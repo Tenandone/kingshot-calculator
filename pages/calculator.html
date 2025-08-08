@@ -92,6 +92,7 @@
     font-weight: 600;
     box-sizing: border-box;
     white-space: pre-wrap;
+    text-align: center; /* ✅ 결과 가운데 정렬 */
   }
   table {
     width: 100%;
@@ -116,9 +117,52 @@
   tbody tr:nth-child(even) td {
     background-color: #f7f9fc;
   }
+  .calc-desc {
+    max-width: 950px;
+    margin: 0 auto 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    line-height: 1.6;
+  }
+  .calc-desc h2 {
+    margin-top: 0;
+  }
 </style>
 </head>
 <body>
+
+<div class="calc-desc">
+  <h2>건물 계산기</h2>
+  <p>아래 킹샷 건물 계산기를 사용해 업그레이드에 필요한 자원과 소요 시간을 확인하세요.</p>
+
+  <h3>사용 방법</h3>
+  <ol>
+    <li>업그레이드할 건물을 선택하세요.</li>
+    <li>현재 레벨과 목표 레벨을 입력하세요.</li>
+    <li>
+      건설 속도 보너스를 입력하세요.<br>
+      <small>확인 방법: 프로필 근처에 표시된 전투력(파워)을 눌러, 아래로 스크롤하면 건설 속도 보너스를 확인할 수 있습니다. <br>여기에는 살로, 늑대펫, 활성화 시, 연구, 국왕버프, 관직버프 및 기타 모든 버프가 포함됩니다.</small>
+    </li>
+  </ol>
+
+  <h3>참고</h3>
+  <ul>
+    <li>늑대 스킬이 이미 활성화되어 있다면, 계산에 자동으로 포함되므로 따로 입력할 필요가 없습니다.</li>
+    <li>활성화되지 않았다면, “늑대 스킬 보너스” 입력 칸에 수동으로 입력하세요.</li>
+    <li><strong>건설 법령</strong> 보너스만은 총 건설 속도에 자동 포함되지 않으므로, 사용 중이라면 해당 체크박스를 선택하세요.</li>
+  </ul>
+
+  <h3>레벨 가이드</h3>
+  <ul>
+    <li>TG 1 = Lv. 35</li>
+    <li>TG 2 = Lv. 40</li>
+    <li>TG 3 = Lv. 45</li>
+    <li>TG 4 = Lv. 50</li>
+    <li>TG 5 = Lv. 55</li>
+  </ul>
+</div>
 
 <form id="calc-form" class="calc-form">
   <label for="building">건물 선택</label>
@@ -146,211 +190,26 @@
   <label for="saulBonus">살로 스킬 보너스 (%)</label>
   <input type="number" id="saulBonus" name="saulBonus" min="0" max="100" value="0" />
 
-  <label for="wolfBonus">울프 스킬 보너스 (%)</label>
+  <label for="wolfBonus">늑대 스킬 보너스 (%)</label>
   <input type="number" id="wolfBonus" name="wolfBonus" min="0" max="100" value="0" />
 
-  <label for="positionBonus">위치 보너스 (%)</label>
+  <label for="positionBonus">국왕버프,관직버프 (%)</label>
   <input type="number" id="positionBonus" name="positionBonus" min="0" max="100" value="0" />
 
-  <label class="checkbox-label"><input type="checkbox" id="doubleTime" name="doubleTime" />더블 타임 적용</label>
+  <label class="checkbox-label"><input type="checkbox" id="doubleTime" name="doubleTime" />건설 법령 적용</label>
 
-  <label class="checkbox-label"><input type="checkbox" id="includePrereq" name="includePrereq" />선행 건물 포함</label>
+  <label class="checkbox-label" style="display:none;"><input type="checkbox" id="includePrereq" name="includePrereq" />선행 건물 포함</label>
 
   <button type="button" id="calcBtn">업그레이드 계산하기</button>
-  <button type="button" id="addPlanBtn">업그레이드 계획에 추가</button>
-  <button type="button" id="clearPlanBtn">계획 초기화</button>
+  <button type="button" id="addPlanBtn" style="display:none;">업그레이드 계획에 추가</button>
+  <button type="button" id="clearPlanBtn" style="display:none;">계획 초기화</button>
 </form>
 
 <div id="result"></div>
 
 <script>
-const allBuildingData = {};
-
-const resourceNames = {
-  meat: '빵',
-  wood: '나무',
-  coal: '석재',
-  iron: '철',
-  crystals: '순금'
-};
-
-const buildingNameMap = {
-  towncenter: '도시센터',
-  embassy: '대사관',
-  academy: '아카데미',
-  command: '지휘부',
-  range: '궁병대',
-  barracks: '보병대',
-  stable: '기병대',
-  infirmary: '의무실',
-  camp: '야전병원'
-};
-
-function formatNumber(value) {
-  if (value >= 1_000_000_000) return (value / 1_000_000_000).toFixed(2) + 'B';
-  if (value >= 1_000_000) return (value / 1_000_000).toFixed(2) + 'M';
-  if (value >= 1_000) return (value / 1_000).toFixed(2) + 'K';
-  return value.toString();
-}
-
-function formatTime(sec) {
-  const days = Math.floor(sec / 86400);
-  sec %= 86400;
-  const hours = Math.floor(sec / 3600);
-  sec %= 3600;
-  const minutes = Math.floor(sec / 60);
-  sec %= 60;
-  let result = '';
-  if (days > 0) result += days + '일 ';
-  if (hours > 0) result += hours + '시간 ';
-  if (minutes > 0) result += minutes + '분 ';
-  if (sec > 0) result += sec + '초';
-  return result.trim() || '0초';
-}
-
-async function loadAllData() {
-  const names = ['academy', 'camp', 'command', 'embassy', 'infirmary', 'towncenter'];
-
-  await Promise.all(names.map(async (name) => {
-    const res = await fetch(`./data/${name}_data.json`);
-    allBuildingData[name] = await res.json();
-  }));
-
-  allBuildingData.barracks = allBuildingData.camp;
-  allBuildingData.stable = allBuildingData.camp;
-  allBuildingData.range = allBuildingData.camp;
-
-  initCalculator();
-}
-
-function calculateUpgrade(building, startLevel, targetLevel, buffs) {
-  const dataList = allBuildingData[building];
-  if (!dataList) throw new Error('존재하지 않는 건물입니다.');
-
-  if (startLevel >= targetLevel) throw new Error('목표 레벨은 시작 레벨보다 커야 합니다.');
-
-  let totalMeat = 0, totalWood = 0, totalCoal = 0, totalIron = 0, totalCrystals = 0, totalTime = 0;
-
-  for (let lvl = startLevel + 1; lvl <= targetLevel; lvl++) {
-    const levelData = dataList.find(item => item.level === lvl);
-    if (!levelData) continue;
-
-    totalMeat += levelData.meat || 0;
-    totalWood += levelData.wood || 0;
-    totalCoal += levelData.coal || 0;
-    totalIron += levelData.iron || 0;
-    totalCrystals += levelData.crystals || 0;
-    totalTime += levelData.time || 0;
-  }
-
-  let totalBuffPercent = buffs.speedBonus + buffs.saulBonus + buffs.wolfBonus + buffs.positionBonus;
-  if (buffs.doubleTime) totalTime *= 0.5;
-  totalTime *= (1 - totalBuffPercent / 100);
-  if (totalTime < 0) totalTime = 0;
-
-  return {
-    meat: totalMeat,
-    wood: totalWood,
-    coal: totalCoal,
-    iron: totalIron,
-    crystals: totalCrystals,
-    timeSec: Math.round(totalTime),
-  };
-}
-
-function displayResult(result) {
-  const resultDiv = document.getElementById('result');
-  resultDiv.innerHTML = `
-    <h3>계산 결과</h3>
-    <p>${resourceNames.meat}: ${formatNumber(result.meat)} 개</p>
-    <p>${resourceNames.wood}: ${formatNumber(result.wood)} 개</p>
-    <p>${resourceNames.coal}: ${formatNumber(result.coal)} 개</p>
-    <p>${resourceNames.iron}: ${formatNumber(result.iron)} 개</p>
-    <p>${resourceNames.crystals}: ${result.crystals.toLocaleString()} 개</p>
-    <p>총 건설 시간: ${formatTime(result.timeSec)}</p>
-  `;
-}
-
-function displayDetailTable(building, startLevel, targetLevel) {
-  const dataList = allBuildingData[building];
-  if (!dataList) return;
-
-  let rowsHtml = '';
-  for (let lvl = startLevel + 1; lvl <= targetLevel; lvl++) {
-    const data = dataList.find(item => item.level === lvl);
-    if (!data) continue;
-
-    rowsHtml += `
-      <tr>
-        <td>${lvl - startLevel}</td>
-        <td>${buildingNameMap[building] || building}</td>
-        <td>${lvl - 1} → ${lvl}</td>
-        <td>${formatNumber(data.meat || 0)}</td>
-        <td>${formatNumber(data.wood || 0)}</td>
-        <td>${formatNumber(data.coal || 0)}</td>
-        <td>${formatNumber(data.iron || 0)}</td>
-        <td>${formatTime(data.time)}</td>
-      </tr>
-    `;
-  }
-
-  const tableHtml = `
-    <table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; margin-top: 20px; width: 100%; max-width: 900px; text-align: center;">
-      <thead style="background-color: #e9f0fa;">
-        <tr>
-          <th>#</th>
-          <th>건물</th>
-          <th>레벨</th>
-          <th>빵</th>
-          <th>나무</th>
-          <th>석재</th>
-          <th>철</th>
-          <th>건설 시간</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${rowsHtml}
-      </tbody>
-    </table>
-  `;
-
-  const resultDiv = document.getElementById('result');
-  resultDiv.innerHTML += tableHtml;
-}
-
-function initCalculator() {
-  const calcBtn = document.getElementById('calcBtn');
-  calcBtn.addEventListener('click', () => {
-    try {
-      const building = document.getElementById('building').value;
-      const startLevel = parseInt(document.getElementById('startLevel').value, 10);
-      const targetLevel = parseInt(document.getElementById('targetLevel').value, 10);
-
-      if (startLevel >= targetLevel) {
-        alert('목표 레벨은 시작 레벨보다 커야 합니다.');
-        return;
-      }
-
-      const buffs = {
-        speedBonus: parseFloat(document.getElementById('speedBonus').value) || 0,
-        saulBonus: parseFloat(document.getElementById('saulBonus').value) || 0,
-        wolfBonus: parseFloat(document.getElementById('wolfBonus').value) || 0,
-        positionBonus: parseFloat(document.getElementById('positionBonus').value) || 0,
-        doubleTime: document.getElementById('doubleTime').checked,
-        includePrereq: document.getElementById('includePrereq').checked,
-      };
-
-      const result = calculateUpgrade(building, startLevel, targetLevel, buffs);
-
-      displayResult(result);
-      displayDetailTable(building, startLevel, targetLevel);
-    } catch (e) {
-      alert(e.message);
-    }
-  });
-}
-
-loadAllData();
+  /* 기존 JS 그대로 붙이기 */
 </script>
+
 </body>
 </html>
