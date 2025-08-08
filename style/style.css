@@ -277,4 +277,34 @@ th, td { padding: 12px 10px; }
   background-color: #cbb300;
   color: #000000 !important;
 }
+/* === Responsive Base === */
+html, body { max-width: 100%; overflow-x: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* 카드 그리드: 화면폭에 따라 자동 개수 조정 */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; }
+
+/* 카드 텍스트가 세로로 찢어지지 않게 */
+.card-name { white-space: normal; word-break: keep-all; text-align: center; }
+
+/* 표 가로 스크롤 래퍼 */
+.table-wrap { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 표 기본 스타일 */
+table { width: 100%; border-collapse: collapse; table-layout: auto; }
+table th, table td { padding: 8px; border-bottom: 1px solid #e5e5e5; text-align: center; vertical-align: middle; }
+
+/* 모바일 축소 */
+@media (max-width: 768px) {
+  body { font-size: 14px; }
+  header { padding: 12px 16px; }
+  main { padding: 24px 16px; }
+  table th, table td { font-size: 12px; padding: 6px 4px; }
+  .card { max-width: 100%; height: auto; }
+}
+.table-wrap {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 
