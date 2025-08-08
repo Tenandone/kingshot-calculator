@@ -3,10 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>KingshotData.KR - 건물 정보</title>
-  <head>
   <link rel="stylesheet" href="style/style.css" />
-
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * {
@@ -21,18 +18,17 @@
     }
 
     header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  border-bottom: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #ccc;
 
-  max-width: 1100px; /* ✅ 카드랑 맞춰줌 */
-  margin: 0 auto;     /* ✅ 가운데 정렬 */
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
+      max-width: 1100px; /* ✅ 카드랑 맞춰줌 */
+      margin: 0 auto;     /* ✅ 가운데 정렬 */
+      padding-left: 20px;
+      padding-right: 20px;
+    }
 
     .logo {
       font-size: 24px;
@@ -74,19 +70,19 @@
     }
 
     .card {
-  width: 100%;
-  max-width: 240px;
-  height: 240px; /* ✅ 카드 높이 고정 */
-  background: #fafafa;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  text-align: center;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* 이미지와 텍스트 사이 균형 유지 */
-  padding: 10px;
-}
+      width: 100%;
+      max-width: 240px;
+      height: 240px; /* ✅ 카드 높이 고정 */
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      text-align: center;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* 이미지와 텍스트 사이 균형 유지 */
+      padding: 10px;
+    }
 
     .card:hover {
       box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
@@ -94,79 +90,78 @@
     }
 
     .card img {
-  width: 100%;
-  height: 160px; /* ✅ 이미지 영역 고정 */
-  object-fit: contain; /* ✅ 전체 다 보이게 */
-  background-color: #fff; /* 이미지 여백 영역이 생길 때도 깔끔하게 */
-}
+      width: 100%;
+      height: 160px; /* ✅ 이미지 영역 고정 */
+      object-fit: contain; /* ✅ 전체 다 보이게 */
+      background-color: #fff; /* 이미지 여백 영역이 생길 때도 깔끔하게 */
+    }
 
     .card-name {
-  font-weight: bold;
-  font-size: 16px;
-  color: #000;
-  padding-top: 10px;
-}
+      font-weight: bold;
+      font-size: 16px;
+      color: #000;
+      padding-top: 10px;
+    }
 
     footer {
-  background-color: #1f1f1f;
-  color: #fff;
-  padding: 40px 20px 0;
-}
+      background-color: #1f1f1f;
+      color: #fff;
+      padding: 40px 20px 0;
+    }
 
-.footer-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-.footer-box {
-  flex: none;
-  width: 48%;
-}
+    .footer-box {
+      flex: none;
+      width: 48%;
+    }
 
-/* ✅ 오른쪽 박스를 완전히 오른쪽 정렬 */
-.footer-box:last-child {
-  margin-left: auto;
-  text-align: right;
-}
+    /* ✅ 오른쪽 박스를 완전히 오른쪽 정렬 */
+    .footer-box:last-child {
+      margin-left: auto;
+      text-align: right;
+    }
 
-.footer-box h3 {
-  font-weight: bold;
-}
+    .footer-box h3 {
+      font-weight: bold;
+    }
 
-.footer-box p,
-.footer-box a {
-  font-size: 14px;
-  color: #ccc;
-  text-decoration: none;
-}
+    .footer-box p,
+    .footer-box a {
+      font-size: 14px;
+      color: #ccc;
+      text-decoration: none;
+    }
 
-.kakao-btn {
-  display: inline-block;
-  background-color: #FEE500;
-  color: #000;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-weight: bold;
-  margin-top: 10px;
-}
+    .kakao-btn {
+      display: inline-block;
+      background-color: #FEE500;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
 
-.footer-bottom,
-.footer-policy {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 15px 20px;
-  text-align: center;
-}
+    .footer-bottom,
+    .footer-policy {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      text-align: center;
+    }
 
-.footer-policy a {
-  color: gray;
-  text-decoration: underline;
-}
-
+    .footer-policy a {
+      color: gray;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -199,57 +194,53 @@
     </div>
 
     <div class="footer-bottom">
-  © 2025 kingshotdata.kr | 
-  <a href="#">About Us</a> | 
-  <a href="#">Privacy Policy</a>
-</div>
+      © 2025 kingshotdata.kr | 
+      <a href="#">About Us</a> | 
+      <a href="#">Privacy Policy</a>
+    </div>
 
-<div class="footer-policy">
-  <a href="#">이용약관 보기</a><br>
-  A FAN-CREATED PROJECT, NOT OFFICIALLY AFFILIATED WITH CENTURY GAMES
-</div>
-
+    <div class="footer-policy">
+      <a href="#">이용약관 보기</a><br>
+      A FAN-CREATED PROJECT, NOT OFFICIALLY AFFILIATED WITH CENTURY GAMES
+    </div>
   </footer>
 
   <script>
     const routes = {
-  buildings: 'pages/buildings.html',
-  calculator: 'pages/calculator.html',
-  policy: 'pages/policy.html',
-  about: 'pages/about.html',
-  towncenter: 'pages/towncenter.html',
-  'truegold-crucible': 'pages/truegold-crucible.html',
-  'academy': 'pages/academy.html',
-  embassy: 'pages/embassy.html',
-   barracks: 'pages/barracks.html',
-   range: 'pages/range.html',
-  stable: 'pages/stable.html',
-  'command-center': 'pages/command-center.html',
-  kitchen: 'pages/kitchen.html',
-  storehouse: 'pages/storehouse.html',
-  'guard-station': 'pages/guard-station.html',
-  calculator: 'pages/calculator.html' // ✅ 추가했는지 확인!
-};
+      buildings: 'pages/buildings.html',
+      calculator: 'pages/calculator.html',
+      policy: 'pages/policy.html',
+      about: 'pages/about.html',
+      towncenter: 'pages/towncenter.html',
+      'truegold-crucible': 'pages/truegold-crucible.html',
+      academy: 'pages/academy.html',
+      embassy: 'pages/embassy.html',
+      barracks: 'pages/barracks.html',
+      range: 'pages/range.html',
+      stable: 'pages/stable.html',
+      'command-center': 'pages/command-center.html',
+      kitchen: 'pages/kitchen.html',
+      storehouse: 'pages/storehouse.html',
+      'guard-station': 'pages/guard-station.html'
+    };
 
+    function navigate(page) {
+      const path = routes[page] || 'pages/buildings.html';
+      fetch(path)
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('content').innerHTML = html;
 
-function navigate(page) {
-  const path = routes[page] || 'pages/buildings.html';
-  fetch(path)
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('content').innerHTML = html;
-
-      if (page === 'calculator') {
-        // DOM 반영 보장 후 실행
-        requestAnimationFrame(() => {
-          if (typeof initCalculator === 'function') {
-            initCalculator();
+          if (page === 'calculator') {
+            // DOM 반영 보장 후 실행
+            requestAnimationFrame(() => {
+              if (typeof initCalculator === 'function') {
+                initCalculator();
+              }
+            });
           }
         });
-      }
-    });
-}
-
+    }
 
     window.onload = () => {
       navigate('buildings');
@@ -264,8 +255,6 @@ function navigate(page) {
       });
     });
   </script>
-<script src="js/calculator.js"></script>
-</body>
-</html>
+  <script src="js/calculator.js"></script>
 </body>
 </html>
