@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>KingshotData.KR - 건물 정보</title>
+  <head>
+  <link rel="stylesheet" href="style/style.css" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+    }
+
+    header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+
+  max-width: 1100px; /* ✅ 카드랑 맞춰줌 */
+  margin: 0 auto;     /* ✅ 가운데 정렬 */
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1a73e8;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    nav a.active {
+      color: #000;
+      border-bottom: 2px solid #000;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+      justify-items: center;
+    }
+
+    .card {
+  width: 100%;
+  max-width: 240px;
+  height: 240px; /* ✅ 카드 높이 고정 */
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 이미지와 텍스트 사이 균형 유지 */
+  padding: 10px;
+}
+
+    .card:hover {
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .card img {
+  width: 100%;
+  height: 160px; /* ✅ 이미지 영역 고정 */
+  object-fit: contain; /* ✅ 전체 다 보이게 */
+  background-color: #fff; /* 이미지 여백 영역이 생길 때도 깔끔하게 */
+}
+
+    .card-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: #000;
+  padding-top: 10px;
+}
+
+    footer {
+  background-color: #1f1f1f;
+  color: #fff;
+  padding: 40px 20px 0;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-box {
+  flex: none;
+  width: 48%;
+}
+
+/* ✅ 오른쪽 박스를 완전히 오른쪽 정렬 */
+.footer-box:last-child {
+  margin-left: auto;
+  text-align: right;
+}
+
+.footer-box h3 {
+  font-weight: bold;
+}
+
+.footer-box p,
+.footer-box a {
+  font-size: 14px;
+  color: #ccc;
+  text-decoration: none;
+}
+
+.kakao-btn {
+  display: inline-block;
+  background-color: #FEE500;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.footer-bottom,
+.footer-policy {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  text-align: center;
+}
+
+.footer-policy a {
+  color: gray;
+  text-decoration: underline;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">KingshotData.KR</div>
+    <nav>
+      <a href="#" onclick="navigate('buildings')">건물</a>
+      <a href="#" onclick="navigate('calculator')">계산기</a>
+      <a href="#" onclick="navigate('policy')">이용약관</a>
+      <a href="#" onclick="navigate('about')">소개</a>
+    </nav>
+  </header>
+
+  <main id="content">
+    <!-- 콘텐츠가 여기에 동적으로 로딩됨 -->
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-box">
+        <h3>ABOUT US</h3>
+        <p>KingshotData.KR은 <br>킹샷 게임 관련 정보를 정리한 한국 유저 전용 데이터 사이트입니다.<br>건물 요구사항, 계산기, 번역 자료 등을 제공합니다.</p>
+      </div>
+
+      <div class="footer-box">
+        <h3>JOIN OUR OPENTALK</h3>
+        <p>킹샷 유저들과 소통하고 전략을 나눌 수 있는<br>카카오 오픈채팅방에 참여하세요.</p>
+        <a href="https://open.kakao.com/o/gYoiOqLh" target="_blank" class="kakao-btn">💬 Join Kakao OpenTalk</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+  © 2025 kingshotdata.kr | 
+  <a href="#">About Us</a> | 
+  <a href="#">Privacy Policy</a>
+</div>
+
+<div class="footer-policy">
+  <a href="#">이용약관 보기</a><br>
+  A FAN-CREATED PROJECT, NOT OFFICIALLY AFFILIATED WITH CENTURY GAMES
+</div>
+
+  </footer>
+
+  <script>
+    const routes = {
+  buildings: 'pages/buildings.html',
+  calculator: 'pages/calculator.html',
+  policy: 'pages/policy.html',
+  about: 'pages/about.html',
+  towncenter: 'pages/towncenter.html',
+  'truegold-crucible': 'pages/truegold-crucible.html',
+  'academy': 'pages/academy.html',
+  embassy: 'pages/embassy.html',
+   barracks: 'pages/barracks.html',
+   range: 'pages/range.html',
+  stable: 'pages/stable.html',
+  'command-center': 'pages/command-center.html',
+  kitchen: 'pages/kitchen.html',
+  storehouse: 'pages/storehouse.html',
+  'guard-station': 'pages/guard-station.html',
+  calculator: 'pages/calculator.html' // ✅ 추가했는지 확인!
+};
+
+
+function navigate(page) {
+  const path = routes[page] || 'pages/buildings.html';
+  fetch(path)
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('content').innerHTML = html;
+
+      if (page === 'calculator') {
+        // DOM 반영 보장 후 실행
+        requestAnimationFrame(() => {
+          if (typeof initCalculator === 'function') {
+            initCalculator();
+          }
+        });
+      }
+    });
+}
+
+
+    window.onload = () => {
+      navigate('buildings');
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.addEventListener("click", (e) => {
+        const target = e.target.closest("a");
+        if (target && target.hasAttribute("onclick")) {
+          e.preventDefault();
+        }
+      });
+    });
+  </script>
+<script src="js/calculator.js"></script>
+</body>
+</html>
+</body>
+</html>

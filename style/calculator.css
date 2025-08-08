@@ -1,0 +1,93 @@
+body {
+  font-family: 'Noto Sans KR', 'Arial', sans-serif;
+  background-color: #f0f2f5;
+  padding: 20px;
+  margin: 0;
+  color: #333;
+}
+
+.calc-form {
+  background: white;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px;
+}
+
+.calc-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.calc-field label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #222;
+}
+
+.calc-field input[type="number"],
+.calc-field select {
+  padding: 10px 12px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+.calc-field input[type="number"]:focus,
+.calc-field select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 4px #007bff;
+}
+
+.calc-field input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.button-group {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+button {
+  flex: 1;
+  padding: 14px 0;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#result {
+  max-width: 650px;
+  margin: 30px auto 0;
+  padding: 20px 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-size: 16px;
+  color: #111;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}

@@ -1,0 +1,152 @@
+<!-- ✅ kitchen.html: 주방 SPA 페이지 -->
+<div class="building-page">
+  <h1>주방 (Kitchen)</h1>
+  <img src="/img/kitchen-kingshot.webp" alt="주방">
+
+  <p>
+    주방은 생존자들의 식사를 준비하는 건물로, 다양한 종류의 식사를 통해 포만감을 채워줍니다.  
+    빵을 기반으로 세 가지 식사(톱밥빵, 치즈피자, 디럭스 만찬)를 제공하며, 고급 식사일수록 더 많은 포만감을 제공합니다.  
+    포만감이 높을수록 병에 걸리거나 사망할 확률이 낮아지므로, 가능하면 디럭스 만찬을 유지하는 것이 좋습니다.
+  </p>
+
+  <h3>작동 방식</h3>
+  <ul>
+    <li><strong>준비 단계:</strong> 주방에서 빵을 사용해 식사를 조리합니다.</li>
+    <li><strong>배식 단계:</strong> 생존자들이 사이드보드에서 식사를 가져갑니다.</li>
+    <li><strong>식사 단계:</strong> 식탁에 앉아 식사를 합니다.</li>
+  </ul>
+  <p>
+    주방 레벨과 아이템 레벨이 높을수록 각 단계가 더 빠르게 진행됩니다.  
+    근무 시간이 끝나기 전에 식사를 마치지 못하면 포만감이 채워지지 않을 수 있습니다.
+  </p>
+
+  <h3>레벨별 요구사항 및 효과</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Level</th>
+          <th>요구 조건</th>
+          <th>업그레이드 비용</th>
+          <th>건설 시간</th>
+          <th>해금 아이템</th>
+          <th>전투력</th>
+          <th>아이템 업그레이드 비용</th>
+          <th>최대 총 아이템 비용</th>
+          <th>건물 효과 (최대 기준)</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td>튜토리얼 중 건설</td>
+        <td>목재 35</td>
+        <td>00:00:02</td>
+        <td>Stove A, Sideboard Lv.1, Dining Table A Lv.1, Larder Lv.1</td>
+        <td>100</td>
+        <td>목재 68</td>
+        <td>68 wood</td>
+        <td>+1 작업 생존자<br>준비: 8s / 40~60 포만<br>배식: 0.8s<br>식사: 6.5s</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>도시센터 Lv.2</td>
+        <td>목재 50</td>
+        <td>00:00:09</td>
+        <td>–</td>
+        <td>190</td>
+        <td>목재 175</td>
+        <td>175 wood</td>
+        <td>준비: 7.4s / 40~60 포만<br>배식: 0.7s<br>식사: 5.3s</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>도시센터 Lv.3</td>
+        <td>목재 240</td>
+        <td>00:00:45</td>
+        <td>–</td>
+        <td>325</td>
+        <td>목재 620</td>
+        <td>620 wood</td>
+        <td>준비: 7.0s / 40~60 포만<br>배식: 0.6s<br>식사: 4.9s</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>도시센터 Lv.4</td>
+        <td>목재 540, 석재 105</td>
+        <td>00:02:15</td>
+        <td>Stove B, Dining Table B, Heater</td>
+        <td>505</td>
+        <td>목재 1,561, 금화 324</td>
+        <td>1,561 wood, 324 gold</td>
+        <td>+1 작업 생존자, +0.1 온기<br>준비: 6.6s<br>배식: 0.5s<br>식사: 4.7s</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>도시센터 Lv.5</td>
+        <td>목재 2.2k, 석재 455</td>
+        <td>00:04:30</td>
+        <td>Bin</td>
+        <td>775</td>
+        <td>목재 3,340, 금화 714</td>
+        <td>3,340 wood, 714 gold</td>
+        <td>+0.1 온기<br>준비: 5.6s<br>배식: 0.5s<br>식사: 4.5s</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>도시센터 Lv.6</td>
+        <td>목재 5.7k, 석재 1.1k, 철 285</td>
+        <td>00:09:00</td>
+        <td>Water Bucket</td>
+        <td>1,180</td>
+        <td>목재 2,400, 석재 890, 금화 1,284</td>
+        <td>2,400 wood, 890 stone, 1,284 gold</td>
+        <td>+0.12 온기<br>준비: 5.6s<br>배식: 0.4s<br>식사: 4.5s</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>도시센터 Lv.7</td>
+        <td>목재 20k, 석재 4.1k, 철 1k</td>
+        <td>00:18:00</td>
+        <td>Stove C, Washbasin</td>
+        <td>1,765</td>
+        <td>목재 1,088, 석재 3,495, 금화 2,074</td>
+        <td>1,088 wood, 3,495 stone, 2,074 gold</td>
+        <td>+1 작업 생존자, +0.14 온기<br>준비: 3.8s<br>배식: 0.3s<br>식사: 4.1s</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>도시센터 Lv.8</td>
+        <td>목재 37k, 석재 7.5k, 철 1.8k</td>
+        <td>00:27:00</td>
+        <td>–</td>
+        <td>2,350</td>
+        <td>석재 2,850, 철 570, 금화 1,620</td>
+        <td>2,850 stone, 570 iron, 1,620 gold</td>
+        <td>+0.16 온기<br>준비: 3.2s<br>배식: 0.3s<br>식사: 3.9s</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>도시센터 Lv.9</td>
+        <td>목재 78k, 석재 15k, 철 3.9k</td>
+        <td>00:40:30</td>
+        <td>Cask</td>
+        <td>2,935</td>
+        <td>목재 26.4k, 석재 5.87k, 금화 4,104</td>
+        <td>26.4k wood, 5.87k stone, 4,104 gold</td>
+        <td>+0.18 온기<br>준비: 2.6s<br>배식: 0.2s<br>식사: 3.7s</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>도시센터 Lv.10</td>
+        <td>목재 130k, 석재 27k, 철 6.9k</td>
+        <td>00:54:00</td>
+        <td>–</td>
+        <td>3,785</td>
+        <td>–</td>
+        <td>–</td>
+        <td>– (미기재)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
