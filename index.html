@@ -3,165 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <title>KingshotData.KR - 건물 정보</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6');
+  </script>
+
   <link rel="stylesheet" href="style/style.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #fff;
-    }
-
+    * { box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #fff; }
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      border-bottom: 1px solid #ccc;
-
-      max-width: 1100px; /* ✅ 카드랑 맞춰줌 */
-      margin: 0 auto;     /* ✅ 가운데 정렬 */
-      padding-left: 20px;
-      padding-right: 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px; border-bottom: 1px solid #ccc;
+      max-width: 1100px; margin: 0 auto; padding-left: 20px; padding-right: 20px;
     }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #1a73e8;
-    }
-
-    nav {
-      display: flex;
-      gap: 20px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    nav a.active {
-      color: #000;
-      border-bottom: 2px solid #000;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 24px;
-      justify-items: center;
-    }
-
+    .logo { font-size: 24px; font-weight: bold; color: #1a73e8; }
+    nav { display: flex; gap: 20px; }
+    nav a { text-decoration: none; color: #333; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    nav a.active { color: #000; border-bottom: 2px solid #000; }
+    main { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; justify-items: center; }
     .card {
-      width: 100%;
-      max-width: 240px;
-      height: 240px; /* ✅ 카드 높이 고정 */
-      background: #fafafa;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      text-align: center;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between; /* 이미지와 텍스트 사이 균형 유지 */
-      padding: 10px;
+      width: 100%; max-width: 240px; height: 240px;
+      background: #fafafa; border: 1px solid #ddd; border-radius: 10px;
+      text-align: center; overflow: hidden; display: flex;
+      flex-direction: column; justify-content: space-between; padding: 10px;
     }
-
-    .card:hover {
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-      transform: translateY(-4px);
-    }
-
+    .card:hover { box-shadow: 0 0 12px rgba(0, 0, 0, 0.1); transform: translateY(-4px); }
     .card img {
-      width: 100%;
-      height: 160px; /* ✅ 이미지 영역 고정 */
-      object-fit: contain; /* ✅ 전체 다 보이게 */
-      background-color: #fff; /* 이미지 여백 영역이 생길 때도 깔끔하게 */
+      width: 100%; height: 160px; object-fit: contain; background-color: #fff;
     }
-
-    .card-name {
-      font-weight: bold;
-      font-size: 16px;
-      color: #000;
-      padding-top: 10px;
-    }
-
-    footer {
-      background-color: #1f1f1f;
-      color: #fff;
-      padding: 40px 20px 0;
-    }
-
+    .card-name { font-weight: bold; font-size: 16px; color: #000; padding-top: 10px; }
+    footer { background-color: #1f1f1f; color: #fff; padding: 40px 20px 0; }
     .footer-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px;
+      display: flex; flex-wrap: wrap; justify-content: space-between;
+      max-width: 1100px; margin: 0 auto; padding: 0 20px;
     }
-
-    .footer-box {
-      flex: none;
-      width: 48%;
-    }
-
-    /* ✅ 오른쪽 박스를 완전히 오른쪽 정렬 */
-    .footer-box:last-child {
-      margin-left: auto;
-      text-align: right;
-    }
-
-    .footer-box h3 {
-      font-weight: bold;
-    }
-
-    .footer-box p,
-    .footer-box a {
-      font-size: 14px;
-      color: #ccc;
-      text-decoration: none;
-    }
-
+    .footer-box { flex: none; width: 48%; }
+    .footer-box:last-child { margin-left: auto; text-align: right; }
+    .footer-box h3 { font-weight: bold; }
+    .footer-box p, .footer-box a { font-size: 14px; color: #ccc; text-decoration: none; }
     .kakao-btn {
-      display: inline-block;
-      background-color: #FEE500;
-      color: #000;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-weight: bold;
-      margin-top: 10px;
+      display: inline-block; background-color: #FEE500; color: #000;
+      padding: 10px 20px; border-radius: 6px; font-weight: bold; margin-top: 10px;
     }
-
-    .footer-bottom,
-    .footer-policy {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 15px 20px;
-      text-align: center;
+    .footer-bottom, .footer-policy {
+      max-width: 1100px; margin: 0 auto; padding: 15px 20px; text-align: center;
     }
-
-    .footer-policy a {
-      color: gray;
-      text-decoration: underline;
-    }
+    .footer-policy a { color: gray; text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -185,7 +81,6 @@
         <h3>ABOUT US</h3>
         <p>KingshotData.KR은 <br>킹샷 게임 관련 정보를 정리한 한국 유저 전용 데이터 사이트입니다.<br>건물 요구사항, 계산기, 번역 자료 등을 제공합니다.</p>
       </div>
-
       <div class="footer-box">
         <h3>JOIN OUR OPENTALK</h3>
         <p>킹샷 유저들과 소통하고 전략을 나눌 수 있는<br>카카오 오픈채팅방에 참여하세요.</p>
@@ -230,9 +125,7 @@
         .then(res => res.text())
         .then(html => {
           document.getElementById('content').innerHTML = html;
-
           if (page === 'calculator') {
-            // DOM 반영 보장 후 실행
             requestAnimationFrame(() => {
               if (typeof initCalculator === 'function') {
                 initCalculator();
