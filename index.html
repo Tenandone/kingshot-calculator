@@ -17,8 +17,9 @@
   <!-- CSS: 기본 + 인라인 이관본 -->
   <link rel="stylesheet" href="style/style.css" />
   <link rel="stylesheet" href="style/app.css" />
-<!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-9189957764761115"
+
+  <!-- Google AdSense (자동/수동 공통 로더) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189957764761115"
      crossorigin="anonymous"></script>
 </head>
 <body>
@@ -33,7 +34,27 @@
     </nav>
   </header>
 
+  <!-- [ADS] 상단 고정 광고 -->
+  <div class="ad-wrap" style="max-width:1100px;margin:16px auto;">
+    <ins class="adsbygoogle"
+         style="display:block;min-height:250px"
+         data-ad-client="ca-pub-9189957764761115"
+         data-ad-slot="1234567890"     <!-- TODO: 상단 슬롯ID로 교체 -->
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
+
   <main id="content"><!-- 동적 로드 --></main>
+
+  <!-- [ADS] 하단 고정 광고 -->
+  <div class="ad-wrap" style="max-width:1100px;margin:24px auto;">
+    <ins class="adsbygoogle"
+         style="display:block;min-height:250px"
+         data-ad-client="ca-pub-9189957764761115"
+         data-ad-slot="0987654321"     <!-- TODO: 하단 슬롯ID로 교체 -->
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
 
   <footer>
     <div class="footer-container">
@@ -64,6 +85,20 @@
   <!-- DB 모듈: window.initDatabase / window.renderDbDetail 노출 -->
   <script type="module" src="js/pages/database.js"></script>
 
+  <!-- [ADS] SPA 동적 광고 활성화 유틸 -->
+  <script>
+    function initAdsIn(root = document) {
+      try {
+        const nodes = root.querySelectorAll('ins.adsbygoogle:not([data-adsbygoogle-status])');
+        nodes.forEach(() => {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        });
+      } catch (e) {
+        console.warn('ads init skipped:', e);
+      }
+    }
+  </script>
+
  <script>
   // 라우트: 조각 파일 경로
   const routes = {
@@ -93,160 +128,165 @@
     about: '사이트 소개 - KingshotData.KR'
   };
 
+  let currentHash = null;       // 현재 해시
+  let pendingController = null; // 진행 중 fetch 취소용
 
-    let currentHash = null;       // 현재 해시
-    let pendingController = null; // 진행 중 fetch 취소용
-
-    async function navigate(page) {
-      // 상세 페이지 (#db/<slug>)는 외부 모듈(window.renderDbDetail) 우선
-      if (page && page.startsWith('db/')) {
-        const slug = page.slice(3);
-        if (typeof window.renderDbDetail === 'function') {
-          await window.renderDbDetail(slug);
-        } else {
-          // 안전백업: 간단한 안내
-          const main = document.getElementById('content');
-          main.innerHTML = `
-            <div style="padding:24px;border:1px solid #ddd;border-radius:8px;background:#fff;">
-              <h2 style="margin-top:0;">로드 오류</h2>
-              <p>renderDbDetail 모듈이 로드되지 않았습니다.</p>
-            </div>`;
-        }
-        setActiveNav('database');
-        return;
-      }
-
-      const key = routes[page] ? page : 'buildings';
-      const path = routes[key];
-
-      // 진행 중 로딩이 있으면 취소
-      if (pendingController) pendingController.abort();
-      pendingController = new AbortController();
-
-      try {
-        const res = await fetch(path, { cache: 'no-store', signal: pendingController.signal });
-        if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${path}`);
-        const html = await res.text();
-
+  async function navigate(page) {
+    // 상세 페이지 (#db/<slug>)는 외부 모듈(window.renderDbDetail) 우선
+    if (page && page.startsWith('db/')) {
+      const slug = page.slice(3);
+      if (typeof window.renderDbDetail === 'function') {
+        await window.renderDbDetail(slug);
+      } else {
         const main = document.getElementById('content');
-        main.innerHTML = html;
-
-        // 계산기 초기화
-        if (key === 'calculator') {
-          requestAnimationFrame(() => {
-            if (typeof initCalculator === 'function') initCalculator();
-          });
-        }
-        // 데이터베이스 초기화: 외부 모듈(window.initDatabase)만 호출
-        if (key === 'database') {
-          requestAnimationFrame(() => {
-            if (typeof window.initDatabase === 'function') window.initDatabase();
-          });
-        }
-
-        // 문서 타이틀
-        document.title = PAGE_TITLES[key] || 'KingshotData.KR';
-
-        // GA4 page_view (해시 라우팅)
-        if (window.gtag) {
-          gtag('event', 'page_view', {
-            page_location: location.href,
-            page_path: location.pathname + location.hash,
-            page_title: document.title
-          });
-        }
-
-        // UX: 스크롤만 (포커스X)
-        window.scrollTo({ top: 0, behavior: 'instant' });
-
-      } catch (err) {
-        if (err.name === 'AbortError') return;
-        document.getElementById('content').innerHTML =
-          `<div style="padding:24px;border:1px solid #ddd;border-radius:8px;background:#fff;">
-             <h2 style="margin-top:0;">로드 오류</h2>
-             <p><code>${routes[page] || 'pages/buildings.html'}</code></p>
-             <pre style="white-space:pre-wrap">${err.message}</pre>
-           </div>`;
-        console.error(err);
-      } finally {
-        pendingController = null;
+        main.innerHTML = `
+          <div style="padding:24px;border:1px solid #ddd;border-radius:8px;background:#fff;">
+            <h2 style="margin-top:0;">로드 오류</h2>
+            <p>renderDbDetail 모듈이 로드되지 않았습니다.</p>
+          </div>`;
       }
+      setActiveNav('database');
+      return;
     }
 
-    function setActiveNav(page) {
-      const canonical = routes[page] ? page : 'buildings';
-      document.querySelectorAll('#top-nav a').forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === `#${canonical}`);
-      });
-    }
+    const key = routes[page] ? page : 'buildings';
+    const path = routes[key];
 
-    function handleHash() {
-      const raw = (location.hash || '#buildings');
-      if (raw === currentHash) return;
-      currentHash = raw;
+    // 진행 중 로딩이 있으면 취소
+    if (pendingController) pendingController.abort();
+    pendingController = new AbortController();
 
-      const pageRaw = raw.slice(1);
-      const page = (pageRaw === 'privacy') ? 'policy' : pageRaw;
-      setActiveNav(page.startsWith('db/') ? 'database' : page);
-      navigate(page);
-    }
+    try {
+      const res = await fetch(path, { cache: 'no-store', signal: pendingController.signal });
+      if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${path}`);
+      const html = await res.text();
 
-    function routeTo(dest) {
-      const page = (dest === 'privacy') ? 'policy' : (routes[dest] ? dest : dest); // db/<slug> 허용
-      const hash = '#' + page;
+      const main = document.getElementById('content');
+      main.innerHTML = html;
 
-      currentHash = hash;
-      setActiveNav(page.startsWith('db/') ? 'database' : page);
-      navigate(page);
-      if (location.hash !== hash) {
-        location.hash = hash;
+      // [ADS] 새로 그려진 영역의 광고 태그 활성화
+      initAdsIn(main);
+
+      // 계산기 초기화
+      if (key === 'calculator') {
+        requestAnimationFrame(() => {
+          if (typeof initCalculator === 'function') initCalculator();
+        });
       }
-    }
-
-    // 콘텐츠 영역 내부 클릭 위임
-    document.addEventListener('click', (e) => {
-      const withinContent = e.target.closest('#content');
-      if (!withinContent) return;
-
-      // 절대경로 상세 링크도 SPA로 전환 (/pages/database/<slug>/…)
-      const aAbs = e.target.closest('a[href^="/pages/database/"], a[href^="pages/database/"]');
-      if (aAbs) {
-        e.preventDefault();
-        const href = aAbs.getAttribute('href') || '';
-        const m = href.match(/pages\/database\/([^/]+)\/?/);
-        if (m && m[1]) routeTo('db/' + m[1]);
-        return;
+      // 데이터베이스 초기화: 외부 모듈(window.initDatabase)만 호출
+      if (key === 'database') {
+        requestAnimationFrame(() => {
+          if (typeof window.initDatabase === 'function') window.initDatabase();
+        });
       }
 
-      const el = e.target.closest('[data-route],[data-hash],[data-goto],a[href^="#"]');
-      if (!el) return;
+      // 문서 타이틀
+      document.title = PAGE_TITLES[key] || 'KingshotData.KR';
 
-      let dest =
-        el.getAttribute('data-route') ||
-        el.getAttribute('data-hash') ||
-        el.getAttribute('data-goto') ||
-        (el.getAttribute('href') || '').slice(1);
+      // GA4 page_view (해시 라우팅)
+      if (window.gtag) {
+        gtag('event', 'page_view', {
+          page_location: location.href,
+          page_path: location.pathname + location.hash,
+          page_title: document.title
+        });
+      }
 
-      if (!dest) return;
+      // UX: 스크롤만 (포커스X)
+      window.scrollTo({ top: 0, behavior: 'instant' });
+
+    } catch (err) {
+      if (err.name === 'AbortError') return;
+      document.getElementById('content').innerHTML =
+        `<div style="padding:24px;border:1px solid #ddd;border-radius:8px;background:#fff;">
+           <h2 style="margin-top:0;">로드 오류</h2>
+           <p><code>${routes[page] || 'pages/buildings.html'}</code></p>
+           <pre style="white-space:pre-wrap">${err.message}</pre>
+         </div>`;
+      console.error(err);
+    } finally {
+      pendingController = null;
+    }
+  }
+
+  function setActiveNav(page) {
+    const canonical = routes[page] ? page : 'buildings';
+    document.querySelectorAll('#top-nav a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === `#${canonical}`);
+    });
+  }
+
+  function handleHash() {
+    const raw = (location.hash || '#buildings');
+    if (raw === currentHash) return;
+    currentHash = raw;
+
+    const pageRaw = raw.slice(1);
+    const page = (pageRaw === 'privacy') ? 'policy' : pageRaw;
+    setActiveNav(page.startsWith('db/') ? 'database' : page);
+    navigate(page);
+  }
+
+  function routeTo(dest) {
+    const page = (dest === 'privacy') ? 'policy' : (routes[dest] ? dest : dest); // db/<slug> 허용
+    const hash = '#' + page;
+
+    currentHash = hash;
+    setActiveNav(page.startsWith('db/') ? 'database' : page);
+    navigate(page);
+    if (location.hash !== hash) {
+      location.hash = hash;
+    }
+  }
+
+  // 콘텐츠 영역 내부 클릭 위임
+  document.addEventListener('click', (e) => {
+    const withinContent = e.target.closest('#content');
+    if (!withinContent) return;
+
+    // 절대경로 상세 링크도 SPA로 전환 (/pages/database/<slug>/…)
+    const aAbs = e.target.closest('a[href^="/pages/database/"], a[href^="pages/database/"]');
+    if (aAbs) {
       e.preventDefault();
-      routeTo(dest);
-    });
+      const href = aAbs.getAttribute('href') || '';
+      const m = href.match(/pages\/database\/([^/]+)\/?/);
+      if (m && m[1]) routeTo('db/' + m[1]);
+      return;
+    }
 
-    // 상단 네비 즉시 라우팅
-    document.getElementById('top-nav').addEventListener('click', (e) => {
-      const a = e.target.closest('a[href^="#"]');
-      if (!a) return;
-      e.preventDefault();
-      routeTo(a.getAttribute('href').slice(1));
-    });
+    const el = e.target.closest('[data-route],[data-hash],[data-goto],a[href^="#"]');
+    if (!el) return;
 
-    window.addEventListener('hashchange', handleHash);
-    window.addEventListener('load', () => routeTo((location.hash || '#buildings').slice(1)));
+    let dest =
+      el.getAttribute('data-route') ||
+      el.getAttribute('data-hash') ||
+      el.getAttribute('data-goto') ||
+      (el.getAttribute('href') || '').slice(1);
 
-    // 초진입 포커스 제거
-    window.addEventListener('DOMContentLoaded', () => {
-      if (document.activeElement) document.activeElement.blur();
-    });
+    if (!dest) return;
+    e.preventDefault();
+    routeTo(dest);
+  });
+
+  // 상단 네비 즉시 라우팅
+  document.getElementById('top-nav').addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    e.preventDefault();
+    routeTo(a.getAttribute('href').slice(1));
+  });
+
+  window.addEventListener('hashchange', handleHash);
+  window.addEventListener('load', () => {
+    routeTo((location.hash || '#buildings').slice(1));
+    // [ADS] 초기 정적 광고 박스 활성화
+    initAdsIn(document);
+  });
+
+  // 초진입 포커스 제거
+  window.addEventListener('DOMContentLoaded', () => {
+    if (document.activeElement) document.activeElement.blur();
+  });
   </script>
 
   <!-- 계산기 로직 -->
