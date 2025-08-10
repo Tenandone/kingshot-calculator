@@ -1,0 +1,57 @@
+* { box-sizing: border-box; }
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #fff; }
+
+header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px; border-bottom: 1px solid #ccc;
+  max-width: 1100px; margin: 0 auto; padding-left: 20px; padding-right: 20px;
+}
+.logo { font-size: 24px; font-weight: bold; color: #1a73e8; }
+nav { display: flex; gap: 20px; }
+nav a { text-decoration: none; color: #333; font-weight: bold; }
+nav a:hover { text-decoration: underline; }
+nav a.active { color: #000; border-bottom: 2px solid #000; }
+
+main { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; justify-items: center; }
+.card {
+  width: 100%; max-width: 240px; height: 240px;
+  background: #fafafa; border: 1px solid #ddd; border-radius: 10px;
+  text-align: center; overflow: hidden; display: flex;
+  flex-direction: column; justify-content: space-between; padding: 10px;
+  cursor: pointer;
+}
+.card:hover { box-shadow: 0 0 12px rgba(0,0,0,0.1); transform: translateY(-4px); }
+.card img { width: 100%; height: 160px; object-fit: contain; background-color: #fff; }
+.card-name { font-weight: bold; font-size: 16px; color: #000; padding-top: 10px; }
+/* 카드 링크 밑줄 제거 */
+.grid .card a { text-decoration: none; color: inherit; }
+
+/* 포커스 아웃라인 제거(특히 초진입) */
+#content a,
+#content a:focus,
+#content a:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Footer */
+footer { background-color: #1f1f1f; color: #fff; padding: 40px 20px 0; }
+.footer-container {
+  display: flex; flex-wrap: wrap; justify-content: space-between;
+  max-width: 1100px; margin: 0 auto; padding: 0 20px;
+}
+.footer-box { flex: none; width: 48%; }
+.footer-box:last-child { margin-left: auto; text-align: right; }
+.footer-box h3 { font-weight: bold; margin-top: 0; }
+.footer-box p, .footer-box a { font-size: 14px; color: #ccc; text-decoration: none; }
+.kakao-btn { display: inline-block; background-color: #FEE500; color: #000;
+  padding: 10px 20px; border-radius: 6px; font-weight: bold; margin-top: 10px; }
+
+.footer-links, .footer-officer, .footer-copy, .footer-note {
+  max-width: 1100px; margin: 0 auto; padding: 15px 20px; text-align: center;
+}
+.footer-links a { color: #ccc; text-decoration: underline; margin: 0 8px; }
+.footer-officer a { color: #ccc; text-decoration: underline; }
+.footer-note { color: #9a9a9a; font-size: 12px; }
+.footer-copy { color: #cfcfcf; font-size: 13px; padding-bottom: 20px; }

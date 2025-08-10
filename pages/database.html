@@ -1,0 +1,189 @@
+<h1>데이터베이스</h1>
+<div
+  class="grid db-grid"
+  id="db-grid"
+  style="display:grid;grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;max-width:1100px;margin:0 auto;"
+></div>
+
+
+<style>
+/* === DB 카드 (건물 카드 톤) === */
+.db-grid .card{
+  width:100%; max-width:240px; height:240px;
+  background:#fafafa; border:1px solid #ddd; border-radius:10px;
+  text-align:center; overflow:hidden; display:flex;
+  flex-direction:column; justify-content:space-between; padding:10px;
+  cursor:pointer; transition:transform .12s ease, box-shadow .12s ease;
+}
+.db-grid .card:hover{ box-shadow:0 0 12px rgba(0,0,0,.1); transform:translateY(-4px); }
+.db-grid .card a{ text-decoration:none !important; color:inherit !important; display:block; }
+.db-grid .card img{ width:100%; height:160px; object-fit:contain; display:block; background:#fff; }
+
+/* 제목 2줄(모바일 3줄) – 전역 규칙 무력화 포함 */
+#content .db-grid .card .card-name{
+  font-weight:700; font-size:16px; color:#000; padding-top:10px;
+  line-height:1.35 !important;
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:2 !important;   /* 데스크톱 2줄 */
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:normal !important;
+  word-break:break-word !important;
+  overflow-wrap:anywhere !important;
+  text-align:center;
+  min-height:calc(1.35em * 2) !important;
+}
+@media (max-width:768px){
+  #content .db-grid .card .card-name{
+    -webkit-line-clamp:3 !important;
+    min-height:calc(1.35em * 3) !important;
+  }
+}
+
+</style>
+
+<script>
+(async () => {
+  const grid = document.getElementById('db-grid');
+  if (grid.dataset.rendered) return;
+  grid.dataset.rendered = '1';
+  grid.innerHTML = '';
+
+  const ROOT = location.pathname.includes('/pages/') ? location.pathname.split('/pages/')[0] + '/' : '/';
+  const TARGET_COUNT = 8;
+  const ver = Date.now();
+
+  /* 고정 7개 (preferFileBase: 확장자 달라도 OK) */
+  const curated = [
+    { name:'영웅 전용 무기',       preferFileBase:'widget-helgas-exclusive-gear-300x296', keys:['영웅','전용','무기'] },
+    { name:'타임라인(서버나이)',   preferFileBase:'state-age-kingshot-300x291',            keys:['일정','타임라인','state','age','서버','나이'] },
+    { name:'영웅 장비',            preferFileBase:'forgehammer-icon',                       keys:['영웅','장비'] },
+    { name:'영웅 성급',            preferFileBase:'mythic-hero-shard-300x264',             keys:['영웅','성급','샤드','조각'] },
+    { name:'영주 장비',            preferFileBase:'governor-gear-icon-296x300',            keys:['영주','장비'] },
+    { name:'영주 보석',            preferFileBase:'governor-charms-300x282',               keys:['영주','보석','charms'] },
+    { name:'영웅 부속품 조각',     preferFileBase:'purple-enhancement-xp-parts-295x300',   keys:['영웅','부속품','조각','accessory','액세서리','악세사리'] },
+  ];
+
+  /* JSON 로드 */
+  let posts = [];
+  try{
+    const r = await fetch(ROOT + 'normalized/database_normalized.json', { cache:'no-store' });
+    if (r.ok){ const d = await r.json(); posts = Array.isArray(d.posts) ? d.posts : []; }
+  }catch{}
+
+  /* 유틸 */
+  const clean = p => (p||'').replace(/^\//,'');
+  const fileName = p => clean(p).split('/').pop() || '';
+  const baseName = f => f.toLowerCase().replace(/\.(webp|png|jpe?g|gif|svg)$/,'');
+  const lower = s => (s||'').toLowerCase();
+
+  /* 인덱스: 베이스명 → {src, slug} */
+  const byBase = new Map();
+  for (const p of posts){
+    for (const src of (p.images||[])){
+      const bn = baseName(fileName(src));
+      if (bn && !byBase.has(bn)) byBase.set(bn, { src:clean(src), slug:p.slug });
+    }
+  }
+
+  function findByKeys(keys){
+    if (!keys?.length) return null;
+    for (const p of posts){ const t = lower(p.title); if (keys.every(k=>t.includes(lower(k)))) return p; }
+    for (const p of posts){ const t = lower(p.title); if (keys.some(k=>t.includes(lower(k)))) return p; }
+    return null;
+  }
+  function pickImage(p, preferBase){
+    if (!p?.images?.length) return null;
+    if (preferBase){
+      const hit = p.images.find(x => baseName(fileName(x)) === preferBase.toLowerCase());
+      if (hit) return clean(hit);
+    }
+    return clean(p.images[0]);
+  }
+
+  const usedSlugs = new Set();
+  const usedHrefs = new Set();
+  const cardObjs = [];
+
+  /* 1) 고정 7개 */
+  for (const item of curated){
+    let slug=null, img=null;
+
+    if (item.preferFileBase && byBase.has(item.preferFileBase.toLowerCase())){
+      const hit = byBase.get(item.preferFileBase.toLowerCase());
+      slug = hit.slug; img = hit.src;
+    }else{
+      const match = findByKeys(item.keys);
+      if (match){ slug = match.slug; img = pickImage(match, item.preferFileBase); }
+    }
+
+    const href = slug ? (ROOT + 'pages/database/' + slug + '/') : '';
+    if (slug) usedSlugs.add(slug);
+    if (href) usedHrefs.add(href);
+
+    cardObjs.push({
+      href, slug,
+      html: `
+        <div class="card">
+          <a ${href ? `href="${href}" target="_self"` : ''}>
+            ${img ? `<img src="${ROOT + img}?v=${ver}" alt="${item.name}" loading="lazy" decoding="async">`
+                   : `<div style="height:160px;display:flex;align-items:center;justify-content:center;color:#888;border:1px dashed #ddd;border-radius:8px;">이미지 없음</div>`}
+            <div class="card-name">${item.name}</div>
+            ${href ? '' : '<div class="meta" style="font-size:12px;color:#888;margin-top:6px;">링크 준비중</div>'}
+          </a>
+        </div>`
+    });
+  }
+
+  /* 2) 남는 1칸 보충 — 중복 slug/href 제외 */
+  for (const p of posts){
+    if (cardObjs.length >= TARGET_COUNT) break;
+    if (usedSlugs.has(p.slug)) continue;
+    const href = ROOT + 'pages/database/' + p.slug + '/';
+    if (usedHrefs.has(href)) continue;
+    const cover = p.images?.[0] ? clean(p.images[0]) : '';
+    cardObjs.push({
+      href, slug:p.slug,
+      html: `
+        <div class="card">
+          <a href="${href}" target="_self">
+            ${cover ? `<img src="${ROOT + cover}?v=${ver}" alt="${p.title}" loading="lazy" decoding="async">` : ''}
+            <div class="card-name">${p.title || 'Untitled'}</div>
+          </a>
+        </div>`
+    });
+    usedSlugs.add(p.slug);
+    usedHrefs.add(href);
+  }
+
+  /* 3) 최종: 중복 제거 + 8개 하드캡 */
+  const unique = [];
+  const seen = new Set();
+  for (const c of cardObjs){
+    const key = c.href || c.slug || c.html;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    unique.push(c.html);
+    if (unique.length >= TARGET_COUNT) break;
+  }
+  grid.innerHTML = unique.join('');
+  
+
+  /* 4) 텍스트 정규화: 맥스레벨/맥스레벨s/Max Level(s) → 최대레벨 */
+  normalizeLabels(grid);
+
+  function normalizeLabels(root){
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    for (const n of nodes){
+      const before = n.nodeValue;
+      const after = before
+        .replace(/맥스\s*레벨s?/gi, '최대레벨')   // 맥스레벨/맥스 레벨/맥스레벨s
+        .replace(/max\s*levels?/gi, '최대레벨'); // Max Level/Max Levels
+      if (after !== before) n.nodeValue = after;
+    }
+  }
+})();
+</script>
