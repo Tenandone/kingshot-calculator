@@ -1,4 +1,6 @@
-// calculator.js (선행건물 자동 생성 + 표시 포함 완성본, 한글 매핑 보강)
+// calculator.js (선행 자동 + 표시 포함 완성본)
+// camp=훈련소 공용표, infirmary=야전병원, 의무실=선행 전용 medical
+// 순금 키/문자열 숫자화 정규화 포함 + 선행조건 TG 표기
 
 // ------------------------ 기본 설정 ------------------------
 const allBuildingData = {};
@@ -12,7 +14,7 @@ const resourceNames = {
   crystals: '순금'
 };
 
-// 화면 표기용(영문 키 -> 한글명) ★ 누락분 보강
+// 화면 표기용(영문 키 -> 한글명)
 const buildingNameMap = {
   towncenter: '도시센터',
   embassy: '대사관',
@@ -22,15 +24,18 @@ const buildingNameMap = {
   range: '궁병대',
   barracks: '보병대',
   stable: '기병대',
-  infirmary: '의무실',
-  camp: '야전병원',
+  infirmary: '야전병원',   // ← 야전병원
+  // camp는 훈련소 공용키(보/기/궁 데이터 재사용). 직접 노출 불필요
+  // camp: '훈련소',
   // 생활/생산 건물(선행조건 표시에 사용)
   lumbermill: '벌목장',
   house: '민가',
   stonework: '석재공장',
   'hero-hall': '영웅의 홀',
   ironworks: '제철공장',
-  mill: '방앗간'
+  mill: '방앗간',
+  // 선행조건 전용(표 없음)
+  medical: '의무실'
 };
 
 // 한글 원문 → 내부 키 매핑(선행 파싱용)
@@ -42,8 +47,8 @@ const nameToKeyMap = {
   '궁병대': 'range',
   '보병대': 'barracks',
   '기병대': 'stable',
-  '의무실': 'infirmary',
-  '야전병원': 'camp',
+  '야전병원': 'infirmary', // ← camp 아님
+  '의무실': 'medical',     // ← 선행 전용
   // 생활/생산 건물
   '벌목장': 'lumbermill',
   '민가': 'house',
@@ -79,6 +84,12 @@ function formatNumber(value) {
   if (value >= 1_000_000) return removeTrailingZeros((value / 1_000_000).toFixed(2)) + 'M';
   if (value >= 1_000) return removeTrailingZeros((value / 1_000).toFixed(2)) + 'K';
   return (value ?? 0).toString();
+}
+
+// TG 가독성 표시
+function formatLevelWithTG(level) {
+  const tgMap = { 35: 'TG1', 40: 'TG2', 45: 'TG3', 50: 'TG4' };
+  return tgMap[level] ? `Lv.${level} (${tgMap[level]})` : `Lv.${level}`;
 }
 
 function formatTime(sec) {
@@ -120,6 +131,27 @@ function levelKeyToNumber(levelKey) {
   return Number.isFinite(num) ? num : 0;
 }
 
+// 문자열 숫자화 + 순금 키 정규화
+function toNum(v){
+  if (v == null) return 0;
+  if (typeof v === 'number') return v;
+  if (typeof v === 'string') return Number(v.replace(/[, ]/g, '')) || 0;
+  return 0;
+}
+function normalizeDataList(list){
+  if (!Array.isArray(list)) return;
+  for (const r of list) {
+    r.level = levelKeyToNumber(r.level);
+    const tgAny = r.crystals ?? r.truegold ?? r.gold ?? r.tg ?? r.trugold;
+    r.crystals = toNum(tgAny);
+    r.meat = toNum(r.meat);
+    r.wood = toNum(r.wood);
+    r.coal = toNum(r.coal);
+    r.iron = toNum(r.iron);
+    r.time = toNum(r.time); // 초 가정
+  }
+}
+
 // requirement 문자열 → [{name(한글), level(숫자), tg(true/false)}]
 function extractPrereqsAny(reqStr) {
   if (!reqStr || reqStr.trim() === '-') return [];
@@ -135,8 +167,8 @@ function extractPrereqsAny(reqStr) {
 }
 
 // 특정 건물의 구간 합(증분) 계산
-function sumSegment(building, fromLevel, toLevel) {
-  const list = allBuildingData[building];
+function sumSegment(bKey, fromLevel, toLevel) {
+  const list = allBuildingData[bKey];
   if (!list) return { meat:0, wood:0, coal:0, iron:0, crystals:0, time:0 };
   let meat=0, wood=0, coal=0, iron=0, crystals=0, time=0;
   for (let lvl = Math.max(fromLevel, 1) + 1; lvl <= toLevel; lvl++) {
@@ -146,7 +178,7 @@ function sumSegment(building, fromLevel, toLevel) {
     wood     += row.wood     || 0;
     coal     += row.coal     || 0;
     iron     += row.iron     || 0;
-    crystals += row.crystals || 0;
+    crystals += row.crystals || 0; // 순금은 할인 미적용
     time     += row.time     || 0; // 초
   }
   return { meat, wood, coal, iron, crystals, time };
@@ -162,9 +194,10 @@ async function loadAllData() {
     const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) throw new Error(`${name}_data.json 로드 실패 (${res.status}) - 경로: ${url}`);
     allBuildingData[name] = await res.json();
+    normalizeDataList(allBuildingData[name]); // ← 정규화
   }));
 
-  // 병영 3종은 camp 재사용
+  // 병영 3종은 camp 공용표 재사용
   allBuildingData.barracks = allBuildingData.camp;
   allBuildingData.stable   = allBuildingData.camp;
   allBuildingData.range    = allBuildingData.camp;
@@ -184,26 +217,34 @@ async function loadAllData() {
     prereqMap = {}; // 실패 시 비움
   }
 
+  // debugSum('towncenter', 30, 45); // (선택) 레벨별 순금 디버그
+
   initCalculator();
 }
 
 // towncenter.json → prereqMap.towncenter 생성
 function buildPrereqMapFromTowncenter(rawRows) {
   prereqMap = prereqMap || {};
-  prereqMap.towncenter = {};
+  if (!prereqMap.towncenter) prereqMap.towncenter = {};
 
   for (const row of rawRows) {
     const numericLevel = levelKeyToNumber(row.level);
     if (!numericLevel) continue;
 
-    const parts = extractPrereqsAny(row.requirement || '-');
+    const parts = extractPrereqsAny(row.requirement || row.require || '-');
     if (!parts.length) continue;
 
-    // 요구사항을 {buildingKey, to} 배열로 변환
     const reqs = [];
     for (const p of parts) {
       const key = nameToKeyMap[p.name] || p.name; // 내부 키(없으면 원문 fallback)
-      reqs.push({ building: key, to: p.level });
+
+      // ★ TG 표기 보정: TG Lv.n → 30 + n*5
+      const toLevel = p.tg ? (30 + (Number(p.level || 1) * 5)) : Number(p.level || 1);
+
+      reqs.push({ building: key, to: toLevel });
+
+      // 확장 포인트: 해당 건물 별도 선행을 채울 수 있도록 공간만 만들어둠
+      if (!prereqMap[key]) prereqMap[key] = {};
     }
     prereqMap.towncenter[numericLevel] = reqs;
   }
@@ -224,7 +265,7 @@ function computeTimeFactor(buffs) {
   return lawFactor / (1 + speedSum / 100);
 }
 
-// ------------------------ 핵심 계산 ------------------------
+// ------------------------ 핵심 계산 (패치본: from 초과 처리) ------------------------
 function calculateUpgrade(building, startLevel, targetLevel, buffs) {
   const dataList = allBuildingData[building];
   if (!dataList) throw new Error('존재하지 않는 건물입니다.');
@@ -239,49 +280,63 @@ function calculateUpgrade(building, startLevel, targetLevel, buffs) {
   const currentLevels = {};
   currentLevels[building] = startLevel;
 
-  // 특정 건물 toLevel까지 보장(재귀적으로 선행 처리)
-  const ensureBuildingLevel = (bKey, toLevel) => {
-    const curr = currentLevels[bKey] ?? 1; // 미지정시 1
-    if (toLevel <= curr) return;
+  // ★ 기준선 시드: startLevel까지 이미 충족된 선행들은 '현재 달성'으로만 반영(비용/시간 합산 X)
+  for (let lvl = 2; lvl <= startLevel; lvl++) {
+    const reqs = (prereqMap[building] && prereqMap[building][lvl]) || [];
+    for (const req of reqs) {
+      if (!req || !req.building || !Number.isFinite(req.to)) continue;
+      const prev = currentLevels[req.building] ?? 1;
+      if (req.to > prev) currentLevels[req.building] = req.to;
+    }
+  }
 
-    const seg = sumSegment(bKey, curr, toLevel);
+  // from(최소기준)은 '초과'로 처리: 합산 시작점 = max(curr, from) + 1
+  const ensureBuildingLevel = (bKey, fromLevel, toLevel) => {
+    const curr = currentLevels[bKey] ?? 1; // 미지정시 1
+    const startBase = Number.isFinite(fromLevel) ? Math.max(curr, fromLevel) : curr;
+
+    if (toLevel <= startBase) return;
+
+    // 이 건물을 toLevel까지 올리기 전, 그 과정의 선행부터 재귀적으로 보장
+    for (let lv = startBase + 1; lv <= toLevel; lv++) {
+      const reqs = (prereqMap[bKey] && prereqMap[bKey][lv]) || [];
+      for (const r of reqs) {
+        if (!r || !r.building || !Number.isFinite(r.to)) continue;
+        // 하위 선행에도 from이 있을 수 있으므로 함께 전달
+        ensureBuildingLevel(r.building, Number.isFinite(r.from) ? r.from : undefined, r.to);
+      }
+    }
+
+    // 실제 증분 합산 (startBase → toLevel)
+    const seg = sumSegment(bKey, startBase, toLevel); // sumSegment는 (from, to)로 가정: from+1..to 합산
     total.meat     += seg.meat;
     total.wood     += seg.wood;
     total.coal     += seg.coal;
     total.iron     += seg.iron;
-    total.crystals += seg.crystals;
+    total.crystals += seg.crystals; // 순금은 할인 미적용
     total.time     += seg.time;
 
     currentLevels[bKey] = toLevel;
-
-    // 이 건물 올리는 과정의 선행도 재귀 처리
-    for (let lv = curr + 1; lv <= toLevel; lv++) {
-      const reqs = (prereqMap[bKey] && prereqMap[bKey][lv]) ? prereqMap[bKey][lv] : null;
-      if (!reqs) continue;
-      for (const req of reqs) {
-        if (!req || !req.building || !Number.isFinite(req.to)) continue;
-        ensureBuildingLevel(req.building, req.to);
-      }
-    }
   };
 
-  // 메인 건물 start→target 증분 + 각 레벨 선행 처리
+  // 메인 건물: start+1 → target 레벨만 처리(구간 제한)
   for (let lvl = startLevel + 1; lvl <= targetLevel; lvl++) {
-    const reqs = (prereqMap[building] && prereqMap[building][lvl]) ? prereqMap[building][lvl] : null;
-    if (reqs && reqs.length) {
-      for (const req of reqs) {
-        if (!req || !req.building || !Number.isFinite(req.to)) continue;
-        ensureBuildingLevel(req.building, req.to);
-      }
+    // 그 레벨로 올리기 위한 선행을 최소치로만 보장
+    const reqs = (prereqMap[building] && prereqMap[building][lvl]) || [];
+    for (const req of reqs) {
+      if (!req || !req.building || !Number.isFinite(req.to)) continue;
+      // 메인 선행도 from 초과 처리
+      ensureBuildingLevel(req.building, Number.isFinite(req.from) ? req.from : undefined, req.to);
     }
 
+    // 메인 단계 자체 비용/시간 합산
     const row = dataList.find(item => item.level === lvl);
     if (row) {
       total.meat     += row.meat     || 0;
       total.wood     += row.wood     || 0;
       total.coal     += row.coal     || 0;
       total.iron     += row.iron     || 0;
-      total.crystals += row.crystals || 0;
+      total.crystals += row.crystals || 0; // 순금은 할인 미적용
       total.time     += row.time     || 0;
       currentLevels[building] = lvl;
     }
@@ -299,6 +354,8 @@ function calculateUpgrade(building, startLevel, targetLevel, buffs) {
     timeSec
   };
 }
+
+
 
 // ------------------------ 선행조건 표시 ------------------------
 function renderPrereqBox(building, startLevel, targetLevel) {
@@ -327,11 +384,12 @@ function renderPrereqBox(building, startLevel, targetLevel) {
     return;
   }
 
+  // ★ TG 가독성 적용: Lv.35 (TG1) 등으로 표기
   const liHtml = keys.map(k => {
-    const displayName = buildingNameMap[k] || k; // ★ 한글 매핑 적용
+    const displayName = buildingNameMap[k] || k; // 한글 매핑 적용
     const known = !!allBuildingData[k];
     const style = known ? '' : 'style="color:#888"';
-    return `<li ${style}>${displayName} Lv.${need[k]}</li>`;
+    return `<li ${style}>${displayName} ${formatLevelWithTG(need[k])}</li>`;
   }).join("");
 
   ul.innerHTML = liHtml;
@@ -457,7 +515,7 @@ function initCalculator() {
           totals.wood     += row.wood     || 0;
           totals.coal     += row.coal     || 0;
           totals.iron     += row.iron     || 0;
-          totals.crystals += row.crystals || 0;
+          totals.crystals += row.crystals || 0; // 순금은 할인 미적용
           totals.time     += row.time     || 0;
         }
         const timeFactor = computeTimeFactor(buffs);
@@ -481,6 +539,20 @@ function initCalculator() {
       console.error(e);
     }
   });
+}
+
+function debugSum(building, from, to){
+  const list = allBuildingData[building] || [];
+  let sumTG = 0;
+  console.group(`[DBG] ${building} ${from+1}..${to} 순금`);
+  for (let lvl = from + 1; lvl <= to; lvl++){
+    const row = list.find(r => r.level === lvl);
+    const tg = row ? (row.crystals || 0) : 0;
+    sumTG += tg;
+    console.log(`L${lvl-1}->${lvl}: ${tg}`);
+  }
+  console.log(`==> SUM: ${sumTG}`);
+  console.groupEnd();
 }
 
 loadAllData().catch(err => {
