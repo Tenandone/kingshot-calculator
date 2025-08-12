@@ -265,7 +265,7 @@ function computeTimeFactor(buffs) {
   return lawFactor / (1 + speedSum / 100);
 }
 
-// ------------------------ 핵심 계산 (패치본: from 초과 처리) ------------------------
+// ------------------------ 핵심 계산 (패치본: from은 기준선, 합산 시작은 curr) ------------------------
 function calculateUpgrade(building, startLevel, targetLevel, buffs) {
   const dataList = allBuildingData[building];
   if (!dataList) throw new Error('존재하지 않는 건물입니다.');
@@ -290,10 +290,10 @@ function calculateUpgrade(building, startLevel, targetLevel, buffs) {
     }
   }
 
-  // from(최소기준)은 '초과'로 처리: 합산 시작점 = max(curr, from) + 1
+  // fromLevel은 '최소 기준'으로만 사용. 합산 시작점은 항상 curr.
   const ensureBuildingLevel = (bKey, fromLevel, toLevel) => {
     const curr = currentLevels[bKey] ?? 1; // 미지정시 1
-    const startBase = Number.isFinite(fromLevel) ? Math.max(curr, fromLevel) : curr;
+    const startBase = curr; // ★ 핵심 변경: Math.max(curr, fromLevel) 대신 curr 고정
 
     if (toLevel <= startBase) return;
 
@@ -302,13 +302,14 @@ function calculateUpgrade(building, startLevel, targetLevel, buffs) {
       const reqs = (prereqMap[bKey] && prereqMap[bKey][lv]) || [];
       for (const r of reqs) {
         if (!r || !r.building || !Number.isFinite(r.to)) continue;
-        // 하위 선행에도 from이 있을 수 있으므로 함께 전달
+        // 하위 선행에도 from이 있을 수 있으므로 함께 전달(기준선 용도)
         ensureBuildingLevel(r.building, Number.isFinite(r.from) ? r.from : undefined, r.to);
       }
     }
 
     // 실제 증분 합산 (startBase → toLevel)
-    const seg = sumSegment(bKey, startBase, toLevel); // sumSegment는 (from, to)로 가정: from+1..to 합산
+    // sumSegment는 (from, to) = from+1..to 합산 기준이어야 함
+    const seg = sumSegment(bKey, startBase, toLevel);
     total.meat     += seg.meat;
     total.wood     += seg.wood;
     total.coal     += seg.coal;
@@ -325,7 +326,7 @@ function calculateUpgrade(building, startLevel, targetLevel, buffs) {
     const reqs = (prereqMap[building] && prereqMap[building][lvl]) || [];
     for (const req of reqs) {
       if (!req || !req.building || !Number.isFinite(req.to)) continue;
-      // 메인 선행도 from 초과 처리
+      // 메인 선행도 동일하게 처리(from은 기준선)
       ensureBuildingLevel(req.building, Number.isFinite(req.from) ? req.from : undefined, req.to);
     }
 
