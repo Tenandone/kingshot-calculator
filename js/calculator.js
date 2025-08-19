@@ -1,11 +1,20 @@
-// calculator.js — pages/calculator.html 최적화본 대응 (final, sorted + prereq summary)
-// - 선행건물: academy, barracks, range, stable, embassy만 반영
-// - 선행건물은 최소 Lv.3부터 "적용"(입력이 1~2여도 계산에선 3으로 처리)
-// - includePrereq 체크 시 <details id="prereq-details"> 토글/표시
-// - 결과 표는 "건물별 → 레벨 오름차순" 정렬
-// - 결과 상단에 "선행건물 요약(현재 레벨 / 요구 레벨)" 표시 (현재 레벨 0이면 숨김)
+// calculator.js — pages/calculator.html 최적화본 대응 (final, robust JSON loader + SPA-safe init guards)
+//
+// 보강 포인트:
+// - SPA 라우팅에서 스크립트가 중복 로드되어도 안전(초기화 가드 + 이벤트 바인딩 중복 방지)
+// - DOM 요소 미존재 시 우아한 무시(에러 대신 경고)
+// - JSON 로더: 절대경로 우선 + Content-Type/본문 검사로 HTML 오인 파싱 차단
+// - 어느 경로를 실제 사용했는지 콘솔에 기록
+
 (function () {
   'use strict';
+
+  // ========= 전역 초기화 가드(중복 로드 방지) =========
+  if (window.__calculatorScriptLoaded__) {
+    console.info('[calc] calculator.js already loaded — skipping duplicate definition');
+    return;
+  }
+  window.__calculatorScriptLoaded__ = true;
 
   // ------------------------ 상태 ------------------------
   const allBuildingData = {};
@@ -16,8 +25,6 @@
   // ===== 선행 제한 & 최소 레벨 =====
   const ALLOWED_PREREQ = new Set(['academy', 'barracks', 'range', 'stable', 'embassy']);
   const PREREQ_MIN_LV = 3;
-
-  // 결과 표에 사용할 표시 순서(건물 정렬 우선순위)
   const DISPLAY_ORDER_PREREQ = ['academy', 'barracks', 'range', 'stable', 'embassy'];
 
   // ------------------------ 빌딩 키/표시명 ------------------------
@@ -92,7 +99,7 @@
 
   function parseTimeToSec(v) {
     if (v == null) return 0;
-    if (typeof v === 'number') return Math.max(0, Math.round(v * 60)); // 분
+    if (typeof v === 'number') return Math.max(0, Math.round(v * 60)); // 분 단위 숫자 방어
     let s = String(v).trim().toLowerCase();
     if (/^\d+(\.\d+)?$/.test(s)) return Math.max(0, Math.round(parseFloat(s) * 60));
 
@@ -132,24 +139,59 @@
     return n.toLocaleString();
   }
 
-  // ------------------------ buildings.json 로더 ------------------------
-  const BUILDINGS_JSON_CANDIDATES = [
-    'data/buildings.json', '/data/buildings.json', '../data/buildings.json', '../../data/buildings.json'
-  ];
+  // ------------------------ 안전한 JSON 로더 ------------------------
+  function guessBasePath() {
+    const baseTag = document.querySelector('base[href]');
+    if (baseTag) {
+      try { return new URL(baseTag.getAttribute('href'), location.origin).pathname || '/'; }
+      catch (_) {}
+    }
+    const seg = location.pathname.split('/').filter(Boolean);
+    if (seg.length > 0 && !seg[0].includes('.')) return '/' + seg[0] + '/';
+    return '/';
+  }
+
+  async function fetchJsonSafe(url) {
+    const r = await fetch(url, { cache: 'no-store' });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const ct = (r.headers.get('content-type') || '').toLowerCase();
+    const text = await r.text();
+    const looksJson = /application\/json|text\/json/.test(ct) || /^\s*[{[]/.test(text);
+    if (!looksJson) {
+      const head = text.slice(0, 120).replace(/\s+/g, ' ');
+      throw new Error(`Not JSON from ${url} (got HTML/text): "${head}..."`);
+    }
+    try { return JSON.parse(text); }
+    catch (e) { throw new Error(`JSON parse failed at ${url}: ${e.message}`); }
+  }
 
   async function loadBuildingsJson() {
-    for (const u of BUILDINGS_JSON_CANDIDATES) {
+    const ts = Date.now(); // 캐시 버스터
+    const base = guessBasePath();
+    const candidates = [
+      `/data/buildings.json?v=${ts}`,
+      `${base}data/buildings.json?v=${ts}`,
+      `data/buildings.json?v=${ts}`,
+      `../data/buildings.json?v=${ts}`,
+      `../../data/buildings.json?v=${ts}`
+    ];
+
+    const errors = [];
+    for (const u of candidates) {
       try {
-        const r = await fetch(u, { cache: 'no-store' });
-        if (r.ok) {
-          const j = await r.json();
-          return Array.isArray(j.buildings) ? j.buildings : [];
-        }
-      } catch (_) { }
+        const j = await fetchJsonSafe(u);
+        const arr = Array.isArray(j.buildings) ? j.buildings : [];
+        console.info('[calc] buildings.json loaded from:', u, '(count:', arr.length, ')');
+        return arr;
+      } catch (e) {
+        errors.push(`${u} → ${e.message}`);
+      }
     }
+    console.error('[calc] Failed to load buildings.json:\n' + errors.join('\n'));
     throw new Error('buildings.json을 불러올 수 없습니다.');
   }
 
+  // ------------------------ 표 파서 ------------------------
   function tableToRows(table) {
     if (!Array.isArray(table) || !table.length) return [];
     const header = table[0].map(String);
@@ -200,7 +242,7 @@
       const to = hasTG ? (30 + rawL * 5) : rawL;
       return { building: key, to };
     }).filter(Boolean)
-      .filter(r => ALLOWED_PREREQ.has(r.building)); // 허용 선행만
+      .filter(r => ALLOWED_PREREQ.has(r.building));
   }
 
   const SLUG_ALIASES = { towncenter: ['town-center'], command: ['command-center'] };
@@ -284,7 +326,7 @@
         prereqMap[bKey][lvl].push(...filtered);
       };
 
-      // 선행조건 맵 구성 (도시센터 요구 r._tc는 정책상 제외)
+      // 선행조건 맵 구성
       for (const b of list) {
         const slug = String(b.slug || '').toLowerCase();
         if (Array.isArray(b.table) && b.table.length) {
@@ -329,7 +371,7 @@
     return _loadingPromise;
   }
 
-  // ------------------------ 합산 로직 ------------------------
+  // ------------------------ 합산/계산 ------------------------
   function sumSegment(bKey, fromLevel, toLevel) {
     const rows = allBuildingData[bKey] || [];
     let meat = 0, wood = 0, coal = 0, iron = 0, crystals = 0, time = 0;
@@ -373,7 +415,6 @@
     };
   }
 
-  // ===== 필요 선행조건 맵 (최소 3 적용) =====
   function getNeedMap(buildingKey, startLevel, targetLevel) {
     const need = {};
     for (let lv = startLevel + 1; lv <= targetLevel; lv++) {
@@ -388,12 +429,11 @@
     return need;
   }
 
-  // ===== 선행 포함 계산(사용자 현재 레벨 반영, 최소 3 적용) =====
   function calculateWithPrereq(mainKey, startLevel, targetLevel, buffs, preLevels) {
     let total = { meat: 0, wood: 0, coal: 0, iron: 0, crystals: 0, time: 0 };
     const current = { ...(preLevels || {}) };
     current[mainKey] = startLevel;
-    const lines = []; // 단계별(메인+선행) 라인 아이템
+    const lines = [];
 
     const pushLine = (bKey, lvl, row) => {
       if (!row) return;
@@ -456,7 +496,6 @@
     };
   }
 
-  // 선행 미포함 계산 시에도 라인 생성
   function buildMainOnlyResult(dataKey, startLevel, targetLevel, buffs) {
     const seg = sumSegment(dataKey, startLevel, targetLevel);
     const tf = computeTimeFactor(buffs);
@@ -495,7 +534,7 @@
     ul.innerHTML = keys.map(k => `<li>${buildingNameMap[k] || k} Lv.${need[k]}</li>`).join('');
   }
 
-  // 선행건물 숫자 입력값(원본 그대로: 0~55) — 요약 표시용
+  // 입력 읽기
   function readUserPrereqLevelsRaw() {
     const g = (id) => {
       const el = document.getElementById(id);
@@ -511,8 +550,6 @@
       embassy: g('prereqEmbassy')
     };
   }
-
-  // 선행건물 숫자 입력값(계산용: 최소 3 적용)
   function readUserPrereqLevels() {
     const raw = readUserPrereqLevelsRaw();
     const out = {};
@@ -523,26 +560,18 @@
     return out;
   }
 
-  // includePrereq 토글에 따라 <details> 열고/닫기
   function syncPrereqDetailsVisibility(shouldOpen) {
     const details = document.getElementById('prereq-details');
     if (!details) return;
-    if (shouldOpen) {
-      details.hidden = false;
-      details.open = true;
-    } else {
-      details.open = false;
-      details.hidden = true;
-    }
+    if (shouldOpen) { details.hidden = false; details.open = true; }
+    else { details.open = false; details.hidden = true; }
   }
 
-  // 표시용 건물명(메인 선택이 camp:common일 때 UI 라벨 유지)
   function getDisplayNameForLine(lineBKey, uiKey, dataKey) {
     if (lineBKey === dataKey) return buildingNameMap[uiKey] || uiKey;
     return buildingNameMap[lineBKey] || lineBKey;
   }
 
-  // lines 정렬: 건물 우선순위 → 레벨 오름차순
   function sortLines(lines, dataKey) {
     const order = [dataKey, ...DISPLAY_ORDER_PREREQ];
     const idxOf = (k) => {
@@ -556,14 +585,12 @@
     });
   }
 
-  // 화면 표시는 uiKey, 데이터 조회는 dataKey
   function displaySummaryAndTable(dataKey, uiKey, startLevel, targetLevel, result, saulPct, needMap, preRaw) {
     const resultDiv = document.getElementById('result');
-    if (!resultDiv) return;
+    if (!resultDiv) { console.warn('[calc] #result not found'); return; }
 
     const title = buildingNameMap[uiKey] || buildingNameMap[dataKey] || uiKey || dataKey;
 
-    // 총합(살로 할인 적용된 값이 result에 병합되어 들어옴)
     const summaryTop = `
       <div style="background:#d7e8fc;padding:10px 15px;border-radius:14px;max-width:900px;margin:0 auto 10px;color:#004a99;font-weight:600;line-height:1.2;">
         <p><strong>업그레이드:</strong> ${title} Lv.${startLevel} → Lv.${targetLevel}</p>
@@ -577,11 +604,9 @@
       </div>
     `;
 
-    // ===== 선행건물 요약(현재 레벨 vs 요구 레벨) =====
-    // ▶ curLv가 0이면 표시하지 않도록 필터 추가
-    const orderForSummary = DISPLAY_ORDER_PREREQ; // 고정 순서
-    const prereqItems = orderForSummary
-      .filter(k => needMap[k] != null && ((preRaw[k] | 0) > 0)) // 요구 있고, 현재 레벨이 0보다 클 때만
+    // 선행 요약(현재 레벨이 0이면 숨김)
+    const prereqItems = DISPLAY_ORDER_PREREQ
+      .filter(k => needMap[k] != null && ((preRaw[k] | 0) > 0))
       .map(k => {
         const needLv = needMap[k] | 0;
         const curLv = preRaw[k] | 0;
@@ -595,7 +620,6 @@
          </section>`
       : '';
 
-    // ===== 상세 라인(선행 포함) 테이블 =====
     const sortedLines = sortLines(result.lines || [], dataKey);
     const showGold = sortedLines.some(r => (r.crystals || 0) > 0);
     let body = '';
@@ -640,7 +664,23 @@
   }
 
   // ------------------------ 초기화 ------------------------
+  // 이벤트 중복 바인딩 방지 헬퍼
+  function bindOnce(el, type, handler) {
+    if (!el) return;
+    if (!el.__bound__) el.__bound__ = {};
+    if (el.__bound__[type]) return;
+    el.addEventListener(type, handler);
+    el.__bound__[type] = true;
+  }
+
   async function initCalculator() {
+    // 한 페이지에서 여러 번 호출되어도 한 번만 초기화
+    if (window.__calculatorInited__) {
+      // 데이터가 이미 로드되어 있다면 UI만 재동기화
+      try { refreshPrereqUI(); } catch (_) {}
+      return;
+    }
+
     try { await ensureDataLoaded(); }
     catch (e) {
       const el = document.getElementById('result');
@@ -648,10 +688,22 @@
       return;
     }
 
-    const refreshPrereqUI = () => {
-      const uiKey = document.getElementById('building').value;
-      const start = parseInt(document.getElementById('startLevel').value || 1, 10);
-      const to = parseInt(document.getElementById('targetLevel').value || 1, 10);
+    const buildingEl = document.getElementById('building');
+    const startEl = document.getElementById('startLevel');
+    const targetEl = document.getElementById('targetLevel');
+    const incEl = document.getElementById('includePrereq');
+    const calcBtn = document.getElementById('calcBtn');
+    const clearBtn = document.getElementById('clearPlanBtn');
+
+    if (!buildingEl || !startEl || !targetEl) {
+      console.warn('[calc] Required inputs not found (#building, #startLevel, #targetLevel)');
+      return;
+    }
+
+    function refreshPrereqUI() {
+      const uiKey = buildingEl.value;
+      const start = parseInt(startEl.value || 1, 10);
+      const to = parseInt(targetEl.value || 1, 10);
       const map = CALC_BUILDING_MAP[uiKey] || { slug: uiKey };
       let dataKey = map.variant ? `${map.slug}:${map.variant}` : map.slug;
       if (uiKey === 'infirmary' && !allBuildingData[dataKey]) dataKey = 'camp:common';
@@ -663,38 +715,31 @@
         if (ul) ul.innerHTML = '';
       }
 
-      const inc = document.getElementById('includePrereq')?.checked;
+      const inc = incEl?.checked;
       syncPrereqDetailsVisibility(Boolean(inc && to > start));
-    };
-
-    ['building', 'startLevel', 'targetLevel'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.addEventListener('input', refreshPrereqUI);
-    });
-
-    const incEl = document.getElementById('includePrereq');
-    if (incEl) {
-      incEl.addEventListener('change', () => {
-        refreshPrereqUI();
-      });
     }
 
-    // 계산 실행
-    document.getElementById('calcBtn')?.addEventListener('click', () => {
-      const uiKey = document.getElementById('building').value;
-      const start = parseInt(document.getElementById('startLevel').value, 10);
-      const to = parseInt(document.getElementById('targetLevel').value, 10);
+    // 바인딩(중복 방지)
+    bindOnce(buildingEl, 'input', refreshPrereqUI);
+    bindOnce(startEl, 'input', refreshPrereqUI);
+    bindOnce(targetEl, 'input', refreshPrereqUI);
+    if (incEl) bindOnce(incEl, 'change', refreshPrereqUI);
+
+    if (calcBtn) bindOnce(calcBtn, 'click', () => {
+      const uiKey = buildingEl.value;
+      const start = parseInt(startEl.value, 10);
+      const to = parseInt(targetEl.value, 10);
       if (!Number.isFinite(start) || !Number.isFinite(to)) { alert('레벨 입력이 올바르지 않습니다.'); return; }
       if (start >= to) { alert('목표 레벨은 시작 레벨보다 커야 합니다.'); return; }
 
       const buffs = {
-        speedBonus: parseFloat(document.getElementById('speedBonus').value) || 0,
-        saulBonus: parseFloat(document.getElementById('saulBonus').value) || 0,
-        wolfBonus: parseFloat(document.getElementById('wolfBonus').value) || 0,
-        positionBonus: parseFloat(document.getElementById('positionBonus').value) || 0,
-        doubleTime: document.getElementById('doubleTime').checked,
+        speedBonus: parseFloat(document.getElementById('speedBonus')?.value) || 0,
+        saulBonus: parseFloat(document.getElementById('saulBonus')?.value) || 0,
+        wolfBonus: parseFloat(document.getElementById('wolfBonus')?.value) || 0,
+        positionBonus: parseFloat(document.getElementById('positionBonus')?.value) || 0,
+        doubleTime: !!document.getElementById('doubleTime')?.checked,
       };
-      const includePrereq = document.getElementById('includePrereq')?.checked || false;
+      const includePrereq = !!incEl?.checked;
 
       const map = CALC_BUILDING_MAP[uiKey] || { slug: uiKey };
       let dataKey = map.variant ? `${map.slug}:${map.variant}` : map.slug;
@@ -703,19 +748,17 @@
 
       let result;
       if (includePrereq) {
-        const preLevels = readUserPrereqLevels();      // 계산용(최소 3 적용)
+        const preLevels = readUserPrereqLevels();
         result = calculateWithPrereq(dataKey, start, to, { ...buffs, includePrereq }, preLevels);
       } else {
         result = buildMainOnlyResult(dataKey, start, to, buffs);
       }
 
-      // 총합에 살로 할인 적용
       const totalsAfterSaul = applySaulDiscountTotals(
         { meat: result.meat, wood: result.wood, coal: result.coal, iron: result.iron, crystals: result.crystals, timeSec: result.timeSec },
         buffs.saulBonus
       );
 
-      // 선행 요약 표시용 데이터
       const needMap = getNeedMap(dataKey, start, to);
       const preRaw = readUserPrereqLevelsRaw();
 
@@ -732,11 +775,10 @@
       renderPrereqBox(dataKey, start, to);
     });
 
-    // 초기화 버튼 (id=clearPlanBtn)
-    document.getElementById('clearPlanBtn')?.addEventListener('click', () => {
-      const b = document.getElementById('building'); if (b) b.selectedIndex = 0;
-      const s = document.getElementById('startLevel'); if (s) s.value = 1;
-      const t = document.getElementById('targetLevel'); if (t) t.value = 1;
+    if (clearBtn) bindOnce(clearBtn, 'click', () => {
+      if (buildingEl) buildingEl.selectedIndex = 0;
+      if (startEl) startEl.value = 1;
+      if (targetEl) targetEl.value = 1;
 
       ['speedBonus','saulBonus','wolfBonus','positionBonus'].forEach(id => {
         const el = document.getElementById(id);
@@ -744,7 +786,7 @@
       });
 
       const dt = document.getElementById('doubleTime'); if (dt) dt.checked = false;
-      const ip = document.getElementById('includePrereq'); if (ip) ip.checked = false;
+      if (incEl) incEl.checked = false;
 
       ['prereqAcademy','prereqRange','prereqStable','prereqBarracks','prereqEmbassy'].forEach(id => {
         const el = document.getElementById(id);
@@ -759,6 +801,8 @@
 
     // 초기 1회 UI 동기화
     refreshPrereqUI();
+    window.__calculatorInited__ = true;
+    console.info('[calc] init complete');
   }
 
   // 외부에서 호출

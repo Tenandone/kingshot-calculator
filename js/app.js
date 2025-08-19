@@ -1,5 +1,5 @@
 // js/app.js — SPA Router for KingshotData.kr
-// final: route-scoped CSS, H1 dedupe, no nested panel, race-safe script loader
+// final: route-scoped CSS, H1 dedupe, no nested panel, race-safe & preflighted script loader
 (function () {
   'use strict';
 
@@ -19,22 +19,48 @@
     });
   }
 
-  // ---- dynamic <script> loader (once, race-safe) ----
+  // ---- dynamic <script> loader (once, race-safe, preflight to avoid MIME errors) ----
   const loadedScripts = new Map();
-  function loadScriptOnce(src) {
-    if (!src) return Promise.resolve();
-    if (loadedScripts.has(src)) return loadedScripts.get(src); // 이미 로딩 중/완료된 프라미스 재사용
 
-    const p = new Promise((resolve, reject) => {
-      const s = document.createElement('script');
-      s.src = src;
-      s.defer = true;
-      s.onload = () => resolve();
-      s.onerror = () => { loadedScripts.delete(src); reject(new Error('Failed to load ' + src)); };
-      document.head.appendChild(s);
-    });
+  async function loadScriptOnce(src) {
+    if (!src) return;
+    if (loadedScripts.has(src)) return loadedScripts.get(src); // in-flight/completed promise
+
+    const p = (async () => {
+      // 1) Preflight: 존재/타입 확인 (HTML을 JS로 실행하려다 나는 MIME 에러 방지)
+      let r;
+      try {
+        r = await fetch(src, { cache: 'no-store' });
+      } catch (e) {
+        throw new Error(`Fetch failed @ ${src}: ${e.message}`);
+      }
+      if (!r.ok) throw new Error(`HTTP ${r.status} @ ${src}`);
+
+      const ct = (r.headers.get('content-type') || '').toLowerCase();
+      const looksJs = /\.js($|\?)/.test(src) || /javascript|ecmascript/.test(ct);
+      if (!looksJs) {
+        // HTML/텍스트라면 주입하지 않고 실패 처리 (콘솔 MIME 경고 차단)
+        throw new Error(`Not JS: ${ct || 'unknown content-type'} @ ${src}`);
+      }
+
+      // 2) Script 태그 주입
+      await new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.defer = true;
+        s.onload = resolve;
+        s.onerror = () => reject(new Error('Failed to load ' + src));
+        document.head.appendChild(s);
+      });
+    })();
 
     loadedScripts.set(src, p);
+    try {
+      await p;
+    } catch (e) {
+      loadedScripts.delete(src); // 실패 시 캐시 제거 (다음 후보 시도)
+      throw e;
+    }
     return p;
   }
 
@@ -161,7 +187,7 @@
         el.innerHTML = [
           '<section class="hero">',
             '<div class="hero__copy">',
-              '<h1 class="hero__title">KingshotDataKorea</h1>',              
+              '<h1 class="hero__title">KingshotDataKorea</h1>',
             '</div>',
             '<div class="hero__art" aria-hidden="true">KD</div>',
           '</section>',
@@ -274,8 +300,6 @@
             .kv dt{ color:#666; }
             .pill{ display:inline-block; padding:2px 8px; border-radius:999px; background:#eef2ff; color:#273; font-size:12px; margin-right:6px; }
             .muted{ color:#666; }
-
-            /* ✅ 스킬 이미지 중앙정렬(전역 영향 무시) */
             .hero-section .skill img{ display:block; margin-inline:auto; float:none; }
             .hero-section .skills-row{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
             .hero-section .skills-grid{ display:grid; place-items:center; gap:12px; }
@@ -367,12 +391,12 @@
         const m = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
         el.innerHTML = m ? m[1] : html;
 
+        // ✅ 실제 위치만 우선 시도 (불필요 후보 제거로 404/MIME 로그 최소화)
         const jsCands = [
-          'js/pages/calculator.js','/js/pages/calculator.js',
-          'js/tools/calculator.js','/js/tools/calculator.js',
-          'js/calculator.js','/js/calculator.js',
-          'calculator.js','/calculator.js'
+          '/js/calculator.js',
+          'js/calculator.js'
         ];
+
         let loadedAny = false;
         for (const src of jsCands) {
           try { await loadScriptOnce(src); loadedAny = true; break; } catch(_) {}
