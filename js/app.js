@@ -161,8 +161,7 @@
         el.innerHTML = [
           '<section class="hero">',
             '<div class="hero__copy">',
-              '<h1 class="hero__title">KingshotData Korea</h1>',
-              '<p class="hero__desc muted">추가 업로드 요청 환영합니다.</p>',
+              '<h1 class="hero__title">KingshotDataKorea</h1>',              
             '</div>',
             '<div class="hero__art" aria-hidden="true">KD</div>',
           '</section>',
