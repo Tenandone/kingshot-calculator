@@ -1,135 +1,149 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="robots" content="noindex,nofollow">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>영주 장비 | KingshotData KR</title>
-<style>
-  /* SPA 상세 주입 루트 = .db-detail  */
-  .db-detail{font-family:Arial,system-ui,-apple-system,Segoe UI,Roboto,'Noto Sans KR',sans-serif;color:#222;line-height:1.5;}
-  .db-detail .wrap{max-width:920px;margin:24px auto;padding:0 12px;}
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>영주 장비 | KingshotData KR</title>
 
-  /* 대표 이미지: 카드 크기(240x160) 정확히 고정 */
-  .db-detail .hero{
-    width:240px; height:160px; margin:0 0 12px;
-    border:1px solid #eee; border-radius:8px; padding:4px; background:#fff;
-    box-sizing:border-box;
-  }
-  .db-detail .hero img{
-    width:100%; height:100%; object-fit:contain; display:block;
-    border:0; padding:0; background:transparent;
-  }
+  <style>
+    .visually-hidden{
+      position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+      clip:rect(0 0 0 0);white-space:nowrap;border:0
+    }
 
-  .db-detail h1{font-size:28px;margin:0 0 12px;}
-  .db-detail h2{margin:20px 0 8px;}
-  .db-detail p{margin:8px 0;}
-
-  /* (선택) 재료 섹션 */
-  .db-detail .materials{margin:12px 0 4px;}
-  .db-detail .mat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px;}
-  .db-detail .mat{border:1px solid #eee;border-radius:10px;padding:10px;text-align:center;background:#fafafa;}
-  .db-detail .mat img{width:100%;height:auto;max-height:140px;object-fit:contain;display:block;margin:0 auto 8px;background:#fff;border:1px solid #eee;border-radius:8px;padding:4px;}
-  .db-detail .mat .label{font-weight:700;}
-
-  /* 표 */
-  .db-detail table{border-collapse:collapse;width:100%;margin:16px 0;font-size:14px;}
-  .db-detail th,.db-detail td{border:1px solid #ddd;padding:8px;text-align:left;}
-  .db-detail th{background:#f7f7f7;}
-
-  /* 표 아이콘 */
-  .db-detail .th-ico{width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:6px;border:0;padding:0;background:transparent;}
-
-  @media (max-width:768px){
-    .db-detail .mat-grid{grid-template-columns:repeat(2,1fr);}
-  }
-  @media (max-width:520px){
-    .db-detail .mat-grid{grid-template-columns:1fr;}
-  }
-</style>
+    /* 표 가독성 최적화 */
+    .table-wrap{overflow:auto}
+    .table-wrap table{
+      border-collapse:collapse;
+      font-size:13px;
+      width:auto;            /* 100% 대신 내용 기준 */
+      min-width: 680px;      /* 너무 좁아지지 않게 */
+      margin: 0 auto;        /* 중앙 정렬 */
+      table-layout:auto;
+    }
+    .table-wrap caption{
+      caption-side: top;
+      text-align: left;
+      padding: 6px 0 8px;
+      color: #8a93a4;        /* 사이트 muted 톤과 유사 */
+      font-size: 12px;
+    }
+    .table-wrap th, .table-wrap td{
+      padding:6px 10px;
+      border-bottom:1px solid var(--border, #1e2430);
+      white-space:nowrap;    /* 숫자 줄바꿈 방지 */
+      text-align:right;      /* 숫자 기본 우측 정렬 */
+    }
+    .table-wrap th:first-child,
+    .table-wrap td:first-child{
+      text-align:left;       /* 첫 컬럼(등급)은 좌측 정렬 */
+    }
+    .table-wrap thead th{
+      position:sticky; top:0;
+      background:#0f1318;    /* 다크 톤 헤더 */
+      color:#8a93a4;
+      z-index:1;
+    }
+    /* 컬럼 폭 (필요 시 조정) */
+    .table--compact th:nth-child(1), .table--compact td:nth-child(1){ width:100px } /* 등급 */
+    .table--compact th:nth-child(2), .table--compact td:nth-child(2){ width:60px }  /* 성급 */
+    .table--compact th:nth-child(3), .table--compact td:nth-child(3){ width:90px }  /* 비단 */
+    .table--compact th:nth-child(4), .table--compact td:nth-child(4){ width:90px }  /* 금사 */
+    .table--compact th:nth-child(5), .table--compact td:nth-child(5){ width:110px } /* 설계 스케치 */
+    .table--compact th:nth-child(6), .table--compact td:nth-child(6){ width:110px } /* 전투력 */
+  </style>
 </head>
 <body>
-<div class="wrap">
+  <main>
+    <!-- 대표이미지 -->
+    <figure>
+      <img src="/download/database/Governor Gear/governor-gear-icon-296x300.webp"
+           alt="영주 장비 대표 이미지"
+           width="296" height="300"
+           loading="lazy" decoding="async">      
+    </figure>
 
-  <!-- 대표이미지 (카드 사이즈) -->
-  <figure class="hero">
-    <img src="/download/database/Governor Gear/governor-gear-icon-296x300.webp"
-         alt="영주 장비 대표 이미지" loading="lazy" decoding="async">
-  </figure>
+    <h1>영주 장비</h1>
 
-  <h1>영주 장비</h1>
+    <section aria-labelledby="what-is-gear">
+      <h2 id="what-is-gear">영주 장비란?</h2>
+      <p>영주 장비는 강력한 장비를 제작하고 강화할 수 있게 해줍니다.</p>
+      <p>화면 왼쪽 상단 프로필에서 접근할 수 있습니다.</p>
+      <p>도시센터 22레벨 달성 시 해금되며, 게임 내 전투력을 크게 끌어올리는 핵심 수단입니다.</p>
+    </section>
 
-  <h2>영주장비란?</h2>
-  <p>영주 장비는 강력한 장비를 제작하고 강화할 수 있게 해줍니다.</p>
-  <p>화면 왼쪽 상단 프로필에서 접근할 수 있습니다.</p>
-  <p>도시센터 22레벨 달성 시 해금되며,</p>
-  <p>게임 내 전투력을 크게 끌어올리는 핵심 수단입니다.</p>
+    <section aria-labelledby="upgrade">
+      <h2 id="upgrade">강화</h2>
+      <p>비단과 금사를 사용하여 강화되며, 파랑 등급부터 설계 스케치가 포함됩니다.</p>
+    </section>
 
-  <h2>강화</h2>
-  <p>비단과 금사를 사용하여 강화되며,</p>
-  <p>파랑 등급부터 설계 스케치가 포함됩니다.</p>
+    <!-- 표 -->
+    <section aria-labelledby="gear-table">
+      <h2 id="gear-table">등급별 요구 재료 및 전투력</h2>
+      <div class="table-wrap" role="region" aria-labelledby="gear-table">
+        <table class="table--compact" aria-describedby="gear-table-caption">
+          <caption id="gear-table-caption">영주 장비 등급·성급에 따른 재료 소모량 및 전투력</caption>
+          <thead>
+            <tr>
+              <th scope="col">등급</th>
+              <th scope="col">성급</th>
+              <th scope="col">비단</th>
+              <th scope="col">금사</th>
+              <th scope="col">설계 스케치</th>
+              <th scope="col">전투력</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>일반</td><td>0</td><td>1,500</td><td>15</td><td>–</td><td>224,400</td></tr>
+            <tr><td>일반</td><td>1</td><td>3,800</td><td>40</td><td>–</td><td>306,000</td></tr>
 
-  <!-- 표: 헤더에 아이콘 + 등급 한글화 -->
-  <table aria-label="영주 장비 등급별 요구 재료 및 전투력">
-    <thead>
-      <tr>
-        <th>등급</th>
-        <th>성급</th>
-        <th><img src="/download/database/Governor Gear/satin-kingshot.webp" class="th-ico" alt="">비단</th>
-        <th><img src="/download/database/Governor Gear/gilded-threads.webp" class="th-ico" alt="">금사</th>
-        <th><img src="/download/database/Governor Gear/artisans-vision.webp" class="th-ico" alt="">설계 스케치</th>
-        <th>전투력</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>그린</td><td>0</td><td>1,500</td><td>15</td><td>–</td><td>224,400</td></tr>
-      <tr><td>그린</td><td>1</td><td>3,800</td><td>40</td><td>–</td><td>306,000</td></tr>
+            <tr><td>레어</td><td>0</td><td>7,000</td><td>70</td><td>–</td><td>408,000</td></tr>
+            <tr><td>레어</td><td>1</td><td>9,700</td><td>95</td><td>–</td><td>510,000</td></tr>
+            <tr><td>레어</td><td>2</td><td>1,000</td><td>10</td><td>45</td><td>612,000</td></tr>
+            <tr><td>레어</td><td>3</td><td>1,000</td><td>10</td><td>50</td><td>714,000</td></tr>
 
-      <tr><td>파랑</td><td>0</td><td>7,000</td><td>70</td><td>–</td><td>408,000</td></tr>
-      <tr><td>파랑</td><td>1</td><td>9,700</td><td>95</td><td>–</td><td>510,000</td></tr>
-      <tr><td>파랑</td><td>2</td><td>1,000</td><td>10</td><td>45</td><td>612,000</td></tr>
-      <tr><td>파랑</td><td>3</td><td>1,000</td><td>10</td><td>50</td><td>714,000</td></tr>
+            <tr><td>에픽</td><td>0</td><td>1,500</td><td>15</td><td>60</td><td>816,000</td></tr>
+            <tr><td>에픽</td><td>1</td><td>1,500</td><td>15</td><td>70</td><td>885,360</td></tr>
+            <tr><td>에픽</td><td>2</td><td>6,500</td><td>65</td><td>40</td><td>954,720</td></tr>
+            <tr><td>에픽</td><td>3</td><td>8,000</td><td>80</td><td>50</td><td>1,024,080</td></tr>
 
-      <tr><td>에픽</td><td>0</td><td>1,500</td><td>15</td><td>60</td><td>816,000</td></tr>
-      <tr><td>에픽</td><td>1</td><td>1,500</td><td>15</td><td>70</td><td>885,360</td></tr>
-      <tr><td>에픽</td><td>2</td><td>6,500</td><td>65</td><td>40</td><td>954,720</td></tr>
-      <tr><td>에픽</td><td>3</td><td>8,000</td><td>80</td><td>50</td><td>1,024,080</td></tr>
+            <tr><td>에픽 T1</td><td>0</td><td>10,000</td><td>95</td><td>60</td><td>1,093,440</td></tr>
+            <tr><td>에픽 T1</td><td>1</td><td>11,000</td><td>110</td><td>70</td><td>1,162,800</td></tr>
+            <tr><td>에픽 T1</td><td>2</td><td>13,000</td><td>130</td><td>85</td><td>1,232,160</td></tr>
+            <tr><td>에픽 T1</td><td>3</td><td>15,000</td><td>160</td><td>100</td><td>1,301,520</td></tr>
 
-      <tr><td>에픽 T1</td><td>0</td><td>10,000</td><td>95</td><td>60</td><td>1,093,440</td></tr>
-      <tr><td>에픽 T1</td><td>1</td><td>11,000</td><td>110</td><td>70</td><td>1,162,800</td></tr>
-      <tr><td>에픽 T1</td><td>2</td><td>13,000</td><td>130</td><td>85</td><td>1,232,160</td></tr>
-      <tr><td>에픽 T1</td><td>3</td><td>15,000</td><td>160</td><td>100</td><td>1,301,520</td></tr>
+            <tr><td>레전드</td><td>0</td><td>22,000</td><td>220</td><td>40</td><td>1,362,720</td></tr>
+            <tr><td>레전드</td><td>1</td><td>23,000</td><td>230</td><td>40</td><td>1,423,920</td></tr>
+            <tr><td>레전드</td><td>2</td><td>25,000</td><td>250</td><td>45</td><td>1,485,120</td></tr>
+            <tr><td>레전드</td><td>3</td><td>26,000</td><td>260</td><td>45</td><td>1,546,320</td></tr>
 
-      <tr><td>레전드</td><td>0</td><td>22,000</td><td>220</td><td>40</td><td>1,362,720</td></tr>
-      <tr><td>레전드</td><td>1</td><td>23,000</td><td>230</td><td>40</td><td>1,423,920</td></tr>
-      <tr><td>레전드</td><td>2</td><td>25,000</td><td>250</td><td>45</td><td>1,485,120</td></tr>
-      <tr><td>레전드</td><td>3</td><td>26,000</td><td>260</td><td>45</td><td>1,546,320</td></tr>
+            <tr><td>레전드 T1</td><td>0</td><td>28,000</td><td>280</td><td>45</td><td>1,607,520</td></tr>
+            <tr><td>레전드 T1</td><td>1</td><td>30,000</td><td>300</td><td>55</td><td>1,668,720</td></tr>
+            <tr><td>레전드 T1</td><td>2</td><td>32,000</td><td>320</td><td>55</td><td>1,729,920</td></tr>
+            <tr><td>레전드 T1</td><td>3</td><td>35,000</td><td>340</td><td>55</td><td>1,791,120</td></tr>
 
-      <tr><td>레전드 T1</td><td>0</td><td>28,000</td><td>280</td><td>45</td><td>1,607,520</td></tr>
-      <tr><td>레전드 T1</td><td>1</td><td>30,000</td><td>300</td><td>55</td><td>1,668,720</td></tr>
-      <tr><td>레전드 T1</td><td>2</td><td>32,000</td><td>320</td><td>55</td><td>1,729,920</td></tr>
-      <tr><td>레전드 T1</td><td>3</td><td>35,000</td><td>340</td><td>55</td><td>1,791,120</td></tr>
+            <tr><td>레전드 T2</td><td>0</td><td>38,000</td><td>390</td><td>55</td><td>1,852,320</td></tr>
+            <tr><td>레전드 T2</td><td>1</td><td>43,000</td><td>430</td><td>75</td><td>1,913,520</td></tr>
+            <tr><td>레전드 T2</td><td>2</td><td>45,000</td><td>460</td><td>80</td><td>1,974,720</td></tr>
+            <tr><td>레전드 T2</td><td>3</td><td>48,000</td><td>500</td><td>85</td><td>2,040,000</td></tr>
 
-      <tr><td>레전드 T2</td><td>0</td><td>38,000</td><td>390</td><td>55</td><td>1,852,320</td></tr>
-      <tr><td>레전드 T2</td><td>1</td><td>43,000</td><td>430</td><td>75</td><td>1,913,520</td></tr>
-      <tr><td>레전드 T2</td><td>2</td><td>45,000</td><td>460</td><td>80</td><td>1,974,720</td></tr>
-      <tr><td>레전드 T2</td><td>3</td><td>48,000</td><td>500</td><td>85</td><td>2,040,000</td></tr>
+            <tr><td>레전드 T3</td><td>0</td><td>60,000</td><td>600</td><td>120</td><td>2,097,120</td></tr>
+            <tr><td>레전드 T3</td><td>1</td><td>70,000</td><td>700</td><td>140</td><td>2,158,320</td></tr>
+            <tr><td>레전드 T3</td><td>2</td><td>80,000</td><td>800</td><td>160</td><td>2,219,520</td></tr>
+            <tr><td>레전드 T3</td><td>3</td><td>90,000</td><td>900</td><td>180</td><td>2,280,000</td></tr>
 
-      <tr><td>레전드 T3</td><td>0</td><td>60,000</td><td>600</td><td>120</td><td>2,097,120</td></tr>
-      <tr><td>레전드 T3</td><td>1</td><td>70,000</td><td>700</td><td>140</td><td>2,158,320</td></tr>
-      <tr><td>레전드 T3</td><td>2</td><td>80,000</td><td>800</td><td>160</td><td>2,219,520</td></tr>
-      <tr><td>레전드 T3</td><td>3</td><td>90,000</td><td>900</td><td>180</td><td>2,280,000</td></tr>
+            <tr><td>신화</td><td>0</td><td>108,000</td><td>1,080</td><td>220</td><td>2,340,000</td></tr>
+            <tr><td>신화</td><td>1</td><td>114,000</td><td>1,140</td><td>230</td><td>2,400,000</td></tr>
+            <tr><td>신화</td><td>2</td><td>121,000</td><td>1,210</td><td>240</td><td>2,460,000</td></tr>
+            <tr><td>신화</td><td>3</td><td>128,000</td><td>1,280</td><td>250</td><td>2,520,000</td></tr>
 
-      <tr><td>신화</td><td>0</td><td>108,000</td><td>1,080</td><td>220</td><td>2,340,000</td></tr>
-      <tr><td>신화</td><td>1</td><td>114,000</td><td>1,140</td><td>230</td><td>2,400,000</td></tr>
-      <tr><td>신화</td><td>2</td><td>121,000</td><td>1,210</td><td>240</td><td>2,460,000</td></tr>
-      <tr><td>신화</td><td>3</td><td>128,000</td><td>1,280</td><td>250</td><td>2,520,000</td></tr>
-
-      <tr><td>신화 T1</td><td>0</td><td>154,000</td><td>1,540</td><td>300</td><td>2,580,000</td></tr>
-      <tr><td>신화 T1</td><td>1</td><td>163,000</td><td>1,630</td><td>320</td><td>2,640,000</td></tr>
-    </tbody>
-  </table>
-
-</div>
+            <tr><td>신화 T1</td><td>0</td><td>154,000</td><td>1,540</td><td>300</td><td>2,580,000</td></tr>
+            <tr><td>신화 T1</td><td>1</td><td>163,000</td><td>1,630</td><td>320</td><td>2,640,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

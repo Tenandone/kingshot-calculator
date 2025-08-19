@@ -1,112 +1,141 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="robots" content="noindex,nofollow">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>마스터리 강화 | KingshotData KR</title>
-<style>
-  /* 페이지 스코프 */
-  .page-mastery{font-family:Arial,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;color:#222;line-height:1.5;}
-  .page-mastery .wrap{max-width:920px;margin:24px auto;padding:0 12px;}
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>마스터리 강화 | KingshotData KR</title>
 
-  /* 대표 이미지 */
-  .page-mastery .hero{margin:0 0 12px;}
-  .page-mastery .hero img{
-    display:block;width:auto;max-width:100%;height:auto;object-fit:contain;
-    border:1px solid #eee;border-radius:8px;padding:4px;background:#fff;
-  }
+  <style>
+    .visually-hidden{
+      position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+      clip:rect(0 0 0 0);white-space:nowrap;border:0
+    }
 
-  .page-mastery h1{font-size:28px;margin:0 0 8px;}
-  .page-mastery .meta{color:#666;margin:0 0 16px;}
-  .page-mastery .notice{background:#fff8e1;border:1px solid #f3e5ab;padding:10px;border-radius:8px;margin:12px 0;font-size:13px;}
+    /* 표 가독성 */
+    .table-wrap{overflow:auto}
+    .table-wrap table{
+      border-collapse:collapse;
+      font-size:13px;
+      width:auto;             /* 내용 기준 */
+      min-width: 560px;       /* 너무 좁아지지 않게 */
+      margin:0 auto;          /* 중앙 배치 */
+      table-layout:auto;
+    }
+    .table-wrap caption{
+      caption-side: top;
+      text-align:left;
+      padding:6px 0 8px;
+      color:#8a93a4;          /* muted 톤 */
+      font-size:12px;
+    }
+    .table-wrap th,.table-wrap td{
+      padding:6px 10px;
+      border-bottom:1px solid var(--border, #1e2430);
+      white-space:nowrap;     /* 숫자 줄바꿈 방지 */
+      text-align:right;       /* 수치 기본 우측정렬 */
+    }
+    .table-wrap th:first-child,
+    .table-wrap td:first-child{ text-align:left } /* 첫 컬럼(레벨)은 좌측 */
 
-  /* 표 위 설명 이미지 */
-  .page-mastery .lead{margin:16px 0 8px;}
-  .page-mastery .lead img{
-    display:block;width:auto;max-width:100%;height:auto;object-fit:contain;
-    border:1px solid #eee;border-radius:8px;padding:4px;background:#fff;
-  }
+    .table-wrap thead th{
+      position:sticky; top:0;
+      background:#0f1318; color:#8a93a4; z-index:1;
+    }
 
-  /* 표 */
-  .page-mastery table{border-collapse:collapse;width:100%;margin:16px 0;font-size:14px;}
-  .page-mastery th,.page-mastery td{border:1px solid #ddd;padding:8px;text-align:center;vertical-align:middle;}
-  .page-mastery th{background:#f7f7f7;font-weight:700;}
-</style>
+    /* 컬럼 폭 (필요 시 조정 가능) */
+    .table--mastery th:nth-child(1), .table--mastery td:nth-child(1){ width:70px }   /* 레벨 */
+    .table--mastery th:nth-child(2), .table--mastery td:nth-child(2){ width:120px }  /* 제작망치 */
+    .table--mastery th:nth-child(3), .table--mastery td:nth-child(3){ width:120px }  /* 레전드 장비 */
+    .table--mastery th:nth-child(4), .table--mastery td:nth-child(4){ width:90px }   /* +% 보너스 */
+    .table--mastery th:nth-child(5), .table--mastery td:nth-child(5){ width:110px }  /* 능력치 배수 */
+  </style>
 </head>
 <body>
-<div class="page-mastery">
-  <div class="wrap">
-
+  <main>
     <!-- 대표 이미지 -->
-    <figure class="hero">
+    <figure>
       <img src="/download/database/Mastery Forging/forgehammer-icon.webp"
-           alt="마스터리 강화 · 제작망치 아이콘" loading="lazy" decoding="async">
+           alt="마스터리 강화 · 제작망치 아이콘"
+           width="300" height="300"
+           loading="lazy" decoding="async">      
     </figure>
 
     <h1>마스터리 강화</h1>
-    <div class="meta">March 23, 2025 · DataKorea</div>
+    <p><time datetime="2025-03-23">2025년 3월 23일</time> · DataKorea</p>
 
-    
-    <h2>개요</h2>
-    <p><strong>해금 조건:</strong> 도시센터 20레벨</p>
-    <p><strong>시작 조건:</strong> 마스터리 강화를 쓰기 전에 해당 <strong>레전드 장비를 20레벨</strong>까지 일반 강화해야 합니다.</p>
+    <section aria-labelledby="overview">
+      <h2 id="overview">개요</h2>
+      <p><strong>해금 조건:</strong> 도시센터 20레벨</p>
+      <p><strong>시작 조건:</strong> 마스터리 강화를 쓰기 전에 해당 <strong>레전드 장비를 20레벨</strong>까지 일반 강화해야 한다.</p>
+    </section>
 
-    <h2>적용 대상</h2>
-    <p><strong>레전드 장비 전용</strong>입니다. 에픽/레어/일반 장비에는 적용되지 않습니다.<br>
-       일반 강화는 <strong>강화 경험치(또는 합성)</strong>을 쓰고, 마스터리 강화는 <strong>제작망치</strong>가 필요합니다.</p>
+    <section aria-labelledby="target">
+      <h2 id="target">적용 대상</h2>
+      <p><strong>레전드 장비 전용</strong>이다. 에픽/레어/일반 장비에는 적용되지 않는다.</p>
+      <p>일반 강화는 <strong>강화 경험치(또는 합성)</strong>을 쓰고, 마스터리 강화는 <strong>제작망치</strong>가 필요하다.</p>
+    </section>
 
-    <h2>알림</h2>
-    <ul>
-      <li><strong>마스터리 강화 10레벨 초과(11~20)</strong>부터 <strong>레전드 장비(완품)</strong>가 추가 재료로 필요합니다.
-        <br>11레벨→1개, 12레벨→2개 … 20레벨→10개</li>
-      <li>레전드 장비를 재료로 사용하면, 그 장비에 들어가 있던 <strong>강화 경험치 전부 반환</strong>, 해당 장비에 사용된 <strong>제작망치의 절반 반환</strong></li>
-      <li><strong>마스터리 강화 10레벨 초과</strong> 레전드 장비는 다른 장비의 재료로 사용할 수 없습니다.</li>
-      <li><strong>최상위 등급 장비</strong>는 마스터리 강화 재료로 사용할 수 없습니다.</li>
-    </ul>
+    <section aria-labelledby="notice">
+      <h2 id="notice">알림</h2>
+      <ul>
+        <li><strong>마스터리 강화 10레벨 초과(11~20)</strong>부터 <strong>레전드 장비(완품)</strong>가 추가 재료로 필요하다.<br>
+          11레벨→1개, 12레벨→2개 … 20레벨→10개</li>
+        <li>레전드 장비를 재료로 사용하면, 그 장비에 들어가 있던 <strong>강화 경험치 전부 반환</strong>, 해당 장비에 사용된 <strong>제작망치의 절반 반환</strong></li>
+        <li><strong>마스터리 강화 10레벨 초과</strong> 레전드 장비는 다른 장비의 재료로 사용할 수 없다.</li>
+        <li><strong>최상위 등급 장비</strong>는 마스터리 강화 재료로 사용할 수 없다.</li>
+      </ul>
+    </section>
 
-    <!-- 표 위 예시 이미지 -->
-    <figure class="lead">
+    <!-- 예시 이미지 -->
+    <figure>
       <img src="/download/database/Mastery Forging/mastery-forging-example-576x1024.webp"
-           alt="마스터리 강화 화면 예시" loading="lazy" decoding="async">
+           alt="마스터리 강화 화면 예시"
+           width="576" height="1024"
+           loading="lazy" decoding="async">
+      <figcaption class="visually-hidden">마스터리 강화 화면 예시</figcaption>
     </figure>
 
-    <!-- 비용/요구치 표 -->
-    <table aria-label="마스터리 강화 레벨별 필요 제작망치 및 레전드 장비">
-      <thead>
-        <tr>
-          <th>레벨</th>
-          <th>필요 제작망치</th>
-          <th>필요 레전드 장비</th>
-          <th>+% 보너스</th>
-          <th>능력치 배수</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>10</td><td>–</td><td>10</td><td>x 1.1</td></tr>
-        <tr><td>2</td><td>20</td><td>–</td><td>20</td><td>x 1.2</td></tr>
-        <tr><td>3</td><td>30</td><td>–</td><td>30</td><td>x 1.3</td></tr>
-        <tr><td>4</td><td>40</td><td>–</td><td>40</td><td>x 1.4</td></tr>
-        <tr><td>5</td><td>50</td><td>–</td><td>50</td><td>x 1.5</td></tr>
-        <tr><td>6</td><td>60</td><td>–</td><td>60</td><td>x 1.6</td></tr>
-        <tr><td>7</td><td>70</td><td>–</td><td>70</td><td>x 1.7</td></tr>
-        <tr><td>8</td><td>80</td><td>–</td><td>80</td><td>x 1.8</td></tr>
-        <tr><td>9</td><td>90</td><td>–</td><td>90</td><td>x 1.9</td></tr>
-        <tr><td>10</td><td>100</td><td>–</td><td>100</td><td>x 2</td></tr>
-        <tr><td>11</td><td>110</td><td>1</td><td>110</td><td>x 2.1</td></tr>
-        <tr><td>12</td><td>120</td><td>2</td><td>120</td><td>x 2.2</td></tr>
-        <tr><td>13</td><td>130</td><td>3</td><td>130</td><td>x 2.3</td></tr>
-        <tr><td>14</td><td>140</td><td>4</td><td>140</td><td>x 2.4</td></tr>
-        <tr><td>15</td><td>150</td><td>5</td><td>150</td><td>x 2.5</td></tr>
-        <tr><td>16</td><td>160</td><td>6</td><td>160</td><td>x 2.6</td></tr>
-        <tr><td>17</td><td>170</td><td>7</td><td>170</td><td>x 2.7</td></tr>
-        <tr><td>18</td><td>180</td><td>8</td><td>180</td><td>x 2.8</td></tr>
-        <tr><td>19</td><td>190</td><td>9</td><td>190</td><td>x 2.9</td></tr>
-        <tr><td>20</td><td>200</td><td>10</td><td>200</td><td>x 3</td></tr>
-      </tbody>
-    </table>
-
-  </div>
-</div>
+    <!-- 표 -->
+    <section aria-labelledby="table-title">
+      <h2 id="table-title">마스터리 강화 레벨별 필요치</h2>
+      <div class="table-wrap" role="region" aria-labelledby="table-title">
+        <table class="table--mastery" aria-describedby="table-caption">
+          <caption id="table-caption">마스터리 강화 레벨별 필요 제작망치, 레전드 장비, 보너스 및 능력치 배수</caption>
+          <thead>
+            <tr>
+              <th scope="col">레벨</th>
+              <th scope="col">필요 제작망치</th>
+              <th scope="col">필요 레전드 장비</th>
+              <th scope="col">+% 보너스</th>
+              <th scope="col">능력치 배수</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>10</td><td>–</td><td>10</td><td>× 1.1</td></tr>
+            <tr><td>2</td><td>20</td><td>–</td><td>20</td><td>× 1.2</td></tr>
+            <tr><td>3</td><td>30</td><td>–</td><td>30</td><td>× 1.3</td></tr>
+            <tr><td>4</td><td>40</td><td>–</td><td>40</td><td>× 1.4</td></tr>
+            <tr><td>5</td><td>50</td><td>–</td><td>50</td><td>× 1.5</td></tr>
+            <tr><td>6</td><td>60</td><td>–</td><td>60</td><td>× 1.6</td></tr>
+            <tr><td>7</td><td>70</td><td>–</td><td>70</td><td>× 1.7</td></tr>
+            <tr><td>8</td><td>80</td><td>–</td><td>80</td><td>× 1.8</td></tr>
+            <tr><td>9</td><td>90</td><td>–</td><td>90</td><td>× 1.9</td></tr>
+            <tr><td>10</td><td>100</td><td>–</td><td>100</td><td>× 2.0</td></tr>
+            <tr><td>11</td><td>110</td><td>1</td><td>110</td><td>× 2.1</td></tr>
+            <tr><td>12</td><td>120</td><td>2</td><td>120</td><td>× 2.2</td></tr>
+            <tr><td>13</td><td>130</td><td>3</td><td>130</td><td>× 2.3</td></tr>
+            <tr><td>14</td><td>140</td><td>4</td><td>140</td><td>× 2.4</td></tr>
+            <tr><td>15</td><td>150</td><td>5</td><td>150</td><td>× 2.5</td></tr>
+            <tr><td>16</td><td>160</td><td>6</td><td>160</td><td>× 2.6</td></tr>
+            <tr><td>17</td><td>170</td><td>7</td><td>170</td><td>× 2.7</td></tr>
+            <tr><td>18</td><td>180</td><td>8</td><td>180</td><td>× 2.8</td></tr>
+            <tr><td>19</td><td>190</td><td>9</td><td>190</td><td>× 2.9</td></tr>
+            <tr><td>20</td><td>200</td><td>10</td><td>200</td><td>× 3.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

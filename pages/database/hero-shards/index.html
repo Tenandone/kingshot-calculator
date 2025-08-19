@@ -1,111 +1,137 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="robots" content="noindex,nofollow">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>영웅 조각 | KingshotData KR</title>
-<style>
-  /* 페이지 스코프 */
-  .page-hero-shards{font-family:Arial,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;color:#222;line-height:1.5;}
-  .page-hero-shards .wrap{max-width:920px;margin:24px auto;padding:0 12px;}
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>영웅 조각 | KingshotData KR</title>
 
-  /* 대표 이미지(상단) */
-  .page-hero-shards .hero{margin:0 0 12px;}
-  .page-hero-shards .hero img{
-    width:auto; max-width:100%; height:auto; object-fit:contain; display:block;
-    border:1px solid #eee; border-radius:8px; padding:4px; background:#fff;
-  }
+  <style>
+    .visually-hidden{
+      position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+      clip:rect(0 0 0 0);white-space:nowrap;border:0
+    }
 
-  .page-hero-shards h1{font-size:28px;margin:0 0 12px;}
-  .page-hero-shards h2{margin:20px 0 8px;}
-  .page-hero-shards p{margin:8px 0;}
-  .page-hero-shards ul{margin:8px 0 12px 18px;}
+    /* 표 가독성 */
+    .table-wrap{overflow:auto}
+    .table-wrap table{
+      border-collapse:collapse;
+      font-size:13px;
+      width:auto;              /* 내용 기반 */
+      min-width: 720px;        /* 8컬럼 최소폭 */
+      margin:0 auto;           /* 중앙 배치 */
+      table-layout:auto;
+    }
+    .table-wrap caption{
+      caption-side: top;
+      text-align: left;
+      padding: 6px 0 8px;
+      color: #8a93a4;          /* muted 톤 */
+      font-size: 12px;
+    }
+    .table-wrap th,.table-wrap td{
+      padding:6px 10px;
+      border-bottom:1px solid var(--border, #1e2430);
+      white-space:nowrap;      /* 숫자 줄바꿈 방지 */
+      text-align:right;        /* 수치 기본 우측정렬 */
+    }
+    .table-wrap th:first-child,
+    .table-wrap td:first-child{ text-align:left }  /* 첫 컬럼(성급)만 좌측 */
+    .table-wrap thead th{
+      position:sticky; top:0;
+      background:#0f1318; color:#8a93a4; z-index:1;
+    }
 
-  /* 표 공통 (이미지 제거 전제) */
-  .page-hero-shards table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px;}
-  .page-hero-shards th,.page-hero-shards td{
-    border:1px solid #e5e7eb;padding:10px 12px;text-align:center;vertical-align:middle;line-height:1.35;white-space:nowrap;
-  }
-  .page-hero-shards th{background:#f7f7f7;font-weight:700;}
-  .page-hero-shards td:first-child{min-width:120px;}
-  .page-hero-shards th:not(:first-child):not(:last-child),
-  .page-hero-shards td:not(:first-child):not(:last-child){min-width:110px;}
-  .page-hero-shards th:last-child,.page-hero-shards td:last-child{min-width:110px;}
-
-
-
-  /* 안내 박스(선택) */
-  .page-hero-shards .notice{background:#fff8e1;border:1px solid #f3e5ab;padding:10px;border-radius:8px;margin:12px 0;font-size:13px;}
-
-  @media (max-width:560px){
-    .page-hero-shards table{font-size:13px;}
-    .page-hero-shards th,.page-hero-shards td{padding:8px 10px;white-space:normal;}
-  }
-</style>
+    /* 컬럼 폭 (필요 시 조정 가능) */
+    .table--shards th:nth-child(1), .table--shards td:nth-child(1){ width:90px }   /* 성급 레벨 */
+    .table--shards th:nth-child(2), .table--shards td:nth-child(2){ width:70px }   /* T1 */
+    .table--shards th:nth-child(3), .table--shards td:nth-child(3){ width:70px }   /* T2 */
+    .table--shards th:nth-child(4), .table--shards td:nth-child(4){ width:70px }   /* T3 */
+    .table--shards th:nth-child(5), .table--shards td:nth-child(5){ width:70px }   /* T4 */
+    .table--shards th:nth-child(6), .table--shards td:nth-child(6){ width:70px }   /* T5 */
+    .table--shards th:nth-child(7), .table--shards td:nth-child(7){ width:70px }   /* T6 */
+    .table--shards th:nth-child(8), .table--shards td:nth-child(8){ width:80px }   /* 합계 */
+  </style>
 </head>
 <body>
-<div class="page-hero-shards">
-  <div class="wrap">
-
-    <!-- 대표 이미지: mythic-hero-shard-300x264 만 사용 -->
-    <figure class="hero">
-      <img src="/download/database/Hero Shards/mythic-hero-shard-300x264.webp" alt="영웅 조각 대표 이미지" loading="lazy" decoding="async">
+  <main>
+    <!-- 대표 이미지 -->
+    <figure>
+      <img
+        src="/download/database/Hero Shards/mythic-hero-shard-300x264.webp"
+        alt="영웅 조각 대표 이미지"
+        width="300" height="264"
+        loading="lazy" decoding="async">      
     </figure>
 
     <h1>영웅 조각</h1>
 
-    <h2>개요</h2>
-    <p>영웅 조각은 영웅의 성급을 올리는 데 사용됩니다. 성급 상승 시 신규 스킬 해금/강화와 전투력 증가, 영웅 스토리가 열립니다.</p>
+    <section aria-labelledby="overview">
+      <h2 id="overview">개요</h2>
+      <p>영웅 조각은 영웅의 성급을 올리는 데 사용된다. 성급 상승 시 신규 스킬 해금/강화와 전투력 증가, 영웅 스토리가 열린다.</p>
+    </section>
 
-    <h2>영웅 등급</h2>
-    <p>R(레어/파랑), SR, SSR</p>
+    <section aria-labelledby="grades">
+      <h2 id="grades">영웅 등급</h2>
+      <p>R(레어/파랑), SR, SSR</p>
+    </section>
 
-    <h2>조각 종류</h2>
-    <ul>
-      <li><strong>공용(범용) 조각</strong>: 희귀도만 맞으면 대부분의 영웅에 사용/교환 가능</li>
-      <li><strong>영웅 전용 조각</strong>: 해당 영웅에게만 사용</li>
-    </ul>
+    <section aria-labelledby="types">
+      <h2 id="types">조각 종류</h2>
+      <ul>
+        <li><strong>공용(범용) 조각</strong>: 희귀도만 맞으면 대부분의 영웅에 사용/교환 가능</li>
+        <li><strong>영웅 전용 조각</strong>: 해당 영웅에게만 사용</li>
+      </ul>
+    </section>
 
-    <h2>예외</h2>
-    <p>아마데우스, 헬가는 VIP 패키지의 전용 조각으로만 성급 업그레이드가 가능합니다. 공용 레전드 조각은 사용할 수 없습니다. 그 외 모든 영웅은 공용 조각으로 성급 업그레이드가 가능합니다.</p>
+    <section aria-labelledby="exceptions">
+      <h2 id="exceptions">예외</h2>
+      <p>아마데우스, 헬가는 VIP 패키지의 전용 조각으로만 성급 업그레이드가 가능하다. 공용 레전드 조각은 사용할 수 없다. 그 외 모든 영웅은 공용 조각으로 성급 업그레이드가 가능하다.</p>
+    </section>
 
-    <h2>획득처</h2>
-    <ul>
-      <li>전망대 임무</li>
-      <li>토벌 단계 일부</li>
-      <li>반군 처치</li>
-      <li>영웅의 전당, 연맹 상점, VIP 상점</li>
-      <li>영웅 모집, 이벤트/패키지</li>
-    </ul>
+    <section aria-labelledby="sources">
+      <h2 id="sources">획득처</h2>
+      <ul>
+        <li>전망대 임무</li>
+        <li>토벌 단계 일부</li>
+        <li>반군 처치</li>
+        <li>영웅의 전당, 연맹 상점, VIP 상점</li>
+        <li>영웅 모집, 이벤트/패키지</li>
+      </ul>
+    </section>
 
-    <h2>필요 수량</h2>
-    <p>최대 성급까지 총 <strong>1,065개</strong>가 필요합니다. 해금(명함) 조각까지 포함하면 <strong>1,075개</strong>입니다.</p>
+    <section aria-labelledby="counts">
+      <h2 id="counts">필요 수량</h2>
+      <p>최대 성급까지 총 <strong>1,065개</strong>가 필요하다. 해금(명함) 조각까지 포함하면 <strong>1,075개</strong>다.</p>
+    </section>
 
-    <!-- 표: 성급 레벨(숫자), 표 안 이미지 없음 -->
-    <table aria-label="성급별 티어 요구 수량">
-      <thead>
-        <tr>
-          <th>성급 레벨</th>
-          <th>티어 1</th>
-          <th>티어 2</th>
-          <th>티어 3</th>
-          <th>티어 4</th>
-          <th>티어 5</th>
-          <th>티어 6</th>
-          <th>합계</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>1성</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>10</td></tr>
-        <tr><td>2성</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>15</td><td>40</td></tr>
-        <tr><td>3성</td><td>15</td><td>15</td><td>15</td><td>15</td><td>15</td><td>40</td><td>115</td></tr>
-        <tr><td>4성</td><td>40</td><td>40</td><td>40</td><td>40</td><td>40</td><td>100</td><td>300</td></tr>
-        <tr><td>5성</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>600</td></tr>
-      </tbody>
-    </table>
-
-  </div>
-</div>
+    <section aria-labelledby="table-title">
+      <h2 id="table-title">성급별 티어 요구 수량</h2>
+      <div class="table-wrap" role="region" aria-labelledby="table-title">
+        <table class="table--shards" aria-describedby="table-caption">
+          <caption id="table-caption">성급 레벨에 따른 티어별 요구 수량과 합계</caption>
+          <thead>
+            <tr>
+              <th scope="col">성급 레벨</th>
+              <th scope="col">티어 1</th>
+              <th scope="col">티어 2</th>
+              <th scope="col">티어 3</th>
+              <th scope="col">티어 4</th>
+              <th scope="col">티어 5</th>
+              <th scope="col">티어 6</th>
+              <th scope="col">합계</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1성</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>10</td></tr>
+            <tr><td>2성</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>15</td><td>40</td></tr>
+            <tr><td>3성</td><td>15</td><td>15</td><td>15</td><td>15</td><td>15</td><td>40</td><td>115</td></tr>
+            <tr><td>4성</td><td>40</td><td>40</td><td>40</td><td>40</td><td>40</td><td>100</td><td>300</td></tr>
+            <tr><td>5성</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>600</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

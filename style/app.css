@@ -55,3 +55,8 @@ footer { background-color: #1f1f1f; color: #fff; padding: 40px 20px 0; }
 .footer-officer a { color: #ccc; text-decoration: underline; }
 .footer-note { color: #9a9a9a; font-size: 12px; }
 .footer-copy { color: #cfcfcf; font-size: 13px; padding-bottom: 20px; }
+/* DB 상세페이지 기본 텍스트 색 통일 */
+.panel, 
+.panel * {
+  color: var(--text) !important;
+}

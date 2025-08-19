@@ -1,241 +1,237 @@
-// === Database bootstrap (외부 모듈) ===
-function initDatabase(){
-  const grid = document.getElementById('db-grid');
-  if (!grid || grid.dataset.rendered) return;
-  grid.dataset.rendered = '1';
-  grid.innerHTML = '';
+// js/pages/database.js — DB 카드 SPA (목록 + 상세, '목록으로' 버튼, 중복 타이틀 방지)
+(function () {
+  'use strict';
 
-  const TARGET_COUNT = 8;
-  const ver = Date.now();
+  // ===== 기본 경로/헬퍼 =====
+  const DB_BASE = '/pages/database/';
 
-  const curated = [
-    { name:'영웅 전용 무기',       preferFileBase:'widget-helgas-exclusive-gear-300x296', keys:['영웅','전용','무기'] },
-    { name:'타임라인(서버나이)',   preferFileBase:'state-age-kingshot-300x291',            keys:['일정','타임라인','state','age','서버','나이'] },
-    { name:'영웅 장비',            preferFileBase:'forgehammer-icon',                       keys:['영웅','장비'] },
-    { name:'영웅 성급',            preferFileBase:'mythic-hero-shard-300x264',             keys:['영웅','성급','샤드','조각'] },
-    { name:'영주 장비',            preferFileBase:'governor-gear-icon-296x300',            keys:['영주','장비'] },
-    { name:'영주 보석',            preferFileBase:'governor-charms-300x282',               keys:['영주','보석','charms'] },
-    { name:'영웅 부속품 조각',     preferFileBase:'purple-enhancement-xp-parts-295x300',   keys:['영웅','부속품','조각','accessory','액세서리','악세사리'] },
+  const buildUrl = (folder, file) =>
+    DB_BASE + encodeURIComponent(folder) + '/' + file;
+
+  function resolveAsset(folder, src) {
+    if (!src) return '';
+    const s = String(src);
+    if (/^https?:\/\//i.test(s)) return s;
+    if (s.startsWith('/')) return s;
+    return buildUrl(folder, s.replace(/^\.?\//, ''));
+  }
+
+  // ===== 섹션 목록 =====
+  const ITEMS = [
+    { folder: 'governor-gear',               category: '영주장비' },
+    { folder: 'governor-charm',              category: '영주보석' },
+    { folder: 'server-timeline-(state-age)', category: '타임라인(서버나이)' },
+    { folder: 'hero-gear-enhancement-chart', category: '영웅부속품' },
+    { folder: 'max-levels',                  category: '최대레벨' },
+    { folder: 'widgets',                     category: '영웅전용무기' },
+    { folder: 'mastery-forging',             category: '제작망치' },
+    { folder: 'hero-shards',                 category: '영웅성급' }
   ];
 
-  const clean = p => (p||'').replace(/^\//,'');
-  const fileName = p => clean(p).split('/').pop() || '';
-  const baseName = f => f.toLowerCase().replace(/\.(webp|png|jpe?g|gif|svg)$/,'');
-  const lower = s => (s||'').toLowerCase();
-  const makeSrc = p => '/' + clean(p);
+  // 폴더 안에서 시도할 파일명
+  const CANDIDATES = ['index.html', 'main.html', 'guide.html', 'list.html', 'README.html'];
 
-  (async () => {
-    let posts = [];
-    try{
-      // JSON은 pages/database 폴더로 이동됨(절대경로)
-      const r = await fetch('/pages/database/database_normalized.json?v=' + Date.now(), { cache:'no-store' });
-      if (r.ok){
-        const d = await r.json();
-        posts = Array.isArray(d.posts) ? d.posts : [];
-      }
-    }catch{}
+  // ===== 유틸 =====
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[m]));
 
-    const byBase = new Map();
-    for (const p of posts){
-      for (const src of (p.images||[])){
-        const bn = baseName(fileName(src));
-        if (bn && !byBase.has(bn)) byBase.set(bn, { src: clean(src), slug: p.slug });
-      }
+  const pickText = (doc, sels) => {
+    for (const sel of sels) {
+      const n = doc.querySelector(sel);
+      if (n && n.textContent.trim()) return n.textContent.trim();
     }
+    return '';
+  };
 
-    function findByKeys(keys){
-      if (!keys?.length) return null;
-      for (const p of posts){ const t = lower(p.title); if (keys.every(k=>t.includes(lower(k)))) return p; }
-      for (const p of posts){ const t = lower(p.title); if (keys.some(k=>t.includes(lower(k)))) return p; }
-      return null;
+  const pickAttr = (doc, sels, attr) => {
+    for (const sel of sels) {
+      const n = doc.querySelector(sel);
+      const v = n && n.getAttribute(attr);
+      if (v) return v;
     }
-    function pickImage(p, preferBase){
-      if (!p?.images?.length) return null;
-      if (preferBase){
-        const hit = p.images.find(x => baseName(fileName(x)) === preferBase.toLowerCase());
-        if (hit) return clean(hit);
-      }
-      return clean(p.images[0]);
-    }
+    return '';
+  };
 
-    const usedSlugs = new Set();
-    const usedHrefs = new Set();
-    const cardObjs = [];
-
-    // 고정 7개
-    for (const item of curated){
-      let slug=null, img=null;
-      if (item.preferFileBase && byBase.has(item.preferFileBase.toLowerCase())){
-        const hit = byBase.get(item.preferFileBase.toLowerCase());
-        slug = hit.slug; img = hit.src;
-      }else{
-        const match = findByKeys(item.keys);
-        if (match){ slug = match.slug; img = pickImage(match, item.preferFileBase); }
-      }
-      const href = slug ? ('#db/' + slug) : '';
-      if (slug) usedSlugs.add(slug);
-      if (href) usedHrefs.add(href);
-      cardObjs.push({
-        href, slug,
-        html: `
-          <div class="card">
-            <a ${href ? `href="${href}"` : ''}>
-              ${img ? `<img src="${makeSrc(img)}?v=${ver}" alt="${item.name}" loading="lazy" decoding="async">`
-                     : `<div style="height:160px;display:flex;align-items:center;justify-content:center;color:#888;border:1px dashed #ddd;border-radius:8px;">이미지 없음</div>`}
-              <div class="card-name">${item.name}</div>
-              ${href ? '' : '<div class="meta" style="font-size:12px;color:#888;margin-top:6px;">링크 준비중</div>'}
-            </a>
-          </div>`
-      });
-    }
-
-    // 남는 1칸 보충
-    for (const p of posts){
-      if (cardObjs.length >= TARGET_COUNT) break;
-      if (usedSlugs.has(p.slug)) continue;
-      const href = '#db/' + p.slug;
-      if (usedHrefs.has(href)) continue;
-      const cover = p.images?.[0] ? clean(p.images[0]) : '';
-      cardObjs.push({
-        href, slug:p.slug,
-        html: `
-          <div class="card">
-            <a href="${href}">
-              ${cover ? `<img src="${makeSrc(cover)}?v=${ver}" alt="${p.title}" loading="lazy" decoding="async">` : ''}
-              <div class="card-name">${p.title || 'Untitled'}</div>
-            </a>
-          </div>`
-      });
-      usedSlugs.add(p.slug);
-      usedHrefs.add(href);
-    }
-
-    const unique = [];
-    const seen = new Set();
-    for (const c of cardObjs){
-      const key = c.href || c.slug || c.html;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      unique.push(c.html);
-      if (unique.length >= TARGET_COUNT) break;
-    }
-    grid.innerHTML = unique.join('');
-
-    // 텍스트 정규화
-    const walker = document.createTreeWalker(grid, NodeFilter.SHOW_TEXT, null);
-    const nodes = [];
-    while (walker.nextNode()) nodes.push(walker.currentNode);
-    for (const n of nodes){
-      const before = n.nodeValue;
-      const after = before
-        .replace(/맥스\s*레벨s?/gi, '최대레벨')
-        .replace(/max\s*levels?/gi, '최대레벨');
-      if (after !== before) n.nodeValue = after;
-    }
-  })();
-}
-
-async function renderDbDetail(slug){
-  const main = document.getElementById('content');
-  try{
-    const url = `pages/database/${slug}/index.html?v=${Date.now()}`;
-    const res = await fetch(url, { cache:'no-store' });
-    if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${url}`);
-    const html = await res.text();
-
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-
-    // 1) 이전 상세에서 주입한 스타일 제거
-    document.head.querySelectorAll('[data-db-style]').forEach(n => n.remove());
-
-    // 2) 상세 문서의 <head> 스타일/스타일시트도 현재 문서에 주입
-    doc.querySelectorAll('head style').forEach((el, i) => {
-      const clone = el.cloneNode(true);
-      clone.setAttribute('data-db-style', `db-style-${slug}-${i}`);
-      document.head.appendChild(clone);
-    });
-    doc.querySelectorAll('head link[rel="stylesheet"]').forEach((el, i) => {
-      const href = el.getAttribute('href');
-      if (!href) return;
-      const abs = new URL(href, url).toString(); // 상대경로 → 절대경로
-      if (!document.querySelector(`head link[rel="stylesheet"][href="${abs}"]`)) {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = abs;
-        link.setAttribute('data-db-style', `db-style-${slug}-${i}`);
-        document.head.appendChild(link);
-      }
-    });
-
-    const body = doc.querySelector('.wrap') || doc.querySelector('main') || doc.body;
-
-    // 3) "데이터베이스 목록" 버튼 — 중앙 정렬 + 깔끔한 스타일
-    const ROOT = location.pathname.includes('/pages/')
-      ? location.pathname.split('/pages/')[0] + '/'
-      : '/';
-    const backHref = ROOT + '#database';
-
-    const backStyles = `
-      <style data-db-style="db-back">
-        .db-detail .backbar{display:flex;justify-content:center;margin:8px 0 20px;}
-        .db-detail .backbtn{
-          display:inline-flex;align-items:center;gap:8px;
-          padding:10px 14px;border-radius:10px;
-          border:1px solid #e5e7eb;background:#fafafa;color:#111;
-          text-decoration:none;font-weight:600;
-          box-shadow:0 1px 2px rgba(0,0,0,.04);
-          transition:transform .12s ease, box-shadow .12s ease, background-color .12s ease;
-        }
-        .db-detail .backbtn:hover{background:#f3f4f6;box-shadow:0 4px 10px rgba(0,0,0,.08);transform:translateY(-1px);}
-        .db-detail .backbtn:focus-visible{outline:2px solid #1a73e8;outline-offset:2px;}
-        .db-detail .backbtn .icon{width:16px;height:16px;display:inline-block;line-height:0;}
-      </style>
-    `;
-    const back = `
-  <nav class="backbar" aria-label="breadcrumb">
-    <a class="backbtn" href="${backHref}" data-goto="database">
-      목록으로 돌아가기
-    </a>
-  </nav>
-`;
-
-    // 4) 본문 주입
-    const articleHTML = `<article class="db-detail">${backStyles}${back}${body.outerHTML || body.innerHTML}</article>`;
-    main.innerHTML = articleHTML;
-
-    // 5) 타이틀/GA/스크롤
-    const title = (doc.querySelector('h1')?.textContent || slug).trim();
-    document.title = `${title} - KingshotData.KR`;
-    if (window.gtag) {
-      gtag('event', 'page_view', {
-        page_location: location.href,
-        page_path: location.pathname + `#db/${slug}`,
-        page_title: document.title
-      });
-    }
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  } catch (err) {
-    console.error(err);
-    main.innerHTML = `
-      <div style="padding:24px;border:1px solid #ddd;border-radius:8px;background:#fff;">
-        <h2 style="margin-top:0;">로드 오류</h2>
-        <p><code>pages/database/${slug}/index.html</code></p>
-        <pre style="white-space:pre-wrap">${err.message}</pre>
-      </div>`;
+  function extractMeta(doc, fallbackUrl) {
+    const title = (doc.querySelector('meta[name="db-title"]')?.content)
+      || pickText(doc, ['.page h1', '.building-page h1', 'h1', 'title']);
+    const summary = (doc.querySelector('meta[name="description"]')?.content)
+      || pickText(doc, ['.page p', '.building-page p', 'p']);
+    const image = (doc.querySelector('meta[property="og:image"]')?.content)
+      || pickAttr(doc, ['.page img', '.building-page img', 'img'], 'src');
+    return { title: title || '(제목 없음)', summary: summary || '', image: image || '', url: fallbackUrl };
   }
-}
 
-// 상세 화면 빠져나올 때, 주입 스타일 정리 (index 수정 없이 처리)
-if (!window.__dbStyleCleanupBound){
-  window.addEventListener('hashchange', () => {
-    const h = location.hash || '';
-    if (!h.startsWith('#db/')) {
-      document.head.querySelectorAll('[data-db-style]').forEach(n => n.remove());
+  // ===== 카드 렌더러 =====
+  function card(it) {
+    const img = it.image
+      ? `<div class="card__media"><img src="${esc(it.image)}" alt="" loading="lazy" decoding="async"></div>`
+      : `<div class="card__media"></div>`;
+
+    const href = `#/db/${encodeURIComponent(it.folder)}`;
+
+    return `
+      <a class="card card--db" href="${href}" data-folder="${esc(it.folder)}" aria-label="${esc(it.title)}">
+        ${img}
+        <div class="card__body">
+          <div class="card__title">${esc(it.title)}</div>
+        </div>
+      </a>
+    `;
+  }
+
+  // ===== 리스트 =====
+  function getGrid() {
+    const grid = document.getElementById('db-grid');
+    if (grid) grid.classList.add('grid', 'category-grid');
+    return grid;
+  }
+
+  function render(list) {
+    const grid = getGrid();
+    if (!grid) return;
+    grid.innerHTML = list.map(card).join('');
+  }
+
+  // ===== 상세 로더 (중복 타이틀/이미지 방지) =====
+  async function openDbFolder(folder) {
+    const main = document.getElementById('content') || document.body;
+    const parser = new DOMParser();
+
+    for (const file of CANDIDATES) {
+      const url = buildUrl(folder, file);
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) continue;
+
+        const html = await res.text();
+        const doc  = parser.parseFromString(html, 'text/html');
+
+        const meta = extractMeta(doc, url);
+        const heroResolved = meta.image ? resolveAsset(folder, meta.image) : '';
+
+        // 본문 루트
+        const bodyNode =
+          doc.querySelector('.page, .building-page, main, article') || doc.body;
+
+        // 본문에 이미 타이틀이 있는가?
+        const hasTitleInBody = !!bodyNode.querySelector('h1');
+
+        // 본문 첫 이미지 (상대경로 → 절대/폴더 기준으로 보정)
+        const firstImg = bodyNode.querySelector('img');
+        const firstImgResolved = firstImg ? resolveAsset(folder, firstImg.getAttribute('src') || '') : '';
+
+        // 히어로를 주입해야 하는가? (본문 첫 이미지와 같으면 주입 안 함)
+        const shouldInjectHero = !!(heroResolved && heroResolved !== firstImgResolved);
+
+        // 본문 HTML
+        const bodyHTML = bodyNode ? bodyNode.innerHTML : html;
+
+        // 상단 '목록으로' 버튼 (항상 주입)
+        const backNavHTML = `
+          <nav class="db-detail__back" aria-label="데이터베이스 탐색">
+            <a href="#/db" class="back-button back-button--pill" aria-label="목록으로">← 데이터베이스 목록으로</a>
+          </nav>
+        `;
+
+        // 공통 헤더(타이틀/요약/히어로): 본문에 h1이 없을 때만 주입
+        const headerHTML = !hasTitleInBody ? `
+          <header class="db-detail__header">
+            <h1 class="db-detail__title">${esc(meta.title)}</h1>
+            ${meta.summary ? `<p class="db-detail__summary">${esc(meta.summary)}</p>` : ''}
+            ${shouldInjectHero ? `
+              <div class="db-detail__hero" aria-hidden="true">
+                <img src="${esc(heroResolved)}" alt="" loading="lazy" decoding="async">
+              </div>` : ''}
+            <hr class="db-detail__divider">
+          </header>
+        ` : '';
+
+        const wrapped = `
+          <div class="container">
+            <div class="panel panel--db-detail">
+              ${backNavHTML}
+              ${headerHTML}
+              <section class="db-detail__content">${bodyHTML}</section>
+            </div>
+          </div>
+        `;
+        main.innerHTML = wrapped;
+
+        try { window.scrollTo({ top: 0, behavior: 'instant' }); } catch (_) { window.scrollTo(0, 0); }
+        return;
+      } catch (_) {}
     }
-  });
-  window.__dbStyleCleanupBound = true;
-}
 
-// ★ 전역 연결: 기존 index의 호출부가 window.* 를 찾도록 보조
-window.initDatabase = window.initDatabase || initDatabase;
-window.renderDbDetail = window.renderDbDetail || renderDbDetail;
+    main.innerHTML = `<div class="container"><div class="panel"><p>해당 폴더를 열 수 없습니다: ${esc(folder)}</p></div></div>`;
+  }
+  window.openDbFolder = openDbFolder;
+
+  // ===== 데이터 로딩/초기 렌더 =====
+  let _once = false, _cache = [];
+  async function loadListOnceAndRender() {
+    if (_once) { render(_cache); return; }
+    _once = true;
+
+    const parser = new DOMParser();
+    const results = [];
+
+    for (const it of ITEMS) {
+      let loaded = false;
+      for (const file of CANDIDATES) {
+        const url = buildUrl(it.folder, file);
+        try {
+          const res = await fetch(url, { cache: 'no-store' });
+          if (!res.ok) continue;
+          const text = await res.text();
+          const doc = parser.parseFromString(text, 'text/html');
+          const meta = extractMeta(doc, url);
+          const fixedImage = meta.image ? resolveAsset(it.folder, meta.image) : '';
+          results.push({ ...it, ...meta, image: fixedImage });
+          loaded = true;
+          break;
+        } catch (_) {}
+      }
+      if (!loaded) {
+        results.push({
+          ...it,
+          title: `(로드 실패) ${it.category}`,
+          summary: '파일을 찾을 수 없습니다.',
+          image: '',
+          url: buildUrl(it.folder, 'index.html')
+        });
+      }
+    }
+
+    _cache = results;
+    render(_cache);
+  }
+
+  // database.html에서 호출
+  async function initDatabase() {
+    const m = (location.hash || '').match(/^#\/db\/([^\/?#]+)/);
+    if (m) {
+      await loadListOnceAndRender();   // 목록 메타 캐시
+      const folder = decodeURIComponent(m[1]);
+      return openDbFolder(folder);
+    }
+    return loadListOnceAndRender();
+  }
+  window.initDatabase = initDatabase;
+
+  // ===== 라우터 =====
+  async function handleHashRoute() {
+    const hash = location.hash || '';
+    const m = hash.match(/^#\/db\/([^\/?#]+)/);
+    if (m) {
+      const folder = decodeURIComponent(m[1]);
+      return openDbFolder(folder);
+    }
+    if (hash === '#/db' || hash === '#/db/') {
+      render(_cache);
+    }
+  }
+  window.addEventListener('hashchange', handleHashRoute);
+
+})();

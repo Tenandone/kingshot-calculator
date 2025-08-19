@@ -1,299 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>KingshotData.KR - 건물 정보</title>
-
-  <!-- GA4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-TMGDGSEWW6');
-  </script>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- CSS: 기본 + 인라인 이관본 -->
-  <link rel="stylesheet" href="style/style.css" />
-  <link rel="stylesheet" href="style/app.css" />
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico">
-
-  <!-- Google AdSense (자동/수동 공통 로더) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189957764761115"
-     crossorigin="anonymous"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KingshotData.kr</title>
+  <!-- 프로젝트 루트 기준 경로 확인 -->
+  <link rel="stylesheet" href="css/common.css" />
+  <!-- SPA 라우터 -->
+  <script src="js/app.js" defer></script>
 </head>
-<body>
-  <header>
-    <div class="logo">KingshotData.KR</div>
-    <nav id="top-nav">
-      <a href="#buildings">건물</a>
-      <a href="#calculator">계산기</a>
-      <a href="#database">데이터베이스</a>
-      <a href="#policy">이용약관</a>
-      <a href="#about">소개</a>
-    </nav>
+<body class="theme-default">
+  <header class="site-header" role="banner">
+    <div class="container nav-bar">
+      <a class="brand" href="#/home" data-link aria-label="KingshotData.kr 홈">
+        <span class="brand-badge" aria-hidden="true">KD</span>
+        <span class="brand-text">KingshotData.kr</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false"
+              aria-controls="primaryNav" aria-label="메뉴 열기">메뉴</button>
+
+      <nav class="nav" id="primaryNav" role="navigation" aria-label="주 메뉴">
+        <a href="#/home" data-nav>홈</a>
+        <a href="#/buildings" data-nav>건물</a>
+        <a href="#/heroes" data-nav>영웅</a>
+        <a href="#/database" data-nav>데이터베이스</a>
+        <a href="#/guides" data-nav>가이드</a>
+        <a href="#/calculator" data-nav>계산기</a>
+        <a href="#/about" data-nav>소개</a>
+      </nav>
+    </div>
   </header>
 
- <!-- 광고: 상단 -->
-<div class="ad-wrap" style="max-width:1100px;margin:16px auto;">
-  <ins class="adsbygoogle"
-       style="display:block;min-height:250px"
-       data-ad-client="ca-pub-9189957764761115"
-       data-ad-slot="1234567890"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-</div>
+  <main class="container" id="main" role="main">
+    <div id="content" class="panel"></div>
+  </main>
 
-
-  <main id="content"><!-- 동적 로드 --></main>
-
- <!-- 광고: 하단 -->
-<div class="ad-wrap" style="max-width:1100px;margin:24px auto;">
-  <ins class="adsbygoogle"
-       style="display:block;min-height:250px"
-       data-ad-client="ca-pub-9189957764761115"
-       data-ad-slot="0987654321"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-</div>
-
-
-  <footer>
-    <div class="footer-container">
-      <div class="footer-box">
-        <h3>ABOUT US</h3>
-        <p>KingshotData.KR은<br>
-           킹샷 게임 관련 정보를 정리한 한국 유저 전용 데이터 사이트입니다.<br>
-           건물 요구사항, 계산기, 번역 자료 등을 제공합니다.
-        </p>
-      </div>
-      <div class="footer-box">
-        <h3>JOIN OUR OPENTALK</h3>
-        <p>킹샷 유저들과 소통하고 전략을 나눌 수 있는<br>
-           카카오 오픈채팅방에 참여하세요.
-        </p>
-        <a href="https://open.kakao.com/o/gYoiOqLh" target="_blank" class="kakao-btn">Join Kakao OpenTalk</a>
-      </div>
-    </div>
-
-    <div class="footer-copy">
-      A FAN-CREATED PROJECT, NOT OFFICIALLY AFFILIATED WITH CENTURY GAMES<br>
-      Privacy Officer: KingshotData.kr
-      Email: <a href="mailto:contact@kingshotdata.kr">contact@kingshotdata.kr</a><br>
-      <span class="footer-2025">© 2025 KingshotData.kr</span>
-    </div>
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">© <span id="y"></span> KingshotData.kr</div>
   </footer>
-
-  <!-- DB 모듈: window.initDatabase / window.renderDbDetail 노출 -->
-  <script type="module" src="js/pages/database.js"></script>
-
-  <!-- [ADS] SPA 동적 광고 활성화 유틸 -->
-  <script>
-    function initAdsIn(root = document) {
-      try {
-        const nodes = root.querySelectorAll('ins.adsbygoogle:not([data-adsbygoogle-status])');
-        nodes.forEach(() => {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        });
-      } catch (e) {
-        console.warn('ads init skipped:', e);
-      }
-    }
-  </script>
-
- <script>
-  // 라우트: 조각 파일 경로
-  const routes = {
-    buildings: 'pages/buildings.html',
-    database: 'pages/database.html',
-    calculator: 'pages/calculator.html',
-    policy: 'pages/policy.html',
-    about: 'pages/about.html',
-    towncenter: 'pages/towncenter.html',
-    'truegold-crucible': 'pages/truegold-crucible.html',
-    academy: 'pages/academy.html',
-    embassy: 'pages/embassy.html',
-    barracks: 'pages/barracks.html',
-    range: 'pages/range.html',
-    stable: 'pages/stable.html',
-    'command-center': 'pages/command-center.html',
-    kitchen: 'pages/kitchen.html',
-    storehouse: 'pages/storehouse.html',
-    'guard-station': 'pages/guard-station.html'
-  };
-
-  const PAGE_TITLES = {
-    buildings: '건물 정보 - KingshotData.KR',
-    database: '데이터베이스 - KingshotData.KR',
-    calculator: '건물 업그레이드 계산기 - KingshotData.KR',
-    policy: '이용약관 · 개인정보 처리방침 - KingshotData.KR',
-    about: '사이트 소개 - KingshotData.KR'
-  };
-
-  let currentHash = null;       // 현재 해시
-  let pendingController = null; // 진행 중 fetch 취소용
-
-  async function navigate(page) {
-    // 상세 페이지 (#db/<slug>)는 외부 모듈(window.renderDbDetail) 우선
-    if (page && page.startsWith('db/')) {
-      const slug = page.slice(3);
-      if (typeof window.renderDbDetail === 'function') {
-        await window.renderDbDetail(slug);
-      } else {
-        const main = document.getElementById('content');
-        main.innerHTML = `
-          <div style="padding:24px;border:1px solid #ddd;border-radius:8px;background:#fff;">
-            <h2 style="margin-top:0;">로드 오류</h2>
-            <p>renderDbDetail 모듈이 로드되지 않았습니다.</p>
-          </div>`;
-      }
-      setActiveNav('database');
-      return;
-    }
-
-    const key = routes[page] ? page : 'buildings';
-    const path = routes[key];
-
-    // 진행 중 로딩이 있으면 취소
-    if (pendingController) pendingController.abort();
-    pendingController = new AbortController();
-
-    try {
-      const res = await fetch(path, { cache: 'no-store', signal: pendingController.signal });
-      if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${path}`);
-      const html = await res.text();
-
-      const main = document.getElementById('content');
-      main.innerHTML = html;
-
-      // [ADS] 새로 그려진 영역의 광고 태그 활성화
-      initAdsIn(main);
-
-      // 계산기 초기화
-      if (key === 'calculator') {
-        requestAnimationFrame(() => {
-          if (typeof initCalculator === 'function') initCalculator();
-        });
-      }
-      // 데이터베이스 초기화: 외부 모듈(window.initDatabase)만 호출
-      if (key === 'database') {
-        requestAnimationFrame(() => {
-          if (typeof window.initDatabase === 'function') window.initDatabase();
-        });
-      }
-
-      // 문서 타이틀
-      document.title = PAGE_TITLES[key] || 'KingshotData.KR';
-
-      // GA4 page_view (해시 라우팅)
-      if (window.gtag) {
-        gtag('event', 'page_view', {
-          page_location: location.href,
-          page_path: location.pathname + location.hash,
-          page_title: document.title
-        });
-      }
-
-      // UX: 스크롤만 (포커스X)
-      window.scrollTo({ top: 0, behavior: 'instant' });
-
-    } catch (err) {
-      if (err.name === 'AbortError') return;
-      document.getElementById('content').innerHTML =
-        `<div style="padding:24px;border:1px solid #ddd;border-radius:8px;background:#fff;">
-           <h2 style="margin-top:0;">로드 오류</h2>
-           <p><code>${routes[page] || 'pages/buildings.html'}</code></p>
-           <pre style="white-space:pre-wrap">${err.message}</pre>
-         </div>`;
-      console.error(err);
-    } finally {
-      pendingController = null;
-    }
-  }
-
-  function setActiveNav(page) {
-    const canonical = routes[page] ? page : 'buildings';
-    document.querySelectorAll('#top-nav a').forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === `#${canonical}`);
-    });
-  }
-
-  function handleHash() {
-    const raw = (location.hash || '#buildings');
-    if (raw === currentHash) return;
-    currentHash = raw;
-
-    const pageRaw = raw.slice(1);
-    const page = (pageRaw === 'privacy') ? 'policy' : pageRaw;
-    setActiveNav(page.startsWith('db/') ? 'database' : page);
-    navigate(page);
-  }
-
-  function routeTo(dest) {
-    const page = (dest === 'privacy') ? 'policy' : (routes[dest] ? dest : dest); // db/<slug> 허용
-    const hash = '#' + page;
-
-    currentHash = hash;
-    setActiveNav(page.startsWith('db/') ? 'database' : page);
-    navigate(page);
-    if (location.hash !== hash) {
-      location.hash = hash;
-    }
-  }
-
-  // 콘텐츠 영역 내부 클릭 위임
-  document.addEventListener('click', (e) => {
-    const withinContent = e.target.closest('#content');
-    if (!withinContent) return;
-
-    // 절대경로 상세 링크도 SPA로 전환 (/pages/database/<slug>/…)
-    const aAbs = e.target.closest('a[href^="/pages/database/"], a[href^="pages/database/"]');
-    if (aAbs) {
-      e.preventDefault();
-      const href = aAbs.getAttribute('href') || '';
-      const m = href.match(/pages\/database\/([^/]+)\/?/);
-      if (m && m[1]) routeTo('db/' + m[1]);
-      return;
-    }
-
-    const el = e.target.closest('[data-route],[data-hash],[data-goto],a[href^="#"]');
-    if (!el) return;
-
-    let dest =
-      el.getAttribute('data-route') ||
-      el.getAttribute('data-hash') ||
-      el.getAttribute('data-goto') ||
-      (el.getAttribute('href') || '').slice(1);
-
-    if (!dest) return;
-    e.preventDefault();
-    routeTo(dest);
-  });
-
-  // 상단 네비 즉시 라우팅
-  document.getElementById('top-nav').addEventListener('click', (e) => {
-    const a = e.target.closest('a[href^="#"]');
-    if (!a) return;
-    e.preventDefault();
-    routeTo(a.getAttribute('href').slice(1));
-  });
-
-  window.addEventListener('hashchange', handleHash);
-  window.addEventListener('load', () => {
-    routeTo((location.hash || '#buildings').slice(1));
-    // [ADS] 초기 정적 광고 박스 활성화
-    initAdsIn(document);
-  });
-
-  // 초진입 포커스 제거
-  window.addEventListener('DOMContentLoaded', () => {
-    if (document.activeElement) document.activeElement.blur();
-  });
-  </script>
-
-  <!-- 계산기 로직 -->
-  <script src="js/calculator.js"></script>
 </body>
 </html>

@@ -1,19 +1,30 @@
-body {
-  background-color: #f0f2f5;
+/* === Calculator UI (scoped to #calc-ui) =================================== */
+/* 전역과 충돌 방지: 모든 규칙은 #calc-ui 하위로 한정 */
+
+#calc-ui {
+  --bg: #f0f2f5;
+  --panel: #fff;
+  --text: #222;
+  --muted: #333;
+  --border: #ccc;
+  --primary: #0069d9;
+  --primary-hover: #004a9f;
+
   font-family: 'Noto Sans KR', Arial, sans-serif;
-  margin: 0;
+  color: var(--text);
+  background-color: var(--bg);
   padding: 20px;
-  color: #222;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-form.calc-form {
+/* 폼 컨테이너 */
+#calc-ui form.calc-form {
   max-width: 400px;
   width: 100%;
   margin: 20px auto;
   padding: 20px 15px;
-  background: #fff;
+  background: var(--panel);
   border-radius: 10px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   box-sizing: border-box;
@@ -22,39 +33,47 @@ form.calc-form {
   gap: 10px;
 }
 
-label {
+/* 라벨 */
+#calc-ui label {
   font-weight: 600;
   font-size: 13px;
   margin-bottom: 4px;
   display: block;
+  color: var(--muted);
 }
 
-input[type="number"],
-select {
+/* 입력 & 셀렉트 */
+#calc-ui input[type="number"],
+#calc-ui select {
   width: 100%;
   padding: 8px;
   font-size: 14px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
   border-radius: 5px;
   box-sizing: border-box;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: #fff;
+  color: #111;
 }
 
-input[type="number"]:focus,
-select:focus {
+#calc-ui input[type="number"]:focus,
+#calc-ui select:focus,
+#calc-ui input[type="number"]:focus-visible,
+#calc-ui select:focus-visible {
   outline: none;
-  border-color: #0069d9;
-  box-shadow: 0 0 4px #0069d9;
+  border-color: var(--primary);
+  box-shadow: 0 0 4px var(--primary);
 }
 
-input[type="checkbox"] {
+/* 체크박스 & 라벨 */
+#calc-ui input[type="checkbox"] {
   transform: scale(1.05);
   margin-right: 6px;
   cursor: pointer;
   vertical-align: middle;
 }
 
-label.checkbox-label {
+#calc-ui label.checkbox-label {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -65,28 +84,29 @@ label.checkbox-label {
   user-select: none;
 }
 
-button {
+/* 버튼 */
+#calc-ui button {
   margin-top: 6px;
   padding: 12px 0;
   font-weight: 700;
   font-size: 15px;
   border: none;
   border-radius: 7px;
-  background-color: #0069d9;
-  color: white;
+  background-color: var(--primary);
+  color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease, filter 0.15s ease;
   width: 100%;
 }
 
-button:hover {
-  background-color: #004a9f;
-}
+#calc-ui button:hover { background-color: var(--primary-hover); }
+#calc-ui button:active { filter: brightness(0.98); }
 
-#result {
+/* 결과 패널 */
+#calc-ui #result {
   max-width: 900px;
   margin: 25px auto 0;
-  background: #fff;
+  background: var(--panel);
   border-radius: 14px;
   padding: 20px 15px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.12);
@@ -99,66 +119,70 @@ button:hover {
   text-align: left;
 }
 
-#result p {
-  margin: 0;
-}
+#calc-ui #result p { margin: 0; }
 
-table {
+/* 표 */
+#calc-ui table {
   width: 100%;
   max-width: 900px;
   border-collapse: collapse;
   table-layout: fixed;
   word-break: break-word;
   font-size: 13px;
+  margin: 0 auto; /* 가운데 정렬 */
 }
 
-th, td {
-  border: 1px solid #ccc;
+#calc-ui th,
+#calc-ui td {
+  border: 1px solid var(--border);
   padding: 6px 8px;
   text-align: center;
   vertical-align: middle;
 }
 
-thead th {
+#calc-ui thead th {
   background-color: #e9f0fa;
   font-weight: 700;
 }
 
-tbody tr:nth-child(even) td {
+#calc-ui tbody tr:nth-child(even) td {
   background-color: #f7f9fc;
 }
 
+/* 선행조건 패널(있을 경우) */
+#calc-ui #prereq-box {
+  max-width: 900px;
+  margin: 20px auto 0;
+  background: var(--panel);
+  border-radius: 14px;
+  padding: 18px 15px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+#calc-ui #prereq-box h2 { margin: 0 0 8px; font-size: 16px; }
+#calc-ui #prereq-list { margin: 0; padding-left: 18px; }
+#calc-ui #prereq-list li { margin: 4px 0; }
+
 /* 반응형 */
 @media (max-width: 480px) {
-  body {
-    padding: 10px;
-  }
+  #calc-ui { padding: 10px; }
 
-  form.calc-form {
-    padding: 15px 10px;
-  }
+  #calc-ui form.calc-form { padding: 15px 10px; }
 
-  label {
-    font-size: 12px;
-  }
+  #calc-ui label { font-size: 12px; }
 
-  input[type="number"],
-  select,
-  button {
+  #calc-ui input[type="number"],
+  #calc-ui select,
+  #calc-ui button {
     font-size: 13px;
     padding: 8px;
   }
 
-  button {
-    font-weight: 600;
-  }
+  #calc-ui button { font-weight: 600; }
 
-  #result {
+  #calc-ui #result {
     font-size: 14px;
     padding: 15px 10px;
   }
 
-  table {
-    font-size: 11px;
-  }
+  #calc-ui table { font-size: 11px; }
 }

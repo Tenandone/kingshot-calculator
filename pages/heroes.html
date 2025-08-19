@@ -1,0 +1,116 @@
+<!-- pages/heroes.html -->
+<section class="container">
+  <h1 class="page-title">영웅</h1>
+
+  <!-- JS(heroes.js)가 섹션(3/2/1세대, SR, R)을 주입할 마운트 포인트 -->
+  <div id="heroes-root" aria-live="polite"></div>
+
+  <noscript>
+    <p class="muted">자바스크립트를 활성화하면 영웅 목록이 표시됩니다.</p>
+  </noscript>
+</section>
+
+<style>
+  /* ===== 섹션 공통 ===== */
+  .section{ margin:16px 0 24px; }
+  .section-title{
+    margin:8px 0 10px;
+    font-size:16px; font-weight:700; line-height:1.25;
+  }
+
+  /* ===== 섹션 그리드 ===== */
+  .heroes-grid{
+    --card-min: 200px;
+    --card-gap: 14px;
+    display:grid;
+    gap:var(--card-gap);
+    grid-template-columns:repeat(auto-fill, minmax(var(--card-min), 1fr));
+  }
+  .heroes-grid.compact{
+    --card-min: 160px;
+    --card-gap: 12px;
+  }
+
+  /* 반응형 보정 */
+  @media (max-width: 1024px){
+    .heroes-grid{ --card-min: 180px; }
+    .heroes-grid.compact{ --card-min: 150px; }
+  }
+  @media (max-width: 640px){
+    .heroes-grid{ --card-min: 160px; }
+    .heroes-grid.compact{ --card-min: 140px; }
+  }
+
+  /* ===== 카드 ===== */
+  .heroes-grid .card{
+    width:100%; max-width:none;
+    display:block;
+    border-radius:14px; overflow:hidden;
+    background:var(--panel-bg, #fff); color:var(--panel-fg, #111);
+    text-decoration:none;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+    transition:transform .1s ease, box-shadow .1s ease;
+    position:relative;
+  }
+  .heroes-grid .card:hover,
+  .heroes-grid .card:focus-visible{
+    transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(0,0,0,.12);
+    outline:none;
+  }
+
+  /* 썸네일 */
+  .heroes-grid .card .thumb{
+    background:#0b1120;
+    overflow:hidden;
+  }
+  .heroes-grid .card img{
+    width:100%;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    display:block;
+    background:#0b1120;
+  }
+
+  /* 이름 라벨 */
+  .heroes-grid .card .name{
+    padding:10px 12px;
+    font-weight:600; text-align:center;
+    font-size:14px; color:inherit;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .heroes-grid.compact .card .name{ font-size:13px; }
+
+  /* 다크 테마 */
+  .theme-default .heroes-grid .card{
+    --panel-bg:#111827;
+    --panel-fg:#e5e7eb;
+    box-shadow:0 6px 18px rgba(0,0,0,.35);
+  }
+
+  .page-title{ margin:4px 0 12px; font-size:20px; font-weight:700; }
+  .muted{ color:#666; font-size:14px; }
+
+  @media (prefers-reduced-motion: reduce){
+    .heroes-grid .card{ transition:none; }
+  }
+</style>
+
+<!-- SR/R 자동 compact 보조 스크립트 -->
+<script>
+  (function(){
+    function applyCompact(root){
+      root.querySelectorAll('.section').forEach(sec=>{
+        const title = sec.querySelector('.section-title')?.textContent?.trim() || '';
+        const grid  = sec.querySelector('.heroes-grid');
+        if (!grid) return;
+        if (/^(SR|R)\b/i.test(title)) grid.classList.add('compact');
+      });
+    }
+    const root = document.getElementById('heroes-root');
+    if (!root) return;
+    const mo = new MutationObserver(()=>applyCompact(root));
+    mo.observe(root, { childList:true, subtree:true });
+    applyCompact(root);
+  })();
+</script>
