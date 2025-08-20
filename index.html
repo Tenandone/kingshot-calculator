@@ -19,12 +19,14 @@
 
   <!-- 프로젝트 루트 기준 CSS -->
   <link rel="stylesheet" href="css/common.css" />
-  <!-- SPA 라우터 -->
-  <script src="js/app.js" defer></script>
+
+  <!-- 반드시 routes.js → app.js 순서 (캐시무효화 쿼리 권장) -->
+  <script defer src="js/routes.js?v=20250820a"></script>
+  <script defer src="js/app.js?v=20250820a"></script>
 
   <style>
     .site-footer {
-      text-align: center; /* 푸터 텍스트 가운데 정렬 */
+      text-align: center;
       font-size: 0.9em;
       color: #666;
       line-height: 1.6;
