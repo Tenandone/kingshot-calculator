@@ -41,12 +41,13 @@
     .heroes-grid.compact{ --card-min: 140px; }
   }
 
-  /* ===== 카드 ===== */
+  /* ===== 카드 (라이트 고정) ===== */
   .heroes-grid .card{
     width:100%; max-width:none;
     display:block;
     border-radius:14px; overflow:hidden;
-    background:var(--panel-bg, #fff); color:var(--panel-fg, #111);
+    background:#fff; color:#111;               /* 라이트 고정 */
+    border:1px solid var(--border, #e5e7eb);   /* 공용 토큰 없으면 기본값 */
     text-decoration:none;
     box-shadow:0 2px 10px rgba(0,0,0,.06);
     transition:transform .1s ease, box-shadow .1s ease;
@@ -55,22 +56,14 @@
   .heroes-grid .card:hover,
   .heroes-grid .card:focus-visible{
     transform:translateY(-2px);
-    box-shadow:0 6px 18px rgba(0,0,0,.12);
+    box-shadow:0 6px 18px rgba(0,0,0,.10);
     outline:none;
   }
 
-  /* 썸네일 */
-  .heroes-grid .card .thumb{
-    background:#0b1120;
-    overflow:hidden;
-  }
-  .heroes-grid .card img{
-    width:100%;
-    aspect-ratio:3/4;
-    object-fit:cover;
-    display:block;
-    background:#0b1120;
-  }
+  /* 썸네일 (라이트 배경) */
+  .heroes-grid .card .thumb{ background:#f3f4f6; }   /* 라이트 톤 */
+.heroes-grid .card img{   background:transparent; }
+
 
   /* 이름 라벨 */
   .heroes-grid .card .name{
@@ -78,14 +71,15 @@
     font-weight:600; text-align:center;
     font-size:14px; color:inherit;
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    background:#fff;                            /* 라이트 고정 */
+    border-top:1px solid var(--border, #e5e7eb);
   }
   .heroes-grid.compact .card .name{ font-size:13px; }
 
-  /* 다크 테마 */
+  /* 🔧 기존 다크 강제 오버라이드 제거/무력화 */
   .theme-default .heroes-grid .card{
-    --panel-bg:#111827;
-    --panel-fg:#e5e7eb;
-    box-shadow:0 6px 18px rgba(0,0,0,.35);
+    background:#fff; color:#111;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
   }
 
   .page-title{ margin:4px 0 12px; font-size:20px; font-weight:700; }
@@ -96,7 +90,7 @@
   }
 </style>
 
-<!-- SR/R 자동 compact 보조 스크립트 -->
+<!-- SR/R 섹션을 자동으로 compact 보기로 전환 -->
 <script>
   (function(){
     function applyCompact(root){

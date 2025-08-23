@@ -20,12 +20,12 @@
               '<h2 class="section-title">카테고리</h2>',
               '<div class="grid category-grid">',
 
-                catCard('#/buildings', iconImg('건물', '/img/saulchar.png'), '건물', '업그레이드 표'),
-                catCard('#/heroes',    iconImg('영웅', '/img/helgachar.png'), '영웅', '영웅스킬/특성'),
-                catCard('#/database',  iconImg('최대레벨', '/img/database.png'), '데이터베이스', '킹샷데이터'),
-                catCard('#/guides',    iconImg('가이드', '/img/guides.png'), '가이드', '공략모음'),
-                catCard('#/calculator',iconImg('계산기', '/img/calculator.png'), '계산기', '업그레이드 자원계산'),
-                catCard('#/about',     iconImg('소개', '/img/about.png'), '소개', '문의하기'),
+                catCard('#/buildings', iconImg('건물', '/img/home/saulchar.png'), '건물', '업그레이드 표'),
+                catCard('#/heroes',    iconImg('영웅', '/img/home/helgachar.png'), '영웅', '영웅스킬/특성'),
+                catCard('#/database',  iconImg('최대레벨', '/img//home/database.png'), '데이터베이스', '킹샷데이터'),
+                catCard('#/guides',    iconImg('가이드', '/img/home/guides.png'), '가이드', '공략모음'),
+                catCard('#/calculator',iconImg('계산기', '/img/home/calculator.png'), '계산기', '업그레이드 자원계산'),
+                catCard('#/about',     iconImg('소개', '/img/home/about.png'), '소개', '문의하기'),
 
               '</div>',
             '</section>'
@@ -149,23 +149,19 @@
       },
 
       '/guides': {
-  title: '가이드 - KingshotData.kr',
-  render: async (el) => {
-    el.innerHTML = '<div class="loading">Loading…</div>';
-
-    // pages/guide.html 파일을 불러와 본문만 주입
-    const html = await loadHTML(['pages/guide.html','/pages/guide.html']);
-    if (!html) {
-      el.innerHTML = '<div class="placeholder"><h2>가이드</h2><p class="muted">guide.html을 찾을 수 없습니다.</p></div>';
-      return;
-    }
-    const m = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-    el.innerHTML = m ? m[1] : html;
-
-    window.scrollTo({ top: 0 });
-  }
-},
-
+        title: '가이드 - KingshotData.kr',
+        render: async (el) => {
+          el.innerHTML = '<div class="loading">Loading…</div>';
+          const html = await loadHTML(['pages/guide.html','/pages/guide.html']);
+          if (!html) {
+            el.innerHTML = '<div class="placeholder"><h2>가이드</h2><p class="muted">guide.html을 찾을 수 없습니다.</p></div>';
+            return;
+          }
+          const m = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+          el.innerHTML = m ? m[1] : html;
+          window.scrollTo({ top: 0 });
+        }
+      },
 
       '/database': {
         title: '데이터베이스 - KingshotData.kr',
@@ -213,43 +209,131 @@
         }
       },
 
+      // ====== 계산기 허브 ======
       '/calculator': {
         title: '계산기 - KingshotData.kr',
         render: async (el) => {
           el.innerHTML = '<div class="loading">Loading…</div>';
-
           const html = await loadHTML(['pages/calculator.html','/pages/calculator.html','calculator.html','/calculator.html']);
           if (!html) {
             el.innerHTML = '<div class="placeholder"><h2>계산기</h2><p class="muted">calculator.html을 찾을 수 없습니다.</p></div>';
             return;
           }
-
           const m = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
           el.innerHTML = m ? m[1] : html;
-
-          const jsCands = [
-            '/js/calculator.js',
-            'js/calculator.js'
-          ];
-
-          let loadedAny = false;
-          for (const src of jsCands) {
-            try { await loadScriptOnce(src); loadedAny = true; break; } catch(_) {}
-          }
-          if (!loadedAny) {
-            el.insertAdjacentHTML('beforeend','<div class="error">calculator.js 로드 실패</div>');
-            return;
-          }
-
-          if (typeof window.initCalculator === 'function') {
-            try { window.initCalculator(); } catch(e) { console.error(e); }
-          } else {
-            el.insertAdjacentHTML('beforeend','<div class="error">initCalculator()가 없습니다.</div>');
-          }
-
+          // 허브는 별도 JS 필요 없음
           window.scrollTo({ top: 0 });
         }
       },
+
+      '/calc-building': {
+  title: '건물계산기 - KingshotData.kr',
+  render: async (el) => {
+    // ❌ 잘못된 후보 'pages/calculator/building.html' 제거
+    const html = await loadHTML([
+      '/pages/calculators/building.html',
+      'pages/calculators/building.html'
+    ]);
+
+    if (!html) {
+      el.innerHTML = '<div class="placeholder"><h2>건물계산기</h2><p class="muted">building.html을 찾을 수 없습니다.</p></div>';
+      return;
+    }
+
+    const m = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+    el.innerHTML = m ? m[1] : html;
+
+    // 기존 calculator.js 로드 & 초기화
+    const jsCands = ['/js/calculator.js','js/calculator.js'];
+    for (const src of jsCands) { try { await loadScriptOnce(src); break; } catch(_) {} }
+    if (typeof window.initCalculator === 'function') { try { window.initCalculator(); } catch(e){ console.error(e); } }
+
+    window.scrollTo({ top: 0 });
+  }
+}
+,
+
+      '/calc-gear': {
+  title: '영주장비계산기 - KingshotData.kr',
+  render: async (el) => {
+    const html = await loadHTML([
+      '/pages/calculators/gear.html', 'pages/calculators/gear.html'
+    ]);
+    if (!html) {
+      el.innerHTML = '<div class="placeholder"><h2>영주장비계산기</h2><p class="muted">gear.html을 찾을 수 없습니다.</p></div>';
+      return;
+    }
+    el.innerHTML = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || html;
+
+    await loadScriptOnce('/js/gear-calculator.js?v=20250823');
+    if (!window.initGearCalculator) {
+      el.insertAdjacentHTML('beforeend','<div class="error">gear-calculator.js 로드 실패</div>');
+      return;
+    }
+    window.initGearCalculator({
+      mount: '#gear-calc',
+      jsonUrl: '/data/governor-gear.json',
+      
+    });
+
+    window.scrollTo({ top: 0 });
+  }
+}
+
+
+,
+
+      '/calc-charm': {
+  title: '영주보석계산기 - KingshotData.kr',
+  render: async (el) => {
+    // ✅ 올바른 html 경로(복수 후보)
+    const html = await loadHTML(['/pages/calculators/charm.html','pages/calculators/charm.html']);
+    el.innerHTML = html ? (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || html)
+                        : '<div class="placeholder"><h2>영주보석계산기</h2><p class="muted">charm.html을 찾을 수 없습니다.</p></div>';
+
+    // ✅ 계산기 스크립트 로드 + 캐시 무효화 쿼리
+    await loadScriptOnce('/js/charm-calculator.js?v=20250823b');
+
+    // ✅ 마운트 ID(#charm-calc)로 초기화
+    if (window.initCharmCalculator) {
+      window.initCharmCalculator({
+        mount: '#charm-calc',
+        jsonUrl: '/data/governor-charm.json'
+      });
+    }
+    window.scrollTo({ top: 0 });
+  }
+}
+
+,
+
+      '/calc-training': {
+  title: '병력 훈련/승급 계산기 - KingshotData.kr',
+  render: async (el) => {
+    const html = await loadHTML([
+      '/pages/calculators/training.html',
+      'pages/calculators/training.html'
+    ]);
+
+    el.innerHTML = html
+      ? (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || html)
+      : '<div class="placeholder"><h2>훈련/승급 계산기</h2><p class="muted">training.html을 찾을 수 없습니다.</p></div>';
+
+    // ✅ charm과 동일한 패턴로 JS 로드
+    await loadScriptOnce('/js/training-calculator.js?v=20250823a');
+
+    // ✅ 전역 init 함수 호출 (파일에서 정의해두기)
+    if (window.initTrainingCalculator) {
+      window.initTrainingCalculator({
+        mount: '#training-calc',
+        jsonUrl: '/data/troop-training.json'
+      });
+    }
+    window.scrollTo({ top: 0 });
+  }
+}
+
+,
 
       '/about': {
         title: '소개 - KingshotData.kr',

@@ -9,6 +9,7 @@
     font-size: 24px;
     text-align: center; /* ← 가운데 정렬 */
   }
+  
 </style>
 
   <!-- 텍스트 표 (SEO/접근성용, 이미지와 동일 정보) -->
@@ -200,36 +201,60 @@
 </section>
 
 <style>
-  /* 페이지 한정 스타일 (범위를 .guide 아래로 제한) */
+  /* 페이지 한정 + 테마 변수 기반 (다크 하드코딩 제거) */
   .guide { display:block; }
-  .guide__title { margin: 0 0 8px; font-size: 24px; }
-  .guide__intro { color:#444; margin: 0 0 16px; }
-  .guide__hero-figure { margin: 16px 0; }
-  .guide__hero-figure img { width:100%; height:auto; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
-  .muted { color:#666; }
-
-  .guide__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 18px;
-    margin: 20px 0 12px;
+  .guide__title { margin:0 0 8px; font-size:24px; text-align:center; }
+  .guide__intro { color:var(--muted); margin:0 0 16px; }
+  .guide__hero-figure { margin:16px 0; }
+  .guide__hero-figure img{
+    width:100%; height:auto; border-radius:10px;
+    box-shadow:0 2px 12px rgba(0,0,0,.06);
   }
-  @media (min-width: 900px) {
-    .guide__grid { grid-template-columns: 1fr 1fr 1fr; }
-  }
-  .guide__col { background:#272525; border-radius:14px; padding:14px; box-shadow:0 2px 10px rgba(0,0,0,.06); }
-  .guide__col-title { margin:0 0 10px; font-size:18px; }
+  .muted{ color:var(--muted); }
 
-  .combo { border-top: 1px solid #312e2e; padding-top: 12px; margin-top: 12px; }
-  .combo:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
-  .combo__gen { margin: 0 0 8px; font-size: 16px; }
-  .combo__list { display:flex; gap:8px; align-items:center; margin:0 0 6px; padding:0; list-style:none; flex-wrap: wrap; }
-  .combo__item { display:flex; align-items:center; gap:6px; padding:6px 8px; background:#3e4444; border-radius:10px; }
-  .combo__item img { width:40px; height:40px; object-fit:cover; border-radius:8px; display:block; }
-  .combo__note { margin:0; }
-
-  .guide__tips, .guide__meta {
-    background:#1d1c1c; border-radius:14px; padding:14px; box-shadow:0 2px 10px rgba(0,0,0,.06); margin-top:16px;
+  .guide__grid{
+    display:grid; grid-template-columns:1fr; gap:18px; margin:20px 0 12px;
   }
-  .guide__tips h2, .guide__meta h2 { margin:0 0 8px; font-size:18px; }
+  @media (min-width:900px){
+    .guide__grid{ grid-template-columns:1fr 1fr 1fr; }
+  }
+
+  .guide__col{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px; padding:14px;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+  }
+  .guide__col-title{ margin:0 0 10px; font-size:18px; color:var(--text); }
+
+  .combo{
+    border-top:1px solid var(--border);
+    padding-top:12px; margin-top:12px;
+  }
+  .combo:first-of-type{ border-top:0; padding-top:0; margin-top:0; }
+  .combo__gen{ margin:0 0 8px; font-size:16px; color:var(--text); }
+
+  .combo__list{
+    display:flex; gap:8px; align-items:center; margin:0 0 6px;
+    padding:0; list-style:none; flex-wrap:wrap;
+  }
+  .combo__item{
+    display:flex; align-items:center; gap:6px; padding:6px 8px;
+    background:#f3f4f6;               /* 라이트 톤 배경 */
+    border:1px solid var(--border);   /* 테마 경계선 */
+    border-radius:10px;
+  }
+  .combo__item img{
+    width:40px; height:40px; object-fit:cover; border-radius:8px; display:block;
+  }
+  .combo__note{ margin:0; color:var(--muted); }
+
+  .guide__tips, .guide__meta{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px; padding:14px;
+    box-shadow:0 2px 10px rgba(0,0,0,.06); margin-top:16px;
+  }
+  .guide__tips h2, .guide__meta h2{ margin:0 0 8px; font-size:18px; color:var(--text); }
 </style>
+

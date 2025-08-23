@@ -8,7 +8,7 @@
   <!-- DB 카드용 메타 (database.js가 읽어감) -->
   <title>영주 보석 | DataKorea</title>
   <meta name="db-title" content="영주 보석">
-  <meta name="description" content="도시센터 25레벨에 해금되는 영주 보석 시스템. 보석 매뉴얼/설계도면으로 최대 11레벨까지 강화하며 전투력을 크게 올립니다.">
+  <meta name="description" content="도시센터 25레벨 해금. 보석 매뉴얼/설계도면으로 최대 11레벨까지 강화하며 전투력을 크게 올립니다.">
   <meta property="og:image" content="/download/database/Governor Charm/governor-charms-300x282.webp">
 
   <style>
@@ -24,7 +24,7 @@
       border-collapse:collapse;
       font-size:13px;
       width:auto;
-      min-width: 520px;
+      min-width: 600px; /* 컬럼 추가 */
       margin: 0 auto;
       table-layout:auto;
     }
@@ -33,17 +33,21 @@
       border-bottom:1px solid var(--border, #e5e7eb);
       text-align:right;
       white-space:nowrap;
+      line-height:20px;
+      height:28px;
+      vertical-align:middle;
     }
     .table-wrap th:first-child,.table-wrap td:first-child{ text-align:left }
     .table-wrap thead th{
       position:sticky; top:0;
       background:#0f1318; color:var(--muted, #6b7280); z-index:1
     }
-    /* 칼럼 폭 */
+    /* 칼럼 폭 (5컬럼) */
     .table--compact th:nth-child(1), .table--compact td:nth-child(1){ width:64px }   /* 레벨 */
     .table--compact th:nth-child(2), .table--compact td:nth-child(2){ width:110px }  /* 매뉴얼 */
     .table--compact th:nth-child(3), .table--compact td:nth-child(3){ width:120px }  /* 설계도면 */
-    .table--compact th:nth-child(4), .table--compact td:nth-child(4){ width:120px }  /* 전투력 */
+    .table--compact th:nth-child(4), .table--compact td:nth-child(4){ width:90px }   /* 속성 */
+    .table--compact th:nth-child(5), .table--compact td:nth-child(5){ width:120px }  /* 전투력 */
 
     /* 표 설명 */
     .table-note{
@@ -60,16 +64,16 @@
   <main class="page" aria-labelledby="page-title">
     <figure>
       <img
-        src="/download/database/Governor Charm/governor-charms-300x282.webp"
+        src="/img/database/Governor Charm/governor-charms-300x282.webp"
         alt="영주 보석 대표 이미지"
         width="300" height="282"
         loading="lazy" decoding="async"
-        sizes="(max-width: 920px) 100vw, 920px">      
+        sizes="(max-width: 920px) 100vw, 920px">
     </figure>
 
     <header>
       <h1 id="page-title">영주 보석</h1>
-      <p class="muted">DataKorea</p>
+      <p class="muted">KingshotDataKorea</p>
     </header>
 
     <p>
@@ -87,38 +91,37 @@
     </section>
 
     <section aria-labelledby="table-title">
-      <h2 id="table-title">레벨별 요구 재료 및 전투력</h2>
+      <h2 id="table-title">레벨별 요구 재료 · 속성 · 전투력</h2>
       <div class="table-wrap" role="region" aria-labelledby="table-title">
         <table class="table--compact" aria-describedby="table-desc">
-          <caption id="table-desc">영주 보석 레벨에 따른 보석 매뉴얼, 보석 설계도면, 전투력 표</caption>
+         
           <thead>
             <tr>
               <th scope="col">레벨</th>
               <th scope="col">보석 매뉴얼</th>
               <th scope="col">보석 설계도면</th>
+              <th scope="col">속성</th>
               <th scope="col">전투력</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>1</td><td>5</td><td>5</td><td>205,700</td></tr>
-            <tr><td>2</td><td>40</td><td>15</td><td>288,000</td></tr>
-            <tr><td>3</td><td>60</td><td>40</td><td>370,000</td></tr>
-            <tr><td>4</td><td>80</td><td>100</td><td>452,000</td></tr>
-            <tr><td>5</td><td>100</td><td>200</td><td>576,000</td></tr>
-            <tr><td>6</td><td>120</td><td>300</td><td>700,000</td></tr>
-            <tr><td>7</td><td>140</td><td>400</td><td>824,000</td></tr>
-            <tr><td>8</td><td>200</td><td>400</td><td>948,000</td></tr>
-            <tr><td>9</td><td>300</td><td>400</td><td>1,072,000</td></tr>
-            <tr><td>10</td><td>420</td><td>420</td><td>1,196,000</td></tr>
-            <tr><td>11</td><td>560</td><td>420</td><td>1,320,000</td></tr>
+            <tr><td>1</td><td>5</td><td>5</td><td>9.0%</td><td>205,700</td></tr>
+            <tr><td>2</td><td>40</td><td>15</td><td>12.0%</td><td>288,000</td></tr>
+            <tr><td>3</td><td>60</td><td>40</td><td>16.0%</td><td>370,000</td></tr>
+            <tr><td>4</td><td>80</td><td>100</td><td>19.0%</td><td>452,000</td></tr>
+            <tr><td>5</td><td>100</td><td>200</td><td>25.0%</td><td>576,000</td></tr>
+            <tr><td>6</td><td>120</td><td>300</td><td>30.0%</td><td>700,000</td></tr>
+            <tr><td>7</td><td>140</td><td>400</td><td>35.0%</td><td>824,000</td></tr>
+            <tr><td>8</td><td>200</td><td>400</td><td>40.0%</td><td>948,000</td></tr>
+            <tr><td>9</td><td>300</td><td>400</td><td>45.0%</td><td>1,072,000</td></tr>
+            <tr><td>10</td><td>420</td><td>420</td><td>50.0%</td><td>1,196,000</td></tr>
+            <tr><td>11</td><td>560</td><td>420</td><td>55.0%</td><td>1,320,000</td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="table-note">
-        보석은 영주 장비에 추가 옵션을 부여하며, 레벨이 오를수록 전투력이 상승합니다.<br>
-        각 레벨 업에는 보석 매뉴얼과 보석 설계도면이 소모됩니다.<br>
-        표의 수치는 게임 업데이트로 변경될 수 있습니다.
+        수치는 게임 업데이트로 변경될 수 있습니다.
       </div>
     </section>
   </main>

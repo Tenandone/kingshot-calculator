@@ -4,7 +4,10 @@
   'use strict';
 
   const $ = (sel) => document.querySelector(sel);
+
+  // ✅ CSS 경로
   const CALC_CSS_HREF = '/css/calculator.css';
+  const COMPONENTS_CSS_HREF = '/css/components.css'; // 공통 카드/썸네일 스타일(옵션)
 
   // ---- header utils ----
   const yearEl = $('#y');
@@ -24,10 +27,9 @@
 
   async function loadScriptOnce(src) {
     if (!src) return;
-    if (loadedScripts.has(src)) return loadedScripts.get(src); // in-flight/completed promise
+    if (loadedScripts.has(src)) return loadedScripts.get(src);
 
     const p = (async () => {
-      // 1) Preflight: 존재/타입 확인 (HTML을 JS로 실행하려다 나는 MIME 에러 방지)
       let r;
       try {
         r = await fetch(src, { cache: 'no-store' });
@@ -38,12 +40,8 @@
 
       const ct = (r.headers.get('content-type') || '').toLowerCase();
       const looksJs = /\.js($|\?)/.test(src) || /javascript|ecmascript/.test(ct);
-      if (!looksJs) {
-        // HTML/텍스트라면 주입하지 않고 실패 처리 (콘솔 MIME 경고 차단)
-        throw new Error(`Not JS: ${ct || 'unknown content-type'} @ ${src}`);
-      }
+      if (!looksJs) throw new Error(`Not JS: ${ct || 'unknown content-type'} @ ${src}`);
 
-      // 2) Script 태그 주입
       await new Promise((resolve, reject) => {
         const s = document.createElement('script');
         s.src = src;
@@ -55,12 +53,7 @@
     })();
 
     loadedScripts.set(src, p);
-    try {
-      await p;
-    } catch (e) {
-      loadedScripts.delete(src); // 실패 시 캐시 제거 (다음 후보 시도)
-      throw e;
-    }
+    try { await p; } catch (e) { loadedScripts.delete(src); throw e; }
     return p;
   }
 
@@ -121,7 +114,7 @@
       if (!href) return;
       if (/^https?:\/\//i.test(href) || href.startsWith('mailto:') || href.startsWith('#') || href.startsWith('/')) return;
       a.setAttribute('data-db-internal', href.replace(/^\.?\//,''));
-      a.setAttribute('href', '#'); // CSP 친화적으로 변경
+      a.setAttribute('href', '#');
     });
     return doc;
   }
@@ -152,7 +145,6 @@
                    || fixed.querySelector('h1')?.textContent
                    || '데이터베이스';
 
-    // 본문 h1 중복 제거
     const bodyNode = fixed.body ? fixed.body.cloneNode(true) : null;
     if (bodyNode) {
       const firstH1 = bodyNode.querySelector('h1');
@@ -160,7 +152,6 @@
     }
     const bodyHTML = bodyNode ? bodyNode.innerHTML : (fixed.body ? fixed.body.innerHTML : html);
 
-    // ⛔ 중첩 .panel 제거: #content가 이미 panel이므로 여기서 panel로 감싸지 않음
     el.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
         <h1 style="margin:0;font-size:20px;">${metaTitle}</h1>
@@ -180,9 +171,6 @@
   // ------------------------------------
 
   // ---------- 라우트 생성(외부 routes.js에서 주입) ----------
-  // ⚠️ index.html에서 반드시 routes.js를 app.js보다 먼저 로드할 것.
-  // <script defer src="/js/routes.js"></script>
-  // <script defer src="/js/app.js"></script>
   const routes = window.buildRoutes({
     loadHTML,
     loadScriptOnce,
@@ -190,7 +178,6 @@
     iconImg,
     catCard
   });
-  // -----------------------------
 
   // --- 상단 내비게이션 활성화 표시 ---
   function setActive(path) {
@@ -212,11 +199,13 @@
     document.title = route.title;
     setActive(path);
 
-    // route-scoped CSS: calculator만 calculator.css 적용
-    if (path === '/calculator') {
+    // ✅ 계산기 허브 + 상세 모두 calculator.css 적용
+    if (path === '/calculator' || path.startsWith('/calc-')) {
       await ensureCSS('calc-css', CALC_CSS_HREF);
+      // (선택) 흰 배경 강제: el.classList.add('calc-surface');
     } else {
       removeCSS('calc-css');
+      // (선택) el.classList.remove('calc-surface');
     }
 
     const rest = location.hash.replace('#' + path, '').replace(/^#?\/?/, '');
@@ -248,7 +237,9 @@
     navigate(path);
   });
 
-  window.addEventListener('DOMContentLoaded', () => {
+  // ✅ 공통 카드/썸네일 CSS는 초기 1회 로드
+  window.addEventListener('DOMContentLoaded', async () => {
+    await ensureCSS('components-css', COMPONENTS_CSS_HREF);
     const [path] = parseHash();
     navigate(path);
   });

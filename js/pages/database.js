@@ -162,6 +162,7 @@
         try { window.scrollTo({ top: 0, behavior: 'instant' }); } catch (_) { window.scrollTo(0, 0); }
         return;
       } catch (_) {}
+      
     }
 
     main.innerHTML = `<div class="container"><div class="panel"><p>해당 폴더를 열 수 없습니다: ${esc(folder)}</p></div></div>`;

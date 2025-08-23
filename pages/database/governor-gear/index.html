@@ -17,51 +17,81 @@
     .table-wrap table{
       border-collapse:collapse;
       font-size:13px;
-      width:auto;            /* 100% 대신 내용 기준 */
-      min-width: 680px;      /* 너무 좁아지지 않게 */
-      margin: 0 auto;        /* 중앙 정렬 */
+      width:auto;
+      min-width: 640px;
+      margin: 0 auto;
       table-layout:auto;
     }
     .table-wrap caption{
       caption-side: top;
       text-align: left;
       padding: 6px 0 8px;
-      color: #8a93a4;        /* 사이트 muted 톤과 유사 */
+      color: #8a93a4;
       font-size: 12px;
     }
     .table-wrap th, .table-wrap td{
       padding:6px 10px;
       border-bottom:1px solid var(--border, #1e2430);
-      white-space:nowrap;    /* 숫자 줄바꿈 방지 */
-      text-align:right;      /* 숫자 기본 우측 정렬 */
+      white-space:nowrap;
+      text-align:right;
+      line-height:20px;
+      height:28px;
+      vertical-align:middle;
     }
     .table-wrap th:first-child,
-    .table-wrap td:first-child{
-      text-align:left;       /* 첫 컬럼(등급)은 좌측 정렬 */
-    }
+    .table-wrap td:first-child{ text-align:left; }
+
     .table-wrap thead th{
       position:sticky; top:0;
-      background:#0f1318;    /* 다크 톤 헤더 */
+      background:#0f1318;
       color:#8a93a4;
       z-index:1;
     }
-    /* 컬럼 폭 (필요 시 조정) */
-    .table--compact th:nth-child(1), .table--compact td:nth-child(1){ width:100px } /* 등급 */
-    .table--compact th:nth-child(2), .table--compact td:nth-child(2){ width:60px }  /* 성급 */
-    .table--compact th:nth-child(3), .table--compact td:nth-child(3){ width:90px }  /* 비단 */
-    .table--compact th:nth-child(4), .table--compact td:nth-child(4){ width:90px }  /* 금사 */
-    .table--compact th:nth-child(5), .table--compact td:nth-child(5){ width:110px } /* 설계 스케치 */
-    .table--compact th:nth-child(6), .table--compact td:nth-child(6){ width:110px } /* 전투력 */
+
+    /* 컬럼 폭 (성급 제거로 5컬럼) */
+    .table--compact th:nth-child(1), .table--compact td:nth-child(1){ width:120px } /* 등급(+별) */
+    .table--compact th:nth-child(2), .table--compact td:nth-child(2){ width:90px }  /* 비단 */
+    .table--compact th:nth-child(3), .table--compact td:nth-child(3){ width:90px }  /* 금사 */
+    .table--compact th:nth-child(4), .table--compact td:nth-child(4){ width:110px } /* 설계 스케치 */
+    .table--compact th:nth-child(5), .table--compact td:nth-child(5){ width:110px } /* 장비평점 */
+
+    /* ===== 등급별 배경색 ===== */
+    tr.grade-common  td { background-color: #eef8ee; }   /* 고급 */
+    tr.grade-rare    td { background-color: #eef4fc; }   /* 레어 */
+    tr.grade-epic    td { background-color: #f6eefe; }   /* 에픽 */
+    tr.grade-legend  td { background-color: #fff5e8; }   /* 레전드 */
+    tr.grade-mythic-base td { background-color: #ffecec; }  /* 신화 */
+    tr.grade-mythic-t1   td { background-color: #ffd6d6; }  /* 신화 T1 */
+    tr.grade-mythic-t2   td { background-color: #ffbfbf; }  /* 신화 T2 */
+    tr.grade-mythic-t3   td { background-color: #ffa8a8; }  /* 신화 T3 */
+    tr.grade-mythic-t4   td { background-color: #ff9191; }  /* 신화 T4 */
+
+    /* ===== 성급 제거 → 등급 옆 별(검정) =====
+       사용: <td class="grade s1">레어</td>  (s1~s3)
+       s0 또는 미지정 = 별 없음
+    */
+    td.grade{
+      font-weight:bold;
+      text-align:left;
+      position:relative;
+    }
+    td.grade.s1::after{ content:" ★";    color:#111; }
+    td.grade.s2::after{ content:" ★★";   color:#111; }
+    td.grade.s3::after{ content:" ★★★";  color:#111; }
+    /* 필요 시 확장
+    td.grade.s4::after{ content:" ★★★★"; color:#111; }
+    td.grade.s5::after{ content:" ★★★★★"; color:#111; }
+    */
   </style>
 </head>
 <body>
   <main>
     <!-- 대표이미지 -->
     <figure>
-      <img src="/download/database/Governor Gear/governor-gear-icon-296x300.webp"
+      <img src="/img/database/Governor Gear/governor-gear.webp"
            alt="영주 장비 대표 이미지"
            width="296" height="300"
-           loading="lazy" decoding="async">      
+           loading="lazy" decoding="async">
     </figure>
 
     <h1>영주 장비</h1>
@@ -80,66 +110,95 @@
 
     <!-- 표 -->
     <section aria-labelledby="gear-table">
-      <h2 id="gear-table">등급별 요구 재료 및 전투력</h2>
+      <h2 id="gear-table">등급별 요구 재료 및 장비평점</h2>
       <div class="table-wrap" role="region" aria-labelledby="gear-table">
         <table class="table--compact" aria-describedby="gear-table-caption">
-          <caption id="gear-table-caption">영주 장비 등급·성급에 따른 재료 소모량 및 전투력</caption>
+          
           <thead>
             <tr>
               <th scope="col">등급</th>
-              <th scope="col">성급</th>
               <th scope="col">비단</th>
               <th scope="col">금사</th>
               <th scope="col">설계 스케치</th>
-              <th scope="col">전투력</th>
+              <th scope="col">장비평점</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>일반</td><td>0</td><td>1,500</td><td>15</td><td>–</td><td>224,400</td></tr>
-            <tr><td>일반</td><td>1</td><td>3,800</td><td>40</td><td>–</td><td>306,000</td></tr>
+            <!-- 고급 -->
+            <tr class="grade-common"><td class="grade">고급</td><td>1,500</td><td>15</td><td>–</td><td>1,125</td></tr>
+            <tr class="grade-common"><td class="grade s1">고급</td><td>3,800</td><td>40</td><td>–</td><td>1,875</td></tr>
 
-            <tr><td>레어</td><td>0</td><td>7,000</td><td>70</td><td>–</td><td>408,000</td></tr>
-            <tr><td>레어</td><td>1</td><td>9,700</td><td>95</td><td>–</td><td>510,000</td></tr>
-            <tr><td>레어</td><td>2</td><td>1,000</td><td>10</td><td>45</td><td>612,000</td></tr>
-            <tr><td>레어</td><td>3</td><td>1,000</td><td>10</td><td>50</td><td>714,000</td></tr>
+            <!-- 레어 -->
+            <tr class="grade-rare"><td class="grade">레어</td><td>7,000</td><td>70</td><td>–</td><td>3,000</td></tr>
+            <tr class="grade-rare"><td class="grade s1">레어</td><td>9,700</td><td>95</td><td>–</td><td>4,540</td></tr>
+            <tr class="grade-rare"><td class="grade s2">레어</td><td>1,000</td><td>10</td><td>45</td><td>5,100</td></tr>
+            <tr class="grade-rare"><td class="grade s3">레어</td><td>1,000</td><td>10</td><td>50</td><td>5,440</td></tr>
 
-            <tr><td>에픽</td><td>0</td><td>1,500</td><td>15</td><td>60</td><td>816,000</td></tr>
-            <tr><td>에픽</td><td>1</td><td>1,500</td><td>15</td><td>70</td><td>885,360</td></tr>
-            <tr><td>에픽</td><td>2</td><td>6,500</td><td>65</td><td>40</td><td>954,720</td></tr>
-            <tr><td>에픽</td><td>3</td><td>8,000</td><td>80</td><td>50</td><td>1,024,080</td></tr>
+            <!-- 에픽 -->
+            <tr class="grade-epic"><td class="grade">에픽</td><td>1,500</td><td>15</td><td>60</td><td>3,230</td></tr>
+            <tr class="grade-epic"><td class="grade s1">에픽</td><td>1,500</td><td>15</td><td>70</td><td>3,380</td></tr>
+            <tr class="grade-epic"><td class="grade s2">에픽</td><td>6,500</td><td>65</td><td>40</td><td>4,125</td></tr>
+            <tr class="grade-epic"><td class="grade s3">에픽</td><td>8,000</td><td>80</td><td>50</td><td>4,740</td></tr>
 
-            <tr><td>에픽 T1</td><td>0</td><td>10,000</td><td>95</td><td>60</td><td>1,093,440</td></tr>
-            <tr><td>에픽 T1</td><td>1</td><td>11,000</td><td>110</td><td>70</td><td>1,162,800</td></tr>
-            <tr><td>에픽 T1</td><td>2</td><td>13,000</td><td>130</td><td>85</td><td>1,232,160</td></tr>
-            <tr><td>에픽 T1</td><td>3</td><td>15,000</td><td>160</td><td>100</td><td>1,301,520</td></tr>
+            <!-- 에픽 T1 -->
+            <tr class="grade-epic"><td class="grade">에픽 T1</td><td>10,000</td><td>95</td><td>60</td><td>5,320</td></tr>
+            <tr class="grade-epic"><td class="grade s1">에픽 T1</td><td>11,000</td><td>110</td><td>70</td><td>5,775</td></tr>
+            <tr class="grade-epic"><td class="grade s2">에픽 T1</td><td>13,000</td><td>130</td><td>85</td><td>6,485</td></tr>
+            <tr class="grade-epic"><td class="grade s3">에픽 T1</td><td>15,000</td><td>160</td><td>100</td><td>7,260</td></tr>
 
-            <tr><td>레전드</td><td>0</td><td>22,000</td><td>220</td><td>40</td><td>1,362,720</td></tr>
-            <tr><td>레전드</td><td>1</td><td>23,000</td><td>230</td><td>40</td><td>1,423,920</td></tr>
-            <tr><td>레전드</td><td>2</td><td>25,000</td><td>250</td><td>45</td><td>1,485,120</td></tr>
-            <tr><td>레전드</td><td>3</td><td>26,000</td><td>260</td><td>45</td><td>1,546,320</td></tr>
+            <!-- 레전드 -->
+            <tr class="grade-legend"><td class="grade">레전드</td><td>22,000</td><td>220</td><td>40</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s1">레전드</td><td>23,000</td><td>230</td><td>40</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s2">레전드</td><td>25,000</td><td>250</td><td>45</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s3">레전드</td><td>26,000</td><td>260</td><td>45</td><td>6,250</td></tr>
 
-            <tr><td>레전드 T1</td><td>0</td><td>28,000</td><td>280</td><td>45</td><td>1,607,520</td></tr>
-            <tr><td>레전드 T1</td><td>1</td><td>30,000</td><td>300</td><td>55</td><td>1,668,720</td></tr>
-            <tr><td>레전드 T1</td><td>2</td><td>32,000</td><td>320</td><td>55</td><td>1,729,920</td></tr>
-            <tr><td>레전드 T1</td><td>3</td><td>35,000</td><td>340</td><td>55</td><td>1,791,120</td></tr>
+            <!-- 레전드 T1 -->
+            <tr class="grade-legend"><td class="grade">레전드 T1</td><td>28,000</td><td>280</td><td>45</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s1">레전드 T1</td><td>30,000</td><td>300</td><td>55</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s2">레전드 T1</td><td>32,000</td><td>320</td><td>55</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s3">레전드 T1</td><td>35,000</td><td>340</td><td>55</td><td>6,250</td></tr>
 
-            <tr><td>레전드 T2</td><td>0</td><td>38,000</td><td>390</td><td>55</td><td>1,852,320</td></tr>
-            <tr><td>레전드 T2</td><td>1</td><td>43,000</td><td>430</td><td>75</td><td>1,913,520</td></tr>
-            <tr><td>레전드 T2</td><td>2</td><td>45,000</td><td>460</td><td>80</td><td>1,974,720</td></tr>
-            <tr><td>레전드 T2</td><td>3</td><td>48,000</td><td>500</td><td>85</td><td>2,040,000</td></tr>
+            <!-- 레전드 T2 -->
+            <tr class="grade-legend"><td class="grade">레전드 T2</td><td>38,000</td><td>360</td><td>55</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s1">레전드 T2</td><td>43,000</td><td>430</td><td>75</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s2">레전드 T2</td><td>45,000</td><td>460</td><td>80</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s3">레전드 T2</td><td>48,000</td><td>500</td><td>85</td><td>6,250</td></tr>
 
-            <tr><td>레전드 T3</td><td>0</td><td>60,000</td><td>600</td><td>120</td><td>2,097,120</td></tr>
-            <tr><td>레전드 T3</td><td>1</td><td>70,000</td><td>700</td><td>140</td><td>2,158,320</td></tr>
-            <tr><td>레전드 T3</td><td>2</td><td>80,000</td><td>800</td><td>160</td><td>2,219,520</td></tr>
-            <tr><td>레전드 T3</td><td>3</td><td>90,000</td><td>900</td><td>180</td><td>2,280,000</td></tr>
+            <!-- 레전드 T3 -->
+            <tr class="grade-legend"><td class="grade">레전드 T3</td><td>60,000</td><td>600</td><td>120</td><td>9,000</td></tr>
+            <tr class="grade-legend"><td class="grade s1">레전드 T3</td><td>70,000</td><td>700</td><td>140</td><td>9,000</td></tr>
+            <tr class="grade-legend"><td class="grade s2">레전드 T3</td><td>80,000</td><td>800</td><td>160</td><td>9,000</td></tr>
+            <tr class="grade-legend"><td class="grade s3">레전드 T3</td><td>90,000</td><td>900</td><td>180</td><td>9,000</td></tr>
 
-            <tr><td>신화</td><td>0</td><td>108,000</td><td>1,080</td><td>220</td><td>2,340,000</td></tr>
-            <tr><td>신화</td><td>1</td><td>114,000</td><td>1,140</td><td>230</td><td>2,400,000</td></tr>
-            <tr><td>신화</td><td>2</td><td>121,000</td><td>1,210</td><td>240</td><td>2,460,000</td></tr>
-            <tr><td>신화</td><td>3</td><td>128,000</td><td>1,280</td><td>250</td><td>2,520,000</td></tr>
+            <!-- 신화 -->
+            <tr class="grade-mythic-base"><td class="grade">신화</td><td>108,000</td><td>1,080</td><td>220</td><td>12,000</td></tr>
+            <tr class="grade-mythic-base"><td class="grade s1">신화</td><td>114,000</td><td>1,140</td><td>230</td><td>12,000</td></tr>
+            <tr class="grade-mythic-base"><td class="grade s2">신화</td><td>121,000</td><td>1,210</td><td>240</td><td>12,000</td></tr>
+            <tr class="grade-mythic-base"><td class="grade s3">신화</td><td>128,000</td><td>1,280</td><td>250</td><td>12,000</td></tr>
 
-            <tr><td>신화 T1</td><td>0</td><td>154,000</td><td>1,540</td><td>300</td><td>2,580,000</td></tr>
-            <tr><td>신화 T1</td><td>1</td><td>163,000</td><td>1,630</td><td>320</td><td>2,640,000</td></tr>
+            <!-- 신화 T1 -->
+            <tr class="grade-mythic-t1"><td class="grade">신화 T1</td><td>154,000</td><td>1,540</td><td>300</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t1"><td class="grade s1">신화 T1</td><td>163,000</td><td>1,630</td><td>320</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t1"><td class="grade s2">신화 T1</td><td>173,000</td><td>1,730</td><td>340</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t1"><td class="grade s3">신화 T1</td><td>183,000</td><td>1,830</td><td>360</td><td>12,000</td></tr>
+
+            <!-- 신화 T2 -->
+            <tr class="grade-mythic-t2"><td class="grade">신화 T2</td><td>220,000</td><td>2,200</td><td>430</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t2"><td class="grade s1">신화 T2</td><td>233,000</td><td>2,330</td><td>460</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t2"><td class="grade s2">신화 T2</td><td>247,000</td><td>2,470</td><td>490</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t2"><td class="grade s3">신화 T2</td><td>264,000</td><td>2,640</td><td>520</td><td>12,000</td></tr>
+
+            <!-- 신화 T3 -->
+            <tr class="grade-mythic-t3"><td class="grade">신화 T3</td><td>306,000</td><td>3,060</td><td>610</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t3"><td class="grade s1">신화 T3</td><td>323,000</td><td>3,230</td><td>650</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t3"><td class="grade s2">신화 T3</td><td>340,000</td><td>3,400</td><td>690</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t3"><td class="grade s3">신화 T3</td><td>357,000</td><td>3,570</td><td>730</td><td>12,000</td></tr>
+
+            <!-- 신화 T4 -->
+            <tr class="grade-mythic-t4"><td class="grade">신화 T4</td><td>412,000</td><td>4,120</td><td>840</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t4"><td class="grade s1">신화 T4</td><td>433,000</td><td>4,330</td><td>890</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t4"><td class="grade s2">신화 T4</td><td>454,000</td><td>4,540</td><td>940</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t4"><td class="grade s3">신화 T4</td><td>475,000</td><td>4,750</td><td>990</td><td>12,000</td></tr>
           </tbody>
         </table>
       </div>
