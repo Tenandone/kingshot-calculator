@@ -345,3 +345,32 @@ a:hover{text-decoration:underline}
 .hero-grid .card__body {
   padding: 10px 12px;
 }
+/* === Mobile-first base === */
+:root{
+  --container-max: 960px;
+  --gap: 12px;
+  --radius: 14px;
+  --border: #e8edf5;
+  --bg-card: #fff;        /* 카드 라이트 톤 유지 */
+  --text: #0b1324;
+}
+
+/* 레이아웃 */
+.container{ max-width:var(--container-max); margin:0 auto; padding:0 12px; }
+.panel{ padding:12px; }
+
+/* 미디어는 부모폭에 맞춰 축소 */
+img, video, canvas{ max-width:100%; height:auto; display:block; }
+
+/* 테이블은 넘치면 가로 스크롤 */
+.table-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.table-wrap table{ min-width:560px; width:100%; border-collapse:collapse; }
+
+/* 터치 타깃(버튼/링크) */
+button, .btn, [role="button"]{ min-height:44px; border-radius:10px; }
+
+/* 카드 기본 */
+.card{ background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+
+/* 네비 토글 열렸을 때 스크롤 잠금(선택) */
+.nav.open ~ *{ overscroll-behavior:none; }
