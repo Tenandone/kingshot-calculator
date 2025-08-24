@@ -1,6 +1,48 @@
-// js/pages/database.js — DB 카드 SPA (목록 + 상세, '목록으로' 버튼, 중복 타이틀 방지)
+// js/pages/database.js — DB 카드 SPA (목록 + 상세, '목록으로' 버튼, 중복 타이틀 방지 + 성능개선)
 (function () {
   'use strict';
+
+  // =========================
+  // 0) 네트워크 최적화 헬퍼
+  //    - 같은 URL은 한 번만 fetch (메모이제이션)
+  //    - 정적 사이트 특성상 cache:'force-cache'로 브라우저 캐시 적극 활용
+  //    - 라우트 이동 시에도 캐시가 유지되도록 전역 Map 사용
+  // =========================
+  const MEMO = (window.__KSD_MEMO__ = window.__KSD_MEMO__ || new Map());
+
+  const getText = (url) => {
+    if (MEMO.has(url)) return MEMO.get(url);
+    const p = fetch(url, { cache: 'force-cache' }).then((r) => {
+      if (!r.ok) throw new Error(`HTTP ${r.status} @ ${url}`);
+      return r.text();
+    });
+    MEMO.set(url, p);
+    return p;
+  };
+
+  // 동시 요청 제한 풀 (한 번에 limit개만 네트워크 날림 → 초기 로드 체감 개선)
+  async function withPool(items, worker, limit = 6) {
+    const q = items.map((v, i) => ({ v, i }));
+    const running = [];
+    const out = new Array(items.length);
+
+    const runOne = () => {
+      if (!q.length) return;
+      const { v, i } = q.shift();
+      const job = worker(v, i)
+        .then((res) => (out[i] = res))
+        .catch(() => (out[i] = null))
+        .finally(() => {
+          running.splice(running.indexOf(job), 1);
+          runOne();
+        });
+      running.push(job);
+    };
+
+    while (running.length < limit && q.length) runOne();
+    while (running.length) await Promise.race(running);
+    return out;
+  }
 
   // ===== 기본 경로/헬퍼 =====
   const DB_BASE = '/pages/database/';
@@ -11,9 +53,11 @@
   function resolveAsset(folder, src) {
     if (!src) return '';
     const s = String(src);
-    if (/^https?:\/\//i.test(s)) return s;
-    if (s.startsWith('/')) return s;
-    return buildUrl(folder, s.replace(/^\.?\//, ''));
+    // 절대 URL/data URL/루트 절대경로는 그대로(공백만 인코딩)
+    if (/^(https?:|data:)/i.test(s)) return s.replace(/\s/g, '%20');
+    if (s.startsWith('/')) return s.replace(/\s/g, '%20');
+    // 상대경로 → 해당 폴더 기준으로 보정
+    return buildUrl(folder, s.replace(/^\.?\//, '')).replace(/\s/g, '%20');
   }
 
   // ===== 섹션 목록 =====
@@ -32,9 +76,8 @@
   const CANDIDATES = ['index.html', 'main.html', 'guide.html', 'list.html', 'README.html'];
 
   // ===== 유틸 =====
-  const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-  }[m]));
+  const esc = (s) =>
+    String(s ?? '').replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 
   const pickText = (doc, sels) => {
     for (const sel of sels) {
@@ -54,13 +97,24 @@
   };
 
   function extractMeta(doc, fallbackUrl) {
-    const title = (doc.querySelector('meta[name="db-title"]')?.content)
-      || pickText(doc, ['.page h1', '.building-page h1', 'h1', 'title']);
-    const summary = (doc.querySelector('meta[name="description"]')?.content)
-      || pickText(doc, ['.page p', '.building-page p', 'p']);
-    const image = (doc.querySelector('meta[property="og:image"]')?.content)
-      || pickAttr(doc, ['.page img', '.building-page img', 'img'], 'src');
-    return { title: title || '(제목 없음)', summary: summary || '', image: image || '', url: fallbackUrl };
+    const title =
+      doc.querySelector('meta[name="db-title"]')?.content ||
+      pickText(doc, ['.page h1', '.building-page h1', 'h1', 'title']);
+
+    const summary =
+      doc.querySelector('meta[name="description"]')?.content ||
+      pickText(doc, ['.page p', '.building-page p', 'p']);
+
+    const image =
+      doc.querySelector('meta[property="og:image"]')?.content ||
+      pickAttr(doc, ['.page img', '.building-page img', 'img'], 'src');
+
+    return {
+      title: title || '(제목 없음)',
+      summary: summary || '',
+      image: image || '',
+      url: fallbackUrl
+    };
   }
 
   // ===== 카드 렌더러 =====
@@ -81,7 +135,7 @@
     `;
   }
 
-  // ===== 리스트 =====
+  // ===== 리스트 영역 =====
   function getGrid() {
     const grid = document.getElementById('db-grid');
     if (grid) grid.classList.add('grid', 'category-grid');
@@ -102,18 +156,14 @@
     for (const file of CANDIDATES) {
       const url = buildUrl(folder, file);
       try {
-        const res = await fetch(url, { cache: 'no-store' });
-        if (!res.ok) continue;
-
-        const html = await res.text();
+        const html = await getText(url); // 메모이제이션 + 캐시
         const doc  = parser.parseFromString(html, 'text/html');
 
         const meta = extractMeta(doc, url);
         const heroResolved = meta.image ? resolveAsset(folder, meta.image) : '';
 
         // 본문 루트
-        const bodyNode =
-          doc.querySelector('.page, .building-page, main, article') || doc.body;
+        const bodyNode = doc.querySelector('.page, .building-page, main, article') || doc.body;
 
         // 본문에 이미 타이틀이 있는가?
         const hasTitleInBody = !!bodyNode.querySelector('h1');
@@ -136,7 +186,8 @@
         `;
 
         // 공통 헤더(타이틀/요약/히어로): 본문에 h1이 없을 때만 주입
-        const headerHTML = !hasTitleInBody ? `
+        const headerHTML = !hasTitleInBody
+          ? `
           <header class="db-detail__header">
             <h1 class="db-detail__title">${esc(meta.title)}</h1>
             ${meta.summary ? `<p class="db-detail__summary">${esc(meta.summary)}</p>` : ''}
@@ -146,7 +197,8 @@
               </div>` : ''}
             <hr class="db-detail__divider">
           </header>
-        ` : '';
+        `
+          : '';
 
         const wrapped = `
           <div class="container">
@@ -159,10 +211,15 @@
         `;
         main.innerHTML = wrapped;
 
-        try { window.scrollTo({ top: 0, behavior: 'instant' }); } catch (_) { window.scrollTo(0, 0); }
+        try {
+          window.scrollTo({ top: 0, behavior: 'auto' });
+        } catch (_) {
+          window.scrollTo(0, 0);
+        }
         return;
-      } catch (_) {}
-      
+      } catch (_) {
+        // 다음 후보 파일로 계속
+      }
     }
 
     main.innerHTML = `<div class="container"><div class="panel"><p>해당 폴더를 열 수 없습니다: ${esc(folder)}</p></div></div>`;
@@ -170,42 +227,46 @@
   window.openDbFolder = openDbFolder;
 
   // ===== 데이터 로딩/초기 렌더 =====
-  let _once = false, _cache = [];
+  let _once = false,
+    _cache = [];
+
   async function loadListOnceAndRender() {
-    if (_once) { render(_cache); return; }
+    if (_once) {
+      render(_cache);
+      return;
+    }
     _once = true;
 
     const parser = new DOMParser();
-    const results = [];
 
-    for (const it of ITEMS) {
-      let loaded = false;
+    // 각 항목별로 "후보 파일들"을 순차 시도하는 워커
+    const worker = async (it) => {
       for (const file of CANDIDATES) {
         const url = buildUrl(it.folder, file);
         try {
-          const res = await fetch(url, { cache: 'no-store' });
-          if (!res.ok) continue;
-          const text = await res.text();
+          const text = await getText(url); // 메모이제이션 + 캐시
           const doc = parser.parseFromString(text, 'text/html');
           const meta = extractMeta(doc, url);
           const fixedImage = meta.image ? resolveAsset(it.folder, meta.image) : '';
-          results.push({ ...it, ...meta, image: fixedImage });
-          loaded = true;
-          break;
-        } catch (_) {}
+          return { ...it, ...meta, image: fixedImage };
+        } catch (_) {
+          // 다음 후보 파일 시도
+        }
       }
-      if (!loaded) {
-        results.push({
-          ...it,
-          title: `(로드 실패) ${it.category}`,
-          summary: '파일을 찾을 수 없습니다.',
-          image: '',
-          url: buildUrl(it.folder, 'index.html')
-        });
-      }
-    }
+      // 모든 후보 실패 시
+      return {
+        ...it,
+        title: `(로드 실패) ${it.category}`,
+        summary: '파일을 찾을 수 없습니다.',
+        image: '',
+        url: buildUrl(it.folder, 'index.html')
+      };
+    };
 
-    _cache = results;
+    // 동시 6개 제한으로 병렬 수집 → 네트워크 폭주 방지 + 체감 개선
+    const results = await withPool(ITEMS, worker, 6);
+
+    _cache = results.filter(Boolean);
     render(_cache);
   }
 
@@ -213,7 +274,7 @@
   async function initDatabase() {
     const m = (location.hash || '').match(/^#\/db\/([^\/?#]+)/);
     if (m) {
-      await loadListOnceAndRender();   // 목록 메타 캐시
+      await loadListOnceAndRender(); // 목록 메타 캐시
       const folder = decodeURIComponent(m[1]);
       return openDbFolder(folder);
     }
@@ -234,5 +295,4 @@
     }
   }
   window.addEventListener('hashchange', handleHashRoute);
-
 })();
