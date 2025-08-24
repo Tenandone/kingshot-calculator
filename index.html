@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KingshotData.kr</title>
 
+  <!-- Perf: preconnect -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <meta name="theme-color" content="#ffffff" />
+
   <!-- Google AdSense (Auto Ads) -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189957764761115" crossorigin="anonymous"></script>
 
@@ -17,23 +22,20 @@
     gtag('config', 'G-TMGDGSEWW6');
   </script>
 
-  <!-- 프로젝트 루트 기준 CSS -->
-  <link rel="stylesheet" href="css/common.css" />
+  <!-- CSS (루트 기준 + 캐시버스터) -->
+  <link rel="stylesheet" href="/css/common.css?v=20250824k" />
+  <link rel="stylesheet" href="/css/database.css?v=20250824k">
+  <link rel="stylesheet" href="/css/home.css?v=20250824c">
+  <link rel="stylesheet" href="/css/mobile-patch.css?v=20250824k">
 
-  <!-- 반드시 routes.js → app.js 순서 (캐시무효화 쿼리 권장) -->
-  <script defer src="js/routes.js?v=20250820a"></script>
-  <script defer src="js/app.js?v=20250820a"></script>
+  <!-- JS (routes → app 순서, 캐시버스터) -->
+  <script defer src="/js/routes.js?v=20250824k"></script>
+  <script defer src="/js/app.js?v=20250824n"></script>
 
+  <!-- (선택) 푸터 기본 스타일 보강 -->
   <style>
-    .site-footer {
-      text-align: center;
-      font-size: 0.9em;
-      color: #666;
-      line-height: 1.6;
-    }
+    .site-footer { text-align:center; font-size:.9em; color:#666; line-height:1.6; }
   </style>
-  <link rel="stylesheet" href="/css/database.css">
-
 </head>
 <body class="theme-default">
   <header class="site-header" role="banner">
@@ -66,7 +68,8 @@
     <div class="container">
       All game images and data are copyrighted by Century Games.<br />
       This site is an unofficial fan site.<br />
-      © 2025 KingshotData Korea
+      © 2025 KingshotData Korea · <a href="#/privacy">개인정보처리방침 / Privacy</a>
+
     </div>
   </footer>
 </body>

@@ -1,9 +1,18 @@
 // js/app.js — SPA Router for KingshotData.kr
 // final: route-scoped CSS, H1 dedupe, no nested panel, race-safe & preflighted script loader
+//        + AutoAds ping + asset versioning (+ DB img/srcset 버전 보강)
 (function () {
   'use strict';
 
   const $ = (sel) => document.querySelector(sel);
+
+  // ===== Asset version (캐시 무효화) =====
+  const ASSET_VER = '20250824n';
+  function v(url){
+    if (!url) return url;
+    if (/^(data:|blob:|#)/i.test(url)) return url; // data:/blob:/# 은 제외
+    return url + (url.includes('?') ? '&' : '?') + 'v=' + ASSET_VER;
+  }
 
   // ✅ CSS 경로
   const CALC_CSS_HREF = '/css/calculator.css';
@@ -83,8 +92,9 @@
     return null;
   }
 
+  // ---- 이미지 아이콘: 자동 버전 파라미터 부착 ----
   const iconImg = (alt, src) =>
-    `<img src="${src}" alt="${alt}" class="cat-icon__img" loading="lazy" decoding="async">`;
+    `<img src="${v(src)}" alt="${alt}" class="cat-icon__img" loading="lazy" decoding="async">`;
 
   function catCard(href, iconHTML, title, subtitle) {
     return [
@@ -100,19 +110,46 @@
 
   // ---------- DB 상세 렌더러 ----------
   function rewriteRelativeUrls(doc, base) {
-    const fix = (el, attr) => {
-      const v = el.getAttribute(attr);
-      if (!v) return;
-      if (/^https?:\/\//i.test(v) || v.startsWith('data:') || v.startsWith('#') || v.startsWith('/')) return;
-      el.setAttribute(attr, base + v.replace(/^\.?\//,''));
-    };
-    doc.querySelectorAll('img[src]').forEach(el => fix(el, 'src'));
-    doc.querySelectorAll('link[href]').forEach(el => fix(el, 'href'));
+    const isAbs = (u) => /^https?:\/\//i.test(u) || u.startsWith('data:') || u.startsWith('#') || u.startsWith('/');
+    const joinBase = (u) => base + u.replace(/^\.?\//,'');
+
+    const fixUrl = (u) => isAbs(u) ? u : joinBase(u);
+
+    // <img src>: 상대 → 절대화 + 버전
+    doc.querySelectorAll('img[src]').forEach(el => {
+      const cur = el.getAttribute('src');
+      if (!cur) return;
+      el.setAttribute('src', v(fixUrl(cur)));
+    });
+
+    // <img/srcset> & <source/srcset>: 각 URL 절대화 + 버전
+    doc.querySelectorAll('img[srcset], source[srcset]').forEach(el => {
+      const cur = el.getAttribute('srcset');
+      if (!cur) return;
+      const out = cur.split(',').map(part => {
+        const [u, d] = part.trim().split(/\s+/, 2);
+        if (!u) return part;
+        const fixed = v(fixUrl(u));
+        return d ? `${fixed} ${d}` : fixed;
+      }).join(', ');
+      el.setAttribute('srcset', out);
+    });
+
+    // <link> href: 상대경로만 절대화
+    doc.querySelectorAll('link[href]').forEach(el => {
+      const cur = el.getAttribute('href');
+      if (!cur) return;
+      if (!isAbs(cur)) el.setAttribute('href', joinBase(cur));
+    });
+
+    // 외부 스크립트 제거(보안/충돌 방지)
     doc.querySelectorAll('script[src]').forEach(el => el.remove());
+
+    // 내부 링크는 SPA 경로로 바꾸기
     doc.querySelectorAll('a[href]').forEach(a => {
       const href = a.getAttribute('href');
       if (!href) return;
-      if (/^https?:\/\//i.test(href) || href.startsWith('mailto:') || href.startsWith('#') || href.startsWith('/')) return;
+      if (isAbs(href) || href.startsWith('mailto:')) return;
       a.setAttribute('data-db-internal', href.replace(/^\.?\//,''));
       a.setAttribute('href', '#');
     });
@@ -160,6 +197,23 @@
       <div class="db-detail">${bodyHTML}</div>
     `;
 
+    // ✅ 보강: 렌더된 노드에서도 img/srcset에 버전 재확인(동적/엣지 케이스 커버)
+    el.querySelectorAll('.db-detail img[src]').forEach(img => {
+      img.setAttribute('src', v(img.getAttribute('src')));
+    });
+    el.querySelectorAll('.db-detail img[srcset], .db-detail source[srcset]').forEach(node => {
+      const cur = node.getAttribute('srcset');
+      if (!cur) return;
+      const out = cur.split(',').map(part => {
+        const [u, d] = part.trim().split(/\s+/, 2);
+        if (!u) return part;
+        const hasQuery = /\?/.test(u);
+        const fixed = v(u); // 여기서는 이미 절대/상대 상관없이 v()만 적용(상대도 동작)
+        return d ? `${fixed} ${d}` : fixed;
+      }).join(', ');
+      node.setAttribute('srcset', out);
+    });
+
     el.querySelectorAll('[data-db-internal]').forEach(a => {
       a.addEventListener('click', (e) => {
         e.preventDefault();
@@ -189,6 +243,17 @@
     });
   }
 
+  // ---- Auto Ads: SPA 라우팅 시 재호출(디바운스) ----
+  const pingAutoAds = (() => {
+    let t;
+    return () => {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+      }, 150);
+    };
+  })();
+
   let navVer = 0;
 
   async function navigate(path) {
@@ -199,13 +264,11 @@
     document.title = route.title;
     setActive(path);
 
-    // ✅ 계산기 허브 + 상세 모두 calculator.css 적용
+    // ✅ 계산기 허브 + 상세 모두 calculator.css 적용 (버전 부착)
     if (path === '/calculator' || path.startsWith('/calc-')) {
-      await ensureCSS('calc-css', CALC_CSS_HREF);
-      // (선택) 흰 배경 강제: el.classList.add('calc-surface');
+      await ensureCSS('calc-css', v(CALC_CSS_HREF));
     } else {
       removeCSS('calc-css');
-      // (선택) el.classList.remove('calc-surface');
     }
 
     const rest = location.hash.replace('#' + path, '').replace(/^#?\/?/, '');
@@ -217,6 +280,9 @@
       nav.classList.remove('open');
       toggle.setAttribute('aria-expanded', 'false');
     }
+
+    // 🔔 라우트 렌더 완료 후 자동광고 트리거
+    pingAutoAds();
   }
 
   function parseHash() {
@@ -235,12 +301,17 @@
   window.addEventListener('hashchange', () => {
     const [path] = parseHash();
     navigate(path);
+    pingAutoAds(); // 보강
   });
 
-  // ✅ 공통 카드/썸네일 CSS는 초기 1회 로드
+  // ✅ 공통 카드/썸네일 CSS는 초기 1회 로드 (버전 부착)
   window.addEventListener('DOMContentLoaded', async () => {
-    await ensureCSS('components-css', COMPONENTS_CSS_HREF);
+    await ensureCSS('components-css', v(COMPONENTS_CSS_HREF));
     const [path] = parseHash();
-    navigate(path);
+    await navigate(path);
+    pingAutoAds();
   });
+
+  // (디버그) 로드 확인
+  // console.log('app.js loaded:', ASSET_VER);
 })();
