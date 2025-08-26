@@ -7,7 +7,7 @@
   const $ = (sel) => document.querySelector(sel);
 
   // ===== Asset version (캐시 무효화) =====
-  const ASSET_VER = '20250824n';
+  const ASSET_VER = '202508261423';
   function v(url){
     if (!url) return url;
     if (/^(data:|blob:|#)/i.test(url)) return url; // data:/blob:/# 은 제외

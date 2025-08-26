@@ -254,7 +254,7 @@
           }
           el.innerHTML = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || html;
 
-          await loadScriptOnce('/js/gear-calculator.js?v=20250823');
+          await loadScriptOnce('/js/gear-calculator.js?v=202508261423');
           if (!window.initGearCalculator) {
             el.insertAdjacentHTML('beforeend','<div class="error">gear-calculator.js 로드 실패</div>');
             return;
@@ -276,7 +276,7 @@
             ? (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || html)
             : '<div class="placeholder"><h2>영주보석계산기</h2><p class="muted">charm.html을 찾을 수 없습니다.</p></div>';
 
-          await loadScriptOnce('/js/charm-calculator.js?v=20250823b');
+          await loadScriptOnce('/js/charm-calculator.js?v=202508261423');
           if (window.initCharmCalculator) {
             window.initCharmCalculator({
               mount: '#charm-calc',
@@ -294,7 +294,7 @@
     if (!document.querySelector('link[rel="stylesheet"][href="/css/kingshot_calc.css"]')) {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = '/css/kingshot_calc.css?v=20250826a'; // 캐시 무시용 쿼리
+      link.href = '/css/kingshot_calc.css?v=202508261423'; // 캐시 무시용 쿼리
       document.head.appendChild(link);
     }
 
@@ -305,7 +305,7 @@
       : '<div class="placeholder"><h2>훈련/승급 계산기</h2><p class="muted">training.html을 찾을 수 없습니다.</p></div>';
 
     // 2) 계산기 스크립트 로드
-    await loadScriptOnce('/js/training-calculator.js?v=20250826a');
+    await loadScriptOnce('/js/training-calculator.js?v=202508261423');
 
     // 3) 초기화 (JSON 경로 지정)
     if (window.initTrainingCalculator) {
