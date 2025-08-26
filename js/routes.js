@@ -288,23 +288,40 @@
       },
 
       '/calc-training': {
-        title: '병력 훈련/승급 계산기 - KingshotData.kr',
-        render: async (el) => {
-          const html = await loadHTML(['/pages/calculators/training.html','pages/calculators/training.html']);
-          el.innerHTML = html
-            ? (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || html)
-            : '<div class="placeholder"><h2>훈련/승급 계산기</h2><p class="muted">training.html을 찾을 수 없습니다.</p></div>';
+  title: '병력 훈련/승급 계산기 - KingshotData.kr',
+  render: async (el) => {
+    // 0) CSS 주입 (중복 방지)
+    if (!document.querySelector('link[rel="stylesheet"][href="/css/kingshot_calc.css"]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/css/kingshot_calc.css?v=20250826a'; // 캐시 무시용 쿼리
+      document.head.appendChild(link);
+    }
 
-          await loadScriptOnce('/js/training-calculator.js?v=20250823a');
-          if (window.initTrainingCalculator) {
-            window.initTrainingCalculator({
-              mount: '#training-calc',
-              jsonUrl: '/data/troop-training.json'
-            });
-          }
-          window.scrollTo({ top: 0 });
-        }
-      },
+    // 1) HTML 로드 (training.html의 body 안쪽만 붙이기)
+    const html = await loadHTML(['/pages/calculators/training.html']);
+    el.innerHTML = html
+      ? (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || html)
+      : '<div class="placeholder"><h2>훈련/승급 계산기</h2><p class="muted">training.html을 찾을 수 없습니다.</p></div>';
+
+    // 2) 계산기 스크립트 로드
+    await loadScriptOnce('/js/training-calculator.js?v=20250826a');
+
+    // 3) 초기화 (JSON 경로 지정)
+    if (window.initTrainingCalculator) {
+      window.initTrainingCalculator({
+        mount: '#training-calc',
+        jsonUrl: '/data/ks_training_promotion_per_troop.json' // ← 실제 JSON 위치 확인
+      });
+    }
+
+    // 4) 스크롤 상단 이동
+    window.scrollTo({ top: 0 });
+  }
+}
+
+
+,
       '/privacy': {
   title: '개인정보처리방침 - KingshotData.kr',
   render: async (el) => {
