@@ -88,7 +88,7 @@
     }
 
     .lang-switch select{padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff}
-    .nav-right .lootbar-banner { margin-top: 14px; } /* 살짝 아래로 */
+    .nav-right .lootbar-banner { margin-top: 14px; } /* 헤더에서 살짝 아래로 */
 
     /* 햄버거(모바일) */
     #menuToggle.hamburger{display:none;font-size:22px;background:none;border:0;color:#333;cursor:pointer}
@@ -105,7 +105,7 @@
     .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:.2s;z-index:110}
     .drawer{
       position:fixed;top:0;right:0;height:100%;
-      width:420px; /* 기본(태블릿/데스크탑) */
+      width:420px; /* 기본 */
       background:#fff;border-left:1px solid #e5e7eb;transform:translateX(100%);
       transition:transform .25s ease;z-index:120;display:flex;flex-direction:column
     }
@@ -121,11 +121,11 @@
     .drawer nav a:active{background:#f2f4f7}
     .drawer .lang-switch select{width:100%}
 
-    /* 드로어 내 배너들: 좌측 정렬(요청 반영) */
-    .drawer .lootbar-banner{align-items:flex-start}
+    /* 드로어 내 배너들: 중앙 정렬(요청 반영) */
+    .drawer .lootbar-banner{align-items:center}
     .drawer .lootbar-banner img{height:20px}
-    .drawer .lootbar-banner span{font-size:10px;opacity:.4}
-    .drawer .cafe-banner{align-items:flex-start;text-align:left}
+    .drawer .lootbar-banner span{font-size:10px;opacity:.4;align-self:center;text-align:center}
+    .drawer .cafe-banner{align-items:center;text-align:center}
     .drawer .cafe-banner img{height:60px}
     .drawer .cafe-banner span{font-size:10px;font-weight:300;margin-top:4px;color:#000;opacity:.4}
 
@@ -134,21 +134,22 @@
     .is-open .drawer{transform:translateX(0)}
     .no-scroll{overflow:hidden}
 
-    /* ===== 홈 카테고리: 모바일 2열 강제 ===== */
-    @media (max-width:768px){
-      #home-categories,
-      .category-grid,
-      .home-categories,
-      .cards-grid,
-      .card-grid,
-      .cards {
-        display:grid !important;
-        grid-template-columns: repeat(2, minmax(0,1fr)) !important;
-        gap:12px !important;
-      }
-      #home-categories > *, .category-grid > *, .home-categories > *,
-      .cards-grid > *, .card-grid > *, .cards > * { width:auto !important; }
-    }
+    /* ===== 홈 카테고리: 모바일 1열 ===== */
+@media (max-width:768px){
+  #home-categories,
+  .category-grid,
+  .home-categories,
+  .cards-grid,
+  .card-grid,
+  .cards {
+    display: grid !important;
+    grid-template-columns: 1fr !important; /* ← 1열 */
+    gap: 12px !important;
+  }
+  #home-categories > *, .category-grid > *, .home-categories > *,
+  .cards-grid > *, .card-grid > *, .cards > * { width: auto !important; }
+}
+
 
     /* 메인/푸터 */
     #content{min-height:50vh}
@@ -234,7 +235,7 @@
     </nav>
     <div class="rule"></div>
 
-    <!-- 3) 루트바배너 -->
+    <!-- 3) 루트바배너 (모바일: 중앙정렬) -->
     <div class="section">
       <a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" class="lootbar-banner" target="_blank" rel="noopener">
         <img src="/img/brand.png" alt="Lootbar">
@@ -242,7 +243,7 @@
       </a>
     </div>
 
-    <!-- 4) 네이버배너 -->
+    <!-- 4) 네이버배너 (모바일: 중앙정렬) -->
     <div class="section">
       <a href="https://cafe.naver.com/kingshot1" class="cafe-banner" target="_blank" rel="noopener">
         <img src="/img/brand2.png" alt="Kingshot Fan Community">
