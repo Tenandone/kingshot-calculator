@@ -7,7 +7,7 @@
     "dev": "vite dev",
     "build": "vite build",
     "bump": "node bump-version.js",
-    "deploy": "npm run bump && git add . && git commit -m \"chore: auto bump\" && git push"
+    "deploy": "npm run bump && npm run build && gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Tenandone/kingshot-calculator/issues"
   },
-  "homepage": "https://github.com/Tenandone/kingshot-calculator#readme"
+  "homepage": "https://tenandone.github.io/kingshot-calculator/",
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
 }
