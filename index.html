@@ -5,109 +5,216 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KingshotData</title>
 
-  <!-- Perf: preconnect -->
+  <!-- Perf -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <meta name="theme-color" content="#ffffff" />
 
-  <!-- Naver site verification (소유확인) -->
-  <meta name="naver-site-verification" content="92c48ed5b9081ab9ac2ef714ab077a0dc002f48a" />
-
-  <!-- SEO: description (i18n 적용; 내용은 /i18n/*/common.json 에서 로드) -->
+  <!-- SEO / OG -->
   <meta name="description" content="" data-i18n-attr="content:meta.description">
-
-  <!-- Open Graph -->
   <meta property="og:title" content="KingshotData">
   <meta property="og:description" content="" data-i18n-attr="content:og.description">
-  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og.png">
+  <meta property="og:image" content="https://kingshotdata.kr/img/logo-kingshotdata.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://kingshotdata.kr">
   <meta property="og:type" content="website">
-
-  <!-- Canonical -->
   <link rel="canonical" href="https://kingshotdata.kr">
 
-  <!-- Google AdSense (Auto Ads) -->
+  <!-- Ads/GA -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189957764761115" crossorigin="anonymous"></script>
-
-  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-TMGDGSEWW6');
+    gtag('js', new Date()); gtag('config', 'G-TMGDGSEWW6');
   </script>
 
-  <!-- CSS (루트 기준 + 캐시버스터) -->
-  <link rel="stylesheet" href="/css/common.css?v=now" />
+  <!-- CSS 공통 -->
+  <link rel="stylesheet" href="/css/common.css?v=now">
   <link rel="stylesheet" href="/css/database.css?v=now">
   <link rel="stylesheet" href="/css/home.css?v=now">
   <link rel="stylesheet" href="/css/mobile-patch.css?v=now">
 
-  <!-- =========================================================
-       1) i18n.js 를 가장 먼저 로드(중요, defer 사용하지 않음)
-       ========================================================= -->
+  <!-- i18n (먼저) -->
   <script src="/js/i18n.js?v=now"></script>
   <script>
-    // 초기 언어 결정: URL ?lang → 저장값 → 브라우저 → 기본 ko
     (function () {
-      var sp = new URLSearchParams(location.search);
-      var urlLang = sp.get('lang');
-      var saved = null;
-      try { saved = localStorage.getItem('lang'); } catch (_) {}
-      var browser = (navigator.language || 'ko').slice(0,2);
-      var initialLang = urlLang || saved || (browser === 'ko' ? 'ko' : 'en');
-
-      // html lang 속성 선 적용 (FOUC 감소)
-      document.documentElement.setAttribute('lang', initialLang);
-
-      // i18n 선 초기화 (공통 네임스페이스 로딩)
-      if (window.I18N && typeof I18N.init === 'function') {
-        I18N.init({ lang: initialLang, supported: ['ko','en','ja','zh-CN','zh-TW'] });
-      }
+      const sp = new URLSearchParams(location.search);
+      const urlLang = sp.get('lang');
+      let saved = null; try { saved = localStorage.getItem('lang'); } catch(_){}
+      const browser = (navigator.language || 'ko').slice(0,2);
+      const initial = urlLang || saved || (browser === 'ko' ? 'ko' : 'en');
+      document.documentElement.setAttribute('lang', initial);
+      if (window.I18N?.init) I18N.init({ lang: initial, supported: ['ko','en','ja','zh-CN','zh-TW'] });
+      if (!location.hash) location.replace('#/home'); // 기본 라우트
     })();
   </script>
 
-  <!-- =========================================================
-       2) 앱 스크립트는 defer 로드 (i18n.js 후에 실행되도록)
-       ========================================================= -->
+  <!-- 앱 -->
   <script defer src="/js/routes.js?v=now"></script>
   <script defer src="/js/app.js?v=now"></script>
 
-  <!-- (선택) 푸터 기본 스타일 보강 -->
+  <!-- 헤더/드로어 스타일 -->
   <style>
-    .site-footer { text-align:center; font-size:.9em; color:#666; line-height:1.6; }
-    .lang-switch { display:flex; align-items:center; }
-    .lang-switch select{ padding:4px 8px; border:1px solid #ccc; border-radius:6px; background:#fff; }
+    :root{ --nav-h:60px; }
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+    a{text-decoration:none;color:inherit}
+
+    .site-header{background:#fff;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:100}
+    .nav-bar{max-width:1200px;margin:0 auto;padding:0 12px;display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
+    .nav-left,.nav-right{display:flex;align-items:center;gap:16px}
+    .nav-left nav a{margin:0 6px;color:#333;font-size:14px}
+    .brand-logo{height:39px;width:auto}
+
+    /* --- 데스크탑 우측 묶음 --- */
+    .cafe-banner{display:flex;flex-direction:column;align-items:center}
+    .cafe-banner img{height:35px;width:auto}
+    /* 팬커뮤니티 텍스트 = 루트바 텍스트와 동일 */
+    .cafe-banner span{
+      font-size:10px;
+      font-weight:300;
+      margin-top:2px;
+      align-self:flex-start;
+      color:#000;
+      opacity:.4;
+    }
+
+    /* 루트바 배너(텍스트 40% 투명, 밑줄 없음) */
+    .lootbar-banner{display:flex;flex-direction:column;align-items:flex-end}
+    .lootbar-banner img{height:20px;width:auto;filter:grayscale(100%)}
+    .lootbar-banner span{font-size:10px;font-weight:300;margin-top:2px;align-self:flex-start;opacity:.4}
+    .lootbar-banner:hover span{text-decoration:none}
+
+    /* 배너 링크들은 어떤 상태에서도 밑줄 제거 (헤더/드로어 공통) */
+    .cafe-banner,
+    .cafe-banner:hover,
+    .cafe-banner:focus,
+    .lootbar-banner,
+    .lootbar-banner:hover,
+    .lootbar-banner:focus,
+    .drawer .cafe-banner,
+    .drawer .cafe-banner:hover,
+    .drawer .cafe-banner:focus,
+    .drawer .lootbar-banner,
+    .drawer .lootbar-banner:hover,
+    .drawer .lootbar-banner:focus {
+      text-decoration: none !important;
+    }
+
+    .lang-switch select{padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff}
+
+    /* 헤더(데스크탑) 전용 - 루트바 배너 아래로 nudge */
+    .nav-right .lootbar-banner { margin-top: 14px; }
+
+    /* 햄버거(모바일) */
+    #menuToggle.hamburger{display:none;font-size:22px;background:none;border:0;color:#333;cursor:pointer}
+
+    /* 반응형: 모바일에선 좌측 메뉴 숨기고 드로어 사용, 우측 묶음 감춤 */
+    @media (max-width:768px){
+      #primaryNav{display:none}
+      #menuToggle.hamburger{display:inline-block}
+      .nav-right{display:none}
+      .brand-logo{height:34px}
+    }
+
+    /* 드로어 */
+    .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:.2s;z-index:110}
+    .drawer{
+      position:fixed;top:0;right:0;height:100%;width:50vw;max-width:420px;min-width:300px;
+      background:#fff;border-left:1px solid #e5e7eb;transform:translateX(100%);
+      transition:transform .25s ease;z-index:120;display:flex;flex-direction:column
+    }
+    .drawer header{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-bottom:1px solid #eee}
+    .drawer .section{padding:12px}
+    .drawer .rule{height:10px;border-bottom:1px dashed #ddd;margin:6px 0 10px}
+    .drawer nav a{display:block;padding:12px 8px;border-radius:8px;color:#222;font-size:15px}
+    .drawer nav a:active{background:#f2f4f7}
+    .drawer .lang-switch select{width:100%}
+
+    /* 드로어 내 배너들 (루트바 = 동일, 카페 = 동일 스타일로 통일) */
+    .drawer .lootbar-banner{align-items:flex-end}
+    .drawer .lootbar-banner img{height:20px}
+    .drawer .lootbar-banner span{font-size:10px;opacity:.4}
+    .drawer .cafe-banner{align-items:center}
+    .drawer .cafe-banner img{height:60px}
+    .drawer .cafe-banner span{
+      font-size:10px;
+      font-weight:300;
+      margin-top:4px;
+      color:#000;
+      opacity:.4;
+    }
+
+    /* 열림 상태 */
+    .is-open .backdrop{opacity:1;pointer-events:auto}
+    .is-open .drawer{transform:translateX(0)}
+    .no-scroll{overflow:hidden}
+
+    /* 메인/푸터 */
+    #content{min-height:50vh}
+    .site-footer{text-align:center;font-size:.9em;color:#666;line-height:1.6;padding:20px 0}
   </style>
 </head>
 <body class="theme-default">
   <header class="site-header" role="banner">
     <div class="container nav-bar">
-      <a class="brand" href="#/home" data-link aria-label="KingshotData 홈">
-        <span class="brand-badge" aria-hidden="true">KD</span>
-        <span class="brand-text">KingshotData</span>
-      </a>
+      <!-- 좌: 로고 + 메뉴 -->
+      <div class="nav-left">
+        <a class="brand" href="#/home" data-link aria-label="KingshotData 홈">
+          <img class="brand-logo" src="/img/logo-kingshotdata.png" alt="KingshotData" decoding="async">
+        </a>
+        <nav class="nav" id="primaryNav" role="navigation" aria-label="주 메뉴">
+          <a href="#/home" data-link data-i18n="nav.home">홈</a>
+          <a href="#/buildings" data-link data-i18n="nav.buildings">건물</a>
+          <a href="#/heroes" data-link data-i18n="nav.heroes">영웅</a>
+          <a href="#/database" data-link data-i18n="nav.database">데이터베이스</a>
+          <a href="#/guides" data-link data-i18n="nav.guides">가이드</a>
+          <a href="#/calculator" data-link data-i18n="nav.calculators">계산기</a>
+          <a href="#/about" data-link data-i18n="nav.about">소개</a>
+        </nav>
+      </div>
 
-      <button class="menu-toggle" id="menuToggle" aria-expanded="false"
-              aria-controls="primaryNav" aria-label="메뉴 열기" data-i18n-attr="aria-label:nav.menuOpen">메뉴</button>
+      <!-- 햄버거(모바일) -->
+      <button class="hamburger" id="menuToggle" aria-label="메뉴 열기" aria-controls="mobileDrawer" aria-expanded="false">☰</button>
 
-      <nav class="nav" id="primaryNav" role="navigation" aria-label="주 메뉴" data-i18n-attr="aria-label:nav.primaryAria">
-        <!-- a 태그 텍스트는 i18n이 주입 -->
-        <a href="#/home" data-nav data-i18n="nav.home">홈</a>
-        <a href="#/buildings" data-nav data-i18n="nav.buildings">건물</a>
-        <a href="#/heroes" data-nav data-i18n="nav.heroes">영웅</a>
-        <a href="#/database" data-nav data-i18n="nav.database">데이터베이스</a>
-        <a href="#/guides" data-nav data-i18n="nav.guides">가이드</a>
-        <a href="#/calculator" data-nav data-i18n="nav.calculators">계산기</a>
-        <a href="#/about" data-nav data-i18n="nav.about">소개</a>
-      </nav>
+      <!-- 우: 네이버배너 → 루트바배너 → 번역기 -->
+      <div class="nav-right">
+        <a href="https://cafe.naver.com/kingshot1" class="cafe-banner" target="_blank" rel="noopener">
+          <img src="/img/brand2.png" alt="Kingshot Fan Community">
+          <span>KingshotFanCommunity</span>
+        </a>
 
-      <!-- 언어 드롭다운 -->
-      <label class="lang-switch" for="langSelect" data-i18n-attr="aria-label:nav.langAria">
-        <select id="langSelect" aria-label="Language">
+        <a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" class="lootbar-banner" target="_blank" rel="noopener">
+          <img src="/img/brand.png" alt="Lootbar">
+          <span>Buy Kingshot Packs</span>
+        </a>
+
+        <label class="lang-switch" for="langSelect" data-i18n-attr="aria-label:nav.langAria">
+          <select id="langSelect" aria-label="Language">
+            <option value="ko">한국어(KR)</option>
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="zh-CN">简体</option>
+            <option value="zh-TW">繁體</option>
+          </select>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <!-- 모바일 드로어 -->
+  <div class="backdrop" id="backdrop" hidden></div>
+  <aside class="drawer" id="mobileDrawer" aria-hidden="true" aria-label="모바일 내비게이션">
+    <header>
+      <strong>Menu</strong>
+      <button id="btnClose" aria-label="닫기" style="background:none;border:0;font-size:20px;cursor:pointer">✕</button>
+    </header>
+
+    <!-- 1) 번역기 -->
+    <div class="section">
+      <label class="lang-switch" for="langSelectMobile">
+        <select id="langSelectMobile" aria-label="Language (mobile)">
           <option value="ko">한국어(KR)</option>
           <option value="en">English</option>
           <option value="ja">日本語</option>
@@ -116,49 +223,93 @@
         </select>
       </label>
     </div>
-  </header>
+    <div class="rule"></div>
+
+    <!-- 2) 메뉴 -->
+    <nav class="section">
+      <a href="#/buildings" data-link data-i18n="nav.buildings">건물</a>
+      <a href="#/heroes" data-link data-i18n="nav.heroes">영웅</a>
+      <a href="#/database" data-link data-i18n="nav.database">데이터베이스</a>
+      <a href="#/guides" data-link data-i18n="nav.guides">가이드</a>
+      <a href="#/calculator" data-link data-i18n="nav.calculators">계산기</a>
+    </nav>
+    <div class="rule"></div>
+
+    <!-- 3) 루트바배너 -->
+    <div class="section">
+      <a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" class="lootbar-banner" target="_blank" rel="noopener">
+        <img src="/img/brand.png" alt="Lootbar">
+        <span>Buy Kingshot Packs</span>
+      </a>
+    </div>
+
+    <!-- 4) 네이버배너 -->
+    <div class="section" style="text-align:center">
+      <a href="https://cafe.naver.com/kingshot1" class="cafe-banner" target="_blank" rel="noopener">
+        <img src="/img/brand2.png" alt="Kingshot Fan Community">
+        <span>KingshotFanCommunity</span>
+      </a>
+    </div>
+  </aside>
 
   <main class="container" id="main" role="main">
-    <div id="content" class="panel"></div>
+    <div id="content" class="panel">
+      <noscript>자바스크립트를 활성화하세요. 콘텐츠가 표시됩니다.</noscript>
+    </div>
   </main>
 
   <footer class="site-footer" role="contentinfo">
     <div class="container">
       <span data-i18n="footer.disclaimer1">All game images and data are copyrighted by Century Games.</span><br />
       <span data-i18n="footer.disclaimer2">This site is an unofficial fan site.</span><br />
-      © 2025 KingshotData Korea · <a href="#/privacy" data-i18n="footer.privacy">개인정보처리방침 / Privacy</a>
+      © 2025 KingshotData Korea · <a href="#/privacy" data-link data-i18n="footer.privacy">개인정보처리방침 / Privacy</a>
     </div>
   </footer>
 
-  <!-- 페이지 DOM 준비 후 UI 바인딩 + 메타 i18n 반영 -->
+  <!-- 바인딩 -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 언어 드롭다운 현재 값 반영
-      var sel = document.getElementById('langSelect');
+      const sel = document.getElementById('langSelect');
+      const selM = document.getElementById('langSelectMobile');
 
-      function applyMetaI18N() {
+      function syncLang(val){ if (sel) sel.value=val; if (selM) selM.value=val; }
+      function applyMeta(){
         if (!window.I18N) return;
-        const d   = document.querySelector('meta[name="description"]');
-        const ogd = document.querySelector('meta[property="og:description"]');
-        if (d)   d.setAttribute('content',  I18N.t('meta.description', 'KingshotData is a fanmade data site for Kingshot.'));
-        if (ogd) ogd.setAttribute('content', I18N.t('og.description', 'All Kingshot data in one place! Buildings, Heroes, Calculators.'));
+        const d=document.querySelector('meta[name="description"]');
+        const ogd=document.querySelector('meta[property="og:description"]');
+        if (d) d.setAttribute('content', I18N.t('meta.description','KingshotData is a fanmade data site for Kingshot.'));
+        if (ogd) ogd.setAttribute('content', I18N.t('og.description','All Kingshot data in one place! Buildings, Heroes, Calculators.'));
       }
+      applyMeta(); if (window.I18N) syncLang(I18N.current);
 
-      // 초기 1회 적용
-      applyMetaI18N();
-
-      if (sel && window.I18N) {
-        try { sel.value = I18N.current; } catch (_) {}
-        sel.addEventListener('change', async (e) => {
-          if (!window.I18N) return;
-          await I18N.setLang(e.target.value);
-          document.documentElement.setAttribute('lang', I18N.current);
-          applyMetaI18N();
-        });
-
-        // 초기 html lang 동기화(보장)
+      async function onLangChange(v){
+        if (!window.I18N) return;
+        await I18N.setLang(v);
         document.documentElement.setAttribute('lang', I18N.current);
+        applyMeta();
+        window.dispatchEvent(new HashChangeEvent('hashchange'));
       }
+      sel?.addEventListener('change', e=>onLangChange(e.target.value));
+      selM?.addEventListener('change', e=>onLangChange(e.target.value));
+
+      // 라우터 초기 렌더 보장
+      requestAnimationFrame(()=>window.dispatchEvent(new HashChangeEvent('hashchange')));
+
+      // 드로어
+      const html=document.documentElement, body=document.body;
+      const drawer=document.getElementById('mobileDrawer');
+      const backdrop=document.getElementById('backdrop');
+      const btnOpen=document.getElementById('menuToggle');
+      const btnClose=document.getElementById('btnClose');
+
+      function openDrawer(){ html.classList.add('is-open'); body.classList.add('no-scroll'); backdrop.hidden=false; drawer.setAttribute('aria-hidden','false'); btnOpen.setAttribute('aria-expanded','true'); btnClose?.focus(); }
+      function closeDrawer(){ html.classList.remove('is-open'); body.classList.remove('no-scroll'); backdrop.hidden=true; drawer.setAttribute('aria-hidden','true'); btnOpen.setAttribute('aria-expanded','false'); btnOpen.focus(); }
+
+      btnOpen?.addEventListener('click', openDrawer);
+      btnClose?.addEventListener('click', closeDrawer);
+      backdrop?.addEventListener('click', closeDrawer);
+      window.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDrawer(); });
+      drawer.querySelectorAll('a[data-link]').forEach(a=>a.addEventListener('click', closeDrawer));
     });
   </script>
 </body>
