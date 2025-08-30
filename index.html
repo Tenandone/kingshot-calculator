@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KingshotData.kr</title>
+
+  <!-- Perf: preconnect -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Google AdSense (Auto Ads) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189957764761115" crossorigin="anonymous"></script>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6');
+  </script>
+
+  <!-- CSS (루트 기준 + 캐시버스터) -->
+
+  <!-- =========================================================
+       1) i18n.js 를 가장 먼저 로드(중요, defer 사용하지 않음)
+       ========================================================= -->
+  <script src="/js/i18n.js?v=now"></script>
+  <script>
+    // 초기 언어 결정: URL ?lang → 저장값 → 브라우저 → 기본 ko
+    (function () {
+      var sp = new URLSearchParams(location.search);
+      var urlLang = sp.get('lang');
+      var saved = null;
+      try { saved = localStorage.getItem('lang'); } catch (_) {}
+      var browser = (navigator.language || 'ko').slice(0,2);
+      var initialLang = urlLang || saved || (browser === 'ko' ? 'ko' : 'en');
+
+      // html lang 속성 선 적용 (FOUC 감소)
+      document.documentElement.setAttribute('lang', initialLang);
+
+      // i18n 선 초기화 (공통 네임스페이스 로딩)
+      if (window.I18N && typeof I18N.init === 'function') {
+        I18N.init({ lang: initialLang, supported: ['ko','en','ja','zh-CN','zh-TW'] });
+      }
+    })();
+  </script>
+
+  <!-- =========================================================
+       2) 앱 스크립트는 defer 로드 (i18n.js 후에 실행되도록)
+       ========================================================= -->
+  <script defer src="/js/routes.js?v=now"></script>
+  <script defer src="/js/app.js?v=now"></script>
+
+  <!-- (선택) 푸터 기본 스타일 보강 -->
+  <style>
+    .site-footer { text-align:center; font-size:.9em; color:#666; line-height:1.6; }
+    .lang-switch { display:flex; align-items:center; }
+    .lang-switch select{ padding:4px 8px; border:1px solid #ccc; border-radius:6px; background:#fff; }
+  </style>
+  <link rel="stylesheet" crossorigin href="/assets/index-YkscFcFW.css">
+</head>
+<body class="theme-default">
+  <header class="site-header" role="banner">
+    <div class="container nav-bar">
+      <a class="brand" href="#/home" data-link aria-label="KingshotData.kr 홈">
+        <span class="brand-badge" aria-hidden="true">KD</span>
+        <span class="brand-text">KingshotData.kr</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false"
+              aria-controls="primaryNav" aria-label="메뉴 열기" data-i18n-attr="aria-label:nav.menuOpen">메뉴</button>
+
+      <nav class="nav" id="primaryNav" role="navigation" aria-label="주 메뉴" data-i18n-attr="aria-label:nav.primaryAria">
+        <!-- a 태그 텍스트는 i18n이 주입 -->
+        <a href="#/home" data-nav data-i18n="nav.home">홈</a>
+        <a href="#/buildings" data-nav data-i18n="nav.buildings">건물</a>
+        <a href="#/heroes" data-nav data-i18n="nav.heroes">영웅</a>
+        <a href="#/database" data-nav data-i18n="nav.database">데이터베이스</a>
+        <a href="#/guides" data-nav data-i18n="nav.guides">가이드</a>
+        <a href="#/calculator" data-nav data-i18n="nav.calculators">계산기</a>
+        <a href="#/about" data-nav data-i18n="nav.about">소개</a>
+      </nav>
+
+      <!-- 언어 드롭다운 -->
+      <label class="lang-switch" for="langSelect" data-i18n-attr="aria-label:nav.langAria">
+        <select id="langSelect" aria-label="Language">
+          <option value="ko">한국어(KR)</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+          <option value="zh-CN">简体</option>
+          <option value="zh-TW">繁體</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <main class="container" id="main" role="main">
+    <div id="content" class="panel"></div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <span data-i18n="footer.disclaimer1">All game images and data are copyrighted by Century Games.</span><br />
+      <span data-i18n="footer.disclaimer2">This site is an unofficial fan site.</span><br />
+      © 2025 KingshotData Korea · <a href="#/privacy" data-i18n="footer.privacy">개인정보처리방침 / Privacy</a>
+    </div>
+  </footer>
+
+  <!-- 페이지 DOM 준비 후 UI 바인딩만 수행 (재초기화 X) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 언어 드롭다운 현재 값 반영
+      var sel = document.getElementById('langSelect');
+      if (sel && window.I18N) {
+        try { sel.value = I18N.current; } catch (_) {}
+
+        sel.addEventListener('change', async (e) => {
+          if (!window.I18N) return;
+          await I18N.setLang(e.target.value);
+          document.documentElement.setAttribute('lang', I18N.current);
+        });
+
+        // 초기 html lang 동기화(보장)
+        document.documentElement.setAttribute('lang', I18N.current);
+      }
+    });
+  </script>
+</body>
+</html>
