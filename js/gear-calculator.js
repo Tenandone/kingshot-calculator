@@ -1,23 +1,19 @@
-/* js/gear-calculator.js  (v20250823-multi)
- * 영주 장비 계산기 – JSON을 불러와(UI 렌더+합산) 한 번에 동작
- *
- * 사용 방법:
- *  1) HTML에 <div id="gear-calc"></div> 컨테이너 준비
- *  2) 스크립트 로드 후:
- *       initGearCalculator({
- *         mount: '#gear-calc',
- *         jsonUrl: '/data/governor-gear.json',
- *         // slots 생략 시 기본 6슬롯(모자/목걸이/상의/하의/반지/지팡이)
- *         // slotClasses 생략 시 기본 매핑(모자/목걸이=기병, 상의/하의=보병, 반지/지팡이=궁병)
- *         // stepsMap: { '모자': stepsObj, ... }  // 부위별 비용 상이 시 오버라이드
- *       });
+/* js/gear-calculator.js (v20250830-calcGear-final+reapply-fixed)
+ * 영주 장비 계산기 – JSON 로드 → UI 렌더 → 합산 계산
+ * - calcGear i18n 적용
+ * - 티어 i18n(code/tierKeyMap) 대응
+ * - 언어 전환 재적용(window.reapplyGearCalculatorI18N) + 마지막 상태 복원/자동 재계산
  */
-
 (function () {
   'use strict';
 
+  // ===== i18n =====
+  const T = (k) => (window.I18N?.t?.(k) ?? k);
+
+  // ===== 숫자 포맷 =====
   const fmt = (n) => (n || 0).toLocaleString();
 
+  // ===== DOM helper =====
   function h(tag, attrs = {}, children = []) {
     const el = document.createElement(tag);
     for (const [k, v] of Object.entries(attrs)) {
@@ -32,9 +28,10 @@
     });
     return el;
   }
-
   const stepKeys = (steps) => Object.keys(steps);
+  const slug = (s) => String(s).replace(/\s+/g, '-');
 
+  // 단계 구간 합산
   function sumRange(steps, keys, fromIdx, toIdx) {
     if (fromIdx >= toIdx) {
       return { satin: 0, thread: 0, sketch: 0, score: 0, invalid: true };
@@ -51,32 +48,47 @@
     return { satin: s, thread: t, sketch: sk, score: sc, invalid: false };
   }
 
-  // 슬롯명을 id로 쓰기 위한 간단 슬러그
-  const slug = (s) => s.replace(/\s+/g, '-');
+  // 내부 상태(재적용/복원용)
+  const STATE = {
+    root: null,
+    gear: null,
+    opts: null,
+    els: {},
+    last: null
+  };
 
-  /**
-   * @param {Object} opt
-   * @param {string} opt.mount
-   * @param {string} [opt.jsonUrl]
-   * @param {Object} [opt.data]
-   * @param {string[]} [opt.slots]
-   * @param {Object<string,Object>} [opt.stepsMap]
-   * @param {Object<string,string>} [opt.slotClasses]
-   */
   async function initGearCalculator(opt) {
     const {
       mount,
       jsonUrl,
       data,
-      slots = ['모자', '목걸이', '상의', '하의', '반지', '지팡이'],
+      slots = [
+        T('calcGear.slots.hat'),
+        T('calcGear.slots.necklace'),
+        T('calcGear.slots.armor'),
+        T('calcGear.slots.pants'),
+        T('calcGear.slots.ring'),
+        T('calcGear.slots.staff')
+      ],
       stepsMap = null,
-      slotClasses: slotClassesInput
+      slotClasses: slotClassesInput,
+      tierKeyMap = {} // { '고급': 'calcGear.tiers.basic', ... }
     } = opt || {};
 
+    // 병종 라벨 (i18n)
+    const CLASS = {
+      cav: T('calcGear.classes.cavalry'),
+      inf: T('calcGear.classes.infantry'),
+      rng: T('calcGear.classes.archer')
+    };
+
     const defaultSlotClasses = {
-      '모자': '기병', '목걸이': '기병',
-      '상의': '보병', '하의': '보병',
-      '반지': '궁병', '지팡이': '궁병'
+      [T('calcGear.slots.hat')]      : CLASS.cav,
+      [T('calcGear.slots.necklace')] : CLASS.cav,
+      [T('calcGear.slots.armor')]    : CLASS.inf,
+      [T('calcGear.slots.pants')]    : CLASS.inf,
+      [T('calcGear.slots.ring')]     : CLASS.rng,
+      [T('calcGear.slots.staff')]    : CLASS.rng
     };
     const slotClasses = Object.assign({}, defaultSlotClasses, slotClassesInput || {});
 
@@ -100,16 +112,11 @@
       }
     } catch (e) {
       console.error('[gear-calc] failed to load data:', e);
-      root.textContent = '데이터를 불러오지 못했습니다.';
+      root.textContent = T('calcGear.alerts.loadFail');
       return;
     }
 
-    const getStepsForSlot = (slotName) => {
-      if (stepsMap && stepsMap[slotName]) return stepsMap[slotName];
-      return gear.steps;
-    };
-
-    // 스타일 (중복 주입 방지)
+    // ===== 스타일 (한 번만) =====
     if (!document.getElementById('gear-calc-style')) {
       const style = document.createElement('style');
       style.id = 'gear-calc-style';
@@ -119,10 +126,9 @@
         .slot-item{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #ddd;border-radius:10px;background:#f5f5f7;cursor:pointer}
         .slot-item input{margin:0}
         .slot-item .pill{font-size:11px;line-height:1;padding:3px 8px;border-radius:999px;border:1px solid rgba(0,0,0,.08);background:#fff;color:#222}
-        .pill-cav{box-shadow:inset 0 0 0 999px rgba(59,130,246,.12)}  /* 기병 */
-        .pill-inf{box-shadow:inset 0 0 0 999px rgba(16,185,129,.14)}  /* 보병 */
-        .pill-arc{box-shadow:inset 0 0 0 999px rgba(245,158,11,.16)}  /* 궁병 */
-
+        .pill-cav{box-shadow:inset 0 0 0 999px rgba(59,130,246,.12)}
+        .pill-inf{box-shadow:inset 0 0 0 999px rgba(16,185,129,.14)}
+        .pill-rng{box-shadow:inset 0 0 0 999px rgba(245,158,11,.16)}
         .gear-card{border:1px solid #e5e7eb;border-radius:14px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.05);max-width:860px;background:#fff}
         .gear-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}
         .gear-row select,.gear-row button{padding:8px 10px;border:1px solid #ddd;border-radius:10px;background:#f8f9fb}
@@ -140,66 +146,77 @@
       document.head.appendChild(style);
     }
 
-    // UI
+    // ===== UI 조립 =====
     root.innerHTML = '';
     root.classList.add('gear-calc-wrap');
-
     const card = h('div', { class: 'gear-card' });
 
-    // 슬롯 멀티선택(체크박스)
-    const slotList = h('div', { class: 'slot-list', role: 'group', 'aria-label': '장비 슬롯 선택' });
-    const classToPill = (cls) =>
-      cls === '기병' ? 'pill pill-cav' : cls === '보병' ? 'pill pill-inf' : 'pill pill-arc';
-    slots.forEach(name => {
+    // 슬롯 체크박스
+    const slotList = h('div', { class: 'slot-list', role: 'group', 'aria-label': T('calcGear.cols.slot') });
+
+    // 기본 슬롯 키(기본 슬롯 사용 시 언어 재적용에 활용)
+    const BASE_SLOT_KEYS = ['hat','necklace','armor','pants','ring','staff'];
+    const usingDefaultSlots = (opt.slots == null);
+
+    const classToPill = (cls) => {
+      if (cls === CLASS.cav) return 'pill pill-cav';
+      if (cls === CLASS.inf) return 'pill pill-inf';
+      return 'pill pill-rng';
+    };
+
+    const slotSpanRefs = []; // reapply에서 텍스트 교체용
+    slots.forEach((name, idx) => {
       const id = 'slot-' + slug(name);
       const cls = slotClasses[name] || '';
       const pill = h('span', { class: classToPill(cls), text: cls });
       const input = h('input', { type: 'checkbox', id, name: 'slot', value: name });
-      const label = h('label', { class: 'slot-item', for: id }, [input, h('span', { text: name }), pill]);
+      if (usingDefaultSlots) input.dataset.slotkey = BASE_SLOT_KEYS[idx] || '';
+      const nameSpan = h('span', { text: name });
+      if (usingDefaultSlots) nameSpan.dataset.slotkey = BASE_SLOT_KEYS[idx] || '';
+      const label = h('label', { class: 'slot-item', for: id }, [input, nameSpan, pill]);
       slotList.appendChild(label);
+      slotSpanRefs.push(nameSpan);
     });
 
-    // 컨트롤 (공통 단계 from/to) + 계산 버튼
-    const fromSel = h('select', { 'aria-label': '현재 단계 선택' });
-    const toSel   = h('select', { 'aria-label': '목표 단계 선택' });
-    const runBtn  = h('button', { text: '계산하기', 'aria-label': '계산하기' });
+    // 단계 선택 + 버튼
+    const fromSel = h('select', { 'aria-label': T('calcGear.cols.current') });
+    const toSel   = h('select', { 'aria-label': T('calcGear.cols.target') });
+    const runBtn  = h('button', { text: T('calcGear.actions.calculate') });
 
     // KPI
-    const kpiSat   = h('div', { class: 'gear-kpi' }, [h('div', { class: 'num', id: 'gc-sat', text: '0' }), h('div', { text: '비단' })]);
-    const kpiThr   = h('div', { class: 'gear-kpi' }, [h('div', { class: 'num', id: 'gc-thr', text: '0' }), h('div', { text: '금사' })]);
-    const kpiSk    = h('div', { class: 'gear-kpi' }, [h('div', { class: 'num', id: 'gc-sk',  text: '0' }), h('div', { text: '설계 스케치' })]);
-    const kpiScore = h('div', { class: 'gear-kpi' }, [h('div', { class: 'num', id: 'gc-score', text: '0' }), h('div', { text: '장비평점' })]);
-
+    const kpiSat   = h('div', { class: 'gear-kpi' }, [h('div', { class: 'num', id: 'gc-sat', text: '0' }), h('div', { id:'gc-kpi-sat-lab', text: T('calcGear.kpi.satin') })]);
+    const kpiThr   = h('div', { class: 'gear-kpi' }, [h('div', { class: 'num', id: 'gc-thr', text: '0' }), h('div', { id:'gc-kpi-thr-lab', text: T('calcGear.kpi.thread') })]);
+    const kpiSk    = h('div', { class: 'gear-kpi' }, [h('div', { class: 'num', id: 'gc-sk',  text: '0' }), h('div', { id:'gc-kpi-sk-lab',  text: T('calcGear.kpi.sketch') })]);
+    const kpiScore = h('div', { class: 'gear-kpi' }, [h('div', { class: 'num', id: 'gc-score',text: '0' }), h('div', { id:'gc-kpi-score-lab',text: T('calcGear.kpi.score') })]);
     const grid = h('div', { class: 'gear-grid' }, [kpiSat, kpiThr, kpiSk, kpiScore]);
 
     const row = h('div', { class: 'gear-row' }, [
-      h('label', { text: '현재 단계' }), fromSel,
-      h('label', { text: '→ 목표 단계' }), toSel,
+      h('label', { id:'gc-lab-current', text: T('calcGear.cols.current') }), fromSel,
+      h('label', { id:'gc-lab-target',  text: T('calcGear.cols.target')  }), toSel,
       runBtn
     ]);
 
-    const hint = h('div', { class: 'gear-muted', text: '※ 선택한 여러 슬롯을 한 번에 합산합니다. 부위별 비용이 다르면 stepsMap으로 각 부위 steps를 주입하세요.' });
+    const hint = h('div', { class: 'gear-muted', id:'gc-hint', text: T('calcGear.misc.hint') });
 
-    // 상세 테이블(슬롯별 합계 + 총합)
+    // 상세 테이블
     const detailWrap = h('div', { class: 'gear-details', style: 'display:none' });
+    const thSlot   = h('th', { id:'gc-th-slot',   text: T('calcGear.cols.slot') });
+    const thClass  = h('th', { id:'gc-th-class',  text: T('calcGear.cols.class') });
+    const thSatin  = h('th', { id:'gc-th-satin',  text: T('calcGear.cols.satin') });
+    const thThread = h('th', { id:'gc-th-thread', text: T('calcGear.cols.thread') });
+    const thSketch = h('th', { id:'gc-th-sketch', text: T('calcGear.cols.sketch') });
+    const thScore  = h('th', { id:'gc-th-score',  text: T('calcGear.cols.score') });
+
     const detailTable = h('table', {}, [
-      h('thead', {}, h('tr', {}, [
-        h('th', { text: '슬롯' }),
-        h('th', { text: '병종' }),
-        h('th', { text: '비단' }),
-        h('th', { text: '금사' }),
-        h('th', { text: '스케치' }),
-        h('th', { text: '평점' })
-      ])),
+      h('thead', {}, h('tr', {}, [thSlot, thClass, thSatin, thThread, thSketch, thScore])),
       h('tbody', { id: 'gc-tbody' })
     ]);
     detailWrap.appendChild(detailTable);
 
     const actions = h('div', { class: 'gear-actions' });
-    const toggleDetailBtn = h('button', { text: '상세 보기', disabled: 'disabled', title: '계산 후 활성화' });
+    const toggleDetailBtn = h('button', { id:'gc-toggle', text: T('calcGear.actions.showDetail'), disabled: 'disabled' });
     actions.appendChild(toggleDetailBtn);
 
-    // 조립
     card.appendChild(slotList);
     card.appendChild(row);
     card.appendChild(grid);
@@ -208,12 +225,29 @@
     card.appendChild(detailWrap);
     root.appendChild(card);
 
-    // 셀렉트 채우기 (공통 단계 목록은 기본 steps 기준)
+    // ---------- 티어 라벨 i18n ----------
+    function getTierLabelByIndex(keys, idx) {
+      const k = keys[idx];
+      const node = gear.steps[k];
+      const code = node && (node.code || node.tierCode);
+      if (code) return T('calcGear.tiers.' + code);
+      const rawLabel = k;
+      const i18nKey = tierKeyMap[rawLabel];
+      return i18nKey ? T(i18nKey) : rawLabel;
+    }
+
+    function getStepsForSlot(slotName) {
+      if (stepsMap && stepsMap[slotName]) return stepsMap[slotName];
+      return gear.steps;
+    }
+
+    // 단계 옵션 채우기
     function populateSelects() {
       const keys = stepKeys(gear.steps);
       fromSel.innerHTML = '';
-      toSel.innerHTML = '';
-      keys.forEach((label, idx) => {
+      toSel.innerHTML   = '';
+      keys.forEach((_, idx) => {
+        const label = getTierLabelByIndex(keys, idx);
         fromSel.appendChild(h('option', { value: String(idx), text: label }));
         toSel.appendChild(h('option',   { value: String(idx), text: label }));
       });
@@ -222,46 +256,32 @@
     }
     populateSelects();
 
-    // 엔터키로도 계산
-    [fromSel, toSel].forEach(sel => {
-      sel.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') runBtn.click();
-      });
-    });
-
     // 상세 토글
     toggleDetailBtn.addEventListener('click', () => {
       const open = detailWrap.style.display !== 'none';
       detailWrap.style.display = open ? 'none' : '';
-      toggleDetailBtn.textContent = open ? '상세 보기' : '상세 숨기기';
+      toggleDetailBtn.textContent = open ? T('calcGear.actions.showDetail') : T('calcGear.actions.hideDetail');
     });
 
     // 출력 리셋
     function resetOutputs() {
-      document.getElementById('gc-sat').textContent   = '0';
-      document.getElementById('gc-thr').textContent   = '0';
-      document.getElementById('gc-sk').textContent    = '0';
+      document.getElementById('gc-sat').textContent = '0';
+      document.getElementById('gc-thr').textContent = '0';
+      document.getElementById('gc-sk').textContent  = '0';
       document.getElementById('gc-score').textContent = '0';
       detailWrap.style.display = 'none';
       document.getElementById('gc-tbody').innerHTML = '';
       toggleDetailBtn.disabled = true;
-      toggleDetailBtn.textContent = '상세 보기';
+      toggleDetailBtn.textContent = T('calcGear.actions.showDetail');
     }
 
     // 계산
-    runBtn.addEventListener('click', () => {
+    const run = () => {
       const checked = [...root.querySelectorAll('input[name="slot"]:checked')].map(i => i.value);
-      if (!checked.length) {
-        alert('최소 1개 이상의 슬롯을 선택하세요.');
-        return;
-      }
-
+      if (!checked.length) { alert(T('calcGear.alerts.needSlot')); return; }
       const fromIdx = parseInt(fromSel.value, 10);
       const toIdx   = parseInt(toSel.value, 10);
-      if (fromIdx >= toIdx) {
-        alert('현재 단계는 목표 단계보다 낮아야 합니다.');
-        return;
-      }
+      if (fromIdx >= toIdx) { alert(T('calcGear.alerts.invalidRange')); return; }
 
       let total = { satin: 0, thread: 0, sketch: 0, score: 0 };
       const tbody = document.getElementById('gc-tbody');
@@ -277,10 +297,9 @@
         total.score  += r.score;
 
         const cls = slotClasses[slotName] || '';
-        const clsShort = cls; // 그대로 표기(기병/보병/궁병)
         tbody.appendChild(h('tr', {}, [
           h('td', { text: slotName }),
-          h('td', { text: clsShort }),
+          h('td', { text: cls }),
           h('td', { text: fmt(r.satin) }),
           h('td', { text: fmt(r.thread) }),
           h('td', { text: fmt(r.sketch) }),
@@ -288,10 +307,9 @@
         ]));
       });
 
-      // 총합 행
       const trTotal = h('tr', { class: 'gc-total-row' }, [
-        h('td', { text: '합계' }),
-        h('td', { text: `선택 ${checked.length}개` }),
+        h('td', { text: T('calcGear.cols.total') }),
+        h('td', { text: T('calcGear.cols.selected').replace('{n}', String(checked.length)) }),
         h('td', { text: fmt(total.satin) }),
         h('td', { text: fmt(total.thread) }),
         h('td', { text: fmt(total.sketch) }),
@@ -299,20 +317,127 @@
       ]);
       tbody.appendChild(trTotal);
 
-      // KPI 출력
       document.getElementById('gc-sat').textContent   = fmt(total.satin);
       document.getElementById('gc-thr').textContent   = fmt(total.thread);
       document.getElementById('gc-sk').textContent    = fmt(total.sketch);
       document.getElementById('gc-score').textContent = fmt(total.score);
 
+      // 버튼/상세 갱신
       toggleDetailBtn.disabled = false;
-      detailWrap.style.display = '';  // 자동 펼침
-      toggleDetailBtn.textContent = '상세 숨기기';
-    });
+      detailWrap.style.display = '';
+      toggleDetailBtn.textContent = T('calcGear.actions.hideDetail');
 
-    // 외부에서 재초기화 시 쓰라고 노출(선택)
+      // 마지막 상태 저장 (언어 전환 후 복원용)
+      STATE.last = {
+        checkedKeys: [...root.querySelectorAll('input[name="slot"]:checked')]
+          .map(i => i.dataset.slotkey || i.value),
+        fromIdx: parseInt(fromSel.value, 10),
+        toIdx:   parseInt(toSel.value, 10)
+      };
+    };
+    runBtn.addEventListener('click', run);
+
+    // ===== 재적용 핸들 저장 =====
+    STATE.root = root;
+    STATE.gear = gear;
+    STATE.opts = { slots, usingDefaultSlots, BASE_SLOT_KEYS, slotSpanRefs, slotClasses, tierKeyMap };
+    STATE.els  = {
+      fromSel, toSel, runBtn, toggleDetailBtn, detailWrap,
+      kpiLabs: {
+        sat: document.getElementById('gc-kpi-sat-lab'),
+        thr: document.getElementById('gc-kpi-thr-lab'),
+        sk : document.getElementById('gc-kpi-sk-lab'),
+        sc : document.getElementById('gc-kpi-score-lab')
+      },
+      hdrs: {
+        slot: thSlot, cls: thClass, sat: thSatin, thr: thThread, sk: thSketch, sc: thScore
+      },
+      rowLabs: {
+        current: document.getElementById('gc-lab-current'),
+        target:  document.getElementById('gc-lab-target'),
+        hint
+      }
+    };
+
+    // 외부에서 재초기화 접근 가능
     window.__gearCalcReset = resetOutputs;
   }
 
+  // ===== 언어 전환 재적용 =====
+  window.reapplyGearCalculatorI18N = function reapplyGearCalculatorI18N() {
+    const S = STATE;
+    if (!S.root || !S.gear || !S.opts || !S.els) return;
+
+    const { usingDefaultSlots, BASE_SLOT_KEYS, slotSpanRefs, tierKeyMap } = S.opts;
+    const { fromSel, toSel, runBtn, toggleDetailBtn, kpiLabs, hdrs, rowLabs, detailWrap } = S.els;
+
+    // 1) 정적 라벨
+    rowLabs.current.textContent = T('calcGear.cols.current');
+    rowLabs.target .textContent = T('calcGear.cols.target');
+    rowLabs.hint.textContent    = T('calcGear.misc.hint');
+    runBtn.textContent          = T('calcGear.actions.calculate');
+    (detailWrap.style.display === 'none')
+      ? (toggleDetailBtn.textContent = T('calcGear.actions.showDetail'))
+      : (toggleDetailBtn.textContent = T('calcGear.actions.hideDetail'));
+
+    // KPI 라벨
+    kpiLabs.sat.textContent = T('calcGear.kpi.satin');
+    kpiLabs.thr.textContent = T('calcGear.kpi.thread');
+    kpiLabs.sk .textContent = T('calcGear.kpi.sketch');
+    kpiLabs.sc .textContent = T('calcGear.kpi.score');
+
+    // 테이블 헤더
+    hdrs.slot.textContent = T('calcGear.cols.slot');
+    hdrs.cls .textContent = T('calcGear.cols.class');
+    hdrs.sat .textContent = T('calcGear.cols.satin');
+    hdrs.thr .textContent = T('calcGear.cols.thread');
+    hdrs.sk  .textContent = T('calcGear.cols.sketch');
+    hdrs.sc  .textContent = T('calcGear.cols.score');
+
+    // 2) 슬롯 이름 (기본 슬롯 사용 시에만 재번역)
+    if (usingDefaultSlots) {
+      slotSpanRefs.forEach((span, idx) => {
+        const key = span.dataset.slotkey || BASE_SLOT_KEYS[idx];
+        if (key) span.textContent = T('calcGear.slots.' + key);
+      });
+    }
+
+    // 3) 티어 셀렉트 라벨 재생성(선택 인덱스 유지)
+    const keys = stepKeys(S.gear.steps);
+    const keepFrom = parseInt(fromSel.value || '0', 10);
+    const keepTo   = parseInt(toSel.value   || String(keys.length - 1), 10);
+    const getTierLabelByIndex = (ks, idx) => {
+      const k = ks[idx];
+      const node = S.gear.steps[k];
+      const code = node && (node.code || node.tierCode);
+      if (code) return T('calcGear.tiers.' + code);
+      const raw = k;
+      const i18nKey = (tierKeyMap || {})[raw];
+      return i18nKey ? T(i18nKey) : raw;
+    };
+    fromSel.innerHTML = '';
+    toSel.innerHTML   = '';
+    keys.forEach((_, idx) => {
+      const lbl = getTierLabelByIndex(keys, idx);
+      fromSel.appendChild(h('option', { value: String(idx), text: lbl }));
+      toSel.appendChild(h('option',   { value: String(idx), text: lbl }));
+    });
+    fromSel.value = String(Math.max(0, Math.min(keepFrom, keys.length - 1)));
+    toSel.value   = String(Math.max(0, Math.min(keepTo,   keys.length - 1)));
+
+    // 4) 마지막 선택 복원 + 자동 재계산
+    if (S.last) {
+      const want = new Set(S.last.checkedKeys);
+      S.root.querySelectorAll('input[name="slot"]').forEach(i => {
+        const key = i.dataset.slotkey || i.value;
+        i.checked = want.has(key);
+      });
+      fromSel.value = String(Math.max(0, Math.min(S.last.fromIdx, keys.length - 1)));
+      toSel.value   = String(Math.max(0, Math.min(S.last.toIdx,   keys.length - 1)));
+      runBtn.click(); // 재계산 트리거
+    }
+  };
+
+  // 전역 진입점
   window.initGearCalculator = initGearCalculator;
 })();

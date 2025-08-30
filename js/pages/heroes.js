@@ -1,8 +1,31 @@
-﻿// /js/pages/heroes.js — Fixed plan (3-3-4-SR-R) + normalization + fallback + SPA detail
-// + rarity badge + unit icon (inline in name) + dark background (no image darkening)
-// + compact grid applied to ALL sections
+﻿// /js/pages/heroes.js — i18n-ready card list names (완성본)
+// - 카드 이름에 i18n 키 지원: (1) h.title, (2) h.nameKey, (3) `heroes.card.${slug}.name`
+// - I18N가 없으면 폴백: nameKo → name → nameEn → '이름없음'
+// - 언어 변경(i18n:changed) 시 카드 라벨에 즉시 반영 (재렌더 없이)
+// - 기존 기능(정렬/배지/유닛아이콘/compact 그리드) 유지
 (function(){
   'use strict';
+
+  /* ========= i18n helpers ========= */
+  const hasI18N = () => (window.I18N && typeof I18N.t === 'function');
+  const t = (key, fallback) => hasI18N() ? I18N.t(key, fallback ?? key) : (fallback ?? key);
+  const applyI18N = (root) => { if (hasI18N() && typeof I18N.applyTo === 'function') I18N.applyTo(root || document); };
+
+  // 현재 DOM에 렌더된 카드 라벨들에 대해, i18n 키 기반으로 텍스트 갱신
+  function bindLiveI18N(root){
+    if (!root || !hasI18N()) return;
+    const refresh = () => {
+      root.querySelectorAll('[data-i18n-key]').forEach(el => {
+        const key = el.getAttribute('data-i18n-key');
+        const fb  = el.getAttribute('data-i18n-fallback') || '';
+        el.textContent = t(key, fb);
+      });
+    };
+    // 최초 1회
+    refresh();
+    // 언어가 바뀔 때마다
+    document.addEventListener('i18n:changed', refresh);
+  }
 
   /* ========= Entry ========= */
   window.initHeroes = async function initHeroes(){
@@ -33,6 +56,12 @@
         );
 
       renderPlanned(ROOT, list);
+      // 렌더 후 현재 DOM에 i18n 적용 및 live 
+      applyI18N(ROOT);      // 첫 렌더 치환
+bindLiveI18N(ROOT);   // i18n:changed 시 라벨 즉시 갱신
+
+      applyI18N(ROOT);
+      bindLiveI18N(ROOT);
     } catch (e) {
       console.warn(e);
       ROOT.innerHTML = '<div style="padding:12px;text-align:center;color:#d00;">영웅 데이터를 불러오지 못했습니다.</div>';
@@ -41,9 +70,9 @@
 
   /* ========= Plan: order & limits ========= */
   const PLAN = [
-    { type:'gen', value:'3',  label:'3세대', limit:3 },
-    { type:'gen', value:'2',  label:'2세대', limit:3 },
-    { type:'gen', value:'1',  label:'1세대', limit:4 },
+    { type:'gen', value:'3',  label:'Gen3', limit:3 },
+    { type:'gen', value:'2',  label:'Gen2', limit:3 },
+    { type:'gen', value:'1',  label:'Gen1', limit:4 },
     { type:'rar', value:'SR', label:'SR'    },
     { type:'rar', value:'R',  label:'R'     },
   ];
@@ -84,14 +113,35 @@
   }
 
   /* ========= Unit (보/기/궁) ========= */
-  function normUnit(v){
-    const s = String(v||'').trim().toLowerCase();
-    if (!s) return '';
-    if (/(궁|활|arch|bow)/.test(s)) return 'ARC';
-    if (/(보|검|방패|infan|sword|shield)/.test(s)) return 'INF';
-    if (/(기|말|cav|horse|rider)/.test(s)) return 'CAV';
-    return '';
+ function normUnit(v, stats){
+  // 1) v가 일반 문자열일 때 우선 판정
+  const raw = String(v||'').trim();
+  const s = raw.toLowerCase();
+  let code = '';
+  if (s){
+    if (/(궁|활|arch|bow)/.test(s)) code = 'ARC';
+    else if (/(보|검|방패|infan|sword|shield)/.test(s)) code = 'INF';
+    else if (/(기|말|cav|horse|rider)/.test(s)) code = 'CAV';
   }
+
+  // 2) i18n 키라면 번역 결과로 재판정
+  if (!code && s.includes('.') && window.I18N && typeof I18N.t === 'function'){
+    const resolved = String(I18N.t(raw, '') || '').toLowerCase();
+    if (/arch|bow|궁|활/.test(resolved)) code = 'ARC';
+    else if (/infan|sword|shield|보|검|방패/.test(resolved)) code = 'INF';
+    else if (/cav|horse|rider|기|말/.test(resolved)) code = 'CAV';
+  }
+
+  // 3) expedition.stats 라벨에서 보조 추론
+  if (!code && Array.isArray(stats) && stats.length){
+    const joined = stats.map(x => String(x.label||'').toLowerCase()).join(' ');
+    if (/archer/.test(joined)) code = 'ARC';
+    else if (/infantry/.test(joined)) code = 'INF';
+    else if (/cavalry/.test(joined)) code = 'CAV';
+  }
+
+  return code;
+}
   function unitLabel(code){ return ({ARC:'궁병', INF:'보병', CAV:'기병'}[code] || ''); }
   function unitEmoji(code){ return ({ARC:'🏹', INF:'🛡️', CAV:'🐎'}[code] || '❔'); }
   function unitAsset(code){
@@ -191,6 +241,9 @@
       });
 
       ROOT.appendChild(section);
+      applyI18N(ROOT);      // 첫 렌더 치환
+bindLiveI18N(ROOT);   // 언어 변경 시 라벨만 즉시 갱신
+
     }
 
     if (rendered === 0) {
@@ -247,6 +300,8 @@
 
       items.forEach(h => grid.appendChild(cardEl(h)));
       ROOT.appendChild(section);
+      applyI18N(ROOT);
+bindLiveI18N(ROOT);
     }
 
     const leftovers = heroes.filter(h => !used.has(h));
@@ -264,20 +319,27 @@
     }
   }
 
-  /* ========= Card ========= */
-  function cardEl(h){
-    const name   = h.nameKo || h.name || '이름없음';
-    const rarity = normRarity(h.rarity ?? h.grade ?? h.Rarity);
-    const unit   = normUnit(h.unit || h.class || h.role || h.type);
+ /* ========= Card ========= */
+function cardEl(h){
+  // 1) i18n 키 결정
+  const slug = String(h.slug || '').trim();
+  const nameKey = h.title || h.nameKey || (slug ? `heroes.card.${slug}.name` : '');
 
-    const el = document.createElement('a');
-    el.className = 'card';
-    el.href = h.slug ? `#/hero/${encodeURIComponent(h.slug)}` : '#';
+  // 2) 폴백 텍스트
+  const fallbackName = String(h.nameKo || h.name || h.nameEn || '이름없음');
+  const displayName  = nameKey ? t(nameKey, fallbackName) : fallbackName;
+
+  const rarity = normRarity(h.rarity ?? h.grade ?? h.Rarity);
+  const unit   = normUnit(h.unit || h.class || h.role || h.type, h.expedition?.stats);
+
+  const el = document.createElement('a');
+  el.className = 'card';
+  el.href = h.slug ? `#/hero/${encodeURIComponent(h.slug)}` : '#';
 
     // 이미지 폴백
     const candidates = imageCandidatesForHero(h);
     const img = document.createElement('img');
-    img.alt = name; img.loading = 'lazy'; img.decoding = 'async';
+    img.alt = displayName; img.loading = 'lazy'; img.decoding = 'async';
     let i = 0;
     function next(){ img.src = candidates[i++] || candidates[candidates.length-1]; }
     img.onerror = () => { if (i < candidates.length) next(); else img.onerror = null; };
@@ -298,17 +360,25 @@
         : `<span class="unit-inline" aria-label="${label}">${emoji}</span>`;
     }
 
+    // label span에 i18n 키/폴백을 data-*로 저장 → 언어 변경 시 실시간 갱신 가능
+    const i18nAttrs = nameKey
+      ? ` data-i18n-key="${escapeHtml(nameKey)}" data-i18n-fallback="${escapeHtml(fallbackName)}"`
+      : '';
+
     el.innerHTML = `
-      ${rarityBadge}
-      <div class="thumb"></div>
-      <div class="name">
-        ${unitInline}
-        <span class="label">${escapeHtml(name)}</span>
-      </div>
-    `;
-    el.querySelector('.thumb').appendChild(img);
-    return el;
-  }
+    ${rarityBadge}
+    <div class="thumb"></div>
+    <div class="name">
+      ${unitInline || ''}
+      <span class="label"
+        ${nameKey ? `data-i18n-key="${escapeHtml(nameKey)}" data-i18n-fallback="${escapeHtml(fallbackName)}"` : ''}>
+        ${nameKey && hasI18N() ? t(nameKey, fallbackName) : escapeHtml(fallbackName)}
+      </span>
+    </div>
+  `;
+  el.querySelector('.thumb').appendChild(img);
+  return el;
+}
 
   /* ========= Misc ========= */
   function escapeHtml(s){

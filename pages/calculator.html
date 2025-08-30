@@ -4,36 +4,35 @@
   <meta charset="utf-8">
   <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>계산기 | KingshotData KR</title>
+  <title data-i18n="calcHub.meta.title">계산기 | KingshotData KR</title>
+  <!-- NOTE: meta description은 보통 속성 번역을 별도 지원해야 해서, 우선 고정값 유지 -->
   <meta name="description" content="킹샷 계산기 허브. 건물, 영주장비, 영주보석, 병력훈련 계산기.">
 </head>
 <body>
   <main id="calc-ui" class="calc-wrap" aria-labelledby="calc-title">
     <section class="calc-card">
-      <h2 id="calc-title" class="calc-title">계산기</h2>
+      <h2 id="calc-title" class="calc-title" data-i18n="calcHub.title">계산기</h2>
     </section>
 
     <section class="calc-card" style="margin-top:14px">
       <div class="card-grid" aria-label="계산기 목록">
-
         <!-- 건물계산기 -->
         <a class="card" href="#calc-building">
           <div class="thumb">
             <img src="/img/icons/towncenter.webp" alt="건물계산기" loading="lazy">
           </div>
           <div class="card-body">
-            <h3 class="card-title">건물계산기</h3>
+            <h3 class="card-title" data-i18n="calcHub.cards.building.title">건물계산기</h3>
           </div>
         </a>
 
         <!-- 영주장비계산기 -->
         <a class="card" href="#calc-gear">
           <div class="thumb">
-            <!-- 공백 경로는 %20 유지 또는 폴더명을 하이픈으로 변경 권장 -->
             <img src="/img/database/Governor%20Gear/governor-gear.webp" alt="영주장비계산기" loading="lazy">
           </div>
           <div class="card-body">
-            <h3 class="card-title">영주장비계산기</h3>
+            <h3 class="card-title" data-i18n="calcHub.cards.gear.title">영주장비계산기</h3>
           </div>
         </a>
 
@@ -43,7 +42,7 @@
             <img src="/img/database/Governor%20Charm/governor-charms-300x282.webp" alt="영주보석계산기" loading="lazy">
           </div>
           <div class="card-body">
-            <h3 class="card-title">영주보석계산기</h3>
+            <h3 class="card-title" data-i18n="calcHub.cards.charm.title">영주보석계산기</h3>
           </div>
         </a>
 
@@ -53,63 +52,22 @@
             <img src="/img/icons/infantry.webp" alt="병력훈련계산기" loading="lazy">
           </div>
           <div class="card-body">
-            <h3 class="card-title">병력훈련계산기</h3>
+            <h3 class="card-title" data-i18n="calcHub.cards.training.title">병력훈련계산기</h3>
           </div>
         </a>
-
       </div>
     </section>
   </main>
 
   <style>
-    .calc-title {
-      text-align: center;
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px;
-    }
-    .card {
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      text-decoration: none;
-      background: #fff;
-      overflow: hidden;
-      transition: transform .12s ease, box-shadow .12s ease;
-      text-align: center;
-    }
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0,0,0,.08);
-    }
-
-    /* ✅ 정사각 썸네일 박스(내용은 가운데, 여백 균일) */
-    .thumb{
-      width:100%;
-      aspect-ratio: 1 / 1;           /* 정사각형 고정 */
-      background:#f8fafc;            /* 밝은 배경으로 통일감 */
-      display:grid; place-items:center;
-      border-bottom:1px solid #eef2f7;
-    }
-    .thumb img{
-      width:72%; height:72%;         /* 내부 여백 통일 */
-      object-fit: contain;            /* 크롭 없이 온전히 표시 */
-      display:block;
-    }
-
-    .card-body { padding: 12px 14px; }
-    .card-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #111827;
-      margin: 0;
-    }
+    .calc-title { text-align:center; font-size:20px; font-weight:700; margin-bottom:10px; }
+    .card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+    .card { display:flex; flex-direction:column; border:1px solid #e5e7eb; border-radius:14px; text-decoration:none; background:#fff; overflow:hidden; transition:transform .12s, box-shadow .12s; text-align:center; }
+    .card:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,.08); }
+    .thumb{ width:100%; aspect-ratio:1/1; background:#f8fafc; display:grid; place-items:center; border-bottom:1px solid #eef2f7; }
+    .thumb img{ width:72%; height:72%; object-fit:contain; display:block; }
+    .card-body { padding:12px 14px; }
+    .card-title { font-size:16px; font-weight:700; color:#111827; margin:0; }
   </style>
 </body>
 </html>

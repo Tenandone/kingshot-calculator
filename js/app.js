@@ -1,13 +1,14 @@
 // js/app.js — SPA Router for KingshotData.kr
 // final: route-scoped CSS, H1 dedupe, no nested panel, race-safe & preflighted script loader
 //        + AutoAds ping + asset versioning (+ DB img/srcset 버전 보강)
+//        + i18n init & route-scoped namespace loading(calc)
 (function () {
   'use strict';
 
   const $ = (sel) => document.querySelector(sel);
 
   // ===== Asset version (캐시 무효화) =====
-  const ASSET_VER = '202508261423';
+  const ASSET_VER = 'now';
   function v(url){
     if (!url) return url;
     if (/^(data:|blob:|#)/i.test(url)) return url; // data:/blob:/# 은 제외
@@ -15,8 +16,8 @@
   }
 
   // ✅ CSS 경로
-  const CALC_CSS_HREF = '/css/calculator.css';
-  const COMPONENTS_CSS_HREF = '/css/components.css'; // 공통 카드/썸네일 스타일(옵션)
+  const CALC_CSS_HREF = '/css/calculator.css?v=now';
+  const COMPONENTS_CSS_HREF = '/css/components.css?v=now'; // 공통 카드/썸네일 스타일(옵션)
 
   // ---- header utils ----
   const yearEl = $('#y');
@@ -256,6 +257,22 @@
 
   let navVer = 0;
 
+  // ===== i18n helpers =====
+  async function ensureI18N() {
+    if (!window.I18N) return;
+    // 언어 결정
+    const saved = localStorage.getItem('lang');
+    const urlLang = new URLSearchParams(location.search).get('lang');
+    const fallback = (navigator.language || 'ko').replace('_','-');
+    const lang = urlLang || saved || fallback;
+
+    // 이미 초기화된 경우 skip (대충 current 읽히면 초기화된 걸로 간주)
+    if (I18N.current && typeof I18N.t === 'function') return;
+
+    // 공통 네임스페이스 선로딩
+    await I18N.init({ lang, namespaces: ['common'] });
+  }
+
   async function navigate(path) {
     const myVer = ++navVer;
     const el = document.getElementById('content');
@@ -265,7 +282,8 @@
     setActive(path);
 
     // ✅ 계산기 허브 + 상세 모두 calculator.css 적용 (버전 부착)
-    if (path === '/calculator' || path.startsWith('/calc-')) {
+    const isCalc = (path === '/calculator' || path.startsWith('/calc-'));
+    if (isCalc) {
       await ensureCSS('calc-css', v(CALC_CSS_HREF));
     } else {
       removeCSS('calc-css');
@@ -279,6 +297,28 @@
     if (nav && toggle) {
       nav.classList.remove('open');
       toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    // ===== i18n 적용 (라우트 후) =====
+    if (window.I18N) {
+      // 초기화 보장
+      await ensureI18N();
+
+      // 계산기 라우트면 calc 네임스페이스 로드
+      if (isCalc) {
+        // 이미 로드됐는지 간단히 키로 확인 후 필요시 로드
+        if (!I18N.has('calc.title')) {
+          try { await I18N.loadNamespace('calc'); } catch (_) {}
+        }
+        // 계산기 전용 타이틀 세팅
+        try {
+          const metaTitle = I18N.t('calc.meta.title', '건물 계산기 | KingshotData KR');
+          document.title = metaTitle;
+        } catch (_) {}
+      }
+
+      // 새로 삽입된 DOM에 번역 적용
+      try { I18N.applyTo(el); } catch (_) {}
     }
 
     // 🔔 라우트 렌더 완료 후 자동광고 트리거
@@ -304,9 +344,12 @@
     pingAutoAds(); // 보강
   });
 
-  // ✅ 공통 카드/썸네일 CSS는 초기 1회 로드 (버전 부착)
+  // ✅ 공통 카드/썸네일 CSS는 초기 1회 로드 (버전 부착) + i18n init 보장
   window.addEventListener('DOMContentLoaded', async () => {
     await ensureCSS('components-css', v(COMPONENTS_CSS_HREF));
+    if (window.I18N) {
+      try { await ensureI18N(); } catch (_) {}
+    }
     const [path] = parseHash();
     await navigate(path);
     pingAutoAds();

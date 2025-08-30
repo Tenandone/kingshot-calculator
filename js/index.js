@@ -56,10 +56,10 @@
   // 페이지별 필요 스크립트 (지연 로딩)
   // --------------------
   const PAGE_SCRIPTS = {
-    buildings:  'js/pages/buildings.js',
-    database:   'js/pages/database.js',
-    calculator: 'js/pages/calculator.js',
-    heroes:     'js/pages/heroes-spa.js'
+    buildings:  'js/pages/buildings.js?v=now',
+    database:   'js/pages/database.js?v=now',
+    calculator: 'js/pages/calculator.js?v=now',
+    heroes:     'js/pages/heroes-spa.js?v=now'
   };
 
   // 상세 페이지들도 공통으로 buildings.js의 initBuilding을 쓰는 경우가 많음
@@ -67,7 +67,7 @@
     'towncenter','truegold-crucible','academy','embassy','barracks','range','stable',
     'command-center','kitchen','storehouse','guard-station'
   ]);
-  const DETAIL_SCRIPT = 'js/pages/buildings.js';
+  const DETAIL_SCRIPT = 'js/pages/buildings.js?v=now';
 
   const _loadedScripts = new Set();
   function ensureScript(url) {

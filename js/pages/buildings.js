@@ -1,6 +1,56 @@
-// js/pages/buildings.js (final)
+// /js/pages/buildings.js (i18n-ready final, with calculator adapter & i18n result rerun)
 (function () {
   'use strict';
+  // 표준키 → i18n 라벨
+window.KEY_TO_I18N = {
+  level: 'buildings.col.level',
+  reqBuilding: 'buildings.col.reqBuilding', // 새로 필요
+  bread: 'buildings.col.bread',
+  wood: 'buildings.col.wood',
+  stone: 'buildings.col.stone',
+  iron: 'buildings.col.iron',
+  truegold: 'buildings.col.gold',
+  buildTimeMin: 'buildings.col.buildTimeMin',
+  power: 'buildings.col.power'
+};
+
+// 렌더 후 테이블 헤더 텍스트를 번역으로 치환
+(function setupHeaderI18NBridge(){
+  function i18nHeaderText(raw){
+    const key = (window.KEY_TO_I18N && window.KEY_TO_I18N[raw]) || raw;
+    if (window.I18N && typeof I18N.t === 'function') {
+      return I18N.t(key, raw);
+    }
+    return raw;
+  }
+
+  function patchTableHeaders(root){
+    const scope = root || document;
+    const ths = scope.querySelectorAll('table th, .table th, thead th');
+    ths.forEach(th => {
+      const raw = (th.textContent || '').trim();
+      if (!raw) return;
+      // 표준키면 번역 적용
+      if (window.KEY_TO_I18N && Object.prototype.hasOwnProperty.call(window.KEY_TO_I18N, raw)) {
+        th.textContent = i18nHeaderText(raw);
+      }
+    });
+  }
+
+  // 최초 진입/언어 변경/라우팅 변경 때마다 패치
+  document.addEventListener('DOMContentLoaded', () => setTimeout(() => patchTableHeaders(), 0));
+  document.addEventListener('i18n:changed', () => setTimeout(() => patchTableHeaders(), 0));
+  window.addEventListener('hashchange', () => setTimeout(() => patchTableHeaders(), 0));
+
+  // 혹시 SPA 내부 렌더가 비동기라면, 작은 지연으로 한 번 더
+  window.__patchKsHeaders = patchTableHeaders; // 수동 호출용 (원할 때 호출 가능)
+})();
+
+
+  // ---- i18n helpers (안전 폴백) ----
+  const t = (key, fallback) =>
+    (window.I18N && typeof I18N.t === 'function') ? I18N.t(key, fallback ?? key) : (fallback ?? key);
+  const applyI18N = (root) => { if (window.I18N && typeof I18N.applyTo === 'function') I18N.applyTo(root || document); };
 
   // ---------- ROOT ----------
   const ROOT = (() => {
@@ -20,9 +70,10 @@
   // ---------- utils ----------
   const esc  = (s) => String(s ?? '').replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   const norm = (s) => String(s ?? '').trim().toLowerCase();
+  const looksLikeKey = (s) => (typeof s === 'string' && /^[a-z0-9_.-]+$/i.test(s));
 
   // TG 라벨 적용 대상
-  const TG_LABEL_SLUGS = new Set(['towncenter', 'command-center', 'command', 'embassy', 'camp']);
+  const TG_LABEL_SLUGS = new Set(['towncenter', 'command-center', 'command', 'embassy', 'infantry','cavalry','archer','range']);
 
   function imgUrl(p){
     if(!p) return ROOT + 'img/placeholder.webp';
@@ -31,32 +82,36 @@
     return ROOT + p.replace(/^\.?\//,'');
   }
 
-  // 숫자 약어: k / m / b
+  // 숫자 약어: k / m / b (언어화)
   function fmtAbbrev(v) {
     const n = Number(v);
     if (!Number.isFinite(n)) return String(v ?? '');
     const x = Math.abs(n);
     const sign = n < 0 ? '-' : '';
+    const k = t('num.k', 'k');
+    const m = t('num.m', 'm');
+    const b = t('num.b', 'b');
     const fix1 = (y) => (y % 1 === 0 ? String(y) : y.toFixed(1).replace(/\.0$/,''));
-    if (x >= 1e9)  return sign + fix1(x / 1e9) + 'b';
-    if (x >= 1e6)  return sign + fix1(x / 1e6) + 'm';
-    if (x >= 1e3)  return sign + fix1(x / 1e3) + 'k';
+    if (x >= 1e9)  return sign + fix1(x / 1e9) + b;
+    if (x >= 1e6)  return sign + fix1(x / 1e6) + m;
+    if (x >= 1e3)  return sign + fix1(x / 1e3) + k;
     return String(n);
   }
 
-  // 시간 포맷(d h m) — 큰 값(>=100000)은 초로 간주, 아니면 분
+  // 시간 포맷(d h m) — 큰 값(>=100000)은 초로 간주, 아니면 분 (언어화)
   function fmtTime(v) {
     const n = Number(v);
-    if (!Number.isFinite(n) || n <= 0) return '0m';
+    const D = t('time.d', 'd'), H = t('time.h', 'h'), M = t('time.m', 'm');
+    if (!Number.isFinite(n) || n <= 0) return `0${M}`;
     const secs = n >= 100000 ? n : n * 60;
     let s = Math.floor(secs);
     const d = Math.floor(s / 86400); s -= d * 86400;
     const h = Math.floor(s / 3600);  s -= h * 3600;
     const m = Math.floor(s / 60);
     const out = [];
-    if (d) out.push(d + 'd');
-    if (h) out.push(h + 'h');
-    if (m || (!d && !h)) out.push(m + 'm');
+    if (d) out.push(d + D);
+    if (h) out.push(h + H);
+    if (m || (!d && !h)) out.push(m + M);
     return out.join(' ');
   }
 
@@ -80,9 +135,9 @@
 
   // ---------- slug/variant alias ----------
   const SLUG_ALIAS = {
-    'barracks':       { slug: 'camp', variant: 'infantry' },
-    'stable':         { slug: 'camp', variant: 'cavalry'  },
-    'range':          { slug: 'camp', variant: 'archer'   },
+    'barracks':       { slug: 'barracks' },
+    'stable':         { slug: 'stable' },
+    'range':          { slug: 'range' },
     'town-center':    { slug: 'towncenter' },
     'command-center': { slug: 'command' } // 구링크 보정
   };
@@ -123,6 +178,21 @@
   function showListMode(){ const g=$grid(), r=$root(); if(g) g.style.display='grid'; if(r){ r.style.display='none'; r.innerHTML=''; } }
   function showDetailMode(){ const g=$grid(), r=$root(); if(g) g.style.display='none'; if(r) r.style.display='block'; }
 
+  // ---- header/column finder (다국어 키워드 지원) ----
+  const LEVEL_KEYS = ['레벨','lv','level','等级','等級'];
+  const TIME_KEYS  = ['건설','건축','build','construction','建設','建造','施工'];
+  const findIndexContains = (arr, needles) =>
+    arr.findIndex(h => needles.some(n => String(h).toLowerCase().includes(n)));
+
+  const findHeader = (arr, names) => {
+    const lower = arr.map(x => String(x).toLowerCase());
+    for (const name of names) {
+      const idx = lower.indexOf(String(name).toLowerCase());
+      if (idx >= 0) return idx;
+    }
+    return -1;
+  };
+
   // === 표 렌더 (크리스탈/트루골드→순금 통합 + TG 라벨 + 약어/시간 포맷 + 순금 자동 숨김) ===
   function buildTable(rows, ctx = {}) {
     if (!rows || !rows.length) return '';
@@ -134,29 +204,45 @@
     let header = Array.isArray(rows[0]) ? rows[0].slice() : [];
     let body   = rows.slice(1).map(r => Array.isArray(r) ? r.slice() : []);
 
-    // 인덱스 찾기
-    let idxLevel = header.findIndex(h => String(h).includes('레벨'));
-    let idxTime  = header.findIndex(h => String(h).includes('건설'));
-    let idxGold  = header.indexOf('순금');
-    let idxCrys  = header.indexOf('크리스탈');
-    let idxTG    = header.indexOf('트루골드');
+    // ---- 인덱스 찾기 ----
+    // 레벨
+    let idxLevel = findIndexContains(header, LEVEL_KEYS);
+    if (idxLevel < 0) idxLevel = findHeader(header, ['buildings.col.level']);
+
+    // 시간(i18n 키 우선 → 정밀 정규식 → 느슨한 키워드)
+    const TIME_I18N_KEYS = [
+      'buildings.col.buildtime',
+      'buildings.col.buildtimemin',
+      'buildings.col.buildTimeMin',
+      'buildings.col.buildTime'
+    ];
+    const TIME_STRICT_RE = /^(?:건설\s*시간|건축\s*시간|build(?:ing)?\s*time|construction\s*time|建造時間|建設時間|施工時間)$/i;
+    const TIME_LOOSE_NEEDLES = ['건설','건축','build','construction','建設','建造','施工','time','시간'];
+
+    let idxTime = findHeader(header, TIME_I18N_KEYS);
+    if (idxTime < 0) idxTime = header.findIndex(h => TIME_STRICT_RE.test(String(h).trim()));
+    if (idxTime < 0) idxTime = findIndexContains(header, TIME_LOOSE_NEEDLES);
+
+    // ---- 자원/순금 컬럼 탐색 ----
+    let idxGold  = findHeader(header, ['순금','gold','buildings.col.gold']);
+    let idxCrys  = findHeader(header, ['크리스탈','crystal','水晶','クリスタル']);
+    let idxTG    = findHeader(header, ['트루골드','true gold','truegold','tg']);
 
     // (A) '크리스탈' → '순금'으로 통합
     if (idxCrys >= 0 && idxGold < 0) {
-      header[idxCrys] = '순금';
+      header[idxCrys] = t('buildings.col.gold', '순금');
       idxGold = idxCrys;
       idxCrys = -1;
     } else if (idxCrys >= 0 && idxGold >= 0) {
       body.forEach(r => {
         const g = r[idxGold];
-        const t = r[idxCrys];
+        const c = r[idxCrys];
         const isEmpty = (v) => {
           if (v === undefined || v === null) return true;
           const s = String(v).trim();
-          if (s === '' || s === '-' || s === '–' || s === '0') return true;
-          return false;
+          return (s === '' || s === '-' || s === '–' || s === '0');
         };
-        if (isEmpty(g) && !isEmpty(t)) r[idxGold] = t;
+        if (isEmpty(g) && !isEmpty(c)) r[idxGold] = c;
       });
       header.splice(idxCrys, 1);
       body.forEach(r => { if (idxCrys < r.length) r.splice(idxCrys, 1); });
@@ -167,20 +253,19 @@
 
     // (B) '트루골드' → '순금'으로 통합
     if (idxTG >= 0 && idxGold < 0) {
-      header[idxTG] = '순금';
+      header[idxTG] = t('buildings.col.gold', '순금');
       idxGold = idxTG;
       idxTG = -1;
     } else if (idxTG >= 0 && idxGold >= 0) {
       body.forEach(r => {
         const g = r[idxGold];
-        const t = r[idxTG];
+        const tg = r[idxTG];
         const isEmpty = (v) => {
           if (v === undefined || v === null) return true;
           const s = String(v).trim();
-          if (s === '' || s === '-' || s === '–' || s === '0') return true;
-          return false;
+          return (s === '' || s === '-' || s === '–' || s === '0');
         };
-        if (isEmpty(g) && !isEmpty(t)) r[idxGold] = t;
+        if (isEmpty(g) && !isEmpty(tg)) r[idxGold] = tg;
       });
       header.splice(idxTG, 1);
       body.forEach(r => { if (idxTG < r.length) r.splice(idxTG, 1); });
@@ -189,15 +274,15 @@
       idxTG = -1;
     }
 
-    // (C) 순금 열이 아예 없으면 삽입(0으로)
-    if (header.indexOf('순금') < 0) {
+    // (C) 순금 열이 없으면 삽입(0으로)
+    if (findHeader(header, [t('buildings.col.gold','순금'), '순금','gold','buildings.col.gold']) < 0) {
       const pos = idxTime >= 0 ? idxTime : header.length;
-      header.splice(pos, 0, '순금');
+      header.splice(pos, 0, t('buildings.col.gold', '순금'));
       body.forEach(r => r.splice(pos, 0, 0));
       if (idxTime >= 0) idxTime++;
       idxGold = pos;
     } else {
-      idxGold = header.indexOf('순금');
+      idxGold = findHeader(header, [t('buildings.col.gold','순금'), '순금','gold','buildings.col.gold']);
     }
 
     // (D) 순금이 모든 행에서 비어있으면 컬럼 제거(표시만 숨김)
@@ -207,11 +292,9 @@
         if (v === undefined || v === null) return true;
         const s = String(v).trim().toLowerCase().replace(/[, ]/g, '');
         if (s === '' || s === '-' || s === '–' || s === 'null' || s === 'undefined') return true;
-        // 약어 수치 파싱
         const num = Number(s.replace(/k$/,'000').replace(/m$/,'000000').replace(/b$/,'000000000'));
         if (Number.isFinite(num)) return num <= 0;
-        // 숫자 아닌 텍스트가 들어오면 보수적으로 표시 유지
-        return false;
+        return false; // 숫자 아닌 텍스트면 보수적으로 표시 유지
       };
       const hasAny = body.some(r => !isEmptyGold(r[idxGold]));
       if (!hasAny) {
@@ -223,25 +306,41 @@
       }
     })();
 
-    // 자원 약어 포맷 대상 (최종 헤더 기준)
-    const RESOURCE_HEADERS = new Set(['빵','나무','석재','철','순금']);
+    // 자원 약어 포맷 대상 (다국어/키 포함)
+    const RESOURCE_NAMES = ['빵','bread','나무','wood','석재','stone','철','iron', t('buildings.col.gold','순금').toLowerCase(), 'gold'];
+    const resourceKeyRe = /^buildings\.col\.(bread|wood|stone|iron|gold)$/i;
+
     const resourceIdxs = header.reduce((acc, h, i) => {
-      if (RESOURCE_HEADERS.has(String(h))) acc.push(i);
+      const str = String(h);
+      const name = str.toLowerCase();
+      if (RESOURCE_NAMES.includes(name) || resourceKeyRe.test(str)) acc.push(i);
       return acc;
     }, []);
 
-    const ths = header.map(h => `<th>${esc(h)}</th>`).join('');
+    // ----- 헤더 출력 (i18n 키면 번역 + data-i18n 부여)
+    const ths = header.map((h) => {
+      const key = String(h);
+      const label = t(key, key);
+      const isKey = /^[a-z0-9_.-]+$/i.test(key);
+      return `<th${isKey ? ` data-i18n="${esc(key)}"` : ''}>${esc(label)}</th>`;
+    }).join('');
 
+    // ----- 바디 출력
     const trs = body.map((r) => {
       const tds = r.map((c, i) => {
+        // 레벨 열: TG 라벨 처리
         if (useTGLabels && i === idxLevel) return `<td>${esc(levelToLabel(c))}</td>`;
-        if (i === idxTime)  return `<td>${esc(fmtTime(c))}</td>`;
+        // 시간 열: idxTime이 레벨과 겹치지 않을 때만 시간 포맷 적용 (최종 가드)
+        if (i === idxTime && idxTime !== idxLevel) return `<td>${esc(fmtTime(c))}</td>`;
+        // 자원 열: 약어
         if (resourceIdxs.includes(i)) return `<td>${esc(fmtAbbrev(c))}</td>`;
+        // 기본
         return `<td>${esc(c)}</td>`;
       }).join('');
       return `<tr>${tds}</tr>`;
     }).join('');
 
+    // ----- 최종 반환
     return `<div class="table-wrap">
       <table>
         <thead><tr>${ths}</tr></thead>
@@ -250,17 +349,29 @@
     </div>`;
   }
 
+  // ---------- 카드/탭 라벨 i18n ----------
+  const keySlug = s => String(s || '').trim().toLowerCase();
+  const keyVar  = v => String(v || '').trim().toLowerCase();
+  const cardTitle = (slug, variantKey, fb) => {
+    const s = keySlug(slug);
+    const v = keyVar(variantKey);
+    const k = v ? `buildings.card.${s}.${v}.title` : `buildings.card.${s}.title`;
+    return t(k, fb);
+  };
+  const cardSubtitle = (slug, fb) => t(`buildings.card.${keySlug(slug)}.subtitle`, fb);
+
   // ---------- 카드 렌더 ----------
-  function makeCardHTML({ href, title, img, subtitle }) {
+  function makeCardHTML({ href, title, img, subtitle, i18nTitleKey, i18nSubtitleKey, i18nAltKey }) {
     const fallback = esc(ROOT + 'img/placeholder.webp');
     const safeImg = imgUrl(img || 'img/placeholder.webp');
     return `
       <a class="card" href="${esc(href)}">
         <img src="${esc(safeImg)}" alt="${esc(title)}"
+             ${i18nAltKey ? `data-i18n-attr="alt:${esc(i18nAltKey)}"` : ''}
              onerror="this.onerror=null;this.src='${fallback}'">
         <div class="card-text">
-          <div class="card-title">${esc(title)}</div>
-          ${subtitle ? `<div class="card-sub">${esc(subtitle)}</div>` : ''}
+          <div class="card-title" ${i18nTitleKey ? `data-i18n="${esc(i18nTitleKey)}"` : ''}>${esc(title)}</div>
+          ${subtitle ? `<div class="card-sub" ${i18nSubtitleKey ? `data-i18n="${esc(i18nSubtitleKey)}"` : ''}>${esc(subtitle)}</div>` : ''}
         </div>
       </a>`;
   }
@@ -269,19 +380,18 @@
   const ORDER = [
     'towncenter',
     'embassy',
-    'camp:infantry',
-    'camp:cavalry',
-    'camp:archer',
+    'barracks',
+    'stable',
+    'range',
     'academy',
-    'command',                 // 지휘부 (alias: command-center → command)
+    'command',
     'infirmary',
-    'truegold-crucible',       // 황금용광로(프로젝트 내 슬러그에 맞춰 필요시 변경)
-    'gold-smelter',            // 혹시 다른 슬러그일 경우도 커버
-    'guard-station',           // 방위소
-    'kitchen',                 // 주방
-    'storehouse'               // 창고
+    'truegold-crucible',
+    'gold-smelter',
+    'guard-station',
+    'kitchen',
+    'storehouse'
   ];
-
   function orderScore(key){
     const i = ORDER.indexOf(key);
     return i < 0 ? 9999 : i;
@@ -290,26 +400,41 @@
   // item → 카드 항목들(variants 포함)
   function buildCardItems(b){
     if (b.hidden) return [];
-    const baseSlug = String(b.slug);
+    // i18n 키용 슬러그는 정규화(+구슬러그 보정)
+    const mapped = resolveSlugVariant(b.slug);
+    const baseSlug = String(mapped.slug);
+    const sKey = keySlug(baseSlug);
+
     if (Array.isArray(b.variants) && b.variants.length){
-      const subtitle = b.title || b.name || baseSlug;
-      return b.variants.map(v => ({
-        key: `${baseSlug}:${String(v.key)}`,
-        html: makeCardHTML({
-          href: `#building/${baseSlug}/${v.key}`,
-          title: v.title || v.key,
-          img: v.image,
-          subtitle
-        })
-      }));
+      const subtitle = cardSubtitle(sKey, b.title || b.name || baseSlug);
+      return b.variants.map(v => {
+        const vKeyRaw = String(v.key || '');
+        const vKey = keyVar(vKeyRaw);
+        return {
+          key: `${baseSlug}:${vKeyRaw}`,
+          html: makeCardHTML({
+            href: `#building/${baseSlug}/${vKeyRaw}`,
+            title: cardTitle(sKey, vKeyRaw, v.title || vKeyRaw),
+            img: v.image,
+            subtitle,
+            i18nTitleKey:   `buildings.card.${sKey}.${vKey}.title`,
+            i18nSubtitleKey:`buildings.card.${sKey}.subtitle`,
+            i18nAltKey:     `buildings.card.${sKey}.${vKey}.title`
+          })
+        };
+      });
     }
+
     return [{
       key: baseSlug,
       html: makeCardHTML({
         href: `#building/${baseSlug}`,
-        title: b.title || b.name || baseSlug,
+        title: cardTitle(sKey, '', b.title || b.name || baseSlug),
         img: b.image,
-        subtitle: b.subtitle || ''
+        subtitle: cardSubtitle(sKey, b.subtitle || ''),
+        i18nTitleKey:   `buildings.card.${sKey}.title`,
+        i18nSubtitleKey:`buildings.card.${sKey}.subtitle`,
+        i18nAltKey:     `buildings.card.${sKey}.title`
       })
     }];
   }
@@ -318,7 +443,9 @@
   async function renderBuildingsList(){
     const g=$grid(), r=$root(); if(!g) return;
     if (r){ r.innerHTML=''; r.style.display='none'; }
-    g.innerHTML = '<div class="loading" style="padding:12px;color:#666">Loading…</div>';
+    g.innerHTML = `<div class="loading" style="padding:12px;color:#666" data-i18n="common.loading">${esc(t('common.loading','Loading…'))}</div>`;
+    applyI18N(g);
+
     try{
       const list = await loadData();
       const items = list.flatMap(buildCardItems);
@@ -332,35 +459,172 @@
 
       g.innerHTML = items.map(x => x.html).join('');
       g.style.display='grid';
-      document.title = '건물 목록 - KingshotData.KR';
+      document.title = t('title.buildingsList', '건물 목록 - KingshotData.KR');
+      applyI18N(g);
       window.scrollTo({ top: 0 });
     }catch(e){
-      g.innerHTML = `<div class="error">목록 로드 실패<br>${esc(String(e))}</div>`;
+      g.innerHTML = `<div class="error">
+        <div data-i18n="buildings.listLoadFail">${esc(t('buildings.listLoadFail','목록 로드 실패'))}</div>
+        <div class="muted">${esc(String(e))}</div>
+      </div>`;
+      applyI18N(g);
     }
   }
 
   // ---------- variants 탭 ----------
   function buildVariantTabs(slug, variants, currentKey){
     if (!variants || !variants.length) return '';
+    const sKey = keySlug(slug);
     const items = variants.map(v=>{
-      const key = esc(v.key);
-      const isOn = (norm(currentKey)===norm(v.key));
+      const keyRaw = String(v.key || '');
+      const key = esc(keyRaw);
+      const vKey = keyVar(keyRaw);
+      const isOn = (norm(currentKey)===norm(keyRaw));
       const href = `#building/${slug}/${key}`;
-      return `<a href="${href}" class="tab${isOn?' on':''}" data-variant="${key}" style="display:inline-block;padding:6px 10px;border:1px solid #ddd;border-radius:16px;margin-right:6px;text-decoration:none;color:${isOn?'#fff':'#333'};background:${isOn?'#333':'#fff'}">${esc(v.title||key)}</a>`;
+      const kPath = `buildings.card.${sKey}.${vKey}.title`;
+      const label = t(kPath, v.title || keyRaw);
+      return `<a href="${href}" class="tab${isOn?' on':''}" data-variant="${key}" style="display:inline-block;padding:6px 10px;border:1px solid #ddd;border-radius:16px;margin-right:6px;text-decoration:none;color:${isOn?'#fff':'#333'};background:${isOn?'#333':'#fff'}">
+                <span data-i18n="${esc(kPath)}">${esc(label)}</span>
+              </a>`;
     }).join('');
     return `<nav class="variant-tabs" style="margin:8px 0 12px">${items}</nav>`;
   }
 
   // 언락 제목 커스텀 맵 (JSON 키는 그대로 unlocks 사용)
   const UNLOCK_TITLE_BY_SLUG = {
-    'kitchen': '주방일정'
+    'kitchen': 'buildings.kitchenSchedule' // i18n key
   };
+
+  // =====================================================================
+  // ★ 계산기 어댑터 & 연동 (라벨/키 → 머신키, i18n 컨텍스트 전달, 언어 변경 재계산)
+  // =====================================================================
+
+  // 라벨 → 머신키 역매핑
+  const HEADER_REVERSE_MAP = {
+    // KO
+    '레벨':'level','빵':'bread','나무':'wood','석재':'stone','철':'iron','순금':'truegold','건설 시간':'buildTime',
+    // EN
+    'level':'level','bread':'bread','wood':'wood','stone':'stone','iron':'iron','gold':'truegold','truegold':'truegold','build time':'buildTime','construction time':'buildTime',
+    // JA
+    'レベル':'level','パン':'bread','木材':'wood','石材':'stone','鉄':'iron','真金':'truegold','建設時間':'buildTime',
+    // zh-CN
+    '等级':'level','面包':'bread','木材':'wood','石材':'stone','铁':'iron','真金':'truegold','建造时间':'buildTime',
+    // zh-TW
+    '等級':'level','麵包':'bread','木材':'wood','石材':'stone','鐵':'iron','真金':'truegold','建造時間':'buildTime'
+  };
+
+  // i18n 키 → 컬럼 id (예: buildings.col.buildTime → buildTime)
+  function idFromI18nKey(k){
+    const m = /^buildings\.col\.([A-Za-z0-9_-]+)$/i.exec(String(k));
+    if (!m) return null;
+    return m[1];
+  }
+
+  // 머신 id 표준화 (buildTimeMin → buildTime, gold → truegold 등)
+  function normalizeId(id){
+    const raw = String(id);
+    const flat = raw.replace(/[-_]/g,'').toLowerCase();
+    switch(flat){
+      case 'gold':         return 'truegold';
+      case 'truegold':     return 'truegold';
+      case 'buildtimemin':
+      case 'buildtime':
+      case 'constructiontime':
+      case 'time':         return 'buildTime';
+      case 'level':        return 'level';
+      case 'bread':        return 'bread';
+      case 'wood':         return 'wood';
+      case 'stone':        return 'stone';
+      case 'iron':         return 'iron';
+      default:             return raw; // 알 수 없는 것은 그대로
+    }
+  }
+
+  // 헤더 1행을 머신키 배열로 정규화
+  function normalizeHeaderToIds(headerRow){
+    return headerRow.map(h => {
+      const s = String(h);
+      // i18n 키?
+      const fromKey = idFromI18nKey(s);
+      if (fromKey) return normalizeId(fromKey);
+      // 라벨?
+      const fromLabel = HEADER_REVERSE_MAP[s.toLowerCase()] || HEADER_REVERSE_MAP[s];
+      if (fromLabel) return normalizeId(fromLabel);
+      // 이미 머신키?
+      return normalizeId(s);
+    });
+  }
+
+  // 전체 테이블을 계산기용으로 변환
+  function adaptTableForCalculator(table){
+    if (!Array.isArray(table) || table.length === 0) return table;
+    const headerIds = normalizeHeaderToIds(table[0]);
+    return [headerIds, ...table.slice(1)];
+  }
+
+  // 계산기 컨텍스트 구성(언어, t, 포맷터, 컬럼 라벨 맵)
+  function buildCalcContext(meta, headerIds){
+    const lang = (window.I18N && I18N.current) ? I18N.current : 'ko';
+    const columns = {};
+    (headerIds || []).forEach(id => {
+      columns[id] = t(`buildings.col.${id}`, id);
+    });
+    const units = {
+      thousand: t('num.k','k'),
+      million:  t('num.m','m'),
+      billion:  t('num.b','b'),
+      hour:     t('time.h','h'),
+      minute:   t('time.m','m'),
+      day:      t('time.d','d')
+    };
+    return {
+      lang,
+      t: (k, fb) => t(k, fb),
+      fmt: { number: fmtAbbrev, time: fmtTime, level: levelToLabel },
+      columns,
+      units,
+      meta: meta || {}
+    };
+  }
+
+  // 외부 계산기 실행 래퍼 (여러 구현 감지)
+  function runCalculator(table, ctx){
+    const container = document.getElementById('calc-root');
+    if (!container) return false;
+
+    // 1) 명시적 렌더 API
+    if (window.BuildingCalc && typeof window.BuildingCalc.render === 'function') {
+      window.BuildingCalc.render(container, table, ctx);
+      return true;
+    }
+    // 2) run 후 결과 반환
+    if (window.BuildingCalc && typeof window.BuildingCalc.run === 'function') {
+      const res = window.BuildingCalc.run(table, ctx);
+      if (typeof res === 'string') container.innerHTML = res;
+      return true;
+    }
+    // 3) 전역 함수
+    if (typeof window.runCalculator === 'function') {
+      const res = window.runCalculator(table, ctx);
+      if (typeof res === 'string') container.innerHTML = res;
+      return true;
+    }
+    // 4) 이벤트로 브로드캐스트
+    document.dispatchEvent(new CustomEvent('calculator:input', { detail: { table, ctx, container } }));
+    // 로더 없음 표시(조용히)
+    container.innerHTML = `<div class="calc-hint" style="margin-top:12px;color:#666">${esc(t('calc.notLoaded','계산기 모듈이 로드되지 않았습니다.'))}</div>`;
+    return false;
+  }
+
+  // 마지막 계산 입력(언어 변경 시 재실행)
+  let __lastCalcInput = null;
 
   // ---------- 상세 ----------
   async function renderBuildingDetail(slugRaw, variantRaw){
     const g=$grid(), r=$root(); if(!r) return;
     showDetailMode();
-    r.innerHTML = '<div class="loading" style="padding:12px;color:#666">Loading…</div>';
+    r.innerHTML = `<div class="loading" style="padding:12px;color:#666" data-i18n="common.loading">${esc(t('common.loading','Loading…'))}</div>`;
+    applyI18N(r);
 
     try{
       const mapped  = resolveSlugVariant(slugRaw, variantRaw);
@@ -373,11 +637,14 @@
       if (!item){
         r.innerHTML = `
           <div class="not-found" style="padding:12px">
-            <h2 style="margin:0 0 6px">Not Found</h2>
-            <p>요청한 건물을 찾을 수 없습니다: <code>${esc(slugRaw)}</code></p>
-            <p style="margin-top:10px"><a href="#buildings">← 건물 목록으로</a></p>
+            <h2 style="margin:0 0 6px" data-i18n="buildings.notFound.title">${esc(t('buildings.notFound.title','Not Found'))}</h2>
+            <p data-i18n="buildings.notFound.desc">${esc(t('buildings.notFound.desc','요청한 건물을 찾을 수 없습니다.'))}</p>
+            <p style="margin-top:10px">
+              <a href="#buildings" data-i18n="buildings.backToList">← ${esc(t('buildings.backToList','건물 목록으로'))}</a>
+            </p>
           </div>`;
-        document.title = 'Not Found - KingshotData.KR';
+        document.title = t('title.notFound', 'Not Found - KingshotData.KR');
+        applyI18N(r);
         window.scrollTo({ top: 0 });
         return;
       }
@@ -387,15 +654,21 @@
         ? (variants.find(v=>norm(v.key)===norm(variant)) || variants[0])
         : null;
 
-      const titleBase = esc(item.title || item.name || item.slug);
-      const title = currentVar ? `${titleBase} – ${esc(currentVar.title||currentVar.key)}` : titleBase;
+      // === 상세 제목/alt/문서 타이틀 i18n 키 계산 ===
+      const sKey = keySlug(item.slug);
+      const vKey = currentVar ? keyVar(currentVar.key) : '';
+      const titleKey = vKey ? `buildings.card.${sKey}.${vKey}.title` : `buildings.card.${sKey}.title`;
+      const titleFallback = currentVar
+        ? (currentVar.title || currentVar.key)
+        : (item.title || item.name || item.slug);
+      const titleText = t(titleKey, titleFallback);
 
       const img = imgUrl((currentVar && currentVar.image) || item.image || 'img/placeholder.webp');
       const fallback = esc(ROOT+'img/placeholder.webp');
-      const desc = esc(item.description || '');
 
-      const rows = (currentVar && currentVar.table) || item.table || [];
-      const table = buildTable(rows, { slug: item.slug });
+      // 원본 표(렌더용)
+      const rowsRaw = (currentVar && currentVar.table) || item.table || [];
+      const tableHtml = buildTable(rowsRaw, { slug: item.slug });
       const tabs = buildVariantTabs(item.slug, variants, currentVar ? currentVar.key : '');
 
       const unlocksSrc =
@@ -403,45 +676,92 @@
           ? currentVar.unlocks
           : (Array.isArray(item.unlocks) ? item.unlocks : []);
 
-      const unlocksList = unlocksSrc.map(esc).map(u=>`<li>${u}</li>`).join('');
-      const unlockTitle = UNLOCK_TITLE_BY_SLUG[norm(item.slug)] || '언락';
+      const unlocksList = unlocksSrc
+        .map(u => {
+          const label = looksLikeKey(u) ? t(u, u) : u;
+          return `<li${looksLikeKey(u) ? ` data-i18n="${esc(u)}"` : ''}>${esc(label)}</li>`;
+        })
+        .join('');
+      const unlockTitleKey = UNLOCK_TITLE_BY_SLUG[norm(item.slug)] || 'buildings.unlocks';
+      const unlockTitleText = t(
+        unlockTitleKey,
+        UNLOCK_TITLE_BY_SLUG[norm(item.slug)] ? t('buildings.kitchenSchedule','주방 일정') : t('buildings.unlocks','해금')
+      );
+
+      // 상세 설명 i18n: 데이터에 키가 있으면 우선, 없으면 폴백 키
+      const descKey = looksLikeKey(item.description) ? item.description : `buildings.detail.${sKey}.desc`;
+      const descText = t(descKey, item.description || '');
+
       const unlocksHtml = unlocksList ? `
         <section class="detail-unlocks" style="margin-top:16px">
-          <h3 style="margin:0 0 6px">${esc(unlockTitle)}</h3>
+          <h3 style="margin:0 0 6px" data-i18n="${esc(unlockTitleKey)}">${esc(unlockTitleText)}</h3>
           <ul>${unlocksList}</ul>
         </section>` : '';
 
+      // === 계산기 입력 준비: 헤더를 머신키로 통일 ===
+      const adaptedTable = adaptTableForCalculator(rowsRaw);
+      const headerIds = Array.isArray(adaptedTable) && adaptedTable.length ? adaptedTable[0] : [];
+
+      // 계산기 컨테이너 포함한 상세 HTML
       r.innerHTML = `
-        <div style="margin-bottom:16px">
-          <a href="#buildings" style="display:inline-block;padding:8px 12px;border:1px solid #ccc;border-radius:6px;text-decoration:none;background:#fff;color:#333">← 건물 목록으로</a>
-        </div>
+  <div style="margin-bottom:16px; text-align:right">
+    <a href="#buildings"
+       style="display:inline-block;padding:8px 12px;border:1px solid #ccc;
+              border-radius:6px;text-decoration:none;background:#fff;color:#333"
+       aria-label="${esc(t('buildings.backToList','건물 목록으로'))}">
+      ←
+    </a>
+  </div>
+
+
 
         ${tabs}
 
         <section class="detail-grid">
           <div>
-            <img src="${esc(img)}" alt="${title}" class="detail-img"
+            <img src="${esc(img)}" alt="${esc(titleText)}" class="detail-img"
+                 data-i18n-attr="alt:${esc(titleKey)}"
                  onerror="this.onerror=null;this.src='${fallback}'">
           </div>
           <div>
-            <h1 style="margin:0 0 8px">${title}</h1>
-            ${desc ? `<p class="detail-desc">${desc}</p>` : ''}
+            <h1 style="margin:0 0 8px" data-i18n="${esc(titleKey)}">${esc(titleText)}</h1>
+            ${descText ? `<p class="detail-desc"${looksLikeKey(descKey) ? ` data-i18n="${esc(descKey)}"` : ''}>${esc(descText)}</p>` : ''}
           </div>
         </section>
 
-        <section class="detail-table" style="margin-top:16px">${table}</section>
+        <section class="detail-table" style="margin-top:16px">${tableHtml}</section>
+
+        <section id="calc-root" class="detail-calc" style="margin-top:16px"></section>
 
         ${unlocksHtml}
       `;
-      document.title = `${title} - KingshotData.KR`;
+      document.title = `${t(titleKey, titleFallback)} - KingshotData.KR`;
+      applyI18N(r);
       window.scrollTo({ top: 0 });
+
+      // === 계산기 실행 & 저장 (언어 컨텍스트 포함)
+      const calcCtx = buildCalcContext({ slug: item.slug, variant: currentVar ? currentVar.key : '' }, headerIds);
+      runCalculator(adaptedTable, calcCtx);
+      __lastCalcInput = { table: adaptedTable, meta: { slug: item.slug, variant: currentVar ? currentVar.key : '' }, headerIds };
     }catch(e){
-      r.innerHTML = `<div class="error">상세 로드 실패<br>${esc(String(e))}</div>`;
+      r.innerHTML = `<div class="error">
+        <div data-i18n="buildings.detailLoadFail">${esc(t('buildings.detailLoadFail','상세 로드 실패'))}</div>
+        <div class="muted">${esc(String(e))}</div>
+      </div>`;
+      applyI18N(r);
+    }
+  }
+
+  // ---------- i18n namespace 보장 ----------
+  async function ensureBuildingsNS(){
+    if (window.I18N && typeof I18N.loadNamespace === 'function') {
+      await I18N.loadNamespace('buildings');
     }
   }
 
   // ---------- routing ----------
-  function handleRoute(){
+  async function handleRoute(){
+    await ensureBuildingsNS(); // ← 네임스페이스 로드 보장
     const hash = (location.hash || '#buildings').slice(1);
     const [page, slug, variant] = hash.split('/');
     if (page === 'building' && slug){ renderBuildingDetail(slug, variant); return; }
@@ -458,6 +778,33 @@
   // 단독 페이지로 열려도 동작
   window.addEventListener('DOMContentLoaded', handleRoute);
 
+  // 언어 변경 시 현재 페이지 텍스트 재적용 + 계산 결과 재실행
+  document.addEventListener('i18n:changed', async () => {
+    await ensureBuildingsNS();
+    const gridEl = document.getElementById('buildings-grid') || document;
+    const rootEl = document.getElementById('building-root') || document;
+    applyI18N(gridEl);
+    applyI18N(rootEl);
+
+    if (location.hash.startsWith('#building/')) {
+      // 상세 페이지일 때 문서 타이틀도 i18n 키로 갱신
+      const h1 = rootEl.querySelector('h1[data-i18n]');
+      if (h1) {
+        const k = h1.getAttribute('data-i18n');
+        const txt = t(k, h1.textContent || '');
+        document.title = `${txt} - KingshotData.KR`;
+      }
+
+      // ★ 계산기도 언어 컨텍스트로 재실행
+      if (__lastCalcInput && __lastCalcInput.table) {
+        const ctx = buildCalcContext(__lastCalcInput.meta, __lastCalcInput.headerIds);
+        runCalculator(__lastCalcInput.table, ctx);
+      }
+    } else {
+      document.title = t('title.buildingsList', '건물 목록 - KingshotData.KR');
+    }
+  });
+
   // 탭 즉시 반응
   document.addEventListener('click', (e) => {
     const tab = e.target.closest('.variant-tabs a[href^="#building/"]');
@@ -467,4 +814,5 @@
       handleRoute();
     }
   });
+
 })();

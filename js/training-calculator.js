@@ -1,4 +1,4 @@
-// /js/training-calculator.js
+// /js/training-calculator.js (v20250830-i18n)
 window.initTrainingCalculator = function initTrainingCalculator(opts){
   const mountSel = opts?.mount || '#training-calc';
   const jsonUrl  = opts?.jsonUrl;
@@ -6,6 +6,9 @@ window.initTrainingCalculator = function initTrainingCalculator(opts){
   if (!root) return console.warn('[kscalc] mount not found:', mountSel);
   if (!jsonUrl) return console.warn('[kscalc] jsonUrl is required');
   if (root.dataset.kscalcBound === '1') return; // 중복 init 방지
+
+  // i18n helper
+  const T = (k) => (window.I18N?.t?.(k) ?? k);
 
   let DATA = null;
 
@@ -21,7 +24,11 @@ window.initTrainingCalculator = function initTrainingCalculator(opts){
     const h = Math.floor(sec/3600);  sec%=3600;
     const m = Math.floor(sec/60);
     const s = sec%60;
-    const parts=[]; if(d)parts.push(d+'일'); if(h)parts.push(h+'시간'); if(m)parts.push(m+'분'); if(s||!parts.length)parts.push(s+'초');
+    const parts=[];
+    if (d) parts.push(d + T('trainCalc.units.day'));
+    if (h) parts.push(h + T('trainCalc.units.hour'));
+    if (m) parts.push(m + T('trainCalc.units.min'));
+    if (s || !parts.length) parts.push(s + T('trainCalc.units.sec'));
     return parts.join(' ');
   };
 
@@ -50,7 +57,8 @@ window.initTrainingCalculator = function initTrainingCalculator(opts){
     for (const v of arr){
       const opt = document.createElement('option');
       opt.value = v;
-      opt.textContent = "Level " + v;
+      const tpl = T('trainCalc.level'); // e.g., "Lv {n}"
+      opt.textContent = (typeof tpl === 'string' && tpl.includes('{n}')) ? tpl.replace('{n}', v) : `Level ${v}`;
       el.appendChild(opt);
     }
   }
@@ -71,7 +79,7 @@ window.initTrainingCalculator = function initTrainingCalculator(opts){
     pillTroops.classList.toggle('active', !toTime);
     inTime.forEach(el=> el.style.display   = toTime ? '' : 'none');
     inTroops.forEach(el=> el.style.display = toTime ? 'none' : '');
-    queueMicrotask(calc); // 토글 후 계산 타이밍 안정화
+    queueMicrotask(calc);
   }
   function findRecord(mode, fromTier, toTier){
     return DATA.find(r =>
@@ -90,16 +98,16 @@ window.initTrainingCalculator = function initTrainingCalculator(opts){
     if (total==null || !amount) return null;
     return total/amount;
   }
-  function addRow(name, per1, total){
+  function addRow(nameKey, per1, total){
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${name}</td><td class="num">${per1}</td><td class="num">${total}</td>`;
+    tr.innerHTML = `<td>${T(nameKey)}</td><td class="num">${per1}</td><td class="num">${total}</td>`;
     tbody.appendChild(tr);
   }
 
   // ---------- core calc ----------
   function calc(){
     if (!DATA) return;
-    if (!modeSel || !toSel) return; // DOM 안전장치
+    if (!modeSel || !toSel) return;
     const inputMode = pillTroops.classList.contains('active') ? 'troops' : 'time';
 
     const mode = modeSel.value;
@@ -133,28 +141,25 @@ window.initTrainingCalculator = function initTrainingCalculator(opts){
       const totalSec = days * 86400;
       const n = Math.floor(totalSec / t1);
       const tN = t1 * n;
-      const remain = totalSec - tN;
 
-      addRow('가능 병력 수 (가속일수 기준)', '-', fmt(n,0));
-      addRow('최강영주 점수', fmt(hog1, 2), fmt(hog1==null? null : hog1*n, 0));
-      addRow('최강왕국(준비전) 점수', fmt(kvk1, 2), fmt(kvk1==null? null : kvk1*n, 0));
-      addRow('지고의영주 점수', fmt(gov1, 2), fmt(gov1==null? null : gov1*n, 0));
-      addRow('전투력 증가', fmt(pow1, 2), fmt(pow1==null? null : pow1*n, 0));
-      addRow('1명당 소요 시간 (속도 적용)', secToDHMS(t1), secToDHMS(tN));
-      
+      addRow('trainCalc.rows.possibleTroops', '-', fmt(n,0));
+      addRow('trainCalc.rows.hogPoints',       fmt(hog1, 2), fmt(hog1==null? null : hog1*n, 0));
+      addRow('trainCalc.rows.kvkPoints',       fmt(kvk1, 2), fmt(kvk1==null? null : kvk1*n, 0));
+      addRow('trainCalc.rows.govPoints',       fmt(gov1, 2), fmt(gov1==null? null : gov1*n, 0));
+      addRow('trainCalc.rows.powerInc',        fmt(pow1, 2), fmt(pow1==null? null : pow1*n, 0));
+      addRow('trainCalc.rows.timePerOneApplied', secToDHMS(t1), secToDHMS(tN));
+
     } else {
       const n = Math.max(1, Number(countEl.value||1));
       const tN = t1 * n;
-      const daysNeed = tN / 86400;
 
-      addRow('입력 병력 수', '-', fmt(n,0));
-      addRow('최강영주 점수', fmt(hog1, 2), fmt(hog1==null? null : hog1*n, 0));
-      addRow('최강왕국(준비전) 점수', fmt(kvk1, 2), fmt(kvk1==null? null : kvk1*n, 0));
-      addRow('지고의영주 점수', fmt(gov1, 2), fmt(gov1==null? null : gov1*n, 0));
-      addRow('전투력 증가', fmt(pow1, 2), fmt(pow1==null? null : pow1*n, 0));
-      addRow('1명당 소요 시간 (속도 적용)', secToDHMS(t1), secToDHMS(tN));
-      addRow('필요 가속 시간', '-', secToDHMS(tN));
-      
+      addRow('trainCalc.rows.inputTroops',     '-', fmt(n,0));
+      addRow('trainCalc.rows.hogPoints',       fmt(hog1, 2), fmt(hog1==null? null : hog1*n, 0));
+      addRow('trainCalc.rows.kvkPoints',       fmt(kvk1, 2), fmt(kvk1==null? null : kvk1*n, 0));
+      addRow('trainCalc.rows.govPoints',       fmt(gov1, 2), fmt(gov1==null? null : gov1*n, 0));
+      addRow('trainCalc.rows.powerInc',        fmt(pow1, 2), fmt(pow1==null? null : pow1*n, 0));
+      addRow('trainCalc.rows.timePerOneApplied', secToDHMS(t1), secToDHMS(tN));
+      addRow('trainCalc.rows.needAccelTime',   '-', secToDHMS(tN));
     }
   }
 
@@ -172,6 +177,10 @@ window.initTrainingCalculator = function initTrainingCalculator(opts){
     });
 
     calcBtn?.addEventListener('click', calc);
+
+    // 언어 전환 시 옵션 라벨 갱신
+    document.addEventListener('i18n:changed', () => { refreshTierInputs(); calc(); }, { once:false });
+
     refreshTierInputs();
     setInputMode('time');
     calc();

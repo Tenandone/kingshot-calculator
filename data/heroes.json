@@ -1,1627 +1,2195 @@
 ﻿[
   {
     "name": "Jaeger",
-    "nameKo": "예거",
     "image": "/img/heroes/Jaeger/img_001.webp",
     "generation": 3,
-    "unit": "궁병",
-    "summary": "킹샷 3세대 SSR 궁병 영웅 예거는 최강왕국과 지고의 영주 이벤트를 통해 조각을 획득할 수 있습니다.",
-    "sources": ["일일 특혜", "성검 상점", "최강왕국 이벤트", "지고의영주 이벤트"],
+    "unit": "heroes.card.jaeger.unit",
+    "summary": "heroes.card.jaeger.summary",
+    "sources": [
+      "heroes.card.jaeger.source.1",
+      "heroes.card.jaeger.source.2",
+      "heroes.card.jaeger.source.3",
+      "heroes.card.jaeger.source.4"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "4,045" },
-        { "label": "영웅 방어", "value": "3,330" },
-        { "label": "영웅 체력", "value": "24,974" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "4,045"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "3,330"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "24,974"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Jaeger/img_002.webp",
-          "name": "치명적인 이끌림",
-          "desc": "범위 내의 적에게 공격력 * 224%의 피해를 주고 2초 동안 기절시킵니다.",
-          "upgrade": "범위 피해 증가: 160% / 176% / 192% / 208% / 224%"
+          "desc": "heroes.jaeger.conq.s1.desc",
+          "upgrade": "heroes.jaeger.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Jaeger/img_003.webp",
-          "name": "서투른 연기",
-          "desc": "공격에 성공 시 예거는 공격력 * 300%의 피해를 입히거나, 공격에 실패 시 공격력 * 50%와 동일한 체력을 회복시킵니다.",
-          "upgrade": "피해 증가: 220% / 240% / 260% / 280% / 300%"
+          "desc": "heroes.jaeger.conq.s2.desc",
+          "upgrade": "heroes.jaeger.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Jaeger/img_004.webp",
-          "name": "비문",
-          "desc": "3초 동안 적이 받는 피해량이 30% 증가합니다.",
-          "upgrade": "적이 받는 피해 증가: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.jaeger.conq.s3.desc",
+          "upgrade": "heroes.jaeger.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "궁병 공격력", "value": "+290%" },
-        { "label": "궁병 방어력", "value": "+290%" }
+        {
+          "label": "heroes.col.archerAtk",
+          "value": "+290%"
+        },
+        {
+          "label": "heroes.col.archerDef",
+          "value": "+290%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Jaeger/img_005.webp",
-          "name": "템페스트",
-          "desc": "예거의 승리 음악은 위협의 훌륭한 도구로, 3턴 동안 스쿼드의 피해량이 40% 증가할 확률이 20%입니다.",
-          "upgrade": "피해 증가: 8% / 16% / 24% / 32% / 40%"
+          "desc": "heroes.jaeger.exp.s1.desc",
+          "upgrade": "heroes.jaeger.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Jaeger/img_006.webp",
-          "name": "저항",
-          "desc": "음악은 군인의 마음을 집중시킵니다. 예거는 모든 스쿼드에게 공격 시 2턴 동안 적 스쿼드의 총 치사율을 50% 감소시킬 확률을 20%로 부여합니다.",
-          "upgrade": "적의 치명률 감소: 10% / 20% / 30% / 40% / 50%"
+          "desc": "heroes.jaeger.exp.s2.desc",
+          "upgrade": "heroes.jaeger.exp.s2.up"
         },
         {
           "icon": "/img/heroes/Jaeger/img_007.webp",
-          "name": "축하 행사",
-          "desc": "활기찬 노래는 새로운 활력을 불어넣습니다. 전체 스쿼드의 체력이 25% 증가합니다.",
-          "upgrade": "건강 증진: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.jaeger.exp.s3.desc",
+          "upgrade": "heroes.jaeger.exp.s3.up"
         }
       ]
     },
     "exclusiveGear": {
-      "name": "방랑자",
+      "name": "heroes.jaeger.gear.name",
       "icon": "/img/heroes/Jaeger/img_008.webp",
       "stats": [
-        { "label": "전투력", "value": "315,000" },
-        { "label": "영웅 공격", "value": "764" },
-        { "label": "영웅 방어", "value": "630" },
-        { "label": "영웅 체력", "value": "4,725" },
-        { "label": "호위 공격", "value": "254" },
-        { "label": "호위 방어", "value": "210" },
-        { "label": "호위 체력", "value": "1,575" },
-        { "label": "궁병 파괴력", "value": "+70%" },
-        { "label": "궁병 체력", "value": "+70%" }
+        {
+          "label": "heroes.col.power",
+          "value": "315,000"
+        },
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "764"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "630"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "4,725"
+        },
+        {
+          "label": "heroes.col.guardAtk",
+          "value": "254"
+        },
+        {
+          "label": "heroes.col.guardDef",
+          "value": "210"
+        },
+        {
+          "label": "heroes.col.guardHp",
+          "value": "1,575"
+        },
+        {
+          "label": "heroes.col.archerMight",
+          "value": "+70%"
+        },
+        {
+          "label": "heroes.col.archerTroopHp",
+          "value": "+70%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Jaeger/img_009.webp",
           "type": "conquest",
-          "name": "[토벌] 침묵의 소리",
-          "desc": "예거는 대상을 침묵시켜 5초 동안 스킬 사용을 막습니다(이미 시전 중인 스킬은 영향 없음). 추가로 공격력 * 300% 피해.",
-          "upgrade": "침묵 지속: 3초 / 3.5초 / 4초 / 4.5초 / 5초 | 피해 증가: 220% / 240% / 260% / 280% / 300%"
+          "desc": "heroes.jaeger.gear.s1.desc",
+          "upgrade": "heroes.jaeger.gear.s1.up"
         },
         {
           "icon": "/img/heroes/Jaeger/img_010.webp",
           "type": "expedition",
-          "name": "[원정] 생존을 위한 찬송가",
-          "desc": "수성부대 체력을 15% 증가시킵니다.",
-          "upgrade": "수성부대 체력 증가: 5% / 7.5% / 10% / 12.5% / 15%"
+          "desc": "heroes.jaeger.gear.s2.desc",
+          "upgrade": "heroes.jaeger.gear.s2.up"
         }
       ]
-    }
+    },
+    "slug": "jaeger",
+    "title": "heroes.card.jaeger.title",
+    "subtitle": "heroes.card.jaeger.subtitle"
   },
   {
     "name": "Eric",
-    "nameKo": "에릭",
     "image": "/img/heroes/Eric/img_001.webp",
     "generation": 3,
-    "unit": "보병",
-    "summary": "킹샷 3세대 신화 등급 보병 영웅. 영웅의 전당에서 획득 가능하며 성검 상점에서도 조각을 구할 수 있습니다.",
-    "sources": ["영웅의 전당", "성검 상점"],
+    "unit": "heroes.card.eric.unit",
+    "summary": "heroes.card.eric.summary",
+    "sources": [
+      "heroes.card.eric.source.1",
+      "heroes.card.eric.source.2"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "2,554" },
-        { "label": "영웅 방어", "value": "3,330" },
-        { "label": "영웅 체력", "value": "49,950" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "2,554"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "3,330"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "49,950"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Eric/img_002.webp",
-          "name": "Ground Shock",
-          "desc": "축복의 망치로 전방을 강타하여 공격력 * 168% 피해를 주고, 4초간 대상의 공격 속도를 50% 감소시킵니다.",
-          "upgrade": "피해 증가: 120% / 132% / 144% / 156% / 168%"
+          "desc": "heroes.eric.conq.s1.desc",
+          "upgrade": "heroes.eric.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Eric/img_003.webp",
-          "name": "Veterancy",
-          "desc": "에릭을 공격한 적에게 16% 확률로 2초 동안 방어력이 20% 증가합니다(최대 5중첩).",
-          "upgrade": "발동 확률: 8% / 10% / 12% / 14% / 16% | 방어 증가: 8% / 11% / 14% / 17% / 20%"
+          "desc": "heroes.eric.conq.s2.desc",
+          "upgrade": "heroes.eric.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Eric/img_004.webp",
-          "name": "Hammer of Justice",
-          "desc": "전방 부채꼴로 공격력 * 112% 피해를 주며 30% 확률로 1초 기절시킵니다.",
-          "upgrade": "피해 증가: 80% / 88% / 96% / 104% / 112%"
+          "desc": "heroes.eric.conq.s3.desc",
+          "upgrade": "heroes.eric.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "보병 공격력", "value": "+290.23%" },
-        { "label": "보병 방어력", "value": "+290.23%" }
+        {
+          "label": "heroes.col.infantryAtk",
+          "value": "+290.23%"
+        },
+        {
+          "label": "heroes.col.infantryDef",
+          "value": "+290.23%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Eric/img_005.webp",
-          "name": "Holy Warrior",
-          "desc": "적 전체 부대의 총 공격을 20% 감소시킵니다.",
-          "upgrade": "적 부대 공격 감소: 4% / 8% / 12% / 16% / 20%"
+          "desc": "heroes.eric.exp.s1.desc",
+          "upgrade": "heroes.eric.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Eric/img_006.webp",
-          "name": "Conviction",
-          "desc": "우리 부대가 받는 피해를 20% 감소시킵니다.",
-          "upgrade": "받는 피해 감소: 4% / 8% / 12% / 16% / 20%"
+          "desc": "heroes.eric.exp.s2.desc",
+          "upgrade": "heroes.eric.exp.s2.up"
         },
         {
           "icon": "/img/heroes/Eric/img_007.webp",
-          "name": "Exhortation",
-          "desc": "아군 전체 부대의 체력을 25% 증가시킵니다.",
-          "upgrade": "체력 증가: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.eric.exp.s3.desc",
+          "upgrade": "heroes.eric.exp.s3.up"
         }
       ]
     },
     "exclusiveGear": {
-      "name": "Anvil of Truth",
+      "name": "heroes.eric.gear.name",
       "icon": "/img/heroes/Eric/img_008.webp",
       "stats": [
-        { "label": "전투력", "value": "315,000" },
-        { "label": "영웅 공격", "value": "482" },
-        { "label": "영웅 방어", "value": "630" },
-        { "label": "영웅 체력", "value": "9,450" },
-        { "label": "호위 공격", "value": "161" },
-        { "label": "호위 방어", "value": "210" },
-        { "label": "호위 체력", "value": "3,150" },
-        { "label": "보병 파괴력", "value": "+70.00%" },
-        { "label": "보병 체력", "value": "+70.00%" }
+        {
+          "label": "heroes.col.power",
+          "value": "315,000"
+        },
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "482"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "630"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "9,450"
+        },
+        {
+          "label": "heroes.col.guardAtk",
+          "value": "161"
+        },
+        {
+          "label": "heroes.col.guardDef",
+          "value": "210"
+        },
+        {
+          "label": "heroes.col.guardHp",
+          "value": "3,150"
+        },
+        {
+          "label": "heroes.col.infantryMight",
+          "value": "+70.00%"
+        },
+        {
+          "label": "heroes.col.infantryTroopHp",
+          "value": "+70.00%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Eric/img_009.webp",
           "type": "conquest",
-          "name": "[토벌] Blessed Hammer",
-          "desc": "축복의 전쟁망치를 신봉하여 주는 피해가 30% 증가합니다.",
-          "upgrade": "피해 증가: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.eric.gear.s1.desc",
+          "upgrade": "heroes.eric.gear.s1.up"
         },
         {
           "icon": "/img/heroes/Eric/img_010.webp",
           "type": "expedition",
-          "name": "[원정] Vanguard",
-          "desc": "수성 부대의 방어력이 15% 증가합니다.",
-          "upgrade": "수성 방어 증가: 5% / 7.5% / 10% / 12.5% / 15%"
+          "desc": "heroes.eric.gear.s2.desc",
+          "upgrade": "heroes.eric.gear.s2.up"
         }
       ]
-    }
+    },
+    "slug": "eric",
+    "title": "heroes.card.eric.title",
+    "subtitle": "heroes.card.eric.subtitle"
   },
   {
     "name": "Petra",
-    "nameKo": "리틀페라",
     "slug": "petra",
     "image": "/img/heroes/Petra/img_001.webp",
     "generation": 3,
-    "unit": "기병",
-    "summary": "킹샷 3세대 SSR 기병 영웅. 영웅 룰렛에서 획득할 수 있습니다.",
-    "sources": ["영웅 룰렛", "성검 상점"],
+    "unit": "heroes.card.petra.unit",
+    "summary": "heroes.card.petra.summary",
+    "sources": [
+      "heroes.card.petra.source.1",
+      "heroes.card.petra.source.2"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "3,330" },
-        { "label": "영웅 방어", "value": "3,330" },
-        { "label": "영웅 체력", "value": "33,300" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "3,330"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "3,330"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "33,300"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Petra/img_002.webp",
-          "name": "Dichotomoy",
-          "desc": "적에게 타로 카드를 던져 공격력 * 378% 피해. 추가로 2초간 공격 20% 감소 또는 1.5초 기절 중 하나의 효과를 부여합니다.",
-          "upgrade": "피해 증가: 270% / 297% / 324% / 351% / 378%"
+          "desc": "heroes.petra.conq.s1.desc",
+          "upgrade": "heroes.petra.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Petra/img_003.webp",
-          "name": "Change of Fate",
-          "desc": "페트라의 기본 공격력 * 70%를 기준으로 변동 피해를 줍니다. 최종 피해는 기준값의 5%~600% 사이에서 무작위로 결정됩니다.",
-          "upgrade": "피해 증가: 50% / 55% / 60% / 65% / 70%"
+          "desc": "heroes.petra.conq.s2.desc",
+          "upgrade": "heroes.petra.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Petra/img_004.webp",
-          "name": "Turn Card",
-          "desc": "남은 체력 비율이 가장 낮은 아군 영웅을 치유합니다. 페트라의 기본 공격력 * 140%를 기준으로 하며 최종 회복량은 기준의 5%~400% 사이에서 무작위로 결정됩니다.",
-          "upgrade": "치유량 증가: 100% / 110% / 120% / 130% / 140%"
+          "desc": "heroes.petra.conq.s3.desc",
+          "upgrade": "heroes.petra.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "기병 공격력", "value": "+290.23%" },
-        { "label": "기병 방어력", "value": "+290.23%" }
+        {
+          "label": "heroes.col.cavalryAtk",
+          "value": "+290.23%"
+        },
+        {
+          "label": "heroes.col.cavalryDef",
+          "value": "+290.23%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Petra/img_005.webp",
-          "name": "Evil Eye",
-          "desc": "아군 공격이 50% 확률로 적에게 저주를 걸어, 적이 받는 피해를 50% 증가시킵니다.",
-          "upgrade": "적이 받는 피해 증가: 10% / 20% / 30% / 40% / 50%"
+          "desc": "heroes.petra.exp.s1.desc",
+          "upgrade": "heroes.petra.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Petra/img_006.webp",
-          "name": "The Favor",
-          "desc": "아군 공격이 50% 확률로 아군 부대의 공격을 50% 증가시킵니다.",
-          "upgrade": "공격 증가: 10% / 20% / 30% / 40% / 50%"
+          "desc": "heroes.petra.exp.s2.desc",
+          "upgrade": "heroes.petra.exp.s2.up"
         },
         {
           "icon": "/img/heroes/Petra/img_007.webp",
-          "name": "The Shield",
-          "desc": "아군이 받는 피해를 50% 줄일 확률 40%를 부여합니다.",
-          "upgrade": "받는 피해 감소(확률): 10% / 20% / 30% / 40% / 50%"
+          "desc": "heroes.petra.exp.s3.desc",
+          "upgrade": "heroes.petra.exp.s3.up"
         }
       ]
     },
     "exclusiveGear": {
-      "name": "Fate’s Writ",
+      "name": "heroes.petra.gear.name",
       "icon": "/img/heroes/Petra/img_008.webp",
       "stats": [
-        { "label": "전투력", "value": "315,000" },
-        { "label": "영웅 공격", "value": "630" },
-        { "label": "영웅 방어", "value": "630" },
-        { "label": "영웅 체력", "value": "6,300" },
-        { "label": "호위 공격", "value": "210" },
-        { "label": "호위 방어", "value": "210" },
-        { "label": "호위 체력", "value": "2,100" },
-        { "label": "기병 파괴력", "value": "+70.00%" },
-        { "label": "기병 체력", "value": "+70.00%" }
+        {
+          "label": "heroes.col.power",
+          "value": "315,000"
+        },
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "630"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "630"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "6,300"
+        },
+        {
+          "label": "heroes.col.guardAtk",
+          "value": "210"
+        },
+        {
+          "label": "heroes.col.guardDef",
+          "value": "210"
+        },
+        {
+          "label": "heroes.col.guardHp",
+          "value": "2,100"
+        },
+        {
+          "label": "heroes.col.cavalryMight",
+          "value": "+70.00%"
+        },
+        {
+          "label": "heroes.col.cavalryTroopHp",
+          "value": "+70.00%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Petra/img_009.webp",
           "type": "conquest",
-          "name": "[토벌] Weighted Deck",
-          "desc": "변동 계열 스킬의 상·하한을 150%까지 끌어올립니다.",
-          "upgrade": "변동 스킬 효과 증가: 30% / 60% / 90% / 120% / 150%"
+          "desc": "heroes.petra.gear.s1.desc",
+          "upgrade": "heroes.petra.gear.s1.up"
         },
         {
           "icon": "/img/heroes/Petra/img_010.webp",
           "type": "expedition",
-          "name": "[원정] Cosmic Eye",
-          "desc": "집결 부대의 공격을 15% 증가시킵니다.",
-          "upgrade": "집결 부대 공격 증가: 5% / 7.5% / 10% / 12.5% / 15%"
+          "desc": "heroes.petra.gear.s2.desc",
+          "upgrade": "heroes.petra.gear.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.petra.title",
+    "subtitle": "heroes.card.petra.subtitle"
   },
   {
     "name": "Hilde",
-    "nameKo": "힐데",
     "slug": "hilde",
     "image": "/img/heroes/Hilde/img_001.webp",
     "generation": 2,
-    "unit": "기병",
-    "summary": "킹샷 2세대 SSR 기병 영웅. 데일리 딜 또는 최강 총독 이벤트, 영웅 집결, (3세대 이후) 영웅의 전당에서 획득 가능합니다.",
-    "sources": ["최강영주 이벤트", "일일 특혜", "영웅 집결", "영웅의 전당(3세대 이상)"],
+    "unit": "heroes.card.hilde.unit",
+    "summary": "heroes.card.hilde.summary",
+    "sources": [
+      "heroes.card.hilde.source.1",
+      "heroes.card.hilde.source.2",
+      "heroes.card.hilde.source.3",
+      "heroes.card.hilde.source.4"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "2,664" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "26,640" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "2,664"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "26,640"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Hilde/img_002.webp",
-          "name": "Rejuvenating Plea",
-          "desc": "아군 모든 영웅의 체력을 공격력 * 280%만큼 즉시 회복합니다.",
-          "upgrade": "치유량 증가: 200% / 220% / 240% / 260% / 280%"
+          "desc": "heroes.hilde.conq.s1.desc",
+          "upgrade": "heroes.hilde.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Hilde/img_003.webp",
-          "name": "Redeemer",
-          "desc": "가장 약한 아군 영웅의 체력을 공격력 * 140%만큼 즉시 회복합니다.",
-          "upgrade": "치유량 증가: 100% / 110% / 120% / 130% / 140%"
+          "desc": "heroes.hilde.conq.s2.desc",
+          "upgrade": "heroes.hilde.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Hilde/img_004.webp",
-          "name": "Intimidation",
-          "desc": "대상을 1초간 제압하고 공격력 * 196% 피해를 줍니다.",
-          "upgrade": "피해 증가: 140% / 154% / 168% / 182% / 196%"
+          "desc": "heroes.hilde.conq.s3.desc",
+          "upgrade": "heroes.hilde.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "기병 공격력", "value": "+240.19%" },
-        { "label": "기병 방어력", "value": "+240.19%" }
+        {
+          "label": "heroes.col.cavalryAtk",
+          "value": "+240.19%"
+        },
+        {
+          "label": "heroes.col.cavalryDef",
+          "value": "+240.19%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Hilde/img_005.webp",
-          "name": "Noble Path",
-          "desc": "아군 총 공격 +15%, 총 방어 +10%.",
-          "upgrade": "공격 증가: 3% / 6% / 9% / 12% / 15% | 방어 증가: 2% / 4% / 6% / 8% / 10%"
+          "desc": "heroes.hilde.exp.s1.desc",
+          "upgrade": "heroes.hilde.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Hilde/img_006.webp",
-          "name": "Elixir of Strength",
-          "desc": "아군 공격이 25% 확률로 200% 추가 피해를 줍니다.",
-          "upgrade": "추가 피해: 120% / 140% / 160% / 180% / 200%"
+          "desc": "heroes.hilde.exp.s2.desc",
+          "upgrade": "heroes.hilde.exp.s2.up"
         },
         {
           "icon": "/img/heroes/Hilde/img_007.webp",
-          "name": "Trial by Fire",
-          "desc": "아군이 받는 피해를 50% 줄일 확률 40%를 부여합니다.",
-          "upgrade": "발동 확률: 8% / 16% / 24% / 32% / 40%"
+          "desc": "heroes.hilde.exp.s3.desc",
+          "upgrade": "heroes.hilde.exp.s3.up"
         }
       ]
     },
     "exclusiveGear": {
-      "name": "Revelation",
+      "name": "heroes.hilde.gear.name",
       "icon": "/img/heroes/Hilde/img_008.webp",
       "stats": [
-        { "label": "전투력", "value": "270,000" },
-        { "label": "영웅 공격", "value": "540" },
-        { "label": "영웅 방어", "value": "540" },
-        { "label": "영웅 체력", "value": "5,400" },
-        { "label": "호위 공격", "value": "180" },
-        { "label": "호위 방어", "value": "180" },
-        { "label": "호위 체력", "value": "1,800" },
-        { "label": "기병 파괴력", "value": "+60.00%" },
-        { "label": "기병 체력", "value": "+60.00%" }
+        {
+          "label": "heroes.col.power",
+          "value": "270,000"
+        },
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "540"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "540"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "5,400"
+        },
+        {
+          "label": "heroes.col.guardAtk",
+          "value": "180"
+        },
+        {
+          "label": "heroes.col.guardDef",
+          "value": "180"
+        },
+        {
+          "label": "heroes.col.guardHp",
+          "value": "1,800"
+        },
+        {
+          "label": "heroes.col.cavalryMight",
+          "value": "+60.00%"
+        },
+        {
+          "label": "heroes.col.cavalryTroopHp",
+          "value": "+60.00%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Hilde/img_009.webp",
           "type": "conquest",
-          "name": "[토벌] Holy Invocation",
-          "desc": "치유 효과가 70% 증가합니다.",
-          "upgrade": "치유 효과 증가: 30% / 40% / 50% / 60% / 70%"
+          "desc": "heroes.hilde.gear.s1.desc",
+          "upgrade": "heroes.hilde.gear.s1.up"
         },
         {
           "icon": "/img/heroes/Hilde/img_010.webp",
           "type": "expedition",
-          "name": "[원정] Fortitude",
-          "desc": "수성 부대의 체력이 15% 증가합니다.",
-          "upgrade": "수성 부대 체력 증가: 5% / 7.5% / 10% / 12.5% / 15%"
+          "desc": "heroes.hilde.gear.s2.desc",
+          "upgrade": "heroes.hilde.gear.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.hilde.title",
+    "subtitle": "heroes.card.hilde.subtitle"
   },
   {
     "name": "Zoe",
-    "nameKo": "조이",
     "slug": "zoe",
     "image": "/img/heroes/Zoe/img_001.webp",
     "generation": 2,
-    "unit": "보병",
-    "summary": "킹샷 2세대 SSR 보병 영웅. 영웅 룰렛에서 획득(이후 세대는 일일 특혜, 영웅의 전당에서도 조각 획득 가능).",
-    "sources": ["영웅 룰렛", "일일 특혜(3세대 이상)", "영웅의 전당(3세대 이상)"],
+    "unit": "heroes.card.zoe.unit",
+    "summary": "heroes.card.zoe.summary",
+    "sources": [
+      "heroes.card.zoe.source.1",
+      "heroes.card.zoe.source.2",
+      "heroes.card.zoe.source.3"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "2,043" },
-        { "label": "영웅 방어", "value": "2,664" },
-        { "label": "영웅 체력", "value": "39,960" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "2,043"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,664"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "39,960"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Zoe/img_002.webp",
-          "name": "Shield Strike",
-          "desc": "0.5초마다 공격력 * 84% 피해, 대상이 받는 피해 2초간 30% 증가.",
-          "upgrade": "피해 증가: 60% / 66% / 72% / 78% / 84% | 적이 받는 피해 증가: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.zoe.conq.s1.desc",
+          "upgrade": "heroes.zoe.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Zoe/img_003.webp",
-          "name": "Agony Rush",
-          "desc": "체력 50% 미만 시 최대 체력의 40% 즉시 회복(전투당 1회).",
-          "upgrade": "회복량 증가: 20% / 25% / 30% / 35% / 40%"
+          "desc": "heroes.zoe.conq.s2.desc",
+          "upgrade": "heroes.zoe.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Zoe/img_004.webp",
-          "name": "Holy Might",
-          "desc": "아군 영웅들의 공격 속도 7% 증가.",
-          "upgrade": "공격 속도 증가: 3% / 4% / 5% / 6% / 7%"
+          "desc": "heroes.zoe.conq.s3.desc",
+          "upgrade": "heroes.zoe.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "보병 공격력", "value": "+240.19%" },
-        { "label": "보병 방어력", "value": "+240.19%" }
+        {
+          "label": "heroes.col.infantryAtk",
+          "value": "+240.19%"
+        },
+        {
+          "label": "heroes.col.infantryDef",
+          "value": "+240.19%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Zoe/img_005.webp",
-          "name": "Sundering Wound",
-          "desc": "아군 공격이 20% 확률로 3턴 동안 매턴 40%의 지속 피해를 가합니다.",
-          "upgrade": "지속 피해: 8% / 16% / 24% / 32% / 40%"
+          "desc": "heroes.zoe.exp.s1.desc",
+          "upgrade": "heroes.zoe.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Zoe/img_006.webp",
-          "name": "Stoic",
-          "desc": "아군 총 공격 25% 증가.",
-          "upgrade": "공격 증가: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.zoe.exp.s2.desc",
+          "upgrade": "heroes.zoe.exp.s2.up"
         },
         {
           "icon": "/img/heroes/Zoe/img_007.webp",
-          "name": "Infinite Arsenal",
-          "desc": "아군 공격이 50% 확률로 적이 받는 피해를 50% 증가시킵니다.",
-          "upgrade": "적이 받는 피해 증가: 10% / 20% / 30% / 40% / 50%"
+          "desc": "heroes.zoe.exp.s3.desc",
+          "upgrade": "heroes.zoe.exp.s3.up"
         }
       ]
     },
     "exclusiveGear": {
-      "name": "The Unrighteous",
+      "name": "heroes.zoe.gear.name",
       "icon": "/img/heroes/Zoe/img_008.webp",
       "stats": [
-        { "label": "전투력", "value": "270,000" },
-        { "label": "영웅 공격", "value": "414" },
-        { "label": "영웅 방어", "value": "540" },
-        { "label": "영웅 체력", "value": "8,100" },
-        { "label": "호위 공격", "value": "138" },
-        { "label": "호위 방어", "value": "180" },
-        { "label": "호위 체력", "value": "2,700" },
-        { "label": "보병 파괴력", "value": "+60.00%" },
-        { "label": "보병 체력", "value": "+60.00%" }
+        {
+          "label": "heroes.col.power",
+          "value": "270,000"
+        },
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "414"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "540"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "8,100"
+        },
+        {
+          "label": "heroes.col.guardAtk",
+          "value": "138"
+        },
+        {
+          "label": "heroes.col.guardDef",
+          "value": "180"
+        },
+        {
+          "label": "heroes.col.guardHp",
+          "value": "2,700"
+        },
+        {
+          "label": "heroes.col.infantryMight",
+          "value": "+60.00%"
+        },
+        {
+          "label": "heroes.col.infantryTroopHp",
+          "value": "+60.00%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Zoe/img_009.webp",
           "type": "conquest",
-          "name": "[토벌] Death or Glory",
-          "desc": "‘Agony Rush’ 발동 후 전투 종료까지 공격력이 24% 증가합니다.",
-          "upgrade": "공격 증가: 8% / 12% / 16% / 20% / 24%"
+          "desc": "heroes.zoe.gear.s1.desc",
+          "upgrade": "heroes.zoe.gear.s1.up"
         },
         {
           "icon": "/img/heroes/Zoe/img_010.webp",
           "type": "expedition",
-          "name": "[원정] Dark Lady",
-          "desc": "수성 부대의 공격이 15% 증가합니다.",
-          "upgrade": "수성 부대 공격 증가: 5% / 7.5% / 10% / 12.5% / 15%"
+          "desc": "heroes.zoe.gear.s2.desc",
+          "upgrade": "heroes.zoe.gear.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.zoe.title",
+    "subtitle": "heroes.card.zoe.subtitle"
   },
   {
     "name": "Marlin",
-    "nameKo": "마린",
     "slug": "marlin",
     "image": "/img/heroes/Marlin/img_001.webp",
     "generation": 2,
-    "unit": "궁병",
-    "summary": "킹샷 2세대 SSR 궁병 영웅. 영웅의 전당에서 획득(상위 세대에서는 일일 특혜로도 조각 획득).",
-    "sources": ["영웅의 전당", "일일 특혜(3세대 이상)"],
+    "unit": "heroes.card.marlin.unit",
+    "summary": "heroes.card.marlin.summary",
+    "sources": [
+      "heroes.card.marlin.source.1",
+      "heroes.card.marlin.source.2"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "3,235" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "19,980" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "3,235"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "19,980"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Marlin/img_002.webp",
-          "name": "Tidal Rush",
-          "desc": "범위 280% 피해를 주고 1.5초간 속박합니다.",
-          "upgrade": "피해 증가: 200% / 220% / 240% / 260% / 280%"
+          "desc": "heroes.marlin.conq.s1.desc",
+          "upgrade": "heroes.marlin.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Marlin/img_003.webp",
-          "name": "Fermented Blow",
-          "desc": "공격력 * 70% 범위 피해를 줍니다.",
-          "upgrade": "범위 피해 증가: 50% / 55% / 60% / 65% / 70%"
+          "desc": "heroes.marlin.conq.s2.desc",
+          "upgrade": "heroes.marlin.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Marlin/img_004.webp",
-          "name": "Lucky Hit",
-          "desc": "매 5회 공격마다 0.5초 기절(레벨에 따라 필요 공격 수/기절 시간 변동).",
-          "upgrade": "공격 횟수: 8 / 7 / 7 / 6 / 5 | 기절: 0.2s / 0.2s / 0.4s / 0.4s / 0.5s"
+          "desc": "heroes.marlin.conq.s3.desc",
+          "upgrade": "heroes.marlin.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "궁병 공격력", "value": "+240.19%" },
-        { "label": "궁병 방어력", "value": "+240.19%" }
+        {
+          "label": "heroes.col.archerAtk",
+          "value": "+240.19%"
+        },
+        {
+          "label": "heroes.col.archerDef",
+          "value": "+240.19%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Marlin/img_005.webp",
-          "name": "Wild Card",
-          "desc": "아군이 주는 피해가 50% 증가할 확률 40%를 부여합니다.",
-          "upgrade": "발동 확률: 8% / 16% / 24% / 32% / 40%"
+          "desc": "heroes.marlin.exp.s1.desc",
+          "upgrade": "heroes.marlin.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Marlin/img_006.webp",
-          "name": "Rumhead",
-          "desc": "공격 시 2턴 동안 적 전체 부대의 총 파괴력을 50% 감소시킬 확률 20%를 부여합니다.",
-          "upgrade": "적 파괴력 감소: 10% / 20% / 30% / 40% / 50%"
+          "desc": "heroes.marlin.exp.s2.desc",
+          "upgrade": "heroes.marlin.exp.s2.up"
         },
         {
           "icon": "/img/heroes/Marlin/img_007.webp",
-          "name": "Dynamo",
-          "desc": "아군 공격이 50% 확률로 피해 50% 증가 효과를 얻습니다.",
-          "upgrade": "피해 증가: 10% / 20% / 30% / 40% / 50%"
+          "desc": "heroes.marlin.exp.s3.desc",
+          "upgrade": "heroes.marlin.exp.s3.up"
         }
       ]
     },
     "exclusiveGear": {
-      "name": "Mistweaver",
+      "name": "heroes.marlin.gear.name",
       "icon": "/img/heroes/Marlin/img_008.webp",
       "stats": [
-        { "label": "전투력", "value": "270,000" },
-        { "label": "영웅 공격", "value": "655" },
-        { "label": "영웅 방어", "value": "540" },
-        { "label": "영웅 체력", "value": "4,050" },
-        { "label": "호위 공격", "value": "218" },
-        { "label": "호위 방어", "value": "180" },
-        { "label": "호위 체력", "value": "1,350" },
-        { "label": "궁병 파괴력", "value": "+60.00%" },
-        { "label": "궁병 체력", "value": "+60.00%" }
+        {
+          "label": "heroes.col.power",
+          "value": "270,000"
+        },
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "655"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "540"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "4,050"
+        },
+        {
+          "label": "heroes.col.guardAtk",
+          "value": "218"
+        },
+        {
+          "label": "heroes.col.guardDef",
+          "value": "180"
+        },
+        {
+          "label": "heroes.col.guardHp",
+          "value": "1,350"
+        },
+        {
+          "label": "heroes.col.archerMight",
+          "value": "+60.00%"
+        },
+        {
+          "label": "heroes.col.archerTroopHp",
+          "value": "+60.00%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Marlin/img_009.webp",
           "type": "conquest",
-          "name": "[토벌] Servant of Wine",
-          "desc": "기본 공격마다 가장 약한 영웅을 공격력 * 15% 만큼 치유합니다.",
-          "upgrade": "치유량 증가: 5% / 7.5% / 10% / 12.5% / 15%"
+          "desc": "heroes.marlin.gear.s1.desc",
+          "upgrade": "heroes.marlin.gear.s1.up"
         },
         {
           "icon": "/img/heroes/Marlin/img_010.webp",
           "type": "expedition",
-          "name": "[원정] Admiral of the Line",
-          "desc": "집결 부대의 파괴력이 15% 증가합니다.",
-          "upgrade": "집결 파괴력 증가: 5% / 7.5% / 10% / 12.5% / 15%"
+          "desc": "heroes.marlin.gear.s2.desc",
+          "upgrade": "heroes.marlin.gear.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.marlin.title",
+    "subtitle": "heroes.card.marlin.subtitle"
   },
   {
     "name": "Jabel",
-    "nameKo": "제이벨",
     "slug": "jabel",
     "image": "/img/heroes/Jabel/img_001.webp",
     "generation": 1,
-    "unit": "기병",
-    "summary": "킹샷 1세대 SSR 기병 영웅. 7일 출석 선물과 영웅 모집 등 다양한 경로로 가장 쉽게 획득 가능한 신화 등급 영웅입니다.",
-    "sources": ["7일 출석 선물", "성장 경로(이벤트)", "영웅 모집", "전망대", "영웅의 전당", "성검 상점", "제이벨의 용기 – 패키지"],
+    "unit": "heroes.card.jabel.unit",
+    "summary": "heroes.card.jabel.summary",
+    "sources": [
+      "heroes.card.jabel.source.1",
+      "heroes.card.jabel.source.2",
+      "heroes.card.jabel.source.3",
+      "heroes.card.jabel.source.4",
+      "heroes.card.jabel.source.5",
+      "heroes.card.jabel.source.6",
+      "heroes.card.jabel.source.7"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "2,220" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "22,200" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "22,200"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Jabel/img_002.webp",
-          "name": "Gallant Throw",
-          "desc": "창을 투척해 방어를 관통, 범위 내 적에게 공격력 * 252% 피해 및 1.5초 속박.",
-          "upgrade": "범위 피해 증가: 180% / 198% / 216% / 234% / 252%"
+          "desc": "heroes.jabel.conq.s1.desc",
+          "upgrade": "heroes.jabel.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Jabel/img_003.webp",
-          "name": "Brave the Storm",
-          "desc": "대상에게 공격력 * 210% 피해.",
-          "upgrade": "피해 증가: 150% / 165% / 180% / 195% / 210%"
+          "desc": "heroes.jabel.conq.s2.desc",
+          "upgrade": "heroes.jabel.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Jabel/img_004.webp",
-          "name": "Persistence",
-          "desc": "체력 50% 미만 시 공격 속도 60% 증가.",
-          "upgrade": "공격 속도 증가: 20% / 30% / 40% / 50% / 60%"
+          "desc": "heroes.jabel.conq.s3.desc",
+          "upgrade": "heroes.jabel.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "기병 공격력", "value": "+200.16%" },
-        { "label": "기병 방어력", "value": "+200.16%" }
+        {
+          "label": "heroes.col.cavalryAtk",
+          "value": "+200.16%"
+        },
+        {
+          "label": "heroes.col.cavalryDef",
+          "value": "+200.16%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Jabel/img_005.webp",
-          "name": "Rally Flag",
-          "desc": "아군이 받는 피해를 50% 줄일 확률 40%를 부여합니다.",
-          "upgrade": "발동 확률: 8% / 16% / 24% / 32% / 40%"
+          "desc": "heroes.jabel.exp.s1.desc",
+          "upgrade": "heroes.jabel.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Jabel/img_006.webp",
-          "name": "Hero’s Domain",
-          "desc": "아군 공격이 50% 확률로 50% 추가 피해를 줍니다.",
-          "upgrade": "추가 피해: 10% / 20% / 30% / 40% / 50%"
+          "desc": "heroes.jabel.exp.s2.desc",
+          "upgrade": "heroes.jabel.exp.s2.up"
         },
         {
           "icon": "/img/heroes/Jabel/img_007.webp",
-          "name": "Youthful Rage",
-          "desc": "아군이 주는 피해가 25% 증가합니다.",
-          "upgrade": "파괴력 증가: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.jabel.exp.s3.desc",
+          "upgrade": "heroes.jabel.exp.s3.up"
         }
       ]
     },
     "exclusiveGear": {
-      "name": "Greaves of Faith",
+      "name": "heroes.jabel.gear.name",
       "icon": "/img/heroes/Jabel/img_008.webp",
       "stats": [
-        { "label": "전투력", "value": "225,000" },
-        { "label": "영웅 공격", "value": "450" },
-        { "label": "영웅 방어", "value": "450" },
-        { "label": "영웅 체력", "value": "4,500" },
-        { "label": "호위 공격", "value": "150" },
-        { "label": "호위 방어", "value": "150" },
-        { "label": "호위 체력", "value": "1,500" },
-        { "label": "기병 파괴력", "value": "+50.00%" },
-        { "label": "기병 체력", "value": "+50.00%" }
+        {
+          "label": "heroes.col.power",
+          "value": "225,000"
+        },
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "450"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "450"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "4,500"
+        },
+        {
+          "label": "heroes.col.guardAtk",
+          "value": "150"
+        },
+        {
+          "label": "heroes.col.guardDef",
+          "value": "150"
+        },
+        {
+          "label": "heroes.col.guardHp",
+          "value": "1,500"
+        },
+        {
+          "label": "heroes.col.cavalryMight",
+          "value": "+50.00%"
+        },
+        {
+          "label": "heroes.col.cavalryTroopHp",
+          "value": "+50.00%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Jabel/img_009.webp",
           "type": "conquest",
-          "name": "[토벌] Crimson Spirit",
-          "desc": "주는 피해가 30% 증가합니다.",
-          "upgrade": "피해 증가: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.jabel.gear.s1.desc",
+          "upgrade": "heroes.jabel.gear.s1.up"
         },
         {
           "icon": "/img/heroes/Jabel/img_010.webp",
           "type": "expedition",
-          "name": "[원정] Divine Strength",
-          "desc": "수성 부대의 파괴력이 15% 증가합니다.",
-          "upgrade": "수성 파괴력 증가: 5% / 7.5% / 10% / 12.5% / 15%"
+          "desc": "heroes.jabel.gear.s2.desc",
+          "upgrade": "heroes.jabel.gear.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.jabel.title",
+    "subtitle": "heroes.card.jabel.subtitle"
   },
   {
     "name": "Amadeus",
-    "nameKo": "아마데우스",
     "slug": "amadeus",
     "image": "/img/heroes/Amadeus/img_001.webp",
     "generation": 1,
     "rarity": "Mythic",
-    "unit": "보병",
-    "summary": "킹샷 1세대 보병 영웅. 1세대 기간에는 총독의 전당과 VIP 특별 패키지로, 1세대 종료 후에는 VIP 특별 패키지로만 획득할 수 있습니다.",
-    "sources": ["최강영주(1세대)", "VIP 패키지"],
+    "unit": "heroes.card.amadeus.unit",
+    "summary": "heroes.card.amadeus.summary",
+    "sources": [
+      "heroes.card.amadeus.source.1",
+      "heroes.card.amadeus.source.2"
+    ],
     "talent": {
       "icon": "/img/heroes/Amadeus/img_002.webp",
-      "name": "Born Leader",
-      "desc": "부재 중에도 출전한 모든 병사의 파괴력과 체력을 15% 증가시킵니다.",
-      "upgrade": "파괴력/체력 증가: 3% / 6% / 9% / 12% / 15%"
+      "desc": "heroes.amadeus.talent.desc",
+      "upgrade": "heroes.amadeus.talent.up"
     },
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "2,128" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "41,624" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "2,128"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "41,624"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Amadeus/img_003.webp",
-          "name": "Combo Slash",
-          "desc": "대상 지역의 적을 띄운 뒤 강력한 3연격을 가해, 타격마다 공격력 * 224% 피해.",
-          "upgrade": "피해 증가: 160% / 176% / 192% / 208% / 224%"
+          "desc": "heroes.amadeus.conq.s1.desc",
+          "upgrade": "heroes.amadeus.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Amadeus/img_004.webp",
-          "name": "Arcane Swordship",
-          "desc": "검격마다 전방 적에게 공격력 * 23%의 비전 폭발 피해.",
-          "upgrade": "피해 증가: 15% / 17% / 19% / 21% / 23%"
+          "desc": "heroes.amadeus.conq.s2.desc",
+          "upgrade": "heroes.amadeus.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Amadeus/img_005.webp",
-          "name": "Onslaught",
-          "desc": "체력 50% 미만 시 공격력 48% 증가.",
-          "upgrade": "공격 증가: 16% / 24% / 32% / 40% / 48%"
+          "desc": "heroes.amadeus.conq.s3.desc",
+          "upgrade": "heroes.amadeus.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "보병 공격력", "value": "+260.20%" },
-        { "label": "보병 방어력", "value": "+260.20%" }
+        {
+          "label": "heroes.col.infantryAtk",
+          "value": "+260.20%"
+        },
+        {
+          "label": "heroes.col.infantryDef",
+          "value": "+260.20%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Amadeus/img_006.webp",
-          "name": "Battle Ready",
-          "desc": "아군 총 파괴력 25% 증가.",
-          "upgrade": "파괴력 증가: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.amadeus.exp.s1.desc",
+          "upgrade": "heroes.amadeus.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Amadeus/img_007.webp",
-          "name": "Way of the Blade",
-          "desc": "아군 총 공격 25% 증가.",
-          "upgrade": "공격 증가: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.amadeus.exp.s2.desc",
+          "upgrade": "heroes.amadeus.exp.s2.up"
         },
         {
           "icon": "/img/heroes/Amadeus/img_008.webp",
-          "name": "Unrighteous Strike",
-          "desc": "아군이 주는 피해가 50% 증가할 확률 40%를 부여합니다.",
-          "upgrade": "발동 확률: 8% / 16% / 24% / 32% / 40%"
+          "desc": "heroes.amadeus.exp.s3.desc",
+          "upgrade": "heroes.amadeus.exp.s3.up"
         }
       ]
     },
     "exclusiveGear": {
-      "name": "Aegis of Fate",
+      "name": "heroes.amadeus.gear.name",
       "icon": "/img/heroes/Amadeus/img_009.webp",
       "stats": [
-        { "label": "전투력", "value": "281,250" },
-        { "label": "영웅 공격", "value": "431" },
-        { "label": "영웅 방어", "value": "562" },
-        { "label": "영웅 체력", "value": "8,437" },
-        { "label": "호위 공격", "value": "143" },
-        { "label": "호위 방어", "value": "187" },
-        { "label": "호위 체력", "value": "2,812" },
-        { "label": "보병 파괴력", "value": "+62.50%" },
-        { "label": "보병 체력", "value": "+62.50%" }
+        {
+          "label": "heroes.col.power",
+          "value": "281,250"
+        },
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "431"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "562"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "8,437"
+        },
+        {
+          "label": "heroes.col.guardAtk",
+          "value": "143"
+        },
+        {
+          "label": "heroes.col.guardDef",
+          "value": "187"
+        },
+        {
+          "label": "heroes.col.guardHp",
+          "value": "2,812"
+        },
+        {
+          "label": "heroes.col.infantryMight",
+          "value": "+62.50%"
+        },
+        {
+          "label": "heroes.col.infantryTroopHp",
+          "value": "+62.50%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Amadeus/img_010.webp",
           "type": "conquest",
-          "name": "[토벌] Double Parry",
-          "desc": "받는 피해 30% 감소.",
-          "upgrade": "받는 피해 감소: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.amadeus.gear.s1.desc",
+          "upgrade": "heroes.amadeus.gear.s1.up"
         },
         {
           "icon": "/img/heroes/Amadeus/img_011.webp",
           "type": "expedition",
-          "name": "[원정] Discernment",
-          "desc": "집결 공격 15% 증가.",
-          "upgrade": "집결 공격 증가: 5% / 7.5% / 10% / 12.5% / 15%"
+          "desc": "heroes.amadeus.gear.s2.desc",
+          "upgrade": "heroes.amadeus.gear.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.amadeus.title",
+    "subtitle": "heroes.card.amadeus.subtitle"
   },
   {
     "slug": "helga",
     "name": "Helga",
-    "nameKo": "헬가",
     "generation": 1,
-    "unit": "보병",
+    "unit": "heroes.card.helga.unit",
     "image": "/img/heroes/Helga/img_001.webp",
-    "summary": "킹샷 1세대 신화 등급 보병 영웅. 첫 결제로 해금되며, VIP 특별 패키지로도 획득 가능합니다.",
-    "sources": ["첫 결제 보상", "VIP 특별 패키지"],
+    "summary": "heroes.card.helga.summary",
+    "sources": [
+      "heroes.card.helga.source.1",
+      "heroes.card.helga.source.2"
+    ],
     "talent": {
-      "name": "Power of the Deer",
       "icon": "/img/heroes/Helga/img_002.webp",
-      "desc": "부재 중에도 출전 병사들의 공격과 방어를 10% 증가시킵니다.",
-      "upgrade": "공격/방어 증가: 2% / 4% / 6% / 8% / 10%"
+      "desc": "heroes.helga.talent.desc",
+      "upgrade": "heroes.helga.talent.up"
     },
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "1,873" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "36,630" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "1,873"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "36,630"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Helga/img_003.webp",
-          "name": "Antler Assault",
-          "desc": "사슴뿔 돌진으로 공격력 * 224% 범위 피해, 넉백 및 1초 기절.",
-          "upgrade": "범위 피해 증가: 160% / 176% / 192% / 208% / 224%"
+          "desc": "heroes.helga.conq.s1.desc",
+          "upgrade": "heroes.helga.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Helga/img_004.webp",
-          "name": "Spear Charge",
-          "desc": "대상에게 공격력 * 210% 피해.",
-          "upgrade": "피해 증가: 150% / 165% / 180% / 195% / 210%"
+          "desc": "heroes.helga.conq.s2.desc",
+          "upgrade": "heroes.helga.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Helga/img_005.webp",
-          "name": "Fury",
-          "desc": "피격 시 10% 확률로 3초 동안 공격 12% 증가(최대 5중첩).",
-          "upgrade": "공격 증가: 4% / 6% / 8% / 10% / 12%"
+          "desc": "heroes.helga.conq.s3.desc",
+          "upgrade": "heroes.helga.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "보병 공격력", "value": "+200.16%" },
-        { "label": "보병 방어력", "value": "+200.16%" }
+        {
+          "label": "heroes.col.infantryAtk",
+          "value": "+200.16%"
+        },
+        {
+          "label": "heroes.col.infantryDef",
+          "value": "+200.16%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Helga/img_006.webp",
-          "name": "Oath of Guardian",
-          "desc": "아군이 받는 피해를 50% 줄일 확률 40%를 부여합니다.",
-          "upgrade": "발동 확률: 8% / 16% / 24% / 32% / 40%"
+          "desc": "heroes.helga.exp.s1.desc",
+          "upgrade": "heroes.helga.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Helga/img_007.webp",
-          "name": "Echoes of Valhalla",
-          "desc": "아군 총 공격 25% 증가.",
-          "upgrade": "공격 증가: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.helga.exp.s2.desc",
+          "upgrade": "heroes.helga.exp.s2.up"
         },
         {
           "icon": "/img/heroes/Helga/img_008.webp",
-          "name": "Nature’s Balance",
-          "desc": "아군 총 파괴력 25% 증가.",
-          "upgrade": "파괴력 증가: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.helga.exp.s3.desc",
+          "upgrade": "heroes.helga.exp.s3.up"
         }
       ]
     },
     "exclusiveGear": {
-      "name": "Bands of Tyre",
+      "name": "heroes.helga.gear.name",
       "icon": "/img/heroes/Helga/img_009.webp",
       "stats": [
-        { "label": "전투력", "value": "247,500" },
-        { "label": "영웅 공격", "value": "379" },
-        { "label": "영웅 방어", "value": "495" },
-        { "label": "영웅 체력", "value": "7,425" },
-        { "label": "호위 공격", "value": "126" },
-        { "label": "호위 방어", "value": "165" },
-        { "label": "호위 체력", "value": "2,475" },
-        { "label": "보병 파괴력", "value": "+55.50%" },
-        { "label": "보병 체력", "value": "+55.50%" }
+        {
+          "label": "heroes.col.power",
+          "value": "247,500"
+        },
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "379"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "495"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "7,425"
+        },
+        {
+          "label": "heroes.col.guardAtk",
+          "value": "126"
+        },
+        {
+          "label": "heroes.col.guardDef",
+          "value": "165"
+        },
+        {
+          "label": "heroes.col.guardHp",
+          "value": "2,475"
+        },
+        {
+          "label": "heroes.col.infantryMight",
+          "value": "+55.50%"
+        },
+        {
+          "label": "heroes.col.infantryTroopHp",
+          "value": "+55.50%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Helga/img_010.webp",
           "type": "conquest",
-          "name": "[토벌] Valiant Fury",
-          "desc": "주는 피해 30% 증가.",
-          "upgrade": "피해 증가: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.helga.gear.s1.desc",
+          "upgrade": "heroes.helga.gear.s1.up"
         },
         {
           "icon": "/img/heroes/Helga/img_011.webp",
           "type": "expedition",
-          "name": "[원정] Zeal",
-          "desc": "집결 부대의 파괴력 15% 증가.",
-          "upgrade": "집결 파괴력 증가: 5% / 7.5% / 10% / 12.5% / 15%"
+          "desc": "heroes.helga.gear.s2.desc",
+          "upgrade": "heroes.helga.gear.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.helga.title",
+    "subtitle": "heroes.card.helga.subtitle"
   },
   {
     "slug": "saul",
     "name": "Saul",
-    "nameKo": "살로",
     "generation": 1,
-    "unit": "궁병",
+    "unit": "heroes.card.saul.unit",
     "image": "/img/heroes/Saul/img_001.webp",
-    "summary": "킹샷 1세대 신화 등급 궁병 영웅. 일일 특혜, 영웅 룰렛, 영웅의 전당, 성검 상점에서 획득 가능합니다.",
-    "sources": ["일일 특혜", "영웅 룰렛", "영웅의 전당", "성검 상점"],
+    "summary": "heroes.card.saul.summary",
+    "sources": [
+      "heroes.card.saul.source.1",
+      "heroes.card.saul.source.2",
+      "heroes.card.saul.source.3",
+      "heroes.card.saul.source.4"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "2,697" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "16,650" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "2,697"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "16,650"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Saul/img_002.webp",
-          "name": "Rapidfire",
-          "desc": "다중 타격을 가해 타격마다 공격력 * 75% 피해, 대상 2초 기절.",
-          "upgrade": "피해 증가: 55% / 60% / 65% / 70% / 75%"
+          "desc": "heroes.saul.conq.s1.desc",
+          "upgrade": "heroes.saul.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Saul/img_003.webp",
-          "name": "Final Prayer",
-          "desc": "체력 50% 미만일 때 방어력 150% 증가.",
-          "upgrade": "방어 증가: 50% / 75% / 100% / 125% / 150%"
+          "desc": "heroes.saul.conq.s2.desc",
+          "upgrade": "heroes.saul.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Saul/img_004.webp",
-          "name": "Superior Techniques",
-          "desc": "공격 속도 30% 증가.",
-          "upgrade": "공격 속도 증가: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.saul.conq.s3.desc",
+          "upgrade": "heroes.saul.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "궁병 공격력", "value": "+200.16%" },
-        { "label": "궁병 방어력", "value": "+200.16%" }
+        {
+          "label": "heroes.col.archerAtk",
+          "value": "+200.16%"
+        },
+        {
+          "label": "heroes.col.archerDef",
+          "value": "+200.16%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Saul/img_005.webp",
-          "name": "Taskforce Training",
-          "desc": "아군 총 방어 +10%, 총 체력 +15%.",
-          "upgrade": "방어 증가: 2% / 4% / 6% / 8% / 10% | 체력 증가: 3% / 6% / 9% / 12% / 15%"
+          "desc": "heroes.saul.exp.s1.desc",
+          "upgrade": "heroes.saul.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Saul/img_006.webp",
-          "name": "Resourceful",
-          "desc": "건설 속도 15% 증가, 건설 비용 15% 감소.",
-          "upgrade": "건설 속도 증가: 3% / 6% / 9% / 12% / 15% | 건설 비용 감소: 3% / 6% / 9% / 12% / 15%"
+          "desc": "heroes.saul.exp.s2.desc",
+          "upgrade": "heroes.saul.exp.s2.up"
         },
         {
           "icon": "/img/heroes/Saul/img_007.webp",
-          "name": "Positional Batter",
-          "desc": "아군 총 파괴력 25% 증가.",
-          "upgrade": "파괴력 증가: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.saul.exp.s3.desc",
+          "upgrade": "heroes.saul.exp.s3.up"
         }
       ]
     },
     "exclusiveGear": {
-      "name": "Rabbitgear Cannon",
+      "name": "heroes.saul.gear.name",
       "icon": "/img/heroes/Saul/img_008.webp",
       "stats": [
-        { "label": "전투력", "value": "225,000" },
-        { "label": "영웅 공격", "value": "546" },
-        { "label": "영웅 방어", "value": "450" },
-        { "label": "영웅 체력", "value": "3,375" },
-        { "label": "호위 공격", "value": "182" },
-        { "label": "호위 방어", "value": "150" },
-        { "label": "호위 체력", "value": "1,125" },
-        { "label": "궁병 파괴력", "value": "+50.00%" },
-        { "label": "궁병 체력", "value": "+50.00%" }
+        {
+          "label": "heroes.col.power",
+          "value": "225,000"
+        },
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "546"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "450"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "3,375"
+        },
+        {
+          "label": "heroes.col.guardAtk",
+          "value": "182"
+        },
+        {
+          "label": "heroes.col.guardDef",
+          "value": "150"
+        },
+        {
+          "label": "heroes.col.guardHp",
+          "value": "1,125"
+        },
+        {
+          "label": "heroes.col.archerMight",
+          "value": "+50.00%"
+        },
+        {
+          "label": "heroes.col.archerTroopHp",
+          "value": "+50.00%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Saul/img_009.webp",
           "type": "conquest",
-          "name": "[토벌] Fearless Advance",
-          "desc": "공격력 24% 증가.",
-          "upgrade": "공격 증가: 6% / 12% / 16% / 20% / 24%"
+          "desc": "heroes.saul.gear.s1.desc",
+          "upgrade": "heroes.saul.gear.s1.up"
         },
         {
           "icon": "/img/heroes/Saul/img_010.webp",
           "type": "expedition",
-          "name": "[원정] Defend to Attack",
-          "desc": "수성 부대의 공격이 15% 증가합니다.",
-          "upgrade": "수성 공격 증가: 5% / 7.5% / 10% / 12.5% / 15%"
+          "desc": "heroes.saul.gear.s2.desc",
+          "upgrade": "heroes.saul.gear.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.saul.title",
+    "subtitle": "heroes.card.saul.subtitle"
   },
   {
     "slug": "amane",
     "name": "Amane",
-    "nameKo": "아마네",
-    "nameEn": "Amane",
-    "rarity": "SR",
-    "generation": 0,
-    "unit": "궁병",
+    "rarity": "SR",    
+    "unit": "heroes.card.amane.unit",
     "groupOrder": 1,
     "image": "/img/heroes/Amane/img_001.webp",
-    "summary": "아마네(구 미코토)는 2025-06-26 업데이트로 추가된 SR 궁병 영웅입니다. 영웅 모집과 Oasis & Beyond 이벤트에서 획득할 수 있습니다.",
-    "sources": ["영웅 모집", "Oasis & Beyond 이벤트"],
+    "summary": "heroes.card.amane.summary",
+    "sources": [
+      "heroes.card.amane.source.1",
+      "heroes.card.amane.source.2"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "2,157" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "13,320" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "2,157"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "13,320"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Amane/img_002.webp",
-          "name": "Sakura Blossom",
-          "desc": "모든 영웅 및 호위의 공격력 3.5%, 공격 속도 4.5% 증가(4초).",
-          "upgrade": "공격 증가: 1.5% / 2% / 2.5% / 3% / 3.5% | 공격 속도 증가: 2.5% / 3% / 3.5% / 4% / 4.5%"
+          "desc": "heroes.amane.conq.s1.desc",
+          "upgrade": "heroes.amane.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Amane/img_003.webp",
-          "name": "Fire Sigil",
-          "desc": "공격력 * 210% 피해.",
-          "upgrade": "피해 증가: 150% / 165% / 180% / 195% / 210%"
+          "desc": "heroes.amane.conq.s2.desc",
+          "upgrade": "heroes.amane.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Amane/img_004.webp",
-          "name": "Divine Melody",
-          "desc": "기본 공격 3회마다 아마네의 공격 속도 5% 증가(전투 종료까지).",
-          "upgrade": "공격 속도 증가: 1% / 2% / 3% / 4% / 5%"
+          "desc": "heroes.amane.conq.s3.desc",
+          "upgrade": "heroes.amane.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "궁병 공격력", "value": "+140.11%" },
-        { "label": "궁병 방어력", "value": "+140.11%" }
+        {
+          "label": "heroes.col.archerAtk",
+          "value": "+140.11%"
+        },
+        {
+          "label": "heroes.col.archerDef",
+          "value": "+140.11%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Amane/img_005.webp",
-          "name": "Tri-Phalanx",
-          "desc": "아군 총 공격 25% 증가.",
-          "upgrade": "공격 증가: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.amane.exp.s1.desc",
+          "upgrade": "heroes.amane.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Amane/img_006.webp",
-          "name": "Exorcism",
-          "desc": "야전병원 치유 속도 50% 증가.",
-          "upgrade": "치유 속도 증가: 10% / 20% / 30% / 40% / 50%"
+          "desc": "heroes.amane.exp.s2.desc",
+          "upgrade": "heroes.amane.exp.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.amane.title",
+    "subtitle": "heroes.card.amane.subtitle"
   },
   {
     "slug": "yeonwoo",
     "name": "Yeonwoo",
-    "nameKo": "연우",
     "image": "/img/heroes/Yeonwoo/img_001.webp",
     "rarity": "SR",
     "generation": null,
-    "unit": "궁병",
-    "summary": "2025-06-26 업데이트로 추가된 SR 궁병 영웅. 영웅 모집과 Oasis & Beyond 이벤트에서 획득. 곰 사냥 합류용으로 유용하며, 원정 스킬로 연구 속도도 증가시킵니다.",
-    "sources": ["영웅 모집", "Oasis & Beyond 이벤트"],
+    "unit": "heroes.card.yeonwoo.unit",
+    "summary": "heroes.card.yeonwoo.summary",
+    "sources": [
+      "heroes.card.yeonwoo.source.1",
+      "heroes.card.yeonwoo.source.2"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "2,157" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "13,320" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "2,157"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "13,320"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Yeonwoo/img_002.webp",
-          "name": "Petalbloom",
-          "desc": "3연사: 1타 공격력 * 100%, 2타 * 175%, 3타 * 210%(3타는 범위 피해).",
-          "upgrade": "2타 피해: 125% / 137.5% / 150% / 162.5% / 175% | 3타 피해: 150% / 165% / 180% / 195% / 210%"
+          "desc": "heroes.yeonwoo.conq.s1.desc",
+          "upgrade": "heroes.yeonwoo.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Yeonwoo/img_003.webp",
-          "name": "Falling Swallow",
-          "desc": "공격력 * 140% 피해 및 2초간 대상의 공격 속도 50% 감소.",
-          "upgrade": "피해 증가: 100% / 110% / 120% / 130% / 140% | 적 공격 속도 감소: 30% / 35% / 40% / 45% / 50%"
+          "desc": "heroes.yeonwoo.conq.s2.desc",
+          "upgrade": "heroes.yeonwoo.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Yeonwoo/img_004.webp",
-          "name": "Twin Fangs",
-          "desc": "자신의 공격 24% 증가.",
-          "upgrade": "공격 증가: 8% / 12% / 16% / 20% / 24%"
+          "desc": "heroes.yeonwoo.conq.s3.desc",
+          "upgrade": "heroes.yeonwoo.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "궁병 공격력", "value": "+140.11%" },
-        { "label": "궁병 방어력", "value": "+140.11%" }
+        {
+          "label": "heroes.col.archerAtk",
+          "value": "+140.11%"
+        },
+        {
+          "label": "heroes.col.archerDef",
+          "value": "+140.11%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Yeonwoo/img_005.webp",
-          "name": "On Guard",
-          "desc": "아군 총 파괴력 25% 증가.",
-          "upgrade": "파괴력 증가: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.yeonwoo.exp.s1.desc",
+          "upgrade": "heroes.yeonwoo.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Yeonwoo/img_006.webp",
-          "name": "Well-Traveled",
-          "desc": "연구 속도 15% 증가.",
-          "upgrade": "연구 속도 증가: 3% / 6% / 9% / 12% / 15%"
+          "desc": "heroes.yeonwoo.exp.s2.desc",
+          "upgrade": "heroes.yeonwoo.exp.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.yeonwoo.title",
+    "subtitle": "heroes.card.yeonwoo.subtitle"
   },
   {
     "slug": "fahd",
     "name": "Fahd",
-    "nameKo": "파드",
     "image": "/img/heroes/Fahd/img_001.webp",
     "rarity": "SR",
     "generation": null,
-    "unit": "기병",
-    "summary": "2025-06-26 업데이트로 추가된 SR 기병 영웅. 영웅 모집과 Oasis & Beyond 이벤트에서 획득.",
-    "sources": ["영웅 모집", "Oasis & Beyond 이벤트"],
+    "unit": "heroes.card.fahd.unit",
+    "summary": "heroes.card.fahd.summary",
+    "sources": [
+      "heroes.card.fahd.source.1",
+      "heroes.card.fahd.source.2"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "1,776" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "17,760" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "1,776"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "17,760"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Fahd/img_002.webp",
-          "name": "Sandstorm",
-          "desc": "적 전체 부대의 공격을 2초간 5% 감소시킵니다.",
-          "upgrade": "적 공격 감소: 1% / 2% / 3% / 4% / 5%"
+          "desc": "heroes.fahd.conq.s1.desc",
+          "upgrade": "heroes.fahd.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Fahd/img_003.webp",
-          "name": "Eagle Wings",
-          "desc": "‘Sandstorm’ 후 자신 및 근처 아군 부대의 공격이 2초간 35% 증가.",
-          "upgrade": "공격 증가: 15% / 20% / 25% / 30% / 35%"
+          "desc": "heroes.fahd.conq.s2.desc",
+          "upgrade": "heroes.fahd.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Fahd/img_004.webp",
-          "name": "Dune General",
-          "desc": "공격 속도 30% 증가.",
-          "upgrade": "공격 속도 증가: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.fahd.conq.s3.desc",
+          "upgrade": "heroes.fahd.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "기병 공격력", "value": "+140.11%" },
-        { "label": "기병 방어력", "value": "+140.11%" }
+        {
+          "label": "heroes.col.cavalryAtk",
+          "value": "+140.11%"
+        },
+        {
+          "label": "heroes.col.cavalryDef",
+          "value": "+140.11%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Fahd/img_005.webp",
-          "name": "Desert Eclipse",
-          "desc": "적 전체 부대가 주는 피해 20% 감소.",
-          "upgrade": "적 피해량 감소: 4% / 8% / 12% / 16% / 20%"
+          "desc": "heroes.fahd.exp.s1.desc",
+          "upgrade": "heroes.fahd.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Fahd/img_006.webp",
-          "name": "Pathfinder",
-          "desc": "솔로 사냥 행군 속도 100% 증가.",
-          "upgrade": "사냥 행군 속도: 20% / 40% / 60% / 80% / 100%"
+          "desc": "heroes.fahd.exp.s2.desc",
+          "upgrade": "heroes.fahd.exp.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.fahd.title",
+    "subtitle": "heroes.card.fahd.subtitle"
   },
   {
     "slug": "chenko",
     "name": "Chenko",
-    "nameKo": "첸코",
     "image": "/img/heroes/Chenko/img_001.webp",
     "rarity": "SR",
     "generation": null,
-    "unit": "기병",
-    "summary": "SR 기병 영웅. 성장 경로 이벤트, 영웅 모집, 전망대 미션으로 획득(모집에 40조각 필요). 곰 사냥 합류용 ‘Stand of Arms’로 높은 평가.",
-    "sources": ["성장 경로(이벤트)", "영웅 모집", "전망대 미션"],
+    "unit": "heroes.card.chenko.unit",
+    "summary": "heroes.card.chenko.summary",
+    "sources": [
+      "heroes.card.chenko.source.1",
+      "heroes.card.chenko.source.2",
+      "heroes.card.chenko.source.3"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "1,776" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "17,760" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "1,776"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "17,760"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Chenko/img_002.webp",
-          "name": "Burst Fire",
-          "desc": "전방에 2초 동안 0.5초마다 공격력 * 75%의 연사 범위 피해.",
-          "upgrade": "범위 피해 증가: 55% / 60% / 65% / 70% / 75%"
+          "desc": "heroes.chenko.conq.s1.desc",
+          "upgrade": "heroes.chenko.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Chenko/img_003.webp",
-          "name": "Defense Upgrade",
-          "desc": "방어력 70% 증가.",
-          "upgrade": "방어 증가: 25% / 37.5% / 50% / 62.5% / 70%"
+          "desc": "heroes.chenko.conq.s2.desc",
+          "upgrade": "heroes.chenko.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Chenko/img_004.webp",
-          "name": "Weapon Upgrade",
-          "desc": "공격력 24% 증가.",
-          "upgrade": "공격 증가: 8% / 12% / 16% / 20% / 24%"
+          "desc": "heroes.chenko.conq.s3.desc",
+          "upgrade": "heroes.chenko.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "기병 공격력", "value": "+140.11%" },
-        { "label": "기병 방어력", "value": "+140.11%" }
+        {
+          "label": "heroes.col.cavalryAtk",
+          "value": "+140.11%"
+        },
+        {
+          "label": "heroes.col.cavalryDef",
+          "value": "+140.11%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Chenko/img_005.webp",
-          "name": "Stand of Arms",
-          "desc": "아군 총 파괴력 25% 증가.",
-          "upgrade": "파괴력 증가: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.chenko.exp.s1.desc",
+          "upgrade": "heroes.chenko.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Chenko/img_006.webp",
-          "name": "Shield Wall",
-          "desc": "아군이 받는 피해 20% 감소.",
-          "upgrade": "받는 피해 감소: 4% / 8% / 12% / 16% / 20%"
+          "desc": "heroes.chenko.exp.s2.desc",
+          "upgrade": "heroes.chenko.exp.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.chenko.title",
+    "subtitle": "heroes.card.chenko.subtitle"
   },
   {
     "slug": "gordon",
     "name": "Gordon",
-    "nameKo": "고든",
     "image": "/img/heroes/Gordon/img_001.webp",
     "rarity": "SR",
     "generation": null,
-    "unit": "기병",
-    "summary": "SR 기병 영웅. 영웅 모집, 전망대 미션, 연맹 챔피언십 상점에서 획득. 원정 체력 버프로 수성 합류에 적합.",
-    "sources": ["영웅 모집", "전망대 미션", "연맹 챔피언십 상점"],
+    "unit": "heroes.card.gordon.unit",
+    "summary": "heroes.card.gordon.summary",
+    "sources": [
+      "heroes.card.gordon.source.1",
+      "heroes.card.gordon.source.2",
+      "heroes.card.gordon.source.3"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "1,776" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "17,760" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "1,776"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "17,760"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Gordon/img_002.webp",
-          "name": "BBQ Feast",
-          "desc": "모든 부대 체력을 공격력 * 280% 회복하고 4초간 공격 +7%.",
-          "upgrade": "치유량 증가: 200% / 220% / 240% / 260% / 280% | 공격 증가: 5% / 5.5% / 6% / 6.5% / 7%"
+          "desc": "heroes.gordon.conq.s1.desc",
+          "upgrade": "heroes.gordon.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Gordon/img_003.webp",
-          "name": "Culinary Chaos",
-          "desc": "받는 피해 30% 감소.",
-          "upgrade": "받는 피해 감소: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.gordon.conq.s2.desc",
+          "upgrade": "heroes.gordon.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Gordon/img_004.webp",
-          "name": "Emergency Snack",
-          "desc": "5초마다 공격력 * 70% 체력 회복.",
-          "upgrade": "치유량 증가: 50% / 55% / 60% / 65% / 70%"
+          "desc": "heroes.gordon.conq.s3.desc",
+          "upgrade": "heroes.gordon.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "기병 공격력", "value": "+140.11%" },
-        { "label": "기병 방어력", "value": "+140.11%" }
+        {
+          "label": "heroes.col.cavalryAtk",
+          "value": "+140.11%"
+        },
+        {
+          "label": "heroes.col.cavalryDef",
+          "value": "+140.11%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Gordon/img_005.webp",
-          "name": "Super Nutrients",
-          "desc": "아군 총 체력 25% 증가.",
-          "upgrade": "체력 증가: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.gordon.exp.s1.desc",
+          "upgrade": "heroes.gordon.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Gordon/img_006.webp",
-          "name": "Trash Talk",
-          "desc": "아군 총 공격 25% 증가.",
-          "upgrade": "공격 증가: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.gordon.exp.s2.desc",
+          "upgrade": "heroes.gordon.exp.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.gordon.title",
+    "subtitle": "heroes.card.gordon.subtitle"
   },
   {
     "slug": "diana",
     "name": "Diana",
-    "nameKo": "다이애나",
     "image": "/img/heroes/Diana/img_001.webp",
     "rarity": "SR",
     "generation": null,
-    "unit": "궁병",
-    "summary": "사막의 시련(이벤트) 전용 SR 궁병 영웅. 집결/행군 스태미나 소모 감소와 최대 +100% 행군 속도 원정 스킬로 필수급(합류 시에만 적용).",
-    "sources": ["사막의 시련(이벤트)"],
+    "unit": "heroes.card.diana.unit",
+    "summary": "heroes.card.diana.summary",
+    "sources": [
+      "heroes.card.diana.source.1"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "2,157" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "13,320" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "2,157"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "13,320"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Diana/img_002.webp",
-          "name": "Incendiary Arrows",
-          "desc": "대상에게 공격력 * 290% 피해, 주변 적에게 공격력 * 98% 피해.",
-          "upgrade": "대상 피해: 210% / 230% / 250% / 270% / 290% | 범위 피해: 70% / 77% / 84% / 91% / 98%"
+          "desc": "heroes.diana.conq.s1.desc",
+          "upgrade": "heroes.diana.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Diana/img_003.webp",
-          "name": "Sharpshooter",
-          "desc": "공격 속도 30% 증가.",
-          "upgrade": "공격 속도 증가: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.diana.conq.s2.desc",
+          "upgrade": "heroes.diana.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Diana/img_004.webp",
-          "name": "Deadly Strike",
-          "desc": "치명타 확률 20% 증가.",
-          "upgrade": "치명타 확률: 7% / 10% / 13% / 16% / 20%"
+          "desc": "heroes.diana.conq.s3.desc",
+          "upgrade": "heroes.diana.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "궁병 공격력", "value": "+110.08%" },
-        { "label": "궁병 방어력", "value": "+110.08%" }
+        {
+          "label": "heroes.col.archerAtk",
+          "value": "+110.08%"
+        },
+        {
+          "label": "heroes.col.archerDef",
+          "value": "+110.08%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Diana/img_005.webp",
-          "name": "Iron Constitution",
-          "desc": "총독 스태미나 소모 20% 감소.",
-          "upgrade": "스태미나 소모 감소: 10% / 12% / 15% / 18% / 20%"
+          "desc": "heroes.diana.exp.s1.desc",
+          "upgrade": "heroes.diana.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Diana/img_006.webp",
-          "name": "Quick Paced",
-          "desc": "행군 속도 100% 증가.",
-          "upgrade": "야외 행군 속도: 20% / 40% / 60% / 80% / 100%"
+          "desc": "heroes.diana.exp.s2.desc",
+          "upgrade": "heroes.diana.exp.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.diana.title",
+    "subtitle": "heroes.card.diana.subtitle"
   },
   {
     "slug": "howard",
     "name": "Howard",
-    "nameKo": "하워드",
     "image": "/img/heroes/Howard/img_001.webp",
     "rarity": "SR",
     "generation": null,
-    "unit": "보병",
-    "summary": "SR 보병 영웅. 영웅 모집, 토벌 전투, 전망대 미션으로 조각 획득. 토벌에서 광역 제어와 수비 버프, 원정에서 피해감소와 적 약화 제공.",
-    "sources": ["영웅 모집", "토벌 전투", "전망대 미션"],
+    "unit": "heroes.card.howard.unit",
+    "summary": "heroes.card.howard.summary",
+    "sources": [
+      "heroes.card.howard.source.1",
+      "heroes.card.howard.source.2",
+      "heroes.card.howard.source.3"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "1,361" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "26,640" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "1,361"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "26,640"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Howard/img_002.webp",
-          "name": "Shielded Strike",
-          "desc": "방패 타격으로 넉백시키며 공격력 * 280% 범위 피해.",
-          "upgrade": "범위 피해 증가: 200% / 220% / 240% / 260% / 280%"
+          "desc": "heroes.howard.conq.s1.desc",
+          "upgrade": "heroes.howard.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Howard/img_003.webp",
-          "name": "Joint Defense",
-          "desc": "모든 영웅의 방어를 15% 증가.",
-          "upgrade": "방어 증가: 5% / 7.5% / 10% / 12.5% / 15%"
+          "desc": "heroes.howard.conq.s2.desc",
+          "upgrade": "heroes.howard.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Howard/img_004.webp",
-          "name": "Shield Block",
-          "desc": "받는 피해 30% 감소.",
-          "upgrade": "받는 피해 감소: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.howard.conq.s3.desc",
+          "upgrade": "heroes.howard.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "보병 공격력", "value": "+140.11%" },
-        { "label": "보병 방어력", "value": "+140.11%" }
+        {
+          "label": "heroes.col.infantryAtk",
+          "value": "+140.11%"
+        },
+        {
+          "label": "heroes.col.infantryDef",
+          "value": "+140.11%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Howard/img_005.webp",
-          "name": "Defenders’ Edge",
-          "desc": "아군이 받는 피해 20% 감소.",
-          "upgrade": "받는 피해 감소: 4% / 8% / 12% / 16% / 20%"
+          "desc": "heroes.howard.exp.s1.desc",
+          "upgrade": "heroes.howard.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Howard/img_006.webp",
-          "name": "Weaken",
-          "desc": "적 전체 부대의 총 공격 20% 감소.",
-          "upgrade": "적 부대 공격 감소: 4% / 8% / 12% / 16% / 20%"
+          "desc": "heroes.howard.exp.s2.desc",
+          "upgrade": "heroes.howard.exp.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.howard.title",
+    "subtitle": "heroes.card.howard.subtitle"
   },
   {
     "slug": "quinn",
     "name": "Quinn",
-    "nameKo": "퀸",
     "image": "/img/heroes/Quinn/img_001.webp",
     "rarity": "SR",
     "generation": null,
-    "unit": "궁병",
-    "summary": "튜토리얼 해금 SR 궁병. 추가 조각은 영웅 모집, 전망대 미션으로 획득. 토벌 단일 폭딜과 공속, 원정 안정적 경감/화력 보조.",
-    "sources": ["영웅 모집", "전망대 미션"],
+    "unit": "heroes.card.quinn.unit",
+    "summary": "heroes.card.quinn.summary",
+    "sources": [
+      "heroes.card.quinn.source.1",
+      "heroes.card.quinn.source.2"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "2,157" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "13,320" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "2,157"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "13,320"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Quinn/img_002.webp",
-          "name": "Headshot",
-          "desc": "개량 석궁으로 공격력 * 560% 피해.",
-          "upgrade": "피해 증가: 400% / 440% / 480% / 520% / 560%"
+          "desc": "heroes.quinn.conq.s1.desc",
+          "upgrade": "heroes.quinn.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Quinn/img_003.webp",
-          "name": "Quick Shot",
-          "desc": "공격 속도 30% 증가.",
-          "upgrade": "공격 속도 증가: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.quinn.conq.s2.desc",
+          "upgrade": "heroes.quinn.conq.s2.up"
         },
         {
           "icon": "/img/heroes/Quinn/img_004.webp",
-          "name": "Natural Selection",
-          "desc": "주는 피해 30% 증가.",
-          "upgrade": "피해 증가: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.quinn.conq.s3.desc",
+          "upgrade": "heroes.quinn.conq.s3.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "궁병 공격력", "value": "+140.11%" },
-        { "label": "궁병 방어력", "value": "+140.11%" }
+        {
+          "label": "heroes.col.archerAtk",
+          "value": "+140.11%"
+        },
+        {
+          "label": "heroes.col.archerDef",
+          "value": "+140.11%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Quinn/img_005.webp",
-          "name": "Sixth Sense",
-          "desc": "아군이 받는 피해 20% 감소.",
-          "upgrade": "받는 피해 감소: 4% / 8% / 12% / 16% / 20%"
+          "desc": "heroes.quinn.exp.s1.desc",
+          "upgrade": "heroes.quinn.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Quinn/img_006.webp",
-          "name": "Precision Shot",
-          "desc": "아군 공격이 50% 확률로 50% 추가 피해.",
-          "upgrade": "추가 피해: 10% / 20% / 30% / 40% / 50%"
+          "desc": "heroes.quinn.exp.s2.desc",
+          "upgrade": "heroes.quinn.exp.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.quinn.title",
+    "subtitle": "heroes.card.quinn.subtitle"
   },
   {
     "slug": "olive",
     "name": "Olive",
-    "nameKo": "올리브",
     "image": "/img/heroes/Olive/img_001.webp",
     "rarity": "R",
     "generation": null,
-    "unit": "궁병",
-    "summary": "성장형 R 등급 궁병 영웅: 도시 방앗간(빵) 생산량과 야외 빵 채집 속도를 증가시킵니다.",
-    "sources": ["영웅모집", "전망대미션", "토벌"],
+    "unit": "heroes.card.olive.unit",
+    "summary": "heroes.card.olive.summary",
+    "sources": [
+      "heroes.card.olive.source.1",
+      "heroes.card.olive.source.2",
+      "heroes.card.olive.source.3"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "1,752" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "10,822" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "1,752"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "10,822"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Olive/img_002.webp",
-          "name": "Rain of Arrows",
-          "desc": "대상 주변에 공격력 * 252% 범위 피해를 가합니다.",
-          "upgrade": "범위 피해 증가: 180% / 198% / 216% / 234% / 252%"
+          "desc": "heroes.olive.conq.s1.desc",
+          "upgrade": "heroes.olive.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Olive/img_003.webp",
-          "name": "Target Lock",
-          "desc": "대상에게 가하는 피해를 30% 증가시킵니다.",
-          "upgrade": "피해 증가: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.olive.conq.s2.desc",
+          "upgrade": "heroes.olive.conq.s2.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "궁병 공격력", "value": "+90.07%" },
-        { "label": "궁병 방어력", "value": "+90.07%" }
+        {
+          "label": "heroes.col.archerAtk",
+          "value": "+90.07%"
+        },
+        {
+          "label": "heroes.col.archerDef",
+          "value": "+90.07%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Olive/img_004.webp",
-          "name": "Green Thumb",
-          "desc": "도시 방앗간 생산량 25% 증가.",
-          "upgrade": "방앗간 수입: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.olive.exp.s1.desc",
+          "upgrade": "heroes.olive.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Olive/img_005.webp",
-          "name": "Forager’s Luck",
-          "desc": "야외 빵 채집 속도 25% 증가.",
-          "upgrade": "빵 채집 속도: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.olive.exp.s2.desc",
+          "upgrade": "heroes.olive.exp.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.olive.title",
+    "subtitle": "heroes.card.olive.subtitle"
   },
   {
     "slug": "edwin",
     "name": "Edwin",
-    "nameKo": "에드윈",
     "image": "/img/heroes/Edwin/img_001.webp",
     "rarity": "R",
     "generation": null,
-    "unit": "기병",
-    "summary": "성장형 R 등급 기병 영웅: 도시 석재 생산량과 야외 석재 채집 속도를 증가시킵니다.",
-    "sources": ["영웅모집", "전망대미션", "토벌"],
+    "unit": "heroes.card.edwin.unit",
+    "summary": "heroes.card.edwin.summary",
+    "sources": [
+      "heroes.card.edwin.source.1",
+      "heroes.card.edwin.source.2",
+      "heroes.card.edwin.source.3"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "1,442" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "14,430" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "1,442"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "14,430"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Edwin/img_002.webp",
-          "name": "Shrapnel Load",
-          "desc": "자작 폭탄을 투척해 대상 및 주변에 공격력 * 196% 범위 피해.",
-          "upgrade": "범위 피해 증가: 140% / 154% / 168% / 182% / 196%"
+          "desc": "heroes.edwin.conq.s1.desc",
+          "upgrade": "heroes.edwin.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Edwin/img_003.webp",
-          "name": "Detonate",
-          "desc": "폭발물에 20% 확률로 최대 1.5초 기절 효과가 있습니다.",
-          "upgrade": "기절 확률: 10% / 15% / 15% / 20% / 20% | 기절 시간: 0.5s / 0.5s / 1s / 1s / 1.5s"
+          "desc": "heroes.edwin.conq.s2.desc",
+          "upgrade": "heroes.edwin.conq.s2.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "기병 공격력", "value": "+90.07%" },
-        { "label": "기병 방어력", "value": "+90.07%" }
+        {
+          "label": "heroes.col.cavalryAtk",
+          "value": "+90.07%"
+        },
+        {
+          "label": "heroes.col.cavalryDef",
+          "value": "+90.07%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Edwin/img_004.webp",
-          "name": "Demolitions Expert",
-          "desc": "도시 채석장 생산량 25% 증가.",
-          "upgrade": "채석장 수입: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.edwin.exp.s1.desc",
+          "upgrade": "heroes.edwin.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Edwin/img_005.webp",
-          "name": "Stone Mining",
-          "desc": "야외 석재 채집 속도 25% 증가.",
-          "upgrade": "석재 채집 속도: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.edwin.exp.s2.desc",
+          "upgrade": "heroes.edwin.exp.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.edwin.title",
+    "subtitle": "heroes.card.edwin.subtitle"
   },
   {
     "slug": "seth",
     "name": "Seth",
-    "nameKo": "스미스",
     "image": "/img/heroes/Seth/img_001.webp",
     "rarity": "R",
     "generation": null,
-    "unit": "보병",
-    "summary": "성장형 R 등급 보병 영웅: 도시 철 생산량과 야외 철 채집 속도를 증가시킵니다.",
-    "sources": ["영웅모집", "전망대미션", "토벌"],
+    "unit": "heroes.card.seth.unit",
+    "summary": "heroes.card.seth.summary",
+    "sources": [
+      "heroes.card.seth.source.1",
+      "heroes.card.seth.source.2",
+      "heroes.card.seth.source.3"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "1,106" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "21,644" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "1,106"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "21,644"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Seth/img_002.webp",
-          "name": "Hammer Burn",
-          "desc": "강력한 도끼 휘두르기로 공격력 * 280% 피해.",
-          "upgrade": "범위 피해 증가: 200% / 220% / 240% / 260% / 280%"
+          "desc": "heroes.seth.conq.s1.desc",
+          "upgrade": "heroes.seth.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Seth/img_003.webp",
-          "name": "Armor Enhancement",
-          "desc": "받는 피해 30% 감소.",
-          "upgrade": "받는 피해 감소: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.seth.conq.s2.desc",
+          "upgrade": "heroes.seth.conq.s2.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "보병 공격력", "value": "+90.07%" },
-        { "label": "보병 방어력", "value": "+90.07%" }
+        {
+          "label": "heroes.col.infantryAtk",
+          "value": "+90.07%"
+        },
+        {
+          "label": "heroes.col.infantryDef",
+          "value": "+90.07%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Seth/img_004.webp",
-          "name": "Burnished Iron",
-          "desc": "도시 철광 생산량 25% 증가.",
-          "upgrade": "철광 수입: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.seth.exp.s1.desc",
+          "upgrade": "heroes.seth.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Seth/img_005.webp",
-          "name": "Craftsmanship",
-          "desc": "야외 철 채집 속도 25% 증가.",
-          "upgrade": "철 채집 속도: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.seth.exp.s2.desc",
+          "upgrade": "heroes.seth.exp.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.seth.title",
+    "subtitle": "heroes.card.seth.subtitle"
   },
   {
     "slug": "forrest",
     "name": "Forrest",
-    "nameKo": "포스터",
     "image": "/img/heroes/Forrest/img_001.webp",
     "rarity": "R",
     "generation": null,
-    "unit": "보병",
-    "summary": "성장형 R 등급 보병 영웅: 도시 목재 생산량과 야외 목재 채집 속도를 증가시킵니다.",
-    "sources": ["영웅모집", "전망대미션", "토벌"],
+    "unit": "heroes.card.forrest.unit",
+    "summary": "heroes.card.forrest.summary",
+    "sources": [
+      "heroes.card.forrest.source.1",
+      "heroes.card.forrest.source.2",
+      "heroes.card.forrest.source.3"
+    ],
     "conquest": {
       "stats": [
-        { "label": "영웅 공격", "value": "1,106" },
-        { "label": "영웅 방어", "value": "2,220" },
-        { "label": "영웅 체력", "value": "21,644" }
+        {
+          "label": "heroes.col.heroAtk",
+          "value": "1,106"
+        },
+        {
+          "label": "heroes.col.heroDef",
+          "value": "2,220"
+        },
+        {
+          "label": "heroes.col.heroHp",
+          "value": "21,644"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Forrest/img_002.webp",
-          "name": "Axe Whirl",
-          "desc": "3초 동안 0.5초마다 주변 적에게 공격력 * 110% 피해.",
-          "upgrade": "범위 피해 증가: 80% / 88% / 96% / 104% / 110%"
+          "desc": "heroes.forrest.conq.s1.desc",
+          "upgrade": "heroes.forrest.conq.s1.up"
         },
         {
           "icon": "/img/heroes/Forrest/img_003.webp",
-          "name": "Razor Sharp",
-          "desc": "초당 피해가 30% 증가합니다.",
-          "upgrade": "피해 증가: 10% / 15% / 20% / 25% / 30%"
+          "desc": "heroes.forrest.conq.s2.desc",
+          "upgrade": "heroes.forrest.conq.s2.up"
         }
       ]
     },
     "expedition": {
       "stats": [
-        { "label": "보병 공격력", "value": "+90.07%" },
-        { "label": "보병 방어력", "value": "+90.07%" }
+        {
+          "label": "heroes.col.infantryAtk",
+          "value": "+90.07%"
+        },
+        {
+          "label": "heroes.col.infantryDef",
+          "value": "+90.07%"
+        }
       ],
       "skills": [
         {
           "icon": "/img/heroes/Forrest/img_004.webp",
-          "name": "Woodland Inheritor",
-          "desc": "도시 제재소 생산량 25% 증가.",
-          "upgrade": "제재소 수입: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.forrest.exp.s1.desc",
+          "upgrade": "heroes.forrest.exp.s1.up"
         },
         {
           "icon": "/img/heroes/Forrest/img_005.webp",
-          "name": "Master Woodcutter",
-          "desc": "야외 목재 채집 속도 25% 증가.",
-          "upgrade": "목재 채집 속도: 5% / 10% / 15% / 20% / 25%"
+          "desc": "heroes.forrest.exp.s2.desc",
+          "upgrade": "heroes.forrest.exp.s2.up"
         }
       ]
-    }
+    },
+    "title": "heroes.card.forrest.title",
+    "subtitle": "heroes.card.forrest.subtitle"
   }
 ]

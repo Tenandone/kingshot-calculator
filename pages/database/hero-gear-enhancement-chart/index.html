@@ -4,150 +4,128 @@
   <meta charset="utf-8">
   <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>영웅 장비 강화 차트 | KingshotData KR</title>
 
   <style>
-    .visually-hidden{
-      position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
-      clip:rect(0 0 0 0);white-space:nowrap;border:0
-    }
-
-    /* 공통 표 스타일 */
+    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
     .table-wrap{overflow:auto}
-    .table-wrap table{
-      border-collapse:collapse;
-      font-size:13px;
-      width:auto;            /* 내용 기준 */
-      min-width: 420px;      /* 너무 좁아지지 않게 */
-      margin:0 auto;         /* 중앙 배치 */
-      table-layout:auto;
-    }
-    .table-wrap caption{
-      caption-side: top;
-      text-align: left;
-      padding: 6px 0 8px;
-      color: #8a93a4;
-      font-size: 12px;
-    }
-    .table-wrap th,.table-wrap td{
-      padding:6px 10px;
-      border-bottom:1px solid var(--border, #1e2430);
-      white-space:nowrap;    /* 줄바꿈 방지 */
-      text-align:right;      /* 숫자 기본 우측정렬 */
-    }
-    .table-wrap th:first-child,
-    .table-wrap td:first-child{ text-align:left }  /* 첫 컬럼(텍스트)만 좌측 */
-    .table-wrap thead th{
-      position:sticky; top:0;
-      background:#0f1318; color:#8a93a4; z-index:1;
-    }
-
-    /* 2컬럼 표(레벨/경험치) 폭 */
-    .table--lvxp th:nth-child(1), .table--lvxp td:nth-child(1){ width:72px }   /* 레벨 */
-    .table--lvxp th:nth-child(2), .table--lvxp td:nth-child(2){ width:100px }  /* 필요 강화 경험치 */
-
-    /* 4컬럼 표(레벨/경험치/미스릴/레전드장비) 폭 */
-    .table--mythic th:nth-child(1), .table--mythic td:nth-child(1){ width:72px }   /* 레벨 */
-    .table--mythic th:nth-child(2), .table--mythic td:nth-child(2){ width:110px }  /* 경험치 */
-    .table--mythic th:nth-child(3), .table--mythic td:nth-child(3){ width:80px }   /* 미스릴 */
-    .table--mythic th:nth-child(4), .table--mythic td:nth-child(4){ width:110px }  /* 레전드 장비 */
+    .table-wrap table{border-collapse:collapse;font-size:13px;width:auto;min-width:420px;margin:0 auto;table-layout:auto}
+    .table-wrap caption{caption-side:top;text-align:left;padding:6px 0 8px;color:#8a93a4;font-size:12px}
+    .table-wrap th,.table-wrap td{padding:6px 10px;border-bottom:1px solid var(--border,#1e2430);white-space:nowrap;text-align:right;line-height:20px;height:28px;vertical-align:middle}
+    .table-wrap th:first-child,.table-wrap td:first-child{ text-align:left }
+    .table-wrap thead th{position:sticky;top:0;background:#0f1318;color:#8a93a4;z-index:1}
+    /* 2컬럼 (레벨 구간 / 총 경험치) */
+    .table--lvxp th:nth-child(1), .table--lvxp td:nth-child(1){ width:120px }
+    .table--lvxp th:nth-child(2), .table--lvxp td:nth-child(2){ width:160px }
+    /* 4컬럼 (레벨 구간 / 총 경험치 / 미스릴 / 레전드 장비) */
+    .table--range4 th:nth-child(1), .table--range4 td:nth-child(1){ width:120px }
+    .table--range4 th:nth-child(2), .table--range4 td:nth-child(2){ width:160px }
+    .table--range4 th:nth-child(3), .table--range4 td:nth-child(3){ width:110px }
+    .table--range4 th:nth-child(4), .table--range4 td:nth-child(4){ width:120px }
   </style>
+
+  <!-- i18n (타이틀/헤더 생성 안 함) -->
+  <script src="/js/i18n.js?v=now" defer></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    if (!window.I18N?.init) return;
+    const raw = (localStorage.getItem('lang') || navigator.language || 'ko').replace('_','-');
+    const lang = raw.startsWith('zh') ? (raw.toLowerCase().includes('tw') ? 'zh-TW' : 'zh-CN')
+                                      : (raw.split('-')[0] || 'ko');
+    try {
+      await I18N.init({ lang, namespaces: ['db'] }); // 'db'만 로드
+      I18N.applyTo(document);
+    } catch (e) { console.error('[i18n init error]', e); }
+    document.addEventListener('i18n:changed', () => I18N.applyTo(document));
+  });
+  </script>
 </head>
 <body>
   <main>
-    <!-- 대표 이미지 -->
+    <!-- 대표 이미지 (타이틀 제거 유지) -->
     <figure>
       <img
         src="/img/database/Hero Gear Enhancement Chart/purple-enhancement-xp-parts-295x300.webp"
-        alt="영웅 장비 강화 대표 이미지"
-        width="295" height="300"
-        loading="lazy" decoding="async">      
+        alt="" width="295" height="300" loading="lazy" decoding="async">
     </figure>
 
-    <h1>영웅 장비 강화 차트</h1>
-
+    <!-- 본문만 i18n 처리 -->
     <section aria-labelledby="unlock">
-      <h2 id="unlock">해금</h2>
-      <p>도시센터 15레벨에 도달하면 영웅 장비가 해금됩니다.</p>
-      <p>강화 방법: 다른 장비를 합성해 경험치를 넣거나, 강화 경험치 부속품을 사용합니다.</p>
-      <p>레전드 장비는 다른 장비의 합성 재료로 사용할 수 없습니다.</p>
+      <h2 id="unlock" data-i18n="db.heroGearEnhance.section.unlock.title">해금</h2>
+      <p data-i18n="db.heroGearEnhance.section.unlock.p1">도시센터 15레벨에 도달하면 영웅 장비가 해금됩니다.</p>
+      <p data-i18n="db.heroGearEnhance.section.unlock.p2">강화 방법: 다른 장비를 합성해 경험치를 넣거나, 강화 경험치 부속품을 사용합니다.</p>
+      <p data-i18n="db.heroGearEnhance.section.unlock.p3">레전드 장비는 다른 장비의 합성 재료로 사용할 수 없습니다.</p>
     </section>
 
     <section aria-labelledby="grades">
-      <h2 id="grades">장비 등급(6단계)</h2>
-      <p>일반, 그린, 레어, 에픽, 레전드, 신화</p>
+      <h2 id="grades" data-i18n="db.heroGearEnhance.section.grades.title">장비 등급(6단계)</h2>
+      <p data-i18n="db.heroGearEnhance.section.grades.list">일반, 고급, 레어, 에픽, 레전드, 신화</p>
     </section>
 
     <section aria-labelledby="max-level">
-      <h2 id="max-level">등급별 최대 레벨</h2>
-      <p>일반 20 / 그린 40 / 레어 60 / 에픽 80 / 레전드 100 / 신화 200</p>
+      <h2 id="max-level" data-i18n="db.heroGearEnhance.section.maxLevel.title">등급별 최대 레벨</h2>
+      <p data-i18n="db.heroGearEnhance.section.maxLevel.desc">일반 20 / 고급 40 / 레어 60 / 에픽 80 / 레전드 100 / 신화 200</p>
     </section>
 
     <section aria-labelledby="reforge">
-      <h2 id="reforge">단련(레전드 → 신화)</h2>
-      <p>레전드 장비가 100레벨에 도달하면 단련을 통해 신화 장비로 승격됩니다.</p>
-      <p>단련 해금 조건: 도시센터 30레벨, 왕국/서버 나이 약 40일</p>
-      <p>단련 필요 조건: 마스터리(단조 숙련) 10레벨, 추가 레전드 장비 2개 합성</p>
+      <h2 id="reforge" data-i18n="db.heroGearEnhance.section.reforge.title">단련(레전드 → 신화)</h2>
+      <p data-i18n="db.heroGearEnhance.section.reforge.p1">레전드 장비가 100레벨에 도달하면 단련을 통해 신화 장비로 승격됩니다.</p>
+      <p data-i18n="db.heroGearEnhance.section.reforge.p2">단련 해금 조건: 도시센터 30레벨, 왕국/서버 나이 약 40일</p>
+      <p data-i18n="db.heroGearEnhance.section.reforge.p3">단련 필요 조건: 마스터리(단조 숙련) 10레벨, 추가 레전드 장비 2개 합성</p>
     </section>
 
     <section aria-labelledby="mythic-upgrade">
-      <h2 id="mythic-upgrade">신화 장비 강화</h2>
-      <p>최대 200레벨까지 강화 가능하며, 20레벨마다 미스릴이 추가로 필요합니다.</p>
+      <h2 id="mythic-upgrade" data-i18n="db.heroGearEnhance.section.mythic.title">신화 장비 강화</h2>
+      <p data-i18n="db.heroGearEnhance.section.mythic.desc">최대 200레벨까지 강화 가능하며, 특정 구간마다 추가 재료(미스릴/레전드 장비)가 요구됩니다.</p>
     </section>
 
-    <section aria-labelledby="xp-from-fuse">
-      <h2 id="xp-from-fuse">장비 합성 시 획득 강화 경험치</h2>
-      <p>일반 10 / 그린 30 / 레어 60 / 에픽 150</p>
-    </section>
-
-    <!-- ===== 1~100: 레전드 구간 ===== -->
+    <!-- 레전드 1–100: 한 줄 집계 -->
     <section aria-labelledby="legend-1-100">
-      <h2 id="legend-1-100">레전드 장비 레벨별 필요치 (1–100)</h2>
+      <h2 id="legend-1-100" data-i18n="db.heroGearEnhance.legend.title">레전드 장비 레벨별 필요치 (1–100)</h2>
       <div class="table-wrap" role="region" aria-labelledby="legend-1-100">
         <table class="table--lvxp" aria-describedby="legend-caption">
-          <caption id="legend-caption">레전드 장비 1~100 레벨별 필요 강화 경험치</caption>
+          <caption id="legend-caption" data-i18n="db.heroGearEnhance.legend.caption">레전드 1–100 총 필요 강화 경험치</caption>
           <thead>
             <tr>
-              <th scope="col">레벨</th>
-              <th scope="col">필요 강화 경험치</th>
+              <th scope="col" data-i18n="db.heroGearEnhance.col.range">레벨 구간</th>
+              <th scope="col" data-i18n="db.heroGearEnhance.col.totalXp">총 강화 경험치</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>1</td><td>10</td></tr><tr><td>2</td><td>15</td></tr><tr><td>3</td><td>20</td></tr><tr><td>4</td><td>25</td></tr><tr><td>5</td><td>30</td></tr><tr><td>6</td><td>35</td></tr><tr><td>7</td><td>40</td></tr><tr><td>8</td><td>45</td></tr><tr><td>9</td><td>50</td></tr><tr><td>10</td><td>55</td></tr><tr><td>11</td><td>60</td></tr><tr><td>12</td><td>65</td></tr><tr><td>13</td><td>70</td></tr><tr><td>14</td><td>75</td></tr><tr><td>15</td><td>80</td></tr><tr><td>16</td><td>85</td></tr><tr><td>17</td><td>90</td></tr><tr><td>18</td><td>95</td></tr><tr><td>19</td><td>100</td></tr><tr><td>20</td><td>105</td></tr><tr><td>21</td><td>110</td></tr><tr><td>22</td><td>115</td></tr><tr><td>23</td><td>120</td></tr><tr><td>24</td><td>125</td></tr><tr><td>25</td><td>130</td></tr><tr><td>26</td><td>135</td></tr><tr><td>27</td><td>140</td></tr><tr><td>28</td><td>145</td></tr><tr><td>29</td><td>150</td></tr><tr><td>30</td><td>160</td></tr><tr><td>31</td><td>170</td></tr><tr><td>32</td><td>180</td></tr><tr><td>33</td><td>190</td></tr><tr><td>34</td><td>200</td></tr><tr><td>35</td><td>210</td></tr><tr><td>36</td><td>220</td></tr><tr><td>37</td><td>230</td></tr><tr><td>38</td><td>240</td></tr><tr><td>39</td><td>250</td></tr><tr><td>40</td><td>270</td></tr><tr><td>41</td><td>290</td></tr><tr><td>42</td><td>310</td></tr><tr><td>43</td><td>330</td></tr><tr><td>44</td><td>350</td></tr><tr><td>45</td><td>370</td></tr><tr><td>46</td><td>390</td></tr><tr><td>47</td><td>410</td></tr><tr><td>48</td><td>430</td></tr><tr><td>49</td><td>450</td></tr><tr><td>50</td><td>470</td></tr><tr><td>51</td><td>490</td></tr><tr><td>52</td><td>510</td></tr><tr><td>53</td><td>530</td></tr><tr><td>54</td><td>550</td></tr><tr><td>55</td><td>570</td></tr><tr><td>56</td><td>590</td></tr><tr><td>57</td><td>610</td></tr><tr><td>58</td><td>630</td></tr><tr><td>59</td><td>650</td></tr><tr><td>60</td><td>680</td></tr><tr><td>61</td><td>710</td></tr><tr><td>62</td><td>740</td></tr><tr><td>63</td><td>770</td></tr><tr><td>64</td><td>800</td></tr><tr><td>65</td><td>830</td></tr><tr><td>66</td><td>860</td></tr><tr><td>67</td><td>890</td></tr><tr><td>68</td><td>920</td></tr><tr><td>69</td><td>950</td></tr><tr><td>70</td><td>990</td></tr><tr><td>71</td><td>1030</td></tr><tr><td>72</td><td>1070</td></tr><tr><td>73</td><td>1110</td></tr><tr><td>74</td><td>1150</td></tr><tr><td>75</td><td>1190</td></tr><tr><td>76</td><td>1230</td></tr><tr><td>77</td><td>1270</td></tr><tr><td>78</td><td>1310</td></tr><tr><td>79</td><td>1350</td></tr><tr><td>80</td><td>1400</td></tr><tr><td>81</td><td>1450</td></tr><tr><td>82</td><td>1500</td></tr><tr><td>83</td><td>1550</td></tr><tr><td>84</td><td>1600</td></tr><tr><td>85</td><td>1650</td></tr><tr><td>86</td><td>1700</td></tr><tr><td>87</td><td>1750</td></tr><tr><td>88</td><td>1800</td></tr><tr><td>89</td><td>1850</td></tr><tr><td>90</td><td>1900</td></tr><tr><td>91</td><td>1950</td></tr><tr><td>92</td><td>2000</td></tr><tr><td>93</td><td>2050</td></tr><tr><td>94</td><td>2100</td></tr><tr><td>95</td><td>2150</td></tr><tr><td>96</td><td>2200</td></tr><tr><td>97</td><td>2250</td></tr><tr><td>98</td><td>2300</td></tr><tr><td>99</td><td>2350</td></tr><tr><td>100</td><td>2400</td></tr>
+            <tr><td>1–100</td><td>73,320</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- ===== 101~200: 신화 구간 ===== -->
+    <!-- 신화 101–200: 재료 구간 표시 + 사이 구간 경험치 합산 -->
     <section aria-labelledby="mythic-101-200">
-      <h2 id="mythic-101-200">신화 장비 레벨별 필요치 (101–200)</h2>
+      <h2 id="mythic-101-200" data-i18n="db.heroGearEnhance.mythic.title2">신화 장비 레벨별 필요치 (101–200)</h2>
       <div class="table-wrap" role="region" aria-labelledby="mythic-101-200">
-        <table class="table--mythic" aria-describedby="mythic-caption">
-          <caption id="mythic-caption">신화 장비 101~200 레벨별 필요 강화 경험치/미스릴/레전드 장비</caption>
+        <table class="table--range4" aria-describedby="mythic-caption">
+          <caption id="mythic-caption" data-i18n="db.heroGearEnhance.mythic.caption">신화 101–200 (추가 재료 구간 표시 + 사이 구간 경험치 집계)</caption>
           <thead>
             <tr>
-              <th scope="col">레벨</th>
-              <th scope="col">필요 강화 경험치</th>
-              <th scope="col">미스릴</th>
-              <th scope="col">레전드 장비</th>
+              <th scope="col" data-i18n="db.heroGearEnhance.col.range">레벨 구간</th>
+              <th scope="col" data-i18n="db.heroGearEnhance.col.totalXp">총 강화 경험치</th>
+              <th scope="col" data-i18n="db.heroGearEnhance.col.mithril">미스릴</th>
+              <th scope="col" data-i18n="db.heroGearEnhance.col.legendGear">레전드 장비</th>
             </tr>
           </thead>
           <tbody>
             <tr><td>101</td><td>0</td><td>0</td><td>2</td></tr>
-            <tr><td>102</td><td>2500</td><td>0</td><td>0</td></tr><tr><td>103</td><td>2550</td><td>0</td><td>0</td></tr><tr><td>104</td><td>2600</td><td>0</td><td>0</td></tr><tr><td>105</td><td>2650</td><td>0</td><td>0</td></tr><tr><td>106</td><td>2700</td><td>0</td><td>0</td></tr><tr><td>107</td><td>2750</td><td>0</td><td>0</td></tr><tr><td>108</td><td>2800</td><td>0</td><td>0</td></tr><tr><td>109</td><td>2850</td><td>0</td><td>0</td></tr><tr><td>110</td><td>2900</td><td>0</td><td>0</td></tr><tr><td>111</td><td>2950</td><td>0</td><td>0</td></tr><tr><td>112</td><td>3000</td><td>0</td><td>0</td></tr><tr><td>113</td><td>3050</td><td>0</td><td>0</td></tr><tr><td>114</td><td>3100</td><td>0</td><td>0</td></tr><tr><td>115</td><td>3150</td><td>0</td><td>0</td></tr><tr><td>116</td><td>3200</td><td>0</td><td>0</td></tr><tr><td>117</td><td>3250</td><td>0</td><td>0</td></tr><tr><td>118</td><td>3300</td><td>0</td><td>0</td></tr><tr><td>119</td><td>3350</td><td>0</td><td>0</td></tr>
+            <tr><td>102–119</td><td>52,650</td><td>–</td><td>–</td></tr>
             <tr><td>120</td><td>0</td><td>10</td><td>3</td></tr>
-            <tr><td>121</td><td>3500</td><td>0</td><td>0</td></tr><tr><td>122</td><td>3550</td><td>0</td><td>0</td></tr><tr><td>123</td><td>3600</td><td>0</td><td>0</td></tr><tr><td>124</td><td>3650</td><td>0</td><td>0</td></tr><tr><td>125</td><td>3700</td><td>0</td><td>0</td></tr><tr><td>126</td><td>3750</td><td>0</td><td>0</td></tr><tr><td>127</td><td>3800</td><td>0</td><td>0</td></tr><tr><td>128</td><td>3850</td><td>0</td><td>0</td></tr><tr><td>129</td><td>3900</td><td>0</td><td>0</td></tr>
-            <tr><td>130</td><td>3950</td><td>0</td><td>0</td></tr><tr><td>131</td><td>4000</td><td>0</td><td>0</td></tr><tr><td>132</td><td>4050</td><td>0</td><td>0</td></tr><tr><td>133</td><td>4100</td><td>0</td><td>0</td></tr><tr><td>134</td><td>4150</td><td>0</td><td>0</td></tr><tr><td>135</td><td>4200</td><td>0</td><td>0</td></tr><tr><td>136</td><td>4250</td><td>0</td><td>0</td></tr><tr><td>137</td><td>4300</td><td>0</td><td>0</td></tr><tr><td>138</td><td>4350</td><td>0</td><td>0</td></tr><tr><td>139</td><td>4400</td><td>0</td><td>0</td></tr>
+            <tr><td>121–129</td><td>33,300</td><td>–</td><td>–</td></tr>
+            <tr><td>130–139</td><td>41,750</td><td>–</td><td>–</td></tr>
             <tr><td>140</td><td>0</td><td>20</td><td>5</td></tr>
-            <tr><td>141</td><td>4450</td><td>0</td><td>0</td></tr><tr><td>142</td><td>4500</td><td>0</td><td>0</td></tr><tr><td>143</td><td>4550</td><td>0</td><td>0</td></tr><tr><td>144</td><td>4600</td><td>0</td><td>0</td></tr><tr><td>145</td><td>4650</td><td>0</td><td>0</td></tr><tr><td>146</td><td>4700</td><td>0</td><td>0</td></tr><tr><td>147</td><td>4750</td><td>0</td><td>0</td></tr><tr><td>148</td><td>4800</td><td>0</td><td>0</td></tr><tr><td>149</td><td>4850</td><td>0</td><td>0</td></tr>
-            <tr><td>150</td><td>4900</td><td>0</td><td>0</td></tr><tr><td>151</td><td>4950</td><td>0</td><td>0</td></tr><tr><td>152</td><td>5000</td><td>0</td><td>0</td></tr><tr><td>153</td><td>5050</td><td>0</td><td>0</td></tr><tr><td>154</td><td>5100</td><td>0</td><td>0</td></tr><tr><td>155</td><td>5150</td><td>0</td><td>0</td></tr><tr><td>156</td><td>5200</td><td>0</td><td>0</td></tr><tr><td>157</td><td>5250</td><td>0</td><td>0</td></tr><tr><td>158</td><td>5300</td><td>0</td><td>0</td></tr><tr><td>159</td><td>5350</td><td>0</td><td>0</td></tr>
+            <tr><td>141–149</td><td>41,850</td><td>–</td><td>–</td></tr>
+            <tr><td>150–159</td><td>51,250</td><td>–</td><td>–</td></tr>
             <tr><td>160</td><td>0</td><td>30</td><td>5</td></tr>
-            <tr><td>161</td><td>5500</td><td>0</td><td>0</td></tr><tr><td>162</td><td>5600</td><td>0</td><td>0</td></tr><tr><td>163</td><td>5700</td><td>0</td><td>0</td></tr><tr><td>164</td><td>5800</td><td>0</td><td>0</td></tr><tr><td>165</td><td>5900</td><td>0</td><td>0</td></tr><tr><td>166</td><td>6000</td><td>0</td><td>0</td></tr><tr><td>167</td><td>6100</td><td>0</td><td>0</td></tr><tr><td>168</td><td>6200</td><td>0</td><td>0</td></tr><tr><td>169</td><td>6300</td><td>0</td><td>0</td></tr>
-            <tr><td>170</td><td>6400</td><td>0</td><td>0</td></tr><tr><td>171</td><td>6500</td><td>0</td><td>0</td></tr><tr><td>172</td><td>6600</td><td>0</td><td>0</td></tr><tr><td>173</td><td>6700</td><td>0</td><td>0</td></tr><tr><td>174</td><td>6800</td><td>0</td><td>0</td></tr><tr><td>175</td><td>6900</td><td>0</td><td>0</td></tr><tr><td>176</td><td>7000</td><td>0</td><td>0</td></tr><tr><td>177</td><td>7100</td><td>0</td><td>0</td></tr><tr><td>178</td><td>7200</td><td>0</td><td>0</td></tr><tr><td>179</td><td>7300</td><td>0</td><td>0</td></tr>
+            <tr><td>161–169</td><td>53,100</td><td>–</td><td>–</td></tr>
+            <tr><td>170–179</td><td>68,500</td><td>–</td><td>–</td></tr>
             <tr><td>180</td><td>0</td><td>40</td><td>10</td></tr>
-            <tr><td>181</td><td>7500</td><td>0</td><td>0</td></tr><tr><td>182</td><td>7600</td><td>0</td><td>0</td></tr><tr><td>183</td><td>7700</td><td>0</td><td>0</td></tr><tr><td>184</td><td>7800</td><td>0</td><td>0</td></tr><tr><td>185</td><td>7900</td><td>0</td><td>0</td></tr><tr><td>186</td><td>8000</td><td>0</td><td>0</td></tr><tr><td>187</td><td>8100</td><td>0</td><td>0</td></tr><tr><td>188</td><td>8200</td><td>0</td><td>0</td></tr><tr><td>189</td><td>8300</td><td>0</td><td>0</td></tr>
-            <tr><td>190</td><td>8400</td><td>0</td><td>0</td></tr><tr><td>191</td><td>8500</td><td>0</td><td>0</td></tr><tr><td>192</td><td>8600</td><td>0</td><td>0</td></tr><tr><td>193</td><td>8700</td><td>0</td><td>0</td></tr><tr><td>194</td><td>8800</td><td>0</td><td>0</td></tr><tr><td>195</td><td>8900</td><td>0</td><td>0</td></tr><tr><td>196</td><td>9000</td><td>0</td><td>0</td></tr><tr><td>197</td><td>9100</td><td>0</td><td>0</td></tr><tr><td>198</td><td>9200</td><td>0</td><td>0</td></tr><tr><td>199</td><td>9300</td><td>0</td><td>0</td></tr>
+            <tr><td>181–189</td><td>71,100</td><td>–</td><td>–</td></tr>
+            <tr><td>190–199</td><td>88,500</td><td>–</td><td>–</td></tr>
             <tr><td>200</td><td>0</td><td>50</td><td>10</td></tr>
           </tbody>
         </table>

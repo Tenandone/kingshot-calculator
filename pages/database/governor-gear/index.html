@@ -4,7 +4,22 @@
   <meta charset="utf-8">
   <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>영주 장비 | KingshotData KR</title>
+
+ <script>
+(async function () {
+  if (!window.I18N) return;
+  const raw = (localStorage.getItem('lang') || navigator.language || 'ko').replace('_','-');
+  const lang = raw.startsWith('zh') ? (raw.toLowerCase().includes('tw') ? 'zh-TW' : 'zh-CN')
+                                   : (raw.split('-')[0] || 'ko');
+  try {
+    await I18N.init({ lang, namespaces: ['db'] });  // 🔥 db 네임스페이스 로드
+    I18N.applyTo(document);
+    document.dispatchEvent(new Event('i18n:changed'));
+  } catch (e) { console.error('[i18n init error]', e); }
+  document.addEventListener('i18n:changed', () => I18N.applyTo(document));
+})();
+</script>
+
 
   <style>
     .visually-hidden{
@@ -55,33 +70,22 @@
     .table--compact th:nth-child(4), .table--compact td:nth-child(4){ width:110px } /* 설계 스케치 */
     .table--compact th:nth-child(5), .table--compact td:nth-child(5){ width:110px } /* 장비평점 */
 
-    /* ===== 등급별 배경색 ===== */
-    tr.grade-common  td { background-color: #eef8ee; }   /* 고급 */
-    tr.grade-rare    td { background-color: #eef4fc; }   /* 레어 */
-    tr.grade-epic    td { background-color: #f6eefe; }   /* 에픽 */
-    tr.grade-legend  td { background-color: #fff5e8; }   /* 레전드 */
-    tr.grade-mythic-base td { background-color: #ffecec; }  /* 신화 */
-    tr.grade-mythic-t1   td { background-color: #ffd6d6; }  /* 신화 T1 */
-    tr.grade-mythic-t2   td { background-color: #ffbfbf; }  /* 신화 T2 */
-    tr.grade-mythic-t3   td { background-color: #ffa8a8; }  /* 신화 T3 */
-    tr.grade-mythic-t4   td { background-color: #ff9191; }  /* 신화 T4 */
+    /* 등급별 배경색 */
+    tr.grade-common  td { background-color: #eef8ee; }
+    tr.grade-rare    td { background-color: #eef4fc; }
+    tr.grade-epic    td { background-color: #f6eefe; }
+    tr.grade-legend  td { background-color: #fff5e8; }
+    tr.grade-mythic-base td { background-color: #ffecec; }
+    tr.grade-mythic-t1   td { background-color: #ffd6d6; }
+    tr.grade-mythic-t2   td { background-color: #ffbfbf; }
+    tr.grade-mythic-t3   td { background-color: #ffa8a8; }
+    tr.grade-mythic-t4   td { background-color: #ff9191; }
 
-    /* ===== 성급 제거 → 등급 옆 별(검정) =====
-       사용: <td class="grade s1">레어</td>  (s1~s3)
-       s0 또는 미지정 = 별 없음
-    */
-    td.grade{
-      font-weight:bold;
-      text-align:left;
-      position:relative;
-    }
+    /* 성급 제거 → 등급 옆 별(검정) */
+    td.grade{ font-weight:bold; text-align:left; position:relative; }
     td.grade.s1::after{ content:" ★";    color:#111; }
     td.grade.s2::after{ content:" ★★";   color:#111; }
     td.grade.s3::after{ content:" ★★★";  color:#111; }
-    /* 필요 시 확장
-    td.grade.s4::after{ content:" ★★★★"; color:#111; }
-    td.grade.s5::after{ content:" ★★★★★"; color:#111; }
-    */
   </style>
 </head>
 <body>
@@ -89,116 +93,122 @@
     <!-- 대표이미지 -->
     <figure>
       <img src="/img/database/Governor Gear/governor-gear.webp"
-           alt="영주 장비 대표 이미지"
+           alt="db.governorGear.imageAlt"
+           data-i18n-attr="alt"
            width="296" height="300"
            loading="lazy" decoding="async">
     </figure>
 
-    <h1>영주 장비</h1>
+    <!-- 상세 타이틀(h1) 없음 -->
 
     <section aria-labelledby="what-is-gear">
-      <h2 id="what-is-gear">영주 장비란?</h2>
-      <p>영주 장비는 강력한 장비를 제작하고 강화할 수 있게 해줍니다.</p>
-      <p>화면 왼쪽 상단 프로필에서 접근할 수 있습니다.</p>
-      <p>도시센터 22레벨 달성 시 해금되며, 게임 내 전투력을 크게 끌어올리는 핵심 수단입니다.</p>
+      <h2 id="what-is-gear" data-i18n="db.governorGear.section.whatIs">영주 장비란?</h2>
+      <p data-i18n="db.governorGear.intro.1">영주 장비는 강력한 장비를 제작하고 강화할 수 있게 해줍니다.</p>
+      <p data-i18n="db.governorGear.intro.2">화면 왼쪽 상단 프로필에서 접근할 수 있습니다.</p>
+      <p data-i18n="db.governorGear.intro.3">도시센터 22레벨 달성 시 해금되며, 게임 내 전투력을 크게 끌어올리는 핵심 수단입니다.</p>
     </section>
 
     <section aria-labelledby="upgrade">
-      <h2 id="upgrade">강화</h2>
-      <p>비단과 금사를 사용하여 강화되며, 파랑 등급부터 설계 스케치가 포함됩니다.</p>
+      <h2 id="upgrade" data-i18n="db.governorGear.section.upgrade">강화</h2>
+      <p data-i18n="db.governorGear.upgrade.desc">
+        비단과 금사를 사용하여 강화되며, 파랑 등급부터 설계 스케치가 포함됩니다.
+      </p>
     </section>
 
     <!-- 표 -->
     <section aria-labelledby="gear-table">
-      <h2 id="gear-table">등급별 요구 재료 및 장비평점</h2>
+      <h2 id="gear-table" data-i18n="db.governorGear.table.title">등급별 요구 재료 및 장비평점</h2>
       <div class="table-wrap" role="region" aria-labelledby="gear-table">
         <table class="table--compact" aria-describedby="gear-table-caption">
-          
+          <caption id="gear-table-caption" data-i18n="db.governorGear.table.caption">
+            장비 등급에 따른 요구 재료(비단, 금사, 설계 스케치)와 장비평점
+          </caption>
           <thead>
             <tr>
-              <th scope="col">등급</th>
-              <th scope="col">비단</th>
-              <th scope="col">금사</th>
-              <th scope="col">설계 스케치</th>
-              <th scope="col">장비평점</th>
+              <th scope="col" data-i18n="db.governorGear.col.grade">등급</th>
+              <th scope="col" data-i18n="db.governorGear.col.silk">비단</th>
+              <th scope="col" data-i18n="db.governorGear.col.goldThread">금사</th>
+              <th scope="col" data-i18n="db.governorGear.col.sketch">설계 스케치</th>
+              <th scope="col" data-i18n="db.governorGear.col.gearScore">장비평점</th>
             </tr>
           </thead>
           <tbody>
+            
             <!-- 고급 -->
-            <tr class="grade-common"><td class="grade">고급</td><td>1,500</td><td>15</td><td>–</td><td>1,125</td></tr>
-            <tr class="grade-common"><td class="grade s1">고급</td><td>3,800</td><td>40</td><td>–</td><td>1,875</td></tr>
+            <tr class="grade-common"><td class="grade" data-i18n="db.governorGear.grade.common">고급</td><td>1,500</td><td>15</td><td>–</td><td>1,125</td></tr>
+            <tr class="grade-common"><td class="grade s1" data-i18n="db.governorGear.grade.common">고급</td><td>3,800</td><td>40</td><td>–</td><td>1,875</td></tr>
 
             <!-- 레어 -->
-            <tr class="grade-rare"><td class="grade">레어</td><td>7,000</td><td>70</td><td>–</td><td>3,000</td></tr>
-            <tr class="grade-rare"><td class="grade s1">레어</td><td>9,700</td><td>95</td><td>–</td><td>4,540</td></tr>
-            <tr class="grade-rare"><td class="grade s2">레어</td><td>1,000</td><td>10</td><td>45</td><td>5,100</td></tr>
-            <tr class="grade-rare"><td class="grade s3">레어</td><td>1,000</td><td>10</td><td>50</td><td>5,440</td></tr>
+            <tr class="grade-rare"><td class="grade" data-i18n="db.governorGear.grade.rare">레어</td><td>7,000</td><td>70</td><td>–</td><td>3,000</td></tr>
+            <tr class="grade-rare"><td class="grade s1" data-i18n="db.governorGear.grade.rare">레어</td><td>9,700</td><td>95</td><td>–</td><td>4,540</td></tr>
+            <tr class="grade-rare"><td class="grade s2" data-i18n="db.governorGear.grade.rare">레어</td><td>1,000</td><td>10</td><td>45</td><td>5,100</td></tr>
+            <tr class="grade-rare"><td class="grade s3" data-i18n="db.governorGear.grade.rare">레어</td><td>1,000</td><td>10</td><td>50</td><td>5,440</td></tr>
 
             <!-- 에픽 -->
-            <tr class="grade-epic"><td class="grade">에픽</td><td>1,500</td><td>15</td><td>60</td><td>3,230</td></tr>
-            <tr class="grade-epic"><td class="grade s1">에픽</td><td>1,500</td><td>15</td><td>70</td><td>3,380</td></tr>
-            <tr class="grade-epic"><td class="grade s2">에픽</td><td>6,500</td><td>65</td><td>40</td><td>4,125</td></tr>
-            <tr class="grade-epic"><td class="grade s3">에픽</td><td>8,000</td><td>80</td><td>50</td><td>4,740</td></tr>
+            <tr class="grade-epic"><td class="grade" data-i18n="db.governorGear.grade.epic">에픽</td><td>1,500</td><td>15</td><td>60</td><td>3,230</td></tr>
+            <tr class="grade-epic"><td class="grade s1" data-i18n="db.governorGear.grade.epic">에픽</td><td>1,500</td><td>15</td><td>70</td><td>3,380</td></tr>
+            <tr class="grade-epic"><td class="grade s2" data-i18n="db.governorGear.grade.epic">에픽</td><td>6,500</td><td>65</td><td>40</td><td>4,125</td></tr>
+            <tr class="grade-epic"><td class="grade s3" data-i18n="db.governorGear.grade.epic">에픽</td><td>8,000</td><td>80</td><td>50</td><td>4,740</td></tr>
 
             <!-- 에픽 T1 -->
-            <tr class="grade-epic"><td class="grade">에픽 T1</td><td>10,000</td><td>95</td><td>60</td><td>5,320</td></tr>
-            <tr class="grade-epic"><td class="grade s1">에픽 T1</td><td>11,000</td><td>110</td><td>70</td><td>5,775</td></tr>
-            <tr class="grade-epic"><td class="grade s2">에픽 T1</td><td>13,000</td><td>130</td><td>85</td><td>6,485</td></tr>
-            <tr class="grade-epic"><td class="grade s3">에픽 T1</td><td>15,000</td><td>160</td><td>100</td><td>7,260</td></tr>
+            <tr class="grade-epic"><td class="grade" data-i18n="db.governorGear.grade.epicT1">에픽 T1</td><td>10,000</td><td>95</td><td>60</td><td>5,320</td></tr>
+            <tr class="grade-epic"><td class="grade s1" data-i18n="db.governorGear.grade.epicT1">에픽 T1</td><td>11,000</td><td>110</td><td>70</td><td>5,775</td></tr>
+            <tr class="grade-epic"><td class="grade s2" data-i18n="db.governorGear.grade.epicT1">에픽 T1</td><td>13,000</td><td>130</td><td>85</td><td>6,485</td></tr>
+            <tr class="grade-epic"><td class="grade s3" data-i18n="db.governorGear.grade.epicT1">에픽 T1</td><td>15,000</td><td>160</td><td>100</td><td>7,260</td></tr>
 
             <!-- 레전드 -->
-            <tr class="grade-legend"><td class="grade">레전드</td><td>22,000</td><td>220</td><td>40</td><td>6,250</td></tr>
-            <tr class="grade-legend"><td class="grade s1">레전드</td><td>23,000</td><td>230</td><td>40</td><td>6,250</td></tr>
-            <tr class="grade-legend"><td class="grade s2">레전드</td><td>25,000</td><td>250</td><td>45</td><td>6,250</td></tr>
-            <tr class="grade-legend"><td class="grade s3">레전드</td><td>26,000</td><td>260</td><td>45</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade" data-i18n="db.governorGear.grade.legend">레전드</td><td>22,000</td><td>220</td><td>40</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s1" data-i18n="db.governorGear.grade.legend">레전드</td><td>23,000</td><td>230</td><td>40</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s2" data-i18n="db.governorGear.grade.legend">레전드</td><td>25,000</td><td>250</td><td>45</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s3" data-i18n="db.governorGear.grade.legend">레전드</td><td>26,000</td><td>260</td><td>45</td><td>6,250</td></tr>
 
             <!-- 레전드 T1 -->
-            <tr class="grade-legend"><td class="grade">레전드 T1</td><td>28,000</td><td>280</td><td>45</td><td>6,250</td></tr>
-            <tr class="grade-legend"><td class="grade s1">레전드 T1</td><td>30,000</td><td>300</td><td>55</td><td>6,250</td></tr>
-            <tr class="grade-legend"><td class="grade s2">레전드 T1</td><td>32,000</td><td>320</td><td>55</td><td>6,250</td></tr>
-            <tr class="grade-legend"><td class="grade s3">레전드 T1</td><td>35,000</td><td>340</td><td>55</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade" data-i18n="db.governorGear.grade.legendT1">레전드 T1</td><td>28,000</td><td>280</td><td>45</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s1" data-i18n="db.governorGear.grade.legendT1">레전드 T1</td><td>30,000</td><td>300</td><td>55</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s2" data-i18n="db.governorGear.grade.legendT1">레전드 T1</td><td>32,000</td><td>320</td><td>55</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s3" data-i18n="db.governorGear.grade.legendT1">레전드 T1</td><td>35,000</td><td>340</td><td>55</td><td>6,250</td></tr>
 
             <!-- 레전드 T2 -->
-            <tr class="grade-legend"><td class="grade">레전드 T2</td><td>38,000</td><td>360</td><td>55</td><td>6,250</td></tr>
-            <tr class="grade-legend"><td class="grade s1">레전드 T2</td><td>43,000</td><td>430</td><td>75</td><td>6,250</td></tr>
-            <tr class="grade-legend"><td class="grade s2">레전드 T2</td><td>45,000</td><td>460</td><td>80</td><td>6,250</td></tr>
-            <tr class="grade-legend"><td class="grade s3">레전드 T2</td><td>48,000</td><td>500</td><td>85</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade" data-i18n="db.governorGear.grade.legendT2">레전드 T2</td><td>38,000</td><td>360</td><td>55</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s1" data-i18n="db.governorGear.grade.legendT2">레전드 T2</td><td>43,000</td><td>430</td><td>75</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s2" data-i18n="db.governorGear.grade.legendT2">레전드 T2</td><td>45,000</td><td>460</td><td>80</td><td>6,250</td></tr>
+            <tr class="grade-legend"><td class="grade s3" data-i18n="db.governorGear.grade.legendT2">레전드 T2</td><td>48,000</td><td>500</td><td>85</td><td>6,250</td></tr>
 
             <!-- 레전드 T3 -->
-            <tr class="grade-legend"><td class="grade">레전드 T3</td><td>60,000</td><td>600</td><td>120</td><td>9,000</td></tr>
-            <tr class="grade-legend"><td class="grade s1">레전드 T3</td><td>70,000</td><td>700</td><td>140</td><td>9,000</td></tr>
-            <tr class="grade-legend"><td class="grade s2">레전드 T3</td><td>80,000</td><td>800</td><td>160</td><td>9,000</td></tr>
-            <tr class="grade-legend"><td class="grade s3">레전드 T3</td><td>90,000</td><td>900</td><td>180</td><td>9,000</td></tr>
+            <tr class="grade-legend"><td class="grade" data-i18n="db.governorGear.grade.legendT3">레전드 T3</td><td>60,000</td><td>600</td><td>120</td><td>9,000</td></tr>
+            <tr class="grade-legend"><td class="grade s1" data-i18n="db.governorGear.grade.legendT3">레전드 T3</td><td>70,000</td><td>700</td><td>140</td><td>9,000</td></tr>
+            <tr class="grade-legend"><td class="grade s2" data-i18n="db.governorGear.grade.legendT3">레전드 T3</td><td>80,000</td><td>800</td><td>160</td><td>9,000</td></tr>
+            <tr class="grade-legend"><td class="grade s3" data-i18n="db.governorGear.grade.legendT3">레전드 T3</td><td>90,000</td><td>900</td><td>180</td><td>9,000</td></tr>
 
             <!-- 신화 -->
-            <tr class="grade-mythic-base"><td class="grade">신화</td><td>108,000</td><td>1,080</td><td>220</td><td>12,000</td></tr>
-            <tr class="grade-mythic-base"><td class="grade s1">신화</td><td>114,000</td><td>1,140</td><td>230</td><td>12,000</td></tr>
-            <tr class="grade-mythic-base"><td class="grade s2">신화</td><td>121,000</td><td>1,210</td><td>240</td><td>12,000</td></tr>
-            <tr class="grade-mythic-base"><td class="grade s3">신화</td><td>128,000</td><td>1,280</td><td>250</td><td>12,000</td></tr>
+            <tr class="grade-mythic-base"><td class="grade" data-i18n="db.governorGear.grade.mythic">신화</td><td>108,000</td><td>1,080</td><td>220</td><td>12,000</td></tr>
+            <tr class="grade-mythic-base"><td class="grade s1" data-i18n="db.governorGear.grade.mythic">신화</td><td>114,000</td><td>1,140</td><td>230</td><td>12,000</td></tr>
+            <tr class="grade-mythic-base"><td class="grade s2" data-i18n="db.governorGear.grade.mythic">신화</td><td>121,000</td><td>1,210</td><td>240</td><td>12,000</td></tr>
+            <tr class="grade-mythic-base"><td class="grade s3" data-i18n="db.governorGear.grade.mythic">신화</td><td>128,000</td><td>1,280</td><td>250</td><td>12,000</td></tr>
 
             <!-- 신화 T1 -->
-            <tr class="grade-mythic-t1"><td class="grade">신화 T1</td><td>154,000</td><td>1,540</td><td>300</td><td>12,000</td></tr>
-            <tr class="grade-mythic-t1"><td class="grade s1">신화 T1</td><td>163,000</td><td>1,630</td><td>320</td><td>12,000</td></tr>
-            <tr class="grade-mythic-t1"><td class="grade s2">신화 T1</td><td>173,000</td><td>1,730</td><td>340</td><td>12,000</td></tr>
-            <tr class="grade-mythic-t1"><td class="grade s3">신화 T1</td><td>183,000</td><td>1,830</td><td>360</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t1"><td class="grade" data-i18n="db.governorGear.grade.mythicT1">신화 T1</td><td>154,000</td><td>1,540</td><td>300</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t1"><td class="grade s1" data-i18n="db.governorGear.grade.mythicT1">신화 T1</td><td>163,000</td><td>1,630</td><td>320</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t1"><td class="grade s2" data-i18n="db.governorGear.grade.mythicT1">신화 T1</td><td>173,000</td><td>1,730</td><td>340</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t1"><td class="grade s3" data-i18n="db.governorGear.grade.mythicT1">신화 T1</td><td>183,000</td><td>1,830</td><td>360</td><td>12,000</td></tr>
 
             <!-- 신화 T2 -->
-            <tr class="grade-mythic-t2"><td class="grade">신화 T2</td><td>220,000</td><td>2,200</td><td>430</td><td>12,000</td></tr>
-            <tr class="grade-mythic-t2"><td class="grade s1">신화 T2</td><td>233,000</td><td>2,330</td><td>460</td><td>12,000</td></tr>
-            <tr class="grade-mythic-t2"><td class="grade s2">신화 T2</td><td>247,000</td><td>2,470</td><td>490</td><td>12,000</td></tr>
-            <tr class="grade-mythic-t2"><td class="grade s3">신화 T2</td><td>264,000</td><td>2,640</td><td>520</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t2"><td class="grade" data-i18n="db.governorGear.grade.mythicT2">신화 T2</td><td>220,000</td><td>2,200</td><td>430</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t2"><td class="grade s1" data-i18n="db.governorGear.grade.mythicT2">신화 T2</td><td>233,000</td><td>2,330</td><td>460</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t2"><td class="grade s2" data-i18n="db.governorGear.grade.mythicT2">신화 T2</td><td>247,000</td><td>2,470</td><td>490</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t2"><td class="grade s3" data-i18n="db.governorGear.grade.mythicT2">신화 T2</td><td>264,000</td><td>2,640</td><td>520</td><td>12,000</td></tr>
 
             <!-- 신화 T3 -->
-            <tr class="grade-mythic-t3"><td class="grade">신화 T3</td><td>306,000</td><td>3,060</td><td>610</td><td>12,000</td></tr>
-            <tr class="grade-mythic-t3"><td class="grade s1">신화 T3</td><td>323,000</td><td>3,230</td><td>650</td><td>12,000</td></tr>
-            <tr class="grade-mythic-t3"><td class="grade s2">신화 T3</td><td>340,000</td><td>3,400</td><td>690</td><td>12,000</td></tr>
-            <tr class="grade-mythic-t3"><td class="grade s3">신화 T3</td><td>357,000</td><td>3,570</td><td>730</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t3"><td class="grade" data-i18n="db.governorGear.grade.mythicT3">신화 T3</td><td>306,000</td><td>3,060</td><td>610</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t3"><td class="grade s1" data-i18n="db.governorGear.grade.mythicT3">신화 T3</td><td>323,000</td><td>3,230</td><td>650</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t3"><td class="grade s2" data-i18n="db.governorGear.grade.mythicT3">신화 T3</td><td>340,000</td><td>3,400</td><td>690</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t3"><td class="grade s3" data-i18n="db.governorGear.grade.mythicT3">신화 T3</td><td>357,000</td><td>3,570</td><td>730</td><td>12,000</td></tr>
 
             <!-- 신화 T4 -->
-            <tr class="grade-mythic-t4"><td class="grade">신화 T4</td><td>412,000</td><td>4,120</td><td>840</td><td>12,000</td></tr>
-            <tr class="grade-mythic-t4"><td class="grade s1">신화 T4</td><td>433,000</td><td>4,330</td><td>890</td><td>12,000</td></tr>
-            <tr class="grade-mythic-t4"><td class="grade s2">신화 T4</td><td>454,000</td><td>4,540</td><td>940</td><td>12,000</td></tr>
-            <tr class="grade-mythic-t4"><td class="grade s3">신화 T4</td><td>475,000</td><td>4,750</td><td>990</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t4"><td class="grade" data-i18n="db.governorGear.grade.mythicT4">신화 T4</td><td>412,000</td><td>4,120</td><td>840</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t4"><td class="grade s1" data-i18n="db.governorGear.grade.mythicT4">신화 T4</td><td>433,000</td><td>4,330</td><td>890</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t4"><td class="grade s2" data-i18n="db.governorGear.grade.mythicT4">신화 T4</td><td>454,000</td><td>4,540</td><td>940</td><td>12,000</td></tr>
+            <tr class="grade-mythic-t4"><td class="grade s3" data-i18n="db.governorGear.grade.mythicT4">신화 T4</td><td>475,000</td><td>4,750</td><td>990</td><td>12,000</td></tr>
           </tbody>
         </table>
       </div>

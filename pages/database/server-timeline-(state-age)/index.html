@@ -4,54 +4,38 @@
   <meta charset="utf-8">
   <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>서버 타임라인 | KingshotData KR</title>
+  
 
   <style>
     .visually-hidden{
       position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
       clip:rect(0 0 0 0);white-space:nowrap;border:0
     }
-
-    /* 표 가독성 */
-    .table-wrap{overflow:auto}
-    .table-wrap table{
-      border-collapse:collapse;
-      font-size:13px;
-      width:auto;              /* 내용 기준 폭 */
-      min-width: 520px;        /* 너무 좁아지지 않게 */
-      margin:0 auto;           /* 중앙 정렬 */
-      table-layout:auto;
-    }
-    .table-wrap caption{
-      caption-side: top;
-      text-align:left;
-      padding:6px 0 8px;
-      color:#8a93a4;           /* muted 톤 */
-      font-size:12px;
-    }
-    .table-wrap th,.table-wrap td{
-      padding:6px 10px;
-      border-bottom:1px solid var(--border, #1e2430);
-      vertical-align:top;
-    }
-    .table-wrap thead th{
-      position:sticky; top:0;
-      background:#0f1318; color:#8a93a4; z-index:1;
-    }
-
-    /* 타임라인 전용: 1열은 숫자, 2열은 설명 */
-    .table--timeline th:nth-child(1),
-    .table--timeline td:nth-child(1){
-      width:110px;
-      white-space:nowrap;   /* 0일, 70~80일 등이 한 줄 유지 */
-      text-align:right;
-    }
-    .table--timeline th:nth-child(2),
-    .table--timeline td:nth-child(2){
-      text-align:left;      /* 설명은 좌측 정렬 + 줄바꿈 */
-      white-space:normal;
-    }
+    .list-plain{list-style:none;margin:8px 0 16px;padding-left:0}
+    .list-plain li{line-height:1.7}
+    .muted{color:#8a93a4;font-size:12px}
+    .timeline-item{display:flex;gap:12px}
+    .timeline-item .when{min-width:96px;text-align:right;color:#8a93a4}
+    .timeline-item .arrow{margin:0 4px;color:#8a93a4}
+    .timeline-item .what{flex:1}
+    figure{margin:0 0 12px}
   </style>
+
+  <!-- i18n -->
+  <script src="/js/i18n.js?v=now" defer></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    if (!window.I18N?.init) return;
+    const raw = (localStorage.getItem('lang') || navigator.language || 'ko').replace('_','-');
+    const lang = raw.startsWith('zh') ? (raw.toLowerCase().includes('tw') ? 'zh-TW' : 'zh-CN')
+                                      : (raw.split('-')[0] || 'ko');
+    try {
+      await I18N.init({ lang, namespaces: ['db'] });
+      I18N.applyTo(document);
+    } catch (e) { console.error('[i18n init error]', e); }
+    document.addEventListener('i18n:changed', () => I18N.applyTo(document));
+  });
+  </script>
 </head>
 <body>
   <main>
@@ -59,74 +43,120 @@
     <figure>
       <img
         src="/img/database/Server Timeline (State Age)/state-age-kingshot-300x291.webp"
-        alt="서버 타임라인 대표 이미지"
-        width="300" height="291"
-        loading="lazy" decoding="async">      
+        alt="db.serverTimeline.imageAlt" data-i18n-attr="alt"
+        width="300" height="291" loading="lazy" decoding="async">
     </figure>
 
-    <h1>서버 타임라인</h1>
+    
 
+    <!-- 개요 -->
     <section aria-labelledby="overview">
-      <h2 id="overview">개요</h2>
-      <p>킹샷에서 왕국/서버는 시간이 지나감에 따라 새로운 기능과 영웅이 순차적으로 해금됩니다. 아래 타임라인은 대략적인 기준입니다.</p>
+      <h2 id="overview" data-i18n="db.serverTimeline.overview.title">개요</h2>
+      <p data-i18n="db.serverTimeline.overview.desc">
+        킹샷에서 왕국/서버는 시간이 지날수록 새로운 기능과 영웅이 순차적으로 해금됩니다. 아래 타임라인은 대략적인 기준입니다.
+      </p>
     </section>
 
-    <section aria-labelledby="timeline">
-      <h2 id="timeline">서버 나이 타임라인</h2>
-      <div class="table-wrap" role="region" aria-labelledby="timeline">
-        <table class="table--timeline" aria-describedby="timeline-cap">
-          <caption id="timeline-cap">서버 나이별 해금 콘텐츠</caption>
-          <thead>
-            <tr>
-              <th scope="col">서버 나이</th>
-              <th scope="col">해금 콘텐츠</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>0일</td><td>1세대 영웅</td></tr>
-            <tr><td>14일</td><td>평원 지역 안개 해제</td></tr>
-            <tr><td>38일</td><td>옥토 안개 해제</td></tr>
-            <tr><td>40~50일</td><td>2세대 영웅</td></tr>
-            <tr><td>45일</td><td>연맹자원교환</td></tr>
-            <tr><td>54일</td><td>첫 캐슬 전투</td></tr>
-            <tr><td>55~60일</td><td>1세대 펫(회색 늑대, 스라소니, 들소)</td></tr>
-            <tr><td>70일</td><td>순금의 시대(황금시대)</td></tr>
-            <tr><td>75~80일</td><td>2세대 펫(치타, 무스)</td></tr>
-            <tr><td>70~80일</td><td>왕국이 최강왕국(서버전) 참가 자격 충족</td></tr>
-            <tr><td>105~110일</td><td>3세대 펫(사자, 베어)</td></tr>
-            <tr><td>105~120일</td><td>3세대 영웅</td></tr>
-            <tr><td>150일</td><td>순금 5레벨 및 황금 용광로</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <!-- 타임라인: 텍스트 리스트 -->
+    <!-- 타임라인: 텍스트 리스트 -->
+<section aria-labelledby="timeline">
+  <h2 id="timeline" data-i18n="db.serverTimeline.timeline.title">서버 나이 타임라인</h2>
+  <ul class="list-plain" aria-describedby="timeline-cap">
+    <li class="timeline-item">
+      <span class="when" data-i18n="db.serverTimeline.timeline.when.d0">0일</span><span class="arrow">→</span>
+      <span class="what" data-i18n="db.serverTimeline.timeline.what.d0">1세대 영웅</span>
+    </li>
+    <li class="timeline-item">
+      <span class="when" data-i18n="db.serverTimeline.timeline.when.d14">14일</span><span class="arrow">→</span>
+      <span class="what" data-i18n="db.serverTimeline.timeline.what.d14">평원 지역 안개 해제</span>
+    </li>
+    <li class="timeline-item">
+      <span class="when" data-i18n="db.serverTimeline.timeline.when.d38">38일</span><span class="arrow">→</span>
+      <span class="what" data-i18n="db.serverTimeline.timeline.what.d38">옥토 안개 해제</span>
+    </li>
+    <li class="timeline-item">
+      <span class="when" data-i18n="db.serverTimeline.timeline.when.d40_50">40~50일</span><span class="arrow">→</span>
+      <span class="what" data-i18n="db.serverTimeline.timeline.what.d40_50">2세대 영웅</span>
+    </li>
+    <li class="timeline-item">
+      <span class="when" data-i18n="db.serverTimeline.timeline.when.d45">45일</span><span class="arrow">→</span>
+      <span class="what" data-i18n="db.serverTimeline.timeline.what.d45">연맹 자원 교환</span>
+    </li>
+    <li class="timeline-item">
+      <span class="when" data-i18n="db.serverTimeline.timeline.when.d54">54일</span><span class="arrow">→</span>
+      <span class="what" data-i18n="db.serverTimeline.timeline.what.d54">첫 캐슬 전투</span>
+    </li>
+    <li class="timeline-item">
+      <span class="when" data-i18n="db.serverTimeline.timeline.when.d55_60">55~60일</span><span class="arrow">→</span>
+      <span class="what" data-i18n="db.serverTimeline.timeline.what.d55_60">1세대 펫</span>
+    </li>
+    <li class="timeline-item">
+      <span class="when" data-i18n="db.serverTimeline.timeline.when.d70">70일</span><span class="arrow">→</span>
+      <span class="what" data-i18n="db.serverTimeline.timeline.what.d70">순금의 시대 (황금시대)</span>
+    </li>
+    <li class="timeline-item">
+      <span class="when" data-i18n="db.serverTimeline.timeline.when.d75_80">75~80일</span><span class="arrow">→</span>
+      <span class="what" data-i18n="db.serverTimeline.timeline.what.d75_80">2세대 펫</span>
+    </li>
+    <li class="timeline-item">
+      <span class="when" data-i18n="db.serverTimeline.timeline.when.d70_80">70~80일</span><span class="arrow">→</span>
+      <span class="what" data-i18n="db.serverTimeline.timeline.what.d70_80">왕국이 최강왕국 (서버전) 참가 자격 충족</span>
+    </li>
+    <li class="timeline-item">
+      <span class="when" data-i18n="db.serverTimeline.timeline.when.d105_110">105~110일</span><span class="arrow">→</span>
+      <span class="what" data-i18n="db.serverTimeline.timeline.what.d105_110">3세대 펫</span>
+    </li>
+    <li class="timeline-item">
+      <span class="when" data-i18n="db.serverTimeline.timeline.when.d105_120">105~120일</span><span class="arrow">→</span>
+      <span class="what" data-i18n="db.serverTimeline.timeline.what.d105_120">3세대 영웅</span>
+    </li>
+    <li class="timeline-item">
+      <span class="when" data-i18n="db.serverTimeline.timeline.when.d150">150일</span><span class="arrow">→</span>
+      <span class="what" data-i18n="db.serverTimeline.timeline.what.d150">순금 5레벨 및 황금 용광로</span>
+    </li>
+    <li class="timeline-item">
+  <span class="when" data-i18n="db.serverTimeline.timeline.when.d170_180">170~180일</span><span class="arrow">→</span>
+  <span class="what" data-i18n="db.serverTimeline.timeline.what.d170_180">4세대 영웅</span>
+</li>
 
+  </ul>
+  
+</section>
+
+  </main>
+</body>
+</html>
+
+
+    <!-- 서버 나이 계산 방법 -->
     <section aria-labelledby="how-to-calc">
-      <h2 id="how-to-calc">서버 나이 계산 방법</h2>
+      <h2 id="how-to-calc" data-i18n="db.serverTimeline.calc.title">서버 나이 계산 방법</h2>
 
       <section aria-labelledby="vip-days">
-        <h3 id="vip-days">1) VIP 로그인 일수로 추정</h3>
-        <p>VIP 탭에서 누적 로그인 일수를 확인합니다. 서버 생성일에 맞춰 시작했고 매일 접속했다면, 이 값이 왕국/서버 생성 이후 경과 일수의 비교적 정확한 추정치입니다.</p>
+        <h3 id="vip-days" data-i18n="db.serverTimeline.calc.vip.title">1) VIP 로그인 일수로 추정</h3>
+        <p data-i18n="db.serverTimeline.calc.vip.desc">
+          VIP 탭에서 누적 로그인 일수를 확인합니다. 서버 생성일에 맞춰 시작했고 매일 접속했다면, 이 값이 왕국/서버 생성 이후 경과 일수의 비교적 정확한 추정치입니다.
+        </p>
         <figure>
           <img
             src="/img/database/Server Timeline (State Age)/vip-login-days-576x1024.webp"
-            alt="VIP 로그인 일수 예시"
-            width="576" height="1024"
-            loading="lazy" decoding="async">
-          <figcaption class="visually-hidden">VIP 로그인 일수 예시</figcaption>
+            alt="db.serverTimeline.calc.vip.imageAlt" data-i18n-attr="alt"
+            width="576" height="1024" loading="lazy" decoding="async">
+          <figcaption class="visually-hidden" data-i18n="db.serverTimeline.calc.vip.caption">VIP 로그인 일수 예시</figcaption>
         </figure>
       </section>
 
       <section aria-labelledby="star-flame">
-        <h3 id="star-flame">2) 업적 ‘별의 불꽃’으로 추정</h3>
-        <p>도시 중앙에 있는 이정표로 가거나, 이벤트 페이지에서 접근합니다. 위에서 두 번째 업적인 ‘별의 불꽃’을 찾습니다. 이 업적은 보통 서버 생성 후 6일째 완료되며, 표시된 완료 날짜에서 6일을 빼면 해당 왕국/서버의 생성일을 대략 추정할 수 있습니다.</p>
+        <h3 id="star-flame" data-i18n="db.serverTimeline.calc.star.title">2) 업적 ‘별의 불꽃’으로 추정</h3>
+        <p data-i18n="db.serverTimeline.calc.star.desc">
+          도시 중앙에 있는 이정표로 가거나, 이벤트 페이지에서 접근합니다. 위에서 두 번째 업적인 ‘별의 불꽃’을 찾습니다. 이 업적은 보통 서버 생성 후 6일째 완료되며, 표시된 완료 날짜에서 6일을 빼면 해당 왕국/서버의 생성일을 대략 추정할 수 있습니다.
+        </p>
         <figure>
           <img
             src="/img/database/Server Timeline (State Age)/Screenshot_20250330-081554-576x1024.webp"
-            alt="별의 불꽃 업적 예시"
-            width="576" height="1024"
-            loading="lazy" decoding="async">
-          <figcaption class="visually-hidden">별의 불꽃 업적 예시</figcaption>
+            alt="db.serverTimeline.calc.star.imageAlt" data-i18n-attr="alt"
+            width="576" height="1024" loading="lazy" decoding="async">
+          <figcaption class="visually-hidden" data-i18n="db.serverTimeline.calc.star.caption">별의 불꽃 업적 예시</figcaption>
         </figure>
       </section>
     </section>

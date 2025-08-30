@@ -4,6 +4,8 @@
   "description": "Kingshot training & promotion calculator",
   "main": "bump-version.js",
   "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
     "bump": "node bump-version.js",
     "deploy": "npm run bump && git add . && git commit -m \"chore: auto bump\" && git push"
   },
