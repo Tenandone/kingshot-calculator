@@ -70,42 +70,25 @@
     /* --- 데스크탑 우측 묶음 --- */
     .cafe-banner{display:flex;flex-direction:column;align-items:center}
     .cafe-banner img{height:35px;width:auto}
-    /* 팬커뮤니티 텍스트 = 루트바 텍스트와 동일 */
     .cafe-banner span{
-      font-size:10px;
-      font-weight:300;
-      margin-top:2px;
-      align-self:flex-start;
-      color:#000;
-      opacity:.4;
+      font-size:10px;font-weight:300;margin-top:2px;align-self:flex-start;color:#000;opacity:.4;
     }
 
-    /* 루트바 배너(텍스트 40% 투명, 밑줄 없음) */
     .lootbar-banner{display:flex;flex-direction:column;align-items:flex-end}
     .lootbar-banner img{height:20px;width:auto;filter:grayscale(100%)}
     .lootbar-banner span{font-size:10px;font-weight:300;margin-top:2px;align-self:flex-start;opacity:.4}
     .lootbar-banner:hover span{text-decoration:none}
 
-    /* 배너 링크들은 어떤 상태에서도 밑줄 제거 (헤더/드로어 공통) */
-    .cafe-banner,
-    .cafe-banner:hover,
-    .cafe-banner:focus,
-    .lootbar-banner,
-    .lootbar-banner:hover,
-    .lootbar-banner:focus,
-    .drawer .cafe-banner,
-    .drawer .cafe-banner:hover,
-    .drawer .cafe-banner:focus,
-    .drawer .lootbar-banner,
-    .drawer .lootbar-banner:hover,
-    .drawer .lootbar-banner:focus {
+    /* 배너 링크: 밑줄 제거(헤더/드로어 공통) */
+    .cafe-banner, .cafe-banner:hover, .cafe-banner:focus,
+    .lootbar-banner, .lootbar-banner:hover, .lootbar-banner:focus,
+    .drawer .cafe-banner, .drawer .cafe-banner:hover, .drawer .cafe-banner:focus,
+    .drawer .lootbar-banner, .drawer .lootbar-banner:hover, .drawer .lootbar-banner:focus {
       text-decoration: none !important;
     }
 
     .lang-switch select{padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff}
-
-    /* 헤더(데스크탑) 전용 - 루트바 배너 아래로 nudge */
-    .nav-right .lootbar-banner { margin-top: 14px; }
+    .nav-right .lootbar-banner { margin-top: 14px; } /* 살짝 아래로 */
 
     /* 햄버거(모바일) */
     #menuToggle.hamburger{display:none;font-size:22px;background:none;border:0;color:#333;cursor:pointer}
@@ -118,13 +101,19 @@
       .brand-logo{height:34px}
     }
 
-    /* 드로어 */
+    /* ===== 드로어 ===== */
     .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:.2s;z-index:110}
     .drawer{
-      position:fixed;top:0;right:0;height:100%;width:50vw;max-width:420px;min-width:300px;
+      position:fixed;top:0;right:0;height:100%;
+      width:420px; /* 기본(태블릿/데스크탑) */
       background:#fff;border-left:1px solid #e5e7eb;transform:translateX(100%);
       transition:transform .25s ease;z-index:120;display:flex;flex-direction:column
     }
+    /* ✅ 모바일에서 정확히 50% 폭 */
+    @media (max-width:768px){
+      .drawer{ width:50vw !important; max-width:none !important; min-width:0 !important; }
+    }
+
     .drawer header{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-bottom:1px solid #eee}
     .drawer .section{padding:12px}
     .drawer .rule{height:10px;border-bottom:1px dashed #ddd;margin:6px 0 10px}
@@ -132,24 +121,34 @@
     .drawer nav a:active{background:#f2f4f7}
     .drawer .lang-switch select{width:100%}
 
-    /* 드로어 내 배너들 (루트바 = 동일, 카페 = 동일 스타일로 통일) */
-    .drawer .lootbar-banner{align-items:flex-end}
+    /* 드로어 내 배너들: 좌측 정렬(요청 반영) */
+    .drawer .lootbar-banner{align-items:flex-start}
     .drawer .lootbar-banner img{height:20px}
     .drawer .lootbar-banner span{font-size:10px;opacity:.4}
-    .drawer .cafe-banner{align-items:center}
+    .drawer .cafe-banner{align-items:flex-start;text-align:left}
     .drawer .cafe-banner img{height:60px}
-    .drawer .cafe-banner span{
-      font-size:10px;
-      font-weight:300;
-      margin-top:4px;
-      color:#000;
-      opacity:.4;
-    }
+    .drawer .cafe-banner span{font-size:10px;font-weight:300;margin-top:4px;color:#000;opacity:.4}
 
     /* 열림 상태 */
     .is-open .backdrop{opacity:1;pointer-events:auto}
     .is-open .drawer{transform:translateX(0)}
     .no-scroll{overflow:hidden}
+
+    /* ===== 홈 카테고리: 모바일 2열 강제 ===== */
+    @media (max-width:768px){
+      #home-categories,
+      .category-grid,
+      .home-categories,
+      .cards-grid,
+      .card-grid,
+      .cards {
+        display:grid !important;
+        grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+        gap:12px !important;
+      }
+      #home-categories > *, .category-grid > *, .home-categories > *,
+      .cards-grid > *, .card-grid > *, .cards > * { width:auto !important; }
+    }
 
     /* 메인/푸터 */
     #content{min-height:50vh}
@@ -244,7 +243,7 @@
     </div>
 
     <!-- 4) 네이버배너 -->
-    <div class="section" style="text-align:center">
+    <div class="section">
       <a href="https://cafe.naver.com/kingshot1" class="cafe-banner" target="_blank" rel="noopener">
         <img src="/img/brand2.png" alt="Kingshot Fan Community">
         <span>KingshotFanCommunity</span>
