@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="ko">
 <head>
+  <!-- HEAD 안에 추가 -->
+<meta name="google-adsense-account" content="ca-pub-9189957764761115">
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KingshotData</title>
@@ -20,15 +23,6 @@
   <meta property="og:url" content="https://kingshotdata.kr">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://kingshotdata.kr">
-
-  <!-- Ads/GA -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189957764761115" crossorigin="anonymous"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date()); gtag('config', 'G-TMGDGSEWW6');
-  </script>
 
   <!-- CSS 공통 -->
   <link rel="stylesheet" href="/css/common.css?v=now">
@@ -150,15 +144,13 @@
   .cards-grid > *, .card-grid > *, .cards > * { width: auto !important; }
 }
 
-
     /* 메인/푸터 */
     #content{min-height:50vh}
     .site-footer{text-align:center;font-size:.9em;color:#666;line-height:1.6;padding:20px 0}
 
     /* 모바일 드로어: 네이버 텍스트 중앙 정렬 강제 */
-.drawer .cafe-banner { align-items:center !important; text-align:center !important; }
-.drawer .cafe-banner span { align-self:center !important; }
-
+    .drawer .cafe-banner { align-items:center !important; text-align:center !important; }
+    .drawer .cafe-banner span { align-self:center !important; }
   </style>
 </head>
 <body class="theme-default">
@@ -267,7 +259,9 @@
     <div class="container">
       <span data-i18n="footer.disclaimer1">All game images and data are copyrighted by Century Games.</span><br />
       <span data-i18n="footer.disclaimer2">This site is an unofficial fan site.</span><br />
-      © 2025 KingshotData Korea · <a href="#/privacy" data-link data-i18n="footer.privacy">개인정보처리방침 / Privacy</a>
+      © 2025 KingshotData Korea · <a href="#/privacy" data-link data-i18n="footer.privacy">개인정보처리방침 / Privacy</a> ·
+      <button id="cookie-prefs-open" type="button">Cookie Preferences</button> ·
+      <a id="dnsmpi" href="#" role="button">Do Not Sell or Share…</a>
     </div>
   </footer>
 
@@ -316,6 +310,127 @@
       window.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDrawer(); });
       drawer.querySelectorAll('a[data-link]').forEach(a=>a.addEventListener('click', closeDrawer));
     });
+  </script>
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner" role="dialog" aria-live="polite" style="position:fixed;inset:auto 0 0 0;z-index:9999;display:none;background:#111;color:#fff;padding:12px 14px">
+    <div style="max-width:980px;margin:0 auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <p style="margin:0;flex:1 1 340px;font-size:14px;line-height:1.45">
+        We use cookies for site functionality, analytics, and ads. You can change preferences anytime.
+      </p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button id="cookie-accept-all" style="padding:8px 12px;border:0;border-radius:8px;background:#22c55e;color:#061">Accept all</button>
+        <button id="cookie-reject-all" style="padding:8px 12px;border:1px solid #444;border-radius:8px;background:#1a1a1a;color:#fff">Reject all</button>
+        <button id="cookie-customize" style="padding:8px 12px;border:1px solid #444;border-radius:8px;background:#1a1a1a;color:#fff">Customize</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cookie Preferences Modal -->
+  <div id="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title"
+       style="position:fixed;inset:0;display:none;z-index:10000;background:rgba(0,0,0,.55)">
+    <div style="max-width:520px;margin:8vh auto;background:#fff;color:#111;border-radius:12px;overflow:hidden">
+      <div style="padding:14px 16px;border-bottom:1px solid #e5e7eb">
+        <h2 id="cookie-modal-title" style="margin:0;font-size:18px">Cookie Preferences</h2>
+      </div>
+      <div style="padding:16px">
+        <label style="display:flex;justify-content:space-between;align-items:center;margin:8px 0">
+          <span><strong>Necessary</strong> (always on)</span>
+          <input type="checkbox" checked disabled>
+        </label>
+        <label style="display:flex;justify-content:space-between;align-items:center;margin:8px 0">
+          <span><strong>Analytics</strong> (GA4)</span>
+          <input id="consent-analytics" type="checkbox">
+        </label>
+        <label style="display:flex;justify-content:space-between;align-items:center;margin:8px 0">
+          <span><strong>Ads</strong> (AdSense)</span>
+          <input id="consent-ads" type="checkbox">
+        </label>
+      </div>
+      <div style="padding:12px 16px;border-top:1px solid #e5e7eb;display:flex;gap:8px;justify-content:flex-end">
+        <button id="cookie-save" style="padding:10px 14px;border-radius:8px;border:0;background:#0b5fff;color:#fff">Save</button>
+        <button id="cookie-cancel" style="padding:10px 14px;border-radius:8px;border:1px solid #e5e7eb;background:#fff">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consent loader (동의 후에만 GA/Ads 로드) -->
+  <script>
+  (function(){
+    'use strict';
+    const KEY = 'KSD_CONSENT_V1';
+    const $ = (id)=>document.getElementById(id);
+    const defaultConsent = { necessary:true, analytics:false, ads:false };
+
+    function readConsent(){ try{ return JSON.parse(localStorage.getItem(KEY)) || null; }catch(_){ return null; } }
+    function writeConsent(c){ localStorage.setItem(KEY, JSON.stringify(c)); }
+
+    function loadGA(){
+      if (window.__gaLoaded) return; window.__gaLoaded = true;
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6';
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){ dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', 'G-TMGDGSEWW6');
+    }
+    function loadAdSense(){
+      if (window.__adsenseLoaded) return; window.__adsenseLoaded = true;
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189957764761115';
+      s.crossOrigin = 'anonymous';
+      document.head.appendChild(s);
+    }
+    function applyConsent(c){
+      if (c.analytics) loadGA();
+      if (c.ads) loadAdSense();
+    }
+
+    function showBanner(){ $('cookie-banner').style.display = 'block'; }
+    function hideBanner(){ $('cookie-banner').style.display = 'none'; }
+    function openModal(){
+      const c = readConsent() || defaultConsent;
+      $('consent-analytics').checked = !!c.analytics;
+      $('consent-ads').checked = !!c.ads;
+      $('cookie-modal').style.display = 'block';
+    }
+    function closeModal(){ $('cookie-modal').style.display = 'none'; }
+
+    $('cookie-accept-all')?.addEventListener('click', function(){
+      const c = { necessary:true, analytics:true, ads:true };
+      writeConsent(c); applyConsent(c); hideBanner();
+    });
+    $('cookie-reject-all')?.addEventListener('click', function(){
+      const c = { necessary:true, analytics:false, ads:false };
+      writeConsent(c); hideBanner();
+    });
+    $('cookie-customize')?.addEventListener('click', openModal);
+
+    $('cookie-save')?.addEventListener('click', function(){
+      const c = {
+        necessary: true,
+        analytics: $('consent-analytics').checked,
+        ads: $('consent-ads').checked
+      };
+      writeConsent(c); applyConsent(c); closeModal(); hideBanner();
+    });
+    $('cookie-cancel')?.addEventListener('click', closeModal);
+
+    $('cookie-prefs-open')?.addEventListener('click', openModal);
+    $('dnsmpi')?.addEventListener('click', function(e){
+      e.preventDefault();
+      openModal();
+      const ads = $('consent-ads'); if (ads) ads.checked = false; // CA 옵트아웃 빠른 경로
+    });
+
+    document.addEventListener('DOMContentLoaded', function(){
+      const c = readConsent();
+      if (!c) { showBanner(); } else { applyConsent(c); }
+    });
+  })();
   </script>
 </body>
 </html>
