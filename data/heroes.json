@@ -1,4 +1,47 @@
 ﻿[
+{
+  "name": "Alcar",
+  "slug": "alcar",
+  "image": "/img/heroes/Alcar/img_001.webp",
+  "generation": 4,
+  "unit": "heroes.card.alcar.unit",
+  "title": "heroes.card.alcar.title",
+  "subtitle": "heroes.card.alcar.subtitle",
+  "summary": "heroes.card.alcar.summary",
+  "sources": [
+    "heroes.card.alcar.source.1",
+    "heroes.card.alcar.source.2",
+    "heroes.card.alcar.source.3",
+    "heroes.card.alcar.source.4",
+    "heroes.card.alcar.source.5"
+  ],
+  "conquest": {
+    "stats": [
+      { "label": "heroes.col.heroAtk", "value": "3,150" },
+      { "label": "heroes.col.heroDef", "value": "4,106" },
+      { "label": "heroes.col.heroHp",  "value": "61,604" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Alcar/img_002.webp", "desc": "heroes.alcar.conq.s1.desc", "upgrade": "heroes.alcar.conq.s1.up" },
+      { "icon": "/img/heroes/Alcar/img_003.webp", "desc": "heroes.alcar.conq.s2.desc", "upgrade": "heroes.alcar.conq.s2.up" },
+      { "icon": "/img/heroes/Alcar/img_004.webp", "desc": "heroes.alcar.conq.s3.desc", "upgrade": "heroes.alcar.conq.s3.up" }
+    ]
+  },
+  "expedition": {
+    "stats": [
+      { "label": "heroes.col.infantryAtk", "value": "+370.29%" },
+      { "label": "heroes.col.infantryDef", "value": "+370.29%" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Alcar/img_005.webp", "desc": "heroes.alcar.exp.s1.desc", "upgrade": "heroes.alcar.exp.s1.up" },
+      { "icon": "/img/heroes/Alcar/img_006.webp", "desc": "heroes.alcar.exp.s2.desc", "upgrade": "heroes.alcar.exp.s2.up" },
+      { "icon": "/img/heroes/Alcar/img_007.webp", "desc": "heroes.alcar.exp.s3.desc", "upgrade": "heroes.alcar.exp.s3.up" }
+    ]
+  }
+}
+
+,
+
   {
     "name": "Jaeger",
     "image": "/img/heroes/Jaeger/img_001.webp",
