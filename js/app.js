@@ -1,7 +1,4 @@
 // js/app.js — SPA Router for KingshotData.kr
-// final: route-scoped CSS, H1 dedupe, no nested panel, race-safe & preflighted script loader
-//        + AutoAds ping + asset versioning (+ DB img/srcset 버전 보강)
-//        + i18n init & route-scoped namespace loading(calc)
 (function () {
   'use strict';
 
@@ -11,13 +8,13 @@
   const ASSET_VER = 'now';
   function v(url){
     if (!url) return url;
-    if (/^(data:|blob:|#)/i.test(url)) return url; // data:/blob:/# 은 제외
+    if (/^(data:|blob:|#)/i.test(url)) return url;
     return url + (url.includes('?') ? '&' : '?') + 'v=' + ASSET_VER;
   }
 
   // ✅ CSS 경로
   const CALC_CSS_HREF = '/css/calculator.css?v=now';
-  const COMPONENTS_CSS_HREF = '/css/components.css?v=now'; // 공통 카드/썸네일 스타일(옵션)
+  const COMPONENTS_CSS_HREF = '/css/components.css?v=now';
 
   // ---- header utils ----
   const yearEl = $('#y');
@@ -32,20 +29,16 @@
     });
   }
 
-  // ---- dynamic <script> loader (once, race-safe, preflight to avoid MIME errors) ----
+  // ---- dynamic <script> loader ----
   const loadedScripts = new Map();
-
   async function loadScriptOnce(src) {
     if (!src) return;
     if (loadedScripts.has(src)) return loadedScripts.get(src);
 
     const p = (async () => {
       let r;
-      try {
-        r = await fetch(src, { cache: 'no-store' });
-      } catch (e) {
-        throw new Error(`Fetch failed @ ${src}: ${e.message}`);
-      }
+      try { r = await fetch(src, { cache: 'no-store' }); }
+      catch (e) { throw new Error(`Fetch failed @ ${src}: ${e.message}`); }
       if (!r.ok) throw new Error(`HTTP ${r.status} @ ${src}`);
 
       const ct = (r.headers.get('content-type') || '').toLowerCase();
@@ -83,6 +76,7 @@
   }
   function removeCSS(id) { document.getElementById(id)?.remove(); }
 
+  // ---- HTML fetch with fallbacks ----
   async function loadHTML(candidates) {
     for (const path of candidates) {
       try {
@@ -113,20 +107,14 @@
   function rewriteRelativeUrls(doc, base) {
     const isAbs = (u) => /^https?:\/\//i.test(u) || u.startsWith('data:') || u.startsWith('#') || u.startsWith('/');
     const joinBase = (u) => base + u.replace(/^\.?\//,'');
-
     const fixUrl = (u) => isAbs(u) ? u : joinBase(u);
 
-    // <img src>: 상대 → 절대화 + 버전
     doc.querySelectorAll('img[src]').forEach(el => {
-      const cur = el.getAttribute('src');
-      if (!cur) return;
+      const cur = el.getAttribute('src'); if (!cur) return;
       el.setAttribute('src', v(fixUrl(cur)));
     });
-
-    // <img/srcset> & <source/srcset>: 각 URL 절대화 + 버전
     doc.querySelectorAll('img[srcset], source[srcset]').forEach(el => {
-      const cur = el.getAttribute('srcset');
-      if (!cur) return;
+      const cur = el.getAttribute('srcset'); if (!cur) return;
       const out = cur.split(',').map(part => {
         const [u, d] = part.trim().split(/\s+/, 2);
         if (!u) return part;
@@ -135,21 +123,13 @@
       }).join(', ');
       el.setAttribute('srcset', out);
     });
-
-    // <link> href: 상대경로만 절대화
     doc.querySelectorAll('link[href]').forEach(el => {
-      const cur = el.getAttribute('href');
-      if (!cur) return;
+      const cur = el.getAttribute('href'); if (!cur) return;
       if (!isAbs(cur)) el.setAttribute('href', joinBase(cur));
     });
-
-    // 외부 스크립트 제거(보안/충돌 방지)
     doc.querySelectorAll('script[src]').forEach(el => el.remove());
-
-    // 내부 링크는 SPA 경로로 바꾸기
     doc.querySelectorAll('a[href]').forEach(a => {
-      const href = a.getAttribute('href');
-      if (!href) return;
+      const href = a.getAttribute('href'); if (!href) return;
       if (isAbs(href) || href.startsWith('mailto:')) return;
       a.setAttribute('data-db-internal', href.replace(/^\.?\//,''));
       a.setAttribute('href', '#');
@@ -198,18 +178,15 @@
       <div class="db-detail">${bodyHTML}</div>
     `;
 
-    // ✅ 보강: 렌더된 노드에서도 img/srcset에 버전 재확인(동적/엣지 케이스 커버)
     el.querySelectorAll('.db-detail img[src]').forEach(img => {
       img.setAttribute('src', v(img.getAttribute('src')));
     });
     el.querySelectorAll('.db-detail img[srcset], .db-detail source[srcset]').forEach(node => {
-      const cur = node.getAttribute('srcset');
-      if (!cur) return;
+      const cur = node.getAttribute('srcset'); if (!cur) return;
       const out = cur.split(',').map(part => {
         const [u, d] = part.trim().split(/\s+/, 2);
         if (!u) return part;
-        const hasQuery = /\?/.test(u);
-        const fixed = v(u); // 여기서는 이미 절대/상대 상관없이 v()만 적용(상대도 동작)
+        const fixed = v(u);
         return d ? `${fixed} ${d}` : fixed;
       }).join(', ');
       node.setAttribute('srcset', out);
@@ -238,19 +215,24 @@
   function setActive(path) {
     const tab = path === '/db' ? '/database'
              : path === '/hero' ? '/heroes'
+             : path === '/building' ? '/buildings'
              : path;
     document.querySelectorAll('[data-nav]').forEach(a => {
       a.classList.toggle('is-active', a.getAttribute('href') === '#' + tab);
     });
   }
 
-  // ---- Auto Ads: SPA 라우팅 시 재호출(디바운스) ----
+  // ---- AdSense: 새로 삽입된 슬롯만 초기화 ----
   const pingAutoAds = (() => {
     let t;
     return () => {
       clearTimeout(t);
       t = setTimeout(() => {
-        try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+        try {
+          const fresh = document.querySelectorAll('ins.adsbygoogle:not([data-adsbygoogle-status])');
+          if (!fresh.length) return;
+          fresh.forEach(() => (window.adsbygoogle = window.adsbygoogle || []).push({}));
+        } catch (_) {}
       }, 150);
     };
   })();
@@ -258,21 +240,29 @@
   let navVer = 0;
 
   // ===== i18n helpers =====
+  // NOTE: 언어 변경 감지 → 전체 초기화(페이지 리로드) 전략
   async function ensureI18N() {
     if (!window.I18N) return;
-    // 언어 결정
     const saved = localStorage.getItem('lang');
     const urlLang = new URLSearchParams(location.search).get('lang');
     const fallback = (navigator.language || 'ko').replace('_','-');
     const lang = urlLang || saved || fallback;
 
-    // 이미 초기화된 경우 skip (대충 current 읽히면 초기화된 걸로 간주)
-    if (I18N.current && typeof I18N.t === 'function') return;
+    // 이미 초기화되어 있고, 언어가 바뀌었다면 전체 리로드
+    if (window.__APP_LANG && window.__APP_LANG !== lang) {
+      // 선택: 필요하면 여기에서 계산기/임시 상태 localStorage 정리도 가능
+      // localStorage.removeItem('KSD_CALC_STATE'); 등…
+      location.reload();           // ← 전체 초기화 원샷
+      return;
+    }
 
-    // 공통 네임스페이스 선로딩
-    await I18N.init({ lang, namespaces: ['common'] });
+    if (!I18N.current || typeof I18N.t !== 'function') {
+      await I18N.init({ lang, namespaces: ['common'] });
+    }
+    window.__APP_LANG = lang;      // 현재 사용 언어 기록
   }
 
+  // ===== Router =====
   async function navigate(path) {
     const myVer = ++navVer;
     const el = document.getElementById('content');
@@ -281,7 +271,6 @@
     document.title = route.title;
     setActive(path);
 
-    // ✅ 계산기 허브 + 상세 모두 calculator.css 적용 (버전 부착)
     const isCalc = (path === '/calculator' || path.startsWith('/calc-'));
     if (isCalc) {
       await ensureCSS('calc-css', v(CALC_CSS_HREF));
@@ -289,8 +278,38 @@
       removeCSS('calc-css');
     }
 
+    
+    // i18n: 렌더 전
+    if (window.I18N) {
+      try {
+        await ensureI18N();
+        if (isCalc) {
+          if (typeof I18N.loadNamespace === 'function') {
+            await I18N.loadNamespace('calc');
+          } else if (typeof I18N.loadNS === 'function') {
+            await I18N.loadNS(['common', 'calc']);
+          }
+        }
+      } catch (_) {}
+    }
+
     const rest = location.hash.replace('#' + path, '').replace(/^#?\/?/, '');
     await route.render(el, rest);
+
+    // 계산기 부트
+    if (isCalc) {
+      try {
+        if (typeof window.initCalculator !== 'function') {
+          await loadScriptOnce('/js/calculator.js?v=now');           // core
+        }
+        if (!window.KSD?.buildingUI?.boot) {
+          await loadScriptOnce('/js/building-calculator.js?v=now');  // UI
+        }
+        await window.KSD?.buildingUI?.boot?.(el);
+      } catch (e) {
+        console.warn('[calc] bootstrap failed:', e);
+      }
+    }
 
     if (myVer !== navVer) return;
 
@@ -299,39 +318,29 @@
       toggle.setAttribute('aria-expanded', 'false');
     }
 
-    // ===== i18n 적용 (라우트 후) =====
+    // i18n: 렌더 후
     if (window.I18N) {
-      // 초기화 보장
-      await ensureI18N();
-
-      // 계산기 라우트면 calc 네임스페이스 로드
-      if (isCalc) {
-        // 이미 로드됐는지 간단히 키로 확인 후 필요시 로드
-        if (!I18N.has('calc.title')) {
-          try { await I18N.loadNamespace('calc'); } catch (_) {}
-        }
-        // 계산기 전용 타이틀 세팅
-        try {
+      try {
+        if (isCalc) {
           const metaTitle = I18N.t('calc.meta.title', '건물 계산기 | KingshotData KR');
           document.title = metaTitle;
-        } catch (_) {}
-      }
-
-      // 새로 삽입된 DOM에 번역 적용
-      try { I18N.applyTo(el); } catch (_) {}
+        }
+        I18N.applyTo(el);
+      } catch (_) {}
     }
 
-    // 🔔 라우트 렌더 완료 후 자동광고 트리거
+    // 광고 트리거
     pingAutoAds();
   }
 
   function parseHash() {
     let raw = (location.hash || '#/home').slice(1);
     raw = raw.replace(/^\/+/, '');
-
-    if (raw.startsWith('building/')) return ['/buildings', raw];
-    if (raw === 'buildings') return ['/buildings', ''];
-
+    // 건물 카드 전용 라우팅: /buildings 네임스페이스로 연결
+    if (raw.startsWith('building/')) {
+      return ['/buildings', raw.replace(/^building\//, '')];
+    }
+    if (raw === 'building') return ['/buildings', ''];
     const parts = raw.split('/');
     const path  = '/' + (parts[0] || 'home');
     const rest  = parts.slice(1).join('/');
@@ -341,20 +350,23 @@
   window.addEventListener('hashchange', () => {
     const [path] = parseHash();
     navigate(path);
-    pingAutoAds(); // 보강
+    pingAutoAds();
   });
 
-  // ✅ 공통 카드/썸네일 CSS는 초기 1회 로드 (버전 부착) + i18n init 보장
+  // 언어 변경(동일 탭 내) 트리거를 위한 헬퍼:
+  // 네가 언어 스위치 버튼에서 localStorage.setItem('lang', nextLang) 하고 아래 이벤트를 디스패치하면
+  // ensureI18N에서 감지 → 전체 리로드됨.
+  window.addEventListener('ksd:lang-changed', () => {
+    // 강제 리로드 (동일 탭 내에서도 확실히 초기화)
+    location.reload();
+  });
+
+  // 초기 부트
   window.addEventListener('DOMContentLoaded', async () => {
     await ensureCSS('components-css', v(COMPONENTS_CSS_HREF));
-    if (window.I18N) {
-      try { await ensureI18N(); } catch (_) {}
-    }
+    if (window.I18N) { try { await ensureI18N(); } catch (_) {} }
     const [path] = parseHash();
     await navigate(path);
     pingAutoAds();
   });
-
-  // (디버그) 로드 확인
-  // console.log('app.js loaded:', ASSET_VER);
 })();
