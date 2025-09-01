@@ -139,15 +139,23 @@
     catch (e) { throw new Error(`JSON parse failed at ${url}: ${e.message}`); }
   }
 
+  // === [PATCH] buildings-calc.json을 1순위로, clac는 레거시 폴백으로 ===
   async function loadBuildingsJson() {
     const ts = Date.now(); // 캐시 버스터
     const base = guessBasePath();
     const candidates = [
+      // ✅ 정식 경로들
+      `/data/buildings-calc.json?v=${ts}`,
+      `${base}data/buildings-calc.json?v=${ts}`,
+      `data/buildings-calc.json?v=${ts}`,
+      `../data/buildings-calc.json?v=${ts}`,
+      `../../data/buildings-calc.json?v=${ts}`,
+      // 🔁 레거시 파일명 폴백 (남아있을 경우 대비)
       `/data/buildings-clac.json?v=${ts}`,
       `${base}data/buildings-clac.json?v=${ts}`,
       `data/buildings-clac.json?v=${ts}`,
       `../data/buildings-clac.json?v=${ts}`,
-      `../../data/buildings-clac.json?v=${ts}`
+      `../../data/buildings-clac.json?v=${ts}`,
     ];
 
     const errors = [];
@@ -155,14 +163,14 @@
       try {
         const j = await fetchJsonSafe(u);
         const arr = Array.isArray(j.buildings) ? j.buildings : [];
-        console.info('[calc] buildings-clac.json loaded from:', u, '(count:', arr.length, ')');
+        console.info('[calc] buildings JSON loaded from:', u, '(count:', arr.length, ')');
         return arr;
       } catch (e) {
         errors.push(`${u} → ${e.message}`);
       }
     }
-    console.error('[calc] Failed to load buildings-clac.json:\n' + errors.join('\n'));
-    throw new Error('buildings-clac.json을 불러올 수 없습니다.');
+    console.error('[calc] Failed to load buildings JSON:\n' + errors.join('\n'));
+    throw new Error('buildings-calc.json(또는 레거시 clac) 로드 실패');
   }
 
   // ------------------------ 표 파서 ------------------------
