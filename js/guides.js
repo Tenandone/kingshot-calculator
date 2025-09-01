@@ -68,16 +68,21 @@
   }
 
   // 내부 앵커(#id) 스무스 스크롤
-  document.addEventListener('click', (e) => {
-    const a = e.target.closest('a[href^="#"]');
-    if (!a) return;
-    const href = a.getAttribute('href') || '';
-    if (href.startsWith('#/')) return; // 라우팅 링크 제외
-    const target = document.querySelector(href);
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth' });
-  });
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const href = a.getAttribute('href') || '';
+  if (href.startsWith('#/')) return; // 라우팅 링크 제외
+
+  // ✅ querySelector 대신 getElementById 사용 (특수문자 안전)
+  const id = href.slice(1); // '#' 제거
+  const target = document.getElementById(id);
+
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView({ behavior: 'smooth' });
+});
+
 
   // 외부 호출 가능
   window.GUIDES_apply = async function (root) {

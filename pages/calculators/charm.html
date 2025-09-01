@@ -6,6 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title data-i18n="calcCharm.meta.title">영주 보석 계산기 | KingshotData KR</title>
   <!-- 스타일은 /css/common.css 의 .calc-wrap / .calc-card 규칙을 사용 -->
+  <style>
+    /* ✅ 표 컨테이너 여백 추가해서 상단 짤림 방지 */
+    .calc-table-container {
+      overflow-y: auto;
+      max-height: 400px;
+      padding-top: 6px;
+    }
+  </style>
 </head>
 <body>
   <main id="calc-ui" class="calc-wrap" aria-labelledby="charm-title">
@@ -51,7 +59,8 @@
   <script>
     window.initCharmCalculator?.({
       mount: '#charm-calc',
-      jsonUrl: '/data/governor-charm.json'
+      jsonUrl: '/data/governor-charm.json',
+      tableContainerClass: 'calc-table-container' // ✅ 표 컨테이너 클래스 적용
     });
   </script>
   -->

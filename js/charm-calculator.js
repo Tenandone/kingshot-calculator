@@ -1,4 +1,4 @@
-/* js/charm-calculator.js (v20250830-i18n-full) 
+/* js/charm-calculator.js (v20250902-i18n-full)
  * 영주 보석 계산기: JSON 로드 → UI 렌더 → 합산 (i18n 대응 + 언어 전환 갱신)
  */
 (function(){
@@ -68,10 +68,10 @@
       .charm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
       .charm-kpi{border:1px solid #eee;border-radius:12px;padding:12px;text-align:center;background:#fafafa}
       .charm-kpi .num{font-size:18px;font-weight:700}
-      .charm-details{margin-top:12px;font-size:13px;background:#fff;border:1px solid #eee;border-radius:10px;max-height:260px;overflow:auto}
+      .charm-details{margin-top:12px;font-size:13px;background:#fff;border:1px solid #eee;border-radius:10px;max-height:260px;overflow:auto;padding-top:6px}
       .charm-details table{border-collapse:collapse;width:100%}
-      .charm-details th,.charm-details td{border-bottom:1px solid #f0f0f0;padding:8px 10px;text-align:left}
-      .charm-details th{background:#fafafa;font-weight:600}
+      .charm-details th,.charm-details td{border-bottom:1px solid #f0f0f0;padding:8px 10px;text-align:left;line-height:1.2}
+      .charm-details th{background:#fafafa;font-weight:600;white-space:nowrap}
       `;
       document.head.appendChild(st);
     }
@@ -101,10 +101,15 @@
     const row2=h('div',{class:'charm-row class-group'},[ cavInp, infInp, arcInp, fill9, clear, runBtn ]);
 
     const hint=h('div',{class:'gear-muted'});
+
+    // ✅ 헤더 라벨을 채워서 상단 한 줄이 '보이도록'
     const detailWrap=h('div',{class:'charm-details',style:'display:none'});
     const detailTable=h('table',{},[
       h('thead',{},h('tr',{},[
-        h('th'), h('th'), h('th'), h('th')
+        h('th',{text: t('calcCharm.table.level','레벨')}),
+        h('th',{text: t('calcCharm.table.manual','보석매뉴얼')}),
+        h('th',{text: t('calcCharm.table.blueprint','보석도면')}),
+        h('th',{text: t('calcCharm.table.attr','속성(%)')})
       ])),
       h('tbody',{id:'ck-tbody'})
     ]);
@@ -138,6 +143,7 @@
         document.getElementById('ck-manual').textContent = '0';
         document.getElementById('ck-bp').textContent = '0';
         document.getElementById('ck-attr').textContent = '0%';
+        detailWrap.style.display='none';
         return;
       }
       const cost = sumUpgrade(charm.steps, keys, fromIdx, toIdx);

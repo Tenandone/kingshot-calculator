@@ -278,7 +278,6 @@
       removeCSS('calc-css');
     }
 
-    
     // i18n: 렌더 전
     if (window.I18N) {
       try {
@@ -362,11 +361,33 @@
   });
 
   // 초기 부트
-  window.addEventListener('DOMContentLoaded', async () => {
-    await ensureCSS('components-css', v(COMPONENTS_CSS_HREF));
-    if (window.I18N) { try { await ensureI18N(); } catch (_) {} }
-    const [path] = parseHash();
-    await navigate(path);
-    pingAutoAds();
-  });
+window.addEventListener('DOMContentLoaded', async () => {
+  await ensureCSS('components-css', v(COMPONENTS_CSS_HREF));
+  if (window.I18N) {
+    try {
+      await ensureI18N();
+    } catch (_) {}
+  }
+
+  // ✅ calc-card 프리로드 (hover/touch 시점에 번역 JSON 미리 로드)
+  const calcCard = document.querySelector('#calc-card');
+  if (calcCard) {
+    ['mouseenter', 'touchstart'].forEach(ev => {
+      calcCard.addEventListener(ev, async () => {
+        if (window.I18N && !window.I18N.has('calc')) {
+          try {
+            await I18N.preload(['calc', 'calcGear']);
+          } catch (e) {
+            console.warn('[i18n] preload failed', e);
+          }
+        }
+      }, { once: true }); // 한 번만 실행
+    });
+  }
+
+  const [path] = parseHash();
+  await navigate(path);
+  pingAutoAds();
+});
+
 })();
