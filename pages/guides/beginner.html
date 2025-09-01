@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- i18n namespaces (자동 로드 대상) -->
+  <meta name="i18n-ns" content="guides,guides/beginner" />
+  <meta name="site-title" content="KingshotData" />
+
+  <title data-i18n="beginner.meta.title">킹샷 초보자 가이드 | KingshotData KR</title>
+  <meta name="description" content="" data-i18n-attr="content:beginner.meta.desc" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://kingshotdata.kr/guides/beginner.html" />
+
+  <style>
+    :root{
+      --fg:#111; --fg-sub:#444; --muted:#777; --bg:#fff; --card:#f7f7f8; --link:#0b57d0;
+      --radius:16px; --max:980px; --pad:16px;
+    }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,Apple SD Gothic Neo,Noto Sans KR,Arial,sans-serif;line-height:1.65}
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:32px var(--pad)}
+    header h1{font-size:clamp(24px,4vw,36px);margin:0 0 8px}
+    header p{color:var(--fg-sub);margin:6px 0 0}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.95em;margin:8px 0 24px}
+    .toc{background:var(--card);padding:16px;border-radius:var(--radius);margin:24px 0}
+    .toc h2{margin:0 0 8px;font-size:1.05rem}
+    .toc ol{margin:0;padding-left:18px}
+    .toc a{display:block;padding:3px 0}
+    section{margin:40px 0}
+    section h2{font-size:1.35rem;margin:0 0 10px}
+    .tip,.warn,.note{padding:12px 14px;border-radius:12px;margin:12px 0}
+    .tip{background:#eef7ee}
+    .warn{background:#fff3cd}
+    .note{background:#eef2ff}
+    ul,ol{padding-left:20px}
+    code.k{background:#f0f0f0;padding:2px 6px;border-radius:6px;font-family:ui-monospace,Consolas,monospace}
+    hr{border:0;border-top:1px solid #e5e5e5;margin:36px 0}
+    footer{color:var(--muted);font-size:.9em;margin:48px 0 0}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+   <header>
+  <!-- <h1 data-i18n="beginner.h1">킹샷 초보자 가이드</h1> -->
+  <p class="meta"><span data-i18n="beginner.meta.updated">작성/갱신: 2025-09-02</span> · <span data-i18n="beginner.meta.author">KingshotData 커뮤니티 가이드</span></p>
+  <p data-i18n="beginner.intro">...</p>
+</header>
+
+    <nav class="toc" aria-label="Table of contents">
+      <h2 data-i18n="beginner.toc.title">목차</h2>
+      <ol>
+        <li><a href="#s1" data-i18n="beginner.toc.s1">건설/행렬 대기 해제는 필수</a></li>
+        <li><a href="#s2" data-i18n="beginner.toc.s2">상위(1~3위) 연맹 합류</a></li>
+        <li><a href="#s3" data-i18n="beginner.toc.s3">아레나 순위→레전드 장비 수급</a></li>
+        <li><a href="#s4" data-i18n="beginner.toc.s4">영웅 성급·장비는 아레나를 위해</a></li>
+        <li><a href="#s5" data-i18n="beginner.toc.s5">소과금 핵심: 레전드 공용조각</a></li>
+        <li><a href="#s6" data-i18n="beginner.toc.s6">자원은 채집으로 충분 (가방 보관)</a></li>
+        <li><a href="#s7" data-i18n="beginner.toc.s7">센터(타운센터) 우선 상승</a></li>
+        <li><a href="#s8" data-i18n="beginner.toc.s8">최강영주 vs 단기 이벤트 전략</a></li>
+        <li><a href="#s9" data-i18n="beginner.toc.s9">캐시 아이템 구매 원칙</a></li>
+        <li><a href="#s10" data-i18n="beginner.toc.s10">다이아 사용: VIP4 → 룰렛 집중</a></li>
+        <li><a href="#s11" data-i18n="beginner.toc.s11">상점별 우선 구매</a></li>
+        <li><a href="#s12" data-i18n="beginner.toc.s12">아레나 기본 운용</a></li>
+        <li><a href="#s13" data-i18n="beginner.toc.s13">병사·승급 운영</a></li>
+        <li><a href="#s14" data-i18n="beginner.toc.s14">영웅 체계·집결 이해</a></li>
+        <li><a href="#s15" data-i18n="beginner.toc.s15">아카데미 투자 순서</a></li>
+        <li><a href="#s16" data-i18n="beginner.toc.s16">야전병원/손실 관리</a></li>
+        <li><a href="#s17" data-i18n="beginner.toc.s17">징병소와 충성도</a></li>
+        <li><a href="#s18" data-i18n="beginner.toc.s18">법령(건설가속) 활용</a></li>
+        <li><a href="#s19" data-i18n="beginner.toc.s19">도시 버프 활용</a></li>
+        <li><a href="#s20" data-i18n="beginner.toc.s20">연맹 시스템 핵심</a></li>
+      </ol>
+    </nav>
+
+    <section id="s1">
+      <h2 data-i18n="beginner.s1.title">1) 건설/행렬 대기 해제는 필수</h2>
+      <p data-i18n="beginner.s1.p1">건설 슬롯 추가는 기본이며, 행렬 대기는 채집·토벌·이동 등 전반 효율을 크게 끌어올립니다. 초반 다이아·캐시 사용 우선순위에서도 ‘건설/행렬 해제’가 최상위입니다.</p>
+    </section>
+
+    <section id="s2">
+      <h2 data-i18n="beginner.s2.title">2) 상위(1~3위) 연맹으로 이동</h2>
+      <p data-i18n="beginner.s2.p1">상위 연맹은 매일 열리는 보물상자/선물, 빠른 HELP, 높은 유적·성소 버프, 집결 빈도 등에서 압도적입니다. 채집 중에도 안전성이 높고, ALL OUT 시기에도 하위권 대비 피해가 적습니다.</p>
+      <ul>
+        <li data-i18n="beginner.s2.l1">연맹 내부 보상(보물상자 4~5개/일 수준), 가속·보석 수급.</li>
+        <li data-i18n="beginner.s2.l2">성소·유적 버프(건설 가속 등)로 체감 성장 속도 상승.</li>
+        <li data-i18n="beginner.s2.l3">정치 분쟁 회피: 최소 2~3위권 합류 권장.</li>
+      </ul>
+    </section>
+
+    <section id="s3">
+      <h2 data-i18n="beginner.s3.title">3) 아레나 순위 → 레전드 장비 루프 만들기</h2>
+      <p data-i18n="beginner.s3.p1">소과금이 레전드 장비를 정기 수급하는 현실적 경로는 아레나입니다. 코인과 조각을 모아 2주 주기로 장비 한 개 확보를 목표로 하고, 자주 쓰는 병영 라인(보/궁/기)부터 마스터리 1~2를 넓게 찍어 효율을 극대화합니다.</p>
+      <ul>
+        <li data-i18n="beginner.s3.l1">초기엔 단일 서버 매칭→점차 서버 통합. 격차는 ‘장비 개수·마스터리’에서 벌어짐.</li>
+        <li data-i18n="beginner.s3.l2">주력 조합이 궁/기라면 파괴력 위주 장비 우선 수급을 권장.</li>
+        <li data-i18n="beginner.s3.l3">집결원 참여만으론 장비 효과 체감이 제한적→아레나 우선.</li>
+      </ul>
+    </section>
+
+    <section id="s4">
+      <h2 data-i18n="beginner.s4.title">4) 영웅 성급·장비는 ‘아레나 우선’으로</h2>
+      <p data-i18n="beginner.s4.p1">캐슬 전 단계에선 집결원이 티어·수량으로 기여하지만, 아레나는 성급·장비의 영향이 직접적입니다. 이틀 단독 ‘영웅육성’ 이벤트는 2세대부턴 최영/다른 이벤트에 묶여 나오므로, 순위권만 챙기고 아레나 전력 강화에 집중합니다.</p>
+    </section>
+
+    <section id="s5">
+      <h2 data-i18n="beginner.s5.title">5) 소과금의 핵심: 레전드 공용조각(공조) 우선</h2>
+      <p data-i18n="beginner.s5.p1">룰렛은 다이아로 돌리면 되지만, ‘영웅의 전당’ 영웅은 공조 없이는 성급 상승이 어렵습니다. 2~3세대 핵심 영웅을 3~4성으로 끌어올리기 위해 공조를 아끼고 모으는 것이 장기 효율의 핵심입니다.</p>
+      <div class="tip" data-i18n="beginner.s5.tip">팁: 제이벨 등 특정 영웅은 영웅의 홀·전망대에서 조각 수급이 가능하므로, 공조는 차세대 핵심 영웅(예: 마린 등)에 우선 투자.</div>
+    </section>
+
+    <section id="s6">
+      <h2 data-i18n="beginner.s6.title">6) 자원은 채집으로 충분 + 가방 보관</h2>
+      <p data-i18n="beginner.s6.p1">가속을 과하게 쓰지 않는 한, 채집만으로도 자원은 충당됩니다. 약탈 방지를 위해 가능한 한 가방(아이템)으로 보관하고 필요 시에만 사용하세요.</p>
+    </section>
+
+    <section id="s7">
+      <h2 data-i18n="beginner.s7.title">7) 센터(타운센터) 우선 상승</h2>
+      <p data-i18n="beginner.s7.p1">티어 격차는 결국 전반 전력 차이를 만듭니다. 센터를 끌어올려 고티어 병사를 빠르게 여는 것이 최우선입니다.</p>
+      
+      
+    </section>
+
+    <section id="s8">
+      <h2 data-i18n="beginner.s8.title">8) 최강영주 vs 단기 이벤트: ‘터트릴 타이밍’ 설계</h2>
+      <p data-i18n="beginner.s8.p1">최강영주는 고래를 이기기 어렵습니다. 대신 1~2일 단기 이벤트에서 1위 타이밍을 노려 다이아 5만개급 보상을 주기적으로 확보하세요.</p>
+      <h3 data-i18n="beginner.s8.h3a">① 철야근무</h3>
+      <ul>
+        <li data-i18n="beginner.s8.overnight.l1">이벤트 시작 직후 건설 진행→HELP→24시간 후 마무리 가속.</li>
+        <li data-i18n="beginner.s8.overnight.l2">종료 1분 전 경쟁 점수 +α로 가속 확정(센터 작업 권장).</li>
+        <li data-i18n="beginner.s8.overnight.l3">연맹총동원과 동시 진행 시, 개인·공용 미션 점수 동시 획득.</li>
+      </ul>
+      <h3 data-i18n="beginner.s8.h3b">② 기술발전</h3>
+      <p data-i18n="beginner.s8.tech.p1">기술 가속 비중을 높여 1위 노림. 철야근무 후 이어지는 편성.</p>
+      <h3 data-i18n="beginner.s8.h3c">③ 연맹총동원</h3>
+      <p data-i18n="beginner.s8.union.p1">리롤로 ‘가속 200%/400점’ 등 고점 미션을 세팅하고, 병사·야수·채집 조합으로 일일 700점+ 안정 수급.</p>
+      <h3 data-i18n="beginner.s8.h3d">④ 영웅육성</h3>
+      <p data-i18n="beginner.s8.hero.p1">전망대·이벤트로 모은 조각을 종료 직전 일괄 반영(승산 계산 후).</p>
+      <h3 data-i18n="beginner.s8.h3e">⑤ 야수처치</h3>
+      <p data-i18n="beginner.s8.beast.p1">다이애나 스테미너 절감 노드 활용. 체사레 종료 직후 고기 잔여량 우위로 1위 공략.</p>
+    </section>
+
+    <section id="s9">
+      <h2 data-i18n="beginner.s9.title">9) 캐시 아이템 구매 원칙</h2>
+      <ul>
+        <li data-i18n="beginner.s9.l1">초반 최우선: 건설 대기, 행렬 대기, 월간 카드(할인 시).</li>
+        <li data-i18n="beginner.s9.l2">중장기: 레전드 공용조각 효율이 높은 패키지 위주.</li>
+        <li data-i18n="beginner.s9.l3">가속 패키지는 ‘터트릴 이벤트’를 전제로 한정 구매.</li>
+      </ul>
+      <div class="warn" data-i18n="beginner.s9.warn">주의: 다이아 직구매보다 ‘이벤트 1위→대량 다이아’ 루트가 장기 효율이 우수합니다.</div>
+    </section>
+
+    <section id="s10">
+      <h2 data-i18n="beginner.s10.title">10) 다이아 사용: VIP4 → 룰렛 집중</h2>
+      <ul>
+        <li data-i18n="beginner.s10.l1">VIP4(건설 +10%)까지는 투자 가치 높음. 이후는 효율 저하.</li>
+        <li data-i18n="beginner.s10.l2">룰렛(보통 120회 세트) 대비 저축. 세대별 핵심 SSR 확보 전략.</li>
+        <li data-i18n="beginner.s10.l3">연맹 기부·은행·아레나·이벤트로 상시 다이아 파이프라인 구축.</li>
+      </ul>
+    </section>
+
+    <section id="s11">
+      <h2 data-i18n="beginner.s11.title">11) 상점별 우선 구매</h2>
+      <ul>
+        <li data-i18n="beginner.s11.l1">떠돌이: 자원↔자원, 가속, 고급 이동권(다이아 구매는 비권장).</li>
+        <li data-i18n="beginner.s11.l2">신비한: 영웅 부속품 위주. 50% 할인, 무료 리롤 챙기기.</li>
+        <li data-i18n="beginner.s11.l3">경기장: 레전드 장비 상자 최우선.</li>
+        <li data-i18n="beginner.s11.l4">연맹: VIP, 건설가속 70%, 회군/방어막/이전권(40% 이상 할인 선호).</li>
+      </ul>
+    </section>
+
+    <section id="s12">
+      <h2 data-i18n="beginner.s12.title">12) 아레나 기본 운용</h2>
+      <ul>
+        <li data-i18n="beginner.s12.l1">현실 목표: 100~500위권. 일일 보상으로 다이아·코인 수급.</li>
+        <li data-i18n="beginner.s12.l2">공격은 약한 상대 위주로 승률 확보. 방어 배치는 탱/스턴 고려.</li>
+        <li data-i18n="beginner.s12.l3">다이아로 도전권 추가는 비효율. 근본 해법은 영웅/장비 강화.</li>
+      </ul>
+    </section>
+
+    <section id="s13">
+      <h2 data-i18n="beginner.s13.title">13) 병사·승급 운영</h2>
+      <p data-i18n="beginner.s13.p1">초기 목표는 8티어 이상 다수 보유. 저티어는 해산 대신 승급 위주로 전환하고, 센터 22 이후 고티어 대량 운용을 목표로 합니다.</p>
+    </section>
+
+    <section id="s14">
+      <h2 data-i18n="beginner.s14.title">14) 영웅 체계·집결 이해</h2>
+      <ul>
+        <li data-i18n="beginner.s14.l1">등급: R(채집), SR(전투 입문), SSR(전투 최적화: 룰렛/전당/최영 계열).</li>
+        <li data-i18n="beginner.s14.l2">스킬: 좌(아레나/토벌), 우(수성/공성/사냥)로 구분.</li>
+        <li data-i18n="beginner.s14.l3">집결: 집결장 버프(영주/영웅/장비)가 전반에 적용. 집결원은 첫 슬롯 1스킬 상위 4개만 공용 적용(추정). 소과금은 SR 4성(Lv5 스킬), 고티어 병력으로 기여.</li>
+      </ul>
+    </section>
+
+    <section id="s15">
+      <h2 data-i18n="beginner.s15.title">15) 아카데미 투자 순서</h2>
+      <ul>
+        <li data-i18n="beginner.s15.l1">초반: 발전→경제→전투. 훈련속도·병실 확장·붕대술 우선.</li>
+        <li data-i18n="beginner.s15.l2">중반 이후: 전투 투자 비중 확대(솔로 교전 대비).</li>
+        <li data-i18n="beginner.s15.l3">기자재개선은 효율 저하 구간에서 보류 가능.</li>
+      </ul>
+    </section>
+
+    <section id="s16">
+      <h2 data-i18n="beginner.s16.title">16) 야전병원/손실 관리</h2>
+      <p data-i18n="beginner.s16.p1">병원 수용 초과 시 손실 발생. 저티어 투입 최소화, 병원 용량 확장, 전투력 격차 교전 회피로 손실을 억제합니다.</p>
+    </section>
+
+    <section id="s17">
+      <h2 data-i18n="beginner.s17.title">17) 징병소와 충성도</h2>
+      <p data-i18n="beginner.s17.p1">부상 초과분은 징병소로 이동. 충성도는 시간·일퀘·채집로 회복되며, 캐시 구매 효율은 낮습니다.</p>
+    </section>
+
+    <section id="s18">
+      <h2 data-i18n="beginner.s18.title">18) 법령(건설가속) 타이밍</h2>
+      <p data-i18n="beginner.s18.p1">건설 법령 5분 내 업그레이드 착수 시 시간 20% 단축. 단기 이벤트 마감 직전 센터/장시간 건설에 결합해 가속 효율을 극대화합니다.</p>
+    </section>
+
+    <section id="s19">
+      <h2 data-i18n="beginner.s19.title">19) 도시 버프 활용</h2>
+      <ul>
+        <li data-i18n="beginner.s19.l1">보호막/정찰방지: 불안정 정치 국면·성전 교전 시 필수.</li>
+        <li data-i18n="beginner.s19.l2">랜덤 이전: 채집 약탈 루트 개척 시 유용.</li>
+        <li data-i18n="beginner.s19.l3">훈련 수용/채집 속도: 초반·장시간 채집 구간에 선택적 사용.</li>
+      </ul>
+    </section>
+
+    <section id="s20">
+      <h2 data-i18n="beginner.s20.title">20) 연맹 시스템 핵심</h2>
+      <ul>
+        <li data-i18n="beginner.s20.l1">영지 보너스: 연맹 타일 내부 배치로 상시 버프 수령.</li>
+        <li data-i18n="beginner.s20.l2">거점/유적: 협약 점령으로 건설·훈련·이동·채집 가속.</li>
+        <li data-i18n="beginner.s20.l3">연맹상점/과학/HELP: 가속·이동권·보호막·VIP 등 핵심 물자 수급과 치유·업그레이드 단축.</li>
+        <li data-i18n="beginner.s20.l4">전쟁/일지: 집결·솔로 교전 추적, 기록 보존.</li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <section id="faq">
+      <h2 data-i18n="beginner.faq.title">FAQ 요약</h2>
+      <ul>
+        <li data-i18n="beginner.faq.q1">Q. 소과금 최우선 과금은? — A. 건설/행렬 해제, 월간카드(할인), 공조 효율 패키지.</li>
+        <li data-i18n="beginner.faq.q2">Q. 다이아는 어디에? — A. VIP4까지, 이후 룰렛. 이벤트 1위 루프로 대량 확보.</li>
+        <li data-i18n="beginner.faq.q3">Q. 성장 루프는? — A. 센터 상승 → 아레나 순위 → 장비 수급 → 아레나 강화.</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p data-i18n="beginner.footer.note">본 가이드는 실제 플레이 경험과 커뮤니티 팁을 바탕으로 작성되었습니다. 서버/메타 상황에 따라 일부 최적 전략은 달라질 수 있습니다.</p>
+    </footer>
+  </main>
+</body>
+</html>

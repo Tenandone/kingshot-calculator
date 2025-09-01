@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <!-- HEAD 안에 추가 -->
-<meta name="google-adsense-account" content="ca-pub-9189957764761115">
+  <!-- AdSense account meta (유지) -->
+  <meta name="google-adsense-account" content="ca-pub-9189957764761115">
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,11 +24,13 @@
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://kingshotdata.kr">
 
-  <!-- CSS 공통 -->
+  <!-- CSS -->
   <link rel="stylesheet" href="/css/common.css?v=now">
   <link rel="stylesheet" href="/css/database.css?v=now">
   <link rel="stylesheet" href="/css/home.css?v=now">
   <link rel="stylesheet" href="/css/mobile-patch.css?v=now">
+  <!-- 쿠키 배너/모달 전용 CSS (외부) -->
+  <link rel="stylesheet" href="/css/cookie.css?v=now">
 
   <!-- i18n (먼저) -->
   <script src="/js/i18n.js?v=now"></script>
@@ -48,107 +50,63 @@
   <!-- 앱 -->
   <script defer src="/js/routes.js?v=now"></script>
   <script defer src="/js/app.js?v=now"></script>
+  <!-- 쿠키 동의 모듈 (외부) -->
+  <script defer src="/js/consent.js?v=now"></script>
 
-  <!-- 헤더/드로어 스타일 -->
+  <!-- 헤더/드로어 스타일 (필요 최소만 남김) -->
   <style>
     :root{ --nav-h:60px; }
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
     a{text-decoration:none;color:inherit}
-
     .site-header{background:#fff;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:100}
     .nav-bar{max-width:1200px;margin:0 auto;padding:0 12px;display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
     .nav-left,.nav-right{display:flex;align-items:center;gap:16px}
     .nav-left nav a{margin:0 6px;color:#333;font-size:14px}
     .brand-logo{height:39px;width:auto}
-
-    /* --- 데스크탑 우측 묶음 --- */
     .cafe-banner{display:flex;flex-direction:column;align-items:center}
     .cafe-banner img{height:35px;width:auto}
-    .cafe-banner span{
-      font-size:10px;font-weight:300;margin-top:2px;align-self:flex-start;color:#000;opacity:.4;
-    }
-
+    .cafe-banner span{font-size:10px;font-weight:300;margin-top:2px;align-self:flex-start;color:#000;opacity:.4;}
     .lootbar-banner{display:flex;flex-direction:column;align-items:flex-end}
     .lootbar-banner img{height:20px;width:auto;filter:grayscale(100%)}
     .lootbar-banner span{font-size:10px;font-weight:300;margin-top:2px;align-self:flex-start;opacity:.4}
     .lootbar-banner:hover span{text-decoration:none}
-
-    /* 배너 링크: 밑줄 제거(헤더/드로어 공통) */
     .cafe-banner, .cafe-banner:hover, .cafe-banner:focus,
     .lootbar-banner, .lootbar-banner:hover, .lootbar-banner:focus,
     .drawer .cafe-banner, .drawer .cafe-banner:hover, .drawer .cafe-banner:focus,
-    .drawer .lootbar-banner, .drawer .lootbar-banner:hover, .drawer .lootbar-banner:focus {
-      text-decoration: none !important;
-    }
-
+    .drawer .lootbar-banner, .drawer .lootbar-banner:hover, .drawer .lootbar-banner:focus { text-decoration: none !important; }
     .lang-switch select{padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff}
-    .nav-right .lootbar-banner { margin-top: 14px; } /* 헤더에서 살짝 아래로 */
-
-    /* 햄버거(모바일) */
+    .nav-right .lootbar-banner { margin-top: 14px; }
     #menuToggle.hamburger{display:none;font-size:22px;background:none;border:0;color:#333;cursor:pointer}
-
-    /* 반응형: 모바일에선 좌측 메뉴 숨기고 드로어 사용, 우측 묶음 감춤 */
     @media (max-width:768px){
       #primaryNav{display:none}
       #menuToggle.hamburger{display:inline-block}
       .nav-right{display:none}
       .brand-logo{height:34px}
     }
-
-    /* ===== 드로어 ===== */
     .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:.2s;z-index:110}
-    .drawer{
-      position:fixed;top:0;right:0;height:100%;
-      width:420px; /* 기본 */
-      background:#fff;border-left:1px solid #e5e7eb;transform:translateX(100%);
-      transition:transform .25s ease;z-index:120;display:flex;flex-direction:column
-    }
-    /* ✅ 모바일에서 정확히 50% 폭 */
-    @media (max-width:768px){
-      .drawer{ width:50vw !important; max-width:none !important; min-width:0 !important; }
-    }
-
+    .drawer{position:fixed;top:0;right:0;height:100%;width:420px;background:#fff;border-left:1px solid #e5e7eb;transform:translateX(100%);transition:transform .25s ease;z-index:120;display:flex;flex-direction:column}
+    @media (max-width:768px){ .drawer{ width:50vw !important; max-width:none !important; min-width:0 !important; } }
     .drawer header{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-bottom:1px solid #eee}
     .drawer .section{padding:12px}
     .drawer .rule{height:10px;border-bottom:1px dashed #ddd;margin:6px 0 10px}
     .drawer nav a{display:block;padding:12px 8px;border-radius:8px;color:#222;font-size:15px}
     .drawer nav a:active{background:#f2f4f7}
     .drawer .lang-switch select{width:100%}
-
-    /* 드로어 내 배너들: 중앙 정렬(요청 반영) */
     .drawer .lootbar-banner{align-items:center}
     .drawer .lootbar-banner img{height:20px}
     .drawer .lootbar-banner span{font-size:10px;opacity:.4;align-self:center;text-align:center}
     .drawer .cafe-banner{align-items:center;text-align:center}
     .drawer .cafe-banner img{height:60px}
     .drawer .cafe-banner span{font-size:10px;font-weight:300;margin-top:4px;color:#000;opacity:.4}
-
-    /* 열림 상태 */
     .is-open .backdrop{opacity:1;pointer-events:auto}
     .is-open .drawer{transform:translateX(0)}
     .no-scroll{overflow:hidden}
-
-    /* ===== 홈 카테고리: 모바일 1열 ===== */
-@media (max-width:768px){
-  #home-categories,
-  .category-grid,
-  .home-categories,
-  .cards-grid,
-  .card-grid,
-  .cards {
-    display: grid !important;
-    grid-template-columns: 1fr !important; /* ← 1열 */
-    gap: 12px !important;
-  }
-  #home-categories > *, .category-grid > *, .home-categories > *,
-  .cards-grid > *, .card-grid > *, .cards > * { width: auto !important; }
-}
-
-    /* 메인/푸터 */
+    @media (max-width:768px){
+      #home-categories,.category-grid,.home-categories,.cards-grid,.card-grid,.cards{display:grid !important;grid-template-columns:1fr !important;gap:12px !important;}
+      #home-categories > *, .category-grid > *, .home-categories > *, .cards-grid > *, .card-grid > *, .cards > * { width:auto !important; }
+    }
     #content{min-height:50vh}
     .site-footer{text-align:center;font-size:.9em;color:#666;line-height:1.6;padding:20px 0}
-
-    /* 모바일 드로어: 네이버 텍스트 중앙 정렬 강제 */
     .drawer .cafe-banner { align-items:center !important; text-align:center !important; }
     .drawer .cafe-banner span { align-self:center !important; }
   </style>
@@ -156,7 +114,6 @@
 <body class="theme-default">
   <header class="site-header" role="banner">
     <div class="container nav-bar">
-      <!-- 좌: 로고 + 메뉴 -->
       <div class="nav-left">
         <a class="brand" href="#/home" data-link aria-label="KingshotData 홈">
           <img class="brand-logo" src="/img/logo-kingshotdata.png" alt="KingshotData" decoding="async">
@@ -172,21 +129,17 @@
         </nav>
       </div>
 
-      <!-- 햄버거(모바일) -->
       <button class="hamburger" id="menuToggle" aria-label="메뉴 열기" aria-controls="mobileDrawer" aria-expanded="false">☰</button>
 
-      <!-- 우: 네이버배너 → 루트바배너 → 번역기 -->
       <div class="nav-right">
         <a href="https://cafe.naver.com/kingshot1" class="cafe-banner" target="_blank" rel="noopener">
           <img src="/img/brand2.png" alt="Kingshot Fan Community">
           <span>KingshotFanCommunity</span>
         </a>
-
         <a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" class="lootbar-banner" target="_blank" rel="noopener">
           <img src="/img/brand.png" alt="Lootbar">
           <span>Buy Kingshot Packs</span>
         </a>
-
         <label class="lang-switch" for="langSelect" data-i18n-attr="aria-label:nav.langAria">
           <select id="langSelect" aria-label="Language">
             <option value="ko">한국어(KR)</option>
@@ -200,7 +153,6 @@
     </div>
   </header>
 
-  <!-- 모바일 드로어 -->
   <div class="backdrop" id="backdrop" hidden></div>
   <aside class="drawer" id="mobileDrawer" aria-hidden="true" aria-label="모바일 내비게이션">
     <header>
@@ -208,7 +160,6 @@
       <button id="btnClose" aria-label="닫기" style="background:none;border:0;font-size:20px;cursor:pointer">✕</button>
     </header>
 
-    <!-- 1) 번역기 -->
     <div class="section">
       <label class="lang-switch" for="langSelectMobile">
         <select id="langSelectMobile" aria-label="Language (mobile)">
@@ -222,7 +173,6 @@
     </div>
     <div class="rule"></div>
 
-    <!-- 2) 메뉴 -->
     <nav class="section">
       <a href="#/buildings" data-link data-i18n="nav.buildings">건물</a>
       <a href="#/heroes" data-link data-i18n="nav.heroes">영웅</a>
@@ -232,15 +182,12 @@
     </nav>
     <div class="rule"></div>
 
-    <!-- 3) 루트바배너 (모바일: 중앙정렬) -->
     <div class="section">
       <a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" class="lootbar-banner" target="_blank" rel="noopener">
         <img src="/img/brand.png" alt="Lootbar">
         <span>Buy Kingshot Packs</span>
       </a>
     </div>
-
-    <!-- 4) 네이버배너 (모바일: 중앙정렬) -->
     <div class="section">
       <a href="https://cafe.naver.com/kingshot1" class="cafe-banner" target="_blank" rel="noopener">
         <img src="/img/brand2.png" alt="Kingshot Fan Community">
@@ -312,125 +259,7 @@
     });
   </script>
 
-  <!-- Cookie Banner -->
-  <div id="cookie-banner" role="dialog" aria-live="polite" style="position:fixed;inset:auto 0 0 0;z-index:9999;display:none;background:#111;color:#fff;padding:12px 14px">
-    <div style="max-width:980px;margin:0 auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-      <p style="margin:0;flex:1 1 340px;font-size:14px;line-height:1.45">
-        We use cookies for site functionality, analytics, and ads. You can change preferences anytime.
-      </p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button id="cookie-accept-all" style="padding:8px 12px;border:0;border-radius:8px;background:#22c55e;color:#061">Accept all</button>
-        <button id="cookie-reject-all" style="padding:8px 12px;border:1px solid #444;border-radius:8px;background:#1a1a1a;color:#fff">Reject all</button>
-        <button id="cookie-customize" style="padding:8px 12px;border:1px solid #444;border-radius:8px;background:#1a1a1a;color:#fff">Customize</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Cookie Preferences Modal -->
-  <div id="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title"
-       style="position:fixed;inset:0;display:none;z-index:10000;background:rgba(0,0,0,.55)">
-    <div style="max-width:520px;margin:8vh auto;background:#fff;color:#111;border-radius:12px;overflow:hidden">
-      <div style="padding:14px 16px;border-bottom:1px solid #e5e7eb">
-        <h2 id="cookie-modal-title" style="margin:0;font-size:18px">Cookie Preferences</h2>
-      </div>
-      <div style="padding:16px">
-        <label style="display:flex;justify-content:space-between;align-items:center;margin:8px 0">
-          <span><strong>Necessary</strong> (always on)</span>
-          <input type="checkbox" checked disabled>
-        </label>
-        <label style="display:flex;justify-content:space-between;align-items:center;margin:8px 0">
-          <span><strong>Analytics</strong> (GA4)</span>
-          <input id="consent-analytics" type="checkbox">
-        </label>
-        <label style="display:flex;justify-content:space-between;align-items:center;margin:8px 0">
-          <span><strong>Ads</strong> (AdSense)</span>
-          <input id="consent-ads" type="checkbox">
-        </label>
-      </div>
-      <div style="padding:12px 16px;border-top:1px solid #e5e7eb;display:flex;gap:8px;justify-content:flex-end">
-        <button id="cookie-save" style="padding:10px 14px;border-radius:8px;border:0;background:#0b5fff;color:#fff">Save</button>
-        <button id="cookie-cancel" style="padding:10px 14px;border-radius:8px;border:1px solid #e5e7eb;background:#fff">Cancel</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Consent loader (동의 후에만 GA/Ads 로드) -->
-  <script>
-  (function(){
-    'use strict';
-    const KEY = 'KSD_CONSENT_V1';
-    const $ = (id)=>document.getElementById(id);
-    const defaultConsent = { necessary:true, analytics:false, ads:false };
-
-    function readConsent(){ try{ return JSON.parse(localStorage.getItem(KEY)) || null; }catch(_){ return null; } }
-    function writeConsent(c){ localStorage.setItem(KEY, JSON.stringify(c)); }
-
-    function loadGA(){
-      if (window.__gaLoaded) return; window.__gaLoaded = true;
-      const s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6';
-      document.head.appendChild(s);
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function(){ dataLayer.push(arguments); };
-      gtag('js', new Date());
-      gtag('config', 'G-TMGDGSEWW6');
-    }
-    function loadAdSense(){
-      if (window.__adsenseLoaded) return; window.__adsenseLoaded = true;
-      const s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189957764761115';
-      s.crossOrigin = 'anonymous';
-      document.head.appendChild(s);
-    }
-    function applyConsent(c){
-      if (c.analytics) loadGA();
-      if (c.ads) loadAdSense();
-    }
-
-    function showBanner(){ $('cookie-banner').style.display = 'block'; }
-    function hideBanner(){ $('cookie-banner').style.display = 'none'; }
-    function openModal(){
-      const c = readConsent() || defaultConsent;
-      $('consent-analytics').checked = !!c.analytics;
-      $('consent-ads').checked = !!c.ads;
-      $('cookie-modal').style.display = 'block';
-    }
-    function closeModal(){ $('cookie-modal').style.display = 'none'; }
-
-    $('cookie-accept-all')?.addEventListener('click', function(){
-      const c = { necessary:true, analytics:true, ads:true };
-      writeConsent(c); applyConsent(c); hideBanner();
-    });
-    $('cookie-reject-all')?.addEventListener('click', function(){
-      const c = { necessary:true, analytics:false, ads:false };
-      writeConsent(c); hideBanner();
-    });
-    $('cookie-customize')?.addEventListener('click', openModal);
-
-    $('cookie-save')?.addEventListener('click', function(){
-      const c = {
-        necessary: true,
-        analytics: $('consent-analytics').checked,
-        ads: $('consent-ads').checked
-      };
-      writeConsent(c); applyConsent(c); closeModal(); hideBanner();
-    });
-    $('cookie-cancel')?.addEventListener('click', closeModal);
-
-    $('cookie-prefs-open')?.addEventListener('click', openModal);
-    $('dnsmpi')?.addEventListener('click', function(e){
-      e.preventDefault();
-      openModal();
-      const ads = $('consent-ads'); if (ads) ads.checked = false; // CA 옵트아웃 빠른 경로
-    });
-
-    document.addEventListener('DOMContentLoaded', function(){
-      const c = readConsent();
-      if (!c) { showBanner(); } else { applyConsent(c); }
-    });
-  })();
-  </script>
+  <!-- ✅ 인라인 Cookie Banner/Modal 마크업 & 로더 스크립트는 삭제됨.
+       /css/cookie.css + /js/consent.js 가 모든 기능을 담당합니다. -->
 </body>
 </html>

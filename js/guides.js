@@ -10,7 +10,7 @@
     const blocks = Array.from(document.querySelectorAll('.g-block'));
     toc.innerHTML = blocks.map(b => {
       const id = b.id;
-      const title = b.querySelector('.g-title')?.textContent || id;
+      const title = b.querySelector('.g-title')?.textContent?.trim() || id;
       return `<a href="#${id}">${title}</a>`;
     }).join('');
   }
@@ -19,19 +19,23 @@
     const input = document.getElementById('guide-search');
     const counter = document.getElementById('guide-count');
     if (!input) return;
+
     const blocks = Array.from(document.querySelectorAll('.g-block'));
+    const cards  = Array.from(document.querySelectorAll('.guide-card')); // 수동 카드와 동기화
 
     const apply = () => {
       const q = (input.value || '').trim().toLowerCase();
       let shown = 0;
-      blocks.forEach(b => {
+      blocks.forEach((b, i) => {
         const text = b.textContent.toLowerCase();
         const hit = !q || text.includes(q);
         b.style.display = hit ? '' : 'none';
+        if (cards[i]) cards[i].style.display = hit ? '' : 'none';
         if (hit) shown++;
       });
-      if (counter) counter.textContent = shown ? `표시: ${shown}개` : '표시: 0개';
+      if (counter) counter.textContent = `표시: ${shown}개`;
     };
+
     input.addEventListener('input', apply);
     apply();
   }
@@ -63,32 +67,32 @@
     }));
   }
 
-  // 내부 앵커(#bear 등) 클릭 시 라우터로 가지 않게 가로채서 스크롤만
+  // 내부 앵커(#id) 스무스 스크롤
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="#"]');
     if (!a) return;
     const href = a.getAttribute('href') || '';
-    if (href.startsWith('#/')) return;            // 라우팅용은 건드리지 않음
+    if (href.startsWith('#/')) return; // 라우팅 링크 제외
     const target = document.querySelector(href);
     if (!target) return;
     e.preventDefault();
     target.scrollIntoView({ behavior: 'smooth' });
   });
 
-  // ✅ 외부에서 재실행 가능하도록 공개
+  // 외부 호출 가능
   window.GUIDES_apply = async function (root) {
     await loadIncludes(root || document);
     buildTOC();
     initSearch();
   };
 
-  // 독립 문서로 직접 열린 경우 자동 1회 실행
+  // 자동 1회 실행
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => window.GUIDES_apply(document), { once: true });
   } else {
     window.GUIDES_apply(document);
   }
 
-  // 언어 변경 시 TOC 제목 갱신
+  // 언어 변경 시 TOC 갱신
   document.addEventListener('i18n:changed', buildTOC);
 })();

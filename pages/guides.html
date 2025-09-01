@@ -9,25 +9,23 @@
 
   <link rel="stylesheet" href="/css/guides.css?v=now">
 
-  <!-- i18n (번역은 나중에) -->
+  <!-- i18n -->
   <script src="/js/i18n.js?v=now" defer></script>
   <script>
   document.addEventListener('DOMContentLoaded', async () => {
     const raw = (localStorage.getItem('lang') || navigator.language || 'ko').replace('_','-');
     const lang = raw.startsWith('zh') ? (raw.toLowerCase().includes('tw') ? 'zh-TW' : 'zh-CN')
                                       : (raw.split('-')[0] || 'ko');
-    await I18N.init({ lang, namespaces: ['db','guides'] });
+    // guides + 각 가이드용 네임스페이스를 필요만큼 추가
+    await I18N.init({ lang, namespaces: ['db','guides','f2p-2nd-gen'] });
     I18N.applyTo(document);
   });
   </script>
 
-  <!-- 공통 스크립트 (TOC/검색/partial 로더 포함) -->
+  <!-- 공통 스크립트 -->
   <script src="/js/guides.js?v=now" defer></script>
 
-  <style>
-    /* 라우터 타지 않는 내부 앵커 스크롤 보조 */
-    .anchor-link { cursor:pointer; }
-  </style>
+  <style>.anchor-link{cursor:pointer}</style>
 </head>
 <body>
 
@@ -47,30 +45,34 @@
 
   <hr class="sep">
 
-  <!-- 카드 -->
-<a class="guide-card anchor-link" href="#bear">
-  <h3 class="guide-card__title" data-i18n="guide.bear.title">곰사냥 집결장 조합 추천</h3>
-</a>
+  <!-- 카드 영역: JS가 .g-block 들을 읽어 자동 생성 -->
+  <div id="guide-cards"></div>
 
-<!-- 섹션 타이틀 -->
-<section class="g-block" id="bear" data-guide="bear">
-  <h2 class="g-title" data-i18n="guide.bear.title">곰사냥 집결장 조합 추천</h2>
-  <div data-include="/pages/guides/bear-hunt-guide.html"></div>
+  <!-- ===== 섹션들만 유지 ===== -->
+
+  <!-- 섹션: 곰사냥 -->
+  <section class="g-block" id="bear" data-guide="bear">
+    <h2 class="g-title" data-i18n="guide.bear.title">곰사냥 집결장 조합 추천</h2>
+    <div data-include="/pages/guides/bear-hunt-guide.html"></div>
+  </section>
+
+  <!-- 섹션: 초보자 가이드 -->
+<section class="g-block" id="beginner" data-guide="beginner">
+  <h2 class="g-title" data-i18n="beginner.h1">킹샷 초보자 가이드</h2>
+  <div data-include="/pages/guides/beginner.html"></div>
 </section>
 
 
   <script>
-  // 해시(#bear) 클릭 시 라우터로 넘어가지 않도록 가로채서 스크롤만 수행
+  // 내부 앵커 클릭 시 라우터 미트리거, 부드러운 스크롤만
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a.anchor-link[href^="#"]');
     if (!a) return;
     const sel = a.getAttribute('href');
     const target = document.querySelector(sel);
     if (!target) return;
-    e.preventDefault();                               // 라우터로 안 가게 막음
-    target.scrollIntoView({ behavior: 'smooth' });    // 부드럽게 스크롤
-    // URL은 바꾸지 않거나, 표시만 바꾸고 싶으면 아래 주석 해제(라우터 미트리거)
-    // history.replaceState(null, '', location.pathname + location.search + '#/guides' + sel);
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth' });
   });
   </script>
 </body>

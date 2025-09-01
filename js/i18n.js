@@ -1,201 +1,236 @@
-// /js/i18n.js (namespace loader + dot-path & flat-key support + title/meta sync)
-// 개발 중: 캐시버스터 즉시반영(Date.now()), 운영 시: 버전 번호로 교체
+// /js/i18n.js (v1.2 - namespace loader, dot-path, title/meta via data-i18n[-attr])
 (function (global) {
   'use strict';
 
-  // state
+  // ===== State =====
   var dict = {};
   var current = 'ko';
   var supported = ['ko', 'en', 'ja', 'zh-CN', 'zh-TW'];
   var loadedNamespaces = [];
+  var siteTitleSuffix = 'KingshotData';
 
-  // ---------- utils ----------
-  async function fetchJSON(url) {
-    const res = await fetch(url, { cache: 'no-store' });
-    if (!res.ok) throw new Error('i18n load error: ' + url);
-    return await res.json();
+  // ===== Utils =====
+  function fetchJSON(url) {
+    return fetch(url, { cache: 'no-store' }).then(function (res) {
+      if (!res.ok) throw new Error('i18n load error: ' + url + ' (' + res.status + ')');
+      return res.json();
+    });
   }
-
   function deepMerge(target, source) {
     if (!source || typeof source !== 'object') return target || source;
     target = target && typeof target === 'object' ? target : {};
-    for (const k of Object.keys(source)) {
-      const sv = source[k];
+    Object.keys(source).forEach(function (k) {
+      var sv = source[k];
       if (sv && typeof sv === 'object' && !Array.isArray(sv)) {
         target[k] = deepMerge(target[k] || {}, sv);
       } else {
         target[k] = sv;
       }
-    }
+    });
     return target;
   }
-
   function getByPath(obj, path) {
     if (!path) return undefined;
-    return String(path).split('.').reduce((o, key) => (o && o[key] !== undefined ? o[key] : undefined), obj);
+    return String(path).split('.').reduce(function (o, key) {
+      return (o && o[key] !== undefined) ? o[key] : undefined;
+    }, obj);
   }
 
-  function has(key) {
-    return getByPath(dict, key) !== undefined || dict[key] !== undefined;
+  // ===== URL Resolver =====
+  // ns에 '/'가 있든 없든 둘 다 시도:
+  // 1) /i18n/{lang}/{ns}.json
+  // 2) /i18n/{ns}/{lang}.json
+  function buildUrls(ns, lang) {
+    var v = Date.now();
+    return [
+      '/i18n/' + lang + '/' + ns + '.json?v=' + v,
+      '/i18n/' + ns + '/' + lang + '.json?v=' + v
+    ];
   }
 
-  // ---------- loaders ----------
-  async function loadNamespace(ns, lang) {
-    const langToUse = lang || current;
-    const url = `/i18n/${langToUse}/${ns}.json?v=now`;  // ✅ 즉시반영
-    try {
-      const obj = await fetchJSON(url);
-      dict = deepMerge(dict, obj);
-      if (loadedNamespaces.indexOf(ns) === -1) loadedNamespaces.push(ns);
-      apply();
-      return true;
-    } catch (_) {
-      return false;
+  // ===== Loaders =====
+  function loadNamespace(ns, lang) {
+    var langToUse = lang || current;
+    var urls = buildUrls(ns, langToUse);
+
+    // 순차 시도
+    var i = 0;
+    function tryNext() {
+      if (i >= urls.length) {
+        console.warn('[i18n] not found ns:', ns, 'lang:', langToUse, 'tried:', urls);
+        return Promise.resolve(false);
+      }
+      var url = urls[i++];
+      return fetchJSON(url).then(function (obj) {
+        dict = deepMerge(dict, obj);
+        if (loadedNamespaces.indexOf(ns) === -1) loadedNamespaces.push(ns);
+        console.info('[i18n] loaded:', url);
+        return true;
+      }).catch(function () {
+        return tryNext();
+      });
     }
+    return tryNext();
   }
 
-  // ✅ 통합 파일 로더 (/locales/{lang}.json)
-  async function loadUnified(lang) {
-    const langToUse = lang || current;
-    const url = `/locales/${langToUse}.json?v=now`;      // ✅ 즉시반영
-    const obj = await fetchJSON(url);
-    dict = deepMerge(dict, obj);
-    apply();
-    return true;
+  function loadUnified(lang) {
+    var langToUse = lang || current;
+    var url = '/locales/' + langToUse + '.json?v=' + Date.now();
+    return fetchJSON(url).then(function (obj) {
+      dict = deepMerge(dict, obj);
+      console.info('[i18n] unified loaded:', url);
+      return true;
+    });
   }
 
-  // ---------- translate ----------
+  // ===== Translate =====
+  function t(key, fallback) {
+    var v = getByPath(dict, key);
+    if (v === undefined && dict[key] !== undefined) v = dict[key];
+    return (v !== undefined) ? v : (fallback !== undefined ? fallback : key);
+  }
   function translateScope(scope) {
-    const root = scope || document;
+    var root = scope || document;
 
-    // 텍스트 노드 치환
-    root.querySelectorAll('[data-i18n]').forEach((el) => {
-      const key = el.getAttribute('data-i18n');
-      let val = getByPath(dict, key);
-      if (val === undefined && dict[key] !== undefined) val = dict[key];
+    // 텍스트 치환
+    root.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      var val = t(key, el.textContent || key);
       if (val !== undefined) el.textContent = val;
     });
 
-    // 속성 치환: data-i18n-attr="placeholder:xxx; aria-label:yyy"
-    root.querySelectorAll('[data-i18n-attr]').forEach((el) => {
-      const pairs = el.getAttribute('data-i18n-attr')
-        .split(';').map((s) => s.trim()).filter(Boolean);
-      pairs.forEach((pair) => {
-        const parts = pair.split(':');
-        const attr = (parts[0] || '').trim();
-        const key = (parts[1] || '').trim();
+    // 속성 치환: data-i18n-attr="placeholder:foo; aria-label:bar"
+    root.querySelectorAll('[data-i18n-attr]').forEach(function (el) {
+      var pairs = el.getAttribute('data-i18n-attr')
+        .split(';').map(function (s) { return s.trim(); }).filter(Boolean);
+      pairs.forEach(function (pair) {
+        var parts = pair.split(':');
+        var attr = (parts[0] || '').trim();
+        var key = (parts[1] || '').trim();
         if (!attr || !key) return;
-        let val = getByPath(dict, key);
-        if (val === undefined && dict[key] !== undefined) val = dict[key];
+        var val = t(key, el.getAttribute(attr) || key);
         if (val !== undefined) el.setAttribute(attr, val);
       });
     });
 
-    // ✅ 호환: data-i18n-placeholder / data-i18n-aria-label (기존 마크업 그대로 지원)
-    root.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
-      const key = el.getAttribute('data-i18n-placeholder');
-      const val = t(key, el.getAttribute('placeholder') || '');
-      el.setAttribute('placeholder', val);
+    // 호환: 개별 단축
+    root.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n-placeholder');
+      el.setAttribute('placeholder', t(key, el.getAttribute('placeholder') || key));
     });
-    root.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
-      const key = el.getAttribute('data-i18n-aria-label');
-      const val = t(key, el.getAttribute('aria-label') || '');
-      el.setAttribute('aria-label', val);
+    root.querySelectorAll('[data-i18n-aria-label]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n-aria-label');
+      el.setAttribute('aria-label', t(key, el.getAttribute('aria-label') || key));
     });
   }
 
   function apply() {
-    if (typeof document !== 'undefined') {
-      translateScope(document);
-      syncTitles();
-    }
+    if (typeof document === 'undefined') return;
+    translateScope(document);
+    syncTitles(); // fallback 전용
   }
 
-  // ---------- init / setLang ----------
-  async function init(opts) {
+  // ===== Init / setLang =====
+  function parseNsFromMeta() {
+    var m = document.querySelector('meta[name="i18n-ns"]');
+    if (!m || !m.content) return [];
+    return m.content.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+
+  function init(opts) {
     opts = opts || {};
     supported = opts.supported || supported;
-    const pref = opts.lang || 'ko';
+    var pref = opts.lang || 'ko';
     current = supported.indexOf(pref) >= 0 ? pref : supported[0];
+
     try { localStorage.setItem('lang', current); } catch (_) {}
 
-    const preload = Array.isArray(opts.namespaces) ? opts.namespaces : ['common'];
-    if (preload.length === 0) {
-      await loadUnified(current);
-    } else {
-      for (const ns of preload) { await loadNamespace(ns, current); }
-    }
-    apply();
-  }
-
-  async function setLang(lang) {
-    if (supported.indexOf(lang) < 0) return;
-    current = lang;
-    try { localStorage.setItem('lang', lang); } catch (_) {}
-
-    dict = {};
-    if (loadedNamespaces.length > 0) {
-      for (const ns of loadedNamespaces.slice()) {
-        await loadNamespace(ns, current);
-      }
-    } else {
-      await loadUnified(current);
-    }
-    apply();
-
+    // 사이트 타이틀 접미사(선택)
     try {
-      const sp = new URLSearchParams(location.search);
-      sp.set('lang', lang);
-      history.replaceState(null, '', `${location.pathname}?${sp}`);
+      var metaSite = document.querySelector('meta[name="site-title"]');
+      if (metaSite && metaSite.content) siteTitleSuffix = metaSite.content;
     } catch (_) {}
 
-    if (typeof document !== 'undefined') {
-      document.dispatchEvent(new CustomEvent('i18n:changed', { detail: { lang } }));
-    }
+    // 네임스페이스 결정: 옵션 > meta[name=i18n-ns] > ['common']
+    var preload = Array.isArray(opts.namespaces) && opts.namespaces.length
+      ? opts.namespaces
+      : parseNsFromMeta();
+    if (!preload.length) preload = ['common'];
+
+    // 순차 로드
+    var p = Promise.resolve();
+    preload.forEach(function (ns) {
+      p = p.then(function () { return loadNamespace(ns, current); });
+    });
+
+    return p.then(function () {
+      apply();
+      document.dispatchEvent(new CustomEvent('i18n:ready', { detail: { lang: current } }));
+    });
   }
 
-  function t(key, fallback) {
-    let v = getByPath(dict, key);
-    if (v === undefined && dict[key] !== undefined) v = dict[key];
-    return v !== undefined ? v : (fallback !== undefined ? fallback : key);
+  function setLang(lang) {
+    if (supported.indexOf(lang) < 0) return Promise.resolve(false);
+    current = lang;
+    try { localStorage.setItem('lang', lang); } catch (_) {}
+    dict = {};
+
+    var p = Promise.resolve();
+    if (loadedNamespaces.length) {
+      loadedNamespaces.slice().forEach(function (ns) {
+        p = p.then(function () { return loadNamespace(ns, current); });
+      });
+    } else {
+      p = loadUnified(current);
+    }
+    return p.then(function () {
+      apply();
+      try {
+        var sp = new URLSearchParams(location.search);
+        sp.set('lang', lang);
+        history.replaceState(null, '', location.pathname + '?' + sp);
+      } catch (_) {}
+      document.dispatchEvent(new CustomEvent('i18n:changed', { detail: { lang: lang } }));
+      return true;
+    });
   }
 
   function applyTo(root) {
     if (!root) return;
     translateScope(root);
-    syncTitles();
+    syncTitles(); // fallback
   }
 
-  // ---------- title/meta sync ----------
+  // ===== Title/Meta Fallback =====
+  // 원칙: <title>과 <meta>도 data-i18n / data-i18n-attr로 치환된다.
+  // 다만 일부 브라우저/마크업에서 누락될 때 보조로 한 번 더 시도.
   function syncTitles() {
     if (typeof document === 'undefined') return;
 
-    const h1 = document.getElementById('page-title');
-    const metaTitleKey = document.querySelector('meta[name="db-title"]')?.content;
-    const titleKey = metaTitleKey || (h1?.dataset?.i18n);
-    if (titleKey && h1) {
-      const txt = t(titleKey, h1.textContent || titleKey);
-      h1.textContent = txt;
-      document.title = `${txt} | DataKorea`;
+    // 1) <title data-i18n="...">가 있다면 이미 translateScope로 바뀜.
+    //    만약 data-i18n이 없고, #page-title에 data-i18n이 있으면 그걸로 title 보조.
+    var titleEl = document.querySelector('title');
+    if (titleEl && !titleEl.getAttribute('data-i18n')) {
+      var h1 = document.getElementById('page-title');
+      var key = h1 && h1.getAttribute('data-i18n');
+      if (key) {
+        var txt = t(key, h1.textContent || key);
+        if (txt) document.title = txt + ' | ' + siteTitleSuffix;
+      }
     }
 
-    const metaDescEl = document.querySelector('meta[name="description"]');
-    if (metaDescEl?.content) {
-      const descTxt = t(metaDescEl.content, metaDescEl.content);
-      metaDescEl.setAttribute('content', descTxt);
-    }
+    // 2) <meta name="description" data-i18n-attr="content:...">는 translateScope가 처리함.
+    //    별도 조치 필요 없음.
   }
 
-  // ---------- export ----------
+  // ===== Export =====
   global.I18N = {
-    init,
-    setLang,
-    t,
-    has,
-    applyTo,
-    loadNamespace,
-    loadUnified,
+    init: init,
+    setLang: setLang,
+    t: t,
+    applyTo: applyTo,
+    loadNamespace: loadNamespace,
+    loadUnified: loadUnified,
     get current() { return current; }
   };
-
 })(window);
