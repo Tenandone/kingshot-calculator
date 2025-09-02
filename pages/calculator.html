@@ -47,16 +47,48 @@
         </a>
 
         <!-- 병력훈련계산기 -->
-        <a class="card" href="#calc-training">
-          <div class="thumb">
-            <img src="/img/icons/infantry.webp" alt="병력훈련계산기" loading="lazy">
-          </div>
-          <div class="card-body">
-            <h3 class="card-title" data-i18n="calcHub.cards.training.title">병력훈련계산기</h3>
-          </div>
-        </a>
-      </div>
-    </section>
+<a class="card" href="#calc-training">
+  <div class="thumb">
+    <img src="/img/icons/infantry.webp" alt="병력훈련계산기" loading="lazy" decoding="async">
+  </div>
+  <div class="card-body">
+    <h3 class="card-title" data-i18n="calcHub.cards.training.title">병력훈련계산기</h3>
+  </div>
+</a>
+
+<!-- VIP 포인트 계산기 -->
+<a class="card" href="#calc-vip" data-keep-lang>
+  <div class="thumb">
+    <img src="/img/icons/vip.webp"
+         alt="VIP 포인트 계산기"
+         loading="lazy" decoding="async"
+         data-i18n-attr="alt:alt.calcVip">
+  </div>
+  <div class="card-body">
+    <h3 class="card-title" data-i18n="title.calcVip">VIP 포인트 계산기</h3>
+  </div>
+</a>
+
+<script>
+  // 언어 유지(그대로 사용)
+  document.querySelectorAll('a[data-keep-lang]').forEach(function(a){
+    if (location.search) a.href += location.search;
+  });
+</script>
+
+
+
+
+
+
+
+<!-- ?lang 유지 스크립트 (카드 목록 하단에 1회만) -->
+<script>
+document.querySelectorAll('a[data-keep-lang]').forEach(a=>{
+  if (location.search) a.href += location.search;
+});
+</script>
+
   </main>
 
   <style>

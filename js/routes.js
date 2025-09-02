@@ -513,6 +513,46 @@ async function ensureI18NReady() {
         }
       },
 
+      '/calc-vip': {
+  title: 'VIP 포인트 계산기 - KingshotData.kr',
+  render: async (el) => {
+    // (선택) 공통 계산기 CSS 1회 로드
+    if (!document.querySelector('link[rel="stylesheet"][href="/css/kingshot_calc.css?v=now"]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/css/kingshot_calc.css?v=now';
+      document.head.appendChild(link);
+    }
+
+    const qs = location.search || ''; // ?lang 유지
+    el.innerHTML = `
+      <div class="calc-embed-wrap">
+        <iframe
+          class="calc-embed-frame"
+          style="width:100%; min-height:1100px; border:0; background:transparent; display:block"
+          src="/pages/calculators/vip.html${qs}"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          title="VIP 포인트 계산기"
+        ></iframe>
+      </div>
+    `;
+
+    setTitle('calcVip.meta.title', 'VIP 포인트 계산기 - KingshotData.kr');
+    window.scrollTo({ top: 0 });
+
+    // 자동 높이 조절(자식 페이지의 postMessage 수신)
+    const frame = el.querySelector('.calc-embed-frame');
+    window.addEventListener('message', function (e) {
+      if (!e || !e.data || e.data.type !== 'KSD_CALC_RESIZE') return;
+      frame.style.minHeight = Math.max(900, e.data.height) + 'px';
+    }, { passive: true });
+  }
+},
+
+
+
+
       '/privacy': {
         title: '개인정보처리방침 - KingshotData.kr',
         render: async (el) => {
