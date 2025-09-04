@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kingshot 댓글 이벤트 추첨기</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;background:#fff;margin:0;color:#111}
+    header{background:#f7f7f8;border-bottom:1px solid #ddd;padding:12px}
+    h1{margin:0;font-size:18px}
+    main{padding:20px;max-width:900px;margin:auto}
+    section{background:#fafafa;border:1px solid #eee;border-radius:12px;padding:16px;margin-bottom:16px}
+    h2{font-size:16px;margin-top:0}
+    textarea,input{width:100%;box-sizing:border-box;border:1px solid #ccc;border-radius:8px;padding:8px;margin:4px 0;font-size:14px}
+    .btn{padding:8px 12px;border-radius:8px;border:1px solid #ccc;background:#fff;cursor:pointer;margin-right:6px}
+    .btn.primary{background:#0b57d0;color:#fff;border:none}
+    .winner-list{border:1px dashed #aaa;border-radius:8px;padding:10px;margin:6px 0}
+
+    /* ▼ 참가자 그리드(가로 나열) */
+    .list-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:8px}
+    .chip{display:inline-block;padding:6px 10px;border:1px solid #ddd;border-radius:999px;background:#fff;
+          font-size:13px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .muted{color:#666;font-size:13px}
+    #list{min-height:140px} /* 입력창은 조금만 보이게 */
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kingshot 댓글 이벤트 추첨기</h1>
+  </header>
+  <main>
+    <section>
+      <h2>① 원문 붙여넣기</h2>
+      <textarea id="raw" placeholder="네이버 카페 댓글 원문 전체 복사 후 붙여넣기"></textarea>
+      <button class="btn" id="btnParse">참가자 추출</button>
+      <button class="btn" id="btnClear">지우기</button>
+    </section>
+
+    <section>
+      <h2>② 경품 설정</h2>
+      <label>🥇 1등 경품명 <input id="prize1Label" type="text" value="롯데리아 한우 불고기버거 세트"></label>
+      <label>1등 인원수 <input id="prize1Count" type="number" value="1"></label>
+      <label>🥈 2등 경품명 <input id="prize2Label" type="text" value="구글 기프트카드 (1만원)"></label>
+      <label>2등 인원수 <input id="prize2Count" type="number" value="1"></label>
+      <label>🥉 3등 경품명 <input id="prize3Label" type="text" value="커피 기프티콘"></label>
+      <label>3등 인원수 <input id="prize3Count" type="number" value="20"></label>
+    </section>
+
+    <section>
+      <h2>③ 참가자 목록</h2>
+      <!-- 데이터 편집용(유지) -->
+      <textarea id="list" placeholder="닉네임을 줄바꿈으로 구분(자동으로 오른쪽 그리드에 표시됩니다)"></textarea>
+      <div class="muted">현재 참가자: <span id="count">0</span>명</div>
+
+      <!-- 가로 나열 미리보기 -->
+      <div id="listView" class="list-wrap" aria-live="polite"></div>
+    </section>
+
+    <section>
+      <h2>④ 추첨</h2>
+      <button class="btn primary" id="btnDraw">추첨하기</button>
+      <div id="results">
+        <div id="wPrize1" class="winner-list" hidden></div>
+        <div id="wPrize2" class="winner-list" hidden></div>
+        <div id="wPrize3" class="winner-list" hidden></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const raw = document.getElementById('raw');
+    const list = document.getElementById('list');
+    const listView = document.getElementById('listView');
+    const countEl = document.getElementById('count');
+
+    // 공용: 현재 텍스트 영역을 배열로 변환
+    function getNames(){
+      return list.value.split(/\n/).map(s=>s.trim()).filter(Boolean);
+    }
+
+    function updateCount(){
+      countEl.textContent = getNames().length;
+    }
+
+    // 참가자 칩 그리드 렌더링
+    function renderListView(){
+      const names = getNames();
+      if (!names.length){ listView.innerHTML = '<span class="muted">아직 참가자가 없습니다.</span>'; return; }
+      listView.innerHTML = names.map(n=>`<span class="chip" title="${n}">${n}</span>`).join('');
+    }
+
+    document.getElementById('btnParse').addEventListener('click', ()=>{
+      const lines = raw.value.split(/\n/).map(s=>s.trim());
+      const names = [];
+      let expectName = false;
+      for (const line of lines){
+        if (!line) continue;
+        if (line === '프로필 사진'){ expectName = true; continue; }
+        if (expectName){ names.push(line); expectName=false; continue; }
+      }
+      list.value = names.join('\n');   // 편집용 저장
+      updateCount();
+      renderListView();                // 그리드 즉시 반영
+    });
+
+    document.getElementById('btnClear').addEventListener('click', ()=>{
+      raw.value=''; list.value='';
+      updateCount();
+      renderListView();
+    });
+
+    document.getElementById('btnDraw').addEventListener('click', ()=>{
+      const names = getNames();
+      if (!names.length){ alert('참가자가 없습니다.'); return; }
+      const shuffled = [...names].sort(()=>Math.random()-0.5);
+
+      const p1Label = document.getElementById('prize1Label').value;
+      const p1Count = parseInt(document.getElementById('prize1Count').value)||0;
+      const p2Label = document.getElementById('prize2Label').value;
+      const p2Count = parseInt(document.getElementById('prize2Count').value)||0;
+      const p3Label = document.getElementById('prize3Label').value;
+      const p3Count = parseInt(document.getElementById('prize3Count').value)||0;
+
+      const p1 = shuffled.slice(0,p1Count);
+      const p2 = shuffled.slice(p1Count,p1Count+p2Count);
+      const p3 = shuffled.slice(p1Count+p2Count,p1Count+p2Count+p3Count);
+
+      function render(el,label,list){
+        if(list.length){
+          el.hidden=false;
+          el.innerHTML = `<b>${label}</b><br>`+list.join(', ');
+        } else { el.hidden=true; }
+      }
+      render(document.getElementById('wPrize1'),'🥇 '+p1Label,p1);
+      render(document.getElementById('wPrize2'),'🥈 '+p2Label,p2);
+      render(document.getElementById('wPrize3'),'🥉 '+p3Label,p3);
+    });
+
+    // 입력창이 바뀌어도 즉시 칩 업데이트
+    list.addEventListener('input', ()=>{ updateCount(); renderListView(); });
+
+    // 초기 표시
+    updateCount();
+    renderListView();
+  </script>
+</body>
+</html>
