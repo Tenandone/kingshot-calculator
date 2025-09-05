@@ -47,3 +47,25 @@
 .guide-card__title{ margin:0 0 6px; font-size:16px; }
 .guide-card__desc{ margin:0; font-size:13px; }
 #guide-count { display: none !important; }
+
+/* ── 사라진 유적 포함문서 CSS 격리 ── */
+#ruins .ruins-scope {
+  /* 전역 규칙 영향 최소화 */
+  all: revert;
+  display: block;
+  font: 15px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;
+  color:#111;
+}
+#ruins .ruins-scope * { box-sizing:border-box; }
+#ruins .ruins-scope a { color:#0b57d0; text-decoration:none; }
+#ruins .ruins-scope a:hover { text-decoration:underline; }
+/* 포함문서 내부 .wrap 충돌 회피 */
+#ruins .ruins-scope .wrap { max-width:980px; margin:0 auto; padding:32px 16px; }
+/* 편의: 이미지 기본 반응형 */
+#ruins .ruins-scope img { max-width:100%; height:auto; display:block; }
+.lang { display: none; }
+html[lang="ko"] .lang-ko { display: inline; }
+html[lang="en"] .lang-en { display: inline; }
+html[lang="ja"] .lang-ja { display: inline; }
+html[lang="zh-CN"] .lang-zh-CN { display: inline; }
+html[lang="zh-TW"] .lang-zh-TW { display: inline; }
