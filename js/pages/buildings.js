@@ -1,51 +1,45 @@
-// /js/pages/buildings.js (i18n-ready final, with calculator adapter & i18n result rerun)
+// /js/pages/buildings.js (calculator-free, i18n-ready, with req-building auto-translate)
 (function () {
   'use strict';
-  // 표준키 → i18n 라벨
-window.KEY_TO_I18N = {
-  level: 'buildings.col.level',
-  reqBuilding: 'buildings.col.reqBuilding', // 새로 필요
-  bread: 'buildings.col.bread',
-  wood: 'buildings.col.wood',
-  stone: 'buildings.col.stone',
-  iron: 'buildings.col.iron',
-  truegold: 'buildings.col.gold',
-  buildTimeMin: 'buildings.col.buildTimeMin',
-  power: 'buildings.col.power'
-};
 
-// 렌더 후 테이블 헤더 텍스트를 번역으로 치환
-(function setupHeaderI18NBridge(){
-  function i18nHeaderText(raw){
-    const key = (window.KEY_TO_I18N && window.KEY_TO_I18N[raw]) || raw;
-    if (window.I18N && typeof I18N.t === 'function') {
-      return I18N.t(key, raw);
+  // 표준키 → i18n 라벨 매핑 (헤더 패치용)
+  window.KEY_TO_I18N = {
+    level: 'buildings.col.level',
+    reqBuilding: 'buildings.col.reqBuilding',
+    bread: 'buildings.col.bread',
+    wood: 'buildings.col.wood',
+    stone: 'buildings.col.stone',
+    iron: 'buildings.col.iron',
+    truegold: 'buildings.col.gold',
+    buildTimeMin: 'buildings.col.buildTimeMin',
+    power: 'buildings.col.power'
+  };
+
+  /* =============================
+   * 렌더 후 테이블 헤더 번역 치환
+   * ============================= */
+  (function setupHeaderI18NBridge(){
+    function i18nHeaderText(raw){
+      const key = (window.KEY_TO_I18N && window.KEY_TO_I18N[raw]) || raw;
+      if (window.I18N && typeof I18N.t === 'function') return I18N.t(key, raw);
+      return raw;
     }
-    return raw;
-  }
-
-  function patchTableHeaders(root){
-    const scope = root || document;
-    const ths = scope.querySelectorAll('table th, .table th, thead th');
-    ths.forEach(th => {
-      const raw = (th.textContent || '').trim();
-      if (!raw) return;
-      // 표준키면 번역 적용
-      if (window.KEY_TO_I18N && Object.prototype.hasOwnProperty.call(window.KEY_TO_I18N, raw)) {
-        th.textContent = i18nHeaderText(raw);
-      }
-    });
-  }
-
-  // 최초 진입/언어 변경/라우팅 변경 때마다 패치
-  document.addEventListener('DOMContentLoaded', () => setTimeout(() => patchTableHeaders(), 0));
-  document.addEventListener('i18n:changed', () => setTimeout(() => patchTableHeaders(), 0));
-  window.addEventListener('hashchange', () => setTimeout(() => patchTableHeaders(), 0));
-
-  // 혹시 SPA 내부 렌더가 비동기라면, 작은 지연으로 한 번 더
-  window.__patchKsHeaders = patchTableHeaders; // 수동 호출용 (원할 때 호출 가능)
-})();
-
+    function patchTableHeaders(root){
+      const scope = root || document;
+      const ths = scope.querySelectorAll('table th, .table th, thead th');
+      ths.forEach(th => {
+        const raw = (th.textContent || '').trim();
+        if (!raw) return;
+        if (window.KEY_TO_I18N && Object.prototype.hasOwnProperty.call(window.KEY_TO_I18N, raw)) {
+          th.textContent = i18nHeaderText(raw);
+        }
+      });
+    }
+    document.addEventListener('DOMContentLoaded', () => setTimeout(() => patchTableHeaders(), 0));
+    document.addEventListener('i18n:changed', () => setTimeout(() => patchTableHeaders(), 0));
+    window.addEventListener('hashchange', () => setTimeout(() => patchTableHeaders(), 0));
+    window.__patchKsHeaders = patchTableHeaders;
+  })();
 
   // ---- i18n helpers (안전 폴백) ----
   const t = (key, fallback) =>
@@ -116,12 +110,6 @@ window.KEY_TO_I18N = {
   }
 
   // ---------- Level 라벨 ----------
-  // 31→30-1, 32→30-2, 33→30-3, 34→30-4
-  // 35→TG1, 36~39→TG1-1..4
-  // 40→TG2, 41~44→TG2-1..4
-  // 45→TG3, 46~49→TG3-1..4
-  // 50→TG4, 51~54→TG4-1..4
-  // 55→TG5
   function levelToLabel(n) {
     const lv = Number(n);
     if (!Number.isFinite(lv)) return String(n);
@@ -143,12 +131,64 @@ window.KEY_TO_I18N = {
   };
 
   function resolveSlugVariant(rawSlug, rawVariant){
-    const key = norm(rawSlug);
-    const hit = SLUG_ALIAS[key];
-    return {
-      slug:     norm(hit && hit.slug ? hit.slug : key),
-      variant:  norm(hit && hit.variant ? hit.variant : (rawVariant || ''))
-    };
+  const key = norm(rawSlug);
+  const hit = SLUG_ALIAS[key] || null;
+  return {
+    slug:    norm(hit && hit.slug ? hit.slug : key),
+    variant: norm(hit && hit.variant ? hit.variant : (rawVariant || ''))
+  };
+}
+
+
+  /* =============================
+   * 요구 건물 자동 번역 유틸
+   * ============================= */
+  const BUILDING_I18N = {
+    "대사관":   { ko:"대사관", en:"Embassy",        ja:"大使館",   "zh-CN":"大使馆",   "zh-TW":"大使館" },
+    "야전병원": { ko:"야전병원", en:"Infirmary",      ja:"野戦病院", "zh-CN":"野战医院", "zh-TW":"野戰醫院" },
+    "궁병대":   { ko:"궁병대", en:"Archer Camp",     ja:"弓兵隊",   "zh-CN":"弓兵营",   "zh-TW":"弓兵營" },
+    "아카데미": { ko:"아카데미", en:"Academy",        ja:"アカデミー","zh-CN":"学院",    "zh-TW":"學院" },
+    "기병대":   { ko:"기병대", en:"Cavalry Camp",    ja:"騎兵隊",   "zh-CN":"骑兵营",   "zh-TW":"騎兵營" },
+    "보병대":   { ko:"보병대", en:"Infantry Camp",   ja:"歩兵隊",   "zh-CN":"步兵营",   "zh-TW":"步兵營" },
+    "석재공장": { ko:"석재공장", en:"Stoneworks",     ja:"石材工場", "zh-CN":"石材工坊", "zh-TW":"石材工坊" },
+    "제철공장": { ko:"제철공장", en:"Foundry",        ja:"製鉄工場", "zh-CN":"铸造所",   "zh-TW":"鑄造所" },
+    "방앗간":   { ko:"방앗간", en:"Mill",            ja:"粉挽き小屋","zh-CN":"磨坊",    "zh-TW":"磨坊" },
+    "민가":     { ko:"민가",   en:"House",           ja:"民家",     "zh-CN":"民居",     "zh-TW":"民居" },
+    "벌목장":   { ko:"벌목장", en:"Lumber Mill",     ja:"伐採場",   "zh-CN":"伐木场",   "zh-TW":"伐木場" },
+    "영웅의 홀": { ko:"영웅의 홀", en:"Hall of Heroes", ja:"英雄の間", "zh-CN":"英雄殿堂", "zh-TW":"英雄殿堂" },
+    "지휘부":   { ko:"지휘부", en:"Command Center",  ja:"指揮部",   "zh-CN":"指挥部",   "zh-TW":"指揮部" }
+  };
+  const UI_I18N = {
+    ko:{Lv:"Lv.", TG:"TG", comma:", "},
+    en:{Lv:"Lv.", TG:"TG", comma:", "},
+    ja:{Lv:"Lv.", TG:"TG", comma:", "},
+    "zh-CN":{Lv:"Lv.", TG:"TG", comma:"，"},
+    "zh-TW":{Lv:"Lv.", TG:"TG", comma:"，"}
+  };
+  function translateReqLabel(labelKo, lang) {
+    const ui = UI_I18N[lang] || UI_I18N.en;
+    return String(labelKo || '')
+      .split(',')
+      .map(s => s.trim())
+      .map(part => {
+        // [건물명] [TG?] [Lv.X?]
+        const m = part.match(/^([가-힣\s·'의]+?)\s*(TG)?\s*(Lv\.\s*\d+)?$/);
+        if (!m) {
+          // 비정형: 포함된 한글 건물명 전수 치환
+          let fb = part;
+          for (const koName of Object.keys(BUILDING_I18N)) {
+            const local = BUILDING_I18N[koName][lang] || koName;
+            fb = fb.replaceAll(koName, local);
+          }
+          return fb;
+        }
+        const [, nameKo, tg, lv] = m;
+        const local = (BUILDING_I18N[nameKo] && BUILDING_I18N[nameKo][lang]) || nameKo;
+        const tgOut = tg ? ` ${ui.TG}` : '';
+        const lvOut = lv ? ` ${lv.replace("Lv.", ui.Lv)}` : '';
+        return `${local}${tgOut}${lvOut}`.trim();
+      })
+      .join(ui.comma);
   }
 
   // ---------- data (cache) ----------
@@ -180,7 +220,15 @@ window.KEY_TO_I18N = {
 
   // ---- header/column finder (다국어 키워드 지원) ----
   const LEVEL_KEYS = ['레벨','lv','level','等级','等級'];
-  const TIME_KEYS  = ['건설','건축','build','construction','建設','建造','施工'];
+  const TIME_I18N_KEYS = [
+    'buildings.col.buildtime',
+    'buildings.col.buildtimemin',
+    'buildings.col.buildTimeMin',
+    'buildings.col.buildTime'
+  ];
+  const TIME_STRICT_RE = /^(?:건설\s*시간|건축\s*시간|build(?:ing)?\s*time|construction\s*time|建造時間|建設時間|施工時間)$/i;
+  const TIME_LOOSE_NEEDLES = ['건설','건축','build','construction','建設','建造','施工','time','시간'];
+
   const findIndexContains = (arr, needles) =>
     arr.findIndex(h => needles.some(n => String(h).toLowerCase().includes(n)));
 
@@ -193,7 +241,9 @@ window.KEY_TO_I18N = {
     return -1;
   };
 
-  // === 표 렌더 (크리스탈/트루골드→순금 통합 + TG 라벨 + 약어/시간 포맷 + 순금 자동 숨김) ===
+  /* =============================
+   * 표 렌더 (크리스탈/트루골드→순금 통합 + TG 라벨 + 약어/시간 포맷 + 순금 자동 숨김 + 요구건물 번역)
+   * ============================= */
   function buildTable(rows, ctx = {}) {
     if (!rows || !rows.length) return '';
 
@@ -204,31 +254,20 @@ window.KEY_TO_I18N = {
     let header = Array.isArray(rows[0]) ? rows[0].slice() : [];
     let body   = rows.slice(1).map(r => Array.isArray(r) ? r.slice() : []);
 
-    // ---- 인덱스 찾기 ----
-    // 레벨
+    // 레벨/시간 인덱스
     let idxLevel = findIndexContains(header, LEVEL_KEYS);
     if (idxLevel < 0) idxLevel = findHeader(header, ['buildings.col.level']);
-
-    // 시간(i18n 키 우선 → 정밀 정규식 → 느슨한 키워드)
-    const TIME_I18N_KEYS = [
-      'buildings.col.buildtime',
-      'buildings.col.buildtimemin',
-      'buildings.col.buildTimeMin',
-      'buildings.col.buildTime'
-    ];
-    const TIME_STRICT_RE = /^(?:건설\s*시간|건축\s*시간|build(?:ing)?\s*time|construction\s*time|建造時間|建設時間|施工時間)$/i;
-    const TIME_LOOSE_NEEDLES = ['건설','건축','build','construction','建設','建造','施工','time','시간'];
 
     let idxTime = findHeader(header, TIME_I18N_KEYS);
     if (idxTime < 0) idxTime = header.findIndex(h => TIME_STRICT_RE.test(String(h).trim()));
     if (idxTime < 0) idxTime = findIndexContains(header, TIME_LOOSE_NEEDLES);
 
-    // ---- 자원/순금 컬럼 탐색 ----
-    let idxGold  = findHeader(header, ['순금','gold','buildings.col.gold']);
+    // 자원/순금 컬럼 (alias 포함)
+    let idxGold  = findHeader(header, ['순금','gold','buildings.col.gold','buildings.col.truegold']);
     let idxCrys  = findHeader(header, ['크리스탈','crystal','水晶','クリスタル']);
     let idxTG    = findHeader(header, ['트루골드','true gold','truegold','tg']);
 
-    // (A) '크리스탈' → '순금'으로 통합
+    // (A) '크리스탈' → '순금'
     if (idxCrys >= 0 && idxGold < 0) {
       header[idxCrys] = t('buildings.col.gold', '순금');
       idxGold = idxCrys;
@@ -251,7 +290,7 @@ window.KEY_TO_I18N = {
       idxCrys = -1;
     }
 
-    // (B) '트루골드' → '순금'으로 통합
+    // (B) '트루골드' → '순금'
     if (idxTG >= 0 && idxGold < 0) {
       header[idxTG] = t('buildings.col.gold', '순금');
       idxGold = idxTG;
@@ -263,7 +302,7 @@ window.KEY_TO_I18N = {
         const isEmpty = (v) => {
           if (v === undefined || v === null) return true;
           const s = String(v).trim();
-          return (s === '' || s === '-' || s === '–' || s === '0');
+          return (s === '' || s === '–' || s === '-' || s === '0');
         };
         if (isEmpty(g) && !isEmpty(tg)) r[idxGold] = tg;
       });
@@ -275,17 +314,17 @@ window.KEY_TO_I18N = {
     }
 
     // (C) 순금 열이 없으면 삽입(0으로)
-    if (findHeader(header, [t('buildings.col.gold','순금'), '순금','gold','buildings.col.gold']) < 0) {
+    if (findHeader(header, [t('buildings.col.gold','순금'), '순금','gold','buildings.col.gold','buildings.col.truegold']) < 0) {
       const pos = idxTime >= 0 ? idxTime : header.length;
       header.splice(pos, 0, t('buildings.col.gold', '순금'));
       body.forEach(r => r.splice(pos, 0, 0));
       if (idxTime >= 0) idxTime++;
       idxGold = pos;
     } else {
-      idxGold = findHeader(header, [t('buildings.col.gold','순금'), '순금','gold','buildings.col.gold']);
+      idxGold = findHeader(header, [t('buildings.col.gold','순금'), '순금','gold','buildings.col.gold','buildings.col.truegold']);
     }
 
-    // (D) 순금이 모든 행에서 비어있으면 컬럼 제거(표시만 숨김)
+    // (D) 순금이 전 행에서 비어있으면 컬럼 제거
     (function maybeHideGold() {
       if (idxGold < 0) return;
       const isEmptyGold = (v) => {
@@ -294,7 +333,7 @@ window.KEY_TO_I18N = {
         if (s === '' || s === '-' || s === '–' || s === 'null' || s === 'undefined') return true;
         const num = Number(s.replace(/k$/,'000').replace(/m$/,'000000').replace(/b$/,'000000000'));
         if (Number.isFinite(num)) return num <= 0;
-        return false; // 숫자 아닌 텍스트면 보수적으로 표시 유지
+        return false;
       };
       const hasAny = body.some(r => !isEmptyGold(r[idxGold]));
       if (!hasAny) {
@@ -306,9 +345,23 @@ window.KEY_TO_I18N = {
       }
     })();
 
-    // 자원 약어 포맷 대상 (다국어/키 포함)
+    // === 요구 건물 열 자동 번역 ===
+    let idxReq = findHeader(header, [
+      'buildings.col.reqBuilding', 'buildings.col.reqbuilding', // alias 지원
+      '요구 건물','required buildings','必要建物','所需建筑','所需建築'
+    ]);
+    if (idxReq >= 0) {
+      const lang = (window.I18N && I18N.current) ? I18N.current : 'ko';
+      body.forEach(r => {
+        if (typeof r[idxReq] === 'string' && r[idxReq]) {
+          r[idxReq] = translateReqLabel(r[idxReq], lang);
+        }
+      });
+    }
+
+    // 자원 약어 포맷 열 찾기
     const RESOURCE_NAMES = ['빵','bread','나무','wood','석재','stone','철','iron', t('buildings.col.gold','순금').toLowerCase(), 'gold'];
-    const resourceKeyRe = /^buildings\.col\.(bread|wood|stone|iron|gold)$/i;
+    const resourceKeyRe = /^buildings\.col\.(bread|wood|stone|iron|gold|truegold)$/i; // truegold alias 허용
 
     const resourceIdxs = header.reduce((acc, h, i) => {
       const str = String(h);
@@ -317,7 +370,7 @@ window.KEY_TO_I18N = {
       return acc;
     }, []);
 
-    // ----- 헤더 출력 (i18n 키면 번역 + data-i18n 부여)
+    // 헤더 출력 (i18n 키면 data-i18n 부여)
     const ths = header.map((h) => {
       const key = String(h);
       const label = t(key, key);
@@ -325,22 +378,17 @@ window.KEY_TO_I18N = {
       return `<th${isKey ? ` data-i18n="${esc(key)}"` : ''}>${esc(label)}</th>`;
     }).join('');
 
-    // ----- 바디 출력
+    // 바디 출력
     const trs = body.map((r) => {
       const tds = r.map((c, i) => {
-        // 레벨 열: TG 라벨 처리
         if (useTGLabels && i === idxLevel) return `<td>${esc(levelToLabel(c))}</td>`;
-        // 시간 열: idxTime이 레벨과 겹치지 않을 때만 시간 포맷 적용 (최종 가드)
         if (i === idxTime && idxTime !== idxLevel) return `<td>${esc(fmtTime(c))}</td>`;
-        // 자원 열: 약어
         if (resourceIdxs.includes(i)) return `<td>${esc(fmtAbbrev(c))}</td>`;
-        // 기본
         return `<td>${esc(c)}</td>`;
       }).join('');
       return `<tr>${tds}</tr>`;
     }).join('');
 
-    // ----- 최종 반환
     return `<div class="table-wrap">
       <table>
         <thead><tr>${ths}</tr></thead>
@@ -400,7 +448,6 @@ window.KEY_TO_I18N = {
   // item → 카드 항목들(variants 포함)
   function buildCardItems(b){
     if (b.hidden) return [];
-    // i18n 키용 슬러그는 정규화(+구슬러그 보정)
     const mapped = resolveSlugVariant(b.slug);
     const baseSlug = String(mapped.slug);
     const sKey = keySlug(baseSlug);
@@ -450,7 +497,6 @@ window.KEY_TO_I18N = {
       const list = await loadData();
       const items = list.flatMap(buildCardItems);
 
-      // 고정 순서 정렬 → 그 외는 key 보조 정렬
       items.sort((a,b) => {
         const d = orderScore(a.key) - orderScore(b.key);
         if (d) return d;
@@ -492,132 +538,8 @@ window.KEY_TO_I18N = {
 
   // 언락 제목 커스텀 맵 (JSON 키는 그대로 unlocks 사용)
   const UNLOCK_TITLE_BY_SLUG = {
-    'kitchen': 'buildings.kitchenSchedule' // i18n key
+    'kitchen': 'buildings.kitchenSchedule'
   };
-
-  // =====================================================================
-  // ★ 계산기 어댑터 & 연동 (라벨/키 → 머신키, i18n 컨텍스트 전달, 언어 변경 재계산)
-  // =====================================================================
-
-  // 라벨 → 머신키 역매핑
-  const HEADER_REVERSE_MAP = {
-    // KO
-    '레벨':'level','빵':'bread','나무':'wood','석재':'stone','철':'iron','순금':'truegold','건설 시간':'buildTime',
-    // EN
-    'level':'level','bread':'bread','wood':'wood','stone':'stone','iron':'iron','gold':'truegold','truegold':'truegold','build time':'buildTime','construction time':'buildTime',
-    // JA
-    'レベル':'level','パン':'bread','木材':'wood','石材':'stone','鉄':'iron','真金':'truegold','建設時間':'buildTime',
-    // zh-CN
-    '等级':'level','面包':'bread','木材':'wood','石材':'stone','铁':'iron','真金':'truegold','建造时间':'buildTime',
-    // zh-TW
-    '等級':'level','麵包':'bread','木材':'wood','石材':'stone','鐵':'iron','真金':'truegold','建造時間':'buildTime'
-  };
-
-  // i18n 키 → 컬럼 id (예: buildings.col.buildTime → buildTime)
-  function idFromI18nKey(k){
-    const m = /^buildings\.col\.([A-Za-z0-9_-]+)$/i.exec(String(k));
-    if (!m) return null;
-    return m[1];
-  }
-
-  // 머신 id 표준화 (buildTimeMin → buildTime, gold → truegold 등)
-  function normalizeId(id){
-    const raw = String(id);
-    const flat = raw.replace(/[-_]/g,'').toLowerCase();
-    switch(flat){
-      case 'gold':         return 'truegold';
-      case 'truegold':     return 'truegold';
-      case 'buildtimemin':
-      case 'buildtime':
-      case 'constructiontime':
-      case 'time':         return 'buildTime';
-      case 'level':        return 'level';
-      case 'bread':        return 'bread';
-      case 'wood':         return 'wood';
-      case 'stone':        return 'stone';
-      case 'iron':         return 'iron';
-      default:             return raw; // 알 수 없는 것은 그대로
-    }
-  }
-
-  // 헤더 1행을 머신키 배열로 정규화
-  function normalizeHeaderToIds(headerRow){
-    return headerRow.map(h => {
-      const s = String(h);
-      // i18n 키?
-      const fromKey = idFromI18nKey(s);
-      if (fromKey) return normalizeId(fromKey);
-      // 라벨?
-      const fromLabel = HEADER_REVERSE_MAP[s.toLowerCase()] || HEADER_REVERSE_MAP[s];
-      if (fromLabel) return normalizeId(fromLabel);
-      // 이미 머신키?
-      return normalizeId(s);
-    });
-  }
-
-  // 전체 테이블을 계산기용으로 변환
-  function adaptTableForCalculator(table){
-    if (!Array.isArray(table) || table.length === 0) return table;
-    const headerIds = normalizeHeaderToIds(table[0]);
-    return [headerIds, ...table.slice(1)];
-  }
-
-  // 계산기 컨텍스트 구성(언어, t, 포맷터, 컬럼 라벨 맵)
-  function buildCalcContext(meta, headerIds){
-    const lang = (window.I18N && I18N.current) ? I18N.current : 'ko';
-    const columns = {};
-    (headerIds || []).forEach(id => {
-      columns[id] = t(`buildings.col.${id}`, id);
-    });
-    const units = {
-      thousand: t('num.k','k'),
-      million:  t('num.m','m'),
-      billion:  t('num.b','b'),
-      hour:     t('time.h','h'),
-      minute:   t('time.m','m'),
-      day:      t('time.d','d')
-    };
-    return {
-      lang,
-      t: (k, fb) => t(k, fb),
-      fmt: { number: fmtAbbrev, time: fmtTime, level: levelToLabel },
-      columns,
-      units,
-      meta: meta || {}
-    };
-  }
-
-  // 외부 계산기 실행 래퍼 (여러 구현 감지)
-  function runCalculator(table, ctx){
-    const container = document.getElementById('calc-root');
-    if (!container) return false;
-
-    // 1) 명시적 렌더 API
-    if (window.BuildingCalc && typeof window.BuildingCalc.render === 'function') {
-      window.BuildingCalc.render(container, table, ctx);
-      return true;
-    }
-    // 2) run 후 결과 반환
-    if (window.BuildingCalc && typeof window.BuildingCalc.run === 'function') {
-      const res = window.BuildingCalc.run(table, ctx);
-      if (typeof res === 'string') container.innerHTML = res;
-      return true;
-    }
-    // 3) 전역 함수
-    if (typeof window.runCalculator === 'function') {
-      const res = window.runCalculator(table, ctx);
-      if (typeof res === 'string') container.innerHTML = res;
-      return true;
-    }
-    // 4) 이벤트로 브로드캐스트
-    document.dispatchEvent(new CustomEvent('calculator:input', { detail: { table, ctx, container } }));
-    // 로더 없음 표시(조용히)
-    container.innerHTML = `<div class="calc-hint" style="margin-top:12px;color:#666">${esc(t('calc.notLoaded','계산기 모듈이 로드되지 않았습니다.'))}</div>`;
-    return false;
-  }
-
-  // 마지막 계산 입력(언어 변경 시 재실행)
-  let __lastCalcInput = null;
 
   // ---------- 상세 ----------
   async function renderBuildingDetail(slugRaw, variantRaw){
@@ -654,7 +576,7 @@ window.KEY_TO_I18N = {
         ? (variants.find(v=>norm(v.key)===norm(variant)) || variants[0])
         : null;
 
-      // === 상세 제목/alt/문서 타이틀 i18n 키 계산 ===
+      // 제목/alt/타이틀 i18n 키 계산
       const sKey = keySlug(item.slug);
       const vKey = currentVar ? keyVar(currentVar.key) : '';
       const titleKey = vKey ? `buildings.card.${sKey}.${vKey}.title` : `buildings.card.${sKey}.title`;
@@ -666,7 +588,7 @@ window.KEY_TO_I18N = {
       const img = imgUrl((currentVar && currentVar.image) || item.image || 'img/placeholder.webp');
       const fallback = esc(ROOT+'img/placeholder.webp');
 
-      // 원본 표(렌더용)
+      // 표 렌더
       const rowsRaw = (currentVar && currentVar.table) || item.table || [];
       const tableHtml = buildTable(rowsRaw, { slug: item.slug });
       const tabs = buildVariantTabs(item.slug, variants, currentVar ? currentVar.key : '');
@@ -688,7 +610,6 @@ window.KEY_TO_I18N = {
         UNLOCK_TITLE_BY_SLUG[norm(item.slug)] ? t('buildings.kitchenSchedule','주방 일정') : t('buildings.unlocks','해금')
       );
 
-      // 상세 설명 i18n: 데이터에 키가 있으면 우선, 없으면 폴백 키
       const descKey = looksLikeKey(item.description) ? item.description : `buildings.detail.${sKey}.desc`;
       const descText = t(descKey, item.description || '');
 
@@ -698,11 +619,7 @@ window.KEY_TO_I18N = {
           <ul>${unlocksList}</ul>
         </section>` : '';
 
-      // === 계산기 입력 준비: 헤더를 머신키로 통일 ===
-      const adaptedTable = adaptTableForCalculator(rowsRaw);
-      const headerIds = Array.isArray(adaptedTable) && adaptedTable.length ? adaptedTable[0] : [];
-
-      // 계산기 컨테이너 포함한 상세 HTML
+      // 상세 HTML
       r.innerHTML = `
   <div style="margin-bottom:16px; text-align:right">
     <a href="#buildings"
@@ -712,8 +629,6 @@ window.KEY_TO_I18N = {
       ←
     </a>
   </div>
-
-
 
         ${tabs}
 
@@ -731,18 +646,11 @@ window.KEY_TO_I18N = {
 
         <section class="detail-table" style="margin-top:16px">${tableHtml}</section>
 
-        <section id="calc-root" class="detail-calc" style="margin-top:16px"></section>
-
         ${unlocksHtml}
       `;
       document.title = `${t(titleKey, titleFallback)} - KingshotData.KR`;
       applyI18N(r);
       window.scrollTo({ top: 0 });
-
-      // === 계산기 실행 & 저장 (언어 컨텍스트 포함)
-      const calcCtx = buildCalcContext({ slug: item.slug, variant: currentVar ? currentVar.key : '' }, headerIds);
-      runCalculator(adaptedTable, calcCtx);
-      __lastCalcInput = { table: adaptedTable, meta: { slug: item.slug, variant: currentVar ? currentVar.key : '' }, headerIds };
     }catch(e){
       r.innerHTML = `<div class="error">
         <div data-i18n="buildings.detailLoadFail">${esc(t('buildings.detailLoadFail','상세 로드 실패'))}</div>
@@ -761,7 +669,7 @@ window.KEY_TO_I18N = {
 
   // ---------- routing ----------
   async function handleRoute(){
-    await ensureBuildingsNS(); // ← 네임스페이스 로드 보장
+    await ensureBuildingsNS();
     const hash = (location.hash || '#buildings').slice(1);
     const [page, slug, variant] = hash.split('/');
     if (page === 'building' && slug){ renderBuildingDetail(slug, variant); return; }
@@ -778,7 +686,7 @@ window.KEY_TO_I18N = {
   // 단독 페이지로 열려도 동작
   window.addEventListener('DOMContentLoaded', handleRoute);
 
-  // 언어 변경 시 현재 페이지 텍스트 재적용 + 계산 결과 재실행
+  // 언어 변경 시: 본문 재적용 + 상세는 재렌더(요구건물 재번역 반영)
   document.addEventListener('i18n:changed', async () => {
     await ensureBuildingsNS();
     const gridEl = document.getElementById('buildings-grid') || document;
@@ -787,18 +695,10 @@ window.KEY_TO_I18N = {
     applyI18N(rootEl);
 
     if (location.hash.startsWith('#building/')) {
-      // 상세 페이지일 때 문서 타이틀도 i18n 키로 갱신
-      const h1 = rootEl.querySelector('h1[data-i18n]');
-      if (h1) {
-        const k = h1.getAttribute('data-i18n');
-        const txt = t(k, h1.textContent || '');
-        document.title = `${txt} - KingshotData.KR`;
-      }
-
-      // ★ 계산기도 언어 컨텍스트로 재실행
-      if (__lastCalcInput && __lastCalcInput.table) {
-        const ctx = buildCalcContext(__lastCalcInput.meta, __lastCalcInput.headerIds);
-        runCalculator(__lastCalcInput.table, ctx);
+      const [, slug, variant] = (location.hash || '').slice(1).split('/');
+      if (slug) {
+        await renderBuildingDetail(slug, variant); // ← 요구건물 열 재번역 포함
+        return;
       }
     } else {
       document.title = t('title.buildingsList', '건물 목록 - KingshotData.KR');
