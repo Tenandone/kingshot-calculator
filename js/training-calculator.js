@@ -1,4 +1,4 @@
-// /js/training-calculator.js (v20250830-i18n)
+// /js/training-calculator.js (v20250830-i18n, dynamic tiers from DATA)
 window.initTrainingCalculator = function initTrainingCalculator(opts){
   const mountSel = opts?.mount || '#training-calc';
   const jsonUrl  = opts?.jsonUrl;
@@ -62,17 +62,51 @@ window.initTrainingCalculator = function initTrainingCalculator(opts){
       el.appendChild(opt);
     }
   }
+
+  // DATA에서 실제 사용 가능한 from/to 티어 수집
+  function getAvailableTiers(mode){
+    const recs = Array.isArray(DATA) ? DATA.filter(r => String(r.mode) === String(mode)) : [];
+    const froms = new Set();
+    const tos   = new Set();
+    for (const r of recs){
+      if (r.fromTier !== undefined && r.fromTier !== null && r.fromTier !== "")
+        froms.add(Number(r.fromTier));
+      if (r.toTier !== undefined && r.toTier !== null && r.toTier !== "")
+        tos.add(Number(r.toTier));
+    }
+    return {
+      from: [...froms].sort((a,b)=>a-b),
+      to:   [...tos].sort((a,b)=>a-b)
+    };
+  }
+
   function refreshTierInputs(){
     const mode = modeSel.value;
+
+    // 현재 선택값 보존 시도
+    const prevFrom = fromSel?.value;
+    const prevTo   = toSel?.value;
+
     if (mode === 'training'){
       fromWrap.style.display = 'none';
-      fillSelect(toSel, [1,2,3,4,5,6,7,8,9,10]);
+      const avail = getAvailableTiers('training');
+      const toList = (avail.to.length ? avail.to : [1,2,3,4,5,6,7,8,9,10]);
+      fillSelect(toSel, toList);
+
     } else {
       fromWrap.style.display = '';
-      fillSelect(fromSel, [1,2,3,4,5,6,7,8,9]);
-      fillSelect(toSel, [10]);
+      const avail = getAvailableTiers('promotion');
+      const fromList = (avail.from.length ? avail.from : [1,2,3,4,5,6,7,8,9]);
+      const toList   = (avail.to.length   ? avail.to   : [10]); // ← JSON에 9가 있으면 9가 자동으로 뜸
+      fillSelect(fromSel, fromList);
+      fillSelect(toSel, toList);
     }
+
+    // 가능하면 이전 선택 복구
+    if (prevFrom && fromSel && [...fromSel.options].some(o=>o.value===prevFrom)) fromSel.value = prevFrom;
+    if (prevTo   && toSel   && [...toSel.options].some(o=>o.value===prevTo))     toSel.value   = prevTo;
   }
+
   function setInputMode(which){
     const toTime = (which === 'time');
     pillTime.classList.toggle('active', toTime);
@@ -81,13 +115,15 @@ window.initTrainingCalculator = function initTrainingCalculator(opts){
     inTroops.forEach(el=> el.style.display = toTime ? 'none' : '');
     queueMicrotask(calc);
   }
+
   function findRecord(mode, fromTier, toTier){
     return DATA.find(r =>
-      r.mode === mode &&
-      String(r.fromTier||"") === String(fromTier||"") &&
+      String(r.mode) === String(mode) &&
+      String(r.fromTier ?? "") === String(fromTier ?? "") &&
       String(r.toTier) === String(toTier)
     );
   }
+
   function perTroopPower(rec){
     if (!rec) return null;
     if (rec.power_per_troop != null) return rec.power_per_troop;
@@ -181,7 +217,7 @@ window.initTrainingCalculator = function initTrainingCalculator(opts){
     // 언어 전환 시 옵션 라벨 갱신
     document.addEventListener('i18n:changed', () => { refreshTierInputs(); calc(); }, { once:false });
 
-    refreshTierInputs();
+    refreshTierInputs();     // 초기(데이터 로드 전) 기본 리스트 세팅
     setInputMode('time');
     calc();
     root.dataset.kscalcBound = '1'; // init 완료 표시
@@ -195,7 +231,13 @@ window.initTrainingCalculator = function initTrainingCalculator(opts){
       if (!Array.isArray(json)) throw new Error('JSON 최상위 구조가 배열이 아님');
       return json;
     })
-    .then(json => { DATA = json; bind(); })
+    .then(json => {
+      DATA = json;
+      bind();
+      // DATA가 로드된 뒤 한 번 더 옵션을 실제 값으로 동기화
+      refreshTierInputs();
+      calc();
+    })
     .catch(err => {
       console.error(err);
       if (warnEl){
