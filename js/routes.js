@@ -310,7 +310,7 @@
         }
       },
 
-      '/database': {
+     '/database': {
   title: '데이터베이스 - KingshotData.kr',
   render: async (el) => {
     el.innerHTML = '<div class="loading">Loading…</div>';
@@ -356,15 +356,18 @@
   title: 'KingshotData.kr',
   render: async (el, rest) => {
     const parts  = (rest || '').split('/').filter(Boolean);
-    const folder = parts[0] ? decodeURIComponent(parts[0]) : '';
+    const folderRaw = parts[0] ? decodeURIComponent(parts[0]) : '';
     const file   = parts[1] ? decodeURIComponent(parts.slice(1).join('/')) : '';
-    if (!folder) { location.hash = '#/database'; return; }
+    if (!folderRaw) { location.hash = '#/database'; return; }
 
-    // 네임스페이스 로드 확실히 대기
+    // ✅ 전용무기 상세는 widgets로 리맵해서 로드 (URL은 그대로 두고 내부 로딩만 변경)
+    const folder = (folderRaw === 'hero-exclusive-gear') ? 'widgets' : folderRaw;
+
+    // 네임스페이스 로드 확실히 대기 (기존 로직 유지)
     if (window.I18N?.init) {
       try { await I18N.init({ namespaces: ['db'] }); } catch (e) { console.debug('[i18n] init skipped', e); }
     } else {
-      try { await window.I18N?.loadNamespace?.('db'); } catch (e) { console.debug('[i18n] loadNamespace skipped', e); }
+      try { await window.I18N?.loadNamespaces?.(['db']); } catch (e) { console.debug('[i18n] loadNamespaces skipped', e); }
     }
 
     await renderDbDetail(el, folder, file);
@@ -384,6 +387,7 @@
     window.scrollTo({ top: 0 });
   }
 },
+
 
 
       '/privacy': {

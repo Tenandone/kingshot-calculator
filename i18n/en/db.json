@@ -106,20 +106,20 @@
     "title": "Heroes & Hero Gear",
     "li1": "Hero Max Level: 80 (requires Town Center Lv.26)",
     "li2": "Hero Gear (normal) Max Level: 100",
-    "li3": "Hero Exclusive Gear Max Level: 10 — enhanced using exclusive parts",
+    "li3": "Widgets Max Level: 10 — enhanced using exclusive parts",
     "li4": "Mastery Forging Max Level: 20 — Mythic Hero Gear requires Hammers and Legendary Gear for 20 additional levels"
   }
 }
 ,
 
     "widgets": {
-      "title": "Hero Exclusive Gear",
-      "metaTitle": "Hero Exclusive Gear",
-      "metaDesc": "SSR Hero exclusive gear. Unlocks at Town Center Level 15 and can be enhanced up to 10 levels using exclusive materials.",
-      "imageAlt": "Hero Exclusive Gear Representative Image",
+      "title": "Widgets",
+      "metaTitle": "Widgets",
+      "metaDesc": "SSR Widgets. Unlocks at Town Center Level 15 and can be enhanced up to 10 levels using exclusive materials.",
+      "imageAlt": "Widgets Representative Image",
       "what": {
-        "title": "What is Hero Exclusive Gear?",
-        "p1": "Hero Exclusive Gear is special equipment available only to SSR Heroes.",
+        "title": "What is Widgets?",
+        "p1": "Widgets is special equipment available only to SSR Heroes.",
         "p2": "It unlocks at Town Center Level 15 and can be enhanced using exclusive materials."
       },
       "upgrade": {
@@ -143,9 +143,9 @@
       },
       "gallery": {
         "title": "Example Images",
-        "img1Alt": "Hero Exclusive Gear Example Image 1",
-        "img2Alt": "Hero Exclusive Gear Example Image 2",
-        "img3Alt": "Hero Exclusive Gear Example Image 3"
+        "img1Alt": "Widgets Example Image 1",
+        "img2Alt": "Widgets Example Image 2",
+        "img3Alt": "Widgets Example Image 3"
       }
     },
 
@@ -271,47 +271,49 @@
     },
 
     "heroGearEnhance": {
-      "title": "Hero Gear Enhancement Chart",
-      "imageAlt": "Hero Gear Enhancement Representative Image",
-      "section": {
-        "unlock": {
-          "title": "Unlock",
-          "p1": "Hero Gear unlocks at Town Center Level 15.",
-          "p2": "Enhancement method: fuse other gear to add EXP, or use enhancement EXP components.",
-          "p3": "Legendary Gear cannot be used as fusion material for other gear."
-        },
-        "grades": {
-          "title": "Gear Grades (6 Tiers)",
-          "list": "Common, Uncommon, Rare, Epic, Legendary, Mythic"
-        },
-        "maxLevel": {
-          "title": "Max Level by Grade",
-          "desc": "Common 20 / Uncommon 40 / Rare 60 / Epic 80 / Legendary 100 / Mythic 200"
-        },
-        "reforge": {
-          "title": "Reforge (Legendary → Mythic)",
-          "p1": "When Legendary Gear reaches Level 100, it can be reforged into Mythic Gear.",
-          "p2": "Reforge unlock conditions: Town Center Level 30, Server Age ~40 days",
-          "p3": "Reforge requirements: Mastery Forging Level 10, plus fusing 2 additional Legendary Gears"
-        },
-        "mythic": {
-          "title": "Mythic Gear Enhancement",
-          "desc": "Mythic Gear can be enhanced up to Level 200, requiring additional materials (Mithril/Legendary Gear) at certain milestones.",
-          "title2": "Mythic Gear Requirements by Level (101–200)",
-          "caption": "Mythic 101–200 (extra material milestones + cumulative EXP tracking)"
-        }
-      },
-      "legend": {
-        "title": "Legendary Gear Requirements by Level (1–100)",
-        "caption": "Total EXP required for Legendary Levels 1–100"
-      },
-      "col": {
-        "range": "Level Range",
-        "totalXp": "Total Enhancement EXP",
-        "mithril": "Mithril",
-        "legendGear": "Legendary Gear"
-      }
+  "section": {
+    "unlock": {
+      "title": "Unlock",
+      "p1": "Hero Gear unlocks when your Town Center reaches level 15.",
+      "p2": "Enhancement methods: fuse other gear to add experience, or use enhancement XP parts.",
+      "p3": "Legendary gear cannot be used as fusion material for other gear."
     },
+    "grades": {
+      "title": "Gear Grades (6 Tiers)",
+      "list": "Common, Uncommon, Rare, Epic, Legendary, Mythic"
+    },
+    "maxLevel": {
+      "title": "Maximum Level by Grade",
+      "desc": "Common 20 / Uncommon 40 / Rare 60 / Epic 80 / Legendary 100 / Mythic 200"
+    },
+    "reforge": {
+      "title": "Reforge (Legendary → Mythic)",
+      "p1": "When Legendary gear reaches level 100, it can be reforged into Mythic gear.",
+      "p2": "Reforge unlock condition: Town Center level 30, Kingdom/Server age around 40 days.",
+      "p3": "Reforge requirements: Mastery (Forging) level 10, plus fusing 2 additional Legendary gear."
+    },
+    "mythic": {
+      "title": "Mythic Gear Enhancement",
+      "desc": "Can be enhanced up to level 200. Certain ranges require additional materials (Mithril/Legendary Gear)."
+    }
+  },
+  "mythic": {
+    "title2": "Mythic Gear Requirements by Level (101–200)",
+    "caption": "Mythic 101–200 (shows additional material ranges and cumulative XP per range)"
+  },
+  "legend": {
+    "title": "Legendary Gear Requirements by Level (1–100)",
+    "caption": "Total enhancement XP required for Legendary 1–100"
+  },
+  "col": {
+    "range": "Level Range",
+    "totalXp": "Total Enhancement XP",
+    "mithril": "Mithril",
+    "legendGear": "Legendary Gear"
+  }
+},
+
+
 
     "col": {
       "level": "Level",

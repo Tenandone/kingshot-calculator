@@ -1,66 +1,45 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <base href="/" />
-<script src="/js/standalone-bridge.js?v=202509120604" defer></script>
   <meta charset="utf-8">
   <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>영웅전용무기 | KingshotData KR</title>
 
-  <!-- DB 카드용 메타 (선택적으로 사용) -->
-  <meta name="db-title" content="db.widgets.metaTitle">
-  <meta name="description" content="db.widgets.metaDesc">
+  <!-- DB 카드용 메타 -->
+  <meta name="db-title"
+        content="Widgets"
+        data-i18n="db.widgets.metaTitle"
+        data-i18n-attr="content">
+  <meta name="description"
+        content="What the Widgets is, how to upgrade it to level 10, and where to get the parts."
+        data-i18n="db.widgets.metaDesc"
+        data-i18n-attr="content">
   <meta property="og:image" content="/img/database/Widgets/widget-helgas-exclusive-gear-300x296.webp">
 
   <style>
-    .visually-hidden{
-      position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
-      clip:rect(0 0 0 0);white-space:nowrap;border:0
-    }
+    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
     .list-plain{list-style:none;margin:8px 0 16px;padding-left:0}
     .list-plain li{line-height:1.7}
     .muted{color:#8a93a4;font-size:12px}
     figure{margin:0 0 12px}
 
+    /* Page title (EN only) */
+    .page-title{margin:16px auto 8px;padding:0 12px;max-width:1100px;font-size:22px;line-height:1.3;font-weight:700}
+
     /* 표 가독성 */
     .table-wrap{overflow:auto}
-    .table-wrap table{
-      border-collapse:collapse;
-      font-size:13px;
-      width:auto;
-      min-width:360px;
-      margin:0 auto;
-      table-layout:auto;
-    }
-    .table-wrap th,.table-wrap td{
-      padding:6px 10px;
-      border-bottom:1px solid var(--border, #1e2430);
-    }
-    .table-wrap thead th{
-      position:sticky; top:0;
-      background:#0f1318; color:#8a93a4; z-index:1;
-    }
-    .table--widgets th:nth-child(1), .table--widgets td:nth-child(1){
-      width:80px; text-align:right; white-space:nowrap;
-    }
-    .table--widgets th:nth-child(2), .table--widgets td:nth-child(2){
-      width:180px; text-align:right; white-space:nowrap;
-    }
+    .table-wrap table{border-collapse:collapse;font-size:13px;width:auto;min-width:360px;margin:0 auto;table-layout:auto}
+    .table-wrap th,.table-wrap td{padding:6px 10px;border-bottom:1px solid var(--border, #1e2430)}
+    .table-wrap thead th{position:sticky;top:0;background:#0f1318;color:#8a93a4;z-index:1}
+    .table--widgets th:nth-child(1), .table--widgets td:nth-child(1){width:80px;text-align:right;white-space:nowrap}
+    .table--widgets th:nth-child(2), .table--widgets td:nth-child(2){width:180px;text-align:right;white-space:nowrap}
 
     /* 갤러리 그리드 */
-    .gallery-grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap:12px;
-      align-items:start;
-    }
-    .gallery-grid figure{ margin:0; }
-    .gallery-grid img{
-      display:block; width:100%; height:auto;
-      border:1px solid var(--border, #1e2430); border-radius:8px;
-    }
-    .gallery-grid figcaption{ display:none; } /* 요청: 예시 이미지 1/2/3 텍스트 제거 */
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;align-items:start}
+    .gallery-grid figure{margin:0}
+    .gallery-grid img{display:block;width:100%;height:auto;border:1px solid var(--border,#1e2430);border-radius:8px}
+    .gallery-grid figcaption{display:none} /* 예시 이미지 텍스트 제거 */
   </style>
 
   <!-- i18n -->
@@ -82,16 +61,16 @@
 </head>
 <body>
   <main class="page" aria-labelledby="page-title">
+    <!-- Page Title -->
+    <h1 id="page-title" class="page-title">Kingshot Wiki · Widgets</h1>
+
     <!-- 대표 이미지 -->
     <figure>
       <img
         src="/img/database/Widgets/widget-helgas-exclusive-gear-300x296.webp"
         alt="db.widgets.imageAlt" data-i18n-attr="alt"
-        width="300" height="296"
-        loading="lazy" decoding="async">
+        width="300" height="296" loading="lazy" decoding="async">
     </figure>
-
-    <!-- H1 타이틀 제거 (요청) -->
 
     <!-- 무엇인가? -->
     <section aria-labelledby="what">
@@ -120,7 +99,7 @@
       </ul>
     </section>
 
-    <!-- 필요 전용무기부속품 표 (캡션 제거) -->
+    <!-- 필요 전용무기부속품 표 -->
     <section aria-labelledby="req-table">
       <h2 id="req-table" data-i18n="db.widgets.req.title">레벨별 필요 부속품</h2>
       <div class="table-wrap" role="region" aria-labelledby="req-table">
@@ -147,29 +126,26 @@
       </div>
     </section>
 
-    <!-- 예시 이미지 (캡션 텍스트 제거) -->
+    <!-- 예시 이미지 -->
     <section aria-labelledby="gallery">
       <h2 id="gallery" data-i18n="db.widgets.gallery.title">예시 이미지</h2>
       <div class="gallery-grid">
         <figure>
-          <img
-            src="/img/database/Widgets/hero-widget-pictures-1-576x1024.webp"
-            alt="db.widgets.gallery.img1Alt" data-i18n-attr="alt"
-            width="576" height="1024" loading="lazy" decoding="async">
+          <img src="/img/database/Widgets/hero-widget-pictures-1-576x1024.webp"
+               alt="db.widgets.gallery.img1Alt" data-i18n-attr="alt"
+               width="576" height="1024" loading="lazy" decoding="async">
           <figcaption></figcaption>
         </figure>
         <figure>
-          <img
-            src="/img/database/Widgets/hero-widget-pictures-2-576x1024.webp"
-            alt="db.widgets.gallery.img2Alt" data-i18n-attr="alt"
-            width="576" height="1024" loading="lazy" decoding="async">
+          <img src="/img/database/Widgets/hero-widget-pictures-2-576x1024.webp"
+               alt="db.widgets.gallery.img2Alt" data-i18n-attr="alt"
+               width="576" height="1024" loading="lazy" decoding="async">
           <figcaption></figcaption>
         </figure>
         <figure>
-          <img
-            src="/img/database/Widgets/hero-widget-pictures-3-576x1024.webp"
-            alt="db.widgets.gallery.img3Alt" data-i18n-attr="alt"
-            width="576" height="1024" loading="lazy" decoding="async">
+          <img src="/img/database/Widgets/hero-widget-pictures-3-576x1024.webp"
+               alt="db.widgets.gallery.img3Alt" data-i18n-attr="alt"
+               width="576" height="1024" loading="lazy" decoding="async">
           <figcaption></figcaption>
         </figure>
       </div>

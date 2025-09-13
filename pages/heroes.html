@@ -1,4 +1,28 @@
-<!-- pages/heroes.html -->
+<!-- pages/heroes.html — 단독 진입 시 홈으로 리다이렉트, SPA 내부 include 시 정상 동작 -->
+<script>
+/*
+  - 직접 URL(https://kingshotdata.kr/pages/heroes.html)로 들어온 경우에만 홈으로 이동
+  - SPA에서 fetch/innerHTML로 주입될 때는 이 <script>가 실행되지 않으므로 그대로 렌더됨
+*/
+(function () {
+  try {
+    // 탑레벨에서만 동작 (iframe/innerHTML 주입 제외)
+    if (window === window.top) {
+      const p = location.pathname || "";
+      // heroes.html로 직접 접근한 경우만 리다이렉트
+      if (p.endsWith("/pages/heroes.html") || p.endsWith("/pages/heroes.html/") || /\/pages\/heroes\.html$/i.test(p)) {
+        const usp  = new URLSearchParams(location.search);
+        const lang = usp.get("lang");
+        const dest = lang ? `/?lang=${encodeURIComponent(lang)}#heroes` : "/#heroes";
+        // 히스토리 오염 없이 즉시 이동
+        location.replace(dest);
+      }
+    }
+  } catch (_) {}
+})();
+</script>
+
+<!-- 여기부터는 SPA가 include해서 사용할 템플릿(기존 구조 유지) -->
 <section class="container">
   <h1 class="page-title">Heroes</h1>
 
@@ -6,7 +30,7 @@
   <div id="heroes-root" aria-live="polite"></div>
 
   <noscript>
-    <p class="muted">자바스크립트를 활성화하면 영웅 목록이 표시됩니다.</p>
+    <p class="muted">자바스크립트를 활성화하면 영웅 목록이 표시됩니다. 단독 접근 시 <a href="/#heroes">홈의 영웅 섹션</a>으로 이동하세요.</p>
   </noscript>
 </section>
 
@@ -61,9 +85,8 @@
   }
 
   /* 썸네일 (라이트 배경) */
-  .heroes-grid .card .thumb{ background:#f3f4f6; }   /* 라이트 톤 */
-.heroes-grid .card img{   background:transparent; }
-
+  .heroes-grid .card .thumb{ background:#f3f4f6; }
+  .heroes-grid .card img{ background:transparent; }
 
   /* 이름 라벨 */
   .heroes-grid .card .name{
@@ -71,7 +94,7 @@
     font-weight:600; text-align:center;
     font-size:14px; color:inherit;
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    background:#fff;                            /* 라이트 고정 */
+    background:#fff;
     border-top:1px solid var(--border, #e5e7eb);
   }
   .heroes-grid.compact .card .name{ font-size:13px; }

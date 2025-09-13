@@ -1,16 +1,14 @@
+// js/pages/database.js — 최소패치 완성본 (hero-exclusive-gear → widgets 리맵만 적용)
 (function () {
   'use strict';
 
   // =========================
   // 0) 네트워크 최적화 & 캐시 무효화
-  //    - 배포 시 index.html에 설정한 window.__V (예: 202509131858)를 캐시 키에 포함
-  //    - fetch는 no-store로 강제 최신 본문 요청
   // =========================
   const V = (window.__V || 'now');
   const MEMO = (window.__KSD_MEMO__ = window.__KSD_MEMO__ || new Map());
 
   const getText = (url) => {
-    // url에 이미 ?v= 가 없다면 안전하게 붙여준다 (외부/절대 URL은 그대로 둠)
     const finalUrl = appendVersion(url);
     if (MEMO.has(finalUrl)) return MEMO.get(finalUrl);
     const p = fetch(finalUrl, { cache: 'no-store' }).then((r) => {
@@ -23,9 +21,7 @@
 
   function appendVersion(u) {
     try {
-      // 외부(https:, http:, data:)는 건드리지 않음
       if (/^(https?:|data:)/i.test(u)) return u;
-      // 이미 v 파라미터가 있으면 그대로
       if (/\bv=([0-9]+|now)\b/.test(u)) return u;
       return u + (u.includes('?') ? `&v=${V}` : `?v=${V}`);
     } catch {
@@ -34,7 +30,7 @@
   }
 
   // =========================
-  // 1) i18n helpers
+  // 1) i18n helpers (기존 그대로)
   // =========================
   const T = (s, fb) => (window.I18N?.t ? I18N.t(s, fb ?? s) : (fb ?? s));
   async function ensureDbNamespace() {
@@ -44,7 +40,7 @@
   }
 
   // =========================
-  // 2) 병렬 풀 실행 헬퍼
+  // 2) 병렬 풀 실행 헬퍼 (기존 그대로)
   // =========================
   async function withPool(items, worker, limit = 6) {
     const q = items.map((v, i) => ({ v, i }));
@@ -76,15 +72,19 @@
   function resolveAsset(folder, src) {
     if (!src) return '';
     const s = String(src);
-    // 외부/절대 경로 그대로, 상대경로는 DB_BASE 하위로 보정 + 버전 부여
     if (/^(https?:|data:)/i.test(s)) return s.replace(/\s/g, '%20');
     if (s.startsWith('/')) return appendVersion(s.replace(/\s/g, '%20'));
     const rel = s.replace(/^\.?\//, '').replace(/\s/g, '%20');
-    return buildUrl(folder, rel); // buildUrl이 버전도 함께 붙임
+    return buildUrl(folder, rel);
+  }
+
+  // ✅ 전용무기 → 위젯 리맵 (표시/링크/로드 경로만 바꿈)
+  function mapFolder(folder) {
+    return folder === 'hero-exclusive-gear' ? 'widgets' : folder;
   }
 
   // =========================
-  // 4) 카드 목록 소스 (i18n 키 기반)
+  // 4) 카드 목록 소스 (기존 그대로)
   // =========================
   const ITEMS = [
     { folder: 'governor-gear',               category: 'db.governorGear.title' },
@@ -99,7 +99,7 @@
   const CANDIDATES = ['index.html', 'main.html', 'guide.html', 'list.html', 'README.html'];
 
   // =========================
-  // 5) DOM 유틸
+  // 5) DOM 유틸 (기존 그대로)
   // =========================
   const esc = (s) =>
     String(s ?? '').replace(/[&<>"']/g, (m) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));
@@ -133,13 +133,15 @@
   }
 
   // =========================
-  // 6) 카드 템플릿 (i18n 즉시/지연 치환 지원)
+  // 6) 카드 템플릿 (리맵 적용)
   // =========================
   function card(it) {
     const img = it.image
       ? `<div class="card__media"><img src="${esc(it.image)}" alt="" loading="lazy" decoding="async"></div>`
       : `<div class="card__media"></div>`;
-    const href = `#/db/${encodeURIComponent(it.folder)}`;
+
+    // ✅ 링크는 리맵된 폴더로
+    const href = `#/db/${encodeURIComponent(mapFolder(it.folder))}`;
 
     // "a.b" 꼴이면 i18n 키로 간주
     const isKey = typeof it.title === 'string' && /[A-Za-z0-9_.-]+\.[A-Za-z0-9_.-]+/.test(it.title);
@@ -169,42 +171,46 @@
   }
 
   // =========================
-  // 7) 목록 로드 (1회 캐시)
+  // 7) 목록 로드 (리맵 적용)
   // =========================
   let _once = false, _cache = [];
   async function loadListOnceAndRender() {
     if (_once) { render(_cache); return; }
     _once = true;
 
-    await ensureDbNamespace(); // 번역 사전 먼저 로드
+    await ensureDbNamespace();
 
     const parser = new DOMParser();
     const keyRe = /[A-Za-z0-9_.-]+\.[A-Za-z0-9_.-]+/;
 
     const worker = async (it) => {
+      const folderToLoad = mapFolder(it.folder);          // ✅ 리맵된 폴더 기준으로 파일 로드
       for (const file of CANDIDATES) {
-        const url = buildUrl(it.folder, file);
+        const url = buildUrl(folderToLoad, file);
         try {
           const text = await getText(url);
           const doc = parser.parseFromString(text, 'text/html');
           const meta = extractMeta(doc, url);
-          const fixedImage = meta.image ? resolveAsset(it.folder, meta.image) : '';
+          const fixedImage = meta.image ? resolveAsset(folderToLoad, meta.image) : '';
 
-          // 카드 제목은 항상 ITEMS.category(i18n 키)를 우선 사용
-          const title = keyRe.test(it.category) ? it.category : (meta.title || it.category);
+          // ✅ 전용무기는 제목 i18n 키를 widgets로 강제
+          const title =
+            it.folder === 'hero-exclusive-gear'
+              ? 'db.widgets.title'
+              : (keyRe.test(it.category) ? it.category : (meta.title || it.category));
 
           return { ...it, ...meta, title, image: fixedImage };
         } catch (e) {
           console.debug('[db] fetch fail', url, e);
         }
       }
-      // 실패 시에도 i18n 키가 유지되도록
+      // 실패 시에도 i18n 키 유지 + 링크는 리맵 폴더로
       return {
         ...it,
-        title: it.category,
+        title: it.folder === 'hero-exclusive-gear' ? 'db.widgets.title' : it.category,
         summary: '파일을 찾을 수 없습니다.',
         image: '',
-        url: buildUrl(it.folder, 'index.html')
+        url: buildUrl(folderToLoad, 'index.html')
       };
     };
 
@@ -214,7 +220,7 @@
   }
 
   // =========================
-  // 8) 초기화 + 언어 변경 시 재치환
+  // 8) 초기화 + 언어 변경 시 재치환 (기존 그대로)
   // =========================
   let _i18nBound = false;
   async function initDatabase() {

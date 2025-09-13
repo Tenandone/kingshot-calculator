@@ -2,36 +2,49 @@
 <html lang="ko">
 <head>
   <base href="/" />
-<script src="/js/standalone-bridge.js?v=202509120604" defer></script>
+  <script src="/js/standalone-bridge.js?v=202509120604" defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- i18n -->
   <script src="/js/i18n.js?v=202509120604" defer></script>
+  <script>
+  (async function () {
+    if (!window.I18N) return;
+    const raw = (localStorage.getItem('lang') || navigator.language || 'ko').replace('_','-');
+    const lang = raw.startsWith('zh')
+      ? (raw.toLowerCase().includes('tw') ? 'zh-TW' : 'zh-CN')
+      : (raw.split('-')[0] || 'ko');
+    try {
+      await I18N.init({ lang, namespaces: ['db'] });
+      I18N.applyTo(document);
+      document.addEventListener('i18n:changed', () => I18N.applyTo(document));
+    } catch (e) { console.error('[i18n init error]', e); }
+  })();
+  </script>
+
+  <title>Kingshot Wiki · <i18n data-key="db.governorCharm.title">Governor Charm</i18n></title>
+
   <style>
+    .ks-brand{margin:4px 0 2px;color:#6b7280;font-size:13px}
+    .page h1{margin:6px 0 10px;font-size:22px;font-weight:800;line-height:1.25}
+
     .table-wrap{overflow:auto}
     .table-wrap table{border-collapse:collapse;font-size:13px;min-width:600px;margin:0 auto}
-    .table-wrap th,.table-wrap td{padding:6px 10px;border-bottom:1px solid var(--border,#e5e7eb);text-align:right;white-space:nowrap;line-height:20px;height:28px;vertical-align:middle}
+    .table-wrap th,.table-wrap td{
+      padding:6px 10px;border-bottom:1px solid var(--border,#e5e7eb);
+      text-align:right;white-space:nowrap;line-height:20px;height:28px;vertical-align:middle
+    }
     .table-wrap th:first-child,.table-wrap td:first-child{text-align:left}
-    .table-wrap thead th{position:sticky;top:0;background:#0f1318;color:var(--muted,#6b7280);z-index:1}
+    .table-wrap thead th{position:sticky;top:0;background:#0f1318;color:#cbd5e1;z-index:1}
     .table--compact th:nth-child(1),.table--compact td:nth-child(1){width:64px}
     .table--compact th:nth-child(2),.table--compact td:nth-child(2){width:110px}
     .table--compact th:nth-child(3),.table--compact td:nth-child(3){width:120px}
     .table--compact th:nth-child(4),.table--compact td:nth-child(4){width:90px}
     .table--compact th:nth-child(5),.table--compact td:nth-child(5){width:120px}
+
+    .muted{color:#6b7280}
   </style>
-  <script>
-(async function () {
-  if (!window.I18N) return;
-  const raw = (localStorage.getItem('lang') || navigator.language || 'ko').replace('_','-');
-  const lang = raw.startsWith('zh') ? (raw.toLowerCase().includes('tw') ? 'zh-TW' : 'zh-CN')
-                                   : (raw.split('-')[0] || 'ko');
-  try {
-    await I18N.init({ lang, namespaces: ['db'] });  // 🔥 db 네임스페이스 로드
-    I18N.applyTo(document);
-    document.dispatchEvent(new Event('i18n:changed'));
-  } catch (e) { console.error('[i18n init error]', e); }
-  document.addEventListener('i18n:changed', () => I18N.applyTo(document));
-})();
-</script>
 </head>
 <body>
   <main class="page" aria-labelledby="page-title">
@@ -45,11 +58,11 @@
     </figure>
 
     <header>
+      <!-- ✅ 브랜드 라벨: Kingshot Wiki -->
+      <p class="ks-brand">Kingshot Wiki</p>
       <h1 id="page-title" data-i18n="db.governorCharm.title"></h1>
-      <p class="muted" data-i18n="db.brand"></p>
+      <p class="muted" data-i18n="db.governorCharm.intro"></p>
     </header>
-
-    <p data-i18n="db.governorCharm.intro"></p>
 
     <section aria-labelledby="materials-title">
       <h2 id="materials-title" data-i18n="db.governorCharm.materials.title"></h2>
@@ -89,19 +102,5 @@
       </div>
     </section>
   </main>
-
-  <script>
-    (async function () {
-      if (!window.I18N) return;
-      const raw = (localStorage.getItem('lang') || navigator.language || 'ko').replace('_','-');
-      const lang = raw.startsWith('zh') ? (raw.toLowerCase().includes('tw') ? 'zh-TW' : 'zh-CN') : (raw.split('-')[0] || 'ko');
-      try {
-        await I18N.init({ lang, namespaces: [] });
-        I18N.applyTo(document);
-        document.dispatchEvent(new Event('i18n:changed'));
-      } catch (e) { console.error('[i18n init error]', e); }
-      document.addEventListener('i18n:changed', () => I18N.applyTo(document));
-    })();
-  </script>
 </body>
 </html>
