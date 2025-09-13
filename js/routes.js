@@ -311,59 +311,80 @@
       },
 
       '/database': {
-        title: '데이터베이스 - KingshotData.kr',
-        render: async (el) => {
-          el.innerHTML = '<div class="loading">Loading…</div>';
-          const html = await loadHTML(['pages/database.html','/pages/database.html','database.html','/database.html']);
-          if (!html) {
-            el.innerHTML = '<div class="placeholder"><h2>데이터베이스</h2><p class="muted">database.html을 찾을 수 없습니다.</p></div>';
-            return;
-          }
-          const m = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-          el.innerHTML = m ? m[1] : html;
+  title: '데이터베이스 - KingshotData.kr',
+  render: async (el) => {
+    el.innerHTML = '<div class="loading">Loading…</div>';
 
-          const jsCands = [ v('js/pages/database.js'), v('/js/pages/database.js') ];
-          let loadedAny = false;
-          for (const src of jsCands) {
-            try { await loadScriptOnce(src); loadedAny = true; break; } catch(_) {}
-          }
-          if (!loadedAny) {
-            el.insertAdjacentHTML('beforeend','<div class="error">database.js 로드 실패</div>');
-            return;
-          }
-          if (typeof window.initDatabase === 'function') {
-            try { window.initDatabase(); } catch (e) { console.error(e); }
-          } else {
-            el.insertAdjacentHTML('beforeend','<div class="error">initDatabase()가 없습니다。</div>');
-          }
-          setTitle('title.database', '데이터베이스 - KingshotData.kr');
-          apply(el);
-          window.scrollTo({ top: 0 });
-        }
-      },
+    const html = await loadHTML([
+      'pages/database.html',
+      '/pages/database.html',
+      'database.html',
+      '/database.html'
+    ]);
 
-      '/db': {
-        title: 'KingshotData.kr',
-        render: async (el, rest) => {
-          const parts = (rest || '').split('/').filter(Boolean);
-          const folder = parts[0] ? decodeURIComponent(parts[0]) : '';
-          const file   = parts[1] ? decodeURIComponent(parts.slice(1).join('/')) : '';
-          if (!folder) { location.hash = '#/database'; return; }
-          try { await window.I18N?.loadNamespace?.('db'); } catch(_) {}
-          await renderDbDetail(el, folder, file);
-          removeLegacyDbBack(el);
-          el.insertAdjacentHTML('afterbegin', `
-            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-              <a class="btn btn-icon" href="/database"
-                 data-smart-back="#/database" aria-label="Back" title="Back">←</a>
-            </div>
-          `);
-          el.querySelectorAll('h1[data-i18n="title.database"]').forEach(n => n.remove());
-          apply(el);
-          setTitleFromPage(el);
-          window.scrollTo({ top: 0 });
-        }
-      },
+    if (!html) {
+      el.innerHTML = '<div class="placeholder"><h2>데이터베이스</h2><p class="muted">database.html을 찾을 수 없습니다.</p></div>';
+      return;
+    }
+
+    const m = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+    el.innerHTML = m ? m[1] : html;
+
+    const jsCands = [ v('js/pages/database.js'), v('/js/pages/database.js') ];
+    let loadedAny = false;
+    for (const src of jsCands) {
+      try { await loadScriptOnce(src); loadedAny = true; break; } catch (_) {}
+    }
+    if (!loadedAny) {
+      el.insertAdjacentHTML('beforeend','<div class="error">database.js 로드 실패</div>');
+      return;
+    }
+
+    if (typeof window.initDatabase === 'function') {
+      try { await window.initDatabase(); } catch (e) { console.error(e); }
+    } else {
+      el.insertAdjacentHTML('beforeend','<div class="error">initDatabase()가 없습니다。</div>');
+    }
+
+    setTitle('title.database', '데이터베이스 - KingshotData.kr');
+    if (window.I18N?.applyTo) I18N.applyTo(el);
+    window.scrollTo({ top: 0 });
+  }
+},
+
+'/db': {
+  title: 'KingshotData.kr',
+  render: async (el, rest) => {
+    const parts  = (rest || '').split('/').filter(Boolean);
+    const folder = parts[0] ? decodeURIComponent(parts[0]) : '';
+    const file   = parts[1] ? decodeURIComponent(parts.slice(1).join('/')) : '';
+    if (!folder) { location.hash = '#/database'; return; }
+
+    // 네임스페이스 로드 확실히 대기
+    if (window.I18N?.init) {
+      try { await I18N.init({ namespaces: ['db'] }); } catch (e) { console.debug('[i18n] init skipped', e); }
+    } else {
+      try { await window.I18N?.loadNamespace?.('db'); } catch (e) { console.debug('[i18n] loadNamespace skipped', e); }
+    }
+
+    await renderDbDetail(el, folder, file);
+    removeLegacyDbBack(el);
+
+    el.insertAdjacentHTML('afterbegin', `
+      <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+        <a class="btn btn-icon" href="/database"
+           data-smart-back="#/database" aria-label="Back" title="Back">←</a>
+      </div>
+    `);
+
+    el.querySelectorAll('h1[data-i18n="title.database"]').forEach(n => n.remove());
+
+    if (window.I18N?.applyTo) I18N.applyTo(el);
+    setTitleFromPage(el);
+    window.scrollTo({ top: 0 });
+  }
+},
+
 
       '/privacy': {
         title: '개인정보처리방침 - KingshotData.kr',

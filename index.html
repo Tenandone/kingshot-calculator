@@ -64,22 +64,16 @@
       --lootbar-logo-h: 22px;
       --cafe-logo-h:    32px;
 
-      /* OTHER 파트너 타일 로고 크기(드로어 큰 타일) */
+      /* OTHER/파트너 카드 로고 크기 */
       --lootbar-tile-h: 22px;
       --cafe-tile-h:    34px;
-
-      /* 캡션 오프셋(필요 시) */
-      --lootbar-cap-offset: 2px;
-      --cafe-cap-offset:    0px;
 
       /* KD 톤 */
       --bd:#e5e7eb; --fg:#111; --muted:#666;
       --hover:#f3f4f6; --focus:#0b57d0;
       --panel:#fff;
 
-      /* 드로어/메뉴 */
-      --drawer-w: 420px;
-      --menu-w:  200px;
+      --menu-w: 200px;
     }
 
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--fg)}
@@ -92,17 +86,14 @@
     .nav-bar{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
     .nav-left,.nav-right{display:flex;align-items:center;gap:16px}
 
-    /* 사이트 로고 */
     .brand{display:flex;align-items:center;min-width:180px;flex:0 0 auto;margin-right:auto}
     .brand-logo{height:var(--logo-site);width:auto;object-fit:contain;flex-shrink:0}
 
-    /* 1차 메뉴 */
     .nav-left nav a{
       display:inline-flex;align-items:center;justify-content:center;
       height:var(--nav-h);padding:0 10px;margin:0 2px;color:#333;font-size:14px;min-width:72px;white-space:nowrap;
     }
 
-    /* 우측 묶음 */
     .nav-right{min-width:360px;display:flex;align-items:center;gap:20px}
 
     /* 헤더 파트너 배지(작게) */
@@ -112,11 +103,9 @@
     .lootbar-logo{height:var(--lootbar-logo-h) !important;width:auto;object-fit:contain}
     .cafe-logo{height:var(--cafe-logo-h) !important;width:auto;object-fit:contain}
     .lootbar-banner span,.cafe-banner span{font-size:10px;font-weight:300;line-height:1;color:#000;opacity:.6;margin:0}
-    .lootbar-banner span{transform:translateY(var(--lootbar-cap-offset))}
-    .cafe-banner span{transform:translateY(var(--cafe-cap-offset))}
 
     /* 모바일: 메뉴만 접힘 */
-    #menuToggle.hamburger{display:none;font-size:22px;background:none;border:0;color:#333;cursor:pointer;width:44px;height:44px}
+    #menuToggle.hamburger{display:none;font-size:22px;background:none;border:0;color:#333;cursor:pointer;width:44px;height:44}
     @media (max-width:768px){
       #primaryNav{display:none}
       #menuToggle.hamburger{display:inline-block}
@@ -126,12 +115,20 @@
     /* ===== Drawer ===== */
     .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:.2s;z-index:110}
     .drawer{
-      position:fixed;top:0;right:0;height:100%;width:var(--drawer-w);
+      position:fixed;top:0;right:0;height:100%;
+      width:45vw;                        /* 화면의 45% */
       background:var(--panel);border-left:1px solid var(--bd);
-      transform:translateX(100%);transition:transform .25s ease;z-index:120;display:flex;flex-direction:column
+      transform:translateX(100%);transition:transform .25s ease;z-index:120;
+      display:flex;flex-direction:column;
+      overflow:auto;                      /* 내부 스크롤 */
+      -webkit-overflow-scrolling:touch;
+      padding-bottom:env(safe-area-inset-bottom);
     }
-    @media (max-width:768px){ .drawer{ width:75vw } }
-    .drawer header{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid var(--bd)}
+    .drawer header{
+      height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;
+      padding:0 16px;border-bottom:1px solid var(--bd);
+      position:sticky; top:0; background:#fff; z-index:1;
+    }
     .is-open .backdrop{opacity:1;pointer-events:auto}
     .is-open .drawer{transform:translateX(0)}
     .no-scroll{overflow:hidden}
@@ -143,25 +140,22 @@
     .sec-label{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;text-transform:lowercase;letter-spacing:.04em;margin:8px 0}
     .sec-label::before,.sec-label::after{content:"";flex:1;border-bottom:1px dashed var(--bd)}
 
-    /* ===== Drawer 언어 트리거(우측 참고 느낌: 행 형태 + 케럿만) ===== */
+    /* ===== Drawer 언어 트리거 ===== */
     .lang-row{
       display:flex;align-items:center;gap:10px;height:44px;padding:0 12px;border:1px solid var(--bd);border-radius:10px;background:#fff;cursor:pointer;user-select:none;
-      max-width:var(--menu-w);
+      max-width:200px;
     }
     .lang-row:hover{background:var(--hover)}
     .lang-row .globe{width:18px;height:18px}
     .lang-row .current{font-variant-caps:all-small-caps;font-weight:600}
     .lang-row .caret{width:6px;height:6px;display:inline-block;margin-left:auto;transform:rotate(45deg);border-right:2px solid #555;border-bottom:2px solid #555}
 
-    /* 드롭다운 메뉴 (클릭 시만 표시) */
     .lang-menu{
-      position:absolute;top:calc(100% + 8px);left:0;min-width:var(--menu-w);
+      position:absolute;top:calc(100% + 8px);left:0;min-width:200px;
       background:#fff;color:#111;border:1px solid var(--bd);border-radius:10px;padding:6px 0;margin:0;list-style:none;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:3000;max-height:60vh;overflow:auto
     }
     .lang-menu li{position:relative}
-    .lang-item{
-      width:100%;text-align:left;background:none;border:0;cursor:pointer;display:block;padding:12px 14px 12px 16px;font-size:15px
-    }
+    .lang-item{width:100%;text-align:left;background:none;border:0;cursor:pointer;display:block;padding:12px 14px 12px 16px;font-size:15px}
     .lang-item:hover{background:var(--hover)}
     .lang-item + li::before{content:"";position:absolute;top:0;left:12px;right:12px;border-top:1px dashed var(--bd)}
     .lang-item[aria-checked="true"]{background:var(--hover)}
@@ -171,21 +165,29 @@
     .drawer .nav-list a{display:block;padding:12px 4px;font-size:16px;border-radius:8px}
     .drawer .nav-list a:hover{background:var(--hover)}
 
-    /* OTHER: 링크 카드(설명 없음) */
-    .other-grid{display:grid;grid-template-columns:1fr;gap:10px}
-    .other-link{
-      display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #ececec;background:#fff;border-radius:10px;font-weight:600
+    /* ===== 카드(루트바/데이터허브/아더 공통 형식) ===== */
+    .tile-grid{display:grid;grid-template-columns:1fr;gap:10px}
+    .tile{
+      display:flex;align-items:center;gap:12px;
+      border:1px solid #ececec;border-radius:12px;background:#fff;padding:10px 12px;
     }
-    .other-link .icon{width:18px;height:18px;flex:0 0 18px}
+    .tile .logo{height:22px;width:auto}
+    .tile .meta{display:flex;flex-direction:column}
+    .tile .meta .tit{font-weight:700}
 
-    /* OTHER: 파트너 타일 */
-    .partner-block{display:grid;grid-template-columns:1fr;gap:10px;margin-top:8px}
-    .partner-tile{display:flex;align-items:center;gap:12px;border:1px solid #ececec;border-radius:12px;background:#fff;padding:10px 12px}
-    .partner-tile .meta{display:flex;flex-direction:column}
-    .partner-tile .meta .tit{font-weight:700}
-    /* 타일 로고 크기 조화 */
-    .partner-tile .logo-lootbar{height:var(--lootbar-tile-h);width:auto}
-    .partner-tile .logo-cafe{height:var(--cafe-tile-h);width:auto}
+    /* 전용 크기 */
+    .logo-lootbar{height:var(--lootbar-tile-h)}
+    .logo-cafe{height:var(--cafe-tile-h)}
+    .icon-24{width:18px;height:18px;flex:0 0 18px}
+    .tile:hover{background:var(--hover)}
+
+    /* KakaoTalk 카드 전용 */
+.tile-kakao {
+  background:#FEE500 !important;
+  border-color:#FEE500 !important;
+}
+.tile-kakao .tit { color:#111; }
+
   </style>
 </head>
 <body class="theme-default">
@@ -218,21 +220,21 @@
               data-i18n-attr="aria-label:aria.menuOpen">☰</button>
 
       <div class="nav-right">
-        <!-- 순서: Lootbar → FanCommunity -->
+        <!-- 순서: Lootbar → DataHub -->
         <a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc"
            class="lootbar-banner" target="_blank" rel="noopener"
            aria-label="Lootbar" data-i18n-attr="aria-label:brand.lootbar">
           <img class="lootbar-logo" src="/img/brand.png?v=202509131858" alt="Lootbar">
-          <span aria-hidden="true"></span> <!-- 텍스트 숨김 -->
+          <span aria-hidden="true"></span>
         </a>
         <a href="https://cafe.naver.com/kingshot1"
            class="cafe-banner" target="_blank" rel="noopener"
-           aria-label="Kingshot Fan Community" data-i18n-attr="aria-label:brand.cafe">
+           aria-label="DataHub" data-i18n-attr="aria-label:brand.cafe">
           <img class="cafe-logo" src="/img/brand2.png?v=202509131858" alt="">
-          <span data-i18n="brand.cafeShort">KingshotFanCommunity</span>
+          <span>DataHub</span>
         </a>
 
-        <!-- 헤더 언어 드롭다운(작게) -->
+        <!-- 헤더 언어 드롭다운 -->
         <div id="langDropdownHeader" class="lang-dropdown" data-placement="right" style="position:relative">
           <div class="lang-row" role="button" aria-haspopup="menu" aria-expanded="false" aria-controls="langMenuHeader">
             <svg class="globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="#555" stroke-width="1.5"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" fill="none" stroke="#555" stroke-width="1.5"/></svg>
@@ -257,7 +259,6 @@
     </header>
 
     <div class="section" style="position:relative">
-      <!-- 행(row) 트리거만 보이고, 눌러야 드롭다운이 뜸 -->
       <div id="langDropdownDrawer" class="lang-dropdown" data-placement="left">
         <div class="lang-row" role="button" aria-haspopup="menu" aria-expanded="false" aria-controls="langMenuDrawer">
           <svg class="globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="#555" stroke-width="1.5"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" fill="none" stroke="#555" stroke-width="1.5"/></svg>
@@ -285,35 +286,43 @@
     <div class="section">
       <div class="sec-label" data-i18n="drawer.other">other</div>
 
-      <!-- 바로 링크 (설명 제거) -->
-      <div class="other-grid">
-        <a class="other-link" href="https://open.kakao.com/o/gHPnO4uh" target="_blank" rel="noopener"
-           aria-label="KakaoTalk"
-           data-i18n="other.kakao"
-           data-i18n-attr="aria-label:other.kakao">KakaoTalk</a>
+      <!-- OTHER: 카드형식 (루트바/데이터허브와 동일한 타일 스타일) -->
+      <div class="tile-grid">
+        <!-- Gift Code 카드 -->
+<a class="tile" href="https://kingshotdata.kr/pages/guides/kingshot-giftcode.html" target="_blank" rel="noopener">
+  <!-- 🎁 아이콘: 상자 박스 + 리본 -->
+  <svg class="icon-24" viewBox="0 0 24 24" aria-hidden="true">
+    <rect x="3" y="8" width="18" height="13" rx="2" fill="none" stroke="#111" stroke-width="1.6"/>
+    <path d="M12 21V8M3 12h18M7 5c-1 0-2 .7-2 1.8S6 9 7.5 9C9 9 10 7 10 6s-1-1-3-1Zm10 0c1 0 2 .7 2 1.8S18 9 16.5 9C15 9 14 7 14 6s1-1 3-1Z" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+  <div class="meta"><span class="tit">Gift Code</span></div>
+</a>
 
-        <a class="other-link" href="https://kingshotdata.kr/pages/guides/kingshot-giftcode.html" target="_blank" rel="noopener"
-           aria-label="Gift Code"
-           data-i18n="other.giftcode"
-           data-i18n-attr="aria-label:other.giftcode">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="11" rx="2" fill="none" stroke="#333" stroke-width="1.5"/><path d="M3 12h18M12 19V8" stroke="#333" stroke-width="1.5"/></svg>
-          <span data-i18n="other.giftcode">Gift Code</span>
-        </a>
+
+        <!-- KakaoTalk 카드 -->
+<a class="tile tile-kakao" href="https://open.kakao.com/o/gHPnO4uh" target="_blank" rel="noopener">
+  <svg class="icon-24" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 3c5.2 0 9 3 9 6.8 0 3.9-4.1 7.1-9.2 7.1-.6 0-1.2 0-1.8-.1L6 20l1.5-3.1C6 16 3 14 3 9.8 3 6 6.8 3 12 3Z" fill="#111"/>
+  </svg>
+  <div class="meta"><span class="tit">KakaoTalk</span></div>
+</a>
+
       </div>
 
       <!-- 파트너 타일 -->
-      <div class="partner-block">
-        <!-- Lootbar: 로고만 (텍스트 없음) -->
-        <a class="partner-tile" href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc"
+      <div class="rule"></div>
+      <div class="tile-grid">
+        <a class="tile" href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc"
            target="_blank" rel="noopener"
            aria-label="Lootbar" data-i18n-attr="aria-label:brand.lootbar">
-          <img class="logo-lootbar" src="/img/brand.png?v=202509131858" alt="Lootbar">
+          <img class="logo logo-lootbar" src="/img/brand.png?v=202509131858" alt="Lootbar">
+          
         </a>
-        <!-- FanCommunity: 제목만(중복 캡션 제거) -->
-        <a class="partner-tile" href="https://cafe.naver.com/kingshot1" target="_blank" rel="noopener"
-           aria-label="Kingshot Fan Community" data-i18n-attr="aria-label:brand.cafe">
-          <img class="logo-cafe" src="/img/brand2.png?v=202509131858" alt="">
-          <div class="meta"><span class="tit" data-i18n="brand.cafe">Kingshot Fan Community</span></div>
+
+        <a class="tile" href="https://cafe.naver.com/kingshot1" target="_blank" rel="noopener"
+           aria-label="DataHub" data-i18n-attr="aria-label:brand.cafe">
+          <img class="logo logo-cafe" src="/img/brand2.png?v=202509131858" alt="">
+          <div class="meta"><span class="tit">DataHub</span></div>
         </a>
       </div>
     </div>
@@ -390,7 +399,6 @@
       const menu = document.getElementById(menuId);
       if (!root || !trigger || !menu) return;
 
-      // 메뉴 구성
       menu.innerHTML = LANGS.map((l,idx)=>`
         <li><button class="lang-item" role="menuitemradio" data-lang="${l.code}" aria-checked="false" tabindex="${idx===0?'0':'-1'}">${l.label}</button></li>
       `).join('');
@@ -428,7 +436,6 @@
       trigger.addEventListener('click', () => (trigger.getAttribute('aria-expanded')==='true'? close(): open()));
       items.forEach(it => it.addEventListener('click', () => choose(it.dataset.lang)));
 
-      // 초기 표시
       setBtn(getCurrentLang());
     }
 

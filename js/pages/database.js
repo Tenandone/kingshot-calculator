@@ -1,20 +1,37 @@
-// js/pages/database.js — DB 카드 SPA (목록만; 상세는 라우터가 처리 - final)
 (function () {
   'use strict';
 
   // =========================
-  // 0) 네트워크 최적화 (fetch memoization)
+  // 0) 네트워크 최적화 & 캐시 무효화
+  //    - 배포 시 index.html에 설정한 window.__V (예: 202509131858)를 캐시 키에 포함
+  //    - fetch는 no-store로 강제 최신 본문 요청
   // =========================
+  const V = (window.__V || 'now');
   const MEMO = (window.__KSD_MEMO__ = window.__KSD_MEMO__ || new Map());
+
   const getText = (url) => {
-    if (MEMO.has(url)) return MEMO.get(url);
-    const p = fetch(url, { cache: 'force-cache' }).then((r) => {
-      if (!r.ok) throw new Error(`HTTP ${r.status} @ ${url}`);
+    // url에 이미 ?v= 가 없다면 안전하게 붙여준다 (외부/절대 URL은 그대로 둠)
+    const finalUrl = appendVersion(url);
+    if (MEMO.has(finalUrl)) return MEMO.get(finalUrl);
+    const p = fetch(finalUrl, { cache: 'no-store' }).then((r) => {
+      if (!r.ok) throw new Error(`HTTP ${r.status} @ ${finalUrl}`);
       return r.text();
     });
-    MEMO.set(url, p);
+    MEMO.set(finalUrl, p);
     return p;
   };
+
+  function appendVersion(u) {
+    try {
+      // 외부(https:, http:, data:)는 건드리지 않음
+      if (/^(https?:|data:)/i.test(u)) return u;
+      // 이미 v 파라미터가 있으면 그대로
+      if (/\bv=([0-9]+|now)\b/.test(u)) return u;
+      return u + (u.includes('?') ? `&v=${V}` : `?v=${V}`);
+    } catch {
+      return u;
+    }
+  }
 
   // =========================
   // 1) i18n helpers
@@ -22,7 +39,7 @@
   const T = (s, fb) => (window.I18N?.t ? I18N.t(s, fb ?? s) : (fb ?? s));
   async function ensureDbNamespace() {
     if (window.I18N?.init) {
-      try { await I18N.init({ namespaces: ['db'] }); } catch {}
+      try { await I18N.init({ namespaces: ['db'] }); } catch (e) { console.debug('[db] i18n init skipped', e); }
     }
   }
 
@@ -38,7 +55,7 @@
       const { v, i } = q.shift();
       const job = worker(v, i)
         .then((res) => (out[i] = res))
-        .catch(() => (out[i] = null))
+        .catch((err) => { console.warn('[db] worker error', v, err); out[i] = null; })
         .finally(() => {
           running.splice(running.indexOf(job), 1);
           runOne();
@@ -54,14 +71,16 @@
   // 3) 경로/에셋
   // =========================
   const DB_BASE = '/pages/database/';
-  const buildUrl = (folder, file) => DB_BASE + encodeURIComponent(folder) + '/' + file;
+  const buildUrl = (folder, file) => appendVersion(DB_BASE + encodeURIComponent(folder) + '/' + file);
 
   function resolveAsset(folder, src) {
     if (!src) return '';
     const s = String(src);
+    // 외부/절대 경로 그대로, 상대경로는 DB_BASE 하위로 보정 + 버전 부여
     if (/^(https?:|data:)/i.test(s)) return s.replace(/\s/g, '%20');
-    if (s.startsWith('/')) return s.replace(/\s/g, '%20');
-    return buildUrl(folder, s.replace(/^\.?\//, '')).replace(/\s/g, '%20');
+    if (s.startsWith('/')) return appendVersion(s.replace(/\s/g, '%20'));
+    const rel = s.replace(/^\.?\//, '').replace(/\s/g, '%20');
+    return buildUrl(folder, rel); // buildUrl이 버전도 함께 붙임
   }
 
   // =========================
@@ -77,7 +96,6 @@
     { folder: 'mastery-forging',             category: 'db.masteryForging.title' },
     { folder: 'hero-shards',                 category: 'db.heroShards.title' }
   ];
-
   const CANDIDATES = ['index.html', 'main.html', 'guide.html', 'list.html', 'README.html'];
 
   // =========================
@@ -86,11 +104,18 @@
   const esc = (s) =>
     String(s ?? '').replace(/[&<>"']/g, (m) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));
   const pickText = (doc, sels) => {
-    for (const sel of sels) { const n = doc.querySelector(sel); if (n && n.textContent.trim()) return n.textContent.trim(); }
+    for (const sel of sels) {
+      const n = doc.querySelector(sel);
+      if (n && n.textContent && n.textContent.trim()) return n.textContent.trim();
+    }
     return '';
   };
   const pickAttr = (doc, sels, attr) => {
-    for (const sel of sels) { const n = doc.querySelector(sel); const v = n && n.getAttribute(attr); if (v) return v; }
+    for (const sel of sels) {
+      const n = doc.querySelector(sel);
+      const v = n && n.getAttribute(attr);
+      if (v) return v;
+    }
     return '';
   };
 
@@ -116,6 +141,7 @@
       : `<div class="card__media"></div>`;
     const href = `#/db/${encodeURIComponent(it.folder)}`;
 
+    // "a.b" 꼴이면 i18n 키로 간주
     const isKey = typeof it.title === 'string' && /[A-Za-z0-9_.-]+\.[A-Za-z0-9_.-]+/.test(it.title);
     const titleText = T(it.title, it.title);
 
@@ -168,7 +194,9 @@
           const title = keyRe.test(it.category) ? it.category : (meta.title || it.category);
 
           return { ...it, ...meta, title, image: fixedImage };
-        } catch {}
+        } catch (e) {
+          console.debug('[db] fetch fail', url, e);
+        }
       }
       // 실패 시에도 i18n 키가 유지되도록
       return {
