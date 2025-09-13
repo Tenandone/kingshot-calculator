@@ -1,12 +1,11 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <base href="/" />
-<script src="/js/standalone-bridge.js?v=202509120604" defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kingshot 댓글 이벤트 추첨기</title>
   <style>
+    /* ====== 기본 레이아웃 ====== */
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;background:#fff;margin:0;color:#111}
     header{background:#f7f7f8;border-bottom:1px solid #ddd;padding:12px}
     h1{margin:0;font-size:18px}
@@ -16,20 +15,96 @@
     textarea,input{width:100%;box-sizing:border-box;border:1px solid #ccc;border-radius:8px;padding:8px;margin:4px 0;font-size:14px}
     .btn{padding:8px 12px;border-radius:8px;border:1px solid #ccc;background:#fff;cursor:pointer;margin-right:6px}
     .btn.primary{background:#0b57d0;color:#fff;border:none}
+    .btn:disabled{opacity:.6;cursor:not-allowed}
     .winner-list{border:1px dashed #aaa;border-radius:8px;padding:10px;margin:6px 0}
 
-    /* ▼ 참가자 그리드(가로 나열) */
+    /* ====== 참가자 그리드(가로 나열) ====== */
     .list-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:8px}
     .chip{display:inline-block;padding:6px 10px;border:1px solid #ddd;border-radius:999px;background:#fff;
           font-size:13px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .muted{color:#666;font-size:13px}
     #list{min-height:140px} /* 입력창은 조금만 보이게 */
+
+    /* ====== 하단 추첨 무대(시각 효과) ====== */
+    .stage{
+      position:relative;
+      background:linear-gradient(#0b57d0,#093b8f);
+      color:#fff;border-radius:12px;border:1px solid #0a48aa;
+      padding:18px;margin-top:10px;overflow:hidden;
+      box-shadow:0 6px 20px rgba(11,87,208,.25);
+    }
+    .stage .bar{
+      display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:10px
+    }
+    .stage .lamp{
+      width:10px;height:10px;border-radius:50%;
+      background:#ffca28;box-shadow:0 0 12px rgba(255,202,40,.9);
+      animation:blink 1s infinite;
+    }
+    @keyframes blink{50%{opacity:.35}}
+
+    .roller{
+      position:relative;background:#021a46;border:1px solid rgba(255,255,255,.25);
+      border-radius:10px;min-height:88px;display:flex;align-items:center;justify-content:center;
+      overflow:hidden
+    }
+    .bigname{
+      font-weight:800;font-size:28px;letter-spacing:.2px;text-align:center;
+      padding:8px 12px;max-width:92%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .bigname.spin{
+      animation:spinY .6s ease-in-out infinite;
+    }
+    @keyframes spinY{
+      0%{transform:translateY(0) rotate(0);}
+      50%{transform:translateY(-2px) rotate(.2deg);}
+      100%{transform:translateY(0) rotate(0);}
+    }
+
+    .badge-tier{
+      display:inline-flex;align-items:center;gap:6px;
+      background:#001432;border:1px solid rgba(255,255,255,.2);
+      color:#cfe2ff;padding:6px 10px;border-radius:999px;font-size:13px
+    }
+    .badge-tier b{color:#fff}
+
+    .spotlight{
+      position:absolute;inset:-20% -10%;background:radial-gradient(ellipse at center, rgba(255,255,255,.08), transparent 60%);
+      pointer-events:none;filter:blur(6px)
+    }
+
+    .ribbon{
+      position:absolute;top:10px;left:-6px;background:#ff4d4f;color:#fff;font-weight:700;font-size:12px;
+      padding:6px 10px;border-radius:0 8px 8px 0;box-shadow:0 6px 14px rgba(0,0,0,.2)
+    }
+
+    .pop{animation:pop .38s ease-out}
+    @keyframes pop{
+      0%{transform:scale(.85);opacity:.2}
+      70%{transform:scale(1.04);opacity:1}
+      100%{transform:scale(1)}
+    }
+
+    /* ====== 컨페티 캔버스 ====== */
+    canvas#confetti{
+      position:fixed;inset:0;pointer-events:none;z-index:9999
+    }
+
+    @media (max-width:560px){
+      .bigname{font-size:22px}
+    }
   </style>
 </head>
 <body>
+  <!-- place this right after <body> -->
+  <a href="/" class="kd-home-link" style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
+    ← KingshotData Korea
+  </a>
+
   <header>
     <h1>Kingshot 댓글 이벤트 추첨기</h1>
   </header>
+
   <main>
     <section>
       <h2>① 원문 붙여넣기</h2>
@@ -50,48 +125,87 @@
 
     <section>
       <h2>③ 참가자 목록</h2>
-      <!-- 데이터 편집용(유지) -->
       <textarea id="list" placeholder="닉네임을 줄바꿈으로 구분(자동으로 오른쪽 그리드에 표시됩니다)"></textarea>
       <div class="muted">현재 참가자: <span id="count">0</span>명</div>
-
-      <!-- 가로 나열 미리보기 -->
       <div id="listView" class="list-wrap" aria-live="polite"></div>
     </section>
 
     <section>
       <h2>④ 추첨</h2>
       <button class="btn primary" id="btnDraw">추첨하기</button>
+      <button class="btn" id="btnShowResults">결과만 보기</button>
       <div id="results">
         <div id="wPrize1" class="winner-list" hidden></div>
         <div id="wPrize2" class="winner-list" hidden></div>
         <div id="wPrize3" class="winner-list" hidden></div>
       </div>
+
+      <!-- ▼ 시각적 '무대' (하단 실시간 롤링) -->
+      <div class="stage" id="stage" aria-live="polite">
+        <span class="ribbon" id="ribbon" hidden>WINNER</span>
+        <div class="bar">
+          <div class="badge-tier"><span class="lamp"></span><span>현재 추첨: <b id="nowTier">대기</b></span></div>
+          <div class="badge-tier"><span>남은 인원:</span><b id="remain">-</b></div>
+        </div>
+        <div class="roller">
+          <div class="spotlight"></div>
+          <div class="bigname" id="bigName">준비 중…</div>
+        </div>
+      </div>
     </section>
   </main>
 
+  <!-- 컨페티 캔버스 -->
+  <canvas id="confetti"></canvas>
+
   <script>
+    /* =========================================================
+       0) DOM 엘리먼트 참조
+       ========================================================= */
     const raw = document.getElementById('raw');
     const list = document.getElementById('list');
     const listView = document.getElementById('listView');
     const countEl = document.getElementById('count');
 
-    // 공용: 현재 텍스트 영역을 배열로 변환
+    const btnParse = document.getElementById('btnParse');
+    const btnClear = document.getElementById('btnClear');
+    const btnDraw  = document.getElementById('btnDraw');
+
+    const w1 = document.getElementById('wPrize1');
+    const w2 = document.getElementById('wPrize2');
+    const w3 = document.getElementById('wPrize3');
+
+    const p1LabelEl = document.getElementById('prize1Label');
+    const p1CountEl = document.getElementById('prize1Count');
+    const p2LabelEl = document.getElementById('prize2Label');
+    const p2CountEl = document.getElementById('prize2Count');
+    const p3LabelEl = document.getElementById('prize3Label');
+    const p3CountEl = document.getElementById('prize3Count');
+
+    // 무대 요소
+    const bigName = document.getElementById('bigName');
+    const nowTier = document.getElementById('nowTier');
+    const remain  = document.getElementById('remain');
+    const ribbon  = document.getElementById('ribbon');
+
+    /* =========================================================
+       1) 유틸: 참가자 파싱/렌더
+       ========================================================= */
     function getNames(){
       return list.value.split(/\n/).map(s=>s.trim()).filter(Boolean);
     }
+    function updateCount(){ countEl.textContent = getNames().length; }
 
-    function updateCount(){
-      countEl.textContent = getNames().length;
-    }
-
-    // 참가자 칩 그리드 렌더링
     function renderListView(){
       const names = getNames();
-      if (!names.length){ listView.innerHTML = '<span class="muted">아직 참가자가 없습니다.</span>'; return; }
+      if (!names.length){
+        listView.innerHTML = '<span class="muted">아직 참가자가 없습니다.</span>';
+        return;
+      }
       listView.innerHTML = names.map(n=>`<span class="chip" title="${n}">${n}</span>`).join('');
     }
 
-    document.getElementById('btnParse').addEventListener('click', ()=>{
+    btnParse.addEventListener('click', ()=>{
       const lines = raw.value.split(/\n/).map(s=>s.trim());
       const names = [];
       let expectName = false;
@@ -100,50 +214,274 @@
         if (line === '프로필 사진'){ expectName = true; continue; }
         if (expectName){ names.push(line); expectName=false; continue; }
       }
-      list.value = names.join('\n');   // 편집용 저장
+      list.value = names.join('\n');
       updateCount();
-      renderListView();                // 그리드 즉시 반영
+      renderListView();
+      stageReset();
     });
 
-    document.getElementById('btnClear').addEventListener('click', ()=>{
+    btnClear.addEventListener('click', ()=>{
       raw.value=''; list.value='';
       updateCount();
       renderListView();
+      stageReset();
+      [w1,w2,w3].forEach(el=>{ el.hidden = true; el.innerHTML=''; });
     });
 
-    document.getElementById('btnDraw').addEventListener('click', ()=>{
-      const names = getNames();
-      if (!names.length){ alert('참가자가 없습니다.'); return; }
-      const shuffled = [...names].sort(()=>Math.random()-0.5);
+    list.addEventListener('input', ()=>{ updateCount(); renderListView(); stageReset(); });
 
-      const p1Label = document.getElementById('prize1Label').value;
-      const p1Count = parseInt(document.getElementById('prize1Count').value)||0;
-      const p2Label = document.getElementById('prize2Label').value;
-      const p2Count = parseInt(document.getElementById('prize2Count').value)||0;
-      const p3Label = document.getElementById('prize3Label').value;
-      const p3Count = parseInt(document.getElementById('prize3Count').value)||0;
-
-      const p1 = shuffled.slice(0,p1Count);
-      const p2 = shuffled.slice(p1Count,p1Count+p2Count);
-      const p3 = shuffled.slice(p1Count+p2Count,p1Count+p2Count+p3Count);
-
-      function render(el,label,list){
-        if(list.length){
-          el.hidden=false;
-          el.innerHTML = `<b>${label}</b><br>`+list.join(', ');
-        } else { el.hidden=true; }
-      }
-      render(document.getElementById('wPrize1'),'🥇 '+p1Label,p1);
-      render(document.getElementById('wPrize2'),'🥈 '+p2Label,p2);
-      render(document.getElementById('wPrize3'),'🥉 '+p3Label,p3);
-    });
-
-    // 입력창이 바뀌어도 즉시 칩 업데이트
-    list.addEventListener('input', ()=>{ updateCount(); renderListView(); });
-
-    // 초기 표시
     updateCount();
     renderListView();
+
+    /* =========================================================
+       2) 랜덤/셔플 도구
+       ========================================================= */
+    function randomInt(max){
+      if (window.crypto && window.crypto.getRandomValues){
+        const arr = new Uint32Array(1);
+        window.crypto.getRandomValues(arr);
+        return arr[0] % max;
+      }
+      return Math.floor(Math.random()*max);
+    }
+    function shuffle(array){
+      const a = array.slice();
+      for (let i=a.length-1;i>0;i--){
+        const j = randomInt(i+1);
+        [a[i],a[j]] = [a[j],a[i]];
+      }
+      return a;
+    }
+
+    /* =========================================================
+       3) 컨페티 (아주 가벼운 구현)
+       ========================================================= */
+    const confettiCanvas = document.getElementById('confetti');
+    const ctx = confettiCanvas.getContext('2d');
+    let confettiParticles = [];
+    let confettiRAF = null;
+
+    function resizeCanvas(){
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function spawnConfetti(amount=120, power=1){
+      const w = confettiCanvas.width, h = confettiCanvas.height;
+      const colors = ['#ff4757','#ffa502','#2ed573','#1e90ff','#eccc68','#a29bfe','#ff6b81','#70a1ff'];
+      for (let i=0;i<amount;i++){
+        confettiParticles.push({
+          x: w/2 + (Math.random()-0.5)*120,
+          y: h*0.28 + (Math.random()-0.5)*40,
+          vx: (Math.random()*6-3) * power,
+          vy: (Math.random()*-7-4) * power,
+          g: 0.18 + Math.random()*0.12,
+          w: 6+Math.random()*6,
+          h: 10+Math.random()*10,
+          a: 1,
+          rot: Math.random()*Math.PI,
+          vr: (Math.random()*0.3-0.15),
+          color: colors[randomInt(colors.length)]
+        });
+      }
+      if (!confettiRAF) confettiRAF = requestAnimationFrame(tickConfetti);
+    }
+
+    function tickConfetti(){
+      confettiRAF = requestAnimationFrame(tickConfetti);
+      const w = confettiCanvas.width, h = confettiCanvas.height;
+      ctx.clearRect(0,0,w,h);
+      confettiParticles.forEach(p=>{
+        p.vy += p.g;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vr;
+        p.a -= 0.006;
+      });
+      confettiParticles = confettiParticles.filter(p=>p.a>0 && p.y<h+40);
+
+      confettiParticles.forEach(p=>{
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, Math.min(1,p.a));
+        ctx.translate(p.x,p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+        ctx.restore();
+      });
+
+      if (confettiParticles.length===0){
+        cancelAnimationFrame(confettiRAF);
+        confettiRAF = null;
+      }
+    }
+
+    /* =========================================================
+       4) 무대(Stage) 표시/롤링 로직
+       ========================================================= */
+    let rollingTimer = null;
+
+    function stageReset(){
+      clearInterval(rollingTimer);
+      bigName.classList.remove('spin','pop');
+      bigName.textContent = '준비 중…';
+      nowTier.textContent = '대기';
+      ribbon.hidden = true;
+      const remainCount = getNames().length;
+      remain.textContent = remainCount>0 ? remainCount : '-';
+    }
+
+    function startRolling(pool){
+      bigName.classList.add('spin');
+      ribbon.hidden = true;
+      let idx = 0;
+      clearInterval(rollingTimer);
+      rollingTimer = setInterval(()=>{
+        bigName.textContent = pool[idx % pool.length];
+        idx++;
+      }, 50);
+    }
+
+    function stopRolling(winner){
+      clearInterval(rollingTimer);
+      bigName.classList.remove('spin');
+      bigName.classList.add('pop');
+      bigName.textContent = winner;
+      ribbon.hidden = false;
+      setTimeout(()=>bigName.classList.remove('pop'), 500);
+    }
+
+    /* =========================================================
+       5) 추첨 실행
+       ========================================================= */
+    btnDraw.addEventListener('click', async ()=>{
+      const names = getNames();
+      if (!names.length){ alert('참가자가 없습니다.'); return; }
+
+      const p1Label = p1LabelEl.value.trim() || '1등';
+      const p1Count = Math.max(0, parseInt(p1CountEl.value)||0);
+      const p2Label = p2LabelEl.value.trim() || '2등';
+      const p2Count = Math.max(0, parseInt(p2CountEl.value)||0);
+      const p3Label = p3LabelEl.value.trim() || '3등';
+      const p3Count = Math.max(0, parseInt(p3CountEl.value)||0);
+
+      const totalNeed = p1Count+p2Count+p3Count;
+      if (totalNeed===0){ alert('추첨 인원이 0명입니다.'); return; }
+      if (totalNeed > names.length){
+        alert(`추첨 총 ${totalNeed}명이 참가자 ${names.length}명을 초과했습니다.`);
+        return;
+      }
+
+      btnDraw.disabled = btnParse.disabled = btnClear.disabled = true;
+
+      let pool = shuffle(names);
+      let winners1=[], winners2=[], winners3=[];
+      remain.textContent = pool.length;
+
+      async function drawTier(label, count, targetListEl, storeArr, power=1.2){
+        if (count<=0) return;
+        nowTier.textContent = label;
+        targetListEl.hidden = true;
+        targetListEl.innerHTML = '';
+
+        for (let i=0;i<count;i++){
+          startRolling(pool);
+          const wait = 1400 + randomInt(800);
+          await sleep(wait);
+
+          const pickIndex = randomInt(pool.length);
+          const winner = pool[pickIndex];
+          pool.splice(pickIndex,1);
+
+          stopRolling(winner);
+          spawnConfetti(160, power);
+          storeArr.push(winner);
+          remain.textContent = pool.length;
+          await sleep(700);
+        }
+        renderWinners(targetListEl, label, storeArr);
+      }
+
+      await drawTier('🥇 '+p1Label, p1Count, w1, winners1, 1.8);
+      await drawTier('🥈 '+p2Label, p2Count, w2, winners2, 1.4);
+      await drawTier('🥉 '+p3Label, p3Count, w3, winners3, 1.1);
+
+      nowTier.textContent = '완료';
+      setTimeout(()=>{ ribbon.hidden = true; }, 1000);
+
+      btnDraw.disabled = btnParse.disabled = btnClear.disabled = false;
+    });
+
+    function renderWinners(el, label, arr){
+      if (!arr.length){ el.hidden = true; el.innerHTML=''; return; }
+      el.hidden = false;
+      el.innerHTML = `<b>${label}</b><div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:6px">` +
+        arr.map(n=>`<span class="chip" style="border-color:#0b57d0">${escapeHTML(n)}</span>`).join('') +
+        `</div>`;
+    }
+
+    function sleep(ms){ return new Promise(res=>setTimeout(res, ms)); }
+    function escapeHTML(s){ return s.replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+
+    // 첫 로드시 무대 상태 초기화
+    stageReset();
+
+    // ▼ 결과만보기 버튼 이벤트 (없으면 빠른 추첨, 있으면 결과만 표시)
+    document.getElementById('btnShowResults').addEventListener('click', ()=>{
+      const names = getNames();
+      if (!names.length){
+        alert('참가자가 없습니다.');
+        return;
+      }
+
+      const p1Label = p1LabelEl.value.trim() || '1등';
+      const p1Count = Math.max(0, parseInt(p1CountEl.value)||0);
+      const p2Label = p2LabelEl.value.trim() || '2등';
+      const p2Count = Math.max(0, parseInt(p2CountEl.value)||0);
+      const p3Label = p3LabelEl.value.trim() || '3등';
+      const p3Count = Math.max(0, parseInt(p3CountEl.value)||0);
+
+      const totalNeed = p1Count + p2Count + p3Count;
+      if (totalNeed === 0){
+        alert('추첨 인원이 0명입니다.');
+        return;
+      }
+      if (totalNeed > names.length){
+        alert(`추첨 총 ${totalNeed}명이 참가자 ${names.length}명을 초과했습니다.`);
+        return;
+      }
+
+      const hasResults = (w1.innerHTML.trim() !== '') || (w2.innerHTML.trim() !== '') || (w3.innerHTML.trim() !== '');
+
+      clearInterval(rollingTimer);
+      bigName.classList.remove('spin','pop');
+      ribbon.hidden = true;
+      nowTier.textContent = hasResults ? '결과 보기' : '빠른 추첨(애니메이션 생략)';
+
+      if (!hasResults){
+        let pool = shuffle(names);
+        const winners1 = pool.splice(0, p1Count);
+        const winners2 = pool.splice(0, p2Count);
+        const winners3 = pool.splice(0, p3Count);
+
+        renderWinners(w1, '🥇 '+p1Label, winners1);
+        renderWinners(w2, '🥈 '+p2Label, winners2);
+        renderWinners(w3, '🥉 '+p3Label, winners3);
+
+        remain.textContent = pool.length;
+        bigName.textContent = '완료';
+        spawnConfetti(120, 1.1);
+      } else {
+        w1.hidden = w1.innerHTML.trim() === '';
+        w2.hidden = w2.innerHTML.trim() === '';
+        w3.hidden = w3.innerHTML.trim() === '';
+        bigName.textContent = '결과 표시 중';
+      }
+
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   </script>
 </body>
 </html>
