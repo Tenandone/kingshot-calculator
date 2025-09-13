@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "킹샷 VIP 포인트 계산기 | KingshotData KR",
+    "desc": "VIP 포인트만 기준으로 계산합니다. 레벨별 누적 필요 포인트와 단일 패키지 비용 비교를 확인하세요."
+  },
+  "h1": "VIP 계산기",
+  "tag": "VIP 포인트 기준(다이아 제외)",
+
+  "form": {
+    "lang": "언어 / 통화",
+    "preset": "통화 프리셋 불러오기",
+    "p1": "티어 1 가격",
+    "p2": "티어 2 가격",
+    "p3": "티어 3 가격",
+    "p4": "티어 4 가격",
+    "p5": "티어 5 가격",
+    "currLevel": "현재 VIP 레벨",
+    "targetLevel": "목표 VIP 레벨"
+  },
+
+  "btn": {
+    "loadPreset": "프리셋 적용",
+    "calc": "계산하기",
+    "reset": "리셋"
+  },
+
+  "notice": {
+    "noDiamonds": "이 계산기는 다이아를 포함하지 않습니다. 다이아를 VIP 포인트로 전환하면 더 적은 금액으로 목표 레벨에 도달할 수 있습니다.",
+    "calcBase": "현재와 목표의 누적 포인트 차이를 계산합니다."
+  },
+
+  "vipTable": {
+    "title": "VIP 1–12 필요 포인트",
+    "level": "레벨",
+    "segment": "다음 레벨까지 필요 포인트",
+    "cumulative": "누적 합계",
+    "note": "VIP12 누적 합계: 4,800,000"
+  },
+
+  "packTable": {
+    "title": "패키지 (VIP 포인트 기준)",
+    "package": "패키지",
+    "price": "가격",
+    "baseVip": "기본 VIP / 개",
+    "eff": "통화 단위당 VIP",
+    "note": "기본 VIP만 반영합니다. ‘통화 단위당 VIP’는 가격 대비 참고 효율입니다."
+  },
+
+  "summary": {
+    "current": "현재",
+    "target": "목표",
+    "remaining": "남은 누적 포인트"
+  },
+
+  "single": {
+    "title": "단일 패키지로 달성 (VIP 포인트 기준)",
+    "package": "패키지",
+    "vipPerPack": "VIP / 개",
+    "need": "필요 개수(올림)",
+    "totalCost": "총 비용",
+    "note": "초과 허용(올림). 일일 제한 없음."
+  },
+
+  "footer": {
+    "note": "표기 통화는 선택한 언어를 따릅니다. 실제 스토어 가격은 위 입력란에서 조정하세요."
+  },
+
+  "lang": {
+    "ko": "한국어 (KRW)",
+    "en": "English (USD)",
+    "ja": "日本語 (JPY)",
+    "zhc": "简体中文 (CNY)",
+    "zht": "繁體中文 (TWD)"
+  }
+}

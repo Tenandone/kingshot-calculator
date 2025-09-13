@@ -1,0 +1,26 @@
+{
+  "name": "kingshot-calculator",
+  "version": "1.0.0",
+  "description": "Kingshot training & promotion calculator",
+  "main": "bump-version.js",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "bump": "node bump-version.js",
+    "deploy": "npm run bump && npm run build && gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tenandone/kingshot-calculator.git"
+  },
+  "keywords": [],
+  "author": "Ten",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tenandone/kingshot-calculator/issues"
+  },
+  "homepage": "https://tenandone.github.io/kingshot-calculator/",
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}

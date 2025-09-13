@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <base href="/" />
+<script src="/js/standalone-bridge.js?v=202509120604" defer></script>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+    .list-plain{list-style:none;padding-left:0;margin:8px 0 16px}
+    .list-plain li{line-height:1.7}
+    .muted{color:#8a93a4;font-size:12px;margin:6px 0 12px}
+  </style>
+
+  <!-- i18n -->
+  <script src="/js/i18n.js?v=202509120604" defer></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    if (!window.I18N?.init) return;
+    const raw = (localStorage.getItem('lang') || navigator.language || 'ko').replace('_','-');
+    const lang = raw.startsWith('zh') ? (raw.toLowerCase().includes('tw') ? 'zh-TW' : 'zh-CN')
+                                      : (raw.split('-')[0] || 'ko');
+    try {
+      await I18N.init({ lang, namespaces: ['db'] });
+      I18N.applyTo(document);
+    } catch (e) { console.error('[i18n init error]', e); }
+    document.addEventListener('i18n:changed', () => I18N.applyTo(document));
+  });
+  </script>
+</head>
+<body>
+  <main>
+    <!-- 대표 이미지 (타이틀 제거) -->
+    <figure>
+      <img
+        src="/img/database/Max Levels/max-levels-300x298.webp"
+        alt=""
+        data-i18n="db.maxLevels.imageAlt"
+        data-i18n-attr="alt"
+        width="300" height="298" loading="lazy" decoding="async">
+    </figure>
+
+    <!-- 1) 건물 최대레벨 (텍스트 리스트로 간소화) -->
+<section aria-labelledby="buildings-title">
+  <h2 id="buildings-title" data-i18n="db.maxLevels.buildings.title">건물 최대레벨</h2>
+
+  <p data-i18n="db.maxLevels.buildings.p1" data-i18n-mode="html">대부분 건물은 <strong>최대 30레벨</strong>, 일부는 <strong>최대 10레벨</strong>입니다.</p>
+  <p data-i18n="db.maxLevels.buildings.p2" data-i18n-mode="html">왕국/서버 나이 <strong>약 70일</strong>에 <strong>순금의 시대(황금시대)</strong>가 시작되며, <strong>도시센터, 지휘부, 훈련소, 야전병원, 대사관</strong> 등은 <strong>30 이후 순금(TG)</strong> 단계로 확장됩니다.</p>
+  <p data-i18n="db.maxLevels.buildings.p3" data-i18n-mode="html">순금 업그레이드는 <strong>30 → 30-1 → 30-2 → 30-3 → 30-4 → TG1</strong> 순서로 진행되며(30에서 TG1까지 총 15단계), <strong>향후 순금은 TG10까지 해금</strong>됩니다.</p>
+  <p data-i18n="db.maxLevels.buildings.p4" data-i18n-mode="html">주방, 주택, 의무실, 성벽, 방어탑, 방위소는 <strong>최대 10레벨</strong>입니다.</p>
+
+  <!-- TG 단계로 가는 7개 -->
+  <ul class="list-plain">
+    <li data-i18n="db.maxLevels.buildings.b1">도시센터 → 30 → TG10</li>
+    <li data-i18n="db.maxLevels.buildings.b2">보병대 → 30 → TG10</li>
+    <li data-i18n="db.maxLevels.buildings.b3">기병대 → 30 → TG10</li>
+    <li data-i18n="db.maxLevels.buildings.b4">궁병대 → 30 → TG10</li>
+    <li data-i18n="db.maxLevels.buildings.b5">야전병원 → 30 → TG10</li>
+    <li data-i18n="db.maxLevels.buildings.b6">대사관 → 30 → TG10</li>
+    <li data-i18n="db.maxLevels.buildings.b7">지휘부 → 30 → TG10</li>
+  </ul>
+
+  <!-- 일반 30 / 10 레벨 12개 -->
+  <ul class="list-plain">
+    <li data-i18n="db.maxLevels.buildings.r1">제재소 → 30</li>
+    <li data-i18n="db.maxLevels.buildings.r2">방앗간 → 30</li>
+    <li data-i18n="db.maxLevels.buildings.r3">채석장 → 30</li>
+    <li data-i18n="db.maxLevels.buildings.r4">철광산 → 30</li>
+    <li data-i18n="db.maxLevels.buildings.r5">아카데미 → 30</li>
+    <li data-i18n="db.maxLevels.buildings.r6">창고 → 30</li>
+    <li data-i18n="db.maxLevels.buildings.r7">주방 → 10</li>
+    <li data-i18n="db.maxLevels.buildings.r8">주택 → 10</li>
+    <li data-i18n="db.maxLevels.buildings.r9">의무실 → 10</li>
+    <li data-i18n="db.maxLevels.buildings.r10">성벽 → 10</li>
+    <li data-i18n="db.maxLevels.buildings.r11">방어탑 → 10</li>
+    <li data-i18n="db.maxLevels.buildings.r12">방위소 → 10</li>
+  </ul>
+</section>
+
+    <!-- 2) 영주 장비 & 보석 (표 제거, 문장만) -->
+    <section aria-labelledby="lord-gear-gems">
+      <h2 id="lord-gear-gems" data-i18n="db.maxLevels.lord.title">영주 장비 &amp; 보석</h2>
+      <p data-i18n="db.maxLevels.lord.p1">프로필(화면 왼쪽 상단)에서 접근 가능합니다.</p>
+      <p data-i18n="db.maxLevels.lord.p2" data-i18n-mode="html">영주 장비 최대 단계: 신화 T3 ★★★</p>
+      <p data-i18n="db.maxLevels.lord.p3" data-i18n-mode="html">영주 보석 최대레벨: 11 <small>(향후 상향될 수 있음)</small></p>
+    </section>
+
+    <!-- 3) 야수 · 괴수 (표 제거, 문장만) -->
+    <section aria-labelledby="beasts-bosses">
+      <h2 id="beasts-bosses" data-i18n="db.maxLevels.beasts.title">야수 · 괴수</h2>
+      <p data-i18n="db.maxLevels.beasts.p1">왕국/서버가 성장할수록 더 높은 레벨이 등장합니다.</p>
+      <p data-i18n="db.maxLevels.beasts.p2" data-i18n-mode="html">야수 최대레벨: 30 / 괴수 최대레벨: 7</p>
+    </section>
+
+    <!-- 4) 영웅 · 영웅 장비 (요약 리스트) -->
+    <section aria-labelledby="heroes-gear">
+      <h2 id="heroes-gear" data-i18n="db.maxLevels.heroes.title">영웅 · 영웅 장비</h2>
+      <ul class="list-plain">
+        <li data-i18n="db.maxLevels.heroes.li1" data-i18n-mode="html">영웅 최대레벨: 80 (도시센터 26레벨 필요)</li>
+        <li data-i18n="db.maxLevels.heroes.li2" data-i18n-mode="html">영웅 장비(일반) 최대레벨: 100</li>
+        <li data-i18n="db.maxLevels.heroes.li3" data-i18n-mode="html">영웅 전용 무기 최대레벨: 10 — 전용 재료는 영웅전용부속품 사용</li>
+        <li data-i18n="db.maxLevels.heroes.li4" data-i18n-mode="html">강화 및 단련 최대레벨: 20 — 신화 등급 영웅 장비는 제작망치와 레전드장비로 총 20단계 추가 가능</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,61 @@
+/* ==========================================================
+   KingshotData — mobile-patch.css (SAFE, opt-in, Home only)
+   기존 스타일 유지 + 홈 화면만 반응형 개선
+   ========================================================== */
+
+/* 1) 홈 카테고리 그리드: 화면에 맞춰 1~3열 자동 */
+.home-container .category-grid{
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  align-items: stretch;
+}
+/* 태블릿 이상에서 3열 고정 원하면 */
+@media (min-width: 768px){
+  .home-container .category-grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* 2) 홈 카드 미디어 박스: 동일 비율(잘림 방지) */
+.home-container .card__media{
+  /* 기존 전역 .card__media 규칙은 건드리지 않음 */
+  aspect-ratio: 4 / 3;
+  height: auto;                 /* 예전 고정 높이 무력화 */
+  display: grid;
+  place-items: center;
+  background: #f3f4f6;          /* 밝은 톤 유지 */
+  border-bottom: 1px solid #e8edf5;
+}
+.home-container .card__media img{
+  width: 90%;
+  height: 90%;
+  object-fit: contain;          /* 이미지 잘림 방지 */
+  display: block;
+}
+
+/* 3) 스티키 헤더(전역 룩은 유지, 기능만 추가) */
+.theme-default .site-header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #fff; /* 투명 겹침 방지 */
+}
+
+/* 4) 표(테이블) 안전 오버플로 처리 (전역 영향 최소화) */
+.table-wrap{ overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-wrap table{ min-width: 560px; width: 100%; border-collapse: collapse; }
+
+/* 5) 콘텐츠 이미지만 반응형 보장 (네비/아이콘 등은 보존) */
+#content img, #content video, #content canvas{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* (선택) 홈 대문/히어로가 남아있다면 숨기기
+.home-container .hero,
+.home-container .home-hero,
+.home-container .hero-card,
+.home-container .site-hero{ display:none !important; }
+*/

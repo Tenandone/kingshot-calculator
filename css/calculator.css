@@ -1,0 +1,211 @@
+/* === Calculator UI (scoped to #calc-ui) =================================== */
+/* 전역과 충돌 방지: 모든 규칙은 #calc-ui 하위로 한정 */
+
+#calc-ui {
+  --bg: #f0f2f5;
+  --panel: #fff;
+  --text: #222;
+  --muted: #333;
+  --border: #ccc;
+  --primary: #0069d9;
+  --primary-hover: #004a9f;
+
+  font-family: 'Noto Sans KR', Arial, sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  padding: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 폼 컨테이너 */
+#calc-ui form.calc-form {
+  max-width: 400px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px 15px;
+  background: var(--panel);
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 라벨 */
+#calc-ui label {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 4px;
+  display: block;
+  color: var(--muted);
+}
+
+/* 입력 & 셀렉트 */
+#calc-ui input[type="number"],
+#calc-ui select {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: #fff;
+  color: #111;
+}
+
+#calc-ui input[type="number"]:focus,
+#calc-ui select:focus,
+#calc-ui input[type="number"]:focus-visible,
+#calc-ui select:focus-visible {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 4px var(--primary);
+}
+
+/* 체크박스 & 라벨 */
+#calc-ui input[type="checkbox"] {
+  transform: scale(1.05);
+  margin-right: 6px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+#calc-ui label.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 버튼 */
+#calc-ui button {
+  margin-top: 6px;
+  padding: 12px 0;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  border-radius: 7px;
+  background-color: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, filter 0.15s ease;
+  width: 100%;
+}
+
+#calc-ui button:hover { background-color: var(--primary-hover); }
+#calc-ui button:active { filter: brightness(0.98); }
+
+/* 결과 패널 */
+#calc-ui #result {
+  max-width: 900px;
+  margin: 25px auto 0;
+  background: var(--panel);
+  border-radius: 14px;
+  padding: 20px 15px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  font-size: 15px;
+  color: #111;
+  line-height: 1.3;
+  font-weight: 600;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+#calc-ui #result p { margin: 0; }
+
+/* 표 */
+#calc-ui table {
+  width: 100%;
+  max-width: 900px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  word-break: break-word;
+  font-size: 13px;
+  margin: 0 auto; /* 가운데 정렬 */
+}
+
+#calc-ui th,
+#calc-ui td {
+  border: 1px solid var(--border);
+  padding: 6px 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#calc-ui thead th {
+  background-color: #e9f0fa;
+  font-weight: 700;
+}
+
+#calc-ui tbody tr:nth-child(even) td {
+  background-color: #f7f9fc;
+}
+
+/* 선행조건 패널(있을 경우) */
+#calc-ui #prereq-box {
+  max-width: 900px;
+  margin: 20px auto 0;
+  background: var(--panel);
+  border-radius: 14px;
+  padding: 18px 15px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+#calc-ui #prereq-box h2 { margin: 0 0 8px; font-size: 16px; }
+#calc-ui #prereq-list { margin: 0; padding-left: 18px; }
+#calc-ui #prereq-list li { margin: 4px 0; }
+
+/* 반응형 */
+@media (max-width: 480px) {
+  #calc-ui { padding: 10px; }
+
+  #calc-ui form.calc-form { padding: 15px 10px; }
+
+  #calc-ui label { font-size: 12px; }
+
+  #calc-ui input[type="number"],
+  #calc-ui select,
+  #calc-ui button {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  #calc-ui button { font-weight: 600; }
+
+  #calc-ui #result {
+    font-size: 14px;
+    padding: 15px 10px;
+  }
+
+  #calc-ui table { font-size: 11px; }
+}
+/* 결과 표는 고정 레이아웃 + 가운데 정렬 */
+#equip-calc #result table{
+  width:100%;
+  max-width:820px;
+  margin:0 auto;
+  table-layout:fixed;
+}
+
+/* 숫자 열: 우측정렬 + 강제 줄바꿈 허용 */
+#equip-calc th.num,
+#equip-calc td.num{
+  text-align:right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 모바일에서 숫자 줄바꿈 허용 */
+@media (max-width: 640px){
+  #equip-calc #result td.num{
+    overflow-wrap:anywhere;   /* 긴 숫자도 어느 곳에서든 줄바꿈 */
+    word-break:break-word;    /* 보조 */
+  }
+}
+.gear-details{ max-height:clamp(320px, 60vh, 800px); overflow:auto; }

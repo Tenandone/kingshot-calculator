@@ -1,0 +1,146 @@
+<!-- 사라진 유적 요약 가이드 — SPA include용 프래그먼트(doctype/head/body 없음) -->
+<article id="ruins-article">
+  <style>
+    /* 스코프: 이 프래그먼트 밖에는 절대 영향 X */
+    #ruins-article{font:inherit;color:inherit}
+    #ruins-article .wrap{max-width:980px;margin:0 auto;padding:32px 16px}
+    #ruins-article h1{font-size:clamp(24px,4vw,36px);margin:0 0 8px}
+    #ruins-article h2{font-size:1.35rem;margin:40px 0 10px}
+    #ruins-article p{margin:.4em 0}
+    #ruins-article .meta{display:flex;gap:10px;flex-wrap:wrap;color:#777;font-size:.95em;margin:8px 0 24px}
+    #ruins-article .toc{background:#f7f7f8;padding:16px;border-radius:16px;margin:24px 0}
+    #ruins-article .toc h2{margin:0 0 8px;font-size:1.05rem}
+    #ruins-article .toc ol{margin:0;padding-left:18px}
+    #ruins-article .toc a{display:block;padding:3px 0;text-decoration:none}
+    #ruins-article .toc a:hover{text-decoration:underline}
+    #ruins-article section{margin:40px 0}
+    #ruins-article ul,#ruins-article ol{padding-left:20px}
+    #ruins-article .tip,#ruins-article .warn,#ruins-article .note{padding:12px 14px;border-radius:12px;margin:12px 0}
+    #ruins-article .tip{background:#eef7ee}
+    #ruins-article .warn{background:#fff3cd}
+    #ruins-article .note{background:#eef2ff}
+    #ruins-article .cheat{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    #ruins-article .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#0b57d0;color:#fff;font-weight:700}
+    #ruins-article .muted{color:#666}
+    #ruins-article code.k{background:#f0f0f0;padding:2px 6px;border-radius:6px;font-family:ui-monospace,Consolas,monospace}
+    /* 표 기본 */
+    #ruins-article table{width:100%;border-collapse:collapse;margin:10px 0 18px}
+    #ruins-article th,#ruins-article td{border:1px solid #e5e5e5;padding:10px;text-align:center}
+    #ruins-article th{background:#f7f7f7}
+  </style>
+
+  <div class="wrap">
+    <header>
+      <h1 data-i18n="ruins.h1">사라진 유적 요약 가이드</h1>
+      <p class="meta">
+        <span data-i18n="ruins.meta.updated">작성/갱신: 2025-09-06</span> ·
+        <span data-i18n="ruins.meta.author">KingshotData 커뮤니티 가이드</span>
+      </p>
+      <p data-i18n="ruins.intro">
+        개인 콘텐츠(2주 주기, 30분 진행). 목표는 청동석 최대 채집입니다. 광맥 점령·수비병 처치·불안정 광맥 타이밍·궁전 대응·스킬 루틴만 외우면 안정적으로 상위권을 노릴 수 있습니다.
+      </p>
+      <div class="note">
+        <div class="cheat">
+          <span class="pill" data-i18n="ruins.s3.label">스킬 빌드</span>
+          <span data-i18n="ruins.cheat.skill">오 - 오 - 왼 - 왼 - 오</span>
+          <span>·</span>
+          <span data-i18n="ruins.cheat.timing">스킬 타이밍: 20/15/10/5분</span>
+          <span>·</span>
+          <span data-i18n="ruins.cheat.pri">고래: 3렙 광맥+수비병+궁전 / 무과금: 1~2렙 6채집 루틴</span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Table of contents">
+      <h2 data-i18n="ruins.toc.title">목차</h2>
+      <ol>
+        <li><a href="#s0" data-i18n="ruins.toc.s0">기본 정보</a></li>
+        <li><a href="#s1" data-i18n="ruins.toc.s1">기본 전략</a></li>
+        <li><a href="#s2" data-i18n="ruins.toc.s2">궁전 대응 전략</a></li>
+        <li><a href="#s3" data-i18n="ruins.toc.s3">스킬 트리 & 타이밍</a></li>
+        <li><a href="#s4" data-i18n="ruins.toc.s4">불안정 광맥 타이밍</a></li>
+        <li><a href="#s5" data-i18n="ruins.toc.s5">핵심 팁</a></li>
+        <li><a href="#s6" data-i18n="ruins.toc.s6">요약</a></li>
+      </ol>
+    </nav>
+
+    <section id="s0">
+      <h2 data-i18n="ruins.s0.title">기본 정보</h2>
+      <ul>
+        <li data-i18n="ruins.s0.l1">개인 콘텐츠, 2주 주기 / 30분 진행, 자유 시간 선택 가능</li>
+        <li data-i18n="ruins.s0.l2">목표: 청동석 최대 채집 → 영주 보석 성장 핵심 재화</li>
+        <li data-i18n="ruins.s0.l3">광맥(1~3레벨): 레벨↑ = 청동석↑ / 수비 강함↑ → 전투력 맞춰 도전</li>
+        <li data-i18n="ruins.s0.l4">점령 시 손모양 청동석 드랍: 누구나 줍기 가능 → 즉시 획득</li>
+      </ul>
+    </section>
+
+    <section id="s1">
+      <h2 data-i18n="ruins.s1.title">기본 전략</h2>
+      <ul>
+        <li data-i18n="ruins.s1.l1">강한 유저: 3레벨 광맥 위주 자리 → 수비병 수시 처치로 스킬 경험치 확보</li>
+        <li data-i18n="ruins.s1.l2">약한 유저: 2레벨 광맥 6채집 루틴 운영(안정 점수)</li>
+        <li data-i18n="ruins.s1.l3">체사레 수비병: 처치 시 스킬 경험치, 패배 시 해당 영웅 5분 사용 불가</li>
+      </ul>
+      <div class="tip" data-i18n="ruins.s1.tip">
+        시작 3분 대기 동안 2~3렙 광맥 + 수비병 밀집 지역을 파악한 뒤 도시 이전으로 유리한 위치 선점.
+      </div>
+    </section>
+
+    <section id="s2">
+      <h2 data-i18n="ruins.s2.title">궁전 대응 전략</h2>
+      <ul>
+        <li data-i18n="ruins.s2.l1">강한 유저: 남은 7분 시점 중앙 궁전 진입 준비</li>
+        <li data-i18n="ruins.s2.l2">행군 가속 50% 3~4개 사용 시 약 2초 남기고 도착 가능(맵·거리 따라 변동)</li>
+        <li data-i18n="ruins.s2.l3">약한 유저: 궁전 경쟁은 피하고 광맥 채집에 집중 → 안정적 점수</li>
+      </ul>
+    </section>
+
+    <section id="s3">
+      <h2 data-i18n="ruins.s3.title">스킬 트리 & 타이밍</h2>
+      <p class="cheat"><span class="pill" data-i18n="ruins.s3.label">스킬 빌드</span></p>
+      <p><span data-i18n="ruins.s3.buildOrder">오 - 오 - 왼 - 왼 - 오</span></p>
+      <ol>
+        <li data-i18n="ruins.s3.lv1">Lv1 (오): 수비병 처치 시 청동석 추가</li>
+        <li data-i18n="ruins.s3.lv2">Lv2 (오): 부대 이동속도 +25%</li>
+        <li data-i18n="ruins.s3.lv3">Lv3 (왼): 점령 성공 시 청동석 추가 (쿨타임 1분)</li>
+        <li data-i18n="ruins.s3.lv4">Lv4 (왼): 채집 효율 +15%</li>
+        <li data-i18n="ruins.s3.lv5">Lv5 (오): 채집 속도 +50% (60초, 쿨 5분)</li>
+      </ol>
+      <ul>
+        <li data-i18n="ruins.s3.timing">스킬 타이밍: 20분 / 15분 / 10분 / 5분에 한 번씩 사용</li>
+        <li data-i18n="ruins.s3.key">특히 15분 타이밍만 맞춰도 1등 가능 → 쿨 누수 방지</li>
+        <li data-i18n="ruins.s3.goal">목표: 20분 전까지 Lv5 달성(수비병 처치로 경험치 수급)</li>
+      </ul>
+    </section>
+
+    <section id="s4">
+      <h2 data-i18n="ruins.s4.title">불안정 광맥 타이밍</h2>
+      <ul>
+        <li data-i18n="ruins.s4.l1">채집 속도 빠름 → 항상 우선 점령 대상</li>
+        <li data-i18n="ruins.s4.l2">등장 시간: 남은 20·19·18분 / 10·9·8분 구간</li>
+        <li data-i18n="ruins.s4.l3">등장 알림 시 전 부대 투입, 손모양 드랍 즉시 줍기</li>
+      </ul>
+    </section>
+
+    <section id="s5">
+      <h2 data-i18n="ruins.s5.title">핵심 팁</h2>
+      <ul>
+        <li data-i18n="ruins.s5.l1">광맥·수비병·줍기 루프 최적화: 이동 경로를 원형 루틴으로 설계</li>
+        <li data-i18n="ruins.s5.l2">패배 리스크 관리: 약한 영웅은 수비병 교전 지양, 채집/줍기에 집중</li>
+        <li data-i18n="ruins.s5.l3">경쟁 과열 지역 회피: 인접 대체 광맥으로 즉시 이동</li>
+      </ul>
+      <div class="warn" data-i18n="ruins.s5.warn">패배 시 해당 영웅 5분 사용 불가 → 핵심 조합은 무리한 교전 금지</div>
+    </section>
+
+    <section id="s6">
+      <h2 data-i18n="ruins.s6.title">요약</h2>
+      <ul>
+        <li data-i18n="ruins.s6.sum1">강한 유저: 3렙 광맥 + 수비병 + 7분 궁전 진입</li>
+        <li data-i18n="ruins.s6.sum2">약한 유저: 2렙 광맥 6채집 루틴 + 수비병 중심</li>
+        <li data-i18n="ruins.s6.sum3">스킬 타이밍: 20/15/10/5분</li>
+        <li data-i18n="ruins.s6.sum4">체사레 수비병 처리 → 빠른 스킬 5렙 달성</li>
+        <li data-i18n="ruins.s6.sum5">“오-오-왼-왼-오”만 외워도 상위권 충분</li>
+      </ul>
+    </section>
+  </div>
+</article>

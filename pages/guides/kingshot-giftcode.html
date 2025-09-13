@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title id="meta-title">킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드</title>
+
+  <!-- SEO / OG -->
+  <meta name="description" id="meta-desc" content="킹샷 기프트코드(쿠폰) 최신 목록과 입력 방법 정리. 만료일, 무기한 코드 안내, 공식 입력창 링크.">
+  <meta property="og:title" id="og-title" content="킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드">
+  <meta property="og:description" id="og-desc" content="킹샷 기프트코드(쿠폰) 최신 목록과 입력 방법 정리. 만료일, 무기한 코드 안내, 공식 입력창 링크.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://kingshotdata.kr/pages/guides/kingshot-giftcode.html">
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png">
+  <link rel="canonical" href="https://kingshotdata.kr/pages/guides/kingshot-giftcode.html">
+
+  <style>
+:root{--fg:#111;--muted:#666;--bd:#e5e7eb;--pri:#0b57d0;--bg:#fff}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;background:#fff;color:var(--fg)}
+
+.wrap{max-width:1080px;margin-inline:auto;padding:24px clamp(16px,4vw,32px) 64px}
+
+header .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+.lang{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+select{padding:6px 10px;border:1px solid var(--bd);border-radius:8px;background:#fff}
+.h1{font-size:28px;margin:6px 0}
+.muted{color:var(--muted)}
+h2{font-size:20px;margin:26px 0 10px}
+
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+@media (max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+
+.card{
+  border:1px solid var(--bd);
+  border-radius:12px;
+  padding:14px;
+  background:#fff;
+  display:flex;
+  flex-direction:column;   /* 위→아래로 쌓기 */
+  align-items:flex-start;
+  gap:10px;
+}
+.code{font:700 16px/1 ui-monospace,SFMono-Regular,Consolas,monospace}
+.until{font-size:12px;color:var(--muted)}
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{
+  padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:#fff;cursor:pointer;
+  white-space:nowrap;      /* 버튼은 절대 줄바꿈 금지 */
+}
+.btn:hover{background:#f5f5f5}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.disabled{opacity:.5;cursor:not-allowed;pointer-events:none}
+.card.expired .code{text-decoration:line-through;color:var(--muted)}
+
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid var(--bd);
+  white-space:nowrap;      /* 배지도 줄바꿈 금지 */
+  line-height:1.2;
+}
+.badge.expired{border-color:#ef4444;color:#b91c1c;background:#fee2e2}
+.badge.active{border-color:#16a34a;color:#166534;background:#dcfce7}
+
+ol{margin:8px 0 0 18px}
+.faq details{border:1px solid var(--bd);border-radius:10px;padding:10px;background:#fff;margin:8px 0}
+.faq summary{cursor:pointer;font-weight:600}
+.note{font-size:13px;color:var(--muted)}
+.divider{height:1px;background:#eee;margin:24px 0}
+
+/* HERO: Grid로 안정화 (중복/충돌 제거) */
+.hero{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto; /* 왼쪽 유동, 오른쪽 버튼 폭 */
+  align-items:center;
+  gap:16px;
+  border:1px solid var(--bd);
+  border-radius:14px;
+  padding:16px 18px;
+  background:#fafafa;
+}
+.hero > :not(.cta){min-width:0; overflow-wrap:anywhere; word-break:keep-all;}
+.cta{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 16px;border-radius:999px;background:#111;color:#fff;text-decoration:none;
+  justify-self:end;white-space:nowrap;max-width:100%;
+}
+.cta svg{width:18px;height:18px}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .cta{justify-self:stretch;text-align:center}
+}
+
+/* 일반 텍스트만 안전 개행 허용 (전역 any­where 제거) */
+.card p, .card .title, .card .desc {overflow-wrap:anywhere;word-break:keep-all}
+</style>
+
+
+
+  <!-- 기본 FAQ 구조화 데이터(ko). 언어 변경 시 굳이 갱신할 필요 없음 -->
+  <script type="application/ld+json" id="faq-jsonld">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"킹샷 기프트코드는 어디서 입력하나요?",
+        "acceptedAnswer":{"@type":"Answer","text":"게임 내 프로필 → 설정 → 쿠폰 교환에서 입력하거나, 공식 입력창(ks-giftcode.centurygame.com)에서 입력합니다."}
+      },
+      {
+        "@type":"Question",
+        "name":"무기한 쿠폰(vip777)은 만료가 없나요?",
+        "acceptedAnswer":{"@type":"Answer","text":"네, 무기한으로 안내되며 만료일이 없습니다. 본 페이지에서도 ‘무기한’으로 표시됩니다."}
+      },
+      {
+        "@type":"Question",
+        "name":"쿠폰이 적용되지 않아요. 왜 그런가요?",
+        "acceptedAnswer":{"@type":"Answer","text":"계정당 1회 제한, 지역/서버 제한, 오탈자 등의 이유일 수 있습니다. 대소문자/공백을 확인하고 재시도해 주세요."}
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="topbar">
+        <div class="muted">KingshotData</div>
+        <label class="lang">
+          <span id="label-language">언어</span>
+          <select id="langSelect" aria-label="Language">
+            <option value="ko">한국어(KR)</option>
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="zh-CN">简体</option>
+            <option value="zh-TW">繁體</option>
+          </select>
+        </label>
+      </div>
+      <h1 class="h1" id="h1">킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드</h1>
+      <p class="muted" id="lead">공식 입력창 링크, 최신 코드/만료일(무기한 포함), 입력 방법을 한 곳에 정리했습니다.</p>
+    </header>
+
+    <!-- Hero / CTA -->
+    <section class="hero" aria-label="Gift code quick actions">
+      <div>
+        <strong id="hero-title">쿠폰 입력은 여기서!</strong><br>
+        <span class="note" id="hero-desc">공식 입력창으로 이동해 코드를 교환하세요.</span>
+      </div>
+      <a class="cta" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener"
+         aria-label="Open Kingshot gift code page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v8a2 2 0 0 1-2 2h-5v-10h7zM11 22H6a2 2 0 0 1-2-2v-8h7v10zM21 8h-3.17A3 3 0 1 0 12 6a3 3 0 1 0-5.83 2H3a1 1 0 0 0 0 2h18a1 1 0 1 0 0-2ZM9 7a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm6 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
+        <span id="cta-text">쿠폰 입력창 바로가기</span>
+      </a>
+    </section>
+
+    <!-- Current coupons -->
+    <section aria-live="polite" aria-busy="true">
+      <h2 id="current-title">현재 사용 가능한 쿠폰</h2>
+      <div id="couponGrid" class="grid">로딩 중…</div>
+      <p class="note" id="current-note">※ 일부 코드는 지역/서버/계정 상태에 따라 사용이 제한될 수 있습니다.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- How to redeem -->
+    <section>
+      <h2 id="how-title">입력 방법</h2>
+      <ol>
+        <li id="how-1">게임 내 <strong>프로필 → 설정 → 쿠폰 교환</strong> 메뉴로 이동합니다.</li>
+        <li id="how-2">쿠폰 코드를 정확히 입력합니다.</li>
+        <li id="how-3">우편함에서 보상을 수령합니다.</li>
+      </ol>
+      <p class="note" id="how-tip">Tip: 복사 버튼으로 코드를 복사한 뒤, 입력창에 붙여넣으면 편합니다.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <h2 id="faq-title">자주 묻는 질문</h2>
+
+      <details>
+        <summary id="faq-q1">어디서 입력하나요?</summary>
+        <div class="note" id="faq-a1">
+          게임 내 <strong>프로필 → 설정 → 쿠폰 교환</strong> 또는 공식 입력창(상단 버튼)을 이용하세요.
+        </div>
+      </details>
+
+      <details>
+        <summary id="faq-q2">무기한 쿠폰은 어떻게 표기되나요?</summary>
+        <div class="note" id="faq-a2">만료일이 없으면 자동으로 <strong>무기한</strong>으로 표시됩니다.</div>
+      </details>
+
+      <details>
+        <summary id="faq-q3">코드가 적용되지 않아요.</summary>
+        <div class="note" id="faq-a3">계정당 1회 제한, 지역/서버 제한, 오탈자 등의 이유일 수 있습니다. 대소문자/공백을 확인하고 재시도해 주세요.</div>
+      </details>
+    </section>
+  </main>
+
+  <script>
+    // ===== Inline i18n dictionary (ko, en, ja, zh-CN, zh-TW) =====
+    const L = {
+      "ko": {
+        metaTitle: "킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드",
+        metaDesc: "킹샷 기프트코드(쿠폰) 최신 목록과 입력 방법 정리. 만료일, 무기한 코드 안내, 공식 입력창 링크.",
+        ogTitle: "킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드",
+        ogDesc: "킹샷 기프트코드(쿠폰) 최신 목록과 입력 방법 정리. 만료일, 무기한 코드 안내, 공식 입력창 링크.",
+        labelLanguage: "언어",
+        h1: "킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드",
+        lead: "공식 입력창 링크, 최신 코드/만료일(무기한 포함), 입력 방법을 한 곳에 정리했습니다.",
+        heroTitle: "쿠폰 입력은 여기서!",
+        heroDesc: "공식 입력창으로 이동해 코드를 교환하세요.",
+        cta: "쿠폰 입력창 바로가기",
+        currentTitle: "현재 사용 가능한 쿠폰",
+        currentNote: "※ 일부 코드는 지역/서버/계정 상태에 따라 사용이 제한될 수 있습니다.",
+        howTitle: "입력 방법",
+        how1: "게임 내 <strong>프로필 → 설정 → 쿠폰 교환</strong> 메뉴로 이동합니다.",
+        how2: "쿠폰 코드를 정확히 입력합니다.",
+        how3: "우편함에서 보상을 수령합니다.",
+        howTip: "Tip: 복사 버튼으로 코드를 복사한 뒤, 입력창에 붙여넣으면 편합니다.",
+        faqTitle: "자주 묻는 질문",
+        faqQ1: "어디서 입력하나요?",
+        faqA1: "게임 내 <strong>프로필 → 설정 → 쿠폰 교환</strong> 또는 공식 입력창(상단 버튼)을 이용하세요.",
+        faqQ2: "무기한 쿠폰은 어떻게 표기되나요?",
+        faqA2: "만료일이 없으면 자동으로 <strong>무기한</strong>으로 표시됩니다.",
+        faqQ3: "코드가 적용되지 않아요.",
+        faqA3: "계정당 1회 제한, 지역/서버 제한, 오탈자 등의 이유일 수 있습니다. 대소문자/공백을 확인하고 재시도해 주세요.",
+        copy: "복사", copied: "복사됨!", redeem: "교환",
+        until: "만료", empty: "현재 사용 가능한 쿠폰이 없습니다.",
+        forever: "무기한", expired: "만료됨", active: "사용 가능"
+      },
+      "en": {
+        metaTitle: "Kingshot Gift Codes · How to Redeem & Latest Codes",
+        metaDesc: "Up-to-date Kingshot gift codes and how to redeem them. Includes expiry dates, permanent codes, and the official redemption portal.",
+        ogTitle: "Kingshot Gift Codes · How to Redeem & Latest Codes",
+        ogDesc: "Up-to-date Kingshot gift codes and how to redeem them. Includes expiry dates, permanent codes, and the official redemption portal.",
+        labelLanguage: "Language",
+        h1: "Kingshot Gift Codes · How to Redeem & Latest Codes",
+        lead: "All in one place: official portal link, current codes with expiry (incl. permanent), and step-by-step redeem guide.",
+        heroTitle: "Redeem here!",
+        heroDesc: "Go to the official portal to redeem your code.",
+        cta: "Open Redemption Portal",
+        currentTitle: "Current Active Codes",
+        currentNote: "Note: Some codes may be restricted by region/server/account status.",
+        howTitle: "How to Redeem",
+        how1: "In game, go to <strong>Profile → Settings → Coupon Exchange</strong>.",
+        how2: "Enter the code exactly as shown.",
+        how3: "Claim the reward from your mailbox.",
+        howTip: "Tip: Click Copy, then paste the code in the exchange field.",
+        faqTitle: "FAQ",
+        faqQ1: "Where do I redeem?",
+        faqA1: "Use <strong>Profile → Settings → Coupon Exchange</strong> in game, or the official portal (button above).",
+        faqQ2: "How are permanent codes shown?",
+        faqA2: "If a code has no expiry, it’s displayed as <strong>Permanent</strong>.",
+        faqQ3: "My code didn’t work. Why?",
+        faqA3: "It may be one-time per account, region/server limited, or a typo. Check case/spacing and try again.",
+        copy: "Copy", copied: "Copied!", redeem: "Redeem",
+        until: "Until", empty: "No active codes at the moment.",
+        forever: "Permanent", expired: "Expired", active: "Active"
+      },
+      "ja": {
+        metaTitle: "キングショット ギフトコード｜入力方法と最新コード",
+        metaDesc: "キングショットの最新ギフトコードと入力方法をまとめて紹介。期限、無期限コード、公式入力ページへのリンク付き。",
+        ogTitle: "キングショット ギフトコード｜入力方法と最新コード",
+        ogDesc: "キングショットの最新ギフトコードと入力方法をまとめて紹介。期限、無期限コード、公式入力ページへのリンク付き。",
+        labelLanguage: "言語",
+        h1: "キングショット ギフトコード｜入力方法と最新コード",
+        lead: "公式入力ページ、現在のコード（有効期限・無期限含む）、手順をまとめています。",
+        heroTitle: "ここから入力！",
+        heroDesc: "公式入力ページに移動してコードを引き換えましょう。",
+        cta: "入力ページを開く",
+        currentTitle: "現在利用可能なコード",
+        currentNote: "※ 一部コードは地域／サーバー／アカウント状況により制限される場合があります。",
+        howTitle: "入力手順",
+        how1: "ゲーム内で<strong>プロフィール → 設定 → クーポン交換</strong>へ進みます。",
+        how2: "表示どおり正確にコードを入力します。",
+        how3: "メールボックスから報酬を受け取ります。",
+        howTip: "Tip: コピーして貼り付けるとスムーズです。",
+        faqTitle: "よくある質問",
+        faqQ1: "どこで入力しますか？",
+        faqA1: "ゲーム内の<strong>プロフィール → 設定 → クーポン交換</strong>、または上部の公式ページをご利用ください。",
+        faqQ2: "無期限コードはどのように表示されますか？",
+        faqA2: "有効期限がない場合、<strong>無期限</strong>と表示されます。",
+        faqQ3: "コードが使えません。",
+        faqA3: "アカウント1回のみ、地域／サーバー制限、または入力ミスの可能性があります。大文字小文字・スペースを確認してください。",
+        copy: "コピー", copied: "コピー完了！", redeem: "交換",
+        until: "期限", empty: "現在利用できるコードはありません。",
+        forever: "無期限", expired: "期限切れ", active: "利用可"
+      },
+      "zh-CN": {
+        metaTitle: "Kingshot 礼品码｜兑换方法与最新可用代码",
+        metaDesc: "汇总 Kingshot 最新礼品码及兑换方法，包含到期日、永久代码与官网兑换入口。",
+        ogTitle: "Kingshot 礼品码｜兑换方法与最新可用代码",
+        ogDesc: "汇总 Kingshot 最新礼品码及兑换方法，包含到期日、永久代码与官网兑换入口。",
+        labelLanguage: "语言",
+        h1: "Kingshot 礼品码｜兑换方法与最新可用代码",
+        lead: "在此查看官网入口、当前礼品码（含到期/永久）以及兑换步骤。",
+        heroTitle: "从这里兑换！",
+        heroDesc: "前往官方网站兑换你的礼品码。",
+        cta: "打开兑换入口",
+        currentTitle: "当前可用礼品码",
+        currentNote: "※ 部分代码可能受地区/服务器/账号状态限制。",
+        howTitle: "兑换步骤",
+        how1: "在游戏内前往<strong>个人资料 → 设置 → 优惠码兑换</strong>。",
+        how2: "准确输入礼品码。",
+        how3: "在邮箱中领取奖励。",
+        howTip: "Tip：点击复制后，粘贴到兑换框会更方便。",
+        faqTitle: "常见问题",
+        faqQ1: "在哪里兑换？",
+        faqA1: "使用游戏内的<strong>个人资料 → 设置 → 优惠码兑换</strong>，或上方的官方网站入口。",
+        faqQ2: "永久代码如何显示？",
+        faqA2: "若没有到期日，将显示为<strong>永久</strong>。",
+        faqQ3: "代码无法使用？",
+        faqA3: "可能为每个账号仅一次、地区/服务器限制或输入错误。请检查大小写和空格后再试。",
+        copy: "复制", copied: "已复制！", redeem: "兑换",
+        until: "截止", empty: "目前没有可用的礼品码。",
+        forever: "永久", expired: "已过期", active: "可用"
+      },
+      "zh-TW": {
+        metaTitle: "Kingshot 禮品碼｜兌換方法與最新可用代碼",
+        metaDesc: "整理 Kingshot 最新禮品碼與兌換方法，包含到期日、永久代碼與官方兌換入口。",
+        ogTitle: "Kingshot 禮品碼｜兌換方法與最新可用代碼",
+        ogDesc: "整理 Kingshot 最新禮品碼與兌換方法，包含到期日、永久代碼與官方兌換入口。",
+        labelLanguage: "語言",
+        h1: "Kingshot 禮品碼｜兌換方法與最新可用代碼",
+        lead: "本頁提供官方入口、目前可用代碼（含到期/永久）與兌換步驟。",
+        heroTitle: "從這裡兌換！",
+        heroDesc: "前往官方頁面兌換禮品碼。",
+        cta: "開啟兌換入口",
+        currentTitle: "目前可用禮品碼",
+        currentNote: "※ 部分代碼可能受地區/伺服器/帳號限制。",
+        howTitle: "兌換步驟",
+        how1: "在遊戲內前往<strong>個人資料 → 設定 → 優惠碼兌換</strong>。",
+        how2: "正確輸入禮品碼。",
+        how3: "在信箱領取獎勵。",
+        howTip: "Tip：按下複製後，在兌換欄貼上更方便。",
+        faqTitle: "常見問題",
+        faqQ1: "在哪裡兌換？",
+        faqA1: "使用遊戲內的<strong>個人資料 → 設定 → 優惠碼兌換</strong>，或上方的官方入口。",
+        faqQ2: "永久代碼如何顯示？",
+        faqA2: "若沒有到期日，將顯示為<strong>永久</strong>。",
+        faqQ3: "代碼無法使用？",
+        faqA3: "可能為每帳號僅一次、地區/伺服器限制或輸入錯誤。請檢查大小寫與空格後再試。",
+        copy: "複製", copied: "已複製！", redeem: "兌換",
+        until: "截止", empty: "目前沒有可用的禮品碼。",
+        forever: "永久", expired: "已過期", active: "可用"
+      }
+    };
+
+    // ===== Language bootstrap =====
+    function detectInitialLang(){
+      const sp = new URLSearchParams(location.search);
+      const urlLang = sp.get('lang');
+      let saved = null; try { saved = localStorage.getItem('lang'); } catch(_){}
+      if (urlLang && L[urlLang]) return urlLang;
+      if (saved && L[saved]) return saved;
+      const nav = (navigator.language || 'ko').toLowerCase();
+      if (nav.startsWith('ko')) return 'ko';
+      if (nav.startsWith('ja')) return 'ja';
+      if (nav.includes('zh') && nav.includes('tw')) return 'zh-TW';
+      if (nav.includes('zh')) return 'zh-CN';
+      return 'en';
+    }
+
+    function applyLang(lang){
+      const t = (k)=> (L[lang] && L[lang][k]) || (L.en && L.en[k]) || k;
+
+      // <html lang="">
+      document.documentElement.setAttribute('lang', lang);
+
+      // Meta / OG
+      document.getElementById('meta-title').textContent = t('metaTitle');
+      document.title = t('metaTitle');
+      document.getElementById('meta-desc').setAttribute('content', t('metaDesc'));
+      document.getElementById('og-title').setAttribute('content', t('ogTitle'));
+      document.getElementById('og-desc').setAttribute('content', t('ogDesc'));
+
+      // Labels / Text
+      document.getElementById('label-language').textContent = t('labelLanguage');
+      document.getElementById('h1').textContent = t('h1');
+      document.getElementById('lead').textContent = t('lead');
+      document.getElementById('hero-title').textContent = t('heroTitle');
+      document.getElementById('hero-desc').textContent = t('heroDesc');
+      document.getElementById('cta-text').textContent = t('cta');
+      document.getElementById('current-title').textContent = t('currentTitle');
+      document.getElementById('current-note').textContent = t('currentNote');
+      document.getElementById('how-title').textContent = t('howTitle');
+      document.getElementById('how-1').innerHTML = t('how1');
+      document.getElementById('how-2').innerHTML = t('how2');
+      document.getElementById('how-3').innerHTML = t('how3');
+      document.getElementById('how-tip').textContent = t('howTip');
+      document.getElementById('faq-title').textContent = t('faqTitle');
+      document.getElementById('faq-q1').textContent = t('faqQ1');
+      document.getElementById('faq-a1').innerHTML = t('faqA1');
+      document.getElementById('faq-q2').textContent = t('faqQ2');
+      document.getElementById('faq-a2').innerHTML = t('faqA2');
+      document.getElementById('faq-q3').textContent = t('faqQ3');
+      document.getElementById('faq-a3').textContent = t('faqA3');
+
+      try { localStorage.setItem('lang', lang); } catch(_){}
+      renderCoupons(true); // 라벨/배지 재렌더
+    }
+
+    // ===== Coupons logic (UTC 00시 만료) =====
+    function isForever(val){
+      if (!val) return true;
+      const v = String(val).trim().toLowerCase();
+      return v === 'permanent' || v === 'infinite' || v === '∞' || v === 'forever' || v === 'no-expiry' || v === 'noexp' || v === 'nolimit';
+    }
+    function foreverText(lang){
+      return (L[lang] && L[lang].forever) || L.en.forever;
+    }
+    function fmtDate(val, lang){
+      if (isForever(val)) return foreverText(lang);
+      // 간략 표기: JSON 문자열 그대로 노출 (YYYY-MM-DD)
+      return String(val).trim();
+    }
+    function parseUTCDate(ymd){
+      // "2025-09-12" → 2025-09-12 00:00:00 UTC
+      return new Date(String(ymd).trim() + 'T00:00:00Z');
+    }
+    function isExpired(until){
+      if (isForever(until)) return false;
+      return new Date() >= parseUTCDate(until);
+    }
+
+    let _couponsCache = null;
+    async function loadCoupons(){
+      try{
+        const res = await fetch('/data/coupons.json?v=now', { cache:'no-store' });
+        if (!res.ok) throw new Error(res.status);
+        const data = await res.json();
+        return Array.isArray(data?.coupons) ? data.coupons : [];
+      }catch(_){ return []; }
+    }
+
+    async function renderCoupons(reuseCache=false){
+      const grid = document.getElementById('couponGrid');
+      const lang = document.documentElement.getAttribute('lang') || 'en';
+      const T = (k)=> (L[lang] && L[lang][k]) || (L.en && L.en[k]) || k;
+
+      if (!reuseCache || !_couponsCache) {
+        _couponsCache = await loadCoupons();
+      }
+      grid.setAttribute('aria-busy','false');
+      grid.textContent = '';
+
+      const coupons = _couponsCache.slice(0,3); // 필요 시 개수 조정
+      if (!coupons.length){
+        const empty = document.createElement('div');
+        empty.className = 'note';
+        empty.textContent = T('empty');
+        grid.appendChild(empty);
+        return;
+      }
+
+      coupons.forEach(c => {
+        const expired = isExpired(c.until);
+        const card = document.createElement('div');
+        card.className = 'card' + (expired ? ' expired' : '');
+
+        const left = document.createElement('div');
+        left.innerHTML = `
+          <div class="code">${(c.code||'').trim()}</div>
+          <div class="until">
+            ${isForever(c.until) ? foreverText(lang) : (T('until') + ': ' + fmtDate(c.until, lang))}
+            ${expired ? `<span class="badge expired">${T('expired')}</span>` : `<span class="badge active">${T('active')}</span>`}
+          </div>`;
+
+        const actions = document.createElement('div');
+        actions.className = 'actions';
+
+        const btnCopy = document.createElement('button');
+        btnCopy.className = 'btn'; btnCopy.type = 'button'; btnCopy.textContent = T('copy');
+        btnCopy.disabled = expired;
+        btnCopy.addEventListener('click', async () => {
+          const code = (c.code||'').trim();
+          try { await navigator.clipboard.writeText(code); }
+          catch(_){
+            const ta=document.createElement('textarea');
+            ta.value=code; document.body.appendChild(ta);
+            ta.select(); document.execCommand('copy'); ta.remove();
+          }
+          btnCopy.textContent = T('copied');
+          setTimeout(()=>btnCopy.textContent=T('copy'), 1200);
+        });
+
+        const btnOpen = document.createElement('a');
+        btnOpen.className = 'btn';
+        btnOpen.href = 'https://ks-giftcode.centurygame.com/';
+        btnOpen.target = '_blank'; btnOpen.rel = 'noopener';
+        btnOpen.textContent = T('redeem');
+        if (expired) btnOpen.classList.add('disabled');
+
+        actions.appendChild(btnCopy);
+        actions.appendChild(btnOpen);
+
+        card.appendChild(left);
+        card.appendChild(actions);
+        grid.appendChild(card);
+      });
+    }
+
+    // Init
+    (function init(){
+      const initial = detectInitialLang();
+      document.getElementById('langSelect').value = initial;
+      applyLang(initial);
+      renderCoupons();
+
+      // 언어 변경
+      document.getElementById('langSelect').addEventListener('change', e=>{
+        applyLang(e.target.value);
+      });
+
+      // 실시간 만료 반영(UTC 00시 경과 직후 자동 반영) — 60초마다 새로고침 (데이터는 캐시 재사용)
+      setInterval(()=>renderCoupons(true), 60*1000);
+    })();
+  </script>
+</body>
+</html>

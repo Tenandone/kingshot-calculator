@@ -1,0 +1,27 @@
+/* 홈 컨테이너 여백 */
+.home-container{ padding:12px; }
+
+/* 카테고리 카드 그리드: 자동 1~3열 */
+.category-grid{
+  display:grid; gap:14px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  align-items:stretch;
+}
+
+/* 데스크톱에서 3열 고정 원하면 */
+@media (min-width: 768px){
+  .category-grid{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+
+/* 카드 내부 */
+.card--category{ text-decoration:none; color:var(--text); }
+.card--category .card__media{ aspect-ratio: 16/10; background:#f2f6ff; display:grid; place-items:center; }
+.card--category .card__body{ padding:12px; }
+.card__title{ font-weight:700; margin:0 0 4px; }
+.card__subtitle{ opacity:.8; font-size:14px; }
+
+/* 썸네일 이미지 */
+.cat-icon__img{ width:100%; height:100%; object-fit:contain; }
+
+/* (네가 지웠던 대문은 계속 비표시) */
+.hero, .home-hero, .hero-card, .site-hero{ display:none !important; }

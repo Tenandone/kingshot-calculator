@@ -1,0 +1,110 @@
+<!-- pages/heroes.html -->
+<section class="container">
+  <h1 class="page-title">Heroes</h1>
+
+  <!-- JS(heroes.js)가 섹션(3/2/1세대, SR, R)을 주입할 마운트 포인트 -->
+  <div id="heroes-root" aria-live="polite"></div>
+
+  <noscript>
+    <p class="muted">자바스크립트를 활성화하면 영웅 목록이 표시됩니다.</p>
+  </noscript>
+</section>
+
+<style>
+  /* ===== 섹션 공통 ===== */
+  .section{ margin:16px 0 24px; }
+  .section-title{
+    margin:8px 0 10px;
+    font-size:16px; font-weight:700; line-height:1.25;
+  }
+
+  /* ===== 섹션 그리드 ===== */
+  .heroes-grid{
+    --card-min: 200px;
+    --card-gap: 14px;
+    display:grid;
+    gap:var(--card-gap);
+    grid-template-columns:repeat(auto-fill, minmax(var(--card-min), 1fr));
+  }
+  .heroes-grid.compact{
+    --card-min: 160px;
+    --card-gap: 12px;
+  }
+
+  /* 반응형 보정 */
+  @media (max-width: 1024px){
+    .heroes-grid{ --card-min: 180px; }
+    .heroes-grid.compact{ --card-min: 150px; }
+  }
+  @media (max-width: 640px){
+    .heroes-grid{ --card-min: 160px; }
+    .heroes-grid.compact{ --card-min: 140px; }
+  }
+
+  /* ===== 카드 (라이트 고정) ===== */
+  .heroes-grid .card{
+    width:100%; max-width:none;
+    display:block;
+    border-radius:14px; overflow:hidden;
+    background:#fff; color:#111;               /* 라이트 고정 */
+    border:1px solid var(--border, #e5e7eb);   /* 공용 토큰 없으면 기본값 */
+    text-decoration:none;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+    transition:transform .1s ease, box-shadow .1s ease;
+    position:relative;
+  }
+  .heroes-grid .card:hover,
+  .heroes-grid .card:focus-visible{
+    transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(0,0,0,.10);
+    outline:none;
+  }
+
+  /* 썸네일 (라이트 배경) */
+  .heroes-grid .card .thumb{ background:#f3f4f6; }   /* 라이트 톤 */
+.heroes-grid .card img{   background:transparent; }
+
+
+  /* 이름 라벨 */
+  .heroes-grid .card .name{
+    padding:10px 12px;
+    font-weight:600; text-align:center;
+    font-size:14px; color:inherit;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    background:#fff;                            /* 라이트 고정 */
+    border-top:1px solid var(--border, #e5e7eb);
+  }
+  .heroes-grid.compact .card .name{ font-size:13px; }
+
+  /* 🔧 기존 다크 강제 오버라이드 제거/무력화 */
+  .theme-default .heroes-grid .card{
+    background:#fff; color:#111;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+  }
+
+  .page-title{ margin:4px 0 12px; font-size:20px; font-weight:700; }
+  .muted{ color:#666; font-size:14px; }
+
+  @media (prefers-reduced-motion: reduce){
+    .heroes-grid .card{ transition:none; }
+  }
+</style>
+
+<!-- SR/R 섹션을 자동으로 compact 보기로 전환 -->
+<script>
+  (function(){
+    function applyCompact(root){
+      root.querySelectorAll('.section').forEach(sec=>{
+        const title = sec.querySelector('.section-title')?.textContent?.trim() || '';
+        const grid  = sec.querySelector('.heroes-grid');
+        if (!grid) return;
+        if (/^(SR|R)\b/i.test(title)) grid.classList.add('compact');
+      });
+    }
+    const root = document.getElementById('heroes-root');
+    if (!root) return;
+    const mo = new MutationObserver(()=>applyCompact(root));
+    mo.observe(root, { childList:true, subtree:true });
+    applyCompact(root);
+  })();
+</script>

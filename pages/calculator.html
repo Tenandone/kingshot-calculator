@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <base href="/" />
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="calcHub.meta.title">계산기 | KingshotData KR</title>
+  <meta name="description" content="킹샷 계산기 허브. 건물, 영주장비, 영주보석, 병력훈련 계산기.">
+
+  <!-- ① 인라인 번역(기본 KO) : 첫 페인트 즉시 -->
+  <script>
+  window.__i18n = {
+    "calcHub.meta.title": "계산기 | KingshotData KR",
+    "calcHub.title": "계산기",
+    "calcHub.cards.building.title": "건물계산기",
+    "calcHub.cards.gear.title": "영주장비계산기",
+    "calcHub.cards.charm.title": "영주보석계산기",
+    "calcHub.cards.training.title": "병력훈련계산기",
+    "title.calcVip": "VIP 포인트 계산기",
+    "alt.calcVip": "VIP 포인트 계산기"
+  };
+  </script>
+
+  <!-- ② 초경량 i18n 로더: 필요 ns만 병렬 + 1차 즉시적용 + 스코프 제한 -->
+  <script>
+  (function(){
+    const I18N_VERSION = '2025-09-12';                  // 배포시에만 변경
+    const NS = ['common','calc'];                        // 계산기에 필요한 것만
+    const qs = new URLSearchParams(location.search);
+    const LOCALE = (qs.get('lang') || localStorage.getItem('lang') || (navigator.language||'ko')).slice(0,2).replace('_','-') || 'ko';
+    const LS_KEY = `i18n:${LOCALE}:dict`;
+    const LS_VER = `i18n:${LOCALE}:ver`;
+
+    // attr 맵 파서(, ; 구분)
+    function parseAttrMap(str){
+      return (str||'').split(/[,;]+/).map(s=>s.trim()).filter(Boolean).map(pair=>{
+        const i = pair.indexOf(':'); if (i<0) return null;
+        return {attr: pair.slice(0,i).trim(), key: pair.slice(i+1).trim()};
+      }).filter(Boolean);
+    }
+
+    function applyI18n(d, root=document){
+      if (!d) return;
+      root.querySelectorAll('[data-i18n]').forEach(el=>{
+        const k = el.getAttribute('data-i18n'); if (d[k] != null) el.textContent = d[k];
+      });
+      root.querySelectorAll('[data-i18n-attr]').forEach(el=>{
+        const maps = parseAttrMap(el.getAttribute('data-i18n-attr'));
+        for (const m of maps){
+          const val = d[m.key]; if (val == null) continue;
+          if (m.attr === 'content' && el.tagName === 'META') el.setAttribute('content', val);
+          else el.setAttribute(m.attr, val);
+        }
+      });
+    }
+
+    function ready(fn){
+      if (document.readyState !== 'loading') fn();
+      else document.addEventListener('DOMContentLoaded', fn, {once:true});
+    }
+
+    function fetchJSON(url){
+      const ac = new AbortController();
+      const to = setTimeout(()=>{ try{ac.abort();}catch(e){} }, 1200);
+      return fetch(url, {signal: ac.signal, cache: 'force-cache'})
+        .then(r=> r.ok ? r.json() : Promise.reject(r.status))
+        .finally(()=>clearTimeout(to));
+    }
+
+    function urlOf(ns){ return `/i18n/${LOCALE}/${ns}.json?v=${I18N_VERSION}`; }
+
+    // 0) 인라인/캐시 즉시 적용 (DOM 준비 직후 한 번에)
+    let dict = window.__i18n ? {...window.__i18n} : {};
+    try {
+      if (localStorage.getItem(LS_VER) === I18N_VERSION) {
+        const cached = localStorage.getItem(LS_KEY);
+        if (cached) Object.assign(dict, JSON.parse(cached));
+      }
+    } catch(e){}
+
+    // DOM 준비되면 1차 적용
+    ready(()=> applyI18n(dict, document));
+
+    // 1) 우선 ns(common) 먼저 → 적용
+    const primary = 'common';
+    fetchJSON(urlOf(primary))
+      .then(json=>{
+        Object.assign(dict, json);
+        localStorage.setItem(LS_KEY, JSON.stringify(dict));
+        localStorage.setItem(LS_VER, I18N_VERSION);
+        ready(()=> applyI18n(dict, document));
+      })
+      .catch(()=>{/* optional 아님: 로깅만 생략하고 진행 */});
+
+    // 2) 나머지(ns: calc) 병렬 → 도착 시 한 번 더 국소 적용
+    const rest = NS.filter(ns=> ns!==primary);
+    Promise.allSettled(rest.map(ns=> fetchJSON(urlOf(ns))))
+      .then(results=>{
+        let changed=false;
+        results.forEach(r=>{ if (r.status==='fulfilled'){ Object.assign(dict, r.value); changed=true; } });
+        if (changed){
+          localStorage.setItem(LS_KEY, JSON.stringify(dict));
+          localStorage.setItem(LS_VER, I18N_VERSION);
+          const root = document.getElementById('calc-ui') || document;
+          applyI18n(dict, root);
+        }
+      });
+
+    // 3) SPA/동적 노드 → #calc-ui만 감시
+    ready(()=>{
+      const target = document.getElementById('calc-ui');
+      if (!target) return;
+      const mo = new MutationObserver(list=>{
+        if (!dict) return;
+        for (const m of list){
+          m.addedNodes && m.addedNodes.forEach(node=>{
+            if (node.nodeType===1) applyI18n(dict, node);
+          });
+        }
+      });
+      mo.observe(target, {childList:true, subtree:true});
+    });
+
+    // 언어 유지
+    try{ localStorage.setItem('lang', LOCALE); }catch(_){}
+  })();
+  </script>
+
+  <!-- 성능 힌트 -->
+  <link rel="preconnect" href="https://kingshotdata.kr">
+  <link rel="dns-prefetch" href="//kingshotdata.kr">
+
+  <!-- 다른 번들은 defer (i18n보다 뒤) -->
+  <script src="/js/standalone-bridge.js?v=2025-09-12" defer></script>
+</head>
+<body>
+  <main id="calc-ui" class="calc-wrap" aria-labelledby="calc-title">
+    <section class="calc-card">
+      <h2 id="calc-title" class="calc-title" data-i18n="calcHub.title">계산기</h2>
+    </section>
+
+    <section class="calc-card" style="margin-top:14px">
+      <div class="card-grid" aria-label="계산기 목록">
+        <!-- 건물계산기 -->
+        <a class="card" href="#calc-building">
+          <div class="thumb">
+            <img src="/img/icons/towncenter.webp" alt="건물계산기" loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" data-i18n="calcHub.cards.building.title">건물계산기</h3>
+          </div>
+        </a>
+
+        <!-- 영주장비계산기 -->
+        <a class="card" href="#calc-gear">
+          <div class="thumb">
+            <img src="/img/database/Governor%20Gear/governor-gear.webp" alt="영주장비계산기" loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" data-i18n="calcHub.cards.gear.title">영주장비계산기</h3>
+          </div>
+        </a>
+
+        <!-- 영주보석계산기 -->
+        <a class="card" href="#calc-charm">
+          <div class="thumb">
+            <img src="/img/database/Governor%20Charm/governor-charms-300x282.webp" alt="영주보석계산기" loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" data-i18n="calcHub.cards.charm.title">영주보석계산기</h3>
+          </div>
+        </a>
+
+        <!-- 병력훈련계산기 -->
+        <a class="card" href="#calc-training">
+          <div class="thumb">
+            <img src="/img/icons/infantry.webp" alt="병력훈련계산기" loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" data-i18n="calcHub.cards.training.title">병력훈련계산기</h3>
+          </div>
+        </a>
+
+        <!-- VIP 포인트 계산기 (언어 파라미터 유지) -->
+        <a class="card" href="#calc-vip" data-keep-lang>
+          <div class="thumb">
+            <img src="/img/icons/vip.webp"
+                 alt="VIP 포인트 계산기"
+                 loading="lazy" decoding="async"
+                 data-i18n-attr="alt:alt.calcVip">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" data-i18n="title.calcVip">VIP 포인트 계산기</h3>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ?lang 유지 -->
+  <script>
+    (function(){
+      const q = location.search;
+      if (!q) return;
+      document.querySelectorAll('a[data-keep-lang]').forEach(a=>{ a.href += q; });
+    })();
+  </script>
+
+  <style>
+    .calc-title { text-align:center; font-size:20px; font-weight:700; margin-bottom:10px; }
+    .card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+    .card { display:flex; flex-direction:column; border:1px solid #e5e7eb; border-radius:14px; text-decoration:none; background:#fff; overflow:hidden; transition:transform .12s, box-shadow .12s; text-align:center; }
+    .card:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,.08); }
+    .thumb{ width:100%; aspect-ratio:1/1; background:#f8fafc; display:grid; place-items:center; border-bottom:1px solid #eef2f7; }
+    .thumb img{ width:72%; height:72%; object-fit:contain; display:block; }
+    .card-body { padding:12px 14px; }
+    .card-title { font-size:16px; font-weight:700; color:#111827; margin:0; }
+  </style>
+</body>
+</html>

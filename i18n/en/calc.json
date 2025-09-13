@@ -1,0 +1,355 @@
+{
+  "calc": {
+    "meta": { "title": "Building Calculator | KingshotData KR" },
+    "title": "Building Calculator",
+    "desc": "Check the resources and time required for upgrades.",
+    "howto": {
+      "title": "How to Use",
+      "step1": "Select the building to upgrade.",
+      "step2": "Enter the current level and target level.",
+      "step3": {
+        "head": "Enter the construction speed bonus.",
+        "help": "Go to Profile → Power screen to check your construction speed bonus. (Includes Saul/Wolf/Research/King & Position bonuses)"
+      },
+      "step4": "If upgrading the Town Center, you can check the \"Include Prerequisite Buildings\" option.",
+      "step5": "If pet buffs are disabled, you can add pet buffs manually. Decree buffs must be checked manually."
+    },
+    "levelGuide": {
+      "title": "Level Guide",
+      "tg1": "TG 1 = Lv. 35",
+      "tg2": "TG 2 = Lv. 40",
+      "tg3": "TG 3 = Lv. 45",
+      "tg4": "TG 4 = Lv. 50",
+      "tg5": "TG 5 = Lv. 55"
+    },
+    "form": {
+      "building": {
+        "label": "Select Building",
+        "option": {
+          "towncenter": "Town Center",
+          "embassy": "Embassy",
+          "command": "Command Center",
+          "barracks": "Barracks",
+          "stable": "Stable",
+          "range": "Range",
+          "academy": "Academy",
+          "infirmary": "Infirmary"
+        }
+      },
+      "startLevel": { "label": "Current Level", "placeholder": "Enter current level" },
+      "targetLevel": { "label": "Target Level", "placeholder": "Enter target level" },
+      "speedBonus": { "label": "Construction Speed Bonus (%)" },
+      "saulBonus": { "label": "Saul Skill Bonus (%) — Applies to construction cost" },
+      "wolfBonus": { "label": "Wolf Skill Bonus (%)" },
+      "positionBonus": { "label": "King/Position Bonus (%)" },
+      "doubleTime": { "label": "Decree Applied (20% time reduction)" },
+      "includePrereq": { "label": "Include Prerequisite Buildings" },
+      "actions": { "calculate": "Calculate Upgrade", "clear": "Clear Form" }
+    },
+    "prereq": {
+      "summary": "Prerequisite Building Levels (Your Current Levels)",
+      "academy": "Academy",
+      "range": "Range",
+      "stable": "Stable",
+      "barracks": "Barracks",
+      "embassy": "Embassy",
+      "note": "* If left blank, treated as 0."
+    },
+    "prereqBox": {
+      "title": "Prerequisites",
+      "empty": "No prerequisites"
+    },
+    "prereqSummary": {
+      "title": "Prerequisite Summary",
+      "current": "Current",
+      "required": "Required"
+    },
+    "result": {
+      "upgrade": "Upgrade:",
+      "time": "Construction Time:",
+      "totalWithSaul": "Total Resources (with Saul applied)"
+    },
+    "table": {
+      "title": "Details",
+      "titleWithPrereq": "Details (with prerequisites)",
+      "col": {
+        "building": "Building",
+        "level": "Level",
+        "time": "Construction Time",
+        "bread": "Bread",
+        "wood": "Wood",
+        "stone": "Stone",
+        "iron": "Iron",
+        "truegold": "Truegold"
+      }
+    },
+    "common": {
+      "lv": "Lv.",
+      "percentZero": "0",
+      "example25": "Ex: 25",
+      "example20": "Ex: 20",
+      "example15": "Ex: 15"
+    },
+    "time": {
+      "daySuffix": "d",
+      "hourSuffix": "h",
+      "minSuffix": "m",
+      "secSuffix": "s"
+    },
+    "alert": {
+      "invalidLevel": "Invalid level input.",
+      "targetGtStart": "Target level must be higher than start level.",
+      "noData": "No data available."
+    },
+    "error": {
+      "load": "Failed to load data."
+    }
+  },
+ 
+  "calcCharm": {
+  "meta": { "title": "Governor Charm Calculator | KingshotData KR" },
+  "title": "Governor Charm Calculator",
+  "desc": "Enter the current charm level, target level, and the number of units per troop type to calculate the required Charm Manuals/Charm Blueprints and total attribute increase.",
+  "howto": {
+    "title": "How to Use",
+    "step1": "Select the current charm level and the target level.",
+    "step2": "Enter the number of charms for each troop type (Cavalry · Infantry · Archer / e.g., 3·3·3).",
+    "step3": "Click the Calculate button."
+  },
+  "form": {
+    "currentLevel": { "label": "Current Level", "placeholder": "Select current level" },
+    "targetLevel": { "label": "Target Level", "placeholder": "Select target level" },
+    "counts": {
+      "label": "Troop Type Counts",
+      "placeholder": "e.g., 3·3·3",
+      "cavalry": "Cavalry",
+      "infantry": "Infantry",
+      "archer": "Archer"
+    },
+    "actions": {
+      "calculate": "Calculate",
+      "clear": "Clear",
+      "fill9": "Default 3·3·3",
+      "fill9Title": "Fill all troop types with 3",
+      "clearTitle": "Reset troop counts"
+    }
+  },
+  "result": {
+    "title": "Results",
+    "manual": "Required Charm Manuals",
+    "blueprint": "Required Charm Blueprints",
+    "attribute": "Total Attribute Increase"
+  },
+  "detail": {
+    "level": "Level (Reached)",
+    "manual": "Required Manuals",
+    "blueprint": "Required Blueprints",
+    "attr": "Attribute % at this Level"
+  },
+  
+  "table": {
+    "level": "Level",
+    "manual": "Charm Manual",
+    "blueprint": "Charm Blueprint",
+    "attr": "Attribute (%)"
+  
+},
+  "hint": "※ Cost = Sum of upgrade steps from current → target × (total count). Attribute = (Target% − Current%) × total count.",
+  "notice": {
+    "title": "Notice",
+    "p1": "This data is fan-made based on in-game values.",
+    "li1": "Values may change due to patches/balance adjustments.",
+    "li2": "Please report typos or errors through the contact form."
+  },
+  "alert": {
+    "targetGtStart": "Target level must be higher than the current level.",
+    "noTroop": "Enter at least one among Cavalry/Infantry/Archer.",
+    "load": "Failed to load data."
+  }
+}
+,
+
+
+  "calcGear": {
+  "meta": { "title": "Governor Gear Calculator | KingshotData KR" },
+  "title": "Governor Gear Calculator",
+  "desc": "Use this quick Kingshot governor gear calculator.",
+
+  "howto": {
+    "title": "How to Use",
+    "step1": "Select your current governor gear level.",
+    "step2": "Select the target level you want to upgrade to.",
+    "step3": "Choose the gear slots to upgrade from the tabs.",
+    "slotsHelp": "Slots: Hat·Necklace (Cavalry), Armor·Pants (Infantry), Ring·Staff (Archer)",
+    "step4": "Click Calculate."
+  },
+
+  "notice": {
+    "title": "Notes",
+    "p1": "This is fan-made data based on in-game values.",
+    "li1": "Numbers may change due to patches/balance adjustments.",
+    "li2": "Please report typos or errors via Contact.",
+    "contact": "Contact"
+  },
+
+  "slots": {
+    "hat": "Hat",
+    "necklace": "Necklace",
+    "armor": "Armor",
+    "pants": "Pants",
+    "ring": "Ring",
+    "staff": "Staff"
+  },
+
+  "classes": {
+    "cavalry": "Cavalry",
+    "infantry": "Infantry",
+    "archer": "Archer"
+  },
+
+  "actions": {
+    "calculate": "Calculate",
+    "clear": "Clear",
+    "showDetail": "Show Details",
+    "hideDetail": "Hide Details"
+  },
+
+  "kpi": {
+    "satin": "Satin",
+    "thread": "Gold Thread",
+    "sketch": "Design Sketch",
+    "score": "Gear Score"
+  },
+
+  "cols": {
+    "slot": "Slot",
+    "class": "Class",
+    "satin": "Satin",
+    "thread": "Gold Thread",
+    "sketch": "Design Sketch",
+    "score": "Score",
+    "total": "Total",
+    "selected": "Selected {n}",
+    "current": "Current Level",
+    "target": "Target Level",
+    "manual": "Manual Needed",
+    "blueprint": "Blueprint Needed",
+    "attribute": "Attribute Gain"
+  },
+
+  "alerts": {
+    "needSlot": "Select at least one slot.",
+    "invalidRange": "The current level must be lower than the target level.",
+    "loadFail": "Failed to load data."
+  },
+
+  "misc": {
+    "from": "Current Level",
+    "to": "Target Level",
+    "hint": "Sum multiple slots at once. If costs differ by slot, provide per-slot steps via stepsMap."
+  },
+
+  "tiers": {
+    "basic": "Basic",
+    "rare": "Rare",
+    "epic": "Epic",
+    "legendary": "Legendary",
+    "mythic": "Mythic",
+    "mythicT1_1": "Mythic T1 (★1)",
+    "mythicT1_2": "Mythic T1 (★2)",
+    "mythicT1_3": "Mythic T1 (★3)",
+    "mythicT2_1": "Mythic T2 (★1)",
+    "mythicT2_2": "Mythic T2 (★2)",
+    "mythicT2_3": "Mythic T2 (★3)",
+    "mythicT3_1": "Mythic T3 (★1)",
+    "mythicT3_2": "Mythic T3 (★2)",
+    "mythicT3_3": "Mythic T3 (★3)",
+    "mythicT4_1": "Mythic T4 (★1)",
+    "mythicT4_2": "Mythic T4 (★2)",
+    "mythicT4_3": "Mythic T4 (★3)"
+  }
+}
+,
+  
+  "trainCalc": {
+    "meta": { "title": "Kingshot Training & Promotion Calculator | KingshotData KR" },
+    "title": "Kingshot Training & Promotion Calculator",
+    "badge": "Speedup Days ↔ Troop Count",
+
+    "about": {
+      "title": "What does this calculate?",
+      "p1": "Helps you decide whether to train new troops or promote existing ones by calculating troop count, time per troop, power increase, and event points (HoG / KvK-Preparation / Governor).",
+      "li1": "Choose a mode: Training or Promotion.",
+      "li2": "Training supports Lv1–10; Promotion supports Lv1–9 → Lv10.",
+      "li3": "Enter your Training Speed (%).",
+      "li4": "Choose an input method, enter a value, and click Calculate.",
+      "note": "* Time per troop assumes Training Speed 0% and is adjusted by the value you enter."
+    },
+
+    "form": {
+      "mode": "Mode",
+      "fromTier": "Current Tier (from)",
+      "toTier": "Target Tier (to)",
+      "trainSpeed": "Training Speed (%)",
+      "inputMode": "Input Method",
+      "modeTime": "Speedup Days → Troop Count",
+      "modeTroops": "Troop Count → Required Speedup Days",
+      "baseNote": "Baseline: time per troop assumes Training Speed 0%",
+      "speedDays": "Speedup Days (days)",
+      "count": "Troop Count"
+    },
+
+    "mode": {
+      "training": "Training",
+      "promotion": "Promotion"
+    },
+
+    "actions": {
+      "calculate": "Calculate"
+    },
+
+    "summary": {
+      "selPrefix": "Selected:"
+    },
+
+    "warn": {
+      "noData": "No matching data. Please check the tier/mode."
+    },
+
+    "table": {
+      "metric": "Metric",
+      "perOne": "Per Troop",
+      "total": "Total"
+    },
+
+    "units": {
+      "day": "d",
+      "hour": "h",
+      "min": "m",
+      "sec": "s"
+    },
+
+    "level": "Lv {n}",
+
+    "rows": {
+      "possibleTroops": "Possible Troops (from speedup days)",
+      "hogPoints": "HoG Points",
+      "kvkPoints": "KvK (Preparation) Points",
+      "govPoints": "Governor Points",
+      "powerInc": "Power Increase",
+      "timePerOneApplied": "Time per Troop (after speed applied)",
+      "inputTroops": "Input Troop Count",
+      "needAccelTime": "Required Speedup Time"
+    }
+  },
+"calcHub": {
+    "meta": { "title": "Calculators | KingshotData KR", "desc": "Kingshot calculator hub" },
+    "title": "Calculators",
+    "cards": {
+      "building": { "title": "Buildings Calculator" },
+      "gear":     { "title": "Governor Gear Calculator" },
+      "charm":    { "title": "Governor Charms Calculator" },
+      "training": { "title": "Training & Promotion Calculator" }
+    }
+  }
+}

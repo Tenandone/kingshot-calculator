@@ -1,0 +1,93 @@
+/* ===============================
+   KingshotData KR - database.css
+   영주 장비 / 데이터베이스 전용 스타일 (final, grade+stars)
+   =============================== */
+
+/* 공통 테이블 래퍼 */
+.table-wrap { overflow: auto; }
+.table-wrap table{
+  border-collapse: collapse;
+  font-size: 13px;
+  width: auto;
+  min-width: 640px; /* 성급 컬럼 제거로 살짝 줄임 */
+  margin: 0 auto;
+  table-layout: auto;
+}
+.table-wrap caption{
+  caption-side: top;
+  text-align: left;
+  padding: 6px 0 8px;
+  color: #8a93a4; /* muted tone */
+  font-size: 12px;
+}
+.table-wrap th,
+.table-wrap td{
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border, #1e2430);
+  white-space: nowrap;
+  text-align: right;
+  line-height: 20px;        /* 행 높이 균일 */
+  height: 28px;             /* 셀 고정 높이 */
+  vertical-align: middle;   /* 세로 가운데 정렬 */
+}
+.table-wrap th:first-child,
+.table-wrap td:first-child{ text-align: left; }
+
+.table-wrap thead th{
+  position: sticky;
+  top: 0;
+  background: #0f1318;
+  color: #8a93a4;
+  z-index: 1;
+}
+
+/* 컬럼 폭 (성급 컬럼 제거 → 5컬럼) */
+.table--compact th:nth-child(1),
+.table--compact td:nth-child(1){ width: 120px; } /* 등급(+별) */
+.table--compact th:nth-child(2),
+.table--compact td:nth-child(2){ width: 90px; }  /* 비단 */
+.table--compact th:nth-child(3),
+.table--compact td:nth-child(3){ width: 90px; }  /* 금사 */
+.table--compact th:nth-child(4),
+.table--compact td:nth-child(4){ width: 110px; } /* 설계 스케치 */
+.table--compact th:nth-child(5),
+.table--compact td:nth-child(5){ width: 110px; } /* 장비평점 */
+
+/* ===== 등급별 배경색 ===== */
+tr.grade-common  td { background-color: #eef8ee; } /* 고급 (연녹색) */
+tr.grade-rare    td { background-color: #eef4fc; } /* 레어 (연파랑) */
+tr.grade-epic    td { background-color: #f6eefe; } /* 에픽 (연보라) */
+tr.grade-legend  td { background-color: #fff5e8; } /* 레전드 (연주황) */
+
+/* ===== 신화 단계별 색상 (점점 진하게) ===== */
+tr.grade-mythic-base td { background-color: #ffecec; } /* 신화 */
+tr.grade-mythic-t1   td { background-color: #ffd6d6; } /* 신화 T1 */
+tr.grade-mythic-t2   td { background-color: #ffbfbf; } /* 신화 T2 */
+tr.grade-mythic-t3   td { background-color: #ffa8a8; } /* 신화 T3 */
+tr.grade-mythic-t4   td { background-color: #ff9191; } /* 신화 T4 */
+
+/* ===== 성급 제거 → 등급 옆 별(검정) =====
+   사용: <td class="grade s1">레어</td>  (s1~s3)
+   s0 또는 미지정 = 별 없음
+*/
+td.grade{
+  font-weight: bold;
+  text-align: left;
+  position: relative;
+}
+td.grade.s1::after{ content:" ★";    color:#111; }
+td.grade.s2::after{ content:" ★★";   color:#111; }
+td.grade.s3::after{ content:" ★★★";  color:#111; }
+/* 필요 시 확장
+td.grade.s4::after{ content:" ★★★★"; color:#111; }
+td.grade.s5::after{ content:" ★★★★★"; color:#111; }
+*/
+
+/* 접근성: 스크린리더용 숨김 유틸 (필요 시 사용) */
+.visually-hidden{
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}

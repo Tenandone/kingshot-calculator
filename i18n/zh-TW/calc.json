@@ -1,0 +1,356 @@
+{
+  "calc": {
+    "meta": { "title": "建築計算器 | KingshotData KR" },
+    "title": "建築計算器",
+    "desc": "查看升級所需的資源與時間。",
+    "howto": {
+      "title": "使用方法",
+      "step1": "選擇要升級的建築。",
+      "step2": "輸入當前等級與目標等級。",
+      "step3": {
+        "head": "輸入建造速度加成。",
+        "help": "進入 個人資料 → 戰力 頁面底部可查看建造速度加成。（包含薩烏爾/狼/研究/國王·官職等）"
+      },
+      "step4": "升級主城時，可以勾選「包含前置建築」選項。",
+      "step5": "若寵物增益未啟用，可以手動新增；法令增益需手動勾選。"
+    },
+    "levelGuide": {
+      "title": "等級指南",
+      "tg1": "TG 1 = Lv. 35",
+      "tg2": "TG 2 = Lv. 40",
+      "tg3": "TG 3 = Lv. 45",
+      "tg4": "TG 4 = Lv. 50",
+      "tg5": "TG 5 = Lv. 55"
+    },
+    "form": {
+      "building": {
+        "label": "選擇建築",
+        "option": {
+          "towncenter": "主城",
+          "embassy": "大使館",
+          "command": "指揮部",
+          "barracks": "步兵營",
+          "stable": "騎兵營",
+          "range": "弓兵營",
+          "academy": "學院",
+          "infirmary": "醫務所"
+        }
+      },
+      "startLevel": { "label": "當前等級", "placeholder": "輸入當前等級" },
+      "targetLevel": { "label": "目標等級", "placeholder": "輸入目標等級" },
+      "speedBonus": { "label": "建造速度加成 (%)" },
+      "saulBonus": { "label": "薩烏爾技能加成 (%) — 應用於建造成本" },
+      "wolfBonus": { "label": "狼技能加成 (%)" },
+      "positionBonus": { "label": "國王/官職加成 (%)" },
+      "doubleTime": { "label": "法令應用 (時間減少20%)" },
+      "includePrereq": { "label": "包含前置建築" },
+      "actions": { "calculate": "計算升級", "clear": "清除" }
+    },
+    "prereq": {
+      "summary": "前置建築等級（當前等級）",
+      "academy": "學院",
+      "range": "弓兵營",
+      "stable": "騎兵營",
+      "barracks": "步兵營",
+      "embassy": "大使館",
+      "note": "* 留空則視為0。"
+    },
+    "prereqBox": {
+      "title": "前置條件",
+      "empty": "無前置條件"
+    },
+    "prereqSummary": {
+      "title": "前置建築摘要",
+      "current": "當前",
+      "required": "需求"
+    },
+    "result": {
+      "upgrade": "升級:",
+      "time": "建造時間:",
+      "totalWithSaul": "總資源消耗（薩烏爾加成後）"
+    },
+    "table": {
+      "title": "詳細",
+      "titleWithPrereq": "詳細（包含前置條件）",
+      "col": {
+        "building": "建築",
+        "level": "等級",
+        "time": "建造時間",
+        "bread": "糧食",
+        "wood": "木材",
+        "stone": "石料",
+        "iron": "鐵",
+        "truegold": "真金"
+      }
+    },
+    "common": {
+      "lv": "Lv.",
+      "percentZero": "0",
+      "example25": "例: 25",
+      "example20": "例: 20",
+      "example15": "例: 15"
+    },
+    "time": {
+      "daySuffix": "天",
+      "hourSuffix": "小時",
+      "minSuffix": "分鐘",
+      "secSuffix": "秒"
+    },
+    "alert": {
+      "invalidLevel": "等級輸入不正確。",
+      "targetGtStart": "目標等級必須大於起始等級。",
+      "noData": "沒有資料。"
+    },
+    "error": {
+      "load": "資料加載失敗"
+    }
+  },
+"calcCharm": {
+    "meta": { "title": "領主寶石計算器 | KingshotData KR" },
+    "title": "領主寶石計算器",
+    "desc": "輸入當前寶石等級、目標等級以及各兵種數量，即可計算所需的寶石手冊/寶石圖紙和總屬性提升。",
+    "howto": {
+      "title": "使用方法",
+      "step1": "請選擇當前寶石等級和目標等級。",
+      "step2": "輸入要升級的寶石各兵種數量。（騎兵·步兵·弓兵 / 例: 3·3·3）",
+      "step3": "點擊「計算」按鈕。"
+    },
+    "form": {
+      "currentLevel": { "label": "當前等級", "placeholder": "選擇當前等級" },
+      "targetLevel": { "label": "目標等級", "placeholder": "選擇目標等級" },
+      "counts": {
+        "label": "各兵種數量",
+        "placeholder": "例: 3·3·3",
+        "cavalry": "騎兵",
+        "infantry": "步兵",
+        "archer": "弓兵"
+      },
+      "actions": {
+        "calculate": "計算",
+        "clear": "重設",
+        "fill9": "預設 3·3·3",
+        "fill9Title": "將所有兵種填為3個",
+        "clearTitle": "重設所有兵種數量"
+      }
+    },
+    "result": {
+      "title": "結果",
+      "manual": "所需寶石手冊",
+      "blueprint": "所需寶石圖紙",
+      "attribute": "總屬性提升"
+    },
+    "detail": {
+      "level": "等級（達到）",
+      "manual": "所需手冊",
+      "blueprint": "所需圖紙",
+      "attr": "該等級屬性％"
+    },
+    
+  "table": {
+    "level": "等級",
+    "manual": "寶石手冊",
+    "blueprint": "寶石圖紙",
+    "attr": "屬性(%)"
+  
+}
+,
+    "hint": "※ 成本 = 當前→目標升級區間總和 × (總數量)。 屬性 = (目標％ − 當前％) × 總數量。",
+    "notice": {
+      "title": "注意事項",
+      "p1": "本資料為依據遊戲內顯示數值整理的玩家自製資料。",
+      "li1": "數值可能會因補丁/平衡性調整而變更。",
+      "li2": "如有錯字或錯誤，請回報給我們。"
+    },
+    "alert": {
+      "targetGtStart": "目標等級必須高於當前等級。",
+      "noTroop": "請至少輸入1個騎兵/步兵/弓兵。",
+      "load": "資料載入失敗。"
+    }
+  },
+  
+
+"calcGear": {
+  "meta": { "title": "領主裝備計算器 | KingshotData KR" },
+  "title": "領主裝備計算器",
+  "desc": "使用下方的 Kingshot 領主裝備計算器進行快速估算。",
+
+  "howto": {
+    "title": "使用方法",
+    "step1": "選擇目前的裝備等級。",
+    "step2": "選擇欲升級的目標等級。",
+    "step3": "在上方分頁選擇要升級的裝備槽位。",
+    "slotsHelp": "槽位：帽子・項鍊（騎兵）、護甲・褲子（步兵）、戒指・法杖（弓兵）",
+    "step4": "點擊「計算」。"
+  },
+
+  "notice": {
+    "title": "注意事項",
+    "p1": "本工具為依據遊戲內數值整理的玩家自製資料。",
+    "li1": "數值可能因更新／平衡調整而變動。",
+    "li2": "如有錯字或問題，請透過「聯絡我們」回報。",
+    "contact": "聯絡我們"
+  },
+
+  "slots": {
+    "hat": "帽子",
+    "necklace": "項鍊",
+    "armor": "護甲",
+    "pants": "褲子",
+    "ring": "戒指",
+    "staff": "法杖"
+  },
+
+  "classes": {
+    "cavalry": "騎兵",
+    "infantry": "步兵",
+    "archer": "弓兵"
+  },
+
+  "actions": {
+    "calculate": "計算",
+    "clear": "清除",
+    "showDetail": "顯示詳細",
+    "hideDetail": "隱藏詳細"
+  },
+
+  "kpi": {
+    "satin": "綢緞",
+    "thread": "金線",
+    "sketch": "設計草圖",
+    "score": "裝備評分"
+  },
+
+  "cols": {
+    "slot": "槽位",
+    "class": "兵種",
+    "satin": "綢緞",
+    "thread": "金線",
+    "sketch": "設計草圖",
+    "score": "評分",
+    "total": "合計",
+    "selected": "已選 {n} 個",
+    "current": "目前等級",
+    "target": "目標等級",
+    "manual": "需要手冊",
+    "blueprint": "需要圖紙",
+    "attribute": "屬性提升"
+  },
+
+  "alerts": {
+    "needSlot": "請至少選擇一個槽位。",
+    "invalidRange": "目前等級必須低於目標等級。",
+    "loadFail": "資料載入失敗。"
+  },
+
+  "misc": {
+    "from": "目前等級",
+    "to": "目標等級",
+    "hint": "可一次彙總多個槽位；若各部位成本不同，請透過 stepsMap 傳入對應的部位 steps。"
+  },
+
+  "tiers": {
+    "basic": "高級",
+    "rare": "稀有",
+    "epic": "英雄",
+    "legendary": "傳說",
+    "mythic": "神話",
+    "mythicT1_1": "神話 T1（★1）",
+    "mythicT1_2": "神話 T1（★2）",
+    "mythicT1_3": "神話 T1（★3）",
+    "mythicT2_1": "神話 T2（★1）",
+    "mythicT2_2": "神話 T2（★2）",
+    "mythicT2_3": "神話 T2（★3）",
+    "mythicT3_1": "神話 T3（★1）",
+    "mythicT3_2": "神話 T3（★2）",
+    "mythicT3_3": "神話 T3（★3）",
+    "mythicT4_1": "神話 T4（★1）",
+    "mythicT4_2": "神話 T4（★2）",
+    "mythicT4_3": "神話 T4（★3）"
+  }
+}
+,
+
+  "trainCalc": {
+    "meta": { "title": "Kingshot 訓練與升階計算器 | KingshotData KR" },
+    "title": "Kingshot 訓練與升階計算器",
+    "badge": "加速天數 ↔ 部隊數",
+
+    "about": {
+      "title": "可以計算什麼？",
+      "p1": "協助判斷要訓練新部隊或升階現有部隊，並計算部隊數、單兵耗時、戰力提升，以及活動積分（HoG／KvK-準備／Governor）。",
+      "li1": "選擇模式：訓練／升階。",
+      "li2": "訓練支援 Lv1–10；升階支援 Lv1–9 → Lv10。",
+      "li3": "輸入訓練速度（%）。",
+      "li4": "選擇輸入方式，填入數值後點擊「計算」。",
+      "note": "* 單兵耗時以訓練速度 0% 為基準，會依輸入的速度自動調整。"
+    },
+
+    "form": {
+      "mode": "模式",
+      "fromTier": "目前階級（from）",
+      "toTier": "目標階級（to）",
+      "trainSpeed": "訓練速度（%）",
+      "inputMode": "輸入方式",
+      "modeTime": "加速天數 → 計算部隊數",
+      "modeTroops": "部隊數 → 需要加速天數",
+      "baseNote": "基準：單兵耗時以訓練速度 0% 為準",
+      "speedDays": "加速天數（天）",
+      "count": "部隊數"
+    },
+
+    "mode": {
+      "training": "訓練",
+      "promotion": "升階"
+    },
+
+    "actions": {
+      "calculate": "計算"
+    },
+
+    "summary": {
+      "selPrefix": "已選："
+    },
+
+    "warn": {
+      "noData": "無相符資料。請檢查階級／模式。"
+    },
+
+    "table": {
+      "metric": "指標",
+      "perOne": "單兵",
+      "total": "總計"
+    },
+
+    "units": {
+      "day": "天",
+      "hour": "小時",
+      "min": "分",
+      "sec": "秒"
+    },
+
+    "level": "Lv {n}",
+
+    "rows": {
+      "possibleTroops": "可獲得的部隊數（依加速天數）",
+      "hogPoints": "HoG 積分",
+      "kvkPoints": "KvK（準備）積分",
+      "govPoints": "Governor 積分",
+      "powerInc": "戰力提升",
+      "timePerOneApplied": "單兵耗時（已套用速度）",
+      "inputTroops": "輸入的部隊數",
+      "needAccelTime": "所需加速時間"
+    }
+  },
+
+  "calcHub": {
+    "meta": { "title": "計算器 | KingshotData KR", "desc": "Kingshot 計算器中樞" },
+    "title": "計算器",
+    "cards": {
+      "building": { "title": "建築計算器" },
+      "gear":     { "title": "總督裝備計算器" },
+      "charm":    { "title": "總督寶石計算器" },
+      "training": { "title": "訓練／升階計算器" }
+    }
+  }
+}
+

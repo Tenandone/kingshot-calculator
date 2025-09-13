@@ -1,0 +1,244 @@
+<!-- pages/building-calculator.html -->
+<div class="page calculator">
+  <h1>건물 업그레이드 계산기 (표 파싱 방식)</h1>
+
+  <form id="calc-form">
+    <label>건물 선택
+      <select id="building">
+        <option value="towncenter">도시센터</option>
+        <option value="embassy">대사관</option>
+        <option value="academy">아카데미</option>
+        <option value="command-center">지휘부</option>
+        <option value="range">궁병대</option>
+        <option value="barracks">보병대</option>
+        <option value="stable">기병대</option>
+        <option value="kitchen">주방</option>
+        <option value="storehouse">창고</option>
+        <option value="guard-station">방위소</option>
+        <!-- 필요 시 여기 계속 추가 -->
+      </select>
+    </label>
+
+    <label>현재 레벨
+      <input id="current" type="number" min="1" max="29" value="10"/>
+    </label>
+
+    <label>목표 레벨
+      <input id="target" type="number" min="2" max="30" value="15"/>
+    </label>
+
+    <fieldset style="margin-top:8px; border:1px solid #ddd; padding:8px;">
+      <legend>건설 속도 보너스(%)</legend>
+      <label>기본/건설속도
+        <input id="speedBase" type="number" min="0" max="95" value="0"/>
+      </label>
+      <label>사울 스킬
+        <input id="speedSaul" type="number" min="0" max="95" value="0"/>
+      </label>
+      <label>늑대 스킬
+        <input id="speedWolf" type="number" min="0" max="95" value="0"/>
+      </label>
+      <label>포지션 보너스
+        <input id="speedPos" type="number" min="0" max="95" value="0"/>
+      </label>
+      <label style="display:block;margin-top:6px;">
+        <input id="doubleTime" type="checkbox"/> 더블 타임 적용(시간 50% 감소)
+      </label>
+    </fieldset>
+
+    <button type="submit">계산하기</button>
+  </form>
+
+  <div id="result" style="margin-top:16px;"></div>
+</div>
+
+<style>
+.page.calculator label { display:inline-flex; gap:8px; align-items:center; margin:6px 12px 6px 0; }
+.page.calculator input, .page.calculator select, .page.calculator button { padding:6px 8px; }
+.page.calculator .card { border:1px solid #ddd; border-radius:8px; padding:12px; background:#fafafa; }
+.page.calculator .table-wrap { overflow-x:auto; margin-top:12px; }
+.page.calculator table { width:100%; border-collapse:collapse; background:#fff; }
+.page.calculator th, .page.calculator td { border:1px solid #e5e5e5; padding:8px 10px; text-align:right; }
+.page.calculator th:nth-child(1), .page.calculator td:nth-child(1),
+.page.calculator th:nth-child(2), .page.calculator td:nth-child(2) { text-align:center; }
+.page.calculator thead th { background:#f3f8ff; }
+</style>
+
+<script>
+// ====== 1) 공통 유틸 ======
+function n(x){ return Number(String(x??'').replace(/[^0-9]/g,'')||0); }
+function parseRange(text){
+  const m = String(text??'').match(/(\d+)[^\d]+(\d+)/);
+  return m ? {from:+m[1], to:+m[2]} : null;
+}
+function timeToSec(t){
+  if(!t) return 0;
+  let s=0, m;
+  const re=/(\d+)\s*d|(\d+)\s*h|(\d+)\s*m|(\d+)\s*s/gi;
+  while((m=re.exec(t))!==null){
+    if(m[1]) s+=+m[1]*86400;
+    if(m[2]) s+=+m[2]*3600;
+    if(m[3]) s+=+m[3]*60;
+    if(m[4]) s+=+m[4];
+  }
+  return s;
+}
+function secToHuman(sec){
+  sec = Math.max(0, Math.round(sec));
+  let d=Math.floor(sec/86400); sec%=86400;
+  let h=Math.floor(sec/3600);  sec%=3600;
+  let m=Math.floor(sec/60);    sec%=60;
+  const out=[]; if(d) out.push(d+'d'); if(h) out.push(h+'h'); if(m) out.push(m+'m');
+  if(sec||!out.length) out.push(sec+'s');
+  return out.join(' ');
+}
+
+// ====== 2) 표 파싱 ======
+// doc: Document(HTML 문자열을 DOMParser로 만든 것)
+function extractRows(doc, tableSel){
+  const trs = doc.querySelectorAll(`${tableSel} tbody tr`);
+  const rows = [];
+  trs.forEach(tr=>{
+    const tds = tr.querySelectorAll('td,th');
+    // 컬럼 가정: [#, Building, Level, Bread, Wood, Stone, Iron, Truegold, Duration]
+    const lv = parseRange(tds[2]?.textContent);
+    if(!lv) return;
+    rows.push({
+      from: lv.from, to: lv.to,
+      bread: n(tds[3]?.textContent),
+      wood:  n(tds[4]?.textContent),
+      stone: n(tds[5]?.textContent),
+      iron:  n(tds[6]?.textContent),
+      truegold: n(tds[7]?.textContent),
+      time: (tds[8]?.textContent||'').trim()
+    });
+  });
+  return rows;
+}
+
+async function loadRowsFromFile(path, tableSel){
+  const res = await fetch(path);
+  if(!res.ok) throw new Error(`파일 로드 실패: ${path}`);
+  const html = await res.text();
+  const doc  = new DOMParser().parseFromString(html, 'text/html');
+  return extractRows(doc, tableSel);
+}
+
+function sumRange(rows, from, to){
+  const use = rows.filter(r=>r.from>=from && r.to<=to);
+  return use.reduce((a,r)=>({
+    bread:a.bread+r.bread,
+    wood:a.wood+r.wood,
+    stone:a.stone+r.stone,
+    iron:a.iron+r.iron,
+    truegold:a.truegold+r.truegold,
+    timeSec:a.timeSec+timeToSec(r.time)
+  }), {bread:0,wood:0,stone:0,iron:0,truegold:0,timeSec:0});
+}
+
+// ====== 3) 건물 파일 매핑 (네 폴더 구조 기준) ======
+const BUILDINGS = {
+  'towncenter':     ['pages/towncenter.html',      '#table-towncenter'],
+  'embassy':        ['pages/embassy.html',         '#table-embassy'],
+  'academy':        ['pages/academy.html',         '#table-academy'],
+  'command-center': ['pages/command-center.html',  '#table-commandcenter'],
+  'range':          ['pages/range.html',           '#table-range'],
+  'barracks':       ['pages/barracks.html',        '#table-barracks'],
+  'stable':         ['pages/stable.html',          '#table-stable'],
+  'kitchen':        ['pages/kitchen.html',         '#table-kitchen'],
+  'storehouse':     ['pages/storehouse.html',      '#table-storehouse'],
+  'guard-station':  ['pages/guard-station.html',   '#table-guardstation']
+  // 필요 시 추가 (truegold-crucible 등)
+};
+
+// ====== 4) 폼 이벤트 ======
+document.getElementById('calc-form')?.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const k   = document.getElementById('building').value;
+  const cur = +document.getElementById('current').value;
+  const tgt = +document.getElementById('target').value;
+
+  if(!(k in BUILDINGS)) return alert('지원하지 않는 건물입니다.');
+  if(tgt <= cur) return alert('목표 레벨은 현재 레벨보다 커야 합니다.');
+
+  const [path, tableSel] = BUILDINGS[k];
+
+  try{
+    const rows   = await loadRowsFromFile(path, tableSel);
+    const totals = sumRange(rows, cur, tgt);
+
+    // 속도 보너스/더블 타임
+    let sp = (
+      (+document.getElementById('speedBase')?.value || 0) +
+      (+document.getElementById('speedSaul')?.value || 0) +
+      (+document.getElementById('speedWolf')?.value || 0) +
+      (+document.getElementById('speedPos')?.value  || 0)
+    ) / 100;
+    if(sp > 0.95) sp = 0.95;
+
+    let timeSec = totals.timeSec * (1 - sp);
+    if(document.getElementById('doubleTime')?.checked) timeSec *= 0.5;
+
+    const fmt = (n)=>n.toLocaleString('en-US');
+
+    document.getElementById('result').innerHTML = `
+      <div class="card">
+        <h3>${k} ${cur} → ${tgt} 누적 필요치</h3>
+        <ul>
+          <li>빵: <b>${fmt(totals.bread)}</b></li>
+          <li>나무: <b>${fmt(totals.wood)}</b></li>
+          <li>석재: <b>${fmt(totals.stone)}</b></li>
+          <li>철: <b>${fmt(totals.iron)}</b></li>
+          <li>순금: <b>${fmt(totals.truegold)}</b></li>
+          <li>총 소요 시간(보너스 적용): <b>${secToHuman(timeSec)}</b></li>
+        </ul>
+      </div>
+
+      
+        <table>
+          <thead>
+            <tr><th>#</th><th>레벨</th><th>빵</th><th>나무</th><th>석재</th><th>철</th><th>시간(원본)</th></tr>
+          </thead>
+          <tbody>
+            ${rows.filter(r=>r.from>=cur && r.to<=tgt).map((r,i)=>`
+              <tr>
+                <td>${i+1}</td>
+                <td>${r.from} → ${r.to}</td>
+                <td>${fmt(r.bread)}</td>
+                <td>${fmt(r.wood)}</td>
+                <td>${fmt(r.stone)}</td>
+                <td>${fmt(r.iron)}</td>
+                <td>${r.time}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }catch(err){
+    console.error(err);
+    alert('표 로드/파싱 중 오류가 발생했습니다. 표 id와 파일 경로를 확인하세요.');
+  }
+});
+</script>
+<!-- 최소 뼈대 -->
+<form id="calc-form">
+  <label for="building">Select Building</label>
+  <select id="building">
+    <option value="towncenter">Town Center</option>
+  </select>
+
+  <label for="current-level">Current Level</label>
+  <input id="current-level" type="number" value="1" min="1" max="29">
+
+  <label for="desired-level">Desired Level</label>
+  <input id="desired-level" type="number" value="30" min="2" max="30">
+
+  <button type="button" id="calc-btn">Calculate Upgrade</button>
+</form>
+
+<div id="calc-output"></div>
+
+<!-- 순서: 데이터 먼저, 계산 로직 나중 -->
+<script src="/js/data-towncenter.js?v=202509120604"></script>
+<script src="/js/calculator.js?v=202509120604"></script>

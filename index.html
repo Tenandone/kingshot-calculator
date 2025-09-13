@@ -1,0 +1,414 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta name="google-adsense-account" content="ca-pub-9189957764761115">
+  <meta charset="utf-8" />
+  <script>window.__V='202509131858'</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KingshotData</title>
+
+  <!-- Perf -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- SEO / OG -->
+  <meta name="description" content="" data-i18n-attr="content:meta.description">
+  <meta property="og:title" content="KingshotData">
+  <meta property="og:description" content="" data-i18n-attr="content:og.description">
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://kingshotdata.kr">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://kingshotdata.kr">
+  <link rel="preload" as="image" href="/img/logo-kingshotdata.png?v=202509131858" />
+
+  <!-- Site CSS -->
+  <link rel="stylesheet" href="/css/common.css?v=202509131858">
+  <link rel="stylesheet" href="/css/database.css?v=202509131858">
+  <link rel="stylesheet" href="/css/home.css?v=202509131858">
+  <link rel="stylesheet" href="/css/mobile-patch.css?v=202509131858">
+  <link rel="stylesheet" href="/css/cookie.css?v=202509131858">
+  <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
+
+  <!-- i18n 먼저 -->
+  <script src="/js/i18n.js?v=202509131858"></script>
+  <script>
+    (function () {
+      const sp = new URLSearchParams(location.search);
+      const urlLang = sp.get('lang');
+      let saved = null; try { saved = localStorage.getItem('lang'); } catch(_){}
+      const initial = urlLang || saved || 'en';
+      document.documentElement.setAttribute('lang', initial);
+      if (window.I18N?.init) I18N.init({ lang: initial, supported: ['ko','en','ja','zh-CN','zh-TW'] });
+      if (!location.hash) location.replace('#/home');
+    })();
+  </script>
+
+  <!-- 앱 -->
+  <script defer src="/js/routes.js?v=202509131858"></script>
+  <script defer src="/js/app.js?v=202509131858"></script>
+  <script defer src="/js/consent.js?v=202509131858"></script>
+  <script defer src="/js/footer-tools.js?v=202509131858"></script>
+
+  <style>
+    :root{
+      --nav-h:60px;
+
+      /* 로고 규격 */
+      --logo-site:50px;
+      --logo-partner-default:32px;
+
+      /* 파트너 로고 개별 미세조정 (헤더 배지용) */
+      --lootbar-logo-h: 22px;   /* 헤더 작은 배지 */
+      --cafe-logo-h:    32px;
+
+      /* OTHER 파트너 타일 로고 크기(드로어 큰 타일) */
+      --lootbar-tile-h: 22px;   /* 팬커뮤와 어울리도록 살짝 크게 */
+      --cafe-tile-h:    34px;
+
+      /* 캡션 오프셋(필요 시) */
+      --lootbar-cap-offset: 2px;
+      --cafe-cap-offset:    0px;
+
+      /* KD 톤 */
+      --bd:#e5e7eb; --fg:#111; --muted:#666;
+      --hover:#f3f4f6; --focus:#0b57d0;
+      --panel:#fff;
+
+      /* 드로어/메뉴 */
+      --drawer-w: 420px;
+      --menu-w:  200px;
+    }
+
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--fg)}
+    a{text-decoration:none;color:inherit}
+    img{display:block}
+
+    /* ===== Header / Nav ===== */
+    .site-header{background:#fff;border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:100}
+    .container.nav-bar{max-width:100% !important;margin:0 auto;padding:0 20px;}
+    .nav-bar{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
+    .nav-left,.nav-right{display:flex;align-items:center;gap:16px}
+
+    /* 사이트 로고 */
+    .brand{display:flex;align-items:center;min-width:180px;flex:0 0 auto;margin-right:auto}
+    .brand-logo{height:var(--logo-site);width:auto;object-fit:contain;flex-shrink:0}
+
+    /* 1차 메뉴 */
+    .nav-left nav a{
+      display:inline-flex;align-items:center;justify-content:center;
+      height:var(--nav-h);padding:0 10px;margin:0 2px;color:#333;font-size:14px;min-width:72px;white-space:nowrap;
+    }
+
+    /* 우측 묶음 */
+    .nav-right{min-width:360px;display:flex;align-items:center;gap:20px}
+
+    /* 헤더 파트너 배지(작게) */
+    .lootbar-banner,.cafe-banner{display:inline-grid;justify-items:center;align-items:end;text-align:center}
+    .lootbar-banner{grid-template-rows:var(--lootbar-logo-h) auto}
+    .cafe-banner{grid-template-rows:var(--cafe-logo-h) auto}
+    .lootbar-logo{height:var(--lootbar-logo-h) !important;width:auto;object-fit:contain}
+    .cafe-logo{height:var(--cafe-logo-h) !important;width:auto;object-fit:contain}
+    .lootbar-banner span,.cafe-banner span{font-size:10px;font-weight:300;line-height:1;color:#000;opacity:.6;margin:0}
+    .lootbar-banner span{transform:translateY(var(--lootbar-cap-offset))}
+    .cafe-banner span{transform:translateY(var(--cafe-cap-offset))}
+
+    /* 모바일: 메뉴만 접힘 */
+    #menuToggle.hamburger{display:none;font-size:22px;background:none;border:0;color:#333;cursor:pointer;width:44px;height:44px}
+    @media (max-width:768px){
+      #primaryNav{display:none}
+      #menuToggle.hamburger{display:inline-block}
+      .nav-right{display:none}
+    }
+
+    /* ===== Drawer ===== */
+    .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:.2s;z-index:110}
+    .drawer{
+      position:fixed;top:0;right:0;height:100%;width:var(--drawer-w);
+      background:var(--panel);border-left:1px solid var(--bd);
+      transform:translateX(100%);transition:transform .25s ease;z-index:120;display:flex;flex-direction:column
+    }
+    @media (max-width:768px){ .drawer{ width:75vw } }
+    .drawer header{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid var(--bd)}
+    .is-open .backdrop{opacity:1;pointer-events:auto}
+    .is-open .drawer{transform:translateX(0)}
+    .no-scroll{overflow:hidden}
+
+    .section{padding:16px}
+    .rule{height:12px;border-bottom:1px dashed var(--bd);margin:6px 0 12px}
+
+    /* 섹션 라벨 */
+    .sec-label{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;text-transform:lowercase;letter-spacing:.04em;margin:8px 0}
+    .sec-label::before,.sec-label::after{content:"";flex:1;border-bottom:1px dashed var(--bd)}
+
+    /* ===== Drawer 언어 트리거(우측 참고 느낌: 행 형태 + 케럿만) ===== */
+    .lang-row{
+      display:flex;align-items:center;gap:10px;height:44px;padding:0 12px;border:1px solid var(--bd);border-radius:10px;background:#fff;cursor:pointer;user-select:none;
+      max-width:var(--menu-w);
+    }
+    .lang-row:hover{background:var(--hover)}
+    .lang-row .globe{width:18px;height:18px}
+    .lang-row .current{font-variant-caps:all-small-caps;font-weight:600}
+    .lang-row .caret{width:6px;height:6px;display:inline-block;margin-left:auto;transform:rotate(45deg);border-right:2px solid #555;border-bottom:2px solid #555}
+
+    /* 드롭다운 메뉴 (클릭 시만 표시) */
+    .lang-menu{
+      position:absolute;top:calc(100% + 8px);left:0;min-width:var(--menu-w);
+      background:#fff;color:#111;border:1px solid var(--bd);border-radius:10px;padding:6px 0;margin:0;list-style:none;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:3000;max-height:60vh;overflow:auto
+    }
+    .lang-menu li{position:relative}
+    .lang-item{
+      width:100%;text-align:left;background:none;border:0;cursor:pointer;display:block;padding:12px 14px 12px 16px;font-size:15px
+    }
+    .lang-item:hover{background:var(--hover)}
+    .lang-item + li::before{content:"";position:absolute;top:0;left:12px;right:12px;border-top:1px dashed var(--bd)}
+    .lang-item[aria-checked="true"]{background:var(--hover)}
+    .lang-item[aria-checked="true"]::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:2px;background:var(--focus)}
+
+    /* navigation 리스트 */
+    .drawer .nav-list a{display:block;padding:12px 4px;font-size:16px;border-radius:8px}
+    .drawer .nav-list a:hover{background:var(--hover)}
+
+    /* OTHER: 링크 카드(설명 없음) */
+    .other-grid{display:grid;grid-template-columns:1fr;gap:10px}
+    .other-link{
+      display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #ececec;background:#fff;border-radius:10px;font-weight:600
+    }
+    .other-link .icon{width:18px;height:18px;flex:0 0 18px}
+
+    /* OTHER: 파트너 타일 */
+    .partner-block{display:grid;grid-template-columns:1fr;gap:10px;margin-top:8px}
+    .partner-tile{display:flex;align-items:center;gap:12px;border:1px solid #ececec;border-radius:12px;background:#fff;padding:10px 12px}
+    .partner-tile .meta{display:flex;flex-direction:column}
+    .partner-tile .meta .tit{font-weight:700}
+    /* 타일 로고 크기 조화 */
+    .partner-tile .logo-lootbar{height:var(--lootbar-tile-h);width:auto}
+    .partner-tile .logo-cafe{height:var(--cafe-tile-h);width:auto}
+  </style>
+</head>
+<body class="theme-default">
+  <!-- ===== Header ===== -->
+  <header class="site-header" role="banner">
+    <div class="container nav-bar">
+      <div class="nav-left">
+        <a class="brand" href="#/home" aria-label="KingshotData 홈">
+          <img class="brand-logo" src="/img/logo-kingshotdata.png?v=202509131858" alt="KingshotData" width="200" height="50" decoding="async" fetchpriority="high">
+        </a>
+        <nav class="nav" id="primaryNav" role="navigation" aria-label="주 메뉴">
+          <a href="#/home" data-link>홈</a>
+          <a href="#/buildings" data-link>건물</a>
+          <a href="#/heroes" data-link>영웅</a>
+          <a href="#/database" data-link>데이터베이스</a>
+          <a href="#/guides" data-link>가이드</a>
+          <a href="#/calculator" data-link>계산기</a>
+          <a href="#/about" data-link>소개</a>
+        </nav>
+      </div>
+
+      <button class="hamburger" id="menuToggle" aria-label="메뉴 열기" aria-controls="mobileDrawer" aria-expanded="false">☰</button>
+
+      <div class="nav-right">
+        <!-- 순서: Lootbar → FanCommunity -->
+        <a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" class="lootbar-banner" target="_blank" rel="noopener">
+          <img class="lootbar-logo" src="/img/brand.png?v=202509131858" alt="Lootbar" width="120" height="32">
+          <span></span> <!-- 텍스트 숨김 -->
+        </a>
+        <a href="https://cafe.naver.com/kingshot1" class="cafe-banner" target="_blank" rel="noopener">
+          <img class="cafe-logo" src="/img/brand2.png?v=202509131858" alt="Kingshot Fan Community" width="120" height="32">
+          <span>KingshotFanCommunity</span>
+        </a>
+
+        <!-- 헤더 언어 드롭다운(작게) -->
+        <div id="langDropdownHeader" class="lang-dropdown" data-placement="right" style="position:relative">
+          <div class="lang-row" role="button" aria-haspopup="menu" aria-expanded="false" aria-controls="langMenuHeader">
+            <svg class="globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="#555" stroke-width="1.5"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" fill="none" stroke="#555" stroke-width="1.5"/></svg>
+            <span class="current">EN</span><span class="caret" aria-hidden="true"></span>
+          </div>
+          <ul id="langMenuHeader" class="lang-menu" role="menu" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Drawer ===== -->
+  <div class="backdrop" id="backdrop" hidden></div>
+  <aside class="drawer" id="mobileDrawer" aria-hidden="true" aria-label="모바일 내비게이션">
+    <header>
+      <strong>Menu</strong>
+      <button id="btnClose" aria-label="닫기" style="background:none;border:0;font-size:20px;cursor:pointer">✕</button>
+    </header>
+
+    <div class="section" style="position:relative">
+      <!-- 참고처럼: 행(row) 트리거만 보이고, 눌러야 드롭다운이 뜸 -->
+      <div id="langDropdownDrawer" class="lang-dropdown" data-placement="left">
+        <div class="lang-row" role="button" aria-haspopup="menu" aria-expanded="false" aria-controls="langMenuDrawer">
+          <svg class="globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="#555" stroke-width="1.5"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" fill="none" stroke="#555" stroke-width="1.5"/></svg>
+          <span class="current">EN</span><span class="caret" aria-hidden="true"></span>
+        </div>
+        <ul id="langMenuDrawer" class="lang-menu" role="menu" hidden></ul>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+    <div class="section">
+      <div class="sec-label">navigation</div>
+      <div class="nav-list" role="navigation">
+        <a href="#/buildings" data-link>건물</a>
+        <a href="#/heroes" data-link>영웅</a>
+        <a href="#/database" data-link>데이터베이스</a>
+        <a href="#/guides" data-link>가이드</a>
+        <a href="#/calculator" data-link>계산기</a>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+    <div class="section">
+      <div class="sec-label">other</div>
+
+      <!-- 바로 링크 (설명 제거) -->
+      <div class="other-grid">
+        <a class="other-link" href="https://open.kakao.com/o/gHPnO4uh" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c5 0 9 3 9 6.7C21 13.4 17 17 12 17c-.6 0-1.2 0-1.8-.1L6 20l1.5-3.2C5.9 15.7 3 13.7 3 9.7 3 6 7 3 12 3Z" fill="#2b2b2b"/></svg>
+          KakaoTalk
+        </a>
+        <a class="other-link" href="https://kingshotdata.kr/pages/guides/kingshot-giftcode.html" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="11" rx="2" fill="none" stroke="#333" stroke-width="1.5"/><path d="M3 12h18M12 19V8" stroke="#333" stroke-width="1.5"/></svg>
+          Gift Code
+        </a>
+      </div>
+
+      <!-- 파트너 타일 -->
+      <div class="partner-block">
+        <!-- Lootbar: 로고만 (텍스트 없음) -->
+        <a class="partner-tile" href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" target="_blank" rel="noopener" aria-label="Lootbar">
+          <img class="logo-lootbar" src="/img/brand.png?v=202509131858" alt="Lootbar">
+        </a>
+        <!-- FanCommunity: 제목만(중복 캡션 제거) -->
+        <a class="partner-tile" href="https://cafe.naver.com/kingshot1" target="_blank" rel="noopener">
+          <img class="logo-cafe" src="/img/brand2.png?v=202509131858" alt="">
+          <div class="meta"><span class="tit">Kingshot Fan Community</span></div>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== Main / Footer ===== -->
+  <main class="container" id="main" role="main">
+    <div id="content" class="panel">
+      <noscript data-nosnippet>자바스크립트를 활성화하세요. 콘텐츠가 표시됩니다.</noscript>
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div id="footerTools" class="footer-tools"></div>
+      <span>All game images and data are copyrighted by Century Games.</span><br />
+      <span>This site is an unofficial fan site.</span><br />
+      © 2025 KingshotData Korea ·
+      <a href="/privacy/">개인정보처리방침 / Privacy</a> ·
+      <button id="cookie-prefs-open" type="button">Cookie Preferences</button> ·
+      <a id="dnsmpi" href="#" role="button">Do Not Sell or Share…</a>
+    </div>
+  </footer>
+
+  <script>
+    // 드로어 토글
+    document.addEventListener('DOMContentLoaded', () => {
+      const html=document.documentElement, body=document.body;
+      const drawer=document.getElementById('mobileDrawer');
+      const backdrop=document.getElementById('backdrop');
+      const btnOpen=document.getElementById('menuToggle');
+      const btnClose=document.getElementById('btnClose');
+
+      function openDrawer(){ html.classList.add('is-open'); body.classList.add('no-scroll'); backdrop.hidden=false; drawer.setAttribute('aria-hidden','false'); btnOpen?.setAttribute('aria-expanded','true'); btnClose?.focus(); }
+      function closeDrawer(){ html.classList.remove('is-open'); body.classList.remove('no-scroll'); backdrop.hidden=true; drawer.setAttribute('aria-hidden','true'); btnOpen?.setAttribute('aria-expanded','false'); btnOpen?.focus(); }
+      btnOpen?.addEventListener('click', openDrawer);
+      btnClose?.addEventListener('click', closeDrawer);
+      backdrop?.addEventListener('click', closeDrawer);
+      window.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDrawer(); });
+      drawer.querySelectorAll('a[data-link]')?.forEach(a=>a.addEventListener('click', closeDrawer));
+    });
+  </script>
+
+  <!-- 언어 드롭다운 (KO/EN/JA/CN/TW) -->
+  <script>
+  (function(){
+    const LANGS = [
+      {code:'ko',    label:'한국어',  short:'KO'},
+      {code:'en',    label:'English', short:'EN'},
+      {code:'ja',    label:'日本語',    short:'JA'},
+      {code:'zh-CN', label:'简体中文',  short:'CN'},
+      {code:'zh-TW', label:'繁體中文',  short:'TW'},
+    ];
+
+    function getCurrentLang(){
+      if (window.I18N?.current) return I18N.current;
+      return document.documentElement.getAttribute('lang') || 'en';
+    }
+
+    async function applyLang(lang){
+      if (window.I18N?.setLang) await I18N.setLang(lang);
+      document.documentElement.setAttribute('lang', lang);
+      try { localStorage.setItem('lang', lang); } catch(_){}
+      try { window.dispatchEvent(new HashChangeEvent('hashchange')); } catch(_){}
+    }
+
+    function mountPlainDropdown(containerId, menuId){
+      const root = document.getElementById(containerId);
+      const trigger = root?.querySelector('.lang-row');
+      const menu = document.getElementById(menuId);
+      if (!root || !trigger || !menu) return;
+
+      // 메뉴 구성
+      menu.innerHTML = LANGS.map((l,idx)=>`
+        <li><button class="lang-item" role="menuitemradio" data-lang="${l.code}" aria-checked="false" tabindex="${idx===0?'0':'-1'}">${l.label}</button></li>
+      `).join('');
+      const items = Array.from(menu.querySelectorAll('.lang-item'));
+
+      function setBtn(code){ trigger.querySelector('.current').textContent = (LANGS.find(x=>x.code===code)?.short || code.toUpperCase()); }
+      function reflect(code){ items.forEach(it => it.setAttribute('aria-checked', it.dataset.lang===code ? 'true' : 'false')); }
+
+      function open(){
+        const rect = trigger.getBoundingClientRect();
+        menu.style.left = '0';
+        menu.hidden=false; trigger.setAttribute('aria-expanded','true');
+        const cur=getCurrentLang(); reflect(cur); setBtn(cur);
+        (items.find(it=>it.dataset.lang===cur) || items[0]).focus();
+        document.addEventListener('click', onDoc, {capture:true});
+        document.addEventListener('keydown', onKey);
+      }
+      function close(){
+        menu.hidden=true; trigger.setAttribute('aria-expanded','false');
+        document.removeEventListener('click', onDoc, {capture:true});
+        document.removeEventListener('keydown', onKey);
+        trigger.focus?.();
+      }
+      function onDoc(e){ if(!root.contains(e.target)) close(); }
+      function onKey(e){
+        const active=document.activeElement; const idx=items.indexOf(active);
+        if(e.key==='Escape'){ e.preventDefault(); close(); return; }
+        if(e.key==='ArrowDown'){ e.preventDefault(); items[(idx+1+items.length)%items.length].focus(); }
+        if(e.key==='ArrowUp'){ e.preventDefault(); items[(idx-1+items.length)%items.length].focus(); }
+        if(e.key==='Enter' || e.key===' '){
+          e.preventDefault(); if(active && active.classList.contains('lang-item')) choose(active.dataset.lang);
+        }
+      }
+      async function choose(code){ reflect(code); setBtn(code); await applyLang(code); close(); }
+
+      trigger.addEventListener('click', () => (trigger.getAttribute('aria-expanded')==='true'? close(): open()));
+      items.forEach(it => it.addEventListener('click', () => choose(it.dataset.lang)));
+
+      // 초기 표시
+      setBtn(getCurrentLang());
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      mountPlainDropdown('langDropdownHeader','langMenuHeader');
+      mountPlainDropdown('langDropdownDrawer','langMenuDrawer');
+    });
+  })();
+  </script>
+</body>
+</html>

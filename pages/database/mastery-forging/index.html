@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <base href="/" />
+<script src="/js/standalone-bridge.js?v=202509120604" defer></script>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+    .table-wrap{overflow:auto}
+    .table-wrap table{
+      border-collapse:collapse;font-size:13px;width:auto;min-width:560px;margin:0 auto;table-layout:auto
+    }
+    .table-wrap th,.table-wrap td{
+      padding:6px 10px;border-bottom:1px solid var(--border,#1e2430);
+      white-space:nowrap;text-align:right;line-height:20px;height:28px;vertical-align:middle
+    }
+    .table-wrap th:first-child,.table-wrap td:first-child{ text-align:left }
+    .table-wrap thead th{ position:sticky; top:0; background:#0f1318; color:#8a93a4; z-index:1 }
+    /* 열 폭 */
+    .table--mastery th:nth-child(1), .table--mastery td:nth-child(1){ width:70px }   /* # (레벨) */
+    .table--mastery th:nth-child(2), .table--mastery td:nth-child(2){ width:120px }  /* 🔨 (망치) */
+    .table--mastery th:nth-child(3), .table--mastery td:nth-child(3){ width:120px }  /* ⭐ (레전드) */
+    .table--mastery th:nth-child(4), .table--mastery td:nth-child(4){ width:90px }   /* ➕% (보너스) */
+    .table--mastery th:nth-child(5), .table--mastery td:nth-child(5){ width:110px }  /* × (배수) */
+  </style>
+
+  <!-- i18n -->
+  <script src="/js/i18n.js?v=202509120604" defer></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    if (!window.I18N?.init) return;
+    const raw = (localStorage.getItem('lang') || navigator.language || 'ko').replace('_','-');
+    const lang = raw.startsWith('zh') ? (raw.toLowerCase().includes('tw') ? 'zh-TW' : 'zh-CN')
+                                      : (raw.split('-')[0] || 'ko');
+    try {
+      await I18N.init({ lang, namespaces: ['db'] });  // 'db' 네임스페이스만
+      I18N.applyTo(document);
+    } catch (e) { console.error('[i18n init error]', e); }
+    document.addEventListener('i18n:changed', () => I18N.applyTo(document));
+  });
+  </script>
+</head>
+<body>
+  <main>
+    <!-- 대표 이미지 (타이틀 없음 유지) -->
+    <figure>
+      <img src="/img/database/Mastery Forging/forgehammer-icon.webp"
+           alt="db.masteryForging.imageAlt" data-i18n-attr="alt"
+           width="300" height="300" loading="lazy" decoding="async">
+    </figure>
+
+    <!-- 본문 섹션만 i18n -->
+    <section aria-labelledby="overview">
+      <h2 id="overview" data-i18n="db.masteryForging.section.overview.title">개요</h2>
+      <p data-i18n="db.masteryForging.section.overview.p1"><strong>해금 조건:</strong> 도시센터 20레벨</p>
+      <p data-i18n="db.masteryForging.section.overview.p2"><strong>시작 조건:</strong> 마스터리 강화를 쓰기 전에 해당 <strong>레전드 장비를 20레벨</strong>까지 일반 강화해야 한다.</p>
+    </section>
+
+    <section aria-labelledby="target">
+      <h2 id="target" data-i18n="db.masteryForging.section.target.title">적용 대상</h2>
+      <p data-i18n="db.masteryForging.section.target.p1"><strong>레전드 장비 전용</strong>이다. 에픽/레어/일반 장비에는 적용되지 않는다.</p>
+      <p data-i18n="db.masteryForging.section.target.p2">일반 강화는 <strong>강화 경험치(또는 합성)</strong>을 쓰고, 마스터리 강화는 <strong>제작망치</strong>가 필요하다.</p>
+    </section>
+
+    <section aria-labelledby="notice">
+      <h2 id="notice" data-i18n="db.masteryForging.section.notice.title">알림</h2>
+      <ul>
+        <li data-i18n="db.masteryForging.section.notice.n1"><strong>마스터리 강화 10레벨 초과(11~20)</strong>부터 <strong>레전드 장비(완품)</strong>가 추가 재료로 필요하다. 11레벨→1개 … 20레벨→10개</li>
+        <li data-i18n="db.masteryForging.section.notice.n2">레전드 장비를 재료로 사용하면, 그 장비에 들어가 있던 <strong>강화 경험치 전부 반환</strong>, 해당 장비에 사용된 <strong>제작망치의 절반 반환</strong></li>
+        <li data-i18n="db.masteryForging.section.notice.n3"><strong>마스터리 강화 10레벨 초과</strong> 레전드 장비는 다른 장비의 재료로 사용할 수 없다.</li>
+        <li data-i18n="db.masteryForging.section.notice.n4"><strong>최상위 등급 장비</strong>는 마스터리 강화 재료로 사용할 수 없다.</li>
+      </ul>
+    </section>
+
+    <!-- 예시 이미지 -->
+    <figure>
+      <img src="/img/database/Mastery Forging/mastery-forging-example-576x1024.webp"
+           alt="db.masteryForging.imageExampleAlt" data-i18n-attr="alt"
+           width="576" height="1024" loading="lazy" decoding="async">
+      <figcaption class="visually-hidden" data-i18n="db.masteryForging.imageExampleAlt">마스터리 강화 화면 예시</figcaption>
+    </figure>
+
+    <!-- 표 (헤더 이모지 + 접근성용 aria-label만 i18n) -->
+    <section>
+      <div class="table-wrap" role="region">
+        <table class="table--mastery">
+          <thead>
+            <tr>
+              <th scope="col" aria-label="레벨"           data-i18n-attr="aria-label">#</th>
+              <th scope="col" aria-label="제작망치"       data-i18n-attr="aria-label">🔨</th>
+              <th scope="col" aria-label="레전드 장비"     data-i18n-attr="aria-label">⭐</th>
+              <th scope="col" aria-label="+% 보너스"       data-i18n-attr="aria-label">➕%</th>
+              <th scope="col" aria-label="능력치 배수"     data-i18n-attr="aria-label">×</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>10</td><td>–</td><td>10</td><td>× 1.1</td></tr>
+            <tr><td>2</td><td>20</td><td>–</td><td>20</td><td>× 1.2</td></tr>
+            <tr><td>3</td><td>30</td><td>–</td><td>30</td><td>× 1.3</td></tr>
+            <tr><td>4</td><td>40</td><td>–</td><td>40</td><td>× 1.4</td></tr>
+            <tr><td>5</td><td>50</td><td>–</td><td>50</td><td>× 1.5</td></tr>
+            <tr><td>6</td><td>60</td><td>–</td><td>60</td><td>× 1.6</td></tr>
+            <tr><td>7</td><td>70</td><td>–</td><td>70</td><td>× 1.7</td></tr>
+            <tr><td>8</td><td>80</td><td>–</td><td>80</td><td>× 1.8</td></tr>
+            <tr><td>9</td><td>90</td><td>–</td><td>90</td><td>× 1.9</td></tr>
+            <tr><td>10</td><td>100</td><td>–</td><td>100</td><td>× 2.0</td></tr>
+            <tr><td>11</td><td>110</td><td>1</td><td>110</td><td>× 2.1</td></tr>
+            <tr><td>12</td><td>120</td><td>2</td><td>120</td><td>× 2.2</td></tr>
+            <tr><td>13</td><td>130</td><td>3</td><td>130</td><td>× 2.3</td></tr>
+            <tr><td>14</td><td>140</td><td>4</td><td>140</td><td>× 2.4</td></tr>
+            <tr><td>15</td><td>150</td><td>5</td><td>150</td><td>× 2.5</td></tr>
+            <tr><td>16</td><td>160</td><td>6</td><td>160</td><td>× 2.6</td></tr>
+            <tr><td>17</td><td>170</td><td>7</td><td>170</td><td>× 2.7</td></tr>
+            <tr><td>18</td><td>180</td><td>8</td><td>180</td><td>× 2.8</td></tr>
+            <tr><td>19</td><td>190</td><td>9</td><td>190</td><td>× 2.9</td></tr>
+            <tr><td>20</td><td>200</td><td>10</td><td>200</td><td>× 3.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

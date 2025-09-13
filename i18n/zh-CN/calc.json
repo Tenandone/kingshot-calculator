@@ -1,0 +1,357 @@
+{
+  "calc": {
+    "meta": { "title": "建筑计算器 | KingshotData KR" },
+    "title": "建筑计算器",
+    "desc": "查看升级所需的资源和时间。",
+    "howto": {
+      "title": "使用方法",
+      "step1": "选择要升级的建筑。",
+      "step2": "输入当前等级和目标等级。",
+      "step3": {
+        "head": "输入建造速度加成。",
+        "help": "进入 个人资料 → 战力 页面底部可查看建造速度加成。（包含萨乌尔/狼/研究/国王·官职等）"
+      },
+      "step4": "升级主城时，可以勾选“包含前置建筑”选项。",
+      "step5": "若宠物增益未激活，可以手动添加；法令增益需手动勾选。"
+    },
+    "levelGuide": {
+      "title": "等级指南",
+      "tg1": "TG 1 = Lv. 35",
+      "tg2": "TG 2 = Lv. 40",
+      "tg3": "TG 3 = Lv. 45",
+      "tg4": "TG 4 = Lv. 50",
+      "tg5": "TG 5 = Lv. 55"
+    },
+    "form": {
+      "building": {
+        "label": "选择建筑",
+        "option": {
+          "towncenter": "主城",
+          "embassy": "大使馆",
+          "command": "指挥部",
+          "barracks": "步兵营",
+          "stable": "骑兵营",
+          "range": "弓兵营",
+          "academy": "学院",
+          "infirmary": "医务所"
+        }
+      },
+      "startLevel": { "label": "当前等级", "placeholder": "输入当前等级" },
+      "targetLevel": { "label": "目标等级", "placeholder": "输入目标等级" },
+      "speedBonus": { "label": "建造速度加成 (%)" },
+      "saulBonus": { "label": "萨乌尔技能加成 (%) — 应用于建造成本" },
+      "wolfBonus": { "label": "狼技能加成 (%)" },
+      "positionBonus": { "label": "国王/官职加成 (%)" },
+      "doubleTime": { "label": "法令应用 (时间减少20%)" },
+      "includePrereq": { "label": "包含前置建筑" },
+      "actions": { "calculate": "计算升级", "clear": "清空" }
+    },
+    "prereq": {
+      "summary": "前置建筑等级（当前等级）",
+      "academy": "学院",
+      "range": "弓兵营",
+      "stable": "骑兵营",
+      "barracks": "步兵营",
+      "embassy": "大使馆",
+      "note": "* 留空则视为0。"
+    },
+    "prereqBox": {
+      "title": "前置条件",
+      "empty": "无前置条件"
+    },
+    "prereqSummary": {
+      "title": "前置建筑汇总",
+      "current": "当前",
+      "required": "需求"
+    },
+    "result": {
+      "upgrade": "升级:",
+      "time": "建造时间:",
+      "totalWithSaul": "总资源消耗（萨乌尔加成后）"
+    },
+    "table": {
+      "title": "详细",
+      "titleWithPrereq": "详细（包含前置条件）",
+      "col": {
+        "building": "建筑",
+        "level": "等级",
+        "time": "建造时间",
+        "bread": "粮食",
+        "wood": "木材",
+        "stone": "石料",
+        "iron": "铁",
+        "truegold": "真金"
+      }
+    },
+    "common": {
+      "lv": "Lv.",
+      "percentZero": "0",
+      "example25": "例: 25",
+      "example20": "例: 20",
+      "example15": "例: 15"
+    },
+    "time": {
+      "daySuffix": "天",
+      "hourSuffix": "小时",
+      "minSuffix": "分钟",
+      "secSuffix": "秒"
+    },
+    "alert": {
+      "invalidLevel": "等级输入不正确。",
+      "targetGtStart": "目标等级必须大于起始等级。",
+      "noData": "没有数据。"
+    },
+    "error": {
+      "load": "数据加载失败"
+    }
+  },
+
+  "calcCharm": {
+    "meta": { "title": "领主宝石计算器 | KingshotData KR" },
+    "title": "领主宝石计算器",
+    "desc": "输入当前宝石等级、目标等级以及各兵种数量，可以计算所需的宝石手册/宝石图纸和总属性提升。",
+    "howto": {
+      "title": "使用方法",
+      "step1": "请选择当前宝石等级和目标等级。",
+      "step2": "输入要升级的宝石各兵种数量。（骑兵·步兵·弓兵 / 例: 3·3·3）",
+      "step3": "点击“计算”按钮。"
+    },
+    "form": {
+      "currentLevel": { "label": "当前等级", "placeholder": "选择当前等级" },
+      "targetLevel": { "label": "目标等级", "placeholder": "选择目标等级" },
+      "counts": {
+        "label": "各兵种数量",
+        "placeholder": "例: 3·3·3",
+        "cavalry": "骑兵",
+        "infantry": "步兵",
+        "archer": "弓兵"
+      },
+      "actions": {
+        "calculate": "计算",
+        "clear": "重置",
+        "fill9": "默认 3·3·3",
+        "fill9Title": "将所有兵种填为3个",
+        "clearTitle": "重置所有兵种数量"
+      }
+    },
+    "result": {
+      "title": "结果",
+      "manual": "所需宝石手册",
+      "blueprint": "所需宝石图纸",
+      "attribute": "总属性提升"
+    },
+    "detail": {
+      "level": "等级（达到）",
+      "manual": "所需手册",
+      "blueprint": "所需图纸",
+      "attr": "该等级属性％"
+    },
+    
+  "table": {
+    "level": "等级",
+    "manual": "宝石手册",
+    "blueprint": "宝石图纸",
+    "attr": "属性(%)"
+  
+}
+,
+    "hint": "※ 成本 = 当前→目标升级区间总和 × (总数量)。 属性 = (目标％ − 当前％) × 总数量。",
+    "notice": {
+      "title": "注意事项",
+      "p1": "本数据为基于游戏内显示数值整理的玩家自制资料。",
+      "li1": "数值可能会因补丁/平衡性调整而变化。",
+      "li2": "如有错字或错误，请反馈联系我们。"
+    },
+    "alert": {
+      "targetGtStart": "目标等级必须高于当前等级。",
+      "noTroop": "请至少输入1个骑兵/步兵/弓兵。",
+      "load": "数据加载失败。"
+    }
+  },
+  
+
+  "calcGear": {
+  "meta": { "title": "领主装备计算器 | KingshotData KR" },
+  "title": "领主装备计算器",
+  "desc": "使用下方的 Kingshot 领主装备计算器进行快速估算。",
+
+  "howto": {
+    "title": "使用方法",
+    "step1": "选择当前的装备等级。",
+    "step2": "选择要升级的目标等级。",
+    "step3": "在上方标签中选择要升级的装备槽位。",
+    "slotsHelp": "槽位：帽子·项链（骑兵），护甲·裤子（步兵），戒指·法杖（弓兵）",
+    "step4": "点击“计算”。"
+  },
+
+  "notice": {
+    "title": "注意事项",
+    "p1": "本工具为基于游戏内数值整理的玩家自制数据。",
+    "li1": "数值可能因补丁/平衡调整而变化。",
+    "li2": "如有错字或问题，请通过“联系我们”反馈。",
+    "contact": "联系我们"
+  },
+
+  "slots": {
+    "hat": "帽子",
+    "necklace": "项链",
+    "armor": "护甲",
+    "pants": "裤子",
+    "ring": "戒指",
+    "staff": "法杖"
+  },
+
+  "classes": {
+    "cavalry": "骑兵",
+    "infantry": "步兵",
+    "archer": "弓兵"
+  },
+
+  "actions": {
+    "calculate": "计算",
+    "clear": "清除",
+    "showDetail": "显示详情",
+    "hideDetail": "隐藏详情"
+  },
+
+  "kpi": {
+    "satin": "绸缎",
+    "thread": "金线",
+    "sketch": "设计草图",
+    "score": "装备评分"
+  },
+
+  "cols": {
+    "slot": "槽位",
+    "class": "兵种",
+    "satin": "绸缎",
+    "thread": "金线",
+    "sketch": "设计草图",
+    "score": "评分",
+    "total": "合计",
+    "selected": "已选 {n} 个",
+    "current": "当前等级",
+    "target": "目标等级",
+    "manual": "需要手册",
+    "blueprint": "需要图纸",
+    "attribute": "属性提升"
+  },
+
+  "alerts": {
+    "needSlot": "请选择至少一个槽位。",
+    "invalidRange": "当前等级必须低于目标等级。",
+    "loadFail": "数据加载失败。"
+  },
+
+  "misc": {
+    "from": "当前等级",
+    "to": "目标等级",
+    "hint": "可一次性汇总多个槽位；若各部位成本不同，请通过 stepsMap 传入对应的部位 steps。"
+  },
+
+  "tiers": {
+    "basic": "基础",
+    "rare": "稀有",
+    "epic": "史诗",
+    "legendary": "传说",
+    "mythic": "神话",
+    "mythicT1_1": "神话 T1（★1）",
+    "mythicT1_2": "神话 T1（★2）",
+    "mythicT1_3": "神话 T1（★3）",
+    "mythicT2_1": "神话 T2（★1）",
+    "mythicT2_2": "神话 T2（★2）",
+    "mythicT2_3": "神话 T2（★3）",
+    "mythicT3_1": "神话 T3（★1）",
+    "mythicT3_2": "神话 T3（★2）",
+    "mythicT3_3": "神话 T3（★3）",
+    "mythicT4_1": "神话 T4（★1）",
+    "mythicT4_2": "神话 T4（★2）",
+    "mythicT4_3": "神话 T4（★3）"
+  }
+}
+,
+
+  "trainCalc": {
+    "meta": { "title": "Kingshot 训练与升阶计算器 | KingshotData KR" },
+    "title": "Kingshot 训练与升阶计算器",
+    "badge": "加速天数 ↔ 部队数量",
+
+    "about": {
+      "title": "可以计算什么？",
+      "p1": "用于判断应训练新部队还是升阶现有部队，计算部队数量、单兵耗时、战力提升，以及活动积分（HoG / KvK-准备 / Governor）。",
+      "li1": "选择模式：训练 / 升阶。",
+      "li2": "训练支持 Lv1–10；升阶支持 Lv1–9 → Lv10。",
+      "li3": "输入训练速度（%）。",
+      "li4": "选择输入方式，填入数值后点击“计算”。",
+      "note": "* 单兵耗时以训练速度 0% 为基准，并会按输入的速度自动调整。"
+    },
+
+    "form": {
+      "mode": "模式",
+      "fromTier": "当前阶级（from）",
+      "toTier": "目标阶级（to）",
+      "trainSpeed": "训练速度（%）",
+      "inputMode": "输入方式",
+      "modeTime": "加速天数 → 计算部队数量",
+      "modeTroops": "部队数量 → 需要加速天数",
+      "baseNote": "基准：单兵耗时以训练速度 0% 为准",
+      "speedDays": "加速天数（天）",
+      "count": "部队数量"
+    },
+
+    "mode": {
+      "training": "训练",
+      "promotion": "升阶"
+    },
+
+    "actions": {
+      "calculate": "计算"
+    },
+
+    "summary": {
+      "selPrefix": "选择："
+    },
+
+    "warn": {
+      "noData": "无匹配数据。请检查阶级/模式。"
+    },
+
+    "table": {
+      "metric": "指标",
+      "perOne": "单兵",
+      "total": "总计"
+    },
+
+    "units": {
+      "day": "天",
+      "hour": "小时",
+      "min": "分",
+      "sec": "秒"
+    },
+
+    "level": "Lv {n}",
+
+    "rows": {
+      "possibleTroops": "可获得的部队数（基于加速天数）",
+      "hogPoints": "HoG 积分",
+      "kvkPoints": "KvK（准备）积分",
+      "govPoints": "Governor 积分",
+      "powerInc": "战力提升",
+      "timePerOneApplied": "单兵耗时（已应用速度）",
+      "inputTroops": "输入的部队数",
+      "needAccelTime": "所需加速时间"
+    }
+  },
+  "calcHub": {
+    "meta": { "title": "计算器 | KingshotData KR", "desc": "Kingshot 计算器中心" },
+    "title": "计算器",
+    "cards": {
+      "building": { "title": "建筑计算器" },
+      "gear":     { "title": "总督装备计算器" },
+      "charm":    { "title": "总督宝石计算器" },
+      "training": { "title": "训练/升阶计算器" }
+    }
+  }
+}
+
+

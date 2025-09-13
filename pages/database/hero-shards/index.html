@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <base href="/" />
+<script src="/js/standalone-bridge.js?v=202509120604" defer></script>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+    .table-wrap{overflow:auto}
+    .table-wrap table{
+      border-collapse:collapse;font-size:13px;width:auto;min-width:720px;margin:0 auto;table-layout:auto
+    }
+    .table-wrap th,.table-wrap td{
+      padding:6px 10px;border-bottom:1px solid var(--border,#1e2430);
+      white-space:nowrap;text-align:right;line-height:20px;height:28px;vertical-align:middle
+    }
+    .table-wrap th:first-child,.table-wrap td:first-child{ text-align:left }
+    .table-wrap thead th{ position:sticky; top:0; background:#0f1318; color:#8a93a4; z-index:1 }
+
+    /* 컬럼 폭 */
+    .table--shards th:nth-child(1), .table--shards td:nth-child(1){ width:90px }  /* ★ */
+    .table--shards th:nth-child(2), .table--shards td:nth-child(2){ width:70px }  /* T1 */
+    .table--shards th:nth-child(3), .table--shards td:nth-child(3){ width:70px }  /* T2 */
+    .table--shards th:nth-child(4), .table--shards td:nth-child(4){ width:70px }  /* T3 */
+    .table--shards th:nth-child(5), .table--shards td:nth-child(5){ width:70px }  /* T4 */
+    .table--shards th:nth-child(6), .table--shards td:nth-child(6){ width:70px }  /* T5 */
+    .table--shards th:nth-child(7), .table--shards td:nth-child(7){ width:70px }  /* T6 */
+    .table--shards th:nth-child(8), .table--shards td:nth-child(8){ width:80px }  /* Σ */
+  </style>
+
+  <!-- i18n -->
+  <script src="/js/i18n.js?v=202509120604" defer></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    if (!window.I18N?.init) return;
+    const raw = (localStorage.getItem('lang') || navigator.language || 'ko').replace('_','-');
+    const lang = raw.startsWith('zh') ? (raw.toLowerCase().includes('tw') ? 'zh-TW' : 'zh-CN')
+                                      : (raw.split('-')[0] || 'ko');
+    try {
+      await I18N.init({ lang, namespaces: ['db'] });
+      I18N.applyTo(document);
+    } catch (e) { console.error('[i18n init error]', e); }
+    document.addEventListener('i18n:changed', () => I18N.applyTo(document));
+  });
+  </script>
+</head>
+<body>
+  <main>
+    <!-- 대표 이미지 (타이틀 제거 유지) -->
+    <figure>
+      <img
+        src="/img/database/Hero Shards/mythic-hero-shard-300x264.webp"
+        alt="db.heroShards.imageAlt" data-i18n-attr="alt"
+        width="300" height="264" loading="lazy" decoding="async">
+    </figure>
+
+    <!-- 본문: 섹션만 i18n, 제목/캡션 제거 -->
+    <section aria-labelledby="overview">
+      <h2 id="overview" data-i18n="db.heroShards.section.overview.title">개요</h2>
+      <p data-i18n="db.heroShards.section.overview.desc">
+        영웅 조각은 영웅의 성급을 올리는 데 사용된다. 성급 상승 시 신규 스킬 해금/강화와 전투력 증가, 영웅 스토리가 열린다.
+      </p>
+    </section>
+
+    <section aria-labelledby="grades">
+      <h2 id="grades" data-i18n="db.heroShards.section.grades.title">영웅 등급</h2>
+      <p data-i18n="db.heroShards.section.grades.list">R(레어/파랑), SR, SSR</p>
+    </section>
+
+    <section aria-labelledby="types">
+      <h2 id="types" data-i18n="db.heroShards.section.types.title">조각 종류</h2>
+      <ul>
+        <li data-i18n="db.heroShards.section.types.general"><strong>공용(범용) 조각</strong>: 희귀도만 맞으면 대부분의 영웅에 사용/교환 가능</li>
+        <li data-i18n="db.heroShards.section.types.specific"><strong>영웅 전용 조각</strong>: 해당 영웅에게만 사용</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="exceptions">
+      <h2 id="exceptions" data-i18n="db.heroShards.section.exceptions.title">예외</h2>
+      <p data-i18n="db.heroShards.section.exceptions.desc">
+        아마데우스, 헬가는 VIP 패키지의 전용 조각으로만 성급 업그레이드가 가능하다. 공용 레전드 조각은 사용할 수 없다. 그 외 모든 영웅은 공용 조각으로 성급 업그레이드가 가능하다.
+      </p>
+    </section>
+
+    <section aria-labelledby="sources">
+      <h2 id="sources" data-i18n="db.heroShards.section.sources.title">획득처</h2>
+      <ul>
+        <li data-i18n="db.heroShards.section.sources.s1">전망대 임무</li>
+        <li data-i18n="db.heroShards.section.sources.s2">토벌 단계 일부</li>
+        <li data-i18n="db.heroShards.section.sources.s3">반군 처치</li>
+        <li data-i18n="db.heroShards.section.sources.s4">영웅의 전당, 연맹 상점, VIP 상점</li>
+        <li data-i18n="db.heroShards.section.sources.s5">영웅 모집, 이벤트/패키지</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="counts">
+      <h2 id="counts" data-i18n="db.heroShards.section.counts.title">필요 수량</h2>
+      <p data-i18n="db.heroShards.section.counts.desc">최대 성급까지 총 <strong>1,065개</strong>가 필요하다. 해금(명함) 조각까지 포함하면 <strong>1,075개</strong>다.</p>
+    </section>
+
+    <!-- 표: 텍스트 최소화 (★, T1~T6, Σ) -->
+    <section>
+      <div class="table-wrap" role="region">
+        <table class="table--shards">
+          <thead>
+            <tr>
+              <th scope="col">★</th>
+              <th scope="col">T1</th>
+              <th scope="col">T2</th>
+              <th scope="col">T3</th>
+              <th scope="col">T4</th>
+              <th scope="col">T5</th>
+              <th scope="col">T6</th>
+              <th scope="col">Σ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>★</td>    <td>1</td>  <td>1</td>  <td>2</td>  <td>2</td>  <td>2</td>  <td>2</td>  <td>10</td></tr>
+            <tr><td>★★</td>   <td>5</td>  <td>5</td>  <td>5</td>  <td>5</td>  <td>5</td>  <td>15</td> <td>40</td></tr>
+            <tr><td>★★★</td>  <td>15</td> <td>15</td> <td>15</td> <td>15</td> <td>15</td> <td>40</td> <td>115</td></tr>
+            <tr><td>★★★★</td> <td>40</td> <td>40</td> <td>40</td> <td>40</td> <td>40</td> <td>100</td><td>300</td></tr>
+            <tr><td>★★★★★</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>600</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

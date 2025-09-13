@@ -1,0 +1,356 @@
+{
+  "calc": {
+    "meta": { "title": "建物計算機 | KingshotData KR" },
+    "title": "建物計算機",
+    "desc": "アップグレードに必要な資源と時間を確認できます。",
+    "howto": {
+      "title": "使用方法",
+      "step1": "アップグレードする建物を選択してください。",
+      "step2": "現在レベルと目標レベルを入力してください。",
+      "step3": {
+        "head": "建設速度ボーナスを入力してください。",
+        "help": "プロフィール → 戦力画面下部で建設速度ボーナスを確認できます。（サウル/ウルフ/研究/国王・官職などを含む）"
+      },
+      "step4": "タウンセンターをアップグレードする場合、「前提建物を含む」オプションをチェックできます。",
+      "step5": "ペットバフが無効の場合は手動で追加できます。布告バフは手動でチェックする必要があります。"
+    },
+    "levelGuide": {
+      "title": "レベルガイド",
+      "tg1": "TG 1 = Lv. 35",
+      "tg2": "TG 2 = Lv. 40",
+      "tg3": "TG 3 = Lv. 45",
+      "tg4": "TG 4 = Lv. 50",
+      "tg5": "TG 5 = Lv. 55"
+    },
+    "form": {
+      "building": {
+        "label": "建物選択",
+        "option": {
+          "towncenter": "タウンセンター",
+          "embassy": "大使館",
+          "command": "司令部",
+          "barracks": "歩兵兵営",
+          "stable": "騎兵兵営",
+          "range": "弓兵射場",
+          "academy": "アカデミー",
+          "infirmary": "診療所"
+        }
+      },
+      "startLevel": { "label": "現在レベル", "placeholder": "現在レベルを入力" },
+      "targetLevel": { "label": "目標レベル", "placeholder": "目標レベルを入力" },
+      "speedBonus": { "label": "建設速度ボーナス (%)" },
+      "saulBonus": { "label": "サウルスキルボーナス (%) — 建設コストに適用" },
+      "wolfBonus": { "label": "ウルフスキルボーナス (%)" },
+      "positionBonus": { "label": "国王/官職ボーナス (%)" },
+      "doubleTime": { "label": "布告適用（時間20%短縮）" },
+      "includePrereq": { "label": "前提建物を含む" },
+      "actions": { "calculate": "アップグレード計算", "clear": "入力クリア" }
+    },
+    "prereq": {
+      "summary": "前提建物レベル（現在のレベル）",
+      "academy": "アカデミー",
+      "range": "弓兵射場",
+      "stable": "騎兵兵営",
+      "barracks": "歩兵兵営",
+      "embassy": "大使館",
+      "note": "* 空欄の場合は0として扱われます。"
+    },
+    "prereqBox": {
+      "title": "前提条件",
+      "empty": "前提条件なし"
+    },
+    "prereqSummary": {
+      "title": "前提建物の概要",
+      "current": "現在",
+      "required": "必要"
+    },
+    "result": {
+      "upgrade": "アップグレード:",
+      "time": "建設時間:",
+      "totalWithSaul": "総資源消費量（サウル適用）"
+    },
+    "table": {
+      "title": "詳細",
+      "titleWithPrereq": "詳細（前提条件を含む）",
+      "col": {
+        "building": "建物",
+        "level": "レベル",
+        "time": "建設時間",
+        "bread": "パン",
+        "wood": "木材",
+        "stone": "石材",
+        "iron": "鉄",
+        "truegold": "トゥルーゴールド"
+      }
+    },
+    "common": {
+      "lv": "Lv.",
+      "percentZero": "0",
+      "example25": "例: 25",
+      "example20": "例: 20",
+      "example15": "例: 15"
+    },
+    "time": {
+      "daySuffix": "日",
+      "hourSuffix": "時間",
+      "minSuffix": "分",
+      "secSuffix": "秒"
+    },
+    "alert": {
+      "invalidLevel": "レベル入力が正しくありません。",
+      "targetGtStart": "目標レベルは開始レベルより大きくなければなりません。",
+      "noData": "データがありません。"
+    },
+    "error": {
+      "load": "データ読み込み失敗"
+    }
+  },
+
+   
+  "calcCharm": {
+  "meta": { "title": "領主のチャーム計算機 | KingshotData KR" },
+  "title": "領主のチャーム計算機",
+  "desc": "現在のチャームレベル、目標レベル、兵種ごとの数を入力すると、必要なチャームマニュアル／チャーム設計図と総属性増加を計算できます。",
+  "howto": {
+    "title": "使い方",
+    "step1": "現在のチャームレベルと目標レベルを選択してください。",
+    "step2": "アップグレードするチャームの兵種ごとの数を入力してください。（騎兵・歩兵・弓兵 / 例: 3·3·3）",
+    "step3": "計算するボタンを押してください。"
+  },
+  "form": {
+    "currentLevel": { "label": "現在レベル", "placeholder": "現在レベルを選択" },
+    "targetLevel": { "label": "目標レベル", "placeholder": "目標レベルを選択" },
+    "counts": {
+      "label": "兵種ごとの数",
+      "placeholder": "例: 3·3·3",
+      "cavalry": "騎兵",
+      "infantry": "歩兵",
+      "archer": "弓兵"
+    },
+    "actions": {
+      "calculate": "計算する",
+      "clear": "リセット",
+      "fill9": "デフォルト 3·3·3",
+      "fill9Title": "全兵種を3個で埋める",
+      "clearTitle": "兵種の数をリセット"
+    }
+  },
+  "result": {
+    "title": "結果",
+    "manual": "必要なチャームマニュアル",
+    "blueprint": "必要なチャーム設計図",
+    "attribute": "総属性増加"
+  },
+  "detail": {
+    "level": "レベル（到達）",
+    "manual": "必要マニュアル",
+    "blueprint": "必要設計図",
+    "attr": "レベルごとの属性％"
+  },
+  "table": {                                
+    "level": "レベル",
+    "manual": "チャームマニュアル",
+    "blueprint": "チャーム設計図",
+    "attr": "属性(%)"
+  },
+  "hint": "※ コスト = 現在→目標へのアップグレード合計 × (総数)。 属性 = (目標％ − 現在％) × 総数。",
+  "notice": {
+    "title": "注意事項",
+    "p1": "本データはゲーム内の表示値に基づいてまとめたファンメイドの情報です。",
+    "li1": "パッチやバランス調整により数値が変更される場合があります。",
+    "li2": "誤字や不具合の報告は「お問い合わせ」までお願いします。"
+  },
+  "alert": {
+    "targetGtStart": "目標レベルは現在レベルより高くなければなりません。",
+    "noTroop": "騎兵／歩兵／弓兵のいずれかを1以上入力してください。",
+    "load": "データの読み込みに失敗しました。"
+  }
+},
+
+
+  
+  "calcGear": {
+  "meta": { "title": "領主装備計算機 | KingshotData KR" },
+  "title": "領主装備計算機",
+  "desc": "以下の簡易計算機で Kingshot の領主装備コストを試算できます。",
+
+  "howto": {
+    "title": "使い方",
+    "step1": "現在の装備レベルを選択します。",
+    "step2": "目標レベルを選択します。",
+    "step3": "強化したい装備スロットを選びます。",
+    "slotsHelp": "スロット: 帽子・ネックレス(騎兵)、アーマー・パンツ(歩兵)、リング・スタッフ(弓兵)",
+    "step4": "「計算する」をクリックします。"
+  },
+
+  "notice": {
+    "title": "注意事項",
+    "p1": "本ツールはゲーム内表記に基づくファンメイドデータです。",
+    "li1": "パッチ/バランス調整により数値が変更される場合があります。",
+    "li2": "誤記・不具合の報告は「お問い合わせ」からお願いします。",
+    "contact": "お問い合わせ"
+  },
+
+  "slots": {
+    "hat": "帽子",
+    "necklace": "ネックレス",
+    "armor": "アーマー",
+    "pants": "パンツ",
+    "ring": "リング",
+    "staff": "スタッフ"
+  },
+
+  "classes": {
+    "cavalry": "騎兵",
+    "infantry": "歩兵",
+    "archer": "弓兵"
+  },
+
+  "actions": {
+    "calculate": "計算する",
+    "clear": "クリア",
+    "showDetail": "詳細を表示",
+    "hideDetail": "詳細を非表示"
+  },
+
+  "kpi": {
+    "satin": "サテン",
+    "thread": "金糸",
+    "sketch": "設計スケッチ",
+    "score": "ギアスコア"
+  },
+
+  "cols": {
+    "slot": "スロット",
+    "class": "兵種",
+    "satin": "サテン",
+    "thread": "金糸",
+    "sketch": "設計スケッチ",
+    "score": "スコア",
+    "total": "合計",
+    "selected": "選択 {n}件",
+    "current": "現在レベル",
+    "target": "目標レベル",
+    "manual": "必要マニュアル",
+    "blueprint": "必要設計図",
+    "attribute": "属性上昇"
+  },
+
+  "alerts": {
+    "needSlot": "少なくとも1つ以上のスロットを選択してください。",
+    "invalidRange": "現在レベルは目標レベルより低くある必要があります。",
+    "loadFail": "データの読み込みに失敗しました。"
+  },
+
+  "misc": {
+    "from": "現在レベル",
+    "to": "目標レベル",
+    "hint": "複数スロットを一括で合算します。部位ごとにコストが異なる場合は stepsMap で部位別 steps を渡してください。"
+  },
+
+  "tiers": {
+    "basic": "ベーシック",
+    "rare": "レア",
+    "epic": "エピック",
+    "legendary": "レジェンダリー",
+    "mythic": "ミシック",
+    "mythicT1_1": "ミシック T1 (★1)",
+    "mythicT1_2": "ミシック T1 (★2)",
+    "mythicT1_3": "ミシック T1 (★3)",
+    "mythicT2_1": "ミシック T2 (★1)",
+    "mythicT2_2": "ミシック T2 (★2)",
+    "mythicT2_3": "ミシック T2 (★3)",
+    "mythicT3_1": "ミシック T3 (★1)",
+    "mythicT3_2": "ミシック T3 (★2)",
+    "mythicT3_3": "ミシック T3 (★3)",
+    "mythicT4_1": "ミシック T4 (★1)",
+    "mythicT4_2": "ミシック T4 (★2)",
+    "mythicT4_3": "ミシック T4 (★3)"
+  }
+}
+,
+
+  "trainCalc": {
+    "meta": { "title": "Kingshot 訓練・昇格計算機 | KingshotData KR" },
+    "title": "Kingshot 訓練・昇格計算機",
+    "badge": "加速日数 ↔ 兵力数",
+
+    "about": {
+      "title": "何を計算できますか？",
+      "p1": "新規に兵を訓練するか、既存の兵を昇格させるかの判断に役立つよう、兵力数、1人あたりの所要時間、戦力増加、イベントポイント（HoG／KvK（準備）／Governor）を計算します。",
+      "li1": "モードを選択：訓練／昇格。",
+      "li2": "訓練は Lv1–10、昇格は Lv1–9 → Lv10 に対応。",
+      "li3": "訓練速度（%）を入力してください。",
+      "li4": "入力方式を選び、値を入れて「計算」をクリックしてください。",
+      "note": "* 1人あたりの所要時間は訓練速度 0% を前提とし、入力値に応じて自動調整されます。"
+    },
+
+    "form": {
+      "mode": "モード",
+      "fromTier": "現在ティア（from）",
+      "toTier": "目標ティア（to）",
+      "trainSpeed": "訓練速度（%）",
+      "inputMode": "入力方式",
+      "modeTime": "加速日数 → 兵力数を算出",
+      "modeTroops": "兵力数 → 必要加速日数",
+      "baseNote": "基準：1人あたりの所要時間は訓練速度 0% 前提",
+      "speedDays": "加速日数（日）",
+      "count": "兵力数"
+    },
+
+    "mode": {
+      "training": "訓練",
+      "promotion": "昇格"
+    },
+
+    "actions": {
+      "calculate": "計算"
+    },
+
+    "summary": {
+      "selPrefix": "選択："
+    },
+
+    "warn": {
+      "noData": "一致するデータがありません。ティア／モードを確認してください。"
+    },
+
+    "table": {
+      "metric": "指標",
+      "perOne": "1人あたり",
+      "total": "合計"
+    },
+
+    "units": {
+      "day": "日",
+      "hour": "時間",
+      "min": "分",
+      "sec": "秒"
+    },
+
+    "level": "Lv {n}",
+
+    "rows": {
+      "possibleTroops": "可能兵力数（加速日数から）",
+      "hogPoints": "HoGポイント",
+      "kvkPoints": "KvK（準備）ポイント",
+      "govPoints": "Governorポイント",
+      "powerInc": "戦力増加",
+      "timePerOneApplied": "1人あたり所要時間（速度適用後）",
+      "inputTroops": "入力した兵力数",
+      "needAccelTime": "必要加速時間"
+    }
+  },
+  "calcHub": {
+    "meta": { "title": "計算機 | KingshotData KR", "desc": "Kingshot 計算機ハブ" },
+    "title": "計算機",
+    "cards": {
+      "building": { "title": "建物計算機" },
+      "gear":     { "title": "総督装備計算機" },
+      "charm":    { "title": "総督チャーム計算機" },
+      "training": { "title": "訓練・昇格計算機" }
+    }
+  }
+}
+
+

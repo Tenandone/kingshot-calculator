@@ -1,0 +1,354 @@
+{
+  "calc": {
+    "meta": { "title": "건물 계산기 | KingshotData KR" },
+    "title": "건물 계산기",
+    "desc": "업그레이드에 필요한 자원과 소요 시간을 확인하세요.",
+    "howto": {
+      "title": "사용 방법",
+      "step1": "업그레이드할 건물을 선택하세요.",
+      "step2": "현재 레벨과 목표 레벨을 입력하세요.",
+      "step3": {
+        "head": "건설 속도 보너스를 입력하세요.",
+        "help": "프로필 → 전투력(파워) 화면 하단에서 건설 속도 보너스를 확인하세요. (살로/늑대/연구/국왕·관직 등 모두 포함)"
+      },
+      "step4": "도시센터를 업그레이드하는 경우 \"선행 건물 포함\" 옵션을 체크할 수 있습니다.",
+      "step5": "펫 버프 비활성화시 펫 버프를 추가 할 수 있으며, 법령버프는 수동으로 체크하여야 합니다."
+    },
+    "levelGuide": {
+      "title": "레벨 가이드",
+      "tg1": "TG 1 = Lv. 35",
+      "tg2": "TG 2 = Lv. 40",
+      "tg3": "TG 3 = Lv. 45",
+      "tg4": "TG 4 = Lv. 50",
+      "tg5": "TG 5 = Lv. 55"
+    },
+    "form": {
+      "building": {
+        "label": "건물 선택",
+        "option": {
+          "towncenter": "도시센터",
+          "embassy": "대사관",
+          "command": "지휘부",
+          "barracks": "보병대",
+          "stable": "기병대",
+          "range": "궁병대",
+          "academy": "아카데미",
+          "infirmary": "야전병원"
+        }
+      },
+      "startLevel": { "label": "현재 레벨", "placeholder": "현재 레벨 입력" },
+      "targetLevel": { "label": "목표 레벨", "placeholder": "목표 레벨 입력" },
+      "speedBonus": { "label": "건설 속도 보너스 (%)" },
+      "saulBonus": { "label": "살로 스킬 보너스 (%) — 건설 비용 적용" },
+      "wolfBonus": { "label": "늑대 스킬 보너스 (%)" },
+      "positionBonus": { "label": "국왕/관직 보너스 (%)" },
+      "doubleTime": { "label": "건설 법령 적용(시간 20% 감소)" },
+      "includePrereq": { "label": "선행 건물 포함" },
+      "actions": { "calculate": "업그레이드 계산하기", "clear": "업그레이드 초기화" }
+    },
+    "prereq": {
+      "summary": "선행 건물 레벨 (내 현재 레벨)",
+      "academy": "아카데미",
+      "range": "궁병대",
+      "stable": "기병대",
+      "barracks": "보병대",
+      "embassy": "대사관",
+      "note": "* 비워두면 0으로 간주합니다."
+    },
+    "prereqBox": {
+      "title": "선행 조건",
+      "empty": "선행조건 없음"
+    },
+    "prereqSummary": {
+      "title": "선행 건물 요약",
+      "current": "현재",
+      "required": "요구"
+    },
+    "result": {
+      "upgrade": "업그레이드:",
+      "time": "건설 시간:",
+      "totalWithSaul": "총 자원 소모량(살로 적용)"
+    },
+    "table": {
+      "title": "상세 내역",
+      "titleWithPrereq": "상세 내역 (선행 포함)",
+      "col": {
+        "building": "건물",
+        "level": "레벨",
+        "time": "건설 시간"
+      }
+    },
+    "common": {
+      "lv": "Lv.",
+      "percentZero": "0",
+      "example25": "예: 25",
+      "example20": "예: 20",
+      "example15": "예: 15"
+    },
+    "time": {
+      "daySuffix": "일",
+      "hourSuffix": "시간",
+      "minSuffix": "분",
+      "secSuffix": "초"
+    },
+    "alert": {
+      "invalidLevel": "레벨 입력이 올바르지 않습니다.",
+      "targetGtStart": "목표 레벨은 시작 레벨보다 커야 합니다.",
+      "noData": "데이터가 없습니다"
+    },
+    "error": {
+      "load": "데이터 로드 실패"
+    }
+  },
+
+  "calcCharm": {
+  "meta": { "title": "영주 보석 계산기 | KingshotData KR" },
+  "title": "영주 보석 계산기",
+  "desc": "현재 보석 레벨, 목표 레벨, 병종별 개수를 입력하면 필요한 보석 매뉴얼/보석 도면과 총 속성 증가를 계산합니다.",
+  "howto": {
+    "title": "사용 방법",
+    "step1": "현재 보석 레벨과 목표 레벨을 선택하세요.",
+    "step2": "업그레이드할 보석의 병종별 개수를 입력하세요. (기병·보병·궁병 / 예: 3·3·3)",
+    "step3": "계산하기 버튼을 누르세요."
+  },
+  "form": {
+    "currentLevel": { "label": "현재 레벨", "placeholder": "현재 레벨 선택" },
+    "targetLevel": { "label": "목표 레벨", "placeholder": "목표 레벨 선택" },
+    "counts": {
+      "label": "병종별 개수",
+      "placeholder": "예: 3·3·3",
+      "cavalry": "기병",
+      "infantry": "보병",
+      "archer": "궁병"
+    },
+    "actions": {
+      "calculate": "계산하기",
+      "clear": "초기화",
+      "fill9": "기본 3·3·3",
+      "fill9Title": "세 병종 모두 3개로 채우기",
+      "clearTitle": "세 병종 개수 초기화"
+    }
+  },
+  "result": {
+    "title": "결과",
+    "manual": "필요 보석 매뉴얼",
+    "blueprint": "필요 보석 도면",
+    "attribute": "총 속성 증가"
+  },
+  "detail": {
+    "level": "레벨(도달)",
+    "manual": "필요 매뉴얼",
+    "blueprint": "필요 도면",
+    "attr": "해당 레벨 속성%"
+  },
+  
+  "table": {
+    "level": "레벨",
+    "manual": "보석매뉴얼",
+    "blueprint": "보석도면",
+    "attr": "속성(%)"
+  },
+  "hint": "※ 비용은 현재→목표 업그레이드 구간 합 × (총 개수). 속성은 (목표% − 현재%) × 총 개수.",
+  "notice": {
+    "title": "주의사항",
+    "p1": "본 자료는 인게임 표기값을 기반으로 정리한 팬메이드 데이터입니다.",
+    "li1": "패치/밸런스 조정에 따라 수치가 달라질 수 있습니다.",
+    "li2": "오타·오류 제보는 문의하기로 부탁드립니다."
+  },
+  "alert": {
+    "targetGtStart": "목표 레벨이 현재 레벨보다 높아야 합니다.",
+    "noTroop": "기병/보병/궁병 중 최소 1개 이상을 입력하세요.",
+    "load": "데이터를 불러오지 못했습니다."
+  }
+},
+
+  
+  
+  
+  
+  "calcGear": {
+  "meta": { "title": "영주 장비 계산기 | KingshotData KR" },
+  "title": "영주 장비 계산기",
+  "desc": "아래 간편한 킹샷 영주 장비 계산기를 사용해보세요.",
+
+  "howto": {
+    "title": "사용 방법",
+    "step1": "현재 보유한 영주 장비 단계를 선택하세요.",
+    "step2": "업그레이드하려는 목표 단계를 선택하세요.",
+    "step3": "상단 탭에서 업그레이드할 장비 슬롯을 고르세요.",
+    "slotsHelp": "슬롯: 모자·목걸이(기병), 상의·하의(보병), 반지·지팡이(궁병)",
+    "step4": "계산하기 버튼을 누르세요."
+  },
+
+  "notice": {
+    "title": "주의사항",
+    "p1": "본 자료는 인게임 표기값을 기반으로 정리한 팬메이드 데이터입니다.",
+    "li1": "패치/밸런스 조정에 따라 수치가 달라질 수 있습니다.",
+    "li2": "오타·오류 제보는 문의하기로 부탁드립니다.",
+    "contact": "문의하기"
+  },
+
+  "slots": {
+    "hat": "모자",
+    "necklace": "목걸이",
+    "armor": "상의",
+    "pants": "하의",
+    "ring": "반지",
+    "staff": "지팡이"
+  },
+
+  "classes": {
+    "cavalry": "기병",
+    "infantry": "보병",
+    "archer": "궁병"
+  },
+
+  "actions": {
+    "calculate": "계산하기",
+    "clear": "초기화",
+    "showDetail": "상세 보기",
+    "hideDetail": "상세 숨기기"
+  },
+
+  "kpi": {
+    "satin": "비단",
+    "thread": "금사",
+    "sketch": "설계 스케치",
+    "score": "장비평점"
+  },
+
+  "cols": {
+    "slot": "슬롯",
+    "class": "병종",
+    "satin": "비단",
+    "thread": "금사",
+    "sketch": "설계 스케치",
+    "score": "평점",
+    "total": "합계",
+    "selected": "선택 {n}개",
+    "current": "현재 단계",
+    "target": "목표 단계",
+    "manual": "필요 매뉴얼",
+    "blueprint": "필요 도면",
+    "attribute": "속성 증가"
+  },
+
+  "alerts": {
+    "needSlot": "최소 1개 이상의 슬롯을 선택하세요.",
+    "invalidRange": "현재 단계는 목표 단계보다 낮아야 합니다.",
+    "loadFail": "데이터를 불러오지 못했습니다."
+  },
+
+  "misc": {
+    "from": "현재 단계",
+    "to": "목표 단계",
+    "hint": "선택한 여러 슬롯을 한 번에 합산합니다. 부위별 비용이 다르면 stepsMap으로 각 부위 steps를 주입하세요."
+  },
+
+  "tiers": {
+    "basic": "고급",
+    "rare": "희귀",
+    "epic": "영웅",
+    "legendary": "전설",
+    "mythic": "신화",
+    "mythicT1_1": "신화 T1 (1성)",
+    "mythicT1_2": "신화 T1 (2성)",
+    "mythicT1_3": "신화 T1 (3성)",
+    "mythicT2_1": "신화 T2 (1성)",
+    "mythicT2_2": "신화 T2 (2성)",
+    "mythicT2_3": "신화 T2 (3성)",
+    "mythicT3_1": "신화 T3 (1성)",
+    "mythicT3_2": "신화 T3 (2성)",
+    "mythicT3_3": "신화 T3 (3성)",
+    "mythicT4_1": "신화 T4 (1성)",
+    "mythicT4_2": "신화 T4 (2성)",
+    "mythicT4_3": "신화 T4 (3성)"
+  }
+},
+
+
+
+
+
+  "trainCalc": {
+    "meta": { "title": "킹샷 훈련·승급 계산기 | KingshotData KR" },
+    "title": "킹샷 훈련·승급 계산기",
+    "badge": "가속일수 ↔ 병력수",
+
+    "about": {
+      "title": "무엇을 계산하나요?",
+      "p1": "병력을 새로 훈련할지 기존 병력을 승급할지 가늠할 수 있도록 병력 수, 1명당 소요 시간, 전투력 증가, 이벤트 점수(최강영주/최강왕국(준비전)/지고의영주)를 계산합니다.",
+      "li1": "모드를 선택하세요: 훈련 / 승급.",
+      "li2": "훈련은 Lv1~10, 승급은 Lv1~9 → Lv10 지원.",
+      "li3": "훈련 속도(%)를 입력하세요.",
+      "li4": "입력 방식을 고르고 값을 넣은 뒤 계산하기를 누르세요.",
+      "note": "* 1명당 소요 시간은 훈련속도 0% 기준이며, 입력한 훈련 속도(%)만큼 자동 반영됩니다."
+    },
+
+    "form": {
+      "mode": "모드",
+      "fromTier": "현재 티어 (from)",
+      "toTier": "목표 티어 (to)",
+      "trainSpeed": "훈련 속도 (%)",
+      "inputMode": "입력 방식",
+      "modeTime": "가속 일수 → 병력 수 계산",
+      "modeTroops": "병력 수 → 필요 가속 일수",
+      "baseNote": "기준: 1명당 소요시간은 훈련속도 0% 기준",
+      "speedDays": "가속 일수 (일)",
+      "count": "병력 수 (명)"
+    },
+
+    "mode": {
+      "training": "훈련 (Training)",
+      "promotion": "승급 (Promotion)"
+    },
+
+    "actions": {
+      "calculate": "계산하기"
+    },
+
+    "summary": {
+      "selPrefix": "선택:"
+    },
+
+    "warn": {
+      "noData": "매칭되는 데이터가 없습니다. 티어/모드를 확인하세요."
+    },
+
+    "table": {
+      "metric": "지표",
+      "perOne": "1명 기준",
+      "total": "총합"
+    },
+
+    "units": {
+      "day": "일",
+      "hour": "시간",
+      "min": "분",
+      "sec": "초"
+    },
+
+    "level": "Lv {n}",
+
+    "rows": {
+      "possibleTroops": "가능 병력 수 (가속일수 기준)",
+      "hogPoints": "최강영주 점수",
+      "kvkPoints": "최강왕국(준비전) 점수",
+      "govPoints": "지고의영주 점수",
+      "powerInc": "전투력 증가",
+      "timePerOneApplied": "1명당 소요 시간 (속도 적용)",
+      "inputTroops": "입력 병력 수",
+      "needAccelTime": "필요 가속 시간"
+    }
+  },
+"calcHub": {
+    "meta": { "title": "계산기 | KingshotData KR", "desc": "킹샷 계산기 허브" },
+    "title": "계산기",
+    "cards": {
+      "building": { "title": "건물계산기" },
+      "gear":     { "title": "영주장비계산기" },
+      "charm":    { "title": "영주보석계산기" },
+      "training": { "title": "병력훈련계산기" }
+    }
+  }
+}

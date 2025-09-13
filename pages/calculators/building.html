@@ -1,0 +1,174 @@
+<!-- pages/calculator.html (i18n-ready FINAL) -->
+<!doctype html>
+<html lang="ko">
+<head>
+  <base href="/" />
+<script src="/js/standalone-bridge.js?v=202509120604" defer></script>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- i18n title/meta sync -->
+  <meta name="db-title" content="calc.title">
+  <meta name="description" content="calc.desc">
+
+  <title data-i18n="calc.meta.title">Kingshot 건물 계산기</title>
+  <!-- 스타일은 /css/calculator.css?v=202509120604 로 분리 (app.js에서 ensureCSS로 로드) -->
+</head>
+<body>
+  <!-- (선택) h1 동기화가 필요하면 주석 해제
+  <h1 id="page-title" data-i18n="calc.title" class="visually-hidden">건물 계산기</h1>
+  -->
+
+  <main id="calc-ui" class="calc-wrap" aria-labelledby="calc-title">
+    <section class="calc-card">
+      <h2 id="calc-title" class="calc-title" data-i18n="calc.title">건물 계산기</h2>
+      <p class="calc-desc" data-i18n="calc.desc">업그레이드에 필요한 자원과 소요 시간을 확인하세요.</p>
+
+      <h3 class="calc-desc" data-i18n="calc.howto.title">사용 방법</h3>
+      <ol class="calc-desc" style="margin-left:18px">
+        <li data-i18n="calc.howto.step1">업그레이드할 건물을 선택하세요.</li>
+        <li data-i18n="calc.howto.step2">현재 레벨과 목표 레벨을 입력하세요.</li>
+        <li>
+          <span data-i18n="calc.howto.step3.head">건설 속도 보너스를 입력하세요.</span><br>
+          <span class="help" data-i18n="calc.howto.step3.help">
+            프로필 → 전투력(파워) 화면 하단에서 건설 속도 보너스를 확인하세요. (살로/늑대/연구/국왕·관직 등 모두 포함)
+          </span>
+        </li>
+        <li data-i18n="calc.howto.step4">도시센터를 업그레이드하는 경우 "선행 건물 포함" 옵션을 체크할 수 있습니다.</li>
+        <li data-i18n="calc.howto.step5">펫 버프 비활성화시 펫 버프를 추가 할 수 있으며, 법령버프는 수동으로 체크하여야 합니다.</li>
+      </ol>
+
+      <h3 class="calc-desc" data-i18n="calc.levelGuide.title">레벨 가이드</h3>
+      <ul class="calc-desc" style="margin-left:18px">
+        <li data-i18n="calc.levelGuide.tg1">TG 1 = Lv. 35</li>
+        <li data-i18n="calc.levelGuide.tg2">TG 2 = Lv. 40</li>
+        <li data-i18n="calc.levelGuide.tg3">TG 3 = Lv. 45</li>
+        <li data-i18n="calc.levelGuide.tg4">TG 4 = Lv. 50</li>
+        <li data-i18n="calc.levelGuide.tg5">TG 5 = Lv. 55</li>
+      </ul>
+    </section>
+
+    <!-- Form -->
+    <section class="calc-card" style="margin-top:14px">
+      <form id="calc-form" class="calc-form" onsubmit="return false;">
+        <div class="form-group">
+          <label for="building" data-i18n="calc.form.building.label">건물 선택</label>
+          <select id="building" name="building"
+                  data-i18n-attr="aria-label:calc.form.building.label">
+            <option value="towncenter" data-i18n="calc.form.building.option.towncenter">도시센터</option>
+            <option value="embassy"    data-i18n="calc.form.building.option.embassy">대사관</option>
+            <option value="command"    data-i18n="calc.form.building.option.command">지휘부</option>
+            <option value="barracks"   data-i18n="calc.form.building.option.barracks">보병대</option>
+            <option value="stable"     data-i18n="calc.form.building.option.stable">기병대</option>
+            <option value="range"      data-i18n="calc.form.building.option.range">궁병대</option>
+            <option value="academy"    data-i18n="calc.form.building.option.academy">아카데미</option>
+            <option value="infirmary"  data-i18n="calc.form.building.option.infirmary">야전병원</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="startLevel" data-i18n="calc.form.startLevel.label">현재 레벨</label>
+          <input type="number" id="startLevel" name="startLevel" min="1" max="55" value="1"
+                 placeholder="현재 레벨 입력"
+                 data-i18n-attr="placeholder:calc.form.startLevel.placeholder">
+        </div>
+
+        <div class="form-group">
+          <label for="targetLevel" data-i18n="calc.form.targetLevel.label">목표 레벨</label>
+          <input type="number" id="targetLevel" name="targetLevel" min="1" max="55" value="1"
+                 placeholder="목표 레벨 입력"
+                 data-i18n-attr="placeholder:calc.form.targetLevel.placeholder">
+        </div>
+
+        <div class="form-group">
+          <label for="speedBonus" data-i18n="calc.form.speedBonus.label">건설 속도 보너스 (%)</label>
+          <input type="number" id="speedBonus" name="speedBonus" min="0" max="100" value="0"
+                 placeholder="0" data-i18n-attr="placeholder:calc.common.percentZero">
+        </div>
+
+        <div class="form-group">
+          <label for="saulBonus" data-i18n="calc.form.saulBonus.label">살로 스킬 보너스 (%) — 건설 비용 적용</label>
+          <input type="number" id="saulBonus" name="saulBonus" min="0" max="100" value="0"
+                 placeholder="0" data-i18n-attr="placeholder:calc.common.percentZero">
+        </div>
+
+        <div class="form-group">
+          <label for="wolfBonus" data-i18n="calc.form.wolfBonus.label">늑대 스킬 보너스 (%)</label>
+          <input type="number" id="wolfBonus" name="wolfBonus" min="0" max="100" value="0"
+                 placeholder="0" data-i18n-attr="placeholder:calc.common.percentZero">
+        </div>
+
+        <div class="form-group">
+          <label for="positionBonus" data-i18n="calc.form.positionBonus.label">국왕/관직 보너스 (%)</label>
+          <input type="number" id="positionBonus" name="positionBonus" min="0" max="100" value="0"
+                 placeholder="0" data-i18n-attr="placeholder:calc.common.percentZero">
+        </div>
+
+        <div class="form-check">
+          <input type="checkbox" id="doubleTime" name="doubleTime" aria-describedby="doubleTimeHelp">
+          <label for="doubleTime" data-i18n="calc.form.doubleTime.label">건설 법령 적용(시간 20% 감소)</label>
+        </div>
+
+        <div class="form-check">
+          <input type="checkbox" id="includePrereq" name="includePrereq" aria-controls="prereq-details">
+          <label for="includePrereq" data-i18n="calc.form.includePrereq.label">선행 건물 포함</label>
+        </div>
+
+        <!-- 선행 건물 레벨 입력 (토글) -->
+        <details id="prereq-details" class="collapsible" hidden>
+          <summary data-i18n="calc.prereq.summary">선행 건물 레벨 (내 현재 레벨)</summary>
+          <div class="collapsible-body">
+            <div class="calc-grid">
+              <div class="form-group">
+                <label for="prereqAcademy" data-i18n="calc.prereq.academy">아카데미</label>
+                <input type="number" id="prereqAcademy" min="1" max="55" placeholder="예: 25"
+                       data-i18n-attr="placeholder:calc.common.example25" inputmode="numeric">
+              </div>
+              <div class="form-group">
+                <label for="prereqRange" data-i18n="calc.prereq.range">궁병대</label>
+                <input type="number" id="prereqRange" min="1" max="55" placeholder="예: 20"
+                       data-i18n-attr="placeholder:calc.common.example20" inputmode="numeric">
+              </div>
+              <div class="form-group">
+                <label for="prereqStable" data-i18n="calc.prereq.stable">기병대</label>
+                <input type="number" id="prereqStable" min="1" max="55" placeholder="예: 20"
+                       data-i18n-attr="placeholder:calc.common.example20" inputmode="numeric">
+              </div>
+              <div class="form-group">
+                <label for="prereqBarracks" data-i18n="calc.prereq.barracks">보병대</label>
+                <input type="number" id="prereqBarracks" min="1" max="55" placeholder="예: 20"
+                       data-i18n-attr="placeholder:calc.common.example20" inputmode="numeric">
+              </div>
+              <div class="form-group">
+                <label for="prereqEmbassy" data-i18n="calc.prereq.embassy">대사관</label>
+                <input type="number" id="prereqEmbassy" min="1" max="55" placeholder="예: 15"
+                       data-i18n-attr="placeholder:calc.common.example15" inputmode="numeric">
+              </div>
+            </div>
+            <p class="help" style="margin-top:10px" data-i18n="calc.prereq.note">* 비워두면 0으로 간주합니다.</p>
+          </div>
+        </details>
+
+        <div class="btn-row">
+          <button type="button" id="calcBtn" class="btn btn-primary" data-i18n="calc.form.actions.calculate">업그레이드 계산하기</button>
+          <button type="button" id="clearPlanBtn" class="btn" data-i18n="calc.form.actions.clear">업그레이드 초기화</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- 선행 조건 표시 (calculator.js의 renderPrereqBox 사용) -->
+    <section class="calc-card" style="margin-top:14px" id="prereq-box">
+      <h2 class="calc-title" style="font-size:18px" data-i18n="calc.prereqBox.title">선행 조건</h2>
+      <ul id="prereq-list"></ul>
+    </section>
+
+    <!-- Result -->
+    <section class="calc-card" style="margin-top:14px">
+      <div id="result" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <!-- ⚠️ 스크립트는 app.js가 라우트에서 동적 로드함. 여기선 포함하지 않음. -->
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <base href="/" />
+<script src="/js/standalone-bridge.js?v=202509120604" defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="db-title" content="guides.title">
+  <meta name="description" content="guides.metaDesc">
+  <title>KingshotData.kr — Guides</title>
+
+  <link rel="stylesheet" href="/css/guides.css?v=202509120604">
+
+  <!-- i18n -->
+  <script src="/js/i18n.js?v=202509120604" defer></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const raw = (localStorage.getItem('lang') || navigator.language || 'ko').replace('_','-');
+    const lang = raw.startsWith('zh') ? (raw.toLowerCase().includes('tw') ? 'zh-TW' : 'zh-CN')
+                                      : (raw.split('-')[0] || 'ko');
+    await I18N.init({ lang, namespaces: ['db','guides','f2p-2nd-gen','bearTier','ruins'] });
+    I18N.applyTo(document);
+  });
+  </script>
+
+  <!-- 공통 스크립트 -->
+  <script src="/js/guides.js?v=202509120604" defer></script>
+
+  <style>
+    .anchor-link{cursor:pointer}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap:6px;
+      margin-top:8px;padding:10px 14px;
+      border:1px solid #e5e7eb;border-radius:10px;background:#fff;
+      cursor:pointer;font:600 15px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;
+      text-decoration:none;color:#0b57d0;min-width:56px;user-select:none
+    }
+    .btn:hover{background:#f7f7f8}
+
+    /* 접힘/펼침 UI */
+    .g-title-wrap{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .g-toggle{
+      border:1px solid #e5e7eb;background:#fff;border-radius:10px;
+      padding:6px 10px;font:600 15px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;
+      cursor:pointer;min-width:56px;user-select:none;color:#0b57d0
+    }
+    .g-toggle[aria-expanded="true"]{background:#f8fafc}
+    .g-body{display:none;margin-top:10px}
+    .g-body.is-open{display:block}
+    .muted{color:#6b7280}
+
+    /* 포함문서 CSS 격리(공용) */
+    .g-body > .include-scope{
+      all: revert; display:block;
+      font:15px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif; color:#111;
+    }
+    .g-body > .include-scope *{box-sizing:border-box}
+    .g-body > .include-scope a{color:#0b57d0;text-decoration:none}
+    .g-body > .include-scope a:hover{text-decoration:underline}
+    .g-body > .include-scope .wrap{max-width:980px;margin:0 auto;padding:32px 16px}
+    .g-body > .include-scope img{max-width:100%;height:auto;display:block}
+  </style>
+</head>
+<body>
+
+  <!-- 상단: 제목 + 검색 + 목차 -->
+  <section class="guides-head">
+    <h1 id="page-title" data-i18n="guides.title">가이드</h1>
+    <div class="guides-tools">
+      <input id="guide-search" type="search"
+             placeholder=""
+             data-i18n-attr="placeholder:guides.search.placeholder; aria-label:guides.search.aria">
+      <span id="guide-count" class="muted"></span>
+    </div>
+    <nav id="guide-toc" aria-label="가이드 목차"></nav>
+  </section>
+
+  <hr class="sep">
+
+  <!-- 카드 영역 -->
+  <div id="guide-cards"></div>
+
+  <!-- ===== 섹션들 ===== -->
+
+  <!-- 곰사냥 집결원 티어표 — 새 탭 -->
+<section class="g-block" id="bear-tier" data-guide="bear-tier" data-toc="false">
+  <div class="g-title-wrap">
+    <h2 class="g-title">
+      <span class="lang lang-ko">곰사냥 집결원 티어표</span>
+      <span class="lang lang-en">Bear Hunt Rally Tier List</span>
+      <span class="lang lang-ja">ベアハントラリー ティアリスト</span>
+      <span class="lang lang-zh-CN">狩熊集结队员梯队表</span>
+      <span class="lang lang-zh-TW">狩熊集結隊員梯隊表</span>
+    </h2>
+    <a class="btn" href="/pages/guides/kingshot-bear-hunt-tierlist.html" target="_blank" rel="noopener" aria-label="Open in new tab">▼▼▼</a>
+  </div>
+</section>
+
+<!-- 기프트코드 · 쿠폰 — 새 탭 -->
+<section class="g-block" id="giftcode" data-guide="giftcode" data-toc="true">
+  <div class="g-title-wrap">
+    <h2 class="g-title">
+      <span class="lang lang-ko">기프트코드 · 쿠폰</span>
+      <span class="lang lang-en">Gift Codes & Coupons</span>
+      <span class="lang lang-ja">ギフトコード・クーポン</span>
+      <span class="lang lang-zh-CN">礼品码与优惠码</span>
+      <span class="lang lang-zh-TW">禮品碼與優惠碼</span>
+    </h2>
+    <a class="btn"
+       href="/pages/guides/kingshot-giftcode.html"
+       target="_blank" rel="noopener"
+       aria-label="Open in new tab">▼▼▼</a>
+  </div>
+</section>
+
+<!-- F2P 진행 루트 (G4 로사) — SPA 토글 + 지연 로드 -->
+<section class="g-block" id="f2p-route-g4" data-guide="f2p-route-g4" data-toc="true">
+  <div class="g-title-wrap">
+    <h2 class="g-title">
+      <span class="lang lang-ko">F2P 진행 루트 (G2→G3→G4 로사)</span>
+      <span class="lang lang-en">F2P Route (G2→G3→G4 Rosa)</span>
+      <span class="lang lang-ja">F2P進行ルート（G2→G3→G4 ロサ）</span>
+      <span class="lang lang-zh-CN">F2P路线（G2→G3→G4 罗莎）</span>
+      <span class="lang lang-zh-TW">F2P路線（G2→G3→G4 羅莎）</span>
+    </h2>
+    <!-- 외부 링크 대신 토글 버튼 -->
+    <button class="g-toggle"
+            aria-expanded="false"
+            aria-controls="body-f2p-route-g4"
+            aria-label="Toggle section">▼▼▼</button>
+  </div>
+
+  <!-- 본문은 지연 로드 -->
+  <div class="g-body"
+       id="body-f2p-route-g4"
+       data-src="/pages/guides/kingshot-f2p-route-g4.html"
+       data-scope="include-scope"></div>
+</section>
+
+
+
+  <!-- 2) 사라진 유적 — 토글 + 지연 로드 -->
+  <section class="g-block" id="ruins" data-guide="ruins">
+    <div class="g-title-wrap">
+      <h2 class="g-title" data-i18n="ruins.h1">킹샷 사라진유적</h2>
+      <!-- 텍스트 라벨 제거, 기호만 사용 -->
+      <button class="g-toggle" aria-expanded="false" aria-controls="body-ruins" aria-label="Toggle section">▼▼▼</button>
+    </div>
+    <div class="g-body" id="body-ruins"
+         data-src="/pages/guides/kingshot-ruins-tip.html"
+         data-scope="include-scope"></div>
+  </section>
+
+  <!-- 3) 곰사냥 집결장 조합 — 토글 + 지연 로드 -->
+  <section class="g-block" id="bear" data-guide="bear">
+    <div class="g-title-wrap">
+      <h2 class="g-title" data-i18n="guide.bear.title">곰사냥 집결장 조합 추천</h2>
+      <button class="g-toggle" aria-expanded="false" aria-controls="body-bear" aria-label="Toggle section">▼▼▼</button>
+    </div>
+    <div class="g-body" id="body-bear"
+         data-src="/pages/guides/bear-hunt-guide.html"
+         data-scope="include-scope"></div>
+  </section>
+
+  <script>
+  // 내부 앵커 스크롤
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a.anchor-link[href^="#"]');
+    if (!a) return;
+    const sel = a.getAttribute('href');
+    const target = document.querySelector(sel);
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // ---- 토글 + 지연 로드 ----
+  // 라벨은 i18n 미사용: 기호 고정
+  const SHOW_ICON = '▼▼▼';
+  const HIDE_ICON = '▲▲▲';
+
+  function currentLangParam(){
+    const urlLang = new URLSearchParams(location.search).get('lang');
+    const i18nLang = window.I18N?.getLang?.() || window.I18N?.lang;
+    const lsLang = localStorage.getItem('lang');
+    const lang = urlLang || i18nLang || lsLang || 'ko';
+    return lang ? ('lang=' + encodeURIComponent(lang)) : '';
+  }
+
+  async function lazyInclude(host){
+    if (!host || host.dataset.loaded === '1') return;
+    let url = host.dataset.src || host.getAttribute('data-src');
+    if (!url) return;
+
+    const qp = currentLangParam();
+    if (qp) url += (url.includes('?') ? '&' : '?') + qp;
+
+    try{
+      const html = await (await fetch(url, { credentials:'same-origin' })).text();
+      const doc  = new DOMParser().parseFromString(html, 'text/html');
+      const frag = doc.querySelector('main') || doc.body || doc;
+
+      const scope = host.dataset.scope || 'include-scope';
+      host.innerHTML = `<div class="${scope}">${frag.innerHTML}</div>`;
+
+      // 스타일 1회 주입
+      doc.querySelectorAll('style').forEach(st=>{
+        const sig = (st.textContent||'').trim().slice(0,120);
+        const dup = [...document.head.querySelectorAll('style')].some(s=>s.textContent.includes(sig));
+        if (!dup){
+          const copy=document.createElement('style');
+          copy.textContent=st.textContent;
+          document.head.appendChild(copy);
+        }
+      });
+
+      // 스크립트 재실행
+      frag.querySelectorAll('script').forEach(s=>{
+        const ns=document.createElement('script');
+        if (s.src){ ns.src=s.src; ns.defer=s.defer; ns.async=s.async; }
+        else{ ns.textContent=s.textContent; }
+        [...s.attributes].forEach(a=>{ if(!ns.hasAttribute(a.name)) ns.setAttribute(a.name,a.value); });
+        host.appendChild(ns);
+      });
+
+      if (window.I18N?.applyTo) I18N.applyTo(host);
+
+      host.dataset.loaded = '1';
+    }catch(err){
+      console.error('[include fail]', url, err);
+      host.innerHTML = '<p class="muted">가이드를 불러오지 못했습니다.</p>';
+    }
+  }
+
+  function initToggles(){
+    document.querySelectorAll('.g-block').forEach(block=>{
+      const btn  = block.querySelector('.g-toggle');
+      const body = block.querySelector('.g-body');
+      if (!btn || !body) return;
+
+      // data-i18n 제거(기호라 불필요)
+      btn.removeAttribute('data-i18n');
+
+      btn.setAttribute('aria-expanded','false');
+      btn.textContent = SHOW_ICON;
+      body.classList.remove('is-open');
+
+      btn.addEventListener('click', async ()=>{
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        if (open){
+          btn.setAttribute('aria-expanded','false');
+          btn.textContent = SHOW_ICON;
+          body.classList.remove('is-open');
+        }else{
+          btn.setAttribute('aria-expanded','true');
+          btn.textContent = HIDE_ICON;
+          body.classList.add('is-open');
+          await lazyInclude(body);   // 첫 펼침에만 로드
+        }
+      });
+    });
+  }
+
+  // 언어 변경 이벤트가 와도 버튼 라벨은 고정 기호 유지
+  window.addEventListener('i18n:change', ()=>{
+    document.querySelectorAll('.g-block .g-toggle').forEach(btn=>{
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.textContent = open ? HIDE_ICON : SHOW_ICON;
+    });
+  });
+
+  function openByHash(){
+    const id = (location.hash||'').slice(1);
+    if (!id) return;
+    const block = document.getElementById(id);
+    const btn   = block?.querySelector('.g-toggle');
+    if (btn && btn.getAttribute('aria-expanded') !== 'true'){
+      btn.click();
+      block.scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', ()=>{ initToggles(); openByHash(); }, { once:true });
+  } else {
+    initToggles(); openByHash();
+  }
+  </script>
+</body>
+</html>
