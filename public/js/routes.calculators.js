@@ -76,21 +76,42 @@
     };
 
     // ---------------------------
-    // 장비 계산기
+    // 장비 계산기 (각 언어 calcGear.json 강제 로드)
     routes['/calc-gear'] = {
       title: '영주장비계산기 - KingshotData.kr',
       render: async (el) => {
+        // 1) HTML 주입
         const html = await loadHTML([ j('pages/calculators/gear.html') ]);
         el.innerHTML = html
           ? (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || html)
           : '<div class="placeholder"><h2>영주장비계산기</h2><p class="muted">gear.html을 찾을 수 없습니다.</p></div>';
 
+        // 2) i18n 준비 + calcGear 네임스페이스 로드(각 언어 파일 강제)
         try {
           await ensureI18NReady();
-          await window.I18N?.loadNamespace?.('calcGear');
-        } catch (_) {}
-        apply(document);
 
+          if (window.I18N?.loadNamespaces) {
+            await I18N.loadNamespaces(['calcGear']);
+          } else if (window.I18N?.loadNamespace) {
+            await I18N.loadNamespace('calcGear');
+          }
+
+          // <html lang> 동기화 (간/번체 축약 보정)
+          let curr = I18N.current || document.documentElement.getAttribute('lang') || 'ko';
+          if (curr === 'cn') curr = 'zh-CN';
+          if (curr === 'tw') curr = 'zh-TW';
+          document.documentElement.setAttribute('lang', curr);
+
+          // (디버그) 키 확인
+          console.log('[i18n] calcGear.title =', I18N?.t?.('calcGear.title'));
+        } catch (e) {
+          console.debug('[calc-gear] i18n 네임스페이스 로드 경고:', e);
+        }
+
+        // 3) 현재 화면 영역만 우선 적용
+        apply(el);
+
+        // 4) 계산기 스크립트 로드 + 초기화
         await loadOnce('js/gear-calculator.js', loadScriptOnce);
         if (typeof window.initGearCalculator === 'function') {
           window.initGearCalculator({
@@ -102,9 +123,16 @@
           el.insertAdjacentHTML('beforeend', '<div class="error">initGearCalculator()가 없습니다.</div>');
         }
 
+        // 5) 타이틀/스크롤/i18n 재적용
         setTitle('title.calcGear', '영주장비계산기 - KingshotData.kr');
         window.scrollTo({ top: 0 });
         apply(el);
+
+        // 6) 언어 변경 시 이 화면만 재적용(1회 바인딩)
+        if (!window.__calcGearReapplyBound) {
+          document.addEventListener('i18n:changed', () => apply(el));
+          window.__calcGearReapplyBound = true;
+        }
       }
     };
 
