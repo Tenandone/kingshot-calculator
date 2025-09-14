@@ -64,26 +64,85 @@
       }
     }
 
-    // 기어 계산기 티어 라벨 i18n 키 매핑 (계산기 라우트에 전달)
-    const TIER_KEY_MAP_KO = {
-      '고급': 'calcGear.tiers.basic',
-      '희귀': 'calcGear.tiers.rare',
-      '영웅': 'calcGear.tiers.epic',
-      '전설': 'calcGear.tiers.legendary',
-      '신화': 'calcGear.tiers.mythic',
-      '신화 T1 (1성)': 'calcGear.tiers.mythicT1_1',
-      '신화 T1 (2성)': 'calcGear.tiers.mythicT1_2',
-      '신화 T1 (3성)': 'calcGear.tiers.mythicT1_3',
-      '신화 T2 (1성)': 'calcGear.tiers.mythicT2_1',
-      '신화 T2 (2성)': 'calcGear.tiers.mythicT2_2',
-      '신화 T2 (3성)': 'calcGear.tiers.mythicT2_3',
-      '신화 T3 (1성)': 'calcGear.tiers.mythicT3_1',
-      '신화 T3 (2성)': 'calcGear.tiers.mythicT3_2',
-      '신화 T3 (3성)': 'calcGear.tiers.mythicT3_3',
-      '신화 T4 (1성)': 'calcGear.tiers.mythicT4_1',
-      '신화 T4 (2성)': 'calcGear.tiers.mythicT4_2',
-      '신화 T4 (3성)': 'calcGear.tiers.mythicT4_3'
-    };
+    // 기어 계산기 티어 라벨 i18n 키 매핑 (KO 라벨 → i18n key)
+const TIER_KEY_MAP_KO = {
+  // 고급
+  '고급': 'calcGear.tiers.basic',
+  '고급 (1성)': 'calcGear.tiers.basic_1',
+
+  // 레어
+  '레어': 'calcGear.tiers.rare',
+  '레어 (1성)': 'calcGear.tiers.rare_1',
+  '레어 (2성)': 'calcGear.tiers.rare_2',
+  '레어 (3성)': 'calcGear.tiers.rare_3',
+
+  // 에픽
+  '에픽': 'calcGear.tiers.epic',
+  '에픽 (1성)': 'calcGear.tiers.epic_1',
+  '에픽 (2성)': 'calcGear.tiers.epic_2',
+  '에픽 (3성)': 'calcGear.tiers.epic_3',
+
+  // 에픽 T1
+  '에픽 T1': 'calcGear.tiers.epicT1',
+  '에픽 T1 (1성)': 'calcGear.tiers.epicT1_1',
+  '에픽 T1 (2성)': 'calcGear.tiers.epicT1_2',
+  '에픽 T1 (3성)': 'calcGear.tiers.epicT1_3',
+
+  // 레전드
+  '레전드': 'calcGear.tiers.legendary',
+  '레전드 (1성)': 'calcGear.tiers.legendary_1',
+  '레전드 (2성)': 'calcGear.tiers.legendary_2',
+  '레전드 (3성)': 'calcGear.tiers.legendary_3',
+
+  // 레전드 T1
+  '레전드 T1': 'calcGear.tiers.legendT1',
+  '레전드 T1 (1성)': 'calcGear.tiers.legendT1_1',
+  '레전드 T1 (2성)': 'calcGear.tiers.legendT1_2',
+  '레전드 T1 (3성)': 'calcGear.tiers.legendT1_3',
+
+  // 레전드 T2
+  '레전드 T2': 'calcGear.tiers.legendT2',
+  '레전드 T2 (1성)': 'calcGear.tiers.legendT2_1',
+  '레전드 T2 (2성)': 'calcGear.tiers.legendT2_2',
+  '레전드 T2 (3성)': 'calcGear.tiers.legendT2_3',
+
+  // 레전드 T3
+  '레전드 T3': 'calcGear.tiers.legendT3',
+  '레전드 T3 (1성)': 'calcGear.tiers.legendT3_1',
+  '레전드 T3 (2성)': 'calcGear.tiers.legendT3_2',
+  '레전드 T3 (3성)': 'calcGear.tiers.legendT3_3',
+
+  // 신화
+  '신화': 'calcGear.tiers.mythic',
+  '신화 (1성)': 'calcGear.tiers.mythic_1',
+  '신화 (2성)': 'calcGear.tiers.mythic_2',
+  '신화 (3성)': 'calcGear.tiers.mythic_3',
+
+  // 신화 T1
+  '신화 T1': 'calcGear.tiers.mythicT1',
+  '신화 T1 (1성)': 'calcGear.tiers.mythicT1_1',
+  '신화 T1 (2성)': 'calcGear.tiers.mythicT1_2',
+  '신화 T1 (3성)': 'calcGear.tiers.mythicT1_3',
+
+  // 신화 T2
+  '신화 T2': 'calcGear.tiers.mythicT2',
+  '신화 T2 (1성)': 'calcGear.tiers.mythicT2_1',
+  '신화 T2 (2성)': 'calcGear.tiers.mythicT2_2',
+  '신화 T2 (3성)': 'calcGear.tiers.mythicT2_3',
+
+  // 신화 T3
+  '신화 T3': 'calcGear.tiers.mythicT3',
+  '신화 T3 (1성)': 'calcGear.tiers.mythicT3_1',
+  '신화 T3 (2성)': 'calcGear.tiers.mythicT3_2',
+  '신화 T3 (3성)': 'calcGear.tiers.mythicT3_3',
+
+  // 신화 T4
+  '신화 T4': 'calcGear.tiers.mythicT4',
+  '신화 T4 (1성)': 'calcGear.tiers.mythicT4_1',
+  '신화 T4 (2성)': 'calcGear.tiers.mythicT4_2',
+  '신화 T4 (3성)': 'calcGear.tiers.mythicT4_3'
+};
+
 
     // 홈 카드: 언어 변경 시 즉시 갱신 (1회 바인딩)
     if (!window.__i18nHomeBound) {

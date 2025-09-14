@@ -164,107 +164,141 @@
 
   
   
-  
-  
   "calcGear": {
-  "meta": { "title": "영주 장비 계산기 | KingshotData KR" },
-  "title": "영주 장비 계산기",
-  "desc": "아래 간편한 킹샷 영주 장비 계산기를 사용해보세요.",
+    "meta": { "title": "영주 장비 계산기 | KingshotData KR" },
+    "title": "영주 장비 계산기",
+    "desc": "간편한 킹샷 영주 장비 계산기를 사용해보세요.",
+    "howto": {
+      "title": "사용 방법",
+      "step1": "현재 보유한 영주 장비 단계를 선택하세요.",
+      "step2": "업그레이드하려는 목표 단계를 선택하세요.",
+      "step3": "상단 탭에서 업그레이드할 장비 슬롯을 고르세요.",
+      "slotsHelp": "슬롯: 모자·목걸이(기병), 상의·하의(보병), 반지·지팡이(궁병)",
+      "step4": "계산하기 버튼을 누르세요."
+    },
+    "notice": {
+      "title": "주의사항",
+      "p1": "본 자료는 인게임 표기값을 기반으로 정리한 팬메이드 데이터입니다.",
+      "li1": "패치/밸런스 조정에 따라 수치가 달라질 수 있습니다.",
+      "li2": "오타·오류 제보는 문의하기로 부탁드립니다.",
+      "contact": "문의하기"
+    },
+    "slots": {
+      "hat": "모자",
+      "necklace": "목걸이",
+      "armor": "상의",
+      "pants": "하의",
+      "ring": "반지",
+      "staff": "지팡이"
+    },
+    "classes": {
+      "cavalry": "기병",
+      "infantry": "보병",
+      "archer": "궁병"
+    },
+    "actions": {
+      "calculate": "계산하기",
+      "clear": "초기화",
+      "showDetail": "상세 보기",
+      "hideDetail": "상세 숨기기"
+    },
+    "kpi": {
+      "satin": "비단",
+      "thread": "금사",
+      "sketch": "설계 스케치",
+      "score": "장비 평점"
+    },
+    "cols": {
+      "slot": "슬롯",
+      "class": "병종",
+      "satin": "비단",
+      "thread": "금사",
+      "sketch": "설계 스케치",
+      "score": "점수",
+      "total": "합계",
+      "selected": "선택 {n}개",
+      "current": "현재 단계",
+      "target": "목표 단계",
+      "manual": "설명서 필요량",
+      "blueprint": "도면 필요량",
+      "attribute": "속성 증가"
+    },
+    "alerts": {
+      "needSlot": "슬롯을 하나 이상 선택하세요.",
+      "invalidRange": "현재 단계는 목표 단계보다 낮아야 합니다.",
+      "loadFail": "데이터를 불러오지 못했습니다."
+    },
+    "misc": {
+      "from": "현재 단계",
+      "to": "목표 단계",
+      "hint": "여러 슬롯을 한 번에 합산할 수 있습니다. 슬롯별 비용이 다르면 stepsMap으로 슬롯별 단계를 제공하세요."
+    },
+    "tiers": {
+      "basic": "고급",
+      "basic_1": "고급 (★1)",
 
-  "howto": {
-    "title": "사용 방법",
-    "step1": "현재 보유한 영주 장비 단계를 선택하세요.",
-    "step2": "업그레이드하려는 목표 단계를 선택하세요.",
-    "step3": "상단 탭에서 업그레이드할 장비 슬롯을 고르세요.",
-    "slotsHelp": "슬롯: 모자·목걸이(기병), 상의·하의(보병), 반지·지팡이(궁병)",
-    "step4": "계산하기 버튼을 누르세요."
-  },
+      "rare": "레어",
+      "rare_1": "레어 (★1)",
+      "rare_2": "레어 (★2)",
+      "rare_3": "레어 (★3)",
 
-  "notice": {
-    "title": "주의사항",
-    "p1": "본 자료는 인게임 표기값을 기반으로 정리한 팬메이드 데이터입니다.",
-    "li1": "패치/밸런스 조정에 따라 수치가 달라질 수 있습니다.",
-    "li2": "오타·오류 제보는 문의하기로 부탁드립니다.",
-    "contact": "문의하기"
-  },
+      "epic": "에픽",
+      "epic_1": "에픽 (★1)",
+      "epic_2": "에픽 (★2)",
+      "epic_3": "에픽 (★3)",
 
-  "slots": {
-    "hat": "모자",
-    "necklace": "목걸이",
-    "armor": "상의",
-    "pants": "하의",
-    "ring": "반지",
-    "staff": "지팡이"
-  },
+      "epicT1": "에픽 T1",
+      "epicT1_1": "에픽 T1 (★1)",
+      "epicT1_2": "에픽 T1 (★2)",
+      "epicT1_3": "에픽 T1 (★3)",
 
-  "classes": {
-    "cavalry": "기병",
-    "infantry": "보병",
-    "archer": "궁병"
-  },
+      "legendary": "레전드",
+      "legendary_1": "레전드 (★1)",
+      "legendary_2": "레전드 (★2)",
+      "legendary_3": "레전드 (★3)",
 
-  "actions": {
-    "calculate": "계산하기",
-    "clear": "초기화",
-    "showDetail": "상세 보기",
-    "hideDetail": "상세 숨기기"
-  },
+      "legendT1": "레전드 T1",
+      "legendT1_1": "레전드 T1 (★1)",
+      "legendT1_2": "레전드 T1 (★2)",
+      "legendT1_3": "레전드 T1 (★3)",
 
-  "kpi": {
-    "satin": "비단",
-    "thread": "금사",
-    "sketch": "설계 스케치",
-    "score": "장비평점"
-  },
+      "legendT2": "레전드 T2",
+      "legendT2_1": "레전드 T2 (★1)",
+      "legendT2_2": "레전드 T2 (★2)",
+      "legendT2_3": "레전드 T2 (★3)",
 
-  "cols": {
-    "slot": "슬롯",
-    "class": "병종",
-    "satin": "비단",
-    "thread": "금사",
-    "sketch": "설계 스케치",
-    "score": "평점",
-    "total": "합계",
-    "selected": "선택 {n}개",
-    "current": "현재 단계",
-    "target": "목표 단계",
-    "manual": "필요 매뉴얼",
-    "blueprint": "필요 도면",
-    "attribute": "속성 증가"
-  },
+      "legendT3": "레전드 T3",
+      "legendT3_1": "레전드 T3 (★1)",
+      "legendT3_2": "레전드 T3 (★2)",
+      "legendT3_3": "레전드 T3 (★3)",
 
-  "alerts": {
-    "needSlot": "최소 1개 이상의 슬롯을 선택하세요.",
-    "invalidRange": "현재 단계는 목표 단계보다 낮아야 합니다.",
-    "loadFail": "데이터를 불러오지 못했습니다."
-  },
+      "mythic": "신화",
+      "mythic_1": "신화 (★1)",
+      "mythic_2": "신화 (★2)",
+      "mythic_3": "신화 (★3)",
 
-  "misc": {
-    "from": "현재 단계",
-    "to": "목표 단계",
-    "hint": "선택한 여러 슬롯을 한 번에 합산합니다. 부위별 비용이 다르면 stepsMap으로 각 부위 steps를 주입하세요."
-  },
+      "mythicT1": "신화 T1",
+      "mythicT1_1": "신화 T1 (★1)",
+      "mythicT1_2": "신화 T1 (★2)",
+      "mythicT1_3": "신화 T1 (★3)",
 
-  "tiers": {
-    "basic": "고급",
-    "rare": "희귀",
-    "epic": "영웅",
-    "legendary": "전설",
-    "mythic": "신화",
-    "mythicT1_1": "신화 T1 (1성)",
-    "mythicT1_2": "신화 T1 (2성)",
-    "mythicT1_3": "신화 T1 (3성)",
-    "mythicT2_1": "신화 T2 (1성)",
-    "mythicT2_2": "신화 T2 (2성)",
-    "mythicT2_3": "신화 T2 (3성)",
-    "mythicT3_1": "신화 T3 (1성)",
-    "mythicT3_2": "신화 T3 (2성)",
-    "mythicT3_3": "신화 T3 (3성)",
-    "mythicT4_1": "신화 T4 (1성)",
-    "mythicT4_2": "신화 T4 (2성)",
-    "mythicT4_3": "신화 T4 (3성)"
+      "mythicT2": "신화 T2",
+      "mythicT2_1": "신화 T2 (★1)",
+      "mythicT2_2": "신화 T2 (★2)",
+      "mythicT2_3": "신화 T2 (★3)",
+
+      "mythicT3": "신화 T3",
+      "mythicT3_1": "신화 T3 (★1)",
+      "mythicT3_2": "신화 T3 (★2)",
+      "mythicT3_3": "신화 T3 (★3)",
+
+      "mythicT4": "신화 T4",
+      "mythicT4_1": "신화 T4 (★1)",
+      "mythicT4_2": "신화 T4 (★2)",
+      "mythicT4_3": "신화 T4 (★3)"
+    }
   }
-},
+,
 
 
 

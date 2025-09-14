@@ -168,106 +168,140 @@
     }
   },
   
+  "calcGear": {
+    "meta": { "title": "領主裝備計算器 | KingshotData KR" },
+    "title": "領主裝備計算器",
+    "desc": "使用方便的Kingshot領主裝備計算器吧。",
+    "howto": {
+      "title": "使用方法",
+      "step1": "請選擇當前擁有的領主裝備階段。",
+      "step2": "請選擇要升級的目標階段。",
+      "step3": "在上方標籤中選擇要升級的裝備槽位。",
+      "slotsHelp": "槽位：帽子·項鍊(騎兵)、上衣·褲子(步兵)、戒指·法杖(弓兵)",
+      "step4": "點擊計算按鈕。"
+    },
+    "notice": {
+      "title": "注意事項",
+      "p1": "本資料基於遊戲內標示數值整理的粉絲自製數據。",
+      "li1": "數值可能會因更新/平衡調整而有所變動。",
+      "li2": "如有錯字或錯誤，請透過聯絡我們回報。",
+      "contact": "聯絡我們"
+    },
+    "slots": {
+      "hat": "帽子",
+      "necklace": "項鍊",
+      "armor": "上衣",
+      "pants": "褲子",
+      "ring": "戒指",
+      "staff": "法杖"
+    },
+    "classes": {
+      "cavalry": "騎兵",
+      "infantry": "步兵",
+      "archer": "弓兵"
+    },
+    "actions": {
+      "calculate": "計算",
+      "clear": "重設",
+      "showDetail": "顯示詳細",
+      "hideDetail": "隱藏詳細"
+    },
+    "kpi": {
+      "satin": "絲綢",
+      "thread": "金絲",
+      "sketch": "設計草圖",
+      "score": "裝備評分"
+    },
+    "cols": {
+      "slot": "槽位",
+      "class": "兵種",
+      "satin": "絲綢",
+      "thread": "金絲",
+      "sketch": "設計草圖",
+      "score": "評分",
+      "total": "合計",
+      "selected": "已選擇 {n} 個",
+      "current": "當前階段",
+      "target": "目標階段",
+      "manual": "說明書需求量",
+      "blueprint": "圖紙需求量",
+      "attribute": "屬性提升"
+    },
+    "alerts": {
+      "needSlot": "請至少選擇一個槽位。",
+      "invalidRange": "當前階段必須低於目標階段。",
+      "loadFail": "數據載入失敗。"
+    },
+    "misc": {
+      "from": "當前階段",
+      "to": "目標階段",
+      "hint": "可一次合併多個槽位。若不同槽位費用不同，請使用 stepsMap 提供。"
+    },
+    "tiers": {
+      "basic": "高級",
+      "basic_1": "高級 (★1)",
 
-"calcGear": {
-  "meta": { "title": "領主裝備計算器 | KingshotData KR" },
-  "title": "領主裝備計算器",
-  "desc": "使用下方的 Kingshot 領主裝備計算器進行快速估算。",
+      "rare": "稀有",
+      "rare_1": "稀有 (★1)",
+      "rare_2": "稀有 (★2)",
+      "rare_3": "稀有 (★3)",
 
-  "howto": {
-    "title": "使用方法",
-    "step1": "選擇目前的裝備等級。",
-    "step2": "選擇欲升級的目標等級。",
-    "step3": "在上方分頁選擇要升級的裝備槽位。",
-    "slotsHelp": "槽位：帽子・項鍊（騎兵）、護甲・褲子（步兵）、戒指・法杖（弓兵）",
-    "step4": "點擊「計算」。"
-  },
+      "epic": "史詩",
+      "epic_1": "史詩 (★1)",
+      "epic_2": "史詩 (★2)",
+      "epic_3": "史詩 (★3)",
 
-  "notice": {
-    "title": "注意事項",
-    "p1": "本工具為依據遊戲內數值整理的玩家自製資料。",
-    "li1": "數值可能因更新／平衡調整而變動。",
-    "li2": "如有錯字或問題，請透過「聯絡我們」回報。",
-    "contact": "聯絡我們"
-  },
+      "epicT1": "史詩 T1",
+      "epicT1_1": "史詩 T1 (★1)",
+      "epicT1_2": "史詩 T1 (★2)",
+      "epicT1_3": "史詩 T1 (★3)",
 
-  "slots": {
-    "hat": "帽子",
-    "necklace": "項鍊",
-    "armor": "護甲",
-    "pants": "褲子",
-    "ring": "戒指",
-    "staff": "法杖"
-  },
+      "legendary": "傳說",
+      "legendary_1": "傳說 (★1)",
+      "legendary_2": "傳說 (★2)",
+      "legendary_3": "傳說 (★3)",
 
-  "classes": {
-    "cavalry": "騎兵",
-    "infantry": "步兵",
-    "archer": "弓兵"
-  },
+      "legendT1": "傳說 T1",
+      "legendT1_1": "傳說 T1 (★1)",
+      "legendT1_2": "傳說 T1 (★2)",
+      "legendT1_3": "傳說 T1 (★3)",
 
-  "actions": {
-    "calculate": "計算",
-    "clear": "清除",
-    "showDetail": "顯示詳細",
-    "hideDetail": "隱藏詳細"
-  },
+      "legendT2": "傳說 T2",
+      "legendT2_1": "傳說 T2 (★1)",
+      "legendT2_2": "傳說 T2 (★2)",
+      "legendT2_3": "傳說 T2 (★3)",
 
-  "kpi": {
-    "satin": "綢緞",
-    "thread": "金線",
-    "sketch": "設計草圖",
-    "score": "裝備評分"
-  },
+      "legendT3": "傳說 T3",
+      "legendT3_1": "傳說 T3 (★1)",
+      "legendT3_2": "傳說 T3 (★2)",
+      "legendT3_3": "傳說 T3 (★3)",
 
-  "cols": {
-    "slot": "槽位",
-    "class": "兵種",
-    "satin": "綢緞",
-    "thread": "金線",
-    "sketch": "設計草圖",
-    "score": "評分",
-    "total": "合計",
-    "selected": "已選 {n} 個",
-    "current": "目前等級",
-    "target": "目標等級",
-    "manual": "需要手冊",
-    "blueprint": "需要圖紙",
-    "attribute": "屬性提升"
-  },
+      "mythic": "神話",
+      "mythic_1": "神話 (★1)",
+      "mythic_2": "神話 (★2)",
+      "mythic_3": "神話 (★3)",
 
-  "alerts": {
-    "needSlot": "請至少選擇一個槽位。",
-    "invalidRange": "目前等級必須低於目標等級。",
-    "loadFail": "資料載入失敗。"
-  },
+      "mythicT1": "神話 T1",
+      "mythicT1_1": "神話 T1 (★1)",
+      "mythicT1_2": "神話 T1 (★2)",
+      "mythicT1_3": "神話 T1 (★3)",
 
-  "misc": {
-    "from": "目前等級",
-    "to": "目標等級",
-    "hint": "可一次彙總多個槽位；若各部位成本不同，請透過 stepsMap 傳入對應的部位 steps。"
-  },
+      "mythicT2": "神話 T2",
+      "mythicT2_1": "神話 T2 (★1)",
+      "mythicT2_2": "神話 T2 (★2)",
+      "mythicT2_3": "神話 T2 (★3)",
 
-  "tiers": {
-    "basic": "高級",
-    "rare": "稀有",
-    "epic": "英雄",
-    "legendary": "傳說",
-    "mythic": "神話",
-    "mythicT1_1": "神話 T1（★1）",
-    "mythicT1_2": "神話 T1（★2）",
-    "mythicT1_3": "神話 T1（★3）",
-    "mythicT2_1": "神話 T2（★1）",
-    "mythicT2_2": "神話 T2（★2）",
-    "mythicT2_3": "神話 T2（★3）",
-    "mythicT3_1": "神話 T3（★1）",
-    "mythicT3_2": "神話 T3（★2）",
-    "mythicT3_3": "神話 T3（★3）",
-    "mythicT4_1": "神話 T4（★1）",
-    "mythicT4_2": "神話 T4（★2）",
-    "mythicT4_3": "神話 T4（★3）"
+      "mythicT3": "神話 T3",
+      "mythicT3_1": "神話 T3 (★1)",
+      "mythicT3_2": "神話 T3 (★2)",
+      "mythicT3_3": "神話 T3 (★3)",
+
+      "mythicT4": "神話 T4",
+      "mythicT4_1": "神話 T4 (★1)",
+      "mythicT4_2": "神話 T4 (★2)",
+      "mythicT4_3": "神話 T4 (★3)"
+    }
   }
-}
 ,
 
   "trainCalc": {

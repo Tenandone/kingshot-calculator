@@ -1,17 +1,26 @@
-<!-- pages/calculators/gear.html (i18n 적용본, calcGear로 정합) -->
+<!-- pages/calculators/gear.html (i18n 적용본 · 단독 실행 OK · 항상 최신 버전 로드) -->
 <!doctype html>
 <html lang="ko">
 <head>
-  <base href="/" />
-<script src="/js/standalone-bridge.js?v=202509120604" defer></script>
-  <meta charset="utf-8">
-  <meta name="robots" content="noindex,nofollow">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-i18n="calcGear.meta.title">Kingshot 영주 장비 계산기</title>
+
+  <style>
+    :root{--bd:#e5e7eb}
+    body{margin:0;background:#fff;color:#111;font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif}
+    .calc-wrap{max-width:1080px;margin:0 auto;padding:20px 14px 60px}
+    .calc-card{border:1px solid var(--bd);border-radius:12px;background:#fff;padding:16px;margin:12px 0}
+    .calc-title{margin:0 0 8px;font-size:20px}
+    .calc-desc{margin:6px 0;color:#444}
+    .notice-box{background:#f8fafc;border:1px solid var(--bd);border-radius:10px;padding:12px}
+    .notice-list{margin:6px 0 0 18px}
+    .muted{color:#6b7280}
+  </style>
 </head>
 <body>
   <main id="calc-ui" class="calc-wrap" aria-labelledby="gear-title">
-    <!-- 헤더/안내 -->
     <section class="calc-card">
       <h2 id="gear-title" class="calc-title" data-i18n="calcGear.title">영주 장비 계산기</h2>
       <p class="calc-desc" data-i18n="calcGear.desc">아래 간편한 킹샷 영주 장비 계산기를 사용해보세요.</p>
@@ -30,12 +39,10 @@
       </ol>
     </section>
 
-    <!-- 계산기 본체 마운트 영역 -->
     <section class="calc-card" style="margin-top:14px">
       <div id="gear-calc" aria-live="polite"></div>
     </section>
 
-    <!-- 참고/주의 -->
     <section class="calc-card" style="margin-top:14px">
       <h3 class="calc-title" style="font-size:18px" data-i18n="calcGear.notice.title">주의사항</h3>
       <div class="notice-box">
@@ -44,35 +51,161 @@
           <li data-i18n="calcGear.notice.li1">패치/밸런스 조정에 따라 수치가 달라질 수 있습니다.</li>
           <li data-i18n="calcGear.notice.li2">오타·오류 제보는 문의하기로 부탁드립니다.</li>
         </ul>
-        <p class="muted">
-          <a href="/about" data-i18n="calcGear.notice.contact">문의하기</a>
-        </p>
+        <p class="muted"><a href="/about" data-i18n="calcGear.notice.contact">문의하기</a></p>
       </div>
     </section>
   </main>
 
-  <!-- 단독 테스트 시(라우터 없이): i18n init 이후 실행
-  <script src="/js/gear-calculator.js?v=202509120604"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      await I18N.init({ lang: 'ko' });
-      // calcGear 네임스페이스가 분리되어 있다면 보장
-      if (I18N.loadNamespace) { try { await I18N.loadNamespace('calcGear'); } catch(e){} }
+  (function () {
+    const DEV = /localhost|127\.0\.0\.1/.test(location.hostname);
 
-      window.initGearCalculator?.({
-        mount: '#gear-calc',
-        jsonUrl: '/data/governor-gear.json',
-        slots: [
-          I18N.t('calcGear.slots.hat'),
-          I18N.t('calcGear.slots.necklace'),
-          I18N.t('calcGear.slots.armor'),
-          I18N.t('calcGear.slots.pants'),
-          I18N.t('calcGear.slots.ring'),
-          I18N.t('calcGear.slots.staff')
-        ]
+    // ---- 최신 스탬프 확보: window.v > window.__V > /v.txt > Date.now ----
+    let STAMP = (window.__V || window.__v || window.__VERSION || '');
+    async function ensureStamp() {
+      if (DEV) return;                           // dev는 항상 no-cache
+      if (typeof window.v === 'function') return; // 전역 v()가 있으면 그걸 사용
+      if (STAMP) return;                         // 이미 있으면 끝
+
+      try {
+        const r = await fetch('/v.txt?_=' + Date.now(), { cache: 'no-store' });
+        if (r.ok) {
+          STAMP = (window.__V = (await r.text()).trim());
+        }
+      } catch (e) {}
+      if (!STAMP) STAMP = String(Date.now());    // 최후: 지금 시각으로 강제 신선화
+    }
+
+    // ---- ver 헬퍼: 전역 v() 우선, 없으면 스탬프/타임스탬프 사용 ----
+    const ver = (p) => {
+      if (typeof window.v === 'function') return window.v(p);
+      if (DEV) return `${p}?_=${Date.now()}`;
+      return `${p}?v=${encodeURIComponent(STAMP)}`;
+    };
+
+    // ---- 중복 로드 방지 ----
+    const loaded = new Set();
+    function loadScriptOnce(src) {
+      return new Promise((resolve, reject) => {
+        const base = src.split('?')[0];
+        if (loaded.has(base)) return resolve();
+        const s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        s.onload = () => { loaded.add(base); resolve(); };
+        s.onerror = reject;
+        document.head.appendChild(s);
       });
-    });
+    }
+
+    // ---- KO 라벨 → i18n 키 (레전드 고정) ----
+    const TIER_KEY_MAP_KO = {
+      '고급': 'calcGear.tiers.basic',
+      '고급 (1성)': 'calcGear.tiers.basic_1',
+      '레어': 'calcGear.tiers.rare',
+      '레어 (1성)': 'calcGear.tiers.rare_1',
+      '레어 (2성)': 'calcGear.tiers.rare_2',
+      '레어 (3성)': 'calcGear.tiers.rare_3',
+      '에픽': 'calcGear.tiers.epic',
+      '에픽 (1성)': 'calcGear.tiers.epic_1',
+      '에픽 (2성)': 'calcGear.tiers.epic_2',
+      '에픽 (3성)': 'calcGear.tiers.epic_3',
+      '에픽 T1': 'calcGear.tiers.epicT1',
+      '에픽 T1 (1성)': 'calcGear.tiers.epicT1_1',
+      '에픽 T1 (2성)': 'calcGear.tiers.epicT1_2',
+      '에픽 T1 (3성)': 'calcGear.tiers.epicT1_3',
+      '레전드': 'calcGear.tiers.legendary',
+      '레전드 (1성)': 'calcGear.tiers.legendary_1',
+      '레전드 (2성)': 'calcGear.tiers.legendary_2',
+      '레전드 (3성)': 'calcGear.tiers.legendary_3',
+      '레전드 T1': 'calcGear.tiers.legendT1',
+      '레전드 T1 (1성)': 'calcGear.tiers.legendT1_1',
+      '레전드 T1 (2성)': 'calcGear.tiers.legendT1_2',
+      '레전드 T1 (3성)': 'calcGear.tiers.legendT1_3',
+      '레전드 T2': 'calcGear.tiers.legendT2',
+      '레전드 T2 (1성)': 'calcGear.tiers.legendT2_1',
+      '레전드 T2 (2성)': 'calcGear.tiers.legendT2_2',
+      '레전드 T2 (3성)': 'calcGear.tiers.legendT2_3',
+      '레전드 T3': 'calcGear.tiers.legendT3',
+      '레전드 T3 (1성)': 'calcGear.tiers.legendT3_1',
+      '레전드 T3 (2성)': 'calcGear.tiers.legendT3_2',
+      '레전드 T3 (3성)': 'calcGear.tiers.legendT3_3',
+      '신화': 'calcGear.tiers.mythic',
+      '신화 (1성)': 'calcGear.tiers.mythic_1',
+      '신화 (2성)': 'calcGear.tiers.mythic_2',
+      '신화 (3성)': 'calcGear.tiers.mythic_3',
+      '신화 T1': 'calcGear.tiers.mythicT1',
+      '신화 T1 (1성)': 'calcGear.tiers.mythicT1_1',
+      '신화 T1 (2성)': 'calcGear.tiers.mythicT1_2',
+      '신화 T1 (3성)': 'calcGear.tiers.mythicT1_3',
+      '신화 T2': 'calcGear.tiers.mythicT2',
+      '신화 T2 (1성)': 'calcGear.tiers.mythicT2_1',
+      '신화 T2 (2성)': 'calcGear.tiers.mythicT2_2',
+      '신화 T2 (3성)': 'calcGear.tiers.mythicT2_3',
+      '신화 T3': 'calcGear.tiers.mythicT3',
+      '신화 T3 (1성)': 'calcGear.tiers.mythicT3_1',
+      '신화 T3 (2성)': 'calcGear.tiers.mythicT3_2',
+      '신화 T3 (3성)': 'calcGear.tiers.mythicT3_3',
+      '신화 T4': 'calcGear.tiers.mythicT4',
+      '신화 T4 (1성)': 'calcGear.tiers.mythicT4_1',
+      '신화 T4 (2성)': 'calcGear.tiers.mythicT4_2',
+      '신화 T4 (3성)': 'calcGear.tiers.mythicT4_3'
+    };
+
+    async function boot() {
+      await ensureStamp(); // ★ 최신 스탬프 확보
+
+      // i18n (calc, calcGear 둘 다 시도하면 파일 구성 바뀌어도 안전)
+      try {
+        if (window.I18N?.init) {
+          const raw = (localStorage.getItem('lang') || document.documentElement.getAttribute('lang') || navigator.language || 'ko').replace('_','-');
+          const lang = raw.startsWith('zh') ? (raw.toLowerCase().includes('tw') ? 'zh-TW' : 'zh-CN') : (raw.split('-')[0] || 'ko');
+          await I18N.init({ lang });
+          if (I18N.loadNamespace) {
+            try { await I18N.loadNamespace('calc'); } catch(e){}
+            try { await I18N.loadNamespace('calcGear'); } catch(e){}
+          }
+          I18N.applyTo(document);
+          document.title = I18N.t('calcGear.meta.title', document.title);
+          document.dispatchEvent(new Event('i18n:changed'));
+        }
+      } catch (e) {
+        console.warn('[gear.html] i18n init skipped:', e);
+      }
+
+      await loadScriptOnce( ver('/js/gear-calculator.js') );
+
+      const t = (k, fb) => (window.I18N?.t ? I18N.t(k, fb ?? k) : (fb ?? k));
+      const slots = [
+        t('calcGear.slots.hat', '모자'),
+        t('calcGear.slots.necklace', '목걸이'),
+        t('calcGear.slots.armor', '상의'),
+        t('calcGear.slots.pants', '하의'),
+        t('calcGear.slots.ring', '반지'),
+        t('calcGear.slots.staff', '지팡이')
+      ];
+
+      const jsonUrl = ver('/data/governor-gear.json');
+      if (typeof window.initGearCalculator === 'function') {
+        window.initGearCalculator({
+          mount: '#gear-calc',
+          jsonUrl,
+          slots,
+          tierKeyMap: TIER_KEY_MAP_KO,
+          fetchOptions: DEV ? { cache: 'no-store' } : undefined,
+          onDataLoaded(data){
+            console.log('[gear] loaded:', jsonUrl);
+            console.log('[gear] 레전드 (1성):', data?.steps?.['레전드 (1성)']);
+          }
+        });
+      } else {
+        document.querySelector('#gear-calc')
+          ?.insertAdjacentHTML('beforebegin', '<div class="muted">initGearCalculator()가 없습니다.</div>');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', boot);
+  })();
   </script>
-  -->
 </body>
 </html>
