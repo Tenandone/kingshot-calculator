@@ -33,20 +33,22 @@
 
   // 단계 구간 합산
   function sumRange(steps, keys, fromIdx, toIdx) {
-    if (fromIdx >= toIdx) {
-      return { satin: 0, thread: 0, sketch: 0, score: 0, invalid: true };
-    }
-    let s = 0, t = 0, sk = 0, sc = 0;
-    for (let i = fromIdx; i < toIdx; i++) {
-      const k = keys[i];
-      const c = steps[k] || {};
-      s  += +c.satin  || 0;
-      t  += +c.thread || 0;
-      sk += +c.sketch || 0;
-      sc += +c.score  || 0;
-    }
-    return { satin: s, thread: t, sketch: sk, score: sc, invalid: false };
+  if (fromIdx >= toIdx) {
+    return { satin: 0, thread: 0, sketch: 0, score: 0, invalid: true };
   }
+  // 현재 다음 단계부터 목표 단계 "포함"해서 합산
+  let s = 0, t = 0, sk = 0, sc = 0;
+  for (let i = fromIdx + 1; i <= toIdx; i++) {
+    const k = keys[i];
+    const c = steps[k] || {};
+    s  += +c.satin  || 0;
+    t  += +c.thread || 0;
+    sk += +c.sketch || 0;
+    sc += +c.score  || 0;
+  }
+  return { satin: s, thread: t, sketch: sk, score: sc, invalid: false };
+}
+
 
   // 내부 상태(재적용/복원용)
   const STATE = {

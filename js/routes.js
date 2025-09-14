@@ -143,7 +143,6 @@ const TIER_KEY_MAP_KO = {
   '신화 T4 (3성)': 'calcGear.tiers.mythicT4_3'
 };
 
-
     // 홈 카드: 언어 변경 시 즉시 갱신 (1회 바인딩)
     if (!window.__i18nHomeBound) {
       document.addEventListener('i18n:changed', () => {

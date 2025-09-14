@@ -188,7 +188,6 @@
         apply(el);
       }
     };
-
     // ---------------------------
     // VIP 계산기 (HTML에는 cache-buster 금지, lang만 안전하게 부여)
     routes['/calc-vip'] = {
