@@ -3,7 +3,17 @@
 <head>
   <base href="/" />
   <meta charset="utf-8" />
-  <meta name="robots" content="noindex,nofollow" />
+
+  <!-- 단독 접근 리다이렉트 처리 -->
+  <script>
+    if (location.pathname.startsWith('/pages/')) {
+      location.replace('/?p=' + location.pathname + location.search);
+    }
+  </script>
+
+  <!-- SEO 색인 허용: noindex 제거 -->
+  <!-- <meta name="robots" content="noindex,nofollow" /> 제거 -->
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-i18n="calcHub.meta.title">계산기 | KingshotData KR</title>
   <meta name="description" content="킹샷 계산기 허브. 건물, 영주장비, 영주보석, 병력훈련 계산기.">

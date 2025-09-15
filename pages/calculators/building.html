@@ -2,9 +2,14 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <base href="/" />
-<script src="/js/standalone-bridge.js?v=202509120604" defer></script>
+  
   <meta charset="utf-8">
+  <script>
+if (location.pathname.startsWith('/pages/')) {
+  location.replace('/?p=' + location.pathname + location.search);
+}
+</script>
+
   <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 

@@ -1,6 +1,85 @@
-<!-- pages/database.html -->
-<section class="container" style="max-width:1100px;margin:0 auto;padding:16px;">
-  <div id="db-grid"
-       style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;">
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KingshotData KR</title>
+  <meta name="description" content="Hello, Go to KingshotData.kr">
+  <style>
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;
+      background:#fff;color:#111;
+    }
+    .landing{
+      display:flex;flex-direction:column;justify-content:center;align-items:center;
+      text-align:center;height:100vh;
+    }
+    .landing img{max-width:200px;height:auto;margin-bottom:20px}
+    .landing h1{font-size:22px;margin:0}
+    .countdown{
+      margin-top:8px;
+      font-size:64px;
+      font-weight:bold;
+      color:#d33;
+    }
+    .landing a{margin-top:12px;display:inline-block;padding:10px 16px;background:#111;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;transition:background .2s}
+    .landing a:hover{background:#333}
+
+    body.spa-mode .landing{display:none}
+    body.spa-mode #db-grid{display:grid}
+    #db-grid{display:none;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+
+    @keyframes pop {
+      0% { transform:scale(0.5); opacity:0; color:#d33; }
+      50% { transform:scale(1.4); opacity:1; color:#e67e22; }
+      100% { transform:scale(1); opacity:1; color:#111; }
+    }
+    @keyframes boom {
+      0%   { transform:scale(1); opacity:1; }
+      40%  { transform:scale(2); opacity:1; }
+      100% { transform:translateX(150px) scale(0.5) rotate(20deg); opacity:0; }
+    }
+    .boom { animation:boom 0.8s forwards; }
+  </style>
+</head>
+<body>
+  <div class="landing">
+    <img src="/img/brand2.png" alt="KingshotData KR">
+    <h1>Hello, Go to KingshotData.kr</h1>
+    <div class="countdown" id="countdown">3</div>
+    <a href="https://kingshotdata.kr">Go Now</a>
   </div>
-</section>
+
+  <section class="container" style="max-width:1100px;margin:0 auto;padding:16px;">
+    <div id="db-grid"></div>
+  </section>
+
+  <script>
+    if (location.search.includes('p=')) {
+      document.body.classList.add('spa-mode');
+    } else {
+      let sec = 3;
+      const el = document.getElementById("countdown");
+
+      function updateCountdown(){
+        if(sec > 0){
+          el.textContent = sec;
+          el.style.animation = "none";
+          void el.offsetWidth; // 애니메이션 리셋
+          el.style.animation = "pop 0.6s ease";
+        } else {
+          el.textContent = "🏃💨";
+          el.classList.add("boom");
+          setTimeout(()=>{ window.location.href = "https://kingshotdata.kr"; }, 800);
+          return;
+        }
+        sec--;
+        setTimeout(updateCountdown,1000);
+      }
+
+      updateCountdown();
+    }
+  </script>
+</body>
+</html>

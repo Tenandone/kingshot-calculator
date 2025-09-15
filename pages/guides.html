@@ -2,14 +2,26 @@
 <html lang="ko">
 <head>
   <base href="/" />
-<script src="/js/standalone-bridge.js?v=202509120604" defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ✅ 검색 색인 제외, 내부 링크는 크롤 허용 -->
+  <meta name="robots" content="noindex,follow" />
+
+  <!-- ✅ 단독 접근 시 홈으로 리다이렉트 -->
+  <script>
+    (function () {
+      // /pages/guide.html, /pages/guide, /pages/guide/ 모두 처리
+      var p = location.pathname.replace(/\/+$/, ''); // 끝 슬래시 제거
+      if (/^\/pages\/guide(\.html)?$/i.test(p)) {
+        location.replace('/');
+      }
+    })();
+  </script>
+
   <meta name="db-title" content="guides.title">
   <meta name="description" content="guides.metaDesc">
   <title>KingshotData.kr — Guides</title>
-
-  <link rel="stylesheet" href="/css/guides.css?v=202509120604">
 
   <!-- i18n -->
   <script src="/js/i18n.js?v=202509120604" defer></script>

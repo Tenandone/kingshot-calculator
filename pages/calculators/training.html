@@ -4,6 +4,12 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
+  <script>
+if (location.pathname.startsWith('/pages/')) {
+  location.replace('/?p=' + location.pathname + location.search);
+}
+</script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="킹샷 병력 훈련과 승급에 필요한 가속일수, 병력 수, 전투력 증가, 이벤트 점수를 계산할 수 있는 도구입니다.">
 
