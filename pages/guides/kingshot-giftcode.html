@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title id="meta-title">킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드</title>
 
   <!-- SEO / OG -->
@@ -14,6 +14,13 @@
   <meta property="og:url" content="https://kingshotdata.kr/pages/guides/kingshot-giftcode.html">
   <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png">
   <link rel="canonical" href="https://kingshotdata.kr/pages/guides/kingshot-giftcode.html">
+
+  <!-- CTR 보강(선택) -->
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드">
+  <meta name="twitter:description" content="킹샷 최신 기프트코드 안내 | 쿠폰 입력 방법과 최신 코드, 만료/무기한 정보, 공식 입력창 링크.">
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png">
 
   <style>
 :root{--fg:#111;--muted:#666;--bd:#e5e7eb;--pri:#0b57d0;--bg:#fff}
@@ -39,7 +46,7 @@ h2{font-size:20px;margin:26px 0 10px}
   padding:14px;
   background:#fff;
   display:flex;
-  flex-direction:column;   /* 위→아래로 쌓기 */
+  flex-direction:column;
   align-items:flex-start;
   gap:10px;
 }
@@ -48,7 +55,7 @@ h2{font-size:20px;margin:26px 0 10px}
 .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .btn{
   padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:#fff;cursor:pointer;
-  white-space:nowrap;      /* 버튼은 절대 줄바꿈 금지 */
+  white-space:nowrap;
 }
 .btn:hover{background:#f5f5f5}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
@@ -58,8 +65,7 @@ h2{font-size:20px;margin:26px 0 10px}
 .badge{
   display:inline-flex;align-items:center;gap:6px;
   font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid var(--bd);
-  white-space:nowrap;      /* 배지도 줄바꿈 금지 */
-  line-height:1.2;
+  white-space:nowrap;line-height:1.2;
 }
 .badge.expired{border-color:#ef4444;color:#b91c1c;background:#fee2e2}
 .badge.active{border-color:#16a34a;color:#166534;background:#dcfce7}
@@ -70,10 +76,10 @@ ol{margin:8px 0 0 18px}
 .note{font-size:13px;color:var(--muted)}
 .divider{height:1px;background:#eee;margin:24px 0}
 
-/* HERO: Grid로 안정화 (중복/충돌 제거) */
+/* HERO */
 .hero{
   display:grid;
-  grid-template-columns:minmax(0,1fr) auto; /* 왼쪽 유동, 오른쪽 버튼 폭 */
+  grid-template-columns:minmax(0,1fr) auto;
   align-items:center;
   gap:16px;
   border:1px solid var(--bd);
@@ -93,43 +99,29 @@ ol{margin:8px 0 0 18px}
   .cta{justify-self:stretch;text-align:center}
 }
 
-/* 일반 텍스트만 안전 개행 허용 (전역 any­where 제거) */
+/* 일반 텍스트만 안전 개행 허용 */
 .card p, .card .title, .card .desc {overflow-wrap:anywhere;word-break:keep-all}
-</style>
+  </style>
 
-
-
-  <!-- 기본 FAQ 구조화 데이터(ko). 언어 변경 시 굳이 갱신할 필요 없음 -->
+  <!-- FAQ 구조화 데이터(ko) -->
   <script type="application/ld+json" id="faq-jsonld">
   {
     "@context":"https://schema.org",
     "@type":"FAQPage",
     "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"킹샷 기프트코드는 어디서 입력하나요?",
-        "acceptedAnswer":{"@type":"Answer","text":"게임 내 프로필 → 설정 → 쿠폰 교환에서 입력하거나, 공식 입력창(ks-giftcode.centurygame.com)에서 입력합니다."}
-      },
-      {
-        "@type":"Question",
-        "name":"무기한 쿠폰(vip777)은 만료가 없나요?",
-        "acceptedAnswer":{"@type":"Answer","text":"네, 무기한으로 안내되며 만료일이 없습니다. 본 페이지에서도 ‘무기한’으로 표시됩니다."}
-      },
-      {
-        "@type":"Question",
-        "name":"쿠폰이 적용되지 않아요. 왜 그런가요?",
-        "acceptedAnswer":{"@type":"Answer","text":"계정당 1회 제한, 지역/서버 제한, 오탈자 등의 이유일 수 있습니다. 대소문자/공백을 확인하고 재시도해 주세요."}
-      }
+      {"@type":"Question","name":"킹샷 기프트코드는 어디서 입력하나요?","acceptedAnswer":{"@type":"Answer","text":"게임 내 프로필 → 설정 → 쿠폰 교환에서 입력하거나, 공식 입력창(ks-giftcode.centurygame.com)에서 입력합니다."}},
+      {"@type":"Question","name":"무기한 쿠폰(vip777)은 만료가 없나요?","acceptedAnswer":{"@type":"Answer","text":"네, 무기한으로 안내되며 만료일이 없습니다. 본 페이지에서도 ‘무기한’으로 표시됩니다."}},
+      {"@type":"Question","name":"쿠폰이 적용되지 않아요. 왜 그런가요?","acceptedAnswer":{"@type":"Answer","text":"계정당 1회 제한, 지역/서버 제한, 오탈자 등의 이유일 수 있습니다. 대소문자/공백을 확인하고 재시도해 주세요."}}
     ]
   }
   </script>
 </head>
-<!-- place this right after <body> -->
-<a href="/" class="kd-home-link" style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
-  ← KingshotData Korea
-</a>
-
 <body>
+  <!-- 홈 링크(유효 위치) -->
+  <a href="/" class="kd-home-link" style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
+    ← KingshotData Korea
+  </a>
+
   <main class="wrap">
     <header>
       <div class="topbar">
@@ -157,7 +149,7 @@ ol{margin:8px 0 0 18px}
       </div>
       <a class="cta" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener"
          aria-label="Open Kingshot gift code page">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v8a2 2 0 0 1-2 2h-5v-10h7zM11 22H6a2 2 0 0 1-2-2v-8h7v10zM21 8h-3.17A3 3 0 1 0 12 6a3 3 0 1 0-5.83 2H3a1 1 0 0 0 0 2h18a1 1 0 1 0 0-2ZM9 7a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm6 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v8a2 2 0 0 1-2 2h-5v-10h7zM11 22H6a2 2 0 0 1-2-2v-8h7v10zM21 8h-3.17A3 3 0 1 0 12 6a3 3 0 1 0-5.83 2H3a1 1 0 0 0 0 2h18a1 1 0 1 0 0-2ZM9 7a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
         <span id="cta-text">쿠폰 입력창 바로가기</span>
       </a>
     </section>
@@ -422,17 +414,10 @@ ol{margin:8px 0 0 18px}
     }
     function fmtDate(val, lang){
       if (isForever(val)) return foreverText(lang);
-      // 간략 표기: JSON 문자열 그대로 노출 (YYYY-MM-DD)
-      return String(val).trim();
+      return String(val).trim(); // YYYY-MM-DD 그대로
     }
-    function parseUTCDate(ymd){
-      // "2025-09-12" → 2025-09-12 00:00:00 UTC
-      return new Date(String(ymd).trim() + 'T00:00:00Z');
-    }
-    function isExpired(until){
-      if (isForever(until)) return false;
-      return new Date() >= parseUTCDate(until);
-    }
+    function parseUTCDate(ymd){ return new Date(String(ymd).trim() + 'T00:00:00Z'); }
+    function isExpired(until){ return !isForever(until) && (new Date() >= parseUTCDate(until)); }
 
     let _couponsCache = null;
     async function loadCoupons(){
@@ -455,7 +440,7 @@ ol{margin:8px 0 0 18px}
       grid.setAttribute('aria-busy','false');
       grid.textContent = '';
 
-      const coupons = _couponsCache.slice(0,3); // 필요 시 개수 조정
+      const coupons = _couponsCache.slice(0,3); // 필요 시 조정
       if (!coupons.length){
         const empty = document.createElement('div');
         empty.className = 'note';
@@ -523,7 +508,7 @@ ol{margin:8px 0 0 18px}
         applyLang(e.target.value);
       });
 
-      // 실시간 만료 반영(UTC 00시 경과 직후 자동 반영) — 60초마다 새로고침 (데이터는 캐시 재사용)
+      // UTC 00시 경과 반영 — 60초마다 재렌더(데이터 캐시 재사용)
       setInterval(()=>renderCoupons(true), 60*1000);
     })();
   </script>
