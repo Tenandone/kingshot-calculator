@@ -1,541 +1,760 @@
-﻿// ---- dynamic loader utils (중복 로드 방지) ----
+﻿// ---- dynamic loader utils (중복 로드 방지 + Promise화 + 안전성 강화) ----
 (function () {
+  // 이미 로드된 자원 기록 (중복 삽입 방지)
   const seenCSS = new Set();
   const seenJS  = new Set();
 
+  // 동시에 같은 파일을 여러 곳에서 로드하려는 경우를 합치는 in-flight 테이블
+  const inflight = new Map(); // key: "css|js:" + absKey, val: Promise
+
+  // 캐시 버스터용 버전 파라미터
   const ASSET_VER = window.__V || 'now';
+
+  // 절대 URL 표준화(쿼리의 v 파라미터 제외) — 중복 로드 방지의 기준 키
+  function canonical(url) {
+    try {
+      const u = new URL(url, location.href);
+      u.searchParams.delete('v'); // 내부 캐시버스터 제거
+      return u.href;              // 항상 절대 URL
+    } catch (e) {
+      return String(url);
+    }
+  }
+
+  // 문자열 기반 결합은 해시/쿼리 충돌 → URL API로 안전 처리
   function v(url) {
     if (!url) return url;
-    if (/^(data:|blob:|#)/i.test(url)) return url;
-    return url + (url.includes('?') ? '&' : '?') + 'v=' + ASSET_VER;
+    if (/^(data:|blob:|#)/i.test(url)) return url; // data/blob/hash는 그대로
+    try {
+      const u = new URL(url, location.href);
+      u.searchParams.set('v', ASSET_VER);
+      // 크로스 오리진은 전체 href 유지, same-origin은 경로만
+      return (u.origin !== location.origin)
+        ? u.href
+        : (u.pathname + u.search + u.hash);
+    } catch (e) {
+      // 상대경로 등에서 URL 생성 실패 시 기존 로직 폴백
+      return url + (String(url).includes('?') ? '&' : '?') + 'v=' + ASSET_VER;
+    }
   }
-  window.v = window.v || v;
+  if (!window.v) window.v = v;
 
+  // 안전한 attribute selector 생성을 위한 유틸 (CSS.escape가 없는 브라우저 폴백)
+  function escAttr(val) {
+    if (window.CSS && window.CSS.escape) return window.CSS.escape(val);
+    // 매우 보수적 폴백: 공백/따옴표/대괄호 등 특수문자 제거
+    return String(val).replace(/["'\\\[\]\(\)\s]/g, '');
+  }
+
+  // CSS 로더: 실제 onload까지 대기 가능한 Promise 반환
   window.ensureCSS = window.ensureCSS || function (href) {
-    const base = href.split('?')[0];
-    if (seenCSS.has(base) || document.querySelector(`link[rel="stylesheet"][href^="${base}"]`)) return;
-    const l = document.createElement('link');
-    l.rel = 'stylesheet';
-    l.href = v(href);
-    document.head.appendChild(l);
-    seenCSS.add(base);
+    // 상대/절대/쿼리 변형 모두 하나로 취급하도록 절대 URL 키 사용 + data-ensured 마커
+    const absKey = canonical(href);
+    const selEnsured = 'link[rel="stylesheet"][data-ensured="' + escAttr(absKey) + '"]';
+    if (seenCSS.has(absKey) || document.querySelector(selEnsured)) return Promise.resolve();
+
+    const inflightKey = 'css:' + absKey;
+    if (inflight.has(inflightKey)) return inflight.get(inflightKey);
+
+    const p = new Promise(function (res, rej) {
+      const l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.href = v(href);
+      l.setAttribute('data-ensured', absKey);
+      l.onload  = function(){ seenCSS.add(absKey); res(); };
+      l.onerror = function(){ rej(new Error('CSS load failed: ' + href)); };
+      document.head.appendChild(l);
+    }).finally(function(){ inflight.delete(inflightKey); });
+
+    inflight.set(inflightKey, p);
+    return p;
   };
 
-  window.ensureScript = window.ensureScript || function (src) {
-    const base = src.split('?')[0];
-    if (seenJS.has(base) || document.querySelector(`script[src^="${base}"]`)) return Promise.resolve();
-    return new Promise((res, rej) => {
+  // JS 로더: 동적 <script> — async 로 비동기 로드, 의존성은 await 체인으로 보장
+  window.ensureScript = window.ensureScript || function (src, opt) {
+    opt = opt || {};
+    // dedupe 개선(절대 URL 기준) + data-ensured 마커로 DOM 조회 안정화
+    const absKey = canonical(src);
+    const selEnsured = 'script[data-ensured="' + escAttr(absKey) + '"]';
+    if (seenJS.has(absKey) || document.querySelector(selEnsured)) return Promise.resolve();
+
+    const inflightKey = 'js:' + absKey;
+    if (inflight.has(inflightKey)) return inflight.get(inflightKey);
+
+    const p = new Promise(function (res, rej) {
       const s = document.createElement('script');
       s.src = v(src);
-      s.defer = true;
-      s.onload = () => { seenJS.add(base); res(); };
-      s.onerror = rej;
+      if (opt.type === 'module') {
+        s.type = 'module'; // 모듈은 기본적으로 defer 성격
+      } else {
+        s.async = true;
+        if (opt.type) s.type = opt.type;
+      }
+      if (opt.integrity) {
+        s.integrity = opt.integrity;
+        s.crossOrigin = opt.crossOrigin || 'anonymous';
+      }
+      s.setAttribute('data-ensured', absKey);
+      s.onload  = function(){ seenJS.add(absKey); res(); };
+      s.onerror = function(){ rej(new Error('Script load failed: ' + src)); };
       document.head.appendChild(s);
-    });
+    }).finally(function(){ inflight.delete(inflightKey); });
+
+    inflight.set(inflightKey, p);
+    return p;
   };
 })();
 
-// js/routes.js (코어 라우트 + 계산기 라우트 lazy-load 프록시)
+
+// ---- js/routes.js (코어 라우트만; 계산기 관련 라우트/프리패치 제거) ----
 (function () {
   'use strict';
 
-  window.buildRoutes = function ({ loadHTML, loadScriptOnce, renderDbDetail, iconImg /*, catCard*/ }) {
+  // 라우트 렌더 레이스 방지 토큰
+  var __renderToken = 0;
+  function newRenderToken() { return ++__renderToken; }
+  function isStale(token)   { return token !== __renderToken; }
+
+  // 페이지 전환 시 최상단으로: 브라우저 기본 복원 끄기
+  try { history.scrollRestoration = 'manual'; } catch (e) {}
+
+  // HTML에서 <body>만 안전하게 추출 (정규식 대신 DOMParser 사용)
+  function htmlBodyOnly(html) {
+    if (!html) return html;
+    try {
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      return doc && doc.body ? doc.body.innerHTML : html;
+    } catch (e) {
+      return html;
+    }
+  }
+
+  // 접근성: 렌더 완료 후 주요 heading 포커스
+  function focusMain(el) {
+    var h1 = el.querySelector('h1, [role="heading"]');
+    if (h1) {
+      h1.setAttribute('tabindex', '-1');
+      try { h1.focus({ preventScroll: true }); } catch (e) {}
+    }
+  }
+
+  // requestIdleCallback 폴백
+  var ric = window.requestIdleCallback || function (cb) { return setTimeout(cb, 1); };
+
+  // buildRoutes 본체
+  window.buildRoutes = function (deps) {
+    deps = deps || {};
+    var loadHTML = deps.loadHTML;
+    var loadScriptOnce = deps.loadScriptOnce;
+    var renderDbDetail = deps.renderDbDetail;
+    var iconImg = deps.iconImg;
+
+    // loadScriptOnce 미주입 환경 폴백: ensureScript 재사용
+    var _loadScriptOnce = (typeof loadScriptOnce === 'function') ? loadScriptOnce : function (src, opt) { return window.ensureScript(src, opt); };
 
     // ---------- i18n helpers ----------
-    const apply = (root) => window.I18N?.applyTo?.(root || document);
-    const t = (key, fb) => (window.I18N?.t ? I18N.t(key, fb ?? key) : (fb ?? key));
-    const setTitle = (key, fb) => { document.title = t(key, fb); };
-
-    // 언어 감지 + i18n 준비(계산기 라우트에서 사용)
-    function detectLang() {
-      const raw = (localStorage.getItem('lang') || navigator.language || 'ko')
-        .replace('_','-').toLowerCase();
-      if (raw.startsWith('ko')) return 'ko';
-      if (raw.startsWith('en')) return 'en';
-      if (raw.startsWith('ja')) return 'ja';
-      if (raw.startsWith('zh-tw')) return 'zh-TW';
-      if (raw.startsWith('zh')) return 'zh-CN';
-      return 'ko';
+    function apply(root) {
+      if (window.I18N && typeof window.I18N.applyTo === 'function') {
+        return window.I18N.applyTo(root || document);
+      }
     }
-    async function ensureI18NReady() {
-      const lang = detectLang();
-      if (!window.I18N?.t || I18N.current !== lang) {
-        await I18N.init({ lang });
+    function t(key, fb) {
+      var fallback = (typeof fb !== 'undefined') ? fb : key;
+      if (window.I18N && typeof window.I18N.t === 'function') {
+        return window.I18N.t(key, fallback);
+      }
+      return fallback;
+    }
+    function setTitle(key, fb) { document.title = t(key, fb); }
+
+    // 공용 내비게이션: pushState 후 popstate 트리거
+    function goto(path) {
+      var url = String(path || '/');
+      if (window.navigation && typeof window.navigation.navigate === 'function') {
+        try { window.navigation.navigate(url); return; } catch (e) {}
+      }
+      history.pushState(null, '', url);
+      try {
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      } catch (e) {
+        var ev = (document.createEvent && document.createEvent('Event')) || null;
+        if (ev && ev.initEvent) { ev.initEvent('popstate', true, true); window.dispatchEvent(ev); }
       }
     }
 
-    // 기어 계산기 티어 라벨 i18n 키 매핑 (KO 라벨 → i18n key)
-const TIER_KEY_MAP_KO = {
-  // 고급
-  '고급': 'calcGear.tiers.basic',
-  '고급 (1성)': 'calcGear.tiers.basic_1',
-
-  // 레어
-  '레어': 'calcGear.tiers.rare',
-  '레어 (1성)': 'calcGear.tiers.rare_1',
-  '레어 (2성)': 'calcGear.tiers.rare_2',
-  '레어 (3성)': 'calcGear.tiers.rare_3',
-
-  // 에픽
-  '에픽': 'calcGear.tiers.epic',
-  '에픽 (1성)': 'calcGear.tiers.epic_1',
-  '에픽 (2성)': 'calcGear.tiers.epic_2',
-  '에픽 (3성)': 'calcGear.tiers.epic_3',
-
-  // 에픽 T1
-  '에픽 T1': 'calcGear.tiers.epicT1',
-  '에픽 T1 (1성)': 'calcGear.tiers.epicT1_1',
-  '에픽 T1 (2성)': 'calcGear.tiers.epicT1_2',
-  '에픽 T1 (3성)': 'calcGear.tiers.epicT1_3',
-
-  // 레전드
-  '레전드': 'calcGear.tiers.legendary',
-  '레전드 (1성)': 'calcGear.tiers.legendary_1',
-  '레전드 (2성)': 'calcGear.tiers.legendary_2',
-  '레전드 (3성)': 'calcGear.tiers.legendary_3',
-
-  // 레전드 T1
-  '레전드 T1': 'calcGear.tiers.legendT1',
-  '레전드 T1 (1성)': 'calcGear.tiers.legendT1_1',
-  '레전드 T1 (2성)': 'calcGear.tiers.legendT1_2',
-  '레전드 T1 (3성)': 'calcGear.tiers.legendT1_3',
-
-  // 레전드 T2
-  '레전드 T2': 'calcGear.tiers.legendT2',
-  '레전드 T2 (1성)': 'calcGear.tiers.legendT2_1',
-  '레전드 T2 (2성)': 'calcGear.tiers.legendT2_2',
-  '레전드 T2 (3성)': 'calcGear.tiers.legendT2_3',
-
-  // 레전드 T3
-  '레전드 T3': 'calcGear.tiers.legendT3',
-  '레전드 T3 (1성)': 'calcGear.tiers.legendT3_1',
-  '레전드 T3 (2성)': 'calcGear.tiers.legendT3_2',
-  '레전드 T3 (3성)': 'calcGear.tiers.legendT3_3',
-
-  // 신화
-  '신화': 'calcGear.tiers.mythic',
-  '신화 (1성)': 'calcGear.tiers.mythic_1',
-  '신화 (2성)': 'calcGear.tiers.mythic_2',
-  '신화 (3성)': 'calcGear.tiers.mythic_3',
-
-  // 신화 T1
-  '신화 T1': 'calcGear.tiers.mythicT1',
-  '신화 T1 (1성)': 'calcGear.tiers.mythicT1_1',
-  '신화 T1 (2성)': 'calcGear.tiers.mythicT1_2',
-  '신화 T1 (3성)': 'calcGear.tiers.mythicT1_3',
-
-  // 신화 T2
-  '신화 T2': 'calcGear.tiers.mythicT2',
-  '신화 T2 (1성)': 'calcGear.tiers.mythicT2_1',
-  '신화 T2 (2성)': 'calcGear.tiers.mythicT2_2',
-  '신화 T2 (3성)': 'calcGear.tiers.mythicT2_3',
-
-  // 신화 T3
-  '신화 T3': 'calcGear.tiers.mythicT3',
-  '신화 T3 (1성)': 'calcGear.tiers.mythicT3_1',
-  '신화 T3 (2성)': 'calcGear.tiers.mythicT3_2',
-  '신화 T3 (3성)': 'calcGear.tiers.mythicT3_3',
-
-  // 신화 T4
-  '신화 T4': 'calcGear.tiers.mythicT4',
-  '신화 T4 (1성)': 'calcGear.tiers.mythicT4_1',
-  '신화 T4 (2성)': 'calcGear.tiers.mythicT4_2',
-  '신화 T4 (3성)': 'calcGear.tiers.mythicT4_3'
-};
-
-    // 홈 카드: 언어 변경 시 즉시 갱신 (1회 바인딩)
-    if (!window.__i18nHomeBound) {
-      document.addEventListener('i18n:changed', () => {
-        if (!location.hash || location.hash.startsWith('#/home')) {
-          const content = document.getElementById('content');
-          if (content) apply(content);
-          setTitle('title.home', '홈 - KingshotData.kr');
-        }
-      });
-      window.__i18nHomeBound = true;
+    // HTML 로드 결과 메모리 캐시 (간단 LRU)
+    var __htmlCache = new Map(); // key: candidates.join('|'), val: html string
+    function cacheGet(k){ return __htmlCache.get(k); }
+    function cacheSet(k, v){
+      __htmlCache.set(k, v);
+      if (__htmlCache.size > 20) __htmlCache.delete(__htmlCache.keys().next().value);
     }
-
-    // 화살표(뒤로가기) 공통 처리
-    if (!window.__smartBackBound) {
-      document.addEventListener('click', (e) => {
-        const a = e.target.closest('a[data-smart-back]');
-        if (!a) return;
-        e.preventDefault();
-        if (history.length > 1) history.back();
-        else location.hash = a.getAttribute('data-smart-back') || '#/';
-      });
-      window.__smartBackBound = true;
-    }
-
-    function removeLegacyDbBack(el){
-      ['a.btn-back','[data-i18n-key="database.detail.back"]','a[href="/database"]']
-        .forEach(sel => el.querySelectorAll(sel).forEach(a => { if (!a.hasAttribute('data-smart-back')) a.remove(); }));
-    }
-
-    function setTitleFromPage(el){
-      const metaKey = el.querySelector('meta[name="db-title"]')?.content?.trim();
-      if (metaKey) { setTitle(metaKey, (window.I18N?.t?.(metaKey)) || document.title); return; }
-      const h1 = el.querySelector('h1[data-i18n]');
-      if (h1) {
-        const k = h1.getAttribute('data-i18n');
-        setTitle(k, (window.I18N?.t?.(k)) || h1.textContent || 'KingshotData.kr');
-      }
+    async function loadHTMLCached(cands) {
+      var key = cands.join('|');
+      var hit = cacheGet(key);
+      if (hit) return hit;
+      var html = await loadHTML(cands);
+      if (html) cacheSet(key, html);
+      return html;
     }
 
     // ===== 코어 라우트 정의 =====
-    const routes = {
+    var routes = {
       '/home': {
         title: '홈 - KingshotData.kr',
-        render: async (el) => {
-          const cards = [
-            { href:'#/buildings',  img:'/img/home/saulchar.png',   t:'home.card.buildings.title',   d:'home.card.buildings.desc' },
-            { href:'#/heroes',     img:'/img/home/helgachar.png',  t:'home.card.heroes.title',      d:'home.card.heroes.desc' },
-            { href:'#/database',   img:'/img/home/database.png',   t:'home.card.database.title',    d:'home.card.database.desc' },
-            { href:'#/guides',     img:'/img/home/guides.png',     t:'home.card.guides.title',      d:'home.card.guides.desc' },
-            { href:'#/calculator', img:'/img/home/calculator.png', t:'home.card.calculators.title', d:'home.card.calculators.desc' },
-            { href:'#/about',      img:'/img/home/about.png',      t:'nav.about',                   d:'home.card.about.desc' }
+        render: async function (el) {
+          var token = newRenderToken();
+          var cards = [
+            { href:'/buildings',  img:'/img/home/saulchar.png',   t:'home.card.buildings.title',   d:'home.card.buildings.desc' },
+            { href:'/heroes',     img:'/img/home/helgachar.png',  t:'home.card.heroes.title',      d:'home.card.heroes.desc' },
+            { href:'/database',   img:'/img/home/database.png',   t:'home.card.database.title',    d:'home.card.database.desc' },
+            { href:'/guides',     img:'/img/home/guides.png',     t:'home.card.guides.title',      d:'home.card.guides.desc' },
+            { href:'/calculator', img:'/img/home/calculator.png', t:'home.card.calculators.title', d:'home.card.calculators.desc' },
+
+            { href:'/about',      img:'/img/home/about.png',      t:'nav.about',                   d:'home.card.about.desc' }
           ];
-          el.innerHTML = `
-            <div class="home-container">
-              <section class="home-categories">
-                <h2 class="section-title" data-i18n="home.categoriesTitle">${t('home.categoriesTitle','카테고리')}</h2>
-                <div class="grid category-grid">
-                  ${cards.map(c => `
-                    <a class="card card--category" href="${c.href}">
-                      <div class="card__media" aria-hidden="true">
-                        ${iconImg(t(c.t), c.img)}
-                      </div>
-                      <div class="card__body">
-                        <div class="card__title" data-i18n="${c.t}">${t(c.t)}</div>
-                        <div class="card__subtitle" data-i18n="${c.d}">${t(c.d)}</div>
-                      </div>
-                    </a>
-                  `).join('')}
-                </div>
-              </section>
-            </div>
-          `;
+          el.innerHTML =
+            '<div class="home-container">' +
+              '<section class="home-categories">' +
+                '<h2 class="section-title" data-i18n="home.categoriesTitle">' + t('home.categoriesTitle','카테고리') + '</h2>' +
+                '<div class="grid category-grid">' +
+                  cards.map(function(c){
+                    return '' +
+                    '<a class="card card--category" href="' + c.href + '">' +
+                      '<div class="card__media" aria-hidden="true">' +
+                        iconImg(t(c.t), c.img) +
+                      '</div>' +
+                      '<div class="card__body">' +
+                        '<div class="card__title" data-i18n="' + c.t + '">' + t(c.t) + '</div>' +
+                        '<div class="card__subtitle" data-i18n="' + c.d + '">' + t(c.d) + '</div>' +
+                      '</div>' +
+                    '</a>';
+                  }).join('') +
+                '</div>' +
+              '</section>' +
+            '</div>';
+          if (isStale(token)) return;
           apply(el);
           setTitle('title.home', '홈 - KingshotData.kr');
           window.scrollTo({ top: 0 });
+          focusMain(el);
         }
       },
 
-      '/buildings': {
-        title: '건물 - KingshotData.kr',
-        render: async (el) => {
-          try { await window.I18N?.loadNamespace?.('buildings'); } catch(_) {}
-          el.innerHTML = [
-            '<div id="buildings-grid" class="grid"></div>',
-            '<div id="building-root"></div>'
-          ].join('');
-          const candidates = [ v('js/pages/buildings.js'), v('/js/pages/buildings.js') ];
-          let ok = false, lastErr;
-          for (const src of candidates) {
-            try { await loadScriptOnce(src); ok = true; break; }
-            catch (e) { lastErr = e; }
-          }
-          if (!ok) {
-            el.innerHTML = '<div class="placeholder"><h2>로딩 실패</h2><p class="muted">buildings.js 경로를 확인하세요.</p></div>';
-            if (lastErr) console.error(lastErr);
-            return;
-          }
-          if (typeof window.initBuildings !== 'function') {
-            el.innerHTML = '<div class="placeholder"><h2>초기화 실패</h2><p class="muted">window.initBuildings()가 없습니다.</p></div>';
-            return;
-          }
-          try { window.initBuildings(); } catch (e) { console.error(e); }
-          setTitle('title.buildings', '건물 - KingshotData.kr');
-          window.scrollTo({ top: 0 });
-        }
-      },
+     // --- Buildings ---
+'/buildings': {
+  title: '건물 - KingshotData.kr',
+  render: async function (el) {
+    var token = newRenderToken();
+    try {
+      if (window.I18N && window.I18N.loadNamespace) {
+        await window.I18N.loadNamespace('buildings');
+      }
+    } catch(e) {}
+    if (isStale(token)) return;
 
+    el.innerHTML = [
+      '<div id="buildings-grid" class="grid"></div>',
+      '<div id="building-root"></div>'
+    ].join('');
+
+    // ✅ 절대 경로를 먼저 두고, 상대 경로는 fallback
+    var candidates = [ v('/js/pages/buildings.js'), v('js/pages/buildings.js') ];
+    var ok = false, lastErr;
+    for (var i=0;i<candidates.length;i++) {
+      var src = candidates[i];
+      try { 
+        await _loadScriptOnce(src); 
+        ok = true; 
+        break; 
+      } catch (e) { 
+        lastErr = e; 
+      }
+    }
+    if (isStale(token)) return;
+    if (!ok) {
+      el.innerHTML =
+        '<div class="placeholder">' +
+          '<h2 data-i18n="common.loadFail">로딩 실패</h2>' +
+          '<p class="muted" data-i18n="buildings.loadFailHint">/js/pages/buildings.js 경로를 확인하세요.</p>' +
+        '</div>';
+      if (lastErr) console.error(lastErr);
+      return;
+    }
+
+    if (typeof window.initBuildings !== 'function') {
+      el.innerHTML =
+        '<div class="placeholder">' +
+          '<h2 data-i18n="common.initFail">초기화 실패</h2>' +
+          '<p class="muted" data-i18n="buildings.noInit">window.initBuildings()가 없습니다.</p>' +
+        '</div>';
+      return;
+    }
+
+    // 옛 해시 링크 → 클린 경로로 변환
+    el.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#/building/"]');
+      if (a) {
+        e.preventDefault();
+        var tail = a.getAttribute('href').replace(/^#\/building\/?/, ''); // 예: towncenter/30
+        return goto('/buildings/' + tail);
+      }
+      a = e.target.closest && e.target.closest('a[href^="#/buildings"]');
+      if (a) {
+        e.preventDefault();
+        return goto('/buildings');
+      }
+    });
+
+    try { window.initBuildings(); } catch (e) { console.error(e); }
+
+    setTitle('title.buildings', '건물 - KingshotData.kr');
+    window.scrollTo({ top: 0 });
+    focusMain(el);
+  }
+},
+
+
+      // --- Heroes (list) ---
       '/heroes': {
         title: '영웅 - KingshotData.kr',
-        render: async (el) => {
-          el.innerHTML = '<div class="loading">Loading…</div>';
-          const html = await loadHTML(['pages/heroes.html','/pages/heroes.html','heroes.html','/heroes.html']);
+        render: async function (el) {
+          var token = newRenderToken();
+          if (window.performance && performance.mark) performance.mark('route:heroes:start');
+
+          el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+          var html = await loadHTMLCached(['pages/heroes.html','/pages/heroes.html','heroes.html','/heroes.html']);
+          if (isStale(token)) return;
           if (!html) {
-            el.innerHTML = '<div class="placeholder"><h2>영웅</h2><p class="muted">heroes.html을 찾을 수 없습니다.</p></div>';
+            el.innerHTML = '<div class="placeholder"><h2 data-i18n="heroes.title">영웅</h2><p class="muted" data-i18n="heroes.missing">heroes.html을 찾을 수 없습니다.</p></div>';
             return;
           }
-          const m = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-          el.innerHTML = m ? m[1] : html;
+          el.innerHTML = htmlBodyOnly(html);
 
-          const jsCands = [ v('js/pages/heroes.js'), v('/js/pages/heroes.js') ];
-          let loadedAny = false;
-          for (const src of jsCands) {
-            try { await loadScriptOnce(src); loadedAny = true; break; } catch(_) {}
+          // 옛 링크 -> 클린 경로
+          el.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a[href^="#/hero/"]');
+            if (a) {
+              e.preventDefault();
+              var slug = a.getAttribute('href').replace(/^#\/hero\/?/, '');
+              return goto('/hero/' + slug);
+            }
+            a = e.target.closest && e.target.closest('a[href^="/heroes/"]');
+            if (a) {
+              e.preventDefault();
+              var slug2 = a.getAttribute('href').replace(/^\/heroes\/?/, '');
+              return goto('/hero/' + slug2);
+            }
+          });
+
+          var jsCands = [ v('js/pages/heroes.js'), v('/js/pages/heroes.js') ];
+          var loadedAny = false;
+          for (var i=0;i<jsCands.length;i++) {
+            var src = jsCands[i];
+            try { await _loadScriptOnce(src); loadedAny = true; break; } catch(e){}
           }
+          if (isStale(token)) return;
           if (!loadedAny) {
-            el.insertAdjacentHTML('beforeend','<div class="error">heroes.js 로드 실패</div>');
+            el.insertAdjacentHTML('beforeend','<div class="error" data-i18n="heroes.loadFail">heroes.js 로드 실패</div>');
             return;
           }
           if (typeof window.initHeroes === 'function') {
             try { window.initHeroes(); } catch (e) { console.error(e); }
           } else {
-            el.insertAdjacentHTML('beforeend','<div class="error">initHeroes()가 없습니다.</div>');
+            el.insertAdjacentHTML('beforeend','<div class="error" data-i18n="heroes.noInit">initHeroes()가 없습니다.</div>');
           }
           setTitle('title.heroes', '영웅 - KingshotData.kr');
           window.scrollTo({ top: 0 });
+          focusMain(el);
+
+          if (window.performance && performance.mark && performance.measure) {
+            performance.mark('route:heroes:end');
+            performance.measure('route:heroes', 'route:heroes:start', 'route:heroes:end');
+          }
         }
       },
 
+      // --- Hero detail ---
       '/hero': {
         title: '영웅 상세 - KingshotData.kr',
-        render: async (el, rest) => {
-          const slug = decodeURIComponent((rest || '').split('/').filter(Boolean)[0] || '');
-          el.innerHTML = `
-            <section class="container">
-              <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
-                <h1 class="page-title" id="hero-title"
-                    data-i18n-key="heroes.detail.title"
-                    data-i18n-fallback="영웅 상세"></h1>
-                <a class="btn btn-icon" href="/heroes"
-                   data-smart-back="#/heroes" aria-label="Back" title="Back">←</a>
-              </div>
-              <div id="hero-root" class="hero-detail"></div>
-            </section>
-            <style>
-              .hero-detail{ display:grid; gap:16px; grid-template-columns: 1fr; }
-              @media (min-width: 900px){
-                .hero-detail{ grid-template-columns: 320px 1fr; align-items:start; }
-              }
-              .hero-card{ background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.06); }
-              .hero-card img{ width:100%; aspect-ratio:3/4; object-fit:cover; display:block; background:#eee; }
-              .hero-card .meta{ padding:12px; font-size:14px; color:#333; }
-              .hero-section{ background:#fff; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.06); padding:14px; }
-              .hero-section h2{ margin:0 0 8px; font-size:16px; }
-              .kv{ display:grid; grid-template-columns: 110px 1fr; gap:6px 10px; font-size:14px; }
-              .kv dt{ color:#666; }
-              .pill{ display:inline-block; padding:2px 8px; border-radius:999px; background:#eef2ff; color:#273; font-size:12px; margin-right:6px; }
-              .muted{ color:#666; }
-              .hero-section .skill img{ display:block; margin-inline:auto; float:none; }
-              .hero-section .skills-row{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
-              .hero-section .skills-grid{ display:grid; place-items:center; gap:12px; }
-            </style>
-          `;
+        render: async function (el, rest) {
+          var token = newRenderToken();
+          var slug = decodeURIComponent((rest || '').split('/').filter(Boolean)[0] || '');
+          el.innerHTML =
+            '<section class="container">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">' +
+                '<h1 class="page-title" id="hero-title" data-i18n="heroes.detail.title">-</h1>' +
+                '<a class="btn btn-icon" href="/heroes" data-smart-back="/heroes" aria-label="Back" title="Back">←</a>' +
+              '</div>' +
+              '<div id="hero-root" class="hero-detail"></div>' +
+            '</section>' +
+            '<style>' +
+              '.hero-detail{ display:grid; gap:16px; grid-template-columns: 1fr; }' +
+              '@media (min-width: 900px){ .hero-detail{ grid-template-columns: 320px 1fr; align-items:start; } }' +
+              '.hero-card{ background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.06); }' +
+              '.hero-card img{ width:100%; aspect-ratio:3/4; object-fit:cover; display:block; background:#eee; }' +
+              '.hero-card .meta{ padding:12px; font-size:14px; color:#333; }' +
+              '.hero-section{ background:#fff; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.06); padding:14px; }' +
+              '.hero-section h2{ margin:0 0 8px; font-size:16px; }' +
+              '.kv{ display:grid; grid-template-columns: 110px 1fr; gap:6px 10px; font-size:14px; }' +
+              '.kv dt{ color:#666; }' +
+              '.pill{ display:inline-block; padding:2px 8px; border-radius:999px; background:#eef2ff; color:#273; font-size:12px; margin-right:6px; }' +
+              '.muted{ color:#666; }' +
+              '.hero-section .skill img{ display:block; margin-inline:auto; float:none; }' +
+              '.hero-section .skills-row{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }' +
+              '.hero-section .skills-grid{ display:grid; place-items:center; gap:12px; }' +
+            '</style>';
           apply(el);
 
-          const jsCands = [ v('js/pages/hero.js'), v('/js/pages/hero.js') ];
-          let ok=false;
-          for (const src of jsCands){
-            try { await loadScriptOnce(src); ok=true; break; } catch(_){}
+          var jsCands = [ v('js/pages/hero.js'), v('/js/pages/hero.js') ];
+          var ok = false;
+          for (var i=0;i<jsCands.length;i++){
+            var src = jsCands[i];
+            try { await _loadScriptOnce(src); ok = true; break; } catch(e){}
           }
+          if (isStale(token)) return;
           if (!ok){
-            el.insertAdjacentHTML('beforeend','<div class="error">hero.js 로드 실패</div>');
+            el.insertAdjacentHTML('beforeend','<div class="error" data-i18n="hero.loadFail">hero.js 로드 실패</div>');
             return;
           }
           if (typeof window.initHero === 'function'){
             try { await window.initHero(slug); } catch(e){ console.error(e); }
           } else {
-            el.insertAdjacentHTML('beforeend','<div class="error">initHero()가 없습니다。</div>');
+            el.insertAdjacentHTML('beforeend','<div class="error" data-i18n="hero.noInit">initHero()가 없습니다.</div>');
           }
+          if (isStale(token)) return;
+
           apply(el);
 
           if (!window.__heroI18NReapplyBound) {
-            document.addEventListener('i18n:changed', () => apply(el));
+            document.addEventListener('i18n:changed', function(){ apply(el); });
             window.__heroI18NReapplyBound = true;
           }
-          const setHeroTitle = () => setTitle('heroes.detail.pageTitle','영웅 상세 - KingshotData.kr');
+          var setHeroTitle = function(){ setTitle('heroes.detail.pageTitle','영웅 상세 - KingshotData.kr'); };
           setHeroTitle();
           if (!window.__heroTitleBound) {
             document.addEventListener('i18n:changed', setHeroTitle);
             window.__heroTitleBound = true;
           }
           window.scrollTo({ top: 0 });
+          focusMain(el);
         }
       },
 
+      // --- Guides (list + detail) ---
       '/guides': {
         title: '가이드 - KingshotData.kr',
-        render: async (el) => {
-          el.innerHTML = '<div class="loading">Loading…</div>';
-          if (window.I18N?.loadNamespace) {
-            try { await I18N.loadNamespace('guides'); } catch (_) {}
+        render: async function (el, rest) {
+          var token = newRenderToken();
+          var trail = (rest || '').split('/').filter(Boolean).join('/'); // detail slug
+          try { if (window.I18N && window.I18N.loadNamespace) { await window.I18N.loadNamespace('guides'); } } catch(e) {}
+
+          // 내부 공통: guides 의존성 로더
+          async function loadGuidesDeps() {
+            var cssCands = ['/css/guides.css', 'css/guides.css'];
+            for (var i=0;i<cssCands.length;i++){ try { await ensureCSS(cssCands[i]); break; } catch(e){} }
+            // js 후보 경로
+            var jsCands = ['js/guides.js','/js/guides.js','js/pages/guides.js','/js/pages/guides.js'];
+            for (var j=0;j<jsCands.length;j++){ try { await _loadScriptOnce(jsCands[j]); break; } catch(e){} }
           }
-          const html = await loadHTML(['pages/guides.html', '/pages/guides.html', '/pages/guide.html']);
-          const bodyOnly = html ? (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || html) : null;
-          el.innerHTML = bodyOnly || '<div class="placeholder"><h2>가이드</h2><p class="muted">guides.html을 찾을 수 없습니다.</p></div>';
 
-          await ensureCSS('/css/guides.css');
-          await ensureScript('/js/guides.js');
+          // detail 페이지: /guides/:slug
+          if (trail) {
+            el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+            var slug = decodeURIComponent(trail);
 
-          if (window.I18N?.applyTo) I18N.applyTo(el);
+            var html = await loadHTMLCached([
+              'pages/guides/' + slug + '.html',
+              '/pages/guides/' + slug + '.html',
+              'pages/guides/' + slug + '/index.html',
+              '/pages/guides/' + slug + '/index.html',
+              'pages/guide/' + slug + '.html',
+              '/pages/guide/' + slug + '.html'
+            ]);
+            if (isStale(token)) return;
+
+            if (!html) {
+              el.innerHTML =
+                '<div class="placeholder">' +
+                  '<div style="display:flex;justify-content:flex-end;margin-bottom:8px;">' +
+                    '<a class="btn btn-icon" href="/guides" data-smart-back="/guides" aria-label="Back" title="Back">←</a>' +
+                  '</div>' +
+                  '<h2 data-i18n="guides.notFound">가이드를 찾을 수 없습니다.</h2>' +
+                  '<p class="muted">/pages/guides/' + slug + '.html 경로를 확인하세요.</p>' +
+                '</div>';
+              setTitle('guides.title', '가이드 - KingshotData.kr');
+              return;
+            }
+
+            el.innerHTML =
+              '<section class="container">' +
+                '<div style="display:flex;justify-content:flex-end;margin-bottom:8px;">' +
+                  '<a class="btn btn-icon" href="/guides" data-smart-back="/guides" aria-label="Back" title="Back">←</a>' +
+                '</div>' +
+                htmlBodyOnly(html) +
+              '</section>';
+
+            await loadGuidesDeps();
+            if (isStale(token)) return;
+
+            if (window.I18N && window.I18N.applyTo) window.I18N.applyTo(el);
+            if (window.GUIDES_apply) await window.GUIDES_apply(el);
+            if (isStale(token)) return;
+
+            setTitle('guides.title', '가이드 - KingshotData.kr');
+            window.scrollTo({ top: 0 });
+            focusMain(el);
+
+            // 내부 링크 정규화
+            el.addEventListener('click', function (e) {
+              var a = e.target.closest && e.target.closest('a[href^="#/guide/"]');
+              if (a) {
+                e.preventDefault();
+                var slug2 = a.getAttribute('href').replace(/^#\/guide\/?/, '');
+                return goto('/guides/' + slug2);
+              }
+              a = e.target.closest && e.target.closest('a[href^="/guides/"]');
+              if (a) {
+                e.preventDefault();
+                var slug3 = a.getAttribute('href').replace(/^\/guides\/?/, '');
+                return goto('/guides/' + slug3);
+              }
+            });
+            return;
+          }
+
+          // 리스트 페이지
+          el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+          var listHTML = await loadHTMLCached(['pages/guides.html', '/pages/guides.html', '/pages/guide.html']);
+          if (isStale(token)) return;
+
+          el.innerHTML = listHTML ? htmlBodyOnly(listHTML)
+            : '<div class="placeholder"><h2 data-i18n="guides.title">가이드</h2><p class="muted" data-i18n="guides.missing">guides.html을 찾을 수 없습니다.</p></div>';
+
+          await loadGuidesDeps();
+          if (isStale(token)) return;
+
+          if (window.I18N && window.I18N.applyTo) window.I18N.applyTo(el);
           if (window.GUIDES_apply) await window.GUIDES_apply(el);
+          if (isStale(token)) return;
+
+          // 해시/절대 경로 링크 → SPA 경로로 변환
+          el.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a[href^="#/guide/"]');
+            if (a) {
+              e.preventDefault();
+              var slug = a.getAttribute('href').replace(/^#\/guide\/?/, '');
+              return goto('/guides/' + slug);
+            }
+            a = e.target.closest && e.target.closest('a[href^="/guides/"]');
+            if (a) {
+              e.preventDefault();
+              var slug2 = a.getAttribute('href').replace(/^\/guides\/?/, '');
+              return goto('/guides/' + slug2);
+            }
+          });
+
           setTitle('guides.title', '가이드 - KingshotData.kr');
           window.scrollTo({ top: 0 });
+          focusMain(el);
         }
       },
 
-     '/database': {
-  title: '데이터베이스 - KingshotData.kr',
-  render: async (el) => {
-    el.innerHTML = '<div class="loading">Loading…</div>';
+      // --- Database list ---
+      '/database': {
+        title: '데이터베이스 - KingshotData.kr',
+        render: async function (el) {
+          var token = newRenderToken();
+          el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
 
-    const html = await loadHTML([
-      'pages/database.html',
-      '/pages/database.html',
-      'database.html',
-      '/database.html'
-    ]);
+          var html = await loadHTMLCached([
+            'pages/database.html',
+            '/pages/database.html',
+            'database.html',
+            '/database.html'
+          ]);
+          if (isStale(token)) return;
 
-    if (!html) {
-      el.innerHTML = '<div class="placeholder"><h2>데이터베이스</h2><p class="muted">database.html을 찾을 수 없습니다.</p></div>';
-      return;
-    }
+          if (!html) {
+            el.innerHTML = '<div class="placeholder"><h2 data-i18n="database.title">데이터베이스</h2><p class="muted" data-i18n="database.missing">database.html을 찾을 수 없습니다.</p></div>';
+            return;
+          }
 
-    const m = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-    el.innerHTML = m ? m[1] : html;
+          el.innerHTML = htmlBodyOnly(html);
 
-    const jsCands = [ v('js/pages/database.js'), v('/js/pages/database.js') ];
-    let loadedAny = false;
-    for (const src of jsCands) {
-      try { await loadScriptOnce(src); loadedAny = true; break; } catch (_) {}
-    }
-    if (!loadedAny) {
-      el.insertAdjacentHTML('beforeend','<div class="error">database.js 로드 실패</div>');
-      return;
-    }
+          var jsCands = [ v('js/pages/database.js'), v('/js/pages/database.js') ];
+          var loadedAny = false;
+          for (var i=0;i<jsCands.length;i++) {
+            var src = jsCands[i];
+            try { await _loadScriptOnce(src); loadedAny = true; break; } catch (e) {}
+          }
+          if (isStale(token)) return;
+          if (!loadedAny) {
+            el.insertAdjacentHTML('beforeend','<div class="error" data-i18n="database.loadFail">database.js 로드 실패</div>');
+            return;
+          }
 
-    if (typeof window.initDatabase === 'function') {
-      try { await window.initDatabase(); } catch (e) { console.error(e); }
-    } else {
-      el.insertAdjacentHTML('beforeend','<div class="error">initDatabase()가 없습니다。</div>');
-    }
+          if (typeof window.initDatabase === 'function') {
+            try { await window.initDatabase(); } catch (e) { console.error(e); }
+          } else {
+            el.insertAdjacentHTML('beforeend','<div class="error" data-i18n="database.noInit">initDatabase()가 없습니다.</div>');
+          }
+          if (isStale(token)) return;
 
-    setTitle('title.database', '데이터베이스 - KingshotData.kr');
-    if (window.I18N?.applyTo) I18N.applyTo(el);
-    window.scrollTo({ top: 0 });
-  }
-},
+          setTitle('title.database', '데이터베이스 - KingshotData.kr');
+          if (window.I18N && window.I18N.applyTo) window.I18N.applyTo(el);
+          window.scrollTo({ top: 0 });
+          focusMain(el);
+        }
+      },
 
-'/db': {
-  title: 'KingshotData.kr',
-  render: async (el, rest) => {
-    const parts  = (rest || '').split('/').filter(Boolean);
-    const folderRaw = parts[0] ? decodeURIComponent(parts[0]) : '';
-    const file   = parts[1] ? decodeURIComponent(parts.slice(1).join('/')) : '';
-    if (!folderRaw) { location.hash = '#/database'; return; }
+      // --- Database detail proxy (/db/:folder/:file...) ---
+      '/db': {
+        title: 'KingshotData.kr',
+        render: async function (el, rest) {
+          var token = newRenderToken();
+          var parts  = (rest || '').split('/').filter(Boolean);
 
-    // ✅ 전용무기 상세는 widgets로 리맵해서 로드 (URL은 그대로 두고 내부 로딩만 변경)
-    const folder = (folderRaw === 'hero-exclusive-gear') ? 'widgets' : folderRaw;
+          // 상위경로 탈출만 차단하고 유니코드/공백 허용
+          function sanitizeSeg(s) {
+            return String(s)
+              .replace(/\\/g,'/')                     // 역슬래시 → 슬래시
+              .replace(/(^|\/)\.\.(?=\/|$)/g,'')      // 상위 경로 제거
+              .replace(/\/{2,}/g,'/')                 // 중복 슬래시 축소
+              .replace(/^\//,'')                      // 선행 슬래시 제거
+              .replace(/\0/g,'');                     // 널 바이트 제거
+          }
 
-    // 네임스페이스 로드 확실히 대기 (기존 로직 유지)
-    if (window.I18N?.init) {
-      try { await I18N.init({ namespaces: ['db'] }); } catch (e) { console.debug('[i18n] init skipped', e); }
-    } else {
-      try { await window.I18N?.loadNamespaces?.(['db']); } catch (e) { console.debug('[i18n] loadNamespaces skipped', e); }
-    }
+          var folderRaw = parts[0] ? decodeURIComponent(parts[0]) : '';
+          var fileRaw   = parts[1] ? decodeURIComponent(parts.slice(1).join('/')) : '';
+          if (!folderRaw) { goto('/database'); return; }
 
-    await renderDbDetail(el, folder, file);
-    removeLegacyDbBack(el);
+          // 전용무기 상세는 widgets로 리맵해서 로드 (URL은 그대로)
+          var folder = sanitizeSeg(folderRaw === 'hero-exclusive-gear' ? 'widgets' : folderRaw);
+          var file   = sanitizeSeg(fileRaw);
 
-    el.insertAdjacentHTML('afterbegin', `
-      <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-        <a class="btn btn-icon" href="/database"
-           data-smart-back="#/database" aria-label="Back" title="Back">←</a>
-      </div>
-    `);
+          // i18n namespace 준비
+          try {
+            if (window.I18N && typeof window.I18N.init === 'function') {
+              await window.I18N.init({ namespaces: ['db'] });
+            } else if (window.I18N && typeof window.I18N.loadNamespaces === 'function') {
+              await window.I18N.loadNamespaces(['db']);
+            }
+          } catch (e) { console.debug('[i18n] init/loadNamespaces skipped', e); }
+          if (isStale(token)) return;
 
-    el.querySelectorAll('h1[data-i18n="title.database"]').forEach(n => n.remove());
+          await renderDbDetail(el, folder, file);
+          if (isStale(token)) return;
 
-    if (window.I18N?.applyTo) I18N.applyTo(el);
-    setTitleFromPage(el);
-    window.scrollTo({ top: 0 });
-  }
-},
+          // 레거시 back UI 제거 + 스마트 백 버튼 삽입
+          (function removeLegacyDbBack(el) {
+            if (el.__legacyCleaned) return;
+            ['a.btn-back','[data-i18n-key="database.detail.back"]','a[href="/database"]']
+              .forEach(function (sel) {
+                var list = el.querySelectorAll(sel);
+                Array.prototype.forEach.call(list, function (a) {
+                  if (!a.hasAttribute('data-smart-back')) a.remove();
+                });
+              });
+            el.__legacyCleaned = true;
+          })(el);
 
+          el.insertAdjacentHTML('afterbegin',
+            '<div style="display:flex;justify-content:flex-end;margin-bottom:8px;">' +
+              '<a class="btn btn-icon" href="/database" data-smart-back="/database" aria-label="Back" title="Back">←</a>' +
+            '</div>'
+          );
 
+          var heads = el.querySelectorAll('h1[data-i18n="title.database"]');
+          Array.prototype.forEach.call(heads, function(n){ n.remove(); });
 
+          if (window.I18N && window.I18N.applyTo) window.I18N.applyTo(el);
+
+          // 페이지 타이틀을 동적으로 결정
+          (function setTitleFromPage(el) {
+            var metaEl = el.querySelector('meta[name="db-title"]');
+            var metaKey = (metaEl && metaEl.content) ? metaEl.content.trim() : null;
+            if (metaKey) { setTitle(metaKey, (window.I18N && window.I18N.t && window.I18N.t(metaKey)) || document.title); return; }
+            var h1 = el.querySelector('h1[data-i18n], h1[data-i18n-key]');
+            if (h1) {
+              var k = h1.getAttribute('data-i18n') || h1.getAttribute('data-i18n-key');
+              setTitle(k, (window.I18N && window.I18N.t && window.I18N.t(k)) || h1.textContent || 'KingshotData.kr');
+            }
+          })(el);
+
+          window.scrollTo({ top: 0 });
+          focusMain(el);
+        }
+      },
+
+      // --- Privacy ---
       '/privacy': {
         title: '개인정보처리방침 - KingshotData.kr',
-        render: async (el) => {
-          el.innerHTML = '<div class="loading">Loading…</div>';
-          const html = await loadHTML(['pages/privacy.html','/pages/privacy.html','privacy.html','/privacy.html']);
+        render: async function (el) {
+          var token = newRenderToken();
+          el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+          var html = await loadHTMLCached(['pages/privacy.html','/pages/privacy.html','privacy.html','/privacy.html']);
+          if (isStale(token)) return;
           el.innerHTML = html
-            ? (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || html)
-            : '<div class="placeholder"><h2>개인정보처리방침</h2><p class="muted">privacy.html을 찾을 수 없습니다.</p></div>';
+            ? htmlBodyOnly(html)
+            : '<div class="placeholder"><h2 data-i18n="privacy.title">개인정보처리방침</h2><p class="muted" data-i18n="privacy.missing">privacy.html을 찾을 수 없습니다.</p></div>';
           setTitle('title.privacy', '개인정보처리방침 - KingshotData.kr');
           window.scrollTo({ top: 0 });
+          focusMain(el);
         }
       },
 
+      // --- About ---
       '/about': {
         title: '소개 - KingshotData.kr',
-        render: async (el) => {
-          el.innerHTML = '<div class="loading">Loading…</div>';
-          const html = await loadHTML(['pages/about.html','/pages/about.html','about.html','/about.html']);
+        render: async function (el) {
+          var token = newRenderToken();
+          el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+          var html = await loadHTMLCached(['pages/about.html','/pages/about.html','about.html','/about.html']);
+          if (isStale(token)) return;
           el.innerHTML = html
-            ? (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || html)
-            : '<div class="placeholder"><h2>소개</h2><p class="muted">about.html을 찾을 수 없습니다.</p></div>';
+            ? htmlBodyOnly(html)
+            : '<div class="placeholder"><h2 data-i18n="about.title">소개</h2><p class="muted" data-i18n="about.missing">about.html을 찾을 수 없습니다.</p></div>';
           setTitle('title.about', '소개 - KingshotData.kr');
           window.scrollTo({ top: 0 });
+          focusMain(el);
         }
       }
     };
 
-     // ===== 계산기 라우트 지연 로딩 설정 =====
-    let calcLoadPromise = null;
+    // --- /guide 별칭(레거시 링크 호환) → /guides 로 위임
+    routes['/guide'] = {
+      title: '가이드 - KingshotData.kr',
+      render: function (el, rest) { return routes['/guides'].render(el, rest); }
+    };
 
-    async function ensureCalcRoutes() {
-      if (routes.__calcMerged) return;
+    // ===== 프리패치(hover/idle)로 체감속도 향상 =====
+    var PREFETCH_MAP = {
+      '/buildings':  { js: ['js/pages/buildings.js'] },
+      '/heroes':     { js: ['js/pages/heroes.js'], html: ['pages/heroes.html','/pages/heroes.html'] },
+      '/database':   { js: ['js/pages/database.js'], html: ['pages/database.html','/pages/database.html'] },
+      '/guides':     { js: ['js/guides.js','/js/guides.js'], css: ['/css/guides.css'], html: ['pages/guides.html','/pages/guides.html'] }
+    };
 
-      if (!calcLoadPromise) {
-        calcLoadPromise = (async () => {
-          try {
-  await ensureScript('/js/routes.calculators.js'); // v()가 내부에서 자동으로 ?v=__V 붙임
-} catch (e) {
-  console.error('[calc routes] load failed:', e);
-  return;
-}
-
-          // buildCalculatorRoutes가 정의될 때까지 대기 (최대 2초)
-          let waited = 0;
-          while (typeof window.buildCalculatorRoutes !== 'function' && waited < 2000) {
-            await new Promise(r => setTimeout(r, 50));
-            waited += 50;
-          }
-
-          if (typeof window.buildCalculatorRoutes !== 'function') {
-            console.error('buildCalculatorRoutes not defined after load');
-            return;
-          }
-
-          const more = window.buildCalculatorRoutes({
-            loadHTML, loadScriptOnce, iconImg,
-            apply, t, setTitle,
-            ensureI18NReady, TIER_KEY_MAP_KO
-          });
-          Object.assign(routes, more);
-          routes.__calcMerged = true;
-        })();
-      }
-      return calcLoadPromise;
+    function prefetchFor(href) {
+      try {
+        var path = new URL(href, location.href).pathname;
+        var cfg = PREFETCH_MAP[path];
+        if (!cfg) return;
+        if (cfg.css) cfg.css.forEach(function(h){ ensureCSS(h); });
+        if (cfg.js)  cfg.js.forEach(function(s){ ensureScript(s); });
+        if (cfg.html) cfg.html.forEach(async function(h){ try { await loadHTMLCached([h]); } catch(e){} });
+      } catch (e) {}
     }
 
-    function lazyCalcRoute(name, fallbackTitle){
-      return {
-        title: fallbackTitle || '계산기 - KingshotData.kr',
-        render: async (el, rest) => {
-          await ensureCalcRoutes();
-          const real = routes[name];
-          if (!real?.render) {
-            el.innerHTML = '<div class="placeholder"><h2>로딩 실패</h2><p class="muted">계산기 모듈을 불러오지 못했습니다.</p></div>';
-            return;
-          }
-          return real.render(el, rest);
-        }
-      };
-    }
+    // 카테고리 카드/메뉴 hover 시 프리패치
+    document.addEventListener('mouseover', function (e) {
+      var a = e.target.closest && e.target.closest('a.card--category, a[href="/buildings"], a[href="/heroes"], a[href="/database"], a[href="/guides"]');
+      if (!a) return;
+      prefetchFor(a.href);
+    });
 
-    // 프록시 라우트 등록
-    routes['/calculator']     = lazyCalcRoute('/calculator', '계산기 - KingshotData.kr');
-    routes['/calc-building']  = lazyCalcRoute('/calc-building', '건물계산기 - KingshotData.kr');
-    routes['/calc-gear']      = lazyCalcRoute('/calc-gear', '영주장비계산기 - KingshotData.kr');
-    routes['/calc-charm']     = lazyCalcRoute('/calc-charm', '영주보석계산기 - KingshotData.kr');
-    routes['/calc-training']  = lazyCalcRoute('/calc-training', '병력 훈련/승급 계산기 - KingshotData.kr');
-    routes['/calc-vip']       = lazyCalcRoute('/calc-vip', 'VIP 포인트 계산기 - KingshotData.kr');
+    
 
     return routes;
   };

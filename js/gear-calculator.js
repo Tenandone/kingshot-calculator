@@ -1,9 +1,3 @@
-/* js/gear-calculator.js (v20250830-calcGear-final+reapply-fixed)
- * 영주 장비 계산기 – JSON 로드 → UI 렌더 → 합산 계산
- * - calcGear i18n 적용
- * - 티어 i18n(code/tierKeyMap) 대응
- * - 언어 전환 재적용(window.reapplyGearCalculatorI18N) + 마지막 상태 복원/자동 재계산
- */
 (function () {
   'use strict';
 
@@ -31,24 +25,56 @@
   const stepKeys = (steps) => Object.keys(steps);
   const slug = (s) => String(s).replace(/\s+/g, '-');
 
-  // 단계 구간 합산
-  function sumRange(steps, keys, fromIdx, toIdx) {
-  if (fromIdx >= toIdx) {
-    return { satin: 0, thread: 0, sketch: 0, score: 0, invalid: true };
-  }
-  // 현재 다음 단계부터 목표 단계 "포함"해서 합산
-  let s = 0, t = 0, sk = 0, sc = 0;
-  for (let i = fromIdx + 1; i <= toIdx; i++) {
-    const k = keys[i];
-    const c = steps[k] || {};
-    s  += +c.satin  || 0;
-    t  += +c.thread || 0;
-    sk += +c.sketch || 0;
-    sc += +c.score  || 0;
-  }
-  return { satin: s, thread: t, sketch: sk, score: sc, invalid: false };
-}
+  // ====== (중요) KO 단계라벨 → i18n 키 매핑 기본 제공 ======
+  // 원본 JSON이 한국어 키를 쓰는 경우를 커버하기 위한 기본 매핑.
+  // 외부(opt.tierKeyMap)로 들어오면 아래 기본값과 merge해서 사용함.
+  function buildTierKeyMapKO() {
+    const map = {};
+    function add(base, code, stars) {
+      map[base] = 'calcGear.tiers.' + code;
+      for (let i = 1; i <= stars; i++) {
+        map[`${base} (★${i})`] = `calcGear.tiers.${code}_${i}`;
+      }
+    }
+    add('고급', 'basic', 1);
 
+    add('레어', 'rare', 3);
+
+    add('에픽', 'epic', 3);
+    add('에픽 T1', 'epicT1', 3);
+
+    add('레전드', 'legendary', 3);
+    add('레전드 T1', 'legendaryT1', 3);
+    add('레전드 T2', 'legendaryT2', 3);
+    add('레전드 T3', 'legendaryT3', 3);
+
+    add('신화', 'mythic', 3);
+    add('신화 T1', 'mythicT1', 3);
+    add('신화 T2', 'mythicT2', 3);
+    add('신화 T3', 'mythicT3', 3);
+    add('신화 T4', 'mythicT4', 3);
+
+    return map;
+  }
+  // 전역에서도 재사용 가능하도록 노출(부모 라우터가 전달해서 쓰고 싶다면 활용)
+  window.TIER_KEY_MAP_KO = window.TIER_KEY_MAP_KO || buildTierKeyMapKO();
+
+  // 단계 구간 합산 (현재 다음 단계부터 목표 단계 "포함"해서 합산)
+  function sumRange(steps, keys, fromIdx, toIdx) {
+    if (fromIdx >= toIdx) {
+      return { satin: 0, thread: 0, sketch: 0, score: 0, invalid: true };
+    }
+    let s = 0, t = 0, sk = 0, sc = 0;
+    for (let i = fromIdx + 1; i <= toIdx; i++) {
+      const k = keys[i];
+      const c = steps[k] || {};
+      s  += +c.satin  || 0;
+      t  += +c.thread || 0;
+      sk += +c.sketch || 0;
+      sc += +c.score  || 0;
+    }
+    return { satin: s, thread: t, sketch: sk, score: sc, invalid: false };
+  }
 
   // 내부 상태(재적용/복원용)
   const STATE = {
@@ -74,8 +100,12 @@
       ],
       stepsMap = null,
       slotClasses: slotClassesInput,
-      tierKeyMap = {} // { '고급': 'calcGear.tiers.basic', ... }
+      // 외부에서 tierKeyMap을 주면 기본(KO) 매핑과 병합하여 사용
+      tierKeyMap: tierKeyMapExternal
     } = opt || {};
+
+    // 외부 i18n-코드 매핑과 KO기본 매핑 merge
+    const tierMap = Object.assign({}, window.TIER_KEY_MAP_KO || buildTierKeyMapKO(), tierKeyMapExternal || {});
 
     // 병종 라벨 (i18n)
     const CLASS = {
@@ -231,10 +261,12 @@
     function getTierLabelByIndex(keys, idx) {
       const k = keys[idx];
       const node = gear.steps[k];
+      // (1) 데이터에 code/tierCode가 있으면 최우선 사용
       const code = node && (node.code || node.tierCode);
       if (code) return T('calcGear.tiers.' + code);
+      // (2) KO 원본 키 → i18n 키 매핑 사용
       const rawLabel = k;
-      const i18nKey = tierKeyMap[rawLabel];
+      const i18nKey = tierMap[rawLabel];
       return i18nKey ? T(i18nKey) : rawLabel;
     }
 
@@ -253,6 +285,7 @@
         fromSel.appendChild(h('option', { value: String(idx), text: label }));
         toSel.appendChild(h('option',   { value: String(idx), text: label }));
       });
+      // 기본값: 현재 = 첫 단계, 목표 = 마지막 단계
       fromSel.value = '0';
       toSel.value   = String(keys.length - 1);
     }
@@ -342,7 +375,7 @@
     // ===== 재적용 핸들 저장 =====
     STATE.root = root;
     STATE.gear = gear;
-    STATE.opts = { slots, usingDefaultSlots, BASE_SLOT_KEYS, slotSpanRefs, slotClasses, tierKeyMap };
+    STATE.opts = { slots, usingDefaultSlots, BASE_SLOT_KEYS, slotSpanRefs, slotClasses, tierKeyMap: tierMap };
     STATE.els  = {
       fromSel, toSel, runBtn, toggleDetailBtn, detailWrap,
       kpiLabs: {
@@ -363,6 +396,14 @@
 
     // 외부에서 재초기화 접근 가능
     window.__gearCalcReset = resetOutputs;
+
+    // 언어 변경 시 자동 재번역(1회 바인딩)
+    if (!window.__gear_i18n_bound__) {
+      document.addEventListener('i18n:changed', function () {
+        try { window.reapplyGearCalculatorI18N(); } catch (_) {}
+      }, false);
+      window.__gear_i18n_bound__ = true;
+    }
   }
 
   // ===== 언어 전환 재적용 =====

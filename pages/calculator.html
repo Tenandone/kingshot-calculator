@@ -11,9 +11,6 @@
     }
   </script>
 
-  <!-- SEO 색인 허용: noindex 제거 -->
-  <!-- <meta name="robots" content="noindex,nofollow" /> 제거 -->
-
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-i18n="calcHub.meta.title">계산기 | KingshotData KR</title>
   <meta name="description" content="킹샷 계산기 허브. 건물, 영주장비, 영주보석, 병력훈련 계산기.">
@@ -26,23 +23,21 @@
     "calcHub.cards.building.title": "건물계산기",
     "calcHub.cards.gear.title": "영주장비계산기",
     "calcHub.cards.charm.title": "영주보석계산기",
-    "calcHub.cards.training.title": "병력훈련계산기",
-    "title.calcVip": "VIP 포인트 계산기",
-    "alt.calcVip": "VIP 포인트 계산기"
+    "calcHub.cards.training.title": "병력훈련계산기"
   };
   </script>
 
   <!-- ② 초경량 i18n 로더: 필요 ns만 병렬 + 1차 즉시적용 + 스코프 제한 -->
   <script>
   (function(){
-    const I18N_VERSION = '2025-09-12';                  // 배포시에만 변경
-    const NS = ['common','calc'];                        // 계산기에 필요한 것만
+    const I18N_VERSION = '2025-09-12';
+    const NS = ['common','calc'];
     const qs = new URLSearchParams(location.search);
-    const LOCALE = (qs.get('lang') || localStorage.getItem('lang') || (navigator.language||'ko')).slice(0,2).replace('_','-') || 'ko';
+    const LOCALE = (qs.get('lang') || localStorage.getItem('lang') || (navigator.language||'ko'))
+                    .slice(0,2).replace('_','-') || 'ko';
     const LS_KEY = `i18n:${LOCALE}:dict`;
     const LS_VER = `i18n:${LOCALE}:ver`;
 
-    // attr 맵 파서(, ; 구분)
     function parseAttrMap(str){
       return (str||'').split(/[,;]+/).map(s=>s.trim()).filter(Boolean).map(pair=>{
         const i = pair.indexOf(':'); if (i<0) return null;
@@ -53,7 +48,8 @@
     function applyI18n(d, root=document){
       if (!d) return;
       root.querySelectorAll('[data-i18n]').forEach(el=>{
-        const k = el.getAttribute('data-i18n'); if (d[k] != null) el.textContent = d[k];
+        const k = el.getAttribute('data-i18n');
+        if (d[k] != null) el.textContent = d[k];
       });
       root.querySelectorAll('[data-i18n-attr]').forEach(el=>{
         const maps = parseAttrMap(el.getAttribute('data-i18n-attr'));
@@ -80,7 +76,7 @@
 
     function urlOf(ns){ return `/i18n/${LOCALE}/${ns}.json?v=${I18N_VERSION}`; }
 
-    // 0) 인라인/캐시 즉시 적용 (DOM 준비 직후 한 번에)
+    // 0) 인라인/캐시 즉시 적용
     let dict = window.__i18n ? {...window.__i18n} : {};
     try {
       if (localStorage.getItem(LS_VER) === I18N_VERSION) {
@@ -92,7 +88,7 @@
     // DOM 준비되면 1차 적용
     ready(()=> applyI18n(dict, document));
 
-    // 1) 우선 ns(common) 먼저 → 적용
+    // 1) common 먼저
     const primary = 'common';
     fetchJSON(urlOf(primary))
       .then(json=>{
@@ -101,14 +97,16 @@
         localStorage.setItem(LS_VER, I18N_VERSION);
         ready(()=> applyI18n(dict, document));
       })
-      .catch(()=>{/* optional 아님: 로깅만 생략하고 진행 */});
+      .catch(()=>{});
 
-    // 2) 나머지(ns: calc) 병렬 → 도착 시 한 번 더 국소 적용
+    // 2) calc 병렬
     const rest = NS.filter(ns=> ns!==primary);
     Promise.allSettled(rest.map(ns=> fetchJSON(urlOf(ns))))
       .then(results=>{
         let changed=false;
-        results.forEach(r=>{ if (r.status==='fulfilled'){ Object.assign(dict, r.value); changed=true; } });
+        results.forEach(r=>{
+          if (r.status==='fulfilled'){ Object.assign(dict, r.value); changed=true; }
+        });
         if (changed){
           localStorage.setItem(LS_KEY, JSON.stringify(dict));
           localStorage.setItem(LS_VER, I18N_VERSION);
@@ -191,24 +189,11 @@
             <h3 class="card-title" data-i18n="calcHub.cards.training.title">병력훈련계산기</h3>
           </div>
         </a>
-
-        <!-- VIP 포인트 계산기 (언어 파라미터 유지) -->
-        <a class="card" href="#calc-vip" data-keep-lang>
-          <div class="thumb">
-            <img src="/img/icons/vip.webp"
-                 alt="VIP 포인트 계산기"
-                 loading="lazy" decoding="async"
-                 data-i18n-attr="alt:alt.calcVip">
-          </div>
-          <div class="card-body">
-            <h3 class="card-title" data-i18n="title.calcVip">VIP 포인트 계산기</h3>
-          </div>
-        </a>
       </div>
     </section>
   </main>
 
-  <!-- ?lang 유지 -->
+  <!-- (참고) ?lang 유지 스크립트는 VIP 제거로 사용처 없음 → 필요 시 삭제 가능 -->
   <script>
     (function(){
       const q = location.search;

@@ -17,10 +17,15 @@
     return fallback ?? String(keyOrText);
   };
 
+  // ✅ lang을 ko로 강제하지 말고, 현재 설정을 사용
   async function ensureHeroesI18N() {
     if (!window.I18N) throw new Error('I18N not found');
+    const curLang =
+      (document.documentElement && document.documentElement.getAttribute('lang')) ||
+      I18N.current ||
+      'en';
     if (!I18N.current && typeof I18N.init === 'function') {
-      await I18N.init({ lang: 'ko' });
+      await I18N.init({ lang: curLang });
     }
     if (typeof I18N.loadNamespace === 'function') {
       await I18N.loadNamespace('common');
@@ -169,6 +174,9 @@
 
   // ===== 엔트리 =====
   globalThis.initHero = async function(slug){
+    // 중복 실행 방지 (히스토리 라우터 + 폴백 가드)
+    window.__HERO_BOOTED__ = true;
+
     const root = byId('hero-root');
     if (!root) return;
 
@@ -216,9 +224,16 @@
     }
   });
 
-  // 해시 진입시 자동 실행(라우터 없이 직접 접근한 경우)
-  if (location.hash.startsWith('#/hero/')){
-    const slug = location.hash.split('/')[2]||'';
-    if (slug) setTimeout(()=>globalThis.initHero(slug),0);
-  }
+  // 🧰 폴백(선택): 히스토리 모드에서 라우터가 initHero를 못 불렀을 때만 가동
+  // (중복 실행 방지용 가드 포함)
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.__HERO_BOOTED__) return;
+    const m = location.pathname.match(/^\/hero\/([^/?#]+)$/);
+    if (m) {
+      const slug = decodeURIComponent(m[1]);
+      if (slug) globalThis.initHero(slug);
+    }
+  });
+
+  // (레거시 해시 진입은 이제 불필요하므로 제거)
 })();

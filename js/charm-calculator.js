@@ -1,6 +1,3 @@
-/* js/charm-calculator.js (v20250902-i18n-full)
- * 영주 보석 계산기: JSON 로드 → UI 렌더 → 합산 (i18n 대응 + 언어 전환 갱신)
- */
 (function(){
   'use strict';
 

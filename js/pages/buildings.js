@@ -1,4 +1,4 @@
-// /js/pages/buildings.js (calculator-free, i18n-ready, with req-building auto-translate)
+// /js/pages/buildings.js — history-mode ready (calculator-free, i18n-ready, req-building auto-translate)
 (function () {
   'use strict';
 
@@ -38,6 +38,7 @@
     document.addEventListener('DOMContentLoaded', () => setTimeout(() => patchTableHeaders(), 0));
     document.addEventListener('i18n:changed', () => setTimeout(() => patchTableHeaders(), 0));
     window.addEventListener('hashchange', () => setTimeout(() => patchTableHeaders(), 0));
+    window.addEventListener('popstate',  () => setTimeout(() => patchTableHeaders(), 0));
     window.__patchKsHeaders = patchTableHeaders;
   })();
 
@@ -131,14 +132,13 @@
   };
 
   function resolveSlugVariant(rawSlug, rawVariant){
-  const key = norm(rawSlug);
-  const hit = SLUG_ALIAS[key] || null;
-  return {
-    slug:    norm(hit && hit.slug ? hit.slug : key),
-    variant: norm(hit && hit.variant ? hit.variant : (rawVariant || ''))
-  };
-}
-
+    const key = norm(rawSlug);
+    const hit = SLUG_ALIAS[key] || null;
+    return {
+      slug:    norm(hit && hit.slug ? hit.slug : key),
+      variant: norm(hit && hit.variant ? hit.variant : (rawVariant || ''))
+    };
+  }
 
   /* =============================
    * 요구 건물 자동 번역 유틸
@@ -171,10 +171,8 @@
       .split(',')
       .map(s => s.trim())
       .map(part => {
-        // [건물명] [TG?] [Lv.X?]
         const m = part.match(/^([가-힣\s·'의]+?)\s*(TG)?\s*(Lv\.\s*\d+)?$/);
         if (!m) {
-          // 비정형: 포함된 한글 건물명 전수 치환
           let fb = part;
           for (const koName of Object.keys(BUILDING_I18N)) {
             const local = BUILDING_I18N[koName][lang] || koName;
@@ -185,8 +183,8 @@
         const [, nameKo, tg, lv] = m;
         const local = (BUILDING_I18N[nameKo] && BUILDING_I18N[nameKo][lang]) || nameKo;
         const tgOut = tg ? ` ${ui.TG}` : '';
-        const lvOut = lv ? ` ${lv.replace("Lv.", ui.Lv)}` : '';
-        return `${local}${tgOut}${lvOut}`.trim();
+const lvOut = lv ? ` ${lv.replace("Lv.", ui.Lv)}` : '';
+return `${local}${tgOut}${lvOut}`.trim();
       })
       .join(ui.comma);
   }
@@ -199,7 +197,7 @@
       try {
         const r = await fetch(u, { cache: 'no-store' });
         if (r.ok) return await r.json();
-      } catch (_) { /* next */ }
+      } catch (_) {}
     }
     throw new Error('buildings.json 경로를 찾을 수 없습니다.');
   }
@@ -218,7 +216,7 @@
   function showListMode(){ const g=$grid(), r=$root(); if(g) g.style.display='grid'; if(r){ r.style.display='none'; r.innerHTML=''; } }
   function showDetailMode(){ const g=$grid(), r=$root(); if(g) g.style.display='none'; if(r) r.style.display='block'; }
 
-  // ---- header/column finder (다국어 키워드 지원) ----
+  // ---- header/column finder ----
   const LEVEL_KEYS = ['레벨','lv','level','等级','等級'];
   const TIME_I18N_KEYS = [
     'buildings.col.buildtime',
@@ -347,7 +345,7 @@
 
     // === 요구 건물 열 자동 번역 ===
     let idxReq = findHeader(header, [
-      'buildings.col.reqBuilding', 'buildings.col.reqbuilding', // alias 지원
+      'buildings.col.reqBuilding', 'buildings.col.reqbuilding',
       '요구 건물','required buildings','必要建物','所需建筑','所需建築'
     ]);
     if (idxReq >= 0) {
@@ -361,7 +359,7 @@
 
     // 자원 약어 포맷 열 찾기
     const RESOURCE_NAMES = ['빵','bread','나무','wood','석재','stone','철','iron', t('buildings.col.gold','순금').toLowerCase(), 'gold'];
-    const resourceKeyRe = /^buildings\.col\.(bread|wood|stone|iron|gold|truegold)$/i; // truegold alias 허용
+    const resourceKeyRe = /^buildings\.col\.(bread|wood|stone|iron|gold|truegold)$/i;
 
     const resourceIdxs = header.reduce((acc, h, i) => {
       const str = String(h);
@@ -426,19 +424,8 @@
 
   // 원하는 고정 순서
   const ORDER = [
-    'towncenter',
-    'embassy',
-    'barracks',
-    'stable',
-    'range',
-    'academy',
-    'command',
-    'infirmary',
-    'truegold-crucible',
-    'gold-smelter',
-    'guard-station',
-    'kitchen',
-    'storehouse'
+    'towncenter','embassy','barracks','stable','range','academy','command','infirmary',
+    'truegold-crucible','gold-smelter','guard-station','kitchen','storehouse'
   ];
   function orderScore(key){
     const i = ORDER.indexOf(key);
@@ -460,7 +447,7 @@
         return {
           key: `${baseSlug}:${vKeyRaw}`,
           html: makeCardHTML({
-            href: `#building/${baseSlug}/${vKeyRaw}`,
+            href: `/buildings/${baseSlug}/${vKeyRaw}`, // ← 히스토리 모드 링크
             title: cardTitle(sKey, vKeyRaw, v.title || vKeyRaw),
             img: v.image,
             subtitle,
@@ -475,7 +462,7 @@
     return [{
       key: baseSlug,
       html: makeCardHTML({
-        href: `#building/${baseSlug}`,
+        href: `/buildings/${baseSlug}`, // ← 히스토리 모드 링크
         title: cardTitle(sKey, '', b.title || b.name || baseSlug),
         img: b.image,
         subtitle: cardSubtitle(sKey, b.subtitle || ''),
@@ -526,7 +513,7 @@
       const key = esc(keyRaw);
       const vKey = keyVar(keyRaw);
       const isOn = (norm(currentKey)===norm(keyRaw));
-      const href = `#building/${slug}/${key}`;
+      const href = `/buildings/${slug}/${keyRaw}`; // ← 히스토리 모드 링크
       const kPath = `buildings.card.${sKey}.${vKey}.title`;
       const label = t(kPath, v.title || keyRaw);
       return `<a href="${href}" class="tab${isOn?' on':''}" data-variant="${key}" style="display:inline-block;padding:6px 10px;border:1px solid #ddd;border-radius:16px;margin-right:6px;text-decoration:none;color:${isOn?'#fff':'#333'};background:${isOn?'#333':'#fff'}">
@@ -537,9 +524,7 @@
   }
 
   // 언락 제목 커스텀 맵 (JSON 키는 그대로 unlocks 사용)
-  const UNLOCK_TITLE_BY_SLUG = {
-    'kitchen': 'buildings.kitchenSchedule'
-  };
+  const UNLOCK_TITLE_BY_SLUG = { 'kitchen': 'buildings.kitchenSchedule' };
 
   // ---------- 상세 ----------
   async function renderBuildingDetail(slugRaw, variantRaw){
@@ -562,7 +547,7 @@
             <h2 style="margin:0 0 6px" data-i18n="buildings.notFound.title">${esc(t('buildings.notFound.title','Not Found'))}</h2>
             <p data-i18n="buildings.notFound.desc">${esc(t('buildings.notFound.desc','요청한 건물을 찾을 수 없습니다.'))}</p>
             <p style="margin-top:10px">
-              <a href="#buildings" data-i18n="buildings.backToList">← ${esc(t('buildings.backToList','건물 목록으로'))}</a>
+              <a href="/buildings" data-i18n="buildings.backToList">← ${esc(t('buildings.backToList','건물 목록으로'))}</a>
             </p>
           </div>`;
         document.title = t('title.notFound', 'Not Found - KingshotData.KR');
@@ -580,9 +565,7 @@
       const sKey = keySlug(item.slug);
       const vKey = currentVar ? keyVar(currentVar.key) : '';
       const titleKey = vKey ? `buildings.card.${sKey}.${vKey}.title` : `buildings.card.${sKey}.title`;
-      const titleFallback = currentVar
-        ? (currentVar.title || currentVar.key)
-        : (item.title || item.name || item.slug);
+      const titleFallback = currentVar ? (currentVar.title || currentVar.key) : (item.title || item.name || item.slug);
       const titleText = t(titleKey, titleFallback);
 
       const img = imgUrl((currentVar && currentVar.image) || item.image || 'img/placeholder.webp');
@@ -621,14 +604,13 @@
 
       // 상세 HTML
       r.innerHTML = `
-  <div style="margin-bottom:16px; text-align:right">
-    <a href="#buildings"
-       style="display:inline-block;padding:8px 12px;border:1px solid #ccc;
-              border-radius:6px;text-decoration:none;background:#fff;color:#333"
-       aria-label="${esc(t('buildings.backToList','건물 목록으로'))}">
-      ←
-    </a>
-  </div>
+        <div style="margin-bottom:16px; text-align:right">
+          <a href="/buildings"
+             style="display:inline-block;padding:8px 12px;border:1px solid #ccc;border-radius:6px;text-decoration:none;background:#fff;color:#333"
+             aria-label="${esc(t('buildings.backToList','건물 목록으로'))}">
+            ←
+          </a>
+        </div>
 
         ${tabs}
 
@@ -668,10 +650,24 @@
   }
 
   // ---------- routing ----------
+  function parseRoute() {
+    // History API 경로 우선
+    const m = location.pathname.match(/^\/buildings(?:\/([^\/?#]+))?(?:\/([^\/?#]+))?$/);
+    if (m) {
+      const slug    = m[1] ? decodeURIComponent(m[1]) : '';
+      const variant = m[2] ? decodeURIComponent(m[2]) : '';
+      if (slug) return ['building', slug, variant];
+      return ['buildings', '', ''];
+    }
+    // 레거시 해시도 지원
+    const hash = (location.hash || '#buildings').slice(1);
+    const [page='', s='', v=''] = hash.split('/');
+    return [page, s, v];
+  }
+
   async function handleRoute(){
     await ensureBuildingsNS();
-    const hash = (location.hash || '#buildings').slice(1);
-    const [page, slug, variant] = hash.split('/');
+    const [page, slug, variant] = parseRoute();
     if (page === 'building' && slug){ renderBuildingDetail(slug, variant); return; }
     renderBuildingsList();
   }
@@ -679,6 +675,7 @@
   // 인덱스(SPA)에서 한 번만 바인딩
   if (!window.__buildingsBound){
     window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('popstate',  handleRoute); // 히스토리 뒤/앞으로 가기
     window.__buildingsBound = true;
   }
   window.initBuildings = function(){ handleRoute(); };
@@ -686,33 +683,29 @@
   // 단독 페이지로 열려도 동작
   window.addEventListener('DOMContentLoaded', handleRoute);
 
-  // 언어 변경 시: 본문 재적용 + 상세는 재렌더(요구건물 재번역 반영)
+  // 언어 변경 시: 본문 재적용 + 현재 화면 재렌더
   document.addEventListener('i18n:changed', async () => {
     await ensureBuildingsNS();
+    const [page, slug, variant] = parseRoute();
     const gridEl = document.getElementById('buildings-grid') || document;
     const rootEl = document.getElementById('building-root') || document;
     applyI18N(gridEl);
     applyI18N(rootEl);
-
-    if (location.hash.startsWith('#building/')) {
-      const [, slug, variant] = (location.hash || '').slice(1).split('/');
-      if (slug) {
-        await renderBuildingDetail(slug, variant); // ← 요구건물 열 재번역 포함
-        return;
-      }
+    if (page === 'building' && slug) {
+      await renderBuildingDetail(slug, variant);
     } else {
       document.title = t('title.buildingsList', '건물 목록 - KingshotData.KR');
     }
   });
 
-  // 탭 즉시 반응
+  // 탭 즉시 반응 (히스토리 모드 링크)
   document.addEventListener('click', (e) => {
-    const tab = e.target.closest('.variant-tabs a[href^="#building/"]');
-    if (tab){
-      e.preventDefault();
-      location.hash = tab.getAttribute('href');
-      handleRoute();
-    }
+    const a = e.target.closest('.variant-tabs a[href^="/buildings/"]');
+    if (!a) return;
+    e.preventDefault();
+    const href = a.getAttribute('href');
+    if (window.navigate) window.navigate(href);
+    else { history.pushState(null, '', href); handleRoute(); }
   });
 
 })();

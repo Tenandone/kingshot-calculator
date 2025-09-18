@@ -1,19 +1,3 @@
-// /js/building-calculator.js — 빌딩 계산기 전용 UI 바인딩 (Core 분리판)
-// - 이 파일은 "calculator.js (core)"의 계산 로직 위에 UI(i18n 라벨/옵션/이벤트)를 입힘
-// - SPA 재진입/로드 순서(레이스) 고려해 멱등 동작
-//
-// 포함 순서(권장):
-//   <script src="/js/calculator.js?v=now" defer></script>          // core
-//   <script src="/js/building-calculator.js?v=now" defer></script> // UI
-//
-// 사용 방법:
-// - SPA 라우팅 후 계산기 DOM 렌더된 다음, 아래 중 하나로 부트
-//   1) app.js: window.KSD?.buildingUI?.boot();     // 권장(렌더 직후 1회 호출)
-//   2) 자동 부트: DOMContentLoaded 시 컨테이너 있으면 자동 실행
-//
-// 언어 전환 시:
-//   window.KSD?.buildingUI?.reapplyI18N();
-
 (function () {
   'use strict';
 

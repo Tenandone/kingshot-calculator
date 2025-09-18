@@ -1,8 +1,3 @@
-// calculator.js — pages/calculator.html 최적화본 + i18n 대응 (FINAL)
-//
-// 보강: i18n.t()로 동적 텍스트 전부 치환 (Prerequisites/요약/테이블 헤더/리소스명)
-// - UI 라벨/버튼/placeholder 재적용 함수 포함(window.reapplyCalculatorI18N)
-
 (function () {
   'use strict';
 

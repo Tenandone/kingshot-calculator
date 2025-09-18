@@ -1,373 +1,745 @@
-// js/app.js — SPA Router for KingshotData.kr
+// /public/js/app.js — SPA Router (History API) for KingshotData.kr
+// v2025-09-17+opt (bundle-aware: routes.js / routes.calculators.js)
+// ES5-compatible (no arrow functions / optional chaining)
+//
+// 변경 요약
+// - 진입 경로가 /calc-* 또는 /calculator 이면 routes.calculators.js 로드 → window.buildCalculatorRoutes()
+// - 그 외 경로는 routes.js 로드 → window.buildRoutes()
+// - 최초 진입: selectAndBuildRoutesFor → startRouter → dispatch 순서
+// - 내비게이션 중 일반 ↔ 계산기 경계 진입 시 번들 자동 핫스왑
+// - calculators 라우트일 때만 calculator.css 로드 (아닐 때 제거)
+// - 외부/특수 링크는 가로채지 않음
+// - 라우트 프록시 테이블(proxyRoutes) 도입: 실 라우트 준비 전에도 /calc-*·/calculator 접속 안정화
+// - 라우트 렌더 이후 document.body 전체 i18n 강제 재적용 (글로벌 UI 누락 방지)
+// - popstate 보정: 마지막 계산기 경로 복구(lastCalcPath)
+
 (function () {
   'use strict';
 
-  const $ = (sel) => document.querySelector(sel);
+  // ===== small DOM utils =====
+  function $(sel) { return document.querySelector(sel); }
 
-  // ===== Asset version (캐시 무효화) =====
-  const ASSET_VER = window.__V || 'now';   // index.html에서 <script>window.__V=…</script> 세팅됨
-  function v(url){
+  // ===== Asset version (캐시 무효화) — URL API로 안전 처리 =====
+  var ASSET_VER = window.__V || 'now';
+  function v(url) {
     if (!url) return url;
     if (/^(data:|blob:|#)/i.test(url)) return url;
-    return url + (url.includes('?') ? '&' : '?') + 'v=' + ASSET_VER;
+    try {
+      var u = new URL(url, location.origin);
+      if (u.searchParams && typeof u.searchParams.set === 'function') {
+        u.searchParams.set('v', ASSET_VER);
+        return u.pathname + u.search + u.hash;
+      }
+      // URL은 있으나 searchParams 미지원인 드문 환경 대비
+      return u.pathname + (u.search ? u.search + '&v=' + ASSET_VER : '?v=' + ASSET_VER) + u.hash;
+    } catch (_e) {
+      return url + (url.indexOf('?') >= 0 ? '&' : '?') + 'v=' + ASSET_VER;
+    }
   }
+  if (!window.v) window.v = v;
 
-  // ✅ CSS 경로 (버전 붙일 땐 v() 사용)
-  const CALC_CSS_HREF = '/css/calculator.css';
-  const COMPONENTS_CSS_HREF = '/css/components.css';
+  // ===== CSS 경로 =====
+  var CALC_CSS_HREF       = '/css/calculator.css';
+  var COMPONENTS_CSS_HREF = '/css/components.css';
 
-  // ---- header utils ----
-  const yearEl = $('#y');
+  // ===== header utils =====
+  var yearEl = $('#y');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  const nav = $('#primaryNav');
-  const toggle = $('#menuToggle');
+  var nav    = $('#primaryNav');
+  var toggle = $('#menuToggle');
   if (nav && toggle) {
-    toggle.addEventListener('click', () => {
-      const open = nav.classList.toggle('open');
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   }
 
-  // ---- dynamic <script> loader ----
-  const loadedScripts = new Map();
-  async function loadScriptOnce(src) {
-    if (!src) return;
-    if (loadedScripts.has(src)) return loadedScripts.get(src);
+  // ===== dynamic <script> loader (in-flight 병합, async 명시) =====
+  var inFlightScripts = new Map(); // key: normalized path, val: Promise
 
-    const p = (async () => {
-      let r;
-      try { r = await fetch(src, { cache: 'no-store' }); }
-      catch (e) { throw new Error(`Fetch failed @ ${src}: ${e.message}`); }
-      if (!r.ok) throw new Error(`HTTP ${r.status} @ ${src}`);
-
-      const ct = (r.headers.get('content-type') || '').toLowerCase();
-      const looksJs = /\.js($|\?)/.test(src) || /javascript|ecmascript/.test(ct);
-      if (!looksJs) throw new Error(`Not JS: ${ct || 'unknown content-type'} @ ${src}`);
-
-      await new Promise((resolve, reject) => {
-        const s = document.createElement('script');
-        s.src = src;
-        s.defer = true;
-        s.onload = resolve;
-        s.onerror = () => reject(new Error('Failed to load ' + src));
-        document.head.appendChild(s);
-      });
-    })();
-
-    loadedScripts.set(src, p);
-    try { await p; } catch (e) { loadedScripts.delete(src); throw e; }
-    return p;
+  function normalizeScriptKey(src) {
+    try {
+      var u = new URL(src, location.origin);
+      if (u.searchParams && typeof u.searchParams.delete === 'function') {
+        u.searchParams.delete('v');
+      }
+      return u.origin + u.pathname;
+    } catch (_e) {
+      return (src || '').split('?')[0];
+    }
   }
 
-  // ---- dynamic <link rel=stylesheet> (by id) ----
+  function loadScriptOnce(src, opts) {
+    if (!src) return Promise.resolve();
+    var key = normalizeScriptKey(src);
+    if (inFlightScripts.has(key)) return inFlightScripts.get(key);
+
+    var p = new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = v(src);
+      s.async = true;
+      if (opts && opts.type) s.type = opts.type;
+      if (opts && opts.integrity) {
+        s.integrity = opts.integrity;
+        s.crossOrigin = (opts.crossOrigin || 'anonymous');
+      }
+      s.onload  = function(){ resolve(); };
+      s.onerror = function(){ reject(new Error('Failed to load ' + src)); };
+      document.head.appendChild(s);
+    });
+
+    inFlightScripts.set(key, p);
+    return p.then(function (r) { return r; }, function (e) {
+      inFlightScripts.delete(key);
+      throw e;
+    });
+  }
+
+  // ===== dynamic CSS (Promise로 onload 대기, FOUC 방지) =====
   function ensureCSS(id, href) {
-    return new Promise((resolve) => {
-      const had = document.getElementById(id);
+    return new Promise(function (resolve) {
+      var had = document.getElementById(id);
       if (had) return resolve(had);
-      const link = document.createElement('link');
+      var link = document.createElement('link');
       link.id = id;
       link.rel = 'stylesheet';
       link.href = v(href);
-      link.onload = () => resolve(link);
-      link.onerror = () => resolve(link);
+      link.onload = function () { resolve(link); };
+      link.onerror = function () { resolve(link); };
       document.head.appendChild(link);
     });
   }
-  function removeCSS(id) { document.getElementById(id)?.remove(); }
+  // calculators 라우트에서 사용하므로 전역에도 노출
+  if (!window.ensureCSS) window.ensureCSS = ensureCSS;
 
-  // ---- HTML fetch with fallbacks ----
-  async function loadHTML(candidates) {
-    for (const path of candidates) {
-      try {
-        const r = await fetch(path, { cache: 'no-store' });
-        if (r.ok) return await r.text();
-      } catch (_) {}
+  function removeCSS(id) {
+    var node = document.getElementById(id);
+    if (node && node.parentNode) node.parentNode.removeChild(node);
+  }
+
+  // ===== HTML fetch (메모리 LRU 캐시 + 버전 키) =====
+  var HTML_CACHE_MAX = 24;
+  var htmlCache = new Map(); // key: path+'|v='+ASSET_VER, val: string
+  function setHtmlCache(key, val) {
+    htmlCache.set(key, val);
+    if (htmlCache.size > HTML_CACHE_MAX) {
+      var firstKey = htmlCache.keys().next().value;
+      htmlCache.delete(firstKey);
     }
-    return null;
+  }
+  function loadHTML(candidates) {
+    return (function loop(i){
+      if (i >= candidates.length) return Promise.resolve(null);
+      var rawPath = candidates[i];
+      var cacheKey = rawPath + '|v=' + ASSET_VER;
+      if (htmlCache.has(cacheKey)) return Promise.resolve(htmlCache.get(cacheKey));
+
+      var path = v(rawPath);
+      return fetch(path, { cache: 'no-store' }).then(function(r){
+        if (r.ok) return r.text().then(function(text){
+          setHtmlCache(cacheKey, text);
+          return text;
+        });
+        return loop(i+1);
+      }).catch(function(){ return loop(i+1); });
+    })(0);
   }
 
-  // ---- 이미지 아이콘: 자동 버전 파라미터 부착 ----
-  const iconImg = (alt, src) =>
-    `<img src="${v(src)}" alt="${alt}" class="cat-icon__img" loading="lazy" decoding="async">`;
-
-  function catCard(href, iconHTML, title, subtitle) {
-    return [
-      '<a class="card card--category" href="', href, '">',
-        '<div class="card__media" aria-hidden="true">', iconHTML || '', '</div>',
-        '<div class="card__body">',
-          '<div class="card__title">', title, '</div>',
-          subtitle ? '<div class="card__subtitle">' + subtitle + '</div>' : '',
-        '</div>',
-      '</a>'
-    ].join('');
+  // ===== icon util =====
+  function escapeAttr(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function iconImg(alt, src) {
+    return '<img src="' + v(src) + '" alt="' + escapeAttr(alt) + '" class="cat-icon__img" loading="lazy" decoding="async">';
   }
 
-  // ---------- DB 상세 렌더러 ----------
+  // ===== DB 상세 렌더 =====
   function rewriteRelativeUrls(doc, base) {
-    const isAbs = (u) => /^https?:\/\//i.test(u) || u.startsWith('data:') || u.startsWith('#') || u.startsWith('/');
-    const joinBase = (u) => base + u.replace(/^\.?\//,'');
-    const fixUrl = (u) => isAbs(u) ? u : joinBase(u);
+    function isAbs(u){ return /^https?:\/\//i.test(u) || /^(data:|blob:|#)/i.test(u) || u.indexOf('/') === 0; }
+    function joinBase(u){ return base + u.replace(/^\.?\//,''); }
+    function fixUrl(u){ return isAbs(u) ? u : joinBase(u); }
 
-    doc.querySelectorAll('img[src]').forEach(el => {
-      const cur = el.getAttribute('src'); if (!cur) return;
+    // 이미지/소스 정규화
+    var imgs = doc.querySelectorAll('img[src]');
+    for (var i=0;i<imgs.length;i++){
+      var el = imgs[i];
+      var cur = el.getAttribute('src'); if (!cur) continue;
       el.setAttribute('src', v(fixUrl(cur)));
-    });
-    doc.querySelectorAll('img[srcset], source[srcset]').forEach(el => {
-      const cur = el.getAttribute('srcset'); if (!cur) return;
-      const out = cur.split(',').map(part => {
-        const [u, d] = part.trim().split(/\s+/, 2);
+      if (!el.hasAttribute('loading')) el.setAttribute('loading', 'lazy');
+      if (!el.hasAttribute('decoding')) el.setAttribute('decoding', 'async');
+    }
+    var srcsets = doc.querySelectorAll('img[srcset], source[srcset]');
+    for (var j=0;j<srcsets.length;j++){
+      var el2 = srcsets[j];
+      var cur2 = el2.getAttribute('srcset'); if (!cur2) continue;
+      var out = cur2.split(',').map(function(part){
+        var bits = part.trim().split(/\s+/, 2);
+        var u = bits[0], d = bits[1];
         if (!u) return part;
-        const fixed = v(fixUrl(u));
-        return d ? `${fixed} ${d}` : fixed;
+        var fixed = v(fixUrl(u));
+        return d ? (fixed + ' ' + d) : fixed;
       }).join(', ');
-      el.setAttribute('srcset', out);
-    });
-    doc.querySelectorAll('link[href]').forEach(el => {
-      const cur = el.getAttribute('href'); if (!cur) return;
-      if (!isAbs(cur)) el.setAttribute('href', joinBase(cur));
-    });
-    doc.querySelectorAll('script[src]').forEach(el => el.remove());
-    doc.querySelectorAll('a[href]').forEach(a => {
-      const href = a.getAttribute('href'); if (!href) return;
-      if (isAbs(href) || href.startsWith('mailto:')) return;
+      el2.setAttribute('srcset', out);
+    }
+
+    // 링크/스크립트 정리
+    var links = doc.querySelectorAll('link[href]');
+    for (var k=0;k<links.length;k++){
+      var el3 = links[k];
+      var cur3 = el3.getAttribute('href'); if (!cur3) continue;
+      if (!isAbs(cur3)) el3.setAttribute('href', joinBase(cur3));
+    }
+    var scripts = doc.querySelectorAll('script[src]');
+    for (var m=0;m<scripts.length;m++){ if (scripts[m].parentNode) scripts[m].parentNode.removeChild(scripts[m]); }
+
+    // 내부 링크 → SPA 핸들링
+    var anchors = doc.querySelectorAll('a[href]');
+    for (var n=0;n<anchors.length;n++){
+      var a = anchors[n];
+      var href = a.getAttribute('href'); if (!href) continue;
+      if (/^(https?:|mailto:|tel:|#)/i.test(href) || href.indexOf('/') === 0) continue;
       a.setAttribute('data-db-internal', href.replace(/^\.?\//,''));
       a.setAttribute('href', '#');
-    });
+    }
     return doc;
   }
 
-  async function renderDbDetail(el, folder, file) {
-    const base = `pages/database/${encodeURIComponent(folder)}/`;
-    const candidates = file
+  function renderDbDetail(el, folder, file) {
+    var base = 'pages/database/' + encodeURIComponent(folder) + '/';
+    var candidates = file
       ? [ base + file ]
       : [ base + 'index.html', base + 'main.html', base + 'guide.html', base + 'list.html', base + 'README.html' ];
 
-    const html = await loadHTML(candidates);
-    if (!html) {
-      el.innerHTML = `
-        <div class="placeholder">
-          <h2>데이터베이스</h2>
-          <p class="muted">해당 문서를 찾을 수 없습니다.</p>
-        </div>`;
-      return;
-    }
+    return loadHTML(candidates).then(function(html){
+      if (!html) {
+        el.innerHTML = '<div class="placeholder"><h2>데이터베이스</h2><p class="muted">해당 문서를 찾을 수 없습니다.</p></div>';
+        return;
+      }
 
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    const fixed = rewriteRelativeUrls(doc, base);
+      var parser = new DOMParser();
+      var doc    = parser.parseFromString(html, 'text/html');
+      var fixed  = rewriteRelativeUrls(doc, base);
 
-    const metaTitle = fixed.querySelector('meta[name="db-title"]')?.content
-                   || fixed.querySelector('title')?.textContent
-                   || fixed.querySelector('h1')?.textContent
-                   || '데이터베이스';
+      var mt = fixed.querySelector('meta[name="db-title"]');
+      var tt = fixed.querySelector('title');
+      var h1 = fixed.querySelector('h1');
+      var metaTitle = (mt && mt.content) || (tt && tt.textContent) || (h1 && h1.textContent) || '데이터베이스';
 
-    const bodyNode = fixed.body ? fixed.body.cloneNode(true) : null;
-    if (bodyNode) {
-      const firstH1 = bodyNode.querySelector('h1');
-      if (firstH1) firstH1.remove();
-    }
-    const bodyHTML = bodyNode ? bodyNode.innerHTML : (fixed.body ? fixed.body.innerHTML : html);
+      var bodyNode = fixed.body ? fixed.body.cloneNode(true) : null;
+      if (bodyNode) {
+        var firstH1 = bodyNode.querySelector('h1');
+        if (firstH1 && firstH1.parentNode) firstH1.parentNode.removeChild(firstH1);
+      }
+      var bodyHTML = bodyNode ? bodyNode.innerHTML : (fixed.body ? fixed.body.innerHTML : html);
 
-    el.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <h1 style="margin:0;font-size:20px;">${metaTitle}</h1>
-      </div>
-      <div class="db-detail">${bodyHTML}</div>
-    `;
+      el.innerHTML = ''
+        + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">'
+        + '  <h1 id="page-title" data-i18n="db.title" style="margin:0;font-size:20px;">' + metaTitle + '</h1>'
+        + '</div>'
+        + '<div class="db-detail">' + bodyHTML + '</div>';
 
-    el.querySelectorAll('.db-detail img[src]').forEach(img => {
-      img.setAttribute('src', v(img.getAttribute('src')));
-    });
-    el.querySelectorAll('.db-detail img[srcset], .db-detail source[srcset]').forEach(node => {
-      const cur = node.getAttribute('srcset'); if (!cur) return;
-      const out = cur.split(',').map(part => {
-        const [u, d] = part.trim().split(/\s+/, 2);
-        if (!u) return part;
-        const fixed = v(u);
-        return d ? `${fixed} ${d}` : fixed;
-      }).join(', ');
-      node.setAttribute('srcset', out);
-    });
-
-    el.querySelectorAll('[data-db-internal]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        e.preventDefault();
-        const next = a.getAttribute('data-db-internal');
-        location.hash = `#/db/${encodeURIComponent(folder)}/${encodeURIComponent(next)}`;
-      });
+      var internals = el.querySelectorAll('[data-db-internal]');
+      for (var i=0;i<internals.length;i++){
+        (function(a){
+          a.addEventListener('click', function(e){
+            e.preventDefault();
+            var next = a.getAttribute('data-db-internal') || '';
+            var nextPath = next.replace(/^\.?\//, '');
+            var safeNext = nextPath.split('/').map(encodeURIComponent).join('/');
+            if (window.navigate) {
+              window.navigate('/db/' + encodeURIComponent(folder) + '/' + safeNext);
+            }
+          }, { passive: false });
+        })(internals[i]);
+      }
     });
   }
-
-  // ---------- 라우트 생성 ----------
-  const routes = window.buildRoutes({
-    loadHTML,
-    loadScriptOnce,
-    renderDbDetail,
-    iconImg,
-    catCard
-  });
-
-  function setActive(path) {
-    const tab = path === '/db' ? '/database'
-             : path === '/hero' ? '/heroes'
-             : path === '/building' ? '/buildings'
-             : path;
-    document.querySelectorAll('[data-nav]').forEach(a => {
-      a.classList.toggle('is-active', a.getAttribute('href') === '#' + tab);
-    });
-  }
-
-  const pingAutoAds = (() => {
-    let t;
-    return () => {
-      clearTimeout(t);
-      t = setTimeout(() => {
-        try {
-          const fresh = document.querySelectorAll('ins.adsbygoogle:not([data-adsbygoogle-status])');
-          if (!fresh.length) return;
-          fresh.forEach(() => (window.adsbygoogle = window.adsbygoogle || []).push({}));
-        } catch (_) {}
-      }, 150);
-    };
-  })();
-
-  let navVer = 0;
 
   // ===== i18n helpers =====
-  async function ensureI18N() {
-    if (!window.I18N) return;
-    const saved = localStorage.getItem('lang');
-    const urlLang = new URLSearchParams(location.search).get('lang');
-    const fallback = (navigator.language || 'ko').replace('_','-');
-    const lang = urlLang || saved || fallback;
-
-    if (window.__APP_LANG && window.__APP_LANG !== lang) {
-      location.reload();
-      return;
+  function normalizeLanguage(input) {
+    var raw = String(input || '').replace('_','-').toLowerCase();
+    if (!raw) return 'ko';
+    if (raw.indexOf('ko') === 0) return 'ko';
+    if (raw.indexOf('en') === 0) return 'en';
+    if (raw.indexOf('ja') === 0) return 'ja';
+    if (raw.indexOf('zh') === 0) {
+      return (/-((tw|hk|mo))/.test(raw) ? 'zh-TW' : 'zh-CN');
     }
-
-    if (!I18N.current || typeof I18N.t !== 'function') {
-      await I18N.init({ lang, namespaces: ['common'] });
-    }
-    window.__APP_LANG = lang;
+    return 'en';
   }
 
-  // ===== Router =====
-  async function navigate(path) {
-    const myVer = ++navVer;
-    const el = document.getElementById('content');
-    const route = routes[path] || routes['/home'];
+  function ensureI18N() {
+    if (!window.I18N) return Promise.resolve();
+    try {
+      var saved   = (function(){ try { return localStorage.getItem('lang'); } catch(_){ return null; } })();
+      var urlLang = new URLSearchParams(location.search).get('lang');
+      var fallback= (navigator.language || 'ko');
+      var lang    = normalizeLanguage(urlLang || saved || fallback);
+      if (window.I18N.current === lang && typeof window.I18N.t === 'function') return Promise.resolve();
+      return window.I18N.init({ lang: lang, namespaces: ['common'] }).catch(function(e){
+        console.warn('[i18n] init failed:', e);
+      });
+    } catch (e) {
+      console.warn('[i18n] init failed:', e);
+      return Promise.resolve();
+    }
+  }
 
-    document.title = route.title;
-    setActive(path);
+  // 계산기 루트 내부(#calc-ui, #gear-calc, #charm-calc, #training-calc)는 건드리지 않는 i18n 부분 적용
+  function applyI18NOutsideCalc(root) {
+    if (!root) return;
+    if (!window.I18N || !window.I18N.t) return;
 
-    const isCalc = (path === '/calculator' || path.startsWith('/calc-'));
-    if (isCalc) {
-      await ensureCSS('calc-css', CALC_CSS_HREF);
-    } else {
-      removeCSS('calc-css');
+    var SKIP_SEL = '#calc-ui, #gear-calc, #charm-calc, #training-calc';
+
+    var targets = root.querySelectorAll('[data-i18n]');
+    for (var i=0;i<targets.length;i++){
+      var node = targets[i];
+      if (node.closest && node.closest(SKIP_SEL)) continue;
+      var key = node.getAttribute('data-i18n');
+      var val = window.I18N.t(key, node.textContent || key);
+      if (typeof val !== 'undefined') node.textContent = val;
     }
 
-    if (window.I18N) {
-      try {
-        await ensureI18N();
-        if (isCalc) {
-          if (typeof I18N.loadNamespace === 'function') {
-            await I18N.loadNamespace('calc');
-          } else if (typeof I18N.loadNS === 'function') {
-            await I18N.loadNS(['common', 'calc']);
-          }
-        }
-      } catch (_) {}
-    }
-
-    const rest = location.hash.replace('#' + path, '').replace(/^#?\/?/, '');
-    await route.render(el, rest);
-
-    if (isCalc) {
-      try {
-        if (typeof window.initCalculator !== 'function') {
-          await loadScriptOnce(v('/js/calculator.js'));
-        }
-        if (!window.KSD?.buildingUI?.boot) {
-          await loadScriptOnce(v('/js/building-calculator.js'));
-        }
-        await window.KSD?.buildingUI?.boot?.(el);
-      } catch (e) {
-        console.warn('[calc] bootstrap failed:', e);
+    var attrTargets = root.querySelectorAll('[data-i18n-attr]');
+    for (var j=0;j<attrTargets.length;j++){
+      var n = attrTargets[j];
+      if (n.closest && n.closest(SKIP_SEL)) continue;
+      var pairs = (n.getAttribute('data-i18n-attr') || '')
+        .split(';');
+      for (var k=0;k<pairs.length;k++){
+        var pair = (pairs[k] || '').trim(); if (!pair) continue;
+        var sp = pair.split(':');
+        var attr = (sp[0] || '').trim();
+        var key2 = (sp[1] || '').trim();
+        if (!attr || !key2) continue;
+        var cur = n.getAttribute(attr) || key2;
+        var val2 = window.I18N.t(key2, cur);
+        if (typeof val2 !== 'undefined') n.setAttribute(attr, val2);
       }
     }
 
-    if (myVer !== navVer) return;
-
-    if (nav && toggle) {
-      nav.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
+    var phTargets = root.querySelectorAll('[data-i18n-placeholder]');
+    for (var a=0;a<phTargets.length;a++){
+      var ph = phTargets[a];
+      if (ph.closest && ph.closest(SKIP_SEL)) continue;
+      var keyp = ph.getAttribute('data-i18n-placeholder');
+      ph.setAttribute('placeholder', window.I18N.t(keyp, ph.getAttribute('placeholder') || keyp));
     }
-
-    if (window.I18N) {
-      try {
-        if (isCalc) {
-          const metaTitle = I18N.t('calc.meta.title', '건물 계산기 | KingshotData KR');
-          document.title = metaTitle;
-        }
-        I18N.applyTo(el);
-      } catch (_) {}
+    var ariaTargets = root.querySelectorAll('[data-i18n-aria-label]');
+    for (var b=0;b<ariaTargets.length;b++){
+      var ar = ariaTargets[b];
+      if (ar.closest && ar.closest(SKIP_SEL)) continue;
+      var keya = ar.getAttribute('data-i18n-aria-label');
+      ar.setAttribute('aria-label', window.I18N.t(keya, ar.getAttribute('aria-label') || keya));
     }
-
-    pingAutoAds();
   }
 
-  function parseHash() {
-    let raw = (location.hash || '#/home').slice(1);
-    raw = raw.replace(/^\/+/, '');
-    if (raw.startsWith('building/')) {
-      return ['/buildings', raw.replace(/^building\//, '')];
-    }
-    if (raw === 'building') return ['/buildings', ''];
-    const parts = raw.split('/');
-    const path  = '/' + (parts[0] || 'home');
-    const rest  = parts.slice(1).join('/');
-    return [path, rest];
+  // localI18nApply 우선 호출(계산기 번들에 존재 시), 미존재 시 부분 적용으로 폴백
+  function applyCalcI18NIfAvailable(root) {
+    try {
+      if (typeof window.localI18nApply === 'function') {
+        window.localI18nApply(root || (document.getElementById('content') || document.body), { includeCalc: true });
+        return true;
+      }
+    } catch (_e) {}
+    return false;
   }
 
-  window.addEventListener('hashchange', () => {
-    const [path] = parseHash();
-    navigate(path);
-    pingAutoAds();
-  });
+  // ===== active nav =====
+  function setActiveByPath(currentPath) {
+    try {
+      var firstSeg = '/' + (currentPath.split('/').filter(Boolean)[0] || 'home');
+      var anchors = document.querySelectorAll('#primaryNav a[href^="/"]');
+      for (var i=0;i<anchors.length;i++){
+        var a = anchors[i];
+        var href = a.getAttribute('href') || '';
+        var seg  = '/' + (href.split('/').filter(Boolean)[0] || 'home');
+        a.classList.toggle('is-active', seg === firstSeg);
+      }
+    } catch(_){}
+  }
 
-  window.addEventListener('ksd:lang-changed', () => {
-    location.reload();
-  });
+  // ===== normalize path =====
+  function normalize(pathname) {
+    var p = pathname.replace(/\/index\.html$/i, '');
+    if (p.length > 1 && p.lastIndexOf('/') === p.length - 1) p = p.slice(0, -1);
+    return p || '/home';
+  }
 
-  window.addEventListener('DOMContentLoaded', async () => {
-    await ensureCSS('components-css', COMPONENTS_CSS_HREF);
-    if (window.I18N) {
-      try {
-        await ensureI18N();
-      } catch (_) {}
+  function canonicalize(input) {
+    var u = new URL(typeof input === 'string' ? input : String(input), location.origin);
+    var p = u.pathname.replace(/\/index\.html$/i, '');
+    if (p.length > 1 && p.lastIndexOf('/') === p.length - 1) p = p.slice(0, -1);
+
+    // ★ 계산기 경로 예외 처리: /calc-* 또는 /calculator 는 그대로 유지
+    if (p.indexOf('/calc-') === 0 || p === '/calculator') {
+      u.pathname = p;
+      return u;
     }
 
-    const calcCard = document.querySelector('#calc-card');
-    if (calcCard) {
-      ['mouseenter', 'touchstart'].forEach(ev => {
-        calcCard.addEventListener(ev, async () => {
-          if (window.I18N && !window.I18N.has('calc')) {
-            try {
-              await I18N.preload(['calc', 'calcGear']);
-            } catch (e) {
-              console.warn('[i18n] preload failed', e);
-            }
-          }
-        }, { once: true });
+    var segs = p.split('/').filter(Boolean);
+    if (segs[0] === 'heroes' && segs[1]) {
+      u.pathname = '/hero/' + segs.slice(1).join('/');
+      return u;
+    }
+    if (segs[0] === 'database' && segs[1]) {
+      u.pathname = '/db/' + segs.slice(1).join('/');
+      return u;
+    }
+    if (segs[0] === 'building') {
+      u.pathname = '/buildings' + (segs[1] ? '/' + segs.slice(1).join('/') : '');
+      return u;
+    }
+    u.pathname = p || '/home';
+    return u;
+  }
+
+  // ===== 라우트 번들 로더 (routes.js vs routes.calculators.js) =====
+  var routes = null;                   // 현재 사용 중인 라우트 테이블
+  var __routeBundle = '';              // 'main' | 'calc'
+
+  function isCalcPathname(p) {
+    // /calc-* 또는 /calculator → calculators 번들
+    return (p.indexOf('/calc-') === 0) || (p === '/calculator');
+  }
+
+  // calculators 라우트에서 사용할 setTitle 헬퍼
+  function setTitle(i18nKey, fallback) {
+    var title = fallback || '';
+    try {
+      if (window.I18N && typeof window.I18N.t === 'function') {
+        title = window.I18N.t(i18nKey, title || i18nKey);
+      }
+    } catch (_e) {}
+    if (title) { document.title = title; }
+  }
+
+  function loadRoutesForType(type) {
+    // type: 'calc' | 'main'
+    if (type === 'calc') {
+      return loadScriptOnce('/public/js/routes.calculators.js').then(function(){
+        if (typeof window.buildCalculatorRoutes !== 'function') throw new Error('buildCalculatorRoutes not found');
+        routes = window.buildCalculatorRoutes({
+          loadHTML: loadHTML,
+          loadScriptOnce: loadScriptOnce,
+          // calculators 라우트가 필요로 하는 선택적 의존성
+          ensureI18NReady: ensureI18N,
+          setTitle: setTitle,
+          // 기타 도우미
+          renderDbDetail: renderDbDetail,
+          iconImg: iconImg,
+          // 전역 tier map 있으면 전달
+          TIER_KEY_MAP_KO: window.TIER_KEY_MAP_KO
+        });
+        __routeBundle = 'calc';
+        return routes;
+      }).catch(function(e){
+        // ★ 변경: 홈(/home) 리다이렉트/메인 번들 폴백 제거 → 에러 로그 후 전체 새로고침
+        try { console.error('[router] calculators bundle failed:', e); } catch (_ee) {}
+        try { location.reload(); } catch (_er) {}
+        return Promise.reject(e);
+      });
+    } else {
+      return loadScriptOnce('/js/routes.js').then(function(){
+        if (typeof window.buildRoutes !== 'function') throw new Error('buildRoutes not found');
+        routes = window.buildRoutes({
+          loadHTML: loadHTML,
+          loadScriptOnce: loadScriptOnce,
+          setTitle: setTitle,
+          renderDbDetail: renderDbDetail,
+          iconImg: iconImg
+        });
+        __routeBundle = 'main';
+        return routes;
       });
     }
+  }
 
-    const [path] = parseHash();
-    await navigate(path);
-    pingAutoAds();
+  function selectAndBuildRoutesFor(pathname) {
+    var want = isCalcPathname(pathname) ? 'calc' : 'main';
+    if (__routeBundle === want && routes) return Promise.resolve(routes);
+    return loadRoutesForType(want);
+  }
+
+  function startRouter(initialRoutes) {
+    // 초기 진입에서 중복 dispatch 방지 — 여기서는 routes만 설정
+    routes = initialRoutes;
+  }
+
+  // ===== 프록시 라우트 (실 라우트 준비 전 안전 가드) =====
+  var proxyRoutes = (function(){
+    var map = {};
+    var keys = ['/calculator','/calc-building','/calc-gear','/calc-charm','/calc-training'];
+
+    function makeProxyRoute(key) {
+      return {
+        title: '로딩 중...',
+        render: function(el, rest) {
+          // 로딩 플레이스홀더 출력
+          el.innerHTML = ''
+            + '<div class="placeholder">'
+            + '  <h2>로딩 중…</h2>'
+            + '  <p class="muted">콘텐츠를 불러오는 중입니다.</p>'
+            + '</div>';
+
+          // 해당 키에 맞는 번들을 보장 로드 후 실제 라우트로 교체 렌더
+          return selectAndBuildRoutesFor(key).then(function(){
+            var real = routes && routes[key];
+            if (real && typeof real.render === 'function') {
+              if (real.title) { try { document.title = real.title; } catch(_e){} }
+              return real.render(el, rest);
+            } else {
+              el.innerHTML = '<div class="placeholder"><h2>로딩 실패</h2><p class="muted">라우트를 찾지 못했습니다.</p></div>';
+            }
+          });
+        }
+      };
+    }
+
+    for (var i=0;i<keys.length;i++){
+      map[keys[i]] = makeProxyRoute(keys[i]);
+    }
+    return map;
+  })();
+
+  function getRoute(key) {
+    // 실 라우트가 있으면 즉시 사용, 없으면 프록시 라우트로 대체
+    if (routes && routes[key]) return routes[key];
+    if (proxyRoutes && proxyRoutes[key]) return proxyRoutes[key];
+    // 최후 수단: 홈 또는 간단 플레이스홀더
+    if (routes && routes['/home']) return routes['/home'];
+    return {
+      title: '로딩 실패',
+      render: function(el) {
+        el.innerHTML = '<div class="placeholder"><h2>라우트 없음</h2><p class="muted">요청한 페이지를 찾을 수 없습니다.</p></div>';
+      }
+    };
+  }
+
+  // popstate/비동기 전환 레이스 방지용 버전 토큰
+  var navVer = 0;
+
+  // ===== popstate 보정 로직 (요청 사양에 따라 단순화) =====
+  function correctOnPopstate() {
+    try {
+      var p = normalize(location.pathname);
+      // ★ /home → lastCalcPath 리다이렉트 로직 제거
+      // 계산기 경로일 때만 lastCalcPath 저장
+      if (p.indexOf('/calc-') === 0 || p === '/calculator') {
+        try { sessionStorage.setItem('lastCalcPath', p); } catch (_e2) {}
+      }
+    } catch (_e) {}
+    return false;
+  }
+
+  function dispatch() {
+    var myVer = ++navVer;
+    var canon = null;
+
+    // 1) i18n 준비 → 2) URL 정규화 반영 → 3) 라우트 번들 선택/로드(핫스왑, 반드시 완료) → 4) CSS 준비 → 5) render
+    return ensureI18N().then(function(){
+      if (myVer !== navVer) return;
+
+      canon = canonicalize(location.href);
+      var wantUrl = canon.pathname + canon.search + canon.hash;
+      var haveUrl = location.pathname + location.search + location.hash;
+      if (wantUrl !== haveUrl) {
+        history.replaceState(null, '', wantUrl);
+      }
+
+      // 진입 경로에 맞는 번들을 먼저 로드/빌드하고 결과 routes를 받은 뒤에만 렌더
+      return selectAndBuildRoutesFor(canon.pathname);
+    }).then(function(){
+      if (myVer !== navVer) return;
+
+      var pathNorm = normalize(canon.pathname);
+      var segs = pathNorm.split('/').filter(Boolean);
+      var key  = '/' + (segs[0] || 'home');
+      var rest = '/' + segs.slice(1).join('/');
+      var route = getRoute(key);
+
+      var el = document.getElementById('content') || document.body;
+
+      // 계산기 CSS 필요시에만 로드 (아닐 때 제거)
+      var isCalcRoute = (key === '/calculator') || (key.indexOf('/calc-') === 0);
+      var cssPromise = isCalcRoute ? ensureCSS('calc-css', CALC_CSS_HREF) : (removeCSS('calc-css'), Promise.resolve());
+
+      // 계산기 경로 방문 시 마지막 경로 기록
+      if (isCalcRoute) {
+        try { sessionStorage.setItem('lastCalcPath', pathNorm); } catch (_e3) {}
+      }
+
+      return cssPromise.then(function(){
+        if (myVer !== navVer) return;
+
+        if (route && route.title) document.title = route.title;
+
+        var p;
+        try {
+          if (!route || typeof route.render !== 'function') throw new Error('route not found: ' + key);
+          // 라우트 번들 준비 & CSS 준비가 끝난 뒤에만 render 실행
+          p = route.render(el, rest);
+        } catch (e) {
+          console.error('[router] route render error:', e);
+          el.innerHTML = '<div class="placeholder"><h2>로딩 실패</h2><p class="muted">' + ((e && e.message) || '알 수 없는 오류') + '</p></div>';
+          p = Promise.resolve();
+        }
+
+        return Promise.resolve(p).then(function(){
+          if (myVer !== navVer) return;
+
+          // 라우트 렌더 후 i18n 재적용 — 계산기 콘텐츠와 외부 UI 모두 커버
+          try {
+            // 우선 calculators 번들의 localI18nApply가 있으면 그것으로 전체 적용
+            var applied = applyCalcI18NIfAvailable(el);
+            if (!applied) {
+              if (isCalcRoute) {
+                // 계산기 루트는 내부 계산기 DOM을 건드리지 않는 경량 적용
+                applyI18NOutsideCalc(el);
+              } else if (window.I18N && typeof window.I18N.applyTo === 'function') {
+                // 일반 라우트는 전체 컨테이너에 우선 적용
+                window.I18N.applyTo(el);
+              }
+            }
+          } catch (_e) {}
+
+          // 네비게이션 현재 경로 하이라이트
+          setActiveByPath(pathNorm);
+
+          // 메뉴 닫기
+          if (nav && toggle) {
+            nav.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+
+          // 스크롤 복원/초기화
+          try { window.scrollTo({ top: 0 }); } catch(_){}
+
+          // ★★★ 최종 강제 글로벌 i18n 재적용 — 헤더/드롭다운/글로벌 UI 누락 방지
+          if (window.I18N && typeof window.I18N.applyTo === 'function') {
+            try { window.I18N.applyTo(document.body); } catch(_e2) {}
+          }
+
+          // 마지막으로 calculators 쪽 localI18nApply가 있다면 한 번 더 강제 적용(드롭다운 등)
+          try { applyCalcI18NIfAvailable(document.getElementById('content') || document.body); } catch (_e4) {}
+        });
+      });
+    });
+  }
+
+  // ===== navigate =====
+  window.navigate = function (to, opts) {
+    opts = opts || {};
+    var u = canonicalize(to);
+    var url = u.pathname + u.search + u.hash;
+    if (opts.replace) history.replaceState(null, '', url);
+    else history.pushState(null, '', url);
+    return dispatch();
+  };
+
+  // ===== link interception =====
+  document.addEventListener('click', function (e) {
+    // 이미 취소 / 좌클릭 아님 / 수정키 조합이면 개입하지 않음
+    if (e.defaultPrevented) return;
+    if (e.button !== 0) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    // 가장 가까운 <a> 탐색
+    var a = e.target;
+    while (a && a.tagName !== 'A') a = a.parentElement;
+    if (!a) return;
+
+    var href = a.getAttribute('href');
+    if (!href) return;
+
+    // 1) 새창/새탭 의도: target, rel(noopener/noreferrer/external) → 절대 가로채지 않음
+    var target = (a.getAttribute('target') || '').toLowerCase();
+    var rel    = (a.getAttribute('rel') || '').toLowerCase();
+    if (target && target !== '_self') return;
+    if (rel.indexOf('noopener') !== -1 || rel.indexOf('noreferrer') !== -1 || rel.indexOf('external') !== -1) return;
+
+    // 명시적 무시 플래그/다운로드 → 개입하지 않음
+    var routerIgnore = a.getAttribute('data-router-ignore');
+    if (a.hasAttribute('download') || (routerIgnore && routerIgnore === 'true')) return;
+
+    // 특수 프로토콜은 그대로 두기
+    if (/^(mailto:|tel:|data:|blob:|javascript:)/i.test(href)) return;
+
+    // 외부 링크는 브라우저에 맡김
+    if (/^(https?:)?\/\//i.test(href)) return;
+
+    // 레거시 해시 기반 라우트('#/..') 처리
+    var hashIdx = href.indexOf('#/');
+    if (hashIdx === 0) {
+      // "#/..." 로 시작
+      e.preventDefault();
+      var pathHash = href.slice(1); // "/..."
+      var uHash = canonicalize(pathHash);
+      return window.navigate(uHash.pathname + uHash.search + uHash.hash);
+    } else if (hashIdx > 0) {
+      // "something#/..." 형태
+      e.preventDefault();
+      var pathMix = '/' + href.slice(hashIdx + 2);
+      var uMix = canonicalize(pathMix);
+      return window.navigate(uMix.pathname + uMix.search + uMix.hash);
+    }
+
+    // 페이지 내부 해시(#section)는 기본 동작 유지
+    if (href.charAt(0) === '#') return;
+
+    // 절대 내부 경로는 SPA로 처리 (가이드 포함)
+    if (href.charAt(0) === '/') {
+      e.preventDefault();
+      var uAbs = canonicalize(href);
+      return window.navigate(uAbs.pathname + uAbs.search + uAbs.hash);
+    }
+
+    // 기타 상대경로는 각 모듈에서 별도 처리(개입 안 함)
+  }, { passive: false });
+
+  // ===== popstate =====
+  try { history.scrollRestoration = 'manual'; } catch (_e){}
+  window.addEventListener('popstate', function(){
+    // 뒤로/앞으로 이동 시 보정 로직(단순 기록만 수행)
+    if (correctOnPopstate()) return;
+    dispatch();
+  });
+
+  // ===== 글로벌 i18n 변경 대응 (헤더/푸터/네비 포함) =====
+  document.addEventListener('i18n:changed', function(){
+    try {
+      var content = document.getElementById('content') || document.body;
+      // calculators 번들의 localI18nApply가 있으면 우선 사용(계산기 내부 포함 전체 강제)
+      if (!applyCalcI18NIfAvailable(content)) {
+        // 계산기 콘텐츠 손상 최소화를 위해 먼저 부분 적용
+        applyI18NOutsideCalc(content);
+      }
+      // 전역 강제 재적용으로 누락 방지
+      if (window.I18N && typeof window.I18N.applyTo === 'function') {
+        window.I18N.applyTo(document.body);
+      }
+      // 마지막으로 한 번 더 calculators 쪽 localI18nApply 시도(드롭다운 등 내부 옵션까지)
+      applyCalcI18NIfAvailable(content);
+    } catch (_e) {}
+  }, false);
+
+  // ===== bootstrap =====
+  document.addEventListener('DOMContentLoaded', function () {
+    // 공통 컴포넌트 CSS 선적재 → 초기 레이아웃 FOUC 최소화
+    ensureCSS('components-css', COMPONENTS_CSS_HREF)
+      .then(function(){ return ensureI18N(); })
+      .then(function(){
+        // 첫 진입 시점에 경로에 맞는 라우트 번들을 반드시 선택/빌드
+        var canon = canonicalize(location.href);
+        return selectAndBuildRoutesFor(canon.pathname);
+      })
+      .then(function(builtRoutes){
+        // routes 설정 후 최초 1회 렌더
+        startRouter(builtRoutes || {});
+        return dispatch();
+      });
   });
 
 })();

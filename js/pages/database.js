@@ -1,4 +1,4 @@
-// js/pages/database.js — 최소패치 완성본 (hero-exclusive-gear → widgets 리맵만 적용)
+// js/pages/database.js — history 모드 + hero-exclusive-gear → widgets 리맵
 (function () {
   'use strict';
 
@@ -7,6 +7,16 @@
   // =========================
   const V = (window.__V || 'now');
   const MEMO = (window.__KSD_MEMO__ = window.__KSD_MEMO__ || new Map());
+
+  function appendVersion(u) {
+    try {
+      if (/^(https?:|data:)/i.test(u)) return u;
+      if (/\bv=([0-9]+|now)\b/.test(u)) return u;
+      return u + (u.includes('?') ? `&v=${V}` : `?v=${V}`);
+    } catch {
+      return u;
+    }
+  }
 
   const getText = (url) => {
     const finalUrl = appendVersion(url);
@@ -19,28 +29,30 @@
     return p;
   };
 
-  function appendVersion(u) {
-    try {
-      if (/^(https?:|data:)/i.test(u)) return u;
-      if (/\bv=([0-9]+|now)\b/.test(u)) return u;
-      return u + (u.includes('?') ? `&v=${V}` : `?v=${V}`);
-    } catch {
-      return u;
-    }
-  }
-
   // =========================
-  // 1) i18n helpers (기존 그대로)
+  // 1) i18n helpers
   // =========================
   const T = (s, fb) => (window.I18N?.t ? I18N.t(s, fb ?? s) : (fb ?? s));
+
+  // ✅ i18n 로딩을 확실히 보장 (환경별 구현 차이 모두 커버)
   async function ensureDbNamespace() {
-    if (window.I18N?.init) {
-      try { await I18N.init({ namespaces: ['db'] }); } catch (e) { console.debug('[db] i18n init skipped', e); }
+    try {
+      if (window.I18N?.init) {
+        // lang 유지 + db 네임스페이스 보장
+        await I18N.init({ namespaces: ['db'] });
+      }
+      if (window.I18N?.loadNamespace) {
+        await I18N.loadNamespace('db');
+      } else if (window.I18N?.loadNamespaces) {
+        await I18N.loadNamespaces(['db']);
+      }
+    } catch (e) {
+      console.debug('[db] i18n ensure namespace skipped', e);
     }
   }
 
   // =========================
-  // 2) 병렬 풀 실행 헬퍼 (기존 그대로)
+  // 2) 병렬 풀 실행 헬퍼
   // =========================
   async function withPool(items, worker, limit = 6) {
     const q = items.map((v, i) => ({ v, i }));
@@ -51,9 +63,13 @@
       const { v, i } = q.shift();
       const job = worker(v, i)
         .then((res) => (out[i] = res))
-        .catch((err) => { console.warn('[db] worker error', v, err); out[i] = null; })
+        .catch((err) => {
+          console.warn('[db] worker error', v, err);
+          out[i] = null;
+        })
         .finally(() => {
-          running.splice(running.indexOf(job), 1);
+          const idx = running.indexOf(job);
+          if (idx >= 0) running.splice(idx, 1);
           runOne();
         });
       running.push(job);
@@ -67,7 +83,8 @@
   // 3) 경로/에셋
   // =========================
   const DB_BASE = '/pages/database/';
-  const buildUrl = (folder, file) => appendVersion(DB_BASE + encodeURIComponent(folder) + '/' + file);
+  const buildUrl = (folder, file) =>
+    appendVersion(DB_BASE + encodeURIComponent(folder) + '/' + file);
 
   function resolveAsset(folder, src) {
     if (!src) return '';
@@ -78,38 +95,49 @@
     return buildUrl(folder, rel);
   }
 
-  // ✅ 전용무기 → 위젯 리맵 (표시/링크/로드 경로만 바꿈)
+  // ✅ 전용무기 → 위젯 리맵
   function mapFolder(folder) {
     return folder === 'hero-exclusive-gear' ? 'widgets' : folder;
   }
 
   // =========================
-  // 4) 카드 목록 소스 (기존 그대로)
+  // 4) 카드 목록 소스
   // =========================
   const ITEMS = [
     { folder: 'governor-gear',               category: 'db.governorGear.title' },
     { folder: 'governor-charm',              category: 'db.governorCharm.title' },
     { folder: 'server-timeline-(state-age)', category: 'db.serverTimeline.title' },
-    { folder: 'hero-gear-enhancement-chart', category: 'db.heroGearEnhance.title' },
+    { folder: 'hero-gear-enhancement-chart', category: 'db.heroGearEnhance.title' }, // 영웅 부속품(경험치)
     { folder: 'max-levels',                  category: 'db.maxLevels.title' },
     { folder: 'widgets',                     category: 'db.widgets.title' },
     { folder: 'mastery-forging',             category: 'db.masteryForging.title' },
     { folder: 'hero-shards',                 category: 'db.heroShards.title' }
   ];
-  const CANDIDATES = ['index.html', 'main.html', 'guide.html', 'list.html', 'README.html'];
+  const CANDIDATES = [
+    'index.html',
+    'main.html',
+    'guide.html',
+    'list.html',
+    'README.html'
+  ];
 
   // =========================
-  // 5) DOM 유틸 (기존 그대로)
+  // 5) DOM 유틸
   // =========================
   const esc = (s) =>
-    String(s ?? '').replace(/[&<>"']/g, (m) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));
+    String(s ?? '').replace(/[&<>"']/g, (m) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])
+    );
+
   const pickText = (doc, sels) => {
     for (const sel of sels) {
       const n = doc.querySelector(sel);
-      if (n && n.textContent && n.textContent.trim()) return n.textContent.trim();
+      if (n && n.textContent && n.textContent.trim())
+        return n.textContent.trim();
     }
     return '';
   };
+
   const pickAttr = (doc, sels, attr) => {
     for (const sel of sels) {
       const n = doc.querySelector(sel);
@@ -129,23 +157,35 @@
     const image =
       doc.querySelector('meta[property="og:image"]')?.content ||
       pickAttr(doc, ['.page img', '.building-page img', 'img'], 'src');
-    return { title: title || '(제목 없음)', summary: summary || '', image: image || '', url: fallbackUrl };
+    return {
+      title: title || '(제목 없음)',
+      summary: summary || '',
+      image: image || '',
+      url: fallbackUrl
+    };
   }
 
   // =========================
-  // 6) 카드 템플릿 (리맵 적용)
+  // 6) 카드 템플릿
   // =========================
+  // ✅ 안전 폴백(번역 키가 아직 없거나 캐시된 구버전일 때도 보기 좋게)
+  const TITLE_FALLBACKS = {
+    'db.heroGearEnhance.title': 'EXP'
+  };
+
   function card(it) {
     const img = it.image
       ? `<div class="card__media"><img src="${esc(it.image)}" alt="" loading="lazy" decoding="async"></div>`
       : `<div class="card__media"></div>`;
 
-    // ✅ 링크는 리맵된 폴더로
-    const href = `#/db/${encodeURIComponent(mapFolder(it.folder))}`;
+    // ✅ history 모드
+    const href = `/db/${encodeURIComponent(mapFolder(it.folder))}`;
 
-    // "a.b" 꼴이면 i18n 키로 간주
-    const isKey = typeof it.title === 'string' && /[A-Za-z0-9_.-]+\.[A-Za-z0-9_.-]+/.test(it.title);
-    const titleText = T(it.title, it.title);
+    const isKey =
+      typeof it.title === 'string' &&
+      /[A-Za-z0-9_.-]+\.[A-Za-z0-9_.-]+/.test(it.title);
+
+    const titleText = T(it.title, TITLE_FALLBACKS[it.title] ?? it.title);
 
     return `
       <a class="card card--db" href="${href}" data-folder="${esc(it.folder)}" aria-label="${esc(titleText)}">
@@ -171,20 +211,20 @@
   }
 
   // =========================
-  // 7) 목록 로드 (리맵 적용)
+  // 7) 목록 로드
   // =========================
   let _once = false, _cache = [];
   async function loadListOnceAndRender() {
     if (_once) { render(_cache); return; }
     _once = true;
 
-    await ensureDbNamespace();
+    await ensureDbNamespace(); // ✅ 네임스페이스 확실히 로드
 
     const parser = new DOMParser();
     const keyRe = /[A-Za-z0-9_.-]+\.[A-Za-z0-9_.-]+/;
 
     const worker = async (it) => {
-      const folderToLoad = mapFolder(it.folder);          // ✅ 리맵된 폴더 기준으로 파일 로드
+      const folderToLoad = mapFolder(it.folder);
       for (const file of CANDIDATES) {
         const url = buildUrl(folderToLoad, file);
         try {
@@ -193,18 +233,18 @@
           const meta = extractMeta(doc, url);
           const fixedImage = meta.image ? resolveAsset(folderToLoad, meta.image) : '';
 
-          // ✅ 전용무기는 제목 i18n 키를 widgets로 강제
           const title =
             it.folder === 'hero-exclusive-gear'
               ? 'db.widgets.title'
-              : (keyRe.test(it.category) ? it.category : (meta.title || it.category));
+              : keyRe.test(it.category)
+                ? it.category
+                : meta.title || it.category;
 
           return { ...it, ...meta, title, image: fixedImage };
         } catch (e) {
           console.debug('[db] fetch fail', url, e);
         }
       }
-      // 실패 시에도 i18n 키 유지 + 링크는 리맵 폴더로
       return {
         ...it,
         title: it.folder === 'hero-exclusive-gear' ? 'db.widgets.title' : it.category,
@@ -220,7 +260,7 @@
   }
 
   // =========================
-  // 8) 초기화 + 언어 변경 시 재치환 (기존 그대로)
+  // 8) 초기화 + 언어 변경 시 재치환
   // =========================
   let _i18nBound = false;
   async function initDatabase() {
@@ -235,5 +275,5 @@
   }
   window.initDatabase = initDatabase;
 
-  // ⛔ 상세 페이지 렌더는 routes.js의 '/db' 라우트에서 처리
+  // ⛔ 상세 페이지는 routes.js의 '/db' 라우트에서 처리
 })();

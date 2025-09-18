@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Redirecting…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="refresh" content="0; url=/" />
+  <script>
+    // GitHub Pages에서 /about 같은 딥링크로 진입 시 404가 발생하므로
+    // 쿼리 ?p=/about 로 싣고 인덱스에서 복원하도록 한다.
+    (function() {
+      var l = window.location;
+      var p = l.pathname + l.search + l.hash;     // 원래 경로 보존
+      // 루트가 아닌 경우에만 p 파라미터로 넘김
+      if (p && p !== '/' && !p.startsWith('/?p=')) {
+        l.replace('/?p=' + encodeURIComponent(p));
+      }
+    })();
+  </script>
+  <noscript>
+    JavaScript가 꺼져 있어 홈으로 이동합니다. <a href="/">Home</a>
+  </noscript>
+</head>
+<body></body>
+</html>
