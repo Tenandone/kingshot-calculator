@@ -43,10 +43,10 @@
     add('에픽', 'epic', 3);
     add('에픽 T1', 'epicT1', 3);
 
-    add('레전드', 'legend', 3);
-    add('레전드 T1', 'legendT1', 3);
-    add('레전드 T2', 'legendT2', 3);
-    add('레전드 T3', 'legendT3', 3);
+    add('레전드', 'legendaryary', 3);
+    add('레전드 T1', 'legendaryaryT1', 3);
+    add('레전드 T2', 'legendaryaryT2', 3);
+    add('레전드 T3', 'legendaryaryT3', 3);
 
     add('신화', 'mythic', 3);
     add('신화 T1', 'mythicT1', 3);

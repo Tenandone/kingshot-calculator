@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SSR 영웅 A vs B 비교 계산기</title>
@@ -25,7 +24,7 @@
   .cmp{border-top:1px dashed var(--bd);padding:10px 14px;color:#333;font-size:14px}
   .cmp .muted{font-size:12px;color:#666}
 
-  /* ====== 5개 별(0~6 단계 이미지) ====== */
+  /* ====== 별(0~6 단계 이미지) ====== */
   .stars{display:flex;gap:4px;align-items:center}
   .star{
     width:24px;height:24px;display:inline-block;
@@ -39,11 +38,17 @@
   .star[data-lv="5"]{ background-image:url('/img/star/5.webp'); }
   .star[data-lv="6"]{ background-image:url('/img/star/6.webp'); }
 
+  /* ====== 초상화 ====== */
+  .portraitWrap{display:flex;justify-content:center;margin-bottom:8px}
+  .portrait{
+    width:96px;height:96px;object-fit:cover;border-radius:10px;
+    border:1px solid var(--bd);background:#f6f7fb;display:block
+  }
+
   @media (max-width:760px){ .row{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
-  <!-- place this right after <body> -->
 <a href="/" class="kd-home-link" style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
   ← KingshotData Korea
 </a>
@@ -51,7 +56,7 @@
 <header>
   <h1>SSR 영웅 A vs B 비교 계산기</h1>
   <div class="muted">
-    병종별로 A와 B 영웅을 선택하고 각 단계(1~30, 표기: 기본 0★~4★ T1~T6, 단 마지막 30레벨은 5★)를 조절하면
+    병종별로 A와 B 영웅을 선택하고 각 단계를 조절하면
     아래에 “A가 B를 이기려면 최소 몇 단계가 필요한지”가 바로 표시됩니다.
   </div>
 </header>
@@ -62,6 +67,10 @@
     <h2>보병</h2>
     <div class="row">
       <div class="card">
+        <!-- 초상화 -->
+        <div class="portraitWrap">
+          <img class="portrait" data-side="A" alt="A 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
         <div class="title"><span class="badge">A</span><select class="select hero" data-side="A"></select></div>
         <div class="kv">
           <label>단계: <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="A"></label>
@@ -74,7 +83,12 @@
         </div>
         <div class="kv"><span>현재 수치</span> <b class="stat" data-side="A">+0.00%</b></div>
       </div>
+
       <div class="card">
+        <!-- 초상화 -->
+        <div class="portraitWrap">
+          <img class="portrait" data-side="B" alt="B 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
         <div class="title"><span class="badge">B</span><select class="select hero" data-side="B"></select></div>
         <div class="kv">
           <label>단계: <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="B"></label>
@@ -96,6 +110,9 @@
     <h2>기병</h2>
     <div class="row">
       <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="A" alt="A 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
         <div class="title"><span class="badge">A</span><select class="select hero" data-side="A"></select></div>
         <div class="kv">
           <label>단계: <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="A"></label>
@@ -108,7 +125,11 @@
         </div>
         <div class="kv"><span>현재 수치</span> <b class="stat" data-side="A">+0.00%</b></div>
       </div>
+
       <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="B" alt="B 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
         <div class="title"><span class="badge">B</span><select class="select hero" data-side="B"></select></div>
         <div class="kv">
           <label>단계: <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="B"></label>
@@ -130,6 +151,9 @@
     <h2>궁병</h2>
     <div class="row">
       <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="A" alt="A 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
         <div class="title"><span class="badge">A</span><select class="select hero" data-side="A"></select></div>
         <div class="kv">
           <label>단계: <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="A"></label>
@@ -142,7 +166,11 @@
         </div>
         <div class="kv"><span>현재 수치</span> <b class="stat" data-side="A">+0.00%</b></div>
       </div>
+
       <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="B" alt="B 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
         <div class="title"><span class="badge">B</span><select class="select hero" data-side="B"></select></div>
         <div class="kv">
           <label>단계: <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="B"></label>
@@ -161,6 +189,28 @@
 </main>
 
 <script>
+/* ================== 이미지 경로 설정 ================== */
+/* 웹 배포용 기본 경로(권장): /img/heroes/{영웅영문명}/img_001.webp */
+const PORTRAIT_BASE = '/img/heroes/';
+/* 로컬 파일 경로를 직접 쓰려면(개발용):
+   예) const PORTRAIT_BASE = 'file:///C:/Users/ant79/Documents/kingshot-calculator/img/heroes/';
+   주의: file:// 경로는 서버에서 열 때 브라우저 정책으로 차단될 수 있음. 가능하면 위의 웹 경로를 쓰고,
+   해당 위치로 이미지를 복사해서 정적 호스팅하는 걸 추천. */
+
+/* 없는 이미지 대체용 SVG(플레이스홀더) */
+const PLACEHOLDER_SVG =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">' +
+    '<rect width="96" height="96" rx="10" ry="10" fill="#f2f4f7" stroke="#e5e7eb"/>' +
+    '<circle cx="48" cy="36" r="16" fill="#dde3ea"/>' +
+    '<rect x="18" y="60" width="60" height="20" rx="10" fill="#dde3ea"/>' +
+    '</svg>'
+  );
+
+/* 경로 생성 */
+function portraitUrl(heroKey){ return PORTRAIT_BASE + heroKey + '/img_001.webp'; }
+
 /* ================== 내장 데이터(SSR만) ================== */
 /* 세그먼트 공식: base + Σ(길이 × delta). 3세대 L30=290.23, 4세대 L30=370.29 앵커 */
 const SEG = {
@@ -238,11 +288,15 @@ const META={
 };
 
 /* ============ 코어/라벨 ============ */
-// 기본: 0★~4★ T1~T6, 단 L=30은 5★로 표기
+/* 표기 규칙:
+   - 기본: 0★~4★ T1~T5
+   - T6 도달 시: n성 (예: 0별 6티어 = 1성, ..., 4별 6티어 = 5성)
+   - L=30(최종)은 자동으로 5성
+*/
 function levelToStarTier6(L){
-  if (L === 30) return "5★";
   const star = Math.floor((L - 1) / 6);   // 0..4
   const tier = ((L - 1) % 6) + 1;         // 1..6
+  if (tier === 6) return `${star + 1}성`;
   return `${star}★ T${tier}`;
 }
 function listHeroesByType(type){
@@ -280,6 +334,10 @@ document.querySelectorAll('.lane').forEach(section=>{
   const starsA=[...starsBoxA.querySelectorAll('.star')];
   const starsB=[...starsBoxB.querySelectorAll('.star')];
 
+  // 초상화 DOM
+  const portraitA=cardA.querySelector('.portrait[data-side="A"]');
+  const portraitB=cardB.querySelector('.portrait[data-side="B"]');
+
   // 옵션 주입
   const list=listHeroesByType(type);
   selA.innerHTML=list.map(n=>`<option value="${n}">${ko(n)} (${n}) · ${META[n].gen}세대</option>`).join('');
@@ -310,15 +368,31 @@ document.querySelectorAll('.lane').forEach(section=>{
     }
   }
 
+  function setPortrait(imgEl, heroKey, sideLabel){
+    if(!imgEl) return;
+    imgEl.alt = `${sideLabel} 영웅 초상화 — ${ko(heroKey)} (${heroKey})`;
+    imgEl.src = portraitUrl(heroKey);
+    imgEl.onerror = () => { imgEl.onerror = null; imgEl.src = PLACEHOLDER_SVG; };
+  }
+
   function render(){
     const A=selA.value, B=selB.value, LA=+lvlA.value, LB=+lvlB.value;
 
+    // 라벨(요청 규칙: T6 → n성)
     lblA.textContent=levelToStarTier6(LA);
     lblB.textContent=levelToStarTier6(LB);
 
     // 별 아이콘 갱신
     setStarImages(starsA, LA);
     setStarImages(starsB, LB);
+
+    // 접근성 라벨 갱신
+    starsBoxA.setAttribute('aria-label', `A 성급: ${levelToStarTier6(LA)}`);
+    starsBoxB.setAttribute('aria-label', `B 성급: ${levelToStarTier6(LB)}`);
+
+    // 초상화 갱신
+    setPortrait(portraitA, A, 'A');
+    setPortrait(portraitB, B, 'B');
 
     // 수치 갱신
     const va=statAtHero(A,LA), vb=statAtHero(B,LB);

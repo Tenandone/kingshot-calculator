@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>Saul - Hero Card</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background:#f5f5f5; }
+    .hero-card {
+      max-width: 900px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      padding: 20px;
+    }
+    .hero-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .sources img { width: 48px; margin-right: 6px; }
+    .hero-name { font-size: 40px; color: #b8860b; margin: 0; }
+    .stats-box {
+      border: 1px solid #caa45b;
+      background: #fffaf0;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .hero-main {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+    .skills { width: 35%; }
+    .skill {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      background: #f8fafc;
+      padding: 8px;
+      border-radius: 8px;
+    }
+    .skill img {
+      width: 50px; height: 50px;
+      margin-right: 8px;
+      border-radius: 6px;
+    }
+    .skill strong { display:block; font-size:14px; margin-bottom:4px; }
+    .hero-image { width: 220px; align-self: center; }
+
+    .hero-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .stat {
+      flex: 1 1 200px;
+      background: #f0f0f0;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-card">
+    <!-- 상단 -->
+    <div class="hero-header">
+      <div class="sources">
+        <img src="/img/daily-deals.png" alt="Daily Deals">
+        <img src="/img/hero-roulette.png" alt="Hero Roulette">
+      </div>
+      <h1 class="hero-name">Saul</h1>
+      <div class="stats-box">
+        <p>Hero Attack: 2,697</p>
+        <p>Hero Defense: 2,220</p>
+        <p>Hero Health: 16,650</p>
+        <p>Archer Attack: +200.16%</p>
+        <p>Archer Defense: +200.16%</p>
+      </div>
+    </div>
+
+    <!-- 메인 -->
+    <div class="hero-main">
+      <!-- 왼쪽 스킬 -->
+      <div class="skills">
+        <div class="skill">
+          <img src="/img/skills/saul-s1.png" alt="Skill 1">
+          <div>
+            <strong>Delivers multiple hits...</strong>
+            <p>Damage Up: 55% → 75%</p>
+          </div>
+        </div>
+        <div class="skill">
+          <img src="/img/skills/saul-s2.png" alt="Skill 2">
+          <div>
+            <strong>When Health is below 50%...</strong>
+            <p>Defense Up: 50% → 150%</p>
+          </div>
+        </div>
+        <div class="skill">
+          <img src="/img/skills/saul-s3.png" alt="Skill 3">
+          <div>
+            <strong>Increase Attack Speed by 30%</strong>
+            <p>Attack Speed Up: 10% → 30%</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 중앙 캐릭터 -->
+      <img src="/img/heroes/saul.png" alt="Saul" class="hero-image">
+
+      <!-- 오른쪽 스킬 -->
+      <div class="skills">
+        <div class="skill">
+          <img src="/img/skills/saul-s4.png" alt="Skill 4">
+          <div>
+            <strong>Efficient construction...</strong>
+            <p>Construction Speed Up: 3% → 15%</p>
+          </div>
+        </div>
+        <div class="skill">
+          <img src="/img/skills/saul-s5.png" alt="Skill 5">
+          <div>
+            <strong>Proficiency in resource...</strong>
+            <p>Construction Cost Down: 3% → 15%</p>
+          </div>
+        </div>
+        <div class="skill">
+          <img src="/img/skills/saul-s6.png" alt="Skill 6">
+          <div>
+            <strong>Increases damage dealt...</strong>
+            <p>Damage Up: 5% → 15%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 하단 -->
+    <div class="hero-footer">
+      <div class="stat">Attack 546</div>
+      <div class="stat">Defense 450</div>
+      <div class="stat">Health 3,375</div>
+      <div class="stat">Marksman Lethality +50%</div>
+      <div class="stat">Marksman Health +50%</div>
+    </div>
+  </div>
+</body>
+</html>
