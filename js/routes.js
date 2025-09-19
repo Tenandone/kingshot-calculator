@@ -241,79 +241,78 @@
         }
       },
 
-     // --- Buildings ---
-'/buildings': {
-  title: '건물 - KingshotData.kr',
-  render: async function (el) {
-    var token = newRenderToken();
-    try {
-      if (window.I18N && window.I18N.loadNamespace) {
-        await window.I18N.loadNamespace('buildings');
-      }
-    } catch(e) {}
-    if (isStale(token)) return;
+      // --- Buildings ---
+      '/buildings': {
+        title: '건물 - KingshotData.kr',
+        render: async function (el) {
+          var token = newRenderToken();
+          try {
+            if (window.I18N && window.I18N.loadNamespace) {
+              await window.I18N.loadNamespace('buildings');
+            }
+          } catch(e) {}
+          if (isStale(token)) return;
 
-    el.innerHTML = [
-      '<div id="buildings-grid" class="grid"></div>',
-      '<div id="building-root"></div>'
-    ].join('');
+          el.innerHTML = [
+            '<div id="buildings-grid" class="grid"></div>',
+            '<div id="building-root"></div>'
+          ].join('');
 
-    // ✅ 절대 경로를 먼저 두고, 상대 경로는 fallback
-    var candidates = [ v('/js/pages/buildings.js'), v('js/pages/buildings.js') ];
-    var ok = false, lastErr;
-    for (var i=0;i<candidates.length;i++) {
-      var src = candidates[i];
-      try { 
-        await _loadScriptOnce(src); 
-        ok = true; 
-        break; 
-      } catch (e) { 
-        lastErr = e; 
-      }
-    }
-    if (isStale(token)) return;
-    if (!ok) {
-      el.innerHTML =
-        '<div class="placeholder">' +
-          '<h2 data-i18n="common.loadFail">로딩 실패</h2>' +
-          '<p class="muted" data-i18n="buildings.loadFailHint">/js/pages/buildings.js 경로를 확인하세요.</p>' +
-        '</div>';
-      if (lastErr) console.error(lastErr);
-      return;
-    }
+          // ✅ 절대 경로만 사용
+          var candidates = [ v('/js/pages/buildings.js') ];
+          var ok = false, lastErr;
+          for (var i=0;i<candidates.length;i++) {
+            var src = candidates[i];
+            try { 
+              await _loadScriptOnce(src); 
+              ok = true; 
+              break; 
+            } catch (e) { 
+              lastErr = e; 
+            }
+          }
+          if (isStale(token)) return;
+          if (!ok) {
+            el.innerHTML =
+              '<div class="placeholder">' +
+                '<h2 data-i18n="common.loadFail">로딩 실패</h2>' +
+                '<p class="muted" data-i18n="buildings.loadFailHint">/js/pages/buildings.js 경로를 확인하세요.</p>' +
+              '</div>';
+            if (lastErr) console.error(lastErr);
+            return;
+          }
 
-    if (typeof window.initBuildings !== 'function') {
-      el.innerHTML =
-        '<div class="placeholder">' +
-          '<h2 data-i18n="common.initFail">초기화 실패</h2>' +
-          '<p class="muted" data-i18n="buildings.noInit">window.initBuildings()가 없습니다.</p>' +
-        '</div>';
-      return;
-    }
+          if (typeof window.initBuildings !== 'function') {
+            el.innerHTML =
+              '<div class="placeholder">' +
+                '<h2 data-i18n="common.initFail">초기화 실패</h2>' +
+                '<p class="muted" data-i18n="buildings.noInit">window.initBuildings()가 없습니다.</p>' +
+              '</div>';
+            return;
+          }
 
-    // 옛 해시 링크 → 클린 경로로 변환
-    el.addEventListener('click', function (e) {
-      var a = e.target.closest && e.target.closest('a[href^="#/building/"]');
-      if (a) {
-        e.preventDefault();
-        var tail = a.getAttribute('href').replace(/^#\/building\/?/, ''); // 예: towncenter/30
-        return goto('/buildings/' + tail);
-      }
-      a = e.target.closest && e.target.closest('a[href^="#/buildings"]');
-      if (a) {
-        e.preventDefault();
-        return goto('/buildings');
-      }
-    });
+          // 옛 해시 링크 → 클린 경로로 변환
+          el.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a[href^="#/building/"]');
+            if (a) {
+              e.preventDefault();
+              var tail = a.getAttribute('href').replace(/^#\/building\/?/, ''); // 예: towncenter/30
+              return goto('/buildings/' + tail);
+            }
+            a = e.target.closest && e.target.closest('a[href^="#/buildings"]');
+            if (a) {
+              e.preventDefault();
+              return goto('/buildings');
+            }
+          });
 
-    try { window.initBuildings(); } catch (e) { console.error(e); }
+          try { window.initBuildings(); } catch (e) { console.error(e); }
 
-    setTitle('title.buildings', '건물 - KingshotData.kr');
-    window.scrollTo({ top: 0 });
-    focusMain(el);
-  }
-},
-
+          setTitle('title.buildings', '건물 - KingshotData.kr');
+          window.scrollTo({ top: 0 });
+          focusMain(el);
+        }
+      },
 
       // --- Heroes (list) ---
       '/heroes': {
@@ -347,7 +346,8 @@
             }
           });
 
-          var jsCands = [ v('js/pages/heroes.js'), v('/js/pages/heroes.js') ];
+          // ✅ 절대 경로만 사용
+          var jsCands = [ v('/js/pages/heroes.js') ];
           var loadedAny = false;
           for (var i=0;i<jsCands.length;i++) {
             var src = jsCands[i];
@@ -383,7 +383,7 @@
           el.innerHTML =
             '<section class="container">' +
               '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">' +
-                '<h1 class="page-title" id="hero-title" data-i18n="heroes.detail.title">-</h1>' +
+                '<h1 class="page-title" id="hero-title" data-i18n="heroes.detail.title">^_^</h1>' +
                 '<a class="btn btn-icon" href="/heroes" data-smart-back="/heroes" aria-label="Back" title="Back">←</a>' +
               '</div>' +
               '<div id="hero-root" class="hero-detail"></div>' +
@@ -406,7 +406,8 @@
             '</style>';
           apply(el);
 
-          var jsCands = [ v('js/pages/hero.js'), v('/js/pages/hero.js') ];
+          // ✅ 절대 경로만 사용
+          var jsCands = [ v('/js/pages/hero.js') ];
           var ok = false;
           for (var i=0;i<jsCands.length;i++){
             var src = jsCands[i];
@@ -453,8 +454,8 @@
           async function loadGuidesDeps() {
             var cssCands = ['/css/guides.css', 'css/guides.css'];
             for (var i=0;i<cssCands.length;i++){ try { await ensureCSS(cssCands[i]); break; } catch(e){} }
-            // js 후보 경로
-            var jsCands = ['js/guides.js','/js/guides.js','js/pages/guides.js','/js/pages/guides.js'];
+            // ✅ js 후보 경로 절대경로(/js/pages/guides.js)만 유지
+            var jsCands = [ '/js/pages/guides.js' ];
             for (var j=0;j<jsCands.length;j++){ try { await _loadScriptOnce(jsCands[j]); break; } catch(e){} }
           }
 
@@ -582,7 +583,8 @@
 
           el.innerHTML = htmlBodyOnly(html);
 
-          var jsCands = [ v('js/pages/database.js'), v('/js/pages/database.js') ];
+          // ✅ 절대 경로만 사용
+          var jsCands = [ v('/js/pages/database.js') ];
           var loadedAny = false;
           for (var i=0;i<jsCands.length;i++) {
             var src = jsCands[i];
@@ -730,10 +732,10 @@
 
     // ===== 프리패치(hover/idle)로 체감속도 향상 =====
     var PREFETCH_MAP = {
-      '/buildings':  { js: ['js/pages/buildings.js'] },
-      '/heroes':     { js: ['js/pages/heroes.js'], html: ['pages/heroes.html','/pages/heroes.html'] },
-      '/database':   { js: ['js/pages/database.js'], html: ['pages/database.html','/pages/database.html'] },
-      '/guides':     { js: ['js/guides.js','/js/guides.js'], css: ['/css/guides.css'], html: ['pages/guides.html','/pages/guides.html'] }
+      '/buildings':  { js: ['/js/pages/buildings.js'] },
+      '/heroes':     { js: ['/js/pages/heroes.js'], html: ['pages/heroes.html','/pages/heroes.html'] },
+      '/database':   { js: ['/js/pages/database.js'], html: ['pages/database.html','/pages/database.html'] },
+      '/guides':     { js: ['/js/pages/guides.js'], css: ['/css/guides.css'], html: ['pages/guides.html','/pages/guides.html'] }
     };
 
     function prefetchFor(href) {
@@ -753,8 +755,6 @@
       if (!a) return;
       prefetchFor(a.href);
     });
-
-    
 
     return routes;
   };
