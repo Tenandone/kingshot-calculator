@@ -400,19 +400,22 @@ document.querySelectorAll('.lane').forEach(section=>{
     statB.textContent=`+${vb.toFixed(2)}%`;
 
     // 비교 문구
-    const aNeed=minLevelToBeat(A,B,LB);
-    const bNeed=minLevelToBeat(B,A,LA);
-    let line='';
-    if (Math.abs(va - vb) < 0.005){
-      line = `현재 ${ko(A)}와 ${ko(B)}의 수치는 거의 동일합니다.`;
-    } else if (va > vb){
-      line = `${ko(A)}(A)이 이미 우세합니다. (${levelToStarTier6(LA)} vs ${levelToStarTier6(LB)})`;
-    } else {
-      line = `${ko(A)}(A)이 ${ko(B)}(B)를 추월하려면 최소 <b>${aNeed.lv? levelToStarTier6(aNeed.lv): '불가(최대 초과)'}</b>이 필요합니다.`;
-    }
-    const sub = `${ko(B)}(B)이 ${ko(A)}(A)를 추월하려면 ${bNeed.lv? levelToStarTier6(bNeed.lv): '불가(최대 초과)'} 필요`;
-    cmpText.innerHTML=line;
-    cmpHint.textContent=sub;
+const aNeed = minLevelToBeat(A, B, LB);
+const bNeed = minLevelToBeat(B, A, LA);
+let line = '';
+
+if (Math.abs(va - vb) < 0.005) {
+  line = `현재 ${ko(A)}와 ${ko(B)}의 성능은 거의 차이가 없습니다.`;
+} else if (va > vb) {
+  line = `${ko(A)}가 우세한 상태입니다. (${levelToStarTier6(LA)} vs ${levelToStarTier6(LB)})`;
+} else {
+  line = `${ko(A)}가 ${ko(B)}를 따라잡으려면 최소 <b>${aNeed.lv ? levelToStarTier6(aNeed.lv) : '불가능 (최대 초과)'}</b>가 필요합니다.`;
+}
+
+const sub = `${ko(B)}가 ${ko(A)}를 앞서려면 ${bNeed.lv ? levelToStarTier6(bNeed.lv) : '불가능 (최대 초과)'}가 필요합니다.`;
+
+cmpText.innerHTML = line;
+cmpHint.textContent = sub;
   }
 
   [selA,selB,lvlA,lvlB].forEach(el=> el.addEventListener('input',render));
