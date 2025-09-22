@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>모바일 게임 유저들을 위한 합리적인 충전 가이드</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root{
+      --brand:#0b57d0;
+      --text:#222;
+      --muted:#555;
+      --surface:#fff;
+      --bg:#fff;
+      --border:#e6e6e6;
+      --note-bg:#f9f9f9;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --text:#e8eaed;
+        --muted:#c2c7d0;
+        --surface:#121212;
+        --bg:#0b0b0b;
+        --border:#2a2a2a;
+        --note-bg:#1a1a1a;
+      }
+    }
+    html,body{
+      margin:0; padding:0;
+      background:var(--bg); color:var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+        "Noto Sans KR","Noto Sans JP","Noto Sans SC","Noto Sans TC","Noto Naskh Arabic",
+        Arial, sans-serif;
+      line-height:1.65;
+    }
+    .topbar{
+      position: sticky; top:0; z-index:10;
+      background:var(--surface);
+      border-bottom:1px solid var(--border);
+      padding:8px max(env(safe-area-inset-left),12px) 8px max(env(safe-area-inset-right),12px);
+    }
+    .topbar .controls{ max-width:1000px; margin:0 auto; display:flex; gap:10px; align-items:center; justify-content:flex-end; }
+    .topbar label{ font-size:14px; color:var(--muted); }
+    .topbar select{
+      font-size:14px; padding:8px 10px; border:1px solid var(--border);
+      border-radius:10px; background:var(--surface); color:var(--text);
+    }
+    .container{ max-width:1000px; margin:0 auto; padding:16px max(env(safe-area-inset-left),16px) 40px max(env(safe-area-inset-right),16px); }
+    h1{ font-size:clamp(22px,3vw,36px); color:var(--brand); margin:8px 0 16px; }
+    h2{ font-size:clamp(18px,2.4vw,26px); color:var(--brand); margin:24px 0 12px; }
+    .step{ margin-bottom:32px; }
+    .note{
+      font-size:14px; color:var(--muted); background:var(--note-bg);
+      padding:12px 14px; border-left:4px solid var(--brand);
+      border-radius:6px; margin:16px 0;
+    }
+    [dir="rtl"] .note{ border-left:0; border-right:4px solid var(--brand); }
+    a{ color:var(--brand); text-decoration:none; font-weight:600; }
+    a:hover, a:focus{ text-decoration:underline; }
+    a:focus-visible{ outline:2px dashed var(--brand); outline-offset:3px; }
+    .imgrow{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin:12px 0; }
+    .imgrow img{ width:100%; height:auto; display:block; border:1px solid var(--border); border-radius:8px; }
+    .links{
+      background:#f5f5f5;
+      background: color-mix(in srgb, var(--surface) 85%, var(--brand) 5%);
+      padding:16px; border-radius:10px; margin-top:28px;
+    }
+    .links h2{ color:var(--text); margin-top:0; }
+    .links ul{ list-style:none; padding:0; margin:0; }
+    .links li{ margin:8px 0; }
+    .links a{ font-weight:700; }
+    ul{ padding-inline-start:18px; }
+    strong{ font-weight:700; }
+    em{ font-style: italic; color: var(--muted); }
+  </style>
+</head>
+<a href="/" class="kd-home-link" style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
+  ← KingshotData Korea
+</a>
+<body>
+  <header class="topbar">
+    <div class="controls">
+      <label for="langSwitcher" id="langLabel">Language</label>
+      <select id="langSwitcher" aria-label="언어 선택 / Language">
+        <option value="ko">한국어</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+        <option value="zh-CN">简体中文</option>
+        <option value="zh-TW">繁體中文</option>
+        <option value="ar">العربية</option>
+      </select>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 data-i18n="h1">모바일 게임 유저들을 위한 합리적인 충전 가이드</h1>
+
+    <div class="note">
+      <div data-i18n="note1_line1">
+        <a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" target="_blank" rel="noopener noreferrer">[루트바 가입하기 링크]</a> 로 가입을 합니다.
+      </div>
+      <div data-i18n="note1_line2">
+        루트바 검색창에 <strong>#s4qU</strong> 입력하면 추가 쿠폰을 받을 수 있습니다.
+      </div>
+      <div data-i18n="note1_line3">
+        (하단에 누적충전 프로모션 링크를 남겨놨습니다)
+      </div>
+    </div>
+
+    <!-- Step 1 -->
+    <section class="step">
+      <h2 data-i18n="s1_title">1. 단품 충전</h2>
+      <p data-i18n="s1_p1">충전하고 싶은 <strong>카드를 선택</strong>하고 <strong>Top‑up Now</strong> 버튼을 누릅니다.</p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step1.png" alt="Screenshot: single-item top-up">
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step">
+      <h2 data-i18n="s2_title">2. 다품 충전</h2>
+      <p data-i18n="s2_p1">카드 하단의 <strong>장바구니 버튼</strong>을 눌러 장바구니에 추가합니다. <em>(신중히 추가하세요)</em></p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step2.png" alt="Screenshot: multi-item top-up">
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step">
+      <h2 data-i18n="s3_title">3. 결제 진행</h2>
+      <p data-i18n="s3_p1">충전 방식을 <strong>카드, 페이팔</strong> 중 편한 방법으로 선택 후 <strong>Pay Now</strong>를 누릅니다.</p>
+      <p data-i18n="s3_p2">좌측은 <strong>셀프탑업(내가 직접 충전)</strong>, 우측은 <strong>상담원 충전</strong>입니다. 편리한 <strong>셀프탑업</strong>을 선택하세요.</p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step3.png" alt="Screenshot: checkout (payment method)">
+        <img src="/img/lootbar/step8.png" alt="Screenshot: checkout (self top-up vs agent)">
+      </div>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="step">
+      <h2 data-i18n="s4_title">4. 로그인</h2>
+      <p data-i18n="s4_p1">셀프탑업을 선택하면 로그인 화면이 나옵니다. 구글 로그인과 페이스북 로그인 중에서 <strong>구글 로그인이 더 편리</strong>합니다.</p>
+      <ul>
+        <li data-i18n="s4_li1">구글 아이디 입력</li>
+        <li data-i18n="s4_li2">비밀번호 입력</li>
+      </ul>
+      <p class="note" data-i18n="s4_note">※ 초반에는 비밀번호를 미리 정확히 확인 후 진행하세요.</p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step4.png" alt="Screenshot: sign in">
+        <img src="/img/lootbar/step5.png" alt="Screenshot: sign in (email)">
+        <img src="/img/lootbar/step6.png" alt="Screenshot: sign in (password)">
+      </div>
+    </section>
+
+    <!-- Step 5 -->
+    <section class="step">
+      <h2 data-i18n="s5_title">5. 장바구니 충전</h2>
+      <p data-i18n="s5_p1">장바구니에 담아둔 금액만큼 충전이 가능합니다. 예: <strong>$4.99</strong> 팩을 장바구니에 담아 계정에 충전.</p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step7.png" alt="Screenshot: cart top-up">
+        <img src="/img/lootbar/step9.png" alt="Screenshot: cart pay">
+        <img src="/img/lootbar/step10.png" alt="Screenshot: cart purchase confirm">
+      </div>
+    </section>
+
+    <!-- Step 6 -->
+    <section class="step">
+      <h2 data-i18n="s6_title">6. 구매 완료</h2>
+      <p data-i18n="s6_p1">구매 확인창에서 <strong>확인</strong>을 누르면 결제가 진행됩니다. 완료 후 제한 시간이 지나면 자동으로 완료 화면이 뜨며 <strong>Got it</strong>을 누르면 종료됩니다.</p>
+      <p><strong data-i18n="s6_done">충전 완료!</strong></p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step12.png" alt="Screenshot: purchase complete 1">
+        <img src="/img/lootbar/step13.png" alt="Screenshot: purchase complete 2">
+        <img src="/img/lootbar/step14.png" alt="Screenshot: purchase complete 3">
+      </div>
+    </section>
+
+    <!-- Final -->
+    <section class="step">
+      <h2 data-i18n="final_title">최종 완료</h2>
+      <p><strong data-i18n="final_p_strong">모든 과정이 완료되었습니다. 이제 게임에서 충전된 패키지를 확인해 보세요!</strong></p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step15.png" alt="Screenshot: final screen">
+      </div>
+    </section>
+
+    <div class="note">
+      <div data-i18n="simple_note_1">셀프충전은 매우 간단합니다.</div>
+      <div data-i18n="simple_note_2">문의가 많아 모두 답변드리기 어려워, 본 포스팅으로 대체합니다.</div>
+    </div>
+
+    <!-- Cumulative -->
+    <div class="note" data-i18n="note_cum">
+      <a href="https://lootbar.gg/a/htDl21" target="_blank" rel="noopener noreferrer">[누적충전 바로가기 링크]</a> 를 즐겨찾기 &amp; 북마크 해놓으시고<br>
+      충전하면 <strong>매월말 집계하여 5~12% 쿠폰</strong>을 추가로 증정합니다.<br>
+      많은 관심 부탁드립니다.
+    </div>
+
+    <!-- Extra Links -->
+    <div class="links">
+      <h2 data-i18n="links_title">킹샷 외에도 모바일게임 할인 링크 안내</h2>
+      <ul>
+        <li><a href="https://lootbar.gg/a/htDl21" target="_blank" rel="noopener noreferrer" data-i18n="link_wos">화이트아웃 서바이벌 할인 링크</a></li>
+        <li><a href="https://lootbar.gg/a/htDl21" target="_blank" rel="noopener noreferrer" data-i18n="link_lastwar">라스트워 할인 링크</a></li>
+        <li><a href="https://lootbar.gg/a/htDl21" target="_blank" rel="noopener noreferrer" data-i18n="link_genshin">원신 할인 링크</a></li>
+        <li><a href="https://lootbar.gg/a/htDl21" target="_blank" rel="noopener noreferrer" data-i18n="link_afk">AFK 아레나 할인 링크</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <script>
+    (function(){
+      const i18n = {
+        "ko": {
+          "h1":"모바일 게임 유저들을 위한 합리적인 충전 가이드",
+          "note1_line1":'<a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" target="_blank" rel="noopener noreferrer">[루트바 가입하기 링크]</a> 로 가입을 합니다.',
+          "note1_line2":"루트바 검색창에 <strong>#s4qU</strong> 입력하면 추가 쿠폰을 받을 수 있습니다.",
+          "note1_line3":"(하단에 누적충전 프로모션 링크를 남겨놨습니다)",
+          "s1_title":"1. 단품 충전",
+          "s1_p1":"충전하고 싶은 <strong>카드를 선택</strong>하고 <strong>Top‑up Now</strong> 버튼을 누릅니다.",
+          "s2_title":"2. 다품 충전",
+          "s2_p1":"카드 하단의 <strong>장바구니 버튼</strong>을 눌러 장바구니에 추가합니다. <em>(신중히 추가하세요)</em>",
+          "s3_title":"3. 결제 진행",
+          "s3_p1":"충전 방식을 <strong>카드, 페이팔</strong> 중 편한 방법으로 선택 후 <strong>Pay Now</strong>를 누릅니다.",
+          "s3_p2":"좌측은 <strong>셀프탑업(내가 직접 충전)</strong>, 우측은 <strong>상담원 충전</strong>입니다. 편리한 <strong>셀프탑업</strong>을 선택하세요.",
+          "s4_title":"4. 로그인",
+          "s4_p1":"셀프탑업을 선택하면 로그인 화면이 나옵니다. 구글 로그인과 페이스북 로그인 중에서 <strong>구글 로그인이 더 편리</strong>합니다.",
+          "s4_li1":"구글 아이디 입력",
+          "s4_li2":"비밀번호 입력",
+          "s4_note":"※ 초반에는 비밀번호를 미리 정확히 확인 후 진행하세요.",
+          "s5_title":"5. 장바구니 충전",
+          "s5_p1":"장바구니에 담아둔 금액만큼 충전이 가능합니다. 예: <strong>$4.99</strong> 팩을 장바구니에 담아 계정에 충전.",
+          "s6_title":"6. 구매 완료",
+          "s6_p1":"구매 확인창에서 <strong>확인</strong>을 누르면 결제가 진행됩니다. 완료 후 제한 시간이 지나면 자동으로 완료 화면이 뜨며 <strong>Got it</strong>을 누르면 종료됩니다.",
+          "s6_done":"충전 완료!",
+          "final_title":"최종 완료",
+          "final_p_strong":"모든 과정이 완료되었습니다. 이제 게임에서 충전된 패키지를 확인해 보세요!",
+          "simple_note_1":"셀프충전은 매우 간단합니다.",
+          "simple_note_2":"문의가 많아 모두 답변드리기 어려워, 본 포스팅으로 대체합니다.",
+          "note_cum":'<a href="https://lootbar.gg/a/htDl21" target="_blank" rel="noopener noreferrer">[누적충전 바로가기 링크]</a> 를 즐겨찾기 &amp; 북마크 해놓으시고<br>충전하면 <strong>매월말 집계하여 5~12% 쿠폰</strong>을 추가로 증정합니다.<br>많은 관심 부탁드립니다.',
+          "links_title":"킹샷 외에도 모바일게임 할인 링크 안내",
+          "link_wos":"화이트아웃 서바이벌 할인 링크",
+          "link_lastwar":"라스트워 할인 링크",
+          "link_genshin":"원신 할인 링크",
+          "link_afk":"AFK 아레나 할인 링크"
+        },
+        "en": {
+          "h1":"A Sensible Top‑Up Guide for Mobile Gamers",
+          "note1_line1":'Sign up via <a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" target="_blank" rel="noopener noreferrer">[LootBar sign‑up link]</a>.',
+          "note1_line2":"Type <strong>#s4qU</strong> in the LootBar search box to receive an extra coupon.",
+          "note1_line3":"(A cumulative top‑up promo link is provided at the bottom.)",
+          "s1_title":"1. Single‑Item Top‑Up",
+          "s1_p1":"Choose the <strong>card you want</strong> and click <strong>Top‑up Now</strong>.",
+          "s2_title":"2. Multi‑Item Top‑Up",
+          "s2_p1":"Click the <strong>cart icon</strong> under a card to add it to your cart. <em>(Add carefully.)</em>",
+          "s3_title":"3. Checkout",
+          "s3_p1":"Select your payment method (<strong>Card or PayPal</strong>) and hit <strong>Pay Now</strong>.",
+          "s3_p2":"Left = <strong>Self Top‑up</strong> (you top up yourself). Right = <strong>Agent Top‑up</strong>. Choose <strong>Self Top‑up</strong> for convenience.",
+          "s4_title":"4. Sign In",
+          "s4_p1":"If you choose Self Top‑up, a sign‑in screen appears. Between Google and Facebook, <strong>Google sign‑in is easier</strong>.",
+          "s4_li1":"Enter your Google email",
+          "s4_li2":"Enter your password",
+          "s4_note":"※ Early on, double‑check your password before proceeding.",
+          "s5_title":"5. Cart Top‑Up",
+          "s5_p1":"You can top up the total you added to the cart. Example: top up a <strong>$4.99</strong> pack to your account.",
+          "s6_title":"6. Purchase Complete",
+          "s6_p1":"Press <strong>Confirm</strong> on the purchase prompt to proceed. After a short time, the completion screen appears automatically; tap <strong>Got it</strong> to finish.",
+          "s6_done":"Top‑up complete!",
+          "final_title":"Final Complete",
+          "final_p_strong":"Everything is done. Open the game to check your topped‑up package!",
+          "simple_note_1":"Self top‑up is very simple.",
+          "simple_note_2":"Due to the volume of inquiries, this post serves as a general answer.",
+          "note_cum":'Bookmark the <a href="https://lootbar.gg/a/htDl21" target="_blank" rel="noopener noreferrer">[Cumulative top‑up link]</a> and, at the end of each month, we tally your total and grant an extra <strong>5–12% coupon</strong>.<br>Thanks for your support.',
+          "links_title":"Discount links for other mobile games",
+          "link_wos":"Whiteout Survival — discount link",
+          "link_lastwar":"Last War — discount link",
+          "link_genshin":"Genshin Impact — discount link",
+          "link_afk":"AFK Arena — discount link"
+        },
+        "ja": {
+          "h1":"モバイルゲームユーザー向けの合理的なチャージガイド",
+          "note1_line1":'<a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" target="_blank" rel="noopener noreferrer">［LootBar 登録リンク］</a> から登録してください。',
+          "note1_line2":"LootBar の検索欄に <strong>#s4qU</strong> を入力すると追加クーポンがもらえます。",
+          "note1_line3":"（ページ下部に累計チャージのプロモーションリンクがあります）",
+          "s1_title":"1. 単品チャージ",
+          "s1_p1":"希望の<strong>カードを選択</strong>し、<strong>Top‑up Now</strong> をクリックします。",
+          "s2_title":"2. 複数チャージ",
+          "s2_p1":"カード下の<strong>カートボタン</strong>を押してカートに追加します。<em>（追加は慎重に）</em>",
+          "s3_title":"3. 決済",
+          "s3_p1":"支払い方法は <strong>クレジットカードまたは PayPal</strong> を選び、<strong>Pay Now</strong> をクリック。",
+          "s3_p2":"左＝<strong>セルフチャージ</strong>（自分でチャージ）、右＝<strong>スタッフ代行</strong>。便利な<strong>セルフチャージ</strong>をおすすめします。",
+          "s4_title":"4. ログイン",
+          "s4_p1":"セルフチャージを選ぶとログイン画面が表示されます。Google と Facebook のうち、<strong>Google ログインの方が簡単</strong>です。",
+          "s4_li1":"Google メールを入力",
+          "s4_li2":"パスワードを入力",
+          "s4_note":"※ 最初はパスワードを正確に確認してから進めてください。",
+          "s5_title":"5. カートチャージ",
+          "s5_p1":"カートに入れた合計金額分をチャージできます。例：<strong>$4.99</strong> パックをカートに入れてアカウントにチャージ。",
+          "s6_title":"6. 購入完了",
+          "s6_p1":"購入確認画面で <strong>Confirm</strong> を押すと決済が進みます。しばらくして自動で完了画面が表示され、<strong>Got it</strong> を押して終了。",
+          "s6_done":"チャージ完了！",
+          "final_title":"最終完了",
+          "final_p_strong":"すべての手順が完了しました。ゲーム内でチャージされたパッケージを確認してください。",
+          "simple_note_1":"セルフチャージはとても簡単です。",
+          "simple_note_2":"お問い合わせが多いため、本投稿を案内としてご利用ください。",
+          "note_cum":'<a href="https://lootbar.gg/a/htDl21" target="_blank" rel="noopener noreferrer">［累計チャージはこちら］</a> をブックマークしておき、チャージすると<strong>毎月末に集計して5～12%クーポン</strong>を追加進呈します。<br>ご支援ありがとうございます。',
+          "links_title":"キングショット以外のモバイルゲーム割引リンク",
+          "link_wos":"ホワイトアウト・サバイバル 割引リンク",
+          "link_lastwar":"ラストウォー 割引リンク",
+          "link_genshin":"原神 割引リンク",
+          "link_afk":"AFK アリーナ 割引リンク"
+        },
+        "zh-CN": {
+          "h1":"面向手游玩家的合理充值指南",
+          "note1_line1":'请通过 <a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" target="_blank" rel="noopener noreferrer">【LootBar 注册链接】</a> 注册。',
+          "note1_line2":"在 LootBar 搜索框输入 <strong>#s4qU</strong> 可领取额外优惠券。",
+          "note1_line3":"（文末提供累计充值活动链接）",
+          "s1_title":"1. 单品充值",
+          "s1_p1":"选择你想要的<strong>卡片</strong>，点击 <strong>Top‑up Now</strong>。",
+          "s2_title":"2. 多品充值",
+          "s2_p1":"点击卡片下方的<strong>购物车按钮</strong>加入购物车。<em>（请谨慎添加）</em>",
+          "s3_title":"3. 结算",
+          "s3_p1":"选择支付方式（<strong>银行卡或 PayPal</strong>），然后点击 <strong>Pay Now</strong>。",
+          "s3_p2":"左侧＝<strong>自助充值</strong>，右侧＝<strong>人工充值</strong>。建议选择更方便的<strong>自助充值</strong>。",
+          "s4_title":"4. 登录",
+          "s4_p1":"选择自助充值后会出现登录界面。在 Google 与 Facebook 中，<strong>Google 登录更便捷</strong>。",
+          "s4_li1":"输入 Google 邮箱",
+          "s4_li2":"输入密码",
+          "s4_note":"※ 初次操作请先确认密码无误。",
+          "s5_title":"5. 购物车充值",
+          "s5_p1":"可按购物车中的总额进行充值。例：将 <strong>$4.99</strong> 包加入购物车并为账号充值。",
+          "s6_title":"6. 购买完成",
+          "s6_p1":"在购买确认框点击 <strong>Confirm</strong> 开始支付。稍后会自动显示完成界面，点击 <strong>Got it</strong> 结束。",
+          "s6_done":"充值完成！",
+          "final_title":"最终完成",
+          "final_p_strong":"所有步骤已完成。请到游戏内确认已到账的礼包。",
+          "simple_note_1":"自助充值非常简单。",
+          "simple_note_2":"由于咨询较多，本帖作为统一说明。",
+          "note_cum":'请将 <a href="https://lootbar.gg/a/htDl21" target="_blank" rel="noopener noreferrer">【累计充值直达链接】</a> 收藏/书签；完成充值后，我们会在<strong>每月月底统计并追加发放 5～12% 优惠券</strong>。<br>感谢支持。',
+          "links_title":"除 Kingshot 外的手游优惠链接",
+          "link_wos":"Whiteout Survival 优惠链接",
+          "link_lastwar":"Last War 优惠链接",
+          "link_genshin":"原神 优惠链接",
+          "link_afk":"AFK Arena 优惠链接"
+        },
+        "zh-TW": {
+          "h1":"給行動遊戲玩家的合理儲值指南",
+          "note1_line1":'請透過 <a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" target="_blank" rel="noopener noreferrer">【LootBar 註冊連結】</a> 註冊。',
+          "note1_line2":"在 LootBar 搜尋框輸入 <strong>#s4qU</strong> 可獲得額外優惠券。",
+          "note1_line3":"（文末附有累積儲值活動連結）",
+          "s1_title":"1. 單品儲值",
+          "s1_p1":"選擇想儲值的<strong>卡片</strong>，點擊 <strong>Top‑up Now</strong>。",
+          "s2_title":"2. 多品儲值",
+          "s2_p1":"點擊卡片下方的<strong>購物車按鈕</strong>加入購物車。<em>（請謹慎加入）</em>",
+          "s3_title":"3. 結帳",
+          "s3_p1":"選擇付款方式（<strong>信用卡或 PayPal</strong>），然後按 <strong>Pay Now</strong>。",
+          "s3_p2":"左側＝<strong>自助儲值</strong>，右側＝<strong>人工儲值</strong>。建議選擇更方便的<strong>自助儲值</strong>。",
+          "s4_title":"4. 登入",
+          "s4_p1":"選擇自助儲值後會出現登入畫面。在 Google 與 Facebook 之間，<strong>Google 登入更方便</strong>。",
+          "s4_li1":"輸入 Google 帳號",
+          "s4_li2":"輸入密碼",
+          "s4_note":"※ 初期請先確認密碼正確後再進行。",
+          "s5_title":"5. 購物車儲值",
+          "s5_p1":"可依購物車中的金額進行儲值。例：將 <strong>$4.99</strong> 套組加入購物車並為帳號儲值。",
+          "s6_title":"6. 購買完成",
+          "s6_p1":"在購買確認視窗點擊 <strong>Confirm</strong> 進行付款。稍後會自動跳出完成畫面，按 <strong>Got it</strong> 結束。",
+          "s6_done":"儲值完成！",
+          "final_title":"最終完成",
+          "final_p_strong":"所有流程已完成。請至遊戲內確認儲值的套組。",
+          "simple_note_1":"自助儲值非常簡單。",
+          "simple_note_2":"由於詢問眾多，請以本篇為主。",
+          "note_cum":'請將 <a href="https://lootbar.gg/a/htDl21" target="_blank" rel="noopener noreferrer">【累積儲值快速連結】</a> 加入最愛/書籤；儲值後我們會在<strong>每月底統計並追加發放 5～12% 優惠券</strong>。<br>感謝支持。',
+          "links_title":"除了 Kingshot 之外的行動遊戲優惠連結",
+          "link_wos":"Whiteout Survival 優惠連結",
+          "link_lastwar":"Last War 優惠連結",
+          "link_genshin":"原神 優惠連結",
+          "link_afk":"AFK Arena 優惠連結"
+        },
+        "ar": {
+          "h1":"دليل شحن معقول لمستخدمي ألعاب الجوال",
+          "note1_line1":'سجِّل عبر <a href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc" target="_blank" rel="noopener noreferrer">[رابط التسجيل في LootBar]</a>.',
+          "note1_line2":"أدخل <strong>#s4qU</strong> في خانة البحث داخل LootBar لتحصل على قسيمة إضافية.",
+          "note1_line3":"(رابط عرض الشحن التراكمي موجود أسفل الصفحة).",
+          "s1_title":"1. الشحن المفرد",
+          "s1_p1":"اختر <strong>البطاقة التي ترغب بها</strong> ثم انقر <strong>Top‑up Now</strong>.",
+          "s2_title":"2. الشحن المتعدد",
+          "s2_p1":"اضغط <strong>أيقونة السلة</strong> أسفل البطاقة لإضافتها إلى السلة. <em>(أضِف بعناية)</em>",
+          "s3_title":"3. الدفع",
+          "s3_p1":"اختر طريقة الدفع <strong>(بطاقة أو PayPal)</strong> ثم انقر <strong>Pay Now</strong>.",
+          "s3_p2":"اليسار = <strong>شحن ذاتي</strong> (تقوم بالشحن بنفسك). اليمين = <strong>شحن عبر موظّف</strong>. اختر <strong>الشحن الذاتي</strong> لسهولة الاستخدام.",
+          "s4_title":"4. تسجيل الدخول",
+          "s4_p1":"عند اختيار الشحن الذاتي ستظهر شاشة تسجيل الدخول. بين Google وFacebook، <strong>تسجيل دخول Google أسهل</strong>.",
+          "s4_li1":"أدخل بريد Google",
+          "s4_li2":"أدخل كلمة المرور",
+          "s4_note":"※ في البداية تحقّق من كلمة المرور بدقّة قبل المتابعة.",
+          "s5_title":"5. الشحن من السلة",
+          "s5_p1":"يمكنك الشحن بالمبلغ المُضاف في السلة. مثال: اشحن باقة <strong>$4.99</strong> إلى حسابك.",
+          "s6_title":"6. إتمام الشراء",
+          "s6_p1":"في نافذة تأكيد الشراء اضغط <strong>Confirm</strong> لإتمام الدفع. بعد مدة قصيرة ستظهر شاشة الإكمال تلقائيًا؛ اضغط <strong>Got it</strong> للإنهاء.",
+          "s6_done":"تم الشحن!",
+          "final_title":"الإكمال النهائي",
+          "final_p_strong":"اكتملت جميع الخطوات. افتح اللعبة للتحقّق من الحزمة التي تم شحنها.",
+          "simple_note_1":"الشحن الذاتي بسيط جدًا.",
+          "simple_note_2":"نظرًا لكثرة الاستفسارات، يُعتَمد هذا المنشور كمرجع عام.",
+          "note_cum":'احفظ <a href="https://lootbar.gg/a/htDl21" target="_blank" rel="noopener noreferrer">[رابط الشحن التراكمي]</a> في المفضّلة/الإشارات؛ سنحصي شحنك في <strong>نهاية كل شهر</strong> ونمنح <strong>قسائم إضافية بنسبة 5–12%</strong>.<br>شكرًا لدعمك.',
+          "links_title":"روابط خصم لألعاب جوال أخرى",
+          "link_wos":"رابط خصم Whiteout Survival",
+          "link_lastwar":"رابط خصم Last War",
+          "link_genshin":"رابط خصم Genshin Impact",
+          "link_afk":"رابط خصم AFK Arena"
+        }
+      };
+
+      function applyLang(locale){
+        const dict = i18n[locale] || i18n["ko"];
+        document.documentElement.lang = (locale === "zh-CN" || locale === "zh-TW") ? locale : locale;
+        document.documentElement.dir = (locale === "ar") ? "rtl" : "ltr";
+        document.title = dict["h1"] || document.title;
+        // text nodes
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          const key = el.getAttribute("data-i18n");
+          if (dict[key] !== undefined){
+            el.innerHTML = dict[key];
+          }
+        });
+        // label for accessibility
+        const label = document.getElementById("langLabel");
+        if (label){
+          const labelText = {
+            "ko": "언어",
+            "en": "Language",
+            "ja": "言語",
+            "zh-CN": "语言",
+            "zh-TW": "語言",
+            "ar": "اللغة"
+          }[locale] || "Language";
+          label.textContent = labelText;
+        }
+      }
+
+      const select = document.getElementById("langSwitcher");
+      const saved = localStorage.getItem("lang");
+      const browser = (navigator.language || navigator.userLanguage || "").toLowerCase();
+      let initial = saved || (function(){
+        if (browser.startsWith("ko")) return "ko";
+        if (browser.startsWith("ja")) return "ja";
+        if (browser.startsWith("zh")){
+          if (browser.includes("tw") || browser.includes("hk") || browser.includes("hant")) return "zh-TW";
+          return "zh-CN";
+        }
+        if (browser.startsWith("ar")) return "ar";
+        return "en";
+      })();
+      applyLang(initial);
+      if (select){ select.value = initial; }
+      select && select.addEventListener("change", (e)=>{
+        const loc = e.target.value;
+        localStorage.setItem("lang", loc);
+        applyLang(loc);
+      });
+    })();
+  </script>
+</body>
+</html>
