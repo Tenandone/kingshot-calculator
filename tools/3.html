@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>킹샷 중독 자가진단 테스트</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <style>
+    :root{
+      --brand:#0b57d0;
+      --ink:#222;
+      --bg:#f5f7fb;
+      --card:#fff;
+      --line:#e6e8ef;
+      --ok-bg:#e0f7fa;     --ok-ink:#00796b;
+      --warn-bg:#fff3e0;   --warn-ink:#e65100;
+      --danger-bg:#ffebee; --danger-ink:#c62828;
+      --radius:12px;
+      --shadow:0 6px 18px rgba(0,0,0,.06);
+    }
+
+    html,body{height:100%}
+    *{box-sizing:border-box}
+    body{
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Malgun Gothic,Apple Color Emoji,Noto Color Emoji,sans-serif;
+      line-height:1.6;
+      margin:0;
+      color:var(--ink);
+      background:var(--bg);
+      -webkit-tap-highlight-color: transparent;
+      scroll-behavior:smooth;
+    }
+
+    .wrap{
+      max-width: 880px;
+      margin: 0 auto;
+      padding: clamp(16px, 4vw, 28px);
+      padding-bottom: 120px; /* 하단 고정 버튼 공간 */
+    }
+
+    header h1{
+      margin: 6px 0 8px;
+      font-size: clamp(22px, 4.5vw, 32px);
+      color: var(--brand);
+      letter-spacing:-.02em;
+    }
+
+    header p{
+      margin:0 0 16px;
+      font-size: 14px;
+      color:#555;
+      background:#eef3ff;
+      border:1px solid #d8e3ff;
+      padding:10px 12px;
+      border-radius:10px;
+    }
+
+    .meter{
+      display:flex; align-items:center; gap:10px;
+      margin: 10px 0 18px;
+    }
+    .meter-bar{
+      flex:1; height:8px; background:#e9edf6; border-radius:999px; overflow:hidden;
+    }
+    .meter-bar > span{
+      display:block; height:100%; width:0%; background:var(--brand);
+      transition:width .25s ease;
+    }
+    .meter-text{ font-size:13px; color:#555; min-width:88px; text-align:right;}
+
+    h2{
+      font-size: clamp(18px, 3.8vw, 22px);
+      margin: 6px 0 8px;
+    }
+
+    .question{
+      margin:14px 0;
+      padding:14px;
+      background:var(--card);
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .question h3{
+      margin:0 0 10px;
+      font-size: clamp(16px, 3.6vw, 18px);
+      line-height:1.45;
+    }
+
+    /* 옵션을 큰 터치 영역으로 */
+    .options{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:8px;
+    }
+    @media (min-width: 720px){
+      .options{ grid-template-columns: repeat(4, minmax(0,1fr)); }
+    }
+    .options label{
+      display:flex; align-items:center; gap:8px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:10px 12px;
+      background:#fff;
+      cursor:pointer;
+      user-select:none;
+      font-size:14px;
+      transition: border-color .2s ease, box-shadow .2s ease, transform .06s ease;
+      min-height:44px;
+    }
+    .options label:active{ transform: scale(.99); }
+    .options input[type="radio"]{
+      appearance:none; width:18px; height:18px; border-radius:50%;
+      border:2px solid #aab3c5; outline:none; display:inline-block; position:relative; flex:0 0 auto;
+    }
+    .options input[type="radio"]::after{
+      content:""; position:absolute; inset:2px; border-radius:50%; background:transparent;
+      transition: background .2s ease;
+    }
+    .options label:has(input[type="radio"]:checked){
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(11,87,208,.12);
+    }
+    .options input[type="radio"]:checked{ border-color: var(--brand); }
+    .options input[type="radio"]:checked::after{ background: var(--brand); }
+
+    /* 미응답 강조 */
+    .question.unanswered{
+      border-color:#ffb9b9;
+      box-shadow:0 0 0 3px rgba(198,40,40,.15);
+    }
+
+    /* 하단 고정 액션 */
+    .actionbar{
+      position: fixed;
+      left:0; right:0; bottom:0;
+      padding: 12px calc(16px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));
+      background:rgba(255,255,255,.96);
+      border-top:1px solid var(--line);
+      backdrop-filter:saturate(1.2) blur(6px);
+      display:flex; gap:10px; justify-content:center;
+      z-index: 30;
+    }
+    .btn{
+      appearance:none; border:none;
+      background:var(--brand); color:#fff;
+      padding:14px 18px; font-size:16px; border-radius:12px; cursor:pointer;
+      box-shadow: 0 8px 18px rgba(11,87,208,.22);
+      min-width: 220px;
+    }
+    .btn:disabled{ opacity:.5; cursor:not-allowed; box-shadow:none; }
+    .btn-subtle{
+      background:#eef3ff; color:#21427a; box-shadow:none;
+    }
+
+    /* 토스트 알림 */
+    .toast{
+      position: fixed; left:50%; transform:translateX(-50%);
+      top: 12px; z-index: 40;
+      background:#111; color:#fff; padding:10px 14px; border-radius:999px;
+      font-size:13px; box-shadow:0 10px 20px rgba(0,0,0,.2);
+      opacity:0; pointer-events:none; transition: opacity .2s ease, transform .2s ease;
+    }
+    .toast.show{ opacity:1; pointer-events:auto; transform: translate(-50%, 0); }
+
+    /* 모달(결과 팝업) */
+    .overlay{
+      position: fixed; inset:0; background: rgba(0,0,0,.44);
+      backdrop-filter: blur(2px);
+      opacity:0; pointer-events:none; transition: opacity .2s ease;
+      z-index: 90;
+    }
+    .overlay.open{ opacity:1; pointer-events:auto; }
+
+    .modal{
+      position: fixed; left:50%; top:50%;
+      transform: translate(-50%,-50%) scale(.98);
+      width: min(92vw, 560px);
+      background:#fff; border-radius:16px; border:1px solid var(--line);
+      box-shadow: 0 18px 44px rgba(0,0,0,.2);
+      padding: 18px 18px 16px;
+      opacity:0; pointer-events:none; transition: opacity .2s ease, transform .2s ease;
+      z-index: 100;
+    }
+    .modal.open{ opacity:1; pointer-events:auto; transform: translate(-50%,-50%) scale(1); }
+    .modal header{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom: 6px;
+    }
+    .modal header h3{ margin:0; font-size:18px; }
+    .modal .close{
+      appearance:none; border:none; background:transparent; font-size:22px; line-height:1; cursor:pointer;
+      padding:6px; border-radius:8px;
+    }
+    .modal .close:focus{ outline:2px solid var(--brand) }
+
+    .result-box{ text-align:center; padding:10px 8px 6px; }
+    .result-box img{ max-width:120px; margin-bottom:10px; }
+    .result-score{ font-size:42px; font-weight:800; margin:6px 0 4px; letter-spacing:.02em; }
+    .result-main{ font-size:20px; margin: 4px 0; }
+    .result-sub{ font-size:14px; opacity:.9; margin:2px 0 10px; }
+
+    /* 결과 테마 색 */
+    .modal.normal .result-wrap{ background: var(--ok-bg); color: var(--ok-ink); border:1px solid #b2ebf2; }
+    .modal.warning .result-wrap{ background: var(--warn-bg); color: var(--warn-ink); border:1px solid #ffe0b2; }
+    .modal.danger .result-wrap{ background: var(--danger-bg); color: var(--danger-ink); border:1px solid #ffcdd2; }
+
+    .result-wrap{
+      border-radius: 14px; padding:16px; margin: 6px 0 12px;
+    }
+
+    .modal .actions{
+      display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+    }
+    .modal .actions .btn{ min-width: 140px; }
+    .modal .actions .btn-subtle{ background:#f1f3f9; color:#2b3b57; }
+
+    /* 스크린리더 전용 */
+    .sr-only{
+      position: absolute !important; width:1px; height:1px; margin:-1px; padding:0;
+      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; animation:none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>킹샷 게임중독 자가진단 테스트</h1>
+      <p>
+        ※ 이 테스트는 <strong>자가진단</strong>용이며, 심리적인 어려움을 점검·예방하기 위한 참고 자료입니다.
+        정확한 진단을 위해서는 전문가와의 상담이 필요합니다.
+      </p>
+      <div class="meter" aria-hidden="true">
+        <div class="meter-bar" aria-hidden="true"><span id="meterFill" style="width:0%"></span></div>
+        <div class="meter-text"><span id="answered">0</span> / 16</div>
+      </div>
+    </header>
+
+    <div class="section">
+      <h2>자가진단 문항</h2>
+
+      <!-- 질문들 -->
+      <div class="question" id="qbox1"><h3>1. 나는 식사나 휴식 없이 화장실도 가지 않고 킹샷을 한다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q1" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q1" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q1" value="2"> 그렇다</label>
+          <label><input type="radio" name="q1" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox2"><h3>2. 나는 킹샷을 종료 후 다시 켜기도 한다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q2" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q2" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q2" value="2"> 그렇다</label>
+          <label><input type="radio" name="q2" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox3"><h3>3. 나는 킹샷을 못하게 되면 초조하다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q3" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q3" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q3" value="2"> 그렇다</label>
+          <label><input type="radio" name="q3" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox4"><h3>4. 나는 킹샷을 하고 있을 때만 흥미진진하고 생생함을 느낀다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q4" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q4" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q4" value="2"> 그렇다</label>
+          <label><input type="radio" name="q4" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox5"><h3>5. 나는 킹샷을 안 할 때 불안하다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q5" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q5" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q5" value="2"> 그렇다</label>
+          <label><input type="radio" name="q5" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox6"><h3>6. 나는 다른 할 일이 있어도 킹샷을 한다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q6" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q6" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q6" value="2"> 그렇다</label>
+          <label><input type="radio" name="q6" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox7"><h3>7. 나는 킹샷을 못하게 되면 지루하고 재미없다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q7" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q7" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q7" value="2"> 그렇다</label>
+          <label><input type="radio" name="q7" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox8"><h3>8. 나는 킹샷을 할 때 가장 편안함을 느낀다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q8" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q8" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q8" value="2"> 그렇다</label>
+          <label><input type="radio" name="q8" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox9"><h3>9. 나는 과도하게 킹샷에 몰입해서 일에 집중하지 못한다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q9" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q9" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q9" value="2"> 그렇다</label>
+          <label><input type="radio" name="q9" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox10"><h3>10. 나는 킹샷의 전망대를 하지 못하면 초조하다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q10" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q10" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q10" value="2"> 그렇다</label>
+          <label><input type="radio" name="q10" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox11"><h3>11. 나는 킹샷을 하면서 불규칙한 생활을 하게 된다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q11" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q11" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q11" value="2"> 그렇다</label>
+          <label><input type="radio" name="q11" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox12"><h3>12. 나는 정해진 시간까지만 킹샷을 하겠다는 약속을 지키지 못한다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q12" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q12" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q12" value="2"> 그렇다</label>
+          <label><input type="radio" name="q12" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox13"><h3>13. 나는 과금을 줄인다고 다짐하며 과금을 한다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q13" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q13" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q13" value="2"> 그렇다</label>
+          <label><input type="radio" name="q13" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox14"><h3>14. 나는 킹샷을 떠나고 싶다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q14" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q14" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q14" value="2"> 그렇다</label>
+          <label><input type="radio" name="q14" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox15"><h3>15. 나는 친구들과 약속된 자리에서 몰래 킹샷을 켠 적이 있다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q15" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q15" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q15" value="2"> 그렇다</label>
+          <label><input type="radio" name="q15" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+
+      <div class="question" id="qbox16"><h3>16. 나는 효율 좋은 패키지를 못 사면 매우 불안하고 우울해진다.</h3>
+        <div class="options">
+          <label><input type="radio" name="q16" value="0"> 전혀 그렇지 않다</label>
+          <label><input type="radio" name="q16" value="1"> 그렇지 않다</label>
+          <label><input type="radio" name="q16" value="2"> 그렇다</label>
+          <label><input type="radio" name="q16" value="3"> 매우 그렇다</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단 고정 액션바 -->
+  <div class="actionbar" role="region" aria-label="테스트 동작">
+    <button id="resetBtn" class="btn btn-subtle" type="button">초기화</button>
+    <button id="submitBtn" class="btn" type="button">결과 확인하기</button>
+  </div>
+
+  <!-- 토스트 -->
+  <div id="toast" class="toast" role="status" aria-live="polite">모든 문항에 응답해주세요.</div>
+
+  <!-- 결과 오버레이 & 모달 -->
+  <div id="overlay" class="overlay" hidden></div>
+
+  <div id="resultModal" class="modal" role="dialog" aria-modal="true"
+       aria-labelledby="resultTitle" aria-describedby="resultDesc" hidden>
+    <header>
+      <h3 id="resultTitle">자가진단 결과</h3>
+      <button class="close" type="button" aria-label="닫기" id="closeModalBtn">×</button>
+    </header>
+
+    <div class="result-wrap">
+      <div class="result-box">
+        <img id="resultImg" src="" alt="결과 이미지">
+        <div class="result-score" id="score">0점</div>
+        <div class="result-main" id="mainMsg"></div>
+        <div class="result-sub" id="subMsg"></div>
+      </div>
+    </div>
+
+    <p id="resultDesc" class="sr-only">점수와 상태가 표시됩니다.</p>
+
+    <div class="actions">
+      <button type="button" class="btn btn-subtle" id="editBtn">답변 수정하기</button>
+      <button type="button" class="btn" id="retakeBtn">다시 하기</button>
+    </div>
+  </div>
+
+  <script>
+    // 유틸: 토스트
+    function showToast(msg){
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=> t.classList.remove('show'), 1800);
+    }
+
+    // 진행도 업데이트
+    function updateProgress(){
+      let answered = 0;
+      for(let i=1;i<=16;i++){
+        const sel = document.querySelector('input[name="q'+i+'"]:checked');
+        if(sel) answered++;
+      }
+      const percent = Math.round((answered/16)*100);
+      document.getElementById('answered').textContent = answered;
+      document.getElementById('meterFill').style.width = percent + '%';
+      // 버튼 활성/비활성은 강제하지 않음(중간 확인용도 고려)
+    }
+
+    // 첫 미응답 문항 찾기
+    function getFirstUnanswered(){
+      for(let i=1;i<=16;i++){
+        const sel = document.querySelector('input[name="q'+i+'"]:checked');
+        if(!sel) return i;
+      }
+      return null;
+    }
+
+    // 문항 박스 강조/해제
+    function markUnanswered(index){
+      for(let i=1;i<=16;i++){
+        document.getElementById('qbox'+i).classList.remove('unanswered');
+      }
+      if(index){
+        const box = document.getElementById('qbox'+index);
+        box.classList.add('unanswered');
+        box.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+    }
+
+    // 모달 제어: 포커스 트랩 포함
+    const overlay   = document.getElementById('overlay');
+    const modal     = document.getElementById('resultModal');
+    const closeBtn  = document.getElementById('closeModalBtn');
+    const editBtn   = document.getElementById('editBtn');
+    const retakeBtn = document.getElementById('retakeBtn');
+    let lastActive  = null;
+    let trapHandler = null;
+
+    function openModal(){
+      lastActive = document.activeElement;
+      overlay.hidden = false;
+      modal.hidden = false;
+      // 결과 레벨 클래스 유지한 채로 open 플래그만 토글
+      overlay.classList.add('open');
+      modal.classList.add('open');
+      document.body.style.overflow='hidden';
+
+      // 포커스 트랩
+      const focusables = modal.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])');
+      const first = focusables[0], last = focusables[focusables.length-1];
+      (first || closeBtn).focus();
+
+      trapHandler = function(e){
+        if(e.key === 'Escape'){ e.preventDefault(); closeModal(); return; }
+        if(e.key !== 'Tab') return;
+        if(focusables.length === 0) return;
+        if(e.shiftKey){
+          if(document.activeElement === first){ e.preventDefault(); last.focus(); }
+        }else{
+          if(document.activeElement === last){ e.preventDefault(); first.focus(); }
+        }
+      };
+      modal.addEventListener('keydown', trapHandler);
+    }
+
+    function closeModal(){
+      overlay.classList.remove('open');
+      modal.classList.remove('open');
+      document.body.style.overflow='';
+      setTimeout(()=>{ overlay.hidden = true; modal.hidden = true; }, 180);
+      if(trapHandler){ modal.removeEventListener('keydown', trapHandler); trapHandler = null; }
+      if(lastActive) lastActive.focus();
+    }
+
+    overlay.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeModal);
+    editBtn.addEventListener('click', closeModal);
+    retakeBtn.addEventListener('click', ()=>{
+      // 모든 라디오 해제
+      for(let i=1;i<=16;i++){
+        const radios = document.querySelectorAll('input[name="q'+i+'"]');
+        radios.forEach(r=> r.checked = false);
+      }
+      markUnanswered(null);
+      updateProgress();
+      closeModal();
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    // 결과 계산 및 표시
+    function calculateResult(){
+      let total = 0;
+      let answered = 0;
+      let firstUnans = null;
+
+      for (let i = 1; i <= 16; i++) {
+        const selected = document.querySelector('input[name="q'+i+'"]:checked');
+        if (selected){
+          total += parseInt(selected.value,10);
+          answered++;
+        }else if(!firstUnans){ firstUnans = i; }
+      }
+
+      if(answered < 16){
+        markUnanswered(firstUnans);
+        showToast('모든 문항에 응답해주세요.');
+        return;
+      }else{
+        markUnanswered(null);
+      }
+
+      // DOM 요소
+      const scoreEl = document.getElementById("score");
+      const img = document.getElementById("resultImg");
+      const mainMsg = document.getElementById("mainMsg");
+      const subMsg = document.getElementById("subMsg");
+
+      // 이전 결과 테마 클래스 제거
+      modal.classList.remove('normal','warning','danger');
+
+      // 결과 맵핑
+      if (total <= 16) {
+        scoreEl.textContent = total + "점";
+        img.src = "/img/home/001.png";
+        img.alt = "정상 상태 캐릭터";
+        mainMsg.textContent = "아직까지 킹샷의 매력을 못 느끼고 있는 정상!";
+        subMsg.textContent = "연맹원들이 기다립니다. 함께 모험을 시작해보세요!";
+        modal.classList.add('normal');
+      } else if (total <= 32) {
+        scoreEl.textContent = total + "점";
+        img.src = "/img/home/002.png";
+        img.alt = "주의 상태 캐릭터";
+        mainMsg.textContent = "열심히 하고 있군요! 주의가 필요합니다.";
+        subMsg.textContent = "잠도 줄여가며 플레이하는 유저의 길에 들어섰습니다 😅";
+        modal.classList.add('warning');
+      } else {
+        scoreEl.textContent = total + "점";
+        img.src = "/img/home/003.png";
+        img.alt = "위험 상태 캐릭터";
+        mainMsg.textContent = "수면 부족! 위험 신호 🚨";
+        subMsg.textContent = "하루 정도는 편안하게 잠들기를 바랍니다...";
+        modal.classList.add('danger');
+      }
+
+      openModal();
+    }
+
+    // 초기화 버튼
+    document.getElementById('resetBtn').addEventListener('click', ()=>{
+      for(let i=1;i<=16;i++){
+        const radios = document.querySelectorAll('input[name="q'+i+'"]');
+        radios.forEach(r=> r.checked = false);
+      }
+      markUnanswered(null);
+      updateProgress();
+      showToast('모든 문항이 초기화되었습니다.');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    // 제출 버튼
+    document.getElementById('submitBtn').addEventListener('click', calculateResult);
+
+    // 입력 변화 시 진행도 업데이트 + 미응답 강조 해제
+    document.addEventListener('change', (e)=>{
+      if(e.target && e.target.matches('input[type="radio"]')){
+        const name = e.target.name; // q1 ~ q16
+        const idx = name && parseInt(name.replace('q',''),10);
+        if(idx) document.getElementById('qbox'+idx).classList.remove('unanswered');
+        updateProgress();
+      }
+    });
+
+    // 구버전 onclick 호환을 위해 전역 노출
+    window.calculateResult = calculateResult;
+
+    // 첫 렌더
+    updateProgress();
+  </script>
+</body>
+</html>
