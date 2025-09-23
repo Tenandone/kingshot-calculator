@@ -285,6 +285,7 @@
       if (campKey) {
         const campBase = temp[campKey];
         allBuildingData['camp:common'] = campBase;
+        
         allBuildingData.barracks = campBase;
         allBuildingData.stable = campBase;
         allBuildingData.range = campBase;
