@@ -285,7 +285,7 @@
       if (campKey) {
         const campBase = temp[campKey];
         allBuildingData['camp:common'] = campBase;
-        
+
         allBuildingData.barracks = campBase;
         allBuildingData.stable = campBase;
         allBuildingData.range = campBase;
@@ -533,19 +533,6 @@
     const preTitle = document.getElementById('prereq-title');
     if (preTitle) preTitle.textContent = t('calc.prereqBox.title', '선행 건물 요구사항');
 
-    // ------------------------ 초기화 ------------------------
-function bindOnce(el, type, handler) {
-  if (!el) return;
-  if (!el.__bound__) el.__bound__ = {};
-  if (el.__bound__[type]) return;
-  el.addEventListener(type, handler);
-  el.__bound__[type] = true;
-}
-
-
-
-
-
     // placeholder + aria-label
     const placeholders = {
       startLevel:   ['calc.form.placeholder.start',    '현재 레벨'],
@@ -735,32 +722,69 @@ function bindOnce(el, type, handler) {
     resultDiv.innerHTML = summaryTop + prereqSummary + table;
   }
 
-  // ------------------------ 초기화 ------------------------
+  // ------------------------ 이벤트 바인더 (중복 방지) ------------------------
   function bindOnce(el, type, handler) {
-  if (!el) return;
-  if (!el.__bound__) el.__bound__ = {};
+    if (!el) return;
+    if (!el.__bound__) el.__bound__ = {};
 
-  // 이미 바인딩된 것으로 표시돼도 실제 리스너가 없으면 다시 바인딩
-  const alreadyBound = el.__bound__[type];
-  let hasListener = false;
+    // 이미 바인딩된 것으로 표시돼도 실제 리스너가 없으면 다시 바인딩 (DevTools 전용 함수가 있을 때만 검사)
+    const alreadyBound = el.__bound__[type];
+    let hasListener = false;
 
-  if (alreadyBound && typeof getEventListeners === 'function') {
-    const listeners = getEventListeners(el)[type] || [];
-    hasListener = listeners.length > 0;
-  }
-
-  if (!alreadyBound || !hasListener) {
-    el.addEventListener(type, handler);
-    el.__bound__[type] = true;
-  }
-}
-
-  async function initCalculator() {
-    if (window.__calculatorInited__) {
-      try { window.__calcRefreshPrereqUI && window.__calcRefreshPrereqUI(); } catch (_) {}
-      return;
+    if (alreadyBound && typeof getEventListeners === 'function') {
+      const listeners = getEventListeners(el)[type] || [];
+      hasListener = listeners.length > 0;
     }
 
+    if (!alreadyBound || !hasListener) {
+      el.addEventListener(type, handler);
+      el.__bound__[type] = true;
+    }
+  }
+
+  // ------------------------ 폼 초기화: resetFormToDefaults() ------------------------
+  function resetFormToDefaults() {
+    // 셀렉트
+    const buildingEl = document.getElementById('building');
+    if (buildingEl) buildingEl.selectedIndex = 0;
+
+    // 숫자 입력 기본값
+    const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = String(val); };
+    setVal('startLevel', 1);
+    setVal('targetLevel', 1);
+    setVal('speedBonus', 0);
+    setVal('saulBonus', 0);
+    setVal('wolfBonus', 0);
+    setVal('positionBonus', 0);
+
+    // 체크박스 해제
+    const uncheck = (id) => { const el = document.getElementById(id); if (el) el.checked = false; };
+    uncheck('doubleTime');
+    uncheck('includePrereq');
+
+    // 선행 입력칸 비우기
+    ['prereqAcademy','prereqRange','prereqStable','prereqBarracks','prereqEmbassy'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+
+    // 결과/선행 박스 초기화 및 숨김
+    const resultDiv = document.getElementById('result');
+    if (resultDiv) resultDiv.innerHTML = '';
+
+    const pl = document.getElementById('prereq-list');
+    if (pl) pl.innerHTML = '';
+
+    const details = document.getElementById('prereq-details');
+    if (details) { details.open = false; details.hidden = true; }
+  }
+
+  // ------------------------ init ------------------------
+  async function initCalculator() {
+    // ✅ 재진입 시에도 항상 폼 초기화 보장
+    try { resetFormToDefaults(); } catch (_) {}
+
+    // 데이터 로드 (idempotent)
     try { await ensureDataLoaded(); }
     catch (e) {
       const el = document.getElementById('result');
@@ -768,7 +792,7 @@ function bindOnce(el, type, handler) {
       return;
     }
 
-    // i18n 라벨/버튼/placeholder 1회 적용
+    // i18n 라벨/버튼/placeholder 적용 (idempotent)
     applyI18NLabels();
 
     const buildingEl = document.getElementById('building');
@@ -800,6 +824,7 @@ function bindOnce(el, type, handler) {
     }
     window.__calcRefreshPrereqUI = refreshPrereqUI;
 
+    // 이벤트 바인딩 (idempotent)
     bindOnce(buildingEl, 'input', refreshPrereqUI);
     bindOnce(startEl, 'input', refreshPrereqUI);
     bindOnce(targetEl, 'input', refreshPrereqUI);
@@ -856,28 +881,9 @@ function bindOnce(el, type, handler) {
       renderPrereqBox(dataKey, start, to);
     });
 
+    // ✅ 초기화 버튼은 공용 초기화 함수 호출
     if (clearBtn) bindOnce(clearBtn, 'click', () => {
-      buildingEl && (buildingEl.selectedIndex = 0);
-      startEl && (startEl.value = 1);
-      targetEl && (targetEl.value = 1);
-
-      ['speedBonus','saulBonus','wolfBonus','positionBonus'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.value = 0;
-      });
-
-      const dt = document.getElementById('doubleTime'); if (dt) dt.checked = false;
-      if (document.getElementById('includePrereq')) document.getElementById('includePrereq').checked = false;
-
-      ['prereqAcademy','prereqRange','prereqStable','prereqBarracks','prereqEmbassy'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.value = '';
-      });
-
-      syncPrereqDetailsVisibility(false);
-
-      const r = document.getElementById('result'); if (r) r.innerHTML = '';
-      const pl = document.getElementById('prereq-list'); if (pl) pl.innerHTML = '';
+      resetFormToDefaults();
     });
 
     // 초기 1회 UI 동기화
@@ -889,4 +895,9 @@ function bindOnce(el, type, handler) {
   // 외부에서 호출
   window.initCalculator = initCalculator;
   window._calcDebug = { allBuildingData, prereqMap };
+
+  // ✅ 전역 API로 reset 노출 (라우팅 진입 시 언제든 호출 가능)
+  window.KSD = window.KSD || {};
+  window.KSD.buildingUI = window.KSD.buildingUI || {};
+  window.KSD.buildingUI.reset = resetFormToDefaults;
 })();

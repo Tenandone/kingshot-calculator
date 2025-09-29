@@ -12,6 +12,7 @@
 // - 라우트 프록시 테이블(proxyRoutes) 도입: 실 라우트 준비 전에도 /calc-*·/calculator 접속 안정화
 // - 라우트 렌더 이후 document.body 전체 i18n 강제 재적용 (글로벌 UI 누락 방지)
 // - popstate 보정: 마지막 계산기 경로 복구(lastCalcPath)
+// - ★ 계산기 경로 진입 시, route.render 완료 후 then에서 window.KSD.buildingUI.reset() 호출(실패 시 console.warn)
 
 (function () {
   'use strict';
@@ -30,7 +31,6 @@
         u.searchParams.set('v', ASSET_VER);
         return u.pathname + u.search + u.hash;
       }
-      // URL은 있으나 searchParams 미지원인 드문 환경 대비
       return u.pathname + (u.search ? u.search + '&v=' + ASSET_VER : '?v=' + ASSET_VER) + u.hash;
     } catch (_e) {
       return url + (url.indexOf('?') >= 0 ? '&' : '?') + 'v=' + ASSET_VER;
@@ -110,7 +110,6 @@
       document.head.appendChild(link);
     });
   }
-  // calculators 라우트에서 사용하므로 전역에도 노출
   if (!window.ensureCSS) window.ensureCSS = ensureCSS;
 
   function removeCSS(id) {
@@ -160,7 +159,6 @@
     function joinBase(u){ return base + u.replace(/^\.?\//,''); }
     function fixUrl(u){ return isAbs(u) ? u : joinBase(u); }
 
-    // 이미지/소스 정규화
     var imgs = doc.querySelectorAll('img[src]');
     for (var i=0;i<imgs.length;i++){
       var el = imgs[i];
@@ -183,7 +181,6 @@
       el2.setAttribute('srcset', out);
     }
 
-    // 링크/스크립트 정리
     var links = doc.querySelectorAll('link[href]');
     for (var k=0;k<links.length;k++){
       var el3 = links[k];
@@ -193,7 +190,6 @@
     var scripts = doc.querySelectorAll('script[src]');
     for (var m=0;m<scripts.length;m++){ if (scripts[m].parentNode) scripts[m].parentNode.removeChild(scripts[m]); }
 
-    // 내부 링크 → SPA 핸들링
     var anchors = doc.querySelectorAll('a[href]');
     for (var n=0;n<anchors.length;n++){
       var a = anchors[n];
@@ -417,7 +413,6 @@
   }
 
   function loadRoutesForType(type) {
-    // type: 'calc' | 'main'
     if (type === 'calc') {
       return loadScriptOnce('/public/js/routes.calculators.js').then(function(){
         if (typeof window.buildCalculatorRoutes !== 'function') throw new Error('buildCalculatorRoutes not found');
@@ -436,7 +431,6 @@
         __routeBundle = 'calc';
         return routes;
       }).catch(function(e){
-        // ★ 변경: 홈(/home) 리다이렉트/메인 번들 폴백 제거 → 에러 로그 후 전체 새로고침
         try { console.error('[router] calculators bundle failed:', e); } catch (_ee) {}
         try { location.reload(); } catch (_er) {}
         return Promise.reject(e);
@@ -464,7 +458,6 @@
   }
 
   function startRouter(initialRoutes) {
-    // 초기 진입에서 중복 dispatch 방지 — 여기서는 routes만 설정
     routes = initialRoutes;
   }
 
@@ -477,14 +470,12 @@
       return {
         title: '로딩 중...',
         render: function(el, rest) {
-          // 로딩 플레이스홀더 출력
           el.innerHTML = ''
             + '<div class="placeholder">'
             + '  <h2>로딩 중…</h2>'
             + '  <p class="muted">콘텐츠를 불러오는 중입니다.</p>'
             + '</div>';
 
-          // 해당 키에 맞는 번들을 보장 로드 후 실제 라우트로 교체 렌더
           return selectAndBuildRoutesFor(key).then(function(){
             var real = routes && routes[key];
             if (real && typeof real.render === 'function') {
@@ -505,10 +496,8 @@
   })();
 
   function getRoute(key) {
-    // 실 라우트가 있으면 즉시 사용, 없으면 프록시 라우트로 대체
     if (routes && routes[key]) return routes[key];
     if (proxyRoutes && proxyRoutes[key]) return proxyRoutes[key];
-    // 최후 수단: 홈 또는 간단 플레이스홀더
     if (routes && routes['/home']) return routes['/home'];
     return {
       title: '로딩 실패',
@@ -521,12 +510,10 @@
   // popstate/비동기 전환 레이스 방지용 버전 토큰
   var navVer = 0;
 
-  // ===== popstate 보정 로직 (요청 사양에 따라 단순화) =====
+  // ===== popstate 보정 로직 =====
   function correctOnPopstate() {
     try {
       var p = normalize(location.pathname);
-      // ★ /home → lastCalcPath 리다이렉트 로직 제거
-      // 계산기 경로일 때만 lastCalcPath 저장
       if (p.indexOf('/calc-') === 0 || p === '/calculator') {
         try { sessionStorage.setItem('lastCalcPath', p); } catch (_e2) {}
       }
@@ -538,7 +525,7 @@
     var myVer = ++navVer;
     var canon = null;
 
-    // 1) i18n 준비 → 2) URL 정규화 반영 → 3) 라우트 번들 선택/로드(핫스왑, 반드시 완료) → 4) CSS 준비 → 5) render
+    // 1) i18n 준비 → 2) URL 정규화 반영 → 3) 라우트 번들 선택/로드 → 4) CSS 준비 → 5) render
     return ensureI18N().then(function(){
       if (myVer !== navVer) return;
 
@@ -549,7 +536,6 @@
         history.replaceState(null, '', wantUrl);
       }
 
-      // 진입 경로에 맞는 번들을 먼저 로드/빌드하고 결과 routes를 받은 뒤에만 렌더
       return selectAndBuildRoutesFor(canon.pathname);
     }).then(function(){
       if (myVer !== navVer) return;
@@ -566,7 +552,6 @@
       var isCalcRoute = (key === '/calculator') || (key.indexOf('/calc-') === 0);
       var cssPromise = isCalcRoute ? ensureCSS('calc-css', CALC_CSS_HREF) : (removeCSS('calc-css'), Promise.resolve());
 
-      // 계산기 경로 방문 시 마지막 경로 기록
       if (isCalcRoute) {
         try { sessionStorage.setItem('lastCalcPath', pathNorm); } catch (_e3) {}
       }
@@ -579,7 +564,6 @@
         var p;
         try {
           if (!route || typeof route.render !== 'function') throw new Error('route not found: ' + key);
-          // 라우트 번들 준비 & CSS 준비가 끝난 뒤에만 render 실행
           p = route.render(el, rest);
         } catch (e) {
           console.error('[router] route render error:', e);
@@ -590,31 +574,34 @@
         return Promise.resolve(p).then(function(){
           if (myVer !== navVer) return;
 
-          // 라우트 렌더 후 i18n 재적용 — 계산기 콘텐츠와 외부 UI 모두 커버
+          // ★★★ 계산기 라우트라면, render 완료 후 DOM이 붙은 시점에서 reset() 실행
+          if (isCalcRoute && window.KSD && window.KSD.buildingUI && typeof window.KSD.buildingUI.reset === 'function') {
+            try {
+              window.KSD.buildingUI.reset();
+            } catch (eReset) {
+              console.warn('[router] calc reset failed', eReset);
+            }
+          }
+
+          // 라우트 렌더 후 i18n 재적용
           try {
-            // 우선 calculators 번들의 localI18nApply가 있으면 그것으로 전체 적용
             var applied = applyCalcI18NIfAvailable(el);
             if (!applied) {
               if (isCalcRoute) {
-                // 계산기 루트는 내부 계산기 DOM을 건드리지 않는 경량 적용
                 applyI18NOutsideCalc(el);
               } else if (window.I18N && typeof window.I18N.applyTo === 'function') {
-                // 일반 라우트는 전체 컨테이너에 우선 적용
                 window.I18N.applyTo(el);
               }
             }
-          } catch (_e) {}
+          } catch (_eApply) {}
 
-          // 네비게이션 현재 경로 하이라이트
           setActiveByPath(pathNorm);
 
-          // 메뉴 닫기
           if (nav && toggle) {
             nav.classList.remove('open');
             toggle.setAttribute('aria-expanded', 'false');
           }
 
-          // 스크롤 복원/초기화
           try { window.scrollTo({ top: 0 }); } catch(_){}
 
           // ★★★ 최종 강제 글로벌 i18n 재적용 — 헤더/드롭다운/글로벌 UI 누락 방지
@@ -641,12 +628,10 @@
 
   // ===== link interception =====
   document.addEventListener('click', function (e) {
-    // 이미 취소 / 좌클릭 아님 / 수정키 조합이면 개입하지 않음
     if (e.defaultPrevented) return;
     if (e.button !== 0) return;
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
 
-    // 가장 가까운 <a> 탐색
     var a = e.target;
     while (a && a.tagName !== 'A') a = a.parentElement;
     if (!a) return;
@@ -654,55 +639,44 @@
     var href = a.getAttribute('href');
     if (!href) return;
 
-    // 1) 새창/새탭 의도: target, rel(noopener/noreferrer/external) → 절대 가로채지 않음
     var target = (a.getAttribute('target') || '').toLowerCase();
     var rel    = (a.getAttribute('rel') || '').toLowerCase();
     if (target && target !== '_self') return;
     if (rel.indexOf('noopener') !== -1 || rel.indexOf('noreferrer') !== -1 || rel.indexOf('external') !== -1) return;
 
-    // 명시적 무시 플래그/다운로드 → 개입하지 않음
     var routerIgnore = a.getAttribute('data-router-ignore');
     if (a.hasAttribute('download') || (routerIgnore && routerIgnore === 'true')) return;
 
-    // 특수 프로토콜은 그대로 두기
     if (/^(mailto:|tel:|data:|blob:|javascript:)/i.test(href)) return;
 
-    // 외부 링크는 브라우저에 맡김
     if (/^(https?:)?\/\//i.test(href)) return;
 
-    // 레거시 해시 기반 라우트('#/..') 처리
     var hashIdx = href.indexOf('#/');
     if (hashIdx === 0) {
-      // "#/..." 로 시작
       e.preventDefault();
-      var pathHash = href.slice(1); // "/..."
+      var pathHash = href.slice(1);
       var uHash = canonicalize(pathHash);
       return window.navigate(uHash.pathname + uHash.search + uHash.hash);
     } else if (hashIdx > 0) {
-      // "something#/..." 형태
       e.preventDefault();
       var pathMix = '/' + href.slice(hashIdx + 2);
       var uMix = canonicalize(pathMix);
       return window.navigate(uMix.pathname + uMix.search + uMix.hash);
     }
 
-    // 페이지 내부 해시(#section)는 기본 동작 유지
     if (href.charAt(0) === '#') return;
 
-    // 절대 내부 경로는 SPA로 처리 (가이드 포함)
     if (href.charAt(0) === '/') {
       e.preventDefault();
       var uAbs = canonicalize(href);
       return window.navigate(uAbs.pathname + uAbs.search + uAbs.hash);
     }
 
-    // 기타 상대경로는 각 모듈에서 별도 처리(개입 안 함)
   }, { passive: false });
 
   // ===== popstate =====
   try { history.scrollRestoration = 'manual'; } catch (_e){}
   window.addEventListener('popstate', function(){
-    // 뒤로/앞으로 이동 시 보정 로직(단순 기록만 수행)
     if (correctOnPopstate()) return;
     dispatch();
   });
@@ -711,32 +685,25 @@
   document.addEventListener('i18n:changed', function(){
     try {
       var content = document.getElementById('content') || document.body;
-      // calculators 번들의 localI18nApply가 있으면 우선 사용(계산기 내부 포함 전체 강제)
       if (!applyCalcI18NIfAvailable(content)) {
-        // 계산기 콘텐츠 손상 최소화를 위해 먼저 부분 적용
         applyI18NOutsideCalc(content);
       }
-      // 전역 강제 재적용으로 누락 방지
       if (window.I18N && typeof window.I18N.applyTo === 'function') {
         window.I18N.applyTo(document.body);
       }
-      // 마지막으로 한 번 더 calculators 쪽 localI18nApply 시도(드롭다운 등 내부 옵션까지)
       applyCalcI18NIfAvailable(content);
     } catch (_e) {}
   }, false);
 
   // ===== bootstrap =====
   document.addEventListener('DOMContentLoaded', function () {
-    // 공통 컴포넌트 CSS 선적재 → 초기 레이아웃 FOUC 최소화
     ensureCSS('components-css', COMPONENTS_CSS_HREF)
       .then(function(){ return ensureI18N(); })
       .then(function(){
-        // 첫 진입 시점에 경로에 맞는 라우트 번들을 반드시 선택/빌드
         var canon = canonicalize(location.href);
         return selectAndBuildRoutesFor(canon.pathname);
       })
       .then(function(builtRoutes){
-        // routes 설정 후 최초 1회 렌더
         startRouter(builtRoutes || {});
         return dispatch();
       });
