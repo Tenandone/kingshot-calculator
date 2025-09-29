@@ -533,11 +533,18 @@
     const preTitle = document.getElementById('prereq-title');
     if (preTitle) preTitle.textContent = t('calc.prereqBox.title', '선행 건물 요구사항');
 
-    // 버튼
-    const calcBtn = document.getElementById('calcBtn');
-    if (calcBtn) calcBtn.textContent = t('calc.form.calculate', '계산하기');
-    const clearBtn = document.getElementById('clearPlanBtn');
-    if (clearBtn) clearBtn.textContent = t('calc.form.clear', '초기화');
+    // ------------------------ 초기화 ------------------------
+function bindOnce(el, type, handler) {
+  if (!el) return;
+  if (!el.__bound__) el.__bound__ = {};
+  if (el.__bound__[type]) return;
+  el.addEventListener(type, handler);
+  el.__bound__[type] = true;
+}
+
+
+
+
 
     // placeholder + aria-label
     const placeholders = {
@@ -730,12 +737,23 @@
 
   // ------------------------ 초기화 ------------------------
   function bindOnce(el, type, handler) {
-    if (!el) return;
-    if (!el.__bound__) el.__bound__ = {};
-    if (el.__bound__[type]) return;
+  if (!el) return;
+  if (!el.__bound__) el.__bound__ = {};
+
+  // 이미 바인딩된 것으로 표시돼도 실제 리스너가 없으면 다시 바인딩
+  const alreadyBound = el.__bound__[type];
+  let hasListener = false;
+
+  if (alreadyBound && typeof getEventListeners === 'function') {
+    const listeners = getEventListeners(el)[type] || [];
+    hasListener = listeners.length > 0;
+  }
+
+  if (!alreadyBound || !hasListener) {
     el.addEventListener(type, handler);
     el.__bound__[type] = true;
   }
+}
 
   async function initCalculator() {
     if (window.__calculatorInited__) {

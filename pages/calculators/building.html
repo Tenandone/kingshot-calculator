@@ -1,16 +1,39 @@
-<!-- pages/calculator.html (i18n-ready FINAL) -->
+<!-- pages/calculator.html (i18n-ready FIXED FINAL) -->
 <!doctype html>
-<html lang="ko">
+<html lang="ko" dir="ltr">
 <head>
-  
   <meta charset="utf-8">
-  <script>
-if (location.pathname.startsWith('/pages/')) {
-  location.replace('/?p=' + location.pathname + location.search);
-}
-</script>
 
-  
+  <!-- FIX: 다국어/서브디렉터리에서도 SPA 라우터로 안정적으로 넘기고, 쿼리/해시를 보존 -->
+  <script>
+  (function redirectFromStaticPage() {
+    try {
+      var url = new URL(window.location.href);
+      var path = url.pathname;
+      var idx = path.indexOf('/pages/');        // '/ko/pages/...' 등 모든 경우 지원
+      if (idx !== -1) {
+        // '/pages/...' 앞의 베이스('/ko', '/myapp' 등)와 '/pages/...' 이후를 분리
+        var basePrefix = (idx === 0) ? '' : path.slice(0, idx);  // '' or '/ko' or '/myapp'
+        var pagesPath  = path.slice(idx);                        // '/pages/calculator.html' ...
+
+        // 이미 SPA 진입(p=/pages/...) 상태라면 루프 방지
+        var params = new URLSearchParams(url.search);
+        if (params.get('p') === pagesPath) return;
+
+        // 기존 쿼리 보존 + p 설정 + 해시 보존
+        params.set('p', pagesPath);
+        var newUrl = basePrefix + '/?' + params.toString() + url.hash;
+
+        // 히스토리 오염 방지를 위해 replace 사용
+        window.location.replace(newUrl);
+      }
+    } catch (e) {
+      // 콘솔 경고만, 동작 막지 않음
+      console && console.warn && console.warn('[calc redirect]', e);
+    }
+  })();
+  </script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- i18n title/meta sync -->
@@ -75,6 +98,7 @@ if (location.pathname.startsWith('/pages/')) {
         <div class="form-group">
           <label for="startLevel" data-i18n="calc.form.startLevel.label">현재 레벨</label>
           <input type="number" id="startLevel" name="startLevel" min="1" max="55" value="1"
+                 inputmode="numeric" autocomplete="off"
                  placeholder="현재 레벨 입력"
                  data-i18n-attr="placeholder:calc.form.startLevel.placeholder">
         </div>
@@ -82,6 +106,7 @@ if (location.pathname.startsWith('/pages/')) {
         <div class="form-group">
           <label for="targetLevel" data-i18n="calc.form.targetLevel.label">목표 레벨</label>
           <input type="number" id="targetLevel" name="targetLevel" min="1" max="55" value="1"
+                 inputmode="numeric" autocomplete="off"
                  placeholder="목표 레벨 입력"
                  data-i18n-attr="placeholder:calc.form.targetLevel.placeholder">
         </div>
@@ -89,30 +114,38 @@ if (location.pathname.startsWith('/pages/')) {
         <div class="form-group">
           <label for="speedBonus" data-i18n="calc.form.speedBonus.label">건설 속도 보너스 (%)</label>
           <input type="number" id="speedBonus" name="speedBonus" min="0" max="100" value="0"
+                 inputmode="numeric" autocomplete="off"
                  placeholder="0" data-i18n-attr="placeholder:calc.common.percentZero">
         </div>
 
         <div class="form-group">
           <label for="saulBonus" data-i18n="calc.form.saulBonus.label">살로 스킬 보너스 (%) — 건설 비용 적용</label>
           <input type="number" id="saulBonus" name="saulBonus" min="0" max="100" value="0"
+                 inputmode="numeric" autocomplete="off"
                  placeholder="0" data-i18n-attr="placeholder:calc.common.percentZero">
         </div>
 
         <div class="form-group">
           <label for="wolfBonus" data-i18n="calc.form.wolfBonus.label">늑대 스킬 보너스 (%)</label>
           <input type="number" id="wolfBonus" name="wolfBonus" min="0" max="100" value="0"
+                 inputmode="numeric" autocomplete="off"
                  placeholder="0" data-i18n-attr="placeholder:calc.common.percentZero">
         </div>
 
         <div class="form-group">
           <label for="positionBonus" data-i18n="calc.form.positionBonus.label">국왕/관직 보너스 (%)</label>
           <input type="number" id="positionBonus" name="positionBonus" min="0" max="100" value="0"
+                 inputmode="numeric" autocomplete="off"
                  placeholder="0" data-i18n-attr="placeholder:calc.common.percentZero">
         </div>
 
         <div class="form-check">
           <input type="checkbox" id="doubleTime" name="doubleTime" aria-describedby="doubleTimeHelp">
           <label for="doubleTime" data-i18n="calc.form.doubleTime.label">건설 법령 적용(시간 20% 감소)</label>
+          <!-- FIX: aria-describedby 대상 추가(접근성) -->
+          <p id="doubleTimeHelp" class="visually-hidden" data-i18n="calc.form.doubleTime.help">
+            건설 법령 활성화 시 기본 건설 시간에서 20% 감소가 적용됩니다.
+          </p>
         </div>
 
         <div class="form-check">
@@ -128,27 +161,32 @@ if (location.pathname.startsWith('/pages/')) {
               <div class="form-group">
                 <label for="prereqAcademy" data-i18n="calc.prereq.academy">아카데미</label>
                 <input type="number" id="prereqAcademy" min="1" max="55" placeholder="예: 25"
-                       data-i18n-attr="placeholder:calc.common.example25" inputmode="numeric">
+                       inputmode="numeric" autocomplete="off"
+                       data-i18n-attr="placeholder:calc.common.example25">
               </div>
               <div class="form-group">
                 <label for="prereqRange" data-i18n="calc.prereq.range">궁병대</label>
                 <input type="number" id="prereqRange" min="1" max="55" placeholder="예: 20"
-                       data-i18n-attr="placeholder:calc.common.example20" inputmode="numeric">
+                       inputmode="numeric" autocomplete="off"
+                       data-i18n-attr="placeholder:calc.common.example20">
               </div>
               <div class="form-group">
                 <label for="prereqStable" data-i18n="calc.prereq.stable">기병대</label>
                 <input type="number" id="prereqStable" min="1" max="55" placeholder="예: 20"
-                       data-i18n-attr="placeholder:calc.common.example20" inputmode="numeric">
+                       inputmode="numeric" autocomplete="off"
+                       data-i18n-attr="placeholder:calc.common.example20">
               </div>
               <div class="form-group">
                 <label for="prereqBarracks" data-i18n="calc.prereq.barracks">보병대</label>
                 <input type="number" id="prereqBarracks" min="1" max="55" placeholder="예: 20"
-                       data-i18n-attr="placeholder:calc.common.example20" inputmode="numeric">
+                       inputmode="numeric" autocomplete="off"
+                       data-i18n-attr="placeholder:calc.common.example20">
               </div>
               <div class="form-group">
                 <label for="prereqEmbassy" data-i18n="calc.prereq.embassy">대사관</label>
                 <input type="number" id="prereqEmbassy" min="1" max="55" placeholder="예: 15"
-                       data-i18n-attr="placeholder:calc.common.example15" inputmode="numeric">
+                       inputmode="numeric" autocomplete="off"
+                       data-i18n-attr="placeholder:calc.common.example15">
               </div>
             </div>
             <p class="help" style="margin-top:10px" data-i18n="calc.prereq.note">* 비워두면 0으로 간주합니다.</p>
@@ -156,9 +194,10 @@ if (location.pathname.startsWith('/pages/')) {
         </details>
 
         <div class="btn-row">
-          <button type="button" id="calcBtn" class="btn btn-primary" data-i18n="calc.form.actions.calculate">업그레이드 계산하기</button>
-          <button type="button" id="clearPlanBtn" class="btn" data-i18n="calc.form.actions.clear">업그레이드 초기화</button>
-        </div>
+  <button type="button" id="calcBtn" class="btn btn-primary">Start</button>
+  <button type="button" id="clearPlanBtn" class="btn">Reset</button>
+</div>
+
       </form>
     </section>
 
