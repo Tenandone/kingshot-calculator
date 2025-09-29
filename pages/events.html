@@ -1,0 +1,100 @@
+<!-- pages/events.html -->
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Events · Kingshot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kingshot events guide and archive. See details of biweekly and seasonal events like Hall of Governors, Alliance Wars, and more.">
+
+  <style>
+    body { font-family: system-ui, sans-serif; margin:0; padding:0; }
+    main { max-width: 1100px; margin: 0 auto; padding: 20px; }
+    h1 { font-size: 26px; margin-bottom: 20px; text-align:center; }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .event-card {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+    .event-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .event-card h2 {
+      font-size: 18px;
+      margin: 12px 16px 6px;
+    }
+    .event-card p {
+      font-size: 14px;
+      color: #555;
+      margin: 0 16px 12px;
+    }
+    .event-card a {
+      display: block;
+      padding: 12px 16px;
+      text-align: center;
+      background: #0b57d0;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 0 0 12px 12px;
+    }
+    .event-card a:hover {
+      background: #0949b3;
+    }
+
+    /* 다국어 제목 처리 */
+    [lang] { display: none; }
+    html[lang="ko"] [lang="ko"],
+    html[lang="en"] [lang="en"],
+    html[lang="ja"] [lang="ja"],
+    html[lang="zh-CN"] [lang="zh-CN"],
+    html[lang="zh-TW"] [lang="zh-TW"] { display: inline; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>
+      <span lang="ko">이벤트</span>
+      <span lang="en">Events</span>
+      <span lang="ja">イベント</span>
+      <span lang="zh-CN">活动</span>
+      <span lang="zh-TW">活動</span>
+    </h1>
+
+    <div class="event-grid">
+      <!-- 이벤트 카드 예시 -->
+      <div class="event-card">
+        <img src="/img/events/hall-of-governors-icon.webp" alt="Hall of Governors">
+        <h2>
+          <span lang="ko">최강영주</span>
+          <span lang="en">Hall of Governors</span>
+          <span lang="ja">最強領主</span>
+          <span lang="zh-CN">最强领主</span>
+          <span lang="zh-TW">最強領主</span>
+        </h2>
+        <p>Biweekly event during early generations. Earn points from construction, research, heroes, and troops.</p>
+        <a href="/pages/events/hall-of-governors.html">
+          <span lang="ko">자세히 보기</span>
+          <span lang="en">View Details</span>
+          <span lang="ja">詳細を見る</span>
+          <span lang="zh-CN">查看详情</span>
+          <span lang="zh-TW">查看詳情</span>
+        </a>
+      </div>
+
+      <!-- 다음 이벤트 카드 추가 예정 -->
+      <!-- <div class="event-card"> ... </div> -->
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!-- /pages/events/hall-of-governors.html -->
+<meta name="db-title" content="Hall of Governors">
+
+<style>
+  /* Scope all styles under #hog to avoid leaking */
+  #hog { max-width: 920px; margin: 0 auto; padding: 8px 12px 24px; }
+  #hog .hog-banner { margin: 0 0 12px 0; }
+  #hog .hog-banner img { width: 100%; height: auto; display: block; border-radius: 10px; }
+  #hog h1.hog-title { font-size: 28px; line-height: 1.25; margin: 12px 0 6px; }
+  #hog .lead { color: #333; font-size: 16px; line-height: 1.55; margin: 8px 0 12px; }
+  #hog section.hog-block { margin-top: 22px; }
+  #hog h2 { font-size: 20px; margin: 18px 0 8px; }
+  #hog h3 { font-size: 16px; margin: 12px 0 6px; }
+  #hog ul.task-list { margin: 0 0 12px 22px; }
+  #hog ul.task-list li { margin: 4px 0; }
+  #hog table.score { width: 100%; border-collapse: collapse; margin: 8px 0 14px; font-size: 14px; }
+  #hog table.score th, #hog table.score td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+  #hog table.score th { background: #f5f7fb; font-weight: 700; }
+
+  /* Language visibility: title only (body stays English as requested) */
+  #hog .hog-title [lang] { display: none; }
+
+  /* Default / English */
+  html:not([lang]) #hog .hog-title [lang="en"],
+  html[lang=""] #hog .hog-title [lang="en"],
+  html[lang|="en"] #hog .hog-title [lang="en"] { display: inline; }
+
+  /* Korean */
+  html[lang|="ko"] #hog .hog-title [lang="ko"] { display: inline; }
+
+  /* Japanese */
+  html[lang|="ja"] #hog .hog-title [lang="ja"] { display: inline; }
+
+  /* Simplified Chinese (zh, zh-CN, zh-Hans → zh-CN label) */
+  html[lang="zh"] #hog .hog-title [lang="zh-CN"],
+  html[lang="zh-CN"] #hog .hog-title [lang="zh-CN"],
+  html[lang="zh-Hans"] #hog .hog-title [lang="zh-CN"] { display: inline; }
+
+  /* Traditional Chinese (zh-TW, zh-Hant → zh-TW label) */
+  html[lang="zh-TW"] #hog .hog-title [lang="zh-TW"],
+  html[lang="zh-Hant"] #hog .hog-title [lang="zh-TW"] { display: inline; }
+</style>
+
+<main id="hog" aria-labelledby="hog-title">
+  <!-- 1) Event Banner -->
+  <div class="hog-banner">
+    <img src="/img/events/hall-of-governors-icon.webp" alt="Hall of Governors">
+  </div>
+
+  <!-- 2) Multilingual Title (title only; body remains English) -->
+  <h1 id="hog-title" class="hog-title">
+    <span lang="ko">최강영주</span>
+    <span lang="en">Hall of Governors</span>
+    <span lang="ja">最強領主</span>
+    <span lang="zh-CN">最强领主</span>
+    <span lang="zh-TW">最強領主</span>
+  </h1>
+
+  <!-- 3) English Description (original text) -->
+  <p class="lead">
+    Hall of Governors is a biweekly event in Kingshot that takes place during the first and second generations of a kingdom.
+    The event lasts several days, with different tasks available each day. Completing these tasks earns you points and milestone rewards.
+  </p>
+  <p class="lead">
+    Players can also compete on the points leaderboard to win Amadeus shards during the event.
+  </p>
+
+  <!-- 4) Stage Lists (English original preserved) -->
+  <!-- 1st Hall of Governors -->
+  <section class="hog-block" id="hog-1st">
+    <h2>1st Hall of Governors</h2>
+    <p>
+      The first Hall of Governors event begins on day 6 after the state is created. Amadeus is the Hero of the Season for this event.
+    </p>
+
+    <h3>Stage 1: City Construction</h3>
+    <ul class="task-list">
+      <li>Raise 1 Power through Construction – 45 points</li>
+      <li>Raise 1 Power through Research – 45 points</li>
+    </ul>
+
+    <h3>Stage 2: Hero Development</h3>
+    <ul class="task-list">
+      <li>Play Hero Roulette once – 90,000 points</li>
+      <li>Use 1 Rare Hero Shard to ascend Heroes – 4,000 points</li>
+      <li>Use 1 Epic Hero Shard to ascend Heroes – 14,000 points</li>
+      <li>Use 1 Mythic Hero Shard to ascend Heroes – 35,000 points</li>
+      <li>Gather 50 Bread in the Wilderness – 3 points</li>
+      <li>Gather 50 Wood in the Wilderness – 3 points</li>
+      <li>Gather 10 Stone in the Wilderness – 3 points</li>
+      <li>Gather 2 Iron in the Wilderness – 3 points</li>
+    </ul>
+
+    <h3>Stage 3: Train Troops</h3>
+    <ul class="task-list">
+      <li>Train 1 Level 1 Troop(s) – 90 points</li>
+      <li>Train 1 Level 2 Troop(s) – 120 points</li>
+      <li>Train 1 Level 3 Troop(s) – 180 points</li>
+      <li>Train 1 Level 4 Troop(s) – 265 points</li>
+      <li>Train 1 Level 5 Troop(s) – 385 points</li>
+      <li>Train 1 Level 6 Troop(s) – 595 points</li>
+      <li>Train 1 Level 7 Troop(s) – 830 points</li>
+      <li>Train 1 Level 8 Troop(s) – 1,130 points</li>
+      <li>Train 1 Level 9 Troop(s) – 1,485 points</li>
+      <li>Train 1 Level 10 Troop(s) – 1,960 points</li>
+    </ul>
+
+    <h3>Stage 4: Beast Slay</h3>
+    <ul class="task-list">
+      <li>Kill a Level 1 to Level 30 Beast – 30,000 points</li>
+      <li>Call a rally and hunt down 1 Terror – 90,000 points</li>
+    </ul>
+
+    <h3>Stage 5: Power Boost</h3>
+    <ul class="task-list">
+      <li>Raise 1 Power through Construction – 30 points</li>
+      <li>Raise 1 Power through Research – 30 points</li>
+      <li>Raise 1 Power by training/promoting troops – 20 points</li>
+    </ul>
+  </section>
+
+  <!-- 2nd Hall of Governors -->
+  <section class="hog-block" id="hog-2nd">
+    <h2>2nd Hall of Governors</h2>
+    <p>
+      The second Hall of Governors event takes place two weeks after the first one and also features Amadeus as the Hero of the Season.
+    </p>
+
+    <h3>Stage 1: City Construction</h3>
+    <ul class="task-list">
+      <li>Raise 1 Power through Construction – 45 points</li>
+      <li>Raise 1 Power through Research – 45 points</li>
+    </ul>
+
+    <h3>Stage 2: Hero Development</h3>
+    <ul class="task-list">
+      <li>Play Hero Roulette – 90,000 points</li>
+      <li>Use 1 Rare Hero Shard to ascend Heroes – 4,000 points</li>
+      <li>Use 1 Epic Hero Shard to ascend Heroes – 14,000 points</li>
+      <li>Use 1 Mythic Hero Shard to ascend Heroes – 35,000 points</li>
+      <li>Gather 50 Bread in the Wilderness – 3 points</li>
+      <li>Gather 50 Wood in the Wilderness – 3 points</li>
+      <li>Gather 10 Stone in the Wilderness – 3 points</li>
+      <li>Gather 2 Iron in the Wilderness – 3 points</li>
+    </ul>
+
+    <h3>Stage 3: Train Troops</h3>
+    <ul class="task-list">
+      <li>Train 1 Level 1 Troop(s) – 90 points</li>
+      <li>Train 1 Level 2 Troop(s) – 120 points</li>
+      <li>Train 1 Level 3 Troop(s) – 180 points</li>
+      <li>Train 1 Level 4 Troop(s) – 265 points</li>
+      <li>Train 1 Level 5 Troop(s) – 385 points</li>
+      <li>Train 1 Level 6 Troop(s) – 595 points</li>
+      <li>Train 1 Level 7 Troop(s) – 830 points</li>
+      <li>Train 1 Level 8 Troop(s) – 1,130 points</li>
+      <li>Train 1 Level 9 Troop(s) – 1,485 points</li>
+      <li>Train 1 Level 10 Troop(s) – 1,960 points</li>
+    </ul>
+
+    <h3>Stage 4: Gather Resources</h3>
+    <ul class="task-list">
+      <li>Gather 50 Bread in the Wilderness – 3 points</li>
+      <li>Gather 50 Wood in the Wilderness – 3 points</li>
+      <li>Gather 10 Stone in the Wilderness – 3 points</li>
+      <li>Gather 2 Iron in the Wilderness – 3 points</li>
+      <li>Raise 1 Power through Research – 45 points</li>
+    </ul>
+
+    <h3>Stage 5: Power Boost</h3>
+    <ul class="task-list">
+      <li>Use 1 Hero Gear Forgehammer(s) – 50,000 points</li>
+      <li>Use 100 Hero Gear Enhancement XP – 30,000 points</li>
+      <li>Use 1 Widget for Hero Exclusive Gear – 100,000 points</li>
+      <li>Raise 1 Power through Construction – 30 points</li>
+      <li>Raise 1 Power through Research – 30 points</li>
+      <li>Raise 1 Power by training/promoting troops – 20 points</li>
+    </ul>
+
+    <h3>Stage 6: Governor Gear Upgrade</h3>
+    <ul class="task-list">
+      <li>Raise Governor Gear max score by 1 – 500 points</li>
+      <li>Raise 1 Power through Construction – 30 points</li>
+      <li>Raise 1 Power through Research – 30 points</li>
+      <li>Raise 1 Power by training/promoting troops – 20 points</li>
+    </ul>
+
+    <table class="score">
+      <thead>
+        <tr><th>Governor Gear Rarity</th><th>Level Up Score</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Uncommon</td><td>1,125</td></tr>
+        <tr><td>Uncommon (1-Star)</td><td>1,875</td></tr>
+        <tr><td>Rare</td><td>3,000</td></tr>
+        <tr><td>Rare (1-Star)</td><td>4,500</td></tr>
+        <tr><td>Rare (2-Star)</td><td>5,100</td></tr>
+        <tr><td>Rare (3-Star)</td><td>5,400</td></tr>
+        <tr><td>Epic</td><td>3,230</td></tr>
+        <tr><td>Epic (1-Star)</td><td>3,230</td></tr>
+        <tr><td>Epic (2-Star)</td><td>3,225</td></tr>
+        <tr><td>Epic (3-Star)</td><td>3,225</td></tr>
+        <tr><td>Epic T1</td><td>3,440</td></tr>
+        <tr><td>Epic T1 (1-Star)</td><td>3,440</td></tr>
+        <tr><td>Epic T1 (2-Star)</td><td>4,085</td></tr>
+        <tr><td>Epic T1 (3-Star)</td><td>4,085</td></tr>
+        <tr><td>Mythic</td><td>6,250</td></tr>
+        <tr><td>Mythic (1-Star)</td><td>6,250</td></tr>
+        <tr><td>Mythic (2-Star)</td><td>6,250</td></tr>
+        <tr><td>Mythic (3-Star)</td><td>6,250</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 3rd Hall of Governors -->
+  <section class="hog-block" id="hog-3rd">
+    <h2>3rd Hall of Governors</h2>
+    <p>
+      The 3rd Hall of Governors usually happens in Generation 2, but some servers might still be in Generation 1 during the 3rd HoG.
+      Amadeus remains the Hero of the Season for this event. This one lasts 7 days.
+    </p>
+
+    <h3>Stage 1: Power Boost</h3>
+    <ul class="task-list">
+      <li>Raise 1 Power through Construction – 30 points</li>
+      <li>Raise 1 Power through Research – 30 points</li>
+      <li>Raise 1 Power by training/promoting troops – 20 points</li>
+    </ul>
+
+    <h3>Stage 2: Hero Development</h3>
+    <ul class="task-list">
+      <li>Play Hero Roulette – 90,000 points</li>
+      <li>Use 1 Rare Hero Shard to ascend Heroes – 4,000 points</li>
+      <li>Use 1 Epic Hero Shard to ascend Heroes – 14,000 points</li>
+      <li>Use 1 Mythic Hero Shard to ascend Heroes – 35,000 points</li>
+      <li>Gather 50 Bread in the Wilderness – 3 points</li>
+      <li>Gather 50 Wood in the Wilderness – 3 points</li>
+      <li>Gather 10 Stone in the Wilderness – 3 points</li>
+      <li>Gather 2 Iron in the Wilderness – 3 points</li>
+    </ul>
+
+    <h3>Stage 3: Train Troops</h3>
+    <ul class="task-list">
+      <li>Train 1 Level 1 Troop(s) – 90 points</li>
+      <li>Train 1 Level 2 Troop(s) – 120 points</li>
+      <li>Train 1 Level 3 Troop(s) – 180 points</li>
+      <li>Train 1 Level 4 Troop(s) – 265 points</li>
+      <li>Train 1 Level 5 Troop(s) – 385 points</li>
+      <li>Train 1 Level 6 Troop(s) – 595 points</li>
+      <li>Train 1 Level 7 Troop(s) – 830 points</li>
+      <li>Train 1 Level 8 Troop(s) – 1,130 points</li>
+      <li>Train 1 Level 9 Troop(s) – 1,485 points</li>
+      <li>Train 1 Level 10 Troop(s) – 1,960 points</li>
+    </ul>
+
+    <h3>Stage 4: Gather Resources</h3>
+    <ul class="task-list">
+      <li>Gather 50 Bread in the Wilderness – 3 points</li>
+      <li>Gather 50 Wood in the Wilderness – 3 points</li>
+      <li>Gather 10 Stone in the Wilderness – 3 points</li>
+      <li>Gather 2 Iron in the Wilderness – 3 points</li>
+      <li>Raise 1 Power through Research – 45 points</li>
+    </ul>
+
+    <h3>Stage 5: Power Boost</h3>
+    <ul class="task-list">
+      <li>Use 1 Hero Gear Forgehammer(s) – 50,000 points</li>
+      <li>Use 1 Widget for Hero Exclusive Gear – 100,000 points</li>
+      <li>Raise 1 Power through Construction – 30 points</li>
+      <li>Raise 1 Power through Research – 30 points</li>
+      <li>Raise 1 Power by training/promoting troops – 20 points</li>
+    </ul>
+
+    <h3>Stage 6: Governor Gear Upgrade</h3>
+    <ul class="task-list">
+      <li>Raise Governor Gear max score by 1 – 500 points</li>
+    </ul>
+
+    <table class="score">
+      <thead>
+        <tr><th>Governor Gear Rarity</th><th>Level Up Score</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Uncommon</td><td>1,125</td></tr>
+        <tr><td>Uncommon (1-Star)</td><td>1,875</td></tr>
+        <tr><td>Rare</td><td>3,000</td></tr>
+        <tr><td>Rare (1-Star)</td><td>4,500</td></tr>
+        <tr><td>Rare (2-Star)</td><td>5,100</td></tr>
+        <tr><td>Rare (3-Star)</td><td>5,400</td></tr>
+        <tr><td>Epic</td><td>3,230</td></tr>
+        <tr><td>Epic (1-Star)</td><td>3,230</td></tr>
+        <tr><td>Epic (2-Star)</td><td>3,225</td></tr>
+        <tr><td>Epic (3-Star)</td><td>3,225</td></tr>
+        <tr><td>Epic T1</td><td>3,440</td></tr>
+        <tr><td>Epic T1 (1-Star)</td><td>3,440</td></tr>
+        <tr><td>Epic T1 (2-Star)</td><td>4,085</td></tr>
+        <tr><td>Epic T1 (3-Star)</td><td>4,085</td></tr>
+        <tr><td>Mythic</td><td>6,250</td></tr>
+        <tr><td>Mythic (1-Star)</td><td>6,250</td></tr>
+        <tr><td>Mythic (2-Star)</td><td>6,250</td></tr>
+        <tr><td>Mythic (3-Star)</td><td>6,250</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Stage 7: Hero Development</h3>
+    <ul class="task-list">
+      <li>Use 1 Rare Hero Shard to ascend Heroes – 4,000 points</li>
+      <li>Use 1 Epic Hero Shard to ascend Heroes – 14,000 points</li>
+      <li>Use 1 Mythic Hero Shard to ascend Heroes – 35,000 points</li>
+      <li>Use 1m of Speedups for Construction – 300 points</li>
+      <li>Use 1m of Speedups for Research – 300 points</li>
+      <li>Use 1m of Speedups for Troop Training or Promotion – 300 points</li>
+    </ul>
+  </section>
+
+  <!-- 4th & 5th Hall of Governors -->
+  <section class="hog-block" id="hog-4th-5th">
+    <h2>4th &amp; 5th Hall of Governors</h2>
+    <p>
+      The 4th and 5th Hall of Governors events have the same tasks. Hilde is the “Hero of the Season” for both,
+      and you can get her shards by ranking in the top 100 players with the most points during the event.
+    </p>
+
+    <h3>Stage 1: Power Boost</h3>
+    <ul class="task-list">
+      <li>Raise 1 Power through Construction – 30 points</li>
+      <li>Raise 1 Power through Research – 30 points</li>
+      <li>Raise 1 Power by training/promoting troops – 20 points</li>
+    </ul>
+
+    <h3>Stage 2: Hero Development</h3>
+    <ul class="task-list">
+      <li>Play Hero Roulette – 90,000 points</li>
+      <li>Use 1 Rare Hero Shard to ascend Heroes – 4,000 points</li>
+      <li>Use 1 Epic Hero Shard to ascend Heroes – 14,000 points</li>
+      <li>Use 1 Mythic Hero Shard to ascend Heroes – 35,000 points</li>
+      <li>Gather 50 Bread in the Wilderness – 3 points</li>
+      <li>Gather 50 Wood in the Wilderness – 3 points</li>
+      <li>Gather 10 Stone in the Wilderness – 3 points</li>
+      <li>Gather 2 Iron in the Wilderness – 3 points</li>
+    </ul>
+
+    <h3>Stage 3: Train Troops</h3>
+    <ul class="task-list">
+      <li>Train 1 Level 1 Troop(s) – 90 points</li>
+      <li>Train 1 Level 2 Troop(s) – 120 points</li>
+      <li>Train 1 Level 3 Troop(s) – 180 points</li>
+      <li>Train 1 Level 4 Troop(s) – 265 points</li>
+      <li>Train 1 Level 5 Troop(s) – 385 points</li>
+      <li>Train 1 Level 6 Troop(s) – 595 points</li>
+      <li>Train 1 Level 7 Troop(s) – 830 points</li>
+      <li>Train 1 Level 8 Troop(s) – 1,130 points</li>
+      <li>Train 1 Level 9 Troop(s) – 1,485 points</li>
+      <li>Train 1 Level 10 Troop(s) – 1,960 points</li>
+    </ul>
+
+    <h3>Stage 4: Charm Upgrade</h3>
+    <ul class="task-list">
+      <li>Raise Governor Gear Charm max score by 1 – 1,000 points</li>
+      <li>Gather 50 Bread in the Wilderness – 3 points</li>
+      <li>Gather 50 Wood in the Wilderness – 3 points</li>
+      <li>Gather 10 Stone in the Wilderness – 3 points</li>
+      <li>Gather 2 Iron in the Wilderness – 3 points</li>
+      <li>Raise 1 Power through Research – 45 points</li>
+    </ul>
+
+    <table class="score">
+      <thead>
+        <tr><th>Governor Charm Level</th><th>Level Up Score</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>625</td></tr>
+        <tr><td>2</td><td>1,250</td></tr>
+        <tr><td>3</td><td>3,125</td></tr>
+        <tr><td>4</td><td>8,750</td></tr>
+        <tr><td>5</td><td>11,250</td></tr>
+        <tr><td>6</td><td>12,500</td></tr>
+        <tr><td>7</td><td>12,500</td></tr>
+        <tr><td>8</td><td>13,000</td></tr>
+        <tr><td>9</td><td>14,000</td></tr>
+        <tr><td>10</td><td>15,000</td></tr>
+        <tr><td>11</td><td>16,000</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Stage 5: Power Boost</h3>
+    <ul class="task-list">
+      <li>Use 1 Hero Gear Forgehammer(s) – 50,000 points</li>
+      <li>Use 1 Widget for Hero Exclusive Gear – 100,000 points</li>
+      <li>Raise 1 Power through Construction – 30 points</li>
+      <li>Raise 1 Power through Research – 30 points</li>
+      <li>Raise 1 Power by training/promoting troops – 20 points</li>
+    </ul>
+
+    <h3>Stage 6: Governor Gear Upgrade</h3>
+    <ul class="task-list">
+      <li>Raise Governor Gear max score by 1 – 500 points</li>
+    </ul>
+
+    <table class="score">
+      <thead>
+        <tr><th>Governor Gear Rarity</th><th>Level Up Score</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Uncommon</td><td>1,125</td></tr>
+        <tr><td>Uncommon (1-Star)</td><td>1,875</td></tr>
+        <tr><td>Rare</td><td>3,000</td></tr>
+        <tr><td>Rare (1-Star)</td><td>4,500</td></tr>
+        <tr><td>Rare (2-Star)</td><td>5,100</td></tr>
+        <tr><td>Rare (3-Star)</td><td>5,400</td></tr>
+        <tr><td>Epic</td><td>3,230</td></tr>
+        <tr><td>Epic (1-Star)</td><td>3,230</td></tr>
+        <tr><td>Epic (2-Star)</td><td>3,225</td></tr>
+        <tr><td>Epic (3-Star)</td><td>3,225</td></tr>
+        <tr><td>Epic T1</td><td>3,440</td></tr>
+        <tr><td>Epic T1 (1-Star)</td><td>3,440</td></tr>
+        <tr><td>Epic T1 (2-Star)</td><td>4,085</td></tr>
+        <tr><td>Epic T1 (3-Star)</td><td>4,085</td></tr>
+        <tr><td>Mythic</td><td>6,250</td></tr>
+        <tr><td>Mythic (1-Star)</td><td>6,250</td></tr>
+        <tr><td>Mythic (2-Star)</td><td>6,250</td></tr>
+        <tr><td>Mythic (3-Star)</td><td>6,250</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Stage 7: Hero Development</h3>
+    <ul class="task-list">
+      <li>Use 1 Rare Hero Shard to ascend Heroes – 4,000 points</li>
+      <li>Use 1 Epic Hero Shard to ascend Heroes – 14,000 points</li>
+      <li>Use 1 Mythic Hero Shard to ascend Heroes – 35,000 points</li>
+      <li>Use 1m of Speedups for Construction – 300 points</li>
+      <li>Use 1m of Speedups for Research – 300 points</li>
+      <li>Use 1m of Speedups for Troop Training or Promotion – 300 points</li>
+    </ul>
+  </section>
+</main>
