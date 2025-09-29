@@ -424,9 +424,9 @@ return `${local}${tgOut}${lvOut}`.trim();
 
   // 원하는 고정 순서
   const ORDER = [
-    'towncenter','embassy','barracks','stable','range','academy','command','infirmary',
-    'truegold-crucible','gold-smelter','guard-station','kitchen','storehouse'
-  ];
+  'towncenter','embassy','barracks','stable','range','academy','war-academy','command','infirmary',
+  'truegold-crucible','gold-smelter','guard-station','kitchen','storehouse'
+];
   function orderScore(key){
     const i = ORDER.indexOf(key);
     return i < 0 ? 9999 : i;
@@ -571,7 +571,7 @@ return `${local}${tgOut}${lvOut}`.trim();
       const img = imgUrl((currentVar && currentVar.image) || item.image || 'img/placeholder.webp');
       const fallback = esc(ROOT+'img/placeholder.webp');
 
-      // 표 렌더
+            // 표 렌더
       const rowsRaw = (currentVar && currentVar.table) || item.table || [];
       const tableHtml = buildTable(rowsRaw, { slug: item.slug });
       const tabs = buildVariantTabs(item.slug, variants, currentVar ? currentVar.key : '');
@@ -602,34 +602,56 @@ return `${local}${tgOut}${lvOut}`.trim();
           <ul>${unlocksList}</ul>
         </section>` : '';
 
+      // ✅ 표 위 이미지
+      const topImgHtml = item.imagesTop ? `
+        <section class="detail-image-top" style="margin:16px 0; text-align:center">
+          <img src="${esc(imgUrl(item.imagesTop))}" style="max-width:100%;border:1px solid #ccc;border-radius:6px">
+        </section>` : '';
+
+      // ✅ 표 아래 여러 장 이미지
+      const imagesHtml = (Array.isArray(item.images) && item.images.length) ? `
+  <section class="detail-images" style="margin-top:16px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;justify-items:center;">
+      ${item.images.map(src => `
+        <img src="${esc(imgUrl(src))}" style="width:100%;max-width:300px;border:1px solid #ccc;border-radius:6px">
+      `).join('')}
+    </div>
+  </section>` : '';
+
+
       // 상세 HTML
-      r.innerHTML = `
-        <div style="margin-bottom:16px; text-align:right">
-          <a href="/buildings"
-             style="display:inline-block;padding:8px 12px;border:1px solid #ccc;border-radius:6px;text-decoration:none;background:#fff;color:#333"
-             aria-label="${esc(t('buildings.backToList','건물 목록으로'))}">
-            ←
-          </a>
-        </div>
+r.innerHTML = `
+  <div style="margin-bottom:16px; text-align:right">
+    <a href="/buildings"
+       style="display:inline-block;padding:8px 12px;border:1px solid #ccc;border-radius:6px;text-decoration:none;background:#fff;color:#333"
+       aria-label="${esc(t('buildings.backToList','건물 목록으로'))}">
+      ←
+    </a>
+  </div>
 
-        ${tabs}
+  ${tabs}
 
-        <section class="detail-grid">
-          <div>
-            <img src="${esc(img)}" alt="${esc(titleText)}" class="detail-img"
-                 data-i18n-attr="alt:${esc(titleKey)}"
-                 onerror="this.onerror=null;this.src='${fallback}'">
-          </div>
-          <div>
-            <h1 style="margin:0 0 8px" data-i18n="${esc(titleKey)}">${esc(titleText)}</h1>
-            ${descText ? `<p class="detail-desc"${looksLikeKey(descKey) ? ` data-i18n="${esc(descKey)}"` : ''}>${esc(descText)}</p>` : ''}
-          </div>
-        </section>
+  <section class="detail-grid">
+    <div>
+      <img src="${esc(img)}" alt="${esc(titleText)}" class="detail-img"
+           data-i18n-attr="alt:${esc(titleKey)}"
+           onerror="this.onerror=null;this.src='${fallback}'">
+    </div>
+    <div>
+      <h1 style="margin:0 0 8px" data-i18n="${esc(titleKey)}">${esc(titleText)}</h1>
+      ${descText ? `<p class="detail-desc"${looksLikeKey(descKey) ? ` data-i18n="${esc(descKey)}"` : ''}>${esc(descText)}</p>` : ''}
+    </div>
+  </section>
 
-        <section class="detail-table" style="margin-top:16px">${tableHtml}</section>
+  <section class="detail-table" style="margin-top:16px">
+    ${topImgHtml}   <!-- ✅ 표 위 이미지 -->
+    ${tableHtml}
+  </section>
 
-        ${unlocksHtml}
-      `;
+  ${imagesHtml}     <!-- ✅ 표 아래 여러 장 이미지 -->
+  ${unlocksHtml}
+`;
+
       document.title = `${t(titleKey, titleFallback)} - KingshotData.KR`;
       applyI18N(r);
       window.scrollTo({ top: 0 });

@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>부대 전투 시뮬레이터</title>
+  <style>
+    body { font-family: sans-serif; padding:20px; }
+    .tabs { margin-bottom: 15px; }
+    .tab-btn { padding:8px 12px; margin-right:4px; cursor:pointer; border:1px solid #ccc; background:#eee; }
+    .tab-btn.active { background:#ddd; font-weight:bold; }
+    .tab-content { display:none; margin-top:10px; }
+    .tab-content.active { display:block; }
+    .battlefield {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 10px;
+    }
+    .army {
+      border:1px solid #ccc;
+      padding:10px;
+      background:#f4f4f4;
+    }
+    .log {
+      border:1px solid #aaa;
+      padding:10px;
+      height:300px;
+      overflow-y:auto;
+      white-space:pre-line;
+      background:#fff;
+      font-size:14px;
+    }
+    .summary {
+      border:1px solid #aaa;
+      margin-top:10px;
+      background:#fafafa;
+    }
+    .summary table { width:100%; border-collapse:collapse; font-size:13px; }
+    .summary th, .summary td { border:1px solid #ccc; padding:4px; text-align:center; }
+    input, select { margin:2px; width:70px; }
+    h3 { margin:6px 0; text-align:center; }
+    .army h4 { margin:4px 0; }
+  </style>
+</head>
+<body>
+  <h1>집결장 그룹 전투 시뮬레이터 (1~10레벨)</h1>
+
+  <!-- 탭 버튼 -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('tabA')">부대 A 설정</button>
+    <button class="tab-btn" onclick="showTab('tabB')">부대 B 설정</button>
+    <button class="tab-btn" onclick="showTab('tabAll')">전체 설정</button>
+  </div>
+
+  <!-- 부대 A 설정 -->
+  <div class="tab-content active" id="tabA">
+    <h3>부대 A</h3>
+    <b>집결장 그룹</b><br>
+    영웅1: <input id="aHero1" type="text" placeholder="영웅 이름"><br>
+    영웅2: <input id="aHero2" type="text" placeholder="영웅 이름"><br>
+    영웅3: <input id="aHero3" type="text" placeholder="영웅 이름"><br><br>
+    <b>병력</b><br>
+    보병: <input id="aInfCount" type="number" value="10"> Lv <select id="aInfLv"></select><br>
+    기병: <input id="aCavCount" type="number" value="10"> Lv <select id="aCavLv"></select><br>
+    궁병: <input id="aArcCount" type="number" value="10"> Lv <select id="aArcLv"></select>
+  </div>
+
+  <!-- 부대 B 설정 -->
+  <div class="tab-content" id="tabB">
+    <h3>부대 B</h3>
+    <b>집결장 그룹</b><br>
+    영웅1: <input id="bHero1" type="text" placeholder="영웅 이름"><br>
+    영웅2: <input id="bHero2" type="text" placeholder="영웅 이름"><br>
+    영웅3: <input id="bHero3" type="text" placeholder="영웅 이름"><br><br>
+    <b>병력</b><br>
+    보병: <input id="bInfCount" type="number" value="10"> Lv <select id="bInfLv"></select><br>
+    기병: <input id="bCavCount" type="number" value="10"> Lv <select id="bCavLv"></select><br>
+    궁병: <input id="bArcCount" type="number" value="10"> Lv <select id="bArcLv"></select>
+  </div>
+
+  <!-- 전체 설정 -->
+  <div class="tab-content" id="tabAll">
+    <h3>전체 설정</h3>
+    모든 병력 수: <input id="allCount" type="number" value="10">  
+    모든 레벨: <select id="allLv"></select>  
+    <button onclick="applyAll()">적용</button>
+  </div>
+
+  <button style="margin-top:15px;" onclick="startBattle()">전투 시작</button>
+
+  <div class="battlefield" style="margin-top:20px;">
+    <div class="army" id="armyA">
+      <h3>부대 A</h3>
+      <div id="aHeroes"></div>
+      <h4>보병: <span id="aInfRemain">0</span></h4>
+      <h4>기병: <span id="aCavRemain">0</span></h4>
+      <h4>궁병: <span id="aArcRemain">0</span></h4>
+    </div>
+
+    <div>
+      <div class="log" id="log"></div>
+      <div class="summary" id="summary"></div>
+    </div>
+
+    <div class="army" id="armyB">
+      <h3>부대 B</h3>
+      <div id="bHeroes"></div>
+      <h4>보병: <span id="bInfRemain">0</span></h4>
+      <h4>기병: <span id="bCavRemain">0</span></h4>
+      <h4>궁병: <span id="bArcRemain">0</span></h4>
+    </div>
+  </div>
+
+  <script>
+    // ===== 탭 전환 =====
+    function showTab(tabId) {
+      document.querySelectorAll(".tab-btn").forEach(btn=>btn.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(tab=>tab.classList.remove("active"));
+      document.querySelector(`.tab-btn[onclick*='${tabId}']`).classList.add("active");
+      document.getElementById(tabId).classList.add("active");
+    }
+
+    // ===== 레벨별 스펙 생성 =====
+    function getUnitStats(type, lv) {
+      let base;
+      if (type==="infantry") base = { atk:1, def:4, hp:6, bonus:"cavalry" };
+      if (type==="cavalry")  base = { atk:4, def:2, hp:2, bonus:"archer" };
+      if (type==="archer")   base = { atk:5, def:1, hp:1, bonus:"infantry" };
+      return {
+        atk: base.atk + (lv-1),
+        def: base.def + (lv-1),
+        hp:  base.hp  + (lv-1),
+        bonus: base.bonus,
+        lv: lv
+      };
+    }
+
+    // ===== 부대 불러오기 =====
+    function getArmy(prefix) {
+      return {
+        heroes: [
+          document.getElementById(prefix+"Hero1").value,
+          document.getElementById(prefix+"Hero2").value,
+          document.getElementById(prefix+"Hero3").value
+        ],
+        infantry: { count:+document.getElementById(prefix+"InfCount").value, lv:+document.getElementById(prefix+"InfLv").value },
+        cavalry:  { count:+document.getElementById(prefix+"CavCount").value, lv:+document.getElementById(prefix+"CavLv").value },
+        archer:   { count:+document.getElementById(prefix+"ArcCount").value, lv:+document.getElementById(prefix+"ArcLv").value }
+      };
+    }
+
+    // ===== 전체 설정 적용 =====
+    function applyAll() {
+      let c = +document.getElementById("allCount").value;
+      let lv = +document.getElementById("allLv").value;
+      ["aInf","aCav","aArc","bInf","bCav","bArc"].forEach(p=>{
+        document.getElementById(p+"Count").value = c;
+        document.getElementById(p+"Lv").value = lv;
+      });
+    }
+
+    // ===== 전투 시작 =====
+    function startBattle() {
+      const logBox = document.getElementById("log");
+      const sumBox = document.getElementById("summary");
+      logBox.innerHTML = "";
+      sumBox.innerHTML = "";
+
+      let armyA = getArmy("a");
+      let armyB = getArmy("b");
+
+      updateUI(armyA, "a");
+      updateUI(armyB, "b");
+
+      let summaryRows = [];
+      summaryRows.push(`<tr><th>라운드</th><th>A 보병</th><th>A 기병</th><th>A 궁병</th><th>B 보병</th><th>B 기병</th><th>B 궁병</th></tr>`);
+
+      let round = 1;
+      while (armyAlive(armyA) && armyAlive(armyB) && round <= 30) {
+        logBox.innerHTML += `=== 라운드 ${round} ===\n`;
+
+        combatPhase("A", armyA, armyB, logBox);
+        updateUI(armyA, "a"); updateUI(armyB, "b");
+        if (!armyAlive(armyB)) { logBox.innerHTML += "부대 B 전멸! A 승리!\n"; }
+
+        else {
+          combatPhase("B", armyB, armyA, logBox);
+          updateUI(armyA, "a"); updateUI(armyB, "b");
+          if (!armyAlive(armyA)) { logBox.innerHTML += "부대 A 전멸! B 승리!\n"; }
+        }
+
+        summaryRows.push(`<tr>
+          <td>${round}</td>
+          <td>${armyA.infantry.count}</td><td>${armyA.cavalry.count}</td><td>${armyA.archer.count}</td>
+          <td>${armyB.infantry.count}</td><td>${armyB.cavalry.count}</td><td>${armyB.archer.count}</td>
+        </tr>`);
+
+        if (!armyAlive(armyA) || !armyAlive(armyB)) break;
+        round++;
+      }
+      sumBox.innerHTML = `<table>${summaryRows.join("")}</table>`;
+    }
+
+    function armyAlive(army) {
+      return (army.infantry.count+army.cavalry.count+army.archer.count) > 0;
+    }
+
+    // ===== 전투 페이즈 =====
+    function combatPhase(sideName, atkArmy, defArmy, logBox) {
+      ["infantry","cavalry","archer"].forEach(type=>{
+        if (atkArmy[type].count <= 0) return;
+        let atkStat = getUnitStats(type, atkArmy[type].lv);
+        let times = 1;
+
+        // 궁병 패시브
+        if (type==="archer" && atkStat.lv>=7) {
+          if (Math.random()<0.1) {
+            times = 2;
+            logBox.innerHTML += `${sideName}의 궁병 패시브 발동! 2회 공격!\n`;
+          } else {
+            logBox.innerHTML += `${sideName}의 궁병 패시브 미발동.\n`;
+          }
+        }
+
+        for (let i=0;i<times;i++) {
+          let targetType = pickTarget(defArmy);
+          if (type==="cavalry" && atkStat.lv>=7) {
+            if (Math.random()<0.2 && defArmy.archer.count>0) {
+              targetType = "archer";
+              logBox.innerHTML += `${sideName}의 기병 패시브 발동! 궁병 직접 노림!\n`;
+            } else {
+              logBox.innerHTML += `${sideName}의 기병 패시브 미발동.\n`;
+            }
+          }
+          if (!targetType) return;
+
+          let defStat = getUnitStats(targetType, defArmy[targetType].lv);
+          let damage = atkStat.atk * atkArmy[type].count;
+          if (atkStat.bonus === targetType) damage *= 1.1;
+          let defDef = defStat.def;
+          if (targetType==="cavalry" && defStat.lv>=7 && type==="infantry") {
+            defDef = Math.floor(defDef*1.1);
+            logBox.innerHTML += `${sideName}의 보병 방어 패시브 발동! 기병 상대로 방어력 증가!\n`;
+          }
+          damage = Math.max(1, Math.floor(damage - defDef*0.5));
+          let killed = Math.min(defArmy[targetType].count, Math.floor(damage/defStat.hp));
+          defArmy[targetType].count -= killed;
+          logBox.innerHTML += `${sideName}의 ${type} → ${targetType} 공격, ${killed}명 격파 (남은 ${targetType}: ${defArmy[targetType].count})\n`;
+        }
+      });
+    }
+
+    // ===== 랜덤 타겟 =====
+    function pickTarget(army) {
+      let alive = Object.keys(army).filter(k=>army[k].count>0);
+      if (alive.length===0) return null;
+      return alive[Math.floor(Math.random()*alive.length)];
+    }
+
+    // ===== UI 업데이트 =====
+    function updateUI(army, prefix) {
+      document.getElementById(prefix+"InfRemain").innerText = army.infantry.count;
+      document.getElementById(prefix+"CavRemain").innerText = army.cavalry.count;
+      document.getElementById(prefix+"ArcRemain").innerText = army.archer.count;
+      let heroBox = document.getElementById(prefix+"Heroes");
+      heroBox.innerHTML = "<b>영웅:</b><br>"+army.heroes.filter(h=>h).join("<br>");
+    }
+
+    // ===== 레벨 선택 박스 채우기 =====
+    window.onload = ()=>{
+      for (let i=1;i<=10;i++) {
+        ["aInfLv","aCavLv","aArcLv","bInfLv","bCavLv","bArcLv","allLv"].forEach(id=>{
+          let sel = document.getElementById(id);
+          let opt = document.createElement("option");
+          opt.value=i; opt.text=i;
+          sel.appendChild(opt);
+        });
+      }
+    }
+  </script>
+</body>
+</html>
