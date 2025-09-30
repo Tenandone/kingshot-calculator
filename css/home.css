@@ -9,15 +9,15 @@
 .category-grid {
   display: grid;
   gap: 12px;
-  /* 화면 크기에 맞춰 칸 개수 자동 조절 */
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  /* 카드 최소 폭을 줄여서 화면 크기에 맞게 자동 줄어듦 */
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   align-items: stretch;
 }
 
-/* 작은 화면(모바일)에서도 2칸 이상 보장 */
-@media (max-width: 480px) {
+/* 아주 작은 화면(예: 320px 이하)에서도 2칸 유지 */
+@media (max-width: 360px) {
   .category-grid {
-    grid-template-columns: repeat(2, 1fr); /* 무조건 2칸 */
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
 }
 
