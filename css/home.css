@@ -1,5 +1,7 @@
-/* 홈 컨테이너 여백 */
+/* 홈 컨테이너: 네비게이션과 폭 맞춤 */
 .home-container {
+  max-width: 1200px;   /* nav-bar와 동일 */
+  margin: 0 auto;      /* 가운데 정렬 */
   padding: 12px;
 }
 
@@ -12,10 +14,10 @@
   align-items: stretch;
 }
 
-/* 모바일에서도 2칸 이상 보이도록 */
+/* 작은 화면(모바일)에서도 2칸 이상 보장 */
 @media (max-width: 480px) {
   .category-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(2, 1fr); /* 무조건 2칸 */
   }
 }
 
@@ -36,12 +38,15 @@
   box-shadow: 0 2px 6px rgba(0,0,0,.08);
 }
 
+/* 카드 내부 - 이미지 박스 */
 .card--category .card__media {
   aspect-ratio: 16/10;
   background: #f2f6ff;
   display: grid;
   place-items: center;
 }
+
+/* 카드 내부 - 텍스트 */
 .card--category .card__body {
   padding: 8px;
 }

@@ -1,0 +1,51 @@
+/* ===== Sponsor Strip (1200px 컨테이너 안 맞춤) ===== */
+.sponsor-strip {
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  background: #fafafa;
+  padding: 6px 0;
+  position: relative;
+}
+
+/* 트랙: 아이템들을 가로로 나열 + 무한 스크롤 */
+.sponsor-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+  animation: scroll-left 40s linear infinite;
+  will-change: transform;
+}
+
+/* 칩 */
+.sponsor {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #444;
+  padding: 2px 6px;       /* 살짝만 여백 */
+}
+
+.sponsor .label {
+  font-weight: 600;
+  color: #777;
+  font-size: 12px;
+}
+
+.sponsor img {
+  height: 20px;
+  object-fit: contain;
+  display: block;
+}
+
+
+/* === 애니메이션: 트랙 전체 이동만 적용 === */
+@keyframes scroll-left {
+  0%   { transform: translateX(1200px); }
+  100% { transform: translateX(-1200px); }
+}

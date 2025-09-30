@@ -1,0 +1,319 @@
+:root{
+  --nav-h:60px;
+  --logo-site:50px;
+  --logo-partner-default:32px;
+  --lootbar-logo-h: 22px;
+  --cafe-logo-h:    22px;
+  --lootbar-tile-h: 22px;
+  --cafe-tile-h:    34px;
+  --bd:#e5e7eb; --fg:#111; --muted:#666;
+  --hover:#f3f4f6; --focus:#0b57d0;
+  --panel:#fff;
+  --menu-w: 200px;
+}
+
+body {
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color:var(--fg);
+}
+
+a { text-decoration:none; color:inherit }
+img { display:block }
+
+.site-header {
+  background:#fff;
+  border-bottom:1px solid var(--bd);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+/* 네비게이션 컨테이너 폭을 카드 영역과 맞춤 */
+.container.nav-bar {
+  max-width: 1200px;   /* 카드 영역 max-width 값과 동일하게 */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.nav-bar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:var(--nav-h);
+}
+
+.nav-left, .nav-right {
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+/* 브랜드(로고)는 왼쪽 고정 */
+.brand {
+  display:flex;
+  align-items:center;
+  flex:0 0 auto;
+  margin-right:auto;  /* 로고 다음 공간 밀어냄 */
+}
+
+/* 네비 전체 메뉴를 오른쪽 끝으로 */
+.nav-left nav,
+.nav-right nav {
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;  /* 우측 정렬 */
+  gap:16px;
+}
+
+/* 우측 메뉴 컨테이너 */
+.nav-right {
+  margin-left:auto;  /* 자동 여백으로 끝까지 밀림 */
+  display:flex;
+  align-items:center;
+  gap:20px;
+  min-width:unset;   /* 기존 360px 강제폭 제거 */
+}
+
+/* 모든 네비 a 태그 공통 스타일 */
+.nav-left nav a,
+.nav-right nav a {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:var(--nav-h);
+  padding:0 12px;
+  font-size:14px;
+  white-space:nowrap;
+  color:#333;
+}
+
+.lootbar-banner, .cafe-banner {
+  display:inline-grid;
+  justify-items:center;
+  align-items:end;
+  text-align:center;
+}
+
+.lootbar-banner { grid-template-rows:var(--lootbar-logo-h) auto }
+.cafe-banner   { grid-template-rows:var(--cafe-logo-h) auto }
+
+.lootbar-logo {
+  height:var(--lootbar-logo-h) !important;
+  width:auto;
+  object-fit:contain;
+}
+.cafe-logo {
+  height:var(--cafe-logo-h) !important;
+  width:auto;
+  object-fit:contain;
+}
+.lootbar-banner span, .cafe-banner span {
+  font-size:10px;
+  font-weight:300;
+  line-height:1;
+  color:#000;
+  opacity:.6;
+  margin:0;
+}
+
+#menuToggle.hamburger {
+  display:none;
+  font-size:22px;
+  background:none;
+  border:0;
+  color:#333;
+  cursor:pointer;
+  width:44px;
+  height:44px;
+}
+
+@media (max-width:768px){
+  #primaryNav { display:none }
+  #menuToggle.hamburger { display:inline-block }
+  .nav-right { display:none }
+}
+
+.backdrop {
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  opacity:0;
+  pointer-events:none;
+  transition:.2s;
+  z-index:110;
+}
+
+.drawer {
+  position:fixed;
+  top:0;
+  right:0;
+  height:100%;
+  width:45vw;
+  background:var(--panel);
+  border-left:1px solid var(--bd);
+  transform:translateX(100%);
+  transition:transform .25s ease;
+  z-index:120;
+  display:flex;
+  flex-direction:column;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+
+.drawer header {
+  height:var(--nav-h);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 16px;
+  border-bottom:1px solid var(--bd);
+  position:sticky;
+  top:0;
+  background:#fff;
+  z-index:1;
+}
+
+.is-open .backdrop { opacity:1; pointer-events:auto }
+.is-open .drawer   { transform:translateX(0) }
+.no-scroll { overflow:hidden }
+
+.section { padding:16px }
+.rule {
+  height:12px;
+  border-bottom:1px dashed var(--bd);
+  margin:6px 0 12px;
+}
+
+.sec-label {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--muted);
+  font-size:12px;
+  text-transform:lowercase;
+  letter-spacing:.04em;
+  margin:8px 0;
+}
+.sec-label::before, .sec-label::after {
+  content:"";
+  flex:1;
+  border-bottom:1px dashed var(--bd);
+}
+
+.lang-row {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  height:44px;
+  padding:0 12px;
+  border:1px solid var(--bd);
+  border-radius:10px;
+  background:#fff;
+  cursor:pointer;
+  user-select:none;
+  max-width:200px;
+}
+.lang-row:hover { background:var(--hover) }
+.lang-row .globe { width:18px; height:18px }
+.lang-row .current { font-variant-caps:all-small-caps; font-weight:600 }
+.lang-row .caret {
+  width:6px;
+  height:6px;
+  display:inline-block;
+  margin-left:auto;
+  transform:rotate(45deg);
+  border-right:2px solid #555;
+  border-bottom:2px solid #555;
+}
+
+.lang-menu {
+  position:absolute;
+  top:calc(100% + 8px);
+  left:0;
+  min-width:200px;
+  background:#fff;
+  color:#111;
+  border:1px solid var(--bd);
+  border-radius:10px;
+  padding:6px 0;
+  margin:0;
+  list-style:none;
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
+  z-index:3000;
+  max-height:60vh;
+  overflow:auto;
+}
+.lang-menu li { position:relative }
+.lang-item {
+  width:100%;
+  text-align:left;
+  background:none;
+  border:0;
+  cursor:pointer;
+  display:block;
+  padding:12px 14px 12px 16px;
+  font-size:15px;
+}
+.lang-item:hover { background:var(--hover) }
+.lang-item + li::before {
+  content:"";
+  position:absolute;
+  top:0;
+  left:12px;
+  right:12px;
+  border-top:1px dashed var(--bd);
+}
+.lang-item[aria-checked="true"] { background:var(--hover) }
+.lang-item[aria-checked="true"]::before {
+  content:"";
+  position:absolute;
+  left:0;
+  top:10px;
+  bottom:10px;
+  width:2px;
+  background:var(--focus);
+}
+
+/* Drawer 메뉴 세로 정렬 보장 */
+.drawer .nav-list {
+  display:block;
+  padding:0 12px;
+}
+.drawer .nav-list a {
+  display:block;
+  width:100%;
+  padding:12px 4px;
+  font-size:16px;
+  border-radius:8px;
+}
+.drawer .nav-list a:hover { background:var(--hover) }
+
+.tile-grid {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+.tile {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border:1px solid #ececec;
+  border-radius:12px;
+  background:#fff;
+  padding:10px 12px;
+}
+.tile .logo { height:22px; width:auto }
+.tile .meta { display:flex; flex-direction:column }
+.tile .meta .tit { font-weight:700 }
+.logo-lootbar { height:var(--lootbar-tile-h) }
+.logo-cafe   { height:var(--cafe-tile-h) }
+.icon-24 { width:18px; height:18px; flex:0 0 18px }
+.tile:hover { background:var(--hover) }
+
+.tile-kakao {
+  background:#FEE500 !important;
+  border-color:#FEE500 !important;
+}
+.tile-kakao .tit { color:#111; }
