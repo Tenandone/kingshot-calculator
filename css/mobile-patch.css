@@ -100,3 +100,32 @@
   height: auto;
   display: block;
 }
+/* 카테고리 카드 제목/부제목: 한 줄 고정 + … 처리 */
+.category-grid .card__title,
+#buildings-grid .card__title,
+#heroes-grid .card__title,
+#db-grid .card__title,
+#calc-grid .card__title,
+.category-grid .card__subtitle,
+#buildings-grid .card__subtitle,
+#heroes-grid .card__subtitle,
+#db-grid .card__subtitle,
+#calc-grid .card__subtitle {
+  text-align: center;
+  white-space: nowrap !important;     /* 무조건 한 줄 */
+  overflow: hidden !important;        /* 넘치면 숨김 */
+  text-overflow: ellipsis !important; /* … 표시 */
+  display: block;                     /* inline에서 깨지는 경우 방지 */
+  width: 100%;                        /* 부모 너비 꽉 채우기 */
+}
+#buildings-grid .card__title {
+  text-align: center;
+  font-size: clamp(12px, 2vw, 14px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  display: block;    /* inline이면 깨지니까 block 강제 */
+  width: 100%;       /* 부모(.card__body)의 폭 꽉 채우기 */
+  box-sizing: border-box;
+}
