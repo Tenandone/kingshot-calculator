@@ -39,8 +39,22 @@
   if (!window.v) window.v = v;
 
   // ===== CSS 경로 =====
-  var CALC_CSS_HREF       = '/css/calculator.css';
-  var COMPONENTS_CSS_HREF = '/css/components.css';
+var CALC_CSS_HREF = '/css/calculator.css';
+// var COMPONENTS_CSS_HREF = '/css/components.css';  // 선언은 주석 처리 (호출도 같이 제거)
+
+// ===== bootstrap =====
+document.addEventListener('DOMContentLoaded', function () {
+  ensureCSS('calculator-css', CALC_CSS_HREF)   // ✅ calculator.css만 로드
+    .then(function(){ return ensureI18N(); })
+    .then(function(){
+      var canon = canonicalize(location.href);
+      return selectAndBuildRoutesFor(canon.pathname);
+    })
+    .then(function(builtRoutes){
+      startRouter(builtRoutes || {});
+      return dispatch();
+    });
+});
 
   // ===== header utils =====
   var yearEl = $('#y');
@@ -695,18 +709,6 @@
     } catch (_e) {}
   }, false);
 
-  // ===== bootstrap =====
-  document.addEventListener('DOMContentLoaded', function () {
-    ensureCSS('components-css', COMPONENTS_CSS_HREF)
-      .then(function(){ return ensureI18N(); })
-      .then(function(){
-        var canon = canonicalize(location.href);
-        return selectAndBuildRoutesFor(canon.pathname);
-      })
-      .then(function(builtRoutes){
-        startRouter(builtRoutes || {});
-        return dispatch();
-      });
-  });
+  
 
 })();

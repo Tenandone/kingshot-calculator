@@ -1,0 +1,120 @@
+/* ==========================================================
+   KingshotData — category.css
+   홈 / 건물 / 영웅 / 데이터베이스 / 계산기 공용
+   ========================================================== */
+
+/* 공통 변수 */
+:root {
+  --cat-gap: 12px;          /* 카드 간격 */
+  --cat-min: 120px;         /* 최소 카드 폭 */
+  --cat-min-mobile: 60px;   /* 모바일 최소 카드 폭 */
+  --cat-radius: 12px;       /* 카드 모서리 */
+  --cat-img-size: 160px;     /* 카드 이미지 크기 */
+}
+
+/* ===== 카테고리 그리드 ===== */
+.category-grid,
+#buildings-grid,
+#heroes-grid,
+#db-grid,
+#calc-grid {
+  display: grid;
+  gap: var(--cat-gap);
+  grid-template-columns: repeat(auto-fill, minmax(var(--cat-min), 1fr));
+  align-items: stretch;
+}
+@media (max-width: 480px) {
+  .category-grid,
+  #buildings-grid,
+  #heroes-grid,
+  #db-grid,
+  #calc-grid {
+    grid-template-columns: repeat(auto-fill, minmax(var(--cat-min-mobile), 1fr));
+  }
+}
+
+/* ===== 카드 공용 ===== */
+.card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--cat-radius);
+  overflow: hidden;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  box-shadow: var(--shadow);
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.08);
+  border-color: #dfe3ea;
+}
+
+/* ===== 카드 이미지 영역 ===== */
+.card__media,
+.card .thumb { /* 계산기 카드 썸네일 포함 */
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  border-radius: var(--cat-radius);
+}
+
+/* ===== 카드 이미지 ===== */
+.card__media img,
+.card .thumb img {
+  width: var(--cat-img-size) !important;
+  height: var(--cat-img-size) !important;
+  object-fit: contain !important;  /* 잘림 방지 */
+  display: block;
+  margin: 0 auto;
+}
+
+/* ===== 카드 텍스트 ===== */
+.card__body {
+  padding: 10px;
+  text-align: center;
+}
+.card__title {
+  font-weight: 700;
+  margin: 0 0 4px;
+  font-size: 14px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.card__subtitle {
+  opacity: .8;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 카테고리 카드 서브타이틀 숨기기 */
+.card__subtitle {
+  display: none !important;
+}
+/* =========================
+   홈/빌딩 카드 보정
+   ========================= */
+.grid .card { border-radius: 12px; overflow: hidden; }
+
+/* 건물 카드 썸네일 정사각 고정 */
+#buildings-grid .card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+#calc-grid {
+  display: grid;
+  gap: var(--cat-gap);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}

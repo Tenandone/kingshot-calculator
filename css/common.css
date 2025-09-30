@@ -197,18 +197,7 @@ a:hover{text-decoration:underline}
 .variant-tabs .tab:hover{background:#eef2f8}
 .variant-tabs .tab.on{background:#2b6cb0;color:#fff;border-color:transparent}
 
-/* =========================
-   홈/빌딩 카드 보정
-   ========================= */
-.grid .card { border-radius: 12px; overflow: hidden; }
 
-/* 건물 카드 썸네일 정사각 고정 */
-#buildings-grid .card img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  display: block;
-}
 
 /* =========================
    DB cards (이미지 자르지 않음)
@@ -246,13 +235,7 @@ a:hover{text-decoration:underline}
   float:none !important; display:block; margin-left:auto; margin-right:auto;
 }
 
-/* =========================
-   계산기 중앙 정렬
-   ========================= */
-.calc-wrap { max-width: 1200px; margin: 0 auto; padding: 16px 12px; }
-.calc-card { max-width: 1200px; margin: 0 auto 14px; }
-#gear-calc .gear-card { margin: 0 auto; }
-#gear-calc .gear-row, #gear-calc .slot-list { justify-content: center; }
+
 
 /* =========================
    Footer

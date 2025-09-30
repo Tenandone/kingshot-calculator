@@ -404,7 +404,8 @@ return `${local}${tgOut}${lvOut}`.trim();
     const k = v ? `buildings.card.${s}.${v}.title` : `buildings.card.${s}.title`;
     return t(k, fb);
   };
-  const cardSubtitle = (slug, fb) => t(`buildings.card.${keySlug(slug)}.subtitle`, fb);
+  const cardSubtitle = (slug, fb) => null;
+
 
   // ---------- 카드 렌더 ----------
   function makeCardHTML({ href, title, img, subtitle, i18nTitleKey, i18nSubtitleKey, i18nAltKey }) {

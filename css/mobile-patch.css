@@ -1,10 +1,14 @@
 /* ==========================================================
-   KingshotData — mobile-patch.css (SAFE, opt-in, Home only)
-   기존 스타일 유지 + 홈 화면 모바일 최적화
+   KingshotData — mobile-patch.css
+   기존 스타일 유지 + 모바일 최적화
    ========================================================== */
 
-/* 1) 홈 카테고리 그리드: 화면 크기에 맞춰 자동 배치 */
-.home-container .category-grid {
+/* 1) 모든 카테고리 그리드: 화면 크기에 맞춰 자동 배치 */
+.category-grid,
+#buildings-grid,
+#heroes-grid,
+#db-grid,
+#calc-grid {
   display: grid;
   gap: 12px;
   grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* 최소 60px까지 줄어듦 */
@@ -13,20 +17,28 @@
 
 /* 태블릿 이상에서는 3칸 고정 */
 @media (min-width: 768px) {
-  .home-container .category-grid {
+  .category-grid,
+  #buildings-grid,
+  #heroes-grid,
+  #db-grid,
+  #calc-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 /* 데스크탑 이상에서는 4칸 이상 */
 @media (min-width: 1200px) {
-  .home-container .category-grid {
+  .category-grid,
+  #buildings-grid,
+  #heroes-grid,
+  #db-grid,
+  #calc-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
-/* 2) 홈 카드 미디어 박스: 비율 유지 + 작은 화면에서도 대응 */
-.home-container .card__media {
+/* 카드 미디어 박스 (홈/전체 동일 적용) */
+.card__media {
   aspect-ratio: 16 / 10;
   height: auto;
   display: grid;
@@ -35,19 +47,19 @@
   border-bottom: 1px solid #e8edf5;
   overflow: hidden;
 }
-.home-container .card__media img {
+.card__media img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
   display: block;
 }
 
-/* 3) 카드 본문 (텍스트 최적화) */
-.home-container .card__body {
+/* 카드 본문 (텍스트 최적화) */
+.card__body {
   padding: 8px;
   min-width: 0;
 }
-.home-container .card__title {
+.card__title {
   font-weight: 700;
   font-size: 14px;
   margin: 0 0 2px;
@@ -55,7 +67,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.home-container .card__subtitle {
+.card__subtitle {
   opacity: .8;
   font-size: 12px;
   overflow: hidden;
@@ -65,39 +77,26 @@
 
 /* 작은 화면일 때 텍스트/패딩 축소 */
 @media (max-width: 480px) {
-  .home-container .card__body {
-    padding: 4px;
-  }
-  .home-container .card__title {
-    font-size: 12px;
-  }
-  .home-container .card__subtitle {
-    font-size: 10px;
-  }
+  .card__body { padding: 4px; }
+  .card__title { font-size: 12px; }
+  .card__subtitle { font-size: 10px; }
 }
 
-/* 4) 스티키 헤더 (전역 룩 유지) */
+/* 스티키 헤더 */
 .theme-default .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: #fff; /* 투명 겹침 방지 */
+  background: #fff;
 }
 
-/* 5) 표(테이블) 안전 오버플로 처리 */
+/* 표 안전 처리 */
 .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .table-wrap table { min-width: 560px; width: 100%; border-collapse: collapse; }
 
-/* 6) 콘텐츠 이미지/비디오 반응형 */
+/* 콘텐츠 미디어 반응형 */
 #content img, #content video, #content canvas {
   max-width: 100%;
   height: auto;
   display: block;
 }
-
-/* (선택) 홈 대문/히어로가 남아있다면 숨기기
-.home-container .hero,
-.home-container .home-hero,
-.home-container .hero-card,
-.home-container .site-hero { display:none !important; }
-*/
