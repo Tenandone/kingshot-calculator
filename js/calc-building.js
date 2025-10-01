@@ -26,7 +26,8 @@
     { value: 'barracks',   key: 'calc.form.building.option.barracks'   },
     { value: 'stable',     key: 'calc.form.building.option.stable'     },
     { value: 'range',      key: 'calc.form.building.option.range'      },
-    { value: 'infirmary',  key: 'calc.form.building.option.infirmary'  }
+    { value: 'infirmary',  key: 'calc.form.building.option.infirmary'  },
+    { value: 'war-academy', key: 'calc.form.building.option.war-academy' }
   ];
 
   // ========= 간단 헬퍼 =========

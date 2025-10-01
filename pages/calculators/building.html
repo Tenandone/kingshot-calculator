@@ -4,6 +4,10 @@
 <head>
   <meta charset="utf-8">
 
+  <!-- i18n 네임스페이스 지정 -->
+<meta name="i18n-ns" content="common,calc">
+
+
   <!-- FIX: 다국어/서브디렉터리에서도 SPA 라우터로 안정적으로 넘기고, 쿼리/해시를 보존 -->
   <script>
   (function redirectFromStaticPage() {
@@ -92,6 +96,7 @@
             <option value="range"      data-i18n="calc.form.building.option.range">궁병대</option>
             <option value="academy"    data-i18n="calc.form.building.option.academy">아카데미</option>
             <option value="infirmary"  data-i18n="calc.form.building.option.infirmary">야전병원</option>
+             <option value="war-academy"  data-i18n="calc.form.building.option.war-academy">전쟁 아카데미</option>
           </select>
         </div>
 

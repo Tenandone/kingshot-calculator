@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var fallback= (navigator.language || 'ko');
       var lang    = normalizeLanguage(urlLang || saved || fallback);
       if (window.I18N.current === lang && typeof window.I18N.t === 'function') return Promise.resolve();
-      return window.I18N.init({ lang: lang, namespaces: ['common'] }).catch(function(e){
+      return window.I18N.init({ lang: lang, namespaces: ['common', 'calc']  }).catch(function(e){
         console.warn('[i18n] init failed:', e);
       });
     } catch (e) {

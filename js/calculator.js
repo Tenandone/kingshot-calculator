@@ -21,7 +21,8 @@
     stable:     'calc.form.building.option.stable',
     range:      'calc.form.building.option.range',
     infirmary:  'calc.form.building.option.infirmary',
-    'camp:common': 'calc.form.building.option.barracks' // 공용 캠프는 보병대 라벨로 폴백
+    'camp:common': 'calc.form.building.option.barracks', // 공용 캠프는 보병대 라벨로 폴백
+    "war-academy": "calc.form.building.option.war-academy"
   };
   const getBuildingLabel = (key) => t(BUILDING_I18N_KEY[key] || key, key);
 
@@ -32,9 +33,10 @@
   let _loadingPromise = null;
 
   // ===== 선행 제한 & 최소 레벨 =====
-  const ALLOWED_PREREQ = new Set(['academy', 'barracks', 'range', 'stable', 'embassy']);
-  const PREREQ_MIN_LV = 3;
-  const DISPLAY_ORDER_PREREQ = ['academy', 'barracks', 'range', 'stable', 'embassy'];
+const ALLOWED_PREREQ = new Set(['towncenter', 'academy', 'barracks', 'range', 'stable', 'embassy']);
+const PREREQ_MIN_LV = 3;
+const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'stable', 'embassy'];
+
 
   // ------------------------ 유틸 ------------------------
   function parseRes(v) {
@@ -279,6 +281,7 @@
       pick('embassy', ['embassy']);
       pick('academy', ['academy']);
       pick('command', ['command']);
+      pick('war-academy', ['war-academy']);
       allBuildingData.commandcenter = allBuildingData.command;
 
       const campKey = findKey(temp, ['camp', 'camp:infantry', 'camp:cavalry', 'camp:archer']);
@@ -812,7 +815,7 @@
       const start = parseInt(startEl.value || 1, 10);
       const to = parseInt(targetEl.value || 1, 10);
       const map = { towncenter:{slug:'towncenter'}, embassy:{slug:'embassy'}, academy:{slug:'academy'}, command:{slug:'command'},
-        barracks:{slug:'camp',variant:'common'}, stable:{slug:'camp',variant:'common'}, range:{slug:'camp',variant:'common'}, infirmary:{slug:'infirmary'} };
+        barracks:{slug:'camp',variant:'common'}, stable:{slug:'camp',variant:'common'}, range:{slug:'camp',variant:'common'}, infirmary:{slug:'infirmary'},'war-academy': {slug:'war-academy'} };
       let dataKey = (map[uiKey]?.variant) ? `${map[uiKey].slug}:${map[uiKey].variant}` : (map[uiKey]?.slug || uiKey);
       if (uiKey === 'infirmary' && !allBuildingData[dataKey]) dataKey = 'camp:common';
 
@@ -847,7 +850,7 @@
       const includePrereq = !!incEl?.checked;
 
       const map = { towncenter:{slug:'towncenter'}, embassy:{slug:'embassy'}, academy:{slug:'academy'}, command:{slug:'command'},
-        barracks:{slug:'camp',variant:'common'}, stable:{slug:'camp',variant:'common'}, range:{slug:'camp',variant:'common'}, infirmary:{slug:'infirmary'} };
+        barracks:{slug:'camp',variant:'common'}, stable:{slug:'camp',variant:'common'}, range:{slug:'camp',variant:'common'}, infirmary:{slug:'infirmary'},'war-academy': {slug:'war-academy'} };
       let dataKey = (map[uiKey]?.variant) ? `${map[uiKey].slug}:${map[uiKey].variant}` : (map[uiKey]?.slug || uiKey);
       if (uiKey === 'infirmary' && !allBuildingData[dataKey]) dataKey = 'camp:common';
       if (!allBuildingData[dataKey]) { alert(t('calc.alert.noData','데이터가 없습니다') + `: ${getBuildingLabel(uiKey)}`); return; }

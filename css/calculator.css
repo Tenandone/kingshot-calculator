@@ -194,19 +194,26 @@
   table-layout:fixed;
 }
 
-/* 숫자 열: 우측정렬 + 강제 줄바꿈 허용 */
+/* 숫자 열: 우측정렬 + 고정 폭에서 넘치면 숨김 + … 처리 */
 #equip-calc th.num,
-#equip-calc td.num{
-  text-align:right;
+#equip-calc td.num {
+  text-align: right;
   font-variant-numeric: tabular-nums;
+
+  white-space: nowrap;        /* 줄바꿈 금지 */
+  overflow: hidden;           /* 넘치는 부분 숨김 */
+  text-overflow: ellipsis;    /* … 처리 */
+  max-width: 1px;             /* 테이블 레이아웃에서 ellipsis 동작 보장 */
 }
 
-/* 모바일에서 숫자 줄바꿈 허용 */
-@media (max-width: 640px){
-  #equip-calc #result td.num{
-    overflow-wrap:anywhere;   /* 긴 숫자도 어느 곳에서든 줄바꿈 */
-    word-break:break-word;    /* 보조 */
+/* 모바일에서도 동일하게 유지 (줄바꿈 허용 제거) */
+@media (max-width: 640px) {
+  #equip-calc #result td.num {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
+
 .gear-details{ max-height:clamp(320px, 60vh, 800px); overflow:auto; }
 
