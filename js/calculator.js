@@ -415,71 +415,125 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
   }
 
   function calculateWithPrereq(mainKey, startLevel, targetLevel, buffs, preLevels) {
-    let total = { meat: 0, wood: 0, coal: 0, iron: 0, crystals: 0, time: 0 };
-    const current = { ...(preLevels || {}) };
-    current[mainKey] = startLevel;
-    const lines = [];
+  let total = { meat: 0, wood: 0, coal: 0, iron: 0, crystals: 0, time: 0 };
+  const current = { ...(preLevels || {}) };
+  current[mainKey] = startLevel;
+  const lines = [];
 
-    const pushLine = (bKey, lvl, row) => {
-      if (!row) return;
-      lines.push({
-        bKey,
-        levelTo: lvl,
-        from: lvl - 1,
-        to: lvl,
-        meat: row.meat || 0,
-        wood: row.wood || 0,
-        coal: row.coal || 0,
-        iron: row.iron || 0,
-        crystals: row.crystals || 0,
-        time: row.time || 0
-      });
-    };
+  const pushLine = (bKey, lvl, row) => {
+    if (!row) return;
+    lines.push({
+      bKey,
+      levelTo: lvl,
+      from: lvl - 1,
+      to: lvl,
+      meat: row.meat || 0,
+      wood: row.wood || 0,
+      coal: row.coal || 0,
+      iron: row.iron || 0,
+      crystals: row.crystals || 0,
+      time: row.time || 0
+    });
+  };
 
-    const ensure = (bKey, toLevel) => {
-      if (!ALLOWED_PREREQ.has(bKey)) return;
-      toLevel = Math.max(PREREQ_MIN_LV, toLevel);
-      const curr = Math.max(PREREQ_MIN_LV, current[bKey] ?? 1);
-      if (toLevel <= curr) return;
+  // [FIX] 순환/중복 방지 장치
+  // - visiting: 현재 재귀 스택에 올라 있는 (building, level)
+  // - done: 한 번 완전히 처리(선행 보장 + 자원 합산)된 (building, level)
+  const visiting = new Set();
+  const done = new Set();
 
-      for (let lv = curr + 1; lv <= toLevel; lv++) {
-        const reqs = (prereqMap[bKey] && prereqMap[bKey][lv]) || [];
-        for (const r of reqs) {
-          if (!r || !r.building || !Number.isFinite(r.to)) continue;
-          if (!ALLOWED_PREREQ.has(r.building)) continue;
-          ensure(r.building, r.to);
-        }
-        const row = (allBuildingData[bKey] || []).find(x => x.level === lv);
-        if (row) {
-          total.meat += row.meat || 0; total.wood += row.wood || 0; total.coal += row.coal || 0; total.iron += row.iron || 0;
-          total.crystals += row.crystals || 0; total.time += row.time || 0;
-          pushLine(bKey, lv, row);
-        }
+  const ensure = (bKey, toLevel) => {
+    // 허용된 선행 빌딩만 처리
+    if (!ALLOWED_PREREQ.has(bKey)) return;
+
+    // 요구 레벨/현재 레벨 정규화
+    toLevel = Math.max(PREREQ_MIN_LV, Number(toLevel) || 0);
+    const currBase = Math.max(PREREQ_MIN_LV, Number(current[bKey] ?? 1));
+
+    // 이미 충족된 경우 스킵
+    if (toLevel <= currBase) return;
+
+    // currBase+1 ~ toLevel 까지 한 레벨씩 보장
+    for (let lv = currBase + 1; lv <= toLevel; lv++) {
+      const nodeKey = `${bKey}#${lv}`;
+
+      // 이미 완전히 처리된 노드면 현재 레벨만 동기화 후 스킵
+      if (done.has(nodeKey)) {
+        current[bKey] = Math.max(current[bKey] || 1, lv);
+        continue;
       }
-      current[bKey] = toLevel;
-    };
 
-    for (let lv = startLevel + 1; lv <= targetLevel; lv++) {
-      const reqs = (prereqMap[mainKey] && prereqMap[mainKey][lv]) || [];
+      // [FIX] 순환 탐지: 같은 (building, level)을 처리 중이라면 경고 후 빠져나와 무한 재귀 차단
+      if (visiting.has(nodeKey)) {
+        console.warn(`[calc] circular prereq detected: ${nodeKey} (main=${mainKey})`);
+        return; // 현재 프레임 종료(상위 호출이 계속 진행하도록 함)
+      }
+
+      // 처리 중으로 마킹
+      visiting.add(nodeKey);
+
+      // 이 레벨의 선행 조건을 먼저 보장
+      const reqs = (prereqMap[bKey] && prereqMap[bKey][lv]) || [];
       for (const r of reqs) {
-        if (!r || !ALLOWED_PREREQ.has(r.building)) continue;
+        if (!r || !r.building || !Number.isFinite(r.to)) continue;
+        if (!ALLOWED_PREREQ.has(r.building)) continue;
         ensure(r.building, r.to);
       }
-      const row = (allBuildingData[mainKey] || []).find(x => x.level === lv);
-      if (row) {
-        total.meat += row.meat || 0; total.wood += row.wood || 0; total.coal += row.coal || 0; total.iron += row.iron || 0;
-        total.crystals += row.crystals || 0; total.time += row.time || 0;
-        pushLine(mainKey, lv, row);
+
+      // 동시 경로에서 선행 처리/합산이 끝났다면 재합산 방지
+      if (done.has(nodeKey)) {
+        visiting.delete(nodeKey);
+        current[bKey] = Math.max(current[bKey] || 1, lv);
+        continue;
       }
+
+      // 실제 자원/시간 합산 및 라인 추가
+      const row = (allBuildingData[bKey] || []).find(x => x.level === lv);
+      if (row) {
+        total.meat += row.meat || 0;
+        total.wood += row.wood || 0;
+        total.coal += row.coal || 0;
+        total.iron += row.iron || 0;
+        total.crystals += row.crystals || 0;
+        total.time += row.time || 0;
+        pushLine(bKey, lv, row);
+      }
+
+      // 처리 완료 마킹 및 상태 업데이트
+      done.add(nodeKey);
+      visiting.delete(nodeKey);
+      current[bKey] = lv;
+    }
+  };
+
+  // 메인 빌딩을 목표 레벨까지 올리면서 각 레벨별 선행을 먼저 충족
+  for (let lv = startLevel + 1; lv <= targetLevel; lv++) {
+    const reqs = (prereqMap[mainKey] && prereqMap[mainKey][lv]) || [];
+    for (const r of reqs) {
+      if (!r || !ALLOWED_PREREQ.has(r.building)) continue;
+      ensure(r.building, r.to);
     }
 
-    const tf = computeTimeFactor(buffs);
-    return {
-      meat: total.meat, wood: total.wood, coal: total.coal, iron: total.iron,
-      crystals: total.crystals, timeSec: Math.round(Math.max(0, total.time * tf)),
-      lines, tf
-    };
+    const row = (allBuildingData[mainKey] || []).find(x => x.level === lv);
+    if (row) {
+      total.meat += row.meat || 0;
+      total.wood += row.wood || 0;
+      total.coal += row.coal || 0;
+      total.iron += row.iron || 0;
+      total.crystals += row.crystals || 0;
+      total.time += row.time || 0;
+      pushLine(mainKey, lv, row);
+    }
   }
+
+  const tf = computeTimeFactor(buffs);
+  return {
+    meat: total.meat, wood: total.wood, coal: total.coal, iron: total.iron,
+    crystals: total.crystals, timeSec: Math.round(Math.max(0, total.time * tf)),
+    lines, tf
+  };
+}
+
 
   function buildMainOnlyResult(dataKey, startLevel, targetLevel, buffs) {
     const seg = sumSegment(dataKey, startLevel, targetLevel);
