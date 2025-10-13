@@ -1,66 +1,204 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>War Academy · KingshotData</title>
-  <link rel="stylesheet" href="/css/waracademy.css" />
-  <style>
-    main { max-width: 1100px; margin: auto; padding: 20px; font-family: system-ui, sans-serif; }
-    h1 { font-size: 26px; margin-bottom: 20px; text-align: center; }
-    .banner { text-align: center; margin-bottom: 30px; }
-    .banner img { max-width: 100%; height: auto; border-radius: 12px; }
-    .wa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-    .wa-card {
-      display: block;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      background: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,.08);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .wa-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 10px rgba(0,0,0,.12);
-    }
-    .wa-card img { width: 100%; height: 160px; object-fit: cover; }
-    .wa-card h3 { margin: 12px; font-size: 18px; }
-    .wa-card p { margin: 0 12px 16px; font-size: 14px; color: #555; }
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title data-i18n="waracademy.page_title">전쟁 아카데미 (황금 병종)</title>
+  <link rel="preload" href="/js/pages/waracademy.js" as="script">
 </head>
 <body>
+<section class="container">
   <main>
-    <h1>War Academy (Truegold Troops)</h1>
+    <h1 data-i18n="waracademy.title">전쟁 아카데미 (황금 병종)</h1>
 
-    <!-- 대표 배너 이미지 -->
-    <div class="banner">
-      <img src="/img/brand2.png" alt="War Academy Main Banner">
-    </div>
+    <div class="wa-accordion">
 
-    <!-- 병종 카드 그리드 -->
-    <div class="wa-grid">
-      <a href="/pages/waracademy/waracademy-infantry.html" class="wa-card">
-  <img src="/img/troop-infantry.png" alt="Truegold Infantry">
-  <h3>Truegold Infantry</h3>
-  <p>Training requirements, costs, and bonuses.</p>
-</a>
+      <!-- === INFANTRY === -->
+      <details>
+        <summary>
+          <img src="/img/waracademy/truegold-infantry.webp"
+               alt="황금보병"
+               data-i18n="[alt]waracademy.infantry.alt">
+          <div>
+            <h3 data-i18n="waracademy.infantry.title">황금보병</h3>
+            <p data-i18n="waracademy.infantry.desc">연구 조건, 비용, 효과를 확인하세요.</p>
+          </div>
+        </summary>
+        <div class="wa-content" id="infantry-section">
+          <!-- ✅ 병종별 메타 표시 영역 -->
+          <div id="infantry-meta"></div>
+          <div class="research-grid" id="infantry-grid"></div>
+          <div id="infantry-detail" class="research-detail"></div>
+        </div>
+      </details>
 
-<a href="/pages/waracademy/waracademy-archer.html" class="wa-card">
-  <img src="/img/troop-archer.png" alt="Truegold Archer">
-  <h3>Truegold Archer</h3>
-  <p>Training requirements, costs, and bonuses.</p>
-</a>
+      <!-- === ARCHER === -->
+      <details>
+        <summary>
+          <img src="/img/waracademy/truegold-archer.webp"
+               alt="황금궁병"
+               data-i18n="[alt]waracademy.archer.alt">
+          <div>
+            <h3 data-i18n="waracademy.archer.title">황금궁병</h3>
+            <p data-i18n="waracademy.archer.desc">연구 조건, 비용, 효과를 확인하세요.</p>
+          </div>
+        </summary>
+        <div class="wa-content" id="archer-section">
+          <!-- ✅ 병종별 메타 표시 영역 -->
+          <div id="archer-meta"></div>
+          <div class="research-grid" id="archer-grid"></div>
+          <div id="archer-detail" class="research-detail"></div>
+        </div>
+      </details>
 
-<a href="/pages/waracademy/waracademy-cavalry.html" class="wa-card">
-  <img src="/img/troop-cavalry.png" alt="Truegold Cavalry">
-  <h3>Truegold Cavalry</h3>
-  <p>Training requirements, costs, and bonuses.</p>
-</a>
+      <!-- === CAVALRY === -->
+      <details>
+        <summary>
+          <img src="/img/waracademy/truegold-cavalry.webp"
+               alt="황금기병"
+               data-i18n="[alt]waracademy.cavalry.alt">
+          <div>
+            <h3 data-i18n="waracademy.cavalry.title">황금기병</h3>
+            <p data-i18n="waracademy.cavalry.desc">연구 조건, 비용, 효과를 확인하세요.</p>
+          </div>
+        </summary>
+        <div class="wa-content" id="cavalry-section">
+          <!-- ✅ 병종별 메타 표시 영역 -->
+          <div id="cavalry-meta"></div>
+          <div class="research-grid" id="cavalry-grid"></div>
+          <div id="cavalry-detail" class="research-detail"></div>
+        </div>
+      </details>
 
     </div>
   </main>
+</section>
+
+<noscript>
+  <p style="padding:12px;background:#fff3cd;border:1px solid #ffeeba;border-radius:8px;margin:16px;">
+    JavaScript가 비활성화되어 있습니다. 페이지 기능을 사용하려면 활성화해 주세요.
+  </p>
+</noscript>
+
+<script src="/js/pages/waracademy.js" defer></script>
+<script>
+  // DOM 준비 후 초기화 (중복 실행 방지 가드 포함)
+  window.addEventListener('DOMContentLoaded', function () {
+    if (typeof window.initWarAcademy === 'function' && !window.__waracademy_initialized) {
+      window.initWarAcademy();
+    }
+  });
+</script>
+
+<style>
+/* ✅ 2열 카드 (이미지 왼쪽, 텍스트 오른쪽) */
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.wa-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.08);
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+.wa-card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.wa-card .wa-info h4 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  color: #111;
+}
+.wa-card .wa-info p {
+  margin: 0;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.3;
+}
+.wa-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,.1);
+}
+.wa-card.active {
+  outline: 2px solid #2b7cff;
+  box-shadow: 0 0 0 3px rgba(43,124,255,.2);
+}
+
+/* ✅ 표 스타일 */
+.tg-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+}
+.tg-table thead th {
+  background: linear-gradient(180deg,#f5f5f5,#ececec);
+  color: #222;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-bottom: 2px solid #ddd;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.tg-table tbody td {
+  padding: 7px 10px;
+  border: 1px solid #eee;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+.tg-table tbody tr:nth-child(even) { background: #fafafa; }
+.tg-table tbody tr:hover { background: #f0f7ff; transition: background .15s; }
+
+/* Σ 합계 행 강조 */
+.tg-table .tg-total td {
+  font-weight: 700;
+  background: #fff7e6;
+  border-top: 2px solid #f0c36d;
+}
+
+.research-detail {
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  margin-top: 10px;
+}
+
+/* 전역 메타 카드 (JS가 자동 삽입) */
+.tg-meta {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+  margin: 16px 0 20px;
+}
+.tg-meta h2 { margin: 0 0 8px; font-size: 18px; }
+.tg-meta h3 { margin: 14px 0 8px; font-size: 16px; }
+.tg-meta ul { margin: 0; padding-left: 16px; }
+
+/* 반응형 (모바일에서는 한 줄 1개 카드) */
+@media (max-width: 768px) {
+  .research-grid { grid-template-columns: 1fr; }
+  .wa-card img { width: 60px; height: 60px; }
+}
+</style>
 </body>
 </html>

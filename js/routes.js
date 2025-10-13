@@ -210,6 +210,7 @@
             { href:'/database',   img:'/img/home/database.png',   t:'home.card.database.title',    d:'home.card.database.desc' },
             { href:'/guides',     img:'/img/home/guides.png',     t:'home.card.guides.title',      d:'home.card.guides.desc' },
             { href:'/calculator', img:'/img/home/calculator.png', t:'home.card.calculators.title', d:'home.card.calculators.desc' },
+            { href:'/waracademy', img:'/img/home/waracademy.png', t:'home.card.waracademy.title',  d:'home.card.waracademy.desc' },
 
             { href:'/about',      img:'/img/home/about.png',      t:'nav.about',                   d:'home.card.about.desc' }
           ];
@@ -560,6 +561,151 @@
           focusMain(el);
         }
       },
+
+
+      // --- War Academy 메인 ---
+'/waracademy': {
+  title: 'War Academy - KingshotData.kr',
+  render: async function (el) {
+    var token = newRenderToken();
+    el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+
+    var html = await loadHTMLCached([
+      'pages/waracademy.html',
+      '/pages/waracademy.html'
+    ]);
+    if (isStale(token)) return;
+    el.innerHTML = html
+      ? htmlBodyOnly(html)
+      : '<div class="placeholder"><h2 data-i18n="waracademy.title">War Academy</h2><p class="muted">waracademy.html을 찾을 수 없습니다.</p></div>';
+
+    // ✅ i18n 번역 불러오기
+    try {
+      if (window.I18N && window.I18N.loadNamespace) {
+        await window.I18N.loadNamespace('waracademy');
+      }
+      if (window.I18N && window.I18N.applyTo) {
+        window.I18N.applyTo(el);
+      }
+    } catch (e) {
+      console.warn('[i18n] War Academy 번역 로드 실패', e);
+    }
+
+    // ✅ JS 초기화
+    await ensureScript('/js/pages/waracademy.js');
+    if (typeof window.initWarAcademy === 'function') {
+      window.initWarAcademy();
+    }
+
+    setTitle('title.waracademy', 'War Academy - KingshotData.kr');
+    window.scrollTo({ top: 0 });
+    focusMain(el);
+  }
+},
+
+// --- War Academy: Infantry ---
+'/waracademy-infantry': {
+  title: 'War Academy · Truegold Infantry - KingshotData.kr',
+  render: async function (el) {
+    var token = newRenderToken();
+    el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+
+    var html = await loadHTMLCached([
+      'pages/waracademy-infantry.html',
+      '/pages/waracademy-infantry.html'
+    ]);
+    if (isStale(token)) return;
+    el.innerHTML = html
+      ? htmlBodyOnly(html)
+      : '<div class="placeholder"><h2>Truegold Infantry</h2><p class="muted">waracademy-infantry.html을 찾을 수 없습니다.</p></div>';
+
+    // ✅ i18n 로드
+    try {
+      if (window.I18N && window.I18N.loadNamespace) {
+        await window.I18N.loadNamespace('waracademy');
+      }
+      if (window.I18N && window.I18N.applyTo) {
+        window.I18N.applyTo(el);
+      }
+    } catch (e) {
+      console.warn('[i18n] Infantry 번역 로드 실패', e);
+    }
+
+    setTitle('title.waracademy-infantry', 'War Academy · Truegold Infantry - KingshotData.kr');
+    window.scrollTo({ top: 0 });
+    focusMain(el);
+  }
+},
+
+// --- War Academy: Archer ---
+'/waracademy-archer': {
+  title: 'War Academy · Truegold Archer - KingshotData.kr',
+  render: async function (el) {
+    var token = newRenderToken();
+    el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+
+    var html = await loadHTMLCached([
+      'pages/waracademy-archer.html',
+      '/pages/waracademy-archer.html'
+    ]);
+    if (isStale(token)) return;
+    el.innerHTML = html
+      ? htmlBodyOnly(html)
+      : '<div class="placeholder"><h2>Truegold Archer</h2><p class="muted">waracademy-archer.html을 찾을 수 없습니다.</p></div>';
+
+    // ✅ i18n 로드
+    try {
+      if (window.I18N && window.I18N.loadNamespace) {
+        await window.I18N.loadNamespace('waracademy');
+      }
+      if (window.I18N && window.I18N.applyTo) {
+        window.I18N.applyTo(el);
+      }
+    } catch (e) {
+      console.warn('[i18n] Archer 번역 로드 실패', e);
+    }
+
+    setTitle('title.waracademy-archer', 'War Academy · Truegold Archer - KingshotData.kr');
+    window.scrollTo({ top: 0 });
+    focusMain(el);
+  }
+},
+
+// --- War Academy: Cavalry ---
+'/waracademy-cavalry': {
+  title: 'War Academy · Truegold Cavalry - KingshotData.kr',
+  render: async function (el) {
+    var token = newRenderToken();
+    el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+
+    var html = await loadHTMLCached([
+      'pages/waracademy-cavalry.html',
+      '/pages/waracademy-cavalry.html'
+    ]);
+    if (isStale(token)) return;
+    el.innerHTML = html
+      ? htmlBodyOnly(html)
+      : '<div class="placeholder"><h2>Truegold Cavalry</h2><p class="muted">waracademy-cavalry.html을 찾을 수 없습니다.</p></div>';
+
+    // ✅ i18n 로드
+    try {
+      if (window.I18N && window.I18N.loadNamespace) {
+        await window.I18N.loadNamespace('waracademy');
+      }
+      if (window.I18N && window.I18N.applyTo) {
+        window.I18N.applyTo(el);
+      }
+    } catch (e) {
+      console.warn('[i18n] Cavalry 번역 로드 실패', e);
+    }
+
+    setTitle('title.waracademy-cavalry', 'War Academy · Truegold Cavalry - KingshotData.kr');
+    window.scrollTo({ top: 0 });
+    focusMain(el);
+  }
+},
+
+
 
       // --- Database list ---
       '/database': {

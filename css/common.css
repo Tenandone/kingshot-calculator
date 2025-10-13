@@ -406,3 +406,68 @@ button, .btn, [role="button"]{ min-height:44px; border-radius:10px; }
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap:16px;
 }
+
+/* ===== War Academy Main Title (이미지 + 텍스트 좌우 배치) ===== */
+.wa-accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.08);
+  cursor: pointer;
+  transition: box-shadow .2s, transform .2s;
+}
+
+/* Hover 시 살짝 올라오게 */
+.wa-accordion summary:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,.12);
+  transform: translateY(-2px);
+}
+
+/* 🔹 메인 타이틀 이미지 크기 조정 */
+.wa-accordion summary img {
+  width: 64px;        /* 원래보다 작게 (기존 100px 전후였다면 약 60~70px이 적당) */
+  height: auto;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+/* 🔹 텍스트 영역 (오른쪽) */
+.wa-accordion summary div {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+/* 메인 타이틀 (h3) */
+.wa-accordion summary h3 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* 서브타이틀 (p) */
+.wa-accordion summary p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* 반응형 (모바일에서 이미지 더 작게) */
+@media (max-width: 768px) {
+  .wa-accordion summary img {
+    width: 50px;
+  }
+  .wa-accordion summary h3 {
+    font-size: 16px;
+  }
+  .wa-accordion summary p {
+    font-size: 13px;
+  }
+}

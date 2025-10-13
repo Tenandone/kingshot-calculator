@@ -1,0 +1,257 @@
+<section class="container">
+  <main>
+    <h1>전쟁 아카데미 (순금 병종)</h1>
+
+    <!-- === 병종 선택 === -->
+    <div class="troop-selector">
+      <div class="troop" data-type="infantry">
+        <img src="/img/waracademy/truegold-infantry.webp" alt="순금 보병"><p>순금 보병</p>
+      </div>
+      <div class="troop" data-type="cavalry">
+        <img src="/img/waracademy/truegold-cavalry.webp" alt="순금 기병"><p>순금 기병</p>
+      </div>
+      <div class="troop" data-type="archer">
+        <img src="/img/waracademy/truegold-archer.webp" alt="순금 궁병"><p>순금 궁병</p>
+      </div>
+    </div>
+
+    <!-- === 트리 및 표 === -->
+    <div class="troop-info hidden" id="troop-info">
+      <h2 id="troop-title"></h2>
+      <p id="troop-desc" class="desc"></p>
+
+      <div class="tg-tree" id="tree">
+        <svg id="tg-lines"></svg>
+      </div>
+
+      <div id="infantry-data" class="wa-data hidden">
+        <div id="infantry-meta"></div>
+        <div class="research-grid" id="infantry-grid"></div>
+        <div id="infantry-detail" class="research-detail"></div>
+      </div>
+    </div>
+  </main>
+</section>
+
+<style>
+.container{ text-align:center;color:#fff;background:#2b1a0f;padding:40px 20px 80px;border-radius:16px;overflow:hidden}
+.troop-selector{display:flex;justify-content:center;gap:60px;margin-bottom:40px}
+.troop{display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:transform .3s}
+.troop img{width:120px;height:120px;border-radius:50%;border:3px solid rgba(255,215,123,.4)}
+.troop p{margin-top:10px;font-size:16px;color:#ffd77b;font-weight:600}
+.troop:hover{transform:scale(1.06)}
+
+.troop-info{max-width:1200px;margin:0 auto}
+.troop-info.hidden{display:none}
+.troop-info .desc{color:#ccc;font-size:14px;margin-bottom:16px}
+
+/* === 트리 === */
+.tg-tree{position:relative;width:100%;height:420px;margin:0 auto 40px}
+.node{
+  position:absolute;width:120px;height:96px;
+  background:rgba(255,255,255,.08);border:2px solid rgba(255,215,123,.35);
+  border-radius:12px;text-align:center;padding:6px;z-index:2;cursor:pointer
+}
+.node img{width:48px;height:48px;border-radius:8px;border:1.5px solid rgba(255,215,123,.3);margin-bottom:4px}
+.node p{font-size:12px;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0}
+.node:hover{transform:scale(1.04);border-color:#ffd77b;box-shadow:0 0 8px rgba(255,215,123,.5)}
+
+#tg-lines{position:absolute;inset:0;pointer-events:none;z-index:1}
+#tg-lines path{stroke:rgba(255,215,123,.8);stroke-width:2;fill:none;stroke-linecap:round}
+
+/* === 표 === */
+.wa-data.hidden{display:none}
+.research-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(48%,1fr));gap:14px;margin-bottom:20px}
+.wa-card{display:flex;align-items:center;gap:14px;background:#fff;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,.08);padding:10px 12px;cursor:pointer}
+.wa-card img{width:70px;height:70px;border-radius:8px}
+.wa-card .wa-info h4{margin:0 0 4px;font-size:15px;color:#111}
+.wa-card .wa-info p{margin:0;font-size:13px;color:#555;line-height:1.3}
+.wa-card:hover{transform:translateY(-3px);box-shadow:0 4px 10px rgba(0,0,0,.1)}
+.tg-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+.tg-table th,.tg-table td{border:1px solid #eee;padding:6px;text-align:center}
+.tg-table th{background:#f7f7f7}
+.research-detail{background:#fff;padding:16px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.08);margin-top:10px}
+.tg-meta{background:#fff;border-radius:10px;padding:15px;box-shadow:0 2px 5px rgba(0,0,0,.1);margin-bottom:20px}
+</style>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const info  = document.getElementById('troop-info');
+  const title = document.getElementById('troop-title');
+  const desc  = document.getElementById('troop-desc');
+  const board = document.getElementById('tree');
+  const svg   = document.getElementById('tg-lines');
+  const NS    = 'http://www.w3.org/2000/svg';
+  const dataBox = document.getElementById('infantry-data');
+
+  // === 트리 레이아웃 (Y값만 조정됨)
+  const layout = [
+    { ids:['n1'], y:[180] },
+    { ids:['n2','n3'], y:[100,260] },
+    { ids:['n4'], y:[180] },
+    { ids:['n5','n6'], y:[100,260] },
+    { ids:['n7'], y:[180] },
+    { ids:['n8','n9'], y:[120,240] },
+    { ids:['n10'], y:[180] }
+  ];
+
+  const nodeMeta = {
+    n1:['순금 보병 부대 편성','truegold-battalion.webp'],
+    n2:['순금 검','truegold-blades.webp'],
+    n3:['순금 방패','truegold-shields.webp'],
+    n4:['순금 보병 부대','truegold-legionaries.webp'],
+    n5:['순금 철퇴','truegold-mauls.webp'],
+    n6:['순금 방패판','truegold-plating.webp'],
+    n7:['순금 보병','truegold-infantry.webp'],
+    n8:['순금 보병 치료','truegold-infantry-healing.webp'],
+    n9:['순금 보병 치료 지원','truegold-infantry-aid.webp'],
+    n10:['순금 보병 훈련','truegold-infantry-training.webp']
+  };
+
+  const links = [
+    ['n1','n2'],['n1','n3'],
+    ['n2','n4'],['n3','n4'],
+    ['n4','n5'],['n4','n6'],
+    ['n5','n7'],['n6','n7'],
+    ['n7','n8'],['n7','n9'],
+    ['n8','n10'],['n9','n10']
+  ];
+
+  function renderTroop(type='infantry'){
+    if(type!=='infantry') return;
+    title.textContent = '순금 보병';
+    desc.textContent  = '보병 연구는 공격력과 체력을 중심으로 안정적인 전투력을 제공합니다.';
+    info.classList.remove('hidden');
+    dataBox.classList.add('hidden');
+
+    board.querySelectorAll('.node').forEach(n=>n.remove());
+    svg.innerHTML = '';
+
+    const startX = 80, colGap = 160, nodeW = 120;
+    layout.forEach((col,colIdx)=>{
+      const x = startX + colIdx * colGap;
+      col.ids.forEach((id,i)=>{
+        const [label,img] = nodeMeta[id];
+        const y = col.y[i];
+        const el = document.createElement('div');
+        el.className='node'; el.id=id;
+        el.style.left=(x-nodeW/2)+'px'; el.style.top=y+'px';
+        el.innerHTML=`<img src="/img/waracademy/${img}" alt="${label}"><p>${label}</p>`;
+        el.addEventListener('click',()=>{
+          dataBox.classList.remove('hidden');
+          loadData('/data/waracademy-infantry.json','infantry-meta','infantry-grid','infantry-detail');
+        });
+        board.appendChild(el);
+      });
+    });
+
+    function drawLines(){
+      svg.innerHTML='';
+      const s=svg.getBoundingClientRect();
+      const center=id=>{
+        const r=document.getElementById(id).getBoundingClientRect();
+        return [r.left+r.width/2-s.left,r.top+r.height/2-s.top];
+      };
+      links.forEach(([a,b])=>{
+        const [fx,fy]=center(a);
+        const [tx,ty]=center(b);
+        const midX=(fx+tx)/2;
+        const path=document.createElementNS(NS,'path');
+        path.setAttribute('d',`M${fx},${fy} Q${midX},${fy} ${tx},${ty}`);
+        svg.appendChild(path);
+      });
+    }
+    requestAnimationFrame(drawLines);
+    window.addEventListener('resize',drawLines,{passive:true});
+  }
+
+  // === 표 로더 (정상 동작 구조) ===
+  const cache = {};
+  function renderMeta(data, metaId) {
+    const box = document.getElementById(metaId);
+    if (!data.requirements) return;
+    const r = data.requirements;
+    const b = data.bonuses || {};
+    box.innerHTML = `
+      <div class="tg-meta">
+        <h2>순금 보병 연구 조건</h2>
+        <ul>
+          <li><b>도시센터:</b> ${r.building.towncenter}, 전쟁아카데미 ${r.building.waracademy}</li>
+          <li><b>총 연구 시간:</b> ${r.research_time_days}일</li>
+          <li><b>빵:</b> ${r.bread.toLocaleString()}</li>
+          <li><b>나무:</b> ${r.wood.toLocaleString()}</li>
+          <li><b>석재:</b> ${r.stone.toLocaleString()}</li>
+          <li><b>철:</b> ${r.iron.toLocaleString()}</li>
+          <li><b>금화:</b> ${r.gold.toLocaleString()}</li>
+        </ul>
+        <h3>보너스 효과</h3>
+        <ul>
+          <li>공격력: ${b.attack}</li>
+          <li>방어력: ${b.defense}</li>
+          <li>체력: ${b.health}</li>
+        </ul>
+      </div>`;
+  }
+
+  function renderResearchGrid(data, gridId, detailId) {
+    const grid = document.getElementById(gridId);
+    grid.innerHTML = data.researches.map((r,i)=>`
+      <div class="wa-card" data-index="${i}">
+        <img src="${r.image}" alt="${r.title}">
+        <div class="wa-info">
+          <h4>${r.title}</h4>
+          <p>${r.description}</p>
+        </div>
+      </div>`).join('');
+    grid.querySelectorAll('.wa-card').forEach(card=>{
+      card.addEventListener('click',()=>{
+        const idx=parseInt(card.dataset.index,10);
+        renderResearchDetail(data.researches[idx],'infantry-detail');
+      });
+    });
+  }
+
+  function renderResearchDetail(research, detailId) {
+    const box = document.getElementById(detailId);
+    box.innerHTML = `<h2>${research.title}</h2><p>${research.description}</p>`;
+    if (research.levels?.length) {
+      box.insertAdjacentHTML('beforeend',`
+      <table class="tg-table">
+        <thead><tr><th>Lv</th><th>요구사항</th><th>빵</th><th>나무</th><th>석재</th><th>철</th><th>금화</th><th>시간</th><th>전투력</th><th>보너스</th></tr></thead>
+        <tbody>${research.levels.map(l=>`
+          <tr><td>${l.level}</td><td>${l.requirements||'-'}</td>
+          <td>${l.bread.toLocaleString()}</td><td>${l.wood.toLocaleString()}</td><td>${l.stone.toLocaleString()}</td>
+          <td>${l.iron.toLocaleString()}</td><td>${l.gold.toLocaleString()}</td><td>${l.time}</td><td>${l.power}</td><td>${l.bonus}</td></tr>`).join('')}</tbody>
+      </table>`);
+    }
+  }
+
+  function loadData(url, metaId, gridId, detailId) {
+    const abs = new URL(url, location.origin).href;
+    if (cache[abs]) {
+      renderMeta(cache[abs], metaId);
+      renderResearchGrid(cache[abs], gridId, detailId);
+      return;
+    }
+    fetch(abs)
+      .then(r=>r.json())
+      .then(j=>{
+        cache[abs]=j;
+        renderMeta(j, metaId);
+        renderResearchGrid(j, gridId, detailId);
+      })
+      .catch(e=>{
+        document.getElementById(gridId).innerHTML=`<p style="color:red">⚠️ Load failed</p>`;
+        console.error(e);
+      });
+  }
+
+  // === 이벤트 ===
+  document.querySelectorAll('.troop').forEach(btn=>{
+    btn.addEventListener('click',()=>renderTroop(btn.dataset.type));
+  });
+
+  // 초기 로드
+  renderTroop('infantry');
+});
+</script>

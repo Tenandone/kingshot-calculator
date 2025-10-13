@@ -1,20 +1,70 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Truegold Infantry Training · KingshotData</title>
-  <link rel="stylesheet" href="/css/waracademy.css" />
-</head>
-<body>
-  <main>
-    <h1>Truegold Infantry Training</h1>
-    <div id="tg-root"></div>
-  </main>
+<script>
+(async function(){
+  try {
+    const url = new URL('/data/waracademy-infantry.json', location.origin);
+    console.log('Fetching:', url.href);
 
-  <script src="/js/waracademy-render.js"></script>
-  <script>
-    WarAcademyRender.renderWarAcademy('/data/waracademy-infantry.json', 'tg-root');
-  </script>
-</body>
-</html>
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    console.log('Loaded data:', data);
+
+    if (!data.researches) throw new Error('Missing "researches" array in JSON');
+
+    const grid = document.getElementById('research-grid');
+    const detail = document.getElementById('research-detail');
+
+    grid.innerHTML = data.researches.map((r,i)=>`
+      <div class="wa-card" data-idx="${i}">
+        <img src="${r.image}" alt="${r.title}">
+        <h3>${r.title}</h3>
+        <p>${r.description}</p>
+      </div>
+    `).join('');
+
+    grid.querySelectorAll('.wa-card').forEach(card=>{
+      card.addEventListener('click',()=>{
+        const idx = parseInt(card.dataset.idx,10);
+        const r = data.researches[idx];
+        console.log('Clicked research:', r.title);
+        detail.innerHTML = `
+          <h2>${r.title}</h2>
+          <p>${r.description}</p>
+          ${r.levels?.length ? `
+            <table class="tg-table">
+              <thead>
+                <tr>
+                  <th>Lv</th><th>Requirements</th><th>Bread</th><th>Wood</th><th>Stone</th>
+                  <th>Iron</th><th>Gold</th><th>Dust</th><th>Time</th><th>Power</th><th>Bonus</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${r.levels.map(lv=>`
+                  <tr>
+                    <td>${lv.level}</td>
+                    <td>${lv.requirements || '-'}</td>
+                    <td>${(lv.bread ?? 0).toLocaleString()}</td>
+                    <td>${(lv.wood ?? 0).toLocaleString()}</td>
+                    <td>${(lv.stone ?? 0).toLocaleString()}</td>
+                    <td>${(lv.iron ?? 0).toLocaleString()}</td>
+                    <td>${(lv.gold ?? 0).toLocaleString()}</td>
+                    <td>${(lv.dust ?? 0).toLocaleString()}</td>
+                    <td>${lv.time || '-'}</td>
+                    <td>${(lv.power ?? 0).toLocaleString()}</td>
+                    <td>${lv.bonus || '-'}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>` : ''}
+        `;
+        detail.scrollIntoView({behavior:'smooth'});
+      });
+    });
+
+  } catch(e) {
+    console.error('Infantry load error:', e);
+    document.getElementById('research-grid').innerHTML =
+      `<p style="color:red;">⚠️ Data load failed: ${e.message}</p>`;
+  }
+})();
+</script>

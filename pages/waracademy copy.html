@@ -1,0 +1,309 @@
+<section class="container">
+  <main>
+    <h1 data-i18n="waracademy.title">War Academy (Truegold Troops)</h1>
+
+    <div class="wa-accordion">
+
+      <!-- === INFANTRY === -->
+      <details>
+        <summary>
+          <img src="/img/waracademy/truegold-infantry.webp" alt="Truegold Infantry">
+          <div>
+            <h3 data-i18n="waracademy.infantry.title">Truegold Infantry</h3>
+            <p data-i18n="waracademy.infantry.desc">Training requirements, costs, and bonuses.</p>
+          </div>
+        </summary>
+        <div class="wa-content" id="infantry-section">
+          <div id="infantry-meta"></div>
+          <div class="research-grid" id="infantry-grid"></div>
+          <div id="infantry-detail" class="research-detail"></div>
+        </div>
+      </details>
+
+      <!-- === ARCHER === -->
+      <details>
+        <summary>
+          <img src="/img/waracademy/truegold-archer.webp" alt="Truegold Archer">
+          <div>
+            <h3 data-i18n="waracademy.archer.title">Truegold Archer</h3>
+            <p data-i18n="waracademy.archer.desc">Training requirements, costs, and bonuses.</p>
+          </div>
+        </summary>
+        <div class="wa-content" id="archer-section">
+          <div id="archer-meta"></div>
+          <div class="research-grid" id="archer-grid"></div>
+          <div id="archer-detail" class="research-detail"></div>
+        </div>
+      </details>
+
+      <!-- === CAVALRY === -->
+      <details>
+        <summary>
+          <img src="/img/waracademy/truegold-cavalry.webp" alt="Truegold Cavalry">
+          <div>
+            <h3 data-i18n="waracademy.cavalry.title">Truegold Cavalry</h3>
+            <p data-i18n="waracademy.cavalry.desc">Training requirements, costs, and bonuses.</p>
+          </div>
+        </summary>
+        <div class="wa-content" id="cavalry-section">
+          <div id="cavalry-meta"></div>
+          <div class="research-grid" id="cavalry-grid"></div>
+          <div id="cavalry-detail" class="research-detail"></div>
+        </div>
+      </details>
+
+    </div>
+  </main>
+</section>
+
+<script>
+(function(){
+  'use strict';
+  const cache = {};
+
+  // === 메타 정보 ===
+  function renderMeta(data, metaId) {
+    const box = document.getElementById(metaId);
+    if (!data.requirements) return;
+    const req = data.requirements;
+    const bonuses = data.bonuses || {};
+    box.innerHTML = `
+      <div class="tg-meta">
+        <h2>Requirements</h2>
+        <ul>
+          <li><b>Town Center:</b> ${req.building.towncenter}</li>
+          <li><b>War Academy:</b> ${req.building.waracademy}</li>
+          <li><b>Total Time:</b> ${req.research_time_days} days</li>
+          <li><b>Bread:</b> ${req.bread.toLocaleString()}</li>
+          <li><b>Wood:</b> ${req.wood.toLocaleString()}</li>
+          <li><b>Stone:</b> ${req.stone.toLocaleString()}</li>
+          <li><b>Iron:</b> ${req.iron.toLocaleString()}</li>
+          <li><b>Gold:</b> ${req.gold.toLocaleString()}</li>
+          <li><b>Dust:</b> ${req.dust.toLocaleString()}</li>
+        </ul>
+        <h3>Bonuses</h3>
+        <ul>
+          <li>Squad Capacity: ${bonuses.squad_capacity}</li>
+          <li>Health: ${bonuses.health}</li>
+          <li>Lethality: ${bonuses.lethality}</li>
+          <li>Attack: ${bonuses.attack}</li>
+          <li>Defense: ${bonuses.defense}</li>
+          <li>Rally Capacity: ${bonuses.rally_capacity}</li>
+        </ul>
+      </div>`;
+  }
+
+  // === 연구 카드 ===
+  function renderResearchGrid(data, gridId, detailId) {
+    const grid = document.getElementById(gridId);
+    grid.innerHTML = data.researches.map((r,i)=>`
+      <div class="wa-card" data-index="${i}">
+        <img src="${r.image}" alt="${r.title}">
+        <div class="wa-info">
+          <h4>${r.title}</h4>
+          <p>${r.description}</p>
+        </div>
+      </div>
+    `).join('');
+
+    grid.querySelectorAll('.wa-card').forEach(card=>{
+      card.addEventListener('click',()=>{
+        const idx = parseInt(card.dataset.index,10);
+        renderResearchDetail(data.researches[idx], detailId);
+
+        // ✅ 클릭된 카드 강조
+        grid.querySelectorAll('.wa-card').forEach(c=>c.classList.remove('active'));
+        card.classList.add('active');
+
+        // ✅ 표 위치로 부드럽게 스크롤 이동
+        setTimeout(() => {
+          const container = document.getElementById(detailId);
+          const table = container.querySelector('table');
+          if (table) {
+            table.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 120);
+      });
+    });
+  }
+
+  // === 상세 표 ===
+  function renderResearchDetail(research, detailId) {
+    const container = document.getElementById(detailId);
+    container.innerHTML = `
+      <h2>${research.title}</h2>
+      <p>${research.description}</p>
+    `;
+    if (research.levels && research.levels.length > 0) {
+      const table = document.createElement('table');
+      table.className = 'tg-table';
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>Lv</th><th>Requirements</th><th>Bread</th><th>Wood</th><th>Stone</th>
+            <th>Iron</th><th>Gold</th><th>Dust</th><th>Time</th><th>Power</th><th>Bonus</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${research.levels.map(lv=>`
+            <tr>
+              <td>${lv.level}</td>
+              <td>${lv.requirements || '-'}</td>
+              <td>${(lv.bread ?? 0).toLocaleString()}</td>
+              <td>${(lv.wood ?? 0).toLocaleString()}</td>
+              <td>${(lv.stone ?? 0).toLocaleString()}</td>
+              <td>${(lv.iron ?? 0).toLocaleString()}</td>
+              <td>${(lv.gold ?? 0).toLocaleString()}</td>
+              <td>${(lv.dust ?? 0).toLocaleString()}</td>
+              <td>${lv.time || '-'}</td>
+              <td>${(lv.power ?? 0).toLocaleString()}</td>
+              <td>${lv.bonus || '-'}</td>
+            </tr>
+          `).join('')}
+        </tbody>`;
+      container.appendChild(table);
+    }
+  }
+
+  // === 데이터 로더 ===
+  function loadData(url, metaId, gridId, detailId) {
+    const absUrl = new URL(url, location.origin).href;
+    if (cache[absUrl]) {
+      renderMeta(cache[absUrl], metaId);
+      renderResearchGrid(cache[absUrl], gridId, detailId);
+      return;
+    }
+    fetch(absUrl)
+      .then(res=>res.json())
+      .then(data=>{
+        cache[absUrl]=data;
+        renderMeta(data, metaId);
+        renderResearchGrid(data, gridId, detailId);
+      })
+      .catch(err=>{
+        console.error('[TG] Load failed:', err);
+        document.getElementById(gridId).innerHTML =
+          `<p style="color:red;">⚠️ Failed to load data (${absUrl})</p>`;
+      });
+  }
+
+  // === 토글 이벤트 ===
+  document.querySelectorAll('details').forEach(detail=>{
+    detail.addEventListener('toggle',()=>{
+      if (!detail.open) return;
+      if (detail.querySelector('#infantry-section'))
+        loadData('/data/waracademy-infantry.json','infantry-meta','infantry-grid','infantry-detail');
+      else if (detail.querySelector('#archer-section'))
+        loadData('/data/waracademy-archer.json','archer-meta','archer-grid','archer-detail');
+      else if (detail.querySelector('#cavalry-section'))
+        loadData('/data/waracademy-cavalry.json','cavalry-meta','cavalry-grid','cavalry-detail');
+    });
+  });
+})();
+</script>
+
+<style>
+/* ✅ 2열 카드 (이미지 왼쪽, 텍스트 오른쪽) */
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.wa-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.08);
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+.wa-card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.wa-card .wa-info h4 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  color: #111;
+}
+.wa-card .wa-info p {
+  margin: 0;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.3;
+}
+.wa-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,.1);
+}
+.wa-card.active {
+  outline: 2px solid #2b7cff;
+  box-shadow: 0 0 0 3px rgba(43,124,255,.2);
+}
+
+/* ✅ 표 스타일 */
+.tg-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+}
+.tg-table thead th {
+  background: linear-gradient(180deg,#f5f5f5,#ececec);
+  color: #222;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-bottom: 2px solid #ddd;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.tg-table tbody td {
+  padding: 7px 10px;
+  border: 1px solid #eee;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+.tg-table tbody tr:nth-child(even) { background: #fafafa; }
+.tg-table tbody tr:hover { background: #f0f7ff; transition: background .15s; }
+
+.research-detail {
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  margin-top: 10px;
+}
+.tg-meta {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+  margin-bottom: 20px;
+}
+
+/* 반응형 (모바일에서는 한 줄 1개 카드) */
+@media (max-width: 768px) {
+  .research-grid {
+    grid-template-columns: 1fr;
+  }
+  .wa-card img {
+    width: 60px;
+    height: 60px;
+  }
+}
+</style>

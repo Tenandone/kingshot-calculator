@@ -9,7 +9,7 @@
   var dict = {};                         // 현재 언어 병합된 번역 사전
   var current = 'ko';
   var supported = ['ko', 'en', 'ja', 'zh-CN', 'zh-TW'];
-  var loadedNamespaces = [];             // 사람이 읽기 좋은 기록(중복 방지용 check 포함)
+  var loadedNamespaces = ['common','waracademy'];             // 사람이 읽기 좋은 기록(중복 방지용 check 포함)
   var siteTitleSuffix = 'KingshotData';
 
   // 디듀프/상태

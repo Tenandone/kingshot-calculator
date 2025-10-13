@@ -1,10 +1,85 @@
-main { max-width: 900px; margin: auto; padding: 20px; font-family: system-ui, sans-serif; }
-h1 { font-size: 24px; margin-bottom: 20px; }
-.tg-meta ul { list-style: none; padding: 0; }
-.tg-meta li { margin: 4px 0; }
-.tg-level { margin: 40px 0; text-align: center; }
-.tg-level img { margin-bottom: 10px; }
-.tg-table { border-collapse: collapse; width: 100%; margin-top: 10px; }
-.tg-table th, .tg-table td { border: 1px solid #ddd; padding: 6px; font-size: 14px; }
-.tg-table th { background: #f5f5f5; text-align: left; }
-caption { font-weight: bold; margin-bottom: 6px; }
+/* ===== War Academy Research Table ===== */
+.tg-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+}
+
+/* 헤더 부분 */
+.tg-table thead th {
+  background: linear-gradient(180deg,#f5f5f5,#ececec);
+  color: #222;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-bottom: 2px solid #ddd;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* 본문 */
+.tg-table tbody td {
+  padding: 7px 10px;
+  border: 1px solid #eee;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+
+/* 짝수 행 배경 */
+.tg-table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* Hover 시 강조 */
+.tg-table tbody tr:hover {
+  background: #f0f7ff;
+  transition: background .15s;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .tg-table {
+    font-size: 13px;
+  }
+  .tg-table th, .tg-table td {
+    padding: 5px 6px;
+  }
+}
+
+/* 표를 감싸는 div 여백 */
+.research-detail {
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  margin-top: 10px;
+}
+
+/* Requirements/Meta 박스 */
+.tg-meta {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+  margin-bottom: 20px;
+}
+.tg-meta h2 {
+  font-size: 18px;
+  margin-top: 0;
+}
+.tg-meta ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 10px;
+  font-size: 14px;
+}
+.tg-meta li {
+  margin-bottom: 4px;
+}

@@ -1,20 +1,96 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Truegold Archer Training · KingshotData</title>
-  <link rel="stylesheet" href="/css/waracademy.css" />
-</head>
-<body>
+<section class="container">
   <main>
-    <h1>Truegold Archer Training</h1>
-    <div id="tg-root"></div>
-  </main>
+    <h1 data-i18n="waracademy.infantry.title">Truegold Infantry Research Tree</h1>
 
-  <script src="/js/waracademy-render.js"></script>
-  <script>
-    WarAcademyRender.renderWarAcademy('/data/waracademy-archer.json', 'tg-root');
-  </script>
-</body>
-</html>
+    <div class="research-grid" id="research-grid"></div>
+    <div id="research-detail" class="research-detail"></div>
+  </main>
+</section>
+
+<script>
+(async function(){
+  try {
+    const res = await fetch('/data/waracademy-infantry.json');
+    const data = await res.json();
+
+    const grid = document.getElementById('research-grid');
+    const detail = document.getElementById('research-detail');
+
+    // 카드 자동 생성
+    grid.innerHTML = data.researches.map((r,i)=>`
+      <div class="wa-card" data-idx="${i}">
+        <img src="${r.image}" alt="${r.title}">
+        <h3>${r.title}</h3>
+        <p>${r.description}</p>
+      </div>
+    `).join('');
+
+    // 카드 클릭 시 상세 표시
+    grid.querySelectorAll('.wa-card').forEach(card=>{
+      card.addEventListener('click',()=>{
+        const idx = parseInt(card.dataset.idx,10);
+        const r = data.researches[idx];
+        detail.innerHTML = `
+          <h2>${r.title}</h2>
+          <p>${r.description}</p>
+          ${r.levels?.length ? `
+            <table class="tg-table">
+              <thead>
+                <tr>
+                  <th>Lv</th><th>Requirements</th><th>Bread</th><th>Wood</th><th>Stone</th>
+                  <th>Iron</th><th>Gold</th><th>Dust</th><th>Time</th><th>Power</th><th>Bonus</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${r.levels.map(lv=>`
+                  <tr>
+                    <td>${lv.level}</td>
+                    <td>${lv.requirements || '-'}</td>
+                    <td>${(lv.bread ?? 0).toLocaleString()}</td>
+                    <td>${(lv.wood ?? 0).toLocaleString()}</td>
+                    <td>${(lv.stone ?? 0).toLocaleString()}</td>
+                    <td>${(lv.iron ?? 0).toLocaleString()}</td>
+                    <td>${(lv.gold ?? 0).toLocaleString()}</td>
+                    <td>${(lv.dust ?? 0).toLocaleString()}</td>
+                    <td>${lv.time || '-'}</td>
+                    <td>${(lv.power ?? 0).toLocaleString()}</td>
+                    <td>${lv.bonus || '-'}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>` : ''}
+        `;
+        detail.scrollIntoView({behavior:'smooth'});
+      });
+    });
+  } catch(e) {
+    console.error('Infantry load error', e);
+  }
+})();
+</script>
+
+<style>
+.wa-card{
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 2px 5px rgba(0,0,0,.1);
+  padding:10px;
+  text-align:center;
+  cursor:pointer;
+  transition:transform .2s;
+}
+.wa-card:hover{transform:scale(1.05);}
+.wa-card img{width:100%;border-radius:8px;margin-bottom:6px;}
+.tg-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:12px;
+  font-size:14px;
+}
+.tg-table th,.tg-table td{
+  border:1px solid #ddd;
+  padding:6px;
+  text-align:center;
+}
+.tg-table th{background:#f5f5f5;}
+</style>

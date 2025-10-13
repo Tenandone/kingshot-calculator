@@ -1,44 +1,2176 @@
 {
   "meta": {
-    "troop": "Archer",
-    "title": "Truegold Archer Training",
-    "description": "A modernized Truegold production line reduces Truegold Archer training costs.",
-    "requirements": {
+    "title": "Truegold Archer Researches",
+    "troop": "Archer"
+  },
+  "requirements": {
+    "building": {
       "towncenter": "TG5",
       "waracademy": "TG5"
     },
-    "research": {
-      "time_days": 271,
-      "dust": 13421,
-      "bread": 246180000,
-      "wood": 246180000,
-      "stone": 49116000,
-      "iron": 12196000,
-      "gold": 3974000
-    },
-    "bonuses": {
-      "squad_capacity": 1000,
-      "health": "25%",
-      "lethality": "25",
-      "attack": "40%",
-      "defense": "40%",
-      "rally_capacity": 33500
-    }
+    "research_time_days": 271,
+    "dust": 13421,
+    "bread": 246180000,
+    "wood": 246180000,
+    "stone": 49116000,
+    "iron": 12196000,
+    "gold": 3974000
   },
-  "levels": [
+  "bonuses": {
+    "squad_capacity": "+1,000",
+    "health": "+25%",
+    "lethality": "+25",
+    "attack": "+40%",
+    "defense": "+40%",
+    "rally_capacity": "+33,500"
+  },
+  "troop_type": "Truegold Troop (T11)",
+  "researches": [
     {
-      "level": 1,
-      "image": "/img/archer-training-1.webp",
-      "requirements": "War Academy TG Lv. 5, Truegold Archer Lv. 1",
-      "bread": 2500000,
-      "wood": 2500000,
-      "stone": 500000,
-      "iron": 120000,
-      "gold": 30000,
-      "dust": 102,
-      "time": "2d 02:00:00",
-      "power": 35000,
-      "bonus": "+5.00% Training Cost Down"
+      "title": "Truegold Archer Training",
+      "description": "A modernized Truegold production line reduces Truegold Archer training costs.",
+      "image": "/img/waracademy/truegold-archer-training.webp",
+      "levels": [
+        {
+          "level": 1,
+          "requirements": "War Academy TG Lv. 5, Truegold Archer Lv. 1",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_archer",
+              "name": "Truegold Archer",
+              "level": 1
+            }
+          ],
+          "bread": 2500000,
+          "wood": 2500000,
+          "stone": 500000,
+          "iron": 120000,
+          "gold": 30000,
+          "dust": 102,
+          "time": "2d 02:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Training Cost Down"
+        },
+        {
+          "level": 2,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 3300000,
+          "wood": 3300000,
+          "stone": 670000,
+          "iron": 160000,
+          "gold": 40000,
+          "dust": 137,
+          "time": "2d 19:30:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Training Cost Down"
+        },
+        {
+          "level": 3,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 4600000,
+          "wood": 4600000,
+          "stone": 920000,
+          "iron": 230000,
+          "gold": 55000,
+          "dust": 188,
+          "time": "3d 20:30:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Training Cost Down"
+        },
+        {
+          "level": 4,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 6200000,
+          "wood": 6200000,
+          "stone": 1200000,
+          "iron": 310000,
+          "gold": 75000,
+          "dust": 255,
+          "time": "5d 05:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Training Cost Down"
+        },
+        {
+          "level": 5,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 8300000,
+          "wood": 8300000,
+          "stone": 1600000,
+          "iron": 410000,
+          "gold": 100000,
+          "dust": 341,
+          "time": "6d 23:30:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Training Cost Down"
+        },
+        {
+          "level": 6,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 11000000,
+          "wood": 11000000,
+          "stone": 2200000,
+          "iron": 560000,
+          "gold": 130000,
+          "dust": 459,
+          "time": "9d 09:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Training Cost Down"
+        },
+        {
+          "level": 7,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 15000000,
+          "wood": 15000000,
+          "stone": 3000000,
+          "iron": 750000,
+          "gold": 180000,
+          "dust": 612,
+          "time": "12d 12:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Training Cost Down"
+        },
+        {
+          "level": 8,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 20000000,
+          "wood": 20000000,
+          "stone": 4100000,
+          "iron": 1000000,
+          "gold": 240000,
+          "dust": 836,
+          "time": "17d 02:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Training Cost Down"
+        },
+        {
+          "level": 9,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 27000000,
+          "wood": 27000000,
+          "stone": 5500000,
+          "iron": 1300000,
+          "gold": 330000,
+          "dust": 1122,
+          "time": "22d 22:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Training Cost Down"
+        },
+        {
+          "level": 10,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 37000000,
+          "wood": 37000000,
+          "stone": 7500000,
+          "iron": 1800000,
+          "gold": 450000,
+          "dust": 1500,
+          "time": "31d 06:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Training Cost Down"
+        }
+      ]
+    },
+    {
+      "title": "Truegold Archer Aid",
+      "description": "Truegold has a powerful restorative effect on the human body, accelerating Truegold Archer healing.",
+      "image": "/img/waracademy/truegold-archer-aid.webp",
+      "levels": [
+        {
+          "level": 1,
+          "requirements": "War Academy TG Lv. 5, Truegold Archer Lv. 1",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_archer",
+              "name": "Truegold Archer",
+              "level": 1
+            }
+          ],
+          "bread": 1200000,
+          "wood": 1200000,
+          "stone": 250000,
+          "iron": 62000,
+          "gold": 15000,
+          "dust": 51,
+          "time": "1d 01:00:00",
+          "power": 17250,
+          "bonus": "+1.50% Truegold Archer Healing Time Down"
+        },
+        {
+          "level": 2,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 1600000,
+          "wood": 1600000,
+          "stone": 330000,
+          "iron": 84000,
+          "gold": 20000,
+          "dust": 68,
+          "time": "1d 09:45:00",
+          "power": 17250,
+          "bonus": "+1.50% Truegold Archer Healing Time Down"
+        },
+        {
+          "level": 3,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 2300000,
+          "wood": 2300000,
+          "stone": 460000,
+          "iron": 110000,
+          "gold": 27000,
+          "dust": 94,
+          "time": "1d 22:15:00",
+          "power": 17250,
+          "bonus": "+1.50% Truegold Archer Healing Time Down"
+        },
+        {
+          "level": 4,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 3100000,
+          "wood": 3100000,
+          "stone": 620000,
+          "iron": 150000,
+          "gold": 37000,
+          "dust": 127,
+          "time": "2d 14:30:00",
+          "power": 17250,
+          "bonus": "+1.50% Truegold Archer Healing Time Down"
+        },
+        {
+          "level": 5,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 4100000,
+          "wood": 4100000,
+          "stone": 830000,
+          "iron": 200000,
+          "gold": 50000,
+          "dust": 170,
+          "time": "3d 11:45:00",
+          "power": 17250,
+          "bonus": "+1.50% Truegold Archer Healing Time Down"
+        },
+        {
+          "level": 6,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 5600000,
+          "wood": 5600000,
+          "stone": 1100000,
+          "iron": 280000,
+          "gold": 67000,
+          "dust": 229,
+          "time": "4d 16:30:00",
+          "power": 17250,
+          "bonus": "+1.50% Truegold Archer Healing Time Down"
+        },
+        {
+          "level": 7,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 7500000,
+          "wood": 7500000,
+          "stone": 1500000,
+          "iron": 370000,
+          "gold": 90000,
+          "dust": 306,
+          "time": "6d 06:00:00",
+          "power": 17250,
+          "bonus": "+1.50% Truegold Archer Healing Time Down"
+        },
+        {
+          "level": 8,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 10000000,
+          "wood": 10000000,
+          "stone": 2000000,
+          "iron": 510000,
+          "gold": 120000,
+          "dust": 418,
+          "time": "8d 13:00:00",
+          "power": 17250,
+          "bonus": "+1.50% Truegold Archer Healing Time Down"
+        },
+        {
+          "level": 9,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 13000000,
+          "wood": 13000000,
+          "stone": 2700000,
+          "iron": 680000,
+          "gold": 160000,
+          "dust": 561,
+          "time": "11d 11:00:00",
+          "power": 17250,
+          "bonus": "+1.50% Truegold Archer Healing Time Down"
+        },
+        {
+          "level": 10,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 18000000,
+          "wood": 18000000,
+          "stone": 3700000,
+          "iron": 930000,
+          "gold": 220000,
+          "dust": 765,
+          "time": "15d 15:00:00",
+          "power": 17250,
+          "bonus": "+1.50% Truegold Archer Healing Time Down"
+        }
+      ]
+    },
+    {
+      "title": "Truegold Archer Healing",
+      "description": "Truegold has a restorative effect all its own, reducing healing costs on Truegold Archers.",
+      "image": "/img/waracademy/truegold-archer-healing.webp",
+      "levels": [
+        {
+          "level": 1,
+          "requirements": "War Academy TG Lv. 5, Truegold Archer Lv. 1",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_archer",
+              "name": "Truegold Archer",
+              "level": 1
+            }
+          ],
+          "bread": 2500000,
+          "wood": 2500000,
+          "stone": 500000,
+          "iron": 120000,
+          "gold": 30000,
+          "dust": 102,
+          "time": "2d 02:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Healing Cost Reduction"
+        },
+        {
+          "level": 2,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 3300000,
+          "wood": 3300000,
+          "stone": 670000,
+          "iron": 160000,
+          "gold": 40000,
+          "dust": 137,
+          "time": "2d 19:30:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Healing Cost Reduction"
+        },
+        {
+          "level": 3,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 4600000,
+          "wood": 4600000,
+          "stone": 920000,
+          "iron": 230000,
+          "gold": 55000,
+          "dust": 188,
+          "time": "3d 20:30:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Healing Cost Reduction"
+        },
+        {
+          "level": 4,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 6200000,
+          "wood": 6200000,
+          "stone": 1200000,
+          "iron": 310000,
+          "gold": 75000,
+          "dust": 255,
+          "time": "5d 05:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Healing Cost Reduction"
+        },
+        {
+          "level": 5,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 8300000,
+          "wood": 8300000,
+          "stone": 1600000,
+          "iron": 410000,
+          "gold": 100000,
+          "dust": 341,
+          "time": "6d 23:30:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Healing Cost Reduction"
+        },
+        {
+          "level": 6,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 11000000,
+          "wood": 11000000,
+          "stone": 2200000,
+          "iron": 560000,
+          "gold": 130000,
+          "dust": 459,
+          "time": "9d 09:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Healing Cost Reduction"
+        },
+        {
+          "level": 7,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 15000000,
+          "wood": 15000000,
+          "stone": 3000000,
+          "iron": 750000,
+          "gold": 180000,
+          "dust": 612,
+          "time": "12d 12:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Healing Cost Reduction"
+        },
+        {
+          "level": 8,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 20000000,
+          "wood": 20000000,
+          "stone": 4100000,
+          "iron": 1000000,
+          "gold": 240000,
+          "dust": 836,
+          "time": "17d 02:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Healing Cost Reduction"
+        },
+        {
+          "level": 9,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 27000000,
+          "wood": 27000000,
+          "stone": 5500000,
+          "iron": 1300000,
+          "gold": 330000,
+          "dust": 1112,
+          "time": "22d 22:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Healing Cost Reduction"
+        },
+        {
+          "level": 10,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 37000000,
+          "wood": 37000000,
+          "stone": 7500000,
+          "iron": 1800000,
+          "gold": 450000,
+          "dust": 1500,
+          "time": "31d 06:00:00",
+          "power": 35000,
+          "bonus": "+5.00% Truegold Archer Healing Cost Reduction"
+        }
+      ]
+    },
+    {
+      "title": "Truegold Archers",
+      "description": "With a Truegold arsenal by your side, the Range can deploy even more powerful Archers.",
+      "image": "/img/waracademy/truegold-archer.webp",
+      "levels": [
+        {
+          "level": 1,
+          "requirements": "War Academy TG Lv. 5, Truegold Arrows Lv. 12, Truegold Vests Lv. 12, Truegold Legionaries (Archer) Lv. 12",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_arrows",
+              "name": "Truegold Arrows",
+              "level": 12
+            },
+            {
+              "type": "research",
+              "id": "truegold_vests",
+              "name": "Truegold Vests",
+              "level": 12
+            },
+            {
+              "type": "research",
+              "id": "truegold_legionaries_archer",
+              "name": "Truegold Legionaries (Archer)",
+              "level": 12
+            }
+          ],
+          "bread": 85000000,
+          "wood": 85000000,
+          "stone": 17000000,
+          "iron": 4200000,
+          "gold": 1000000,
+          "dust": 2236,
+          "time": "91d 08:15:00",
+          "power": 8000000,
+          "bonus": "Unlock XI Truegold Archer"
+        }
+      ]
+    },
+    {
+      "title": "Truegold Vests",
+      "description": "Truegold armor is the most elite available, increasing Archer Defense.",
+      "image": "/img/waracademy/truegold-vests.webp",
+      "levels": [
+        {
+          "level": 1,
+          "requirements": "War Academy TG Lv. 3, Truegold Bracers Lv. 6",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 3
+            },
+            {
+              "type": "research",
+              "id": "truegold_bracers",
+              "name": "Truegold Bracers",
+              "level": 6
+            }
+          ],
+          "bread": 700000,
+          "wood": 700000,
+          "stone": 140000,
+          "iron": 35000,
+          "gold": 15000,
+          "dust": 54,
+          "time": "18:55:40",
+          "power": 120000,
+          "bonus": "+2.00% Archer Defense"
+        },
+        {
+          "level": 2,
+          "requirements": "War Academy TG Lv. 3",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 3
+            }
+          ],
+          "bread": 860000,
+          "wood": 860000,
+          "stone": 170000,
+          "iron": 43000,
+          "gold": 18000,
+          "dust": 66,
+          "time": "23:16:52",
+          "power": 108000,
+          "bonus": "+2.00% Archer Defense"
+        },
+        {
+          "level": 3,
+          "requirements": "War Academy TG Lv. 4",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 4
+            }
+          ],
+          "bread": 1000000,
+          "wood": 1000000,
+          "stone": 210000,
+          "iron": 52000,
+          "gold": 22000,
+          "dust": 81,
+          "time": "1d 04:23:30",
+          "power": 103200,
+          "bonus": "+2.00% Archer Defense"
+        },
+        {
+          "level": 4,
+          "requirements": "War Academy TG Lv. 4",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 4
+            }
+          ],
+          "bread": 1200000,
+          "wood": 1200000,
+          "stone": 250000,
+          "iron": 63000,
+          "gold": 27000,
+          "dust": 97,
+          "time": "1d 10:04:12",
+          "power": 102300,
+          "bonus": "+2.50% Archer Defense"
+        },
+        {
+          "level": 5,
+          "requirements": "War Academy TG Lv. 4",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 4
+            }
+          ],
+          "bread": 1500000,
+          "wood": 1500000,
+          "stone": 300000,
+          "iron": 77000,
+          "gold": 33000,
+          "dust": 118,
+          "time": "1d 17:38:28",
+          "power": 101100,
+          "bonus": "+2.50% Archer Defense"
+        },
+        {
+          "level": 6,
+          "requirements": "War Academy TG Lv. 4",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 4
+            }
+          ],
+          "bread": 1800000,
+          "wood": 1800000,
+          "stone": 370000,
+          "iron": 94000,
+          "gold": 40000,
+          "dust": 145,
+          "time": "2d 03:06:18",
+          "power": 103800,
+          "bonus": "+3.00% Archer Defense"
+        },
+        {
+          "level": 7,
+          "requirements": "War Academy TG Lv. 5, Truegold Bracers Lv. 7",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_bracers",
+              "name": "Truegold Bracers",
+              "level": 7
+            }
+          ],
+          "bread": 2300000,
+          "wood": 2300000,
+          "stone": 460000,
+          "iron": 110000,
+          "gold": 49000,
+          "dust": 178,
+          "time": "2d 14:27:42",
+          "power": 106200,
+          "bonus": "+3.00% Archer Defense"
+        },
+        {
+          "level": 8,
+          "requirements": "War Academy TG Lv. 5, Truegold Bracers Lv. 8",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_bracers",
+              "name": "Truegold Bracers",
+              "level": 8
+            }
+          ],
+          "bread": 2800000,
+          "wood": 2800000,
+          "stone": 560000,
+          "iron": 140000,
+          "gold": 60000,
+          "dust": 216,
+          "time": "3d 03:42:40",
+          "power": 107400,
+          "bonus": "+3.00% Archer Defense"
+        },
+        {
+          "level": 9,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 3500000,
+          "wood": 3500000,
+          "stone": 700000,
+          "iron": 170000,
+          "gold": 75000,
+          "dust": 270,
+          "time": "3d 22:38:20",
+          "power": 123000,
+          "bonus": "+5.00% Archer Defense"
+        },
+        {
+          "level": 10,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 4200000,
+          "wood": 4200000,
+          "stone": 840000,
+          "iron": 210000,
+          "gold": 90000,
+          "dust": 324,
+          "time": "4d 17:34:00",
+          "power": 123000,
+          "bonus": "+5.00% Archer Defense"
+        },
+        {
+          "level": 11,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 5000000,
+          "wood": 5000000,
+          "stone": 1000000,
+          "iron": 250000,
+          "gold": 100000,
+          "dust": 388,
+          "time": "5d 16:16:48",
+          "power": 120000,
+          "bonus": "+5.00% Archer Defense"
+        },
+        {
+          "level": 12,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 6200000,
+          "wood": 6200000,
+          "stone": 1200000,
+          "iron": 310000,
+          "gold": 130000,
+          "dust": 480,
+          "time": "7d 00:27:26",
+          "power": 126000,
+          "bonus": "+5.00% Archer Defense"
+        }
+      ]
+    },
+    {
+      "title": "Truegold Arrows",
+      "description": "Truegold arrowheads are known for stability and piercing consistency, increasing Archer Attack.",
+      "image": "/img/waracademy/truegold-arrows.webp",
+      "levels": [
+        {
+          "level": 1,
+          "requirements": "War Academy TG Lv. 3, Truegold Bows Lv. 6",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 3
+            },
+            {
+              "type": "research",
+              "id": "truegold_bows",
+              "name": "Truegold Bows",
+              "level": 6
+            }
+          ],
+          "bread": 700000,
+          "wood": 700000,
+          "stone": 140000,
+          "iron": 35000,
+          "gold": 15000,
+          "dust": 54,
+          "time": "18:55:40",
+          "power": 120000,
+          "bonus": "+2.00% Archer Attack"
+        },
+        {
+          "level": 2,
+          "requirements": "War Academy TG Lv. 3",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 3
+            }
+          ],
+          "bread": 860000,
+          "wood": 860000,
+          "stone": 170000,
+          "iron": 43000,
+          "gold": 18000,
+          "dust": 66,
+          "time": "23:16:52",
+          "power": 108000,
+          "bonus": "+2.00% Archer Attack"
+        },
+        {
+          "level": 3,
+          "requirements": "War Academy TG Lv. 4",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 4
+            }
+          ],
+          "bread": 1000000,
+          "wood": 1000000,
+          "stone": 210000,
+          "iron": 52000,
+          "gold": 22000,
+          "dust": 81,
+          "time": "1d 04:23:30",
+          "power": 103200,
+          "bonus": "+2.00% Archer Attack"
+        },
+        {
+          "level": 4,
+          "requirements": "War Academy TG Lv. 4",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 4
+            }
+          ],
+          "bread": 1200000,
+          "wood": 1200000,
+          "stone": 250000,
+          "iron": 63000,
+          "gold": 27000,
+          "dust": 97,
+          "time": "1d 10:04:12",
+          "power": 102300,
+          "bonus": "+2.50% Archer Attack"
+        },
+        {
+          "level": 5,
+          "requirements": "War Academy TG Lv. 4",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 4
+            }
+          ],
+          "bread": 1500000,
+          "wood": 1500000,
+          "stone": 300000,
+          "iron": 77000,
+          "gold": 33000,
+          "dust": 118,
+          "time": "1d 17:38:28",
+          "power": 101100,
+          "bonus": "+2.50% Archer Attack"
+        },
+        {
+          "level": 6,
+          "requirements": "War Academy TG Lv. 4",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 4
+            }
+          ],
+          "bread": 1800000,
+          "wood": 1800000,
+          "stone": 370000,
+          "iron": 94000,
+          "gold": 40000,
+          "dust": 145,
+          "time": "2d 03:06:18",
+          "power": 103800,
+          "bonus": "+3.00% Archer Attack"
+        },
+        {
+          "level": 7,
+          "requirements": "War Academy TG Lv. 5, Truegold Bows Lv. 7",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_bows",
+              "name": "Truegold Bows",
+              "level": 7
+            }
+          ],
+          "bread": 2300000,
+          "wood": 2300000,
+          "stone": 460000,
+          "iron": 110000,
+          "gold": 49000,
+          "dust": 178,
+          "time": "2d 14:27:42",
+          "power": 106200,
+          "bonus": "+3.00% Archer Attack"
+        },
+        {
+          "level": 8,
+          "requirements": "War Academy TG Lv. 5, Truegold Bows Lv. 8",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_bows",
+              "name": "Truegold Bows",
+              "level": 8
+            }
+          ],
+          "bread": 2800000,
+          "wood": 2800000,
+          "stone": 560000,
+          "iron": 140000,
+          "gold": 60000,
+          "dust": 216,
+          "time": "3d 03:42:40",
+          "power": 107400,
+          "bonus": "+3.00% Archer Attack"
+        },
+        {
+          "level": 9,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 3500000,
+          "wood": 3500000,
+          "stone": 700000,
+          "iron": 170000,
+          "gold": 75000,
+          "dust": 270,
+          "time": "3d 22:38:20",
+          "power": 123000,
+          "bonus": "+5.00% Archer Attack"
+        },
+        {
+          "level": 10,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 4200000,
+          "wood": 4200000,
+          "stone": 840000,
+          "iron": 210000,
+          "gold": 90000,
+          "dust": 324,
+          "time": "4d 17:34:00",
+          "power": 123000,
+          "bonus": "+5.00% Archer Attack"
+        },
+        {
+          "level": 11,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 5000000,
+          "wood": 5000000,
+          "stone": 1000000,
+          "iron": 250000,
+          "gold": 100000,
+          "dust": 388,
+          "time": "5d 16:16:48",
+          "power": 120000,
+          "bonus": "+5.00% Archer Attack"
+        },
+        {
+          "level": 12,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 6200000,
+          "wood": 6200000,
+          "stone": 1200000,
+          "iron": 310000,
+          "gold": 130000,
+          "dust": 480,
+          "time": "7d 00:27:26",
+          "power": 126000,
+          "bonus": "+5.00% Archer Attack"
+        }
+      ]
+    },
+    {
+      "title": "Truegold Legionaries (Archer)",
+      "description": "Truegold enhances the command abilities of alliance heroes and increases the Rally Squad Capacity.",
+      "image": "/img/waracademy/truegold-legionaries-archer.webp",
+      "levels": [
+        {
+          "level": 1,
+          "requirements": "War Academy TG Lv. 4, Truegold Bows Lv. 6, Truegold Bracers Lv. 6",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 4
+            },
+            {
+              "type": "research",
+              "id": "truegold_bows",
+              "name": "Truegold Bows",
+              "level": 6
+            },
+            {
+              "type": "research",
+              "id": "truegold_bracers",
+              "name": "Truegold Bracers",
+              "level": 6
+            }
+          ],
+          "bread": 1000000,
+          "wood": 1000000,
+          "stone": 210000,
+          "iron": 54000,
+          "gold": 23000,
+          "dust": 83,
+          "time": "1d 05:20:17",
+          "power": 150000,
+          "bonus": "+1,500 Rally Capacity"
+        },
+        {
+          "level": 2,
+          "requirements": "War Academy TG Lv. 4",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 4
+            }
+          ],
+          "bread": 1300000,
+          "wood": 1300000,
+          "stone": 260000,
+          "iron": 66000,
+          "gold": 28000,
+          "dust": 102,
+          "time": "1d 12:05:08",
+          "power": 135000,
+          "bonus": "+1,500 Rally Capacity"
+        },
+        {
+          "level": 3,
+          "requirements": "War Academy TG Lv. 4",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 4
+            }
+          ],
+          "bread": 1600000,
+          "wood": 1600000,
+          "stone": 320000,
+          "iron": 81000,
+          "gold": 34000,
+          "dust": 125,
+          "time": "1d 20:00:25",
+          "power": 175000,
+          "bonus": "+2,000 Rally Capacity"
+        },
+        {
+          "level": 4,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 1900000,
+          "wood": 1900000,
+          "stone": 390000,
+          "iron": 97000,
+          "gold": 41000,
+          "dust": 150,
+          "time": "2d 04:48:30",
+          "power": 135000,
+          "bonus": "+2,000 Rally Capacity"
+        },
+        {
+          "level": 5,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 2300000,
+          "wood": 2300000,
+          "stone": 470000,
+          "iron": 110000,
+          "gold": 51000,
+          "dust": 184,
+          "time": "2d 16:32:37",
+          "power": 174500,
+          "bonus": "+2,500 Rally Capacity"
+        },
+        {
+          "level": 6,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 2900000,
+          "wood": 2900000,
+          "stone": 580000,
+          "iron": 140000,
+          "gold": 62000,
+          "dust": 225,
+          "time": "3d 07:12:45",
+          "power": 142500,
+          "bonus": "+2,500 Rally Capacity"
+        },
+        {
+          "level": 7,
+          "requirements": "War Academy TG Lv. 5, Truegold Bracers Lv. 7, Truegold Bows Lv. 7",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_bracers",
+              "name": "Truegold Bracers",
+              "level": 7
+            },
+            {
+              "type": "research",
+              "id": "truegold_bows",
+              "name": "Truegold Bows",
+              "level": 7
+            }
+          ],
+          "bread": 3500000,
+          "wood": 3500000,
+          "stone": 710000,
+          "iron": 170000,
+          "gold": 76000,
+          "dust": 276,
+          "time": "4d 00:48:56",
+          "power": 146500,
+          "bonus": "+2,500 Rally Capacity"
+        },
+        {
+          "level": 8,
+          "requirements": "War Academy TG Lv. 5, Truegold Bracers Lv. 8, Truegold Bows Lv. 8",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_bracers",
+              "name": "Truegold Bracers",
+              "level": 8
+            },
+            {
+              "type": "research",
+              "id": "truegold_bows",
+              "name": "Truegold Bows",
+              "level": 8
+            }
+          ],
+          "bread": 4300000,
+          "wood": 4300000,
+          "stone": 860000,
+          "iron": 210000,
+          "gold": 93000,
+          "dust": 334,
+          "time": "4d 21:21:08",
+          "power": 184000,
+          "bonus": "+3,000 Rally Capacity"
+        },
+        {
+          "level": 9,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 5400000,
+          "wood": 5400000,
+          "stone": 1000000,
+          "iron": 270000,
+          "gold": 110000,
+          "dust": 418,
+          "time": "6d 02:41:25",
+          "power": 122500,
+          "bonus": "+3,500 Rally Capacity"
+        },
+        {
+          "level": 10,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 6500000,
+          "wood": 6500000,
+          "stone": 1300000,
+          "iron": 320000,
+          "gold": 130000,
+          "dust": 502,
+          "time": "7d 08:01:42",
+          "power": 160000,
+          "bonus": "+4,000 Rally Capacity"
+        },
+        {
+          "level": 11,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 7800000,
+          "wood": 7800000,
+          "stone": 1500000,
+          "iron": 390000,
+          "gold": 160000,
+          "dust": 602,
+          "time": "8d 19:14:02",
+          "power": 157000,
+          "bonus": "+4,000 Rally Capacity"
+        },
+        {
+          "level": 12,
+          "requirements": "War Academy TG Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            }
+          ],
+          "bread": 9600000,
+          "wood": 9600000,
+          "stone": 1900000,
+          "iron": 480000,
+          "gold": 200000,
+          "dust": 744,
+          "time": "10d 21:06:31",
+          "power": 194000,
+          "bonus": "+4,500 Rally Capacity"
+        }
+      ]
+    },
+    {
+      "title": "Truegold Bows",
+      "description": "Every aspect of refined Truegold weaponry increases Archer Lethality.",
+      "image": "/img/waracademy/truegold-bows.webp",
+      "levels": [
+        {
+          "level": 1,
+          "requirements": "War Academy TG Lv. 1, Truegold Battalion (Archer) Lv. 3",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 1
+            },
+            {
+              "type": "research",
+              "id": "truegold_battalion_archer",
+              "name": "Truegold Battalion (Archer)",
+              "level": 3
+            }
+          ],
+          "bread": 800000,
+          "wood": 800000,
+          "stone": 160000,
+          "iron": 40000,
+          "gold": 10000,
+          "dust": 40,
+          "time": "20:00:00",
+          "power": 82500,
+          "bonus": "+1.50% Archer Lethality"
+        },
+        {
+          "level": 2,
+          "requirements": "War Academy TG Lv. 2, Truegold Bows Lv. 1",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 2
+            },
+            {
+              "type": "research",
+              "id": "truegold_bows",
+              "name": "Truegold Bows",
+              "level": 1
+            }
+          ],
+          "bread": 1100000,
+          "wood": 1100000,
+          "stone": 220000,
+          "iron": 56000,
+          "gold": 14000,
+          "dust": 56,
+          "time": "1d 04:00:00",
+          "power": 74250,
+          "bonus": "+1.50% Archer Lethality"
+        },
+        {
+          "level": 3,
+          "requirements": "War Academy TG Lv. 2, Truegold Bows Lv. 2",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 2
+            },
+            {
+              "type": "research",
+              "id": "truegold_bows",
+              "name": "Truegold Bows",
+              "level": 2
+            }
+          ],
+          "bread": 1400000,
+          "wood": 1400000,
+          "stone": 290000,
+          "iron": 74000,
+          "gold": 18000,
+          "dust": 74,
+          "time": "1d 13:00:00",
+          "power": 90750,
+          "bonus": "+3.00% Archer Lethality"
+        },
+        {
+          "level": 4,
+          "requirements": "War Academy TG Lv. 2, Truegold Battalion (Archer) Lv. 4, Truegold Bows Lv. 3",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 2
+            },
+            {
+              "type": "research",
+              "id": "truegold_battalion_archer",
+              "name": "Truegold Battalion (Archer)",
+              "level": 4
+            },
+            {
+              "type": "research",
+              "id": "truegold_bows",
+              "name": "Truegold Bows",
+              "level": 3
+            }
+          ],
+          "bread": 2000000,
+          "wood": 2000000,
+          "stone": 400000,
+          "iron": 100000,
+          "gold": 25000,
+          "dust": 102,
+          "time": "2d 03:00:00",
+          "power": 99000,
+          "bonus": "+3.00% Archer Lethality"
+        },
+        {
+          "level": 5,
+          "requirements": "War Academy TG Lv. 3, Truegold Battalion (Archer) Lv. 5, Truegold Bows Lv. 4",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 3
+            },
+            {
+              "type": "research",
+              "id": "truegold_battalion_archer",
+              "name": "Truegold Battalion (Archer)",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_bows",
+              "name": "Truegold Bows",
+              "level": 4
+            }
+          ],
+          "bread": 2700000,
+          "wood": 2700000,
+          "stone": 540000,
+          "iron": 130000,
+          "gold": 34000,
+          "dust": 136,
+          "time": "2d 20:00:00",
+          "power": 95700,
+          "bonus": "+3.00% Archer Lethality"
+        },
+        {
+          "level": 6,
+          "requirements": "War Academy TG Lv. 3, Truegold Bows Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 3
+            },
+            {
+              "type": "research",
+              "id": "truegold_bows",
+              "name": "Truegold Bows",
+              "level": 5
+            }
+          ],
+          "bread": 3600000,
+          "wood": 3600000,
+          "stone": 730000,
+          "iron": 180000,
+          "gold": 46000,
+          "dust": 184,
+          "time": "3d 20:00:00",
+          "power": 98175,
+          "bonus": "+3.00% Archer Lethality"
+        },
+        {
+          "level": 7,
+          "requirements": "War Academy TG Lv. 4, Truegold Bows Lv. 6",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 4
+            },
+            {
+              "type": "research",
+              "id": "truegold_bows",
+              "name": "Truegold Bows",
+              "level": 6
+            }
+          ],
+          "bread": 4900000,
+          "wood": 4900000,
+          "stone": 990000,
+          "iron": 240000,
+          "gold": 62000,
+          "dust": 248,
+          "time": "5d 04:00:00",
+          "power": 122925,
+          "bonus": "+5.00% Archer Lethality"
+        },
+        {
+          "level": 8,
+          "requirements": "War Academy TG Lv. 5, Truegold Bows Lv. 7",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_bows",
+              "name": "Truegold Bows",
+              "level": 7
+            }
+          ],
+          "bread": 6600000,
+          "wood": 6600000,
+          "stone": 1300000,
+          "iron": 330000,
+          "gold": 83000,
+          "dust": 334,
+          "time": "6d 23:00:00",
+          "power": 120450,
+          "bonus": "+5.00% Archer Lethality"
+        }
+      ]
+    },
+    {
+      "title": "Truegold Bracers",
+      "description": "A Truegold bracer is the perfect accompaniment to a watchful bowman, increasing Archer Health.",
+      "image": "/img/waracademy/truegold-bracers.webp",
+      "levels": [
+        {
+          "level": 1,
+          "requirements": "War Academy TG Lv. 1, Truegold Battalion (Archer) Lv. 3",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 1
+            },
+            {
+              "type": "research",
+              "id": "truegold_battalion_archer",
+              "name": "Truegold Battalion (Archer)",
+              "level": 3
+            }
+          ],
+          "bread": 800000,
+          "wood": 800000,
+          "stone": 160000,
+          "iron": 40000,
+          "gold": 10000,
+          "dust": 40,
+          "time": "20:00:00",
+          "power": 82500,
+          "bonus": "+1.50% Archer Health"
+        },
+        {
+          "level": 2,
+          "requirements": "War Academy TG Lv. 2, Truegold Bracers Lv. 1",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 2
+            },
+            {
+              "type": "research",
+              "id": "truegold_bracers",
+              "name": "Truegold Bracers",
+              "level": 1
+            }
+          ],
+          "bread": 1100000,
+          "wood": 1100000,
+          "stone": 220000,
+          "iron": 56000,
+          "gold": 14000,
+          "dust": 56,
+          "time": "1d 04:00:00",
+          "power": 74250,
+          "bonus": "+1.50% Archer Health"
+        },
+        {
+          "level": 3,
+          "requirements": "War Academy TG Lv. 2, Truegold Bracers Lv. 2",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 2
+            },
+            {
+              "type": "research",
+              "id": "truegold_bracers",
+              "name": "Truegold Bracers",
+              "level": 2
+            }
+          ],
+          "bread": 1400000,
+          "wood": 1400000,
+          "stone": 290000,
+          "iron": 74000,
+          "gold": 18000,
+          "dust": 74,
+          "time": "1d 13:00:00",
+          "power": 90750,
+          "bonus": "+3.00% Archer Health"
+        },
+        {
+          "level": 4,
+          "requirements": "War Academy TG Lv. 2, Truegold Battalion (Archer) Lv. 4, Truegold Bracers Lv. 3",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 2
+            },
+            {
+              "type": "research",
+              "id": "truegold_battalion_archer",
+              "name": "Truegold Battalion (Archer)",
+              "level": 4
+            },
+            {
+              "type": "research",
+              "id": "truegold_bracers",
+              "name": "Truegold Bracers",
+              "level": 3
+            }
+          ],
+          "bread": 2000000,
+          "wood": 2000000,
+          "stone": 400000,
+          "iron": 100000,
+          "gold": 25000,
+          "dust": 102,
+          "time": "2d 03:00:00",
+          "power": 99000,
+          "bonus": "+3.00% Archer Health"
+        },
+        {
+          "level": 5,
+          "requirements": "War Academy TG Lv. 3, Truegold Battalion (Archer) Lv. 5, Truegold Bracers Lv. 4",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 3
+            },
+            {
+              "type": "research",
+              "id": "truegold_battalion_archer",
+              "name": "Truegold Battalion (Archer)",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_bracers",
+              "name": "Truegold Bracers",
+              "level": 4
+            }
+          ],
+          "bread": 2700000,
+          "wood": 2700000,
+          "stone": 540000,
+          "iron": 130000,
+          "gold": 34000,
+          "dust": 136,
+          "time": "2d 20:00:00",
+          "power": 95700,
+          "bonus": "+3.00% Archer Health"
+        },
+        {
+          "level": 6,
+          "requirements": "War Academy TG Lv. 3, Truegold Bracers Lv. 5",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 3
+            },
+            {
+              "type": "research",
+              "id": "truegold_bracers",
+              "name": "Truegold Bracers",
+              "level": 5
+            }
+          ],
+          "bread": 3600000,
+          "wood": 3600000,
+          "stone": 730000,
+          "iron": 180000,
+          "gold": 46000,
+          "dust": 184,
+          "time": "3d 20:00:00",
+          "power": 98175,
+          "bonus": "+3.00% Archer Health"
+        },
+        {
+          "level": 7,
+          "requirements": "War Academy TG Lv. 4, Truegold Bracers Lv. 6",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 4
+            },
+            {
+              "type": "research",
+              "id": "truegold_bracers",
+              "name": "Truegold Bracers",
+              "level": 6
+            }
+          ],
+          "bread": 4900000,
+          "wood": 4900000,
+          "stone": 990000,
+          "iron": 240000,
+          "gold": 62000,
+          "dust": 248,
+          "time": "5d 04:00:00",
+          "power": 122925,
+          "bonus": "+5.00% Archer Health"
+        },
+        {
+          "level": 8,
+          "requirements": "War Academy TG Lv. 5, Truegold Bracers Lv. 7",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 5
+            },
+            {
+              "type": "research",
+              "id": "truegold_bracers",
+              "name": "Truegold Bracers",
+              "level": 7
+            }
+          ],
+          "bread": 6600000,
+          "wood": 6600000,
+          "stone": 1300000,
+          "iron": 330000,
+          "gold": 83000,
+          "dust": 334,
+          "time": "6d 23:00:00",
+          "power": 120450,
+          "bonus": "+5.00% Archer Health"
+        }
+      ]
+    },
+    {
+      "title": "Truegold Battalion (Archer)",
+      "description": "Truegold enhances the command abilities of heroes and increases Squads’ Deployment Capacity.",
+      "image": "/img/waracademy/truegold-battalion-archer.webp",
+      "levels": [
+        {
+          "level": 1,
+          "requirements": "War Academy TG Lv. 1",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 1
+            }
+          ],
+          "bread": 300000,
+          "wood": 300000,
+          "stone": 60000,
+          "iron": 15000,
+          "gold": 5000,
+          "dust": 16,
+          "time": "08:00:00",
+          "power": 60000,
+          "bonus": "+200 Squad Deployment Capacity"
+        },
+        {
+          "level": 2,
+          "requirements": "War Academy TG Lv. 1",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 1
+            }
+          ],
+          "bread": 480000,
+          "wood": 480000,
+          "stone": 96000,
+          "iron": 24000,
+          "gold": 8000,
+          "dust": 25,
+          "time": "12:48:00",
+          "power": 60000,
+          "bonus": "+200 Squad Deployment Capacity"
+        },
+        {
+          "level": 3,
+          "requirements": "War Academy TG Lv. 1",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 1
+            }
+          ],
+          "bread": 780000,
+          "wood": 780000,
+          "stone": 150000,
+          "iron": 39000,
+          "gold": 13000,
+          "dust": 41,
+          "time": "20:48:00",
+          "power": 60000,
+          "bonus": "+200 Squad Deployment Capacity"
+        },
+        {
+          "level": 4,
+          "requirements": "War Academy TG Lv. 1",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 1
+            }
+          ],
+          "bread": 1200000,
+          "wood": 1200000,
+          "stone": 250000,
+          "iron": 64000,
+          "gold": 21000,
+          "dust": 68,
+          "time": "1d 10:24:00",
+          "power": 60000,
+          "bonus": "+200 Squad Deployment Capacity"
+        },
+        {
+          "level": 5,
+          "requirements": "War Academy TG Lv. 1",
+          "requirements_parsed": [
+            {
+              "type": "building",
+              "id": "waracademy",
+              "name": "War Academy",
+              "level": 1
+            }
+          ],
+          "bread": 2000000,
+          "wood": 2000000,
+          "stone": 400000,
+          "iron": 100000,
+          "gold": 33000,
+          "dust": 108,
+          "time": "2d 06:00:00",
+          "power": 60000,
+          "bonus": "+200 Squad Deployment Capacity"
+        }
+      ]
     }
   ]
 }
