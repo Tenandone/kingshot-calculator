@@ -45,7 +45,7 @@
   <meta name="description" content="calc.desc">
 
   <title data-i18n="calc.meta.title">Kingshot 건물 계산기</title>
-  <!-- 스타일은 /css/calculator.css?v=202509120604 로 분리 (app.js에서 ensureCSS로 로드) -->
+ 
 </head>
 <body>
   <!-- (선택) h1 동기화가 필요하면 주석 해제
@@ -218,6 +218,14 @@
     </section>
   </main>
 
-  <!-- ⚠️ 스크립트는 app.js가 라우트에서 동적 로드함. 여기선 포함하지 않음. -->
+  <!-- ⚠️ 스크립트는 app.js가 라우트에서 동적 로드함. 여기선 포함하지 않음. --> <!-- 스타일은 /css/calculator.css?v=202509120604 로 분리 (app.js에서 ensureCSS로 로드) -->
+   <style>
+    /* "선행 건물 포함" 관련 요소 전부 숨김 */
+    #includePrereq,
+    label[for="includePrereq"],
+    #prereq-details {
+      display: none !important;
+    }
+  </style>
 </body>
 </html>
