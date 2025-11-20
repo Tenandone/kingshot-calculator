@@ -1,4 +1,187 @@
-﻿[
+﻿[{
+  "name": "Rosa",
+  "slug": "rosa-5",
+  "image": "/img/heroes/Rosa/img_001.webp",
+  "generation": null,
+  "unit": "heroes.card.rosa.unit",
+  "title": "heroes.card.rosa.title",
+  "subtitle": "heroes.card.rosa.subtitle",
+  "summary": "heroes.card.rosa.summary",
+  "sources": [
+    "heroes.card.rosa.source.1",
+    "heroes.card.rosa.source.2"
+  ],
+  "conquest": {
+    "stats": [
+      { "label": "heroes.col.heroAtk", "value": "4,989" },
+      { "label": "heroes.col.heroDef", "value": "4,106" },
+      { "label": "heroes.col.heroHp",  "value": "30,802" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Rosa/img_002.webp", "desc": "heroes.rosa.conq.s1.desc", "upgrade": "heroes.rosa.conq.s1.up" },
+      { "icon": "/img/heroes/Rosa/img_003.webp", "desc": "heroes.rosa.conq.s2.desc", "upgrade": "heroes.rosa.conq.s2.up" },
+      { "icon": "/img/heroes/Rosa/img_004.webp", "desc": "heroes.rosa.conq.s3.desc", "upgrade": "heroes.rosa.conq.s3.up" }
+    ]
+  },
+  "expedition": {
+    "stats": [
+      { "label": "heroes.col.archerAtk", "value": "+370.29%" },
+      { "label": "heroes.col.archerDef", "value": "+370.29%" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Rosa/img_005.webp", "desc": "heroes.rosa.exp.s1.desc", "upgrade": "heroes.rosa.exp.s1.up" },
+      { "icon": "/img/heroes/Rosa/img_006.webp", "desc": "heroes.rosa.exp.s2.desc", "upgrade": "heroes.rosa.exp.s2.up" },
+      { "icon": "/img/heroes/Rosa/img_007.webp", "desc": "heroes.rosa.exp.s3.desc", "upgrade": "heroes.rosa.exp.s3.up" }
+    ]
+  },
+  "exclusiveGear": {
+  "name": "heroes.rosa.gear.name",
+  "icon": "/img/heroes/Rosa/img_008.webp",
+  "stats": [
+    { "label": "heroes.col.power",         "value": "416,250" },
+    { "label": "heroes.col.heroAtk",       "value": "1,010" },
+    { "label": "heroes.col.heroDef",       "value": "832" },
+    { "label": "heroes.col.heroHp",        "value": "6,243" },
+    { "label": "heroes.col.guardAtk",      "value": "336" },
+    { "label": "heroes.col.guardDef",      "value": "277" },
+    { "label": "heroes.col.guardHp",       "value": "2,081" },
+    { "label": "heroes.col.archerMight",   "value": "+92.50%" },
+    { "label": "heroes.col.archerTroopHp", "value": "+92.50%" }
+  ],
+  "skills": [
+    {
+      "icon": "/img/heroes/Rosa/img_009.webp",
+      "type": "conquest",
+      "desc": "heroes.rosa.gear.s1.desc",
+      "upgrade": "heroes.rosa.gear.s1.up"
+    },
+    {
+      "icon": "/img/heroes/Rosa/img_010.webp",
+      "type": "expedition",
+      "desc": "heroes.rosa.gear.s2.desc",
+      "upgrade": "heroes.rosa.gear.s2.up"
+    }
+  ]
+}
+}
+
+,
+  {
+  "name": "Thrud",
+  "slug": "thrud",
+  "image": "/img/heroes/Thrud/img_001.webp",
+  "generation": 5,
+  "unit": "heroes.card.thrud.unit",
+  "title": "heroes.card.thrud.title",
+  "subtitle": "heroes.card.thrud.subtitle",
+  "summary": "heroes.card.thrud.summary",
+  "sources": [
+    "heroes.card.thrud.source.1",
+    "heroes.card.thrud.source.2",
+    "heroes.card.thrud.source.3",
+    "heroes.card.thrud.source.4",
+    "heroes.card.thrud.source.5"
+  ],
+
+  "conquest": {
+    "stats": [
+      { "label": "heroes.col.heroAtk", "value": "4,928" },
+      { "label": "heroes.col.heroDef", "value": "4,928" },
+      { "label": "heroes.col.heroHp",  "value": "49,284" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Thrud/img_002.webp", "desc": "heroes.thrud.conq.s1.desc", "upgrade": "heroes.thrud.conq.s1.up" },
+      { "icon": "/img/heroes/Thrud/img_003.webp", "desc": "heroes.thrud.conq.s2.desc", "upgrade": "heroes.thrud.conq.s2.up" },
+      { "icon": "/img/heroes/Thrud/img_004.webp", "desc": "heroes.thrud.conq.s3.desc", "upgrade": "heroes.thrud.conq.s3.up" }
+    ]
+  },
+
+  "expedition": {
+    "stats": [
+      { "label": "heroes.col.cavalryAtk", "value": "+444.35%" },
+      { "label": "heroes.col.cavalryDef", "value": "+444.35%" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Thrud/img_005.webp", "desc": "heroes.thrud.exp.s1.desc", "upgrade": "heroes.thrud.exp.s1.up" },
+      { "icon": "/img/heroes/Thrud/img_006.webp", "desc": "heroes.thrud.exp.s2.desc", "upgrade": "heroes.thrud.exp.s2.up" },
+      { "icon": "/img/heroes/Thrud/img_007.webp", "desc": "heroes.thrud.exp.s3.desc", "upgrade": "heroes.thrud.exp.s3.up" }
+    ]
+  }
+}
+
+,
+{
+  "name": "Alcar",
+  "slug": "alcar-5",
+  "image": "/img/heroes/Alcar/img_001.webp",
+  "generation": null,
+  "unit": "heroes.card.alcar.unit",
+  "title": "heroes.card.alcar.title",
+  "subtitle": "heroes.card.alcar.subtitle",
+  "summary": "heroes.card.alcar.summary",
+  "sources": [
+    "heroes.card.alcar.source.1",
+    "heroes.card.alcar.source.2",
+    "heroes.card.alcar.source.3",
+    "heroes.card.alcar.source.4",
+    "heroes.card.alcar.source.5"
+  ],
+  "conquest": {
+    "stats": [
+      { "label": "heroes.col.heroAtk", "value": "3,150" },
+      { "label": "heroes.col.heroDef", "value": "4,106" },
+      { "label": "heroes.col.heroHp",  "value": "61,604" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Alcar/img_002.webp", "desc": "heroes.alcar.conq.s1.desc", "upgrade": "heroes.alcar.conq.s1.up" },
+      { "icon": "/img/heroes/Alcar/img_003.webp", "desc": "heroes.alcar.conq.s2.desc", "upgrade": "heroes.alcar.conq.s2.up" },
+      { "icon": "/img/heroes/Alcar/img_004.webp", "desc": "heroes.alcar.conq.s3.desc", "upgrade": "heroes.alcar.conq.s3.up" }
+    ]
+  },
+  "expedition": {
+    "stats": [
+      { "label": "heroes.col.infantryAtk", "value": "+370.29%" },
+      { "label": "heroes.col.infantryDef", "value": "+370.29%" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Alcar/img_005.webp", "desc": "heroes.alcar.exp.s1.desc", "upgrade": "heroes.alcar.exp.s1.up" },
+      { "icon": "/img/heroes/Alcar/img_006.webp", "desc": "heroes.alcar.exp.s2.desc", "upgrade": "heroes.alcar.exp.s2.up" },
+      { "icon": "/img/heroes/Alcar/img_007.webp", "desc": "heroes.alcar.exp.s3.desc", "upgrade": "heroes.alcar.exp.s3.up" }
+    ]
+  },
+  "exclusiveGear": {
+    "name": "heroes.alcar.gear.name",
+    "icon": "/img/heroes/Alcar/img_008.webp",
+    "stats": [
+      { "label": "heroes.col.power",   "value": "416,250" },
+      { "label": "heroes.col.heroAtk", "value": "638" },
+      { "label": "heroes.col.heroDef", "value": "832" },
+      { "label": "heroes.col.heroHp",  "value": "12,487" },
+      { "label": "heroes.col.guardAtk","value": "212" },
+      { "label": "heroes.col.guardDef","value": "277" },
+      { "label": "heroes.col.guardHp", "value": "4,162" },
+      { "label": "heroes.col.infantryMight",   "value": "+92.50%" },
+      { "label": "heroes.col.infantryTroopHp", "value": "+92.50%" }
+    ],
+    "skills": [
+      {
+        "icon": "/img/heroes/Alcar/img_009.webp",
+        "type": "conquest",
+        "desc": "heroes.alcar.gear.s1.desc",
+        "upgrade": "heroes.alcar.gear.s1.up"
+      },
+      {
+        "icon": "/img/heroes/Alcar/img_010.webp",
+        "type": "expedition",
+        "desc": "heroes.alcar.gear.s2.desc",
+        "upgrade": "heroes.alcar.gear.s2.up"
+      }
+    ]
+  }
+}
+
+
+,
   {
   "name": "Rosa",
   "slug": "rosa",
