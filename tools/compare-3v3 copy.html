@@ -23,7 +23,7 @@
   .kv b{font-size:14px}
   .slider{width:100%}
   .cmp{border-top:1px dashed var(--bd);padding:10px 14px;color:#333;font-size:14px}
-  .cmp .muted{font-size:12px;color:#666}
+  .cmp .muted{font-size:12px;color:var(--muted)}
   .langBar{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
   .langSel{padding:6px 8px;border:1px solid var(--bd);border-radius:8px;font-size:13px;background:#fff;color:#111}
   .stepLabel{margin-right:6px}
@@ -455,7 +455,7 @@ function portraitUrl(heroKey){ return PORTRAIT_BASE + heroKey + '/img_001.webp';
 
 /* ================== 내장 데이터(SSR급 영웅 성장 공식) ================== */
 /* 세그먼트 공식: base + Σ(길이 × delta).
-   3세대 L30=290.23, 4세대 L30=370.29, 5세대 L30=444.35 (스루드/Gen5 앵커) */
+   3세대 L30=290.23, 4세대 L30=370.29, 5세대 L30=444.35 (스루드/롱페이/비비안 앵커) */
 const SEG = {
   // Gen1
   Helga:{base:25.25,seg:[[1,5,2.35],[6,6,4.23],[7,11,3.29],[12,12,5.92],[13,17,4.6069],[18,18,8.29],[19,23,6.4494],[24,24,11.61],[25,29,9.0294],[30,30,16.25]]},
@@ -538,23 +538,23 @@ function fillLastCycleFromGen2(name){
   });
 })();
 
-/* 5세대(Gen5) 생성: 4세대 패턴을 444.35%까지 스케일링 */
+/* 5세대(롱페이/스루드/비비안): 4세대 패턴을 444.35%까지 스케일링 */
 (function buildGen5(){
   const ref = SEG['Rosa'] || SEG['Margot'] || SEG['Alcar'];
   if (!ref) return;
-  const current = statAtSegments(ref,30); // 이건 370.29가 됨
+  const current = statAtSegments(ref,30); // 370.29
   const k = GEN5_L30 / current;          // ≒ 1.20배
 
-  ['Gen5Inf','Thrud','Gen5Arc'].forEach(n=>{
+  ['Longfei','Thrud','Vivian'].forEach(n=>{
     SEG[n] = {
       base: +(ref.base * k).toFixed(4),
       seg: ref.seg.map(([f,t,d])=>[f,t, +(d*k).toFixed(4)])
     };
-    anchorLevel(n,30,GEN5_L30);          // L30 = 444.35로 정확히 맞춤
+    anchorLevel(n,30,GEN5_L30);          // L30 = 444.35로 맞춤
   });
 })();
 
-/* ===== 메타(정정 + Gen5 더미/스루드 추가) ===== */
+/* ===== 메타(세대/병종/표시 이름) ===== */
 const META={
   Amadeus:{type:'infantry',gen:1,ko:'아마데우스'},
   Helga:{type:'infantry',gen:1,ko:'헬가'},
@@ -569,10 +569,10 @@ const META={
   Alcar:{type:'infantry',gen:4,ko:'알카르'},
   Margot:{type:'cavalry',gen:4,ko:'마르고'},
   Rosa:{type:'archer',gen:4,ko:'로사'},
-  // Gen5 (보병/궁병은 임시 이름 + 더미 키)
-  Gen5Inf:{type:'infantry',gen:5,ko:'시즌5 보병(가칭)'},
+  // Gen5 실제 영웅
+  Longfei:{type:'infantry',gen:5,ko:'롱페이'},
   Thrud:{type:'cavalry',gen:5,ko:'스루드'},
-  Gen5Arc:{type:'archer',gen:5,ko:'시즌5 궁병(가칭)'}
+  Vivian:{type:'archer',gen:5,ko:'비비안'}
 };
 
 /* ============ 코어/라벨 & 이름 ============ */
