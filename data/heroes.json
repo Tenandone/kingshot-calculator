@@ -101,8 +101,38 @@
       { "icon": "/img/heroes/Thrud/img_006.webp", "desc": "heroes.thrud.exp.s2.desc", "upgrade": "heroes.thrud.exp.s2.up" },
       { "icon": "/img/heroes/Thrud/img_007.webp", "desc": "heroes.thrud.exp.s3.desc", "upgrade": "heroes.thrud.exp.s3.up" }
     ]
-  }
+  },
+  "exclusiveGear": {
+  "name": "heroes.thrud.gear.name",
+  "icon": "/img/heroes/Thrud/img_008.webp",
+  "stats": [
+    { "label": "heroes.col.power",         "value": "499,500" },
+    { "label": "heroes.col.heroAtk",       "value": "999" },
+    { "label": "heroes.col.heroDef",       "value": "999" },
+    { "label": "heroes.col.heroHp",        "value": "9,990" },
+    { "label": "heroes.col.guardAtk",      "value": "333" },
+    { "label": "heroes.col.guardDef",      "value": "333" },
+    { "label": "heroes.col.guardHp",       "value": "3,330" },
+    { "label": "heroes.col.cavalryMight",  "value": "+111.00%" },
+    { "label": "heroes.col.cavalryTroopHp","value": "+111.00%" }
+  ],
+  "skills": [
+    {
+      "icon": "/img/heroes/Thrud/img_009.webp",
+      "type": "conquest",
+      "desc": "heroes.thrud.gear.s1.desc",
+      "upgrade": "heroes.thrud.gear.s1.up"
+    },
+    {
+      "icon": "/img/heroes/Thrud/img_010.webp",
+      "type": "expedition",
+      "desc": "heroes.thrud.gear.s2.desc",
+      "upgrade": "heroes.thrud.gear.s2.up"
+    }
+  ]
+}
 },
+
 {
   "name": "Longfei",
   "slug": "longfei",
