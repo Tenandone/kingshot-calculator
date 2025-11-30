@@ -57,7 +57,36 @@
         "upgrade": "heroes.vivian.exp.s3.up"
       }
     ]
-  }  
+  },
+  "exclusiveGear": {
+  "name": "heroes.vivian.gear.name",
+  "icon": "/img/heroes/Vivian/img_008.webp",
+  "stats": [
+    { "label": "heroes.col.power",          "value": "499,500" },
+    { "label": "heroes.col.heroAtk",        "value": "1,212" },
+    { "label": "heroes.col.heroDef",        "value": "999" },
+    { "label": "heroes.col.heroHp",         "value": "7,494" },
+    { "label": "heroes.col.guardAtk",       "value": "404" },
+    { "label": "heroes.col.guardDef",       "value": "333" },
+    { "label": "heroes.col.guardHp",        "value": "2,497" },
+    { "label": "heroes.col.archerMight",    "value": "+111.00%" },
+    { "label": "heroes.col.archerTroopHp",  "value": "+111.00%" }
+  ],
+  "skills": [
+    {
+      "icon": "/img/heroes/Vivian/img_009.webp",
+      "type": "conquest",
+      "desc": "heroes.vivian.gear.s1.desc",
+      "upgrade": "heroes.vivian.gear.s1.up"
+    },
+    {
+      "icon": "/img/heroes/Vivian/img_010.webp",
+      "type": "expedition",
+      "desc": "heroes.vivian.gear.s2.desc",
+      "upgrade": "heroes.vivian.gear.s2.up"
+    }
+  ]
+}  
 }
 
 ,
