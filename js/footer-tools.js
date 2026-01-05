@@ -115,22 +115,24 @@
     `;
 
     /* --- banner (LANG SAFE) --- */
-    const banner = document.createElement('div');
-    banner.className = 'footer-image-banner';
+const banner = document.createElement('div');
+banner.className = 'footer-image-banner';
 
-    const img = document.createElement('img');
-    img.loading = 'lazy';
-    img.alt = 'Top-up Guide Banner';
-    img.src = getLangSafe().startsWith('ko')
-      ? '/img/lootbarkr.png'
-      : '/img/lootbar.png';
+const img = document.createElement('img');
+img.loading = 'lazy';
+img.alt = 'Top-up Guide Banner';
 
-    const a = document.createElement('a');
-    a.href = '/pages/guides/topup-guide.html';
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.appendChild(img);
-    banner.appendChild(a);
+/* 🔥 언어 무관, 단일 배너 */
+img.src = '/img/lootbar.png';
+
+const a = document.createElement('a');
+a.href = 'https://lootbar.gg/ko/shop/ten/top-up/kingshot';
+a.target = '_blank';
+a.rel = 'noopener noreferrer';
+
+a.appendChild(img);
+banner.appendChild(a);
+
 
     /* --- mount order --- */
     container.innerHTML = '';
