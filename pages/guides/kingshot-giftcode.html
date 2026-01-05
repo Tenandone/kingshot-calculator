@@ -450,50 +450,67 @@ ol{margin:8px 0 0 18px}
       }
 
       coupons.forEach(c => {
-        const expired = isExpired(c.until);
-        const card = document.createElement('div');
-        card.className = 'card' + (expired ? ' expired' : '');
+  const expired = isExpired(c.until);
 
-        const left = document.createElement('div');
-        left.innerHTML = `
-          <div class="code">${(c.code||'').trim()}</div>
-          <div class="until">
-            ${isForever(c.until) ? foreverText(lang) : (T('until') + ': ' + fmtDate(c.until, lang))}
-            ${expired ? `<span class="badge expired">${T('expired')}</span>` : `<span class="badge active">${T('active')}</span>`}
-          </div>`;
+  const card = document.createElement('div');
+  card.className = 'card' + (expired ? ' expired' : '');
 
-        const actions = document.createElement('div');
-        actions.className = 'actions';
+  const left = document.createElement('div');
 
-        const btnCopy = document.createElement('button');
-        btnCopy.className = 'btn'; btnCopy.type = 'button'; btnCopy.textContent = T('copy');
-        btnCopy.disabled = expired;
-        btnCopy.addEventListener('click', async () => {
-          const code = (c.code||'').trim();
-          try { await navigator.clipboard.writeText(code); }
-          catch(_){
-            const ta=document.createElement('textarea');
-            ta.value=code; document.body.appendChild(ta);
-            ta.select(); document.execCommand('copy'); ta.remove();
-          }
-          btnCopy.textContent = T('copied');
-          setTimeout(()=>btnCopy.textContent=T('copy'), 1200);
-        });
+  const codeDiv = document.createElement('div');
+  codeDiv.className = 'code';
+  codeDiv.textContent = (c.code || '').trim();
 
-        const btnOpen = document.createElement('a');
-        btnOpen.className = 'btn';
-        btnOpen.href = 'https://ks-giftcode.centurygame.com/';
-        btnOpen.target = '_blank'; btnOpen.rel = 'noopener';
-        btnOpen.textContent = T('redeem');
-        if (expired) btnOpen.classList.add('disabled');
+  const untilDiv = document.createElement('div');
+  untilDiv.className = 'until';
+  untilDiv.textContent = isForever(c.until)
+    ? foreverText(lang)
+    : `${T('until')}: ${fmtDate(c.until, lang)}`;
 
-        actions.appendChild(btnCopy);
-        actions.appendChild(btnOpen);
+  left.appendChild(codeDiv);
+  left.appendChild(untilDiv);
 
-        card.appendChild(left);
-        card.appendChild(actions);
-        grid.appendChild(card);
-      });
+  const actions = document.createElement('div');
+  actions.className = 'actions';
+
+  const btnCopy = document.createElement('button');
+  btnCopy.className = 'btn';
+  btnCopy.type = 'button';
+  btnCopy.textContent = T('copy');
+  btnCopy.disabled = expired;
+
+  btnCopy.addEventListener('click', async () => {
+    const code = (c.code || '').trim();
+    try {
+      await navigator.clipboard.writeText(code);
+    } catch (_) {
+      const ta = document.createElement('textarea');
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    btnCopy.textContent = T('copied');
+    setTimeout(() => btnCopy.textContent = T('copy'), 1200);
+  });
+
+  const btnOpen = document.createElement('a');
+  btnOpen.className = 'btn';
+  btnOpen.href = 'https://ks-giftcode.centurygame.com/';
+  btnOpen.target = '_blank';
+  btnOpen.rel = 'noopener';
+  btnOpen.textContent = T('redeem');
+  if (expired) btnOpen.classList.add('disabled');
+
+  actions.appendChild(btnCopy);
+  actions.appendChild(btnOpen);
+
+  card.appendChild(left);
+  card.appendChild(actions);
+  grid.appendChild(card);
+});
+
     }
 
     // Init
