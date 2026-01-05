@@ -317,3 +317,23 @@ img { display:block }
   border-color:#FEE500 !important;
 }
 .tile-kakao .tit { color:#111; }
+/* Drawer Partner Banner */
+.partner-banner{
+  width:100%;
+  margin:8px 0 4px;
+  display:flex;
+  justify-content:center;
+}
+
+.partner-banner a{
+  display:block;
+  width:100%;
+  max-width:240px; /* drawer 폭 기준 */
+}
+
+.partner-banner img{
+  width:100%;
+  height:auto;      /* 🔥 절대 안 짤림 */
+  display:block;
+  border-radius:10px;
+}

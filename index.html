@@ -140,17 +140,23 @@
   </div> <!-- .nav-bar 끝 -->
 </header>
 
-  <!-- 
-<div class="sponsor-strip">
-  <div class="sponsor-track">
-    <div class="sponsor">
-      <span class="label" data-i18n="sponsor.info">정보 제공</span>
-      <a href="https://cafe.naver.com/kingshot1" target="_blank" rel="noopener">
-        <img src="/img/brand2.png" alt="네이버 카페">
-      </a>
-    </div>
+  <div class="header-brand-strip">
+  <div class="header-brand-track">
+    <a href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener">
+      <img src="/img/brand.png" alt="LootBar">
+    </a>
+
+    <a href="https://cafe.naver.com/kingshot1" target="_blank" rel="noopener">
+      <img src="/img/brand2.png" alt="Kingshot Cafe">
+    </a>
+
+    <a href="/home">
+      <img src="/img/logo-kingshotdata.png" alt="KingshotData">
+    </a>
   </div>
-</div> 👇 여기에 추가 -->
+</div>
+
+
     
 
 
@@ -216,45 +222,76 @@
         </a>
       </div>
 
-      <!-- 
-      <div class="rule"></div>
-      <div class="tile-grid">
-        <a class="tile" href="https://lootbar.gg/top-up/kingshot?utm_source=Affiliate&utm_medium=Affiliate&utm_campaign=rgmNLezsOc"
-           target="_blank" rel="noopener"
-           aria-label="Lootbar" data-i18n-attr="aria-label:brand.lootbar">
-          <img class="logo logo-lootbar" src="/img/brand.png?v=202509131858" alt="Lootbar">
-        </a>
-
-        <a class="tile" href="https://cafe.naver.com/kingshot1" target="_blank" rel="noopener"
-           aria-label="DataHub" data-i18n-attr="aria-label:brand.cafe">
-          <img class="logo logo-cafe" src="/img/brand2.png?v=202509131858" alt="">
-          
-        </a>
-      </div>
-    </div> 파트너 타일 -->
   </aside>
 
-  <!-- ===== Main / Footer ===== -->
-  <main class="container" id="main" role="main"
-        aria-label="Main content"
-        data-i18n-attr="aria-label:aria.main">
-    <div id="content" class="panel">
-      <noscript data-nosnippet data-i18n="misc.enableJs">자바스크립트를 활성화하세요. 콘텐츠가 표시됩니다.</noscript>
-    </div>
-  </main>
+<!-- ===== Main / Footer ===== -->
+<main class="container" id="main" role="main"
+      aria-label="Main content"
+      data-i18n-attr="aria-label:aria.main">
+  <div id="content" class="panel">
+    <noscript data-nosnippet data-i18n="misc.enableJs">
+      자바스크립트를 활성화하세요. 콘텐츠가 표시됩니다.
+    </noscript>
+  </div>
+</main>
 
-  <footer class="site-footer" role="contentinfo"
-          aria-label="Footer"
-          data-i18n-attr="aria-label:aria.footer">
-    <div class="container">
-      <div id="footerTools" class="footer-tools"></div>
-      <span data-i18n="footer.copyrightLine1">All game images and data are copyrighted by Century Games.</span><br />
-      <span data-i18n="footer.fansiteNotice">This site is an unofficial fan site.</span><br />
-      <span>© 2025 KingshotData Korea · </span>
-      <a href="/privacy/" data-i18n="footer.privacy">개인정보처리방침 / Privacy</a>
-      
-    </div>
-  </footer>
+<footer class="site-footer" role="contentinfo"
+        aria-label="Footer"
+        data-i18n-attr="aria-label:aria.footer">
+  <div class="container">
+
+    <!-- Footer Tools (쿠폰 → 버튼 → 배너는 JS에서 렌더링) -->
+    <div id="footerTools" class="footer-tools"></div>
+
+    <span data-i18n="footer.copyrightLine1">
+      All game images and data are copyrighted by Century Games.
+    </span><br />
+
+    <span data-i18n="footer.fansiteNotice">
+      This site is an unofficial fan site.
+    </span><br />
+
+    <span>© 2025 KingshotData Korea · </span>
+    <a href="/privacy/" data-i18n="footer.privacy">
+      개인정보처리방침 / Privacy
+    </a>
+
+  </div>
+</footer>
+
+
+<!-- 🔧 Language-based Banner Switch -->
+<script>
+(function(){
+  function updateLootbarBanner(){
+    const img = document.getElementById('lootbarBanner');
+    if (!img) return;
+
+    const lang =
+      window.I18N?.current ||
+      document.documentElement.getAttribute('lang') ||
+      'en';
+
+    // 한국어만 KR 배너, 나머지는 EN 배너
+    img.src = (lang === 'ko')
+      ? '/img/lootbarkr.png'
+      : '/img/lootbar.png';
+  }
+
+  document.addEventListener('DOMContentLoaded', updateLootbarBanner);
+
+  // 언어 변경 시 즉시 반영
+  if (window.I18N && typeof I18N.setLang === 'function') {
+    const _setLang = I18N.setLang.bind(I18N);
+    I18N.setLang = async function(lang){
+      await _setLang(lang);
+      updateLootbarBanner();
+    };
+  }
+})();
+</script>
+
+
 
   <script>
     // 드로어 토글

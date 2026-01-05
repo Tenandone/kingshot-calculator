@@ -1,51 +1,45 @@
-/* ===== Sponsor Strip (1200px 컨테이너 안 맞춤) ===== */
-.sponsor-strip {
-  max-width: 1200px;
-  margin: 0 auto;
-  overflow: hidden;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  background: #fafafa;
-  padding: 6px 0;
-  position: relative;
+/* ===== Header Brand Strip ===== */
+.header-brand-strip{
+  width:100%;                 /* 🔥 사이트 전체 폭 */
+  overflow:hidden;
+  position:relative;
 }
 
-/* 트랙: 아이템들을 가로로 나열 + 무한 스크롤 */
-.sponsor-track {
-  display: inline-flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: nowrap;
-  animation: scroll-left 40s linear infinite;
+/* 이동 트랙 */
+.header-brand-track{
+  display:flex;
+  align-items:center;
+  gap:24px;                   /* 간격 살짝 넓힘 */
+  animation: brand-scroll 22s linear infinite;
   will-change: transform;
 }
 
-/* 칩 */
-.sponsor {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: #444;
-  padding: 2px 6px;       /* 살짝만 여백 */
+/* 개별 로고 */
+.header-brand-track a{
+  display:flex;
+  align-items:center;
+  flex:0 0 auto;
 }
 
-.sponsor .label {
-  font-weight: 600;
-  color: #777;
-  font-size: 12px;
+.header-brand-track img{
+  height:28px;                /* 🔥 사이즈 업 (기존 22px) */
+  width:auto;
+  object-fit:contain;
+  display:block;
+
+  border-radius:10px;         /* 둥글게 */
+  padding:4px 10px;
+  background:#fff;
+  border:1px solid #eee;
 }
 
-.sponsor img {
-  height: 20px;
-  object-fit: contain;
-  display: block;
+/* hover */
+.header-brand-track a:hover img{
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
 }
 
-
-/* === 애니메이션: 트랙 전체 이동만 적용 === */
-@keyframes scroll-left {
-  0%   { transform: translateX(1040px); }
-  100% { transform: translateX(-1040px); }
+/* ===== 좌 → 우 전체 폭 이동 ===== */
+@keyframes brand-scroll{
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100vw); }
 }

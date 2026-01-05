@@ -1,27 +1,92 @@
 /* Footer Tools (top of footer) */
-.footer-tools{max-width:960px;margin:0 auto 12px;display:flex;flex-direction:column;align-items:center;gap:10px}
-.footer-ctas{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.footer-tools{
+  max-width:960px;
+  margin:0 auto 12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px
+}
+
+.footer-ctas{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center
+}
+
 .footer-ctas a{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:10px 14px;border-radius:999px;border:1px solid #e5e7eb;
-  background:#fff;color:#111;font-size:14px;line-height:1;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  color:#111;
+  font-size:14px;
+  line-height:1;
   box-shadow:0 1px 2px rgba(0,0,0,.04);
   transition:transform .05s ease, box-shadow .15s ease, background .2s ease;
 }
-.footer-ctas a:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(0,0,0,.06)}
-.footer-ctas a:active{transform:translateY(0)}
+
+.footer-ctas a:hover{
+  transform:translateY(-1px);
+  box-shadow:0 4px 10px rgba(0,0,0,.06)
+}
+
 .footer-ctas .kakao{background:#FEE500}
-.footer-ctas .kakao:hover{box-shadow:0 4px 10px rgba(0,0,0,.08)}
 .footer-ctas svg{width:18px;height:18px;flex:0 0 18px}
-.footer-coupons{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+
+/* Coupons */
+.footer-coupons{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px
+}
+
 .footer-coupon{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:10px 12px;border:1px dashed #e5e7eb;border-radius:12px;background:#fff;color:#111;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 12px;
+  border:1px dashed #e5e7eb;
+  border-radius:12px;
+  background:#fff;
+  color:#111;
 }
-.footer-coupon .code{font-weight:700;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
-.footer-coupon .until{font-size:12px;color:#666}
-.footer-coupons .empty{grid-column:1/-1;text-align:center;color:#666;font-size:14px;padding:6px 0}
-@media (max-width:768px){
-  .footer-coupons{grid-template-columns:1fr}
-  .footer-ctas a{width:100%;justify-content:center}
+
+.footer-coupon .code{
+  font-weight:700;
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace
 }
+
+.footer-coupon .until{
+  font-size:12px;
+  color:#666
+}
+
+.footer-coupons .empty{
+  grid-column:1/-1;
+  text-align:center;
+  color:#666;
+  font-size:14px;
+  padding:6px 0
+}
+
+/* 🔹 Footer Image Banner (정답) */
+.footer-image-banner{
+  width:100%;
+  max-width:960px;
+  margin:20px auto 14px;
+}
+
+.footer-image-banner img{
+  width:100%;
+  height:auto;        /* 🔥 이게 핵심 */
+  display:block;
+  border-radius:10px;
+}
+
