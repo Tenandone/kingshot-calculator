@@ -89,4 +89,12 @@
   display:block;
   border-radius:10px;
 }
+/* 🔹 AdPick만 좌우 폭 확장 */
+.footer-adpick{
+  width:100vw;                 /* 화면 전체 기준 */
+  max-width:600px;            /* 너무 과하지 않게 상한 */
+  margin:12px auto 0;
+  padding:0 16px;              /* 모바일 좌우 여백 */
+  box-sizing:border-box;
+}
 

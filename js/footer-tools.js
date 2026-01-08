@@ -1,4 +1,4 @@
-/* footer-tools.js (FINAL — coupons → CTAs → banner → adpick, lang-safe) */
+/* footer-tools.js (FINAL — coupons → CTAs → banner → adpick (KO only), lang-safe) */
 ;(() => {
   'use strict';
 
@@ -80,6 +80,8 @@
     const container = document.getElementById('footerTools');
     if (!container) return;
 
+    const lang = getLangSafe();
+
     /* --- coupons --- */
     const couponWrap = document.createElement('div');
     couponWrap.className = 'footer-coupons';
@@ -131,27 +133,29 @@
     a.appendChild(img);
     banner.appendChild(a);
 
-    /* --- AdPick native (NO TEXT) --- */
-    const adpick = document.createElement('div');
-    adpick.className = 'footer-adpick';
-    adpick.innerHTML = `
-      <iframe
-        src="https://www.adpick.co.kr/nativeAD/ad.php?bannerType=type1&limit=1&affid=fb05e3&frameId=AdpickFooter&popup=false"
-        width="100%"
-        frameborder="0"
-        scrolling="no"
-        data-adpick_nativeAD
-        id="AdpickFooter"
-        referrerpolicy="unsafe-url"></iframe>
-      <script src="https://www.adpick.co.kr/nativeAD/script.js" async></script>
-    `;
-
     /* --- mount order --- */
     container.innerHTML = '';
     container.appendChild(couponWrap); // 1️⃣ 쿠폰
     container.appendChild(ctas);       // 2️⃣ CTA
     container.appendChild(banner);     // 3️⃣ 루트바
-    container.appendChild(adpick);     // 4️⃣ 애드픽 (서브)
+
+    /* --- AdPick native (KOREAN ONLY) --- */
+    if (lang.startsWith('ko')) {
+      const adpick = document.createElement('div');
+      adpick.className = 'footer-adpick';
+      adpick.innerHTML = `
+        <iframe
+          src="https://www.adpick.co.kr/nativeAD/ad.php?bannerType=type1&limit=1&affid=fb05e3&frameId=AdpickFooter&popup=false"
+          width="100%"
+          frameborder="0"
+          scrolling="no"
+          data-adpick_nativeAD
+          id="AdpickFooter"
+          referrerpolicy="unsafe-url"></iframe>
+        <script src="https://www.adpick.co.kr/nativeAD/script.js" async></script>
+      `;
+      container.appendChild(adpick);   // 4️⃣ 애드픽 (한국어만)
+    }
   }
 
   if (document.readyState === 'loading') {
