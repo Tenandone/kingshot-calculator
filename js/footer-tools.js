@@ -1,4 +1,4 @@
-/* footer-tools.js (FINAL — coupons → CTAs → banner → adpick(KO) / ezoic(!KO)) */
+/* footer-tools.js (FINAL — coupons → CTAs → LootBar → TEMU → AdPick/Ezoic) */
 ;(() => {
   'use strict';
 
@@ -81,6 +81,7 @@
     if (!container) return;
 
     const lang = getLangSafe();
+    container.innerHTML = '';
 
     /* --- coupons --- */
     const couponWrap = document.createElement('div');
@@ -116,34 +117,36 @@
       </a>
     `;
 
-    /* --- LootBar banner (ALL LANG) --- */
-    const banner = document.createElement('div');
-    banner.className = 'footer-image-banner';
+    /* --- LootBar --- */
+    const lootbar = document.createElement('div');
+    lootbar.className = 'footer-image-banner';
+    lootbar.innerHTML = `
+      <a href="https://lootbar.gg/ko/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">
+        <img src="/img/lootbar.png" alt="Top-up Guide Banner" loading="lazy">
+      </a>
+    `;
 
-    const img = document.createElement('img');
-    img.loading = 'lazy';
-    img.alt = 'Top-up Guide Banner';
-    img.src = '/img/lootbar.png';
+    /* --- TEMU --- */
+    const temu = document.createElement('div');
+    temu.className = 'footer-temu';
+    temu.innerHTML = `
+      <a href="https://bitl.bz/NNrlMs" target="_blank" rel="nofollow noopener">
+        <img
+          src="${lang.startsWith('ko')
+            ? '/img/temu-banner-kr.avif'
+            : '/img/temu-banner-en.avif'}"
+          alt="Recommended Shopping Deals"
+          loading="lazy">
+      </a>
+    `;
 
-    const a = document.createElement('a');
-    a.href = 'https://lootbar.gg/ko/shop/ten/top-up/kingshot';
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
+    /* --- Ads --- */
+    let ads = null;
 
-    a.appendChild(img);
-    banner.appendChild(a);
-
-    /* --- mount common --- */
-    container.innerHTML = '';
-    container.appendChild(couponWrap); // 1️⃣ 쿠폰
-    container.appendChild(ctas);       // 2️⃣ CTA
-    container.appendChild(banner);     // 3️⃣ 루트바 배너
-
-    /* --- KO: AdPick --- */
     if (lang.startsWith('ko')) {
-      const adpick = document.createElement('div');
-      adpick.className = 'footer-adpick';
-      adpick.innerHTML = `
+      ads = document.createElement('div');
+      ads.className = 'footer-adpick';
+      ads.innerHTML = `
         <iframe
           src="https://www.adpick.co.kr/nativeAD/ad.php?bannerType=type1&limit=1&affid=fb05e3&frameId=AdpickFooter&popup=false"
           width="100%"
@@ -154,14 +157,10 @@
           referrerpolicy="unsafe-url"></iframe>
         <script src="https://www.adpick.co.kr/nativeAD/script.js" async></script>
       `;
-      container.appendChild(adpick);
-    }
-
-    /* --- NON-KO: Ezoic --- */
-    if (!/^ko/i.test(lang)) {
-      const ez = document.createElement('div');
-      ez.className = 'footer-ezoic';
-      ez.innerHTML = `
+    } else {
+      ads = document.createElement('div');
+      ads.className = 'footer-ezoic';
+      ads.innerHTML = `
         <div id="ezoic-pub-ad-placeholder-101"></div>
         <script>
           window.ezstandalone = window.ezstandalone || {};
@@ -171,8 +170,14 @@
           });
         <\/script>
       `;
-      container.appendChild(ez);
     }
+
+    /* --- mount in correct order --- */
+    container.appendChild(couponWrap);
+    container.appendChild(ctas);
+    container.appendChild(lootbar);
+    container.appendChild(temu);
+    container.appendChild(ads);
   }
 
   if (document.readyState === 'loading') {

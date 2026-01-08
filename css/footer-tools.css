@@ -76,7 +76,7 @@
   padding:6px 0
 }
 
-/* 🔹 Footer Image Banner (정답) */
+/* 🔹 LootBar Banner */
 .footer-image-banner{
   width:100%;
   max-width:960px;
@@ -85,16 +85,45 @@
 
 .footer-image-banner img{
   width:100%;
-  height:auto;        /* 🔥 이게 핵심 */
+  height:auto;
   display:block;
-  border-radius:10px;
+  border-radius:12px;
 }
-/* 🔹 AdPick만 좌우 폭 확장 */
+
+/* 🔹 TEMU Banner (LootBar와 시각적 통일) */
+.footer-temu{
+  width:100%;
+  max-width:960px;
+  margin:14px auto 10px;
+}
+
+.footer-temu img{
+  width:100%;
+  height:auto;
+  max-height:140px;          /* 🔥 세로만 줄이기 */
+  object-fit:cover;          /* 가로 유지 + 세로 크롭 */
+  display:block;
+  border-radius:12px;        /* 🔥 루트바와 동일 */
+}
+
+/* 🔹 AdPick (둥글게 + 안정감) */
 .footer-adpick{
-  width:100vw;                 /* 화면 전체 기준 */
-  max-width:600px;            /* 너무 과하지 않게 상한 */
+  width:100vw;
+  max-width:600px;
   margin:12px auto 0;
-  padding:0 16px;              /* 모바일 좌우 여백 */
+  padding:0 16px;
   box-sizing:border-box;
 }
 
+.footer-adpick iframe{
+  border-radius:12px;        /* 🔥 핵심 */
+  overflow:hidden;
+  background:#fff;
+}
+
+/* 모바일 보정 */
+@media (max-width:768px){
+  .footer-temu img{
+    max-height:110px;
+  }
+}
