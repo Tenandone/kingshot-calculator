@@ -1,4 +1,4 @@
-/* footer-tools.js (FINAL — coupons → CTAs → banner → adpick (KO only), lang-safe) */
+/* footer-tools.js (FINAL — coupons → CTAs → banner → adpick(KO) / ezoic(!KO)) */
 ;(() => {
   'use strict';
 
@@ -116,7 +116,7 @@
       </a>
     `;
 
-    /* --- LootBar banner --- */
+    /* --- LootBar banner (ALL LANG) --- */
     const banner = document.createElement('div');
     banner.className = 'footer-image-banner';
 
@@ -133,13 +133,13 @@
     a.appendChild(img);
     banner.appendChild(a);
 
-    /* --- mount order --- */
+    /* --- mount common --- */
     container.innerHTML = '';
     container.appendChild(couponWrap); // 1️⃣ 쿠폰
     container.appendChild(ctas);       // 2️⃣ CTA
-    container.appendChild(banner);     // 3️⃣ 루트바
+    container.appendChild(banner);     // 3️⃣ 루트바 배너
 
-    /* --- AdPick native (KOREAN ONLY) --- */
+    /* --- KO: AdPick --- */
     if (lang.startsWith('ko')) {
       const adpick = document.createElement('div');
       adpick.className = 'footer-adpick';
@@ -154,7 +154,24 @@
           referrerpolicy="unsafe-url"></iframe>
         <script src="https://www.adpick.co.kr/nativeAD/script.js" async></script>
       `;
-      container.appendChild(adpick);   // 4️⃣ 애드픽 (한국어만)
+      container.appendChild(adpick);
+    }
+
+    /* --- NON-KO: Ezoic --- */
+    if (!/^ko/i.test(lang)) {
+      const ez = document.createElement('div');
+      ez.className = 'footer-ezoic';
+      ez.innerHTML = `
+        <div id="ezoic-pub-ad-placeholder-101"></div>
+        <script>
+          window.ezstandalone = window.ezstandalone || {};
+          ezstandalone.cmd = ezstandalone.cmd || [];
+          ezstandalone.cmd.push(function () {
+            ezstandalone.showAds(101);
+          });
+        <\/script>
+      `;
+      container.appendChild(ez);
     }
   }
 
