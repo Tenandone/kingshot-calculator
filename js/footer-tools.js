@@ -1,4 +1,4 @@
-/* footer-tools.js (FINAL — coupons → CTAs → banner, lang-safe) */
+/* footer-tools.js (FINAL — coupons → CTAs → banner → adpick, lang-safe) */
 ;(() => {
   'use strict';
 
@@ -114,31 +114,44 @@
       </a>
     `;
 
-    /* --- banner (LANG SAFE) --- */
-const banner = document.createElement('div');
-banner.className = 'footer-image-banner';
+    /* --- LootBar banner --- */
+    const banner = document.createElement('div');
+    banner.className = 'footer-image-banner';
 
-const img = document.createElement('img');
-img.loading = 'lazy';
-img.alt = 'Top-up Guide Banner';
+    const img = document.createElement('img');
+    img.loading = 'lazy';
+    img.alt = 'Top-up Guide Banner';
+    img.src = '/img/lootbar.png';
 
-/* 🔥 언어 무관, 단일 배너 */
-img.src = '/img/lootbar.png';
+    const a = document.createElement('a');
+    a.href = 'https://lootbar.gg/ko/shop/ten/top-up/kingshot';
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
 
-const a = document.createElement('a');
-a.href = 'https://lootbar.gg/ko/shop/ten/top-up/kingshot';
-a.target = '_blank';
-a.rel = 'noopener noreferrer';
+    a.appendChild(img);
+    banner.appendChild(a);
 
-a.appendChild(img);
-banner.appendChild(a);
-
+    /* --- AdPick native (NO TEXT) --- */
+    const adpick = document.createElement('div');
+    adpick.className = 'footer-adpick';
+    adpick.innerHTML = `
+      <iframe
+        src="https://www.adpick.co.kr/nativeAD/ad.php?bannerType=type1&limit=1&affid=fb05e3&frameId=AdpickFooter&popup=false"
+        width="100%"
+        frameborder="0"
+        scrolling="no"
+        data-adpick_nativeAD
+        id="AdpickFooter"
+        referrerpolicy="unsafe-url"></iframe>
+      <script src="https://www.adpick.co.kr/nativeAD/script.js" async></script>
+    `;
 
     /* --- mount order --- */
     container.innerHTML = '';
     container.appendChild(couponWrap); // 1️⃣ 쿠폰
-    container.appendChild(ctas);       // 2️⃣ 버튼
-    container.appendChild(banner);     // 3️⃣ 배너
+    container.appendChild(ctas);       // 2️⃣ CTA
+    container.appendChild(banner);     // 3️⃣ 루트바
+    container.appendChild(adpick);     // 4️⃣ 애드픽 (서브)
   }
 
   if (document.readyState === 'loading') {
