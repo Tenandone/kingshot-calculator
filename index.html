@@ -87,12 +87,12 @@
   document.documentElement.setAttribute('lang', lang);
   try { localStorage.setItem('lang', lang); } catch(_){}
 
-  if (window.I18N?.apply) {
-    I18N.apply(document.body); // 즉시 DOM 갱신
-  }
+  const url = new URL(window.location.href);
+  url.searchParams.set('lang', lang);
 
-  location.reload(); // 그 다음 페이지 전체 새로고침
+  window.location.href = url.toString(); // ✅ 정상 페이지 이동
 }
+
 
   </script>
 
@@ -338,18 +338,7 @@
     function getCurrentLang(){
       if (window.I18N?.current) return I18N.current;
       return document.documentElement.getAttribute('lang') || 'en';
-    }
-
-    async function applyLang(lang){
-      if (window.I18N?.setLang) await I18N.setLang(lang);
-      document.documentElement.setAttribute('lang', lang);
-      try { localStorage.setItem('lang', lang); } catch(_){}
-      // 히스토리 모드에 맞게 라우터 갱신 트리거
-      try {
-        if (window.navigate) window.navigate(location.pathname, { replace: true });
-        else window.dispatchEvent(new PopStateEvent('popstate'));
-      } catch(_) {}
-    }
+    }   
 
     function mountPlainDropdown(containerId, menuId){
       const root = document.getElementById(containerId);
