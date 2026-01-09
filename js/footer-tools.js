@@ -1,4 +1,4 @@
-/* footer-tools.js (FINAL — coupons → CTAs → LootBar → TEMU → AdPick/Ezoic) */
+/* footer-tools.js (FINAL — coupons → CTAs → LootBar → TEMU → AdPick) */
 ;(() => {
   'use strict';
 
@@ -132,20 +132,17 @@
     temu.innerHTML = `
       <a href="https://bitl.bz/NNrlMs" target="_blank" rel="nofollow noopener">
         <img
-          src="${lang.startsWith('ko')
-            ? '/img/temu-banner-kr.avif'
-            : '/img/temu-banner-en.avif'}"
+          src="${lang.startsWith('ko') ? '/img/temu-banner-kr.avif' : '/img/temu-banner-en.avif'}"
           alt="Recommended Shopping Deals"
           loading="lazy">
       </a>
     `;
 
-    /* --- Ads --- */
-    let ads = null;
+    /* --- Ads (AdPick only, Ezoic removed) --- */
+    const ads = document.createElement('div');
+    ads.className = 'footer-ad';
 
     if (lang.startsWith('ko')) {
-      ads = document.createElement('div');
-      ads.className = 'footer-adpick';
       ads.innerHTML = `
         <iframe
           src="https://www.adpick.co.kr/nativeAD/ad.php?bannerType=type1&limit=1&affid=fb05e3&frameId=AdpickFooter&popup=false"
@@ -158,18 +155,7 @@
         <script src="https://www.adpick.co.kr/nativeAD/script.js" async></script>
       `;
     } else {
-      ads = document.createElement('div');
-      ads.className = 'footer-ezoic';
-      ads.innerHTML = `
-        <div id="ezoic-pub-ad-placeholder-101"></div>
-        <script>
-          window.ezstandalone = window.ezstandalone || {};
-          ezstandalone.cmd = ezstandalone.cmd || [];
-          ezstandalone.cmd.push(function () {
-            ezstandalone.showAds(101);
-          });
-        <\/script>
-      `;
+      ads.innerHTML = ''; // 해외 트래픽 광고 비워둠 (Raptive 대비)
     }
 
     /* --- mount in correct order --- */
