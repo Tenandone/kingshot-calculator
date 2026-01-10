@@ -22,12 +22,20 @@
     });
     return el;
   }
+
   const stepKeys = (steps) => Object.keys(steps);
   const slug = (s) => String(s).replace(/\s+/g, '-');
 
+  // ===== 라벨 정규화(공백/괄호 형태 차이로 매핑 누락 방지) =====
+  function normLabel(s) {
+    return String(s || '')
+      .replace(/\s+/g, ' ')
+      .replace(/\s*\(\s*/g, ' (')
+      .replace(/\s*\)\s*/g, ')')
+      .trim();
+  }
+
   // ====== (중요) KO 단계라벨 → i18n 키 매핑 기본 제공 ======
-  // 원본 JSON이 한국어 키를 쓰는 경우를 커버하기 위한 기본 매핑.
-  // 외부(opt.tierKeyMap)로 들어오면 아래 기본값과 merge해서 사용함.
   function buildTierKeyMapKO() {
     const map = {};
     function add(base, code, stars) {
@@ -36,6 +44,7 @@
         map[`${base} (★${i})`] = `calcGear.tiers.${code}_${i}`;
       }
     }
+
     add('고급', 'basic', 1);
 
     add('레어', 'rare', 3);
@@ -43,10 +52,16 @@
     add('에픽', 'epic', 3);
     add('에픽 T1', 'epicT1', 3);
 
+    // 레전드 + 레전더리 둘 다 커버
     add('레전드', 'legendaryary', 3);
     add('레전드 T1', 'legendaryaryT1', 3);
     add('레전드 T2', 'legendaryaryT2', 3);
     add('레전드 T3', 'legendaryaryT3', 3);
+
+    add('레전더리', 'legendaryary', 3);
+    add('레전더리 T1', 'legendaryaryT1', 3);
+    add('레전더리 T2', 'legendaryaryT2', 3);
+    add('레전더리 T3', 'legendaryaryT3', 3);
 
     add('신화', 'mythic', 3);
     add('신화 T1', 'mythicT1', 3);
@@ -54,9 +69,13 @@
     add('신화 T3', 'mythicT3', 3);
     add('신화 T4', 'mythicT4', 3);
 
+    // 신화 상위 티어
+    add('신화 T5', 'mythicT5', 3);
+    add('신화 T6', 'mythicT6', 3);
+
     return map;
   }
-  // 전역에서도 재사용 가능하도록 노출(부모 라우터가 전달해서 쓰고 싶다면 활용)
+
   window.TIER_KEY_MAP_KO = window.TIER_KEY_MAP_KO || buildTierKeyMapKO();
 
   // 단계 구간 합산 (현재 다음 단계부터 목표 단계 "포함"해서 합산)
@@ -100,7 +119,6 @@
       ],
       stepsMap = null,
       slotClasses: slotClassesInput,
-      // 외부에서 tierKeyMap을 주면 기본(KO) 매핑과 병합하여 사용
       tierKeyMap: tierKeyMapExternal
     } = opt || {};
 
@@ -261,11 +279,20 @@
     function getTierLabelByIndex(keys, idx) {
       const k = keys[idx];
       const node = gear.steps[k];
+
       // (1) 데이터에 code/tierCode가 있으면 최우선 사용
       const code = node && (node.code || node.tierCode);
       if (code) return T('calcGear.tiers.' + code);
-      // (2) KO 원본 키 → i18n 키 매핑 사용
-      const rawLabel = k;
+
+      // (2) rawLabel 정규화 + EN(i18n키) 직접 번역 처리 + KO 매핑 처리
+      const rawLabel = normLabel(k);
+
+      // ✅ EN steps가 "calcGear.tiers.xxx" 형태면 바로 번역 태움
+      if (rawLabel.startsWith('calcGear.tiers.')) {
+        return T(rawLabel);
+      }
+
+      // ✅ KO 원본 키 → i18n 키 매핑 사용
       const i18nKey = tierMap[rawLabel];
       return i18nKey ? T(i18nKey) : rawLabel;
     }
@@ -449,15 +476,24 @@
     const keys = stepKeys(S.gear.steps);
     const keepFrom = parseInt(fromSel.value || '0', 10);
     const keepTo   = parseInt(toSel.value   || String(keys.length - 1), 10);
+
     const getTierLabelByIndex = (ks, idx) => {
       const k = ks[idx];
       const node = S.gear.steps[k];
       const code = node && (node.code || node.tierCode);
       if (code) return T('calcGear.tiers.' + code);
-      const raw = k;
+
+      const raw = normLabel(k);
+
+      // ✅ EN steps가 i18n 키면 바로 번역
+      if (raw.startsWith('calcGear.tiers.')) {
+        return T(raw);
+      }
+
       const i18nKey = (tierKeyMap || {})[raw];
       return i18nKey ? T(i18nKey) : raw;
     };
+
     fromSel.innerHTML = '';
     toSel.innerHTML   = '';
     keys.forEach((_, idx) => {
@@ -465,6 +501,7 @@
       fromSel.appendChild(h('option', { value: String(idx), text: lbl }));
       toSel.appendChild(h('option',   { value: String(idx), text: lbl }));
     });
+
     fromSel.value = String(Math.max(0, Math.min(keepFrom, keys.length - 1)));
     toSel.value   = String(Math.max(0, Math.min(keepTo,   keys.length - 1)));
 

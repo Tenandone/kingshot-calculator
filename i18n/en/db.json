@@ -9,40 +9,52 @@
       },
       "timeline": {
         "title": "Server Age Timeline",
-        "caption": "Content unlocked by server age (approximate)",
-        "when": {
-          "d0": "Day 0",
-          "d14": "Day 14",
-          "d38": "Day 38",
-          "d40_50": "Day 40–50",
-          "d45": "Day 45",
-          "d54": "Day 54",
-          "d55_60": "Day 55–60",
-          "d70": "Day 70",
-          "d75_80": "Day 75–80",
-          "d70_80": "Day 70–80",
-          "d105_110": "Day 105–110",
-          "d105_120": "Day 105–120",
-          "d150": "Day 150",
-          "d170_180": "Day 170–180"
-        },
-        "what": {
-          "d0": "Generation 1 Heroes",
-          "d14": "Plains Fog Removal",
-          "d38": "Okto Fog Removal",
-          "d40_50": "Generation 2 Heroes",
-          "d45": "Alliance Resource Exchange",
-          "d54": "First Castle Battle",
-          "d55_60": "Generation 1 Pets",
-          "d70": "Truegold Age (Golden Age)",
-          "d75_80": "Generation 2 Pets",
-          "d70_80": "Kingdom qualifies for Strongest Kingdom (SvS)",
-          "d105_110": "Generation 3 Pets",
-          "d105_120": "Generation 3 Heroes",
-          "d150": "Truegold Level 5 and Golden Crucible",
-          "d170_180": "Generation 4 Heroes"
-        }
-      },
+        "caption": "Server Age Unlock Schedule",
+
+  "when": {
+    "d0": "Day 0",
+    "d14": "Day 14",
+    "d38": "Day 38",
+    "d40": "Day 40",
+    "d45": "Day 45",
+    "d54": "Day 54",
+    "d55": "Day 55",
+    "d60_70": "Day 60–70",
+    "d70": "Day 70",
+    "d75_80": "Day 75–80",
+    "d80": "Day 80",
+    "d100_110": "Day 100–110",
+    "d100_120": "Day 100–120",
+    "d150": "Day 150",
+    "d190_200": "Day 190–200",
+    "d220_230": "Day 220–230",
+    "d260_280": "Day 260–280",
+    "d310_320": "Day 310–320",
+    "d360_plus": "Day 360+"
+  },
+
+  "what": {
+    "d0": "Generation 1 Heroes Unlocked",
+    "d14": "Plains Area Fog Cleared",
+    "d38": "Octo Area Fog Cleared",
+    "d40": "Generation 2 Heroes Unlocked",
+    "d45": "Alliance Resource Exchange Unlocked",
+    "d54": "First Castle Battle",
+    "d55": "Generation 1 Pets Unlocked",
+    "d60_70": "Truegold Content Begins (Lv.1–3)",
+    "d70": "Age of Truegold (Golden Age)",
+    "d75_80": "Generation 2 Pets Unlocked",
+    "d80": "Strongest Kingdom (SvS) / Supreme Governor Available",
+    "d100_110": "Generation 3 Pets Unlocked",
+    "d100_120": "Generation 3 Heroes Unlocked",
+    "d150": "Truegold Lv.4–5 & Golden Crucible Unlocked",
+    "d190_200": "Generation 4 Pets & Generation 4 Heroes Unlocked",
+    "d220_230": "War Academy (Truegold Research) Unlocked",
+    "d260_280": "Generation 5 Heroes & Generation 5 Pets Unlocked",
+    "d310_320": "Truegold Lv.8 Unlocked",
+    "d360_plus": "Generation 6 Heroes Unlocked (Schedule TBD)"
+  }
+},
       "calc": {
         "title": "How to Calculate Server Age",
         "vip": {
@@ -215,10 +227,14 @@
         "title": "Required Materials · Attributes · Power by Level"
       },
       "col": {
-        "manual": "Charm Manual",
-        "blueprint": "Charm Blueprint"
+      "level": "Level",
+      "attribute": "Attribute",
+      "power": "Power",
+      "manual": "Charm Manual",
+      "blueprint": "Charm Blueprint"
       }
     },
+    
     "governorGear": {
       "title": "Governor Gear",
       "desc": "Governor Gear unlocks at Town Center Level 22 and serves as a key system to craft and enhance powerful equipment, greatly boosting combat power.",
@@ -259,7 +275,9 @@
         "mythicT1": "Mythic T1",
         "mythicT2": "Mythic T2",
         "mythicT3": "Mythic T3",
-        "mythicT4": "Mythic T4"
+        "mythicT4": "Mythic T4",
+        "mythicT5": "Mythic T5",
+    "mythicT6": "Mythic T6"
       }
     },
     "heroGearEnhance": {

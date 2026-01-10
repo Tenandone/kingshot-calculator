@@ -1,12 +1,11 @@
-<!-- pages/calculator.html (i18n-ready FIXED FINAL) -->
+<!-- pages/calculator.html (i18n-ready FIXED FINAL | TG8(=Lv70) + max 70 반영) -->
 <!doctype html>
 <html lang="ko" dir="ltr">
 <head>
   <meta charset="utf-8">
 
   <!-- i18n 네임스페이스 지정 -->
-<meta name="i18n-ns" content="common,calc">
-
+  <meta name="i18n-ns" content="common,calc">
 
   <!-- FIX: 다국어/서브디렉터리에서도 SPA 라우터로 안정적으로 넘기고, 쿼리/해시를 보존 -->
   <script>
@@ -32,7 +31,6 @@
         window.location.replace(newUrl);
       }
     } catch (e) {
-      // 콘솔 경고만, 동작 막지 않음
       console && console.warn && console.warn('[calc redirect]', e);
     }
   })();
@@ -45,13 +43,9 @@
   <meta name="description" content="calc.desc">
 
   <title data-i18n="calc.meta.title">Kingshot 건물 계산기</title>
- 
 </head>
-<body>
-  <!-- (선택) h1 동기화가 필요하면 주석 해제
-  <h1 id="page-title" data-i18n="calc.title" class="visually-hidden">건물 계산기</h1>
-  -->
 
+<body>
   <main id="calc-ui" class="calc-wrap" aria-labelledby="calc-title">
     <section class="calc-card">
       <h2 id="calc-title" class="calc-title" data-i18n="calc.title">건물 계산기</h2>
@@ -78,6 +72,9 @@
         <li data-i18n="calc.levelGuide.tg3">TG 3 = Lv. 45</li>
         <li data-i18n="calc.levelGuide.tg4">TG 4 = Lv. 50</li>
         <li data-i18n="calc.levelGuide.tg5">TG 5 = Lv. 55</li>
+        <li data-i18n="calc.levelGuide.tg6">TG 6 = Lv. 60</li>
+        <li data-i18n="calc.levelGuide.tg7">TG 7 = Lv. 65</li>
+        <li data-i18n="calc.levelGuide.tg8">TG 8 = Lv. 70</li>
       </ul>
     </section>
 
@@ -96,13 +93,14 @@
             <option value="range"      data-i18n="calc.form.building.option.range">궁병대</option>
             <option value="academy"    data-i18n="calc.form.building.option.academy">아카데미</option>
             <option value="infirmary"  data-i18n="calc.form.building.option.infirmary">야전병원</option>
-             <option value="war-academy"  data-i18n="calc.form.building.option.war-academy">전쟁 아카데미</option>
+            <option value="war-academy" data-i18n="calc.form.building.option.war-academy">전쟁 아카데미</option>
           </select>
         </div>
 
         <div class="form-group">
           <label for="startLevel" data-i18n="calc.form.startLevel.label">현재 레벨</label>
-          <input type="number" id="startLevel" name="startLevel" min="1" max="55" value="1"
+          <!-- ✅ FIX: max 70 -->
+          <input type="number" id="startLevel" name="startLevel" min="1" max="70" value="1"
                  inputmode="numeric" autocomplete="off"
                  placeholder="현재 레벨 입력"
                  data-i18n-attr="placeholder:calc.form.startLevel.placeholder">
@@ -110,7 +108,8 @@
 
         <div class="form-group">
           <label for="targetLevel" data-i18n="calc.form.targetLevel.label">목표 레벨</label>
-          <input type="number" id="targetLevel" name="targetLevel" min="1" max="55" value="1"
+          <!-- ✅ FIX: max 70 -->
+          <input type="number" id="targetLevel" name="targetLevel" min="1" max="70" value="1"
                  inputmode="numeric" autocomplete="off"
                  placeholder="목표 레벨 입력"
                  data-i18n-attr="placeholder:calc.form.targetLevel.placeholder">
@@ -147,7 +146,6 @@
         <div class="form-check">
           <input type="checkbox" id="doubleTime" name="doubleTime" aria-describedby="doubleTimeHelp">
           <label for="doubleTime" data-i18n="calc.form.doubleTime.label">건설 법령 적용(시간 20% 감소)</label>
-          <!-- FIX: aria-describedby 대상 추가(접근성) -->
           <p id="doubleTimeHelp" class="visually-hidden" data-i18n="calc.form.doubleTime.help">
             건설 법령 활성화 시 기본 건설 시간에서 20% 감소가 적용됩니다.
           </p>
@@ -165,31 +163,36 @@
             <div class="calc-grid">
               <div class="form-group">
                 <label for="prereqAcademy" data-i18n="calc.prereq.academy">아카데미</label>
-                <input type="number" id="prereqAcademy" min="1" max="55" placeholder="예: 25"
+                <!-- ✅ FIX: max 70 -->
+                <input type="number" id="prereqAcademy" min="1" max="70" placeholder="예: 25"
                        inputmode="numeric" autocomplete="off"
                        data-i18n-attr="placeholder:calc.common.example25">
               </div>
               <div class="form-group">
                 <label for="prereqRange" data-i18n="calc.prereq.range">궁병대</label>
-                <input type="number" id="prereqRange" min="1" max="55" placeholder="예: 20"
+                <!-- ✅ FIX: max 70 -->
+                <input type="number" id="prereqRange" min="1" max="70" placeholder="예: 20"
                        inputmode="numeric" autocomplete="off"
                        data-i18n-attr="placeholder:calc.common.example20">
               </div>
               <div class="form-group">
                 <label for="prereqStable" data-i18n="calc.prereq.stable">기병대</label>
-                <input type="number" id="prereqStable" min="1" max="55" placeholder="예: 20"
+                <!-- ✅ FIX: max 70 -->
+                <input type="number" id="prereqStable" min="1" max="70" placeholder="예: 20"
                        inputmode="numeric" autocomplete="off"
                        data-i18n-attr="placeholder:calc.common.example20">
               </div>
               <div class="form-group">
                 <label for="prereqBarracks" data-i18n="calc.prereq.barracks">보병대</label>
-                <input type="number" id="prereqBarracks" min="1" max="55" placeholder="예: 20"
+                <!-- ✅ FIX: max 70 -->
+                <input type="number" id="prereqBarracks" min="1" max="70" placeholder="예: 20"
                        inputmode="numeric" autocomplete="off"
                        data-i18n-attr="placeholder:calc.common.example20">
               </div>
               <div class="form-group">
                 <label for="prereqEmbassy" data-i18n="calc.prereq.embassy">대사관</label>
-                <input type="number" id="prereqEmbassy" min="1" max="55" placeholder="예: 15"
+                <!-- ✅ FIX: max 70 -->
+                <input type="number" id="prereqEmbassy" min="1" max="70" placeholder="예: 15"
                        inputmode="numeric" autocomplete="off"
                        data-i18n-attr="placeholder:calc.common.example15">
               </div>
@@ -199,10 +202,16 @@
         </details>
 
         <div class="btn-row">
-  <button type="button" id="calcBtn" class="btn btn-primary">Start</button>
-  <button type="button" id="clearPlanBtn" class="btn">Reset</button>
-</div>
+          <!-- ✅ FIX: 버튼도 i18n 연결 -->
+          <button id="calcBtn"
+  data-i18n="calc.form.actions.calculate"
+  data-i18n-attr="aria-label:calc.form.actions.calculate">계산하기</button>
 
+<button id="clearPlanBtn"
+  data-i18n="calc.form.actions.clear"
+  data-i18n-attr="aria-label:calc.form.actions.clear">초기화</button>
+
+        </div>
       </form>
     </section>
 
@@ -218,10 +227,14 @@
     </section>
   </main>
 
-  <!-- ⚠️ 스크립트는 app.js가 라우트에서 동적 로드함. 여기선 포함하지 않음. --> 
-   
-  <!-- 스타일은 /css/calculator.css?v=202509120604 로 분리 (app.js에서 ensureCSS로 로드) -->
-   <style>
+  <!-- ⚠️ 스크립트는 app.js가 라우트에서 동적 로드함. 여기선 포함하지 않음. -->
+
+  <!--
+    NOTE:
+    지금은 "선행 건물 포함" UI를 전부 숨김 처리 중.
+    나중에 다시 켤 거면 아래 style 블록 삭제하면 됨.
+  -->
+  <style>
     /* "선행 건물 포함" 관련 요소 전부 숨김 */
     #includePrereq,
     label[for="includePrereq"],

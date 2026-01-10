@@ -9,7 +9,9 @@
   window.__calculatorScriptLoaded__ = true;
 
   // ---------- i18n helpers ----------
-  const t = (k, fb) => (window.I18N && typeof I18N.t === 'function') ? I18N.t(k, fb ?? k) : (fb ?? k);
+  const t = (k, fb) => (window.I18N && typeof I18N.t === 'function')
+    ? I18N.t(k, (fb !== undefined ? fb : k))
+    : (fb !== undefined ? fb : k);
 
   // 동적 표시용 빌딩명 키 매핑 (라벨은 calc.json에 넣음)
   const BUILDING_I18N_KEY = {
@@ -22,7 +24,7 @@
     range:      'calc.form.building.option.range',
     infirmary:  'calc.form.building.option.infirmary',
     'camp:common': 'calc.form.building.option.barracks', // 공용 캠프는 보병대 라벨로 폴백
-    "war-academy": "calc.form.building.option.war-academy"
+    'war-academy': 'calc.form.building.option.war-academy'
   };
   const getBuildingLabel = (key) => t(BUILDING_I18N_KEY[key] || key, key);
 
@@ -33,10 +35,12 @@
   let _loadingPromise = null;
 
   // ===== 선행 제한 & 최소 레벨 =====
-const ALLOWED_PREREQ = new Set(['towncenter', 'academy', 'barracks', 'range', 'stable', 'embassy']);
-const PREREQ_MIN_LV = 3;
-const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'stable', 'embassy'];
+  const ALLOWED_PREREQ = new Set(['towncenter', 'academy', 'barracks', 'range', 'stable', 'embassy']);
+  const PREREQ_MIN_LV = 3;
+  const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'stable', 'embassy'];
 
+  // ===== 최대 레벨 (1~70) =====
+  const MAX_LV = 70;
 
   // ------------------------ 유틸 ------------------------
   function parseRes(v) {
@@ -57,9 +61,28 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
   function labelToLevelNumber(x) {
     if (typeof x === 'number') return x;
     const s = String(x).trim().toUpperCase();
-    if (/^\d+-\d+$/.test(s)) { const [a, b] = s.split('-').map(Number); return a + b; }
-    if (/^TG\d+$/.test(s)) { const n = +s.slice(2); return 30 + n * 5; }
-    if (/^TG\d+-\d+$/.test(s)) { const [tg, sub] = s.split('-'); const n = +tg.slice(2); return 30 + n * 5 + (+sub); }
+
+    // "34-35" 같은 표기면 합쳐서 비교 가능하게(레거시)
+    if (/^\d+-\d+$/.test(s)) {
+      const ab = s.split('-').map(Number);
+      return (ab[0] || 0) + (ab[1] || 0);
+    }
+
+    // TGn => 30 + n*5 (TG1=35, TG8=70)
+    if (/^TG\d+$/.test(s)) {
+      const n = +s.slice(2);
+      return 30 + n * 5;
+    }
+
+    // TGn-x => 30 + n*5 + x
+    if (/^TG\d+-\d+$/.test(s)) {
+      const parts = s.split('-');
+      const tg = parts[0];
+      const sub = parts[1];
+      const n = +tg.slice(2);
+      return 30 + n * 5 + (+sub);
+    }
+
     const n = parseInt(s, 10);
     return Number.isFinite(n) ? n : 0;
   }
@@ -92,10 +115,11 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
     sec = Math.max(0, Math.floor(sec || 0));
     const d = Math.floor(sec / 86400); sec %= 86400;
     const h = Math.floor(sec / 3600); sec %= 3600;
-    const m = Math.floor(sec / 60); const s = sec % 60;
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
 
     const out = [];
-    if (d) out.push(d + t('calc.time.daySuffix', '일'));   // ✅ 숫자 + 접미사
+    if (d) out.push(d + t('calc.time.daySuffix', '일'));
     if (h) out.push(h + t('calc.time.hourSuffix', '시간'));
     if (m) out.push(m + t('calc.time.minSuffix', '분'));
     if (s) out.push(s + t('calc.time.secSuffix', '초'));
@@ -136,18 +160,18 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
     catch (e) { throw new Error(`JSON parse failed at ${url}: ${e.message}`); }
   }
 
-  // === [PATCH] buildings-calc.json을 1순위로, clac는 레거시 폴백으로 ===
+  // buildings-calc.json 우선
   async function loadBuildingsJson() {
-    const ts = Date.now(); // 캐시 버스터
+    const ts = Date.now();
     const base = guessBasePath();
     const candidates = [
-      // ✅ 정식 경로들
       `/data/buildings-calc.json?v=${ts}`,
       `${base}data/buildings-calc.json?v=${ts}`,
       `data/buildings-calc.json?v=${ts}`,
       `../data/buildings-calc.json?v=${ts}`,
       `../../data/buildings-calc.json?v=${ts}`,
-      // 🔁 레거시 파일명 폴백 (남아있을 경우 대비)
+
+      // 레거시 폴백
       `/data/buildings-clac.json?v=${ts}`,
       `${base}data/buildings-clac.json?v=${ts}`,
       `data/buildings-clac.json?v=${ts}`,
@@ -170,42 +194,77 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
     throw new Error('buildings-calc.json(또는 레거시 clac) 로드 실패');
   }
 
-  // ------------------------ 표 파서 ------------------------
+  // ------------------------ 표 파서 (✅ 정련순금 추가) ------------------------
+  function findHeaderIndex(header, patterns) {
+    for (let i = 0; i < header.length; i++) {
+      const h = String(header[i] || '');
+      for (const p of patterns) {
+        if (p instanceof RegExp) {
+          if (p.test(h)) return i;
+        } else {
+          if (h.indexOf(String(p)) > -1) return i;
+        }
+      }
+    }
+    return -1;
+  }
+
   function tableToRows(table) {
     if (!Array.isArray(table) || !table.length) return [];
     const header = table[0].map(String);
     const body = table.slice(1);
 
     const idx = {
-      level: header.findIndex(h => String(h).includes('레벨')),
-      meat: header.indexOf('빵'),
-      wood: header.indexOf('나무'),
-      coal: header.indexOf('석재'),
-      iron: header.indexOf('철'),
-      gold: (() => { let i = header.indexOf('순금'); if (i < 0) i = header.indexOf('크리스탈'); if (i < 0) i = header.indexOf('트루골드'); return i; })(),
-      time: (() => {
-        let i = header.findIndex(h => String(h).includes('건설'));
-        if (i < 0) i = header.findIndex(h => String(h) === '시간' || String(h).includes('시간'));
-        if (i < 0) i = header.findIndex(h => String(h).includes('(분)'));
+      level: findHeaderIndex(header, ['레벨', /level/i]),
+      bread: findHeaderIndex(header, ['빵', /bread/i]),
+      wood:  findHeaderIndex(header, ['나무', /wood/i]),
+      stone: findHeaderIndex(header, ['석재', '돌', /stone/i]),
+      iron:  findHeaderIndex(header, ['철', /iron/i]),
+
+      // ✅ 순금(기존)
+      truegold: findHeaderIndex(header, ['순금', '크리스탈', '트루골드', /truegold/i, /true\s*gold/i, /crystal/i]),
+
+      // ✅ 정련순금(신규)
+      tempered: findHeaderIndex(header, ['정련', '정련순금', '정련 순금', /tempered/i, /refined/i, /tempered\s*true/i]),
+
+      time: (function () {
+        let i = findHeaderIndex(header, ['건설', /build/i]);
+        if (i < 0) i = findHeaderIndex(header, ['시간', /(min|minute)/i, /\(분\)/]);
         return i;
       })(),
-      req: header.findIndex(h => String(h).includes('요구 건물') || String(h).includes('요구사항') || String(h).includes('요구')),
-      tcreq: header.findIndex(h => /도시센터.*요구|요구.*도시센터/.test(String(h)))
+
+      req: findHeaderIndex(header, ['요구 건물', '요구사항', '요구', /require/i]),
+      tcreq: findHeaderIndex(header, [/도시센터.*요구/, /요구.*도시센터/])
     };
 
+    const get = (row, i) => (i >= 0 && i < row.length) ? row[i] : 0;
+
     return body.map(row => {
-      const get = (i) => (i >= 0 && i < row.length) ? row[i] : 0;
-      const level = labelToLevelNumber(get(idx.level));
-      const meat = parseRes(get(idx.meat));
-      const wood = parseRes(get(idx.wood));
-      const coal = parseRes(get(idx.coal));
-      const iron = parseRes(get(idx.iron));
-      const crystals = parseRes(get(idx.gold));
-      const time = parseTimeToSec(get(idx.time));
-      const reqStr = idx.req >= 0 ? String(get(idx.req) || '') : '';
-      const tcNeed = idx.tcreq >= 0 ? parseRes(get(idx.tcreq)) : 0;
-      return { level, meat, wood, coal, iron, crystals, time, _req: reqStr, _tc: tcNeed };
-    }).filter(r => r.level > 0);
+      const level = labelToLevelNumber(get(row, idx.level));
+
+      const bread = parseRes(get(row, idx.bread));
+      const wood  = parseRes(get(row, idx.wood));
+      const stone = parseRes(get(row, idx.stone));
+      const iron  = parseRes(get(row, idx.iron));
+
+      const truegold = parseRes(get(row, idx.truegold));
+      const tempered_truegold = parseRes(get(row, idx.tempered));
+
+      const time = parseTimeToSec(get(row, idx.time));
+
+      const reqStr = idx.req >= 0 ? String(get(row, idx.req) || '') : '';
+      const tcNeed = idx.tcreq >= 0 ? parseRes(get(row, idx.tcreq)) : 0;
+
+      return {
+        level,
+        bread, wood, stone, iron,
+        truegold,
+        tempered_truegold,
+        time,
+        _req: reqStr,
+        _tc: tcNeed
+      };
+    }).filter(r => r.level > 0 && r.level <= MAX_LV);
   }
 
   function parseReqList(reqStr) {
@@ -218,8 +277,13 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
       const name = (m[1] || '').trim();
       const rawL = m[2] ? parseInt(m[2], 10) : 1;
       const map = {
-        '도시센터':'towncenter','대사관':'embassy','아카데미':'academy','지휘부':'command',
-        '보병대':'barracks','기병대':'stable','궁병대':'range'
+        '도시센터': 'towncenter',
+        '대사관': 'embassy',
+        '아카데미': 'academy',
+        '지휘부': 'command',
+        '보병대': 'barracks',
+        '기병대': 'stable',
+        '궁병대': 'range'
       };
       const key = map[name] || name;
       const to = hasTG ? (30 + rawL * 5) : rawL;
@@ -356,17 +420,26 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
     return _loadingPromise;
   }
 
-  // ------------------------ 합산/계산 ------------------------
+  // ------------------------ 합산/계산 (✅ 정련순금 포함) ------------------------
   function sumSegment(bKey, fromLevel, toLevel) {
     const rows = allBuildingData[bKey] || [];
-    let meat = 0, wood = 0, coal = 0, iron = 0, crystals = 0, time = 0;
+    let bread = 0, wood = 0, stone = 0, iron = 0, truegold = 0, tempered_truegold = 0, time = 0;
+
     for (let lv = Math.max(1, fromLevel) + 1; lv <= toLevel; lv++) {
       const r = rows.find(x => x.level === lv);
       if (!r) continue;
-      meat += r.meat || 0; wood += r.wood || 0; coal += r.coal || 0; iron += r.iron || 0;
-      crystals += r.crystals || 0; time += r.time || 0;
+
+      bread += r.bread || 0;
+      wood  += r.wood || 0;
+      stone += r.stone || 0;
+      iron  += r.iron || 0;
+
+      truegold += r.truegold || 0;
+      tempered_truegold += r.tempered_truegold || 0;
+
+      time += r.time || 0;
     }
-    return { meat, wood, coal, iron, crystals, time };
+    return { bread, wood, stone, iron, truegold, tempered_truegold, time };
   }
 
   function computeTimeFactor(buffs) {
@@ -378,25 +451,30 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
     return law / (1 + speed / 100);
   }
 
+  // ✅ 살로 할인은 “기본 자원(빵/나무/석재/철)”만 적용. 순금/정련순금은 보통 할인 대상이 아니라 그대로 둠.
   function applySaulDiscountTotals(res, saulPct) {
     const rate = Math.max(0, 1 - (Number(saulPct) || 0) / 100);
     return {
-      meat: Math.round((res.meat || 0) * rate),
-      wood: Math.round((res.wood || 0) * rate),
-      coal: Math.round((res.coal || 0) * rate),
-      iron: Math.round((res.iron || 0) * rate),
-      crystals: Math.round(res.crystals || 0),
+      bread: Math.round((res.bread || 0) * rate),
+      wood:  Math.round((res.wood || 0) * rate),
+      stone: Math.round((res.stone || 0) * rate),
+      iron:  Math.round((res.iron || 0) * rate),
+
+      truegold: Math.round(res.truegold || 0),
+      tempered_truegold: Math.round(res.tempered_truegold || 0),
+
       timeSec: res.timeSec | 0
     };
   }
+
   function applySaulDiscountRow(r, saulPct) {
     const rate = Math.max(0, 1 - (Number(saulPct) || 0) / 100);
     return {
       ...r,
-      meat: Math.round((r.meat || 0) * rate),
-      wood: Math.round((r.wood || 0) * rate),
-      coal: Math.round((r.coal || 0) * rate),
-      iron: Math.round((r.iron || 0) * rate)
+      bread: Math.round((r.bread || 0) * rate),
+      wood:  Math.round((r.wood || 0) * rate),
+      stone: Math.round((r.stone || 0) * rate),
+      iron:  Math.round((r.iron || 0) * rate)
     };
   }
 
@@ -415,131 +493,120 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
   }
 
   function calculateWithPrereq(mainKey, startLevel, targetLevel, buffs, preLevels) {
-  let total = { meat: 0, wood: 0, coal: 0, iron: 0, crystals: 0, time: 0 };
-  const current = { ...(preLevels || {}) };
-  current[mainKey] = startLevel;
-  const lines = [];
+    let total = { bread: 0, wood: 0, stone: 0, iron: 0, truegold: 0, tempered_truegold: 0, time: 0 };
+    const current = { ...(preLevels || {}) };
+    current[mainKey] = startLevel;
+    const lines = [];
 
-  const pushLine = (bKey, lvl, row) => {
-    if (!row) return;
-    lines.push({
-      bKey,
-      levelTo: lvl,
-      from: lvl - 1,
-      to: lvl,
-      meat: row.meat || 0,
-      wood: row.wood || 0,
-      coal: row.coal || 0,
-      iron: row.iron || 0,
-      crystals: row.crystals || 0,
-      time: row.time || 0
-    });
-  };
+    const pushLine = (bKey, lvl, row) => {
+      if (!row) return;
+      lines.push({
+        bKey,
+        levelTo: lvl,
+        from: lvl - 1,
+        to: lvl,
+        bread: row.bread || 0,
+        wood: row.wood || 0,
+        stone: row.stone || 0,
+        iron: row.iron || 0,
+        truegold: row.truegold || 0,
+        tempered_truegold: row.tempered_truegold || 0,
+        time: row.time || 0
+      });
+    };
 
-  // [FIX] 순환/중복 방지 장치
-  // - visiting: 현재 재귀 스택에 올라 있는 (building, level)
-  // - done: 한 번 완전히 처리(선행 보장 + 자원 합산)된 (building, level)
-  const visiting = new Set();
-  const done = new Set();
+    const visiting = new Set();
+    const done = new Set();
 
-  const ensure = (bKey, toLevel) => {
-    // 허용된 선행 빌딩만 처리
-    if (!ALLOWED_PREREQ.has(bKey)) return;
+    const ensure = (bKey, toLevel) => {
+      if (!ALLOWED_PREREQ.has(bKey)) return;
 
-    // 요구 레벨/현재 레벨 정규화
-    toLevel = Math.max(PREREQ_MIN_LV, Number(toLevel) || 0);
-    const currBase = Math.max(PREREQ_MIN_LV, Number(current[bKey] ?? 1));
+      toLevel = Math.max(PREREQ_MIN_LV, Number(toLevel) || 0);
+      const currBase = Math.max(PREREQ_MIN_LV, Number(current[bKey] ?? 1));
+      if (toLevel <= currBase) return;
 
-    // 이미 충족된 경우 스킵
-    if (toLevel <= currBase) return;
+      for (let lv = currBase + 1; lv <= toLevel; lv++) {
+        const nodeKey = `${bKey}#${lv}`;
 
-    // currBase+1 ~ toLevel 까지 한 레벨씩 보장
-    for (let lv = currBase + 1; lv <= toLevel; lv++) {
-      const nodeKey = `${bKey}#${lv}`;
+        if (done.has(nodeKey)) {
+          current[bKey] = Math.max(current[bKey] || 1, lv);
+          continue;
+        }
 
-      // 이미 완전히 처리된 노드면 현재 레벨만 동기화 후 스킵
-      if (done.has(nodeKey)) {
-        current[bKey] = Math.max(current[bKey] || 1, lv);
-        continue;
+        if (visiting.has(nodeKey)) {
+          console.warn(`[calc] circular prereq detected: ${nodeKey} (main=${mainKey})`);
+          return;
+        }
+
+        visiting.add(nodeKey);
+
+        const reqs = (prereqMap[bKey] && prereqMap[bKey][lv]) || [];
+        for (const r of reqs) {
+          if (!r || !r.building || !Number.isFinite(r.to)) continue;
+          if (!ALLOWED_PREREQ.has(r.building)) continue;
+          ensure(r.building, r.to);
+        }
+
+        if (done.has(nodeKey)) {
+          visiting.delete(nodeKey);
+          current[bKey] = Math.max(current[bKey] || 1, lv);
+          continue;
+        }
+
+        const row = (allBuildingData[bKey] || []).find(x => x.level === lv);
+        if (row) {
+          total.bread += row.bread || 0;
+          total.wood  += row.wood || 0;
+          total.stone += row.stone || 0;
+          total.iron  += row.iron || 0;
+          total.truegold += row.truegold || 0;
+          total.tempered_truegold += row.tempered_truegold || 0;
+          total.time += row.time || 0;
+          pushLine(bKey, lv, row);
+        }
+
+        done.add(nodeKey);
+        visiting.delete(nodeKey);
+        current[bKey] = lv;
       }
+    };
 
-      // [FIX] 순환 탐지: 같은 (building, level)을 처리 중이라면 경고 후 빠져나와 무한 재귀 차단
-      if (visiting.has(nodeKey)) {
-        console.warn(`[calc] circular prereq detected: ${nodeKey} (main=${mainKey})`);
-        return; // 현재 프레임 종료(상위 호출이 계속 진행하도록 함)
-      }
-
-      // 처리 중으로 마킹
-      visiting.add(nodeKey);
-
-      // 이 레벨의 선행 조건을 먼저 보장
-      const reqs = (prereqMap[bKey] && prereqMap[bKey][lv]) || [];
+    for (let lv = startLevel + 1; lv <= targetLevel; lv++) {
+      const reqs = (prereqMap[mainKey] && prereqMap[mainKey][lv]) || [];
       for (const r of reqs) {
-        if (!r || !r.building || !Number.isFinite(r.to)) continue;
-        if (!ALLOWED_PREREQ.has(r.building)) continue;
+        if (!r || !ALLOWED_PREREQ.has(r.building)) continue;
         ensure(r.building, r.to);
       }
 
-      // 동시 경로에서 선행 처리/합산이 끝났다면 재합산 방지
-      if (done.has(nodeKey)) {
-        visiting.delete(nodeKey);
-        current[bKey] = Math.max(current[bKey] || 1, lv);
-        continue;
-      }
-
-      // 실제 자원/시간 합산 및 라인 추가
-      const row = (allBuildingData[bKey] || []).find(x => x.level === lv);
+      const row = (allBuildingData[mainKey] || []).find(x => x.level === lv);
       if (row) {
-        total.meat += row.meat || 0;
-        total.wood += row.wood || 0;
-        total.coal += row.coal || 0;
-        total.iron += row.iron || 0;
-        total.crystals += row.crystals || 0;
+        total.bread += row.bread || 0;
+        total.wood  += row.wood || 0;
+        total.stone += row.stone || 0;
+        total.iron  += row.iron || 0;
+        total.truegold += row.truegold || 0;
+        total.tempered_truegold += row.tempered_truegold || 0;
         total.time += row.time || 0;
-        pushLine(bKey, lv, row);
+        pushLine(mainKey, lv, row);
       }
-
-      // 처리 완료 마킹 및 상태 업데이트
-      done.add(nodeKey);
-      visiting.delete(nodeKey);
-      current[bKey] = lv;
-    }
-  };
-
-  // 메인 빌딩을 목표 레벨까지 올리면서 각 레벨별 선행을 먼저 충족
-  for (let lv = startLevel + 1; lv <= targetLevel; lv++) {
-    const reqs = (prereqMap[mainKey] && prereqMap[mainKey][lv]) || [];
-    for (const r of reqs) {
-      if (!r || !ALLOWED_PREREQ.has(r.building)) continue;
-      ensure(r.building, r.to);
     }
 
-    const row = (allBuildingData[mainKey] || []).find(x => x.level === lv);
-    if (row) {
-      total.meat += row.meat || 0;
-      total.wood += row.wood || 0;
-      total.coal += row.coal || 0;
-      total.iron += row.iron || 0;
-      total.crystals += row.crystals || 0;
-      total.time += row.time || 0;
-      pushLine(mainKey, lv, row);
-    }
+    const tf = computeTimeFactor(buffs);
+    return {
+      bread: total.bread, wood: total.wood, stone: total.stone, iron: total.iron,
+      truegold: total.truegold,
+      tempered_truegold: total.tempered_truegold,
+      timeSec: Math.round(Math.max(0, total.time * tf)),
+      lines, tf
+    };
   }
-
-  const tf = computeTimeFactor(buffs);
-  return {
-    meat: total.meat, wood: total.wood, coal: total.coal, iron: total.iron,
-    crystals: total.crystals, timeSec: Math.round(Math.max(0, total.time * tf)),
-    lines, tf
-  };
-}
-
 
   function buildMainOnlyResult(dataKey, startLevel, targetLevel, buffs) {
     const seg = sumSegment(dataKey, startLevel, targetLevel);
     const tf = computeTimeFactor(buffs);
     const rows = allBuildingData[dataKey] || [];
     const lines = [];
+
     for (let lv = startLevel + 1; lv <= targetLevel; lv++) {
       const row = rows.find(x => x.level === lv);
       if (!row) continue;
@@ -548,67 +615,33 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
         levelTo: lv,
         from: lv - 1,
         to: lv,
-        meat: row.meat || 0,
+        bread: row.bread || 0,
         wood: row.wood || 0,
-        coal: row.coal || 0,
+        stone: row.stone || 0,
         iron: row.iron || 0,
-        crystals: row.crystals || 0,
+        truegold: row.truegold || 0,
+        tempered_truegold: row.tempered_truegold || 0,
         time: row.time || 0
       });
     }
+
     return {
-      meat: seg.meat, wood: seg.wood, coal: seg.coal, iron: seg.iron,
-      crystals: seg.crystals, timeSec: Math.round(Math.max(0, seg.time * tf)),
+      bread: seg.bread, wood: seg.wood, stone: seg.stone, iron: seg.iron,
+      truegold: seg.truegold,
+      tempered_truegold: seg.tempered_truegold,
+      timeSec: Math.round(Math.max(0, seg.time * tf)),
       lines, tf
     };
   }
 
   // ------------------------ i18n 라벨 재적용 ------------------------
   function applyI18NLabels() {
-    // 폼 라벨들
-    const LABEL_MAP = [
-      ['label-building', 'calc.form.building.label', '건물 선택'],
-      ['label-start',    'calc.form.startLevel',     '시작 레벨'],
-      ['label-target',   'calc.form.targetLevel',    '목표 레벨'],
-      ['label-speed',    'calc.form.speedBonus',     '건설 속도(%)'],
-      ['label-saul',     'calc.form.saulBonus',      '살로 할인(%)'],
-      ['label-wolf',     'calc.form.wolfBonus',      '늑대 버프(%)'],
-      ['label-position', 'calc.form.positionBonus',  '직책/타이틀(%)'],
-      ['label-double',   'calc.form.doubleTime',     '이중법령(시간 20% 감소)'],
-      ['label-include',  'calc.form.includePrereq',  '선행 건물 포함'],
-    ];
-    for (const [id, key, fb] of LABEL_MAP) {
-      const el = document.getElementById(id);
-      if (el) el.textContent = t(key, fb);
-    }
-
-    // 타이틀/설명/선행박스 타이틀
     const title = document.getElementById('calc-title');
     if (title) title.textContent = t('calc.title', '건물 계산기');
+
     const desc = document.querySelector('.calc-desc');
     if (desc) desc.textContent = t('calc.desc', '업그레이드에 필요한 자원과 소요 시간을 확인하세요.');
-    const preTitle = document.getElementById('prereq-title');
-    if (preTitle) preTitle.textContent = t('calc.prereqBox.title', '선행 건물 요구사항');
 
-    // placeholder + aria-label
-    const placeholders = {
-      startLevel:   ['calc.form.placeholder.start',    '현재 레벨'],
-      targetLevel:  ['calc.form.placeholder.target',   '목표 레벨'],
-      speedBonus:   ['calc.form.placeholder.speed',    '0'],
-      saulBonus:    ['calc.form.placeholder.saul',     '0'],
-      wolfBonus:    ['calc.form.placeholder.wolf',     '0'],
-      positionBonus:['calc.form.placeholder.position', '0'],
-    };
-    for (const id of Object.keys(placeholders)) {
-      const el = document.getElementById(id);
-      if (!el) continue;
-      const [key, fb] = placeholders[id];
-      const label = t(key, fb);
-      el.setAttribute('placeholder', label);
-      if (!el.getAttribute('aria-label')) el.setAttribute('aria-label', label);
-    }
-
-    // 셀렉트 옵션 텍스트
     const sel = document.getElementById('building');
     if (sel && sel.options && sel.options.length) {
       for (const opt of sel.options) {
@@ -619,19 +652,23 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
     }
   }
 
-  // 전역: 언어 전환 시 호출
   window.reapplyCalculatorI18N = function reapplyCalculatorI18N() {
     applyI18NLabels();
-    try { window.__calcRefreshPrereqUI && window.__calcRefreshPrereqUI(); } catch(_) {}
+    try { window.__calcRefreshPrereqUI && window.__calcRefreshPrereqUI(); } catch (_) {}
   };
 
   // ------------------------ UI ------------------------
   function renderPrereqBox(buildingKey, startLevel, targetLevel) {
     const ul = document.getElementById('prereq-list');
     if (!ul) return;
+
     const need = getNeedMap(buildingKey, startLevel, targetLevel);
     const keys = Object.keys(need);
-    if (!keys.length) { ul.innerHTML = `<li>${t('calc.prereqBox.empty','선행조건 없음')}</li>`; return; }
+
+    if (!keys.length) {
+      ul.innerHTML = `<li>${t('calc.prereqBox.empty', '선행조건 없음')}</li>`;
+      return;
+    }
 
     const lvLabel = t('calc.common.lv', 'Lv.');
     ul.innerHTML = keys
@@ -639,7 +676,6 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
       .join('');
   }
 
-  // 입력 읽기
   function readUserPrereqLevelsRaw() {
     const g = (id) => {
       const el = document.getElementById(id);
@@ -672,11 +708,6 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
     else { details.open = false; details.hidden = true; }
   }
 
-  function getDisplayNameForLine(lineBKey, uiKey, dataKey) {
-    if (lineBKey === dataKey) return getBuildingLabel(uiKey);
-    return getBuildingLabel(lineBKey);
-  }
-
   function sortLines(lines, dataKey) {
     const order = [dataKey, ...DISPLAY_ORDER_PREREQ];
     const idxOf = (k) => {
@@ -698,18 +729,23 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
     const lvLabel = t('calc.common.lv', 'Lv.');
 
     const sortedLines = sortLines(result.lines || [], dataKey);
-    const showGold = sortedLines.some(r => (r.crystals || 0) > 0);
+
+    const showTruegold = sortedLines.some(r => (r.truegold || 0) > 0) || (result.truegold || 0) > 0;
+    const showTempered = sortedLines.some(r => (r.tempered_truegold || 0) > 0) || (result.tempered_truegold || 0) > 0;
 
     const summaryTop = `
       <div style="background:#d7e8fc;padding:10px 15px;border-radius:14px;max-width:900px;margin:0 auto 10px;color:#004a99;font-weight:600;line-height:1.2;">
         <p><strong>${t('calc.result.upgrade','업그레이드:')}</strong> ${title} ${lvLabel}${startLevel} → ${lvLabel}${targetLevel}</p>
         <p><strong>${t('calc.result.time','건설 시간:')}</strong> ${formatTime(result.timeSec)}</p>
         <p><strong>${t('calc.result.totalWithSaul','총 자원 소모량(살로 적용)')}</strong></p>
-        <p>🍞 ${t('calc.table.col.bread','빵')}: ${result.meat.toLocaleString()} (${formatNumber(result.meat)})</p>
+
+        <p>🍞 ${t('calc.table.col.bread','빵')}: ${result.bread.toLocaleString()} (${formatNumber(result.bread)})</p>
         <p>🌲 ${t('calc.table.col.wood','나무')}: ${result.wood.toLocaleString()} (${formatNumber(result.wood)})</p>
-        <p>🗿 ${t('calc.table.col.stone','석재')}: ${result.coal.toLocaleString()} (${formatNumber(result.coal)})</p>
+        <p>🗿 ${t('calc.table.col.stone','석재')}: ${result.stone.toLocaleString()} (${formatNumber(result.stone)})</p>
         <p>⛏️ ${t('calc.table.col.iron','철')}: ${result.iron.toLocaleString()} (${formatNumber(result.iron)})</p>
-        ${showGold ? `<p>🥇 ${t('calc.table.col.truegold','순금')}: ${result.crystals.toLocaleString()}</p>` : ''}
+
+        ${showTruegold ? `<p>🥇 ${t('calc.table.col.truegold','순금')}: ${(result.truegold || 0).toLocaleString()}</p>` : ''}
+        ${showTempered ? `<p>🏅 ${t('calc.table.col.tempered_truegold','정련 순금')}: ${(result.tempered_truegold || 0).toLocaleString()}</p>` : ''}
       </div>
     `;
 
@@ -721,6 +757,7 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
         const label = getBuildingLabel(k);
         return `<li>${label}: ${t('calc.prereqSummary.current','현재')} ${lvLabel}${curLv} (${t('calc.prereqSummary.required','요구')} ${lvLabel}${needLv})</li>`;
       });
+
     const prereqSummary = prereqItems.length
       ? `<section style="max-width:900px;margin:0 auto 10px;">
            <h3 class="calc-title" style="font-size:16px;margin:0 0 6px">${t('calc.prereqSummary.title','선행 건물 요약')}</h3>
@@ -730,24 +767,35 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
 
     let body = '';
     let idx = 0;
+
     for (const ln of sortedLines) {
       idx++;
-      const dispName = getDisplayNameForLine(ln.bKey, uiKey, dataKey);
+
       const discounted = applySaulDiscountRow(
-        { meat: ln.meat, wood: ln.wood, coal: ln.coal, iron: ln.iron, crystals: ln.crystals, time: ln.time },
+        {
+          bread: ln.bread, wood: ln.wood, stone: ln.stone, iron: ln.iron,
+          truegold: ln.truegold, tempered_truegold: ln.tempered_truegold,
+          time: ln.time
+        },
         saulPct
       );
+
       const timeAdj = Math.round((ln.time || 0) * (result.tf || 1));
+
       body += `
         <tr>
           <td>${idx}</td>
-          <td>${dispName}</td>
+          <td>${(ln.bKey === dataKey) ? getBuildingLabel(uiKey) : getBuildingLabel(ln.bKey)}</td>
           <td>${ln.from} → ${ln.to}</td>
-          <td>${formatNumber(discounted.meat || 0)}</td>
+
+          <td>${formatNumber(discounted.bread || 0)}</td>
           <td>${formatNumber(discounted.wood || 0)}</td>
-          <td>${formatNumber(discounted.coal || 0)}</td>
+          <td>${formatNumber(discounted.stone || 0)}</td>
           <td>${formatNumber(discounted.iron || 0)}</td>
-          ${showGold ? `<td>${(ln.crystals || 0).toLocaleString()}</td>` : ''}
+
+          ${showTruegold ? `<td>${(ln.truegold || 0).toLocaleString()}</td>` : ''}
+          ${showTempered ? `<td>${(ln.tempered_truegold || 0).toLocaleString()}</td>` : ''}
+
           <td>${formatTime(timeAdj)}</td>
         </tr>`;
     }
@@ -761,13 +809,14 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
         <th>${t('calc.table.col.wood','나무')}</th>
         <th>${t('calc.table.col.stone','석재')}</th>
         <th>${t('calc.table.col.iron','철')}</th>
-        ${showGold ? `<th>${t('calc.table.col.truegold','순금')}</th>` : ''}
+        ${showTruegold ? `<th>${t('calc.table.col.truegold','순금')}</th>` : ''}
+        ${showTempered ? `<th>${t('calc.table.col.tempered_truegold','정련 순금')}</th>` : ''}
         <th>${t('calc.table.col.time','건설 시간')}</th>
       </tr>`;
 
     const tableTitle = sortedLines.length
-      ? t('calc.table.titleWithPrereq','상세 내역 (선행 포함)')
-      : t('calc.table.title','상세 내역');
+      ? t('calc.table.titleWithPrereq', '상세 내역 (선행 포함)')
+      : t('calc.table.title', '상세 내역');
 
     const table = `
       <h3 class="calc-title" style="font-size:16px;margin:10px auto;max-width:900px;">${tableTitle}</h3>
@@ -783,29 +832,16 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
   function bindOnce(el, type, handler) {
     if (!el) return;
     if (!el.__bound__) el.__bound__ = {};
-
-    // 이미 바인딩된 것으로 표시돼도 실제 리스너가 없으면 다시 바인딩 (DevTools 전용 함수가 있을 때만 검사)
-    const alreadyBound = el.__bound__[type];
-    let hasListener = false;
-
-    if (alreadyBound && typeof getEventListeners === 'function') {
-      const listeners = getEventListeners(el)[type] || [];
-      hasListener = listeners.length > 0;
-    }
-
-    if (!alreadyBound || !hasListener) {
-      el.addEventListener(type, handler);
-      el.__bound__[type] = true;
-    }
+    if (el.__bound__[type]) return;
+    el.addEventListener(type, handler);
+    el.__bound__[type] = true;
   }
 
-  // ------------------------ 폼 초기화: resetFormToDefaults() ------------------------
+  // ------------------------ 폼 초기화 ------------------------
   function resetFormToDefaults() {
-    // 셀렉트
     const buildingEl = document.getElementById('building');
     if (buildingEl) buildingEl.selectedIndex = 0;
 
-    // 숫자 입력 기본값
     const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = String(val); };
     setVal('startLevel', 1);
     setVal('targetLevel', 1);
@@ -814,18 +850,15 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
     setVal('wolfBonus', 0);
     setVal('positionBonus', 0);
 
-    // 체크박스 해제
     const uncheck = (id) => { const el = document.getElementById(id); if (el) el.checked = false; };
     uncheck('doubleTime');
     uncheck('includePrereq');
 
-    // 선행 입력칸 비우기
     ['prereqAcademy','prereqRange','prereqStable','prereqBarracks','prereqEmbassy'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.value = '';
     });
 
-    // 결과/선행 박스 초기화 및 숨김
     const resultDiv = document.getElementById('result');
     if (resultDiv) resultDiv.innerHTML = '';
 
@@ -838,10 +871,8 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
 
   // ------------------------ init ------------------------
   async function initCalculator() {
-    // ✅ 재진입 시에도 항상 폼 초기화 보장
     try { resetFormToDefaults(); } catch (_) {}
 
-    // 데이터 로드 (idempotent)
     try { await ensureDataLoaded(); }
     catch (e) {
       const el = document.getElementById('result');
@@ -849,7 +880,6 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
       return;
     }
 
-    // i18n 라벨/버튼/placeholder 적용 (idempotent)
     applyI18NLabels();
 
     const buildingEl = document.getElementById('building');
@@ -864,24 +894,44 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
       return;
     }
 
+    function clampLv(n) {
+      n = parseInt(n, 10);
+      if (!Number.isFinite(n)) return 1;
+      return Math.max(1, Math.min(MAX_LV, n));
+    }
+
     function refreshPrereqUI() {
       const uiKey = buildingEl.value;
-      const start = parseInt(startEl.value || 1, 10);
-      const to = parseInt(targetEl.value || 1, 10);
-      const map = { towncenter:{slug:'towncenter'}, embassy:{slug:'embassy'}, academy:{slug:'academy'}, command:{slug:'command'},
-        barracks:{slug:'camp',variant:'common'}, stable:{slug:'camp',variant:'common'}, range:{slug:'camp',variant:'common'}, infirmary:{slug:'infirmary'},'war-academy': {slug:'war-academy'} };
-      let dataKey = (map[uiKey]?.variant) ? `${map[uiKey].slug}:${map[uiKey].variant}` : (map[uiKey]?.slug || uiKey);
+
+      const start = clampLv(startEl.value || 1);
+      const to = clampLv(targetEl.value || 1);
+      startEl.value = String(start);
+      targetEl.value = String(to);
+
+      const map = {
+        towncenter: { slug: 'towncenter' },
+        embassy: { slug: 'embassy' },
+        academy: { slug: 'academy' },
+        command: { slug: 'command' },
+        barracks: { slug: 'camp', variant: 'common' },
+        stable: { slug: 'camp', variant: 'common' },
+        range: { slug: 'camp', variant: 'common' },
+        infirmary: { slug: 'infirmary' },
+        'war-academy': { slug: 'war-academy' }
+      };
+
+      const cfg = map[uiKey] || {};
+      let dataKey = cfg.variant ? `${cfg.slug}:${cfg.variant}` : (cfg.slug || uiKey);
       if (uiKey === 'infirmary' && !allBuildingData[dataKey]) dataKey = 'camp:common';
 
       if (to > start) renderPrereqBox(dataKey, start, to);
       else { const ul = document.getElementById('prereq-list'); if (ul) ul.innerHTML = ''; }
 
-      const inc = incEl?.checked;
+      const inc = incEl ? incEl.checked : false;
       syncPrereqDetailsVisibility(Boolean(inc && to > start));
     }
     window.__calcRefreshPrereqUI = refreshPrereqUI;
 
-    // 이벤트 바인딩 (idempotent)
     bindOnce(buildingEl, 'input', refreshPrereqUI);
     bindOnce(startEl, 'input', refreshPrereqUI);
     bindOnce(targetEl, 'input', refreshPrereqUI);
@@ -889,25 +939,48 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
 
     if (calcBtn) bindOnce(calcBtn, 'click', () => {
       const uiKey = buildingEl.value;
-      const start = parseInt(startEl.value, 10);
-      const to = parseInt(targetEl.value, 10);
-      if (!Number.isFinite(start) || !Number.isFinite(to)) { alert(t('calc.alert.invalidLevel','레벨 입력이 올바르지 않습니다.')); return; }
-      if (start >= to) { alert(t('calc.alert.targetGtStart','목표 레벨은 시작 레벨보다 커야 합니다.')); return; }
+
+      const start = clampLv(startEl.value);
+      const to = clampLv(targetEl.value);
+
+      startEl.value = String(start);
+      targetEl.value = String(to);
+
+      if (start >= to) { alert(t('calc.alert.targetGtStart', '목표 레벨은 시작 레벨보다 커야 합니다.')); return; }
+
+      const getNum = (id) => {
+        const el = document.getElementById(id);
+        const v = el ? parseFloat(el.value) : 0;
+        return Number.isFinite(v) ? v : 0;
+      };
 
       const buffs = {
-        speedBonus: parseFloat(document.getElementById('speedBonus')?.value) || 0,
-        saulBonus: parseFloat(document.getElementById('saulBonus')?.value) || 0,
-        wolfBonus: parseFloat(document.getElementById('wolfBonus')?.value) || 0,
-        positionBonus: parseFloat(document.getElementById('positionBonus')?.value) || 0,
-        doubleTime: !!document.getElementById('doubleTime')?.checked,
+        speedBonus: getNum('speedBonus'),
+        saulBonus: getNum('saulBonus'),
+        wolfBonus: getNum('wolfBonus'),
+        positionBonus: getNum('positionBonus'),
+        doubleTime: !!(document.getElementById('doubleTime') && document.getElementById('doubleTime').checked)
       };
-      const includePrereq = !!incEl?.checked;
 
-      const map = { towncenter:{slug:'towncenter'}, embassy:{slug:'embassy'}, academy:{slug:'academy'}, command:{slug:'command'},
-        barracks:{slug:'camp',variant:'common'}, stable:{slug:'camp',variant:'common'}, range:{slug:'camp',variant:'common'}, infirmary:{slug:'infirmary'},'war-academy': {slug:'war-academy'} };
-      let dataKey = (map[uiKey]?.variant) ? `${map[uiKey].slug}:${map[uiKey].variant}` : (map[uiKey]?.slug || uiKey);
+      const includePrereq = !!(incEl && incEl.checked);
+
+      const map = {
+        towncenter: { slug: 'towncenter' },
+        embassy: { slug: 'embassy' },
+        academy: { slug: 'academy' },
+        command: { slug: 'command' },
+        barracks: { slug: 'camp', variant: 'common' },
+        stable: { slug: 'camp', variant: 'common' },
+        range: { slug: 'camp', variant: 'common' },
+        infirmary: { slug: 'infirmary' },
+        'war-academy': { slug: 'war-academy' }
+      };
+
+      const cfg = map[uiKey] || {};
+      let dataKey = cfg.variant ? `${cfg.slug}:${cfg.variant}` : (cfg.slug || uiKey);
       if (uiKey === 'infirmary' && !allBuildingData[dataKey]) dataKey = 'camp:common';
-      if (!allBuildingData[dataKey]) { alert(t('calc.alert.noData','데이터가 없습니다') + `: ${getBuildingLabel(uiKey)}`); return; }
+
+      if (!allBuildingData[dataKey]) { alert(t('calc.alert.noData', '데이터가 없습니다') + `: ${getBuildingLabel(uiKey)}`); return; }
 
       let result;
       if (includePrereq) {
@@ -918,7 +991,12 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
       }
 
       const totalsAfterSaul = applySaulDiscountTotals(
-        { meat: result.meat, wood: result.wood, coal: result.coal, iron: result.iron, crystals: result.crystals, timeSec: result.timeSec },
+        {
+          bread: result.bread, wood: result.wood, stone: result.stone, iron: result.iron,
+          truegold: result.truegold,
+          tempered_truegold: result.tempered_truegold,
+          timeSec: result.timeSec
+        },
         buffs.saulBonus
       );
 
@@ -935,15 +1013,14 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
         needMap,
         preRaw
       );
+
       renderPrereqBox(dataKey, start, to);
     });
 
-    // ✅ 초기화 버튼은 공용 초기화 함수 호출
     if (clearBtn) bindOnce(clearBtn, 'click', () => {
       resetFormToDefaults();
     });
 
-    // 초기 1회 UI 동기화
     refreshPrereqUI();
     window.__calculatorInited__ = true;
     console.info('[calc] init complete');
@@ -953,7 +1030,7 @@ const DISPLAY_ORDER_PREREQ = ['towncenter', 'academy', 'barracks', 'range', 'sta
   window.initCalculator = initCalculator;
   window._calcDebug = { allBuildingData, prereqMap };
 
-  // ✅ 전역 API로 reset 노출 (라우팅 진입 시 언제든 호출 가능)
+  // 전역 reset API
   window.KSD = window.KSD || {};
   window.KSD.buildingUI = window.KSD.buildingUI || {};
   window.KSD.buildingUI.reset = resetFormToDefaults;
