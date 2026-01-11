@@ -1,4 +1,4 @@
-/* footer-tools.js (FINAL — coupons → CTAs → LootBar → TEMU → AdPick) */
+/* footer-tools.js (FINAL — coupons → CTAs → LootBar ONLY) */
 ;(() => {
   'use strict';
 
@@ -26,7 +26,7 @@
   function isForever(val) {
     if (!val) return true;
     const v = String(val).trim().toLowerCase();
-    return ['permanent','infinite','∞','forever','no-expiry','noexp','nolimit'].includes(v);
+    return ['permanent', 'infinite', '∞', 'forever', 'no-expiry', 'noexp', 'nolimit'].includes(v);
   }
 
   function foreverText() {
@@ -51,36 +51,35 @@
   }
 
   /* ================= icons ================= */
-  function iconGift(){
+  function iconGift() {
     return `<svg viewBox="0 0 24 24"><path d="M20 12v8a2 2 0 0 1-2 2h-5v-10h7zM11 22H6a2 2 0 0 1-2-2v-8h7v10zM21 8h-3.17A3 3 0 1 0 12 6a3 3 0 1 0-5.83 2H3a1 1 0 0 0 0 2h18a1 1 0 1 0 0-2Z"/></svg>`;
   }
-  function iconChat(){
+  function iconChat() {
     return `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.94 2 10.8c0 2.76 1.6 5.2 4.09 6.8L5.5 22l4.3-2.37c.72.13 1.45.2 2.2.2 5.52 0 10-3.94 10-8.8S17.52 2 12 2z"/></svg>`;
   }
 
   /* ================= fetch coupons ================= */
-  async function fetchCoupons(url){
+  async function fetchCoupons(url) {
     try {
-      const res = await fetch(url, { cache:'no-store' });
+      const res = await fetch(url, { cache: 'no-store' });
       if (!res.ok) throw 0;
       const data = await res.json();
-      return Array.isArray(data?.coupons) ? data.coupons.slice(0,3) : [];
+      return Array.isArray(data?.coupons) ? data.coupons.slice(0, 3) : [];
     } catch {
       return [];
     }
   }
 
-  function isExpiredUTC(until){
+  function isExpiredUTC(until) {
     if (isForever(until)) return false;
     return new Date() >= new Date(String(until).trim() + 'T00:00:00Z');
   }
 
   /* ================= render ================= */
-  async function renderFooterTools(){
+  async function renderFooterTools() {
     const container = document.getElementById('footerTools');
     if (!container) return;
 
-    const lang = getLangSafe();
     container.innerHTML = '';
 
     /* --- coupons --- */
@@ -91,10 +90,10 @@
     if (!coupons.length) {
       const empty = document.createElement('div');
       empty.className = 'empty';
-      empty.textContent = t('footer.coupons.empty','No active coupons at the moment.');
+      empty.textContent = t('footer.coupons.empty', 'No active coupons at the moment.');
       couponWrap.appendChild(empty);
     } else {
-      coupons.forEach(c=>{
+      coupons.forEach(c => {
         const d = document.createElement('div');
         d.className = 'footer-coupon' + (isExpiredUTC(c.until) ? ' expired' : '');
         d.innerHTML = `
@@ -109,11 +108,11 @@
     const ctas = document.createElement('div');
     ctas.className = 'footer-ctas';
     ctas.innerHTML = `
-      <a href="/pages/guides/kingshot-giftcode.html" target="_blank">
-        ${iconGift()} <strong>${t('footer.cta.gift','Gift Code Guide')}</strong>
+      <a href="/pages/guides/kingshot-giftcode.html" target="_blank" rel="noopener">
+        ${iconGift()} <strong>${t('footer.cta.gift', 'Gift Code Guide')}</strong>
       </a>
-      <a class="kakao" href="https://open.kakao.com/o/gHPnO4uh" target="_blank">
-        ${iconChat()} <strong>${t('footer.cta.chat','Kingshot Group Chat')}</strong>
+      <a class="kakao" href="https://open.kakao.com/o/gHPnO4uh" target="_blank" rel="noopener noreferrer">
+        ${iconChat()} <strong>${t('footer.cta.chat', 'Kingshot Group Chat')}</strong>
       </a>
     `;
 
@@ -126,44 +125,10 @@
       </a>
     `;
 
-    /* --- TEMU --- */
-    const temu = document.createElement('div');
-    temu.className = 'footer-temu';
-    temu.innerHTML = `
-      <a href="https://bitl.bz/NNrlMs" target="_blank" rel="nofollow noopener">
-        <img
-          src="${lang.startsWith('ko') ? '/img/temu-banner-kr.avif' : '/img/temu-banner-en.avif'}"
-          alt="Recommended Shopping Deals"
-          loading="lazy">
-      </a>
-    `;
-
-    /* --- Ads (AdPick only, Ezoic removed) --- */
-    const ads = document.createElement('div');
-    ads.className = 'footer-ad';
-
-    if (lang.startsWith('ko')) {
-      ads.innerHTML = `
-        <iframe
-          src="https://www.adpick.co.kr/nativeAD/ad.php?bannerType=type1&limit=1&affid=fb05e3&frameId=AdpickFooter&popup=false"
-          width="100%"
-          frameborder="0"
-          scrolling="no"
-          data-adpick_nativeAD
-          id="AdpickFooter"
-          referrerpolicy="unsafe-url"></iframe>
-        <script src="https://www.adpick.co.kr/nativeAD/script.js" async></script>
-      `;
-    } else {
-      ads.innerHTML = ''; // 해외 트래픽 광고 비워둠 (Raptive 대비)
-    }
-
     /* --- mount in correct order --- */
     container.appendChild(couponWrap);
     container.appendChild(ctas);
     container.appendChild(lootbar);
-    container.appendChild(temu);
-    container.appendChild(ads);
   }
 
   if (document.readyState === 'loading') {
