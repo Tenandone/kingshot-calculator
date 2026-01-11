@@ -1,52 +1,164 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <title>About - KingshotData.kr</title>
+  <title>소개 - KingshotData.kr</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- SPA DB title compatibility (optional) -->
   <meta name="db-title" content="About" />
+
   <script src="./js/standalone-bridge.js?v=202509120604" defer></script>
+
+  <style>
+    /* 줄바꿈 트릭 필요 없게 문장 단위로 p 쪼갬 */
+    .about-block { margin: 18px 0; }
+    .about-block h2 { margin: 18px 0 10px; }
+    .about-block p { margin: 8px 0; }
+  </style>
 </head>
-<a href="/" class="kd-home-link" style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
-  ← KingshotData Korea
-</a>
+
 <body>
-  <section class="container">
-    <h1>About</h1>
-    <p class="muted">Last updated: 2025-08-24</p>
+  <a href="/" class="kd-home-link"
+     style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
+    ← KingshotData Korea
+  </a>
 
-    <p><strong><a href="https://kingshotdata.kr">KingshotData.kr</a></strong> is an
-      <strong>unofficial fan site</strong> for Kingshot players,
-      bringing together building and hero information, calculators,
-      and guides in one place.</p>
+  <main class="container">
+    <header class="about-header">
+      <h1 data-i18n="about.title">소개</h1>
 
-    <h2>What do we provide?</h2>
-    <ul>
-      <li>Building/Hero database</li>
-      <li>Upgrade & resource calculators</li>
-      <li>Strategy guides and tips</li>
-    </ul>
+      <p class="muted">
+        <span data-i18n="about.lastUpdatedLabel">마지막 업데이트:</span>
+        <span id="about-last-updated">2026-01-11</span>
+      </p>
+    </header>
 
-    <h2>Copyright Notice</h2>
-    <p>All game images and data are copyrighted by
-      <strong>Century Games</strong>. Original content on this site
-      is provided for non-commercial, informational purposes,
-      and some materials may be cited with proper attribution.</p>
+    <!-- 운영자 소개 -->
+    <section class="about-block" aria-labelledby="about-intro">
+      <h2 id="about-intro" data-i18n="about.section.intro">운영자 소개</h2>
 
-    <h2>Disclaimer</h2>
-    <p>Displayed values and information may differ from the actual
-      game due to updates. This site assumes no legal responsibility
-      for outcomes resulting from the use of its information.</p>
+      <p data-i18n="about.intro.p1"></p>
+      <p data-i18n="about.intro.p2"></p>
+      <p data-i18n="about.intro.p3"></p>
+      <p data-i18n="about.intro.p4"></p>
+      <p data-i18n="about.intro.p5"></p>
+      <p data-i18n="about.intro.p6"></p>
+    </section>
 
-    <h2>Contact</h2>
-    <p>Feedback / suggestions / inquiries: 
-      <a href="mailto:contact@kingshotdata.kr">contact@kingshotdata.kr</a></p>
+    <!-- 광고/실험 -->
+    <section class="about-block" aria-labelledby="about-ads">
+      <h2 id="about-ads" data-i18n="about.section.ads">테스트/실험 안내 (광고 포함)</h2>
 
-    <p class="muted" style="margin-top:16px">
-      For details regarding personal data, please see the 
-      <a href="/privacy">Privacy Policy</a>.
-    </p>
-  </section>
+      <p data-i18n="about.ads.p1"></p>
+      <p data-i18n="about.ads.p2"></p>
+      <p data-i18n="about.ads.p3"></p>
+      <p data-i18n="about.ads.p4"></p>
+      <p data-i18n="about.ads.p5"></p>
+      <p data-i18n="about.ads.p6"></p>
+    </section>
+
+    <!-- 제공 -->
+    <section class="about-block" aria-labelledby="about-provide">
+      <h2 id="about-provide" data-i18n="about.section.provide">무엇을 제공하나요?</h2>
+
+      <ul>
+        <li data-i18n="about.provide.li1"></li>
+        <li data-i18n="about.provide.li2"></li>
+        <li data-i18n="about.provide.li3"></li>
+      </ul>
+    </section>
+
+    <!-- 저작권 -->
+    <section class="about-block" aria-labelledby="about-copyright">
+      <h2 id="about-copyright" data-i18n="about.section.copyright">저작권 안내</h2>
+
+      <p data-i18n="about.copyright.p1"></p>
+      <p data-i18n="about.copyright.p2"></p>
+    </section>
+
+    <!-- 면책 -->
+    <section class="about-block" aria-labelledby="about-disclaimer">
+      <h2 id="about-disclaimer" data-i18n="about.section.disclaimer">면책 조항</h2>
+
+      <p data-i18n="about.disclaimer.p1"></p>
+      <p data-i18n="about.disclaimer.p2"></p>
+    </section>
+
+    <!-- 문의 -->
+    <section class="about-block" aria-labelledby="about-contact">
+      <h2 id="about-contact" data-i18n="about.section.contact">문의</h2>
+
+      <p data-i18n="about.contact.p1"></p>
+
+      <p>
+        <span data-i18n="about.contact.label">피드백 / 제안 / 문의:</span>
+        <a href="mailto:contact@kingshotdata.kr">contact@kingshotdata.kr</a>
+      </p>
+    </section>
+
+    <footer class="about-block">
+      <p class="muted" style="margin-top:16px">
+        <span data-i18n="about.privacy.p1">개인정보 관련 사항은</span>
+        <a href="/privacy" data-i18n="about.privacy.link">개인정보처리방침</a>.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+
+      if (window.__ABOUT_BOOT_ONCE__) return;
+      window.__ABOUT_BOOT_ONCE__ = true;
+
+      function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+
+      // ✅ data-i18n → 무조건 textContent로 렌더(줄바꿈 필요 없음)
+      function renderAll(showMissingKey) {
+        var nodes = document.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < nodes.length; i++) {
+          var el = nodes[i];
+          var key = el.getAttribute('data-i18n');
+
+          if (!window.I18N || typeof I18N.t !== 'function') continue;
+
+          var val = I18N.t(key, null);
+
+          // 못 찾으면 디버그용으로 키 표시(원하면 false로)
+          if (val === null || val === undefined || val === key) {
+            el.textContent = showMissingKey ? key : '';
+            continue;
+          }
+
+          el.textContent = String(val);
+        }
+      }
+
+      async function boot() {
+        // I18N 준비 대기
+        for (var i = 0; i < 200; i++) {
+          if (window.I18N && typeof I18N.t === 'function') break;
+          await sleep(50);
+        }
+        if (!window.I18N || typeof I18N.t !== 'function') {
+          console.warn('[about] I18N missing');
+          return;
+        }
+
+        // 1) 기본 applyTo
+        try {
+          if (typeof I18N.applyTo === 'function') I18N.applyTo(document);
+        } catch (e) {}
+
+        // 2) 최종 렌더(키 누락 시 보이게 해서 바로 잡기)
+        renderAll(true);
+      }
+
+      window.addEventListener('load', boot);
+      window.addEventListener('i18n:changed', boot);
+      window.addEventListener('languagechange', boot);
+
+      if (document.readyState === 'complete') boot();
+    })();
+  </script>
 </body>
 </html>

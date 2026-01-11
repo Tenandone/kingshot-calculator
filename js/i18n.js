@@ -2,7 +2,7 @@
   'use strict';
 
   // ===== Config =====
-  var I18N_VERSION = '2025-09-17';       // 배포 시에만 변경 (빈번히 바꾸지 말 것)
+  var I18N_VERSION = (window.__V || '2025-09-17');      // 배포 시에만 변경 (빈번히 바꾸지 말 것)
   var I18N_REQUEST_TIMEOUT_MS = 1200;    // 느린 경로 방어 타임아웃
 
   // ===== State =====
@@ -64,9 +64,10 @@
   // ===== URL Resolver =====
   // 프로젝트 구조는 /i18n/{lang}/{ns}.json 이므로 단일 경로만 사용한다.
   function buildUrls(ns, lang) {
-    var v = I18N_VERSION; // 고정 버전(캐시 버스터)
-    return ['/i18n/' + lang + '/' + ns + '.json?v=' + v];
-  }
+  var v = (window.__V || I18N_VERSION || 'now');   // ✅ 런타임에서 바로 반영
+  return ['/i18n/' + lang + '/' + ns + '.json?v=' + v];
+}
+
 
   // ===== Internal merge helpers (언어 가드) =====
 

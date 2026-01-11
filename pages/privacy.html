@@ -1,13 +1,14 @@
 <!doctype html>
-<html lang="en">
-<head>  
+<html lang="ko">
+<head>
   <meta charset="utf-8" />
-  <title>Privacy Policy - KingshotData.kr</title>
+  <title data-i18n="privacy.title">개인정보처리방침</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Privacy Policy for KingshotData.kr — how we collect, use, and protect information, our third-party partners (GA4/AdSense), cookie practices, user rights, and contact details." />
-  <meta name="color-scheme" content="light dark" />
+
+  <!-- standalone-bridge가 이미 i18n을 올려주는 구조라면 유지 -->
+  <script src="./js/standalone-bridge.js?v=202509120604" defer></script>
+
   <style>
-    /* === minimal, fast, accessible === */
     :root{ --fg:#111;--muted:#6b7280;--border:#e5e7eb;--bg:#fff;--bg-soft:#fafafa;--link:#0b5fff; }
     @media (prefers-color-scheme:dark){
       :root{--fg:#eaecef;--muted:#a3a7ad;--border:#2a2f36;--bg:#0c0e12;--bg-soft:#0f1217;--link:#80aaff;}
@@ -28,95 +29,123 @@
     small{color:var(--muted)}
   </style>
 </head>
-<a href="/" class="kd-home-link" style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
-  ← KingshotData Korea
-</a>
-<body>
-  <section class="container" id="top">
-    <h1>Privacy Policy</h1>
-    <p class="muted">Effective Date: <strong>2025-08-24</strong> · Contact: <a href="mailto:contact@kingshotdata.kr">contact@kingshotdata.kr</a></p>
 
-    <h2 id="who">0. Who We Are (Controller)</h2>
-    <p>
-      KingshotData (“we”, “us”) is operated by the
-      <strong>Kingshot Strategy User Team</strong> (an unofficial fan community) based in the Republic of Korea.<br>
-      Data Controller contact: <a href="mailto:contact@kingshotdata.kr">contact@kingshotdata.kr</a><br>
-      <em>We are independent and not affiliated with Century Games.</em>
+<body>
+  <a href="/" class="kd-home-link" style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
+    ← <span data-i18n="privacy.backHome">KingshotData Korea</span>
+  </a>
+
+  <section class="container" id="top">
+    <h1 data-i18n="privacy.h1">개인정보처리방침 (Privacy Policy)</h1>
+
+    <p class="muted">
+      <span data-i18n="privacy.effectiveLabel">시행일:</span>
+      <strong>2026-01-11</strong>
+      <span> · </span>
+      <span data-i18n="privacy.contactLabel">문의:</span>
+      <a href="mailto:contact@kingshotdata.kr">contact@kingshotdata.kr</a>
     </p>
 
-    <h2 id="scope">1. Scope</h2>
-    <p>This Policy applies to <strong>kingshotdata.kr</strong> and all services/pages under this domain.</p>
+    <h2 id="who" data-i18n="privacy.s0.title">0. 운영 주체</h2>
+    <p data-i18n="privacy.s0.p1"></p>
 
-    <h2 id="collect">2. Information We Collect</h2>
+    <h2 id="scope" data-i18n="privacy.s1.title">1. 적용 범위</h2>
+    <p data-i18n="privacy.s1.p1"></p>
+
+    <h2 id="collect" data-i18n="privacy.s2.title">2. 수집하는 개인정보 항목</h2>
     <ul>
-      <li><strong>Usage data</strong>: timestamps, visited URLs, referrers, approximate IP (with anonymization where applicable), browser/OS, and device information.</li>
-      <li><strong>Cookies and similar identifiers</strong> for site functionality, analytics, and advertising.</li>
-      <li><strong>User-provided data</strong> (e.g., details included in emails you voluntarily send to us).</li>
+      <li data-i18n="privacy.s2.li1"></li>
+      <li data-i18n="privacy.s2.li2"></li>
+    </ul>
+    <p class="note" data-i18n="privacy.s2.note"></p>
+
+    <h2 id="use" data-i18n="privacy.s3.title">3. 개인정보 수집 및 이용 목적</h2>
+    <ul>
+      <li data-i18n="privacy.s3.li1"></li>
+      <li data-i18n="privacy.s3.li2"></li>
+      <li data-i18n="privacy.s3.li3"></li>
+      <li data-i18n="privacy.s3.li4"></li>
+      <li data-i18n="privacy.s3.li5"></li>
     </ul>
 
-    <h2 id="use">3. How We Use Information</h2>
+    <h2 id="cookies" data-i18n="privacy.s4.title">4. 쿠키(Cookie) 및 유사 기술</h2>
+    <p data-i18n="privacy.s4.p1"></p>
+
+    <h2 id="security" data-i18n="privacy.s41.title">4.1. 보호 조치</h2>
+    <p data-i18n="privacy.s41.p1"></p>
+
+    <h2 id="partners" data-i18n="privacy.s5.title">5. 제3자 제공 및 제3자 서비스(외부 파트너)</h2>
+    <p data-i18n="privacy.s5.p1"></p>
     <ul>
-      <li>Provide and improve site functionality and user experience.</li>
-      <li>Measure and analyze usage (aggregated/anonymous analytics).</li>
-      <li>Serve and measure ads (non-PII based; interest-based advertising may be used by partners).</li>
-      <li>Respond to inquiries.</li>
+      <li data-i18n="privacy.s5.li1"></li>
+      <li data-i18n="privacy.s5.li2"></li>
+    </ul>
+    <p data-i18n="privacy.s5.p2"></p>
+    <ul>
+      <li data-i18n="privacy.s5.li3"></li>
+      <li data-i18n="privacy.s5.li4"></li>
     </ul>
 
-    <h2 id="cookies">4. Cookies</h2>
-    <p>You can refuse or delete cookies via your browser settings. Some features may not function properly without cookies.</p>
+    <h2 id="ads_affiliate" data-i18n="privacy.s51.title">5.1. 광고 및 제휴 링크 안내</h2>
+    <p class="note" data-i18n="privacy.s51.note"></p>
 
-    <h2 id="security">4.1. Security</h2>
-    <p>We implement reasonable technical and organizational measures to protect information during transmission and at rest. However, no method of transmission or storage is 100% secure.</p>
-
-    <h2 id="partners">5. Third-Party Partners</h2>
-    <p>We use the following services; they may process non-identifying data under their own policies:</p>
+    <h2 id="retention" data-i18n="privacy.s6.title">6. 개인정보 보유 및 이용 기간</h2>
     <ul>
-      <li><strong>Google Analytics 4 (GA4)</strong> — site analytics.<br>
-        How Google uses data: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">policies.google.com/technologies/partner-sites</a>
-      </li>
-      <li><strong>Google AdSense</strong> — advertising delivery and measurement.<br>
-        Ads Settings: <a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a> ·
-        Personalized Ads Opt-out (NAI): <a href="https://optout.networkadvertising.org/" target="_blank" rel="noopener">optout.networkadvertising.org</a>
-      </li>
+      <li data-i18n="privacy.s6.li1"></li>
+      <li data-i18n="privacy.s6.li2"></li>
+      <li data-i18n="privacy.s6.li3"></li>
     </ul>
 
-    <h2 id="consent">5.1. Ads & Cookies Disclosure (EEA/UK Consent)</h2>
-    <p class="note">Where required by law (e.g., EEA/UK), we display a consent banner for cookies and advertising identifiers. You can adjust your preferences at any time via your browser settings and (if provided) our on-site “Cookie Preferences” control. Third-party vendors, including Google, may use cookies or similar technologies to serve and measure ads. You can opt out of personalized ads via Google Ads Settings or the NAI opt-out pages linked above.</p>
+    <h2 id="destroy" data-i18n="privacy.s7.title">7. 파기 절차 및 방법</h2>
+    <ul>
+      <li data-i18n="privacy.s7.li1"></li>
+      <li data-i18n="privacy.s7.li2"></li>
+    </ul>
 
-    <h2 id="legal">6. Legal Basis</h2>
-    <p>Depending on your location, we rely on one or more of the following: performance of a service you request, our legitimate interests in operating and improving the site, and/or your consent where required (e.g., for certain cookies/ads).</p>
+    <h2 id="rights" data-i18n="privacy.s8.title">8. 이용자 권리 및 행사 방법</h2>
+    <p data-i18n="privacy.s8.p1"></p>
+    <p class="note" data-i18n="privacy.s8.note"></p>
 
-    <h2 id="retention">7. Data Retention</h2>
-    <p>We retain data only for as long as necessary for the purposes described above, or as required by applicable laws or platform policies. For example, analytics data is retained according to our GA settings (e.g., <strong>14 months</strong> unless otherwise required). After retention periods, data is deleted or anonymized.</p>
+    <h2 id="children" data-i18n="privacy.s9.title">9. 아동의 개인정보</h2>
+    <p data-i18n="privacy.s9.p1"></p>
 
-    <h2 id="transfers">8. International Transfers</h2>
-    <p>Data may be processed on servers located outside your country. We take reasonable steps to protect information consistent with this Policy.</p>
+    <h2 id="transfers" data-i18n="privacy.s10.title">10. 국외 이전</h2>
+    <p data-i18n="privacy.s10.p1"></p>
 
-    <h2 id="children">9. Children’s Privacy</h2>
-    <p>Our services are not directed to children under the age of 14, and we do not knowingly collect personal data from them.</p>
-
-    <h2 id="choices">10. Your Rights & Choices</h2>
-    <div class="grid two">
-      <div>
-        <p><strong>Korea (PIPA):</strong> You may request access, correction, deletion, or suspension of processing of your personal information.</p>
-        <p><strong>EEA/UK (GDPR):</strong> You have rights to access, rectification, erasure, restrict/oppose processing, and data portability; where processing relies on consent, you may withdraw consent at any time.</p>
-      </div>
-      <div>
-        <p><strong>California (CPRA):</strong> If applicable, residents may request access/deletion and opt out of “sale”/“sharing” of personal information. If we engage in such practices, we will provide a “Do Not Sell or Share My Personal Information” link.</p>
-        <ul>
-          <li>Manage cookies in your browser settings.</li>
-          <li>Manage Google ads personalization at <a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a>.</li>
-          <li>Opt out of interest-based advertising via <a href="https://optout.networkadvertising.org/" target="_blank" rel="noopener">NAI</a>.</li>
-          <li>Contact: <a href="mailto:contact@kingshotdata.kr">contact@kingshotdata.kr</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <h2 id="changes">11. Changes to This Policy</h2>
-    <p>We may update this Policy from time to time. Material changes will be posted on this page with an updated effective date.</p>
+    <h2 id="changes" data-i18n="privacy.s11.title">11. 방침 변경</h2>
+    <p data-i18n="privacy.s11.p1"></p>
 
     <hr>
-    <p class="muted"><small>This page is provided for transparency and general information. It does not constitute legal advice.</small></p>
+
+    
+
+    <p class="muted">
+      <small data-i18n="privacy.footerNote"></small>
+    </p>
   </section>
+
+  <script>
+    (function () {
+      'use strict';
+      if (window.__PRIVACY_BOOT_ONCE__) return;
+      window.__PRIVACY_BOOT_ONCE__ = true;
+
+      function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+
+      async function boot(){
+        for (var i = 0; i < 200; i++) {
+          if (window.I18N && typeof I18N.t === 'function' && typeof I18N.applyTo === 'function') break;
+          await sleep(50);
+        }
+        if (!window.I18N || typeof I18N.applyTo !== 'function') return;
+        I18N.applyTo(document);
+      }
+
+      window.addEventListener('load', boot);
+      window.addEventListener('i18n:changed', boot);
+      window.addEventListener('languagechange', boot);
+      if (document.readyState === 'complete') boot();
+    })();
+  </script>
 </body>
 </html>

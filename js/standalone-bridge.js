@@ -110,4 +110,96 @@
   })();
 
   // (선택) 영웅/DB/가이드는 단독 유지. 필요하면 같은 방식으로 리다이렉트 추가 가능.
+    // ===== 6) Standalone i18n boot (about/privacy 등 단독 페이지 지원) =====
+  (function bootStandaloneI18n() {
+    // 중복 실행 방지
+    if (window.__KSD_STANDALONE_I18N_BOOT__) return;
+    window.__KSD_STANDALONE_I18N_BOOT__ = true;
+
+    function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+
+    // 페이지별 네임스페이스 결정
+    function getPageNS() {
+      // 1) meta db-title 우선
+      var meta = document.querySelector('meta[name="db-title"]');
+      var t = meta && meta.content ? String(meta.content).trim().toLowerCase() : '';
+
+      if (t === 'about') return 'about';
+      if (t === 'privacy') return 'privacy';
+
+      // 2) pathname fallback
+      var p = (location.pathname || '').toLowerCase();
+      if (p.includes('/about')) return 'about';
+      if (p.includes('/privacy')) return 'privacy';
+
+      return null;
+    }
+
+    async function waitI18NReady() {
+      // 최대 10초 대기 (200 * 50ms)
+      for (var i = 0; i < 200; i++) {
+        if (window.I18N && typeof I18N.t === 'function' && typeof I18N.loadNamespace === 'function') {
+          return true;
+        }
+        await sleep(50);
+      }
+      return false;
+    }
+
+    async function safeSetLang(l) {
+      try {
+        // setLang이 있으면 우선 사용
+        if (typeof I18N.setLang === 'function') {
+          var r = I18N.setLang(l);
+          if (r && typeof r.then === 'function') await r;
+        }
+      } catch (e) {}
+    }
+
+    async function boot() {
+      var ok = await waitI18NReady();
+      if (!ok) {
+        console.warn('[bridge] I18N not ready (timeout)');
+        return;
+      }
+
+      // ✅ 현재 페이지 lang 보장
+      await safeSetLang(lang);
+
+      // ✅ 페이지별 네임스페이스 로드
+      var ns = getPageNS();
+      if (ns) {
+        try {
+          await I18N.loadNamespace(ns);
+        } catch (e) {
+          console.warn('[bridge] loadNamespace failed:', ns, e);
+        }
+      }
+
+      // ✅ 번역 적용
+      try {
+        if (typeof I18N.applyTo === 'function') {
+          I18N.applyTo(document);
+        } else {
+          // applyTo가 없을 수도 있으니 data-i18n 수동 적용 fallback
+          var nodes = document.querySelectorAll('[data-i18n]');
+          for (var i = 0; i < nodes.length; i++) {
+            var el = nodes[i];
+            var key = el.getAttribute('data-i18n');
+            var val = String(I18N.t(key, key) || '');
+            el.innerHTML = val.replace(/\n/g, '<br>');
+          }
+        }
+      } catch (e) {
+        console.warn('[bridge] apply failed:', e);
+      }
+
+      // ✅ “준비 완료” 신호(About 같은 페이지에서 후킹 가능)
+      window.dispatchEvent(new Event('i18n:ready'));
+      window.dispatchEvent(new Event('i18n:changed'));
+    }
+
+    boot();
+  })();
+
 })();
