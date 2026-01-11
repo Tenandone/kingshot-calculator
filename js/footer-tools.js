@@ -1,4 +1,4 @@
-/* footer-tools.js (FINAL — coupons → CTAs → LootBar ONLY) */
+/* footer-tools.js (FINAL — coupons → CTAs → LootBar → AdFit(KO only)) */
 ;(() => {
   'use strict';
 
@@ -54,6 +54,7 @@
   function iconGift() {
     return `<svg viewBox="0 0 24 24"><path d="M20 12v8a2 2 0 0 1-2 2h-5v-10h7zM11 22H6a2 2 0 0 1-2-2v-8h7v10zM21 8h-3.17A3 3 0 1 0 12 6a3 3 0 1 0-5.83 2H3a1 1 0 0 0 0 2h18a1 1 0 1 0 0-2Z"/></svg>`;
   }
+
   function iconChat() {
     return `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.94 2 10.8c0 2.76 1.6 5.2 4.09 6.8L5.5 22l4.3-2.37c.72.13 1.45.2 2.2.2 5.52 0 10-3.94 10-8.8S17.52 2 12 2z"/></svg>`;
   }
@@ -75,11 +76,29 @@
     return new Date() >= new Date(String(until).trim() + 'T00:00:00Z');
   }
 
+  /* ================= AdFit loader (KO only + load once) ================= */
+  function loadAdfitOnce() {
+    // // 왜: ba.min.js는 한 페이지에서 여러 번 로드되면 광고가 안 뜨거나 꼬일 수 있어서 1회만 로드
+    if (document.querySelector('script[data-kakao-adfit="1"]')) return;
+
+    const s = document.createElement('script');
+    s.src = '//t1.daumcdn.net/kas/static/ba.min.js';
+    s.async = true;
+    s.setAttribute('data-kakao-adfit', '1');
+    document.body.appendChild(s);
+  }
+
   /* ================= render ================= */
   async function renderFooterTools() {
     const container = document.getElementById('footerTools');
     if (!container) return;
 
+    // // 왜: SPA/라우팅에서 renderFooterTools가 여러 번 실행되면
+    // //      AdFit는 동적 재삽입 때 광고가 안 뜨는 경우가 있어서 "테스트 단계"는 1회 렌더로 고정
+    if (container.dataset.footerToolsRendered === '1') return;
+    container.dataset.footerToolsRendered = '1';
+
+    const lang = getLangSafe();
     container.innerHTML = '';
 
     /* --- coupons --- */
@@ -93,7 +112,7 @@
       empty.textContent = t('footer.coupons.empty', 'No active coupons at the moment.');
       couponWrap.appendChild(empty);
     } else {
-      coupons.forEach(c => {
+      coupons.forEach((c) => {
         const d = document.createElement('div');
         d.className = 'footer-coupon' + (isExpiredUTC(c.until) ? ' expired' : '');
         d.innerHTML = `
@@ -125,10 +144,27 @@
       </a>
     `;
 
-    /* --- mount in correct order --- */
+    /* --- mount base blocks --- */
     container.appendChild(couponWrap);
     container.appendChild(ctas);
     container.appendChild(lootbar);
+
+    /* --- AdFit (KO only, below LootBar) --- */
+    if (lang.startsWith('ko')) {
+      const adfit = document.createElement('div');
+      adfit.className = 'footer-adfit';
+      adfit.innerHTML = `
+        <ins class="kakao_ad_area"
+             style="display:none;"
+             data-ad-unit="DAN-iGFM4JeI8aenYEf7"
+             data-ad-width="300"
+             data-ad-height="250"></ins>
+      `;
+      container.appendChild(adfit);
+
+      // // 왜: ins가 DOM에 붙은 다음 스크립트를 로드해야 스캔/렌더가 안정적
+      loadAdfitOnce();
+    }
   }
 
   if (document.readyState === 'loading') {
