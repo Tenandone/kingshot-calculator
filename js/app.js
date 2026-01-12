@@ -707,8 +707,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       applyCalcI18NIfAvailable(content);
     } catch (_e) {}
-  }, false);
-
+  }, false); 
   
 
 })();

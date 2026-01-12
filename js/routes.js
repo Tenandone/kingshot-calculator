@@ -211,6 +211,8 @@
             { href:'/guides',     img:'/img/home/guides.png',     t:'home.card.guides.title',      d:'home.card.guides.desc' },
             { href:'/calculator', img:'/img/home/calculator.png', t:'home.card.calculators.title', d:'home.card.calculators.desc' },
             { href:'/waracademy', img:'/img/home/waracademy.png', t:'home.card.waracademy.title',  d:'home.card.waracademy.desc' },
+            
+            { href:'/tools',      img:'/img/home/tools.png',      t:'home.card.tools.title',       d:'home.card.tools.desc' },
 
             { href:'/about',      img:'/img/home/about.png',      t:'nav.about',                   d:'home.card.about.desc' }
           ];
@@ -704,6 +706,336 @@
     focusMain(el);
   }
 },
+
+
+/* =========================================================
+ * /tools — pages 기반 실험/유틸 허브 (list + detail)
+ *
+ * 파일 규칙(권장)
+ * - 리스트(우선순위):
+ *   1) /pages/tools/index.json  (있으면 카드 자동 생성)
+ *   2) /pages/tools.html        (없으면 기본 화면)
+ *
+ * - 상세:
+ *   /pages/tools/<slug>.html
+ *   /pages/tools/<slug>/index.html
+ *
+ * - 옵션(meta 자동 로드):
+ *   <meta name="tools-css" content="/css/tools.css">
+ *   <meta name="tools-js"  content="/js/pages/tools.js">
+ *   <meta name="tools-title" content="표시할 제목(또는 i18n 키)">
+ * ========================================================= */
+'/tools': {
+  title: 'Tools - KingshotData.kr',
+  render: async function (el, rest) {
+    var token = newRenderToken();
+
+    // ---- helpers ----
+    function safeSlug(input) {
+      var s = String(input || '');
+      try { s = decodeURIComponent(s); } catch (e) {}
+      s = s.replace(/\\/g, '/');
+      s = s.replace(/(^|\/)\.\.(?=\/|$)/g, ''); // 상위경로 차단
+      s = s.replace(/\/{2,}/g, '/');
+      s = s.replace(/^\//, '');
+      s = s.replace(/\0/g, '');
+      s = s.split('?')[0].split('#')[0].trim();
+      return s;
+    }
+
+    async function tryFetchJSON(url) {
+      try {
+        var res = await fetch(v(url), { cache: 'no-store' });
+        if (!res.ok) return null;
+        return await res.json();
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function cardHTML(item) {
+      item = item || {};
+      var href = item.href || ('/tools/' + encodeURIComponent(item.slug || ''));
+      var img  = item.img || '/img/home/tools.png';
+
+      var titleKey = item.titleKey || '';
+      var descKey  = item.descKey  || '';
+
+      var title = item.title || (titleKey ? t(titleKey, item.slug || 'Tool') : (item.slug || 'Tool'));
+      var desc  = item.desc  || (descKey  ? t(descKey, '') : '');
+
+      return ''
+        + '<a class="card card--category" href="' + href + '">'
+        + '  <div class="card__media" aria-hidden="true">' + iconImg(title, img) + '</div>'
+        + '  <div class="card__body">'
+        + '    <div class="card__title"' + (titleKey ? ' data-i18n="' + titleKey + '"' : '') + '>' + title + '</div>'
+        + '    <div class="card__subtitle"' + (descKey  ? ' data-i18n="' + descKey  + '"' : '') + '>' + desc  + '</div>'
+        + '  </div>'
+        + '</a>';
+    }
+
+    async function loadMetaAssets(doc) {
+      try {
+        var cssMeta = doc && doc.querySelector && doc.querySelector('meta[name="tools-css"]');
+        var jsMeta  = doc && doc.querySelector && doc.querySelector('meta[name="tools-js"]');
+
+        if (cssMeta && cssMeta.content) {
+          try { await ensureCSS(cssMeta.content); } catch (e) {}
+        }
+        if (jsMeta && jsMeta.content) {
+          try { await ensureScript(jsMeta.content); } catch (e) {}
+        }
+      } catch (e2) {}
+    }
+
+    // ✅ 단일 HTML(doctype/head/style/script 포함)도 그대로 테스트 가능하게 마운트
+    // ✅ 핵심 수정: 인라인 스크립트를 IIFE로 감싸서 "전역 const/let 재선언" 에러 방지
+    // ✅ 외부 스크립트는 중복 로드 방지(Set)
+    async function mountFullHTML(root, html) {
+      var doc = null;
+      try { doc = new DOMParser().parseFromString(html, 'text/html'); } catch (eDoc) {}
+
+      // 1) meta 기반 CSS/JS 자동 로드 (있을 때만)
+      if (doc) {
+        try { await loadMetaAssets(doc); } catch (eMeta) {}
+      }
+
+      if (!doc || !doc.body) {
+        // 파싱 실패 시 폴백
+        root.innerHTML = htmlBodyOnly(html);
+        return { doc: null };
+      }
+
+      // 2) head의 inline <style>을 body 상단으로 "주입" (body의 style도 정상 적용됨)
+      var injectedStyles = '';
+      try {
+        var styles = doc.head ? doc.head.querySelectorAll('style') : [];
+        for (var i = 0; i < styles.length; i++) {
+          injectedStyles += '<style data-tools-inline-style="1">' + (styles[i].textContent || '') + '</style>';
+        }
+      } catch (eStyle) {}
+
+      // 3) body HTML에서 script는 제거하고 먼저 렌더
+      var bodyClone = doc.body.cloneNode(true);
+      try {
+        var scriptsInBody = bodyClone.querySelectorAll('script');
+        for (var j = 0; j < scriptsInBody.length; j++) scriptsInBody[j].remove();
+      } catch (eRm) {}
+
+      // ✅ 기존 root 안 스크립트도 함께 날아가도록 innerHTML로 리셋
+      root.innerHTML = injectedStyles + bodyClone.innerHTML;
+
+      // 4) script 실행(문서 순서: head→body)
+      var scripts = [];
+      try { scripts = Array.prototype.slice.call(doc.querySelectorAll('script')); } catch (eScr) { scripts = []; }
+
+      // ✅ 외부 스크립트 중복 로드 방지(라우팅 재진입 대비)
+      var LOADED = (window.__TOOLS_SCRIPT_LOADED__ = window.__TOOLS_SCRIPT_LOADED__ || new Set());
+
+      for (var k = 0; k < scripts.length; k++) {
+        var sc = scripts[k];
+
+        var src = sc.getAttribute && sc.getAttribute('src');
+        var typeAttr = (sc.getAttribute && sc.getAttribute('type')) ? sc.getAttribute('type') : '';
+        var type = String(typeAttr || '').trim();
+        var isModule = (type === 'module');
+        var hasNoModule = sc.hasAttribute && sc.hasAttribute('nomodule');
+
+        // ---- 외부 스크립트 ----
+        if (src) {
+          try {
+            // 절대 URL로 정규화해 Set으로 중복 방지
+            var abs = '';
+            try { abs = new URL(src, location.href).href; } catch (eUrl) { abs = src; }
+
+            if (LOADED.has(abs)) continue;
+
+            await ensureScript(src, { type: isModule ? 'module' : undefined });
+            LOADED.add(abs);
+          } catch (eExt) {
+            console.warn('[tools] script load fail:', src, eExt);
+          }
+          continue;
+        }
+
+        // ---- 인라인 스크립트 ----
+        var code = (sc.textContent || '');
+        if (!code.trim()) continue;
+
+        try {
+          var s = document.createElement('script');
+
+          // module은 원래대로 실행 (모듈 스코프라 전역 재선언 충돌 없음)
+          if (isModule) {
+            s.type = 'module';
+            s.text = code + '\n//# sourceURL=tools:inline-module:' + k;
+            root.appendChild(s);
+            continue;
+          }
+
+          // ✅ 핵심: 일반 인라인 스크립트는 IIFE로 감싸서 전역 const/let 재선언을 차단
+          // 전역이 꼭 필요하면 툴 HTML 안에서 window.xxx = ... 로 작성하면 됨
+          s.text =
+            '(function(window, document){\n' +
+            code +
+            '\n}).call(window, window, document);\n' +
+            '//# sourceURL=tools:inline:' + k;
+
+          if (hasNoModule) s.noModule = true;
+
+          root.appendChild(s);
+        } catch (eIn) {
+          console.warn('[tools] inline script fail', eIn);
+        }
+      }
+
+      return { doc: doc };
+    }
+
+    // ---- view ----
+    el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+
+    var trail = safeSlug((rest || '').split('/').filter(Boolean).join('/'));
+
+    // =========================
+    // 1) 상세 페이지: /tools/:slug...
+    // =========================
+    if (trail) {
+      el.innerHTML =
+        '<section class="container">'
+        + '  <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">'
+        + '    <a class="btn btn-icon" href="/tools" data-smart-back="/tools" aria-label="Back" title="Back">←</a>'
+        + '  </div>'
+        + '  <div id="tools-detail-root" class="tools-detail-root"></div>'
+        + '</section>';
+
+      if (isStale(token)) return;
+
+      // ✅ trail 전체를 기준으로 파일도 찾아줌 (중첩 실험 페이지 가능)
+      // 예: /tools/db-lab/truegold → /pages/tools/db-lab/truegold.html or .../index.html
+      var slugPath = safeSlug(trail);
+
+      var html = await loadHTMLCached([
+        'pages/tools/' + slugPath + '.html',
+        '/pages/tools/' + slugPath + '.html',
+        'pages/tools/' + slugPath + '/index.html',
+        '/pages/tools/' + slugPath + '/index.html'
+      ]);
+
+      if (isStale(token)) return;
+
+      var root = el.querySelector('#tools-detail-root') || el;
+
+      if (!html) {
+        root.innerHTML =
+          '<div class="placeholder">'
+          + '  <h2 data-i18n="tools.notFound">' + t('tools.notFound', '툴 페이지를 찾을 수 없습니다.') + '</h2>'
+          + '  <p class="muted">/pages/tools/' + slugPath + '.html 또는 /pages/tools/' + slugPath + '/index.html</p>'
+          + '</div>';
+        if (window.I18N && window.I18N.applyTo) window.I18N.applyTo(el);
+        setTitle('title.tools', 'Tools - KingshotData.kr');
+        window.scrollTo({ top: 0 });
+        focusMain(el);
+        return;
+      }
+
+      // ✅ 여기서 CSS/JS(인라인 포함) 제대로 먹게 마운트
+      var mounted = await mountFullHTML(root, html);
+      if (isStale(token)) return;
+
+      if (window.I18N && window.I18N.applyTo) window.I18N.applyTo(el);
+
+      // 제목: meta tools-title 우선
+      (function setTitleFromToolsMeta(docMaybe) {
+        try {
+          var metaT = docMaybe && docMaybe.querySelector && docMaybe.querySelector('meta[name="tools-title"]');
+          if (metaT && metaT.content) {
+            // meta에 i18n 키를 넣어도 됨
+            setTitle(metaT.content, metaT.content);
+            return;
+          }
+        } catch (e3) {}
+        setTitle('title.tools', 'Tools - KingshotData.kr');
+      })(mounted && mounted.doc);
+
+      window.scrollTo({ top: 0 });
+      focusMain(el);
+      return;
+    }
+
+    // =========================
+    // 2) 리스트 페이지: /tools
+    // =========================
+
+    // (A) index.json 있으면 카드 자동 생성
+    var list = await tryFetchJSON('/pages/tools/index.json');
+    if (isStale(token)) return;
+
+    if (list && Object.prototype.toString.call(list) === '[object Array]') {
+      el.innerHTML =
+        '<div class="home-container">'
+        + '  <section class="home-categories">'
+        + '    <h2 class="section-title" data-i18n="tools.title">' + t('tools.title', 'Tools') + '</h2>'
+        + '    <div class="grid category-grid">'
+        +       list.map(function (it) { return cardHTML(it || {}); }).join('')
+        + '    </div>'
+        + '  </section>'
+        + '</div>';
+
+      if (window.I18N && window.I18N.applyTo) window.I18N.applyTo(el);
+      setTitle('title.tools', 'Tools - KingshotData.kr');
+      window.scrollTo({ top: 0 });
+      focusMain(el);
+      return;
+    }
+
+    // (B) tools.html 있으면 그대로 렌더 (여긴 굳이 full mount 필요 없음)
+    var html2 = await loadHTMLCached([
+      'pages/tools.html',
+      '/pages/tools.html',
+      'tools.html',
+      '/tools.html'
+    ]);
+    if (isStale(token)) return;
+
+    el.innerHTML = html2
+      ? htmlBodyOnly(html2)
+      : (
+        '<div class="placeholder">'
+        + '  <h2 data-i18n="tools.title">' + t('tools.title', 'Tools') + '</h2>'
+        + '  <p class="muted" data-i18n="tools.desc">'
+        +      t('tools.desc', '실험용/유틸 페이지입니다. /pages/tools/index.json 또는 /pages/tools.html을 만들면 이 화면이 대체됩니다.')
+        + '  </p>'
+        + '</div>'
+      );
+
+    // tools.html에도 meta로 assets 자동 로드 가능
+    var doc2 = null;
+    try { doc2 = new DOMParser().parseFromString(html2 || '', 'text/html'); } catch (eDoc2) {}
+    if (doc2) {
+      try { await loadMetaAssets(doc2); } catch (eAsset2) {}
+    }
+
+    if (window.I18N && window.I18N.applyTo) window.I18N.applyTo(el);
+    setTitle('title.tools', 'Tools - KingshotData.kr');
+    window.scrollTo({ top: 0 });
+    focusMain(el);
+
+    // (선택) tools.html 안에서 레거시 해시 링크 → SPA로
+    el.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#/tools/"]');
+      if (a) {
+        e.preventDefault();
+        var slug = a.getAttribute('href').replace(/^#\/tools\/?/, '');
+        return goto('/tools/' + slug);
+      }
+    });
+  }
+},
+
+
+
+
 
 
 
