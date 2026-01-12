@@ -152,14 +152,32 @@
   </div> <!-- .nav-bar 끝 -->
 </header>
 
-<!-- ✅ AdFit 심사용 광고 (PC 728x90) -->
-<div class="adfit-review-slot" style="text-align:center; margin:16px 0;">
+<!-- ✅ AdFit (KO only) -->
+<div id="adfitKoSlot" style="text-align:center; margin:16px 0; display:none;">
   <ins class="kakao_ad_area"
        data-ad-unit="DAN-n0VbUcLaeDeaLU9B"
        data-ad-width="728"
        data-ad-height="90"></ins>
 </div>
+
 <script src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+
+<script>
+(function(){
+  function isKO(){
+    return (
+      document.documentElement.getAttribute('lang') === 'ko' ||
+      window.I18N?.current === 'ko'
+    );
+  }
+
+  if (isKO()) {
+    const slot = document.getElementById('adfitKoSlot');
+    if (slot) slot.style.display = 'block';
+  }
+})();
+</script>
+
 
 <main class="container" id="main" role="main">
 
