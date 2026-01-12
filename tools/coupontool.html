@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Kingshot 쿠폰 교환 헬퍼</title>
+<style>
+  body{font-family:"Noto Sans KR",sans-serif;background:#f7f9fb;margin:0;padding:0;}
+  .container{max-width:460px;margin:40px auto;padding:24px;background:#fff;
+    border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,0.06);}
+  h1{font-size:22px;margin-bottom:8px;text-align:center;color:#222;}
+  p.desc{text-align:center;color:#666;font-size:14px;margin-bottom:24px;}
+  label{display:block;margin-top:12px;font-size:14px;color:#333;font-weight:600;}
+  input{width:100%;padding:10px;margin-top:6px;border:1px solid #ccc;border-radius:8px;
+    font-size:15px;box-sizing:border-box;}
+  button{margin-top:20px;width:100%;padding:12px;border:0;border-radius:8px;
+    background:#155bd6;color:#fff;font-size:16px;font-weight:600;cursor:pointer;}
+  button:hover{background:#0e45a6;}
+  .note{margin-top:16px;font-size:13px;color:#666;text-align:center;line-height:1.5;}
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎁 Kingshot 쿠폰 입력</h1>
+    <p class="desc">공식 교환 페이지를 빠르게 열고, 쿠폰 코드를 자동 복사합니다.</p>
+
+    <label for="fid">게임 ID (FID)</label>
+    <input id="fid" type="text" placeholder="예: 65706615">
+
+    <label for="code">교환 코드 (CDK)</label>
+    <input id="code" type="text" placeholder="예: PEpero2025">
+
+    <button id="openBtn">공식 페이지 열기</button>
+
+    <p class="note">
+      버튼을 누르면 입력한 쿠폰 코드가 자동 복사되고,<br>
+      공식 교환 페이지가 새 탭으로 열립니다.<br>
+      페이지에서 게임 ID와 쿠폰을 붙여넣고 교환을 완료하세요.
+    </p>
+  </div>
+
+<script>
+const targetURL = "https://ks-giftcode.centurygame.com/";
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    alert("✅ 쿠폰 코드가 복사되었습니다!");
+  } catch (err) {
+    alert("복사 실패 — 브라우저에서 수동 복사해주세요.");
+  }
+}
+
+document.getElementById("openBtn").addEventListener("click", ()=>{
+  const fid = document.getElementById("fid").value.trim();
+  const code = document.getElementById("code").value.trim();
+
+  if(!fid || !code){
+    alert("게임 ID와 쿠폰 코드를 모두 입력해주세요.");
+    return;
+  }
+
+  copyText(code);
+  window.open(targetURL, "_blank");
+});
+</script>
+</body>
+</html>

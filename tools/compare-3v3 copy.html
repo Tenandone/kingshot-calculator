@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SSR 영웅 A vs B 비교 계산기</title>
+<style>
+  :root{--fg:#111;--muted:#666;--bd:#e5e7eb;--pri:#0b57d0}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,"Noto Sans JP","Noto Sans SC","Noto Sans TC","Noto Naskh Arabic",sans-serif;margin:0;background:#fff;color:var(--fg)}
+  a{color:var(--pri)}
+  header{padding:18px 20px 8px}
+  h1{margin:0 0 6px;font-size:20px}
+  .muted{color:var(--muted);font-size:13px}
+  main{padding:0 20px 24px;max-width:1100px;margin:auto}
+  .lane{border:1px solid var(--bd);border-radius:14px;background:#fff;margin-top:14px}
+  .lane h2{margin:0;padding:12px 14px;border-bottom:1px solid var(--bd);font-size:16px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 14px}
+  .card{border:1px solid var(--bd);border-radius:12px;padding:10px 12px}
+  .title{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .select{min-width:220px;padding:8px 10px;border:1px solid var(--bd);border-radius:10px;font-size:14px;width:100%}
+  .badge{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef3ff;color:#1b56d6;font-size:12px}
+  .kv{display:flex;gap:8px;align-items:center;font-size:13px;margin-top:6px;flex-wrap:wrap}
+  .kv b{font-size:14px}
+  .slider{width:100%}
+  .cmp{border-top:1px dashed var(--bd);padding:10px 14px;color:#333;font-size:14px}
+  .cmp .muted{font-size:12px;color:var(--muted)}
+  .langBar{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
+  .langSel{padding:6px 8px;border:1px solid var(--bd);border-radius:8px;font-size:13px;background:#fff;color:#111}
+  .stepLabel{margin-right:6px}
+
+  /* ====== 별(0~6 단계 이미지) ====== */
+  .stars{display:flex;gap:4px;align-items:center}
+  .star{
+    width:24px;height:24px;display:inline-block;
+    background-size:contain;background-repeat:no-repeat;background-position:center;
+  }
+  .star[data-lv="0"]{ background-image:url('/img/star/0.webp'); }
+  .star[data-lv="1"]{ background-image:url('/img/star/1.webp'); }
+  .star[data-lv="2"]{ background-image:url('/img/star/2.webp'); }
+  .star[data-lv="3"]{ background-image:url('/img/star/3.webp'); }
+  .star[data-lv="4"]{ background-image:url('/img/star/4.webp'); }
+  .star[data-lv="5"]{ background-image:url('/img/star/5.webp'); }
+  .star[data-lv="6"]{ background-image:url('/img/star/6.webp'); }
+
+  /* ====== 초상화 ====== */
+  .portraitWrap{display:flex;justify-content:center;margin-bottom:8px}
+  .portrait{
+    width:96px;height:96px;object-fit:cover;border-radius:10px;
+    border:1px solid var(--bd);background:#f6f7fb;display:block
+  }
+
+  @media (max-width:760px){ .row{grid-template-columns:1fr} }
+
+  /* ====== RTL(아랍어) 보조 ====== */
+  html[dir="rtl"] body{direction:rtl}
+  html[dir="rtl"] .title{flex-direction:row-reverse}
+  html[dir="rtl"] .kv{flex-direction:row-reverse}
+  html[dir="rtl"] .row{direction:rtl}
+</style>
+</head>
+<body>
+<a href="/" class="kd-home-link" style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
+  ← KingshotData Korea
+</a>
+
+<header>
+  <h1 data-i18n="title">SSR 영웅 A vs B 비교 계산기</h1>
+  <div class="muted" data-i18n="subtitle">
+    병종별로 A와 B 영웅을 선택하고 각 단계를 조절하면
+    아래에 “A가 B를 이기려면 최소 몇 단계가 필요한지”가 바로 표시됩니다.
+  </div>
+
+  <!-- 언어 선택 바 -->
+  <div class="langBar">
+    <label for="langSel" class="muted" data-i18n="label.language">언어</label>
+    <select id="langSel" class="langSel" aria-label="Language">
+      <option value="ko">한국어</option>
+      <option value="en">English</option>
+      <option value="ja">日本語</option>
+      <option value="cn">简体中文</option>
+      <option value="tw">繁體中文</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+</header>
+
+<main>
+  <!-- 보병 -->
+  <section class="lane" data-type="infantry">
+    <h2 data-i18n="section.infantry">보병</h2>
+    <div class="row">
+      <div class="card">
+        <!-- 초상화 -->
+        <div class="portraitWrap">
+          <img class="portrait" data-side="A" alt="A 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
+        <div class="title"><span class="badge">A</span><select class="select hero" data-side="A"></select></div>
+        <div class="kv">
+          <label>
+            <span class="stepLabel" data-i18n="label.step">단계:</span>
+            <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="A">
+          </label>
+          <span class="badge lvlLabel" data-side="A">0★ T1</span>
+          <div class="stars" data-side="A" aria-label="A 성급">
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span>
+          </div>
+        </div>
+        <div class="kv"><span data-i18n="label.currentStat">현재 수치</span> <b class="stat" data-side="A">+0.00%</b></div>
+      </div>
+
+      <div class="card">
+        <!-- 초상화 -->
+        <div class="portraitWrap">
+          <img class="portrait" data-side="B" alt="B 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
+        <div class="title"><span class="badge">B</span><select class="select hero" data-side="B"></select></div>
+        <div class="kv">
+          <label>
+            <span class="stepLabel" data-i18n="label.step">단계:</span>
+            <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="B">
+          </label>
+          <span class="badge lvlLabel" data-side="B">0★ T1</span>
+          <div class="stars" data-side="B" aria-label="B 성급">
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span>
+          </div>
+        </div>
+        <div class="kv"><span data-i18n="label.currentStat">현재 수치</span> <b class="stat" data-side="B">+0.00%</b></div>
+      </div>
+    </div>
+    <div class="cmp"><span class="cmpText"></span><div class="muted cmpHint"></div></div>
+  </section>
+
+  <!-- 기병 -->
+  <section class="lane" data-type="cavalry">
+    <h2 data-i18n="section.cavalry">기병</h2>
+    <div class="row">
+      <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="A" alt="A 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
+        <div class="title"><span class="badge">A</span><select class="select hero" data-side="A"></select></div>
+        <div class="kv">
+          <label>
+            <span class="stepLabel" data-i18n="label.step">단계:</span>
+            <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="A">
+          </label>
+          <span class="badge lvlLabel" data-side="A">0★ T1</span>
+          <div class="stars" data-side="A" aria-label="A 성급">
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span>
+          </div>
+        </div>
+        <div class="kv"><span data-i18n="label.currentStat">현재 수치</span> <b class="stat" data-side="A">+0.00%</b></div>
+      </div>
+
+      <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="B" alt="B 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
+        <div class="title"><span class="badge">B</span><select class="select hero" data-side="B"></select></div>
+        <div class="kv">
+          <label>
+            <span class="stepLabel" data-i18n="label.step">단계:</span>
+            <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="B">
+          </label>
+          <span class="badge lvlLabel" data-side="B">0★ T1</span>
+          <div class="stars" data-side="B" aria-label="B 성급">
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span>
+          </div>
+        </div>
+        <div class="kv"><span data-i18n="label.currentStat">현재 수치</span> <b class="stat" data-side="B">+0.00%</b></div>
+      </div>
+    </div>
+    <div class="cmp"><span class="cmpText"></span><div class="muted cmpHint"></div></div>
+  </section>
+
+  <!-- 궁병 -->
+  <section class="lane" data-type="archer">
+    <h2 data-i18n="section.archer">궁병</h2>
+    <div class="row">
+      <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="A" alt="A 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
+        <div class="title"><span class="badge">A</span><select class="select hero" data-side="A"></select></div>
+        <div class="kv">
+          <label>
+            <span class="stepLabel" data-i18n="label.step">단계:</span>
+            <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="A">
+          </label>
+          <span class="badge lvlLabel" data-side="A">0★ T1</span>
+          <div class="stars" data-side="A" aria-label="A 성급">
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span>
+          </div>
+        </div>
+        <div class="kv"><span data-i18n="label.currentStat">현재 수치</span> <b class="stat" data-side="A">+0.00%</b></div>
+      </div>
+
+      <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="B" alt="B 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
+        <div class="title"><span class="badge">B</span><select class="select hero" data-side="B"></select></div>
+        <div class="kv">
+          <label>
+            <span class="stepLabel" data-i18n="label.step">단계:</span>
+            <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="B">
+          </label>
+          <span class="badge lvlLabel" data-side="B">0★ T1</span>
+          <div class="stars" data-side="B" aria-label="B 성급">
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span>
+          </div>
+        </div>
+        <div class="kv"><span data-i18n="label.currentStat">현재 수치</span> <b class="stat" data-side="B">+0.00%</b></div>
+      </div>
+    </div>
+    <div class="cmp"><span class="cmpText"></span><div class="muted cmpHint"></div></div>
+  </section>
+</main>
+
+<script>
+/* ===========================================================
+   다국어(i18n) 설정 — 브라우저 언어 감지 + ?lang= + localStorage
+   =========================================================== */
+
+// 지원 언어 메타
+const LANGS = {
+  ko:{label:'한국어', htmlLang:'ko', dir:'ltr'},
+  en:{label:'English', htmlLang:'en', dir:'ltr'},
+  ja:{label:'日本語', htmlLang:'ja', dir:'ltr'},
+  cn:{label:'简体中文', htmlLang:'zh-CN', dir:'ltr'},
+  tw:{label:'繁體中文', htmlLang:'zh-TW', dir:'ltr'},
+  ar:{label:'العربية', htmlLang:'ar', dir:'rtl'}
+};
+
+// UI 텍스트 번역 사전
+const I18N = {
+  ko:{
+    title:'SSR 영웅 A vs B 비교 계산기',
+    subtitle:'병종별로 A와 B 영웅을 선택하고 각 단계를 조절하면 아래에 “A가 B를 이기려면 최소 몇 단계가 필요한지”가 바로 표시됩니다.',
+    section:{infantry:'보병', cavalry:'기병', archer:'궁병'},
+    label:{
+      language:'언어',
+      step:'단계:',
+      currentStat:'현재 수치',
+      gen:'{n}세대',
+      impossible:'불가능 (최대 초과)'
+    },
+    aria:{stars:'{side} 성급: {level}'},
+    alt:{portrait:'{side} 영웅 초상화 — {name} ({key})'},
+    cmp:{
+      same:'현재 {A}와 {B}의 성능은 거의 차이가 없습니다.',
+      ahead:'{A}가 우세한 상태입니다. ({LA} vs {LB})',
+      needA:'{A}가 {B}를 따라잡으려면 최소 <b>{LV}</b>가 필요합니다.',
+      needB:'{B}가 {A}를 앞서려면 {LV}가 필요합니다.'
+    }
+  },
+  en:{
+    title:'SSR Hero A vs B Comparator',
+    subtitle:'Choose heroes per troop type and adjust stages. It will show “the minimum stage A needs to beat B.”',
+    section:{infantry:'Infantry', cavalry:'Cavalry', archer:'Archers'},
+    label:{
+      language:'Language',
+      step:'Stage:',
+      currentStat:'Current stat',
+      gen:'Gen {n}',
+      impossible:'Impossible (beyond max)'
+    },
+    aria:{stars:'{side} stars: {level}'},
+    alt:{portrait:'{side} hero portrait — {name} ({key})'},
+    cmp:{
+      same:'Currently {A} and {B} perform almost the same.',
+      ahead:'{A} is ahead. ({LA} vs {LB})',
+      needA:'For {A} to catch up to {B}, at least <b>{LV}</b> is required.',
+      needB:'For {B} to overtake {A}, {LV} is needed.'
+    }
+  },
+  ja:{
+    title:'SSR英雄 A vs B 比較計算機',
+    subtitle:'兵種ごとにAとBの英雄を選び、段階を調整すると、「AがBに勝つために必要な最小段階」が表示されます。',
+    section:{infantry:'歩兵', cavalry:'騎兵', archer:'弓兵'},
+    label:{
+      language:'言語',
+      step:'段階:',
+      currentStat:'現在値',
+      gen:'{n}世代',
+      impossible:'不可能（上限超過）'
+    },
+    aria:{stars:'{side} の星数: {level}'},
+    alt:{portrait:'{side} 英雄の肖像 — {name}（{key}）'},
+    cmp:{
+      same:'現在、{A} と {B} の性能差はほとんどありません。',
+      ahead:'{A} が優勢です。（{LA} vs {LB}）',
+      needA:'{A} が {B} に追いつくには、最低でも <b>{LV}</b> が必要です。',
+      needB:'{B} が {A} を上回るには {LV} が必要です。'
+    }
+  },
+  cn:{
+    title:'SSR英雄 A 与 B 比较计算器',
+    subtitle:'按兵种选择A与B英雄并调整阶段，下面会显示“英雄A击败英雄B所需的最低阶段”。',
+    section:{infantry:'步兵', cavalry:'骑兵', archer:'弓兵'},
+    label:{
+      language:'语言',
+      step:'阶段：',
+      currentStat:'当前数值',
+      gen:'第{n}代',
+      impossible:'无法达到（超过上限）'
+    },
+    aria:{stars:'{side} 星级：{level}'},
+    alt:{portrait:'{side} 英雄头像 — {name}（{key}）'},
+    cmp:{
+      same:'当前 {A} 与 {B} 的表现几乎没有差别。',
+      ahead:'{A} 处于领先。（{LA} vs {LB}）',
+      needA:'{A} 想追上 {B}，至少需要 <b>{LV}</b>。',
+      needB:'{B} 想反超 {A} 需要 {LV}。'
+    }
+  },
+  tw:{
+    title:'SSR英雄 A 與 B 比較計算器',
+    subtitle:'依兵種選擇 A 與 B 英雄並調整階段，下面會顯示「A 擊敗 B 所需的最低階段」。',
+    section:{infantry:'步兵', cavalry:'騎兵', archer:'弓兵'},
+    label:{
+      language:'語言',
+      step:'階段：',
+      currentStat:'目前數值',
+      gen:'第{n}代',
+      impossible:'無法達到（超過上限）'
+    },
+    aria:{stars:'{side} 星級：{level}'},
+    alt:{portrait:'{side} 英雄頭像 — {name}（{key}）'},
+    cmp:{
+      same:'目前 {A} 與 {B} 的表現幾乎沒有差異。',
+      ahead:'{A} 佔上風。（{LA} vs {LB}）',
+      needA:'{A} 要追上 {B}，至少需要 <b>{LV}</b>。',
+      needB:'{B} 要超過 {A} 需要 {LV}。'
+    }
+  },
+  ar:{
+    title:'حاسبة مقارنة أبطال SSR (A مقابل B)',
+    subtitle:'اختر البطلين A و B لكل نوع من الجنود ثم حرّك المراحل. سيظهر أدناه: «أدنى مرحلة يحتاجها A ليتفوق على B».',
+    section:{infantry:'مشاة', cavalry:'فرسان', archer:'رماة'},
+    label:{
+      language:'اللغة',
+      step:'المرحلة:',
+      currentStat:'القيمة الحالية',
+      gen:'الجيل {n}',
+      impossible:'غير ممكن (تجاوز الحد الأقصى)'
+    },
+    aria:{stars:'نجوم {side}: {level}'},
+    alt:{portrait:'صورة بطل {side} — {name} ({key})'},
+    cmp:{
+      same:'حاليًا أداء {A} و{B} متقارب جدًا.',
+      ahead:'{A} متقدم. ({LA} مقابل {LB})',
+      needA:'ليتجاوز {A} {B} يلزم على الأقل <b>{LV}</b>.',
+      needB:'لِيتفوّق {B} على {A}، يلزم {LV}.'
+    }
+  }
+};
+
+// 간단한 템플릿 치환 함수
+function t(key, vars){
+  const dict = I18N[currentLang] || I18N.en;
+  let val = key.split('.').reduce((o,k)=> (o && o[k]!=null)? o[k]: null, dict);
+  if (val == null) val = key.split('.').reduce((o,k)=> (o && o[k]!=null)? o[k]: null, I18N.en);
+  if (typeof val !== 'string') return key;
+  return val.replace(/\{(\w+)\}/g, (_,k)=> (vars && (k in vars)) ? String(vars[k]) : '');
+}
+
+// 언어 정규화
+function normalizeLang(raw){
+  const s=(raw||'').toLowerCase();
+  if (s.startsWith('ko')) return 'ko';
+  if (s.startsWith('ja')) return 'ja';
+  if (s.startsWith('zh')){
+    if (s.includes('tw')||s.includes('hk')||s.includes('hant')) return 'tw';
+    return 'cn';
+  }
+  if (s.startsWith('ar')) return 'ar';
+  return 'en';
+}
+// 초기 언어 결정: ?lang > localStorage > navigator.language
+function detectLang(){
+  const url = new URL(window.location.href);
+  const qp = url.searchParams.get('lang');
+  if (qp) return normalizeLang(qp);
+  const saved = localStorage.getItem('kd.lang');
+  if (saved) return normalizeLang(saved);
+  return normalizeLang(navigator.language || navigator.userLanguage);
+}
+let currentLang = detectLang();
+
+// HTML lang/dir 및 고정 텍스트 갱신
+function applyI18NStatic(){
+  document.documentElement.lang = (LANGS[currentLang]?.htmlLang)||'en';
+  document.documentElement.dir = (LANGS[currentLang]?.dir)||'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.getAttribute('data-i18n');
+    el.textContent = t(key);
+  });
+  // 섹션 제목은 타입 기반 키로 보정
+  document.querySelectorAll('.lane').forEach(sec=>{
+    const type = sec.dataset.type;
+    const h2 = sec.querySelector('h2');
+    if (h2) h2.textContent = t(`section.${type}`);
+  });
+  // 언어 선택 박스 표시값/선택값 동기화
+  const sel = document.getElementById('langSel');
+  if (sel) sel.value = currentLang;
+}
+// 언어 적용(저장+UI갱신+옵션 재생성)
+function setLang(lang){
+  currentLang = lang in LANGS ? lang : 'en';
+  localStorage.setItem('kd.lang', currentLang);
+  applyI18NStatic();
+  refreshAllLanes();
+}
+
+// 레벨 라벨 포맷: 기본 0★ Tn, T6이면 언어별 별 표기
+function formatLevelLabel(L){
+  const star = Math.floor((L - 1) / 6);   // 0..4
+  const tier = ((L - 1) % 6) + 1;         // 1..6
+  if (tier === 6 || L===30){
+    if (currentLang==='ko') return `${star + 1}성`;
+    if (currentLang==='cn' || currentLang==='tw') return `${star + 1}星`;
+    // en/ja/ar 등은 ★ 사용
+    return `${star + 1}★`;
+  }
+  if (currentLang==='cn' || currentLang==='tw') return `${star}星 T${tier}`;
+  return `${star}★ T${tier}`;
+}
+
+/* ================== 이미지 경로 설정 ================== */
+const PORTRAIT_BASE = '/img/heroes/';
+const PLACEHOLDER_SVG =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">' +
+    '<rect width="96" height="96" rx="10" ry="10" fill="#f2f4f7" stroke="#e5e7eb"/>' +
+    '<circle cx="48" cy="36" r="16" fill="#dde3ea"/>' +
+    '<rect x="18" y="60" width="60" height="20" rx="10" fill="#dde3ea"/>' +
+    '</svg>'
+  );
+function portraitUrl(heroKey){ return PORTRAIT_BASE + heroKey + '/img_001.webp'; }
+
+/* ================== 내장 데이터(SSR급 영웅 성장 공식) ================== */
+/* 세그먼트 공식: base + Σ(길이 × delta).
+   3세대 L30=290.23, 4세대 L30=370.29, 5세대 L30=444.35 (스루드/롱페이/비비안 앵커) */
+const SEG = {
+  // Gen1
+  Helga:{base:25.25,seg:[[1,5,2.35],[6,6,4.23],[7,11,3.29],[12,12,5.92],[13,17,4.6069],[18,18,8.29],[19,23,6.4494],[24,24,11.61],[25,29,9.0294],[30,30,16.25]]},
+  Amadeus:{base:32.82,seg:[[1,5,3.0569],[6,6,5.49],[7,11,4.2775],[12,12,7.7],[13,17,5.9869],[18,18,10.78],[19,23,8.3825],[24,24,15.1],[25,29,11.7388],[30,30,21.12]]},
+  Jabel:{base:25.25,seg:[[1,5,2.35],[6,6,4.23],[7,11,3.29],[12,12,5.92],[13,17,4.6069],[18,18,8.29],[19,23,6.4494],[24,24,11.61],[25,29,9.0294],[30,30,16.25]]},
+  Saul:{base:25.25,seg:[[1,5,2.35],[6,6,4.23],[7,11,3.29],[12,12,5.92],[13,17,4.6069],[18,18,8.29],[19,23,6.4494],[24,24,11.61],[25,29,9.0294],[30,30,16.25]]},
+  // Gen2
+  Hilde:{base:30.30,seg:[[1,5,2.82],[6,6,5.07],[7,11,3.9475],[12,12,7.11],[13,17,5.5269],[18,18,9.95],[19,23,7.7394],[24,24,13.93],[25,26,10.83],[27,27,3.84],[28,28,17.83],[29,29,10.84],[30,30,19.41]]},
+  Marlin:{base:30.30,seg:[[1,5,2.82],[6,6,5.07],[7,11,3.9475],[12,12,7.11],[13,17,5.5269],[18,18,9.95],[19,23,7.7394],[24,24,13.93],[25,26,10.83],[27,27,3.84],[28,28,17.83],[29,29,10.84],[30,30,19.41]]},
+  Zoe:{base:30.30,seg:[[1,5,2.82],[6,6,5.07],[7,11,3.9475],[12,12,7.11],[13,17,5.5269],[18,18,9.95],[19,23,7.7394],[24,24,13.93],[25,26,10.83],[27,27,3.84],[28,28,17.83],[29,29,10.84],[30,30,19.41]]},
+  // Gen3 (초기 말단 27~29는 아래에서 채움)
+  Eric:{base:36.61,seg:[[1,5,3.4094],[6,6,6.13],[7,11,4.77],[12,12,8.59],[13,17,6.6819],[18,18,12.02],[19,23,9.3544],[24,24,16.83],[25,26,13.085]]},
+  Petra:{base:36.61,seg:[[1,5,3.4094],[6,6,6.13],[7,11,4.77],[12,12,8.59],[13,17,6.6819],[18,18,12.02],[19,23,9.3544],[24,24,16.83],[25,26,13.085]]},
+  Jaeger:{base:36.61,seg:[[1,5,3.4094],[6,6,6.13],[7,11,4.77],[12,12,8.59],[13,17,6.6819],[18,18,12.02],[19,23,9.3544],[24,24,16.83],[25,26,13.085]]}
+};
+const GEN3_REF='Jaeger', GEN3_L30=290.23, GEN4_L30=370.29, GEN5_L30=444.35;
+
+/* ===== 세그먼트/보정/앵커 유틸 ===== */
+function statAtSegments(H,L){
+  let s=H.base;
+  for(const [f,t,d] of H.seg){
+    if(L<f)break;
+    const u=Math.min(L,t);
+    s += (u-f+1)*d;
+    if(L<=t)break;
+  }
+  return s;
+}
+function anchorLevel(name,level,target){
+  const H=SEG[name]; if(!H) return;
+  let i=H.seg.findIndex(([f,t])=>level>=f&&level<=t);
+  if(i>=0){
+    const [f,t,d]=H.seg[i];
+    if(!(f===level&&t===level)){
+      const left=(level-1>=f)?[f,level-1,d]:null;
+      const right=(level<=t)?[level,t,d]:null;
+      H.seg.splice(i,1,...(left?[left]:[]),...(right?[right]:[]));
+    }
+  }
+  const need=+(target - statAtSegments(H,level-1)).toFixed(4);
+  const j=H.seg.findIndex(([f,t])=>f===level&&t===level);
+  const fixed=[level,level,need];
+  if(j>=0)H.seg[j]=fixed; else H.seg.push(fixed);
+}
+function deltaAt(H,L){
+  const seg=H.seg.find(([f,t])=>L>=f&&L<=t);
+  return seg?seg[2]:null;
+}
+
+/* --- 3세대의 27/28/29 빈칸을 2세대 말단 패턴(스케일)로 보정 --- */
+function fillLastCycleFromGen2(name){
+  const H=SEG[name]; if(!H) return;
+  const G2=SEG['Hilde']; if(!G2) return;
+  const d25_26 = deltaAt(H,25), g2_25_26 = deltaAt(G2,25);
+  const patt = [ deltaAt(G2,27), deltaAt(G2,28), deltaAt(G2,29) ]; // [3.84, 17.83, 10.84]
+  if (d25_26==null || g2_25_26==null) return;
+  const k = d25_26 / g2_25_26;
+  [27,28,29].forEach((L,idx)=>{
+    if (deltaAt(H,L)!=null) return;
+    const d = +((patt[idx]||0)*k).toFixed(4);
+    H.seg.push([L,L,d]);
+  });
+  H.seg.sort((a,b)=>a[0]-b[0]);
+}
+
+/* 3세대 말단 보정 → 앵커(290.23) → 4세대 생성(스케일) → 앵커(370.29) */
+['Eric','Petra','Jaeger'].forEach(fillLastCycleFromGen2);
+['Eric','Petra','Jaeger'].forEach(h=>anchorLevel(h,30,GEN3_L30));
+
+(function buildGen4(){
+  const ref=SEG[GEN3_REF]; if(!ref) return;
+  const current=statAtSegments(ref,30);
+  const k=GEN4_L30/current;
+  ['Alcar','Margot','Rosa'].forEach(n=>{
+    SEG[n]={
+      base:+(ref.base*k).toFixed(4),
+      seg:ref.seg.map(([f,t,d])=>[f,t,+(d*k).toFixed(4)])
+    };
+    anchorLevel(n,30,GEN4_L30);
+  });
+})();
+
+/* 5세대(롱페이/스루드/비비안): 4세대 패턴을 444.35%까지 스케일링 */
+(function buildGen5(){
+  const ref = SEG['Rosa'] || SEG['Margot'] || SEG['Alcar'];
+  if (!ref) return;
+  const current = statAtSegments(ref,30); // 370.29
+  const k = GEN5_L30 / current;          // ≒ 1.20배
+
+  ['Longfei','Thrud','Vivian'].forEach(n=>{
+    SEG[n] = {
+      base: +(ref.base * k).toFixed(4),
+      seg: ref.seg.map(([f,t,d])=>[f,t, +(d*k).toFixed(4)])
+    };
+    anchorLevel(n,30,GEN5_L30);          // L30 = 444.35로 맞춤
+  });
+})();
+
+/* ===== 메타(세대/병종/표시 이름) ===== */
+const META={
+  Amadeus:{type:'infantry',gen:1,ko:'아마데우스'},
+  Helga:{type:'infantry',gen:1,ko:'헬가'},
+  Jabel:{type:'cavalry',gen:1,ko:'제이벨'},
+  Saul:{type:'archer',gen:1,ko:'살로'},
+  Zoe:{type:'infantry',gen:2,ko:'조이'},
+  Hilde:{type:'cavalry',gen:2,ko:'힐데'},
+  Marlin:{type:'archer',gen:2,ko:'마린'},
+  Eric:{type:'infantry',gen:3,ko:'에릭'},
+  Petra:{type:'cavalry',gen:3,ko:'리틀페라'},
+  Jaeger:{type:'archer',gen:3,ko:'예거'},
+  Alcar:{type:'infantry',gen:4,ko:'알카르'},
+  Margot:{type:'cavalry',gen:4,ko:'마르고'},
+  Rosa:{type:'archer',gen:4,ko:'로사'},
+  // Gen5 실제 영웅
+  Longfei:{type:'infantry',gen:5,ko:'롱페이'},
+  Thrud:{type:'cavalry',gen:5,ko:'스루드'},
+  Vivian:{type:'archer',gen:5,ko:'비비안'}
+};
+
+/* ============ 코어/라벨 & 이름 ============ */
+function listHeroesByType(type){
+  const all=Object.keys(META).filter(n=>META[n].type===type && SEG[n]);
+  return all.sort((a,b)=>(META[a].gen - META[b].gen)||a.localeCompare(b));
+}
+function nameIn(n){
+  // ko만 한글 이름 사용, 나머지는 내부 키 그대로
+  if (currentLang==='ko') return (META[n]&&META[n].ko)||n;
+  return n;
+}
+function statAtHero(name,L){
+  const H=SEG[name];
+  if(!H) return 0;
+  return statAtSegments(H,L);
+}
+function minLevelToBeat(attacker,defender,defL){
+  const target=statAtHero(defender,defL);
+  for(let l=1;l<=30;l++){
+    if(statAtHero(attacker,l)+0.005>=target) return {lv:l,target};
+  }
+  return {lv:null,target};
+}
+
+// 옵션 라벨 생성
+function optionLabel(n){
+  const genStr = t('label.gen',{n:META[n].gen});
+  return `${nameIn(n)} (${n}) · ${genStr}`;
+}
+// 섹션 내 셀렉트 옵션 채우기
+function populateOptions(select, type){
+  const list=listHeroesByType(type);
+  select.innerHTML=list.map(n=>`<option value="${n}">${optionLabel(n)}</option>`).join('');
+}
+
+/* ============ 초기화 & 렌더링 ============ */
+function refreshAllLanes(){
+  document.querySelectorAll('.lane').forEach(section=>{
+    const type=section.dataset.type;
+    const selects=section.querySelectorAll('select.hero');
+    selects.forEach(sel=>{
+      const prev=sel.value;
+      populateOptions(sel, type);
+      const opts=[...sel.options];
+      sel.value = opts.some(o=>o.value===prev) ? prev : (opts[0]?.value || '');
+    });
+    // 섹션 제목 현지화
+    const h2 = section.querySelector('h2');
+    if (h2) h2.textContent = t(`section.${type}`);
+    // 렌더 트리거
+    if (selects[0]) selects[0].dispatchEvent(new Event('input'));
+  });
+}
+
+document.getElementById('langSel').addEventListener('change', e=> setLang(e.target.value));
+
+/* ============ UI 바인딩(각 섹션 별로) ============ */
+document.querySelectorAll('.lane').forEach(section=>{
+  const type=section.dataset.type;
+  const [cardA,cardB]=section.querySelectorAll('.card');
+  const selA=cardA.querySelector('.hero[data-side="A"]');
+  const selB=cardB.querySelector('.hero[data-side="B"]');
+  const lvlA=cardA.querySelector('.lvl[data-side="A"]');
+  const lvlB=cardB.querySelector('.lvl[data-side="B"]');
+  const lblA=cardA.querySelector('.lvlLabel[data-side="A"]');
+  const lblB=cardB.querySelector('.lvlLabel[data-side="B"]');
+  const statA=cardA.querySelector('.stat[data-side="A"]');
+  const statB=cardB.querySelector('.stat[data-side="B"]');
+  const cmpText=section.querySelector('.cmpText');
+  const cmpHint=section.querySelector('.cmpHint');
+
+  // 별 DOM
+  const starsBoxA=cardA.querySelector('.stars[data-side="A"]');
+  const starsBoxB=cardB.querySelector('.stars[data-side="B"]');
+  const starsA=[...starsBoxA.querySelectorAll('.star')];
+  const starsB=[...starsBoxB.querySelectorAll('.star')];
+
+  // 초상화 DOM
+  const portraitA=cardA.querySelector('.portrait[data-side="A"]');
+  const portraitB=cardB.querySelector('.portrait[data-side="B"]');
+
+  // 옵션 주입
+  populateOptions(selA, type);
+  populateOptions(selB, type);
+
+  const heroList = listHeroesByType(type);
+  const pickGen = g => heroList.find(n=>META[n].gen===g);
+
+  // 기본 선택:
+  // A: 3세대(있으면) 아니면 첫 번째
+  // B: 5세대(있으면) > 4세대(있으면) > 두 번째/첫 번째
+  selA.value = pickGen(3) || heroList[0];
+  selB.value = pickGen(5) || pickGen(4) || heroList[1] || heroList[0];
+
+  lvlA.value=1;
+  lvlB.value=1;
+
+  function tierOfLevel(L){ return ((L - 1) % 6) + 1; } // 1..6
+  function starOfLevel(L){ return Math.floor((L - 1) / 6); } // 0..4
+
+  // 5개 별에 0~6 단계 채우기 (L=30은 5개 모두 6)
+  function setStarImages(starElems, L){
+    if (L === 30){
+      starElems.forEach(el => el.setAttribute('data-lv', 6));
+      return;
+    }
+    const s = starOfLevel(L);   // 완료된 별 개수(0..4)
+    const t = tierOfLevel(L);   // 현재 별 진행도(1..6)
+    for(let i=0;i<5;i++){
+      let lv = 0;
+      if (i < s) lv = 6;
+      else if (i === s) lv = t;
+      else lv = 0;
+      starElems[i].setAttribute('data-lv', lv);
+    }
+  }
+
+  function setPortrait(imgEl, heroKey, sideLabel){
+    if(!imgEl) return;
+    const altText = t('alt.portrait',{side: sideLabel, name: nameIn(heroKey), key: heroKey});
+    imgEl.alt = altText;
+    imgEl.src = portraitUrl(heroKey);
+    imgEl.onerror = () => { imgEl.onerror = null; imgEl.src = PLACEHOLDER_SVG; };
+  }
+
+  function render(){
+    const A=selA.value, B=selB.value, LA=+lvlA.value, LB=+lvlB.value;
+
+    // 라벨(언어별 규칙: T6 → ko=성, cn/tw=星, 기타=★)
+    lblA.textContent=formatLevelLabel(LA);
+    lblB.textContent=formatLevelLabel(LB);
+
+    // 별 아이콘 갱신
+    setStarImages(starsA, LA);
+    setStarImages(starsB, LB);
+
+    // 접근성 라벨 갱신
+    starsBoxA.setAttribute('aria-label', t('aria.stars',{side:'A', level:formatLevelLabel(LA)}));
+    starsBoxB.setAttribute('aria-label', t('aria.stars',{side:'B', level:formatLevelLabel(LB)}));
+
+    // 초상화 갱신
+    setPortrait(portraitA, A, 'A');
+    setPortrait(portraitB, B, 'B');
+
+    // 수치 갱신
+    const va=statAtHero(A,LA), vb=statAtHero(B,LB);
+    statA.textContent=`+${va.toFixed(2)}%`;
+    statB.textContent=`+${vb.toFixed(2)}%`;
+
+    // 비교 문구
+    const aNeed = minLevelToBeat(A, B, LB);
+    const bNeed = minLevelToBeat(B, A, LA);
+    let line = '';
+
+    if (Math.abs(va - vb) < 0.005) {
+      line = t('cmp.same',{A:nameIn(A), B:nameIn(B)});
+    } else if (va > vb) {
+      line = t('cmp.ahead',{A:nameIn(A), LA:formatLevelLabel(LA), LB:formatLevelLabel(LB)});
+    } else {
+      const needTxt = aNeed.lv ? formatLevelLabel(aNeed.lv) : t('label.impossible');
+      line = t('cmp.needA',{A:nameIn(A), B:nameIn(B), LV:needTxt});
+    }
+
+    const subNeed = bNeed.lv ? formatLevelLabel(bNeed.lv) : t('label.impossible');
+    const sub = t('cmp.needB',{A:nameIn(A), B:nameIn(B), LV:subNeed});
+
+    cmpText.innerHTML = line;
+    cmpHint.innerHTML = sub;
+  }
+
+  [selA,selB,lvlA,lvlB].forEach(el=> el.addEventListener('input',render));
+  render();
+});
+
+// 초기 적용
+applyI18NStatic();     // 고정 텍스트(타이틀/설명/라벨 등)
+refreshAllLanes();     // 옵션/섹션 텍스트 반영
+</script>
+</body>
+</html>

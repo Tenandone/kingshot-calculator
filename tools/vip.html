@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="ko">
+<head>  
+  <meta charset="utf-8" />
+  <script>
+if (location.pathname.startsWith('/pages/')) {
+  location.replace('/?p=' + location.pathname + location.search);
+}
+</script>
+
+  <meta name="i18n-ns" content="common">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Kingshot VIP Calculator</title>
+  <meta name="description" content="VIP calculator for Kingshot. Compare VIP segments, cumulative points, and package efficiency across languages/currencies." />
+  <link rel="canonical" href="/pages/calculators/vip.html" />
+
+  <style>
+    :root{--fg:#111;--muted:#666;--bg:#fff;--card:#f7f7f8;--radius:14px;--gap:12px;--max:900px}
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;color:var(--fg);background:#fff;margin:0;padding:24px}
+    h1{font-size:22px;margin:0 0 16px}
+    h3{margin:0 0 8px}
+    .wrap{max-width:var(--max);margin:0 auto}
+    .grid{display:grid;gap:var(--gap)}
+    .row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+    .card{background:var(--card);border-radius:var(--radius);padding:16px}
+    label{font-size:13px;color:var(--muted)}
+    select,input[type="number"]{padding:10px 12px;border:1px solid #ddd;border-radius:10px;font-size:14px;width:100%}
+    button{padding:10px 14px;border:0;border-radius:10px;background:#0b57d0;color:#fff;cursor:pointer}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{padding:8px;border-bottom:1px solid #eee;text-align:right}
+    th:first-child,td:first-child{text-align:left}
+    .small{font-size:12px;color:var(--muted)}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;background:#eee;font-size:12px;margin-left:6px}
+    .num{font-variant-numeric:tabular-nums}
+    .col{min-width:180px}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>
+    <span id="i_h1">VIP Calculator</span>
+    <span class="tag" id="i_tag">VIP points only (no diamonds)</span>
+  </h1>
+
+  <!-- 언어/통화 + 가격 입력 -->
+  <div class="card grid">
+    <div class="row">
+      <div class="col">
+        <label id="i_label_lang">Language / Currency</label><br/>
+        <select id="lang">
+          <option value="ko">한국어 (KRW)</option>
+          <option value="en">English (USD)</option>
+          <option value="ja">日本語 (JPY)</option>
+          <option value="zh-CN">简体中文 (CNY)</option>
+          <option value="zh-TW">繁體中文 (TWD)</option>
+        </select>
+      </div>
+      <div class="col">
+        <label id="i_label_preset">Load currency presets</label><br/>
+        <button id="loadPresetBtn" type="button">Apply Preset</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label id="i_label_p1">Tier 1 Price</label>
+        <input id="p1" type="number" step="0.01" inputmode="decimal" />
+      </div>
+      <div class="col">
+        <label id="i_label_p2">Tier 2 Price</label>
+        <input id="p2" type="number" step="0.01" inputmode="decimal" />
+      </div>
+      <div class="col">
+        <label id="i_label_p3">Tier 3 Price</label>
+        <input id="p3" type="number" step="0.01" inputmode="decimal" />
+      </div>
+      <div class="col">
+        <label id="i_label_p4">Tier 4 Price</label>
+        <input id="p4" type="number" step="0.01" inputmode="decimal" />
+      </div>
+      <div class="col">
+        <label id="i_label_p5">Tier 5 Price</label>
+        <input id="p5" type="number" step="0.01" inputmode="decimal" />
+      </div>
+    </div>
+
+    <div class="small" id="i_notice_noDiamonds">
+      This calculator excludes diamonds. If you convert diamonds to VIP points, you can reach levels with less spending.
+    </div>
+  </div>
+
+  <!-- VIP 구간/누적 표 -->
+  <div class="card">
+    <h3 id="i_vipTable_title">VIP 1–12 Required Points</h3>
+    <table id="vipTable">
+      <thead>
+      <tr>
+        <th id="i_vipTable_level">Level</th>
+        <th id="i_vipTable_segment">Segment</th>
+        <th id="i_vipTable_cumulative">Cumulative</th>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="small" id="i_vipTable_note">VIP12 cumulative total: 4,800,000</div>
+  </div>
+
+  <!-- 패키지 표 -->
+  <div class="card">
+    <h3 id="i_packTable_title">Packages (VIP points only)</h3>
+    <table id="packTable">
+      <thead>
+      <tr>
+        <th id="i_packTable_package">Package</th>
+        <th id="i_packTable_price">Price</th>
+        <th id="i_packTable_baseVip">Base VIP / pack</th>
+        <th id="i_packTable_eff">VIP per currency</th>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="small" id="i_packTable_note">Base VIP only. “VIP per currency” is a reference efficiency.</div>
+  </div>
+
+  <!-- 입력 -->
+  <div class="card grid">
+    <div class="row">
+      <div class="col">
+        <label id="i_form_currLevel">Current VIP Level</label><br/>
+        <select id="currLevel"></select>
+      </div>
+      <div class="col">
+        <label id="i_form_targetLevel">Target VIP Level</label><br/>
+        <select id="targetLevel"></select>
+      </div>
+      <div class="col">
+        <label>&nbsp;</label><br/>
+        <button id="calcBtn">Calculate</button>
+        <button id="resetBtn" style="background:#777">Reset</button>
+      </div>
+    </div>
+    <div class="small" id="i_notice_calcBase">
+      We compute the difference between current and target cumulative points.
+    </div>
+  </div>
+
+  <!-- 요약 -->
+  <div id="summary" class="card">
+    <div><span id="i_summary_current">Current</span>: <span id="sumCurrent"></span></div>
+    <div><span id="i_summary_target">Target</span>: <span id="sumTarget"></span></div>
+    <div><span id="i_summary_remaining">Remaining points</span>: <b id="sumRemain"></b></div>
+  </div>
+
+  <!-- 단일 패키지 비교 -->
+  <div class="card">
+    <h3 id="i_single_title">Single-package completion (VIP points only)</h3>
+    <table id="singleTable">
+      <thead>
+      <tr>
+        <th id="i_single_package">Package</th>
+        <th id="i_single_vipPerPack">VIP / pack</th>
+        <th id="i_single_need">Needed (ceil)</th>
+        <th id="i_single_totalCost">Total cost</th>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="small" id="i_single_note">Ceiling with overage allowed. No daily limits.</div>
+  </div>
+
+  <p class="small" id="i_footer_note">
+    The currency display follows the selected language. Adjust exact store prices in the inputs above.
+  </p>
+</div>
+
+<script>
+  // ===== 내장 다국어 사전 =====
+  const I18N = {
+    en: {
+      meta: {
+        title: "Kingshot VIP Calculator | KingshotData",
+        desc: "VIP calculator for Kingshot. Compare VIP segments, cumulative points, and package efficiency across languages/currencies."
+      },
+      h1: "VIP Calculator",
+      tag: "VIP points only (no diamonds)",
+      form: {
+        lang: "Language / Currency",
+        preset: "Load currency presets",
+        p1: "Tier 1 Price",
+        p2: "Tier 2 Price",
+        p3: "Tier 3 Price",
+        p4: "Tier 4 Price",
+        p5: "Tier 5 Price",
+        currLevel: "Current VIP Level",
+        targetLevel: "Target VIP Level"
+      },
+      btn: { loadPreset: "Apply Preset", calc: "Calculate", reset: "Reset" },
+      notice: {
+        noDiamonds: "This calculator excludes diamonds. If you convert diamonds to VIP points, you can reach levels with less spending.",
+        calcBase: "We compute the difference between current and target cumulative points."
+      },
+      vipTable: {
+        title: "VIP 1–12 Required Points",
+        level: "Level",
+        segment: "Segment",
+        cumulative: "Cumulative",
+        note: "VIP12 cumulative total: 4,800,000"
+      },
+      packTable: {
+        title: "Packages (VIP points only)",
+        package: "Package",
+        price: "Price",
+        baseVip: "Base VIP / pack",
+        eff: "VIP per currency",
+        note: "Base VIP only. “VIP per currency” is a reference efficiency."
+      },
+      summary: { current: "Current", target: "Target", remaining: "Remaining points" },
+      single: {
+        title: "Single-package completion (VIP points only)",
+        package: "Package",
+        vipPerPack: "VIP / pack",
+        need: "Needed (ceil)",
+        totalCost: "Total cost",
+        note: "Ceiling with overage allowed. No daily limits."
+      },
+      footer: { note: "The currency display follows the selected language. Adjust exact store prices in the inputs above." },
+      tiers: { tier1:"Tier 1", tier2:"Tier 2", tier3:"Tier 3", tier4:"Tier 4", tier5:"Tier 5" }
+    },
+    ko: {
+      meta: {
+        title: "킹샷 VIP 계산기 | KingshotData",
+        desc: "VIP 계산기. VIP 구간/누적 포인트와 패키지 효율을 언어·통화에 맞춰 비교하세요."
+      },
+      h1: "VIP 계산기",
+      tag: "VIP 포인트만 계산 (다이아 제외)",
+      form: {
+        lang: "언어 / 통화",
+        preset: "통화 프리셋 불러오기",
+        p1: "티어 1 가격",
+        p2: "티어 2 가격",
+        p3: "티어 3 가격",
+        p4: "티어 4 가격",
+        p5: "티어 5 가격",
+        currLevel: "현재 VIP 레벨",
+        targetLevel: "목표 VIP 레벨"
+      },
+      btn: { loadPreset: "프리셋 적용", calc: "계산하기", reset: "초기화" },
+      notice: {
+        noDiamonds: "이 계산기는 다이아를 제외합니다. 다이아를 VIP 포인트로 전환하면 더 적은 비용으로 도달할 수 있습니다.",
+        calcBase: "현재/목표 누적 포인트의 차이를 계산합니다."
+      },
+      vipTable: {
+        title: "VIP 1–12 필요 포인트",
+        level: "레벨",
+        segment: "구간",
+        cumulative: "누적",
+        note: "VIP12 누적 합계: 4,800,000"
+      },
+      packTable: {
+        title: "패키지 (VIP 포인트만)",
+        package: "패키지",
+        price: "가격",
+        baseVip: "기본 VIP / 패키지",
+        eff: "통화당 VIP",
+        note: "기본 VIP만 반영. ‘통화당 VIP’는 참고용 효율입니다."
+      },
+      summary: { current: "현재", target: "목표", remaining: "남은 포인트" },
+      single: {
+        title: "단일 패키지로 달성 (VIP 포인트만)",
+        package: "패키지",
+        vipPerPack: "VIP / 패키지",
+        need: "필요 수량(올림)",
+        totalCost: "총 비용",
+        note: "초과 허용한 올림 계산. 일일 제한 미적용."
+      },
+      footer: { note: "통화 표시는 선택한 언어를 따릅니다. 상단 입력에서 실제 상점 가격을 조정하세요." },
+      tiers: { tier1:"티어 1", tier2:"티어 2", tier3:"티어 3", tier4:"티어 4", tier5:"티어 5" }
+    },
+    ja: {
+      meta: {
+        title: "Kingshot VIP 計算機 | KingshotData",
+        desc: "VIP計算機。VIP区間/累計ポイントとパッケージ効率を言語・通貨に合わせて比較できます。"
+      },
+      h1: "VIP 計算機",
+      tag: "VIPポイントのみ（ダイヤ除外）",
+      form: {
+        lang: "言語 / 通貨",
+        preset: "通貨プリセットを読み込み",
+        p1: "ティア 1 価格",
+        p2: "ティア 2 価格",
+        p3: "ティア 3 価格",
+        p4: "ティア 4 価格",
+        p5: "ティア 5 価格",
+        currLevel: "現在の VIP レベル",
+        targetLevel: "目標 VIP レベル"
+      },
+      btn: { loadPreset: "プリセット適用", calc: "計算", reset: "リセット" },
+      notice: {
+        noDiamonds: "本計算機はダイヤを除外します。ダイヤをVIPポイントに換算すると、より少ない支出で到達できます。",
+        calcBase: "現在と目標の累計ポイント差を計算します。"
+      },
+      vipTable: {
+        title: "VIP 1–12 必要ポイント",
+        level: "レベル",
+        segment: "区間",
+        cumulative: "累計",
+        note: "VIP12 累計合計: 4,800,000"
+      },
+      packTable: {
+        title: "パッケージ（VIPポイントのみ）",
+        package: "パッケージ",
+        price: "価格",
+        baseVip: "基本VIP / パック",
+        eff: "通貨あたりVIP",
+        note: "基本VIPのみ反映。『通貨あたりVIP』は参考効率です。"
+      },
+      summary: { current: "現在", target: "目標", remaining: "残りポイント" },
+      single: {
+        title: "単一パッケージで達成（VIPポイントのみ）",
+        package: "パッケージ",
+        vipPerPack: "VIP / パック",
+        need: "必要数（切り上げ）",
+        totalCost: "合計費用",
+        note: "オーバー許容の切り上げ。日次制限なし。"
+      },
+      footer: { note: "通貨表示は選択言語に従います。上部入力で実際のストア価格を調整してください。" },
+      tiers: { tier1:"ティア 1", tier2:"ティア 2", tier3:"ティア 3", tier4:"ティア 4", tier5:"ティア 5" }
+    },
+    "zh-CN": {
+      meta: {
+        title: "Kingshot VIP 计算器 | KingshotData",
+        desc: "VIP 计算器。按语言/货币比较 VIP 阶段、累计点数和礼包效率。"
+      },
+      h1: "VIP 计算器",
+      tag: "仅计算 VIP 点数（不含钻石）",
+      form: {
+        lang: "语言 / 货币",
+        preset: "载入货币预设",
+        p1: "档位 1 价格",
+        p2: "档位 2 价格",
+        p3: "档位 3 价格",
+        p4: "档位 4 价格",
+        p5: "档位 5 价格",
+        currLevel: "当前 VIP 等级",
+        targetLevel: "目标 VIP 等级"
+      },
+      btn: { loadPreset: "应用预设", calc: "计算", reset: "重置" },
+      notice: {
+        noDiamonds: "此计算器不包含钻石。若将钻石换算为 VIP 点数，可用更少花费达成目标。",
+        calcBase: "计算当前与目标累计点数之间的差额。"
+      },
+      vipTable: {
+        title: "VIP 1–12 所需点数",
+        level: "等级",
+        segment: "阶段",
+        cumulative: "累计",
+        note: "VIP12 累计总计：4,800,000"
+      },
+      packTable: {
+        title: "礼包（仅 VIP 点数）",
+        package: "礼包",
+        price: "价格",
+        baseVip: "基础 VIP / 礼包",
+        eff: "每单位货币的 VIP",
+        note: "仅含基础 VIP。“每单位货币的 VIP”为参考效率。"
+      },
+      summary: { current: "当前", target: "目标", remaining: "剩余点数" },
+      single: {
+        title: "单一礼包达成（仅 VIP 点数）",
+        package: "礼包",
+        vipPerPack: "VIP / 礼包",
+        need: "所需数量（向上取整）",
+        totalCost: "总费用",
+        note: "允许超额的向上取整。不含每日限制。"
+      },
+      footer: { note: "货币显示遵循所选语言。请在上方输入区调整实际商店价格。" },
+      tiers: { tier1:"档位 1", tier2:"档位 2", tier3:"档位 3", tier4:"档位 4", tier5:"档位 5" }
+    },
+    "zh-TW": {
+      meta: {
+        title: "Kingshot VIP 計算器 | KingshotData",
+        desc: "VIP 計算器。依語言/幣別比較 VIP 區間、累計點數與方案效率。"
+      },
+      h1: "VIP 計算器",
+      tag: "僅計 VIP 點數（不含鑽石）",
+      form: {
+        lang: "語言 / 幣別",
+        preset: "載入幣別預設",
+        p1: "方案 1 價格",
+        p2: "方案 2 價格",
+        p3: "方案 3 價格",
+        p4: "方案 4 價格",
+        p5: "方案 5 價格",
+        currLevel: "目前 VIP 等級",
+        targetLevel: "目標 VIP 等級"
+      },
+      btn: { loadPreset: "套用預設", calc: "計算", reset: "重設" },
+      notice: {
+        noDiamonds: "此計算器不含鑽石。若將鑽石換算成 VIP 點數，可用更少費用達成目標。",
+        calcBase: "計算目前與目標的累計點數差。"
+      },
+      vipTable: {
+        title: "VIP 1–12 所需點數",
+        level: "等級",
+        segment: "區間",
+        cumulative: "累計",
+        note: "VIP12 累計總計：4,800,000"
+      },
+      packTable: {
+        title: "方案（僅 VIP 點數）",
+        package: "方案",
+        price: "價格",
+        baseVip: "基礎 VIP / 方案",
+        eff: "每單位幣值的 VIP",
+        note: "僅含基礎 VIP。「每單位幣值的 VIP」為參考效率。"
+      },
+      summary: { current: "目前", target: "目標", remaining: "剩餘點數" },
+      single: {
+        title: "單一方案達成（僅 VIP 點數）",
+        package: "方案",
+        vipPerPack: "VIP / 方案",
+        need: "所需數量（無條件進位）",
+        totalCost: "總成本",
+        note: "允許超額的進位計算。不含每日限制。"
+      },
+      footer: { note: "幣別顯示依所選語言。請在上方輸入區調整實際商店價格。" },
+      tiers: { tier1:"方案 1", tier2:"方案 2", tier3:"方案 3", tier4:"方案 4", tier5:"方案 5" }
+    }
+  };
+
+  // ===== 데이터 =====
+  const SEGMENTS = [
+    { level: 1,  requiredSegment:    0, cumulative:        0 },
+    { level: 2,  requiredSegment: 2500, cumulative:     2500 },
+    { level: 3,  requiredSegment: 5000, cumulative:     7500 },
+    { level: 4,  requiredSegment:12500, cumulative:    20000 },
+    { level: 5,  requiredSegment:30000, cumulative:    50000 },
+    { level: 6,  requiredSegment:40000, cumulative:    90000 },
+    { level: 7,  requiredSegment:60000, cumulative:   150000 },
+    { level: 8,  requiredSegment:100000,cumulative:   250000 },
+    { level: 9,  requiredSegment:350000,cumulative:   600000 },
+    { level:10,  requiredSegment:600000,cumulative:  1200000 },
+    { level:11,  requiredSegment:1200000,cumulative: 2400000 },
+    { level:12,  requiredSegment:2400000,cumulative: 4800000 }
+  ];
+
+  const BASE_PACKS = [
+    { id:'p1', tKey:'tier1', baseVip:  2500 },
+    { id:'p2', tKey:'tier2', baseVip:  4000 },
+    { id:'p3', tKey:'tier3', baseVip:  6000 },
+    { id:'p4', tKey:'tier4', baseVip: 12000 },
+    { id:'p5', tKey:'tier5', baseVip: 20000 }
+  ];
+
+  // 통화 프리셋(예시). 실제 가격은 입력으로 수정.
+  const PRESET = {
+    'ko':   [  7500, 15000, 30000,  79000, 149000 ],
+    'en':   [  4.99,  9.99, 19.99,  49.99,  99.99 ],
+    'ja':   [  4.99,  9.99, 19.99,  49.99,  99.99 ],
+    'zh-CN':[  4.99,  9.99, 19.99,  49.99,  99.99 ],
+    'zh-TW':[  4.99,  9.99, 19.99,  49.99,  99.99 ]
+  };
+
+  // 통화 포맷(소수 자릿수: KRW/JPY/TWD=0, 기타=2)
+  function fmtMoney(n, lang){
+    const map = { 'ko':'KRW', 'en':'USD', 'ja':'JPY', 'zh-CN':'CNY', 'zh-TW':'TWD' };
+    const cur = map[lang] || 'USD';
+    const zeroFrac = new Set(['KRW','JPY','TWD']);
+    const maxFrac = zeroFrac.has(cur) ? 0 : 2;
+    const locale =
+      lang==='zh-TW' ? 'zh-TW' :
+      lang==='zh-CN' ? 'zh-CN' :
+      lang==='ja'    ? 'ja-JP' :
+      lang==='ko'    ? 'ko-KR' : 'en-US';
+    return Number(n).toLocaleString(locale, { style:'currency', currency: cur, maximumFractionDigits: maxFrac });
+  }
+  const fmtNum = n => Number(n).toLocaleString();
+
+  // ===== DOM =====
+  const $ = s => document.querySelector(s);
+  const $lang = $('#lang');
+  const priceInputs = [$('#p1'),$('#p2'),$('#p3'),$('#p4'),$('#p5')];
+  const $vipTBody = $('#vipTable tbody');
+  const $packTBody = $('#packTable tbody');
+  const $currLevel = $('#currLevel');
+  const $targetLevel = $('#targetLevel');
+  const $sumCurrent = $('#sumCurrent');
+  const $sumTarget = $('#sumTarget');
+  const $sumRemain = $('#sumRemain');
+  const $singleTbody = $('#singleTable tbody');
+
+  // ===== 다국어 적용 =====
+  function tDict(lang){ return I18N[lang] || I18N.en; }
+  function setMeta(langDict){
+    document.title = langDict.meta.title;
+    const m = document.querySelector('meta[name="description"]');
+    if (m) m.setAttribute('content', langDict.meta.desc);
+  }
+  function applyLang(){
+    const lang = $lang.value;
+    const L = tDict(lang);
+
+    // 헤더/태그
+    $('#i_h1').textContent = L.h1;
+    $('#i_tag').textContent = L.tag;
+
+    // 라벨/버튼
+    $('#i_label_lang').textContent    = L.form.lang;
+    $('#i_label_preset').textContent  = L.form.preset;
+    $('#i_label_p1').textContent      = L.form.p1;
+    $('#i_label_p2').textContent      = L.form.p2;
+    $('#i_label_p3').textContent      = L.form.p3;
+    $('#i_label_p4').textContent      = L.form.p4;
+    $('#i_label_p5').textContent      = L.form.p5;
+    $('#i_notice_noDiamonds').textContent = L.notice.noDiamonds;
+
+    $('#i_vipTable_title').textContent = L.vipTable.title;
+    $('#i_vipTable_level').textContent = L.vipTable.level;
+    $('#i_vipTable_segment').textContent = L.vipTable.segment;
+    $('#i_vipTable_cumulative').textContent = L.vipTable.cumulative;
+    $('#i_vipTable_note').textContent = L.vipTable.note;
+
+    $('#i_packTable_title').textContent = L.packTable.title;
+    $('#i_packTable_package').textContent = L.packTable.package;
+    $('#i_packTable_price').textContent = L.packTable.price;
+    $('#i_packTable_baseVip').textContent = L.packTable.baseVip;
+    $('#i_packTable_eff').textContent = L.packTable.eff;
+    $('#i_packTable_note').textContent = L.packTable.note;
+
+    $('#i_form_currLevel').textContent = L.form.currLevel;
+    $('#i_form_targetLevel').textContent = L.form.targetLevel;
+
+    $('#calcBtn').textContent = L.btn.calc;
+    $('#resetBtn').textContent = L.btn.reset;
+    $('#loadPresetBtn').textContent = L.btn.loadPreset;
+
+    $('#i_notice_calcBase').textContent = L.notice.calcBase;
+
+    $('#i_summary_current').textContent = L.summary.current;
+    $('#i_summary_target').textContent = L.summary.target;
+    $('#i_summary_remaining').textContent = L.summary.remaining;
+
+    $('#i_single_title').textContent = L.single.title;
+    $('#i_single_package').textContent = L.single.package;
+    $('#i_single_vipPerPack').textContent = L.single.vipPerPack;
+    $('#i_single_need').textContent = L.single.need;
+    $('#i_single_totalCost').textContent = L.single.totalCost;
+    $('#i_single_note').textContent = L.single.note;
+
+    $('#i_footer_note').textContent = L.footer.note;
+
+    setMeta(L);
+  }
+
+  function tTier(lang, key){
+    const L = (I18N[lang] && I18N[lang].tiers) ? I18N[lang].tiers : I18N.en.tiers;
+    return L[key] || key;
+  }
+
+  // ===== 표 렌더링 =====
+  function renderVipTable(){
+    $vipTBody.innerHTML = SEGMENTS.map(s => `
+      <tr>
+        <td>VIP ${s.level}</td>
+        <td class="num">${fmtNum(s.requiredSegment)}</td>
+        <td class="num">${fmtNum(s.cumulative)}</td>
+      </tr>
+    `).join('');
+  }
+
+  function getPrices(){ return priceInputs.map($el => parseFloat($el.value||'0') || 0); }
+
+  function renderPackTable(){
+    const lang = $lang.value;
+    const prices = getPrices();
+    $packTBody.innerHTML = BASE_PACKS.map((p,i)=>{
+      const price = prices[i];
+      const eff = price > 0 ? (p.baseVip / price) : 0;
+      return `
+        <tr>
+          <td>${tTier(lang, p.tKey)}</td>
+          <td>${fmtMoney(price, lang)}</td>
+          <td class="num">${fmtNum(p.baseVip)}</td>
+          <td class="num">${eff ? eff.toFixed(2) : '-'}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  // ===== 레벨 옵션 =====
+  function fillLevelOptions(){
+    $currLevel.innerHTML = '';
+    $targetLevel.innerHTML = '';
+    for(const s of SEGMENTS){
+      const o1 = document.createElement('option');
+      o1.value = s.level; o1.textContent = `VIP ${s.level}`;
+      if(s.level===1) o1.selected = true;
+      $currLevel.appendChild(o1);
+
+      const o2 = document.createElement('option');
+      o2.value = s.level; o2.textContent = `VIP ${s.level}`;
+      if(s.level===12) o2.selected = true;
+      $targetLevel.appendChild(o2);
+    }
+  }
+
+  // ===== 계산 =====
+  const requiredCumulative = lv => SEGMENTS.find(s=>s.level===lv).cumulative;
+
+  function singlePackPlan(remainVip, prices){
+    return BASE_PACKS.map((p,i)=>{
+      const price = prices[i];
+      const need = p.baseVip > 0 ? Math.ceil((remainVip>0?remainVip:0)/p.baseVip) : 0;
+      const cost = need * price;
+      return { nameKey:p.tKey, vipPerPack:p.baseVip, need, cost };
+    });
+  }
+
+  function runCalc(){
+    const lang = $lang.value;
+    const prices = getPrices();
+    const curr = parseInt($currLevel.value,10);
+    const target = parseInt($targetLevel.value,10);
+
+    const currCum = requiredCumulative(curr);
+    const targetCum = requiredCumulative(target);
+    const remain = Math.max(targetCum - currCum, 0);
+
+    $sumCurrent.textContent = `VIP ${curr} / ${fmtNum(currCum)}`;
+    $sumTarget.textContent  = `VIP ${target} / ${fmtNum(targetCum)}`;
+    $sumRemain.textContent  = fmtNum(remain);
+
+    const rows = singlePackPlan(remain, prices).map(r=>`
+      <tr>
+        <td>${tTier(lang, r.nameKey)}</td>
+        <td class="num">${fmtNum(r.vipPerPack)}</td>
+        <td class="num">${fmtNum(r.need)}</td>
+        <td>${fmtMoney(r.cost, lang)}</td>
+      </tr>
+    `).join('');
+    $singleTbody.innerHTML = rows;
+
+    postHeight();
+  }
+
+  // ===== URL ?lang= 적용 및 프리셋 =====
+  function applyLangFromQuery(){
+    const q = new URLSearchParams(location.search).get('lang');
+    const allowed = ['ko','en','ja','zh-CN','zh-TW'];
+    if (q && allowed.includes(q)) $lang.value = q;
+  }
+
+  function loadPreset(){
+    const lang = $lang.value;
+    (PRESET[lang] || PRESET.en).forEach((v,i)=> priceInputs[i].value = v);
+    renderPackTable();
+    runCalc();
+  }
+
+  // ===== iframe 자동 높이 전달(임베드 대응) =====
+  function postHeight(){
+    const h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    if (parent && parent !== window) {
+      parent.postMessage({ type:'KSD_CALC_RESIZE', height:h }, '*');
+    }
+  }
+
+  // ===== 이벤트 =====
+  $lang.addEventListener('change', ()=>{
+    applyLang();
+    loadPreset();
+  });
+  document.getElementById('calcBtn').addEventListener('click', runCalc);
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    $lang.value = 'ko';
+    applyLang();
+    loadPreset();
+    $currLevel.value = 1;
+    $targetLevel.value = 12;
+    $sumCurrent.textContent = '';
+    $sumTarget.textContent = '';
+    $sumRemain.textContent = '';
+    $singleTbody.innerHTML = '';
+    postHeight();
+  });
+  document.getElementById('loadPresetBtn').addEventListener('click', loadPreset);
+  [$('#p1'),$('#p2'),$('#p3'),$('#p4'),$('#p5')].forEach($el => $el.addEventListener('input', ()=>{ renderPackTable(); runCalc(); }));
+
+  // ===== 초기화 =====
+  function init(){
+    renderVipTable();
+    fillLevelOptions();
+    applyLangFromQuery();
+    applyLang();     // 라벨/타이틀/메타 적용
+    loadPreset();    // 프리셋 로드 + 초기 계산
+    window.addEventListener('load', ()=>setTimeout(postHeight, 50));
+    window.addEventListener('resize', ()=>setTimeout(postHeight, 50));
+    if ('ResizeObserver' in window) new ResizeObserver(()=>setTimeout(postHeight,50)).observe(document.body);
+    setTimeout(postHeight, 300);
+  }
+  init();
+</script>
+</body>
+</html>

@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>버프 적용 확인표 · Kingshot</title>
+  <style>
+    :root{
+      --bg-grad-top:#96afac;
+      --bg-grad-bot:#4e615e;
+      --panel:#b6a7a7cc;
+      --ink:#18212f;
+      --muted:#5b6b83;
+      --line:#e7ecf6;
+      --head:#f8faff;
+      --ring:#27ae60;
+      --x:#e06464;
+      --warn:#f2b735;
+      --sticky-shadow:0 2px 0 rgba(18,37,77,.06),0 1px 0 rgba(18,37,77,.06);
+      --cell-h:120px;      /* 셀 높이 여유 */
+      --first-col-w:280px; /* 첫 열 폭 */
+    }
+.title h1 {
+  font-family: 'Black Han Sans', sans-serif;
+}
+
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",Arial,sans-serif;
+      color:var(--ink);
+      background:linear-gradient(180deg,var(--bg-grad-top),var(--bg-grad-bot)) fixed;
+    }
+    .wrap{
+      width:100%;         /* 가로 제한 해제 */
+      margin:clamp(16px,3vw,28px) auto;
+      padding:clamp(12px,2vw,20px);
+      background:var(--panel);
+      backdrop-filter:blur(6px);
+      border-radius:16px;
+      box-shadow:0 8px 24px rgba(12,25,56,.12);
+    }
+
+    .title{
+      display:flex;align-items:center;justify-content:center;
+      gap:16px;margin:8px 4px 18px;
+    }
+    .title-logo{
+      width:168px;height:auto;max-height:52px;object-fit:contain;
+    }
+    .title h1{
+      text-align:center;width:100%;
+      font-size:clamp(22px,2.6vw,32px);
+      line-height:1.15;margin:0;font-weight:800;
+    }
+    .title small{color:var(--muted);font-weight:600;display:block;margin-top:4px;}
+
+    .table-scroller{overflow:auto;border-radius:12px;background:#fff;box-shadow:inset 0 0 0 1px var(--line);}
+    table{
+      border-collapse:separate;border-spacing:0;
+      width:100%;table-layout:fixed;font-size:18px;
+    }
+    thead th,tbody td{
+      border-bottom:1px solid var(--line);border-right:1px solid var(--line);
+      height:var(--cell-h);text-align:center;vertical-align:middle;
+      padding:0 10px;background:#fff;
+    }
+    thead tr:first-child th{background:var(--head);font-weight:700;}
+    thead th:first-child,tbody th:first-child,tbody td:first-child{border-left:1px solid var(--line);}
+    thead th{position:sticky;top:0;z-index:3;box-shadow:var(--sticky-shadow);}
+    thead tr:nth-child(2) th{top:calc(0px + var(--cell-h));z-index:2;background:#fff;}
+    .pin{position:sticky;left:0;z-index:4;text-align:left;padding:0 14px;background:#fff;font-weight:600;white-space:nowrap;}
+    tbody .pin{z-index:1;background:#fff;}
+
+    .status{display:inline-block;width:28px;height:28px;position:relative;}
+    .status--yes::after{content:"";width:22px;height:22px;border-radius:50%;border:3px solid var(--ring);position:absolute;inset:0;margin:auto;}
+    .status--no::before,.status--no::after{content:"";position:absolute;left:50%;top:50%;width:22px;height:3px;background:var(--x);transform-origin:center;}
+    .status--no::before{transform:translate(-50%,-50%) rotate(45deg);}
+    .status--no::after{transform:translate(-50%,-50%) rotate(-45deg);}
+    .status--warn::after{content:"";width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-bottom:22px solid var(--warn);position:absolute;left:50%;top:50%;transform:translate(-50%,-40%);}
+    .status--warn i{position:absolute;left:50%;top:8px;transform:translateX(-50%);width:2px;height:9px;background:#2a2a2a;border-radius:1px;}
+    .status--warn i::after{content:"";position:absolute;left:50%;bottom:-4px;transform:translateX(-50%);width:2px;height:2px;background:#2a2a2a;border-radius:50%;}
+
+    .hicon{width:48px;height:48px;object-fit:contain;display:block;margin:0 auto;}
+    .note{color:#ad2f2f;font-size:18px;font-weight:700;}
+    .muted{color:var(--muted);font-size:18px;}
+
+    .icon-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;justify-items:center;}
+    .icon-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;justify-items:center;}
+
+    tbody th {
+  border-bottom:1px solid var(--line);
+  border-right:1px solid var(--line);
+}
+.hicon-oasis {
+  width: 88px;  /* 원하는 크기 */
+  height: 88px;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 좌-가운데-우 배치 */
+  gap: 16px;
+  margin: 8px 4px 18px;
+}
+
+.title h1 {
+  flex: 1;               /* 가운데 영역 넓게 */
+  text-align: center;    /* 텍스트 가운데 정렬 */
+}
+
+.mascot-logo {
+  width: 80px;   /* 필요 크기 조정 */
+  height: auto;
+  object-fit: contain;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  /* 여백 설정 */
+  padding: 20px 40px; /* 상하 20px, 좌우 40px */
+}
+html, body {
+  height: 100%;
+  margin: 20px;   /* ← HTML 전체 여백 */
+  padding: 20px;  /* ← 내부 컨텐츠 여백 */
+}
+body {
+  margin: 0px 60px;   /* 위아래 40px, 좌우 60px */
+}
+html, body {
+  min-height: 100%; /* 내용이 길면 자동으로 늘어남 */
+  height: auto;     /* 100% 고정 대신 auto */
+}
+
+.title h1 {
+  text-align: center;
+  width: 100%;
+  font-size: 90px;              /* 크기 키움 */
+  font-weight: 900;
+  letter-spacing: 2px;          /* 자간 */
+  text-transform: uppercase;    /* 대문자 변환 */
+  color: #222;
+  position: relative;
+  display: inline-block;
+}
+
+/* 밑줄 강조 */
+.title h1::after {
+  content: "";
+  display: block;
+  margin: 8px auto 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff9800, #f44336);
+  border-radius: 2px;
+}
+
+/* 보조 텍스트 (TEN) */
+.title small {
+  display: block;
+  margin-top: 14px;
+  font-size: 20px;             /* 키움 */
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #52c9bd;              /* 청록 포인트 */
+  text-shadow: 0 0 6px rgba(4, 15, 14, 0.822); /* 빛나는 효과 */
+}
+html, body {
+  min-height: 100%;
+  height: auto; /* 100% 고정 제거 */
+}
+body {
+  min-height: 100vh; /* 화면 높이 이상 자동 확장 */
+  background: linear-gradient(180deg, var(--bg-grad-top), var(--bg-grad-bot));
+  background-attachment: fixed; /* 스크롤해도 고정 */
+}
+html {
+  min-height: 100%;
+}
+body {
+  min-height: 100%;
+  background: linear-gradient(180deg, var(--bg-grad-top), var(--bg-grad-bot));
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="title">
+  <!-- 좌측: 로고 -->
+  <img class="title-logo" src="/img/buff/kingshot-logo-1568x502.png" alt="Kingshot 로고">
+
+  <!-- 가운데: 제목 -->
+  <h1>버프 적용 확인표 <small>TEN</small></h1>
+
+  <!-- 우측: 마스코트 -->
+  <img class="mascot-logo" src="/img/buff/3216 (2).png" alt="마스코트">
+</div>
+
+    <p class="scroll-hint"></p>
+
+    <div class="table-scroller">
+      <table>
+        <colgroup>
+          <col style="width: var(--first-col-w)" />
+          <col span="9" />
+        </colgroup>
+
+        <!-- 1행: 텍스트 헤더 (필요 시 수정) -->
+        <thead>
+            
+          <tr>
+            <th class="pin"></th>
+            <th>도시 버프</th>
+            <th>출정 수용량</th>
+            <th>펫 버프</th>
+            <th>오아시스</th>
+            <th>국왕 스킬</th>
+            <th>관직 버프</th>
+            <th>영지 버프</th>
+            <th>거점 버프</th>
+            <th>행군 가속</th>
+            
+          </tr>
+
+          <!-- 2행: 아이콘 헤더 (이미지 경로를 프로젝트에 맞게 교체) -->
+          <tr>
+            <th class="pin muted"></th>
+            <th title="도시 버프">
+              <div class="icon-grid3">
+    <img class="hicon" src="/img/buff/abuff (1).png" alt="">
+    <img class="hicon" src="/img/buff/abuff (2).png" alt="">
+    <img class="hicon" src="/img/buff/abuff (3).png" alt="">
+    <img class="hicon" src="/img/buff/abuff (4).png" alt="">
+    <img class="hicon" src="/img/buff/abuff (5).png" alt="">
+    <img class="hicon" src="/img/buff/abuff (6).png" alt="">
+  </div>
+  <span class="visually-hidden"></span>
+            </th>
+
+            <th title="출정 수용량">
+                <div class="icon-grid">
+    <img class="hicon" src="/img/buff/bbuff (1).png" alt="">
+    <img class="hicon" src="/img/buff/bbuff (2).png" alt="">
+    
+  </div>
+  <span class="visually-hidden"></span>
+</th>
+
+            <th title="펫 전투 버프">
+  <div class="icon-grid">
+    <img class="hicon" src="/img/buff/pet (1).png" alt="">
+    <img class="hicon" src="/img/buff/pet (1).webp" alt="">
+    <img class="hicon" src="/img/buff/pet (2).webp" alt="">
+    <img class="hicon" src="/img/buff/pet (3).webp" alt="">
+  </div>
+  <span class="visually-hidden"></span>
+</th>
+
+            <th title="햇살 섬">
+  <img class="hicon hicon-oasis" src="/img/buff/oasis.png" alt="">
+  <span class="visually-hidden"></span>
+</th>
+            <th title="전함·스킬">
+              <div class="icon-grid">
+    <img class="hicon" src="/img/buff/kbuff (1).png" alt="">
+    <img class="hicon" src="/img/buff/kbuff (2).png" alt="">
+    <img class="hicon" src="/img/buff/kbuff (3).png" alt="">
+    <img class="hicon" src="/img/buff/kbuff (4).png" alt="">
+  </div>
+  <span class="visually-hidden"></span>
+            </th>
+            <th title="관직 버프">
+              <div class="icon-grid">
+    <img class="hicon" src="/img/buff/kkbuff (1).png" alt="">
+    <img class="hicon" src="/img/buff/kkbuff (2).png" alt="">
+    
+  </div>
+  <span class="visually-hidden"></span>
+            </th>
+            <th title="영지 버프">
+              <img class="hicon" src="/img/buff/h.png" alt="">
+              <span class="visually-hidden"></span>
+            </th>
+            <th title="엔지니어링 버프">
+              <img class="hicon" src="/img/buff/s.png" alt="">
+              <span class="visually-hidden"></span>
+            </th>
+            <th title="영웅 가속">
+              <div class="icon-grid">
+    <img class="hicon" src="/img/buff/sbuff (1).png" alt="">
+    <img class="hicon" src="/img/buff/sbuff (2).png" alt="">
+    
+  </div>
+  <span class="visually-hidden"></span>
+</th>
+            
+        </thead>
+
+        <!-- 본문 데이터
+             초록 링: status--yes
+             빨간 X : status--no
+             노랑 경고: status--warn
+             ※ 아래는 샘플 값입니다. 실제 게임 규칙대로 수정하세요.
+        -->
+        <tbody>
+  <tr>
+    <th class="pin">
+      <img src="/img/buff/MuMu12-20250914-110638.png" alt="곰사냥" style="width:78px;height:78px;vertical-align:middle;margin-right:6px;">
+      곰사냥
+    </th>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>    
+    <td>
+      <span class="status status--warn" aria-label="예외"><i></i></span>
+      <div class="note">집결공격 시 불가</div>
+    </td>
+  </tr>
+
+  <tr>
+    <th class="pin">
+      <img src="/img/buff/viking.png" alt="바이킹의약탈" style="width:78px;height:78px;vertical-align:middle;margin-right:6px;">
+      바이킹의약탈
+    </th>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+  </tr>
+
+  <tr>
+    <th class="pin">
+      <img src="/img/buff/MuMu12-20250914-110636.png" alt="연맹챔피언십" style="width:78px;height:78px;vertical-align:middle;margin-right:6px;">
+      연맹챔피언십<br>
+    <small style="color:red;font-size:12px;">※ 버프는 등록단계에서 활성화</small>
+    </th>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+  </tr>
+
+  <tr>
+    <th class="pin">
+      <img src="/img/buff/swordland-showdown.webp" alt="성검쟁탈" style="width:78px;height:78px;vertical-align:middle;margin-right:6px;">
+      성검쟁탈
+    </th>    
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>    
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+  </tr>
+
+  <tr>
+    <th class="pin">
+      <img src="/img/buff/ruins.png" alt="사라진유적" style="width:78px;height:78px;vertical-align:middle;margin-right:6px;">
+      사라진유적
+    </th>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>    
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>    
+    <td><span class="status status--yes" aria-label="적용"></span></td>    
+  </tr>
+
+  <tr>
+    <th class="pin">
+      <img src="/img/buff/MuMu12-20250914-110645.png" alt="유적쟁탈전" style="width:78px;height:78px;vertical-align:middle;margin-right:6px;">
+      유적쟁탈전
+    </th>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>    
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td> 
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>    
+    <td>
+      <span class="status status--warn" aria-label="예외"><i></i></span>
+      <div class="note">집결공격 시 불가</div>
+    </td>
+  </tr>
+
+  <tr>
+    <th class="pin">
+      <img src="/img/buff/s.png" alt="거점" style="width:78px;height:78px;vertical-align:middle;margin-right:6px;">
+      거점
+    </th>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>    
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td> 
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>    
+    <td>
+      <span class="status status--warn" aria-label="예외"><i></i></span>
+      <div class="note">집결공격 시 불가</div>
+    </td>
+  </tr>
+
+  <tr>
+    <th class="pin">
+      <img src="/img/buff/MuMu12-20250914-110643.png" alt="캐슬" style="width:78px;height:78px;vertical-align:middle;margin-right:6px;">
+      캐슬
+    </th>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>    
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>    
+    <td>
+      <span class="status status--warn" aria-label="예외"><i></i></span>
+      <div class="note">집결공격 시 불가</div>
+    </td>
+  </tr>
+
+  <tr>
+    <th class="pin">
+      <img src="/img/buff/merchant-empire-event-icon.webp" alt="무역부흥" style="width:78px;height:78px;vertical-align:middle;margin-right:6px;">
+      무역부흥
+    </th>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+  </tr>
+
+  <tr>
+    <th class="pin">
+      <img src="/img/buff/333.png" alt="무역부흥" style="width:78px;height:78px;vertical-align:middle;margin-right:6px;">
+      삼대연맹전
+      <br>
+    <small style="color:red;font-size:12px;">※ 버프는 등록단계에서 활성화</small>
+    </th>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--no" aria-label="미적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+    <td><span class="status status--yes" aria-label="적용"></span></td>
+  </tr>
+</tbody>
+
+
+          <!-- 복사해서 원하는 만큼 행을 추가하세요 -->
+          <!--
+          <tr>
+            <th class="pin">콘텐츠 이름</th>
+            <td><span class="status status--yes" aria-label="적용"></span></td>
+            <td><span class="status status--no" aria-label="미적용"></span></td>
+            <td><span class="status status--warn" aria-label="예외"><i></i></span></td>
+            ...
+          </tr>
+          -->
+        </tbody>
+      </table>
+    </div>
+
+    
+    
+  </div>
+</body>
+</html>

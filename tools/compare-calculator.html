@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>영웅 VS 영웅 — 단계별 교체 타이밍 계산기 (SSR 전용)</title>
+<style>
+  :root{--fg:#111;--muted:#666;--bd:#e5e7eb;--pri:#0b57d0}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;margin:0;background:#fff;color:var(--fg)}
+  header{padding:18px 20px 8px}
+  h1{margin:0 0 6px;font-size:20px}
+  .muted{color:var(--muted);font-size:13px}
+  main{padding:0 20px 20px;max-width:1080px;margin:auto}
+  .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:10px 0}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .tab{padding:8px 12px;border:1px solid var(--bd);border-radius:10px;background:#fff;cursor:pointer}
+  .tab.active{background:#0b57d0;color:#fff;border-color:#0b57d0}
+  .pills{display:flex;gap:8px;flex-wrap:wrap}
+  .pill{display:inline-block;padding:4px 10px;border:1px solid var(--bd);border-radius:999px;cursor:pointer}
+  .pill.on{background:#eef3ff;border-color:#bfd0ff}
+  .select{min-width:220px;padding:8px 10px;border:1px solid var(--bd);border-radius:10px;font-size:14px}
+  .btn{padding:8px 10px;border:1px solid var(--bd);border-radius:10px;background:#fff;cursor:pointer}
+  .slider{width:260px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:12px}
+  .card{border:1px solid var(--bd);border-radius:12px;padding:12px}
+  .card h3{margin:0 0 6px;font-size:16px}
+  .kv{display:flex;justify-content:space-between;margin:4px 0;font-size:13px}
+  .pillBadge{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef3ff;color:#1b56d6;font-size:12px;margin-left:6px}
+  .good{color:#0a7d33} .bad{color:#b00}
+</style>
+</head>
+<body>
+<header>
+  <h1>영웅 VS 영웅 — 단계별 교체 타이밍 계산기 (SSR 전용)</h1>
+  <div class="muted">SSR만 비교합니다. 병종 탭을 고르고 두 영웅을 선택한 뒤, 단계(0★T1 → 5★T5)를 움직이며 현재 수치·증가폭·격차를 확인하세요.</div>
+</header>
+
+<main>
+  <!-- 병종 탭 -->
+  <div class="row">
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-type="infantry">보병</div>
+      <div class="tab" data-type="cavalry">기병</div>
+      <div class="tab" data-type="archer">궁병</div>
+    </div>
+    <!-- (선택) 세대 필터: meta에 gen이 있을 때만 의미 있음 -->
+    <div id="genPills" class="pills" aria-label="세대 필터">
+      <span class="pill on" data-gen="all">전체</span>
+      <span class="pill" data-gen="1">1세대</span>
+      <span class="pill" data-gen="2">2세대</span>
+      <span class="pill" data-gen="3">3세대</span>
+    </div>
+  </div>
+
+  <!-- 선택/컨트롤 -->
+  <div class="row">
+    <select id="heroA" class="select"></select>
+    <select id="heroB" class="select"></select>
+    <button id="swap" class="btn">A↔B</button>
+    <label>단계: <input id="level" type="range" min="1" max="30" step="1" class="slider"></label>
+    <span id="lv" class="pillBadge">0★ T1</span>
+  </div>
+
+  <!-- 격차 설명 -->
+  <div id="analysis" class="muted" style="margin:6px 0 2px"></div>
+
+  <!-- 카드 -->
+  <div id="cards" class="cards"></div>
+</main>
+
+<script>
+/* === 경로: HTML과 같은 폴더 기준 ===
+   다른 폴더라면 new URL('경로', location.href) 로 바꿔줘 */
+const MODEL_URL = new URL('hero-levels.segments.json', location.href).toString();
+const META_URL  = new URL('hero-meta.json', location.href).toString(); // 없으면 자동 무시
+
+/* === 방탄 로더 === */
+async function loadJSON(url){
+  const res = await fetch(url + (url.includes('?')?'&':'?') + 'v=' + Date.now(), {cache:'no-store'});
+  const txt = await res.text();
+  if (!res.ok) throw new Error(`HTTP ${res.status} @ ${url}`);
+  if (/^\s*</.test(txt)) throw new Error(`HTML returned (경로 확인): ${url}`);
+  return JSON.parse(txt);
+}
+
+/* === SSR 전용 화이트리스트 & 표시명(한글) === */
+const SSR_ONLY = ['Helga','Amadeus','Saul','Jabel','Hilde','Marlin','Zoe','Jaeger','Petra','Eric'];
+const KO_NAME  = {
+  Helga:'헬가', Amadeus:'아마데우스', Saul:'살로', Jabel:'제이벨',
+  Hilde:'힐데', Marlin:'마린', Zoe:'조이',
+  Jaeger:'예거', Petra:'리틀페라', Eric:'에릭'
+};
+
+/* === 기본 메타(병종/레어/세대) — hero-meta.json 있으면 그걸로 덮어씀 === */
+const DEFAULT_META = {
+  Helga:{type:'infantry', rarity:'SSR', gen:1},
+  Amadeus:{type:'infantry', rarity:'SSR', gen:1},
+  Saul:{type:'infantry', rarity:'SSR', gen:1},
+  Jabel:{type:'infantry', rarity:'SSR', gen:1},
+  Hilde:{type:'cavalry', rarity:'SSR', gen:2},
+  Marlin:{type:'cavalry', rarity:'SSR', gen:2},
+  Zoe:{type:'archer', rarity:'SSR', gen:2},
+  Jaeger:{type:'cavalry', rarity:'SSR', gen:3},
+  Petra:{type:'cavalry', rarity:'SSR', gen:3},
+  Eric:{type:'cavalry', rarity:'SSR', gen:3}
+};
+
+/* === 상태/DOM === */
+let MODEL=null, META={}, CUR_TYPE='infantry', CUR_GEN='all';
+const heroA = document.getElementById('heroA');
+const heroB = document.getElementById('heroB');
+const level = document.getElementById('level');
+const lv    = document.getElementById('lv');
+const cards = document.getElementById('cards');
+const analysis = document.getElementById('analysis');
+const tabs  = document.querySelectorAll('#tabs .tab');
+const pills = document.querySelectorAll('#genPills .pill');
+
+/* === 유틸 === */
+const norm = s => String(s||'').trim().toLowerCase();
+const labelOf = n => `${KO_NAME[n]||n} (${n})`;
+function levelToStarTier(L){ const star=Math.floor((L-1)/5), tier=((L-1)%5)+1; return `${star}★ T${tier}`; }
+function metaOf(n){ return (META && META[n]) || DEFAULT_META[n] || {}; }
+function isSSR(n){ const m = metaOf(n); return (m.rarity==='SSR') || SSR_ONLY.includes(n); }
+function typeOf(n){ return metaOf(n).type || null; }
+function genOf(n){ return metaOf(n).gen ?? null; }
+
+/* === 세그먼트 공식 === */
+function statAt(hero, L){
+  const h = MODEL.heroes[hero]; if(!h) return null;
+  let s = h.base;
+  for (const seg of h.segments){
+    if (L < seg.from) break;
+    const upto = Math.min(L, seg.to);
+    s += (upto - seg.from + 1) * seg.delta;
+    if (L <= seg.to) break;
+  }
+  return s;
+}
+function deltaAt(hero, L){
+  const h = MODEL.heroes[hero]; if (!h) return null;
+  for (const seg of h.segments){
+    if (L >= seg.from && L <= seg.to) return seg.delta;
+  }
+  return null;
+}
+
+/* === (옵션) 앵커: 특정 영웅을 L레벨에서 정확히 target%로 맞춤 === */
+function statAtRaw(hero, L){ return statAt(hero, L); }
+function setAnchor(hero, level, target){
+  const h = MODEL.heroes[hero]; if (!h) return;
+  // level을 포함하는 세그먼트를 쪼개서 마지막 스텝을 단일 스텝으로 만든 뒤 need로 설정
+  let idx = h.segments.findIndex(seg => level >= seg.from && level <= seg.to);
+  if (idx >= 0){
+    const seg = h.segments[idx];
+    if (!(seg.from === level && seg.to === level)){
+      const left  = (level-1 >= seg.from) ? {from:seg.from, to:level-1, delta:seg.delta} : null;
+      const right = (level   <= seg.to)   ? {from:level,   to:seg.to,   delta:seg.delta} : null;
+      h.segments.splice(idx, 1, ...(left?[left]:[]), ...(right?[right]:[]));
+    }
+  }
+  const before = statAtRaw(hero, level-1);
+  const need = +(target - before).toFixed(4);
+  const j = h.segments.findIndex(seg => seg.from===level && seg.to===level);
+  const fixed = {from:level, to:level, delta:need};
+  if (j>=0) h.segments[j]=fixed; else h.segments.push(fixed);
+}
+
+/* === 목록 생성 === */
+function namesByTypeAndGen(type, gen){
+  // MODEL에 있는 이름들 중 SSR만 취급
+  const all = Object.keys(MODEL.heroes).filter(isSSR).sort();
+  let list = all.filter(n => typeOf(n) === type);
+  if (gen !== 'all') list = list.filter(n => String(genOf(n)) === String(gen));
+  // 메타에 타입이 없으면(혹은 비었으면) SSR 전부라도 보여주기
+  return list.length ? list : all;
+}
+
+/* === 렌더 === */
+function renderSelects(){
+  const names = namesByTypeAndGen(CUR_TYPE, CUR_GEN);
+  const keepA = heroA.value, keepB = heroB.value;
+  const toOpt = v => `<option value="${v}">${labelOf(v)}</option>`;
+  heroA.innerHTML = names.map(toOpt).join('');
+  heroB.innerHTML = names.map(toOpt).join('');
+  heroA.value = names.includes(keepA) ? keepA : (names[0]||'');
+  heroB.value = names.includes(keepB) ? keepB : (names[1]||names[0]||'');
+}
+function renderCards(){
+  const A = heroA.value, B = heroB.value, L = +level.value;
+  lv.textContent = levelToStarTier(L);
+
+  const a  = statAt(A,L),  b  = statAt(B,L);
+  const da = deltaAt(A,L), db = deltaAt(B,L);
+  const diff = (a!=null && b!=null) ? (b-a) : null;
+  const fmt = x => (x==null ? '—' : ('+'+x.toFixed(2)+'%'));
+
+  cards.innerHTML = `
+    <div class="card">
+      <h3>${labelOf(A)} <span class="pillBadge">${(typeOf(A)||'').toUpperCase()}</span></h3>
+      <div class="kv"><span>현재 수치</span><b>${fmt(a)}</b></div>
+      <div class="kv"><span>이번 단계 증가폭</span><b>${fmt(da)}</b></div>
+    </div>
+    <div class="card">
+      <h3>${labelOf(B)} <span class="pillBadge">${(typeOf(B)||'').toUpperCase()}</span></h3>
+      <div class="kv"><span>현재 수치</span><b>${fmt(b)}</b></div>
+      <div class="kv"><span>이번 단계 증가폭</span><b>${fmt(db)}</b></div>
+    </div>
+    <div class="card">
+      <h3>격차 (B − A)</h3>
+      <div class="kv"><span>현재</span>
+        <b class="${diff!=null && diff>=0 ? 'good':'bad'}">
+          ${diff==null ? '—' : (diff>=0?'+':'') + diff.toFixed(2) + '%'}
+        </b>
+      </div>
+    </div>
+  `;
+
+  // 교차 및 최소 격차
+  let crossAt = null, minGap = {level:null, diff:Infinity};
+  for (let l=1; l<=30; l++){
+    const sa = statAt(A,l), sb = statAt(B,l);
+    if (sa==null || sb==null) continue;
+    const d = sb-sa;
+    if (crossAt===null && d>=0) crossAt = l;
+    if (Math.abs(d) < Math.abs(minGap.diff)) minGap = {level:l, diff:d};
+  }
+  const nearTxt = (minGap.level==null) ? '—'
+    : `${levelToStarTier(minGap.level)} (격차 ${(minGap.diff>=0?'+':'')+Math.abs(minGap.diff).toFixed(2)}%)`;
+  analysis.textContent = (crossAt==null)
+    ? `역전 없음(데이터 범위). 가장 비슷한 단계: ${nearTxt}`
+    : `B가 A를 추월하는 최소 단계: ${levelToStarTier(crossAt)} · 가장 비슷한 단계: ${nearTxt}`;
+}
+
+/* === 이벤트 === */
+document.getElementById('swap').addEventListener('click', ()=>{
+  const a = heroA.value; heroA.value = heroB.value; heroB.value = a; renderCards();
+});
+heroA.addEventListener('change', renderCards);
+heroB.addEventListener('change', renderCards);
+level.addEventListener('input', renderCards);
+tabs.forEach(t=>{
+  t.addEventListener('click', ()=>{
+    tabs.forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    CUR_TYPE = t.dataset.type;
+    renderSelects(); renderCards();
+  });
+});
+pills.forEach(p=>{
+  p.addEventListener('click', ()=>{
+    pills.forEach(x=>x.classList.remove('on'));
+    p.classList.add('on');
+    CUR_GEN = p.dataset.gen;
+    renderSelects(); renderCards();
+  });
+});
+
+/* === 로드 === */
+Promise.all([
+  loadJSON(MODEL_URL),
+  loadJSON(META_URL).catch(()=> ({})) // 없으면 무시
+]).then(([model, meta])=>{
+  MODEL = model; META = meta || {};
+
+  /* (옵션) 정확도 앵커: 예) Petra L30을 정확히 290%로 고정하고 싶다면 아래 주석 해제
+     ['Petra'].forEach(n => setAnchor(n, 30, 290)); */
+
+  // 초기 화면
+  renderSelects();
+  if (!heroA.value){ heroA.value = heroB.value || (heroA.options[0]?.value || ''); }
+  if (!heroB.value || heroB.value===heroA.value){
+    const opts = [...heroB.options].map(o=>o.value).filter(v=>v!==heroA.value);
+    heroB.value = opts[0] || heroA.value;
+  }
+  level.value = 1; lv.textContent = levelToStarTier(1);
+  renderCards();
+}).catch(err=>{
+  document.body.innerHTML =
+    `<div style="padding:18px;color:#b00;line-height:1.6">
+      <b>데이터 로드 실패</b><br>${String(err)}<br>
+      현재 모델 경로: <code>${MODEL_URL}</code>
+    </div>`;
+});
+</script>
+</body>
+</html>
