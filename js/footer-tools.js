@@ -43,7 +43,9 @@
       const d = new Date(String(yyyy_mm_dd).trim() + 'T00:00:00');
       if (isNaN(d)) return String(yyyy_mm_dd);
       return new Intl.DateTimeFormat(getLangSafe(), {
-        year: 'numeric', month: 'short', day: '2-digit'
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit'
       }).format(d);
     } catch {
       return String(yyyy_mm_dd);
@@ -78,7 +80,7 @@
 
   /* ================= AdFit loader (KO only + load once) ================= */
   function loadAdfitOnce() {
-    // // 왜: ba.min.js는 한 페이지에서 여러 번 로드되면 광고가 안 뜨거나 꼬일 수 있어서 1회만 로드
+    // 왜: ba.min.js는 한 페이지에서 여러 번 로드되면 광고가 안 뜨거나 꼬일 수 있어서 1회만 로드
     if (document.querySelector('script[data-kakao-adfit="1"]')) return;
 
     const s = document.createElement('script');
@@ -93,8 +95,8 @@
     const container = document.getElementById('footerTools');
     if (!container) return;
 
-    // // 왜: SPA/라우팅에서 renderFooterTools가 여러 번 실행되면
-    // //      AdFit는 동적 재삽입 때 광고가 안 뜨는 경우가 있어서 "테스트 단계"는 1회 렌더로 고정
+    // 왜: SPA/라우팅에서 renderFooterTools가 여러 번 실행되면
+    //     AdFit는 동적 재삽입 때 광고가 안 뜨는 경우가 있어서 "테스트 단계"는 1회 렌더로 고정
     if (container.dataset.footerToolsRendered === '1') return;
     container.dataset.footerToolsRendered = '1';
 
@@ -162,7 +164,7 @@
       `;
       container.appendChild(adfit);
 
-      // // 왜: ins가 DOM에 붙은 다음 스크립트를 로드해야 스캔/렌더가 안정적
+      // ins가 DOM에 붙은 다음 스크립트를 로드해야 스캔/렌더가 안정적
       loadAdfitOnce();
     }
   }
