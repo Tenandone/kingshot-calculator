@@ -5,84 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <title>모바일 게임 유저들을 위한 합리적인 충전 가이드</title>
+
   <style>
-    * { box-sizing: border-box; }
+    *{box-sizing:border-box}
     :root{
-      --brand:#0b57d0;
-      --text:#222;
-      --muted:#555;
-      --surface:#fff;
-      --bg:#fff;
-      --border:#e6e6e6;
-      --note-bg:#f9f9f9;
+      --brand:#0b57d0;--text:#222;--muted:#555;
+      --surface:#fff;--bg:#fff;--border:#e6e6e6;--note-bg:#f9f9f9
     }
-    @media (prefers-color-scheme: dark){
+    @media(prefers-color-scheme:dark){
       :root{
-        --text:#e8eaed;
-        --muted:#c2c7d0;
-        --surface:#121212;
-        --bg:#0b0b0b;
-        --border:#2a2a2a;
-        --note-bg:#1a1a1a;
+        --text:#e8eaed;--muted:#c2c7d0;
+        --surface:#121212;--bg:#0b0b0b;
+        --border:#2a2a2a;--note-bg:#1a1a1a
       }
     }
     html,body{
-      margin:0; padding:0;
-      background:var(--bg); color:var(--text);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+      margin:0;background:var(--bg);color:var(--text);
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,
         "Noto Sans KR","Noto Sans JP","Noto Sans SC","Noto Sans TC","Noto Naskh Arabic",
-        Arial, sans-serif;
-      line-height:1.65;
+        Arial,sans-serif;
+      line-height:1.65
     }
-    .topbar{
-      position: sticky; top:0; z-index:10;
-      background:var(--surface);
-      border-bottom:1px solid var(--border);
-      padding:8px max(env(safe-area-inset-left),12px) 8px max(env(safe-area-inset-right),12px);
-    }
-    .topbar .controls{ max-width:1000px; margin:0 auto; display:flex; gap:10px; align-items:center; justify-content:flex-end; }
-    .topbar label{ font-size:14px; color:var(--muted); }
-    .topbar select{
-      font-size:14px; padding:8px 10px; border:1px solid var(--border);
-      border-radius:10px; background:var(--surface); color:var(--text);
-    }
-    .container{ max-width:1000px; margin:0 auto; padding:16px max(env(safe-area-inset-left),16px) 40px max(env(safe-area-inset-right),16px); }
-    h1{ font-size:clamp(22px,3vw,36px); color:var(--brand); margin:8px 0 16px; }
-    h2{ font-size:clamp(18px,2.4vw,26px); color:var(--brand); margin:24px 0 12px; }
-    .step{ margin-bottom:32px; }
+    a{color:var(--brand);font-weight:600;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .toplink{display:block;padding:10px 14px;font:600 13px/1 system-ui;color:var(--brand)}
+    .topbar{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--border)}
+    .controls{max-width:1000px;margin:0 auto;display:flex;justify-content:flex-end;gap:10px;padding:8px;align-items:center}
+    .controls label{font-size:14px;color:var(--muted)}
+    select{padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text)}
+    .container{max-width:1000px;margin:0 auto;padding:16px}
+    h1{font-size:clamp(22px,3vw,36px);color:var(--brand);margin:8px 0 16px}
+    h2{font-size:clamp(18px,2.4vw,26px);color:var(--brand);margin-top:28px;margin-bottom:10px}
+    .step{margin-bottom:36px}
     .note{
-      font-size:14px; color:var(--muted); background:var(--note-bg);
-      padding:12px 14px; border-left:4px solid var(--brand);
-      border-radius:6px; margin:16px 0;
+      font-size:14px;color:var(--muted);
+      background:var(--note-bg);padding:12px 14px;
+      border-left:4px solid var(--brand);border-radius:6px;margin:16px 0
     }
-    [dir="rtl"] .note{ border-left:0; border-right:4px solid var(--brand); }
-    a{ color:var(--brand); text-decoration:none; font-weight:600; }
-    a:hover, a:focus{ text-decoration:underline; }
-    a:focus-visible{ outline:2px dashed var(--brand); outline-offset:3px; }
-    .imgrow{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin:12px 0; }
-    .imgrow img{ width:100%; height:auto; display:block; border:1px solid var(--border); border-radius:8px; }
+    [dir="rtl"] .note{border-left:0;border-right:4px solid var(--brand)}
+    .note .line{margin:6px 0}
+    .imgrow{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:12px;margin:12px 0
+    }
+    .imgrow img{width:100%;border:1px solid var(--border);border-radius:8px}
     .links{
-      background:#f5f5f5;
-      background: color-mix(in srgb, var(--surface) 85%, var(--brand) 5%);
-      padding:16px; border-radius:10px; margin-top:28px;
+      background:color-mix(in srgb,var(--surface) 85%,var(--brand) 5%);
+      padding:16px;border-radius:10px;margin-top:28px
     }
-    .links h2{ color:var(--text); margin-top:0; }
-    .links ul{ list-style:none; padding:0; margin:0; }
-    .links li{ margin:8px 0; }
-    .links a{ font-weight:700; }
-    ul{ padding-inline-start:18px; }
-    strong{ font-weight:700; }
-    em{ font-style: italic; color: var(--muted); }
+    .links h2{color:var(--text);margin-top:0}
+    .links a{font-weight:800}
+    ul{padding-inline-start:18px}
   </style>
 </head>
-<a href="/" class="kd-home-link" style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
-  ← KingshotData Korea
-</a>
+
 <body>
+  <a href="/" class="toplink">← KingshotData Korea</a>
+
   <header class="topbar">
     <div class="controls">
       <label for="langSwitcher" id="langLabel">Language</label>
-      <select id="langSwitcher" aria-label="언어 선택 / Language">
+      <select id="langSwitcher" aria-label="Language">
         <option value="ko">한국어</option>
         <option value="en">English</option>
         <option value="ja">日本語</option>
@@ -94,240 +78,342 @@
   </header>
 
   <main class="container">
-    <h1 data-i18n="h1">모바일 게임 유저들을 위한 합리적인 충전 가이드</h1>
+    <h1 data-i18n="h1"></h1>
 
+    <!-- NOTE: 링크는 HTML에 고정 / 번역은 텍스트만 -->
     <div class="note">
-      <div data-i18n="note1_line1">
-        <a href="https://lootbar.gg/shop/ten/top-up/kingshot"
- target="_blank" rel="noopener noreferrer">[루트바 가입하기 링크]</a> 로 가입을 합니다.
+      <div class="line">
+        <a id="signupLink"
+           href="https://lootbar.gg/shop/ten/top-up/kingshot"
+           target="_blank"
+           rel="noopener noreferrer"></a>
+        <span data-i18n="note1_after"></span>
       </div>
-      <div data-i18n="note1_line2">
-        루트바 검색창에 <strong>#s4qU</strong> 입력하면 추가 쿠폰을 받을 수 있습니다.
-      </div>
-      <div data-i18n="note1_line3">
-        
-      </div>
+      <div class="line" data-i18n="note1_line2"></div>
     </div>
 
     <!-- Step 1 -->
     <section class="step">
-      <h2 data-i18n="s1_title">1. 단품 충전</h2>
-      <p data-i18n="s1_p1">충전하고 싶은 <strong>카드를 선택</strong>하고 <strong>Top‑up Now</strong> 버튼을 누릅니다.</p>
+      <h2 data-i18n="s1_title"></h2>
+      <p data-i18n="s1_p1"></p>
       <div class="imgrow">
-        <img src="/img/lootbar/step1.png" alt="Screenshot: single-item top-up">
+        <img src="/img/lootbar/step1.png" alt="step1">
       </div>
     </section>
 
     <!-- Step 2 -->
     <section class="step">
-      <h2 data-i18n="s2_title">2. 다품 충전</h2>
-      <p data-i18n="s2_p1">카드 하단의 <strong>장바구니 버튼</strong>을 눌러 장바구니에 추가합니다. <em>(신중히 추가하세요)</em></p>
+      <h2 data-i18n="s2_title"></h2>
+      <p data-i18n="s2_p1"></p>
       <div class="imgrow">
-        <img src="/img/lootbar/step2.png" alt="Screenshot: multi-item top-up">
+        <img src="/img/lootbar/step2.png" alt="step2">
       </div>
     </section>
 
     <!-- Step 3 -->
     <section class="step">
-      <h2 data-i18n="s3_title">3. 결제 진행</h2>
-      <p data-i18n="s3_p1">충전 방식을 <strong>카드, 페이팔</strong> 중 편한 방법으로 선택 후 <strong>Pay Now</strong>를 누릅니다.</p>
-      <p data-i18n="s3_p2">좌측은 <strong>셀프탑업(내가 직접 충전)</strong>, 우측은 <strong>상담원 충전</strong>입니다. 편리한 <strong>셀프탑업</strong>을 선택하세요.</p>
+      <h2 data-i18n="s3_title"></h2>
+      <p data-i18n="s3_p1"></p>
+      <p data-i18n="s3_p2"></p>
       <div class="imgrow">
-        <img src="/img/lootbar/step3.png" alt="Screenshot: checkout (payment method)">
-        <img src="/img/lootbar/step8.png" alt="Screenshot: checkout (self top-up vs agent)">
+        <img src="/img/lootbar/step3.png" alt="step3">
+        <img src="/img/lootbar/step8.png" alt="step8">
       </div>
     </section>
 
     <!-- Step 4 -->
     <section class="step">
-      <h2 data-i18n="s4_title">4. 로그인</h2>
-      <p data-i18n="s4_p1">셀프탑업을 선택하면 로그인 화면이 나옵니다. 구글 로그인과 페이스북 로그인 중에서 <strong>구글 로그인이 더 편리</strong>합니다.</p>
+      <h2 data-i18n="s4_title"></h2>
+      <p data-i18n="s4_p1"></p>
       <ul>
-        <li data-i18n="s4_li1">구글 아이디 입력</li>
-        <li data-i18n="s4_li2">비밀번호 입력</li>
+        <li data-i18n="s4_li1"></li>
+        <li data-i18n="s4_li2"></li>
       </ul>
-      <p class="note" data-i18n="s4_note">※ 초반에는 비밀번호를 미리 정확히 확인 후 진행하세요.</p>
+      <p class="note" data-i18n="s4_note"></p>
       <div class="imgrow">
-        <img src="/img/lootbar/step4.png" alt="Screenshot: sign in">
-        <img src="/img/lootbar/step5.png" alt="Screenshot: sign in (email)">
-        <img src="/img/lootbar/step6.png" alt="Screenshot: sign in (password)">
+        <img src="/img/lootbar/step4.png" alt="step4">
+        <img src="/img/lootbar/step5.png" alt="step5">
+        <img src="/img/lootbar/step6.png" alt="step6">
       </div>
     </section>
 
     <!-- Step 5 -->
     <section class="step">
-      <h2 data-i18n="s5_title">5. 장바구니 충전</h2>
-      <p data-i18n="s5_p1">장바구니에 담아둔 금액만큼 충전이 가능합니다. 예: <strong>$4.99</strong> 팩을 장바구니에 담아 계정에 충전.</p>
+      <h2 data-i18n="s5_title"></h2>
+      <p data-i18n="s5_p1"></p>
       <div class="imgrow">
-        <img src="/img/lootbar/step7.png" alt="Screenshot: cart top-up">
-        <img src="/img/lootbar/step9.png" alt="Screenshot: cart pay">
-        <img src="/img/lootbar/step10.png" alt="Screenshot: cart purchase confirm">
+        <img src="/img/lootbar/step7.png" alt="step7">
+        <img src="/img/lootbar/step9.png" alt="step9">
+        <img src="/img/lootbar/step10.png" alt="step10">
       </div>
     </section>
 
     <!-- Step 6 -->
     <section class="step">
-      <h2 data-i18n="s6_title">6. 구매 완료</h2>
-      <p data-i18n="s6_p1">구매 확인창에서 <strong>확인</strong>을 누르면 결제가 진행됩니다. 완료 후 제한 시간이 지나면 자동으로 완료 화면이 뜨며 <strong>Got it</strong>을 누르면 종료됩니다.</p>
-      <p><strong data-i18n="s6_done">충전 완료!</strong></p>
+      <h2 data-i18n="s6_title"></h2>
+      <p data-i18n="s6_p1"></p>
+      <p><strong data-i18n="s6_done"></strong></p>
       <div class="imgrow">
-        <img src="/img/lootbar/step12.png" alt="Screenshot: purchase complete 1">
-        <img src="/img/lootbar/step13.png" alt="Screenshot: purchase complete 2">
-        <img src="/img/lootbar/step14.png" alt="Screenshot: purchase complete 3">
+        <img src="/img/lootbar/step12.png" alt="step12">
+        <img src="/img/lootbar/step13.png" alt="step13">
+        <img src="/img/lootbar/step14.png" alt="step14">
       </div>
     </section>
 
     <!-- Final -->
     <section class="step">
-      <h2 data-i18n="final_title">최종 완료</h2>
-      <p><strong data-i18n="final_p_strong">모든 과정이 완료되었습니다. 이제 게임에서 충전된 패키지를 확인해 보세요!</strong></p>
+      <h2 data-i18n="final_title"></h2>
+      <p><strong data-i18n="final_p_strong"></strong></p>
       <div class="imgrow">
-        <img src="/img/lootbar/step15.png" alt="Screenshot: final screen">
+        <img src="/img/lootbar/step15.png" alt="step15">
       </div>
     </section>
 
     <div class="note">
-      <div data-i18n="simple_note_1">셀프충전은 매우 간단합니다.</div>
-      <div data-i18n="simple_note_2">문의가 많아 모두 답변드리기 어려워, 본 포스팅으로 대체합니다.</div>
+      <div class="line" data-i18n="simple_note_1"></div>
+      <div class="line" data-i18n="simple_note_2"></div>
     </div>
 
-    <!-- Cumulative -->
-    <div class="note" data-i18n="note_cum">
-      <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">[누적충전 바로가기 링크]</a> 를 즐겨찾기 &amp; 북마크 해놓으시고<br>
-      충전하면 <strong>매월말 집계하여 $4.99~$99.99 패키지</strong>를 추가로 증정합니다.<br>
-      많은 관심 부탁드립니다.
+    <!-- cumulative: 링크는 HTML 고정 -->
+    <div class="note">
+      <div class="line">
+        <a id="cumLink"
+           href="https://lootbar.gg/shop/ten/top-up/kingshot"
+           target="_blank"
+           rel="noopener noreferrer"></a>
+        <span data-i18n="note_cum_after"></span>
+      </div>
+      <div class="line" data-i18n="note_cum_line2"></div>
     </div>
 
-    <!-- Extra Link -->
-<div class="links">
-  <h2 data-i18n="links_title">모바일게임 할인 링크 안내</h2>
-  <ul>
-    <li>
-      <a href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">
-        모바일게임 할인 바로가기
-      </a>
-    </li>
-  </ul>
-</div>
+    <!-- mobile discount -->
+    <div class="links">
+      <h2 data-i18n="links_title"></h2>
+      <a href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer" data-i18n="mobile_discount_link"></a>
+    </div>
+  </main>
 
-
- <script>
+<script>
 (function(){
-
-  /* =========================
-     i18n DICTIONARY
-  ========================= */
   const i18n = {
     "ko": {
-      "h1":"모바일 게임 유저들을 위한 합리적인 충전 가이드",
-      "note1_line1":'<a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">[루트바 가입하기 링크]</a> 로 가입을 합니다.',
-      "note1_line2":"루트바 검색창에 <strong>#s4qU</strong> 입력하면 추가 쿠폰을 받을 수 있습니다.",
-      "s1_title":"1. 단품 충전",
-      "s1_p1":"충전하고 싶은 <strong>카드를 선택</strong>하고 <strong>Top-up Now</strong> 버튼을 누릅니다.",
-      "s2_title":"2. 다품 충전",
-      "s2_p1":"카드 하단의 <strong>장바구니 버튼</strong>을 눌러 장바구니에 추가합니다. <em>(신중히 추가하세요)</em>",
-      "s3_title":"3. 결제 진행",
-      "s3_p1":"충전 방식을 <strong>카드, 페이팔</strong> 중 편한 방법으로 선택 후 <strong>Pay Now</strong>를 누릅니다.",
-      "s3_p2":"좌측은 <strong>셀프탑업</strong>, 우측은 <strong>상담원 충전</strong>입니다. 편리한 <strong>셀프탑업</strong>을 선택하세요.",
-      "s4_title":"4. 로그인",
-      "s4_p1":"셀프탑업 선택 시 로그인 화면이 표시됩니다. <strong>구글 로그인이 더 편리</strong>합니다.",
-      "s4_li1":"구글 아이디 입력",
-      "s4_li2":"비밀번호 입력",
-      "s4_note":"※ 비밀번호를 정확히 확인 후 진행하세요.",
-      "s5_title":"5. 장바구니 충전",
-      "s5_p1":"장바구니에 담긴 금액만큼 충전이 가능합니다.",
-      "s6_title":"6. 구매 완료",
-      "s6_p1":"확인을 누르면 결제가 진행되며, 완료 후 <strong>Got it</strong>을 누르면 종료됩니다.",
-      "s6_done":"충전 완료!",
-      "final_title":"최종 완료",
-      "final_p_strong":"모든 과정이 완료되었습니다. 게임에서 충전 내역을 확인하세요.",
-      "simple_note_1":"셀프충전은 매우 간단합니다.",
-      "simple_note_2":"문의가 많아 본 가이드로 안내를 대신합니다.",
-      "note_cum":'<a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">[누적충전 바로가기 링크]</a>를 즐겨찾기 해두세요.<br>매월 말 집계하여 <strong>$4.99~$99.99 패키지</strong>를 추가로 지급합니다.',
-      "links_title":"모바일게임 할인 링크 안내",
-      "mobile_discount_link":"모바일게임 할인 바로가기"
+      h1: "모바일 게임 유저들을 위한 합리적인 충전 가이드",
+      signupText: "[루트바 가입 링크]",
+      note1_after: " 로 가입하세요.",
+      note1_line2: "검색창에 #s4qU 입력 시 추가 쿠폰을 받을 수 있습니다.",
+      s1_title: "1. 단품 충전",
+      s1_p1: "충전하고 싶은 패키지를 선택한 뒤 Top-up Now를 누릅니다.",
+      s2_title: "2. 다품 충전",
+      s2_p1: "장바구니 버튼으로 원하는 패키지를 여러 개 추가합니다.",
+      s3_title: "3. 결제 진행",
+      s3_p1: "결제 수단을 카드 또는 PayPal 중 선택한 뒤 Pay Now를 누릅니다.",
+      s3_p2: "좌측은 셀프탑업(내가 직접 충전), 우측은 상담원 충전입니다. 셀프탑업을 선택하세요.",
+      s4_title: "4. 로그인",
+      s4_p1: "셀프탑업 선택 시 로그인 화면이 표시됩니다. 구글 로그인이 가장 편리합니다.",
+      s4_li1: "구글 이메일 입력",
+      s4_li2: "비밀번호 입력",
+      s4_note: "※ 초반에는 비밀번호를 미리 정확히 확인 후 진행하세요.",
+      s5_title: "5. 장바구니 충전",
+      s5_p1: "장바구니에 담긴 금액(합계)만큼 충전합니다.",
+      s6_title: "6. 구매 완료",
+      s6_p1: "확인 후 결제가 진행되며, 완료 화면에서 Got it을 누르면 종료됩니다.",
+      s6_done: "충전 완료!",
+      final_title: "최종 완료",
+      final_p_strong: "모든 과정이 완료되었습니다. 게임에서 충전된 패키지를 확인하세요.",
+      simple_note_1: "셀프충전은 매우 간단합니다.",
+      simple_note_2: "문의가 많아 본 가이드로 안내를 대신합니다.",
+      cumText: "[누적충전 바로가기 링크]",
+      note_cum_after: " 를 즐겨찾기(북마크) 해두세요.",
+      note_cum_line2: "매월 말 집계하여 $4.99~$99.99 패키지를 추가로 증정합니다.",
+      links_title: "모바일게임 할인 링크 안내",
+      mobile_discount_link: "모바일게임 할인 바로가기"
     },
 
     "en": {
-      "h1":"A Sensible Top-Up Guide for Mobile Gamers",
-      "note1_line1":'Sign up via the <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">[LootBar sign-up link]</a>.',
-      "note1_line2":"Type <strong>#s4qU</strong> in the LootBar search box to receive an extra coupon.",
-      "s1_title":"1. Single-Item Top-Up",
-      "s1_p1":"Choose a <strong>card</strong> and click <strong>Top-up Now</strong>.",
-      "s2_title":"2. Multi-Item Top-Up",
-      "s2_p1":"Add items to the cart using the <strong>cart button</strong>. <em>(Add carefully.)</em>",
-      "s3_title":"3. Checkout",
-      "s3_p1":"Select <strong>Card or PayPal</strong>, then click <strong>Pay Now</strong>.",
-      "s3_p2":"Left is <strong>Self Top-up</strong>, right is <strong>Agent Top-up</strong>. Choose self top-up.",
-      "s4_title":"4. Sign In",
-      "s4_p1":"Google sign-in is recommended for convenience.",
-      "s4_li1":"Enter Google email",
-      "s4_li2":"Enter password",
-      "s4_note":"※ Please double-check your password.",
-      "s5_title":"5. Cart Top-Up",
-      "s5_p1":"Top up the total amount in your cart.",
-      "s6_title":"6. Purchase Complete",
-      "s6_p1":"Confirm the purchase and tap <strong>Got it</strong> to finish.",
-      "s6_done":"Top-up complete!",
-      "final_title":"Final Complete",
-      "final_p_strong":"All steps are complete. Check your game account.",
-      "simple_note_1":"Self top-up is very easy.",
-      "simple_note_2":"This guide replaces individual inquiries.",
-      "note_cum":'Bookmark the <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">[cumulative top-up link]</a>.<br>Monthly totals grant an extra <strong>$4.99–$99.99 package</strong>.',
-      "links_title":"Mobile game discount link",
-      "mobile_discount_link":"Go to Mobile Game Discounts"
+      h1: "A Sensible Top-Up Guide for Mobile Gamers",
+      signupText: "[LootBar Sign-Up Link]",
+      note1_after: " Sign up using this link.",
+      note1_line2: "Type #s4qU in the search box to receive an extra coupon.",
+      s1_title: "1. Single-Item Top-Up",
+      s1_p1: "Choose a package and click Top-up Now.",
+      s2_title: "2. Multi-Item Top-Up",
+      s2_p1: "Add multiple items to the cart using the cart button.",
+      s3_title: "3. Checkout",
+      s3_p1: "Select Card or PayPal, then click Pay Now.",
+      s3_p2: "Left is Self Top-up, right is Agent Top-up. Choose Self Top-up.",
+      s4_title: "4. Sign In",
+      s4_p1: "Google sign-in is recommended for convenience.",
+      s4_li1: "Enter Google email",
+      s4_li2: "Enter password",
+      s4_note: "※ Please double-check your password before continuing.",
+      s5_title: "5. Cart Top-Up",
+      s5_p1: "Top up the total amount in your cart.",
+      s6_title: "6. Purchase Complete",
+      s6_p1: "Confirm the purchase, then tap Got it to finish.",
+      s6_done: "Top-up complete!",
+      final_title: "Final Complete",
+      final_p_strong: "All steps are complete. Check your game account.",
+      simple_note_1: "Self top-up is very easy.",
+      simple_note_2: "This guide replaces individual inquiries.",
+      cumText: "[Cumulative Top-Up Link]",
+      note_cum_after: " Bookmark this link.",
+      note_cum_line2: "Monthly totals grant an extra $4.99–$99.99 package.",
+      links_title: "Mobile Game Discount Link",
+      mobile_discount_link: "Go to Mobile Game Discounts"
     },
 
     "ja": {
-      "h1":"モバイルゲーム向け合理的なチャージガイド",
-      "note1_line1":'<a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">［LootBar 登録リンク］</a>から登録してください。',
-      "note1_line2":"検索欄に <strong>#s4qU</strong> を入力すると追加クーポンがもらえます。",
-      "links_title":"モバイルゲーム割引リンク",
-      "mobile_discount_link":"モバイルゲーム割引ページへ"
+      h1: "モバイルゲーム向け合理的なチャージガイド",
+      signupText: "［LootBar 登録リンク］",
+      note1_after: " から登録してください。",
+      note1_line2: "検索欄に #s4qU を入力すると追加クーポンがもらえます。",
+      s1_title: "1. 単品チャージ",
+      s1_p1: "パッケージを選択し、Top-up Now をクリックします。",
+      s2_title: "2. 複数チャージ",
+      s2_p1: "カートボタンで複数のパッケージを追加します。",
+      s3_title: "3. 決済",
+      s3_p1: "カードまたは PayPal を選択し、Pay Now を押します。",
+      s3_p2: "左はセルフチャージ、右は代行チャージです。セルフチャージを選択してください。",
+      s4_title: "4. ログイン",
+      s4_p1: "利便性のため Google ログインがおすすめです。",
+      s4_li1: "メールを入力",
+      s4_li2: "パスワードを入力",
+      s4_note: "※ 事前にパスワードを確認してください。",
+      s5_title: "5. カートチャージ",
+      s5_p1: "カート合計金額をチャージします。",
+      s6_title: "6. 購入完了",
+      s6_p1: "購入を確認し、Got it をタップして終了します。",
+      s6_done: "チャージ完了！",
+      final_title: "最終完了",
+      final_p_strong: "すべて完了しました。ゲーム内で反映を確認してください。",
+      simple_note_1: "セルフチャージはとても簡単です。",
+      simple_note_2: "本ガイドで個別問い合わせを代替します。",
+      cumText: "［累計チャージリンク］",
+      note_cum_after: " をブックマークしてください。",
+      note_cum_line2: "月末集計で $4.99～$99.99 の追加パッケージがもらえます。",
+      links_title: "モバイルゲーム割引リンク",
+      mobile_discount_link: "割引ページへ"
     },
 
     "zh-CN": {
-      "h1":"手游合理充值指南",
-      "note1_line1":'请通过 <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">【LootBar 注册链接】</a> 注册。',
-      "note1_line2":"搜索框输入 <strong>#s4qU</strong> 可领取优惠券。",
-      "links_title":"手游优惠链接",
-      "mobile_discount_link":"前往手游折扣页面"
+      h1: "手游合理充值指南",
+      signupText: "【LootBar 注册链接】",
+      note1_after: " 点击链接注册。",
+      note1_line2: "在搜索框输入 #s4qU 可领取额外优惠券。",
+      s1_title: "1. 单项充值",
+      s1_p1: "选择套餐并点击 Top-up Now。",
+      s2_title: "2. 多项充值",
+      s2_p1: "使用购物车按钮添加多个套餐。",
+      s3_title: "3. 支付",
+      s3_p1: "选择银行卡或 PayPal，然后点击 Pay Now。",
+      s3_p2: "左侧为自助充值，右侧为代充。请选择自助充值。",
+      s4_title: "4. 登录",
+      s4_p1: "推荐使用 Google 登录，更加方便。",
+      s4_li1: "输入邮箱",
+      s4_li2: "输入密码",
+      s4_note: "※ 请提前确认密码无误。",
+      s5_title: "5. 购物车充值",
+      s5_p1: "按购物车总金额进行充值。",
+      s6_title: "6. 完成购买",
+      s6_p1: "确认购买后，点击 Got it 结束。",
+      s6_done: "充值完成！",
+      final_title: "最终完成",
+      final_p_strong: "所有步骤已完成，请在游戏内确认到账。",
+      simple_note_1: "自助充值非常简单。",
+      simple_note_2: "本指南用于替代重复咨询。",
+      cumText: "【累计充值链接】",
+      note_cum_after: " 建议收藏/书签。",
+      note_cum_line2: "每月结算可额外获得 $4.99–$99.99 套餐。",
+      links_title: "手游优惠链接",
+      mobile_discount_link: "前往手游折扣页面"
     },
 
     "zh-TW": {
-      "h1":"行動遊戲合理儲值指南",
-      "note1_line1":'請透過 <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">【LootBar 註冊連結】</a> 註冊。',
-      "note1_line2":"搜尋欄輸入 <strong>#s4qU</strong> 可領取優惠。",
-      "links_title":"行動遊戲優惠連結",
-      "mobile_discount_link":"前往行動遊戲折扣頁面"
+      h1: "行動遊戲合理儲值指南",
+      signupText: "【LootBar 註冊連結】",
+      note1_after: " 點此註冊。",
+      note1_line2: "在搜尋欄輸入 #s4qU 可獲得額外優惠券。",
+      s1_title: "1. 單項儲值",
+      s1_p1: "選擇方案並點擊 Top-up Now。",
+      s2_title: "2. 多項儲值",
+      s2_p1: "使用購物車按鈕加入多個方案。",
+      s3_title: "3. 付款",
+      s3_p1: "選擇信用卡或 PayPal，然後點擊 Pay Now。",
+      s3_p2: "左側為自助儲值，右側為代儲。請選擇自助儲值。",
+      s4_title: "4. 登入",
+      s4_p1: "建議使用 Google 登入，更方便。",
+      s4_li1: "輸入信箱",
+      s4_li2: "輸入密碼",
+      s4_note: "※ 請先確認密碼正確。",
+      s5_title: "5. 購物車儲值",
+      s5_p1: "依購物車總金額進行儲值。",
+      s6_title: "6. 完成購買",
+      s6_p1: "確認購買後，點擊 Got it 結束。",
+      s6_done: "儲值完成！",
+      final_title: "最終完成",
+      final_p_strong: "所有流程已完成，請到遊戲內確認。",
+      simple_note_1: "自助儲值很簡單。",
+      simple_note_2: "本指南用於取代重複詢問。",
+      cumText: "【累積儲值連結】",
+      note_cum_after: " 建議加入書籤。",
+      note_cum_line2: "每月結算可額外獲得 $4.99–$99.99 方案。",
+      links_title: "行動遊戲優惠連結",
+      mobile_discount_link: "前往行動遊戲折扣頁面"
     },
 
     "ar": {
-      "h1":"دليل شحن معقول لألعاب الجوال",
-      "note1_line1":'سجّل عبر <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">[رابط LootBar]</a>.',
-      "note1_line2":"أدخل <strong>#s4qU</strong> للحصول على قسيمة إضافية.",
-      "links_title":"رابط خصومات ألعاب الجوال",
-      "mobile_discount_link":"الانتقال إلى خصومات ألعاب الجوال"
+      h1: "دليل شحن معقول لألعاب الجوال",
+      signupText: "[رابط التسجيل في LootBar]",
+      note1_after: " سجّل عبر هذا الرابط.",
+      note1_line2: "أدخل #s4qU في مربع البحث للحصول على قسيمة إضافية.",
+      s1_title: "1) شحن عنصر واحد",
+      s1_p1: "اختر الباقة واضغط Top-up Now.",
+      s2_title: "2) شحن عدة عناصر",
+      s2_p1: "أضف عدة باقات إلى السلة عبر زر السلة.",
+      s3_title: "3) الدفع",
+      s3_p1: "اختر بطاقة أو PayPal ثم اضغط Pay Now.",
+      s3_p2: "الخيار الأيسر شحن ذاتي، والأيمن شحن عبر وكيل. اختر الشحن الذاتي.",
+      s4_title: "4) تسجيل الدخول",
+      s4_p1: "يوصى بتسجيل الدخول عبر Google لسهولة الاستخدام.",
+      s4_li1: "إدخال البريد الإلكتروني",
+      s4_li2: "إدخال كلمة المرور",
+      s4_note: "※ تأكد من كلمة المرور قبل المتابعة.",
+      s5_title: "5) شحن السلة",
+      s5_p1: "قم بالشحن بقيمة إجمالي السلة.",
+      s6_title: "6) اكتمال الشراء",
+      s6_p1: "أكد الشراء ثم اضغط Got it للإنهاء.",
+      s6_done: "تم الشحن!",
+      final_title: "الاكتـمال النهائي",
+      final_p_strong: "اكتملت جميع الخطوات. تحقق من حسابك داخل اللعبة.",
+      simple_note_1: "الشحن الذاتي سهل جدًا.",
+      simple_note_2: "هذا الدليل بديل عن الاستفسارات المتكررة.",
+      cumText: "[رابط الشحن التراكمي]",
+      note_cum_after: " احفظ هذا الرابط.",
+      note_cum_line2: "إجمالي الشهر يمنحك باقة إضافية بقيمة $4.99–$99.99.",
+      links_title: "رابط خصومات ألعاب الجوال",
+      mobile_discount_link: "الانتقال إلى خصومات ألعاب الجوال"
     }
   };
 
-  /* =========================
-     APPLY LANGUAGE
-  ========================= */
   function applyLang(locale){
-    const dict = i18n[locale] || i18n["ko"];
+    const dict = i18n[locale] || i18n.ko;
 
     document.documentElement.lang = locale;
     document.documentElement.dir = (locale === "ar") ? "rtl" : "ltr";
+    document.title = dict.h1 || document.title;
 
-    if (dict.h1) document.title = dict.h1;
-
-    document.querySelectorAll("[data-i18n]").forEach(el => {
+    // 텍스트 교체 (innerHTML 금지: 링크 2번열림 방지)
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
       const key = el.getAttribute("data-i18n");
-      if (dict[key] !== undefined) {
-        el.innerHTML = dict[key];
-      }
+      if (dict[key] !== undefined) el.textContent = dict[key];
     });
+
+    // 고정 링크 텍스트만 교체
+    const signup = document.getElementById("signupLink");
+    if (signup) signup.textContent = dict.signupText || "[Link]";
+
+    const cum = document.getElementById("cumLink");
+    if (cum) cum.textContent = dict.cumText || "[Link]";
 
     const label = document.getElementById("langLabel");
     if (label){
@@ -342,9 +428,6 @@
     }
   }
 
-  /* =========================
-     INIT & SWITCHER
-  ========================= */
   const select = document.getElementById("langSwitcher");
   const saved = localStorage.getItem("lang");
   const browser = (navigator.language || "").toLowerCase();
@@ -360,13 +443,14 @@
 
   if (select){
     select.value = initial;
-    select.addEventListener("change", e => {
+    select.addEventListener("change", e=>{
       const lang = e.target.value;
       localStorage.setItem("lang", lang);
       applyLang(lang);
     });
   }
-
 })();
 </script>
 
+</body>
+</html>
