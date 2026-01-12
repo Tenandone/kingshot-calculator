@@ -1,4 +1,4 @@
-/* footer-tools.js (FINAL — coupons → CTAs → LootBar → AdFit(KO only)) */
+/* footer-tools.js (FINAL — coupons → CTAs → LootBar / NO ADS) */
 ;(() => {
   'use strict';
 
@@ -78,29 +78,15 @@
     return new Date() >= new Date(String(until).trim() + 'T00:00:00Z');
   }
 
-  /* ================= AdFit loader (KO only + load once) ================= */
-  function loadAdfitOnce() {
-    // 왜: ba.min.js는 한 페이지에서 여러 번 로드되면 광고가 안 뜨거나 꼬일 수 있어서 1회만 로드
-    if (document.querySelector('script[data-kakao-adfit="1"]')) return;
-
-    const s = document.createElement('script');
-    s.src = '//t1.daumcdn.net/kas/static/ba.min.js';
-    s.async = true;
-    s.setAttribute('data-kakao-adfit', '1');
-    document.body.appendChild(s);
-  }
-
   /* ================= render ================= */
   async function renderFooterTools() {
     const container = document.getElementById('footerTools');
     if (!container) return;
 
-    // 왜: SPA/라우팅에서 renderFooterTools가 여러 번 실행되면
-    //     AdFit는 동적 재삽입 때 광고가 안 뜨는 경우가 있어서 "테스트 단계"는 1회 렌더로 고정
+    // SPA 중복 렌더 방지
     if (container.dataset.footerToolsRendered === '1') return;
     container.dataset.footerToolsRendered = '1';
 
-    const lang = getLangSafe();
     container.innerHTML = '';
 
     /* --- coupons --- */
@@ -146,27 +132,10 @@
       </a>
     `;
 
-    /* --- mount base blocks --- */
+    /* --- mount --- */
     container.appendChild(couponWrap);
     container.appendChild(ctas);
     container.appendChild(lootbar);
-
-    /* --- AdFit (KO only, below LootBar) --- */
-    if (lang.startsWith('ko')) {
-      const adfit = document.createElement('div');
-      adfit.className = 'footer-adfit';
-      adfit.innerHTML = `
-        <ins class="kakao_ad_area"
-             style="display:none;"
-             data-ad-unit="DAN-iGFM4JeI8aenYEf7"
-             data-ad-width="300"
-             data-ad-height="250"></ins>
-      `;
-      container.appendChild(adfit);
-
-      // ins가 DOM에 붙은 다음 스크립트를 로드해야 스캔/렌더가 안정적
-      loadAdfitOnce();
-    }
   }
 
   if (document.readyState === 'loading') {
