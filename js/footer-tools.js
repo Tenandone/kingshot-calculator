@@ -127,7 +127,7 @@
     const lootbar = document.createElement('div');
     lootbar.className = 'footer-image-banner';
     lootbar.innerHTML = `
-      <a href="https://lootbar.gg/ko/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">
+      <a href="https://lootbar.gg/ko/top-up/kingshot?utm_source=ten" target="_blank" rel="noopener noreferrer">
         <img src="/img/lootbar.png" alt="Top-up Guide Banner" loading="lazy">
       </a>
     `;
