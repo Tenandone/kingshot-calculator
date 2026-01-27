@@ -150,9 +150,7 @@
       padding:7px;
       flex:0 0 auto;
     }
-    .tg-meta{
-      min-width:0;
-    }
+    .tg-meta{ min-width:0; }
     .tg-label{
       font-weight:1000;
       font-size: 14px;
@@ -186,6 +184,7 @@
       box-shadow: 0 10px 22px rgba(16,24,40,.06);
       flex: 0 0 auto;
       max-width: 100%;
+      min-width: 0; /* ✅ iOS/모바일 flex overflow 방지 */
     }
     .total-chip .ico{
       width:30px;height:30px;
@@ -211,16 +210,9 @@
       line-height: 1;
       white-space:nowrap;
     }
-    .total-chip.temper .value{
-      color: var(--gold);
-    }
+    .total-chip.temper .value{ color: var(--gold); }
 
-    .total-chip.cum{
-      background: linear-gradient(180deg, #ffffff, #fbfcff);
-      border-color: var(--line2);
-    }
-
-    /* ✅ 숨김(자리 유지) */
+    /* ✅ 숨김(자리 유지) - PC용 */
     .total-chip.is-hidden{
       visibility: hidden;
       pointer-events: none;
@@ -393,12 +385,8 @@
       letter-spacing:.2px;
       color: var(--txt);
     }
-    .line.temper{
-      color: var(--gold);
-    }
-    .line.temper .num{
-      color: var(--gold);
-    }
+    .line.temper{ color: var(--gold); }
+    .line.temper .num{ color: var(--gold); }
     .ico-mini{
       width:16px;height:16px;
       object-fit:contain;
@@ -413,9 +401,7 @@
       background:#fff;
       border-top:1px solid var(--line);
     }
-    .tg-tip__inner{
-      padding: 18px 16px 22px;
-    }
+    .tg-tip__inner{ padding: 18px 16px 22px; }
     .tg-tip__head{
       display:flex;
       gap:14px;
@@ -567,16 +553,19 @@
     }
 
     /* =========================
-      Mobile tuning (v2)
-      - PC는 그대로
-      - 모바일에서 "안 잘리게" 재배치
+      Mobile 최소 기준 (핵심)
+      ✅ “완전 안보임” 방지:
+        1) 제목/제작자 줄바꿈
+        2) 칩을 1열 또는 2열 그리드로 강제
+        3) 숨김칩은 모바일에서 display:none
+        4) 테이블 최소폭 완화 + sticky 깨짐 방지
     ========================= */
     @media (max-width: 720px){
       .wrap{ padding: 0 12px; margin: 12px auto 24px; }
       .slider-wrap{ padding: 12px; }
       .slider-card{ padding: 12px; }
 
-      /* 헤더: 2줄로 쌓기 */
+      /* 헤더: 2줄 스택 */
       .head{
         grid-template-columns: 1fr;
         gap: 8px;
@@ -594,53 +583,48 @@
       .maker{ align-items:flex-start; }
       .ten{ width:30px; height:30px; }
 
-      /* 슬라이더 상단: 세로로 */
+      /* 슬라이더 상단: 세로 스택 */
       .slider-top{
         flex-direction: column;
         align-items: stretch;
         gap: 10px;
       }
-
-      .tg-display{
-        min-width: 0;
-        width: 100%;
-      }
-      .tg-ico{
-        width:44px;height:44px;
-        border-radius: 14px;
-        padding:6px;
-      }
+      .tg-display{ min-width: 0; width: 100%; }
+      .tg-ico{ width:44px;height:44px; border-radius: 14px; padding:6px; }
       .tg-label{ font-size: 13px; }
       .tg-help{ font-size: 11.5px; }
 
-      /* 칩: 2칸 그리드로 -> 안 잘림 */
+      /* ✅ 칩: 화면이 좁으면 1열(최소 기준) -> 조금 넓으면 2열 */
       .totals{
         min-width: 0;
         width: 100%;
-        justify-content: stretch;
-        flex-wrap: wrap;          /* 모바일에선 wrap 허용 */
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display:grid;
+        grid-template-columns: 1fr;     /* ✅ 최소 기준: 1열 */
         gap: 10px;
+        justify-content: stretch;
       }
+      @media (min-width: 420px){
+        .totals{ grid-template-columns: 1fr 1fr; } /* ✅ 420px 이상이면 2열 */
+      }
+
       .total-chip{
+        width: 100%;
         border-radius: 14px;
         padding: 10px 10px;
-        width: 100%;
       }
       .total-chip .ico{ width:26px;height:26px; border-radius: 9px; padding:4px; }
       .total-chip .label{ font-size: 11px; }
       .total-chip .value{ font-size: 20px; }
 
-      /* 숨김칩은 모바일에서 아예 제거(빈칸/자리낭비 방지) */
+      /* ✅ TG1~TG5에서 담글질 칩은 모바일에서 아예 제거 */
       .total-chip.is-hidden{ display:none; }
 
-      /* 틱: 너무 촘촘하니 축소 */
+      /* ticks 축소 */
       .tick{ font-size: 10.5px; gap:4px; }
       .tick img{ width:18px; height:18px; border-radius: 7px; padding:2px; }
 
-      /* 테이블: 가로 스크롤은 유지하되 "덜 빡빡하게" */
-      table{ min-width: 860px; }            /* 980 -> 860 */
+      /* 테이블: 너무 크지 않게 */
+      table{ min-width: 860px; } /* 980 -> 860 */
       thead th{ font-size: 11px; padding: 8px 6px; }
       tbody td, tbody th{ padding: 8px 6px; }
       th.building-col{ min-width: 190px; padding-left: 10px; }
@@ -654,6 +638,19 @@
       /* tg-tip: 1열 */
       .tg-tip__grid{ grid-template-columns: 1fr; }
       .tg-tip__tierRow{ grid-template-columns: 1fr; }
+
+      /* ✅ iOS에서 sticky + overflow 조합 문제 완화용 */
+      .table-wrap{
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+      }
+    }
+
+    /* ✅ 더 작은 폰(최소 360px 대응)에서 텍스트가 잘리는 경우 대비 */
+    @media (max-width: 380px){
+      .total-chip .value{ font-size: 18px; }
+      .tg-help{ font-size: 11px; }
+      .h1{ font-size: 15px; }
     }
   </style>
 </head>
@@ -798,7 +795,6 @@
           </div>
         </div>
       </section>
-
     </section>
   </div>
 
@@ -1000,7 +996,7 @@
       }).join('');
     }
 
-    function chipHTML(icon, label, value, extraClass) {
+    function chipHTML(icon, label, value, extraClass){
       return `
         <div class="total-chip ${extraClass || ''}">
           <img class="ico" src="${icon}" alt="${label}" onerror="this.style.display='none'">

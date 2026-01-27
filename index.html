@@ -8,20 +8,18 @@
   <title>KingshotData</title>
   <base href="/" />
 
+  <!-- Adsense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189957764761115"
-     crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
 
-     <!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-TMGDGSEWW6', {
-    send_page_view: true
-  });
-</script>
-
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
 
   <!-- Perf -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
@@ -44,13 +42,10 @@
   <link rel="stylesheet" href="/css/common.css?v=202509131858">
   <link rel="stylesheet" href="/css/category.css?v=202509131858">
   <link rel="stylesheet" href="/css/database.css?v=202509131858">
-  
   <link rel="stylesheet" href="/css/mobile-patch.css?v=202509131858">
-  
   <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
-
-  
-
+  <link rel="stylesheet" href="/css/header.css?v=202509131858">
+  <link rel="stylesheet" href="/css/sponsor.css?v=202509131858">
 
   <!-- ★ GitHub Pages용 SPA Fallback 복원 스크립트 -->
   <script>
@@ -63,10 +58,6 @@
         var newUrl = p + (rest.length ? (p.indexOf('?') >= 0 ? '&' : '?') + rest.join('&') : '');
         history.replaceState(null, '', newUrl);
       }
-      // 루트 진입 시 /home으로 보내고 싶다면 주석 해제
-      // if ((location.pathname === '/' || location.pathname === '/index.html') && !p) {
-      //   history.replaceState(null, '', '/home');
-      // }
     })();
   </script>
 
@@ -80,32 +71,49 @@
       const initial = urlLang || saved || 'en';
       document.documentElement.setAttribute('lang', initial);
       if (window.I18N?.init) I18N.init({ lang: initial, supported: ['ko','en','ja','zh-CN','zh-TW'] });
-      /* ❌ 해시 강제 진입 제거됨 */
     })();
-     async function applyLang(lang){
-  if (window.I18N?.setLang) await I18N.setLang(lang);
-  document.documentElement.setAttribute('lang', lang);
-  try { localStorage.setItem('lang', lang); } catch(_){}
 
-  const url = new URL(window.location.href);
-  url.searchParams.set('lang', lang);
+    async function applyLang(lang){
+      if (window.I18N?.setLang) await I18N.setLang(lang);
+      document.documentElement.setAttribute('lang', lang);
+      try { localStorage.setItem('lang', lang); } catch(_){}
 
-  window.location.href = url.toString(); // ✅ 정상 페이지 이동
-}
-
-
+      const url = new URL(window.location.href);
+      url.searchParams.set('lang', lang);
+      window.location.href = url.toString(); // 페이지 리로드 방식
+    }
   </script>
 
   <!-- 앱 -->
   <script defer src="/js/routes.js?v=202509131858"></script>
   <script defer src="/js/app.js?v=202509131858"></script>
-  
   <script defer src="/js/footer-tools.js?v=202509131858"></script>
 
- <link rel="stylesheet" href="/css/header.css?v=202509131858">
-<link rel="stylesheet" href="/css/sponsor.css?v=202509131858">
+  <!-- ✅ AdFit 표시 제어는 "CSS만" 사용 (JS로 display 건드리지 않음) -->
+  <style>
+    /* 광고가 원인으로 가로 스크롤 생기는거 방지 */
+    html, body { overflow-x: hidden; }
 
+    /* 기본: 둘 다 숨김 */
+    #adfitKoPc, #adfitKoMobile { display: none !important; }
+
+    /* KO면 PC 광고만 */
+    html[lang="ko"] #adfitKoPc { display: block !important; }
+
+    /* KO + 모바일 폭이면 모바일 광고만 */
+    @media (max-width: 768px) {
+      html[lang="ko"] #adfitKoPc { display: none !important; }
+      html[lang="ko"] #adfitKoMobile { display: block !important; }
+    }
+
+    /* 광고 컨테이너 안전폭 */
+    .adfit-wrap {
+      text-align: center;
+      margin: 16px 0;
+    }
+  </style>
 </head>
+
 <body class="theme-default">
   <!-- ===== Header ===== -->
   <header class="site-header" role="banner">
@@ -117,17 +125,16 @@
           <img class="brand-logo" src="/img/logo-kingshotdata.png?v=202509131858"
                alt="KingshotData" width="200" height="50" decoding="async" fetchpriority="high">
         </a>
+
         <nav class="nav" id="primaryNav" role="navigation"
              aria-label="Primary"
              data-i18n-attr="aria-label:aria.primaryNav">
-          
           <a href="/buildings"  data-link data-i18n="nav.buildings">건물</a>
           <a href="/heroes"     data-link data-i18n="nav.heroes">영웅</a>
           <a href="/database"   data-link data-i18n="nav.database">데이터베이스</a>
           <a href="/guides"     data-link data-i18n="nav.guides">가이드</a>
           <a href="/calculator" data-link data-i18n="nav.calculators">계산기</a>
           <a href="/about"      data-link data-i18n="nav.about">소개</a>
-          
         </nav>
       </div>
 
@@ -137,136 +144,56 @@
               data-i18n-attr="aria-label:aria.menuOpen">☰</button>
 
       <div class="nav-right">
-      <!-- 헤더 언어 드롭다운 -->
-      <div id="langDropdownHeader" class="lang-dropdown" data-placement="right" style="position:relative">
-        <div class="lang-row" role="button" aria-haspopup="menu" aria-expanded="false" aria-controls="langMenuHeader">
-          <svg class="globe" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="none" stroke="#555" stroke-width="1.5"/>
-            <path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" fill="none" stroke="#555" stroke-width="1.5"/>
-          </svg>
-          <span class="current">EN</span><span class="caret" aria-hidden="true"></span>
+        <!-- 헤더 언어 드롭다운 -->
+        <div id="langDropdownHeader" class="lang-dropdown" data-placement="right" style="position:relative">
+          <div class="lang-row" role="button" aria-haspopup="menu" aria-expanded="false" aria-controls="langMenuHeader">
+            <svg class="globe" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" fill="none" stroke="#555" stroke-width="1.5"/>
+              <path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" fill="none" stroke="#555" stroke-width="1.5"/>
+            </svg>
+            <span class="current">EN</span><span class="caret" aria-hidden="true"></span>
+          </div>
+          <ul id="langMenuHeader" class="lang-menu" role="menu" hidden></ul>
         </div>
-        <ul id="langMenuHeader" class="lang-menu" role="menu" hidden></ul>
       </div>
     </div>
-  </div> <!-- .nav-bar 끝 -->
-</header>
+  </header>
 
-<!-- ✅ AdFit (KO only) - PC / Mobile split -->
-<style>
-  /* 광고가 원인으로 가로 스크롤 생기는거 방지 */
-  html, body { overflow-x: hidden; }
-
-  /* 기본: PC만 보이게 */
-  #adfitKoPc { display: block; }
-  #adfitKoMobile { display: none; }
-
-  /* 모바일: 모바일만 보이게 */
-  @media (max-width: 768px) {
-    #adfitKoPc { display: none !important; }
-    #adfitKoMobile { display: block !important; }
-  }
-
-  /* 광고 컨테이너 안전폭 */
-  .adfit-wrap {
-    text-align: center;
-    margin: 16px 0;
-  }
-</style>
-
-<div id="adfitKoPc" class="adfit-wrap" style="display:none;">
-  <ins class="kakao_ad_area"
-       data-ad-unit="DAN-n0VbUcLaeDeaLU9B"
-       data-ad-width="728"
-       data-ad-height="90"></ins>
-</div>
-
-<div id="adfitKoMobile" class="adfit-wrap" style="display:none;">
-  <ins class="kakao_ad_area"
-       data-ad-unit="DAN-mhQxfrqp7TKmoxtT"
-       data-ad-width="320"
-       data-ad-height="50"></ins>
-</div>
-
-<script src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
-
-<script>
-(function(){
-  function getLang(){
-    return (
-      window.I18N?.current ||
-      document.documentElement.getAttribute('lang') ||
-      'en'
-    );
-  }
-
-  function refreshAdfitVisibility(){
-    const isKo = (getLang() === 'ko');
-
-    const pc = document.getElementById('adfitKoPc');
-    const mo = document.getElementById('adfitKoMobile');
-
-    if (!pc || !mo) return;
-
-    // KO 아니면 둘 다 숨김
-    if (!isKo) {
-      pc.style.display = 'none';
-      mo.style.display = 'none';
-      return;
-    }
-
-    // KO면 "CSS가 기기별로 무엇을 보여줄지" 결정
-    // 여기서는 둘 다 block으로 풀어주고, 실제 표시는 media query가 맡는다
-    pc.style.display = 'block';
-    mo.style.display = 'block';
-  }
-
-  // 최초 1회
-  refreshAdfitVisibility();
-
-  // 언어 변경(네 applyLang은 페이지 리로드라 사실 필요없지만, 혹시 모를 케이스 대비)
-  document.addEventListener('DOMContentLoaded', refreshAdfitVisibility);
-
-  // i18n이 runtime 언어변경을 한다면 대비
-  if (window.I18N && typeof I18N.setLang === 'function') {
-    const _setLang = I18N.setLang.bind(I18N);
-    I18N.setLang = async function(lang){
-      await _setLang(lang);
-      document.documentElement.setAttribute('lang', lang);
-      refreshAdfitVisibility();
-    };
-  }
-})();
-</script>
-
-
-
-<main class="container" id="main" role="main">
-
-
-  <div class="header-brand-strip">
-  <div class="header-brand-track">
-    <a href="https://lootbar.gg/ko/top-up/kingshot?utm_source=ten" target="_blank" rel="noopener">
-      <img src="/img/brand.png" alt="LootBar">
-    </a>
-
-    <a href="https://cafe.naver.com/kingshot1" target="_blank" rel="noopener">
-      <img src="/img/brand2.png" alt="Kingshot Cafe">
-    </a>
-
-    <a href="/home">
-      <img src="/img/logo-kingshotdata 2.png" alt="KingshotData">
-    </a>
+  <!-- ✅ AdFit (KO only) - PC / Mobile split -->
+  <div id="adfitKoPc" class="adfit-wrap">
+    <ins class="kakao_ad_area"
+         data-ad-unit="DAN-n0VbUcLaeDeaLU9B"
+         data-ad-width="728"
+         data-ad-height="90"></ins>
   </div>
-</div>
 
+  <div id="adfitKoMobile" class="adfit-wrap">
+    <ins class="kakao_ad_area"
+         data-ad-unit="DAN-mhQxfrqp7TKmoxtT"
+         data-ad-width="320"
+         data-ad-height="50"></ins>
+  </div>
 
-    
+  <script src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 
-
+  <!-- ===== Sponsor strip ===== -->
+  <div class="header-brand-strip">
+    <div class="header-brand-track">
+      <a href="https://lootbar.gg/ko/top-up/kingshot?utm_source=ten" target="_blank" rel="noopener">
+        <img src="/img/brand.png" alt="LootBar">
+      </a>
+      <a href="https://cafe.naver.com/kingshot1" target="_blank" rel="noopener">
+        <img src="/img/brand2.png" alt="Kingshot Cafe">
+      </a>
+      <a href="/home">
+        <img src="/img/logo-kingshotdata 2.png" alt="KingshotData">
+      </a>
+    </div>
+  </div>
 
   <!-- ===== Drawer ===== -->
   <div class="backdrop" id="backdrop" hidden></div>
+
   <aside class="drawer" id="mobileDrawer" aria-hidden="true"
          aria-label="Mobile navigation"
          data-i18n-attr="aria-label:aria.mobileNav">
@@ -280,7 +207,10 @@
     <div class="section" style="position:relative">
       <div id="langDropdownDrawer" class="lang-dropdown" data-placement="left">
         <div class="lang-row" role="button" aria-haspopup="menu" aria-expanded="false" aria-controls="langMenuDrawer">
-          <svg class="globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="#555" stroke-width="1.5"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" fill="none" stroke="#555" stroke-width="1.5"/></svg>
+          <svg class="globe" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="#555" stroke-width="1.5"/>
+            <path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" fill="none" stroke="#555" stroke-width="1.5"/>
+          </svg>
           <span class="current">EN</span><span class="caret" aria-hidden="true"></span>
         </div>
         <ul id="langMenuDrawer" class="lang-menu" role="menu" hidden></ul>
@@ -288,6 +218,7 @@
     </div>
 
     <div class="rule"></div>
+
     <div class="section">
       <div class="sec-label" data-i18n="drawer.navigation">navigation</div>
       <div class="nav-list" role="navigation"
@@ -298,22 +229,20 @@
         <a href="/database"   data-link data-i18n="nav.database">데이터베이스</a>
         <a href="/guides"     data-link data-i18n="nav.guides">가이드</a>
         <a href="/calculator" data-link data-i18n="nav.calculators">계산기</a>
-        
-        
-
       </div>
     </div>
 
     <div class="rule"></div>
+
     <div class="section">
       <div class="sec-label" data-i18n="drawer.other">other</div>
 
-      <!-- OTHER: 카드형식 -->
       <div class="tile-grid">
         <a class="tile" href="https://kingshotdata.kr/pages/guides/kingshot-giftcode.html" target="_blank" rel="noopener">
           <svg class="icon-24" viewBox="0 0 24 24" aria-hidden="true">
             <rect x="3" y="8" width="18" height="13" rx="2" fill="none" stroke="#111" stroke-width="1.6"/>
-            <path d="M12 21V8M3 12h18M7 5c-1 0-2 .7-2 1.8S6 9 7.5 9C9 9 10 7 10 6s-1-1-3-1Zm10 0c1 0 2 .7 2 1.8S18 9 16.5 9C15 9 14 7 14 6s1-1 3-1Z" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M12 21V8M3 12h18M7 5c-1 0-2 .7-2 1.8S6 9 7.5 9C9 9 10 7 10 6s-1-1-3-1Zm10 0c1 0 2 .7 2 1.8S18 9 16.5 9C15 9 14 7 14 6s1-1 3-1Z"
+              fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"/>
           </svg>
           <div class="meta"><span class="tit">Gift Code</span></div>
         </a>
@@ -325,172 +254,193 @@
           <div class="meta"><span class="tit">KakaoTalk</span></div>
         </a>
       </div>
-
+    </div>
   </aside>
 
-<!-- ===== Main / Footer ===== -->
-<main class="container" id="main" role="main"
-      aria-label="Main content"
-      data-i18n-attr="aria-label:aria.main">
-  <div id="content" class="panel">
-    <noscript data-nosnippet data-i18n="misc.enableJs">
-      자바스크립트를 활성화하세요. 콘텐츠가 표시됩니다.
-    </noscript>
-  </div>
-</main>
+  <!-- ===== Main ===== -->
+  <main class="container" id="main" role="main"
+        aria-label="Main content"
+        data-i18n-attr="aria-label:aria.main">
+    <div id="content" class="panel">
+      <noscript data-nosnippet data-i18n="misc.enableJs">
+        자바스크립트를 활성화하세요. 콘텐츠가 표시됩니다.
+      </noscript>
+    </div>
+  </main>
 
-<footer class="site-footer" role="contentinfo"
-        aria-label="Footer"
-        data-i18n-attr="aria-label:aria.footer">
-  <div class="container">
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer" role="contentinfo"
+          aria-label="Footer"
+          data-i18n-attr="aria-label:aria.footer">
+    <div class="container">
+      <!-- Footer Tools (쿠폰 → 버튼 → 배너는 JS에서 렌더링) -->
+      <div id="footerTools" class="footer-tools"></div>
 
-    <!-- Footer Tools (쿠폰 → 버튼 → 배너는 JS에서 렌더링) -->
-    <div id="footerTools" class="footer-tools"></div>
+      <span data-i18n="footer.copyrightLine1">
+        All game images and data are copyrighted by Century Games.
+      </span><br />
 
-    <!-- ✅ 카카오 애드핏 (모바일/PC 겸용, 심사용 OK) 
-    <div class="adfit-footer-slot" style="text-align:center; margin:24px 0;">
-      <ins class="kakao_ad_area"
-           data-ad-unit="DAN-iGFM4JeI8aenYEf7"
-           data-ad-width="300"
-           data-ad-height="250"></ins>
-    </div>-->
+      <span data-i18n="footer.fansiteNotice">
+        This site is an unofficial fan site.
+      </span><br />
 
-    <span data-i18n="footer.copyrightLine1">
-      All game images and data are copyrighted by Century Games.
-    </span><br />
+      <span>© 2025 KingshotData Korea · </span>
+      <a href="/privacy/" data-i18n="footer.privacy">개인정보처리방침 / Privacy</a>
+    </div>
+  </footer>
 
-    <span data-i18n="footer.fansiteNotice">
-      This site is an unofficial fan site.
-    </span><br />
-
-    <span>© 2025 KingshotData Korea · </span>
-    <a href="/privacy/" data-i18n="footer.privacy">
-      개인정보처리방침 / Privacy
-    </a>
-
-  </div>
-</footer>
-
-
-<!-- 🔧 Language-based Banner Switch -->
-<script>
-(function(){
-  function updateLootbarBanner(){
-    const img = document.getElementById('lootbarBanner');
-    if (!img) return;
-
-    const lang =
-      window.I18N?.current ||
-      document.documentElement.getAttribute('lang') ||
-      'en';
-
-    // 한국어만 KR 배너, 나머지는 EN 배너
-    img.src = (lang === 'ko')
-      ? '/img/lootbarkr.png'
-      : '/img/lootbar.png';
-  }
-
-  document.addEventListener('DOMContentLoaded', updateLootbarBanner);
-
-  // 언어 변경 시 즉시 반영
-  if (window.I18N && typeof I18N.setLang === 'function') {
-    const _setLang = I18N.setLang.bind(I18N);
-    I18N.setLang = async function(lang){
-      await _setLang(lang);
-      updateLootbarBanner();
-    };
-  }
-})();
-</script>
-
-
-
+  <!-- 🔧 Footer LootBar 배너 언어별 이미지 스위치 (footer-tools.js가 만든 이미지 대상으로 처리) -->
   <script>
-    // 드로어 토글
-    document.addEventListener('DOMContentLoaded', () => {
-      const html=document.documentElement, body=document.body;
-      const drawer=document.getElementById('mobileDrawer');
-      const backdrop=document.getElementById('backdrop');
-      const btnOpen=document.getElementById('menuToggle');
-      const btnClose=document.getElementById('btnClose');
+    (function(){
+      function updateLootbarBanner(){
+        const img = document.querySelector('.footer-image-banner img');
+        if (!img) return;
 
-      function openDrawer(){ html.classList.add('is-open'); body.classList.add('no-scroll'); backdrop.hidden=false; drawer.setAttribute('aria-hidden','false'); btnOpen?.setAttribute('aria-expanded','true'); btnClose?.focus(); }
-      function closeDrawer(){ html.classList.remove('is-open'); body.classList.remove('no-scroll'); backdrop.hidden=true; drawer.setAttribute('aria-hidden','true'); btnOpen?.setAttribute('aria-expanded','false'); btnOpen?.focus(); }
+        const lang =
+          window.I18N?.current ||
+          document.documentElement.getAttribute('lang') ||
+          'en';
+
+        img.src = (lang === 'ko') ? '/img/lootbarkr.png' : '/img/lootbar.png';
+      }
+
+      document.addEventListener('DOMContentLoaded', updateLootbarBanner);
+
+      if (window.I18N && typeof I18N.setLang === 'function') {
+        const _setLang = I18N.setLang.bind(I18N);
+        I18N.setLang = async function(lang){
+          await _setLang(lang);
+          document.documentElement.setAttribute('lang', lang);
+          updateLootbarBanner();
+        };
+      }
+    })();
+  </script>
+
+  <!-- 🔧 Drawer toggle -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const html = document.documentElement, body = document.body;
+      const drawer = document.getElementById('mobileDrawer');
+      const backdrop = document.getElementById('backdrop');
+      const btnOpen = document.getElementById('menuToggle');
+      const btnClose = document.getElementById('btnClose');
+
+      function openDrawer(){
+        html.classList.add('is-open');
+        body.classList.add('no-scroll');
+        backdrop.hidden = false;
+        drawer.setAttribute('aria-hidden','false');
+        btnOpen?.setAttribute('aria-expanded','true');
+        btnClose?.focus();
+      }
+
+      function closeDrawer(){
+        html.classList.remove('is-open');
+        body.classList.remove('no-scroll');
+        backdrop.hidden = true;
+        drawer.setAttribute('aria-hidden','true');
+        btnOpen?.setAttribute('aria-expanded','false');
+        btnOpen?.focus();
+      }
+
       btnOpen?.addEventListener('click', openDrawer);
       btnClose?.addEventListener('click', closeDrawer);
       backdrop?.addEventListener('click', closeDrawer);
-      window.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDrawer(); });
-      drawer.querySelectorAll('a[data-link]')?.forEach(a=>a.addEventListener('click', closeDrawer));
+      window.addEventListener('keydown', e => { if(e.key === 'Escape') closeDrawer(); });
+      drawer.querySelectorAll('a[data-link]')?.forEach(a => a.addEventListener('click', closeDrawer));
     });
   </script>
 
-  <!-- 언어 드롭다운 (KO/EN/JA/CN/TW) -->
+  <!-- 🔧 Language dropdown (KO/EN/JA/CN/TW) -->
   <script>
-  (function(){
-    const LANGS = [
-      {code:'ko',    label:'한국어',  short:'KO'},
-      {code:'en',    label:'English', short:'EN'},
-      {code:'ja',    label:'日本語',   short:'JA'},
-      {code:'zh-CN', label:'简体中文', short:'CN'},
-      {code:'zh-TW', label:'繁體中文', short:'TW'},
-    ];
+    (function(){
+      const LANGS = [
+        {code:'ko',    label:'한국어',  short:'KO'},
+        {code:'en',    label:'English', short:'EN'},
+        {code:'ja',    label:'日本語',   short:'JA'},
+        {code:'zh-CN', label:'简体中文', short:'CN'},
+        {code:'zh-TW', label:'繁體中文', short:'TW'},
+      ];
 
-    function getCurrentLang(){
-      if (window.I18N?.current) return I18N.current;
-      return document.documentElement.getAttribute('lang') || 'en';
-    }   
-
-    function mountPlainDropdown(containerId, menuId){
-      const root = document.getElementById(containerId);
-      const trigger = root?.querySelector('.lang-row');
-      const menu = document.getElementById(menuId);
-      if (!root || !trigger || !menu) return;
-
-      menu.innerHTML = LANGS.map((l,idx)=>`
-        <li><button class="lang-item" role="menuitemradio" data-lang="${l.code}" aria-checked="false" tabindex="${idx===0?'0':'-1'}">${l.label}</button></li>
-      `).join('');
-      const items = Array.from(menu.querySelectorAll('.lang-item'));
-
-      function setBtn(code){ trigger.querySelector('.current').textContent = (LANGS.find(x=>x.code===code)?.short || code.toUpperCase()); }
-      function reflect(code){ items.forEach(it => it.setAttribute('aria-checked', it.dataset.lang===code ? 'true' : 'false')); }
-
-      function open(){
-        menu.style.left = '0';
-        menu.hidden=false; trigger.setAttribute('aria-expanded','true');
-        const cur=getCurrentLang(); reflect(cur); setBtn(cur);
-        (items.find(it=>it.dataset.lang===cur) || items[0]).focus();
-        document.addEventListener('click', onDoc, {capture:true});
-        document.addEventListener('keydown', onKey);
+      function getCurrentLang(){
+        if (window.I18N?.current) return I18N.current;
+        return document.documentElement.getAttribute('lang') || 'en';
       }
-      function close(){
-        menu.hidden=true; trigger.setAttribute('aria-expanded','false');
-        document.removeEventListener('click', onDoc, {capture:true});
-        document.removeEventListener('keydown', onKey);
-        trigger.focus?.();
-      }
-      function onDoc(e){ if(!root.contains(e.target)) close(); }
-      function onKey(e){
-        const active=document.activeElement; const idx=items.indexOf(active);
-        if(e.key==='Escape'){ e.preventDefault(); close(); return; }
-        if(e.key==='ArrowDown'){ e.preventDefault(); items[(idx+1+items.length)%items.length].focus(); }
-        if(e.key==='ArrowUp'){ e.preventDefault(); items[(idx-1+items.length)%items.length].focus(); }
-        if(e.key==='Enter' || e.key===' '){
-          e.preventDefault(); if(active && active.classList.contains('lang-item')) choose(active.dataset.lang);
+
+      function mountPlainDropdown(containerId, menuId){
+        const root = document.getElementById(containerId);
+        const trigger = root?.querySelector('.lang-row');
+        const menu = document.getElementById(menuId);
+        if (!root || !trigger || !menu) return;
+
+        menu.innerHTML = LANGS.map((l,idx)=>`
+          <li><button class="lang-item" role="menuitemradio" data-lang="${l.code}" aria-checked="false" tabindex="${idx===0?'0':'-1'}">${l.label}</button></li>
+        `).join('');
+
+        const items = Array.from(menu.querySelectorAll('.lang-item'));
+
+        function setBtn(code){
+          trigger.querySelector('.current').textContent = (LANGS.find(x=>x.code===code)?.short || code.toUpperCase());
         }
+        function reflect(code){
+          items.forEach(it => it.setAttribute('aria-checked', it.dataset.lang===code ? 'true' : 'false'));
+        }
+
+        function open(){
+          menu.style.left = '0';
+          menu.hidden = false;
+          trigger.setAttribute('aria-expanded','true');
+
+          const cur = getCurrentLang();
+          reflect(cur);
+          setBtn(cur);
+          (items.find(it=>it.dataset.lang===cur) || items[0]).focus();
+
+          document.addEventListener('click', onDoc, {capture:true});
+          document.addEventListener('keydown', onKey);
+        }
+
+        function close(){
+          menu.hidden = true;
+          trigger.setAttribute('aria-expanded','false');
+          document.removeEventListener('click', onDoc, {capture:true});
+          document.removeEventListener('keydown', onKey);
+          trigger.focus?.();
+        }
+
+        function onDoc(e){ if(!root.contains(e.target)) close(); }
+
+        function onKey(e){
+          const active = document.activeElement;
+          const idx = items.indexOf(active);
+          if(e.key === 'Escape'){ e.preventDefault(); close(); return; }
+          if(e.key === 'ArrowDown'){ e.preventDefault(); items[(idx+1+items.length)%items.length].focus(); }
+          if(e.key === 'ArrowUp'){ e.preventDefault(); items[(idx-1+items.length)%items.length].focus(); }
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            if(active && active.classList.contains('lang-item')) choose(active.dataset.lang);
+          }
+        }
+
+        async function choose(code){
+          reflect(code);
+          setBtn(code);
+          await applyLang(code);
+          close();
+        }
+
+        trigger.addEventListener('click', () => (trigger.getAttribute('aria-expanded')==='true' ? close() : open()));
+        items.forEach(it => it.addEventListener('click', () => choose(it.dataset.lang)));
+
+        setBtn(getCurrentLang());
       }
-      async function choose(code){ reflect(code); setBtn(code); await applyLang(code); close(); }
 
-      trigger.addEventListener('click', () => (trigger.getAttribute('aria-expanded')==='true'? close(): open()));
-      items.forEach(it => it.addEventListener('click', () => choose(it.dataset.lang)));
-
-      setBtn(getCurrentLang());
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      mountPlainDropdown('langDropdownHeader','langMenuHeader');
-      mountPlainDropdown('langDropdownDrawer','langMenuDrawer');
-    });
-  })();
+      document.addEventListener('DOMContentLoaded', () => {
+        mountPlainDropdown('langDropdownHeader','langMenuHeader');
+        mountPlainDropdown('langDropdownDrawer','langMenuDrawer');
+      });
+    })();
   </script>
 </body>
 </html>

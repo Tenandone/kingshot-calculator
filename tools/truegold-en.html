@@ -194,6 +194,15 @@
       padding:5px;
       flex:0 0 auto;
     }
+
+    /* ✅ chip text overflow fix (desktop/mobile safe) */
+    .total-chip > div{ min-width:0; }
+    .total-chip .label,
+    .total-chip .value{
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
     .total-chip .label{
       font-size: 12px;
       color: var(--mut);
@@ -261,6 +270,7 @@
       overflow:auto;
       -webkit-overflow-scrolling: touch;
       background:#fff;
+      overscroll-behavior: contain; /* ✅ optional but helpful on iOS */
     }
     table{
       width: 100%;
@@ -553,16 +563,12 @@
 
     /* =========================
       Mobile tuning (FINAL)
-      - no layout break
-      - chips readable
-      - header stacks
     ========================= */
     @media (max-width: 720px){
       .wrap{ padding: 0 12px; margin: 12px auto 24px; }
       .slider-wrap{ padding: 12px; }
       .slider-card{ padding: 12px; }
 
-      /* Header -> stacked */
       .head{
         grid-template-columns: 1fr;
         gap: 8px;
@@ -579,7 +585,6 @@
       .maker{ align-items:flex-start; }
       .ten{ width:30px; height:30px; }
 
-      /* Slider top -> stacked */
       .slider-top{
         flex-direction: column;
         align-items: stretch;
@@ -590,7 +595,6 @@
       .tg-label{ font-size: 13px; }
       .tg-help{ font-size: 11.5px; }
 
-      /* Chips -> 2-column grid */
       .totals{
         min-width: 0;
         width: 100%;
@@ -609,14 +613,11 @@
       .total-chip .label{ font-size: 11px; }
       .total-chip .value{ font-size: 20px; }
 
-      /* On mobile, don't waste space with hidden tempered chip */
       .total-chip.is-hidden{ display:none; }
 
-      /* ticks a bit smaller */
       .tick{ font-size: 10.5px; gap:4px; }
       .tick img{ width:18px; height:18px; border-radius: 7px; padding:2px; }
 
-      /* table */
       table{ min-width: 860px; }
       thead th{ font-size: 11px; padding: 8px 6px; }
       tbody td, tbody th{ padding: 8px 6px; }
@@ -628,9 +629,14 @@
       .ico-mini{ width:14px;height:14px; }
       .cell{ min-height: 40px; gap:4px; }
 
-      /* tip grid */
       .tg-tip__grid{ grid-template-columns: 1fr; }
       .tg-tip__tierRow{ grid-template-columns: 1fr; }
+    }
+
+    /* ✅ ultra-small phones (<=360px): 2 cols -> 1 col */
+    @media (max-width: 360px){
+      .totals{ grid-template-columns: 1fr; }
+      .total-chip .value{ font-size: 18px; }
     }
   </style>
 </head>
@@ -691,7 +697,6 @@
       <section class="tg-tip" aria-label="Tempered Truegold info">
         <div class="tg-tip__inner">
           <div class="tg-tip__head">
-            <!-- ✅ remove the accidental space in filename -->
             <img class="tg-tip__img" src="/img/icons/Ttruegold-kingshot.webp" alt="Tempered Truegold" loading="lazy"
                  onerror="this.style.display='none'">
             <div class="tg-tip__titlebox">
@@ -781,10 +786,6 @@
   </div>
 
   <script>
-    /* =========================
-      ICONS / PATHS
-      - ✅ remove space in filename to avoid missing icon
-    ========================= */
     const ICONS = {
       tgLevel: (n) => `/img/icons/truegold_level_${n}.webp`,
       truegold: '/img/icons/truegold-kingshot.webp',

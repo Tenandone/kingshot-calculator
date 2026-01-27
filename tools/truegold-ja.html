@@ -194,6 +194,15 @@
       padding:5px;
       flex:0 0 auto;
     }
+
+    /* ✅ 칩 안쪽 텍스트 overflow 방지(PC/모바일 공통 안정화) */
+    .total-chip > div{ min-width:0; }
+    .total-chip .label,
+    .total-chip .value{
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
     .total-chip .label{
       font-size: 12px;
       color: var(--mut);
@@ -261,6 +270,8 @@
       overflow:auto;
       -webkit-overflow-scrolling: touch;
       background:#fff;
+      /* ✅ iOS에서 sticky+scroll 조합 안정화 도움 */
+      overscroll-behavior: contain;
     }
     table{
       width: 100%;
@@ -351,7 +362,8 @@
     }
     .tg-fallback{
       display:none;
-      width:34px;height:34px;
+      width:34px;
+      height:34px;
       align-items:center;
       justify-content:center;
       border-radius: 10px;
@@ -553,16 +565,12 @@
 
     /* =========================
       Mobile tuning (FINAL)
-      - PC는 그대로
-      - 모바일에서 "안 잘리고" 읽히게 재배치
     ========================= */
     @media (max-width: 720px){
-      /* layout */
       .wrap{ padding: 0 12px; margin: 12px auto 24px; }
       .slider-wrap{ padding: 12px; }
       .slider-card{ padding: 12px; }
 
-      /* header -> 2줄 스택 */
       .head{
         grid-template-columns: 1fr;
         gap: 8px;
@@ -580,7 +588,6 @@
       .maker{ align-items:flex-start; }
       .ten{ width:30px; height:30px; }
 
-      /* slider top -> 세로 스택 */
       .slider-top{
         flex-direction: column;
         align-items: stretch;
@@ -599,7 +606,6 @@
       .tg-label{ font-size: 13px; }
       .tg-help{ font-size: 11.5px; }
 
-      /* chips -> 2열 그리드 (안 잘리게) */
       .totals{
         min-width: 0;
         width: 100%;
@@ -618,14 +624,11 @@
       .total-chip .label{ font-size: 11px; }
       .total-chip .value{ font-size: 20px; }
 
-      /* TG1~5 숨김칩: 모바일에서는 아예 제거(공간 낭비 방지) */
       .total-chip.is-hidden{ display:none; }
 
-      /* ticks */
       .tick{ font-size: 10.5px; gap:4px; }
       .tick img{ width:18px; height:18px; border-radius: 7px; padding:2px; }
 
-      /* table: 스크롤 유지 + 폭/폰트 완화 */
       table{ min-width: 860px; }
       thead th{ font-size: 11px; padding: 8px 6px; }
       tbody td, tbody th{ padding: 8px 6px; }
@@ -637,9 +640,14 @@
       .ico-mini{ width:14px;height:14px; }
       .cell{ min-height: 40px; gap:4px; }
 
-      /* tg-tip */
       .tg-tip__grid{ grid-template-columns: 1fr; }
       .tg-tip__tierRow{ grid-template-columns: 1fr; }
+    }
+
+    /* ✅ 최소 기준: 360px 이하(초소형 폰) */
+    @media (max-width: 360px){
+      .totals{ grid-template-columns: 1fr; } /* 2열 -> 1열 */
+      .total-chip .value{ font-size: 18px; } /* 숫자 더 안정 */
     }
   </style>
 </head>
@@ -700,7 +708,6 @@
       <section class="tg-tip" aria-label="精製順金の説明">
         <div class="tg-tip__inner">
           <div class="tg-tip__head">
-            <!-- ✅ 공백 제거된 경로로 통일 -->
             <img class="tg-tip__img" src="/img/icons/Ttruegold-kingshot.webp" alt="精製順金" loading="lazy"
                  onerror="this.style.display='none'">
             <div class="tg-tip__titlebox">
@@ -785,15 +792,10 @@
           </div>
         </div>
       </section>
-
     </section>
   </div>
 
   <script>
-    /* =========================
-      ICONS / PATHS
-      - ✅ 파일명에 공백 있으면 모바일/서버에서 자주 깨짐 → 공백 없는 파일명으로 통일 권장
-    ========================= */
     const ICONS = {
       tgLevel: (n) => `/img/icons/truegold_level_${n}.webp`,
       truegold: '/img/icons/truegold-kingshot.webp',
