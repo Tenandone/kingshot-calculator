@@ -183,6 +183,7 @@
       background:#ffffff;
       box-shadow: 0 10px 22px rgba(16,24,40,.06);
       flex: 0 0 auto;
+      max-width: 100%;
     }
     .total-chip .ico{
       width:30px;height:30px;
@@ -550,13 +551,95 @@
       line-height: 1.7;
     }
 
-    /* Mobile tuning */
+    /* =========================
+      Mobile tuning (FINAL)
+      - PC는 그대로
+      - 모바일에서 "안 잘리고" 읽히게 재배치
+    ========================= */
     @media (max-width: 720px){
+      /* layout */
+      .wrap{ padding: 0 12px; margin: 12px auto 24px; }
+      .slider-wrap{ padding: 12px; }
+      .slider-card{ padding: 12px; }
+
+      /* header -> 2줄 스택 */
+      .head{
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 14px 12px;
+      }
+      .head-left{ display:none; }
+      .head-center{ text-align:left; }
+      .h1{ font-size: 16px; white-space: normal; }
+
+      .head-right{
+        min-width: 0;
+        justify-content:flex-start;
+        white-space: normal;
+      }
+      .maker{ align-items:flex-start; }
+      .ten{ width:30px; height:30px; }
+
+      /* slider top -> 세로 스택 */
+      .slider-top{
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .tg-display{
+        min-width: 0;
+        width: 100%;
+      }
+      .tg-ico{
+        width:44px;height:44px;
+        border-radius: 14px;
+        padding:6px;
+      }
+      .tg-label{ font-size: 13px; }
+      .tg-help{ font-size: 11.5px; }
+
+      /* chips -> 2열 그리드 (안 잘리게) */
+      .totals{
+        min-width: 0;
+        width: 100%;
+        justify-content: stretch;
+        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .total-chip{
+        border-radius: 14px;
+        padding: 10px 10px;
+        width: 100%;
+      }
+      .total-chip .ico{ width:26px;height:26px; border-radius: 9px; padding:4px; }
+      .total-chip .label{ font-size: 11px; }
+      .total-chip .value{ font-size: 20px; }
+
+      /* TG1~5 숨김칩: 모바일에서는 아예 제거(공간 낭비 방지) */
+      .total-chip.is-hidden{ display:none; }
+
+      /* ticks */
+      .tick{ font-size: 10.5px; gap:4px; }
+      .tick img{ width:18px; height:18px; border-radius: 7px; padding:2px; }
+
+      /* table: 스크롤 유지 + 폭/폰트 완화 */
+      table{ min-width: 860px; }
+      thead th{ font-size: 11px; padding: 8px 6px; }
+      tbody td, tbody th{ padding: 8px 6px; }
+      th.building-col{ min-width: 190px; padding-left: 10px; }
+      tbody th{ padding-left: 10px; }
+
+      .bicon{ width:28px;height:28px; border-radius: 9px; padding:4px; }
+      .bname{ font-size: 12px; }
+      .ico-mini{ width:14px;height:14px; }
+      .cell{ min-height: 40px; gap:4px; }
+
+      /* tg-tip */
       .tg-tip__grid{ grid-template-columns: 1fr; }
       .tg-tip__tierRow{ grid-template-columns: 1fr; }
-      .totals{ width:100%; justify-content:flex-end; }
-      .total-chip .value{ font-size: 22px; }
-      .total-chip{ padding: 8px 12px; }
     }
   </style>
 </head>
@@ -595,7 +678,6 @@
               </div>
             </div>
 
-            <!-- Tempered (left, hidden until TG6) + Truegold (right, always) -->
             <div id="tgTotals" class="totals"></div>
           </div>
 
@@ -614,13 +696,12 @@
         </table>
       </div>
 
-      <!-- =========================
-        SEO TIP: Tempered Truegold
-      ========================= -->
+      <!-- SEO TIP -->
       <section class="tg-tip" aria-label="精製順金の説明">
         <div class="tg-tip__inner">
           <div class="tg-tip__head">
-            <img class="tg-tip__img" src="/img/icons/Ttruegold-kingshot .webp" alt="精製順金" loading="lazy"
+            <!-- ✅ 공백 제거된 경로로 통일 -->
+            <img class="tg-tip__img" src="/img/icons/Ttruegold-kingshot.webp" alt="精製順金" loading="lazy"
                  onerror="this.style.display='none'">
             <div class="tg-tip__titlebox">
               <h2 class="tg-tip__title">精製順金とは？</h2>
@@ -711,19 +792,16 @@
   <script>
     /* =========================
       ICONS / PATHS
-      - Tempered Truegold file name: "Ttruegold-kingshot .webp" (includes a space)
+      - ✅ 파일명에 공백 있으면 모바일/서버에서 자주 깨짐 → 공백 없는 파일명으로 통일 권장
     ========================= */
     const ICONS = {
       tgLevel: (n) => `/img/icons/truegold_level_${n}.webp`,
       truegold: '/img/icons/truegold-kingshot.webp',
-      tempered: '/img/icons/Ttruegold-kingshot .webp'
+      tempered: '/img/icons/Ttruegold-kingshot.webp'
     };
 
     const TG_MAX = 8;
 
-    /* =========================
-      BUILDINGS (rows)
-    ========================= */
     const BUILDINGS = [
       { key:'towncenter',    name:'タウンセンター', icons:['/img/buildings/towncenter-kingshot.webp'] },
       { key:'embassy',       name:'大使館',         icons:['/img/buildings/embassy-kingshot.webp'] },
@@ -734,11 +812,6 @@
       { key:'range',         name:'弓兵舎',         icons:['/img/buildings/range-kingshot.webp'] }
     ];
 
-    /* =========================
-      DATA
-      - truegold: TG1~TG8
-      - tempered: TG6~TG8 only (null for others)
-    ========================= */
     const DATA = {
       towncenter: {
         truegold: [660, 790, 1190, 1400, 1675, 900, 1080, 1080],
@@ -777,7 +850,6 @@
       sliderTotal: (tg) => `TG${tg} 合計消費`
     };
 
-    /* helpers */
     function fmt(n){
       const v = Number(n);
       if (!Number.isFinite(v)) return '—';
@@ -931,9 +1003,6 @@
       `;
     }
 
-    /* Slider totals:
-       - Tempered (left): hidden until TG6 (space preserved)
-       - Truegold (right): always visible */
     function updateSliderUI(tg, totals) {
       const idx = tg - 1;
 
@@ -965,7 +1034,6 @@
       sync();
     }
 
-    /* init */
     renderTable();
     renderTicks();
     initSlider();

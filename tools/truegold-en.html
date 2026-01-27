@@ -150,9 +150,7 @@
       padding:7px;
       flex:0 0 auto;
     }
-    .tg-meta{
-      min-width:0;
-    }
+    .tg-meta{ min-width:0; }
     .tg-label{
       font-weight:1000;
       font-size: 14px;
@@ -185,6 +183,7 @@
       background:#ffffff;
       box-shadow: 0 10px 22px rgba(16,24,40,.06);
       flex: 0 0 auto;
+      max-width: 100%;
     }
     .total-chip .ico{
       width:30px;height:30px;
@@ -210,11 +209,9 @@
       line-height: 1;
       white-space:nowrap;
     }
-    .total-chip.temper .value{
-      color: var(--gold);
-    }
+    .total-chip.temper .value{ color: var(--gold); }
 
-    /* hidden but keep space */
+    /* hidden but keep space (desktop) */
     .total-chip.is-hidden{
       visibility: hidden;
       pointer-events: none;
@@ -387,12 +384,8 @@
       letter-spacing:.2px;
       color: var(--txt);
     }
-    .line.temper{
-      color: var(--gold);
-    }
-    .line.temper .num{
-      color: var(--gold);
-    }
+    .line.temper{ color: var(--gold); }
+    .line.temper .num{ color: var(--gold); }
     .ico-mini{
       width:16px;height:16px;
       object-fit:contain;
@@ -401,15 +394,13 @@
     }
 
     /* =========================
-      tg-tip (SEO section)
+      tg-tip
     ========================= */
     .tg-tip{
       background:#fff;
       border-top:1px solid var(--line);
     }
-    .tg-tip__inner{
-      padding: 18px 16px 22px;
-    }
+    .tg-tip__inner{ padding: 18px 16px 22px; }
     .tg-tip__head{
       display:flex;
       gap:14px;
@@ -560,18 +551,86 @@
       line-height: 1.7;
     }
 
-    /* Mobile tuning */
+    /* =========================
+      Mobile tuning (FINAL)
+      - no layout break
+      - chips readable
+      - header stacks
+    ========================= */
     @media (max-width: 720px){
+      .wrap{ padding: 0 12px; margin: 12px auto 24px; }
+      .slider-wrap{ padding: 12px; }
+      .slider-card{ padding: 12px; }
+
+      /* Header -> stacked */
+      .head{
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 14px 12px;
+      }
+      .head-left{ display:none; }
+      .head-center{ text-align:left; }
+      .h1{ font-size: 16px; white-space: normal; }
+      .head-right{
+        min-width: 0;
+        justify-content:flex-start;
+        white-space: normal;
+      }
+      .maker{ align-items:flex-start; }
+      .ten{ width:30px; height:30px; }
+
+      /* Slider top -> stacked */
+      .slider-top{
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .tg-display{ min-width: 0; width:100%; }
+      .tg-ico{ width:44px;height:44px; border-radius: 14px; padding:6px; }
+      .tg-label{ font-size: 13px; }
+      .tg-help{ font-size: 11.5px; }
+
+      /* Chips -> 2-column grid */
+      .totals{
+        min-width: 0;
+        width: 100%;
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        justify-content: stretch;
+        flex-wrap: wrap;
+      }
+      .total-chip{
+        width:100%;
+        border-radius: 14px;
+        padding: 10px 10px;
+      }
+      .total-chip .ico{ width:26px;height:26px; border-radius: 9px; padding:4px; }
+      .total-chip .label{ font-size: 11px; }
+      .total-chip .value{ font-size: 20px; }
+
+      /* On mobile, don't waste space with hidden tempered chip */
+      .total-chip.is-hidden{ display:none; }
+
+      /* ticks a bit smaller */
+      .tick{ font-size: 10.5px; gap:4px; }
+      .tick img{ width:18px; height:18px; border-radius: 7px; padding:2px; }
+
+      /* table */
+      table{ min-width: 860px; }
+      thead th{ font-size: 11px; padding: 8px 6px; }
+      tbody td, tbody th{ padding: 8px 6px; }
+      th.building-col{ min-width: 190px; padding-left: 10px; }
+      tbody th{ padding-left: 10px; }
+
+      .bicon{ width:28px;height:28px; border-radius: 9px; padding:4px; }
+      .bname{ font-size: 12px; }
+      .ico-mini{ width:14px;height:14px; }
+      .cell{ min-height: 40px; gap:4px; }
+
+      /* tip grid */
       .tg-tip__grid{ grid-template-columns: 1fr; }
       .tg-tip__tierRow{ grid-template-columns: 1fr; }
-
-      /* Make chips not break layout on mobile */
-      .totals{
-        width: 100%;
-        justify-content:flex-end;
-      }
-      .total-chip .value{ font-size: 22px; }
-      .total-chip{ padding: 8px 12px; }
     }
   </style>
 </head>
@@ -610,7 +669,6 @@
               </div>
             </div>
 
-            <!-- Tempered (left, hidden until TG6) + Truegold (right, always) -->
             <div id="tgTotals" class="totals"></div>
           </div>
 
@@ -629,13 +687,12 @@
         </table>
       </div>
 
-      <!-- =========================
-        SEO TIP: Tempered Truegold
-      ========================= -->
+      <!-- TIP -->
       <section class="tg-tip" aria-label="Tempered Truegold info">
         <div class="tg-tip__inner">
           <div class="tg-tip__head">
-            <img class="tg-tip__img" src="/img/icons/Ttruegold-kingshot .webp" alt="Tempered Truegold" loading="lazy"
+            <!-- ✅ remove the accidental space in filename -->
+            <img class="tg-tip__img" src="/img/icons/Ttruegold-kingshot.webp" alt="Tempered Truegold" loading="lazy"
                  onerror="this.style.display='none'">
             <div class="tg-tip__titlebox">
               <h2 class="tg-tip__title">What is Tempered Truegold?</h2>
@@ -726,34 +783,26 @@
   <script>
     /* =========================
       ICONS / PATHS
-      - Tempered Truegold file name: "Ttruegold-kingshot .webp" (includes a space)
+      - ✅ remove space in filename to avoid missing icon
     ========================= */
     const ICONS = {
       tgLevel: (n) => `/img/icons/truegold_level_${n}.webp`,
       truegold: '/img/icons/truegold-kingshot.webp',
-      tempered: '/img/icons/Ttruegold-kingshot .webp'
+      tempered: '/img/icons/Ttruegold-kingshot.webp'
     };
 
     const TG_MAX = 8;
 
-    /* =========================
-      BUILDINGS (rows)
-    ========================= */
     const BUILDINGS = [
-      { key:'towncenter',    name:'Town Center',  icons:['/img/buildings/towncenter-kingshot.webp'] },
-      { key:'embassy',       name:'Embassy',      icons:['/img/buildings/embassy-kingshot.webp'] },
+      { key:'towncenter',    name:'Town Center',    icons:['/img/buildings/towncenter-kingshot.webp'] },
+      { key:'embassy',       name:'Embassy',        icons:['/img/buildings/embassy-kingshot.webp'] },
       { key:'commandcenter', name:'Command Center', icons:['/img/buildings/command-center-kingshot.webp'] },
-      { key:'infirmary',     name:'Infirmary',    icons:['/img/buildings/infirmary-kingshot.webp'] },
-      { key:'barracks',      name:'Barracks',     icons:['/img/buildings/barracks-kingshot.webp'] },
-      { key:'stable',        name:'Stable',       icons:['/img/buildings/stable-kingshot.webp'] },
-      { key:'range',         name:'Range',        icons:['/img/buildings/range-kingshot.webp'] }
+      { key:'infirmary',     name:'Infirmary',      icons:['/img/buildings/infirmary-kingshot.webp'] },
+      { key:'barracks',      name:'Barracks',       icons:['/img/buildings/barracks-kingshot.webp'] },
+      { key:'stable',        name:'Stable',         icons:['/img/buildings/stable-kingshot.webp'] },
+      { key:'range',         name:'Range',          icons:['/img/buildings/range-kingshot.webp'] }
     ];
 
-    /* =========================
-      DATA
-      - truegold: TG1~TG8
-      - tempered: TG6~TG8 only (null for others)
-    ========================= */
     const DATA = {
       towncenter: {
         truegold: [660, 790, 1190, 1400, 1675, 900, 1080, 1080],
@@ -792,7 +841,6 @@
       sliderTotal: (tg) => `TG${tg} Total Cost`
     };
 
-    /* helpers */
     function fmt(n){
       const v = Number(n);
       if (!Number.isFinite(v)) return '—';
@@ -946,9 +994,6 @@
       `;
     }
 
-    /* Slider totals:
-       - Tempered (left): hidden until TG6 (space preserved)
-       - Truegold (right): always visible */
     function updateSliderUI(tg, totals) {
       const idx = tg - 1;
 
@@ -980,7 +1025,6 @@
       sync();
     }
 
-    /* init */
     renderTable();
     renderTicks();
     initSlider();

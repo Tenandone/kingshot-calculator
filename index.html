@@ -152,31 +152,93 @@
   </div> <!-- .nav-bar 끝 -->
 </header>
 
-<!-- ✅ AdFit (KO only) -->
-<div id="adfitKoSlot" style="text-align:center; margin:16px 0; display:none;">
+<!-- ✅ AdFit (KO only) - PC / Mobile split -->
+<style>
+  /* 광고가 원인으로 가로 스크롤 생기는거 방지 */
+  html, body { overflow-x: hidden; }
+
+  /* 기본: PC만 보이게 */
+  #adfitKoPc { display: block; }
+  #adfitKoMobile { display: none; }
+
+  /* 모바일: 모바일만 보이게 */
+  @media (max-width: 768px) {
+    #adfitKoPc { display: none !important; }
+    #adfitKoMobile { display: block !important; }
+  }
+
+  /* 광고 컨테이너 안전폭 */
+  .adfit-wrap {
+    text-align: center;
+    margin: 16px 0;
+  }
+</style>
+
+<div id="adfitKoPc" class="adfit-wrap" style="display:none;">
   <ins class="kakao_ad_area"
        data-ad-unit="DAN-n0VbUcLaeDeaLU9B"
        data-ad-width="728"
        data-ad-height="90"></ins>
 </div>
 
+<div id="adfitKoMobile" class="adfit-wrap" style="display:none;">
+  <ins class="kakao_ad_area"
+       data-ad-unit="DAN-mhQxfrqp7TKmoxtT"
+       data-ad-width="320"
+       data-ad-height="50"></ins>
+</div>
+
 <script src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 
 <script>
 (function(){
-  function isKO(){
+  function getLang(){
     return (
-      document.documentElement.getAttribute('lang') === 'ko' ||
-      window.I18N?.current === 'ko'
+      window.I18N?.current ||
+      document.documentElement.getAttribute('lang') ||
+      'en'
     );
   }
 
-  if (isKO()) {
-    const slot = document.getElementById('adfitKoSlot');
-    if (slot) slot.style.display = 'block';
+  function refreshAdfitVisibility(){
+    const isKo = (getLang() === 'ko');
+
+    const pc = document.getElementById('adfitKoPc');
+    const mo = document.getElementById('adfitKoMobile');
+
+    if (!pc || !mo) return;
+
+    // KO 아니면 둘 다 숨김
+    if (!isKo) {
+      pc.style.display = 'none';
+      mo.style.display = 'none';
+      return;
+    }
+
+    // KO면 "CSS가 기기별로 무엇을 보여줄지" 결정
+    // 여기서는 둘 다 block으로 풀어주고, 실제 표시는 media query가 맡는다
+    pc.style.display = 'block';
+    mo.style.display = 'block';
+  }
+
+  // 최초 1회
+  refreshAdfitVisibility();
+
+  // 언어 변경(네 applyLang은 페이지 리로드라 사실 필요없지만, 혹시 모를 케이스 대비)
+  document.addEventListener('DOMContentLoaded', refreshAdfitVisibility);
+
+  // i18n이 runtime 언어변경을 한다면 대비
+  if (window.I18N && typeof I18N.setLang === 'function') {
+    const _setLang = I18N.setLang.bind(I18N);
+    I18N.setLang = async function(lang){
+      await _setLang(lang);
+      document.documentElement.setAttribute('lang', lang);
+      refreshAdfitVisibility();
+    };
   }
 })();
 </script>
+
 
 
 <main class="container" id="main" role="main">
