@@ -1,43 +1,38 @@
 /* ==========================================================
-   KingshotData — mobile-patch.css
-   기존 스타일 유지 + 모바일 최적화
+   KingshotData — mobile-patch.css (OPTIMIZED)
+   목표:
+   - PC 레이아웃은 건드리지 않음
+   - 모바일에서만 "그리드/카드/쿠폰카드" 최적화 적용
+   - 전역에는 "깨짐 방지" 성격만 둔다
    ========================================================== */
 
-/* 1) 모든 카테고리 그리드: 화면 크기에 맞춰 자동 배치 */
-.category-grid,
-#buildings-grid,
-#heroes-grid,
-#db-grid,
-#calc-grid {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* 최소 60px까지 줄어듦 */
-  align-items: stretch;
+/* =========================
+   0) 전역(PC/모바일 공통) - 깨짐 방지용만
+========================= */
+
+/* 표 안전 처리 */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-wrap table { min-width: 560px; width: 100%; border-collapse: collapse; }
+
+/* 콘텐츠 미디어 반응형 */
+#content img,
+#content video,
+#content canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* 태블릿 이상에서는 3칸 고정 */
-@media (min-width: 768px) {
-  .category-grid,
-  #buildings-grid,
-  #heroes-grid,
-  #db-grid,
-  #calc-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+/* 카드 제목/부제목 말줄임(전역 안전) */
+.card__title,
+.card__subtitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
 
-/* 데스크탑 이상에서는 4칸 이상 */
-@media (min-width: 1200px) {
-  .category-grid,
-  #buildings-grid,
-  #heroes-grid,
-  #db-grid,
-  #calc-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-/* 카드 미디어 박스 (홈/전체 동일 적용) */
+/* 카드 미디어 박스(전역 안전) */
 .card__media {
   aspect-ratio: 16 / 10;
   height: auto;
@@ -54,82 +49,73 @@
   display: block;
 }
 
-/* 카드 본문 (텍스트 최적화) */
-.card__body {
-  padding: 8px;
-  min-width: 0;
-}
-.card__title {
-  font-weight: 700;
-  font-size: 14px;
-  margin: 0 0 2px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.card__subtitle {
-  opacity: .8;
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* 작은 화면일 때 텍스트/패딩 축소 */
-@media (max-width: 480px) {
-  .card__body { padding: 4px; }
-  .card__title { font-size: 12px; }
-  .card__subtitle { font-size: 10px; }
-}
-
-/* 스티키 헤더 */
-.theme-default .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: #fff;
-}
-
-/* 표 안전 처리 */
-.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.table-wrap table { min-width: 560px; width: 100%; border-collapse: collapse; }
-
-/* 콘텐츠 미디어 반응형 */
-#content img, #content video, #content canvas {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-/* 카테고리 카드 제목/부제목: 한 줄 고정 + … 처리 */
-.category-grid .card__title,
-#buildings-grid .card__title,
-#heroes-grid .card__title,
-#db-grid .card__title,
-#calc-grid .card__title,
-.category-grid .card__subtitle,
-#buildings-grid .card__subtitle,
-#heroes-grid .card__subtitle,
-#db-grid .card__subtitle,
-#calc-grid .card__subtitle {
-  text-align: center;
-  white-space: nowrap !important;     /* 무조건 한 줄 */
-  overflow: hidden !important;        /* 넘치면 숨김 */
-  text-overflow: ellipsis !important; /* … 표시 */
-  display: block;                     /* inline에서 깨지는 경우 방지 */
-  width: 100%;                        /* 부모 너비 꽉 채우기 */
-}
-#buildings-grid .card__title {
-  text-align: center;
-  font-size: clamp(12px, 2vw, 14px);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  display: block;    /* inline이면 깨지니까 block 강제 */
-  width: 100%;       /* 부모(.card__body)의 폭 꽉 채우기 */
-  box-sizing: border-box;
-}
+/* =========================
+   1) 모바일 전용(<=768px)
+   - 여기서만 레이아웃을 바꾼다
+========================= */
 @media (max-width: 768px) {
+
+  /* 1) 모든 카테고리 그리드: 화면 크기에 맞춰 자동 배치 */
+  .category-grid,
+  #buildings-grid,
+  #heroes-grid,
+  #db-grid,
+  #calc-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    align-items: stretch;
+  }
+
+  /* 카드 본문(모바일에 맞게) */
+  .card__body {
+    padding: 8px;
+    min-width: 0;
+  }
+  .card__title {
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 0 2px;
+    text-align: center;
+  }
+  .card__subtitle {
+    opacity: .8;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  /* 카테고리 카드 제목/부제목: 한 줄 고정 + … */
+  .category-grid .card__title,
+  #buildings-grid .card__title,
+  #heroes-grid .card__title,
+  #db-grid .card__title,
+  #calc-grid .card__title,
+  .category-grid .card__subtitle,
+  #buildings-grid .card__subtitle,
+  #heroes-grid .card__subtitle,
+  #db-grid .card__subtitle,
+  #calc-grid .card__subtitle {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block;
+    width: 100%;
+  }
+
+  /* buildings 폰트는 clamp로만 살짝 조절 */
+  #buildings-grid .card__title {
+    font-size: clamp(12px, 3.2vw, 14px);
+  }
+
+  /* 2) 스티키 헤더(모바일에서만) */
+  .theme-default .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #fff;
+  }
+
+  /* 3) 쿠폰 카드(모바일에서만) */
   .code-card {
     background: #fff;
     border-radius: 14px;
@@ -154,9 +140,7 @@
     font-weight: 600;
   }
 
-  .code-exp {
-    color: #999;
-  }
+  .code-exp { color: #999; }
 
   .code-value {
     font-size: 20px;
@@ -171,5 +155,59 @@
     padding: 10px;
     background: #ffcf00;
     font-weight: 700;
+  }
+}
+
+/* =========================
+   2) 초소형(<=480px) - 더 작은 패딩/폰트
+========================= */
+@media (max-width: 480px) {
+  .card__body { padding: 6px; }
+  .card__title { font-size: 12px; }
+  .card__subtitle { font-size: 10px; }
+}
+/* =========================
+   Footer coupons: mobile overflow fix
+========================= */
+
+/* 쿠폰 영역 자체가 화면 밖으로 안나가게 */
+#footerTools,
+#footerTools * {
+  max-width: 100%;
+}
+
+/* coupon row가 flex/inline-flex여도 줄바꿈 허용 */
+.footer-coupon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;          /* ✅ flex overflow 방지 핵심 */
+  flex-wrap: wrap;       /* ✅ 좁으면 줄바꿈 */
+}
+
+/* 쿠폰 코드가 길어도 말줄임 처리 */
+.footer-coupon .code {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 날짜는 자동 줄바꿈 가능하게 */
+.footer-coupon .until {
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+/* 모바일에선 아예 세로로 쌓아 더 안전하게 */
+@media (max-width: 520px) {
+  .footer-coupon {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-coupon .until {
+    opacity: .85;
   }
 }
