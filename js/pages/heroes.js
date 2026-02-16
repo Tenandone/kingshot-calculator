@@ -1,30 +1,80 @@
-﻿// /js/pages/heroes.js — i18n-ready card list names (완성본)
-// - 카드 이름에 i18n 키 지원: (1) h.title, (2) h.nameKey, (3) `heroes.card.${slug}.name`
-// - I18N가 없으면 폴백: nameKo → name → nameEn → '이름없음'
-// - 언어 변경(i18n:changed) 시 카드 라벨에 즉시 반영 (재렌더 없이)
+﻿// /js/pages/heroes.js — i18n-safe & robust (FULL)
+// ✅ 목표:
+// - 카드 이름 i18n 키 지원 + 누락 방지(초기 I18N 지연 로드 포함)
+// - i18n:changed 리스너 중복 등록 방지(1회만 바인딩)
+// - nameKey 우선순위 개선: (1) h.title/key (2) h.nameKey (3) heroes.card.${slug}.title (4) heroes.card.${slug}.name
+// - 키처럼 보이는 문자열만 i18n key로 취급(일반 텍스트를 key로 착각 방지)
 // - 기존 기능(정렬/배지/유닛아이콘/compact 그리드) 유지
 (function(){
   'use strict';
 
   /* ========= i18n helpers ========= */
-  const hasI18N = () => (window.I18N && typeof I18N.t === 'function');
-  const t = (key, fallback) => hasI18N() ? I18N.t(key, fallback ?? key) : (fallback ?? key);
-  const applyI18N = (root) => { if (hasI18N() && typeof I18N.applyTo === 'function') I18N.applyTo(root || document); };
+  const hasI18N = () => (window.I18N && typeof window.I18N.t === 'function');
+  const t = (key, fallback) => hasI18N() ? window.I18N.t(key, fallback ?? key) : (fallback ?? key);
+  const applyI18N = (root) => {
+    if (hasI18N() && typeof window.I18N.applyTo === 'function') window.I18N.applyTo(root || document);
+  };
 
-  // 현재 DOM에 렌더된 카드 라벨들에 대해, i18n 키 기반으로 텍스트 갱신
-  function bindLiveI18N(root){
+  // "키처럼 보이는 문자열"만 i18n key로 인정 (ex: heroes.xxx.yyy)
+  function isKeyLike(v){
+    const s = String(v || '').trim();
+    if (!s) return false;
+    // 공백이 있으면 일반 문장일 확률 높음
+    if (/\s/.test(s)) return false;
+    // 점(.)이 1개 이상 있고, 너무 짧지 않으며
+    if (!s.includes('.')) return false;
+    // heroes.* 또는 pets.* 등 프로젝트 키 패턴을 넓게 허용
+    if (/^[a-z0-9_]+\.[a-z0-9_.-]+$/i.test(s)) return true;
+    return false;
+  }
+
+  // data-i18n-key 가진 요소 텍스트를 즉시 갱신
+  function refreshI18N(root){
     if (!root || !hasI18N()) return;
-    const refresh = () => {
-      root.querySelectorAll('[data-i18n-key]').forEach(el => {
-        const key = el.getAttribute('data-i18n-key');
-        const fb  = el.getAttribute('data-i18n-fallback') || '';
-        el.textContent = t(key, fb);
-      });
+    root.querySelectorAll('[data-i18n-key]').forEach(el => {
+      const key = el.getAttribute('data-i18n-key') || '';
+      const fb  = el.getAttribute('data-i18n-fallback') || '';
+      if (key) el.textContent = t(key, fb);
+    });
+  }
+
+  // ✅ I18N이 늦게 로드돼도 적용되도록: (1) i18n:changed 1회 바인딩 (2) 폴링으로 준비되면 자동 적용
+  function installI18N(root){
+    if (!root) return;
+
+    // 중복 바인딩 방지
+    if (root.__heroesI18NInstalled) {
+      // 이미 설치되어도, 지금 시점에 I18N 있으면 즉시 갱신
+      applyI18N(root);
+      refreshI18N(root);
+      return;
+    }
+    root.__heroesI18NInstalled = true;
+
+    // 언어 변경 이벤트는 I18N이 없어도 미리 걸어둬도 됨
+    const onChanged = () => {
+      applyI18N(root);
+      refreshI18N(root);
     };
-    // 최초 1회
-    refresh();
-    // 언어가 바뀔 때마다
-    document.addEventListener('i18n:changed', refresh);
+    document.addEventListener('i18n:changed', onChanged);
+
+    // 초기 1회 시도
+    applyI18N(root);
+    refreshI18N(root);
+
+    // I18N이 나중에 로드되는 경우 대비: 짧게 폴링
+    let tries = 0;
+    const maxTries = 40;     // 40 * 100ms = 4초
+    const timer = setInterval(() => {
+      tries++;
+      if (hasI18N()) {
+        applyI18N(root);
+        refreshI18N(root);
+        clearInterval(timer);
+        return;
+      }
+      if (tries >= maxTries) clearInterval(timer);
+    }, 100);
   }
 
   /* ========= Entry ========= */
@@ -33,6 +83,7 @@
     if (!ROOT) return;
 
     ROOT.innerHTML = '<div style="padding:12px;text-align:center;">Loading heroes…</div>';
+
     ensureRarityStyles();   // 등급 배지
     ensureCardStyles();     // 썸네일 배경/오버레이(이미지 톤 유지)
     ensureUnitStyles();     // 이름 왼쪽 병종 아이콘
@@ -56,12 +107,10 @@
         );
 
       renderPlanned(ROOT, list);
-      // 렌더 후 현재 DOM에 i18n 적용 및 live 
-      applyI18N(ROOT);      // 첫 렌더 치환
-bindLiveI18N(ROOT);   // i18n:changed 시 라벨 즉시 갱신
 
-      applyI18N(ROOT);
-      bindLiveI18N(ROOT);
+      // ✅ 렌더 끝나고 "한 번만" 설치 (중복 리스너/중복 apply 방지)
+      installI18N(ROOT);
+
     } catch (e) {
       console.warn(e);
       ROOT.innerHTML = '<div style="padding:12px;text-align:center;color:#d00;">영웅 데이터를 불러오지 못했습니다.</div>';
@@ -70,7 +119,7 @@ bindLiveI18N(ROOT);   // i18n:changed 시 라벨 즉시 갱신
 
   /* ========= Plan: order & limits ========= */
   const PLAN = [
-    { type:'gen', value:'6', label:'Gen6', limit:3 },
+    { type:'gen', value:'6',  label:'Gen6', limit:3 },
     { type:'gen', value:'5',  label:'Gen5', limit:3 },
     { type:'gen', value:'4',  label:'Gen4', limit:3 },
     { type:'gen', value:'3',  label:'Gen3', limit:3 },
@@ -116,35 +165,35 @@ bindLiveI18N(ROOT);   // i18n:changed 시 라벨 즉시 갱신
   }
 
   /* ========= Unit (보/기/궁) ========= */
- function normUnit(v, stats){
-  // 1) v가 일반 문자열일 때 우선 판정
-  const raw = String(v||'').trim();
-  const s = raw.toLowerCase();
-  let code = '';
-  if (s){
-    if (/(궁|활|arch|bow)/.test(s)) code = 'ARC';
-    else if (/(보|검|방패|infan|sword|shield)/.test(s)) code = 'INF';
-    else if (/(기|말|cav|horse|rider)/.test(s)) code = 'CAV';
-  }
+  function normUnit(v, stats){
+    // 1) v가 일반 문자열일 때 우선 판정
+    const raw = String(v||'').trim();
+    const s = raw.toLowerCase();
+    let code = '';
+    if (s){
+      if (/(궁|활|arch|bow)/.test(s)) code = 'ARC';
+      else if (/(보|검|방패|infan|sword|shield)/.test(s)) code = 'INF';
+      else if (/(기|말|cav|horse|rider)/.test(s)) code = 'CAV';
+    }
 
-  // 2) i18n 키라면 번역 결과로 재판정
-  if (!code && s.includes('.') && window.I18N && typeof I18N.t === 'function'){
-    const resolved = String(I18N.t(raw, '') || '').toLowerCase();
-    if (/arch|bow|궁|활/.test(resolved)) code = 'ARC';
-    else if (/infan|sword|shield|보|검|방패/.test(resolved)) code = 'INF';
-    else if (/cav|horse|rider|기|말/.test(resolved)) code = 'CAV';
-  }
+    // 2) i18n 키라면 번역 결과로 재판정
+    if (!code && isKeyLike(raw) && hasI18N()){
+      const resolved = String(t(raw, '') || '').toLowerCase();
+      if (/arch|bow|궁|활/.test(resolved)) code = 'ARC';
+      else if (/infan|sword|shield|보|검|방패/.test(resolved)) code = 'INF';
+      else if (/cav|horse|rider|기|말/.test(resolved)) code = 'CAV';
+    }
 
-  // 3) expedition.stats 라벨에서 보조 추론
-  if (!code && Array.isArray(stats) && stats.length){
-    const joined = stats.map(x => String(x.label||'').toLowerCase()).join(' ');
-    if (/archer/.test(joined)) code = 'ARC';
-    else if (/infantry/.test(joined)) code = 'INF';
-    else if (/cavalry/.test(joined)) code = 'CAV';
-  }
+    // 3) expedition.stats 라벨에서 보조 추론
+    if (!code && Array.isArray(stats) && stats.length){
+      const joined = stats.map(x => String(x.label||'').toLowerCase()).join(' ');
+      if (/archer/.test(joined)) code = 'ARC';
+      else if (/infantry/.test(joined)) code = 'INF';
+      else if (/cavalry/.test(joined)) code = 'CAV';
+    }
 
-  return code;
-}
+    return code;
+  }
   function unitLabel(code){ return ({ARC:'궁병', INF:'보병', CAV:'기병'}[code] || ''); }
   function unitEmoji(code){ return ({ARC:'🏹', INF:'🛡️', CAV:'🐎'}[code] || '❔'); }
   function unitAsset(code){
@@ -229,13 +278,10 @@ bindLiveI18N(ROOT);   // i18n:changed 시 라벨 즉시 갱신
       const section = document.createElement('section');
       section.className = 'section';
       section.innerHTML = `
-        <h2 class="section-title">${p.label}</h2>
-        <div class="heroes-grid"></div>
+        <h2 class="section-title">${escapeHtml(p.label)}</h2>
+        <div class="heroes-grid compact"></div>
       `;
       const grid = section.querySelector('.heroes-grid');
-
-      // ✅ 전 섹션 공통 compact 적용
-      grid.classList.add('compact');
 
       items.forEach(h => {
         used.add(h.slug || h.name || h.nameEn || '');
@@ -244,9 +290,6 @@ bindLiveI18N(ROOT);   // i18n:changed 시 라벨 즉시 갱신
       });
 
       ROOT.appendChild(section);
-      applyI18N(ROOT);      // 첫 렌더 치환
-bindLiveI18N(ROOT);   // 언어 변경 시 라벨만 즉시 갱신
-
     }
 
     if (rendered === 0) {
@@ -293,18 +336,13 @@ bindLiveI18N(ROOT);   // 언어 변경 시 라벨만 즉시 갱신
       const section = document.createElement('section');
       section.className = 'section';
       section.innerHTML = `
-        <h2 class="section-title">${o.label}</h2>
-        <div class="heroes-grid"></div>
+        <h2 class="section-title">${escapeHtml(o.label)}</h2>
+        <div class="heroes-grid compact"></div>
       `;
       const grid = section.querySelector('.heroes-grid');
 
-      // ✅ 전 섹션 공통 compact 적용
-      grid.classList.add('compact');
-
       items.forEach(h => grid.appendChild(cardEl(h)));
       ROOT.appendChild(section);
-      applyI18N(ROOT);
-bindLiveI18N(ROOT);
     }
 
     const leftovers = heroes.filter(h => !used.has(h));
@@ -313,43 +351,52 @@ bindLiveI18N(ROOT);
       section.className = 'section';
       section.innerHTML = `
         <h2 class="section-title">기타</h2>
-        <div class="heroes-grid"></div>
+        <div class="heroes-grid compact"></div>
       `;
       const grid = section.querySelector('.heroes-grid');
-      grid.classList.add('compact'); // ✅ 기타도 compact
       leftovers.forEach(h => grid.appendChild(cardEl(h)));
       ROOT.appendChild(section);
     }
   }
 
- /* ========= Card ========= */
-function cardEl(h){
-  // 1) i18n 키 결정
-  const slug = String(h.slug || '').trim();
-  const nameKey = h.title || h.nameKey || (slug ? `heroes.card.${slug}.name` : '');
+  /* ========= Card ========= */
+  function cardEl(h){
+    const slug = String(h.slug || '').trim();
 
-  // 2) 폴백 텍스트
-  const fallbackName = String(h.nameKo || h.name || h.nameEn || '이름없음');
-  const displayName  = nameKey ? t(nameKey, fallbackName) : fallbackName;
+    // ✅ 카드 이름 i18n 키 우선순위 + 키 판별
+    const candidates = [];
+    if (isKeyLike(h.title)) candidates.push(String(h.title).trim());
+    if (isKeyLike(h.nameKey)) candidates.push(String(h.nameKey).trim());
+    if (slug) {
+      candidates.push(`heroes.card.${slug}.title`);
+      candidates.push(`heroes.card.${slug}.name`);
+    }
+    const nameKey = candidates[0] || '';
 
-  const rarity = normRarity(h.rarity ?? h.grade ?? h.Rarity);
-  const unit   = normUnit(h.unit || h.class || h.role || h.type, h.expedition?.stats);
+    // 폴백 텍스트
+    const fallbackName = String(h.nameKo || h.name || h.nameEn || '이름없음');
+    const displayName  = nameKey ? t(nameKey, fallbackName) : fallbackName;
 
-  const el = document.createElement('a');
-  el.className = 'card';
-  el.href = h.slug ? `#/hero/${encodeURIComponent(h.slug)}` : '#';
+    const rarity = normRarity(h.rarity ?? h.grade ?? h.Rarity);
+    const unit   = normUnit(h.unit || h.class || h.role || h.type, h.expedition?.stats);
+
+    const el = document.createElement('a');
+    el.className = 'card';
+    el.href = slug ? `#/hero/${encodeURIComponent(slug)}` : '#';
 
     // 이미지 폴백
-    const candidates = imageCandidatesForHero(h);
+    const candidatesImg = imageCandidatesForHero(h);
     const img = document.createElement('img');
-    img.alt = displayName; img.loading = 'lazy'; img.decoding = 'async';
+    img.alt = displayName;
+    img.loading = 'lazy';
+    img.decoding = 'async';
     let i = 0;
-    function next(){ img.src = candidates[i++] || candidates[candidates.length-1]; }
-    img.onerror = () => { if (i < candidates.length) next(); else img.onerror = null; };
+    function next(){ img.src = candidatesImg[i++] || candidatesImg[candidatesImg.length-1]; }
+    img.onerror = () => { if (i < candidatesImg.length) next(); else img.onerror = null; };
     next();
 
     // 등급 배지
-    const rarityBadge = rarity ? `<span class="rarity-badge rarity-${rarity}">${rarity}</span>` : '';
+    const rarityBadge = rarity ? `<span class="rarity-badge rarity-${escapeHtml(rarity)}">${escapeHtml(rarity)}</span>` : '';
 
     // 이름 옆 병종 아이콘(아이콘 없으면 이모지 폴백)
     let unitInline = '';
@@ -358,30 +405,28 @@ function cardEl(h){
       const src   = unitAsset(unit);
       const emoji = unitEmoji(unit);
       unitInline = src
-        ? `<img class="unit-inline" src="${src}" alt="${label}"
+        ? `<img class="unit-inline" src="${escapeHtml(src)}" alt="${escapeHtml(label)}"
                 onerror="this.outerHTML='<span class=&quot;unit-inline&quot;>${emoji}</span>';">`
-        : `<span class="unit-inline" aria-label="${label}">${emoji}</span>`;
+        : `<span class="unit-inline" aria-label="${escapeHtml(label)}">${emoji}</span>`;
     }
 
-    // label span에 i18n 키/폴백을 data-*로 저장 → 언어 변경 시 실시간 갱신 가능
+    // label span에 i18n 키/폴백 저장
     const i18nAttrs = nameKey
       ? ` data-i18n-key="${escapeHtml(nameKey)}" data-i18n-fallback="${escapeHtml(fallbackName)}"`
       : '';
 
     el.innerHTML = `
-    ${rarityBadge}
-    <div class="thumb"></div>
-    <div class="name">
-      ${unitInline || ''}
-      <span class="label"
-        ${nameKey ? `data-i18n-key="${escapeHtml(nameKey)}" data-i18n-fallback="${escapeHtml(fallbackName)}"` : ''}>
-        ${nameKey && hasI18N() ? t(nameKey, fallbackName) : escapeHtml(fallbackName)}
-      </span>
-    </div>
-  `;
-  el.querySelector('.thumb').appendChild(img);
-  return el;
-}
+      ${rarityBadge}
+      <div class="thumb"></div>
+      <div class="name">
+        ${unitInline || ''}
+        <span class="label"${i18nAttrs}>${escapeHtml(displayName)}</span>
+      </div>
+    `;
+    el.querySelector('.thumb').appendChild(img);
+
+    return el;
+  }
 
   /* ========= Misc ========= */
   function escapeHtml(s){
@@ -447,7 +492,6 @@ function cardEl(h){
   function ensureUnitStyles(){
     if (document.getElementById('unit-inline-styles')) return;
     const css = `
-      /* 이름 라벨을 아이콘 + 텍스트 가로 정렬 */
       .heroes-grid .card .name{
         display:flex; align-items:center; justify-content:center;
         gap:6px; padding:10px 12px;
@@ -456,7 +500,6 @@ function cardEl(h){
       }
       .heroes-grid.compact .card .name{ font-size:13px; padding:8px 10px; }
 
-      /* 인라인 유닛 아이콘(이미지/이모지 공통) */
       .heroes-grid .card .unit-inline{
         width:18px; height:18px; line-height:18px;
         display:inline-flex; align-items:center; justify-content:center;
@@ -465,7 +508,6 @@ function cardEl(h){
       }
       .heroes-grid.compact .card .unit-inline{ width:16px; height:16px; }
 
-      /* 이미지 타입일 때 */
       .heroes-grid .card img.unit-inline{
         object-fit:contain; background:transparent;
       }
