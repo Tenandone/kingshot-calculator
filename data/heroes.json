@@ -1,4 +1,141 @@
 ﻿[{
+  "name": "Yang",
+  "slug": "yang",
+  "image": "/img/heroes/Yang/img_001.webp",
+  "generation": 6,
+  "unit": "heroes.card.yang.unit",
+  "title": "heroes.card.yang.title",
+  "subtitle": "heroes.card.yang.subtitle",
+  "summary": "heroes.card.yang.summary",
+  "sources": [
+    "heroes.card.yang.source.1",
+    "heroes.card.yang.source.2",
+    "heroes.card.yang.source.3",
+    "heroes.card.yang.source.4"
+  ],
+  "conquest": {
+    "stats": [
+      { "label": "heroes.col.heroAtk", "value": "7,200" },
+      { "label": "heroes.col.heroDef", "value": "5,926" },
+      { "label": "heroes.col.heroHp",  "value": "44,454" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Yang/img_002.webp", "desc": "heroes.yang.conq.s1.desc", "upgrade": "heroes.yang.conq.s1.up" },
+      { "icon": "/img/heroes/Yang/img_003.webp", "desc": "heroes.yang.conq.s2.desc", "upgrade": "heroes.yang.conq.s2.up" },
+      { "icon": "/img/heroes/Yang/img_004.webp", "desc": "heroes.yang.conq.s3.desc", "upgrade": "heroes.yang.conq.s3.up" }
+    ]
+  },
+  "expedition": {
+    "stats": [
+      { "label": "heroes.col.archerAtk", "value": "+540.43%" },
+      { "label": "heroes.col.archerDef", "value": "+540.43%" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Yang/img_005.webp", "desc": "heroes.yang.exp.s1.desc", "upgrade": "heroes.yang.exp.s1.up" },
+      { "icon": "/img/heroes/Yang/img_006.webp", "desc": "heroes.yang.exp.s2.desc", "upgrade": "heroes.yang.exp.s2.up" },
+      { "icon": "/img/heroes/Yang/img_007.webp", "desc": "heroes.yang.exp.s3.desc", "upgrade": "heroes.yang.exp.s3.up" }
+    ]
+  },
+  "exclusiveGear": {
+    "name": "heroes.yang.gear.name",
+    "icon": "/img/heroes/Yang/img_008.webp",
+    "stats": [
+      { "label": "heroes.col.power", "value": "600,750" },
+      { "label": "heroes.col.heroAtk", "value": "1,457" },
+      { "label": "heroes.col.heroDef", "value": "1,201" },
+      { "label": "heroes.col.heroHp", "value": "9,011" },
+      { "label": "heroes.col.guardAtk", "value": "485" },
+      { "label": "heroes.col.guardDef", "value": "400" },
+      { "label": "heroes.col.guardHp", "value": "3,003" },
+      { "label": "heroes.col.archerMight", "value": "+133.50%" },
+      { "label": "heroes.col.archerTroopHp", "value": "+133.50%" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Yang/img_009.webp", "type": "conquest", "desc": "heroes.yang.gear.s1.desc", "upgrade": "heroes.yang.gear.s1.up" },
+      { "icon": "/img/heroes/Yang/img_010.webp", "type": "expedition", "desc": "heroes.yang.gear.s2.desc", "upgrade": "heroes.yang.gear.s2.up" }
+    ]
+  }
+}
+,
+{
+  "name": "Triton",
+  "slug": "triton",
+  "image": "/img/heroes/Triton/img_001.webp",
+  "generation": 6,
+  "unit": "heroes.card.triton.unit",
+  "title": "heroes.card.triton.title",
+  "subtitle": "heroes.card.triton.subtitle",
+  "summary": "heroes.card.triton.summary",
+  "sources": [
+    "heroes.card.triton.source.1",
+    "heroes.card.triton.source.2"
+  ],
+  "conquest": {
+    "stats": [
+      { "label": "heroes.col.heroAtk", "value": "4,546" },
+      { "label": "heroes.col.heroDef", "value": "5,926" },
+      { "label": "heroes.col.heroHp",  "value": "99,910" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Triton/img_002.webp", "desc": "heroes.triton.conq.s1.desc", "upgrade": "heroes.triton.conq.s1.up" },
+      { "icon": "/img/heroes/Triton/img_003.webp", "desc": "heroes.triton.conq.s2.desc", "upgrade": "heroes.triton.conq.s2.up" },
+      { "icon": "/img/heroes/Triton/img_004.webp", "desc": "heroes.triton.conq.s3.desc", "upgrade": "heroes.triton.conq.s3.up" }
+    ]
+  },
+  "expedition": {
+    "stats": [
+      { "label": "heroes.col.infantryAtk", "value": "+540.43%" },
+      { "label": "heroes.col.infantryDef", "value": "+540.43%" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Triton/img_005.webp", "desc": "heroes.triton.exp.s1.desc", "upgrade": "heroes.triton.exp.s1.up" },
+      { "icon": "/img/heroes/Triton/img_006.webp", "desc": "heroes.triton.exp.s2.desc", "upgrade": "heroes.triton.exp.s2.up" },
+      { "icon": "/img/heroes/Triton/img_007.webp", "desc": "heroes.triton.exp.s3.desc", "upgrade": "heroes.triton.exp.s3.up" }
+    ]
+  }
+}
+,
+
+{
+  "name": "Sophia",
+  "slug": "sophia",
+  "image": "/img/heroes/Sophia/img_001.webp",
+  "generation": 6,
+  "unit": "heroes.card.sophia.unit",
+  "title": "heroes.card.sophia.title",
+  "subtitle": "heroes.card.sophia.subtitle",
+  "summary": "heroes.card.sophia.summary",
+  "sources": [
+    "heroes.card.sophia.source.1",
+    "heroes.card.sophia.source.2"
+  ],
+  "conquest": {
+    "stats": [
+      { "label": "heroes.col.heroAtk", "value": "5,926" },
+      { "label": "heroes.col.heroDef", "value": "5,926" },
+      { "label": "heroes.col.heroHp",  "value": "59,274" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Sophia/img_002.webp", "desc": "heroes.sophia.conq.s1.desc", "upgrade": "heroes.sophia.conq.s1.up" },
+      { "icon": "/img/heroes/Sophia/img_003.webp", "desc": "heroes.sophia.conq.s2.desc", "upgrade": "heroes.sophia.conq.s2.up" },
+      { "icon": "/img/heroes/Sophia/img_004.webp", "desc": "heroes.sophia.conq.s3.desc", "upgrade": "heroes.sophia.conq.s3.up" }
+    ]
+  },
+  "expedition": {
+    "stats": [
+      { "label": "heroes.col.cavalryAtk", "value": "+540.43%" },
+      { "label": "heroes.col.cavalryDef", "value": "+540.43%" }
+    ],
+    "skills": [
+      { "icon": "/img/heroes/Sophia/img_005.webp", "desc": "heroes.sophia.exp.s1.desc", "upgrade": "heroes.sophia.exp.s1.up" },
+      { "icon": "/img/heroes/Sophia/img_006.webp", "desc": "heroes.sophia.exp.s2.desc", "upgrade": "heroes.sophia.exp.s2.up" },
+      { "icon": "/img/heroes/Sophia/img_007.webp", "desc": "heroes.sophia.exp.s3.desc", "upgrade": "heroes.sophia.exp.s3.up" }
+    ]
+  }
+}
+,
+
+{
   "name": "Vivian",
   "slug": "vivian",
   "image": "/img/heroes/Vivian/img_001.webp",
