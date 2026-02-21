@@ -56,6 +56,8 @@
         var rest = [];
         params.forEach(function (v, k) { if (k !== 'p') rest.push(k + '=' + encodeURIComponent(v)); });
         var newUrl = p + (rest.length ? (p.indexOf('?') >= 0 ? '&' : '?') + rest.join('&') : '');
+
+        // p 파라미터를 제거한 "정상 경로"로 복원
         history.replaceState(null, '', newUrl);
       }
     })();
@@ -68,19 +70,30 @@
       const sp = new URLSearchParams(location.search);
       const urlLang = sp.get('lang');
       let saved = null; try { saved = localStorage.getItem('lang'); } catch(_){}
+
       const initial = urlLang || saved || 'en';
+
       document.documentElement.setAttribute('lang', initial);
-      if (window.I18N?.init) I18N.init({ lang: initial, supported: ['ko','en','ja','zh-CN','zh-TW'] });
+
+      // i18n init
+      if (window.I18N?.init) {
+        I18N.init({ lang: initial, supported: ['ko','en','ja','zh-CN','zh-TW'] });
+      }
     })();
 
+    // ✅ SPA 언어 변경 (새로고침 없음)
     async function applyLang(lang){
       if (window.I18N?.setLang) await I18N.setLang(lang);
+
       document.documentElement.setAttribute('lang', lang);
       try { localStorage.setItem('lang', lang); } catch(_){}
 
-      const url = new URL(window.location.href);
-      url.searchParams.set('lang', lang);
-      window.location.href = url.toString(); // 페이지 리로드 방식
+      // ✅ URL에 lang만 유지 (리로드 X)
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('lang', lang);
+        history.replaceState(null, '', url.toString());
+      } catch(_) {}
     }
   </script>
 

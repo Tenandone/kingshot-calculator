@@ -1,0 +1,2092 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title data-i18n="hog.meta.title">킹샷 최강영주(Hall of Governors) 가이드 · 스테이지/점수/보상/팁</title>
+  <meta name="description"
+        content="Kingshot Hall of Governors(최강영주) 가이드: 1~5회차 스테이지별 점수표, 아마데우스/힐데 보상, 영주장비/보석(Charm) 업그레이드 점수, TOP10/100 조건, 소과금/과금 운영 팁까지 한 번에 정리."
+        data-i18n-attr="content:hog.meta.desc" />
+
+  <style>
+    *{box-sizing:border-box}
+
+    :root{
+      --brand:#0b57d0;
+      --text:#111827;
+      --muted:#6b7280;
+
+      --bg:#ffffff;
+      --surface:#ffffff;
+
+      --border:#e5e7eb;
+      --chip:#f3f4f6;
+
+      --shadow:0 10px 25px rgba(0,0,0,.06);
+      --radius:16px;
+
+      --ok-bg:#ecfdf5;
+      --warn-bg:#fff7ed;
+      --note-bg:#f8fafc;
+
+      --table-head:#f3f4f6;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+
+        --bg:#0b0b0b;
+        --surface:#121212;
+
+        --border:#2a2a2a;
+        --chip:#1b1b1b;
+
+        --shadow:0 10px 25px rgba(0,0,0,.35);
+
+        --ok-bg:#0e1a13;
+        --warn-bg:#1a140c;
+        --note-bg:#141414;
+
+        --table-head:#1b1b1b;
+      }
+    }
+
+    html,body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:15px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,
+            "Noto Sans KR","Noto Sans JP","Noto Sans SC","Noto Sans TC",Arial,sans-serif;
+    }
+    a{color:var(--brand);text-decoration:none;font-weight:900}
+    a:hover{text-decoration:underline}
+    .muted{color:var(--muted)}
+
+    /* ===== Topbar (Back / Language) ===== */
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      background:var(--surface);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar-inner{
+      max-width:1100px;margin:0 auto;
+      padding:10px 16px;
+      display:flex;justify-content:space-between;align-items:center;
+      gap:12px;
+    }
+    .backlink{
+      font:900 14px/1 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,sans-serif;
+      color:var(--brand);
+      white-space:nowrap;
+    }
+    .langbox{display:flex;align-items:center;gap:10px;white-space:nowrap}
+    .langbox label{font-size:14px;color:var(--muted);font-weight:800}
+    select{
+      padding:8px 10px;border-radius:10px;
+      border:1px solid var(--border);
+      background:var(--surface);color:var(--text);
+      font:800 14px/1 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,sans-serif;
+      outline:none;
+    }
+
+    /* ===== Layout ===== */
+    .wrap{max-width:1100px;margin:0 auto;padding:16px}
+    h1{
+      margin:12px 0 8px;
+      font-size:clamp(22px,3vw,38px);
+      letter-spacing:-0.02em;
+      line-height:1.2;
+    }
+    .meta{
+      display:flex;gap:10px;flex-wrap:wrap;
+      margin:6px 0 16px;
+      font-size:13px;color:var(--muted);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+    @media (min-width: 980px){
+      .grid{grid-template-columns:1.3fr .7fr}
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--surface);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note-bg);
+    }
+    .callout.ok{background:var(--ok-bg)}
+    .callout.warn{background:var(--warn-bg)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0;padding-left:18px}
+    .callout li{margin:6px 0}
+
+    /* ===== TOC ===== */
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+    .toc a{color:var(--text);font-weight:900}
+    .toc a:hover{color:var(--brand)}
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+
+    /* ===== Sections ===== */
+    section.block{
+      margin-top:14px;
+      border:1px solid var(--border);
+      background:var(--surface);
+      border-radius:var(--radius);
+      padding:16px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:18px;
+      font-weight:1000;
+      letter-spacing:-0.02em;
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note-bg);
+      padding:10px 12px;
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+
+    /* ===== Tables ===== */
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--surface);
+      margin:10px 0;
+    }
+    thead th{
+      background:var(--table-head);
+      font-size:13px;
+      font-weight:1000;
+      text-align:left;
+      padding:10px 10px;
+      border-bottom:1px solid var(--border);
+    }
+    tbody td{
+      padding:9px 10px;
+      border-bottom:1px solid var(--border);
+      font-size:13px;
+      vertical-align:top;
+    }
+    tbody tr:last-child td{border-bottom:0}
+    .td-num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+    .tag{
+      display:inline-flex;align-items:center;
+      height:26px;padding:0 10px;border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--chip);
+      font-size:12px;font-weight:1000;
+    }
+
+    .hr{border:0;border-top:1px solid var(--border);margin:16px 0}
+    .foot{font-size:12.5px;color:var(--muted);margin:10px 0 6px}
+    .small{font-size:13px}
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a id="backLink" class="backlink" href="/guides" aria-label="Back to guides"></a>
+
+      <div class="langbox">
+        <label for="langSwitcher" id="langLabel">Language</label>
+        <select id="langSwitcher" aria-label="Language">
+          <option value="ko">한국어</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+          <option value="zh-CN">简体中文</option>
+          <option value="zh-TW">繁體中文</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1 data-i18n="hog.h1">킹샷 최강영주(Hall of Governors) 가이드</h1>
+    <div class="meta">
+      <span class="tag" data-i18n="hog.meta.tag1">2주 단위 이벤트</span>
+      <span class="tag" data-i18n="hog.meta.tag2">스테이지별 점수표</span>
+      <span class="tag" data-i18n="hog.meta.tag3">TOP10/100 조건</span>
+      <span class="tag" data-i18n="hog.meta.tag4">소과금/과금 팁</span>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="callout ok">
+          <h3 data-i18n="hog.quick.h3">이 가이드 한 줄 요약</h3>
+          <ul>
+            <li data-i18n="hog.quick.li1">최강영주(Hall of Governors)는 보통 2주 간격으로 열리며, 날짜/구성은 서버마다 달라질 수 있습니다.</li>
+            <li data-i18n="hog.quick.li2">아마데우스(시즌1)는 “완주”로 얻는 게 아니라, 누적 점수 TOP10 같은 “순위 조건”이 핵심입니다.</li>
+            <li data-i18n="hog.quick.li3">고득점은 “가속/조각/망치/룰렛”을 미리 모아 한 번에 쓰는 방식이 가장 효율적입니다.</li>
+          </ul>
+        </div>
+
+        <div class="callout warn" style="margin-top:12px">
+          <h3 data-i18n="hog.warn.h3">자주 하는 오해</h3>
+          <p data-i18n="hog.warn.p1">많은 사람이 “이벤트 미션만 다 하면 아마데우스가 나온다”고 생각하지만, 실제로는 순위 보상(예: TOP10)에 들어야 해금되는 시즌이 있습니다.</p>
+        </div>
+      </div>
+
+      <nav class="card toc" aria-label="Table of contents">
+        <h2 data-i18n="hog.toc.h2">목차</h2>
+        <ul>
+          <li><a href="#sec-1" data-i18n="hog.toc.1">1) 이벤트 개요 · 일정 · 시즌 영웅</a></li>
+          <li><a href="#sec-2" data-i18n="hog.toc.2">2) 점수 획득 방식(요약)</a></li>
+          <li><a href="#sec-3" data-i18n="hog.toc.3">3) 1~5회차 스테이지/점수표</a></li>
+          <li><a href="#sec-4" data-i18n="hog.toc.4">4) 영주 장비 업그레이드 점수표</a></li>
+          <li><a href="#sec-5" data-i18n="hog.toc.5">5) 영주 보석(Charm) 업그레이드 점수표</a></li>
+          <li><a href="#sec-6" data-i18n="hog.toc.6">6) 시즌 영웅 해금 조건(TOP10/100)</a></li>
+          <li><a href="#sec-7" data-i18n="hog.toc.7">7) 운영 Q&A + 소과금/과금 팁</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <section id="sec-1" class="block">
+      <h2 data-i18n="hog.sec1.h2">1) 이벤트 개요 · 일정 · 시즌 영웅</h2>
+      <p data-i18n="hog.sec1.p1">
+        Hall of Governors(최강영주)는 킹샷에서 2주 단위로 열리는 대표 성장 이벤트입니다.
+        기간 동안 스테이지별 미션을 수행해 점수를 쌓고, 누적 점수로 마일스톤 보상을 받습니다.
+      </p>
+
+      <ul>
+        <li data-i18n="hog.sec1.li1"><b>1회차</b>: 왕국 생성 후 <b>6일차</b> 시작(서버 기준). 시즌 영웅: <b>Amadeus</b></li>
+        <li data-i18n="hog.sec1.li2"><b>2회차</b>: 1회차로부터 약 2주 후. 시즌 영웅: <b>Amadeus</b></li>
+        <li data-i18n="hog.sec1.li3"><b>3회차</b>: 보통 2세대 구간(서버에 따라 1세대일 수도). 시즌 영웅: <b>Amadeus</b>, 7일 진행</li>
+        <li data-i18n="hog.sec1.li4"><b>4~5회차</b>: 동일한 미션 구성. 시즌 영웅: <b>Hilde</b>(보통 TOP100 순위 보상)</li>
+      </ul>
+
+      <div class="callout">
+        <h3 data-i18n="hog.sec1.note.h3">주의</h3>
+        <p data-i18n="hog.sec1.note.p1">서버/버전/운영 정책에 따라 스테이지 순서나 항목, 점수는 조정될 수 있습니다. 게임 내 공지를 최우선으로 확인하세요.</p>
+      </div>
+    </section>
+
+    <section id="sec-2" class="block">
+      <h2 data-i18n="hog.sec2.h2">2) 점수 획득 방식(요약)</h2>
+      <p data-i18n="hog.sec2.p1">대표적인 점수 항목은 다음과 같습니다.</p>
+      <ul>
+        <li data-i18n="hog.sec2.li1">건물 업그레이드(건설 전투력 상승)</li>
+        <li data-i18n="hog.sec2.li2">기술 연구(연구 전투력 상승)</li>
+        <li data-i18n="hog.sec2.li3">병력 훈련/승급(병력 전투력 상승)</li>
+        <li data-i18n="hog.sec2.li4">가속 아이템 사용(회차/스테이지에 따라 반영)</li>
+        <li data-i18n="hog.sec2.li5">영웅 승급(조각 사용)</li>
+        <li data-i18n="hog.sec2.li6">영웅 장비 제작망치/강화 XP/전용장비 재료(해당 스테이지에서 고득점)</li>
+        <li data-i18n="hog.sec2.li7">영웅 룰렛(루트바/과금이 아니라 “게임 내 룰렛”을 의미)</li>
+        <li data-i18n="hog.sec2.li8">영주 장비 평점 증가, 영주 보석(Charm) 평점 증가(해당 회차)</li>
+      </ul>
+    </section>
+
+    <section id="sec-3" class="block">
+      <h2 data-i18n="hog.sec3.h2">3) 1~5회차 스테이지/점수표</h2>
+
+      <details open>
+        <summary data-i18n="hog.sec3.d1.sum">1회차 Hall of Governors (시즌 영웅: Amadeus)</summary>
+
+        <h3 data-i18n="hog.sec3.d1.s1">Stage 1: City Construction</h3>
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="hog.table.task">Task</th>
+              <th class="td-num" data-i18n="hog.table.points">Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td data-i18n="hog.d1.s1.t1">Raise 1 Power through Construction</td><td class="td-num">45</td></tr>
+            <tr><td data-i18n="hog.d1.s1.t2">Raise 1 Power through Research</td><td class="td-num">45</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d1.s2">Stage 2: Hero Development</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d1.s2.t1">Play Hero Roulette once</td><td class="td-num">90,000</td></tr>
+            <tr><td data-i18n="hog.d1.s2.t2">Use 1 Rare Hero Shard to ascend Heroes</td><td class="td-num">4,000</td></tr>
+            <tr><td data-i18n="hog.d1.s2.t3">Use 1 Epic Hero Shard to ascend Heroes</td><td class="td-num">14,000</td></tr>
+            <tr><td data-i18n="hog.d1.s2.t4">Use 1 Mythic Hero Shard to ascend Heroes</td><td class="td-num">35,000</td></tr>
+            <tr><td data-i18n="hog.d1.s2.g1">Gather 50 Bread in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d1.s2.g2">Gather 50 Wood in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d1.s2.g3">Gather 10 Stone in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d1.s2.g4">Gather 2 Iron in the Wilderness</td><td class="td-num">3</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.trainTitle">Stage 3: Train Troops (points per troop)</h3>
+        <div class="small muted" data-i18n="hog.sec3.trainNote">각 티어 병력 1명 훈련 기준 점수입니다.</div>
+        <table>
+          <thead><tr><th data-i18n="hog.table.troopLevel">Troop Level</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+            <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+            <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+            <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+            <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+            <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+            <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+            <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+            <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+            <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d1.s4">Stage 4: Beast Slay</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d1.s4.t1">Kill a Level 1 to Level 30 Beast</td><td class="td-num">30,000</td></tr>
+            <tr><td data-i18n="hog.d1.s4.t2">Call a rally and hunt down 1 Terror</td><td class="td-num">90,000</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d1.s5">Stage 5: Power Boost</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d1.s5.t1">Raise 1 Power through Construction</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d1.s5.t2">Raise 1 Power through Research</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d1.s5.t3">Raise 1 Power by training/promoting troops</td><td class="td-num">20</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <details>
+        <summary data-i18n="hog.sec3.d2.sum">2회차 Hall of Governors (시즌 영웅: Amadeus)</summary>
+
+        <h3 data-i18n="hog.sec3.d2.s1">Stage 1: City Construction</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d2.s1.t1">Raise 1 Power through Construction</td><td class="td-num">45</td></tr>
+            <tr><td data-i18n="hog.d2.s1.t2">Raise 1 Power through Research</td><td class="td-num">45</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d2.s2">Stage 2: Hero Development</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d2.s2.t1">Play Hero Roulette</td><td class="td-num">90,000</td></tr>
+            <tr><td data-i18n="hog.d2.s2.t2">Use 1 Rare Hero Shard to ascend Heroes</td><td class="td-num">4,000</td></tr>
+            <tr><td data-i18n="hog.d2.s2.t3">Use 1 Epic Hero Shard to ascend Heroes</td><td class="td-num">14,000</td></tr>
+            <tr><td data-i18n="hog.d2.s2.t4">Use 1 Mythic Hero Shard to ascend Heroes</td><td class="td-num">35,000</td></tr>
+            <tr><td data-i18n="hog.d2.s2.g1">Gather 50 Bread in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d2.s2.g2">Gather 50 Wood in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d2.s2.g3">Gather 10 Stone in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d2.s2.g4">Gather 2 Iron in the Wilderness</td><td class="td-num">3</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.trainTitle">Stage 3: Train Troops (points per troop)</h3>
+        <div class="small muted" data-i18n="hog.sec3.trainNote">각 티어 병력 1명 훈련 기준 점수입니다.</div>
+        <table>
+          <thead><tr><th data-i18n="hog.table.troopLevel">Troop Level</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+            <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+            <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+            <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+            <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+            <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+            <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+            <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+            <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+            <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d2.s4">Stage 4: Gather Resources</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d2.s4.g1">Gather 50 Bread in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d2.s4.g2">Gather 50 Wood in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d2.s4.g3">Gather 10 Stone in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d2.s4.g4">Gather 2 Iron in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d2.s4.t5">Raise 1 Power through Research</td><td class="td-num">45</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d2.s5">Stage 5: Power Boost</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d2.s5.t1">Use 1 Hero Gear Forgehammer(s)</td><td class="td-num">50,000</td></tr>
+            <tr><td data-i18n="hog.d2.s5.t2">Use 100 Hero Gear Enhancement XP</td><td class="td-num">30,000</td></tr>
+            <tr><td data-i18n="hog.d2.s5.t3">Use 1 Widget for Hero Exclusive Gear</td><td class="td-num">100,000</td></tr>
+            <tr><td data-i18n="hog.d2.s5.t4">Raise 1 Power through Construction</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d2.s5.t5">Raise 1 Power through Research</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d2.s5.t6">Raise 1 Power by training/promoting troops</td><td class="td-num">20</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d2.s6">Stage 6: Governor Gear Upgrade</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d2.s6.t1">Raise Governor Gear max score by 1</td><td class="td-num">500</td></tr>
+            <tr><td data-i18n="hog.d2.s6.t2">Raise 1 Power through Construction</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d2.s6.t3">Raise 1 Power through Research</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d2.s6.t4">Raise 1 Power by training/promoting troops</td><td class="td-num">20</td></tr>
+          </tbody>
+        </table>
+
+        <div class="small muted" data-i18n="hog.sec3.d2.gearHint">영주 장비 희귀도별 “레벨업 점수”는 아래 4번 섹션 표를 참고하세요.</div>
+      </details>
+
+      <details>
+        <summary data-i18n="hog.sec3.d3.sum">3회차 Hall of Governors (시즌 영웅: Amadeus, 보통 7일)</summary>
+
+        <h3 data-i18n="hog.sec3.d3.s1">Stage 1: Power Boost</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d3.s1.t1">Raise 1 Power through Construction</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d3.s1.t2">Raise 1 Power through Research</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d3.s1.t3">Raise 1 Power by training/promoting troops</td><td class="td-num">20</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d3.s2">Stage 2: Hero Development</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d3.s2.t1">Play Hero Roulette</td><td class="td-num">90,000</td></tr>
+            <tr><td data-i18n="hog.d3.s2.t2">Use 1 Rare Hero Shard to ascend Heroes</td><td class="td-num">4,000</td></tr>
+            <tr><td data-i18n="hog.d3.s2.t3">Use 1 Epic Hero Shard to ascend Heroes</td><td class="td-num">14,000</td></tr>
+            <tr><td data-i18n="hog.d3.s2.t4">Use 1 Mythic Hero Shard to ascend Heroes</td><td class="td-num">35,000</td></tr>
+            <tr><td data-i18n="hog.d3.s2.g1">Gather 50 Bread in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d3.s2.g2">Gather 50 Wood in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d3.s2.g3">Gather 10 Stone in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d3.s2.g4">Gather 2 Iron in the Wilderness</td><td class="td-num">3</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.trainTitle">Stage 3: Train Troops (points per troop)</h3>
+        <div class="small muted" data-i18n="hog.sec3.trainNote">각 티어 병력 1명 훈련 기준 점수입니다.</div>
+        <table>
+          <thead><tr><th data-i18n="hog.table.troopLevel">Troop Level</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+            <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+            <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+            <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+            <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+            <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+            <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+            <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+            <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+            <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d3.s4">Stage 4: Gather Resources</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d3.s4.g1">Gather 50 Bread in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d3.s4.g2">Gather 50 Wood in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d3.s4.g3">Gather 10 Stone in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d3.s4.g4">Gather 2 Iron in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d3.s4.t5">Raise 1 Power through Research</td><td class="td-num">45</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d3.s5">Stage 5: Power Boost</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d3.s5.t1">Use 1 Hero Gear Forgehammer(s)</td><td class="td-num">50,000</td></tr>
+            <tr><td data-i18n="hog.d3.s5.t2">Use 1 Widget for Hero Exclusive Gear</td><td class="td-num">100,000</td></tr>
+            <tr><td data-i18n="hog.d3.s5.t3">Raise 1 Power through Construction</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d3.s5.t4">Raise 1 Power through Research</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d3.s5.t5">Raise 1 Power by training/promoting troops</td><td class="td-num">20</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d3.s6">Stage 6: Governor Gear Upgrade</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d3.s6.t1">Raise Governor Gear max score by 1</td><td class="td-num">500</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d3.s7">Stage 7: Hero Development (Speedups)</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d3.s7.t1">Use 1 Rare Hero Shard to ascend Heroes</td><td class="td-num">4,000</td></tr>
+            <tr><td data-i18n="hog.d3.s7.t2">Use 1 Epic Hero Shard to ascend Heroes</td><td class="td-num">14,000</td></tr>
+            <tr><td data-i18n="hog.d3.s7.t3">Use 1 Mythic Hero Shard to ascend Heroes</td><td class="td-num">35,000</td></tr>
+            <tr><td data-i18n="hog.d3.s7.t4">Use 1m of Speedups for Construction</td><td class="td-num">300</td></tr>
+            <tr><td data-i18n="hog.d3.s7.t5">Use 1m of Speedups for Research</td><td class="td-num">300</td></tr>
+            <tr><td data-i18n="hog.d3.s7.t6">Use 1m of Speedups for Troop Training or Promotion</td><td class="td-num">300</td></tr>
+          </tbody>
+        </table>
+
+        <div class="small muted" data-i18n="hog.sec3.d3.gearHint">영주 장비 희귀도별 “레벨업 점수”는 아래 4번 섹션 표를 참고하세요.</div>
+      </details>
+
+      <details>
+        <summary data-i18n="hog.sec3.d45.sum">4~5회차 Hall of Governors (시즌 영웅: Hilde)</summary>
+
+        <h3 data-i18n="hog.sec3.d45.s1">Stage 1: Power Boost</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d45.s1.t1">Raise 1 Power through Construction</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d45.s1.t2">Raise 1 Power through Research</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d45.s1.t3">Raise 1 Power by training/promoting troops</td><td class="td-num">20</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d45.s2">Stage 2: Hero Development</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d45.s2.t1">Play Hero Roulette</td><td class="td-num">90,000</td></tr>
+            <tr><td data-i18n="hog.d45.s2.t2">Use 1 Rare Hero Shard to ascend Heroes</td><td class="td-num">4,000</td></tr>
+            <tr><td data-i18n="hog.d45.s2.t3">Use 1 Epic Hero Shard to ascend Heroes</td><td class="td-num">14,000</td></tr>
+            <tr><td data-i18n="hog.d45.s2.t4">Use 1 Mythic Hero Shard to ascend Heroes</td><td class="td-num">35,000</td></tr>
+            <tr><td data-i18n="hog.d45.s2.g1">Gather 50 Bread in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d45.s2.g2">Gather 50 Wood in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d45.s2.g3">Gather 10 Stone in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d45.s2.g4">Gather 2 Iron in the Wilderness</td><td class="td-num">3</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.trainTitle">Stage 3: Train Troops (points per troop)</h3>
+        <div class="small muted" data-i18n="hog.sec3.trainNote">각 티어 병력 1명 훈련 기준 점수입니다.</div>
+        <table>
+          <thead><tr><th data-i18n="hog.table.troopLevel">Troop Level</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+            <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+            <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+            <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+            <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+            <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+            <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+            <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+            <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+            <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d45.s4">Stage 4: Charm Upgrade</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d45.s4.t1">Raise Governor Gear Charm max score by 1</td><td class="td-num">1,000</td></tr>
+            <tr><td data-i18n="hog.d45.s4.g1">Gather 50 Bread in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d45.s4.g2">Gather 50 Wood in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d45.s4.g3">Gather 10 Stone in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d45.s4.g4">Gather 2 Iron in the Wilderness</td><td class="td-num">3</td></tr>
+            <tr><td data-i18n="hog.d45.s4.t2">Raise 1 Power through Research</td><td class="td-num">45</td></tr>
+          </tbody>
+        </table>
+
+        <div class="small muted" data-i18n="hog.sec3.d45.charmHint">보석(Charm) 레벨별 “레벨업 점수”는 아래 5번 섹션 표를 참고하세요.</div>
+
+        <h3 data-i18n="hog.sec3.d45.s5">Stage 5: Power Boost</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d45.s5.t1">Use 1 Hero Gear Forgehammer(s)</td><td class="td-num">50,000</td></tr>
+            <tr><td data-i18n="hog.d45.s5.t2">Use 1 Widget for Hero Exclusive Gear</td><td class="td-num">100,000</td></tr>
+            <tr><td data-i18n="hog.d45.s5.t3">Raise 1 Power through Construction</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d45.s5.t4">Raise 1 Power through Research</td><td class="td-num">30</td></tr>
+            <tr><td data-i18n="hog.d45.s5.t5">Raise 1 Power by training/promoting troops</td><td class="td-num">20</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d45.s6">Stage 6: Governor Gear Upgrade</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d45.s6.t1">Raise Governor Gear max score by 1</td><td class="td-num">500</td></tr>
+          </tbody>
+        </table>
+
+        <h3 data-i18n="hog.sec3.d45.s7">Stage 7: Hero Development (Speedups)</h3>
+        <table>
+          <thead><tr><th data-i18n="hog.table.task">Task</th><th class="td-num" data-i18n="hog.table.points">Points</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hog.d45.s7.t1">Use 1 Rare Hero Shard to ascend Heroes</td><td class="td-num">4,000</td></tr>
+            <tr><td data-i18n="hog.d45.s7.t2">Use 1 Epic Hero Shard to ascend Heroes</td><td class="td-num">14,000</td></tr>
+            <tr><td data-i18n="hog.d45.s7.t3">Use 1 Mythic Hero Shard to ascend Heroes</td><td class="td-num">35,000</td></tr>
+            <tr><td data-i18n="hog.d45.s7.t4">Use 1m of Speedups for Construction</td><td class="td-num">300</td></tr>
+            <tr><td data-i18n="hog.d45.s7.t5">Use 1m of Speedups for Research</td><td class="td-num">300</td></tr>
+            <tr><td data-i18n="hog.d45.s7.t6">Use 1m of Speedups for Troop Training or Promotion</td><td class="td-num">300</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <div class="callout">
+        <h3 data-i18n="hog.sec3.tip.h3">운영 팁(공통)</h3>
+        <ul>
+          <li data-i18n="hog.sec3.tip.li1">점수 스테이지에 맞춰 “해당 재화만” 집중 사용하면 같은 재화로도 점수가 더 잘 나옵니다.</li>
+          <li data-i18n="hog.sec3.tip.li2">연맹총동원/철야근무 같은 이벤트와 겹치면 점수 효율이 더 좋아질 수 있습니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sec-4" class="block">
+      <h2 data-i18n="hog.sec4.h2">4) 영주 장비 업그레이드 점수표</h2>
+      <p class="muted small" data-i18n="hog.sec4.p1">회차/스테이지에 따라 “영주 장비 평점(Score)” 증가가 점수로 잡히는 구간이 있습니다.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="hog.sec4.th1">Governor Gear Rarity</th>
+            <th class="td-num" data-i18n="hog.sec4.th2">Level Up Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Uncommon</td><td class="td-num">1,125</td></tr>
+          <tr><td>Uncommon (1-Star)</td><td class="td-num">1,875</td></tr>
+          <tr><td>Rare</td><td class="td-num">3,000</td></tr>
+          <tr><td>Rare (1-Star)</td><td class="td-num">4,500</td></tr>
+          <tr><td>Rare (2-Star)</td><td class="td-num">5,100</td></tr>
+          <tr><td>Rare (3-Star)</td><td class="td-num">5,400</td></tr>
+          <tr><td>Epic</td><td class="td-num">3,230</td></tr>
+          <tr><td>Epic (1-Star)</td><td class="td-num">3,230</td></tr>
+          <tr><td>Epic (2-Star)</td><td class="td-num">3,225</td></tr>
+          <tr><td>Epic (3-Star)</td><td class="td-num">3,225</td></tr>
+          <tr><td>Epic T1</td><td class="td-num">3,440</td></tr>
+          <tr><td>Epic T1 (1-Star)</td><td class="td-num">3,440</td></tr>
+          <tr><td>Epic T1 (2-Star)</td><td class="td-num">4,085</td></tr>
+          <tr><td>Epic T1 (3-Star)</td><td class="td-num">4,085</td></tr>
+          <tr><td>Mythic</td><td class="td-num">6,250</td></tr>
+          <tr><td>Mythic (1-Star)</td><td class="td-num">6,250</td></tr>
+          <tr><td>Mythic (2-Star)</td><td class="td-num">6,250</td></tr>
+          <tr><td>Mythic (3-Star)</td><td class="td-num">6,250</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sec-5" class="block">
+      <h2 data-i18n="hog.sec5.h2">5) 영주 보석(Charm) 업그레이드 점수표</h2>
+      <p class="muted small" data-i18n="hog.sec5.p1">4~5회차에 보석(Charm) 평점 증가가 직접 점수로 잡히는 스테이지가 나옵니다.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="hog.sec5.th1">Governor Charm Level</th>
+            <th class="td-num" data-i18n="hog.sec5.th2">Level Up Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td class="td-num">625</td></tr>
+          <tr><td>2</td><td class="td-num">1,250</td></tr>
+          <tr><td>3</td><td class="td-num">3,125</td></tr>
+          <tr><td>4</td><td class="td-num">8,750</td></tr>
+          <tr><td>5</td><td class="td-num">11,250</td></tr>
+          <tr><td>6</td><td class="td-num">12,500</td></tr>
+          <tr><td>7</td><td class="td-num">12,500</td></tr>
+          <tr><td>8</td><td class="td-num">13,000</td></tr>
+          <tr><td>9</td><td class="td-num">14,000</td></tr>
+          <tr><td>10</td><td class="td-num">15,000</td></tr>
+          <tr><td>11</td><td class="td-num">16,000</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sec-6" class="block">
+      <h2 data-i18n="hog.sec6.h2">6) 시즌 영웅 해금 조건(TOP10/100)</h2>
+
+      <div class="callout warn">
+        <h3 data-i18n="hog.sec6.h3a">Amadeus(시즌1) 해금</h3>
+        <p data-i18n="hog.sec6.p1">
+          아마데우스는 “미션 완주”로 자동 획득이 아니라,
+          이벤트 기간 누적 점수 <b>TOP10</b> 같은 조건을 만족해야 해금되는 시즌이 있습니다.
+        </p>
+      </div>
+
+      <div class="callout" style="margin-top:12px">
+        <h3 data-i18n="hog.sec6.h3b">Hilde(4~5회차) 보상</h3>
+        <p data-i18n="hog.sec6.p2">4~5회차는 Hilde가 시즌 영웅으로 등장하며, 보통 <b>TOP100</b> 순위 보상으로 조각을 받을 수 있습니다.</p>
+      </div>
+
+      <p class="muted small" data-i18n="hog.sec6.p3">정확한 컷/보상 구조는 서버마다 다를 수 있으니, 반드시 게임 내 공지를 기준으로 확인하세요.</p>
+    </section>
+
+    <section id="sec-7" class="block">
+      <h2 data-i18n="hog.sec7.h2">7) 운영 Q&A + 소과금/과금 팁</h2>
+
+      <details open>
+        <summary data-i18n="hog.qa.sum">최강영주 Q&A 요약(실전용)</summary>
+
+        <h3 data-i18n="hog.qa.q1">Q1. 최강영주 이벤트는 언제 열리나요?</h3>
+        <p data-i18n="hog.qa.a1">A. 보통 연맹총동원 이후, 약 2주 간격으로 열립니다. 일정은 서버 상황에 따라 유동적일 수 있으니 게임 내 공지를 확인하세요.</p>
+
+        <h3 data-i18n="hog.qa.q2">Q2. 참여 조건은 무엇인가요?</h3>
+        <p data-i18n="hog.qa.a2">A. 서버 내 모든 영주는 자동으로 참여합니다. 기간 동안 획득한 점수로 순위가 정해지고 보상이 지급됩니다.</p>
+
+        <h3 data-i18n="hog.qa.q3">Q3. 점수는 어떻게 획득하나요?</h3>
+        <p data-i18n="hog.qa.a3">A. 병력 훈련, 건물 업그레이드, 기술 연구, 가속 사용, 영웅 승급, 제작망치, 룰렛, 영주 장비/보석 평점 증가 등으로 획득합니다. (스테이지에 따라 유효 항목이 달라짐)</p>
+
+        <h3 data-i18n="hog.qa.q4">Q4. 고득점을 위한 준비 방법은?</h3>
+        <ul>
+          <li data-i18n="hog.qa.a4.li1">속도 아이템과 자원을 사전에 충분히 모아두고, 이벤트 시작일에 집중해서 사용하세요.</li>
+          <li data-i18n="hog.qa.a4.li2">병력/기술 이벤트와 시기가 겹치면 점수 효율이 좋아집니다.</li>
+          <li data-i18n="hog.qa.a4.li3">건설/훈련/연구 가속, 제작망치, 룰렛(다이아&티켓)은 미리 준비해두는 것이 좋습니다.</li>
+        </ul>
+
+        <h3 data-i18n="hog.qa.q5">Q5. 어떤 보상이 주어지나요?</h3>
+        <p data-i18n="hog.qa.a5">A. 순위에 따라 다이아, 속도 아이템, 영웅 조각 등이 지급됩니다. 영주 장비 재료는 보상에 포함되지 않는 경우가 많습니다.</p>
+
+        <h3 data-i18n="hog.qa.q6">Q6. TOP10에 필요한 점수는 어느 정도인가요?</h3>
+        <p data-i18n="hog.qa.a6">A. 서버마다 차이가 있지만, TOP10 평균 컷이 약 5억 점 이상인 경우가 많습니다. 신규 서버일수록 경쟁이 매우 치열한 편입니다.</p>
+
+        <h3 data-i18n="hog.qa.q7">Q7. 무조건 상위권을 노려야 하나요?</h3>
+        <p data-i18n="hog.qa.a7">
+          A. 반드시 그렇진 않습니다. 시즌1 아마데우스가 보상으로 주어지는 구간을 제외하면,
+          이후 세대 영웅들은 공용 조각으로도 승급이 가능하므로 무리하게 순위를 노리기보다 기본 보상을 안정적으로 가져가는 전략이 더 효율적일 수 있습니다.
+        </p>
+
+        <h3 data-i18n="hog.qa.q8">Q8. 사전 준비해야 할 다이아는 어느 정도인가요?</h3>
+        <p data-i18n="hog.qa.a8">A. 최강영주와 영웅 룰렛이 함께 열리는 경우가 많아, 최소 162,000 다이아 이상을 준비해두면 운영이 훨씬 편합니다.</p>
+      </details>
+
+      <div class="callout ok">
+        <h3 data-i18n="hog.spend.h3">과금할 마음이 있다면(핵심)</h3>
+        <p data-i18n="hog.spend.p1">
+          과금을 하기로 마음먹었다면, 시즌1 아마데우스 보상은 가능하면 꼭 챙기는 편이 좋습니다.
+          단기간에 2~3만 달러 규모로 투자하는 유저라면, VIP12 이전에 아마데우스를 5성까지 올려
+          시즌1~시즌2 구간에서 확실한 체감 우위를 만들 수 있습니다.
+        </p>
+      </div>
+
+      <div class="callout warn" style="margin-top:12px">
+        <h3 data-i18n="hog.f2p.h3">F2P(무/소과금) 핵심 한 줄</h3>
+        <p data-i18n="hog.f2p.p1">
+          F2P는 룰렛 영웅을 “세대마다” 꼭 챙기는 게 중요합니다. 룰렛 영웅을 못 챙기면, 잘 키운 F2P에게도 경기장/전투에서 밀릴 수 있습니다.
+        </p>
+      </div>
+    </section>
+
+    <div class="hr"></div>
+    <p class="foot" data-i18n="hog.footer">
+      본 문서는 공식이 아닌, 공개된 정보 및 운영 경험을 바탕으로 정리한 가이드입니다.
+      서버/버전/운영 정책에 따라 내용은 변경될 수 있습니다.
+    </p>
+  </main>
+
+  <script>
+  (function(){
+    var I18N = {
+      ko: {
+  "hog.meta.title":"킹샷 최강영주(Hall of Governors) 가이드 · 스테이지/점수/보상/팁",
+  "hog.meta.desc":"Kingshot Hall of Governors(최강영주) 가이드: 1~5회차 스테이지별 점수표, 아마데우스/힐데 보상, 영주장비/보석(Charm) 업그레이드 점수, TOP10/100 조건, 소과금/과금 운영 팁까지 한 번에 정리.",
+  "top.back":"← Kingshot Guides",
+  "top.lang":"언어",
+
+  "hog.h1":"킹샷 최강영주(Hall of Governors) 가이드",
+  "hog.meta.tag1":"2주 단위 이벤트",
+  "hog.meta.tag2":"스테이지별 점수표",
+  "hog.meta.tag3":"TOP10/100 조건",
+  "hog.meta.tag4":"소과금/과금 팁",
+
+  "hog.quick.h3":"이 가이드 한 줄 요약",
+  "hog.quick.li1":"최강영주(Hall of Governors)는 보통 2주 간격으로 열리며, 날짜/구성은 서버마다 달라질 수 있습니다.",
+  "hog.quick.li2":"아마데우스(시즌1)는 “완주”로 얻는 게 아니라, 누적 점수 TOP10 같은 “순위 조건”이 핵심입니다.",
+  "hog.quick.li3":"고득점은 “가속/조각/망치/룰렛”을 미리 모아 한 번에 쓰는 방식이 가장 효율적입니다.",
+
+  "hog.warn.h3":"자주 하는 오해",
+  "hog.warn.p1":"많은 사람이 “이벤트 미션만 다 하면 아마데우스가 나온다”고 생각하지만, 실제로는 순위 보상(예: TOP10)에 들어야 해금되는 시즌이 있습니다.",
+
+  "hog.toc.h2":"목차",
+  "hog.toc.1":"1) 이벤트 개요 · 일정 · 시즌 영웅",
+  "hog.toc.2":"2) 점수 획득 방식(요약)",
+  "hog.toc.3":"3) 1~5회차 스테이지/점수표",
+  "hog.toc.4":"4) 영주 장비 업그레이드 점수표",
+  "hog.toc.5":"5) 영주 보석(Charm) 업그레이드 점수표",
+  "hog.toc.6":"6) 시즌 영웅 해금 조건(TOP10/100)",
+  "hog.toc.7":"7) 운영 Q&A + 소과금/과금 팁",
+
+  "hog.sec1.h2":"1) 이벤트 개요 · 일정 · 시즌 영웅",
+  "hog.sec1.p1":"Hall of Governors(최강영주)는 킹샷에서 2주 단위로 열리는 대표 성장 이벤트입니다. 기간 동안 스테이지별 미션을 수행해 점수를 쌓고, 누적 점수로 마일스톤 보상을 받습니다.",
+  "hog.sec1.li1":"1회차: 왕국 생성 후 6일차 시작(서버 기준). 시즌 영웅: 아마데우스",
+  "hog.sec1.li2":"2회차: 1회차로부터 약 2주 후. 시즌 영웅: 아마데우스",
+  "hog.sec1.li3":"3회차: 보통 2세대 구간(서버에 따라 1세대일 수도). 시즌 영웅: 아마데우스, 7일 진행",
+  "hog.sec1.li4":"4~5회차: 동일한 미션 구성. 시즌 영웅: 힐데(보통 TOP100 순위 보상)",
+  "hog.sec1.note.h3":"주의",
+  "hog.sec1.note.p1":"서버/버전/운영 정책에 따라 스테이지 순서나 항목, 점수는 조정될 수 있습니다. 게임 내 공지를 최우선으로 확인하세요.",
+
+  "hog.sec2.h2":"2) 점수 획득 방식(요약)",
+  "hog.sec2.p1":"대표적인 점수 항목은 다음과 같습니다.",
+  "hog.sec2.li1":"건물 업그레이드(건설 전투력 상승)",
+  "hog.sec2.li2":"기술 연구(연구 전투력 상승)",
+  "hog.sec2.li3":"병력 훈련/승급(병력 전투력 상승)",
+  "hog.sec2.li4":"가속 아이템 사용(회차/스테이지에 따라 반영)",
+  "hog.sec2.li5":"영웅 승급(조각 사용)",
+  "hog.sec2.li6":"영웅 장비 제작망치/강화 XP/전용장비 재료(해당 스테이지에서 고득점)",
+  "hog.sec2.li7":"영웅 룰렛(게임 내 룰렛)",
+  "hog.sec2.li8":"영주 장비 평점 증가, 영주 보석(Charm) 평점 증가(해당 회차)",
+
+  "hog.sec3.h2":"3) 1~5회차 스테이지/점수표",
+  "hog.table.task":"항목",
+  "hog.table.points":"점수",
+  "hog.table.troopLevel":"병사 티어",
+  "hog.sec3.trainTitle":"Stage 3: 병력 훈련 (병사 1명당 점수)",
+  "hog.sec3.trainNote":"각 티어 병력 1명 훈련 기준 점수입니다.",
+
+  /* ===== 1회차 ===== */
+  "hog.sec3.d1.sum":"1회차 최강영주 (시즌 영웅: 아마데우스)",
+  "hog.sec3.d1.s1":"Stage 1: 도시 건설",
+  "hog.d1.s1.t1":"건설로 전투력 1 상승",
+  "hog.d1.s1.t2":"연구로 전투력 1 상승",
+
+  "hog.sec3.d1.s2":"Stage 2: 영웅 육성",
+  "hog.d1.s2.t1":"영웅 룰렛 1회 진행",
+  "hog.d1.s2.t2":"희귀(레어) 영웅 조각 1개 사용(승급)",
+  "hog.d1.s2.t3":"에픽(영웅) 조각 1개 사용(승급)",
+  "hog.d1.s2.t4":"신화(레전드/미식) 조각 1개 사용(승급)",
+  "hog.d1.s2.g1":"야외에서 빵 50 채집",
+  "hog.d1.s2.g2":"야외에서 나무 50 채집",
+  "hog.d1.s2.g3":"야외에서 석재 10 채집",
+  "hog.d1.s2.g4":"야외에서 철 2 채집",
+
+  "hog.sec3.d1.s4":"Stage 4: 야수 처치",
+  "hog.d1.s4.t1":"레벨 1~30 야수 처치",
+  "hog.d1.s4.t2":"집결을 열어 테러 1회 처치",
+
+  "hog.sec3.d1.s5":"Stage 5: 전투력 부스트",
+  "hog.d1.s5.t1":"건설로 전투력 1 상승",
+  "hog.d1.s5.t2":"연구로 전투력 1 상승",
+  "hog.d1.s5.t3":"병력 훈련/승급으로 전투력 1 상승",
+
+  /* ===== 2회차 ===== */
+  "hog.sec3.d2.sum":"2회차 최강영주 (시즌 영웅: 아마데우스)",
+  "hog.sec3.d2.s1":"Stage 1: 도시 건설",
+  "hog.d2.s1.t1":"건설로 전투력 1 상승",
+  "hog.d2.s1.t2":"연구로 전투력 1 상승",
+
+  "hog.sec3.d2.s2":"Stage 2: 영웅 육성",
+  "hog.d2.s2.t1":"영웅 룰렛 진행",
+  "hog.d2.s2.t2":"희귀(레어) 영웅 조각 1개 사용(승급)",
+  "hog.d2.s2.t3":"에픽(영웅) 조각 1개 사용(승급)",
+  "hog.d2.s2.t4":"신화(레전드/미식) 조각 1개 사용(승급)",
+  "hog.d2.s2.g1":"야외에서 빵 50 채집",
+  "hog.d2.s2.g2":"야외에서 나무 50 채집",
+  "hog.d2.s2.g3":"야외에서 석재 10 채집",
+  "hog.d2.s2.g4":"야외에서 철 2 채집",
+
+  "hog.sec3.d2.s4":"Stage 4: 자원 채집",
+  "hog.d2.s4.g1":"야외에서 빵 50 채집",
+  "hog.d2.s4.g2":"야외에서 나무 50 채집",
+  "hog.d2.s4.g3":"야외에서 석재 10 채집",
+  "hog.d2.s4.g4":"야외에서 철 2 채집",
+  "hog.d2.s4.t5":"연구로 전투력 1 상승",
+
+  "hog.sec3.d2.s5":"Stage 5: 전투력 부스트",
+  "hog.d2.s5.t1":"영웅 장비 제작망치 1개 사용",
+  "hog.d2.s5.t2":"영웅 장비 강화 XP 100 사용",
+  "hog.d2.s5.t3":"영웅 전용 장비 부품(위젯) 1개 사용",
+  "hog.d2.s5.t4":"건설로 전투력 1 상승",
+  "hog.d2.s5.t5":"연구로 전투력 1 상승",
+  "hog.d2.s5.t6":"병력 훈련/승급으로 전투력 1 상승",
+
+  "hog.sec3.d2.s6":"Stage 6: 영주 장비 업그레이드",
+  "hog.d2.s6.t1":"영주 장비 최대 평점 1 상승",
+  "hog.d2.s6.t2":"건설로 전투력 1 상승",
+  "hog.d2.s6.t3":"연구로 전투력 1 상승",
+  "hog.d2.s6.t4":"병력 훈련/승급으로 전투력 1 상승",
+  "hog.sec3.d2.gearHint":"영주 장비 희귀도별 ‘레벨업 점수’는 아래 4번 섹션 표를 참고하세요.",
+
+  /* ===== 3회차 ===== */
+  "hog.sec3.d3.sum":"3회차 최강영주 (시즌 영웅: 아마데우스, 보통 7일)",
+  "hog.sec3.d3.s1":"Stage 1: 전투력 부스트",
+  "hog.d3.s1.t1":"건설로 전투력 1 상승",
+  "hog.d3.s1.t2":"연구로 전투력 1 상승",
+  "hog.d3.s1.t3":"병력 훈련/승급으로 전투력 1 상승",
+
+  "hog.sec3.d3.s2":"Stage 2: 영웅 육성",
+  "hog.d3.s2.t1":"영웅 룰렛 진행",
+  "hog.d3.s2.t2":"희귀(레어) 영웅 조각 1개 사용(승급)",
+  "hog.d3.s2.t3":"에픽(영웅) 조각 1개 사용(승급)",
+  "hog.d3.s2.t4":"신화(레전드/미식) 조각 1개 사용(승급)",
+  "hog.d3.s2.g1":"야외에서 빵 50 채집",
+  "hog.d3.s2.g2":"야외에서 나무 50 채집",
+  "hog.d3.s2.g3":"야외에서 석재 10 채집",
+  "hog.d3.s2.g4":"야외에서 철 2 채집",
+
+  "hog.sec3.d3.s4":"Stage 4: 자원 채집",
+  "hog.d3.s4.g1":"야외에서 빵 50 채집",
+  "hog.d3.s4.g2":"야외에서 나무 50 채집",
+  "hog.d3.s4.g3":"야외에서 석재 10 채집",
+  "hog.d3.s4.g4":"야외에서 철 2 채집",
+  "hog.d3.s4.t5":"연구로 전투력 1 상승",
+
+  "hog.sec3.d3.s5":"Stage 5: 전투력 부스트",
+  "hog.d3.s5.t1":"영웅 장비 제작망치 1개 사용",
+  "hog.d3.s5.t2":"영웅 전용 장비 부품(위젯) 1개 사용",
+  "hog.d3.s5.t3":"건설로 전투력 1 상승",
+  "hog.d3.s5.t4":"연구로 전투력 1 상승",
+  "hog.d3.s5.t5":"병력 훈련/승급으로 전투력 1 상승",
+
+  "hog.sec3.d3.s6":"Stage 6: 영주 장비 업그레이드",
+  "hog.d3.s6.t1":"영주 장비 최대 평점 1 상승",
+
+  "hog.sec3.d3.s7":"Stage 7: 영웅 육성(가속 포함)",
+  "hog.d3.s7.t1":"희귀(레어) 영웅 조각 1개 사용(승급)",
+  "hog.d3.s7.t2":"에픽(영웅) 조각 1개 사용(승급)",
+  "hog.d3.s7.t3":"신화(레전드/미식) 조각 1개 사용(승급)",
+  "hog.d3.s7.t4":"건설 가속 1분 사용",
+  "hog.d3.s7.t5":"연구 가속 1분 사용",
+  "hog.d3.s7.t6":"훈련/승급 가속 1분 사용",
+  "hog.sec3.d3.gearHint":"영주 장비 희귀도별 ‘레벨업 점수’는 아래 4번 섹션 표를 참고하세요.",
+
+  /* ===== 4~5회차 ===== */
+  "hog.sec3.d45.sum":"4~5회차 최강영주 (시즌 영웅: 힐데)",
+  "hog.sec3.d45.s1":"Stage 1: 전투력 부스트",
+  "hog.d45.s1.t1":"건설로 전투력 1 상승",
+  "hog.d45.s1.t2":"연구로 전투력 1 상승",
+  "hog.d45.s1.t3":"병력 훈련/승급으로 전투력 1 상승",
+
+  "hog.sec3.d45.s2":"Stage 2: 영웅 육성",
+  "hog.d45.s2.t1":"영웅 룰렛 진행",
+  "hog.d45.s2.t2":"희귀(레어) 영웅 조각 1개 사용(승급)",
+  "hog.d45.s2.t3":"에픽(영웅) 조각 1개 사용(승급)",
+  "hog.d45.s2.t4":"신화(레전드/미식) 조각 1개 사용(승급)",
+  "hog.d45.s2.g1":"야외에서 빵 50 채집",
+  "hog.d45.s2.g2":"야외에서 나무 50 채집",
+  "hog.d45.s2.g3":"야외에서 석재 10 채집",
+  "hog.d45.s2.g4":"야외에서 철 2 채집",
+
+  "hog.sec3.d45.s4":"Stage 4: 보석(Charm) 업그레이드",
+  "hog.d45.s4.t1":"영주 보석(Charm) 최대 평점 1 상승",
+  "hog.d45.s4.g1":"야외에서 빵 50 채집",
+  "hog.d45.s4.g2":"야외에서 나무 50 채집",
+  "hog.d45.s4.g3":"야외에서 석재 10 채집",
+  "hog.d45.s4.g4":"야외에서 철 2 채집",
+  "hog.d45.s4.t2":"연구로 전투력 1 상승",
+  "hog.sec3.d45.charmHint":"보석(Charm) 레벨별 ‘레벨업 점수’는 아래 5번 섹션 표를 참고하세요.",
+
+  "hog.sec3.d45.s5":"Stage 5: 전투력 부스트",
+  "hog.d45.s5.t1":"영웅 장비 제작망치 1개 사용",
+  "hog.d45.s5.t2":"영웅 전용 장비 부품(위젯) 1개 사용",
+  "hog.d45.s5.t3":"건설로 전투력 1 상승",
+  "hog.d45.s5.t4":"연구로 전투력 1 상승",
+  "hog.d45.s5.t5":"병력 훈련/승급으로 전투력 1 상승",
+
+  "hog.sec3.d45.s6":"Stage 6: 영주 장비 업그레이드",
+  "hog.d45.s6.t1":"영주 장비 최대 평점 1 상승",
+
+  "hog.sec3.d45.s7":"Stage 7: 영웅 육성(가속 포함)",
+  "hog.d45.s7.t1":"희귀(레어) 영웅 조각 1개 사용(승급)",
+  "hog.d45.s7.t2":"에픽(영웅) 조각 1개 사용(승급)",
+  "hog.d45.s7.t3":"신화(레전드/미식) 조각 1개 사용(승급)",
+  "hog.d45.s7.t4":"건설 가속 1분 사용",
+  "hog.d45.s7.t5":"연구 가속 1분 사용",
+  "hog.d45.s7.t6":"훈련/승급 가속 1분 사용",
+
+  "hog.sec3.tip.h3":"운영 팁(공통)",
+  "hog.sec3.tip.li1":"점수 스테이지에 맞춰 해당 재화만 집중 사용하면, 같은 재화로도 점수가 더 잘 나옵니다.",
+  "hog.sec3.tip.li2":"연맹총동원/철야근무 같은 이벤트와 겹치면 점수 효율이 더 좋아질 수 있습니다.",
+
+  "hog.sec4.h2":"4) 영주 장비 업그레이드 점수표",
+  "hog.sec4.p1":"회차/스테이지에 따라 영주 장비 평점(Score) 증가가 점수로 잡히는 구간이 있습니다.",
+  "hog.sec4.th1":"영주 장비 등급",
+  "hog.sec4.th2":"레벨업 점수",
+
+  "hog.sec5.h2":"5) 영주 보석(Charm) 업그레이드 점수표",
+  "hog.sec5.p1":"4~5회차에는 보석(Charm) 평점 증가가 직접 점수로 잡히는 스테이지가 나옵니다.",
+  "hog.sec5.th1":"영주 보석(Charm) 레벨",
+  "hog.sec5.th2":"레벨업 점수",
+
+  "hog.sec6.h2":"6) 시즌 영웅 해금 조건(TOP10/100)",
+  "hog.sec6.h3a":"아마데우스(시즌1) 해금",
+  "hog.sec6.p1":"아마데우스는 미션 완주로 자동 획득이 아니라, 이벤트 기간 누적 점수 TOP10 같은 조건을 만족해야 해금되는 시즌이 있습니다.",
+  "hog.sec6.h3b":"힐데(4~5회차) 보상",
+  "hog.sec6.p2":"4~5회차는 힐데가 시즌 영웅으로 등장하며, 보통 TOP100 순위 보상으로 조각을 받을 수 있습니다.",
+  "hog.sec6.p3":"정확한 컷/보상 구조는 서버마다 다를 수 있으니, 반드시 게임 내 공지를 기준으로 확인하세요.",
+
+  "hog.sec7.h2":"7) 운영 Q&A + 소과금/과금 팁",
+  "hog.qa.sum":"최강영주 Q&A 요약(실전용)",
+  "hog.qa.q1":"Q1. 최강영주 이벤트는 언제 열리나요?",
+  "hog.qa.a1":"A. 보통 연맹총동원 이후, 약 2주 간격으로 열립니다. 일정은 서버 상황에 따라 유동적일 수 있으니 게임 내 공지를 확인하세요.",
+  "hog.qa.q2":"Q2. 참여 조건은 무엇인가요?",
+  "hog.qa.a2":"A. 서버 내 모든 영주는 자동으로 참여합니다. 이벤트 기간 동안 획득한 점수로 순위가 정해지고 보상이 지급됩니다.",
+  "hog.qa.q3":"Q3. 점수는 어떻게 획득하나요?",
+  "hog.qa.a3":"A. 병력 훈련, 건물 업그레이드, 기술 연구, 가속 사용, 영웅 승급, 제작망치, 룰렛 참여, 영주 장비/보석 평점 증가 등으로 획득합니다. (스테이지에 따라 유효 항목이 달라짐)",
+  "hog.qa.q4":"Q4. 고득점을 위한 준비 방법은?",
+  "hog.qa.a4.li1":"속도 아이템과 자원을 사전에 충분히 모아두고, 이벤트 시작일에 집중해서 사용하세요.",
+  "hog.qa.a4.li2":"병력 훈련 이벤트나 기술 성장 이벤트와 시기가 겹치면 효율적으로 점수를 올릴 수 있습니다.",
+  "hog.qa.a4.li3":"건설/훈련/연구 가속, 제작망치, 룰렛(다이아&티켓) 등을 미리 준비해 두는 것이 좋습니다.",
+  "hog.qa.q5":"Q5. 어떤 보상이 주어지나요?",
+  "hog.qa.a5":"A. 순위에 따라 다이아, 속도 아이템, 영웅 조각 등이 지급됩니다. 영주 장비 재료는 보상에 포함되지 않는 경우가 많습니다.",
+  "hog.qa.q6":"Q6. TOP10 진입에 필요한 점수는 어느 정도인가요?",
+  "hog.qa.a6":"A. 서버마다 차이가 있지만, TOP10 평균 컷이 약 5억 점 이상인 경우가 많습니다. 신규 서버일수록 경쟁이 매우 치열한 편입니다.",
+  "hog.qa.q7":"Q7. 무조건 상위권을 노려야 하나요?",
+  "hog.qa.a7":"A. 반드시 그렇진 않습니다. 시즌1 아마데우스가 보상으로 주어지는 구간을 제외하면, 이후 세대 영웅들은 영웅 조각(공용)으로 승급이 가능하므로 무리하게 순위를 노리기보다 기본 보상을 안정적으로 가져가는 전략이 더 효율적일 수 있습니다.",
+  "hog.qa.q8":"Q8. 사전 준비해야 할 다이아는 어느 정도인가요?",
+  "hog.qa.a8":"A. 최강영주와 영웅 룰렛 이벤트가 함께 열리는 경우가 많아, 최소 162,000 다이아 이상을 준비해두는 것이 좋습니다.",
+
+  "hog.spend.h3":"과금할 마음이 있다면(핵심)",
+  "hog.spend.p1":"과금을 하기로 마음먹었다면, 시즌1 아마데우스 보상은 가능하면 꼭 챙기는 편이 좋습니다. 단기간에 2~3만 달러 규모로 투자하는 유저라면, VIP12 이전에 아마데우스를 5성까지 올려 시즌1~시즌2 구간에서 확실한 체감 우위를 만들 수 있습니다.",
+
+  "hog.f2p.h3":"F2P(무/소과금) 핵심 한 줄",
+  "hog.f2p.p1":"F2P는 룰렛 영웅을 세대마다 꼭 챙기는 게 중요합니다. 룰렛 영웅을 못 챙기면, 잘 키운 F2P에게도 경기장/전투에서 밀릴 수 있습니다.",
+
+  "hog.footer":"본 문서는 공식이 아닌, 공개된 정보 및 운영 경험을 바탕으로 정리한 가이드입니다. 서버/버전/운영 정책에 따라 내용은 변경될 수 있습니다."
+},
+
+      /* ========= EN/JA/ZH-CN/ZH-TW =========
+         아래는 “필수 UI/핵심 문장” 중심 번역본.
+         (원하면 다음 단계에서 문장 스타일 더 다듬어줄게)
+      */
+      en:{
+        "hog.meta.title":"Kingshot Hall of Governors Guide · Stages, Points, Rewards, Tips",
+        "hog.meta.desc":"Kingshot Hall of Governors guide: stage-by-stage point tables (HoG 1–5), Amadeus/Hilde season rewards, Governor Gear/Charm score tables, Top 10/100 requirements, and practical F2P/spender tips.",
+        "top.back":"← Kingshot Guides",
+        "top.lang":"Language",
+
+        "hog.h1":"Kingshot Hall of Governors Guide",
+        "hog.meta.tag1":"Biweekly Event",
+        "hog.meta.tag2":"Stage Point Tables",
+        "hog.meta.tag3":"Top 10/100 Requirements",
+        "hog.meta.tag4":"F2P/Spender Tips",
+
+        "hog.quick.h3":"One-line summary",
+        "hog.quick.li1":"Hall of Governors typically runs every two weeks, but exact timing and stages can vary by server.",
+        "hog.quick.li2":"Amadeus (Season 1) is not guaranteed by “finishing tasks”; ranking conditions like Top 10 often matter.",
+        "hog.quick.li3":"High scores usually come from saving speedups/shards/hammers/roulette and spending them in the right stage.",
+
+        "hog.warn.h3":"Common misconception",
+        "hog.warn.p1":"Many players assume completing tasks unlocks Amadeus, but some seasons require ranking (e.g., Top 10).",
+
+        "hog.toc.h2":"Contents",
+        "hog.toc.1":"1) Overview · Schedule · Season Heroes",
+        "hog.toc.2":"2) How scoring works (summary)",
+        "hog.toc.3":"3) HoG 1–5 stages & point tables",
+        "hog.toc.4":"4) Governor Gear upgrade score table",
+        "hog.toc.5":"5) Governor Charm upgrade score table",
+        "hog.toc.6":"6) Season hero unlock requirements (Top 10/100)",
+        "hog.toc.7":"7) Q&A + F2P/spender tips",
+
+        "hog.sec1.h2":"1) Overview · Schedule · Season Heroes",
+        "hog.sec1.p1":"Hall of Governors is a major biweekly progression event. You earn points by completing stage tasks and claim milestone rewards based on total points.",
+        "hog.sec1.li1":"1st HoG: starts around Day 6 after the kingdom is created. Season hero: Amadeus",
+        "hog.sec1.li2":"2nd HoG: roughly two weeks after the first. Season hero: Amadeus",
+        "hog.sec1.li3":"3rd HoG: usually during Generation 2 (some servers may still be Gen 1). Season hero: Amadeus, typically 7 days",
+        "hog.sec1.li4":"4th–5th HoG: same task set. Season hero: Hilde (often Top 100 leaderboard shards)",
+        "hog.sec1.note.h3":"Note",
+        "hog.sec1.note.p1":"Stages, tasks, and points may change by server/version. Always follow in-game announcements.",
+
+        "hog.sec2.h2":"2) How scoring works (summary)",
+        "hog.sec2.p1":"Common scoring actions include:",
+        "hog.sec2.li1":"Building upgrades (Construction power)",
+        "hog.sec2.li2":"Research (Research power)",
+        "hog.sec2.li3":"Training/Promoting troops (Troop power)",
+        "hog.sec2.li4":"Using speedups (depends on stage/event)",
+        "hog.sec2.li5":"Hero ascension (using shards)",
+        "hog.sec2.li6":"Hero gear hammers / enhancement XP / exclusive gear materials (stage-dependent big points)",
+        "hog.sec2.li7":"Hero Roulette (in-game roulette)",
+        "hog.sec2.li8":"Governor Gear score increase / Governor Charm score increase (event-dependent)",
+
+        "hog.sec3.h2":"3) HoG 1–5 stages & point tables",
+        "hog.table.task":"Task",
+        "hog.table.points":"Points",
+        "hog.table.troopLevel":"Troop Level",
+        "hog.sec3.trainTitle":"Stage 3: Train Troops (points per troop)",
+        "hog.sec3.trainNote":"Points shown are per 1 troop trained (by tier).",
+
+        "hog.sec3.d1.sum":"1st Hall of Governors (Season Hero: Amadeus)",
+        "hog.sec3.d1.s1":"Stage 1: City Construction",
+        "hog.d1.s1.t1":"Raise 1 Power through Construction",
+        "hog.d1.s1.t2":"Raise 1 Power through Research",
+        "hog.sec3.d1.s2":"Stage 2: Hero Development",
+        "hog.d1.s2.t1":"Play Hero Roulette once",
+        "hog.d1.s2.t2":"Use 1 Rare Hero Shard to ascend Heroes",
+        "hog.d1.s2.t3":"Use 1 Epic Hero Shard to ascend Heroes",
+        "hog.d1.s2.t4":"Use 1 Mythic Hero Shard to ascend Heroes",
+        "hog.d1.s2.g1":"Gather 50 Bread in the Wilderness",
+        "hog.d1.s2.g2":"Gather 50 Wood in the Wilderness",
+        "hog.d1.s2.g3":"Gather 10 Stone in the Wilderness",
+        "hog.d1.s2.g4":"Gather 2 Iron in the Wilderness",
+        "hog.sec3.d1.s4":"Stage 4: Beast Slay",
+        "hog.d1.s4.t1":"Kill a Level 1 to Level 30 Beast",
+        "hog.d1.s4.t2":"Call a rally and hunt down 1 Terror",
+        "hog.sec3.d1.s5":"Stage 5: Power Boost",
+        "hog.d1.s5.t1":"Raise 1 Power through Construction",
+        "hog.d1.s5.t2":"Raise 1 Power through Research",
+        "hog.d1.s5.t3":"Raise 1 Power by training/promoting troops",
+
+        "hog.sec3.d2.sum":"2nd Hall of Governors (Season Hero: Amadeus)",
+        "hog.sec3.d2.s1":"Stage 1: City Construction",
+        "hog.d2.s1.t1":"Raise 1 Power through Construction",
+        "hog.d2.s1.t2":"Raise 1 Power through Research",
+        "hog.sec3.d2.s2":"Stage 2: Hero Development",
+        "hog.d2.s2.t1":"Play Hero Roulette",
+        "hog.d2.s2.t2":"Use 1 Rare Hero Shard to ascend Heroes",
+        "hog.d2.s2.t3":"Use 1 Epic Hero Shard to ascend Heroes",
+        "hog.d2.s2.t4":"Use 1 Mythic Hero Shard to ascend Heroes",
+        "hog.d2.s2.g1":"Gather 50 Bread in the Wilderness",
+        "hog.d2.s2.g2":"Gather 50 Wood in the Wilderness",
+        "hog.d2.s2.g3":"Gather 10 Stone in the Wilderness",
+        "hog.d2.s2.g4":"Gather 2 Iron in the Wilderness",
+        "hog.sec3.d2.s4":"Stage 4: Gather Resources",
+        "hog.d2.s4.g1":"Gather 50 Bread in the Wilderness",
+        "hog.d2.s4.g2":"Gather 50 Wood in the Wilderness",
+        "hog.d2.s4.g3":"Gather 10 Stone in the Wilderness",
+        "hog.d2.s4.g4":"Gather 2 Iron in the Wilderness",
+        "hog.d2.s4.t5":"Raise 1 Power through Research",
+        "hog.sec3.d2.s5":"Stage 5: Power Boost",
+        "hog.d2.s5.t1":"Use 1 Hero Gear Forgehammer(s)",
+        "hog.d2.s5.t2":"Use 100 Hero Gear Enhancement XP",
+        "hog.d2.s5.t3":"Use 1 Widget for Hero Exclusive Gear",
+        "hog.d2.s5.t4":"Raise 1 Power through Construction",
+        "hog.d2.s5.t5":"Raise 1 Power through Research",
+        "hog.d2.s5.t6":"Raise 1 Power by training/promoting troops",
+        "hog.sec3.d2.s6":"Stage 6: Governor Gear Upgrade",
+        "hog.d2.s6.t1":"Raise Governor Gear max score by 1",
+        "hog.d2.s6.t2":"Raise 1 Power through Construction",
+        "hog.d2.s6.t3":"Raise 1 Power through Research",
+        "hog.d2.s6.t4":"Raise 1 Power by training/promoting troops",
+        "hog.sec3.d2.gearHint":"See Section 4 for the gear “level-up score” table.",
+
+        "hog.sec3.d3.sum":"3rd Hall of Governors (Season Hero: Amadeus, often 7 days)",
+        "hog.sec3.d3.s1":"Stage 1: Power Boost",
+        "hog.d3.s1.t1":"Raise 1 Power through Construction",
+        "hog.d3.s1.t2":"Raise 1 Power through Research",
+        "hog.d3.s1.t3":"Raise 1 Power by training/promoting troops",
+        "hog.sec3.d3.s2":"Stage 2: Hero Development",
+        "hog.d3.s2.t1":"Play Hero Roulette",
+        "hog.d3.s2.t2":"Use 1 Rare Hero Shard to ascend Heroes",
+        "hog.d3.s2.t3":"Use 1 Epic Hero Shard to ascend Heroes",
+        "hog.d3.s2.t4":"Use 1 Mythic Hero Shard to ascend Heroes",
+        "hog.d3.s2.g1":"Gather 50 Bread in the Wilderness",
+        "hog.d3.s2.g2":"Gather 50 Wood in the Wilderness",
+        "hog.d3.s2.g3":"Gather 10 Stone in the Wilderness",
+        "hog.d3.s2.g4":"Gather 2 Iron in the Wilderness",
+        "hog.sec3.d3.s4":"Stage 4: Gather Resources",
+        "hog.d3.s4.g1":"Gather 50 Bread in the Wilderness",
+        "hog.d3.s4.g2":"Gather 50 Wood in the Wilderness",
+        "hog.d3.s4.g3":"Gather 10 Stone in the Wilderness",
+        "hog.d3.s4.g4":"Gather 2 Iron in the Wilderness",
+        "hog.d3.s4.t5":"Raise 1 Power through Research",
+        "hog.sec3.d3.s5":"Stage 5: Power Boost",
+        "hog.d3.s5.t1":"Use 1 Hero Gear Forgehammer(s)",
+        "hog.d3.s5.t2":"Use 1 Widget for Hero Exclusive Gear",
+        "hog.d3.s5.t3":"Raise 1 Power through Construction",
+        "hog.d3.s5.t4":"Raise 1 Power through Research",
+        "hog.d3.s5.t5":"Raise 1 Power by training/promoting troops",
+        "hog.sec3.d3.s6":"Stage 6: Governor Gear Upgrade",
+        "hog.d3.s6.t1":"Raise Governor Gear max score by 1",
+        "hog.sec3.d3.s7":"Stage 7: Hero Development (Speedups)",
+        "hog.d3.s7.t1":"Use 1 Rare Hero Shard to ascend Heroes",
+        "hog.d3.s7.t2":"Use 1 Epic Hero Shard to ascend Heroes",
+        "hog.d3.s7.t3":"Use 1 Mythic Hero Shard to ascend Heroes",
+        "hog.d3.s7.t4":"Use 1m of Speedups for Construction",
+        "hog.d3.s7.t5":"Use 1m of Speedups for Research",
+        "hog.d3.s7.t6":"Use 1m of Speedups for Troop Training or Promotion",
+        "hog.sec3.d3.gearHint":"See Section 4 for the gear “level-up score” table.",
+
+        "hog.sec3.d45.sum":"4th–5th Hall of Governors (Season Hero: Hilde)",
+        "hog.sec3.d45.s1":"Stage 1: Power Boost",
+        "hog.d45.s1.t1":"Raise 1 Power through Construction",
+        "hog.d45.s1.t2":"Raise 1 Power through Research",
+        "hog.d45.s1.t3":"Raise 1 Power by training/promoting troops",
+        "hog.sec3.d45.s2":"Stage 2: Hero Development",
+        "hog.d45.s2.t1":"Play Hero Roulette",
+        "hog.d45.s2.t2":"Use 1 Rare Hero Shard to ascend Heroes",
+        "hog.d45.s2.t3":"Use 1 Epic Hero Shard to ascend Heroes",
+        "hog.d45.s2.t4":"Use 1 Mythic Hero Shard to ascend Heroes",
+        "hog.d45.s2.g1":"Gather 50 Bread in the Wilderness",
+        "hog.d45.s2.g2":"Gather 50 Wood in the Wilderness",
+        "hog.d45.s2.g3":"Gather 10 Stone in the Wilderness",
+        "hog.d45.s2.g4":"Gather 2 Iron in the Wilderness",
+        "hog.sec3.d45.s4":"Stage 4: Charm Upgrade",
+        "hog.d45.s4.t1":"Raise Governor Gear Charm max score by 1",
+        "hog.d45.s4.g1":"Gather 50 Bread in the Wilderness",
+        "hog.d45.s4.g2":"Gather 50 Wood in the Wilderness",
+        "hog.d45.s4.g3":"Gather 10 Stone in the Wilderness",
+        "hog.d45.s4.g4":"Gather 2 Iron in the Wilderness",
+        "hog.d45.s4.t2":"Raise 1 Power through Research",
+        "hog.sec3.d45.charmHint":"See Section 5 for the charm “level-up score” table.",
+        "hog.sec3.d45.s5":"Stage 5: Power Boost",
+        "hog.d45.s5.t1":"Use 1 Hero Gear Forgehammer(s)",
+        "hog.d45.s5.t2":"Use 1 Widget for Hero Exclusive Gear",
+        "hog.d45.s5.t3":"Raise 1 Power through Construction",
+        "hog.d45.s5.t4":"Raise 1 Power through Research",
+        "hog.d45.s5.t5":"Raise 1 Power by training/promoting troops",
+        "hog.sec3.d45.s6":"Stage 6: Governor Gear Upgrade",
+        "hog.d45.s6.t1":"Raise Governor Gear max score by 1",
+        "hog.sec3.d45.s7":"Stage 7: Hero Development (Speedups)",
+        "hog.d45.s7.t1":"Use 1 Rare Hero Shard to ascend Heroes",
+        "hog.d45.s7.t2":"Use 1 Epic Hero Shard to ascend Heroes",
+        "hog.d45.s7.t3":"Use 1 Mythic Hero Shard to ascend Heroes",
+        "hog.d45.s7.t4":"Use 1m of Speedups for Construction",
+        "hog.d45.s7.t5":"Use 1m of Speedups for Research",
+        "hog.d45.s7.t6":"Use 1m of Speedups for Troop Training or Promotion",
+
+        "hog.sec3.tip.h3":"General tips",
+        "hog.sec3.tip.li1":"Spend only the right resources in the matching stage to maximize points.",
+        "hog.sec3.tip.li2":"Overlapping events (alliance mobilization / speedup events) can improve efficiency.",
+
+        "hog.sec4.h2":"4) Governor Gear upgrade score table",
+        "hog.sec4.p1":"Some stages score you by increasing Governor Gear “max score”.",
+        "hog.sec4.th1":"Governor Gear Rarity",
+        "hog.sec4.th2":"Level Up Score",
+
+        "hog.sec5.h2":"5) Governor Charm upgrade score table",
+        "hog.sec5.p1":"In HoG 4–5, Charm score increases can be scored directly in a stage.",
+        "hog.sec5.th1":"Governor Charm Level",
+        "hog.sec5.th2":"Level Up Score",
+
+        "hog.sec6.h2":"6) Season hero unlock requirements (Top 10/100)",
+        "hog.sec6.h3a":"Unlocking Amadeus (Season 1)",
+        "hog.sec6.p1":"Amadeus is not always unlocked by completing tasks; some seasons require leaderboard ranking such as Top 10.",
+        "hog.sec6.h3b":"Hilde rewards (HoG 4–5)",
+        "hog.sec6.p2":"In HoG 4–5, Hilde is the season hero and shards are often awarded to Top 100 players.",
+        "hog.sec6.p3":"Exact cutoffs vary by server. Always check in-game announcements.",
+
+        "hog.sec7.h2":"7) Q&A + F2P/spender tips",
+        "hog.qa.sum":"Strongest Governor Q&A (practical)",
+        "hog.qa.q1":"Q1. When does the event run?",
+        "hog.qa.a1":"A. Usually about every two weeks (often after alliance mobilization), but schedules vary by server—check in-game notices.",
+        "hog.qa.q2":"Q2. Who can participate?",
+        "hog.qa.a2":"A. All governors are automatically included; rewards are based on points and ranking.",
+        "hog.qa.q3":"Q3. How do you earn points?",
+        "hog.qa.a3":"A. Training, construction, research, speedups, hero ascension, hammers, roulette, governor gear/charm score increases (stage-dependent).",
+        "hog.qa.q4":"Q4. How to prepare for high scores?",
+        "hog.qa.a4.li1":"Save speedups and resources, then spend them heavily on the right day/stage.",
+        "hog.qa.a4.li2":"If it overlaps with troop/research events, your scoring efficiency improves.",
+        "hog.qa.a4.li3":"Prepare construction/training/research speedups, forgehammers, and roulette (diamonds/tickets).",
+        "hog.qa.q5":"Q5. What rewards do you get?",
+        "hog.qa.a5":"A. Diamonds, speedups, hero shards, etc., depending on rank. Governor gear materials are often not included.",
+        "hog.qa.q6":"Q6. How many points for Top 10?",
+        "hog.qa.a6":"A. It varies, but Top 10 can often require ~500M+ points; newer servers are more competitive.",
+        "hog.qa.q7":"Q7. Do you always need to push for top ranks?",
+        "hog.qa.a7":"A. Not necessarily. Outside Season 1 Amadeus windows, focusing on steady milestone rewards can be more efficient for many players.",
+        "hog.qa.q8":"Q8. How many diamonds should I prepare?",
+        "hog.qa.a8":"A. Since HoG often overlaps with Hero Roulette, having at least ~162,000 diamonds prepared makes it much smoother.",
+
+        "hog.spend.h3":"If you plan to spend",
+        "hog.spend.p1":"If you decide to spend, aiming for Season 1 Amadeus rewards can be very impactful. Heavy spenders who push Amadeus to 5★ before VIP12 can dominate early seasons (server-dependent).",
+        "hog.f2p.h3":"F2P key point",
+        "hog.f2p.p1":"F2P players should secure roulette heroes each generation. Missing them can make you lose even to well-built F2P accounts.",
+
+        "hog.footer":"This is a fan-made guide based on public info and gameplay experience. Details may change by server/version."
+      },
+
+      /* JA */
+      ja:{
+        "hog.meta.title":"Kingshot 最強領主(Hall of Governors) ガイド · ステージ/点数/報酬",
+        "hog.meta.desc":"Kingshot Hall of Governors ガイド：1〜5回のステージ別点数表、アマデウス/ヒルデ報酬、領主装備/宝石(Charm)点数表、TOP10/100条件、無課金/課金の運用ポイント。",
+        "top.back":"← Kingshot ガイド",
+        "top.lang":"言語",
+        "hog.h1":"Kingshot 最強領主(Hall of Governors) ガイド",
+        "hog.meta.tag1":"2週周期",
+        "hog.meta.tag2":"点数表",
+        "hog.meta.tag3":"TOP10/100",
+        "hog.meta.tag4":"無課金/課金 tips",
+        "hog.quick.h3":"要点まとめ",
+        "hog.quick.li1":"最強領主は通常2週間ごとに開催されますが、サーバーにより変動します。",
+        "hog.quick.li2":"アマデウス(Season 1)は“完走”で確定ではなく、TOP10など順位条件が重要です。",
+        "hog.quick.li3":"高得点は加速/欠片/ハンマー/ルーレットを貯めて適切なステージで一気に使うのが効率的です。",
+        "hog.warn.h3":"よくある誤解",
+        "hog.warn.p1":"ミッションを全部やればアマデウスが取れると思われがちですが、順位(例：TOP10)が必要な場合があります。",
+        "hog.toc.h2":"目次",
+        "hog.toc.1":"1) 概要・日程・シーズン英雄",
+        "hog.toc.2":"2) 点数の稼ぎ方(要約)",
+        "hog.toc.3":"3) 1〜5回 ステージ/点数表",
+        "hog.toc.4":"4) 領主装備 点数表",
+        "hog.toc.5":"5) 領主宝石(Charm) 点数表",
+        "hog.toc.6":"6) シーズン英雄 解放条件",
+        "hog.toc.7":"7) Q&A + tips",
+        "hog.sec1.h2":"1) 概要・日程・シーズン英雄",
+        "hog.sec1.p1":"Hall of Governors(最強領主)は2週周期の成長イベント。ステージ課題で点数を稼ぎ、累計でマイルストーン報酬を獲得します。",
+        "hog.sec1.li1":"1回目：王国作成後6日目頃開始。シーズン英雄：Amadeus",
+        "hog.sec1.li2":"2回目：およそ2週間後。シーズン英雄：Amadeus",
+        "hog.sec1.li3":"3回目：通常Gen2(サーバーによりGen1の場合も)。Amadeus、7日間が多い",
+        "hog.sec1.li4":"4〜5回目：同一構成。シーズン英雄：Hilde(多くはTOP100)",
+        "hog.sec1.note.h3":"注意",
+        "hog.sec1.note.p1":"内容/点数はサーバーやバージョンで変わることがあります。ゲーム内告知を優先してください。",
+        "hog.sec2.h2":"2) 点数の稼ぎ方(要約)",
+        "hog.sec2.p1":"代表的な加点要素：",
+        "hog.sec2.li1":"建設(建設戦力)",
+        "hog.sec2.li2":"研究(研究戦力)",
+        "hog.sec2.li3":"訓練/昇格(兵士戦力)",
+        "hog.sec2.li4":"加速使用(ステージ依存)",
+        "hog.sec2.li5":"英雄昇格(欠片)",
+        "hog.sec2.li6":"英雄装備ハンマー/強化XP/専用装備素材",
+        "hog.sec2.li7":"英雄ルーレット(ゲーム内)",
+        "hog.sec2.li8":"領主装備/宝石(Charm)のスコア上昇",
+        "hog.sec3.h2":"3) 1〜5回 ステージ/点数表",
+        "hog.table.task":"タスク",
+        "hog.table.points":"点数",
+        "hog.table.troopLevel":"兵士レベル",
+        "hog.sec3.trainTitle":"Stage 3: 兵士訓練(1体あたり)",
+        "hog.sec3.trainNote":"各ティア兵士1体あたりの点数です。",
+        "hog.sec3.d1.sum":"1回目(シーズン英雄：Amadeus)",
+        "hog.sec3.d1.s1":"Stage 1: 建設",
+        "hog.d1.s1.t1":"建設で戦力1上昇",
+        "hog.d1.s1.t2":"研究で戦力1上昇",
+        "hog.sec3.d1.s2":"Stage 2: 英雄育成",
+        "hog.d1.s2.t1":"英雄ルーレット1回",
+        "hog.d1.s2.t2":"レア欠片1で昇格",
+        "hog.d1.s2.t3":"エピック欠片1で昇格",
+        "hog.d1.s2.t4":"ミシック欠片1で昇格",
+        "hog.d1.s2.g1":"野外でパン50採集",
+        "hog.d1.s2.g2":"野外で木材50採集",
+        "hog.d1.s2.g3":"野外で石材10採集",
+        "hog.d1.s2.g4":"野外で鉄2採集",
+        "hog.sec3.d1.s4":"Stage 4: 野獣討伐",
+        "hog.d1.s4.t1":"Lv1〜30の野獣を討伐",
+        "hog.d1.s4.t2":"集結してTerror 1体討伐",
+        "hog.sec3.d1.s5":"Stage 5: 戦力ブースト",
+        "hog.d1.s5.t1":"建設で戦力1上昇",
+        "hog.d1.s5.t2":"研究で戦力1上昇",
+        "hog.d1.s5.t3":"訓練/昇格で戦力1上昇",
+
+        "hog.sec3.d2.sum":"2回目(シーズン英雄：Amadeus)",
+        "hog.sec3.d2.s1":"Stage 1: 建設",
+        "hog.d2.s1.t1":"建設で戦力1上昇",
+        "hog.d2.s1.t2":"研究で戦力1上昇",
+        "hog.sec3.d2.s2":"Stage 2: 英雄育成",
+        "hog.d2.s2.t1":"英雄ルーレット",
+        "hog.d2.s2.t2":"レア欠片1で昇格",
+        "hog.d2.s2.t3":"エピック欠片1で昇格",
+        "hog.d2.s2.t4":"ミシック欠片1で昇格",
+        "hog.d2.s2.g1":"パン50採集",
+        "hog.d2.s2.g2":"木材50採集",
+        "hog.d2.s2.g3":"石材10採集",
+        "hog.d2.s2.g4":"鉄2採集",
+        "hog.sec3.d2.s4":"Stage 4: 採集",
+        "hog.d2.s4.g1":"パン50採集",
+        "hog.d2.s4.g2":"木材50採集",
+        "hog.d2.s4.g3":"石材10採集",
+        "hog.d2.s4.g4":"鉄2採集",
+        "hog.d2.s4.t5":"研究で戦力1上昇",
+        "hog.sec3.d2.s5":"Stage 5: ブースト",
+        "hog.d2.s5.t1":"英雄装備ハンマー1使用",
+        "hog.d2.s5.t2":"英雄装備強化XP100使用",
+        "hog.d2.s5.t3":"専用装備素材1使用",
+        "hog.d2.s5.t4":"建設で戦力1上昇",
+        "hog.d2.s5.t5":"研究で戦力1上昇",
+        "hog.d2.s5.t6":"訓練/昇格で戦力1上昇",
+        "hog.sec3.d2.s6":"Stage 6: 領主装備",
+        "hog.d2.s6.t1":"領主装備 最大スコア+1",
+        "hog.d2.s6.t2":"建設で戦力1上昇",
+        "hog.d2.s6.t3":"研究で戦力1上昇",
+        "hog.d2.s6.t4":"訓練/昇格で戦力1上昇",
+        "hog.sec3.d2.gearHint":"装備の点数表はセクション4を参照。",
+
+        "hog.sec3.d3.sum":"3回目(Amadeus/7日が多い)",
+        "hog.sec3.d3.s1":"Stage 1: ブースト",
+        "hog.d3.s1.t1":"建設で戦力1上昇",
+        "hog.d3.s1.t2":"研究で戦力1上昇",
+        "hog.d3.s1.t3":"訓練/昇格で戦力1上昇",
+        "hog.sec3.d3.s2":"Stage 2: 英雄育成",
+        "hog.d3.s2.t1":"英雄ルーレット",
+        "hog.d3.s2.t2":"レア欠片1で昇格",
+        "hog.d3.s2.t3":"エピック欠片1で昇格",
+        "hog.d3.s2.t4":"ミシック欠片1で昇格",
+        "hog.d3.s2.g1":"パン50採集",
+        "hog.d3.s2.g2":"木材50採集",
+        "hog.d3.s2.g3":"石材10採集",
+        "hog.d3.s2.g4":"鉄2採集",
+        "hog.sec3.d3.s4":"Stage 4: 採集",
+        "hog.d3.s4.g1":"パン50採集",
+        "hog.d3.s4.g2":"木材50採集",
+        "hog.d3.s4.g3":"石材10採集",
+        "hog.d3.s4.g4":"鉄2採集",
+        "hog.d3.s4.t5":"研究で戦力1上昇",
+        "hog.sec3.d3.s5":"Stage 5: ブースト",
+        "hog.d3.s5.t1":"英雄装備ハンマー1使用",
+        "hog.d3.s5.t2":"専用装備素材1使用",
+        "hog.d3.s5.t3":"建設で戦力1上昇",
+        "hog.d3.s5.t4":"研究で戦力1上昇",
+        "hog.d3.s5.t5":"訓練/昇格で戦力1上昇",
+        "hog.sec3.d3.s6":"Stage 6: 領主装備",
+        "hog.d3.s6.t1":"領主装備 最大スコア+1",
+        "hog.sec3.d3.s7":"Stage 7: 加速",
+        "hog.d3.s7.t1":"レア欠片1で昇格",
+        "hog.d3.s7.t2":"エピック欠片1で昇格",
+        "hog.d3.s7.t3":"ミシック欠片1で昇格",
+        "hog.d3.s7.t4":"建設加速1分使用",
+        "hog.d3.s7.t5":"研究加速1分使用",
+        "hog.d3.s7.t6":"訓練/昇格加速1分使用",
+        "hog.sec3.d3.gearHint":"装備の点数表はセクション4を参照。",
+
+        "hog.sec3.d45.sum":"4〜5回目(シーズン英雄：Hilde)",
+        "hog.sec3.d45.s1":"Stage 1: ブースト",
+        "hog.d45.s1.t1":"建設で戦力1上昇",
+        "hog.d45.s1.t2":"研究で戦力1上昇",
+        "hog.d45.s1.t3":"訓練/昇格で戦力1上昇",
+        "hog.sec3.d45.s2":"Stage 2: 英雄育成",
+        "hog.d45.s2.t1":"英雄ルーレット",
+        "hog.d45.s2.t2":"レア欠片1で昇格",
+        "hog.d45.s2.t3":"エピック欠片1で昇格",
+        "hog.d45.s2.t4":"ミシック欠片1で昇格",
+        "hog.d45.s2.g1":"パン50採集",
+        "hog.d45.s2.g2":"木材50採集",
+        "hog.d45.s2.g3":"石材10採集",
+        "hog.d45.s2.g4":"鉄2採集",
+        "hog.sec3.d45.s4":"Stage 4: Charm",
+        "hog.d45.s4.t1":"Charm 最大スコア+1",
+        "hog.d45.s4.g1":"パン50採集",
+        "hog.d45.s4.g2":"木材50採集",
+        "hog.d45.s4.g3":"石材10採集",
+        "hog.d45.s4.g4":"鉄2採集",
+        "hog.d45.s4.t2":"研究で戦力1上昇",
+        "hog.sec3.d45.charmHint":"Charmの点数表はセクション5を参照。",
+        "hog.sec3.d45.s5":"Stage 5: ブースト",
+        "hog.d45.s5.t1":"英雄装備ハンマー1使用",
+        "hog.d45.s5.t2":"専用装備素材1使用",
+        "hog.d45.s5.t3":"建設で戦力1上昇",
+        "hog.d45.s5.t4":"研究で戦力1上昇",
+        "hog.d45.s5.t5":"訓練/昇格で戦力1上昇",
+        "hog.sec3.d45.s6":"Stage 6: 領主装備",
+        "hog.d45.s6.t1":"領主装備 最大スコア+1",
+        "hog.sec3.d45.s7":"Stage 7: 加速",
+        "hog.d45.s7.t1":"レア欠片1で昇格",
+        "hog.d45.s7.t2":"エピック欠片1で昇格",
+        "hog.d45.s7.t3":"ミシック欠片1で昇格",
+        "hog.d45.s7.t4":"建設加速1分使用",
+        "hog.d45.s7.t5":"研究加速1分使用",
+        "hog.d45.s7.t6":"訓練/昇格加速1分使用",
+
+        "hog.sec3.tip.h3":"共通のコツ",
+        "hog.sec3.tip.li1":"ステージに合う資源だけを集中投入すると点数効率が上がります。",
+        "hog.sec3.tip.li2":"他イベントと重なると効率が良い場合があります。",
+
+        "hog.sec4.h2":"4) 領主装備 点数表",
+        "hog.sec4.p1":"一部ステージでは領主装備のスコア上昇が点数になります。",
+        "hog.sec4.th1":"Rarity",
+        "hog.sec4.th2":"Score",
+
+        "hog.sec5.h2":"5) 領主宝石(Charm) 点数表",
+        "hog.sec5.p1":"4〜5回目ではCharmスコア上昇が点数になるステージがあります。",
+        "hog.sec5.th1":"Charm Level",
+        "hog.sec5.th2":"Score",
+
+        "hog.sec6.h2":"6) シーズン英雄 解放条件",
+        "hog.sec6.h3a":"Amadeus 解放",
+        "hog.sec6.p1":"Amadeusは完走で確定ではなく、TOP10など順位条件が必要な場合があります。",
+        "hog.sec6.h3b":"Hilde 報酬",
+        "hog.sec6.p2":"4〜5回目はHildeがシーズン英雄で、TOP100報酬になることが多いです。",
+        "hog.sec6.p3":"条件はサーバーにより変わります。告知を優先してください。",
+
+        "hog.sec7.h2":"7) Q&A + tips",
+        "hog.qa.sum":"Q&A (要約)",
+        "hog.qa.q1":"Q1. 開催はいつ？",
+        "hog.qa.a1":"A. 2週周期が多いですがサーバーで変動します。告知を確認してください。",
+        "hog.qa.q2":"Q2. 参加条件は？",
+        "hog.qa.a2":"A. 全員自動参加。点数/順位で報酬が決まります。",
+        "hog.qa.q3":"Q3. 点数は？",
+        "hog.qa.a3":"A. 訓練/建設/研究/加速/昇格/ハンマー/ルーレット/装備・Charmなど(ステージ依存)。",
+        "hog.qa.q4":"Q4. 準備は？",
+        "hog.qa.a4.li1":"加速と資源を貯めて、開始日に集中使用。",
+        "hog.qa.a4.li2":"他イベントと重なると効率UP。",
+        "hog.qa.a4.li3":"建設/訓練/研究加速、ハンマー、ルーレットを事前準備。",
+        "hog.qa.q5":"Q5. 報酬は？",
+        "hog.qa.a5":"A. ダイヤ/加速/欠片など。装備素材は含まれない場合が多いです。",
+        "hog.qa.q6":"Q6. TOP10の目安は？",
+        "hog.qa.a6":"A. サーバー次第ですが5億点以上になることもあります。",
+        "hog.qa.q7":"Q7. 常に上位を狙うべき？",
+        "hog.qa.a7":"A. 必須ではありません。基本報酬重視が効率的な場合も多いです。",
+        "hog.qa.q8":"Q8. ダイヤ準備は？",
+        "hog.qa.a8":"A. ルーレットと重なることが多いので最低162,000ダイヤ程度あると楽です。",
+
+        "hog.spend.h3":"課金するなら",
+        "hog.spend.p1":"課金するならSeason 1のAmadeus報酬は狙う価値があります。重課金でAmadeusを早期に5★へ上げると序盤で大きな優位を作れます(サーバー依存)。",
+        "hog.f2p.h3":"無課金の要点",
+        "hog.f2p.p1":"無課金は各世代でルーレット英雄を確保するのが重要です。取り逃すと不利になります。",
+        "hog.footer":"本ガイドは非公式で、公開情報とプレイ経験に基づく整理です。内容は変更される可能性があります。"
+      },
+
+      /* zh-CN */
+      "zh-CN":{
+        "hog.meta.title":"Kingshot 最强领主(Hall of Governors)攻略 · 阶段/积分/奖励",
+        "hog.meta.desc":"Kingshot Hall of Governors 攻略：1–5期阶段积分表、阿玛迪乌斯/希尔德赛季奖励、领主装备/宝石(Charm)积分表、TOP10/100条件，以及零氪/氪金实战建议。",
+        "top.back":"← Kingshot 指南",
+        "top.lang":"语言",
+        "hog.h1":"Kingshot 最强领主(Hall of Governors)攻略",
+        "hog.meta.tag1":"两周一次",
+        "hog.meta.tag2":"阶段积分表",
+        "hog.meta.tag3":"TOP10/100条件",
+        "hog.meta.tag4":"零氪/氪金建议",
+        "hog.quick.h3":"一句话总结",
+        "hog.quick.li1":"活动通常两周一轮，但具体时间与阶段可能因服务器而异。",
+        "hog.quick.li2":"第1赛季阿玛迪乌斯并非“做完任务就有”，很多情况下需要TOP10等排名条件。",
+        "hog.quick.li3":"高分更依赖提前囤加速/碎片/锻造锤/转盘，在对应阶段集中使用。",
+        "hog.warn.h3":"常见误解",
+        "hog.warn.p1":"很多人以为做完任务就能拿阿玛迪乌斯，但部分赛季需要排名(例如TOP10)。",
+        "hog.toc.h2":"目录",
+        "hog.toc.1":"1) 概览·时间·赛季英雄",
+        "hog.toc.2":"2) 得分方式(摘要)",
+        "hog.toc.3":"3) 1–5期阶段/积分表",
+        "hog.toc.4":"4) 领主装备升级积分表",
+        "hog.toc.5":"5) 领主宝石(Charm)升级积分表",
+        "hog.toc.6":"6) 赛季英雄解锁条件",
+        "hog.toc.7":"7) Q&A + 建议",
+        "hog.sec1.h2":"1) 概览·时间·赛季英雄",
+        "hog.sec1.p1":"Hall of Governors(最强领主)是两周一轮的成长活动。完成各阶段任务获取积分，按总积分领取里程碑奖励。",
+        "hog.sec1.li1":"第1期：王国创建后约第6天开始。赛季英雄：Amadeus",
+        "hog.sec1.li2":"第2期：约两周后。赛季英雄：Amadeus",
+        "hog.sec1.li3":"第3期：通常在第2世代(部分服仍在第1世代)。Amadeus，常见为7天",
+        "hog.sec1.li4":"第4–5期：任务相同。赛季英雄：Hilde(常见TOP100奖励碎片)",
+        "hog.sec1.note.h3":"注意",
+        "hog.sec1.note.p1":"阶段/任务/积分可能因服务器版本调整，请以游戏内公告为准。",
+        "hog.sec2.h2":"2) 得分方式(摘要)",
+        "hog.sec2.p1":"常见得分来源：",
+        "hog.sec2.li1":"建筑升级(建设战力)",
+        "hog.sec2.li2":"科技研究(研究战力)",
+        "hog.sec2.li3":"训练/晋升部队(部队战力)",
+        "hog.sec2.li4":"使用加速(看阶段)",
+        "hog.sec2.li5":"英雄升星(用碎片)",
+        "hog.sec2.li6":"英雄装备锻造锤/强化XP/专属装备材料(某些阶段高分)",
+        "hog.sec2.li7":"英雄转盘(游戏内)",
+        "hog.sec2.li8":"领主装备/宝石(Charm)评分提升(看期数)",
+        "hog.sec3.h2":"3) 1–5期阶段/积分表",
+        "hog.table.task":"任务",
+        "hog.table.points":"积分",
+        "hog.table.troopLevel":"部队等级",
+        "hog.sec3.trainTitle":"Stage 3: 训练部队(每1名)",
+        "hog.sec3.trainNote":"表内为每训练1名对应等级部队的积分。",
+        "hog.sec3.d1.sum":"第1期(赛季英雄：Amadeus)",
+        "hog.sec3.d1.s1":"Stage 1: 城市建设",
+        "hog.d1.s1.t1":"建设提升1点战力",
+        "hog.d1.s1.t2":"研究提升1点战力",
+        "hog.sec3.d1.s2":"Stage 2: 英雄培养",
+        "hog.d1.s2.t1":"英雄转盘1次",
+        "hog.d1.s2.t2":"使用1个稀有英雄碎片升星",
+        "hog.d1.s2.t3":"使用1个史诗英雄碎片升星",
+        "hog.d1.s2.t4":"使用1个传说英雄碎片升星",
+        "hog.d1.s2.g1":"野外采集面包50",
+        "hog.d1.s2.g2":"野外采集木材50",
+        "hog.d1.s2.g3":"野外采集石材10",
+        "hog.d1.s2.g4":"野外采集铁矿2",
+        "hog.sec3.d1.s4":"Stage 4: 猎杀野兽",
+        "hog.d1.s4.t1":"击杀1–30级野兽",
+        "hog.d1.s4.t2":"发起集结击杀1只Terror",
+        "hog.sec3.d1.s5":"Stage 5: 战力提升",
+        "hog.d1.s5.t1":"建设提升1点战力",
+        "hog.d1.s5.t2":"研究提升1点战力",
+        "hog.d1.s5.t3":"训练/晋升提升1点战力",
+        "hog.sec3.d2.sum":"第2期(赛季英雄：Amadeus)",
+        "hog.sec3.d2.s1":"Stage 1: 城市建设",
+        "hog.d2.s1.t1":"建设提升1点战力",
+        "hog.d2.s1.t2":"研究提升1点战力",
+        "hog.sec3.d2.s2":"Stage 2: 英雄培养",
+        "hog.d2.s2.t1":"英雄转盘",
+        "hog.d2.s2.t2":"稀有碎片升星",
+        "hog.d2.s2.t3":"史诗碎片升星",
+        "hog.d2.s2.t4":"传说碎片升星",
+        "hog.d2.s2.g1":"采集面包50",
+        "hog.d2.s2.g2":"采集木材50",
+        "hog.d2.s2.g3":"采集石材10",
+        "hog.d2.s2.g4":"采集铁矿2",
+        "hog.sec3.d2.s4":"Stage 4: 资源采集",
+        "hog.d2.s4.g1":"采集面包50",
+        "hog.d2.s4.g2":"采集木材50",
+        "hog.d2.s4.g3":"采集石材10",
+        "hog.d2.s4.g4":"采集铁矿2",
+        "hog.d2.s4.t5":"研究提升1点战力",
+        "hog.sec3.d2.s5":"Stage 5: 战力提升",
+        "hog.d2.s5.t1":"使用1个英雄装备锻造锤",
+        "hog.d2.s5.t2":"使用100点英雄装备强化XP",
+        "hog.d2.s5.t3":"使用1个英雄专属装备材料",
+        "hog.d2.s5.t4":"建设提升1点战力",
+        "hog.d2.s5.t5":"研究提升1点战力",
+        "hog.d2.s5.t6":"训练/晋升提升1点战力",
+        "hog.sec3.d2.s6":"Stage 6: 领主装备升级",
+        "hog.d2.s6.t1":"领主装备最大评分+1",
+        "hog.d2.s6.t2":"建设提升1点战力",
+        "hog.d2.s6.t3":"研究提升1点战力",
+        "hog.d2.s6.t4":"训练/晋升提升1点战力",
+        "hog.sec3.d2.gearHint":"领主装备“升级评分”见第4节表格。",
+        "hog.sec3.d3.sum":"第3期(Amadeus/常见7天)",
+        "hog.sec3.d3.s1":"Stage 1: 战力提升",
+        "hog.d3.s1.t1":"建设提升1点战力",
+        "hog.d3.s1.t2":"研究提升1点战力",
+        "hog.d3.s1.t3":"训练/晋升提升1点战力",
+        "hog.sec3.d3.s2":"Stage 2: 英雄培养",
+        "hog.d3.s2.t1":"英雄转盘",
+        "hog.d3.s2.t2":"稀有碎片升星",
+        "hog.d3.s2.t3":"史诗碎片升星",
+        "hog.d3.s2.t4":"传说碎片升星",
+        "hog.d3.s2.g1":"采集面包50",
+        "hog.d3.s2.g2":"采集木材50",
+        "hog.d3.s2.g3":"采集石材10",
+        "hog.d3.s2.g4":"采集铁矿2",
+        "hog.sec3.d3.s4":"Stage 4: 资源采集",
+        "hog.d3.s4.g1":"采集面包50",
+        "hog.d3.s4.g2":"采集木材50",
+        "hog.d3.s4.g3":"采集石材10",
+        "hog.d3.s4.g4":"采集铁矿2",
+        "hog.d3.s4.t5":"研究提升1点战力",
+        "hog.sec3.d3.s5":"Stage 5: 战力提升",
+        "hog.d3.s5.t1":"使用1个英雄装备锻造锤",
+        "hog.d3.s5.t2":"使用1个英雄专属装备材料",
+        "hog.d3.s5.t3":"建设提升1点战力",
+        "hog.d3.s5.t4":"研究提升1点战力",
+        "hog.d3.s5.t5":"训练/晋升提升1点战力",
+        "hog.sec3.d3.s6":"Stage 6: 领主装备升级",
+        "hog.d3.s6.t1":"领主装备最大评分+1",
+        "hog.sec3.d3.s7":"Stage 7: 加速/升星",
+        "hog.d3.s7.t1":"稀有碎片升星",
+        "hog.d3.s7.t2":"史诗碎片升星",
+        "hog.d3.s7.t3":"传说碎片升星",
+        "hog.d3.s7.t4":"使用1分钟建设加速",
+        "hog.d3.s7.t5":"使用1分钟研究加速",
+        "hog.d3.s7.t6":"使用1分钟训练/晋升加速",
+        "hog.sec3.d3.gearHint":"领主装备“升级评分”见第4节表格。",
+        "hog.sec3.d45.sum":"第4–5期(赛季英雄：Hilde)",
+        "hog.sec3.d45.s1":"Stage 1: 战力提升",
+        "hog.d45.s1.t1":"建设提升1点战力",
+        "hog.d45.s1.t2":"研究提升1点战力",
+        "hog.d45.s1.t3":"训练/晋升提升1点战力",
+        "hog.sec3.d45.s2":"Stage 2: 英雄培养",
+        "hog.d45.s2.t1":"英雄转盘",
+        "hog.d45.s2.t2":"稀有碎片升星",
+        "hog.d45.s2.t3":"史诗碎片升星",
+        "hog.d45.s2.t4":"传说碎片升星",
+        "hog.d45.s2.g1":"采集面包50",
+        "hog.d45.s2.g2":"采集木材50",
+        "hog.d45.s2.g3":"采集石材10",
+        "hog.d45.s2.g4":"采集铁矿2",
+        "hog.sec3.d45.s4":"Stage 4: 宝石(Charm)升级",
+        "hog.d45.s4.t1":"宝石(Charm)最大评分+1",
+        "hog.d45.s4.g1":"采集面包50",
+        "hog.d45.s4.g2":"采集木材50",
+        "hog.d45.s4.g3":"采集石材10",
+        "hog.d45.s4.g4":"采集铁矿2",
+        "hog.d45.s4.t2":"研究提升1点战力",
+        "hog.sec3.d45.charmHint":"宝石(Charm)“升级评分”见第5节表格。",
+        "hog.sec3.d45.s5":"Stage 5: 战力提升",
+        "hog.d45.s5.t1":"使用1个英雄装备锻造锤",
+        "hog.d45.s5.t2":"使用1个英雄专属装备材料",
+        "hog.d45.s5.t3":"建设提升1点战力",
+        "hog.d45.s5.t4":"研究提升1点战力",
+        "hog.d45.s5.t5":"训练/晋升提升1点战力",
+        "hog.sec3.d45.s6":"Stage 6: 领主装备升级",
+        "hog.d45.s6.t1":"领主装备最大评分+1",
+        "hog.sec3.d45.s7":"Stage 7: 加速/升星",
+        "hog.d45.s7.t1":"稀有碎片升星",
+        "hog.d45.s7.t2":"史诗碎片升星",
+        "hog.d45.s7.t3":"传说碎片升星",
+        "hog.d45.s7.t4":"使用1分钟建设加速",
+        "hog.d45.s7.t5":"使用1分钟研究加速",
+        "hog.d45.s7.t6":"使用1分钟训练/晋升加速",
+        "hog.sec3.tip.h3":"通用建议",
+        "hog.sec3.tip.li1":"在对应阶段集中使用对应资源，积分效率更高。",
+        "hog.sec3.tip.li2":"与其他活动重叠时，可能更容易堆分。",
+        "hog.sec4.h2":"4) 领主装备升级积分表",
+        "hog.sec4.p1":"部分阶段会按领主装备评分提升计分。",
+        "hog.sec4.th1":"稀有度",
+        "hog.sec4.th2":"升级评分",
+        "hog.sec5.h2":"5) 宝石(Charm)升级积分表",
+        "hog.sec5.p1":"第4–5期会出现宝石(Charm)评分提升计分的阶段。",
+        "hog.sec5.th1":"宝石等级",
+        "hog.sec5.th2":"升级评分",
+        "hog.sec6.h2":"6) 赛季英雄解锁条件(TOP10/100)",
+        "hog.sec6.h3a":"解锁 Amadeus(第1赛季)",
+        "hog.sec6.p1":"Amadeus 并非一定通过做完任务获得，部分赛季需要TOP10等排名条件。",
+        "hog.sec6.h3b":"Hilde 奖励(第4–5期)",
+        "hog.sec6.p2":"第4–5期的赛季英雄是 Hilde，常见为TOP100奖励碎片。",
+        "hog.sec6.p3":"具体条件以游戏内公告为准。",
+        "hog.sec7.h2":"7) Q&A + 建议",
+        "hog.qa.sum":"最强领主 Q&A(摘要)",
+        "hog.qa.q1":"Q1. 什么时候开？",
+        "hog.qa.a1":"A. 通常两周一轮，但因服务器而异，请看公告。",
+        "hog.qa.q2":"Q2. 参与条件？",
+        "hog.qa.a2":"A. 全员自动参与，按积分/排名发奖。",
+        "hog.qa.q3":"Q3. 怎么得分？",
+        "hog.qa.a3":"A. 训练/建设/研究/加速/升星/锻造锤/转盘/装备与宝石评分(看阶段)。",
+        "hog.qa.q4":"Q4. 怎么准备高分？",
+        "hog.qa.a4.li1":"提前囤加速与资源，在活动开始集中使用。",
+        "hog.qa.a4.li2":"与训练/研究活动重叠时更划算。",
+        "hog.qa.a4.li3":"提前准备建设/训练/研究加速、锻造锤、转盘(钻石/票)。",
+        "hog.qa.q5":"Q5. 有什么奖励？",
+        "hog.qa.a5":"A. 钻石、加速、英雄碎片等，装备材料往往不包含在内。",
+        "hog.qa.q6":"Q6. TOP10要多少分？",
+        "hog.qa.a6":"A. 因服务器而异，可能需要约5亿分以上，新服更卷。",
+        "hog.qa.q7":"Q7. 一定要冲排名吗？",
+        "hog.qa.a7":"A. 不一定。除第1赛季Amadeus窗口外，稳定拿里程碑奖励往往更划算。",
+        "hog.qa.q8":"Q8. 需要准备多少钻石？",
+        "hog.qa.a8":"A. 常与转盘同开，准备至少162,000钻石会更舒服。",
+        "hog.spend.h3":"如果你打算氪金",
+        "hog.spend.p1":"若决定氪金，第1赛季Amadeus奖励通常很关键。重氪玩家早期冲到5★会在前期更有优势(视服务器而定)。",
+        "hog.f2p.h3":"零氪关键点",
+        "hog.f2p.p1":"零氪要尽量拿到每代转盘英雄，否则竞技场/战斗会吃亏。",
+        "hog.footer":"本页面为非官方整理，内容可能随服务器/版本变化。"
+      },
+
+      /* zh-TW */
+      "zh-TW":{
+        "hog.meta.title":"Kingshot 最強領主(Hall of Governors)攻略 · 階段/積分/獎勵",
+        "hog.meta.desc":"Kingshot Hall of Governors 攻略：1–5期階段積分表、阿瑪迪烏斯/希爾德賽季獎勵、領主裝備/寶石(Charm)積分表、TOP10/100條件，以及無課/課金實戰建議。",
+        "top.back":"← Kingshot 指南",
+        "top.lang":"語言",
+        "hog.h1":"Kingshot 最強領主(Hall of Governors)攻略",
+        "hog.meta.tag1":"兩週一次",
+        "hog.meta.tag2":"階段積分表",
+        "hog.meta.tag3":"TOP10/100條件",
+        "hog.meta.tag4":"無課/課金建議",
+        "hog.quick.h3":"一句話總結",
+        "hog.quick.li1":"活動通常兩週一輪，但時間與階段可能因伺服器而異。",
+        "hog.quick.li2":"第1賽季阿瑪迪烏斯不是「做完任務就有」，常見需要TOP10等排名條件。",
+        "hog.quick.li3":"高分更依賴先囤加速/碎片/鍛造鎚/轉盤，在對應階段集中使用。",
+        "hog.warn.h3":"常見誤解",
+        "hog.warn.p1":"很多人以為做完任務就能拿阿瑪迪烏斯，但部分賽季需要排名(例如TOP10)。",
+        "hog.toc.h2":"目錄",
+        "hog.toc.1":"1) 概覽·時間·賽季英雄",
+        "hog.toc.2":"2) 得分方式(摘要)",
+        "hog.toc.3":"3) 1–5期階段/積分表",
+        "hog.toc.4":"4) 領主裝備升級積分表",
+        "hog.toc.5":"5) 領主寶石(Charm)升級積分表",
+        "hog.toc.6":"6) 賽季英雄解鎖條件",
+        "hog.toc.7":"7) Q&A + 建議",
+        "hog.sec1.h2":"1) 概覽·時間·賽季英雄",
+        "hog.sec1.p1":"Hall of Governors(最強領主)是兩週一輪的成長活動。完成各階段任務獲得積分，按總積分領取里程碑獎勵。",
+        "hog.sec1.li1":"第1期：王國建立後約第6天開始。賽季英雄：Amadeus",
+        "hog.sec1.li2":"第2期：約兩週後。賽季英雄：Amadeus",
+        "hog.sec1.li3":"第3期：通常在第2世代(部分服仍在第1世代)。Amadeus，常見7天",
+        "hog.sec1.li4":"第4–5期：任務相同。賽季英雄：Hilde(常見TOP100獎勵碎片)",
+        "hog.sec1.note.h3":"注意",
+        "hog.sec1.note.p1":"階段/任務/積分可能因伺服器版本調整，請以遊戲內公告為準。",
+        "hog.sec2.h2":"2) 得分方式(摘要)",
+        "hog.sec2.p1":"常見得分來源：",
+        "hog.sec2.li1":"建築升級(建設戰力)",
+        "hog.sec2.li2":"科技研究(研究戰力)",
+        "hog.sec2.li3":"訓練/晉升部隊(部隊戰力)",
+        "hog.sec2.li4":"使用加速(看階段)",
+        "hog.sec2.li5":"英雄升星(用碎片)",
+        "hog.sec2.li6":"英雄裝備鍛造鎚/強化XP/專屬裝備素材(某些階段高分)",
+        "hog.sec2.li7":"英雄轉盤(遊戲內)",
+        "hog.sec2.li8":"領主裝備/寶石(Charm)評分提升(看期數)",
+        "hog.sec3.h2":"3) 1–5期階段/積分表",
+        "hog.table.task":"任務",
+        "hog.table.points":"積分",
+        "hog.table.troopLevel":"部隊等級",
+        "hog.sec3.trainTitle":"Stage 3: 訓練部隊(每1名)",
+        "hog.sec3.trainNote":"表內為每訓練1名對應等級部隊的積分。",
+        "hog.sec3.d1.sum":"第1期(賽季英雄：Amadeus)",
+        "hog.sec3.d1.s1":"Stage 1: 城市建設",
+        "hog.d1.s1.t1":"建設提升1點戰力",
+        "hog.d1.s1.t2":"研究提升1點戰力",
+        "hog.sec3.d1.s2":"Stage 2: 英雄培養",
+        "hog.d1.s2.t1":"英雄轉盤1次",
+        "hog.d1.s2.t2":"使用1個稀有英雄碎片升星",
+        "hog.d1.s2.t3":"使用1個史詩英雄碎片升星",
+        "hog.d1.s2.t4":"使用1個傳說英雄碎片升星",
+        "hog.d1.s2.g1":"野外採集麵包50",
+        "hog.d1.s2.g2":"野外採集木材50",
+        "hog.d1.s2.g3":"野外採集石材10",
+        "hog.d1.s2.g4":"野外採集鐵礦2",
+        "hog.sec3.d1.s4":"Stage 4: 獵殺野獸",
+        "hog.d1.s4.t1":"擊殺1–30級野獸",
+        "hog.d1.s4.t2":"發起集結擊殺1隻Terror",
+        "hog.sec3.d1.s5":"Stage 5: 戰力提升",
+        "hog.d1.s5.t1":"建設提升1點戰力",
+        "hog.d1.s5.t2":"研究提升1點戰力",
+        "hog.d1.s5.t3":"訓練/晉升提升1點戰力",
+        "hog.sec3.d2.sum":"第2期(賽季英雄：Amadeus)",
+        "hog.sec3.d2.s1":"Stage 1: 城市建設",
+        "hog.d2.s1.t1":"建設提升1點戰力",
+        "hog.d2.s1.t2":"研究提升1點戰力",
+        "hog.sec3.d2.s2":"Stage 2: 英雄培養",
+        "hog.d2.s2.t1":"英雄轉盤",
+        "hog.d2.s2.t2":"稀有碎片升星",
+        "hog.d2.s2.t3":"史詩碎片升星",
+        "hog.d2.s2.t4":"傳說碎片升星",
+        "hog.d2.s2.g1":"採集麵包50",
+        "hog.d2.s2.g2":"採集木材50",
+        "hog.d2.s2.g3":"採集石材10",
+        "hog.d2.s2.g4":"採集鐵礦2",
+        "hog.sec3.d2.s4":"Stage 4: 資源採集",
+        "hog.d2.s4.g1":"採集麵包50",
+        "hog.d2.s4.g2":"採集木材50",
+        "hog.d2.s4.g3":"採集石材10",
+        "hog.d2.s4.g4":"採集鐵礦2",
+        "hog.d2.s4.t5":"研究提升1點戰力",
+        "hog.sec3.d2.s5":"Stage 5: 戰力提升",
+        "hog.d2.s5.t1":"使用1個英雄裝備鍛造鎚",
+        "hog.d2.s5.t2":"使用100點英雄裝備強化XP",
+        "hog.d2.s5.t3":"使用1個英雄專屬裝備素材",
+        "hog.d2.s5.t4":"建設提升1點戰力",
+        "hog.d2.s5.t5":"研究提升1點戰力",
+        "hog.d2.s5.t6":"訓練/晉升提升1點戰力",
+        "hog.sec3.d2.s6":"Stage 6: 領主裝備升級",
+        "hog.d2.s6.t1":"領主裝備最大評分+1",
+        "hog.d2.s6.t2":"建設提升1點戰力",
+        "hog.d2.s6.t3":"研究提升1點戰力",
+        "hog.d2.s6.t4":"訓練/晉升提升1點戰力",
+        "hog.sec3.d2.gearHint":"領主裝備「升級評分」請看第4節表格。",
+        "hog.sec3.d3.sum":"第3期(Amadeus/常見7天)",
+        "hog.sec3.d3.s1":"Stage 1: 戰力提升",
+        "hog.d3.s1.t1":"建設提升1點戰力",
+        "hog.d3.s1.t2":"研究提升1點戰力",
+        "hog.d3.s1.t3":"訓練/晉升提升1點戰力",
+        "hog.sec3.d3.s2":"Stage 2: 英雄培養",
+        "hog.d3.s2.t1":"英雄轉盤",
+        "hog.d3.s2.t2":"稀有碎片升星",
+        "hog.d3.s2.t3":"史詩碎片升星",
+        "hog.d3.s2.t4":"傳說碎片升星",
+        "hog.d3.s2.g1":"採集麵包50",
+        "hog.d3.s2.g2":"採集木材50",
+        "hog.d3.s2.g3":"採集石材10",
+        "hog.d3.s2.g4":"採集鐵礦2",
+        "hog.sec3.d3.s4":"Stage 4: 資源採集",
+        "hog.d3.s4.g1":"採集麵包50",
+        "hog.d3.s4.g2":"採集木材50",
+        "hog.d3.s4.g3":"採集石材10",
+        "hog.d3.s4.g4":"採集鐵礦2",
+        "hog.d3.s4.t5":"研究提升1點戰力",
+        "hog.sec3.d3.s5":"Stage 5: 戰力提升",
+        "hog.d3.s5.t1":"使用1個英雄裝備鍛造鎚",
+        "hog.d3.s5.t2":"使用1個英雄專屬裝備素材",
+        "hog.d3.s5.t3":"建設提升1點戰力",
+        "hog.d3.s5.t4":"研究提升1點戰力",
+        "hog.d3.s5.t5":"訓練/晉升提升1點戰力",
+        "hog.sec3.d3.s6":"Stage 6: 領主裝備升級",
+        "hog.d3.s6.t1":"領主裝備最大評分+1",
+        "hog.sec3.d3.s7":"Stage 7: 加速/升星",
+        "hog.d3.s7.t1":"稀有碎片升星",
+        "hog.d3.s7.t2":"史詩碎片升星",
+        "hog.d3.s7.t3":"傳說碎片升星",
+        "hog.d3.s7.t4":"使用1分鐘建設加速",
+        "hog.d3.s7.t5":"使用1分鐘研究加速",
+        "hog.d3.s7.t6":"使用1分鐘訓練/晉升加速",
+        "hog.sec3.d3.gearHint":"領主裝備「升級評分」請看第4節表格。",
+        "hog.sec3.d45.sum":"第4–5期(賽季英雄：Hilde)",
+        "hog.sec3.d45.s1":"Stage 1: 戰力提升",
+        "hog.d45.s1.t1":"建設提升1點戰力",
+        "hog.d45.s1.t2":"研究提升1點戰力",
+        "hog.d45.s1.t3":"訓練/晉升提升1點戰力",
+        "hog.sec3.d45.s2":"Stage 2: 英雄培養",
+        "hog.d45.s2.t1":"英雄轉盤",
+        "hog.d45.s2.t2":"稀有碎片升星",
+        "hog.d45.s2.t3":"史詩碎片升星",
+        "hog.d45.s2.t4":"傳說碎片升星",
+        "hog.d45.s2.g1":"採集麵包50",
+        "hog.d45.s2.g2":"採集木材50",
+        "hog.d45.s2.g3":"採集石材10",
+        "hog.d45.s2.g4":"採集鐵礦2",
+        "hog.sec3.d45.s4":"Stage 4: 寶石(Charm)升級",
+        "hog.d45.s4.t1":"寶石(Charm)最大評分+1",
+        "hog.d45.s4.g1":"採集麵包50",
+        "hog.d45.s4.g2":"採集木材50",
+        "hog.d45.s4.g3":"採集石材10",
+        "hog.d45.s4.g4":"採集鐵礦2",
+        "hog.d45.s4.t2":"研究提升1點戰力",
+        "hog.sec3.d45.charmHint":"寶石(Charm)「升級評分」請看第5節表格。",
+        "hog.sec3.d45.s5":"Stage 5: 戰力提升",
+        "hog.d45.s5.t1":"使用1個英雄裝備鍛造鎚",
+        "hog.d45.s5.t2":"使用1個英雄專屬裝備素材",
+        "hog.d45.s5.t3":"建設提升1點戰力",
+        "hog.d45.s5.t4":"研究提升1點戰力",
+        "hog.d45.s5.t5":"訓練/晉升提升1點戰力",
+        "hog.sec3.d45.s6":"Stage 6: 領主裝備升級",
+        "hog.d45.s6.t1":"領主裝備最大評分+1",
+        "hog.sec3.d45.s7":"Stage 7: 加速/升星",
+        "hog.d45.s7.t1":"稀有碎片升星",
+        "hog.d45.s7.t2":"史詩碎片升星",
+        "hog.d45.s7.t3":"傳說碎片升星",
+        "hog.d45.s7.t4":"使用1分鐘建設加速",
+        "hog.d45.s7.t5":"使用1分鐘研究加速",
+        "hog.d45.s7.t6":"使用1分鐘訓練/晉升加速",
+        "hog.sec3.tip.h3":"通用建議",
+        "hog.sec3.tip.li1":"在對應階段集中使用對應資源，積分效率更高。",
+        "hog.sec3.tip.li2":"與其他活動重疊時，可能更好堆分。",
+        "hog.sec4.h2":"4) 領主裝備升級積分表",
+        "hog.sec4.p1":"部分階段會按領主裝備評分提升計分。",
+        "hog.sec4.th1":"稀有度",
+        "hog.sec4.th2":"升級評分",
+        "hog.sec5.h2":"5) 寶石(Charm)升級積分表",
+        "hog.sec5.p1":"第4–5期會出現寶石(Charm)評分提升計分的階段。",
+        "hog.sec5.th1":"寶石等級",
+        "hog.sec5.th2":"升級評分",
+        "hog.sec6.h2":"6) 賽季英雄解鎖條件(TOP10/100)",
+        "hog.sec6.h3a":"解鎖 Amadeus(第1賽季)",
+        "hog.sec6.p1":"Amadeus 並非一定透過做完任務取得，部分賽季需要TOP10等排名條件。",
+        "hog.sec6.h3b":"Hilde 獎勵(第4–5期)",
+        "hog.sec6.p2":"第4–5期賽季英雄是 Hilde，常見為TOP100獎勵碎片。",
+        "hog.sec6.p3":"實際條件請以遊戲內公告為準。",
+        "hog.sec7.h2":"7) Q&A + 建議",
+        "hog.qa.sum":"最強領主 Q&A(摘要)",
+        "hog.qa.q1":"Q1. 什麼時候開？",
+        "hog.qa.a1":"A. 通常兩週一輪，但依伺服器不同，請看公告。",
+        "hog.qa.q2":"Q2. 參與條件？",
+        "hog.qa.a2":"A. 全員自動參與，依積分/排名發獎。",
+        "hog.qa.q3":"Q3. 怎麼得分？",
+        "hog.qa.a3":"A. 訓練/建設/研究/加速/升星/鍛造鎚/轉盤/裝備與寶石評分(看階段)。",
+        "hog.qa.q4":"Q4. 怎麼準備高分？",
+        "hog.qa.a4.li1":"先囤加速與資源，活動開始集中使用。",
+        "hog.qa.a4.li2":"與訓練/研究活動重疊時更划算。",
+        "hog.qa.a4.li3":"提前準備建設/訓練/研究加速、鍛造鎚、轉盤(鑽石/票)。",
+        "hog.qa.q5":"Q5. 有什麼獎勵？",
+        "hog.qa.a5":"A. 鑽石、加速、英雄碎片等，裝備素材常不包含在內。",
+        "hog.qa.q6":"Q6. TOP10要多少分？",
+        "hog.qa.a6":"A. 依伺服器不同，可能需要約5億分以上，新服更競爭。",
+        "hog.qa.q7":"Q7. 一定要衝排名嗎？",
+        "hog.qa.a7":"A. 不一定。除第1賽季Amadeus窗口外，穩定拿里程碑獎勵更划算的情況也很多。",
+        "hog.qa.q8":"Q8. 要準備多少鑽石？",
+        "hog.qa.a8":"A. 常與轉盤同開，準備至少162,000鑽石會更舒服。",
+        "hog.spend.h3":"如果你打算課金",
+        "hog.spend.p1":"若決定課金，第1賽季Amadeus獎勵通常很關鍵。重課玩家早期衝到5★會在前期更有優勢(視伺服器而定)。",
+        "hog.f2p.h3":"無課關鍵點",
+        "hog.f2p.p1":"無課要盡量拿到每代轉盤英雄，否則競技場/戰鬥會吃虧。",
+        "hog.footer":"本頁為非官方整理，內容可能隨伺服器/版本變化。"
+      }
+    };
+
+    function normalizeLang(raw){
+      raw = String(raw || '').replace('_','-');
+      var low = raw.toLowerCase();
+      if (!low) return 'ko';
+      if (low.indexOf('ko') === 0) return 'ko';
+      if (low.indexOf('en') === 0) return 'en';
+      if (low.indexOf('ja') === 0) return 'ja';
+      if (low.indexOf('zh') === 0){
+        if (low.indexOf('tw') >= 0 || low.indexOf('hk') >= 0 || low.indexOf('mo') >= 0) return 'zh-TW';
+        return 'zh-CN';
+      }
+      return 'en';
+    }
+
+    function currentLang(){
+      try{
+        var p = new URLSearchParams(location.search);
+        var q = p.get('lang');
+        if (q) return normalizeLang(q);
+      }catch(_e){}
+      try{
+        var ls = localStorage.getItem('lang');
+        if (ls) return normalizeLang(ls);
+      }catch(_e2){}
+      return normalizeLang(navigator.language || 'ko');
+    }
+
+    function t(key){
+      var lang = currentLang();
+      var dict = I18N[lang] || I18N.ko;
+      return (dict && dict[key] != null) ? dict[key] : ((I18N.ko && I18N.ko[key]) || '');
+    }
+
+    function applyI18N(){
+      // topbar
+      var back = document.getElementById('backLink');
+      if (back) back.textContent = t('top.back') || '← Kingshot Guides';
+      var label = document.getElementById('langLabel');
+      if (label) label.textContent = t('top.lang') || 'Language';
+
+      // nodes
+      var nodes = document.querySelectorAll('[data-i18n]');
+      for (var i=0;i<nodes.length;i++){
+        var el = nodes[i];
+        var key = el.getAttribute('data-i18n');
+        var v = t(key);
+        if (v !== '') el.textContent = v;
+      }
+
+      // attributes
+      var attrs = document.querySelectorAll('[data-i18n-attr]');
+      for (var j=0;j<attrs.length;j++){
+        var el2 = attrs[j];
+        var raw = el2.getAttribute('data-i18n-attr') || '';
+        var pairs = raw.split(';');
+        for (var p=0;p<pairs.length;p++){
+          var pair = (pairs[p] || '').trim();
+          if (!pair) continue;
+          var sp = pair.split(':');
+          var attr = (sp[0] || '').trim();
+          var key2 = (sp[1] || '').trim();
+          if (!attr || !key2) continue;
+          var v2 = t(key2);
+          if (v2 !== '') el2.setAttribute(attr, v2);
+        }
+      }
+
+      var title = t('hog.meta.title');
+      if (title) document.title = title;
+
+      // sync html lang
+      document.documentElement.lang = currentLang();
+      document.documentElement.dir = 'ltr';
+    }
+
+    function setLang(next){
+      next = normalizeLang(next);
+      try{ localStorage.setItem('lang', next); }catch(_e){}
+      try{
+        var u = new URL(location.href);
+        u.searchParams.set('lang', next);
+        history.replaceState(null, '', u.pathname + u.search + u.hash);
+      }catch(_e2){}
+      applyI18N();
+    }
+
+    function init(){
+      var sel = document.getElementById('langSwitcher');
+      if (sel){
+        sel.value = currentLang();
+        sel.addEventListener('change', function(e){
+          setLang(e.target.value);
+        });
+      }
+      applyI18N();
+    }
+
+    if (document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', init, { once:true });
+    } else {
+      init();
+    }
+  })();
+  </script>
+</body>
+</html>

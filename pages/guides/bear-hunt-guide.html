@@ -1,160 +1,667 @@
-<!-- /pages/guides/bear-hunt-guide.html (partial only) -->
+<!-- /pages/guides/bear-hunt-guide.html (FULL · SPA include friendly fragment · Gen 6 updated · with Topbar + Local i18n) -->
 
-<div class="guide__grid">
-  <div class="guide__col">
-    <h2 class="guide__col-title" data-i18n="guide.bear.best">베스트 영웅</h2>
+<article id="bear-hunt-guide" class="bear-guide">
+  <style>
+    /* ===== scope: #bear-hunt-guide only ===== */
+    #bear-hunt-guide{color:inherit;font:inherit}
+    #bear-hunt-guide *{box-sizing:border-box}
+    #bear-hunt-guide img{display:block;max-width:100%;height:auto}
 
-    <article class="combo">
-      <h3 class="combo__gen">Gen 1</h3>
-      <ul class="combo__list">
-        <li class="combo__item"><img src="/img/heroes/Amadeus/img_001.webp" alt="영웅A" loading="lazy"></li>
-        <li class="combo__item"><img src="/img/heroes/Jabel/img_001.webp" alt="영웅B" loading="lazy"></li>
-        <li class="combo__item"><img src="/img/heroes/Saul/img_001.webp" alt="영웅C" loading="lazy"></li>
+    #bear-hunt-guide .muted{opacity:.72}
+
+    /* ===== Topbar (Back + Language) ===== */
+    #bear-hunt-guide .topbar{
+      position:sticky;top:0;z-index:10;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:saturate(1.2) blur(10px);
+      border-bottom:1px solid rgba(0,0,0,.10);
+    }
+    @media (prefers-color-scheme: dark){
+      #bear-hunt-guide .topbar{
+        background:rgba(18,18,18,.88);
+        border-bottom-color:rgba(255,255,255,.12);
+      }
+    }
+    #bear-hunt-guide .topbar-inner{
+      max-width:1100px;margin:0 auto;
+      padding:10px 14px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    #bear-hunt-guide .backlink{
+      display:inline-flex;align-items:center;gap:8px;
+      font:900 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;
+      text-decoration:none;
+      color:#0b57d0;
+      white-space:nowrap;
+    }
+    #bear-hunt-guide .langbox{
+      display:flex;align-items:center;gap:10px;
+      white-space:nowrap;
+      font:700 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;
+      opacity:.9;
+    }
+    #bear-hunt-guide .langbox label{opacity:.75}
+    #bear-hunt-guide select{
+      padding:8px 10px;border-radius:10px;
+      border:1px solid rgba(0,0,0,.14);
+      background:rgba(255,255,255,.9);
+      color:inherit;
+    }
+    @media (prefers-color-scheme: dark){
+      #bear-hunt-guide select{
+        border-color:rgba(255,255,255,.16);
+        background:rgba(0,0,0,.25);
+      }
+    }
+
+    /* ===== Title ===== */
+    #bear-hunt-guide .wrap{max-width:1100px;margin:0 auto;padding:14px}
+    #bear-hunt-guide .h1{
+      margin:6px 0 14px;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:-0.02em;
+    }
+
+    /* ===== Grid ===== */
+    #bear-hunt-guide .guide__grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:16px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      #bear-hunt-guide .guide__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width: 640px){
+      #bear-hunt-guide .guide__grid{grid-template-columns:1fr}
+    }
+
+    #bear-hunt-guide .guide__col{
+      border:1px solid rgba(0,0,0,.12);
+      border-radius:18px;
+      background:rgba(0,0,0,.02);
+      padding:14px;
+    }
+    @media (prefers-color-scheme: dark){
+      #bear-hunt-guide .guide__col{
+        border-color:rgba(255,255,255,.14);
+        background:rgba(255,255,255,.04);
+      }
+    }
+
+    #bear-hunt-guide .guide__col-title{
+      margin:0 0 12px;
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:-0.02em;
+    }
+
+    #bear-hunt-guide .combo{margin:0 0 14px}
+    #bear-hunt-guide .combo:last-child{margin-bottom:0}
+    #bear-hunt-guide .combo__gen{
+      margin:0 0 8px;
+      font-size:13px;
+      font-weight:900;
+      opacity:.85;
+    }
+
+    #bear-hunt-guide .combo__list{
+      list-style:none;
+      padding:0;margin:0;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    #bear-hunt-guide .combo__item{
+      width:64px;height:64px;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,.12);
+      background:rgba(255,255,255,.7);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    @media (prefers-color-scheme: dark){
+      #bear-hunt-guide .combo__item{
+        border-color:rgba(255,255,255,.14);
+        background:rgba(0,0,0,.25);
+      }
+    }
+    #bear-hunt-guide .combo__item img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    /* ===== Tips ===== */
+    #bear-hunt-guide .guide__tips{
+      margin-top:18px;
+      border:1px solid rgba(0,0,0,.12);
+      border-radius:18px;
+      background:rgba(0,0,0,.02);
+      padding:14px;
+    }
+    @media (prefers-color-scheme: dark){
+      #bear-hunt-guide .guide__tips{
+        border-color:rgba(255,255,255,.14);
+        background:rgba(255,255,255,.04);
+      }
+    }
+    #bear-hunt-guide .guide__tips h2{
+      margin:0 0 10px;
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:-0.02em;
+    }
+    #bear-hunt-guide .guide__tips ul{margin:0;padding-left:18px}
+    #bear-hunt-guide .guide__tips li{margin:6px 0}
+    #bear-hunt-guide .tips-block{margin-top:12px;padding-top:12px;border-top:1px solid rgba(0,0,0,.10)}
+    @media (prefers-color-scheme: dark){
+      #bear-hunt-guide .tips-block{border-top-color:rgba(255,255,255,.12)}
+    }
+    #bear-hunt-guide .tips-block h3{
+      margin:0 0 10px;
+      font-size:14px;
+      font-weight:900;
+    }
+    #bear-hunt-guide .tips-block h4{
+      margin:12px 0 6px;
+      font-size:13px;
+      font-weight:900;
+      opacity:.9;
+    }
+    #bear-hunt-guide .tips-block p{margin:6px 0}
+  </style>
+
+  <!-- ✅ Topbar: Back to Guides + Language -->
+  <header class="topbar" role="banner">
+    <div class="topbar-inner">
+      <a id="bhg-backLink" class="backlink" href="/guides" aria-label="Back to guides">← Guides</a>
+
+      <div class="langbox">
+        <label for="bhg-lang" id="bhg-langLabel">Language</label>
+        <select id="bhg-lang" aria-label="Language">
+          <option value="ko">한국어</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+          <option value="zh-CN">简体中文</option>
+          <option value="zh-TW">繁體中文</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="h1" data-i18n="bhg.title">곰사냥 조합 추천</div>
+
+    <div class="guide__grid">
+      <!-- ===== BEST (Gen 1 ~ 6) ===== -->
+      <div class="guide__col">
+        <h2 class="guide__col-title" data-i18n="guide.bear.best">베스트 영웅</h2>
+
+        <article class="combo">
+          <h3 class="combo__gen">Gen 1</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Jabel/img_001.webp" alt="Jabel" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Saul/img_001.webp" alt="Saul" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <article class="combo">
+          <h3 class="combo__gen">Gen 2</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Hilde/img_001.webp" alt="Hilde" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Marlin/img_001.webp" alt="Marlin" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <article class="combo">
+          <h3 class="combo__gen">Gen 3</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Marlin/img_001.webp" alt="Marlin" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <article class="combo">
+          <h3 class="combo__gen">Gen 4</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Rosa/img_001.webp" alt="Rosa" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <!-- ✅ Gen 5 (UPDATED): Amadeus · Petra · Rosa -->
+        <article class="combo">
+          <h3 class="combo__gen">Gen 5</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Rosa/img_001.webp" alt="Rosa" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <!-- ✅ Gen 6 (UPDATED): Amadeus · Petra · Yang -->
+        <article class="combo">
+          <h3 class="combo__gen">Gen 6</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Yang/img_001.webp" alt="Yang" loading="lazy"></li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- ===== ALT (Gen 1 ~ 6) ===== -->
+      <div class="guide__col">
+        <h2 class="guide__col-title" data-i18n="guide.bear.alt">최선의 대체 조합</h2>
+
+        <article class="combo">
+          <h3 class="combo__gen">Gen 1</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Helga/img_001.webp" alt="Helga" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Jabel/img_001.webp" alt="Jabel" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Quinn/img_001.webp" alt="Quinn" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <article class="combo">
+          <h3 class="combo__gen">Gen 2</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Helga/img_001.webp" alt="Helga" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Jabel/img_001.webp" alt="Jabel" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Marlin/img_001.webp" alt="Marlin" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <article class="combo">
+          <h3 class="combo__gen">Gen 3</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Helga/img_001.webp" alt="Helga" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Marlin/img_001.webp" alt="Marlin" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <article class="combo">
+          <h3 class="combo__gen">Gen 4</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Helga/img_001.webp" alt="Helga" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Rosa/img_001.webp" alt="Rosa" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <!-- ✅ Gen 5 (UPDATED): Helga · Petra · Rosa -->
+        <article class="combo">
+          <h3 class="combo__gen">Gen 5</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Helga/img_001.webp" alt="Helga" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Rosa/img_001.webp" alt="Rosa" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <!-- ✅ Gen 6 (UPDATED): Helga · Petra · Yang -->
+        <article class="combo">
+          <h3 class="combo__gen">Gen 6</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Helga/img_001.webp" alt="Helga" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Yang/img_001.webp" alt="Yang" loading="lazy"></li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- ===== F2P (Gen 1 ~ 6) ===== -->
+      <div class="guide__col">
+        <h2 class="guide__col-title" data-i18n="guide.bear.f2p">F2P</h2>
+
+        <article class="combo">
+          <h3 class="combo__gen">Gen 1</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Howard/img_001.webp" alt="Howard" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Jabel/img_001.webp" alt="Jabel" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Quinn/img_001.webp" alt="Quinn" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <article class="combo">
+          <h3 class="combo__gen">Gen 2</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Zoe/img_001.webp" alt="Zoe" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Jabel/img_001.webp" alt="Jabel" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Quinn/img_001.webp" alt="Quinn" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <article class="combo">
+          <h3 class="combo__gen">Gen 3</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Zoe/img_001.webp" alt="Zoe" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Quinn/img_001.webp" alt="Quinn" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <article class="combo">
+          <h3 class="combo__gen">Gen 4</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Zoe/img_001.webp" alt="Zoe" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Rosa/img_001.webp" alt="Rosa" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <!-- ✅ Gen 5 (UPDATED): Longfei · Petra · Rosa -->
+        <article class="combo">
+          <h3 class="combo__gen">Gen 5</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Longfei/img_001.webp" alt="Longfei" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Rosa/img_001.webp" alt="Rosa" loading="lazy"></li>
+          </ul>
+        </article>
+
+        <!-- ✅ Gen 6 (UPDATED): Longfei · Sophia · Rosa -->
+        <article class="combo">
+          <h3 class="combo__gen">Gen 6</h3>
+          <ul class="combo__list">
+            <li class="combo__item"><img src="/img/heroes/Longfei/img_001.webp" alt="Longfei" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Sophia/img_001.webp" alt="Sophia" loading="lazy"></li>
+            <li class="combo__item"><img src="/img/heroes/Rosa/img_001.webp" alt="Rosa" loading="lazy"></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <aside class="guide__tips">
+      <h2 data-i18n="guide.bear.tips.title">운영 팁</h2>
+      <ul>
+        <li data-i18n="guide.bear.tips.li1">곰사냥 부대비율 1:1:8</li>
+        <li data-i18n="guide.bear.tips.li2">F2P유저라면 최우선적으로 연맹내 고투력의 집결에 탑승</li>
       </ul>
-    </article>
 
-    <article class="combo">
-      <h3 class="combo__gen">Gen 2</h3>
-      <ul class="combo__list">
-        <li class="combo__item"><img src="/img/heroes/Amadeus/img_001.webp" alt="영웅A2"></li>
-        <li class="combo__item"><img src="/img/heroes/Hilde/img_001.webp" alt="영웅B2"></li>
-        <li class="combo__item"><img src="/img/heroes/Marlin/img_001.webp" alt="영웅C2"></li>
-      </ul>
-    </article>
+      <section class="tips-block">
+        <h3 data-i18n="guide.bear.tips.core.title">곰사냥 핵심 공략</h3>
 
-    <article class="combo">
-      <h3 class="combo__gen">Gen 3</h3>
-      <ul class="combo__list">
-        <li class="combo__item"><img src="/img/heroes/Amadeus/img_001.webp" alt="영웅A3"></li>
-        <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="영웅B3"></li>
-        <li class="combo__item"><img src="/img/heroes/Marlin/img_001.webp" alt="영웅C3"></li>
-      </ul>
-    </article>
+        <h4 data-i18n="guide.bear.tips.core.overview.title">이벤트 개요</h4>
+        <p class="muted" data-i18n="guide.bear.tips.core.overview.body">
+          곰사냥은 48시간마다 참여할 수 있는 연맹 이벤트로, 제작망치를 얻을 수 있는 콘텐츠다.
+        </p>
 
-    <article class="combo">
-      <h3 class="combo__gen">Gen 4</h3>
-      <ul class="combo__list">
-        <li class="combo__item"><img src="/img/heroes/Amadeus/img_001.webp" alt="영웅A4"></li>
-        <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="영웅B4"></li>
-        <li class="combo__item"><img src="/img/heroes/Rosa/img_001.webp" alt="영웅C4"></li>
-      </ul>
-    </article>
+        <h4 data-i18n="guide.bear.tips.core.troops.title">병력 조합</h4>
+        <ul>
+          <li data-i18n="guide.bear.tips.core.troops.li1">최종적으로 1:1:8 (보병:기병:궁병) 비율 운용</li>
+        </ul>
+
+        <h4 data-i18n="guide.bear.tips.core.heroes.title">영웅 조합</h4>
+        <ul>
+          <li data-i18n="guide.bear.tips.core.heroes.li1">집결장: 가장 강한 집결 영웅을 우선 배치</li>
+          <li data-i18n="guide.bear.tips.core.heroes.li2">집결원: 원정 첫 스킬이 공격력·파괴력 버프인 영웅을 우선 배치</li>
+        </ul>
+
+        <h4 data-i18n="guide.bear.tips.core.mode.title">단독 vs 집결 참여</h4>
+        <ul>
+          <li data-i18n="guide.bear.tips.core.mode.li1">항상 나의 집결 1부대</li>
+          <li data-i18n="guide.bear.tips.core.mode.li2">상위 연맹원 집결 6부대 참여</li>
+          <li data-i18n="guide.bear.tips.core.mode.li3">총 7부대 운용이 곰사냥 고득점의 핵심</li>
+        </ul>
+      </section>
+    </aside>
   </div>
 
-  <div class="guide__col">
-    <h2 class="guide__col-title" data-i18n="guide.bear.alt">최선의 대체 조합</h2>
+  <script>
+  (function(){
+    // ===== Local i18n (no external dependency) =====
+    var DICT = {
+      ko:{
+        "bhg.back":"← 가이드",
+        "bhg.lang":"언어",
+        "bhg.title":"곰사냥 조합 추천",
 
-    <article class="combo">
-      <h3 class="combo__gen">Gen 1</h3>
-      <ul class="combo__list">
-        <li class="combo__item"><img src="/img/heroes/Helga/img_001.webp" alt="영웅A" loading="lazy"></li>
-        <li class="combo__item"><img src="/img/heroes/Jabel/img_001.webp" alt="영웅B" loading="lazy"></li>
-        <li class="combo__item"><img src="/img/heroes/Quinn/img_001.webp" alt="영웅C" loading="lazy"></li>
-      </ul>
-    </article>
+        "guide.bear.best":"베스트 영웅",
+        "guide.bear.alt":"최선의 대체 조합",
+        "guide.bear.f2p":"F2P",
 
-    <article class="combo">
-      <h3 class="combo__gen">Gen 2</h3>
-      <ul class="combo__list">
-        <li class="combo__item"><img src="/img/heroes/Helga/img_001.webp" alt="영웅A2"></li>
-        <li class="combo__item"><img src="/img/heroes/Jabel/img_001.webp" alt="영웅B2"></li>
-        <li class="combo__item"><img src="/img/heroes/Marlin/img_001.webp" alt="영웅C2"></li>
-      </ul>
-    </article>
+        "guide.bear.tips.title":"운영 팁",
+        "guide.bear.tips.li1":"곰사냥 부대비율 1:1:8",
+        "guide.bear.tips.li2":"F2P유저라면 최우선적으로 연맹내 고투력의 집결에 탑승",
 
-    <article class="combo">
-      <h3 class="combo__gen">Gen 3</h3>
-      <ul class="combo__list">
-        <li class="combo__item"><img src="/img/heroes/Helga/img_001.webp" alt="영웅A3"></li>
-        <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="영웅B3"></li>
-        <li class="combo__item"><img src="/img/heroes/Marlin/img_001.webp" alt="영웅C3"></li>
-      </ul>
-    </article>
+        "guide.bear.tips.core.title":"곰사냥 핵심 공략",
+        "guide.bear.tips.core.overview.title":"이벤트 개요",
+        "guide.bear.tips.core.overview.body":"곰사냥은 48시간마다 참여할 수 있는 연맹 이벤트로, 제작망치를 얻을 수 있는 콘텐츠다.",
+        "guide.bear.tips.core.troops.title":"병력 조합",
+        "guide.bear.tips.core.troops.li1":"최종적으로 1:1:8 (보병:기병:궁병) 비율 운용",
+        "guide.bear.tips.core.heroes.title":"영웅 조합",
+        "guide.bear.tips.core.heroes.li1":"집결장: 가장 강한 집결 영웅을 우선 배치",
+        "guide.bear.tips.core.heroes.li2":"집결원: 원정 첫 스킬이 공격력·파괴력 버프인 영웅을 우선 배치",
+        "guide.bear.tips.core.mode.title":"단독 vs 집결 참여",
+        "guide.bear.tips.core.mode.li1":"항상 나의 집결 1부대",
+        "guide.bear.tips.core.mode.li2":"상위 연맹원 집결 6부대 참여",
+        "guide.bear.tips.core.mode.li3":"총 7부대 운용이 곰사냥 고득점의 핵심"
+      },
+      en:{
+        "bhg.back":"← Guides",
+        "bhg.lang":"Language",
+        "bhg.title":"Bear Hunt Compositions",
 
-    <article class="combo">
-      <h3 class="combo__gen">Gen 4</h3>
-      <ul class="combo__list">
-        <li class="combo__item"><img src="/img/heroes/Helga/img_001.webp" alt="영웅A4"></li>
-        <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="영웅B4"></li>
-        <li class="combo__item"><img src="/img/heroes/Rosa/img_001.webp" alt="영웅C4"></li>
-      </ul>
-    </article>
-  </div>
+        "guide.bear.best":"Best Heroes",
+        "guide.bear.alt":"Best Alternative Comps",
+        "guide.bear.f2p":"F2P",
 
-  <div class="guide__col">
-    <h2 class="guide__col-title">F2P</h2>
+        "guide.bear.tips.title":"Tips",
+        "guide.bear.tips.li1":"Troop ratio: 1:1:8",
+        "guide.bear.tips.li2":"If you're F2P, prioritize joining the strongest alliance rallies first",
 
-    <article class="combo">
-      <h3 class="combo__gen">Gen 1</h3>
-      <ul class="combo__list">
-        <li class="combo__item"><img src="/img/heroes/Howard/img_001.webp" alt="영웅A" loading="lazy"></li>
-        <li class="combo__item"><img src="/img/heroes/Jabel/img_001.webp" alt="영웅B" loading="lazy"></li>
-        <li class="combo__item"><img src="/img/heroes/Quinn/img_001.webp" alt="영웅C" loading="lazy"></li>
-      </ul>
-    </article>
+        "guide.bear.tips.core.title":"Bear Hunt Core Guide",
+        "guide.bear.tips.core.overview.title":"Overview",
+        "guide.bear.tips.core.overview.body":"Bear Hunt is an alliance event you can join every 48 hours, and it rewards crafting hammers.",
+        "guide.bear.tips.core.troops.title":"Troops",
+        "guide.bear.tips.core.troops.li1":"Final ratio: 1:1:8 (Infantry:Cavalry:Archer)",
+        "guide.bear.tips.core.heroes.title":"Heroes",
+        "guide.bear.tips.core.heroes.li1":"Rally leader: place your strongest rally hero first",
+        "guide.bear.tips.core.heroes.li2":"Joiner: prioritize heroes whose first Expedition skill is an Attack/Destructive Power buff",
+        "guide.bear.tips.core.mode.title":"Solo vs Joining",
+        "guide.bear.tips.core.mode.li1":"Always run 1 of your own rally marches",
+        "guide.bear.tips.core.mode.li2":"Join 6 rallies from top alliance members",
+        "guide.bear.tips.core.mode.li3":"Running a total of 7 marches is key for high scores"
+      },
+      ja:{
+        "bhg.back":"← ガイド",
+        "bhg.lang":"言語",
+        "bhg.title":"ベアハント 編成おすすめ",
 
-    <article class="combo">
-      <h3 class="combo__gen">Gen 2</h3>
-      <ul class="combo__list">
-        <li class="combo__item"><img src="/img/heroes/Zoe/img_001.webp" alt="영웅A2"></li>
-        <li class="combo__item"><img src="/img/heroes/Jabel/img_001.webp" alt="영웅B2"></li>
-        <li class="combo__item"><img src="/img/heroes/Quinn/img_001.webp" alt="영웅C2"></li>
-      </ul>
-    </article>
+        "guide.bear.best":"ベスト英雄",
+        "guide.bear.alt":"最善の代替編成",
+        "guide.bear.f2p":"F2P",
 
-    <article class="combo">
-      <h3 class="combo__gen">Gen 3</h3>
-      <ul class="combo__list">
-        <li class="combo__item"><img src="/img/heroes/Zoe/img_001.webp" alt="영웅A3"></li>
-        <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="영웅B3"></li>
-        <li class="combo__item"><img src="/img/heroes/Quinn/img_001.webp" alt="영웅C3"></li>
-      </ul>
-    </article>
+        "guide.bear.tips.title":"運用のコツ",
+        "guide.bear.tips.li1":"部隊比率 1:1:8",
+        "guide.bear.tips.li2":"F2Pなら、同盟内の高戦力の集結に最優先で乗る",
 
-    <article class="combo">
-      <h3 class="combo__gen">Gen 4</h3>
-      <ul class="combo__list">
-        <li class="combo__item"><img src="/img/heroes/Zoe/img_001.webp" alt="영웅A4"></li>
-        <li class="combo__item"><img src="/img/heroes/Petra/img_001.webp" alt="영웅B4"></li>
-        <li class="combo__item"><img src="/img/heroes/Rosa/img_001.webp" alt="영웅C4"></li>
-      </ul>
-    </article>
-  </div>
-</div>
+        "guide.bear.tips.core.title":"ベアハント 核心攻略",
+        "guide.bear.tips.core.overview.title":"イベント概要",
+        "guide.bear.tips.core.overview.body":"ベアハントは48時間ごとに参加できる同盟イベントで、クラフト用ハンマーを獲得できます。",
+        "guide.bear.tips.core.troops.title":"兵士編成",
+        "guide.bear.tips.core.troops.li1":"最終比率 1:1:8（歩兵:騎兵:弓兵）",
+        "guide.bear.tips.core.heroes.title":"英雄編成",
+        "guide.bear.tips.core.heroes.li1":"集結長：最強の集結英雄を優先配置",
+        "guide.bear.tips.core.heroes.li2":"集結員：遠征スキル1が攻撃/破壊力バフの英雄を優先",
+        "guide.bear.tips.core.mode.title":"単独 vs 参加",
+        "guide.bear.tips.core.mode.li1":"常に自分の集結 1部隊",
+        "guide.bear.tips.core.mode.li2":"上位同盟員の集結に 6部隊参加",
+        "guide.bear.tips.core.mode.li3":"合計7部隊運用が高得点の鍵"
+      },
+      "zh-CN":{
+        "bhg.back":"← 指南",
+        "bhg.lang":"语言",
+        "bhg.title":"熊狩阵容推荐",
 
-<aside class="guide__tips">
-  <h2 data-i18n="guide.bear.tips.title">운영 팁</h2>
-  <ul>
-    <li data-i18n="guide.bear.tips.li1">곰사냥 부대비율 1:1:8</li>
-    <li data-i18n="guide.bear.tips.li2">F2P유저라면 최우선적으로 연맹내 고투력의 집결에 탑승</li>
-  </ul>
+        "guide.bear.best":"最佳英雄",
+        "guide.bear.alt":"最佳替代阵容",
+        "guide.bear.f2p":"F2P",
 
-  <section class="tips-block">
-    <h3 data-i18n="guide.bear.tips.core.title">곰사냥 핵심 공략</h3>
+        "guide.bear.tips.title":"运营技巧",
+        "guide.bear.tips.li1":"兵力比例 1:1:8",
+        "guide.bear.tips.li2":"F2P优先上车同盟内高战力集结",
 
-    <h4 data-i18n="guide.bear.tips.core.overview.title">이벤트 개요</h4>
-    <p class="muted" data-i18n="guide.bear.tips.core.overview.body">
-      곰사냥은 48시간마다 참여할 수 있는 연맹 이벤트로, 제작망치를 얻을 수 있는 콘텐츠다.
-    </p>
+        "guide.bear.tips.core.title":"熊狩核心攻略",
+        "guide.bear.tips.core.overview.title":"活动概览",
+        "guide.bear.tips.core.overview.body":"熊狩是每48小时可参与一次的同盟活动，可获得制作锤。",
+        "guide.bear.tips.core.troops.title":"兵种搭配",
+        "guide.bear.tips.core.troops.li1":"最终比例 1:1:8（步兵:骑兵:弓兵）",
+        "guide.bear.tips.core.heroes.title":"英雄搭配",
+        "guide.bear.tips.core.heroes.li1":"集结长：优先放最强集结英雄",
+        "guide.bear.tips.core.heroes.li2":"集结员：优先选择远征1技能为攻击/破坏力加成的英雄",
+        "guide.bear.tips.core.mode.title":"单独 vs 上车",
+        "guide.bear.tips.core.mode.li1":"始终开自己的集结 1队",
+        "guide.bear.tips.core.mode.li2":"上车同盟强者集结 6队",
+        "guide.bear.tips.core.mode.li3":"总计7队是高分关键"
+      },
+      "zh-TW":{
+        "bhg.back":"← 指南",
+        "bhg.lang":"語言",
+        "bhg.title":"熊狩陣容推薦",
 
-    <h4 data-i18n="guide.bear.tips.core.troops.title">병력 조합</h4>
-    <ul>
-      <li data-i18n="guide.bear.tips.core.troops.li1">최종적으로 1:1:8 (보병:기병:궁병) 비율 운용</li>
-    </ul>
+        "guide.bear.best":"最佳英雄",
+        "guide.bear.alt":"最佳替代陣容",
+        "guide.bear.f2p":"F2P",
 
-    <h4 data-i18n="guide.bear.tips.core.heroes.title">영웅 조합</h4>
-    <ul>
-      <li data-i18n="guide.bear.tips.core.heroes.li1">집결장: 가장 강한 집결 영웅을 우선 배치</li>
-      <li data-i18n="guide.bear.tips.core.heroes.li2">집결원: 원정 첫 스킬이 공격력·파괴력 버프인 영웅을 우선 배치</li>
-    </ul>
+        "guide.bear.tips.title":"營運技巧",
+        "guide.bear.tips.li1":"兵力比例 1:1:8",
+        "guide.bear.tips.li2":"F2P優先上車同盟內高戰力集結",
 
-    <h4 data-i18n="guide.bear.tips.core.mode.title">단독 vs 집결 참여</h4>
-    <ul>
-      <li data-i18n="guide.bear.tips.core.mode.li1">항상 나의 집결 1부대</li>
-      <li data-i18n="guide.bear.tips.core.mode.li2">상위 연맹원 집결 6부대 참여</li>
-      <li data-i18n="guide.bear.tips.core.mode.li3">총 7부대 운용이 곰사냥 고득점의 핵심</li>
-    </ul>
-  </section>
-</aside>
+        "guide.bear.tips.core.title":"熊狩核心攻略",
+        "guide.bear.tips.core.overview.title":"活動概覽",
+        "guide.bear.tips.core.overview.body":"熊狩是每48小時可參與一次的同盟活動，可獲得製作鎚。",
+        "guide.bear.tips.core.troops.title":"兵種搭配",
+        "guide.bear.tips.core.troops.li1":"最終比例 1:1:8（步兵:騎兵:弓兵）",
+        "guide.bear.tips.core.heroes.title":"英雄搭配",
+        "guide.bear.tips.core.heroes.li1":"集結長：優先放最強集結英雄",
+        "guide.bear.tips.core.heroes.li2":"集結員：優先選擇遠征1技能為攻擊/破壞力加成的英雄",
+        "guide.bear.tips.core.mode.title":"單獨 vs 上車",
+        "guide.bear.tips.core.mode.li1":"固定開自己的集結 1隊",
+        "guide.bear.tips.core.mode.li2":"上車同盟強者集結 6隊",
+        "guide.bear.tips.core.mode.li3":"總計7隊是高分關鍵"
+      }
+    };
 
+    function normalizeLang(raw){
+      raw = String(raw || '').replace('_','-');
+      var low = raw.toLowerCase();
+      if (!low) return 'ko';
+      if (low.indexOf('ko') === 0) return 'ko';
+      if (low.indexOf('en') === 0) return 'en';
+      if (low.indexOf('ja') === 0) return 'ja';
+      if (low.indexOf('zh') === 0){
+        if (low.indexOf('tw') >= 0 || low.indexOf('hk') >= 0 || low.indexOf('mo') >= 0) return 'zh-TW';
+        return 'zh-CN';
+      }
+      return 'en';
+    }
 
+    function getLang(){
+      var ls = null;
+      try{ ls = localStorage.getItem('lang'); }catch(_e){}
+      if (ls) return normalizeLang(ls);
+
+      try{
+        var p = new URLSearchParams(location.search);
+        var q = p.get('lang');
+        if (q) return normalizeLang(q);
+      }catch(_e2){}
+
+      try{
+        if (window.I18N){
+          if (typeof window.I18N.getLang === 'function') return normalizeLang(window.I18N.getLang());
+          if (typeof window.I18N.lang === 'string') return normalizeLang(window.I18N.lang);
+        }
+      }catch(_e3){}
+
+      return normalizeLang(navigator.language || 'ko');
+    }
+
+    function t(lang, key){
+      var dict = DICT[lang] || DICT.ko;
+      return (dict && dict[key] != null) ? dict[key] : ((DICT.ko && DICT.ko[key]) || '');
+    }
+
+    function applyLang(lang){
+      var host = document.getElementById('bear-hunt-guide');
+      if (!host) return;
+
+      // Topbar text
+      var back = host.querySelector('#bhg-backLink');
+      if (back) back.textContent = t(lang,'bhg.back') || '← Guides';
+
+      var lab = host.querySelector('#bhg-langLabel');
+      if (lab) lab.textContent = t(lang,'bhg.lang') || 'Language';
+
+      // Translate nodes inside this guide only
+      var nodes = host.querySelectorAll('[data-i18n]');
+      for (var i=0;i<nodes.length;i++){
+        var el = nodes[i];
+        var key = el.getAttribute('data-i18n');
+        var val = t(lang, key);
+        if (val !== '') el.textContent = val;
+      }
+
+      // Keep selector in sync
+      var sel = host.querySelector('#bhg-lang');
+      if (sel) sel.value = lang;
+
+      // Update back link with lang (so returning keeps same language)
+      if (back){
+        var href = '/guides?lang=' + encodeURIComponent(lang);
+        back.setAttribute('href', href);
+      }
+
+      // Fire events for other parts of the site (if they listen)
+      try{ window.dispatchEvent(new Event('i18n:change')); }catch(_e){}
+      try{ document.dispatchEvent(new Event('i18n:changed')); }catch(_e2){}
+    }
+
+    function init(){
+      var host = document.getElementById('bear-hunt-guide');
+      if (!host) return;
+
+      var lang = getLang();
+      applyLang(lang);
+
+      var sel = host.querySelector('#bhg-lang');
+      if (sel){
+        sel.addEventListener('change', function(e){
+          var next = normalizeLang(e.target.value);
+          try{ localStorage.setItem('lang', next); }catch(_e){}
+          applyLang(next);
+        });
+      }
+
+      // Back link: SPA router 있으면 navigate 우선
+      var back = host.querySelector('#bhg-backLink');
+      if (back){
+        back.addEventListener('click', function(e){
+          var to = back.getAttribute('href') || '/guides';
+          if (window.navigate){
+            e.preventDefault();
+            try{ window.navigate(to); }catch(_e){ location.href = to; }
+          }
+        }, { passive:false });
+      }
+    }
+
+    if (document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', init, { once:true });
+    } else {
+      init();
+    }
+  })();
+  </script>
+</article>

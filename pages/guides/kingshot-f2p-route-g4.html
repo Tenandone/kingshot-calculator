@@ -1,339 +1,875 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" dir="ltr">
 <head>
-  <base href="/" />
-<script src="/js/standalone-bridge.js?v=202509120604" defer></script>
   <meta charset="utf-8" />
-  <title>F2P 진행 루트 업데이트 (로사 전용옵션 반영)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="킹샷 F2P 추천 루트 업데이트: 로사 전용무기(원정) 집결 파괴력 +15% 반영. G2 조이 → G3 리틀페라 → G4 로사, 곰사냥 베스트 조합 및 룰렛 운영 팁 정리." />
-  <style>
-    /* ====== 스코프: 이 문서 내부만 영향 ====== */
-    #f2p-article{font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;line-height:1.65;color:#111;background:#fff;max-width:1000px;margin:0 auto;padding:20px}
-    #f2p-article h1{font-size:26px;margin:.2em 0 .6em}
-    #f2p-article h2{font-size:20px;margin:1.6em 0 .6em}
-    #f2p-article p{margin:.4em 0}
-    #f2p-article .muted{color:#666}
-    #f2p-article .note{background:#f8fafc;border:1px solid #e5e7eb;padding:12px;border-radius:10px}
-    #f2p-article table{width:100%;border-collapse:collapse;margin:10px 0 18px}
-    #f2p-article th,#f2p-article td{border:1px solid #e5e7eb;padding:10px;text-align:center}
-    #f2p-article th{background:#f7f7f7}
-    #f2p-article ul,#f2p-article ol{padding-left:18px}
-    #f2p-article .tag{display:inline-block;font-size:12px;border:1px solid #e5e7eb;padding:2px 8px;border-radius:999px;margin:4px 6px 0 0}
-    #f2p-article .grid{display:grid;gap:12px}
-    @media(min-width:720px){#f2p-article .grid.cols-2{grid-template-columns:1fr 1fr}}
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
 
-    /* ====== 다국어 표시 규칙 ====== */
-    #f2p-article .lang{display:none}
-    html[lang="ko"] #f2p-article .lang-ko{display:block}
-    html[lang="en"] #f2p-article .lang-en{display:block}
-    html[lang^="ja"] #f2p-article .lang-ja{display:block}
-    html[lang="zh-CN"], html[lang^="zh-cn"] #f2p-article .lang-zh-CN{display:block}
-    html[lang="zh-TW"], html[lang^="zh-tw"] #f2p-article .lang-zh-TW{display:block}
+  <title>Kingshot Beginner Guide (F2P/Low-Spend Roadmap)</title>
+  <meta name="description" content="Kingshot beginner roadmap for F2P/low spenders: top alliance, VIP7, Arena, hammers (hero gear), Town Center tiers, and best event strategy." />
+
+  <style>
+    *{box-sizing:border-box}
+    :root{
+      --brand:#0b57d0;
+      --text:#111827;
+      --muted:#6b7280;
+      --bg:#ffffff;
+      --surface:#ffffff;
+      --border:#e5e7eb;
+      --chip:#f3f4f6;
+      --note:#f8fafc;
+      --warn:#fff7ed;
+      --ok:#ecfdf5;
+      --shadow:0 10px 25px rgba(0,0,0,.06);
+      --radius:16px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --bg:#0b0b0b;
+        --surface:#121212;
+        --border:#2a2a2a;
+        --chip:#1b1b1b;
+        --note:#141414;
+        --warn:#1a140c;
+        --ok:#0e1a13;
+        --shadow:0 10px 25px rgba(0,0,0,.35);
+      }
+    }
+
+    html,body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:15px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,"Noto Sans KR","Noto Sans JP","Noto Sans SC","Noto Sans TC",Arial,sans-serif;
+    }
+    a{color:var(--brand);text-decoration:none;font-weight:800}
+    a:hover{text-decoration:underline}
+    .muted{color:var(--muted)}
+    .container{max-width:1060px;margin:0 auto;padding:16px}
+
+    /* ===== Topbar ===== */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background:var(--surface);
+      border-bottom:1px solid var(--border);
+      backdrop-filter:saturate(1.2) blur(10px);
+    }
+    .topbar-inner{
+      max-width:1060px;margin:0 auto;
+      padding:10px 16px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .back{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:14px;font-weight:900;color:var(--brand);
+      white-space:nowrap;
+    }
+    .pill{
+      display:inline-flex;align-items:center;
+      height:32px;padding:0 12px;border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--chip);
+      font-size:13px;font-weight:900;
+      color:var(--text);
+      white-space:nowrap;
+      gap:8px;
+    }
+    .pill select{
+      height:26px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--surface);
+      color:var(--text);
+      padding:0 10px;
+      font:800 12px/1 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      outline:none;
+    }
+
+    /* ===== Head ===== */
+    h1{
+      margin:14px 0 8px;
+      font-size:clamp(24px,3vw,38px);
+      letter-spacing:-0.02em;
+      line-height:1.2;
+    }
+    .meta{
+      display:flex;gap:10px;flex-wrap:wrap;
+      margin:6px 0 18px;
+      font-size:13px;color:var(--muted);
+    }
+
+    /* ===== Cards / blocks ===== */
+    .card{
+      border:1px solid var(--border);
+      background:var(--surface);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+    @media (min-width: 940px){
+      .grid{grid-template-columns:1.2fr .8fr}
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:12px 14px;
+      background:var(--note);
+    }
+    .callout.ok{background:var(--ok)}
+    .callout.warn{background:var(--warn)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0;padding-left:18px}
+    .callout li{margin:6px 0}
+
+    /* ===== TOC ===== */
+    .toc{
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:var(--surface);
+    }
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+    .toc a{font-weight:900;color:var(--text)}
+    .toc a:hover{color:var(--brand)}
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+
+    /* ===== Sections ===== */
+    section.block{
+      margin-top:16px;
+      border:1px solid var(--border);
+      background:var(--surface);
+      border-radius:var(--radius);
+      padding:16px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:18px;
+      letter-spacing:-0.02em;
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      letter-spacing:-0.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .chip{
+      display:inline-flex;align-items:center;
+      height:34px;padding:0 12px;border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--chip);
+      font-weight:900;font-size:13px;color:var(--text);
+      cursor:pointer;
+      transition:transform .12s ease, border-color .12s ease;
+    }
+    .chip:hover{
+      transform:translateY(-1px);
+      border-color:color-mix(in srgb, var(--brand) 40%, var(--border));
+    }
+
+    /* ===== Details ===== */
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:var(--note);
+      margin:10px 0;
+    }
+    summary{cursor:pointer;font-weight:1000;letter-spacing:-0.01em}
+
+    /* ===== Footer note ===== */
+    .foot{margin:18px 0 8px;font-size:12.5px;color:var(--muted)}
+    .hr{border:0;border-top:1px solid var(--border);margin:16px 0}
+
+    /* ===== i18n visibility ===== */
+    .lang{display:none}
+    html[data-lang="ko"] .lang.ko{display:inline}
+    html[data-lang="en"] .lang.en{display:inline}
+    html[data-lang="ja"] .lang.ja{display:inline}
+    html[data-lang="zh-CN"] .lang.zh-CN{display:inline}
+    html[data-lang="zh-TW"] .lang.zh-TW{display:inline}
   </style>
 </head>
+
 <body>
-<article id="f2p-article">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="back" href="/guides" aria-label="Back to guides">
+        <span class="lang ko">← Kingshot 가이드</span>
+        <span class="lang en">← Kingshot Guides</span>
+        <span class="lang ja">← Kingshot ガイド</span>
+        <span class="lang zh-CN">← Kingshot 指南</span>
+        <span class="lang zh-TW">← Kingshot 指南</span>
+      </a>
 
-  <!-- ========= KO ========= -->
-  <section class="lang lang-ko">
-    <h1>F2P 진행 루트 업데이트 (로사 전용옵션 반영)</h1>
-    <p><b>로사 전용무기(원정 옵션)</b>: 집결 파괴력 +15% → 집결 콘텐츠 효율 대폭 상승</p>
-    <p><b>추천 F2P 루트(룰렛 기준)</b>: <span class="tag">G2 조이</span> → <span class="tag">G3 리틀페라</span> → <span class="tag">G4 로사</span></p>
+      <span class="pill">
+        <span class="lang ko">초보자 로드맵 · 소과금/무과금</span>
+        <span class="lang en">Beginner Roadmap · F2P/Low-spend</span>
+        <span class="lang ja">初心者ロードマップ · 微課金/無課金</span>
+        <span class="lang zh-CN">新手路线 · 微氪/零氪</span>
+        <span class="lang zh-TW">新手路線 · 微課/無課</span>
 
-    <h2>왜 루트가 바뀌나요?</h2>
-    <div class="note">
-      <ul>
-        <li><b>로사 전용옵션 = 집결 파괴력 +15%</b>로 집결 딜 지표가 체감 상승.</li>
-        <li>기존 <b>G2 마린 공용 조각 루트</b>보다 <b>G4 로사 룰렛</b>이 집결 효율/메타 대응에서 합리적.</li>
-        <li><b>5세대 이후</b> 공용 조각을 “핫한 5세대 핵심 라인”에 집중 투자 시, 1~4세대 고른 투자보다 전투력 체감 우위 기대.</li>
-      </ul>
+        <select id="langSwitcher" aria-label="Language">
+          <option value="ko">KO</option>
+          <option value="en">EN</option>
+          <option value="ja">JA</option>
+          <option value="zh-CN">CN</option>
+          <option value="zh-TW">TW</option>
+        </select>
+      </span>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>
+      <span class="lang ko">Kingshot 초보자 가이드</span>
+      <span class="lang en">Kingshot Beginner Guide</span>
+      <span class="lang ja">Kingshot 初心者ガイド</span>
+      <span class="lang zh-CN">Kingshot 新手指南</span>
+      <span class="lang zh-TW">Kingshot 新手指南</span>
+    </h1>
+
+    <div class="meta">
+      <span class="lang ko">목표: 소과금/무과금이 꾸준히 강해지는 운영 루트</span>
+      <span class="lang en">Goal: A steady growth path for F2P/low spenders</span>
+      <span class="lang ja">目的: 微課金/無課金でも着実に強くなる運用ルート</span>
+      <span class="lang zh-CN">目标：零氪/微氪也能稳定变强的路线</span>
+      <span class="lang zh-TW">目標：無課/微課也能穩定變強的路線</span>
+
+      <span class="lang ko">핵심: 1위 연맹 · VIP7 · 경기장 · 망치(영웅장비)</span>
+      <span class="lang en">Core: Top alliance · VIP7 · Arena · Hammers (Hero Gear)</span>
+      <span class="lang ja">要点: 上位同盟 · VIP7 · アリーナ · ハンマー（英雄装備）</span>
+      <span class="lang zh-CN">核心：顶级联盟 · VIP7 · 竞技场 · 锤子（英雄装备）</span>
+      <span class="lang zh-TW">核心：頂級聯盟 · VIP7 · 競技場 · 鎚子（英雄裝備）</span>
     </div>
 
-    <h2>F2P 추천 루트 (룰렛 중심)</h2>
-    <table aria-label="F2P 추천 루트">
-      <thead>
-        <tr><th>세대</th><th>영웅</th><th>출처</th><th>포지션/역할</th><th>비고</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>G2</td><td>조이</td><td>룰렛</td><td>보병 핵심</td><td><b>5성 필수</b>, G4까지 장기 사용</td></tr>
-        <tr><td>G3</td><td>리틀페라</td><td>룰렛</td><td>첫 집결 기병</td><td><b>5성 필수</b> (F2P 선택지 거의 없음)</td></tr>
-        <tr><td>G4</td><td>로사</td><td>룰렛</td><td>궁병 딜/집결 상승</td><td>전용옵션 = <b>집결 파괴력 +15%</b> → <b>5성 필수</b></td></tr>
-      </tbody>
-    </table>
-    <p class="muted">※ G2 대체 보병은 현재 부재(5세대에서 가능성).</p>
+    <div class="grid">
+      <div class="card">
+        <div class="callout ok">
+          <h3>
+            <span class="lang ko">먼저 이것만 기억하면 절반은 성공</span>
+            <span class="lang en">Remember these first (you’re halfway there)</span>
+            <span class="lang ja">まずはこれだけ覚えれば半分成功</span>
+            <span class="lang zh-CN">先记住这些，你就成功了一半</span>
+            <span class="lang zh-TW">先記住這些，你就成功了一半</span>
+          </h3>
+          <ul>
+            <li>
+              <span class="lang ko"><b>건설 대기 + 행렬 대기</b>는 필수(게임 속도 자체가 달라짐)</span>
+              <span class="lang en"><b>Construction queue + March queue</b> are mandatory (your pace changes)</span>
+              <span class="lang ja"><b>建設キュー + 行軍キュー</b>は必須（進行速度が変わる）</span>
+              <span class="lang zh-CN"><b>建造队列 + 行军队列</b>必开（节奏直接变）</span>
+              <span class="lang zh-TW"><b>建造佇列 + 行軍佇列</b>必開（節奏直接變）</span>
+            </li>
+            <li>
+              <span class="lang ko"><b>상위 1~3위 연맹</b>에 최대한 빨리 들어가기(가속/다이아/상자 수급이 차원이 다름)</span>
+              <span class="lang en">Get into a <b>Top 1–3 alliance</b> ASAP (boosts/gems/chests are on another level)</span>
+              <span class="lang ja"><b>上位1～3同盟</b>にできるだけ早く入る（加速/ダイヤ/箱が段違い）</span>
+              <span class="lang zh-CN">尽快加入<b>前1–3联盟</b>（加速/钻石/宝箱差太多）</span>
+              <span class="lang zh-TW">盡快加入<b>前1–3聯盟</b>（加速/鑽石/寶箱差太多）</span>
+            </li>
+            <li>
+              <span class="lang ko"><b>VIP는 7</b>이 1차 목표(매일 레전드 공용 조각 1개 루틴 만들기)</span>
+              <span class="lang en">Aim for <b>VIP 7</b> first (daily 1 Legendary Universal Shard routine)</span>
+              <span class="lang ja">まずは<b>VIP7</b>（毎日レジェンド共用欠片1個の習慣）</span>
+              <span class="lang zh-CN">先把<b>VIP 7</b>当目标（每天1个传奇通用碎片）</span>
+              <span class="lang zh-TW">先把<b>VIP 7</b>當目標（每天1個傳奇通用碎片）</span>
+            </li>
+            <li>
+              <span class="lang ko"><b>경기장</b>은 레전드 장비/공용조각 수급 루트(소과금 생명줄)</span>
+              <span class="lang en"><b>Arena</b> is your Legendary gear/shard pipeline (lifeline for low spenders)</span>
+              <span class="lang ja"><b>アリーナ</b>はレジェンド装備/欠片の供給源（生命線）</span>
+              <span class="lang zh-CN"><b>竞技场</b>是传奇装备/碎片来源（微氪生命线）</span>
+              <span class="lang zh-TW"><b>競技場</b>是傳奇裝備/碎片來源（微課生命線）</span>
+            </li>
+            <li>
+              <span class="lang ko"><b>망치</b>는 장기전의 핵심(영웅이 바뀌어도 장비는 계속 감)</span>
+              <span class="lang en"><b>Hammers</b> win long-term (gear stays even when heroes change)</span>
+              <span class="lang ja"><b>ハンマー</b>が長期戦の要（英雄が変わっても装備は残る）</span>
+              <span class="lang zh-CN"><b>锤子</b>决定长期强度（英雄换了装备还在）</span>
+              <span class="lang zh-TW"><b>鎚子</b>決定長期強度（英雄換了裝備還在）</span>
+            </li>
+          </ul>
+        </div>
 
-    <h2>곰사냥 추천 조합</h2>
-    <table aria-label="곰사냥 추천 조합">
-      <thead>
-        <tr><th>구분</th><th>추천 조합</th><th>비고</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>베스트</td><td>아마데우스 – 리틀페라 – 로사</td><td>집결/버프/딜 균형 우수</td></tr>
-        <tr><td>대체</td><td>헬가 – 리틀페라 – 로사</td><td>아마데우스 부재 시</td></tr>
-        <tr><td>조건부</td><td>아마데우스 – 리틀페라 – 로사</td><td>아마데우스가 <b>4성 2~3성</b>이면 기용 권장</td></tr>
-        <tr><td>F2P 전용</td><td>조이 – 리틀페라 – 로사</td><td>리틀페라/로사 전용무기 <b>최소 4성</b> 권장</td></tr>
-      </tbody>
-    </table>
+        <div class="callout warn" style="margin-top:12px">
+          <h3>
+            <span class="lang ko">초보가 제일 많이 망하는 패턴</span>
+            <span class="lang en">Common beginner traps</span>
+            <span class="lang ja">初心者がハマりやすい罠</span>
+            <span class="lang zh-CN">新手最常见的坑</span>
+            <span class="lang zh-TW">新手最常見的坑</span>
+          </h3>
+          <ul>
+            <li>
+              <span class="lang ko">연맹을 아무 데나 오래 머무름 → 상자/가속/버프 손해 누적</span>
+              <span class="lang en">Staying in a random alliance too long → compounding losses</span>
+              <span class="lang ja">適当な同盟に居座る → 箱/加速/バフ損が積み上がる</span>
+              <span class="lang zh-CN">长期待在随便的联盟 → 宝箱/加速/增益损失累积</span>
+              <span class="lang zh-TW">長期待在隨便的聯盟 → 寶箱/加速/增益損失累積</span>
+            </li>
+            <li>
+              <span class="lang ko">이벤트마다 조금씩 쓰다 아무것도 못 먹음 → 짧은 이벤트 1등 타이밍이 사라짐</span>
+              <span class="lang en">Spending a little every event → never winning anything meaningful</span>
+              <span class="lang ja">イベントごとに少しずつ使う → 1位のタイミングを作れない</span>
+              <span class="lang zh-CN">每个活动都小花 → 最后啥都拿不到</span>
+              <span class="lang zh-TW">每個活動都小花 → 最後什麼都拿不到</span>
+            </li>
+            <li>
+              <span class="lang ko">영웅/장비/다이아를 분산 투자 → 경기장 순위가 안 올라 핵심 재화가 막힘</span>
+              <span class="lang en">Over-diversifying heroes/gear/gems → Arena stalls, income stalls</span>
+              <span class="lang ja">分散投資 → アリーナ順位が伸びず、収入が止まる</span>
+              <span class="lang zh-CN">分散投资 → 竞技场上不去，关键资源断档</span>
+              <span class="lang zh-TW">分散投資 → 競技場上不去，關鍵資源斷檔</span>
+            </li>
+          </ul>
+        </div>
 
-    <h2>룰렛 운영 팁</h2>
-    <ol>
-      <li><b>1세대</b>: 3~4성까지만 진행 후 패스(다이아 부족 시 과감히 패스)</li>
-      <li><b>2세대</b>: 조이 <b>5성 필수</b></li>
-      <li><b>3세대</b>: 리틀페라 <b>5성 필수</b></li>
-      <li><b>4세대</b>: 로사 <b>5성 필수</b></li>
-    </ol>
+        <div class="chips" aria-label="Quick links">
+          <a class="chip" href="#sec-0">0</a>
+          <a class="chip" href="#sec-1">1</a>
+          <a class="chip" href="#sec-2">2</a>
+          <a class="chip" href="#sec-3">3</a>
+          <a class="chip" href="#sec-4">4</a>
+          <a class="chip" href="#sec-5">5</a>
+          <a class="chip" href="#sec-6">6</a>
+          <a class="chip" href="#sec-7">7</a>
+          <a class="chip" href="#sec-8">8</a>
+          <a class="chip" href="#sec-9">9</a>
+        </div>
+      </div>
 
-    <h2>5세대 이후 전략 (공용 조각)</h2>
-    <ul>
-      <li><b>부족 포지션</b> 보완에 공용 조각 집중 투자.</li>
-      <li><b>핵심 라인 강화형</b> 세팅이 세대별 고른 투자보다 집결/메타 대응력에서 우위.</li>
-    </ul>
-
-    <h2>가정·주의사항</h2>
-    <ul>
-      <li>서버/이벤트/상점 로테이션에 따라 체감 편차 존재.</li>
-      <li>아마데우스가 낮은 성급이어도 <b>4성 2~3성</b>이면 곰사냥 체감 효율 충분.</li>
-      <li>향후 밸런싱/신규 전용옵션 공개에 따라 루트는 변동 가능.</li>
-    </ul>
-  </section>
-
-  <!-- ========= EN ========= -->
-  <section class="lang lang-en">
-    <h1>F2P Route Update (Rosa Exclusive Option Applied)</h1>
-    <p><b>Rosa Exclusive Gear (Expedition)</b>: Rally Power +15% → Major boost in rally efficiency</p>
-    <p><b>Recommended F2P Route (Roulette)</b>: <span class="tag">G2 Joe</span> → <span class="tag">G3 Petra</span> → <span class="tag">G4 Rosa</span></p>
-
-    <h2>Why did the route change?</h2>
-    <div class="note">
-      <ul>
-        <li><b>+15% Rally Power</b> from Rosa’s exclusive option meaningfully lifts rally DPS.</li>
-        <li>Versus the old <b>G2 Marlin + universal shards</b> path, pivoting to <b>G4 Rosa roulette</b> is more rational for rallies/meta.</li>
-        <li><b>After Gen5</b>, focusing universal shards on a “hot Gen5 core line” tends to outperform evenly spread Gen1–4 accounts.</li>
-      </ul>
+      <nav class="toc" aria-label="Table of contents">
+        <h2>
+          <span class="lang ko">목차</span>
+          <span class="lang en">Contents</span>
+          <span class="lang ja">目次</span>
+          <span class="lang zh-CN">目录</span>
+          <span class="lang zh-TW">目錄</span>
+        </h2>
+        <ul>
+          <li><a href="#sec-0"><span class="lang ko">0) 전체 흐름</span><span class="lang en">0) Overall Flow</span><span class="lang ja">0) 全体の流れ</span><span class="lang zh-CN">0) 总体路线</span><span class="lang zh-TW">0) 整體路線</span></a></li>
+          <li><a href="#sec-1"><span class="lang ko">1) 연맹은 1~3위로</span><span class="lang en">1) Join a Top 1–3 Alliance</span><span class="lang ja">1) 上位同盟へ</span><span class="lang zh-CN">1) 进前1–3联盟</span><span class="lang zh-TW">1) 進前1–3聯盟</span></a></li>
+          <li><a href="#sec-2"><span class="lang ko">2) VIP 7</span><span class="lang en">2) VIP 7</span><span class="lang ja">2) VIP 7</span><span class="lang zh-CN">2) VIP 7</span><span class="lang zh-TW">2) VIP 7</span></a></li>
+          <li><a href="#sec-3"><span class="lang ko">3) 경기장</span><span class="lang en">3) Arena</span><span class="lang ja">3) アリーナ</span><span class="lang zh-CN">3) 竞技场</span><span class="lang zh-TW">3) 競技場</span></a></li>
+          <li><a href="#sec-4"><span class="lang ko">4) 망치/장비</span><span class="lang en">4) Hammers/Gear</span><span class="lang ja">4) ハンマー/装備</span><span class="lang zh-CN">4) 锤子/装备</span><span class="lang zh-TW">4) 鎚子/裝備</span></a></li>
+          <li><a href="#sec-5"><span class="lang ko">5) 센터/티어</span><span class="lang en">5) Town Center/Tiers</span><span class="lang ja">5) 都市センター/ティア</span><span class="lang zh-CN">5) 主城/兵种等级</span><span class="lang zh-TW">5) 主城/兵種等級</span></a></li>
+          <li><a href="#sec-6"><span class="lang ko">6) 이벤트</span><span class="lang en">6) Events</span><span class="lang ja">6) イベント</span><span class="lang zh-CN">6) 活动</span><span class="lang zh-TW">6) 活動</span></a></li>
+          <li><a href="#sec-7"><span class="lang ko">7) 상점</span><span class="lang en">7) Shops</span><span class="lang ja">7) ショップ</span><span class="lang zh-CN">7) 商店</span><span class="lang zh-TW">7) 商店</span></a></li>
+          <li><a href="#sec-8"><span class="lang ko">8) 영웅/스킬/집결</span><span class="lang en">8) Heroes/Skills/Rally</span><span class="lang ja">8) 英雄/スキル/集結</span><span class="lang zh-CN">8) 英雄/技能/集结</span><span class="lang zh-TW">8) 英雄/技能/集結</span></a></li>
+          <li><a href="#sec-9"><span class="lang ko">9) 연맹 시스템</span><span class="lang en">9) Alliance Basics</span><span class="lang ja">9) 同盟の基本</span><span class="lang zh-CN">9) 联盟基础</span><span class="lang zh-TW">9) 聯盟基礎</span></a></li>
+        </ul>
+      </nav>
     </div>
 
-    <h2>F2P Route (Roulette-focused)</h2>
-    <table aria-label="F2P Route">
-      <thead><tr><th>Gen</th><th>Hero</th><th>Source</th><th>Role</th><th>Notes</th></tr></thead>
-      <tbody>
-        <tr><td>G2</td><td>Joe</td><td>Roulette</td><td>Infantry core</td><td><b>5★ mandatory</b>, usable through G4</td></tr>
-        <tr><td>G3</td><td>Petra</td><td>Roulette</td><td>First rally cavalry</td><td><b>5★ mandatory</b> (no real F2P alternative)</td></tr>
-        <tr><td>G4</td><td>Rosa</td><td>Roulette</td><td>Archer DPS / rally boost</td><td>Exclusive = <b>+15% Rally Power</b> → <b>5★ mandatory</b></td></tr>
-      </tbody>
-    </table>
-    <p class="muted">* No solid Gen2 infantry replacement yet (possible in Gen5).</p>
+    <section id="sec-0" class="block">
+      <h2>
+        <span class="lang ko">0) 초보 운영의 전체 흐름</span>
+        <span class="lang en">0) The Overall Growth Loop</span>
+        <span class="lang ja">0) 初心者の成長ループ</span>
+        <span class="lang zh-CN">0) 新手成长闭环</span>
+        <span class="lang zh-TW">0) 新手成長閉環</span>
+      </h2>
+      <p class="lang ko">소과금/무과금이 강해지는 구조는 단순해요. <b>연맹(상자/버프) → 경기장(레전드 장비) → 망치(마스터리) → 더 높은 경기장 순위</b>가 반복되면서 격차가 벌어집니다.</p>
+      <p class="lang en">The loop is simple: <b>Alliance (chests/buffs) → Arena (Legendary gear) → Hammers (mastery) → Higher Arena rank</b>. Repeat this and the gap grows.</p>
+      <p class="lang ja">流れはシンプルです。<b>同盟（箱/バフ）→ アリーナ（レジェンド装備）→ ハンマー（マスタリー）→ さらに高い順位</b>の繰り返しで差が開きます。</p>
+      <p class="lang zh-CN">路线很简单：<b>联盟（宝箱/增益）→ 竞技场（传奇装备）→ 锤子（精通）→ 更高竞技场排名</b>，循环越久差距越大。</p>
+      <p class="lang zh-TW">路線很簡單：<b>聯盟（寶箱/增益）→ 競技場（傳奇裝備）→ 鎚子（精通）→ 更高競技場排名</b>，循環越久差距越大。</p>
 
-    <h2>Bear Hunt – Recommended Compositions</h2>
-    <table aria-label="Bear Hunt Comps">
-      <thead><tr><th>Tier</th><th>Composition</th><th>Remark</th></tr></thead>
-      <tbody>
-        <tr><td>Best</td><td>Amadeus – Petra – Rosa</td><td>Balanced rally/buff/DPS</td></tr>
-        <tr><td>Alternative</td><td>Helga – Petra – Rosa</td><td>Use if Amadeus is missing</td></tr>
-        <tr><td>Conditional</td><td>Amadeus – Petra – Rosa</td><td>Recommended if Amadeus is <b>4★ (2–3)</b></td></tr>
-        <tr><td>F2P</td><td>Joe – Petra – Rosa</td><td>Petra & Rosa exclusive gear <b>≥4★</b> recommended</td></tr>
-      </tbody>
-    </table>
+      <div class="callout">
+        <h3>
+          <span class="lang ko">초보가 따라가기 쉬운 3단계</span>
+          <span class="lang en">3 Easy Phases</span>
+          <span class="lang ja">3つの段階</span>
+          <span class="lang zh-CN">三阶段</span>
+          <span class="lang zh-TW">三階段</span>
+        </h3>
+        <ul>
+          <li class="lang ko"><b>1단계</b>: 센터/건설 대기/행렬 뚫고, 상위 연맹 진입</li>
+          <li class="lang en"><b>Phase 1</b>: Unlock queues, raise Town Center, enter a top alliance</li>
+          <li class="lang ja"><b>第1段階</b>: キュー解放＋都市センター強化＋上位同盟へ</li>
+          <li class="lang zh-CN"><b>阶段1</b>：开队列、升主城、进强盟</li>
+          <li class="lang zh-TW"><b>階段1</b>：開佇列、升主城、進強盟</li>
 
-    <h2>Roulette Tips</h2>
-    <ol>
-      <li><b>Gen1</b>: raise to 3–4★ then skip (earlier if low on diamonds)</li>
-      <li><b>Gen2</b>: Joe <b>5★ mandatory</b></li>
-      <li><b>Gen3</b>: Petra <b>5★ mandatory</b></li>
-      <li><b>Gen4</b>: Rosa <b>5★ mandatory</b></li>
-    </ol>
+          <li class="lang ko"><b>2단계</b>: VIP 7 목표로 루틴 만들고, 경기장 순위 올리기</li>
+          <li class="lang en"><b>Phase 2</b>: Build the VIP7 routine and climb Arena</li>
+          <li class="lang ja"><b>第2段階</b>: VIP7のルーティン＋アリーナ上昇</li>
+          <li class="lang zh-CN"><b>阶段2</b>：冲VIP7、爬竞技场</li>
+          <li class="lang zh-TW"><b>階段2</b>：衝VIP7、爬競技場</li>
 
-    <h2>Post-Gen5 Strategy (Universal Shards)</h2>
-    <ul>
-      <li>Concentrate shards on <b>weak roles</b> to fill gaps.</li>
-      <li><b>Focused core-line</b> builds generally beat evenly spread accounts in rallies/meta.</li>
-    </ul>
+          <li class="lang ko"><b>3단계</b>: 망치/장비 마스터리 누적해서 “세대가 지나도” 강한 계정 만들기</li>
+          <li class="lang en"><b>Phase 3</b>: Stack mastery so you stay strong across generations</li>
+          <li class="lang ja"><b>第3段階</b>: マスタリーを積んで世代が変わっても強いアカウントに</li>
+          <li class="lang zh-CN"><b>阶段3</b>：精通持续累积，换代也强</li>
+          <li class="lang zh-TW"><b>階段3</b>：精通持續累積，換代也強</li>
+        </ul>
+      </div>
+    </section>
 
-    <h2>Assumptions & Caveats</h2>
-    <ul>
-      <li>Rotation (server/events/shops) can change availability and pacing.</li>
-      <li>Even at lower stars, <b>Amadeus 4★ (2–3)</b> still performs well in Bear Hunt.</li>
-      <li>Future balance/exclusive options may shift the recommended route.</li>
-    </ul>
-  </section>
+    <section id="sec-1" class="block">
+      <h2>
+        <span class="lang ko">1) 연맹은 1~3위로</span>
+        <span class="lang en">1) Join a Top 1–3 Alliance</span>
+        <span class="lang ja">1) 上位1～3同盟へ</span>
+        <span class="lang zh-CN">1) 加入前1–3联盟</span>
+        <span class="lang zh-TW">1) 加入前1–3聯盟</span>
+      </h2>
 
-  <!-- ========= JA ========= -->
-  <section class="lang lang-ja">
-    <h1>F2P進行ルート更新（ロサ専用オプション反映）</h1>
-    <p><b>ロサ専用装備（遠征）</b>: 集結破壊力 +15% → 集結効率が大幅向上</p>
-    <p><b>推奨F2Pルート（ルーレット）</b>: <span class="tag">G2 ジョイ</span> → <span class="tag">G3 リトルペラ</span> → <span class="tag">G4 ロサ</span></p>
+      <p class="lang ko"><b>여기서 최소 절반은 먹고 들어갑니다.</b> 가능하면 1위, 최소 2~3위 안에 들어가세요.</p>
+      <p class="lang en"><b>This alone is half the game.</b> Aim for #1; at least stay within Top 2–3.</p>
+      <p class="lang ja"><b>ここで半分決まります。</b>できれば1位、最低でも2～3位に。</p>
+      <p class="lang zh-CN"><b>这里就决定了一半。</b>尽量进第1，至少前2–3。</p>
+      <p class="lang zh-TW"><b>這裡就決定了一半。</b>盡量進第1，至少前2–3。</p>
 
-    <h2>なぜルートが変わった？</h2>
-    <div class="note">
+      <h3>
+        <span class="lang ko">왜 꼭 상위 연맹이어야 하나</span>
+        <span class="lang en">Why it matters</span>
+        <span class="lang ja">なぜ上位同盟なのか</span>
+        <span class="lang zh-CN">为什么必须强盟</span>
+        <span class="lang zh-TW">為什麼必須強盟</span>
+      </h3>
       <ul>
-        <li><b>ロサの+15%集結破壊力</b>で集結DPSが体感上昇。</li>
-        <li>従来の<b>G2 マーリン＋汎用欠片</b>より、<b>G4 ロサのルーレット</b>へ切替える方が集結/メタ対応で合理的。</li>
-        <li><b>第5世代以降</b>は“ホットな第5世代中核ライン”へ汎用欠片を集中した方が、1～4世代均等育成より実戦力で優位になりやすい。</li>
+        <li class="lang ko"><b>연맹 선물/보물상자</b>로 다이아, 가속, 아이템이 매일 쌓임</li>
+        <li class="lang en"><b>Gifts/chests</b> generate daily gems, boosts, and items</li>
+        <li class="lang ja"><b>ギフト/宝箱</b>でダイヤや加速が毎日積み上がる</li>
+        <li class="lang zh-CN"><b>礼物/宝箱</b>每天稳定产出钻石与加速</li>
+        <li class="lang zh-TW"><b>禮物/寶箱</b>每天穩定產出鑽石與加速</li>
+
+        <li class="lang ko"><b>HELP 속도</b>, <b>집결 빈도</b>가 다름</li>
+        <li class="lang en">Faster <b>HELP</b>, more frequent <b>rallies</b></li>
+        <li class="lang ja"><b>HELP</b>も<b>集結</b>頻度も違う</li>
+        <li class="lang zh-CN"><b>帮助速度</b>、<b>集结频率</b>完全不同</li>
+        <li class="lang zh-TW"><b>幫助速度</b>、<b>集結頻率</b>完全不同</li>
+
+        <li class="lang ko"><b>성소/유적 버프</b>로 건설/훈련/채집 효율이 크게 차이남</li>
+        <li class="lang en"><b>Shrine/ruin buffs</b> boost building/training/gathering</li>
+        <li class="lang ja"><b>聖所/遺跡バフ</b>で効率が大きく変わる</li>
+        <li class="lang zh-CN"><b>圣所/遗迹增益</b>让建造训练采集差距变大</li>
+        <li class="lang zh-TW"><b>聖所/遺跡增益</b>讓建造訓練採集差距變大</li>
       </ul>
-    </div>
 
-    <h2>F2Pルート（ルーレット中心）</h2>
-    <table>
-      <thead><tr><th>世代</th><th>英雄</th><th>入手</th><th>役割</th><th>備考</th></tr></thead>
-      <tbody>
-        <tr><td>G2</td><td>ジョイ</td><td>ルーレット</td><td>歩兵コア</td><td><b>★5必須</b>、G4まで長期運用</td></tr>
-        <tr><td>G3</td><td>リトルペラ</td><td>ルーレット</td><td>初の集結騎兵</td><td><b>★5必須</b>（F2Pに代替ほぼなし）</td></tr>
-        <tr><td>G4</td><td>ロサ</td><td>ルーレット</td><td>弓DPS/集結強化</td><td>専用＝<b>集結破壊力+15%</b> → <b>★5必須</b></td></tr>
-      </tbody>
-    </table>
-    <p class="muted">※ G2歩兵の確かな代替は未登場（第5世代で可能性）。</p>
+      <div class="callout warn">
+        <h3>
+          <span class="lang ko">주의</span>
+          <span class="lang en">Warning</span>
+          <span class="lang ja">注意</span>
+          <span class="lang zh-CN">注意</span>
+          <span class="lang zh-TW">注意</span>
+        </h3>
+        <p class="lang ko">애매한 중위권에 오래 있으면 정치/전쟁에 휘말리거나 약탈 대상이 될 수 있어요.</p>
+        <p class="lang en">Mid-tier alliances are unstable: politics/war and getting farmed happens more.</p>
+        <p class="lang ja">中堅に長居すると政治/戦争に巻き込まれやすいです。</p>
+        <p class="lang zh-CN">长期待在中游联盟，容易被卷入政治/战争或被掠夺。</p>
+        <p class="lang zh-TW">長期待在中游聯盟，容易被捲入政治/戰爭或被掠奪。</p>
+      </div>
 
-    <h2>ベアハント推奨編成</h2>
-    <table>
-      <thead><tr><th>区分</th><th>編成</th><th>備考</th></tr></thead>
-      <tbody>
-        <tr><td>ベスト</td><td>アマデウス – リトルペラ – ロサ</td><td>集結/バフ/火力のバランス◎</td></tr>
-        <tr><td>代替</td><td>ヘルガ – リトルペラ – ロサ</td><td>アマデウス不在時</td></tr>
-        <tr><td>条件付</td><td>アマデウス – リトルペラ – ロサ</td><td>アマデウスが<b>★4(2～3)</b>なら採用推奨</td></tr>
-        <tr><td>F2P</td><td>ジョイ – リトルペラ – ロサ</td><td>リトルペラ/ロサ専用<b>★4以上</b>推奨</td></tr>
-      </tbody>
-    </table>
-
-    <h2>ルーレット運用のコツ</h2>
-    <ol>
-      <li><b>第1世代</b>: ★3～4で停止→スキップ（ダイヤ不足なら早めにスキップ）</li>
-      <li><b>第2世代</b>: ジョイ<b>★5必須</b></li>
-      <li><b>第3世代</b>: リトルペラ<b>★5必須</b></li>
-      <li><b>第4世代</b>: ロサ<b>★5必須</b></li>
-    </ol>
-
-    <h2>第5世代以降（汎用欠片）</h2>
-    <ul>
-      <li><b>不足ロール補完</b>へ集中的に投資。</li>
-      <li><b>中核ライン強化型</b>が均等育成より集結/メタ対応で有利。</li>
-    </ul>
-
-    <h2>前提・注意</h2>
-    <ul>
-      <li>サーバー/イベント/ショップのローテで体感差あり。</li>
-      <li>アマデウスは<b>★4(2～3)</b>でもベアハントで十分機能。</li>
-      <li>将来のバランス/専用更新で推奨ルートが変わる可能性。</li>
-    </ul>
-  </section>
-
-  <!-- ========= ZH-CN ========= -->
-  <section class="lang lang-zh-CN">
-    <h1>F2P 路线更新（已反映罗莎专属选项）</h1>
-    <p><b>罗莎专属武器（远征）</b>：集结破坏力 +15% → 集结效率显著提升</p>
-    <p><b>F2P 推荐路线（转盘）</b>：<span class="tag">G2 乔伊</span> → <span class="tag">G3 小佩拉</span> → <span class="tag">G4 罗莎</span></p>
-
-    <h2>为什么要改路线？</h2>
-    <div class="note">
+      <h3>
+        <span class="lang ko">연맹 들어가면 바로 해야 할 것</span>
+        <span class="lang en">Do this immediately</span>
+        <span class="lang ja">入ったらすぐやること</span>
+        <span class="lang zh-CN">进盟后立刻做</span>
+        <span class="lang zh-TW">進盟後立刻做</span>
+      </h3>
       <ul>
-        <li><b>罗莎 +15% 集结破坏力</b>带来明显的集结输出提升。</li>
-        <li>相比旧的<b>G2 马林 + 通用碎片</b>路线，转向<b>G4 罗莎转盘</b>更符合集结/版本趋势。</li>
-        <li><b>第5代之后</b>将通用碎片集中给“热门5代核心线”，通常比1–4代平均投入更强。</li>
+        <li class="lang ko"><b>연맹 영지 안으로 도시를 완전히 넣기</b>(걸치는 게 아니라 “완전히”)</li>
+        <li class="lang en">Move your city fully inside alliance territory (not partially)</li>
+        <li class="lang ja">同盟領地に都市を完全に入れる（“完全”）</li>
+        <li class="lang zh-CN">城市要完全放进联盟领地里（不是擦边）</li>
+        <li class="lang zh-TW">城市要完全放進聯盟領地裡（不是擦邊）</li>
+
+        <li class="lang ko">집결 참여를 위해 <b>연맹장 근처</b>로 이동</li>
+        <li class="lang en">Teleport near the leader/core so you can join rallies on time</li>
+        <li class="lang ja">集結に間に合う位置（盟主周辺）へ移動</li>
+        <li class="lang zh-CN">为上车集结，传送到盟主/核心附近</li>
+        <li class="lang zh-TW">為上車集結，傳送到盟主/核心附近</li>
       </ul>
-    </div>
+    </section>
 
-    <h2>F2P 路线（以转盘为主）</h2>
-    <table>
-      <thead><tr><th>代</th><th>英雄</th><th>来源</th><th>定位</th><th>备注</th></tr></thead>
-      <tbody>
-        <tr><td>G2</td><td>乔伊</td><td>转盘</td><td>步兵核心</td><td><b>5★必备</b>，可用到G4</td></tr>
-        <tr><td>G3</td><td>小佩拉</td><td>转盘</td><td>首个集结骑兵</td><td><b>5★必备</b>（F2P几乎无替代）</td></tr>
-        <tr><td>G4</td><td>罗莎</td><td>转盘</td><td>弓系输出/集结强化</td><td>专属 = <b>集结破坏力 +15%</b> → <b>5★必备</b></td></tr>
-      </tbody>
-    </table>
-    <p class="muted">＊ 目前没有稳妥的 G2 步兵替代（第5代或许会出现）。</p>
+    <section id="sec-2" class="block">
+      <h2>
+        <span class="lang ko">2) VIP 7을 최대한 빨리</span>
+        <span class="lang en">2) Rush VIP 7</span>
+        <span class="lang ja">2) VIP7を最優先</span>
+        <span class="lang zh-CN">2) 尽快到VIP 7</span>
+        <span class="lang zh-TW">2) 盡快到VIP 7</span>
+      </h2>
 
-    <h2>狩熊推荐组合</h2>
-    <table>
-      <thead><tr><th>类型</th><th>组合</th><th>备注</th></tr></thead>
-      <tbody>
-        <tr><td>最佳</td><td>阿马迪乌斯 – 小佩拉 – 罗莎</td><td>集结/增益/输出均衡</td></tr>
-        <tr><td>替代</td><td>海尔加 – 小佩拉 – 罗莎</td><td>无阿马迪乌斯时替代</td></tr>
-        <tr><td>条件</td><td>阿马迪乌斯 – 小佩拉 – 罗莎</td><td>若阿马迪乌斯为<b>4★(2–3)</b>，建议上场</td></tr>
-        <tr><td>F2P</td><td>乔伊 – 小佩拉 – 罗莎</td><td>小佩拉/罗莎专属<b>≥4★</b>推荐</td></tr>
-      </tbody>
-    </table>
+      <p class="lang ko">목표는 <b>VIP 7</b>이에요.</p>
+      <p class="lang en">Your first milestone is <b>VIP 7</b>.</p>
+      <p class="lang ja">まずの目標は<b>VIP7</b>です。</p>
+      <p class="lang zh-CN">第一目标就是<b>VIP 7</b>。</p>
+      <p class="lang zh-TW">第一目標就是<b>VIP 7</b>。</p>
 
-    <h2>转盘小贴士</h2>
-    <ol>
-      <li><b>第1代</b>：升到3–4★即停，然后跳过（钻石紧张可更早跳过）</li>
-      <li><b>第2代</b>：乔伊<b>5★必备</b></li>
-      <li><b>第3代</b>：小佩拉<b>5★必备</b></li>
-      <li><b>第4代</b>：罗莎<b>5★必备</b></li>
-    </ol>
-
-    <h2>第5代之后（通用碎片）</h2>
-    <ul>
-      <li>将通用碎片<b>集中补齐短板位</b>。</li>
-      <li><b>核心线强化型</b>账号通常在集结/版本应对上胜过平均投入。</li>
-    </ul>
-
-    <h2>前提与说明</h2>
-    <ul>
-      <li>服务器/活动/商店轮换会影响节奏与体验。</li>
-      <li><b>阿马迪乌斯 4★(2–3)</b>在狩熊中依然好用。</li>
-      <li>未来平衡/新专属可能改变推荐路线。</li>
-    </ul>
-  </section>
-
-  <!-- ========= ZH-TW ========= -->
-  <section class="lang lang-zh-TW">
-    <h1>F2P 路線更新（已反映羅莎專屬選項）</h1>
-    <p><b>羅莎專武（遠征）</b>：集結破壞力 +15% → 集結效率明顯提升</p>
-    <p><b>F2P 推薦路線（轉盤）</b>：<span class="tag">G2 喬伊</span> → <span class="tag">G3 小佩拉</span> → <span class="tag">G4 羅莎</span></p>
-
-    <h2>為何更改路線？</h2>
-    <div class="note">
+      <h3>
+        <span class="lang ko">VIP 7이 중요한 이유</span>
+        <span class="lang en">Why VIP 7 matters</span>
+        <span class="lang ja">VIP7が重要な理由</span>
+        <span class="lang zh-CN">VIP7为什么重要</span>
+        <span class="lang zh-TW">VIP7為什麼重要</span>
+      </h3>
       <ul>
-        <li><b>羅莎 +15% 集結破壞力</b>帶來顯著輸出提升。</li>
-        <li>相較舊的<b>G2 馬林＋通用碎片</b>，改走<b>G4 羅莎轉盤</b>在集結/版本上更合理。</li>
-        <li><b>第五代之後</b>把通用碎片集中於「熱門5代核心線」，通常比平均投入更強勢。</li>
+        <li class="lang ko">VIP 7 활성화 시 <b>매일 레전드 공용 조각 1개</b> 루틴이 가능</li>
+        <li class="lang en">When active, VIP7 gives <b>1 Legendary Universal Shard daily</b></li>
+        <li class="lang ja">VIP7で<b>レジェンド共用欠片が毎日1個</b>取れる</li>
+        <li class="lang zh-CN">VIP7后可<b>每日领取1个传奇通用碎片</b></li>
+        <li class="lang zh-TW">VIP7後可<b>每日領取1個傳奇通用碎片</b></li>
       </ul>
-    </div>
 
-    <h2>F2P 路線（以轉盤為主）</h2>
-    <table>
-      <thead><tr><th>世代</th><th>英雄</th><th>來源</th><th>定位</th><th>備註</th></tr></thead>
-      <tbody>
-        <tr><td>G2</td><td>喬伊</td><td>轉盤</td><td>步兵核心</td><td><b>5★必備</b>，可用至G4</td></tr>
-        <tr><td>G3</td><td>小佩拉</td><td>轉盤</td><td>首位集結騎兵</td><td><b>5★必備</b>（F2P幾無替代）</td></tr>
-        <tr><td>G4</td><td>羅莎</td><td>轉盤</td><td>弓系輸出/集結強化</td><td>專屬＝<b>集結破壞力 +15%</b> → <b>5★必備</b></td></tr>
-      </tbody>
-    </table>
-    <p class="muted">＊ 目前沒有穩定的 G2 步兵替代（第五代或許有機會）。</p>
+      <details>
+        <summary>
+          <span class="lang ko">소과금 VIP 올리는 루트</span>
+          <span class="lang en">How low spenders raise VIP</span>
+          <span class="lang ja">微課金のVIP上げ</span>
+          <span class="lang zh-CN">微氪怎么升VIP</span>
+          <span class="lang zh-TW">微課怎麼升VIP</span>
+        </summary>
+        <ul>
+          <li class="lang ko">매일 VIP 포인트 받기(연속 수령)</li>
+          <li class="lang en">Claim daily VIP points consistently</li>
+          <li class="lang ja">毎日VIPポイントを欠かさず受け取る</li>
+          <li class="lang zh-CN">每天稳定领取VIP点数</li>
+          <li class="lang zh-TW">每天穩定領取VIP點數</li>
 
-    <h2>狩熊推薦組合</h2>
-    <table>
-      <thead><tr><th>類別</th><th>組合</th><th>備註</th></tr></thead>
-      <tbody>
-        <tr><td>最佳</td><td>阿馬迪烏斯 – 小佩拉 – 羅莎</td><td>集結/增益/輸出均衡</td></tr>
-        <tr><td>替代</td><td>海爾加 – 小佩拉 – 羅莎</td><td>缺少阿馬迪烏斯時</td></tr>
-        <tr><td>條件</td><td>阿馬迪烏斯 – 小佩拉 – 羅莎</td><td>若阿馬迪烏斯為<b>4★(2–3)</b>，建議上場</td></tr>
-        <tr><td>F2P</td><td>喬伊 – 小佩拉 – 羅莎</td><td>小佩拉/羅莎專武<b>≥4★</b>建議</td></tr>
-      </tbody>
-    </table>
+          <li class="lang ko">연맹/떠돌이 상점에서 할인 VIP 포인트 구매</li>
+          <li class="lang en">Buy discounted VIP points from alliance/wanderer shops</li>
+          <li class="lang ja">同盟/行商で割引VIPポイントを買う</li>
+          <li class="lang zh-CN">在联盟/游商里买折扣VIP点</li>
+          <li class="lang zh-TW">在聯盟/遊商裡買折扣VIP點</li>
+        </ul>
+      </details>
 
-    <h2>轉盤技巧</h2>
-    <ol>
-      <li><b>第一代</b>：升到3–4★後即跳過（鑽石吃緊可更早跳過）</li>
-      <li><b>第二代</b>：喬伊<b>5★必備</b></li>
-      <li><b>第三代</b>：小佩拉<b>5★必備</b></li>
-      <li><b>第四代</b>：羅莎<b>5★必備</b></li>
-    </ol>
+      <div class="callout">
+        <h3>
+          <span class="lang ko">한 줄 결론</span>
+          <span class="lang en">One-line takeaway</span>
+          <span class="lang ja">結論</span>
+          <span class="lang zh-CN">一句话总结</span>
+          <span class="lang zh-TW">一句話總結</span>
+        </h3>
+        <p class="lang ko"><b>VIP 7</b>을 빨리 찍으면 “매일 조각이 쌓이는 계정”이 됩니다.</p>
+        <p class="lang en">Hit <b>VIP 7</b> early and you become an account that gains shards every day.</p>
+        <p class="lang ja"><b>VIP7</b>を早く達成すると「毎日欠片が増えるアカ」になります。</p>
+        <p class="lang zh-CN">早点到<b>VIP7</b>，你就拥有“每天自动积累碎片”的账号。</p>
+        <p class="lang zh-TW">早點到<b>VIP7</b>，你就擁有「每天自動累積碎片」的帳號。</p>
+      </div>
+    </section>
 
-    <h2>第五代之後（通用碎片）</h2>
-    <ul>
-      <li>通用碎片<b>集中補位</b>，先解決短板。</li>
-      <li><b>核心線強化</b>在集結/版本應對上往往比平均投資更占優勢。</li>
-    </ul>
+    <section id="sec-3" class="block">
+      <h2>
+        <span class="lang ko">3) 경기장(아레나)에 집중해야 하는 이유</span>
+        <span class="lang en">3) Why You Must Focus on Arena</span>
+        <span class="lang ja">3) アリーナが最重要な理由</span>
+        <span class="lang zh-CN">3) 为什么必须主打竞技场</span>
+        <span class="lang zh-TW">3) 為什麼必須主打競技場</span>
+      </h2>
 
-    <h2>前提與提醒</h2>
-    <ul>
-      <li>伺服器/活動/商店輪替會影響體感與節奏。</li>
-      <li><b>阿馬迪烏斯 4★(2–3)</b>在狩熊仍然很好用。</li>
-      <li>未來平衡/新專屬可能改變推薦路線。</li>
-    </ul>
-  </section>
+      <p class="lang ko">소과금이 <b>레전드 영웅장비</b>를 “꾸준히” 받는 루트가 경기장입니다.</p>
+      <p class="lang en">Arena is the repeatable pipeline for <b>Legendary hero gear</b> and key resources.</p>
+      <p class="lang ja">微課金が<b>レジェンド装備</b>を継続入手するルートがアリーナです。</p>
+      <p class="lang zh-CN">竞技场是微氪能持续拿到<b>传奇英雄装备</b>的关键来源。</p>
+      <p class="lang zh-TW">競技場是微課能持續拿到<b>傳奇英雄裝備</b>的關鍵來源。</p>
 
-</article>
+      <div class="callout ok">
+        <h3>
+          <span class="lang ko">추천 방향(초보 기준)</span>
+          <span class="lang en">Beginner-friendly approach</span>
+          <span class="lang ja">初心者向けの方針</span>
+          <span class="lang zh-CN">新手推荐方向</span>
+          <span class="lang zh-TW">新手推薦方向</span>
+        </h3>
+        <ul>
+          <li class="lang ko">초반은 <b>궁병/기병</b> 장비 우선 고려(자주 쓰는 병과 기준)</li>
+          <li class="lang en">Prioritize gear for the class you use most (often <b>archer/cavalry</b>)</li>
+          <li class="lang ja">よく使う兵科（多くは<b>弓/騎</b>）の装備を優先</li>
+          <li class="lang zh-CN">优先做你常用兵种的装备（通常<b>弓/骑</b>）</li>
+          <li class="lang zh-TW">優先做你常用兵種的裝備（通常<b>弓/騎</b>）</li>
+
+          <li class="lang ko">망치/강화는 경기장 순위에 도움이 되게 사용</li>
+          <li class="lang en">Spend hammers/upgrades to directly improve Arena results</li>
+          <li class="lang ja">ハンマー/強化はアリーナ順位に直結させる</li>
+          <li class="lang zh-CN">锤子/强化要服务于竞技场提升</li>
+          <li class="lang zh-TW">鎚子/強化要服務於競技場提升</li>
+
+          <li class="lang ko">현실 목표: <b>100~500위권</b></li>
+          <li class="lang en">Realistic target: <b>Rank 100–500</b></li>
+          <li class="lang ja">現実的目標：<b>100～500位</b></li>
+          <li class="lang zh-CN">现实目标：<b>100–500名</b></li>
+          <li class="lang zh-TW">現實目標：<b>100–500名</b></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sec-4" class="block">
+      <h2>
+        <span class="lang ko">4) 망치(영웅장비)가 장기전의 핵심</span>
+        <span class="lang en">4) Hammers (Hero Gear) Win Long-term</span>
+        <span class="lang ja">4) ハンマー（英雄装備）が長期戦の要</span>
+        <span class="lang zh-CN">4) 锤子（英雄装备）决定长期强度</span>
+        <span class="lang zh-TW">4) 鎚子（英雄裝備）決定長期強度</span>
+      </h2>
+
+      <p class="lang ko">영웅은 바뀌어도 장비는 남습니다. <b>마스터리 누적</b>이 결국 격차를 만들어요.</p>
+      <p class="lang en">Heroes change, gear stays. <b>Mastery stacking</b> is what creates long-term gaps.</p>
+      <p class="lang ja">英雄は変わっても装備は残る。<b>マスタリーの積み</b>が差になります。</p>
+      <p class="lang zh-CN">英雄会换，但装备会一直用。<b>精通累积</b>才是长期差距。</p>
+      <p class="lang zh-TW">英雄會換，但裝備會一直用。<b>精通累積</b>才是長期差距。</p>
+
+      <div class="callout">
+        <h3>
+          <span class="lang ko">망치 루틴</span>
+          <span class="lang en">Hammer routine</span>
+          <span class="lang ja">ハンマーのルーティン</span>
+          <span class="lang zh-CN">锤子日常</span>
+          <span class="lang zh-TW">鎚子日常</span>
+        </h3>
+        <ul>
+          <li class="lang ko">곰사냥은 “성실하게, 꾸준히”</li>
+          <li class="lang en">Do Bear Hunt consistently</li>
+          <li class="lang ja">ベアハントは継続が命</li>
+          <li class="lang zh-CN">熊狩要坚持做</li>
+          <li class="lang zh-TW">熊狩要堅持做</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sec-5" class="block">
+      <h2>
+        <span class="lang ko">5) 센터를 올려 티어를 앞당기기</span>
+        <span class="lang en">5) Raise Town Center to Unlock Higher Tiers</span>
+        <span class="lang ja">5) 都市センターを上げてティア先行</span>
+        <span class="lang zh-CN">5) 升主城抢先解锁高阶兵</span>
+        <span class="lang zh-TW">5) 升主城搶先解鎖高階兵</span>
+      </h2>
+
+      <p class="lang ko">나중에 가장 체감되는 건 <b>병사 티어</b>입니다.</p>
+      <p class="lang en">The biggest long-term difference is <b>troop tier</b>.</p>
+      <p class="lang ja">後半で一番効くのは<b>兵士ティア</b>です。</p>
+      <p class="lang zh-CN">后期最有体感的是<b>兵种等级</b>。</p>
+      <p class="lang zh-TW">後期最有體感的是<b>兵種等級</b>。</p>
+
+      <h3>
+        <span class="lang ko">센터 레벨 필요조건</span>
+        <span class="lang en">Town Center requirements</span>
+        <span class="lang ja">都市センター条件</span>
+        <span class="lang zh-CN">主城升级条件</span>
+        <span class="lang zh-TW">主城升級條件</span>
+      </h3>
+      <p class="muted">
+        <span class="lang ko">센터 레벨 필요조건은 아래 링크 참고:</span>
+        <span class="lang en">See Town Center level requirements here:</span>
+        <span class="lang ja">都市センターの必要条件はこちら:</span>
+        <span class="lang zh-CN">主城升级条件参考链接：</span>
+        <span class="lang zh-TW">主城升級條件參考連結：</span>
+        <a href="https://kingshotdata.kr/buildings/towncenter" target="_blank" rel="noopener noreferrer">https://kingshotdata.kr/buildings/towncenter</a>
+      </p>
+
+      <details>
+        <summary>
+          <span class="lang ko">가속 우선순위(초반)</span>
+          <span class="lang en">Boost priority (early)</span>
+          <span class="lang ja">加速の優先（序盤）</span>
+          <span class="lang zh-CN">加速优先级（前期）</span>
+          <span class="lang zh-TW">加速優先級（前期）</span>
+        </summary>
+        <ul>
+          <li class="lang ko">건설 &gt; 기술 &gt; 병사/치유</li>
+          <li class="lang en">Construction &gt; Research &gt; Training/Healing</li>
+          <li class="lang ja">建設 &gt; 研究 &gt; 訓練/治療</li>
+          <li class="lang zh-CN">建造 &gt; 科技 &gt; 训练/治疗</li>
+          <li class="lang zh-TW">建造 &gt; 科技 &gt; 訓練/治療</li>
+        </ul>
+      </details>
+    </section>
+
+    <section id="sec-6" class="block">
+      <h2>
+        <span class="lang ko">6) 이벤트 운영: 짧은 이벤트 1등 전략</span>
+        <span class="lang en">6) Events: Win Short Events</span>
+        <span class="lang ja">6) イベント：短期イベントで勝つ</span>
+        <span class="lang zh-CN">6) 活动：拿短活动第一</span>
+        <span class="lang zh-TW">6) 活動：拿短活動第一</span>
+      </h2>
+
+      <div class="callout ok">
+        <h3>
+          <span class="lang ko">핵심 사고방식</span>
+          <span class="lang en">Core mindset</span>
+          <span class="lang ja">考え方</span>
+          <span class="lang zh-CN">核心思路</span>
+          <span class="lang zh-TW">核心思路</span>
+        </h3>
+        <ul>
+          <li class="lang ko">기본보상은 전부 받고, 1등은 선택과 집중</li>
+          <li class="lang en">Take all base rewards; focus resources only when you can win</li>
+          <li class="lang ja">基本報酬は全部、1位は選択と集中</li>
+          <li class="lang zh-CN">基础奖励全拿，冲第一要集中资源</li>
+          <li class="lang zh-TW">基礎獎勵全拿，衝第一要集中資源</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sec-7" class="block">
+      <h2>
+        <span class="lang ko">7) 상점 우선순위</span>
+        <span class="lang en">7) Shop Priorities</span>
+        <span class="lang ja">7) ショップ優先度</span>
+        <span class="lang zh-CN">7) 商店优先级</span>
+        <span class="lang zh-TW">7) 商店優先級</span>
+      </h2>
+
+      <h3>
+        <span class="lang ko">연맹 상점</span>
+        <span class="lang en">Alliance Shop</span>
+        <span class="lang ja">同盟ショップ</span>
+        <span class="lang zh-CN">联盟商店</span>
+        <span class="lang zh-TW">聯盟商店</span>
+      </h3>
+      <ul>
+        <li class="lang ko">할인 40%+면 고려, 70%면 거의 구매</li>
+        <li class="lang en">Consider 40%+ discounts; 70% is usually a buy</li>
+        <li class="lang ja">40%+割引は検討、70%はほぼ買い</li>
+        <li class="lang zh-CN">40%+可考虑，70%基本必买</li>
+        <li class="lang zh-TW">40%+可考慮，70%基本必買</li>
+      </ul>
+    </section>
+
+    <section id="sec-8" class="block">
+      <h2>
+        <span class="lang ko">8) 영웅/스킬/집결 구조(초보용)</span>
+        <span class="lang en">8) Heroes / Skills / Rally (Beginner)</span>
+        <span class="lang ja">8) 英雄/スキル/集結（初心者）</span>
+        <span class="lang zh-CN">8) 英雄/技能/集结（新手）</span>
+        <span class="lang zh-TW">8) 英雄/技能/集結（新手）</span>
+      </h2>
+
+      <div class="callout">
+        <h3>
+          <span class="lang ko">집결원 핵심</span>
+          <span class="lang en">Joiner key point</span>
+          <span class="lang ja">集結員の要点</span>
+          <span class="lang zh-CN">集结上车核心</span>
+          <span class="lang zh-TW">集結上車核心</span>
+        </h3>
+        <p class="lang ko">소과금 현실 목표: <b>SR 4성 → 첫 스킬 LV5</b> + <b>병사 티어 올리기</b></p>
+        <p class="lang en">Low-spender goal: <b>SR 4★ → Skill 1 Lv5</b> + <b>raise troop tier</b></p>
+        <p class="lang ja">微課金の現実目標：<b>SR★4→スキル1 Lv5</b>＋<b>兵士ティア</b></p>
+        <p class="lang zh-CN">微氪现实目标：<b>SR四星→1技能5级</b> + <b>提升兵种等级</b></p>
+        <p class="lang zh-TW">微課現實目標：<b>SR四星→1技能5級</b> + <b>提升兵種等級</b></p>
+      </div>
+    </section>
+
+    <section id="sec-9" class="block">
+      <h2>
+        <span class="lang ko">9) 연맹 시스템: 이것만은 꼭</span>
+        <span class="lang en">9) Alliance: Must-Do Basics</span>
+        <span class="lang ja">9) 同盟：必ずやること</span>
+        <span class="lang zh-CN">9) 联盟：必做清单</span>
+        <span class="lang zh-TW">9) 聯盟：必做清單</span>
+      </h2>
+
+      <ul>
+        <li class="lang ko">기부(다이아/코인) + HELP(코인) + 집결(보상/망치)</li>
+        <li class="lang en">Donate (gems/coins) + HELP (coins) + Join rallies (rewards/hammers)</li>
+        <li class="lang ja">寄付 + HELP + 集結参加（報酬/ハンマー）</li>
+        <li class="lang zh-CN">捐献 + 帮助 + 上车集结（奖励/锤子）</li>
+        <li class="lang zh-TW">捐獻 + 幫助 + 上車集結（獎勵/鎚子）</li>
+      </ul>
+
+      <div class="callout warn">
+        <h3>
+          <span class="lang ko">주의</span>
+          <span class="lang en">Warning</span>
+          <span class="lang ja">注意</span>
+          <span class="lang zh-CN">注意</span>
+          <span class="lang zh-TW">注意</span>
+        </h3>
+        <p class="lang ko">이벤트 시간이 내 시간대와 안 맞는 연맹이면 장기적으로 손해가 큽니다.</p>
+        <p class="lang en">If event times don’t match your schedule, it’s a long-term loss.</p>
+        <p class="lang ja">イベント時間が合わない同盟は長期的に不利です。</p>
+        <p class="lang zh-CN">活动时间不合你作息的联盟，长期一定亏。</p>
+        <p class="lang zh-TW">活動時間不合你作息的聯盟，長期一定虧。</p>
+      </div>
+    </section>
+
+    <div class="hr"></div>
+    <p class="foot">
+      <span class="lang ko">본 문서는 공식이 아닌, 플레이 경험을 바탕으로 정리한 초보자 운영 가이드입니다. 서버/메타/업데이트에 따라 최적 해답은 달라질 수 있습니다.</span>
+      <span class="lang en">This is a community-made guide based on gameplay experience. Optimal play may change by server/meta/updates.</span>
+      <span class="lang ja">本ガイドはプレイ経験に基づくコミュニティ整理です。サーバー/環境/更新により最適解は変わります。</span>
+      <span class="lang zh-CN">本文为玩家经验整理，非官方。不同服务器/环境/更新会影响最优解。</span>
+      <span class="lang zh-TW">本文為玩家經驗整理，非官方。不同伺服器/環境/更新會影響最優解。</span>
+    </p>
+  </main>
+
+  <script>
+    (function(){
+      function normalizeLang(raw){
+        raw = String(raw || '').replace('_','-');
+        var low = raw.toLowerCase();
+        if (!low) return 'ko';
+        if (low.indexOf('ko') === 0) return 'ko';
+        if (low.indexOf('en') === 0) return 'en';
+        if (low.indexOf('ja') === 0) return 'ja';
+        if (low.indexOf('zh') === 0){
+          if (low.indexOf('tw') >= 0 || low.indexOf('hk') >= 0 || low.indexOf('mo') >= 0) return 'zh-TW';
+          return 'zh-CN';
+        }
+        return 'en';
+      }
+
+      function setLang(lang){
+        lang = normalizeLang(lang);
+        document.documentElement.dataset.lang = lang;
+        document.documentElement.lang = lang;
+
+        // title/description swap (simple)
+        var titles = {
+          "ko":"Kingshot 초보자 가이드 (소과금/무과금 핵심 로드맵)",
+          "en":"Kingshot Beginner Guide (F2P/Low-Spend Roadmap)",
+          "ja":"Kingshot 初心者ガイド（無課金/微課金ロードマップ）",
+          "zh-CN":"Kingshot 新手指南（零氪/微氪路线）",
+          "zh-TW":"Kingshot 新手指南（無課/微課路線）"
+        };
+        document.title = titles[lang] || titles.en;
+
+        try{ localStorage.setItem('lang', lang); }catch(e){}
+      }
+
+      var saved = null;
+      try{ saved = localStorage.getItem('lang'); }catch(e){}
+      var initial = saved || normalizeLang(navigator.language || 'ko');
+      setLang(initial);
+
+      var sel = document.getElementById('langSwitcher');
+      if (sel){
+        sel.value = initial;
+        sel.addEventListener('change', function(e){
+          setLang(e.target.value);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

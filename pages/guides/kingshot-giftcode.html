@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="ko">
 <head>
+  <base href="/" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- SEO / OG (언어 변경 시 JS로 갱신) -->
   <title id="meta-title">킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드</title>
-
-  <!-- SEO / OG -->
   <meta name="description" id="meta-desc" content="킹샷 기프트코드(쿠폰) 최신 목록과 입력 방법 정리. 만료일, 무기한 코드 안내, 공식 입력창 링크.">
+
   <meta property="og:title" id="og-title" content="킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드">
   <meta property="og:description" id="og-desc" content="킹샷 기프트코드(쿠폰) 최신 목록과 입력 방법 정리. 만료일, 무기한 코드 안내, 공식 입력창 링크.">
   <meta property="og:type" content="article">
@@ -15,23 +16,43 @@
   <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png">
   <link rel="canonical" href="https://kingshotdata.kr/pages/guides/kingshot-giftcode.html">
 
-  <!-- CTR 보강(선택) -->
+  <!-- CTR -->
   <meta name="robots" content="max-image-preview:large">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드">
-  <meta name="twitter:description" content="킹샷 최신 기프트코드 안내 | 쿠폰 입력 방법과 최신 코드, 만료/무기한 정보, 공식 입력창 링크.">
+  <meta name="twitter:title" id="tw-title" content="킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드">
+  <meta name="twitter:description" id="tw-desc" content="킹샷 최신 기프트코드 안내 | 쿠폰 입력 방법과 최신 코드, 만료/무기한 정보, 공식 입력창 링크.">
   <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png">
 
   <style>
 :root{--fg:#111;--muted:#666;--bd:#e5e7eb;--pri:#0b57d0;--bg:#fff}
 *{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;background:#fff;color:var(--fg)}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;background:var(--bg);color:var(--fg)}
+a{color:var(--pri);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
 
-.wrap{max-width:1080px;margin-inline:auto;padding:24px clamp(16px,4vw,32px) 64px}
+.wrap{max-width:1080px;margin-inline:auto;padding:18px clamp(16px,4vw,32px) 64px}
 
-header .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+/* ✅ 상단: 좌측(가이드로) / 우측(언어) 한 줄 */
+.topbar{
+  position:sticky;top:0;z-index:10;
+  background:#fff;
+  border-bottom:1px solid var(--bd);
+}
+.topbar-inner{
+  max-width:1080px;margin-inline:auto;
+  padding:10px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.backlink{display:inline-flex;align-items:center;gap:6px;font-size:13px}
 .lang{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
-select{padding:6px 10px;border:1px solid var(--bd);border-radius:8px;background:#fff}
+select{padding:6px 10px;border:1px solid var(--bd);border-radius:8px;background:#fff;color:#111}
+
+/* ✅ 브레드크럼 */
+.crumb{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 10px}
+.crumb a{font-size:13px}
+.crumb .sep{color:#9aa0a6}
+.crumb .here{color:#444;font-size:13px;font-weight:600}
+
 .h1{font-size:28px;margin:6px 0}
 .muted{color:var(--muted)}
 h2{font-size:20px;margin:26px 0 10px}
@@ -55,7 +76,7 @@ h2{font-size:20px;margin:26px 0 10px}
 .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .btn{
   padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:#fff;cursor:pointer;
-  white-space:nowrap;
+  white-space:nowrap;text-decoration:none;color:#111;display:inline-flex;align-items:center;justify-content:center;
 }
 .btn:hover{background:#f5f5f5}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
@@ -93,17 +114,14 @@ ol{margin:8px 0 0 18px}
   padding:12px 16px;border-radius:999px;background:#111;color:#fff;text-decoration:none;
   justify-self:end;white-space:nowrap;max-width:100%;
 }
-.cta svg{width:18px;height:18px}
+.cta svg{width:18px;height:18px;fill:currentColor}
 @media (max-width:900px){
   .hero{grid-template-columns:1fr}
   .cta{justify-self:stretch;text-align:center}
 }
-
-/* 일반 텍스트만 안전 개행 허용 */
-.card p, .card .title, .card .desc {overflow-wrap:anywhere;word-break:keep-all}
   </style>
 
-  <!-- FAQ 구조화 데이터(ko) -->
+  <!-- FAQ 구조화 데이터 (언어 변경 시 JS로 갱신) -->
   <script type="application/ld+json" id="faq-jsonld">
   {
     "@context":"https://schema.org",
@@ -116,27 +134,35 @@ ol{margin:8px 0 0 18px}
   }
   </script>
 </head>
-<body>
-  <!-- 홈 링크(유효 위치) -->
-  <a href="/" class="kd-home-link" style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
-    ← KingshotData Korea
-  </a>
 
-  <main class="wrap">
+<body data-page="guide-article" data-category="guides" data-slug="kingshot-giftcode">
+  <!-- ✅ 상단바: 좌측(가이드로) / 우측(언어) -->
+  <header class="topbar" role="banner">
+    <div class="topbar-inner">
+      <a class="backlink" id="backLink" href="/guides">← <span id="backText">킹샷 가이드</span></a>
+
+      <label class="lang" aria-label="Language selector">
+        <span id="label-language">언어</span>
+        <select id="langSelect" aria-label="Language">
+          <option value="ko">한국어(KR)</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+          <option value="zh-CN">简体</option>
+          <option value="zh-TW">繁體</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <main class="wrap" role="main">
+    <!-- ✅ 브레드크럼 -->
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/guides" id="crumb-guides">가이드</a>
+      <span class="sep">›</span>
+      <span class="here" id="crumb-here">기프트코드</span>
+    </nav>
+
     <header>
-      <div class="topbar">
-        <div class="muted">KingshotData</div>
-        <label class="lang">
-          <span id="label-language">언어</span>
-          <select id="langSelect" aria-label="Language">
-            <option value="ko">한국어(KR)</option>
-            <option value="en">English</option>
-            <option value="ja">日本語</option>
-            <option value="zh-CN">简体</option>
-            <option value="zh-TW">繁體</option>
-          </select>
-        </label>
-      </div>
       <h1 class="h1" id="h1">킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드</h1>
       <p class="muted" id="lead">공식 입력창 링크, 최신 코드/만료일(무기한 포함), 입력 방법을 한 곳에 정리했습니다.</p>
     </header>
@@ -155,7 +181,7 @@ ol{margin:8px 0 0 18px}
     </section>
 
     <!-- Current coupons -->
-    <section aria-live="polite" aria-busy="true">
+    <section id="couponSection" aria-live="polite" aria-busy="true">
       <h2 id="current-title">현재 사용 가능한 쿠폰</h2>
       <div id="couponGrid" class="grid">로딩 중…</div>
       <p class="note" id="current-note">※ 일부 코드는 지역/서버/계정 상태에 따라 사용이 제한될 수 있습니다.</p>
@@ -197,6 +223,11 @@ ol{margin:8px 0 0 18px}
         <div class="note" id="faq-a3">계정당 1회 제한, 지역/서버 제한, 오탈자 등의 이유일 수 있습니다. 대소문자/공백을 확인하고 재시도해 주세요.</div>
       </details>
     </section>
+
+    <noscript>
+      <div class="divider"></div>
+      <p class="note">이 페이지는 쿠폰 목록 표시를 위해 JavaScript가 필요합니다.</p>
+    </noscript>
   </main>
 
   <script>
@@ -207,7 +238,12 @@ ol{margin:8px 0 0 18px}
         metaDesc: "킹샷 기프트코드(쿠폰) 최신 목록과 입력 방법 정리. 만료일, 무기한 코드 안내, 공식 입력창 링크.",
         ogTitle: "킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드",
         ogDesc: "킹샷 기프트코드(쿠폰) 최신 목록과 입력 방법 정리. 만료일, 무기한 코드 안내, 공식 입력창 링크.",
+        twTitle: "킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드",
+        twDesc: "킹샷 최신 기프트코드 안내 | 쿠폰 입력 방법과 최신 코드, 만료/무기한 정보, 공식 입력창 링크.",
+        backText: "킹샷 가이드",
         labelLanguage: "언어",
+        guides: "가이드",
+        here: "기프트코드",
         h1: "킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드",
         lead: "공식 입력창 링크, 최신 코드/만료일(무기한 포함), 입력 방법을 한 곳에 정리했습니다.",
         heroTitle: "쿠폰 입력은 여기서!",
@@ -228,17 +264,23 @@ ol{margin:8px 0 0 18px}
         faqQ3: "코드가 적용되지 않아요.",
         faqA3: "계정당 1회 제한, 지역/서버 제한, 오탈자 등의 이유일 수 있습니다. 대소문자/공백을 확인하고 재시도해 주세요.",
         copy: "복사", copied: "복사됨!", redeem: "교환",
-        until: "만료", empty: "현재 사용 가능한 쿠폰이 없습니다.",
-        forever: "무기한", expired: "만료됨", active: "사용 가능"
+        until: "만료일", empty: "현재 표시할 쿠폰이 없습니다.",
+        forever: "무기한", expired: "만료됨", active: "사용 가능",
+        loadFail: "쿠폰 데이터를 불러오지 못했습니다. (/data/coupons.json 경로 확인)"
       },
       "en": {
         metaTitle: "Kingshot Gift Codes · How to Redeem & Latest Codes",
         metaDesc: "Up-to-date Kingshot gift codes and how to redeem them. Includes expiry dates, permanent codes, and the official redemption portal.",
         ogTitle: "Kingshot Gift Codes · How to Redeem & Latest Codes",
         ogDesc: "Up-to-date Kingshot gift codes and how to redeem them. Includes expiry dates, permanent codes, and the official redemption portal.",
+        twTitle: "Kingshot Gift Codes · How to Redeem & Latest Codes",
+        twDesc: "Latest Kingshot gift codes | Redeem steps, expiry/permanent info, and the official portal link.",
+        backText: "Kingshot Guides",
         labelLanguage: "Language",
+        guides: "Guides",
+        here: "Gift Codes",
         h1: "Kingshot Gift Codes · How to Redeem & Latest Codes",
-        lead: "All in one place: official portal link, current codes with expiry (incl. permanent), and step-by-step redeem guide.",
+        lead: "All in one place: official portal link, codes with expiry (incl. permanent), and a step-by-step redeem guide.",
         heroTitle: "Redeem here!",
         heroDesc: "Go to the official portal to redeem your code.",
         cta: "Open Redemption Portal",
@@ -257,15 +299,21 @@ ol{margin:8px 0 0 18px}
         faqQ3: "My code didn’t work. Why?",
         faqA3: "It may be one-time per account, region/server limited, or a typo. Check case/spacing and try again.",
         copy: "Copy", copied: "Copied!", redeem: "Redeem",
-        until: "Until", empty: "No active codes at the moment.",
-        forever: "Permanent", expired: "Expired", active: "Active"
+        until: "Until", empty: "No codes to show right now.",
+        forever: "Permanent", expired: "Expired", active: "Active",
+        loadFail: "Failed to load coupon data. (Check /data/coupons.json path)"
       },
       "ja": {
         metaTitle: "キングショット ギフトコード｜入力方法と最新コード",
         metaDesc: "キングショットの最新ギフトコードと入力方法をまとめて紹介。期限、無期限コード、公式入力ページへのリンク付き。",
         ogTitle: "キングショット ギフトコード｜入力方法と最新コード",
         ogDesc: "キングショットの最新ギフトコードと入力方法をまとめて紹介。期限、無期限コード、公式入力ページへのリンク付き。",
+        twTitle: "キングショット ギフトコード｜入力方法と最新コード",
+        twDesc: "最新ギフトコード / 入力手順 / 期限・無期限情報 / 公式入力ページ。",
+        backText: "ガイド",
         labelLanguage: "言語",
+        guides: "ガイド",
+        here: "ギフトコード",
         h1: "キングショット ギフトコード｜入力方法と最新コード",
         lead: "公式入力ページ、現在のコード（有効期限・無期限含む）、手順をまとめています。",
         heroTitle: "ここから入力！",
@@ -286,15 +334,21 @@ ol{margin:8px 0 0 18px}
         faqQ3: "コードが使えません。",
         faqA3: "アカウント1回のみ、地域／サーバー制限、または入力ミスの可能性があります。大文字小文字・スペースを確認してください。",
         copy: "コピー", copied: "コピー完了！", redeem: "交換",
-        until: "期限", empty: "現在利用できるコードはありません。",
-        forever: "無期限", expired: "期限切れ", active: "利用可"
+        until: "期限", empty: "表示できるコードがありません。",
+        forever: "無期限", expired: "期限切れ", active: "利用可",
+        loadFail: "クーポンデータの読み込みに失敗しました。（/data/coupons.json を確認）"
       },
       "zh-CN": {
         metaTitle: "Kingshot 礼品码｜兑换方法与最新可用代码",
         metaDesc: "汇总 Kingshot 最新礼品码及兑换方法，包含到期日、永久代码与官网兑换入口。",
         ogTitle: "Kingshot 礼品码｜兑换方法与最新可用代码",
         ogDesc: "汇总 Kingshot 最新礼品码及兑换方法，包含到期日、永久代码与官网兑换入口。",
+        twTitle: "Kingshot 礼品码｜兑换方法与最新可用代码",
+        twDesc: "最新礼品码 / 兑换步骤 / 到期&永久信息 / 官方入口。",
+        backText: "指南",
         labelLanguage: "语言",
+        guides: "指南",
+        here: "礼品码",
         h1: "Kingshot 礼品码｜兑换方法与最新可用代码",
         lead: "在此查看官网入口、当前礼品码（含到期/永久）以及兑换步骤。",
         heroTitle: "从这里兑换！",
@@ -315,15 +369,21 @@ ol{margin:8px 0 0 18px}
         faqQ3: "代码无法使用？",
         faqA3: "可能为每个账号仅一次、地区/服务器限制或输入错误。请检查大小写和空格后再试。",
         copy: "复制", copied: "已复制！", redeem: "兑换",
-        until: "截止", empty: "目前没有可用的礼品码。",
-        forever: "永久", expired: "已过期", active: "可用"
+        until: "截止", empty: "暂无可显示的礼品码。",
+        forever: "永久", expired: "已过期", active: "可用",
+        loadFail: "无法加载礼品码数据。（请检查 /data/coupons.json）"
       },
       "zh-TW": {
         metaTitle: "Kingshot 禮品碼｜兌換方法與最新可用代碼",
         metaDesc: "整理 Kingshot 最新禮品碼與兌換方法，包含到期日、永久代碼與官方兌換入口。",
         ogTitle: "Kingshot 禮品碼｜兌換方法與最新可用代碼",
         ogDesc: "整理 Kingshot 最新禮品碼與兌換方法，包含到期日、永久代碼與官方兌換入口。",
+        twTitle: "Kingshot 禮品碼｜兌換方法與最新可用代碼",
+        twDesc: "最新禮品碼 / 兌換步驟 / 到期&永久資訊 / 官方入口。",
+        backText: "指南",
         labelLanguage: "語言",
+        guides: "指南",
+        here: "禮品碼",
         h1: "Kingshot 禮品碼｜兌換方法與最新可用代碼",
         lead: "本頁提供官方入口、目前可用代碼（含到期/永久）與兌換步驟。",
         heroTitle: "從這裡兌換！",
@@ -344,41 +404,79 @@ ol{margin:8px 0 0 18px}
         faqQ3: "代碼無法使用？",
         faqA3: "可能為每帳號僅一次、地區/伺服器限制或輸入錯誤。請檢查大小寫與空格後再試。",
         copy: "複製", copied: "已複製！", redeem: "兌換",
-        until: "截止", empty: "目前沒有可用的禮品碼。",
-        forever: "永久", expired: "已過期", active: "可用"
+        until: "截止", empty: "目前沒有可顯示的禮品碼。",
+        forever: "永久", expired: "已過期", active: "可用",
+        loadFail: "無法載入禮品碼資料。（請檢查 /data/coupons.json）"
       }
     };
 
-    // ===== Language bootstrap =====
+    // ===== helpers =====
+    function stripHtml(html){
+      const div = document.createElement('div');
+      div.innerHTML = String(html || '');
+      return (div.textContent || '').trim();
+    }
+
+    function setLangParam(lang){
+      try{
+        const u = new URL(location.href);
+        u.searchParams.set('lang', lang);
+        history.replaceState(null, '', u.toString());
+      }catch(_){}
+    }
+
     function detectInitialLang(){
       const sp = new URLSearchParams(location.search);
       const urlLang = sp.get('lang');
-      let saved = null; try { saved = localStorage.getItem('lang'); } catch(_){}
+      let saved = null;
+      try { saved = localStorage.getItem('lang'); } catch(_){}
       if (urlLang && L[urlLang]) return urlLang;
       if (saved && L[saved]) return saved;
+
       const nav = (navigator.language || 'ko').toLowerCase();
       if (nav.startsWith('ko')) return 'ko';
       if (nav.startsWith('ja')) return 'ja';
-      if (nav.includes('zh') && nav.includes('tw')) return 'zh-TW';
+      if (nav.includes('zh') && (nav.includes('tw') || nav.includes('hk'))) return 'zh-TW';
       if (nav.includes('zh')) return 'zh-CN';
       return 'en';
+    }
+
+    function setFaqJsonLd(lang){
+      const t = (k)=> (L[lang] && L[lang][k]) || (L.en && L.en[k]) || k;
+      const json = {
+        "@context":"https://schema.org",
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":t('faqQ1'),"acceptedAnswer":{"@type":"Answer","text":stripHtml(t('faqA1'))}},
+          {"@type":"Question","name":t('faqQ2'),"acceptedAnswer":{"@type":"Answer","text":stripHtml(t('faqA2'))}},
+          {"@type":"Question","name":t('faqQ3'),"acceptedAnswer":{"@type":"Answer","text":stripHtml(t('faqA3'))}}
+        ]
+      };
+      const tag = document.getElementById('faq-jsonld');
+      if (tag) tag.textContent = JSON.stringify(json);
     }
 
     function applyLang(lang){
       const t = (k)=> (L[lang] && L[lang][k]) || (L.en && L.en[k]) || k;
 
-      // <html lang="">
       document.documentElement.setAttribute('lang', lang);
+      setLangParam(lang);
 
-      // Meta / OG
-      document.getElementById('meta-title').textContent = t('metaTitle');
+      // Meta/OG/Twitter
       document.title = t('metaTitle');
+      document.getElementById('meta-title').textContent = t('metaTitle');
       document.getElementById('meta-desc').setAttribute('content', t('metaDesc'));
       document.getElementById('og-title').setAttribute('content', t('ogTitle'));
       document.getElementById('og-desc').setAttribute('content', t('ogDesc'));
+      document.getElementById('tw-title').setAttribute('content', t('twTitle'));
+      document.getElementById('tw-desc').setAttribute('content', t('twDesc'));
 
-      // Labels / Text
+      // UI
+      document.getElementById('backText').textContent = t('backText');
       document.getElementById('label-language').textContent = t('labelLanguage');
+      document.getElementById('crumb-guides').textContent = t('guides');
+      document.getElementById('crumb-here').textContent = t('here');
+
       document.getElementById('h1').textContent = t('h1');
       document.getElementById('lead').textContent = t('lead');
       document.getElementById('hero-title').textContent = t('heroTitle');
@@ -399,48 +497,160 @@ ol{margin:8px 0 0 18px}
       document.getElementById('faq-q3').textContent = t('faqQ3');
       document.getElementById('faq-a3').textContent = t('faqA3');
 
+      setFaqJsonLd(lang);
+
       try { localStorage.setItem('lang', lang); } catch(_){}
-      renderCoupons(true); // 라벨/배지 재렌더
     }
 
-    // ===== Coupons logic (UTC 00시 만료) =====
+    // ===== Coupons logic (UTC 00:00 만료 기준) =====
     function isForever(val){
       if (!val) return true;
       const v = String(val).trim().toLowerCase();
       return v === 'permanent' || v === 'infinite' || v === '∞' || v === 'forever' || v === 'no-expiry' || v === 'noexp' || v === 'nolimit';
     }
-    function foreverText(lang){
-      return (L[lang] && L[lang].forever) || L.en.forever;
-    }
-    function fmtDate(val, lang){
-      if (isForever(val)) return foreverText(lang);
-      return String(val).trim(); // YYYY-MM-DD 그대로
-    }
     function parseUTCDate(ymd){ return new Date(String(ymd).trim() + 'T00:00:00Z'); }
     function isExpired(until){ return !isForever(until) && (new Date() >= parseUTCDate(until)); }
 
-    let _couponsCache = null;
-    async function loadCoupons(){
-      try{
-        const res = await fetch('/data/coupons.json?v=now', { cache:'no-store' });
-        if (!res.ok) throw new Error(res.status);
-        const data = await res.json();
-        return Array.isArray(data?.coupons) ? data.coupons : [];
-      }catch(_){ return []; }
+    function sortCoupons(coupons){
+      return coupons.slice().sort((a,b)=>{
+        const ea = isExpired(a.until), eb = isExpired(b.until);
+        if (ea !== eb) return ea ? 1 : -1;
+
+        const fa = isForever(a.until), fb = isForever(b.until);
+        if (fa !== fb) return fa ? -1 : 1;
+
+        if (!fa && !fb){
+          const da = parseUTCDate(a.until).getTime();
+          const db = parseUTCDate(b.until).getTime();
+          return da - db;
+        }
+        return String(a.code||'').localeCompare(String(b.code||''));
+      });
     }
 
-    async function renderCoupons(reuseCache=false){
+    function safeText(s){ return String(s ?? '').trim(); }
+
+    let _couponsCache = null;
+    let _cacheAt = 0;
+
+    async function loadCoupons(){
+      const url = '/data/coupons.json?v=' + Date.now(); // 캐시 꼬임 방지
+      try{
+        const res = await fetch(url, { cache:'no-store' });
+        if (!res.ok) throw new Error(String(res.status));
+        const data = await res.json();
+        return Array.isArray(data?.coupons) ? data.coupons : [];
+      }catch(_){
+        return null; // 실패
+      }
+    }
+
+    function createCouponCard(c, lang){
+      const T = (k)=> (L[lang] && L[lang][k]) || (L.en && L.en[k]) || k;
+
+      const expired = isExpired(c.until);
+      const forever = isForever(c.until);
+
+      const card = document.createElement('div');
+      card.className = 'card' + (expired ? ' expired' : '');
+
+      const top = document.createElement('div');
+
+      const row1 = document.createElement('div');
+      row1.style.display = 'flex';
+      row1.style.gap = '8px';
+      row1.style.alignItems = 'center';
+      row1.style.flexWrap = 'wrap';
+
+      const codeDiv = document.createElement('div');
+      codeDiv.className = 'code';
+      codeDiv.textContent = safeText(c.code);
+
+      const badge = document.createElement('span');
+      badge.className = 'badge ' + (expired ? 'expired' : 'active');
+      badge.textContent = expired ? T('expired') : T('active');
+
+      row1.appendChild(codeDiv);
+      row1.appendChild(badge);
+
+      const untilDiv = document.createElement('div');
+      untilDiv.className = 'until';
+      if (forever) untilDiv.textContent = T('forever');
+      else untilDiv.textContent = `${T('until')}: ${safeText(c.until)}`;
+
+      top.appendChild(row1);
+      top.appendChild(untilDiv);
+
+      const actions = document.createElement('div');
+      actions.className = 'actions';
+
+      const btnCopy = document.createElement('button');
+      btnCopy.className = 'btn';
+      btnCopy.type = 'button';
+      btnCopy.textContent = T('copy');
+      btnCopy.disabled = expired;
+
+      btnCopy.addEventListener('click', async () => {
+        const code = safeText(c.code);
+        try{
+          await navigator.clipboard.writeText(code);
+        }catch(_){
+          const ta = document.createElement('textarea');
+          ta.value = code;
+          document.body.appendChild(ta);
+          ta.select();
+          try{ document.execCommand('copy'); }catch(__){}
+          ta.remove();
+        }
+        btnCopy.textContent = T('copied');
+        setTimeout(() => btnCopy.textContent = T('copy'), 1200);
+      });
+
+      const btnOpen = document.createElement('a');
+      btnOpen.className = 'btn';
+      btnOpen.href = 'https://ks-giftcode.centurygame.com/';
+      btnOpen.target = '_blank';
+      btnOpen.rel = 'noopener';
+      btnOpen.textContent = T('redeem');
+      if (expired) btnOpen.classList.add('disabled');
+
+      actions.appendChild(btnCopy);
+      actions.appendChild(btnOpen);
+
+      card.appendChild(top);
+      card.appendChild(actions);
+      return card;
+    }
+
+    async function renderCoupons(forceRefetch=false){
+      const section = document.getElementById('couponSection');
       const grid = document.getElementById('couponGrid');
       const lang = document.documentElement.getAttribute('lang') || 'en';
       const T = (k)=> (L[lang] && L[lang][k]) || (L.en && L.en[k]) || k;
 
-      if (!reuseCache || !_couponsCache) {
-        _couponsCache = await loadCoupons();
+      section.setAttribute('aria-busy','true');
+      grid.textContent = 'Loading…';
+
+      const now = Date.now();
+      const stale = (now - _cacheAt) > 5 * 60 * 1000; // 5분 이상이면 재조회
+      if (forceRefetch || !_couponsCache || stale){
+        const raw = await loadCoupons();
+        _cacheAt = now;
+        _couponsCache = raw; // null 가능
       }
-      grid.setAttribute('aria-busy','false');
+
+      section.setAttribute('aria-busy','false');
       grid.textContent = '';
 
-      const coupons = _couponsCache.slice(0,4); // 필요 시 조정
+      if (_couponsCache === null){
+        const msg = document.createElement('div');
+        msg.className = 'note';
+        msg.textContent = T('loadFail');
+        grid.appendChild(msg);
+        return;
+      }
+
+      const coupons = sortCoupons(_couponsCache || []);
       if (!coupons.length){
         const empty = document.createElement('div');
         empty.className = 'note';
@@ -449,84 +659,26 @@ ol{margin:8px 0 0 18px}
         return;
       }
 
-      coupons.forEach(c => {
-  const expired = isExpired(c.until);
-
-  const card = document.createElement('div');
-  card.className = 'card' + (expired ? ' expired' : '');
-
-  const left = document.createElement('div');
-
-  const codeDiv = document.createElement('div');
-  codeDiv.className = 'code';
-  codeDiv.textContent = (c.code || '').trim();
-
-  const untilDiv = document.createElement('div');
-  untilDiv.className = 'until';
-  untilDiv.textContent = isForever(c.until)
-    ? foreverText(lang)
-    : `${T('until')}: ${fmtDate(c.until, lang)}`;
-
-  left.appendChild(codeDiv);
-  left.appendChild(untilDiv);
-
-  const actions = document.createElement('div');
-  actions.className = 'actions';
-
-  const btnCopy = document.createElement('button');
-  btnCopy.className = 'btn';
-  btnCopy.type = 'button';
-  btnCopy.textContent = T('copy');
-  btnCopy.disabled = expired;
-
-  btnCopy.addEventListener('click', async () => {
-    const code = (c.code || '').trim();
-    try {
-      await navigator.clipboard.writeText(code);
-    } catch (_) {
-      const ta = document.createElement('textarea');
-      ta.value = code;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      ta.remove();
-    }
-    btnCopy.textContent = T('copied');
-    setTimeout(() => btnCopy.textContent = T('copy'), 1200);
-  });
-
-  const btnOpen = document.createElement('a');
-  btnOpen.className = 'btn';
-  btnOpen.href = 'https://ks-giftcode.centurygame.com/';
-  btnOpen.target = '_blank';
-  btnOpen.rel = 'noopener';
-  btnOpen.textContent = T('redeem');
-  if (expired) btnOpen.classList.add('disabled');
-
-  actions.appendChild(btnCopy);
-  actions.appendChild(btnOpen);
-
-  card.appendChild(left);
-  card.appendChild(actions);
-  grid.appendChild(card);
-});
-
+      coupons.forEach(c => grid.appendChild(createCouponCard(c, lang)));
     }
 
     // Init
     (function init(){
       const initial = detectInitialLang();
-      document.getElementById('langSelect').value = initial;
-      applyLang(initial);
-      renderCoupons();
+      const sel = document.getElementById('langSelect');
+      sel.value = initial;
 
-      // 언어 변경
-      document.getElementById('langSelect').addEventListener('change', e=>{
-        applyLang(e.target.value);
+      applyLang(initial);
+      renderCoupons(true);
+
+      sel.addEventListener('change', e=>{
+        const lang = e.target.value;
+        applyLang(lang);
+        renderCoupons(false); // 캐시 유지, 라벨/만료표시만 갱신
       });
 
-      // UTC 00시 경과 반영 — 60초마다 재렌더(데이터 캐시 재사용)
-      setInterval(()=>renderCoupons(true), 60*1000);
+      // 만료(UTC 00:00) 반영을 위해 60초마다 재렌더 (5분마다 자동 재조회)
+      setInterval(()=>renderCoupons(false), 60*1000);
     })();
   </script>
 </body>

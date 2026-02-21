@@ -1,64 +1,207 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" dir="ltr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title data-i18n="bearTier.meta.title">곰사냥 집결원 티어 (A/B/C/No-Go)</title>
-  <meta name="description" content="킹샷 곰사냥 집결 참여 시 A/B/C/절대 집결 금지 티어와 집결장 최적 조합 정리" data-i18n-attr="content:bearTier.meta.desc" />
-  <style>
-  :root{
-  --fg:#0b0d12;--muted:#6b7280;--bd:#e5e7eb;--card:#f8fafc;
-  --best:#db2777;   /* ✅ Best 전용 색상 (에메랄드톤 예시) */
-  --a:#16a34a;--b:#f59e0b;--c:#3b82f6;--w:#ef4444;
-  --radius:16px;--gap:12px
-}
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
 
-  *{box-sizing:border-box}
-  body{margin:0;background:#fff;color:var(--fg);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,Noto Sans JP,Noto Sans SC,Noto Sans TC,sans-serif}
-  img{display:block;max-width:100%}
-  .wrap{max-width:1100px;margin:0 auto;padding:18px}
-  .notice{margin:4px 0 14px;color:var(--muted);font-size:13px}
-  .tier{border:1px solid var(--bd);border-radius:var(--radius);background:#fff;margin:16px 0;overflow:hidden}
-  .tier>header{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--bd)}
-  .tag{display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;font-weight:700;font-size:13px;color:#fff}
-  .a{background:var(--a)} .b{background:var(--b)} .c{background:var(--c)} .w{background:var(--w)} .best { background:var(--best); }
-  .desc{font-size:13px;color:var(--muted)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:var(--gap);padding:14px;justify-items:center}
-  .card{border:1px solid var(--bd);background:var(--card);border-radius:12px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
-  .img{width:92px;height:92px;border-radius:12px;border:1px solid var(--bd);object-fit:cover;background:#fff;margin:0 auto}
-  .name{font-weight:600;font-size:13px;text-align:center}
-  .hint{font-size:12px;color:var(--muted);text-align:center}
-  @media print{.hint{display:none}}
+  <title data-i18n="bearTier.meta.title">곰사냥 집결원 티어 (A/B/C/No-Go)</title>
+  <meta name="description"
+        content="킹샷 곰사냥 집결 참여 시 A/B/C/절대 집결 금지 티어와 집결장 최적 조합 정리"
+        data-i18n-attr="content:bearTier.meta.desc" />
+
+  <style>
+    *{box-sizing:border-box}
+
+    :root{
+      --brand:#0b57d0;
+      --fg:#0b0d12;--muted:#6b7280;--bd:#e5e7eb;--card:#f8fafc;
+
+      /* Tier colors */
+      --best:#db2777;
+      --a:#16a34a;--b:#f59e0b;--c:#3b82f6;--w:#ef4444;
+
+      --radius:16px;--gap:12px;
+
+      --surface:#fff;--bg:#fff;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --fg:#e8eaed;--muted:#c2c7d0;--bd:#2a2a2a;--card:#12161f;
+        --surface:#121212;--bg:#0b0b0b;
+      }
+    }
+
+    html,body{
+      margin:0;background:var(--bg);color:var(--fg);
+      font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,
+        "Noto Sans KR","Noto Sans JP","Noto Sans SC","Noto Sans TC",Arial,sans-serif;
+    }
+    img{display:block;max-width:100%}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* ===== Standard Guide Topbar (Back / Language) ===== */
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      background:var(--surface);
+      border-bottom:1px solid var(--bd);
+    }
+    .topbar-inner{
+      max-width:1100px;margin:0 auto;
+      padding:10px 16px;
+      display:flex;justify-content:space-between;align-items:center;
+      gap:12px;
+    }
+    .backlink{
+      font:800 14px/1 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,sans-serif;
+      color:var(--brand);
+      white-space:nowrap;
+    }
+    .langbox{
+      display:flex;align-items:center;gap:10px;
+      white-space:nowrap;
+    }
+    .langbox label{
+      font-size:14px;color:var(--muted);font-weight:700;
+    }
+    select{
+      padding:8px 10px;border-radius:10px;
+      border:1px solid var(--bd);
+      background:var(--surface);color:var(--fg);
+      font:700 14px/1 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,sans-serif;
+      outline:none;
+    }
+
+    /* ===== Content ===== */
+    .wrap{max-width:1100px;margin:0 auto;padding:18px}
+    h1{margin:10px 0 10px;font-size:clamp(22px,3vw,34px);letter-spacing:-0.02em}
+    .notice{margin:6px 0;color:var(--muted);font-size:13px}
+    .notice .muted{color:var(--muted)}
+    .notice strong{color:inherit}
+
+    .tier{border:1px solid var(--bd);border-radius:var(--radius);background:var(--surface);margin:16px 0;overflow:hidden}
+    .tier>header{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--bd)}
+    .tag{display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;font-weight:900;font-size:13px;color:#fff}
+    .a{background:var(--a)} .b{background:var(--b)} .c{background:var(--c)} .w{background:var(--w)} .best{background:var(--best)}
+    .desc{font-size:13px;color:var(--muted);font-weight:700}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:var(--gap);padding:14px;justify-items:center}
+    .card{border:1px solid var(--bd);background:var(--card);border-radius:12px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;width:100%}
+    .img{width:92px;height:92px;border-radius:12px;border:1px solid var(--bd);object-fit:cover;background:var(--surface);margin:0 auto}
+    .name{font-weight:800;font-size:13px;text-align:center}
+    .hint{font-size:12px;color:var(--muted);text-align:center;font-weight:700}
+    @media print{.hint{display:none}}
+
+    /* Rally Leader note row */
+    .leader-note-row{
+      display:flex;gap:10px;flex-wrap:wrap;
+      padding:12px 14px;
+      border-top:1px solid var(--bd);
+      background:color-mix(in srgb, var(--surface) 92%, var(--brand) 4%);
+    }
+    @media (prefers-color-scheme: dark){
+      .leader-note-row{
+        background:color-mix(in srgb, var(--surface) 90%, #fff 6%);
+      }
+    }
+    .mini-pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid var(--bd);
+      background:var(--surface);
+      font:800 12px/1 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,sans-serif;
+      color:var(--fg);
+      white-space:nowrap;
+    }
+    .leader-note-text{
+      flex:1 1 260px;
+      font-size:12.5px;
+      font-weight:700;
+      color:var(--muted);
+      line-height:1.5;
+    }
   </style>
 </head>
 
-<a href="/" class="kd-home-link" style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
-  ← KingshotData Korea
-</a>
-
 <body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a id="backLink" class="backlink" href="/guides" aria-label="Back to guides"></a>
+
+      <div class="langbox">
+        <label for="langSwitcher" id="langLabel">Language</label>
+        <select id="langSwitcher" aria-label="Language">
+          <option value="ko">한국어</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+          <option value="zh-CN">简体中文</option>
+          <option value="zh-TW">繁體中文</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
   <main class="wrap">
     <h1 data-i18n="bearTier.h1">곰사냥 집결원 티어</h1>
-    <p class="notice" data-i18n="bearTier.notice.line1">곰사냥은 <b>집결원 3자리 중 첫 번째</b> + <b>첫 번째 영웅의 ‘원정 1번 스킬’</b>만 적용됩니다.</p>
-    <p class="notice" data-i18n="bearTier.notice.line2">이 섹션은 <b>A등급</b>, <b>B등급</b>, <b>C등급</b>, <b>절대 집결 금지</b>만 간단히 정리합니다.</p>
-    <p class="notice" data-i18n="bearTier.notice.line3">곰사냥 집결원에는 집결장으로 활용되는 영웅이 포함되어있습니다. 현재 최고의 집결장 조합은 아래와 같습니다. <span class="muted">(업데이트에 따라 변경될 수 있음)</span></p>
+
+    <p class="notice" data-i18n="bearTier.notice.line1">
+      곰사냥은 <b>집결원 3자리 중 첫 번째</b> + <b>첫 번째 영웅의 ‘원정 1번 스킬’</b>만 적용됩니다.
+    </p>
+    <p class="notice" data-i18n="bearTier.notice.line2">
+      이 섹션은 <b>A등급</b>, <b>B등급</b>, <b>C등급</b>, <b>절대 집결 금지</b>만 간단히 정리합니다.
+    </p>
+    <p class="notice" data-i18n="bearTier.notice.line3">
+      곰사냥 집결원에는 집결장으로 활용되는 영웅이 포함되어있습니다. 현재 최고의 집결장 조합은 아래와 같습니다.
+      <span class="muted">(업데이트에 따라 변경될 수 있음)</span>
+    </p>
 
     <!-- Rally Leader -->
     <section class="tier-group">
-      <h2 style="margin:20px 0 10px;font-size:18px;font-weight:700">Rally Leader</h2>
+      <h2 data-i18n="bearTier.h2.leader" style="margin:20px 0 10px;font-size:18px;font-weight:900">Rally Leader</h2>
+
       <div class="tier">
-        <header><span class="tag best">Best</span></header>
+        <header>
+          <span id="bestTag" class="tag best">Best</span>
+        </header>
+
+        <!-- ✅ Rally Leader 4 heroes: Amadeus / Yang / Petra / Sophia -->
         <div class="grid">
-          <div class="card"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" class="img"><div class="name">Amadeus</div></div>
-          <div class="card"><img src="/img/heroes/Rosa/img_001.webp" alt="Rosa" class="img"><div class="name">Rosa</div></div>
-          <div class="card"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" class="img"><div class="name">Petra</div></div>
+          <div class="card">
+            <img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" class="img">
+            <div class="name">Amadeus</div>
+          </div>
+
+          <div class="card">
+            <img src="/img/heroes/Yang/img_001.webp" alt="Yang" class="img">
+            <div class="name">Yang</div>
+          </div>
+
+          <div class="card">
+            <img src="/img/heroes/Petra/img_001.webp" alt="Petra" class="img">
+            <div class="name">Petra</div>
+          </div>
+
+          <div class="card">
+            <img src="/img/heroes/Sophia/img_001.webp" alt="Sophia" class="img">
+            <div class="name">Sophia</div>
+          </div>
+        </div>
+
+        <!-- ✅ Petra <-> Sophia note -->
+        <div class="leader-note-row" aria-label="Rally leader substitution note">
+          <span class="mini-pill">Petra</span>
+          <span class="mini-pill">Sophia</span>
+          <div class="leader-note-text" data-i18n="bearTier.leader.note">
+            페트라는 소피아와 대체 될 수도 있습니다. 대체되면 수정진행하겠습니다.
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Rally Joiner (외부 소제목) -->
+    <!-- Rally Joiner -->
     <section class="tier-group" id="joiners">
-      <h2 style="margin:20px 0 10px;font-size:18px;font-weight:700" data-i18n="bearTier.h2.joiner">Rally Joiner</h2>
+      <h2 style="margin:20px 0 10px;font-size:18px;font-weight:900" data-i18n="bearTier.h2.joiner">Rally Joiner</h2>
       <div id="tiers"></div>
     </section>
   </main>
@@ -66,179 +209,350 @@
   <noscript>Kingshot 곰사냥 집결원 티어표 (Kingshot Bear Rally Tier List - A/B/C/No-Go)</noscript>
 
   <script>
-  // ===== I18N (local fallback) =====
-  const LOCAL_I18N = {
-    ko:{
-      'bearTier.meta.title':'곰사냥 집결원 티어 (A/B/C/No-Go)',
-      'bearTier.meta.desc':'킹샷 곰사냥 집결 참여 시 A/B/C/절대 집결 금지 티어와 집결장 최적 조합 정리',
-      'bearTier.h1':'곰사냥 집결원 티어',
-      'bearTier.h2.joiner':'Rally Joiner',
-      'bearTier.notice.line1':'곰사냥은 <b>집결원 3자리 중 첫 번째</b> + <b>첫 번째 영웅의 ‘원정 1번 스킬’</b>만 적용됩니다.',
-      'bearTier.notice.line2':'이 섹션은 <b>A등급</b>, <b>B등급</b>, <b>C등급</b>, <b>절대 집결 금지</b>만 간단히 정리합니다.',
-      'bearTier.notice.line3':'곰사냥 집결원에는 집결장으로 활용되는 영웅이 포함되어있습니다. 현재 최고의 집결장 조합은 아래와 같습니다. <span class="muted">(업데이트에 따라 변경될 수 있음)</span>',
-      'bearTier.tier.a':'A등급','bearTier.tier.b':'B등급','bearTier.tier.c':'C등급','bearTier.tier.no':'절대 집결 금지',
-      'bearTier.desc.a':'추천: 곰사냥 필수 집결원',
-      'bearTier.desc.b':'조건부 추천: 조합/상황 따라',
-      'bearTier.desc.c':'보조 선택: 대체/보완용',
-      'bearTier.desc.no':'비추천: 집결 효율 저하 / 아래 소개 된 영웅이 내 집결에 참여했다면 그 유저를 제로하세요😆'
-    },
-    en:{
-      'bearTier.meta.title':'Kingshot Bear Hunt Rally – Tier List (A/B/C/No-Go)',
-      'bearTier.meta.desc':'A/B/C/No-Go tiers for Bear Hunt rally joiners and the current best rally-leader trio for Kingshot.',
-      'bearTier.h1':'Bear Hunt Rally Joiner Tier List',
-      'bearTier.h2.joiner':'Rally Joiner',
-      'bearTier.notice.line1':'In Bear Hunt, only the <b>first of the 3 rally Joiner slots</b> and the <b>first Expedition skill of that first hero</b> apply.',
-      'bearTier.notice.line2':'This section summarizes only <b>A tier</b>, <b>B tier</b>, <b>C tier</b>, and <b>No-Go</b>.',
-      'bearTier.notice.line3':'Rally leaders are included as joiners as well. The current best rally-leader trio is shown below.',
-      'bearTier.tier.a':'A Tier','bearTier.tier.b':'B Tier','bearTier.tier.c':'C Tier','bearTier.tier.no':'Do NOT Put in the Rally',
-      'bearTier.desc.a':'Recommended: near must-pick for Bear Hunt',
-      'bearTier.desc.b':'Situational: depends on comp & context',
-      'bearTier.desc.c':'Supportive: alternative/complement picks',
-      'bearTier.desc.no':'Not recommended: reduces rally efficiency / If any of the heroes below join your rally, zero that player 😂'
-    },
-    ja:{
-      'bearTier.meta.title':'ベアハント 集結員ティア（A/B/C/禁止）',
-      'bearTier.meta.desc':'ベアハント集結員のA/B/C/禁止ティアと、現行ベストの集結長コンボをまとめました。',
-      'bearTier.h1':'ベアハント 集結員ティア表',
-      'bearTier.h2.joiner':'Rally Joiner',
-      'bearTier.notice.line1':'ベアハントでは、<b>集結員3枠のうち先頭</b>と、その英雄の<b>遠征スキル1</b>のみが適用されます。',
-      'bearTier.notice.line2':'ここでは<b>Aティア</b>、<b>Bティア</b>、<b>Cティア</b>、<b>禁止（No-Go）</b>のみを簡潔に掲載します。',
-      'bearTier.notice.line3':'集結員には集結長として使う英雄も含まれます。現在の最強集結長トリオは下段のカードをご覧ください。<span class="muted">（アップデートで変わる可能性あり）</span>',
-      'bearTier.tier.a':'Aティア','bearTier.tier.b':'Bティア','bearTier.tier.c':'Cティア','bearTier.tier.no':'集結に絶対入れない',
-      'bearTier.desc.a':'推奨：ベアハントでほぼ必須','bearTier.desc.b':'状況次第：編成・状況による','bearTier.desc.c':'補助枠：代替/補完として可',
-      'bearTier.desc.no':'非推奨：集結の効率を下げる / 以下の英雄が自分の集結に乗ってきたら、そのプレイヤーをゼロにしてください🤣'
-    },
-    cn:{
-      'bearTier.meta.title':'熊狩集结队员分级（A/B/C/禁用）',
-      'bearTier.meta.desc':'熊狩活动的集结队员 A/B/C/禁用分级，以及当前最强集结队长组合。',
-      'bearTier.h1':'熊狩 集结队员分级',
-      'bearTier.h2.joiner':'Rally Joiner',
-      'bearTier.notice.line1':'熊狩中仅生效<b>集结队员3个位置中的第一个</b>和该英雄的<b>远征第1技能</b>。',
-      'bearTier.notice.line2':'本节仅列出<b>A级</b>、<b>B级</b>、<b>C级</b>和<b>禁用</b>。',
-      'bearTier.notice.line3':'集结队员中包含可担任队长的英雄。当前最佳队长三人组请见下方。<span class="muted">（随更新可能变化）</span>',
-      'bearTier.tier.a':'A级','bearTier.tier.b':'B级','bearTier.tier.c':'C级','bearTier.tier.no':'切勿加入集结',
-      'bearTier.desc.a':'推荐：熊狩几乎必带','bearTier.desc.b':'有条件推荐：看阵容与场景','bearTier.desc.c':'辅助选择：可作为替补/补强',
-      'bearTier.desc.no':'不推荐：会降低集结效率 / 如果下面这些英雄加入了你的集结，那就把那个玩家清零吧 😅'
-    },
-    tw:{
-      'bearTier.meta.title':'熊狩集結隊員分級（A/B/C/禁止）',
-      'bearTier.meta.desc':'熊狩活動之集結隊員 A/B/C/禁止分級與目前最強的集結隊長組合。',
-      'bearTier.h1':'熊狩 集結隊員分級',
-      'bearTier.h2.joiner':'Rally Joiner',
-      'bearTier.notice.line1':'在熊狩中，僅套用<b>集結隊員三格中的第一格</b>與該英雄的<b>遠征第1技能</b>。',
-      'bearTier.notice.line2':'本節僅整理<b>A級</b>、<b>B級</b>、<b>C級</b>與<b>禁止</b>。',
-      'bearTier.notice.line3':'集結隊員中包含可擔任隊長的英雄。目前最佳隊長三人組請見下方。<span class="muted">（可能因版本更新而調整）</span>',
-      'bearTier.tier.a':'A級','bearTier.tier.b':'B級','bearTier.tier.c':'C級','bearTier.tier.no':'絕對不要上車',
-      'bearTier.desc.a':'推薦：熊狩幾乎必帶','bearTier.desc.b':'情境推薦：依編成/情況','bearTier.desc.c':'輔助選擇：可作為替補/補強',
-      'bearTier.desc.no':'不推薦：會降低集結效率 / 如果以下英雄參加了你的集結，那就直接把那位玩家歸零吧 🤣'
+  (function(){
+    var LOCAL_I18N = {
+      ko:{
+        'bearTier.meta.title':'곰사냥 집결원 티어 (A/B/C/No-Go)',
+        'bearTier.meta.desc':'킹샷 곰사냥 집결 참여 시 A/B/C/절대 집결 금지 티어와 집결장 최적 조합 정리',
+        'bearTier.topbar.backText':'← Kingshot Guides',
+        'bearTier.topbar.langLabel':'언어',
+        'bearTier.tag.best':'Best',
+        'bearTier.h1':'곰사냥 집결원 티어',
+        'bearTier.h2.leader':'Rally Leader',
+        'bearTier.h2.joiner':'Rally Joiner',
+        'bearTier.notice.line1':'곰사냥은 <b>집결원 3자리 중 첫 번째</b> + <b>첫 번째 영웅의 ‘원정 1번 스킬’</b>만 적용됩니다.',
+        'bearTier.notice.line2':'이 섹션은 <b>A등급</b>, <b>B등급</b>, <b>C등급</b>, <b>절대 집결 금지</b>만 간단히 정리합니다.',
+        'bearTier.notice.line3':'곰사냥 집결원에는 집결장으로 활용되는 영웅이 포함되어있습니다. 현재 최고의 집결장 조합은 아래와 같습니다. <span class="muted">(업데이트에 따라 변경될 수 있음)</span>',
+        'bearTier.leader.note':'페트라는 소피아와 대체 될 수도 있습니다. 대체되면 수정진행하겠습니다.',
+        'bearTier.tier.a':'A등급','bearTier.tier.b':'B등급','bearTier.tier.c':'C등급','bearTier.tier.no':'절대 집결 금지',
+        'bearTier.desc.a':'추천: 곰사냥 필수 집결원',
+        'bearTier.desc.b':'조건부 추천: 조합/상황 따라',
+        'bearTier.desc.c':'보조 선택: 대체/보완용',
+        'bearTier.desc.no':'비추천: 집결 효율 저하 / 아래 소개 된 영웅이 내 집결에 참여했다면 그 유저를 제로하세요😆'
+      },
+      en:{
+        'bearTier.meta.title':'Kingshot Bear Hunt Rally – Tier List (A/B/C/No-Go)',
+        'bearTier.meta.desc':'A/B/C/No-Go tiers for Bear Hunt rally joiners and the current best rally-leader trio for Kingshot.',
+        'bearTier.topbar.backText':'← Kingshot Guides',
+        'bearTier.topbar.langLabel':'Language',
+        'bearTier.tag.best':'Best',
+        'bearTier.h1':'Bear Hunt Rally Joiner Tier List',
+        'bearTier.h2.leader':'Rally Leader',
+        'bearTier.h2.joiner':'Rally Joiner',
+        'bearTier.notice.line1':'In Bear Hunt, only the <b>first of the 3 rally joiner slots</b> and the <b>first Expedition skill of that first hero</b> apply.',
+        'bearTier.notice.line2':'This section summarizes only <b>A tier</b>, <b>B tier</b>, <b>C tier</b>, and <b>No-Go</b>.',
+        'bearTier.notice.line3':'Rally leaders are included as joiners as well. The current best rally-leader lineup is shown below.',
+        'bearTier.leader.note':'Petra may be replaced by Sophia. If that happens, we will update this guide.',
+        'bearTier.tier.a':'A Tier','bearTier.tier.b':'B Tier','bearTier.tier.c':'C Tier','bearTier.tier.no':'Do NOT Put in the Rally',
+        'bearTier.desc.a':'Recommended: near must-pick for Bear Hunt',
+        'bearTier.desc.b':'Situational: depends on comp & context',
+        'bearTier.desc.c':'Supportive: alternative/complement picks',
+        'bearTier.desc.no':'Not recommended: reduces rally efficiency / If any of the heroes below join your rally, zero that player 😂'
+      },
+      ja:{
+        'bearTier.meta.title':'ベアハント 集結員ティア（A/B/C/禁止）',
+        'bearTier.meta.desc':'ベアハント集結員のA/B/C/禁止ティアと、現行ベストの集結長コンボをまとめました。',
+        'bearTier.topbar.backText':'← Kingshot ガイド',
+        'bearTier.topbar.langLabel':'言語',
+        'bearTier.tag.best':'Best',
+        'bearTier.h1':'ベアハント 集結員ティア表',
+        'bearTier.h2.leader':'Rally Leader',
+        'bearTier.h2.joiner':'Rally Joiner',
+        'bearTier.notice.line1':'ベアハントでは、<b>集結員3枠のうち先頭</b>と、その英雄の<b>遠征スキル1</b>のみが適用されます。',
+        'bearTier.notice.line2':'ここでは<b>Aティア</b>、<b>Bティア</b>、<b>Cティア</b>、<b>禁止（No-Go）</b>のみを簡潔に掲載します。',
+        'bearTier.notice.line3':'集結員には集結長として使う英雄も含まれます。現在の最強集結長ラインナップは下段をご覧ください。<span class="muted">（アップデートで変わる可能性あり）</span>',
+        'bearTier.leader.note':'Petra は Sophia に置き換わる可能性があります。変更された場合、このガイドを更新します。',
+        'bearTier.tier.a':'Aティア','bearTier.tier.b':'Bティア','bearTier.tier.c':'Cティア','bearTier.tier.no':'集結に絶対入れない',
+        'bearTier.desc.a':'推奨：ベアハントでほぼ必須','bearTier.desc.b':'状況次第：編成・状況による','bearTier.desc.c':'補助枠：代替/補完として可',
+        'bearTier.desc.no':'非推奨：集結の効率を下げる / 以下の英雄が自分の集結に乗ってきたら、そのプレイヤーをゼロにしてください🤣'
+      },
+      'zh-CN':{
+        'bearTier.meta.title':'熊狩集结队员分级（A/B/C/禁用）',
+        'bearTier.meta.desc':'熊狩活动的集结队员 A/B/C/禁用分级，以及当前最强集结队长组合。',
+        'bearTier.topbar.backText':'← Kingshot 指南',
+        'bearTier.topbar.langLabel':'语言',
+        'bearTier.tag.best':'Best',
+        'bearTier.h1':'熊狩 集结队员分级',
+        'bearTier.h2.leader':'Rally Leader',
+        'bearTier.h2.joiner':'Rally Joiner',
+        'bearTier.notice.line1':'熊狩中仅生效<b>集结队员3个位置中的第一个</b>和该英雄的<b>远征第1技能</b>。',
+        'bearTier.notice.line2':'本节仅列出<b>A级</b>、<b>B级</b>、<b>C级</b>和<b>禁用</b>。',
+        'bearTier.notice.line3':'集结队员中包含可担任队长的英雄。当前最佳队长阵容如下。<span class="muted">（随更新可能变化）</span>',
+        'bearTier.leader.note':'Petra 可能会被 Sophia 替代。如有变更，我们会更新本指南。',
+        'bearTier.tier.a':'A级','bearTier.tier.b':'B级','bearTier.tier.c':'C级','bearTier.tier.no':'切勿加入集结',
+        'bearTier.desc.a':'推荐：熊狩几乎必带','bearTier.desc.b':'有条件推荐：看阵容与场景','bearTier.desc.c':'辅助选择：可作为替补/补强',
+        'bearTier.desc.no':'不推荐：会降低集结效率 / 如果下面这些英雄加入了你的集结，那就把那个玩家清零吧 😅'
+      },
+      'zh-TW':{
+        'bearTier.meta.title':'熊狩集結隊員分級（A/B/C/禁止）',
+        'bearTier.meta.desc':'熊狩活動之集結隊員 A/B/C/禁止分級與目前最強的集結隊長組合。',
+        'bearTier.topbar.backText':'← Kingshot 指南',
+        'bearTier.topbar.langLabel':'語言',
+        'bearTier.tag.best':'Best',
+        'bearTier.h1':'熊狩 集結隊員分級',
+        'bearTier.h2.leader':'Rally Leader',
+        'bearTier.h2.joiner':'Rally Joiner',
+        'bearTier.notice.line1':'在熊狩中，僅套用<b>集結隊員三格中的第一格</b>與該英雄的<b>遠征第1技能</b>。',
+        'bearTier.notice.line2':'本節僅整理<b>A級</b>、<b>B級</b>、<b>C級</b>與<b>禁止</b>。',
+        'bearTier.notice.line3':'集結隊員中包含可擔任隊長的英雄。目前最佳隊長陣容如下。<span class="muted">（可能因版本更新而調整）</span>',
+        'bearTier.leader.note':'Petra 可能會被 Sophia 取代。如有變更，我們會更新本指南。',
+        'bearTier.tier.a':'A級','bearTier.tier.b':'B級','bearTier.tier.c':'C級','bearTier.tier.no':'絕對不要上車',
+        'bearTier.desc.a':'推薦：熊狩幾乎必帶','bearTier.desc.b':'情境推薦：依編成/情況','bearTier.desc.c':'輔助選擇：可作為替補/補強',
+        'bearTier.desc.no':'不推薦：會降低集結效率 / 如果以下英雄參加了你的集結，那就直接把那位玩家歸零吧 🤣'
+      }
+    };
+
+    // NOTES (by hero)
+    var NOTES_I18N = {
+      ko:{
+        'Amadeus':'파괴력 25%','Chenko':'파괴력 25%','Yeonwoo':'파괴력 25%','Amane':'공격력 25%','Margot':'공격력 25%',
+        'Rosa':'확률 피해','Jaeger':'확률 피해','Petra':'확률 피해','Hilde':'공격력 15%','Zoe':'확률 피해','Marlin':'확률 피해','Joy':'확률 피해',
+        'Longfei':'C등급','Thrud':'C등급','Vivian':'A등급','Yang':'B등급','Triton':'절대 집결 금지','Sophia':'집결 금지'
+      },
+      en:{
+        'Amadeus':'Destructive Power +25%','Chenko':'Destructive Power +25%','Yeonwoo':'Destructive Power +25%','Amane':'Attack +25%','Margot':'Attack +25%',
+        'Rosa':'Chance Damage','Jaeger':'Chance Damage','Petra':'Chance Damage','Hilde':'Attack +15%','Zoe':'Chance Damage','Marlin':'Chance Damage','Joy':'Chance Damage',
+        'Longfei':'C tier','Thrud':'C tier','Vivian':'A tier','Yang':'B tier','Triton':'No-Go','Sophia':'No-Go (Joiner)'
+      },
+      ja:{
+        'Amadeus':'破壊力+25%','Chenko':'破壊力+25%','Yeonwoo':'破壊力+25%','Amane':'攻撃力+25%','Margot':'攻撃力+25%',
+        'Rosa':'確率ダメージ','Jaeger':'確率ダメージ','Petra':'確率ダメージ','Hilde':'攻撃力+15%','Zoe':'確率ダメージ','Marlin':'確率ダメージ','Joy':'確率ダメージ',
+        'Longfei':'Cティア','Thrud':'Cティア','Vivian':'Aティア','Yang':'Bティア','Triton':'禁止','Sophia':'禁止（集結員）'
+      },
+      'zh-CN':{
+        'Amadeus':'破坏力+25%','Chenko':'破坏力+25%','Yeonwoo':'破坏力+25%','Amane':'攻击力+25%','Margot':'攻击力+25%',
+        'Rosa':'概率伤害','Jaeger':'概率伤害','Petra':'概率伤害','Hilde':'攻击力+15%','Zoe':'概率伤害','Marlin':'概率伤害','Joy':'概率伤害',
+        'Longfei':'C级','Thrud':'C级','Vivian':'A级','Yang':'B级','Triton':'禁用','Sophia':'禁用（队员）'
+      },
+      'zh-TW':{
+        'Amadeus':'破壞力+25%','Chenko':'破壞力+25%','Yeonwoo':'破壞力+25%','Amane':'攻擊力+25%','Margot':'攻擊力+25%',
+        'Rosa':'機率傷害','Jaeger':'機率傷害','Petra':'機率傷害','Hilde':'攻擊力+15%','Zoe':'機率傷害','Marlin':'機率傷害','Joy':'機率傷害',
+        'Longfei':'C級','Thrud':'C級','Vivian':'A級','Yang':'B級','Triton':'禁止','Sophia':'禁止（隊員）'
+      }
+    };
+
+    function normalizeLang(raw){
+      raw = String(raw || '').replace('_','-');
+      var low = raw.toLowerCase();
+      if (!low) return 'ko';
+      if (low.indexOf('ko') === 0) return 'ko';
+      if (low.indexOf('en') === 0) return 'en';
+      if (low.indexOf('ja') === 0) return 'ja';
+      if (low.indexOf('zh') === 0){
+        if (low.indexOf('tw') >= 0 || low.indexOf('hk') >= 0 || low.indexOf('mo') >= 0) return 'zh-TW';
+        return 'zh-CN';
+      }
+      return 'en';
     }
-  };
 
-  // ===== NOTES (by hero) =====
-  const NOTES_I18N = {
-    ko:{'Amadeus':'파괴력 25%','Chenko':'파괴력 25%','Yeonwoo':'파괴력 25%','Amane':'공격력 25%','Margot':'공격력 25%','Rosa':'확률 피해','Jaeger':'확률 피해','Petra':'확률 피해','Hilde':'공격력 15%','Zoe':'확률 피해','Marlin':'확률 피해','Joy':'확률 피해'},
-    en:{'Amadeus':'Destructive Power +25%','Chenko':'Destructive Power +25%','Yeonwoo':'Destructive Power +25%','Amane':'Attack +25%','Margot':'Attack +25%','Rosa':'Chance Damage','Jaeger':'Chance Damage','Petra':'Chance Damage','Hilde':'Attack +15%','Zoe':'Chance Damage','Marlin':'Chance Damage','Joy':'Chance Damage'},
-    ja:{'Amadeus':'破壊力+25%','Chenko':'破壊力+25%','Yeonwoo':'破壊力+25%','Amane':'攻撃力+25%','Margot':'攻撃力+25%','Rosa':'確率ダメージ','Jaeger':'確率ダメージ','Petra':'確率ダメージ','Hilde':'攻撃力+15%','Zoe':'確率ダメージ','Marlin':'確率ダメージ','Joy':'確率ダメージ'},
-    cn:{'Amadeus':'破坏力+25%','Chenko':'破坏力+25%','Yeonwoo':'破坏力+25%','Amane':'攻击力+25%','Margot':'攻击力+25%','Rosa':'概率伤害','Jaeger':'概率伤害','Petra':'概率伤害','Hilde':'攻击力+15%','Zoe':'概率伤害','Marlin':'概率伤害','Joy':'概率伤害'},
-    tw:{'Amadeus':'破壞力+25%','Chenko':'破壞力+25%','Yeonwoo':'破壞力+25%','Amane':'攻擊力+25%','Margot':'攻擊力+25%','Rosa':'機率傷害','Jaeger':'機率傷害','Petra':'機率傷害','Hilde':'攻擊力+15%','Zoe':'機率傷害','Marlin':'機率傷害','Joy':'機率傷害'}
-  };
-
-  // ===== helpers =====
-  function currentLang(){
-    if (window.I18N){
-      if (typeof window.I18N.getLang==='function') return window.I18N.getLang();
-      if (typeof window.I18N.lang==='string') return window.I18N.lang;
-      if (window.I18N.state?.lang) return window.I18N.state.lang;
+    function currentLang(){
+      try{
+        var p = new URLSearchParams(location.search);
+        var q = p.get('lang');
+        if (q) return normalizeLang(q);
+      }catch(_e){}
+      try{
+        var ls = localStorage.getItem('lang');
+        if (ls) return normalizeLang(ls);
+      }catch(_e2){}
+      return normalizeLang(navigator.language || 'ko');
     }
-    const p=new URLSearchParams(location.search);
-    if (p.get('lang')) return p.get('lang');
-    return localStorage.getItem('lang')||'ko';
-  }
 
-  function t(key){
-    if (window.I18N?.t){
-      const v = window.I18N.t(key);
-      if (v) return v;
+    function dict(){
+      var lang = currentLang();
+      return LOCAL_I18N[lang] || LOCAL_I18N.ko;
     }
-    const dict = LOCAL_I18N[currentLang()] || LOCAL_I18N.ko || {};
-    return dict[key] || (LOCAL_I18N.ko ? LOCAL_I18N.ko[key] : null);
-  }
 
-  function applyI18N(){
-    document.querySelectorAll('[data-i18n]').forEach(el=>{
-      const key=el.getAttribute('data-i18n'); const v=t(key);
-      if (v!=null) el.innerHTML=v;
-    });
-    document.querySelectorAll('[data-i18n-attr]').forEach(el=>{
-      const [attr,key]=el.getAttribute('data-i18n-attr').split(':'); const v=t(key);
-      if (v!=null) el.setAttribute(attr,v);
-    });
-    document.title = t('bearTier.meta.title') || document.title;
-  }
+    function t(key){
+      var d = dict();
+      return (d && d[key] != null) ? d[key] : (LOCAL_I18N.ko ? LOCAL_I18N.ko[key] : '');
+    }
 
-  window.addEventListener('i18n:change', ()=>{ applyI18N(); mount(); });
+    function applyI18N(){
+      var back = document.getElementById('backLink');
+      if (back) back.textContent = t('bearTier.topbar.backText') || '← Kingshot Guides';
 
-  // ===== Tier data (Joiner) =====
-  const TIER_DATA = {
-    A:['Amadeus','Chenko','Yeonwoo','Amane','Margot'],
-    B:['Hilde'],                       // 이동 반영
-    C:['Zoe','Marlin','Petra','Rosa','Jaeger'],
-    NO_GO:['Alcar','Diana','Edwin','Eric','Fahd','Forrest','Gordon','Helga','Howard','Jabel','Olive','Quinn','Saul','Seth']
-  };
+      var label = document.getElementById('langLabel');
+      if (label) label.textContent = t('bearTier.topbar.langLabel') || 'Language';
 
-  const ALIASES = { /* 필요 시 이미지 경로 별칭 매핑 */ };
+      var bestTag = document.getElementById('bestTag');
+      if (bestTag) bestTag.textContent = t('bearTier.tag.best') || 'Best';
 
-  function imgCandidates(name){
-    if (ALIASES[name]) return [ALIASES[name]];
-    const base=`/img/heroes/${name}/img_001`;
-    return [`${base}.webp`,`${base}.png`,`${base}.jpg`];
-  }
+      var nodes = document.querySelectorAll('[data-i18n]');
+      for (var i=0;i<nodes.length;i++){
+        var el = nodes[i];
+        var key = el.getAttribute('data-i18n');
+        var v = t(key);
+        if (v != null && v !== '') el.innerHTML = v;
+      }
 
-  function avatar(name){
-    const img=document.createElement('img');
-    img.className='img'; img.alt=name;
-    const list=imgCandidates(name); let i=0;
-    function tryNext(){ if(i<list.length) img.src=list[i++]; }
-    img.addEventListener('error',tryNext); tryNext();
-    return img;
-  }
+      var attrs = document.querySelectorAll('[data-i18n-attr]');
+      for (var j=0;j<attrs.length;j++){
+        var el2 = attrs[j];
+        var raw = el2.getAttribute('data-i18n-attr') || '';
+        var pairs = raw.split(';');
+        for (var p=0;p<pairs.length;p++){
+          var pair = (pairs[p] || '').trim();
+          if (!pair) continue;
+          var sp = pair.split(':');
+          var attr = (sp[0] || '').trim();
+          var key2 = (sp[1] || '').trim();
+          if (!attr || !key2) continue;
+          var v2 = t(key2);
+          if (v2 != null && v2 !== '') el2.setAttribute(attr, v2);
+        }
+      }
 
-  function noteFor(name){ const m=NOTES_I18N[currentLang()]||NOTES_I18N.ko||{}; return m[name]||''; }
+      var title = t('bearTier.meta.title');
+      if (title) document.title = title;
 
-  function card(name){
-    const el=document.createElement('div'); el.className='card';
-    el.appendChild(avatar(name));
-    const nm=document.createElement('div'); nm.className='name'; nm.textContent=name; el.appendChild(nm);
-    const h=noteFor(name); if(h){ const d=document.createElement('div'); d.className='hint'; d.textContent=h; el.appendChild(d); }
-    return el;
-  }
+      var langNow = currentLang();
+      document.documentElement.lang = langNow;
+      document.documentElement.dir = 'ltr';
+    }
 
-  function renderTier(titleKey, tagClass, list){
-    const sec=document.createElement('section'); sec.className='tier';
-    const head=document.createElement('header');
-    const tag=document.createElement('span'); tag.className=`tag ${tagClass}`; tag.textContent=t(titleKey)||titleKey;
-    const desc=document.createElement('div'); desc.className='desc';
-    let dk='bearTier.desc.no';
-    if(tagClass==='a') dk='bearTier.desc.a'; else if(tagClass==='b') dk='bearTier.desc.b'; else if(tagClass==='c') dk='bearTier.desc.c';
-    desc.textContent=t(dk)||'';
-    head.append(tag,desc);
-    const grid=document.createElement('div'); grid.className='grid';
-    list.forEach(n=>grid.appendChild(card(n)));
-    sec.append(head,grid);
-    return sec;
-  }
+    // ===== Tier data (Joiner) =====
+    var TIER_DATA = {
+      A:['Amadeus','Chenko','Yeonwoo','Amane','Margot','Vivian'],
+      B:['Hilde','Yang'],
+      C:['Zoe','Marlin','Petra','Rosa','Jaeger','Longfei','Thrud'],
+      NO_GO:['Alcar','Diana','Edwin','Eric','Fahd','Forrest','Gordon','Helga','Howard','Jabel','Olive','Quinn','Saul','Seth','Triton','Sophia']
+    };
 
-  function mount(){
-    applyI18N();
-    const root=document.getElementById('tiers'); if(!root) return;
-    root.innerHTML='';
-    if((TIER_DATA.A||[]).length) root.appendChild(renderTier('bearTier.tier.a','a',TIER_DATA.A));
-    if((TIER_DATA.B||[]).length) root.appendChild(renderTier('bearTier.tier.b','b',TIER_DATA.B));
-    if((TIER_DATA.C||[]).length) root.appendChild(renderTier('bearTier.tier.c','c',TIER_DATA.C));
-    if((TIER_DATA.NO_GO||[]).length) root.appendChild(renderTier('bearTier.tier.no','w',TIER_DATA.NO_GO));
-  }
+    // 필요 시 이미지 경로 별칭 매핑
+    var ALIASES = {};
 
-  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',mount,{once:true}); } else { mount(); }
+    function imgCandidates(name){
+      if (ALIASES[name]) return [ALIASES[name]];
+      var base = '/img/heroes/' + encodeURIComponent(name) + '/img_001';
+      return [base + '.webp', base + '.png', base + '.jpg'];
+    }
+
+    function avatar(name){
+      var img = document.createElement('img');
+      img.className = 'img';
+      img.alt = name;
+
+      var list = imgCandidates(name);
+      var idx = 0;
+
+      function tryNext(){
+        if (idx < list.length) img.src = list[idx++];
+      }
+      img.addEventListener('error', tryNext);
+      tryNext();
+      return img;
+    }
+
+    function noteFor(name){
+      var lang = currentLang();
+      var m = NOTES_I18N[lang] || NOTES_I18N.ko || {};
+      return m[name] || '';
+    }
+
+    function card(name){
+      var el = document.createElement('div');
+      el.className = 'card';
+
+      el.appendChild(avatar(name));
+
+      var nm = document.createElement('div');
+      nm.className = 'name';
+      nm.textContent = name;
+      el.appendChild(nm);
+
+      var h = noteFor(name);
+      if (h){
+        var d = document.createElement('div');
+        d.className = 'hint';
+        d.textContent = h;
+        el.appendChild(d);
+      }
+      return el;
+    }
+
+    function renderTier(titleKey, tagClass, list){
+      var sec = document.createElement('section');
+      sec.className = 'tier';
+
+      var head = document.createElement('header');
+
+      var tag = document.createElement('span');
+      tag.className = 'tag ' + tagClass;
+      tag.textContent = t(titleKey) || titleKey;
+
+      var desc = document.createElement('div');
+      desc.className = 'desc';
+
+      var dk = 'bearTier.desc.no';
+      if (tagClass === 'a') dk = 'bearTier.desc.a';
+      else if (tagClass === 'b') dk = 'bearTier.desc.b';
+      else if (tagClass === 'c') dk = 'bearTier.desc.c';
+      desc.textContent = t(dk) || '';
+
+      head.appendChild(tag);
+      head.appendChild(desc);
+
+      var grid = document.createElement('div');
+      grid.className = 'grid';
+      for (var i=0;i<list.length;i++){
+        grid.appendChild(card(list[i]));
+      }
+
+      sec.appendChild(head);
+      sec.appendChild(grid);
+      return sec;
+    }
+
+    function mount(){
+      applyI18N();
+
+      var sel = document.getElementById('langSwitcher');
+      var langNow = currentLang();
+      if (sel && sel.value !== langNow) sel.value = langNow;
+
+      var root = document.getElementById('tiers');
+      if (!root) return;
+
+      root.innerHTML = '';
+      if ((TIER_DATA.A||[]).length) root.appendChild(renderTier('bearTier.tier.a','a',TIER_DATA.A));
+      if ((TIER_DATA.B||[]).length) root.appendChild(renderTier('bearTier.tier.b','b',TIER_DATA.B));
+      if ((TIER_DATA.C||[]).length) root.appendChild(renderTier('bearTier.tier.c','c',TIER_DATA.C));
+      if ((TIER_DATA.NO_GO||[]).length) root.appendChild(renderTier('bearTier.tier.no','w',TIER_DATA.NO_GO));
+    }
+
+    function setLang(next){
+      next = normalizeLang(next);
+      try { localStorage.setItem('lang', next); } catch(_e) {}
+
+      try{
+        var u = new URL(location.href);
+        u.searchParams.set('lang', next);
+        history.replaceState(null, '', u.pathname + u.search + u.hash);
+      }catch(_e2){}
+
+      mount();
+    }
+
+    function initTopbar(){
+      var sel = document.getElementById('langSwitcher');
+      if (!sel) return;
+      sel.value = currentLang();
+      sel.addEventListener('change', function(e){
+        setLang(e.target.value);
+      });
+    }
+
+    if (document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', function(){
+        initTopbar();
+        mount();
+      }, { once:true });
+    } else {
+      initTopbar();
+      mount();
+    }
+  })();
   </script>
 </body>
 </html>

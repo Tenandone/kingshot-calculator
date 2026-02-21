@@ -13,6 +13,9 @@
 // - 라우트 렌더 이후 document.body 전체 i18n 강제 재적용 (글로벌 UI 누락 방지)
 // - popstate 보정: 마지막 계산기 경로 복구(lastCalcPath)
 // - ★ 계산기 경로 진입 시, route.render 완료 후 then에서 window.KSD.buildingUI.reset() 호출(실패 시 console.warn)
+//
+// [FIX v2026-02-21]
+// - ✅ /pages/guides/ 정적 가이드는 라우터가 가로채지 않도록 예외 처리 (클릭 시 홈으로 튕김 방지)
 
 (function () {
   'use strict';
@@ -39,22 +42,22 @@
   if (!window.v) window.v = v;
 
   // ===== CSS 경로 =====
-var CALC_CSS_HREF = '/css/calculator.css';
-// var COMPONENTS_CSS_HREF = '/css/components.css';  // 선언은 주석 처리 (호출도 같이 제거)
+  var CALC_CSS_HREF = '/css/calculator.css';
+  // var COMPONENTS_CSS_HREF = '/css/components.css';  // 선언은 주석 처리 (호출도 같이 제거)
 
-// ===== bootstrap =====
-document.addEventListener('DOMContentLoaded', function () {
-  ensureCSS('calculator-css', CALC_CSS_HREF)   // ✅ calculator.css만 로드
-    .then(function(){ return ensureI18N(); })
-    .then(function(){
-      var canon = canonicalize(location.href);
-      return selectAndBuildRoutesFor(canon.pathname);
-    })
-    .then(function(builtRoutes){
-      startRouter(builtRoutes || {});
-      return dispatch();
-    });
-});
+  // ===== bootstrap =====
+  document.addEventListener('DOMContentLoaded', function () {
+    ensureCSS('calculator-css', CALC_CSS_HREF)   // ✅ calculator.css만 로드
+      .then(function(){ return ensureI18N(); })
+      .then(function(){
+        var canon = canonicalize(location.href);
+        return selectAndBuildRoutesFor(canon.pathname);
+      })
+      .then(function(builtRoutes){
+        startRouter(builtRoutes || {});
+        return dispatch();
+      });
+  });
 
   // ===== header utils =====
   var yearEl = $('#y');
@@ -680,6 +683,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (href.charAt(0) === '#') return;
 
+    // ✅ [FIX] 가이드(정적 HTML)만 예외 — SPA 라우터가 가로채지 않도록
+    // WHY: /pages/guides/*.html 은 SPA routes에 등록되어 있지 않아
+    //      가로채면 /pages → 미등록 라우트 처리로 홈으로 튕김.
+    if (href.indexOf('/pages/guides/') === 0) {
+      return; // 브라우저 기본 이동(풀 로드)
+    }
+
     if (href.charAt(0) === '/') {
       e.preventDefault();
       var uAbs = canonicalize(href);
@@ -707,7 +717,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       applyCalcI18NIfAvailable(content);
     } catch (_e) {}
-  }, false); 
-  
+  }, false);
 
 })();
