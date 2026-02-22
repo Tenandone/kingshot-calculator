@@ -1,5 +1,5 @@
 /* =================================================================
-   KingshotData — common.css (Light Theme, final)
+   KingshotData — common.css (Light Theme, CLEAN + HOME BIG CARDS)
    ================================================================= */
 
 /* =========================
@@ -16,6 +16,9 @@
   --accent:#ffd166;
   --radius:14px;
   --shadow:0 1px 6px rgba(0,0,0,.06);
+
+  /* layout */
+  --container-max:1200px;
 }
 
 /* =========================
@@ -34,7 +37,7 @@ img{max-width:100%;height:auto;display:block}
 a{color:var(--brand);text-decoration:none}
 a:hover{text-decoration:underline}
 .muted{color:var(--muted)}
-.container{max-width:1100px;margin:0 auto;padding:0 16px}
+.container{max-width:var(--container-max);margin:0 auto;padding:0 16px}
 .section{margin:16px 0}
 
 /* =========================
@@ -78,12 +81,6 @@ a:hover{text-decoration:underline}
 }
 .nav-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;height:56px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px;color:var(--text);text-decoration:none}
-.brand-badge{
-  width:28px;height:28px;border-radius:8px;
-  background:linear-gradient(135deg,var(--brand) 0%,var(--brand-2) 100%);
-  display:grid;place-items:center;font-weight:900;color:#0b0d10;
-  box-shadow:0 0 0 2px #fff,0 4px 14px rgba(92,200,255,.25);
-}
 .brand-text{font-size:16px}
 .nav{display:flex;gap:10px;align-items:center}
 .nav a{
@@ -93,9 +90,17 @@ a:hover{text-decoration:underline}
 .nav a:hover{border-color:var(--border);background:#f8fafc}
 .nav a.is-active{color:#fff;background:var(--brand);border-color:transparent}
 .menu-toggle{display:none}
+
 @media (max-width:720px){
-  .menu-toggle{display:block;border:1px solid var(--border);padding:6px 10px;border-radius:10px;color:var(--text);background:#f8f9fb}
-  .nav{display:none;position:absolute;top:56px;left:0;right:0;padding:10px 16px;background:var(--panel);border-bottom:1px solid var(--border);flex-wrap:wrap}
+  .menu-toggle{
+    display:block;border:1px solid var(--border);
+    padding:6px 10px;border-radius:10px;color:var(--text);background:#f8f9fb
+  }
+  .nav{
+    display:none;position:absolute;top:56px;left:0;right:0;
+    padding:10px 16px;background:var(--panel);
+    border-bottom:1px solid var(--border);flex-wrap:wrap
+  }
   .nav.open{display:flex}
   .nav a{width:calc(50% - 10px)}
 }
@@ -123,19 +128,19 @@ a:hover{text-decoration:underline}
   display:grid;place-items:center;font-weight:900;font-size:38px;color:#0b0d10;
   box-shadow:0 10px 40px rgba(92,200,255,.12), inset 0 0 40px rgba(92,200,255,.06);
 }
-.section-title{margin:0 0 8px;font-size:16px;color:var(--muted)}
+.section-title{margin:0 0 10px;font-size:16px;color:var(--muted)}
 @media (max-width:860px){
   .hero{grid-template-columns:1fr}
   .hero__art{justify-self:start;max-width:200px}
 }
 
 /* =========================
-   Grid
+   Grid (base)
    ========================= */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
 
 /* =========================
-   Cards (홈/카테고리 공용)
+   Cards (common)
    ========================= */
 .card{
   display:block;text-decoration:none;color:var(--text);
@@ -146,17 +151,61 @@ a:hover{text-decoration:underline}
 }
 .card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.08);border-color:#dfe3ea}
 .card__media{
-  /* 고정 높이 제거 → 컨텍스트별 비율로 제어 */
-  display:grid;place-items:center;background:#f3f4f6;border-bottom:1px solid var(--border)
+  display:grid;
+  place-items:center;
+  background:#f3f4f6;
+  border-bottom:1px solid var(--border);
 }
-.card__emoji{font-size:40px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.1))}
 .card__body{padding:12px}
-.card__title{font-weight:700;margin:0 0 4px;font-size:14px;line-height:1.2}
-.card--category .card__media{ /* 홈 카테고리 카드 */
-  aspect-ratio:4/3;
+.card__title{font-weight:800;margin:0 0 4px;font-size:14px;line-height:1.2}
+.card__subtitle{margin:0;color:var(--muted);font-size:12px;line-height:1.35}
+
+/* =========================
+   HOME category cards (크게 + 3줄 느낌)
+   - PC: 3열
+   - Tablet: 2열
+   - Mobile: 1열
+   ========================= */
+.grid.category-grid{
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:18px;
+}
+
+/* 더 큰 카드(패딩/폰트) */
+.card--category .card__body{
+  padding:16px;
+}
+.card--category .card__title{
+  font-size:16px;
+  font-weight:900;
+  letter-spacing:.1px;
+}
+.card--category .card__subtitle{
+  font-size:13px;
+}
+
+/* 이미지 박스: 잘림 없이 보기 좋게 */
+.card--category .card__media{
+  aspect-ratio: 4 / 3;
 }
 .card--category .card__media img{
-  width:90%; height:90%; object-fit:contain;
+  width:88%;
+  height:88%;
+  object-fit:contain;
+}
+
+/* 반응형 */
+@media (max-width: 1024px){
+  .grid.category-grid{
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:16px;
+  }
+}
+@media (max-width: 600px){
+  .grid.category-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
 }
 
 /* =========================
@@ -170,8 +219,8 @@ a:hover{text-decoration:underline}
 /* =========================
    Tables (buildings)
    ========================= */
-.table-wrap{overflow:auto}
-.table-wrap table{width:100%;border-collapse:collapse;font-size:13px}
+.table-wrap{overflow:auto;-webkit-overflow-scrolling:touch}
+.table-wrap table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px}
 .table-wrap th,.table-wrap td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:right}
 .table-wrap th:first-child,.table-wrap td:first-child{text-align:left}
 .table-wrap thead th{position:sticky;top:0;background:#fff;color:var(--muted);z-index:1}
@@ -197,172 +246,11 @@ a:hover{text-decoration:underline}
 .variant-tabs .tab:hover{background:#eef2f8}
 .variant-tabs .tab.on{background:#2b6cb0;color:#fff;border-color:transparent}
 
-
-
 /* =========================
-   DB cards (이미지 자르지 않음)
+   DB cards (이미지 자르지 않음 + 중앙정렬)
    ========================= */
 .card--db{
   display:flex;flex-direction:column;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;text-decoration:none;
-  box-shadow:var(--shadow);
-}
-.card--db .card__media{
-  aspect-ratio:16/9; width:100%;
-  overflow:hidden; background:#f3f4f6; border-bottom:1px solid var(--border);
-}
-.card--db .card__media img{
-  width:100%; height:100%; object-fit:contain; object-position:center; display:block; padding:8px;
-}
-.card--db .card__body{ padding:12px; }
-.card--db .card__title{ font-size:16px; font-weight:700; line-height:1.25; margin:0; color:var(--text); }
-#db-grid.grid.category-grid{ grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap:16px; }
-
-/* =========================
-   Hero detail fixes
-   ========================= */
-.hero-detail .skills,
-.hero-detail .skill-list,
-.hero-detail .skill-row,
-.hero-detail .skill{ text-align:center; }
-.hero-detail .skills img,
-.hero-detail .skill-list img,
-.hero-detail .skill-row img,
-.hero-detail .skill img{
-  float:none !important; display:block; margin-left:auto; margin-right:auto;
-}
-
-
-
-/* =========================
-   Footer
-   ========================= */
-.site-footer{
-  background:var(--panel);
-  color:#666;
-  text-align:center;
-  border-top:1px solid var(--border);
-  line-height:1.6;
-  font-size:.9em;
-  padding:12px 0;
-}
-
-/* =========================
-   A11y
-   ========================= */
-.visually-hidden{
-  position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
-  clip:rect(0 0 0 0);white-space:nowrap;border:0
-}
-/* Home 카테고리 카드 이미지를 모두 같은 비율로(잘림 없음) */
-.category-grid .card__media{ aspect-ratio: 4/3; height:auto !important; display:grid; place-items:center; }
-.category-grid .card__media img{ width:90%; height:90%; object-fit:contain; }
-/* ==== HOME 카테고리 카드 미디어 강제 통일(잘림 없음) ==== */
-/* 미디어 박스를 비율 고정 + 기존 높이값 무력화 */
-.category-grid .card .card__media{
-  height: auto !important;           /* 예전 86~96px 고정값 무시 */
-  aspect-ratio: 4 / 3 !important;    /* 원하는 비율: 4:3 (필요시 16/9로 변경) */
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: #f3f4f6;               /* 동일 톤 */
-  overflow: hidden;
-}
-
-/* 내부 이미지/픽처/SVG가 박스 안에 "잘리지 않고" 들어가도록 */
-.category-grid .card .card__media > img,
-.category-grid .card .card__media > picture > img,
-.category-grid .card .card__media > svg{
-  width: 90% !important;             /* 여백 조금 남기고 꽉 차게 */
-  height: 90% !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  object-fit: contain !important;    /* 잘림 방지 */
-  display: block;
-}
-
-/* (예전 전역 규칙 무력화) .card__media img { height:120px } 같은 것 덮어쓰기 */
-.card__media img{ height: auto !important; }
-/* ===== HEROES GRID — 썸네일 통일 & 잘림 방지 ===== */
-/* 컨테이너 이름이 무엇이든 잡히게 넓게 지정 */
-#heroes-grid .card__media,
-#heroes-grid .thumb,
-.heroes-grid .card__media,
-.heroes-grid .thumb,
-.hero-grid .card__media,
-.hero-grid .thumb {
-  height: auto !important;          /* 예전 고정 height 무력화 */
-  aspect-ratio: 1 / 1 !important;   /* 정사각(필요하면 4/5 등으로 변경) */
-  background: #f3f4f6;
-  overflow: hidden;
-  border-bottom: 1px solid var(--border);
-}
-
-/* 이미지가 박스 안을 꽉 채우되 비율 유지 */
-#heroes-grid .card__media > img,
-#heroes-grid .thumb > img,
-.heroes-grid .card__media > img,
-.heroes-grid .thumb > img,
-.hero-grid .card__media > img,
-.hero-grid .thumb > img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;     /* ‘가득 채우기’ */
-  display: block;
-  border-radius: 0;
-}
-
-/* 혹시 전역에서 img 높이 강제한 규칙이 남아 있으면 무력화 */
-#heroes-grid img,
-.heroes-grid img,
-.hero-grid img {
-  height: auto;                     /* 안전장치 */
-}
-
-/* 카드 하단 이름줄 살짝 간격 */
-#heroes-grid .card__body,
-.heroes-grid .card__body,
-.hero-grid .card__body {
-  padding: 10px 12px;
-}
-/* === Mobile-first base === */
-:root{
-  --container-max: 1200px;
-  --gap: 12px;
-  --radius: 14px;
-  --border: #e8edf5;
-  --bg-card: #fff;        /* 카드 라이트 톤 유지 */
-  --text: #0b1324;
-}
-
-/* 레이아웃 */
-.container{ max-width:var(--container-max); margin:0 auto; padding:0 12px; }
-.panel{ padding:12px; }
-
-/* 미디어는 부모폭에 맞춰 축소 */
-img, video, canvas{ max-width:100%; height:auto; display:block; }
-
-/* 테이블은 넘치면 가로 스크롤 */
-.table-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
-.table-wrap table{ min-width:560px; width:100%; border-collapse:collapse; }
-
-/* 터치 타깃(버튼/링크) */
-button, .btn, [role="button"]{ min-height:44px; border-radius:10px; }
-
-/* 카드 기본 */
-.card{ background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
-
-/* 네비 토글 열렸을 때 스크롤 잠금(선택) */
-.nav.open ~ *{ overscroll-behavior:none; }
-/* =========================
-   DB cards (이미지 자르지 않음)
-   ========================= */
-.card--db{
-  display:flex;
-  flex-direction:column;
   background:var(--panel);
   border:1px solid var(--border);
   border-radius:12px;
@@ -385,89 +273,129 @@ button, .btn, [role="button"]{ min-height:44px; border-radius:10px; }
   display:block;
   padding:8px;
 }
-/* ✅ 하단 텍스트 영역 중앙 정렬 */
 .card--db .card__body{
   padding:12px;
-  text-align:center;        /* 가로 중앙 */
+  text-align:center;
   display:flex;
   flex-direction:column;
-  align-items:center;       /* 세로축 중앙 */
-  justify-content:center;   /* 세로축 중앙 */
+  align-items:center;
+  justify-content:center;
 }
 .card--db .card__title{
   font-size:16px;
-  font-weight:700;
+  font-weight:800;
   line-height:1.25;
   margin:0;
   color:var(--text);
-  text-align:center;        /* 제목 중앙 */
+  text-align:center;
 }
 #db-grid.grid.category-grid{
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap:16px;
 }
 
-/* ===== War Academy Main Title (이미지 + 텍스트 좌우 배치) ===== */
-.wa-accordion summary {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
-  background: #fff;
-  border-radius: 10px;
-  padding: 12px 16px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,.08);
-  cursor: pointer;
+/* =========================
+   Hero detail fixes
+   ========================= */
+.hero-detail .skills,
+.hero-detail .skill-list,
+.hero-detail .skill-row,
+.hero-detail .skill{ text-align:center; }
+.hero-detail .skills img,
+.hero-detail .skill-list img,
+.hero-detail .skill-row img,
+.hero-detail .skill img{
+  float:none !important;
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* ===== HEROES GRID — 썸네일 통일 ===== */
+#heroes-grid .card__media,
+.heroes-grid .card__media,
+.hero-grid .card__media{
+  height:auto;
+  aspect-ratio: 1 / 1;
+  background:#f3f4f6;
+  overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+#heroes-grid .card__media > img,
+.heroes-grid .card__media > img,
+.hero-grid .card__media > img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* =========================
+   War Academy Accordion
+   ========================= */
+.wa-accordion summary{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:12px;
+  background:#fff;
+  border-radius:10px;
+  padding:12px 16px;
+  margin-bottom:10px;
+  box-shadow:0 2px 5px rgba(0,0,0,.08);
+  cursor:pointer;
   transition: box-shadow .2s, transform .2s;
 }
-
-/* Hover 시 살짝 올라오게 */
-.wa-accordion summary:hover {
-  box-shadow: 0 4px 10px rgba(0,0,0,.12);
+.wa-accordion summary:hover{
+  box-shadow:0 4px 10px rgba(0,0,0,.12);
   transform: translateY(-2px);
 }
-
-/* 🔹 메인 타이틀 이미지 크기 조정 */
-.wa-accordion summary img {
-  width: 64px;        /* 원래보다 작게 (기존 100px 전후였다면 약 60~70px이 적당) */
-  height: auto;
-  border-radius: 10px;
-  flex-shrink: 0;
+.wa-accordion summary img{
+  width:64px;
+  height:auto;
+  border-radius:10px;
+  flex-shrink:0;
+}
+.wa-accordion summary div{
+  display:flex;
+  flex-direction:column;
+  text-align:left;
+}
+.wa-accordion summary h3{
+  margin:0 0 5px;
+  font-size:18px;
+  font-weight:700;
+  color:#222;
+}
+.wa-accordion summary p{
+  margin:0;
+  font-size:14px;
+  color:#666;
+  line-height:1.4;
+}
+@media (max-width:768px){
+  .wa-accordion summary img{ width:50px; }
+  .wa-accordion summary h3{ font-size:16px; }
+  .wa-accordion summary p{ font-size:13px; }
 }
 
-/* 🔹 텍스트 영역 (오른쪽) */
-.wa-accordion summary div {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
+/* =========================
+   Footer
+   ========================= */
+.site-footer{
+  background:var(--panel);
+  color:#666;
+  text-align:center;
+  border-top:1px solid var(--border);
+  line-height:1.6;
+  font-size:.9em;
+  padding:12px 0;
 }
 
-/* 메인 타이틀 (h3) */
-.wa-accordion summary h3 {
-  margin: 0 0 5px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #222;
-}
-
-/* 서브타이틀 (p) */
-.wa-accordion summary p {
-  margin: 0;
-  font-size: 14px;
-  color: #666;
-  line-height: 1.4;
-}
-
-/* 반응형 (모바일에서 이미지 더 작게) */
-@media (max-width: 768px) {
-  .wa-accordion summary img {
-    width: 50px;
-  }
-  .wa-accordion summary h3 {
-    font-size: 16px;
-  }
-  .wa-accordion summary p {
-    font-size: 13px;
-  }
+/* =========================
+   A11y
+   ========================= */
+.visually-hidden{
+  position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0
 }

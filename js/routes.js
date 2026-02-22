@@ -212,7 +212,7 @@
             { href:'/calculator', img:'/img/home/calculator.png', t:'home.card.calculators.title', d:'home.card.calculators.desc' },
             { href:'/waracademy', img:'/img/home/waracademy.png', t:'home.card.waracademy.title',  d:'home.card.waracademy.desc' },
             
-            { href:'/tools',      img:'/img/home/tools.png',      t:'home.card.tools.title',       d:'home.card.tools.desc' },
+            
 
             { href:'/about',      img:'/img/home/about.png',      t:'nav.about',                   d:'home.card.about.desc' }
           ];

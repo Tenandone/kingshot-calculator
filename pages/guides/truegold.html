@@ -1,0 +1,1314 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>2026순금소모표</title>
+
+  <style>
+    :root{
+      --bg:#f6f8fc;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --line:#e7ecf5;
+      --line2:#eef2fb;
+
+      --txt:#111827;
+      --mut:#6b7280;
+
+      --shadow: 0 14px 34px rgba(16,24,40,.08);
+      --radius: 18px;
+      --radius2: 14px;
+
+      --brand:#2563eb;
+      --gold:#b7791f;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 700px at 20% 0%, rgba(37,99,235,.08), transparent 55%),
+        radial-gradient(900px 600px at 85% 10%, rgba(245,158,11,.08), transparent 55%),
+        var(--bg);
+      color:var(--txt);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    .wrap{
+      max-width: 1200px;
+      margin: 22px auto 36px;
+      padding: 0 16px;
+    }
+
+    .section{
+      border:1px solid var(--line);
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    /* =========================
+      Header (title centered)
+    ========================= */
+    .head{
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items:center;
+      gap:12px;
+      padding: 16px 16px;
+      background: linear-gradient(180deg, #ffffff, var(--panel2));
+      border-bottom:1px solid var(--line);
+    }
+
+    .head-center{
+      text-align:center;
+      min-width:0;
+    }
+    .h1{
+      font-weight: 1000;
+      font-size: 18px;
+      margin:0;
+      line-height: 1.2;
+      letter-spacing: .1px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .head-right{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      gap:10px;
+      min-width: 260px;
+      flex-wrap: wrap;
+    }
+    .maker{
+      display:flex;
+      flex-direction: column;
+      align-items:flex-end;
+      line-height:1.2;
+      gap:4px;
+      color: var(--mut);
+      font-size: 12px;
+    }
+    .maker b{
+      color: var(--txt);
+      font-weight: 1000;
+      font-size: 13px;
+    }
+    .ten{
+      width:34px;height:34px;
+      border-radius: 999px;
+      object-fit: cover;
+      background:#eef2ff;
+      border:1px solid #dbeafe;
+      padding:4px;
+      flex:0 0 auto;
+    }
+
+    /* ✅ Back link */
+    .backlink{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color: var(--brand);
+      font-weight: 1000;
+      font-size: 13px;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .backlink:hover{ text-decoration:underline; }
+
+    /* language selector */
+    .langbox{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .sr-only{
+      position:absolute !important;
+      width:1px;height:1px;
+      padding:0;margin:-1px;overflow:hidden;
+      clip:rect(0,0,0,0);white-space:nowrap;border:0;
+    }
+    select{
+      padding:7px 10px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--txt);
+      font-weight:700;
+      height:34px;
+    }
+
+    /* =========================
+      Slider card
+    ========================= */
+    .slider-wrap{
+      padding: 14px 16px 16px;
+      border-bottom:1px solid var(--line);
+      background: #fff;
+    }
+
+    .slider-card{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, #ffffff, #fbfcff);
+      padding: 14px;
+    }
+
+    .slider-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .tg-display{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 240px;
+    }
+    .tg-ico{
+      width:52px;height:52px;
+      object-fit:contain;
+      border-radius: 16px;
+      background:#f2f5ff;
+      border:1px solid #dbeafe;
+      padding:7px;
+      flex:0 0 auto;
+    }
+    .tg-meta{
+      min-width:0;
+    }
+    .tg-label{
+      font-weight:1000;
+      font-size: 14px;
+      margin:0;
+    }
+    .tg-help{
+      margin-top:4px;
+      font-size: 12px;
+      color: var(--mut);
+      line-height: 1.35;
+    }
+
+    /* ✅ 줄바꿈 방지 */
+    .totals{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      gap:12px;
+      flex-wrap: nowrap;
+      min-width: 260px;
+    }
+
+    .total-chip{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background:#ffffff;
+      box-shadow: 0 10px 22px rgba(16,24,40,.06);
+      flex: 0 0 auto;
+    }
+    .total-chip .ico{
+      width:30px;height:30px;
+      object-fit:contain;
+      border-radius: 10px;
+      background:#f3f4f6;
+      border:1px solid var(--line2);
+      padding:5px;
+      flex:0 0 auto;
+    }
+    .total-chip .label{
+      font-size: 12px;
+      color: var(--mut);
+      line-height: 1.1;
+      white-space:nowrap;
+    }
+    .total-chip .value{
+      font-size: 28px;
+      font-weight: 1000;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .2px;
+      color: var(--txt);
+      line-height: 1;
+      white-space:nowrap;
+    }
+    .total-chip.temper .value{
+      color: var(--gold);
+    }
+
+    /* ✅ 숨김(자리 유지) */
+    .total-chip.is-hidden{
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .slider-row{
+      margin-top: 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    input[type="range"]{
+      width:100%;
+      accent-color: var(--brand);
+    }
+
+    .ticks{
+      display:flex;
+      justify-content:space-between;
+      gap:6px;
+      padding: 0 2px;
+      user-select:none;
+    }
+    .tick{
+      font-size: 12px;
+      color: var(--mut);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+      min-width: 0;
+    }
+    .tick img{
+      width:22px;height:22px;
+      object-fit:contain;
+      border-radius: 8px;
+      background:#f3f4f6;
+      border:1px solid var(--line2);
+      padding:3px;
+    }
+
+    /* =========================
+      Table
+    ========================= */
+    .table-wrap{
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      background:#fff;
+    }
+    table{
+      width: 100%;
+      min-width: 980px;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    thead th{
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      background: #ffffff;
+      border-bottom:1px solid var(--line);
+      padding: 10px 8px;
+      text-align:center;
+      font-weight: 1000;
+      font-size: 12px;
+      color: var(--txt);
+    }
+    th.building-col{
+      left:0;
+      z-index: 4;
+      text-align:left;
+      padding-left: 12px;
+      min-width: 260px;
+      border-right:1px solid var(--line2);
+      background:#fff;
+    }
+    tbody td, tbody th{
+      border-bottom:1px solid var(--line2);
+      padding: 10px 8px;
+      text-align:center;
+      vertical-align: middle;
+      background:#fff;
+    }
+    tbody th{
+      position: sticky;
+      left:0;
+      z-index: 2;
+      text-align:left;
+      padding-left: 12px;
+      font-weight: 1000;
+      border-right:1px solid var(--line2);
+      background:#fff;
+    }
+    tbody tr:hover td,
+    tbody tr:hover th{
+      background:#fbfcff;
+    }
+
+    .bcell{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+    .bicons{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex:0 0 auto;
+    }
+    .bicon{
+      width:34px;height:34px;
+      object-fit:contain;
+      border-radius: 10px;
+      background:#f3f4f6;
+      border:1px solid var(--line2);
+      padding:5px;
+    }
+    .bname{
+      min-width:0;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      font-size: 13px;
+      font-weight: 1000;
+    }
+
+    .tghead{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .tghead img{
+      width:34px;height:34px;
+      object-fit:contain;
+    }
+    .tg-fallback{
+      display:none;
+      width:34px;height:34px;
+      align-items:center;
+      justify-content:center;
+      border-radius: 10px;
+      background:#f3f4f6;
+      border:1px solid var(--line2);
+      font-weight: 1000;
+      font-size: 12px;
+      color: var(--txt);
+    }
+
+    .cell{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      min-height: 44px;
+    }
+    .line{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      width:100%;
+      white-space:nowrap;
+    }
+    .num{
+      font-variant-numeric: tabular-nums;
+      font-weight: 950;
+      letter-spacing:.2px;
+      color: var(--txt);
+    }
+    .line.temper{
+      color: var(--gold);
+    }
+    .line.temper .num{
+      color: var(--gold);
+    }
+    .ico-mini{
+      width:16px;height:16px;
+      object-fit:contain;
+      vertical-align:middle;
+      opacity:.95;
+    }
+
+    /* =========================
+      tg-tip (SEO section)
+    ========================= */
+    .tg-tip{
+      background:#fff;
+      border-top:1px solid var(--line);
+    }
+    .tg-tip__inner{
+      padding: 18px 16px 22px;
+    }
+    .tg-tip__head{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      padding: 14px;
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg,#fff,#fbfcff);
+    }
+    .tg-tip__img{
+      width:56px;height:56px;
+      border-radius: 16px;
+      object-fit: contain;
+      background:#f3f4f6;
+      border:1px solid var(--line2);
+      padding:8px;
+      flex:0 0 auto;
+    }
+    .tg-tip__title{
+      margin:0;
+      font-size: 16px;
+      font-weight: 1000;
+    }
+    .tg-tip__sub{
+      margin:6px 0 0;
+      color: var(--mut);
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+
+    .tg-tip__grid{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:12px;
+    }
+    .tg-tip__card{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background:#fff;
+      padding: 12px 12px;
+    }
+    .tg-tip__card h3{
+      margin:0 0 8px;
+      font-size: 13px;
+      font-weight: 1000;
+    }
+    .tg-tip__card ul{
+      margin:0;
+      padding-left: 18px;
+      color: var(--txt);
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+    .tg-tip__p{
+      margin:0;
+      color: var(--txt);
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+    .tg-tip__card b{ font-weight:1000; }
+
+    .tg-tip__tier{
+      margin-top: 14px;
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding: 12px;
+      background:#fff;
+    }
+    .tg-tip__tierTitle{
+      margin:0 0 10px;
+      font-size: 13px;
+      font-weight: 1000;
+    }
+    .tg-tip__tierRow{
+      display:grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap:10px;
+    }
+    .tg-tier{
+      border:1px solid var(--line2);
+      border-radius: 12px;
+      padding: 10px 10px;
+      background:#fbfcff;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .tg-tier b{ display:block; font-weight:1000; }
+    .tg-tier span{ display:block; color: var(--mut); margin-top:2px; }
+    .tg-tier em{
+      display:block;
+      margin-top:6px;
+      font-style: normal;
+      font-weight: 1000;
+    }
+    .tg-tip__note{
+      margin:10px 0 0;
+      color: var(--mut);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .tg-tip__strategy{
+      margin-top: 14px;
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding: 12px;
+      background:#fff;
+    }
+    .tg-tip__strategy h3{
+      margin:0 0 8px;
+      font-size: 13px;
+      font-weight: 1000;
+    }
+    .tg-tip__strategy ol{
+      margin:0;
+      padding-left: 18px;
+      font-size: 12.5px;
+      line-height: 1.7;
+    }
+    .tg-tip__warn{
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border:1px solid var(--line2);
+      background: linear-gradient(180deg,#fff,#fff7ed);
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+    .tg-tip__warn b{ font-weight:1000; }
+
+    .tg-tip__check{
+      margin-top: 14px;
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding: 12px;
+      background:#fff;
+    }
+    .tg-tip__check h3{
+      margin:0 0 8px;
+      font-size: 13px;
+      font-weight: 1000;
+    }
+    .tg-tip__check ul{
+      margin:0;
+      padding-left: 18px;
+      font-size: 12.5px;
+      line-height: 1.7;
+    }
+
+    /* Mobile tuning */
+    @media (max-width: 720px){
+      .tg-tip__grid{ grid-template-columns: 1fr; }
+      .tg-tip__tierRow{ grid-template-columns: 1fr; }
+      .head-right{ min-width: 0; }
+      .totals{ min-width: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <section class="section" aria-label="Truegold Chart">
+      <div class="head">
+        <a id="backLink" class="backlink" href="/guides" data-i18n="header.back" aria-label="Back to guides">← 가이드로</a>
+
+        <div class="head-center">
+          <h1 class="h1" data-i18n="page.title">2026순금소모표</h1>
+        </div>
+
+        <div class="head-right">
+          <div class="maker">
+            <span data-i18n="header.madeBy">제작</span>
+            <b>Ten</b>
+          </div>
+
+          <div class="langbox">
+            <label class="sr-only" for="langSwitcher">Language</label>
+            <select id="langSwitcher" aria-label="Language">
+              <option value="ko">한국어</option>
+              <option value="en">English</option>
+              <option value="ja">日本語</option>
+              <option value="zh-CN">简体中文</option>
+              <option value="zh-TW">繁體中文</option>
+            </select>
+          </div>
+
+          <img class="ten" src="/img/icons/ten.png" alt="Ten" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <!-- TG Slider -->
+      <div class="slider-wrap">
+        <div class="slider-card" aria-label="TG totals slider">
+          <div class="slider-top">
+            <div class="tg-display">
+              <img id="tgIcon" class="tg-ico" src="/img/icons/truegold_level_1.webp" alt="TG1"
+                   onerror="this.style.display='none'">
+              <div class="tg-meta">
+                <p id="tgLabel" class="tg-label">TG1 전체 소모</p>
+                <div class="tg-help" data-i18n="slider.hint">
+                  슬라이드를 움직이면 해당 TG 레벨의 전체 소모량이 바뀝니다.
+                </div>
+              </div>
+            </div>
+
+            <!-- ✅ 2칩(담금질된 순금 + 순금). 담금질된 순금은 TG1~5 숨김(자리 유지) -->
+            <div id="tgTotals" class="totals"></div>
+          </div>
+
+          <div class="slider-row">
+            <input id="tgRange" type="range" min="1" max="8" value="1" step="1" aria-label="TG level slider" />
+            <div class="ticks" aria-hidden="true" id="ticks"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main table -->
+      <div class="table-wrap" role="region" aria-label="TG1–TG8 table" tabindex="0">
+        <table id="tgTable">
+          <thead id="tgThead"></thead>
+          <tbody id="tgTbody"></tbody>
+        </table>
+      </div>
+
+      <!-- SEO TIP -->
+      <section class="tg-tip" aria-label="Tempered Truegold Tip">
+        <div class="tg-tip__inner">
+          <div class="tg-tip__head">
+            <img class="tg-tip__img" src="/img/icons/Ttruegold-kingshot .webp" alt="Tempered Truegold" loading="lazy"
+                 onerror="this.onerror=null; this.src='/img/icons/Ttruegold-kingshot.webp';">
+            <div class="tg-tip__titlebox">
+              <h2 class="tg-tip__title" data-i18n="tip.title">담금질된 순금이란?</h2>
+              <p class="tg-tip__sub" data-i18n="tip.sub">
+                TG5 이후 건물 업그레이드에 추가로 요구되는 특수 재료로, 순금을 한 단계 더 정제해 성능을 강화한 고급 소재입니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="tg-tip__grid">
+            <div class="tg-tip__card">
+              <h3 data-i18n="tip.when.title">언제 필요한가요?</h3>
+              <ul>
+                <li>
+                  <b data-i18n="tip.when.b1">TG5 전</b>: <span data-i18n="tip.when.t1">순금 + 일반 자원만으로 업그레이드</span>
+                </li>
+                <li>
+                  <b data-i18n="tip.when.b2">TG5 이후</b>: <span data-i18n="tip.when.t2">업그레이드 요구 재료에 담금질된 순금이 추가</span>
+                </li>
+                <li>
+                  <b data-i18n="tip.when.b3">TG8</b>: <span data-i18n="tip.when.t3">서버 기준 약 310~320일 전후 오픈 구간</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="tg-tip__card">
+              <h3 data-i18n="tip.desc.title">담금질된 순금 설명</h3>
+              <p class="tg-tip__p" data-i18n="tip.desc.p">
+                왕실 주조소에서 순금을 한 단계 더 정제해 경도와 연성이 강화되며, 그 결과 매우 뛰어난 재료로 재탄생합니다.
+              </p>
+            </div>
+
+            <div class="tg-tip__card">
+              <h3 data-i18n="tip.source.title">획득처</h3>
+              <ul>
+                <li><b data-i18n="tip.source.b1">초정련(순금정련소)</b> — <span data-i18n="tip.source.t1">핵심 루트</span></li>
+                <li><b data-i18n="tip.source.b2">골든 글레이브 이벤트</b> — <span data-i18n="tip.source.t2">이벤트 보조 수급</span></li>
+              </ul>
+            </div>
+
+            <div class="tg-tip__card">
+              <h3 data-i18n="tip.core.title">초정련 핵심(효율 운영)</h3>
+              <ul>
+                <li data-i18n="tip.core.li1">주간 최대 100회 가능하지만, 주간 누적 횟수가 쌓일수록 티어가 올라가며 순금 소모가 급증</li>
+                <li data-i18n="tip.core.li2">“한 번에 몰아치기”를 막는 구조라, 티어 관리 = 효율</li>
+                <li data-i18n="tip.core.li3">매일 첫 1회는 순금 소모 50% 할인(매우 중요)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tg-tip__tier">
+            <h3 class="tg-tip__tierTitle" data-i18n="tip.tier.title">초정련 티어(주간 누적 기준)</h3>
+            <div class="tg-tip__tierRow">
+              <div class="tg-tier">
+                <b data-i18n="tip.tier1.b">티어 1</b><span data-i18n="tip.tier1.range">(1–20회)</span>
+                <em data-i18n="tip.tier1.em">순금 20 → 담금질된 순금 1–3</em>
+              </div>
+              <div class="tg-tier">
+                <b data-i18n="tip.tier2.b">티어 2</b><span data-i18n="tip.tier2.range">(21–40회)</span>
+                <em data-i18n="tip.tier2.em">순금 50 → 담금질된 순금 2–3</em>
+              </div>
+              <div class="tg-tier">
+                <b data-i18n="tip.tier3.b">티어 3</b><span data-i18n="tip.tier3.range">(41–60회)</span>
+                <em data-i18n="tip.tier3.em">순금 100 → 담금질된 순금 3–6</em>
+              </div>
+              <div class="tg-tier">
+                <b data-i18n="tip.tier4.b">티어 4</b><span data-i18n="tip.tier4.range">(61–80회)</span>
+                <em data-i18n="tip.tier4.em">순금 130 → 담금질된 순금 3–9</em>
+              </div>
+              <div class="tg-tier">
+                <b data-i18n="tip.tier5.b">티어 5</b><span data-i18n="tip.tier5.range">(81–100회)</span>
+                <em data-i18n="tip.tier5.em">순금 160 → 담금질된 순금 3–12</em>
+              </div>
+            </div>
+            <p class="tg-tip__note" data-i18n="tip.tier.note">
+              예시: 주간 누적 20회까지는 티어 1 유지 → 21회부터 티어 2로 이동합니다.
+            </p>
+          </div>
+
+          <div class="tg-tip__strategy">
+            <h3 data-i18n="tip.strategy.title">추천 운영 전략(무/소과금 효율 루트)</h3>
+            <ol>
+              <li><b data-i18n="tip.strategy.b1">월요일</b>: <span data-i18n="tip.strategy.t1">초정련을 20회까지 먼저 진행(티어 1 효율 구간 최대 활용)</span></li>
+              <li><b data-i18n="tip.strategy.b2">이후</b>: <span data-i18n="tip.strategy.t2">남은 기간은 하루 1회만 진행(매일 첫 1회 반값을 꾸준히 챙김)</span></li>
+              <li data-i18n="tip.strategy.t3">티어 2 초입 근처로 유지하며 담금질된 순금을 하루 2~3개 수준으로 안정 확보</li>
+            </ol>
+
+            <div class="tg-tip__warn">
+              <b data-i18n="tip.warn.b">결론:</b>
+              <span data-i18n="tip.warn.t">
+                주간 100회를 한 번에 몰아서 진행하면 티어가 빠르게 올라 순금 소모가 폭증합니다.
+                특히 무/소과금은 티어 1 → 티어 2 유지가 핵심입니다.
+              </span>
+            </div>
+          </div>
+
+          <div class="tg-tip__check">
+            <h3 data-i18n="tip.check.title">실전 운영 체크리스트</h3>
+            <ul>
+              <li data-i18n="tip.check.li1">월요일: 주간 20회까지는 효율 구간이므로 최대한 활용</li>
+              <li data-i18n="tip.check.li2">이후: 하루 1회로 반값 보너스를 꾸준히 챙기기</li>
+              <li data-i18n="tip.check.li3">업그레이드 전: 목표 TG 단계에 필요한 담금질된 순금 총량부터 계산</li>
+              <li data-i18n="tip.check.li4">주의: 초정련을 몰아서 할수록 주간 티어 상승 → 이후 순금 소모 폭증</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </section>
+  </div>
+
+  <script>
+  (function(){
+    /* =========================
+      ICONS / PATHS
+      - tempered 아이콘: 공백 포함 파일명일 수 있어 onerror fallback 처리
+    ========================= */
+    const ICONS = {
+      tgLevel: (n) => `/img/icons/truegold_level_${n}.webp`,
+      truegold: '/img/icons/truegold-kingshot.webp',
+      tempered: '/img/icons/Ttruegold-kingshot .webp',
+      temperedAlt: '/img/icons/Ttruegold-kingshot.webp'
+    };
+
+    const TG_MAX = 8;
+
+    /* =========================
+      i18n
+    ========================= */
+    const I18N = {
+      "ko": {
+        page: { title: "2026순금소모표" },
+        header: { madeBy: "제작", back: "← 가이드로" },
+        slider: {
+          hint: "슬라이드를 움직이면 해당 TG 레벨의 전체 소모량이 바뀝니다.",
+          totalLabel: (tg)=>`TG${tg} 전체 소모`,
+          truegold: "순금",
+          tempered: "담금질된 순금",
+          building: "건물"
+        },
+        buildings: {
+          towncenter:"도시센터",
+          embassy:"대사관",
+          commandcenter:"지휘부",
+          infirmary:"야전병원",
+          barracks:"보병대",
+          stable:"기병대",
+          range:"궁병대"
+        },
+        tip:{
+          title:"담금질된 순금이란?",
+          sub:"TG5 이후 건물 업그레이드에 추가로 요구되는 특수 재료로, 순금을 한 단계 더 정제해 성능을 강화한 고급 소재입니다.",
+          when:{ title:"언제 필요한가요?", b1:"TG5 전", t1:"순금 + 일반 자원만으로 업그레이드", b2:"TG5 이후", t2:"업그레이드 요구 재료에 담금질된 순금이 추가", b3:"TG8", t3:"서버 기준 약 310~320일 전후 오픈 구간" },
+          desc:{ title:"담금질된 순금 설명", p:"왕실 주조소에서 순금을 한 단계 더 정제해 경도와 연성이 강화되며, 그 결과 매우 뛰어난 재료로 재탄생합니다." },
+          source:{ title:"획득처", b1:"초정련(순금정련소)", t1:"핵심 루트", b2:"골든 글레이브 이벤트", t2:"이벤트 보조 수급" },
+          core:{ title:"초정련 핵심(효율 운영)", li1:"주간 최대 100회 가능하지만, 주간 누적 횟수가 쌓일수록 티어가 올라가며 순금 소모가 급증", li2:"“한 번에 몰아치기”를 막는 구조라, 티어 관리 = 효율", li3:"매일 첫 1회는 순금 소모 50% 할인(매우 중요)" },
+          tier:{
+            title:"초정련 티어(주간 누적 기준)",
+            tier1:{ b:"티어 1", range:"(1–20회)", em:"순금 20 → 담금질된 순금 1–3" },
+            tier2:{ b:"티어 2", range:"(21–40회)", em:"순금 50 → 담금질된 순금 2–3" },
+            tier3:{ b:"티어 3", range:"(41–60회)", em:"순금 100 → 담금질된 순금 3–6" },
+            tier4:{ b:"티어 4", range:"(61–80회)", em:"순금 130 → 담금질된 순금 3–9" },
+            tier5:{ b:"티어 5", range:"(81–100회)", em:"순금 160 → 담금질된 순금 3–12" },
+            note:"예시: 주간 누적 20회까지는 티어 1 유지 → 21회부터 티어 2로 이동합니다."
+          },
+          strategy:{
+            title:"추천 운영 전략(무/소과금 효율 루트)",
+            b1:"월요일", t1:"초정련을 20회까지 먼저 진행(티어 1 효율 구간 최대 활용)",
+            b2:"이후", t2:"남은 기간은 하루 1회만 진행(매일 첫 1회 반값을 꾸준히 챙김)",
+            t3:"티어 2 초입 근처로 유지하며 담금질된 순금을 하루 2~3개 수준으로 안정 확보"
+          },
+          warn:{ b:"결론:", t:"주간 100회를 한 번에 몰아서 진행하면 티어가 빠르게 올라 순금 소모가 폭증합니다. 특히 무/소과금은 티어 1 → 티어 2 유지가 핵심입니다." },
+          check:{ title:"실전 운영 체크리스트", li1:"월요일: 주간 20회까지는 효율 구간이므로 최대한 활용", li2:"이후: 하루 1회로 반값 보너스를 꾸준히 챙기기", li3:"업그레이드 전: 목표 TG 단계에 필요한 담금질된 순금 총량부터 계산", li4:"주의: 초정련을 몰아서 할수록 주간 티어 상승 → 이후 순금 소모 폭증" }
+        }
+      },
+
+      "en": {
+        page: { title: "2026 Truegold Cost Chart" },
+        header: { madeBy: "Made by", back: "← Back to Guides" },
+        slider: {
+          hint: "Move the slider to see the total cost for each TG level.",
+          totalLabel: (tg)=>`TG${tg} Total Cost`,
+          truegold: "Truegold",
+          tempered: "Tempered Truegold",
+          building: "Building"
+        },
+        buildings: {
+          towncenter:"Town Center",
+          embassy:"Embassy",
+          commandcenter:"Command Center",
+          infirmary:"Infirmary",
+          barracks:"Barracks",
+          stable:"Stable",
+          range:"Range"
+        },
+        tip:{
+          title:"What is Tempered Truegold?",
+          sub:"A special material additionally required for building upgrades after TG5. It is further refined Truegold enhanced for higher-tier progression.",
+          when:{ title:"When do you need it?", b1:"Before TG5", t1:"Upgrades use Truegold + regular resources", b2:"After TG5", t2:"Tempered Truegold is added to upgrade requirements", b3:"TG8", t3:"Typically unlocks around day 310–320 (server timeline)" },
+          desc:{ title:"About Tempered Truegold", p:"Truegold is refined one more step in the Royal Foundry, improving hardness and ductility—reborn as a premium material." },
+          source:{ title:"How to obtain", b1:"Primary Refining (Truegold Crucible)", t1:"Main source", b2:"Golden Glaive event", t2:"Supplemental source" },
+          core:{ title:"Primary Refining (efficiency)", li1:"Up to 100 times per week, but costs rise as your weekly total increases (tier system)", li2:"Designed to discourage binge refining; tier management = efficiency", li3:"Your first refine each day is 50% off (very important)" },
+          tier:{
+            title:"Primary Refining Tiers (weekly total)",
+            tier1:{ b:"Tier 1", range:"(1–20)", em:"Truegold 20 → Tempered 1–3" },
+            tier2:{ b:"Tier 2", range:"(21–40)", em:"Truegold 50 → Tempered 2–3" },
+            tier3:{ b:"Tier 3", range:"(41–60)", em:"Truegold 100 → Tempered 3–6" },
+            tier4:{ b:"Tier 4", range:"(61–80)", em:"Truegold 130 → Tempered 3–9" },
+            tier5:{ b:"Tier 5", range:"(81–100)", em:"Truegold 160 → Tempered 3–12" },
+            note:"Example: staying within 20 total keeps Tier 1; from the 21st refine you move to Tier 2."
+          },
+          strategy:{
+            title:"Recommended Strategy (F2P / low spend)",
+            b1:"Monday", t1:"Do up to 20 refinements first (maximize Tier 1 efficiency)",
+            b2:"Afterwards", t2:"Do only 1 per day (keep taking the daily 50% off)",
+            t3:"Hover around early Tier 2 and secure about 2–3 tempered pieces per day steadily"
+          },
+          warn:{ b:"Bottom line:", t:"If you do all 100 in one go, your tier rises quickly and Truegold costs spike. For F2P/low spend players, keeping Tier 1 → early Tier 2 is the key." },
+          check:{ title:"Practical checklist", li1:"Monday: use the efficient window up to 20 weekly refinements", li2:"Afterwards: keep doing 1 per day for the 50% off", li3:"Before upgrading: calculate total Tempered Truegold needed for your target TG", li4:"Caution: binge refining raises weekly tier → costs spike afterwards" }
+        }
+      },
+
+      "ja": {
+        page: { title: "2026 純金消費表" },
+        header: { madeBy: "作成", back: "← ガイドへ" },
+        slider: {
+          hint: "スライダーを動かすと、各TGレベルの総消費量が表示されます。",
+          totalLabel: (tg)=>`TG${tg} 総消費`,
+          truegold: "純金",
+          tempered: "精錬純金",
+          building: "建物"
+        },
+        buildings: {
+          towncenter:"都市センター",
+          embassy:"大使館",
+          commandcenter:"司令部",
+          infirmary:"野戦病院",
+          barracks:"歩兵隊",
+          stable:"騎兵隊",
+          range:"弓兵隊"
+        },
+        tip:{
+          title:"精錬純金とは？",
+          sub:"TG5以降の建物アップグレードで追加要求される特殊素材。純金をさらに精製して性能を高めた上位素材です。",
+          when:{ title:"いつ必要？", b1:"TG5前", t1:"純金＋通常資源のみでアップグレード", b2:"TG5後", t2:"要求素材に精錬純金が追加", b3:"TG8", t3:"サーバー基準で約310〜320日頃に解放" },
+          desc:{ title:"精錬純金の説明", p:"王室鋳造所で純金をさらに精製し、硬度と延性が強化されることで高級素材として生まれ変わります。" },
+          source:{ title:"入手先", b1:"初精錬（純金精錬所）", t1:"メイン", b2:"ゴールデングレイブイベント", t2:"補助入手" },
+          core:{ title:"初精錬の要点（効率運用）", li1:"週最大100回だが、週累計が増えるほどティアが上がり純金消費が急増", li2:"まとめて回すのを防ぐ構造。ティア管理＝効率", li3:"毎日の最初の1回は純金消費50%割引（重要）" },
+          tier:{
+            title:"初精錬ティア（週累計）",
+            tier1:{ b:"ティア1", range:"(1–20回)", em:"純金20 → 精錬純金1–3" },
+            tier2:{ b:"ティア2", range:"(21–40回)", em:"純金50 → 精錬純金2–3" },
+            tier3:{ b:"ティア3", range:"(41–60回)", em:"純金100 → 精錬純金3–6" },
+            tier4:{ b:"ティア4", range:"(61–80回)", em:"純金130 → 精錬純金3–9" },
+            tier5:{ b:"ティア5", range:"(81–100回)", em:"純金160 → 精錬純金3–12" },
+            note:"例：週累計20回まではティア1維持。21回目からティア2へ移行します。"
+          },
+          strategy:{
+            title:"おすすめ運用（無/微課金）",
+            b1:"月曜", t1:"まず20回まで実施（ティア1の効率区間を最大活用）",
+            b2:"以降", t2:"残りは1日1回だけ（毎日最初の1回半額を継続）",
+            t3:"ティア2序盤付近を維持し、精錬純金を1日2〜3個ペースで安定確保"
+          },
+          warn:{ b:"結論:", t:"週100回を一気に回すとティアが急上昇し、純金消費が爆増します。無/微課金はティア1→ティア2維持が重要です。" },
+          check:{ title:"チェックリスト", li1:"月曜：週20回までは効率区間なので最大活用", li2:"以降：1日1回で半額を継続", li3:"強化前：目標TGに必要な精錬純金総量を先に計算", li4:"注意：まとめて回すほど週ティア上昇→後半の消費が爆増" }
+        }
+      },
+
+      "zh-CN": {
+        page: { title: "2026 纯金消耗表" },
+        header: { madeBy: "制作", back: "← 返回指南" },
+        slider: {
+          hint: "拖动滑块可查看对应 TG 等级的总消耗。",
+          totalLabel: (tg)=>`TG${tg} 总消耗`,
+          truegold: "纯金",
+          tempered: "精炼纯金",
+          building: "建筑"
+        },
+        buildings: {
+          towncenter:"城市中心",
+          embassy:"大使馆",
+          commandcenter:"指挥部",
+          infirmary:"野战医院",
+          barracks:"步兵营",
+          stable:"骑兵营",
+          range:"弓兵营"
+        },
+        tip:{
+          title:"什么是精炼纯金？",
+          sub:"TG5 之后建筑升级会额外需要的特殊材料。它是将纯金进一步精炼后得到的高阶素材，用于更高阶段的推进。",
+          when:{ title:"什么时候需要？", b1:"TG5 之前", t1:"仅需纯金 + 常规资源即可升级", b2:"TG5 之后", t2:"升级材料中会追加精炼纯金", b3:"TG8", t3:"通常在服务器约 310–320 天左右开放" },
+          desc:{ title:"精炼纯金说明", p:"在王室铸造所中将纯金进一步精炼，提升硬度与延展性，从而成为更高级的材料。" },
+          source:{ title:"获取途径", b1:"初精炼（纯金精炼所）", t1:"主要来源", b2:"黄金长刀活动", t2:"活动补充" },
+          core:{ title:"初精炼要点（高效运营）", li1:"每周最多 100 次，但周累计次数越高，阶层越高，纯金消耗会快速上升", li2:"该机制用于避免一次性“狂刷”；管理阶层 = 提升效率", li3:"每天第 1 次精炼纯金消耗 50% 折扣（非常关键）" },
+          tier:{
+            title:"初精炼阶层（按周累计）",
+            tier1:{ b:"阶层 1", range:"(1–20 次)", em:"纯金 20 → 精炼纯金 1–3" },
+            tier2:{ b:"阶层 2", range:"(21–40 次)", em:"纯金 50 → 精炼纯金 2–3" },
+            tier3:{ b:"阶层 3", range:"(41–60 次)", em:"纯金 100 → 精炼纯金 3–6" },
+            tier4:{ b:"阶层 4", range:"(61–80 次)", em:"纯金 130 → 精炼纯金 3–9" },
+            tier5:{ b:"阶层 5", range:"(81–100 次)", em:"纯金 160 → 精炼纯金 3–12" },
+            note:"示例：周累计到 20 次仍为阶层 1；从第 21 次开始进入阶层 2。"
+          },
+          strategy:{
+            title:"推荐策略（零/微氪效率路线）",
+            b1:"周一", t1:"先做满 20 次（最大化阶层 1 的效率区间）",
+            b2:"之后", t2:"剩余时间每天只做 1 次（持续拿每日首次 50% 折扣）",
+            t3:"保持在阶层 2 的初段附近，每天稳定获得约 2–3 个精炼纯金"
+          },
+          warn:{ b:"结论：", t:"如果一口气做满 100 次，阶层会迅速提升，纯金消耗会暴涨。零/微氪玩家的关键是维持在阶层 1 → 阶层 2 初段。" },
+          check:{ title:"实战检查清单", li1:"周一：周 20 次以内是高效区间，尽量用满", li2:"之后：每天 1 次，持续拿首次 50% 折扣", li3:"升级前：先计算目标 TG 需要的精炼纯金总量", li4:"注意：越集中精炼，周阶层越高 → 后续消耗暴涨" }
+        }
+      },
+
+      "zh-TW": {
+        page: { title: "2026 純金消耗表" },
+        header: { madeBy: "製作", back: "← 返回指南" },
+        slider: {
+          hint: "拖動滑桿可查看對應 TG 等級的總消耗。",
+          totalLabel: (tg)=>`TG${tg} 總消耗`,
+          truegold: "純金",
+          tempered: "精煉純金",
+          building: "建築"
+        },
+        buildings: {
+          towncenter:"城市中心",
+          embassy:"大使館",
+          commandcenter:"指揮部",
+          infirmary:"野戰醫院",
+          barracks:"步兵營",
+          stable:"騎兵營",
+          range:"弓兵營"
+        },
+        tip:{
+          title:"什麼是精煉純金？",
+          sub:"TG5 之後建築升級會額外需要的特殊材料。它是將純金再進一步精煉後得到的高階素材，用於更高階段推進。",
+          when:{ title:"何時需要？", b1:"TG5 之前", t1:"僅需純金 + 一般資源即可升級", b2:"TG5 之後", t2:"升級材料中會追加精煉純金", b3:"TG8", t3:"通常於伺服器約 310–320 天左右開放" },
+          desc:{ title:"精煉純金說明", p:"在王室鑄造所中將純金進一步精煉，提升硬度與延展性，從而成為更高級的材料。" },
+          source:{ title:"取得途徑", b1:"初精煉（純金精煉所）", t1:"主要來源", b2:"黃金長刀活動", t2:"活動補充" },
+          core:{ title:"初精煉重點（效率運用）", li1:"每週最多 100 次，但週累計越高，階層越高，純金消耗會快速上升", li2:"此機制用於避免一次性狂刷；管理階層 = 提升效率", li3:"每日第 1 次精煉可享純金消耗 50% 折扣（非常重要）" },
+          tier:{
+            title:"初精煉階層（依週累計）",
+            tier1:{ b:"階層 1", range:"(1–20 次)", em:"純金 20 → 精煉純金 1–3" },
+            tier2:{ b:"階層 2", range:"(21–40 次)", em:"純金 50 → 精煉純金 2–3" },
+            tier3:{ b:"階層 3", range:"(41–60 次)", em:"純金 100 → 精煉純金 3–6" },
+            tier4:{ b:"階層 4", range:"(61–80 次)", em:"純金 130 → 精煉純金 3–9" },
+            tier5:{ b:"階層 5", range:"(81–100 次)", em:"純金 160 → 精煉純金 3–12" },
+            note:"例：週累計到 20 次仍為階層 1；從第 21 次開始進入階層 2。"
+          },
+          strategy:{
+            title:"推薦策略（零/微課效率路線）",
+            b1:"週一", t1:"先做到 20 次（最大化階層 1 的效率區間）",
+            b2:"之後", t2:"剩餘時間每天只做 1 次（持續拿每日首次 50% 折扣）",
+            t3:"維持在階層 2 初段附近，每天穩定取得約 2–3 個精煉純金"
+          },
+          warn:{ b:"結論：", t:"若一次做滿 100 次，階層會迅速提升，純金消耗會暴增。零/微課玩家關鍵是維持在階層 1 → 階層 2 初段。" },
+          check:{ title:"實戰檢查清單", li1:"週一：週 20 次內是效率區間，盡量用滿", li2:"之後：每天 1 次，持續拿首次 50% 折扣", li3:"升級前：先計算目標 TG 需要的精煉純金總量", li4:"注意：越集中精煉，週階層越高 → 後續消耗暴增" }
+        }
+      }
+    };
+
+    let CURRENT = I18N.ko;
+
+    /* =========================
+      BUILDINGS (rows)
+    ========================= */
+    const BUILDINGS = [
+      { key:'towncenter',    icons:['/img/buildings/towncenter-kingshot.webp'] },
+      { key:'embassy',       icons:['/img/buildings/embassy-kingshot.webp'] },
+      { key:'commandcenter', icons:['/img/buildings/command-center-kingshot.webp'] },
+      { key:'infirmary',     icons:['/img/buildings/infirmary-kingshot.webp'] },
+      { key:'barracks',      icons:['/img/buildings/barracks-kingshot.webp'] },
+      { key:'stable',        icons:['/img/buildings/stable-kingshot.webp'] },
+      { key:'range',         icons:['/img/buildings/range-kingshot.webp'] }
+    ];
+
+    /* =========================
+      DATA (사진 기준)
+    ========================= */
+    const DATA = {
+      towncenter: { truegold:[660,790,1190,1400,1675,900,1080,1080], tempered:[null,null,null,null,null,60,90,120] },
+      embassy:    { truegold:[165,195,295,350,415,225,270,270],       tempered:[null,null,null,null,null,13,19,30] },
+      commandcenter:{ truegold:[130,155,235,280,335,180,216,216],     tempered:[null,null,null,null,null,13,19,24] },
+      infirmary:  { truegold:[130,155,235,280,335,180,216,216],       tempered:[null,null,null,null,null,13,19,24] },
+      barracks:   { truegold:[295,355,535,630,750,405,486,486],       tempered:[null,null,null,null,null,25,37,54] },
+      stable:     { truegold:[295,355,535,630,750,405,486,486],       tempered:[null,null,null,null,null,25,37,54] },
+      range:      { truegold:[295,355,535,630,750,405,486,486],       tempered:[null,null,null,null,null,25,37,54] }
+    };
+
+    /* =========================
+      HELPERS
+    ========================= */
+    function fmt(n){
+      const v = Number(n);
+      if (!Number.isFinite(v)) return '—';
+      return v.toLocaleString('en-US');
+    }
+    function isNum(x){ return Number.isFinite(Number(x)); }
+
+    function buildIconsHTML(icons, alt){
+      return `
+        <div class="bicons">
+          ${icons.map(src => `
+            <img class="bicon" src="${src}" alt="${alt}" loading="lazy"
+                 onerror="this.style.display='none'">
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function tgHeaderCell(tg){
+      const label = `TG${tg}`;
+      const src = ICONS.tgLevel(tg);
+      return `
+        <div class="tghead">
+          <img src="${src}" alt="${label}"
+               onerror="this.style.display='none'; this.parentNode.querySelector('.tg-fallback').style.display='inline-flex';">
+          <span class="tg-fallback">${label}</span>
+        </div>
+      `;
+    }
+
+    function iconOnErrorSwap(srcFallback){
+      return `this.onerror=null; this.src='${srcFallback}';`;
+    }
+
+    function cellHTML(tgIndex, truegoldVal, temperedVal){
+      const tgOK = isNum(truegoldVal);
+      const tpOK = isNum(temperedVal);
+
+      if (!tgOK && !tpOK) return `<div class="cell"><span class="num">—</span></div>`;
+
+      // TG1~TG5: 순금만
+      if (tgIndex <= 4 || !tpOK){
+        return `
+          <div class="cell">
+            <div class="line">
+              <img class="ico-mini" src="${ICONS.truegold}" alt="${CURRENT.slider.truegold}"
+                   onerror="this.style.display='none'">
+              <span class="num">${fmt(truegoldVal)}</span>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="cell">
+          <div class="line">
+            <img class="ico-mini" src="${ICONS.truegold}" alt="${CURRENT.slider.truegold}"
+                 onerror="this.style.display='none'">
+            <span class="num">${fmt(truegoldVal)}</span>
+          </div>
+          <div class="line temper">
+            <img class="ico-mini" src="${ICONS.tempered}" alt="${CURRENT.slider.tempered}"
+                 onerror="${iconOnErrorSwap(ICONS.temperedAlt)}">
+            <span class="num">${fmt(temperedVal)}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTable(){
+      const thead = document.getElementById('tgThead');
+      const tbody = document.getElementById('tgTbody');
+
+      thead.innerHTML = `
+        <tr>
+          <th class="building-col">${CURRENT.slider.building}</th>
+          ${Array.from({length: TG_MAX}, (_, i) => `<th>${tgHeaderCell(i+1)}</th>`).join('')}
+        </tr>
+      `;
+
+      tbody.innerHTML = BUILDINGS.map(b => {
+        const row = DATA[b.key];
+        const name = (CURRENT.buildings && CURRENT.buildings[b.key]) ? CURRENT.buildings[b.key] : b.key;
+
+        const tds = Array.from({length: TG_MAX}, (_, i) => {
+          return `<td>${cellHTML(i, row.truegold[i], row.tempered[i])}</td>`;
+        }).join('');
+
+        return `
+          <tr>
+            <th>
+              <div class="bcell">
+                ${buildIconsHTML(b.icons, name)}
+                <div class="bname" title="${name}">${name}</div>
+              </div>
+            </th>
+            ${tds}
+          </tr>
+        `;
+      }).join('');
+    }
+
+    /* =========================
+      TOTALS
+    ========================= */
+    function calcTotalsPerTG(){
+      const out = Array.from({length: TG_MAX}, () => ({ truegold:0, tempered:0 }));
+      for (let i=0; i<TG_MAX; i++){
+        let tgSum = 0, tpSum = 0;
+        for (const b of BUILDINGS){
+          const r = DATA[b.key];
+          const tv = r.truegold[i];
+          const pv = r.tempered[i];
+          if (isNum(tv)) tgSum += Number(tv);
+          if (isNum(pv)) tpSum += Number(pv);
+        }
+        out[i].truegold = tgSum;
+        out[i].tempered = tpSum;
+      }
+      return out;
+    }
+
+    function renderTicks(){
+      const root = document.getElementById('ticks');
+      root.innerHTML = Array.from({length: TG_MAX}, (_, i) => {
+        const tg = i+1;
+        return `
+          <div class="tick">
+            <img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">
+            <span>${tg}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function chipHTML(icon, label, value, extraClass, onErr){
+      const onerrorAttr = onErr ? ` onerror="${onErr}"` : ` onerror="this.style.display='none'"`;
+      return `
+        <div class="total-chip ${extraClass || ''}">
+          <img class="ico" src="${icon}" alt="${label}"${onerrorAttr}>
+          <div>
+            <div class="label">${label}</div>
+            <div class="value">${fmt(value)}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function updateSliderUI(tg, totals) {
+      const idx = tg - 1;
+
+      const tgIcon   = document.getElementById('tgIcon');
+      const tgLabel  = document.getElementById('tgLabel');
+      const tgTotals = document.getElementById('tgTotals');
+
+      const curT = totals[idx].truegold;
+      const curP = totals[idx].tempered;
+
+      tgIcon.src = ICONS.tgLevel(tg);
+      tgIcon.alt = `TG${tg}`;
+      tgLabel.textContent = CURRENT.slider.totalLabel(tg);
+
+      const hideTemper = (tg <= 5) || !Number(curP);
+
+      tgTotals.innerHTML =
+        chipHTML(
+          ICONS.tempered,
+          CURRENT.slider.tempered,
+          curP,
+          (hideTemper ? 'is-hidden temper' : 'temper'),
+          iconOnErrorSwap(ICONS.temperedAlt)
+        ) +
+        chipHTML(
+          ICONS.truegold,
+          CURRENT.slider.truegold,
+          curT
+        );
+    }
+
+    function initSlider(){
+      const totals = calcTotalsPerTG();
+      const range = document.getElementById('tgRange');
+
+      const sync = () => updateSliderUI(Number(range.value), totals);
+      range.addEventListener('input', sync);
+      sync();
+      return totals;
+    }
+
+    /* =========================
+      APPLY i18n (textContent only)
+    ========================= */
+    function applyLang(locale){
+      const dict = I18N[locale] || I18N.ko;
+      CURRENT = dict;
+
+      document.documentElement.lang = locale;
+      document.title = dict.page.title;
+
+      document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const key = el.getAttribute("data-i18n");
+        const val = key.split(".").reduce((o,k)=> (o && o[k] !== undefined) ? o[k] : undefined, dict);
+        if (typeof val === "string") el.textContent = val;
+      });
+
+      const curTG = Number(document.getElementById("tgRange").value || 1);
+      renderTable();
+      renderTicks();
+
+      const totals = calcTotalsPerTG();
+      updateSliderUI(curTG, totals);
+    }
+
+    function detectInitialLang(){
+      const saved = localStorage.getItem("lang");
+      if (saved && I18N[saved]) return saved;
+
+      const browser = (navigator.language || "").toLowerCase();
+      if (browser.startsWith("ko")) return "ko";
+      if (browser.startsWith("ja")) return "ja";
+      if (browser.startsWith("zh")) {
+        if (browser.includes("tw") || browser.includes("hk") || browser.includes("hant")) return "zh-TW";
+        return "zh-CN";
+      }
+      return "en";
+    }
+
+    /* =========================
+      INIT
+    ========================= */
+    renderTable();
+    renderTicks();
+    initSlider();
+
+    const select = document.getElementById("langSwitcher");
+    const initial = detectInitialLang();
+    select.value = initial;
+    applyLang(initial);
+
+    select.addEventListener("change", (e)=>{
+      const lang = e.target.value;
+      localStorage.setItem("lang", lang);
+      applyLang(lang);
+    });
+  })();
+  </script>
+</body>
+</html>
