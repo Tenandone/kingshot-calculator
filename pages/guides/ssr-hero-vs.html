@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<title>SSR 영웅 A vs B 비교 계산기</title>
+
+<style>
+  *{box-sizing:border-box}
+  :root{
+    --fg:#111;--muted:#666;--bd:#e5e7eb;--pri:#0b57d0;
+    --bg:#fff;--surface:#fff;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{--fg:#e8eaed;--muted:#c2c7d0;--bd:#2a2a2a;--bg:#0b0b0b;--surface:#121212}
+  }
+  body{
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,"Noto Sans JP","Noto Sans SC","Noto Sans TC",sans-serif;
+    margin:0;background:var(--bg);color:var(--fg)
+  }
+  a{color:var(--pri);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* ===== Topbar: LEFT(back) / RIGHT(language) ===== */
+  .topbar{
+    position:sticky;top:0;z-index:10;
+    background:var(--surface);
+    border-bottom:1px solid var(--bd);
+  }
+  .topbar-inner{
+    max-width:1100px;margin:0 auto;
+    padding:10px 14px;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;
+  }
+  .backlink{
+    font:700 14px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;
+    white-space:nowrap;color:var(--pri)
+  }
+  .langbox{display:flex;align-items:center;gap:10px;white-space:nowrap}
+  .langbox label{font-size:13px;color:var(--muted)}
+  .langSel{
+    padding:6px 8px;border:1px solid var(--bd);border-radius:10px;
+    font-size:13px;background:var(--surface);color:var(--fg)
+  }
+
+  header{padding:18px 20px 8px;max-width:1100px;margin:auto}
+  h1{margin:0 0 6px;font-size:20px}
+  .muted{color:var(--muted);font-size:13px}
+
+  main{padding:0 20px 24px;max-width:1100px;margin:auto}
+  .lane{border:1px solid var(--bd);border-radius:14px;background:var(--surface);margin-top:14px}
+  .lane h2{margin:0;padding:12px 14px;border-bottom:1px solid var(--bd);font-size:16px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 14px}
+  .card{border:1px solid var(--bd);border-radius:12px;padding:10px 12px;background:var(--surface)}
+  .title{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .select{min-width:220px;padding:8px 10px;border:1px solid var(--bd);border-radius:10px;font-size:14px;width:100%;background:var(--surface);color:var(--fg)}
+  .badge{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef3ff;color:#1b56d6;font-size:12px}
+  .kv{display:flex;gap:8px;align-items:center;font-size:13px;margin-top:6px;flex-wrap:wrap}
+  .kv b{font-size:14px}
+  .slider{width:100%}
+  .cmp{border-top:1px dashed var(--bd);padding:10px 14px;color:var(--fg);font-size:14px}
+  .cmp .muted{font-size:12px;color:var(--muted)}
+  .stepLabel{margin-right:6px}
+
+  /* ====== 별(0~6 단계 이미지) ====== */
+  .stars{display:flex;gap:4px;align-items:center}
+  .star{
+    width:24px;height:24px;display:inline-block;
+    background-size:contain;background-repeat:no-repeat;background-position:center;
+  }
+  .star[data-lv="0"]{ background-image:url('/img/star/0.webp'); }
+  .star[data-lv="1"]{ background-image:url('/img/star/1.webp'); }
+  .star[data-lv="2"]{ background-image:url('/img/star/2.webp'); }
+  .star[data-lv="3"]{ background-image:url('/img/star/3.webp'); }
+  .star[data-lv="4"]{ background-image:url('/img/star/4.webp'); }
+  .star[data-lv="5"]{ background-image:url('/img/star/5.webp'); }
+  .star[data-lv="6"]{ background-image:url('/img/star/6.webp'); }
+
+  /* ====== 초상화 ====== */
+  .portraitWrap{display:flex;justify-content:center;margin-bottom:8px}
+  .portrait{
+    width:96px;height:96px;object-fit:cover;border-radius:10px;
+    border:1px solid var(--bd);background:#f6f7fb;display:block
+  }
+
+  @media (max-width:760px){ .row{grid-template-columns:1fr} }
+</style>
+</head>
+
+<body>
+  <!-- Topbar: 뒤로가기(좌) + 번역기(우) -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="/guides" class="backlink" id="backLink" data-i18n="back">← 가이드로</a>
+
+      <div class="langbox">
+        <label for="langSel" class="muted" data-i18n="label.language">언어</label>
+        <select id="langSel" class="langSel" aria-label="Language">
+          <option value="ko">한국어</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+          <option value="cn">简体中文</option>
+          <option value="tw">繁體中文</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+<header>
+  <h1 data-i18n="title">SSR 영웅 A vs B 비교 계산기</h1>
+  <div class="muted" data-i18n="subtitle">
+    병종별로 A와 B 영웅을 선택하고 각 단계를 조절하면
+    아래에 “A가 B를 이기려면 최소 몇 단계가 필요한지”가 바로 표시됩니다.
+  </div>
+</header>
+
+<main>
+  <!-- 보병 -->
+  <section class="lane" data-type="infantry">
+    <h2 data-i18n="section.infantry">보병</h2>
+    <div class="row">
+      <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="A" alt="A 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
+        <div class="title"><span class="badge">A</span><select class="select hero" data-side="A"></select></div>
+        <div class="kv">
+          <label>
+            <span class="stepLabel" data-i18n="label.step">단계:</span>
+            <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="A">
+          </label>
+          <span class="badge lvlLabel" data-side="A">0★ T1</span>
+          <div class="stars" data-side="A" aria-label="A 성급">
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span>
+          </div>
+        </div>
+        <div class="kv"><span data-i18n="label.currentStat">현재 수치</span> <b class="stat" data-side="A">+0.00%</b></div>
+      </div>
+
+      <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="B" alt="B 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
+        <div class="title"><span class="badge">B</span><select class="select hero" data-side="B"></select></div>
+        <div class="kv">
+          <label>
+            <span class="stepLabel" data-i18n="label.step">단계:</span>
+            <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="B">
+          </label>
+          <span class="badge lvlLabel" data-side="B">0★ T1</span>
+          <div class="stars" data-side="B" aria-label="B 성급">
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span>
+          </div>
+        </div>
+        <div class="kv"><span data-i18n="label.currentStat">현재 수치</span> <b class="stat" data-side="B">+0.00%</b></div>
+      </div>
+    </div>
+    <div class="cmp"><span class="cmpText"></span><div class="muted cmpHint"></div></div>
+  </section>
+
+  <!-- 기병 -->
+  <section class="lane" data-type="cavalry">
+    <h2 data-i18n="section.cavalry">기병</h2>
+    <div class="row">
+      <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="A" alt="A 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
+        <div class="title"><span class="badge">A</span><select class="select hero" data-side="A"></select></div>
+        <div class="kv">
+          <label>
+            <span class="stepLabel" data-i18n="label.step">단계:</span>
+            <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="A">
+          </label>
+          <span class="badge lvlLabel" data-side="A">0★ T1</span>
+          <div class="stars" data-side="A" aria-label="A 성급">
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span>
+          </div>
+        </div>
+        <div class="kv"><span data-i18n="label.currentStat">현재 수치</span> <b class="stat" data-side="A">+0.00%</b></div>
+      </div>
+
+      <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="B" alt="B 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
+        <div class="title"><span class="badge">B</span><select class="select hero" data-side="B"></select></div>
+        <div class="kv">
+          <label>
+            <span class="stepLabel" data-i18n="label.step">단계:</span>
+            <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="B">
+          </label>
+          <span class="badge lvlLabel" data-side="B">0★ T1</span>
+          <div class="stars" data-side="B" aria-label="B 성급">
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span>
+          </div>
+        </div>
+        <div class="kv"><span data-i18n="label.currentStat">현재 수치</span> <b class="stat" data-side="B">+0.00%</b></div>
+      </div>
+    </div>
+    <div class="cmp"><span class="cmpText"></span><div class="muted cmpHint"></div></div>
+  </section>
+
+  <!-- 궁병 -->
+  <section class="lane" data-type="archer">
+    <h2 data-i18n="section.archer">궁병</h2>
+    <div class="row">
+      <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="A" alt="A 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
+        <div class="title"><span class="badge">A</span><select class="select hero" data-side="A"></select></div>
+        <div class="kv">
+          <label>
+            <span class="stepLabel" data-i18n="label.step">단계:</span>
+            <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="A">
+          </label>
+          <span class="badge lvlLabel" data-side="A">0★ T1</span>
+          <div class="stars" data-side="A" aria-label="A 성급">
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span>
+          </div>
+        </div>
+        <div class="kv"><span data-i18n="label.currentStat">현재 수치</span> <b class="stat" data-side="A">+0.00%</b></div>
+      </div>
+
+      <div class="card">
+        <div class="portraitWrap">
+          <img class="portrait" data-side="B" alt="B 영웅 초상화" width="96" height="96" loading="lazy" />
+        </div>
+        <div class="title"><span class="badge">B</span><select class="select hero" data-side="B"></select></div>
+        <div class="kv">
+          <label>
+            <span class="stepLabel" data-i18n="label.step">단계:</span>
+            <input type="range" min="1" max="30" step="1" class="slider lvl" data-side="B">
+          </label>
+          <span class="badge lvlLabel" data-side="B">0★ T1</span>
+          <div class="stars" data-side="B" aria-label="B 성급">
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+            <span class="star" data-lv="0"></span>
+          </div>
+        </div>
+        <div class="kv"><span data-i18n="label.currentStat">현재 수치</span> <b class="stat" data-side="B">+0.00%</b></div>
+      </div>
+    </div>
+    <div class="cmp"><span class="cmpText"></span><div class="muted cmpHint"></div></div>
+  </section>
+</main>
+
+<script>
+/* ===========================================================
+   i18n — ?lang= > localStorage > navigator.language
+   =========================================================== */
+const LANGS = {
+  ko:{label:'한국어', htmlLang:'ko', dir:'ltr'},
+  en:{label:'English', htmlLang:'en', dir:'ltr'},
+  ja:{label:'日本語', htmlLang:'ja', dir:'ltr'},
+  cn:{label:'简体中文', htmlLang:'zh-CN', dir:'ltr'},
+  tw:{label:'繁體中文', htmlLang:'zh-TW', dir:'ltr'}
+};
+
+const I18N = {
+  ko:{
+    back:'← 가이드로',
+    title:'SSR 영웅 A vs B 비교 계산기',
+    subtitle:'병종별로 A와 B 영웅을 선택하고 각 단계를 조절하면 아래에 “A가 B를 이기려면 최소 몇 단계가 필요한지”가 바로 표시됩니다.',
+    section:{infantry:'보병', cavalry:'기병', archer:'궁병'},
+    label:{
+      language:'언어',
+      step:'단계:',
+      currentStat:'현재 수치',
+      gen:'{n}세대',
+      impossible:'불가능 (최대 초과)'
+    },
+    aria:{stars:'{side} 성급: {level}'},
+    alt:{portrait:'{side} 영웅 초상화 — {name} ({key})'},
+    cmp:{
+      same:'현재 {A}와 {B}의 성능은 거의 차이가 없습니다.',
+      ahead:'{A}가 우세한 상태입니다. ({LA} vs {LB})',
+      needA:'{A}가 {B}를 따라잡으려면 최소 <b>{LV}</b>가 필요합니다.',
+      needB:'{B}가 {A}를 앞서려면 {LV}가 필요합니다.'
+    }
+  },
+  en:{
+    back:'← Guides',
+    title:'SSR Hero A vs B Comparator',
+    subtitle:'Choose heroes per troop type and adjust stages. It will show “the minimum stage A needs to beat B.”',
+    section:{infantry:'Infantry', cavalry:'Cavalry', archer:'Archers'},
+    label:{
+      language:'Language',
+      step:'Stage:',
+      currentStat:'Current stat',
+      gen:'Gen {n}',
+      impossible:'Impossible (beyond max)'
+    },
+    aria:{stars:'{side} stars: {level}'},
+    alt:{portrait:'{side} hero portrait — {name} ({key})'},
+    cmp:{
+      same:'Currently {A} and {B} perform almost the same.',
+      ahead:'{A} is ahead. ({LA} vs {LB})',
+      needA:'For {A} to catch up to {B}, at least <b>{LV}</b> is required.',
+      needB:'For {B} to overtake {A}, {LV} is needed.'
+    }
+  },
+  ja:{
+    back:'← ガイドへ',
+    title:'SSR英雄 A vs B 比較計算機',
+    subtitle:'兵種ごとにAとBの英雄を選び、段階を調整すると、「AがBに勝つために必要な最小段階」が表示されます。',
+    section:{infantry:'歩兵', cavalry:'騎兵', archer:'弓兵'},
+    label:{
+      language:'言語',
+      step:'段階:',
+      currentStat:'現在値',
+      gen:'{n}世代',
+      impossible:'不可能（上限超過）'
+    },
+    aria:{stars:'{side} の星数: {level}'},
+    alt:{portrait:'{side} 英雄の肖像 — {name}（{key}）'},
+    cmp:{
+      same:'現在、{A} と {B} の性能差はほとんどありません。',
+      ahead:'{A} が優勢です。（{LA} vs {LB}）',
+      needA:'{A} が {B} に追いつくには、最低でも <b>{LV}</b> が必要です。',
+      needB:'{B} が {A} を上回るには {LV} が必要です。'
+    }
+  },
+  cn:{
+    back:'← 指南',
+    title:'SSR英雄 A 与 B 比较计算器',
+    subtitle:'按兵种选择A与B英雄并调整阶段，下面会显示“英雄A击败英雄B所需的最低阶段”。',
+    section:{infantry:'步兵', cavalry:'骑兵', archer:'弓兵'},
+    label:{
+      language:'语言',
+      step:'阶段：',
+      currentStat:'当前数值',
+      gen:'第{n}代',
+      impossible:'无法达到（超过上限）'
+    },
+    aria:{stars:'{side} 星级：{level}'},
+    alt:{portrait:'{side} 英雄头像 — {name}（{key}）'},
+    cmp:{
+      same:'当前 {A} 与 {B} 的表现几乎没有差别。',
+      ahead:'{A} 处于领先。（{LA} vs {LB}）',
+      needA:'{A} 想追上 {B}，至少需要 <b>{LV}</b>。',
+      needB:'{B} 想反超 {A} 需要 {LV}。'
+    }
+  },
+  tw:{
+    back:'← 指南',
+    title:'SSR英雄 A 與 B 比較計算器',
+    subtitle:'依兵種選擇 A 與 B 英雄並調整階段，下面會顯示「A 擊敗 B 所需的最低階段」。',
+    section:{infantry:'步兵', cavalry:'騎兵', archer:'弓兵'},
+    label:{
+      language:'語言',
+      step:'階段：',
+      currentStat:'目前數值',
+      gen:'第{n}代',
+      impossible:'無法達到（超過上限）'
+    },
+    aria:{stars:'{side} 星級：{level}'},
+    alt:{portrait:'{side} 英雄頭像 — {name}（{key}）'},
+    cmp:{
+      same:'目前 {A} 與 {B} 的表現幾乎沒有差異。',
+      ahead:'{A} 佔上風。（{LA} vs {LB}）',
+      needA:'{A} 要追上 {B}，至少需要 <b>{LV}</b>。',
+      needB:'{B} 要超過 {A} 需要 {LV}。'
+    }
+  }
+};
+
+function t(key, vars){
+  const dict = I18N[currentLang] || I18N.en;
+  let val = key.split('.').reduce((o,k)=> (o && o[k]!=null)? o[k]: null, dict);
+  if (val == null) val = key.split('.').reduce((o,k)=> (o && o[k]!=null)? o[k]: null, I18N.en);
+  if (typeof val !== 'string') return key;
+  return val.replace(/\{(\w+)\}/g, (_,k)=> (vars && (k in vars)) ? String(vars[k]) : '');
+}
+
+function normalizeLang(raw){
+  const s=(raw||'').toLowerCase();
+  if (s.startsWith('ko')) return 'ko';
+  if (s.startsWith('ja')) return 'ja';
+  if (s.startsWith('zh')){
+    if (s.includes('tw')||s.includes('hk')||s.includes('hant')) return 'tw';
+    return 'cn';
+  }
+  return 'en';
+}
+function detectLang(){
+  const url = new URL(window.location.href);
+  const qp = url.searchParams.get('lang');
+  if (qp) return normalizeLang(qp);
+  const saved = localStorage.getItem('kd.lang');
+  if (saved) return normalizeLang(saved);
+  return normalizeLang(navigator.language || navigator.userLanguage);
+}
+let currentLang = detectLang();
+
+function applyI18NStatic(){
+  document.documentElement.lang = (LANGS[currentLang]?.htmlLang)||'en';
+  document.documentElement.dir = 'ltr';
+
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.getAttribute('data-i18n');
+    el.textContent = t(key);
+  });
+
+  const back = document.getElementById('backLink');
+  if (back) back.textContent = t('back');
+
+  document.querySelectorAll('.lane').forEach(sec=>{
+    const type = sec.dataset.type;
+    const h2 = sec.querySelector('h2');
+    if (h2) h2.textContent = t(`section.${type}`);
+  });
+
+  const sel = document.getElementById('langSel');
+  if (sel) sel.value = currentLang;
+}
+
+function setLang(lang){
+  currentLang = (lang in LANGS) ? lang : 'en';
+  localStorage.setItem('kd.lang', currentLang);
+  applyI18NStatic();
+  refreshAllLanes();
+}
+
+document.getElementById('langSel').addEventListener('change', e=> setLang(e.target.value));
+
+/* ===== 레벨 라벨 ===== */
+function formatLevelLabel(L){
+  const star = Math.floor((L - 1) / 6);
+  const tier = ((L - 1) % 6) + 1;
+
+  if (tier === 6 || L===30){
+    if (currentLang==='ko') return `${star + 1}성`;
+    if (currentLang==='cn' || currentLang==='tw') return `${star + 1}星`;
+    return `${star + 1}★`;
+  }
+  if (currentLang==='cn' || currentLang==='tw') return `${star}星 T${tier}`;
+  return `${star}★ T${tier}`;
+}
+
+/* ================== 이미지 경로 설정 ================== */
+const PORTRAIT_BASE = '/img/heroes/';
+const PLACEHOLDER_SVG =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">' +
+    '<rect width="96" height="96" rx="10" ry="10" fill="#f2f4f7" stroke="#e5e7eb"/>' +
+    '<circle cx="48" cy="36" r="16" fill="#dde3ea"/>' +
+    '<rect x="18" y="60" width="60" height="20" rx="10" fill="#dde3ea"/>' +
+    '</svg>'
+  );
+function portraitUrl(heroKey){ return PORTRAIT_BASE + heroKey + '/img_001.webp'; }
+
+/* ================== 성장 데이터 ==================
+   Gen6는 L30 기준값이 필요함.
+   지금은 임시로 GEN6_L30=511.00으로 만들어둠 (원하면 숫자만 교체하면 됨).
+   ================================================= */
+const SEG = {
+  // Gen1
+  Helga:{base:25.25,seg:[[1,5,2.35],[6,6,4.23],[7,11,3.29],[12,12,5.92],[13,17,4.6069],[18,18,8.29],[19,23,6.4494],[24,24,11.61],[25,29,9.0294],[30,30,16.25]]},
+  Amadeus:{base:32.82,seg:[[1,5,3.0569],[6,6,5.49],[7,11,4.2775],[12,12,7.7],[13,17,5.9869],[18,18,10.78],[19,23,8.3825],[24,24,15.1],[25,29,11.7388],[30,30,21.12]]},
+  Jabel:{base:25.25,seg:[[1,5,2.35],[6,6,4.23],[7,11,3.29],[12,12,5.92],[13,17,4.6069],[18,18,8.29],[19,23,6.4494],[24,24,11.61],[25,29,9.0294],[30,30,16.25]]},
+  Saul:{base:25.25,seg:[[1,5,2.35],[6,6,4.23],[7,11,3.29],[12,12,5.92],[13,17,4.6069],[18,18,8.29],[19,23,6.4494],[24,24,11.61],[25,29,9.0294],[30,30,16.25]]},
+
+  // Gen2
+  Hilde:{base:30.30,seg:[[1,5,2.82],[6,6,5.07],[7,11,3.9475],[12,12,7.11],[13,17,5.5269],[18,18,9.95],[19,23,7.7394],[24,24,13.93],[25,26,10.83],[27,27,3.84],[28,28,17.83],[29,29,10.84],[30,30,19.41]]},
+  Marlin:{base:30.30,seg:[[1,5,2.82],[6,6,5.07],[7,11,3.9475],[12,12,7.11],[13,17,5.5269],[18,18,9.95],[19,23,7.7394],[24,24,13.93],[25,26,10.83],[27,27,3.84],[28,28,17.83],[29,29,10.84],[30,30,19.41]]},
+  Zoe:{base:30.30,seg:[[1,5,2.82],[6,6,5.07],[7,11,3.9475],[12,12,7.11],[13,17,5.5269],[18,18,9.95],[19,23,7.7394],[24,24,13.93],[25,26,10.83],[27,27,3.84],[28,28,17.83],[29,29,10.84],[30,30,19.41]]},
+
+  // Gen3 (말단 27~29는 아래에서 보정)
+  Eric:{base:36.61,seg:[[1,5,3.4094],[6,6,6.13],[7,11,4.77],[12,12,8.59],[13,17,6.6819],[18,18,12.02],[19,23,9.3544],[24,24,16.83],[25,26,13.085]]},
+  Petra:{base:36.61,seg:[[1,5,3.4094],[6,6,6.13],[7,11,4.77],[12,12,8.59],[13,17,6.6819],[18,18,12.02],[19,23,9.3544],[24,24,16.83],[25,26,13.085]]},
+  Jaeger:{base:36.61,seg:[[1,5,3.4094],[6,6,6.13],[7,11,4.77],[12,12,8.59],[13,17,6.6819],[18,18,12.02],[19,23,9.3544],[24,24,16.83],[25,26,13.085]]}
+};
+
+const GEN3_REF='Jaeger';
+const GEN3_L30=290.23, GEN4_L30=370.29, GEN5_L30=444.35;
+const GEN6_L30=540.43; // ✅ 필요하면 여기 숫자만 바꾸면 됨
+
+function statAtSegments(H,L){
+  let s=H.base;
+  for(const [f,t,d] of H.seg){
+    if(L<f)break;
+    const u=Math.min(L,t);
+    s += (u-f+1)*d;
+    if(L<=t)break;
+  }
+  return s;
+}
+function deltaAt(H,L){
+  const seg=H.seg.find(([f,t])=>L>=f&&L<=t);
+  return seg?seg[2]:null;
+}
+function anchorLevel(name,level,target){
+  const H=SEG[name]; if(!H) return;
+  let i=H.seg.findIndex(([f,t])=>level>=f&&level<=t);
+  if(i>=0){
+    const [f,t,d]=H.seg[i];
+    if(!(f===level&&t===level)){
+      const left=(level-1>=f)?[f,level-1,d]:null;
+      const right=(level<=t)?[level,t,d]:null;
+      H.seg.splice(i,1,...(left?[left]:[]),...(right?[right]:[]));
+    }
+  }
+  const need=+(target - statAtSegments(H,level-1)).toFixed(4);
+  const j=H.seg.findIndex(([f,t])=>f===level&&t===level);
+  const fixed=[level,level,need];
+  if(j>=0)H.seg[j]=fixed; else H.seg.push(fixed);
+}
+
+/* --- 3세대 27/28/29 보정(2세대 말단 패턴 스케일) --- */
+function fillLastCycleFromGen2(name){
+  const H=SEG[name]; if(!H) return;
+  const G2=SEG['Hilde']; if(!G2) return;
+  const d25_26 = deltaAt(H,25), g2_25_26 = deltaAt(G2,25);
+  const patt = [ deltaAt(G2,27), deltaAt(G2,28), deltaAt(G2,29) ];
+  if (d25_26==null || g2_25_26==null) return;
+  const k = d25_26 / g2_25_26;
+  [27,28,29].forEach((L,idx)=>{
+    if (deltaAt(H,L)!=null) return;
+    const d = +((patt[idx]||0)*k).toFixed(4);
+    H.seg.push([L,L,d]);
+  });
+  H.seg.sort((a,b)=>a[0]-b[0]);
+}
+['Eric','Petra','Jaeger'].forEach(fillLastCycleFromGen2);
+['Eric','Petra','Jaeger'].forEach(h=>anchorLevel(h,30,GEN3_L30));
+
+/* --- Gen4 생성 --- */
+(function buildGen4(){
+  const ref=SEG[GEN3_REF]; if(!ref) return;
+  const current=statAtSegments(ref,30);
+  const k=GEN4_L30/current;
+  ['Alcar','Margot','Rosa'].forEach(n=>{
+    SEG[n]={
+      base:+(ref.base*k).toFixed(4),
+      seg:ref.seg.map(([f,t,d])=>[f,t,+(d*k).toFixed(4)])
+    };
+    anchorLevel(n,30,GEN4_L30);
+  });
+})();
+
+/* --- Gen5 생성 --- */
+(function buildGen5(){
+  const ref = SEG['Rosa'] || SEG['Margot'] || SEG['Alcar'];
+  if (!ref) return;
+  const current = statAtSegments(ref,30);
+  const k = GEN5_L30 / current;
+  ['Longfei','Thrud','Vivian'].forEach(n=>{
+    SEG[n] = {
+      base: +(ref.base * k).toFixed(4),
+      seg: ref.seg.map(([f,t,d])=>[f,t, +(d*k).toFixed(4)])
+    };
+    anchorLevel(n,30,GEN5_L30);
+  });
+})();
+
+/* --- Gen6 생성 (Yang, Triton, Sophia) --- */
+(function buildGen6(){
+  const ref = SEG['Vivian'] || SEG['Thrud'] || SEG['Longfei'];
+  if (!ref) return;
+  const current = statAtSegments(ref,30);
+  const k = GEN6_L30 / current;
+  ['Yang','Triton','Sophia'].forEach(n=>{
+    SEG[n] = {
+      base: +(ref.base * k).toFixed(4),
+      seg: ref.seg.map(([f,t,d])=>[f,t, +(d*k).toFixed(4)])
+    };
+    anchorLevel(n,30,GEN6_L30);
+  });
+})();
+
+/* ===== 메타(세대/병종/한글명) =====
+   ✅ 요청 반영:
+   Yang=궁병, Triton=보병, Sophia=기병
+*/
+const META={
+  // Gen1
+  Amadeus:{type:'infantry',gen:1,ko:'아마데우스'},
+  Helga:{type:'infantry',gen:1,ko:'헬가'},
+  Jabel:{type:'cavalry',gen:1,ko:'제이벨'},
+  Saul:{type:'archer',gen:1,ko:'살로'},
+
+  // Gen2
+  Zoe:{type:'infantry',gen:2,ko:'조이'},
+  Hilde:{type:'cavalry',gen:2,ko:'힐데'},
+  Marlin:{type:'archer',gen:2,ko:'마린'},
+
+  // Gen3
+  Eric:{type:'infantry',gen:3,ko:'에릭'},
+  Petra:{type:'cavalry',gen:3,ko:'리틀페라'},
+  Jaeger:{type:'archer',gen:3,ko:'예거'},
+
+  // Gen4
+  Alcar:{type:'infantry',gen:4,ko:'알카르'},
+  Margot:{type:'cavalry',gen:4,ko:'마고트'},
+  Rosa:{type:'archer',gen:4,ko:'로사'},
+
+  // Gen5
+  Longfei:{type:'infantry',gen:5,ko:'롱페이'},
+  Thrud:{type:'cavalry',gen:5,ko:'스루드'},
+  Vivian:{type:'archer',gen:5,ko:'비비안'},
+
+  // Gen6
+  Triton:{type:'infantry',gen:6,ko:'트리톤'},
+  Sophia:{type:'cavalry',gen:6,ko:'소피아'},
+  Yang:{type:'archer',gen:6,ko:'양'}
+};
+
+/* ===== 계산 로직 ===== */
+function listHeroesByType(type){
+  const all=Object.keys(META).filter(n=>META[n].type===type && SEG[n]);
+  return all.sort((a,b)=>(META[a].gen - META[b].gen)||a.localeCompare(b));
+}
+function nameIn(n){
+  if (currentLang==='ko') return (META[n]&&META[n].ko)||n;
+  return n;
+}
+function statAtHero(name,L){
+  const H=SEG[name];
+  if(!H) return 0;
+  return statAtSegments(H,L);
+}
+function minLevelToBeat(attacker,defender,defL){
+  const target=statAtHero(defender,defL);
+  for(let l=1;l<=30;l++){
+    if(statAtHero(attacker,l)+0.005>=target) return {lv:l,target};
+  }
+  return {lv:null,target};
+}
+function optionLabel(n){
+  const genStr = t('label.gen',{n:META[n].gen});
+  return `${nameIn(n)} (${n}) · ${genStr}`;
+}
+function populateOptions(select, type){
+  const list=listHeroesByType(type);
+  select.innerHTML=list.map(n=>`<option value="${n}">${optionLabel(n)}</option>`).join('');
+}
+function refreshAllLanes(){
+  document.querySelectorAll('.lane').forEach(section=>{
+    const type=section.dataset.type;
+    const selects=section.querySelectorAll('select.hero');
+    selects.forEach(sel=>{
+      const prev=sel.value;
+      populateOptions(sel, type);
+      const opts=[...sel.options];
+      sel.value = opts.some(o=>o.value===prev) ? prev : (opts[0]?.value || '');
+    });
+    const h2 = section.querySelector('h2');
+    if (h2) h2.textContent = t(`section.${type}`);
+    if (selects[0]) selects[0].dispatchEvent(new Event('input'));
+  });
+}
+
+/* ===== 섹션별 UI 바인딩 ===== */
+document.querySelectorAll('.lane').forEach(section=>{
+  const type=section.dataset.type;
+  const [cardA,cardB]=section.querySelectorAll('.card');
+  const selA=cardA.querySelector('.hero[data-side="A"]');
+  const selB=cardB.querySelector('.hero[data-side="B"]');
+  const lvlA=cardA.querySelector('.lvl[data-side="A"]');
+  const lvlB=cardB.querySelector('.lvl[data-side="B"]');
+  const lblA=cardA.querySelector('.lvlLabel[data-side="A"]');
+  const lblB=cardB.querySelector('.lvlLabel[data-side="B"]');
+  const statA=cardA.querySelector('.stat[data-side="A"]');
+  const statB=cardB.querySelector('.stat[data-side="B"]');
+  const cmpText=section.querySelector('.cmpText');
+  const cmpHint=section.querySelector('.cmpHint');
+
+  const starsBoxA=cardA.querySelector('.stars[data-side="A"]');
+  const starsBoxB=cardB.querySelector('.stars[data-side="B"]');
+  const starsA=[...starsBoxA.querySelectorAll('.star')];
+  const starsB=[...starsBoxB.querySelectorAll('.star')];
+
+  const portraitA=cardA.querySelector('.portrait[data-side="A"]');
+  const portraitB=cardB.querySelector('.portrait[data-side="B"]');
+
+  populateOptions(selA, type);
+  populateOptions(selB, type);
+
+  const heroList = listHeroesByType(type);
+  const pickGen = g => heroList.find(n=>META[n].gen===g);
+
+  // ✅ 기본 선택 개선: A=구세대(Gen3 우선), B=최신(Gen6 우선)
+  selA.value = pickGen(3) || pickGen(2) || heroList[0];
+  selB.value = pickGen(6) || pickGen(5) || pickGen(4) || heroList[1] || heroList[0];
+
+  lvlA.value=1; lvlB.value=1;
+
+  function tierOfLevel(L){ return ((L - 1) % 6) + 1; }
+  function starOfLevel(L){ return Math.floor((L - 1) / 6); }
+
+  function setStarImages(starElems, L){
+    if (L === 30){
+      starElems.forEach(el => el.setAttribute('data-lv', 6));
+      return;
+    }
+    const s = starOfLevel(L);
+    const t = tierOfLevel(L);
+    for(let i=0;i<5;i++){
+      let lv = 0;
+      if (i < s) lv = 6;
+      else if (i === s) lv = t;
+      else lv = 0;
+      starElems[i].setAttribute('data-lv', lv);
+    }
+  }
+
+  function setPortrait(imgEl, heroKey, sideLabel){
+    if(!imgEl) return;
+    imgEl.alt = t('alt.portrait',{side: sideLabel, name: nameIn(heroKey), key: heroKey});
+    imgEl.src = portraitUrl(heroKey);
+    imgEl.onerror = () => { imgEl.onerror = null; imgEl.src = PLACEHOLDER_SVG; };
+  }
+
+  function render(){
+    const A=selA.value, B=selB.value, LA=+lvlA.value, LB=+lvlB.value;
+
+    lblA.textContent=formatLevelLabel(LA);
+    lblB.textContent=formatLevelLabel(LB);
+
+    setStarImages(starsA, LA);
+    setStarImages(starsB, LB);
+
+    starsBoxA.setAttribute('aria-label', t('aria.stars',{side:'A', level:formatLevelLabel(LA)}));
+    starsBoxB.setAttribute('aria-label', t('aria.stars',{side:'B', level:formatLevelLabel(LB)}));
+
+    setPortrait(portraitA, A, 'A');
+    setPortrait(portraitB, B, 'B');
+
+    const va=statAtHero(A,LA), vb=statAtHero(B,LB);
+    statA.textContent=`+${va.toFixed(2)}%`;
+    statB.textContent=`+${vb.toFixed(2)}%`;
+
+    const aNeed = minLevelToBeat(A, B, LB);
+    const bNeed = minLevelToBeat(B, A, LA);
+
+    let line = '';
+    if (Math.abs(va - vb) < 0.005) {
+      line = t('cmp.same',{A:nameIn(A), B:nameIn(B)});
+    } else if (va > vb) {
+      line = t('cmp.ahead',{A:nameIn(A), LA:formatLevelLabel(LA), LB:formatLevelLabel(LB)});
+    } else {
+      const needTxt = aNeed.lv ? formatLevelLabel(aNeed.lv) : t('label.impossible');
+      line = t('cmp.needA',{A:nameIn(A), B:nameIn(B), LV:needTxt});
+    }
+
+    const subNeed = bNeed.lv ? formatLevelLabel(bNeed.lv) : t('label.impossible');
+    const sub = t('cmp.needB',{A:nameIn(A), B:nameIn(B), LV:subNeed});
+
+    cmpText.innerHTML = line;
+    cmpHint.innerHTML = sub;
+  }
+
+  [selA,selB,lvlA,lvlB].forEach(el=> el.addEventListener('input',render));
+  render();
+});
+
+/* ===== 최초 실행 ===== */
+applyI18NStatic();
+refreshAllLanes();
+</script>
+</body>
+</html>
