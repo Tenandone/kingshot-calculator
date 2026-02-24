@@ -74,7 +74,7 @@
     "stats": [
       { "label": "heroes.col.heroAtk", "value": "4,546" },
       { "label": "heroes.col.heroDef", "value": "5,926" },
-      { "label": "heroes.col.heroHp",  "value": "99,910" }
+      { "label": "heroes.col.heroHp", "value": "99,910" }
     ],
     "skills": [
       { "icon": "/img/heroes/Triton/img_002.webp", "desc": "heroes.triton.conq.s1.desc", "upgrade": "heroes.triton.conq.s1.up" },
@@ -91,6 +91,35 @@
       { "icon": "/img/heroes/Triton/img_005.webp", "desc": "heroes.triton.exp.s1.desc", "upgrade": "heroes.triton.exp.s1.up" },
       { "icon": "/img/heroes/Triton/img_006.webp", "desc": "heroes.triton.exp.s2.desc", "upgrade": "heroes.triton.exp.s2.up" },
       { "icon": "/img/heroes/Triton/img_007.webp", "desc": "heroes.triton.exp.s3.desc", "upgrade": "heroes.triton.exp.s3.up" }
+    ]
+  },
+  "exclusiveGear": {
+    "name": "heroes.triton.gear.name",
+    "icon": "/img/heroes/Triton/img_008.webp",
+    "stats": [
+      { "label": "heroes.col.power", "value": "600,750" },
+      { "label": "heroes.col.heroAtk", "value": "921" },
+      { "label": "heroes.col.heroDef", "value": "1,201" },
+      { "label": "heroes.col.heroHp", "value": "18,022" },
+      { "label": "heroes.col.guardAtk", "value": "307" },
+      { "label": "heroes.col.guardDef", "value": "400" },
+      { "label": "heroes.col.guardHp", "value": "6,007" },
+      { "label": "heroes.col.infantryMight", "value": "+133.50%" },
+      { "label": "heroes.col.infantryTroopHp", "value": "+133.50%" }
+    ],
+    "skills": [
+      {
+        "icon": "/img/heroes/Triton/img_009.webp",
+        "type": "conquest",
+        "desc": "heroes.triton.gear.s1.desc",
+        "upgrade": "heroes.triton.gear.s1.up"
+      },
+      {
+        "icon": "/img/heroes/Triton/img_010.webp",
+        "type": "expedition",
+        "desc": "heroes.triton.gear.s2.desc",
+        "upgrade": "heroes.triton.gear.s2.up"
+      }
     ]
   }
 }
@@ -131,7 +160,36 @@
       { "icon": "/img/heroes/Sophia/img_006.webp", "desc": "heroes.sophia.exp.s2.desc", "upgrade": "heroes.sophia.exp.s2.up" },
       { "icon": "/img/heroes/Sophia/img_007.webp", "desc": "heroes.sophia.exp.s3.desc", "upgrade": "heroes.sophia.exp.s3.up" }
     ]
-  }
+  },
+  "exclusiveGear": {
+  "name": "heroes.sophia.gear.name",
+  "icon": "/img/heroes/Sophia/img_008.webp",
+  "stats": [
+    { "label": "heroes.col.power", "value": "600,750" },
+    { "label": "heroes.col.heroAtk", "value": "1,201" },
+    { "label": "heroes.col.heroDef", "value": "1,201" },
+    { "label": "heroes.col.heroHp", "value": "12,015" },
+    { "label": "heroes.col.guardAtk", "value": "400" },
+    { "label": "heroes.col.guardDef", "value": "400" },
+    { "label": "heroes.col.guardHp", "value": "4,005" },
+    { "label": "heroes.col.cavalryMight", "value": "+133.50%" },
+    { "label": "heroes.col.cavalryTroopHp", "value": "+133.50%" }
+  ],
+  "skills": [
+    {
+      "icon": "/img/heroes/Sophia/img_009.webp",
+      "type": "conquest",
+      "desc": "heroes.sophia.gear.s1.desc",
+      "upgrade": "heroes.sophia.gear.s1.up"
+    },
+    {
+      "icon": "/img/heroes/Sophia/img_010.webp",
+      "type": "expedition",
+      "desc": "heroes.sophia.gear.s2.desc",
+      "upgrade": "heroes.sophia.gear.s2.up"
+    }
+  ]
+}
 }
 ,
 
