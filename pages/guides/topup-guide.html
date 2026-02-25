@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
-  <title>모바일 게임 유저들을 위한 합리적인 충전 가이드</title>
+  <title>Tri-Alliance Clash 승리 가이드</title>
 
   <style>
     *{box-sizing:border-box}
@@ -22,7 +22,7 @@
     html,body{
       margin:0;background:var(--bg);color:var(--text);
       font-family:system-ui,-apple-system,"Segoe UI",Roboto,
-        "Noto Sans KR","Noto Sans JP","Noto Sans SC","Noto Sans TC","Noto Naskh Arabic",
+        "Noto Sans KR","Noto Sans JP","Noto Sans SC","Noto Sans TC",
         Arial,sans-serif;
       line-height:1.65
     }
@@ -56,35 +56,54 @@
       border:1px solid var(--border);
       background:var(--surface);color:var(--text)
     }
-    /* RTL일 때는 자연스럽게 반전 (뒤로/언어 위치) */
-    [dir="rtl"] .topbar-inner{flex-direction:row-reverse}
-    [dir="rtl"] .langbox{direction:rtl}
 
     /* ===== Content ===== */
     .container{max-width:1000px;margin:0 auto;padding:16px}
-    h1{font-size:clamp(22px,3vw,36px);color:var(--brand);margin:14px 0 16px}
+    h1{font-size:clamp(22px,3vw,36px);color:var(--brand);margin:14px 0 8px}
+    .subtitle{color:var(--muted);margin:0 0 16px}
     h2{font-size:clamp(18px,2.4vw,26px);color:var(--brand);margin-top:28px;margin-bottom:10px}
-    .step{margin-bottom:36px}
+    h3{font-size:clamp(16px,2vw,20px);margin:18px 0 8px}
+    .meta{
+      display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 18px;color:var(--muted);font-size:14px
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:6px 10px;border:1px solid var(--border);border-radius:999px;background:var(--note-bg)
+    }
+    .toc{
+      border:1px solid var(--border);border-radius:10px;background:var(--note-bg);
+      padding:12px 14px;margin:16px 0
+    }
+    .toc strong{display:block;margin-bottom:6px}
     .note{
       font-size:14px;color:var(--muted);
       background:var(--note-bg);padding:12px 14px;
       border-left:4px solid var(--brand);border-radius:6px;margin:16px 0
     }
-    [dir="rtl"] .note{border-left:0;border-right:4px solid var(--brand)}
-    .note .line{margin:6px 0}
-    .imgrow{
+    .grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
       gap:12px;margin:12px 0
     }
-    .imgrow img{width:100%;border:1px solid var(--border);border-radius:8px}
-    .links{
-      background:color-mix(in srgb,var(--surface) 85%,var(--brand) 5%);
-      padding:16px;border-radius:10px;margin-top:28px
+    .card{
+      border:1px solid var(--border);border-radius:10px;background:var(--surface);
+      padding:12px 14px
     }
-    .links h2{color:var(--text);margin-top:0}
-    .links a{font-weight:900}
-    ul{padding-inline-start:18px}
+    .card .title{font-weight:900;margin:0 0 6px}
+    .imgbox{
+      border:1px solid var(--border);border-radius:10px;background:var(--surface);
+      padding:10px;margin:12px 0
+    }
+    .imgbox img{width:100%;border-radius:8px;border:1px solid var(--border)}
+    .imgcap{color:var(--muted);font-size:13px;margin-top:8px}
+    table{width:100%;border-collapse:collapse;margin:10px 0}
+    th,td{border:1px solid var(--border);padding:10px;vertical-align:top}
+    th{background:var(--note-bg);text-align:left}
+    ul{padding-inline-start:18px;margin:8px 0}
+    li{margin:6px 0}
+    code{background:color-mix(in srgb,var(--surface) 85%,#000 5%);padding:2px 6px;border-radius:8px}
+
+    .k{font-weight:900}
   </style>
 </head>
 
@@ -102,7 +121,6 @@
           <option value="ja">日本語</option>
           <option value="zh-CN">简体中文</option>
           <option value="zh-TW">繁體中文</option>
-          <option value="ar">العربية</option>
         </select>
       </div>
     </div>
@@ -110,118 +128,253 @@
 
   <main class="container">
     <h1 data-i18n="h1"></h1>
+    <p class="subtitle" data-i18n="subtitle"></p>
 
-    <!-- NOTE: 링크는 HTML에 고정 / 번역은 텍스트만 -->
-    <div class="note">
-      <div class="line">
-        <a id="signupLink"
-           href="https://lootbar.gg/ko/top-up/kingshot?utm_source=ten"
-           target="_blank"
-           rel="noopener noreferrer"></a>
-        <span data-i18n="note1_after"></span>
-      </div>
-      <div class="line" data-i18n="note1_line2"></div>
+    <div class="meta">
+      <span class="badge"><span class="k" data-i18n="meta_core_label"></span> <span data-i18n="meta_core_text"></span></span>
+      <span class="badge"><span class="k" data-i18n="meta_time_label"></span> <span data-i18n="meta_time_text"></span></span>
+      <span class="badge"><span class="k" data-i18n="meta_day_label"></span> <span data-i18n="meta_day_text"></span></span>
     </div>
 
-    <!-- Step 1 -->
-    <section class="step">
-      <h2 data-i18n="s1_title"></h2>
-      <p data-i18n="s1_p1"></p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step1.png" alt="step1">
-      </div>
-    </section>
-
-    <!-- Step 2 -->
-    <section class="step">
-      <h2 data-i18n="s2_title"></h2>
-      <p data-i18n="s2_p1"></p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step2.png" alt="step2">
-      </div>
-    </section>
-
-    <!-- Step 3 -->
-    <section class="step">
-      <h2 data-i18n="s3_title"></h2>
-      <p data-i18n="s3_p1"></p>
-      <p data-i18n="s3_p2"></p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step3.png" alt="step3">
-        <img src="/img/lootbar/step8.png" alt="step8">
-      </div>
-    </section>
-
-    <!-- Step 4 -->
-    <section class="step">
-      <h2 data-i18n="s4_title"></h2>
-      <p data-i18n="s4_p1"></p>
+    <div class="toc">
+      <strong data-i18n="toc_title"></strong>
       <ul>
-        <li data-i18n="s4_li1"></li>
-        <li data-i18n="s4_li2"></li>
+        <li><a href="#summary" data-i18n="toc_1"></a></li>
+        <li><a href="#stages" data-i18n="toc_2"></a></li>
+        <li><a href="#map" data-i18n="toc_3"></a></li>
+        <li><a href="#setup" data-i18n="toc_4"></a></li>
+        <li><a href="#teams" data-i18n="toc_5"></a></li>
+        <li><a href="#strategy" data-i18n="toc_6"></a></li>
+        <li><a href="#tips" data-i18n="toc_7"></a></li>
+        <li><a href="#faq" data-i18n="toc_8"></a></li>
       </ul>
-      <p class="note" data-i18n="s4_note"></p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step4.png" alt="step4">
-        <img src="/img/lootbar/step5.png" alt="step5">
-        <img src="/img/lootbar/step6.png" alt="step6">
-      </div>
-    </section>
-
-    <!-- Step 5 -->
-    <section class="step">
-      <h2 data-i18n="s5_title"></h2>
-      <p data-i18n="s5_p1"></p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step7.png" alt="step7">
-        <img src="/img/lootbar/step9.png" alt="step9">
-        <img src="/img/lootbar/step10.png" alt="step10">
-      </div>
-    </section>
-
-    <!-- Step 6 -->
-    <section class="step">
-      <h2 data-i18n="s6_title"></h2>
-      <p data-i18n="s6_p1"></p>
-      <p><strong data-i18n="s6_done"></strong></p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step12.png" alt="step12">
-        <img src="/img/lootbar/step13.png" alt="step13">
-        <img src="/img/lootbar/step14.png" alt="step14">
-      </div>
-    </section>
-
-    <!-- Final -->
-    <section class="step">
-      <h2 data-i18n="final_title"></h2>
-      <p><strong data-i18n="final_p_strong"></strong></p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step15.png" alt="step15">
-      </div>
-    </section>
-
-    <div class="note">
-      <div class="line" data-i18n="simple_note_1"></div>
-      <div class="line" data-i18n="simple_note_2"></div>
     </div>
 
-    <!-- cumulative: 링크는 HTML 고정 -->
-    <div class="note">
-      <div class="line">
-        <a id="cumLink"
-           href="https://lootbar.gg/ko/top-up/kingshot?utm_source=ten"
-           target="_blank"
-           rel="noopener noreferrer"></a>
-        <span data-i18n="note_cum_after"></span>
-      </div>
-      <div class="line" data-i18n="note_cum_line2"></div>
-    </div>
+    <!-- Map Image -->
+    <section class="imgbox" id="map">
+      <img src="/img/tri_alliance_clash_map.png" alt="Tri-Alliance Clash map">
+      <div class="imgcap" data-i18n="map_caption"></div>
+    </section>
 
-    <!-- mobile discount -->
-    <div class="links">
-      <h2 data-i18n="links_title"></h2>
-      <a href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer" data-i18n="mobile_discount_link"></a>
-    </div>
+    <!-- Summary -->
+    <section id="summary">
+      <h2 data-i18n="summary_title"></h2>
+
+      <div class="grid">
+        <div class="card">
+          <p class="title" data-i18n="summary_card1_title"></p>
+          <ul>
+            <li data-i18n="summary_card1_li1"></li>
+            <li data-i18n="summary_card1_li2"></li>
+            <li data-i18n="summary_card1_li3"></li>
+            <li data-i18n="summary_card1_li4"></li>
+            <li data-i18n="summary_card1_li5"></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <p class="title" data-i18n="summary_card2_title"></p>
+          <ul>
+            <li data-i18n="summary_card2_li1"></li>
+            <li data-i18n="summary_card2_li2"></li>
+            <li data-i18n="summary_card2_li3"></li>
+            <li data-i18n="summary_card2_li4"></li>
+            <li data-i18n="summary_card2_li5"></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note" data-i18n="summary_note"></div>
+    </section>
+
+    <!-- Stages -->
+    <section id="stages">
+      <h2 data-i18n="stages_title"></h2>
+
+      <table aria-label="Stages table">
+        <thead>
+          <tr>
+            <th data-i18n="tbl_stage"></th>
+            <th data-i18n="tbl_time"></th>
+            <th data-i18n="tbl_goal"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-i18n="tbl_r1_stage"></td>
+            <td>3m</td>
+            <td data-i18n="tbl_r1_goal"></td>
+          </tr>
+          <tr>
+            <td data-i18n="tbl_r2_stage"></td>
+            <td>17m</td>
+            <td data-i18n="tbl_r2_goal"></td>
+          </tr>
+          <tr>
+            <td data-i18n="tbl_r3_stage"></td>
+            <td>20m</td>
+            <td data-i18n="tbl_r3_goal"></td>
+          </tr>
+          <tr>
+            <td data-i18n="tbl_r4_stage"></td>
+            <td>20m</td>
+            <td data-i18n="tbl_r4_goal"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note" data-i18n="stages_note"></div>
+    </section>
+
+    <!-- Map Key Points -->
+    <section id="map">
+      <h2 data-i18n="map_title"></h2>
+      <p data-i18n="map_p1"></p>
+
+      <div class="grid">
+        <div class="card">
+          <p class="title" data-i18n="map_card1_title"></p>
+          <ul>
+            <li data-i18n="map_card1_li1"></li>
+            <li data-i18n="map_card1_li2"></li>
+            <li data-i18n="map_card1_li3"></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <p class="title" data-i18n="map_card2_title"></p>
+          <ul>
+            <li data-i18n="map_card2_li1"></li>
+            <li data-i18n="map_card2_li2"></li>
+            <li data-i18n="map_card2_li3"></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note" data-i18n="map_note"></div>
+    </section>
+
+    <!-- Setup -->
+    <section id="setup">
+      <h2 data-i18n="setup_title"></h2>
+
+      <h3 data-i18n="setup_h3_1"></h3>
+      <ul>
+        <li data-i18n="setup_li1"></li>
+        <li data-i18n="setup_li2"></li>
+      </ul>
+
+      <h3 data-i18n="setup_h3_2"></h3>
+      <ul>
+        <li data-i18n="setup_li3"></li>
+        <li data-i18n="setup_li4"></li>
+      </ul>
+    </section>
+
+    <!-- Teams -->
+    <section id="teams">
+      <h2 data-i18n="teams_title"></h2>
+      <p data-i18n="teams_p1"></p>
+
+      <div class="grid">
+        <div class="card">
+          <p class="title" data-i18n="teams_card1_title"></p>
+          <ul>
+            <li data-i18n="teams_card1_li1"></li>
+            <li data-i18n="teams_card1_li2"></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <p class="title" data-i18n="teams_card2_title"></p>
+          <ul>
+            <li data-i18n="teams_card2_li1"></li>
+            <li data-i18n="teams_card2_li2"></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <p class="title" data-i18n="teams_card3_title"></p>
+          <ul>
+            <li data-i18n="teams_card3_li1"></li>
+            <li data-i18n="teams_card3_li2"></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <p class="title" data-i18n="teams_card4_title"></p>
+          <ul>
+            <li data-i18n="teams_card4_li1"></li>
+            <li data-i18n="teams_card4_li2"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strategy -->
+    <section id="strategy">
+      <h2 data-i18n="strategy_title"></h2>
+
+      <h3 data-i18n="strategy_h3_1"></h3>
+      <ul>
+        <li data-i18n="strategy_1_li1"></li>
+        <li data-i18n="strategy_1_li2"></li>
+        <li data-i18n="strategy_1_li3"></li>
+        <li data-i18n="strategy_1_li4"></li>
+      </ul>
+
+      <h3 data-i18n="strategy_h3_2"></h3>
+      <ul>
+        <li data-i18n="strategy_2_li1"></li>
+        <li data-i18n="strategy_2_li2"></li>
+        <li data-i18n="strategy_2_li3"></li>
+        <li data-i18n="strategy_2_li4"></li>
+      </ul>
+
+      <h3 data-i18n="strategy_h3_3"></h3>
+      <ul>
+        <li data-i18n="strategy_3_li1"></li>
+        <li data-i18n="strategy_3_li2"></li>
+        <li data-i18n="strategy_3_li3"></li>
+      </ul>
+
+      <div class="note" data-i18n="strategy_note"></div>
+    </section>
+
+    <!-- Tips -->
+    <section id="tips">
+      <h2 data-i18n="tips_title"></h2>
+
+      <h3 data-i18n="tips_h3_1"></h3>
+      <ul>
+        <li data-i18n="tips_1_li1"></li>
+        <li data-i18n="tips_1_li2"></li>
+      </ul>
+
+      <h3 data-i18n="tips_h3_2"></h3>
+      <ul>
+        <li data-i18n="tips_2_li1"></li>
+        <li data-i18n="tips_2_li2"></li>
+        <li data-i18n="tips_2_li3"></li>
+      </ul>
+
+      <h3 data-i18n="tips_h3_3"></h3>
+      <ul>
+        <li data-i18n="tips_3_li1"></li>
+        <li data-i18n="tips_3_li2"></li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2>FAQ</h2>
+
+      <h3 data-i18n="faq_q1"></h3>
+      <p data-i18n="faq_a1"></p>
+
+      <h3 data-i18n="faq_q2"></h3>
+      <p data-i18n="faq_a2"></p>
+    </section>
   </main>
 
 <script>
@@ -230,211 +383,636 @@
     "ko": {
       backText: "← Kingshot Guides",
       langLabel: "언어",
-      h1: "모바일 게임 유저들을 위한 합리적인 충전 가이드",
-      signupText: "[루트바 가입 링크]",
-      note1_after: " 로 가입하세요.",
-      note1_line2: "검색창에 #s4qU 입력 시 추가 쿠폰을 받을 수 있습니다.",
-      s1_title: "1. 단품 충전",
-      s1_p1: "충전하고 싶은 패키지를 선택한 뒤 Top-up Now를 누릅니다.",
-      s2_title: "2. 다품 충전",
-      s2_p1: "장바구니 버튼으로 원하는 패키지를 여러 개 추가합니다.",
-      s3_title: "3. 결제 진행",
-      s3_p1: "결제 수단을 카드 또는 PayPal 중 선택한 뒤 Pay Now를 누릅니다.",
-      s3_p2: "좌측은 셀프탑업(내가 직접 충전), 우측은 상담원 충전입니다. 셀프탑업을 선택하세요.",
-      s4_title: "4. 로그인",
-      s4_p1: "셀프탑업 선택 시 로그인 화면이 표시됩니다. 구글 로그인이 가장 편리합니다.",
-      s4_li1: "구글 이메일 입력",
-      s4_li2: "비밀번호 입력",
-      s4_note: "※ 초반에는 비밀번호를 미리 정확히 확인 후 진행하세요.",
-      s5_title: "5. 장바구니 충전",
-      s5_p1: "장바구니에 담긴 금액(합계)만큼 충전합니다.",
-      s6_title: "6. 구매 완료",
-      s6_p1: "확인 후 결제가 진행되며, 완료 화면에서 Got it을 누르면 종료됩니다.",
-      s6_done: "충전 완료!",
-      final_title: "최종 완료",
-      final_p_strong: "모든 과정이 완료되었습니다. 게임에서 충전된 패키지를 확인하세요.",
-      simple_note_1: "셀프충전은 매우 간단합니다.",
-      simple_note_2: "문의가 많아 본 가이드로 안내를 대신합니다.",
-      cumText: "[누적충전 바로가기 링크]",
-      note_cum_after: " 를 즐겨찾기(북마크) 해두세요.",
-      note_cum_line2: "매월 말 집계하여 $4.99~$99.99 패키지를 추가로 증정합니다.",
-      links_title: "모바일게임 할인 링크 안내",
-      mobile_discount_link: "모바일게임 할인 바로가기"
+
+      h1: "Tri-Alliance Clash 승리 가이드",
+      subtitle: "3개 연맹이 건물 점령으로 점수를 겨루는 서버 이벤트. 1시간 전투에서 누적 포인트가 가장 높은 연맹이 승리합니다.",
+
+      meta_core_label: "핵심",
+      meta_core_text: "에너지 관리 · 주둔(캡틴) · 20분 수비대(가리슨) · 40분 천공(파도 신전)",
+      meta_time_label: "전투 시간",
+      meta_time_text: "오픈 후 1시간",
+      meta_day_label: "전투일",
+      meta_day_text: "선택된 시간대의 토요일",
+
+      toc_title: "목차",
+      toc_1: "한눈에 보는 규칙 요약",
+      toc_2: "전투 단계(4스테이지)",
+      toc_3: "맵 구조와 핵심 포인트",
+      toc_4: "사전 준비(등록/인원/음성)",
+      toc_5: "팀 편성 추천",
+      toc_6: "스테이지별 운영 전략",
+      toc_7: "실전 팁(에너지/회복/재진입)",
+      toc_8: "FAQ",
+
+      map_caption: "핵심 오브젝트(중계 거점/수비대/천공 루트)를 한 장에 정리한 지도입니다. 좌표(A1/B1/C1, A24/B24/C24 등)는 전장 내 표기를 기준으로 합니다.",
+
+      summary_title: "한눈에 보는 규칙 요약",
+      summary_card1_title: "참전 조건(요약)",
+      summary_card1_li1: "연맹 전투력 상위 20위",
+      summary_card1_li2: "자동: 제1군 기본 해제",
+      summary_card1_li3: "2군단 해제 예시: 연맹 Lv.6 이상 + 누적 접속 인원 40명(서버/시즌에 따라 상이)",
+      summary_card1_li4: "군단: 참전자+후보자 합계 15명 이상이면 2개 군단 인원 별도 계산",
+      summary_card1_li5: "개인: 연맹 가입 + 도시센터 Lv.16 이상, 미접속 5일 이상은 참가 제한 가능",
+
+      summary_card2_title: "기본 규칙(운영)",
+      summary_card2_li1: "투표/신청/매칭/전투는 서버 캘린더에 따라 진행",
+      summary_card2_li2: "R4 이상: 신청 및 참여 인원 조정 가능",
+      summary_card2_li3: "최대 30인 참가 + 후보자 10인(서버 규칙에 따라 상이)",
+      summary_card2_li4: "연맹당 최대 2개 군단으로 다른 전장 동시 진행 가능",
+      summary_card2_li5: "영주는 총 3개 부대를 전장에 투입 가능",
+
+      summary_note: "요점: ‘인원 등록’이 승패에 직결됩니다. 실제 참여 가능한 인원만 등록하세요.",
+
+      stages_title: "전투 단계(4스테이지)",
+      tbl_stage: "단계",
+      tbl_time: "시간",
+      tbl_goal: "핵심 목표",
+      tbl_r1_stage: "1) 준비(Preparation)",
+      tbl_r1_goal: "역할 분배, 이동 루트 확인, 초기 점령 동선 정리",
+      tbl_r2_stage: "2) 점령 확장(Seize & Conquer)",
+      tbl_r2_goal: "아군 구역 선점 + 적 구역 소형 건물 일부 탈취(가리슨은 보호)",
+      tbl_r3_stage: "3) 수비대 점령(Garrison Occupation)",
+      tbl_r3_goal: "20분에 A24/B24/C24 개방. 분당 점수가 높아 승부처",
+      tbl_r4_stage: "4) 천공 공세(Temple Onslaught)",
+      tbl_r4_goal: "40분에 파도 신전(천공) 개방. 최초 점령+유지 점수로 최종 승부",
+      stages_note: "핵심 타이밍: 20분(수비대) / 40분(천공). 이 타이밍에 에너지를 남겨두는 운영이 중요합니다.",
+
+      map_title: "맵 구조와 핵심 포인트",
+      map_p1: "맵은 3개 구역으로 나뉘며, 각 연맹은 본진(A1/B1/C1)에서 시작합니다.",
+      map_card1_title: "수비대(가리슨) — 20분 개방",
+      map_card1_li1: "대표 좌표: A24, B24, C24",
+      map_card1_li2: "가리슨은 +1800점/분(유적 군집 +600/분의 3배 수준)으로 점수 영향이 큼",
+      map_card1_li3: "기본은 내 수비대 사수 + 가능하면 적 수비대 탈취",
+      map_card2_title: "천공(파도 신전) 진입 연결 건물",
+      map_card2_li1: "예시 좌표: A29, B29, C29",
+      map_card2_li2: "아군 측 2개의 중계 거점과 연결되어 천공으로 가는 통로 역할",
+      map_card2_li3: "적이 점령하면 천공 접근이 막혀 최종 20분이 매우 불리해질 수 있음",
+      map_note: "운영 원칙: ‘20분 수비대 방어’ + ‘40분 천공 진입로(A29/B29/C29) 유지’를 동시에 잡아야 합니다.",
+
+      setup_title: "사전 준비(등록/인원/음성)",
+      setup_h3_1: "1) 등록(Registration)",
+      setup_li1: "실제 참여 가능한 인원만 등록(유령 등록은 매칭/전투 모두 손해)",
+      setup_li2: "R4 이상 참여 권장: 점령 후 캡틴 임명 가능 → 에너지 회복 이점",
+      setup_h3_2: "2) 음성 채널(Discord)",
+      setup_li3: "디스코드 보이스 권장(최소 리더 1~3명)",
+      setup_li4: "실시간 콜이 채팅보다 압도적으로 빠름",
+
+      teams_title: "팀 편성 추천",
+      teams_p1: "목표는 ‘점수 생산(점령/유지)’과 ‘핵심 오브젝트 방어’를 동시에 굴리는 것입니다.",
+      teams_card1_title: "공격팀(Attack Team)",
+      teams_card1_li1: "적 구역 진입 → 건물 탈취 → 20분 수비대 공략 → 40분 천공 러시",
+      teams_card1_li2: "가장 강한 부대를 우선 배치",
+      teams_card2_title: "수비팀(Defender Team 1/2)",
+      teams_card2_li1: "아군 핵심 루트/중계 거점 방어",
+      teams_card2_li2: "특히 20분 이후 수비대 사수",
+      teams_card3_title: "플로터(Floaters)",
+      teams_card3_li1: "백업/증원 담당, 상황에 따라 공격·수비 지원",
+      teams_card3_li2: "에너지 절약 후 급변 상황에 반응",
+      teams_card4_title: "부대/영웅 운영",
+      teams_card4_li1: "각 영주는 3개 부대(총 9영웅) 운용",
+      teams_card4_li2: "최강 1개 부대는 수비대/천공 타이밍용으로 아끼는 운영도 유효",
+
+      strategy_title: "스테이지별 운영 전략",
+      strategy_h3_1: "스테이지 1~2 (0~20분): 준비 + 점령 확장",
+      strategy_1_li1: "시작 즉시 아군 구역 건물 선점 + 중계 거점 확보",
+      strategy_1_li2: "공격팀은 적 구역 소형 건물 일부 탈취로 점수/동선 이득",
+      strategy_1_li3: "초반 목표: 분당 점수(PPM) 우위 만들기",
+      strategy_1_li4: "에너지 과소모 금지: 20분 타이밍을 위해 에너지 30~40% 남기기",
+      strategy_h3_2: "스테이지 3 (20~40분): 수비대",
+      strategy_2_li1: "20분에 A24/B24/C24 개방",
+      strategy_2_li2: "우선순위 1: 내 수비대 방어(잃으면 점수 뒤집힘)",
+      strategy_2_li3: "우선순위 2: 가능하면 적 수비대 탈취로 격차 벌리기",
+      strategy_2_li4: "플로터는 교전이 밀리는 곳에 즉시 투입",
+      strategy_h3_3: "스테이지 4 (40~60분): 천공(파도 신전)",
+      strategy_3_li1: "40분에 천공 개방. 최초 점령 포인트(예: 50,000)가 커서 러시 타이밍 중요",
+      strategy_3_li2: "공격팀: 천공 러시/유지 · 수비팀: 진입로(A29/B29/C29) 유지",
+      strategy_3_li3: "플로터: 적 증원 차단(연결 건물 탈환/재점령) + 천공 수비 보강",
+      strategy_note: "승리 공식: (수비대 유지) + (천공 최초 점령) + (천공 유지) + (진입로 방어) 4가지를 동시에 만족하면 승률이 크게 올라갑니다.",
+
+      tips_title: "실전 팁(에너지/회복/재진입)",
+      tips_h3_1: "에너지 관리",
+      tips_1_li1: "에너지는 이동/점령/돌진/철수/즉시 부활 등에 소모",
+      tips_1_li2: "점령 후 캡틴 임명 시 에너지 회복이 유리",
+      tips_h3_2: "회복/재진입 운영",
+      tips_2_li1: "부상이 크면 전 건물로 후퇴 → 회복 → 재진입이 즉부보다 손실이 적을 때가 많음",
+      tips_2_li2: "회복/징집은 교전이 잠시 끊기는 구간에 맞추면 효율이 좋아짐",
+      tips_2_li3: "전장을 나가면 쿨타임 후 재입장 가능(서버 규칙에 따라 예: 12분)",
+      tips_h3_3: "추가 팁",
+      tips_3_li1: "펫/도시 버프는 서버전 핵심 이벤트에 맞춰 아껴두기",
+      tips_3_li2: "수비팀은 점수가 적게 나올 수 있으니, 다음 회차에 역할 로테이션을 고려",
+
+      faq_q1: "Q. 왜 각 팀의 유적 군집(Ruin Clusters) 수가 다르게 배치되나요?",
+      faq_a1: "맵 밸런스는 ‘개수 동일’보다 경로 길이·중계 거점 접근성·수비대 방어 난이도·천공 진입 안정성 등을 함께 맞추는 경우가 많습니다. 유적이 많은 쪽은 방어 부담이 더 크거나 연결 지점 관리 난이도가 높을 수 있습니다. 실전 승부는 유적 개수보다 20분 수비대와 40분 천공 운영에서 갈리는 경우가 많습니다.",
+      faq_q2: "Q. 이 이벤트에서 가장 중요한 한 가지는?",
+      faq_a2: "에너지입니다. 초반에 에너지를 다 써버리면 20분/40분 승부 타이밍에 아무것도 못합니다. 점령 후 캡틴 임명, 역할 분담, 플로터 운영으로 에너지를 남겨두세요."
     },
 
     "en": {
       backText: "← Kingshot Guides",
       langLabel: "Language",
-      h1: "A Sensible Top-Up Guide for Mobile Gamers",
-      signupText: "[LootBar Sign-Up Link]",
-      note1_after: " Sign up using this link.",
-      note1_line2: "Type #s4qU in the search box to receive an extra coupon.",
-      s1_title: "1. Single-Item Top-Up",
-      s1_p1: "Choose a package and click Top-up Now.",
-      s2_title: "2. Multi-Item Top-Up",
-      s2_p1: "Add multiple items to the cart using the cart button.",
-      s3_title: "3. Checkout",
-      s3_p1: "Select Card or PayPal, then click Pay Now.",
-      s3_p2: "Left is Self Top-up, right is Agent Top-up. Choose Self Top-up.",
-      s4_title: "4. Sign In",
-      s4_p1: "Google sign-in is recommended for convenience.",
-      s4_li1: "Enter Google email",
-      s4_li2: "Enter password",
-      s4_note: "※ Please double-check your password before continuing.",
-      s5_title: "5. Cart Top-Up",
-      s5_p1: "Top up the total amount in your cart.",
-      s6_title: "6. Purchase Complete",
-      s6_p1: "Confirm the purchase, then tap Got it to finish.",
-      s6_done: "Top-up complete!",
-      final_title: "Final Complete",
-      final_p_strong: "All steps are complete. Check your game account.",
-      simple_note_1: "Self top-up is very easy.",
-      simple_note_2: "This guide replaces individual inquiries.",
-      cumText: "[Cumulative Top-Up Link]",
-      note_cum_after: " Bookmark this link.",
-      note_cum_line2: "Monthly totals grant an extra $4.99–$99.99 package.",
-      links_title: "Mobile Game Discount Link",
-      mobile_discount_link: "Go to Mobile Game Discounts"
+
+      h1: "How to Win Tri-Alliance Clash",
+      subtitle: "A 3-alliance event where you capture buildings to score points. The alliance with the most points after a 1-hour battle wins.",
+
+      meta_core_label: "Core",
+      meta_core_text: "Energy management · Captains · 20m Garrisons · 40m Temple of Tides",
+      meta_time_label: "Duration",
+      meta_time_text: "1 hour",
+      meta_day_label: "Battle Day",
+      meta_day_text: "Saturday (chosen time slot)",
+
+      toc_title: "Contents",
+      toc_1: "Rules at a Glance",
+      toc_2: "4 Battle Stages",
+      toc_3: "Map & Key Points",
+      toc_4: "Registration & Setup",
+      toc_5: "Team Setup",
+      toc_6: "Stage-by-Stage Strategy",
+      toc_7: "Practical Tips",
+      toc_8: "FAQ",
+
+      map_caption: "A one-page map of key objectives (Transit Hubs / Garrisons / Temple route). Coordinates (A1/B1/C1, A24/B24/C24, etc.) follow in-game labels.",
+
+      summary_title: "Rules at a Glance",
+      summary_card1_title: "Entry Requirements (Summary)",
+      summary_card1_li1: "Top 20 alliances by power",
+      summary_card1_li2: "Auto: Squad 1 unlocked",
+      summary_card1_li3: "Example for Squad 2: Alliance Lv.6+ and 40 cumulative active logins (may vary)",
+      summary_card1_li4: "Squads: If Participants + Subs ≥ 15, Squad 2 can be counted separately",
+      summary_card1_li5: "Players: In alliance + City Center Lv.16+; inactive 5+ days may be restricted",
+
+      summary_card2_title: "Basic Rules (Operations)",
+      summary_card2_li1: "Voting / Sign-up / Matchmaking / Battle follow the server calendar",
+      summary_card2_li2: "R4+: Can adjust sign-ups and participants",
+      summary_card2_li3: "Up to 30 participants + 10 substitutes (may vary)",
+      summary_card2_li4: "Up to 2 squads per alliance can run in separate battlefields",
+      summary_card2_li5: "Each Governor can deploy up to 3 marches",
+
+      summary_note: "Key point: Registration decides everything. Only register members who will actually show up.",
+
+      stages_title: "4 Battle Stages",
+      tbl_stage: "Stage",
+      tbl_time: "Time",
+      tbl_goal: "Goal",
+      tbl_r1_stage: "1) Preparation",
+      tbl_r1_goal: "Assign roles, confirm routes, plan opening captures",
+      tbl_r2_stage: "2) Seize & Conquer",
+      tbl_r2_goal: "Secure your side and steal a few small buildings (Garrisons are shielded)",
+      tbl_r3_stage: "3) Garrison Occupation",
+      tbl_r3_goal: "At 20m, A24/B24/C24 unlock. High points per minute decide the match",
+      tbl_r4_stage: "4) Temple Onslaught",
+      tbl_r4_goal: "At 40m, Temple opens. First-capture + holding points decide the endgame",
+      stages_note: "Key timing: 20m (Garrisons) / 40m (Temple). Save energy for these moments.",
+
+      map_title: "Map & Key Points",
+      map_p1: "The map has three regions. Each alliance starts at its HQ (A1/B1/C1).",
+      map_card1_title: "Garrisons — Unlock at 20m",
+      map_card1_li1: "Key coords: A24, B24, C24",
+      map_card1_li2: "Garrisons give +1800 points/min (about 3× a Ruin Cluster at +600/min)",
+      map_card1_li3: "Default: Hold yours, then try to take an enemy Garrison",
+      map_card2_title: "Temple Access Buildings",
+      map_card2_li1: "Example coords: A29, B29, C29",
+      map_card2_li2: "They connect to two Transit Hubs — your main path to the Temple",
+      map_card2_li3: "If the enemy holds one, you can lose Temple access in the final 20 minutes",
+      map_note: "Operating rule: Hold your Garrison at 20m AND protect Temple access (A29/B29/C29) at 40m.",
+
+      setup_title: "Registration & Setup",
+      setup_h3_1: "1) Registration",
+      setup_li1: "Register only active members (inactive sign-ups hurt matchmaking and battle)",
+      setup_li2: "Have R4+ present: they can assign Captains after captures → faster energy regen",
+      setup_h3_2: "2) Voice Chat (Discord)",
+      setup_li3: "Use Discord voice (at least 1–3 leaders)",
+      setup_li4: "Real-time calls are much faster than typing",
+
+      teams_title: "Recommended Team Setup",
+      teams_p1: "Your goal is to run point production (capture/hold) and key-object defense at the same time.",
+      teams_card1_title: "Attack Team",
+      teams_card1_li1: "Push enemy side → steal buildings → hit Garrisons at 20m → rush Temple at 40m",
+      teams_card1_li2: "Put your strongest marches here",
+      teams_card2_title: "Defenders (Team 1/2)",
+      teams_card2_li1: "Defend key routes and Transit Hubs",
+      teams_card2_li2: "Especially hold your Garrison after 20m",
+      teams_card3_title: "Floaters",
+      teams_card3_li1: "Backup/reinforce — help attack or defense as needed",
+      teams_card3_li2: "Conserve energy and react to sudden swings",
+      teams_card4_title: "Marches & Heroes",
+      teams_card4_li1: "Each Governor uses 3 marches (9 heroes total)",
+      teams_card4_li2: "Saving your strongest march for Garrisons/Temple timing can be effective",
+
+      strategy_title: "Stage-by-Stage Strategy",
+      strategy_h3_1: "Stage 1–2 (0–20m): Prep + Seize",
+      strategy_1_li1: "Immediately capture your-side buildings and secure Transit Hubs",
+      strategy_1_li2: "Attack Team steals a few small buildings for points and routes",
+      strategy_1_li3: "Early goal: win on points per minute (PPM)",
+      strategy_1_li4: "Do not overspend energy: keep 30–40% for the 20m timing",
+      strategy_h3_2: "Stage 3 (20–40m): Garrisons",
+      strategy_2_li1: "At 20m, A24/B24/C24 unlock",
+      strategy_2_li2: "Priority #1: Hold your Garrison (losing it flips the score)",
+      strategy_2_li3: "Priority #2: If possible, take an enemy Garrison",
+      strategy_2_li4: "Floaters immediately reinforce wherever the fight is slipping",
+      strategy_h3_3: "Stage 4 (40–60m): Temple of Tides",
+      strategy_3_li1: "At 40m, Temple opens. First-capture points (e.g., 50,000) make timing critical",
+      strategy_3_li2: "Attack: rush/hold Temple · Defense: hold access (A29/B29/C29)",
+      strategy_3_li3: "Floaters: cut reinforcements (retake connectors) + reinforce Temple",
+      strategy_note: "Win formula: Hold your Garrison + first-capture Temple + hold Temple + protect access routes — do all four and your win rate jumps.",
+
+      tips_title: "Practical Tips",
+      tips_h3_1: "Energy Management",
+      tips_1_li1: "Energy is spent on moving, capturing, charging, retreating, instant revive",
+      tips_1_li2: "Assign Captains after capture for faster energy regeneration",
+      tips_h3_2: "Healing & Re-entry",
+      tips_2_li1: "If badly wounded, retreat → heal → return is often better than instant revive",
+      tips_2_li2: "Time heals/conscript during brief lulls between fights",
+      tips_2_li3: "Leaving the battlefield triggers a cooldown (varies; e.g., 12m) before re-entry",
+      tips_h3_3: "Extra Tips",
+      tips_3_li1: "Save pet/city buffs for key server events",
+      tips_3_li2: "Defenders may score less; consider rotating roles in future events",
+
+      faq_q1: "Q. Why does each side have a different number of Ruin Clusters?",
+      faq_a1: "Maps are often balanced around route length, Transit Hub access, Garrison defense difficulty, and Temple access stability — not just equal counts. A side with more Ruins may also carry higher defense burden or harder connector control. In practice, wins are often decided by Garrisons at 20m and the Temple at 40m, more than Ruin count.",
+      faq_q2: "Q. What’s the single most important thing?",
+      faq_a2: "Energy. If you burn it early, you can’t fight at the 20m/40m swing points. Assign Captains, split roles, and use Floaters to save energy for the moments that decide the match."
     },
 
     "ja": {
       backText: "← Kingshot ガイド",
       langLabel: "言語",
-      h1: "モバイルゲーム向け合理的なチャージガイド",
-      signupText: "［LootBar 登録リンク］",
-      note1_after: " から登録してください。",
-      note1_line2: "検索欄に #s4qU を入力すると追加クーポンがもらえます。",
-      s1_title: "1. 単品チャージ",
-      s1_p1: "パッケージを選択し、Top-up Now をクリックします。",
-      s2_title: "2. 複数チャージ",
-      s2_p1: "カートボタンで複数のパッケージを追加します。",
-      s3_title: "3. 決済",
-      s3_p1: "カードまたは PayPal を選択し、Pay Now を押します。",
-      s3_p2: "左はセルフチャージ、右は代行チャージです。セルフチャージを選択してください。",
-      s4_title: "4. ログイン",
-      s4_p1: "利便性のため Google ログインがおすすめです。",
-      s4_li1: "メールを入力",
-      s4_li2: "パスワードを入力",
-      s4_note: "※ 事前にパスワードを確認してください。",
-      s5_title: "5. カートチャージ",
-      s5_p1: "カート合計金額をチャージします。",
-      s6_title: "6. 購入完了",
-      s6_p1: "購入を確認し、Got it をタップして終了します。",
-      s6_done: "チャージ完了！",
-      final_title: "最終完了",
-      final_p_strong: "すべて完了しました。ゲーム内で反映を確認してください。",
-      simple_note_1: "セルフチャージはとても簡単です。",
-      simple_note_2: "本ガイドで個別問い合わせを代替します。",
-      cumText: "［累計チャージリンク］",
-      note_cum_after: " をブックマークしてください。",
-      note_cum_line2: "月末集計で $4.99～$99.99 の追加パッケージがもらえます。",
-      links_title: "モバイルゲーム割引リンク",
-      mobile_discount_link: "割引ページへ"
+
+      h1: "トライ・アライアンス・クラッシュ 勝利ガイド",
+      subtitle: "3つの同盟が建物を占領して得点を競うイベント。1時間の戦闘終了時点で合計ポイントが最も高い同盟が勝利します。",
+
+      meta_core_label: "要点",
+      meta_core_text: "エネルギー管理 · キャプテン · 20分ガリソン · 40分潮の寺院",
+      meta_time_label: "時間",
+      meta_time_text: "1時間",
+      meta_day_label: "開催日",
+      meta_day_text: "土曜日（選択した時間帯）",
+
+      toc_title: "目次",
+      toc_1: "ルール要約",
+      toc_2: "4つのステージ",
+      toc_3: "マップと要点",
+      toc_4: "事前準備",
+      toc_5: "編成",
+      toc_6: "ステージ別運用",
+      toc_7: "実戦Tips",
+      toc_8: "FAQ",
+
+      map_caption: "主要目標（中継拠点/ガリソン/寺院ルート）を1枚にまとめたマップです。座標はゲーム内表記（A1/B1/C1、A24/B24/C24など）に準拠します。",
+
+      summary_title: "ルール要約",
+      summary_card1_title: "参加条件（要約）",
+      summary_card1_li1: "同盟戦力上位20",
+      summary_card1_li2: "自動：第1部隊解放",
+      summary_card1_li3: "第2部隊解放例：同盟Lv.6以上＋累計接続40人（変動あり）",
+      summary_card1_li4: "部隊：参加者＋補欠が15人以上で第2部隊を別計算",
+      summary_card1_li5: "個人：同盟加入＋都市センターLv.16以上、5日以上未ログインは制限の可能性",
+
+      summary_card2_title: "基本ルール（運用）",
+      summary_card2_li1: "投票/申請/マッチング/戦闘はサーバーカレンダー準拠",
+      summary_card2_li2: "R4以上：申請/参加人数の調整可",
+      summary_card2_li3: "最大30人＋補欠10人（サーバーにより異なる）",
+      summary_card2_li4: "同盟あたり最大2部隊で別戦場同時進行可",
+      summary_card2_li5: "各領主は最大3部隊投入可",
+
+      summary_note: "要点：登録が勝敗を左右します。実参加できる人だけ登録しましょう。",
+
+      stages_title: "4つの戦闘ステージ",
+      tbl_stage: "段階",
+      tbl_time: "時間",
+      tbl_goal: "目的",
+      tbl_r1_stage: "1) 準備",
+      tbl_r1_goal: "役割分担、ルート確認、初動の占領動線",
+      tbl_r2_stage: "2) 占領拡大",
+      tbl_r2_goal: "自陣確保＋敵陣の小建物を一部奪取（ガリソンは保護）",
+      tbl_r3_stage: "3) ガリソン占領",
+      tbl_r3_goal: "20分でA24/B24/C24解放。分間得点が高く勝負所",
+      tbl_r4_stage: "4) 寺院総攻撃",
+      tbl_r4_goal: "40分で潮の寺院解放。初回占領＋保持得点が勝負",
+      stages_note: "重要タイミング：20分（ガリソン）/40分（寺院）。ここにエネルギーを残すのが鍵。",
+
+      map_title: "マップ構造と要点",
+      map_p1: "マップは3区画。各同盟は本拠地（A1/B1/C1）から開始します。",
+      map_card1_title: "ガリソン — 20分で解放",
+      map_card1_li1: "座標：A24, B24, C24",
+      map_card1_li2: "ガリソンは+1800/分（遺跡クラスター+600/分の約3倍）で影響大",
+      map_card1_li3: "基本：自軍ガリソン死守＋可能なら敵ガリソン奪取",
+      map_card2_title: "寺院進入の接続建物",
+      map_card2_li1: "例：A29, B29, C29",
+      map_card2_li2: "2つの中継拠点に接続し、寺院への通路になる",
+      map_card2_li3: "敵に取られると終盤20分の寺院到達が不利",
+      map_note: "運用原則：20分ガリソン防衛＋40分寺院進入路（A29/B29/C29）維持を同時に。",
+
+      setup_title: "事前準備",
+      setup_h3_1: "1) 登録",
+      setup_li1: "実参加できる人だけ登録（幽霊登録は不利）",
+      setup_li2: "R4以上推奨：占領後にキャプテン任命 → 回復優位",
+      setup_h3_2: "2) ボイス（Discord）",
+      setup_li3: "Discordボイス推奨（最低リーダー1〜3人）",
+      setup_li4: "リアルタイム指示はチャットより圧倒的に早い",
+
+      teams_title: "編成おすすめ",
+      teams_p1: "目的は「得点生産（占領/保持）」と「重要目標の防衛」を同時に回すこと。",
+      teams_card1_title: "攻撃隊",
+      teams_card1_li1: "敵陣侵入→奪取→20分ガリソン→40分寺院ラッシュ",
+      teams_card1_li2: "最強部隊を優先配置",
+      teams_card2_title: "防衛隊（1/2）",
+      teams_card2_li1: "重要ルート/中継拠点を防衛",
+      teams_card2_li2: "特に20分以降のガリソン死守",
+      teams_card3_title: "遊軍",
+      teams_card3_li1: "補助/増援、状況に応じて攻防支援",
+      teams_card3_li2: "エネルギー温存→急変に対応",
+      teams_card4_title: "部隊/英雄",
+      teams_card4_li1: "各領主3部隊（英雄9体）運用",
+      teams_card4_li2: "最強1部隊をガリソン/寺院タイミング用に温存も有効",
+
+      strategy_title: "ステージ別運用",
+      strategy_h3_1: "ステージ1–2（0–20分）：準備＋占領拡大",
+      strategy_1_li1: "初動で自陣占領＋中継拠点確保",
+      strategy_1_li2: "攻撃隊は敵の小建物を一部奪取して得点/動線優位",
+      strategy_1_li3: "序盤目標：分間得点（PPM）優位",
+      strategy_1_li4: "エネルギー浪費禁止：20分に向けて30〜40%温存",
+      strategy_h3_2: "ステージ3（20–40分）：ガリソン",
+      strategy_2_li1: "20分でA24/B24/C24解放",
+      strategy_2_li2: "優先①：自軍ガリソン死守（失うと逆転されやすい）",
+      strategy_2_li3: "優先②：可能なら敵ガリソン奪取",
+      strategy_2_li4: "遊軍は劣勢箇所へ即投入",
+      strategy_h3_3: "ステージ4（40–60分）：潮の寺院",
+      strategy_3_li1: "40分で寺院解放。初回占領得点（例：50,000）が大きくタイミング重要",
+      strategy_3_li2: "攻撃：寺院ラッシュ/保持 · 防衛：進入路（A29/B29/C29）維持",
+      strategy_3_li3: "遊軍：増援遮断（接続建物奪還）＋寺院補強",
+      strategy_note: "勝利公式：ガリソン保持＋寺院初回占領＋寺院保持＋進入路防衛。4つ同時に満たすと勝率が上がる。",
+
+      tips_title: "実戦Tips",
+      tips_h3_1: "エネルギー管理",
+      tips_1_li1: "移動/占領/突撃/撤退/即時復活で消費",
+      tips_1_li2: "占領後にキャプテン任命で回復有利",
+      tips_h3_2: "回復/再入場",
+      tips_2_li1: "大きく削れたら後退→回復→再突入が即復活より得な場合が多い",
+      tips_2_li2: "回復/徴兵は戦闘が途切れる瞬間に合わせると効率が良い",
+      tips_2_li3: "退出するとクールタイム後に再入場（例：12分）",
+      tips_h3_3: "追加Tips",
+      tips_3_li1: "ペット/都市バフは重要イベント用に温存",
+      tips_3_li2: "防衛側は得点が少なめ。次回は役割ローテも検討",
+
+      faq_q1: "Q. なぜ各陣営で遺跡クラスター数が違うの？",
+      faq_a1: "マップは数よりも、ルート距離・中継拠点への到達性・ガリソン防衛難度・寺院進入の安定性などでバランス調整されます。遺跡が多い側は防衛負担や接続地点管理が重い場合があります。実戦では20分ガリソンと40分寺院の運用が勝負を分けやすいです。",
+      faq_q2: "Q. いちばん重要なことは？",
+      faq_a2: "エネルギーです。序盤で使い切ると20/40分の勝負所で動けません。キャプテン任命、役割分担、遊軍運用で温存しましょう。"
     },
 
     "zh-CN": {
       backText: "← Kingshot 指南",
       langLabel: "语言",
-      h1: "手游合理充值指南",
-      signupText: "【LootBar 注册链接】",
-      note1_after: " 点击链接注册。",
-      note1_line2: "在搜索框输入 #s4qU 可领取额外优惠券。",
-      s1_title: "1. 单项充值",
-      s1_p1: "选择套餐并点击 Top-up Now。",
-      s2_title: "2. 多项充值",
-      s2_p1: "使用购物车按钮添加多个套餐。",
-      s3_title: "3. 支付",
-      s3_p1: "选择银行卡或 PayPal，然后点击 Pay Now。",
-      s3_p2: "左侧为自助充值，右侧为代充。请选择自助充值。",
-      s4_title: "4. 登录",
-      s4_p1: "推荐使用 Google 登录，更加方便。",
-      s4_li1: "输入邮箱",
-      s4_li2: "输入密码",
-      s4_note: "※ 请提前确认密码无误。",
-      s5_title: "5. 购物车充值",
-      s5_p1: "按购物车总金额进行充值。",
-      s6_title: "6. 完成购买",
-      s6_p1: "确认购买后，点击 Got it 结束。",
-      s6_done: "充值完成！",
-      final_title: "最终完成",
-      final_p_strong: "所有步骤已完成，请在游戏内确认到账。",
-      simple_note_1: "自助充值非常简单。",
-      simple_note_2: "本指南用于替代重复咨询。",
-      cumText: "【累计充值链接】",
-      note_cum_after: " 建议收藏/书签。",
-      note_cum_line2: "每月结算可额外获得 $4.99–$99.99 套餐。",
-      links_title: "手游优惠链接",
-      mobile_discount_link: "前往手游折扣页面"
+
+      h1: "三联盟争夺战 胜利指南",
+      subtitle: "三大联盟通过占领建筑获取积分。1小时战斗结束时，总积分最高的联盟获胜。",
+
+      meta_core_label: "核心",
+      meta_core_text: "能量管理 · 队长 · 20分钟要塞 · 40分钟潮汐神殿",
+      meta_time_label: "时长",
+      meta_time_text: "1小时",
+      meta_day_label: "战斗日",
+      meta_day_text: "周六（所选时间段）",
+
+      toc_title: "目录",
+      toc_1: "规则速览",
+      toc_2: "四个阶段",
+      toc_3: "地图与关键点",
+      toc_4: "报名与准备",
+      toc_5: "队伍编成",
+      toc_6: "分阶段策略",
+      toc_7: "实战技巧",
+      toc_8: "常见问题",
+
+      map_caption: "关键目标一图说明（中转枢纽/要塞/神殿路线）。坐标（A1/B1/C1、A24/B24/C24等）以游戏内标注为准。",
+
+      summary_title: "规则速览",
+      summary_card1_title: "参战条件（摘要）",
+      summary_card1_li1: "联盟战力前20",
+      summary_card1_li2: "自动：第1队解锁",
+      summary_card1_li3: "第2队解锁示例：联盟Lv.6+ 且累计活跃40人（可能不同）",
+      summary_card1_li4: "队伍：参战+候补≥15 时可单独计算第2队",
+      summary_card1_li5: "个人：加入联盟且主城Lv.16+；5天以上未登录可能被限制",
+
+      summary_card2_title: "基础规则（运营）",
+      summary_card2_li1: "投票/报名/匹配/战斗按服务器日程进行",
+      summary_card2_li2: "R4以上：可调整报名与参战人数",
+      summary_card2_li3: "最多30人参战+10名候补（可能不同）",
+      summary_card2_li4: "每个联盟最多2支队伍可同时在不同战场进行",
+      summary_card2_li5: "每位领主可投入最多3支部队",
+
+      summary_note: "要点：报名决定成败。只报名真正能到场的人。",
+
+      stages_title: "四个战斗阶段",
+      tbl_stage: "阶段",
+      tbl_time: "时间",
+      tbl_goal: "目标",
+      tbl_r1_stage: "1) 准备",
+      tbl_r1_goal: "分配角色、确认路线、规划开局占领",
+      tbl_r2_stage: "2) 扩张占领",
+      tbl_r2_goal: "先占己方并夺取少量敌方小建筑（要塞仍受保护）",
+      tbl_r3_stage: "3) 要塞争夺",
+      tbl_r3_goal: "20分钟A24/B24/C24开放。分钟高分是胜负关键",
+      tbl_r4_stage: "4) 神殿总攻",
+      tbl_r4_goal: "40分钟潮汐神殿开放。首占+占领分决定最终胜负",
+      stages_note: "关键时间点：20分钟（要塞）/40分钟（神殿）。务必为这两个时间点保留能量。",
+
+      map_title: "地图与关键点",
+      map_p1: "地图分为三个区域，各联盟从总部（A1/B1/C1）出发。",
+      map_card1_title: "要塞 — 20分钟开放",
+      map_card1_li1: "坐标：A24, B24, C24",
+      map_card1_li2: "要塞+1800分/分钟（遗迹群+600/分钟的约3倍）影响巨大",
+      map_card1_li3: "基本：先守住己方，再尝试夺取敌方要塞",
+      map_card2_title: "通往神殿的连接建筑",
+      map_card2_li1: "示例：A29, B29, C29",
+      map_card2_li2: "连接两处中转枢纽，是通往神殿的关键通道",
+      map_card2_li3: "被敌方占领会导致终盘无法顺利进神殿",
+      map_note: "运营原则：必须同时做到20分钟守要塞 + 40分钟保住神殿通道（A29/B29/C29）。",
+
+      setup_title: "报名与准备",
+      setup_h3_1: "1) 报名",
+      setup_li1: "只报名能到场的人（挂名会拖累匹配与实战）",
+      setup_li2: "建议R4以上到场：可任命队长 → 更快能量恢复",
+      setup_h3_2: "2) 语音（Discord）",
+      setup_li3: "建议开Discord语音（至少1–3名指挥）",
+      setup_li4: "实时指挥远比打字快",
+
+      teams_title: "队伍编成建议",
+      teams_p1: "目标是同时做到“占领/持有拿分”和“关键目标防守”。",
+      teams_card1_title: "进攻队",
+      teams_card1_li1: "推进敌区→夺点→20分钟打要塞→40分钟冲神殿",
+      teams_card1_li2: "优先配置最强部队",
+      teams_card2_title: "防守队（1/2）",
+      teams_card2_li1: "防守关键路线/中转枢纽",
+      teams_card2_li2: "尤其20分钟后要塞必须守住",
+      teams_card3_title: "机动队",
+      teams_card3_li1: "负责支援与增援，视情况支援攻防",
+      teams_card3_li2: "节省能量，随时应对突发",
+      teams_card4_title: "部队/英雄",
+      teams_card4_li1: "每位领主3支部队（共9名英雄）",
+      teams_card4_li2: "最强一队留给要塞/神殿时机也很有效",
+
+      strategy_title: "分阶段策略",
+      strategy_h3_1: "阶段1–2（0–20分钟）：准备+扩张",
+      strategy_1_li1: "开局先占己方建筑并拿下中转枢纽",
+      strategy_1_li2: "进攻队夺取少量敌方小建筑拿分和路线优势",
+      strategy_1_li3: "前期目标：拿到分钟得分（PPM）优势",
+      strategy_1_li4: "别把能量花光：为20分钟保留30–40%",
+      strategy_h3_2: "阶段3（20–40分钟）：要塞",
+      strategy_2_li1: "20分钟A24/B24/C24开放",
+      strategy_2_li2: "优先①：守住己方要塞（丢了就可能被快速反超）",
+      strategy_2_li3: "优先②：有机会就抢敌方要塞",
+      strategy_2_li4: "机动队随时补到吃紧点",
+      strategy_h3_3: "阶段4（40–60分钟）：神殿",
+      strategy_3_li1: "40分钟神殿开放，首占分（例：50,000）很高，冲点时机关键",
+      strategy_3_li2: "进攻：冲/守神殿；防守：保住通道（A29/B29/C29）",
+      strategy_3_li3: "机动：切增援（夺回连接点）+ 加固神殿",
+      strategy_note: "取胜公式：守住要塞 + 首占神殿 + 守住神殿 + 保住通道，四项同时做到胜率大增。",
+
+      tips_title: "实战技巧",
+      tips_h3_1: "能量管理",
+      tips_1_li1: "移动/占领/冲锋/撤退/立即复活都会耗能",
+      tips_1_li2: "占领后任命队长能量回得更快",
+      tips_h3_2: "回复与返场",
+      tips_2_li1: "伤得重就先撤回一格补好再上，往往比立刻复活更划算",
+      tips_2_li2: "回血/征兵尽量卡在战斗间隙做",
+      tips_2_li3: "离开战场会进入冷却（例：12分钟）后才能返场",
+      tips_h3_3: "额外建议",
+      tips_3_li1: "宠物/城市增益尽量留给关键服务器活动",
+      tips_3_li2: "防守位得分可能更低，可在后续轮次轮换角色",
+
+      faq_q1: "Q. 为什么各阵营的遗迹群数量不同？",
+      faq_a1: "地图平衡通常不追求“数量完全相同”，而是综合路线距离、中转枢纽可达性、要塞防守难度、神殿通道稳定性等因素。遗迹更多的一侧可能承担更高防守压力或连接点管理难度。实战胜负多数取决于20分钟要塞与40分钟神殿的运营。",
+      faq_q2: "Q. 最重要的一点是什么？",
+      faq_a2: "能量。前期耗光能量，就无法在20/40分钟关键点发力。任命队长、明确分工、机动队运用来留能量，才是赢的关键。"
     },
 
     "zh-TW": {
       backText: "← Kingshot 指南",
       langLabel: "語言",
-      h1: "行動遊戲合理儲值指南",
-      signupText: "【LootBar 註冊連結】",
-      note1_after: " 點此註冊。",
-      note1_line2: "在搜尋欄輸入 #s4qU 可獲得額外優惠券。",
-      s1_title: "1. 單項儲值",
-      s1_p1: "選擇方案並點擊 Top-up Now。",
-      s2_title: "2. 多項儲值",
-      s2_p1: "使用購物車按鈕加入多個方案。",
-      s3_title: "3. 付款",
-      s3_p1: "選擇信用卡或 PayPal，然後點擊 Pay Now。",
-      s3_p2: "左側為自助儲值，右側為代儲。請選擇自助儲值。",
-      s4_title: "4. 登入",
-      s4_p1: "建議使用 Google 登入，更方便。",
-      s4_li1: "輸入信箱",
-      s4_li2: "輸入密碼",
-      s4_note: "※ 請先確認密碼正確。",
-      s5_title: "5. 購物車儲值",
-      s5_p1: "依購物車總金額進行儲值。",
-      s6_title: "6. 完成購買",
-      s6_p1: "確認購買後，點擊 Got it 結束。",
-      s6_done: "儲值完成！",
-      final_title: "最終完成",
-      final_p_strong: "所有流程已完成，請到遊戲內確認。",
-      simple_note_1: "自助儲值很簡單。",
-      simple_note_2: "本指南用於取代重複詢問。",
-      cumText: "【累積儲值連結】",
-      note_cum_after: " 建議加入書籤。",
-      note_cum_line2: "每月結算可額外獲得 $4.99–$99.99 方案。",
-      links_title: "行動遊戲優惠連結",
-      mobile_discount_link: "前往行動遊戲折扣頁面"
-    },
 
-    "ar": {
-      backText: "أدلة Kingshot ←",
-      langLabel: "اللغة",
-      h1: "دليل شحن معقول لألعاب الجوال",
-      signupText: "[رابط التسجيل في LootBar]",
-      note1_after: " سجّل عبر هذا الرابط.",
-      note1_line2: "أدخل #s4qU في مربع البحث للحصول على قسيمة إضافية.",
-      s1_title: "1) شحن عنصر واحد",
-      s1_p1: "اختر الباقة واضغط Top-up Now.",
-      s2_title: "2) شحن عدة عناصر",
-      s2_p1: "أضف عدة باقات إلى السلة عبر زر السلة.",
-      s3_title: "3) الدفع",
-      s3_p1: "اختر بطاقة أو PayPal ثم اضغط Pay Now.",
-      s3_p2: "الخيار الأيسر شحن ذاتي، والأيمن شحن عبر وكيل. اختر الشحن الذاتي.",
-      s4_title: "4) تسجيل الدخول",
-      s4_p1: "يوصى بتسجيل الدخول عبر Google لسهولة الاستخدام.",
-      s4_li1: "إدخال البريد الإلكتروني",
-      s4_li2: "إدخال كلمة المرور",
-      s4_note: "※ تأكد من كلمة المرور قبل المتابعة.",
-      s5_title: "5) شحن السلة",
-      s5_p1: "قم بالشحن بقيمة إجمالي السلة.",
-      s6_title: "6) اكتمال الشراء",
-      s6_p1: "أكد الشراء ثم اضغط Got it للإنهاء.",
-      s6_done: "تم الشحن!",
-      final_title: "الاكتـمال النهائي",
-      final_p_strong: "اكتملت جميع الخطوات. تحقق من حسابك داخل اللعبة.",
-      simple_note_1: "الشحن الذاتي سهل جدًا.",
-      simple_note_2: "هذا الدليل بديل عن الاستفسارات المتكررة.",
-      cumText: "[رابط الشحن التراكمي]",
-      note_cum_after: " احفظ هذا الرابط.",
-      note_cum_line2: "إجمالي الشهر يمنحك باقة إضافية بقيمة $4.99–$99.99.",
-      links_title: "رابط خصومات ألعاب الجوال",
-      mobile_discount_link: "الانتقال إلى خصومات ألعاب الجوال"
+      h1: "三聯盟爭奪戰 勝利指南",
+      subtitle: "三大聯盟透過佔領建築獲得積分。1小時戰鬥結束時，總積分最高的聯盟獲勝。",
+
+      meta_core_label: "核心",
+      meta_core_text: "能量管理 · 隊長 · 20分鐘要塞 · 40分鐘潮汐神殿",
+      meta_time_label: "時長",
+      meta_time_text: "1小時",
+      meta_day_label: "戰鬥日",
+      meta_day_text: "週六（所選時段）",
+
+      toc_title: "目錄",
+      toc_1: "規則速覽",
+      toc_2: "四個階段",
+      toc_3: "地圖與關鍵點",
+      toc_4: "報名與準備",
+      toc_5: "隊伍編成",
+      toc_6: "分階段策略",
+      toc_7: "實戰技巧",
+      toc_8: "常見問題",
+
+      map_caption: "關鍵目標一圖整理（中繼樞紐/要塞/神殿路線）。座標（A1/B1/C1、A24/B24/C24等）以遊戲內標註為準。",
+
+      summary_title: "規則速覽",
+      summary_card1_title: "參戰條件（摘要）",
+      summary_card1_li1: "聯盟戰力前20",
+      summary_card1_li2: "自動：第1隊解鎖",
+      summary_card1_li3: "第2隊解鎖示例：聯盟Lv.6+ 且累計活躍40人（可能不同）",
+      summary_card1_li4: "隊伍：參戰+候補≥15 時可單獨計算第2隊",
+      summary_card1_li5: "個人：加入聯盟且主城Lv.16+；5天以上未登入可能被限制",
+
+      summary_card2_title: "基礎規則（營運）",
+      summary_card2_li1: "投票/報名/配對/戰鬥依伺服器日程進行",
+      summary_card2_li2: "R4以上：可調整報名與參戰人數",
+      summary_card2_li3: "最多30人參戰+10名候補（可能不同）",
+      summary_card2_li4: "每個聯盟最多2支隊伍可同時在不同戰場進行",
+      summary_card2_li5: "每位領主可投入最多3支部隊",
+
+      summary_note: "要點：報名決定成敗。只報名真正能到場的人。",
+
+      stages_title: "四個戰鬥階段",
+      tbl_stage: "階段",
+      tbl_time: "時間",
+      tbl_goal: "目標",
+      tbl_r1_stage: "1) 準備",
+      tbl_r1_goal: "分配角色、確認路線、規劃開局佔領",
+      tbl_r2_stage: "2) 擴張佔領",
+      tbl_r2_goal: "先佔己方並奪取少量敵方小建築（要塞仍受保護）",
+      tbl_r3_stage: "3) 要塞爭奪",
+      tbl_r3_goal: "20分鐘A24/B24/C24開放。每分鐘高分是勝負關鍵",
+      tbl_r4_stage: "4) 神殿總攻",
+      tbl_r4_goal: "40分鐘潮汐神殿開放。首佔+佔領分決定最終勝負",
+      stages_note: "關鍵時間點：20分鐘（要塞）/40分鐘（神殿）。務必為這兩個時間點保留能量。",
+
+      map_title: "地圖與關鍵點",
+      map_p1: "地圖分為三個區域，各聯盟從總部（A1/B1/C1）出發。",
+      map_card1_title: "要塞 — 20分鐘開放",
+      map_card1_li1: "座標：A24, B24, C24",
+      map_card1_li2: "要塞+1800分/分鐘（遺跡群+600/分鐘的約3倍）影響巨大",
+      map_card1_li3: "基本：先守住己方，再嘗試奪取敵方要塞",
+      map_card2_title: "通往神殿的連結建築",
+      map_card2_li1: "示例：A29, B29, C29",
+      map_card2_li2: "連結兩處中繼樞紐，是通往神殿的關鍵通道",
+      map_card2_li3: "被敵方佔領會導致終盤無法順利進神殿",
+      map_note: "營運原則：必須同時做到20分鐘守要塞 + 40分鐘守住神殿通道（A29/B29/C29）。",
+
+      setup_title: "報名與準備",
+      setup_h3_1: "1) 報名",
+      setup_li1: "只報名能到場的人（掛名會拖累配對與實戰）",
+      setup_li2: "建議R4以上到場：可任命隊長 → 更快能量恢復",
+      setup_h3_2: "2) 語音（Discord）",
+      setup_li3: "建議開Discord語音（至少1–3名指揮）",
+      setup_li4: "即時指揮遠比打字快",
+
+      teams_title: "隊伍編成建議",
+      teams_p1: "目標是同時做到「佔領/持有拿分」與「關鍵目標防守」。",
+      teams_card1_title: "進攻隊",
+      teams_card1_li1: "推進敵區→奪點→20分鐘打要塞→40分鐘衝神殿",
+      teams_card1_li2: "優先配置最強部隊",
+      teams_card2_title: "防守隊（1/2）",
+      teams_card2_li1: "防守關鍵路線/中繼樞紐",
+      teams_card2_li2: "尤其20分鐘後要塞必須守住",
+      teams_card3_title: "機動隊",
+      teams_card3_li1: "負責支援與增援，視情況支援攻防",
+      teams_card3_li2: "節省能量，隨時應對突發",
+      teams_card4_title: "部隊/英雄",
+      teams_card4_li1: "每位領主3支部隊（共9名英雄）",
+      teams_card4_li2: "最強一隊留給要塞/神殿時機也很有效",
+
+      strategy_title: "分階段策略",
+      strategy_h3_1: "階段1–2（0–20分鐘）：準備+擴張",
+      strategy_1_li1: "開局先佔己方建築並拿下中繼樞紐",
+      strategy_1_li2: "進攻隊奪取少量敵方小建築拿分和路線優勢",
+      strategy_1_li3: "前期目標：拿到每分鐘得分（PPM）優勢",
+      strategy_1_li4: "別把能量花光：為20分鐘保留30–40%",
+      strategy_h3_2: "階段3（20–40分鐘）：要塞",
+      strategy_2_li1: "20分鐘A24/B24/C24開放",
+      strategy_2_li2: "優先①：守住己方要塞（丟了就可能被快速反超）",
+      strategy_2_li3: "優先②：有機會就搶敵方要塞",
+      strategy_2_li4: "機動隊隨時補到吃緊點",
+      strategy_h3_3: "階段4（40–60分鐘）：神殿",
+      strategy_3_li1: "40分鐘神殿開放，首佔分（例：50,000）很高，衝點時機關鍵",
+      strategy_3_li2: "進攻：衝/守神殿；防守：保住通道（A29/B29/C29）",
+      strategy_3_li3: "機動：切增援（奪回連結點）+ 加固神殿",
+      strategy_note: "取勝公式：守住要塞 + 首佔神殿 + 守住神殿 + 保住通道，四項同時做到勝率大增。",
+
+      tips_title: "實戰技巧",
+      tips_h3_1: "能量管理",
+      tips_1_li1: "移動/佔領/衝鋒/撤退/立即復活都會耗能",
+      tips_1_li2: "佔領後任命隊長能量回得更快",
+      tips_h3_2: "回復與返場",
+      tips_2_li1: "傷得重就先撤回一格補好再上，往往比立刻復活更划算",
+      tips_2_li2: "回血/徵兵盡量卡在戰鬥間隙做",
+      tips_2_li3: "離開戰場會進入冷卻（例：12分鐘）後才能返場",
+      tips_h3_3: "額外建議",
+      tips_3_li1: "寵物/城市增益盡量留給關鍵伺服器活動",
+      tips_3_li2: "防守位得分可能更低，可在後續輪次輪換角色",
+
+      faq_q1: "Q. 為什麼各陣營的遺跡群數量不同？",
+      faq_a1: "地圖平衡通常不追求「數量完全相同」，而是綜合路線距離、中繼樞紐可達性、要塞防守難度、神殿通道穩定性等因素。遺跡更多的一側可能承擔更高防守壓力或連結點管理難度。實戰勝負多數取決於20分鐘要塞與40分鐘神殿的運營。",
+      faq_q2: "Q. 最重要的一點是什麼？",
+      faq_a2: "能量。前期耗光能量，就無法在20/40分鐘關鍵點發力。任命隊長、明確分工、機動隊運用來留能量，才是贏的關鍵。"
     }
   };
 
@@ -442,28 +1020,19 @@
     const dict = i18n[locale] || i18n.ko;
 
     document.documentElement.lang = locale;
-    document.documentElement.dir = (locale === "ar") ? "rtl" : "ltr";
+    document.documentElement.dir = "ltr";
     document.title = dict.h1 || document.title;
 
-    // 헤더
     const back = document.getElementById("backLink");
     if (back) back.textContent = dict.backText || "← Kingshot Guides";
 
     const label = document.getElementById("langLabel");
     if (label) label.textContent = dict.langLabel || "Language";
 
-    // 본문 텍스트 교체 (innerHTML 금지)
     document.querySelectorAll("[data-i18n]").forEach(el=>{
       const key = el.getAttribute("data-i18n");
       if (dict[key] !== undefined) el.textContent = dict[key];
     });
-
-    // 고정 링크 텍스트만 교체
-    const signup = document.getElementById("signupLink");
-    if (signup) signup.textContent = dict.signupText || "[Link]";
-
-    const cum = document.getElementById("cumLink");
-    if (cum) cum.textContent = dict.cumText || "[Link]";
   }
 
   const select = document.getElementById("langSwitcher");
@@ -474,7 +1043,7 @@
     browser.startsWith("ko") ? "ko" :
     browser.startsWith("ja") ? "ja" :
     browser.startsWith("zh") ? (browser.includes("tw") || browser.includes("hk") ? "zh-TW" : "zh-CN") :
-    browser.startsWith("ar") ? "ar" : "en"
+    "en"
   );
 
   applyLang(initial);

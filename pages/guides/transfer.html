@@ -1,0 +1,1025 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>왕국 이민 심화 가이드</title>
+
+  <style>
+    *{box-sizing:border-box}
+    :root{
+      --brand:#0b57d0;--text:#222;--muted:#555;
+      --surface:#fff;--bg:#fff;--border:#e6e6e6;--note-bg:#f9f9f9
+    }
+    @media(prefers-color-scheme:dark){
+      :root{
+        --text:#e8eaed;--muted:#c2c7d0;
+        --surface:#121212;--bg:#0b0b0b;
+        --border:#2a2a2a;--note-bg:#1a1a1a
+      }
+    }
+    html,body{
+      margin:0;background:var(--bg);color:var(--text);
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,
+        "Noto Sans KR","Noto Sans JP","Noto Sans SC","Noto Sans TC",
+        Arial,sans-serif;
+      line-height:1.65
+    }
+    a{color:var(--brand);font-weight:800;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* ===== Topbar (LEFT: back / RIGHT: language) ===== */
+    .topbar{
+      position:sticky;top:0;z-index:10;
+      background:var(--surface);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar-inner{
+      max-width:1000px;margin:0 auto;
+      padding:10px 16px;
+      display:flex;justify-content:space-between;align-items:center;
+      gap:12px;
+    }
+    .backlink{
+      font:800 14px/1 system-ui;
+      color:var(--brand);
+      white-space:nowrap;
+    }
+    .langbox{
+      display:flex;align-items:center;gap:10px;
+      white-space:nowrap;
+    }
+    .langbox label{font-size:14px;color:var(--muted)}
+    select{
+      padding:8px 10px;border-radius:10px;
+      border:1px solid var(--border);
+      background:var(--surface);color:var(--text)
+    }
+
+    /* ===== Content ===== */
+    .container{max-width:1000px;margin:0 auto;padding:16px}
+    h1{font-size:clamp(22px,3vw,36px);color:var(--brand);margin:14px 0 8px}
+    h2{font-size:clamp(18px,2.4vw,26px);color:var(--brand);margin-top:28px;margin-bottom:10px}
+    h3{font-size:clamp(16px,2vw,20px);margin:18px 0 8px}
+    .meta{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 18px;color:var(--muted);font-size:14px}
+    .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--border);border-radius:999px;background:var(--note-bg)}
+    .k{font-weight:900}
+    .toc{
+      border:1px solid var(--border);border-radius:10px;background:var(--note-bg);
+      padding:12px 14px;margin:16px 0
+    }
+    .toc strong{display:block;margin-bottom:6px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:12px;margin:12px 0
+    }
+    .card{border:1px solid var(--border);border-radius:10px;background:var(--surface);padding:12px 14px}
+    .card .title{font-weight:900;margin:0 0 6px}
+    table{width:100%;border-collapse:collapse;margin:10px 0}
+    th,td{border:1px solid var(--border);padding:10px;vertical-align:top}
+    th{background:var(--note-bg);text-align:left}
+    ul{padding-inline-start:18px;margin:8px 0}
+    li{margin:6px 0}
+  </style>
+</head>
+
+<body>
+  <!-- ✅ 표준 가이드 Topbar: 좌측(가이드로) / 우측(언어) -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a id="backLink" class="backlink" href="/guides" aria-label="Back to guides"></a>
+
+      <div class="langbox">
+        <label for="langSwitcher" id="langLabel">Language</label>
+        <select id="langSwitcher" aria-label="Language">
+          <option value="ko">한국어</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+          <option value="zh-CN">简体中文</option>
+          <option value="zh-TW">繁體中文</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 data-i18n="h1"></h1>
+
+    <div class="meta">
+      <span class="badge"><span class="k" data-i18n="meta_core_label"></span> <span data-i18n="meta_core_text"></span></span>
+      <span class="badge"><span class="k" data-i18n="meta_group_label"></span> <span data-i18n="meta_group_text"></span></span>
+      <span class="badge"><span class="k" data-i18n="meta_shop_label"></span> <span data-i18n="meta_shop_text"></span></span>
+    </div>
+
+    <div class="toc">
+      <strong data-i18n="toc_title"></strong>
+      <ul>
+        <li><a href="#facts" data-i18n="toc_0"></a></li>
+        <li><a href="#overview" data-i18n="toc_1"></a></li>
+        <li><a href="#eligibility" data-i18n="toc_2"></a></li>
+        <li><a href="#phases" data-i18n="toc_4"></a></li>
+        <li><a href="#invites" data-i18n="toc_5"></a></li>
+        <li><a href="#score" data-i18n="toc_3"></a></li>
+        <li><a href="#after" data-i18n="toc_8"></a></li>
+        <li><a href="#checklist" data-i18n="toc_9"></a></li>
+      </ul>
+    </div>
+
+    <!-- FACTS -->
+    <section id="facts">
+      <h2 data-i18n="facts_title"></h2>
+
+      <div class="grid">
+        <div class="card">
+          <p class="title" data-i18n="facts_cap_title"></p>
+          <ul>
+            <li data-i18n="facts_cap_li1"></li>
+            <li data-i18n="facts_cap_li2"></li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="title" data-i18n="facts_steps_title"></p>
+          <ul>
+            <li data-i18n="facts_steps_li1"></li>
+            <li data-i18n="facts_steps_li2"></li>
+            <li data-i18n="facts_steps_li3"></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="title" data-i18n="facts_conditions_title"></p>
+        <ol style="margin:8px 0 0 1.2em">
+          <li data-i18n="cond_1"></li>
+          <li data-i18n="cond_2"></li>
+          <li data-i18n="cond_3"></li>
+          <li data-i18n="cond_4"></li>
+          <li data-i18n="cond_5"></li>
+          <li data-i18n="cond_6"></li>
+          <li data-i18n="cond_7"></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Overview -->
+    <section id="overview">
+      <h2 data-i18n="overview_title"></h2>
+      <div class="grid">
+        <div class="card">
+          <p class="title" data-i18n="overview_card1_title"></p>
+          <ul>
+            <li data-i18n="overview_card1_li1"></li>
+            <li data-i18n="overview_card1_li2"></li>
+            <li data-i18n="overview_card1_li3"></li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="title" data-i18n="overview_card2_title"></p>
+          <ul>
+            <li data-i18n="overview_card2_li1"></li>
+            <li data-i18n="overview_card2_li2"></li>
+            <li data-i18n="overview_card2_li3"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Eligibility -->
+    <section id="eligibility">
+      <h2 data-i18n="elig_title"></h2>
+
+      <h3 data-i18n="elig_h3_1"></h3>
+      <ul>
+        <li data-i18n="elig_group_li1"></li>
+        <li data-i18n="elig_group_li2"></li>
+        <li data-i18n="elig_group_li3"></li>
+      </ul>
+
+      <h3 data-i18n="elig_h3_2"></h3>
+      <div class="grid">
+        <div class="card">
+          <p class="title" data-i18n="elig_card1_title"></p>
+          <ul>
+            <li data-i18n="elig_req_li1"></li>
+            <li data-i18n="elig_req_li2"></li>
+            <li data-i18n="elig_req_li3"></li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="title" data-i18n="elig_card2_title"></p>
+          <ul>
+            <li data-i18n="elig_req_li4"></li>
+            <li data-i18n="elig_req_li5"></li>
+            <li data-i18n="elig_req_li6"></li>
+            <li data-i18n="elig_req_li7"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phases -->
+    <section id="phases">
+      <h2 data-i18n="ph_title"></h2>
+
+      <table aria-label="Transfer phases">
+        <thead>
+          <tr>
+            <th data-i18n="ph_th_phase"></th>
+            <th data-i18n="ph_th_name"></th>
+            <th data-i18n="ph_th_desc"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td data-i18n="ph_1_name"></td>
+            <td>
+              <ul>
+                <li data-i18n="ph_1_li1"></li>
+                <li data-i18n="ph_1_li2"></li>
+                <li data-i18n="ph_1_li3"></li>
+                <li data-i18n="ph_1_li4"></li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td data-i18n="ph_2_name"></td>
+            <td>
+              <ul>
+                <li data-i18n="ph_2_li1"></li>
+                <li data-i18n="ph_2_li2"></li>
+                <li data-i18n="ph_2_li3"></li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td data-i18n="ph_3_name"></td>
+            <td>
+              <ul>
+                <li data-i18n="ph_3_li1"></li>
+                <li data-i18n="ph_3_li2"></li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Invites -->
+    <section id="invites">
+      <h2 data-i18n="inv_title"></h2>
+
+      <div class="grid">
+        <div class="card">
+          <p class="title" data-i18n="inv_card1_title"></p>
+          <ul>
+            <li data-i18n="inv_li1"></li>
+            <li data-i18n="inv_li2"></li>
+            <li data-i18n="inv_li3"></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <p class="title" data-i18n="inv_card2_title"></p>
+          <ul>
+            <li data-i18n="inv_li4"></li>
+            <li data-i18n="inv_li5"></li>
+            <li data-i18n="inv_li6"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Score -->
+    <section id="score">
+      <h2 data-i18n="score_title"></h2>
+
+      <div class="grid">
+        <div class="card">
+          <p class="title" data-i18n="score_card1_title"></p>
+          <ul>
+            <li data-i18n="score_li1"></li>
+            <li data-i18n="score_li2"></li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="title" data-i18n="score_card2_title"></p>
+          <ul>
+            <li data-i18n="score_li3"></li>
+            <li data-i18n="score_li4"></li>
+            <li data-i18n="score_li5"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- After transfer -->
+    <section id="after">
+      <h2 data-i18n="after_title"></h2>
+
+      <div class="grid">
+        <div class="card">
+          <p class="title" data-i18n="after_card1_title"></p>
+          <ul>
+            <li data-i18n="after_li1"></li>
+            <li data-i18n="after_li2"></li>
+            <li data-i18n="after_li3"></li>
+            <li data-i18n="after_li4"></li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="title" data-i18n="after_card2_title"></p>
+          <ul>
+            <li data-i18n="after_li5"></li>
+            <li data-i18n="after_li6"></li>
+            <li data-i18n="after_li7"></li>
+            <li data-i18n="after_li8"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Checklist -->
+    <section id="checklist">
+      <h2 data-i18n="chk_title"></h2>
+      <div class="card">
+        <ul>
+          <li data-i18n="chk_li1"></li>
+          <li data-i18n="chk_li2"></li>
+          <li data-i18n="chk_li3"></li>
+          <li data-i18n="chk_li4"></li>
+          <li data-i18n="chk_li5"></li>
+          <li data-i18n="chk_li6"></li>
+          <li data-i18n="chk_li7"></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+<script>
+(function(){
+  const i18n = {
+    "ko": {
+      backText:"← Kingshot Guides",
+      langLabel:"언어",
+      h1:"왕국 이민 심화 가이드",
+
+      meta_core_label:"핵심",
+      meta_core_text:"3단계(서막/초대/자유) · 이민 전투력 제한 · 초대장/특별초대 · 이민권 · 이민 후 초기화/정산",
+      meta_group_label:"이민 그룹",
+      meta_group_text:"같은 진행도(TG3·TG5·TG8 등)끼리 그룹이 나뉘며, 같은 그룹 안에서만 이민 가능",
+      meta_shop_label:"이민권",
+      meta_shop_text:"연맹 상점에 이민권(두루마리)이 등장하면 이민 진행",
+
+      toc_title:"목차",
+      toc_0:"핵심 요약",
+      toc_1:"이벤트 개요",
+      toc_2:"이민 조건",
+      toc_4:"이민 단계(3단계)",
+      toc_5:"초대 규칙",
+      toc_3:"이민 점수/전투력",
+      toc_8:"이민 후 처리",
+      toc_9:"이민 전 체크리스트",
+
+      facts_title:"핵심 요약",
+      facts_cap_title:"왕국 정원",
+      facts_cap_li1:"강성 왕국: 30인",
+      facts_cap_li2:"일반 왕국: 55인",
+      facts_steps_title:"이민 단계",
+      facts_steps_li1:"1단계: 이민의 서막",
+      facts_steps_li2:"2단계: 이민 초대",
+      facts_steps_li3:"3단계: 자유 이민",
+      facts_conditions_title:"이민 조건(7개)",
+      cond_1:"이민 전투력 제한 초과 불가(필요 시 병력으로 조절)",
+      cond_2:"도시 센터 레벨 조건 충족",
+      cond_3:"도시 전투 상태 아님 + 외부 충격 부대 없음",
+      cond_4:"연맹 미가입 상태",
+      cond_5:"이민 관리자/국왕 아님",
+      cond_6:"지난 이민 이후 최소 25일 경과",
+      cond_7:"목표 왕국 보유 캐릭터 4개 미만",
+
+      overview_title:"이벤트 개요",
+      overview_card1_title:"이민이란?",
+      overview_card1_li1:"같은 이민 그룹 내 다른 왕국으로 도시를 이동",
+      overview_card1_li2:"이민 그룹은 같은 진행도(TG 단계) 기준으로 묶임",
+      overview_card1_li3:"같은 그룹 안에서만 이동 가능",
+      overview_card2_title:"이민권이란?",
+      overview_card2_li1:"이민에 필요한 소모 아이템(두루마리)",
+      overview_card2_li2:"필요 수량은 개인 이민 점수/전투력에 따라 달라질 수 있음",
+      overview_card2_li3:"연맹 상점에서 확인 가능",
+
+      elig_title:"이민 조건",
+      elig_h3_1:"1) 그룹/왕국",
+      elig_group_li1:"같은 TG 진행도 그룹 안에서만 이동 가능",
+      elig_group_li2:"세대 영웅/시대 진행(순금 등) 조건이 양쪽 왕국에서 일치해야 함",
+      elig_group_li3:"강성/일반 왕국으로 나뉘며 정원(30/55)이 다름",
+      elig_h3_2:"2) 개인",
+      elig_card1_title:"전투력/상태",
+      elig_req_li1:"이민 전투력 제한(캡) 초과 불가",
+      elig_req_li2:"도시 센터 레벨 조건 충족",
+      elig_req_li3:"전투 상태 아님 + 외부 충격 부대 없음",
+      elig_card2_title:"소속/쿨타임/캐릭터",
+      elig_req_li4:"연맹 미가입 상태여야 함",
+      elig_req_li5:"이민 관리자/국왕이면 불가",
+      elig_req_li6:"지난 이민 이후 최소 25일 경과",
+      elig_req_li7:"목표 왕국 보유 캐릭터 4개 미만",
+
+      ph_title:"이민 단계(3단계)",
+      ph_th_phase:"단계",
+      ph_th_name:"단계명",
+      ph_th_desc:"내용",
+      ph_1_name:"1단계: 이민의 서막",
+      ph_1_li1:"이민 관리자가 이민 전투력 제한 설정",
+      ph_1_li2:"전투력 산정: 영주 + 병원 부상병 + 징병소 예비병",
+      ph_1_li3:"이민 관리자는 국왕과 연동됨",
+      ph_1_li4:"국왕이 없다면 최근 국왕이 이민 관리자",
+      ph_2_name:"2단계: 이민 초대",
+      ph_2_li1:"일반 초대: 캡 이하만 가능",
+      ph_2_li2:"특별 초대: 캡 초과도 가능(최대 50장 소모)",
+      ph_2_li3:"특별 초대: 왕국당 기본 3회, 매달 1일 1회 회복(최대 3회)",
+      ph_3_name:"3단계: 자유 이민",
+      ph_3_li1:"캡 이하 조건 충족 시 자유롭게 이민",
+      ph_3_li2:"강성 왕국은 특별 초대 불가",
+
+      inv_title:"초대 규칙",
+      inv_card1_title:"초대장",
+      inv_li1:"초대는 초대장 보유 수량만큼만 발송 가능(사용 시 소모)",
+      inv_li2:"초대가 있어도 이민권이 부족하면 이민 불가",
+      inv_li3:"초대장은 발송 제한, 이민권은 이민 비용",
+      inv_card2_title:"특별 초대",
+      inv_li4:"일반 초대: 캡 이하 / 특별 초대: 캡 초과",
+      inv_li5:"특별 초대: 기본 3회 + 월 1회 회복(최대 3회)",
+      inv_li6:"강성 왕국: 특별 초대 불가",
+
+      score_title:"이민 점수/전투력",
+      score_card1_title:"왕국 이민 평점",
+      score_li1:"왕국 평점은 활동 영주 상위 100위 합산 기준",
+      score_li2:"평점으로 강성/일반 분류 가능",
+      score_card2_title:"개인 이민 전투력",
+      score_li3:"도시 센터 + 영주 장비/보석 + 영웅 + 영웅 장비 + 펫 전투력",
+      score_li4:"캡 판정은 병원 부상병/징병소 예비병 포함",
+      score_li5:"캡 조절은 장비/보석/영웅 세팅 + 부상/예비 정리",
+
+      after_title:"이민 후 처리",
+      after_card1_title:"즉시 적용",
+      after_li1:"도시 랜덤 이동 + 24시간 보호막",
+      after_li2:"그룹 채팅 자동 탈퇴",
+      after_li3:"창고 보호 한도 초과 자원은 폐기될 수 있음",
+      after_li4:"경기장 포인트 1,000으로 초기화 + 랭킹 초기화",
+      after_card2_title:"정산/리셋",
+      after_li5:"일부 이벤트는 정산 후 보상 우편 지급",
+      after_li6:"패키지 구매 제한이 리셋되어 재구매 가능",
+      after_li7:"일부 이벤트는 양쪽 왕국 진행 상황에 따라 유지/종료",
+      after_li8:"세부는 이벤트 규칙/FAQ 기준",
+
+      chk_title:"이민 전 체크리스트",
+      chk_li1:"내 TG 진행도 그룹 확인",
+      chk_li2:"목표 왕국이 같은 그룹인지 확인",
+      chk_li3:"캡 충족(부상병/예비병 포함)",
+      chk_li4:"도시 센터 레벨 조건 충족",
+      chk_li5:"전투 상태 해제 + 외부 충격 부대 없음",
+      chk_li6:"연맹 탈퇴 + 국왕/이민 관리자 아님 + 25일 경과",
+      chk_li7:"목표 왕국 캐릭터 4 미만 + 이민권 수량 확보"
+    },
+
+    "en": {
+      backText:"← Kingshot Guides",
+      langLabel:"Language",
+      h1:"Kingdom Transfer Guide",
+
+      meta_core_label:"Core",
+      meta_core_text:"3 phases · Power Cap · Invites · Transfer Pass · Resets/Settlements",
+      meta_group_label:"Groups",
+      meta_group_text:"Transfers are only within the same progress group (TG3/TG5/TG8 tiers).",
+      meta_shop_label:"Pass",
+      meta_shop_text:"Transfer Pass appears in Alliance Shop.",
+
+      toc_title:"Contents",
+      toc_0:"Summary",
+      toc_1:"Overview",
+      toc_2:"Requirements",
+      toc_4:"3 Phases",
+      toc_5:"Invites",
+      toc_3:"Score/Power",
+      toc_8:"After Transfer",
+      toc_9:"Checklist",
+
+      facts_title:"Summary",
+      facts_cap_title:"Capacity",
+      facts_cap_li1:"Leading: 30",
+      facts_cap_li2:"Ordinary: 55",
+      facts_steps_title:"Phases",
+      facts_steps_li1:"Phase 1: Pre-Transfer",
+      facts_steps_li2:"Phase 2: Invitational",
+      facts_steps_li3:"Phase 3: Open",
+      facts_conditions_title:"7 Requirements",
+      cond_1:"Do not exceed the cap (adjust troops if needed)",
+      cond_2:"Meet Town Center level",
+      cond_3:"Not in combat + no external impact",
+      cond_4:"Not in an alliance",
+      cond_5:"Not King/Manager",
+      cond_6:"25 days since last transfer",
+      cond_7:"Fewer than 4 characters in target kingdom",
+
+      overview_title:"Overview",
+      overview_card1_title:"What it is",
+      overview_card1_li1:"Move your city within the same transfer group",
+      overview_card1_li2:"Groups are based on progress tiers (TG3/TG5/TG8)",
+      overview_card1_li3:"Only within the same group",
+      overview_card2_title:"Transfer Pass",
+      overview_card2_li1:"Consumable item required to transfer",
+      overview_card2_li2:"Required amount may vary by your score/power",
+      overview_card2_li3:"Found in the Alliance Shop",
+
+      elig_title:"Requirements",
+      elig_h3_1:"1) Group/Kingdom",
+      elig_group_li1:"Only within the same TG progress group",
+      elig_group_li2:"Era/generation must match in both kingdoms",
+      elig_group_li3:"Capacity differs (30/55)",
+      elig_h3_2:"2) Governor",
+      elig_card1_title:"Power/State",
+      elig_req_li1:"Must meet the cap",
+      elig_req_li2:"Town Center requirement",
+      elig_req_li3:"Not in combat + no external impact",
+      elig_card2_title:"Membership/Cooldown",
+      elig_req_li4:"Not in an alliance",
+      elig_req_li5:"Not King/Manager",
+      elig_req_li6:"25-day cooldown",
+      elig_req_li7:"<4 characters in target kingdom",
+
+      ph_title:"3 Phases",
+      ph_th_phase:"Phase",
+      ph_th_name:"Name",
+      ph_th_desc:"Details",
+      ph_1_name:"Pre-Transfer",
+      ph_1_li1:"Manager sets the cap",
+      ph_1_li2:"Power includes governor + injured + reserves",
+      ph_1_li3:"Manager is linked to King role",
+      ph_1_li4:"If no King, recent King becomes manager",
+      ph_2_name:"Invitational",
+      ph_2_li1:"Normal invite: within cap",
+      ph_2_li2:"Special invite: above cap (up to 50)",
+      ph_2_li3:"Special: 3 uses, +1 monthly (max 3)",
+      ph_3_name:"Open",
+      ph_3_li1:"Open transfer if you meet the cap",
+      ph_3_li2:"No special invites in Leading",
+
+      inv_title:"Invites",
+      inv_card1_title:"Invite Tickets",
+      inv_li1:"Invites are limited by the number of invite tickets you own",
+      inv_li2:"Invite does not replace pass cost",
+      inv_li3:"Invite ticket = sending limit, Pass = transfer cost",
+      inv_card2_title:"Special Invite",
+      inv_li4:"Normal: within cap / Special: above cap",
+      inv_li5:"3 uses + monthly recharge (max 3)",
+      inv_li6:"Leading: no special invite",
+
+      score_title:"Score/Power",
+      score_card1_title:"Kingdom score",
+      score_li1:"Kingdom score uses top active 100 sum",
+      score_li2:"Score can classify Leading/Ordinary",
+      score_card2_title:"Your transfer power",
+      score_li3:"Town Center + gear/gems + heroes + hero gear + pets",
+      score_li4:"Cap check includes injured/reserves",
+      score_li5:"Adjust setup + manage injured/reserves to meet cap",
+
+      after_title:"After Transfer",
+      after_card1_title:"Immediate",
+      after_li1:"Random relocation + 24h shield",
+      after_li2:"Leave group chats automatically",
+      after_li3:"Resources above protection may be discarded",
+      after_li4:"Arena resets to 1,000",
+      after_card2_title:"Settlement/Reset",
+      after_li5:"Some events settle and mail rewards",
+      after_li6:"Pack limits can reset",
+      after_li7:"Some progress depends on both kingdoms’ event status",
+      after_li8:"Final details follow in-game rules",
+
+      chk_title:"Checklist",
+      chk_li1:"Confirm your TG group",
+      chk_li2:"Target kingdom is in the same group",
+      chk_li3:"Meet the cap (incl. injured/reserves)",
+      chk_li4:"Meet Town Center requirement",
+      chk_li5:"No combat/external impact",
+      chk_li6:"Leave alliance + not King/Manager + 25 days",
+      chk_li7:"<4 characters + enough passes"
+    },
+
+    "ja": {
+      backText:"← Kingshot ガイド",
+      langLabel:"言語",
+      h1:"王国移民ガイド",
+
+      meta_core_label:"要点",
+      meta_core_text:"3段階 · 戦力制限 · 招待 · 移民券 · 初期化/精算",
+      meta_group_label:"グループ",
+      meta_group_text:"同じ進行度（TG3/TG5/TG8）グループ内のみ移民可能。",
+      meta_shop_label:"移民券",
+      meta_shop_text:"同盟ショップに移民券が出現。",
+
+      toc_title:"目次",
+      toc_0:"要約",
+      toc_1:"概要",
+      toc_2:"条件",
+      toc_4:"3段階",
+      toc_5:"招待",
+      toc_3:"スコア/戦力",
+      toc_8:"移民後",
+      toc_9:"チェック",
+
+      facts_title:"要約",
+      facts_cap_title:"定員",
+      facts_cap_li1:"強国：30",
+      facts_cap_li2:"通常：55",
+      facts_steps_title:"段階",
+      facts_steps_li1:"1：事前",
+      facts_steps_li2:"2：招待",
+      facts_steps_li3:"3：自由移民",
+      facts_conditions_title:"条件（7つ）",
+      cond_1:"戦力制限を超えない（必要なら兵で調整）",
+      cond_2:"都市センターレベル条件",
+      cond_3:"戦闘/外部影響なし",
+      cond_4:"同盟未加入",
+      cond_5:"国王/管理者でない",
+      cond_6:"前回移民から25日以上",
+      cond_7:"移民先キャラ<4",
+
+      overview_title:"概要",
+      overview_card1_title:"概要",
+      overview_card1_li1:"同じグループ内で王国移動",
+      overview_card1_li2:"グループはTG進行度で分かれる",
+      overview_card1_li3:"同じグループ内のみ",
+      overview_card2_title:"移民券",
+      overview_card2_li1:"移民に必要な消耗品",
+      overview_card2_li2:"必要数はスコアで変動しうる",
+      overview_card2_li3:"同盟ショップで確認",
+
+      elig_title:"条件",
+      elig_h3_1:"1) グループ/王国",
+      elig_group_li1:"同じTGグループ内のみ",
+      elig_group_li2:"時代/解放条件が一致",
+      elig_group_li3:"定員30/55",
+      elig_h3_2:"2) 個人",
+      elig_card1_title:"戦力/状態",
+      elig_req_li1:"戦力制限を満たす",
+      elig_req_li2:"都市センター条件",
+      elig_req_li3:"戦闘/外部影響なし",
+      elig_card2_title:"所属/クール",
+      elig_req_li4:"同盟未加入",
+      elig_req_li5:"国王/管理者でない",
+      elig_req_li6:"25日クール",
+      elig_req_li7:"移民先キャラ<4",
+
+      ph_title:"3段階",
+      ph_th_phase:"段階",
+      ph_th_name:"名称",
+      ph_th_desc:"内容",
+      ph_1_name:"1：事前",
+      ph_1_li1:"管理者が戦力制限を設定",
+      ph_1_li2:"戦力＝領主＋病院＋予備（表）",
+      ph_1_li3:"管理者は国王と連動",
+      ph_1_li4:"国王不在なら直近国王",
+      ph_2_name:"2：招待",
+      ph_2_li1:"通常：制限内",
+      ph_2_li2:"特別：制限超過（最大50）",
+      ph_2_li3:"特別：3回＋月回復（最大3）",
+      ph_3_name:"3：自由移民",
+      ph_3_li1:"制限内なら自由移民",
+      ph_3_li2:"強国は特別不可",
+
+      inv_title:"招待",
+      inv_card1_title:"招待状",
+      inv_li1:"招待は招待状の所持数分だけ送れる（消耗）",
+      inv_li2:"招待は費用免除ではない",
+      inv_li3:"招待状＝送信制限、移民券＝費用",
+      inv_card2_title:"特別招待",
+      inv_li4:"通常：制限内 / 特別：制限外",
+      inv_li5:"3回＋月回復（最大3）",
+      inv_li6:"強国は特別不可",
+
+      score_title:"スコア/戦力",
+      score_card1_title:"王国",
+      score_li1:"上位100の合計など",
+      score_li2:"分類に影響",
+      score_card2_title:"個人",
+      score_li3:"都市センター＋装備/宝石＋英雄＋ペット",
+      score_li4:"制限判定に病院/予備も含む",
+      score_li5:"装備解除＋病院/予備整理",
+
+      after_title:"移民後",
+      after_card1_title:"直後",
+      after_li1:"ランダム移動＋24hシールド",
+      after_li2:"チャット自動脱退",
+      after_li3:"保護超過資源は破棄の可能性",
+      after_li4:"アリーナ1000に初期化",
+      after_card2_title:"精算",
+      after_li5:"一部イベントは精算して郵送",
+      after_li6:"購入制限リセットの可能性",
+      after_li7:"進行度は状況次第",
+      after_li8:"最終はゲーム内ルール",
+
+      chk_title:"チェック",
+      chk_li1:"TGグループ確認",
+      chk_li2:"同グループか確認",
+      chk_li3:"制限（病院/予備含む）を満たす",
+      chk_li4:"都市センター条件",
+      chk_li5:"非戦闘/外部影響なし",
+      chk_li6:"同盟脱退＋国王/管理者でない＋25日",
+      chk_li7:"キャラ<4＋移民券確保"
+    },
+
+    "zh-CN": {
+      backText:"← Kingshot 指南",
+      langLabel:"语言",
+      h1:"王国转移指南",
+
+      meta_core_label:"核心",
+      meta_core_text:"三阶段 · 战力上限 · 邀请 · 通行证 · 重置/结算",
+      meta_group_label:"分组",
+      meta_group_text:"仅限同一进度分组（TG3/TG5/TG8）。",
+      meta_shop_label:"通行证",
+      meta_shop_text:"联盟商店出现通行证。",
+
+      toc_title:"目录",
+      toc_0:"摘要",
+      toc_1:"概览",
+      toc_2:"条件",
+      toc_4:"三阶段",
+      toc_5:"邀请",
+      toc_3:"评分/战力",
+      toc_8:"转移后",
+      toc_9:"清单",
+
+      facts_title:"摘要",
+      facts_cap_title:"名额",
+      facts_cap_li1:"强势：30",
+      facts_cap_li2:"普通：55",
+      facts_steps_title:"阶段",
+      facts_steps_li1:"阶段1：预转移",
+      facts_steps_li2:"阶段2：邀请",
+      facts_steps_li3:"阶段3：开放",
+      facts_conditions_title:"7项条件",
+      cond_1:"不超过上限（必要时调兵）",
+      cond_2:"满足主城等级",
+      cond_3:"非战斗/无外部影响",
+      cond_4:"不在联盟",
+      cond_5:"不是国王/管理员",
+      cond_6:"25天冷却",
+      cond_7:"目标王国角色<4",
+
+      overview_title:"概览",
+      overview_card1_title:"活动内容",
+      overview_card1_li1:"同分组内转移王国",
+      overview_card1_li2:"分组按TG进度划分",
+      overview_card1_li3:"仅限同分组",
+      overview_card2_title:"通行证",
+      overview_card2_li1:"转移所需消耗品",
+      overview_card2_li2:"所需数量可能因个人评分变化",
+      overview_card2_li3:"联盟商店可查看",
+
+      elig_title:"条件",
+      elig_h3_1:"1) 分组/王国",
+      elig_group_li1:"仅限同TG分组",
+      elig_group_li2:"时代/解锁条件需一致",
+      elig_group_li3:"名额30/55",
+      elig_h3_2:"2) 个人",
+      elig_card1_title:"战力/状态",
+      elig_req_li1:"满足上限",
+      elig_req_li2:"主城等级",
+      elig_req_li3:"非战斗/无外部影响",
+      elig_card2_title:"联盟/冷却",
+      elig_req_li4:"不在联盟",
+      elig_req_li5:"不是国王/管理员",
+      elig_req_li6:"25天冷却",
+      elig_req_li7:"角色<4",
+
+      ph_title:"三阶段",
+      ph_th_phase:"阶段",
+      ph_th_name:"名称",
+      ph_th_desc:"内容",
+      ph_1_name:"阶段1：预转移",
+      ph_1_li1:"管理员设置上限",
+      ph_1_li2:"战力含领主+伤兵+预备",
+      ph_1_li3:"管理员与国王关联",
+      ph_1_li4:"无国王则最近国王担任",
+      ph_2_name:"阶段2：邀请",
+      ph_2_li1:"普通：上限内",
+      ph_2_li2:"特殊：上限外（最多50）",
+      ph_2_li3:"特殊：3次＋月恢复（最多3）",
+      ph_3_name:"阶段3：开放",
+      ph_3_li1:"满足上限即可转移",
+      ph_3_li2:"强势无特殊邀请",
+
+      inv_title:"邀请",
+      inv_card1_title:"邀请券",
+      inv_li1:"邀请数量受邀请券数量限制（消耗）",
+      inv_li2:"邀请不免通行证费用",
+      inv_li3:"邀请券=发送限制，通行证=费用",
+      inv_card2_title:"特殊邀请",
+      inv_li4:"普通：上限内 / 特殊：上限外",
+      inv_li5:"3次＋月恢复（最多3）",
+      inv_li6:"强势无特殊邀请",
+
+      score_title:"评分/战力",
+      score_card1_title:"王国",
+      score_li1:"上位100合计等",
+      score_li2:"影响分类",
+      score_card2_title:"个人",
+      score_li3:"主城+装备/宝石+英雄+宠物",
+      score_li4:"上限判定含伤兵/预备",
+      score_li5:"卸装＋整理伤兵/预备",
+
+      after_title:"转移后",
+      after_card1_title:"立即",
+      after_li1:"随机迁城+24h护盾",
+      after_li2:"自动退出群聊",
+      after_li3:"超出保护资源可能丢弃",
+      after_li4:"竞技场重置1000",
+      after_card2_title:"结算",
+      after_li5:"部分活动结算并邮件补发",
+      after_li6:"购买限制可能重置",
+      after_li7:"进度视情况而定",
+      after_li8:"以游戏内规则为准",
+
+      chk_title:"清单",
+      chk_li1:"确认TG分组",
+      chk_li2:"目标在同分组",
+      chk_li3:"满足上限（含伤兵/预备）",
+      chk_li4:"主城等级",
+      chk_li5:"非战斗/无外部影响",
+      chk_li6:"退盟+非国王/管理员+25天",
+      chk_li7:"角色<4+通行证足够"
+    },
+
+    "zh-TW": {
+      backText:"← Kingshot 指南",
+      langLabel:"語言",
+      h1:"王國轉移指南",
+
+      meta_core_label:"核心",
+      meta_core_text:"三階段 · 戰力上限 · 邀請 · 通行證 · 重置/結算",
+      meta_group_label:"分組",
+      meta_group_text:"僅限同一進度分組（TG3/TG5/TG8）。",
+      meta_shop_label:"通行證",
+      meta_shop_text:"聯盟商店出現通行證。",
+
+      toc_title:"目錄",
+      toc_0:"摘要",
+      toc_1:"概覽",
+      toc_2:"條件",
+      toc_4:"三階段",
+      toc_5:"邀請",
+      toc_3:"評分/戰力",
+      toc_8:"轉移後",
+      toc_9:"清單",
+
+      facts_title:"摘要",
+      facts_cap_title:"名額",
+      facts_cap_li1:"強勢：30",
+      facts_cap_li2:"普通：55",
+      facts_steps_title:"階段",
+      facts_steps_li1:"階段1：預轉移",
+      facts_steps_li2:"階段2：邀請",
+      facts_steps_li3:"階段3：開放",
+      facts_conditions_title:"7項條件",
+      cond_1:"不超過上限（必要時調兵）",
+      cond_2:"滿足主城等級",
+      cond_3:"非戰鬥/無外部影響",
+      cond_4:"不在聯盟",
+      cond_5:"不是國王/管理者",
+      cond_6:"25天冷卻",
+      cond_7:"目標王國角色<4",
+
+      overview_title:"概覽",
+      overview_card1_title:"活動內容",
+      overview_card1_li1:"同分組內轉移王國",
+      overview_card1_li2:"分組按TG進度劃分",
+      overview_card1_li3:"僅限同分組",
+      overview_card2_title:"通行證",
+      overview_card2_li1:"轉移所需消耗品",
+      overview_card2_li2:"所需數量可能因個人評分變化",
+      overview_card2_li3:"聯盟商店可查看",
+
+      elig_title:"條件",
+      elig_h3_1:"1) 分組/王國",
+      elig_group_li1:"僅限同TG分組",
+      elig_group_li2:"時代/解鎖條件需一致",
+      elig_group_li3:"名額30/55",
+      elig_h3_2:"2) 個人",
+      elig_card1_title:"戰力/狀態",
+      elig_req_li1:"滿足上限",
+      elig_req_li2:"主城等級",
+      elig_req_li3:"非戰鬥/無外部影響",
+      elig_card2_title:"聯盟/冷卻",
+      elig_req_li4:"不在聯盟",
+      elig_req_li5:"不是國王/管理者",
+      elig_req_li6:"25天冷卻",
+      elig_req_li7:"角色<4",
+
+      ph_title:"三階段",
+      ph_th_phase:"階段",
+      ph_th_name:"名稱",
+      ph_th_desc:"內容",
+      ph_1_name:"階段1：預轉移",
+      ph_1_li1:"管理者設定上限",
+      ph_1_li2:"戰力含領主+傷兵+預備",
+      ph_1_li3:"管理者與國王關聯",
+      ph_1_li4:"無國王則最近國王擔任",
+      ph_2_name:"階段2：邀請",
+      ph_2_li1:"普通：上限內",
+      ph_2_li2:"特殊：上限外（最多50）",
+      ph_2_li3:"特殊：3次＋月恢復（最多3）",
+      ph_3_name:"階段3：開放",
+      ph_3_li1:"滿足上限即可轉移",
+      ph_3_li2:"強勢無特殊邀請",
+
+      inv_title:"邀請",
+      inv_card1_title:"邀請券",
+      inv_li1:"邀請數量受邀請券數量限制（消耗）",
+      inv_li2:"邀請不免通行證費用",
+      inv_li3:"邀請券=發送限制，通行證=費用",
+      inv_card2_title:"特殊邀請",
+      inv_li4:"普通：上限內 / 特殊：上限外",
+      inv_li5:"3次＋月恢復（最多3）",
+      inv_li6:"強勢無特殊邀請",
+
+      score_title:"評分/戰力",
+      score_card1_title:"王國",
+      score_li1:"上位100合計等",
+      score_li2:"影響分類",
+      score_card2_title:"個人",
+      score_li3:"主城+裝備/寶石+英雄+寵物",
+      score_li4:"上限判定含傷兵/預備",
+      score_li5:"卸裝＋整理傷兵/預備",
+
+      after_title:"轉移後",
+      after_card1_title:"立即",
+      after_li1:"隨機遷城+24h護盾",
+      after_li2:"自動退出群聊",
+      after_li3:"超出保護資源可能丟棄",
+      after_li4:"競技場重置1000",
+      after_card2_title:"結算",
+      after_li5:"部分活動結算並郵件補發",
+      after_li6:"購買限制可能重置",
+      after_li7:"進度視情況而定",
+      after_li8:"以遊戲內規則為準",
+
+      chk_title:"清單",
+      chk_li1:"確認TG分組",
+      chk_li2:"目標在同分組",
+      chk_li3:"滿足上限（含傷兵/預備）",
+      chk_li4:"主城等級",
+      chk_li5:"非戰鬥/無外部影響",
+      chk_li6:"退盟+非國王/管理者+25天",
+      chk_li7:"角色<4+通行證足夠"
+    }
+  };
+
+  function applyLang(locale){
+    const dict = i18n[locale] || i18n.ko;
+    document.documentElement.lang = locale;
+    document.documentElement.dir = "ltr";
+    document.title = dict.h1 || document.title;
+
+    const back = document.getElementById("backLink");
+    if (back) back.textContent = dict.backText || "← Kingshot Guides";
+
+    const label = document.getElementById("langLabel");
+    if (label) label.textContent = dict.langLabel || "Language";
+
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const key = el.getAttribute("data-i18n");
+      if (dict[key] !== undefined) el.textContent = dict[key];
+    });
+  }
+
+  const select = document.getElementById("langSwitcher");
+  const saved = localStorage.getItem("lang");
+  const browser = (navigator.language || "").toLowerCase();
+
+  const initial = saved || (
+    browser.startsWith("ko") ? "ko" :
+    browser.startsWith("ja") ? "ja" :
+    browser.startsWith("zh") ? (browser.includes("tw") || browser.includes("hk") ? "zh-TW" : "zh-CN") :
+    "en"
+  );
+
+  applyLang(initial);
+
+  if (select){
+    select.value = initial;
+    select.addEventListener("change", e=>{
+      const lang = e.target.value;
+      localStorage.setItem("lang", lang);
+      applyLang(lang);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

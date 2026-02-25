@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>바이킹의 약탈(Viking Vengeance) 최적 공략</title>
+
+  <style>
+    *{box-sizing:border-box}
+    :root{
+      --brand:#0b57d0;--text:#222;--muted:#555;
+      --surface:#fff;--bg:#fff;--border:#e6e6e6;--note-bg:#f9f9f9
+    }
+    @media(prefers-color-scheme:dark){
+      :root{
+        --text:#e8eaed;--muted:#c2c7d0;
+        --surface:#121212;--bg:#0b0b0b;
+        --border:#2a2a2a;--note-bg:#1a1a1a
+      }
+    }
+    html,body{
+      margin:0;background:var(--bg);color:var(--text);
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,
+        "Noto Sans KR","Noto Sans JP","Noto Sans SC","Noto Sans TC",
+        Arial,sans-serif;
+      line-height:1.65
+    }
+    a{color:var(--brand);font-weight:700;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* ===== Topbar (LEFT: back / RIGHT: language) ===== */
+    .topbar{
+      position:sticky;top:0;z-index:10;
+      background:var(--surface);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar-inner{
+      max-width:1000px;margin:0 auto;
+      padding:10px 16px;
+      display:flex;justify-content:space-between;align-items:center;
+      gap:12px;
+    }
+    .backlink{
+      font:700 14px/1 system-ui;
+      color:var(--brand);
+      white-space:nowrap;
+    }
+    .langbox{
+      display:flex;align-items:center;gap:10px;
+      white-space:nowrap;
+    }
+    .langbox label{font-size:14px;color:var(--muted)}
+    select{
+      padding:8px 10px;border-radius:10px;
+      border:1px solid var(--border);
+      background:var(--surface);color:var(--text)
+    }
+
+    /* ===== Content ===== */
+    .container{max-width:1000px;margin:0 auto;padding:16px}
+    h1{font-size:clamp(22px,3vw,36px);color:var(--brand);margin:14px 0 8px}
+    .subtitle{color:var(--muted);margin:0 0 16px}
+    h2{font-size:clamp(18px,2.4vw,26px);color:var(--brand);margin-top:28px;margin-bottom:10px}
+    h3{font-size:clamp(16px,2vw,20px);margin:18px 0 8px}
+    .meta{
+      display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 18px;color:var(--muted);font-size:14px
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:6px 10px;border:1px solid var(--border);border-radius:999px;background:var(--note-bg)
+    }
+    .k{font-weight:900}
+    .toc{
+      border:1px solid var(--border);border-radius:10px;background:var(--note-bg);
+      padding:12px 14px;margin:16px 0
+    }
+    .toc strong{display:block;margin-bottom:6px}
+    .note{
+      font-size:14px;color:var(--muted);
+      background:var(--note-bg);padding:12px 14px;
+      border-left:4px solid var(--brand);border-radius:6px;margin:16px 0
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:12px;margin:12px 0
+    }
+    .card{
+      border:1px solid var(--border);border-radius:10px;background:var(--surface);
+      padding:12px 14px
+    }
+    .card .title{font-weight:900;margin:0 0 6px}
+    .imgbox{
+      border:1px solid var(--border);border-radius:10px;background:var(--surface);
+      padding:10px;margin:12px 0
+    }
+    .imgbox img{width:100%;border-radius:8px;border:1px solid var(--border)}
+    .imgcap{color:var(--muted);font-size:13px;margin-top:8px}
+    table{width:100%;border-collapse:collapse;margin:10px 0}
+    th,td{border:1px solid var(--border);padding:10px;vertical-align:top}
+    th{background:var(--note-bg);text-align:left}
+    ul{padding-inline-start:18px;margin:8px 0}
+    li{margin:6px 0}
+    code{background:color-mix(in srgb,var(--surface) 85%,#000 5%);padding:2px 6px;border-radius:8px}
+  </style>
+</head>
+
+<body>
+  <!-- ✅ 표준 가이드 Topbar: 좌측(가이드로) / 우측(언어) -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a id="backLink" class="backlink" href="/guides" aria-label="Back to guides"></a>
+
+      <div class="langbox">
+        <label for="langSwitcher" id="langLabel">Language</label>
+        <select id="langSwitcher" aria-label="Language">
+          <option value="ko">한국어</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+          <option value="zh-CN">简体中文</option>
+          <option value="zh-TW">繁體中文</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 data-i18n="h1"></h1>
+    <p class="subtitle" data-i18n="subtitle"></p>
+
+    <div class="meta">
+      <span class="badge"><span class="k" data-i18n="meta_when_label"></span> <span data-i18n="meta_when_text"></span></span>
+      <span class="badge"><span class="k" data-i18n="meta_core_label"></span> <span data-i18n="meta_core_text"></span></span>
+      <span class="badge"><span class="k" data-i18n="meta_goal_label"></span> <span data-i18n="meta_goal_text"></span></span>
+    </div>
+
+    <div class="toc">
+      <strong data-i18n="toc_title"></strong>
+      <ul>
+        <li><a href="#overview" data-i18n="toc_1"></a></li>
+        <li><a href="#waves" data-i18n="toc_2"></a></li>
+        <li><a href="#points" data-i18n="toc_3"></a></li>
+        <li><a href="#flow" data-i18n="toc_4"></a></li>
+        <li><a href="#hq" data-i18n="toc_5"></a></li>
+        <li><a href="#city" data-i18n="toc_6"></a></li>
+        <li><a href="#heroes" data-i18n="toc_7"></a></li>
+        <li><a href="#checklist" data-i18n="toc_8"></a></li>
+      </ul>
+    </div>
+
+    
+
+    <!-- Overview -->
+    <section>
+      <h2 data-i18n="overview_title"></h2>
+      <div class="grid">
+        <div class="card">
+          <p class="title" data-i18n="overview_card1_title"></p>
+          <ul>
+            <li data-i18n="overview_card1_li1"></li>
+            <li data-i18n="overview_card1_li2"></li>
+            <li data-i18n="overview_card1_li3"></li>
+            <li data-i18n="overview_card1_li4"></li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="title" data-i18n="overview_card2_title"></p>
+          <ul>
+            <li data-i18n="overview_card2_li1"></li>
+            <li data-i18n="overview_card2_li2"></li>
+            <li data-i18n="overview_card2_li3"></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note" data-i18n="overview_note"></div>
+    </section>
+
+    <!-- Waves -->
+    <section id="waves">
+      <h2 data-i18n="waves_title"></h2>
+      <p data-i18n="waves_p1"></p>
+
+      <table aria-label="Wave targets">
+        <thead>
+          <tr>
+            <th data-i18n="waves_th_wave"></th>
+            <th data-i18n="waves_th_target"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td data-i18n="waves_r1_w"></td><td data-i18n="waves_r1_t"></td></tr>
+          <tr><td data-i18n="waves_r2_w"></td><td data-i18n="waves_r2_t"></td></tr>
+          <tr><td data-i18n="waves_r3_w"></td><td data-i18n="waves_r3_t"></td></tr>
+          <tr><td data-i18n="waves_r4_w"></td><td data-i18n="waves_r4_t"></td></tr>
+          <tr><td data-i18n="waves_r5_w"></td><td data-i18n="waves_r5_t"></td></tr>
+          <tr><td data-i18n="waves_r6_w"></td><td data-i18n="waves_r6_t"></td></tr>
+        </tbody>
+      </table>
+
+      <div class="note" data-i18n="waves_note"></div>
+    </section>
+
+    <!-- Points -->
+    <section id="points">
+      <h2 data-i18n="points_title"></h2>
+      <div class="grid">
+        <div class="card">
+          <p class="title" data-i18n="points_card1_title"></p>
+          <ul>
+            <li data-i18n="points_card1_li1"></li>
+            <li data-i18n="points_card1_li2"></li>
+            <li data-i18n="points_card1_li3"></li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="title" data-i18n="points_card2_title"></p>
+          <ul>
+            <li data-i18n="points_card2_li1"></li>
+            <li data-i18n="points_card2_li2"></li>
+            <li data-i18n="points_card2_li3"></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note" data-i18n="points_note"></div>
+    </section>
+
+    <!-- Flow -->
+    <section id="flow">
+      <h2 data-i18n="flow_title"></h2>
+
+      <h3 data-i18n="flow_s1_title"></h3>
+      <ul>
+        <li data-i18n="flow_s1_li1"></li>
+        <li data-i18n="flow_s1_li2"></li>
+        <li data-i18n="flow_s1_li3"></li>
+      </ul>
+
+      <h3 data-i18n="flow_s2_title"></h3>
+      <ul>
+        <li data-i18n="flow_s2_li1"></li>
+        <li data-i18n="flow_s2_li2"></li>
+      </ul>
+
+      <h3 data-i18n="flow_s3_title"></h3>
+      <ul>
+        <li data-i18n="flow_s3_li1"></li>
+        <li data-i18n="flow_s3_li2"></li>
+      </ul>
+
+      <h3 data-i18n="flow_s4_title"></h3>
+      <ul>
+        <li data-i18n="flow_s4_li1"></li>
+        <li data-i18n="flow_s4_li2"></li>
+        <li data-i18n="flow_s4_li3"></li>
+      </ul>
+
+      <div class="note" data-i18n="flow_note"></div>
+    </section>
+
+    <!-- HQ -->
+    <section id="hq">
+      <h2 data-i18n="hq_title"></h2>
+      <ul>
+        <li data-i18n="hq_li1"></li>
+        <li data-i18n="hq_li2"></li>
+        <li data-i18n="hq_li3"></li>
+      </ul>
+      <div class="note" data-i18n="hq_note"></div>
+    </section>
+
+    <!-- City Defense -->
+    <section id="city">
+      <h2 data-i18n="city_title"></h2>
+      <div class="grid">
+        <div class="card">
+          <p class="title" data-i18n="city_card1_title"></p>
+          <ul>
+            <li data-i18n="city_card1_li1"></li>
+            <li data-i18n="city_card1_li2"></li>
+            <li data-i18n="city_card1_li3"></li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="title" data-i18n="city_card2_title"></p>
+          <ul>
+            <li data-i18n="city_card2_li1"></li>
+            <li data-i18n="city_card2_li2"></li>
+            <li data-i18n="city_card2_li3"></li>
+          </ul>
+        </div>
+      </div>
+      <div class="note" data-i18n="city_note"></div>
+    </section>
+
+    <!-- Heroes -->
+    <section id="heroes">
+      <h2 data-i18n="heroes_title"></h2>
+      <div class="grid">
+        <div class="card">
+          <p class="title" data-i18n="heroes_card1_title"></p>
+          <ul>
+            <li data-i18n="heroes_card1_li1"></li>
+            <li data-i18n="heroes_card1_li2"></li>
+            <li data-i18n="heroes_card1_li3"></li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="title" data-i18n="heroes_card2_title"></p>
+          <ul>
+            <li data-i18n="heroes_card2_li1"></li>
+            <li data-i18n="heroes_card2_li2"></li>
+            <li data-i18n="heroes_card2_li3"></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note" data-i18n="heroes_note"></div>
+    </section>
+
+    <!-- Checklist -->
+    <section id="checklist">
+      <h2 data-i18n="check_title"></h2>
+      <div class="card">
+        <ul>
+          <li data-i18n="check_li1"></li>
+          <li data-i18n="check_li2"></li>
+          <li data-i18n="check_li3"></li>
+          <li data-i18n="check_li4"></li>
+          <li data-i18n="check_li5"></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+<script>
+(function(){
+  const i18n = {
+    "ko": {
+      backText:"← Kingshot Guides",
+      langLabel:"언어",
+
+      h1:"바이킹의 약탈(Viking Vengeance) 최적 공략",
+      subtitle:"20라운드 방어 이벤트에서 점수를 최대화하는 ‘고득점 협업 운영’ 가이드입니다.",
+
+      meta_when_label:"주기",
+      meta_when_text:"2주마다 화/목 (서버 설정에 따라 다를 수 있음)",
+      meta_core_label:"핵심",
+      meta_core_text:"본성 비우기 · 지원 점수 · 10/20 HQ 방어 · 접속자 우선 지원",
+      meta_goal_label:"목표",
+      meta_goal_text:"연맹 전체 점수 극대화(서로 점수 몰아주기 가능)",
+
+      toc_title:"목차",
+      toc_1:"이벤트 개요",
+      toc_2:"공격 라운드(타겟) 안내",
+      toc_3:"점수 구조",
+      toc_4:"고득점 플레이 흐름(Step 1~4)",
+      toc_5:"10/20 라운드 HQ 방어",
+      toc_6:"본성 수성(병력) 세팅",
+      toc_7:"영웅 운용(지원/수비)",
+      toc_8:"최종 체크리스트",
+
+      img_cap:"상단 이미지(요약표+전략)를 그대로 웹에 넣을 수 있도록, 아래에 텍스트 공략을 ‘실행 순서’로 정리했습니다.",
+
+      overview_title:"이벤트 개요",
+      overview_card1_title:"기본 규칙",
+      overview_card1_li1:"총 20웨이브의 AI 바이킹이 공격",
+      overview_card1_li2:"웨이브 방어 성공 조건: 공격 병력의 50% 이상 처치",
+      overview_card1_li3:"공격 대상은 ‘전체/접속자/HQ’로 섞여서 등장",
+      overview_card1_li4:"2번 패배하면 내 도시는 추가 공격이 멈출 수 있으나, ‘지원’으로 계속 점수 획득 가능",
+      overview_card2_title:"핵심 개념",
+      overview_card2_li1:"내 점수는 ‘내 성에서 죽은 바이킹 수’에 크게 영향",
+      overview_card2_li2:"하지만 최고점은 ‘남 지원’에서 나온다(지원 점수는 별도로 생성)",
+      overview_card2_li3:"그래서 ‘내 성 비우기 + 접속자 우선 지원’이 정답",
+      overview_note:"요점: 내 성에 보/기가 남아있으면 지원군의 킬을 뺏어가서 동료 점수가 떨어집니다. 가능한 한 비우는 구조로 운영하세요.",
+
+      waves_title:"공격 라운드(타겟) 안내",
+      waves_p1:"웨이브는 ‘전체 멤버/접속자만/HQ’로 타겟이 바뀝니다. 특히 7·14·17은 접속자만 공격, 10·20은 HQ만 공격합니다.",
+      waves_th_wave:"구간",
+      waves_th_target:"타겟",
+      waves_r1_w:"1~6",
+      waves_r1_t:"전체 멤버",
+      waves_r2_w:"7 / 14 / 17",
+      waves_r2_t:"접속 중인 멤버만",
+      waves_r3_w:"8~9 / 11~13 / 15~16 / 18~19",
+      waves_r3_t:"전체 멤버",
+      waves_r4_w:"10 / 20",
+      waves_r4_t:"연맹 HQ만",
+      waves_r5_w:"비접속자",
+      waves_r5_t:"7·14·17 라운드에서는 공격을 받지 않음",
+      waves_r6_w:"권장 HQ",
+      waves_r6_t:"평원(Plains) HQ 선호",
+      waves_note:"팁: ‘접속자만 공격’ 라운드가 있기 때문에, 지원은 접속자부터 넣는 게 효율이 가장 좋습니다.",
+
+      points_title:"점수 구조",
+      points_card1_title:"내 성 점수(기본)",
+      points_card1_li1:"내 성에서 바이킹이 죽을수록 내 점수 상승",
+      points_card1_li2:"100% 처치하면 가능한 점수도 100%",
+      points_card1_li3:"다만 고득점은 ‘지원 점수’에서 크게 벌어짐",
+      points_card2_title:"지원 점수(핵심)",
+      points_card2_li1:"남을 지원해도 상대 점수를 빼앗지 않음",
+      points_card2_li2:"대신 ‘지원 점수’가 내게 별도로 생성됨",
+      points_card2_li3:"그래서 서로 역할 분담하면 둘 다 점수 극대화 가능",
+      points_note:"고득점 결론: 내 성은 비우고, 연맹원에게 지원을 돌려서 ‘킬을 지원군이 먹게’ 만들어야 점수가 가장 잘 나옵니다.",
+
+      flow_title:"고득점 플레이 흐름(실전 Step 1~4)",
+      flow_s1_title:"Step 1 — 초기 지원(0~19라운드 유지)",
+      flow_s1_li1:"접속 중 연맹원 6명 정도에게 지원을 보냄",
+      flow_s1_li2:"지원 병력은 보병+기병 위주(초보/신서버는 보병 100%도 효율적)",
+      flow_s1_li3:"내 성에 보/기가 남아있으면 지원군 점수를 뺏어가니, 가능한 한 내 보/기를 먼저 빼기",
+      flow_s2_title:"Step 2 — 본부 방어 라운드(10/20)",
+      flow_s2_li1:"10라운드와 20라운드에는 ‘바이킹 왕’이 HQ만 공격",
+      flow_s2_li2:"9/19라운드가 완전히 끝난 뒤, 강한 1개 행군(보병 위주)을 HQ로 보내서 방어",
+      flow_s3_title:"Step 3 — 연맹 협업 문구(그대로 복붙)",
+      flow_s3_li1:"“내가 19라운드까지 지원 유지할게요. 궁병 제외한 보/기는 다른 곳으로 지원 보내서 성을 비워주세요.”",
+      flow_s3_li2:"오프라인 유저는 병력이 성에 남아있을 확률이 높아서, 가능하면 접속자부터 협업",
+      flow_s4_title:"Step 4 — 본성 수성(점수 몰아주기)",
+      flow_s4_li1:"내 성 방어는 궁병 100% 배치(고웨이브에서 3턴까지 가도 점수 영향은 크지 않음)",
+      flow_s4_li2:"친한 유저에게 ‘보병 지원’을 받아서 내 성 점수를 몰아주는 운영도 가능(강한 지원군이 핵심)",
+      flow_s4_li3:"지원군이 약하면 궁병 턴까지 와서 궁병이 킬을 먹을 수 있음 → 그건 ‘지원군이 약한 탓’",
+      flow_note:"핵심 정리: (1) 내 보/기는 최대한 밖으로 (2) 지원은 접속자 위주 (3) 10/20은 HQ 방어로 스위치.",
+
+      hq_title:"10/20 라운드 HQ 방어(중요)",
+      hq_li1:"10라운드/20라운드는 HQ만 공격 → HQ 방어 준비가 승패를 좌우",
+      hq_li2:"9/19가 완전히 끝난 뒤에만 병력 회수(너무 일찍 회수하면 지원 점수 손해)",
+      hq_li3:"HQ 방어 후에는 다시 원래 지원하던 연맹원에게 복귀 지원",
+      hq_note:"권장: HQ 방어용은 ‘강한 1개 행군’을 따로 정해두고, 끝나면 즉시 지원 복귀.",
+
+      city_title:"본성 수성(병력) 세팅",
+      city_card1_title:"왜 ‘성 비우기’가 중요한가",
+      city_card1_li1:"내 성에 병력이 남아 있으면, 바이킹과 싸우며 ‘킬을 가져감’",
+      city_card1_li2:"그 킬은 ‘나에게는 큰 이득이 아니고’, 지원해준 동료 점수를 깎음",
+      city_card1_li3:"그래서 보/기는 최대한 빼고, (필요 시) 궁병만 남기는 구조가 유리",
+      city_card2_title:"병과 효율(현장 팁)",
+      city_card2_li1:"보/기/궁 모두 데미지는 정상 적용",
+      city_card2_li2:"신규 서버/낮은 난이도는 보병 100%가 매우 효율적(고난이도에서도 보병 강함)",
+      city_card2_li3:"후반 웨이브에서 궁병 턴까지 가도 ‘점수 영향은 큰 편 아님’",
+      city_note:"중요: 치유는 이벤트 도중 하지 않는 게 안전합니다. 치유로 병력이 돌아오면 지원군 점수를 뺏는 상황이 생길 수 있습니다.",
+
+      heroes_title:"영웅 운용(지원/수비)",
+      heroes_card1_title:"지원 보낼 때(공격형 우선)",
+      heroes_card1_li1:"목표는 ‘킬 확보’ → 공격 관련 리더/합류형 영웅이 유리",
+      heroes_card1_li2:"예: Chenko, Amadeus, Yeonwoo, Amane 같은 ‘공격 기여’ 영웅을 선호",
+      heroes_card1_li3:"방어형(예: Howard, Gordon, Fahd 등)은 이 이벤트에선 효율이 낮은 편",
+      heroes_card2_title:"내 성에 남길 때(수비 3명만)",
+      heroes_card2_li1:"도시에는 최강 수비 영웅 3명만 남기고, 나머지는 지원/출정",
+      heroes_card2_li2:"예(Gen1): F2P는 Jabel/Howard/Quinn, P2W는 Amadeus(or Helga)/Jabel/Saul",
+      heroes_card2_li3:"‘내 성에서 킬 먹기’보다 ‘지원군이 킬 먹게’ 만드는 게 전체 점수에 유리",
+      heroes_note:"한 줄 결론: 지원은 공격형(킬) / 성 수비는 최소(3영웅) / 보·기는 비우기.",
+
+      check_title:"최종 체크리스트(이대로 실행)",
+      check_li1:"이벤트 시작 전: 접속 가능한 인원 위주로 시간 선정",
+      check_li2:"0~19: 접속자에게 보/기 지원 넣고 내 성 보/기 최대한 비우기",
+      check_li3:"7/14/17: 접속자만 공격 → 접속자 우선 지원 유지",
+      check_li4:"10/20: 9/19 완전 종료 후 강한 1개 행군을 HQ로 보내 방어",
+      check_li5:"이벤트 중: 치유는 최대한 미루고, HQ 방어 끝나면 지원 복귀"
+    },
+
+    "en": {
+      backText:"← Kingshot Guides",
+      langLabel:"Language",
+
+      h1:"Viking Vengeance (Viking Raid) Best Strategy Guide",
+      subtitle:"A high-score teamwork guide for the 20-wave defense event.",
+
+      meta_when_label:"Schedule",
+      meta_when_text:"Every 2 weeks on Tue/Thu (may vary by server)",
+      meta_core_label:"Core",
+      meta_core_text:"Empty your city · Reinforcement points · Defend HQ on 10/20 · Reinforce online first",
+      meta_goal_label:"Goal",
+      meta_goal_text:"Maximize alliance-wide points (score-funneling is possible)",
+
+      toc_title:"Contents",
+      toc_1:"Event Overview",
+      toc_2:"Wave Targets",
+      toc_3:"How Points Work",
+      toc_4:"High-Score Flow (Step 1–4)",
+      toc_5:"HQ Defense on Wave 10/20",
+      toc_6:"City Defense (Troop Setup)",
+      toc_7:"Heroes (Reinforce/Defend)",
+      toc_8:"Final Checklist",
+
+      img_cap:"You can embed the infographic above. Below is the same strategy rewritten as an execution flow.",
+
+      overview_title:"Event Overview",
+      overview_card1_title:"Basic Rules",
+      overview_card1_li1:"20 waves of AI Vikings attack",
+      overview_card1_li2:"To clear a wave: kill at least 50% of attackers",
+      overview_card1_li3:"Targets rotate between All / Online-only / HQ",
+      overview_card1_li4:"After 2 losses, attacks on you may stop, but you can still score by reinforcing allies",
+      overview_card2_title:"Core Idea",
+      overview_card2_li1:"Your points are related to Vikings dying in your city",
+      overview_card2_li2:"But the biggest scores come from reinforcement points",
+      overview_card2_li3:"So: empty your city + reinforce online members first",
+      overview_note:"Key: If you leave Infantry/Cavalry at home, they steal kills from your reinforcers and reduce your allies’ points.",
+
+      waves_title:"Wave Targets",
+      waves_p1:"Targets change by wave. The important ones: 7/14/17 hit online players only, and 10/20 hit HQ only.",
+      waves_th_wave:"Waves",
+      waves_th_target:"Target",
+      waves_r1_w:"1–6",
+      waves_r1_t:"All members",
+      waves_r2_w:"7 / 14 / 17",
+      waves_r2_t:"Online members only",
+      waves_r3_w:"8–9 / 11–13 / 15–16 / 18–19",
+      waves_r3_t:"All members",
+      waves_r4_w:"10 / 20",
+      waves_r4_t:"Alliance HQ only",
+      waves_r5_w:"Offline players",
+      waves_r5_t:"They are not targeted on 7/14/17",
+      waves_r6_w:"Recommended HQ",
+      waves_r6_t:"Plains HQ is preferred",
+      waves_note:"Tip: Since some waves are online-only, reinforce online members first for best efficiency.",
+
+      points_title:"How Points Work",
+      points_card1_title:"City Points",
+      points_card1_li1:"More Vikings dying in your city → more points",
+      points_card1_li2:"Kill 100% → get 100% of possible points",
+      points_card1_li3:"But high scores usually come from reinforcement points",
+      points_card2_title:"Reinforcement Points (Main Source)",
+      points_card2_li1:"Reinforcing does not steal the target’s points",
+      points_card2_li2:"It generates extra reinforcement points for you",
+      points_card2_li3:"With role-splitting, both you and allies can maximize scores",
+      points_note:"High-score conclusion: empty your city and let reinforcers secure the kills.",
+
+      flow_title:"High-Score Flow (Step 1–4)",
+      flow_s1_title:"Step 1 — Early Reinforcement (Keep until Wave 19)",
+      flow_s1_li1:"Send reinforcements to ~6 online alliance members",
+      flow_s1_li2:"Use mostly Infantry + Cavalry (new servers: Infantry-only can work very well)",
+      flow_s1_li3:"If your city keeps Infantry/Cav, it steals kills → move them out first",
+      flow_s2_title:"Step 2 — HQ Defense (Wave 10/20)",
+      flow_s2_li1:"Wave 10 and 20 attack HQ only",
+      flow_s2_li2:"After Wave 9/19 fully ends, recall one strong march (Infantry-focused) to defend HQ",
+      flow_s3_title:"Step 3 — Team Message (Copy/Paste)",
+      flow_s3_li1:"“I’ll keep reinforcement until Wave 19. Please send out Infantry/Cav (leave Archers) to empty your city.”",
+      flow_s3_li2:"Offline players often keep troops at home, reducing reinforcement efficiency — prioritize online coordination",
+      flow_s4_title:"Step 4 — City Defense (Score-Funneling)",
+      flow_s4_li1:"Defend your city with Archers-only if needed (later waves may reach Archer turns, but score impact is usually small)",
+      flow_s4_li2:"You can funnel points by receiving strong Infantry reinforcements from a trusted ally",
+      flow_s4_li3:"If reinforcements are weak, your Archers may start taking kills — that’s because support is too weak",
+      flow_note:"Summary: (1) move your Infantry/Cav out (2) reinforce online first (3) switch to HQ defense on 10/20.",
+
+      hq_title:"HQ Defense on Wave 10/20 (Important)",
+      hq_li1:"Wave 10/20 are HQ-only → HQ defense can decide success",
+      hq_li2:"Recall only after Wave 9/19 fully ends (early recall loses reinforcement points)",
+      hq_li3:"After defending HQ, return that march to your previous reinforcement target",
+      hq_note:"Best practice: pre-assign one “HQ march” and switch it in/out quickly.",
+
+      city_title:"City Defense (Troop Setup)",
+      city_card1_title:"Why ‘Empty City’ Matters",
+      city_card1_li1:"Troops left at home take kills from reinforcers",
+      city_card1_li2:"That barely helps you but lowers allies’ points",
+      city_card1_li3:"So move Infantry/Cav out; keep only what’s necessary (often Archers only)",
+      city_card2_title:"Troop Efficiency Notes",
+      city_card2_li1:"All troop types deal normal damage",
+      city_card2_li2:"Infantry is extremely effective (even on high difficulty in many cases)",
+      city_card2_li3:"Even if later waves reach Archer turns, overall score impact is usually limited",
+      city_note:"Important: Avoid healing during the event. Healed troops return home and may start stealing kills.",
+
+      heroes_title:"Heroes (Reinforce/Defend)",
+      heroes_card1_title:"When Reinforcing (Attack-first)",
+      heroes_card1_li1:"Goal is kills → attack-oriented leaders perform better",
+      heroes_card1_li2:"Examples: Chenko, Amadeus, Yeonwoo, Amane (pick your best damage/assist leaders)",
+      heroes_card1_li3:"Defensive heroes are generally less efficient here",
+      heroes_card2_title:"When Staying Home (Only 3 defenders)",
+      heroes_card2_li1:"Keep only your best 3 defense heroes at home",
+      heroes_card2_li2:"Example (Gen1): F2P Jabel/Howard/Quinn; P2W Amadeus(or Helga)/Jabel/Saul",
+      heroes_card2_li3:"Alliance score grows when reinforcers take the kills, not your city troops",
+      heroes_note:"One-line: Attack leaders for reinforcements, minimal home defense, empty Infantry/Cav.",
+
+      check_title:"Final Checklist",
+      check_li1:"Before start: pick a time when many members can be online",
+      check_li2:"0–19: reinforce online members and move your Infantry/Cav out",
+      check_li3:"7/14/17: online-only waves → keep online reinforcement priority",
+      check_li4:"10/20: after 9/19 fully ends, send one strong march to HQ, then return to reinforcing",
+      check_li5:"During event: avoid healing; keep the HQ switch fast"
+    },
+
+    "ja": {
+      backText:"← Kingshot ガイド",
+      langLabel:"言語",
+
+      h1:"バイキングの略奪（Viking Vengeance）最適攻略",
+      subtitle:"20ウェーブ防衛イベントでスコアを最大化する協力運用ガイド。",
+
+      meta_when_label:"周期",
+      meta_when_text:"2週間ごと 火/木（サーバーにより異なる）",
+      meta_core_label:"要点",
+      meta_core_text:"都市を空に · 支援ポイント · 10/20はHQ防衛 · 接続者優先支援",
+      meta_goal_label:"目的",
+      meta_goal_text:"同盟全体のスコア最大化（スコア寄せ可能）",
+
+      toc_title:"目次",
+      toc_1:"イベント概要",
+      toc_2:"ウェーブの対象",
+      toc_3:"ポイントの仕組み",
+      toc_4:"高得点フロー（Step 1–4）",
+      toc_5:"10/20のHQ防衛",
+      toc_6:"都市防衛（兵種）",
+      toc_7:"英雄運用（支援/防衛）",
+      toc_8:"最終チェック",
+
+      img_cap:"上の画像をそのまま埋め込み可能。以下は同内容を実行手順として整理。",
+
+      overview_title:"イベント概要",
+      overview_card1_title:"基本ルール",
+      overview_card1_li1:"AIバイキングが全20ウェーブで攻撃",
+      overview_card1_li2:"防衛成功：敵の50%以上を撃破",
+      overview_card1_li3:"対象は「全体/接続者のみ/HQ」で変化",
+      overview_card1_li4:"2回敗北で自分への攻撃は止まる場合あり（支援で得点は可能）",
+      overview_card2_title:"核心",
+      overview_card2_li1:"自分の得点は「自都市で死んだバイキング数」に影響",
+      overview_card2_li2:"ただし最大得点は支援ポイントが中心",
+      overview_card2_li3:"結論：都市を空にして接続者を優先支援",
+      overview_note:"要点：自都市に歩兵/騎兵が残ると支援者のキルを奪い、味方の得点が下がる。",
+
+      waves_title:"ウェーブの対象",
+      waves_p1:"特に重要：7/14/17は接続者のみ、10/20はHQのみ。",
+      waves_th_wave:"ウェーブ",
+      waves_th_target:"対象",
+      waves_r1_w:"1–6",
+      waves_r1_t:"全メンバー",
+      waves_r2_w:"7 / 14 / 17",
+      waves_r2_t:"接続中メンバーのみ",
+      waves_r3_w:"8–9 / 11–13 / 15–16 / 18–19",
+      waves_r3_t:"全メンバー",
+      waves_r4_w:"10 / 20",
+      waves_r4_t:"同盟HQのみ",
+      waves_r5_w:"未接続者",
+      waves_r5_t:"7/14/17では攻撃されない",
+      waves_r6_w:"推奨HQ",
+      waves_r6_t:"平原HQ推奨",
+      waves_note:"接続者のみ対象のウェーブがあるため、支援は接続者からが最効率。",
+
+      points_title:"ポイントの仕組み",
+      points_card1_title:"都市ポイント",
+      points_card1_li1:"自都市でバイキングが死ぬほど得点",
+      points_card1_li2:"100%撃破で100%得点",
+      points_card1_li3:"ただし高得点は支援ポイントが中心",
+      points_card2_title:"支援ポイント（主戦場）",
+      points_card2_li1:"支援しても相手の得点は奪わない",
+      points_card2_li2:"代わりに自分へ支援ポイントが追加生成",
+      points_card2_li3:"役割分担で双方が最大化できる",
+      points_note:"結論：都市を空にし、支援側がキルを取る形が最強。",
+
+      flow_title:"高得点フロー（Step 1–4）",
+      flow_s1_title:"Step 1 — 初期支援（19まで維持）",
+      flow_s1_li1:"接続中の同盟員6人程度へ支援",
+      flow_s1_li2:"歩兵+騎兵中心（新サーバーは歩兵100%も強い）",
+      flow_s1_li3:"自都市に歩/騎が残るとキルを奪う→先に外へ出す",
+      flow_s2_title:"Step 2 — HQ防衛（10/20）",
+      flow_s2_li1:"10と20はHQのみ攻撃",
+      flow_s2_li2:"9/19が完全終了後、強い1部隊（歩兵中心）をHQへ",
+      flow_s3_title:"Step 3 — 協力メッセージ（コピペ）",
+      flow_s3_li1:"「19まで支援維持します。弓以外の歩/騎は外へ支援して都市を空にしてください。」",
+      flow_s3_li2:"未接続者は都市に兵が残りがち→接続者優先で連携",
+      flow_s4_title:"Step 4 — 都市防衛（スコア寄せ）",
+      flow_s4_li1:"必要なら弓兵100%で防衛（終盤に弓ターン到達しても影響は小さめ）",
+      flow_s4_li2:"信頼できる味方から強い歩兵支援を受けてスコア寄せも可能",
+      flow_s4_li3:"支援が弱いと弓がキルを取ってしまう→支援不足",
+      flow_note:"まとめ：歩/騎は外へ、接続者優先支援、10/20でHQへ切替。",
+
+      hq_title:"10/20のHQ防衛（重要）",
+      hq_li1:"10/20はHQのみ→HQ防衛が重要",
+      hq_li2:"9/19が完全に終わってから回収（早いと支援ポイント損）",
+      hq_li3:"HQ防衛後は元の支援先へ戻す",
+      hq_note:"おすすめ：HQ専用の強い1部隊を決めておく。",
+
+      city_title:"都市防衛（兵種）",
+      city_card1_title:"なぜ都市を空にする？",
+      city_card1_li1:"都市に兵が残ると支援者のキルを奪う",
+      city_card1_li2:"自分の得より味方の損が大きい",
+      city_card1_li3:"歩/騎は外へ。必要なら弓だけ残す",
+      city_card2_title:"兵種メモ",
+      city_card2_li1:"歩/騎/弓は通常通りダメージ",
+      city_card2_li2:"歩兵が非常に強い（高難度でも有効なことが多い）",
+      city_card2_li3:"弓ターン到達してもスコア影響は限定的",
+      city_note:"注意：イベント中の治療は基本しない。戻った兵がキルを奪う可能性。",
+
+      heroes_title:"英雄運用（支援/防衛）",
+      heroes_card1_title:"支援時（攻撃優先）",
+      heroes_card1_li1:"目的はキル→攻撃寄りリーダーが有利",
+      heroes_card1_li2:"例：Chenko / Amadeus / Yeonwoo / Amane など",
+      heroes_card1_li3:"防衛系は効率が落ちやすい",
+      heroes_card2_title:"都市に残す（防衛は3人だけ）",
+      heroes_card2_li1:"最強防衛3人のみ残す",
+      heroes_card2_li2:"例（Gen1）：無課金 Jabel/Howard/Quinn、課金 Amadeus(or Helga)/Jabel/Saul",
+      heroes_card2_li3:"都市より支援側がキルを取る方が全体スコアが伸びる",
+      heroes_note:"結論：支援は攻撃、都市は最小、歩/騎は空に。",
+
+      check_title:"最終チェック",
+      check_li1:"開始前：接続人数が多い時間を選ぶ",
+      check_li2:"0–19：接続者へ支援、歩/騎は外へ",
+      check_li3:"7/14/17：接続者のみ対象→接続者優先",
+      check_li4:"10/20：9/19終了後にHQ防衛→終わったら支援へ復帰",
+      check_li5:"イベント中：治療は基本後回し、HQ切替を素早く"
+    },
+
+    "zh-CN": {
+      backText:"← Kingshot 指南",
+      langLabel:"语言",
+
+      h1:"维京复仇（Viking Vengeance）最优攻略",
+      subtitle:"20波防守活动的高分协作打法。",
+
+      meta_when_label:"周期",
+      meta_when_text:"每两周周二/周四（可能因服务器不同）",
+      meta_core_label:"核心",
+      meta_core_text:"清空主城 · 支援积分 · 第10/20波守HQ · 优先支援在线玩家",
+      meta_goal_label:"目标",
+      meta_goal_text:"最大化联盟总分（可互相“喂分”）",
+
+      toc_title:"目录",
+      toc_1:"活动概览",
+      toc_2:"波次目标说明",
+      toc_3:"积分机制",
+      toc_4:"高分流程（Step 1–4）",
+      toc_5:"第10/20波HQ防守",
+      toc_6:"主城防守（兵种）",
+      toc_7:"英雄选择（支援/防守）",
+      toc_8:"最终清单",
+
+      img_cap:"上方图片可直接嵌入。下方为同策略的执行顺序整理。",
+
+      overview_title:"活动概览",
+      overview_card1_title:"基础规则",
+      overview_card1_li1:"共20波AI维京来袭",
+      overview_card1_li2:"通过条件：击杀至少50%进攻兵力",
+      overview_card1_li3:"目标会在“全员/仅在线/HQ”之间切换",
+      overview_card1_li4:"连败2次后可能不再打你，但你仍可通过支援拿分",
+      overview_card2_title:"核心思路",
+      overview_card2_li1:"你的分数与“你城里死掉的维京数量”有关",
+      overview_card2_li2:"但最高分通常来自“支援积分”",
+      overview_card2_li3:"所以：清空主城 + 优先支援在线",
+      overview_note:"要点：主城留步/骑会抢支援者人头，降低队友得分。尽量清空。",
+
+      waves_title:"波次目标说明",
+      waves_p1:"关键波次：7/14/17只打在线玩家；10/20只打HQ。",
+      waves_th_wave:"波次",
+      waves_th_target:"目标",
+      waves_r1_w:"1–6",
+      waves_r1_t:"全体成员",
+      waves_r2_w:"7 / 14 / 17",
+      waves_r2_t:"仅在线成员",
+      waves_r3_w:"8–9 / 11–13 / 15–16 / 18–19",
+      waves_r3_t:"全体成员",
+      waves_r4_w:"10 / 20",
+      waves_r4_t:"仅联盟HQ",
+      waves_r5_w:"离线成员",
+      waves_r5_t:"在7/14/17不会被攻击",
+      waves_r6_w:"推荐HQ",
+      waves_r6_t:"平原HQ更合适",
+      waves_note:"因为存在“只打在线”的波次，支援优先给在线成员效率最高。",
+
+      points_title:"积分机制",
+      points_card1_title:"主城积分",
+      points_card1_li1:"你城里死的维京越多，你分越高",
+      points_card1_li2:"击杀100%可拿满分",
+      points_card1_li3:"但高分主要来自支援积分",
+      points_card2_title:"支援积分（关键）",
+      points_card2_li1:"支援不会偷走对方积分",
+      points_card2_li2:"会额外给你生成支援积分",
+      points_card2_li3:"分工协作可让双方都更高分",
+      points_note:"高分结论：清空主城，让支援军拿到击杀。",
+
+      flow_title:"高分流程（Step 1–4）",
+      flow_s1_title:"Step 1 — 前期支援（保持到第19波）",
+      flow_s1_li1:"给约6名在线盟友送支援",
+      flow_s1_li2:"以步兵+骑兵为主（新服步兵100%也很强）",
+      flow_s1_li3:"主城留步/骑会抢人头 → 先把自己的步/骑尽量送出去",
+      flow_s2_title:"Step 2 — HQ防守（第10/20波）",
+      flow_s2_li1:"第10与第20波只打HQ",
+      flow_s2_li2:"确认第9/19波完全结束后，再抽回一支强行军（步兵为主）去守HQ",
+      flow_s3_title:"Step 3 — 协作话术（可直接复制）",
+      flow_s3_li1:"“我会支援到第19波。请把除弓兵外的步/骑都送去支援，尽量清空主城。”",
+      flow_s3_li2:"离线玩家更容易城里留兵，优先与在线玩家协作",
+      flow_s4_title:"Step 4 — 主城防守（喂分玩法）",
+      flow_s4_li1:"需要守城时可用弓兵100%（后期到弓回合通常对分数影响不大）",
+      flow_s4_li2:"可让熟人用强步兵来支援你，实现“把分喂给你/或喂给对方”的玩法",
+      flow_s4_li3:"若支援太弱，弓兵会开始抢击杀 → 说明支援不足",
+      flow_note:"总结：步/骑尽量外出；支援优先在线；10/20切到HQ防守。",
+
+      hq_title:"第10/20波HQ防守（非常重要）",
+      hq_li1:"10/20只打HQ → HQ防守决定稳定性",
+      hq_li2:"只在9/19完全结束后再回收兵力（太早会丢支援分）",
+      hq_li3:"守完HQ立刻回到原本的支援目标",
+      hq_note:"建议：提前指定一支“HQ专用队”，切换更快。",
+
+      city_title:"主城防守（兵种）",
+      city_card1_title:"为什么要清空主城",
+      city_card1_li1:"主城留兵会抢支援者击杀",
+      city_card1_li2:"对你收益有限，却大幅降低队友得分",
+      city_card1_li3:"所以尽量把步/骑送出去，必要时仅留弓兵",
+      city_card2_title:"兵种效率提示",
+      city_card2_li1:"步/骑/弓伤害均正常生效",
+      city_card2_li2:"步兵非常强（高难度也常有效）",
+      city_card2_li3:"后期到弓回合也通常不会决定分数核心",
+      city_note:"注意：活动中尽量别治疗。治疗后回城的兵可能会抢击杀。",
+
+      heroes_title:"英雄选择（支援/防守）",
+      heroes_card1_title:"支援时（偏输出）",
+      heroes_card1_li1:"目标是击杀 → 输出/增伤类领队更合适",
+      heroes_card1_li2:"例：Chenko、Amadeus、Yeonwoo、Amane 等",
+      heroes_card1_li3:"纯防御型一般效率较低",
+      heroes_card2_title:"留守主城（只留3个防守）",
+      heroes_card2_li1:"主城只留最强3个防守英雄",
+      heroes_card2_li2:"例（Gen1）：F2P Jabel/Howard/Quinn；P2W Amadeus(或Helga)/Jabel/Saul",
+      heroes_card2_li3:"联盟总分更依赖支援方拿击杀",
+      heroes_note:"一句话：支援用输出，守城最少化，步/骑尽量清空。",
+
+      check_title:"最终清单",
+      check_li1:"开打前：选择大多数人能在线的时间",
+      check_li2:"0–19：优先支援在线成员，自己的步/骑尽量外出",
+      check_li3:"7/14/17：只打在线 → 支援继续优先在线",
+      check_li4:"10/20：确认9/19结束后去守HQ，结束后回到支援",
+      check_li5:"活动中：尽量不治疗；HQ切换要快"
+    },
+
+    "zh-TW": {
+      backText:"← Kingshot 指南",
+      langLabel:"語言",
+
+      h1:"維京復仇（Viking Vengeance）最佳攻略",
+      subtitle:"20波防守活動的高分協作打法。",
+
+      meta_when_label:"週期",
+      meta_when_text:"每兩週週二/週四（可能因伺服器不同）",
+      meta_core_label:"核心",
+      meta_core_text:"清空主城 · 支援積分 · 第10/20波守HQ · 優先支援線上玩家",
+      meta_goal_label:"目標",
+      meta_goal_text:"最大化聯盟總分（可互相「餵分」）",
+
+      toc_title:"目錄",
+      toc_1:"活動概覽",
+      toc_2:"波次目標說明",
+      toc_3:"積分機制",
+      toc_4:"高分流程（Step 1–4）",
+      toc_5:"第10/20波HQ防守",
+      toc_6:"主城防守（兵種）",
+      toc_7:"英雄選擇（支援/防守）",
+      toc_8:"最終清單",
+
+      img_cap:"上方圖片可直接嵌入。下方為同策略的執行順序整理。",
+
+      overview_title:"活動概覽",
+      overview_card1_title:"基礎規則",
+      overview_card1_li1:"共20波AI維京來襲",
+      overview_card1_li2:"通關條件：擊殺至少50%進攻兵力",
+      overview_card1_li3:"目標會在「全員/僅線上/HQ」間切換",
+      overview_card1_li4:"連敗2次後可能不再打你，但你仍可透過支援拿分",
+      overview_card2_title:"核心思路",
+      overview_card2_li1:"你的分數與「你城裡死掉的維京數量」有關",
+      overview_card2_li2:"但最高分通常來自「支援積分」",
+      overview_card2_li3:"所以：清空主城 + 優先支援線上",
+      overview_note:"要點：主城留步/騎會搶支援者人頭，降低隊友得分。盡量清空。",
+
+      waves_title:"波次目標說明",
+      waves_p1:"關鍵波次：7/14/17只打線上玩家；10/20只打HQ。",
+      waves_th_wave:"波次",
+      waves_th_target:"目標",
+      waves_r1_w:"1–6",
+      waves_r1_t:"全體成員",
+      waves_r2_w:"7 / 14 / 17",
+      waves_r2_t:"僅線上成員",
+      waves_r3_w:"8–9 / 11–13 / 15–16 / 18–19",
+      waves_r3_t:"全體成員",
+      waves_r4_w:"10 / 20",
+      waves_r4_t:"僅聯盟HQ",
+      waves_r5_w:"離線成員",
+      waves_r5_t:"在7/14/17不會被攻擊",
+      waves_r6_w:"推薦HQ",
+      waves_r6_t:"平原HQ更合適",
+      waves_note:"因為存在「只打線上」的波次，支援優先給線上成員效率最高。",
+
+      points_title:"積分機制",
+      points_card1_title:"主城積分",
+      points_card1_li1:"你城裡死的維京越多，你分越高",
+      points_card1_li2:"擊殺100%可拿滿分",
+      points_card1_li3:"但高分主要來自支援積分",
+      points_card2_title:"支援積分（關鍵）",
+      points_card2_li1:"支援不會偷走對方積分",
+      points_card2_li2:"會額外給你生成支援積分",
+      points_card2_li3:"分工協作可讓雙方都更高分",
+      points_note:"高分結論：清空主城，讓支援軍拿到擊殺。",
+
+      flow_title:"高分流程（Step 1–4）",
+      flow_s1_title:"Step 1 — 前期支援（維持到第19波）",
+      flow_s1_li1:"給約6名線上盟友送支援",
+      flow_s1_li2:"以步兵+騎兵為主（新服步兵100%也很強）",
+      flow_s1_li3:"主城留步/騎會搶人頭 → 先把自己的步/騎盡量送出去",
+      flow_s2_title:"Step 2 — HQ防守（第10/20波）",
+      flow_s2_li1:"第10與第20波只打HQ",
+      flow_s2_li2:"確認第9/19波完全結束後，再抽回一支強行軍（步兵為主）去守HQ",
+      flow_s3_title:"Step 3 — 協作話術（可直接複製）",
+      flow_s3_li1:"「我會支援到第19波。請把除弓兵外的步/騎都送去支援，盡量清空主城。」",
+      flow_s3_li2:"離線玩家更容易城裡留兵，優先與線上玩家協作",
+      flow_s4_title:"Step 4 — 主城防守（餵分玩法）",
+      flow_s4_li1:"需要守城時可用弓兵100%（後期到弓回合通常對分數影響不大）",
+      flow_s4_li2:"可讓熟人用強步兵來支援你，達成互相「餵分」",
+      flow_s4_li3:"若支援太弱，弓兵會開始搶擊殺 → 代表支援不足",
+      flow_note:"總結：步/騎盡量外出；支援優先線上；10/20切到HQ防守。",
+
+      hq_title:"第10/20波HQ防守（非常重要）",
+      hq_li1:"10/20只打HQ → HQ防守決定穩定性",
+      hq_li2:"只在9/19完全結束後再回收兵力（太早會丟支援分）",
+      hq_li3:"守完HQ立刻回到原本的支援目標",
+      hq_note:"建議：提前指定一支「HQ專用隊」，切換更快。",
+
+      city_title:"主城防守（兵種）",
+      city_card1_title:"為什麼要清空主城",
+      city_card1_li1:"主城留兵會搶支援者擊殺",
+      city_card1_li2:"對你收益有限，卻大幅降低隊友得分",
+      city_card1_li3:"所以盡量把步/騎送出去，必要時僅留弓兵",
+      city_card2_title:"兵種效率提示",
+      city_card2_li1:"步/騎/弓傷害均正常生效",
+      city_card2_li2:"步兵非常強（高難度也常有效）",
+      city_card2_li3:"後期到弓回合也通常不會決定分數核心",
+      city_note:"注意：活動中盡量別治療。治療後回城的兵可能會搶擊殺。",
+
+      heroes_title:"英雄選擇（支援/防守）",
+      heroes_card1_title:"支援時（偏輸出）",
+      heroes_card1_li1:"目標是擊殺 → 輸出/增傷類領隊更合適",
+      heroes_card1_li2:"例：Chenko、Amadeus、Yeonwoo、Amane 等",
+      heroes_card1_li3:"純防禦型一般效率較低",
+      heroes_card2_title:"留守主城（只留3個防守）",
+      heroes_card2_li1:"主城只留最強3個防守英雄",
+      heroes_card2_li2:"例（Gen1）：F2P Jabel/Howard/Quinn；P2W Amadeus(或Helga)/Jabel/Saul",
+      heroes_card2_li3:"聯盟總分更依賴支援方拿擊殺",
+      heroes_note:"一句話：支援用輸出，守城最少化，步/騎盡量清空。",
+
+      check_title:"最終清單",
+      check_li1:"開打前：選擇大多數人能線上的時間",
+      check_li2:"0–19：優先支援線上成員，自己的步/騎盡量外出",
+      check_li3:"7/14/17：只打線上 → 支援繼續優先線上",
+      check_li4:"10/20：確認9/19結束後去守HQ，結束後回到支援",
+      check_li5:"活動中：盡量不治療；HQ切換要快"
+    }
+  };
+
+  function applyLang(locale){
+    const dict = i18n[locale] || i18n.ko;
+
+    document.documentElement.lang = locale;
+    document.documentElement.dir = "ltr";
+    document.title = dict.h1 || document.title;
+
+    const back = document.getElementById("backLink");
+    if (back) back.textContent = dict.backText || "← Kingshot Guides";
+
+    const label = document.getElementById("langLabel");
+    if (label) label.textContent = dict.langLabel || "Language";
+
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const key = el.getAttribute("data-i18n");
+      if (dict[key] !== undefined) el.textContent = dict[key];
+    });
+  }
+
+  const select = document.getElementById("langSwitcher");
+  const saved = localStorage.getItem("lang");
+  const browser = (navigator.language || "").toLowerCase();
+
+  const initial = saved || (
+    browser.startsWith("ko") ? "ko" :
+    browser.startsWith("ja") ? "ja" :
+    browser.startsWith("zh") ? (browser.includes("tw") || browser.includes("hk") ? "zh-TW" : "zh-CN") :
+    "en"
+  );
+
+  applyLang(initial);
+
+  if (select){
+    select.value = initial;
+    select.addEventListener("change", e=>{
+      const lang = e.target.value;
+      localStorage.setItem("lang", lang);
+      applyLang(lang);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,801 @@
+<!-- Tri-Alliance Clash Guide — 멀티언어(ko/en/ja/zh-CN/zh-TW) + 상단바(좌:가이드로/우:번역기) + 바로복붙 완성본 -->
+<article id="tri-alliance-clash-guide" data-page="guide" data-lang="ko">
+  <style>
+    /* =========================
+       Scope: this article only
+       ========================= */
+    #tri-alliance-clash-guide{font:inherit;color:inherit}
+    #tri-alliance-clash-guide *{box-sizing:border-box}
+    #tri-alliance-clash-guide .wrap{max-width:980px;margin:0 auto;padding:22px 16px 34px}
+
+    /* Topbar */
+    #tri-alliance-clash-guide .topbar{
+      position:sticky;top:0;z-index:50;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:saturate(180%) blur(10px);
+      border-bottom:1px solid #e5e7eb;
+    }
+    #tri-alliance-clash-guide .topbar .inner{max-width:980px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    #tri-alliance-clash-guide .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border:1px solid #e5e7eb;border-radius:999px;background:#fff;
+      font-size:14px;line-height:1;color:inherit;text-decoration:none;cursor:pointer;
+    }
+    #tri-alliance-clash-guide .btn:hover{background:#fafafa}
+    #tri-alliance-clash-guide .btn:active{transform:translateY(1px)}
+    #tri-alliance-clash-guide .btn svg{width:16px;height:16px;flex:0 0 auto}
+
+    #tri-alliance-clash-guide h1{font-size:clamp(24px,3.2vw,36px);margin:14px 0 8px;letter-spacing:-.02em}
+    #tri-alliance-clash-guide h2{font-size:1.35rem;margin:34px 0 10px;letter-spacing:-.01em}
+    #tri-alliance-clash-guide h3{font-size:1.05rem;margin:18px 0 8px}
+    #tri-alliance-clash-guide p{margin:.55em 0;line-height:1.75}
+    #tri-alliance-clash-guide .muted{color:#666}
+
+    #tri-alliance-clash-guide .meta{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 18px;color:#666;font-size:.95em}
+    #tri-alliance-clash-guide .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid #e5e7eb;border-radius:999px;background:#fafafa}
+    #tri-alliance-clash-guide .k{font-weight:700}
+
+    #tri-alliance-clash-guide .toc{border:1px solid #e5e7eb;border-radius:14px;background:#fafafa;padding:14px 14px;margin:18px 0 22px}
+    #tri-alliance-clash-guide .toc strong{display:block;margin-bottom:8px}
+    #tri-alliance-clash-guide .toc a{color:inherit;text-decoration:none}
+    #tri-alliance-clash-guide .toc a:hover{text-decoration:underline}
+
+    #tri-alliance-clash-guide .grid{display:grid;grid-template-columns:1fr;gap:12px}
+    @media (min-width:860px){
+      #tri-alliance-clash-guide .grid{grid-template-columns:1fr 1fr}
+    }
+
+    #tri-alliance-clash-guide .card{border:1px solid #e5e7eb;border-radius:16px;background:#fff;padding:14px 14px}
+    #tri-alliance-clash-guide .card .title{font-weight:700;margin-bottom:6px}
+    #tri-alliance-clash-guide .hr{height:1px;background:#e5e7eb;margin:18px 0}
+
+    #tri-alliance-clash-guide ul{margin:.4em 0 .8em 1.2em}
+    #tri-alliance-clash-guide li{margin:.35em 0}
+
+    #tri-alliance-clash-guide .tbl{width:100%;border-collapse:collapse;font-size:.98em;margin:10px 0 0}
+    #tri-alliance-clash-guide .tbl th,#tri-alliance-clash-guide .tbl td{border:1px solid #e5e7eb;padding:10px 10px;vertical-align:top}
+    #tri-alliance-clash-guide .tbl th{background:#fafafa;text-align:left}
+
+    #tri-alliance-clash-guide .callout{border-left:4px solid #111;padding:10px 12px;background:#fafafa;border-radius:12px;margin:12px 0}
+
+    #tri-alliance-clash-guide .imgbox{border:1px solid #e5e7eb;border-radius:16px;background:#fff;padding:10px;margin:14px 0}
+    #tri-alliance-clash-guide figure{margin:0}
+    #tri-alliance-clash-guide figcaption{font-size:.92em;color:#666;margin-top:8px;line-height:1.6}
+    #tri-alliance-clash-guide img{max-width:100%;height:auto;border-radius:12px;display:block}
+
+    #tri-alliance-clash-guide code{background:#f3f4f6;padding:2px 6px;border-radius:8px}
+
+    /* Language system */
+    #tri-alliance-clash-guide .lang{display:none}
+    #tri-alliance-clash-guide[data-lang="ko"] .lang-ko{display:inline}
+    #tri-alliance-clash-guide[data-lang="en"] .lang-en{display:inline}
+    #tri-alliance-clash-guide[data-lang="ja"] .lang-ja{display:inline}
+    #tri-alliance-clash-guide[data-lang="zh-CN"] .lang-zh-CN{display:inline}
+    #tri-alliance-clash-guide[data-lang="zh-TW"] .lang-zh-TW{display:inline}
+
+    /* For blocks (paragraphs/headings that need whole replacement) */
+    #tri-alliance-clash-guide .langblock{display:none}
+    #tri-alliance-clash-guide[data-lang="ko"] .langblock.lang-ko{display:block}
+    #tri-alliance-clash-guide[data-lang="en"] .langblock.lang-en{display:block}
+    #tri-alliance-clash-guide[data-lang="ja"] .langblock.lang-ja{display:block}
+    #tri-alliance-clash-guide[data-lang="zh-CN"] .langblock.lang-zh-CN{display:block}
+    #tri-alliance-clash-guide[data-lang="zh-TW"] .langblock.lang-zh-TW{display:block}
+  </style>
+
+  <!-- Topbar: Left = back to guide / Right = translator -->
+  <div class="topbar">
+    <div class="inner">
+      <!-- 좌측 끝: 가이드로(뒤로가기) -->
+      <a class="btn" href="/guides.html" aria-label="가이드로 이동">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="lang lang-ko">가이드로</span>
+        <span class="lang lang-en">Back to Guides</span>
+        <span class="lang lang-ja">ガイドへ戻る</span>
+        <span class="lang lang-zh-CN">返回指南</span>
+        <span class="lang lang-zh-TW">返回指南</span>
+      </a>
+
+      <!-- 우측 끝: 번역기 -->
+      <button class="btn" type="button" id="tac-lang-btn" aria-label="언어 변경(번역기)">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h7M7.5 5c0 6-3 9-6 11M11 18l-3-7m3 7l3-7m-3 7H5m14-2h-6m6 0l-2-2m2 2l-2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="lang lang-ko">번역기</span>
+        <span class="lang lang-en">Translate</span>
+        <span class="lang lang-ja">翻訳</span>
+        <span class="lang lang-zh-CN">翻译</span>
+        <span class="lang lang-zh-TW">翻譯</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header>
+      <h1>
+        <span class="lang lang-ko">Tri-Alliance Clash 승리 가이드</span>
+        <span class="lang lang-en">How to Win Tri-Alliance Clash</span>
+        <span class="lang lang-ja">トライ・アライアンス・クラッシュ 勝利ガイド</span>
+        <span class="lang lang-zh-CN">三联盟争夺战 胜利指南</span>
+        <span class="lang lang-zh-TW">三聯盟爭奪戰 勝利指南</span>
+      </h1>
+
+      <p class="muted">
+        <span class="lang lang-ko">3개 연맹이 건물 점령으로 점수를 겨루는 서버 이벤트. 1시간 전투에서 누적 포인트가 가장 높은 연맹이 승리합니다.</span>
+        <span class="lang lang-en">A server event where three alliances capture buildings to score points. The alliance with the most total points after a 1-hour battle wins.</span>
+        <span class="lang lang-ja">3つの同盟が建物を占領して得点を競うイベント。1時間の戦闘終了時点で合計ポイントが最も高い同盟が勝利します。</span>
+        <span class="lang lang-zh-CN">三大联盟通过占领建筑获取积分。1小时战斗结束时，总积分最高的联盟获胜。</span>
+        <span class="lang lang-zh-TW">三大聯盟透過佔領建築獲得積分。1小時戰鬥結束時，總積分最高的聯盟獲勝。</span>
+      </p>
+
+      <div class="meta">
+        <span class="badge">
+          <span class="k">
+            <span class="lang lang-ko">핵심</span>
+            <span class="lang lang-en">Core</span>
+            <span class="lang lang-ja">要点</span>
+            <span class="lang lang-zh-CN">核心</span>
+            <span class="lang lang-zh-TW">核心</span>
+          </span>
+          <span class="lang lang-ko">에너지 관리 · 주둔(캡틴) · 20분 수비대(가리슨) · 40분 천공(사원)</span>
+          <span class="lang lang-en">Energy management · Captains (garrisoned) · 20m Garrisons · 40m Temple</span>
+          <span class="lang lang-ja">エネルギー管理 · キャプテン(駐屯) · 20分ガリソン · 40分寺院</span>
+          <span class="lang lang-zh-CN">能量管理 · 队长(驻守) · 20分钟要塞 · 40分钟神殿</span>
+          <span class="lang lang-zh-TW">能量管理 · 隊長(駐守) · 20分鐘要塞 · 40分鐘神殿</span>
+        </span>
+
+        <span class="badge">
+          <span class="k">
+            <span class="lang lang-ko">전투 시간</span>
+            <span class="lang lang-en">Duration</span>
+            <span class="lang lang-ja">戦闘時間</span>
+            <span class="lang lang-zh-CN">时长</span>
+            <span class="lang lang-zh-TW">時長</span>
+          </span>
+          <span class="lang lang-ko">오픈 후 1시간</span>
+          <span class="lang lang-en">1 hour</span>
+          <span class="lang lang-ja">1時間</span>
+          <span class="lang lang-zh-CN">1小时</span>
+          <span class="lang lang-zh-TW">1小時</span>
+        </span>
+
+        <span class="badge">
+          <span class="k">
+            <span class="lang lang-ko">전투일</span>
+            <span class="lang lang-en">Battle Day</span>
+            <span class="lang lang-ja">開催日</span>
+            <span class="lang lang-zh-CN">战斗日</span>
+            <span class="lang lang-zh-TW">戰鬥日</span>
+          </span>
+          <span class="lang lang-ko">선택된 시간대의 토요일</span>
+          <span class="lang lang-en">Saturday (chosen time slot)</span>
+          <span class="lang lang-ja">選択した時間帯の土曜日</span>
+          <span class="lang lang-zh-CN">周六（所选时间段）</span>
+          <span class="lang lang-zh-TW">週六（所選時段）</span>
+        </span>
+      </div>
+
+      <nav class="toc" aria-label="목차">
+        <strong>
+          <span class="lang lang-ko">목차</span>
+          <span class="lang lang-en">Contents</span>
+          <span class="lang lang-ja">目次</span>
+          <span class="lang lang-zh-CN">目录</span>
+          <span class="lang lang-zh-TW">目錄</span>
+        </strong>
+        <ul>
+          <li><a href="#tac-summary"><span class="lang lang-ko">한눈에 보는 규칙 요약</span><span class="lang lang-en">Rules at a Glance</span><span class="lang lang-ja">ルール要約</span><span class="lang lang-zh-CN">规则速览</span><span class="lang lang-zh-TW">規則速覽</span></a></li>
+          <li><a href="#tac-stages"><span class="lang lang-ko">전투 단계(4스테이지)</span><span class="lang lang-en">4 Battle Stages</span><span class="lang lang-ja">4つのステージ</span><span class="lang lang-zh-CN">四个阶段</span><span class="lang lang-zh-TW">四個階段</span></a></li>
+          <li><a href="#tac-map"><span class="lang lang-ko">맵 구조와 핵심 포인트</span><span class="lang lang-en">Map & Key Points</span><span class="lang lang-ja">マップと要点</span><span class="lang lang-zh-CN">地图与关键点</span><span class="lang lang-zh-TW">地圖與關鍵點</span></a></li>
+          <li><a href="#tac-setup"><span class="lang lang-ko">사전 준비(등록/인원/음성)</span><span class="lang lang-en">Registration & Setup</span><span class="lang lang-ja">事前準備</span><span class="lang lang-zh-CN">报名与准备</span><span class="lang lang-zh-TW">報名與準備</span></a></li>
+          <li><a href="#tac-team"><span class="lang lang-ko">팀 편성 추천</span><span class="lang lang-en">Team Setup</span><span class="lang lang-ja">編成</span><span class="lang lang-zh-CN">队伍编成</span><span class="lang lang-zh-TW">隊伍編成</span></a></li>
+          <li><a href="#tac-strategy"><span class="lang lang-ko">스테이지별 운영 전략</span><span class="lang lang-en">Stage Strategy</span><span class="lang lang-ja">ステージ戦略</span><span class="lang lang-zh-CN">阶段策略</span><span class="lang lang-zh-TW">階段策略</span></a></li>
+          <li><a href="#tac-tips"><span class="lang lang-ko">실전 팁(에너지/회복/재진입)</span><span class="lang lang-en">Practical Tips</span><span class="lang lang-ja">実戦Tips</span><span class="lang lang-zh-CN">实战技巧</span><span class="lang lang-zh-TW">實戰技巧</span></a></li>
+          <li><a href="#tac-faq"><span class="lang lang-ko">FAQ</span><span class="lang lang-en">FAQ</span><span class="lang lang-ja">FAQ</span><span class="lang lang-zh-CN">常见问题</span><span class="lang lang-zh-TW">常見問題</span></a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Image / Map -->
+    <section class="imgbox" id="tac-map">
+      <figure>
+        <img src="/img/tri_alliance_clash_map.png" alt="Tri-Alliance Clash 규칙/맵 요약 이미지">
+        <figcaption>
+          <span class="lang lang-ko">핵심 오브젝트(중계 거점/수비대/파도 신전/천공 루트)를 한 장에 정리한 지도입니다. 좌표(A1/B1/C1, A24/B24/C24 등)는 전장 내 표기를 기준으로 합니다.</span>
+          <span class="lang lang-en">A one-page map highlighting key objectives (Transit Hubs / Garrisons / Temple route). Coordinates (A1/B1/C1, A24/B24/C24, etc.) follow the in-game labels.</span>
+          <span class="lang lang-ja">主要目標（中継拠点/ガリソン/寺院ルート）を1枚にまとめたマップです。座標はゲーム内表記（A1/B1/C1、A24/B24/C24など）に準拠します。</span>
+          <span class="lang lang-zh-CN">本图将关键目标（中转枢纽/要塞/神殿路线）集中展示。坐标（A1/B1/C1、A24/B24/C24等）以游戏内标注为准。</span>
+          <span class="lang lang-zh-TW">本圖將關鍵目標（中繼樞紐/要塞/神殿路線）集中展示。座標（A1/B1/C1、A24/B24/C24等）以遊戲內標註為準。</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- Rules summary -->
+    <section id="tac-summary">
+      <h2>
+        <span class="lang lang-ko">한눈에 보는 규칙 요약</span>
+        <span class="lang lang-en">Rules at a Glance</span>
+        <span class="lang lang-ja">ルール要約</span>
+        <span class="lang lang-zh-CN">规则速览</span>
+        <span class="lang lang-zh-TW">規則速覽</span>
+      </h2>
+
+      <div class="grid">
+        <div class="card">
+          <div class="title">
+            <span class="lang lang-ko">참전 조건(요약)</span>
+            <span class="lang lang-en">Entry Requirements (Summary)</span>
+            <span class="lang lang-ja">参加条件（要約）</span>
+            <span class="lang lang-zh-CN">参战条件（摘要）</span>
+            <span class="lang lang-zh-TW">參戰條件（摘要）</span>
+          </div>
+          <ul>
+            <li>
+              <span class="lang lang-ko">연맹 전투력 상위 20위</span>
+              <span class="lang lang-en">Top 20 alliances by power</span>
+              <span class="lang lang-ja">同盟戦力上位20</span>
+              <span class="lang lang-zh-CN">联盟战力前20</span>
+              <span class="lang lang-zh-TW">聯盟戰力前20</span>
+            </li>
+            <li>
+              <span class="lang lang-ko">자동: 제1군 기본 해제</span>
+              <span class="lang lang-en">Auto: Squad 1 unlocked</span>
+              <span class="lang lang-ja">自動：第1部隊解放</span>
+              <span class="lang lang-zh-CN">自动：第1队解锁</span>
+              <span class="lang lang-zh-TW">自動：第1隊解鎖</span>
+            </li>
+            <li>
+              <span class="lang lang-ko">2군단 해제 예시: 연맹 Lv.6 이상 + 누적 접속 인원 40명</span>
+              <span class="lang lang-en">Example for Squad 2: Alliance Lv.6+ and 40 cumulative active logins</span>
+              <span class="lang lang-ja">第2部隊解放例：同盟Lv.6以上＋累計接続40人</span>
+              <span class="lang lang-zh-CN">第2队解锁示例：联盟Lv.6+ 且累计活跃40人</span>
+              <span class="lang lang-zh-TW">第2隊解鎖示例：聯盟Lv.6+ 且累計活躍40人</span>
+            </li>
+            <li>
+              <span class="lang lang-ko">군단: <span class="k">참전자+후보자 합계 15명 이상</span>이면 2개 군단 인원 별도 계산</span>
+              <span class="lang lang-en">Squads: If <span class="k">Participants + Subs ≥ 15</span>, Squad 2 can be counted separately</span>
+              <span class="lang lang-ja">部隊：<span class="k">参加者＋補欠が15人以上</span>で第2部隊を別計算</span>
+              <span class="lang lang-zh-CN">队伍：<span class="k">参战+候补≥15</span>时可单独计算第2队</span>
+              <span class="lang lang-zh-TW">隊伍：<span class="k">參戰+候補≥15</span>時可單獨計算第2隊</span>
+            </li>
+            <li>
+              <span class="lang lang-ko">개인: 연맹 가입 + 도시센터 Lv.16 이상, 5일 이상 미접속은 참가 제한 가능</span>
+              <span class="lang lang-en">Players: Must be in an alliance and City Center Lv.16+; inactive for 5+ days may be restricted</span>
+              <span class="lang lang-ja">個人：同盟加入＋都市センターLv.16以上、5日以上未ログインは制限の可能性</span>
+              <span class="lang lang-zh-CN">个人：加入联盟且主城Lv.16+；5天以上未登录可能被限制</span>
+              <span class="lang lang-zh-TW">個人：加入聯盟且主城Lv.16+；5天以上未登入可能被限制</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="title">
+            <span class="lang lang-ko">기본 규칙(운영)</span>
+            <span class="lang lang-en">Basic Rules (Operations)</span>
+            <span class="lang lang-ja">基本ルール（運用）</span>
+            <span class="lang lang-zh-CN">基础规则（运营）</span>
+            <span class="lang lang-zh-TW">基礎規則（營運）</span>
+          </div>
+          <ul>
+            <li>
+              <span class="lang lang-ko">투표/신청/매칭/전투는 서버 캘린더에 따라 진행</span>
+              <span class="lang lang-en">Voting / Sign-up / Matchmaking / Battle follow the server calendar</span>
+              <span class="lang lang-ja">投票/申請/マッチング/戦闘はサーバーカレンダー準拠</span>
+              <span class="lang lang-zh-CN">投票/报名/匹配/战斗按服务器日程进行</span>
+              <span class="lang lang-zh-TW">投票/報名/配對/戰鬥依伺服器日程進行</span>
+            </li>
+            <li>
+              <span class="lang lang-ko">R4 이상: 신청 및 참여 인원 조정 가능</span>
+              <span class="lang lang-en">R4+: Can adjust sign-ups and participants</span>
+              <span class="lang lang-ja">R4以上：申請/参加人数の調整可</span>
+              <span class="lang lang-zh-CN">R4以上：可调整报名与参战人数</span>
+              <span class="lang lang-zh-TW">R4以上：可調整報名與參戰人數</span>
+            </li>
+            <li>
+              <span class="lang lang-ko">최대 30인 참가 + 후보자 10인(서버 규칙에 따라 상이)</span>
+              <span class="lang lang-en">Up to 30 participants + 10 substitutes (may vary by server rules)</span>
+              <span class="lang lang-ja">最大30人＋補欠10人（サーバーにより異なる）</span>
+              <span class="lang lang-zh-CN">最多30人参战+10名候补（可能因服务器不同）</span>
+              <span class="lang lang-zh-TW">最多30人參戰+10名候補（可能因伺服器不同）</span>
+            </li>
+            <li>
+              <span class="lang lang-ko">연맹당 최대 2개 군단으로 다른 전장 동시 진행 가능</span>
+              <span class="lang lang-en">Up to 2 squads per alliance can run in separate battlefields</span>
+              <span class="lang lang-ja">同盟あたり最大2部隊で別戦場同時進行可</span>
+              <span class="lang lang-zh-CN">每个联盟最多2支队伍可同时在不同战场进行</span>
+              <span class="lang lang-zh-TW">每個聯盟最多2支隊伍可同時在不同戰場進行</span>
+            </li>
+            <li>
+              <span class="lang lang-ko">영주는 <span class="k">총 3개 부대</span>를 전장에 투입 가능</span>
+              <span class="lang lang-en">Each Governor can deploy <span class="k">up to 3 marches</span></span>
+              <span class="lang lang-ja">各領主は<span class="k">最大3部隊</span>投入可</span>
+              <span class="lang lang-zh-CN">每位领主可投入<span class="k">最多3支部队</span></span>
+              <span class="lang lang-zh-TW">每位領主可投入<span class="k">最多3支部隊</span></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>
+          <span class="k">
+            <span class="lang lang-ko">요점</span>
+            <span class="lang lang-en">Key Point</span>
+            <span class="lang lang-ja">要点</span>
+            <span class="lang lang-zh-CN">要点</span>
+            <span class="lang lang-zh-TW">要點</span>
+          </span>
+          <span class="lang lang-ko">“인원 등록”이 승패에 직결됩니다. 실제 참여 가능한 인원만 등록하세요.</span>
+          <span class="lang lang-en">Registration decides everything. Only register members who will actually show up.</span>
+          <span class="lang lang-ja">登録が勝敗を左右します。実参加できる人だけ登録しましょう。</span>
+          <span class="lang lang-zh-CN">报名决定成败。只报名真正能到场的人。</span>
+          <span class="lang lang-zh-TW">報名決定成敗。只報名真正能到場的人。</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Stages -->
+    <section id="tac-stages">
+      <h2>
+        <span class="lang lang-ko">전투 단계(4스테이지)</span>
+        <span class="lang lang-en">4 Battle Stages</span>
+        <span class="lang lang-ja">4つの戦闘ステージ</span>
+        <span class="lang lang-zh-CN">四个战斗阶段</span>
+        <span class="lang lang-zh-TW">四個戰鬥階段</span>
+      </h2>
+
+      <table class="tbl" aria-label="Tri-Alliance Clash 단계 요약">
+        <thead>
+          <tr>
+            <th><span class="lang lang-ko">단계</span><span class="lang lang-en">Stage</span><span class="lang lang-ja">段階</span><span class="lang lang-zh-CN">阶段</span><span class="lang lang-zh-TW">階段</span></th>
+            <th><span class="lang lang-ko">시간</span><span class="lang lang-en">Time</span><span class="lang lang-ja">時間</span><span class="lang lang-zh-CN">时间</span><span class="lang lang-zh-TW">時間</span></th>
+            <th><span class="lang lang-ko">핵심 목표</span><span class="lang lang-en">Goal</span><span class="lang lang-ja">目的</span><span class="lang lang-zh-CN">目标</span><span class="lang lang-zh-TW">目標</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="lang lang-ko">1) 준비</span><span class="lang lang-en">1) Preparation</span><span class="lang lang-ja">1) 準備</span><span class="lang lang-zh-CN">1) 准备</span><span class="lang lang-zh-TW">1) 準備</span></td>
+            <td>3m</td>
+            <td>
+              <span class="lang lang-ko">역할 분배, 이동 루트 확인, 초기 점령 동선 정리</span>
+              <span class="lang lang-en">Assign roles, confirm routes, plan opening captures</span>
+              <span class="lang lang-ja">役割分担、ルート確認、初動の占領動線</span>
+              <span class="lang lang-zh-CN">分配角色、确认路线、规划开局占领</span>
+              <span class="lang lang-zh-TW">分配角色、確認路線、規劃開局佔領</span>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="lang lang-ko">2) 점령 확장</span><span class="lang lang-en">2) Seize &amp; Conquer</span><span class="lang lang-ja">2) 占領拡大</span><span class="lang lang-zh-CN">2) 扩张占领</span><span class="lang lang-zh-TW">2) 擴張佔領</span></td>
+            <td>17m</td>
+            <td>
+              <span class="lang lang-ko">아군 구역 선점 + 적 구역 소형 건물 일부 탈취(가리슨은 보호)</span>
+              <span class="lang lang-en">Secure your side and steal a few small buildings (Garrisons are shielded)</span>
+              <span class="lang lang-ja">自陣確保＋敵陣の小建物を一部奪取（ガリソンは保護）</span>
+              <span class="lang lang-zh-CN">先占己方建筑并夺取少量敌方小建筑（要塞仍受保护）</span>
+              <span class="lang lang-zh-TW">先佔己方建築並奪取少量敵方小建築（要塞仍受保護）</span>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="lang lang-ko">3) 수비대 점령</span><span class="lang lang-en">3) Garrison Occupation</span><span class="lang lang-ja">3) ガリソン占領</span><span class="lang lang-zh-CN">3) 要塞争夺</span><span class="lang lang-zh-TW">3) 要塞爭奪</span></td>
+            <td>20m</td>
+            <td>
+              <span class="lang lang-ko"><span class="k">A24/B24/C24</span> 개방. 수비대는 분당 점수가 높아 승부처</span>
+              <span class="lang lang-en"><span class="k">A24/B24/C24</span> unlock. Garrisons are high points per minute and decide the match</span>
+              <span class="lang lang-ja"><span class="k">A24/B24/C24</span>解放。分間得点が高く勝負所</span>
+              <span class="lang lang-zh-CN"><span class="k">A24/B24/C24</span>开放。要塞分分钟高分，是胜负关键</span>
+              <span class="lang lang-zh-TW"><span class="k">A24/B24/C24</span>開放。要塞每分鐘高分，是勝負關鍵</span>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="lang lang-ko">4) 천공 공세</span><span class="lang lang-en">4) Temple Onslaught</span><span class="lang lang-ja">4) 寺院総攻撃</span><span class="lang lang-zh-CN">4) 神殿总攻</span><span class="lang lang-zh-TW">4) 神殿總攻</span></td>
+            <td>20m</td>
+            <td>
+              <span class="lang lang-ko">40분에 <span class="k">파도 신전(천공)</span> 개방. 최초 점령 + 유지 점수로 최종 승부</span>
+              <span class="lang lang-en">At 40m, <span class="k">Temple of Tides</span> opens. First-capture + holding points decide the endgame</span>
+              <span class="lang lang-ja">40分で<span class="k">潮の寺院</span>解放。初回占領＋保持得点が勝負</span>
+              <span class="lang lang-zh-CN">40分钟<span class="k">潮汐神殿</span>开放。首占+占领分决定最终胜负</span>
+              <span class="lang lang-zh-TW">40分鐘<span class="k">潮汐神殿</span>開放。首佔+佔領分決定最終勝負</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <p>
+          <span class="k">
+            <span class="lang lang-ko">핵심 타이밍</span>
+            <span class="lang lang-en">Key Timing</span>
+            <span class="lang lang-ja">重要タイミング</span>
+            <span class="lang lang-zh-CN">关键时间点</span>
+            <span class="lang lang-zh-TW">關鍵時間點</span>
+          </span>
+          <span class="lang lang-ko">20분(수비대) / 40분(천공). 이 타이밍에 에너지를 남겨두는 것이 승리의 핵심입니다.</span>
+          <span class="lang lang-en">20m (Garrisons) / 40m (Temple). Save energy for these moments.</span>
+          <span class="lang lang-ja">20分（ガリソン）/40分（寺院）。ここにエネルギーを残すのが勝利の鍵。</span>
+          <span class="lang lang-zh-CN">20分钟（要塞）/40分钟（神殿）。务必为这两个时间点保留能量。</span>
+          <span class="lang lang-zh-TW">20分鐘（要塞）/40分鐘（神殿）。務必為這兩個時間點保留能量。</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Map key points -->
+    <section id="tac-map">
+      <h2>
+        <span class="lang lang-ko">맵 구조와 핵심 포인트</span>
+        <span class="lang lang-en">Map & Key Points</span>
+        <span class="lang lang-ja">マップ構造と要点</span>
+        <span class="lang lang-zh-CN">地图与关键点</span>
+        <span class="lang lang-zh-TW">地圖與關鍵點</span>
+      </h2>
+
+      <p>
+        <span class="lang lang-ko">맵은 3개 구역으로 나뉘며, 각 연맹은 본진(예: A1/B1/C1)에서 시작합니다.</span>
+        <span class="lang lang-en">The map has three regions. Each alliance starts at its HQ (A1/B1/C1).</span>
+        <span class="lang lang-ja">マップは3区画。各同盟は本拠地（A1/B1/C1）から開始します。</span>
+        <span class="lang lang-zh-CN">地图分为三个区域，各联盟从总部（A1/B1/C1）出发。</span>
+        <span class="lang lang-zh-TW">地圖分為三個區域，各聯盟從總部（A1/B1/C1）出發。</span>
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="title">
+            <span class="lang lang-ko">수비대(가리슨) — 20분 개방</span>
+            <span class="lang lang-en">Garrisons — Unlock at 20m</span>
+            <span class="lang lang-ja">ガリソン — 20分で解放</span>
+            <span class="lang lang-zh-CN">要塞 — 20分钟开放</span>
+            <span class="lang lang-zh-TW">要塞 — 20分鐘開放</span>
+          </div>
+          <ul>
+            <li><span class="lang lang-ko">대표 좌표: <span class="k">A24, B24, C24</span></span><span class="lang lang-en">Key coords: <span class="k">A24, B24, C24</span></span><span class="lang lang-ja">座標：<span class="k">A24, B24, C24</span></span><span class="lang lang-zh-CN">坐标：<span class="k">A24, B24, C24</span></span><span class="lang lang-zh-TW">座標：<span class="k">A24, B24, C24</span></span></li>
+            <li><span class="lang lang-ko">분당 점수가 높아, 잃으면 점수 차가 급격히 벌어짐</span><span class="lang lang-en">High points per minute — losing it flips the score fast</span><span class="lang lang-ja">分間得点が高く、失うと一気に逆転される</span><span class="lang lang-zh-CN">分钟高分，丢了就可能被快速反超</span><span class="lang lang-zh-TW">每分鐘高分，丟了就可能被快速反超</span></li>
+            <li><span class="lang lang-ko">기본: <span class="k">내 수비대 사수</span> + 가능하면 <span class="k">적 수비대 탈취</span></span><span class="lang lang-en">Default: <span class="k">Hold yours</span>, then try to <span class="k">take an enemy Garrison</span></span><span class="lang lang-ja">基本：<span class="k">自軍防衛</span>＋可能なら<span class="k">敵ガリソン奪取</span></span><span class="lang lang-zh-CN">基本：<span class="k">守住己方</span>，再尝试<span class="k">夺取敌方</span></span><span class="lang lang-zh-TW">基本：<span class="k">守住己方</span>，再嘗試<span class="k">奪取敵方</span></span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="title">
+            <span class="lang lang-ko">천공(파도 신전) 진입 연결 건물</span>
+            <span class="lang lang-en">Temple Access Buildings</span>
+            <span class="lang lang-ja">寺院進入の接続建物</span>
+            <span class="lang lang-zh-CN">通往神殿的连接建筑</span>
+            <span class="lang lang-zh-TW">通往神殿的連結建築</span>
+          </div>
+          <ul>
+            <li><span class="lang lang-ko">예시 좌표: <span class="k">A29, B29, C29</span></span><span class="lang lang-en">Example coords: <span class="k">A29, B29, C29</span></span><span class="lang lang-ja">例：<span class="k">A29, B29, C29</span></span><span class="lang lang-zh-CN">示例：<span class="k">A29, B29, C29</span></span><span class="lang lang-zh-TW">示例：<span class="k">A29, B29, C29</span></span></li>
+            <li><span class="lang lang-ko">아군 측 2개의 중계 거점(Transit Hubs)과 연결되어 천공으로 가는 통로 역할</span><span class="lang lang-en">They connect to two Transit Hubs — your only reliable path to the Temple</span><span class="lang lang-ja">2つの中継拠点に接続し、寺院への通路になる</span><span class="lang lang-zh-CN">连接两处中转枢纽，是通往神殿的关键通道</span><span class="lang lang-zh-TW">連結兩處中繼樞紐，是通往神殿的關鍵通道</span></li>
+            <li><span class="lang lang-ko">적이 점령하면 천공 접근이 막혀 최종 20분이 매우 불리해질 수 있음</span><span class="lang lang-en">If the enemy holds one, you can lose Temple access in the final 20 minutes</span><span class="lang lang-ja">敵に取られると終盤20分の寺院到達が不利</span><span class="lang lang-zh-CN">被敌方占领会导致终盘无法顺利进神殿</span><span class="lang lang-zh-TW">被敵方佔領會導致終盤無法順利進神殿</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>
+          <span class="k">
+            <span class="lang lang-ko">운영 원칙</span>
+            <span class="lang lang-en">Operating Rule</span>
+            <span class="lang lang-ja">運用原則</span>
+            <span class="lang lang-zh-CN">运营原则</span>
+            <span class="lang lang-zh-TW">營運原則</span>
+          </span>
+          <span class="lang lang-ko">“20분 수비대 방어” + “40분 천공 진입로(A29/B29/C29) 유지”를 동시에 잡아야 합니다.</span>
+          <span class="lang lang-en">You must do both: “Hold your Garrison at 20m” + “Protect Temple access (A29/B29/C29) at 40m.”</span>
+          <span class="lang lang-ja">「20分ガリソン防衛」＋「40分寺院進入路（A29/B29/C29）維持」を同時に。</span>
+          <span class="lang lang-zh-CN">必须同时做到：20分钟守要塞 + 40分钟保住神殿通道（A29/B29/C29）。</span>
+          <span class="lang lang-zh-TW">必須同時做到：20分鐘守要塞 + 40分鐘守住神殿通道（A29/B29/C29）。</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Setup -->
+    <section id="tac-setup">
+      <h2>
+        <span class="lang lang-ko">사전 준비(등록/인원/음성)</span>
+        <span class="lang lang-en">Registration & Setup</span>
+        <span class="lang lang-ja">事前準備（登録/人数/音声）</span>
+        <span class="lang lang-zh-CN">报名与准备（人员/语音）</span>
+        <span class="lang lang-zh-TW">報名與準備（人員/語音）</span>
+      </h2>
+
+      <h3>
+        <span class="lang lang-ko">1) 등록</span>
+        <span class="lang lang-en">1) Registration</span>
+        <span class="lang lang-ja">1) 登録</span>
+        <span class="lang lang-zh-CN">1) 报名</span>
+        <span class="lang lang-zh-TW">1) 報名</span>
+      </h3>
+      <ul>
+        <li><span class="lang lang-ko">실제 참여 가능한 인원만 등록(유령 등록은 매칭/전투 모두 손해)</span><span class="lang lang-en">Register only active members (inactive sign-ups hurt matchmaking and battle)</span><span class="lang lang-ja">実参加できる人だけ登録（幽霊登録は不利）</span><span class="lang lang-zh-CN">只报名能到场的人（挂名会拖累匹配与实战）</span><span class="lang lang-zh-TW">只報名能到場的人（掛名會拖累配對與實戰）</span></li>
+        <li><span class="lang lang-ko">R4 이상 참여 권장: 점령 후 <span class="k">지휘관(캡틴)</span> 임명 가능 → 에너지 회복 이점</span><span class="lang lang-en">Have R4+ present: they can assign <span class="k">Captains</span> → faster energy regen</span><span class="lang lang-ja">R4以上推奨：<span class="k">キャプテン</span>任命で回復優位</span><span class="lang lang-zh-CN">建议R4以上到场：可任命<span class="k">队长</span>→更快能量恢复</span><span class="lang lang-zh-TW">建議R4以上到場：可任命<span class="k">隊長</span>→更快能量恢復</span></li>
+      </ul>
+
+      <h3>
+        <span class="lang lang-ko">2) 음성 채널</span>
+        <span class="lang lang-en">2) Voice Chat</span>
+        <span class="lang lang-ja">2) ボイス</span>
+        <span class="lang lang-zh-CN">2) 语音</span>
+        <span class="lang lang-zh-TW">2) 語音</span>
+      </h3>
+      <ul>
+        <li><span class="lang lang-ko">디스코드 보이스 권장(최소 리더 1~3명)</span><span class="lang lang-en">Use Discord voice (at least 1–3 leaders)</span><span class="lang lang-ja">Discordボイス推奨（最低リーダー1〜3人）</span><span class="lang lang-zh-CN">建议开Discord语音（至少1–3名指挥）</span><span class="lang lang-zh-TW">建議開Discord語音（至少1–3名指揮）</span></li>
+        <li><span class="lang lang-ko">실시간 콜이 채팅보다 압도적으로 빠름</span><span class="lang lang-en">Real-time calls are much faster than typing</span><span class="lang lang-ja">リアルタイム指示はチャットより圧倒的に早い</span><span class="lang lang-zh-CN">实时指挥远比打字快</span><span class="lang lang-zh-TW">即時指揮遠比打字快</span></li>
+      </ul>
+    </section>
+
+    <!-- Team -->
+    <section id="tac-team">
+      <h2>
+        <span class="lang lang-ko">팀 편성 추천</span>
+        <span class="lang lang-en">Recommended Team Setup</span>
+        <span class="lang lang-ja">編成おすすめ</span>
+        <span class="lang lang-zh-CN">队伍编成建议</span>
+        <span class="lang lang-zh-TW">隊伍編成建議</span>
+      </h2>
+
+      <p>
+        <span class="lang lang-ko">목표는 “점수 생산(점령/유지)”과 “핵심 오브젝트 방어”를 동시에 굴리는 것입니다.</span>
+        <span class="lang lang-en">Your goal is to run “point production (capture/hold)” and “key-object defense” at the same time.</span>
+        <span class="lang lang-ja">目的は「得点生産（占領/保持）」と「重要目標の防衛」を同時に回すこと。</span>
+        <span class="lang lang-zh-CN">目标是同时做到“占领/持有拿分”和“关键目标防守”。</span>
+        <span class="lang lang-zh-TW">目標是同時做到「佔領/持有拿分」與「關鍵目標防守」。</span>
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="title"><span class="lang lang-ko">공격팀</span><span class="lang lang-en">Attack Team</span><span class="lang lang-ja">攻撃隊</span><span class="lang lang-zh-CN">进攻队</span><span class="lang lang-zh-TW">進攻隊</span></div>
+          <ul>
+            <li><span class="lang lang-ko">적 구역 진입 → 건물 탈취 → 20분 수비대 공략 → 40분 천공 러시</span><span class="lang lang-en">Push enemy side → steal buildings → hit Garrisons at 20m → rush Temple at 40m</span><span class="lang lang-ja">敵陣侵入→奪取→20分ガリソン→40分寺院ラッシュ</span><span class="lang lang-zh-CN">推进敌区→夺点→20分钟打要塞→40分钟冲神殿</span><span class="lang lang-zh-TW">推進敵區→奪點→20分鐘打要塞→40分鐘衝神殿</span></li>
+            <li><span class="lang lang-ko">가장 강한 부대를 우선 배치</span><span class="lang lang-en">Put your strongest marches here</span><span class="lang lang-ja">最強部隊を優先配置</span><span class="lang lang-zh-CN">优先配置最强部队</span><span class="lang lang-zh-TW">優先配置最強部隊</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="title"><span class="lang lang-ko">수비팀 1/2</span><span class="lang lang-en">Defenders 1/2</span><span class="lang lang-ja">防衛隊1/2</span><span class="lang lang-zh-CN">防守队1/2</span><span class="lang lang-zh-TW">防守隊1/2</span></div>
+          <ul>
+            <li><span class="lang lang-ko">아군 핵심 루트/중계 거점 방어</span><span class="lang lang-en">Defend key routes and Transit Hubs</span><span class="lang lang-ja">重要ルート/中継拠点を防衛</span><span class="lang lang-zh-CN">防守关键路线/中转枢纽</span><span class="lang lang-zh-TW">防守關鍵路線/中繼樞紐</span></li>
+            <li><span class="lang lang-ko">특히 20분 이후 수비대 사수</span><span class="lang lang-en">Especially hold your Garrison after 20m</span><span class="lang lang-ja">特に20分以降のガリソン死守</span><span class="lang lang-zh-CN">尤其20分钟后要塞必须守住</span><span class="lang lang-zh-TW">尤其20分鐘後要塞必須守住</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="title"><span class="lang lang-ko">플로터</span><span class="lang lang-en">Floaters</span><span class="lang lang-ja">遊軍</span><span class="lang lang-zh-CN">机动队</span><span class="lang lang-zh-TW">機動隊</span></div>
+          <ul>
+            <li><span class="lang lang-ko">백업/증원 담당, 상황에 따라 공격·수비 지원</span><span class="lang lang-en">Backup/reinforce — help attack or defense as needed</span><span class="lang lang-ja">補助/増援、状況に応じて攻防支援</span><span class="lang lang-zh-CN">负责支援与增援，视情况支援攻防</span><span class="lang lang-zh-TW">負責支援與增援，視情況支援攻防</span></li>
+            <li><span class="lang lang-ko">에너지 절약 후 급변 상황에 반응</span><span class="lang lang-en">Conserve energy and react to sudden swings</span><span class="lang lang-ja">エネルギー温存→急変に対応</span><span class="lang lang-zh-CN">节省能量，随时应对突发</span><span class="lang lang-zh-TW">節省能量，隨時應對突發</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="title"><span class="lang lang-ko">영웅/부대 선택</span><span class="lang lang-en">Heroes & Marches</span><span class="lang lang-ja">英雄/部隊</span><span class="lang lang-zh-CN">英雄/部队</span><span class="lang lang-zh-TW">英雄/部隊</span></div>
+          <ul>
+            <li><span class="lang lang-ko">각 영주는 3개 부대(총 9영웅) 운용</span><span class="lang lang-en">Each Governor uses 3 marches (9 heroes total)</span><span class="lang lang-ja">各領主3部隊（英雄9体）運用</span><span class="lang lang-zh-CN">每位领主3支部队（共9名英雄）</span><span class="lang lang-zh-TW">每位領主3支部隊（共9名英雄）</span></li>
+            <li><span class="lang lang-ko">가장 강한 1개 부대는 수비대/천공 타이밍용으로 아끼는 운영도 유효</span><span class="lang lang-en">Saving your strongest march for Garrisons/Temple timing can be effective</span><span class="lang lang-ja">最強1部隊をガリソン/寺院タイミング用に温存も有効</span><span class="lang lang-zh-CN">最强一队留给要塞/神殿时机也很有效</span><span class="lang lang-zh-TW">最強一隊留給要塞/神殿時機也很有效</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strategy -->
+    <section id="tac-strategy">
+      <h2>
+        <span class="lang lang-ko">스테이지별 운영 전략</span>
+        <span class="lang lang-en">Stage-by-Stage Strategy</span>
+        <span class="lang lang-ja">ステージ別運用</span>
+        <span class="lang lang-zh-CN">分阶段策略</span>
+        <span class="lang lang-zh-TW">分階段策略</span>
+      </h2>
+
+      <h3>
+        <span class="lang lang-ko">스테이지 1~2 (0~20분): 준비 + 점령 확장</span>
+        <span class="lang lang-en">Stage 1–2 (0–20m): Prep + Seize</span>
+        <span class="lang lang-ja">ステージ1–2（0–20分）：準備＋占領拡大</span>
+        <span class="lang lang-zh-CN">阶段1–2（0–20分钟）：准备+扩张</span>
+        <span class="lang lang-zh-TW">階段1–2（0–20分鐘）：準備+擴張</span>
+      </h3>
+      <ul>
+        <li><span class="lang lang-ko">시작 즉시 아군 구역 건물 선점 + 중계 거점(Transit Hubs) 확보</span><span class="lang lang-en">Immediately capture your-side buildings and secure Transit Hubs</span><span class="lang lang-ja">初動で自陣占領＋中継拠点確保</span><span class="lang lang-zh-CN">开局先占己方并拿下中转枢纽</span><span class="lang lang-zh-TW">開局先佔己方並拿下中繼樞紐</span></li>
+        <li><span class="lang lang-ko">공격팀은 적 구역 소형 건물 일부 탈취로 점수/동선 이득</span><span class="lang lang-en">Attack Team steals a few small buildings for points and routes</span><span class="lang lang-ja">攻撃隊は敵の小建物を一部奪取して得点/動線優位</span><span class="lang lang-zh-CN">进攻队夺取少量敌方小建筑拿分和路线优势</span><span class="lang lang-zh-TW">進攻隊奪取少量敵方小建築拿分和路線優勢</span></li>
+        <li><span class="lang lang-ko">초반 목표: “분당 점수” 우위 만들기</span><span class="lang lang-en">Early goal: Win on “points per minute”</span><span class="lang lang-ja">序盤目標：「分間得点」優位</span><span class="lang lang-zh-CN">前期目标：拿到“分钟得分”优势</span><span class="lang lang-zh-TW">前期目標：拿到「每分鐘得分」優勢</span></li>
+        <li><span class="lang lang-ko"><span class="k">에너지 과소모 금지:</span> 20분 타이밍을 위해 에너지 30~40% 남기기</span><span class="lang lang-en"><span class="k">Do not overspend energy:</span> keep 30–40% for the 20m timing</span><span class="lang lang-ja"><span class="k">エネルギー浪費禁止:</span> 20分に向けて30〜40%温存</span><span class="lang lang-zh-CN"><span class="k">别把能量花光:</span> 为20分钟保留30–40%</span><span class="lang lang-zh-TW"><span class="k">別把能量花光:</span> 為20分鐘保留30–40%</span></li>
+      </ul>
+
+      <h3>
+        <span class="lang lang-ko">스테이지 3 (20~40분): 수비대</span>
+        <span class="lang lang-en">Stage 3 (20–40m): Garrisons</span>
+        <span class="lang lang-ja">ステージ3（20–40分）：ガリソン</span>
+        <span class="lang lang-zh-CN">阶段3（20–40分钟）：要塞</span>
+        <span class="lang lang-zh-TW">階段3（20–40分鐘）：要塞</span>
+      </h3>
+      <ul>
+        <li><span class="lang lang-ko">20분에 수비대(A24/B24/C24) 개방</span><span class="lang lang-en">At 20m, Garrisons (A24/B24/C24) unlock</span><span class="lang lang-ja">20分でガリソン解放</span><span class="lang lang-zh-CN">20分钟要塞开放</span><span class="lang lang-zh-TW">20分鐘要塞開放</span></li>
+        <li><span class="lang lang-ko">우선순위 1: <span class="k">내 수비대 방어</span>(잃으면 점수 뒤집힘)</span><span class="lang lang-en">Priority #1: <span class="k">Hold your Garrison</span> (losing it flips the score)</span><span class="lang lang-ja">優先①：<span class="k">自軍ガリソン死守</span></span><span class="lang lang-zh-CN">优先①：<span class="k">守住己方要塞</span></span><span class="lang lang-zh-TW">優先①：<span class="k">守住己方要塞</span></span></li>
+        <li><span class="lang lang-ko">우선순위 2: 가능하면 <span class="k">적 수비대 탈취</span>로 격차 벌리기</span><span class="lang lang-en">Priority #2: If possible, <span class="k">take an enemy Garrison</span></span><span class="lang lang-ja">優先②：可能なら敵ガリソン奪取</span><span class="lang lang-zh-CN">优先②：有机会就抢敌方要塞</span><span class="lang lang-zh-TW">優先②：有機會就搶敵方要塞</span></li>
+        <li><span class="lang lang-ko">플로터는 교전이 밀리는 곳에 즉시 투입</span><span class="lang lang-en">Floaters immediately reinforce wherever the fight is slipping</span><span class="lang lang-ja">遊軍は劣勢箇所へ即投入</span><span class="lang lang-zh-CN">机动队随时补到吃紧点</span><span class="lang lang-zh-TW">機動隊隨時補到吃緊點</span></li>
+      </ul>
+
+      <h3>
+        <span class="lang lang-ko">스테이지 4 (40~60분): 천공(파도 신전)</span>
+        <span class="lang lang-en">Stage 4 (40–60m): Temple</span>
+        <span class="lang lang-ja">ステージ4（40–60分）：寺院</span>
+        <span class="lang lang-zh-CN">阶段4（40–60分钟）：神殿</span>
+        <span class="lang lang-zh-TW">階段4（40–60分鐘）：神殿</span>
+      </h3>
+      <ul>
+        <li><span class="lang lang-ko">40분에 천공(파도 신전) 개방. <span class="k">최초 점령 포인트</span>가 커서 러시 타이밍 중요</span><span class="lang lang-en">At 40m the Temple opens. <span class="k">First-capture points</span> are huge — timing matters</span><span class="lang lang-ja">40分で寺院解放。<span class="k">初回占領得点</span>が大きくタイミングが重要</span><span class="lang lang-zh-CN">40分钟神殿开放，<span class="k">首占分</span>很高，冲点时机关键</span><span class="lang lang-zh-TW">40分鐘神殿開放，<span class="k">首佔分</span>很高，衝點時機關鍵</span></li>
+        <li><span class="lang lang-ko">공격팀: 천공 러시/유지 · 수비팀: 진입로(A29/B29/C29) 유지</span><span class="lang lang-en">Attack: rush/hold Temple · Defense: hold access (A29/B29/C29)</span><span class="lang lang-ja">攻撃：寺院ラッシュ/保持 · 防衛：進入路維持</span><span class="lang lang-zh-CN">进攻：冲/守神殿；防守：保住通道(A29/B29/C29)</span><span class="lang lang-zh-TW">進攻：衝/守神殿；防守：保住通道(A29/B29/C29)</span></li>
+        <li><span class="lang lang-ko">플로터: 적 증원 차단(연결 건물 탈환/재점령) + 천공 수비 보강</span><span class="lang lang-en">Floaters: cut reinforcements (retake connectors) + reinforce Temple</span><span class="lang lang-ja">遊軍：増援遮断（接続建物奪還）＋寺院補強</span><span class="lang lang-zh-CN">机动：切增援（夺回连接点）+ 加固神殿</span><span class="lang lang-zh-TW">機動：切增援（奪回連結點）+ 加固神殿</span></li>
+      </ul>
+
+      <div class="callout">
+        <p>
+          <span class="k">
+            <span class="lang lang-ko">승리 공식</span>
+            <span class="lang lang-en">Win Formula</span>
+            <span class="lang lang-ja">勝利公式</span>
+            <span class="lang lang-zh-CN">取胜公式</span>
+            <span class="lang lang-zh-TW">取勝公式</span>
+          </span>
+          <span class="lang lang-ko">(수비대 유지) + (천공 최초 점령) + (천공 유지) + (진입로 방어) 4가지를 동시에 만족하면 승률이 크게 올라갑니다.</span>
+          <span class="lang lang-en">Hold your Garrison + first-capture Temple + hold Temple + protect access routes — do all four and your win rate jumps.</span>
+          <span class="lang lang-ja">ガリソン保持＋寺院初回占領＋寺院保持＋進入路防衛。4つ同時に満たすと勝率が上がる。</span>
+          <span class="lang lang-zh-CN">守住要塞 + 首占神殿 + 守住神殿 + 保住通道，四项同时做到胜率大增。</span>
+          <span class="lang lang-zh-TW">守住要塞 + 首佔神殿 + 守住神殿 + 保住通道，四項同時做到勝率大增。</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Tips -->
+    <section id="tac-tips">
+      <h2>
+        <span class="lang lang-ko">실전 팁(에너지/회복/재진입)</span>
+        <span class="lang lang-en">Practical Tips (Energy/Heal/Re-enter)</span>
+        <span class="lang lang-ja">実戦Tips（回復/再入場）</span>
+        <span class="lang lang-zh-CN">实战技巧（能量/回血/返场）</span>
+        <span class="lang lang-zh-TW">實戰技巧（能量/回血/返場）</span>
+      </h2>
+
+      <h3>
+        <span class="lang lang-ko">에너지 관리</span>
+        <span class="lang lang-en">Energy Management</span>
+        <span class="lang lang-ja">エネルギー管理</span>
+        <span class="lang lang-zh-CN">能量管理</span>
+        <span class="lang lang-zh-TW">能量管理</span>
+      </h3>
+      <ul>
+        <li><span class="lang lang-ko">에너지는 이동/점령/돌진/철수/즉시 부활 등에 소모</span><span class="lang lang-en">Energy is spent on moving, capturing, charging, retreating, instant revive</span><span class="lang lang-ja">移動/占領/突撃/撤退/即時復活で消費</span><span class="lang lang-zh-CN">移动/占领/冲锋/撤退/立即复活都会耗能</span><span class="lang lang-zh-TW">移動/佔領/衝鋒/撤退/立即復活都會耗能</span></li>
+        <li><span class="lang lang-ko">점령 후 <span class="k">지휘관(캡틴)</span> 임명 시 에너지 회복이 유리</span><span class="lang lang-en">Assign <span class="k">Captains</span> after capture for faster energy regen</span><span class="lang lang-ja">占領後に<span class="k">キャプテン</span>任命で回復有利</span><span class="lang lang-zh-CN">占领后任命<span class="k">队长</span>能量回得更快</span><span class="lang lang-zh-TW">佔領後任命<span class="k">隊長</span>能量回得更快</span></li>
+      </ul>
+
+      <h3>
+        <span class="lang lang-ko">재진입/버프</span>
+        <span class="lang lang-en">Re-entry & Buffs</span>
+        <span class="lang lang-ja">再入場/バフ</span>
+        <span class="lang lang-zh-CN">返场/增益</span>
+        <span class="lang lang-zh-TW">返場/增益</span>
+      </h3>
+      <ul>
+        <li><span class="lang lang-ko">전장을 나가면 쿨타임 후 재입장 가능(예: 12분)</span><span class="lang lang-en">Leaving the battlefield triggers a cooldown (e.g., 12m) before re-entry</span><span class="lang lang-ja">退出するとクールタイム後に再入場（例：12分）</span><span class="lang lang-zh-CN">离开战场会进入冷却（例：12分钟）后才能返场</span><span class="lang lang-zh-TW">離開戰場會進入冷卻（例：12分鐘）後才能返場</span></li>
+        <li><span class="lang lang-ko">출정 가속/수용량 관련을 제외하면 대부분 버프는 유효(룰 기준)</span><span class="lang lang-en">Most buffs apply (per rules), except some march-speed/capacity related ones</span><span class="lang lang-ja">行軍速度/容量系を除き多くのバフは有効（ルール準拠）</span><span class="lang lang-zh-CN">除部分行军速度/容量类外，多数增益有效（以规则为准）</span><span class="lang lang-zh-TW">除部分行軍速度/容量類外，多數增益有效（以規則為準）</span></li>
+      </ul>
+
+      <h3>
+        <span class="lang lang-ko">부상/회복 운영</span>
+        <span class="lang lang-en">Wounds & Healing</span>
+        <span class="lang lang-ja">負傷/回復運用</span>
+        <span class="lang lang-zh-CN">受伤与回复</span>
+        <span class="lang lang-zh-TW">受傷與回復</span>
+      </h3>
+      <ul>
+        <li><span class="lang lang-ko">크게 밀리면 전 건물로 후퇴 → 회복 → 재진입이 즉부보다 손실이 적을 때가 많음</span><span class="lang lang-en">If badly wounded, retreat → heal → return is often better than instant revive</span><span class="lang lang-ja">大きく削れたら後退→回復→再突入が即復活より得な場合が多い</span><span class="lang lang-zh-CN">伤得重就先撤回一格补好再上，往往比立刻复活更划算</span><span class="lang lang-zh-TW">傷得重就先撤回一格補好再上，往往比立刻復活更划算</span></li>
+        <li><span class="lang lang-ko">회복/징집은 “교전이 잠시 끊기는 구간”에 맞추면 효율이 좋아짐</span><span class="lang lang-en">Time heals/conscript during brief lulls between fights</span><span class="lang lang-ja">回復/徴兵は「戦闘が途切れる瞬間」に合わせると効率が良い</span><span class="lang lang-zh-CN">回血/征兵尽量卡在战斗间隙做</span><span class="lang lang-zh-TW">回血/徵兵盡量卡在戰鬥間隙做</span></li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section id="tac-faq">
+      <h2>FAQ</h2>
+
+      <h3>
+        <span class="lang lang-ko">Q. 왜 각 팀의 유적 군집(Ruin Clusters) 수가 다르게 배치되나요?</span>
+        <span class="lang lang-en">Q. Why does each side have a different number of Ruin Clusters?</span>
+        <span class="lang lang-ja">Q. なぜ各陣営で遺跡クラスター数が違うの？</span>
+        <span class="lang lang-zh-CN">Q. 为什么各阵营的遗迹群数量不同？</span>
+        <span class="lang lang-zh-TW">Q. 為什麼各陣營的遺跡群數量不同？</span>
+      </h3>
+
+      <p class="langblock lang-ko">
+        맵 밸런스는 “완전 같은 개수”보다, 경로 길이·중계 거점 접근성·수비대 방어 난이도·천공 진입 안정성 같은 요소를 함께 맞추는 방식으로 설계되는 경우가 많습니다.
+        즉, 유적 군집이 더 많아 보이는 구역은 그만큼 방어 부담이 크거나 핵심 연결 지점 관리 난이도가 높게 잡혀 있을 수 있습니다.
+        실전 승부는 유적 개수보다 <span class="k">20분 수비대</span>와 <span class="k">40분 천공</span> 운영에서 갈리는 경우가 많습니다.
+      </p>
+
+      <p class="langblock lang-en">
+        Many maps balance around routes, Transit Hub access, Garrison defense difficulty, and Temple access stability — not just “equal counts.”
+        If a side has more Ruin Clusters, it may also carry higher defense burden or harder connector control. In practice, wins are often decided by
+        <span class="k">Garrisons at 20m</span> and the <span class="k">Temple at 40m</span>, more than Ruin count.
+      </p>
+
+      <p class="langblock lang-ja">
+        マップは「数を完全に揃える」よりも、ルート距離・中継拠点への到達性・ガリソン防衛難度・寺院進入の安定性などでバランス調整されることが多いです。
+        遺跡が多い側は防衛負担や接続地点の管理難度が高い場合があります。実戦では、<span class="k">20分ガリソン</span>と<span class="k">40分寺院</span>の運用が勝負を分けやすいです。
+      </p>
+
+      <p class="langblock lang-zh-CN">
+        地图平衡通常不追求“数量完全相同”，而是综合路线距离、中转枢纽可达性、要塞防守难度、神殿通道稳定性等因素。
+        遗迹群更多的一侧，往往也承担更高的防守压力或连接点管理难度。实战胜负多数取决于<span class="k">20分钟要塞</span>与<span class="k">40分钟神殿</span>的运营。
+      </p>
+
+      <p class="langblock lang-zh-TW">
+        地圖平衡通常不追求「數量完全相同」，而是綜合路線距離、中繼樞紐可達性、要塞防守難度、神殿通道穩定性等因素。
+        遺跡群更多的一側，往往也承擔更高的防守壓力或連結點管理難度。實戰勝負多數取決於<span class="k">20分鐘要塞</span>與<span class="k">40分鐘神殿</span>的運營。
+      </p>
+
+      <div class="hr"></div>
+
+      <h3>
+        <span class="lang lang-ko">Q. 이 이벤트에서 가장 중요한 한 가지는?</span>
+        <span class="lang lang-en">Q. What’s the single most important thing?</span>
+        <span class="lang lang-ja">Q. いちばん重要なことは？</span>
+        <span class="lang lang-zh-CN">Q. 最重要的一点是什么？</span>
+        <span class="lang lang-zh-TW">Q. 最重要的一點是什麼？</span>
+      </h3>
+
+      <p class="langblock lang-ko">
+        <span class="k">에너지</span>입니다. 초반에 에너지를 다 써버리면 20분/40분 타이밍에 아무것도 못합니다.
+        점령 후 캡틴 임명, 역할 분담, 플로터 운영으로 에너지를 남겨두는 것이 승리의 핵심입니다.
+      </p>
+
+      <p class="langblock lang-en">
+        <span class="k">Energy</span>. If you burn it early, you can’t fight at the 20m/40m swing points.
+        Assign Captains, split roles, and use Floaters to save energy for the moments that decide the match.
+      </p>
+
+      <p class="langblock lang-ja">
+        <span class="k">エネルギー</span>です。序盤で使い切ると20分/40分の勝負所で動けません。
+        キャプテン任命、役割分担、遊軍運用でエネルギーを温存するのが鍵です。
+      </p>
+
+      <p class="langblock lang-zh-CN">
+        <span class="k">能量</span>。前期耗光能量，就无法在20/40分钟关键点发力。
+        任命队长、明确分工、机动队运用来留能量，才是赢的关键。
+      </p>
+
+      <p class="langblock lang-zh-TW">
+        <span class="k">能量</span>。前期耗光能量，就無法在20/40分鐘關鍵點發力。
+        任命隊長、明確分工、機動隊運用來留能量，才是贏的關鍵。
+      </p>
+    </section>
+
+    <!-- SEO JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Tri-Alliance Clash 승리 가이드",
+      "about": "Kingshot Tri-Alliance Clash 전략 및 팁",
+      "inLanguage": "ko",
+      "author": { "@type": "Person", "name": "Ten Community" },
+      "publisher": { "@type": "Organization", "name": "wos.gg" }
+    }
+    </script>
+
+    <!-- JS: simple language switcher (cycles ko -> en -> ja -> zh-CN -> zh-TW) -->
+    <script>
+      (function(){
+        const root = document.getElementById('tri-alliance-clash-guide');
+        const btn  = document.getElementById('tac-lang-btn');
+        if(!root || !btn) return;
+
+        const langs = ["ko","en","ja","zh-CN","zh-TW"];
+
+        // Load saved lang (localStorage) if present
+        const saved = localStorage.getItem("tac_lang");
+        if(saved && langs.includes(saved)) root.setAttribute("data-lang", saved);
+
+        btn.addEventListener('click', function(){
+          const cur = root.getAttribute('data-lang') || 'ko';
+          const idx = langs.indexOf(cur);
+          const next = langs[(idx + 1) % langs.length];
+          root.setAttribute('data-lang', next);
+          localStorage.setItem("tac_lang", next);
+        });
+      })();
+    </script>
+  </div>
+</article>
