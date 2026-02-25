@@ -119,6 +119,106 @@ ol{margin:8px 0 0 18px}
   .hero{grid-template-columns:1fr}
   .cta{justify-self:stretch;text-align:center}
 }
+
+/* =========================================================
+   ✅ RELATED GUIDES (카드형 허브 섹션)
+   - guides.html 타일 디자인을 기프트코드 페이지에 그대로 이식
+   ========================================================= */
+
+.related-wrap{margin-top:18px}
+.related-lead{margin:4px 0 0;color:var(--muted);font-size:13px}
+.guides-list{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:14px;
+  padding:10px 0 0;
+}
+@media (max-width: 980px){
+  .guides-list{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px){
+  .guides-list{ grid-template-columns:1fr; }
+}
+
+.g-block{
+  background:#fff;
+  border:2px solid #5b5e73;
+  border-radius:22px;
+  overflow:hidden;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.g-block:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
+.g-link{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:18px 18px;
+  min-height:140px;
+}
+.tile-icon{
+  flex:0 0 132px;
+  height:132px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.tile-icon img{
+  max-width:112px;
+  max-height:112px;
+  width:auto;height:auto;
+  display:block;
+  object-fit:contain;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,.18));
+}
+.tile-fallback{
+  display:none;
+  width:112px;height:112px;
+  border-radius:18px;
+  border:1px solid var(--bd);
+  background:#f7f7f8;
+  color:var(--pri);
+  font-weight:900;
+  font-size:30px;
+  align-items:center;
+  justify-content:center;
+  user-select:none;
+}
+.tile-icon.is-fallback img{display:none}
+.tile-icon.is-fallback .tile-fallback{display:flex}
+
+.tile-title{
+  flex:1 1 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  min-width:0;
+  padding:0 6px;
+}
+.g-title{
+  margin:0;
+  font-size:16px;
+  font-weight:800;
+  line-height:1.25;
+  letter-spacing:-0.02em;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+/* MULTI-LANG (겹침 완전 차단판) */
+.langx{ display:none !important; }
+html[lang^="ko" i] .langx-ko{ display:inline !important; }
+html[lang^="en" i] .langx-en{ display:inline !important; }
+html[lang^="ja" i] .langx-ja{ display:inline !important; }
+html[lang="zh-CN" i] .langx-zh-CN{ display:inline !important; }
+html[lang="zh-TW" i] .langx-zh-TW{ display:inline !important; }
+html:not([lang]) .langx-ko{ display:inline !important; }
   </style>
 
   <!-- FAQ 구조화 데이터 (언어 변경 시 JS로 갱신) -->
@@ -189,6 +289,132 @@ ol{margin:8px 0 0 18px}
 
     <div class="divider"></div>
 
+    <!-- ✅ RELATED GUIDES HUB (카드형) -->
+    <section class="related-wrap" aria-label="Related guides">
+      <h2 id="related-title">추천 가이드</h2>
+      <p class="related-lead" id="related-lead">기프트코드만 보고 나가지 말고, 바로 필요한 공략/데이터로 이어가세요.</p>
+
+      <div class="guides-list">
+
+        <!-- A -->
+        <section class="g-block" id="transfer" data-href="/pages/guides/transfer.html">
+          <a class="g-link" data-router-ignore="true" href="/pages/guides/transfer.html" aria-label="Open Kingdom Transfer Guide">
+            <div class="tile-icon" aria-hidden="true">
+              <img src="/img/guide/transfer.webp" alt="" loading="lazy" decoding="async">
+              <div class="tile-fallback">TR</div>
+            </div>
+            <div class="tile-title">
+              <h3 class="g-title">
+                <span class="langx langx-ko">왕국 이민 심화 가이드</span>
+                <span class="langx langx-en">Kingdom Transfer Guide</span>
+                <span class="langx langx-ja">王国移民ガイド</span>
+                <span class="langx langx-zh-CN">王国转移指南</span>
+                <span class="langx langx-zh-TW">王國轉移指南</span>
+              </h3>
+            </div>
+          </a>
+        </section>
+
+        <!-- B -->
+        <section class="g-block" id="beginners" data-href="/pages/guides/kingshot-f2p-route-g4.html">
+          <a class="g-link" data-router-ignore="true" href="/pages/guides/kingshot-f2p-route-g4.html" aria-label="Open Beginner Guide">
+            <div class="tile-icon" aria-hidden="true">
+              <img src="/img/guide/double-time-decree-in-kingshot.webp" alt="" loading="lazy" decoding="async">
+              <div class="tile-fallback">BG</div>
+            </div>
+            <div class="tile-title">
+              <h3 class="g-title">
+                <span class="langx langx-ko">초보자 가이드</span>
+                <span class="langx langx-en">Beginner Guide</span>
+                <span class="langx langx-ja">初心者ガイド</span>
+                <span class="langx langx-zh-CN">新手指南</span>
+                <span class="langx langx-zh-TW">新手指南</span>
+              </h3>
+            </div>
+          </a>
+        </section>
+
+        <!-- C -->
+        <section class="g-block" id="viking" data-href="/pages/guides/viking.html">
+          <a class="g-link" data-router-ignore="true" href="/pages/guides/viking.html" aria-label="Open Viking Vengeance Guide">
+            <div class="tile-icon" aria-hidden="true">
+              <img src="/img/guide/viking-vengeance-event.webp" alt="" loading="lazy" decoding="async">
+              <div class="tile-fallback">VIK</div>
+            </div>
+            <div class="tile-title">
+              <h3 class="g-title">
+                <span class="langx langx-ko">바이킹의 약탈 최적 공략</span>
+                <span class="langx langx-en">Viking Vengeance Best Strategy</span>
+                <span class="langx langx-ja">バイキングの略奪 最適攻略</span>
+                <span class="langx langx-zh-CN">维京复仇 最优攻略</span>
+                <span class="langx langx-zh-TW">維京復仇 最佳攻略</span>
+              </h3>
+            </div>
+          </a>
+        </section>
+
+        <!-- D -->
+        <section class="g-block" id="ruins" data-href="/pages/guides/kingshot-ruins-tip.html">
+          <a class="g-link" data-router-ignore="true" href="/pages/guides/kingshot-ruins-tip.html" aria-label="Open Lost Ruins">
+            <div class="tile-icon" aria-hidden="true">
+              <img src="/img/guide/eternitys-reach-guide.webp" alt="" loading="lazy" decoding="async">
+              <div class="tile-fallback">RU</div>
+            </div>
+            <div class="tile-title">
+              <h3 class="g-title">
+                <span class="langx langx-ko">사라진 유적</span>
+                <span class="langx langx-en">Eternity’s Reach</span>
+                <span class="langx langx-ja">失われた遺跡</span>
+                <span class="langx langx-zh-CN">失落遗迹</span>
+                <span class="langx langx-zh-TW">失落遺跡</span>
+              </h3>
+            </div>
+          </a>
+        </section>
+
+        <!-- E -->
+        <section class="g-block" id="hallofgovernors" data-href="/pages/guides/hallofgovernors.html">
+          <a class="g-link" data-router-ignore="true" href="/pages/guides/hallofgovernors.html" aria-label="Open Hall of Governors Guide">
+            <div class="tile-icon" aria-hidden="true">
+              <img src="/img/guide/hallofgovernors.webp" alt="" loading="lazy" decoding="async">
+              <div class="tile-fallback">H</div>
+            </div>
+            <div class="tile-title">
+              <h3 class="g-title">
+                <span class="langx langx-ko">최강영주 공략</span>
+                <span class="langx langx-en">Hall of Governors</span>
+                <span class="langx langx-ja">最強総督攻略</span>
+                <span class="langx langx-zh-CN">最强总督攻略</span>
+                <span class="langx langx-zh-TW">最強總督攻略</span>
+              </h3>
+            </div>
+          </a>
+        </section>
+
+        <!-- F : Kingshot Home Hub -->
+<section class="g-block" id="kingshot-home" data-href="/home">
+  <a class="g-link" data-router-ignore="true" href="/home" aria-label="Open Kingshot Data Home">
+    <div class="tile-icon" aria-hidden="true">
+      <img src="/img/guide/ten.png" alt="" loading="lazy" decoding="async">
+      <div class="tile-fallback">HOME</div>
+    </div>
+    <div class="tile-title">
+      <h3 class="g-title">
+        <span class="langx langx-ko">킹샷 데이터 허브</span>
+        <span class="langx langx-en">Kingshot Data Hub</span>
+        <span class="langx langx-ja">キングショット データハブ</span>
+        <span class="langx langx-zh-CN">Kingshot 数据中心</span>
+        <span class="langx langx-zh-TW">Kingshot 數據中心</span>
+      </h3>
+    </div>
+  </a>
+</section>
+
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
     <!-- How to redeem -->
     <section>
       <h2 id="how-title">입력 방법</h2>
@@ -251,6 +477,8 @@ ol{margin:8px 0 0 18px}
         cta: "쿠폰 입력창 바로가기",
         currentTitle: "현재 사용 가능한 쿠폰",
         currentNote: "※ 일부 코드는 지역/서버/계정 상태에 따라 사용이 제한될 수 있습니다.",
+        relatedTitle: "추천 가이드",
+        relatedLead: "기프트코드만 보고 나가지 말고, 바로 필요한 공략/데이터로 이어가세요.",
         howTitle: "입력 방법",
         how1: "게임 내 <strong>프로필 → 설정 → 쿠폰 교환</strong> 메뉴로 이동합니다.",
         how2: "쿠폰 코드를 정확히 입력합니다.",
@@ -286,6 +514,8 @@ ol{margin:8px 0 0 18px}
         cta: "Open Redemption Portal",
         currentTitle: "Current Active Codes",
         currentNote: "Note: Some codes may be restricted by region/server/account status.",
+        relatedTitle: "Recommended Guides",
+        relatedLead: "Don’t bounce after copying a code—jump straight into the guides and data you need.",
         howTitle: "How to Redeem",
         how1: "In game, go to <strong>Profile → Settings → Coupon Exchange</strong>.",
         how2: "Enter the code exactly as shown.",
@@ -321,6 +551,8 @@ ol{margin:8px 0 0 18px}
         cta: "入力ページを開く",
         currentTitle: "現在利用可能なコード",
         currentNote: "※ 一部コードは地域／サーバー／アカウント状況により制限される場合があります。",
+        relatedTitle: "おすすめガイド",
+        relatedLead: "コードだけ見て離脱せず、そのまま必要な攻略・データへ。",
         howTitle: "入力手順",
         how1: "ゲーム内で<strong>プロフィール → 設定 → クーポン交換</strong>へ進みます。",
         how2: "表示どおり正確にコードを入力します。",
@@ -356,6 +588,8 @@ ol{margin:8px 0 0 18px}
         cta: "打开兑换入口",
         currentTitle: "当前可用礼品码",
         currentNote: "※ 部分代码可能受地区/服务器/账号状态限制。",
+        relatedTitle: "推荐指南",
+        relatedLead: "别只复制礼品码就离开，直接跳到你需要的攻略与数据。",
         howTitle: "兑换步骤",
         how1: "在游戏内前往<strong>个人资料 → 设置 → 优惠码兑换</strong>。",
         how2: "准确输入礼品码。",
@@ -391,6 +625,8 @@ ol{margin:8px 0 0 18px}
         cta: "開啟兌換入口",
         currentTitle: "目前可用禮品碼",
         currentNote: "※ 部分代碼可能受地區/伺服器/帳號限制。",
+        relatedTitle: "推薦指南",
+        relatedLead: "別只複製禮品碼就離開，直接跳到你需要的攻略與資料。",
         howTitle: "兌換步驟",
         how1: "在遊戲內前往<strong>個人資料 → 設定 → 優惠碼兌換</strong>。",
         how2: "正確輸入禮品碼。",
@@ -484,6 +720,12 @@ ol{margin:8px 0 0 18px}
       document.getElementById('cta-text').textContent = t('cta');
       document.getElementById('current-title').textContent = t('currentTitle');
       document.getElementById('current-note').textContent = t('currentNote');
+
+      const rt = document.getElementById('related-title');
+      const rl = document.getElementById('related-lead');
+      if (rt) rt.textContent = t('relatedTitle');
+      if (rl) rl.textContent = t('relatedLead');
+
       document.getElementById('how-title').textContent = t('howTitle');
       document.getElementById('how-1').innerHTML = t('how1');
       document.getElementById('how-2').innerHTML = t('how2');
@@ -534,14 +776,14 @@ ol{margin:8px 0 0 18px}
     let _cacheAt = 0;
 
     async function loadCoupons(){
-      const url = '/data/coupons.json?v=' + Date.now(); // 캐시 꼬임 방지
+      const url = '/data/coupons.json?v=' + Date.now();
       try{
         const res = await fetch(url, { cache:'no-store' });
         if (!res.ok) throw new Error(String(res.status));
         const data = await res.json();
         return Array.isArray(data?.coupons) ? data.coupons : [];
       }catch(_){
-        return null; // 실패
+        return null;
       }
     }
 
@@ -632,11 +874,11 @@ ol{margin:8px 0 0 18px}
       grid.textContent = 'Loading…';
 
       const now = Date.now();
-      const stale = (now - _cacheAt) > 5 * 60 * 1000; // 5분 이상이면 재조회
+      const stale = (now - _cacheAt) > 5 * 60 * 1000;
       if (forceRefetch || !_couponsCache || stale){
         const raw = await loadCoupons();
         _cacheAt = now;
-        _couponsCache = raw; // null 가능
+        _couponsCache = raw;
       }
 
       section.setAttribute('aria-busy','false');
@@ -662,7 +904,6 @@ ol{margin:8px 0 0 18px}
       coupons.forEach(c => grid.appendChild(createCouponCard(c, lang)));
     }
 
-    // Init
     (function init(){
       const initial = detectInitialLang();
       const sel = document.getElementById('langSelect');
@@ -674,10 +915,9 @@ ol{margin:8px 0 0 18px}
       sel.addEventListener('change', e=>{
         const lang = e.target.value;
         applyLang(lang);
-        renderCoupons(false); // 캐시 유지, 라벨/만료표시만 갱신
+        renderCoupons(false);
       });
 
-      // 만료(UTC 00:00) 반영을 위해 60초마다 재렌더 (5분마다 자동 재조회)
       setInterval(()=>renderCoupons(false), 60*1000);
     })();
   </script>
