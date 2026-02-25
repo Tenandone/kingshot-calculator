@@ -434,7 +434,7 @@
     }
 
     /* =========================
-      tg-tip (SEO section)
+      tg-tip
     ========================= */
     .tg-tip{
       background:#fff;
@@ -593,7 +593,6 @@
       line-height: 1.7;
     }
 
-    /* Mobile tuning */
     @media (max-width: 720px){
       .tg-tip__grid{ grid-template-columns: 1fr; }
       .tg-tip__tierRow{ grid-template-columns: 1fr; }
@@ -620,7 +619,7 @@
           </div>
 
           <div class="langbox">
-            <label class="sr-only" for="langSwitcher">Language</label>
+            <label class="sr-only" for="langSwitcher" data-i18n="header.langLabel">언어</label>
             <select id="langSwitcher" aria-label="Language">
               <option value="ko">한국어</option>
               <option value="en">English</option>
@@ -639,8 +638,7 @@
         <div class="slider-card" aria-label="TG totals slider">
           <div class="slider-top">
             <div class="tg-display">
-              <img id="tgIcon" class="tg-ico" src="/img/icons/truegold_level_1.webp" alt="TG1"
-                   onerror="this.style.display='none'">
+              <img id="tgIcon" class="tg-ico" src="/img/icons/truegold_level_1.webp" alt="TG1" onerror="this.style.display='none'">
               <div class="tg-meta">
                 <p id="tgLabel" class="tg-label">TG1 전체 소모</p>
                 <div class="tg-help" data-i18n="slider.hint">
@@ -649,7 +647,6 @@
               </div>
             </div>
 
-            <!-- ✅ 2칩(담금질된 순금 + 순금). 담금질된 순금은 TG1~5 숨김(자리 유지) -->
             <div id="tgTotals" class="totals"></div>
           </div>
 
@@ -668,7 +665,7 @@
         </table>
       </div>
 
-      <!-- SEO TIP -->
+      <!-- TIP -->
       <section class="tg-tip" aria-label="Tempered Truegold Tip">
         <div class="tg-tip__inner">
           <div class="tg-tip__head">
@@ -725,28 +722,31 @@
 
           <div class="tg-tip__tier">
             <h3 class="tg-tip__tierTitle" data-i18n="tip.tier.title">초정련 티어(주간 누적 기준)</h3>
+
             <div class="tg-tip__tierRow">
+              <!-- ✅ FIX: data-i18n 경로를 dict에 맞게 tip.tier.tierX 로 변경 -->
               <div class="tg-tier">
-                <b data-i18n="tip.tier1.b">티어 1</b><span data-i18n="tip.tier1.range">(1–20회)</span>
-                <em data-i18n="tip.tier1.em">순금 20 → 담금질된 순금 1–3</em>
+                <b data-i18n="tip.tier.tier1.b">티어 1</b><span data-i18n="tip.tier.tier1.range">(1–20회)</span>
+                <em data-i18n="tip.tier.tier1.em">순금 20 → 담금질된 순금 1–3</em>
               </div>
               <div class="tg-tier">
-                <b data-i18n="tip.tier2.b">티어 2</b><span data-i18n="tip.tier2.range">(21–40회)</span>
-                <em data-i18n="tip.tier2.em">순금 50 → 담금질된 순금 2–3</em>
+                <b data-i18n="tip.tier.tier2.b">티어 2</b><span data-i18n="tip.tier.tier2.range">(21–40회)</span>
+                <em data-i18n="tip.tier.tier2.em">순금 50 → 담금질된 순금 2–3</em>
               </div>
               <div class="tg-tier">
-                <b data-i18n="tip.tier3.b">티어 3</b><span data-i18n="tip.tier3.range">(41–60회)</span>
-                <em data-i18n="tip.tier3.em">순금 100 → 담금질된 순금 3–6</em>
+                <b data-i18n="tip.tier.tier3.b">티어 3</b><span data-i18n="tip.tier.tier3.range">(41–60회)</span>
+                <em data-i18n="tip.tier.tier3.em">순금 100 → 담금질된 순금 3–6</em>
               </div>
               <div class="tg-tier">
-                <b data-i18n="tip.tier4.b">티어 4</b><span data-i18n="tip.tier4.range">(61–80회)</span>
-                <em data-i18n="tip.tier4.em">순금 130 → 담금질된 순금 3–9</em>
+                <b data-i18n="tip.tier.tier4.b">티어 4</b><span data-i18n="tip.tier.tier4.range">(61–80회)</span>
+                <em data-i18n="tip.tier.tier4.em">순금 130 → 담금질된 순금 3–9</em>
               </div>
               <div class="tg-tier">
-                <b data-i18n="tip.tier5.b">티어 5</b><span data-i18n="tip.tier5.range">(81–100회)</span>
-                <em data-i18n="tip.tier5.em">순금 160 → 담금질된 순금 3–12</em>
+                <b data-i18n="tip.tier.tier5.b">티어 5</b><span data-i18n="tip.tier.tier5.range">(81–100회)</span>
+                <em data-i18n="tip.tier.tier5.em">순금 160 → 담금질된 순금 3–12</em>
               </div>
             </div>
+
             <p class="tg-tip__note" data-i18n="tip.tier.note">
               예시: 주간 누적 20회까지는 티어 1 유지 → 21회부터 티어 2로 이동합니다.
             </p>
@@ -785,10 +785,6 @@
 
   <script>
   (function(){
-    /* =========================
-      ICONS / PATHS
-      - tempered 아이콘: 공백 포함 파일명일 수 있어 onerror fallback 처리
-    ========================= */
     const ICONS = {
       tgLevel: (n) => `/img/icons/truegold_level_${n}.webp`,
       truegold: '/img/icons/truegold-kingshot.webp',
@@ -798,13 +794,11 @@
 
     const TG_MAX = 8;
 
-    /* =========================
-      i18n
-    ========================= */
     const I18N = {
       "ko": {
         page: { title: "2026순금소모표" },
-        header: { madeBy: "제작", back: "← 가이드로" },
+        header: { madeBy: "제작", back: "← 가이드로", langLabel: "언어" },
+        aria:{ truegoldChart:"순금 소모표", tgTotalsSlider:"TG 전체 소모 슬라이더", tableRegion:"TG1–TG8 표", temperedTip:"담금질된 순금 안내", tgRange:"TG 레벨 슬라이더" },
         slider: {
           hint: "슬라이드를 움직이면 해당 TG 레벨의 전체 소모량이 바뀝니다.",
           totalLabel: (tg)=>`TG${tg} 전체 소모`,
@@ -812,15 +806,7 @@
           tempered: "담금질된 순금",
           building: "건물"
         },
-        buildings: {
-          towncenter:"도시센터",
-          embassy:"대사관",
-          commandcenter:"지휘부",
-          infirmary:"야전병원",
-          barracks:"보병대",
-          stable:"기병대",
-          range:"궁병대"
-        },
+        buildings: { towncenter:"도시센터", embassy:"대사관", commandcenter:"지휘부", infirmary:"야전병원", barracks:"보병대", stable:"기병대", range:"궁병대" },
         tip:{
           title:"담금질된 순금이란?",
           sub:"TG5 이후 건물 업그레이드에 추가로 요구되는 특수 재료로, 순금을 한 단계 더 정제해 성능을 강화한 고급 소재입니다.",
@@ -850,7 +836,8 @@
 
       "en": {
         page: { title: "2026 Truegold Cost Chart" },
-        header: { madeBy: "Made by", back: "← Back to Guides" },
+        header: { madeBy: "Made by", back: "← Back to Guides", langLabel:"Language" },
+        aria:{ truegoldChart:"Truegold cost chart", tgTotalsSlider:"TG totals slider", tableRegion:"TG1–TG8 table", temperedTip:"Tempered Truegold guide", tgRange:"TG level slider" },
         slider: {
           hint: "Move the slider to see the total cost for each TG level.",
           totalLabel: (tg)=>`TG${tg} Total Cost`,
@@ -858,15 +845,7 @@
           tempered: "Tempered Truegold",
           building: "Building"
         },
-        buildings: {
-          towncenter:"Town Center",
-          embassy:"Embassy",
-          commandcenter:"Command Center",
-          infirmary:"Infirmary",
-          barracks:"Barracks",
-          stable:"Stable",
-          range:"Range"
-        },
+        buildings: { towncenter:"Town Center", embassy:"Embassy", commandcenter:"Command Center", infirmary:"Infirmary", barracks:"Barracks", stable:"Stable", range:"Range" },
         tip:{
           title:"What is Tempered Truegold?",
           sub:"A special material additionally required for building upgrades after TG5. It is further refined Truegold enhanced for higher-tier progression.",
@@ -896,7 +875,8 @@
 
       "ja": {
         page: { title: "2026 純金消費表" },
-        header: { madeBy: "作成", back: "← ガイドへ" },
+        header: { madeBy: "作成", back: "← ガイドへ", langLabel:"言語" },
+        aria:{ truegoldChart:"純金消費表", tgTotalsSlider:"TG総消費スライダー", tableRegion:"TG1–TG8 表", temperedTip:"精錬純金ガイド", tgRange:"TGレベルスライダー" },
         slider: {
           hint: "スライダーを動かすと、各TGレベルの総消費量が表示されます。",
           totalLabel: (tg)=>`TG${tg} 総消費`,
@@ -904,15 +884,7 @@
           tempered: "精錬純金",
           building: "建物"
         },
-        buildings: {
-          towncenter:"都市センター",
-          embassy:"大使館",
-          commandcenter:"司令部",
-          infirmary:"野戦病院",
-          barracks:"歩兵隊",
-          stable:"騎兵隊",
-          range:"弓兵隊"
-        },
+        buildings: { towncenter:"都市センター", embassy:"大使館", commandcenter:"司令部", infirmary:"野戦病院", barracks:"歩兵隊", stable:"騎兵隊", range:"弓兵隊" },
         tip:{
           title:"精錬純金とは？",
           sub:"TG5以降の建物アップグレードで追加要求される特殊素材。純金をさらに精製して性能を高めた上位素材です。",
@@ -942,7 +914,8 @@
 
       "zh-CN": {
         page: { title: "2026 纯金消耗表" },
-        header: { madeBy: "制作", back: "← 返回指南" },
+        header: { madeBy: "制作", back: "← 返回指南", langLabel:"语言" },
+        aria:{ truegoldChart:"纯金消耗表", tgTotalsSlider:"TG 总消耗滑块", tableRegion:"TG1–TG8 表格", temperedTip:"精炼纯金指南", tgRange:"TG 等级滑块" },
         slider: {
           hint: "拖动滑块可查看对应 TG 等级的总消耗。",
           totalLabel: (tg)=>`TG${tg} 总消耗`,
@@ -950,15 +923,7 @@
           tempered: "精炼纯金",
           building: "建筑"
         },
-        buildings: {
-          towncenter:"城市中心",
-          embassy:"大使馆",
-          commandcenter:"指挥部",
-          infirmary:"野战医院",
-          barracks:"步兵营",
-          stable:"骑兵营",
-          range:"弓兵营"
-        },
+        buildings: { towncenter:"城市中心", embassy:"大使馆", commandcenter:"指挥部", infirmary:"野战医院", barracks:"步兵营", stable:"骑兵营", range:"弓兵营" },
         tip:{
           title:"什么是精炼纯金？",
           sub:"TG5 之后建筑升级会额外需要的特殊材料。它是将纯金进一步精炼后得到的高阶素材，用于更高阶段的推进。",
@@ -988,7 +953,8 @@
 
       "zh-TW": {
         page: { title: "2026 純金消耗表" },
-        header: { madeBy: "製作", back: "← 返回指南" },
+        header: { madeBy: "製作", back: "← 返回指南", langLabel:"語言" },
+        aria:{ truegoldChart:"純金消耗表", tgTotalsSlider:"TG 總消耗滑桿", tableRegion:"TG1–TG8 表格", temperedTip:"精煉純金指南", tgRange:"TG 等級滑桿" },
         slider: {
           hint: "拖動滑桿可查看對應 TG 等級的總消耗。",
           totalLabel: (tg)=>`TG${tg} 總消耗`,
@@ -996,15 +962,7 @@
           tempered: "精煉純金",
           building: "建築"
         },
-        buildings: {
-          towncenter:"城市中心",
-          embassy:"大使館",
-          commandcenter:"指揮部",
-          infirmary:"野戰醫院",
-          barracks:"步兵營",
-          stable:"騎兵營",
-          range:"弓兵營"
-        },
+        buildings: { towncenter:"城市中心", embassy:"大使館", commandcenter:"指揮部", infirmary:"野戰醫院", barracks:"步兵營", stable:"騎兵營", range:"弓兵營" },
         tip:{
           title:"什麼是精煉純金？",
           sub:"TG5 之後建築升級會額外需要的特殊材料。它是將純金再進一步精煉後得到的高階素材，用於更高階段推進。",
@@ -1035,9 +993,6 @@
 
     let CURRENT = I18N.ko;
 
-    /* =========================
-      BUILDINGS (rows)
-    ========================= */
     const BUILDINGS = [
       { key:'towncenter',    icons:['/img/buildings/towncenter-kingshot.webp'] },
       { key:'embassy',       icons:['/img/buildings/embassy-kingshot.webp'] },
@@ -1048,9 +1003,6 @@
       { key:'range',         icons:['/img/buildings/range-kingshot.webp'] }
     ];
 
-    /* =========================
-      DATA (사진 기준)
-    ========================= */
     const DATA = {
       towncenter: { truegold:[660,790,1190,1400,1675,900,1080,1080], tempered:[null,null,null,null,null,60,90,120] },
       embassy:    { truegold:[165,195,295,350,415,225,270,270],       tempered:[null,null,null,null,null,13,19,30] },
@@ -1061,9 +1013,6 @@
       range:      { truegold:[295,355,535,630,750,405,486,486],       tempered:[null,null,null,null,null,25,37,54] }
     };
 
-    /* =========================
-      HELPERS
-    ========================= */
     function fmt(n){
       const v = Number(n);
       if (!Number.isFinite(v)) return '—';
@@ -1104,7 +1053,6 @@
 
       if (!tgOK && !tpOK) return `<div class="cell"><span class="num">—</span></div>`;
 
-      // TG1~TG5: 순금만
       if (tgIndex <= 4 || !tpOK){
         return `
           <div class="cell">
@@ -1166,9 +1114,6 @@
       }).join('');
     }
 
-    /* =========================
-      TOTALS
-    ========================= */
     function calcTotalsPerTG(){
       const out = Array.from({length: TG_MAX}, () => ({ truegold:0, tempered:0 }));
       for (let i=0; i<TG_MAX; i++){
@@ -1253,9 +1198,11 @@
       return totals;
     }
 
-    /* =========================
-      APPLY i18n (textContent only)
-    ========================= */
+    function setAttr(el, name, value){
+      if (!el) return;
+      el.setAttribute(name, value);
+    }
+
     function applyLang(locale){
       const dict = I18N[locale] || I18N.ko;
       CURRENT = dict;
@@ -1263,16 +1210,34 @@
       document.documentElement.lang = locale;
       document.title = dict.page.title;
 
+      const backLink = document.getElementById('backLink');
+      if (backLink) backLink.textContent = dict.header.back;
+      setAttr(backLink, 'aria-label', dict.header.back.replace('← ', ''));
+
       document.querySelectorAll("[data-i18n]").forEach(el=>{
         const key = el.getAttribute("data-i18n");
         const val = key.split(".").reduce((o,k)=> (o && o[k] !== undefined) ? o[k] : undefined, dict);
         if (typeof val === "string") el.textContent = val;
       });
 
+      const section = document.querySelector('.section');
+      setAttr(section, 'aria-label', dict.aria.truegoldChart);
+
+      const sliderCard = document.querySelector('.slider-card');
+      setAttr(sliderCard, 'aria-label', dict.aria.tgTotalsSlider);
+
+      const range = document.getElementById('tgRange');
+      setAttr(range, 'aria-label', dict.aria.tgRange);
+
+      const tableWrap = document.querySelector('.table-wrap');
+      setAttr(tableWrap, 'aria-label', dict.aria.tableRegion);
+
+      const tip = document.querySelector('.tg-tip');
+      setAttr(tip, 'aria-label', dict.aria.temperedTip);
+
       const curTG = Number(document.getElementById("tgRange").value || 1);
       renderTable();
       renderTicks();
-
       const totals = calcTotalsPerTG();
       updateSliderUI(curTG, totals);
     }
@@ -1291,9 +1256,6 @@
       return "en";
     }
 
-    /* =========================
-      INIT
-    ========================= */
     renderTable();
     renderTicks();
     initSlider();
