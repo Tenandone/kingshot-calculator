@@ -88,6 +88,9 @@ h3{font-size:16px;margin:16px 0 8px}
 .badge.active{border-color:#16a34a;color:#166534;background:#dcfce7}
 .badge.new{border-color:#0b57d0;color:#0b57d0;background:#e8f0fe}
 
+/* ✅ NEW: 무기한(영구) 코드는 '사용 가능'처럼 보이지 않게 중립 뱃지 */
+.badge.neutral{border-color:#9ca3af;color:#374151;background:#f3f4f6}
+
 ol{margin:8px 0 0 18px}
 .note{font-size:13px;color:var(--muted)}
 .divider{height:1px;background:#eee;margin:24px 0}
@@ -213,7 +216,6 @@ html:not([lang]) .langx-ko{ display:inline !important; }
       <h1 class="h1" id="h1">킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드</h1>
       <p class="muted" id="lead">공식 입력창 링크, 최신 코드/만료일(무기한 포함), 입력 방법과 오류 해결까지 한 곳에 정리했습니다.</p>
 
-      <!-- ✅ Updated 대신 NEW 느낌 -->
       <p class="note" id="newBadgeLine" style="margin-top:10px;">
         <span class="badge new" id="new-badge">NEW</span>
         <span class="muted" id="new-text">최신 코드가 확인되는 즉시 이 페이지에 반영됩니다.</span>
@@ -239,7 +241,6 @@ html:not([lang]) .langx-ko{ display:inline !important; }
       <p class="note" id="current-note">※ 일부 코드는 지역/서버/계정 상태에 따라 사용이 제한될 수 있습니다.</p>
     </section>
 
-    <!-- ✅ 추가 섹션: 무기한 + 기념/이벤트 (혼란 방지: 아래로 분리) -->
     <div class="divider"></div>
 
     <section id="permanent-codes">
@@ -434,7 +435,6 @@ html:not([lang]) .langx-ko{ display:inline !important; }
 
   <script>
     // ===== Inline i18n dictionary (ko, en, ja, zh-CN, zh-TW) =====
-    // ✅ 누락 없이: 상단/브레드크럼/NEW/섹션 타이틀/가이드 리드/FAQ/빠른해결/카드 라벨 전부 번역 포함
     const L = {
       "ko": {
         metaTitle: "킹샷 기프트코드 · 쿠폰 입력 방법과 최신 코드",
@@ -949,8 +949,21 @@ html:not([lang]) .langx-ko{ display:inline !important; }
       const v = String(val).trim().toLowerCase();
       return v === 'permanent' || v === 'infinite' || v === '∞' || v === 'forever' || v === 'no-expiry' || v === 'noexp' || v === 'nolimit';
     }
-    function parseUTCDate(ymd){ return new Date(String(ymd).trim() + 'T00:00:00Z'); }
-    function isExpired(until){ return !isForever(until) && (new Date() >= parseUTCDate(until)); }
+
+    // ✅ 포맷 방어: 2026-2-7 같은 값도 2026-02-07로 보정해서 UTC 파싱
+    function parseUTCDate(ymd){
+      const s = String(ymd ?? '').trim();
+      const parts = s.split('-');
+      if (parts.length !== 3) return new Date('invalid');
+      const y = parts[0];
+      const m = String(parts[1]).padStart(2,'0');
+      const d = String(parts[2]).padStart(2,'0');
+      return new Date(`${y}-${m}-${d}T00:00:00Z`);
+    }
+
+    function isExpired(until){
+      return !isForever(until) && (new Date() >= parseUTCDate(until));
+    }
 
     function sortCoupons(coupons){
       return coupons.slice().sort((a,b)=>{
@@ -986,11 +999,13 @@ html:not([lang]) .langx-ko{ display:inline !important; }
       }
     }
 
-    function makeStaticCard({code, label, expired=true}, lang){
+    // ✅ state: 'expired' | 'neutral' | 'active'
+    function makeStaticCard({code, label, state='expired'}, lang){
       const T = (k)=> (L[lang] && L[lang][k]) || (L.en && L.en[k]) || k;
 
       const card = document.createElement('div');
-      card.className = 'card' + (expired ? ' expired' : '');
+      const isExp = state === 'expired';
+      card.className = 'card' + (isExp ? ' expired' : '');
 
       const row = document.createElement('div');
       row.style.display = 'flex';
@@ -1003,20 +1018,28 @@ html:not([lang]) .langx-ko{ display:inline !important; }
       codeDiv.textContent = safeText(code);
 
       const badge = document.createElement('span');
-      badge.className = 'badge ' + (expired ? 'expired' : 'active');
-      badge.textContent = expired ? T('expired') : T('active');
+      if (state === 'expired'){
+        badge.className = 'badge expired';
+        badge.textContent = T('expired');
+      } else if (state === 'neutral'){
+        badge.className = 'badge neutral';
+        badge.textContent = T('labelForever'); // ✅ 무기한은 '사용 가능' 대신 중립
+      } else {
+        badge.className = 'badge active';
+        badge.textContent = T('active');
+      }
 
       row.appendChild(codeDiv);
       row.appendChild(badge);
 
       const untilDiv = document.createElement('div');
       untilDiv.className = 'until';
-      untilDiv.textContent = label || (expired ? T('expired') : T('active'));
+      untilDiv.textContent = label || (state === 'expired' ? T('expired') : (state === 'neutral' ? T('forever') : T('active')));
 
       card.appendChild(row);
       card.appendChild(untilDiv);
 
-      if (!expired){
+      if (state !== 'expired'){
         const actions = document.createElement('div');
         actions.className = 'actions';
 
@@ -1068,9 +1091,21 @@ html:not([lang]) .langx-ko{ display:inline !important; }
       codeDiv.className = 'code';
       codeDiv.textContent = safeText(c.code);
 
+      // ✅ 뱃지 방어:
+      // - expired: 만료됨(빨강)
+      // - forever: 무기한(중립 회색)
+      // - else: 사용 가능(초록)
       const badge = document.createElement('span');
-      badge.className = 'badge ' + (expired ? 'expired' : 'active');
-      badge.textContent = expired ? T('expired') : T('active');
+      if (expired){
+        badge.className = 'badge expired';
+        badge.textContent = T('expired');
+      } else if (forever){
+        badge.className = 'badge neutral';
+        badge.textContent = T('labelForever');
+      } else {
+        badge.className = 'badge active';
+        badge.textContent = T('active');
+      }
 
       row1.appendChild(codeDiv);
       row1.appendChild(badge);
@@ -1135,20 +1170,21 @@ html:not([lang]) .langx-ko{ display:inline !important; }
       perm.innerHTML = '';
       comm.innerHTML = '';
 
+      // ✅ 무기한 코드는 중립 뱃지로 표시 (사용 가능처럼 확정 느낌 방지)
       const permanentCodes = [
-        { code: 'VIP777', label: `${T('labelForever')} · ${T('labelNoExpiryNotice')}`, expired:false },
-        { code: 'JackKaoAndKS', label: `${T('labelForever')} · ${T('labelNoExpiryNotice')}`, expired:false }
+        { code: 'VIP777', label: `${T('labelForever')} · ${T('labelNoExpiryNotice')}`, state:'neutral' },
+        { code: 'JackKaoAndKS', label: `${T('labelForever')} · ${T('labelNoExpiryNotice')}`, state:'neutral' }
       ];
 
       const commCodes = [
-        { code: 'KSFB150K',     label: `${T('labelCommemorative')} · ${T('labelExpired')}`, expired:true },
-        { code: 'KSFB200K',     label: `${T('labelCommemorative')} · ${T('labelExpired')}`, expired:true },
-        { code: 'KSDC100K',     label: `${T('labelDiscord')} · ${T('labelExpired')}`, expired:true },
-        { code: 'KSFB300K',     label: `${T('labelCommemorative')} · ${T('labelExpired')}`, expired:true },
-        { code: 'WEHIT400',     label: `${T('labelCommemorative')} · ${T('labelExpired')}`, expired:true },
-        { code: 'WEHIT1K',      label: `${T('labelCommemorative')} · ${T('labelExpired')}`, expired:true },
-        { code: 'tgs2025ks1st', label: `${T('labelCommemorative')} · ${T('labelExpired')}`, expired:true },
-        { code: 'KS2025award',  label: `${T('labelCommemorative')} · ${T('labelExpired')}`, expired:true }
+        { code: 'KSFB150K',     label: `${T('labelCommemorative')} · ${T('labelExpired')}`, state:'expired' },
+        { code: 'KSFB200K',     label: `${T('labelCommemorative')} · ${T('labelExpired')}`, state:'expired' },
+        { code: 'KSDC100K',     label: `${T('labelDiscord')} · ${T('labelExpired')}`, state:'expired' },
+        { code: 'KSFB300K',     label: `${T('labelCommemorative')} · ${T('labelExpired')}`, state:'expired' },
+        { code: 'WEHIT400',     label: `${T('labelCommemorative')} · ${T('labelExpired')}`, state:'expired' },
+        { code: 'WEHIT1K',      label: `${T('labelCommemorative')} · ${T('labelExpired')}`, state:'expired' },
+        { code: 'tgs2025ks1st', label: `${T('labelCommemorative')} · ${T('labelExpired')}`, state:'expired' },
+        { code: 'KS2025award',  label: `${T('labelCommemorative')} · ${T('labelExpired')}`, state:'expired' }
       ];
 
       permanentCodes.forEach(x => perm.appendChild(makeStaticCard(x, lang)));
