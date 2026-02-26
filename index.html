@@ -56,8 +56,6 @@
         var rest = [];
         params.forEach(function (v, k) { if (k !== 'p') rest.push(k + '=' + encodeURIComponent(v)); });
         var newUrl = p + (rest.length ? (p.indexOf('?') >= 0 ? '&' : '?') + rest.join('&') : '');
-
-        // p 파라미터를 제거한 "정상 경로"로 복원
         history.replaceState(null, '', newUrl);
       }
     })();
@@ -102,28 +100,9 @@
   <script defer src="/js/app.js?v=202509131858"></script>
   <script defer src="/js/footer-tools.js?v=202509131858"></script>
 
-  <!-- ✅ AdFit 표시 제어는 "CSS만" 사용 (JS로 display 건드리지 않음) -->
   <style>
-    /* 광고가 원인으로 가로 스크롤 생기는거 방지 */
+    /* (선택) 혹시 모를 가로 스크롤 방지 */
     html, body { overflow-x: hidden; }
-
-    /* 기본: 둘 다 숨김 */
-    #adfitKoPc, #adfitKoMobile { display: none !important; }
-
-    /* KO면 PC 광고만 */
-    html[lang="ko"] #adfitKoPc { display: block !important; }
-
-    /* KO + 모바일 폭이면 모바일 광고만 */
-    @media (max-width: 768px) {
-      html[lang="ko"] #adfitKoPc { display: none !important; }
-      html[lang="ko"] #adfitKoMobile { display: block !important; }
-    }
-
-    /* 광고 컨테이너 안전폭 */
-    .adfit-wrap {
-      text-align: center;
-      margin: 16px 0;
-    }
   </style>
 </head>
 
@@ -171,23 +150,6 @@
       </div>
     </div>
   </header>
-
-  <!-- ✅ AdFit (KO only) - PC / Mobile split -->
-  <div id="adfitKoPc" class="adfit-wrap">
-    <ins class="kakao_ad_area"
-         data-ad-unit="DAN-n0VbUcLaeDeaLU9B"
-         data-ad-width="728"
-         data-ad-height="90"></ins>
-  </div>
-
-  <div id="adfitKoMobile" class="adfit-wrap">
-    <ins class="kakao_ad_area"
-         data-ad-unit="DAN-mhQxfrqp7TKmoxtT"
-         data-ad-width="320"
-         data-ad-height="50"></ins>
-  </div>
-
-  <script src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 
   <!-- ===== Sponsor strip ===== -->
   <div class="header-brand-strip">
