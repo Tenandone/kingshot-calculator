@@ -1,0 +1,1226 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>タウンセンター強化コスト & Truegold段階（Lv 1–30 + TG） | Kingshot</title>
+  <meta name="description" content="Kingshot タウンセンターの強化条件・コスト（Lv1–30 + Truegold(TG)段階）。解放要素、連動建物の必要条件、サーバー経過日数のタイムラインまで整理。" />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://wos.gg/ja/buildings/town-center.html" />
+  <link rel="alternate" hreflang="en" href="https://wos.gg/en/buildings/town-center.html" />
+  <link rel="alternate" hreflang="ko" href="https://wos.gg/ko/buildings/town-center.html" />
+  <link rel="alternate" hreflang="ja" href="https://wos.gg/ja/buildings/town-center.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://wos.gg/zh-tw/buildings/town-center.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/buildings/town-center.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h: 0px;
+      --tabs-h: 0px;
+      --sticky-top: 0px;
+
+      --cell-ico: 14px;
+      --th-ico: 14px;
+      --tbl-font: 13px;
+      --tbl-pad-y: 9px;
+      --tbl-pad-x: 10px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    /* Top header */
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+    nav.lang{
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+    /* Sticky section nav (mobile-first) */
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    /* Hero */
+    .hero{
+      display:grid; grid-template-columns: 160px 1fr; gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px; height:160px; object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted)}
+    .muted{color:var(--muted)}
+
+    .jump{
+      margin-top:10px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    /* Sections */
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px; font-size:20px}
+    section p{margin:8px 0}
+
+    /* Note */
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(245,158,11,.35);
+      background:rgba(245,158,11,.08);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px; height:18px; flex:0 0 18px;
+      margin-top:2px;
+      color:#b45309;
+    }
+
+    /* Segmented control */
+    .seg-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin:6px 0 12px;
+    }
+    .seg{
+      display:inline-flex;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .seg button{
+      appearance:none;
+      border:0;
+      background:transparent;
+      padding:10px 14px;
+      font:inherit;
+      font-weight:800;
+      color:var(--muted);
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .seg button + button{border-left:1px solid var(--border)}
+    .seg button[aria-selected="true"]{
+      color:#fff;
+      background:var(--brand);
+    }
+
+    /* Panels */
+    .panel{margin-top:10px}
+    .js .panel{display:none}
+    .js .panel.is-active{display:block}
+
+    /* Tables */
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto; /* mobile */
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+    }
+
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      font-size:calc(var(--tbl-font) - 1px);
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td{
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:var(--tbl-font);
+      white-space:nowrap;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+
+    .center{text-align:center}
+    .num{text-align:right; font-variant-numeric: tabular-nums}
+
+    .req{
+      white-space:normal;
+      overflow-wrap:anywhere;
+      word-break:keep-all;
+    }
+
+    /* Header icon + label */
+    .th-flex{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .th-ico{
+      width:var(--th-ico);
+      height:var(--th-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+    }
+
+    /* Cell icon + number */
+    .cell-num{
+      display:inline-flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:6px;
+      white-space:nowrap;
+    }
+    .td-ico{
+      width:var(--cell-ico);
+      height:var(--cell-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+      opacity:.95;
+    }
+
+    /* Sticky first column */
+    table.sticky-firstcol th:first-child,
+    table.sticky-firstcol td:first-child{
+      position: sticky;
+      left: 0;
+      background:inherit;
+      z-index:2;
+    }
+    table.sticky-firstcol thead th:first-child{
+      z-index:4;
+      background:#f8fafc;
+    }
+
+    /* Desktop: no horizontal scroll (fit all columns) */
+    @media (min-width: 901px){
+      :root{
+        --tbl-font: 12px;
+        --tbl-pad-y: 7px;
+        --tbl-pad-x: 8px;
+        --cell-ico: 13px;
+        --th-ico: 13px;
+      }
+
+      table{table-layout:fixed}
+      .table-wrap{overflow-x:clip}
+      @supports not (overflow: clip){
+        .table-wrap{overflow-x:hidden}
+      }
+
+      td.req, th.req-h{white-space:normal}
+    }
+
+    /* Timeline */
+    .timeline{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    .timeline .callout{
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+    }
+    .timeline small{color:var(--muted)}
+
+    /* Related pills */
+    .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{
+      display:inline-flex; align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    ul.clean{margin:0; padding-left:18px}
+    ul.clean li{margin:6px 0}
+
+    /* Mobile cards (progressive enhancement) */
+    .cards{display:none}
+    .cards .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:12px 12px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0;
+    }
+    .card-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.25;
+      white-space:nowrap;
+    }
+    .card-req{
+      margin:8px 0 10px;
+      color:var(--text);
+      font-size:13px;
+    }
+
+    .res-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:8px;
+      margin-top:10px;
+    }
+    .res-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 10px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      font-size:13px;
+    }
+    .res-left{display:flex; align-items:center; gap:8px; min-width:0}
+    .icoimg{
+      width:18px; height:18px; flex:0 0 18px;
+      object-fit:contain;
+      display:block;
+    }
+    .res-label{
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .res-val{
+      font-weight:900;
+      font-variant-numeric: tabular-nums;
+      white-space:nowrap;
+    }
+    .card-foot{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      white-space:nowrap;
+    }
+    .badge svg{width:16px;height:16px;opacity:.85}
+
+    /* Anchors under sticky header */
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top: calc(var(--sticky-top) + 12px);
+    }
+
+    /* Mobile layout */
+    @media (max-width: 900px){
+      header.top{
+        position: sticky;
+        top: 0;
+        z-index: 40;
+      }
+      nav.section-tabs{
+        display:flex;
+        position: sticky;
+        top: var(--header-h);
+        z-index: 35;
+      }
+
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+
+      .enhanced .data-table{display:none}
+      .enhanced .cards{display:grid; gap:12px}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+      .res-grid{grid-template-columns: 1fr}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"タウンセンター (Kingshot)",
+    "inLanguage":"ja",
+    "description":"Kingshot タウンセンターの強化条件・コスト（Lv 1–30 + Truegold(TG)段階）。解放要素と連動建物の必要条件を含みます。",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"ホーム","item":"https://wos.gg/ja/"},
+        {"@type":"ListItem","position":2,"name":"建物","item":"https://wos.gg/ja/buildings/"},
+        {"@type":"ListItem","position":3,"name":"タウンセンター","item":"https://wos.gg/ja/buildings/town-center.html"}
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Inline SVG for NOTE / Time / Power -->
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-time" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 6v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ico-power" viewBox="0 0 24 24">
+      <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ja/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/buildings/town-center.html">EN</a>
+        <a href="/ko/buildings/town-center.html">KO</a>
+        <a href="/ja/buildings/town-center.html" aria-current="page">JA</a>
+        <a href="/zh-tw/buildings/town-center.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <!-- Section nav (mobile sticky) -->
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#truegold-timeline">タイムライン</a>
+      <a href="#requirements">必要条件</a>
+      <a href="#unlocks">解放</a>
+      <a href="#truegold">Truegold</a>
+      <a href="#related">関連</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ja/">ホーム</a> <span class="muted">›</span>
+        <a href="/ja/buildings/">建物</a> <span class="muted">›</span>
+        <span>タウンセンター</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/buildings/town-center.webp" alt="タウンセンター (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>タウンセンター</h1>
+          <p class="sub">
+            タウンセンターは Kingshot の都市の中核となる建物です。強化するほど、新しい機能やコンテンツ（建物、ヒーロー装備、領主装備、領主チャームなど）が解放されます。
+          </p>
+          <p class="muted" style="margin-top:10px">
+            王国が Truegold（純金）時代に入ると（多くのサーバーでおおよそ 60～70日 目安）、タウンセンターを Lv.30 以降へ進められます。
+            この区間を Truegold（TG）段階と呼び、パン/木材/石材/鉄に加えて Truegold が必要になります。
+          </p>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#truegold-timeline">タイムライン</a><span class="dotsep">•</span>
+            <a href="#requirements">必要条件</a><span class="dotsep">•</span>
+            <a href="#unlocks">解放</a><span class="dotsep">•</span>
+            <a href="#truegold">Truegold（TG）</a><span class="dotsep">•</span>
+            <a href="#related">関連</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="truegold-timeline">
+        <h2>Truegold コンテンツのタイムライン（サーバー経過日数）</h2>
+
+        <div class="timeline">
+          <div class="callout">
+            <p style="margin:0">
+              下記の目安は一般的なサーバー進行を基準にしており、サーバーによって前後する場合があります。
+            </p>
+            <p class="muted" style="margin:8px 0 0">
+              Truegold 段階、Truegold Crucible、War Academy など主要要素がいつ頃登場するかの計画にご活用ください。
+            </p>
+          </div>
+
+          <!-- Mobile: cards (built by JS) -->
+          <div class="cards" id="timeline-cards" aria-label="Truegold タイムラインカード"></div>
+
+          <!-- Desktop: table -->
+          <div class="table-wrap data-table" aria-label="Truegold server-age timeline table">
+            <table id="timeline-table">
+              <colgroup>
+                <col style="width: 30%">
+                <col style="width: 20%">
+                <col style="width: 50%">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>区間</th>
+                  <th>目安（サーバー経過）</th>
+                  <th>意味</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Truegold 開始</strong></td>
+                  <td>約 60～70日</td>
+                  <td>タウンセンターが Lv.30 以降へ進行可能になり、Truegold（TG）強化が本格化します。</td>
+                </tr>
+                <tr>
+                  <td><strong>TG 1～3</strong></td>
+                  <td>約 60～70日</td>
+                  <td>Truegold 進行の序盤（最初の Truegold 区間）。</td>
+                </tr>
+                <tr>
+                  <td><strong>TG 4～5</strong></td>
+                  <td>約 150日</td>
+                  <td><a href="/ja/buildings/truegold-crucible.html">Truegold Crucible</a> がこの時期に開放されることが多い（Truegold 進行の大きな節目）。</td>
+                </tr>
+                <tr>
+                  <td><strong>War Academy</strong></td>
+                  <td>約 220～230日</td>
+                  <td><a href="/ja/buildings/war-academy.html">War Academy</a> が多くのサーバーでこの時期に重要になります。</td>
+                </tr>
+                <tr>
+                  <td><strong>TG 8</strong></td>
+                  <td>約 310～320日</td>
+                  <td>Truegold の後半段階（上級進行）。</td>
+                </tr>
+                <tr>
+                  <td><strong>TG 10（サーバー経過）</strong></td>
+                  <td><em>TBD</em></td>
+                  <td>確認でき次第、更新します。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <small>※ “TBD” は「未確定」を意味します。</small>
+        </div>
+      </section>
+
+      <section id="upgrade">
+        <span id="requirements" class="anchor"></span>
+        <h2>強化の必要条件</h2>
+        <p class="muted" style="margin-top:-2px">タウンセンターの全レベル（1–30）および Truegold（TG）段階のコスト/時間/必要条件</p>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>注意:</strong>
+            パン/木材/石材/鉄の必要量は、ヒーローや研究などの強化状況によって変動する場合があります。
+            表示値はベース（原本）値です。
+          </div>
+        </div>
+
+        <div class="seg-wrap">
+          <div class="seg" role="tablist" aria-label="Upgrade level type">
+            <button id="tab-normal" type="button" role="tab" aria-selected="true" aria-controls="panel-normal">通常レベル</button>
+            <button id="tab-tg" type="button" role="tab" aria-selected="false" aria-controls="panel-tg">Truegold（TG）</button>
+          </div>
+        </div>
+
+        <!-- Normal panel -->
+        <div id="panel-normal" class="panel is-active" role="tabpanel" aria-labelledby="tab-normal">
+          <div class="cards" id="req-cards" aria-label="Town Center requirements (mobile cards)"></div>
+
+          <div class="table-wrap data-table" aria-label="Town Center upgrade requirements table">
+            <table id="req-table" class="sticky-firstcol">
+              <colgroup>
+                <col style="width:6%">
+                <col style="width:28%">
+                <col style="width:8%">
+                <col style="width:8%">
+                <col style="width:8%">
+                <col style="width:8%">
+                <col style="width:10%">
+                <col style="width:14%">
+                <col style="width:10%">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="center">Lv</th>
+                  <th class="req-h">必要条件</th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="14" height="14">木材</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="14" height="14">パン</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="14" height="14">石材</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="14" height="14">鉄</span></th>
+                  <th><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-time"></use></svg>時間</span></th>
+                  <th class="num"><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-power"></use></svg>戦力</span></th>
+                  <th class="center">ヒーロー上限</th>
+                </tr>
+              </thead>
+
+              <!-- ✅ 原본 데이터(EN) 유지: 수치/시간/파워 그대로 -->
+              <tbody>
+                <tr><td class="center">1</td><td class="req">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td>–</td><td class="num">2000</td><td class="center">–</td></tr>
+                <tr><td class="center">2</td><td class="req">Sawmill Lvl. 1</td><td class="num">180</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td>6s</td><td class="num">3800</td><td class="center">–</td></tr>
+                <tr><td class="center">3</td><td class="req">House 1 Lvl. 2</td><td class="num">805</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td>1m</td><td class="num">6,500</td><td class="center">–</td></tr>
+                <tr><td class="center">4</td><td class="req">Quarry Lvl. 3</td><td class="num">1.8k</td><td class="num">–</td><td class="num">360</td><td class="num">–</td><td>3m</td><td class="num">10,100</td><td class="center">20</td></tr>
+                <tr><td class="center">5</td><td class="req">Hero Hall, House 3 Lvl. 3</td><td class="num">7.6k</td><td class="num">–</td><td class="num">1.5k</td><td class="num">–</td><td>10m</td><td class="num">15,500</td><td class="center">–</td></tr>
+                <tr><td class="center">6</td><td class="req">Iron Mine Lvl. 5</td><td class="num">19k</td><td class="num">–</td><td class="num">3.8k</td><td class="num">960</td><td>30m</td><td class="num">23,600</td><td class="center">–</td></tr>
+                <tr><td class="center">7</td><td class="req">Mill Lvl. 6</td><td class="num">69k</td><td class="num">–</td><td class="num">13k</td><td class="num">3.4k</td><td>1h</td><td class="num">35,300</td><td class="center">–</td></tr>
+                <tr><td class="center">8</td><td class="req"><a href="/ja/buildings/barracks.html">Barracks</a> Lvl. 7</td><td class="num">120k</td><td class="num">–</td><td class="num">25k</td><td class="num">6.3k</td><td>2h 30m</td><td class="num">47,000</td><td class="center">–</td></tr>
+                <tr><td class="center">9</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 8, <a href="/ja/buildings/infirmary.html">Infirmary</a> Lvl. 1</td><td class="num">260k</td><td class="num">–</td><td class="num">52k</td><td class="num">13k</td><td>4h 30m</td><td class="num">58,700</td><td class="center">–</td></tr>
+                <tr><td class="center">10</td><td class="req"><a href="/ja/buildings/range.html">Range</a> Lvl. 9, <a href="/ja/buildings/academy.html">Academy</a></td><td class="num">460k</td><td class="num">–</td><td class="num">92k</td><td class="num">23k</td><td>6h</td><td class="num">75,700</td><td class="center">22</td></tr>
+                <tr><td class="center">11</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 10, <a href="/ja/buildings/stable.html">Stable</a> Lvl. 10</td><td class="num">1.3M</td><td class="num">1.3M</td><td class="num">20k</td><td class="num">65k</td><td>7h 30m</td><td class="num">92,700</td><td class="center">25</td></tr>
+                <tr><td class="center">12</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 11, <a href="/ja/buildings/command-center.html">Command Center</a> Lvl. 1</td><td class="num">1.6M</td><td class="num">1.6M</td><td class="num">330k</td><td class="num">84k</td><td>9h</td><td class="num">109,700</td><td class="center">28</td></tr>
+                <tr><td class="center">13</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 12, <a href="/ja/buildings/barracks.html">Barracks</a> Lvl. 12</td><td class="num">2.3M</td><td class="num">2.3M</td><td class="num">470k</td><td class="num">110k</td><td>11h</td><td class="num">138,400</td><td class="center">31</td></tr>
+                <tr><td class="center">14</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 13, <a href="/ja/buildings/range.html">Range</a> Lvl. 13</td><td class="num">3.1M</td><td class="num">3.1M</td><td class="num">630k</td><td class="num">150k</td><td>14h</td><td class="num">167,100</td><td class="center">34</td></tr>
+                <tr><td class="center">15</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 14, <a href="/ja/buildings/stable.html">Stable</a> Lvl. 14</td><td class="num">4.6M</td><td class="num">4.6M</td><td class="num">930k</td><td class="num">230k</td><td>18h</td><td class="num">195,800</td><td class="center">37</td></tr>
+                <tr><td class="center">16</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 15, <a href="/ja/buildings/academy.html">Academy</a> Lvl. 15</td><td class="num">5.9M</td><td class="num">5.9M</td><td class="num">1.1M</td><td class="num">290k</td><td>1d 6h 28m</td><td class="num">236,200</td><td class="center">40</td></tr>
+                <tr><td class="center">17</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 16, <a href="/ja/buildings/barracks.html">Barracks</a> Lvl. 16</td><td class="num">9.3M</td><td class="num">9.3M</td><td class="num">1.8M</td><td class="num">480k</td><td>1d 12h 34m</td><td class="num">276,600</td><td class="center">43</td></tr>
+                <tr><td class="center">18</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 17, <a href="/ja/buildings/range.html">Range</a> Lvl. 17</td><td class="num">12M</td><td class="num">12M</td><td class="num">2.5M</td><td class="num">620k</td><td>1d 19h 53m</td><td class="num">317,000</td><td class="center">46</td></tr>
+                <tr><td class="center">19</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 18, <a href="/ja/buildings/stable.html">Stable</a> Lvl. 18</td><td class="num">15M</td><td class="num">15M</td><td class="num">3.1M</td><td class="num">780k</td><td>2d 17h 50m</td><td class="num">374,400</td><td class="center">49</td></tr>
+                <tr><td class="center">20</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 19, <a href="/ja/buildings/academy.html">Academy</a> Lvl. 19</td><td class="num">21M</td><td class="num">21M</td><td class="num">4.3M</td><td class="num">1M</td><td>3d 10h 18m</td><td class="num">431,800</td><td class="center">54</td></tr>
+                <tr><td class="center">21</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 20, <a href="/ja/buildings/barracks.html">Barracks</a> Lvl. 20</td><td class="num">27M</td><td class="num">27M</td><td class="num">5.4M</td><td class="num">1.3M</td><td>4d 10h 59m</td><td class="num">489,200</td><td class="center">59</td></tr>
+                <tr><td class="center">22</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 21, <a href="/ja/buildings/range.html">Range</a> Lvl. 21</td><td class="num">36M</td><td class="num">36M</td><td class="num">7.2M</td><td class="num">1.8M</td><td>6d 16h 29m</td><td class="num">575,300</td><td class="center">64</td></tr>
+                <tr><td class="center">23</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 22, <a href="/ja/buildings/stable.html">Stable</a> Lvl. 22</td><td class="num">44M</td><td class="num">44M</td><td class="num">8.9M</td><td class="num">2.2M</td><td>9d 8h 40m</td><td class="num">661,400</td><td class="center">69</td></tr>
+                <tr><td class="center">24</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 23, <a href="/ja/buildings/academy.html">Academy</a> Lvl. 23</td><td class="num">60M</td><td class="num">60M</td><td class="num">12M</td><td class="num">3M</td><td>13d 2h 33m</td><td class="num">747,500</td><td class="center">74</td></tr>
+                <tr><td class="center">25</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 24, <a href="/ja/buildings/barracks.html">Barracks</a> Lvl. 24</td><td class="num">81M</td><td class="num">81M</td><td class="num">16M</td><td class="num">4M</td><td>18d 8h 22m</td><td class="num">833,600</td><td class="center">79</td></tr>
+                <tr><td class="center">26</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 25, <a href="/ja/buildings/range.html">Range</a> Lvl. 25</td><td class="num">100M</td><td class="num">100M</td><td class="num">21M</td><td class="num">5.2M</td><td>21d 2h 26m</td><td class="num">960,100</td><td class="center">80 (max)</td></tr>
+                <tr><td class="center">27</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 26, <a href="/ja/buildings/stable.html">Stable</a> Lvl. 26</td><td class="num">140M</td><td class="num">140M</td><td class="num">24M</td><td class="num">7.4M</td><td>25d 7h 43m</td><td class="num">1,086,600</td><td class="center">–</td></tr>
+                <tr><td class="center">28</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 27, <a href="/ja/buildings/academy.html">Academy</a> Lvl. 27</td><td class="num">190M</td><td class="num">190M</td><td class="num">39M</td><td class="num">9.9M</td><td>29d 2h 52m</td><td class="num">1,213,100</td><td class="center">–</td></tr>
+                <tr><td class="center">29</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 28, <a href="/ja/buildings/barracks.html">Barracks</a> Lvl. 28</td><td class="num">240M</td><td class="num">240M</td><td class="num">49M</td><td class="num">12M</td><td>33d 11h 42m</td><td class="num">1,339,600</td><td class="center">–</td></tr>
+                <tr><td class="center">30</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lvl. 29, <a href="/ja/buildings/range.html">Range</a> Lvl. 29</td><td class="num">300M</td><td class="num">300M</td><td class="num">60M</td><td class="num">15M</td><td>40d 4h 27m</td><td class="num">1,523,500</td><td class="center">–</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Truegold panel -->
+        <span id="truegold" class="anchor"></span>
+        <div id="panel-tg" class="panel" role="tabpanel" aria-labelledby="tab-tg">
+          <div class="cards" id="tg-cards" aria-label="Town Center truegold (mobile cards)"></div>
+
+          <div class="table-wrap data-table" aria-label="Town Center Truegold levels table">
+            <table id="tg-table" class="sticky-firstcol">
+              <colgroup>
+                <col style="width:10%">
+                <col style="width:25%">
+                <col style="width:8%">
+                <col style="width:10%">
+                <col style="width:7%">
+                <col style="width:7%">
+                <col style="width:7%">
+                <col style="width:7%">
+                <col style="width:9%">
+                <col style="width:10%">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="center">段階</th>
+                  <th class="req-h">必要条件</th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/truegold.webp" alt="" aria-hidden="true" width="14" height="14">Truegold</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/tempered-truegold.webp" alt="" aria-hidden="true" width="14" height="14">焼入れ済みTruegold</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="14" height="14">木材</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="14" height="14">パン</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="14" height="14">石材</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="14" height="14">鉄</span></th>
+                  <th><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-time"></use></svg>時間</span></th>
+                  <th class="num"><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-power"></use></svg>戦力</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- ✅ Requirements: one-line formatting -->
+                <tr><td class="center">30-1</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lv. 30, <a href="/ja/buildings/academy.html">Academy</a> Lv. 30</td><td class="num">132</td><td class="num">–</td><td class="num">67M</td><td class="num">67M</td><td class="num">13M</td><td class="num">3.3M</td><td>7d</td><td class="num">–</td></tr>
+                <tr><td class="center">30-2</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lv. 30, <a href="/ja/buildings/academy.html">Academy</a> Lv. 30</td><td class="num">132</td><td class="num">–</td><td class="num">67M</td><td class="num">67M</td><td class="num">13M</td><td class="num">3.3M</td><td>7d</td><td class="num">–</td></tr>
+                <tr><td class="center">30-3</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lv. 30, <a href="/ja/buildings/academy.html">Academy</a> Lv. 30</td><td class="num">132</td><td class="num">–</td><td class="num">67M</td><td class="num">67M</td><td class="num">13M</td><td class="num">3.3M</td><td>7d</td><td class="num">–</td></tr>
+                <tr><td class="center">30-4</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lv. 30, <a href="/ja/buildings/academy.html">Academy</a> Lv. 30</td><td class="num">132</td><td class="num">–</td><td class="num">67M</td><td class="num">67M</td><td class="num">13M</td><td class="num">3.3M</td><td>7d</td><td class="num">–</td></tr>
+
+                <tr><td class="center">TG 1</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> Lv. 30, <a href="/ja/buildings/academy.html">Academy</a> Lv. 30</td><td class="num">132</td><td class="num">–</td><td class="num">67M</td><td class="num">67M</td><td class="num">13M</td><td class="num">3.3M</td><td>7d</td><td class="num">1,810,500</td></tr>
+
+                <tr><td class="center">TG1-1</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 1, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 1</td><td class="num">158</td><td class="num">–</td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td>9d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG1-2</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 1, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 1</td><td class="num">158</td><td class="num">–</td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td>9d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG1-3</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 1, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 1</td><td class="num">158</td><td class="num">–</td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td>9d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG1-4</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 1, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 1</td><td class="num">158</td><td class="num">–</td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td>9d</td><td class="num">–</td></tr>
+
+                <tr><td class="center">TG 2</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 1, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 1</td><td class="num">158</td><td class="num">–</td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td>9d</td><td class="num">2,097,500</td></tr>
+
+                <tr><td class="center">TG2-1</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 2, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 2</td><td class="num">238</td><td class="num">–</td><td class="num">79M</td><td class="num">79M</td><td class="num">15M</td><td class="num">3.9M</td><td>11d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG2-2</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 2, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 2</td><td class="num">238</td><td class="num">–</td><td class="num">79M</td><td class="num">79M</td><td class="num">15M</td><td class="num">3.9M</td><td>11d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG2-3</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 2, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 2</td><td class="num">238</td><td class="num">–</td><td class="num">79M</td><td class="num">79M</td><td class="num">15M</td><td class="num">3.9M</td><td>11d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG2-4</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 2, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 2</td><td class="num">238</td><td class="num">–</td><td class="num">79M</td><td class="num">79M</td><td class="num">15M</td><td class="num">3.9M</td><td>11d</td><td class="num">–</td></tr>
+
+                <tr><td class="center">TG 3</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 2, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 2</td><td class="num">238</td><td class="num">–</td><td class="num">79M</td><td class="num">79M</td><td class="num">15M</td><td class="num">3.9M</td><td>11d</td><td class="num">2,384,500</td></tr>
+
+                <tr><td class="center">TG3-1</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 3, <a href="/ja/buildings/range.html">Range</a> TG Lv. 3</td><td class="num">280</td><td class="num">–</td><td class="num">82M</td><td class="num">82M</td><td class="num">16M</td><td class="num">4.1M</td><td>12d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG3-2</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 3, <a href="/ja/buildings/range.html">Range</a> TG Lv. 3</td><td class="num">280</td><td class="num">–</td><td class="num">82M</td><td class="num">82M</td><td class="num">16M</td><td class="num">4.1M</td><td>12d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG3-3</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 3, <a href="/ja/buildings/range.html">Range</a> TG Lv. 3</td><td class="num">280</td><td class="num">–</td><td class="num">82M</td><td class="num">82M</td><td class="num">16M</td><td class="num">4.1M</td><td>12d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG3-4</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 3, <a href="/ja/buildings/range.html">Range</a> TG Lv. 3</td><td class="num">280</td><td class="num">–</td><td class="num">82M</td><td class="num">82M</td><td class="num">16M</td><td class="num">4.1M</td><td>12d</td><td class="num">–</td></tr>
+
+                <tr><td class="center">TG 4</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 3, <a href="/ja/buildings/range.html">Range</a> TG Lv. 3</td><td class="num">280</td><td class="num">–</td><td class="num">82M</td><td class="num">82M</td><td class="num">16M</td><td class="num">4.1M</td><td>12d</td><td class="num">2,700,500</td></tr>
+
+                <tr><td class="center">TG4-1</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 4, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 4</td><td class="num">335</td><td class="num">–</td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">4.2M</td><td>14d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG4-2</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 4, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 4</td><td class="num">335</td><td class="num">–</td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">4.2M</td><td>14d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG4-3</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 4, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 4</td><td class="num">335</td><td class="num">–</td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">4.2M</td><td>14d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG4-4</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 4, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 4</td><td class="num">335</td><td class="num">–</td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">4.2M</td><td>14d</td><td class="num">–</td></tr>
+
+                <tr><td class="center">TG 5</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 4, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 4</td><td class="num">335</td><td class="num">–</td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">4.2M</td><td>14d</td><td class="num">3,016,500</td></tr>
+
+                <tr><td class="center">TG5-1</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 5, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 5</td><td class="num">200</td><td class="num">10</td><td class="num">96M</td><td class="num">96M</td><td class="num">19M</td><td class="num">4.8M</td><td>15d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG5-2</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 5, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 5</td><td class="num">200</td><td class="num">10</td><td class="num">96M</td><td class="num">96M</td><td class="num">19M</td><td class="num">4.8M</td><td>15d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG5-3</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 5, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 5</td><td class="num">200</td><td class="num">10</td><td class="num">96M</td><td class="num">96M</td><td class="num">19M</td><td class="num">4.8M</td><td>15d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG5-4</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 5, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 5</td><td class="num">200</td><td class="num">10</td><td class="num">96M</td><td class="num">96M</td><td class="num">19M</td><td class="num">4.8M</td><td>15d</td><td class="num">–</td></tr>
+
+                <tr><td class="center">TG 6</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 5, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 5</td><td class="num">100</td><td class="num">20</td><td class="num">96M</td><td class="num">96M</td><td class="num">19M</td><td class="num">4.8M</td><td>15d</td><td class="num">3,354,500</td></tr>
+
+                <tr><td class="center">TG6-1</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 6, <a href="/ja/buildings/range.html">Range</a> TG Lv. 6</td><td class="num">240</td><td class="num">15</td><td class="num">100M</td><td class="num">100M</td><td class="num">21M</td><td class="num">5.4M</td><td>18d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG6-2</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 6, <a href="/ja/buildings/range.html">Range</a> TG Lv. 6</td><td class="num">240</td><td class="num">15</td><td class="num">100M</td><td class="num">100M</td><td class="num">21M</td><td class="num">5.4M</td><td>18d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG6-3</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 6, <a href="/ja/buildings/range.html">Range</a> TG Lv. 6</td><td class="num">240</td><td class="num">15</td><td class="num">100M</td><td class="num">100M</td><td class="num">21M</td><td class="num">5.4M</td><td>18d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG6-4</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 6, <a href="/ja/buildings/range.html">Range</a> TG Lv. 6</td><td class="num">240</td><td class="num">15</td><td class="num">100M</td><td class="num">100M</td><td class="num">21M</td><td class="num">5.4M</td><td>18d</td><td class="num">–</td></tr>
+
+                <tr><td class="center">TG 7</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 6, <a href="/ja/buildings/range.html">Range</a> TG Lv. 6</td><td class="num">120</td><td class="num">30</td><td class="num">100M</td><td class="num">100M</td><td class="num">21M</td><td class="num">5.4M</td><td>18d</td><td class="num">3,692,500</td></tr>
+
+                <tr><td class="center">TG7-1</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 7, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 7</td><td class="num">240</td><td class="num">20</td><td class="num">130M</td><td class="num">130M</td><td class="num">26M</td><td class="num">6.6M</td><td>20d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG7-2</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 7, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 7</td><td class="num">240</td><td class="num">20</td><td class="num">130M</td><td class="num">130M</td><td class="num">26M</td><td class="num">6.6M</td><td>20d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG7-3</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 7, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 7</td><td class="num">240</td><td class="num">20</td><td class="num">130M</td><td class="num">130M</td><td class="num">26M</td><td class="num">6.6M</td><td>20d</td><td class="num">–</td></tr>
+                <tr><td class="center">TG7-4</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 7, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 7</td><td class="num">240</td><td class="num">20</td><td class="num">130M</td><td class="num">130M</td><td class="num">26M</td><td class="num">6.6M</td><td>20d</td><td class="num">–</td></tr>
+
+                <tr><td class="center">TG 8</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 7, <a href="/ja/buildings/stable.html">Stable</a> TG Lv. 7</td><td class="num">120</td><td class="num">40</td><td class="num">130M</td><td class="num">130M</td><td class="num">26M</td><td class="num">6.6M</td><td>20d</td><td class="num">4,030,500</td></tr>
+
+                <tr><td class="center">TG8-1</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 8, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 8</td><td class="num">280</td><td class="num">30</td><td class="num">140M</td><td class="num">140M</td><td class="num">29M</td><td class="num">7.2M</td><td>13d</td><td class="num">4,102,900</td></tr>
+                <tr><td class="center">TG8-2</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 8, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 8</td><td class="num">280</td><td class="num">30</td><td class="num">140M</td><td class="num">140M</td><td class="num">29M</td><td class="num">7.2M</td><td>13d</td><td class="num">4,175,300</td></tr>
+                <tr><td class="center">TG8-3</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 8, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 8</td><td class="num">280</td><td class="num">30</td><td class="num">140M</td><td class="num">140M</td><td class="num">29M</td><td class="num">7.2M</td><td>13d</td><td class="num">4,247,700</td></tr>
+                <tr><td class="center">TG8-4</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 8, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 8</td><td class="num">280</td><td class="num">30</td><td class="num">140M</td><td class="num">140M</td><td class="num">29M</td><td class="num">7.2M</td><td>13d</td><td class="num">4,320,100</td></tr>
+
+                <tr><td class="center">TG 9</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 8, <a href="/ja/buildings/barracks.html">Barracks</a> TG Lv. 8</td><td class="num">140</td><td class="num">60</td><td class="num">140M</td><td class="num">140M</td><td class="num">29M</td><td class="num">7.2M</td><td>13d</td><td class="num">4,392,500</td></tr>
+
+                <tr><td class="center">TG9-1</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 9, <a href="/ja/buildings/range.html">Range</a> TG Lv. 9</td><td class="num">350</td><td class="num">70</td><td class="num">160M</td><td class="num">160M</td><td class="num">33M</td><td class="num">8.4M</td><td>20d</td><td class="num">4,464,900</td></tr>
+                <tr><td class="center">TG9-2</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 9, <a href="/ja/buildings/range.html">Range</a> TG Lv. 9</td><td class="num">350</td><td class="num">70</td><td class="num">160M</td><td class="num">160M</td><td class="num">33M</td><td class="num">8.4M</td><td>20d</td><td class="num">4,537,300</td></tr>
+                <tr><td class="center">TG9-3</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 9, <a href="/ja/buildings/range.html">Range</a> TG Lv. 9</td><td class="num">350</td><td class="num">70</td><td class="num">160M</td><td class="num">160M</td><td class="num">33M</td><td class="num">8.4M</td><td>20d</td><td class="num">4,609,700</td></tr>
+                <tr><td class="center">TG9-4</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 9, <a href="/ja/buildings/range.html">Range</a> TG Lv. 9</td><td class="num">350</td><td class="num">70</td><td class="num">160M</td><td class="num">160M</td><td class="num">33M</td><td class="num">8.4M</td><td>20d</td><td class="num">4,682,100</td></tr>
+
+                <tr><td class="center">TG 10</td><td class="req"><a href="/ja/buildings/embassy.html">Embassy</a> TG Lv. 9, <a href="/ja/buildings/range.html">Range</a> TG Lv. 9</td><td class="num">175</td><td class="num">140</td><td class="num">160M</td><td class="num">160M</td><td class="num">33M</td><td class="num">8.4M</td><td>20d</td><td class="num">4,754,500</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="unlocks">
+        <h2>解放要素</h2>
+        <ul class="clean">
+          <li><strong>タウンセンター Lv. 2:</strong> Mill</li>
+          <li><strong>タウンセンター Lv. 3:</strong> Quarry</li>
+          <li><strong>タウンセンター Lv. 4:</strong> House 3, Clinic, Suppressors’ Camp, Hero Hall</li>
+          <li><strong>タウンセンター Lv. 5:</strong> House 4, Iron Mine</li>
+          <li><strong>タウンセンター Lv. 6:</strong> House 5, Watchtower, Alliance, Court of Justice</li>
+          <li><strong>タウンセンター Lv. 7:</strong> House 6, <a href="/ja/buildings/barracks.html">Barracks</a>, <a href="/ja/buildings/guard-station.html">Guard Station</a></li>
+          <li><strong>タウンセンター Lv. 8:</strong> <a href="/ja/buildings/embassy.html">Embassy</a>, Arena, Monument, <a href="/ja/buildings/range.html">Range</a>, <a href="/ja/buildings/infirmary.html">Infirmary</a></li>
+          <li><strong>タウンセンター Lv. 9:</strong> <a href="/ja/buildings/storehouse.html">Storehouse</a>, <a href="/ja/buildings/academy.html">Academy</a>, <a href="/ja/buildings/stable.html">Stable</a></li>
+          <li><strong>タウンセンター Lv. 10:</strong> House 7, House 8, <a href="/ja/buildings/command-center.html">Command Center</a></li>
+          <li><strong>タウンセンター Lv. 11:</strong> Enlistment Office</li>
+          <li><strong>タウンセンター Lv. 13:</strong> Drill Camp</li>
+          <li><strong>タウンセンター Lv. 15:</strong> Hero Gear</li>
+          <li><strong>タウンセンター Lv. 20:</strong> Mastery Forging</li>
+          <li><strong>タウンセンター Lv. 22:</strong> Governor Gear</li>
+          <li><strong>タウンセンター Lv. 25:</strong> Governor Charms</li>
+          <li><strong>タウンセンター Lv. 30:</strong> Truegold（TG）段階</li>
+        </ul>
+      </section>
+
+      <section id="related">
+        <h2>関連建物</h2>
+        <div class="related">
+          <a class="pill" href="/ja/buildings/embassy.html">Embassy</a>
+          <a class="pill" href="/ja/buildings/academy.html">Academy</a>
+          <a class="pill" href="/ja/buildings/war-academy.html">War Academy</a>
+          <a class="pill" href="/ja/buildings/barracks.html">Barracks</a>
+          <a class="pill" href="/ja/buildings/stable.html">Stable</a>
+          <a class="pill" href="/ja/buildings/range.html">Range</a>
+          <a class="pill" href="/ja/buildings/command-center.html">Command Center</a>
+          <a class="pill" href="/ja/buildings/guard-station.html">Guard Station</a>
+          <a class="pill" href="/ja/buildings/storehouse.html">Storehouse</a>
+          <a class="pill" href="/ja/buildings/infirmary.html">Infirmary</a>
+          <a class="pill" href="/ja/buildings/truegold-crucible.html">Truegold Crucible</a>
+          <a class="pill" href="/ja/buildings/kitchen.html">Kitchen</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function isDash(v){
+        if(!v) return true;
+        var t = String(v).trim();
+        return t === '–' || t === '-' || t === '';
+      }
+
+      var ICON = {
+        wood: '/img/wood.webp',
+        bread: '/img/bread.webp',
+        stone: '/img/stone.webp',
+        iron: '/img/iron.webp',
+        truegold: '/img/truegold.webp',
+        tempered: '/img/tempered-truegold.webp'
+      };
+
+      function imgIcon(src){
+        return '<img class="icoimg" src="'+src+'" alt="" aria-hidden="true" width="18" height="18" loading="lazy" decoding="async">';
+      }
+
+      function makeResItem(src, label, value){
+        return (
+          '<div class="res-item">' +
+            '<div class="res-left">' +
+              imgIcon(src) +
+              '<div class="res-label">'+ label +'</div>' +
+            '</div>' +
+            '<div class="res-val">'+ value +'</div>' +
+          '</div>'
+        );
+      }
+
+      function svgUse(id){
+        return '<svg aria-hidden="true" viewBox="0 0 24 24"><use href="#'+id+'"></use></svg>';
+      }
+
+      function buildCardsFromTable(tableId, targetId, mode){
+        var table = document.getElementById(tableId);
+        var target = document.getElementById(targetId);
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var cells = tr.querySelectorAll('td');
+          if(!cells || !cells.length) return;
+
+          if(mode === 'req'){
+            var level = cells[0].textContent.trim();
+            var reqHTML = cells[1].innerHTML.trim();
+            var wood = cells[2].textContent.trim();
+            var bread = cells[3].textContent.trim();
+            var stone = cells[4].textContent.trim();
+            var iron = cells[5].textContent.trim();
+            var time = cells[6].textContent.trim();
+            var power = cells[7].textContent.trim();
+            var maxHero = cells[8].textContent.trim();
+
+            var res = '';
+            if(!isDash(wood))  res += makeResItem(ICON.wood, '木材', wood);
+            if(!isDash(bread)) res += makeResItem(ICON.bread,'パン', bread);
+            if(!isDash(stone)) res += makeResItem(ICON.stone,'石材', stone);
+            if(!isDash(iron))  res += makeResItem(ICON.iron,'鉄', iron);
+
+            var foot = '';
+            if(!isDash(time))  foot += '<span class="badge">'+ svgUse('ico-time') + '<span>時間: '+ time +'</span></span>';
+            if(!isDash(power)) foot += '<span class="badge">'+ svgUse('ico-power') + '<span>戦力: '+ power +'</span></span>';
+            if(!isDash(maxHero)) foot += '<span class="badge"><span>ヒーロー上限: '+ maxHero +'</span></span>';
+
+            html += (
+              '<article class="card">' +
+                '<div class="card-head">' +
+                  '<h3 class="card-title">Lv ' + level + '</h3>' +
+                  '<div class="card-meta">' + (isDash(time) ? '' : ('時間<br><strong>'+ time +'</strong>')) + '</div>' +
+                '</div>' +
+                '<div class="card-req"><strong>必要条件:</strong> ' + reqHTML + '</div>' +
+                (res ? ('<div class="res-grid" aria-label="Resources">'+ res +'</div>') : '') +
+                (foot ? ('<div class="card-foot">'+ foot +'</div>') : '') +
+              '</article>'
+            );
+
+            count++;
+          }
+
+          if(mode === 'tg'){
+            var tgLevel = cells[0].textContent.trim();
+            var tgReqHTML = cells[1].innerHTML.trim();
+            var truegold = cells[2].textContent.trim();
+            var tempered = cells[3].textContent.trim();
+            var wood2 = cells[4].textContent.trim();
+            var bread2 = cells[5].textContent.trim();
+            var stone2 = cells[6].textContent.trim();
+            var iron2 = cells[7].textContent.trim();
+            var time2 = cells[8].textContent.trim();
+            var power2 = cells[9].textContent.trim();
+
+            var res2 = '';
+            if(!isDash(truegold)) res2 += makeResItem(ICON.truegold,'Truegold', truegold);
+            if(!isDash(tempered)) res2 += makeResItem(ICON.tempered,'焼入れ済みTruegold', tempered);
+            if(!isDash(wood2))    res2 += makeResItem(ICON.wood,'木材', wood2);
+            if(!isDash(bread2))   res2 += makeResItem(ICON.bread,'パン', bread2);
+            if(!isDash(stone2))   res2 += makeResItem(ICON.stone,'石材', stone2);
+            if(!isDash(iron2))    res2 += makeResItem(ICON.iron,'鉄', iron2);
+
+            var foot2 = '';
+            if(!isDash(time2))  foot2 += '<span class="badge">'+ svgUse('ico-time') + '<span>時間: '+ time2 +'</span></span>';
+            if(!isDash(power2)) foot2 += '<span class="badge">'+ svgUse('ico-power') + '<span>戦力: '+ power2 +'</span></span>';
+
+            html += (
+              '<article class="card">' +
+                '<div class="card-head">' +
+                  '<h3 class="card-title">' + tgLevel + '</h3>' +
+                  '<div class="card-meta">' + (isDash(time2) ? '' : ('時間<br><strong>'+ time2 +'</strong>')) + '</div>' +
+                '</div>' +
+                '<div class="card-req"><strong>必要条件:</strong> ' + tgReqHTML + '</div>' +
+                (res2 ? ('<div class="res-grid" aria-label="Resources">'+ res2 +'</div>') : '') +
+                (foot2 ? ('<div class="card-foot">'+ foot2 +'</div>') : '') +
+              '</article>'
+            );
+
+            count++;
+          }
+        });
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      function buildTimelineCards(){
+        var table = document.getElementById('timeline-table');
+        var target = document.getElementById('timeline-cards');
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || tds.length < 3) return;
+
+          var milestone = tds[0].innerHTML.trim();
+          var age = tds[1].textContent.trim();
+          var meaning = tds[2].innerHTML.trim();
+
+          html += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">' + milestone + '</h3>' +
+                '<div class="card-meta">' + (isDash(age) ? '' : ('サーバー経過<br><strong>'+ age +'</strong>')) + '</div>' +
+              '</div>' +
+              '<div class="card-req" style="margin:0"><strong>意味:</strong> ' + meaning + '</div>' +
+            '</article>'
+          );
+
+          count++;
+        });
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      var tabNormal, tabTG, panelNormal, panelTG;
+
+      function setActive(which, updateHash){
+        if(!tabNormal) return;
+
+        var isNormal = which === 'normal';
+
+        tabNormal.setAttribute('aria-selected', isNormal ? 'true' : 'false');
+        tabTG.setAttribute('aria-selected', isNormal ? 'false' : 'true');
+
+        panelNormal.classList.toggle('is-active', isNormal);
+        panelTG.classList.toggle('is-active', !isNormal);
+
+        if(updateHash){
+          var id = isNormal ? 'requirements' : 'truegold';
+          if(history && history.replaceState){
+            history.replaceState(null, '', '#'+id);
+          }else{
+            location.hash = '#'+id;
+          }
+        }
+      }
+
+      function initTabs(){
+        tabNormal = document.getElementById('tab-normal');
+        tabTG = document.getElementById('tab-tg');
+        panelNormal = document.getElementById('panel-normal');
+        panelTG = document.getElementById('panel-tg');
+
+        if(!tabNormal || !tabTG || !panelNormal || !panelTG) return;
+
+        tabNormal.addEventListener('click', function(){
+          setActive('normal', true);
+          var el = document.getElementById('requirements');
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+
+        tabTG.addEventListener('click', function(){
+          setActive('tg', true);
+          var el = document.getElementById('truegold');
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+
+        var aReq = document.querySelector('a[href="#requirements"]');
+        var aTG = document.querySelector('a[href="#truegold"]');
+        if(aReq){
+          aReq.addEventListener('click', function(e){
+            if(document.documentElement.classList.contains('js')){
+              e.preventDefault();
+              setActive('normal', true);
+              var el = document.getElementById('requirements');
+              if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+            }
+          });
+        }
+        if(aTG){
+          aTG.addEventListener('click', function(e){
+            if(document.documentElement.classList.contains('js')){
+              e.preventDefault();
+              setActive('tg', true);
+              var el = document.getElementById('truegold');
+              if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+            }
+          });
+        }
+
+        var h = (location.hash || '').toLowerCase();
+        if(h === '#truegold'){ setActive('tg', false); }
+        else { setActive('normal', false); }
+      }
+
+      function decorateTableNumbers(tableId, map){
+        var table = document.getElementById(tableId);
+        if(!table) return;
+
+        var rows = table.querySelectorAll('tbody tr');
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || !tds.length) return;
+
+          Object.keys(map).forEach(function(key){
+            var idx = parseInt(key, 10);
+            var iconSrc = map[key];
+            if(!tds[idx]) return;
+
+            var raw = tds[idx].textContent.trim();
+            if(isDash(raw)) return;
+
+            tds[idx].innerHTML =
+              '<span class="cell-num">' +
+                '<img class="td-ico" src="'+ iconSrc +'" alt="" aria-hidden="true" width="14" height="14" loading="lazy" decoding="async">' +
+                '<span>'+ raw +'</span>' +
+              '</span>';
+          });
+        });
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+
+        var c0 = buildTimelineCards();
+        var c1 = buildCardsFromTable('req-table', 'req-cards', 'req');
+        var c2 = buildCardsFromTable('tg-table', 'tg-cards', 'tg');
+
+        if((c0 + c1 + c2) > 0){
+          document.documentElement.classList.add('enhanced');
+        }
+
+        initTabs();
+
+        decorateTableNumbers('req-table', {
+          2: ICON.wood,
+          3: ICON.bread,
+          4: ICON.stone,
+          5: ICON.iron
+        });
+
+        decorateTableNumbers('tg-table', {
+          2: ICON.truegold,
+          3: ICON.tempered,
+          4: ICON.wood,
+          5: ICON.bread,
+          6: ICON.stone,
+          7: ICON.iron
+        });
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
