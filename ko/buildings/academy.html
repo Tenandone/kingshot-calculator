@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>아카데미 업그레이드 비용 (Lv 1–30) | Kingshot</title>
+  <meta name="description" content="Kingshot 아카데미 업그레이드 요구 조건 및 비용 (Lv 1–30). 도시센터 요구 레벨, 자원(빵/나무/석재/철), 업그레이드 시간, 연구 속도 보너스를 포함합니다." />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://kingshotdata.kr/ko/buildings/academy.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings/academy.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/buildings/academy.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/buildings/academy.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/buildings/academy.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/buildings/academy.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h: 0px;
+      --tabs-h: 0px;
+      --sticky-top: 0px;
+
+      --cell-ico: 14px;
+      --th-ico: 14px;
+      --tbl-font: 13px;
+      --tbl-pad-y: 9px;
+      --tbl-pad-x: 10px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+    nav.lang{
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid; grid-template-columns: 160px 1fr; gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px; height:160px; object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted)}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .jump{
+      margin-top:10px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px; font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(245,158,11,.35);
+      background:rgba(245,158,11,.08);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px; height:18px; flex:0 0 18px;
+      margin-top:2px;
+      color:#b45309;
+    }
+
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+    }
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      font-size:calc(var(--tbl-font) - 1px);
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td{
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:var(--tbl-font);
+      white-space:nowrap;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+
+    .center{text-align:center}
+    .num{text-align:right; font-variant-numeric: tabular-nums}
+
+    .th-flex{display:inline-flex; align-items:center; gap:6px}
+    .th-ico{
+      width:var(--th-ico);
+      height:var(--th-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+    }
+
+    .cell-num{
+      display:inline-flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:6px;
+      white-space:nowrap;
+    }
+    .td-ico{
+      width:var(--cell-ico);
+      height:var(--cell-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+      opacity:.95;
+    }
+
+    table.sticky-firstcol th:first-child,
+    table.sticky-firstcol td:first-child{
+      position: sticky;
+      left: 0;
+      background:inherit;
+      z-index:2;
+    }
+    table.sticky-firstcol thead th:first-child{
+      z-index:4;
+      background:#f8fafc;
+    }
+
+    @media (min-width: 901px){
+      :root{
+        --tbl-font: 12px;
+        --tbl-pad-y: 7px;
+        --tbl-pad-x: 8px;
+        --cell-ico: 13px;
+        --th-ico: 13px;
+      }
+      table{table-layout:fixed}
+      .table-wrap{overflow-x:clip}
+      @supports not (overflow: clip){ .table-wrap{overflow-x:hidden} }
+    }
+
+    /* Mobile cards */
+    .cards{display:none}
+    .cards .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:12px 12px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0;
+    }
+    .card-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.25;
+      white-space:nowrap;
+    }
+    .res-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:8px;
+      margin-top:10px;
+    }
+    .res-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 10px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      font-size:13px;
+    }
+    .res-left{display:flex; align-items:center; gap:8px; min-width:0}
+    .icoimg{
+      width:18px; height:18px; flex:0 0 18px;
+      object-fit:contain;
+      display:block;
+    }
+    .res-label{
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .res-val{
+      font-weight:900;
+      font-variant-numeric: tabular-nums;
+      white-space:nowrap;
+    }
+    .card-foot{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      white-space:nowrap;
+    }
+    .badge svg{width:16px;height:16px;opacity:.85}
+
+    .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{
+      display:inline-flex; align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    ul.clean{margin:0; padding-left:18px}
+    ul.clean li{margin:6px 0}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top: calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width: 900px){
+      header.top{position: sticky; top: 0; z-index: 40;}
+      nav.section-tabs{
+        display:flex;
+        position: sticky;
+        top: var(--header-h);
+        z-index: 35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+
+      .enhanced .data-table{display:none}
+      .enhanced .cards{display:grid; gap:12px}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+      .res-grid{grid-template-columns: 1fr}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"아카데미 (Kingshot)",
+    "inLanguage":"ko",
+    "description":"Kingshot 아카데미 업그레이드 요구 조건 및 비용 (Lv 1–30). 도시센터 요구 레벨, 자원, 업그레이드 시간, 연구 속도 보너스를 포함합니다.",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
+        {"@type":"ListItem","position":2,"name":"건물","item":"https://kingshotdata.kr/ko/buildings/"},
+        {"@type":"ListItem","position":3,"name":"아카데미","item":"https://kingshotdata.kr/ko/buildings/academy.html"}
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-time" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 6v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/buildings/academy.html">EN</a>
+        <a href="/ko/buildings/academy.html" aria-current="page">KO</a>
+        <a href="/ja/buildings/academy.html">JA</a>
+        <a href="/zh-tw/buildings/academy.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">개요</a>
+      <a href="#requirements">요구 조건</a>
+      <a href="#related">관련</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/buildings/">건물</a> <span class="muted">›</span>
+        <span>아카데미</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/buildings/academy.webp" alt="아카데미 (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>아카데미</h1>
+          <p class="sub">
+            아카데미는 도시센터 9레벨에서 해금됩니다. 이곳에서 도시 성장에 필요한 다양한 연구를 진행할 수 있으며,
+            연구는 성장 / 경제 / 전투 3개 카테고리로 구분됩니다.
+          </p>
+          <div class="quote">
+            새로운 기술을 연구하는 기관입니다. 업그레이드하면 더 강력한 기술 연구가 가능합니다.
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">개요</a><span class="dotsep">•</span>
+            <a href="#requirements">요구 조건</a><span class="dotsep">•</span>
+            <a href="#related">관련</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>개요</h2>
+        <ul class="clean">
+          <li><strong>성장:</strong> 건설/연구 속도, 동시 훈련량, 각종 확장 등 도시 발전에 직접 영향을 주는 연구</li>
+          <li><strong>경제:</strong> 자원 생산량, 월드 채집 속도 등 자원 수급을 강화하는 연구</li>
+          <li><strong>전투:</strong> 병력 능력치, 출정/편성 등 전투 성능을 강화하는 연구</li>
+        </ul>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>안내:</strong>
+            영웅/연구/버프 등에 따라 실제 요구 자원은 달라질 수 있습니다. 아래 수치는 기본(원본) 기준입니다.
+          </div>
+        </div>
+
+        <p class="muted" style="margin:0">
+          아카데미는 <strong>순금(Truegold) 단계가 없으며</strong>, <strong>30레벨에서 끝</strong>입니다.
+        </p>
+      </section>
+
+      <section id="requirements">
+        <span class="anchor"></span>
+        <h2>업그레이드 요구 조건 (Lv 1–30)</h2>
+        <p class="muted" style="margin-top:-2px">도시센터 요구 레벨, 자원, 업그레이드 시간, 연구 속도 보너스</p>
+
+        <div class="cards" id="req-cards" aria-label="아카데미 요구 조건 (모바일 카드)"></div>
+
+        <div class="table-wrap data-table" aria-label="아카데미 업그레이드 표">
+          <table id="req-table" class="sticky-firstcol">
+            <colgroup>
+              <col style="width:6%">
+              <col style="width:10%">
+              <col style="width:11%"><!-- Bread -->
+              <col style="width:11%"><!-- Wood -->
+              <col style="width:11%"><!-- Stone -->
+              <col style="width:11%"><!-- Iron -->
+              <col style="width:18%">
+              <col style="width:12%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="center">레벨</th>
+                <th class="center">도시센터</th>
+                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="14" height="14">빵</span></th>
+                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="14" height="14">나무</span></th>
+                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="14" height="14">석재</span></th>
+                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="14" height="14">철</span></th>
+                <th><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-time"></use></svg>업그레이드 시간</span></th>
+                <th class="center">연구 속도</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- 순서: 빵 / 나무 / 석재 / 철 -->
+              <tr><td class="center">1</td><td class="center">9</td><td class="num">–</td><td class="num">105</td><td class="num">–</td><td class="num">–</td><td>2s</td><td class="center">0.1%</td></tr>
+              <tr><td class="center">2</td><td class="center">9</td><td class="num">–</td><td class="num">160</td><td class="num">–</td><td class="num">–</td><td>9s</td><td class="center">0.2%</td></tr>
+              <tr><td class="center">3</td><td class="center">9</td><td class="num">–</td><td class="num">725</td><td class="num">–</td><td class="num">–</td><td>45s</td><td class="center">0.3%</td></tr>
+              <tr><td class="center">4</td><td class="center">9</td><td class="num">–</td><td class="num">1,600</td><td class="num">320</td><td class="num">–</td><td>2m 15s</td><td class="center">0.4%</td></tr>
+              <tr><td class="center">5</td><td class="center">9</td><td class="num">–</td><td class="num">6,800</td><td class="num">1,300</td><td class="num">–</td><td>4m 30s</td><td class="center">0.5%</td></tr>
+              <tr><td class="center">6</td><td class="center">9</td><td class="num">–</td><td class="num">17,000</td><td class="num">3,400</td><td class="num">860</td><td>9m</td><td class="center">0.6%</td></tr>
+              <tr><td class="center">7</td><td class="center">9</td><td class="num">–</td><td class="num">62,000</td><td class="num">12,000</td><td class="num">3,100</td><td>18m</td><td class="center">0.7%</td></tr>
+              <tr><td class="center">8</td><td class="center">9</td><td class="num">–</td><td class="num">110,000</td><td class="num">22,000</td><td class="num">5,600</td><td>27m</td><td class="center">0.8%</td></tr>
+              <tr><td class="center">9</td><td class="center">9</td><td class="num">–</td><td class="num">230,000</td><td class="num">47,000</td><td class="num">11,000</td><td>40m 30s</td><td class="center">0.9%</td></tr>
+              <tr><td class="center">10</td><td class="center">10</td><td class="num">–</td><td class="num">410,000</td><td class="num">82,000</td><td class="num">20,000</td><td>54m</td><td class="center">1.0%</td></tr>
+
+              <tr><td class="center">11</td><td class="center">11</td><td class="num">520,000</td><td class="num">520,000</td><td class="num">100,000</td><td class="num">26,000</td><td>1h 7m 30s</td><td class="center">1.1%</td></tr>
+              <tr><td class="center">12</td><td class="center">12</td><td class="num">670,000</td><td class="num">670,000</td><td class="num">130,000</td><td class="num">33,000</td><td>1h 21m</td><td class="center">1.2%</td></tr>
+              <tr><td class="center">13</td><td class="center">13</td><td class="num">950,000</td><td class="num">950,000</td><td class="num">190,000</td><td class="num">47,000</td><td>1h 39m</td><td class="center">1.3%</td></tr>
+              <tr><td class="center">14</td><td class="center">14</td><td class="num">1,200,000</td><td class="num">1,200,000</td><td class="num">250,000</td><td class="num">63,000</td><td>2h 6m</td><td class="center">1.4%</td></tr>
+              <tr><td class="center">15</td><td class="center">15</td><td class="num">1,800,000</td><td class="num">1,800,000</td><td class="num">370,000</td><td class="num">93,000</td><td>2h 42m</td><td class="center">1.5%</td></tr>
+              <tr><td class="center">16</td><td class="center">16</td><td class="num">2,300,000</td><td class="num">2,300,000</td><td class="num">470,000</td><td class="num">110,000</td><td>4h 34m</td><td class="center">1.6%</td></tr>
+              <tr><td class="center">17</td><td class="center">17</td><td class="num">3,700,000</td><td class="num">3,700,000</td><td class="num">740,000</td><td class="num">180,000</td><td>5h 29m</td><td class="center">1.7%</td></tr>
+              <tr><td class="center">18</td><td class="center">18</td><td class="num">5,000,000</td><td class="num">5,000,000</td><td class="num">1,000,000</td><td class="num">250,000</td><td>6h 35m</td><td class="center">1.8%</td></tr>
+              <tr><td class="center">19</td><td class="center">19</td><td class="num">6,200,000</td><td class="num">6,200,000</td><td class="num">1,200,000</td><td class="num">310,000</td><td>9h 52m</td><td class="center">1.9%</td></tr>
+              <tr><td class="center">20</td><td class="center">20</td><td class="num">8,600,000</td><td class="num">8,600,000</td><td class="num">1,700,000</td><td class="num">430,000</td><td>12h 20m 30s</td><td class="center">2.0%</td></tr>
+              <tr><td class="center">21</td><td class="center">21</td><td class="num">10,000,000</td><td class="num">10,000,000</td><td class="num">2,100,000</td><td class="num">540,000</td><td>16h 2m 30s</td><td class="center">2.1%</td></tr>
+              <tr><td class="center">22</td><td class="center">22</td><td class="num">14,000,000</td><td class="num">14,000,000</td><td class="num">2,800,000</td><td class="num">720,000</td><td>1d 4m</td><td class="center">2.2%</td></tr>
+              <tr><td class="center">23</td><td class="center">23</td><td class="num">17,000,000</td><td class="num">17,000,000</td><td class="num">3,500,000</td><td class="num">890,000</td><td>1d 9h 42m</td><td class="center">2.3%</td></tr>
+              <tr><td class="center">24</td><td class="center">24</td><td class="num">24,000,000</td><td class="num">24,000,000</td><td class="num">4,800,000</td><td class="num">1,200,000</td><td>1d 23h 11m</td><td class="center">2.4%</td></tr>
+              <tr><td class="center">25</td><td class="center">25</td><td class="num">32,000,000</td><td class="num">32,000,000</td><td class="num">6,500,000</td><td class="num">1,600,000</td><td>2d 18h 3m</td><td class="center">2.5%</td></tr>
+              <tr><td class="center">26</td><td class="center">26</td><td class="num">42,000,000</td><td class="num">42,000,000</td><td class="num">8,400,000</td><td class="num">2,100,000</td><td>3d 3h 57m</td><td class="center">2.6%</td></tr>
+              <tr><td class="center">27</td><td class="center">27</td><td class="num">59,000,000</td><td class="num">59,000,000</td><td class="num">11,000,000</td><td class="num">2,900,000</td><td>3d 19h 9m</td><td class="center">2.7%</td></tr>
+              <tr><td class="center">28</td><td class="center">28</td><td class="num">79,000,000</td><td class="num">79,000,000</td><td class="num">15,000,000</td><td class="num">3,900,000</td><td>4d 8h 49m</td><td class="center">2.8%</td></tr>
+              <tr><td class="center">29</td><td class="center">29</td><td class="num">98,000,000</td><td class="num">98,000,000</td><td class="num">19,000,000</td><td class="num">4,900,000</td><td>5d 33m</td><td class="center">2.9%</td></tr>
+              <tr><td class="center">30</td><td class="center">30</td><td class="num">120,000,000</td><td class="num">120,000,000</td><td class="num">24,000,000</td><td class="num">6,000,000</td><td>6d 40m</td><td class="center">3.0%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="related">
+        <h2>관련 건물</h2>
+        <div class="related">
+          <a class="pill" href="/ko/buildings/town-center.html">도시센터</a>
+          <a class="pill" href="/ko/buildings/embassy.html">대사관</a>
+          <a class="pill" href="/ko/buildings/commandcenter.html">지휘부</a>
+          <a class="pill" href="/ko/buildings/storehouse.html">창고</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function isDash(v){
+        if(!v) return true;
+        var t = String(v).trim();
+        return t === '–' || t === '-' || t === '';
+      }
+
+      function parseNum(s){
+        var t = String(s || '').trim();
+        if(isDash(t)) return null;
+        t = t.replace(/,/g,'');
+        var n = Number(t);
+        return Number.isFinite(n) ? n : null;
+      }
+
+      // 105 -> 105, 1600 -> 1.6k, 120000000 -> 120M
+      function fmtKMB(n){
+        if(n === null) return '–';
+        if(n < 1000) return String(n);
+
+        var v, suf;
+        if(n >= 1e9){ v = n / 1e9; suf = 'B'; }
+        else if(n >= 1e6){ v = n / 1e6; suf = 'M'; }
+        else { v = n / 1e3; suf = 'k'; }
+
+        var out;
+        if(v >= 100 || Number.isInteger(v)) out = v.toFixed(0);
+        else out = (Math.round(v * 10) / 10).toFixed(1).replace(/\.0$/,'');
+
+        return out + suf;
+      }
+
+      function formatResourceCells(tableId, colIdxs){
+        var table = document.getElementById(tableId);
+        if(!table) return;
+
+        var rows = table.querySelectorAll('tbody tr');
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          colIdxs.forEach(function(idx){
+            var td = tds[idx];
+            if(!td) return;
+
+            var raw = td.textContent.trim();
+            if(isDash(raw)) return;
+
+            td.dataset.raw = raw;
+
+            var n = parseNum(raw);
+            if(n === null) return;
+
+            td.textContent = fmtKMB(n);
+          });
+        });
+      }
+
+      var ICON = {
+        bread: '/img/bread.webp',
+        wood: '/img/wood.webp',
+        stone: '/img/stone.webp',
+        iron: '/img/iron.webp'
+      };
+
+      function imgIcon(src){
+        return '<img class="icoimg" src="'+src+'" alt="" aria-hidden="true" width="18" height="18" loading="lazy" decoding="async">';
+      }
+
+      function makeResItem(src, label, value, rawTitle){
+        var titleAttr = rawTitle ? (' title="원본: '+ rawTitle.replace(/"/g,'&quot;') +'"') : '';
+        return (
+          '<div class="res-item"' + titleAttr + '>' +
+            '<div class="res-left">' +
+              imgIcon(src) +
+              '<div class="res-label">'+ label +'</div>' +
+            '</div>' +
+            '<div class="res-val">'+ value +'</div>' +
+          '</div>'
+        );
+      }
+
+      function svgUse(id){
+        return '<svg aria-hidden="true" viewBox="0 0 24 24"><use href="#'+id+'"></use></svg>';
+      }
+
+      function buildCardsFromTable(tableId, targetId){
+        var table = document.getElementById(tableId);
+        var target = document.getElementById(targetId);
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var cells = tr.querySelectorAll('td');
+          if(!cells || cells.length < 8) return;
+
+          var level = cells[0].textContent.trim();
+          var tc = cells[1].textContent.trim();
+
+          // indices after reorder: Bread(2), Wood(3), Stone(4), Iron(5)
+          var bread = cells[2].textContent.trim();
+          var wood  = cells[3].textContent.trim();
+          var stone = cells[4].textContent.trim();
+          var iron  = cells[5].textContent.trim();
+
+          var breadRaw = cells[2].dataset.raw || '';
+          var woodRaw  = cells[3].dataset.raw || '';
+          var stoneRaw = cells[4].dataset.raw || '';
+          var ironRaw  = cells[5].dataset.raw || '';
+
+          var time = cells[6].textContent.trim();
+          var rs = cells[7].textContent.trim();
+
+          var res = '';
+          if(!isDash(bread)) res += makeResItem(ICON.bread,'빵', bread, breadRaw);
+          if(!isDash(wood))  res += makeResItem(ICON.wood, '나무', wood, woodRaw);
+          if(!isDash(stone)) res += makeResItem(ICON.stone,'석재', stone, stoneRaw);
+          if(!isDash(iron))  res += makeResItem(ICON.iron, '철', iron, ironRaw);
+
+          var foot = '';
+          if(!isDash(time)) foot += '<span class="badge">'+ svgUse('ico-time') + '<span>시간: '+ time +'</span></span>';
+          if(!isDash(tc))   foot += '<span class="badge"><span>도시센터: '+ tc +'</span></span>';
+          if(!isDash(rs))   foot += '<span class="badge"><span>연구 속도: '+ rs +'</span></span>';
+
+          html += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">레벨 ' + level + '</h3>' +
+                '<div class="card-meta">' + (isDash(time) ? '' : ('시간<br><strong>'+ time +'</strong>')) + '</div>' +
+              '</div>' +
+              (res ? ('<div class="res-grid" aria-label="Resources">'+ res +'</div>') : '') +
+              (foot ? ('<div class="card-foot">'+ foot +'</div>') : '') +
+            '</article>'
+          );
+
+          count++;
+        });
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      function decorateTableNumbers(tableId, map){
+        var table = document.getElementById(tableId);
+        if(!table) return;
+
+        var rows = table.querySelectorAll('tbody tr');
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || !tds.length) return;
+
+          Object.keys(map).forEach(function(key){
+            var idx = parseInt(key, 10);
+            var iconSrc = map[key];
+            var td = tds[idx];
+            if(!td) return;
+
+            var display = td.textContent.trim();
+            if(isDash(display)) return;
+
+            var raw = td.dataset.raw ? td.dataset.raw.trim() : '';
+            var title = raw ? (' title="원본: ' + raw.replace(/"/g,'&quot;') + '"') : '';
+
+            td.innerHTML =
+              '<span class="cell-num"' + title + '>' +
+                '<img class="td-ico" src="'+ iconSrc +'" alt="" aria-hidden="true" width="14" height="14" loading="lazy" decoding="async">' +
+                '<span>'+ display +'</span>' +
+              '</span>';
+          });
+        });
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+
+        // 자원 k/M/B 변환 (빵/나무/석재/철)
+        formatResourceCells('req-table', [2,3,4,5]);
+
+        // 모바일 카드 생성
+        var c1 = buildCardsFromTable('req-table', 'req-cards');
+        if(c1 > 0) document.documentElement.classList.add('enhanced');
+
+        // 표 수치 옆 아이콘 + 원본 툴팁
+        decorateTableNumbers('req-table', {
+          2: ICON.bread,
+          3: ICON.wood,
+          4: ICON.stone,
+          5: ICON.iron
+        });
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Kingshot 建築指南 – 全部建築清單・解鎖條件・升級需求</title>
+  <meta name="description" content="一次查看 Kingshot 全部建築清單、解鎖資訊與升級需求。包含市政廳、學院、大使館、步兵營、射擊場、馬廄、指揮部、倉庫、廚房、衛兵所、純金熔爐、戰爭學院等。" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/tw/buildings/" />
+
+  <meta property="og:title" content="Kingshot 建築指南 – 全部建築清單" />
+  <meta property="og:description" content="一次查看 Kingshot 全部建築清單、解鎖資訊與升級需求。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kingshotdata.kr/tw/buildings/" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <!-- ✅ 사이트 공통 CSS -->
+  <link rel="stylesheet" href="/css/common.css?v=202509131858">
+  <link rel="stylesheet" href="/css/category.css?v=202509131858">
+  <link rel="stylesheet" href="/css/database.css?v=202509131858">
+  <link rel="stylesheet" href="/css/mobile-patch.css?v=202509131858">
+  <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
+  <link rel="stylesheet" href="/css/header.css?v=202509131858">
+  <link rel="stylesheet" href="/css/sponsor.css?v=202509131858">
+
+  <style>
+    /* ===== page scope ===== */
+    #buildings-page{max-width:1100px;margin:0 auto;padding:28px 16px}
+    #buildings-page h1{margin:0 0 10px;font-size:28px;letter-spacing:-.02em}
+    #buildings-page .sub{margin:0 0 18px;color:#6b7280}
+
+    /* ✅ PC 4열 / 모바일 2열 */
+    #buildings-page .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}
+    @media (max-width:980px){ #buildings-page .grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+    @media (max-width:520px){
+      #buildings-page{padding:18px 12px}
+      #buildings-page h1{font-size:22px}
+      #buildings-page .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    }
+
+    #buildings-page .card{
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:16px;
+      background:#fff;
+      overflow:hidden;
+      transition:transform .12s ease,box-shadow .12s ease;
+      height:100%;
+    }
+    #buildings-page .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
+    #buildings-page .card a{display:flex;flex-direction:column;height:100%;color:inherit;text-decoration:none}
+
+    /* ✅ 이미지 크롭 제거 */
+    #buildings-page .imgbox{
+      background:#f2f4f7;
+      display:flex;align-items:center;justify-content:center;
+      padding:10px;
+      aspect-ratio:16/10;
+    }
+    #buildings-page img{
+      width:100%;height:100%;
+      object-fit:contain;
+      display:block;
+      max-width:100%;max-height:100%;
+    }
+    @media (max-width:520px){ #buildings-page .imgbox{padding:8px;aspect-ratio:1/1} }
+
+    /* ✅ 건물이름 가운데 정렬 */
+    #buildings-page .card-name{
+      padding:12px 12px 14px;
+      font-weight:800;
+      font-size:15px;
+      line-height:1.2;
+      min-height:40px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+    @media (max-width:520px){
+      #buildings-page .card-name{
+        font-size:14px;
+        min-height:36px;
+        padding:10px 10px 12px;
+      }
+    }
+
+    /* ✅ SEO용: 화면엔 안 보이지만 접근성 방식으로 남김 */
+    .visually-hidden{
+      position:absolute !important;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;border:0;
+    }
+
+    #building-root{margin-top:26px}
+  </style>
+
+  <!-- ✅ JSON-LD: ItemList (SEO 구조화 데이터) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Kingshot Buildings List (TW)",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"市政廳","url":"https://kingshotdata.kr/tw/buildings/towncenter.html"},
+      {"@type":"ListItem","position":2,"name":"學院","url":"https://kingshotdata.kr/tw/buildings/academy.html"},
+      {"@type":"ListItem","position":3,"name":"大使館","url":"https://kingshotdata.kr/tw/buildings/embassy.html"},
+      {"@type":"ListItem","position":4,"name":"步兵營","url":"https://kingshotdata.kr/tw/buildings/barracks.html"},
+      {"@type":"ListItem","position":5,"name":"射擊場","url":"https://kingshotdata.kr/tw/buildings/range.html"},
+      {"@type":"ListItem","position":6,"name":"馬廄","url":"https://kingshotdata.kr/tw/buildings/stable.html"},
+      {"@type":"ListItem","position":7,"name":"指揮部","url":"https://kingshotdata.kr/tw/buildings/commandcenter.html"},
+      {"@type":"ListItem","position":8,"name":"倉庫","url":"https://kingshotdata.kr/tw/buildings/storehouse.html"},
+      {"@type":"ListItem","position":9,"name":"廚房","url":"https://kingshotdata.kr/tw/buildings/kitchen.html"},
+      {"@type":"ListItem","position":10,"name":"衛兵所","url":"https://kingshotdata.kr/tw/buildings/guard-station.html"},
+      {"@type":"ListItem","position":11,"name":"純金熔爐","url":"https://kingshotdata.kr/tw/buildings/truegold-crucible.html"},
+      {"@type":"ListItem","position":12,"name":"戰爭學院","url":"https://kingshotdata.kr/tw/buildings/war-academy.html"}
+    ]
+  }
+  </script>
+</head>
+
+<body class="theme-default">
+  <main id="buildings-page">
+    <h1>Kingshot 建築</h1>
+    <p class="sub">瀏覽完整建築清單，進入各頁面查看解鎖資訊與升級需求。</p>
+
+    <!-- ✅ SEO 本文（畫面不顯示，但以可及性方式保留） -->
+    <section class="visually-hidden" aria-hidden="false">
+      <h2>全部建築清單</h2>
+      <p>此頁提供 Kingshot 全部建築清單：市政廳、學院、大使館、步兵營、射擊場、馬廄、指揮部、倉庫、廚房、衛兵所、純金熔爐、戰爭學院。</p>
+    </section>
+
+    <div id="buildings-grid" class="grid">
+      <div class="card"><a href="/tw/buildings/towncenter.html"><div class="imgbox"><img src="/img/buildings/towncenter-kingshot.webp" alt="市政廳"></div><div class="card-name">市政廳</div></a></div>
+      <div class="card"><a href="/tw/buildings/academy.html"><div class="imgbox"><img src="/img/buildings/academy-kingshot.webp" alt="學院"></div><div class="card-name">學院</div></a></div>
+      <div class="card"><a href="/tw/buildings/embassy.html"><div class="imgbox"><img src="/img/buildings/embassy-kingshot.webp" alt="大使館"></div><div class="card-name">大使館</div></a></div>
+      <div class="card"><a href="/tw/buildings/barracks.html"><div class="imgbox"><img src="/img/buildings/barracks-kingshot.webp" alt="步兵營"></div><div class="card-name">步兵營</div></a></div>
+      <div class="card"><a href="/tw/buildings/range.html"><div class="imgbox"><img src="/img/buildings/range-kingshot.webp" alt="射擊場"></div><div class="card-name">射擊場</div></a></div>
+      <div class="card"><a href="/tw/buildings/stable.html"><div class="imgbox"><img src="/img/buildings/stable-kingshot.webp" alt="馬廄"></div><div class="card-name">馬廄</div></a></div>
+      <div class="card"><a href="/tw/buildings/commandcenter.html"><div class="imgbox"><img src="/img/buildings/command-center-kingshot.webp" alt="指揮部"></div><div class="card-name">指揮部</div></a></div>
+      <div class="card"><a href="/tw/buildings/storehouse.html"><div class="imgbox"><img src="/img/buildings/storehouse-kingshot.webp" alt="倉庫"></div><div class="card-name">倉庫</div></a></div>
+      <div class="card"><a href="/tw/buildings/kitchen.html"><div class="imgbox"><img src="/img/buildings/kitchen-kingshot.webp" alt="廚房"></div><div class="card-name">廚房</div></a></div>
+      <div class="card"><a href="/tw/buildings/guard-station.html"><div class="imgbox"><img src="/img/buildings/guard-station-kingshot.webp" alt="衛兵所"></div><div class="card-name">衛兵所</div></a></div>
+      <div class="card"><a href="/tw/buildings/truegold-crucible.html"><div class="imgbox"><img src="/img/buildings/truegold-crucible-kingshot.webp" alt="純金熔爐"></div><div class="card-name">純金熔爐</div></a></div>
+      <div class="card"><a href="/tw/buildings/war-academy.html"><div class="imgbox"><img src="/img/buildings/war-academy.webp" alt="戰爭學院"></div><div class="card-name">戰爭學院</div></a></div>
+    </div>
+
+    <div id="building-root"></div>
+  </main>
+</body>
+</html>

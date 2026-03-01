@@ -292,7 +292,7 @@
       .filter(r => ALLOWED_PREREQ.has(r.building));
   }
 
-  const SLUG_ALIASES = { towncenter: ['town-center'], command: ['command-center'] };
+  const SLUG_ALIASES = { towncenter: ['town-center'], command: ['commandcenter'] };
 
   function findKey(obj, wants) {
     const keys = Object.keys(obj);

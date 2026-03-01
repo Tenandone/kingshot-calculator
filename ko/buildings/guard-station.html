@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>방위소 업그레이드 비용 (Lv 1–10) | 킹샷</title>
+  <meta name="description" content="킹샷 방위소(Guard Station) 업그레이드 요구사항과 비용 (레벨 1–10). 도시센터 요구 레벨, 업그레이드 시간, 자원, 방위소 방어력, 전투력과 방위소 수리/복구 방법 포함." />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://kingshotdata.kr/ko/buildings/guard-station.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings/guard-station.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/buildings/guard-station.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/buildings/guard-station.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/buildings/guard-station.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/buildings/guard-station.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h: 0px;
+      --tabs-h: 0px;
+      --sticky-top: 0px;
+
+      --cell-ico: 14px;
+      --th-ico: 14px;
+      --tbl-font: 13px;
+      --tbl-pad-y: 9px;
+      --tbl-pad-x: 10px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+    nav.lang{
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid; grid-template-columns: 160px 1fr; gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px; height:160px; object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted)}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .jump{
+      margin-top:10px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px; font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(245,158,11,.35);
+      background:rgba(245,158,11,.08);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px; height:18px; flex:0 0 18px;
+      margin-top:2px;
+      color:#b45309;
+    }
+
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+    }
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      font-size:calc(var(--tbl-font) - 1px);
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td{
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:var(--tbl-font);
+      white-space:nowrap;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+
+    .center{text-align:center}
+    .num{text-align:right; font-variant-numeric: tabular-nums}
+
+    .th-flex{display:inline-flex; align-items:center; gap:6px}
+    .th-ico{
+      width:var(--th-ico);
+      height:var(--th-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+    }
+
+    .cell-num{
+      display:inline-flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:6px;
+      white-space:nowrap;
+    }
+    .td-ico{
+      width:var(--cell-ico);
+      height:var(--cell-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+      opacity:.95;
+    }
+
+    table.sticky-firstcol th:first-child,
+    table.sticky-firstcol td:first-child{
+      position: sticky;
+      left: 0;
+      background:inherit;
+      z-index:2;
+    }
+    table.sticky-firstcol thead th:first-child{
+      z-index:4;
+      background:#f8fafc;
+    }
+
+    .cards{display:none}
+    .cards .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:12px 12px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0;
+    }
+    .card-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.25;
+      white-space:nowrap;
+    }
+
+    .res-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:8px;
+      margin-top:10px;
+    }
+    .res-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 10px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      font-size:13px;
+    }
+    .res-left{display:flex; align-items:center; gap:8px; min-width:0}
+    .icoimg{
+      width:18px; height:18px; flex:0 0 18px;
+      object-fit:contain;
+      display:block;
+    }
+    .res-label{color:var(--muted); font-size:12px; white-space:nowrap}
+    .res-val{font-weight:900; font-variant-numeric: tabular-nums; white-space:nowrap}
+
+    .card-foot{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      white-space:nowrap;
+    }
+    .badge svg{width:16px;height:16px;opacity:.85}
+
+    ul.clean{margin:0; padding-left:18px}
+    ul.clean li{margin:6px 0}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top: calc(var(--sticky-top) + 12px);
+    }
+
+    @media (min-width: 901px){
+      :root{
+        --tbl-font: 12px;
+        --tbl-pad-y: 7px;
+        --tbl-pad-x: 8px;
+        --cell-ico: 13px;
+        --th-ico: 13px;
+      }
+      table{table-layout:fixed}
+      .table-wrap{overflow-x:clip}
+      @supports not (overflow: clip){ .table-wrap{overflow-x:hidden} }
+    }
+
+    @media (max-width: 900px){
+      header.top{ position: sticky; top: 0; z-index: 40; }
+      nav.section-tabs{
+        display:flex;
+        position: sticky;
+        top: var(--header-h);
+        z-index: 35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+
+      .enhanced .data-table{display:none}
+      .enhanced .cards{display:grid; gap:12px}
+      .res-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"방위소 (Kingshot)",
+    "inLanguage":"ko",
+    "description":"킹샷 방위소(Guard Station) 업그레이드 요구사항과 비용 (레벨 1–10). 도시센터 요구 레벨, 업그레이드 시간, 자원, 방위소 방어력, 전투력과 방위소 수리/복구 방법 포함.",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
+        {"@type":"ListItem","position":2,"name":"건물","item":"https://kingshotdata.kr/ko/buildings/"},
+        {"@type":"ListItem","position":3,"name":"방위소","item":"https://kingshotdata.kr/ko/buildings/guard-station.html"}
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Inline SVG for NOTE / Time -->
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-time" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 6v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data 홈">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/buildings/guard-station.html">EN</a>
+        <a href="/ko/buildings/guard-station.html" aria-current="page">KO</a>
+        <a href="/ja/buildings/guard-station.html">JA</a>
+        <a href="/zh-tw/buildings/guard-station.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="섹션 네비게이션">
+      <a href="#overview">개요</a>
+      <a href="#requirements">요구사항</a>
+      <a href="#restore">수리/복구</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/buildings/">건물</a> <span class="muted">›</span>
+        <span>방위소</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/buildings/guard-station.webp" alt="방위소 (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>방위소</h1>
+          <p class="sub">
+            방위소는 도시를 방어하는 핵심 건물입니다. 방어에 실패해 도시가 불타면 방위소 체력이 지속적으로 감소하며,
+            <strong>체력이 0이 되면 도시가 랜덤 위치로 텔레포트</strong>됩니다.
+          </p>
+          <div class="quote">도시를 보호합니다. 방위소를 업그레이드하면 내구성이 강화됩니다.</div>
+
+          <div class="jump" aria-label="빠른 이동">
+            <a href="#overview">개요</a><span class="dotsep">•</span>
+            <a href="#requirements">요구사항</a><span class="dotsep">•</span>
+            <a href="#restore">수리/복구</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>개요</h2>
+        <p>
+          방위소는 <strong>도시센터 7레벨</strong>에서 해금되는 방어 건물입니다.
+          도시가 공격을 받아 패배하면 도시가 불타기 시작하고, 그 동안 방위소 체력이 시간이 지날수록 감소합니다.
+          추가로 공격을 더 받을수록 불타는 시간이 늘어나 체력이 더 많이 깎일 수 있습니다.
+        </p>
+        <p>
+          방위소 체력이 <strong>0</strong>이 되면 도시가 <strong>지도 내 랜덤 위치로 텔레포트</strong>됩니다.
+          이 때문에 <strong>소드랜드 쇼다운</strong>, <strong>바이킹 복수</strong> 같은 이벤트에서 특히 중요합니다.
+        </p>
+        <p>
+          방어 강화를 위해 방위소에 <strong>상위 3명의 영웅</strong>을 배치하거나, 방어 스킬을 가진 영웅을 활용하는 것을 추천합니다.
+        </p>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>참고:</strong>
+            실제 자원 소모는 버프/연구 등에 따라 달라질 수 있습니다. 아래 값은 기본(원본) 수치입니다.
+          </div>
+        </div>
+      </section>
+
+      <section id="upgrade">
+        <span id="requirements" class="anchor"></span>
+        <h2>업그레이드 요구사항</h2>
+        <p class="muted" style="margin-top:-2px">방위소 레벨 1–10 전체</p>
+
+        <div class="cards" id="gs-cards" aria-label="방위소 요구사항 (모바일 카드)"></div>
+
+        <div class="table-wrap data-table" aria-label="방위소 업그레이드 표">
+          <table id="gs-table" class="sticky-firstcol">
+            <colgroup>
+              <col style="width:7%">
+              <col style="width:10%">
+              <col style="width:13%">
+              <col style="width:10%">
+              <col style="width:10%">
+              <col style="width:10%">
+              <col style="width:10%">
+              <col style="width:12%">
+              <col style="width:10%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="center">레벨</th>
+                <th class="center">도시센터</th>
+                <th><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-time"></use></svg>시간</span></th>
+                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="14" height="14">나무</span></th>
+                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="14" height="14">빵</span></th>
+                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="14" height="14">석재</span></th>
+                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="14" height="14">철</span></th>
+                <th class="num">방위소 방어력</th>
+                <th class="num">전투력</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="center">1</td><td class="center">–</td><td>–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">1,000</td><td class="num">400</td></tr>
+              <tr><td class="center">2</td><td class="center">7</td><td>10s</td><td class="num">5.3k</td><td class="num">–</td><td class="num">1k</td><td class="num">–</td><td class="num">1,500</td><td class="num">3,100</td></tr>
+              <tr><td class="center">3</td><td class="center">10</td><td>21m 30s</td><td class="num">88k</td><td class="num">–</td><td class="num">17k</td><td class="num">4.4k</td><td class="num">2,000</td><td class="num">9,400</td></tr>
+              <tr><td class="center">4</td><td class="center">13</td><td>1h 4m 30s</td><td class="num">420k</td><td class="num">420k</td><td class="num">84k</td><td class="num">21k</td><td class="num">5,000</td><td class="num">21,940</td></tr>
+              <tr><td class="center">5</td><td class="center">16</td><td>3h 39m</td><td class="num">1.4M</td><td class="num">1.4M</td><td class="num">290k</td><td class="num">74k</td><td class="num">10,000</td><td class="num">47,240</td></tr>
+              <tr><td class="center">6</td><td class="center">20</td><td>9h 52m 30s</td><td class="num">5.3M</td><td class="num">5.3M</td><td class="num">1M</td><td class="num">260k</td><td class="num">15,000</td><td class="num">86,360</td></tr>
+              <tr><td class="center">7</td><td class="center">24</td><td>1d 13h 44m</td><td class="num">15M</td><td class="num">15M</td><td class="num">3M</td><td class="num">750k</td><td class="num">20,000</td><td class="num">149,500</td></tr>
+              <tr><td class="center">8</td><td class="center">27</td><td>3d 55m</td><td class="num">37M</td><td class="num">37M</td><td class="num">7.4M</td><td class="num">1.8M</td><td class="num">25,000</td><td class="num">217,320</td></tr>
+              <tr><td class="center">9</td><td class="center">29</td><td>4d 26m</td><td class="num">61M</td><td class="num">61M</td><td class="num">12M</td><td class="num">3M</td><td class="num">30,000</td><td class="num">267,920</td></tr>
+              <tr><td class="center">10</td><td class="center">30</td><td>4d 19h 44m</td><td class="num">75M</td><td class="num">75M</td><td class="num">15M</td><td class="num">3.7M</td><td class="num">35,000</td><td class="num">304,700</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="restore">
+        <h2>방위소 수리/복구</h2>
+        <p>
+          공격 이후 방위소 체력은 <strong>30분마다</strong> 일부를 복구할 수 있습니다.
+          단, <strong>젬으로 즉시 풀체력 복구는 불가능</strong>하며, 30분 쿨타임마다 반복 복구해야 합니다.
+        </p>
+        <p>
+          공격 중 온라인 상태라면 젬을 사용해 <strong>화재 진압</strong>이 가능합니다.
+          화재를 끄면 방위소 체력이 더 이상 감소하지 않아 텔레포트를 예방하는 데 도움이 됩니다.
+        </p>
+
+        <h3 style="margin:14px 0 8px; font-size:16px">수리 절차</h3>
+        <ul class="clean">
+          <li><strong>방위소</strong>로 이동</li>
+          <li><strong>도시 방어</strong> 버튼 선택</li>
+          <li>손상 상태라면 <strong>방위소 수리</strong> 버튼이 표시됨 → 눌러서 체력 복구</li>
+          <li><strong>30분마다</strong> 반복하여 완전 수리될 때까지 진행</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function isDash(v){
+        if(!v) return true;
+        var t = String(v).trim();
+        return t === '–' || t === '-' || t === '';
+      }
+
+      var ICON = {
+        bread: '/img/bread.webp',
+        wood: '/img/wood.webp',
+        stone: '/img/stone.webp',
+        iron: '/img/iron.webp'
+      };
+
+      function imgIcon(src){
+        return '<img class="icoimg" src="'+src+'" alt="" aria-hidden="true" width="18" height="18" loading="lazy" decoding="async">';
+      }
+
+      function makeResItem(src, label, value){
+        return (
+          '<div class="res-item">' +
+            '<div class="res-left">' +
+              imgIcon(src) +
+              '<div class="res-label">'+ label +'</div>' +
+            '</div>' +
+            '<div class="res-val">'+ value +'</div>' +
+          '</div>'
+        );
+      }
+
+      function svgUse(id){
+        return '<svg aria-hidden="true" viewBox="0 0 24 24"><use href="#'+id+'"></use></svg>';
+      }
+
+      function buildCards(){
+        var table = document.getElementById('gs-table');
+        var target = document.getElementById('gs-cards');
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var td = tr.querySelectorAll('td');
+          if(!td || td.length < 9) return;
+
+          var level = td[0].textContent.trim();
+          var tc = td[1].textContent.trim();
+          var time = td[2].textContent.trim();
+
+          var wood = td[3].textContent.trim();
+          var bread = td[4].textContent.trim();
+          var stone = td[5].textContent.trim();
+          var iron = td[6].textContent.trim();
+
+          var def = td[7].textContent.trim();
+          var power = td[8].textContent.trim();
+
+          var res = '';
+          if(!isDash(wood))  res += makeResItem(ICON.wood,'나무', wood);
+          if(!isDash(bread)) res += makeResItem(ICON.bread,'빵', bread);
+          if(!isDash(stone)) res += makeResItem(ICON.stone,'석재', stone);
+          if(!isDash(iron))  res += makeResItem(ICON.iron,'철', iron);
+
+          var foot = '';
+          if(!isDash(time))  foot += '<span class="badge">'+ svgUse('ico-time') + '<span>시간: '+ time +'</span></span>';
+          if(!isDash(tc))    foot += '<span class="badge"><span>도시센터: '+ tc +'</span></span>';
+          if(!isDash(def))   foot += '<span class="badge"><span>방어력: '+ def +'</span></span>';
+          if(!isDash(power)) foot += '<span class="badge"><span>전투력: '+ power +'</span></span>';
+
+          html += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">레벨 ' + level + '</h3>' +
+                '<div class="card-meta">' + (isDash(time) ? '' : ('시간<br><strong>'+ time +'</strong>')) + '</div>' +
+              '</div>' +
+              '<div class="card-foot">' + foot + '</div>' +
+              (res ? ('<div class="res-grid" aria-label="자원">'+ res +'</div>') : '') +
+            '</article>'
+          );
+          count++;
+        });
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      function decorateTableNumbers(tableId, map){
+        var table = document.getElementById(tableId);
+        if(!table) return;
+
+        var rows = table.querySelectorAll('tbody tr');
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || !tds.length) return;
+
+          Object.keys(map).forEach(function(key){
+            var idx = parseInt(key, 10);
+            var iconSrc = map[key];
+            var td = tds[idx];
+            if(!td) return;
+
+            var display = td.textContent.trim();
+            if(isDash(display)) return;
+
+            td.innerHTML =
+              '<span class="cell-num">' +
+                '<img class="td-ico" src="'+ iconSrc +'" alt="" aria-hidden="true" width="14" height="14" loading="lazy" decoding="async">' +
+                '<span>'+ display +'</span>' +
+              '</span>';
+          });
+        });
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+
+        var c = buildCards();
+        if(c > 0) document.documentElement.classList.add('enhanced');
+
+        // Wood(3), Bread(4), Stone(5), Iron(6)
+        decorateTableNumbers('gs-table', { 3: ICON.wood, 4: ICON.bread, 5: ICON.stone, 6: ICON.iron });
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

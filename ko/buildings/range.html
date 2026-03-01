@@ -1,0 +1,1157 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>궁병대 업그레이드 비용 & 순금 레벨 (Lv 1–30 + TG) | Kingshot</title>
+  <meta name="description" content="Kingshot 궁병대 업그레이드 요구사항과 비용을 레벨 1–30 및 순금 레벨(TG) TG10까지 정리했습니다. 훈련 수용량, 훈련 속도, 해금, 자원, 순금, 단련 순금, 업그레이드 시간, 전투력을 포함합니다." />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://kingshotdata.kr/ko/buildings/range.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings/range.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/buildings/range.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/buildings/range.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/buildings/range.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/buildings/range.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h: 0px;
+      --tabs-h: 0px;
+      --sticky-top: 0px;
+
+      --cell-ico: 14px;
+      --th-ico: 14px;
+      --tbl-font: 13px;
+      --tbl-pad-y: 9px;
+      --tbl-pad-x: 10px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+    nav.lang{
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid; grid-template-columns: 160px 1fr; gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px; height:160px; object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted)}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .jump{
+      margin-top:10px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px; font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(245,158,11,.35);
+      background:rgba(245,158,11,.08);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px; height:18px; flex:0 0 18px;
+      margin-top:2px;
+      color:#b45309;
+    }
+
+    .seg-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin:6px 0 12px;
+    }
+    .seg{
+      display:inline-flex;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .seg button{
+      appearance:none;
+      border:0;
+      background:transparent;
+      padding:10px 14px;
+      font:inherit;
+      font-weight:800;
+      color:var(--muted);
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .seg button + button{border-left:1px solid var(--border)}
+    .seg button[aria-selected="true"]{
+      color:#fff;
+      background:var(--brand);
+    }
+
+    .panel{margin-top:10px}
+    .js .panel{display:none}
+    .js .panel.is-active{display:block}
+
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+    }
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      font-size:calc(var(--tbl-font) - 1px);
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td{
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:var(--tbl-font);
+      white-space:nowrap;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+
+    .center{text-align:center}
+    .num{text-align:right; font-variant-numeric: tabular-nums}
+    .req{white-space:normal; overflow-wrap:anywhere; word-break:keep-all}
+    .req-h{white-space:normal}
+
+    .th-flex{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .th-ico{
+      width:var(--th-ico);
+      height:var(--th-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+    }
+
+    .cell-num{
+      display:inline-flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:6px;
+      white-space:nowrap;
+    }
+    .td-ico{
+      width:var(--cell-ico);
+      height:var(--cell-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+      opacity:.95;
+    }
+
+    table.sticky-firstcol th:first-child,
+    table.sticky-firstcol td:first-child{
+      position: sticky;
+      left: 0;
+      background:inherit;
+      z-index:2;
+    }
+    table.sticky-firstcol thead th:first-child{
+      z-index:4;
+      background:#f8fafc;
+    }
+
+    .cards{display:none}
+    .cards .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:12px 12px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0;
+    }
+    .card-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.25;
+      white-space:nowrap;
+    }
+    .card-req{
+      margin:8px 0 10px;
+      color:var(--text);
+      font-size:13px;
+      white-space:normal;
+    }
+
+    .res-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:8px;
+      margin-top:10px;
+    }
+    .res-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 10px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      font-size:13px;
+    }
+    .res-left{display:flex; align-items:center; gap:8px; min-width:0}
+    .icoimg{
+      width:18px; height:18px; flex:0 0 18px;
+      object-fit:contain;
+      display:block;
+    }
+    .res-label{
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .res-val{
+      font-weight:900;
+      font-variant-numeric: tabular-nums;
+      white-space:nowrap;
+    }
+    .card-foot{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      white-space:nowrap;
+    }
+    .badge svg{width:16px;height:16px;opacity:.85}
+
+    .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{
+      display:inline-flex; align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    ul.clean{margin:0; padding-left:18px}
+    ul.clean li{margin:6px 0}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top: calc(var(--sticky-top) + 12px);
+    }
+
+    @media (min-width: 901px){
+      :root{
+        --tbl-font: 12px;
+        --tbl-pad-y: 7px;
+        --tbl-pad-x: 8px;
+        --cell-ico: 13px;
+        --th-ico: 13px;
+      }
+      table{table-layout:fixed}
+      .table-wrap{overflow-x:clip}
+      @supports not (overflow: clip){ .table-wrap{overflow-x:hidden} }
+      td.req, th.req-h{white-space:normal}
+    }
+
+    @media (max-width: 900px){
+      header.top{
+        position: sticky;
+        top: 0;
+        z-index: 40;
+      }
+      nav.section-tabs{
+        display:flex;
+        position: sticky;
+        top: var(--header-h);
+        z-index: 35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+
+      .enhanced .data-table{display:none}
+      .enhanced .cards{display:grid; gap:12px}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+      .res-grid{grid-template-columns: 1fr}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"궁병대 (Kingshot)",
+    "inLanguage":"ko",
+    "description":"Kingshot 궁병대 업그레이드 요구사항과 비용을 레벨 1–30 및 순금 레벨(TG) TG10까지 정리했습니다. 훈련 수용량, 훈련 속도, 해금, 자원, 순금, 단련 순금, 업그레이드 시간, 전투력을 포함합니다.",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
+        {"@type":"ListItem","position":2,"name":"건물","item":"https://kingshotdata.kr/ko/buildings/"},
+        {"@type":"ListItem","position":3,"name":"궁병대","item":"https://kingshotdata.kr/ko/buildings/range.html"}
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Inline SVG for NOTE / Time -->
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-time" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 6v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data 홈">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="언어 선택">
+        <a href="/en/buildings/range.html">EN</a>
+        <a href="/ko/buildings/range.html" aria-current="page">KO</a>
+        <a href="/ja/buildings/range.html">JA</a>
+        <a href="/zh-tw/buildings/range.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="섹션 이동">
+      <a href="#overview">개요</a>
+      <a href="#requirements">요구사항</a>
+      <a href="#truegold">순금</a>
+      <a href="#unlocks">해금</a>
+      <a href="#related">관련</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/buildings/">건물</a> <span class="muted">›</span>
+        <span>궁병대</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/buildings/range.webp" alt="궁병대 (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>궁병대</h1>
+          <p class="sub">
+            궁병대는 <strong>궁수</strong> 병력을 훈련합니다. 업그레이드하면 더 높은 티어의 궁수가 해금되며,
+            <strong>훈련 수용량</strong>과 <strong>훈련 속도</strong>가 증가합니다.
+          </p>
+          <div class="quote">“궁수를 훈련합니다. 업그레이드하면 더 높은 레벨의 궁수가 해금됩니다.”</div>
+
+          <div class="jump" aria-label="빠른 이동">
+            <a href="#overview">개요</a><span class="dotsep">•</span>
+            <a href="#requirements">요구사항</a><span class="dotsep">•</span>
+            <a href="#truegold">순금(TG)</a><span class="dotsep">•</span>
+            <a href="#unlocks">해금</a><span class="dotsep">•</span>
+            <a href="#related">관련</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>개요</h2>
+        <p>
+          궁병대는 <strong>도시센터 8레벨</strong>에서 해금됩니다. 궁수 티어는 특정 궁병대 레벨에서 해금되며,
+          업그레이드할수록 훈련 수용량과 훈련 속도가 함께 성장합니다.
+        </p>
+
+        <div class="note" role="note" aria-label="참고">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>참고:</strong>
+            자원 비용은 영웅, 연구, 버프 등에 따라 달라질 수 있습니다. 본 페이지의 수치는 기본(원본) 수치입니다.
+          </div>
+        </div>
+      </section>
+
+      <section id="upgrade">
+        <span id="requirements" class="anchor"></span>
+        <h2>업그레이드 요구사항</h2>
+        <p class="muted" style="margin-top:-2px">궁병대 전체 레벨의 비용과 업그레이드 스탯</p>
+
+        <div class="seg-wrap">
+          <div class="seg" role="tablist" aria-label="레벨 구분">
+            <button id="tab-normal" type="button" role="tab" aria-selected="true" aria-controls="panel-normal">일반 레벨</button>
+            <button id="tab-tg" type="button" role="tab" aria-selected="false" aria-controls="panel-tg">순금 레벨</button>
+          </div>
+        </div>
+
+        <!-- Normal panel -->
+        <div id="panel-normal" class="panel is-active" role="tabpanel" aria-labelledby="tab-normal">
+          <div class="cards" id="req-cards" aria-label="궁병대 요구사항 (모바일 카드)"></div>
+
+          <div class="table-wrap data-table" aria-label="궁병대 업그레이드 요구사항 표">
+            <table id="req-table" class="sticky-firstcol">
+              <colgroup>
+                <col style="width:6%">
+                <col style="width:10%">
+                <col style="width:10%"><!-- Bread -->
+                <col style="width:10%"><!-- Wood -->
+                <col style="width:10%"><!-- Stone -->
+                <col style="width:10%"><!-- Iron -->
+                <col style="width:12%"><!-- Time -->
+                <col style="width:12%"><!-- Cap -->
+                <col style="width:10%"><!-- Speed -->
+                <col style="width:20%"><!-- Unlocks -->
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="center">레벨</th>
+                  <th class="center">도시센터</th>
+
+                  <!-- preferred order: Bread / Wood / Stone / Iron -->
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="14" height="14">빵</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="14" height="14">나무</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="14" height="14">석재</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="14" height="14">철</span></th>
+
+                  <th><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-time"></use></svg>시간</span></th>
+                  <th class="num">훈련 수용량</th>
+                  <th class="num">훈련 속도</th>
+                  <th class="req-h">해금</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="center">1</td><td class="center">7</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td>2s</td><td class="num">17</td><td class="num">0.3%</td><td class="req">티어 1 궁수</td></tr>
+                <tr><td class="center">2</td><td class="center">7</td><td class="num">–</td><td class="num">140</td><td class="num">–</td><td class="num">–</td><td>9s</td><td class="num">22</td><td class="num">0.5%</td><td class="req">없음</td></tr>
+                <tr><td class="center">3</td><td class="center">7</td><td class="num">–</td><td class="num">645</td><td class="num">–</td><td class="num">–</td><td>45s</td><td class="num">26</td><td class="num">0.8%</td><td class="req">없음</td></tr>
+                <tr><td class="center">4</td><td class="center">7</td><td class="num">–</td><td class="num">1,400</td><td class="num">285</td><td class="num">–</td><td>2m 5s</td><td class="num">30</td><td class="num">1.0%</td><td class="req">티어 2 궁수</td></tr>
+                <tr><td class="center">5</td><td class="center">7</td><td class="num">–</td><td class="num">6,000</td><td class="num">1,200</td><td class="num">–</td><td>4m 30s</td><td class="num">35</td><td class="num">1.3%</td><td class="req">없음</td></tr>
+                <tr><td class="center">6</td><td class="center">7</td><td class="num">–</td><td class="num">15,000</td><td class="num">3,000</td><td class="num">765</td><td>9m</td><td class="num">39</td><td class="num">1.6%</td><td class="req">없음</td></tr>
+                <tr><td class="center">7</td><td class="center">7</td><td class="num">–</td><td class="num">55,000</td><td class="num">11,000</td><td class="num">2,700</td><td>18m</td><td class="num">43</td><td class="num">1.8%</td><td class="req">티어 3 궁수</td></tr>
+                <tr><td class="center">8</td><td class="center">8</td><td class="num">–</td><td class="num">100,000</td><td class="num">20,000</td><td class="num">5,000</td><td>27m</td><td class="num">48</td><td class="num">2.1%</td><td class="req">없음</td></tr>
+                <tr><td class="center">9</td><td class="center">9</td><td class="num">–</td><td class="num">200,000</td><td class="num">41,000</td><td class="num">10,000</td><td>40m 30s</td><td class="num">52</td><td class="num">2.4%</td><td class="req">없음</td></tr>
+                <tr><td class="center">10</td><td class="center">10</td><td class="num">–</td><td class="num">360,000</td><td class="num">73,000</td><td class="num">18,000</td><td>54m</td><td class="num">56</td><td class="num">2.6%</td><td class="req">없음</td></tr>
+
+                <tr><td class="center">11</td><td class="center">11</td><td class="num">460,000</td><td class="num">460,000</td><td class="num">92,000</td><td class="num">23,000</td><td>1h 7m 30s</td><td class="num">61</td><td class="num">2.9%</td><td class="req">티어 4 궁수</td></tr>
+                <tr><td class="center">12</td><td class="center">12</td><td class="num">580,000</td><td class="num">580,000</td><td class="num">110,000</td><td class="num">29,000</td><td>1h 21m</td><td class="num">65</td><td class="num">3.2%</td><td class="req">없음</td></tr>
+                <tr><td class="center">13</td><td class="center">13</td><td class="num">830,000</td><td class="num">830,000</td><td class="num">160,000</td><td class="num">41,000</td><td>1h 39m</td><td class="num">69</td><td class="num">3.4%</td><td class="req">티어 5 궁수 + 병력 승급</td></tr>
+                <tr><td class="center">14</td><td class="center">14</td><td class="num">1,100,000</td><td class="num">1,100,000</td><td class="num">220,000</td><td class="num">55,000</td><td>2h 6m</td><td class="num">76</td><td class="num">3.7%</td><td class="req">없음</td></tr>
+                <tr><td class="center">15</td><td class="center">15</td><td class="num">1,600,000</td><td class="num">1,600,000</td><td class="num">320,000</td><td class="num">81,000</td><td>2h 42m</td><td class="num">84</td><td class="num">4.0%</td><td class="req">없음</td></tr>
+                <tr><td class="center">16</td><td class="center">16</td><td class="num">2,000,000</td><td class="num">2,000,000</td><td class="num">410,000</td><td class="num">100,000</td><td>4h 34m</td><td class="num">92</td><td class="num">4.2%</td><td class="req">티어 6 궁수</td></tr>
+                <tr><td class="center">17</td><td class="center">17</td><td class="num">3,200,000</td><td class="num">3,200,000</td><td class="num">650,000</td><td class="num">160,000</td><td>5h 29m</td><td class="num">101</td><td class="num">4.5%</td><td class="req">없음</td></tr>
+                <tr><td class="center">18</td><td class="center">18</td><td class="num">4,300,000</td><td class="num">4,300,000</td><td class="num">870,000</td><td class="num">210,000</td><td>6h 35m</td><td class="num">109</td><td class="num">4.8%</td><td class="req">없음</td></tr>
+                <tr><td class="center">19</td><td class="center">19</td><td class="num">5,400,000</td><td class="num">5,400,000</td><td class="num">1,000,000</td><td class="num">270,000</td><td>9h 52m</td><td class="num">117</td><td class="num">5.0%</td><td class="req">티어 7 궁수</td></tr>
+                <tr><td class="center">20</td><td class="center">20</td><td class="num">7,500,000</td><td class="num">7,500,000</td><td class="num">1,500,000</td><td class="num">370,000</td><td>12h 20m 30s</td><td class="num">126</td><td class="num">5.3%</td><td class="req">없음</td></tr>
+                <tr><td class="center">21</td><td class="center">21</td><td class="num">9,500,000</td><td class="num">9,500,000</td><td class="num">1,900,000</td><td class="num">470,000</td><td>16h 2m 30s</td><td class="num">134</td><td class="num">5.6%</td><td class="req">없음</td></tr>
+                <tr><td class="center">22</td><td class="center">22</td><td class="num">12,000,000</td><td class="num">12,000,000</td><td class="num">2,500,000</td><td class="num">630,000</td><td>1d 4m</td><td class="num">142</td><td class="num">5.8%</td><td class="req">티어 8 궁수</td></tr>
+                <tr><td class="center">23</td><td class="center">23</td><td class="num">15,000,000</td><td class="num">15,000,000</td><td class="num">3,100,000</td><td class="num">780,000</td><td>1d 9h 42m</td><td class="num">151</td><td class="num">6.1%</td><td class="req">없음</td></tr>
+                <tr><td class="center">24</td><td class="center">24</td><td class="num">21,000,000</td><td class="num">21,000,000</td><td class="num">4,200,000</td><td class="num">1,000,000</td><td>1d 23h 11m</td><td class="num">159</td><td class="num">6.4%</td><td class="req">없음</td></tr>
+                <tr><td class="center">25</td><td class="center">25</td><td class="num">28,000,000</td><td class="num">28,000,000</td><td class="num">5,700,000</td><td class="num">1,400,000</td><td>2d 18h 3m</td><td class="num">167</td><td class="num">6.7%</td><td class="req">없음</td></tr>
+                <tr><td class="center">26</td><td class="center">26</td><td class="num">36,000,000</td><td class="num">36,000,000</td><td class="num">7,300,000</td><td class="num">1,800,000</td><td>3d 3h 57m</td><td class="num">176</td><td class="num">6.9%</td><td class="req">티어 9 궁수</td></tr>
+                <tr><td class="center">27</td><td class="center">27</td><td class="num">52,000,000</td><td class="num">52,000,000</td><td class="num">10,000,000</td><td class="num">2,600,000</td><td>3d 19h 9m</td><td class="num">184</td><td class="num">7.2%</td><td class="req">없음</td></tr>
+                <tr><td class="center">28</td><td class="center">28</td><td class="num">69,000,000</td><td class="num">69,000,000</td><td class="num">13,000,000</td><td class="num">3,400,000</td><td>4d 8h 49m</td><td class="num">192</td><td class="num">7.4%</td><td class="req">없음</td></tr>
+                <tr><td class="center">29</td><td class="center">29</td><td class="num">86,000,000</td><td class="num">86,000,000</td><td class="num">17,000,000</td><td class="num">4,300,000</td><td>5d 33m</td><td class="num">201</td><td class="num">7.7%</td><td class="req">없음</td></tr>
+                <tr><td class="center">30</td><td class="center">30</td><td class="num">100,000,000</td><td class="num">100,000,000</td><td class="num">21,000,000</td><td class="num">5,800,000</td><td>6d 40m</td><td class="num">209</td><td class="num">8.0%</td><td class="req">티어 10 궁수</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Truegold panel -->
+        <span id="truegold" class="anchor"></span>
+        <div id="panel-tg" class="panel" role="tabpanel" aria-labelledby="tab-tg">
+          <div class="cards" id="tg-cards" aria-label="궁병대 순금 레벨 (모바일 카드)"></div>
+
+          <div class="table-wrap data-table" aria-label="궁병대 순금 레벨 표">
+            <table id="tg-table" class="sticky-firstcol">
+              <colgroup>
+                <col style="width:8%">
+                <col style="width:18%">
+                <col style="width:8%"><!-- TG -->
+                <col style="width:9%"><!-- Tempered -->
+                <col style="width:9%"><!-- Bread -->
+                <col style="width:9%"><!-- Wood -->
+                <col style="width:9%"><!-- Stone -->
+                <col style="width:9%"><!-- Iron -->
+                <col style="width:12%"><!-- Time -->
+                <col style="width:16%"><!-- Unlocks -->
+                <col style="width:10%"><!-- Power -->
+                <col style="width:10%"><!-- Cap -->
+                <col style="width:10%"><!-- Speed -->
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="center">레벨</th>
+                  <th class="req-h">요구 조건</th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/truegold.webp" alt="" aria-hidden="true" width="14" height="14">순금</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/tempered-truegold.webp" alt="" aria-hidden="true" width="14" height="14">단련 순금</span></th>
+
+                  <!-- preferred order: Bread / Wood / Stone / Iron -->
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="14" height="14">빵</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="14" height="14">나무</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="14" height="14">석재</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="14" height="14">철</span></th>
+
+                  <th><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-time"></use></svg>시간</span></th>
+                  <th class="req-h">해금</th>
+                  <th class="num">전투력</th>
+                  <th class="num">훈련 수용량</th>
+                  <th class="num">훈련 속도</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="center">30-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 1</a></td><td class="num">59</td><td class="num">–</td><td class="num">23M</td><td class="num">23M</td><td class="num">4.7M</td><td class="num">1.1M</td><td>1d 1h 12m</td><td class="req">–</td><td class="num">316,180</td><td class="num">214</td><td class="num">8.0%</td></tr>
+                <tr><td class="center">30-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 1</a></td><td class="num">59</td><td class="num">–</td><td class="num">23M</td><td class="num">23M</td><td class="num">4.7M</td><td class="num">1.1M</td><td>1d 1h 12m</td><td class="req">–</td><td class="num">327,660</td><td class="num">219</td><td class="num">8.0%</td></tr>
+                <tr><td class="center">30-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 1</a></td><td class="num">59</td><td class="num">–</td><td class="num">23M</td><td class="num">23M</td><td class="num">4.7M</td><td class="num">1.1M</td><td>1d 1h 12m</td><td class="req">–</td><td class="num">339,140</td><td class="num">224</td><td class="num">8.0%</td></tr>
+                <tr><td class="center">30-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 1</a></td><td class="num">59</td><td class="num">–</td><td class="num">23M</td><td class="num">23M</td><td class="num">4.7M</td><td class="num">1.1M</td><td>1d 1h 12m</td><td class="req">–</td><td class="num">350,620</td><td class="num">229</td><td class="num">8.0%</td></tr>
+                <tr><td class="center">TG 1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 1</a></td><td class="num">59</td><td class="num">–</td><td class="num">23M</td><td class="num">23M</td><td class="num">4.7M</td><td class="num">1.1M</td><td>1d 1h 12m</td><td class="req">순금 1티어 병력</td><td class="num">362,100</td><td class="num">234</td><td class="num">8.3%</td></tr>
+
+                <tr><td class="center">TG 1-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 2</a></td><td class="num">71</td><td class="num">–</td><td class="num">25M</td><td class="num">25M</td><td class="num">5M</td><td class="num">1.2M</td><td>1d 8h 24m</td><td class="req">–</td><td class="num">373,580</td><td class="num">239</td><td class="num">8.3%</td></tr>
+                <tr><td class="center">TG 1-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 2</a></td><td class="num">71</td><td class="num">–</td><td class="num">25M</td><td class="num">25M</td><td class="num">5M</td><td class="num">1.2M</td><td>1d 8h 24m</td><td class="req">–</td><td class="num">385,060</td><td class="num">244</td><td class="num">8.3%</td></tr>
+                <tr><td class="center">TG 1-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 2</a></td><td class="num">71</td><td class="num">–</td><td class="num">25M</td><td class="num">25M</td><td class="num">5M</td><td class="num">1.2M</td><td>1d 8h 24m</td><td class="req">–</td><td class="num">396,540</td><td class="num">249</td><td class="num">8.3%</td></tr>
+                <tr><td class="center">TG 1-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 2</a></td><td class="num">71</td><td class="num">–</td><td class="num">25M</td><td class="num">25M</td><td class="num">5M</td><td class="num">1.2M</td><td>1d 8h 24m</td><td class="req">–</td><td class="num">408,020</td><td class="num">254</td><td class="num">8.3%</td></tr>
+                <tr><td class="center">TG 2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 2</a></td><td class="num">71</td><td class="num">–</td><td class="num">25M</td><td class="num">25M</td><td class="num">5M</td><td class="num">1.2M</td><td>1d 8h 24m</td><td class="req">순금 2티어 병력</td><td class="num">419,500</td><td class="num">259</td><td class="num">8.6%</td></tr>
+
+                <tr><td class="center">TG 2-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 3</a></td><td class="num">107</td><td class="num">–</td><td class="num">27M</td><td class="num">27M</td><td class="num">5.5M</td><td class="num">1.3M</td><td>1d 15h 36m</td><td class="req">–</td><td class="num">430,980</td><td class="num">264</td><td class="num">8.6%</td></tr>
+                <tr><td class="center">TG 2-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 3</a></td><td class="num">107</td><td class="num">–</td><td class="num">27M</td><td class="num">27M</td><td class="num">5.5M</td><td class="num">1.3M</td><td>1d 15h 36m</td><td class="req">–</td><td class="num">442,460</td><td class="num">269</td><td class="num">8.6%</td></tr>
+                <tr><td class="center">TG 2-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 3</a></td><td class="num">107</td><td class="num">–</td><td class="num">27M</td><td class="num">27M</td><td class="num">5.5M</td><td class="num">1.3M</td><td>1d 15h 36m</td><td class="req">–</td><td class="num">453,940</td><td class="num">274</td><td class="num">8.6%</td></tr>
+                <tr><td class="center">TG 2-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 3</a></td><td class="num">107</td><td class="num">–</td><td class="num">27M</td><td class="num">27M</td><td class="num">5.5M</td><td class="num">1.3M</td><td>1d 15h 36m</td><td class="req">–</td><td class="num">465,420</td><td class="num">279</td><td class="num">8.6%</td></tr>
+                <tr><td class="center">TG 3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 3</a></td><td class="num">107</td><td class="num">–</td><td class="num">27M</td><td class="num">27M</td><td class="num">5.5M</td><td class="num">1.3M</td><td>1d 15h 36m</td><td class="req">순금 3티어 병력</td><td class="num">476,900</td><td class="num">284</td><td class="num">8.9%</td></tr>
+
+                <tr><td class="center">TG 3-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 4</a></td><td class="num">126</td><td class="num">–</td><td class="num">28M</td><td class="num">28M</td><td class="num">5.7M</td><td class="num">1.4M</td><td>1d 19h 12m</td><td class="req">–</td><td class="num">489,540</td><td class="num">289</td><td class="num">8.9%</td></tr>
+                <tr><td class="center">TG 3-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 4</a></td><td class="num">126</td><td class="num">–</td><td class="num">28M</td><td class="num">28M</td><td class="num">5.7M</td><td class="num">1.4M</td><td>1d 19h 12m</td><td class="req">–</td><td class="num">502,180</td><td class="num">294</td><td class="num">8.9%</td></tr>
+                <tr><td class="center">TG 3-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 4</a></td><td class="num">126</td><td class="num">–</td><td class="num">28M</td><td class="num">28M</td><td class="num">5.7M</td><td class="num">1.4M</td><td>1d 19h 12m</td><td class="req">–</td><td class="num">514,820</td><td class="num">299</td><td class="num">8.9%</td></tr>
+                <tr><td class="center">TG 3-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 4</a></td><td class="num">126</td><td class="num">–</td><td class="num">28M</td><td class="num">28M</td><td class="num">5.7M</td><td class="num">1.4M</td><td>1d 19h 12m</td><td class="req">–</td><td class="num">527,460</td><td class="num">304</td><td class="num">8.9%</td></tr>
+                <tr><td class="center">TG 4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 4</a></td><td class="num">126</td><td class="num">–</td><td class="num">28M</td><td class="num">28M</td><td class="num">5.7M</td><td class="num">1.4M</td><td>1d 19h 12m</td><td class="req">순금 4티어 병력</td><td class="num">540,100</td><td class="num">309</td><td class="num">9.2%</td></tr>
+
+                <tr><td class="center">TG 4-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 5</a></td><td class="num">150</td><td class="num">–</td><td class="num">29M</td><td class="num">29M</td><td class="num">5.9M</td><td class="num">1.4M</td><td>2d 2h 24m</td><td class="req">–</td><td class="num">552,740</td><td class="num">314</td><td class="num">9.2%</td></tr>
+                <tr><td class="center">TG 4-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 5</a></td><td class="num">150</td><td class="num">–</td><td class="num">29M</td><td class="num">29M</td><td class="num">5.9M</td><td class="num">1.4M</td><td>2d 2h 24m</td><td class="req">–</td><td class="num">565,380</td><td class="num">319</td><td class="num">9.2%</td></tr>
+                <tr><td class="center">TG 4-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 5</a></td><td class="num">150</td><td class="num">–</td><td class="num">29M</td><td class="num">29M</td><td class="num">5.9M</td><td class="num">1.4M</td><td>2d 2h 24m</td><td class="req">–</td><td class="num">578,020</td><td class="num">324</td><td class="num">9.2%</td></tr>
+                <tr><td class="center">TG 4-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 5</a></td><td class="num">150</td><td class="num">–</td><td class="num">29M</td><td class="num">29M</td><td class="num">5.9M</td><td class="num">1.4M</td><td>2d 2h 24m</td><td class="req">–</td><td class="num">590,660</td><td class="num">329</td><td class="num">9.2%</td></tr>
+                <tr><td class="center">TG 5</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 5</a></td><td class="num">150</td><td class="num">–</td><td class="num">29M</td><td class="num">29M</td><td class="num">5.9M</td><td class="num">1.4M</td><td>2d 2h 24m</td><td class="req">순금 5티어 병력</td><td class="num">603,300</td><td class="num">334</td><td class="num">9.5%</td></tr>
+
+                <tr><td class="center">TG 5-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 6</a></td><td class="num">90</td><td class="num">4</td><td class="num">33M</td><td class="num">33M</td><td class="num">6.7M</td><td class="num">1.6M</td><td>2d 6h</td><td class="req">–</td><td class="num">616,820</td><td class="num">339</td><td class="num">9.5%</td></tr>
+                <tr><td class="center">TG 5-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 6</a></td><td class="num">90</td><td class="num">4</td><td class="num">33M</td><td class="num">33M</td><td class="num">6.7M</td><td class="num">1.6M</td><td>2d 6h</td><td class="req">–</td><td class="num">630,340</td><td class="num">344</td><td class="num">9.5%</td></tr>
+                <tr><td class="center">TG 5-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 6</a></td><td class="num">90</td><td class="num">4</td><td class="num">33M</td><td class="num">33M</td><td class="num">6.7M</td><td class="num">1.6M</td><td>2d 6h</td><td class="req">–</td><td class="num">643,860</td><td class="num">349</td><td class="num">9.5%</td></tr>
+                <tr><td class="center">TG 5-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 6</a></td><td class="num">90</td><td class="num">4</td><td class="num">33M</td><td class="num">33M</td><td class="num">6.7M</td><td class="num">1.6M</td><td>2d 6h</td><td class="req">–</td><td class="num">657,380</td><td class="num">354</td><td class="num">9.5%</td></tr>
+                <tr><td class="center">TG 6</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 6</a></td><td class="num">45</td><td class="num">9</td><td class="num">33M</td><td class="num">33M</td><td class="num">6.7M</td><td class="num">1.6M</td><td>2d 6h</td><td class="req">순금 6티어 병력</td><td class="num">670,900</td><td class="num">359</td><td class="num">9.8%</td></tr>
+
+                <tr><td class="center">TG 6-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 7</a></td><td class="num">108</td><td class="num">6</td><td class="num">38M</td><td class="num">38M</td><td class="num">7.6M</td><td class="num">1.9M</td><td>2d 16h 48m</td><td class="req">–</td><td class="num">684,420</td><td class="num">364</td><td class="num">9.8%</td></tr>
+                <tr><td class="center">TG 6-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 7</a></td><td class="num">108</td><td class="num">6</td><td class="num">38M</td><td class="num">38M</td><td class="num">7.6M</td><td class="num">1.9M</td><td>2d 16h 48m</td><td class="req">–</td><td class="num">697,940</td><td class="num">369</td><td class="num">9.8%</td></tr>
+                <tr><td class="center">TG 6-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 7</a></td><td class="num">108</td><td class="num">6</td><td class="num">38M</td><td class="num">38M</td><td class="num">7.6M</td><td class="num">1.9M</td><td>2d 16h 48m</td><td class="req">–</td><td class="num">711,460</td><td class="num">374</td><td class="num">9.8%</td></tr>
+                <tr><td class="center">TG 6-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 7</a></td><td class="num">108</td><td class="num">6</td><td class="num">38M</td><td class="num">38M</td><td class="num">7.6M</td><td class="num">1.9M</td><td>2d 16h 48m</td><td class="req">–</td><td class="num">724,980</td><td class="num">379</td><td class="num">9.8%</td></tr>
+                <tr><td class="center">TG 7</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 7</a></td><td class="num">54</td><td class="num">13</td><td class="num">38M</td><td class="num">38M</td><td class="num">7.6M</td><td class="num">1.9M</td><td>2d 16h 48m</td><td class="req">순금 7티어 병력</td><td class="num">738,500</td><td class="num">384</td><td class="num">10.1%</td></tr>
+
+                <tr><td class="center">TG 7-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 8</a></td><td class="num">108</td><td class="num">9</td><td class="num">46M</td><td class="num">46M</td><td class="num">9.3M</td><td class="num">2.3M</td><td>3d</td><td class="req">–</td><td class="num">752,020</td><td class="num">389</td><td class="num">10.1%</td></tr>
+                <tr><td class="center">TG 7-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 8</a></td><td class="num">108</td><td class="num">9</td><td class="num">46M</td><td class="num">46M</td><td class="num">9.3M</td><td class="num">2.3M</td><td>3d</td><td class="req">–</td><td class="num">765,540</td><td class="num">394</td><td class="num">10.1%</td></tr>
+                <tr><td class="center">TG 7-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 8</a></td><td class="num">108</td><td class="num">9</td><td class="num">46M</td><td class="num">46M</td><td class="num">9.3M</td><td class="num">2.3M</td><td>3d</td><td class="req">–</td><td class="num">779,060</td><td class="num">399</td><td class="num">10.1%</td></tr>
+                <tr><td class="center">TG 7-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 8</a></td><td class="num">108</td><td class="num">9</td><td class="num">46M</td><td class="num">46M</td><td class="num">9.3M</td><td class="num">2.3M</td><td>3d</td><td class="req">–</td><td class="num">792,580</td><td class="num">404</td><td class="num">10.1%</td></tr>
+                <tr><td class="center">TG 8</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 8</a></td><td class="num">54</td><td class="num">18</td><td class="num">46M</td><td class="num">46M</td><td class="num">9.3M</td><td class="num">2.3M</td><td>3d</td><td class="req">순금 8티어 병력</td><td class="num">806,100</td><td class="num">409</td><td class="num">10.3%</td></tr>
+
+                <tr><td class="center">TG 8-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 9</a></td><td class="num">126</td><td class="num">13</td><td class="num">50M</td><td class="num">50M</td><td class="num">10M</td><td class="num">2.5M</td><td>1d 22h 48m</td><td class="req">–</td><td class="num">820,580</td><td class="num">414</td><td class="num">10.3%</td></tr>
+                <tr><td class="center">TG 8-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 9</a></td><td class="num">126</td><td class="num">13</td><td class="num">50M</td><td class="num">50M</td><td class="num">10M</td><td class="num">2.5M</td><td>1d 22h 48m</td><td class="req">–</td><td class="num">835,060</td><td class="num">419</td><td class="num">10.3%</td></tr>
+                <tr><td class="center">TG 8-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 9</a></td><td class="num">126</td><td class="num">13</td><td class="num">50M</td><td class="num">50M</td><td class="num">10M</td><td class="num">2.5M</td><td>1d 22h 48m</td><td class="req">–</td><td class="num">849,540</td><td class="num">424</td><td class="num">10.3%</td></tr>
+                <tr><td class="center">TG 8-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 9</a></td><td class="num">126</td><td class="num">13</td><td class="num">50M</td><td class="num">50M</td><td class="num">10M</td><td class="num">2.5M</td><td>1d 22h 48m</td><td class="req">–</td><td class="num">864,020</td><td class="num">429</td><td class="num">10.3%</td></tr>
+
+                <tr><td class="center">TG 9</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 9</a></td><td class="num">63</td><td class="num">27</td><td class="num">50M</td><td class="num">50M</td><td class="num">10M</td><td class="num">2.5M</td><td>1d 22h 48m</td><td class="req">순금 9티어 병력</td><td class="num">878,500</td><td class="num">434</td><td class="num">10.6%</td></tr>
+
+                <tr><td class="center">TG 9-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 10</a></td><td class="num">157</td><td class="num">31</td><td class="num">59M</td><td class="num">59M</td><td class="num">11M</td><td class="num">2.9M</td><td>3d</td><td class="req">–</td><td class="num">892,980</td><td class="num">439</td><td class="num">10.6%</td></tr>
+                <tr><td class="center">TG 9-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 10</a></td><td class="num">157</td><td class="num">31</td><td class="num">59M</td><td class="num">59M</td><td class="num">11M</td><td class="num">2.9M</td><td>3d</td><td class="req">–</td><td class="num">907,460</td><td class="num">444</td><td class="num">10.6%</td></tr>
+                <tr><td class="center">TG 9-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 10</a></td><td class="num">157</td><td class="num">31</td><td class="num">59M</td><td class="num">59M</td><td class="num">11M</td><td class="num">2.9M</td><td>3d</td><td class="req">–</td><td class="num">921,940</td><td class="num">449</td><td class="num">10.6%</td></tr>
+                <tr><td class="center">TG 9-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 10</a></td><td class="num">157</td><td class="num">31</td><td class="num">59M</td><td class="num">59M</td><td class="num">11M</td><td class="num">2.9M</td><td>3d</td><td class="req">–</td><td class="num">936,420</td><td class="num">454</td><td class="num">10.6%</td></tr>
+
+                <tr><td class="center">TG 10</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 순금 레벨 10</a></td><td class="num">78</td><td class="num">63</td><td class="num">59M</td><td class="num">59M</td><td class="num">11M</td><td class="num">2.9M</td><td>3d</td><td class="req">순금 10티어 병력</td><td class="num">950,900</td><td class="num">459</td><td class="num">10.9%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="unlocks">
+        <h2>해금</h2>
+        <p class="muted" style="margin-top:-2px">궁병대 레벨 업으로 해금되는 주요 궁수 티어/기능</p>
+        <ul class="clean">
+          <li><strong>궁병대 Lv. 1:</strong> 초보 궁수 + 원거리 타격(스킬)</li>
+          <li><strong>궁병대 Lv. 4:</strong> 훈련된 궁수</li>
+          <li><strong>궁병대 Lv. 7:</strong> 숙련 궁수</li>
+          <li><strong>궁병대 Lv. 11:</strong> 베테랑 궁수</li>
+          <li><strong>궁병대 Lv. 13:</strong> 불굴의 궁수 + 병력 승급</li>
+          <li><strong>궁병대 Lv. 16:</strong> 영웅 궁수</li>
+          <li><strong>궁병대 Lv. 19:</strong> 대담한 궁수 + 연속 사격(스킬)</li>
+          <li><strong>궁병대 Lv. 22:</strong> 정예 궁수</li>
+          <li><strong>궁병대 Lv. 26:</strong> 숭고한 궁수</li>
+          <li><strong>궁병대 Lv. 30:</strong> 궁극의 궁수</li>
+          <li><strong>순금 레벨:</strong> 순금 티어(TG 1 → TG 10)별 순금 병력 해금</li>
+        </ul>
+        <p class="muted" style="margin-top:10px">
+          <strong>원거리 타격:</strong> 보병에게 주는 피해 10% 증가<br/>
+          <strong>병력 승급:</strong> 낮은 티어 궁수를 더 높은 티어로 승급 가능<br/>
+          <strong>연속 사격:</strong> 10% 확률로 2회 연속 공격
+        </p>
+      </section>
+
+      <section id="related">
+        <h2>관련 건물</h2>
+        <div class="related">
+          <a class="pill" href="/ko/buildings/town-center.html">도시센터</a>
+          <a class="pill" href="/ko/buildings/academy.html">아카데미</a>
+          <a class="pill" href="/ko/buildings/embassy.html">대사관</a>
+          <a class="pill" href="/ko/buildings/commandcenter.html">지휘부</a>
+          <a class="pill" href="/ko/buildings/truegold-crucible.html">순금정련소</a>
+          <a class="pill" href="/ko/buildings/barracks.html">보병대</a>
+          <a class="pill" href="/ko/buildings/stable.html">기병대</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function isDash(v){
+        if(!v) return true;
+        var t = String(v).trim();
+        return t === '–' || t === '-' || t === '';
+      }
+
+      function parseCompact(s){
+        var t = String(s || '').trim();
+        if(isDash(t)) return null;
+
+        t = t.replace(/,/g,'').toUpperCase();
+
+        var m = t.match(/^(\d+(?:\.\d+)?)([KMB])$/);
+        if(m){
+          var n = Number(m[1]);
+          var suf = m[2];
+          if(!Number.isFinite(n)) return null;
+          if(suf === 'K') return Math.round(n * 1e3);
+          if(suf === 'M') return Math.round(n * 1e6);
+          if(suf === 'B') return Math.round(n * 1e9);
+        }
+
+        var n2 = Number(t);
+        return Number.isFinite(n2) ? n2 : null;
+      }
+
+      function fmtKMB(n){
+        if(n === null) return '–';
+        if(n < 1000) return String(n);
+
+        var v, suf;
+        if(n >= 1e9){ v = n / 1e9; suf = 'B'; }
+        else if(n >= 1e6){ v = n / 1e6; suf = 'M'; }
+        else { v = n / 1e3; suf = 'k'; }
+
+        var out;
+        if(v >= 100 || Number.isInteger(v)) out = v.toFixed(0);
+        else out = (Math.round(v * 10) / 10).toFixed(1).replace(/\.0$/,'');
+
+        return out + suf;
+      }
+
+      function formatResourceCells(tableId, colIdxs){
+        var table = document.getElementById(tableId);
+        if(!table) return;
+
+        var rows = table.querySelectorAll('tbody tr');
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          colIdxs.forEach(function(idx){
+            var td = tds[idx];
+            if(!td) return;
+
+            var raw = td.textContent.trim();
+            if(isDash(raw)) return;
+
+            td.dataset.raw = raw;
+
+            var n = parseCompact(raw);
+            if(n === null) return;
+
+            td.textContent = fmtKMB(n);
+          });
+        });
+      }
+
+      var ICON = {
+        bread: '/img/bread.webp',
+        wood: '/img/wood.webp',
+        stone: '/img/stone.webp',
+        iron: '/img/iron.webp',
+        truegold: '/img/truegold.webp',
+        tempered: '/img/tempered-truegold.webp'
+      };
+
+      function imgIcon(src){
+        return '<img class="icoimg" src="'+src+'" alt="" aria-hidden="true" width="18" height="18" loading="lazy" decoding="async">';
+      }
+
+      function makeResItem(src, label, value, rawTitle){
+        var titleAttr = rawTitle ? (' title="원본: '+ rawTitle.replace(/"/g,'&quot;') +'"') : '';
+        return (
+          '<div class="res-item"' + titleAttr + '>' +
+            '<div class="res-left">' +
+              imgIcon(src) +
+              '<div class="res-label">'+ label +'</div>' +
+            '</div>' +
+            '<div class="res-val">'+ value +'</div>' +
+          '</div>'
+        );
+      }
+
+      function svgUse(id){
+        return '<svg aria-hidden="true" viewBox="0 0 24 24"><use href="#'+id+'"></use></svg>';
+      }
+
+      function buildNormalCards(){
+        var table = document.getElementById('req-table');
+        var target = document.getElementById('req-cards');
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var td = tr.querySelectorAll('td');
+          if(!td || td.length < 10) return;
+
+          var level = td[0].textContent.trim();
+          var tc = td[1].textContent.trim();
+
+          var bread = td[2].textContent.trim();
+          var wood  = td[3].textContent.trim();
+          var stone = td[4].textContent.trim();
+          var iron  = td[5].textContent.trim();
+
+          var breadRaw = td[2].dataset.raw || '';
+          var woodRaw  = td[3].dataset.raw || '';
+          var stoneRaw = td[4].dataset.raw || '';
+          var ironRaw  = td[5].dataset.raw || '';
+
+          var time = td[6].textContent.trim();
+          var cap = td[7].textContent.trim();
+          var spd = td[8].textContent.trim();
+          var unlock = td[9].textContent.trim();
+
+          var res = '';
+          if(!isDash(bread)) res += makeResItem(ICON.bread,'빵', bread, breadRaw);
+          if(!isDash(wood))  res += makeResItem(ICON.wood,'나무', wood, woodRaw);
+          if(!isDash(stone)) res += makeResItem(ICON.stone,'석재', stone, stoneRaw);
+          if(!isDash(iron))  res += makeResItem(ICON.iron,'철', iron, ironRaw);
+
+          var foot = '';
+          if(!isDash(time))  foot += '<span class="badge">'+ svgUse('ico-time') + '<span>시간: '+ time +'</span></span>';
+          if(!isDash(tc))    foot += '<span class="badge"><span>도시센터: '+ tc +'</span></span>';
+          if(!isDash(cap))   foot += '<span class="badge"><span>수용량: '+ cap +'</span></span>';
+          if(!isDash(spd))   foot += '<span class="badge"><span>속도: '+ spd +'</span></span>';
+          if(!isDash(unlock) && unlock !== '–') foot += '<span class="badge"><span>해금: '+ unlock +'</span></span>';
+
+          html += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">레벨 ' + level + '</h3>' +
+                '<div class="card-meta">' + (isDash(time) ? '' : ('시간<br><strong>'+ time +'</strong>')) + '</div>' +
+              '</div>' +
+              '<div class="card-req"><strong>요구 조건:</strong> 도시센터 ' + tc + '</div>' +
+              (res ? ('<div class="res-grid" aria-label="자원">'+ res +'</div>') : '') +
+              (foot ? ('<div class="card-foot">'+ foot +'</div>') : '') +
+            '</article>'
+          );
+          count++;
+        });
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      function buildTGCards(){
+        var table = document.getElementById('tg-table');
+        var target = document.getElementById('tg-cards');
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var td = tr.querySelectorAll('td');
+          if(!td || td.length < 13) return;
+
+          var lvl = td[0].textContent.trim();
+          var reqHTML = td[1].innerHTML.trim();
+
+          var tg = td[2].textContent.trim();
+          var temp = td[3].textContent.trim();
+
+          var bread = td[4].textContent.trim();
+          var wood  = td[5].textContent.trim();
+          var stone = td[6].textContent.trim();
+          var iron  = td[7].textContent.trim();
+
+          var tgRaw = td[2].dataset.raw || '';
+          var tempRaw = td[3].dataset.raw || '';
+          var breadRaw = td[4].dataset.raw || '';
+          var woodRaw  = td[5].dataset.raw || '';
+          var stoneRaw = td[6].dataset.raw || '';
+          var ironRaw  = td[7].dataset.raw || '';
+
+          var time = td[8].textContent.trim();
+          var unlock = td[9].textContent.trim();
+          var power = td[10].textContent.trim();
+          var cap = td[11].textContent.trim();
+          var spd = td[12].textContent.trim();
+
+          var res = '';
+          if(!isDash(tg))   res += makeResItem(ICON.truegold,'순금', tg, tgRaw);
+          if(!isDash(temp)) res += makeResItem(ICON.tempered,'단련 순금', temp, tempRaw);
+          if(!isDash(bread)) res += makeResItem(ICON.bread,'빵', bread, breadRaw);
+          if(!isDash(wood))  res += makeResItem(ICON.wood,'나무', wood, woodRaw);
+          if(!isDash(stone)) res += makeResItem(ICON.stone,'석재', stone, stoneRaw);
+          if(!isDash(iron))  res += makeResItem(ICON.iron,'철', iron, ironRaw);
+
+          var foot = '';
+          if(!isDash(time))  foot += '<span class="badge">'+ svgUse('ico-time') + '<span>시간: '+ time +'</span></span>';
+          if(!isDash(power)) foot += '<span class="badge"><span>전투력: '+ power +'</span></span>';
+          if(!isDash(cap))   foot += '<span class="badge"><span>수용량: '+ cap +'</span></span>';
+          if(!isDash(spd))   foot += '<span class="badge"><span>속도: '+ spd +'</span></span>';
+          if(!isDash(unlock) && unlock !== '–') foot += '<span class="badge"><span>해금: '+ unlock +'</span></span>';
+
+          html += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">' + lvl + '</h3>' +
+                '<div class="card-meta">' + (isDash(time) ? '' : ('시간<br><strong>'+ time +'</strong>')) + '</div>' +
+              '</div>' +
+              '<div class="card-req"><strong>요구 조건:</strong> ' + reqHTML + '</div>' +
+              (res ? ('<div class="res-grid" aria-label="자원">'+ res +'</div>') : '') +
+              (foot ? ('<div class="card-foot">'+ foot +'</div>') : '') +
+            '</article>'
+          );
+          count++;
+        });
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      function decorateTableNumbers(tableId, map){
+        var table = document.getElementById(tableId);
+        if(!table) return;
+
+        var rows = table.querySelectorAll('tbody tr');
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || !tds.length) return;
+
+          Object.keys(map).forEach(function(key){
+            var idx = parseInt(key, 10);
+            var iconSrc = map[key];
+            var td = tds[idx];
+            if(!td) return;
+
+            var display = td.textContent.trim();
+            if(isDash(display)) return;
+
+            var raw = td.dataset.raw ? td.dataset.raw.trim() : '';
+            var title = raw ? (' title="원본: ' + raw.replace(/"/g,'&quot;') + '"') : '';
+
+            td.innerHTML =
+              '<span class="cell-num"' + title + '>' +
+                '<img class="td-ico" src="'+ iconSrc +'" alt="" aria-hidden="true" width="14" height="14" loading="lazy" decoding="async">' +
+                '<span>'+ display +'</span>' +
+              '</span>';
+          });
+        });
+      }
+
+      var tabNormal, tabTG, panelNormal, panelTG;
+
+      function setActive(which, updateHash){
+        if(!tabNormal) return;
+
+        var isNormal = which === 'normal';
+        tabNormal.setAttribute('aria-selected', isNormal ? 'true' : 'false');
+        tabTG.setAttribute('aria-selected', isNormal ? 'false' : 'true');
+
+        panelNormal.classList.toggle('is-active', isNormal);
+        panelTG.classList.toggle('is-active', !isNormal);
+
+        if(updateHash){
+          var id = isNormal ? 'requirements' : 'truegold';
+          if(history && history.replaceState){
+            history.replaceState(null, '', '#'+id);
+          }else{
+            location.hash = '#'+id;
+          }
+        }
+      }
+
+      function initTabs(){
+        tabNormal = document.getElementById('tab-normal');
+        tabTG = document.getElementById('tab-tg');
+        panelNormal = document.getElementById('panel-normal');
+        panelTG = document.getElementById('panel-tg');
+        if(!tabNormal || !tabTG || !panelNormal || !panelTG) return;
+
+        tabNormal.addEventListener('click', function(){
+          setActive('normal', true);
+          var el = document.getElementById('requirements');
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+        tabTG.addEventListener('click', function(){
+          setActive('tg', true);
+          var el = document.getElementById('truegold');
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+
+        var h = (location.hash || '').toLowerCase();
+        if(h === '#truegold'){ setActive('tg', false); }
+        else { setActive('normal', false); }
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+
+        // Normal resources: Bread(2), Wood(3), Stone(4), Iron(5)
+        formatResourceCells('req-table', [2,3,4,5]);
+
+        // TG resources: Truegold(2), Tempered(3), Bread(4), Wood(5), Stone(6), Iron(7)
+        formatResourceCells('tg-table', [2,3,4,5,6,7]);
+
+        var c1 = buildNormalCards();
+        var c2 = buildTGCards();
+        if((c1 + c2) > 0) document.documentElement.classList.add('enhanced');
+
+        initTabs();
+
+        decorateTableNumbers('req-table', { 2: ICON.bread, 3: ICON.wood, 4: ICON.stone, 5: ICON.iron });
+        decorateTableNumbers('tg-table',  { 2: ICON.truegold, 3: ICON.tempered, 4: ICON.bread, 5: ICON.wood, 6: ICON.stone, 7: ICON.iron });
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

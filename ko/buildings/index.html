@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>킹샷 건물 가이드 – 전체 목록, 해금 조건 & 업그레이드 요구사항</title>
+  <meta name="description" content="킹샷 건물 전체 목록과 해금 정보, 업그레이드 요구사항을 한 번에 확인하세요. 도시센터, 아카데미, 대사관, 보병대, 궁병대, 기병대, 지휘부, 창고, 주방, 방위소, 순금정련소, 전쟁 아카데미를 포함합니다." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/buildings/" />
+
+  <meta property="og:title" content="킹샷 건물 가이드 – 전체 건물 목록" />
+  <meta property="og:description" content="킹샷 건물 전체 목록과 해금 정보, 업그레이드 요구사항을 확인하세요." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/buildings/" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <!-- ✅ 사이트 공통 CSS -->
+  <link rel="stylesheet" href="/css/common.css?v=202509131858">
+  <link rel="stylesheet" href="/css/category.css?v=202509131858">
+  <link rel="stylesheet" href="/css/database.css?v=202509131858">
+  <link rel="stylesheet" href="/css/mobile-patch.css?v=202509131858">
+  <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
+  <link rel="stylesheet" href="/css/header.css?v=202509131858">
+  <link rel="stylesheet" href="/css/sponsor.css?v=202509131858">
+
+  <style>
+    /* ===== page scope ===== */
+    #buildings-page{max-width:1100px;margin:0 auto;padding:28px 16px}
+    #buildings-page h1{margin:0 0 10px;font-size:28px;letter-spacing:-.02em}
+    #buildings-page .sub{margin:0 0 18px;color:#6b7280}
+
+    /* ✅ PC 4열 / 모바일 2열 */
+    #buildings-page .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}
+    @media (max-width:980px){ #buildings-page .grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+    @media (max-width:520px){
+      #buildings-page{padding:18px 12px}
+      #buildings-page h1{font-size:22px}
+      #buildings-page .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    }
+
+    #buildings-page .card{
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:16px;
+      background:#fff;
+      overflow:hidden;
+      transition:transform .12s ease,box-shadow .12s ease;
+      height:100%;
+    }
+    #buildings-page .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
+    #buildings-page .card a{display:flex;flex-direction:column;height:100%;color:inherit;text-decoration:none}
+
+    /* ✅ 이미지 크롭 제거 */
+    #buildings-page .imgbox{
+      background:#f2f4f7;
+      display:flex;align-items:center;justify-content:center;
+      padding:10px;
+      aspect-ratio:16/10;
+    }
+    #buildings-page img{
+      width:100%;height:100%;
+      object-fit:contain;
+      display:block;
+      max-width:100%;max-height:100%;
+    }
+    @media (max-width:520px){ #buildings-page .imgbox{padding:8px;aspect-ratio:1/1} }
+
+    /* ✅ 건물이름 가운데 정렬 */
+    #buildings-page .card-name{
+      padding:12px 12px 14px;
+      font-weight:800;
+      font-size:15px;
+      line-height:1.2;
+      min-height:40px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+    @media (max-width:520px){
+      #buildings-page .card-name{
+        font-size:14px;
+        min-height:36px;
+        padding:10px 10px 12px;
+      }
+    }
+
+    /* ✅ SEO용: 화면엔 안 보이지만 접근성 방식으로 남김 */
+    .visually-hidden{
+      position:absolute !important;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;border:0;
+    }
+
+    #building-root{margin-top:26px}
+  </style>
+
+  <!-- ✅ JSON-LD: ItemList (SEO 구조화 데이터) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Kingshot Buildings List (KO)",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"도시센터","url":"https://kingshotdata.kr/ko/buildings/towncenter.html"},
+      {"@type":"ListItem","position":2,"name":"아카데미","url":"https://kingshotdata.kr/ko/buildings/academy.html"},
+      {"@type":"ListItem","position":3,"name":"대사관","url":"https://kingshotdata.kr/ko/buildings/embassy.html"},
+      {"@type":"ListItem","position":4,"name":"보병대","url":"https://kingshotdata.kr/ko/buildings/barracks.html"},
+      {"@type":"ListItem","position":5,"name":"궁병대","url":"https://kingshotdata.kr/ko/buildings/range.html"},
+      {"@type":"ListItem","position":6,"name":"기병대","url":"https://kingshotdata.kr/ko/buildings/stable.html"},
+      {"@type":"ListItem","position":7,"name":"지휘부","url":"https://kingshotdata.kr/ko/buildings/commandcenter.html"},
+      {"@type":"ListItem","position":8,"name":"창고","url":"https://kingshotdata.kr/ko/buildings/storehouse.html"},
+      {"@type":"ListItem","position":9,"name":"주방","url":"https://kingshotdata.kr/ko/buildings/kitchen.html"},
+      {"@type":"ListItem","position":10,"name":"방위소","url":"https://kingshotdata.kr/ko/buildings/guard-station.html"},
+      {"@type":"ListItem","position":11,"name":"순금정련소","url":"https://kingshotdata.kr/ko/buildings/truegold-crucible.html"},
+      {"@type":"ListItem","position":12,"name":"전쟁 아카데미","url":"https://kingshotdata.kr/ko/buildings/war-academy.html"}
+    ]
+  }
+  </script>
+</head>
+
+<body class="theme-default">
+  <main id="buildings-page">
+    <h1>킹샷 건물</h1>
+    <p class="sub">전체 건물 목록을 확인하고, 각 페이지에서 해금 정보와 업그레이드 요구사항을 확인하세요.</p>
+
+    <!-- ✅ SEO 본문(유저 눈엔 안 보임) -->
+    <section class="visually-hidden" aria-hidden="false">
+      <h2>전체 건물 목록</h2>
+      <p>이 페이지는 킹샷 건물 전체 목록을 제공합니다. 도시센터, 아카데미, 대사관, 보병대, 궁병대, 기병대, 지휘부, 창고, 주방, 방위소, 순금정련소, 전쟁 아카데미를 포함합니다.</p>
+    </section>
+
+    <div id="buildings-grid" class="grid">
+      <div class="card"><a href="/ko/buildings/towncenter.html"><div class="imgbox"><img src="/img/buildings/towncenter-kingshot.webp" alt="도시센터"></div><div class="card-name">도시센터</div></a></div>
+      <div class="card"><a href="/ko/buildings/academy.html"><div class="imgbox"><img src="/img/buildings/academy-kingshot.webp" alt="아카데미"></div><div class="card-name">아카데미</div></a></div>
+      <div class="card"><a href="/ko/buildings/embassy.html"><div class="imgbox"><img src="/img/buildings/embassy-kingshot.webp" alt="대사관"></div><div class="card-name">대사관</div></a></div>
+      <div class="card"><a href="/ko/buildings/barracks.html"><div class="imgbox"><img src="/img/buildings/barracks-kingshot.webp" alt="보병대"></div><div class="card-name">보병대</div></a></div>
+      <div class="card"><a href="/ko/buildings/range.html"><div class="imgbox"><img src="/img/buildings/range-kingshot.webp" alt="궁병대"></div><div class="card-name">궁병대</div></a></div>
+      <div class="card"><a href="/ko/buildings/stable.html"><div class="imgbox"><img src="/img/buildings/stable-kingshot.webp" alt="기병대"></div><div class="card-name">기병대</div></a></div>
+      <div class="card"><a href="/ko/buildings/commandcenter.html"><div class="imgbox"><img src="/img/buildings/command-center-kingshot.webp" alt="지휘부"></div><div class="card-name">지휘부</div></a></div>
+      <div class="card"><a href="/ko/buildings/storehouse.html"><div class="imgbox"><img src="/img/buildings/storehouse-kingshot.webp" alt="창고"></div><div class="card-name">창고</div></a></div>
+      <div class="card"><a href="/ko/buildings/kitchen.html"><div class="imgbox"><img src="/img/buildings/kitchen-kingshot.webp" alt="주방"></div><div class="card-name">주방</div></a></div>
+      <div class="card"><a href="/ko/buildings/guard-station.html"><div class="imgbox"><img src="/img/buildings/guard-station-kingshot.webp" alt="방위소"></div><div class="card-name">방위소</div></a></div>
+      <div class="card"><a href="/ko/buildings/truegold-crucible.html"><div class="imgbox"><img src="/img/buildings/truegold-crucible-kingshot.webp" alt="순금정련소"></div><div class="card-name">순금정련소</div></a></div>
+      <div class="card"><a href="/ko/buildings/war-academy.html"><div class="imgbox"><img src="/img/buildings/war-academy.webp" alt="전쟁 아카데미"></div><div class="card-name">전쟁 아카데미</div></a></div>
+    </div>
+
+    <div id="building-root"></div>
+  </main>
+</body>
+</html>

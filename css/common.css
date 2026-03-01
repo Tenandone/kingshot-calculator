@@ -171,41 +171,18 @@ a:hover{text-decoration:underline}
   gap:18px;
 }
 
-/* 더 큰 카드(패딩/폰트) */
-.card--category .card__body{
-  padding:16px;
-}
-.card--category .card__title{
-  font-size:16px;
-  font-weight:900;
-  letter-spacing:.1px;
-}
-.card--category .card__subtitle{
-  font-size:13px;
-}
+.card--category .card__body{padding:16px}
+.card--category .card__title{font-size:16px;font-weight:900;letter-spacing:.1px}
+.card--category .card__subtitle{font-size:13px}
 
-/* 이미지 박스: 잘림 없이 보기 좋게 */
-.card--category .card__media{
-  aspect-ratio: 4 / 3;
-}
-.card--category .card__media img{
-  width:88%;
-  height:88%;
-  object-fit:contain;
-}
+.card--category .card__media{aspect-ratio:4/3}
+.card--category .card__media img{width:88%;height:88%;object-fit:contain}
 
-/* 반응형 */
-@media (max-width: 1024px){
-  .grid.category-grid{
-    grid-template-columns:repeat(2, minmax(0,1fr));
-    gap:16px;
-  }
+@media (max-width:1024px){
+  .grid.category-grid{grid-template-columns:repeat(2, minmax(0,1fr));gap:16px}
 }
-@media (max-width: 600px){
-  .grid.category-grid{
-    grid-template-columns:1fr;
-    gap:12px;
-  }
+@media (max-width:600px){
+  .grid.category-grid{grid-template-columns:1fr;gap:12px}
 }
 
 /* =========================
@@ -245,6 +222,27 @@ a:hover{text-decoration:underline}
 }
 .variant-tabs .tab:hover{background:#eef2f8}
 .variant-tabs .tab.on{background:#2b6cb0;color:#fff;border-color:transparent}
+
+/* =========================
+   BUILDINGS INDEX (fixed)
+   ========================= */
+#buildings-page #buildings-grid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr)) !important;
+  gap:14px;
+  align-items:stretch;
+}
+@media (max-width:980px){
+  #buildings-page #buildings-grid{
+    grid-template-columns:repeat(4, minmax(0,1fr)) !important;
+  }
+}
+@media (max-width:520px){
+  #buildings-page #buildings-grid{
+    grid-template-columns:repeat(2, minmax(0,1fr)) !important;
+    gap:10px;
+  }
+}
 
 /* =========================
    DB cards (이미지 자르지 않음 + 중앙정렬)
@@ -398,4 +396,9 @@ a:hover{text-decoration:underline}
 .visually-hidden{
   position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0
+}
+/* h1에 강제로 준 포커스 링 제거 (routes.js focusMain 때문에 생김) */
+#content h1[tabindex="-1"]:focus{
+  outline: none !important;
+  box-shadow: none !important;
 }

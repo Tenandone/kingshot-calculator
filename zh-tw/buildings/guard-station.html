@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>防衛所 升級費用 (Lv 1–10) | Kingshot</title>
+  <meta name="description" content="Kingshot 防衛所(Guard Station) 升級需求與成本（等級1–10）。包含城市中心需求、升級時間、資源、防衛所防禦力、戰力，以及修理/復原方法。" />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/buildings/guard-station.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings/guard-station.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/buildings/guard-station.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/buildings/guard-station.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/buildings/guard-station.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/buildings/guard-station.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h: 0px;
+      --tabs-h: 0px;
+      --sticky-top: 0px;
+
+      --cell-ico: 14px;
+      --th-ico: 14px;
+      --tbl-font: 13px;
+      --tbl-pad-y: 9px;
+      --tbl-pad-x: 10px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+    nav.lang{
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid; grid-template-columns: 160px 1fr; gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px; height:160px; object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted)}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .jump{
+      margin-top:10px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px; font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(245,158,11,.35);
+      background:rgba(245,158,11,.08);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px; height:18px; flex:0 0 18px;
+      margin-top:2px;
+      color:#b45309;
+    }
+
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+    }
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      font-size:calc(var(--tbl-font) - 1px);
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td{
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:var(--tbl-font);
+      white-space:nowrap;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+
+    .center{text-align:center}
+    .num{text-align:right; font-variant-numeric: tabular-nums}
+
+    .th-flex{display:inline-flex; align-items:center; gap:6px}
+    .th-ico{
+      width:var(--th-ico);
+      height:var(--th-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+    }
+
+    .cell-num{
+      display:inline-flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:6px;
+      white-space:nowrap;
+    }
+    .td-ico{
+      width:var(--cell-ico);
+      height:var(--cell-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+      opacity:.95;
+    }
+
+    table.sticky-firstcol th:first-child,
+    table.sticky-firstcol td:first-child{
+      position: sticky;
+      left: 0;
+      background:inherit;
+      z-index:2;
+    }
+    table.sticky-firstcol thead th:first-child{
+      z-index:4;
+      background:#f8fafc;
+    }
+
+    .cards{display:none}
+    .cards .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:12px 12px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0;
+    }
+    .card-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.25;
+      white-space:nowrap;
+    }
+
+    .res-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:8px;
+      margin-top:10px;
+    }
+    .res-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 10px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      font-size:13px;
+    }
+    .res-left{display:flex; align-items:center; gap:8px; min-width:0}
+    .icoimg{
+      width:18px; height:18px; flex:0 0 18px;
+      object-fit:contain;
+      display:block;
+    }
+    .res-label{color:var(--muted); font-size:12px; white-space:nowrap}
+    .res-val{font-weight:900; font-variant-numeric: tabular-nums; white-space:nowrap}
+
+    .card-foot{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      white-space:nowrap;
+    }
+    .badge svg{width:16px;height:16px;opacity:.85}
+
+    ul.clean{margin:0; padding-left:18px}
+    ul.clean li{margin:6px 0}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top: calc(var(--sticky-top) + 12px);
+    }
+
+    @media (min-width: 901px){
+      :root{
+        --tbl-font: 12px;
+        --tbl-pad-y: 7px;
+        --tbl-pad-x: 8px;
+        --cell-ico: 13px;
+        --th-ico: 13px;
+      }
+      table{table-layout:fixed}
+      .table-wrap{overflow-x:clip}
+      @supports not (overflow: clip){ .table-wrap{overflow-x:hidden} }
+    }
+
+    @media (max-width: 900px){
+      header.top{ position: sticky; top: 0; z-index: 40; }
+      nav.section-tabs{
+        display:flex;
+        position: sticky;
+        top: var(--header-h);
+        z-index: 35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+
+      .enhanced .data-table{display:none}
+      .enhanced .cards{display:grid; gap:12px}
+      .res-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"防衛所 (Kingshot)",
+    "inLanguage":"zh-TW",
+    "description":"Kingshot 防衛所(Guard Station) 升級需求與成本（等級1–10）。包含城市中心需求、升級時間、資源、防衛所防禦力、戰力，以及修理/復原方法。",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"首頁","item":"https://kingshotdata.kr/zh-tw/"},
+        {"@type":"ListItem","position":2,"name":"建築","item":"https://kingshotdata.kr/zh-tw/buildings/"},
+        {"@type":"ListItem","position":3,"name":"防衛所","item":"https://kingshotdata.kr/zh-tw/buildings/guard-station.html"}
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Inline SVG for NOTE / Time -->
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-time" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 6v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="Kingshot Data 首頁">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/buildings/guard-station.html">EN</a>
+        <a href="/ko/buildings/guard-station.html">KO</a>
+        <a href="/ja/buildings/guard-station.html">JA</a>
+        <a href="/zh-tw/buildings/guard-station.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="章節導覽">
+      <a href="#overview">概覽</a>
+      <a href="#requirements">需求</a>
+      <a href="#restore">修理/復原</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/buildings/">建築</a> <span class="muted">›</span>
+        <span>防衛所</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/buildings/guard-station.webp" alt="防衛所 (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>防衛所</h1>
+          <p class="sub">
+            防衛所是城市防禦的核心建築。若防守失敗導致城市燃燒，防衛所HP會隨時間下降，
+            <strong>HP歸零時城市將被傳送到地圖上的隨機位置</strong>。
+          </p>
+          <div class="quote">保護城鎮。升級防衛所以提升其耐久度。</div>
+
+          <div class="jump" aria-label="快速跳轉">
+            <a href="#overview">概覽</a><span class="dotsep">•</span>
+            <a href="#requirements">需求</a><span class="dotsep">•</span>
+            <a href="#restore">修理/復原</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>概覽</h2>
+        <p>
+          防衛所是於 <strong>城市中心等級 7</strong> 解鎖的防禦建築。
+          若城市遭到攻擊並戰敗，城市會開始燃燒，防衛所HP會隨時間逐步下降。
+          若再度遭受攻擊，燃燒時間會延長，HP也會下降得更多。
+        </p>
+        <p>
+          當防衛所HP降到 <strong>0</strong> 時，城市會被 <strong>傳送</strong> 到地圖上的 <strong>隨機位置</strong>。
+          因此在 <strong>Swordland Showdown</strong>、<strong>Viking Vengeance</strong> 等活動中非常關鍵。
+        </p>
+        <p>
+          想強化防禦，建議把最強的三位英雄派駐到防衛所，或使用具備防守技能的英雄。
+        </p>
+
+        <div class="note" role="note" aria-label="注意">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>注意：</strong>
+            實際資源消耗可能會因增益/研究而變動；本頁為基礎（原始）數值。
+          </div>
+        </div>
+      </section>
+
+      <section id="upgrade">
+        <span id="requirements" class="anchor"></span>
+        <h2>升級需求</h2>
+        <p class="muted" style="margin-top:-2px">防衛所等級 1–10 全部資料</p>
+
+        <div class="cards" id="gs-cards" aria-label="防衛所需求（手機卡片）"></div>
+
+        <div class="table-wrap data-table" aria-label="防衛所升級表">
+          <table id="gs-table" class="sticky-firstcol">
+            <colgroup>
+              <col style="width:7%">
+              <col style="width:10%">
+              <col style="width:13%">
+              <col style="width:10%">
+              <col style="width:10%">
+              <col style="width:10%">
+              <col style="width:10%">
+              <col style="width:12%">
+              <col style="width:10%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="center">等級</th>
+                <th class="center">城市中心</th>
+                <th><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-time"></use></svg>時間</span></th>
+                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="14" height="14">木材</span></th>
+                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="14" height="14">麵包</span></th>
+                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="14" height="14">石材</span></th>
+                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="14" height="14">鐵</span></th>
+                <th class="num">防衛所防禦力</th>
+                <th class="num">戰力</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="center">1</td><td class="center">–</td><td>–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">1,000</td><td class="num">400</td></tr>
+              <tr><td class="center">2</td><td class="center">7</td><td>10s</td><td class="num">5.3k</td><td class="num">–</td><td class="num">1k</td><td class="num">–</td><td class="num">1,500</td><td class="num">3,100</td></tr>
+              <tr><td class="center">3</td><td class="center">10</td><td>21m 30s</td><td class="num">88k</td><td class="num">–</td><td class="num">17k</td><td class="num">4.4k</td><td class="num">2,000</td><td class="num">9,400</td></tr>
+              <tr><td class="center">4</td><td class="center">13</td><td>1h 4m 30s</td><td class="num">420k</td><td class="num">420k</td><td class="num">84k</td><td class="num">21k</td><td class="num">5,000</td><td class="num">21,940</td></tr>
+              <tr><td class="center">5</td><td class="center">16</td><td>3h 39m</td><td class="num">1.4M</td><td class="num">1.4M</td><td class="num">290k</td><td class="num">74k</td><td class="num">10,000</td><td class="num">47,240</td></tr>
+              <tr><td class="center">6</td><td class="center">20</td><td>9h 52m 30s</td><td class="num">5.3M</td><td class="num">5.3M</td><td class="num">1M</td><td class="num">260k</td><td class="num">15,000</td><td class="num">86,360</td></tr>
+              <tr><td class="center">7</td><td class="center">24</td><td>1d 13h 44m</td><td class="num">15M</td><td class="num">15M</td><td class="num">3M</td><td class="num">750k</td><td class="num">20,000</td><td class="num">149,500</td></tr>
+              <tr><td class="center">8</td><td class="center">27</td><td>3d 55m</td><td class="num">37M</td><td class="num">37M</td><td class="num">7.4M</td><td class="num">1.8M</td><td class="num">25,000</td><td class="num">217,320</td></tr>
+              <tr><td class="center">9</td><td class="center">29</td><td>4d 26m</td><td class="num">61M</td><td class="num">61M</td><td class="num">12M</td><td class="num">3M</td><td class="num">30,000</td><td class="num">267,920</td></tr>
+              <tr><td class="center">10</td><td class="center">30</td><td>4d 19h 44m</td><td class="num">75M</td><td class="num">75M</td><td class="num">15M</td><td class="num">3.7M</td><td class="num">35,000</td><td class="num">304,700</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="restore">
+        <h2>防衛所修理/復原</h2>
+        <p>
+          遭到攻擊後，你可以每 <strong>30 分鐘</strong> 恢復一部分防衛所HP。
+          但無法用寶石直接瞬間回滿HP，必須等待 30 分鐘冷卻後再繼續修理，直到完全修復。
+        </p>
+        <p>
+          若你在遭攻擊時在線，可以使用寶石 <strong>撲滅城市火災</strong>。
+          這能阻止防衛所HP繼續下降，並幫助你避免被傳送走。
+        </p>
+
+        <h3 style="margin:14px 0 8px; font-size:16px">修理步驟</h3>
+        <ul class="clean">
+          <li>前往 <strong>防衛所</strong></li>
+          <li>點擊 <strong>城市防禦</strong></li>
+          <li>若防衛所受損，會出現 <strong>修理防衛所</strong> 按鈕，點擊即可回復HP</li>
+          <li>每 <strong>30 分鐘</strong> 重複一次，直到完全修復</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function isDash(v){
+        if(!v) return true;
+        var t = String(v).trim();
+        return t === '–' || t === '-' || t === '';
+      }
+
+      var ICON = {
+        bread: '/img/bread.webp',
+        wood: '/img/wood.webp',
+        stone: '/img/stone.webp',
+        iron: '/img/iron.webp'
+      };
+
+      function imgIcon(src){
+        return '<img class="icoimg" src="'+src+'" alt="" aria-hidden="true" width="18" height="18" loading="lazy" decoding="async">';
+      }
+
+      function makeResItem(src, label, value){
+        return (
+          '<div class="res-item">' +
+            '<div class="res-left">' +
+              imgIcon(src) +
+              '<div class="res-label">'+ label +'</div>' +
+            '</div>' +
+            '<div class="res-val">'+ value +'</div>' +
+          '</div>'
+        );
+      }
+
+      function svgUse(id){
+        return '<svg aria-hidden="true" viewBox="0 0 24 24"><use href="#'+id+'"></use></svg>';
+      }
+
+      function buildCards(){
+        var table = document.getElementById('gs-table');
+        var target = document.getElementById('gs-cards');
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var td = tr.querySelectorAll('td');
+          if(!td || td.length < 9) return;
+
+          var level = td[0].textContent.trim();
+          var tc = td[1].textContent.trim();
+          var time = td[2].textContent.trim();
+
+          var wood = td[3].textContent.trim();
+          var bread = td[4].textContent.trim();
+          var stone = td[5].textContent.trim();
+          var iron = td[6].textContent.trim();
+
+          var def = td[7].textContent.trim();
+          var power = td[8].textContent.trim();
+
+          var res = '';
+          if(!isDash(wood))  res += makeResItem(ICON.wood,'木材', wood);
+          if(!isDash(bread)) res += makeResItem(ICON.bread,'麵包', bread);
+          if(!isDash(stone)) res += makeResItem(ICON.stone,'石材', stone);
+          if(!isDash(iron))  res += makeResItem(ICON.iron,'鐵', iron);
+
+          var foot = '';
+          if(!isDash(time))  foot += '<span class="badge">'+ svgUse('ico-time') + '<span>時間: '+ time +'</span></span>';
+          if(!isDash(tc))    foot += '<span class="badge"><span>城市中心: '+ tc +'</span></span>';
+          if(!isDash(def))   foot += '<span class="badge"><span>防禦力: '+ def +'</span></span>';
+          if(!isDash(power)) foot += '<span class="badge"><span>戰力: '+ power +'</span></span>';
+
+          html += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">等級 ' + level + '</h3>' +
+                '<div class="card-meta">' + (isDash(time) ? '' : ('時間<br><strong>'+ time +'</strong>')) + '</div>' +
+              '</div>' +
+              '<div class="card-foot">' + foot + '</div>' +
+              (res ? ('<div class="res-grid" aria-label="資源">'+ res +'</div>') : '') +
+            '</article>'
+          );
+          count++;
+        });
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      function decorateTableNumbers(tableId, map){
+        var table = document.getElementById(tableId);
+        if(!table) return;
+
+        var rows = table.querySelectorAll('tbody tr');
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || !tds.length) return;
+
+          Object.keys(map).forEach(function(key){
+            var idx = parseInt(key, 10);
+            var iconSrc = map[key];
+            var td = tds[idx];
+            if(!td) return;
+
+            var display = td.textContent.trim();
+            if(isDash(display)) return;
+
+            td.innerHTML =
+              '<span class="cell-num">' +
+                '<img class="td-ico" src="'+ iconSrc +'" alt="" aria-hidden="true" width="14" height="14" loading="lazy" decoding="async">' +
+                '<span>'+ display +'</span>' +
+              '</span>';
+          });
+        });
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+
+        var c = buildCards();
+        if(c > 0) document.documentElement.classList.add('enhanced');
+
+        // Wood(3), Bread(4), Stone(5), Iron(6)
+        decorateTableNumbers('gs-table', { 3: ICON.wood, 4: ICON.bread, 5: ICON.stone, 6: ICON.iron });
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -67,7 +67,7 @@
     barracks:            'pages/buildings/barracks.html',
     range:               'pages/buildings/range.html',
     stable:              'pages/buildings/stable.html',
-    'command-center':    'pages/buildings/command-center.html',
+    'commandcenter':    'pages/buildings/commandcenter.html',
     kitchen:             'pages/buildings/kitchen.html',
     storehouse:          'pages/buildings/storehouse.html',
     'guard-station':     'pages/buildings/guard-station.html'
@@ -87,7 +87,7 @@
     barracks:            '보병대 - KingshotData.KR',
     range:               '궁병대 - KingshotData.KR',
     stable:              '기병대 - KingshotData.KR',
-    'command-center':    '지휘부 - KingshotData.KR',
+    'commandcenter':    '지휘부 - KingshotData.KR',
     kitchen:             '주방 - KingshotData.KR',
     storehouse:          '창고 - KingshotData.KR',
     'guard-station':     '방위소 - KingshotData.KR'
@@ -102,7 +102,7 @@
 
   const DETAIL_KEYS = new Set([
     'towncenter','truegold-crucible','academy','embassy','barracks','range','stable',
-    'command-center','kitchen','storehouse','guard-station'
+    'commandcenter','kitchen','storehouse','guard-station'
   ]);
   const DETAIL_SCRIPT = 'js/pages/buildings.js'; // window.initBuilding 제공
 

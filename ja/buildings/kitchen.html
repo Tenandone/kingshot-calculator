@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>キッチン アップグレード費用 (Lv 1–10) | Kingshot</title>
+  <meta name="description" content="Kingshot キッチン(Kitchen) のアップグレード要件と費用（レベル1–10）。アップグレード時間、解放、戦闘力、アイテム強化費用、最大アイテム総費用、最大アイテム時の効果を掲載。" />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://kingshotdata.kr/ja/buildings/kitchen.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings/kitchen.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/buildings/kitchen.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/buildings/kitchen.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/buildings/kitchen.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/buildings/kitchen.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h: 0px;
+      --tabs-h: 0px;
+      --sticky-top: 0px;
+
+      --tbl-font: 13px;
+      --tbl-pad-y: 9px;
+      --tbl-pad-x: 10px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+    nav.lang{
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid; grid-template-columns: 160px 1fr; gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px; height:160px; object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted)}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .jump{
+      margin-top:10px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px; font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(245,158,11,.35);
+      background:rgba(245,158,11,.08);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px; height:18px; flex:0 0 18px;
+      margin-top:2px;
+      color:#b45309;
+    }
+
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+    }
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      font-size:calc(var(--tbl-font) - 1px);
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td{
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:var(--tbl-font);
+      white-space:normal;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+
+    .center{text-align:center}
+    .num{text-align:right; font-variant-numeric: tabular-nums}
+    .cell-lines{white-space:normal; line-height:1.45}
+    .cell-lines .mutedline{color:var(--muted)}
+
+    table.sticky-firstcol th:first-child,
+    table.sticky-firstcol td:first-child{
+      position: sticky;
+      left: 0;
+      background:inherit;
+      z-index:2;
+    }
+    table.sticky-firstcol thead th:first-child{
+      z-index:4;
+      background:#f8fafc;
+    }
+
+    .cards{display:none}
+    .cards .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:12px 12px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0;
+    }
+    .card-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.25;
+      white-space:nowrap;
+    }
+    .card-block{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 10px;
+      background:#fff;
+      margin-top:10px;
+      font-size:13px;
+      line-height:1.45;
+    }
+    .card-block .lbl{color:var(--muted); font-size:12px; font-weight:800; margin-bottom:4px}
+    .card-block .val{white-space:normal}
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      white-space:nowrap;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .badges{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+
+    .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{
+      display:inline-flex; align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top: calc(var(--sticky-top) + 12px);
+    }
+
+    @media (min-width: 901px){
+      :root{
+        --tbl-font: 12px;
+        --tbl-pad-y: 7px;
+        --tbl-pad-x: 8px;
+      }
+      table{table-layout:fixed}
+      .table-wrap{overflow-x:clip}
+      @supports not (overflow: clip){ .table-wrap{overflow-x:hidden} }
+    }
+
+    @media (max-width: 900px){
+      header.top{
+        position: sticky;
+        top: 0;
+        z-index: 40;
+      }
+      nav.section-tabs{
+        display:flex;
+        position: sticky;
+        top: var(--header-h);
+        z-index: 35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+
+      .enhanced .data-table{display:none}
+      .enhanced .cards{display:grid; gap:12px}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"キッチン (Kingshot)",
+    "inLanguage":"ja",
+    "description":"Kingshot キッチン(Kitchen) のアップグレード要件と費用（レベル1–10）。アップグレード時間、解放、戦闘力、アイテム強化費用、最大アイテム総費用、最大アイテム時の効果を掲載。",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"ホーム","item":"https://kingshotdata.kr/ja/"},
+        {"@type":"ListItem","position":2,"name":"建物","item":"https://kingshotdata.kr/ja/buildings/"},
+        {"@type":"ListItem","position":3,"name":"キッチン","item":"https://kingshotdata.kr/ja/buildings/kitchen.html"}
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Inline SVG for NOTE -->
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ja/" aria-label="Kingshot Data ホーム">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/buildings/kitchen.html">EN</a>
+        <a href="/ko/buildings/kitchen.html">KO</a>
+        <a href="/ja/buildings/kitchen.html" aria-current="page">JA</a>
+        <a href="/zh-tw/buildings/kitchen.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="セクションナビゲーション">
+      <a href="#overview">概要</a>
+      <a href="#requirements">要件</a>
+      <a href="#how-it-works">仕組み</a>
+      <a href="#related">関連</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ja/">ホーム</a> <span class="muted">›</span>
+        <a href="/ja/buildings/">建物</a> <span class="muted">›</span>
+        <span>キッチン</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/buildings/kitchen.webp" alt="キッチン (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>キッチン</h1>
+          <p class="sub">
+            キッチンは生存者の食事を準備する建物です。キッチンのレベルとアイテムが高いほど、
+            調理/配膳/食事の各工程が速くなります。
+          </p>
+          <div class="quote">住民の食欲を満たす上質な料理を提供します。</div>
+
+          <div class="jump" aria-label="クイックリンク">
+            <a href="#overview">概要</a><span class="dotsep">•</span>
+            <a href="#requirements">要件</a><span class="dotsep">•</span>
+            <a href="#how-it-works">仕組み</a><span class="dotsep">•</span>
+            <a href="#related">関連</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>概要</h2>
+        <p>
+          キッチンは生存者の食事が作られる場所です。食事は3種類から選べます：
+          <strong>おがくずパン(Sawdust Bread)</strong>、<strong>チーズピザ(Cheese Pizza)</strong>、<strong>豪華なごちそう(Deluxe Feast)</strong>。
+        </p>
+        <p>
+          高品質な食事ほどパンの消費量は増えますが、<strong>満腹度</strong>がより多く回復します。
+          満腹度が高いほど、生存者が病気になったり死亡したりする確率が下がります。
+        </p>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>注意:</strong>
+            ここに掲載している数値は基礎（原本）値です。バフ/研究/アイテムにより変動する場合があります。
+          </div>
+        </div>
+      </section>
+
+      <section id="upgrade">
+        <span id="requirements" class="anchor"></span>
+        <h2>アップグレード要件</h2>
+        <p class="muted" style="margin-top:-2px">キッチン Lv 1–10 全レベル</p>
+
+        <div class="cards" id="kitchen-cards" aria-label="キッチン要件（モバイルカード）"></div>
+
+        <div class="table-wrap data-table" aria-label="キッチン アップグレード要件表">
+          <table id="kitchen-table" class="sticky-firstcol">
+            <colgroup>
+              <col style="width:6%">
+              <col style="width:14%">
+              <col style="width:12%">
+              <col style="width:10%">
+              <col style="width:14%">
+              <col style="width:8%">
+              <col style="width:18%">
+              <col style="width:10%">
+              <col style="width:18%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="center">レベル</th>
+                <th>要件</th>
+                <th>コスト</th>
+                <th>時間</th>
+                <th>アップグレードで解放</th>
+                <th class="num">戦闘力</th>
+                <th>アイテム強化コスト</th>
+                <th>最大アイテム総費用</th>
+                <th>最大アイテム時の効果</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="center">1</td>
+                <td>チュートリアル中に建設</td>
+                <td>木材 35</td>
+                <td>00:00:02</td>
+                <td class="cell-lines">
+                  コンロA(アイテム), サイドボード Lv.1(アイテム), 食卓A Lv.1(アイテム), 食料庫(Larder) Lv.1(アイテム)
+                </td>
+                <td class="num">100</td>
+                <td class="cell-lines">
+                  コンロA Lv.1–2 = 木材 18<br>
+                  サイドボード Lv.2 = 木材 10<br>
+                  食卓A Lv.2 = 木材 10<br>
+                  食料庫(Larder) Lv.2 = 木材 30
+                </td>
+                <td>木材 68</td>
+                <td class="cell-lines">
+                  作業生存者 +1<br><br>
+                  <span class="mutedline">調理:</span><br>
+                  満腹度 40/50/60（ティアにより変動） / 調理 8秒<br><br>
+                  <span class="mutedline">配膳:</span> 0.8秒<br><br>
+                  <span class="mutedline">食事:</span> 6.5秒
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">2</td>
+                <td>都市センター Lv.2</td>
+                <td>木材 50</td>
+                <td>00:00:09</td>
+                <td>–</td>
+                <td class="num">190</td>
+                <td class="cell-lines">
+                  コンロA Lv.3–4 = 木材 30<br>
+                  サイドボード Lv.3–4 = 木材 30<br>
+                  食卓A Lv.3–4 = 木材 30<br>
+                  食料庫(Larder) Lv.3–4 = 木材 85
+                </td>
+                <td>木材 175</td>
+                <td class="cell-lines">
+                  <span class="mutedline">調理:</span><br>
+                  満腹度 40/50/60（ティアにより変動） / 調理 7.4秒<br><br>
+                  <span class="mutedline">配膳:</span> 0.7秒<br><br>
+                  <span class="mutedline">食事:</span> 5.3秒
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">3</td>
+                <td>都市センター Lv.3</td>
+                <td>木材 240</td>
+                <td>00:00:45</td>
+                <td>–</td>
+                <td class="num">325</td>
+                <td class="cell-lines">
+                  コンロA Lv.5–6 = 木材 110<br>
+                  サイドボード Lv.5–6 = 木材 110<br>
+                  食卓A Lv.5–6 = 木材 110<br>
+                  食料庫(Larder) Lv.5–6 = 木材 290
+                </td>
+                <td>木材 620</td>
+                <td class="cell-lines">
+                  <span class="mutedline">調理:</span><br>
+                  満腹度 40/50/60（ティアにより変動） / 調理 7秒<br><br>
+                  <span class="mutedline">配膳:</span> 0.6秒<br><br>
+                  <span class="mutedline">食事:</span> 4.9秒
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">4</td>
+                <td>都市センター Lv.4</td>
+                <td>木材 540, 石材 105</td>
+                <td>00:02:15</td>
+                <td>コンロB(アイテム), 食卓B(アイテム), ヒーター(アイテム)</td>
+                <td class="num">505</td>
+                <td class="cell-lines">
+                  コンロA Lv.7–8 = 木材 165<br>
+                  コンロB Lv.1–8 = 木材 323<br>
+                  サイドボード Lv.7–8 = 木材 165<br>
+                  食卓A Lv.7–8 = 木材 165<br>
+                  食卓B Lv.1–8 = 木材 323<br>
+                  食料庫(Larder) Lv.7–8 = 木材 420<br>
+                  ヒーター Lv.1–8 = ゴールド 324
+                </td>
+                <td class="cell-lines">木材 1,561,<br>ゴールド 324</td>
+                <td class="cell-lines">
+                  作業生存者 +1<br>
+                  暖かさ +0.1<br><br>
+                  <span class="mutedline">調理:</span><br>
+                  満腹度 40/50/60（ティアにより変動） / 調理 6.6秒<br><br>
+                  <span class="mutedline">配膳:</span> 0.5秒<br><br>
+                  <span class="mutedline">食事:</span> 4.7秒
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">5</td>
+                <td>都市センター Lv.5</td>
+                <td>木材 2.2k, 石材 455</td>
+                <td>00:04:30</td>
+                <td>ゴミ箱(Bin)(アイテム)</td>
+                <td class="num">775</td>
+                <td class="cell-lines">
+                  コンロA Lv.9–10 = 木材 445<br>
+                  コンロB Lv.9–10 = 木材 445<br>
+                  サイドボード Lv.9–10 = 木材 445<br>
+                  食卓A Lv.9–10 = 木材 445<br>
+                  食卓B Lv.9–10 = 木材 445<br>
+                  食料庫(Larder) Lv.9–10 = 木材 1,115<br>
+                  ヒーター Lv.9–10 = ゴールド 195<br>
+                  ゴミ箱(Bin) Lv.1–10 = ゴールド 519
+                </td>
+                <td class="cell-lines">木材 3,340<br>ゴールド 714</td>
+                <td class="cell-lines">
+                  暖かさ +0.1<br><br>
+                  <span class="mutedline">調理:</span><br>
+                  満腹度 40/50/60（ティアにより変動） / 調理 5.6秒<br><br>
+                  <span class="mutedline">配膳:</span> 0.5秒<br><br>
+                  <span class="mutedline">食事:</span> 4.5秒
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">6</td>
+                <td>都市センター Lv.6</td>
+                <td>木材 5.7k, 石材 1.1k, 鉄 285</td>
+                <td>00:09:00</td>
+                <td>水桶(Water Bucket)(アイテム)</td>
+                <td class="num">1,180</td>
+                <td class="cell-lines">
+                  コンロA Lv.11–12 = 木材 320, 石材 85<br>
+                  コンロB Lv.11–12 = 木材 320, 石材 85<br>
+                  サイドボード Lv.11–12 = 木材 320, 石材 85<br>
+                  食卓A Lv.11–12 = 木材 320, 石材 85<br>
+                  食卓B Lv.11–12 = 木材 320, 石材 85<br>
+                  食料庫(Larder) Lv.11–12 = 木材 800, 石材 210<br>
+                  ヒーター Lv.11–12 = ゴールド 255<br>
+                  ゴミ箱(Bin) Lv.11–12 = ゴールド 255<br>
+                  水桶(Water Bucket) Lv.1–12 = ゴールド 774
+                </td>
+                <td class="cell-lines">木材 2,400, 石材 890<br>ゴールド 1,284</td>
+                <td class="cell-lines">
+                  暖かさ +0.12<br><br>
+                  <span class="mutedline">調理:</span><br>
+                  満腹度 40/50/60（ティアにより変動） / 調理 5.6秒<br><br>
+                  <span class="mutedline">配膳:</span> 0.4秒<br><br>
+                  <span class="mutedline">食事:</span> 4.5秒
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">7</td>
+                <td>都市センター Lv.7</td>
+                <td>木材 20k, 石材 4.1k, 鉄 1k</td>
+                <td>00:18:00</td>
+                <td>コンロC(アイテム), 洗面台(Washbasin)(アイテム)</td>
+                <td class="num">1,765</td>
+                <td class="cell-lines">
+                  コンロA Lv.13–14 = 石材 400<br>
+                  コンロB Lv.13–14 = 石材 400<br>
+                  コンロC Lv.1–14 = 木材 1,088, 石材 485<br>
+                  サイドボード Lv.13–14 = 石材 400<br>
+                  食卓A Lv.13–14 = 石材 400<br>
+                  食卓B Lv.13–14 = 石材 400<br>
+                  食料庫(Larder) Lv.13–14 = 石材 1,010<br>
+                  ヒーター Lv.13–14 = ゴールド 325<br>
+                  ゴミ箱(Bin) Lv.13–14 = ゴールド 325<br>
+                  水桶(Water Bucket) Lv.13–14 = ゴールド 325<br>
+                  洗面台(Washbasin) Lv.1–14 = ゴールド 1,099
+                </td>
+                <td class="cell-lines">木材 1,088, 石材 3,495<br>ゴールド 2,074</td>
+                <td class="cell-lines">
+                  作業生存者 +1<br>
+                  暖かさ +0.14<br><br>
+                  <span class="mutedline">調理:</span><br>
+                  満腹度 40/50/60（ティアにより変動） / 調理 3.8秒<br><br>
+                  <span class="mutedline">配膳:</span> 0.3秒<br><br>
+                  <span class="mutedline">食事:</span> 4.1秒
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">8</td>
+                <td>都市センター Lv.8</td>
+                <td>木材 37k, 石材 7.5k, 鉄 1.8k</td>
+                <td>00:27:00</td>
+                <td>–</td>
+                <td class="num">2,350</td>
+                <td class="cell-lines">
+                  コンロA Lv.15–16 = 石材 335, 鉄 95<br>
+                  コンロB Lv.15–16 = 石材 335, 鉄 95<br>
+                  コンロC Lv.15–16 = 石材 335, 鉄 95<br>
+                  サイドボード Lv.15–16 = 石材 335, 鉄 95<br>
+                  食卓A Lv.15–16 = 石材 335, 鉄 95<br>
+                  食卓B Lv.15–16 = 石材 335, 鉄 95<br>
+                  食料庫(Larder) Lv.15–16 = 石材 840, 鉄 240<br>
+                  ヒーター Lv.15–16 = ゴールド 405<br>
+                  ゴミ箱(Bin) Lv.15–16 = ゴールド 405<br>
+                  水桶(Water Bucket) Lv.15–16 = ゴールド 405<br>
+                  洗面台(Washbasin) Lv.15–16 = ゴールド 405
+                </td>
+                <td class="cell-lines">石材 2,850,<br>鉄 570,<br>ゴールド 1,620</td>
+                <td class="cell-lines">
+                  暖かさ +0.16<br><br>
+                  <span class="mutedline">調理:</span><br>
+                  満腹度 40/50/60（ティアにより変動） / 調理 3.2秒<br><br>
+                  <span class="mutedline">配膳:</span> 0.3秒<br><br>
+                  <span class="mutedline">食事:</span> 3.9秒
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">9</td>
+                <td>都市センター Lv.9</td>
+                <td>木材 78k, 石材 15k, 鉄 3.9k</td>
+                <td>00:40:30</td>
+                <td>樽(Cask)(アイテム)</td>
+                <td class="num">2,935</td>
+                <td class="cell-lines">
+                  コンロA Lv.17–18 = 木材 3.1k, 石材 695<br>
+                  コンロB Lv.17–18 = 木材 3.1k, 石材 695<br>
+                  コンロC Lv.17–18 = 木材 3.1k, 石材 695<br>
+                  サイドボード Lv.17–18 = 木材 3.1k, 石材 695<br>
+                  食卓A Lv.17–18 = 木材 3.1k, 石材 695<br>
+                  食卓B Lv.17–18 = 木材 3.1k, 石材 695<br>
+                  食料庫(Larder) Lv.17–18 = 木材 7.8k, 石材 1.7k<br>
+                  ヒーター Lv.17–18 = ゴールド 520<br>
+                  ゴミ箱(Bin) Lv.17–18 = ゴールド 520<br>
+                  水桶(Water Bucket) Lv.17–18 = ゴールド 520<br>
+                  洗面台(Washbasin) Lv.17–18 = ゴールド 520<br>
+                  樽(Cask) Lv.1–18 = ゴールド 2,024
+                </td>
+                <td class="cell-lines">木材 26,400,<br>石材 5,870,<br>ゴールド 4,104</td>
+                <td class="cell-lines">
+                  暖かさ +0.18<br><br>
+                  <span class="mutedline">調理:</span><br>
+                  満腹度 40/50/60（ティアにより変動） / 調理 2.6秒<br><br>
+                  <span class="mutedline">配膳:</span> 0.2秒<br><br>
+                  <span class="mutedline">食事:</span> 3.7秒
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">10</td>
+                <td>都市センター Lv.10</td>
+                <td>木材 130k, 石材 27k, 鉄 6.9k</td>
+                <td>00:54:00</td>
+                <td>–</td>
+                <td class="num">3,785</td>
+                <td class="cell-lines">
+                  コンロA Lv.19–20 = 鉄 590<br>
+                  コンロB Lv.19–20 = 鉄 590<br>
+                  コンロC Lv.19–20 = 鉄 590<br>
+                  サイドボード Lv.19–20 = 鉄 590<br>
+                  食卓A Lv.19–20 = 鉄 590<br>
+                  食卓B Lv.19–20 = 鉄 590<br>
+                  食料庫(Larder) Lv.19–20 = 鉄 1,475<br>
+                  ヒーター Lv.19–20 = ゴールド 640<br>
+                  ゴミ箱(Bin) Lv.19–20 = ゴールド 640<br>
+                  水桶(Water Bucket) Lv.19–20 = ゴールド 640<br>
+                  洗面台(Washbasin) Lv.19–20 = ゴールド 640<br>
+                  樽(Cask) Lv.19–20 = ゴールド 640
+                </td>
+                <td class="cell-lines">鉄 5,015,<br>ゴールド 3,200</td>
+                <td class="cell-lines">
+                  暖かさ +0.2<br><br>
+                  <span class="mutedline">調理:</span><br>
+                  満腹度 40/50/60（ティアにより変動） / 調理 2秒<br><br>
+                  <span class="mutedline">配膳:</span> 0.1秒<br><br>
+                  <span class="mutedline">食事:</span> 3.5秒
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="how-it-works">
+        <h2>仕組み</h2>
+        <p>
+          キッチンは3つの工程で動きます：<strong>調理</strong>（パンを使って料理を作る）→
+          <strong>配膳</strong>（サイドボードで受け取る）→ <strong>食事</strong>（食卓で食べる）。
+        </p>
+        <p>
+          各工程には時間がかかります。キッチンのレベルやアイテムが高いほど速く進みます。
+          勤務時間が終わる前に食べられないと、満腹度が増えない（または一部スキップ）場合があります。
+        </p>
+        <p>
+          生存者の家を最大まで上げても病気や死亡が続く場合、よくある原因は<strong>低品質の食事</strong>です。
+          キッチンを強化して、より良い食事に切り替え、食事時間内に満腹度を上げられるようにしましょう。
+        </p>
+      </section>
+
+      <section id="related">
+        <h2>関連建物</h2>
+        <div class="related">
+          <a class="pill" href="/ja/buildings/town-center.html">都市センター</a>
+          <a class="pill" href="/ja/buildings/academy.html">アカデミー</a>
+          <a class="pill" href="/ja/buildings/infirmary.html">診療所</a>
+          <a class="pill" href="/ja/buildings/storehouse.html">倉庫</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function txt(el){ return (el && el.textContent ? el.textContent.trim() : ''); }
+      function html(el){ return (el && el.innerHTML ? el.innerHTML.trim() : ''); }
+
+      function buildCards(){
+        var table = document.getElementById('kitchen-table');
+        var target = document.getElementById('kitchen-cards');
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var out = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var td = tr.querySelectorAll('td');
+          if(!td || td.length < 9) return;
+
+          var level = txt(td[0]);
+          var req = html(td[1]);
+          var cost = html(td[2]);
+          var time = html(td[3]);
+          var unlock = html(td[4]);
+          var power = html(td[5]);
+          var items = html(td[6]);
+          var total = html(td[7]);
+          var output = html(td[8]);
+
+          out += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">レベル ' + level + '</h3>' +
+                '<div class="card-meta">' + (time ? ('時間<br><strong>' + time + '</strong>') : '') + '</div>' +
+              '</div>' +
+              '<div class="badges">' +
+                (power && power !== '–' ? ('<span class="badge">戦闘力: <strong style="color:#111827">' + power + '</strong></span>') : '') +
+              '</div>' +
+              '<div class="card-block"><div class="lbl">要件</div><div class="val">' + (req || '–') + '</div></div>' +
+              '<div class="card-block"><div class="lbl">コスト</div><div class="val">' + (cost || '–') + '</div></div>' +
+              '<div class="card-block"><div class="lbl">アップグレードで解放</div><div class="val">' + (unlock || '–') + '</div></div>' +
+              '<div class="card-block"><div class="lbl">アイテム強化コスト</div><div class="val">' + (items || '–') + '</div></div>' +
+              '<div class="card-block"><div class="lbl">最大アイテム総費用</div><div class="val">' + (total || '–') + '</div></div>' +
+              '<div class="card-block"><div class="lbl">最大アイテム時の効果</div><div class="val">' + (output || '–') + '</div></div>' +
+            '</article>'
+          );
+          count++;
+        });
+
+        target.innerHTML = out;
+        return count;
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+        var c = buildCards();
+        if(c > 0) document.documentElement.classList.add('enhanced');
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

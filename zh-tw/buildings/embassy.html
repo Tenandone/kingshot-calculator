@@ -1,0 +1,1198 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>大使館 升級成本＆真金(TG)階段 (Lv 1–30 + TG) | Kingshot</title>
+  <meta name="description" content="Kingshot 大使館升級需求與成本（Lv 1–30 + 真金(TG)階段：至TG10）。包含聯盟協助次數/縮短秒數/增援容量，以及真金內容時間線。" />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/buildings/embassy.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings/embassy.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/buildings/embassy.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/buildings/embassy.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/buildings/embassy.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/buildings/embassy.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h: 0px;
+      --tabs-h: 0px;
+      --sticky-top: 0px;
+
+      --cell-ico: 13px;
+      --th-ico: 13px;
+      --tbl-font: 13px;
+      --tbl-pad-y: 9px;
+      --tbl-pad-x: 10px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","Microsoft JhengHei",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1400px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+    nav.lang{
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid; grid-template-columns: 160px 1fr; gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px; height:160px; object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted)}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .jump{
+      margin-top:10px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px; font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(245,158,11,.35);
+      background:rgba(245,158,11,.08);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px; height:18px; flex:0 0 18px;
+      margin-top:2px;
+      color:#b45309;
+    }
+
+    .seg-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin:6px 0 12px;
+    }
+    .seg{
+      display:inline-flex;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .seg button{
+      appearance:none;
+      border:0;
+      background:transparent;
+      padding:10px 14px;
+      font:inherit;
+      font-weight:900;
+      color:var(--muted);
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .seg button + button{border-left:1px solid var(--border)}
+    .seg button[aria-selected="true"]{
+      color:#fff;
+      background:var(--brand);
+    }
+
+    .panel{margin-top:10px}
+    .js .panel{display:none}
+    .js .panel.is-active{display:block}
+
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+    }
+
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      font-size:calc(var(--tbl-font) - 1px);
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td{
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:var(--tbl-font);
+      white-space:nowrap;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+
+    .center{text-align:center}
+    .num{text-align:right; font-variant-numeric: tabular-nums}
+    .req{white-space:normal; overflow-wrap:anywhere; word-break:keep-all}
+
+    .th-flex{display:inline-flex; align-items:center; gap:6px}
+    .th-ico{
+      width:var(--th-ico);
+      height:var(--th-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+    }
+
+    .cell-num{
+      display:inline-flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:6px;
+      white-space:nowrap;
+    }
+    .td-ico{
+      width:var(--cell-ico);
+      height:var(--cell-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+      opacity:.95;
+    }
+
+    table.sticky-firstcol th:first-child,
+    table.sticky-firstcol td:first-child{
+      position: sticky;
+      left: 0;
+      background:inherit;
+      z-index:2;
+    }
+    table.sticky-firstcol thead th:first-child{
+      z-index:4;
+      background:#f8fafc;
+    }
+
+    @media (min-width: 1200px){
+      :root{
+        --tbl-font: 12px;
+        --tbl-pad-y: 7px;
+        --tbl-pad-x: 8px;
+        --cell-ico: 12px;
+        --th-ico: 12px;
+      }
+      table{table-layout:fixed}
+      .table-wrap{overflow-x:clip}
+      @supports not (overflow: clip){ .table-wrap{overflow-x:hidden} }
+      td.req, th.req-h{white-space:normal}
+    }
+    @media (min-width: 901px) and (max-width: 1199px){
+      :root{
+        --tbl-font: 11px;
+        --tbl-pad-y: 6px;
+        --tbl-pad-x: 7px;
+        --cell-ico: 11px;
+        --th-ico: 11px;
+      }
+      table{table-layout:fixed}
+      .table-wrap{overflow-x:clip}
+      @supports not (overflow: clip){ .table-wrap{overflow-x:hidden} }
+      td.req, th.req-h{white-space:normal}
+    }
+
+    .timeline{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    .timeline .callout{
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+    }
+    .timeline small{color:var(--muted)}
+
+    .cards{display:none}
+    .cards .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:12px 12px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0;
+    }
+    .card-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.25;
+      white-space:nowrap;
+    }
+    .card-req{
+      margin:8px 0 10px;
+      color:var(--text);
+      font-size:13px;
+    }
+    .res-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:8px;
+      margin-top:10px;
+    }
+    .res-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 10px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      font-size:13px;
+    }
+    .res-left{display:flex; align-items:center; gap:8px; min-width:0}
+    .icoimg{
+      width:18px; height:18px; flex:0 0 18px;
+      object-fit:contain;
+      display:block;
+    }
+    .res-label{
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .res-val{
+      font-weight:900;
+      font-variant-numeric: tabular-nums;
+      white-space:nowrap;
+    }
+    .card-foot{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      white-space:nowrap;
+    }
+    .badge svg{width:16px;height:16px;opacity:.85}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top: calc(var(--sticky-top) + 12px);
+    }
+
+    .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{
+      display:inline-flex; align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    ul.clean{margin:0; padding-left:18px}
+    ul.clean li{margin:6px 0}
+
+    @media (max-width: 900px){
+      header.top{position: sticky; top: 0; z-index: 40;}
+      nav.section-tabs{
+        display:flex;
+        position: sticky;
+        top: var(--header-h);
+        z-index: 35;
+      }
+
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+
+      .enhanced .data-table{display:none}
+      .enhanced .cards{display:grid; gap:12px}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+      .res-grid{grid-template-columns: 1fr}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"大使館 (Kingshot)",
+    "inLanguage":"zh-TW",
+    "description":"Kingshot 大使館升級需求與成本（Lv 1–30 + 真金(TG)階段：至TG10）。包含聯盟協助次數/縮短秒數/增援容量。",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"首頁","item":"https://kingshotdata.kr/zh-tw/"},
+        {"@type":"ListItem","position":2,"name":"建築","item":"https://kingshotdata.kr/zh-tw/buildings/"},
+        {"@type":"ListItem","position":3,"name":"大使館","item":"https://kingshotdata.kr/zh-tw/buildings/embassy.html"}
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-time" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 6v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ico-power" viewBox="0 0 24 24">
+      <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/buildings/embassy.html">EN</a>
+        <a href="/ko/buildings/embassy.html">KO</a>
+        <a href="/ja/buildings/embassy.html">JA</a>
+        <a href="/zh-tw/buildings/embassy.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#truegold-timeline">時間線</a>
+      <a href="#overview">概覽</a>
+      <a href="#requirements">需求</a>
+      <a href="#truegold">真金(TG)</a>
+      <a href="#related">相關</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/buildings/">建築</a> <span class="muted">›</span>
+        <span>大使館</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/buildings/embassy.webp" alt="大使館 (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>大使館</h1>
+          <p class="sub">
+            大使館是 Kingshot 中處理聯盟協助與增援（援軍）的重要軍事建築。
+            從城市中心（Town Center）等級 9 之後，提升城市中心通常會需要先升級大使館。
+          </p>
+          <div class="quote">
+            發布並接受聯盟協助與增援請求。升級後可提高增援容量，並能處理更多請求。
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#truegold-timeline">時間線</a><span class="dotsep">•</span>
+            <a href="#overview">概覽</a><span class="dotsep">•</span>
+            <a href="#requirements">需求</a><span class="dotsep">•</span>
+            <a href="#truegold">真金(TG)</a><span class="dotsep">•</span>
+            <a href="#related">相關</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="truegold-timeline">
+        <h2>真金(Truegold) 內容時間線（伺服器天數）</h2>
+
+        <div class="timeline">
+          <div class="callout">
+            <p style="margin:0">
+              以下為常見的伺服器進度參考，實際可能因伺服器而異。
+            </p>
+            <p class="muted" style="margin:8px 0 0">
+              可用於規劃真金階段、真金坩堝、戰爭學院等系統大約何時出現。
+            </p>
+          </div>
+
+          <div class="cards" id="timeline-cards" aria-label="Truegold server-age timeline cards"></div>
+
+          <div class="table-wrap data-table" aria-label="Truegold server-age timeline table">
+            <table id="timeline-table">
+              <colgroup>
+                <col style="width: 30%">
+                <col style="width: 20%">
+                <col style="width: 50%">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>階段</th>
+                  <th>伺服器天數（參考）</th>
+                  <th>說明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>真金開始</strong></td>
+                  <td>約 60–70 天</td>
+                  <td>城市中心可在 Lv30 後繼續提升，真金(TG)升級開始變得重要。</td>
+                </tr>
+                <tr>
+                  <td><strong>TG 1–3</strong></td>
+                  <td>約 60–70 天</td>
+                  <td>早期真金進度（第一批真金階段）。</td>
+                </tr>
+                <tr>
+                  <td><strong>TG 4–5</strong></td>
+                  <td>約 150 天</td>
+                  <td><a href="/zh-tw/buildings/truegold-crucible.html">真金坩堝</a>多在此階段前後開放（真金進度的重要節點）。</td>
+                </tr>
+                <tr>
+                  <td><strong>戰爭學院</strong></td>
+                  <td>約 220–230 天</td>
+                  <td><a href="/zh-tw/buildings/war-academy.html">戰爭學院</a>在多數伺服器於此時段前後變得可用/重要。</td>
+                </tr>
+                <tr>
+                  <td><strong>TG 8</strong></td>
+                  <td>約 310–320 天</td>
+                  <td>後期真金階段（進階進度）。</td>
+                </tr>
+                <tr>
+                  <td><strong>TG 10（伺服器天數）</strong></td>
+                  <td><em>TBD</em></td>
+                  <td>確認後會更新。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <small>註：TBD 代表「待確認」。</small>
+        </div>
+      </section>
+
+      <section id="overview">
+        <span class="anchor" id="overview-anchor"></span>
+        <h2>升級大使館會提升哪些數值</h2>
+        <p class="muted" style="margin-top:-2px">升級後主要強化以下 3 項</p>
+        <ul class="clean">
+          <li><strong>聯盟協助次數：</strong>盟友可協助加速建造/研究/治療的次數</li>
+          <li><strong>聯盟協助縮短（秒）：</strong>每次協助可縮短的秒數</li>
+          <li><strong>增援容量：</strong>可接收用於防守的增援最大數量</li>
+        </ul>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>注意：</strong>
+            資源需求可能受英雄/研究等加成影響而變動。此頁顯示為基礎（原始）數值。
+          </div>
+        </div>
+      </section>
+
+      <section id="upgrade">
+        <span id="requirements" class="anchor"></span>
+        <h2>升級需求</h2>
+        <p class="muted" style="margin-top:-2px">大使館完整等級（Lv 1–30）＋真金(TG)階段（至 TG10）</p>
+
+        <div class="seg-wrap">
+          <div class="seg" role="tablist" aria-label="Upgrade level type">
+            <button id="tab-normal" type="button" role="tab" aria-selected="true" aria-controls="panel-normal">一般等級</button>
+            <button id="tab-tg" type="button" role="tab" aria-selected="false" aria-controls="panel-tg">真金(TG)</button>
+          </div>
+        </div>
+
+        <div id="panel-normal" class="panel is-active" role="tabpanel" aria-labelledby="tab-normal">
+          <div class="cards" id="req-cards" aria-label="Embassy requirements (mobile cards)"></div>
+
+          <div class="table-wrap data-table" aria-label="Embassy upgrade requirements table">
+            <table id="req-table" class="sticky-firstcol">
+              <colgroup>
+                <col style="width:5%">
+                <col style="width:10%">
+                <col style="width:10%">
+                <col style="width:9%">
+                <col style="width:10%">
+                <col style="width:12%">
+                <col style="width:7%">
+                <col style="width:7%">
+                <col style="width:7%">
+                <col style="width:7%">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="center">Lv</th>
+                  <th class="center">城市中心</th>
+                  <th>時間</th>
+                  <th class="num">次數</th>
+                  <th class="num">縮短(秒)</th>
+                  <th class="num">增援容量</th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="13" height="13">木材</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="13" height="13">麵包</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="13" height="13">石材</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="13" height="13">鐵</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Normal levels (same numeric data) -->
+                <tr><td class="center">1</td><td class="center">8</td><td>2s</td><td class="num">1</td><td class="num">10</td><td class="num">1,500</td><td class="num">60</td><td class="num">–</td><td class="num">–</td><td class="num">–</td></tr>
+                <tr><td class="center">2</td><td class="center">8</td><td>10s</td><td class="num">2</td><td class="num">13</td><td class="num">3,500</td><td class="num">90</td><td class="num">–</td><td class="num">–</td><td class="num">–</td></tr>
+                <tr><td class="center">3</td><td class="center">8</td><td>1m</td><td class="num">3</td><td class="num">16</td><td class="num">5,700</td><td class="num">400</td><td class="num">–</td><td class="num">–</td><td class="num">–</td></tr>
+                <tr><td class="center">4</td><td class="center">8</td><td>2m</td><td class="num">4</td><td class="num">19</td><td class="num">8,000</td><td class="num">900</td><td class="num">–</td><td class="num">180</td><td class="num">–</td></tr>
+                <tr><td class="center">5</td><td class="center">8</td><td>6m 40s</td><td class="num">5</td><td class="num">22</td><td class="num">11,500</td><td class="num">3.8k</td><td class="num">–</td><td class="num">760</td><td class="num">–</td></tr>
+                <tr><td class="center">6</td><td class="center">8</td><td>13m 20s</td><td class="num">6</td><td class="num">25</td><td class="num">15,000</td><td class="num">9.6k</td><td class="num">–</td><td class="num">1.9k</td><td class="num">480</td></tr>
+                <tr><td class="center">7</td><td class="center">8</td><td>25m</td><td class="num">7</td><td class="num">28</td><td class="num">19,000</td><td class="num">34k</td><td class="num">–</td><td class="num">6.9k</td><td class="num">1.7k</td></tr>
+                <tr><td class="center">8</td><td class="center">8</td><td>45m</td><td class="num">8</td><td class="num">31</td><td class="num">24,000</td><td class="num">63k</td><td class="num">–</td><td class="num">12k</td><td class="num">3.1k</td></tr>
+                <tr><td class="center">9</td><td class="center">9</td><td>2h</td><td class="num">9</td><td class="num">34</td><td class="num">29,500</td><td class="num">130k</td><td class="num">–</td><td class="num">26k</td><td class="num">6.5k</td></tr>
+                <tr><td class="center">10</td><td class="center">10</td><td>3h 57m 30s</td><td class="num">10</td><td class="num">37</td><td class="num">35,500</td><td class="num">230k</td><td class="num">–</td><td class="num">46k</td><td class="num">11k</td></tr>
+                <tr><td class="center">11</td><td class="center">11</td><td>4h 57m</td><td class="num">11</td><td class="num">40</td><td class="num">43,500</td><td class="num">260k</td><td class="num">260k</td><td class="num">52k</td><td class="num">13k</td></tr>
+                <tr><td class="center">12</td><td class="center">12</td><td>5h 56m</td><td class="num">12</td><td class="num">43</td><td class="num">52,000</td><td class="num">330k</td><td class="num">330k</td><td class="num">67k</td><td class="num">16k</td></tr>
+                <tr><td class="center">13</td><td class="center">13</td><td>7h 15m 30s</td><td class="num">13</td><td class="num">46</td><td class="num">62,000</td><td class="num">470k</td><td class="num">470k</td><td class="num">95k</td><td class="num">23k</td></tr>
+                <tr><td class="center">14</td><td class="center">14</td><td>9h 14m</td><td class="num">14</td><td class="num">49</td><td class="num">73,500</td><td class="num">630k</td><td class="num">630k</td><td class="num">120k</td><td class="num">31k</td></tr>
+                <tr><td class="center">15</td><td class="center">15</td><td>11h 52m 30s</td><td class="num">15</td><td class="num">52</td><td class="num">87,500</td><td class="num">930k</td><td class="num">930k</td><td class="num">180k</td><td class="num">46k</td></tr>
+                <tr><td class="center">16</td><td class="center">16</td><td>19h 43m 20s</td><td class="num">16</td><td class="num">55</td><td class="num">105,000</td><td class="num">1.1M</td><td class="num">1.1M</td><td class="num">230k</td><td class="num">59k</td></tr>
+                <tr><td class="center">17</td><td class="center">17</td><td>1d 8m</td><td class="num">17</td><td class="num">58</td><td class="num">120,000</td><td class="num">1.8M</td><td class="num">1.8M</td><td class="num">370k</td><td class="num">93k</td></tr>
+                <tr><td class="center">18</td><td class="center">18</td><td>1d 4h 58m</td><td class="num">18</td><td class="num">61</td><td class="num">140,000</td><td class="num">2.5M</td><td class="num">2.5M</td><td class="num">500k</td><td class="num">120k</td></tr>
+                <tr><td class="center">19</td><td class="center">19</td><td>1d 19h 27m</td><td class="num">19</td><td class="num">64</td><td class="num">165,000</td><td class="num">3.1M</td><td class="num">3.1M</td><td class="num">620k</td><td class="num">150k</td></tr>
+                <tr><td class="center">20</td><td class="center">20</td><td>2d 6h 19m</td><td class="num">20</td><td class="num">67</td><td class="num">195,000</td><td class="num">4.3M</td><td class="num">4.3M</td><td class="num">860k</td><td class="num">210k</td></tr>
+                <tr><td class="center">21</td><td class="center">21</td><td>2d 22h 36m</td><td class="num">21</td><td class="num">70</td><td class="num">225,000</td><td class="num">5.4M</td><td class="num">5.4M</td><td class="num">1M</td><td class="num">270k</td></tr>
+                <tr><td class="center">22</td><td class="center">22</td><td>4d 9h 55m</td><td class="num">22</td><td class="num">73</td><td class="num">260,000</td><td class="num">7.2M</td><td class="num">7.2M</td><td class="num">1.4M</td><td class="num">360k</td></tr>
+                <tr><td class="center">23</td><td class="center">23</td><td>6d 4h 17m</td><td class="num">23</td><td class="num">76</td><td class="num">305,000</td><td class="num">8.9M</td><td class="num">8.9M</td><td class="num">1.7M</td><td class="num">440k</td></tr>
+                <tr><td class="center">24</td><td class="center">24</td><td>8d 15h 36m</td><td class="num">24</td><td class="num">79</td><td class="num">350,000</td><td class="num">12M</td><td class="num">12M</td><td class="num">2.4M</td><td class="num">600k</td></tr>
+                <tr><td class="center">25</td><td class="center">25</td><td>12d 2h 38m</td><td class="num">25</td><td class="num">82</td><td class="num">400,000</td><td class="num">16M</td><td class="num">16M</td><td class="num">3.2M</td><td class="num">810k</td></tr>
+                <tr><td class="center">26</td><td class="center">26</td><td>13d 22h 14m</td><td class="num">26</td><td class="num">85</td><td class="num">470,000</td><td class="num">21M</td><td class="num">21M</td><td class="num">4.2M</td><td class="num">1M</td></tr>
+                <tr><td class="center">27</td><td class="center">27</td><td>16d 17h 5m</td><td class="num">27</td><td class="num">88</td><td class="num">550,000</td><td class="num">29M</td><td class="num">29M</td><td class="num">5.9M</td><td class="num">1.4M</td></tr>
+                <tr><td class="center">28</td><td class="center">28</td><td>19d 5h 15m</td><td class="num">28</td><td class="num">91</td><td class="num">630,000</td><td class="num">39M</td><td class="num">39M</td><td class="num">7.9M</td><td class="num">1.9M</td></tr>
+                <tr><td class="center">29</td><td class="center">29</td><td>22d 2h 26m</td><td class="num">29</td><td class="num">94</td><td class="num">725,000</td><td class="num">49M</td><td class="num">49M</td><td class="num">9.8M</td><td class="num">2.4M</td></tr>
+                <tr><td class="center">30</td><td class="center">30</td><td>26d 12h 32m</td><td class="num">30</td><td class="num">97</td><td class="num">840,000</td><td class="num">60M</td><td class="num">60M</td><td class="num">12M</td><td class="num">3M</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <span id="truegold" class="anchor"></span>
+        <div id="panel-tg" class="panel" role="tabpanel" aria-labelledby="tab-tg">
+          <div class="cards" id="tg-cards" aria-label="Embassy truegold (mobile cards)"></div>
+
+          <div class="table-wrap data-table" aria-label="Embassy Truegold levels table">
+            <table id="tg-table" class="sticky-firstcol">
+              <colgroup>
+                <col style="width:7%">
+                <col style="width:14%">
+                <col style="width:6%">
+                <col style="width:9%">
+                <col style="width:6%">
+                <col style="width:6%">
+                <col style="width:6%">
+                <col style="width:6%">
+                <col style="width:10%">
+                <col style="width:6%">
+                <col style="width:7%">
+                <col style="width:10%">
+                <col style="width:8%">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="center">階段</th>
+                  <th class="req-h">需求</th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/truegold.webp" alt="" aria-hidden="true" width="13" height="13">真金</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/tempered-truegold.webp" alt="" aria-hidden="true" width="13" height="13">淬鍊真金</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="13" height="13">木材</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="13" height="13">麵包</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="13" height="13">石材</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="13" height="13">鐵</span></th>
+                  <th>時間</th>
+                  <th class="num">次數</th>
+                  <th class="num">秒</th>
+                  <th class="num">增援</th>
+                  <th class="num"><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-power"></use></svg>戰力</span></th>
+                </tr>
+              </thead>
+              <tbody>
+  <tr><td class="center">30-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 1</a></td><td class="num">33</td><td class="num">–</td><td class="num">13M</td><td class="num">13M</td><td class="num">2.7M</td><td class="num">670k</td><td>4d 14h 52m</td><td class="num">30</td><td class="num">97</td><td class="num">845,000</td><td class="num">347,798</td></tr>
+  <tr><td class="center">30-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 1</a></td><td class="num">33</td><td class="num">–</td><td class="num">13M</td><td class="num">13M</td><td class="num">2.7M</td><td class="num">670k</td><td>4d 14h 52m</td><td class="num">30</td><td class="num">97</td><td class="num">850,000</td><td class="num">360,426</td></tr>
+  <tr><td class="center">30-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 1</a></td><td class="num">33</td><td class="num">–</td><td class="num">13M</td><td class="num">13M</td><td class="num">2.7M</td><td class="num">670k</td><td>4d 14h 52m</td><td class="num">30</td><td class="num">97</td><td class="num">855,000</td><td class="num">373,054</td></tr>
+  <tr><td class="center">30-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 1</a></td><td class="num">33</td><td class="num">–</td><td class="num">13M</td><td class="num">13M</td><td class="num">2.7M</td><td class="num">670k</td><td>4d 14h 52m</td><td class="num">30</td><td class="num">97</td><td class="num">860,000</td><td class="num">385,682</td></tr>
+
+  <tr><td class="center">TG 1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 1</a></td><td class="num">33</td><td class="num">–</td><td class="num">13M</td><td class="num">13M</td><td class="num">2.7M</td><td class="num">670k</td><td>4d 14h 52m</td><td class="num">30</td><td class="num">97</td><td class="num">865,000</td><td class="num">398,310</td></tr>
+
+  <tr><td class="center">TG 1-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 2</a></td><td class="num">39</td><td class="num">–</td><td class="num">14M</td><td class="num">14M</td><td class="num">2.9M</td><td class="num">720k</td><td>5d 22h 33m</td><td class="num">30</td><td class="num">97</td><td class="num">870,000</td><td class="num">410,938</td></tr>
+  <tr><td class="center">TG 1-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 2</a></td><td class="num">39</td><td class="num">–</td><td class="num">14M</td><td class="num">14M</td><td class="num">2.9M</td><td class="num">720k</td><td>5d 22h 33m</td><td class="num">30</td><td class="num">97</td><td class="num">875,000</td><td class="num">423,566</td></tr>
+  <tr><td class="center">TG 1-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 2</a></td><td class="num">39</td><td class="num">–</td><td class="num">14M</td><td class="num">14M</td><td class="num">2.9M</td><td class="num">720k</td><td>5d 22h 33m</td><td class="num">30</td><td class="num">97</td><td class="num">880,000</td><td class="num">436,194</td></tr>
+  <tr><td class="center">TG 1-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 2</a></td><td class="num">39</td><td class="num">–</td><td class="num">14M</td><td class="num">14M</td><td class="num">2.9M</td><td class="num">720k</td><td>5d 22h 33m</td><td class="num">30</td><td class="num">97</td><td class="num">885,000</td><td class="num">448,822</td></tr>
+
+  <tr><td class="center">TG 2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 2</a></td><td class="num">39</td><td class="num">–</td><td class="num">14M</td><td class="num">14M</td><td class="num">2.9M</td><td class="num">720k</td><td>5d 22h 33m</td><td class="num">30</td><td class="num">97</td><td class="num">890,000</td><td class="num">461,450</td></tr>
+
+  <tr><td class="center">TG 2-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 3</a></td><td class="num">59</td><td class="num">–</td><td class="num">15M</td><td class="num">15M</td><td class="num">3.1M</td><td class="num">790k</td><td>7d 6h 14m</td><td class="num">30</td><td class="num">97</td><td class="num">895,000</td><td class="num">474,087</td></tr>
+  <tr><td class="center">TG 2-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 3</a></td><td class="num">59</td><td class="num">–</td><td class="num">15M</td><td class="num">15M</td><td class="num">3.1M</td><td class="num">790k</td><td>7d 6h 14m</td><td class="num">30</td><td class="num">97</td><td class="num">900,000</td><td class="num">486,706</td></tr>
+  <tr><td class="center">TG 2-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 3</a></td><td class="num">59</td><td class="num">–</td><td class="num">15M</td><td class="num">15M</td><td class="num">3.1M</td><td class="num">790k</td><td>7d 6h 14m</td><td class="num">30</td><td class="num">97</td><td class="num">905,000</td><td class="num">499,334</td></tr>
+  <tr><td class="center">TG 2-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 3</a></td><td class="num">59</td><td class="num">–</td><td class="num">15M</td><td class="num">15M</td><td class="num">3.1M</td><td class="num">790k</td><td>7d 6h 14m</td><td class="num">30</td><td class="num">97</td><td class="num">910,000</td><td class="num">511,962</td></tr>
+
+  <tr><td class="center">TG 3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 3</a></td><td class="num">59</td><td class="num">–</td><td class="num">15M</td><td class="num">15M</td><td class="num">3.1M</td><td class="num">790k</td><td>7d 6h 14m</td><td class="num">30</td><td class="num">97</td><td class="num">915,000</td><td class="num">524,590</td></tr>
+
+  <tr><td class="center">TG 3-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 4</a></td><td class="num">70</td><td class="num">–</td><td class="num">16M</td><td class="num">16M</td><td class="num">3.2M</td><td class="num">820k</td><td>7d 22h 4m</td><td class="num">30</td><td class="num">97</td><td class="num">920,000</td><td class="num">538,494</td></tr>
+  <tr><td class="center">TG 3-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 4</a></td><td class="num">70</td><td class="num">–</td><td class="num">16M</td><td class="num">16M</td><td class="num">3.2M</td><td class="num">820k</td><td>7d 22h 4m</td><td class="num">30</td><td class="num">97</td><td class="num">925,000</td><td class="num">552,398</td></tr>
+  <tr><td class="center">TG 3-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 4</a></td><td class="num">70</td><td class="num">–</td><td class="num">16M</td><td class="num">16M</td><td class="num">3.2M</td><td class="num">820k</td><td>7d 22h 4m</td><td class="num">30</td><td class="num">97</td><td class="num">930,000</td><td class="num">566,302</td></tr>
+  <tr><td class="center">TG 3-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 4</a></td><td class="num">70</td><td class="num">–</td><td class="num">16M</td><td class="num">16M</td><td class="num">3.2M</td><td class="num">820k</td><td>7d 22h 4m</td><td class="num">30</td><td class="num">97</td><td class="num">935,000</td><td class="num">580,206</td></tr>
+
+  <tr><td class="center">TG 4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 4</a></td><td class="num">70</td><td class="num">–</td><td class="num">16M</td><td class="num">16M</td><td class="num">3.2M</td><td class="num">820k</td><td>7d 22h 4m</td><td class="num">30</td><td class="num">97</td><td class="num">940,000</td><td class="num">594,110</td></tr>
+
+  <tr><td class="center">TG 4-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 5</a></td><td class="num">83</td><td class="num">–</td><td class="num">16M</td><td class="num">16M</td><td class="num">3.3M</td><td class="num">840k</td><td>9d 5h 45m</td><td class="num">30</td><td class="num">97</td><td class="num">945,000</td><td class="num">608,014</td></tr>
+  <tr><td class="center">TG 4-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 5</a></td><td class="num">83</td><td class="num">–</td><td class="num">16M</td><td class="num">16M</td><td class="num">3.3M</td><td class="num">840k</td><td>9d 5h 45m</td><td class="num">30</td><td class="num">97</td><td class="num">950,000</td><td class="num">621,918</td></tr>
+  <tr><td class="center">TG 4-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 5</a></td><td class="num">83</td><td class="num">–</td><td class="num">16M</td><td class="num">16M</td><td class="num">3.3M</td><td class="num">840k</td><td>9d 5h 45m</td><td class="num">30</td><td class="num">97</td><td class="num">955,000</td><td class="num">635,822</td></tr>
+  <tr><td class="center">TG 4-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 5</a></td><td class="num">83</td><td class="num">–</td><td class="num">16M</td><td class="num">16M</td><td class="num">3.3M</td><td class="num">840k</td><td>9d 5h 45m</td><td class="num">30</td><td class="num">97</td><td class="num">960,000</td><td class="num">649,726</td></tr>
+
+  <tr><td class="center">TG 5</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 5</a></td><td class="num">83</td><td class="num">–</td><td class="num">16M</td><td class="num">16M</td><td class="num">3.3M</td><td class="num">840k</td><td>9d 5h 45m</td><td class="num">30</td><td class="num">97</td><td class="num">965,000</td><td class="num">663,630</td></tr>
+
+  <tr><td class="center">TG 5-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 6</a></td><td class="num">50</td><td class="num">2</td><td class="num">19M</td><td class="num">19M</td><td class="num">3.8M</td><td class="num">960k</td><td>9d 21h 36m</td><td class="num">30</td><td class="num">97</td><td class="num">970,000</td><td class="num">678,502</td></tr>
+  <tr><td class="center">TG 5-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 6</a></td><td class="num">50</td><td class="num">2</td><td class="num">19M</td><td class="num">19M</td><td class="num">3.8M</td><td class="num">960k</td><td>9d 21h 36m</td><td class="num">30</td><td class="num">97</td><td class="num">975,000</td><td class="num">693,374</td></tr>
+  <tr><td class="center">TG 5-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 6</a></td><td class="num">50</td><td class="num">2</td><td class="num">19M</td><td class="num">19M</td><td class="num">3.8M</td><td class="num">960k</td><td>9d 21h 36m</td><td class="num">30</td><td class="num">97</td><td class="num">980,000</td><td class="num">708,246</td></tr>
+  <tr><td class="center">TG 5-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 6</a></td><td class="num">50</td><td class="num">2</td><td class="num">19M</td><td class="num">19M</td><td class="num">3.8M</td><td class="num">960k</td><td>9d 21h 36m</td><td class="num">30</td><td class="num">97</td><td class="num">985,000</td><td class="num">723,118</td></tr>
+
+  <tr><td class="center">TG 6</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 6</a></td><td class="num">25</td><td class="num">5</td><td class="num">19M</td><td class="num">19M</td><td class="num">3.8M</td><td class="num">960k</td><td>9d 21h 36m</td><td class="num">30</td><td class="num">97</td><td class="num">990,000</td><td class="num">737,990</td></tr>
+
+  <tr><td class="center">TG 6-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 7</a></td><td class="num">60</td><td class="num">3</td><td class="num">21M</td><td class="num">21M</td><td class="num">4.3M</td><td class="num">1M</td><td>11d 21h 7m</td><td class="num">30</td><td class="num">97</td><td class="num">995,000</td><td class="num">752,862</td></tr>
+  <tr><td class="center">TG 6-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 7</a></td><td class="num">60</td><td class="num">3</td><td class="num">21M</td><td class="num">21M</td><td class="num">4.3M</td><td class="num">1M</td><td>11d 21h 7m</td><td class="num">30</td><td class="num">97</td><td class="num">1,000,000</td><td class="num">767,734</td></tr>
+  <tr><td class="center">TG 6-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 7</a></td><td class="num">60</td><td class="num">3</td><td class="num">21M</td><td class="num">21M</td><td class="num">4.3M</td><td class="num">1M</td><td>11d 21h 7m</td><td class="num">30</td><td class="num">97</td><td class="num">1,005,000</td><td class="num">782,606</td></tr>
+  <tr><td class="center">TG 6-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 7</a></td><td class="num">60</td><td class="num">3</td><td class="num">21M</td><td class="num">21M</td><td class="num">4.3M</td><td class="num">1M</td><td>11d 21h 7m</td><td class="num">30</td><td class="num">97</td><td class="num">1,010,000</td><td class="num">797,478</td></tr>
+
+  <tr><td class="center">TG 7</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 7</a></td><td class="num">30</td><td class="num">7</td><td class="num">21M</td><td class="num">21M</td><td class="num">4.3M</td><td class="num">1M</td><td>11d 21h 7m</td><td class="num">30</td><td class="num">97</td><td class="num">1,015,000</td><td class="num">812,350</td></tr>
+
+  <tr><td class="center">TG 7-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 8</a></td><td class="num">60</td><td class="num">5</td><td class="num">26M</td><td class="num">26M</td><td class="num">5.3M</td><td class="num">1.3M</td><td>13d 4h 48m</td><td class="num">30</td><td class="num">97</td><td class="num">1,020,000</td><td class="num">827,222</td></tr>
+  <tr><td class="center">TG 7-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 8</a></td><td class="num">60</td><td class="num">5</td><td class="num">26M</td><td class="num">26M</td><td class="num">5.3M</td><td class="num">1.3M</td><td>13d 4h 48m</td><td class="num">30</td><td class="num">97</td><td class="num">1,025,000</td><td class="num">842,094</td></tr>
+  <tr><td class="center">TG 7-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 8</a></td><td class="num">60</td><td class="num">5</td><td class="num">26M</td><td class="num">26M</td><td class="num">5.3M</td><td class="num">1.3M</td><td>13d 4h 48m</td><td class="num">30</td><td class="num">97</td><td class="num">1,030,000</td><td class="num">856,966</td></tr>
+  <tr><td class="center">TG 7-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 8</a></td><td class="num">60</td><td class="num">5</td><td class="num">26M</td><td class="num">26M</td><td class="num">5.3M</td><td class="num">1.3M</td><td>13d 4h 48m</td><td class="num">30</td><td class="num">97</td><td class="num">1,035,000</td><td class="num">871,838</td></tr>
+
+  <tr><td class="center">TG 8</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 8</a></td><td class="num">30</td><td class="num">10</td><td class="num">26M</td><td class="num">26M</td><td class="num">5.3M</td><td class="num">1.3M</td><td>13d 4h 48m</td><td class="num">30</td><td class="num">97</td><td class="num">1,040,000</td><td class="num">–</td></tr>
+
+  <tr><td class="center">TG 8-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 9</a></td><td class="num">70</td><td class="num">7</td><td class="num">29M</td><td class="num">29M</td><td class="num">5.8M</td><td class="num">1.4M</td><td>8d 13h 55m</td><td class="num">30</td><td class="num">97</td><td class="num">1,045,000</td><td class="num">902,638</td></tr>
+  <tr><td class="center">TG 8-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 9</a></td><td class="num">70</td><td class="num">7</td><td class="num">29M</td><td class="num">29M</td><td class="num">5.8M</td><td class="num">1.4M</td><td>8d 13h 55m</td><td class="num">30</td><td class="num">97</td><td class="num">1,050,000</td><td class="num">918,566</td></tr>
+  <tr><td class="center">TG 8-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 9</a></td><td class="num">70</td><td class="num">7</td><td class="num">29M</td><td class="num">29M</td><td class="num">5.8M</td><td class="num">1.4M</td><td>8d 13h 55m</td><td class="num">30</td><td class="num">97</td><td class="num">1,055,000</td><td class="num">934,494</td></tr>
+  <tr><td class="center">TG 8-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 9</a></td><td class="num">70</td><td class="num">7</td><td class="num">29M</td><td class="num">29M</td><td class="num">5.8M</td><td class="num">1.4M</td><td>8d 13h 55m</td><td class="num">30</td><td class="num">97</td><td class="num">1,060,000</td><td class="num">950,422</td></tr>
+
+  <tr><td class="center">TG 9</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 9</a></td><td class="num">35</td><td class="num">15</td><td class="num">29M</td><td class="num">29M</td><td class="num">5.8M</td><td class="num">1.4M</td><td>8d 13h 55m</td><td class="num">30</td><td class="num">97</td><td class="num">1,065,000</td><td class="num">966,350</td></tr>
+
+  <tr><td class="center">TG 9-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td><td class="num">87</td><td class="num">17</td><td class="num">33M</td><td class="num">33M</td><td class="num">6.7M</td><td class="num">1.6M</td><td>13d 4h 48m</td><td class="num">30</td><td class="num">97</td><td class="num">1,070,000</td><td class="num">982,278</td></tr>
+  <tr><td class="center">TG 9-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td><td class="num">87</td><td class="num">17</td><td class="num">33M</td><td class="num">33M</td><td class="num">6.7M</td><td class="num">1.6M</td><td>13d 4h 48m</td><td class="num">30</td><td class="num">97</td><td class="num">1,075,000</td><td class="num">998,206</td></tr>
+  <tr><td class="center">TG 9-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td><td class="num">87</td><td class="num">17</td><td class="num">33M</td><td class="num">33M</td><td class="num">6.7M</td><td class="num">1.6M</td><td>13d 4h 48m</td><td class="num">30</td><td class="num">97</td><td class="num">1,080,000</td><td class="num">1,014,134</td></tr>
+  <tr><td class="center">TG 9-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td><td class="num">87</td><td class="num">17</td><td class="num">33M</td><td class="num">33M</td><td class="num">6.7M</td><td class="num">1.6M</td><td>13d 4h 48m</td><td class="num">30</td><td class="num">97</td><td class="num">1,085,000</td><td class="num">1,030,062</td></tr>
+
+  <tr><td class="center">TG 10</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td><td class="num">43</td><td class="num">35</td><td class="num">33M</td><td class="num">33M</td><td class="num">6.7M</td><td class="num">1.6M</td><td>13d 4h 48m</td><td class="num">30</td><td class="num">97</td><td class="num">1,090,000</td><td class="num">1,045,990</td></tr>
+</tbody>
+
+      <section id="related">
+        <h2>相關建築</h2>
+        <div class="related">
+          <a class="pill" href="/zh-tw/buildings/town-center.html">城市中心</a>
+          <a class="pill" href="/zh-tw/buildings/academy.html">學院</a>
+          <a class="pill" href="/zh-tw/buildings/truegold-crucible.html">真金坩堝</a>
+          <a class="pill" href="/zh-tw/buildings/war-academy.html">戰爭學院</a>
+          <a class="pill" href="/zh-tw/buildings/infirmary.html">野戰醫院</a>
+          <a class="pill" href="/zh-tw/buildings/barracks.html">步兵營</a>
+          <a class="pill" href="/zh-tw/buildings/range.html">射擊場</a>
+          <a class="pill" href="/zh-tw/buildings/stable.html">馬廄</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function isDash(v){
+        if(!v) return true;
+        var t = String(v).trim();
+        return t === '–' || t === '-' || t === '';
+      }
+
+      var ICON = {
+        wood: '/img/wood.webp',
+        bread: '/img/bread.webp',
+        stone: '/img/stone.webp',
+        iron: '/img/iron.webp',
+        truegold: '/img/truegold.webp',
+        tempered: '/img/tempered-truegold.webp'
+      };
+
+      function imgIcon(src){
+        return '<img class="icoimg" src="'+src+'" alt="" aria-hidden="true" width="18" height="18" loading="lazy" decoding="async">';
+      }
+
+      function makeResItem(src, label, value){
+        return (
+          '<div class="res-item">' +
+            '<div class="res-left">' +
+              imgIcon(src) +
+              '<div class="res-label">'+ label +'</div>' +
+            '</div>' +
+            '<div class="res-val">'+ value +'</div>' +
+          '</div>'
+        );
+      }
+
+      function svgUse(id){
+        return '<svg aria-hidden="true" viewBox="0 0 24 24"><use href="#'+id+'"></use></svg>';
+      }
+
+      function buildTimelineCards(){
+        var table = document.getElementById('timeline-table');
+        var target = document.getElementById('timeline-cards');
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || tds.length < 3) return;
+
+          var milestone = tds[0].innerHTML.trim();
+          var age = tds[1].textContent.trim();
+          var meaning = tds[2].innerHTML.trim();
+
+          html += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">' + milestone + '</h3>' +
+                '<div class="card-meta">' + (isDash(age) ? '' : ('伺服器天數<br><strong>'+ age +'</strong>')) + '</div>' +
+              '</div>' +
+              '<div class="card-req" style="margin:0"><strong>說明:</strong> ' + meaning + '</div>' +
+            '</article>'
+          );
+          count++;
+        });
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      function buildCardsFromTable(tableId, targetId, mode){
+        var table = document.getElementById(tableId);
+        var target = document.getElementById(targetId);
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var cells = tr.querySelectorAll('td');
+          if(!cells || !cells.length) return;
+
+          if(mode === 'normal'){
+            var lv = cells[0].textContent.trim();
+            var tc = cells[1].textContent.trim();
+            var time = cells[2].textContent.trim();
+            var assists = cells[3].textContent.trim();
+            var help = cells[4].textContent.trim();
+            var cap = cells[5].textContent.trim();
+            var wood = cells[6].textContent.trim();
+            var bread = cells[7].textContent.trim();
+            var stone = cells[8].textContent.trim();
+            var iron = cells[9].textContent.trim();
+
+            var res = '';
+            if(!isDash(wood))  res += makeResItem(ICON.wood, '木材', wood);
+            if(!isDash(bread)) res += makeResItem(ICON.bread,'麵包', bread);
+            if(!isDash(stone)) res += makeResItem(ICON.stone,'石材', stone);
+            if(!isDash(iron))  res += makeResItem(ICON.iron,'鐵', iron);
+
+            var foot = '';
+            if(!isDash(time))    foot += '<span class="badge">'+ svgUse('ico-time') + '<span>時間: '+ time +'</span></span>';
+            if(!isDash(assists)) foot += '<span class="badge"><span>次數: '+ assists +'</span></span>';
+            if(!isDash(help))    foot += '<span class="badge"><span>縮短(秒): '+ help +'</span></span>';
+            if(!isDash(cap))     foot += '<span class="badge"><span>增援容量: '+ cap +'</span></span>';
+            if(!isDash(tc))      foot += '<span class="badge"><span>城市中心: '+ tc +'</span></span>';
+
+            html += (
+              '<article class="card">' +
+                '<div class="card-head">' +
+                  '<h3 class="card-title">Lv ' + lv + '</h3>' +
+                  '<div class="card-meta">' + (isDash(time) ? '' : ('時間<br><strong>'+ time +'</strong>')) + '</div>' +
+                '</div>' +
+                (res ? ('<div class="res-grid" aria-label="Resources">'+ res +'</div>') : '') +
+                (foot ? ('<div class="card-foot">'+ foot +'</div>') : '') +
+              '</article>'
+            );
+
+            count++;
+          }
+
+          if(mode === 'tg'){
+            var lvl = cells[0].textContent.trim();
+            var reqHTML = cells[1].innerHTML.trim();
+            var tg = cells[2].textContent.trim();
+            var tempered = cells[3].textContent.trim();
+            var wood2 = cells[4].textContent.trim();
+            var bread2 = cells[5].textContent.trim();
+            var stone2 = cells[6].textContent.trim();
+            var iron2 = cells[7].textContent.trim();
+            var time2 = cells[8].textContent.trim();
+            var assists2 = cells[9].textContent.trim();
+            var help2 = cells[10].textContent.trim();
+            var cap2 = cells[11].textContent.trim();
+            var power2 = cells[12].textContent.trim();
+
+            var res2 = '';
+            if(!isDash(tg))       res2 += makeResItem(ICON.truegold,'真金', tg);
+            if(!isDash(tempered)) res2 += makeResItem(ICON.tempered,'淬鍊真金', tempered);
+            if(!isDash(wood2))    res2 += makeResItem(ICON.wood,'木材', wood2);
+            if(!isDash(bread2))   res2 += makeResItem(ICON.bread,'麵包', bread2);
+            if(!isDash(stone2))   res2 += makeResItem(ICON.stone,'石材', stone2);
+            if(!isDash(iron2))    res2 += makeResItem(ICON.iron,'鐵', iron2);
+
+            var foot2 = '';
+            if(!isDash(time2))    foot2 += '<span class="badge">'+ svgUse('ico-time') + '<span>時間: '+ time2 +'</span></span>';
+            if(!isDash(assists2)) foot2 += '<span class="badge"><span>次數: '+ assists2 +'</span></span>';
+            if(!isDash(help2))    foot2 += '<span class="badge"><span>秒: '+ help2 +'</span></span>';
+            if(!isDash(cap2))     foot2 += '<span class="badge"><span>增援: '+ cap2 +'</span></span>';
+            if(!isDash(power2))   foot2 += '<span class="badge">'+ svgUse('ico-power') + '<span>戰力: '+ power2 +'</span></span>';
+
+            html += (
+              '<article class="card">' +
+                '<div class="card-head">' +
+                  '<h3 class="card-title">' + lvl + '</h3>' +
+                  '<div class="card-meta">' + (isDash(time2) ? '' : ('時間<br><strong>'+ time2 +'</strong>')) + '</div>' +
+                '</div>' +
+                '<div class="card-req"><strong>需求:</strong> ' + reqHTML + '</div>' +
+                (res2 ? ('<div class="res-grid" aria-label="Resources">'+ res2 +'</div>') : '') +
+                (foot2 ? ('<div class="card-foot">'+ foot2 +'</div>') : '') +
+              '</article>'
+            );
+
+            count++;
+          }
+        });
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      var tabNormal, tabTG, panelNormal, panelTG;
+
+      function setActive(which, updateHash){
+        if(!tabNormal) return;
+
+        var isNormal = which === 'normal';
+
+        tabNormal.setAttribute('aria-selected', isNormal ? 'true' : 'false');
+        tabTG.setAttribute('aria-selected', isNormal ? 'false' : 'true');
+
+        panelNormal.classList.toggle('is-active', isNormal);
+        panelTG.classList.toggle('is-active', !isNormal);
+
+        if(updateHash){
+          var id = isNormal ? 'requirements' : 'truegold';
+          if(history && history.replaceState){
+            history.replaceState(null, '', '#'+id);
+          }else{
+            location.hash = '#'+id;
+          }
+        }
+      }
+
+      function initTabs(){
+        tabNormal = document.getElementById('tab-normal');
+        tabTG = document.getElementById('tab-tg');
+        panelNormal = document.getElementById('panel-normal');
+        panelTG = document.getElementById('panel-tg');
+
+        if(!tabNormal || !tabTG || !panelNormal || !panelTG) return;
+
+        tabNormal.addEventListener('click', function(){
+          setActive('normal', true);
+          var el = document.getElementById('requirements');
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+
+        tabTG.addEventListener('click', function(){
+          setActive('tg', true);
+          var el = document.getElementById('truegold');
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+
+        var aReq = document.querySelector('a[href="#requirements"]');
+        var aTG = document.querySelector('a[href="#truegold"]');
+        if(aReq){
+          aReq.addEventListener('click', function(e){
+            if(document.documentElement.classList.contains('js')){
+              e.preventDefault();
+              setActive('normal', true);
+              var el = document.getElementById('requirements');
+              if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+            }
+          });
+        }
+        if(aTG){
+          aTG.addEventListener('click', function(e){
+            if(document.documentElement.classList.contains('js')){
+              e.preventDefault();
+              setActive('tg', true);
+              var el = document.getElementById('truegold');
+              if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+            }
+          });
+        }
+
+        var h = (location.hash || '').toLowerCase();
+        if(h === '#truegold'){ setActive('tg', false); }
+        else { setActive('normal', false); }
+      }
+
+      function decorateTableNumbers(tableId, map){
+        var table = document.getElementById(tableId);
+        if(!table) return;
+
+        var rows = table.querySelectorAll('tbody tr');
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || !tds.length) return;
+
+          Object.keys(map).forEach(function(key){
+            var idx = parseInt(key, 10);
+            var iconSrc = map[key];
+            if(!tds[idx]) return;
+
+            var raw = tds[idx].textContent.trim();
+            if(isDash(raw)) return;
+
+            tds[idx].innerHTML =
+              '<span class="cell-num">' +
+                '<img class="td-ico" src="'+ iconSrc +'" alt="" aria-hidden="true" width="13" height="13" loading="lazy" decoding="async">' +
+                '<span>'+ raw +'</span>' +
+              '</span>';
+          });
+        });
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+
+        var c0 = buildTimelineCards();
+        var c1 = buildCardsFromTable('req-table', 'req-cards', 'normal');
+        var c2 = buildCardsFromTable('tg-table', 'tg-cards', 'tg');
+
+        if((c0 + c1 + c2) > 0){
+          document.documentElement.classList.add('enhanced');
+        }
+
+        initTabs();
+
+        decorateTableNumbers('req-table', {
+          6: ICON.wood,
+          7: ICON.bread,
+          8: ICON.stone,
+          9: ICON.iron
+        });
+
+        decorateTableNumbers('tg-table', {
+          2: ICON.truegold,
+          3: ICON.tempered,
+          4: ICON.wood,
+          5: ICON.bread,
+          6: ICON.stone,
+          7: ICON.iron
+        });
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

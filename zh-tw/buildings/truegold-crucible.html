@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>順金熔爐（精煉機率・成本・次數） | Kingshot</title>
+  <meta name="description" content="Kingshot 順金熔爐指南：解鎖時機、精煉機率、每日限制、精煉成本。將麵包/木材/石材/鐵礦轉換為順金。" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/buildings/truegold-crucible.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings/truegold-crucible.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/buildings/truegold-crucible.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/buildings/truegold-crucible.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/buildings/truegold-crucible.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="preload" as="image" href="/img/buildings/truegold-crucible.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;--panel:#ffffff;--border:#e5e7eb;--text:#111827;--muted:#6b7280;--brand:#2563eb;
+      --radius:16px;--shadow:0 10px 24px rgba(0,0,0,.06);
+      --header-h:0px;--tabs-h:0px;--sticky-top:0px;
+      --tbl-font:13px;--tbl-pad-y:9px;--tbl-pad-x:10px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC",Arial;color:var(--text);background:var(--bg)}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0 12px;border-bottom:1px solid var(--border);background:var(--bg)}
+    .brand a{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:900;letter-spacing:.1px}
+    .brand img{display:block;width:28px;height:28px;border-radius:8px}
+    nav.lang{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+    nav.lang a{color:var(--muted);padding:8px 10px;border:1px solid var(--border);border-radius:999px;background:#fff;text-decoration:none}
+    nav.lang a[aria-current="page"]{color:var(--text);font-weight:800}
+
+    nav.section-tabs{display:none;gap:8px;padding:6px 0;margin:0;overflow:auto;-webkit-overflow-scrolling:touch;background:var(--bg);border-bottom:1px solid var(--border)}
+    nav.section-tabs a{display:inline-flex;align-items:center;white-space:nowrap;padding:8px 10px;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--muted);font-size:13px;text-decoration:none}
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{display:grid;grid-template-columns:160px 1fr;gap:18px;padding:18px;background:var(--panel);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
+    .hero img{width:160px;height:160px;object-fit:contain;border-radius:14px;background:#f8fafc;border:1px solid var(--border);padding:10px}
+    h1{margin:0 0 6px;font-size:28px;line-height:1.15}
+    .sub{margin:0;color:var(--muted)}
+    .muted{color:var(--muted)}
+    .jump{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+    .jump a{color:var(--muted)} .jump a:hover{color:var(--text)} .dotsep{opacity:.5}
+
+    section{margin-top:22px;background:var(--panel);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+    section h2{margin:0 0 10px;font-size:20px}
+    section p{margin:8px 0}
+
+    .note{display:flex;gap:10px;padding:12px 14px;border:1px solid rgba(245,158,11,.35);background:rgba(245,158,11,.08);border-radius:14px;margin:10px 0 14px}
+    .note strong{font-weight:900}
+    .note .note-ico{width:18px;height:18px;flex:0 0 18px;margin-top:2px;color:#b45309}
+
+    .table-wrap{border:1px solid var(--border);border-radius:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff}
+    table{width:100%;border-collapse:separate;border-spacing:0;background:#fff}
+    thead th{position:sticky;top:var(--sticky-top);background:#f8fafc;text-align:left;padding:var(--tbl-pad-y) var(--tbl-pad-x);border-bottom:1px solid var(--border);font-size:calc(var(--tbl-font) - 1px);white-space:nowrap;z-index:3}
+    tbody td{padding:var(--tbl-pad-y) var(--tbl-pad-x);border-bottom:1px solid var(--border);vertical-align:top;font-size:var(--tbl-font);white-space:nowrap}
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+
+    .num{text-align:right;font-variant-numeric:tabular-nums}
+    ul.clean{margin:0;padding-left:18px}
+    ul.clean li{margin:6px 0}
+
+    .cards{display:none}
+    .cards .card{border:1px solid var(--border);border-radius:16px;background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.04);padding:12px 12px}
+    .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
+    .card-title{font-size:15px;font-weight:900;line-height:1.2;margin:0}
+    .card-meta{text-align:right;color:var(--muted);font-size:12px;line-height:1.25;white-space:nowrap}
+    .card-body{margin:8px 0 0;color:var(--text);font-size:13px;white-space:normal}
+
+    @media (min-width:901px){
+      :root{--tbl-font:12px;--tbl-pad-y:7px;--tbl-pad-x:8px}
+      table{table-layout:fixed}
+      .table-wrap{overflow-x:clip}
+      @supports not (overflow:clip){.table-wrap{overflow-x:hidden}}
+    }
+    @media (max-width:900px){
+      header.top{position:sticky;top:0;z-index:40}
+      nav.section-tabs{display:flex;position:sticky;top:var(--header-h);z-index:35}
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+      .enhanced .data-table{display:none}
+      .enhanced .cards{display:grid;gap:12px}
+    }
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+    }
+  </style>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/buildings/truegold-crucible.html">EN</a>
+        <a href="/ko/buildings/truegold-crucible.html">KO</a>
+        <a href="/ja/buildings/truegold-crucible.html">JA</a>
+        <a href="/zh-tw/buildings/truegold-crucible.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概覽</a>
+      <a href="#chances">機率</a>
+      <a href="#limits">限制・成本</a>
+      <a href="#other">其他</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/buildings/">建築</a> <span class="muted">›</span>
+        <span>順金熔爐</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/buildings/truegold-crucible.webp" alt="順金熔爐 (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>順金熔爐</h1>
+          <p class="sub">
+            順金熔爐是在王國達到 <strong>順金（TG）Lv.5</strong> 時解鎖的特殊建築。
+            多數伺服器通常在王國年齡約 <strong>150 天前後</strong> 出現（依伺服器而異）。
+          </p>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">概覽</a><span class="dotsep">•</span>
+            <a href="#chances">精煉機率</a><span class="dotsep">•</span>
+            <a href="#limits">限制・成本</a><span class="dotsep">•</span>
+            <a href="#other">其他</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>概覽</h2>
+        <p>
+          此建築可透過 <strong>精煉（Refinement）</strong>，將一般資源（<strong>麵包、木材、石材、鐵礦</strong> — 4 種同時）
+          轉換成少量的 <strong>順金（Truegold）</strong>。
+        </p>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>注意:</strong>
+            解鎖時間與每日精煉次數可能因伺服器進度與更新而有所不同。
+          </div>
+        </div>
+      </section>
+
+      <section id="chances">
+        <h2>順金精煉機率</h2>
+        <p class="muted" style="margin-top:-2px">每次精煉會依下列機率隨機獲得 Truegold。</p>
+
+        <div class="table-wrap data-table" aria-label="Refinement chances table">
+          <table id="chance-table">
+            <colgroup><col style="width:60%"><col style="width:40%"></colgroup>
+            <thead>
+              <tr><th>結果</th><th class="num">機率</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Truegold 1</td><td class="num">40%</td></tr>
+              <tr><td>Truegold 2</td><td class="num">30%</td></tr>
+              <tr><td>Truegold 3</td><td class="num">15%</td></tr>
+              <tr><td>Truegold 4</td><td class="num">10%</td></tr>
+              <tr><td>Truegold 5</td><td class="num">5%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cards" id="chance-cards" aria-label="Refinement chances cards"></div>
+
+        <p class="muted" style="margin-top:10px">
+          平均而言，你每天大約可從順金熔爐獲得 <strong>10.5 Truegold</strong>。
+        </p>
+      </section>
+
+      <section id="limits">
+        <h2>精煉限制・成本</h2>
+        <p>
+          在順金初期（TG Lv.5 時期）每天可精煉 <strong>5 次</strong>。
+          隨王國年齡增加，每日精煉次數也會提高。
+        </p>
+        <p class="muted">每次精煉的成本會逐次增加（每次麵包/木材/石材/鐵礦相同數量）:</p>
+
+        <div class="table-wrap data-table" aria-label="Refinement costs table">
+          <table id="cost-table">
+            <colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+            <thead>
+              <tr><th>精煉</th><th>成本（麵包 / 木材 / 石材 / 鐵礦）</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>第 1 次</strong></td><td>各 5,000</td></tr>
+              <tr><td><strong>第 2 次</strong></td><td>各 10,000</td></tr>
+              <tr><td><strong>第 3 次</strong></td><td>各 20,000</td></tr>
+              <tr><td><strong>第 4 次</strong></td><td>各 30,000</td></tr>
+              <tr><td><strong>第 5 次</strong></td><td>各 40,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cards" id="cost-cards" aria-label="Refinement costs cards"></div>
+
+        <p class="muted" style="margin-top:10px">
+          5 次精煉總成本：每種資源各 <strong>105,000</strong>。
+        </p>
+      </section>
+
+      <section id="other">
+        <h2>其他資訊</h2>
+        <ul class="clean">
+          <li>順金熔爐 <strong>免費建造</strong>（不需任何資源）。</li>
+          <li>王國達到 <strong>TG Lv.5</strong> 後可 <strong>立即建造</strong>。</li>
+          <li>此建築 <strong>沒有等級升級</strong>。</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function buildSimpleCards(tableId, targetId, mode){
+        var table = document.getElementById(tableId);
+        var target = document.getElementById(targetId);
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || tds.length < 2) return;
+
+          var left = tds[0].textContent.trim();
+          var right = tds[1].textContent.trim();
+
+          if(mode === 'chance'){
+            html += (
+              '<article class="card">' +
+                '<div class="card-head">' +
+                  '<h3 class="card-title">'+ left +'</h3>' +
+                  '<div class="card-meta"><strong>'+ right +'</strong></div>' +
+                '</div>' +
+              '</article>'
+            );
+          }else{
+            html += (
+              '<article class="card">' +
+                '<div class="card-head">' +
+                  '<h3 class="card-title">'+ left +'</h3>' +
+                '</div>' +
+                '<div class="card-body"><strong>成本:</strong> '+ right +'</div>' +
+              '</article>'
+            );
+          }
+
+          count++;
+        });
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      function init(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+        window.addEventListener('resize', setStickyTop);
+
+        var c1 = buildSimpleCards('chance-table', 'chance-cards', 'chance');
+        var c2 = buildSimpleCards('cost-table', 'cost-cards', 'cost');
+
+        if((c1 + c2) > 0){
+          document.documentElement.classList.add('enhanced');
+        }
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,21 +1,19 @@
 // /public/js/app.js — SPA Router (History API) for KingshotData.kr
-// v2025-09-17+opt (bundle-aware: routes.js / routes.calculators.js)
+// v2026-03-01 (bundle-aware: routes.js(core/light) / routes.calculators.js)
 // ES5-compatible (no arrow functions / optional chaining)
 //
-// 변경 요약
-// - 진입 경로가 /calc-* 또는 /calculator 이면 routes.calculators.js 로드 → window.buildCalculatorRoutes()
-// - 그 외 경로는 routes.js 로드 → window.buildRoutes()
-// - 최초 진입: selectAndBuildRoutesFor → startRouter → dispatch 순서
-// - 내비게이션 중 일반 ↔ 계산기 경계 진입 시 번들 자동 핫스왑
-// - calculators 라우트일 때만 calculator.css 로드 (아닐 때 제거)
-// - 외부/특수 링크는 가로채지 않음
-// - 라우트 프록시 테이블(proxyRoutes) 도입: 실 라우트 준비 전에도 /calc-*·/calculator 접속 안정화
-// - 라우트 렌더 이후 document.body 전체 i18n 강제 재적용 (글로벌 UI 누락 방지)
-// - popstate 보정: 마지막 계산기 경로 복구(lastCalcPath)
-// - ★ 계산기 경로 진입 시, route.render 완료 후 then에서 window.KSD.buildingUI.reset() 호출(실패 시 console.warn)
-//
-// [FIX v2026-02-21]
-// - ✅ /pages/guides/ 정적 가이드는 라우터가 가로채지 않도록 예외 처리 (클릭 시 홈으로 튕김 방지)
+// 동작 요약
+// - /calc-* 또는 /calculator → /public/js/routes.calculators.js 로드 → window.buildCalculatorRoutes()
+// - 그 외 경로 → /js/routes.js 로드 → window.buildRoutes()   ✅ (core/light)
+// - Buildings Static Detail 연결:
+//   /buildings/:slug              → routes['/building-static']
+//   /building/:slug               → routes['/building-static'] (레거시/실수 방지)
+//   /en|ko|ja|zh-tw/buildings/:slug → routes['/building-static'] (forced lang)
+//   /en|ko|ja|zh-tw/building/:slug  → routes['/building-static'] (forced lang)
+// - CN(zh-CN) 완전 제외: i18n 정규화에서 zh-CN은 en으로 폴백
+// - i18n 언어 변경 시(building detail) 정적 HTML 다시 로드
+// - TW 폴더명은 zh-tw 이므로, i18n 언어코드 zh-TW를 경로용 zh-tw로 정규화
+// - 빌딩 상세가 아닐 때 building scoped style(id=bld-scoped-style) 제거(전역 오염 방지)
 
 (function () {
   'use strict';
@@ -43,11 +41,10 @@
 
   // ===== CSS 경로 =====
   var CALC_CSS_HREF = '/css/calculator.css';
-  // var COMPONENTS_CSS_HREF = '/css/components.css';  // 선언은 주석 처리 (호출도 같이 제거)
 
   // ===== bootstrap =====
   document.addEventListener('DOMContentLoaded', function () {
-    ensureCSS('calculator-css', CALC_CSS_HREF)   // ✅ calculator.css만 로드
+    ensureCSS('calculator-css', CALC_CSS_HREF)
       .then(function(){ return ensureI18N(); })
       .then(function(){
         var canon = canonicalize(location.href);
@@ -72,7 +69,7 @@
     });
   }
 
-  // ===== dynamic <script> loader (in-flight 병합, async 명시) =====
+  // ===== dynamic <script> loader =====
   var inFlightScripts = new Map(); // key: normalized path, val: Promise
 
   function normalizeScriptKey(src) {
@@ -113,7 +110,7 @@
     });
   }
 
-  // ===== dynamic CSS (Promise로 onload 대기, FOUC 방지) =====
+  // ===== dynamic CSS =====
   function ensureCSS(id, href) {
     return new Promise(function (resolve) {
       var had = document.getElementById(id);
@@ -134,7 +131,7 @@
     if (node && node.parentNode) node.parentNode.removeChild(node);
   }
 
-  // ===== HTML fetch (메모리 LRU 캐시 + 버전 키) =====
+  // ===== HTML fetch (LRU) =====
   var HTML_CACHE_MAX = 24;
   var htmlCache = new Map(); // key: path+'|v='+ASSET_VER, val: string
   function setHtmlCache(key, val) {
@@ -277,9 +274,15 @@
     if (raw.indexOf('en') === 0) return 'en';
     if (raw.indexOf('ja') === 0) return 'ja';
     if (raw.indexOf('zh') === 0) {
-      return (/-((tw|hk|mo))/.test(raw) ? 'zh-TW' : 'zh-CN');
+      return (/-((tw|hk|mo))/.test(raw) ? 'zh-TW' : 'en'); // ✅ CN 제외
     }
     return 'en';
+  }
+
+  function normalizeLangFolder(code) {
+    if (!code) return code;
+    if (code === 'zh-TW') return 'zh-tw';
+    return code;
   }
 
   function ensureI18N() {
@@ -299,7 +302,6 @@
     }
   }
 
-  // 계산기 루트 내부(#calc-ui, #gear-calc, #charm-calc, #training-calc)는 건드리지 않는 i18n 부분 적용
   function applyI18NOutsideCalc(root) {
     if (!root) return;
     if (!window.I18N || !window.I18N.t) return;
@@ -319,8 +321,7 @@
     for (var j=0;j<attrTargets.length;j++){
       var n = attrTargets[j];
       if (n.closest && n.closest(SKIP_SEL)) continue;
-      var pairs = (n.getAttribute('data-i18n-attr') || '')
-        .split(';');
+      var pairs = (n.getAttribute('data-i18n-attr') || '').split(';');
       for (var k=0;k<pairs.length;k++){
         var pair = (pairs[k] || '').trim(); if (!pair) continue;
         var sp = pair.split(':');
@@ -349,7 +350,6 @@
     }
   }
 
-  // localI18nApply 우선 호출(계산기 번들에 존재 시), 미존재 시 부분 적용으로 폴백
   function applyCalcI18NIfAvailable(root) {
     try {
       if (typeof window.localI18nApply === 'function') {
@@ -360,7 +360,6 @@
     return false;
   }
 
-  // ===== active nav =====
   function setActiveByPath(currentPath) {
     try {
       var firstSeg = '/' + (currentPath.split('/').filter(Boolean)[0] || 'home');
@@ -374,7 +373,6 @@
     } catch(_){}
   }
 
-  // ===== normalize path =====
   function normalize(pathname) {
     var p = pathname.replace(/\/index\.html$/i, '');
     if (p.length > 1 && p.lastIndexOf('/') === p.length - 1) p = p.slice(0, -1);
@@ -386,13 +384,22 @@
     var p = u.pathname.replace(/\/index\.html$/i, '');
     if (p.length > 1 && p.lastIndexOf('/') === p.length - 1) p = p.slice(0, -1);
 
-    // ★ 계산기 경로 예외 처리: /calc-* 또는 /calculator 는 그대로 유지
     if (p.indexOf('/calc-') === 0 || p === '/calculator') {
       u.pathname = p;
       return u;
     }
 
     var segs = p.split('/').filter(Boolean);
+
+    if (segs[0] === 'en' || segs[0] === 'ko' || segs[0] === 'ja' || segs[0] === 'zh-tw') {
+      if ((segs[1] === 'buildings' || segs[1] === 'building') && segs[2]) {
+        u.pathname = '/' + segs[0] + '/' + segs[1] + '/' + segs.slice(2).join('/');
+        return u;
+      }
+      u.pathname = p || '/home';
+      return u;
+    }
+
     if (segs[0] === 'heroes' && segs[1]) {
       u.pathname = '/hero/' + segs.slice(1).join('/');
       return u;
@@ -409,16 +416,14 @@
     return u;
   }
 
-  // ===== 라우트 번들 로더 (routes.js vs routes.calculators.js) =====
-  var routes = null;                   // 현재 사용 중인 라우트 테이블
-  var __routeBundle = '';              // 'main' | 'calc'
+  // ===== 라우트 번들 로더 =====
+  var routes = null;
+  var __routeBundle = '';
 
   function isCalcPathname(p) {
-    // /calc-* 또는 /calculator → calculators 번들
     return (p.indexOf('/calc-') === 0) || (p === '/calculator');
   }
 
-  // calculators 라우트에서 사용할 setTitle 헬퍼
   function setTitle(i18nKey, fallback) {
     var title = fallback || '';
     try {
@@ -436,13 +441,10 @@
         routes = window.buildCalculatorRoutes({
           loadHTML: loadHTML,
           loadScriptOnce: loadScriptOnce,
-          // calculators 라우트가 필요로 하는 선택적 의존성
           ensureI18NReady: ensureI18N,
           setTitle: setTitle,
-          // 기타 도우미
           renderDbDetail: renderDbDetail,
           iconImg: iconImg,
-          // 전역 tier map 있으면 전달
           TIER_KEY_MAP_KO: window.TIER_KEY_MAP_KO
         });
         __routeBundle = 'calc';
@@ -478,7 +480,7 @@
     routes = initialRoutes;
   }
 
-  // ===== 프록시 라우트 (실 라우트 준비 전 안전 가드) =====
+  // ===== 프록시 라우트 =====
   var proxyRoutes = (function(){
     var map = {};
     var keys = ['/calculator','/calc-building','/calc-gear','/calc-charm','/calc-training'];
@@ -524,10 +526,8 @@
     };
   }
 
-  // popstate/비동기 전환 레이스 방지용 버전 토큰
   var navVer = 0;
 
-  // ===== popstate 보정 로직 =====
   function correctOnPopstate() {
     try {
       var p = normalize(location.pathname);
@@ -538,11 +538,21 @@
     return false;
   }
 
+  function removeBuildingScopedStyleIfAny() {
+    var b = document.getElementById('bld-scoped-style');
+    if (b && b.parentNode) b.parentNode.removeChild(b);
+  }
+
+  // ✅ 핵심: slug에 .html이 붙으면 제거 (truegold-crucible.html → truegold-crucible)
+  function stripHtmlExt(s) {
+    var x = String(s || '');
+    return x.replace(/\.html$/i, '');
+  }
+
   function dispatch() {
     var myVer = ++navVer;
     var canon = null;
 
-    // 1) i18n 준비 → 2) URL 정규화 반영 → 3) 라우트 번들 선택/로드 → 4) CSS 준비 → 5) render
     return ensureI18N().then(function(){
       if (myVer !== navVer) return;
 
@@ -559,13 +569,51 @@
 
       var pathNorm = normalize(canon.pathname);
       var segs = pathNorm.split('/').filter(Boolean);
+      var el = document.getElementById('content') || document.body;
+
+      // ===============================
+      // ✅ Buildings Static Detail DISPATCH (buildings + building)
+      // ===============================
+
+      // /buildings/:slug
+      if (pathNorm.indexOf('/buildings/') === 0 && segs.length >= 2) {
+        removeCSS('calc-css');
+        var slug1 = stripHtmlExt(segs.slice(1).join('/')); // ✅ .html 제거
+        if (routes && routes['/building-static'] && typeof routes['/building-static'].render === 'function') {
+          return Promise.resolve(routes['/building-static'].render(el, slug1));
+        }
+      }
+
+      // /building/:slug
+      if (pathNorm.indexOf('/building/') === 0 && segs.length >= 2) {
+        removeCSS('calc-css');
+        var slug1b = stripHtmlExt(segs.slice(1).join('/')); // ✅ .html 제거
+        if (routes && routes['/building-static'] && typeof routes['/building-static'].render === 'function') {
+          return Promise.resolve(routes['/building-static'].render(el, slug1b));
+        }
+      }
+
+      // /{lang}/buildings/:slug  or  /{lang}/building/:slug
+      if (segs.length >= 3 && (segs[1] === 'buildings' || segs[1] === 'building')) {
+        var lang = normalizeLangFolder(segs[0]);
+        if (lang === 'en' || lang === 'ko' || lang === 'ja' || lang === 'zh-tw') {
+          removeCSS('calc-css');
+          var slug2 = stripHtmlExt(segs.slice(2).join('/')); // ✅ .html 제거
+          if (routes && routes['/building-static'] && typeof routes['/building-static'].render === 'function') {
+            return Promise.resolve(routes['/building-static'].render(el, slug2, lang));
+          }
+        }
+      }
+
+      // ===============================
+      // (기존) 일반 라우트 분기
+      // ===============================
+      removeBuildingScopedStyleIfAny();
+
       var key  = '/' + (segs[0] || 'home');
       var rest = '/' + segs.slice(1).join('/');
       var route = getRoute(key);
 
-      var el = document.getElementById('content') || document.body;
-
-      // 계산기 CSS 필요시에만 로드 (아닐 때 제거)
       var isCalcRoute = (key === '/calculator') || (key.indexOf('/calc-') === 0);
       var cssPromise = isCalcRoute ? ensureCSS('calc-css', CALC_CSS_HREF) : (removeCSS('calc-css'), Promise.resolve());
 
@@ -591,16 +639,10 @@
         return Promise.resolve(p).then(function(){
           if (myVer !== navVer) return;
 
-          // ★★★ 계산기 라우트라면, render 완료 후 DOM이 붙은 시점에서 reset() 실행
           if (isCalcRoute && window.KSD && window.KSD.buildingUI && typeof window.KSD.buildingUI.reset === 'function') {
-            try {
-              window.KSD.buildingUI.reset();
-            } catch (eReset) {
-              console.warn('[router] calc reset failed', eReset);
-            }
+            try { window.KSD.buildingUI.reset(); } catch (eReset) { console.warn('[router] calc reset failed', eReset); }
           }
 
-          // 라우트 렌더 후 i18n 재적용
           try {
             var applied = applyCalcI18NIfAvailable(el);
             if (!applied) {
@@ -621,19 +663,16 @@
 
           try { window.scrollTo({ top: 0 }); } catch(_){}
 
-          // ★★★ 최종 강제 글로벌 i18n 재적용 — 헤더/드롭다운/글로벌 UI 누락 방지
           if (window.I18N && typeof window.I18N.applyTo === 'function') {
             try { window.I18N.applyTo(document.body); } catch(_e2) {}
           }
 
-          // 마지막으로 calculators 쪽 localI18nApply가 있다면 한 번 더 강제 적용(드롭다운 등)
           try { applyCalcI18NIfAvailable(document.getElementById('content') || document.body); } catch (_e4) {}
         });
       });
     });
   }
 
-  // ===== navigate =====
   window.navigate = function (to, opts) {
     opts = opts || {};
     var u = canonicalize(to);
@@ -643,7 +682,6 @@
     return dispatch();
   };
 
-  // ===== link interception =====
   document.addEventListener('click', function (e) {
     if (e.defaultPrevented) return;
     if (e.button !== 0) return;
@@ -665,7 +703,6 @@
     if (a.hasAttribute('download') || (routerIgnore && routerIgnore === 'true')) return;
 
     if (/^(mailto:|tel:|data:|blob:|javascript:)/i.test(href)) return;
-
     if (/^(https?:)?\/\//i.test(href)) return;
 
     var hashIdx = href.indexOf('#/');
@@ -683,11 +720,8 @@
 
     if (href.charAt(0) === '#') return;
 
-    // ✅ [FIX] 가이드(정적 HTML)만 예외 — SPA 라우터가 가로채지 않도록
-    // WHY: /pages/guides/*.html 은 SPA routes에 등록되어 있지 않아
-    //      가로채면 /pages → 미등록 라우트 처리로 홈으로 튕김.
     if (href.indexOf('/pages/guides/') === 0) {
-      return; // 브라우저 기본 이동(풀 로드)
+      return;
     }
 
     if (href.charAt(0) === '/') {
@@ -698,17 +732,16 @@
 
   }, { passive: false });
 
-  // ===== popstate =====
   try { history.scrollRestoration = 'manual'; } catch (_e){}
   window.addEventListener('popstate', function(){
     if (correctOnPopstate()) return;
     dispatch();
   });
 
-  // ===== 글로벌 i18n 변경 대응 (헤더/푸터/네비 포함) =====
   document.addEventListener('i18n:changed', function(){
     try {
       var content = document.getElementById('content') || document.body;
+
       if (!applyCalcI18NIfAvailable(content)) {
         applyI18NOutsideCalc(content);
       }
@@ -716,6 +749,19 @@
         window.I18N.applyTo(document.body);
       }
       applyCalcI18NIfAvailable(content);
+
+      if (window.__KS_BLD_LANG_LOCK__) return;
+      window.__KS_BLD_LANG_LOCK__ = true;
+      setTimeout(function(){ window.__KS_BLD_LANG_LOCK__ = false; }, 50);
+
+      var p = location.pathname || '';
+      // ✅ .html 포함 케이스도 빌딩 상세로 인정
+      var m1 = p.match(/^\/buildings\/[^\/?#]+(\.html)?$/i) || p.match(/^\/building\/[^\/?#]+(\.html)?$/i);
+      var m2 = p.match(/^\/(en|ko|ja|zh-tw)\/buildings\/[^\/?#]+(\.html)?$/i) || p.match(/^\/(en|ko|ja|zh-tw)\/building\/[^\/?#]+(\.html)?$/i);
+
+      if (m1 || m2) {
+        dispatch();
+      }
     } catch (_e) {}
   }, false);
 

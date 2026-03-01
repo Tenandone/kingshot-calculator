@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kitchen Upgrade Costs (Lv 1–10) | Kingshot</title>
+  <meta name="description" content="Kingshot Kitchen upgrade requirements and costs from Level 1–10. Includes upgrade time, unlocks, power, item upgrade costs, total max item cost, and building output with max items." />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://kingshotdata.kr/en/buildings/kitchen.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings/kitchen.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/buildings/kitchen.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/buildings/kitchen.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/buildings/kitchen.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/buildings/kitchen.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h: 0px;
+      --tabs-h: 0px;
+      --sticky-top: 0px;
+
+      --tbl-font: 13px;
+      --tbl-pad-y: 9px;
+      --tbl-pad-x: 10px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+    nav.lang{
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid; grid-template-columns: 160px 1fr; gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px; height:160px; object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted)}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .jump{
+      margin-top:10px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px; font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(245,158,11,.35);
+      background:rgba(245,158,11,.08);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px; height:18px; flex:0 0 18px;
+      margin-top:2px;
+      color:#b45309;
+    }
+
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+    }
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      font-size:calc(var(--tbl-font) - 1px);
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td{
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:var(--tbl-font);
+      white-space:normal;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+
+    .center{text-align:center}
+    .num{text-align:right; font-variant-numeric: tabular-nums}
+    .cell-lines{white-space:normal; line-height:1.45}
+    .cell-lines .mutedline{color:var(--muted)}
+
+    table.sticky-firstcol th:first-child,
+    table.sticky-firstcol td:first-child{
+      position: sticky;
+      left: 0;
+      background:inherit;
+      z-index:2;
+    }
+    table.sticky-firstcol thead th:first-child{
+      z-index:4;
+      background:#f8fafc;
+    }
+
+    .cards{display:none}
+    .cards .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:12px 12px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0;
+    }
+    .card-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.25;
+      white-space:nowrap;
+    }
+    .card-block{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 10px;
+      background:#fff;
+      margin-top:10px;
+      font-size:13px;
+      line-height:1.45;
+    }
+    .card-block .lbl{color:var(--muted); font-size:12px; font-weight:800; margin-bottom:4px}
+    .card-block .val{white-space:normal}
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      white-space:nowrap;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .badges{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+
+    .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{
+      display:inline-flex; align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top: calc(var(--sticky-top) + 12px);
+    }
+
+    @media (min-width: 901px){
+      :root{
+        --tbl-font: 12px;
+        --tbl-pad-y: 7px;
+        --tbl-pad-x: 8px;
+      }
+      table{table-layout:fixed}
+      .table-wrap{overflow-x:clip}
+      @supports not (overflow: clip){ .table-wrap{overflow-x:hidden} }
+    }
+
+    @media (max-width: 900px){
+      header.top{
+        position: sticky;
+        top: 0;
+        z-index: 40;
+      }
+      nav.section-tabs{
+        display:flex;
+        position: sticky;
+        top: var(--header-h);
+        z-index: 35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+
+      .enhanced .data-table{display:none}
+      .enhanced .cards{display:grid; gap:12px}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Kitchen (Kingshot)",
+    "inLanguage":"en",
+    "description":"Kingshot Kitchen upgrade requirements and costs from Level 1–10. Includes upgrade time, unlocks, power, item upgrade costs, total max item cost, and building output with max items.",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://kingshotdata.kr/en/"},
+        {"@type":"ListItem","position":2,"name":"Buildings","item":"https://kingshotdata.kr/en/buildings/"},
+        {"@type":"ListItem","position":3,"name":"Kitchen","item":"https://kingshotdata.kr/en/buildings/kitchen.html"}
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Inline SVG for NOTE -->
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/en/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/buildings/kitchen.html" aria-current="page">EN</a>
+        <a href="/ko/buildings/kitchen.html">KO</a>
+        <a href="/ja/buildings/kitchen.html">JA</a>
+        <a href="/zh-tw/buildings/kitchen.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">Overview</a>
+      <a href="#requirements">Requirements</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#related">Related</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/en/">Home</a> <span class="muted">›</span>
+        <a href="/en/buildings/">Buildings</a> <span class="muted">›</span>
+        <span>Kitchen</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/buildings/kitchen.webp" alt="Kitchen (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>Kitchen</h1>
+          <p class="sub">
+            The Kitchen prepares meals for your survivors. Higher-level Kitchens (and better items) speed up
+            meal preparation, distribution, and eating.
+          </p>
+          <div class="quote">“Provides fine food to satisfy residents’ appetite.”</div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">Overview</a><span class="dotsep">•</span>
+            <a href="#requirements">Requirements</a><span class="dotsep">•</span>
+            <a href="#how-it-works">How it works</a><span class="dotsep">•</span>
+            <a href="#related">Related</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>
+          The Kitchen is where your survivors’ food gets made. You can choose between three meal types:
+          <strong>Sawdust Bread</strong>, <strong>Cheese Pizza</strong>, and <strong>Deluxe Feast</strong>.
+        </p>
+        <p>
+          Higher-quality meals use more Bread, but they also fill survivors up more. Higher fullness means
+          survivors are less likely to get sick or expire.
+        </p>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Note:</strong>
+            Values shown here are raw/base numbers and may vary with buffs, research, and items.
+          </div>
+        </div>
+      </section>
+
+      <section id="upgrade">
+        <span id="requirements" class="anchor"></span>
+        <h2>Upgrade Requirements</h2>
+        <p class="muted" style="margin-top:-2px">All levels (Lv 1–10) for Kitchen</p>
+
+        <div class="cards" id="kitchen-cards" aria-label="Kitchen requirements (mobile cards)"></div>
+
+        <div class="table-wrap data-table" aria-label="Kitchen upgrade requirements table">
+          <table id="kitchen-table" class="sticky-firstcol">
+            <colgroup>
+              <col style="width:6%">
+              <col style="width:14%">
+              <col style="width:12%">
+              <col style="width:10%">
+              <col style="width:14%">
+              <col style="width:8%">
+              <col style="width:18%">
+              <col style="width:10%">
+              <col style="width:18%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="center">Level</th>
+                <th>Requirements</th>
+                <th>Cost</th>
+                <th>Upgrade Time</th>
+                <th>Unlocks Upon Upgrade</th>
+                <th class="num">Power</th>
+                <th>Items Upgrade Cost</th>
+                <th>Total Max Item Cost</th>
+                <th>Building Output (w/ Max Items)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="center">1</td>
+                <td>Built During Tutorial</td>
+                <td>35 wood</td>
+                <td>00:00:02</td>
+                <td class="cell-lines">
+                  Stove A (item), Sideboard Lv. 1 (item), Dining Table A Lv. 1 (item), Larder Lv. 1 (item)
+                </td>
+                <td class="num">100</td>
+                <td class="cell-lines">
+                  Stove A Lv. 1–2 = 18 wood<br>
+                  Sideboard Lv. 2 = 10 wood<br>
+                  Dining Table A Lv. 2 = 10 wood<br>
+                  Larder Lv. 2 = 30 wood
+                </td>
+                <td>68 wood</td>
+                <td class="cell-lines">
+                  +1 Working Survivor<br><br>
+                  <span class="mutedline">Preparation:</span><br>
+                  40/50/60 fullness (tier dependent) / 8s cook time<br><br>
+                  <span class="mutedline">Distribution:</span> 0.8s<br><br>
+                  <span class="mutedline">Eating:</span> 6.5s
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">2</td>
+                <td>Town Center Lv. 2</td>
+                <td>50 wood</td>
+                <td>00:00:09</td>
+                <td>–</td>
+                <td class="num">190</td>
+                <td class="cell-lines">
+                  Stove A Lv. 3–4 = 30 wood<br>
+                  Sideboard Lv. 3–4 = 30 wood<br>
+                  Dining Table A Lv. 3–4 = 30 wood<br>
+                  Larder Lv. 3–4 = 85 wood
+                </td>
+                <td>175 wood</td>
+                <td class="cell-lines">
+                  <span class="mutedline">Preparation:</span><br>
+                  40/50/60 fullness (tier dependent) / 7.4s cook time<br><br>
+                  <span class="mutedline">Distribution:</span> 0.7s<br><br>
+                  <span class="mutedline">Eating:</span> 5.3s
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">3</td>
+                <td>Town Center Lv. 3</td>
+                <td>240 wood</td>
+                <td>00:00:45</td>
+                <td>–</td>
+                <td class="num">325</td>
+                <td class="cell-lines">
+                  Stove A Lv. 5–6 = 110 wood<br>
+                  Sideboard Lv. 5–6 = 110 wood<br>
+                  Dining Table A Lv. 5–6 = 110 wood<br>
+                  Larder Lv. 5–6 = 290 wood
+                </td>
+                <td>620 wood</td>
+                <td class="cell-lines">
+                  <span class="mutedline">Preparation:</span><br>
+                  40/50/60 fullness (tier dependent) / 7s cook time<br><br>
+                  <span class="mutedline">Distribution:</span> 0.6s<br><br>
+                  <span class="mutedline">Eating:</span> 4.9s
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">4</td>
+                <td>Town Center Lv. 4</td>
+                <td>540 wood, 105 stone</td>
+                <td>00:02:15</td>
+                <td>Stove B (item), Dining Table B (item), Heater (item)</td>
+                <td class="num">505</td>
+                <td class="cell-lines">
+                  Stove A Lv. 7–8 = 165 wood<br>
+                  Stove B Lv. 1–8 = 323 wood<br>
+                  Sideboard Lv. 7–8 = 165 wood<br>
+                  Dining Table A Lv. 7–8 = 165 wood<br>
+                  Dining Table B Lv. 1–8 = 323 wood<br>
+                  Larder Lv. 7–8 = 420 wood<br>
+                  Heater Lv. 1–8 = 324 gold
+                </td>
+                <td class="cell-lines">1,561 wood,<br>324 gold</td>
+                <td class="cell-lines">
+                  +1 Working Survivor<br>
+                  +0.1 Warmth<br><br>
+                  <span class="mutedline">Preparation:</span><br>
+                  40/50/60 fullness (tier dependent) / 6.6s cook time<br><br>
+                  <span class="mutedline">Distribution:</span> 0.5s<br><br>
+                  <span class="mutedline">Eating:</span> 4.7s
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">5</td>
+                <td>Town Center Lv. 5</td>
+                <td>2.2k wood, 455 stone</td>
+                <td>00:04:30</td>
+                <td>Bin (item)</td>
+                <td class="num">775</td>
+                <td class="cell-lines">
+                  Stove A Lv. 9–10 = 445 wood<br>
+                  Stove B Lv. 9–10 = 445 wood<br>
+                  Sideboard Lv. 9–10 = 445 wood<br>
+                  Dining Table A Lv. 9–10 = 445 wood<br>
+                  Dining Table B Lv. 9–10 = 445 wood<br>
+                  Larder Lv. 9–10 = 1,115 wood<br>
+                  Heater Lv. 9–10 = 195 gold<br>
+                  Bin Lv. 1–10 = 519 gold
+                </td>
+                <td class="cell-lines">3,340 wood<br>714 gold</td>
+                <td class="cell-lines">
+                  +0.1 Warmth<br><br>
+                  <span class="mutedline">Preparation:</span><br>
+                  40/50/60 fullness (tier dependent) / 5.6s cook time<br><br>
+                  <span class="mutedline">Distribution:</span> 0.5s<br><br>
+                  <span class="mutedline">Eating:</span> 4.5s
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">6</td>
+                <td>Town Center Lv. 6</td>
+                <td>5.7k wood, 1.1k stone, 285 iron</td>
+                <td>00:09:00</td>
+                <td>Water Bucket (item)</td>
+                <td class="num">1,180</td>
+                <td class="cell-lines">
+                  Stove A Lv. 11–12 = 320 wood, 85 stone<br>
+                  Stove B Lv. 11–12 = 320 wood, 85 stone<br>
+                  Sideboard Lv. 11–12 = 320 wood, 85 stone<br>
+                  Dining Table A Lv. 11–12 = 320 wood, 85 stone<br>
+                  Dining Table B Lv. 11–12 = 320 wood, 85 stone<br>
+                  Larder Lv. 11–12 = 800 wood, 210 stone<br>
+                  Heater Lv. 11–12 = 255 gold<br>
+                  Bin Lv. 11–12 = 255 gold<br>
+                  Water Bucket Lv. 1–12 = 774 gold
+                </td>
+                <td class="cell-lines">2,400 wood, 890 stone<br>1,284 gold</td>
+                <td class="cell-lines">
+                  +0.12 Warmth<br><br>
+                  <span class="mutedline">Preparation:</span><br>
+                  40/50/60 fullness (tier dependent) / 5.6s cook time<br><br>
+                  <span class="mutedline">Distribution:</span> 0.4s<br><br>
+                  <span class="mutedline">Eating:</span> 4.5s
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">7</td>
+                <td>Town Center Lv. 7</td>
+                <td>20k wood, 4.1k stone, 1k iron</td>
+                <td>00:18:00</td>
+                <td>Stove C (item), Washbasin (item)</td>
+                <td class="num">1,765</td>
+                <td class="cell-lines">
+                  Stove A Lv. 13–14 = 400 stone<br>
+                  Stove B Lv. 13–14 = 400 stone<br>
+                  Stove C Lv. 1–14 = 1,088 wood, 485 stone<br>
+                  Sideboard Lv. 13–14 = 400 stone<br>
+                  Dining Table A Lv. 13–14 = 400 stone<br>
+                  Dining Table B Lv. 13–14 = 400 stone<br>
+                  Larder Lv. 13–14 = 1,010 stone<br>
+                  Heater Lv. 13–14 = 325 gold<br>
+                  Bin Lv. 13–14 = 325 gold<br>
+                  Water Bucket Lv. 13–14 = 325 gold<br>
+                  Washbasin Lv. 1–14 = 1,099 gold
+                </td>
+                <td class="cell-lines">1,088 wood, 3,495 stone<br>2,074 gold</td>
+                <td class="cell-lines">
+                  +1 Working Survivor<br>
+                  +0.14 Warmth<br><br>
+                  <span class="mutedline">Preparation:</span><br>
+                  40/50/60 fullness (tier dependent) / 3.8s cook time<br><br>
+                  <span class="mutedline">Distribution:</span> 0.3s<br><br>
+                  <span class="mutedline">Eating:</span> 4.1s
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">8</td>
+                <td>Town Center Lv. 8</td>
+                <td>37k wood, 7.5k stone, 1.8k iron</td>
+                <td>00:27:00</td>
+                <td>–</td>
+                <td class="num">2,350</td>
+                <td class="cell-lines">
+                  Stove A Lv. 15–16 = 335 stone, 95 iron<br>
+                  Stove B Lv. 15–16 = 335 stone, 95 iron<br>
+                  Stove C Lv. 15–16 = 335 stone, 95 iron<br>
+                  Sideboard Lv. 15–16 = 335 stone, 95 iron<br>
+                  Dining Table A Lv. 15–16 = 335 stone, 95 iron<br>
+                  Dining Table B Lv. 15–16 = 335 stone, 95 iron<br>
+                  Larder Lv. 15–16 = 840 stone, 240 iron<br>
+                  Heater Lv. 15–16 = 405 gold<br>
+                  Bin Lv. 15–16 = 405 gold<br>
+                  Water Bucket Lv. 15–16 = 405 gold<br>
+                  Washbasin Lv. 15–16 = 405 gold
+                </td>
+                <td class="cell-lines">2,850 stone,<br>570 iron,<br>1,620 gold</td>
+                <td class="cell-lines">
+                  +0.16 Warmth<br><br>
+                  <span class="mutedline">Preparation:</span><br>
+                  40/50/60 fullness (tier dependent) / 3.2s cook time<br><br>
+                  <span class="mutedline">Distribution:</span> 0.3s<br><br>
+                  <span class="mutedline">Eating:</span> 3.9s
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">9</td>
+                <td>Town Center Lv. 9</td>
+                <td>78k wood, 15k stone, 3.9k iron</td>
+                <td>00:40:30</td>
+                <td>Cask (item)</td>
+                <td class="num">2,935</td>
+                <td class="cell-lines">
+                  Stove A Lv. 17–18 = 3.1k wood, 695 stone<br>
+                  Stove B Lv. 17–18 = 3.1k wood, 695 stone<br>
+                  Stove C Lv. 17–18 = 3.1k wood, 695 stone<br>
+                  Sideboard Lv. 17–18 = 3.1k wood, 695 stone<br>
+                  Dining Table A Lv. 17–18 = 3.1k wood, 695 stone<br>
+                  Dining Table B Lv. 17–18 = 3.1k wood, 695 stone<br>
+                  Larder Lv. 17–18 = 7.8k wood, 1.7k stone<br>
+                  Heater Lv. 17–18 = 520 gold<br>
+                  Bin Lv. 17–18 = 520 gold<br>
+                  Water Bucket Lv. 17–18 = 520 gold<br>
+                  Washbasin Lv. 17–18 = 520 gold<br>
+                  Cask Lv. 1–18 = 2,024 gold
+                </td>
+                <td class="cell-lines">26,400 wood,<br>5,870 stone,<br>4,104 gold</td>
+                <td class="cell-lines">
+                  +0.18 Warmth<br><br>
+                  <span class="mutedline">Preparation:</span><br>
+                  40/50/60 fullness (tier dependent) / 2.6s cook time<br><br>
+                  <span class="mutedline">Distribution:</span> 0.2s<br><br>
+                  <span class="mutedline">Eating:</span> 3.7s
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center">10</td>
+                <td>Town Center Lv. 10</td>
+                <td>130k wood, 27k stone, 6.9k iron</td>
+                <td>00:54:00</td>
+                <td>–</td>
+                <td class="num">3,785</td>
+                <td class="cell-lines">
+                  Stove A Lv. 19–20 = 590 iron<br>
+                  Stove B Lv. 19–20 = 590 iron<br>
+                  Stove C Lv. 19–20 = 590 iron<br>
+                  Sideboard Lv. 19–20 = 590 iron<br>
+                  Dining Table A Lv. 19–20 = 590 iron<br>
+                  Dining Table B Lv. 19–20 = 590 iron<br>
+                  Larder Lv. 19–20 = 1,475 iron<br>
+                  Heater Lv. 19–20 = 640 gold<br>
+                  Bin Lv. 19–20 = 640 gold<br>
+                  Water Bucket Lv. 19–20 = 640 gold<br>
+                  Washbasin Lv. 19–20 = 640 gold<br>
+                  Cask Lv. 19–20 = 640 gold
+                </td>
+                <td class="cell-lines">5,015 iron,<br>3,200 gold</td>
+                <td class="cell-lines">
+                  +0.2 Warmth<br><br>
+                  <span class="mutedline">Preparation:</span><br>
+                  40/50/60 fullness (tier dependent) / 2s cook time<br><br>
+                  <span class="mutedline">Distribution:</span> 0.1s<br><br>
+                  <span class="mutedline">Eating:</span> 3.5s
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="how-it-works">
+        <h2>How it works</h2>
+        <p>
+          The Kitchen runs in three phases: <strong>Preparation</strong> (cooking meals using Bread),
+          <strong>Distribution</strong> (survivors pick up meals at the Sideboard), and <strong>Eating</strong>
+          (they eat at Dining Tables).
+        </p>
+        <p>
+          Each phase takes time. A higher Kitchen level (and stronger items) speeds the process up. If survivors
+          fail to eat before their work shift ends, their fullness may not increase (or may be skipped).
+        </p>
+        <p>
+          If you already upgraded Survivor Houses but people still get sick or die, the most common reason is
+          low-quality meals. Upgrade your Kitchen and switch to better meals so survivors get full faster.
+        </p>
+      </section>
+
+      <section id="related">
+        <h2>Related Buildings</h2>
+        <div class="related">
+          <a class="pill" href="/en/buildings/town-center.html">Town Center</a>
+          <a class="pill" href="/en/buildings/academy.html">Academy</a>
+          <a class="pill" href="/en/buildings/infirmary.html">Infirmary</a>
+          <a class="pill" href="/en/buildings/storehouse.html">Storehouse</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function txt(el){ return (el && el.textContent ? el.textContent.trim() : ''); }
+      function html(el){ return (el && el.innerHTML ? el.innerHTML.trim() : ''); }
+
+      function buildCards(){
+        var table = document.getElementById('kitchen-table');
+        var target = document.getElementById('kitchen-cards');
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var out = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var td = tr.querySelectorAll('td');
+          if(!td || td.length < 9) return;
+
+          var level = txt(td[0]);
+          var req = html(td[1]);
+          var cost = html(td[2]);
+          var time = html(td[3]);
+          var unlock = html(td[4]);
+          var power = html(td[5]);
+          var items = html(td[6]);
+          var total = html(td[7]);
+          var output = html(td[8]);
+
+          out += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">Level ' + level + '</h3>' +
+                '<div class="card-meta">' + (time ? ('Time<br><strong>' + time + '</strong>') : '') + '</div>' +
+              '</div>' +
+              '<div class="badges">' +
+                (power && power !== '–' ? ('<span class="badge">Power: <strong style="color:#111827">' + power + '</strong></span>') : '') +
+              '</div>' +
+              '<div class="card-block"><div class="lbl">Requirements</div><div class="val">' + (req || '–') + '</div></div>' +
+              '<div class="card-block"><div class="lbl">Cost</div><div class="val">' + (cost || '–') + '</div></div>' +
+              '<div class="card-block"><div class="lbl">Unlocks Upon Upgrade</div><div class="val">' + (unlock || '–') + '</div></div>' +
+              '<div class="card-block"><div class="lbl">Items Upgrade Cost</div><div class="val">' + (items || '–') + '</div></div>' +
+              '<div class="card-block"><div class="lbl">Total Max Item Cost</div><div class="val">' + (total || '–') + '</div></div>' +
+              '<div class="card-block"><div class="lbl">Building Output (w/ Max Items)</div><div class="val">' + (output || '–') + '</div></div>' +
+            '</article>'
+          );
+          count++;
+        });
+
+        target.innerHTML = out;
+        return count;
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+        var c = buildCards();
+        if(c > 0) document.documentElement.classList.add('enhanced');
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

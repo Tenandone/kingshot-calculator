@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Kingshot Buildings Guide – All Buildings, Unlocks & Requirements</title>
+  <meta name="description" content="Complete Kingshot buildings list with unlock info and upgrade requirements. Browse Town Center, Academy, Embassy, Barracks, Range, Stable, Command Center, Storehouse, Kitchen, Guard Station, Truegold Crucible, and War Academy." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/en/buildings/" />
+
+  <meta property="og:title" content="Kingshot Buildings Guide – All Buildings" />
+  <meta property="og:description" content="Complete Kingshot buildings list with unlock info and upgrade requirements." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kingshotdata.kr/en/buildings/" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <!-- ✅ 사이트 공통 CSS -->
+  <link rel="stylesheet" href="/css/common.css?v=202509131858">
+  <link rel="stylesheet" href="/css/category.css?v=202509131858">
+  <link rel="stylesheet" href="/css/database.css?v=202509131858">
+  <link rel="stylesheet" href="/css/mobile-patch.css?v=202509131858">
+  <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
+  <link rel="stylesheet" href="/css/header.css?v=202509131858">
+  <link rel="stylesheet" href="/css/sponsor.css?v=202509131858">
+
+  <style>
+    /* ===== page scope ===== */
+    #buildings-page{max-width:1100px;margin:0 auto;padding:28px 16px}
+    #buildings-page h1{margin:0 0 10px;font-size:28px;letter-spacing:-.02em}
+    #buildings-page .sub{margin:0 0 18px;color:#6b7280}
+
+    /* ✅ PC 4열 / 모바일 2열 */
+    #buildings-page .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}
+    @media (max-width:980px){ #buildings-page .grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+    @media (max-width:520px){
+      #buildings-page{padding:18px 12px}
+      #buildings-page h1{font-size:22px}
+      #buildings-page .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    }
+
+    #buildings-page .card{
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:16px;
+      background:#fff;
+      overflow:hidden;
+      transition:transform .12s ease,box-shadow .12s ease;
+      height:100%;
+    }
+    #buildings-page .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
+    #buildings-page .card a{display:flex;flex-direction:column;height:100%;color:inherit;text-decoration:none}
+
+    /* ✅ 이미지 크롭 제거 */
+    #buildings-page .imgbox{
+      background:#f2f4f7;
+      display:flex;align-items:center;justify-content:center;
+      padding:10px;
+      aspect-ratio:16/10;
+    }
+    #buildings-page img{
+      width:100%;height:100%;
+      object-fit:contain;
+      display:block;
+      max-width:100%;max-height:100%;
+    }
+    @media (max-width:520px){ #buildings-page .imgbox{padding:8px;aspect-ratio:1/1} }
+
+    /* ✅ 건물이름 가운데 정렬 */
+    #buildings-page .card-name{
+      padding:12px 12px 14px;
+      font-weight:800;
+      font-size:15px;
+      line-height:1.2;
+      min-height:40px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center; /* 가운데 */
+      text-align:center;      /* 가운데 */
+    }
+    @media (max-width:520px){
+      #buildings-page .card-name{
+        font-size:14px;
+        min-height:36px;
+        padding:10px 10px 12px;
+      }
+    }
+
+    /* ✅ SEO용: 화면엔 안 보이지만 접근성 방식으로 남김 */
+    .visually-hidden{
+      position:absolute !important;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;border:0;
+    }
+
+    #building-root{margin-top:26px}
+    
+  </style>
+
+  <!-- ✅ JSON-LD: ItemList (SEO 구조화 데이터) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Kingshot Buildings List",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Town Center","url":"https://kingshotdata.kr/en/buildings/towncenter.html"},
+      {"@type":"ListItem","position":2,"name":"Academy","url":"https://kingshotdata.kr/en/buildings/academy.html"},
+      {"@type":"ListItem","position":3,"name":"Embassy","url":"https://kingshotdata.kr/en/buildings/embassy.html"},
+      {"@type":"ListItem","position":4,"name":"Barracks","url":"https://kingshotdata.kr/en/buildings/barracks.html"},
+      {"@type":"ListItem","position":5,"name":"Range","url":"https://kingshotdata.kr/en/buildings/range.html"},
+      {"@type":"ListItem","position":6,"name":"Stable","url":"https://kingshotdata.kr/en/buildings/stable.html"},
+      {"@type":"ListItem","position":7,"name":"Command Center","url":"https://kingshotdata.kr/en/buildings/commandcenter.html"},
+      {"@type":"ListItem","position":8,"name":"Storehouse","url":"https://kingshotdata.kr/en/buildings/storehouse.html"},
+      {"@type":"ListItem","position":9,"name":"Kitchen","url":"https://kingshotdata.kr/en/buildings/kitchen.html"},
+      {"@type":"ListItem","position":10,"name":"Guard Station","url":"https://kingshotdata.kr/en/buildings/guard-station.html"},
+      {"@type":"ListItem","position":11,"name":"Truegold Crucible","url":"https://kingshotdata.kr/en/buildings/truegold-crucible.html"},
+      {"@type":"ListItem","position":12,"name":"War Academy","url":"https://kingshotdata.kr/en/buildings/war-academy.html"}
+    ]
+  }
+  </script>
+</head>
+
+<body class="theme-default">
+  <main id="buildings-page">
+    <h1>Kingshot Buildings</h1>
+    <p class="sub">Browse the complete buildings list and open each page for unlock details and upgrade requirements.</p>
+
+    <!-- ✅ SEO 본문(유저 눈엔 안 보임) -->
+    <section class="visually-hidden" aria-hidden="false">
+      <h2>All Buildings List</h2>
+      <p>This page provides a complete list of Kingshot buildings including Town Center, Academy, Embassy, Barracks, Range, Stable, Command Center, Storehouse, Kitchen, Guard Station, Truegold Crucible, and War Academy.</p>
+    </section>
+
+    <div id="buildings-grid" class="grid">
+      <div class="card"><a href="/en/buildings/towncenter.html"><div class="imgbox"><img src="/img/buildings/towncenter-kingshot.webp" alt="Town Center"></div><div class="card-name">Town Center</div></a></div>
+      <div class="card"><a href="/en/buildings/academy.html"><div class="imgbox"><img src="/img/buildings/academy-kingshot.webp" alt="Academy"></div><div class="card-name">Academy</div></a></div>
+      <div class="card"><a href="/en/buildings/embassy.html"><div class="imgbox"><img src="/img/buildings/embassy-kingshot.webp" alt="Embassy"></div><div class="card-name">Embassy</div></a></div>
+      <div class="card"><a href="/en/buildings/barracks.html"><div class="imgbox"><img src="/img/buildings/barracks-kingshot.webp" alt="Barracks"></div><div class="card-name">Barracks</div></a></div>
+      <div class="card"><a href="/en/buildings/range.html"><div class="imgbox"><img src="/img/buildings/range-kingshot.webp" alt="Range"></div><div class="card-name">Range</div></a></div>
+      <div class="card"><a href="/en/buildings/stable.html"><div class="imgbox"><img src="/img/buildings/stable-kingshot.webp" alt="Stable"></div><div class="card-name">Stable</div></a></div>
+      <div class="card"><a href="/en/buildings/commandcenter.html"><div class="imgbox"><img src="/img/buildings/command-center-kingshot.webp" alt="Command Center"></div><div class="card-name">Command Center</div></a></div>
+      <div class="card"><a href="/en/buildings/storehouse.html"><div class="imgbox"><img src="/img/buildings/storehouse-kingshot.webp" alt="Storehouse"></div><div class="card-name">Storehouse</div></a></div>
+      <div class="card"><a href="/en/buildings/kitchen.html"><div class="imgbox"><img src="/img/buildings/kitchen-kingshot.webp" alt="Kitchen"></div><div class="card-name">Kitchen</div></a></div>
+      <div class="card"><a href="/en/buildings/guard-station.html"><div class="imgbox"><img src="/img/buildings/guard-station-kingshot.webp" alt="Guard Station"></div><div class="card-name">Guard Station</div></a></div>
+      <div class="card"><a href="/en/buildings/truegold-crucible.html"><div class="imgbox"><img src="/img/buildings/truegold-crucible-kingshot.webp" alt="Truegold Crucible"></div><div class="card-name">Truegold Crucible</div></a></div>
+      <div class="card"><a href="/en/buildings/war-academy.html"><div class="imgbox"><img src="/img/buildings/war-academy.webp" alt="War Academy"></div><div class="card-name">War Academy</div></a></div>
+    </div>
+
+    <div id="building-root"></div>
+  </main>
+</body>
+</html>
