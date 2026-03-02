@@ -11,264 +11,269 @@
 <body>
   <!-- ✅ SPA include에서도 CSS가 먹게: body 안 style -->
   <style>
-    *{ box-sizing:border-box; }
+  *{ box-sizing:border-box; }
 
+  :root{
+    --brand:#0b57d0;
+    --text:#111827;
+    --muted:#6b7280;
+
+    --bg:#ffffff;
+    --surface:#ffffff;
+
+    --tile-border:#5b5e73;
+
+    --border:#e5e7eb;
+    --chip:#f3f4f6;
+
+    --shadow:0 10px 25px rgba(0,0,0,.06);
+  }
+  @media (prefers-color-scheme: dark){
     :root{
-      --brand:#0b57d0;
-      --text:#111827;
-      --muted:#6b7280;
+      --text:#e8eaed;
+      --muted:#b7bcc6;
 
-      --bg:#ffffff;
-      --surface:#ffffff;
+      --bg:#0b0b0b;
+      --surface:#121212;
 
-      --tile-border:#5b5e73;
+      --tile-border:#9aa0aa;
 
-      --border:#e5e7eb;
-      --chip:#f3f4f6;
+      --border:#2a2a2a;
+      --chip:#1b1b1b;
 
-      --shadow:0 10px 25px rgba(0,0,0,.06);
+      --shadow:0 10px 25px rgba(0,0,0,.35);
     }
-    @media (prefers-color-scheme: dark){
-      :root{
-        --text:#e8eaed;
-        --muted:#b7bcc6;
+  }
 
-        --bg:#0b0b0b;
-        --surface:#121212;
+  html,body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font:15px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,"Noto Sans KR",Arial,sans-serif;
+  }
 
-        --tile-border:#9aa0aa;
+  a{ color:inherit; text-decoration:none; }
+  .muted{ color:var(--muted); }
 
-        --border:#2a2a2a;
-        --chip:#1b1b1b;
+  .guides-head{
+    max-width:1100px;
+    margin:0 auto;
+    padding:22px 16px 10px;
+  }
+  #page-title{
+    margin:0 0 12px;
+    font-size:clamp(24px,3vw,34px);
+    letter-spacing:-0.02em;
+  }
 
-        --shadow:0 10px 25px rgba(0,0,0,.35);
-      }
-    }
+  .guides-tools{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+  #guide-search{
+    flex:1 1 240px;
+    height:42px;
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:var(--surface);
+    color:var(--text);
+    outline:none;
+  }
+  #guide-search:focus{
+    border-color:color-mix(in srgb, var(--brand) 55%, var(--border));
+    box-shadow:0 0 0 4px color-mix(in srgb, var(--brand) 18%, transparent);
+  }
+  #guide-count{ font-size:14px; white-space:nowrap; }
 
-    html,body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font:15px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,"Noto Sans KR",Arial,sans-serif;
-    }
+  .reco-wrap{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    padding:6px 0 12px;
+  }
+  .reco-title{
+    font-size:13px;
+    font-weight:800;
+    color:var(--muted);
+    letter-spacing:-0.01em;
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  #guide-reco{ display:flex; gap:8px; flex-wrap:wrap; }
 
-    a{ color:inherit; text-decoration:none; }
-    .muted{ color:var(--muted); }
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    height:34px;
+    padding:0 12px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background:var(--chip);
+    color:var(--text);
+    font-weight:700;
+    font-size:13px;
+    cursor:pointer;
+    user-select:none;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .chip:hover{
+    border-color:color-mix(in srgb, var(--brand) 40%, var(--border));
+    transform:translateY(-1px);
+  }
 
-    .guides-head{
-      max-width:1100px;
-      margin:0 auto;
-      padding:22px 16px 10px;
-    }
-    #page-title{
-      margin:0 0 12px;
-      font-size:clamp(24px,3vw,34px);
-      letter-spacing:-0.02em;
-    }
+  #guide-toc{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    padding:0 0 6px;
+  }
 
-    .guides-tools{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-    #guide-search{
-      flex:1 1 240px;
-      height:42px;
-      padding:10px 12px;
-      border:1px solid var(--border);
-      border-radius:12px;
-      background:var(--surface);
-      color:var(--text);
-      outline:none;
-    }
-    #guide-search:focus{
-      border-color:color-mix(in srgb, var(--brand) 55%, var(--border));
-      box-shadow:0 0 0 4px color-mix(in srgb, var(--brand) 18%, transparent);
-    }
-    #guide-count{ font-size:14px; white-space:nowrap; }
+  .sep{ border:0; border-top:1px solid var(--border); margin:0; }
 
-    .reco-wrap{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      padding:6px 0 12px;
-    }
-    .reco-title{
-      font-size:13px;
-      font-weight:800;
-      color:var(--muted);
-      letter-spacing:-0.01em;
-      display:flex;
-      gap:8px;
-      align-items:center;
-    }
-    #guide-reco{ display:flex; gap:8px; flex-wrap:wrap; }
+  .guides-wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:16px;
+  }
 
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      height:34px;
-      padding:0 12px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:var(--chip);
-      color:var(--text);
-      font-weight:700;
-      font-size:13px;
-      cursor:pointer;
-      user-select:none;
-      transition:border-color .15s ease, transform .15s ease;
-    }
-    .chip:hover{
-      border-color:color-mix(in srgb, var(--brand) 40%, var(--border));
-      transform:translateY(-1px);
-    }
+  .guides-list{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:18px;
+    padding:10px 0 24px;
+  }
+  @media (max-width: 980px){
+    .guides-list{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 640px){
+    .guides-list{ grid-template-columns:1fr; }
+  }
 
-    #guide-toc{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      padding:0 0 6px;
-    }
+  .g-block{
+    background:var(--surface);
+    border:2px solid var(--tile-border);
+    border-radius:26px;
+    overflow:hidden;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .g-block:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow);
+  }
 
-    .sep{ border:0; border-top:1px solid var(--border); margin:0; }
+  /* ✅ 카드: 이미지 위 / 텍스트 아래 */
+  .g-link{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    gap:12px;
+    padding:24px;
+    min-height:190px;
+  }
 
-    .guides-wrap{
-      max-width:1100px;
-      margin:0 auto;
-      padding:16px;
-    }
+  /* ✅ 아이콘 영역(가로폭 전체 + 높이 고정) */
+  .tile-icon{
+    flex:0 0 auto;
+    width:100%;
+    height:160px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
 
-    .guides-list{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0, 1fr));
-      gap:18px;
-      padding:10px 0 24px;
-    }
-    @media (max-width: 980px){
-      .guides-list{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
-    }
-    @media (max-width: 640px){
-      .guides-list{ grid-template-columns:1fr; }
-    }
+  /* ✅ 이미지 크기 제각각이어도 자동 축소 + 중앙 */
+  .tile-icon img{
+    max-width:140px;
+    max-height:140px;
+    width:auto;
+    height:auto;
+    display:block;
+    object-fit:contain;
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,.18));
+  }
 
-    .g-block{
-      background:var(--surface);
-      border:2px solid var(--tile-border);
-      border-radius:26px;
-      overflow:hidden;
-      transition:transform .18s ease, box-shadow .18s ease;
-    }
-    .g-block:hover{
-      transform:translateY(-2px);
-      box-shadow:var(--shadow);
-    }
+  .tile-fallback{
+    display:none;
+    width:140px;
+    height:140px;
+    border-radius:22px;
+    border:1px solid var(--border);
+    background:color-mix(in srgb, var(--surface) 90%, var(--brand) 6%);
+    color:var(--brand);
+    font-weight:900;
+    font-size:34px;
+    align-items:center;
+    justify-content:center;
+    user-select:none;
+  }
+  .tile-icon.is-fallback img{ display:none; }
+  .tile-icon.is-fallback .tile-fallback{ display:flex; }
 
-    /* ✅ 왼쪽(아이콘) / 오른쪽(텍스트) 분리: flex */
-    .g-link{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:24px 24px;
-      min-height:170px;
-    }
+  /* ✅ 텍스트 영역(항상 아래/가운데) */
+  .tile-title{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    min-width:0;
+    padding:0 8px;
+  }
 
-    /* ✅ 왼쪽 컬럼(160px) 안에서 아이콘 상/하/좌/우 중앙 */
-    .tile-icon{
-      flex:0 0 160px;
-      height:170px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-    }
+  /* ✅ 제목(모든 언어 공통: 2줄까지) */
+  .g-title{
+    margin:0;
+    font-size:18px;
+    font-weight:800;
+    line-height:1.25;
+    letter-spacing:-0.02em;
 
-    /* ✅ 이미지 크기 제각각이어도 자동 축소 + 중앙 */
-    .tile-icon img{
-      max-width:140px;
-      max-height:140px;
-      width:auto;
-      height:auto;
-      display:block;
-      object-fit:contain;
-      filter: drop-shadow(0 8px 12px rgba(0,0,0,.18));
-    }
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
 
-    .tile-fallback{
-      display:none;
-      width:140px;
-      height:140px;
-      border-radius:22px;
-      border:1px solid var(--border);
-      background:color-mix(in srgb, var(--surface) 90%, var(--brand) 6%);
-      color:var(--brand);
-      font-weight:900;
-      font-size:34px;
-      align-items:center;
-      justify-content:center;
-      user-select:none;
-    }
-    .tile-icon.is-fallback img{ display:none; }
-    .tile-icon.is-fallback .tile-fallback{ display:flex; }
+  /* =========================================================
+     MULTI-LANG (겹침 완전 차단판)
+     - 전역 CSS가 .lang-ko{display:inline} 같은 걸 해도 무조건 이김
+     - 현재 언어만 켜고 나머지는 전부 OFF
+     - 사이트가 lang 또는 data-lang 둘 중 하나만 세팅해도 동작
+     ========================================================= */
 
-    .tile-title{
-      flex:1 1 auto;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      min-width:0;
-      padding:0 8px;
-    }
+  .lang{ display:none !important; } /* 기본: 전부 숨김 */
 
-    .g-title{
-      margin:0;
-      font-size:18px;
-      font-weight:800;
-      line-height:1.25;
-      letter-spacing:-0.02em;
+  /* KO */
+  html[lang^="ko" i] .lang-ko,
+  html[data-lang^="ko" i] .lang-ko{ display:inline !important; }
 
-      display:-webkit-box;
-      -webkit-line-clamp:2;
-      -webkit-box-orient:vertical;
-      overflow:hidden;
-    }
+  /* EN */
+  html[lang^="en" i] .lang-en,
+  html[data-lang^="en" i] .lang-en{ display:inline !important; }
 
-    /* =========================================================
-       MULTI-LANG (겹침 완전 차단판)
-       - 전역 CSS가 .lang-ko{display:inline} 같은 걸 해도 무조건 이김
-       - 현재 언어만 켜고 나머지는 전부 OFF
-       - 사이트가 lang 또는 data-lang 둘 중 하나만 세팅해도 동작
-       ========================================================= */
+  /* JA */
+  html[lang^="ja" i] .lang-ja,
+  html[data-lang^="ja" i] .lang-ja{ display:inline !important; }
 
-    .lang{ display:none !important; } /* 기본: 전부 숨김 */
+  /* ZH-CN */
+  html[lang="zh-CN" i] .lang-zh-CN,
+  html[data-lang="zh-CN" i] .lang-zh-CN{ display:inline !important; }
 
-    /* KO */
-    html[lang^="ko" i] .lang-ko,
-    html[data-lang^="ko" i] .lang-ko{ display:inline !important; }
+  /* ZH-TW */
+  html[lang="zh-TW" i] .lang-zh-TW,
+  html[data-lang="zh-TW" i] .lang-zh-TW{ display:inline !important; }
 
-    /* EN */
-    html[lang^="en" i] .lang-en,
-    html[data-lang^="en" i] .lang-en{ display:inline !important; }
-
-    /* JA */
-    html[lang^="ja" i] .lang-ja,
-    html[data-lang^="ja" i] .lang-ja{ display:inline !important; }
-
-    /* ZH-CN */
-    html[lang="zh-CN" i] .lang-zh-CN,
-    html[data-lang="zh-CN" i] .lang-zh-CN{ display:inline !important; }
-
-    /* ZH-TW */
-    html[lang="zh-TW" i] .lang-zh-TW,
-    html[data-lang="zh-TW" i] .lang-zh-TW{ display:inline !important; }
-
-    /* fallback: 아무 언어도 매칭 안 되면 KO */
-    html:not([lang]):not([data-lang]) .lang-ko{ display:inline !important; }
-  </style>
+  /* fallback: 아무 언어도 매칭 안 되면 KO */
+  html:not([lang]):not([data-lang]) .lang-ko{ display:inline !important; }
+</style>
 
   <section class="guides-head" data-ks-guides-root="1">
     <h1 id="page-title">

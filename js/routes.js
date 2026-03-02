@@ -1,101 +1,32 @@
-﻿(function () {
-  const seenCSS = new Set();
-  const seenJS  = new Set();
-  const inflight = new Map();
-  const ASSET_VER = window.__V || 'now';
-
-  function canonical(url) {
-    try {
-      const u = new URL(url, location.href);
-      u.searchParams.delete('v');
-      return u.href;
-    } catch (e) {
-      return String(url);
-    }
-  }
-
-  function v(url) {
-    if (!url) return url;
-    if (/^(data:|blob:|#)/i.test(url)) return url;
-    try {
-      const u = new URL(url, location.href);
-      u.searchParams.set('v', ASSET_VER);
-      return (u.origin !== location.origin) ? u.href : (u.pathname + u.search + u.hash);
-    } catch (e) {
-      return url + (String(url).includes('?') ? '&' : '?') + 'v=' + ASSET_VER;
-    }
-  }
-  if (!window.v) window.v = v;
-
-  function escAttr(val) {
-    if (window.CSS && window.CSS.escape) return window.CSS.escape(val);
-    return String(val).replace(/["'\\\[\]\(\)\s]/g, '');
-  }
-
-  window.ensureCSS = window.ensureCSS || function (href) {
-    const absKey = canonical(href);
-    const selEnsured = 'link[rel="stylesheet"][data-ensured="' + escAttr(absKey) + '"]';
-    if (seenCSS.has(absKey) || document.querySelector(selEnsured)) return Promise.resolve();
-
-    const inflightKey = 'css:' + absKey;
-    if (inflight.has(inflightKey)) return inflight.get(inflightKey);
-
-    const p = new Promise(function (res, rej) {
-      const l = document.createElement('link');
-      l.rel = 'stylesheet';
-      l.href = v(href);
-      l.setAttribute('data-ensured', absKey);
-      l.onload  = function(){ seenCSS.add(absKey); res(); };
-      l.onerror = function(){ rej(new Error('CSS load failed: ' + href)); };
-      document.head.appendChild(l);
-    }).finally(function(){ inflight.delete(inflightKey); });
-
-    inflight.set(inflightKey, p);
-    return p;
-  };
-
-  window.ensureScript = window.ensureScript || function (src, opt) {
-    opt = opt || {};
-    const absKey = canonical(src);
-    const selEnsured = 'script[data-ensured="' + escAttr(absKey) + '"]';
-    if (seenJS.has(absKey) || document.querySelector(selEnsured)) return Promise.resolve();
-
-    const inflightKey = 'js:' + absKey;
-    if (inflight.has(inflightKey)) return inflight.get(inflightKey);
-
-    const p = new Promise(function (res, rej) {
-      const s = document.createElement('script');
-      s.src = v(src);
-      if (opt.type === 'module') {
-        s.type = 'module';
-      } else {
-        s.async = true;
-        if (opt.type) s.type = opt.type;
-      }
-      if (opt.integrity) {
-        s.integrity = opt.integrity;
-        s.crossOrigin = opt.crossOrigin || 'anonymous';
-      }
-      s.setAttribute('data-ensured', absKey);
-      s.onload  = function(){ seenJS.add(absKey); res(); };
-      s.onerror = function(){ rej(new Error('Script load failed: ' + src)); };
-      document.head.appendChild(s);
-    }).finally(function(){ inflight.delete(inflightKey); });
-
-    inflight.set(inflightKey, p);
-    return p;
-  };
-})();
-
+﻿// =========================================================
+// /js/routes.js — FULL FINAL (CLEANED)
+// REQUIREMENTS (load order in index.html):
+//   1) /js/asset-loader.js   (provides v/ensureCSS/ensureScript)
+//   2) /js/html-loader.js    (provides KD_HTML.mount / KD_HTML.loadAndMount)
+//   3) /js/routes.js         (this file)
+//
+// CLEANUP GOALS:
+// ✅ 불필요한 routes.js-side "모바일 카드 강제 생성" 제거 (html-loader.js + building-detail.js가 처리)
+// ✅ buildRoutes 시그니처/기존 라우팅 구조 유지
+// ✅ Buildings index 스타일 스코프/SEO 메타 적용 유지
+// ✅ Buildings detail: KD_HTML.mount afterMount에서 scope(root.shadowRoot || root) 전달 + KD_BUILDING_DETAIL_INIT(scope)
+// ✅ slug/lang/캐시/링크 하이재킹 유지
+// =========================================================
 (function () {
   'use strict';
 
+  // -----------------------------
+  // Render token (prevent stale async renders)
+  // -----------------------------
   var __renderToken = 0;
   function newRenderToken() { return ++__renderToken; }
   function isStale(token)   { return token !== __renderToken; }
 
   try { history.scrollRestoration = 'manual'; } catch (e) {}
 
+  // -----------------------------
+  // Helpers
+  // -----------------------------
   function htmlBodyOnly(html) {
     if (!html) return html;
     try {
@@ -114,6 +45,45 @@
     }
   }
 
+  // Used for scoping index/list page <style> into #content (keeps your previous behavior)
+  function scopeCssToContent(cssText) {
+    var css = String(cssText || '');
+    css = css.replace(/:root\s*\{/g, '#content{');
+
+    var keyframes = [];
+    css = css.replace(/@(-webkit-)?keyframes[^{]*\{[\s\S]*?\}\s*\}/g, function (m) {
+      var idx = keyframes.push(m) - 1;
+      return '___KS_KEYFRAMES_' + idx + '___';
+    });
+
+    css = css.replace(/(^|})\s*([^{@}][^{]*)\{/g, function (m, brace, sel) {
+      var s = (sel || '').trim();
+      if (!s) return m;
+      if (s.indexOf('#content') === 0) return brace + ' ' + sel + '{';
+
+      var scoped = s.split(',').map(function (part) {
+        part = (part || '').trim();
+        if (!part) return part;
+
+        part = part.replace(/^\s*html\b/, '#content').replace(/^\s*body\b/, '#content');
+        if (part.indexOf('#content') === 0) return part;
+
+        return '#content ' + part;
+      }).join(', ');
+
+      return brace + ' ' + scoped + '{';
+    });
+
+    css = css.replace(/___KS_KEYFRAMES_(\d+)___/g, function (_m, n) {
+      return keyframes[parseInt(n, 10)] || '';
+    });
+
+    return css;
+  }
+
+  // -----------------------------
+  // Exposed routes builder
+  // -----------------------------
   window.buildRoutes = function (deps) {
     deps = deps || {};
     var loadHTML = deps.loadHTML;
@@ -123,7 +93,11 @@
 
     var _loadScriptOnce = (typeof loadScriptOnce === 'function')
       ? loadScriptOnce
-      : function (src, opt) { return window.ensureScript(src, opt); };
+      : function (src, opt) {
+          return (window.ensureScript
+            ? window.ensureScript(src, opt)
+            : Promise.reject(new Error('ensureScript missing')));
+        };
 
     function apply(root) {
       if (window.I18N && typeof window.I18N.applyTo === 'function') {
@@ -190,162 +164,9 @@
       link.href = href;
     }
 
-    function scopeCssToContent(cssText) {
-      var css = String(cssText || '');
-      css = css.replace(/:root\s*\{/g, '#content{');
-
-      var keyframes = [];
-      css = css.replace(/@(-webkit-)?keyframes[^{]*\{[\s\S]*?\}\s*\}/g, function (m) {
-        var idx = keyframes.push(m) - 1;
-        return '___KS_KEYFRAMES_' + idx + '___';
-      });
-
-      css = css.replace(/(^|})\s*([^{@}][^{]*)\{/g, function (m, brace, sel) {
-        var s = (sel || '').trim();
-        if (!s) return m;
-        if (s.indexOf('#content') === 0) return brace + ' ' + sel + '{';
-
-        var scoped = s.split(',').map(function (part) {
-          part = (part || '').trim();
-          if (!part) return part;
-
-          part = part.replace(/^\s*html\b/, '#content').replace(/^\s*body\b/, '#content');
-          if (part.indexOf('#content') === 0) return part;
-
-          return '#content ' + part;
-        }).join(', ');
-
-        return brace + ' ' + scoped + '{';
-      });
-
-      css = css.replace(/___KS_KEYFRAMES_(\d+)___/g, function (_m, n) {
-        return keyframes[parseInt(n, 10)] || '';
-      });
-
-      return css;
-    }
-
-    function isNonExecutableScriptType(typeStr){
-      var t0 = String(typeStr || '').trim().toLowerCase();
-      if (t0 === 'application/ld+json') return true;
-      if (t0 === 'application/json') return true;
-      if (t0 === 'application/schema+json') return true;
-      if (t0 && t0.indexOf('application/') === 0) return true;
-      return false;
-    }
-
-    async function mountBuildingMain(root, html, pageURL){
-      var doc = null;
-      try { doc = new DOMParser().parseFromString(html, 'text/html'); } catch (eDoc) {}
-
-      if(!doc || !doc.body){
-        root.innerHTML = htmlBodyOnly(html);
-        return { doc: null };
-      }
-
-      var main = doc.querySelector('main');
-      if(!main){
-        root.innerHTML = htmlBodyOnly(html);
-        return { doc: doc };
-      }
-
-      try {
-        var title = (doc.querySelector('title') && doc.querySelector('title').textContent) || '';
-        if (title) document.title = title;
-
-        var desc = doc.querySelector('meta[name="description"]');
-        if (desc && desc.content) setMetaTag('description', desc.content);
-
-        var can = doc.querySelector('link[rel="canonical"]');
-        if (can && can.href) setCanonical(can.href);
-        else if (pageURL) {
-          try { setCanonical(new URL(pageURL, location.href).href); } catch(eCan){}
-        }
-      } catch(eMeta){}
-
-      try {
-        var links = doc.head ? doc.head.querySelectorAll('link[rel="stylesheet"][href]') : [];
-        for (var i=0;i<links.length;i++){
-          var href = links[i].getAttribute('href');
-          if(!href) continue;
-          try { await ensureCSS(href); } catch(eCss){}
-        }
-      } catch(eL){}
-
-      try {
-        var styles = doc.head ? doc.head.querySelectorAll('style') : [];
-        var scopedAll = '';
-        for (var j=0;j<styles.length;j++){
-          var cssText = styles[j].textContent || '';
-          if(!cssText.trim()) continue;
-          scopedAll += '\n' + scopeCssToContent(cssText);
-        }
-
-        var old = document.getElementById('bld-scoped-style');
-        if (old && old.parentNode) old.parentNode.removeChild(old);
-
-        if (scopedAll.trim()) {
-          var st = document.createElement('style');
-          st.id = 'bld-scoped-style';
-          st.textContent = scopedAll;
-          document.head.appendChild(st);
-        }
-      } catch(eS){}
-
-      root.innerHTML = main.innerHTML;
-
-      try {
-        var scripts = Array.prototype.slice.call(doc.querySelectorAll('script')) || [];
-        var LOADED = (window.__BLD_SCRIPT_LOADED__ = window.__BLD_SCRIPT_LOADED__ || new Set());
-
-        for (var k=0;k<scripts.length;k++){
-          var sc = scripts[k];
-          var src = sc.getAttribute && sc.getAttribute('src');
-          var typeAttr = (sc.getAttribute && sc.getAttribute('type')) ? sc.getAttribute('type') : '';
-          var type = String(typeAttr || '').trim();
-          var isModule = (type === 'module');
-          var hasNoModule = sc.hasAttribute && sc.hasAttribute('nomodule');
-
-          if (!isModule && isNonExecutableScriptType(type)) continue;
-
-          if (src){
-            var abs = '';
-            try { abs = new URL(src, location.href).href; } catch(eU){ abs = src; }
-            if (LOADED.has(abs)) continue;
-            try { await ensureScript(src, { type: isModule ? 'module' : undefined }); } catch(eExt){}
-            LOADED.add(abs);
-            continue;
-          }
-
-          var code = (sc.textContent || '');
-          if(!code.trim()) continue;
-
-          var s = document.createElement('script');
-          if(isModule){
-            s.type = 'module';
-            s.text = code + '\n//# sourceURL=building:inline-module:' + k;
-            root.appendChild(s);
-            continue;
-          }
-
-          s.text =
-            '(function(window, document){\n' +
-            code +
-            '\n}).call(window, window, document);\n' +
-            '//# sourceURL=building:inline:' + k;
-
-          if(hasNoModule) s.noModule = true;
-          root.appendChild(s);
-        }
-      } catch(eRun){}
-
-      if (document.documentElement.classList.contains('enhanced')) {
-        try { root.classList.add('enhanced'); } catch(_) {}
-      }
-
-      return { doc: doc };
-    }
-
+    // -----------------------------
+    // Language / slug normalization
+    // -----------------------------
     function normLangCode(raw){
       var s = String(raw || '').trim();
       if (!s) return '';
@@ -407,12 +228,16 @@
       return slug;
     }
 
+    // -----------------------------
+    // HTML cache
+    // -----------------------------
     var __htmlCache = new Map();
     function cacheGet(k){ return __htmlCache.get(k); }
     function cacheSet(k, v){
       __htmlCache.set(k, v);
       if (__htmlCache.size > 20) __htmlCache.delete(__htmlCache.keys().next().value);
     }
+
     async function loadHTMLCached(cands) {
       var key = cands.join('|');
       var hit = cacheGet(key);
@@ -422,6 +247,9 @@
       return html;
     }
 
+    // -----------------------------
+    // Buildings list link hijack
+    // -----------------------------
     function bindBuildingsListLinksOnce(el){
       if (el.__bldListBound) return;
       el.__bldListBound = true;
@@ -452,6 +280,9 @@
       }, true);
     }
 
+    // -----------------------------
+    // Buildings index head apply (scoped styles)
+    // -----------------------------
     function applyBuildingsIndexHead(doc){
       if (!doc || !doc.head) return;
 
@@ -460,7 +291,7 @@
         for (var i=0;i<links.length;i++){
           var href = links[i].getAttribute('href');
           if (!href) continue;
-          try { ensureCSS(href); } catch(_){}
+          try { window.ensureCSS && window.ensureCSS(href); } catch(_){}
         }
       } catch(_){}
 
@@ -483,29 +314,46 @@
           document.head.appendChild(st);
         }
       } catch(_){}
-
-      try {
-        var htmlCls = document.documentElement.classList;
-        if (!htmlCls.__ksEnhancedPatched) {
-          htmlCls.__ksEnhancedPatched = true;
-          var _add = htmlCls.add.bind(htmlCls);
-          htmlCls.add = function(){
-            for (var i=0;i<arguments.length;i++){
-              if (arguments[i] === 'enhanced') {
-                try { document.getElementById('content')?.classList.add('enhanced'); } catch(_) {}
-              }
-            }
-            return _add.apply(htmlCls, arguments);
-          };
-        }
-      } catch(_){}
     }
 
+    // -----------------------------
+    // Buildings static HTML mount (uses html-loader.js)
+    // -----------------------------
+    async function mountBuildingStatic(root, html, pageURL){
+      if (window.KD_HTML && typeof window.KD_HTML.mount === 'function') {
+        await window.KD_HTML.mount(root, html, {
+          pageURL: pageURL,
+          preferWrap: true,
+          scopeCSS: true,
+          scopeSelector: '#content',
+          ensureCommonCSS: '/css/building-detail.css',
+          afterMount: async function(){
+            // ✅ ShadowRoot-safe init
+            try {
+              var scope = (root && root.shadowRoot) ? root.shadowRoot : root;
+              if (window.KD_BUILDING_DETAIL_INIT) window.KD_BUILDING_DETAIL_INIT(scope);
+            } catch(_) {}
+          }
+        });
+        return { doc: null };
+      }
+
+      root.innerHTML = htmlBodyOnly(html);
+      try {
+        if (window.KD_BUILDING_DETAIL_INIT) window.KD_BUILDING_DETAIL_INIT(root);
+      } catch(_) {}
+      return { doc: null };
+    }
+
+    // -----------------------------
+    // Routes
+    // -----------------------------
     var routes = {
       '/home': {
         title: '홈 - KingshotData.kr',
         render: async function (el) {
           var token = newRenderToken();
+
           var cards = [
             { href:'/buildings',  img:'/img/home/saulchar.png',   t:'home.card.buildings.title',   d:'home.card.buildings.desc' },
             { href:'/heroes',     img:'/img/home/helgachar.png',  t:'home.card.heroes.title',      d:'home.card.heroes.desc' },
@@ -524,7 +372,7 @@
                     return '' +
                     '<a class="card card--category" href="' + c.href + '">' +
                       '<div class="card__media" aria-hidden="true">' +
-                        iconImg(t(c.t), c.img) +
+                        (iconImg ? iconImg(t(c.t), c.img) : '') +
                       '</div>' +
                       '<div class="card__body">' +
                         '<div class="card__title" data-i18n="' + c.t + '">' + t(c.t) + '</div>' +
@@ -552,7 +400,6 @@
           try { if (window.I18N && window.I18N.loadNamespace) { await window.I18N.loadNamespace('buildings'); } } catch(e) {}
 
           var lang = getCurrentLang();
-
           el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
 
           var cands = [
@@ -658,7 +505,7 @@
           var pageURL = '/' + lang + '/buildings/' + slug + '.html';
           if (slug === 'town-center') pageURL = '/' + lang + '/buildings/town-center.html';
 
-          await mountBuildingMain(el, html, pageURL);
+          await mountBuildingStatic(el, html, pageURL);
           if (isStale(token)) return;
 
           try { apply(el); } catch(e){}
@@ -668,6 +515,7 @@
         }
       },
 
+      // ---- 이하 나머지 라우트는 원본 유지 ----
       '/heroes': {
         title: '영웅 - KingshotData.kr',
         render: async function (el) {
@@ -693,7 +541,7 @@
             el.__heroesLinkBound = true;
           }
 
-          var jsCands = [ v('/js/pages/heroes.js') ];
+          var jsCands = [ (window.v ? window.v('/js/pages/heroes.js') : '/js/pages/heroes.js') ];
           var loadedAny = false;
           for (var i=0;i<jsCands.length;i++){
             try { await _loadScriptOnce(jsCands[i]); loadedAny = true; break; } catch(e){}
@@ -733,7 +581,7 @@
 
           apply(el);
 
-          var jsCands = [ v('/js/pages/hero.js') ];
+          var jsCands = [ (window.v ? window.v('/js/pages/hero.js') : '/js/pages/hero.js') ];
           var ok = false;
           for (var i=0;i<jsCands.length;i++){
             try { await _loadScriptOnce(jsCands[i]); ok = true; break; } catch(e){}
@@ -768,7 +616,7 @@
 
           async function loadGuidesDeps() {
             var cssCands = ['/css/guides.css', 'css/guides.css'];
-            for (var i=0;i<cssCands.length;i++){ try { await ensureCSS(cssCands[i]); break; } catch(e){} }
+            for (var i=0;i<cssCands.length;i++){ try { window.ensureCSS && await window.ensureCSS(cssCands[i]); break; } catch(e){} }
             var jsCands = [ '/js/pages/guides.js' ];
             for (var j=0;j<jsCands.length;j++){ try { await _loadScriptOnce(jsCands[j]); break; } catch(e){} }
           }
@@ -857,7 +705,7 @@
 
           el.innerHTML = htmlBodyOnly(html);
 
-          var jsCands = [ v('/js/pages/database.js') ];
+          var jsCands = [ (window.v ? window.v('/js/pages/database.js') : '/js/pages/database.js') ];
           var loadedAny = false;
           for (var i=0;i<jsCands.length;i++){
             try { await _loadScriptOnce(jsCands[i]); loadedAny = true; break; } catch(e){}
@@ -961,11 +809,15 @@
       }
     };
 
+    // legacy alias
     routes['/guide'] = {
       title: '가이드 - KingshotData.kr',
       render: function (el, rest) { return routes['/guides'].render(el, rest); }
     };
 
+    // -----------------------------
+    // Prefetch (keep)
+    // -----------------------------
     var PREFETCH_MAP = {
       '/heroes':     { js: ['/js/pages/heroes.js'], html: ['pages/heroes.html','/pages/heroes.html'] },
       '/database':   { js: ['/js/pages/database.js'], html: ['pages/database.html','/pages/database.html'] },
@@ -977,8 +829,8 @@
         var path = new URL(href, location.href).pathname;
         var cfg = PREFETCH_MAP[path];
         if (!cfg) return;
-        if (cfg.css) cfg.css.forEach(function(h){ ensureCSS(h); });
-        if (cfg.js)  cfg.js.forEach(function(s){ ensureScript(s); });
+        if (cfg.css && window.ensureCSS) cfg.css.forEach(function(h){ window.ensureCSS(h); });
+        if (cfg.js  && window.ensureScript) cfg.js.forEach(function(s){ window.ensureScript(s); });
         if (cfg.html) cfg.html.forEach(function(h){ loadHTMLCached([h]); });
       } catch (e) {}
     }

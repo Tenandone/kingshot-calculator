@@ -1,4 +1,6 @@
 // /js/guides.js — TOC/검색 + include + 접힘/펼침(지연 로드)
+// ✅ FIX: SPA에서 #anchor 클릭이 전역 라우터에 가로채여 튀는 현상만 차단
+// ✅ IMPORTANT: /pages/guides/*.html 링크는 "정적 이동(풀리로드)" 그대로 유지 (SPA로 변환 금지)
 (function () {
   'use strict';
   if (window.__GUIDES_INIT__) return;
@@ -6,19 +8,59 @@
 
   const d = document;
 
+  function getGuidesRoot() {
+    return d.querySelector('[data-ks-guides-root="1"]') || d;
+  }
+
+  // ✅ 앵커(#id)만 가로채서 스무스 스크롤 (capture로 전역 라우터보다 먼저)
+  function bindGuidesAnchorOnly(root){
+    if (!root || root.__guides_anchor_bound) return;
+    root.__guides_anchor_bound = true;
+
+    root.addEventListener('click', (e) => {
+      const a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+
+      const href = (a.getAttribute('href') || '').trim();
+      if (!href) return;
+
+      // 외부/새창/다운로드는 그대로
+      if (a.target === '_blank' || a.hasAttribute('download')) return;
+      if (/^https?:\/\//i.test(href) || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+
+      // 라우팅 hash 제외
+      if (href.startsWith('#/')) return;
+
+      // ✅ 같은 페이지 앵커만 처리
+      if (href.charAt(0) !== '#' || href.length < 2) return;
+
+      const id = href.slice(1);
+      const target = d.getElementById(id);
+      if (!target) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      try {
+        if (history && history.replaceState) history.replaceState(null, '', '#' + id);
+        else location.hash = '#' + id;
+      } catch (_) {}
+
+      try { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (_) {}
+    }, true);
+  }
+
   /* ========== TOC (목차) ========== */
   function buildTOC() {
     const toc = d.getElementById('guide-toc');
     if (!toc) return;
 
-    // ✅ 제외 규칙: (1) id가 'bear-tier' 인 섹션 (2) data-toc="false|0|no|off|hide"
     const blocks = [...d.querySelectorAll('.g-block')].filter(b => {
       if (b.id === 'bear-tier') return false;
       const v = (b.dataset.toc || '').toLowerCase();
       return !(['false','0','no','off','hide'].includes(v));
     });
 
-    // 다국어 span(.lang.lang-xx) 사용 시 현재 언어만 집어오기
     const lang = d.documentElement.getAttribute('lang') || 'ko';
     const pickTitle = (h2) => {
       if (!h2) return '';
@@ -74,7 +116,6 @@
         if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
         const text = await res.text();
 
-        // 완전 문서면 <main> → 없으면 <body> → 없으면 원문
         let html = text;
         if (/<html[\s>]/i.test(text) || /<body[\s>]/i.test(text) || /<!doctype/i.test(text)) {
           const doc = new DOMParser().parseFromString(text, 'text/html');
@@ -91,29 +132,12 @@
     }));
   }
 
-  /* ========== 스무스 스크롤(내부 앵커) ========== */
-  d.addEventListener('click', (e) => {
-    const a = e.target.closest('a[href^="#"]');
-    if (!a) return;
-    const href = a.getAttribute('href') || '';
-    if (href.startsWith('#/')) return; // 라우팅 링크 제외
-
-    const id = href.slice(1);
-    const target = d.getElementById(id);
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth' });
-  });
-
   /* ============================================================
    * 접힘/펼침(이벤트 위임) + data-src 지연 로드 + 스코프 래퍼
    * ============================================================ */
-
-  // 🔧 라벨은 기호 고정
   const SHOW_ICON = '▼▼▼';
   const HIDE_ICON = '▲▲▲';
 
-  // 현재 언어 파라미터(포함 문서 번역 동기화)
   function currentLangParam(){
     const urlLang = new URLSearchParams(location.search).get('lang');
     const i18nLang = window.I18N?.getLang?.() || window.I18N?.lang;
@@ -122,7 +146,6 @@
     return lang ? ('lang=' + encodeURIComponent(lang)) : '';
   }
 
-  // data-src 지연 로드 + <style> 주입 + <script> 재실행 + i18n 적용
   async function lazyInclude(host){
     if (!host || host.dataset.loaded === '1') return;
     let url = host.dataset.src || host.getAttribute('data-src');
@@ -136,11 +159,9 @@
       const doc  = new DOMParser().parseFromString(html, 'text/html');
       const frag = doc.querySelector('main') || doc.body || doc;
 
-      // ✅ 스코프 래퍼 (data-scope || include-scope)
       const scope = host.dataset.scope || 'include-scope';
       host.innerHTML = `<div class="${scope}">${frag.innerHTML}</div>`;
 
-      // <style> 1회 주입(간단한 중복 방지)
       doc.querySelectorAll('style').forEach(st=>{
         const sig = (st.textContent||'').trim().slice(0,120);
         const dup = [...d.head.querySelectorAll('style')].some(s=>s.textContent.includes(sig));
@@ -151,7 +172,6 @@
         }
       });
 
-      // <script> 재실행
       frag.querySelectorAll('script').forEach(s=>{
         const ns = d.createElement('script');
         if (s.src){ ns.src = s.src; ns.defer = s.defer; ns.async = s.async; }
@@ -161,7 +181,6 @@
       });
 
       if (window.I18N?.applyTo) I18N.applyTo(host);
-
       host.dataset.loaded = '1';
     }catch(err){
       console.error('[lazy include fail]', url, err);
@@ -169,7 +188,6 @@
     }
   }
 
-  // ✅ 중복 바인딩 가드 + 토글 핸들러
   if (!window.__GUIDES_TOGGLE_WIRED__) {
     window.__GUIDES_TOGGLE_WIRED__ = true;
     d.addEventListener('click', onToggleClick, { passive: true });
@@ -188,27 +206,24 @@
       btn.setAttribute('aria-expanded','false');
       btn.textContent = SHOW_ICON;
       body.classList.remove('is-open');
-      body.style.display = 'none';   // 인라인로 확실히 숨김
+      body.style.display = 'none';
     } else {
       btn.setAttribute('aria-expanded','true');
       btn.textContent = HIDE_ICON;
       body.classList.add('is-open');
-      body.style.display = 'block';  // 확실히 표시
-      await lazyInclude(body);        // 첫 펼침 때만 로드
+      body.style.display = 'block';
+      await lazyInclude(body);
     }
   }
 
-  // 초기 라벨/상태 정리
   function initCollapsibles(root){
     (root || d).querySelectorAll('.g-block').forEach(block=>{
       const btn  = block.querySelector('.g-toggle');
       const body = block.querySelector('.g-body');
       if (!btn || !body) return;
 
-      // 번역 키 주입 방지 (아이콘 고정)
       btn.removeAttribute('data-i18n');
 
-      // 과거 data-include가 남아있으면 data-src로 이동(자동 include 차단)
       if (body.hasAttribute('data-include')){
         body.dataset.src = body.getAttribute('data-include');
         body.removeAttribute('data-include');
@@ -217,7 +232,6 @@
 
       if (!btn.hasAttribute('aria-expanded')) btn.setAttribute('aria-expanded','false');
 
-      // 상태/아이콘/표시 동기화
       const open = btn.getAttribute('aria-expanded') === 'true' || body.classList.contains('is-open');
       if (open) {
         btn.setAttribute('aria-expanded','true');
@@ -233,11 +247,9 @@
     });
   }
 
-  // 언어 변경 시에도 아이콘 유지(번역 적용 금지) + 상태 재동기화 + TOC 재빌드
   window.addEventListener('i18n:change', ()=> { initCollapsibles(d); buildTOC(); });
   d.addEventListener('i18n:changed', ()=> { initCollapsibles(d); buildTOC(); });
 
-  // 해시로 진입 시(#ruins 등) 자동 펼침
   function openByHash(){
     const id = (location.hash||'').slice(1);
     if (!id) return;
@@ -250,22 +262,23 @@
     }
   }
 
-  /* ========== 외부 호출 가능 ========== */
   window.GUIDES_apply = async function (root) {
-    await loadIncludes(root || d);   // data-include 처리
+    const r = root || d;
+    await loadIncludes(r);
     buildTOC();
     initSearch();
-    initCollapsibles(root || d);     // 접힘 초기화
-    openByHash();                    // 해시 자동 펼침
+    initCollapsibles(r);
+    openByHash();
+
+    // ✅ 앵커만 스코프 가로채기
+    bindGuidesAnchorOnly(getGuidesRoot());
   };
 
-  /* ========== 자동 1회 실행 ========== */
   if (d.readyState === 'loading') {
     d.addEventListener('DOMContentLoaded', () => window.GUIDES_apply(d), { once: true });
   } else {
     window.GUIDES_apply(d);
   }
 
-  // 언어 변경 시 TOC 갱신 (이벤트 네이밍 호환)
   d.addEventListener('i18n:changed', buildTOC);
 })();

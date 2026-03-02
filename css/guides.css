@@ -1,4 +1,6 @@
 /* /css/guides.css */
+
+/* ===== Guides list header/tools ===== */
 .guides-head{margin:0 0 12px}
 .guides-tools{display:flex;gap:10px;align-items:center;margin:8px 0}
 #guide-search{flex:1;min-width:220px;padding:6px 10px;border:1px solid var(--border);border-radius:10px;background:var(--panel);color:var(--text)}
@@ -8,7 +10,7 @@
 .g-block{margin:20px 0 28px}
 .g-title{margin:0 0 8px}
 
-/* 이미 곰사냥 블록에서 쓰던 것들 */
+/* ===== Guide article base (곰사냥 블록에서 쓰던 것들) ===== */
 .guide { display:block; }
 .guide__title { margin:0 0 8px; font-size:24px; text-align:center; }
 .guide__intro { color:var(--muted); margin:0 0 16px; }
@@ -32,25 +34,62 @@
 
 .guide__tips, .guide__meta{ background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:14px; box-shadow:0 2px 10px rgba(0,0,0,.06); margin-top:16px; }
 .guide__tips h2, .guide__meta h2{ margin:0 0 8px; font-size:18px; color:var(--text); }
+
+/* ===== Guides index cards ===== */
 .guide-index{
   display:grid; gap:12px; margin:16px 0 8px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
+
+/* ✅ FIX: 가이드 카드(모바일)에서 이미지 우측 텍스트 → 이미지 아래 텍스트
+   - 카드 자체는 링크(.guide-card)라 내부 레이아웃만 바로잡는다
+   - 모든 언어 공통: ... (ellipsis) 대신 2줄까지 표시 */
 .guide-card{
-  display:block; text-decoration:none; color:var(--text);
+  display:flex;                /* 기존 block → flex (안전하게 고정) */
+  flex-direction:column;       /* ✅ 세로 배치 */
+  align-items:center;
+  gap:10px;
+
+  text-decoration:none; color:var(--text);
   background:var(--panel); border:1px solid var(--border);
   border-radius:14px; padding:14px;
   box-shadow:0 2px 10px rgba(0,0,0,.06);
   transition:transform .05s ease, box-shadow .2s ease;
 }
 .guide-card:hover{ transform:translateY(-1px); box-shadow:0 4px 14px rgba(0,0,0,.08); }
-.guide-card__title{ margin:0 0 6px; font-size:16px; }
-.guide-card__desc{ margin:0; font-size:13px; }
+
+/* 카드 안 이미지(있을 때) - guide-card 내부에 img가 들어오면 자동으로 위쪽 */
+.guide-card img{
+  display:block;
+  max-width:160px;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  margin:0 auto;
+}
+
+/* 제목/설명: 가운데 + 줄바꿈 허용 + 2줄 제한(… 방지) */
+.guide-card__title,
+.guide-card__desc{
+  width:100%;
+  text-align:center;
+
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  line-clamp:2;
+  -webkit-line-clamp:2;
+}
+.guide-card__title{ margin:0 0 6px; font-size:16px; font-weight:800; }
+.guide-card__desc{ margin:0; font-size:13px; color:var(--muted); }
+
 #guide-count { display: none !important; }
 
 /* ── 사라진 유적 포함문서 CSS 격리 ── */
 #ruins .ruins-scope {
-  /* 전역 규칙 영향 최소화 */
   all: revert;
   display: block;
   font: 15px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;
@@ -59,13 +98,81 @@
 #ruins .ruins-scope * { box-sizing:border-box; }
 #ruins .ruins-scope a { color:#0b57d0; text-decoration:none; }
 #ruins .ruins-scope a:hover { text-decoration:underline; }
-/* 포함문서 내부 .wrap 충돌 회피 */
 #ruins .ruins-scope .wrap { max-width:980px; margin:0 auto; padding:32px 16px; }
-/* 편의: 이미지 기본 반응형 */
 #ruins .ruins-scope img { max-width:100%; height:auto; display:block; }
+
+/* ===== Lang toggles ===== */
 .lang { display: none; }
 html[lang="ko"] .lang-ko { display: inline; }
 html[lang="en"] .lang-en { display: inline; }
 html[lang="ja"] .lang-ja { display: inline; }
 html[lang="zh-CN"] .lang-zh-CN { display: inline; }
 html[lang="zh-TW"] .lang-zh-TW { display: inline; }
+
+/* =========================
+   FIX: Guides index 카드(현재 .card 구조) — 이미지 아래 텍스트
+   - 현재 DOM: .guide-index .card > a > .imgbox + .card-name
+   ========================= */
+.guide-index .card > a{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:10px !important;
+}
+
+/* imgbox는 위쪽 */
+.guide-index .card .imgbox{
+  width:100% !important;
+  display:flex !important;
+  justify-content:center !important;
+}
+
+/* 이름은 아래쪽 + 2줄 허용(… 방지) */
+.guide-index .card .card-name{
+  width:100% !important;
+  text-align:center !important;
+
+  white-space:normal !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:2 !important;
+  line-clamp:2 !important;
+}
+/* =========================
+   FIX: Guides cards — 이미지 아래 텍스트 (모든 화면폭)
+   현재 구조: .guide-index .card > a > .imgbox + .card-name
+   ========================= */
+.guide-index .card > a{
+  display:flex !important;
+  flex-direction:column !important;   /* ✅ 좌우 → 상하 */
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:12px !important;
+}
+
+/* 이미지 박스는 위 */
+.guide-index .card .imgbox{
+  width:100% !important;
+  display:flex !important;
+  justify-content:center !important;
+}
+
+/* 텍스트는 아래 + 가운데 */
+.guide-index .card .card-name{
+  width:100% !important;
+  text-align:center !important;
+
+  /* ✅ ... 방지하고 2줄까지 */
+  white-space:normal !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:2 !important;
+  line-clamp:2 !important;
+}

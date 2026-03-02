@@ -1,0 +1,128 @@
+/* =========================================================
+   Common-Safe: Table Wrap + Responsive Fit (NO cards, NO JS)
+   - ✅ 공통 CSS에 넣어도 다른 페이지에 부작용 거의 없음
+   - ✅ 기존 "모바일 스택(table->block)" 최적화는 제거 유지
+   - ✅ 모바일에서는 가로 스크롤 허용(깨짐 방지)
+   - ✅ 데스크탑에서는 overflow 숨김/clip + 요구사항 칸만 줄바꿈
+   ========================================================= */
+
+/* ---- Table container (common) ---- */
+.table-wrap{
+  border:1px solid var(--border, #e5e7eb);
+  border-radius:14px;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  background:#fff;
+}
+
+/* ---- Base table (common) ---- */
+.table-wrap table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  background:#fff;
+}
+.table-wrap thead th{
+  background:#f8fafc;
+  text-align:left;
+  padding:9px 10px;
+  border-bottom:1px solid var(--border, #e5e7eb);
+  font-size:12px;
+  white-space:nowrap;
+}
+.table-wrap tbody td{
+  padding:9px 10px;
+  border-bottom:1px solid var(--border, #e5e7eb);
+  vertical-align:top;
+  font-size:13px;
+  white-space:nowrap;
+}
+.table-wrap tbody tr:nth-child(even) td{background:#fcfcfd}
+.table-wrap tbody tr:hover td{background:#f3f6ff}
+.table-wrap tbody tr:last-child td{border-bottom:0}
+
+/* helpers */
+.table-wrap .center{text-align:center}
+.table-wrap .num{text-align:right; font-variant-numeric: tabular-nums}
+
+/* ---- Sticky header support (common; needs --sticky-top set by page/JS) ---- */
+.table-wrap thead th{
+  position:sticky;
+  top:var(--sticky-top, 0px);
+  z-index:3;
+}
+
+/* ---- Sticky first column (optional; only when table has .sticky-firstcol) ---- */
+.table-wrap table.sticky-firstcol th:first-child,
+.table-wrap table.sticky-firstcol td:first-child{
+  position: sticky;
+  left: 0;
+  background:inherit;
+  z-index:2;
+}
+.table-wrap table.sticky-firstcol thead th:first-child{
+  z-index:4;
+  background:#f8fafc;
+}
+
+/* ---- Desktop: fit columns / avoid horizontal scrollbar ---- */
+@media (min-width: 901px){
+  .table-wrap table{ table-layout:fixed; }
+
+  .table-wrap{ overflow-x: clip; }
+  @supports not (overflow: clip){
+    .table-wrap{ overflow-x: hidden; }
+  }
+
+  /* 공통 안전장치: 긴 텍스트(요구사항)만 줄바꿈 허용 */
+  .table-wrap td.req,
+  .table-wrap th.req-h{
+    white-space: normal;
+    overflow-wrap:anywhere;
+    word-break:keep-all;
+  }
+}
+
+/* ---- Mobile: keep scroll (safe default) ---- */
+@media (max-width: 900px){
+  .table-wrap{
+    overflow-x:auto;  /* ✅ 모바일은 스크롤 허용이 가장 안전 */
+  }
+}
+/* =========================
+   FIX: Desktop 가로스크롤 제거 (table fit)
+   - Desktop(>=901px): 스크롤 숨김 + 줄바꿈 허용 + fixed layout
+   - Mobile(<901px): 스크롤 유지
+   ========================= */
+
+@media (min-width: 901px){
+  .table-wrap{
+    overflow-x: hidden !important; /* 데스크탑: 가로스크롤 제거 */
+  }
+
+  .table-wrap table{
+    table-layout: fixed !important; /* 칼럼 폭 고정 -> 화면에 맞춤 */
+    width: 100% !important;
+    min-width: 0 !important;        /* 기존 min-width 있으면 제거 */
+  }
+
+  /* ✅ 핵심: nowrap 해제해서 셀이 줄바꿈 되게 */
+  .table-wrap th,
+  .table-wrap td{
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* 숫자 칼럼은 줄바꿈 안 되게 유지하고 싶으면(선택) */
+  .table-wrap td.num,
+  .table-wrap th.num{
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 900px){
+  .table-wrap{
+    overflow-x: auto !important; /* 모바일: 안전하게 스크롤 유지 */
+  }
+}

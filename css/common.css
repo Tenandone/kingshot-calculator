@@ -34,8 +34,26 @@ body{
   color-scheme:light;
 }
 img{max-width:100%;height:auto;display:block}
+
+/* ✅ Base links: keep brand for "general content links" by default */
 a{color:var(--brand);text-decoration:none}
 a:hover{text-decoration:underline}
+
+/* ✅ Cards: links follow text color (prevents blue inside UI cards) */
+.card,
+.card a,
+.card--category,
+.card--category a,
+.grid.category-grid a{
+  color:var(--text);
+  text-decoration:none;
+}
+.card:hover,
+.card:hover a{
+  color:var(--text);
+  text-decoration:none;
+}
+
 .muted{color:var(--muted)}
 .container{max-width:var(--container-max);margin:0 auto;padding:0 16px}
 .section{margin:16px 0}
@@ -232,6 +250,31 @@ a:hover{text-decoration:underline}
   gap:14px;
   align-items:stretch;
 }
+
+/* ✅ 카드 텍스트 중앙정렬 */
+#buildings-page #buildings-grid .card{ text-align:center; }
+
+/* ✅ 제목 링크가 직접 찍히는 구조 대응 */
+#buildings-page #buildings-grid .card a{
+  display:block;
+  width:100%;
+  text-align:center;
+  color:var(--text) !important;
+  text-decoration:none !important;
+}
+#buildings-page #buildings-grid .card__body{
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+#buildings-page #buildings-grid .card__title{
+  width:100%;
+  text-align:center;
+  color:var(--text) !important;
+}
+
 @media (max-width:980px){
   #buildings-page #buildings-grid{
     grid-template-columns:repeat(4, minmax(0,1fr)) !important;
@@ -399,6 +442,74 @@ a:hover{text-decoration:underline}
 }
 /* h1에 강제로 준 포커스 링 제거 (routes.js focusMain 때문에 생김) */
 #content h1[tabindex="-1"]:focus{
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* =========================
+   FIX: Home Categories 링크 텍스트 파란색 제거
+   ========================= */
+.home-container .category-grid a,
+.home-container .category-grid a:visited,
+.home-container .category-grid a:hover,
+.home-container .category-grid a:active{
+  color: var(--text) !important;
+  text-decoration: none !important;
+}
+.home-container .category-grid .card__title,
+.home-container .category-grid .card__subtitle{
+  color: var(--text) !important;
+}
+.home-container .category-grid .card__title a{
+  color: var(--text) !important;
+  text-decoration: none !important;
+}
+
+/* =========================
+   FIX: Buildings list 링크(이름) 파란색 제거 + 가운데 정렬
+   ========================= */
+#buildings-page #buildings-grid a,
+#buildings-page #buildings-grid a:visited,
+#buildings-page #buildings-grid a:hover,
+#buildings-page #buildings-grid a:active{
+  color: var(--text) !important;
+  text-decoration: none !important;
+}
+#buildings-page #buildings-grid{ text-align: center; }
+#buildings-page #buildings-grid a{
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+/* =========================
+   FIX: 전역 #content a(브랜드색) 규칙을 카드 UI에는 적용하지 않기
+   - 너 스샷의 범인: #content a { color: var(--brand) }
+   - 그래서 카드/그리드/리스트 UI 링크는 강제로 검정
+   ========================= */
+#content .card a,
+#content .card a:visited,
+#content #buildings-grid a,
+#content #buildings-grid a:visited,
+#content #heroes-grid a,
+#content #heroes-grid a:visited,
+#content .heroes-grid a,
+#content .heroes-grid a:visited,
+#content .hero-grid a,
+#content .hero-grid a:visited{
+  color: var(--text) !important;
+  text-decoration: none !important;
+}
+/* FIX: routes.js focusMain() 때문에 생기는 검은 포커스 박스 제거 */
+h1[tabindex="-1"]:focus,
+#content h1[tabindex="-1"]:focus,
+#main h1[tabindex="-1"]:focus{
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 혹시 포커스가 h1 말고 section/main에 잡히는 케이스까지 */
+[tabindex="-1"]:focus{
   outline: none !important;
   box-shadow: none !important;
 }

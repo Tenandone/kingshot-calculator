@@ -119,17 +119,26 @@
   text-align: left;
 }
 
-#calc-ui #result p { margin: 0; }
+/* ✅ FIX: 결과 표가 좁은 화면에서 세로로 쪼개지는 문제 해결
+   원인: table-layout:fixed + word-break:break-word → 180이 1/8/0으로 쪼개짐
+   해결: (모바일/좁은 화면) 표는 스크롤 전략 + 줄바꿈 금지 */
+#calc-ui #result{
+  overflow-x: auto;                 /* 표가 넘치면 가로 스크롤 */
+  -webkit-overflow-scrolling: touch;
+}
 
-/* 표 */
+/* 표(기본: 데스크탑에서 보기 좋게) */
 #calc-ui table {
   width: 100%;
   max-width: 900px;
   border-collapse: collapse;
-  table-layout: fixed;
-  word-break: break-word;
+
+  /* ✅ 기본은 auto로 두고, 필요한 경우만 fixed를 적용 */
+  table-layout: auto;
+  word-break: normal;
+
   font-size: 13px;
-  margin: 0 auto; /* 가운데 정렬 */
+  margin: 0 auto;
 }
 
 #calc-ui th,
@@ -138,6 +147,11 @@
   padding: 6px 8px;
   text-align: center;
   vertical-align: middle;
+
+  /* ✅ 숫자/문자 쪼개짐 방지 */
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 #calc-ui thead th {
@@ -186,27 +200,44 @@
 
   #calc-ui table { font-size: 11px; }
 }
-/* 결과 표는 고정 레이아웃 + 가운데 정렬 */
+
+/* =========================
+   (기존) 결과 표 고정 레이아웃: #equip-calc 전용
+   - 유지하되, 모바일에서 쪼개짐 방지 위해 overflow + min-width 추가
+   ========================= */
+
+/* 결과 표는 가운데 정렬 */
 #equip-calc #result table{
   width:100%;
   max-width:820px;
   margin:0 auto;
-  table-layout:fixed;
+
+  /* ✅ FIX: 모바일에서는 fixed 때문에 쪼개질 수 있어 min-width로 스크롤 유도 */
+  table-layout: fixed;
 }
 
-/* 숫자 열: 우측정렬 + 고정 폭에서 넘치면 숨김 + … 처리 */
+/* 숫자 열: 우측정렬 + … 처리 */
 #equip-calc th.num,
 #equip-calc td.num {
   text-align: right;
   font-variant-numeric: tabular-nums;
 
-  white-space: nowrap;        /* 줄바꿈 금지 */
-  overflow: hidden;           /* 넘치는 부분 숨김 */
-  text-overflow: ellipsis;    /* … 처리 */
-  max-width: 1px;             /* 테이블 레이아웃에서 ellipsis 동작 보장 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 1px;
 }
 
-/* 모바일에서도 동일하게 유지 (줄바꿈 허용 제거) */
+/* ✅ FIX: #equip-calc 결과 영역도 스크롤 허용 + 최소 폭 확보 */
+#equip-calc #result{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+#equip-calc #result table{
+  min-width: 760px; /* 칼럼이 많으면 스크롤로 보이게 */
+}
+
+/* 모바일에서도 동일하게 유지 */
 @media (max-width: 640px) {
   #equip-calc #result td.num {
     white-space: nowrap;
