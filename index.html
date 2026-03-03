@@ -3,19 +3,22 @@
 <head>
   <meta name="google-adsense-account" content="ca-pub-9189957764761115">
   <meta charset="utf-8" />
-  <script>window.__V="202601111500"</script>
+  <script>window.__V="20260303"</script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KingshotData</title>
   <base href="/" />
-  <!-- 사용 예시 (index.html 공통 head에 1번) -->
-<script src="/js/asset-loader.js?v=20260303" defer></script>
-<script src="/js/html-loader.js?v=20260303" defer></script>
+
+  <!-- loader deps -->
+  <script src="/js/asset-loader.js?v=20260303" defer></script>
+  <script src="/js/html-loader.js?v=20260303" defer></script>
 
   <!-- Adsense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189957764761115"
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189957764761115"
     crossorigin="anonymous"></script>
 
-  <!-- Google Analytics 4 -->
+  <!-- GA4 -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -25,7 +28,6 @@
   </script>
 
   <!-- Perf -->
-  <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <meta name="theme-color" content="#ffffff" />
 
@@ -41,16 +43,17 @@
   <link rel="canonical" href="https://kingshotdata.kr">
   <link rel="preload" as="image" href="/img/logo-kingshotdata.png?v=202509131858" />
 
-  <!-- Site CSS -->
+  <!-- CSS (theme-test.css is ALWAYS last) -->
   <link rel="stylesheet" href="/css/common.css?v=202509131858">
   <link rel="stylesheet" href="/css/category.css?v=202509131858">
   <link rel="stylesheet" href="/css/database.css?v=202509131858">
   <link rel="stylesheet" href="/css/mobile-patch.css?v=202509131858">
-  <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
   <link rel="stylesheet" href="/css/header.css?v=202509131858">
+  <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
   <link rel="stylesheet" href="/css/sponsor.css?v=202509131858">
+  <link rel="stylesheet" href="/css/theme-test.css?v=20260303">
 
-  <!-- ★ GitHub Pages용 SPA Fallback 복원 스크립트 -->
+  <!-- GitHub Pages SPA Fallback -->
   <script>
     (function () {
       var params = new URLSearchParams(location.search);
@@ -64,23 +67,16 @@
     })();
   </script>
 
-  <!-- i18n 먼저 -->
+  <!-- i18n -->
   <script src="/js/i18n.js?v=202509131858"></script>
   <script>
-    // ✅ zh-CN 완전 제거 + 안전 정규화 (TW 유지)
     function normalizeLang(code){
       var low = String(code || '').trim().toLowerCase();
-
       if (low === 'ko') return 'ko';
       if (low === 'en') return 'en';
       if (low === 'ja') return 'ja';
-
-      // TW 계열은 zh-TW로 통일
       if (low === 'tw' || low === 'zh-tw' || low === 'zh_tw') return 'zh-TW';
-
-      // CN은 en으로 폴백
       if (low === 'cn' || low === 'zh-cn' || low === 'zh_cn') return 'en';
-
       return 'en';
     }
 
@@ -88,16 +84,11 @@
       const sp = new URLSearchParams(location.search);
       const urlLangRaw = sp.get('lang');
       let savedRaw = null; try { savedRaw = localStorage.getItem('lang'); } catch(_){}
-
       const initial = normalizeLang(urlLangRaw || savedRaw || 'en');
       document.documentElement.setAttribute('lang', initial);
-
-      // i18n init
       if (window.I18N?.init) {
         I18N.init({ lang: initial, supported: ['ko','en','ja','zh-TW'] });
       }
-
-      // URL/저장값이 비정상 코드였으면 즉시 정리(리로드 없음)
       try {
         if (urlLangRaw && normalizeLang(urlLangRaw) !== urlLangRaw) {
           const url = new URL(window.location.href);
@@ -112,16 +103,11 @@
       } catch(_) {}
     })();
 
-    // ✅ SPA 언어 변경 (새로고침 없음)
     async function applyLang(lang){
       lang = normalizeLang(lang);
-
       if (window.I18N?.setLang) await I18N.setLang(lang);
-
       document.documentElement.setAttribute('lang', lang);
       try { localStorage.setItem('lang', lang); } catch(_){}
-
-      // ✅ URL에 lang만 유지 (리로드 X)
       try {
         const url = new URL(window.location.href);
         url.searchParams.set('lang', lang);
@@ -130,67 +116,33 @@
     }
   </script>
 
-  <!-- 앱 -->
+  <!-- app -->
   <script defer src="/js/routes.js?v=202509131858"></script>
   <script defer src="/js/app.js?v=202509131858"></script>
   <script defer src="/js/footer-tools.js?v=202509131858"></script>
 
   <style>
-    /* (선택) 혹시 모를 가로 스크롤 방지 */
     html, body { overflow-x: hidden; }
 
-    /* ✅ Kitchen 톤(미니멀) 헤더용 브랜드 텍스트 */
     .brand.brand-pro{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      color:#111827;
-      text-decoration:none;
-      font-weight:900;
-      letter-spacing:.1px;
-      min-width:0;
+      display:flex; align-items:center; gap:10px; min-width:0;
+      color:#111827; text-decoration:none; font-weight:900; letter-spacing:.1px;
+      -webkit-tap-highlight-color: transparent;
     }
-    .brand.brand-pro .brand-logo{
-      width:28px;
-      height:28px;
-      border-radius:8px;
-      display:block;
-      flex:0 0 auto;
-    }
-    .brand.brand-pro .brand-text{
-      display:flex;
-      flex-direction:column;
-      line-height:1.1;
-      min-width:0;
-    }
-    .brand.brand-pro .brand-title{
-      font-size:16px;
-      font-weight:900;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .brand.brand-pro .brand-sub{
-      font-size:12px;
-      color:#6b7280;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    /* 모바일 70% 대응: 초소형에서 서브라인 숨김 */
+    .brand.brand-pro .brand-logo{ width:28px; height:28px; border-radius:8px; display:block; flex:0 0 auto; }
+    .brand.brand-pro .brand-text{ display:flex; flex-direction:column; gap:2px; line-height:1.1; min-width:0; }
+    .brand.brand-pro .brand-title,
+    .brand.brand-pro .brand-sub{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .brand.brand-pro .brand-title{ font-size:16px; font-weight:900; }
+    .brand.brand-pro .brand-sub{ font-size:12px; color:#6b7280; }
     @media (max-width: 520px){
       .brand.brand-pro .brand-title{ font-size:14px; }
       .brand.brand-pro .brand-sub{ display:none; }
     }
 
-    /* ✅ Language pills (EN KO JA TW) */
-    .lang-pills{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      flex-wrap:wrap;
-    }
+    .lang-pills{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
     .lang-pill{
+      -webkit-tap-highlight-color: transparent;
       appearance:none;
       border:1px solid #e5e7eb;
       background:#fff;
@@ -200,14 +152,10 @@
       font:13px/1.1 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Arial;
       cursor:pointer;
       white-space:nowrap;
+      user-select:none;
     }
     .lang-pill:hover{ color:#111827; }
-    .lang-pill[aria-current="true"]{
-      color:#111827;
-      font-weight:800;
-    }
-
-    /* 드로어에서는 2열 그리드로 (모바일 안정) */
+    .lang-pill[aria-current="true"]{ color:#111827; font-weight:900; }
     .lang-pills--drawer{
       display:grid;
       grid-template-columns:repeat(2, minmax(0,1fr));
@@ -216,17 +164,163 @@
     }
     .lang-pills--drawer .lang-pill{
       width:100%;
+      display:flex;
       justify-content:center;
     }
+
+    /* ================================
+       CLOCK BAR — LIGHT CARD (final)
+    ================================ */
+    .kboard{ display:flex; justify-content:center; margin:14px 0 14px; }
+    .kboard a{ text-decoration:none; width:min(920px,100%); }
+    .kpanel{
+      border-radius:18px;
+      border:1px solid rgba(15,23,42,.10);
+      background: linear-gradient(180deg,#ffffff,#f7f8fb);
+      box-shadow: 0 10px 24px rgba(15,23,42,.08);
+      padding: 12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+    .kboard a:hover .kpanel{
+      transform: translateY(-1px);
+      box-shadow: 0 16px 34px rgba(15,23,42,.12);
+      border-color: rgba(11,87,208,.18);
+    }
+    .kleft{display:flex;align-items:center;gap:10px;min-width:0}
+    .kdot{
+      width:10px;height:10px;border-radius:99px;flex:0 0 auto;
+      background: rgba(250,204,21,.95);
+      box-shadow: 0 0 0 3px rgba(250,204,21,.22);
+    }
+    .ktitle{font-weight:1100;letter-spacing:.1px;color:#0b0d12;white-space:nowrap}
+    .ksub{display:none}
+    .kgrid{
+      display:grid;
+      grid-template-columns: repeat(3, auto);
+      gap:10px;
+      align-items:center;
+      flex:0 0 auto;
+    }
+    .kchip{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      align-items:flex-start;
+      padding: 8px 10px;
+      border-radius:14px;
+      border:1px solid rgba(15,23,42,.10);
+      background:#ffffff;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
+      min-width: 150px;
+    }
+    .klabel{
+      font-size:11px;
+      letter-spacing:.12em;
+      font-weight:1000;
+      color:#6b7280;
+      text-transform:uppercase;
+    }
+    .kval{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-weight:1100;
+      letter-spacing:.10em;
+      color:#111827;
+      font-size: 16px;
+      line-height:1.1;
+      font-variant-numeric: tabular-nums;
+    }
+    .kval--accent{
+      color: rgba(234,179,8,1);
+      text-shadow: 0 0 10px rgba(234,179,8,.18);
+    }
+    @media (max-width: 860px){
+      .kpanel{ flex-direction:column; align-items:flex-start; }
+      .kgrid{ width:100%; grid-template-columns: 1fr; }
+      .kchip{ width:100%; min-width: 0; }
+      .kval{ font-size: 18px; }
+    }
+
+    /* ================================
+       Drawer: 45% width + center align
+       - navigation label center
+       - nav items center
+       - Gift Code above LootBar
+       - remove "other" label entirely
+       - add dotted rule above LootBar
+    ================================ */
+
+    /* Drawer width 45% */
+    #mobileDrawer.drawer{
+      width: min(45vw, 460px) !important;
+      max-width: min(45vw, 460px) !important;
+    }
+    @media (max-width: 520px){
+      #mobileDrawer.drawer{
+        width: 45vw !important;
+        max-width: 45vw !important;
+      }
+    }
+
+    /* Center section labels (navigation only remains) */
+    #mobileDrawer .sec-label{
+      text-align:center !important;
+      width:100%;
+    }
+
+    /* Center nav items */
+    #mobileDrawer .nav-list{
+      display:flex !important;
+      flex-direction:column !important;
+      align-items:center !important;
+      text-align:center !important;
+    }
+    #mobileDrawer .nav-list a{
+      width:100%;
+      text-align:center !important;
+    }
+
+    /* Center sponsor stack */
+    .drawer-sponsor-stack{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+      padding-top:12px;
+    }
+    .drawer-sponsor-card{
+      width:min(320px, 100%);
+      display:flex;
+      justify-content:center;
+      text-decoration:none;
+    }
+    .drawer-sponsor-card img{
+      display:block;
+      max-width:100%;
+      height:auto;
+      object-fit:contain;
+    }
+
+    /* dotted rule above LootBar */
+    .drawer-dotrule{
+      width:min(340px, 100%);
+      border-top:1px dashed rgba(15,23,42,.18);
+      margin: 6px auto 2px;
+    }
+
+    /* Hide 'other' section label if any remains */
+    #mobileDrawer .sec-label[data-i18n="drawer.other"]{ display:none !important; }
   </style>
 </head>
 
 <body class="theme-default">
-  <!-- ===== Header ===== -->
+  <!-- Header -->
   <header class="site-header" role="banner">
     <div class="container nav-bar">
       <div class="nav-left">
-        <!-- ✅ Kitchen 헤더 타이틀 톤 채택 + 로고는 KingshotData 로고로 교체 + 텍스트 2줄 -->
         <a class="brand brand-pro" href="/home"
            aria-label="KingshotData Home"
            data-i18n-attr="aria-label:aria.home">
@@ -238,7 +332,6 @@
           </span>
         </a>
 
-        <!-- ✅ 네비는 그대로 유지 -->
         <nav class="nav" id="primaryNav" role="navigation"
              aria-label="Primary"
              data-i18n-attr="aria-label:aria.primaryNav">
@@ -257,17 +350,13 @@
               data-i18n-attr="aria-label:aria.menuOpen">☰</button>
 
       <div class="nav-right">
-        <!-- ✅ Language pills (노출형) -->
         <div id="langDropdownHeader" class="lang-pills" aria-label="Language"></div>
       </div>
     </div>
   </header>
 
-  <!-- ✅ Sponsor strip 제거됨 (나중에 다른 광고로 교체 예정) -->
-
-  <!-- ===== Drawer ===== -->
+  <!-- Drawer -->
   <div class="backdrop" id="backdrop" hidden></div>
-
   <aside class="drawer" id="mobileDrawer" aria-hidden="true"
          aria-label="Mobile navigation"
          data-i18n-attr="aria-label:aria.mobileNav">
@@ -279,7 +368,6 @@
     </header>
 
     <div class="section" style="position:relative">
-      <!-- ✅ Language pills (노출형) -->
       <div id="langDropdownDrawer" class="lang-pills lang-pills--drawer" aria-label="Language"></div>
     </div>
 
@@ -296,37 +384,65 @@
         <a href="/guides"     data-link data-i18n="nav.guides">가이드</a>
         <a href="/calculator" data-link data-i18n="nav.calculators">계산기</a>
       </div>
-    </div>
 
-    <div class="rule"></div>
-
-    <div class="section">
-      <div class="sec-label" data-i18n="drawer.other">other</div>
-
-      <div class="tile-grid">
-        <a class="tile" href="https://kingshotdata.kr/pages/guides/kingshot-giftcode.html" target="_blank" rel="noopener">
-          <svg class="icon-24" viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="3" y="8" width="18" height="13" rx="2" fill="none" stroke="#111" stroke-width="1.6"/>
-            <path d="M12 21V8M3 12h18M7 5c-1 0-2 .7-2 1.8S6 9 7.5 9C9 9 10 7 10 6s-1-1-3-1Zm10 0c1 0 2 .7 2 1.8S18 9 16.5 9C15 9 14 7 14 6s1-1 3-1Z"
-              fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"/>
-          </svg>
-          <div class="meta"><span class="tit">Gift Code</span></div>
+      <!-- ✅ Gift Code + dotted rule + LootBar (inside navigation section, centered) -->
+      <div class="drawer-sponsor-stack" aria-label="Quick links">
+        <a class="drawer-sponsor-card"
+           href="https://kingshotdata.kr/pages/guides/kingshot-giftcode.html"
+           target="_blank" rel="noopener"
+           aria-label="Gift Code">
+          <img src="/img/guide/gift-code-button.webp" alt="Gift Code" width="240" height="54"
+               loading="lazy" decoding="async">
         </a>
 
-        <a class="tile tile-kakao" href="https://open.kakao.com/o/gHPnO4uh" target="_blank" rel="noopener">
-          <svg class="icon-24" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 3c5.2 0 9 3 9 6.8 0 3.9-4.1 7.1-9.2 7.1-.6 0-1.2 0-1.8-.1L6 20l1.5-3.1C6 16 3 14 3 9.8 3 6 6.8 3 12 3Z" fill="#111"/>
-          </svg>
-          <div class="meta"><span class="tit">KakaoTalk</span></div>
+        <div class="drawer-dotrule" aria-hidden="true"></div>
+
+        <a class="drawer-sponsor-card"
+           href="https://lootbar.gg/shop/ten/top-up/kingshot"
+           target="_blank" rel="noopener"
+           aria-label="LootBar Kingshot Top-up">
+          <img src="/img/lootbar/brand.png" alt="LootBar" width="240" height="54"
+               loading="lazy" decoding="async">
         </a>
       </div>
     </div>
   </aside>
 
-  <!-- ===== Main ===== -->
+  <!-- Main -->
   <main class="container" id="main" role="main"
         aria-label="Main content"
         data-i18n-attr="aria-label:aria.main">
+
+    <!-- ✅ ONE DOM CLOCK (light card) -->
+    <section id="liveBar" class="kboard" aria-label="Coupon clock" hidden>
+      <a id="kbGo" href="/tools/coupon-countdown.html" data-router-ignore="true" aria-label="Open coupon countdown">
+        <div class="kpanel">
+          <div class="kleft">
+            <span class="kdot" aria-hidden="true"></span>
+            <div style="min-width:0">
+              <div class="ktitle" id="kbTitle">—</div>
+              <div class="ksub" id="kbSub"></div>
+            </div>
+          </div>
+
+          <div class="kgrid">
+            <div class="kchip">
+              <div class="klabel" id="kbLCoupons">—</div>
+              <div class="kval" id="kbCoupons">—</div>
+            </div>
+            <div class="kchip">
+              <div class="klabel" id="kbLNext">—</div>
+              <div class="kval kval--accent" id="kbNext">—</div>
+            </div>
+            <div class="kchip">
+              <div class="klabel" id="kbLNow">—</div>
+              <div class="kval" id="kbNow">—</div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </section>
+
     <div id="content" class="panel">
       <noscript data-nosnippet data-i18n="misc.enableJs">
         자바스크립트를 활성화하세요. 콘텐츠가 표시됩니다.
@@ -334,12 +450,11 @@
     </div>
   </main>
 
-  <!-- ===== Footer ===== -->
+  <!-- Footer -->
   <footer class="site-footer" role="contentinfo"
           aria-label="Footer"
           data-i18n-attr="aria-label:aria.footer">
     <div class="container">
-      <!-- Footer Tools (쿠폰 → 버튼 → 배너는 JS에서 렌더링) -->
       <div id="footerTools" class="footer-tools"></div>
 
       <span data-i18n="footer.copyrightLine1">
@@ -355,35 +470,7 @@
     </div>
   </footer>
 
-  <!-- 🔧 Footer LootBar 배너 언어별 이미지 스위치 (footer-tools.js가 만든 이미지 대상으로 처리) -->
-  <script>
-    (function(){
-      function updateLootbarBanner(){
-        const img = document.querySelector('.footer-image-banner img');
-        if (!img) return;
-
-        const lang =
-          window.I18N?.current ||
-          document.documentElement.getAttribute('lang') ||
-          'en';
-
-        img.src = (lang === 'ko') ? '/img/lootbarkr.png' : '/img/lootbar.png';
-      }
-
-      document.addEventListener('DOMContentLoaded', updateLootbarBanner);
-
-      if (window.I18N && typeof I18N.setLang === 'function') {
-        const _setLang = I18N.setLang.bind(I18N);
-        I18N.setLang = async function(lang){
-          await _setLang(normalizeLang(lang));
-          document.documentElement.setAttribute('lang', normalizeLang(lang));
-          updateLootbarBanner();
-        };
-      }
-    })();
-  </script>
-
-  <!-- 🔧 Drawer toggle -->
+  <!-- drawer toggle (unchanged) -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const html = document.documentElement, body = document.body;
@@ -400,7 +487,6 @@
         btnOpen?.setAttribute('aria-expanded','true');
         btnClose?.focus();
       }
-
       function closeDrawer(){
         html.classList.remove('is-open');
         body.classList.remove('no-scroll');
@@ -418,7 +504,7 @@
     });
   </script>
 
-  <!-- ✅ Language pills script (EN KO JA TW) -->
+  <!-- language pills (unchanged) -->
   <script>
     (function(){
       const LANGS = [
@@ -431,7 +517,6 @@
       function getCurrentLang(){
         return normalizeLang(window.I18N?.current || document.documentElement.getAttribute('lang') || 'en');
       }
-
       function render(root){
         if (!root) return;
         const cur = getCurrentLang();
@@ -441,7 +526,6 @@
           '</button>'
         )).join('');
       }
-
       async function onClick(e){
         const btn = e.target.closest && e.target.closest('.lang-pill[data-lang]');
         if (!btn) return;
@@ -449,7 +533,6 @@
         await applyLang(btn.getAttribute('data-lang'));
         syncAll();
       }
-
       function syncAll(){
         render(document.getElementById('langDropdownHeader'));
         render(document.getElementById('langDropdownDrawer'));
@@ -457,15 +540,171 @@
 
       document.addEventListener('DOMContentLoaded', () => {
         syncAll();
-
         const h = document.getElementById('langDropdownHeader');
         const d = document.getElementById('langDropdownDrawer');
         h && h.addEventListener('click', onClick);
         d && d.addEventListener('click', onClick);
-
-        // i18n 이벤트가 있는 경우도 동기화
         document.addEventListener('i18n:changed', syncAll);
       });
+    })();
+  </script>
+
+  <!-- ✅ ONE DOM clock script (Light Card + i18n labels/title) -->
+  <script>
+    (function(){
+      const els = {
+        bar: document.getElementById('liveBar'),
+        go: document.getElementById('kbGo'),
+
+        title: document.getElementById('kbTitle'),
+        sub: document.getElementById('kbSub'),
+        lCoupons: document.getElementById('kbLCoupons'),
+        lNext: document.getElementById('kbLNext'),
+        lNow: document.getElementById('kbLNow'),
+
+        vCoupons: document.getElementById('kbCoupons'),
+        vNext: document.getElementById('kbNext'),
+        vNow: document.getElementById('kbNow'),
+      };
+
+      let targetNextMs = null;
+      let tickTimer = null;
+      let cachedCount = 0;
+
+      const TXT = {
+        ko: { title:"킹샷 쿠폰 타이머", coupons:"쿠폰", next:"만료까지", now:"현재시간", suffix:"개 활성" },
+        en: { title:"Kingshot Coupon Timer", coupons:"Coupons", next:"To expiry", now:"Now", suffix:"active" },
+        ja: { title:"キングショット クーポンタイマー", coupons:"クーポン", next:"期限まで", now:"現在", suffix:"件 有効" },
+        "zh-TW": { title:"Kingshot 優惠碼倒數", coupons:"優惠碼", next:"距到期", now:"目前時間", suffix:"個可用" }
+      };
+
+      function curLang(){
+        const l = (document.documentElement.getAttribute('lang') || 'en').trim();
+        if (l === 'ko' || l === 'en' || l === 'ja' || l === 'zh-TW') return l;
+        const low = l.toLowerCase();
+        if (low === 'zh-tw' || low === 'tw') return 'zh-TW';
+        return 'en';
+      }
+      function t(k){
+        const l = curLang();
+        return (TXT[l] && TXT[l][k]) || (TXT.en && TXT.en[k]) || k;
+      }
+
+      function isForever(until){
+        if(!until) return true;
+        const v = String(until).trim().toLowerCase();
+        return v === 'permanent' || v === 'infinite' || v === '∞' || v === 'forever' ||
+               v === 'no-expiry' || v === 'noexp' || v === 'nolimit';
+      }
+      function parseUTCDate(ymd){
+        const s = String(ymd || '').trim();
+        const parts = s.split('-');
+        if(parts.length !== 3) return new Date('invalid');
+        const y = parts[0];
+        const m = String(parts[1]).padStart(2,'0');
+        const d = String(parts[2]).padStart(2,'0');
+        return new Date(`${y}-${m}-${d}T00:00:00Z`);
+      }
+      function isExpired(until){
+        if(isForever(until)) return false;
+        const d = parseUTCDate(until);
+        return (d.toString() !== 'Invalid Date') && (Date.now() >= d.getTime());
+      }
+      function fmt2(n){ return String(n).padStart(2,'0'); }
+      function clockNow(dt){ return `${fmt2(dt.getHours())}:${fmt2(dt.getMinutes())}:${fmt2(dt.getSeconds())}`; }
+      function countdown(ms){
+        let sec = Math.max(0, Math.floor(ms / 1000));
+        const d = Math.floor(sec / 86400); sec %= 86400;
+        const h = Math.floor(sec / 3600);  sec %= 3600;
+        const m = Math.floor(sec / 60);    sec %= 60;
+        if (d > 0) return `${d}d ${fmt2(h)}:${fmt2(m)}:${fmt2(sec)}`;
+        return `${fmt2(h)}:${fmt2(m)}:${fmt2(sec)}`;
+      }
+
+      async function loadCoupons(){
+        const url = '/data/coupons.json?v=' + Date.now();
+        const res = await fetch(url, { cache:'no-store' });
+        if(!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        return Array.isArray(data?.coupons) ? data.coupons : (Array.isArray(data) ? data : []);
+      }
+
+      function computeNextExpiry(active){
+        let min = null;
+        for(const c of active){
+          if(isForever(c.until)) continue;
+          const dt = parseUTCDate(c.until);
+          if(dt.toString() === 'Invalid Date') continue;
+          const ms = dt.getTime();
+          if(min === null || ms < min) min = ms;
+        }
+        return min;
+      }
+
+      function applyText(){
+        if(els.title) els.title.textContent = t('title');
+        if(els.sub) els.sub.textContent = '';
+        if(els.lCoupons) els.lCoupons.textContent = t('coupons');
+        if(els.lNext) els.lNext.textContent = t('next');
+        if(els.lNow) els.lNow.textContent = t('now');
+      }
+
+      function renderCount(){
+        if(!els.vCoupons) return;
+        const l = curLang();
+        const sfx = t('suffix');
+        els.vCoupons.textContent = (l === 'en') ? `${cachedCount} ${sfx}` : `${cachedCount}${sfx}`;
+      }
+
+      function syncLink(){
+        const l = curLang();
+        const url = `/tools/coupon-countdown.html?lang=${encodeURIComponent(l)}`;
+        if(els.go) els.go.href = url;
+      }
+
+      function tick(){
+        const now = new Date();
+        if(els.vNow) els.vNow.textContent = clockNow(now);
+
+        if(els.vNext){
+          if(!targetNextMs) els.vNext.textContent = '—';
+          else {
+            const diff = targetNextMs - Date.now();
+            els.vNext.textContent = (diff <= 0) ? '00:00:00' : countdown(diff);
+          }
+        }
+      }
+
+      async function init(){
+        try{
+          applyText();
+          syncLink();
+
+          const list = await loadCoupons();
+          const active = list.filter(c => c?.code && !isExpired(c.until));
+          cachedCount = active.length;
+          renderCount();
+          targetNextMs = computeNextExpiry(active);
+
+          if(tickTimer) clearInterval(tickTimer);
+          tick();
+          tickTimer = setInterval(tick, 1000);
+
+          if(els.bar) els.bar.hidden = false;
+
+          document.addEventListener('i18n:changed', () => {
+            applyText();
+            renderCount();
+            syncLink();
+          });
+
+        }catch(_e){
+          if(els.bar) els.bar.hidden = true;
+          if(tickTimer) clearInterval(tickTimer);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', init);
     })();
   </script>
 </body>

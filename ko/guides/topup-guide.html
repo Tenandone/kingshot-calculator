@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>모바일 게임 유저들을 위한 합리적인 충전 가이드</title>
+
+  <style>
+    *{box-sizing:border-box}
+    :root{
+      --brand:#0b57d0;--text:#222;--muted:#555;
+      --surface:#fff;--bg:#fff;--border:#e6e6e6;--note-bg:#f9f9f9;
+      --btn:#111;--btnText:#fff;--btnGhostBg:transparent;--btnGhostText:#111;
+      --shadow:0 10px 26px rgba(0,0,0,.10);
+      --radius:14px;
+    }
+    @media(prefers-color-scheme:dark){
+      :root{
+        --text:#e8eaed;--muted:#c2c7d0;
+        --surface:#121212;--bg:#0b0b0b;
+        --border:#2a2a2a;--note-bg:#1a1a1a;
+        --btn:#e8eaed;--btnText:#0b0b0b;--btnGhostText:#e8eaed;
+        --shadow:0 10px 26px rgba(0,0,0,.35);
+      }
+    }
+    html,body{
+      margin:0;background:var(--bg);color:var(--text);
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,
+        "Noto Sans KR","Noto Sans JP","Noto Sans SC","Noto Sans TC","Noto Naskh Arabic",
+        Arial,sans-serif;
+      line-height:1.65
+    }
+    a{color:var(--brand);font-weight:700;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* ===== Topbar (LEFT: back / RIGHT: language) ===== */
+    .topbar{
+      position:sticky;top:0;z-index:10;
+      background:var(--surface);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar-inner{
+      max-width:1000px;margin:0 auto;
+      padding:10px 16px;
+      display:flex;justify-content:space-between;align-items:center;
+      gap:12px;
+    }
+    .backlink{
+      font:700 14px/1 system-ui;
+      color:var(--brand);
+      white-space:nowrap;
+    }
+    .langbox{
+      display:flex;align-items:center;gap:10px;
+      white-space:nowrap;
+    }
+    .langbox label{font-size:14px;color:var(--muted)}
+    select{
+      padding:8px 10px;border-radius:10px;
+      border:1px solid var(--border);
+      background:var(--surface);color:var(--text)
+    }
+    [dir="rtl"] .topbar-inner{flex-direction:row-reverse}
+    [dir="rtl"] .langbox{direction:rtl}
+
+    /* ===== Content ===== */
+    .container{max-width:1000px;margin:0 auto;padding:16px}
+    h1{font-size:clamp(22px,3vw,36px);color:var(--brand);margin:14px 0 16px}
+    h2{font-size:clamp(18px,2.4vw,26px);color:var(--brand);margin-top:28px;margin-bottom:10px}
+    .step{margin-bottom:36px}
+    .note{
+      font-size:14px;color:var(--muted);
+      background:var(--note-bg);padding:12px 14px;
+      border-left:4px solid var(--brand);border-radius:6px;margin:16px 0
+    }
+    [dir="rtl"] .note{border-left:0;border-right:4px solid var(--brand)}
+    .note .line{margin:6px 0}
+    .imgrow{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:12px;margin:12px 0
+    }
+    .imgrow img{width:100%;border:1px solid var(--border);border-radius:8px}
+
+    .links{
+      background:color-mix(in srgb,var(--surface) 85%,var(--brand) 5%);
+      padding:16px;border-radius:10px;margin-top:28px;
+      border:1px solid color-mix(in srgb,var(--border) 70%,transparent);
+    }
+    .links h2{color:var(--text);margin-top:0}
+    .links a{font-weight:900}
+    ul{padding-inline-start:18px}
+
+    /* ===== Bottom CTA ===== */
+    .bottom-cta{
+      margin-top:22px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, color-mix(in srgb,var(--surface) 96%,transparent), color-mix(in srgb,var(--surface) 88%,transparent));
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    .bottom-cta .title{
+      font-size:18px;
+      font-weight:900;
+      color:var(--text);
+      margin:0 0 8px;
+    }
+    .bottom-cta .desc{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      cursor:pointer;
+      font-weight:900;
+      text-decoration:none !important;
+      line-height:1;
+      user-select:none;
+    }
+    .btn-primary{
+      background:var(--btn);
+      color:var(--btnText) !important;
+      border-color:color-mix(in srgb,var(--btn) 70%, var(--border));
+    }
+    .btn-ghost{
+      background:var(--btnGhostBg);
+      color:var(--btnGhostText) !important;
+    }
+    .btn small{
+      font-weight:800;
+      opacity:.85;
+    }
+    .cta-badges{
+      margin-top:10px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:color-mix(in srgb,var(--surface) 70%, transparent);
+    }
+    .kbd{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      font-weight:900;
+      color:var(--text);
+      background:color-mix(in srgb,var(--surface) 75%, transparent);
+      border:1px solid var(--border);
+      border-bottom-width:2px;
+      padding:2px 6px;
+      border-radius:8px;
+      display:inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ✅ 표준 가이드 Topbar: 좌측(가이드로) / 우측(언어) -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a id="backLink" class="backlink" href="/guides" aria-label="Back to guides">← Kingshot Guides</a>
+
+      <div class="langbox">
+        <label for="langSwitcher" id="langLabel">언어</label>
+        <select id="langSwitcher" aria-label="Language">
+          <option value="ko" selected>한국어</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+          <option value="zh-CN">简体中文</option>
+          <option value="zh-TW">繁體中文</option>
+          <option value="ar">العربية</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>모바일 게임 유저들을 위한 합리적인 충전 가이드</h1>
+
+    <!-- NOTE: 링크는 HTML에 고정 / 텍스트만 ko 고정 -->
+    <div class="note">
+      <div class="line">
+        <a id="signupLink"
+           href="https://lootbar.gg/ko/top-up/kingshot?utm_source=ten"
+           target="_blank"
+           rel="noopener noreferrer">[루트바 가입 링크]</a>
+        로 가입하세요.
+      </div>
+      <div class="line">검색창에 <span class="kbd">#s4qU</span> 입력 시 추가 쿠폰을 받을 수 있습니다.</div>
+    </div>
+
+    <!-- Step 1 -->
+    <section class="step">
+      <h2>1. 단품 충전</h2>
+      <p>충전하고 싶은 패키지를 선택한 뒤 Top-up Now를 누릅니다.</p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step1.png" alt="step1">
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step">
+      <h2>2. 다품 충전</h2>
+      <p>장바구니 버튼으로 원하는 패키지를 여러 개 추가합니다.</p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step2.png" alt="step2">
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step">
+      <h2>3. 결제 진행</h2>
+      <p>결제 수단을 카드 또는 PayPal 중 선택한 뒤 Pay Now를 누릅니다.</p>
+      <p>좌측은 셀프탑업(내가 직접 충전), 우측은 상담원 충전입니다. 셀프탑업을 선택하세요.</p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step3.png" alt="step3">
+        <img src="/img/lootbar/step8.png" alt="step8">
+      </div>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="step">
+      <h2>4. 로그인</h2>
+      <p>셀프탑업 선택 시 로그인 화면이 표시됩니다. 구글 로그인이 가장 편리합니다.</p>
+      <ul>
+        <li>구글 이메일 입력</li>
+        <li>비밀번호 입력</li>
+      </ul>
+      <p class="note">※ 초반에는 비밀번호를 미리 정확히 확인 후 진행하세요.</p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step4.png" alt="step4">
+        <img src="/img/lootbar/step5.png" alt="step5">
+        <img src="/img/lootbar/step6.png" alt="step6">
+      </div>
+    </section>
+
+    <!-- Step 5 -->
+    <section class="step">
+      <h2>5. 장바구니 충전</h2>
+      <p>장바구니에 담긴 금액(합계)만큼 충전합니다.</p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step7.png" alt="step7">
+        <img src="/img/lootbar/step9.png" alt="step9">
+        <img src="/img/lootbar/step10.png" alt="step10">
+      </div>
+    </section>
+
+    <!-- Step 6 -->
+    <section class="step">
+      <h2>6. 구매 완료</h2>
+      <p>확인 후 결제가 진행되며, 완료 화면에서 Got it을 누르면 종료됩니다.</p>
+      <p><strong>충전 완료!</strong></p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step12.png" alt="step12">
+        <img src="/img/lootbar/step13.png" alt="step13">
+        <img src="/img/lootbar/step14.png" alt="step14">
+      </div>
+    </section>
+
+    <!-- Final -->
+    <section class="step">
+      <h2>최종 완료</h2>
+      <p><strong>모든 과정이 완료되었습니다. 게임에서 충전된 패키지를 확인하세요.</strong></p>
+      <div class="imgrow">
+        <img src="/img/lootbar/step15.png" alt="step15">
+      </div>
+    </section>
+
+    <div class="note">
+      <div class="line">셀프충전은 매우 간단합니다.</div>
+      <div class="line">문의가 많아 본 가이드로 안내를 대신합니다.</div>
+    </div>
+
+    <!-- cumulative: 링크는 HTML 고정 -->
+    <div class="note">
+      <div class="line">
+        <a id="cumLink"
+           href="https://lootbar.gg/ko/top-up/kingshot?utm_source=ten"
+           target="_blank"
+           rel="noopener noreferrer">[누적충전 바로가기 링크]</a>
+        를 즐겨찾기(북마크) 해두세요.
+      </div>
+      <div class="line">매월 말 집계하여 $4.99~$99.99 패키지를 추가로 증정합니다.</div>
+    </div>
+
+    <!-- mobile discount -->
+    <div class="links">
+      <h2>모바일게임 할인 링크 안내</h2>
+      <a href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">모바일게임 할인 바로가기</a>
+    </div>
+
+    <!-- ✅ NEW: 하단 충전 페이지 CTA (KO 고정) -->
+    <section class="bottom-cta" aria-label="Top-up CTA">
+      <p class="title">지금 바로 충전 페이지로 이동하기</p>
+      <p class="desc">
+        아래 버튼을 누르면 Kingshot 전용 충전 페이지로 바로 이동합니다.
+        (추가 쿠폰은 검색창에 <span class="kbd">#s4qU</span> 입력)
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary"
+           href="https://lootbar.gg/ko/top-up/kingshot?utm_source=ten"
+           target="_blank"
+           rel="noopener noreferrer">충전 페이지 열기</a>
+
+        <a class="btn btn-ghost"
+           href="https://lootbar.gg/shop/ten"
+           target="_blank"
+           rel="noopener noreferrer">모바일게임 할인 페이지</a>
+
+        <a class="btn btn-ghost"
+           href="/coupons"
+           rel="noopener">쿠폰 모음 보기</a>
+      </div>
+
+      <div class="cta-badges" aria-label="quick notes">
+        <span class="badge">셀프탑업 추천</span>
+        <span class="badge">즐겨찾기 권장</span>
+        <span class="badge">업데이트: 수시 반영</span>
+      </div>
+    </section>
+  </main>
+
+<script>
+/*
+  ✅ KO 버전 고정:
+  - 번역 스크립트는 제거(원하면 다시 붙일 수 있음)
+  - 언어 셀렉트는 남겨두되, 선택 시 해당 언어 페이지로 이동하도록만 처리
+  - 네 사이트 라우터 규칙에 맞춰 경로만 바꿔서 쓰면 됨
+*/
+(function(){
+  const select = document.getElementById("langSwitcher");
+  if(!select) return;
+
+  // 현재는 ko 고정이므로, 다른 언어 선택 시 같은 문서의 언어판 경로로 이동만 시킴
+  // 필요 시 너 라우터 규칙에 맞게 아래 매핑만 수정하면 됨.
+  const map = {
+    "ko": "/guides/topup.html",
+    "en": "/en/guides/topup.html",
+    "ja": "/ja/guides/topup.html",
+    "zh-CN": "/zh-cn/guides/topup.html",
+    "zh-TW": "/tw/guides/topup.html",
+    "ar": "/ar/guides/topup.html"
+  };
+
+  select.value = "ko";
+  select.addEventListener("change", (e)=>{
+    const v = e.target.value;
+    const url = map[v] || map.ko;
+    location.href = url;
+  });
+})();
+</script>
+
+</body>
+</html>

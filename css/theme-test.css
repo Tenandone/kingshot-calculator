@@ -1,0 +1,429 @@
+/* =========================================================
+   /css/theme-test.css — FULL FINAL (LootBar-like UI for BOTH PC + MOBILE)
+   대상: KingshotData (현재 index.html 구조: .site-header, .container.nav-bar, .drawer, #content.panel 등)
+   목표:
+   - PC: “프로덕트/스토어 허브” 느낌(섹션/카드/버튼/그리드/섀도)
+   - MOBILE: “LootBar 앱 느낌” (검색바/가로 스크롤/빠른 액션/하단바)
+   - ⚠️ 이 파일은 index.html에서 항상 마지막에 로드되어야 함.
+========================================================= */
+
+/* ---------- Tokens ---------- */
+:root{
+  --bg:#ffffff;
+  --surface:#ffffff;
+  --surface2:#f7f8fb;
+  --fg:#0b0d12;
+  --muted:#6b7280;
+  --bd:#e5e7eb;
+
+  /* Header */
+  --head:#0b1220;
+  --head2:#0a0f1a;
+  --head-fg:#eaf0ff;
+  --head-muted:rgba(234,240,255,.72);
+  --head-bd:rgba(255,255,255,.10);
+
+  /* Accent/CTA */
+  --brand:#0b57d0;
+  --cta:#facc15;
+  --ctaText:#111827;
+
+  /* shape */
+  --r:16px;
+  --r2:20px;
+  --shadow:0 10px 26px rgba(15,23,42,.08);
+  --shadow2:0 14px 34px rgba(15,23,42,.12);
+
+  /* spacing */
+  --gap:14px;
+}
+
+html,body{ background:var(--bg); color:var(--fg); }
+a{ color:var(--brand); }
+a:hover{ filter:brightness(.96); }
+*{ box-sizing:border-box; }
+
+/* =========================================================
+   PC + MOBILE 공통: Header (LootBar-like premium bar)
+========================================================= */
+.site-header{
+  background:linear-gradient(180deg,var(--head),var(--head2)) !important;
+  border-bottom:1px solid var(--head-bd) !important;
+  box-shadow:0 14px 34px rgba(0,0,0,.25) !important;
+}
+.site-header a,
+.site-header span,
+.site-header button{ color:var(--head-fg) !important; }
+
+.site-header .brand.brand-pro{ color:var(--head-fg) !important; }
+.site-header .brand.brand-pro .brand-title{ color:var(--head-fg) !important; }
+.site-header .brand.brand-pro .brand-sub{ color:var(--head-muted) !important; }
+
+/* nav links */
+.site-header .nav a{
+  color:var(--head-fg) !important;
+  opacity:.9;
+  font-weight:900;
+  border-radius:12px;
+}
+.site-header .nav a:hover{
+  opacity:1;
+  background:rgba(255,255,255,.06);
+  color:var(--cta) !important;
+}
+
+/* hamburger */
+.site-header #menuToggle.hamburger{
+  background:rgba(255,255,255,.06) !important;
+  border:1px solid rgba(255,255,255,.16) !important;
+  border-radius:999px !important;
+}
+.site-header #menuToggle.hamburger:hover{
+  border-color:rgba(250,204,21,.35) !important;
+  color:var(--cta) !important;
+}
+
+/* language pills in header */
+.site-header .lang-pill{
+  background:rgba(255,255,255,.06) !important;
+  border:1px solid rgba(255,255,255,.16) !important;
+  color:var(--head-muted) !important;
+  border-radius:999px !important;
+  font-weight:900 !important;
+}
+.site-header .lang-pill:hover{
+  color:var(--head-fg) !important;
+  border-color:rgba(250,204,21,.35) !important;
+}
+.site-header .lang-pill[aria-current="true"]{
+  color:var(--head-fg) !important;
+  border-color:rgba(250,204,21,.65) !important;
+  background:rgba(250,204,21,.14) !important;
+  box-shadow:0 0 0 3px rgba(250,204,21,.20) inset;
+}
+
+/* =========================================================
+   Drawer: keep light + clean tiles
+========================================================= */
+.drawer{
+  background:var(--surface) !important;
+  border-left:1px solid var(--bd) !important;
+}
+.drawer header{ background:#fff !important; }
+.drawer .lang-pill{
+  background:#fff !important;
+  border:1px solid var(--bd) !important;
+  color:var(--muted) !important;
+}
+.drawer .lang-pill[aria-current="true"]{
+  color:var(--fg) !important;
+  border-color:color-mix(in srgb, var(--brand) 40%, var(--bd)) !important;
+  background:color-mix(in srgb, var(--brand) 10%, #fff) !important;
+  box-shadow:none !important;
+}
+.drawer .tile{
+  border:1px solid var(--bd) !important;
+  border-radius:16px !important;
+  box-shadow:0 8px 18px rgba(0,0,0,.05);
+}
+.drawer .tile:hover{ background:#f3f4f6 !important; }
+
+/* =========================================================
+   PC: Page “LootBar store hub” 느낌
+========================================================= */
+@media (min-width: 769px){
+  /* body spacing */
+  .container{ max-width:1200px; }
+
+  /* panel/card look */
+  .panel, #content.panel{
+    border:1px solid var(--bd);
+    border-radius:var(--r2);
+    background:linear-gradient(180deg,var(--surface),var(--surface2));
+    box-shadow:var(--shadow);
+    padding:18px;
+  }
+
+  /* generic cards/tiles if present */
+  .card, .tile, .box, .category-card{
+    border:1px solid var(--bd);
+    border-radius:var(--r2);
+    background:linear-gradient(180deg,var(--surface),var(--surface2));
+    box-shadow:var(--shadow);
+  }
+  .card:hover, .tile:hover, .box:hover, .category-card:hover{
+    transform:translateY(-2px);
+    transition:transform .16s ease, box-shadow .16s ease;
+    box-shadow:var(--shadow2);
+  }
+
+  /* primary CTA style (lootbar links) */
+  a[href*="lootbar" i],
+  a[href*="top-up" i],
+  .btn-primary, .cta, .cta-primary{
+    background:linear-gradient(135deg,var(--cta), color-mix(in srgb, var(--cta) 70%, #fff 30%)) !important;
+    color:var(--ctaText) !important;
+    border:1px solid color-mix(in srgb, var(--cta) 55%, #000 10%) !important;
+    border-radius:999px !important;
+    font-weight:1000 !important;
+    text-decoration:none !important;
+  }
+}
+
+/* =========================================================
+   MOBILE: LootBar-style blocks (CSS ONLY)
+   - 이 CSS는 "추가 블록이 있으면 더 완벽"
+   - 하지만 없는 경우에도: 카드/칩/버튼을 앱 느낌으로 바꿈
+========================================================= */
+@media (max-width: 768px){
+  /* 페이지 패딩 */
+  .container{ padding-left:12px !important; padding-right:12px !important; }
+
+  /* 메인 패널을 “섹션 카드”로 */
+  .panel, #content.panel{
+    border:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    padding:0 !important;
+  }
+
+  /* 공통 카드/타일 -> 앱 카드 */
+  .card, .tile, .box, .category-card{
+    border:1px solid var(--bd) !important;
+    border-radius:18px !important;
+    background:#fff !important;
+    box-shadow:0 10px 22px rgba(0,0,0,.06) !important;
+    overflow:hidden !important;
+  }
+
+  /* 버튼/CTA -> pill */
+  .btn, a.btn, button.btn, .cta, .btn-primary{
+    border-radius:999px !important;
+    font-weight:1000 !important;
+  }
+
+  /* 쿠폰 칩류가 있으면: 가로 스크롤 */
+  .chips, .pill-row, .coupon-row, .coupon-chips{
+    display:flex !important;
+    gap:10px !important;
+    overflow:auto !important;
+    -webkit-overflow-scrolling:touch;
+    padding:8px 2px !important;
+  }
+  .chips::-webkit-scrollbar,
+  .pill-row::-webkit-scrollbar,
+  .coupon-row::-webkit-scrollbar,
+  .coupon-chips::-webkit-scrollbar{ display:none; }
+
+  .chip, .pill, .tag, .coupon-chip{
+    flex:0 0 auto !important;
+    border:1px solid var(--bd) !important;
+    background:#fff !important;
+    border-radius:999px !important;
+    padding:10px 12px !important;
+    font-weight:1000 !important;
+    box-shadow:0 8px 18px rgba(0,0,0,.05);
+  }
+
+  /* ✅ Mobile bottom nav (옵션)
+     - 아래 HTML이 있으면 바로 LootBar 느낌 완성:
+       <nav class="lb-bottom">...</nav>
+  */
+  .lb-bottom{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    height:58px;
+    background:#fff;
+    border-top:1px solid var(--bd);
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    z-index:9999;
+  }
+  .lb-bottom a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    color:var(--muted);
+    font-weight:1000;
+    font-size:12px;
+  }
+  .lb-bottom a.on{ color:var(--fg); }
+
+  /* bottom nav가 있으면 본문이 가리지 않도록 */
+  body{ padding-bottom: 66px; }
+}
+
+/* =========================================================
+   (OPTIONAL) LootBar-style mobile hero/search/actions
+   - 아래 클래스가 HTML에 있으면 자동으로 적용됨
+========================================================= */
+@media (max-width: 768px){
+  .lb-search{
+    margin:10px 0 12px;
+    border:1px solid var(--bd);
+    background:#fff;
+    border-radius:14px;
+    padding:10px 12px;
+    box-shadow:0 8px 18px rgba(0,0,0,.05);
+  }
+  .lb-search input{
+    width:100%;
+    border:0; outline:0;
+    font-size:14px;
+    background:transparent;
+  }
+
+  .lb-hero{
+    display:block;
+    border-radius:16px;
+    border:1px solid var(--bd);
+    background:linear-gradient(135deg,#101827,#0b1220);
+    color:#eaf0ff;
+    text-decoration:none;
+    overflow:hidden;
+    box-shadow:0 12px 26px rgba(0,0,0,.12);
+  }
+  .lb-hero-inner{ padding:16px; }
+  .lb-hero-kicker{ font-weight:900; opacity:.8; font-size:12px; }
+  .lb-hero-title{ font-size:28px; font-weight:1100; letter-spacing:-.6px; margin-top:2px; }
+  .lb-hero-sub{ margin-top:6px; opacity:.85; font-size:13px; }
+  .lb-hero-cta{
+    margin-top:12px;
+    display:inline-flex;
+    padding:10px 12px;
+    border-radius:999px;
+    background:var(--cta);
+    color:var(--ctaText);
+    font-weight:1100;
+  }
+
+  .lb-actions{
+    margin:12px 0 6px;
+    display:flex;
+    gap:10px;
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:6px;
+  }
+  .lb-actions::-webkit-scrollbar{ display:none; }
+  .lb-action{
+    flex:0 0 auto;
+    border:1px solid var(--bd);
+    background:#fff;
+    border-radius:16px;
+    padding:10px 12px;
+    text-decoration:none;
+    color:var(--fg);
+    font-weight:1000;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    box-shadow:0 8px 18px rgba(0,0,0,.05);
+  }
+  .lb-ico{ font-size:18px; }
+
+  .lb-row{ margin:10px 0 0; }
+  .lb-row-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:8px 0 8px;
+  }
+  .lb-row-head h3{ margin:0; font-size:14px; font-weight:1100; }
+  .lb-row-head a{ font-size:12px; color:var(--muted); text-decoration:none; }
+
+  .lb-hscroll{
+    display:flex;
+    gap:10px;
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+    padding:2px 0 8px;
+  }
+  .lb-hscroll::-webkit-scrollbar{ display:none; }
+  .lb-mini{
+    flex:0 0 auto;
+    width:140px;
+    border:1px solid var(--bd);
+    background:#fff;
+    border-radius:16px;
+    padding:12px;
+    text-decoration:none;
+    color:var(--fg);
+    box-shadow:0 8px 18px rgba(0,0,0,.05);
+  }
+  .lb-mini b{ display:block; font-size:14px; }
+  .lb-mini small{ display:block; margin-top:4px; color:var(--muted); font-size:12px; }
+}
+/* =========================================================
+   HOME coupon chips -> HORIZONTAL SCROLL (with peek + fade)
+   넣는 곳:
+   - /css/theme-test.css 맨 아래에 그대로 붙여넣기
+   목표:
+   - 모바일에서 쿠폰이 3~5개여도 UI 안 깨짐
+   - "옆에 더 있음"을 peek + fade로 알려줌
+========================================================= */
+
+/* 모바일 우선 */
+@media (max-width: 768px){
+
+  /* ✅ 쿠폰 영역 컨테이너를 "한 줄 가로 스크롤"로 만들기
+     (네 기존 마크업 클래스가 뭔지 몰라서 여러 후보를 같이 커버)
+  */
+  .coupon-row, .coupon-chips, .chips, .pill-row,
+  .footer-tools .coupon-list, .footer-tools .coupon-row,
+  .footer-tools .chips, .footer-tools .pill-row{
+    display:flex !important;
+    flex-wrap:nowrap !important;
+    gap:10px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;
+    padding:10px 2px 12px !important;
+    margin:0 !important;
+    position:relative;
+  }
+
+  /* 스크롤바 숨김 */
+  .coupon-row::-webkit-scrollbar, .coupon-chips::-webkit-scrollbar, .chips::-webkit-scrollbar, .pill-row::-webkit-scrollbar,
+  .footer-tools .coupon-list::-webkit-scrollbar, .footer-tools .coupon-row::-webkit-scrollbar,
+  .footer-tools .chips::-webkit-scrollbar, .footer-tools .pill-row::-webkit-scrollbar{
+    display:none;
+  }
+
+  /* ✅ "peek" 효과: 한 화면에 1.8~2.2개 정도 보이게
+     - 각 칩(혹은 칩 카드)을 일정 폭으로 고정
+     (대상 클래스가 다를 수 있어 후보를 넓게 잡음)
+  */
+  .coupon-chip, .chip, .pill, .tag,
+  .footer-tools .coupon-chip, .footer-tools .chip, .footer-tools .pill, .footer-tools .tag{
+    flex:0 0 auto !important;
+    min-width: 180px !important;  /* ← 여기 조절하면 한 화면에 보이는 개수 변경됨 */
+    scroll-snap-align:start;
+    border-radius:16px !important;
+    border:1px solid #e5e7eb !important;
+    background:#fff !important;
+    box-shadow:0 8px 18px rgba(0,0,0,.05) !important;
+    padding:10px 12px !important;
+    font-weight:900 !important;
+  }
+
+  /* ✅ fade(오른쪽 끝 그라데이션) */
+  .coupon-row::after, .coupon-chips::after, .chips::after, .pill-row::after,
+  .footer-tools .coupon-list::after, .footer-tools .coupon-row::after,
+  .footer-tools .chips::after, .footer-tools .pill-row::after{
+    content:"";
+    position:sticky;
+    right:0;
+    top:0;
+    height:100%;
+    width:28px;
+    pointer-events:none;
+    background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,1));
+  }
+
+  /* 다크 헤더 쓰는 경우라도 칩 영역 배경은 흰색이니 유지 */
+}
+
+/* ✅ 데스크탑에서는 기존처럼 3칩 고정 레이아웃을 유지하고 싶으면 아무 것도 안 하면 됨 */

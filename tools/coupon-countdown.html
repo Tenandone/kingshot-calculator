@@ -1,0 +1,1241 @@
+<!-- FILE: /tools/coupon-countdown.html — FULL FINAL (v4.2.4 OPTIMIZED)
+     ✅ v4.2.3 유지
+     ✅ [추가] 팝업 하단 작은 안내문(4개 언어) 추가
+        - "할인 링크 → 쿠폰 코드 입력 → 즐겨찾기"
+        - "매달 1일 추첨 · 매달 15일 추가쿠폰(상시)"
+     ✅ 페이지 하단(계산기 옆) "광고보기" 버튼: 새 탭 이동 X → 탑업 팝업(openPopup) 재오픈
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+
+  <title>Kingshot Coupon Countdown — Asia / Europe / America</title>
+  <meta name="description" content="Kingshot coupon countdown for Asia / Europe / America. Active codes, next expiry time, and time since last code if none are active." />
+
+  <style>
+    :root{
+      --fg:#fff;
+      --muted:rgba(255,255,255,.78);
+      --soft:rgba(255,255,255,.55);
+
+      --cta:#facc15;
+      --cta2:#ffd54a;
+      --ctaText:#111827;
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
+
+      --max: 980px;
+      --stickyH: 62px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--fg);
+      font-family:var(--sans);
+      overflow-x:hidden;
+      background:
+        radial-gradient(1100px 700px at 50% 10%, rgba(0,0,0,.55), rgba(0,0,0,.88)),
+        url("/img/back.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    a{color:inherit;text-decoration:none}
+
+    @media (max-width: 820px){
+      body{ background-attachment: scroll; }
+    }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding: calc(18px + var(--stickyH)) 16px 42px;
+    }
+
+    /* ===========================
+       STICKY SPONSOR BAR
+    =========================== */
+    .stickyBar{
+      position:fixed;
+      top:10px;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:9999;
+      width:min(var(--max), calc(100% - 32px));
+      display:flex;
+      justify-content:center;
+      pointer-events:none;
+    }
+    .sponsorPill{
+      pointer-events:auto;
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.42);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 14px 34px rgba(0,0,0,.55);
+      max-width:100%;
+    }
+    .sponsorText{
+      font-weight:1100;
+      font-size:13px;
+      letter-spacing:.25px;
+      color:rgba(255,255,255,.92);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      user-select:none;
+      pointer-events:none;
+    }
+    .btnSave{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:9px 14px;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--cta), var(--cta2));
+      color:var(--ctaText);
+      font-weight:1300;
+      font-size:14px;
+      border:1px solid color-mix(in srgb, var(--cta) 75%, #000 10%);
+      white-space:nowrap;
+      flex:0 0 auto;
+      overflow:hidden;
+      transform: translateZ(0);
+      letter-spacing:.2px;
+    }
+    .btnSave .zap{
+      width:18px;height:18px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.10);
+      border:1px solid rgba(0,0,0,.10);
+      font-size:12px;
+      line-height:1;
+      color: var(--ctaText);
+      font-weight:1200;
+    }
+    .btnSave::after{
+      content:"";
+      position:absolute;
+      top:-30%;
+      left:-60%;
+      width:40%;
+      height:160%;
+      background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0));
+      transform:skewX(-20deg);
+      animation: shine 1.9s ease-in-out infinite;
+      opacity:.9;
+      pointer-events:none;
+    }
+    @keyframes shine{
+      0%   { left:-60%; opacity:0; }
+      20%  { opacity:.9; }
+      55%  { left:120%; opacity:.9; }
+      100% { left:120%; opacity:0; }
+    }
+    .btnSave:active{ transform: translateY(1px); }
+
+    @media (max-width:520px){
+      .stickyBar{ top:8px; width: calc(100% - 20px); }
+      .sponsorPill{ padding:9px 12px; gap:10px; }
+      .sponsorText{ font-size:12px; }
+      .btnSave{ padding:9px 12px; font-size:13px; }
+    }
+
+    /* ===== Title ===== */
+    .title{ text-align:center; padding: 6px 0 10px; }
+    .title h1{
+      margin:0;
+      font-size: clamp(22px, 3.2vw, 34px);
+      font-weight: 1200;
+      letter-spacing: -0.7px;
+      text-shadow: 0 12px 26px rgba(0,0,0,.55);
+    }
+    .title h2{
+      margin:10px 0 0;
+      font-size: clamp(14px, 1.8vw, 18px);
+      font-weight: 1000;
+      color: var(--muted);
+      letter-spacing:-0.2px;
+    }
+
+    /* ===== Region ===== */
+    .region{ padding: 22px 0 26px; border-top: 1px solid rgba(255,255,255,.10); }
+    .region:first-of-type{ border-top: 0; }
+    .regionName{
+      text-align:center;
+      font-size: clamp(18px, 2.6vw, 28px);
+      font-weight: 1200;
+      letter-spacing: -0.25px;
+      margin-bottom: 14px;
+    }
+    .timerRow{
+      display:flex;
+      justify-content:center;
+      gap: clamp(14px, 3vw, 34px);
+      flex-wrap:wrap;
+      margin: 6px 0 10px;
+    }
+    .t{ text-align:center; min-width: 92px; }
+    .t .num{
+      font-family: var(--mono);
+      font-size: clamp(44px, 7vw, 78px);
+      font-weight: 1300;
+      letter-spacing: .6px;
+      line-height: 1;
+      text-shadow: 0 12px 26px rgba(0,0,0,.55);
+      font-variant-numeric: tabular-nums;
+    }
+    .t .lab{
+      margin-top: 8px;
+      font-size: 12px;
+      letter-spacing: .12em;
+      font-weight: 1100;
+      color: var(--muted);
+    }
+    .metaLine{
+      text-align:center;
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 0 8px;
+      font-weight: 800;
+    }
+    .metaLine b{ color: #fff; font-weight: 1200; }
+    .metaLine .soft{ color: var(--soft); }
+
+    /* ===== 2nd sponsor banner ===== */
+    .midBanner{ margin: 18px 0 2px; display:flex; justify-content:center; }
+    .lootbarBanner{
+      width: min(900px, 100%);
+      border-radius: 14px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.35);
+      box-shadow: 0 14px 34px rgba(0,0,0,.55);
+    }
+    .lootbarBanner img{ width:100%; height:auto; display:block; }
+
+    /* ===== codes ===== */
+    .codesWrap{ border-top: 1px solid rgba(255,255,255,.10); padding: 22px 0 10px; }
+    .codesTitle{
+      text-align:center;
+      font-size: 18px;
+      font-weight: 1300;
+      margin: 0 0 14px;
+      letter-spacing:-.2px;
+    }
+    .codesGrid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    @media (max-width: 640px){ .codesGrid{ grid-template-columns: 1fr; } }
+
+    .codeCard{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.35);
+      border-radius: 14px;
+      padding: 12px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      backdrop-filter: blur(8px);
+    }
+    .codeLeft{ min-width:0; }
+    .codeTxt{
+      font-family: var(--mono);
+      font-weight: 1300;
+      letter-spacing: .9px;
+      font-size: 15px;
+      color: #fff;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .codeMeta{
+      margin-top:6px;
+      font-size: 12px;
+      color: rgba(255,255,255,.82);
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.22);
+      color: rgba(255,255,255,.86);
+      font-weight: 1200;
+      font-size: 11px;
+      white-space:nowrap;
+    }
+    .btnCopy{
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      font-weight: 1300;
+      border-radius: 999px;
+      padding: 10px 12px;
+      cursor:pointer;
+      white-space:nowrap;
+      min-width: 92px;
+      letter-spacing:.2px;
+    }
+    .btnCopy:hover{ border-color: rgba(255,255,255,.28); }
+
+    .controls{
+      margin: 18px auto 0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+    }
+    .btnSmall{
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.35);
+      color:#fff;
+      font-weight: 1300;
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor:pointer;
+      backdrop-filter: blur(8px);
+      letter-spacing:.2px;
+      min-width: 220px;
+      text-align:center;
+    }
+    .btnSmall:hover{ border-color: rgba(255,255,255,.28); }
+    .btnSmall.cta{
+      background: var(--cta);
+      border-color: var(--cta);
+      color: var(--ctaText);
+      backdrop-filter:none;
+      font-weight: 1400;
+    }
+
+    .footerLinks{
+      margin-top: 22px;
+      text-align:center;
+      color: rgba(255,255,255,.60);
+      font-size: 12px;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .footerLinks a{
+      color: rgba(255,255,255,.75);
+      font-weight: 1200;
+      border-bottom: 1px dashed rgba(255,255,255,.25);
+      letter-spacing:.2px;
+      padding: 2px 2px;
+    }
+
+    .footerAdBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 2px 2px;
+      border:0;
+      background: transparent;
+      color: rgba(255,255,255,.75);
+      font-weight: 1200;
+      border-bottom: 1px dashed rgba(255,255,255,.25);
+      letter-spacing:.2px;
+      cursor:pointer;
+      font-size: 12px;
+    }
+    .footerAdBtn:active{ transform: translateY(1px); }
+
+    .toast{
+      position:fixed;left:50%;bottom:16px;transform:translateX(-50%);
+      background: rgba(15,15,15,.9);
+      border:1px solid rgba(255,255,255,.16);
+      color:#fff;
+      padding:10px 12px;border-radius:999px;
+      font-weight:1300;font-size:13px;
+      opacity:0;pointer-events:none;
+      transition:opacity .15s ease, transform .15s ease;
+      z-index:9999;
+    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
+
+    /* ===== entry ===== */
+    .entry{
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index: 99999;
+      transition: opacity .25s ease;
+    }
+    .entry.hidden{ opacity: 0; pointer-events:none; }
+    .mascot{
+      width: 96px;
+      height: 96px;
+      display:block;
+      animation: bob 1.2s ease-in-out infinite;
+      filter: drop-shadow(0 16px 22px rgba(0,0,0,.55));
+    }
+    @keyframes bob{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-18px); }
+    }
+    @media (prefers-reduced-motion: reduce){ .mascot{ animation:none; } }
+
+    /* ===== popup ===== */
+    .popback{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 99998;
+      padding: 18px;
+    }
+    .pop{
+      width: min(980px, 100%);
+      min-height: min(520px, 80vh);
+      background:#f5eacc;
+      border-radius: 18px;
+      position:relative;
+      overflow:hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.55);
+    }
+    .popClose{
+      position:absolute; top:14px; right:14px;
+      width:40px; height:40px;
+      border-radius:999px;
+      border:0;
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      z-index:3;
+    }
+    .popCorner{
+      position:absolute;
+      width: 220px; height: 220px;
+      border-radius: 16px;
+      overflow:hidden;
+      background: linear-gradient(180deg, #5b21b6, #2563eb);
+      z-index:1;
+    }
+    .popCorner img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .c1{ top:32px; left:32px; }
+    .c2{ top:32px; right:32px; }
+    .c3{ bottom:32px; left:32px; }
+    .c4{ bottom:32px; right:32px; }
+    @media (max-width: 820px){
+      .popCorner{ width: 160px; height:160px; }
+      .c1{ top:18px; left:18px; }
+      .c2{ top:18px; right:18px; }
+      .c3{ bottom:18px; left:18px; }
+      .c4{ bottom:18px; right:18px; }
+    }
+    @media (max-width: 560px){
+      .pop{ min-height: 72vh; }
+      .popCorner{ width: 120px; height:120px; }
+    }
+    .popCenter{
+      position:absolute; inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:10px;
+      text-align:center;
+      z-index:2;
+      padding: 40px 18px;
+    }
+    .popBig{
+      font-weight: 1500;
+      letter-spacing: -1.1px;
+      color:#0b0d12;
+      text-transform: uppercase;
+      font-size: clamp(38px, 5vw, 70px);
+      line-height: 1.02;
+    }
+    .popSub{
+      margin-top:6px;
+      font-weight: 1300;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(11,13,18,.65);
+    }
+    .popHint{
+      margin-top: 10px;
+      max-width: 520px;
+      color: rgba(11,13,18,.72);
+      font-weight: 1100;
+      font-size: 13px;
+      line-height: 1.35;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px dashed rgba(11,13,18,.25);
+      background: rgba(255,255,255,.55);
+    }
+    .popHint b{
+      color:#0b0d12;
+      font-weight: 1500;
+      letter-spacing: .02em;
+      font-family: var(--mono);
+    }
+
+    /* ✅ new fine print */
+    .popFine{
+      margin-top: 10px;
+      max-width: 640px;
+      font-size: 11.5px;
+      line-height: 1.35;
+      color: rgba(11,13,18,.62);
+      font-weight: 900;
+    }
+    .popFine b{
+      color:#0b0d12;
+      font-weight: 1200;
+    }
+
+    .popBtns{
+      margin-top: 14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      width: min(360px, 100%);
+    }
+    .popYes{
+      width:100%;
+      padding: 14px 16px;
+      border-radius: 999px;
+      border:0;
+      background:#0b0d12;
+      color:#fff;
+      font-weight: 1500;
+      cursor:pointer;
+      letter-spacing:.02em;
+    }
+    .popNo{
+      width:100%;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border:2px solid rgba(11,13,18,.35);
+      background: transparent;
+      color:#0b0d12;
+      font-weight: 1500;
+      cursor:pointer;
+      letter-spacing:.02em;
+    }
+    .popYes:active,.popNo:active{ transform: translateY(1px); }
+  </style>
+</head>
+
+<body>
+  <!-- ENTRY LOADER -->
+  <div class="entry" id="entry">
+    <img class="mascot" src="/img/kingshotdata-logo.png" alt="Loading" />
+  </div>
+
+  <!-- STICKY SPONSOR BAR -->
+  <div class="stickyBar">
+    <div class="sponsorPill" aria-label="Sponsor">
+      <span class="sponsorText" id="sTopText">20% Off Kingshot Top-Ups</span>
+      <a class="btnSave" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener">
+        <span class="zap">⚡</span>
+        <span id="sSaveNow">Save Now</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- DISCOUNT POPUP -->
+  <div class="popback" id="popBack" aria-hidden="true">
+    <div class="pop" role="dialog" aria-modal="true" aria-label="Discount">
+      <button class="popClose" id="popClose" aria-label="Close">✕</button>
+
+      <div class="popCorner c1"><img src="/img/lootbar/1.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="popCorner c2"><img src="/img/lootbar/2.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="popCorner c3"><img src="/img/lootbar/3.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="popCorner c4"><img src="/img/lootbar/4.webp" alt="" loading="lazy" decoding="async"></div>
+
+      <div class="popCenter">
+        <div class="popBig" id="pBig">YOU'VE GOT<br>20% OFF</div>
+        <div class="popSub" id="pSub">YOUR FIRST ORDER</div>
+        <div class="popHint" id="pHint">Tip: Type <b>#s4qU</b> in the search box for a little extra reward.</div>
+
+        <!-- ✅ added small trusted note (i18n) -->
+        <div class="popFine" id="pFine">
+          Open the discounted top-up link, enter the coupon code, and bookmark the link.<br>
+          Join the monthly draw (1st) · Get extra coupons on the 15th (ongoing)
+        </div>
+
+        <div class="popBtns">
+          <button class="popYes" id="popYes" type="button">YES, PLEASE!</button>
+          <button class="popNo" id="popNo" type="button">DECLINE DISCOUNT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="title">
+      <h1 id="h1">Kingshot Coupon Countdown</h1>
+      <h2 id="h2">Active codes + next expiry countdown</h2>
+    </div>
+
+    <!-- ASIA -->
+    <section class="region">
+      <div class="regionName">Asia</div>
+      <div class="timerRow">
+        <div class="t"><div class="num" id="aD">—</div><div class="lab" id="labD1">DAYS</div></div>
+        <div class="t"><div class="num" id="aH">—</div><div class="lab" id="labH1">HOURS</div></div>
+        <div class="t"><div class="num" id="aM">—</div><div class="lab" id="labM1">MINUTES</div></div>
+        <div class="t"><div class="num" id="aS">—</div><div class="lab" id="labS1">SECONDS</div></div>
+      </div>
+      <div class="metaLine" id="aLine"><span id="aLineK">Expiry Date &amp; Time:</span> <b id="aWhen">—</b> <span class="soft" id="aTz">(GMT+9)</span></div>
+
+      <div class="midBanner">
+        <a class="lootbarBanner" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener" aria-label="Open LootBar">
+          <img src="/img/lootbar.png" alt="LootBar banner" loading="lazy" decoding="async" />
+        </a>
+      </div>
+    </section>
+
+    <!-- EUROPE -->
+    <section class="region">
+      <div class="regionName">Europe</div>
+      <div class="timerRow">
+        <div class="t"><div class="num" id="eD">—</div><div class="lab" id="labD2">DAYS</div></div>
+        <div class="t"><div class="num" id="eH">—</div><div class="lab" id="labH2">HOURS</div></div>
+        <div class="t"><div class="num" id="eM">—</div><div class="lab" id="labM2">MINUTES</div></div>
+        <div class="t"><div class="num" id="eS">—</div><div class="lab" id="labS2">SECONDS</div></div>
+      </div>
+      <div class="metaLine" id="eLine"><span id="eLineK">Expiry Date &amp; Time:</span> <b id="eWhen">—</b> <span class="soft" id="eTz">(CET/CEST)</span></div>
+    </section>
+
+    <!-- AMERICA -->
+    <section class="region">
+      <div class="regionName">America</div>
+      <div class="timerRow">
+        <div class="t"><div class="num" id="uD">—</div><div class="lab" id="labD3">DAYS</div></div>
+        <div class="t"><div class="num" id="uH">—</div><div class="lab" id="labH3">HOURS</div></div>
+        <div class="t"><div class="num" id="uM">—</div><div class="lab" id="labM3">MINUTES</div></div>
+        <div class="t"><div class="num" id="uS">—</div><div class="lab" id="labS3">SECONDS</div></div>
+      </div>
+      <div class="metaLine" id="uLine"><span id="uLineK">Expiry Date &amp; Time:</span> <b id="uWhen">—</b> <span class="soft" id="uTz">(ET)</span></div>
+    </section>
+
+    <!-- CODES -->
+    <section class="codesWrap">
+      <div class="codesTitle" id="codesTitle">Active Codes</div>
+      <div class="codesGrid" id="codesGrid"></div>
+
+      <div class="controls">
+        <button class="btnSmall" id="btnShare" type="button">Share</button>
+        <a class="btnSmall" id="btnRedeem" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener">Redeem</a>
+        <a class="btnSmall cta" id="btnGuide" href="/pages/guides/kingshot-giftcode.html" target="_blank" rel="noopener">Gift Code Guide</a>
+      </div>
+
+      <div class="footerLinks" aria-label="Footer links">
+        <a href="/home" data-link id="lnkHome">Home</a>
+        <a href="/guides" data-link id="lnkGuides">Guides</a>
+        <a href="/calculator" data-link id="lnkCalc">Calculator</a>
+        <button class="footerAdBtn" id="footerAdBtn" type="button">VIEW AD</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast">Copied!</div>
+
+  <script>
+  (function(){
+    "use strict";
+
+    const REF_URL = "https://lootbar.gg/shop/ten/top-up/kingshot";
+    const REDEEM_URL = "https://ks-giftcode.centurygame.com/";
+    const DATA_URL = "/data/coupons.json";
+    const MAX_SHOW = 6;
+    const TICK_MS = 1000;
+
+    const UI = {
+      en: {
+        topText: "20% Off Kingshot Top-Ups",
+        saveNow: "Save Now",
+        h1: "Kingshot Coupon Countdown",
+        h2Active: "Active codes + next expiry countdown",
+        h2None: "No active codes — time since last code:",
+        expiry: "Expiry Date & Time:",
+        since: "Since:",
+        codesActive: "Active Codes",
+        noActive: "No active codes right now.",
+        share: "Share",
+        redeem: "Redeem",
+        guide: "Gift Code Guide",
+        home: "Home",
+        guides: "Guides",
+        calc: "Calculator",
+        days: "DAYS",
+        hours: "HOURS",
+        minutes: "MINUTES",
+        seconds: "SECONDS",
+        popupBig: "YOU'VE GOT<br>20% OFF",
+        popupSub: "YOUR FIRST ORDER",
+        popupHint: "Tip: Type <b>#s4qU</b> in the search box for a little extra reward.",
+        popupFine: "Open the discounted top-up link, <b>enter the coupon code</b>, and <b>bookmark the link</b>.<br>Join the monthly draw (1st) · Get extra coupons on the 15th (ongoing)",
+        popupYes: "YES, PLEASE!",
+        popupNo: "DECLINE DISCOUNT",
+        toastCopied: "Copied",
+        copyBtn: "Copy",
+        adTag: "VIEW AD"
+      },
+      ko: {
+        topText: "킹샷 충전 20% 할인",
+        saveNow: "지금 할인받기",
+        h1: "킹샷 쿠폰 카운트다운",
+        h2Active: "활성 쿠폰 + 다음 만료 카운트다운",
+        h2None: "활성 쿠폰 없음 · 마지막 쿠폰 이후:",
+        expiry: "만료 시각:",
+        since: "기준 시각:",
+        codesActive: "현재 활성 쿠폰",
+        noActive: "현재 활성 쿠폰이 없습니다.",
+        share: "공유",
+        redeem: "교환하러가기",
+        guide: "쿠폰 가이드",
+        home: "홈",
+        guides: "가이드",
+        calc: "계산기",
+        days: "일",
+        hours: "시간",
+        minutes: "분",
+        seconds: "초",
+        popupBig: "20% OFF",
+        popupSub: "첫 주문 할인",
+        popupHint: "힌트: 검색창에 <b>#s4qU</b> 를 입력하면 추가 보상이 있어요.",
+        popupFine: "할인 충전 링크로 접속해 <b>쿠폰 코드 입력 후</b>, 링크를 <b>즐겨찾기</b>해두면<br><b>매달 1일</b> 추첨 이벤트 참여 · <b>매달 15일</b> 추가 쿠폰 증정(상시)",
+        popupYes: "예, 받을래요!",
+        popupNo: "할인 거절",
+        toastCopied: "복사됨",
+        copyBtn: "복사",
+        adTag: "광고보기"
+      },
+      ja: {
+        topText: "Kingshot チャージ 20%OFF",
+        saveNow: "今すぐ保存",
+        h1: "Kingshot クーポン カウントダウン",
+        h2Active: "有効コード + 次の期限カウントダウン",
+        h2None: "有効コードなし · 最後のコードから:",
+        expiry: "期限:",
+        since: "基準:",
+        codesActive: "有効コード",
+        noActive: "現在有効なコードはありません。",
+        share: "共有",
+        redeem: "交換する",
+        guide: "コードガイド",
+        home: "ホーム",
+        guides: "ガイド",
+        calc: "計算機",
+        days: "日",
+        hours: "時間",
+        minutes: "分",
+        seconds: "秒",
+        popupBig: "20% OFF",
+        popupSub: "初回注文割引",
+        popupHint: "ヒント: 検索欄に <b>#s4qU</b> を入力すると追加報酬があります。",
+        popupFine: "割引チャージリンクにアクセスして <b>クーポンコードを入力</b>し、リンクを <b>ブックマーク</b>してください。<br><b>毎月1日</b> 抽選イベント参加 · <b>毎月15日</b> 追加クーポン（常設）",
+        popupYes: "はい、お願いします！",
+        popupNo: "辞退する",
+        toastCopied: "コピーしました",
+        copyBtn: "コピー",
+        adTag: "広告を見る"
+      },
+      "zh-TW": {
+        topText: "Kingshot 儲值 20% 折扣",
+        saveNow: "立即省錢",
+        h1: "Kingshot 優惠碼倒數",
+        h2Active: "可用代碼 + 下次到期倒數",
+        h2None: "目前無可用代碼 · 距離上次代碼:",
+        expiry: "到期時間:",
+        since: "基準時間:",
+        codesActive: "可用代碼",
+        noActive: "目前沒有可用代碼。",
+        share: "分享",
+        redeem: "前往兌換",
+        guide: "優惠碼指南",
+        home: "首頁",
+        guides: "攻略",
+        calc: "計算機",
+        days: "天",
+        hours: "小時",
+        minutes: "分鐘",
+        seconds: "秒",
+        popupBig: "20% OFF",
+        popupSub: "首單折扣",
+        popupHint: "提示：在搜尋欄輸入 <b>#s4qU</b> 可獲得額外獎勵。",
+        popupFine: "開啟折扣儲值連結，<b>輸入優惠碼</b>後將連結 <b>加入書籤</b>。<br><b>每月1日</b> 抽獎活動參加 · <b>每月15日</b> 加碼優惠券（常態）",
+        popupYes: "我要優惠！",
+        popupNo: "不要折扣",
+        toastCopied: "已複製",
+        copyBtn: "複製",
+        adTag: "查看廣告"
+      }
+    };
+
+    function detectLang(){
+  const sp = new URLSearchParams(location.search);
+  const raw = (sp.get('lang') || '').trim();
+  const low = raw.toLowerCase();
+
+  // normalize TW aliases
+  let q = raw;
+  if (low === 'tw' || low === 'zh-tw' || low === 'zh_tw') q = 'zh-TW';
+
+  // ✅ URL에 lang가 "있으면" : 지원값만 허용, 아니면 EN 강제
+  if (raw) {
+    if (q === 'ko' || q === 'en' || q === 'ja' || q === 'zh-TW') return q;
+    return 'en';
+  }
+
+  // URL에 lang가 "없을 때만" saved/nav 사용
+  let saved = null;
+  try { saved = localStorage.getItem('lang'); } catch(_){}
+  if (saved) {
+    const sLow = String(saved).trim().toLowerCase();
+    let s = saved;
+    if (sLow === 'tw' || sLow === 'zh-tw' || sLow === 'zh_tw') s = 'zh-TW';
+    if (s === 'ko' || s === 'en' || s === 'ja' || s === 'zh-TW') return s;
+  }
+
+  const nav = (navigator.language || 'en').toLowerCase();
+  if (nav.startsWith('ko')) return 'ko';
+  if (nav.startsWith('ja')) return 'ja';
+  if (nav.includes('zh') && (nav.includes('tw') || nav.includes('hk'))) return 'zh-TW';
+  return 'en';
+}
+
+    const LANG = detectLang();
+    const T = UI[LANG] || UI.en;
+    document.documentElement.setAttribute('lang', LANG);
+
+    const REG = {
+      asia:   { tz:"Asia/Seoul",       tzNote:"(GMT+9)" },
+      europe: { tz:"Europe/Berlin",    tzNote:"(CET/CEST)" },
+      us:     { tz:"America/New_York", tzNote:"(ET)" }
+    };
+
+    const $ = (id)=>document.getElementById(id);
+
+    const dom = {
+      entry: $("entry"),
+      toast: $("toast"),
+
+      sTopText: $("sTopText"),
+      sSaveNow: $("sSaveNow"),
+      h1: $("h1"),
+      h2: $("h2"),
+
+      aLineK: $("aLineK"), eLineK: $("eLineK"), uLineK: $("uLineK"),
+      aWhen: $("aWhen"), eWhen: $("eWhen"), uWhen: $("uWhen"),
+      aTz: $("aTz"), eTz: $("eTz"), uTz: $("uTz"),
+
+      codesTitle: $("codesTitle"),
+      codesGrid: $("codesGrid"),
+      btnShare: $("btnShare"),
+      btnRedeem: $("btnRedeem"),
+      btnGuide: $("btnGuide"),
+
+      lnkHome: $("lnkHome"),
+      lnkGuides: $("lnkGuides"),
+      lnkCalc: $("lnkCalc"),
+
+      footerAdBtn: $("footerAdBtn"),
+
+      labD1:$("labD1"), labH1:$("labH1"), labM1:$("labM1"), labS1:$("labS1"),
+      labD2:$("labD2"), labH2:$("labH2"), labM2:$("labM2"), labS2:$("labS2"),
+      labD3:$("labD3"), labH3:$("labH3"), labM3:$("labM3"), labS3:$("labS3"),
+
+      aD:$("aD"), aH:$("aH"), aM:$("aM"), aS:$("aS"),
+      eD:$("eD"), eH:$("eH"), eM:$("eM"), eS:$("eS"),
+      uD:$("uD"), uH:$("uH"), uM:$("uM"), uS:$("uS"),
+
+      pBig:$("pBig"), pSub:$("pSub"), pHint:$("pHint"),
+      pFine:$("pFine"),
+      popYes:$("popYes"), popNo:$("popNo"),
+    };
+
+    if (dom.sTopText) dom.sTopText.textContent = T.topText;
+    if (dom.sSaveNow) dom.sSaveNow.textContent = T.saveNow;
+    if (dom.h1) dom.h1.textContent = T.h1;
+
+    if (dom.codesTitle) dom.codesTitle.textContent = T.codesActive;
+    if (dom.btnShare) dom.btnShare.textContent = T.share;
+    if (dom.btnRedeem) { dom.btnRedeem.textContent = T.redeem; dom.btnRedeem.href = REDEEM_URL; }
+    if (dom.btnGuide) dom.btnGuide.textContent = T.guide;
+
+    if (dom.lnkHome) dom.lnkHome.textContent = T.home;
+    if (dom.lnkGuides) dom.lnkGuides.textContent = T.guides;
+    if (dom.lnkCalc) dom.lnkCalc.textContent = T.calc;
+
+    if (dom.footerAdBtn) dom.footerAdBtn.textContent = T.adTag;
+
+    [dom.labD1,dom.labD2,dom.labD3].forEach(x=>{ if(x) x.textContent = T.days; });
+    [dom.labH1,dom.labH2,dom.labH3].forEach(x=>{ if(x) x.textContent = T.hours; });
+    [dom.labM1,dom.labM2,dom.labM3].forEach(x=>{ if(x) x.textContent = T.minutes; });
+    [dom.labS1,dom.labS2,dom.labS3].forEach(x=>{ if(x) x.textContent = T.seconds; });
+
+    if (dom.pBig) dom.pBig.innerHTML = T.popupBig;
+    if (dom.pSub) dom.pSub.textContent = T.popupSub;
+    if (dom.pHint) dom.pHint.innerHTML = T.popupHint;
+    if (dom.pFine) dom.pFine.innerHTML = T.popupFine;
+    if (dom.popYes) dom.popYes.textContent = T.popupYes;
+    if (dom.popNo) dom.popNo.textContent = T.popupNo;
+
+    function hideEntry(){
+      if(!dom.entry) return;
+      dom.entry.classList.add("hidden");
+      setTimeout(()=>{ try{ dom.entry.remove(); }catch(_){} }, 300);
+    }
+
+    function toast(msg){
+      if(!dom.toast) return;
+      dom.toast.textContent = msg;
+      dom.toast.classList.add("show");
+      clearTimeout(dom.toast._t);
+      dom.toast._t = setTimeout(()=>dom.toast.classList.remove("show"), 1200);
+    }
+
+    async function copyText(text){
+      try{ await navigator.clipboard.writeText(text); }
+      catch(_){
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position="fixed";
+        ta.style.left="-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        try{ document.execCommand("copy"); }catch(__){}
+        ta.remove();
+      }
+    }
+
+    function safeStr(v){ return (v==null?"":String(v)); }
+
+    function parseExpiryMs(c){
+      const iso = safeStr(c.expiresAt).trim();
+      if(iso){
+        const t = Date.parse(iso);
+        if(Number.isFinite(t)) return t;
+      }
+      const until = safeStr(c.until).trim();
+      if(until){
+        const parts = until.split("-");
+        if(parts.length===3){
+          const y=parts[0];
+          const m=String(parts[1]).padStart(2,"0");
+          const d=String(parts[2]).padStart(2,"0");
+          const t = Date.parse(`${y}-${m}-${d}T00:00:00Z`);
+          if(Number.isFinite(t)) return t;
+        }
+      }
+      return null;
+    }
+
+    function parseSeenMs(c){
+      const seen = safeStr(c.firstSeenAt).trim();
+      if(seen){
+        const t = Date.parse(seen);
+        if(Number.isFinite(t)) return t;
+      }
+      return parseExpiryMs(c);
+    }
+
+    function isActive(c, nowMs){
+      const exp = parseExpiryMs(c);
+      if(exp == null) return false;
+      if(nowMs >= exp) return false;
+      const st = safeStr(c.startAt).trim();
+      if(st){
+        const stMs = Date.parse(st);
+        if(Number.isFinite(stMs) && nowMs < stMs) return false;
+      }
+      return true;
+    }
+
+    function partsFromMs(ms){
+      let sec = Math.max(0, Math.floor(ms/1000));
+      const days = Math.floor(sec/86400); sec%=86400;
+      const hours = Math.floor(sec/3600); sec%=3600;
+      const mins = Math.floor(sec/60); sec%=60;
+      return {days, hours, mins, sec};
+    }
+
+    function setTimer(p){
+      dom.aD.textContent = String(p.days);
+      dom.aH.textContent = String(p.hours);
+      dom.aM.textContent = String(p.mins);
+      dom.aS.textContent = String(p.sec);
+
+      dom.eD.textContent = String(p.days);
+      dom.eH.textContent = String(p.hours);
+      dom.eM.textContent = String(p.mins);
+      dom.eS.textContent = String(p.sec);
+
+      dom.uD.textContent = String(p.days);
+      dom.uH.textContent = String(p.hours);
+      dom.uM.textContent = String(p.mins);
+      dom.uS.textContent = String(p.sec);
+    }
+
+    function formatLine(msUTC, tz){
+      const dtf = new Intl.DateTimeFormat("en-US", {
+        timeZone: tz,
+        weekday:"long", month:"long", day:"numeric", year:"numeric",
+        hour:"numeric", minute:"2-digit", hour12:true
+      });
+      return dtf.format(new Date(msUTC));
+    }
+
+    function escapeHTML(s){
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#39;");
+    }
+
+    function setLineLabels(mode){
+      const txt = (mode === 'since') ? T.since : T.expiry;
+      if (dom.aLineK) dom.aLineK.textContent = txt;
+      if (dom.eLineK) dom.eLineK.textContent = txt;
+      if (dom.uLineK) dom.uLineK.textContent = txt;
+    }
+
+    function renderCodes(active, nowMs){
+      if(!dom.codesGrid) return;
+      dom.codesGrid.innerHTML = "";
+
+      if(active.length === 0){
+        const empty = document.createElement("div");
+        empty.style.gridColumn = "1 / -1";
+        empty.style.textAlign = "center";
+        empty.style.color = "rgba(255,255,255,.75)";
+        empty.style.padding = "10px 0 2px";
+        empty.textContent = T.noActive;
+        dom.codesGrid.appendChild(empty);
+        return;
+      }
+
+      active.slice(0, MAX_SHOW).forEach(c=>{
+        const exp = parseExpiryMs(c);
+        const diff = exp ? (exp - nowMs) : 0;
+
+        let tag = "ACTIVE";
+        if(diff <= 0) tag = "EXPIRED";
+        else if(diff <= 2*86400*1000) tag = "ENDING SOON";
+
+        const reward = safeStr(c.reward).trim();
+
+        const card = document.createElement("div");
+        card.className = "codeCard";
+        card.innerHTML = `
+          <div class="codeLeft">
+            <div class="codeTxt">${escapeHTML(c.code || "")}</div>
+            <div class="codeMeta">
+              <span class="pill">${escapeHTML(tag)}</span>
+              <span class="pill">UTC: ${exp ? new Date(exp).toISOString().replace("T"," ").slice(0,16) : "—"}</span>
+              ${reward ? `<span class="pill">${escapeHTML(reward)}</span>` : ``}
+            </div>
+          </div>
+          <button class="btnCopy" type="button">${escapeHTML(T.copyBtn)}</button>
+        `;
+        card.querySelector("button").addEventListener("click", async ()=>{
+          await copyText(c.code || "");
+          toast(T.toastCopied + ": " + (c.code || ""));
+        });
+        dom.codesGrid.appendChild(card);
+      });
+    }
+
+    async function loadCoupons(){
+      const url = DATA_URL + "?v=" + Date.now();
+      const res = await fetch(url, { cache:"no-store" });
+      if(!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();
+      const arr = Array.isArray(data?.coupons) ? data.coupons : (Array.isArray(data) ? data : []);
+      if(!Array.isArray(arr)) throw new Error("Invalid coupons.json shape");
+      return arr.map(x=>({
+        code: safeStr(x.code).trim(),
+        until: x.until,
+        expiresAt: x.expiresAt,
+        firstSeenAt: x.firstSeenAt,
+        startAt: x.startAt,
+        reward: x.reward
+      })).filter(x=>x.code);
+    }
+
+    let all = [];
+    let active = [];
+    let targetMs = null;
+    let sinceMs = null;
+    let tickTimer = null;
+
+    function compute(){
+      const nowMs = Date.now();
+      active = all.filter(c => c.code && isActive(c, nowMs));
+      active.sort((a,b)=> (parseExpiryMs(a)||0) - (parseExpiryMs(b)||0));
+
+      if (dom.aTz) dom.aTz.textContent = REG.asia.tzNote;
+      if (dom.eTz) dom.eTz.textContent = REG.europe.tzNote;
+      if (dom.uTz) dom.uTz.textContent = REG.us.tzNote;
+
+      if(active.length > 0){
+        setLineLabels('expiry');
+        targetMs = parseExpiryMs(active[0]);
+        sinceMs = null;
+
+        if (dom.h2) dom.h2.textContent = T.h2Active;
+        if (dom.codesTitle) dom.codesTitle.textContent = `${T.codesActive} (${active.length})`;
+
+        if (dom.aWhen) dom.aWhen.textContent = formatLine(targetMs, REG.asia.tz);
+        if (dom.eWhen) dom.eWhen.textContent = formatLine(targetMs, REG.europe.tz);
+        if (dom.uWhen) dom.uWhen.textContent = formatLine(targetMs, REG.us.tz);
+      } else {
+        targetMs = null;
+        let last = null, lastCode = null;
+        for(const c of all){
+          const s = parseSeenMs(c);
+          if(s == null) continue;
+          if(last == null || s > last){ last = s; lastCode = c.code || null; }
+        }
+        sinceMs = last;
+
+        setLineLabels('since');
+        if (dom.h2) dom.h2.textContent = sinceMs ? (T.h2None + " " + (lastCode||"—")) : T.h2None;
+        if (dom.codesTitle) dom.codesTitle.textContent = `${T.codesActive} (0)`;
+
+        if(sinceMs){
+          if (dom.aWhen) dom.aWhen.textContent = formatLine(sinceMs, REG.asia.tz);
+          if (dom.eWhen) dom.eWhen.textContent = formatLine(sinceMs, REG.europe.tz);
+          if (dom.uWhen) dom.uWhen.textContent = formatLine(sinceMs, REG.us.tz);
+        } else {
+          if (dom.aWhen) dom.aWhen.textContent = "—";
+          if (dom.eWhen) dom.eWhen.textContent = "—";
+          if (dom.uWhen) dom.uWhen.textContent = "—";
+        }
+      }
+
+      renderCodes(active, nowMs);
+      hideEntry();
+    }
+
+    function tick(){
+      const nowMs = Date.now();
+      if(targetMs){
+        setTimer(partsFromMs(targetMs - nowMs));
+        return;
+      }
+      if(sinceMs){
+        setTimer(partsFromMs(nowMs - sinceMs));
+      }
+    }
+
+    if (dom.btnShare){
+      dom.btnShare.addEventListener("click", async ()=>{
+        try{
+          if(navigator.share){
+            await navigator.share({ title: document.title, url: location.href });
+          } else {
+            await copyText(location.href);
+            toast(T.toastCopied);
+          }
+        }catch(_){}
+      });
+    }
+
+    (async function init(){
+      try{
+        all = await loadCoupons();
+        compute();
+        tick();
+        if(tickTimer) clearInterval(tickTimer);
+        tickTimer = setInterval(tick, TICK_MS);
+      }catch(e){
+        console.error(e);
+        setTimeout(hideEntry, 900);
+        if (dom.h2) dom.h2.textContent = "Failed to load /data/coupons.json";
+      }
+    })();
+
+    // POPUP (28s, session once)
+    const POP_KEY = "kd:discountPopupShown:session:v1";
+    const popBack = document.getElementById("popBack");
+    const popClose = document.getElementById("popClose");
+    const popYes = document.getElementById("popYes");
+    const popNo = document.getElementById("popNo");
+
+    function openPopup(){
+      if(!popBack) return;
+      popBack.style.display = "flex";
+      popBack.setAttribute("aria-hidden","false");
+      try{ document.body.style.overflow = "hidden"; }catch(_){}
+    }
+    function closePopup(){
+      if(!popBack) return;
+      popBack.style.display = "none";
+      popBack.setAttribute("aria-hidden","true");
+      try{ document.body.style.overflow = ""; }catch(_){}
+    }
+
+    if(popClose) popClose.addEventListener("click", closePopup);
+    if(popBack) popBack.addEventListener("click", (e)=>{ if(e.target === popBack) closePopup(); });
+    window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closePopup(); });
+
+    if(popYes) popYes.addEventListener("click", ()=>{
+      window.open(REF_URL, "_blank", "noopener");
+      closePopup();
+    });
+    if(popNo) popNo.addEventListener("click", closePopup);
+
+    if (dom.footerAdBtn){
+      dom.footerAdBtn.addEventListener("click", ()=>{
+        openPopup();
+        try{ sessionStorage.setItem(POP_KEY, "1"); }catch(_){}
+      });
+    }
+
+    try{
+      const already = sessionStorage.getItem(POP_KEY) === "1";
+      if(!already){
+        setTimeout(()=>{
+          openPopup();
+          try{ sessionStorage.setItem(POP_KEY, "1"); }catch(_){}
+        }, 28000);
+      }
+    }catch(_){}
+  })();
+  </script>
+</body>
+</html>

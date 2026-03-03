@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <title>Kingshot – Event Countdown & Gift Codes</title>
+  <meta name="description" content="Kingshot event countdown + gift code quick copy. Simple landing page for players." />
+  <style>
+    :root{
+      --bg0:#070a12;
+      --bg1:#0a0f1f;
+      --card:#0e1631cc;
+      --card2:#0b1228cc;
+      --bd:#1f2a4a;
+      --fg:#eaf0ff;
+      --muted:#a8b2d1;
+      --brand:#ffd400;
+      --good:#22c55e;
+      --warn:#f59e0b;
+      --bad:#ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --r:18px;
+      --r2:22px;
+      --max:1120px;
+      --gap:16px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--fg);
+      background:
+        radial-gradient(1100px 600px at 20% 10%, rgba(56, 189, 248, .15), transparent 55%),
+        radial-gradient(900px 700px at 80% 20%, rgba(168, 85, 247, .14), transparent 55%),
+        radial-gradient(1200px 700px at 55% 90%, rgba(245, 158, 11, .09), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px 16px 60px;}
+    /* Top */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:10px 0 16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width:240px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background:
+        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.55), transparent 55%),
+        linear-gradient(145deg, rgba(255,212,0,.95), rgba(255,212,0,.25));
+      box-shadow: 0 10px 22px rgba(255,212,0,.12);
+      border:1px solid rgba(255,212,0,.35);
+    }
+    .brand h1{margin:0; font-size:15px; letter-spacing:.2px}
+    .brand small{display:block; margin-top:2px; color:var(--muted); font-weight:500}
+    .actions{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 24px rgba(0,0,0,.16);
+      font-size:13px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .lang{
+      display:inline-flex; gap:6px; padding:6px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+    }
+    .lang button{
+      border:0; background:transparent; color:var(--muted);
+      padding:8px 10px; border-radius:999px;
+      font-weight:700; font-size:12px; cursor:pointer;
+    }
+    .lang button.active{background:rgba(255,212,0,.18); color:var(--fg); border:1px solid rgba(255,212,0,.28)}
+    .cta{
+      display:inline-flex; align-items:center; gap:10px;
+      border:0; cursor:pointer;
+      padding:10px 14px;
+      border-radius:999px;
+      background:linear-gradient(135deg, rgba(255,212,0,.98), rgba(255,212,0,.55));
+      color:#10131b;
+      font-weight:900;
+      box-shadow: 0 12px 26px rgba(255,212,0,.18);
+    }
+    .cta span{font-weight:900}
+    .cta .arrow{
+      width:28px; height:28px; border-radius:999px;
+      background:rgba(0,0,0,.18);
+      display:grid; place-items:center;
+    }
+
+    /* Hero */
+    .hero{
+      position:relative;
+      border-radius:var(--r2);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(800px 420px at 60% 10%, rgba(255,255,255,.10), transparent 55%),
+        radial-gradient(800px 520px at 10% 60%, rgba(56,189,248,.10), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+      box-shadow: var(--shadow);
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(700px 420px at 75% 30%, rgba(168,85,247,.22), transparent 60%),
+        radial-gradient(700px 420px at 30% 40%, rgba(56,189,248,.20), transparent 60%),
+        radial-gradient(900px 520px at 55% 120%, rgba(255,212,0,.12), transparent 55%);
+      filter: blur(0px);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .heroInner{
+      position:relative;
+      padding:28px 18px 18px;
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .heroLeft{
+      padding:10px 10px 6px;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
+    }
+    .heroTitle{
+      margin:12px 0 6px;
+      font-size:34px;
+      line-height:1.1;
+      letter-spacing:-.5px;
+    }
+    .heroSub{
+      margin:0;
+      color:rgba(234,240,255,.82);
+      font-size:14px;
+      line-height:1.6;
+      max-width:54ch;
+    }
+    .heroMeta{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .metaChip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:9px 10px;
+      border-radius:999px;
+      background:rgba(10,15,31,.55);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .metaChip b{color:var(--fg)}
+    .heroRight{
+      display:grid; gap:12px;
+      padding:10px;
+    }
+    .adSlot{
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      min-height:86px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.18);
+    }
+    .adSlot .txt{display:flex; flex-direction:column; gap:4px}
+    .adSlot .txt b{font-size:13px}
+    .adSlot .txt small{color:var(--muted)}
+    .adSlot a{
+      display:inline-flex; align-items:center; gap:10px;
+      text-decoration:none;
+      background:rgba(255,212,0,.14);
+      border:1px solid rgba(255,212,0,.25);
+      padding:9px 12px;
+      border-radius:999px;
+      font-weight:900;
+    }
+    .adSlot a .dot{
+      width:8px;height:8px;border-radius:99px;background:var(--brand);
+      box-shadow:0 0 16px rgba(255,212,0,.55);
+    }
+
+    /* Grid section */
+    .grid{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
+      align-items:start;
+    }
+    .card{
+      border-radius:var(--r);
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .cardHeader{
+      padding:14px 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), transparent);
+    }
+    .cardHeader h2{
+      margin:0; font-size:14px; letter-spacing:.2px;
+      display:flex; align-items:center; gap:10px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:22px;height:22px;border-radius:8px;
+      background:rgba(255,212,0,.18);
+      border:1px solid rgba(255,212,0,.25);
+      color:var(--brand);
+      font-weight:900;
+      font-size:12px;
+    }
+    .cardBody{padding:16px}
+    .muted{color:var(--muted)}
+    .btnRow{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:var(--fg);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:13px;
+    }
+    .btn.primary{
+      background:rgba(255,212,0,.16);
+      border:1px solid rgba(255,212,0,.25);
+    }
+    .btn:active{transform: translateY(1px)}
+    .mini{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    /* Countdown */
+    .countTop{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+      margin-bottom:10px;
+    }
+    .countTop .title{
+      display:flex; flex-direction:column; gap:4px;
+    }
+    .countTop .title b{font-size:15px}
+    .countTop .title small{color:var(--muted)}
+    .select{
+      display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    select, input{
+      appearance:none;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(10,15,31,.55);
+      color:var(--fg);
+      padding:10px 12px;
+      font-weight:800;
+      font-size:13px;
+      outline:none;
+    }
+    .timer{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+      margin-top:8px;
+    }
+    .tbox{
+      border-radius:16px;
+      padding:12px 10px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      text-align:center;
+    }
+    .tbox .num{
+      font-size:26px;
+      font-weight:1000;
+      letter-spacing:-.5px;
+    }
+    .tbox .lab{
+      margin-top:4px;
+      font-size:11px;
+      color:var(--muted);
+      font-weight:800;
+      letter-spacing:.6px;
+    }
+    .releaseLine{
+      margin-top:12px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px dashed rgba(255,255,255,.16);
+      background:rgba(0,0,0,.12);
+      color:rgba(234,240,255,.88);
+      font-size:12px;
+    }
+    .releaseLine b{color:var(--fg)}
+    .hint{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    /* Gift codes */
+    .codeTools{
+      display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px;
+    }
+    .codeList{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+    .codeItem{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    }
+    .codeLeft{display:flex; flex-direction:column; gap:4px}
+    .codeLeft .code{
+      font-weight:1000;
+      letter-spacing:.6px;
+      font-size:14px;
+    }
+    .codeLeft .meta{
+      font-size:12px;
+      color:var(--muted);
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:4px 8px;
+      border-radius:999px;
+      font-size:11px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.14);
+      color:rgba(234,240,255,.85);
+      font-weight:900;
+    }
+    .tag.good{border-color: rgba(34,197,94,.28); background: rgba(34,197,94,.10); color:#c7f9d8}
+    .tag.warn{border-color: rgba(245,158,11,.28); background: rgba(245,158,11,.10); color:#ffefc7}
+    .tag.bad{border-color: rgba(239,68,68,.28); background: rgba(239,68,68,.10); color:#ffd0d0}
+    .copyBtn{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:var(--fg);
+      padding:10px 12px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:1000;
+      display:inline-flex; align-items:center; gap:8px;
+      white-space:nowrap;
+      min-width:112px;
+      justify-content:center;
+    }
+    .copyBtn.primary{
+      background:rgba(255,212,0,.16);
+      border:1px solid rgba(255,212,0,.25);
+      color:var(--fg);
+    }
+
+    /* Footer */
+    .foot{
+      margin-top:18px;
+      color:rgba(168,178,209,.85);
+      font-size:12px;
+      text-align:center;
+      opacity:.9;
+    }
+    .foot a{color:rgba(234,240,255,.85); text-decoration:none; border-bottom:1px dashed rgba(255,255,255,.20)}
+    .toast{
+      position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
+      background:rgba(10,15,31,.85);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--fg);
+      padding:10px 12px;
+      border-radius:999px;
+      box-shadow: 0 12px 26px rgba(0,0,0,.28);
+      backdrop-filter: blur(10px);
+      font-weight:900;
+      font-size:13px;
+      opacity:0; pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(-4px)}
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .heroInner{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .heroTitle{font-size:28px}
+    }
+    @media (max-width: 520px){
+      .timer{grid-template-columns: repeat(2, 1fr)}
+      .actions{justify-content:flex-start}
+      .brand{min-width:unset}
+      .heroTitle{font-size:24px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <!-- TOP -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Kingshot Data</h1>
+          <small>Event Countdown • Gift Codes • Quick Tools</small>
+        </div>
+      </div>
+
+      <div class="actions">
+        <div class="pill" title="Last updated">
+          <span>Last updated:</span>
+          <b id="lastUpdated" style="color:var(--fg)">—</b>
+        </div>
+
+        <div class="lang" aria-label="language">
+          <button class="active" data-lang="en">EN</button>
+          <button data-lang="ko">KO</button>
+          <button data-lang="ja">JA</button>
+          <button data-lang="tw">TW</button>
+        </div>
+
+        <!-- 레퍼럴 CTA (링크만 너꺼로 바꿔) -->
+        <button class="cta" id="topupBtn" type="button">
+          <span>Top-up Discount</span>
+          <span class="arrow">➜</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="heroInner">
+        <div class="heroLeft">
+          <div class="kicker">⚡ Live tools for Kingshot players</div>
+          <h2 class="heroTitle">Next Event Countdown + Gift Codes</h2>
+          <p class="heroSub">
+            딱 필요한 것만 빠르게. 이벤트 시작까지 남은 시간 + 쿠폰 원클릭 복사.
+            업데이트마다 돌아오게 만드는 “툴 랜딩” 스타일 샘플.
+          </p>
+
+          <div class="heroMeta">
+            <div class="metaChip">✅ <b>Fast</b> <span class="muted">single page</span></div>
+            <div class="metaChip">✅ <b>SEO</b> <span class="muted">tool intent</span></div>
+            <div class="metaChip">✅ <b>Convert</b> <span class="muted">CTA in flow</span></div>
+          </div>
+        </div>
+
+        <div class="heroRight">
+          <!-- 얇은 배너 슬롯(원하면 adsense/affiliate로 교체) -->
+          <div class="adSlot">
+            <div class="txt">
+              <b>SAFE & CHEAP KINGSHOT TOP UP</b>
+              <small>Affiliate banner slot (optional)</small>
+            </div>
+            <a id="bannerLink" href="#" target="_blank" rel="noopener">
+              <span class="dot" aria-hidden="true"></span>
+              <span>Save Now</span>
+            </a>
+          </div>
+
+          <div class="adSlot" style="min-height:86px">
+            <div class="txt">
+              <b>Join Kingshot Group Chat</b>
+              <small>Community / Discord / Kakao</small>
+            </div>
+            <a id="communityLink" href="#" target="_blank" rel="noopener">
+              <span class="dot" aria-hidden="true"></span>
+              <span>Open</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN GRID -->
+    <section class="grid">
+      <!-- Countdown Card -->
+      <div class="card">
+        <div class="cardHeader">
+          <h2><span class="badge">⏳</span> Event Countdown</h2>
+          <div class="mini" id="tzLabel">GMT+9</div>
+        </div>
+        <div class="cardBody">
+          <div class="countTop">
+            <div class="title">
+              <b id="eventTitle">Kingshot Event</b>
+              <small class="muted" id="eventSub">Pick your region and event time</small>
+            </div>
+
+            <div class="select">
+              <select id="regionSel" aria-label="region">
+                <option value="KST">Asia (GMT+9)</option>
+                <option value="UTC">Global (UTC)</option>
+                <option value="PST">America (GMT-8)</option>
+                <option value="CET">Europe (GMT+1)</option>
+              </select>
+              <select id="eventSel" aria-label="event">
+                <option value="svs">SvS / Server War</option>
+                <option value="governor">Strongest Lord</option>
+                <option value="bear">Bear Hunt Rally</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Custom date input appears only when custom -->
+          <div id="customRow" style="display:none; gap:10px; margin:10px 0 6px; align-items:center;">
+            <input id="customDT" type="datetime-local" />
+            <button class="btn primary" id="applyCustom" type="button">Apply</button>
+          </div>
+
+          <div class="timer" aria-label="countdown">
+            <div class="tbox"><div class="num" id="d">—</div><div class="lab">DAYS</div></div>
+            <div class="tbox"><div class="num" id="h">—</div><div class="lab">HOURS</div></div>
+            <div class="tbox"><div class="num" id="m">—</div><div class="lab">MINUTES</div></div>
+            <div class="tbox"><div class="num" id="s">—</div><div class="lab">SECONDS</div></div>
+          </div>
+
+          <div class="releaseLine">
+            <span>Release Date & Time:</span>
+            <b id="releaseText">—</b>
+          </div>
+
+          <div class="hint">
+            팁: 이 페이지를 “이벤트 시작 시간” 기준으로 만들어두면, 업데이트/시즌마다 자연스럽게 트래픽이 반복돼.
+            (원신 배너 카운트다운처럼)
+          </div>
+
+          <div class="btnRow" style="margin-top:12px">
+            <button class="btn primary" id="addToCal" type="button">Copy Calendar Text</button>
+            <button class="btn" id="shareLink" type="button">Copy Page Link</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gift Codes Card -->
+      <div class="card">
+        <div class="cardHeader">
+          <h2><span class="badge">🎁</span> Gift Codes</h2>
+          <div class="mini">One-click copy</div>
+        </div>
+        <div class="cardBody">
+          <div class="codeTools">
+            <button class="btn primary" id="copyAll" type="button">Copy All Codes</button>
+            <button class="btn" id="openRedeem" type="button">How to Redeem</button>
+          </div>
+
+          <div class="codeList" id="codeList"></div>
+
+          <div class="hint" style="margin-top:12px">
+            “쿠폰”을 메인 기능처럼 보이게 만들면 전환이 올라감. 만료 임박/업데이트 날짜 표시는 신뢰감까지 같이 챙김.
+          </div>
+
+          <div class="btnRow" style="margin-top:12px">
+            <button class="btn primary" id="bottomTopup" type="button">Top-up (Affiliate)</button>
+            <button class="btn" id="moreTools" type="button">Open Tools</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <div style="margin-top:18px">
+        This is an unofficial fan tool page. All game assets belong to their respective owners.
+      </div>
+      <div style="margin-top:8px">
+        Tip: Replace links with your own routes (e.g. <a href="#">/coupons</a>, <a href="#">/calculator</a>, <a href="#">/guides</a>).
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied!</div>
+
+  <script>
+    (function(){
+      "use strict";
+
+      // =========================
+      // CONFIG (너꺼로 바꿔)
+      // =========================
+      const AFFILIATE_URL = "https://example.com/your-affiliate-link"; // <- 너 레퍼럴 링크
+      const COMMUNITY_URL = "https://example.com/community";          // <- 디스코드/카톡 링크
+      const TOOLS_URL = "/calculator";                                // <- 너 사이트 툴로
+      const REDEEM_GUIDE_URL = "/guides/gift-codes";                  // <- 너 사이트 가이드로
+
+      // 쿠폰 샘플(원하는대로 교체)
+      const CODES = [
+        { code:"RAMADAN",     expires:"2026-03-19", status:"good", note:"New" },
+        { code:"ITSFRIDAY227",expires:"2026-03-03", status:"warn", note:"Ending soon" },
+        { code:"KS0302",      expires:"2026-03-04", status:"good", note:"Active" }
+      ];
+
+      // 이벤트 시간 프리셋(샘플)
+      // 실제로는 너가 운영하는 이벤트 스케줄로 바꾸면 됨.
+      const EVENT_PRESETS = {
+        svs:      { title:"SvS / Server War",       sub:"Preparation → Battle → Settlement", dow:"Sun", time:"21:00" },
+        governor: { title:"Strongest Lord",         sub:"Phases & points optimized",         dow:"Tue", time:"20:00" },
+        bear:     { title:"Bear Hunt Rally",        sub:"Rally timing & roles",              dow:"Wed", time:"19:30" }
+      };
+
+      // Region offsets (fixed example offsets)
+      const REGION = {
+        KST:{ label:"GMT+9",  offsetMin:  9*60 },
+        UTC:{ label:"UTC",    offsetMin:  0 },
+        PST:{ label:"GMT-8",  offsetMin: -8*60 },
+        CET:{ label:"GMT+1",  offsetMin:  1*60 }
+      };
+
+      // =========================
+      // DOM
+      // =========================
+      const $ = (id)=>document.getElementById(id);
+      const toastEl = $("toast");
+      const lastUpdatedEl = $("lastUpdated");
+      const regionSel = $("regionSel");
+      const eventSel = $("eventSel");
+      const customRow = $("customRow");
+      const customDT = $("customDT");
+      const applyCustom = $("applyCustom");
+
+      const dEl=$("d"), hEl=$("h"), mEl=$("m"), sEl=$("s");
+      const eventTitleEl=$("eventTitle");
+      const eventSubEl=$("eventSub");
+      const tzLabelEl=$("tzLabel");
+      const releaseTextEl=$("releaseText");
+
+      // links/buttons
+      $("topupBtn").addEventListener("click", ()=>open(AFFILIATE_URL));
+      $("bottomTopup").addEventListener("click", ()=>open(AFFILIATE_URL));
+      $("bannerLink").href = AFFILIATE_URL;
+      $("communityLink").href = COMMUNITY_URL;
+
+      $("moreTools").addEventListener("click", ()=>open(TOOLS_URL));
+      $("openRedeem").addEventListener("click", ()=>open(REDEEM_GUIDE_URL));
+
+      function open(url){
+        if(!url) return;
+        if(url.startsWith("http")) window.open(url, "_blank", "noopener");
+        else location.href = url;
+      }
+
+      // language buttons (demo only)
+      document.querySelectorAll(".lang button").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          document.querySelectorAll(".lang button").forEach(b=>b.classList.remove("active"));
+          btn.classList.add("active");
+          // 실제 i18n 붙일 때는 여기서 I18N.setLang(...) 호출하면 됨
+          toast("Language: " + btn.dataset.lang.toUpperCase());
+        });
+      });
+
+      // =========================
+      // Gift Codes render
+      // =========================
+      const codeList = $("codeList");
+      function renderCodes(){
+        codeList.innerHTML = "";
+        const now = new Date();
+        CODES.forEach(item=>{
+          const exp = new Date(item.expires + "T23:59:59");
+          const daysLeft = Math.ceil((exp - now) / (1000*60*60*24));
+          let tagClass = item.status || "good";
+          let tagText = item.note || "Active";
+          if(daysLeft <= 0){ tagClass="bad"; tagText="Expired"; }
+          else if(daysLeft <= 2 && tagClass!=="bad"){ tagClass="warn"; tagText="Ending soon"; }
+
+          const row = document.createElement("div");
+          row.className = "codeItem";
+          row.innerHTML = `
+            <div class="codeLeft">
+              <div class="code">${escapeHTML(item.code)}</div>
+              <div class="meta">
+                <span>Expires: <b style="color:var(--fg)">${escapeHTML(item.expires)}</b></span>
+                <span class="tag ${tagClass}">${escapeHTML(tagText)}</span>
+              </div>
+            </div>
+            <button class="copyBtn primary" type="button">Copy</button>
+          `;
+          row.querySelector("button").addEventListener("click", async ()=>{
+            await copyText(item.code);
+            toast("Copied: " + item.code);
+          });
+          codeList.appendChild(row);
+        });
+      }
+
+      $("copyAll").addEventListener("click", async ()=>{
+        const all = CODES.map(c=>c.code).join("\n");
+        await copyText(all);
+        toast("Copied all codes");
+      });
+
+      // =========================
+      // Countdown logic
+      // =========================
+      let targetUTCms = null;
+
+      function computeNextDowTimeUTC(dowStr, hhmm, regionKey){
+        // Creates the next occurrence of a given DOW+time in the chosen region,
+        // then converts that moment to UTC timestamp.
+        // DOW: Sun Mon Tue Wed Thu Fri Sat
+        const dowMap = {Sun:0, Mon:1, Tue:2, Wed:3, Thu:4, Fri:5, Sat:6};
+        const targetDow = dowMap[dowStr];
+        const [hh, mm] = hhmm.split(":").map(Number);
+
+        // current time in UTC
+        const nowUTC = new Date();
+
+        // Convert "now" into region local time by applying offset difference
+        const offsetMin = REGION[regionKey].offsetMin;
+        const nowRegion = new Date(nowUTC.getTime() + offsetMin*60000);
+
+        // Build region-local target date
+        const curDow = nowRegion.getDay();
+        let addDays = (targetDow - curDow + 7) % 7;
+
+        // If same day but time already passed in region, push to next week
+        const candidate = new Date(nowRegion);
+        candidate.setDate(candidate.getDate() + addDays);
+        candidate.setHours(hh, mm, 0, 0);
+
+        if(candidate.getTime() <= nowRegion.getTime()){
+          candidate.setDate(candidate.getDate() + 7);
+        }
+
+        // Convert region-local candidate back to UTC ms
+        const utcMs = candidate.getTime() - offsetMin*60000;
+        return utcMs;
+      }
+
+      function setPreset(){
+        const regionKey = regionSel.value;
+        const presetKey = eventSel.value;
+
+        tzLabelEl.textContent = REGION[regionKey].label;
+
+        if(presetKey === "custom"){
+          customRow.style.display = "flex";
+          eventTitleEl.textContent = "Custom Event";
+          eventSubEl.textContent = "Pick your own date/time (region-based input)";
+          // set default: +7 days
+          const now = new Date();
+          const yyyy = now.getFullYear();
+          const mm = String(now.getMonth()+1).padStart(2,"0");
+          const dd = String(now.getDate()+7).padStart(2,"0");
+          customDT.value = `${yyyy}-${mm}-${dd}T20:00`;
+          // don't set target until apply
+          targetUTCms = null;
+          releaseTextEl.textContent = "—";
+          return;
+        }
+
+        customRow.style.display = "none";
+        const p = EVENT_PRESETS[presetKey];
+        eventTitleEl.textContent = p.title;
+        eventSubEl.textContent = p.sub;
+
+        targetUTCms = computeNextDowTimeUTC(p.dow, p.time, regionKey);
+        releaseTextEl.textContent = formatRelease(targetUTCms, regionKey);
+      }
+
+      function applyCustomTarget(){
+        const regionKey = regionSel.value;
+        const v = customDT.value;
+        if(!v){
+          toast("Pick a datetime");
+          return;
+        }
+        // v is in user's local timezone; we want interpret it as "region local"
+        // Simplified approach: take the components and treat as region-local time.
+        const [datePart, timePart] = v.split("T");
+        const [Y,M,D] = datePart.split("-").map(Number);
+        const [hh,mm] = timePart.split(":").map(Number);
+
+        const offsetMin = REGION[regionKey].offsetMin;
+
+        // Build a "region-local" date by using UTC Date and then offset it
+        // Create a UTC date representing region-local time
+        const utcMs = Date.UTC(Y, M-1, D, hh, mm, 0, 0) - offsetMin*60000;
+        targetUTCms = utcMs;
+        releaseTextEl.textContent = formatRelease(targetUTCms, regionKey);
+        toast("Custom applied");
+      }
+
+      function formatRelease(utcMs, regionKey){
+        if(!utcMs) return "—";
+        const offsetMin = REGION[regionKey].offsetMin;
+        const regionDate = new Date(utcMs + offsetMin*60000);
+
+        const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        const dow = days[regionDate.getDay()];
+        const y = regionDate.getFullYear();
+        const m = String(regionDate.getMonth()+1).padStart(2,"0");
+        const d = String(regionDate.getDate()).padStart(2,"0");
+        let hh = regionDate.getHours();
+        const mm = String(regionDate.getMinutes()).padStart(2,"0");
+        const ampm = hh >= 12 ? "PM" : "AM";
+        hh = hh % 12; if(hh === 0) hh = 12;
+
+        return `${dow}, ${y}-${m}-${d} at ${hh}:${mm} ${ampm} (${REGION[regionKey].label})`;
+      }
+
+      function tick(){
+        const now = Date.now();
+        if(!targetUTCms){
+          dEl.textContent = "—"; hEl.textContent = "—"; mEl.textContent = "—"; sEl.textContent = "—";
+          return;
+        }
+        let diff = targetUTCms - now;
+        if(diff < 0) diff = 0;
+
+        const sec = Math.floor(diff/1000);
+        const days = Math.floor(sec/86400);
+        const hours = Math.floor((sec%86400)/3600);
+        const mins = Math.floor((sec%3600)/60);
+        const secs = sec%60;
+
+        dEl.textContent = String(days);
+        hEl.textContent = String(hours);
+        mEl.textContent = String(mins);
+        sEl.textContent = String(secs);
+      }
+
+      regionSel.addEventListener("change", ()=>{
+        setPreset();
+      });
+      eventSel.addEventListener("change", ()=>{
+        setPreset();
+      });
+      applyCustom.addEventListener("click", applyCustomTarget);
+
+      // calendar/share
+      $("addToCal").addEventListener("click", async ()=>{
+        const regionKey = regionSel.value;
+        const title = eventTitleEl.textContent || "Kingshot Event";
+        const when = releaseTextEl.textContent || "—";
+        const text = `TITLE: ${title}\nWHEN: ${when}\nPAGE: ${location.href}\n`;
+        await copyText(text);
+        toast("Calendar text copied");
+      });
+      $("shareLink").addEventListener("click", async ()=>{
+        await copyText(location.href);
+        toast("Link copied");
+      });
+
+      // last updated
+      function setLastUpdated(){
+        const now = new Date();
+        const y = now.getFullYear();
+        const m = String(now.getMonth()+1).padStart(2,"0");
+        const d = String(now.getDate()).padStart(2,"0");
+        lastUpdatedEl.textContent = `${y}-${m}-${d}`;
+      }
+
+      // utils
+      async function copyText(text){
+        try{
+          await navigator.clipboard.writeText(text);
+        }catch(e){
+          // fallback
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position="fixed";
+          ta.style.left="-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          ta.remove();
+        }
+      }
+      function toast(msg){
+        toastEl.textContent = msg;
+        toastEl.classList.add("show");
+        clearTimeout(toastEl._t);
+        toastEl._t = setTimeout(()=>toastEl.classList.remove("show"), 1300);
+      }
+      function escapeHTML(s){
+        return String(s)
+          .replaceAll("&","&amp;")
+          .replaceAll("<","&lt;")
+          .replaceAll(">","&gt;")
+          .replaceAll('"',"&quot;")
+          .replaceAll("'","&#39;");
+      }
+
+      // init
+      setLastUpdated();
+      renderCodes();
+      setPreset();
+      tick();
+      setInterval(tick, 250);
+
+      // quick tip: show toast once
+      setTimeout(()=>toast("Sample landing loaded"), 500);
+    })();
+  </script>
+</body>
+</html>

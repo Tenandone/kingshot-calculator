@@ -1,27 +1,56 @@
+/* =========================================================
+   /css/header.css — FULL FINAL (Optimized)
+   목적:
+   - 기존 구조 유지
+   - 헤더/드로어/타일/언어 UI 정리 + 성능/유지보수 개선
+   - 변수 통일, 중복 제거, 접근성(focus-visible) 추가
+   - 레이아웃 안정화(가로 스크롤/정렬/모바일)
+========================================================= */
+
+/* ---------- Tokens ---------- */
 :root{
-  --nav-h:60px;
-  --logo-site:50px;
-  --logo-partner-default:32px;
+  --nav-h: 60px;
+
+  --bd:    #e5e7eb;
+  --fg:    #111;
+  --muted: #666;
+  --hover: #f3f4f6;
+  --focus: #0b57d0;
+  --panel: #fff;
+
+  --menu-w: 200px;
+
   --lootbar-logo-h: 22px;
   --cafe-logo-h:    22px;
   --lootbar-tile-h: 22px;
   --cafe-tile-h:    34px;
-  --bd:#e5e7eb; --fg:#111; --muted:#666;
-  --hover:#f3f4f6; --focus:#0b57d0;
-  --panel:#fff;
-  --menu-w: 200px;
+
+  --radius-8:  8px;
+  --radius-10: 10px;
+  --radius-12: 12px;
+
+  --shadow-menu: 0 8px 24px rgba(0,0,0,.12);
 }
 
-body {
+/* ---------- Base ---------- */
+html, body { overflow-x: hidden; }
+body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   color:var(--fg);
 }
+a{ text-decoration:none; color:inherit; }
+img{ display:block; }
 
-a { text-decoration:none; color:inherit }
-img { display:block }
+/* Better focus */
+a:focus-visible, button:focus-visible{
+  outline: 2px solid color-mix(in srgb, var(--focus) 55%, transparent);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
 
-.site-header {
+/* ---------- Header ---------- */
+.site-header{
   background:#fff;
   border-bottom:1px solid var(--bd);
   position:sticky;
@@ -29,55 +58,54 @@ img { display:block }
   z-index:100;
 }
 
-/* 네비게이션 컨테이너 폭을 카드 영역과 맞춤 */
-.container.nav-bar {
-  max-width: 1200px;   /* 카드 영역 max-width 값과 동일하게 */
-  margin: 0 auto;
-  padding: 0 20px;
+/* Nav container width align with card area */
+.container.nav-bar{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px;
 }
 
-.nav-bar {
+.nav-bar{
   display:flex;
   align-items:center;
   justify-content:space-between;
   height:var(--nav-h);
 }
 
-.nav-left, .nav-right {
+/* Left / Right sections */
+.nav-left, .nav-right{
   display:flex;
   align-items:center;
   gap:16px;
 }
 
-/* 브랜드(로고)는 왼쪽 고정 */
-.brand {
+/* Brand pinned left */
+.brand{
   display:flex;
   align-items:center;
   flex:0 0 auto;
-  margin-right:auto;  /* 로고 다음 공간 밀어냄 */
+  margin-right:auto;
 }
 
-/* 네비 전체 메뉴를 오른쪽 끝으로 */
+/* Nav links group (kept same behavior) */
 .nav-left nav,
-.nav-right nav {
+.nav-right nav{
   display:flex;
   align-items:center;
-  justify-content:flex-end;  /* 우측 정렬 */
+  justify-content:flex-end;
   gap:16px;
 }
 
-/* 우측 메뉴 컨테이너 */
-.nav-right {
-  margin-left:auto;  /* 자동 여백으로 끝까지 밀림 */
-  display:flex;
-  align-items:center;
+/* Right container */
+.nav-right{
+  margin-left:auto;
   gap:20px;
-  min-width:unset;   /* 기존 360px 강제폭 제거 */
+  min-width:unset;
 }
 
-/* 모든 네비 a 태그 공통 스타일 */
+/* Common nav link styles */
 .nav-left nav a,
-.nav-right nav a {
+.nav-right nav a{
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -87,28 +115,33 @@ img { display:block }
   white-space:nowrap;
   color:#333;
 }
+.nav-left nav a:hover,
+.nav-right nav a:hover{
+  background:var(--hover);
+  border-radius:10px;
+}
 
-.lootbar-banner, .cafe-banner {
+/* Partner small banners */
+.lootbar-banner, .cafe-banner{
   display:inline-grid;
   justify-items:center;
   align-items:end;
   text-align:center;
 }
+.lootbar-banner{ grid-template-rows:var(--lootbar-logo-h) auto; }
+.cafe-banner  { grid-template-rows:var(--cafe-logo-h) auto; }
 
-.lootbar-banner { grid-template-rows:var(--lootbar-logo-h) auto }
-.cafe-banner   { grid-template-rows:var(--cafe-logo-h) auto }
-
-.lootbar-logo {
+.lootbar-logo{
   height:var(--lootbar-logo-h) !important;
   width:auto;
   object-fit:contain;
 }
-.cafe-logo {
+.cafe-logo{
   height:var(--cafe-logo-h) !important;
   width:auto;
   object-fit:contain;
 }
-.lootbar-banner span, .cafe-banner span {
+.lootbar-banner span, .cafe-banner span{
   font-size:10px;
   font-weight:300;
   line-height:1;
@@ -117,7 +150,8 @@ img { display:block }
   margin:0;
 }
 
-#menuToggle.hamburger {
+/* Hamburger */
+#menuToggle.hamburger{
   display:none;
   font-size:22px;
   background:none;
@@ -126,30 +160,34 @@ img { display:block }
   cursor:pointer;
   width:44px;
   height:44px;
+  border-radius:10px;
 }
+#menuToggle.hamburger:hover{ background:var(--hover); }
 
+/* Mobile rules */
 @media (max-width:768px){
-  #primaryNav { display:none }
-  #menuToggle.hamburger { display:inline-block }
-  .nav-right { display:none }
+  #primaryNav{ display:none; }
+  #menuToggle.hamburger{ display:inline-flex; align-items:center; justify-content:center; }
+  .nav-right{ display:none; }
 }
 
-.backdrop {
+/* ---------- Backdrop + Drawer ---------- */
+.backdrop{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.45);
   opacity:0;
   pointer-events:none;
-  transition:.2s;
+  transition:opacity .2s;
   z-index:110;
 }
 
-.drawer {
+.drawer{
   position:fixed;
   top:0;
   right:0;
   height:100%;
-  width:45vw;
+  width:min(420px, 85vw);   /* ✅ 45vw 보다 안정 (초대형/초소형 대응) */
   background:var(--panel);
   border-left:1px solid var(--bd);
   transform:translateX(100%);
@@ -162,7 +200,7 @@ img { display:block }
   padding-bottom:env(safe-area-inset-bottom);
 }
 
-.drawer header {
+.drawer header{
   height:var(--nav-h);
   display:flex;
   align-items:center;
@@ -175,18 +213,20 @@ img { display:block }
   z-index:1;
 }
 
-.is-open .backdrop { opacity:1; pointer-events:auto }
-.is-open .drawer   { transform:translateX(0) }
-.no-scroll { overflow:hidden }
+.is-open .backdrop{ opacity:1; pointer-events:auto; }
+.is-open .drawer{ transform:translateX(0); }
+.no-scroll{ overflow:hidden; }
 
-.section { padding:16px }
-.rule {
+.section{ padding:16px; }
+
+.rule{
   height:12px;
   border-bottom:1px dashed var(--bd);
   margin:6px 0 12px;
 }
 
-.sec-label {
+/* ---------- Section label ---------- */
+.sec-label{
   display:flex;
   align-items:center;
   gap:8px;
@@ -196,31 +236,31 @@ img { display:block }
   letter-spacing:.04em;
   margin:8px 0;
 }
-.sec-label::before, .sec-label::after {
+.sec-label::before, .sec-label::after{
   content:"";
   flex:1;
   border-bottom:1px dashed var(--bd);
 }
 
-.lang-row {
+/* ---------- Language dropdown (legacy) ---------- */
+.lang-row{
   display:flex;
   align-items:center;
   gap:10px;
   height:44px;
   padding:0 12px;
   border:1px solid var(--bd);
-  border-radius:10px;
+  border-radius:var(--radius-10);
   background:#fff;
   cursor:pointer;
   user-select:none;
   max-width:200px;
 }
-.lang-row:hover { background:var(--hover) }
-.lang-row .globe { width:18px; height:18px }
-.lang-row .current { font-variant-caps:all-small-caps; font-weight:600 }
-.lang-row .caret {
-  width:6px;
-  height:6px;
+.lang-row:hover{ background:var(--hover); }
+.lang-row .globe{ width:18px; height:18px; }
+.lang-row .current{ font-variant-caps:all-small-caps; font-weight:600; }
+.lang-row .caret{
+  width:6px; height:6px;
   display:inline-block;
   margin-left:auto;
   transform:rotate(45deg);
@@ -228,7 +268,7 @@ img { display:block }
   border-bottom:2px solid #555;
 }
 
-.lang-menu {
+.lang-menu{
   position:absolute;
   top:calc(100% + 8px);
   left:0;
@@ -236,17 +276,18 @@ img { display:block }
   background:#fff;
   color:#111;
   border:1px solid var(--bd);
-  border-radius:10px;
+  border-radius:var(--radius-10);
   padding:6px 0;
   margin:0;
   list-style:none;
-  box-shadow:0 8px 24px rgba(0,0,0,.12);
+  box-shadow:var(--shadow-menu);
   z-index:3000;
   max-height:60vh;
   overflow:auto;
 }
-.lang-menu li { position:relative }
-.lang-item {
+.lang-menu li{ position:relative; }
+
+.lang-item{
   width:100%;
   text-align:left;
   background:none;
@@ -256,8 +297,8 @@ img { display:block }
   padding:12px 14px 12px 16px;
   font-size:15px;
 }
-.lang-item:hover { background:var(--hover) }
-.lang-item + li::before {
+.lang-item:hover{ background:var(--hover); }
+.lang-item + li::before{
   content:"";
   position:absolute;
   top:0;
@@ -265,8 +306,8 @@ img { display:block }
   right:12px;
   border-top:1px dashed var(--bd);
 }
-.lang-item[aria-checked="true"] { background:var(--hover) }
-.lang-item[aria-checked="true"]::before {
+.lang-item[aria-checked="true"]{ background:var(--hover); }
+.lang-item[aria-checked="true"]::before{
   content:"";
   position:absolute;
   left:0;
@@ -276,64 +317,66 @@ img { display:block }
   background:var(--focus);
 }
 
-/* Drawer 메뉴 세로 정렬 보장 */
-.drawer .nav-list {
+/* ---------- Drawer nav list ---------- */
+.drawer .nav-list{
   display:block;
   padding:0 12px;
 }
-.drawer .nav-list a {
+.drawer .nav-list a{
   display:block;
   width:100%;
-  padding:12px 4px;
+  padding:12px 10px;
   font-size:16px;
-  border-radius:8px;
+  border-radius:var(--radius-10);
 }
-.drawer .nav-list a:hover { background:var(--hover) }
+.drawer .nav-list a:hover{ background:var(--hover); }
 
-.tile-grid {
+/* ---------- Tiles ---------- */
+.tile-grid{
   display:grid;
   grid-template-columns:1fr;
   gap:10px;
 }
-.tile {
+.tile{
   display:flex;
   align-items:center;
   gap:12px;
   border:1px solid #ececec;
-  border-radius:12px;
+  border-radius:var(--radius-12);
   background:#fff;
   padding:10px 12px;
 }
-.tile .logo { height:22px; width:auto }
-.tile .meta { display:flex; flex-direction:column }
-.tile .meta .tit { font-weight:700 }
-.logo-lootbar { height:var(--lootbar-tile-h) }
-.logo-cafe   { height:var(--cafe-tile-h) }
-.icon-24 { width:18px; height:18px; flex:0 0 18px }
-.tile:hover { background:var(--hover) }
+.tile:hover{ background:var(--hover); }
+.tile .logo{ height:22px; width:auto; }
+.tile .meta{ display:flex; flex-direction:column; min-width:0; }
+.tile .meta .tit{ font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
-.tile-kakao {
+.logo-lootbar{ height:var(--lootbar-tile-h); }
+.logo-cafe{ height:var(--cafe-tile-h); }
+.icon-24{ width:18px; height:18px; flex:0 0 18px; }
+
+/* Kakao special */
+.tile-kakao{
   background:#FEE500 !important;
   border-color:#FEE500 !important;
 }
-.tile-kakao .tit { color:#111; }
-/* Drawer Partner Banner */
+.tile-kakao .tit{ color:#111; }
+
+/* ---------- Drawer Partner Banner ---------- */
 .partner-banner{
   width:100%;
   margin:8px 0 4px;
   display:flex;
   justify-content:center;
 }
-
 .partner-banner a{
   display:block;
   width:100%;
-  max-width:240px; /* drawer 폭 기준 */
+  max-width:240px;
 }
-
 .partner-banner img{
   width:100%;
-  height:auto;      /* 🔥 절대 안 짤림 */
+  height:auto;
   display:block;
-  border-radius:10px;
+  border-radius:var(--radius-10);
 }
