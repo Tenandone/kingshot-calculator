@@ -18,6 +18,7 @@
     --text:#111827;
     --muted:#6b7280;
 
+    /* ✅ 메인(인덱스) 톤과 동일하게: 항상 라이트 배경 */
     --bg:#ffffff;
     --surface:#ffffff;
 
@@ -28,20 +29,27 @@
 
     --shadow:0 10px 25px rgba(0,0,0,.06);
   }
+
+  /* ✅ IMPORTANT:
+     guides는 메인과 "색상 동일"이 목표라서
+     prefers-color-scheme: dark 에서도 배경을 검정으로 바꾸지 않음.
+     (모바일 다크모드에서도 검정 배경 방지)
+  */
   @media (prefers-color-scheme: dark){
     :root{
-      --text:#e8eaed;
-      --muted:#b7bcc6;
+      --brand:#0b57d0;
+      --text:#111827;
+      --muted:#6b7280;
 
-      --bg:#0b0b0b;
-      --surface:#121212;
+      --bg:#ffffff;
+      --surface:#ffffff;
 
-      --tile-border:#9aa0aa;
+      --tile-border:#5b5e73;
 
-      --border:#2a2a2a;
-      --chip:#1b1b1b;
+      --border:#e5e7eb;
+      --chip:#f3f4f6;
 
-      --shadow:0 10px 25px rgba(0,0,0,.35);
+      --shadow:0 10px 25px rgba(0,0,0,.06);
     }
   }
 
@@ -167,7 +175,6 @@
     box-shadow:var(--shadow);
   }
 
-  /* ✅ 카드: 이미지 위 / 텍스트 아래 */
   .g-link{
     display:flex;
     flex-direction:column;
@@ -178,7 +185,6 @@
     min-height:190px;
   }
 
-  /* ✅ 아이콘 영역(가로폭 전체 + 높이 고정) */
   .tile-icon{
     flex:0 0 auto;
     width:100%;
@@ -189,7 +195,6 @@
     overflow:hidden;
   }
 
-  /* ✅ 이미지 크기 제각각이어도 자동 축소 + 중앙 */
   .tile-icon img{
     max-width:140px;
     max-height:140px;
@@ -217,7 +222,6 @@
   .tile-icon.is-fallback img{ display:none; }
   .tile-icon.is-fallback .tile-fallback{ display:flex; }
 
-  /* ✅ 텍스트 영역(항상 아래/가운데) */
   .tile-title{
     width:100%;
     display:flex;
@@ -228,7 +232,6 @@
     padding:0 8px;
   }
 
-  /* ✅ 제목(모든 언어 공통: 2줄까지) */
   .g-title{
     margin:0;
     font-size:18px;
@@ -242,38 +245,26 @@
     overflow:hidden;
   }
 
-  /* =========================================================
-     MULTI-LANG (겹침 완전 차단판)
-     - 전역 CSS가 .lang-ko{display:inline} 같은 걸 해도 무조건 이김
-     - 현재 언어만 켜고 나머지는 전부 OFF
-     - 사이트가 lang 또는 data-lang 둘 중 하나만 세팅해도 동작
-     ========================================================= */
+  /* MULTI-LANG */
+  .lang{ display:none !important; }
 
-  .lang{ display:none !important; } /* 기본: 전부 숨김 */
-
-  /* KO */
   html[lang^="ko" i] .lang-ko,
   html[data-lang^="ko" i] .lang-ko{ display:inline !important; }
 
-  /* EN */
   html[lang^="en" i] .lang-en,
   html[data-lang^="en" i] .lang-en{ display:inline !important; }
 
-  /* JA */
   html[lang^="ja" i] .lang-ja,
   html[data-lang^="ja" i] .lang-ja{ display:inline !important; }
 
-  /* ZH-CN */
   html[lang="zh-CN" i] .lang-zh-CN,
   html[data-lang="zh-CN" i] .lang-zh-CN{ display:inline !important; }
 
-  /* ZH-TW */
   html[lang="zh-TW" i] .lang-zh-TW,
   html[data-lang="zh-TW" i] .lang-zh-TW{ display:inline !important; }
 
-  /* fallback: 아무 언어도 매칭 안 되면 KO */
   html:not([lang]):not([data-lang]) .lang-ko{ display:inline !important; }
-</style>
+  </style>
 
   <section class="guides-head" data-ks-guides-root="1">
     <h1 id="page-title">
@@ -390,10 +381,10 @@
           <div class="tile-title">
             <h2 class="g-title">
               <span class="lang lang-ko">초보자 가이드</span>
-<span class="lang lang-en">Beginner Guide</span>
-<span class="lang lang-ja">初心者ガイド</span>
-<span class="lang lang-zh-CN">新手指南</span>
-<span class="lang lang-zh-TW">新手指南</span>
+              <span class="lang lang-en">Beginner Guide</span>
+              <span class="lang lang-ja">初心者ガイド</span>
+              <span class="lang lang-zh-CN">新手指南</span>
+              <span class="lang lang-zh-TW">新手指南</span>
             </h2>
           </div>
         </a>
@@ -442,130 +433,130 @@
       </section>
 
       <!-- 7 -->
-<section class="g-block" id="hallofgovernors" data-guide="hallofgovernors" data-toc="true"
-  data-title-ko="최강영주 공략" data-title-en="Hall of Governors" data-title-ja="最強総督攻略" data-title-zh-cn="最强总督攻略" data-title-zh-tw="最強總督攻略"
-  data-href="/pages/guides/hallofgovernors.html">
-  <a class="g-link" data-router-ignore="true" href="/pages/guides/hallofgovernors.html" aria-label="Open Hall of Governors Guide">
-    <div class="tile-icon" aria-hidden="true">
-      <img src="/img/guide/hallofgovernors.webp" alt="" loading="lazy" decoding="async">
-      <div class="tile-fallback">H</div>
-    </div>
-    <div class="tile-title">
-      <h2 class="g-title">
-        <span class="lang lang-ko">최강영주 공략</span>
-        <span class="lang lang-en">Hall of Governors</span>
-        <span class="lang lang-ja">最強総督攻略</span>
-        <span class="lang lang-zh-CN">最强总督攻略</span>
-        <span class="lang lang-zh-TW">最強總督攻略</span>
-      </h2>
-    </div>
-  </a>
-</section>
+      <section class="g-block" id="hallofgovernors" data-guide="hallofgovernors" data-toc="true"
+        data-title-ko="최강영주 공략" data-title-en="Hall of Governors" data-title-ja="最強総督攻略" data-title-zh-cn="最强总督攻略" data-title-zh-tw="最強總督攻略"
+        data-href="/pages/guides/hallofgovernors.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/hallofgovernors.html" aria-label="Open Hall of Governors Guide">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/hallofgovernors.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">H</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">최강영주 공략</span>
+              <span class="lang lang-en">Hall of Governors</span>
+              <span class="lang lang-ja">最強総督攻略</span>
+              <span class="lang lang-zh-CN">最强总督攻略</span>
+              <span class="lang lang-zh-TW">最強總督攻略</span>
+            </h2>
+          </div>
+        </a>
+      </section>
 
-<!-- 8 -->
-<section class="g-block" id="truegold2026" data-guide="truegold2026" data-toc="true"
-  data-title-ko="2026 순금 소모표" data-title-en="2026 Truegold Cost Chart" data-title-ja="2026 純金消費表" data-title-zh-cn="2026 纯金消耗表" data-title-zh-tw="2026 純金消耗表"
-  data-href="/pages/guides/truegold.html">
-  <a class="g-link" data-router-ignore="true" href="/pages/guides/truegold.html" aria-label="Open 2026 Truegold Cost Chart">
-    <div class="tile-icon" aria-hidden="true">
-      <img src="/img/guide/Ttruegold-kingshot.webp" alt="" loading="lazy" decoding="async">
-      <div class="tile-fallback">TG</div>
-    </div>
-    <div class="tile-title">
-      <h2 class="g-title">
-        <span class="lang lang-ko">2026 순금 소모표</span>
-        <span class="lang lang-en">2026 Truegold Cost Chart</span>
-        <span class="lang lang-ja">2026 純金消費表</span>
-        <span class="lang lang-zh-CN">2026 纯金消耗表</span>
-        <span class="lang lang-zh-TW">2026 純金消耗表</span>
-      </h2>
-    </div>
-  </a>
-</section>
+      <!-- 8 -->
+      <section class="g-block" id="truegold2026" data-guide="truegold2026" data-toc="true"
+        data-title-ko="2026 순금 소모표" data-title-en="2026 Truegold Cost Chart" data-title-ja="2026 純金消費表" data-title-zh-cn="2026 纯金消耗表" data-title-zh-tw="2026 純金消耗表"
+        data-href="/pages/guides/truegold.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/truegold.html" aria-label="Open 2026 Truegold Cost Chart">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/Ttruegold-kingshot.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">TG</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">2026 순금 소모표</span>
+              <span class="lang lang-en">2026 Truegold Cost Chart</span>
+              <span class="lang lang-ja">2026 純金消費表</span>
+              <span class="lang lang-zh-CN">2026 纯金消耗表</span>
+              <span class="lang lang-zh-TW">2026 純金消耗表</span>
+            </h2>
+          </div>
+        </a>
+      </section>
 
-<!-- 9 -->
-<section class="g-block" id="atob" data-guide="atob" data-toc="true"
-  data-title-ko="SSR 영웅 A vs B 비교 계산기" data-title-en="SSR Hero A vs B Comparator" data-title-ja="SSR英雄 A vs B 比較計算機" data-title-zh-cn="SSR英雄 A 与 B 比较计算器" data-title-zh-tw="SSR英雄 A 與 B 比較計算器"
-  data-href="/pages/guides/ssr-hero-vs.html">
-  <a class="g-link" data-router-ignore="true" href="/pages/guides/ssr-hero-vs.html" aria-label="Open SSR Hero A vs B Comparator">
-    <div class="tile-icon" aria-hidden="true">
-      <img src="/img/guide/yang.webp" alt="" loading="lazy" decoding="async">
-      <div class="tile-fallback">A/B</div>
-    </div>
-    <div class="tile-title">
-      <h2 class="g-title">
-        <span class="lang lang-ko">SSR 영웅 A vs B 비교 계산기</span>
-        <span class="lang lang-en">SSR Hero A vs B Comparator</span>
-        <span class="lang lang-ja">SSR英雄 A vs B 比較計算機</span>
-        <span class="lang lang-zh-CN">SSR英雄 A 与 B 比较计算器</span>
-        <span class="lang lang-zh-TW">SSR英雄 A 與 B 比較計算器</span>
-      </h2>
-    </div>
-  </a>
-</section>
+      <!-- 9 -->
+      <section class="g-block" id="atob" data-guide="atob" data-toc="true"
+        data-title-ko="SSR 영웅 A vs B 비교 계산기" data-title-en="SSR Hero A vs B Comparator" data-title-ja="SSR英雄 A vs B 比較計算機" data-title-zh-cn="SSR英雄 A 与 B 比较计算器" data-title-zh-tw="SSR英雄 A 與 B 比較計算器"
+        data-href="/pages/guides/ssr-hero-vs.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/ssr-hero-vs.html" aria-label="Open SSR Hero A vs B Comparator">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/yang.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">A/B</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">SSR 영웅 A vs B 비교 계산기</span>
+              <span class="lang lang-en">SSR Hero A vs B Comparator</span>
+              <span class="lang lang-ja">SSR英雄 A vs B 比較計算機</span>
+              <span class="lang lang-zh-CN">SSR英雄 A 与 B 比较计算器</span>
+              <span class="lang lang-zh-TW">SSR英雄 A 與 B 比較計算器</span>
+            </h2>
+          </div>
+        </a>
+      </section>
 
-<!-- 10 -->
-<section class="g-block" id="tri-alliance-clash" data-guide="tri-alliance-clash" data-toc="true"
-  data-title-ko="Tri-Alliance Clash 승리 가이드" data-title-en="How to Win Tri-Alliance Clash" data-title-ja="トライ・アライアンス・クラッシュ 勝利ガイド" data-title-zh-cn="三联盟争夺战 胜利指南" data-title-zh-tw="三聯盟爭奪戰 勝利指南"
-  data-href="/pages/guides/Tri-Alliance-Clash.html">
-  <a class="g-link" data-router-ignore="true" href="/pages/guides/Tri-Alliance-Clash.html" aria-label="Open Tri-Alliance Clash Guide">
-    <div class="tile-icon" aria-hidden="true">
-      <img src="/img/guide/tri-alliance-clash-icon.webp" alt="" loading="lazy" decoding="async">
-      <div class="tile-fallback">TAC</div>
-    </div>
-    <div class="tile-title">
-      <h2 class="g-title">
-        <span class="lang lang-ko">삼대연맹전 승리 가이드</span>
-        <span class="lang lang-en">How to Win Tri-Alliance Clash</span>
-        <span class="lang lang-ja">トライ・アライアンス・クラッシュ 勝利ガイド</span>
-        <span class="lang lang-zh-CN">三联盟争夺战 胜利指南</span>
-        <span class="lang lang-zh-TW">三聯盟爭奪戰 勝利指南</span>
-      </h2>
-    </div>
-  </a>
-</section>
+      <!-- 10 -->
+      <section class="g-block" id="tri-alliance-clash" data-guide="tri-alliance-clash" data-toc="true"
+        data-title-ko="Tri-Alliance Clash 승리 가이드" data-title-en="How to Win Tri-Alliance Clash" data-title-ja="トライ・アライアンス・クラッシュ 勝利ガイド" data-title-zh-cn="三联盟争夺战 胜利指南" data-title-zh-tw="三聯盟爭奪戰 勝利指南"
+        data-href="/pages/guides/Tri-Alliance-Clash.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/Tri-Alliance-Clash.html" aria-label="Open Tri-Alliance Clash Guide">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/tri-alliance-clash-icon.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">TAC</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">삼대연맹전 승리 가이드</span>
+              <span class="lang lang-en">How to Win Tri-Alliance Clash</span>
+              <span class="lang lang-ja">トライ・アライアンス・クラッシュ 勝利ガイド</span>
+              <span class="lang lang-zh-CN">三联盟争夺战 胜利指南</span>
+              <span class="lang lang-zh-TW">三聯盟爭奪戰 勝利指南</span>
+            </h2>
+          </div>
+        </a>
+      </section>
 
-<!-- 11 -->
-<section class="g-block" id="viking-vengeance" data-guide="viking-vengeance" data-toc="true"
-  data-title-ko="바이킹의 약탈 최적 공략" data-title-en="Viking Vengeance Best Strategy" data-title-ja="バイキングの略奪 最適攻略" data-title-zh-cn="维京复仇 最优攻略" data-title-zh-tw="維京復仇 最佳攻略"
-  data-href="/pages/guides/viking.html">
-  <a class="g-link" data-router-ignore="true" href="/pages/guides/viking.html" aria-label="Open Viking Vengeance Guide">
-    <div class="tile-icon" aria-hidden="true">
-      <img src="/img/guide/viking-vengeance-event.webp" alt="" loading="lazy" decoding="async">
-      <div class="tile-fallback">VIK</div>
-    </div>
-    <div class="tile-title">
-      <h2 class="g-title">
-        <span class="lang lang-ko">바이킹의 약탈 최적 공략</span>
-        <span class="lang lang-en">Viking Vengeance Best Strategy</span>
-        <span class="lang lang-ja">バイキングの略奪 最適攻略</span>
-        <span class="lang lang-zh-CN">维京复仇 最优攻略</span>
-        <span class="lang lang-zh-TW">維京復仇 最佳攻略</span>
-      </h2>
-    </div>
-  </a>
-</section>
+      <!-- 11 -->
+      <section class="g-block" id="viking-vengeance" data-guide="viking-vengeance" data-toc="true"
+        data-title-ko="바이킹의 약탈 최적 공략" data-title-en="Viking Vengeance Best Strategy" data-title-ja="バイキングの略奪 最適攻略" data-title-zh-cn="维京复仇 最优攻略" data-title-zh-tw="維京復仇 最佳攻略"
+        data-href="/pages/guides/viking.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/viking.html" aria-label="Open Viking Vengeance Guide">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/viking-vengeance-event.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">VIK</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">바이킹의 약탈 최적 공략</span>
+              <span class="lang lang-en">Viking Vengeance Best Strategy</span>
+              <span class="lang lang-ja">バイキングの略奪 最適攻略</span>
+              <span class="lang lang-zh-CN">维京复仇 最优攻略</span>
+              <span class="lang lang-zh-TW">維京復仇 最佳攻略</span>
+            </h2>
+          </div>
+        </a>
+      </section>
 
-<!-- 12 -->
-<section class="g-block" id="transfer" data-guide="transfer" data-toc="true"
-  data-title-ko="왕국 이민 심화 가이드" data-title-en="Kingdom Transfer Guide" data-title-ja="王国移民ガイド" data-title-zh-cn="王国转移指南" data-title-zh-tw="王國轉移指南"
-  data-href="/pages/guides/transfer.html">
-  <a class="g-link" data-router-ignore="true" href="/pages/guides/transfer.html" aria-label="Open Kingdom Transfer Guide">
-    <div class="tile-icon" aria-hidden="true">
-      <img src="/img/guide/transfer.webp" alt="" loading="lazy" decoding="async">
-      <div class="tile-fallback">TR</div>
-    </div>
-    <div class="tile-title">
-      <h2 class="g-title">
-        <span class="lang lang-ko">왕국 이민 심화 가이드</span>
-        <span class="lang lang-en">Kingdom Transfer Guide</span>
-        <span class="lang lang-ja">王国移民ガイド</span>
-        <span class="lang lang-zh-CN">王国转移指南</span>
-        <span class="lang lang-zh-TW">王國轉移指南</span>
-      </h2>
-    </div>
-  </a>
-</section>
+      <!-- 12 -->
+      <section class="g-block" id="transfer" data-guide="transfer" data-toc="true"
+        data-title-ko="왕국 이민 심화 가이드" data-title-en="Kingdom Transfer Guide" data-title-ja="王国移民ガイド" data-title-zh-cn="王国转移指南" data-title-zh-tw="王國轉移指南"
+        data-href="/pages/guides/transfer.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/transfer.html" aria-label="Open Kingdom Transfer Guide">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/transfer.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">TR</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">왕국 이민 심화 가이드</span>
+              <span class="lang lang-en">Kingdom Transfer Guide</span>
+              <span class="lang lang-ja">王国移民ガイド</span>
+              <span class="lang lang-zh-CN">王国转移指南</span>
+              <span class="lang lang-zh-TW">王國轉移指南</span>
+            </h2>
+          </div>
+        </a>
+      </section>
 
     </div>
   </div>
