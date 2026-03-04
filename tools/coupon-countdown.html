@@ -249,6 +249,11 @@
     }
     @media (max-width: 640px){ .codesGrid{ grid-template-columns: 1fr; } }
 
+    /* ✅ only 1 active code → center align */
+.codesGrid.single{
+  grid-template-columns: minmax(0, 520px);
+  justify-content: center;
+} 
     .codeCard{
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.35);
@@ -458,9 +463,24 @@
       .c4{ bottom:18px; right:18px; }
     }
     @media (max-width: 560px){
-      .pop{ min-height: 72vh; }
-      .popCorner{ width: 120px; height:120px; }
-    }
+  .pop{ min-height: 72vh; }
+
+  /* corner images smaller + pushed outward */
+  .popCorner{
+    width: 92px;
+    height: 92px;
+    opacity: .72;
+  }
+  .c1{ top: 10px; left: 10px; }
+  .c2{ top: 10px; right: 10px; }
+  .c3{ bottom: 10px; left: 10px; }
+  .c4{ bottom: 10px; right: 10px; }
+
+  /* text area safe padding */
+  .popCenter{
+    padding: 64px 16px 64px;
+  }
+}
     .popCenter{
       position:absolute; inset:0;
       display:flex;
@@ -1036,6 +1056,7 @@
     function renderCodes(active, nowMs){
       if(!dom.codesGrid) return;
       dom.codesGrid.innerHTML = "";
+      dom.codesGrid.classList.toggle("single", active.length === 1);
 
       if(active.length === 0){
         const empty = document.createElement("div");

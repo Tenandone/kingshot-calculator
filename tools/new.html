@@ -1,0 +1,136 @@
+<!-- ✅ CLOCK BAR — HTML ONLY (optimized)
+     - 목적: 인덱스에 “시계(바)”만 딱 깔끔하게 넣기
+     - JS 없이도 기본 UI가 예쁘게 보이도록 구성
+     - 실제 시간/카운트다운은 너의 기존 스크립트가 #kbTitle/#kbCoupons/#kbNext/#kbNow만 채우면 됨
+-->
+
+<section id="liveBar" class="kboard" aria-label="Coupon clock" hidden>
+  <a id="kbGo"
+     href="/tools/coupon-countdown.html"
+     data-router-ignore="true"
+     aria-label="Open coupon countdown">
+    <div class="kpanel">
+      <div class="kleft">
+        <span class="kdot" aria-hidden="true"></span>
+        <div class="ktext">
+          <div class="ktitle" id="kbTitle">Kingshot Coupon Timer</div>
+          <div class="ksub" id="kbSub">Active codes · Next expiry · Now</div>
+        </div>
+      </div>
+
+      <div class="kgrid" role="group" aria-label="Clock values">
+        <div class="kchip">
+          <div class="klabel" id="kbLCoupons">Coupons</div>
+          <div class="kval" id="kbCoupons">—</div>
+        </div>
+
+        <div class="kchip">
+          <div class="klabel" id="kbLNext">To expiry</div>
+          <div class="kval kval--accent" id="kbNext">—</div>
+        </div>
+
+        <div class="kchip">
+          <div class="klabel" id="kbLNow">Now</div>
+          <div class="kval" id="kbNow">—</div>
+        </div>
+      </div>
+    </div>
+  </a>
+</section>
+
+<style>
+  /* ================================
+     CLOCK BAR — LIGHT CARD (HTML only)
+  ================================ */
+  .kboard{ display:flex; justify-content:center; margin:14px 0 14px; }
+  .kboard a{ text-decoration:none; width:min(920px,100%); }
+
+  .kpanel{
+    border-radius:18px;
+    border:1px solid rgba(15,23,42,.10);
+    background: linear-gradient(180deg,#ffffff,#f7f8fb);
+    box-shadow: 0 10px 24px rgba(15,23,42,.08);
+    padding: 12px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  }
+  .kboard a:hover .kpanel{
+    transform: translateY(-1px);
+    box-shadow: 0 16px 34px rgba(15,23,42,.12);
+    border-color: rgba(11,87,208,.18);
+  }
+
+  .kleft{ display:flex; align-items:center; gap:10px; min-width:0; }
+  .kdot{
+    width:10px;height:10px;border-radius:99px;flex:0 0 auto;
+    background: rgba(250,204,21,.95);
+    box-shadow: 0 0 0 3px rgba(250,204,21,.22);
+  }
+
+  .ktext{ min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .ktitle{
+    font-weight:1100;
+    letter-spacing:.1px;
+    color:#0b0d12;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .ksub{
+    font-size:12px;
+    color:#6b7280;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .kgrid{
+    display:grid;
+    grid-template-columns: repeat(3, auto);
+    gap:10px;
+    align-items:center;
+    flex:0 0 auto;
+  }
+  .kchip{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    align-items:flex-start;
+    padding: 8px 10px;
+    border-radius:14px;
+    border:1px solid rgba(15,23,42,.10);
+    background:#ffffff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
+    min-width: 150px;
+  }
+  .klabel{
+    font-size:11px;
+    letter-spacing:.12em;
+    font-weight:1000;
+    color:#6b7280;
+    text-transform:uppercase;
+  }
+  .kval{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+    font-weight:1100;
+    letter-spacing:.10em;
+    color:#111827;
+    font-size: 16px;
+    line-height:1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .kval--accent{
+    color: rgba(234,179,8,1);
+    text-shadow: 0 0 10px rgba(234,179,8,.18);
+  }
+
+  @media (max-width: 860px){
+    .kpanel{ flex-direction:column; align-items:flex-start; }
+    .kgrid{ width:100%; grid-template-columns: 1fr; }
+    .kchip{ width:100%; min-width: 0; }
+    .kval{ font-size: 18px; }
+  }
+</style>
