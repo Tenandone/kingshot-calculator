@@ -3,14 +3,14 @@
 <head>
   <meta name="google-adsense-account" content="ca-pub-9189957764761115">
   <meta charset="utf-8" />
-  <script>window.__V="20260303"</script>
+  <script>window.__V="20260304"</script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KingshotData</title>
   <base href="/" />
 
   <!-- loader deps -->
-  <script src="/js/asset-loader.js?v=20260303" defer></script>
-  <script src="/js/html-loader.js?v=20260303" defer></script>
+  <script src="/js/asset-loader.js?v=20260304" defer></script>
+  <script src="/js/html-loader.js?v=20260304" defer></script>
 
   <!-- Adsense -->
   <script async
@@ -35,12 +35,21 @@
   <meta name="description" content="" data-i18n-attr="content:meta.description">
   <meta property="og:title" content="KingshotData">
   <meta property="og:description" content="" data-i18n-attr="content:og.description">
-  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png">
+
+  <!-- ✅ OG IMAGE (캐릭터로 바뀌었으면 여기만 교체 + v로 캐시 깨기)
+       예) /img/kingshotdata-og-v6.png 로 교체했으면 아래 그대로 두고 파일명만 바꾸면 됨 -->
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png?v=20260304">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+
   <meta property="og:url" content="https://kingshotdata.kr">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://kingshotdata.kr">
+
+  <!-- ✅ Twitter (카톡/디코/트위터 미리보기 안정화) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png?v=20260304">
+
   <link rel="preload" as="image" href="/img/logo-kingshotdata.png?v=202509131858" />
 
   <!-- CSS (theme-test.css is ALWAYS last) -->
@@ -51,7 +60,7 @@
   <link rel="stylesheet" href="/css/header.css?v=202509131858">
   <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
   <link rel="stylesheet" href="/css/sponsor.css?v=202509131858">
-  <link rel="stylesheet" href="/css/theme-test.css?v=20260303">
+  <link rel="stylesheet" href="/css/theme-test.css?v=20260304">
 
   <!-- GitHub Pages SPA Fallback -->
   <script>
@@ -76,6 +85,7 @@
       if (low === 'en') return 'en';
       if (low === 'ja') return 'ja';
       if (low === 'tw' || low === 'zh-tw' || low === 'zh_tw') return 'zh-TW';
+      // CN은 사이트에서 제거했으니 들어오면 EN으로 폴백만 (안전장치)
       if (low === 'cn' || low === 'zh-cn' || low === 'zh_cn') return 'en';
       return 'en';
     }
@@ -246,14 +256,7 @@
 
     /* ================================
        Drawer: 45% width + center align
-       - navigation label center
-       - nav items center
-       - Gift Code above LootBar
-       - remove "other" label entirely
-       - add dotted rule above LootBar
     ================================ */
-
-    /* Drawer width 45% */
     #mobileDrawer.drawer{
       width: min(45vw, 460px) !important;
       max-width: min(45vw, 460px) !important;
@@ -265,13 +268,11 @@
       }
     }
 
-    /* Center section labels (navigation only remains) */
     #mobileDrawer .sec-label{
       text-align:center !important;
       width:100%;
     }
 
-    /* Center nav items */
     #mobileDrawer .nav-list{
       display:flex !important;
       flex-direction:column !important;
@@ -283,7 +284,6 @@
       text-align:center !important;
     }
 
-    /* Center sponsor stack */
     .drawer-sponsor-stack{
       display:flex;
       flex-direction:column;
@@ -303,15 +303,11 @@
       height:auto;
       object-fit:contain;
     }
-
-    /* dotted rule above LootBar */
     .drawer-dotrule{
       width:min(340px, 100%);
       border-top:1px dashed rgba(15,23,42,.18);
       margin: 6px auto 2px;
     }
-
-    /* Hide 'other' section label if any remains */
     #mobileDrawer .sec-label[data-i18n="drawer.other"]{ display:none !important; }
   </style>
 </head>
@@ -385,7 +381,6 @@
         <a href="/calculator" data-link data-i18n="nav.calculators">계산기</a>
       </div>
 
-      <!-- ✅ Gift Code + dotted rule + LootBar (inside navigation section, centered) -->
       <div class="drawer-sponsor-stack" aria-label="Quick links">
         <a class="drawer-sponsor-card"
            href="https://kingshotdata.kr/pages/guides/kingshot-giftcode.html"
@@ -549,7 +544,7 @@
     })();
   </script>
 
-  <!-- ✅ ONE DOM clock script (Light Card + i18n labels/title) -->
+  <!-- ✅ ONE DOM clock script (FIX: tools 로직과 1:1 동일하게 active 판단: expiresAt/startAt/ until) -->
   <script>
     (function(){
       const els = {
@@ -590,26 +585,41 @@
         return (TXT[l] && TXT[l][k]) || (TXT.en && TXT.en[k]) || k;
       }
 
-      function isForever(until){
-        if(!until) return true;
-        const v = String(until).trim().toLowerCase();
-        return v === 'permanent' || v === 'infinite' || v === '∞' || v === 'forever' ||
-               v === 'no-expiry' || v === 'noexp' || v === 'nolimit';
+      function safeStr(v){ return (v==null ? "" : String(v)); }
+
+      function parseExpiryMs(c){
+        const iso = safeStr(c && c.expiresAt).trim();
+        if(iso){
+          const t = Date.parse(iso);
+          if(Number.isFinite(t)) return t;
+        }
+        const until = safeStr(c && c.until).trim();
+        if(until){
+          const parts = until.split("-");
+          if(parts.length===3){
+            const y=parts[0];
+            const m=String(parts[1]).padStart(2,"0");
+            const d=String(parts[2]).padStart(2,"0");
+            const t = Date.parse(`${y}-${m}-${d}T00:00:00Z`);
+            if(Number.isFinite(t)) return t;
+          }
+        }
+        return null;
       }
-      function parseUTCDate(ymd){
-        const s = String(ymd || '').trim();
-        const parts = s.split('-');
-        if(parts.length !== 3) return new Date('invalid');
-        const y = parts[0];
-        const m = String(parts[1]).padStart(2,'0');
-        const d = String(parts[2]).padStart(2,'0');
-        return new Date(`${y}-${m}-${d}T00:00:00Z`);
+
+      function isActive(c, nowMs){
+        const exp = parseExpiryMs(c);
+        if(exp == null) return false;
+        if(nowMs >= exp) return false;
+
+        const st = safeStr(c && c.startAt).trim();
+        if(st){
+          const stMs = Date.parse(st);
+          if(Number.isFinite(stMs) && nowMs < stMs) return false;
+        }
+        return true;
       }
-      function isExpired(until){
-        if(isForever(until)) return false;
-        const d = parseUTCDate(until);
-        return (d.toString() !== 'Invalid Date') && (Date.now() >= d.getTime());
-      }
+
       function fmt2(n){ return String(n).padStart(2,'0'); }
       function clockNow(dt){ return `${fmt2(dt.getHours())}:${fmt2(dt.getMinutes())}:${fmt2(dt.getSeconds())}`; }
       function countdown(ms){
@@ -632,10 +642,8 @@
       function computeNextExpiry(active){
         let min = null;
         for(const c of active){
-          if(isForever(c.until)) continue;
-          const dt = parseUTCDate(c.until);
-          if(dt.toString() === 'Invalid Date') continue;
-          const ms = dt.getTime();
+          const ms = parseExpiryMs(c);
+          if(ms == null) continue;
           if(min === null || ms < min) min = ms;
         }
         return min;
@@ -681,9 +689,12 @@
           syncLink();
 
           const list = await loadCoupons();
-          const active = list.filter(c => c?.code && !isExpired(c.until));
+          const nowMs = Date.now();
+          const active = list.filter(c => c?.code && isActive(c, nowMs));
+
           cachedCount = active.length;
           renderCount();
+
           targetNextMs = computeNextExpiry(active);
 
           if(tickTimer) clearInterval(tickTimer);
