@@ -1,6 +1,10 @@
-/* footer-tools.js (FINAL — coupons → CTAs → LootBar / NO ADS) */
+/* footer-tools.js (FINAL SAFE+LOCK — coupons → CTAs → LootBar / NO ADS) */
 ;(() => {
   'use strict';
+
+  // ✅ 스크립트 중복 로드 방지
+  if (window.__KD_FOOTER_TOOLS_LOADED__) return;
+  window.__KD_FOOTER_TOOLS_LOADED__ = true;
 
   /* ================= i18n helpers ================= */
   function t(key, fallback) {
@@ -14,12 +18,18 @@
   }
 
   function getLangSafe() {
-    return (
+    const raw =
       document.documentElement.getAttribute('lang') ||
-      localStorage.getItem('lang') ||
       (window.I18N && I18N.current) ||
-      'en'
-    ).toLowerCase();
+      localStorage.getItem('lang') ||
+      'en';
+
+    const low = String(raw).trim().toLowerCase();
+    if (low === 'zh-tw' || low === 'tw' || low === 'zh_tw') return 'zh-TW';
+    if (low.startsWith('zh')) return 'zh-TW';
+    if (low.startsWith('ko')) return 'ko';
+    if (low.startsWith('ja')) return 'ja';
+    return 'en';
   }
 
   /* ================= forever handling ================= */
@@ -31,21 +41,25 @@
 
   function foreverText() {
     const lang = getLangSafe();
-    if (lang.startsWith('ko')) return '무기한';
-    if (lang.startsWith('ja')) return '無期限';
-    if (lang.startsWith('zh')) return '永久';
+    if (lang === 'ko') return '무기한';
+    if (lang === 'ja') return '無期限';
+    if (lang === 'zh-TW') return '永久';
     return 'Permanent';
   }
 
   function fmtDate(yyyy_mm_dd) {
     if (isForever(yyyy_mm_dd)) return foreverText();
     try {
-      const d = new Date(String(yyyy_mm_dd).trim() + 'T00:00:00');
-      if (isNaN(d)) return String(yyyy_mm_dd);
-      return new Intl.DateTimeFormat(getLangSafe(), {
+      const s = String(yyyy_mm_dd).trim();
+      const d = new Date(s + 'T00:00:00Z');
+      if (isNaN(d)) return s;
+
+      const lang = getLangSafe();
+      return new Intl.DateTimeFormat(lang, {
         year: 'numeric',
         month: 'short',
-        day: '2-digit'
+        day: '2-digit',
+        timeZone: 'UTC'
       }).format(d);
     } catch {
       return String(yyyy_mm_dd);
@@ -78,22 +92,23 @@
     return new Date() >= new Date(String(until).trim() + 'T00:00:00Z');
   }
 
-  /* ================= render ================= */
-  async function renderFooterTools() {
-    const container = document.getElementById('footerTools');
+  /* ================= render core ================= */
+  async function renderInto(container, opts) {
+    opts = opts || {};
     if (!container) return;
 
-    // SPA 중복 렌더 방지
-    if (container.dataset.footerToolsRendered === '1') return;
-    container.dataset.footerToolsRendered = '1';
+    if (!opts.force) {
+      if (container.dataset.footerToolsRendered === '1') return;
+      container.dataset.footerToolsRendered = '1';
+    }
 
     container.innerHTML = '';
 
-    /* --- coupons --- */
     const couponWrap = document.createElement('div');
     couponWrap.className = 'footer-coupons';
 
-    const coupons = await fetchCoupons('/data/coupons.json?v=now');
+    const coupons = await fetchCoupons('/data/coupons.json?v=' + Date.now());
+
     if (!coupons.length) {
       const empty = document.createElement('div');
       empty.className = 'empty';
@@ -111,7 +126,6 @@
       });
     }
 
-    /* --- CTAs --- */
     const ctas = document.createElement('div');
     ctas.className = 'footer-ctas';
     ctas.innerHTML = `
@@ -123,7 +137,6 @@
       </a>
     `;
 
-    /* --- LootBar --- */
     const lootbar = document.createElement('div');
     lootbar.className = 'footer-image-banner';
     lootbar.innerHTML = `
@@ -132,15 +145,63 @@
       </a>
     `;
 
-    /* --- mount --- */
     container.appendChild(couponWrap);
     container.appendChild(ctas);
     container.appendChild(lootbar);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', renderFooterTools);
-  } else {
-    renderFooterTools();
+  async function renderFooterToolsAll(opts) {
+    opts = opts || {};
+    const containers = document.querySelectorAll('#footerTools');
+    if (!containers || !containers.length) return;
+    await Promise.all(Array.from(containers).map(c => renderInto(c, opts)));
   }
+
+  // =========================================================
+  // ✅ RENDER LOCK + DEBOUNCE (연속 i18n:changed 폭주 방지)
+  // =========================================================
+  let _timer = null;
+  let _token = 0;
+  let _inflight = false;
+  let _pendingForce = false;
+
+  function scheduleRender(force) {
+    if (force) _pendingForce = true;
+
+    if (_timer) clearTimeout(_timer);
+    _timer = setTimeout(async () => {
+      const myToken = ++_token;
+      const doForce = _pendingForce;
+      _pendingForce = false;
+
+      // 렌더 중이면 "최신만" 남기고 종료
+      if (_inflight) {
+        // 다음 tick에 다시 한 번만 돌도록 예약
+        scheduleRender(doForce);
+        return;
+      }
+
+      _inflight = true;
+      try {
+        await renderFooterToolsAll({ force: doForce });
+      } finally {
+        _inflight = false;
+      }
+
+      // 이 렌더 도중 또 예약이 들어왔다면 한 번 더만 실행
+      if (myToken !== _token) {
+        scheduleRender(true);
+      }
+    }, 150);
+  }
+
+  // ✅ 초기 렌더
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => scheduleRender(false), { once: true });
+  } else {
+    scheduleRender(false);
+  }
+
+  // ✅ 언어 변경 시 (폭주해도 마지막 1번만 렌더)
+  document.addEventListener('i18n:changed', () => scheduleRender(true));
 })();

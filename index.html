@@ -31,22 +31,26 @@
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <meta name="theme-color" content="#ffffff" />
 
-  <!-- SEO / OG -->
-  <meta name="description" content="" data-i18n-attr="content:meta.description">
+  <!-- SEO / OG (✅ 기본값은 EN로 넣어두고, i18n이 덮어쓰게 유지) -->
+  <meta name="description"
+        content="KingshotData — Game Database & Strategy Hub. Browse buildings, heroes, guides, and calculators."
+        data-i18n-attr="content:meta.description">
   <meta property="og:title" content="KingshotData">
-  <meta property="og:description" content="" data-i18n-attr="content:og.description">
+  <meta property="og:description"
+        content="KingshotData — Game Database & Strategy Hub. Browse buildings, heroes, guides, and calculators."
+        data-i18n-attr="content:og.description">
 
-  <!-- ✅ OG IMAGE (캐릭터로 바뀌었으면 여기만 교체 + v로 캐시 깨기)
-       예) /img/kingshotdata-og-v6.png 로 교체했으면 아래 그대로 두고 파일명만 바꾸면 됨 -->
+  <!-- ✅ OG IMAGE -->
   <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png?v=20260304">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
+  <!-- ✅ URL/CANONICAL (기본값은 루트, 아래 SEO sync 스크립트가 언어/경로에 맞게 자동 갱신) -->
   <meta property="og:url" content="https://kingshotdata.kr">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://kingshotdata.kr">
 
-  <!-- ✅ Twitter (카톡/디코/트위터 미리보기 안정화) -->
+  <!-- ✅ Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png?v=20260304">
 
@@ -79,51 +83,215 @@
   <!-- i18n -->
   <script src="/js/i18n.js?v=202509131858"></script>
   <script>
+    // =========================================================
+    // ✅ KD_LANG — SINGLE SOURCE OF TRUTH (유지보수 통일 규칙)
+    // - 언어 정규화/선택/저장/URL반영 + "i18n:changed" 브로드캐스트
+    // - 커스텀 위젯은 document.addEventListener('i18n:changed', ...)만 듣고 갱신
+    // =========================================================
+    (function(){
+      function normalizeLang(code){
+        var low = String(code || '').trim().toLowerCase();
+        if (low === 'ko') return 'ko';
+        if (low === 'en') return 'en';
+        if (low === 'ja') return 'ja';
+        if (low === 'tw' || low === 'zh-tw' || low === 'zh_tw') return 'zh-TW';
+        // CN은 사이트에서 제거했으니 들어오면 EN으로 폴백만 (안전장치)
+        if (low === 'cn' || low === 'zh-cn' || low === 'zh_cn') return 'en';
+        return 'en';
+      }
+
+      function broadcastChanged(){
+        // ✅ 모든 커스텀 위젯/컴포넌트가 이 이벤트 하나만 구독하면 됨
+        try { document.dispatchEvent(new CustomEvent('i18n:changed')); } catch(_){}
+        try { document.dispatchEvent(new Event('i18n:changed')); } catch(_){}
+      }
+
+      function setHtmlLang(lang){
+        document.documentElement.setAttribute('lang', lang);
+      }
+
+      function setUrlParamLang(lang){
+        try{
+          var url = new URL(window.location.href);
+          url.searchParams.set('lang', lang);
+          history.replaceState(null, '', url.toString());
+        }catch(_){}
+      }
+
+      async function setLang(lang, opts){
+        opts = opts || {};
+        lang = normalizeLang(lang);
+
+        // 1) i18n 엔진 적용
+        if (window.I18N && typeof window.I18N.setLang === 'function') {
+          await window.I18N.setLang(lang);
+        }
+
+        // 2) DOM/스토리지/URL 반영
+        setHtmlLang(lang);
+        if (!opts.noStore) {
+          try { localStorage.setItem('lang', lang); } catch(_){}
+        }
+        if (!opts.noUrl) setUrlParamLang(lang);
+
+        // 3) SEO Sync + Broadcast
+        try { window.KD_SEO_SYNC && window.KD_SEO_SYNC(); } catch(_){}
+        broadcastChanged();
+
+        return lang;
+      }
+
+      function init(){
+        var sp = new URLSearchParams(location.search);
+        var urlLangRaw = sp.get('lang');
+        var savedRaw = null; try { savedRaw = localStorage.getItem('lang'); } catch(_){}
+
+        var initial = normalizeLang(urlLangRaw || savedRaw || 'en');
+        setHtmlLang(initial);
+
+        if (window.I18N && typeof window.I18N.init === 'function') {
+          window.I18N.init({ lang: initial, supported: ['ko','en','ja','zh-TW'] });
+        }
+
+        // URL lang가 이상한 형태면 normalize된 값으로 정리
+        try{
+          if (urlLangRaw && normalizeLang(urlLangRaw) !== urlLangRaw) {
+            setUrlParamLang(initial);
+          }
+        }catch(_){}
+
+        // 스토리지 값도 정규화
+        try{
+          if (savedRaw && normalizeLang(savedRaw) !== savedRaw) {
+            localStorage.setItem('lang', initial);
+          }
+        }catch(_){}
+
+        // ✅ 최초 로딩에서도 커스텀 위젯 즉시 갱신
+        try { window.KD_SEO_SYNC && window.KD_SEO_SYNC(); } catch(_){}
+        broadcastChanged();
+
+        return initial;
+      }
+
+      // 전역 API (유지보수 통일 규칙)
+      window.KD_LANG = {
+        normalize: normalizeLang,
+        init: init,
+        set: setLang,
+        broadcast: broadcastChanged
+      };
+    })();
+
+    // 기존 코드 호환: normalizeLang / applyLang 유지
     function normalizeLang(code){
-      var low = String(code || '').trim().toLowerCase();
-      if (low === 'ko') return 'ko';
-      if (low === 'en') return 'en';
-      if (low === 'ja') return 'ja';
-      if (low === 'tw' || low === 'zh-tw' || low === 'zh_tw') return 'zh-TW';
-      // CN은 사이트에서 제거했으니 들어오면 EN으로 폴백만 (안전장치)
-      if (low === 'cn' || low === 'zh-cn' || low === 'zh_cn') return 'en';
-      return 'en';
+      return (window.KD_LANG && window.KD_LANG.normalize) ? window.KD_LANG.normalize(code) : 'en';
     }
 
     (function () {
-      const sp = new URLSearchParams(location.search);
-      const urlLangRaw = sp.get('lang');
-      let savedRaw = null; try { savedRaw = localStorage.getItem('lang'); } catch(_){}
-      const initial = normalizeLang(urlLangRaw || savedRaw || 'en');
-      document.documentElement.setAttribute('lang', initial);
-      if (window.I18N?.init) {
-        I18N.init({ lang: initial, supported: ['ko','en','ja','zh-TW'] });
-      }
-      try {
-        if (urlLangRaw && normalizeLang(urlLangRaw) !== urlLangRaw) {
-          const url = new URL(window.location.href);
-          url.searchParams.set('lang', initial);
-          history.replaceState(null, '', url.toString());
-        }
-      } catch(_) {}
-      try {
-        if (savedRaw && normalizeLang(savedRaw) !== savedRaw) {
-          localStorage.setItem('lang', initial);
-        }
-      } catch(_) {}
+      // KD_LANG.init에서 I18N.init + 이벤트 브로드캐스트까지 처리
+      window.KD_LANG && window.KD_LANG.init && window.KD_LANG.init();
     })();
 
     async function applyLang(lang){
-      lang = normalizeLang(lang);
-      if (window.I18N?.setLang) await I18N.setLang(lang);
-      document.documentElement.setAttribute('lang', lang);
-      try { localStorage.setItem('lang', lang); } catch(_){}
-      try {
-        const url = new URL(window.location.href);
-        url.searchParams.set('lang', lang);
-        history.replaceState(null, '', url.toString());
-      } catch(_) {}
+      // 통일 규칙: 언어 변경은 KD_LANG.set 하나로 끝
+      if (window.KD_LANG && window.KD_LANG.set) return window.KD_LANG.set(lang);
+      return normalizeLang(lang);
     }
+  </script>
+
+  <!-- ✅ SEO HEAD SYNC (canonical / og:url / hreflang) — EN is x-default -->
+  <script>
+    (function(){
+      var ORIGIN = 'https://kingshotdata.kr';
+
+      function langToPath(code){
+        var l = String(code || '').trim();
+        if (l === 'zh-TW') return 'zh-tw';
+        l = l.toLowerCase();
+        if (l === 'zh-tw' || l === 'tw') return 'zh-tw';
+        if (l === 'ko' || l === 'en' || l === 'ja') return l;
+        return 'en';
+      }
+      function getLangPath(){
+        var htmlLang = document.documentElement.getAttribute('lang') || 'en';
+        return langToPath(htmlLang);
+      }
+      function stripLangPrefix(pathname){
+        return pathname.replace(/^\/(en|ja|zh-tw)(\/|$)/i, '/');
+      }
+      function buildUrlFor(langPath, basePath, search){
+        var p = (langPath === 'ko') ? basePath : ('/' + langPath + basePath.replace(/^\//,'/'));
+        p = p.replace(/\/{2,}/g, '/');
+        return ORIGIN + p + (search || '');
+      }
+
+      function upsertLink(rel, attrs){
+        var sel = 'link[rel="' + rel + '"]';
+        var el = document.querySelector(sel);
+        if (!el) {
+          el = document.createElement('link');
+          el.setAttribute('rel', rel);
+          document.head.appendChild(el);
+        }
+        Object.keys(attrs).forEach(function(k){ el.setAttribute(k, attrs[k]); });
+        return el;
+      }
+      function upsertMeta(propOrName, key, value){
+        var sel = propOrName + '="' + key + '"';
+        var el = document.querySelector('meta[' + sel + ']');
+        if (!el) {
+          el = document.createElement('meta');
+          el.setAttribute(propOrName, key);
+          document.head.appendChild(el);
+        }
+        el.setAttribute('content', value);
+        return el;
+      }
+
+      function clearHreflang(){
+        var nodes = document.querySelectorAll('link[rel="alternate"][hreflang][data-kd-hreflang="1"]');
+        nodes.forEach(function(n){ n.parentNode && n.parentNode.removeChild(n); });
+      }
+      function addHreflang(hreflang, href){
+        var el = document.createElement('link');
+        el.setAttribute('rel','alternate');
+        el.setAttribute('hreflang', hreflang);
+        el.setAttribute('href', href);
+        el.setAttribute('data-kd-hreflang','1');
+        document.head.appendChild(el);
+      }
+
+      function sync(){
+        var basePath = stripLangPrefix(location.pathname);
+        var search = location.search || '';
+        var curLangPath = getLangPath();
+
+        var canonical = buildUrlFor(curLangPath, basePath, search);
+        upsertLink('canonical', { href: canonical });
+        upsertMeta('property','og:url', canonical);
+
+        clearHreflang();
+        addHreflang('x-default', buildUrlFor('en', basePath, search));
+        addHreflang('ko',    buildUrlFor('ko',    basePath, search));
+        addHreflang('en',    buildUrlFor('en',    basePath, search));
+        addHreflang('ja',    buildUrlFor('ja',    basePath, search));
+        addHreflang('zh-TW', buildUrlFor('zh-tw', basePath, search));
+      }
+
+      window.KD_SEO_SYNC = sync;
+
+      try { sync(); } catch(_) {}
+      (function(){
+        var _ps = history.pushState;
+        var _rs = history.replaceState;
+        function after(){ try { sync(); } catch(_) {} }
+        history.pushState = function(){ var r=_ps.apply(this, arguments); after(); return r; };
+        history.replaceState = function(){ var r=_rs.apply(this, arguments); after(); return r; };
+        window.addEventListener('popstate', after);
+        document.addEventListener('i18n:changed', after);
+      })();
+    })();
   </script>
 
   <!-- app -->
@@ -461,7 +629,7 @@
       </span><br />
 
       <span>© 2025 KingshotData Korea · </span>
-      <a href="/privacy/" data-i18n="footer.privacy">개인정보처리방침 / Privacy</a>
+      <a href="/privacy" data-i18n="footer.privacy">개인정보처리방침 / Privacy</a>
     </div>
   </footer>
 
@@ -544,7 +712,7 @@
     })();
   </script>
 
-  <!-- ✅ ONE DOM clock script (FIX: tools 로직과 1:1 동일하게 active 판단: expiresAt/startAt/ until) -->
+  <!-- ✅ ONE DOM clock script -->
   <script>
     (function(){
       const els = {
