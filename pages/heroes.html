@@ -1,20 +1,13 @@
 <!-- pages/heroes.html — 단독 진입 시 홈으로 리다이렉트, SPA 내부 include 시 정상 동작 -->
 <script>
-/*
-  - 직접 URL(https://kingshotdata.kr/pages/heroes.html)로 들어온 경우에만 홈으로 이동
-  - SPA에서 fetch/innerHTML로 주입될 때는 이 <script>가 실행되지 않으므로 그대로 렌더됨
-*/
 (function () {
   try {
-    // 탑레벨에서만 동작 (iframe/innerHTML 주입 제외)
     if (window === window.top) {
       const p = location.pathname || "";
-      // heroes.html로 직접 접근한 경우만 리다이렉트
       if (p.endsWith("/pages/heroes.html") || p.endsWith("/pages/heroes.html/") || /\/pages\/heroes\.html$/i.test(p)) {
         const usp  = new URLSearchParams(location.search);
         const lang = usp.get("lang");
         const dest = lang ? `/?lang=${encodeURIComponent(lang)}#heroes` : "/#heroes";
-        // 히스토리 오염 없이 즉시 이동
         location.replace(dest);
       }
     }
@@ -22,11 +15,8 @@
 })();
 </script>
 
-<!-- 여기부터는 SPA가 include해서 사용할 템플릿(기존 구조 유지) -->
 <section class="container">
   <h1 class="page-title">Heroes</h1>
-
-  <!-- JS(heroes.js)가 섹션(3/2/1세대, SR, R)을 주입할 마운트 포인트 -->
   <div id="heroes-root" aria-live="polite"></div>
 
   <noscript>
@@ -37,99 +27,227 @@
 </section>
 
 <style>
-  /* ===== 섹션 공통 ===== */
-  .section{ margin:16px 0 24px; }
-  .section-title{
-    margin:8px 0 10px;
-    font-size:16px; font-weight:700; line-height:1.25;
+  #heroes-root .section{
+    margin:16px 0 24px;
   }
 
-  /* ===== 섹션 그리드 ===== */
-  .heroes-grid{
-    --card-min: 200px;
-    --card-gap: 14px;
-    display:grid;
-    gap:var(--card-gap);
-    grid-template-columns:repeat(auto-fill, minmax(var(--card-min), 1fr));
+  #heroes-root .section-title{
+    margin:8px 0 10px;
+    font-size:16px;
+    font-weight:700;
+    line-height:1.25;
+    text-align:center;
+    color:#667085;
   }
-  .heroes-grid.compact{
-    --card-min: 160px;
+
+  #heroes-root .heroes-grid{
+    --card-w: 200px;
+    --card-gap: 14px;
+
+    display:flex !important;
+    flex-wrap:wrap !important;
+    justify-content:center !important;
+    align-items:stretch !important;
+    gap:var(--card-gap) !important;
+    width:100%;
+    margin:0 auto;
+  }
+
+  #heroes-root .heroes-grid.compact{
+    --card-w: 160px;
     --card-gap: 12px;
   }
 
-  /* 반응형 보정 */
-  @media (max-width: 1024px){
-    .heroes-grid{ --card-min: 180px; }
-    .heroes-grid.compact{ --card-min: 150px; }
-  }
-  @media (max-width: 640px){
-    .heroes-grid{ --card-min: 160px; }
-    .heroes-grid.compact{ --card-min: 140px; }
+  #heroes-root .heroes-grid.sr-grid{
+    --sr-cols: 4;
+    --sr-card-w: 160px;
+    --card-gap: 12px;
+
+    display:grid !important;
+    grid-template-columns:repeat(var(--sr-cols), var(--sr-card-w)) !important;
+    gap:var(--card-gap) !important;
+    justify-content:center !important;
+    align-items:stretch !important;
+
+    width:max-content !important;
+    max-width:100%;
+    margin:0 auto !important;
   }
 
-  /* ===== 카드 (라이트 고정) ===== */
-  .heroes-grid .card{
-    width:100%; max-width:none;
+  #heroes-root .heroes-grid .card{
+    width:var(--card-w) !important;
+    max-width:100% !important;
     display:block;
-    border-radius:14px; overflow:hidden;
-    background:#fff; color:#111;               /* 라이트 고정 */
-    border:1px solid var(--border, #e5e7eb);   /* 공용 토큰 없으면 기본값 */
+    border-radius:14px;
+    overflow:hidden;
+    background:#fff;
+    color:#111;
+    border:1px solid var(--border, #e5e7eb);
     text-decoration:none;
     box-shadow:0 2px 10px rgba(0,0,0,.06);
     transition:transform .1s ease, box-shadow .1s ease;
     position:relative;
   }
-  .heroes-grid .card:hover,
-  .heroes-grid .card:focus-visible{
+
+  #heroes-root .heroes-grid.sr-grid .card{
+    width:var(--sr-card-w) !important;
+    max-width:var(--sr-card-w) !important;
+  }
+
+  #heroes-root .heroes-grid .card:hover,
+  #heroes-root .heroes-grid .card:focus-visible{
     transform:translateY(-2px);
     box-shadow:0 6px 18px rgba(0,0,0,.10);
     outline:none;
   }
 
-  /* 썸네일 (라이트 배경) */
-  .heroes-grid .card .thumb{ background:#f3f4f6; }
-  .heroes-grid .card img{ background:transparent; }
+  #heroes-root .heroes-grid .card .thumb{
+    background:#ffffff !important;
+  }
 
-  /* 이름 라벨 */
-  .heroes-grid .card .name{
+  #heroes-root .heroes-grid .card .thumb img{
+    display:block;
+    width:100%;
+    height:auto;
+    background:#ffffff !important;
+  }
+
+  #heroes-root .heroes-grid .card .name{
     padding:10px 12px;
-    font-weight:600; text-align:center;
-    font-size:14px; color:inherit;
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    font-weight:600;
+    text-align:center;
+    font-size:14px;
+    color:inherit;
     background:#fff;
     border-top:1px solid var(--border, #e5e7eb);
-  }
-  .heroes-grid.compact .card .name{ font-size:13px; }
 
-  /* 🔧 기존 다크 강제 오버라이드 제거/무력화 */
-  .theme-default .heroes-grid .card{
-    background:#fff; color:#111;
-    box-shadow:0 2px 10px rgba(0,0,0,.06);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
   }
 
-  .page-title{ margin:4px 0 12px; font-size:20px; font-weight:700; }
-  .muted{ color:#666; font-size:14px; }
+  #heroes-root .heroes-grid.compact .card .name,
+  #heroes-root .heroes-grid.sr-grid .card .name{
+    font-size:13px;
+  }
+
+  #heroes-root .heroes-grid .card .name img{
+    width:16px !important;
+    height:16px !important;
+    flex:0 0 auto;
+    display:block;
+    background:transparent !important;
+  }
+
+  .theme-default #heroes-root .heroes-grid .card{
+    background:#fff !important;
+    color:#111 !important;
+    box-shadow:0 2px 10px rgba(0,0,0,.06) !important;
+  }
+
+  .theme-default #heroes-root .heroes-grid .card .thumb{
+    background:#ffffff !important;
+  }
+
+  .theme-default #heroes-root .heroes-grid .card .thumb img{
+    background:#ffffff !important;
+  }
+
+  .page-title{
+    margin:4px 0 12px;
+    font-size:20px;
+    font-weight:700;
+  }
+
+  .muted{
+    color:#666;
+    font-size:14px;
+  }
+
+  @media (max-width: 1024px){
+    #heroes-root .heroes-grid{ --card-w: 180px; }
+    #heroes-root .heroes-grid.compact{ --card-w: 150px; }
+
+    #heroes-root .heroes-grid.sr-grid{
+      --sr-cols: 4;
+      --sr-card-w: 150px;
+    }
+
+    #heroes-root .heroes-grid.sr-grid .card{
+      width:var(--sr-card-w) !important;
+      max-width:var(--sr-card-w) !important;
+    }
+  }
+
+  @media (max-width: 820px){
+    #heroes-root .heroes-grid.sr-grid{
+      --sr-cols: 3;
+      --sr-card-w: 150px;
+    }
+
+    #heroes-root .heroes-grid.sr-grid .card{
+      width:var(--sr-card-w) !important;
+      max-width:var(--sr-card-w) !important;
+    }
+  }
+
+  @media (max-width: 640px){
+    #heroes-root .heroes-grid:not(.sr-grid){
+      --mobile-gap: 12px;
+
+      display:grid !important;
+      grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+      gap:var(--mobile-gap) !important;
+      justify-content:center !important;
+      align-items:stretch !important;
+
+      width:100% !important;
+      max-width:340px !important;
+      margin:0 auto !important;
+    }
+
+    #heroes-root .heroes-grid:not(.sr-grid) .card{
+      width:100% !important;
+      max-width:none !important;
+      min-width:0 !important;
+    }
+
+    /* 홀수 개일 때 마지막 1장을 가운데 정렬 */
+    #heroes-root .heroes-grid:not(.sr-grid) .card:last-child:nth-child(odd){
+      grid-column:1 / -1 !important;
+      width:calc((100% - var(--mobile-gap)) / 2) !important;
+      max-width:calc((100% - var(--mobile-gap)) / 2) !important;
+      justify-self:center !important;
+    }
+
+    #heroes-root .heroes-grid.sr-grid{
+      --sr-cols: 2;
+      --sr-card-w: 140px;
+    }
+
+    #heroes-root .heroes-grid.sr-grid .card{
+      width:var(--sr-card-w) !important;
+      max-width:var(--sr-card-w) !important;
+    }
+
+    #heroes-root .heroes-grid .card .name{
+      padding:9px 10px;
+      font-size:13px;
+    }
+
+    #heroes-root .heroes-grid.compact .card .name,
+    #heroes-root .heroes-grid.sr-grid .card .name{
+      font-size:12px;
+    }
+  }
 
   @media (prefers-reduced-motion: reduce){
-    .heroes-grid .card{ transition:none; }
+    #heroes-root .heroes-grid .card{
+      transition:none;
+    }
   }
 </style>
-
-<!-- SR/R 섹션을 자동으로 compact 보기로 전환 -->
-<script>
-  (function(){
-    function applyCompact(root){
-      root.querySelectorAll('.section').forEach(sec=>{
-        const title = sec.querySelector('.section-title')?.textContent?.trim() || '';
-        const grid  = sec.querySelector('.heroes-grid');
-        if (!grid) return;
-        if (/^(SR|R)\b/i.test(title)) grid.classList.add('compact');
-      });
-    }
-    const root = document.getElementById('heroes-root');
-    if (!root) return;
-    const mo = new MutationObserver(()=>applyCompact(root));
-    mo.observe(root, { childList:true, subtree:true });
-    applyCompact(root);
-  })();
-</script>

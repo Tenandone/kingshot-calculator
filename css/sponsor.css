@@ -1,45 +1,633 @@
-/* ===== Header Brand Strip ===== */
+/* =================================================================
+   /css/sponsor.css — FULL FINAL (CLEAN + NO DUPES)
+   - Keep: Header Brand Strip
+   - Keep: KO Naver Cafe Banner (SAFE)
+   - Add : Coupon Bar (tools/coupon-bar.html)
+   - Unify height (PC + Mobile)
+   - Coupon = Gold, Cafe = Green
+   ================================================================= */
+
+/* =========================================================
+   Header Brand Strip
+   ========================================================= */
 .header-brand-strip{
-  width:100%;                 /* 🔥 사이트 전체 폭 */
+  width:100%;
   overflow:hidden;
   position:relative;
 }
-
-/* 이동 트랙 */
 .header-brand-track{
   display:flex;
   align-items:center;
-  gap:24px;                   /* 간격 살짝 넓힘 */
+  gap:24px;
   animation: brand-scroll 22s linear infinite;
   will-change: transform;
 }
-
-/* 개별 로고 */
 .header-brand-track a{
   display:flex;
   align-items:center;
   flex:0 0 auto;
 }
-
 .header-brand-track img{
-  height:28px;                /* 🔥 사이즈 업 (기존 22px) */
+  height:28px;
   width:auto;
   object-fit:contain;
   display:block;
-
-  border-radius:10px;         /* 둥글게 */
+  border-radius:10px;
   padding:4px 10px;
   background:#fff;
   border:1px solid #eee;
 }
-
-/* hover */
 .header-brand-track a:hover img{
   box-shadow:0 4px 12px rgba(0,0,0,.1);
 }
-
-/* ===== 좌 → 우 전체 폭 이동 ===== */
 @keyframes brand-scroll{
   0%   { transform: translateX(-100%); }
   100% { transform: translateX(100vw); }
+}
+
+/* =========================================================
+   TOP BARS TOKENS (shared)
+   ========================================================= */
+:root{
+  /* sizes */
+  --kd-bar-h:64px;      /* PC height */
+  --kd-bar-h-m:54px;    /* Mobile height */
+  --kd-pad:14px;
+  --kd-pad-m:12px;
+  --kd-gap:12px;
+  --kd-gap-m:10px;
+
+  --kd-chip-h:42px;
+  --kd-chip-h-m:36px;
+  --kd-chip-x:12px;
+  --kd-chip-x-m:10px;
+
+  /* colors */
+  --kd-green:#03C75A;
+  --kd-green2:#00B85C;
+
+  --kd-gold:#f59e0b;     /* Kingshot gold */
+  --kd-gold2:#facc15;    /* brighter gold */
+  --kd-gold-glow: rgba(255, 214, 74, .85);
+}
+
+/* =========================================================
+   Shared width on PC (match container)
+   ========================================================= */
+@media (min-width:861px){
+  .kd-couponbar__a,
+  .kd-cafeBanner__a{
+    width:100% !important;
+    max-width:var(--container-max,1200px) !important;
+  }
+}
+
+/* =========================================================
+   1) KO: NAVER CAFE Banner (SAFE)
+   ========================================================= */
+.kd-cafeBanner{ margin:12px 0 !important; }
+
+.kd-cafeBanner__a{
+  min-height:var(--kd-bar-h);
+  padding:0 var(--kd-pad) 0 calc(var(--kd-pad) + 2px);
+  gap:var(--kd-gap);
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  border-radius:16px;
+  border:1px solid rgba(15,23,42,.10);
+  background:linear-gradient(180deg,#ffffff,#f7f8fb);
+  box-shadow:0 10px 24px rgba(15,23,42,.08);
+
+  text-decoration:none !important;
+  color:inherit;
+  position:relative;
+  overflow:hidden;
+
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.kd-cafeBanner__a::before{
+  content:"";
+  position:absolute;
+  inset:-1px auto -1px -1px;
+  width:6px;
+  background:linear-gradient(180deg,var(--kd-green),var(--kd-green2));
+  opacity:.9;
+}
+.kd-cafeBanner__a:hover{
+  transform:translateY(-1px);
+  box-shadow:0 16px 34px rgba(15,23,42,.12);
+  border-color:rgba(3,199,90,.26);
+}
+
+.kd-cafeBanner__left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+  flex:1 1 auto;
+  padding-left:6px;
+}
+.kd-cafeBanner__badge{
+  height:var(--kd-chip-h);
+  padding:0 12px;
+
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  border-radius:999px;
+  border:1px solid rgba(3,199,90,.22);
+  background:rgba(3,199,90,.08);
+  color:#0b7f3c;
+
+  font-weight:1000;
+  letter-spacing:.08em;
+  font-size:11px;
+  white-space:nowrap;
+  flex:0 0 auto;
+}
+.kd-cafeBanner__badge .dot{
+  width:10px;height:10px;border-radius:999px;
+  background:var(--kd-green);
+  box-shadow:0 0 0 3px rgba(3,199,90,.18);
+  flex:0 0 auto;
+}
+.kd-cafeBanner__txt{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+.kd-cafeBanner__title{
+  font-size:14px;
+  font-weight:1100;
+  color:#0b0d12;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.kd-cafeBanner__desc{
+  font-size:12px;
+  font-weight:900;
+  color:#6b7280;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.kd-cafeBanner__cta{
+  height:var(--kd-chip-h);
+  padding:0 14px;
+
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.10);
+  background:linear-gradient(135deg,var(--kd-green),var(--kd-green2));
+  color:#fff;
+
+  font-weight:1100;
+  font-size:12px;
+  white-space:nowrap;
+
+  transition:filter .12s ease, transform .12s ease;
+}
+.kd-cafeBanner__cta:hover{ filter:brightness(.98); }
+.kd-cafeBanner__cta:active{ transform:translateY(1px); }
+
+.kd-cafeBanner__cta{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+
+  height:var(--kd-chip-h);
+  padding:0 14px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.20);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0)) padding-box,
+    linear-gradient(135deg, var(--kd-green), var(--kd-green2)) border-box;
+  color:#fff;
+
+  font-weight:1100;
+  font-size:12px;
+  letter-spacing:-.01em;
+  white-space:nowrap;
+  text-decoration:none;
+
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.20) inset,
+    0 8px 18px rgba(3,199,90,.20),
+    0 2px 6px rgba(15,23,42,.10);
+
+  transition:
+    transform .18s cubic-bezier(.2,.8,.2,1),
+    box-shadow .18s cubic-bezier(.2,.8,.2,1),
+    filter .18s cubic-bezier(.2,.8,.2,1),
+    border-color .18s cubic-bezier(.2,.8,.2,1);
+}
+
+.kd-cafeBanner__cta::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:inherit;
+  background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0));
+  opacity:.9;
+  pointer-events:none;
+  z-index:-1;
+}
+
+.kd-cafeBanner__cta::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:-28%;
+  width:36%;
+  transform:skewX(-18deg);
+  background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.18), rgba(255,255,255,0));
+  opacity:0;
+  transition:
+    left .45s cubic-bezier(.2,.8,.2,1),
+    opacity .25s ease;
+  pointer-events:none;
+}
+
+.kd-cafeBanner__cta:hover{
+  transform:translateY(-1px);
+  filter:saturate(1.02) brightness(1.02);
+  border-color:rgba(255,255,255,.28);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.22) inset,
+    0 12px 24px rgba(3,199,90,.24),
+    0 4px 10px rgba(15,23,42,.12);
+}
+
+.kd-cafeBanner__cta:hover::after{
+  left:108%;
+  opacity:1;
+}
+
+.kd-cafeBanner__cta:active{
+  transform:translateY(0);
+  filter:brightness(.995);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.16) inset,
+    0 6px 14px rgba(3,199,90,.18),
+    0 2px 6px rgba(15,23,42,.10);
+}
+
+.kd-cafeBanner__cta:focus-visible{
+  outline:none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.20),
+    0 1px 0 rgba(255,255,255,.20) inset,
+    0 12px 24px rgba(3,199,90,.24),
+    0 4px 10px rgba(15,23,42,.12);
+}
+
+.kd-cafeBanner__arrow{
+  display:none !important;
+}
+
+@media (max-width:520px){
+  .kd-cafeBanner__cta{
+    height:var(--kd-chip-h-m) !important;
+    padding:0 12px !important;
+    font-size:12px !important;
+  }
+}
+
+/* Mobile: 1-line + title/CTA only */
+@media (max-width:520px){
+  .kd-cafeBanner{ margin:10px 0 !important; }
+
+  .kd-cafeBanner__a{
+    min-height:var(--kd-bar-h-m) !important;
+    padding:0 var(--kd-pad-m) 0 calc(var(--kd-pad-m) + 2px) !important;
+    gap:var(--kd-gap-m) !important;
+  }
+  .kd-cafeBanner__badge{ display:none !important; }
+  .kd-cafeBanner__desc{ display:none !important; }
+  .kd-cafeBanner__title{ font-size:13px !important; }
+
+  .kd-cafeBanner__cta{
+    height:var(--kd-chip-h-m) !important;
+    padding:0 12px !important;
+    font-size:12px !important;
+  }
+  .kd-cafeBanner__arrow{
+    width:16px !important;
+    height:16px !important;
+    font-size:11px !important;
+    line-height:16px !important;
+  }
+}
+
+/* =========================================================
+   2) COUPON BAR (tools/coupon-bar.html)
+   - label + value on one line
+   ========================================================= */
+.kd-couponbar{
+  margin:12px 0 !important;
+  display:flex;
+  justify-content:center;
+}
+
+.kd-couponbar__a{
+  width:min(980px,100%);
+  text-decoration:none !important;
+  color:inherit !important;
+}
+
+.kd-couponbar__a:hover,
+.kd-couponbar__a:focus,
+.kd-couponbar__a:active,
+.kd-couponbar__a:visited{
+  text-decoration:none !important;
+  color:inherit !important;
+}
+
+.kd-couponbar__panel{
+  min-height:var(--kd-bar-h);
+  padding:0 var(--kd-pad);
+  gap:var(--kd-gap);
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  border-radius:16px;
+  border:1px solid rgba(15,23,42,.10);
+  background:linear-gradient(180deg,#ffffff,#f7f8fb);
+  box-shadow:0 10px 24px rgba(15,23,42,.08);
+
+  position:relative;
+  overflow:hidden;
+
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+
+.kd-couponbar__panel::before{
+  content:"";
+  position:absolute;
+  inset:-1px auto -1px -1px;
+  width:6px;
+  background:linear-gradient(180deg,var(--kd-gold2),var(--kd-gold));
+  opacity:.95;
+}
+
+.kd-couponbar__a:hover .kd-couponbar__panel{
+  transform:translateY(-1px);
+  box-shadow:0 16px 34px rgba(15,23,42,.12);
+  border-color:rgba(245,158,11,.25);
+}
+
+.kd-couponbar__left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+  padding-left:6px;
+  flex:1 1 auto;
+}
+
+.kd-couponbar__dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:var(--kd-gold2);
+  box-shadow:0 0 0 3px rgba(250,204,21,.22);
+  flex:0 0 auto;
+}
+
+.kd-couponbar__title{
+  font-weight:1100;
+  color:#0b0d12;
+  font-size:14px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.kd-couponbar__grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(170px,1fr));
+  gap:10px;
+  align-items:center;
+  flex:0 0 auto;
+}
+
+.kd-couponbar__chip{
+  min-height:var(--kd-chip-h);
+  padding:0 var(--kd-chip-x);
+
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+
+  border-radius:14px;
+  border:1px solid rgba(15,23,42,.10);
+  background:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+  min-width:170px;
+}
+
+.kd-couponbar__label{
+  display:block;
+  flex:0 0 auto;
+  text-align:left;
+
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:.02em;
+  color:#6b7280;
+  text-transform:none;
+  line-height:1;
+  white-space:nowrap;
+}
+
+.kd-couponbar__val{
+  display:block;
+  flex:0 0 auto;
+  text-align:right;
+
+  font:1100 16px/1 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  letter-spacing:.02em;
+  color:#111827;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+
+.kd-couponbar__chip[data-kd-chip="next"] .kd-couponbar__val,
+.kd-couponbar [data-kd="vNext"]{
+  color:var(--kd-gold) !important;
+  text-shadow:0 0 10px var(--kd-gold-glow) !important;
+}
+
+/* Mobile: 1-line + expiry only */
+@media (max-width:520px){
+  .kd-couponbar{
+    margin:10px 0 !important;
+  }
+
+  .kd-couponbar__panel{
+    min-height:var(--kd-bar-h-m) !important;
+    padding:0 var(--kd-pad-m) 0 calc(var(--kd-pad-m) + 2px) !important;
+    gap:var(--kd-gap-m) !important;
+  }
+
+  .kd-couponbar__title{
+    font-size:13px !important;
+  }
+
+  .kd-couponbar__chip[data-kd-chip="coupons"],
+  .kd-couponbar__chip[data-kd-chip="now"]{
+    display:none !important;
+  }
+
+  .kd-couponbar__grid{
+    grid-template-columns:1fr !important;
+  }
+
+  .kd-couponbar__chip[data-kd-chip="next"]{
+    min-height:var(--kd-chip-h-m) !important;
+    height:var(--kd-chip-h-m) !important;
+    padding:0 var(--kd-chip-x-m) !important;
+
+    flex-direction:row !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:8px !important;
+
+    min-width:0 !important;
+  }
+
+  .kd-couponbar__chip[data-kd-chip="next"] .kd-couponbar__label{
+    width:auto !important;
+    text-align:left !important;
+    font-size:10px !important;
+    letter-spacing:.02em !important;
+    text-transform:none !important;
+    white-space:nowrap !important;
+  }
+
+  .kd-couponbar__chip[data-kd-chip="next"] .kd-couponbar__val{
+    width:auto !important;
+    text-align:right !important;
+    font-size:12px !important;
+    letter-spacing:.02em !important;
+    white-space:nowrap !important;
+    font-weight:1200 !important;
+  }
+}
+/* =========================================================
+   SSR HERO STRIP
+   - centered layout
+   ========================================================= */
+.community-promo-stack{
+  margin:16px 0 20px !important;
+}
+
+.community-promo-stack #naverCafeBannerMount:empty{
+  display:none !important;
+}
+
+.community-promo-stack #ssrHeroStripMount:empty{
+  display:none !important;
+}
+
+.ssr-hero-strip{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin:10px 0 0 !important;
+  padding:0;
+}
+
+.ssr-hero-strip__item{
+  position:relative;
+  width:46px;
+  height:46px;
+  flex:0 0 auto;
+  overflow:hidden;
+  border-radius:10px;
+  border:1px solid rgba(15,23,42,.10);
+  background:#111827;
+  box-shadow:0 4px 12px rgba(15,23,42,.10);
+  text-decoration:none !important;
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease, filter .12s ease;
+}
+
+.ssr-hero-strip__item:hover,
+.ssr-hero-strip__item:focus,
+.ssr-hero-strip__item:active,
+.ssr-hero-strip__item:visited{
+  text-decoration:none !important;
+  color:inherit !important;
+}
+
+.ssr-hero-strip__item:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(15,23,42,.18);
+  border-color:rgba(245,158,11,.35);
+}
+
+.ssr-hero-strip__item img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center top;
+  filter:saturate(.92) contrast(1.02);
+}
+
+.ssr-hero-strip__item.is-featured{
+  border-color:rgba(245,158,11,.65);
+  box-shadow:
+    0 0 0 1px rgba(245,158,11,.16),
+    0 8px 20px rgba(245,158,11,.18);
+}
+
+.ssr-hero-strip__item.is-featured::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:12px;
+  background:linear-gradient(180deg, rgba(250,204,21,0), rgba(245,158,11,.26));
+  pointer-events:none;
+}
+
+@media (max-width:520px){
+  .community-promo-stack{
+    margin:12px 0 18px !important;
+  }
+
+  .ssr-hero-strip{
+    gap:6px;
+    margin:8px 0 0 !important;
+    justify-content:center;
+  }
+
+  .ssr-hero-strip__item{
+    width:40px;
+    height:40px;
+    border-radius:9px;
+  }
 }

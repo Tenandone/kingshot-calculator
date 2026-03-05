@@ -3,14 +3,14 @@
 <head>
   <meta name="google-adsense-account" content="ca-pub-9189957764761115">
   <meta charset="utf-8" />
-  <script>window.__V="20260304"</script>
+  <script>window.__V="20260306"</script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KingshotData</title>
   <base href="/" />
 
   <!-- loader deps -->
-  <script src="/js/asset-loader.js?v=20260304" defer></script>
-  <script src="/js/html-loader.js?v=20260304" defer></script>
+  <script src="/js/asset-loader.js?v=20260306" defer></script>
+  <script src="/js/html-loader.js?v=20260306" defer></script>
 
   <!-- Adsense -->
   <script async
@@ -22,7 +22,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
   </script>
@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <meta name="theme-color" content="#ffffff" />
 
-  <!-- SEO / OG (✅ 기본값은 EN로 넣어두고, i18n이 덮어쓰게 유지) -->
+  <!-- SEO / OG -->
   <meta name="description"
         content="KingshotData — Game Database & Strategy Hub. Browse buildings, heroes, guides, and calculators."
         data-i18n-attr="content:meta.description">
@@ -40,31 +40,28 @@
         content="KingshotData — Game Database & Strategy Hub. Browse buildings, heroes, guides, and calculators."
         data-i18n-attr="content:og.description">
 
-  <!-- ✅ OG IMAGE -->
-  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png?v=20260304">
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png?v=20260306">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
-  <!-- ✅ URL/CANONICAL (기본값은 루트, 아래 SEO sync 스크립트가 언어/경로에 맞게 자동 갱신) -->
   <meta property="og:url" content="https://kingshotdata.kr">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://kingshotdata.kr">
 
-  <!-- ✅ Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png?v=20260304">
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png?v=20260306">
 
-  <link rel="preload" as="image" href="/img/logo-kingshotdata.png?v=202509131858" />
+  <link rel="preload" as="image" href="/img/logo-kingshotdata.png?v=20260306" />
 
-  <!-- CSS (theme-test.css is ALWAYS last) -->
-  <link rel="stylesheet" href="/css/common.css?v=202509131858">
-  <link rel="stylesheet" href="/css/category.css?v=202509131858">
-  <link rel="stylesheet" href="/css/database.css?v=202509131858">
-  <link rel="stylesheet" href="/css/mobile-patch.css?v=202509131858">
-  <link rel="stylesheet" href="/css/header.css?v=202509131858">
-  <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
-  <link rel="stylesheet" href="/css/sponsor.css?v=202509131858">
-  <link rel="stylesheet" href="/css/theme-test.css?v=20260304">
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/common.css?v=20260306">
+  <link rel="stylesheet" href="/css/category.css?v=20260306">
+  <link rel="stylesheet" href="/css/database.css?v=20260306">
+  <link rel="stylesheet" href="/css/mobile-patch.css?v=20260306">
+  <link rel="stylesheet" href="/css/header.css?v=20260306">
+  <link rel="stylesheet" href="/css/footer-tools.css?v=20260306">
+  <link rel="stylesheet" href="/css/sponsor.css?v=20260306">
+  <link rel="stylesheet" href="/css/theme-test.css?v=20260306">
 
   <!-- GitHub Pages SPA Fallback -->
   <script>
@@ -73,7 +70,9 @@
       var p = params.get('p');
       if (p) {
         var rest = [];
-        params.forEach(function (v, k) { if (k !== 'p') rest.push(k + '=' + encodeURIComponent(v)); });
+        params.forEach(function (v, k) {
+          if (k !== 'p') rest.push(k + '=' + encodeURIComponent(v));
+        });
         var newUrl = p + (rest.length ? (p.indexOf('?') >= 0 ? '&' : '?') + rest.join('&') : '');
         history.replaceState(null, '', newUrl);
       }
@@ -81,13 +80,8 @@
   </script>
 
   <!-- i18n -->
-  <script src="/js/i18n.js?v=202509131858"></script>
+  <script src="/js/i18n.js?v=20260306"></script>
   <script>
-    // =========================================================
-    // ✅ KD_LANG — SINGLE SOURCE OF TRUTH (유지보수 통일 규칙)
-    // - 언어 정규화/선택/저장/URL반영 + "i18n:changed" 브로드캐스트
-    // - 커스텀 위젯은 document.addEventListener('i18n:changed', ...)만 듣고 갱신
-    // =========================================================
     (function(){
       function normalizeLang(code){
         var low = String(code || '').trim().toLowerCase();
@@ -95,13 +89,11 @@
         if (low === 'en') return 'en';
         if (low === 'ja') return 'ja';
         if (low === 'tw' || low === 'zh-tw' || low === 'zh_tw') return 'zh-TW';
-        // CN은 사이트에서 제거했으니 들어오면 EN으로 폴백만 (안전장치)
         if (low === 'cn' || low === 'zh-cn' || low === 'zh_cn') return 'en';
         return 'en';
       }
 
       function broadcastChanged(){
-        // ✅ 모든 커스텀 위젯/컴포넌트가 이 이벤트 하나만 구독하면 됨
         try { document.dispatchEvent(new CustomEvent('i18n:changed')); } catch(_){}
         try { document.dispatchEvent(new Event('i18n:changed')); } catch(_){}
       }
@@ -122,19 +114,18 @@
         opts = opts || {};
         lang = normalizeLang(lang);
 
-        // 1) i18n 엔진 적용
         if (window.I18N && typeof window.I18N.setLang === 'function') {
           await window.I18N.setLang(lang);
         }
 
-        // 2) DOM/스토리지/URL 반영
         setHtmlLang(lang);
+
         if (!opts.noStore) {
           try { localStorage.setItem('lang', lang); } catch(_){}
         }
+
         if (!opts.noUrl) setUrlParamLang(lang);
 
-        // 3) SEO Sync + Broadcast
         try { window.KD_SEO_SYNC && window.KD_SEO_SYNC(); } catch(_){}
         broadcastChanged();
 
@@ -144,7 +135,9 @@
       function init(){
         var sp = new URLSearchParams(location.search);
         var urlLangRaw = sp.get('lang');
-        var savedRaw = null; try { savedRaw = localStorage.getItem('lang'); } catch(_){}
+        var savedRaw = null;
+
+        try { savedRaw = localStorage.getItem('lang'); } catch(_){}
 
         var initial = normalizeLang(urlLangRaw || savedRaw || 'en');
         setHtmlLang(initial);
@@ -153,28 +146,24 @@
           window.I18N.init({ lang: initial, supported: ['ko','en','ja','zh-TW'] });
         }
 
-        // URL lang가 이상한 형태면 normalize된 값으로 정리
         try{
           if (urlLangRaw && normalizeLang(urlLangRaw) !== urlLangRaw) {
             setUrlParamLang(initial);
           }
         }catch(_){}
 
-        // 스토리지 값도 정규화
         try{
           if (savedRaw && normalizeLang(savedRaw) !== savedRaw) {
             localStorage.setItem('lang', initial);
           }
         }catch(_){}
 
-        // ✅ 최초 로딩에서도 커스텀 위젯 즉시 갱신
         try { window.KD_SEO_SYNC && window.KD_SEO_SYNC(); } catch(_){}
         broadcastChanged();
 
         return initial;
       }
 
-      // 전역 API (유지보수 통일 규칙)
       window.KD_LANG = {
         normalize: normalizeLang,
         init: init,
@@ -183,24 +172,23 @@
       };
     })();
 
-    // 기존 코드 호환: normalizeLang / applyLang 유지
     function normalizeLang(code){
-      return (window.KD_LANG && window.KD_LANG.normalize) ? window.KD_LANG.normalize(code) : 'en';
+      return (window.KD_LANG && window.KD_LANG.normalize)
+        ? window.KD_LANG.normalize(code)
+        : 'en';
     }
 
     (function () {
-      // KD_LANG.init에서 I18N.init + 이벤트 브로드캐스트까지 처리
       window.KD_LANG && window.KD_LANG.init && window.KD_LANG.init();
     })();
 
     async function applyLang(lang){
-      // 통일 규칙: 언어 변경은 KD_LANG.set 하나로 끝
       if (window.KD_LANG && window.KD_LANG.set) return window.KD_LANG.set(lang);
       return normalizeLang(lang);
     }
   </script>
 
-  <!-- ✅ SEO HEAD SYNC (canonical / og:url / hreflang) — EN is x-default -->
+  <!-- SEO HEAD SYNC -->
   <script>
     (function(){
       var ORIGIN = 'https://kingshotdata.kr';
@@ -213,15 +201,20 @@
         if (l === 'ko' || l === 'en' || l === 'ja') return l;
         return 'en';
       }
+
       function getLangPath(){
         var htmlLang = document.documentElement.getAttribute('lang') || 'en';
         return langToPath(htmlLang);
       }
+
       function stripLangPrefix(pathname){
         return pathname.replace(/^\/(en|ja|zh-tw)(\/|$)/i, '/');
       }
+
       function buildUrlFor(langPath, basePath, search){
-        var p = (langPath === 'ko') ? basePath : ('/' + langPath + basePath.replace(/^\//,'/'));
+        var p = (langPath === 'ko')
+          ? basePath
+          : ('/' + langPath + basePath.replace(/^\//, '/'));
         p = p.replace(/\/{2,}/g, '/');
         return ORIGIN + p + (search || '');
       }
@@ -234,9 +227,12 @@
           el.setAttribute('rel', rel);
           document.head.appendChild(el);
         }
-        Object.keys(attrs).forEach(function(k){ el.setAttribute(k, attrs[k]); });
+        Object.keys(attrs).forEach(function(k){
+          el.setAttribute(k, attrs[k]);
+        });
         return el;
       }
+
       function upsertMeta(propOrName, key, value){
         var sel = propOrName + '="' + key + '"';
         var el = document.querySelector('meta[' + sel + ']');
@@ -251,14 +247,17 @@
 
       function clearHreflang(){
         var nodes = document.querySelectorAll('link[rel="alternate"][hreflang][data-kd-hreflang="1"]');
-        nodes.forEach(function(n){ n.parentNode && n.parentNode.removeChild(n); });
+        nodes.forEach(function(n){
+          if (n.parentNode) n.parentNode.removeChild(n);
+        });
       }
+
       function addHreflang(hreflang, href){
         var el = document.createElement('link');
-        el.setAttribute('rel','alternate');
+        el.setAttribute('rel', 'alternate');
         el.setAttribute('hreflang', hreflang);
         el.setAttribute('href', href);
-        el.setAttribute('data-kd-hreflang','1');
+        el.setAttribute('data-kd-hreflang', '1');
         document.head.appendChild(el);
       }
 
@@ -269,25 +268,40 @@
 
         var canonical = buildUrlFor(curLangPath, basePath, search);
         upsertLink('canonical', { href: canonical });
-        upsertMeta('property','og:url', canonical);
+        upsertMeta('property', 'og:url', canonical);
 
         clearHreflang();
         addHreflang('x-default', buildUrlFor('en', basePath, search));
-        addHreflang('ko',    buildUrlFor('ko',    basePath, search));
-        addHreflang('en',    buildUrlFor('en',    basePath, search));
-        addHreflang('ja',    buildUrlFor('ja',    basePath, search));
+        addHreflang('ko', buildUrlFor('ko', basePath, search));
+        addHreflang('en', buildUrlFor('en', basePath, search));
+        addHreflang('ja', buildUrlFor('ja', basePath, search));
         addHreflang('zh-TW', buildUrlFor('zh-tw', basePath, search));
       }
 
       window.KD_SEO_SYNC = sync;
 
       try { sync(); } catch(_) {}
+
       (function(){
         var _ps = history.pushState;
         var _rs = history.replaceState;
-        function after(){ try { sync(); } catch(_) {} }
-        history.pushState = function(){ var r=_ps.apply(this, arguments); after(); return r; };
-        history.replaceState = function(){ var r=_rs.apply(this, arguments); after(); return r; };
+
+        function after(){
+          try { sync(); } catch(_) {}
+        }
+
+        history.pushState = function(){
+          var r = _ps.apply(this, arguments);
+          after();
+          return r;
+        };
+
+        history.replaceState = function(){
+          var r = _rs.apply(this, arguments);
+          after();
+          return r;
+        };
+
         window.addEventListener('popstate', after);
         document.addEventListener('i18n:changed', after);
       })();
@@ -295,30 +309,73 @@
   </script>
 
   <!-- app -->
-  <script defer src="/js/routes.js?v=202509131858"></script>
-  <script defer src="/js/app.js?v=202509131858"></script>
-  <script defer src="/js/footer-tools.js?v=202509131858"></script>
+  <script defer src="/js/routes.js?v=20260306"></script>
+  <script defer src="/js/app.js?v=20260306"></script>
+  <script defer src="/js/footer-tools.js?v=20260306"></script>
+  <script defer src="/js/naver-banner.js?v=20260306"></script>
+  <script defer src="/js/coupon-bar.js?v=20260306"></script>
+  <script defer src="/js/ssr-hero-strip.js?v=20260306"></script>
 
   <style>
     html, body { overflow-x: hidden; }
 
     .brand.brand-pro{
-      display:flex; align-items:center; gap:10px; min-width:0;
-      color:#111827; text-decoration:none; font-weight:900; letter-spacing:.1px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      color:#111827;
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
       -webkit-tap-highlight-color: transparent;
     }
-    .brand.brand-pro .brand-logo{ width:28px; height:28px; border-radius:8px; display:block; flex:0 0 auto; }
-    .brand.brand-pro .brand-text{ display:flex; flex-direction:column; gap:2px; line-height:1.1; min-width:0; }
+
+    .brand.brand-pro .brand-logo{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+      display:block;
+      flex:0 0 auto;
+    }
+
+    .brand.brand-pro .brand-text{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      line-height:1.1;
+      min-width:0;
+    }
+
     .brand.brand-pro .brand-title,
-    .brand.brand-pro .brand-sub{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .brand.brand-pro .brand-title{ font-size:16px; font-weight:900; }
-    .brand.brand-pro .brand-sub{ font-size:12px; color:#6b7280; }
+    .brand.brand-pro .brand-sub{
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .brand.brand-pro .brand-title{
+      font-size:16px;
+      font-weight:900;
+    }
+
+    .brand.brand-pro .brand-sub{
+      font-size:12px;
+      color:#6b7280;
+    }
+
     @media (max-width: 520px){
       .brand.brand-pro .brand-title{ font-size:14px; }
       .brand.brand-pro .brand-sub{ display:none; }
     }
 
-    .lang-pills{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .lang-pills{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
     .lang-pill{
       -webkit-tap-highlight-color: transparent;
       appearance:none;
@@ -332,107 +389,32 @@
       white-space:nowrap;
       user-select:none;
     }
+
     .lang-pill:hover{ color:#111827; }
     .lang-pill[aria-current="true"]{ color:#111827; font-weight:900; }
+
     .lang-pills--drawer{
       display:grid;
       grid-template-columns:repeat(2, minmax(0,1fr));
       gap:8px;
       margin-top:2px;
     }
+
     .lang-pills--drawer .lang-pill{
       width:100%;
       display:flex;
       justify-content:center;
     }
 
-    /* ================================
-       CLOCK BAR — LIGHT CARD (final)
-    ================================ */
-    .kboard{ display:flex; justify-content:center; margin:14px 0 14px; }
-    .kboard a{ text-decoration:none; width:min(920px,100%); }
-    .kpanel{
-      border-radius:18px;
-      border:1px solid rgba(15,23,42,.10);
-      background: linear-gradient(180deg,#ffffff,#f7f8fb);
-      box-shadow: 0 10px 24px rgba(15,23,42,.08);
-      padding: 12px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-    }
-    .kboard a:hover .kpanel{
-      transform: translateY(-1px);
-      box-shadow: 0 16px 34px rgba(15,23,42,.12);
-      border-color: rgba(11,87,208,.18);
-    }
-    .kleft{display:flex;align-items:center;gap:10px;min-width:0}
-    .kdot{
-      width:10px;height:10px;border-radius:99px;flex:0 0 auto;
-      background: rgba(250,204,21,.95);
-      box-shadow: 0 0 0 3px rgba(250,204,21,.22);
-    }
-    .ktitle{font-weight:1100;letter-spacing:.1px;color:#0b0d12;white-space:nowrap}
-    .ksub{display:none}
-    .kgrid{
-      display:grid;
-      grid-template-columns: repeat(3, auto);
-      gap:10px;
-      align-items:center;
-      flex:0 0 auto;
-    }
-    .kchip{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-      align-items:flex-start;
-      padding: 8px 10px;
-      border-radius:14px;
-      border:1px solid rgba(15,23,42,.10);
-      background:#ffffff;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
-      min-width: 150px;
-    }
-    .klabel{
-      font-size:11px;
-      letter-spacing:.12em;
-      font-weight:1000;
-      color:#6b7280;
-      text-transform:uppercase;
-    }
-    .kval{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
-      font-weight:1100;
-      letter-spacing:.10em;
-      color:#111827;
-      font-size: 16px;
-      line-height:1.1;
-      font-variant-numeric: tabular-nums;
-    }
-    .kval--accent{
-      color: rgba(234,179,8,1);
-      text-shadow: 0 0 10px rgba(234,179,8,.18);
-    }
-    @media (max-width: 860px){
-      .kpanel{ flex-direction:column; align-items:flex-start; }
-      .kgrid{ width:100%; grid-template-columns: 1fr; }
-      .kchip{ width:100%; min-width: 0; }
-      .kval{ font-size: 18px; }
+    #mobileDrawer.drawer{
+      width:min(45vw, 460px) !important;
+      max-width:min(45vw, 460px) !important;
     }
 
-    /* ================================
-       Drawer: 45% width + center align
-    ================================ */
-    #mobileDrawer.drawer{
-      width: min(45vw, 460px) !important;
-      max-width: min(45vw, 460px) !important;
-    }
     @media (max-width: 520px){
       #mobileDrawer.drawer{
-        width: 45vw !important;
-        max-width: 45vw !important;
+        width:45vw !important;
+        max-width:45vw !important;
       }
     }
 
@@ -447,6 +429,7 @@
       align-items:center !important;
       text-align:center !important;
     }
+
     #mobileDrawer .nav-list a{
       width:100%;
       text-align:center !important;
@@ -459,24 +442,30 @@
       gap:12px;
       padding-top:12px;
     }
+
     .drawer-sponsor-card{
       width:min(320px, 100%);
       display:flex;
       justify-content:center;
       text-decoration:none;
     }
+
     .drawer-sponsor-card img{
       display:block;
       max-width:100%;
       height:auto;
       object-fit:contain;
     }
+
     .drawer-dotrule{
       width:min(340px, 100%);
       border-top:1px dashed rgba(15,23,42,.18);
-      margin: 6px auto 2px;
+      margin:6px auto 2px;
     }
-    #mobileDrawer .sec-label[data-i18n="drawer.other"]{ display:none !important; }
+
+    #mobileDrawer .sec-label[data-i18n="drawer.other"]{
+      display:none !important;
+    }
   </style>
 </head>
 
@@ -488,7 +477,7 @@
         <a class="brand brand-pro" href="/home"
            aria-label="KingshotData Home"
            data-i18n-attr="aria-label:aria.home">
-          <img class="brand-logo" src="/img/kingshotdata-logo.png?v=20260301"
+          <img class="brand-logo" src="/img/kingshotdata-logo.png?v=20260306"
                alt="Kingshot Data" width="28" height="28" decoding="async" fetchpriority="high">
           <span class="brand-text">
             <span class="brand-title">Kingshot Data</span>
@@ -499,12 +488,12 @@
         <nav class="nav" id="primaryNav" role="navigation"
              aria-label="Primary"
              data-i18n-attr="aria-label:aria.primaryNav">
-          <a href="/buildings"  data-link data-i18n="nav.buildings">건물</a>
-          <a href="/heroes"     data-link data-i18n="nav.heroes">영웅</a>
-          <a href="/database"   data-link data-i18n="nav.database">데이터베이스</a>
-          <a href="/guides"     data-link data-i18n="nav.guides">가이드</a>
+          <a href="/buildings" data-link data-i18n="nav.buildings">건물</a>
+          <a href="/heroes" data-link data-i18n="nav.heroes">영웅</a>
+          <a href="/database" data-link data-i18n="nav.database">데이터베이스</a>
+          <a href="/guides" data-link data-i18n="nav.guides">가이드</a>
           <a href="/calculator" data-link data-i18n="nav.calculators">계산기</a>
-          <a href="/about"      data-link data-i18n="nav.about">소개</a>
+          <a href="/about" data-link data-i18n="nav.about">소개</a>
         </nav>
       </div>
 
@@ -542,10 +531,10 @@
       <div class="nav-list" role="navigation"
            aria-label="Drawer navigation"
            data-i18n-attr="aria-label:aria.drawerNav">
-        <a href="/buildings"  data-link data-i18n="nav.buildings">건물</a>
-        <a href="/heroes"     data-link data-i18n="nav.heroes">영웅</a>
-        <a href="/database"   data-link data-i18n="nav.database">데이터베이스</a>
-        <a href="/guides"     data-link data-i18n="nav.guides">가이드</a>
+        <a href="/buildings" data-link data-i18n="nav.buildings">건물</a>
+        <a href="/heroes" data-link data-i18n="nav.heroes">영웅</a>
+        <a href="/database" data-link data-i18n="nav.database">데이터베이스</a>
+        <a href="/guides" data-link data-i18n="nav.guides">가이드</a>
         <a href="/calculator" data-link data-i18n="nav.calculators">계산기</a>
       </div>
 
@@ -576,40 +565,17 @@
         aria-label="Main content"
         data-i18n-attr="aria-label:aria.main">
 
-    <!-- ✅ ONE DOM CLOCK (light card) -->
-    <section id="liveBar" class="kboard" aria-label="Coupon clock" hidden>
-      <a id="kbGo" href="/tools/coupon-countdown.html" data-router-ignore="true" aria-label="Open coupon countdown">
-        <div class="kpanel">
-          <div class="kleft">
-            <span class="kdot" aria-hidden="true"></span>
-            <div style="min-width:0">
-              <div class="ktitle" id="kbTitle">—</div>
-              <div class="ksub" id="kbSub"></div>
-            </div>
-          </div>
-
-          <div class="kgrid">
-            <div class="kchip">
-              <div class="klabel" id="kbLCoupons">—</div>
-              <div class="kval" id="kbCoupons">—</div>
-            </div>
-            <div class="kchip">
-              <div class="klabel" id="kbLNext">—</div>
-              <div class="kval kval--accent" id="kbNext">—</div>
-            </div>
-            <div class="kchip">
-              <div class="klabel" id="kbLNow">—</div>
-              <div class="kval" id="kbNow">—</div>
-            </div>
-          </div>
-        </div>
-      </a>
-    </section>
+    <div id="couponBarMount"></div>
 
     <div id="content" class="panel">
       <noscript data-nosnippet data-i18n="misc.enableJs">
         자바스크립트를 활성화하세요. 콘텐츠가 표시됩니다.
       </noscript>
+    </div>
+
+    <div class="community-promo-stack">
+      <div id="naverCafeBannerMount"></div>
+      <div id="ssrHeroStripMount"></div>
     </div>
   </main>
 
@@ -633,257 +599,102 @@
     </div>
   </footer>
 
-  <!-- drawer toggle (unchanged) -->
+  <!-- drawer toggle -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const html = document.documentElement, body = document.body;
-      const drawer = document.getElementById('mobileDrawer');
-      const backdrop = document.getElementById('backdrop');
-      const btnOpen = document.getElementById('menuToggle');
-      const btnClose = document.getElementById('btnClose');
+    document.addEventListener('DOMContentLoaded', function () {
+      var html = document.documentElement;
+      var body = document.body;
+      var drawer = document.getElementById('mobileDrawer');
+      var backdrop = document.getElementById('backdrop');
+      var btnOpen = document.getElementById('menuToggle');
+      var btnClose = document.getElementById('btnClose');
 
       function openDrawer(){
         html.classList.add('is-open');
         body.classList.add('no-scroll');
         backdrop.hidden = false;
-        drawer.setAttribute('aria-hidden','false');
-        btnOpen?.setAttribute('aria-expanded','true');
-        btnClose?.focus();
+        drawer.setAttribute('aria-hidden', 'false');
+        if (btnOpen) btnOpen.setAttribute('aria-expanded', 'true');
+        if (btnClose) btnClose.focus();
       }
+
       function closeDrawer(){
         html.classList.remove('is-open');
         body.classList.remove('no-scroll');
         backdrop.hidden = true;
-        drawer.setAttribute('aria-hidden','true');
-        btnOpen?.setAttribute('aria-expanded','false');
-        btnOpen?.focus();
+        drawer.setAttribute('aria-hidden', 'true');
+        if (btnOpen) btnOpen.setAttribute('aria-expanded', 'false');
+        if (btnOpen) btnOpen.focus();
       }
 
-      btnOpen?.addEventListener('click', openDrawer);
-      btnClose?.addEventListener('click', closeDrawer);
-      backdrop?.addEventListener('click', closeDrawer);
-      window.addEventListener('keydown', e => { if(e.key === 'Escape') closeDrawer(); });
-      drawer.querySelectorAll('a[data-link]')?.forEach(a => a.addEventListener('click', closeDrawer));
+      if (btnOpen) btnOpen.addEventListener('click', openDrawer);
+      if (btnClose) btnClose.addEventListener('click', closeDrawer);
+      if (backdrop) backdrop.addEventListener('click', closeDrawer);
+
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeDrawer();
+      });
+
+      var links = drawer ? drawer.querySelectorAll('a[data-link]') : [];
+      Array.prototype.forEach.call(links, function(a){
+        a.addEventListener('click', closeDrawer);
+      });
     });
   </script>
 
-  <!-- language pills (unchanged) -->
+  <!-- language pills -->
   <script>
     (function(){
-      const LANGS = [
-        {code:'en',    label:'EN'},
-        {code:'ko',    label:'KO'},
-        {code:'ja',    label:'JA'},
-        {code:'zh-TW', label:'TW'},
+      var LANGS = [
+        { code:'en', label:'EN' },
+        { code:'ko', label:'KO' },
+        { code:'ja', label:'JA' },
+        { code:'zh-TW', label:'TW' }
       ];
 
       function getCurrentLang(){
-        return normalizeLang(window.I18N?.current || document.documentElement.getAttribute('lang') || 'en');
+        return normalizeLang(
+          (window.I18N && window.I18N.current) ||
+          document.documentElement.getAttribute('lang') ||
+          'en'
+        );
       }
+
       function render(root){
         if (!root) return;
-        const cur = getCurrentLang();
-        root.innerHTML = LANGS.map(l => (
-          '<button type="button" class="lang-pill" data-lang="' + l.code + '" aria-current="' + (l.code===cur ? 'true':'false') + '">' +
-            l.label +
-          '</button>'
-        )).join('');
+        var cur = getCurrentLang();
+        root.innerHTML = LANGS.map(function(l){
+          return ''
+            + '<button type="button" class="lang-pill" data-lang="' + l.code + '" aria-current="' + (l.code === cur ? 'true' : 'false') + '">'
+            +   l.label
+            + '</button>';
+        }).join('');
       }
+
       async function onClick(e){
-        const btn = e.target.closest && e.target.closest('.lang-pill[data-lang]');
+        var btn = e.target.closest && e.target.closest('.lang-pill[data-lang]');
         if (!btn) return;
         e.preventDefault();
         await applyLang(btn.getAttribute('data-lang'));
         syncAll();
       }
+
       function syncAll(){
         render(document.getElementById('langDropdownHeader'));
         render(document.getElementById('langDropdownDrawer'));
       }
 
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener('DOMContentLoaded', function () {
         syncAll();
-        const h = document.getElementById('langDropdownHeader');
-        const d = document.getElementById('langDropdownDrawer');
-        h && h.addEventListener('click', onClick);
-        d && d.addEventListener('click', onClick);
+
+        var h = document.getElementById('langDropdownHeader');
+        var d = document.getElementById('langDropdownDrawer');
+
+        if (h) h.addEventListener('click', onClick);
+        if (d) d.addEventListener('click', onClick);
+
         document.addEventListener('i18n:changed', syncAll);
       });
-    })();
-  </script>
-
-  <!-- ✅ ONE DOM clock script -->
-  <script>
-    (function(){
-      const els = {
-        bar: document.getElementById('liveBar'),
-        go: document.getElementById('kbGo'),
-
-        title: document.getElementById('kbTitle'),
-        sub: document.getElementById('kbSub'),
-        lCoupons: document.getElementById('kbLCoupons'),
-        lNext: document.getElementById('kbLNext'),
-        lNow: document.getElementById('kbLNow'),
-
-        vCoupons: document.getElementById('kbCoupons'),
-        vNext: document.getElementById('kbNext'),
-        vNow: document.getElementById('kbNow'),
-      };
-
-      let targetNextMs = null;
-      let tickTimer = null;
-      let cachedCount = 0;
-
-      const TXT = {
-        ko: { title:"킹샷 쿠폰 타이머", coupons:"쿠폰", next:"만료까지", now:"현재시간", suffix:"개 활성" },
-        en: { title:"Kingshot Coupon Timer", coupons:"Coupons", next:"To expiry", now:"Now", suffix:"active" },
-        ja: { title:"キングショット クーポンタイマー", coupons:"クーポン", next:"期限まで", now:"現在", suffix:"件 有効" },
-        "zh-TW": { title:"Kingshot 優惠碼倒數", coupons:"優惠碼", next:"距到期", now:"目前時間", suffix:"個可用" }
-      };
-
-      function curLang(){
-        const l = (document.documentElement.getAttribute('lang') || 'en').trim();
-        if (l === 'ko' || l === 'en' || l === 'ja' || l === 'zh-TW') return l;
-        const low = l.toLowerCase();
-        if (low === 'zh-tw' || low === 'tw') return 'zh-TW';
-        return 'en';
-      }
-      function t(k){
-        const l = curLang();
-        return (TXT[l] && TXT[l][k]) || (TXT.en && TXT.en[k]) || k;
-      }
-
-      function safeStr(v){ return (v==null ? "" : String(v)); }
-
-      function parseExpiryMs(c){
-        const iso = safeStr(c && c.expiresAt).trim();
-        if(iso){
-          const t = Date.parse(iso);
-          if(Number.isFinite(t)) return t;
-        }
-        const until = safeStr(c && c.until).trim();
-        if(until){
-          const parts = until.split("-");
-          if(parts.length===3){
-            const y=parts[0];
-            const m=String(parts[1]).padStart(2,"0");
-            const d=String(parts[2]).padStart(2,"0");
-            const t = Date.parse(`${y}-${m}-${d}T00:00:00Z`);
-            if(Number.isFinite(t)) return t;
-          }
-        }
-        return null;
-      }
-
-      function isActive(c, nowMs){
-        const exp = parseExpiryMs(c);
-        if(exp == null) return false;
-        if(nowMs >= exp) return false;
-
-        const st = safeStr(c && c.startAt).trim();
-        if(st){
-          const stMs = Date.parse(st);
-          if(Number.isFinite(stMs) && nowMs < stMs) return false;
-        }
-        return true;
-      }
-
-      function fmt2(n){ return String(n).padStart(2,'0'); }
-      function clockNow(dt){ return `${fmt2(dt.getHours())}:${fmt2(dt.getMinutes())}:${fmt2(dt.getSeconds())}`; }
-      function countdown(ms){
-        let sec = Math.max(0, Math.floor(ms / 1000));
-        const d = Math.floor(sec / 86400); sec %= 86400;
-        const h = Math.floor(sec / 3600);  sec %= 3600;
-        const m = Math.floor(sec / 60);    sec %= 60;
-        if (d > 0) return `${d}d ${fmt2(h)}:${fmt2(m)}:${fmt2(sec)}`;
-        return `${fmt2(h)}:${fmt2(m)}:${fmt2(sec)}`;
-      }
-
-      async function loadCoupons(){
-        const url = '/data/coupons.json?v=' + Date.now();
-        const res = await fetch(url, { cache:'no-store' });
-        if(!res.ok) throw new Error('HTTP ' + res.status);
-        const data = await res.json();
-        return Array.isArray(data?.coupons) ? data.coupons : (Array.isArray(data) ? data : []);
-      }
-
-      function computeNextExpiry(active){
-        let min = null;
-        for(const c of active){
-          const ms = parseExpiryMs(c);
-          if(ms == null) continue;
-          if(min === null || ms < min) min = ms;
-        }
-        return min;
-      }
-
-      function applyText(){
-        if(els.title) els.title.textContent = t('title');
-        if(els.sub) els.sub.textContent = '';
-        if(els.lCoupons) els.lCoupons.textContent = t('coupons');
-        if(els.lNext) els.lNext.textContent = t('next');
-        if(els.lNow) els.lNow.textContent = t('now');
-      }
-
-      function renderCount(){
-        if(!els.vCoupons) return;
-        const l = curLang();
-        const sfx = t('suffix');
-        els.vCoupons.textContent = (l === 'en') ? `${cachedCount} ${sfx}` : `${cachedCount}${sfx}`;
-      }
-
-      function syncLink(){
-        const l = curLang();
-        const url = `/tools/coupon-countdown.html?lang=${encodeURIComponent(l)}`;
-        if(els.go) els.go.href = url;
-      }
-
-      function tick(){
-        const now = new Date();
-        if(els.vNow) els.vNow.textContent = clockNow(now);
-
-        if(els.vNext){
-          if(!targetNextMs) els.vNext.textContent = '—';
-          else {
-            const diff = targetNextMs - Date.now();
-            els.vNext.textContent = (diff <= 0) ? '00:00:00' : countdown(diff);
-          }
-        }
-      }
-
-      async function init(){
-        try{
-          applyText();
-          syncLink();
-
-          const list = await loadCoupons();
-          const nowMs = Date.now();
-          const active = list.filter(c => c?.code && isActive(c, nowMs));
-
-          cachedCount = active.length;
-          renderCount();
-
-          targetNextMs = computeNextExpiry(active);
-
-          if(tickTimer) clearInterval(tickTimer);
-          tick();
-          tickTimer = setInterval(tick, 1000);
-
-          if(els.bar) els.bar.hidden = false;
-
-          document.addEventListener('i18n:changed', () => {
-            applyText();
-            renderCount();
-            syncLink();
-          });
-
-        }catch(_e){
-          if(els.bar) els.bar.hidden = true;
-          if(tickTimer) clearInterval(tickTimer);
-        }
-      }
-
-      document.addEventListener('DOMContentLoaded', init);
     })();
   </script>
 </body>

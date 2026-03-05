@@ -1,0 +1,228 @@
+<!-- /tools/coupon-bar.html (MOUNT PARTIAL ONLY) — FULL FINAL -->
+<section class="kd-couponbar" aria-label="Coupon clock" hidden data-kd-couponbar="1">
+  <a class="kd-couponbar__a" href="/tools/coupon-countdown.html" data-router-ignore="true" aria-label="Open coupon countdown">
+    <div class="kd-couponbar__panel">
+      <div class="kd-couponbar__left">
+        <span class="kd-couponbar__dot" aria-hidden="true"></span>
+        <div class="kd-couponbar__title" data-kd="title">—</div>
+      </div>
+
+      <div class="kd-couponbar__grid">
+        <div class="kd-couponbar__chip" data-kd-chip="coupons">
+          <div class="kd-couponbar__label" data-kd="lCoupons">—</div>
+          <div class="kd-couponbar__val" data-kd="vCoupons">—</div>
+        </div>
+
+        <div class="kd-couponbar__chip" data-kd-chip="next">
+          <div class="kd-couponbar__label" data-kd="lNext">—</div>
+          <div class="kd-couponbar__val" data-kd="vNext">—</div>
+        </div>
+
+        <div class="kd-couponbar__chip" data-kd-chip="now">
+          <div class="kd-couponbar__label" data-kd="lNow">—</div>
+          <div class="kd-couponbar__val" data-kd="vNow">—</div>
+        </div>
+      </div>
+    </div>
+  </a>
+</section>
+
+<script>
+(function(){
+  'use strict';
+
+  // =========================================================
+  // KD CouponBar — Mount-safe (NO id), SPA-safe, refresh-safe
+  // Fix:
+  //  - previousElementSibling 의존 제거 (html-loader/SPA에서 깨짐)
+  //  - script 기준으로 "가장 가까운 쿠폰바"를 안전하게 찾음
+  //  - i18n:changed 시 refresh()로 즉시 반영 (새로고침 필요 없음)
+  // =========================================================
+
+  var script = document.currentScript;
+  if (!script) return;
+
+  // 1) root 찾기: (a) 바로 앞 section이 맞으면 사용, (b) 아니면 같은 부모/근처에서 탐색
+  var root = script.previousElementSibling;
+  if (!root || !root.matches || !root.matches('[data-kd-couponbar="1"]')) {
+    // 같은 부모 안에서 찾기
+    if (script.parentElement && script.parentElement.querySelector) {
+      root = script.parentElement.querySelector('[data-kd-couponbar="1"]');
+    }
+  }
+  // 그래도 없으면, 상위로 조금 올라가서 찾기(최후 보험)
+  if (!root) {
+    var p = script.parentElement;
+    for (var up=0; up<3 && p; up++){
+      if (p.querySelector) {
+        var found = p.querySelector('[data-kd-couponbar="1"]');
+        if (found) { root = found; break; }
+      }
+      p = p.parentElement;
+    }
+  }
+  if (!root) return;
+
+  // 2) 중복 init 방지
+  if (root.dataset.kdCouponbarInit === '1') return;
+  root.dataset.kdCouponbarInit = '1';
+
+  // 3) mount 내부에서만 query (id 충돌 제거)
+  function q(sel){ return root.querySelector(sel); }
+
+  var els = {
+    bar: root,
+    go: q('.kd-couponbar__a'),
+    title: q('[data-kd="title"]'),
+    lCoupons: q('[data-kd="lCoupons"]'),
+    lNext: q('[data-kd="lNext"]'),
+    lNow: q('[data-kd="lNow"]'),
+    vCoupons: q('[data-kd="vCoupons"]'),
+    vNext: q('[data-kd="vNext"]'),
+    vNow: q('[data-kd="vNow"]'),
+    chipCoupons: q('[data-kd-chip="coupons"]'),
+    chipNext: q('[data-kd-chip="next"]'),
+    chipNow: q('[data-kd-chip="now"]')
+  };
+
+  var tickTimer = null;
+  var targetNextMs = null;
+  var cachedCount = 0;
+
+  var TXT = {
+    ko:{ title:"킹샷 쿠폰 타이머", coupons:"쿠폰", next:"만료까지", now:"현재시간", suffix:"개 활성" },
+    en:{ title:"Kingshot Coupon Timer", coupons:"Coupons", next:"To expiry", now:"Now", suffix:"active" },
+    ja:{ title:"キングショット クーポンタイマー", coupons:"クーポン", next:"期限まで", now:"現在", suffix:"件 有効" },
+    "zh-TW":{ title:"Kingshot 優惠碼倒數", coupons:"優惠碼", next:"距到期", now:"目前時間", suffix:"個可用" }
+  };
+
+  function curLang(){
+    var l = (document.documentElement.getAttribute('lang') || 'en').trim();
+    if (l === 'ko' || l === 'en' || l === 'ja' || l === 'zh-TW') return l;
+    var low = l.toLowerCase();
+    if (low === 'zh-tw' || low === 'tw' || low === 'zh_tw') return 'zh-TW';
+    return 'en';
+  }
+  function t(k){
+    var l = curLang();
+    return (TXT[l] && TXT[l][k]) || (TXT.en && TXT.en[k]) || k;
+  }
+
+  function fmt2(n){ return String(n).padStart(2,'0'); }
+  function clockNow(dt){ return fmt2(dt.getHours())+':'+fmt2(dt.getMinutes())+':'+fmt2(dt.getSeconds()); }
+  function countdown(ms){
+    var sec = Math.max(0, Math.floor(ms/1000));
+    var d = Math.floor(sec/86400); sec%=86400;
+    var h = Math.floor(sec/3600);  sec%=3600;
+    var m = Math.floor(sec/60);    sec%=60;
+    if (d>0) return d+'d '+fmt2(h)+':'+fmt2(m)+':'+fmt2(sec);
+    return fmt2(h)+':'+fmt2(m)+':'+fmt2(sec);
+  }
+
+  function safeStr(v){ return (v==null?'':String(v)); }
+  function parseExpiryMs(c){
+    var iso = safeStr(c && c.expiresAt).trim();
+    if (iso){
+      var ts = Date.parse(iso);
+      if (Number.isFinite(ts)) return ts;
+    }
+    var until = safeStr(c && c.until).trim();
+    if (until){
+      var p = until.split('-');
+      if (p.length===3){
+        var ts2 = Date.parse(p[0]+'-'+String(p[1]).padStart(2,'0')+'-'+String(p[2]).padStart(2,'0')+'T00:00:00Z');
+        if (Number.isFinite(ts2)) return ts2;
+      }
+    }
+    return null;
+  }
+  function isActive(c, nowMs){
+    var exp = parseExpiryMs(c);
+    if (exp==null || nowMs>=exp) return false;
+    var st = safeStr(c && c.startAt).trim();
+    if (st){
+      var stMs = Date.parse(st);
+      if (Number.isFinite(stMs) && nowMs<stMs) return false;
+    }
+    return true;
+  }
+  function computeNextExpiry(active){
+    var min = null;
+    for (var i=0;i<active.length;i++){
+      var ms = parseExpiryMs(active[i]);
+      if (ms==null) continue;
+      if (min==null || ms<min) min = ms;
+    }
+    return min;
+  }
+
+  function applyText(){
+    if (els.title)   els.title.textContent   = t('title');
+    if (els.lCoupons) els.lCoupons.textContent = t('coupons');
+    if (els.lNext)   els.lNext.textContent   = t('next');
+    if (els.lNow)    els.lNow.textContent    = t('now');
+  }
+  function renderCount(){
+    if (!els.vCoupons) return;
+    var l = curLang();
+    var sfx = t('suffix');
+    els.vCoupons.textContent = (l==='en') ? (cachedCount+' '+sfx) : (cachedCount+sfx);
+  }
+  function syncLink(){
+    var l = curLang();
+    if (els.go) els.go.href = '/tools/coupon-countdown.html?lang='+encodeURIComponent(l);
+  }
+
+  function tick(){
+    var now = new Date();
+    if (els.vNow) els.vNow.textContent = clockNow(now);
+    if (els.vNext){
+      if (!targetNextMs) els.vNext.textContent = '—';
+      else {
+        var diff = targetNextMs - Date.now();
+        els.vNext.textContent = (diff<=0) ? '00:00:00' : countdown(diff);
+      }
+    }
+  }
+
+  async function loadCoupons(){
+    var res = await fetch('/data/coupons.json?v='+Date.now(), {cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    var data = await res.json();
+    return Array.isArray(data && data.coupons) ? data.coupons : (Array.isArray(data) ? data : []);
+  }
+
+  async function refresh(){
+    try{
+      applyText();
+      syncLink();
+
+      var list = await loadCoupons();
+      var nowMs = Date.now();
+      var active = list.filter(function(c){ return c && c.code && isActive(c, nowMs); });
+
+      cachedCount = active.length;
+      renderCount();
+      targetNextMs = computeNextExpiry(active);
+
+      els.bar.hidden = false;
+
+      if (tickTimer) clearInterval(tickTimer);
+      tick();
+      tickTimer = setInterval(tick, 1000);
+    }catch(_e){
+      els.bar.hidden = true;
+      if (tickTimer) clearInterval(tickTimer);
+    }
+  }
+
+  // 최초 1회
+  refresh();
+
+  // 언어 바뀌면: 텍스트/링크/데이터까지 즉시 반영 (새로고침 필요 없음)
+  document.addEventListener('i18n:changed', function(){
+    refresh();
+  });
+
+})();
+</script>
