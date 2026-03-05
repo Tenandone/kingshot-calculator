@@ -1,5 +1,7 @@
 /* =================================================================
    KingshotData — common.css (Light Theme, CLEAN + HOME BIG CARDS)
+   ✅ DEPLOY-SAFE: Buildings + Database grid fixed (4 cols PC / 2 cols mobile)
+   ✅ REAL DOM MATCH: supports both static pages and SPA mounted (#main/#content)
    ================================================================= */
 
 /* =========================
@@ -180,19 +182,14 @@ a:hover{text-decoration:underline}
 
 /* =========================
    HOME category cards (크게 + 3줄 느낌)
-   - PC: 3열
-   - Tablet: 2열
-   - Mobile: 1열
    ========================= */
 .grid.category-grid{
   grid-template-columns:repeat(3, minmax(0,1fr));
   gap:18px;
 }
-
 .card--category .card__body{padding:16px}
 .card--category .card__title{font-size:16px;font-weight:900;letter-spacing:.1px}
 .card--category .card__subtitle{font-size:13px}
-
 .card--category .card__media{aspect-ratio:4/3}
 .card--category .card__media img{width:88%;height:88%;object-fit:contain}
 
@@ -242,53 +239,65 @@ a:hover{text-decoration:underline}
 .variant-tabs .tab.on{background:#2b6cb0;color:#fff;border-color:transparent}
 
 /* =========================
-   BUILDINGS INDEX (fixed)
+   BUILDINGS INDEX (DEPLOY-SAFE FIX)
+   - static HTML:  #buildings-page #buildings-grid
+   - SPA mounted:  #main/#content #buildings-grid
    ========================= */
-#buildings-page #buildings-grid{
-  display:grid;
+#buildings-page #buildings-grid,
+#content #buildings-grid,
+#main #buildings-grid,
+main#main #buildings-grid{
+  display:grid !important;
   grid-template-columns:repeat(4, minmax(0,1fr)) !important;
-  gap:14px;
-  align-items:stretch;
+  gap:14px !important;
+  align-items:stretch !important;
 }
 
-/* ✅ 카드 텍스트 중앙정렬 */
-#buildings-page #buildings-grid .card{ text-align:center; }
-
-/* ✅ 제목 링크가 직접 찍히는 구조 대응 */
-#buildings-page #buildings-grid .card a{
+/* ✅ 카드 텍스트/링크 중앙 + 파란 링크 제거 */
+#buildings-page #buildings-grid .card,
+#content #buildings-grid .card,
+#main #buildings-grid .card,
+main#main #buildings-grid .card{
+  text-align:center;
+}
+#buildings-page #buildings-grid .card a,
+#content #buildings-grid .card a,
+#main #buildings-grid .card a,
+main#main #buildings-grid .card a{
   display:block;
   width:100%;
   text-align:center;
   color:var(--text) !important;
   text-decoration:none !important;
 }
-#buildings-page #buildings-grid .card__body{
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-}
-#buildings-page #buildings-grid .card__title{
-  width:100%;
-  text-align:center;
-  color:var(--text) !important;
+#buildings-page #buildings-grid a,
+#buildings-page #buildings-grid a:visited,
+#buildings-page #buildings-grid a:hover,
+#buildings-page #buildings-grid a:active,
+#content #buildings-grid a,
+#content #buildings-grid a:visited,
+#content #buildings-grid a:hover,
+#content #buildings-grid a:active,
+#main #buildings-grid a,
+#main #buildings-grid a:visited,
+#main #buildings-grid a:hover,
+#main #buildings-grid a:active{
+  color: var(--text) !important;
+  text-decoration: none !important;
 }
 
-@media (max-width:980px){
-  #buildings-page #buildings-grid{
-    grid-template-columns:repeat(4, minmax(0,1fr)) !important;
-  }
-}
 @media (max-width:520px){
-  #buildings-page #buildings-grid{
+  #buildings-page #buildings-grid,
+  #content #buildings-grid,
+  #main #buildings-grid,
+  main#main #buildings-grid{
     grid-template-columns:repeat(2, minmax(0,1fr)) !important;
-    gap:10px;
+    gap:10px !important;
   }
 }
 
 /* =========================
-   DB cards (이미지 자르지 않음 + 중앙정렬)
+   DB cards (테이블이 아니라 "카드" 전용)
    ========================= */
 .card--db{
   display:flex;flex-direction:column;
@@ -330,9 +339,29 @@ a:hover{text-decoration:underline}
   color:var(--text);
   text-align:center;
 }
-#db-grid.grid.category-grid{
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap:16px;
+
+/* =========================
+   DATABASE INDEX (DEPLOY-SAFE FIX) — REAL DOM MATCH
+   - SPA mounted:  #main #db-grid
+   - static HTML:  #db-page #db-grid (있다면)
+   ========================= */
+#db-page #db-grid,
+#content #db-grid,
+#main #db-grid,
+main#main #db-grid{
+  display:grid !important;
+  grid-template-columns:repeat(4, minmax(0,1fr)) !important;
+  gap:16px !important;
+  align-items:stretch !important;
+}
+@media (max-width:520px){
+  #db-page #db-grid,
+  #content #db-grid,
+  #main #db-grid,
+  main#main #db-grid{
+    grid-template-columns:repeat(2, minmax(0,1fr)) !important;
+    gap:10px !important;
+  }
 }
 
 /* =========================
@@ -466,26 +495,7 @@ a:hover{text-decoration:underline}
 }
 
 /* =========================
-   FIX: Buildings list 링크(이름) 파란색 제거 + 가운데 정렬
-   ========================= */
-#buildings-page #buildings-grid a,
-#buildings-page #buildings-grid a:visited,
-#buildings-page #buildings-grid a:hover,
-#buildings-page #buildings-grid a:active{
-  color: var(--text) !important;
-  text-decoration: none !important;
-}
-#buildings-page #buildings-grid{ text-align: center; }
-#buildings-page #buildings-grid a{
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-
-/* =========================
    FIX: 전역 #content a(브랜드색) 규칙을 카드 UI에는 적용하지 않기
-   - 너 스샷의 범인: #content a { color: var(--brand) }
-   - 그래서 카드/그리드/리스트 UI 링크는 강제로 검정
    ========================= */
 #content .card a,
 #content .card a:visited,
@@ -500,6 +510,7 @@ a:hover{text-decoration:underline}
   color: var(--text) !important;
   text-decoration: none !important;
 }
+
 /* FIX: routes.js focusMain() 때문에 생기는 검은 포커스 박스 제거 */
 h1[tabindex="-1"]:focus,
 #content h1[tabindex="-1"]:focus,
@@ -512,4 +523,11 @@ h1[tabindex="-1"]:focus,
 [tabindex="-1"]:focus{
   outline: none !important;
   box-shadow: none !important;
+}
+/* FIX: Coupon timer bar hover underline 제거 */
+#liveBar a,
+#liveBar a:hover,
+.kboard a,
+.kboard a:hover{
+  text-decoration: none !important;
 }

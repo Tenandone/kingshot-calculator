@@ -1,0 +1,618 @@
+<!-- FILE: /ko/guides/coupon-countdown.html  (전체 완성본 / 경로 문제 해결판)
+✅ 핵심 수정
+- DATA_URL을 "절대경로(/data/coupons.json)"로 고정
+- <base href="/">가 있거나 SPA 라우팅이 끼어도 절대경로는 안 깨짐
+- fetch 실패 원인 바로 보이게 디버그 라인(현재 URL/요청 URL/상태코드) 표시
+-->
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <title>킹샷 쿠폰 카운트다운</title>
+  <meta name="description" content="현재 활성 쿠폰 만료까지 남은 시간 / 쿠폰 미출시 경과시간을 실시간으로 보여주는 킹샷 쿠폰 카운트다운." />
+
+  <style>
+    *{box-sizing:border-box}
+    :root{
+      --bg:#ffffff;--surface:#ffffff;--card:#f8fafc;
+      --text:#0b0d12;--muted:#6b7280;--border:#e5e7eb;
+      --brand:#0b57d0;
+      --good:#16a34a;--warn:#f59e0b;--bad:#ef4444;
+      --shadow:0 12px 26px rgba(0,0,0,.08);
+      --r:18px;--max:1020px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --font: system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;
+    }
+    @media (prefers-color-scheme:dark){
+      :root{
+        --bg:#0b0b0b;--surface:#121212;--card:#161a22;
+        --text:#e8eaed;--muted:#b6bdc9;--border:#2a2f3a;
+        --shadow:0 14px 30px rgba(0,0,0,.35);
+      }
+    }
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6}
+    a{color:inherit}
+    .wrap{max-width:var(--max);margin:0 auto;padding:16px 14px 46px}
+    .top{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .title{display:flex;flex-direction:column;gap:4px}
+    .title h1{margin:0;font-size:clamp(18px,2.4vw,26px);letter-spacing:-.2px}
+    .title p{margin:0;color:var(--muted);font-size:13px}
+    .pillrow{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border-radius:999px;
+      border:1px solid var(--border);
+      background:color-mix(in srgb,var(--surface) 90%, var(--brand) 4%);
+      font-size:12px;color:var(--muted);
+      white-space:nowrap;
+    }
+    .pill b{color:var(--text)}
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;align-items:start}
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, color-mix(in srgb,var(--surface) 96%, transparent), color-mix(in srgb,var(--surface) 88%, transparent));
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .cardHead{
+      padding:14px 14px;
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    }
+    .cardHead h2{margin:0;font-size:14px;letter-spacing:.2px}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid var(--border);
+      background:color-mix(in srgb,var(--surface) 85%, transparent);
+      font-size:12px;color:var(--muted);
+    }
+    .badge .dot{width:8px;height:8px;border-radius:99px;background:var(--warn)}
+    .badge.good .dot{background:var(--good)}
+    .badge.bad .dot{background:var(--bad)}
+    .cardBody{padding:14px}
+
+    .timer{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
+    .tbox{
+      border:1px solid var(--border);
+      background:color-mix(in srgb,var(--card) 90%, transparent);
+      border-radius:16px;padding:12px 10px;text-align:center;
+    }
+    .num{font-size:28px;font-weight:900;letter-spacing:-.3px}
+    .lab{margin-top:4px;font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.6px}
+
+    .mainLine{
+      margin-top:12px;
+      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      padding:10px 12px;border-radius:14px;
+      border:1px dashed color-mix(in srgb,var(--border) 70%, transparent);
+      background:color-mix(in srgb,var(--surface) 80%, transparent);
+      font-size:12px;color:var(--muted);
+    }
+    .mainLine b{color:var(--text)}
+    .code{
+      font-family:var(--mono);
+      font-weight:900;
+      letter-spacing:.8px;
+      padding:2px 7px;border-radius:10px;
+      border:1px solid var(--border);
+      background:color-mix(in srgb,var(--surface) 70%, transparent);
+      color:var(--text);
+      display:inline-block;
+    }
+
+    .btnRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{
+      border:1px solid var(--border);
+      background:color-mix(in srgb,var(--surface) 90%, transparent);
+      color:var(--text);
+      padding:10px 12px;border-radius:14px;
+      font-weight:900;font-size:13px;cursor:pointer;
+      display:inline-flex;align-items:center;gap:8px;
+      text-decoration:none;
+    }
+    .btn.primary{
+      border-color:color-mix(in srgb,var(--brand) 35%, var(--border));
+      background:color-mix(in srgb,var(--brand) 14%, var(--surface));
+    }
+    .hint{margin-top:10px;color:var(--muted);font-size:12px}
+
+    .list{display:grid;gap:10px}
+    .item{
+      border:1px solid var(--border);
+      background:color-mix(in srgb,var(--card) 92%, transparent);
+      border-radius:16px;padding:12px;
+      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+    }
+    .left{display:flex;flex-direction:column;gap:6px;min-width:0}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12px}
+    .tag{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:4px 8px;border-radius:999px;
+      border:1px solid var(--border);
+      font-size:11px;font-weight:900;color:var(--muted);
+      background:color-mix(in srgb,var(--surface) 70%, transparent);
+    }
+    .tag.good{border-color:color-mix(in srgb,var(--good) 35%, var(--border));color:color-mix(in srgb,var(--good) 70%, var(--text))}
+    .tag.warn{border-color:color-mix(in srgb,var(--warn) 35%, var(--border));color:color-mix(in srgb,var(--warn) 80%, var(--text))}
+    .tag.bad{border-color:color-mix(in srgb,var(--bad) 35%, var(--border));color:color-mix(in srgb,var(--bad) 80%, var(--text))}
+    .copy{white-space:nowrap;min-width:104px;justify-content:center}
+    .small{font-size:12px;color:var(--muted)}
+    .foot{margin-top:14px;text-align:center;color:var(--muted);font-size:12px}
+
+    .toast{
+      position:fixed;left:50%;bottom:16px;transform:translateX(-50%);
+      background:color-mix(in srgb,var(--surface) 85%, black 10%);
+      border:1px solid var(--border);
+      color:var(--text);
+      padding:10px 12px;border-radius:999px;
+      box-shadow:var(--shadow);
+      font-weight:900;font-size:13px;
+      opacity:0;pointer-events:none;
+      transition:opacity .16s ease, transform .16s ease;
+    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
+
+    .debug{
+      margin-top:10px;
+      border:1px solid var(--border);
+      background:color-mix(in srgb,var(--surface) 92%, transparent);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:12px;
+      color:var(--muted);
+      word-break:break-all;
+    }
+    .debug b{color:var(--text)}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="title">
+        <h1>킹샷 쿠폰 카운트다운</h1>
+        <p>활성 쿠폰이 있으면 <b>만료까지</b>, 없으면 <b>쿠폰이 안 나온 지</b> 경과 시간을 표시합니다.</p>
+      </div>
+      <div class="pillrow">
+        <div class="pill">데이터: <b id="dataUrlText">—</b></div>
+        <div class="pill">마지막 업데이트: <b id="lastUpdated">—</b></div>
+      </div>
+    </div>
+
+    <section class="grid">
+      <div class="card">
+        <div class="cardHead">
+          <h2 id="modeTitle">상태 확인 중…</h2>
+          <div id="modeBadge" class="badge"><span class="dot"></span><span id="modeBadgeText">Loading</span></div>
+        </div>
+
+        <div class="cardBody">
+          <div class="timer" aria-label="timer">
+            <div class="tbox"><div class="num" id="dd">—</div><div class="lab">DAYS</div></div>
+            <div class="tbox"><div class="num" id="hh">—</div><div class="lab">HOURS</div></div>
+            <div class="tbox"><div class="num" id="mm">—</div><div class="lab">MINUTES</div></div>
+            <div class="tbox"><div class="num" id="ss">—</div><div class="lab">SECONDS</div></div>
+          </div>
+
+          <div class="mainLine" id="mainLine">
+            <span id="mainLabel">—</span>
+            <b id="mainValue">—</b>
+          </div>
+
+          <div class="btnRow">
+            <button class="btn primary" id="refreshBtn" type="button">새로고침</button>
+            <button class="btn" id="copyActiveBtn" type="button">활성 쿠폰 전체 복사</button>
+            <a class="btn" href="/coupons">쿠폰 모음 보기</a>
+          </div>
+
+          <div class="hint" id="hint">쿠폰이 여러 개 활성화될 수 있어요. 메인 카운트다운은 “가장 빨리 만료되는 쿠폰” 기준입니다.</div>
+
+          <div class="debug" id="debugBox" style="display:none"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardHead">
+          <h2>현재 활성 쿠폰</h2>
+          <div class="small">최대 5개 표시</div>
+        </div>
+        <div class="cardBody">
+          <div class="list" id="activeList"></div>
+          <div class="foot" id="moreHint"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied!</div>
+
+  <script>
+  (function(){
+    "use strict";
+
+    // =========================
+    // ✅ 여기서만 수정하면 됨
+    // =========================
+    // - 같은 프로젝트인데 못 불러오는 경우 대부분:
+    //   1) 상대경로가 base href / SPA 라우터에 의해 꼬임
+    //   2) /data/coupons.json이 실제 배포(dist) 폴더에 복사 안 됨
+    //   3) 서버가 JSON을 404/HTML로 응답함
+    //
+    // => 절대경로 + 강제 no-store + 응답 타입 검증으로 해결
+    const DATA_PATH = "/data/coupons.json"; // ✅ 무조건 루트 data를 읽는다
+
+    const DATA_URL = (function(){
+      // location.origin 붙여서 완전 절대 URL로 만든다 (SPA/base 영향 0)
+      return location.origin + DATA_PATH;
+    })();
+
+    const MAX_ACTIVE_SHOW = 5;
+    const TICK_MS = 250;
+
+    // =========================
+    // DOM
+    // =========================
+    const $ = (id)=>document.getElementById(id);
+    const lastUpdatedEl = $("lastUpdated");
+    const modeTitleEl = $("modeTitle");
+    const modeBadgeEl = $("modeBadge");
+    const modeBadgeTextEl = $("modeBadgeText");
+    const ddEl = $("dd"), hhEl = $("hh"), mmEl = $("mm"), ssEl = $("ss");
+    const mainLabelEl = $("mainLabel");
+    const mainValueEl = $("mainValue");
+    const activeListEl = $("activeList");
+    const moreHintEl = $("moreHint");
+    const toastEl = $("toast");
+    const debugBoxEl = $("debugBox");
+    const dataUrlTextEl = $("dataUrlText");
+
+    dataUrlTextEl.textContent = DATA_PATH;
+
+    $("refreshBtn").addEventListener("click", ()=>init(true));
+    $("copyActiveBtn").addEventListener("click", copyActiveAll);
+
+    // =========================
+    // State
+    // =========================
+    let coupons = [];
+    let activeCoupons = [];
+    let targetMs = null;      // countdown target time (expiresAt)
+    let countupFromMs = null; // last coupon time (firstSeenAt preferred)
+    let tickTimer = null;
+
+    // =========================
+    // Helpers
+    // =========================
+    function toast(msg){
+      toastEl.textContent = msg;
+      toastEl.classList.add("show");
+      clearTimeout(toastEl._t);
+      toastEl._t = setTimeout(()=>toastEl.classList.remove("show"), 1200);
+    }
+
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+      }catch(e){
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position="fixed";
+        ta.style.left="-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+    }
+
+    function safeStr(v){ return (v == null ? "" : String(v)); }
+
+    function parseTime(s){
+      if(!s) return null;
+      const t = Date.parse(s);
+      return Number.isFinite(t) ? t : null;
+    }
+
+    function fmt2(n){ return String(n).padStart(2,"0"); }
+
+    function formatDateTime(ms){
+      const d = new Date(ms);
+      const Y = d.getFullYear();
+      const M = fmt2(d.getMonth()+1);
+      const D = fmt2(d.getDate());
+      const hh = fmt2(d.getHours());
+      const mm = fmt2(d.getMinutes());
+      return `${Y}-${M}-${D} ${hh}:${mm}`;
+    }
+
+    function humanRemain(ms){
+      const sec = Math.max(0, Math.floor(ms/1000));
+      const days = Math.floor(sec/86400);
+      const hours = Math.floor((sec%86400)/3600);
+      const mins = Math.floor((sec%3600)/60);
+      const secs = sec%60;
+      return {days, hours, mins, secs};
+    }
+
+    function setTimerBoxes(o){
+      ddEl.textContent = String(o.days);
+      hhEl.textContent = String(o.hours);
+      mmEl.textContent = String(o.mins);
+      ssEl.textContent = String(o.secs);
+    }
+
+    function setBadge(type, text){
+      modeBadgeEl.classList.remove("good","bad");
+      if(type === "good") modeBadgeEl.classList.add("good");
+      if(type === "bad") modeBadgeEl.classList.add("bad");
+      modeBadgeTextEl.textContent = text;
+    }
+
+    function statusTagFor(c){
+      const now = Date.now();
+      const exp = parseTime(c.expiresAt);
+      if(!exp) return {cls:"bad", text:"INVALID"};
+      const diff = exp - now;
+      if(diff <= 0) return {cls:"bad", text:"EXPIRED"};
+      if(diff <= 2*86400*1000) return {cls:"warn", text:"ENDING SOON"};
+      return {cls:"good", text:"ACTIVE"};
+    }
+
+    function renderActiveList(){
+      activeListEl.innerHTML = "";
+      moreHintEl.textContent = "";
+
+      if(activeCoupons.length === 0){
+        activeListEl.innerHTML = `<div class="small" style="color:var(--muted)">현재 활성 쿠폰이 없습니다.</div>`;
+        return;
+      }
+
+      const show = activeCoupons.slice(0, MAX_ACTIVE_SHOW);
+      show.forEach(c=>{
+        const tag = statusTagFor(c);
+        const expMs = parseTime(c.expiresAt);
+        const reward = safeStr(c.reward).trim();
+        const src = safeStr(c.sourceUrl).trim();
+
+        const item = document.createElement("div");
+        item.className = "item";
+        item.innerHTML = `
+          <div class="left">
+            <div><span class="code">${escapeHTML(c.code)}</span></div>
+            <div class="meta">
+              <span class="tag ${tag.cls}">${escapeHTML(tag.text)}</span>
+              <span>만료: <b style="color:var(--text)">${expMs ? escapeHTML(formatDateTime(expMs)) : "—"}</b></span>
+              ${reward ? `<span>보상: ${escapeHTML(reward)}</span>` : ``}
+              ${src ? `<a href="${escapeAttr(src)}" target="_blank" rel="noopener" style="text-decoration:none;color:var(--brand);font-weight:900">출처</a>` : ``}
+            </div>
+          </div>
+          <button class="btn copy" type="button">복사</button>
+        `;
+        item.querySelector("button").addEventListener("click", async ()=>{
+          await copyText(c.code);
+          toast(`복사됨: ${c.code}`);
+        });
+        activeListEl.appendChild(item);
+      });
+
+      if(activeCoupons.length > MAX_ACTIVE_SHOW){
+        moreHintEl.textContent = `+ ${activeCoupons.length - MAX_ACTIVE_SHOW}개 더 활성화됨 (리스트는 최대 ${MAX_ACTIVE_SHOW}개 표시)`;
+      }
+    }
+
+    async function copyActiveAll(){
+      if(activeCoupons.length === 0){
+        toast("활성 쿠폰 없음");
+        return;
+      }
+      const txt = activeCoupons.map(c=>c.code).join("\n");
+      await copyText(txt);
+      toast("활성 쿠폰 전체 복사");
+    }
+
+    function escapeHTML(s){
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#39;");
+    }
+    function escapeAttr(s){
+      return escapeHTML(s).replaceAll("`","&#96;");
+    }
+
+    function showDebug(html){
+      debugBoxEl.style.display = "block";
+      debugBoxEl.innerHTML = html;
+    }
+    function hideDebug(){
+      debugBoxEl.style.display = "none";
+      debugBoxEl.textContent = "";
+    }
+
+    // =========================
+    // Core
+    // =========================
+    function computeMode(){
+      const now = Date.now();
+
+      const cleaned = coupons
+        .map(c=>{
+          const code = safeStr(c.code).trim();
+          const expiresAt = safeStr(c.expiresAt).trim();
+          const firstSeenAt = safeStr(c.firstSeenAt).trim();
+          const startAt = safeStr(c.startAt).trim();
+          return { code, expiresAt, firstSeenAt, startAt, reward:c.reward, sourceUrl:c.sourceUrl };
+        })
+        .filter(c=>c.code && parseTime(c.expiresAt) != null);
+
+      coupons = cleaned;
+
+      activeCoupons = coupons.filter(c=>{
+        const exp = parseTime(c.expiresAt);
+        if(!exp) return false;
+        if(now >= exp) return false;
+
+        const st = parseTime(c.startAt);
+        if(st && now < st) return false;
+
+        return true;
+      });
+
+      activeCoupons.sort((a,b)=>parseTime(a.expiresAt) - parseTime(b.expiresAt));
+
+      if(activeCoupons.length > 0){
+        const soonest = activeCoupons[0];
+        targetMs = parseTime(soonest.expiresAt);
+        countupFromMs = null;
+
+        modeTitleEl.textContent = "다음 쿠폰 만료까지";
+        setBadge("good", "ACTIVE");
+
+        mainLabelEl.textContent = "기준 쿠폰";
+        mainValueEl.innerHTML = `<span class="code">${escapeHTML(soonest.code)}</span> · 만료 <b>${escapeHTML(formatDateTime(targetMs))}</b>`;
+        $("hint").textContent = "메인 카운트다운은 “가장 빨리 만료되는 쿠폰” 기준이며, 동시에 활성 쿠폰은 최대 5개까지 표시합니다.";
+      }else{
+        targetMs = null;
+
+        let lastMs = null;
+        let lastCode = null;
+
+        coupons.forEach(c=>{
+          const seen = parseTime(c.firstSeenAt);
+          const exp = parseTime(c.expiresAt);
+          const base = (seen != null ? seen : exp);
+          if(base == null) return;
+          if(lastMs == null || base > lastMs){
+            lastMs = base;
+            lastCode = c.code;
+          }
+        });
+
+        countupFromMs = lastMs;
+
+        modeTitleEl.textContent = "새 쿠폰이 안 나온 지";
+        setBadge("bad", "NO ACTIVE");
+
+        if(countupFromMs){
+          mainLabelEl.textContent = "마지막 쿠폰";
+          mainValueEl.innerHTML = `<span class="code">${escapeHTML(lastCode || "—")}</span> · 기준 <b>${escapeHTML(formatDateTime(countupFromMs))}</b>`;
+          $("hint").textContent = "활성 쿠폰이 없어서 “쿠폰 미출시 경과 시간”을 표시합니다. (기준: last firstSeenAt / 없으면 expiresAt)";
+        }else{
+          mainLabelEl.textContent = "데이터";
+          mainValueEl.textContent = "유효한 쿠폰 데이터가 없습니다.";
+          $("hint").textContent = "coupons.json에 expiresAt이 포함된 쿠폰을 추가해 주세요.";
+        }
+      }
+
+      renderActiveList();
+    }
+
+    function tick(){
+      const now = Date.now();
+
+      if(targetMs){
+        const diff = targetMs - now;
+        setTimerBoxes(humanRemain(diff));
+        return;
+      }
+      if(countupFromMs){
+        const diff = now - countupFromMs;
+        setTimerBoxes(humanRemain(diff));
+        return;
+      }
+      setTimerBoxes({days:"—", hours:"—", mins:"—", secs:"—"});
+    }
+
+    async function loadJSON(noCache){
+      const url = noCache ? (DATA_URL + (DATA_URL.includes("?") ? "&" : "?") + "v=" + Date.now()) : DATA_URL;
+
+      // ✅ no-store + same-origin
+      const res = await fetch(url, {
+        method: "GET",
+        cache: "no-store",
+        credentials: "same-origin",
+        headers: { "Accept": "application/json" }
+      });
+
+      // ✅ 404/500 등
+      if(!res.ok){
+        const text = await res.text().catch(()=> "");
+        throw new Error(`HTTP ${res.status} ${res.statusText} :: ${text.slice(0,120)}`);
+      }
+
+      // ✅ 서버가 JSON 대신 HTML을 주는 경우(라우터가 index.html 내려줌)
+      const ct = (res.headers.get("content-type") || "").toLowerCase();
+      const raw = await res.text();
+      if(!ct.includes("application/json")){
+        // 그래도 JSON 파싱을 시도하되, 실패하면 "HTML 응답"임을 확실히 보여줌
+        try{
+          return JSON.parse(raw);
+        }catch(e){
+          throw new Error(`NOT_JSON_RESPONSE :: content-type=${ct || "none"} :: first=${raw.slice(0,80).replace(/\s+/g," ")}`);
+        }
+      }
+
+      // 정상 JSON
+      const data = JSON.parse(raw);
+      if(!Array.isArray(data)) throw new Error("coupons.json must be an array");
+      return data;
+    }
+
+    function setLastUpdated(){
+      const d = new Date();
+      lastUpdatedEl.textContent = `${d.getFullYear()}-${fmt2(d.getMonth()+1)}-${fmt2(d.getDate())} ${fmt2(d.getHours())}:${fmt2(d.getMinutes())}`;
+    }
+
+    async function init(force){
+      hideDebug();
+      try{
+        modeTitleEl.textContent = "데이터 불러오는 중…";
+        setBadge("", "LOADING");
+
+        coupons = await loadJSON(!!force);
+        setLastUpdated();
+        computeMode();
+
+        if(tickTimer) clearInterval(tickTimer);
+        tick();
+        tickTimer = setInterval(tick, TICK_MS);
+
+        toast("쿠폰 데이터 로드 완료");
+      }catch(err){
+        if(tickTimer) clearInterval(tickTimer);
+
+        modeTitleEl.textContent = "데이터 로드 실패";
+        setBadge("bad", "ERROR");
+        mainLabelEl.textContent = "오류";
+        mainValueEl.textContent = "coupons.json을 불러올 수 없습니다.";
+        activeListEl.innerHTML = `<div class="small" style="color:var(--muted)">${escapeHTML(DATA_PATH)} 경로/배포 파일/JSON 형식을 확인하세요.</div>`;
+        moreHintEl.textContent = "";
+        setTimerBoxes({days:"—", hours:"—", mins:"—", secs:"—"});
+
+        showDebug(
+          `<div><b>현재 페이지:</b> ${escapeHTML(location.href)}</div>
+           <div style="margin-top:6px"><b>요청 URL:</b> ${escapeHTML(DATA_URL)}</div>
+           <div style="margin-top:6px"><b>에러:</b> ${escapeHTML(String(err && err.message ? err.message : err))}</div>
+           <div style="margin-top:6px"><b>체크:</b> dist(배포) 폴더에 <span class="code">data/coupons.json</span>이 실제로 존재해야 함</div>`
+        );
+
+        console.error(err);
+      }
+    }
+
+    init(false);
+  })();
+  </script>
+</body>
+</html>

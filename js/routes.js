@@ -316,6 +316,8 @@
       } catch(_){}
     }
 
+    
+
     // -----------------------------
     // Buildings static HTML mount (uses html-loader.js)
     // -----------------------------
@@ -449,9 +451,27 @@
           apply(el);
           window.scrollTo({ top: 0 });
           focusMain(el);
-        }
-      },
 
+          // ✅ FIX: language changed -> reload buildings index HTML immediately (debounced)
+if (!el.__kdBuildingsLangBound) {
+  el.__kdBuildingsLangBound = true;
+
+  var __bldLangTimer = null;
+  document.addEventListener('i18n:changed', function () {
+    try {
+      var p = location.pathname.replace(/\/+$/, '');
+      if (p !== '/buildings') return;
+    } catch (_) {}
+
+    if (__bldLangTimer) clearTimeout(__bldLangTimer);
+    __bldLangTimer = setTimeout(function () {
+      try { routes['/buildings'].render(el); } catch (_) {}
+    }, 80);
+  });
+}
+        }
+      },       
+      
       '/building-static': {
         title: 'Building - KingshotData.kr',
         render: async function (el, rest, __forcedLang) {
