@@ -3,6 +3,7 @@
      ✅ [추가] 팝업 하단 작은 안내문(4개 언어) 추가
         - "할인 링크 → 쿠폰 코드 입력 → 즐겨찾기"
         - "매달 1일 추첨 · 매달 15일 추가쿠폰(상시)"
+        - "이벤트 조건 충족 시"
      ✅ 페이지 하단(계산기 옆) "광고보기" 버튼: 새 탭 이동 X → 탑업 팝업(openPopup) 재오픈
 -->
 <!doctype html>
@@ -253,7 +254,7 @@
 .codesGrid.single{
   grid-template-columns: minmax(0, 520px);
   justify-content: center;
-} 
+}
     .codeCard{
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.35);
@@ -541,6 +542,15 @@
       font-weight: 1200;
     }
 
+    .popFineMini{
+      margin-top: 6px;
+      max-width: 640px;
+      font-size: 10.5px;
+      line-height: 1.3;
+      color: rgba(11,13,18,.50);
+      font-weight: 900;
+    }
+
     .popBtns{
       margin-top: 14px;
       display:flex;
@@ -611,6 +621,7 @@
           Open the discounted top-up link, enter the coupon code, and bookmark the link.<br>
           Join the monthly draw (1st) · Get extra coupons on the 15th (ongoing)
         </div>
+        <div class="popFineMini" id="pFineMini">Benefits apply when event conditions are met.</div>
 
         <div class="popBtns">
           <button class="popYes" id="popYes" type="button">YES, PLEASE!</button>
@@ -724,7 +735,8 @@
         popupBig: "YOU'VE GOT<br>20% OFF",
         popupSub: "YOUR FIRST ORDER",
         popupHint: "Tip: Type <b>#s4qU</b> in the search box for a little extra reward.",
-        popupFine: "Open the discounted top-up link, <b>enter the coupon code</b>, and <b>bookmark the link</b>.<br>Join the monthly draw (1st) · Get extra coupons on the 15th (ongoing)",
+        popupFine: "Open the discounted top-up link, enter the coupon code, and bookmark the link.<br>Join the monthly draw (1st) · Get extra coupons on the 15th (ongoing)",
+        popupFineMini: "Benefits apply when event conditions are met.",
         popupYes: "YES, PLEASE!",
         popupNo: "DECLINE DISCOUNT",
         toastCopied: "Copied",
@@ -754,7 +766,8 @@
         popupBig: "20% OFF",
         popupSub: "첫 주문 할인",
         popupHint: "힌트: 검색창에 <b>#s4qU</b> 를 입력하면 추가 보상이 있어요.",
-        popupFine: "할인 충전 링크로 접속해 <b>쿠폰 코드 입력 후</b>, 링크를 <b>즐겨찾기</b>해두면<br><b>매달 1일</b> 추첨 이벤트 참여 · <b>매달 15일</b> 추가 쿠폰 증정(상시)",
+        popupFine: "할인 충전 링크 접속 · 쿠폰 코드 입력 · 링크 즐겨찾기<br>매달 1일 추첨 · 매달 15일 추가 쿠폰",
+        popupFineMini: "이벤트 조건 충족 시",
         popupYes: "예, 받을래요!",
         popupNo: "할인 거절",
         toastCopied: "복사됨",
@@ -784,7 +797,8 @@
         popupBig: "20% OFF",
         popupSub: "初回注文割引",
         popupHint: "ヒント: 検索欄に <b>#s4qU</b> を入力すると追加報酬があります。",
-        popupFine: "割引チャージリンクにアクセスして <b>クーポンコードを入力</b>し、リンクを <b>ブックマーク</b>してください。<br><b>毎月1日</b> 抽選イベント参加 · <b>毎月15日</b> 追加クーポン（常設）",
+        popupFine: "割引チャージリンクにアクセス · クーポンコード入力 · リンクをブックマーク<br>毎月1日抽選 · 毎月15日追加クーポン",
+        popupFineMini: "イベント条件達成時",
         popupYes: "はい、お願いします！",
         popupNo: "辞退する",
         toastCopied: "コピーしました",
@@ -814,7 +828,8 @@
         popupBig: "20% OFF",
         popupSub: "首單折扣",
         popupHint: "提示：在搜尋欄輸入 <b>#s4qU</b> 可獲得額外獎勵。",
-        popupFine: "開啟折扣儲值連結，<b>輸入優惠碼</b>後將連結 <b>加入書籤</b>。<br><b>每月1日</b> 抽獎活動參加 · <b>每月15日</b> 加碼優惠券（常態）",
+        popupFine: "開啟折扣儲值連結 · 輸入優惠碼 · 將連結加入書籤<br>每月1日抽獎 · 每月15日加碼優惠券",
+        popupFineMini: "需符合活動條件",
         popupYes: "我要優惠！",
         popupNo: "不要折扣",
         toastCopied: "已複製",
@@ -901,7 +916,7 @@
       uD:$("uD"), uH:$("uH"), uM:$("uM"), uS:$("uS"),
 
       pBig:$("pBig"), pSub:$("pSub"), pHint:$("pHint"),
-      pFine:$("pFine"),
+      pFine:$("pFine"), pFineMini:$("pFineMini"),
       popYes:$("popYes"), popNo:$("popNo"),
     };
 
@@ -929,6 +944,7 @@
     if (dom.pSub) dom.pSub.textContent = T.popupSub;
     if (dom.pHint) dom.pHint.innerHTML = T.popupHint;
     if (dom.pFine) dom.pFine.innerHTML = T.popupFine;
+    if (dom.pFineMini) dom.pFineMini.textContent = T.popupFineMini;
     if (dom.popYes) dom.popYes.textContent = T.popupYes;
     if (dom.popNo) dom.popNo.textContent = T.popupNo;
 
