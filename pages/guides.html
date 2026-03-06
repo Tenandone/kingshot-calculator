@@ -9,7 +9,6 @@
 </head>
 
 <body>
-  <!-- ✅ SPA include에서도 CSS가 먹게: body 안 style -->
   <style>
   *{ box-sizing:border-box; }
 
@@ -18,7 +17,6 @@
     --text:#111827;
     --muted:#6b7280;
 
-    /* ✅ 메인(인덱스) 톤과 동일하게: 항상 라이트 배경 */
     --bg:#ffffff;
     --surface:#ffffff;
 
@@ -30,11 +28,6 @@
     --shadow:0 10px 25px rgba(0,0,0,.06);
   }
 
-  /* ✅ IMPORTANT:
-     guides는 메인과 "색상 동일"이 목표라서
-     prefers-color-scheme: dark 에서도 배경을 검정으로 바꾸지 않음.
-     (모바일 다크모드에서도 검정 배경 방지)
-  */
   @media (prefers-color-scheme: dark){
     :root{
       --brand:#0b57d0;
@@ -238,14 +231,12 @@
     font-weight:800;
     line-height:1.25;
     letter-spacing:-0.02em;
-
     display:-webkit-box;
     -webkit-line-clamp:2;
     -webkit-box-orient:vertical;
     overflow:hidden;
   }
 
-  /* MULTI-LANG */
   .lang{ display:none !important; }
 
   html[lang^="ko" i] .lang-ko,
@@ -256,9 +247,6 @@
 
   html[lang^="ja" i] .lang-ja,
   html[data-lang^="ja" i] .lang-ja{ display:inline !important; }
-
-  html[lang="zh-CN" i] .lang-zh-CN,
-  html[data-lang="zh-CN" i] .lang-zh-CN{ display:inline !important; }
 
   html[lang="zh-TW" i] .lang-zh-TW,
   html[data-lang="zh-TW" i] .lang-zh-TW{ display:inline !important; }
@@ -271,7 +259,6 @@
       <span class="lang lang-ko">가이드</span>
       <span class="lang lang-en">Guides</span>
       <span class="lang lang-ja">ガイド</span>
-      <span class="lang lang-zh-CN">指南</span>
       <span class="lang lang-zh-TW">指南</span>
     </h1>
 
@@ -285,7 +272,6 @@
         <span class="lang lang-ko">추천</span>
         <span class="lang lang-en">Top</span>
         <span class="lang lang-ja">おすすめ</span>
-        <span class="lang lang-zh-CN">推荐</span>
         <span class="lang lang-zh-TW">推薦</span>
       </div>
       <div id="guide-reco"></div>
@@ -293,7 +279,6 @@
         <span class="lang lang-ko">아직 추천 데이터가 없어. (가이드를 몇 번 클릭하면 TOP5가 자동으로 잡혀)</span>
         <span class="lang lang-en">No data yet. (Click a few guides and Top 5 will appear.)</span>
         <span class="lang lang-ja">まだデータがありません。（いくつかクリックするとTOP5が表示されます）</span>
-        <span class="lang lang-zh-CN">暂无数据。（点击几次后会自动显示Top 5）</span>
         <span class="lang lang-zh-TW">暫無資料。（點擊幾次後會自動顯示Top 5）</span>
       </div>
     </div>
@@ -306,9 +291,8 @@
   <div class="guides-wrap" data-ks-guides-root="1">
     <div class="guides-list" id="guide-list">
 
-      <!-- 1 -->
       <section class="g-block" id="mobile-topup-guide" data-guide="mobile-topup-guide" data-toc="false"
-        data-title-ko="충전 가이드" data-title-en="Top-Up Guide" data-title-ja="チャージガイド" data-title-zh-cn="充值指南" data-title-zh-tw="儲值指南"
+        data-title-ko="충전 가이드" data-title-en="Top-Up Guide" data-title-ja="チャージガイド" data-title-zh-tw="儲值指南"
         data-href="/pages/guides/topup-guide.html">
         <a class="g-link" data-router-ignore="true" href="/pages/guides/topup-guide.html" aria-label="Open Top-up Guide">
           <div class="tile-icon" aria-hidden="true">
@@ -320,16 +304,14 @@
               <span class="lang lang-ko">충전 가이드</span>
               <span class="lang lang-en">Top-Up Guide</span>
               <span class="lang lang-ja">チャージガイド</span>
-              <span class="lang lang-zh-CN">充值指南</span>
               <span class="lang lang-zh-TW">儲值指南</span>
             </h2>
           </div>
         </a>
       </section>
 
-      <!-- 2 -->
       <section class="g-block" id="bear-tier" data-guide="bear-tier" data-toc="false"
-        data-title-ko="곰사냥 티어표" data-title-en="Bear Tier List" data-title-ja="ベアティア表" data-title-zh-cn="狩熊梯队表" data-title-zh-tw="狩熊梯隊表"
+        data-title-ko="곰사냥 티어표" data-title-en="Bear Tier List" data-title-ja="ベアティア表" data-title-zh-tw="狩熊梯隊表"
         data-href="/pages/guides/kingshot-bear-hunt-tierlist.html">
         <a class="g-link" data-router-ignore="true" href="/pages/guides/kingshot-bear-hunt-tierlist.html" aria-label="Open Bear Tier List">
           <div class="tile-icon" aria-hidden="true">
@@ -341,16 +323,14 @@
               <span class="lang lang-ko">곰사냥 티어표</span>
               <span class="lang lang-en">Bear Tier List</span>
               <span class="lang lang-ja">ベアティア表</span>
-              <span class="lang lang-zh-CN">狩熊梯队表</span>
               <span class="lang lang-zh-TW">狩熊梯隊表</span>
             </h2>
           </div>
         </a>
       </section>
 
-      <!-- 3 -->
       <section class="g-block" id="giftcode" data-guide="giftcode" data-toc="true"
-        data-title-ko="기프트코드" data-title-en="Gift Codes" data-title-ja="ギフトコード" data-title-zh-cn="礼包码" data-title-zh-tw="禮包碼"
+        data-title-ko="기프트코드" data-title-en="Gift Codes" data-title-ja="ギフトコード" data-title-zh-tw="禮包碼"
         data-href="/pages/guides/kingshot-giftcode.html">
         <a class="g-link" data-router-ignore="true" href="/pages/guides/kingshot-giftcode.html" aria-label="Open Gift Codes">
           <div class="tile-icon" aria-hidden="true">
@@ -362,16 +342,14 @@
               <span class="lang lang-ko">기프트코드</span>
               <span class="lang lang-en">Gift Codes</span>
               <span class="lang lang-ja">ギフトコード</span>
-              <span class="lang lang-zh-CN">礼包码</span>
               <span class="lang lang-zh-TW">禮包碼</span>
             </h2>
           </div>
         </a>
       </section>
 
-      <!-- 4 -->
       <section class="g-block" id="f2p-route-g4" data-guide="f2p-route-g4" data-toc="true"
-        data-title-ko="F2P 루트" data-title-en="F2P Route" data-title-ja="F2Pルート" data-title-zh-cn="F2P路线" data-title-zh-tw="F2P路線"
+        data-title-ko="F2P 루트" data-title-en="F2P Route" data-title-ja="F2Pルート" data-title-zh-tw="F2P路線"
         data-href="/pages/guides/kingshot-f2p-route-g4.html">
         <a class="g-link" data-router-ignore="true" href="/pages/guides/kingshot-f2p-route-g4.html" aria-label="Open F2P Route">
           <div class="tile-icon" aria-hidden="true">
@@ -383,16 +361,14 @@
               <span class="lang lang-ko">초보자 가이드</span>
               <span class="lang lang-en">Beginner Guide</span>
               <span class="lang lang-ja">初心者ガイド</span>
-              <span class="lang lang-zh-CN">新手指南</span>
               <span class="lang lang-zh-TW">新手指南</span>
             </h2>
           </div>
         </a>
       </section>
 
-      <!-- 5 -->
       <section class="g-block" id="ruins" data-guide="ruins" data-toc="true"
-        data-title-ko="사라진 유적" data-title-en="Lost Ruins" data-title-ja="失われた遺跡" data-title-zh-cn="失落遗迹" data-title-zh-tw="失落遺跡"
+        data-title-ko="사라진 유적" data-title-en="Lost Ruins" data-title-ja="失われた遺跡" data-title-zh-tw="失落遺跡"
         data-href="/pages/guides/kingshot-ruins-tip.html">
         <a class="g-link" data-router-ignore="true" href="/pages/guides/kingshot-ruins-tip.html" aria-label="Open Lost Ruins">
           <div class="tile-icon" aria-hidden="true">
@@ -404,16 +380,14 @@
               <span class="lang lang-ko">사라진 유적</span>
               <span class="lang lang-en">Eternity’s Reach</span>
               <span class="lang lang-ja">失われた遺跡</span>
-              <span class="lang lang-zh-CN">失落遗迹</span>
               <span class="lang lang-zh-TW">失落遺跡</span>
             </h2>
           </div>
         </a>
       </section>
 
-      <!-- 6 -->
       <section class="g-block" id="bear" data-guide="bear" data-toc="true"
-        data-title-ko="곰사냥 조합" data-title-en="Bear Comps" data-title-ja="ベア編成" data-title-zh-cn="狩熊阵容" data-title-zh-tw="狩熊陣容"
+        data-title-ko="곰사냥 조합" data-title-en="Bear Comps" data-title-ja="ベア編成" data-title-zh-tw="狩熊陣容"
         data-href="/pages/guides/bear-hunt-guide.html">
         <a class="g-link" data-router-ignore="true" href="/pages/guides/bear-hunt-guide.html" aria-label="Open Bear Comps">
           <div class="tile-icon" aria-hidden="true">
@@ -425,16 +399,14 @@
               <span class="lang lang-ko">곰사냥 조합</span>
               <span class="lang lang-en">Bear Comps</span>
               <span class="lang lang-ja">ベア編成</span>
-              <span class="lang lang-zh-CN">狩熊阵容</span>
               <span class="lang lang-zh-TW">狩熊陣容</span>
             </h2>
           </div>
         </a>
       </section>
 
-      <!-- 7 -->
       <section class="g-block" id="hallofgovernors" data-guide="hallofgovernors" data-toc="true"
-        data-title-ko="최강영주 공략" data-title-en="Hall of Governors" data-title-ja="最強総督攻略" data-title-zh-cn="最强总督攻略" data-title-zh-tw="最強總督攻略"
+        data-title-ko="최강영주 공략" data-title-en="Hall of Governors" data-title-ja="最強総督攻略" data-title-zh-tw="最強總督攻略"
         data-href="/pages/guides/hallofgovernors.html">
         <a class="g-link" data-router-ignore="true" href="/pages/guides/hallofgovernors.html" aria-label="Open Hall of Governors Guide">
           <div class="tile-icon" aria-hidden="true">
@@ -446,16 +418,14 @@
               <span class="lang lang-ko">최강영주 공략</span>
               <span class="lang lang-en">Hall of Governors</span>
               <span class="lang lang-ja">最強総督攻略</span>
-              <span class="lang lang-zh-CN">最强总督攻略</span>
               <span class="lang lang-zh-TW">最強總督攻略</span>
             </h2>
           </div>
         </a>
       </section>
 
-      <!-- 8 -->
       <section class="g-block" id="truegold2026" data-guide="truegold2026" data-toc="true"
-        data-title-ko="2026 순금 소모표" data-title-en="2026 Truegold Cost Chart" data-title-ja="2026 純金消費表" data-title-zh-cn="2026 纯金消耗表" data-title-zh-tw="2026 純金消耗表"
+        data-title-ko="2026 순금 소모표" data-title-en="2026 Truegold Cost Chart" data-title-ja="2026 純金消費表" data-title-zh-tw="2026 純金消耗表"
         data-href="/pages/guides/truegold.html">
         <a class="g-link" data-router-ignore="true" href="/pages/guides/truegold.html" aria-label="Open 2026 Truegold Cost Chart">
           <div class="tile-icon" aria-hidden="true">
@@ -467,16 +437,14 @@
               <span class="lang lang-ko">2026 순금 소모표</span>
               <span class="lang lang-en">2026 Truegold Cost Chart</span>
               <span class="lang lang-ja">2026 純金消費表</span>
-              <span class="lang lang-zh-CN">2026 纯金消耗表</span>
               <span class="lang lang-zh-TW">2026 純金消耗表</span>
             </h2>
           </div>
         </a>
       </section>
 
-      <!-- 9 -->
       <section class="g-block" id="atob" data-guide="atob" data-toc="true"
-        data-title-ko="SSR 영웅 A vs B 비교 계산기" data-title-en="SSR Hero A vs B Comparator" data-title-ja="SSR英雄 A vs B 比較計算機" data-title-zh-cn="SSR英雄 A 与 B 比较计算器" data-title-zh-tw="SSR英雄 A 與 B 比較計算器"
+        data-title-ko="SSR 영웅 A vs B 비교 계산기" data-title-en="SSR Hero A vs B Comparator" data-title-ja="SSR英雄 A vs B 比較計算機" data-title-zh-tw="SSR英雄 A 與 B 比較計算器"
         data-href="/pages/guides/ssr-hero-vs.html">
         <a class="g-link" data-router-ignore="true" href="/pages/guides/ssr-hero-vs.html" aria-label="Open SSR Hero A vs B Comparator">
           <div class="tile-icon" aria-hidden="true">
@@ -488,16 +456,14 @@
               <span class="lang lang-ko">SSR 영웅 A vs B 비교 계산기</span>
               <span class="lang lang-en">SSR Hero A vs B Comparator</span>
               <span class="lang lang-ja">SSR英雄 A vs B 比較計算機</span>
-              <span class="lang lang-zh-CN">SSR英雄 A 与 B 比较计算器</span>
               <span class="lang lang-zh-TW">SSR英雄 A 與 B 比較計算器</span>
             </h2>
           </div>
         </a>
       </section>
 
-      <!-- 10 -->
       <section class="g-block" id="tri-alliance-clash" data-guide="tri-alliance-clash" data-toc="true"
-        data-title-ko="Tri-Alliance Clash 승리 가이드" data-title-en="How to Win Tri-Alliance Clash" data-title-ja="トライ・アライアンス・クラッシュ 勝利ガイド" data-title-zh-cn="三联盟争夺战 胜利指南" data-title-zh-tw="三聯盟爭奪戰 勝利指南"
+        data-title-ko="Tri-Alliance Clash 승리 가이드" data-title-en="How to Win Tri-Alliance Clash" data-title-ja="トライ・アライアンス・クラッシュ 勝利ガイド" data-title-zh-tw="三聯盟爭奪戰 勝利指南"
         data-href="/pages/guides/Tri-Alliance-Clash.html">
         <a class="g-link" data-router-ignore="true" href="/pages/guides/Tri-Alliance-Clash.html" aria-label="Open Tri-Alliance Clash Guide">
           <div class="tile-icon" aria-hidden="true">
@@ -509,16 +475,14 @@
               <span class="lang lang-ko">삼대연맹전 승리 가이드</span>
               <span class="lang lang-en">How to Win Tri-Alliance Clash</span>
               <span class="lang lang-ja">トライ・アライアンス・クラッシュ 勝利ガイド</span>
-              <span class="lang lang-zh-CN">三联盟争夺战 胜利指南</span>
               <span class="lang lang-zh-TW">三聯盟爭奪戰 勝利指南</span>
             </h2>
           </div>
         </a>
       </section>
 
-      <!-- 11 -->
       <section class="g-block" id="viking-vengeance" data-guide="viking-vengeance" data-toc="true"
-        data-title-ko="바이킹의 약탈 최적 공략" data-title-en="Viking Vengeance Best Strategy" data-title-ja="バイキングの略奪 最適攻略" data-title-zh-cn="维京复仇 最优攻略" data-title-zh-tw="維京復仇 最佳攻略"
+        data-title-ko="바이킹의 약탈 최적 공략" data-title-en="Viking Vengeance Best Strategy" data-title-ja="バイキングの略奪 最適攻略" data-title-zh-tw="維京復仇 最佳攻略"
         data-href="/pages/guides/viking.html">
         <a class="g-link" data-router-ignore="true" href="/pages/guides/viking.html" aria-label="Open Viking Vengeance Guide">
           <div class="tile-icon" aria-hidden="true">
@@ -530,16 +494,14 @@
               <span class="lang lang-ko">바이킹의 약탈 최적 공략</span>
               <span class="lang lang-en">Viking Vengeance Best Strategy</span>
               <span class="lang lang-ja">バイキングの略奪 最適攻略</span>
-              <span class="lang lang-zh-CN">维京复仇 最优攻略</span>
               <span class="lang lang-zh-TW">維京復仇 最佳攻略</span>
             </h2>
           </div>
         </a>
       </section>
 
-      <!-- 12 -->
       <section class="g-block" id="transfer" data-guide="transfer" data-toc="true"
-        data-title-ko="왕국 이민 심화 가이드" data-title-en="Kingdom Transfer Guide" data-title-ja="王国移民ガイド" data-title-zh-cn="王国转移指南" data-title-zh-tw="王國轉移指南"
+        data-title-ko="왕국 이민 심화 가이드" data-title-en="Kingdom Transfer Guide" data-title-ja="王国移民ガイド" data-title-zh-tw="王國轉移指南"
         data-href="/pages/guides/transfer.html">
         <a class="g-link" data-router-ignore="true" href="/pages/guides/transfer.html" aria-label="Open Kingdom Transfer Guide">
           <div class="tile-icon" aria-hidden="true">
@@ -551,8 +513,29 @@
               <span class="lang lang-ko">왕국 이민 심화 가이드</span>
               <span class="lang lang-en">Kingdom Transfer Guide</span>
               <span class="lang lang-ja">王国移民ガイド</span>
-              <span class="lang lang-zh-CN">王国转移指南</span>
               <span class="lang lang-zh-TW">王國轉移指南</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="server-timeline" data-guide="server-timeline" data-toc="true"
+        data-title-ko="서버 성장 타임라인"
+        data-title-en="Server Timeline"
+        data-title-ja="サーバー成長タイムライン"
+        data-title-zh-tw="伺服器成長時間線"
+        data-href="/ko/guides/server-timeline.html">
+        <a class="g-link" data-router-ignore="true" href="/ko/guides/server-timeline.html" aria-label="Open Server Timeline Guide">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guides/server-timeline.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">TL</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">서버 성장 타임라인</span>
+              <span class="lang lang-en">Server Timeline</span>
+              <span class="lang lang-ja">サーバー成長タイムライン</span>
+              <span class="lang lang-zh-TW">伺服器成長時間線</span>
             </h2>
           </div>
         </a>

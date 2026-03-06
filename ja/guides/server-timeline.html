@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Kingshot サーバー成長タイムラインガイド | 英雄・ペット・真金・戦争アカデミー日程</title>
+  <meta name="description" content="Kingshot サーバー成長タイムラインガイド。第1世代～第6世代の英雄、ペット、真金1～8、真金るつぼ、戦争アカデミー、サーバー戦（SvS）の開放日程を一目で確認できます。" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ja/guides/server-timeline.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/server-timeline.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/server-timeline.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/server-timeline.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/server-timeline.html" />
+
+  <meta property="og:title" content="Kingshot サーバー成長タイムラインガイド" />
+  <meta property="og:description" content="英雄、ペット、真金、真金るつぼ、戦争アカデミー、サーバー戦（SvS）の開放日程をまとめた Kingshot サーバー成長タイムラインガイドです。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://kingshotdata.kr/ja/guides/server-timeline.html" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guides/server-timeline.webp" />
+
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="stylesheet" href="/css/common.css?v=202509131858">
+  <link rel="stylesheet" href="/css/category.css?v=202509131858">
+  <link rel="stylesheet" href="/css/database.css?v=202509131858">
+  <link rel="stylesheet" href="/css/mobile-patch.css?v=202509131858">
+  <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
+  <link rel="stylesheet" href="/css/header.css?v=202509131858">
+  <link rel="stylesheet" href="/css/sponsor.css?v=202509131858">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;align-items:center;gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block;width:28px;height:28px;border-radius:8px}
+
+    nav.lang{
+      display:flex;gap:8px;flex-wrap:wrap;
+      color:var(--muted);font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text);font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px;height:160px;object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px;font-size:28px;line-height:1.15}
+    .sub{margin:0;color:var(--muted)}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .jump{
+      margin-top:10px;
+      display:flex;gap:10px;flex-wrap:wrap;
+      font-size:13px;color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px;font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(245,158,11,.35);
+      background:rgba(245,158,11,.08);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px;height:18px;flex:0 0 18px;
+      margin-top:2px;
+      color:#b45309;
+    }
+
+    .timeline-grid{
+      display:grid;
+      gap:14px;
+    }
+
+    .block{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      overflow:hidden;
+    }
+    .block-head{
+      padding:14px 16px;
+      border-bottom:1px solid var(--border);
+      background:#f8fafc;
+      font-weight:900;
+      font-size:16px;
+    }
+
+    .timeline-list{
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+    .timeline-list li{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      padding:13px 16px;
+      border-bottom:1px solid var(--border);
+      align-items:start;
+    }
+    .timeline-list li:last-child{border-bottom:0}
+
+    .timeline-left{
+      min-width:0;
+    }
+    .timeline-left strong{
+      display:block;
+      font-size:14px;
+      line-height:1.35;
+      margin-bottom:2px;
+    }
+    .timeline-left .desc{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .timeline-day{
+      white-space:nowrap;
+      font-weight:900;
+      font-size:13px;
+      color:var(--brand);
+      text-align:right;
+    }
+
+    .mini-note{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    .update-box{
+      margin-top:14px;
+      padding:14px 16px;
+      border:1px solid rgba(37,99,235,.18);
+      background:rgba(37,99,235,.05);
+      border-radius:14px;
+      color:#1e3a8a;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .related-sections{
+      display:grid;
+      gap:18px;
+    }
+
+    .related-group h3{
+      margin:0 0 10px;
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:-.02em;
+    }
+
+    .card-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:12px;
+    }
+    .info-card{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+      text-decoration:none;
+      color:var(--text);
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+    .info-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 24px rgba(0,0,0,.06);
+      border-color:#c7d2fe;
+      text-decoration:none;
+    }
+    .info-card img{
+      width:56px;
+      height:56px;
+      object-fit:contain;
+      border-radius:12px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:6px;
+      flex:0 0 56px;
+    }
+    .info-card .card-body{
+      min-width:0;
+    }
+    .info-card strong{
+      display:block;
+      margin-bottom:4px;
+      font-size:14px;
+      line-height:1.35;
+    }
+    .info-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    @media (max-width:900px){
+      header.top{position:sticky;top:0;z-index:40}
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+      .timeline-list li{grid-template-columns:1fr}
+      .timeline-day{text-align:left}
+      .card-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+      .block-head{padding:12px 14px}
+      .timeline-list li{padding:12px 14px}
+      .info-card{padding:12px}
+      .info-card img{width:52px;height:52px;flex-basis:52px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot サーバー成長タイムラインガイド",
+    "inLanguage":"ja",
+    "description":"Kingshot サーバー基準の主要コンテンツ開放日程と英雄、ペット、真金、戦争アカデミー、サーバー戦の時期をまとめたガイドです。",
+    "mainEntityOfPage":"https://kingshotdata.kr/ja/guides/server-timeline.html",
+    "author":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Kingshot Data",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+      }
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ja/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/server-timeline.html">EN</a>
+        <a href="/ko/guides/server-timeline.html">KO</a>
+        <a href="/ja/guides/server-timeline.html" aria-current="page">JA</a>
+        <a href="/zh-tw/guides/server-timeline.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概要</a>
+      <a href="#timeline">タイムライン</a>
+      <a href="#links">関連リンク</a>
+      <a href="#notice">注意事項</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ja/">ホーム</a> <span class="muted">›</span>
+        <a href="/ja/guides/">ガイド</a> <span class="muted">›</span>
+        <span>サーバー成長タイムライン</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/guides/server-timeline.webp" alt="Kingshot サーバー成長タイムライン" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>Kingshot サーバー成長タイムラインガイド</h1>
+          <p class="sub">
+            領主の皆さま、以下は Kingshot サーバー基準の主要コンテンツ開放日程です。
+            第1世代～第6世代の英雄とペット、真金コンテンツ、真金るつぼ、戦争アカデミー、サーバー戦（SvS）まで、サーバー成長の流れに沿って一目で確認できるよう整理しました。
+          </p>
+          <div class="quote">
+            実際の適用日程はサーバー進行状況によって多少異なる場合があります。通常は最短10日、最大20日ほどの差が出ることがあるため、参考用としてご活用ください。
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">概要</a><span class="dotsep">•</span>
+            <a href="#timeline">タイムライン</a><span class="dotsep">•</span>
+            <a href="#links">関連リンク</a><span class="dotsep">•</span>
+            <a href="#notice">注意事項</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>概要</h2>
+        <p>
+          このページは、Kingshot サーバーの成長に合わせてどのコンテンツがいつ頃開放されるのかを、すばやく確認できるように作成したタイムラインガイドです。
+          特に英雄世代の切り替え、ペット実装、真金段階、真金るつぼ、戦争アカデミー、サーバー戦（SvS）といった重要な流れを一目で把握できます。
+        </p>
+        <p>
+          各日程はサーバー作成日を基準とした予想日数であり、実際のサーバー状況によって開放時期は変わることがあります。
+          そのため、絶対的な固定日程というよりは、準備タイミングを把握するための参考情報としてご利用ください。
+        </p>
+
+        <div class="note" role="note" aria-label="Server start date tip">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>サーバー作成日確認のヒント:</strong>
+            VIP を漏れなく進めている場合はその記録を基準に確認でき、
+            もし抜けがある場合は、道しるべ最上段の目標達成日から7日引くとサーバー作成日になります。
+          </div>
+        </div>
+
+        <div class="update-box">
+          この投稿はサーバー進行状況に応じて継続的に補完され、最終的には TG10 区間まで更新される予定です。
+        </div>
+      </section>
+
+      <section id="timeline">
+        <span class="anchor"></span>
+        <h2>サーバー成長タイムライン</h2>
+
+        <div class="timeline-grid">
+          <div class="block">
+            <div class="block-head">初期コンテンツ</div>
+            <ul class="timeline-list">
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ja/heroes/">第1世代英雄実装</a></strong>
+                  <div class="desc">サーバーオープンと同時に始まる初期英雄区間です。</div>
+                </div>
+                <div class="timeline-day">0日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>平原地域の霧解除</strong>
+                  <div class="desc">序盤フィールド拡張区間です。</div>
+                </div>
+                <div class="timeline-day">14日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>沃土地域の霧解除</strong>
+                  <div class="desc">ワールド拡張の流れで重要な時点です。</div>
+                </div>
+                <div class="timeline-day">38日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ja/heroes/">第2世代英雄実装</a></strong>
+                  <div class="desc">初期メタ変化が始まる区間です。</div>
+                </div>
+                <div class="timeline-day">40日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>同盟資源交換機能オープン</strong>
+                  <div class="desc">同盟運営効率に影響する機能です。</div>
+                </div>
+                <div class="timeline-day">45日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>キャッスル戦闘</strong>
+                  <div class="desc">サーバー競争構造が本格化し始めます。</div>
+                </div>
+                <div class="timeline-day">54日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>第1世代ペット実装</strong>
+                  <div class="desc">初期ペットシステムが開放される時期です。</div>
+                </div>
+                <div class="timeline-day">55日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>真金コンテンツ開始（真金1・2・3）</strong>
+                  <div class="desc">真金時代への突入。都市成長構造が大きく変わる重要区間です。関連建物は <a href="/ja/buildings/town-center.html">タウンセンター</a> で確認できます。</div>
+                </div>
+                <div class="timeline-day">60～70日目</div>
+              </li>
+            </ul>
+            <div class="mini-note">重要コンテンツ: 2～6週目の最強領主報酬はアマデウスです。</div>
+          </div>
+
+          <div class="block">
+            <div class="block-head">サーバー戦闘コンテンツ</div>
+            <ul class="timeline-list">
+              <li>
+                <div class="timeline-left">
+                  <strong>第2世代ペット実装</strong>
+                  <div class="desc">サーバー戦直前に成長幅が大きくなる区間です。</div>
+                </div>
+                <div class="timeline-day">75～80日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>最強王国（サーバー戦 / SvS）、至高の領主</strong>
+                  <div class="desc">近い戦力のサーバーとマッチングされ、通常は30日以内に作成されたサーバーの中からランダムに割り当てられます。</div>
+                </div>
+                <div class="timeline-day">80日目</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <div class="block-head">中後半コンテンツ</div>
+            <ul class="timeline-list">
+              <li>
+                <div class="timeline-left">
+                  <strong>第3世代ペット実装</strong>
+                  <div class="desc">中盤成長の転換点です。</div>
+                </div>
+                <div class="timeline-day">100～110日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ja/heroes/">第3世代英雄実装</a></strong>
+                  <div class="desc">戦闘編成と英雄メタが再び大きく変わる区間です。</div>
+                </div>
+                <div class="timeline-day">100～120日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>真金4・5 & <a href="/ja/buildings/truegold-crucible.html">真金るつぼ</a> オープン</strong>
+                  <div class="desc">真金中盤区間の重要ポイントです。真金るつぼの解放タイミングとしてよく参考にされます。</div>
+                </div>
+                <div class="timeline-day">150日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>第4世代ペット実装</strong>
+                  <div class="desc">中後半成長区間の始まりです。</div>
+                </div>
+                <div class="timeline-day">190～200日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ja/heroes/">第4世代英雄実装</a></strong>
+                  <div class="desc">英雄世代転換の主要分岐点です。</div>
+                </div>
+                <div class="timeline-day">190～200日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ja/buildings/war-academy.html">戦争アカデミー</a> オープン</strong>
+                  <div class="desc">後半の真金研究と噛み合う重要コンテンツです。</div>
+                </div>
+                <div class="timeline-day">220～230日目</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <div class="block-head">後半コンテンツ</div>
+            <ul class="timeline-list">
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ja/heroes/">第5世代英雄実装</a></strong>
+                  <div class="desc">後半メタ転換の重要な時期です。</div>
+                </div>
+                <div class="timeline-day">260～280日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>第5世代ペット実装</strong>
+                  <div class="desc">後半の成長速度が再び上がる区間です。</div>
+                </div>
+                <div class="timeline-day">260～280日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>真金 Lv.8 解放</strong>
+                  <div class="desc">長期成長基準で非常に重要な真金後半区間です。</div>
+                </div>
+                <div class="timeline-day">310～320日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ja/heroes/">第6世代英雄実装</a></strong>
+                  <div class="desc">最新世代基準の上位メタ区間へ移行します。</div>
+                </div>
+                <div class="timeline-day">360日目</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>第6世代ペット実装</strong>
+                  <div class="desc">最新成長区間とともに開放される後半コンテンツです。</div>
+                </div>
+                <div class="timeline-day">360日目</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="links">
+        <h2>関連リンク</h2>
+        <p class="muted" style="margin-top:-2px">タイムラインで言及した主要ページをまとめて掲載しています。</p>
+
+        <div class="related-sections">
+          <div class="related-group">
+            <h3>関連英雄</h3>
+            <div class="card-grid">
+              <a class="info-card" href="/ja/heroes/">
+                <img src="/img/home/helgachar.png" alt="英雄ページ" loading="lazy" decoding="async" width="56" height="56" />
+                <div class="card-body">
+                  <strong>英雄ページ</strong>
+                  <p>世代別の英雄情報と詳細データを確認できます。</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="related-group">
+            <h3>関連建物</h3>
+            <div class="card-grid">
+              <a class="info-card" href="/ja/buildings/town-center.html">
+                <img src="/img/buildings/town-center.webp" alt="タウンセンター" loading="lazy" decoding="async" width="56" height="56" />
+                <div class="card-body">
+                  <strong>タウンセンター</strong>
+                  <p>真金段階への進入と TG 区間の流れを確認できます。</p>
+                </div>
+              </a>
+
+              <a class="info-card" href="/ja/buildings/truegold-crucible.html">
+                <img src="/img/buildings/truegold-crucible-kingshot.webp" alt="真金るつぼ" loading="lazy" decoding="async" width="56" height="56" />
+                <div class="card-body">
+                  <strong>真金るつぼ</strong>
+                  <p>真金4～5区間で重要な建物です。</p>
+                </div>
+              </a>
+
+              <a class="info-card" href="/ja/buildings/war-academy.html">
+                <img src="/img/buildings/war-academy.webp" alt="戦争アカデミー" loading="lazy" decoding="async" width="56" height="56" />
+                <div class="card-body">
+                  <strong>戦争アカデミー</strong>
+                  <p>後半サーバー成長で重要度が高い核心建物です。</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="notice">
+        <h2>注意事項</h2>
+        <div class="note" role="note" aria-label="Notice">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>注意:</strong>
+            上記日程はサーバー作成日基準の予想日数であり、実際のコンテンツ開放時点はサーバーごとに多少異なる場合があります。
+          </div>
+        </div>
+
+        <p>
+          本ガイドは Kingshot Data が制作した参考用コンテンツです。
+          正確な日程と内容については、必ず Kingshot 公式チャンネルのお知らせもあわせてご確認ください。
+        </p>
+
+        <div class="related">
+          <a class="pill" href="https://www.facebook.com/profile.php?id=61560003321785" target="_blank" rel="noopener noreferrer">Kingshot 公式チャンネル</a>
+          <a class="pill" href="/ja/guides/">ガイド一覧</a>
+          <a class="pill" href="/ja/database/">データベース</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', initStickyObservers);
+      }else{
+        initStickyObservers();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Kingshot Server Timeline Guide | Heroes, Pets, Truegold, War Academy Schedule</title>
+  <meta name="description" content="Kingshot server timeline guide. Check when Generation 1–6 Heroes, Pets, Age of Truegold, Truegold Crucible, War Academy, and Kingdom of Power become available." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/en/guides/server-timeline.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/server-timeline.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/server-timeline.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/server-timeline.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/server-timeline.html" />
+
+  <meta property="og:title" content="Kingshot Server Timeline Guide" />
+  <meta property="og:description" content="A complete Kingshot server timeline guide covering heroes, pets, Truegold, Truegold Crucible, War Academy, and Kingdom of Power unlock timings." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://kingshotdata.kr/en/guides/server-timeline.html" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guides/server-timeline.webp" />
+
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="stylesheet" href="/css/common.css?v=202509131858">
+  <link rel="stylesheet" href="/css/category.css?v=202509131858">
+  <link rel="stylesheet" href="/css/database.css?v=202509131858">
+  <link rel="stylesheet" href="/css/mobile-patch.css?v=202509131858">
+  <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
+  <link rel="stylesheet" href="/css/header.css?v=202509131858">
+  <link rel="stylesheet" href="/css/sponsor.css?v=202509131858">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans","Arial",sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;align-items:center;gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block;width:28px;height:28px;border-radius:8px}
+
+    nav.lang{
+      display:flex;gap:8px;flex-wrap:wrap;
+      color:var(--muted);font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text);font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px;height:160px;object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px;font-size:28px;line-height:1.15}
+    .sub{margin:0;color:var(--muted)}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .jump{
+      margin-top:10px;
+      display:flex;gap:10px;flex-wrap:wrap;
+      font-size:13px;color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px;font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(245,158,11,.35);
+      background:rgba(245,158,11,.08);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px;height:18px;flex:0 0 18px;
+      margin-top:2px;
+      color:#b45309;
+    }
+
+    .timeline-grid{
+      display:grid;
+      gap:14px;
+    }
+
+    .block{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      overflow:hidden;
+    }
+    .block-head{
+      padding:14px 16px;
+      border-bottom:1px solid var(--border);
+      background:#f8fafc;
+      font-weight:900;
+      font-size:16px;
+    }
+
+    .timeline-list{
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+    .timeline-list li{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      padding:13px 16px;
+      border-bottom:1px solid var(--border);
+      align-items:start;
+    }
+    .timeline-list li:last-child{border-bottom:0}
+
+    .timeline-left{
+      min-width:0;
+    }
+    .timeline-left strong{
+      display:block;
+      font-size:14px;
+      line-height:1.35;
+      margin-bottom:2px;
+    }
+    .timeline-left .desc{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .timeline-day{
+      white-space:nowrap;
+      font-weight:900;
+      font-size:13px;
+      color:var(--brand);
+      text-align:right;
+    }
+
+    .mini-note{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    .update-box{
+      margin-top:14px;
+      padding:14px 16px;
+      border:1px solid rgba(37,99,235,.18);
+      background:rgba(37,99,235,.05);
+      border-radius:14px;
+      color:#1e3a8a;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .related-sections{
+      display:grid;
+      gap:18px;
+    }
+
+    .related-group h3{
+      margin:0 0 10px;
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:-.02em;
+    }
+
+    .card-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:12px;
+    }
+    .info-card{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+      text-decoration:none;
+      color:var(--text);
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+    .info-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 24px rgba(0,0,0,.06);
+      border-color:#c7d2fe;
+      text-decoration:none;
+    }
+    .info-card img{
+      width:56px;
+      height:56px;
+      object-fit:contain;
+      border-radius:12px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:6px;
+      flex:0 0 56px;
+    }
+    .info-card .card-body{
+      min-width:0;
+    }
+    .info-card strong{
+      display:block;
+      margin-bottom:4px;
+      font-size:14px;
+      line-height:1.35;
+    }
+    .info-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    @media (max-width:900px){
+      header.top{position:sticky;top:0;z-index:40}
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+      .timeline-list li{grid-template-columns:1fr}
+      .timeline-day{text-align:left}
+      .card-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+      .block-head{padding:12px 14px}
+      .timeline-list li{padding:12px 14px}
+      .info-card{padding:12px}
+      .info-card img{width:52px;height:52px;flex-basis:52px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot Server Timeline (State Age)",
+    "inLanguage":"en",
+    "description":"A guide to Kingshot server timeline and state age, including heroes, pets, Age of Truegold, Truegold Crucible, War Academy, and Kingdom of Power unlock timings.",
+    "mainEntityOfPage":"https://kingshotdata.kr/en/guides/server-timeline.html",
+    "author":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Kingshot Data",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+      }
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/en/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/server-timeline.html" aria-current="page">EN</a>
+        <a href="/ko/guides/server-timeline.html">KO</a>
+        <a href="/ja/guides/server-timeline.html">JA</a>
+        <a href="/zh-tw/guides/server-timeline.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">Overview</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#links">Related Links</a>
+      <a href="#notice">Notes</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/en/">Home</a> <span class="muted">›</span>
+        <a href="/en/guides/">Guides</a> <span class="muted">›</span>
+        <span>Server Timeline</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/guides/server-timeline.webp" alt="Kingshot Server Timeline" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>Kingshot Server Timeline (State Age)</h1>
+          <p class="sub">
+            As your state or server ages in Kingshot, new features, heroes, and pets gradually unlock.
+            This guide summarizes the approximate timeline for major content such as Generation 1–6 Heroes, Pets, Age of Truegold, Truegold Crucible, War Academy, and server battle eligibility.
+          </p>
+          <div class="quote">
+            Actual timings can vary depending on your server's progress. In many cases, the difference can be around 10 to 20 days, so use this page as a practical reference rather than an exact fixed schedule.
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">Overview</a><span class="dotsep">•</span>
+            <a href="#timeline">Timeline</a><span class="dotsep">•</span>
+            <a href="#links">Related Links</a><span class="dotsep">•</span>
+            <a href="#notice">Notes</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>
+          This page is a practical Kingshot server timeline guide built to help you understand when important content usually becomes available as your state grows older.
+          It covers hero generation changes, pet releases, Age of Truegold, Truegold Crucible, War Academy, and major PvP milestones such as Kingdom of Power.
+        </p>
+        <p>
+          The dates below are estimated using server age as a reference. Actual release timing can vary by server, so this guide should be used to plan ahead and prepare, not as an exact guaranteed schedule.
+        </p>
+
+        <div class="note" role="note" aria-label="State age calculation tip">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>How to estimate State Age:</strong>
+            If you have not missed any VIP login days, you can use your VIP login record as a rough estimate.
+            If there are missing days, you can check the top completion date in the Monument achievement section and subtract 6 days to estimate when the server was created.
+          </div>
+        </div>
+
+        <div class="update-box">
+          This post will continue to be updated as the server progresses, and it is planned to cover future TG10 timing as well.
+        </div>
+      </section>
+
+      <section id="timeline">
+        <span class="anchor"></span>
+        <h2>State / Server Timeline</h2>
+
+        <div class="timeline-grid">
+          <div class="block">
+            <div class="block-head">Early Content</div>
+            <ul class="timeline-list">
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/en/heroes/">Generation 1 Heroes</a></strong>
+                  <div class="desc">The starting hero pool available when the server opens.</div>
+                </div>
+                <div class="timeline-day">0 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>Fog is lifted from Plains</strong>
+                  <div class="desc">An early map expansion milestone.</div>
+                </div>
+                <div class="timeline-day">14 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>Fog is lifted from Fertile Land</strong>
+                  <div class="desc">A key point in world expansion.</div>
+                </div>
+                <div class="timeline-day">38 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/en/heroes/">Generation 2 Heroes</a></strong>
+                  <div class="desc">The early meta begins to change around this point.</div>
+                </div>
+                <div class="timeline-day">40 to 50 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>Alliance Resource Exchange</strong>
+                  <div class="desc">An alliance support feature that improves cooperative progression.</div>
+                </div>
+                <div class="timeline-day">45 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>First Castle Battle</strong>
+                  <div class="desc">A major PvP milestone where server competition starts to intensify.</div>
+                </div>
+                <div class="timeline-day">54 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>Generation 1 Pets</strong>
+                  <div class="desc">Gray Wolf, Lynx, and Bison become available in the early pet phase.</div>
+                </div>
+                <div class="timeline-day">55 to 60 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>Age of Truegold</strong>
+                  <div class="desc">A major progression shift begins. You can also track related building progression on the <a href="/en/buildings/town-center.html">Town Center</a> page.</div>
+                </div>
+                <div class="timeline-day">70 days</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <div class="block-head">Server Battle Content</div>
+            <ul class="timeline-list">
+              <li>
+                <div class="timeline-left">
+                  <strong>Generation 2 Pets</strong>
+                  <div class="desc">Cheetah and Moose become available as the server approaches its first large-scale kingdom competition phase.</div>
+                </div>
+                <div class="timeline-day">75 to 80 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>Kingdom becomes eligible for Kingdom of Power</strong>
+                  <div class="desc">This is the point where your state can begin participating in major server battle content.</div>
+                </div>
+                <div class="timeline-day">70 to 80 days</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <div class="block-head">Mid to Late Content</div>
+            <ul class="timeline-list">
+              <li>
+                <div class="timeline-left">
+                  <strong>Generation 3 Pets</strong>
+                  <div class="desc">Lion and Grizzly Bear mark the next pet growth phase.</div>
+                </div>
+                <div class="timeline-day">105 to 110 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/en/heroes/">Generation 3 Heroes</a></strong>
+                  <div class="desc">A major hero generation shift that changes lineups and priorities.</div>
+                </div>
+                <div class="timeline-day">105 to 120 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>Truegold Level 5 and <a href="/en/buildings/truegold-crucible.html">Truegold Crucible</a></strong>
+                  <div class="desc">A key mid-Truegold milestone. The Truegold Crucible becomes one of the main reference points for server progression.</div>
+                </div>
+                <div class="timeline-day">150 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>Artisan’s Vision in Alliance Championship Store & Vikings Vengeance Level 12 to 20</strong>
+                  <div class="desc">A later progression milestone tied to special systems and event growth.</div>
+                </div>
+                <div class="timeline-day">170 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/en/heroes/">Generation 4 Heroes</a> and Generation 4 Pets</strong>
+                  <div class="desc">Giant Rhino and Mighty Bison appear in this phase. Gen 2 Heroes also become available in Hero Recruitment and Intel Missions.</div>
+                </div>
+                <div class="timeline-day">190 to 200 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/en/buildings/war-academy.html">War Academy</a></strong>
+                  <div class="desc">An important late-game system tied closely to advanced progression and Truegold research.</div>
+                </div>
+                <div class="timeline-day">220 days</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <div class="block-head">Late Content</div>
+            <ul class="timeline-list">
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/en/heroes/">Generation 5 Heroes</a> and Generation 5 Pets</strong>
+                  <div class="desc">Great Moose and Alpha Black Panther mark another major endgame transition.</div>
+                </div>
+                <div class="timeline-day">270 to 280 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>Truegold Level 8 and Tempered Truegold</strong>
+                  <div class="desc">A major late-Truegold milestone for long-term progression planning.</div>
+                </div>
+                <div class="timeline-day">310 to 320 days</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/en/heroes/">Generation 6 Heroes</a> and Generation 6 Pets</strong>
+                  <div class="desc">Regal White Lion and Ironclad War Elephant become available as the latest high-end progression phase begins.</div>
+                </div>
+                <div class="timeline-day">350 to 360 days</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="links">
+        <h2>Related Links</h2>
+        <p class="muted" style="margin-top:-2px">These pages are closely connected to the timeline milestones listed above.</p>
+
+        <div class="related-sections">
+          <div class="related-group">
+            <h3>Related Heroes</h3>
+            <div class="card-grid">
+              <a class="info-card" href="/en/heroes/">
+                <img src="/img/home/helgachar.png" alt="Heroes page" loading="lazy" decoding="async" width="56" height="56" />
+                <div class="card-body">
+                  <strong>Heroes Page</strong>
+                  <p>Browse generation-based hero information and detailed data.</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="related-group">
+            <h3>Related Buildings</h3>
+            <div class="card-grid">
+              <a class="info-card" href="/en/buildings/town-center.html">
+                <img src="/img/buildings/town-center.webp" alt="Town Center" loading="lazy" decoding="async" width="56" height="56" />
+                <div class="card-body">
+                  <strong>Town Center</strong>
+                  <p>Check overall progression into Truegold stages and TG milestones.</p>
+                </div>
+              </a>
+
+              <a class="info-card" href="/en/buildings/truegold-crucible.html">
+                <img src="/img/buildings/truegold-crucible-kingshot.webp" alt="Truegold Crucible" loading="lazy" decoding="async" width="56" height="56" />
+                <div class="card-body">
+                  <strong>Truegold Crucible</strong>
+                  <p>An important building around the Truegold 4–5 stage.</p>
+                </div>
+              </a>
+
+              <a class="info-card" href="/en/buildings/war-academy.html">
+                <img src="/img/buildings/war-academy.webp" alt="War Academy" loading="lazy" decoding="async" width="56" height="56" />
+                <div class="card-body">
+                  <strong>War Academy</strong>
+                  <p>A key late-game building with strong relevance to server growth.</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="notice">
+        <h2>Notes</h2>
+        <div class="note" role="note" aria-label="Notice">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Note:</strong>
+            The timeline above is based on estimated server age. Actual content release timing may vary slightly depending on your server.
+          </div>
+        </div>
+
+        <p>
+          This guide is a reference resource created by Kingshot Data.
+          For exact timing and official details, always check the official Kingshot channels as well.
+        </p>
+
+        <div class="related">
+          <a class="pill" href="https://www.facebook.com/profile.php?id=61560003321785" target="_blank" rel="noopener noreferrer">Official Kingshot Channel</a>
+          <a class="pill" href="/en/guides/">More Guides</a>
+          <a class="pill" href="/en/database/">Database</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', initStickyObservers);
+      }else{
+        initStickyObservers();
+      }
+    })();
+  </script>
+</body>
+</html>

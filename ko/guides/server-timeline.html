@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>킹샷 서버 성장 타임라인 가이드 | 영웅, 펫, 순금, 전쟁아카데미 일정</title>
+  <meta name="description" content="킹샷 서버 성장 타임라인 가이드. 1세대~6세대 영웅, 펫, 순금 1~8, 순금용광로, 전쟁아카데미, 서버전(SvS) 오픈 일정을 한눈에 정리했습니다." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/server-timeline.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/server-timeline.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/server-timeline.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/server-timeline.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/server-timeline.html" />
+
+  <meta property="og:title" content="킹샷 서버 성장 타임라인 가이드" />
+  <meta property="og:description" content="영웅, 펫, 순금, 순금용광로, 전쟁아카데미, 서버전(SvS) 오픈 일정을 한 번에 정리한 킹샷 서버 성장 타임라인 가이드." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/guides/server-timeline.html" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guides/server-timeline.webp" />
+
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="stylesheet" href="/css/common.css?v=202509131858">
+  <link rel="stylesheet" href="/css/category.css?v=202509131858">
+  <link rel="stylesheet" href="/css/database.css?v=202509131858">
+  <link rel="stylesheet" href="/css/mobile-patch.css?v=202509131858">
+  <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
+  <link rel="stylesheet" href="/css/header.css?v=202509131858">
+  <link rel="stylesheet" href="/css/sponsor.css?v=202509131858">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;align-items:center;gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block;width:28px;height:28px;border-radius:8px}
+
+    nav.lang{
+      display:flex;gap:8px;flex-wrap:wrap;
+      color:var(--muted);font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text);font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px;height:160px;object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px;font-size:28px;line-height:1.15}
+    .sub{margin:0;color:var(--muted)}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .jump{
+      margin-top:10px;
+      display:flex;gap:10px;flex-wrap:wrap;
+      font-size:13px;color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px;font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(245,158,11,.35);
+      background:rgba(245,158,11,.08);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px;height:18px;flex:0 0 18px;
+      margin-top:2px;
+      color:#b45309;
+    }
+
+    .timeline-grid{
+      display:grid;
+      gap:14px;
+    }
+
+    .block{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      overflow:hidden;
+    }
+    .block-head{
+      padding:14px 16px;
+      border-bottom:1px solid var(--border);
+      background:#f8fafc;
+      font-weight:900;
+      font-size:16px;
+    }
+
+    .timeline-list{
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+    .timeline-list li{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      padding:13px 16px;
+      border-bottom:1px solid var(--border);
+      align-items:start;
+    }
+    .timeline-list li:last-child{border-bottom:0}
+
+    .timeline-left{
+      min-width:0;
+    }
+    .timeline-left strong{
+      display:block;
+      font-size:14px;
+      line-height:1.35;
+      margin-bottom:2px;
+    }
+    .timeline-left .desc{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .timeline-day{
+      white-space:nowrap;
+      font-weight:900;
+      font-size:13px;
+      color:var(--brand);
+      text-align:right;
+    }
+
+    .mini-note{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    .update-box{
+      margin-top:14px;
+      padding:14px 16px;
+      border:1px solid rgba(37,99,235,.18);
+      background:rgba(37,99,235,.05);
+      border-radius:14px;
+      color:#1e3a8a;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .related-sections{
+      display:grid;
+      gap:18px;
+    }
+
+    .related-group h3{
+      margin:0 0 10px;
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:-.02em;
+    }
+
+    .card-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:12px;
+    }
+    .info-card{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+      text-decoration:none;
+      color:var(--text);
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+    .info-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 24px rgba(0,0,0,.06);
+      border-color:#c7d2fe;
+      text-decoration:none;
+    }
+    .info-card img{
+      width:56px;
+      height:56px;
+      object-fit:contain;
+      border-radius:12px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:6px;
+      flex:0 0 56px;
+    }
+    .info-card .card-body{
+      min-width:0;
+    }
+    .info-card strong{
+      display:block;
+      margin-bottom:4px;
+      font-size:14px;
+      line-height:1.35;
+    }
+    .info-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    @media (max-width:900px){
+      header.top{position:sticky;top:0;z-index:40}
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+      .timeline-list li{grid-template-columns:1fr}
+      .timeline-day{text-align:left}
+      .card-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+      .block-head{padding:12px 14px}
+      .timeline-list li{padding:12px 14px}
+      .info-card{padding:12px}
+      .info-card img{width:52px;height:52px;flex-basis:52px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"킹샷 서버 성장 타임라인 가이드",
+    "inLanguage":"ko",
+    "description":"킹샷 서버 기준 주요 콘텐츠 오픈 일정과 영웅, 펫, 순금, 전쟁아카데미, 서버전 시기를 정리한 가이드.",
+    "mainEntityOfPage":"https://kingshotdata.kr/ko/guides/server-timeline.html",
+    "author":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Kingshot Data",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+      }
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/server-timeline.html">EN</a>
+        <a href="/ko/guides/server-timeline.html" aria-current="page">KO</a>
+        <a href="/ja/guides/server-timeline.html">JA</a>
+        <a href="/zh-tw/guides/server-timeline.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">개요</a>
+      <a href="#timeline">타임라인</a>
+      <a href="#links">관련 링크</a>
+      <a href="#notice">주의사항</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/guides/">가이드</a> <span class="muted">›</span>
+        <span>서버 성장 타임라인</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/guides/server-timeline.webp" alt="킹샷 서버 성장 타임라인" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>킹샷 서버 성장 타임라인 가이드</h1>
+          <p class="sub">
+            영주 여러분, 아래는 킹샷 서버 기준 주요 콘텐츠 오픈 일정입니다.
+            1세대~6세대 영웅과 펫, 순금 콘텐츠, 순금용광로, 전쟁아카데미, 서버전(SvS)까지 서버 성장 흐름에 맞춰 한 번에 정리했습니다.
+          </p>
+          <div class="quote">
+            실제 적용 일정은 서버 진행도에 따라 다소 차이가 있을 수 있습니다. 보통 최소 10일에서 최대 20일 정도 차이가 발생할 수 있으므로 참고용으로 활용해 주세요.
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">개요</a><span class="dotsep">•</span>
+            <a href="#timeline">타임라인</a><span class="dotsep">•</span>
+            <a href="#links">관련 링크</a><span class="dotsep">•</span>
+            <a href="#notice">주의사항</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>개요</h2>
+        <p>
+          이 페이지는 킹샷 서버가 성장하면서 어떤 콘텐츠가 언제쯤 열리는지 빠르게 확인할 수 있도록 만든 타임라인 가이드입니다.
+          특히 영웅 세대 교체, 펫 출시, 순금 단계, 순금용광로, 전쟁아카데미, 서버전(SvS) 시점 같은 핵심 흐름을 한눈에 파악할 수 있습니다.
+        </p>
+        <p>
+          각 일정은 서버 생성일 기준 예상 일차이며, 실제 서버 상태에 따라 오픈 시점은 달라질 수 있습니다.
+          따라서 절대적인 고정 일정이라기보다 준비 타이밍을 잡는 참고용으로 보는 것이 좋습니다.
+        </p>
+
+        <div class="note" role="note" aria-label="Server start date tip">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>서버 생성일 확인 팁:</strong>
+            VIP를 누락 없이 진행했다면 해당 기록 기준으로 확인할 수 있고,
+            만약 누락이 발생했다면 이정표 최상단의 목표 달성일에서 7일을 빼면 서버 생성일입니다.
+          </div>
+        </div>
+
+        <div class="update-box">
+          본 포스팅은 서버 진행 상황에 따라 지속적으로 보완되며, 최종적으로 TG10 구간까지 업데이트될 예정입니다.
+        </div>
+      </section>
+
+      <section id="timeline">
+        <span class="anchor"></span>
+        <h2>서버 성장 타임라인</h2>
+
+        <div class="timeline-grid">
+          <div class="block">
+            <div class="block-head">초기 콘텐츠</div>
+            <ul class="timeline-list">
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ko/heroes/">1세대 영웅 출시</a></strong>
+                  <div class="desc">서버 오픈과 함께 시작되는 초기 영웅 구간입니다.</div>
+                </div>
+                <div class="timeline-day">0일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>평원지역 안개 해제</strong>
+                  <div class="desc">초반 필드 확장 구간입니다.</div>
+                </div>
+                <div class="timeline-day">14일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>옥토지역 안개 해제</strong>
+                  <div class="desc">월드 확장 흐름에서 중요한 시점입니다.</div>
+                </div>
+                <div class="timeline-day">38일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ko/heroes/">2세대 영웅 출시</a></strong>
+                  <div class="desc">초기 메타 변화가 시작되는 구간입니다.</div>
+                </div>
+                <div class="timeline-day">40일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>연맹 자원 교환 기능 오픈</strong>
+                  <div class="desc">연맹 운영 효율에 영향을 주는 기능입니다.</div>
+                </div>
+                <div class="timeline-day">45일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>캐슬 전투</strong>
+                  <div class="desc">서버 경쟁 구조가 본격화되기 시작합니다.</div>
+                </div>
+                <div class="timeline-day">54일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>1세대 펫 출시</strong>
+                  <div class="desc">초기 펫 시스템이 열리는 시기입니다.</div>
+                </div>
+                <div class="timeline-day">55일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>순금 콘텐츠 시작 (순금 1, 2, 3)</strong>
+                  <div class="desc">순금 시대 진입. 도시 성장 구조가 크게 바뀌는 핵심 구간입니다. 관련 건물은 <a href="/ko/buildings/town-center.html">도시센터</a>에서 함께 확인할 수 있습니다.</div>
+                </div>
+                <div class="timeline-day">60~70일차</div>
+              </li>
+            </ul>
+            <div class="mini-note">중요 콘텐츠: 2~6주차 최강영주 보상은 아마데우스입니다.</div>
+          </div>
+
+          <div class="block">
+            <div class="block-head">서버 전투 콘텐츠</div>
+            <ul class="timeline-list">
+              <li>
+                <div class="timeline-left">
+                  <strong>2세대 펫 출시</strong>
+                  <div class="desc">서버전 직전 성장 폭이 커지는 구간입니다.</div>
+                </div>
+                <div class="timeline-day">75~80일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>최강왕국 (서버전 / SvS), 지고의영주</strong>
+                  <div class="desc">비슷한 전투력을 가진 서버와 매칭되며, 보통 30일 이내 생성된 서버 중 랜덤 배정됩니다.</div>
+                </div>
+                <div class="timeline-day">80일차</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <div class="block-head">중후반 콘텐츠</div>
+            <ul class="timeline-list">
+              <li>
+                <div class="timeline-left">
+                  <strong>3세대 펫 출시</strong>
+                  <div class="desc">중반 성장 전환점입니다.</div>
+                </div>
+                <div class="timeline-day">100~110일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ko/heroes/">3세대 영웅 출시</a></strong>
+                  <div class="desc">전투 조합과 영웅 메타가 다시 한 번 바뀌는 구간입니다.</div>
+                </div>
+                <div class="timeline-day">100~120일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>순금 4, 5 & <a href="/ko/buildings/truegold-crucible.html">순금용광로</a> 오픈</strong>
+                  <div class="desc">순금 중반 구간의 핵심 포인트입니다. 순금용광로 해금 타이밍으로 많이 참고합니다.</div>
+                </div>
+                <div class="timeline-day">150일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>4세대 펫 출시</strong>
+                  <div class="desc">중후반 성장 구간의 시작입니다.</div>
+                </div>
+                <div class="timeline-day">190~200일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ko/heroes/">4세대 영웅 출시</a></strong>
+                  <div class="desc">영웅 세대 전환의 주요 분기점입니다.</div>
+                </div>
+                <div class="timeline-day">190~200일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ko/buildings/war-academy.html">전쟁아카데미</a> 오픈</strong>
+                  <div class="desc">후반 순금 연구와 맞물리는 중요 콘텐츠입니다.</div>
+                </div>
+                <div class="timeline-day">220~230일차</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <div class="block-head">후반 콘텐츠</div>
+            <ul class="timeline-list">
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ko/heroes/">5세대 영웅 출시</a></strong>
+                  <div class="desc">후반 메타 전환의 핵심 시기입니다.</div>
+                </div>
+                <div class="timeline-day">260~280일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>5세대 펫 출시</strong>
+                  <div class="desc">후반 성장 속도가 다시 빨라지는 구간입니다.</div>
+                </div>
+                <div class="timeline-day">260~280일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>순금 Lv.8 해금</strong>
+                  <div class="desc">장기 성장 기준에서 매우 중요한 순금 후반 구간입니다.</div>
+                </div>
+                <div class="timeline-day">310~320일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong><a href="/ko/heroes/">6세대 영웅 출시</a></strong>
+                  <div class="desc">최신 세대 기준의 상위 메타 구간으로 넘어갑니다.</div>
+                </div>
+                <div class="timeline-day">360일차</div>
+              </li>
+              <li>
+                <div class="timeline-left">
+                  <strong>6세대 펫 출시</strong>
+                  <div class="desc">최신 성장 구간과 함께 열리는 후반 콘텐츠입니다.</div>
+                </div>
+                <div class="timeline-day">360일차</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="links">
+        <h2>관련 링크</h2>
+        <p class="muted" style="margin-top:-2px">타임라인에서 언급된 주요 페이지를 함께 연결해두었습니다.</p>
+
+        <div class="related-sections">
+          <div class="related-group">
+            <h3>관련 영웅</h3>
+            <div class="card-grid">
+              <a class="info-card" href="/ko/heroes/">
+                <img src="/img/home/helgachar.png" alt="영웅 페이지" loading="lazy" decoding="async" width="56" height="56" />
+                <div class="card-body">
+                  <strong>영웅 페이지</strong>
+                  <p>세대별 영웅 정보와 상세 데이터를 확인할 수 있습니다.</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="related-group">
+            <h3>관련 건물</h3>
+            <div class="card-grid">
+              <a class="info-card" href="/ko/buildings/town-center.html">
+                <img src="/img/buildings/town-center.webp" alt="도시센터" loading="lazy" decoding="async" width="56" height="56" />
+                <div class="card-body">
+                  <strong>도시센터</strong>
+                  <p>순금 단계 진입과 TG 구간 흐름을 함께 확인할 수 있습니다.</p>
+                </div>
+              </a>
+
+              <a class="info-card" href="/ko/buildings/truegold-crucible.html">
+                <img src="/img/buildings/truegold-crucible-kingshot.webp" alt="순금용광로" loading="lazy" decoding="async" width="56" height="56" />
+                <div class="card-body">
+                  <strong>순금용광로</strong>
+                  <p>순금 4~5 구간에서 중요한 건물입니다.</p>
+                </div>
+              </a>
+
+              <a class="info-card" href="/ko/buildings/war-academy.html">
+                <img src="/img/buildings/war-academy.webp" alt="전쟁아카데미" loading="lazy" decoding="async" width="56" height="56" />
+                <div class="card-body">
+                  <strong>전쟁아카데미</strong>
+                  <p>후반 서버 성장에서 의미가 커지는 핵심 건물입니다.</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="notice">
+        <h2>주의사항</h2>
+        <div class="note" role="note" aria-label="Notice">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>주의:</strong>
+            위 일정은 서버 생성일 기준 예상 일차이며, 실제 콘텐츠 오픈 시점은 서버별로 다소 차이가 있을 수 있습니다.
+          </div>
+        </div>
+
+        <p>
+          본 가이드는 킹샷 데이터에서 제작한 참고용 콘텐츠입니다.
+          정확한 일정과 내용은 반드시 킹샷 공식 채널 공지사항을 함께 확인해 주세요.
+        </p>
+
+        <div class="related">
+          <a class="pill" href="https://www.facebook.com/profile.php?id=61560003321785" target="_blank" rel="noopener noreferrer">킹샷 공식 채널</a>
+          <a class="pill" href="/ko/guides/">가이드 더 보기</a>
+          <a class="pill" href="/ko/database/">데이터베이스</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', initStickyObservers);
+      }else{
+        initStickyObservers();
+      }
+    })();
+  </script>
+</body>
+</html>
