@@ -3,13 +3,319 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title data-i18n="waracademy.page_title">전쟁 아카데미 (황금 병종)</title>
-  <link rel="preload" href="/js/pages/waracademy.js" as="script">
+
+  <title data-i18n="waracademy.page_title">전쟁아카데미 연구 트리 | 황금 보병·궁병·기병 연구 조건, 비용, 보너스</title>
+  <meta name="description" content="킹샷 전쟁아카데미 연구 트리 페이지. 황금 보병, 황금 궁병, 황금 기병의 연구 조건, 자원 소모량, 보너스 효과, 전체 업그레이드 표를 한눈에 확인하세요." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/waracademy" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/waracademy" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/waracademy" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/waracademy" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-TW/waracademy" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/waracademy" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="KingshotData.kr" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:title" content="전쟁아카데미 연구 트리 | 황금 보병·궁병·기병 연구 조건, 비용, 보너스" />
+  <meta property="og:description" content="킹샷 전쟁아카데미 연구 트리 페이지. 황금 보병, 황금 궁병, 황금 기병의 연구 조건, 자원 소모량, 보너스 효과, 전체 업그레이드 표를 확인하세요." />
+  <meta property="og:url" content="https://kingshotdata.kr/waracademy" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/waracademy/waracademy-og.webp" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="전쟁아카데미 연구 트리 | 황금 보병·궁병·기병 연구 조건, 비용, 보너스" />
+  <meta name="twitter:description" content="킹샷 전쟁아카데미 연구 트리 페이지. 황금 보병, 황금 궁병, 황금 기병의 연구 조건, 자원 소모량, 보너스 효과, 전체 업그레이드 표를 확인하세요." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/waracademy/waracademy-og.webp" />
+
+  <link rel="preload" href="/js/pages/waracademy.js" as="script" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"홈",
+        "item":"https://kingshotdata.kr/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"데이터베이스",
+        "item":"https://kingshotdata.kr/database"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"전쟁아카데미 연구 트리",
+        "item":"https://kingshotdata.kr/waracademy"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    "name":"전쟁아카데미 연구 트리",
+    "headline":"전쟁아카데미 연구 트리",
+    "description":"황금 보병, 황금 궁병, 황금 기병의 연구 조건, 자원 소모량, 보너스 효과, 전체 업그레이드 표를 확인할 수 있는 페이지입니다.",
+    "url":"https://kingshotdata.kr/waracademy",
+    "inLanguage":"ko",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"KingshotData.kr",
+      "url":"https://kingshotdata.kr/"
+    },
+    "about":[
+      {"@type":"Thing","name":"전쟁아카데미"},
+      {"@type":"Thing","name":"황금 보병"},
+      {"@type":"Thing","name":"황금 궁병"},
+      {"@type":"Thing","name":"황금 기병"}
+    ]
+  }
+  </script>
+
+  <style>
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px;
+    }
+
+    .wa-intro{
+      margin:0 0 18px;
+      color:#4b5563;
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    .wa-accordion{
+      display:grid;
+      gap:16px;
+    }
+
+    .wa-accordion details{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 2px 8px rgba(0,0,0,.05);
+    }
+
+    .wa-accordion summary{
+      list-style:none;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:16px;
+      cursor:pointer;
+    }
+
+    .wa-accordion summary::-webkit-details-marker{
+      display:none;
+    }
+
+    .wa-accordion summary img{
+      width:88px;
+      height:88px;
+      border-radius:12px;
+      object-fit:cover;
+      flex-shrink:0;
+      background:#f5f5f5;
+    }
+
+    .wa-accordion summary h2,
+    .wa-accordion summary h3{
+      margin:0 0 6px;
+      font-size:20px;
+      line-height:1.3;
+      color:#111827;
+    }
+
+    .wa-accordion summary p{
+      margin:0;
+      font-size:14px;
+      line-height:1.5;
+      color:#6b7280;
+    }
+
+    .wa-content{
+      padding:0 16px 16px;
+    }
+
+    .research-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(48%,1fr));
+      gap:14px;
+      margin-bottom:20px;
+    }
+
+    .wa-card{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      width:100%;
+      border:0;
+      background:#fff;
+      border-radius:10px;
+      box-shadow:0 2px 5px rgba(0,0,0,.08);
+      padding:10px 12px;
+      cursor:pointer;
+      transition:transform .2s, box-shadow .2s;
+      text-align:left;
+    }
+
+    .wa-card img{
+      width:70px;
+      height:70px;
+      border-radius:8px;
+      flex-shrink:0;
+      object-fit:cover;
+    }
+
+    .wa-card .wa-info h4{
+      margin:0 0 4px;
+      font-size:15px;
+      color:#111;
+    }
+
+    .wa-card .wa-info p{
+      margin:0;
+      font-size:13px;
+      color:#555;
+      line-height:1.3;
+    }
+
+    .wa-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 4px 10px rgba(0,0,0,.1);
+    }
+
+    .wa-card.active{
+      outline:2px solid #2b7cff;
+      box-shadow:0 0 0 3px rgba(43,124,255,.2);
+    }
+
+    .research-detail{
+      background:#fff;
+      padding:16px;
+      border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,.08);
+      margin-top:10px;
+      overflow-x:auto;
+    }
+
+    .tg-meta{
+      background:#fff;
+      border-radius:10px;
+      padding:15px;
+      box-shadow:0 2px 5px rgba(0,0,0,.1);
+      margin:16px 0 20px;
+    }
+
+    .tg-meta h2{
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .tg-meta h3{
+      margin:14px 0 8px;
+      font-size:16px;
+    }
+
+    .tg-meta ul{
+      margin:0;
+      padding-left:16px;
+      line-height:1.7;
+    }
+
+    .tg-table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:14px;
+      font-size:14px;
+      background:#fff;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 2px 6px rgba(0,0,0,.05);
+      min-width:980px;
+    }
+
+    .tg-table thead th{
+      background:linear-gradient(180deg,#f5f5f5,#ececec);
+      color:#222;
+      font-weight:600;
+      padding:8px 10px;
+      border-bottom:2px solid #ddd;
+      text-align:center;
+      position:sticky;
+      top:0;
+      z-index:1;
+      white-space:nowrap;
+    }
+
+    .tg-table tbody td{
+      padding:7px 10px;
+      border:1px solid #eee;
+      text-align:center;
+      vertical-align:middle;
+      line-height:1.4;
+    }
+
+    .tg-table tbody tr:nth-child(even){
+      background:#fafafa;
+    }
+
+    .tg-table tbody tr:hover{
+      background:#f0f7ff;
+      transition:background .15s;
+    }
+
+    .tg-table .tg-total td{
+      font-weight:700;
+      background:#fff7e6;
+      border-top:2px solid #f0c36d;
+    }
+
+    @media (max-width: 768px){
+      .research-grid{
+        grid-template-columns:1fr;
+      }
+
+      .wa-accordion summary{
+        align-items:flex-start;
+      }
+
+      .wa-accordion summary img{
+        width:72px;
+        height:72px;
+      }
+
+      .wa-card img{
+        width:60px;
+        height:60px;
+      }
+
+      .wa-accordion summary h2,
+      .wa-accordion summary h3{
+        font-size:18px;
+      }
+    }
+  </style>
 </head>
 <body>
-<section class="container">
+<section class="container" data-waracademy-root>
   <main>
-    <h1 data-i18n="waracademy.title">전쟁 아카데미 (황금 병종)</h1>
+    <h1 data-i18n="waracademy.title">전쟁아카데미 연구 트리</h1>
+
+    <p class="wa-intro" data-i18n="waracademy.intro">
+      전쟁아카데미 연구 트리에서는 황금 보병, 황금 궁병, 황금 기병의 연구 조건, 자원 소모량, 보너스 효과, 전체 업그레이드 표를 확인할 수 있습니다.
+    </p>
 
     <div class="wa-accordion">
 
@@ -20,12 +326,11 @@
                alt="황금보병"
                data-i18n="[alt]waracademy.infantry.alt">
           <div>
-            <h3 data-i18n="waracademy.infantry.title">황금보병</h3>
+            <h2 data-i18n="waracademy.infantry.title">황금보병</h2>
             <p data-i18n="waracademy.infantry.desc">연구 조건, 비용, 효과를 확인하세요.</p>
           </div>
         </summary>
         <div class="wa-content" id="infantry-section">
-          <!-- ✅ 병종별 메타 표시 영역 -->
           <div id="infantry-meta"></div>
           <div class="research-grid" id="infantry-grid"></div>
           <div id="infantry-detail" class="research-detail"></div>
@@ -39,12 +344,11 @@
                alt="황금궁병"
                data-i18n="[alt]waracademy.archer.alt">
           <div>
-            <h3 data-i18n="waracademy.archer.title">황금궁병</h3>
+            <h2 data-i18n="waracademy.archer.title">황금궁병</h2>
             <p data-i18n="waracademy.archer.desc">연구 조건, 비용, 효과를 확인하세요.</p>
           </div>
         </summary>
         <div class="wa-content" id="archer-section">
-          <!-- ✅ 병종별 메타 표시 영역 -->
           <div id="archer-meta"></div>
           <div class="research-grid" id="archer-grid"></div>
           <div id="archer-detail" class="research-detail"></div>
@@ -58,12 +362,11 @@
                alt="황금기병"
                data-i18n="[alt]waracademy.cavalry.alt">
           <div>
-            <h3 data-i18n="waracademy.cavalry.title">황금기병</h3>
+            <h2 data-i18n="waracademy.cavalry.title">황금기병</h2>
             <p data-i18n="waracademy.cavalry.desc">연구 조건, 비용, 효과를 확인하세요.</p>
           </div>
         </summary>
         <div class="wa-content" id="cavalry-section">
-          <!-- ✅ 병종별 메타 표시 영역 -->
           <div id="cavalry-meta"></div>
           <div class="research-grid" id="cavalry-grid"></div>
           <div id="cavalry-detail" class="research-detail"></div>
@@ -79,126 +382,5 @@
     JavaScript가 비활성화되어 있습니다. 페이지 기능을 사용하려면 활성화해 주세요.
   </p>
 </noscript>
-
-<script src="/js/pages/waracademy.js" defer></script>
-<script>
-  // DOM 준비 후 초기화 (중복 실행 방지 가드 포함)
-  window.addEventListener('DOMContentLoaded', function () {
-    if (typeof window.initWarAcademy === 'function' && !window.__waracademy_initialized) {
-      window.initWarAcademy();
-    }
-  });
-</script>
-
-<style>
-/* ✅ 2열 카드 (이미지 왼쪽, 텍스트 오른쪽) */
-.research-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
-  gap: 14px;
-  margin-bottom: 20px;
-}
-.wa-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,.08);
-  padding: 10px 12px;
-  cursor: pointer;
-  transition: transform .2s, box-shadow .2s;
-}
-.wa-card img {
-  width: 70px;
-  height: 70px;
-  border-radius: 8px;
-  flex-shrink: 0;
-}
-.wa-card .wa-info h4 {
-  margin: 0 0 4px;
-  font-size: 15px;
-  color: #111;
-}
-.wa-card .wa-info p {
-  margin: 0;
-  font-size: 13px;
-  color: #555;
-  line-height: 1.3;
-}
-.wa-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0,0,0,.1);
-}
-.wa-card.active {
-  outline: 2px solid #2b7cff;
-  box-shadow: 0 0 0 3px rgba(43,124,255,.2);
-}
-
-/* ✅ 표 스타일 */
-.tg-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 14px;
-  font-size: 14px;
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,.05);
-}
-.tg-table thead th {
-  background: linear-gradient(180deg,#f5f5f5,#ececec);
-  color: #222;
-  font-weight: 600;
-  padding: 8px 10px;
-  border-bottom: 2px solid #ddd;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-.tg-table tbody td {
-  padding: 7px 10px;
-  border: 1px solid #eee;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 1.4;
-}
-.tg-table tbody tr:nth-child(even) { background: #fafafa; }
-.tg-table tbody tr:hover { background: #f0f7ff; transition: background .15s; }
-
-/* Σ 합계 행 강조 */
-.tg-table .tg-total td {
-  font-weight: 700;
-  background: #fff7e6;
-  border-top: 2px solid #f0c36d;
-}
-
-.research-detail {
-  background: #fff;
-  padding: 16px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,.08);
-  margin-top: 10px;
-}
-
-/* 전역 메타 카드 (JS가 자동 삽입) */
-.tg-meta {
-  background: #fff;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,.1);
-  margin: 16px 0 20px;
-}
-.tg-meta h2 { margin: 0 0 8px; font-size: 18px; }
-.tg-meta h3 { margin: 14px 0 8px; font-size: 16px; }
-.tg-meta ul { margin: 0; padding-left: 16px; }
-
-/* 반응형 (모바일에서는 한 줄 1개 카드) */
-@media (max-width: 768px) {
-  .research-grid { grid-template-columns: 1fr; }
-  .wa-card img { width: 60px; height: 60px; }
-}
-</style>
 </body>
 </html>

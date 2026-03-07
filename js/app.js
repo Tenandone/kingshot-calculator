@@ -1,20 +1,6 @@
 // /public/js/app.js — SPA Router (History API) for KingshotData.kr
-// v2026-03-01 (bundle-aware: routes.js(core/light) / routes.calculators.js)
+// v2026-03-06 (home route = "/" , /home -> / redirect)
 // ES5-compatible (no arrow functions / optional chaining)
-//
-// 동작 요약
-// - /calc-* 또는 /calculator → /public/js/routes.calculators.js 로드 → window.buildCalculatorRoutes()
-// - 그 외 경로 → /js/routes.js 로드 → window.buildRoutes()   ✅ (core/light)
-// - Buildings Static Detail 연결:
-//   /buildings/:slug              → routes['/building-static']
-//   /building/:slug               → routes['/building-static'] (레거시/실수 방지)
-//   /en|ko|ja|zh-tw/buildings/:slug → routes['/building-static'] (forced lang)
-//   /en|ko|ja|zh-tw/building/:slug  → routes['/building-static'] (forced lang)
-// - CN(zh-CN) 완전 제외: i18n 정규화에서 zh-CN은 en으로 폴백
-// - i18n 언어 변경 시(building detail) 정적 HTML 다시 로드
-// - TW 폴더명은 zh-tw 이므로, i18n 언어코드 zh-TW를 경로용 zh-tw로 정규화
-// - 빌딩 상세가 아닐 때 building scoped style(id=bld-scoped-style) 제거(전역 오염 방지)
-
 (function () {
   'use strict';
 
@@ -70,7 +56,7 @@
   }
 
   // ===== dynamic <script> loader =====
-  var inFlightScripts = new Map(); // key: normalized path, val: Promise
+  var inFlightScripts = new Map();
 
   function normalizeScriptKey(src) {
     try {
@@ -133,7 +119,7 @@
 
   // ===== HTML fetch (LRU) =====
   var HTML_CACHE_MAX = 24;
-  var htmlCache = new Map(); // key: path+'|v='+ASSET_VER, val: string
+  var htmlCache = new Map();
   function setHtmlCache(key, val) {
     htmlCache.set(key, val);
     if (htmlCache.size > HTML_CACHE_MAX) {
@@ -274,7 +260,7 @@
     if (raw.indexOf('en') === 0) return 'en';
     if (raw.indexOf('ja') === 0) return 'ja';
     if (raw.indexOf('zh') === 0) {
-      return (/-((tw|hk|mo))/.test(raw) ? 'zh-TW' : 'en'); // ✅ CN 제외
+      return (/-((tw|hk|mo))/.test(raw) ? 'zh-TW' : 'en');
     }
     return 'en';
   }
@@ -362,13 +348,21 @@
 
   function setActiveByPath(currentPath) {
     try {
-      var firstSeg = '/' + (currentPath.split('/').filter(Boolean)[0] || 'home');
+      var segs = currentPath.split('/').filter(Boolean);
+      var firstSeg = '/' + (segs[0] || '');
+
       var anchors = document.querySelectorAll('#primaryNav a[href^="/"]');
       for (var i=0;i<anchors.length;i++){
         var a = anchors[i];
         var href = a.getAttribute('href') || '';
-        var seg  = '/' + (href.split('/').filter(Boolean)[0] || 'home');
-        a.classList.toggle('is-active', seg === firstSeg);
+        var hrefSegs = href.split('/').filter(Boolean);
+        var seg = '/' + (hrefSegs[0] || '');
+
+        if (currentPath === '/' && href === '/') {
+          a.classList.add('is-active');
+        } else {
+          a.classList.toggle('is-active', seg === firstSeg && !(href === '/'));
+        }
       }
     } catch(_){}
   }
@@ -376,13 +370,15 @@
   function normalize(pathname) {
     var p = pathname.replace(/\/index\.html$/i, '');
     if (p.length > 1 && p.lastIndexOf('/') === p.length - 1) p = p.slice(0, -1);
-    return p || '/home';
+    return p || '/';
   }
 
   function canonicalize(input) {
     var u = new URL(typeof input === 'string' ? input : String(input), location.origin);
     var p = u.pathname.replace(/\/index\.html$/i, '');
     if (p.length > 1 && p.lastIndexOf('/') === p.length - 1) p = p.slice(0, -1);
+
+    if (p === '/home') p = '/';
 
     if (p.indexOf('/calc-') === 0 || p === '/calculator') {
       u.pathname = p;
@@ -396,7 +392,7 @@
         u.pathname = '/' + segs[0] + '/' + segs[1] + '/' + segs.slice(2).join('/');
         return u;
       }
-      u.pathname = p || '/home';
+      u.pathname = p || '/';
       return u;
     }
 
@@ -412,7 +408,7 @@
       u.pathname = '/buildings' + (segs[1] ? '/' + segs.slice(1).join('/') : '');
       return u;
     }
-    u.pathname = p || '/home';
+    u.pathname = p || '/';
     return u;
   }
 
@@ -517,7 +513,7 @@
   function getRoute(key) {
     if (routes && routes[key]) return routes[key];
     if (proxyRoutes && proxyRoutes[key]) return proxyRoutes[key];
-    if (routes && routes['/home']) return routes['/home'];
+    if (routes && routes['/']) return routes['/'];
     return {
       title: '로딩 실패',
       render: function(el) {
@@ -543,7 +539,6 @@
     if (b && b.parentNode) b.parentNode.removeChild(b);
   }
 
-  // ✅ 핵심: slug에 .html이 붙으면 제거 (truegold-crucible.html → truegold-crucible)
   function stripHtmlExt(s) {
     var x = String(s || '');
     return x.replace(/\.html$/i, '');
@@ -571,14 +566,10 @@
       var segs = pathNorm.split('/').filter(Boolean);
       var el = document.getElementById('content') || document.body;
 
-      // ===============================
-      // ✅ Buildings Static Detail DISPATCH (buildings + building)
-      // ===============================
-
       // /buildings/:slug
       if (pathNorm.indexOf('/buildings/') === 0 && segs.length >= 2) {
         removeCSS('calc-css');
-        var slug1 = stripHtmlExt(segs.slice(1).join('/')); // ✅ .html 제거
+        var slug1 = stripHtmlExt(segs.slice(1).join('/'));
         if (routes && routes['/building-static'] && typeof routes['/building-static'].render === 'function') {
           return Promise.resolve(routes['/building-static'].render(el, slug1));
         }
@@ -587,30 +578,30 @@
       // /building/:slug
       if (pathNorm.indexOf('/building/') === 0 && segs.length >= 2) {
         removeCSS('calc-css');
-        var slug1b = stripHtmlExt(segs.slice(1).join('/')); // ✅ .html 제거
+        var slug1b = stripHtmlExt(segs.slice(1).join('/'));
         if (routes && routes['/building-static'] && typeof routes['/building-static'].render === 'function') {
           return Promise.resolve(routes['/building-static'].render(el, slug1b));
         }
       }
 
-      // /{lang}/buildings/:slug  or  /{lang}/building/:slug
+      // /{lang}/buildings/:slug or /{lang}/building/:slug
       if (segs.length >= 3 && (segs[1] === 'buildings' || segs[1] === 'building')) {
         var lang = normalizeLangFolder(segs[0]);
         if (lang === 'en' || lang === 'ko' || lang === 'ja' || lang === 'zh-tw') {
           removeCSS('calc-css');
-          var slug2 = stripHtmlExt(segs.slice(2).join('/')); // ✅ .html 제거
+          var slug2 = stripHtmlExt(segs.slice(2).join('/'));
           if (routes && routes['/building-static'] && typeof routes['/building-static'].render === 'function') {
             return Promise.resolve(routes['/building-static'].render(el, slug2, lang));
           }
         }
       }
 
-      // ===============================
-      // (기존) 일반 라우트 분기
-      // ===============================
       removeBuildingScopedStyleIfAny();
 
-      var key  = '/' + (segs[0] || 'home');
+      var key  = '/' + (segs[0] || '');
+      if (key === '//') key = '/';
+      if (pathNorm === '/') key = '/';
+
       var rest = '/' + segs.slice(1).join('/');
       var route = getRoute(key);
 
@@ -755,7 +746,6 @@
       setTimeout(function(){ window.__KS_BLD_LANG_LOCK__ = false; }, 50);
 
       var p = location.pathname || '';
-      // ✅ .html 포함 케이스도 빌딩 상세로 인정
       var m1 = p.match(/^\/buildings\/[^\/?#]+(\.html)?$/i) || p.match(/^\/building\/[^\/?#]+(\.html)?$/i);
       var m2 = p.match(/^\/(en|ko|ja|zh-tw)\/buildings\/[^\/?#]+(\.html)?$/i) || p.match(/^\/(en|ko|ja|zh-tw)\/building\/[^\/?#]+(\.html)?$/i);
 

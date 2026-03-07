@@ -715,12 +715,26 @@
         <div class="cards" id="wa-cards" aria-label="戰爭學院需求（手機卡片）"></div>
       </section>
 
+      <section id="waracademy-link">
+        <h2>戰爭學院研究樹</h2>
+        <p class="muted" style="margin-top:-2px">
+          戰爭學院解鎖後可進行的真金兵種研究與詳細研究成本，都可以在同一頁面一目了然查看。
+        </p>
+        <p>
+          你可以在一個頁面中集中查看真金步兵、真金弓兵、真金騎兵的研究資訊。
+        </p>
+
+        <div class="related">
+          <a class="pill" href="/waracademy">查看戰爭學院研究樹</a>
+        </div>
+      </section>
+
       <section id="related">
         <h2>相關</h2>
         <div class="related">
           <a class="pill" href="/zh-tw/buildings/town-center.html">城市中心</a>
           <a class="pill" href="/zh-tw/buildings/academy.html">學院</a>
-          <a class="pill" href="/zh-tw/buildings/truegold-crucible.html">Truegold 熔爐</a>
+          <a class="pill" href="/zh-tw/buildings/truegold-crucible.html">真金熔爐</a>
         </div>
       </section>
     </main>
@@ -881,8 +895,8 @@
           if(!isDash(wood))  res += makeResItem(ICON.wood,'木材', wood, woodRaw);
           if(!isDash(stone)) res += makeResItem(ICON.stone,'石材', stone, stoneRaw);
           if(!isDash(iron))  res += makeResItem(ICON.iron,'鐵', iron, ironRaw);
-          if(!isDash(tg))    res += makeResItem(ICON.truegold,'Truegold', tg, tgRaw);
-          if(!isDash(temp))  res += makeResItem(ICON.tempered,'淬鍊', temp, tempRaw);
+          if(!isDash(tg))    res += makeResItem(ICON.truegold,'真金', tg, tgRaw);
+          if(!isDash(temp))  res += makeResItem(ICON.tempered,'淬鍊真金', temp, tempRaw);
 
           var foot = '';
           if(!isDash(time))  foot += '<span class="badge">'+ svgUse('ico-time') + '<span>時間: '+ time +'</span></span>';
@@ -964,7 +978,6 @@
       function init(){
         initStickyObservers();
 
-        // 2 Bread, 3 Wood, 4 Stone, 5 Iron, 6 Truegold, 7 Tempered
         formatResourceCells('wa-table', [2,3,4,5,6,7]);
 
         var c = buildCardsFromWarAcademyTable();

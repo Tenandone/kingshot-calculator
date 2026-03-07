@@ -7,46 +7,105 @@
   <meta name="description" content="Hello, Go to KingshotData.kr">
 
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;background:#fff;color:#111}
-    /* SPA 본문용 그리드 — SPA에선 이게 보여야 함 */
-    .container{max-width:1100px;margin:0 auto;padding:16px}
-    #db-grid{display:block;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;
+      background:#fff;
+      color:#111;
+    }
 
-    /* 랜딩 스타일(템플릿 주입 시에만 나타남) */
-    .landing{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;height:100vh}
-    .landing img{max-width:200px;height:auto;margin-bottom:20px}
-    .landing h1{font-size:22px;margin:0}
-    .countdown{margin-top:8px;font-size:64px;font-weight:bold;color:#d33}
-    .landing a{margin-top:12px;display:inline-block;padding:10px 16px;background:#111;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;transition:background .2s}
-    .landing a:hover{background:#333}
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px;
+    }
+
+    #db-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+      gap:12px;
+    }
+
+    .landing{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      height:100vh;
+    }
+
+    .landing img{
+      max-width:200px;
+      height:auto;
+      margin-bottom:20px;
+    }
+
+    .landing h1{
+      font-size:22px;
+      margin:0;
+    }
+
+    .countdown{
+      margin-top:8px;
+      font-size:64px;
+      font-weight:bold;
+      color:#d33;
+    }
+
+    .landing a{
+      margin-top:12px;
+      display:inline-block;
+      padding:10px 16px;
+      background:#111;
+      color:#fff;
+      border-radius:8px;
+      text-decoration:none;
+      font-size:14px;
+      transition:background .2s;
+    }
+
+    .landing a:hover{
+      background:#333;
+    }
 
     @keyframes pop {
-      0% { transform:scale(0.5); opacity:0; color:#d33; }
-      50% { transform:scale(1.4); opacity:1; color:#e67e22; }
+      0%   { transform:scale(0.5); opacity:0; color:#d33; }
+      50%  { transform:scale(1.4); opacity:1; color:#e67e22; }
       100% { transform:scale(1); opacity:1; color:#111; }
     }
+
     @keyframes runIn {
       0%   { transform:translateX(-150px); opacity:0; }
       60%  { transform:translateX(0); opacity:1; }
       100% { transform:translateX(0); opacity:0; }
     }
+
     @keyframes smoke {
       0%   { opacity:0; transform:translateX(-30px) scale(0.5); }
       30%  { opacity:1; transform:translateX(-40px) scale(1); }
       100% { opacity:0; transform:translateX(-50px) scale(1.3); }
     }
-    .runner { animation:runIn 1s forwards; display:inline-block; }
-    .smoke  { position:absolute; left:-40px; animation:smoke 1s forwards; font-size:48px; }
+
+    .runner{
+      animation:runIn 1s forwards;
+      display:inline-block;
+    }
+
+    .smoke{
+      position:absolute;
+      left:-40px;
+      animation:smoke 1s forwards;
+      font-size:48px;
+    }
   </style>
 </head>
 <body>
 
-  <!-- ✅ SPA에서 반드시 필요한 그리드 (JS가 카드 채움) -->
   <section class="container">
     <div id="db-grid"></div>
   </section>
 
-  <!-- ✅ 랜딩은 템플릿에 감춤: 직접 접속일 때만 주입됨 -->
   <template id="landing-tpl">
     <div class="landing">
       <img src="/img/brand2.png" alt="KingshotData KR">
@@ -57,38 +116,38 @@
   </template>
 
   <script>
-    // SPA 라우팅 감지: ?p= 가 있으면 SPA로 포함된 것
     const isSpa = location.search.includes('p=');
 
     if (!isSpa) {
-      // 단독 접근일 때만 랜딩 템플릿 주입 + db-grid 숨김
       const tpl = document.getElementById('landing-tpl');
       const node = tpl.content.cloneNode(true);
       document.body.prepend(node);
+
       const grid = document.getElementById('db-grid');
       if (grid) grid.style.display = 'none';
 
-      // 카운트다운 + 달려와서 사라지기(왼쪽 흔적)
       let sec = 3;
       const el = document.getElementById('countdown');
 
-      function tick(){
+      function tick() {
         if (sec > 0) {
           el.textContent = sec;
           el.style.animation = 'none';
-          void el.offsetWidth; // reset
+          void el.offsetWidth;
           el.style.animation = 'pop 0.6s ease';
           sec--;
           setTimeout(tick, 1000);
         } else {
           el.style.position = 'relative';
           el.innerHTML = '<span class="runner">🏃</span><span class="smoke">💨</span>';
-          setTimeout(()=>{ location.href = 'https://kingshotdata.kr'; }, 1200);
+          setTimeout(() => {
+            location.href = 'https://kingshotdata.kr';
+          }, 1200);
         }
       }
+
       tick();
     }
-    // isSpa === true 인 경우: 템플릿은 주입되지 않으므로 랜딩은 절대 노출되지 않음 (db-grid만 표시)
   </script>
 </body>
 </html>

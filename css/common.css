@@ -341,26 +341,53 @@ main#main #buildings-grid .card a{
 }
 
 /* =========================
-   DATABASE INDEX (DEPLOY-SAFE FIX) — REAL DOM MATCH
-   - SPA mounted:  #main #db-grid
-   - static HTML:  #db-page #db-grid (있다면)
+   DATABASE INDEX (CENTER ALIGN FIX)
    ========================= */
 #db-page #db-grid,
 #content #db-grid,
 #main #db-grid,
 main#main #db-grid{
-  display:grid !important;
-  grid-template-columns:repeat(4, minmax(0,1fr)) !important;
+  display:flex !important;
+  flex-wrap:wrap !important;
+  justify-content:center !important;
   gap:16px !important;
   align-items:stretch !important;
 }
+
+#db-page #db-grid > .card--db,
+#content #db-grid > .card--db,
+#main #db-grid > .card--db,
+main#main #db-grid > .card--db{
+  flex:0 0 calc(25% - 12px) !important;
+  max-width:calc(25% - 12px) !important;
+  min-width:220px !important;
+}
+
+@media (max-width:900px){
+  #db-page #db-grid > .card--db,
+  #content #db-grid > .card--db,
+  #main #db-grid > .card--db,
+  main#main #db-grid > .card--db{
+    flex:0 0 calc(50% - 8px) !important;
+    max-width:calc(50% - 8px) !important;
+    min-width:0 !important;
+  }
+}
+
 @media (max-width:520px){
   #db-page #db-grid,
   #content #db-grid,
   #main #db-grid,
   main#main #db-grid{
-    grid-template-columns:repeat(2, minmax(0,1fr)) !important;
     gap:10px !important;
+  }
+
+  #db-page #db-grid > .card--db,
+  #content #db-grid > .card--db,
+  #main #db-grid > .card--db,
+  main#main #db-grid > .card--db{
+    flex:0 0 calc(50% - 5px) !important;
+    max-width:calc(50% - 5px) !important;
   }
 }
 

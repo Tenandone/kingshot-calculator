@@ -1,32 +1,19 @@
 ﻿// =========================================================
-// /js/routes.js — FULL FINAL (CLEANED)
+// /js/routes.js — FULL FINAL (CLEANED + WARACADEMY ROUTE, /home REMOVED -> / REDIRECT)
 // REQUIREMENTS (load order in index.html):
 //   1) /js/asset-loader.js   (provides v/ensureCSS/ensureScript)
 //   2) /js/html-loader.js    (provides KD_HTML.mount / KD_HTML.loadAndMount)
 //   3) /js/routes.js         (this file)
-//
-// CLEANUP GOALS:
-// ✅ 불필요한 routes.js-side "모바일 카드 강제 생성" 제거 (html-loader.js + building-detail.js가 처리)
-// ✅ buildRoutes 시그니처/기존 라우팅 구조 유지
-// ✅ Buildings index 스타일 스코프/SEO 메타 적용 유지
-// ✅ Buildings detail: KD_HTML.mount afterMount에서 scope(root.shadowRoot || root) 전달 + KD_BUILDING_DETAIL_INIT(scope)
-// ✅ slug/lang/캐시/링크 하이재킹 유지
 // =========================================================
 (function () {
   'use strict';
 
-  // -----------------------------
-  // Render token (prevent stale async renders)
-  // -----------------------------
   var __renderToken = 0;
   function newRenderToken() { return ++__renderToken; }
   function isStale(token)   { return token !== __renderToken; }
 
   try { history.scrollRestoration = 'manual'; } catch (e) {}
 
-  // -----------------------------
-  // Helpers
-  // -----------------------------
   function htmlBodyOnly(html) {
     if (!html) return html;
     try {
@@ -45,7 +32,6 @@
     }
   }
 
-  // Used for scoping index/list page <style> into #content (keeps your previous behavior)
   function scopeCssToContent(cssText) {
     var css = String(cssText || '');
     css = css.replace(/:root\s*\{/g, '#content{');
@@ -81,9 +67,6 @@
     return css;
   }
 
-  // -----------------------------
-  // Exposed routes builder
-  // -----------------------------
   window.buildRoutes = function (deps) {
     deps = deps || {};
     var loadHTML = deps.loadHTML;
@@ -104,6 +87,7 @@
         return window.I18N.applyTo(root || document);
       }
     }
+
     function t(key, fb) {
       var fallback = (typeof fb !== 'undefined') ? fb : key;
       if (window.I18N && typeof window.I18N.t === 'function') {
@@ -111,14 +95,20 @@
       }
       return fallback;
     }
+
     function setTitle(key, fb) { document.title = t(key, fb); }
 
-    function goto(path) {
+    function goto(path, replaceMode) {
       var url = String(path || '/');
-      if (window.navigation && typeof window.navigation.navigate === 'function') {
-        try { window.navigation.navigate(url); return; } catch (e) {}
+      if (replaceMode) {
+        history.replaceState(null, '', url);
+      } else {
+        if (window.navigation && typeof window.navigation.navigate === 'function') {
+          try { window.navigation.navigate(url); return; } catch (e) {}
+        }
+        history.pushState(null, '', url);
       }
-      history.pushState(null, '', url);
+
       try {
         window.dispatchEvent(new PopStateEvent('popstate'));
       } catch (e) {
@@ -164,9 +154,6 @@
       link.href = href;
     }
 
-    // -----------------------------
-    // Language / slug normalization
-    // -----------------------------
     function normLangCode(raw){
       var s = String(raw || '').trim();
       if (!s) return '';
@@ -228,9 +215,6 @@
       return slug;
     }
 
-    // -----------------------------
-    // HTML cache
-    // -----------------------------
     var __htmlCache = new Map();
     function cacheGet(k){ return __htmlCache.get(k); }
     function cacheSet(k, v){
@@ -247,9 +231,6 @@
       return html;
     }
 
-    // -----------------------------
-    // Buildings list link hijack
-    // -----------------------------
     function bindBuildingsListLinksOnce(el){
       if (el.__bldListBound) return;
       el.__bldListBound = true;
@@ -280,9 +261,6 @@
       }, true);
     }
 
-    // -----------------------------
-    // Buildings index head apply (scoped styles)
-    // -----------------------------
     function applyBuildingsIndexHead(doc){
       if (!doc || !doc.head) return;
 
@@ -316,11 +294,6 @@
       } catch(_){}
     }
 
-    
-
-    // -----------------------------
-    // Buildings static HTML mount (uses html-loader.js)
-    // -----------------------------
     async function mountBuildingStatic(root, html, pageURL){
       if (window.KD_HTML && typeof window.KD_HTML.mount === 'function') {
         await window.KD_HTML.mount(root, html, {
@@ -330,7 +303,6 @@
           scopeSelector: '#content',
           ensureCommonCSS: '/css/building-detail.css',
           afterMount: async function(){
-            // ✅ ShadowRoot-safe init
             try {
               var scope = (root && root.shadowRoot) ? root.shadowRoot : root;
               if (window.KD_BUILDING_DETAIL_INIT) window.KD_BUILDING_DETAIL_INIT(scope);
@@ -347,14 +319,65 @@
       return { doc: null };
     }
 
-    // -----------------------------
-    // Routes
-    // -----------------------------
+    async function renderStaticAssetPage(el, token, opts) {
+      opts = opts || {};
+      el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+
+      var html = await loadHTMLCached(opts.html || []);
+      if (isStale(token)) return false;
+
+      if (!html) {
+        el.innerHTML =
+          '<div class="placeholder">' +
+            '<h2>' + (opts.fallbackTitle || 'Not Found') + '</h2>' +
+            '<p class="muted">' + (opts.fallbackText || 'Missing page file.') + '</p>' +
+          '</div>';
+        apply(el);
+        return false;
+      }
+
+      el.innerHTML = htmlBodyOnly(html);
+
+      var cssList = opts.css || [];
+      for (var i = 0; i < cssList.length; i++) {
+        try { if (window.ensureCSS) await window.ensureCSS(cssList[i]); } catch (e) { console.error(e); }
+      }
+
+      var jsList = opts.js || [];
+      for (var j = 0; j < jsList.length; j++) {
+        try { await _loadScriptOnce(jsList[j]); } catch (e2) { console.error(e2); }
+      }
+
+      if (isStale(token)) return false;
+
+      if (opts.titleKey || opts.titleFallback) {
+        setTitle(opts.titleKey || '', opts.titleFallback || document.title);
+      }
+
+      apply(el);
+      window.scrollTo({ top: 0 });
+      focusMain(el);
+      return true;
+    }
+
     var routes = {
-      '/home': {
+      '/': {
         title: '홈 - KingshotData.kr',
         render: async function (el) {
           var token = newRenderToken();
+
+          try {
+            if (window.I18N && window.I18N.loadNamespace) {
+              await window.I18N.loadNamespace('home');
+            } else if (window.I18N && window.I18N.loadNamespaces) {
+              await window.I18N.loadNamespaces(['home']);
+            }
+            if (window.I18N && window.I18N.ready) {
+              await window.I18N.ready();
+            }
+          } catch (e) {}
+
+          if (isStale(token)) return;
 
           var cards = [
             { href:'/buildings',  img:'/img/home/saulchar.png',   t:'home.card.buildings.title',   d:'home.card.buildings.desc' },
@@ -383,7 +406,76 @@
                     '</a>';
                   }).join('') +
                 '</div>' +
+
+                '<a class="home-wide-banner" href="/waracademy" aria-label="' + t('home.waracademy.bannerTitle', 'Kingshot War Academy T11 Research Tree') + '">' +
+                  '<div class="home-wide-banner__media">' +
+                    '<img src="/img/home/waracademy.png" alt="' + t('home.waracademy.bannerTitle', 'Kingshot War Academy T11 Research Tree') + '" loading="lazy" decoding="async">' +
+                  '</div>' +
+                  '<div class="home-wide-banner__body">' +
+                    '<div class="home-wide-banner__eyebrow" data-i18n="home.waracademy.eyebrow">' + t('home.waracademy.eyebrow', 'Kingshot Research Data') + '</div>' +
+                    '<div class="home-wide-banner__title" data-i18n="home.waracademy.bannerTitle">' + t('home.waracademy.bannerTitle', 'Kingshot War Academy T11 Research Tree') + '</div>' +
+                    '<div class="home-wide-banner__desc" data-i18n="home.waracademy.bannerDesc">' + t('home.waracademy.bannerDesc', 'Check the research requirements, resource costs, and bonus effects for Truegold Infantry, Archers, and Cavalry at a glance.') + '</div>' +
+                  '</div>' +
+                  '<div class="home-wide-banner__cta" data-i18n="home.waracademy.bannerCta">' + t('home.waracademy.bannerCta', 'View Now') + '</div>' +
+                '</a>' +
+
               '</section>' +
+
+              '<style>' +
+                '.home-wide-banner{' +
+                  'margin-top:18px;' +
+                  'display:grid;' +
+                  'grid-template-columns:120px 1fr auto;' +
+                  'align-items:center;' +
+                  'gap:18px;' +
+                  'padding:18px 20px;' +
+                  'border-radius:20px;' +
+                  'border:1px solid #e5e7eb;' +
+                  'background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);' +
+                  'box-shadow:0 10px 24px rgba(0,0,0,.06);' +
+                  'text-decoration:none;' +
+                  'color:inherit;' +
+                  'transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;' +
+                '}' +
+                '.home-wide-banner:hover{' +
+                  'transform:translateY(-2px);' +
+                  'box-shadow:0 14px 28px rgba(0,0,0,.10);' +
+                  'border-color:#c9a86a;' +
+                '}' +
+                '.home-wide-banner__media{' +
+                  'width:120px;height:120px;border-radius:16px;background:#eef2f7;' +
+                  'display:flex;align-items:center;justify-content:center;overflow:hidden;' +
+                '}' +
+                '.home-wide-banner__media img{' +
+                  'max-width:88px;max-height:88px;display:block;object-fit:contain;' +
+                '}' +
+                '.home-wide-banner__body{min-width:0;}' +
+                '.home-wide-banner__eyebrow{' +
+                  'font-size:12px;font-weight:800;letter-spacing:.08em;color:#6b7280;margin-bottom:6px;' +
+                '}' +
+                '.home-wide-banner__title{' +
+                  'font-size:24px;font-weight:900;line-height:1.25;color:#111827;margin-bottom:6px;' +
+                '}' +
+                '.home-wide-banner__desc{' +
+                  'font-size:14px;line-height:1.6;color:#4b5563;' +
+                '}' +
+                '.home-wide-banner__cta{' +
+                  'display:inline-flex;align-items:center;justify-content:center;' +
+                  'padding:12px 18px;border-radius:999px;background:#111827;color:#fff;font-weight:800;white-space:nowrap;' +
+                '}' +
+                '@media (max-width: 860px){' +
+                  '.home-wide-banner{grid-template-columns:88px 1fr;}' +
+                  '.home-wide-banner__cta{grid-column:1 / -1;justify-self:start;}' +
+                  '.home-wide-banner__media{width:88px;height:88px;}' +
+                  '.home-wide-banner__media img{max-width:64px;max-height:64px;}' +
+                  '.home-wide-banner__title{font-size:20px;}' +
+                '}' +
+                '@media (max-width: 560px){' +
+                  '.home-wide-banner{grid-template-columns:1fr;padding:16px;gap:14px;}' +
+                  '.home-wide-banner__media{width:100%;height:88px;}' +
+                  '.home-wide-banner__cta{width:100%;}' +
+                '}' +
+              '</style>' +
             '</div>';
 
           if (isStale(token)) return;
@@ -391,6 +483,30 @@
           setTitle('title.home', '홈 - KingshotData.kr');
           window.scrollTo({ top: 0 });
           focusMain(el);
+
+          if (!el.__kdHomeLangBound) {
+            el.__kdHomeLangBound = true;
+
+            var __homeLangTimer = null;
+            document.addEventListener('i18n:changed', function () {
+              try {
+                var p = location.pathname.replace(/\/+$/, '');
+                if (p !== '' && p !== '/') return;
+              } catch (_) {}
+
+              if (__homeLangTimer) clearTimeout(__homeLangTimer);
+              __homeLangTimer = setTimeout(function () {
+                try { routes['/'].render(el); } catch (_) {}
+              }, 50);
+            });
+          }
+        }
+      },
+
+      '/home': {
+        title: '홈 - KingshotData.kr',
+        render: async function () {
+          goto('/', true);
         }
       },
 
@@ -452,26 +568,25 @@
           window.scrollTo({ top: 0 });
           focusMain(el);
 
-          // ✅ FIX: language changed -> reload buildings index HTML immediately (debounced)
-if (!el.__kdBuildingsLangBound) {
-  el.__kdBuildingsLangBound = true;
+          if (!el.__kdBuildingsLangBound) {
+            el.__kdBuildingsLangBound = true;
 
-  var __bldLangTimer = null;
-  document.addEventListener('i18n:changed', function () {
-    try {
-      var p = location.pathname.replace(/\/+$/, '');
-      if (p !== '/buildings') return;
-    } catch (_) {}
+            var __bldLangTimer = null;
+            document.addEventListener('i18n:changed', function () {
+              try {
+                var p = location.pathname.replace(/\/+$/, '');
+                if (p !== '/buildings') return;
+              } catch (_) {}
 
-    if (__bldLangTimer) clearTimeout(__bldLangTimer);
-    __bldLangTimer = setTimeout(function () {
-      try { routes['/buildings'].render(el); } catch (_) {}
-    }, 80);
-  });
-}
+              if (__bldLangTimer) clearTimeout(__bldLangTimer);
+              __bldLangTimer = setTimeout(function () {
+                try { routes['/buildings'].render(el); } catch (_) {}
+              }, 80);
+            });
+          }
         }
-      },       
-      
+      },
+
       '/building-static': {
         title: 'Building - KingshotData.kr',
         render: async function (el, rest, __forcedLang) {
@@ -535,7 +650,61 @@ if (!el.__kdBuildingsLangBound) {
         }
       },
 
-      // ---- 이하 나머지 라우트는 원본 유지 ----
+      '/waracademy': {
+        title: 'War Academy - KingshotData.kr',
+        render: async function (el) {
+          var token = newRenderToken();
+
+          var ok = await renderStaticAssetPage(el, token, {
+            html: [
+              'pages/waracademy.html',
+              '/pages/waracademy.html'
+            ],
+            css: [
+              '/css/waracademy.css'
+            ],
+            js: [
+              (window.v ? window.v('/js/pages/waracademy.js') : '/js/pages/waracademy.js')
+            ],
+            titleKey: 'waracademy.page_title',
+            titleFallback: 'War Academy - KingshotData.kr',
+            fallbackTitle: 'War Academy',
+            fallbackText: 'pages/waracademy.html을 찾을 수 없습니다.'
+          });
+
+          if (!ok || isStale(token)) return;
+
+          try {
+            if (typeof window.initWarAcademy === 'function') {
+              setTimeout(function () {
+                try { window.initWarAcademy(); } catch (e) { console.error(e); }
+              }, 0);
+            }
+          } catch (e2) {
+            console.error(e2);
+          }
+
+          if (!el.__waracademyLinkBound) {
+            el.__waracademyLinkBound = true;
+
+            el.addEventListener('click', function (e) {
+              var a = e.target.closest && e.target.closest('a[href]');
+              if (!a) return;
+
+              var href = a.getAttribute('href') || '';
+              if (!href) return;
+              if (a.target === '_blank' || a.hasAttribute('download')) return;
+              if (/^https?:\/\//i.test(href) || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+
+              if (href === '/waracademy' || href === 'pages/waracademy.html' || href === '/pages/waracademy.html') {
+                e.preventDefault();
+                goto('/waracademy');
+              }
+            }, true);
+          }
+        }
+      },
+
       '/heroes': {
         title: '영웅 - KingshotData.kr',
         render: async function (el) {
@@ -829,24 +998,28 @@ if (!el.__kdBuildingsLangBound) {
       }
     };
 
-    // legacy alias
     routes['/guide'] = {
       title: '가이드 - KingshotData.kr',
       render: function (el, rest) { return routes['/guides'].render(el, rest); }
     };
 
-    // -----------------------------
-    // Prefetch (keep)
-    // -----------------------------
+    routes['/war-academy'] = {
+      title: 'War Academy - KingshotData.kr',
+      render: function (el, rest) { return routes['/waracademy'].render(el, rest); }
+    };
+
     var PREFETCH_MAP = {
+      '/':           { js: [], html: [] },
       '/heroes':     { js: ['/js/pages/heroes.js'], html: ['pages/heroes.html','/pages/heroes.html'] },
       '/database':   { js: ['/js/pages/database.js'], html: ['pages/database.html','/pages/database.html'] },
-      '/guides':     { js: ['/js/pages/guides.js'], css: ['/css/guides.css'], html: ['pages/guides.html','/pages/guides.html'] }
+      '/guides':     { js: ['/js/pages/guides.js'], css: ['/css/guides.css'], html: ['pages/guides.html','/pages/guides.html'] },
+      '/waracademy': { js: ['/js/pages/waracademy.js'], css: ['/css/waracademy.css'], html: ['pages/waracademy.html','/pages/waracademy.html'] }
     };
 
     function prefetchFor(href) {
       try {
         var path = new URL(href, location.href).pathname;
+        if (path === '/home') path = '/';
         var cfg = PREFETCH_MAP[path];
         if (!cfg) return;
         if (cfg.css && window.ensureCSS) cfg.css.forEach(function(h){ window.ensureCSS(h); });
@@ -856,7 +1029,7 @@ if (!el.__kdBuildingsLangBound) {
     }
 
     document.addEventListener('mouseover', function (e) {
-      var a = e.target.closest && e.target.closest('a.card--category, a[href="/buildings"], a[href="/heroes"], a[href="/database"], a[href="/guides"]');
+      var a = e.target.closest && e.target.closest('a.card--category, a[href="/"], a[href="/buildings"], a[href="/heroes"], a[href="/database"], a[href="/guides"], a[href="/waracademy"], a[href="/war-academy"], a[href="/home"]');
       if (!a) return;
       prefetchFor(a.href);
     });

@@ -3,13 +3,6 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- ✅ NOTE
-       - zh-CN(중국어) 전체 제거
-       - ko / en / ja / zh-TW(TW)만 유지
-       - /tools/coupon-countdown.html 추가(색인용)
-       - ✅ x-default는 EN을 기본으로 설정
-  -->
-
   <!-- 메인 -->
   <url>
     <loc>https://kingshotdata.kr/</loc>
@@ -18,24 +11,12 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/" />
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/" />
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <url>
-    <loc>https://kingshotdata.kr/home</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/home" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/home" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/home" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/home" />
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/home" />
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- 히어로 / 건물 / DB -->
+  <!-- 핵심 허브 -->
   <url>
     <loc>https://kingshotdata.kr/heroes</loc>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/heroes" />
@@ -43,9 +24,9 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/heroes" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/heroes" />
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/heroes" />
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
 
   <url>
@@ -55,126 +36,49 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/buildings" />
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/buildings" />
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://kingshotdata.kr/pages/database</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/pages/database" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/pages/database" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/pages/database" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/pages/database" />
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/pages/database" />
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- 가이드 허브 -->
-  <url>
-    <loc>https://kingshotdata.kr/pages/guide.html</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/pages/guide.html" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/pages/guide.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/pages/guide.html" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/pages/guide.html" />
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/pages/guide.html" />
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- ✅ Tools -->
-  <url>
-    <loc>https://kingshotdata.kr/tools/coupon-countdown.html</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=en" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=ko" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=en" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=zh-TW" />
-    <lastmod>2026-03-04</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- 가이드(개별) -->
-  <url>
-    <loc>https://kingshotdata.kr/pages/guides/kingshot-giftcode.html</loc>
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://kingshotdata.kr/pages/guides/transfer.html</loc>
-    <lastmod>2026-02-25</lastmod>
+    <loc>https://kingshotdata.kr/database</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/database" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/database" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/database" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/database" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/database" />
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://kingshotdata.kr/pages/guides/viking.html</loc>
-    <lastmod>2026-02-25</lastmod>
+    <loc>https://kingshotdata.kr/guides</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/guides" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides" />
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
 
+  <!-- 신규 추가: 전쟁아카데미 연구 -->
   <url>
-    <loc>https://kingshotdata.kr/pages/guides/kingshot-ruins-tip.html</loc>
-    <lastmod>2026-02-25</lastmod>
+    <loc>https://kingshotdata.kr/waracademy</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/waracademy" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/waracademy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/waracademy" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/waracademy" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/waracademy" />
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.85</priority>
   </url>
 
-  <url>
-    <loc>https://kingshotdata.kr/pages/guides/hallofgovernors.html</loc>
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://kingshotdata.kr/pages/guides/truegold.html</loc>
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://kingshotdata.kr/pages/guides/ssr-hero-vs.html</loc>
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://kingshotdata.kr/pages/guides/bear-hunt-guide.html</loc>
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://kingshotdata.kr/pages/guides/kingshot-bear-hunt-tierlist.html</loc>
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://kingshotdata.kr/pages/guides/topup-guide.html</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/pages/guides/topup-guide.html" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/pages/guides/topup-guide.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/pages/guides/topup-guide.html" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/pages/guides/topup-guide.html" />
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/pages/guides/topup-guide.html" />
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- 계산기 -->
+  <!-- 툴 -->
   <url>
     <loc>https://kingshotdata.kr/calculator</loc>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/calculator" />
@@ -182,7 +86,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/calculator" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/calculator" />
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/calculator" />
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -194,9 +98,9 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/calc-building" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/calc-building" />
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/calc-building" />
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
 
   <url>
@@ -206,9 +110,9 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/calc-gear" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/calc-gear" />
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/calc-gear" />
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
 
   <url>
@@ -218,9 +122,9 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/calc-charm" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/calc-charm" />
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/calc-charm" />
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
 
   <url>
@@ -230,22 +134,110 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/calc-training" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/calc-training" />
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/calc-training" />
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
 
-  <!-- 정보 (단일 언어면 hreflang 제거 권장) -->
+  <url>
+    <loc>https://kingshotdata.kr/tools/coupon-countdown.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=ko" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=zh-TW" />
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 가이드 개별 -->
+  <url>
+    <loc>https://kingshotdata.kr/pages/guides/kingshot-giftcode.html</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://kingshotdata.kr/pages/guides/transfer.html</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://kingshotdata.kr/pages/guides/viking.html</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://kingshotdata.kr/pages/guides/kingshot-ruins-tip.html</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://kingshotdata.kr/pages/guides/hallofgovernors.html</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://kingshotdata.kr/pages/guides/truegold.html</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://kingshotdata.kr/pages/guides/ssr-hero-vs.html</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://kingshotdata.kr/pages/guides/bear-hunt-guide.html</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://kingshotdata.kr/pages/guides/kingshot-bear-hunt-tierlist.html</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://kingshotdata.kr/pages/guides/topup-guide.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/pages/guides/topup-guide.html" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/pages/guides/topup-guide.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/pages/guides/topup-guide.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/pages/guides/topup-guide.html" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/pages/guides/topup-guide.html" />
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 정보 페이지 -->
   <url>
     <loc>https://kingshotdata.kr/about</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
 
   <url>
     <loc>https://kingshotdata.kr/privacy</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>

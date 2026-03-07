@@ -716,12 +716,26 @@
         <div class="cards" id="wa-cards" aria-label="戦争アカデミー要件（モバイルカード）"></div>
       </section>
 
+      <section id="waracademy-link">
+        <h2>戦争アカデミー研究ツリー</h2>
+        <p class="muted" style="margin-top:-2px">
+          戦争アカデミー解放後に進められるトゥルーゴールド兵種研究と詳細な研究コストを一目で確認できます。
+        </p>
+        <p>
+          トゥルーゴールド歩兵、トゥルーゴールド弓兵、トゥルーゴールド騎兵の研究情報を1ページでまとめて確認できます。
+        </p>
+
+        <div class="related">
+          <a class="pill" href="/waracademy">戦争アカデミー研究ツリーを見る</a>
+        </div>
+      </section>
+
       <section id="related">
         <h2>関連</h2>
         <div class="related">
           <a class="pill" href="/ja/buildings/town-center.html">都市センター</a>
           <a class="pill" href="/ja/buildings/academy.html">アカデミー</a>
-          <a class="pill" href="/ja/buildings/truegold-crucible.html">トゥルーゴールドるつぼ</a>
+          <a class="pill" href="/ja/buildings/truegold-crucible.html">黄金溶鉱炉</a>
         </div>
       </section>
     </main>
@@ -752,7 +766,6 @@
         return t === '–' || t === '-' || t === '';
       }
 
-      // Parse "1.2k / 20M / 4.5M / 10M / 2.1M / 80" and also "1,200"
       function parseCompact(s){
         var t = String(s || '').trim();
         if(isDash(t)) return null;
@@ -773,7 +786,6 @@
         return Number.isFinite(n2) ? n2 : null;
       }
 
-      // 105 -> 105, 1600 -> 1.6k, 120000000 -> 120M
       function fmtKMB(n){
         if(n === null) return '–';
         if(n < 1000) return String(n);
@@ -790,7 +802,6 @@
         return out + suf;
       }
 
-      // Format resource cells to k/M/B and store raw in dataset.raw for tooltip usage
       function formatResourceCells(tableId, colIdxs){
         var table = document.getElementById(tableId);
         if(!table) return;
@@ -968,8 +979,6 @@
       function init(){
         initStickyObservers();
 
-        // wa-table columns:
-        // 2 Bread, 3 Wood, 4 Stone, 5 Iron, 6 Truegold, 7 Tempered
         formatResourceCells('wa-table', [2,3,4,5,6,7]);
 
         var c = buildCardsFromWarAcademyTable();

@@ -1,96 +1,452 @@
 <section class="container">
   <main>
-    <h1 data-i18n="waracademy.infantry.title">Truegold Infantry Research Tree</h1>
+    <h1 id="wa-title" data-i18n="waracademy.infantry.title">Truegold Infantry Research Tree</h1>
+
+    <section id="wa-summary" class="wa-summary" aria-label="Research summary"></section>
 
     <div class="research-grid" id="research-grid"></div>
-    <div id="research-detail" class="research-detail"></div>
+
+    <section id="research-detail" class="research-detail" aria-live="polite"></section>
   </main>
 </section>
 
 <script>
-(async function(){
-  try {
-    const res = await fetch('/data/waracademy-infantry.json');
-    const data = await res.json();
+(async function () {
+  'use strict';
 
-    const grid = document.getElementById('research-grid');
-    const detail = document.getElementById('research-detail');
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
 
-    // 카드 자동 생성
-    grid.innerHTML = data.researches.map((r,i)=>`
-      <div class="wa-card" data-idx="${i}">
-        <img src="${r.image}" alt="${r.title}">
-        <h3>${r.title}</h3>
-        <p>${r.description}</p>
+  function formatNumber(value) {
+    return Number(value ?? 0).toLocaleString();
+  }
+
+  function levelLabel(levels) {
+    if (!Array.isArray(levels) || !levels.length) return '-';
+    if (levels.length === 1) return 'Unlock';
+    return `Lv. 1–${levels.length}`;
+  }
+
+  function renderSummary(data, summaryEl) {
+    const troop = data?.meta?.troop || '-';
+    const title = data?.meta?.title || 'Research Tree';
+    const troopType = data?.troop_type || '-';
+    const req = data?.requirements || {};
+    const building = req.building || {};
+    const bonuses = data?.bonuses || {};
+
+    summaryEl.innerHTML = `
+      <div class="wa-summary-card">
+        <h2 class="wa-summary-title">${escapeHtml(title)}</h2>
+        <div class="wa-summary-grid">
+          <div class="wa-stat"><span class="wa-stat__label">Troop</span><strong>${escapeHtml(troop)}</strong></div>
+          <div class="wa-stat"><span class="wa-stat__label">Type</span><strong>${escapeHtml(troopType)}</strong></div>
+          <div class="wa-stat"><span class="wa-stat__label">Town Center</span><strong>${escapeHtml(building.towncenter || '-')}</strong></div>
+          <div class="wa-stat"><span class="wa-stat__label">War Academy</span><strong>${escapeHtml(building.waracademy || '-')}</strong></div>
+          <div class="wa-stat"><span class="wa-stat__label">Research Time</span><strong>${escapeHtml(req.research_time_days ?? '-')} days</strong></div>
+          <div class="wa-stat"><span class="wa-stat__label">Dust</span><strong>${formatNumber(req.dust)}</strong></div>
+          <div class="wa-stat"><span class="wa-stat__label">Bread</span><strong>${formatNumber(req.bread)}</strong></div>
+          <div class="wa-stat"><span class="wa-stat__label">Wood</span><strong>${formatNumber(req.wood)}</strong></div>
+          <div class="wa-stat"><span class="wa-stat__label">Stone</span><strong>${formatNumber(req.stone)}</strong></div>
+          <div class="wa-stat"><span class="wa-stat__label">Iron</span><strong>${formatNumber(req.iron)}</strong></div>
+          <div class="wa-stat"><span class="wa-stat__label">Gold</span><strong>${formatNumber(req.gold)}</strong></div>
+        </div>
+
+        <div class="wa-bonuses">
+          <h3 class="wa-subtitle">Bonuses</h3>
+          <div class="wa-bonus-list">
+            ${Object.entries(bonuses).map(([key, value]) => `
+              <div class="wa-bonus-chip">
+                <span>${escapeHtml(key.replace(/_/g, ' '))}</span>
+                <strong>${escapeHtml(value)}</strong>
+              </div>
+            `).join('')}
+          </div>
+        </div>
       </div>
+    `;
+  }
+
+  function renderCards(data, grid, detail) {
+    const researches = Array.isArray(data?.researches) ? data.researches : [];
+
+    grid.innerHTML = researches.map((r, i) => `
+      <button type="button" class="wa-card" data-idx="${i}" aria-label="${escapeHtml(r.title)}">
+        <img src="${escapeHtml(r.image || '')}" alt="${escapeHtml(r.title || 'Research image')}" loading="lazy">
+        <div class="wa-card__body">
+          <div class="wa-card__top">
+            <h3>${escapeHtml(r.title || '-')}</h3>
+            <span class="wa-badge">${escapeHtml(levelLabel(r.levels))}</span>
+          </div>
+          <p>${escapeHtml(r.description || '-')}</p>
+        </div>
+      </button>
     `).join('');
 
-    // 카드 클릭 시 상세 표시
-    grid.querySelectorAll('.wa-card').forEach(card=>{
-      card.addEventListener('click',()=>{
-        const idx = parseInt(card.dataset.idx,10);
-        const r = data.researches[idx];
-        detail.innerHTML = `
-          <h2>${r.title}</h2>
-          <p>${r.description}</p>
-          ${r.levels?.length ? `
+    const cards = Array.from(grid.querySelectorAll('.wa-card'));
+
+    function setActiveCard(index) {
+      cards.forEach((card, i) => {
+        card.classList.toggle('is-active', i === index);
+      });
+    }
+
+    function renderDetail(index) {
+      const r = researches[index];
+      if (!r) {
+        detail.innerHTML = '<p class="wa-empty">No research data available.</p>';
+        return;
+      }
+
+      setActiveCard(index);
+
+      detail.innerHTML = `
+        <div class="research-detail__header">
+          <div class="research-detail__text">
+            <h2>${escapeHtml(r.title || '-')}</h2>
+            <p>${escapeHtml(r.description || '-')}</p>
+          </div>
+          ${r.image ? `<img class="research-detail__img" src="${escapeHtml(r.image)}" alt="${escapeHtml(r.title || 'Research image')}" loading="lazy">` : ''}
+        </div>
+
+        ${Array.isArray(r.levels) && r.levels.length ? `
+          <div class="tg-table-wrap">
             <table class="tg-table">
               <thead>
                 <tr>
-                  <th>Lv</th><th>Requirements</th><th>Bread</th><th>Wood</th><th>Stone</th>
-                  <th>Iron</th><th>Gold</th><th>Dust</th><th>Time</th><th>Power</th><th>Bonus</th>
+                  <th>Lv</th>
+                  <th>Requirements</th>
+                  <th>Bread</th>
+                  <th>Wood</th>
+                  <th>Stone</th>
+                  <th>Iron</th>
+                  <th>Gold</th>
+                  <th>Dust</th>
+                  <th>Time</th>
+                  <th>Power</th>
+                  <th>Bonus</th>
                 </tr>
               </thead>
               <tbody>
-                ${r.levels.map(lv=>`
+                ${r.levels.map(lv => `
                   <tr>
-                    <td>${lv.level}</td>
-                    <td>${lv.requirements || '-'}</td>
-                    <td>${(lv.bread ?? 0).toLocaleString()}</td>
-                    <td>${(lv.wood ?? 0).toLocaleString()}</td>
-                    <td>${(lv.stone ?? 0).toLocaleString()}</td>
-                    <td>${(lv.iron ?? 0).toLocaleString()}</td>
-                    <td>${(lv.gold ?? 0).toLocaleString()}</td>
-                    <td>${(lv.dust ?? 0).toLocaleString()}</td>
-                    <td>${lv.time || '-'}</td>
-                    <td>${(lv.power ?? 0).toLocaleString()}</td>
-                    <td>${lv.bonus || '-'}</td>
+                    <td>${escapeHtml(lv.level)}</td>
+                    <td class="ta-left">${escapeHtml(lv.requirements || '-')}</td>
+                    <td>${formatNumber(lv.bread)}</td>
+                    <td>${formatNumber(lv.wood)}</td>
+                    <td>${formatNumber(lv.stone)}</td>
+                    <td>${formatNumber(lv.iron)}</td>
+                    <td>${formatNumber(lv.gold)}</td>
+                    <td>${formatNumber(lv.dust)}</td>
+                    <td>${escapeHtml(lv.time || '-')}</td>
+                    <td>${formatNumber(lv.power)}</td>
+                    <td class="ta-left">${escapeHtml(lv.bonus || '-')}</td>
                   </tr>
                 `).join('')}
               </tbody>
-            </table>` : ''}
-        `;
-        detail.scrollIntoView({behavior:'smooth'});
+            </table>
+          </div>
+        ` : '<p class="wa-empty">No level data available.</p>'}
+      `;
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('click', function () {
+        const idx = parseInt(this.dataset.idx, 10);
+        renderDetail(idx);
+        detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
-  } catch(e) {
-    console.error('Infantry load error', e);
+
+    if (researches.length) {
+      renderDetail(0);
+    } else {
+      detail.innerHTML = '<p class="wa-empty">No research data available.</p>';
+    }
+  }
+
+  try {
+    const res = await fetch('/data/waracademy-infantry.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('Failed to fetch JSON');
+    const data = await res.json();
+
+    const titleEl = document.getElementById('wa-title');
+    const summaryEl = document.getElementById('wa-summary');
+    const grid = document.getElementById('research-grid');
+    const detail = document.getElementById('research-detail');
+
+    if (data?.meta?.title && titleEl && !titleEl.hasAttribute('data-i18n')) {
+      titleEl.textContent = data.meta.title;
+    }
+
+    renderSummary(data, summaryEl);
+    renderCards(data, grid, detail);
+  } catch (e) {
+    console.error('War Academy load error:', e);
+
+    const summaryEl = document.getElementById('wa-summary');
+    const grid = document.getElementById('research-grid');
+    const detail = document.getElementById('research-detail');
+
+    if (summaryEl) summaryEl.innerHTML = '';
+    if (grid) grid.innerHTML = '<p class="wa-error">Failed to load research data.</p>';
+    if (detail) detail.innerHTML = '';
   }
 })();
 </script>
 
 <style>
-.wa-card{
-  background:#fff;
-  border-radius:10px;
-  box-shadow:0 2px 5px rgba(0,0,0,.1);
-  padding:10px;
-  text-align:center;
-  cursor:pointer;
-  transition:transform .2s;
+.research-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+  margin:20px 0 28px;
 }
-.wa-card:hover{transform:scale(1.05);}
-.wa-card img{width:100%;border-radius:8px;margin-bottom:6px;}
+
+.wa-summary{
+  margin-top:20px;
+}
+
+.wa-summary-card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  padding:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+.wa-summary-title{
+  margin:0 0 14px;
+  font-size:22px;
+  line-height:1.3;
+}
+
+.wa-summary-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:12px;
+}
+
+.wa-stat{
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:12px;
+}
+
+.wa-stat__label{
+  display:block;
+  font-size:12px;
+  color:#6b7280;
+  margin-bottom:6px;
+}
+
+.wa-bonuses{
+  margin-top:18px;
+}
+
+.wa-subtitle{
+  margin:0 0 10px;
+  font-size:16px;
+}
+
+.wa-bonus-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.wa-bonus-chip{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding:10px 12px;
+  border-radius:999px;
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  font-size:13px;
+}
+
+.wa-card{
+  appearance:none;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  border-radius:14px;
+  box-shadow:0 4px 14px rgba(0,0,0,.06);
+  padding:10px;
+  text-align:left;
+  cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  width:100%;
+}
+
+.wa-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 24px rgba(0,0,0,.10);
+}
+
+.wa-card.is-active{
+  border-color:#c9a86a;
+  box-shadow:0 10px 24px rgba(201,168,106,.18);
+}
+
+.wa-card img{
+  width:100%;
+  aspect-ratio:1 / 1;
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:10px;
+  display:block;
+}
+
+.wa-card__body h3{
+  margin:0;
+  font-size:16px;
+  line-height:1.35;
+}
+
+.wa-card__body p{
+  margin:8px 0 0;
+  font-size:13px;
+  color:#4b5563;
+  line-height:1.5;
+}
+
+.wa-card__top{
+  display:flex;
+  gap:10px;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+
+.wa-badge{
+  flex-shrink:0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px 8px;
+  border-radius:999px;
+  background:#f3f4f6;
+  border:1px solid #e5e7eb;
+  font-size:12px;
+  color:#374151;
+}
+
+.research-detail{
+  margin-top:8px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+  padding:18px;
+}
+
+.research-detail__header{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 120px;
+  gap:16px;
+  align-items:start;
+  margin-bottom:14px;
+}
+
+.research-detail__text h2{
+  margin:0 0 8px;
+  font-size:24px;
+  line-height:1.3;
+}
+
+.research-detail__text p{
+  margin:0;
+  color:#4b5563;
+  line-height:1.6;
+}
+
+.research-detail__img{
+  width:120px;
+  aspect-ratio:1 / 1;
+  object-fit:cover;
+  border-radius:12px;
+  border:1px solid #e5e7eb;
+}
+
+.tg-table-wrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
 .tg-table{
   width:100%;
+  min-width:1100px;
   border-collapse:collapse;
   margin-top:12px;
   font-size:14px;
 }
-.tg-table th,.tg-table td{
-  border:1px solid #ddd;
-  padding:6px;
+
+.tg-table th,
+.tg-table td{
+  border:1px solid #e5e7eb;
+  padding:8px 10px;
   text-align:center;
+  vertical-align:middle;
 }
-.tg-table th{background:#f5f5f5;}
+
+.tg-table th{
+  background:#f8fafc;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.tg-table td{
+  background:#fff;
+}
+
+.tg-table .ta-left{
+  text-align:left;
+  min-width:220px;
+}
+
+.wa-empty,
+.wa-error{
+  margin:0;
+  padding:14px;
+  border-radius:12px;
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  color:#4b5563;
+}
+
+@media (max-width: 768px){
+  .wa-summary-card,
+  .research-detail{
+    padding:14px;
+  }
+
+  .research-detail__header{
+    grid-template-columns:1fr;
+  }
+
+  .research-detail__img{
+    width:96px;
+  }
+
+  .wa-summary-title{
+    font-size:20px;
+  }
+
+  .research-detail__text h2{
+    font-size:20px;
+  }
+
+  .wa-card__top{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
 </style>
