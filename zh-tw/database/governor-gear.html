@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>領主裝備 | Kingshot</title>
+  <meta name="description" content="Kingshot 領主裝備資料庫。可一次查看領主裝備解鎖條件、強化材料、各品質所需材料與裝備評分。" />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/database/governor-gear.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/database/governor-gear.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/database/governor-gear.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/database/governor-gear.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/database/governor-gear.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/database/governor-gear.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/database/satin.webp" />
+  <link rel="preload" as="image" href="/img/database/threads.webp" />
+  <link rel="preload" as="image" href="/img/database/artisans.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+
+      --tbl-font:12px;
+      --tbl-pad-y:7px;
+      --tbl-pad-x:10px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","Noto Sans CJK TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1180px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px;
+      height:160px;
+      object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+
+    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted)}
+    .muted{color:var(--muted)}
+
+    .jump{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px; font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(37,99,235,.22);
+      background:rgba(37,99,235,.05);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      margin-top:2px;
+      color:#2563eb;
+    }
+
+    .source-list{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .source-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .source-card img{
+      width:42px;
+      height:42px;
+      object-fit:contain;
+      flex:0 0 42px;
+    }
+    .source-card strong{
+      display:block;
+      font-size:14px;
+      margin-bottom:4px;
+    }
+    .source-card span{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+    }
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+      min-width:900px;
+      table-layout:fixed;
+    }
+
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      font-size:var(--tbl-font);
+      line-height:1.25;
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td{
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      vertical-align:middle;
+      font-size:var(--tbl-font);
+      line-height:1.25;
+      white-space:nowrap;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+
+    .num{text-align:right; font-variant-numeric:tabular-nums}
+
+    .th-flex,
+    .cell-flex{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .th-ico,
+    .cell-ico{
+      width:16px;
+      height:16px;
+      object-fit:contain;
+      flex:0 0 16px;
+      vertical-align:middle;
+    }
+
+    .tier-cell{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-width:0;
+    }
+    .tier-cell img{
+      width:20px;
+      height:20px;
+      object-fit:contain;
+      flex:0 0 20px;
+    }
+    .tier-name{
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    .cards{display:none}
+    .cards .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:12px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .card-title img{
+      width:18px;
+      height:18px;
+      object-fit:contain;
+      flex:0 0 18px;
+    }
+    .card-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.25;
+      white-space:nowrap;
+    }
+    .card-req{
+      margin:8px 0 0;
+      color:var(--text);
+      font-size:13px;
+      display:grid;
+      gap:4px;
+    }
+    .card-req span{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .card-req img{
+      width:16px;
+      height:16px;
+      object-fit:contain;
+      flex:0 0 16px;
+    }
+
+    .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    @media (max-width: 900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+      .source-list{grid-template-columns:1fr}
+      .enhanced .data-table{display:none}
+      .enhanced .cards{display:grid; gap:12px}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+
+      table{min-width:100%}
+      thead th,
+      tbody td{
+        padding:6px 8px;
+        font-size:12px;
+      }
+
+      thead th{
+        position:static !important;
+        top:auto !important;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"領主裝備 (Kingshot)",
+    "inLanguage":"zh-Hant",
+    "description":"Kingshot 領主裝備資料庫。可一次查看領主裝備解鎖條件、強化材料、各品質所需材料與裝備評分。",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"首頁","item":"https://kingshotdata.kr/zh-tw/"},
+        {"@type":"ListItem","position":2,"name":"資料庫","item":"https://kingshotdata.kr/zh-tw/database/"},
+        {"@type":"ListItem","position":3,"name":"領主裝備","item":"https://kingshotdata.kr/zh-tw/database/governor-gear.html"}
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/database/governor-gear.html">EN</a>
+        <a href="/ko/database/governor-gear.html">KO</a>
+        <a href="/ja/database/governor-gear.html">JA</a>
+        <a href="/zh-tw/database/governor-gear.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概覽</a>
+      <a href="#source">材料</a>
+      <a href="#requirements">需求材料</a>
+      <a href="#related">相關</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/database/">資料庫</a> <span class="muted">›</span>
+        <span>領主裝備</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/database/governor-gear.webp" alt="領主裝備" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>領主裝備</h1>
+          <p class="sub">
+            領主裝備是可製作並強化強力裝備的特殊系統。
+            可從畫面左上角的個人資料進入，並在城鎮中心達到 22 級時解鎖。
+          </p>
+          <p class="muted" style="margin-top:10px">
+            領主裝備是大幅提升遊戲內戰力的核心系統之一，
+            強化時會消耗綢緞、金線，而從稀有品質開始還需要設計草圖。
+          </p>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">概覽</a><span class="dotsep">•</span>
+            <a href="#source">材料</a><span class="dotsep">•</span>
+            <a href="#requirements">需求材料表</a><span class="dotsep">•</span>
+            <a href="#related">相關</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>領主裝備是什麼？</h2>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>注意：</strong>
+            領主裝備會在城鎮中心 22 級時解鎖，並可於領主個人資料畫面中進行製作與強化。
+          </div>
+        </div>
+
+        <p>
+          領主裝備是一套可製作並持續成長的強力裝備系統，長期來看能大幅提升領主的戰力與屬性。
+        </p>
+        <p>
+          強化時會使用綢緞與金線，而從稀有品質開始還會額外需要設計草圖。
+        </p>
+        <p>
+          下方表格可一次查看各品質所需材料與裝備評分。
+        </p>
+      </section>
+
+      <section id="source">
+        <h2>強化材料</h2>
+        <p class="muted" style="margin-top:-2px">領主裝備強化時使用的核心材料</p>
+
+        <div class="source-list">
+          <div class="source-card">
+            <img src="/img/database/satin.webp" alt="綢緞" width="42" height="42" />
+            <div>
+              <strong>綢緞</strong>
+              <span>領主裝備強化的基礎材料</span>
+            </div>
+          </div>
+
+          <div class="source-card">
+            <img src="/img/database/threads.webp" alt="金線" width="42" height="42" />
+            <div>
+              <strong>金線</strong>
+              <span>與綢緞一同使用的重要強化材料</span>
+            </div>
+          </div>
+
+          <div class="source-card">
+            <img src="/img/database/artisans.webp" alt="設計草圖" width="42" height="42" />
+            <div>
+              <strong>設計草圖</strong>
+              <span>從稀有品質開始額外需要的高級材料</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="requirements">
+        <h2>各品質所需材料與裝備評分</h2>
+        <p class="muted" style="margin-top:-2px">依裝備品質查看所需材料與裝備評分</p>
+
+        <div class="cards" id="governor-gear-cards" aria-label="領主裝備需求材料卡片"></div>
+
+        <div class="table-wrap data-table" aria-label="領主裝備需求材料表">
+          <table id="governor-gear-table">
+            <thead>
+              <tr>
+                <th>品質</th>
+                <th class="num">
+                  <span class="th-flex">
+                    <img class="th-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />
+                    綢緞
+                  </span>
+                </th>
+                <th class="num">
+                  <span class="th-flex">
+                    <img class="th-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />
+                    金線
+                  </span>
+                </th>
+                <th class="num">
+                  <span class="th-flex">
+                    <img class="th-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />
+                    設計草圖
+                  </span>
+                </th>
+                <th class="num">裝備評分</th>
+              </tr>
+            </thead>
+            <tbody>
+  <tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/1.png" alt="高級" width="20" height="20" /><span class="tier-name">高級</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />1,500</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />15</span></td><td class="num">–</td><td class="num">1,125</td></tr>
+  <tr><td>高級 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />3,800</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />40</span></td><td class="num">–</td><td class="num">1,875</td></tr>
+
+  <tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/2.png" alt="稀有" width="20" height="20" /><span class="tier-name">稀有</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />7,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />70</span></td><td class="num">–</td><td class="num">3,000</td></tr>
+  <tr><td>稀有 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />9,700</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />95</span></td><td class="num">–</td><td class="num">4,540</td></tr>
+  <tr><td>稀有 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />1,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />10</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />45</span></td><td class="num">5,100</td></tr>
+  <tr><td>稀有 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />1,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />10</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />50</span></td><td class="num">5,440</td></tr>
+
+  <tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/3.png" alt="史詩" width="20" height="20" /><span class="tier-name">史詩</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />1,500</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />15</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />60</span></td><td class="num">3,230</td></tr>
+  <tr><td>史詩 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />1,500</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />15</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />70</span></td><td class="num">3,380</td></tr>
+  <tr><td>史詩 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />6,500</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />65</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />40</span></td><td class="num">4,125</td></tr>
+  <tr><td>史詩 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />8,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />80</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />50</span></td><td class="num">4,740</td></tr>
+
+  <tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/4.png" alt="史詩 T1" width="20" height="20" /><span class="tier-name">史詩 T1</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />10,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />95</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />60</span></td><td class="num">5,320</td></tr>
+  <tr><td>史詩 T1 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />11,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />110</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />70</span></td><td class="num">5,775</td></tr>
+  <tr><td>史詩 T1 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />13,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />130</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />85</span></td><td class="num">6,485</td></tr>
+  <tr><td>史詩 T1 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />15,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />160</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />100</span></td><td class="num">7,260</td></tr>
+
+  <tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/5.png" alt="傳說" width="20" height="20" /><span class="tier-name">傳說</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />22,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />220</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />40</span></td><td class="num">6,250</td></tr>
+  <tr><td>傳說 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />23,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />230</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />40</span></td><td class="num">6,250</td></tr>
+  <tr><td>傳說 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />25,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />250</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />45</span></td><td class="num">6,250</td></tr>
+  <tr><td>傳說 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />26,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />260</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />45</span></td><td class="num">6,250</td></tr>
+
+  <tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/6.png" alt="傳說 T1" width="20" height="20" /><span class="tier-name">傳說 T1</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />28,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />280</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />45</span></td><td class="num">6,250</td></tr>
+  <tr><td>傳說 T1 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />30,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />300</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />55</span></td><td class="num">6,250</td></tr>
+  <tr><td>傳說 T1 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />32,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />320</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />55</span></td><td class="num">6,250</td></tr>
+  <tr><td>傳說 T1 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />35,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />340</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />55</span></td><td class="num">6,250</td></tr>
+
+  <tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/7.png" alt="傳說 T2" width="20" height="20" /><span class="tier-name">傳說 T2</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />38,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />390</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />55</span></td><td class="num">6,250</td></tr>
+  <tr><td>傳說 T2 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />43,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />430</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />75</span></td><td class="num">6,250</td></tr>
+  <tr><td>傳說 T2 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />45,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />460</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />80</span></td><td class="num">6,250</td></tr>
+  <tr><td>傳說 T2 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />48,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />500</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />85</span></td><td class="num">6,250</td></tr>
+
+  <tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/8.png" alt="傳說 T3" width="20" height="20" /><span class="tier-name">傳說 T3</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />60,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />600</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />120</span></td><td class="num">9,000</td></tr>
+  <tr><td>傳說 T3 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />70,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />700</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />140</span></td><td class="num">9,000</td></tr>
+  <tr><td>傳說 T3 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />80,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />800</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />160</span></td><td class="num">9,000</td></tr>
+  <tr><td>傳說 T3 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />90,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />900</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />180</span></td><td class="num">9,000</td></tr>
+
+  <tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/9.png" alt="神話" width="20" height="20" /><span class="tier-name">神話</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />108,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />1,080</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />220</span></td><td class="num">12,000</td></tr>
+  <tr><td>神話 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />114,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />1,140</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />230</span></td><td class="num">12,000</td></tr>
+  <tr><td>神話 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />121,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />1,210</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />240</span></td><td class="num">12,000</td></tr>
+  <tr><td>神話 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />128,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />1,280</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />250</span></td><td class="num">12,000</td></tr>
+
+  <tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/10.png" alt="神話 T1" width="20" height="20" /><span class="tier-name">神話 T1</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />154,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />1,540</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />300</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T1 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />163,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />1,630</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />320</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T1 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />173,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />1,730</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />340</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T1 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />183,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />1,830</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />360</span></td><td class="num">12,000</td></tr>
+
+<tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/11.png" alt="神話 T2" width="20" height="20" /><span class="tier-name">神話 T2</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />220,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />2,200</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />430</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T2 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />233,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />2,330</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />460</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T2 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />247,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />2,470</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />490</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T2 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />264,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />2,640</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />520</span></td><td class="num">12,000</td></tr>
+
+<tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/12.png" alt="神話 T3" width="20" height="20" /><span class="tier-name">神話 T3</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />306,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />3,060</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />610</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T3 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />323,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />3,230</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />650</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T3 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />340,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />3,400</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />690</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T3 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />357,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />3,570</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />730</span></td><td class="num">12,000</td></tr>
+
+<tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/13.png" alt="神話 T4" width="20" height="20" /><span class="tier-name">神話 T4</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />412,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />4,120</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />840</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T4 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />433,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />4,330</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />890</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T4 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />454,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />4,540</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />940</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T4 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />475,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />4,750</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />990</span></td><td class="num">12,000</td></tr>
+
+<tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/14.png" alt="神話 T5" width="20" height="20" /><span class="tier-name">神話 T5</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />479,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />4,790</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />1,120</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T5 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />493,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />4,930</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />1,180</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T5 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />507,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />5,070</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />1,240</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T5 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />521,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />5,210</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />1,300</span></td><td class="num">12,000</td></tr>
+
+<tr><td><div class="tier-cell"><img src="/img/database/Governor Gear/15.png" alt="神話 T6" width="20" height="20" /><span class="tier-name">神話 T6</span></div></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />548,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />5,480</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />1,450</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T6 ★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />565,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />5,650</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />1,520</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T6 ★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />582,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />5,820</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />1,590</span></td><td class="num">12,000</td></tr>
+<tr><td>神話 T6 ★★★</td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/satin.webp" alt="" aria-hidden="true" width="16" height="16" />599,000</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/threads.webp" alt="" aria-hidden="true" width="16" height="16" />5,990</span></td><td class="num"><span class="cell-flex"><img class="cell-ico" src="/img/database/artisans.webp" alt="" aria-hidden="true" width="16" height="16" />1,660</span></td><td class="num">12,000</td></tr>
+</tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="related">
+        <h2>相關頁面</h2>
+        <div class="related">
+          <a class="pill" href="/zh-tw/database/">資料庫首頁</a>
+          <a class="pill" href="/zh-tw/guides/">攻略</a>
+          <a class="pill" href="/zh-tw/heroes/">英雄列表</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function buildCards(){
+        var table = document.getElementById('governor-gear-table');
+        var target = document.getElementById('governor-gear-cards');
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || tds.length < 5) return;
+
+          var tierImg = tr.querySelector('.tier-cell img');
+          var tierText = tr.querySelector('.tier-name');
+          var tierImgHtml = tierImg ? ('<img src="' + tierImg.getAttribute('src') + '" alt="' + tierImg.getAttribute('alt') + '" width="18" height="18" />') : '';
+          var tierName = tierText ? tierText.textContent.trim() : tds[0].textContent.trim();
+
+          html += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">' + tierImgHtml + '<span>' + tierName + '</span></h3>' +
+                '<div class="card-meta">裝備評分<br><strong>' + tds[4].textContent.trim() + '</strong></div>' +
+              '</div>' +
+              '<div class="card-req">' +
+                '<span><img src="/img/database/satin.webp" alt="綢緞" width="16" height="16" />綢緞: <strong>' + tds[1].textContent.replace(/^[^0-9–-]*/, '').trim() + '</strong></span>' +
+                '<span><img src="/img/database/threads.webp" alt="金線" width="16" height="16" />金線: <strong>' + tds[2].textContent.replace(/^[^0-9–-]*/, '').trim() + '</strong></span>' +
+                '<span><img src="/img/database/artisans.webp" alt="設計草圖" width="16" height="16" />設計草圖: <strong>' + tds[3].textContent.replace(/^[^0-9–-]*/, '').trim() + '</strong></span>' +
+              '</div>' +
+            '</article>'
+          );
+          count++;
+        });
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+
+        var c1 = buildCards();
+        if(c1 > 0){
+          document.documentElement.classList.add('enhanced');
+        }
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

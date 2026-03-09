@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>영웅 장비 강화 | Kingshot</title>
+  <meta name="description" content="Kingshot 영웅 장비 강화 데이터베이스. 레전드 장비 업그레이드 소모표, 강화 경험치, 필요 경험치, 구간별 필요 재료와 미스릴까지 한 번에 정리." />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://kingshotdata.kr/ko/database/mastery-forging.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/database/mastery-forging.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/database/mastery-forging.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/database/mastery-forging.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/database/mastery-forging.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/database/mastery-forging.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+  :root{
+    --bg:#ffffff;
+    --panel:#ffffff;
+    --border:#e5e7eb;
+    --text:#111827;
+    --muted:#6b7280;
+    --brand:#2563eb;
+
+    --radius:16px;
+    --shadow:0 10px 24px rgba(0,0,0,.06);
+
+    --header-h:0px;
+    --tabs-h:0px;
+    --sticky-top:0px;
+
+    --tbl-font:12px;
+    --tbl-pad-y:7px;
+    --tbl-pad-x:10px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial;
+    color:var(--text);
+    background:var(--bg);
+  }
+  a{color:var(--brand); text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:18px 16px 64px}
+
+  header.top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:10px 0 12px;
+    border-bottom:1px solid var(--border);
+    background:var(--bg);
+  }
+
+  .brand a{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--text);
+    text-decoration:none;
+    font-weight:900;
+    letter-spacing:.1px;
+  }
+  .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+  nav.lang{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    color:var(--muted);
+    font-size:13px;
+  }
+  nav.lang a{
+    color:var(--muted);
+    padding:8px 10px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    background:#fff;
+    text-decoration:none;
+  }
+  nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+  nav.section-tabs{
+    display:none;
+    gap:8px;
+    padding:6px 0;
+    margin:0;
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+    background:var(--bg);
+    border-bottom:1px solid var(--border);
+  }
+  nav.section-tabs a{
+    display:inline-flex;
+    align-items:center;
+    white-space:nowrap;
+    padding:8px 10px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    background:#fff;
+    color:var(--muted);
+    font-size:13px;
+    text-decoration:none;
+  }
+  nav.section-tabs a:hover{color:var(--text)}
+
+  .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+  .crumbs a{color:var(--muted)}
+
+  .hero{
+    display:grid;
+    grid-template-columns:160px 1fr;
+    gap:18px;
+    padding:18px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+  .hero img{
+    width:160px;
+    height:160px;
+    object-fit:contain;
+    border-radius:14px;
+    background:#f8fafc;
+    border:1px solid var(--border);
+    padding:10px;
+  }
+
+  h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+  .sub{margin:0; color:var(--muted)}
+  .muted{color:var(--muted)}
+
+  .jump{
+    margin-top:10px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    font-size:13px;
+    color:var(--muted);
+  }
+  .jump a{color:var(--muted)}
+  .jump a:hover{color:var(--text)}
+  .dotsep{opacity:.5}
+
+  section{
+    margin-top:22px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:18px;
+  }
+  section h2{margin:0 0 10px; font-size:20px}
+  section h3{margin:0 0 10px; font-size:16px}
+  section p{margin:8px 0}
+
+  .note{
+    display:flex;
+    gap:10px;
+    padding:12px 14px;
+    border:1px solid rgba(37,99,235,.22);
+    background:rgba(37,99,235,.05);
+    border-radius:14px;
+    margin:10px 0 14px;
+  }
+  .note strong{font-weight:900}
+  .note .note-ico{
+    width:18px;
+    height:18px;
+    flex:0 0 18px;
+    margin-top:2px;
+    color:#2563eb;
+  }
+
+  .table-wrap{
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    background:#fff;
+  }
+
+  table{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+    background:#fff;
+    min-width:420px;
+    table-layout:fixed;
+  }
+
+  thead th{
+    position:sticky;
+    top:var(--sticky-top);
+    background:#f8fafc;
+    text-align:left;
+    padding:var(--tbl-pad-y) var(--tbl-pad-x);
+    border-bottom:1px solid var(--border);
+    font-size:var(--tbl-font);
+    line-height:1.25;
+    white-space:nowrap;
+    z-index:3;
+  }
+  tbody td, tfoot td{
+    padding:var(--tbl-pad-y) var(--tbl-pad-x);
+    border-bottom:1px solid var(--border);
+    vertical-align:middle;
+    font-size:var(--tbl-font);
+    line-height:1.25;
+    white-space:nowrap;
+  }
+  tbody tr:nth-child(even) td{background:#fcfcfd}
+  tbody tr:hover td{background:#f3f6ff}
+  tbody tr:last-child td{border-bottom:0}
+  tfoot td{
+    background:#f8fafc;
+    font-weight:900;
+    border-top:1px solid var(--border);
+    border-bottom:0;
+  }
+
+  .num{text-align:right; font-variant-numeric:tabular-nums}
+
+  .cards{display:none}
+  .cards .card{
+    border:1px solid var(--border);
+    border-radius:16px;
+    background:#fff;
+    box-shadow:0 6px 16px rgba(0,0,0,.04);
+    padding:12px;
+  }
+  .card-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:8px;
+  }
+  .card-title{
+    font-size:15px;
+    font-weight:900;
+    line-height:1.2;
+    margin:0;
+  }
+  .card-meta{
+    text-align:right;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.25;
+    white-space:nowrap;
+  }
+  .card-req{
+    margin:8px 0 0;
+    color:var(--text);
+    font-size:13px;
+  }
+
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:12px;
+    margin-top:12px;
+  }
+  .stat-card{
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px;
+    background:#fff;
+  }
+  .stat-card strong{
+    display:block;
+    margin-bottom:6px;
+    font-size:13px;
+    color:var(--muted);
+  }
+  .stat-card span{
+    display:block;
+    font-size:22px;
+    font-weight:900;
+    line-height:1.1;
+  }
+
+  .grid-2{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px;
+  }
+
+  .legend-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px;
+    align-items:start;
+  }
+  .legend-card{
+    border:1px solid var(--border);
+    border-radius:16px;
+    background:#fff;
+    padding:14px;
+    box-shadow:0 6px 16px rgba(0,0,0,.04);
+  }
+  .legend-card h3{
+    margin:0 0 10px;
+    font-size:16px;
+  }
+  .legend-card .table-wrap{
+    border-radius:12px;
+  }
+
+  .legend-table th:nth-child(1),
+  .legend-table td:nth-child(1){width:34%}
+  .legend-table th:nth-child(2),
+  .legend-table td:nth-child(2){width:28%; text-align:right}
+  .legend-table th:nth-child(3),
+  .legend-table td:nth-child(3){width:38%}
+
+  .xp-table th:nth-child(1),
+  .xp-table td:nth-child(1){width:68%}
+  .xp-table th:nth-child(2),
+  .xp-table td:nth-child(2){width:32%; text-align:right}
+
+  .required-table th:nth-child(1),
+  .required-table td:nth-child(1){width:22%; text-align:right}
+  .required-table th:nth-child(2),
+  .required-table td:nth-child(2){width:38%; text-align:right}
+  .required-table th:nth-child(3),
+  .required-table td:nth-child(3){width:40%; text-align:right}
+
+  .cost-table th:nth-child(1),
+  .cost-table td:nth-child(1){width:36%}
+  .cost-table th:nth-child(2),
+  .cost-table td:nth-child(2){width:24%; text-align:right}
+  .cost-table th:nth-child(3),
+  .cost-table td:nth-child(3){width:40%; text-align:right}
+
+  .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    padding:7px 10px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    background:#fff;
+    font-size:13px;
+    color:var(--text);
+    text-decoration:none;
+  }
+  .pill:hover{border-color:#c7d2fe}
+
+  @media (max-width: 900px){
+    header.top{
+      position:sticky;
+      top:0;
+      z-index:40;
+    }
+    nav.section-tabs{
+      display:flex;
+      position:sticky;
+      top:var(--header-h);
+      z-index:35;
+    }
+    .hero{grid-template-columns:1fr}
+    .hero img{width:120px;height:120px}
+    .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-2,
+    .legend-grid{grid-template-columns:1fr}
+    .enhanced .data-table{display:none}
+    .enhanced .cards{display:grid; gap:12px}
+  }
+
+  @media (max-width: 600px){
+    body{font-size:15px}
+    .wrap{padding:14px 12px 56px}
+    h1{font-size:24px}
+    section{padding:14px}
+    .stat-grid{grid-template-columns:1fr}
+
+    table{
+      min-width:100%;
+    }
+    thead th,
+    tbody td,
+    tfoot td{
+      padding:6px 8px;
+      font-size:12px;
+    }
+
+    /* 모바일에서 sticky 헤더 충돌 방지 */
+    thead th{
+      position:static !important;
+      top:auto !important;
+    }
+
+    .legend-card{
+      padding:12px;
+    }
+    .legend-card h3{
+      font-size:15px;
+    }
+
+    .legend-table th:nth-child(1),
+    .legend-table td:nth-child(1){width:34%}
+    .legend-table th:nth-child(2),
+    .legend-table td:nth-child(2){width:28%}
+    .legend-table th:nth-child(3),
+    .legend-table td:nth-child(3){width:38%}
+
+    .required-table th:nth-child(1),
+    .required-table td:nth-child(1){width:22%}
+    .required-table th:nth-child(2),
+    .required-table td:nth-child(2){width:38%}
+    .required-table th:nth-child(3),
+    .required-table td:nth-child(3){width:40%}
+
+    .cost-table th:nth-child(1),
+    .cost-table td:nth-child(1){width:34%}
+    .cost-table th:nth-child(2),
+    .cost-table td:nth-child(2){width:20%}
+    .cost-table th:nth-child(3),
+    .cost-table td:nth-child(3){width:46%}
+  }
+</style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"영웅 장비 강화 (Kingshot)",
+    "inLanguage":"ko",
+    "description":"Kingshot 영웅 장비 강화 데이터베이스. 레전드 장비 업그레이드 소모표, 강화 경험치, 필요 경험치, 구간별 필요 재료와 미스릴까지 한 번에 정리.",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
+        {"@type":"ListItem","position":2,"name":"데이터베이스","item":"https://kingshotdata.kr/ko/database/"},
+        {"@type":"ListItem","position":3,"name":"영웅 장비 강화","item":"https://kingshotdata.kr/ko/database/mastery-forging.html"}
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/database/mastery-forging.html">EN</a>
+        <a href="/ko/database/mastery-forging.html" aria-current="page">KO</a>
+        <a href="/ja/database/mastery-forging.html">JA</a>
+        <a href="/zh-tw/database/mastery-forging.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">개요</a>
+      <a href="#legend-cost">레전드 장비</a>
+      <a href="#gear-xp">강화 경험치</a>
+      <a href="#required-xp">필요 경험치</a>
+      <a href="#unlock-cost">구간별 필요 재료</a>
+      <a href="#related">관련</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/database/">데이터베이스</a> <span class="muted">›</span>
+        <span>영웅 장비 강화</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/database/mastery-forging.webp" alt="영웅 장비 강화" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>영웅 장비 강화</h1>
+          <p class="sub">
+            레전드 장비 업그레이드 소모표, 강화 경험치, 필요 경험치, 구간별 필요 재료와 미스릴까지
+            영웅 장비 강화에 필요한 핵심 자료를 한 번에 정리한 데이터베이스입니다.
+          </p>
+          <p class="muted" style="margin-top:10px">
+            실전 기준으로는 병종별 세팅보다 장비를 균등하게 올리는 방식이 가장 무난하고 효율적입니다.
+          </p>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">개요</a><span class="dotsep">•</span>
+            <a href="#legend-cost">레전드 장비</a><span class="dotsep">•</span>
+            <a href="#gear-xp">강화 경험치</a><span class="dotsep">•</span>
+            <a href="#required-xp">필요 경험치</a><span class="dotsep">•</span>
+            <a href="#unlock-cost">구간별 필요 재료</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>영웅 장비 강화란?</h2>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>참고:</strong>
+            레전드 장비는 Lv.100 이상 + 마스터 티어 Lv.10 달성 시 신화 단계 업그레이드가 가능합니다.
+            Lv.100 이전에는 강화만 가능하며, Lv.100 달성 후 단련 기능이 해금됩니다.
+          </div>
+        </div>
+
+        <p>
+          영웅 장비 강화는 단순 강화가 아니라 제작망치, 레전드 장비, 미스릴, 강화 경험치를 함께 관리해야 하는 장기 성장 콘텐츠입니다.
+        </p>
+        <p>
+          특히 +20, +40, +60, +80, +100 구간은 요구 재료와 강화 경험치가 확실히 늘어나므로 목표 구간을 정해두고 재료를 모으는 편이 좋습니다.
+        </p>
+        <p>
+          장비 운용은 특정 병종만 몰아주는 것보다 전체 장비를 균등하게 올리는 방식이 가장 무난하고 효율적입니다.
+        </p>
+
+        <div class="stat-grid" aria-label="핵심 요약">
+          <div class="stat-card">
+            <strong>강화부품 10점</strong>
+            <span>10 XP</span>
+          </div>
+          <div class="stat-card">
+            <strong>강화부품 100점</strong>
+            <span>100 XP</span>
+          </div>
+          <div class="stat-card">
+            <strong>+100 장비 1개 미스릴</strong>
+            <span>150</span>
+          </div>
+          <div class="stat-card">
+            <strong>+100 장비 1개 총 강화경험치</strong>
+            <span>502,000</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="legend-cost">
+        <h2>레전드 장비 업그레이드 소모표</h2>        
+
+        <div class="legend-grid">
+          <article class="legend-card">
+            <h3>레전드 장비 1 ~ 10</h3>
+            <div class="table-wrap" aria-label="레전드 장비 1부터 10 표">
+              <table class="legend-table">
+                <thead>
+                  <tr>
+                    <th>레벨</th>
+                    <th>제작망치</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Level 1</td><td class="num">10</td></tr>
+                  <tr><td>Level 2</td><td class="num">20</td></tr>
+                  <tr><td>Level 3</td><td class="num">30</td></tr>
+                  <tr><td>Level 4</td><td class="num">40</td></tr>
+                  <tr><td>Level 5</td><td class="num">50</td></tr>
+                  <tr><td>Level 6</td><td class="num">60</td></tr>
+                  <tr><td>Level 7</td><td class="num">70</td></tr>
+                  <tr><td>Level 8</td><td class="num">80</td></tr>
+                  <tr><td>Level 9</td><td class="num">90</td></tr>
+                  <tr><td>Level 10</td><td class="num">100</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="legend-card">
+            <h3>레전드 장비 11 ~ 20</h3>
+            <div class="table-wrap" aria-label="레전드 장비 11부터 20 표">
+              <table class="legend-table">
+                <thead>
+                  <tr>
+                    <th>레벨</th>
+                    <th>제작망치</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Level 11</td><td class="num">110</td></tr>
+                  <tr><td>Level 12</td><td class="num">120</td></tr>
+                  <tr><td>Level 13</td><td class="num">130</td></tr>
+                  <tr><td>Level 14</td><td class="num">140</td></tr>
+                  <tr><td>Level 15</td><td class="num">150</td></tr>
+                  <tr><td>Level 16</td><td class="num">160</td></tr>
+                  <tr><td>Level 17</td><td class="num">170</td></tr>
+                  <tr><td>Level 18</td><td class="num">180</td></tr>
+                  <tr><td>Level 19</td><td class="num">190</td></tr>
+                  <tr><td>Level 20</td><td class="num">200</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+
+        <div class="note" role="note" aria-label="Legend cost note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>추가 안내:</strong>
+            11~20 구간에서는 제작망치 외에도 레전드 장비가 추가로 들어갑니다.
+            11레벨부터 20레벨까지 순서대로 1개, 2개, 3개, 4개, 5개, 6개, 7개, 8개, 9개, 10개가 필요합니다.            
+          </div>
+        </div>
+      </section>
+
+      <section id="gear-xp">
+        <h2>강화 경험치 기준</h2>
+        <p class="muted" style="margin-top:-2px">장비 등급과 강화부품 기준 경험치</p>
+
+        <div class="cards" id="xp-cards" aria-label="강화 경험치 카드"></div>
+
+        <div class="table-wrap data-table" aria-label="강화 경험치 기준 표">
+          <table id="xp-table" class="xp-table">
+            <thead>
+              <tr>
+                <th>구분</th>
+                <th class="num">강화경험치</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>일반</td><td class="num">10</td></tr>
+              <tr><td>고급</td><td class="num">30</td></tr>
+              <tr><td>레어</td><td class="num">60</td></tr>
+              <tr><td>에픽</td><td class="num">150</td></tr>
+              <tr><td>경험치 강화부품 10점</td><td class="num">10</td></tr>
+              <tr><td>경험치 강화부품 100점</td><td class="num">100</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="required-xp">
+        <h2>필요 경험치</h2>
+        <p class="muted" style="margin-top:-2px">시작 레벨 기준 필요 경험치와 경험치 강화부품 100점 환산 개수</p>
+
+        <div class="table-wrap" aria-label="필요 경험치 표">
+          <table class="required-table">
+            <thead>
+              <tr>
+                <th class="num">시작 레벨</th>
+                <th class="num">필요경험치</th>
+                <th class="num">강화부품 100점</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">73,330</td><td class="num">734개</td></tr>
+              <tr><td class="num">10</td><td class="num">73,005</td><td class="num">731개</td></tr>
+              <tr><td class="num">20</td><td class="num">72,180</td><td class="num">722개</td></tr>
+              <tr><td class="num">30</td><td class="num">70,850</td><td class="num">709개</td></tr>
+              <tr><td class="num">40</td><td class="num">68,690</td><td class="num">687개</td></tr>
+              <tr><td class="num">50</td><td class="num">64,890</td><td class="num">649개</td></tr>
+              <tr><td class="num">55</td><td class="num">62,240</td><td class="num">623개</td></tr>
+              <tr><td class="num">60</td><td class="num">59,080</td><td class="num">591개</td></tr>
+              <tr><td class="num">65</td><td class="num">55,230</td><td class="num">553개</td></tr>
+              <tr><td class="num">70</td><td class="num">50,620</td><td class="num">507개</td></tr>
+              <tr><td class="num">75</td><td class="num">45,070</td><td class="num">451개</td></tr>
+              <tr><td class="num">80</td><td class="num">38,510</td><td class="num">386개</td></tr>
+              <tr><td class="num">85</td><td class="num">30,760</td><td class="num">308개</td></tr>
+              <tr><td class="num">90</td><td class="num">21,750</td><td class="num">218개</td></tr>
+              <tr><td class="num">95</td><td class="num">11,500</td><td class="num">115개</td></tr>
+              <tr><td class="num">96</td><td class="num">9,300</td><td class="num">93개</td></tr>
+              <tr><td class="num">97</td><td class="num">7,050</td><td class="num">71개</td></tr>
+              <tr><td class="num">98</td><td class="num">4,970</td><td class="num">50개</td></tr>
+              <tr><td class="num">99</td><td class="num">2,400</td><td class="num">24개</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note" role="note" aria-label="Required xp note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>포인트:</strong>
+            무과금도 꾸준함만 있다면 과금 없이 고레벨 장비를 얻을 수 있습니다.
+          </div>
+        </div>
+      </section>
+
+      <section id="unlock-cost">
+        <h2>구간별 필요 재료</h2>        
+
+        <div class="grid-2">
+          <div>
+            <h3>+20 구간</h3>
+            <div class="table-wrap" aria-label="+20 구간 표">
+              <table class="cost-table">
+                <thead>
+                  <tr>
+                    <th>구간</th>
+                    <th class="num">미스릴</th>
+                    <th class="num">합산 강화경험치</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1 ~ 20</td><td class="num">10</td><td class="num">52,650</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3>+40 구간</h3>
+            <div class="table-wrap" aria-label="+40 구간 표">
+              <table class="cost-table">
+                <thead>
+                  <tr>
+                    <th>구간</th>
+                    <th class="num">미스릴</th>
+                    <th class="num">합산 강화경험치</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>21 ~ 40</td><td class="num">20</td><td class="num">75,050</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3>+60 구간</h3>
+            <div class="table-wrap" aria-label="+60 구간 표">
+              <table class="cost-table">
+                <thead>
+                  <tr>
+                    <th>구간</th>
+                    <th class="num">미스릴</th>
+                    <th class="num">합산 강화경험치</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>41 ~ 60</td><td class="num">30</td><td class="num">93,100</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3>+80 구간</h3>
+            <div class="table-wrap" aria-label="+80 구간 표">
+              <table class="cost-table">
+                <thead>
+                  <tr>
+                    <th>구간</th>
+                    <th class="num">미스릴</th>
+                    <th class="num">합산 강화경험치</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>61 ~ 80</td><td class="num">40</td><td class="num">121,600</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div style="grid-column:1 / -1">
+            <h3>+100 구간</h3>
+            <div class="table-wrap" aria-label="+100 구간 표">
+              <table class="cost-table">
+                <thead>
+                  <tr>
+                    <th>구간</th>
+                    <th class="num">미스릴</th>
+                    <th class="num">합산 강화경험치</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>81 ~ 100</td><td class="num">50</td><td class="num">159,600</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="note" role="note" aria-label="Unlock summary note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>핵심 정리:</strong>
+            장비 1개를 +100까지 올릴 때 필요한 총 미스릴은 150개이며,
+            총 강화경험치는 502,000입니다.
+          </div>
+        </div>
+      </section>
+
+      <section id="related">
+        <h2>관련 페이지</h2>
+        <div class="related">
+          <a class="pill" href="/ko/database/">데이터베이스 메인</a>
+          <a class="pill" href="/ko/heroes/">영웅 목록</a>
+          <a class="pill" href="/ko/guides/">가이드</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function buildCardsFromTable(tableId, targetId){
+        var table = document.getElementById(tableId);
+        var target = document.getElementById(targetId);
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || tds.length < 2) return;
+
+          html += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">' + tds[0].textContent.trim() + '</h3>' +
+                '<div class="card-meta">강화경험치<br><strong>' + tds[1].textContent.trim() + '</strong></div>' +
+              '</div>' +
+              '<div class="card-req">기준값은 <strong>' + tds[1].textContent.trim() + '</strong>입니다.</div>' +
+            '</article>'
+          );
+          count++;
+        });
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+
+        var c1 = buildCardsFromTable('xp-table', 'xp-cards');
+        if(c1 > 0){
+          document.documentElement.classList.add('enhanced');
+        }
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

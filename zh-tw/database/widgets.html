@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="ko">
+<html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>영웅 전용무기 위젯 | Kingshot</title>
-  <meta name="description" content="Kingshot 영웅 전용무기 위젯(Widgets) 가이드. 위젯이 무엇인지, 어디서 획득하는지, 강화 단계별 필요 개수와 전용무기 영웅까지 정리." />
+  <title>英雄專屬武器零件 | Kingshot</title>
+  <meta name="description" content="Kingshot 英雄專屬武器零件指南。整理英雄專屬武器是什麼、可從哪些途徑獲得、各強化階段所需數量，以及 Full Package 基準。" />
 
   <!-- SEO -->
-  <link rel="canonical" href="https://kingshotdata.kr/ko/database/widget.html" />
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/database/widget.html" />
   <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/database/widget.html" />
   <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/database/widget.html" />
   <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/database/widget.html" />
@@ -46,7 +46,7 @@
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","Microsoft JhengHei","PingFang TC","Heiti TC",Arial,sans-serif;
       color:var(--text);
       background:var(--bg);
     }
@@ -195,7 +195,7 @@
       white-space:nowrap;
       z-index:3;
     }
-    tbody td{
+    tbody td, tfoot td{
       padding:var(--tbl-pad-y) var(--tbl-pad-x);
       border-bottom:1px solid var(--border);
       vertical-align:top;
@@ -205,6 +205,12 @@
     tbody tr:nth-child(even) td{background:#fcfcfd}
     tbody tr:hover td{background:#f3f6ff}
     tbody tr:last-child td{border-bottom:0}
+    tfoot td{
+      background:#f8fafc;
+      font-weight:900;
+      border-top:1px solid var(--border);
+      border-bottom:0;
+    }
 
     .center{text-align:center}
     .num{text-align:right; font-variant-numeric: tabular-nums}
@@ -255,74 +261,53 @@
       color:var(--text);
       font-size:13px;
     }
+    .card-total{
+      border:1px solid rgba(37,99,235,.16);
+      background:rgba(37,99,235,.05);
+    }
 
-    ul.clean{margin:0; padding-left:18px}
-    ul.clean li{margin:6px 0}
-
-    .sources-grid{
+    .sources-grid,
+    .packages-grid{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
       gap:12px;
       margin-top:12px;
     }
-    .source-card{
+    .source-card,
+    .package-card{
       border:1px solid var(--border);
       border-radius:14px;
       padding:14px;
       background:#fff;
     }
-    .source-card strong{
+    .source-card strong,
+    .package-card strong{
       display:block;
       margin-bottom:4px;
       font-size:14px;
     }
-    .source-card p{
+    .source-card p,
+    .package-card p{
       margin:0;
       font-size:13px;
       color:var(--muted);
     }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
-      margin-top:10px;
+    .package-price{
+      font-size:20px;
+      font-weight:900;
+      line-height:1.1;
+      margin-bottom:6px;
     }
-    .hero-card{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:12px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fff;
-      text-decoration:none;
-      color:var(--text);
-    }
-    .hero-card:hover{
-      border-color:#c7d2fe;
-      background:#fbfdff;
-      text-decoration:none;
-    }
-    .hero-card img{
-      width:64px;
-      height:64px;
-      border-radius:12px;
-      object-fit:cover;
+    .package-count{
+      display:inline-flex;
+      margin-top:8px;
+      padding:6px 10px;
+      border-radius:999px;
       background:#f8fafc;
       border:1px solid var(--border);
-      flex:0 0 64px;
-    }
-    .hero-card strong{
-      display:block;
-      font-size:15px;
-      margin-bottom:3px;
-    }
-    .hero-card span{
-      display:block;
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.4;
+      font-size:13px;
+      font-weight:800;
+      color:var(--text);
     }
 
     .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
@@ -358,8 +343,8 @@
       }
       .hero{grid-template-columns:1fr}
       .hero img{width:120px;height:120px}
-      .sources-grid{grid-template-columns:1fr}
-      .hero-grid{grid-template-columns:1fr}
+      .sources-grid,
+      .packages-grid{grid-template-columns:1fr}
       .enhanced .data-table{display:none}
       .enhanced .cards{display:grid; gap:12px}
     }
@@ -376,15 +361,15 @@
   {
     "@context":"https://schema.org",
     "@type":"WebPage",
-    "name":"영웅 전용무기 위젯 (Kingshot)",
-    "inLanguage":"ko",
-    "description":"Kingshot 영웅 전용무기 위젯(Widgets) 획득처, 필요 개수, 전용무기 영웅 정리.",
+    "name":"英雄專屬武器零件 (Kingshot)",
+    "inLanguage":"zh-Hant",
+    "description":"Kingshot 英雄專屬武器零件獲取方式、需求數量與 Full Package 基準整理。",
     "breadcrumb":{
       "@type":"BreadcrumbList",
       "itemListElement":[
-        {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
-        {"@type":"ListItem","position":2,"name":"데이터베이스","item":"https://kingshotdata.kr/ko/database/"},
-        {"@type":"ListItem","position":3,"name":"영웅 전용무기 위젯","item":"https://kingshotdata.kr/ko/database/widget.html"}
+        {"@type":"ListItem","position":1,"name":"首頁","item":"https://kingshotdata.kr/zh-tw/"},
+        {"@type":"ListItem","position":2,"name":"資料庫","item":"https://kingshotdata.kr/zh-tw/database/"},
+        {"@type":"ListItem","position":3,"name":"英雄專屬武器零件","item":"https://kingshotdata.kr/zh-tw/database/widget.html"}
       ]
     }
   }
@@ -403,113 +388,126 @@
   <div class="wrap">
     <header class="top">
       <div class="brand">
-        <a href="/ko/" aria-label="Kingshot Data Home">
+        <a href="/zh-tw/" aria-label="Kingshot Data Home">
           <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
           <span>Kingshot Data</span>
         </a>
       </div>
       <nav class="lang" aria-label="Language">
         <a href="/en/database/widget.html">EN</a>
-        <a href="/ko/database/widget.html" aria-current="page">KO</a>
+        <a href="/ko/database/widget.html">KO</a>
         <a href="/ja/database/widget.html">JA</a>
-        <a href="/zh-tw/database/widget.html">ZH-TW</a>
+        <a href="/zh-tw/database/widget.html" aria-current="page">ZH-TW</a>
       </nav>
     </header>
 
     <nav class="section-tabs" aria-label="Section navigation">
-      <a href="#overview">개요</a>
-      <a href="#sources">획득처</a>
-      <a href="#requirements">필요 개수</a>
-      <a href="#heroes">전용무기 영웅</a>
-      <a href="#related">관련</a>
+      <a href="#overview">概要</a>
+      <a href="#sources">獲取方式</a>
+      <a href="#requirements">需求數量</a>
+      <a href="#packages">Full Package</a>
+      <a href="#related">相關頁面</a>
     </nav>
 
     <main id="main">
       <div class="crumbs">
-        <a href="/ko/">홈</a> <span class="muted">›</span>
-        <a href="/ko/database/">데이터베이스</a> <span class="muted">›</span>
-        <span>영웅 전용무기 위젯</span>
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/database/">資料庫</a> <span class="muted">›</span>
+        <span>英雄專屬武器零件</span>
       </div>
 
       <div class="hero">
-        <img src="/img/database/widget.webp" alt="영웅 전용무기 위젯" loading="eager" fetchpriority="high" width="160" height="160" />
+        <img src="/img/database/widget.webp" alt="英雄專屬武器零件" loading="eager" fetchpriority="high" width="160" height="160" />
         <div>
-          <h1>영웅 전용무기 위젯</h1>
+          <h1>英雄專屬武器零件</h1>
           <p class="sub">
-            위젯(Widgets)은 Kingshot에서 영웅 전용무기를 해금하고 강화하는 데 필요한 핵심 재료입니다.
-            전용무기는 SSR 영웅만 사용할 수 있으며, 도시센터 15레벨 이후 접근할 수 있습니다.
+            英雄專屬武器零件是在 Kingshot 中，用來解鎖與強化 SSR 英雄專屬武器的核心材料。
+            建議先決定會長期使用的英雄，再提前規劃要投資到 10 強的目標。
           </p>
           <p class="muted" style="margin-top:10px">
-            이 페이지에서는 위젯이 무엇인지, 어디서 얻을 수 있는지, 강화 단계별 필요 개수와
-            전용무기를 보유한 영웅까지 한 번에 정리합니다.
+            本頁整理英雄專屬武器是什麼、可從哪些途徑獲得、各強化階段所需數量，
+            以及 Full Package 的計算基準。
           </p>
 
           <div class="jump" aria-label="Quick jump links">
-            <a href="#overview">개요</a><span class="dotsep">•</span>
-            <a href="#sources">획득처</a><span class="dotsep">•</span>
-            <a href="#requirements">필요 개수</a><span class="dotsep">•</span>
-            <a href="#heroes">전용무기 영웅</a><span class="dotsep">•</span>
-            <a href="#related">관련</a>
+            <a href="#overview">概要</a><span class="dotsep">•</span>
+            <a href="#sources">獲取方式</a><span class="dotsep">•</span>
+            <a href="#requirements">需求數量</a><span class="dotsep">•</span>
+            <a href="#packages">Full Package</a><span class="dotsep">•</span>
+            <a href="#related">相關頁面</a>
           </div>
         </div>
       </div>
 
       <section id="overview">
-        <h2>개요</h2>
+        <h2>英雄專屬武器是什麼？</h2>
 
         <div class="note" role="note" aria-label="Note">
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
           <div>
-            <strong>참고:</strong>
-            전용무기는 SSR 영웅 전용 시스템이며, 강화 단계가 올라갈수록 영웅 전투력과 핵심 효과가 크게 증가합니다.
+            <strong>提醒：</strong>
+            英雄專屬武器僅提供給 SSR 品質英雄使用，
+            達成城市中心 15 級後即可解鎖。
           </div>
         </div>
 
         <p>
-          위젯은 영웅 전용무기를 강화하는 전용 재료입니다.
-          전용무기는 각 SSR 영웅마다 따로 존재하며, 강화는 총 10단계까지 진행됩니다.
+          英雄專屬武器是僅限 SSR 英雄使用的專屬裝備。
         </p>
         <p>
-          전용무기를 강화하면 영웅의 전투력이 크게 상승하고, 특정 구간에서는 추가 능력이나 더 강한 효과를 기대할 수 있습니다.
-          따라서 위젯은 단순 재료가 아니라 장기 성장에서 매우 중요한 자원입니다.
+          當城市中心達到 15 級後即可開放，之後可使用專屬材料進行解鎖與強化。
+        </p>
+        <p>
+          強化最高可達 10 階，隨著階段提升，討伐與遠征中有利的能力也會同步增強。
+          因此，英雄專屬武器零件不是單純的消耗素材，而是長期成長中非常重要的資源。
+        </p>
+        <p>
+          尤其是無課或微課玩家，只要持續利用香檳慶典、英雄殿堂、海盜寶藏、神秘商店等途徑，
+          就算需要花比較長的時間，也完全有機會穿上 10 強武器。
+          建議先看好攻略，再把 10 強資源投資在你會長期使用的英雄身上。
         </p>
       </section>
 
       <section id="sources">
-        <h2>위젯 획득처</h2>
-        <p class="muted" style="margin-top:-2px">서버 진행도와 이벤트 상황에 따라 수급처가 달라질 수 있습니다.</p>
+        <h2>英雄專屬武器零件獲取方式</h2>
+        <p class="muted" style="margin-top:-2px">依照伺服器進度與活動安排，實際取得途徑可能有所不同。</p>
 
         <div class="sources-grid">
           <article class="source-card">
-            <strong>Buccaneer Bounty Event</strong>
-            <p>대표적인 이벤트 획득처 중 하나이며, 전용무기 관련 재료를 얻기 좋은 콘텐츠입니다.</p>
+            <strong>香檳慶典</strong>
+            <p>每個賽季結束時開放。是賽季尾聲常見且重要的零件獲取活動之一。</p>
           </article>
 
           <article class="source-card">
-            <strong>Mystery Shop</strong>
-            <p>상점 갱신에 따라 위젯이 등장할 수 있어, 주기적으로 확인하는 것이 좋습니다.</p>
+            <strong>英雄殿堂</strong>
+            <p>會依照伺服器進度逐步解鎖。當伺服器世代推進後，可作為英雄成長材料的獲取來源之一。</p>
           </article>
 
           <article class="source-card">
-            <strong>Hall of Heroes</strong>
-            <p>후반 서버 세대에서는 영웅의 전당에서도 위젯을 확인할 수 있는 경우가 있습니다.</p>
+            <strong>海盜寶藏</strong>
+            <p>也是常見的零件獲取活動之一。活動期間建議更有效率地分配手上的資源。</p>
           </article>
 
           <article class="source-card">
-            <strong>Special Events / Packs</strong>
-            <p>특별 이벤트와 패키지에서 위젯이 제공될 수 있으며, 과금 여부에 따라 수급 속도 차이가 큽니다.</p>
+            <strong>神秘商店</strong>
+            <p>可使用徽章進行折扣購買。由於商店內容會刷新，建議定期查看是否出現零件。</p>
+          </article>
+
+          <article class="source-card">
+            <strong>付費商品</strong>
+            <p>可透過商店中的專屬武器禮包快速獲得零件。是否課金會直接影響培養速度。</p>
           </article>
         </div>
       </section>
 
       <section id="upgrade">
         <span id="requirements" class="anchor"></span>
-        <h2>강화 단계별 필요 개수</h2>
-        <p class="muted" style="margin-top:-2px">전용무기 1~10단계에 필요한 위젯 개수</p>
+        <h2>各強化階段需求數量</h2>
+        <p class="muted" style="margin-top:-2px">專屬武器 1～10 階所需的英雄專屬武器零件數量</p>
 
-        <div class="cards" id="widget-cards" aria-label="위젯 필요 개수 카드"></div>
+        <div class="cards" id="widget-cards" aria-label="英雄專屬武器零件需求數量卡片"></div>
 
-        <div class="table-wrap data-table" aria-label="전용무기 강화 단계별 위젯 필요 개수 표">
+        <div class="table-wrap data-table" aria-label="專屬武器各強化階段英雄專屬武器零件需求表">
           <table id="widget-table">
             <colgroup>
               <col style="width:50%">
@@ -517,11 +515,11 @@
             </colgroup>
             <thead>
               <tr>
-                <th>전용무기 레벨</th>
+                <th>專屬武器等級</th>
                 <th class="num">
                   <span class="th-flex">
                     <img class="th-ico" src="/img/database/widget.webp" alt="" aria-hidden="true" width="14" height="14">
-                    필요 위젯 개수
+                    需求數量
                   </span>
                 </th>
               </tr>
@@ -538,39 +536,78 @@
               <tr><td>9</td><td class="num">45</td></tr>
               <tr><td>10</td><td class="num">50</td></tr>
             </tbody>
+            <tfoot>
+              <tr><td>合計</td><td class="num">275</td></tr>
+            </tfoot>
           </table>
+        </div>
+
+        <div class="note" role="note" aria-label="Total note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>合計基準：</strong>
+            若從專屬武器 1 強一路強化到 10 強，總共需要 <strong>275 個</strong> 英雄專屬武器零件。
+          </div>
         </div>
       </section>
 
-      <section id="heroes">
-        <h2>전용무기 보유 영웅</h2>
-        <p class="muted" style="margin-top:-2px">초안 기준으로 일부 영웅만 연결해둔 예시입니다.</p>
+      <section id="packages">
+        <h2>Full Package 基準</h2>
+        <p class="muted" style="margin-top:-2px">商店專屬武器禮包範例（統一使用美元標示）</p>
 
-        <div class="hero-grid">
-          <a class="hero-card" href="/ko/heroes/amadeus.html">
-            <img src="/img/heroes/amadeus.webp" alt="아마데우스 전용무기" loading="lazy" decoding="async" width="64" height="64" />
-            <div>
-              <strong>아마데우스</strong>
-              <span>집결 공격 기준으로 자주 언급되는 대표 전용무기 영웅</span>
-            </div>
-          </a>
+        <div class="packages-grid">
+          <article class="package-card">
+            <div class="package-price">$4.99</div>
+            <strong>專屬武器零件 5 個</strong>
+            <p>最低價位的禮包，通常作為少量補充使用。</p>
+            <div class="package-count">5 個</div>
+          </article>
 
-          <a class="hero-card" href="/ko/heroes/helga.html">
-            <img src="/img/heroes/helga.webp" alt="헬가 전용무기" loading="lazy" decoding="async" width="64" height="64" />
-            <div>
-              <strong>헬가</strong>
-              <span>초기 세대 보병 전용무기 대체재로 자주 비교되는 영웅</span>
-            </div>
-          </a>
+          <article class="package-card">
+            <div class="package-price">$9.99</div>
+            <strong>專屬武器零件 10 個</strong>
+            <p>適合在前期強化階段快速補足不足數量。</p>
+            <div class="package-count">10 個</div>
+          </article>
+
+          <article class="package-card">
+            <div class="package-price">$19.99</div>
+            <strong>專屬武器零件 20 個</strong>
+            <p>進入中期強化區間後，體感效率會更明顯的價位帶。</p>
+            <div class="package-count">20 個</div>
+          </article>
+
+          <article class="package-card">
+            <div class="package-price">$49.99</div>
+            <strong>專屬武器零件 50 個</strong>
+            <p>高強化前常用來大量補貨的區間，也是玩家常一起計算的禮包之一。</p>
+            <div class="package-count">50 個</div>
+          </article>
+
+          <article class="package-card">
+            <div class="package-price">$99.99</div>
+            <strong>專屬武器零件 100 個</strong>
+            <p>最高價位的禮包。通常會將以上這幾個區間一起視為 Full Package 基準。</p>
+            <div class="package-count">100 個</div>
+          </article>
         </div>
+
+        <p>
+          一般玩家常把以上這類分階段販售的商品組合，統稱為專屬武器
+          <strong>Full Package</strong>。
+        </p>
+        <p>
+          不過即使是無課玩家，只要持續利用香檳慶典、英雄殿堂、海盜寶藏與神秘商店，
+          仍然有機會靠時間慢慢湊齊 10 強武器所需材料。
+        </p>
       </section>
 
       <section id="related">
-        <h2>관련 페이지</h2>
+        <h2>相關頁面</h2>
         <div class="related">
-          <a class="pill" href="/ko/database/">데이터베이스 메인</a>
-          <a class="pill" href="/ko/heroes/">영웅 목록</a>
-          <a class="pill" href="/ko/guides/">가이드</a>
+          <a class="pill" href="/zh-tw/database/">資料庫首頁</a>
+          <a class="pill" href="/zh-tw/heroes/">英雄列表</a>
+          <a class="pill" href="/zh-tw/guides/">攻略</a>
         </div>
       </section>
     </main>
@@ -616,18 +653,28 @@
           html += (
             '<article class="card">' +
               '<div class="card-head">' +
-                '<h3 class="card-title">전용무기 레벨 ' + level + '</h3>' +
-                '<div class="card-meta">필요 위젯<br><strong>' + amount + '</strong></div>' +
+                '<h3 class="card-title">專屬武器等級 ' + level + '</h3>' +
+                '<div class="card-meta">需求數量<br><strong>' + amount + '</strong></div>' +
               '</div>' +
-              '<div class="card-req">강화 단계 <strong>' + level + '</strong> 에는 위젯 <strong>' + amount + '개</strong>가 필요합니다.</div>' +
+              '<div class="card-req">強化到 <strong>' + level + '</strong> 階時，需要 <strong>' + amount + ' 個</strong>英雄專屬武器零件。</div>' +
             '</article>'
           );
 
           count++;
         });
 
+        html += (
+          '<article class="card card-total">' +
+            '<div class="card-head">' +
+              '<h3 class="card-title">合計</h3>' +
+              '<div class="card-meta">總需求數量<br><strong>275</strong></div>' +
+            '</div>' +
+            '<div class="card-req">若從 1 強一路強化到 10 強，總共需要 <strong>275 個</strong>。</div>' +
+          '</article>'
+        );
+
         target.innerHTML = html;
-        return count;
+        return count + 1;
       }
 
       function initStickyObservers(){

@@ -1,5 +1,5 @@
 // /public/js/app.js — SPA Router (History API) for KingshotData.kr
-// v2026-03-06 (home route = "/" , /home -> / redirect)
+// v2026-03-08 (shared html page mount engine for buildings / heroes / database / guides)
 // ES5-compatible (no arrow functions / optional chaining)
 (function () {
   'use strict';
@@ -39,6 +39,9 @@
       .then(function(builtRoutes){
         startRouter(builtRoutes || {});
         return dispatch();
+      })
+      .catch(function(err){
+        console.error('[app bootstrap] failed:', err);
       });
   });
 
@@ -118,7 +121,7 @@
   }
 
   // ===== HTML fetch (LRU) =====
-  var HTML_CACHE_MAX = 24;
+  var HTML_CACHE_MAX = 32;
   var htmlCache = new Map();
   function setHtmlCache(key, val) {
     htmlCache.set(key, val);
@@ -151,6 +154,196 @@
   }
   function iconImg(alt, src) {
     return '<img src="' + v(src) + '" alt="' + escapeAttr(alt) + '" class="cat-icon__img" loading="lazy" decoding="async">';
+  }
+
+  // ===== shared html mount engine =====
+  function getCurrentContentLang() {
+    try {
+      var htmlLang = (document.documentElement.getAttribute('lang') || '').toLowerCase();
+      if (htmlLang === 'ko' || htmlLang.indexOf('ko-') === 0) return 'ko';
+      if (htmlLang === 'ja' || htmlLang.indexOf('ja-') === 0) return 'ja';
+      if (htmlLang === 'zh-tw' || htmlLang === 'zh-hant' || htmlLang === 'tw') return 'zh-tw';
+    } catch (_) {}
+
+    try {
+      var cur = (window.I18N && (window.I18N.current || window.I18N.lang)) || '';
+      cur = String(cur).toLowerCase();
+      if (cur === 'ko') return 'ko';
+      if (cur === 'ja') return 'ja';
+      if (cur === 'zh-tw' || cur === 'zh-hant' || cur === 'tw') return 'zh-tw';
+    } catch (_) {}
+
+    try {
+      var saved = localStorage.getItem('lang') || '';
+      saved = String(saved).toLowerCase();
+      if (saved === 'ko') return 'ko';
+      if (saved === 'ja') return 'ja';
+      if (saved === 'zh-tw' || saved === 'zh-hant' || saved === 'tw') return 'zh-tw';
+    } catch (_) {}
+
+    return 'en';
+  }
+
+  function getLocalizedHtmlCandidates(section, slug) {
+    var lang = getCurrentContentLang();
+    var out = [];
+    out.push('/' + lang + '/' + section + '/' + slug + '.html');
+    if (lang !== 'en') out.push('/en/' + section + '/' + slug + '.html');
+    return out;
+  }
+
+  function removeMountedAssetsByKey(assetKey) {
+    if (!assetKey) return;
+    var nodes = document.querySelectorAll('[data-page-asset-key="' + assetKey + '"]');
+    for (var i = 0; i < nodes.length; i++) {
+      if (nodes[i] && nodes[i].parentNode) nodes[i].parentNode.removeChild(nodes[i]);
+    }
+  }
+
+  function absolutizeHref(href) {
+    try {
+      var u = new URL(href, location.origin);
+      if (u.origin === location.origin) return u.pathname + u.search + u.hash;
+      return u.href;
+    } catch (_) {
+      return href;
+    }
+  }
+
+  function injectHtmlHeadAssets(doc, assetKey) {
+    if (!doc || !doc.head) return;
+    removeMountedAssetsByKey(assetKey);
+
+    var links = doc.head.querySelectorAll('link[rel="stylesheet"][href]');
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute('href');
+      if (!href) continue;
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = v(absolutizeHref(href));
+      link.setAttribute('data-page-asset-key', assetKey);
+      document.head.appendChild(link);
+    }
+
+    var styles = doc.head.querySelectorAll('style');
+    for (var j = 0; j < styles.length; j++) {
+      var cssText = styles[j].textContent || '';
+      if (!cssText.trim()) continue;
+      var st = document.createElement('style');
+      st.textContent = cssText;
+      st.setAttribute('data-page-asset-key', assetKey);
+      document.head.appendChild(st);
+    }
+  }
+
+  function stripMountedPageChrome(scope, extraSelectors) {
+    var selectors = [
+      'header.top',
+      'nav.lang',
+      'nav.section-tabs',
+      '.crumbs'
+    ].concat(extraSelectors || []);
+
+    var i, j, nodes;
+    for (i = 0; i < selectors.length; i++) {
+      nodes = scope.querySelectorAll(selectors[i]);
+      for (j = 0; j < nodes.length; j++) {
+        if (nodes[j] && nodes[j].parentNode) nodes[j].parentNode.removeChild(nodes[j]);
+      }
+    }
+  }
+
+  function rewriteMountedInternalLinks(root, options) {
+    options = options || {};
+
+    var links = root.querySelectorAll('a[href]');
+    for (var i = 0; i < links.length; i++) {
+      (function(a){
+        var href = a.getAttribute('href') || '';
+        if (!href) return;
+        if (/^(https?:|mailto:|tel:|#)/i.test(href)) return;
+
+        a.addEventListener('click', function(e){
+          e.preventDefault();
+
+          try {
+            var u = new URL(href, location.origin);
+            var segs = u.pathname.split('/').filter(Boolean);
+            if (segs.length >= 3) {
+              var sec = segs[1];
+              var targetSlug = String(segs[2] || '').replace(/\.html$/i, '');
+
+              if (sec === 'database') {
+                return window.navigate('/db/' + targetSlug);
+              }
+              if (sec === 'guides') {
+                return window.navigate('/guides/' + targetSlug);
+              }
+              if (sec === 'heroes') {
+                return window.navigate('/hero/' + targetSlug);
+              }
+              if (sec === 'buildings' || sec === 'building') {
+                return window.navigate('/buildings/' + targetSlug);
+              }
+            }
+          } catch (_) {}
+
+          if (window.navigate) window.navigate(href);
+        }, { passive: false });
+      })(links[i]);
+    }
+  }
+
+  function runMountedInlineScripts(root, assetKey) {
+    if (!root) return;
+
+    var scripts = root.querySelectorAll('script');
+    for (var i = 0; i < scripts.length; i++) {
+      var old = scripts[i];
+      var fresh = document.createElement('script');
+      var src = old.getAttribute('src');
+
+      if (src) {
+        fresh.src = v(absolutizeHref(src));
+      } else {
+        fresh.text = old.textContent || '';
+      }
+
+      if (old.type) fresh.type = old.type;
+      fresh.async = false;
+      fresh.setAttribute('data-page-asset-key', assetKey);
+
+      if (old.parentNode) old.parentNode.replaceChild(fresh, old);
+    }
+  }
+
+  function mountLocalizedHtmlPage(el, html, options) {
+    options = options || {};
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(html, 'text/html');
+    var assetKey = options.assetKey || ('html-page-' + Date.now());
+    var main = doc.querySelector('main') || doc.body;
+    var scope = main ? main.cloneNode(true) : (doc.body ? doc.body.cloneNode(true) : null);
+
+    if (!scope) {
+      el.innerHTML = '<div class="placeholder"><h2>불러오기 실패</h2><p class="muted">문서 내용을 표시할 수 없습니다.</p></div>';
+      return Promise.resolve();
+    }
+
+    injectHtmlHeadAssets(doc, assetKey);
+    stripMountedPageChrome(scope, options.removeSelectors || []);
+    el.innerHTML = scope.innerHTML;
+
+    if (options.runScripts !== false) {
+      runMountedInlineScripts(el, assetKey);
+    }
+    rewriteMountedInternalLinks(el, options);
+
+    if (typeof options.afterMount === 'function') {
+      try { options.afterMount(el, doc); } catch (e) { console.error(e); }
+    }
+
+    return Promise.resolve();
   }
 
   // ===== DB 상세 렌더 =====
@@ -202,53 +395,66 @@
   }
 
   function renderDbDetail(el, folder, file) {
-    var base = 'pages/database/' + encodeURIComponent(folder) + '/';
-    var candidates = file
+    var mappedFolder = (folder === 'hero-exclusive-gear' ? 'widgets' : folder);
+    var base = 'pages/database/' + encodeURIComponent(mappedFolder) + '/';
+    var htmlCandidates = getLocalizedHtmlCandidates('database', mappedFolder);
+    var fallbackCandidates = file
       ? [ base + file ]
       : [ base + 'index.html', base + 'main.html', base + 'guide.html', base + 'list.html', base + 'README.html' ];
 
-    return loadHTML(candidates).then(function(html){
-      if (!html) {
-        el.innerHTML = '<div class="placeholder"><h2>데이터베이스</h2><p class="muted">해당 문서를 찾을 수 없습니다.</p></div>';
-        return;
+    return loadHTML(htmlCandidates).then(function(html){
+      if (html) {
+        return mountLocalizedHtmlPage(el, html, {
+          assetKey: 'db-' + mappedFolder,
+          section: 'database',
+          slug: mappedFolder,
+          runScripts: true
+        });
       }
 
-      var parser = new DOMParser();
-      var doc    = parser.parseFromString(html, 'text/html');
-      var fixed  = rewriteRelativeUrls(doc, base);
+      return loadHTML(fallbackCandidates).then(function(fallbackHtml){
+        if (!fallbackHtml) {
+          el.innerHTML = '<div class="placeholder"><h2>데이터베이스</h2><p class="muted">해당 문서를 찾을 수 없습니다.</p></div>';
+          return;
+        }
 
-      var mt = fixed.querySelector('meta[name="db-title"]');
-      var tt = fixed.querySelector('title');
-      var h1 = fixed.querySelector('h1');
-      var metaTitle = (mt && mt.content) || (tt && tt.textContent) || (h1 && h1.textContent) || '데이터베이스';
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(fallbackHtml, 'text/html');
+        var fixed = rewriteRelativeUrls(doc, base);
 
-      var bodyNode = fixed.body ? fixed.body.cloneNode(true) : null;
-      if (bodyNode) {
-        var firstH1 = bodyNode.querySelector('h1');
-        if (firstH1 && firstH1.parentNode) firstH1.parentNode.removeChild(firstH1);
-      }
-      var bodyHTML = bodyNode ? bodyNode.innerHTML : (fixed.body ? fixed.body.innerHTML : html);
+        var mt = fixed.querySelector('meta[name="db-title"]');
+        var tt = fixed.querySelector('title');
+        var h1 = fixed.querySelector('h1');
+        var metaTitle = (mt && mt.content) || (tt && tt.textContent) || (h1 && h1.textContent) || '데이터베이스';
 
-      el.innerHTML = ''
-        + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">'
-        + '  <h1 id="page-title" data-i18n="db.title" style="margin:0;font-size:20px;">' + metaTitle + '</h1>'
-        + '</div>'
-        + '<div class="db-detail">' + bodyHTML + '</div>';
+        var bodyNode = fixed.body ? fixed.body.cloneNode(true) : null;
+        if (bodyNode) {
+          var firstH1 = bodyNode.querySelector('h1');
+          if (firstH1 && firstH1.parentNode) firstH1.parentNode.removeChild(firstH1);
+        }
+        var bodyHTML = bodyNode ? bodyNode.innerHTML : (fixed.body ? fixed.body.innerHTML : fallbackHtml);
 
-      var internals = el.querySelectorAll('[data-db-internal]');
-      for (var i=0;i<internals.length;i++){
-        (function(a){
-          a.addEventListener('click', function(e){
-            e.preventDefault();
-            var next = a.getAttribute('data-db-internal') || '';
-            var nextPath = next.replace(/^\.?\//, '');
-            var safeNext = nextPath.split('/').map(encodeURIComponent).join('/');
-            if (window.navigate) {
-              window.navigate('/db/' + encodeURIComponent(folder) + '/' + safeNext);
-            }
-          }, { passive: false });
-        })(internals[i]);
-      }
+        el.innerHTML = ''
+          + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">'
+          + '  <h1 id="page-title" data-i18n="db.title" style="margin:0;font-size:20px;">' + metaTitle + '</h1>'
+          + '</div>'
+          + '<div class="db-detail">' + bodyHTML + '</div>';
+
+        var internals = el.querySelectorAll('[data-db-internal]');
+        for (var i=0;i<internals.length;i++){
+          (function(a){
+            a.addEventListener('click', function(e){
+              e.preventDefault();
+              var next = a.getAttribute('data-db-internal') || '';
+              var nextPath = next.replace(/^\.?\//, '');
+              var safeNext = nextPath.split('/').map(encodeURIComponent).join('/');
+              if (window.navigate) {
+                window.navigate('/db/' + encodeURIComponent(mappedFolder) + '/' + safeNext);
+              }
+            }, { passive: false });
+          })(internals[i]);
+        }
+      });
     });
   }
 
@@ -392,6 +598,22 @@
         u.pathname = '/' + segs[0] + '/' + segs[1] + '/' + segs.slice(2).join('/');
         return u;
       }
+
+      if (segs[1] === 'database' && segs[2]) {
+        u.pathname = '/db/' + segs.slice(2).join('/').replace(/\.html$/i, '');
+        return u;
+      }
+
+      if (segs[1] === 'heroes' && segs[2]) {
+        u.pathname = '/hero/' + segs.slice(2).join('/').replace(/\.html$/i, '');
+        return u;
+      }
+
+      if (segs[1] === 'guides' && segs[2]) {
+        u.pathname = '/guides/' + segs.slice(2).join('/').replace(/\.html$/i, '');
+        return u;
+      }
+
       u.pathname = p || '/';
       return u;
     }
@@ -596,6 +818,12 @@
         }
       }
 
+      // /db/:slug
+      if (pathNorm.indexOf('/db/') === 0 && segs.length >= 2) {
+        removeCSS('calc-css');
+        return Promise.resolve(renderDbDetail(el, stripHtmlExt(segs[1]), segs.length >= 3 ? segs.slice(2).join('/') : ''));
+      }
+
       removeBuildingScopedStyleIfAny();
 
       var key  = '/' + (segs[0] || '');
@@ -748,8 +976,9 @@
       var p = location.pathname || '';
       var m1 = p.match(/^\/buildings\/[^\/?#]+(\.html)?$/i) || p.match(/^\/building\/[^\/?#]+(\.html)?$/i);
       var m2 = p.match(/^\/(en|ko|ja|zh-tw)\/buildings\/[^\/?#]+(\.html)?$/i) || p.match(/^\/(en|ko|ja|zh-tw)\/building\/[^\/?#]+(\.html)?$/i);
+      var m3 = p.match(/^\/db\/[^\/?#]+(\/.*)?$/i);
 
-      if (m1 || m2) {
+      if (m1 || m2 || m3) {
         dispatch();
       }
     } catch (_e) {}

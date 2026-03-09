@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>領主宝石データベース | Kingshot</title>
+  <meta name="description" content="Kingshot 領主宝石データベース。解放条件、宝石マニュアルと宝石設計図の消費量、レベル1〜22の全必要数値、ステータス上昇量、累計ステータス、戦闘力を確認できます。" />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://kingshotdata.kr/ja/database/governor-charm.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/database/governor-charm.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/database/governor-charm.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/database/governor-charm.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/database/governor-charm.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/database/charm-guide.webp" />
+  <link rel="preload" as="image" href="/img/database/charm-design.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h: 0px;
+      --tabs-h: 0px;
+      --sticky-top: 0px;
+
+      --cell-ico: 14px;
+      --th-ico: 14px;
+      --tbl-font: 13px;
+      --tbl-pad-y: 9px;
+      --tbl-pad-x: 10px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+    nav.lang{
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid; grid-template-columns:160px 1fr; gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px; height:160px; object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted)}
+    .muted{color:var(--muted)}
+
+    .jump{
+      margin-top:10px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px; font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(37,99,235,.22);
+      background:rgba(37,99,235,.05);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px; height:18px; flex:0 0 18px;
+      margin-top:2px;
+      color:#2563eb;
+    }
+
+    .facts{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .fact{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+    }
+    .fact strong{
+      display:block;
+      margin-bottom:4px;
+      font-size:14px;
+    }
+    .fact p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+    }
+
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      font-size:calc(var(--tbl-font) - 1px);
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td{
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      vertical-align:middle;
+      font-size:var(--tbl-font);
+      white-space:nowrap;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+
+    .center{text-align:center}
+    .num{text-align:right; font-variant-numeric: tabular-nums}
+    .level{font-weight:800}
+
+    .th-flex{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .th-ico{
+      width:var(--th-ico);
+      height:var(--th-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+    }
+
+    .cell-item{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      white-space:nowrap;
+    }
+    .cell-ico{
+      width:var(--cell-ico);
+      height:var(--cell-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+      flex:0 0 var(--cell-ico);
+    }
+
+    .cards{display:none}
+    .cards .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:12px 12px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0;
+    }
+    .card-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.25;
+      white-space:nowrap;
+    }
+    .card-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:8px;
+      margin-top:10px;
+    }
+    .card-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#f9fafb;
+    }
+    .card-label{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      min-width:0;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:700;
+    }
+    .card-value{
+      text-align:right;
+      font-size:13px;
+      font-weight:800;
+      color:var(--text);
+      white-space:nowrap;
+    }
+
+    .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{
+      display:inline-flex; align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top: calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width: 900px){
+      header.top{
+        position: sticky;
+        top: 0;
+        z-index: 40;
+      }
+      nav.section-tabs{
+        display:flex;
+        position: sticky;
+        top: var(--header-h);
+        z-index: 35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+      .facts{grid-template-columns:1fr}
+      .enhanced .data-table{display:none}
+      .enhanced .cards{display:grid; gap:12px}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"領主宝石データベース (Kingshot)",
+    "inLanguage":"ja",
+    "description":"Kingshot 領主宝石データベース。レベル別必要数、宝石マニュアル、宝石設計図、ステータス上昇、累計ステータス、戦闘力情報を整理したページです。",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"ホーム","item":"https://kingshotdata.kr/ja/"},
+        {"@type":"ListItem","position":2,"name":"データベース","item":"https://kingshotdata.kr/ja/database/"},
+        {"@type":"ListItem","position":3,"name":"領主宝石","item":"https://kingshotdata.kr/ja/database/governor-charm.html"}
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ja/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/database/governor-charm.html">EN</a>
+        <a href="/ko/database/governor-charm.html">KO</a>
+        <a href="/ja/database/governor-charm.html" aria-current="page">JA</a>
+        <a href="/zh-tw/database/governor-charm.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概要</a>
+      <a href="#requirements">条件</a>
+      <a href="#table-section">必要数表</a>
+      <a href="#related">関連ページ</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ja/">ホーム</a> <span class="muted">›</span>
+        <a href="/ja/database/">データベース</a> <span class="muted">›</span>
+        <span>領主宝石</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/database/Governor Charm/governor-charms.webp" alt="領主宝石" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>領主宝石データベース</h1>
+          <p class="sub">
+            領主宝石は Kingshot で領主装備をさらに強化する特別な成長システムです。
+            都市センター25レベルで解放され、全体戦闘力に大きな上昇効果をもたらします。
+          </p>
+          <p class="muted" style="margin-top:10px">
+            このページでは、解放条件、強化素材、レベル1から22までの全必要数値、
+            ステータス上昇量、累計ステータス、戦闘力情報をまとめて確認できます。
+          </p>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">概要</a><span class="dotsep">•</span>
+            <a href="#requirements">条件</a><span class="dotsep">•</span>
+            <a href="#table-section">必要数表</a><span class="dotsep">•</span>
+            <a href="#related">関連ページ</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>概要</h2>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>参考:</strong>
+            領主宝石は都市センター25レベルで解放され、最大22レベルまで強化できます。
+            強化には宝石マニュアルと宝石設計図が必要です。
+          </div>
+        </div>
+
+        <p>
+          領主宝石は領主装備をさらに一段階強化する上級成長システムです。
+          解放後は領主装備に追加ステータスと戦闘力を付与できるため、後半成長で非常に重要な要素となります。
+        </p>
+        <p>
+          強化には宝石マニュアルと宝石設計図の両方が必要で、
+          レベルが上がるほど必要数が大きく増えるため、長期的な資源計画が重要です。
+        </p>
+      </section>
+
+      <section id="requirements">
+        <h2>条件</h2>
+        <div class="facts">
+          <article class="fact">
+            <strong>解放条件</strong>
+            <p>都市センター25レベル</p>
+          </article>
+          <article class="fact">
+            <strong>最大レベル</strong>
+            <p>領主宝石は22レベルまで強化可能</p>
+          </article>
+          <article class="fact">
+            <strong>強化素材</strong>
+            <p>宝石マニュアル、宝石設計図</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="table-section">
+        <span id="requirements-table" class="anchor"></span>
+        <h2>領主宝石 必要数表</h2>
+        <p class="muted" style="margin-top:-2px">全レベルの素材消費量、ステータス上昇量、累計ステータス、戦闘力情報</p>
+
+        <div class="cards" id="governor-charm-cards" aria-label="領主宝石 必要数カード"></div>
+
+        <div class="table-wrap data-table" aria-label="領主宝石 必要数表">
+          <table id="governor-charm-table">
+            <colgroup>
+              <col style="width:16%">
+              <col style="width:17%">
+              <col style="width:17%">
+              <col style="width:16%">
+              <col style="width:16%">
+              <col style="width:18%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>レベル</th>
+                <th class="num">
+                  <span class="th-flex">
+                    <img class="th-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">
+                    宝石マニュアル
+                  </span>
+                </th>
+                <th class="num">
+                  <span class="th-flex">
+                    <img class="th-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">
+                    宝石設計図
+                  </span>
+                </th>
+                <th class="num">能力上昇</th>
+                <th class="num">累計</th>
+                <th class="num">戦闘力</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="level">レベル 1</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">5</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">5</span></td>
+                <td class="num">+9.00%</td>
+                <td class="num">+9.00%</td>
+                <td class="num">+205,700</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 2</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">40</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">15</span></td>
+                <td class="num">+3.00%</td>
+                <td class="num">+12.00%</td>
+                <td class="num">+82,300</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 3</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">60</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">40</span></td>
+                <td class="num">+4.00%</td>
+                <td class="num">+16.00%</td>
+                <td class="num">+82,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 4</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">80</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">100</span></td>
+                <td class="num">+3.00%</td>
+                <td class="num">+19.00%</td>
+                <td class="num">+82,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 5</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">100</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">200</span></td>
+                <td class="num">+6.00%</td>
+                <td class="num">+25.00%</td>
+                <td class="num">+124,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 6</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">120</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">300</span></td>
+                <td class="num">+5.00%</td>
+                <td class="num">+30.00%</td>
+                <td class="num">+124,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 7</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">140</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">400</span></td>
+                <td class="num">+5.00%</td>
+                <td class="num">+35.00%</td>
+                <td class="num">+124,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 8</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">200</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">400</span></td>
+                <td class="num">+5.00%</td>
+                <td class="num">+40.00%</td>
+                <td class="num">+124,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 9</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">300</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">400</span></td>
+                <td class="num">+5.00%</td>
+                <td class="num">+45.00%</td>
+                <td class="num">+124,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 10</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">420</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">420</span></td>
+                <td class="num">+5.00%</td>
+                <td class="num">+50.00%</td>
+                <td class="num">+124,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 11</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">560</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">420</span></td>
+                <td class="num">+5.00%</td>
+                <td class="num">+55.00%</td>
+                <td class="num">+124,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 12</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">580</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">600</span></td>
+                <td class="num">+4.00%</td>
+                <td class="num">+59.00%</td>
+                <td class="num">+96,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 13</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">610</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">780</span></td>
+                <td class="num">+4.00%</td>
+                <td class="num">+63.00%</td>
+                <td class="num">+96,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 14</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">645</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">960</span></td>
+                <td class="num">+4.00%</td>
+                <td class="num">+67.00%</td>
+                <td class="num">+96,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 15</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">685</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">1,140</span></td>
+                <td class="num">+4.00%</td>
+                <td class="num">+71.00%</td>
+                <td class="num">+96,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 16</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">730</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">1,320</span></td>
+                <td class="num">+4.00%</td>
+                <td class="num">+75.00%</td>
+                <td class="num">+96,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 17</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">780</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">1,500</span></td>
+                <td class="num">+4.00%</td>
+                <td class="num">+79.00%</td>
+                <td class="num">+96,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 18</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">835</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">1,680</span></td>
+                <td class="num">+4.00%</td>
+                <td class="num">+83.00%</td>
+                <td class="num">+96,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 19</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">895</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">1,860</span></td>
+                <td class="num">+4.00%</td>
+                <td class="num">+87.00%</td>
+                <td class="num">+96,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 20</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">960</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">2,040</span></td>
+                <td class="num">+4.00%</td>
+                <td class="num">+91.00%</td>
+                <td class="num">+96,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 21</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">1,030</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">2,220</span></td>
+                <td class="num">+4.00%</td>
+                <td class="num">+95.00%</td>
+                <td class="num">+96,000</td>
+              </tr>
+              <tr>
+                <td class="level">レベル 22</td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">1,105</span></td>
+                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">2,400</span></td>
+                <td class="num">+4.00%</td>
+                <td class="num">+99.00%</td>
+                <td class="num">+96,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="related">
+        <h2>関連ページ</h2>
+        <div class="related">
+          <a class="pill" href="/ja/database/">データベースメイン</a>
+          <a class="pill" href="/ja/database/governor-gear.html">領主装備</a>
+          <a class="pill" href="/ja/calculator">計算機</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function buildGovernorCharmCards(){
+        var table = document.getElementById('governor-charm-table');
+        var target = document.getElementById('governor-charm-cards');
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || tds.length < 6) return;
+
+          var level = tds[0].textContent.trim();
+          var guide = tds[1].textContent.trim();
+          var design = tds[2].textContent.trim();
+          var statUp = tds[3].textContent.trim();
+          var total = tds[4].textContent.trim();
+          var power = tds[5].textContent.trim();
+
+          html += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">' + level + '</h3>' +
+                '<div class="card-meta">領主宝石</div>' +
+              '</div>' +
+              '<div class="card-grid">' +
+                '<div class="card-row">' +
+                  '<span class="card-label"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14">宝石マニュアル</span>' +
+                  '<span class="card-value">' + guide + '</span>' +
+                '</div>' +
+                '<div class="card-row">' +
+                  '<span class="card-label"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14">宝石設計図</span>' +
+                  '<span class="card-value">' + design + '</span>' +
+                '</div>' +
+                '<div class="card-row">' +
+                  '<span class="card-label">能力上昇</span>' +
+                  '<span class="card-value">' + statUp + '</span>' +
+                '</div>' +
+                '<div class="card-row">' +
+                  '<span class="card-label">累計</span>' +
+                  '<span class="card-value">' + total + '</span>' +
+                '</div>' +
+                '<div class="card-row">' +
+                  '<span class="card-label">戦闘力</span>' +
+                  '<span class="card-value">' + power + '</span>' +
+                '</div>' +
+              '</div>' +
+            '</article>'
+          );
+
+          count++;
+        });
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+
+        var c1 = buildGovernorCharmCards();
+        if(c1 > 0){
+          document.documentElement.classList.add('enhanced');
+        }
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

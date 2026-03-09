@@ -1,20 +1,20 @@
-// js/pages/database.js — history 모드 + hero-exclusive-gear → widgets 리맵 + 즉시 패치(자동 갱신)
+// js/pages/database.js — history 모드 + hero-exclusive-gear → widgets 리맵 + governor-charm SPA 경로 유지
 (function () {
   'use strict';
 
   // =========================
   // 0) 네트워크 최적화 & 캐시 무효화
   // =========================
-  const TTL_MS = 10 * 1000;
+  var TTL_MS = 10 * 1000;
 
   function getV() {
     return (window.__V || 'now');
   }
 
   function appendVersion(u) {
-    const V = getV();
+    var V = getV();
     try {
-      const url = new URL(String(u), location.origin);
+      var url = new URL(String(u), location.origin);
 
       if (url.protocol === 'data:') return url.href;
 
@@ -24,20 +24,24 @@
         return url.pathname + url.search + url.hash;
       }
       return url.href;
-    } catch {
-      const raw = String(u);
-      const [base, hashPart] = raw.split('#');
-      const [path, qs] = base.split('?');
-      const params = new URLSearchParams(qs || '');
+    } catch (_) {
+      var raw = String(u);
+      var hashSplit = raw.split('#');
+      var base = hashSplit[0];
+      var hashPart = hashSplit[1];
+      var qsSplit = base.split('?');
+      var path = qsSplit[0];
+      var qs = qsSplit[1];
+      var params = new URLSearchParams(qs || '');
       params.set('v', V);
-      return path + '?' + params.toString() + (hashPart ? `#${hashPart}` : '');
+      return path + '?' + params.toString() + (hashPart ? '#' + hashPart : '');
     }
   }
 
-  const MEMO = (window.__KSD_MEMO__ = window.__KSD_MEMO__ || new Map());
+  var MEMO = (window.__KSD_MEMO__ = window.__KSD_MEMO__ || new Map());
 
   function memoGet(key) {
-    const hit = MEMO.get(key);
+    var hit = MEMO.get(key);
     if (!hit) return null;
     if (hit.v !== getV()) return null;
     if ((Date.now() - hit.ts) > TTL_MS) return null;
@@ -49,42 +53,46 @@
     return promise;
   }
 
-  const getText = (url, { force = false } = {}) => {
-    const finalUrl = appendVersion(url);
+  function getText(url, opts) {
+    opts = opts || {};
+    var force = !!opts.force;
+    var finalUrl = appendVersion(url);
 
     if (!force) {
-      const cached = memoGet(finalUrl);
+      var cached = memoGet(finalUrl);
       if (cached) return cached;
     }
 
-    const p = fetch(finalUrl, {
+    var p = fetch(finalUrl, {
       cache: 'no-store',
       headers: {
         'cache-control': 'no-cache',
         'pragma': 'no-cache'
       }
-    }).then((r) => {
-      if (!r.ok) throw new Error(`HTTP ${r.status} @ ${finalUrl}`);
+    }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status + ' @ ' + finalUrl);
       return r.text();
     });
 
     return memoSet(finalUrl, p);
-  };
+  }
 
   // =========================
   // 1) i18n helpers
   // =========================
-  const T = (s, fb) => (window.I18N?.t ? I18N.t(s, fb ?? s) : (fb ?? s));
+  function T(s, fb) {
+    return (window.I18N && window.I18N.t) ? window.I18N.t(s, (fb != null ? fb : s)) : (fb != null ? fb : s);
+  }
 
   async function ensureDbNamespace() {
     try {
-      if (window.I18N?.init) {
-        await I18N.init({ namespaces: ['db'] });
+      if (window.I18N && window.I18N.init) {
+        await window.I18N.init({ namespaces: ['db'] });
       }
-      if (window.I18N?.loadNamespace) {
-        await I18N.loadNamespace('db');
-      } else if (window.I18N?.loadNamespaces) {
-        await I18N.loadNamespaces(['db']);
+      if (window.I18N && window.I18N.loadNamespace) {
+        await window.I18N.loadNamespace('db');
+      } else if (window.I18N && window.I18N.loadNamespaces) {
+        await window.I18N.loadNamespaces(['db']);
       }
     } catch (e) {
       console.debug('[db] i18n ensure namespace skipped', e);
@@ -94,25 +102,30 @@
   // =========================
   // 2) 병렬 풀 실행 헬퍼
   // =========================
-  async function withPool(items, worker, limit = 6) {
-    const q = items.map((v, i) => ({ v, i }));
-    const running = [];
-    const out = new Array(items.length);
+  async function withPool(items, worker, limit) {
+    limit = limit || 6;
+    var q = items.map(function (v, i) { return { v: v, i: i }; });
+    var running = [];
+    var out = new Array(items.length);
 
-    const runOne = () => {
+    var runOne = function () {
       if (!q.length) return;
-      const { v, i } = q.shift();
-      const job = worker(v, i)
-        .then((res) => (out[i] = res))
-        .catch((err) => {
+      var item = q.shift();
+      var v = item.v;
+      var i = item.i;
+
+      var job = worker(v, i)
+        .then(function (res) { out[i] = res; })
+        .catch(function (err) {
           console.warn('[db] worker error', v, err);
           out[i] = null;
         })
-        .finally(() => {
-          const idx = running.indexOf(job);
+        .finally(function () {
+          var idx = running.indexOf(job);
           if (idx >= 0) running.splice(idx, 1);
           runOne();
         });
+
       running.push(job);
     };
 
@@ -124,16 +137,17 @@
   // =========================
   // 3) 경로/에셋
   // =========================
-  const DB_BASE = '/pages/database/';
-  const buildUrl = (folder, file) =>
-    appendVersion(DB_BASE + encodeURIComponent(folder) + '/' + file);
+  var DB_BASE = '/pages/database/';
+  function buildUrl(folder, file) {
+    return appendVersion(DB_BASE + encodeURIComponent(folder) + '/' + file);
+  }
 
   function resolveAsset(folder, src) {
     if (!src) return '';
-    const s = String(src);
+    var s = String(src);
     if (/^(https?:|data:)/i.test(s)) return appendVersion(s).replace(/\s/g, '%20');
-    if (s.startsWith('/')) return appendVersion(s).replace(/\s/g, '%20');
-    const rel = s.replace(/^\.?\//, '').replace(/\s/g, '%20');
+    if (s.indexOf('/') === 0) return appendVersion(s).replace(/\s/g, '%20');
+    var rel = s.replace(/^\.?\//, '').replace(/\s/g, '%20');
     return buildUrl(folder, rel);
   }
 
@@ -144,32 +158,40 @@
   // =========================
   // 4) 카드 목록 소스
   // =========================
-  const INDEX_JSON = DB_BASE + 'index.json';
+  var INDEX_JSON = DB_BASE + 'index.json';
 
-  const ITEMS_FALLBACK = [
-    { folder: 'governor-gear',               category: 'db.governorGear.title' },
-    { folder: 'governor-charm',              category: 'db.governorCharm.title' },
-    { folder: 'hero-gear-enhancement-chart', category: 'db.heroGearEnhance.title' },
-    { folder: 'max-levels',                  category: 'db.maxLevels.title' },
-    { folder: 'widgets',                     category: 'db.widgets.title' },
-    { folder: 'mastery-forging',             category: 'db.masteryForging.title' },
-    { folder: 'hero-shards',                 category: 'db.heroShards.title' }
+  var ITEMS_FALLBACK = [
+    { folder: 'governor-gear',  category: 'db.governorGear.title' },
+    { folder: 'governor-charm', category: 'db.governorCharm.title' },
+    { folder: 'widgets',        category: 'db.widgets.title' },
+    { folder: 'mastery-forging',category: 'db.masteryForging.title' },
+    { folder: 'hero-shards',    category: 'db.heroShards.title' }
   ];
 
-  const CANDIDATES = ['index.html', 'main.html', 'guide.html', 'list.html', 'README.html'];
+  var CANDIDATES = ['index.html', 'main.html', 'guide.html', 'list.html', 'README.html'];
 
-  async function loadItems({ force = false } = {}) {
+  async function loadItems(opts) {
+    opts = opts || {};
+    var force = !!opts.force;
+
     try {
-      const text = await getText(INDEX_JSON, { force });
-      const j = JSON.parse(text);
+      var text = await getText(INDEX_JSON, { force: force });
+      var j = JSON.parse(text);
       if (Array.isArray(j) && j.length) {
         return j
-          .map(x => ({
-            folder: String(x.folder || '').trim(),
-            category: String(x.category || '').trim() || 'db.widgets.title',
-            directHref: String(x.directHref || '').trim()
-          }))
-          .filter(x => x.folder && x.folder !== 'waracademy');
+          .map(function (x) {
+            return {
+              folder: String(x.folder || '').trim(),
+              category: String(x.category || '').trim() || 'db.widgets.title',
+              directHref: String(x.directHref || '').trim()
+            };
+          })
+          .filter(function (x) {
+            return x.folder &&
+              x.folder !== 'waracademy' &&
+              x.folder !== 'hero-gear-enhancement-chart' &&
+              x.folder !== 'max-levels';
+          });
       }
     } catch (_) {}
 
@@ -179,39 +201,47 @@
   // =========================
   // 5) DOM 유틸
   // =========================
-  const esc = (s) =>
-    String(s ?? '').replace(/[&<>"']/g, (m) =>
-      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])
-    );
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (m) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]);
+    });
+  }
 
-  const pickText = (doc, sels) => {
-    for (const sel of sels) {
-      const n = doc.querySelector(sel);
+  function pickText(doc, sels) {
+    var i, sel, n;
+    for (i = 0; i < sels.length; i++) {
+      sel = sels[i];
+      n = doc.querySelector(sel);
       if (n && n.textContent && n.textContent.trim()) return n.textContent.trim();
     }
     return '';
-  };
+  }
 
-  const pickAttr = (doc, sels, attr) => {
-    for (const sel of sels) {
-      const n = doc.querySelector(sel);
-      const v = n && n.getAttribute(attr);
+  function pickAttr(doc, sels, attr) {
+    var i, sel, n, v;
+    for (i = 0; i < sels.length; i++) {
+      sel = sels[i];
+      n = doc.querySelector(sel);
+      v = n && n.getAttribute(attr);
       if (v) return v;
     }
     return '';
-  };
+  }
 
   function extractMeta(doc, fallbackUrl) {
-    const title =
-      doc.querySelector('meta[name="db-title"]')?.content ||
+    var metaTitleNode = doc.querySelector('meta[name="db-title"]');
+    var title =
+      (metaTitleNode && metaTitleNode.content) ||
       pickText(doc, ['.page h1', '.building-page h1', 'h1', 'title']);
 
-    const summary =
-      doc.querySelector('meta[name="description"]')?.content ||
+    var descNode = doc.querySelector('meta[name="description"]');
+    var summary =
+      (descNode && descNode.content) ||
       pickText(doc, ['.page p', '.building-page p', 'p']);
 
-    const image =
-      doc.querySelector('meta[property="og:image"]')?.content ||
+    var ogNode = doc.querySelector('meta[property="og:image"]');
+    var image =
+      (ogNode && ogNode.content) ||
       pickAttr(doc, ['.page img', '.building-page img', 'img'], 'src');
 
     return { title: title || '(제목 없음)', summary: summary || '', image: image || '', url: fallbackUrl };
@@ -220,65 +250,66 @@
   // =========================
   // 6) 카드 템플릿
   // =========================
-  const TITLE_FALLBACKS = {
+  var TITLE_FALLBACKS = {
     'db.heroGearEnhance.title': 'EXP'
   };
 
-  const DESC_FALLBACKS = {};
+  var DESC_FALLBACKS = {};
 
   function card(it) {
-    const img = it.image
-      ? `<div class="card__media"><img src="${esc(it.image)}" alt="" loading="lazy" decoding="async"></div>`
-      : `<div class="card__media"></div>`;
+    var img = it.image
+      ? '<div class="card__media"><img src="' + esc(it.image) + '" alt="" loading="lazy" decoding="async"></div>'
+      : '<div class="card__media"></div>';
 
-    const href = it.directHref || `/db/${encodeURIComponent(mapFolder(it.folder))}`;
-
-    const isKey =
+    var href = it.directHref || ('/db/' + encodeURIComponent(mapFolder(it.folder)));
+    var isKey =
       typeof it.title === 'string' &&
       /[A-Za-z0-9_.-]+\.[A-Za-z0-9_.-]+/.test(it.title);
 
-    const titleText = T(it.title, TITLE_FALLBACKS[it.title] ?? it.title);
-    const descKey = it.desc || '';
-    const descText = descKey
-      ? T(descKey, DESC_FALLBACKS[descKey] ?? descKey)
+    var titleText = T(it.title, TITLE_FALLBACKS[it.title] != null ? TITLE_FALLBACKS[it.title] : it.title);
+    var descKey = it.desc || '';
+    var descText = descKey
+      ? T(descKey, DESC_FALLBACKS[descKey] != null ? DESC_FALLBACKS[descKey] : descKey)
       : (it.summary || '');
 
-    return `
-      <a class="card card--db" href="${href}" data-folder="${esc(it.folder)}" aria-label="${esc(titleText)}">
-        ${img}
-        <div class="card__body">
-          <div class="card__title"${isKey ? ` data-i18n="${esc(it.title)}"` : ''}>${esc(titleText)}</div>
-          ${descText ? `<div class="card__subtitle"${descKey ? ` data-i18n="${esc(descKey)}"` : ''}>${esc(descText)}</div>` : ''}
-        </div>
-      </a>
-    `;
+    return ''
+      + '<a class="card card--db" href="' + href + '" data-folder="' + esc(it.folder) + '" aria-label="' + esc(titleText) + '">'
+      +   img
+      +   '<div class="card__body">'
+      +     '<div class="card__title"' + (isKey ? ' data-i18n="' + esc(it.title) + '"' : '') + '>' + esc(titleText) + '</div>'
+      +     (descText ? '<div class="card__subtitle"' + (descKey ? ' data-i18n="' + esc(descKey) + '"' : '') + '>' + esc(descText) + '</div>' : '')
+      +   '</div>'
+      + '</a>';
   }
 
   function getGrid() {
-    const grid = document.getElementById('db-grid');
+    var grid = document.getElementById('db-grid');
     if (grid) grid.classList.add('grid', 'category-grid');
     return grid;
   }
 
   function render(list) {
-    const grid = getGrid();
+    var grid = getGrid();
     if (!grid) return;
     grid.innerHTML = list.map(card).join('');
-    if (window.I18N?.applyTo) I18N.applyTo(grid);
+    if (window.I18N && window.I18N.applyTo) I18N.applyTo(grid);
   }
 
   // =========================
   // 7) 목록 로드
   // =========================
-  let _cache = [];
-  let _lastRenderAt = 0;
-  let _loading = null;
+  var _cache = [];
+  var _lastRenderAt = 0;
+  var _loading = null;
 
   function ttlExpired() {
     return (Date.now() - _lastRenderAt) > TTL_MS;
   }
 
-  async function loadListAndRender({ force = false } = {}) {
+  async function loadListAndRender(opts) {
+    opts = opts || {};
+    var force = !!opts.force;
+
     if (_loading) return _loading;
 
     if (!force && _cache.length && !ttlExpired()) {
@@ -286,40 +317,51 @@
       return;
     }
 
-    _loading = (async () => {
+    _loading = (async function () {
       await ensureDbNamespace();
 
-      const items = await loadItems({ force });
+      var items = await loadItems({ force: force });
+      var parser = new DOMParser();
+      var keyRe = /[A-Za-z0-9_.-]+\.[A-Za-z0-9_.-]+/;
 
-      const parser = new DOMParser();
-      const keyRe = /[A-Za-z0-9_.-]+\.[A-Za-z0-9_.-]+/;
+      var worker = async function (it) {
+        var folderToLoad = mapFolder(it.folder);
 
-      const worker = async (it) => {
-        const folderToLoad = mapFolder(it.folder);
-
-        for (const file of CANDIDATES) {
-          const url = buildUrl(folderToLoad, file);
+        var i, file, url, text, doc, meta, fixedImage, title;
+        for (i = 0; i < CANDIDATES.length; i++) {
+          file = CANDIDATES[i];
+          url = buildUrl(folderToLoad, file);
           try {
-            const text = await getText(url, { force: force || ttlExpired() });
-            const doc = parser.parseFromString(text, 'text/html');
-            const meta = extractMeta(doc, url);
-            const fixedImage = meta.image ? resolveAsset(folderToLoad, meta.image) : '';
+            text = await getText(url, { force: force || ttlExpired() });
+            doc = parser.parseFromString(text, 'text/html');
+            meta = extractMeta(doc, url);
+            fixedImage = meta.image ? resolveAsset(folderToLoad, meta.image) : '';
 
-            const title =
+            title =
               it.folder === 'hero-exclusive-gear'
                 ? 'db.widgets.title'
                 : keyRe.test(it.category)
                   ? it.category
-                  : meta.title || it.category;
+                  : (meta.title || it.category);
 
-            return { ...it, ...meta, title, image: fixedImage };
+            return {
+              folder: it.folder,
+              category: it.category,
+              directHref: it.directHref,
+              title: title,
+              summary: meta.summary,
+              image: fixedImage,
+              url: meta.url
+            };
           } catch (e) {
             console.debug('[db] fetch fail', url, e);
           }
         }
 
         return {
-          ...it,
+          folder: it.folder,
+          category: it.category,
+          directHref: it.directHref,
           title: it.folder === 'hero-exclusive-gear' ? 'db.widgets.title' : it.category,
           summary: '파일을 찾을 수 없습니다.',
           image: '',
@@ -327,11 +369,11 @@
         };
       };
 
-      const results = await withPool(items, worker, 6);
+      var results = await withPool(items, worker, 6);
       _cache = results.filter(Boolean);
       _lastRenderAt = Date.now();
       render(_cache);
-    })().finally(() => {
+    })().finally(function () {
       _loading = null;
     });
 
@@ -341,24 +383,27 @@
   // =========================
   // 8) 초기화 + 이벤트 바인딩
   // =========================
-  let _bound = false;
+  var _bound = false;
 
-  async function initDatabase(opts = {}) {
+  async function initDatabase(opts) {
+    opts = opts || {};
+
     if (!_bound) {
-      document.addEventListener('i18n:changed', () => {
-        const grid = getGrid();
-        if (grid && window.I18N?.applyTo) I18N.applyTo(grid);
+      document.addEventListener('i18n:changed', function () {
+        _cache = [];
+        _lastRenderAt = 0;
+        loadListAndRender({ force: true });
       });
 
-      window.addEventListener('popstate', () => initDatabase());
-      window.addEventListener('hashchange', () => initDatabase());
+      window.addEventListener('popstate', function () { initDatabase(); });
+      window.addEventListener('hashchange', function () { initDatabase(); });
 
-      window.addEventListener('focus', () => initDatabase());
-      document.addEventListener('visibilitychange', () => {
+      window.addEventListener('focus', function () { initDatabase(); });
+      document.addEventListener('visibilitychange', function () {
         if (document.visibilityState === 'visible') initDatabase();
       });
 
-      window.__dbRefresh = (force = true) => initDatabase({ force });
+      window.__dbRefresh = function (force) { return initDatabase({ force: force !== false }); };
 
       _bound = true;
     }

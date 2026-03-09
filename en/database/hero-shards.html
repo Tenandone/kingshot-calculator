@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hero Shards | Kingshot</title>
+  <meta name="description" content="Kingshot Hero Shards guide. Check hero shard types, star upgrade totals, unlock requirements, sources, and a complete shard requirement table from 1 Star to 5 Star." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/en/database/hero-shards.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/database/hero-shards.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/database/hero-shards.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/database/hero-shards.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/database/hero-shards.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/star/6.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+      --tbl-font:13px;
+      --tbl-pad-y:10px;
+      --tbl-pad-x:12px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;align-items:center;gap:10px;
+      color:var(--text);text-decoration:none;font-weight:900;letter-spacing:.1px;
+    }
+    .brand img{display:block;width:28px;height:28px;border-radius:8px}
+
+    nav.lang{
+      display:flex;gap:8px;flex-wrap:wrap;
+      color:var(--muted);font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text);font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;grid-template-columns:160px 1fr;gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px;height:160px;object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px;font-size:28px;line-height:1.15}
+    .sub{margin:0;color:var(--muted)}
+    .muted{color:var(--muted)}
+
+    .jump{
+      margin-top:10px;
+      display:flex;gap:10px;flex-wrap:wrap;
+      font-size:13px;color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px;font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(37,99,235,.22);
+      background:rgba(37,99,235,.05);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px;height:18px;flex:0 0 18px;
+      margin-top:2px;color:#2563eb;
+    }
+
+    .facts{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .fact{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+    }
+    .fact strong{
+      display:block;
+      margin-bottom:4px;
+      font-size:14px;
+    }
+    .fact p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .star-banner{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      margin-top:12px;
+    }
+    .star-banner img{
+      width:92px;
+      height:92px;
+      object-fit:contain;
+      flex:0 0 92px;
+    }
+    .star-banner-text strong{
+      display:block;
+      font-size:18px;
+      margin-bottom:4px;
+    }
+    .star-banner-text span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+      margin-top:12px;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+    }
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      font-size:calc(var(--tbl-font) - 1px);
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td,tfoot td{
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      vertical-align:middle;
+      font-size:var(--tbl-font);
+      white-space:nowrap;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+    tfoot td{
+      background:#f8fafc;
+      font-weight:900;
+      border-top:1px solid var(--border);
+      border-bottom:0;
+    }
+
+    .num{text-align:right;font-variant-numeric:tabular-nums}
+    .center{text-align:center}
+    .star-name{font-weight:800}
+    .tier-chip{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:58px;
+      padding:5px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-size:12px;
+      color:var(--text);
+    }
+    .total-strong{font-weight:900}
+
+    .types-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .type-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+      background:#fff;
+    }
+    .type-card strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:14px;
+    }
+    .type-card p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .rarity-list{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .rarity-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+      background:#fff;
+    }
+    .rarity-card strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:14px;
+    }
+    .rarity-card p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .cards{display:none}
+    .cards .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:12px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0;
+    }
+    .card-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.25;
+      white-space:nowrap;
+    }
+    .card-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:8px;
+      margin-top:10px;
+    }
+    .card-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#f9fafb;
+    }
+    .card-label{
+      color:var(--muted);
+      font-size:13px;
+      font-weight:700;
+    }
+    .card-value{
+      text-align:right;
+      font-size:13px;
+      font-weight:800;
+      color:var(--text);
+      white-space:nowrap;
+    }
+
+    .related{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .pill{
+      display:inline-flex;align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    @media (max-width: 900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+      .facts{grid-template-columns:1fr}
+      .types-grid{grid-template-columns:1fr}
+      .rarity-list{grid-template-columns:1fr}
+      .star-banner{padding:14px;gap:12px}
+      .star-banner img{width:72px;height:72px;flex-basis:72px}
+
+      .data-table{display:none}
+      .cards{display:grid;gap:12px}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+      .star-banner-text strong{font-size:16px}
+      .star-banner-text span{font-size:12px}
+    }
+  </style>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/en/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/database/hero-shards.html" aria-current="page">EN</a>
+        <a href="/ko/database/hero-shards.html">KO</a>
+        <a href="/ja/database/hero-shards.html">JA</a>
+        <a href="/zh-tw/database/hero-shards.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">Overview</a>
+      <a href="#requirements">Requirements</a>
+      <a href="#types">Types</a>
+      <a href="#related">Related</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/en/">Home</a> <span class="muted">›</span>
+        <a href="/en/database/">Database</a> <span class="muted">›</span>
+        <span>Hero Shards</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/star/6.webp" alt="Hero Shards" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>Hero Shards</h1>
+          <p class="sub">
+            Hero Shards are used to increase a hero’s star level in Kingshot.
+            Star upgrades unlock new skills, improve existing skills, increase power, and unlock the hero story.
+          </p>
+          <p class="muted" style="margin-top:10px">
+            This page covers hero shard types, hero rarity, exception heroes, sources, and total shard requirements.
+          </p>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">Overview</a><span class="dotsep">•</span>
+            <a href="#requirements">Requirements</a><span class="dotsep">•</span>
+            <a href="#types">Types</a><span class="dotsep">•</span>
+            <a href="#related">Related</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>Overview</h2>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Note:</strong>
+            A total of <strong>1,065 Hero Shards</strong> are needed to reach max star level.
+            Including hero unlock shards, the normal full total becomes <strong>1,075</strong>.
+          </div>
+        </div>
+
+        <p>
+          Hero Shards are pieces used to raise a hero’s star level.
+          When a hero’s stars increase, new skills can unlock, existing skills can be upgraded, power increases, and the hero story opens.
+        </p>
+
+        <div class="facts">
+          <article class="fact">
+            <strong>Hero Rarity</strong>
+            <p>R (Rare / Blue), SR, SSR</p>
+          </article>
+          <article class="fact">
+            <strong>Star Upgrade Total</strong>
+            <p>1,065</p>
+          </article>
+          <article class="fact">
+            <strong>Including Unlock</strong>
+            <p>1,075</p>
+          </article>
+          <article class="fact">
+            <strong>Exception Heroes</strong>
+            <p>Amadeus, Helga</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="requirements">
+        <h2>Requirements</h2>
+        <p class="muted" style="margin-top:-2px">Complete shard requirements by star level and tier</p>
+
+        <div class="star-banner">
+          <img src="/img/star/6.webp" alt="Full 5 Star" width="92" height="92" />
+          <div class="star-banner-text">
+            <strong>5 Star Full Max</strong>
+            <span>Total shards required to fully complete all star upgrades: 1,065</span>
+          </div>
+        </div>
+
+        <div class="cards" id="hero-shard-cards" aria-label="Hero shard requirement cards"></div>
+
+        <div class="table-wrap data-table" aria-label="Hero Shard Requirements table">
+          <table id="hero-shard-table">
+            <colgroup>
+              <col style="width:18%">
+              <col style="width:11%">
+              <col style="width:11%">
+              <col style="width:11%">
+              <col style="width:11%">
+              <col style="width:11%">
+              <col style="width:11%">
+              <col style="width:16%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Star Level</th>
+                <th class="center">Tier 1</th>
+                <th class="center">Tier 2</th>
+                <th class="center">Tier 3</th>
+                <th class="center">Tier 4</th>
+                <th class="center">Tier 5</th>
+                <th class="center">Tier 6</th>
+                <th class="num">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="star-name">1 Star</td>
+                <td class="center"><span class="tier-chip">1</span></td>
+                <td class="center"><span class="tier-chip">1</span></td>
+                <td class="center"><span class="tier-chip">2</span></td>
+                <td class="center"><span class="tier-chip">2</span></td>
+                <td class="center"><span class="tier-chip">2</span></td>
+                <td class="center"><span class="tier-chip">2</span></td>
+                <td class="num total-strong">10</td>
+              </tr>
+              <tr>
+                <td class="star-name">2 Star</td>
+                <td class="center"><span class="tier-chip">5</span></td>
+                <td class="center"><span class="tier-chip">5</span></td>
+                <td class="center"><span class="tier-chip">5</span></td>
+                <td class="center"><span class="tier-chip">5</span></td>
+                <td class="center"><span class="tier-chip">5</span></td>
+                <td class="center"><span class="tier-chip">15</span></td>
+                <td class="num total-strong">40</td>
+              </tr>
+              <tr>
+                <td class="star-name">3 Star</td>
+                <td class="center"><span class="tier-chip">15</span></td>
+                <td class="center"><span class="tier-chip">15</span></td>
+                <td class="center"><span class="tier-chip">15</span></td>
+                <td class="center"><span class="tier-chip">15</span></td>
+                <td class="center"><span class="tier-chip">15</span></td>
+                <td class="center"><span class="tier-chip">40</span></td>
+                <td class="num total-strong">115</td>
+              </tr>
+              <tr>
+                <td class="star-name">4 Star</td>
+                <td class="center"><span class="tier-chip">40</span></td>
+                <td class="center"><span class="tier-chip">40</span></td>
+                <td class="center"><span class="tier-chip">40</span></td>
+                <td class="center"><span class="tier-chip">40</span></td>
+                <td class="center"><span class="tier-chip">40</span></td>
+                <td class="center"><span class="tier-chip">100</span></td>
+                <td class="num total-strong">300</td>
+              </tr>
+              <tr>
+                <td class="star-name">5 Star</td>
+                <td class="center"><span class="tier-chip">100</span></td>
+                <td class="center"><span class="tier-chip">100</span></td>
+                <td class="center"><span class="tier-chip">100</span></td>
+                <td class="center"><span class="tier-chip">100</span></td>
+                <td class="center"><span class="tier-chip">100</span></td>
+                <td class="center"><span class="tier-chip">100</span></td>
+                <td class="num total-strong">600</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>Total</td>
+                <td colspan="6">Max star upgrade total</td>
+                <td class="num">1,065</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="note" role="note" aria-label="Total note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Requirement:</strong>
+            A total of <strong>1,065</strong> shards are needed to reach max star level.
+            Including unlock shards, the normal full total becomes <strong>1,075</strong>.
+          </div>
+        </div>
+      </section>
+
+      <section id="types">
+        <h2>Types</h2>
+        <p class="muted" style="margin-top:-2px">General shards and hero-specific shards are used differently.</p>
+
+        <div class="types-grid">
+          <article class="type-card">
+            <strong>General Hero Shards</strong>
+            <p>Can be used or exchanged for most heroes as long as the rarity matches.</p>
+          </article>
+          <article class="type-card">
+            <strong>Hero-Specific Shards</strong>
+            <p>Can only be used for the hero they belong to.</p>
+          </article>
+        </div>
+
+        <p>
+          <strong>Exception:</strong> Amadeus and Helga can only upgrade stars with their VIP package exclusive shards.
+          General Mythic Hero Shards cannot be used for them.
+        </p>
+        <p>
+          All other heroes can upgrade stars using general shards.
+        </p>
+
+        <div class="rarity-list">
+          <article class="rarity-card">
+            <strong>Hero Rarity</strong>
+            <p>R (Rare / Blue), SR, SSR</p>
+          </article>
+          <article class="rarity-card">
+            <strong>Sources</strong>
+            <p>Intel Missions, some Conquest stages, Terrors, Hall of Heroes, Alliance Shop, VIP Shop</p>
+          </article>
+          <article class="rarity-card">
+            <strong>More Sources</strong>
+            <p>Hero Recruitment, events, and packs</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="related">
+        <h2>Related Pages</h2>
+        <div class="related">
+          <a class="pill" href="/en/database/">Database Main</a>
+          <a class="pill" href="/en/heroes/">Hero List</a>
+          <a class="pill" href="/en/database/widgets.html">Widgets</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function buildHeroShardCards(){
+        var table = document.getElementById('hero-shard-table');
+        var target = document.getElementById('hero-shard-cards');
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+        var i, tr, tds;
+
+        for(i = 0; i < rows.length; i++){
+          tr = rows[i];
+          tds = tr.querySelectorAll('td');
+          if(!tds || tds.length < 8) continue;
+
+          html += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">' + tds[0].textContent.trim() + '</h3>' +
+                '<div class="card-meta">Total<br><strong>' + tds[7].textContent.trim() + '</strong></div>' +
+              '</div>' +
+              '<div class="card-grid">' +
+                '<div class="card-row"><span class="card-label">Tier 1</span><span class="card-value">' + tds[1].textContent.trim() + '</span></div>' +
+                '<div class="card-row"><span class="card-label">Tier 2</span><span class="card-value">' + tds[2].textContent.trim() + '</span></div>' +
+                '<div class="card-row"><span class="card-label">Tier 3</span><span class="card-value">' + tds[3].textContent.trim() + '</span></div>' +
+                '<div class="card-row"><span class="card-label">Tier 4</span><span class="card-value">' + tds[4].textContent.trim() + '</span></div>' +
+                '<div class="card-row"><span class="card-label">Tier 5</span><span class="card-value">' + tds[5].textContent.trim() + '</span></div>' +
+                '<div class="card-row"><span class="card-label">Tier 6</span><span class="card-value">' + tds[6].textContent.trim() + '</span></div>' +
+                '<div class="card-row"><span class="card-label">Total</span><span class="card-value">' + tds[7].textContent.trim() + '</span></div>' +
+              '</div>' +
+            '</article>'
+          );
+          count++;
+        }
+
+        target.innerHTML = html;
+        return count;
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+        buildHeroShardCards();
+        document.documentElement.classList.add('enhanced');
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

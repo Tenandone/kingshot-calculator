@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Widgets | Kingshot</title>
+  <meta name="description" content="Kingshot Widgets guide. Learn what Widgets are, where to get them, widget requirements for Hero Exclusive Gear, and Full Package pricing in USD." />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://kingshotdata.kr/en/database/widget.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/database/widget.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/database/widget.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/database/widget.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/database/widget.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/database/widget.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h: 0px;
+      --tabs-h: 0px;
+      --sticky-top: 0px;
+
+      --cell-ico: 14px;
+      --th-ico: 14px;
+      --tbl-font: 13px;
+      --tbl-pad-y: 9px;
+      --tbl-pad-x: 10px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+    nav.lang{
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid; grid-template-columns:160px 1fr; gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px; height:160px; object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted)}
+    .muted{color:var(--muted)}
+
+    .jump{
+      margin-top:10px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px; font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(37,99,235,.22);
+      background:rgba(37,99,235,.05);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px; height:18px; flex:0 0 18px;
+      margin-top:2px;
+      color:#2563eb;
+    }
+
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+    }
+
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      font-size:calc(var(--tbl-font) - 1px);
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td, tfoot td{
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:var(--tbl-font);
+      white-space:nowrap;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+    tfoot td{
+      background:#f8fafc;
+      font-weight:900;
+      border-top:1px solid var(--border);
+      border-bottom:0;
+    }
+
+    .num{text-align:right; font-variant-numeric:tabular-nums}
+
+    .th-flex{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .th-ico{
+      width:var(--th-ico);
+      height:var(--th-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+    }
+
+    .cards{display:none}
+    .cards .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:12px 12px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0;
+    }
+    .card-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.25;
+      white-space:nowrap;
+    }
+    .card-req{
+      margin:8px 0 0;
+      color:var(--text);
+      font-size:13px;
+    }
+    .card-total{
+      border:1px solid rgba(37,99,235,.16);
+      background:rgba(37,99,235,.05);
+    }
+
+    .sources-grid,
+    .packages-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .source-card,
+    .package-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+      background:#fff;
+    }
+    .source-card strong,
+    .package-card strong{
+      display:block;
+      margin-bottom:4px;
+      font-size:14px;
+    }
+    .source-card p,
+    .package-card p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .package-price{
+      font-size:20px;
+      font-weight:900;
+      line-height:1.1;
+      margin-bottom:6px;
+    }
+    .package-count{
+      display:inline-flex;
+      margin-top:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      font-size:13px;
+      font-weight:800;
+      color:var(--text);
+    }
+
+    .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{
+      display:inline-flex; align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width: 900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+      .sources-grid,
+      .packages-grid{grid-template-columns:1fr}
+      .enhanced .data-table{display:none}
+      .enhanced .cards{display:grid; gap:12px}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Widgets (Kingshot)",
+    "inLanguage":"en",
+    "description":"Kingshot Widgets guide with sources, upgrade requirements, and Full Package pricing.",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://kingshotdata.kr/en/"},
+        {"@type":"ListItem","position":2,"name":"Database","item":"https://kingshotdata.kr/en/database/"},
+        {"@type":"ListItem","position":3,"name":"Widgets","item":"https://kingshotdata.kr/en/database/widget.html"}
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/en/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/database/widget.html" aria-current="page">EN</a>
+        <a href="/ko/database/widget.html">KO</a>
+        <a href="/ja/database/widget.html">JA</a>
+        <a href="/zh-tw/database/widget.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">Overview</a>
+      <a href="#sources">Sources</a>
+      <a href="#requirements">Requirements</a>
+      <a href="#packages">Full Package</a>
+      <a href="#related">Related</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/en/">Home</a> <span class="muted">›</span>
+        <a href="/en/database/">Database</a> <span class="muted">›</span>
+        <span>Widgets</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/database/widget.webp" alt="Widgets" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>Widgets</h1>
+          <p class="sub">
+            Widgets are parts needed to unlock and upgrade Hero Exclusive Gear in Kingshot.
+            If you plan to use a Mythic Hero for a long time, it is better to decide early and invest toward a level 10 Exclusive Gear.
+          </p>
+          <p class="muted" style="margin-top:10px">
+            This page explains what Widgets are, where to get them, how many you need for each upgrade level,
+            and how Full Package pricing is commonly understood in USD.
+          </p>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">Overview</a><span class="dotsep">•</span>
+            <a href="#sources">Sources</a><span class="dotsep">•</span>
+            <a href="#requirements">Requirements</a><span class="dotsep">•</span>
+            <a href="#packages">Full Package</a><span class="dotsep">•</span>
+            <a href="#related">Related</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>What are Widgets?</h2>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Note:</strong>
+            Hero Exclusive Gear is only available for Mythic Heroes and becomes accessible once you reach Town Center level 15.
+          </div>
+        </div>
+
+        <p>
+          Widgets are parts needed to unlock and upgrade Hero Exclusive Gear in Kingshot.
+        </p>
+        <p>
+          These exclusive gears are only available for Mythic Heroes and become accessible once you reach Town Center level 15.
+        </p>
+        <p>
+          You can use Widgets to upgrade Hero Exclusive Gear through ten different levels, boosting the hero’s power massively and unlocking stronger effects for both Expedition and Beast Hunt content.
+        </p>
+        <p>
+          Even free-to-play players can eventually equip a level 10 Exclusive Gear if they keep collecting Widgets over time through events and shops.
+          It is best to check your long-term hero roadmap first, then invest your Widgets into heroes you expect to use for a very long time.
+        </p>
+      </section>
+
+      <section id="sources">
+        <h2>Sources</h2>
+        <p class="muted" style="margin-top:-2px">Availability may vary depending on server progress and event rotation.</p>
+
+        <div class="sources-grid">
+          <article class="source-card">
+            <strong>Buccaneer Bounty Event</strong>
+            <p>One of the main event sources for Widgets. If you prepare well for this event, it can become a strong long-term supply route.</p>
+          </article>
+
+          <article class="source-card">
+            <strong>Mystery Shop</strong>
+            <p>Widgets can appear in the Mystery Shop, and they may be available at a discount depending on your shop rotation and currency usage.</p>
+          </article>
+
+          <article class="source-card">
+            <strong>Hall of Heroes</strong>
+            <p>In later state generations, Hall of Heroes can become another useful source for Hero Exclusive Gear materials.</p>
+          </article>
+
+          <article class="source-card">
+            <strong>Special Events</strong>
+            <p>Limited-time events may include Widgets as milestone or exchange rewards, so event planning matters a lot.</p>
+          </article>
+
+          <article class="source-card">
+            <strong>Packs</strong>
+            <p>Paid packs are the fastest way to collect Widgets, especially if you are aiming to finish a level 10 Exclusive Gear more quickly.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="upgrade">
+        <span id="requirements" class="anchor"></span>
+        <h2>Requirements</h2>
+        <p class="muted" style="margin-top:-2px">Widget requirements for Hero Exclusive Gears</p>
+
+        <div class="cards" id="widget-cards" aria-label="Widget requirement cards"></div>
+
+        <div class="table-wrap data-table" aria-label="Widget requirements for Hero Exclusive Gears table">
+          <table id="widget-table">
+            <colgroup>
+              <col style="width:50%">
+              <col style="width:50%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Exclusive Hero Gear Level</th>
+                <th class="num">
+                  <span class="th-flex">
+                    <img class="th-ico" src="/img/database/widget.webp" alt="" aria-hidden="true" width="14" height="14">
+                    Widgets Required
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td class="num">5</td></tr>
+              <tr><td>2</td><td class="num">10</td></tr>
+              <tr><td>3</td><td class="num">15</td></tr>
+              <tr><td>4</td><td class="num">20</td></tr>
+              <tr><td>5</td><td class="num">25</td></tr>
+              <tr><td>6</td><td class="num">30</td></tr>
+              <tr><td>7</td><td class="num">35</td></tr>
+              <tr><td>8</td><td class="num">40</td></tr>
+              <tr><td>9</td><td class="num">45</td></tr>
+              <tr><td>10</td><td class="num">50</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td>Total</td><td class="num">275</td></tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="note" role="note" aria-label="Total note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Total:</strong>
+            If you upgrade Hero Exclusive Gear from level 1 to level 10 in order, you need a total of <strong>275 Widgets</strong>.
+          </div>
+        </div>
+      </section>
+
+      <section id="packages">
+        <h2>Full Package</h2>
+        <p class="muted" style="margin-top:-2px">Example Exclusive Gear pack pricing in USD</p>
+
+        <div class="packages-grid">
+          <article class="package-card">
+            <div class="package-price">$4.99</div>
+            <strong>5 Widgets</strong>
+            <p>The smallest paid pack tier, usually used for small top-ups or finishing a gap.</p>
+            <div class="package-count">5 Widgets</div>
+          </article>
+
+          <article class="package-card">
+            <div class="package-price">$9.99</div>
+            <strong>10 Widgets</strong>
+            <p>A common entry tier for early Exclusive Gear progress.</p>
+            <div class="package-count">10 Widgets</div>
+          </article>
+
+          <article class="package-card">
+            <div class="package-price">$19.99</div>
+            <strong>20 Widgets</strong>
+            <p>A mid-tier option that becomes more useful once upgrade costs start to rise.</p>
+            <div class="package-count">20 Widgets</div>
+          </article>
+
+          <article class="package-card">
+            <div class="package-price">$49.99</div>
+            <strong>50 Widgets</strong>
+            <p>A larger pack commonly considered when planning high-level Exclusive Gear upgrades.</p>
+            <div class="package-count">50 Widgets</div>
+          </article>
+
+          <article class="package-card">
+            <div class="package-price">$99.99</div>
+            <strong>100 Widgets</strong>
+            <p>The highest standard tier. Players often refer to the full ladder of these offers together as the Full Package.</p>
+            <div class="package-count">100 Widgets</div>
+          </article>
+        </div>
+
+        <p>
+          In practice, many players refer to the full chain of these Exclusive Gear offers as the
+          <strong>Full Package</strong>.
+        </p>
+        <p>
+          Still, free-to-play players can absolutely reach level 10 Exclusive Gear over time by using events, shops, and careful long-term planning.
+        </p>
+      </section>
+
+      <section id="related">
+        <h2>Related Pages</h2>
+        <div class="related">
+          <a class="pill" href="/en/database/">Database Main</a>
+          <a class="pill" href="/en/heroes/">Hero List</a>
+          <a class="pill" href="/en/guides/">Guides</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function buildWidgetCards(){
+        var table = document.getElementById('widget-table');
+        var target = document.getElementById('widget-cards');
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || tds.length < 2) return;
+
+          var level = tds[0].textContent.trim();
+          var amount = tds[1].textContent.trim();
+
+          html += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">Exclusive Hero Gear Level ' + level + '</h3>' +
+                '<div class="card-meta">Widgets Required<br><strong>' + amount + '</strong></div>' +
+              '</div>' +
+              '<div class="card-req">Upgrade level <strong>' + level + '</strong> requires <strong>' + amount + ' Widgets</strong>.</div>' +
+            '</article>'
+          );
+
+          count++;
+        });
+
+        html += (
+          '<article class="card card-total">' +
+            '<div class="card-head">' +
+              '<h3 class="card-title">Total</h3>' +
+              '<div class="card-meta">Total Required<br><strong>275</strong></div>' +
+            '</div>' +
+            '<div class="card-req">Upgrading Hero Exclusive Gear from level 1 through level 10 requires <strong>275 Widgets</strong> in total.</div>' +
+          '</article>'
+        );
+
+        target.innerHTML = html;
+        return count + 1;
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+
+        var c1 = buildWidgetCards();
+        if(c1 > 0){
+          document.documentElement.classList.add('enhanced');
+        }
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

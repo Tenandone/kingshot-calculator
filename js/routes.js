@@ -1,5 +1,5 @@
 ﻿// =========================================================
-// /js/routes.js — FULL FINAL (CLEANED + WARACADEMY ROUTE, /home REMOVED -> / REDIRECT)
+// /js/routes.js — FULL FINAL (HOME BANNER + WARACADEMY ROUTE + /home -> / REDIRECT)
 // REQUIREMENTS (load order in index.html):
 //   1) /js/asset-loader.js   (provides v/ensureCSS/ensureScript)
 //   2) /js/html-loader.js    (provides KD_HTML.mount / KD_HTML.loadAndMount)
@@ -25,7 +25,8 @@
   }
 
   function focusMain(el) {
-    var h1 = el.querySelector('h1, [role="heading"]');
+    if (!el) return;
+    var h1 = el.querySelector && el.querySelector('h1, [role="heading"]');
     if (h1) {
       h1.setAttribute('tabindex', '-1');
       try { h1.focus({ preventScroll: true }); } catch (e) {}
@@ -165,7 +166,7 @@
 
     function getCurrentLang(){
       try{
-        var cur = (window.I18N && (I18N.current || I18N.lang)) || '';
+        var cur = (window.I18N && (window.I18N.current || window.I18N.lang)) || '';
         var n1 = normLangCode(cur);
         if (n1) return n1;
       }catch(_){}
@@ -229,6 +230,35 @@
       var html = await loadHTML(cands);
       if (html) cacheSet(key, html);
       return html;
+    }
+
+    async function mountHomeWaracademyBanner(root) {
+      if (!root) return false;
+
+      try {
+        var html = await loadHTMLCached([
+          '/tools/home-waracademy-banner.html',
+          'tools/home-waracademy-banner.html'
+        ]);
+
+        if (!html) {
+          root.innerHTML = '';
+          root.hidden = true;
+          return false;
+        }
+
+        root.hidden = false;
+        root.innerHTML = htmlBodyOnly(html);
+        apply(root);
+        return true;
+      } catch (e) {
+        console.error('[home banner] load failed:', e);
+        try {
+          root.innerHTML = '';
+          root.hidden = true;
+        } catch (_) {}
+        return false;
+      }
     }
 
     function bindBuildingsListLinksOnce(el){
@@ -406,79 +436,20 @@
                     '</a>';
                   }).join('') +
                 '</div>' +
-
-                '<a class="home-wide-banner" href="/waracademy" aria-label="' + t('home.waracademy.bannerTitle', 'Kingshot War Academy T11 Research Tree') + '">' +
-                  '<div class="home-wide-banner__media">' +
-                    '<img src="/img/home/waracademy.png" alt="' + t('home.waracademy.bannerTitle', 'Kingshot War Academy T11 Research Tree') + '" loading="lazy" decoding="async">' +
-                  '</div>' +
-                  '<div class="home-wide-banner__body">' +
-                    '<div class="home-wide-banner__eyebrow" data-i18n="home.waracademy.eyebrow">' + t('home.waracademy.eyebrow', 'Kingshot Research Data') + '</div>' +
-                    '<div class="home-wide-banner__title" data-i18n="home.waracademy.bannerTitle">' + t('home.waracademy.bannerTitle', 'Kingshot War Academy T11 Research Tree') + '</div>' +
-                    '<div class="home-wide-banner__desc" data-i18n="home.waracademy.bannerDesc">' + t('home.waracademy.bannerDesc', 'Check the research requirements, resource costs, and bonus effects for Truegold Infantry, Archers, and Cavalry at a glance.') + '</div>' +
-                  '</div>' +
-                  '<div class="home-wide-banner__cta" data-i18n="home.waracademy.bannerCta">' + t('home.waracademy.bannerCta', 'View Now') + '</div>' +
-                '</a>' +
-
+                '<div id="home-waracademy-banner-mount" hidden></div>' +
               '</section>' +
-
-              '<style>' +
-                '.home-wide-banner{' +
-                  'margin-top:18px;' +
-                  'display:grid;' +
-                  'grid-template-columns:120px 1fr auto;' +
-                  'align-items:center;' +
-                  'gap:18px;' +
-                  'padding:18px 20px;' +
-                  'border-radius:20px;' +
-                  'border:1px solid #e5e7eb;' +
-                  'background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);' +
-                  'box-shadow:0 10px 24px rgba(0,0,0,.06);' +
-                  'text-decoration:none;' +
-                  'color:inherit;' +
-                  'transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;' +
-                '}' +
-                '.home-wide-banner:hover{' +
-                  'transform:translateY(-2px);' +
-                  'box-shadow:0 14px 28px rgba(0,0,0,.10);' +
-                  'border-color:#c9a86a;' +
-                '}' +
-                '.home-wide-banner__media{' +
-                  'width:120px;height:120px;border-radius:16px;background:#eef2f7;' +
-                  'display:flex;align-items:center;justify-content:center;overflow:hidden;' +
-                '}' +
-                '.home-wide-banner__media img{' +
-                  'max-width:88px;max-height:88px;display:block;object-fit:contain;' +
-                '}' +
-                '.home-wide-banner__body{min-width:0;}' +
-                '.home-wide-banner__eyebrow{' +
-                  'font-size:12px;font-weight:800;letter-spacing:.08em;color:#6b7280;margin-bottom:6px;' +
-                '}' +
-                '.home-wide-banner__title{' +
-                  'font-size:24px;font-weight:900;line-height:1.25;color:#111827;margin-bottom:6px;' +
-                '}' +
-                '.home-wide-banner__desc{' +
-                  'font-size:14px;line-height:1.6;color:#4b5563;' +
-                '}' +
-                '.home-wide-banner__cta{' +
-                  'display:inline-flex;align-items:center;justify-content:center;' +
-                  'padding:12px 18px;border-radius:999px;background:#111827;color:#fff;font-weight:800;white-space:nowrap;' +
-                '}' +
-                '@media (max-width: 860px){' +
-                  '.home-wide-banner{grid-template-columns:88px 1fr;}' +
-                  '.home-wide-banner__cta{grid-column:1 / -1;justify-self:start;}' +
-                  '.home-wide-banner__media{width:88px;height:88px;}' +
-                  '.home-wide-banner__media img{max-width:64px;max-height:64px;}' +
-                  '.home-wide-banner__title{font-size:20px;}' +
-                '}' +
-                '@media (max-width: 560px){' +
-                  '.home-wide-banner{grid-template-columns:1fr;padding:16px;gap:14px;}' +
-                  '.home-wide-banner__media{width:100%;height:88px;}' +
-                  '.home-wide-banner__cta{width:100%;}' +
-                '}' +
-              '</style>' +
             '</div>';
 
           if (isStale(token)) return;
+
+          try {
+            await mountHomeWaracademyBanner(el.querySelector('#home-waracademy-banner-mount'));
+          } catch (e2) {
+            console.error('[home] banner mount isolated error:', e2);
+          }
+
+          if (isStale(token)) return;
+
           apply(el);
           setTitle('title.home', '홈 - KingshotData.kr');
           window.scrollTo({ top: 0 });
@@ -696,7 +667,7 @@
               if (a.target === '_blank' || a.hasAttribute('download')) return;
               if (/^https?:\/\//i.test(href) || href.startsWith('mailto:') || href.startsWith('tel:')) return;
 
-              if (href === '/waracademy' || href === 'pages/waracademy.html' || href === '/pages/waracademy.html') {
+              if (href === '/waracademy' || href === '/war-academy' || href === 'pages/waracademy.html' || href === '/pages/waracademy.html') {
                 e.preventDefault();
                 goto('/waracademy');
               }
@@ -1009,7 +980,7 @@
     };
 
     var PREFETCH_MAP = {
-      '/':           { js: [], html: [] },
+      '/':           { js: [], html: ['/tools/home-waracademy-banner.html', 'tools/home-waracademy-banner.html'] },
       '/heroes':     { js: ['/js/pages/heroes.js'], html: ['pages/heroes.html','/pages/heroes.html'] },
       '/database':   { js: ['/js/pages/database.js'], html: ['pages/database.html','/pages/database.html'] },
       '/guides':     { js: ['/js/pages/guides.js'], css: ['/css/guides.css'], html: ['pages/guides.html','/pages/guides.html'] },
@@ -1023,7 +994,7 @@
         var cfg = PREFETCH_MAP[path];
         if (!cfg) return;
         if (cfg.css && window.ensureCSS) cfg.css.forEach(function(h){ window.ensureCSS(h); });
-        if (cfg.js  && window.ensureScript) cfg.js.forEach(function(s){ window.ensureScript(s); });
+        if (cfg.js) cfg.js.forEach(function(s){ _loadScriptOnce(s); });
         if (cfg.html) cfg.html.forEach(function(h){ loadHTMLCached([h]); });
       } catch (e) {}
     }

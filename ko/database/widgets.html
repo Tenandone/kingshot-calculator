@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>영웅 전용무기 부속품 | Kingshot</title>
+  <meta name="description" content="Kingshot 영웅 전용무기 부속품 가이드. 영웅 전용무기가 무엇인지, 어디서 획득하는지, 강화 단계별 필요 개수와 풀패키지 기준까지 한 번에 정리." />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://kingshotdata.kr/ko/database/widget.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/database/widget.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/database/widget.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/database/widget.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/database/widget.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/database/widget.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h: 0px;
+      --tabs-h: 0px;
+      --sticky-top: 0px;
+
+      --cell-ico: 14px;
+      --th-ico: 14px;
+      --tbl-font: 13px;
+      --tbl-pad-y: 9px;
+      --tbl-pad-x: 10px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+    nav.lang{
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid; grid-template-columns: 160px 1fr; gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px; height:160px; object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted)}
+    .muted{color:var(--muted)}
+
+    .jump{
+      margin-top:10px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px; font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(37,99,235,.22);
+      background:rgba(37,99,235,.05);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px; height:18px; flex:0 0 18px;
+      margin-top:2px;
+      color:#2563eb;
+    }
+
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+    }
+
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      font-size:calc(var(--tbl-font) - 1px);
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td, tfoot td{
+      padding:var(--tbl-pad-y) var(--tbl-pad-x);
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:var(--tbl-font);
+      white-space:nowrap;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:hover td{background:#f3f6ff}
+    tbody tr:last-child td{border-bottom:0}
+    tfoot td{
+      background:#f8fafc;
+      font-weight:900;
+      border-top:1px solid var(--border);
+      border-bottom:0;
+    }
+
+    .center{text-align:center}
+    .num{text-align:right; font-variant-numeric: tabular-nums}
+
+    .th-flex{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .th-ico{
+      width:var(--th-ico);
+      height:var(--th-ico);
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle;
+    }
+
+    .cards{display:none}
+    .cards .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:12px 12px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0;
+    }
+    .card-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.25;
+      white-space:nowrap;
+    }
+    .card-req{
+      margin:8px 0 0;
+      color:var(--text);
+      font-size:13px;
+    }
+    .card-total{
+      border:1px solid rgba(37,99,235,.16);
+      background:rgba(37,99,235,.05);
+    }
+
+    ul.clean{margin:0; padding-left:18px}
+    ul.clean li{margin:6px 0}
+
+    .sources-grid,
+    .packages-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .source-card,
+    .package-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+      background:#fff;
+    }
+    .source-card strong,
+    .package-card strong{
+      display:block;
+      margin-bottom:4px;
+      font-size:14px;
+    }
+    .source-card p,
+    .package-card p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .package-price{
+      font-size:20px;
+      font-weight:900;
+      line-height:1.1;
+      margin-bottom:6px;
+    }
+    .package-count{
+      display:inline-flex;
+      margin-top:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      font-size:13px;
+      font-weight:800;
+      color:var(--text);
+    }
+
+    .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{
+      display:inline-flex; align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top: calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width: 900px){
+      header.top{
+        position: sticky;
+        top: 0;
+        z-index: 40;
+      }
+      nav.section-tabs{
+        display:flex;
+        position: sticky;
+        top: var(--header-h);
+        z-index: 35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+      .sources-grid,
+      .packages-grid{grid-template-columns:1fr}
+      .enhanced .data-table{display:none}
+      .enhanced .cards{display:grid; gap:12px}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"영웅 전용무기 부속품 (Kingshot)",
+    "inLanguage":"ko",
+    "description":"Kingshot 영웅 전용무기 부속품 획득처, 필요 개수, 풀패키지 기준 정리.",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
+        {"@type":"ListItem","position":2,"name":"데이터베이스","item":"https://kingshotdata.kr/ko/database/"},
+        {"@type":"ListItem","position":3,"name":"영웅 전용무기 부속품","item":"https://kingshotdata.kr/ko/database/widget.html"}
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/database/widget.html">EN</a>
+        <a href="/ko/database/widget.html" aria-current="page">KO</a>
+        <a href="/ja/database/widget.html">JA</a>
+        <a href="/zh-tw/database/widget.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">개요</a>
+      <a href="#sources">획득처</a>
+      <a href="#requirements">필요 개수</a>
+      <a href="#packages">풀패키지</a>
+      <a href="#related">관련</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/database/">데이터베이스</a> <span class="muted">›</span>
+        <span>영웅 전용무기 부속품</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/database/widget.webp" alt="영웅 전용무기 부속품" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>영웅 전용무기 부속품</h1>
+          <p class="sub">
+            영웅 전용무기 부속품은 Kingshot에서 SSR 영웅 전용무기를 개방하고 강화할 때 사용하는 핵심 재료입니다.
+            오래 사용할 영웅을 먼저 정하고, 해당 영웅의 10강 목표를 미리 잡아두는 것이 중요합니다.
+          </p>
+          <p class="muted" style="margin-top:10px">
+            이 페이지에서는 영웅 전용무기가 무엇인지, 어디서 얻는지, 강화 단계별 필요 개수,
+            그리고 풀패키지 기준까지 한 번에 정리합니다.
+          </p>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">개요</a><span class="dotsep">•</span>
+            <a href="#sources">획득처</a><span class="dotsep">•</span>
+            <a href="#requirements">필요 개수</a><span class="dotsep">•</span>
+            <a href="#packages">풀패키지</a><span class="dotsep">•</span>
+            <a href="#related">관련</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>영웅 전용무기란?</h2>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>참고:</strong>
+            영웅 전용무기는 SSR 등급 영웅에게만 제공되는 전용 장비이며,
+            도시센터 15레벨 달성 후 해금됩니다.
+          </div>
+        </div>
+
+        <p>
+          영웅 전용무기는 SSR 등급 영웅에게만 제공되는 전용 장비입니다.
+        </p>
+        <p>
+          도시센터 15레벨을 달성하면 해금되며, 전용 재료를 사용해 개방·강화할 수 있습니다.
+        </p>
+        <p>
+          강화는 최대 10단계까지 가능하며, 단계가 오를수록 토벌과 원정에 유리한 능력이 강화됩니다.
+          따라서 영웅 전용무기 부속품은 단순 소모재가 아니라 장기 성장에서 매우 중요한 자원입니다.
+        </p>
+        <p>
+          특히 무과금이나 소과금 유저도 샴페인축제, 영웅의전당, 해적의보물, 신비한상점 등을 꾸준히 활용하면
+          시간은 걸리더라도 충분히 10강 무기를 착용할 수 있습니다.
+          미리 공략을 보고 오래 사용할 영웅에 10강을 투자하기를 바랍니다.
+        </p>
+      </section>
+
+      <section id="sources">
+        <h2>영웅 전용무기 부속품 획득처</h2>
+        <p class="muted" style="margin-top:-2px">서버 진행도와 이벤트 상황에 따라 수급처가 달라질 수 있습니다.</p>
+
+        <div class="sources-grid">
+          <article class="source-card">
+            <strong>샴페인축제</strong>
+            <p>각 시즌 말에 오픈합니다. 시즌 마감 시점에 맞춰 부속품 수급처로 자주 활용되는 대표 이벤트입니다.</p>
+          </article>
+
+          <article class="source-card">
+            <strong>영웅의전당</strong>
+            <p>서버 진행도에 따라 해금됩니다. 서버 세대가 진행되면 영웅 관련 성장 재료 수급처로 확인할 수 있습니다.</p>
+          </article>
+
+          <article class="source-card">
+            <strong>해적의보물</strong>
+            <p>부속품을 노릴 수 있는 대표 이벤트 중 하나입니다. 이벤트 시기에는 보유 자원을 효율적으로 배분하는 것이 중요합니다.</p>
+          </article>
+
+          <article class="source-card">
+            <strong>신비한상점</strong>
+            <p>휘장을 사용해 할인 구매가 가능합니다. 상점 갱신에 따라 등장 여부가 달라질 수 있으므로 주기적으로 확인하는 것이 좋습니다.</p>
+          </article>
+
+          <article class="source-card">
+            <strong>유료상품</strong>
+            <p>상점의 전용무기 패키지를 통해 부속품을 빠르게 확보할 수 있습니다. 과금 여부에 따라 성장 속도 차이가 크게 납니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="upgrade">
+        <span id="requirements" class="anchor"></span>
+        <h2>강화 단계별 필요 개수</h2>
+        <p class="muted" style="margin-top:-2px">전용무기 1~10단계에 필요한 영웅 전용무기 부속품 개수</p>
+
+        <div class="cards" id="widget-cards" aria-label="영웅 전용무기 부속품 필요 개수 카드"></div>
+
+        <div class="table-wrap data-table" aria-label="전용무기 강화 단계별 영웅 전용무기 부속품 필요 개수 표">
+          <table id="widget-table">
+            <colgroup>
+              <col style="width:50%">
+              <col style="width:50%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>전용무기 레벨</th>
+                <th class="num">
+                  <span class="th-flex">
+                    <img class="th-ico" src="/img/database/widget.webp" alt="" aria-hidden="true" width="14" height="14">
+                    필요 개수
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td class="num">5</td></tr>
+              <tr><td>2</td><td class="num">10</td></tr>
+              <tr><td>3</td><td class="num">15</td></tr>
+              <tr><td>4</td><td class="num">20</td></tr>
+              <tr><td>5</td><td class="num">25</td></tr>
+              <tr><td>6</td><td class="num">30</td></tr>
+              <tr><td>7</td><td class="num">35</td></tr>
+              <tr><td>8</td><td class="num">40</td></tr>
+              <tr><td>9</td><td class="num">45</td></tr>
+              <tr><td>10</td><td class="num">50</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td>합계</td><td class="num">275</td></tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="note" role="note" aria-label="Total note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>합계 기준:</strong>
+            전용무기 1강부터 10강까지 순차 강화할 경우 총 <strong>275개</strong>의 영웅 전용무기 부속품이 필요합니다.
+          </div>
+        </div>
+      </section>
+
+      <section id="packages">
+        <h2>풀패키지 기준</h2>
+        <p class="muted" style="margin-top:-2px">상점 전용무기 패키지 구성 예시 (공통 달러 표기)</p>
+
+        <div class="packages-grid">
+          <article class="package-card">
+            <div class="package-price">$4.99</div>
+            <strong>전용무기 부속품 5개</strong>
+            <p>가장 낮은 구간의 패키지입니다. 소량 보충용으로 활용됩니다.</p>
+            <div class="package-count">5개</div>
+          </article>
+
+          <article class="package-card">
+            <div class="package-price">$9.99</div>
+            <strong>전용무기 부속품 10개</strong>
+            <p>초반 강화 구간에서 부족한 수량을 빠르게 채울 때 사용됩니다.</p>
+            <div class="package-count">10개</div>
+          </article>
+
+          <article class="package-card">
+            <div class="package-price">$19.99</div>
+            <strong>전용무기 부속품 20개</strong>
+            <p>중간 강화 구간 진입 시 체감 효율이 올라가는 가격대입니다.</p>
+            <div class="package-count">20개</div>
+          </article>
+
+          <article class="package-card">
+            <div class="package-price">$49.99</div>
+            <strong>전용무기 부속품 50개</strong>
+            <p>고강 구간 진입 전 대량 확보용으로 자주 묶어서 계산하는 패키지입니다.</p>
+            <div class="package-count">50개</div>
+          </article>
+
+          <article class="package-card">
+            <div class="package-price">$99.99</div>
+            <strong>전용무기 부속품 100개</strong>
+            <p>가장 높은 구간의 패키지입니다. 보통 위 구성을 통틀어 풀패키지 기준으로 계산합니다.</p>
+            <div class="package-count">100개</div>
+          </article>
+        </div>
+
+        <p>
+          보통 유저들 사이에서 위와 같은 단계별 상품 구성을 묶어서
+          전용무기 <strong>풀패키지</strong>라고 부릅니다.
+        </p>
+        <p>
+          다만 무과금 유저도 샴페인축제, 영웅의전당, 해적의보물, 신비한상점을 꾸준히 활용하면
+          시간이 걸리더라도 충분히 10강 무기를 맞출 수 있습니다.
+        </p>
+      </section>
+
+      <section id="related">
+        <h2>관련 페이지</h2>
+        <div class="related">
+          <a class="pill" href="/ko/database/">데이터베이스 메인</a>
+          <a class="pill" href="/ko/heroes/">영웅 목록</a>
+          <a class="pill" href="/ko/guides/">가이드</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function buildWidgetCards(){
+        var table = document.getElementById('widget-table');
+        var target = document.getElementById('widget-cards');
+        if(!table || !target) return 0;
+
+        var rows = table.querySelectorAll('tbody tr');
+        if(!rows || !rows.length) return 0;
+
+        var html = '';
+        var count = 0;
+
+        rows.forEach(function(tr){
+          var tds = tr.querySelectorAll('td');
+          if(!tds || tds.length < 2) return;
+
+          var level = tds[0].textContent.trim();
+          var amount = tds[1].textContent.trim();
+
+          html += (
+            '<article class="card">' +
+              '<div class="card-head">' +
+                '<h3 class="card-title">전용무기 레벨 ' + level + '</h3>' +
+                '<div class="card-meta">필요 개수<br><strong>' + amount + '</strong></div>' +
+              '</div>' +
+              '<div class="card-req">강화 단계 <strong>' + level + '</strong> 에는 영웅 전용무기 부속품 <strong>' + amount + '개</strong>가 필요합니다.</div>' +
+            '</article>'
+          );
+
+          count++;
+        });
+
+        html += (
+          '<article class="card card-total">' +
+            '<div class="card-head">' +
+              '<h3 class="card-title">합계</h3>' +
+              '<div class="card-meta">총 필요 개수<br><strong>275</strong></div>' +
+            '</div>' +
+            '<div class="card-req">전용무기 1강부터 10강까지 순차 강화 시 총 <strong>275개</strong>가 필요합니다.</div>' +
+          '</article>'
+        );
+
+        target.innerHTML = html;
+        return count + 1;
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+
+        var c1 = buildWidgetCards();
+        if(c1 > 0){
+          document.documentElement.classList.add('enhanced');
+        }
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
