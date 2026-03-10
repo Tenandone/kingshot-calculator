@@ -81,7 +81,7 @@
     about:     '소개 - KingshotData.KR',
     heroes:    '영웅 - KingshotData.KR',
     towncenter:          '도시센터 - KingshotData.KR',
-    'truegold-crucible': '순금정련소 - KingshotData.KR',
+    'truegold-crucible': '황금용광로 - KingshotData.KR',
     academy:             '아카데미 - KingshotData.KR',
     embassy:             '대사관 - KingshotData.KR',
     barracks:            '보병대 - KingshotData.KR',

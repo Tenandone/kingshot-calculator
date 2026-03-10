@@ -173,7 +173,7 @@ console.log('[buildings.js] LOADED v=20260306');
     'storehouse':         { ko:'창고',     en:'Storehouse',         ja:'倉庫',        'zh-tw':'倉庫' },
     'kitchen':            { ko:'주방',     en:'Kitchen',            ja:'台所',        'zh-tw':'廚房' },
     'guard-station':      { ko:'방위소',   en:'Guard Station',      ja:'衛兵所',      'zh-tw':'警備站' },
-    'truegold-crucible':  { ko:'순금정련소', en:'Truegold Crucible', ja:'真金坩堝',   'zh-tw':'真金熔爐' },
+    'truegold-crucible':  { ko:'황금용광로', en:'Truegold Crucible', ja:'真金坩堝',   'zh-tw':'真金熔爐' },
     'war-academy':        { ko:'전쟁 아카데미', en:'War Academy',    ja:'戦争学院',   'zh-tw':'戰爭學院' },
     'infirmary':          { ko:'야전병원', en:'Infirmary',          ja:'野戦病院',    'zh-tw':'野戰醫院' }
   };
