@@ -477,12 +477,12 @@
         <nav class="nav" id="primaryNav" role="navigation"
              aria-label="Primary"
              data-i18n-attr="aria-label:aria.primaryNav">
-          <a href="/ko/buildings/" data-link data-nav="buildings" data-i18n="nav.buildings">건물</a>
-          <a href="/ko/heroes/" data-link data-nav="heroes" data-i18n="nav.heroes">영웅</a>
-          <a href="/ko/database/" data-link data-nav="database" data-i18n="nav.database">데이터베이스</a>
-          <a href="/ko/guides/" data-link data-nav="guides" data-i18n="nav.guides">가이드</a>
-          <a href="/tools/coupon-countdown.html?lang=ko" data-link data-nav="calculators" data-i18n="nav.calculators">계산기</a>
-          <a href="/pages/about.html?lang=ko" data-link data-nav="about" data-i18n="nav.about">소개</a>
+          <a href="/buildings" data-link data-nav="buildings" data-i18n="nav.buildings">건물</a>
+          <a href="/heroes" data-link data-nav="heroes" data-i18n="nav.heroes">영웅</a>
+          <a href="/database" data-link data-nav="database" data-i18n="nav.database">데이터베이스</a>
+          <a href="/guides" data-link data-nav="guides" data-i18n="nav.guides">가이드</a>
+          <a href="/tools/coupon-countdown.html" data-link data-nav="calculators" data-i18n="nav.calculators">계산기</a>
+          <a href="/pages/about.html" data-link data-nav="about" data-i18n="nav.about">소개</a>
         </nav>
       </div>
 
@@ -519,17 +519,17 @@
       <div class="nav-list" role="navigation"
            aria-label="Drawer navigation"
            data-i18n-attr="aria-label:aria.drawerNav">
-        <a href="/ko/buildings/" data-link data-nav="buildings" data-i18n="nav.buildings">건물</a>
-        <a href="/ko/heroes/" data-link data-nav="heroes" data-i18n="nav.heroes">영웅</a>
-        <a href="/ko/database/" data-link data-nav="database" data-i18n="nav.database">데이터베이스</a>
-        <a href="/ko/guides/" data-link data-nav="guides" data-i18n="nav.guides">가이드</a>
-        <a href="/tools/coupon-countdown.html?lang=ko" data-link data-nav="calculators" data-i18n="nav.calculators">계산기</a>
-        <a href="/pages/about.html?lang=ko" data-link data-nav="about" data-i18n="nav.about">소개</a>
+        <a href="/buildings" data-link data-nav="buildings" data-i18n="nav.buildings">건물</a>
+        <a href="/heroes" data-link data-nav="heroes" data-i18n="nav.heroes">영웅</a>
+        <a href="/database" data-link data-nav="database" data-i18n="nav.database">데이터베이스</a>
+        <a href="/guides" data-link data-nav="guides" data-i18n="nav.guides">가이드</a>
+        <a href="/tools/coupon-countdown.html" data-link data-nav="calculators" data-i18n="nav.calculators">계산기</a>
+        <a href="/pages/about.html" data-link data-nav="about" data-i18n="nav.about">소개</a>
       </div>
 
       <div class="drawer-sponsor-stack" aria-label="Quick links">
         <a class="drawer-sponsor-card"
-           href="https://kingshotdata.kr/ko/guides/kingshot-giftcode.html"
+           href="https://kingshotdata.kr/en/guides/kingshot-giftcode.html"
            target="_blank" rel="noopener"
            aria-label="Gift Code">
           <img src="/img/guide/gift-code-button.webp" alt="Gift Code" width="240" height="54"
@@ -718,9 +718,22 @@
         });
       }
 
-      document.addEventListener('DOMContentLoaded', syncNavLinks);
-      document.addEventListener('i18n:changed', syncNavLinks);
-      window.addEventListener('popstate', syncNavLinks);
+      function syncBrandLink(){
+        var lang = getCurrentLang();
+        var brand = document.querySelector('.brand.brand-pro');
+        if (brand) {
+          brand.setAttribute('href', '/?lang=' + encodeURIComponent(lang));
+        }
+      }
+
+      function syncAllNav(){
+        syncNavLinks();
+        syncBrandLink();
+      }
+
+      document.addEventListener('DOMContentLoaded', syncAllNav);
+      document.addEventListener('i18n:changed', syncAllNav);
+      window.addEventListener('popstate', syncAllNav);
     })();
   </script>
 </body>
