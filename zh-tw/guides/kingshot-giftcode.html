@@ -134,6 +134,7 @@
 
     .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
     .crumbs a{color:var(--muted)}
+    .muted{color:var(--muted)}
 
     .hero{
       display:grid;
@@ -564,7 +565,7 @@
           <a
             class="countdown-banner-link"
             id="countdownBannerLink"
-            href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=zh-TW"
+            href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=zh-tw"
             aria-label="前往 Kingshot 代碼倒數頁面"
           >
             <div class="countdown-banner-copy">
@@ -793,6 +794,9 @@
   </div>
 
   <script>
+    const PAGE_LANG = "zh-TW";
+    const COUPON_TIMER_LANG = "zh-tw";
+
     const LANG_DATA = {
       "zh-TW": {
         metaTitle: "Kingshot 禮包碼・最新兌換碼、輸入方式、過期碼紀錄整理",
@@ -808,7 +812,7 @@
         countdownTitle: "Kingshot 代碼倒數計時",
         countdownDesc: "即時查看目前可用代碼與剩餘有效時間。",
         countdownCta: "查看倒數 →",
-        countdownHref: "https://kingshotdata.kr/tools/coupon-countdown.html?lang=zh-TW",
+        countdownHref: "https://kingshotdata.kr/tools/coupon-countdown.html?lang=zh-tw",
         newBadge: "NEW",
         newText: "一旦確認有最新代碼，這個頁面會立即更新。",
         lastCheckedLabel: "最後確認",
@@ -864,9 +868,9 @@
     };
 
     function stripHtml(html){
-      const div = document.createElement('div');
-      div.innerHTML = String(html || '');
-      return (div.textContent || '').trim();
+      const div = document.createElement("div");
+      div.innerHTML = String(html || "");
+      return (div.textContent || "").trim();
     }
 
     function setFaqJsonLd(t){
@@ -955,7 +959,7 @@
     ];
 
     function makeArchiveCard(code, label){
-      const t = LANG_DATA["zh-TW"];
+      const t = LANG_DATA[PAGE_LANG];
       const card = document.createElement("div");
       card.className = "card expired";
       card.innerHTML = `
@@ -978,10 +982,11 @@
     }
 
     function renderCodes(active){
-      const t = LANG_DATA["zh-TW"];
+      const t = LANG_DATA[PAGE_LANG];
       const grid = document.getElementById("couponGrid");
       if (!grid) return;
       grid.innerHTML = "";
+      grid.setAttribute("aria-busy", "false");
 
       if (!active.length) {
         const empty = document.createElement("div");
@@ -1036,8 +1041,8 @@
     }
 
     function applyLanguage(lang){
-      const t = LANG_DATA[lang] || LANG_DATA["zh-TW"];
-      document.documentElement.setAttribute("lang", lang);
+      const t = LANG_DATA[lang] || LANG_DATA[PAGE_LANG];
+      document.documentElement.setAttribute("lang", PAGE_LANG);
 
       document.title = t.metaTitle;
       document.querySelector('meta[name="description"]').setAttribute("content", t.metaDesc);
@@ -1101,19 +1106,19 @@
     }
 
     (function(){
-      const mqMobile = window.matchMedia('(max-width: 900px)');
+      const mqMobile = window.matchMedia("(max-width: 900px)");
 
       function setStickyTop(){
-        const header = document.querySelector('header.top');
-        const tabs = document.querySelector('nav.section-tabs');
+        const header = document.querySelector("header.top");
+        const tabs = document.querySelector("nav.section-tabs");
         const isMobile = mqMobile.matches;
 
         const hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
         const th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
 
-        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
-        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
-        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+        document.documentElement.style.setProperty("--header-h", Math.round(hh) + "px");
+        document.documentElement.style.setProperty("--tabs-h", Math.round(th) + "px");
+        document.documentElement.style.setProperty("--sticky-top", Math.round(hh + th) + "px");
       }
 
       function initStickyObservers(){
@@ -1121,27 +1126,27 @@
         requestAnimationFrame(setStickyTop);
         setTimeout(setStickyTop, 60);
 
-        if(mqMobile && mqMobile.addEventListener){
-          mqMobile.addEventListener('change', setStickyTop);
-        }else if(mqMobile && mqMobile.addListener){
+        if (mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener("change", setStickyTop);
+        } else if (mqMobile && mqMobile.addListener){
           mqMobile.addListener(setStickyTop);
         }
 
-        if(window.ResizeObserver){
+        if (window.ResizeObserver){
           const ro = new ResizeObserver(function(){ setStickyTop(); });
-          const header = document.querySelector('header.top');
-          const tabs = document.querySelector('nav.section-tabs');
-          if(header) ro.observe(header);
-          if(tabs) ro.observe(tabs);
+          const header = document.querySelector("header.top");
+          const tabs = document.querySelector("nav.section-tabs");
+          if (header) ro.observe(header);
+          if (tabs) ro.observe(tabs);
         }
 
-        window.addEventListener('load', setStickyTop);
-        window.addEventListener('resize', setStickyTop);
+        window.addEventListener("load", setStickyTop);
+        window.addEventListener("resize", setStickyTop);
       }
 
       async function init(){
         try{
-          applyLanguage("zh-TW");
+          applyLanguage(PAGE_LANG);
           initStickyObservers();
           renderArchive();
 
@@ -1158,14 +1163,15 @@
           renderArchive();
           const grid = document.getElementById("couponGrid");
           if (grid) {
-            grid.innerHTML = `<div class="note-txt" style="grid-column:1 / -1;">${escapeHTML(LANG_DATA["zh-TW"].loadFail)}</div>`;
+            grid.setAttribute("aria-busy", "false");
+            grid.innerHTML = `<div class="note-txt" style="grid-column:1 / -1;">${escapeHTML(LANG_DATA[PAGE_LANG].loadFail)}</div>`;
           }
         }
       }
 
-      if(document.readyState === 'loading'){
-        document.addEventListener('DOMContentLoaded', init);
-      }else{
+      if (document.readyState === "loading"){
+        document.addEventListener("DOMContentLoaded", init);
+      } else {
         init();
       }
     })();
