@@ -1,5 +1,5 @@
 // /public/js/app.js — SPA Router (History API) for KingshotData.kr
-// v2026-03-08 (shared html page mount engine for buildings / heroes / database / guides)
+// v2026-03-16 (TW 상세 페이지 언어 고정 보정 포함)
 // ES5-compatible (no arrow functions / optional chaining)
 (function () {
   'use strict';
@@ -158,6 +158,14 @@
 
   // ===== shared html mount engine =====
   function getCurrentContentLang() {
+    try {
+      var pathLang = detectLangFromPath(location.pathname);
+      if (pathLang === 'ko') return 'ko';
+      if (pathLang === 'ja') return 'ja';
+      if (pathLang === 'zh-TW') return 'zh-tw';
+      if (pathLang === 'en') return 'en';
+    } catch (_) {}
+
     try {
       var htmlLang = (document.documentElement.getAttribute('lang') || '').toLowerCase();
       if (htmlLang === 'ko' || htmlLang.indexOf('ko-') === 0) return 'ko';
@@ -477,15 +485,29 @@
     return code;
   }
 
+  function detectLangFromPath(pathname) {
+    var p = String(pathname || location.pathname || '').toLowerCase();
+
+    if (p.indexOf('/zh-tw/') === 0) return 'zh-TW';
+    if (p.indexOf('/ja/') === 0) return 'ja';
+    if (p.indexOf('/en/') === 0) return 'en';
+    if (p.indexOf('/ko/') === 0) return 'ko';
+
+    return null;
+  }
+
   function ensureI18N() {
     if (!window.I18N) return Promise.resolve();
     try {
+      var pathLang = detectLangFromPath(location.pathname);
       var saved   = (function(){ try { return localStorage.getItem('lang'); } catch(_){ return null; } })();
       var urlLang = new URLSearchParams(location.search).get('lang');
-      var fallback= (navigator.language || 'ko');
-      var lang    = normalizeLanguage(urlLang || saved || fallback);
+      var fallback= (navigator.language || 'en');
+      var lang    = normalizeLanguage(pathLang || urlLang || saved || fallback);
+
       if (window.I18N.current === lang && typeof window.I18N.t === 'function') return Promise.resolve();
-      return window.I18N.init({ lang: lang, namespaces: ['common', 'calc']  }).catch(function(e){
+
+      return window.I18N.init({ lang: lang, namespaces: ['common', 'calc'] }).catch(function(e){
         console.warn('[i18n] init failed:', e);
       });
     } catch (e) {
