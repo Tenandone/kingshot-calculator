@@ -1,10 +1,10 @@
-<!-- FILE: /tools/coupon-countdown.html — FULL FINAL (v4.2.4 OPTIMIZED)
-     ✅ v4.2.3 유지
-     ✅ [추가] 팝업 하단 작은 안내문(4개 언어) 추가
-        - "할인 링크 → 쿠폰 코드 입력 → 즐겨찾기"
-        - "매달 1일 추첨 · 매달 15일 추가쿠폰(상시)"
-        - "이벤트 조건 충족 시"
-     ✅ 페이지 하단(계산기 옆) "광고보기" 버튼: 새 탭 이동 X → 탑업 팝업(openPopup) 재오픈
+<!-- FILE: /tools/coupon-countdown.html — FULL FINAL (v4.2.5 OPTIMIZED)
+     ✅ v4.2.4 유지
+     ✅ [수정] Gift Code Guide 버튼 언어별 경로 자동 분기
+        - ko     -> /guides/kingshot-giftcode.html
+        - en     -> /en/guides/kingshot-giftcode.html
+        - ja     -> /ja/guides/kingshot-giftcode.html
+        - zh-TW  -> /zh-tw/guides/kingshot-giftcode.html
 -->
 <!doctype html>
 <html lang="en">
@@ -261,10 +261,11 @@
     @media (max-width: 640px){ .codesGrid{ grid-template-columns: 1fr; } }
 
     /* ✅ only 1 active code → center align */
-.codesGrid.single{
-  grid-template-columns: minmax(0, 520px);
-  justify-content: center;
-}
+    .codesGrid.single{
+      grid-template-columns: minmax(0, 520px);
+      justify-content: center;
+    }
+
     .codeCard{
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.35);
@@ -466,6 +467,7 @@
     .c2{ top:32px; right:32px; }
     .c3{ bottom:32px; left:32px; }
     .c4{ bottom:32px; right:32px; }
+
     @media (max-width: 820px){
       .popCorner{ width: 160px; height:160px; }
       .c1{ top:18px; left:18px; }
@@ -473,25 +475,27 @@
       .c3{ bottom:18px; left:18px; }
       .c4{ bottom:18px; right:18px; }
     }
+
     @media (max-width: 560px){
-  .pop{ min-height: 72vh; }
+      .pop{ min-height: 72vh; }
 
-  /* corner images smaller + pushed outward */
-  .popCorner{
-    width: 92px;
-    height: 92px;
-    opacity: .72;
-  }
-  .c1{ top: 10px; left: 10px; }
-  .c2{ top: 10px; right: 10px; }
-  .c3{ bottom: 10px; left: 10px; }
-  .c4{ bottom: 10px; right: 10px; }
+      /* corner images smaller + pushed outward */
+      .popCorner{
+        width: 92px;
+        height: 92px;
+        opacity: .72;
+      }
+      .c1{ top: 10px; left: 10px; }
+      .c2{ top: 10px; right: 10px; }
+      .c3{ bottom: 10px; left: 10px; }
+      .c4{ bottom: 10px; right: 10px; }
 
-  /* text area safe padding */
-  .popCenter{
-    padding: 64px 16px 64px;
-  }
-}
+      /* text area safe padding */
+      .popCenter{
+        padding: 64px 16px 64px;
+      }
+    }
+
     .popCenter{
       position:absolute; inset:0;
       display:flex;
@@ -626,7 +630,6 @@
         <div class="popSub" id="pSub">YOUR FIRST ORDER</div>
         <div class="popHint" id="pHint">Tip: Type <b>#s4qU</b> in the search box for a little extra reward.</div>
 
-        <!-- ✅ added small trusted note (i18n) -->
         <div class="popFine" id="pFine">
           Open the discounted top-up link, enter the coupon code, and bookmark the link.<br>
           Join the monthly draw (1st) · Get extra coupons on the 15th (ongoing)
@@ -697,7 +700,7 @@
       <div class="controls">
         <button class="btnSmall" id="btnShare" type="button">Share</button>
         <a class="btnSmall" id="btnRedeem" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener">Redeem</a>
-        <a class="btnSmall cta" id="btnGuide" href="/pages/guides/kingshot-giftcode.html" target="_blank" rel="noopener">Gift Code Guide</a>
+        <a class="btnSmall cta" id="btnGuide" href="/ko/guides/topup-guide.html" target="_blank" rel="noopener">할인 충전 가이드</a>
       </div>
 
       <div class="footerLinks" aria-label="Footer links">
@@ -721,164 +724,168 @@
     const MAX_SHOW = 6;
     const TICK_MS = 1000;
 
+    const GUIDE_LINKS = {
+  ko: "/ko/guides/topup-guide.html",
+  en: "/en/guides/topup-guide.html",
+  ja: "/ja/guides/topup-guide.html",
+  "zh-TW": "/zh-tw/guides/topup-guide.html"
+};
+
     const UI = {
-      en: {
-        topText: "20% Off Kingshot Top-Ups",
-        saveNow: "Save Now",
-        h1: "Kingshot Coupon Countdown",
-        h2Active: "Active codes + next expiry countdown",
-        h2None: "No active codes — time since last code:",
-        expiry: "Expiry Date & Time:",
-        since: "Since:",
-        codesActive: "Active Codes",
-        noActive: "No active codes right now.",
-        share: "Share",
-        redeem: "Redeem",
-        guide: "Gift Code Guide",
-        home: "Home",
-        guides: "Guides",
-        calc: "Calculator",
-        days: "DAYS",
-        hours: "HOURS",
-        minutes: "MINUTES",
-        seconds: "SECONDS",
-        popupBig: "YOU'VE GOT<br>20% OFF",
-        popupSub: "YOUR FIRST ORDER",
-        popupHint: "Tip: Type <b>#s4qU</b> in the search box for a little extra reward.",
-        popupFine: "Open the discounted top-up link, enter the coupon code, and bookmark the link.<br>Join the monthly draw (1st) · Get extra coupons on the 15th (ongoing)",
-        popupFineMini: "Benefits apply when event conditions are met.",
-        popupYes: "YES, PLEASE!",
-        popupNo: "DECLINE DISCOUNT",
-        toastCopied: "Copied",
-        copyBtn: "Copy",
-        adTag: "VIEW AD"
-      },
-      ko: {
-        topText: "킹샷 충전 20% 할인",
-        saveNow: "지금 할인받기",
-        h1: "킹샷 쿠폰 카운트다운",
-        h2Active: "활성 쿠폰 + 다음 만료 카운트다운",
-        h2None: "활성 쿠폰 없음 · 마지막 쿠폰 이후:",
-        expiry: "만료 시각:",
-        since: "기준 시각:",
-        codesActive: "현재 활성 쿠폰",
-        noActive: "현재 활성 쿠폰이 없습니다.",
-        share: "공유",
-        redeem: "교환하러가기",
-        guide: "쿠폰 가이드",
-        home: "홈",
-        guides: "가이드",
-        calc: "계산기",
-        days: "일",
-        hours: "시간",
-        minutes: "분",
-        seconds: "초",
-        popupBig: "20% OFF",
-        popupSub: "첫 주문 할인",
-        popupHint: "힌트: 검색창에 <b>#s4qU</b> 를 입력하면 추가 보상이 있어요.",
-        popupFine: "할인 충전 링크 접속 · 쿠폰 코드 입력 · 링크 즐겨찾기<br>매달 1일 추첨 · 매달 15일 추가 쿠폰",
-        popupFineMini: "이벤트 조건 충족 시",
-        popupYes: "예, 받을래요!",
-        popupNo: "할인 거절",
-        toastCopied: "복사됨",
-        copyBtn: "복사",
-        adTag: "광고보기"
-      },
-      ja: {
-        topText: "Kingshot チャージ 20%OFF",
-        saveNow: "今すぐ保存",
-        h1: "Kingshot クーポン カウントダウン",
-        h2Active: "有効コード + 次の期限カウントダウン",
-        h2None: "有効コードなし · 最後のコードから:",
-        expiry: "期限:",
-        since: "基準:",
-        codesActive: "有効コード",
-        noActive: "現在有効なコードはありません。",
-        share: "共有",
-        redeem: "交換する",
-        guide: "コードガイド",
-        home: "ホーム",
-        guides: "ガイド",
-        calc: "計算機",
-        days: "日",
-        hours: "時間",
-        minutes: "分",
-        seconds: "秒",
-        popupBig: "20% OFF",
-        popupSub: "初回注文割引",
-        popupHint: "ヒント: 検索欄に <b>#s4qU</b> を入力すると追加報酬があります。",
-        popupFine: "割引チャージリンクにアクセス · クーポンコード入力 · リンクをブックマーク<br>毎月1日抽選 · 毎月15日追加クーポン",
-        popupFineMini: "イベント条件達成時",
-        popupYes: "はい、お願いします！",
-        popupNo: "辞退する",
-        toastCopied: "コピーしました",
-        copyBtn: "コピー",
-        adTag: "広告を見る"
-      },
-      "zh-TW": {
-        topText: "Kingshot 儲值 20% 折扣",
-        saveNow: "立即省錢",
-        h1: "Kingshot 優惠碼倒數",
-        h2Active: "可用代碼 + 下次到期倒數",
-        h2None: "目前無可用代碼 · 距離上次代碼:",
-        expiry: "到期時間:",
-        since: "基準時間:",
-        codesActive: "可用代碼",
-        noActive: "目前沒有可用代碼。",
-        share: "分享",
-        redeem: "前往兌換",
-        guide: "優惠碼指南",
-        home: "首頁",
-        guides: "攻略",
-        calc: "計算機",
-        days: "天",
-        hours: "小時",
-        minutes: "分鐘",
-        seconds: "秒",
-        popupBig: "20% OFF",
-        popupSub: "首單折扣",
-        popupHint: "提示：在搜尋欄輸入 <b>#s4qU</b> 可獲得額外獎勵。",
-        popupFine: "開啟折扣儲值連結 · 輸入優惠碼 · 將連結加入書籤<br>每月1日抽獎 · 每月15日加碼優惠券",
-        popupFineMini: "需符合活動條件",
-        popupYes: "我要優惠！",
-        popupNo: "不要折扣",
-        toastCopied: "已複製",
-        copyBtn: "複製",
-        adTag: "查看廣告"
-      }
-    };
+  en: {
+    topText: "20% Off Kingshot Top-Ups",
+    saveNow: "Save Now",
+    h1: "Kingshot Coupon Countdown",
+    h2Active: "Active codes + next expiry countdown",
+    h2None: "No active codes — time since last code:",
+    expiry: "Expiry Date & Time:",
+    since: "Since:",
+    codesActive: "Active Codes",
+    noActive: "No active codes right now.",
+    share: "Share",
+    redeem: "Redeem",
+    guide: "Top-Up Guide",
+    home: "Home",
+    guides: "Guides",
+    calc: "Calculator",
+    days: "DAYS",
+    hours: "HOURS",
+    minutes: "MINUTES",
+    seconds: "SECONDS",
+    popupBig: "YOU'VE GOT<br>20% OFF",
+    popupSub: "YOUR FIRST ORDER",
+    popupHint: "Tip: Type <b>#s4qU</b> in the search box for a little extra reward.",
+    popupFine: "Open the discounted top-up link, enter the coupon code, and bookmark the link.<br>Join the monthly draw (1st) · Get extra coupons on the 15th (ongoing)",
+    popupFineMini: "Benefits apply when event conditions are met.",
+    popupYes: "YES, PLEASE!",
+    popupNo: "DECLINE DISCOUNT",
+    toastCopied: "Copied",
+    copyBtn: "Copy",
+    adTag: "VIEW AD"
+  },
+  ko: {
+    topText: "킹샷 충전 20% 할인",
+    saveNow: "지금 할인받기",
+    h1: "킹샷 쿠폰 카운트다운",
+    h2Active: "활성 쿠폰 + 다음 만료 카운트다운",
+    h2None: "활성 쿠폰 없음 · 마지막 쿠폰 이후:",
+    expiry: "만료 시각:",
+    since: "기준 시각:",
+    codesActive: "현재 활성 쿠폰",
+    noActive: "현재 활성 쿠폰이 없습니다.",
+    share: "공유",
+    redeem: "교환하러가기",
+    guide: "할인 충전 가이드",
+    home: "홈",
+    guides: "가이드",
+    calc: "계산기",
+    days: "일",
+    hours: "시간",
+    minutes: "분",
+    seconds: "초",
+    popupBig: "20% OFF",
+    popupSub: "첫 주문 할인",
+    popupHint: "힌트: 검색창에 <b>#s4qU</b> 를 입력하면 추가 보상이 있어요.",
+    popupFine: "할인 충전 링크 접속 · 쿠폰 코드 입력 · 링크 즐겨찾기<br>매달 1일 추첨 · 매달 15일 추가 쿠폰",
+    popupFineMini: "이벤트 조건 충족 시",
+    popupYes: "예, 받을래요!",
+    popupNo: "할인 거절",
+    toastCopied: "복사됨",
+    copyBtn: "복사",
+    adTag: "광고보기"
+  },
+  ja: {
+    topText: "Kingshot チャージ 20%OFF",
+    saveNow: "今すぐ保存",
+    h1: "Kingshot クーポン カウントダウン",
+    h2Active: "有効コード + 次の期限カウントダウン",
+    h2None: "有効コードなし · 最後のコードから:",
+    expiry: "期限:",
+    since: "基準:",
+    codesActive: "有効コード",
+    noActive: "現在有効なコードはありません。",
+    share: "共有",
+    redeem: "交換する",
+    guide: "割引チャージガイド",
+    home: "ホーム",
+    guides: "ガイド",
+    calc: "計算機",
+    days: "日",
+    hours: "時間",
+    minutes: "分",
+    seconds: "秒",
+    popupBig: "20% OFF",
+    popupSub: "初回注文割引",
+    popupHint: "ヒント: 検索欄に <b>#s4qU</b> を入力すると追加報酬があります。",
+    popupFine: "割引チャージリンクにアクセス · クーポンコード入力 · リンクをブックマーク<br>毎月1日抽選 · 毎月15日追加クーポン",
+    popupFineMini: "イベント条件達成時",
+    popupYes: "はい、お願いします！",
+    popupNo: "辞退する",
+    toastCopied: "コピーしました",
+    copyBtn: "コピー",
+    adTag: "広告を見る"
+  },
+  "zh-TW": {
+    topText: "Kingshot 儲值 20% 折扣",
+    saveNow: "立即省錢",
+    h1: "Kingshot 優惠碼倒數",
+    h2Active: "可用代碼 + 下次到期倒數",
+    h2None: "目前無可用代碼 · 距離上次代碼:",
+    expiry: "到期時間:",
+    since: "基準時間:",
+    codesActive: "可用代碼",
+    noActive: "目前沒有可用代碼。",
+    share: "分享",
+    redeem: "前往兌換",
+    guide: "優惠儲值指南",
+    home: "首頁",
+    guides: "攻略",
+    calc: "計算機",
+    days: "天",
+    hours: "小時",
+    minutes: "分鐘",
+    seconds: "秒",
+    popupBig: "20% OFF",
+    popupSub: "首單折扣",
+    popupHint: "提示：在搜尋欄輸入 <b>#s4qU</b> 可獲得額外獎勵。",
+    popupFine: "開啟折扣儲值連結 · 輸入優惠碼 · 將連結加入書籤<br>每月1日抽獎 · 每月15日加碼優惠券",
+    popupFineMini: "需符合活動條件",
+    popupYes: "我要優惠！",
+    popupNo: "不要折扣",
+    toastCopied: "已複製",
+    copyBtn: "複製",
+    adTag: "查看廣告"
+  }
+};
 
     function detectLang(){
-  const sp = new URLSearchParams(location.search);
-  const raw = (sp.get('lang') || '').trim();
-  const low = raw.toLowerCase();
+      const sp = new URLSearchParams(location.search);
+      const raw = (sp.get('lang') || '').trim();
+      const low = raw.toLowerCase();
 
-  // normalize TW aliases
-  let q = raw;
-  if (low === 'tw' || low === 'zh-tw' || low === 'zh_tw') q = 'zh-TW';
+      let q = raw;
+      if (low === 'tw' || low === 'zh-tw' || low === 'zh_tw') q = 'zh-TW';
 
-  // ✅ URL에 lang가 "있으면" : 지원값만 허용, 아니면 EN 강제
-  if (raw) {
-    if (q === 'ko' || q === 'en' || q === 'ja' || q === 'zh-TW') return q;
-    return 'en';
-  }
+      if (raw) {
+        if (q === 'ko' || q === 'en' || q === 'ja' || q === 'zh-TW') return q;
+        return 'en';
+      }
 
-  // URL에 lang가 "없을 때만" saved/nav 사용
-  let saved = null;
-  try { saved = localStorage.getItem('lang'); } catch(_){}
-  if (saved) {
-    const sLow = String(saved).trim().toLowerCase();
-    let s = saved;
-    if (sLow === 'tw' || sLow === 'zh-tw' || sLow === 'zh_tw') s = 'zh-TW';
-    if (s === 'ko' || s === 'en' || s === 'ja' || s === 'zh-TW') return s;
-  }
+      let saved = null;
+      try { saved = localStorage.getItem('lang'); } catch(_){}
+      if (saved) {
+        const sLow = String(saved).trim().toLowerCase();
+        let s = saved;
+        if (sLow === 'tw' || sLow === 'zh-tw' || sLow === 'zh_tw') s = 'zh-TW';
+        if (s === 'ko' || s === 'en' || s === 'ja' || s === 'zh-TW') return s;
+      }
 
-  const nav = (navigator.language || 'en').toLowerCase();
-  if (nav.startsWith('ko')) return 'ko';
-  if (nav.startsWith('ja')) return 'ja';
-  if (nav.includes('zh') && (nav.includes('tw') || nav.includes('hk'))) return 'zh-TW';
-  return 'en';
-}
+      const nav = (navigator.language || 'en').toLowerCase();
+      if (nav.startsWith('ko')) return 'ko';
+      if (nav.startsWith('ja')) return 'ja';
+      if (nav.includes('zh') && (nav.includes('tw') || nav.includes('hk'))) return 'zh-TW';
+      return 'en';
+    }
 
     const LANG = detectLang();
     const T = UI[LANG] || UI.en;
@@ -936,8 +943,14 @@
 
     if (dom.codesTitle) dom.codesTitle.textContent = T.codesActive;
     if (dom.btnShare) dom.btnShare.textContent = T.share;
-    if (dom.btnRedeem) { dom.btnRedeem.textContent = T.redeem; dom.btnRedeem.href = REDEEM_URL; }
-    if (dom.btnGuide) dom.btnGuide.textContent = T.guide;
+    if (dom.btnRedeem) {
+      dom.btnRedeem.textContent = T.redeem;
+      dom.btnRedeem.href = REDEEM_URL;
+    }
+    if (dom.btnGuide) {
+      dom.btnGuide.textContent = T.guide;
+      dom.btnGuide.href = GUIDE_LINKS[LANG] || GUIDE_LINKS.en;
+    }
 
     if (dom.lnkHome) dom.lnkHome.textContent = T.home;
     if (dom.lnkGuides) dom.lnkGuides.textContent = T.guides;
@@ -1236,7 +1249,6 @@
       }
     })();
 
-    // POPUP (28s, session once)
     const POP_KEY = "kd:discountPopupShown:session:v1";
     const popBack = document.getElementById("popBack");
     const popClose = document.getElementById("popClose");

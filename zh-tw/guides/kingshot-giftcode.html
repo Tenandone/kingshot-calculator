@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-TW">
+<html lang="zh-Hant" dir="ltr">
 <head>
   <base href="/" />
   <meta charset="utf-8" />
@@ -64,7 +64,7 @@
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,"Noto Sans TC","Noto Sans",Arial,sans-serif;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,"Noto Sans TC","Microsoft JhengHei","PingFang TC","Noto Sans",Arial,sans-serif;
       color:var(--text);
       background:var(--bg);
     }
@@ -434,7 +434,7 @@
     html[lang^="ko" i] .langx-ko{display:inline !important}
     html[lang^="en" i] .langx-en{display:inline !important}
     html[lang^="ja" i] .langx-ja{display:inline !important}
-    html[lang="zh-TW" i] .langx-zh-TW{display:inline !important}
+    html[lang^="zh-Hant" i] .langx-zh-TW{display:inline !important}
     html:not([lang]) .langx-ko{display:inline !important}
 
     @media (max-width:980px){
@@ -443,12 +443,25 @@
     }
 
     @media (max-width:900px){
-      header.top{position:sticky;top:0;z-index:40}
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
       nav.section-tabs{
         display:flex;
         position:sticky;
         top:var(--header-h);
         z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
       }
       .hero-cta,
       .countdown-banner-link{
@@ -464,7 +477,6 @@
     }
 
     @media (max-width:640px){
-      .wrap{padding:14px 12px 56px}
       h1{font-size:26px}
       section{padding:14px}
       .grid{grid-template-columns:1fr}
@@ -479,8 +491,11 @@
     "@type":"Article",
     "headline":"Kingshot 禮包碼・最新兌換碼、輸入方式、過期碼紀錄整理",
     "description":"Kingshot 最新禮包碼、兌換碼輸入方式、過期碼紀錄與官方兌換頁面連結整理在同一頁。",
-    "inLanguage":"zh-TW",
-    "mainEntityOfPage":"https://kingshotdata.kr/zh-tw/guides/kingshot-giftcode.html",
+    "inLanguage":"zh-Hant",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/zh-tw/guides/kingshot-giftcode.html"
+    },
     "author":{"@type":"Organization","name":"Kingshot Data"},
     "publisher":{
       "@type":"Organization",
@@ -525,10 +540,10 @@
       </div>
 
       <nav class="lang" aria-label="Language">
-        <a data-router-ignore="true" href="/ko/guides/kingshot-giftcode.html">KO</a>
-        <a data-router-ignore="true" href="/en/guides/kingshot-giftcode.html">EN</a>
-        <a data-router-ignore="true" href="/ja/guides/kingshot-giftcode.html">JA</a>
-        <a data-router-ignore="true" href="/zh-tw/guides/kingshot-giftcode.html" aria-current="page">ZH-TW</a>
+        <a href="/en/guides/kingshot-giftcode.html">EN</a>
+        <a href="/ko/guides/kingshot-giftcode.html">KO</a>
+        <a href="/ja/guides/kingshot-giftcode.html">JA</a>
+        <a href="/zh-tw/guides/kingshot-giftcode.html" aria-current="page">ZH-TW</a>
       </nav>
     </header>
 
@@ -542,16 +557,16 @@
     <main id="main">
       <div class="crumbs">
         <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
-        <a href="/zh-tw/guides">指南</a> <span class="muted">›</span>
+        <a href="/zh-tw/guides/">指南</a> <span class="muted">›</span>
         <span>禮包碼</span>
       </div>
 
-      <div class="hero" id="overview">
+      <div class="hero anchor" id="overview">
         <div>
-          <h1 id="h1">Kingshot 禮包碼・最新兌換碼、輸入方式、過期碼紀錄整理</h1>
-          <p class="sub" id="lead">官方兌換頁面連結、最新代碼、已過期活動碼紀錄、輸入方式與常見排錯一次整理完成。</p>
+          <h1>Kingshot 禮包碼・最新兌換碼、輸入方式、過期碼紀錄整理</h1>
+          <p class="sub">官方兌換頁面連結、最新代碼、已過期活動碼紀錄、輸入方式與常見排錯一次整理完成。</p>
 
-          <div class="quote" id="hero-quote">
+          <div class="quote">
             只整理已確認的最新代碼放在頁面上方，狀態不明的代碼不會列入有效清單。
           </div>
 
@@ -564,101 +579,100 @@
 
           <a
             class="countdown-banner-link"
-            id="countdownBannerLink"
             href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=zh-tw"
             aria-label="前往 Kingshot 代碼倒數頁面"
           >
             <div class="countdown-banner-copy">
-              <div class="countdown-banner-kicker" id="countdown-kicker">LIVE COUPON TIMER</div>
-              <h2 class="countdown-banner-title" id="countdown-title">Kingshot 代碼倒數計時</h2>
-              <p class="countdown-banner-desc" id="countdown-desc">即時查看目前可用代碼與剩餘有效時間。</p>
+              <div class="countdown-banner-kicker">LIVE COUPON TIMER</div>
+              <h2 class="countdown-banner-title">Kingshot 代碼倒數計時</h2>
+              <p class="countdown-banner-desc">即時查看目前可用代碼與剩餘有效時間。</p>
             </div>
-            <span class="countdown-banner-cta" id="countdown-cta">查看倒數 →</span>
+            <span class="countdown-banner-cta">查看倒數 →</span>
           </a>
 
           <div class="status-bar">
-            <span class="badge new" id="new-badge">NEW</span>
-            <span class="note-txt" id="new-text">一旦確認有最新代碼，這個頁面會立即更新。</span>
+            <span class="badge new">NEW</span>
+            <span class="note-txt">一旦確認有最新代碼，這個頁面會立即更新。</span>
           </div>
         </div>
       </div>
 
       <section>
         <div class="policy-box">
-          <p><strong id="last-checked-label">最後確認</strong>: <span id="lastCheckedValue">2026-03-15 09:20 KST</span></p>
-          <p id="policy-1">本頁僅將已確認的最新代碼顯示在上方。</p>
-          <p id="policy-2">狀態不明的代碼不會列入有效清單，已過期活動碼僅作為紀錄保存。</p>
-          <p id="policy-3">代碼過期時間以 UTC 為準，最後確認時間之後狀態仍可能變動。</p>
+          <p><strong>最後確認</strong>: <span>2026-03-15 09:20 KST</span></p>
+          <p>本頁僅將已確認的最新代碼顯示在上方。</p>
+          <p>狀態不明的代碼不會列入有效清單，已過期活動碼僅作為紀錄保存。</p>
+          <p>代碼過期時間以 UTC 為準，最後確認時間之後狀態仍可能變動。</p>
         </div>
 
         <div class="intro-box" style="margin-top:14px;">
-          <p id="intro-1">這個頁面優先整理<strong>目前可使用的 Kingshot 代碼</strong>，同時也保留<strong>已過期的紀念／活動代碼紀錄</strong>，方便一起查看。</p>
-          <p id="intro-2">讓從搜尋進來的使用者能快速確認代碼狀態，並直接前往官方兌換頁面。</p>
+          <p>這個頁面優先整理<strong>目前可使用的 Kingshot 代碼</strong>，同時也保留<strong>已過期的紀念／活動代碼紀錄</strong>，方便一起查看。</p>
+          <p>讓從搜尋進來的使用者能快速確認代碼狀態，並直接前往官方兌換頁面。</p>
         </div>
       </section>
 
       <section>
         <div class="hero-cta" aria-label="Gift code quick actions">
           <div>
-            <strong id="hero-title">從這裡輸入代碼</strong><br>
-            <span class="note-txt" id="hero-desc">前往官方兌換頁面，直接輸入代碼兌換。</span>
+            <strong>從這裡輸入代碼</strong><br>
+            <span class="note-txt">前往官方兌換頁面，直接輸入代碼兌換。</span>
           </div>
           <a class="cta" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow" aria-label="Open Kingshot gift code page">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v8a2 2 0 0 1-2 2h-5v-10h7zM11 22H6a2 2 0 0 1-2-2v-8h7v10zM21 8h-3.17A3 3 0 1 0 12 6a3 3 0 1 0-5.83 2H3a1 1 0 0 0 0 2h18a1 1 0 1 0 0-2ZM9 7a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
-            <span id="cta-text">前往官方兌換頁</span>
+            <span>前往官方兌換頁</span>
           </a>
         </div>
       </section>
 
       <section id="current-codes" aria-live="polite" aria-busy="true">
-        <h2 id="current-title">目前可使用的代碼</h2>
+        <h2>目前可使用的代碼</h2>
         <div id="couponGrid" class="grid">載入中…</div>
-        <p class="note-txt" id="current-note">※ 部分代碼可能會依地區、伺服器或帳號狀態而限制使用。</p>
+        <p class="note-txt">※ 部分代碼可能會依地區、伺服器或帳號狀態而限制使用。</p>
       </section>
 
       <section id="how-to-use">
-        <h2 id="how-title">輸入方式</h2>
+        <h2>輸入方式</h2>
         <ol>
-          <li id="how-1">前往遊戲內的<strong>個人資料 → 設定 → 禮包碼兌換</strong>，或進入官方兌換頁面。</li>
-          <li id="how-2">正確輸入禮包碼。</li>
-          <li id="how-3">到信箱領取獎勵。</li>
+          <li>前往遊戲內的<strong>個人資料 → 設定 → 禮包碼兌換</strong>，或進入官方兌換頁面。</li>
+          <li>正確輸入禮包碼。</li>
+          <li>到信箱領取獎勵。</li>
         </ol>
-        <p class="note-txt" id="how-tip">Tip：可先按複製按鈕，再貼到輸入欄，會更方便。</p>
+        <p class="note-txt">Tip：可先按複製按鈕，再貼到輸入欄，會更方便。</p>
       </section>
 
       <section class="quickcheck" aria-label="Quick troubleshooting">
-        <h2 id="fix-title">代碼無法使用時的快速排查</h2>
-        <p class="note-txt" id="fix-lead">照著下面順序檢查，大多數情況都能解決。</p>
+        <h2>代碼無法使用時的快速排查</h2>
+        <p class="note-txt">照著下面順序檢查，大多數情況都能解決。</p>
         <ul>
-          <li id="fix-1"><strong>請完整輸入代碼</strong>，並確認<strong>大小寫</strong>是否正確。</li>
-          <li id="fix-2"><strong>確認是否已過期（UTC 基準）</strong>。</li>
-          <li id="fix-3"><strong>確認是否有限制每個帳號只能使用一次</strong>。</li>
-          <li id="fix-4"><strong>有些代碼會有城市中心等級條件</strong>。</li>
+          <li><strong>請完整輸入代碼</strong>，並確認<strong>大小寫</strong>是否正確。</li>
+          <li><strong>確認是否已過期（UTC 基準）</strong>。</li>
+          <li><strong>確認是否有限制每個帳號只能使用一次</strong>。</li>
+          <li><strong>有些代碼會有城市中心等級條件</strong>。</li>
         </ul>
       </section>
 
       <section class="topup-box" aria-label="Top-up conversion section">
-        <h2 id="topup-title">儲值前也值得先看的指南</h2>
-        <p id="topup-desc">確認代碼後，如果想更有效率地規劃，也可以一起查看儲值指南與折扣儲值頁面。</p>
+        <h2>儲值前也值得先看的指南</h2>
+        <p>確認代碼後，如果想更有效率地規劃，也可以一起查看儲值指南與折扣儲值頁面。</p>
         <div class="topup-actions">
-          <a class="btn btn-primary" id="topup-guide-btn" href="/zh-tw/guides/topup-guide.html">查看儲值指南</a>
-          <a class="btn" id="topup-direct-btn" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener nofollow">前往折扣儲值</a>
+          <a class="btn btn-primary" href="/zh-tw/guides/topup-guide.html">查看儲值指南</a>
+          <a class="btn" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener nofollow">前往折扣儲值</a>
         </div>
       </section>
 
       <section id="commemorative-codes">
-        <h2 id="comm-title">過去活動代碼紀錄（目前已過期）</h2>
-        <p class="note-txt" id="comm-note">這些代碼曾在 Facebook、Discord 與各類紀念活動中公開。以下代碼目前大多已過期，保留僅供查詢與紀錄使用。</p>
+        <h2>過去活動代碼紀錄（目前已過期）</h2>
+        <p class="note-txt">這些代碼曾在 Facebook、Discord 與各類紀念活動中公開。以下代碼目前大多已過期，保留僅供查詢與紀錄使用。</p>
         <div class="grid" id="commGrid"></div>
       </section>
 
       <section class="related-wrap" aria-label="Related guides">
-        <h2 id="related-title">查看代碼後最常一起閱讀的指南</h2>
-        <p class="related-lead" id="related-lead">不只看禮包碼，也可以順便查看接下來最常用到的攻略與儲值指南。</p>
+        <h2>查看代碼後最常一起閱讀的指南</h2>
+        <p class="related-lead">不只看禮包碼，也可以順便查看接下來最常用到的攻略與儲值指南。</p>
 
         <div class="guides-list">
-          <section class="g-block" id="transfer" data-href="/zh-tw/guides/transfer.html">
-            <a class="g-link" data-router-ignore="true" href="/zh-tw/guides/transfer.html" aria-label="Open Kingdom Transfer Guide">
+          <section class="g-block">
+            <a class="g-link" href="/zh-tw/guides/transfer.html" aria-label="Open Kingdom Transfer Guide">
               <div class="tile-icon" aria-hidden="true">
                 <img src="/img/guide/transfer.webp" alt="" loading="lazy" decoding="async">
                 <div class="tile-fallback">TR</div>
@@ -674,8 +688,8 @@
             </a>
           </section>
 
-          <section class="g-block" id="beginners" data-href="/zh-tw/guides/kingshot-f2p-route-g4.html">
-            <a class="g-link" data-router-ignore="true" href="/zh-tw/guides/kingshot-f2p-route-g4.html" aria-label="Open Beginner Guide">
+          <section class="g-block">
+            <a class="g-link" href="/zh-tw/guides/kingshot-f2p-route-g4.html" aria-label="Open Beginner Guide">
               <div class="tile-icon" aria-hidden="true">
                 <img src="/img/guide/double-time-decree-in-kingshot.webp" alt="" loading="lazy" decoding="async">
                 <div class="tile-fallback">BG</div>
@@ -691,8 +705,8 @@
             </a>
           </section>
 
-          <section class="g-block" id="viking" data-href="/zh-tw/guides/viking.html">
-            <a class="g-link" data-router-ignore="true" href="/zh-tw/guides/viking.html" aria-label="Open Viking Guide">
+          <section class="g-block">
+            <a class="g-link" href="/zh-tw/guides/viking.html" aria-label="Open Viking Guide">
               <div class="tile-icon" aria-hidden="true">
                 <img src="/img/guide/viking-vengeance-event.webp" alt="" loading="lazy" decoding="async">
                 <div class="tile-fallback">VIK</div>
@@ -708,8 +722,8 @@
             </a>
           </section>
 
-          <section class="g-block" id="ruins" data-href="/zh-tw/guides/kingshot-ruins-tip.html">
-            <a class="g-link" data-router-ignore="true" href="/zh-tw/guides/kingshot-ruins-tip.html" aria-label="Open Ruins Guide">
+          <section class="g-block">
+            <a class="g-link" href="/zh-tw/guides/kingshot-ruins-tip.html" aria-label="Open Ruins Guide">
               <div class="tile-icon" aria-hidden="true">
                 <img src="/img/guide/eternitys-reach-guide.webp" alt="" loading="lazy" decoding="async">
                 <div class="tile-fallback">RU</div>
@@ -725,8 +739,8 @@
             </a>
           </section>
 
-          <section class="g-block" id="hallofgovernors" data-href="/zh-tw/guides/hallofgovernors.html">
-            <a class="g-link" data-router-ignore="true" href="/zh-tw/guides/hallofgovernors.html" aria-label="Open Hall of Governors Guide">
+          <section class="g-block">
+            <a class="g-link" href="/zh-tw/guides/hallofgovernors.html" aria-label="Open Hall of Governors Guide">
               <div class="tile-icon" aria-hidden="true">
                 <img src="/img/guide/hallofgovernors.webp" alt="" loading="lazy" decoding="async">
                 <div class="tile-fallback">H</div>
@@ -742,8 +756,8 @@
             </a>
           </section>
 
-          <section class="g-block" id="topup-guide" data-href="/zh-tw/guides/topup-guide.html">
-            <a class="g-link" data-router-ignore="true" href="/zh-tw/guides/topup-guide.html" aria-label="Open Top-Up Guide">
+          <section class="g-block">
+            <a class="g-link" href="/zh-tw/guides/topup-guide.html" aria-label="Open Top-Up Guide">
               <div class="tile-icon" aria-hidden="true">
                 <img src="/img/guide/ten.png" alt="" loading="lazy" decoding="async">
                 <div class="tile-fallback">TOP</div>
@@ -762,26 +776,26 @@
       </section>
 
       <section class="faq" id="faq" aria-label="FAQ">
-        <h2 id="faq-title">常見問題</h2>
+        <h2>常見問題</h2>
 
         <details>
-          <summary id="faq-q1">有永久有效的代碼嗎？</summary>
-          <div class="note-txt" id="faq-a1">本頁僅整理狀態明確確認過的有效代碼與已過期活動碼紀錄。狀態不明的代碼不會列入有效清單。</div>
+          <summary>有永久有效的代碼嗎？</summary>
+          <div class="note-txt">本頁僅整理狀態明確確認過的有效代碼與已過期活動碼紀錄。狀態不明的代碼不會列入有效清單。</div>
         </details>
 
         <details>
-          <summary id="faq-q2">代碼無法使用。</summary>
-          <div class="note-txt" id="faq-a2">請確認代碼是否完整輸入並檢查大小寫，也請同時確認是否已過期（UTC）、是否有每個帳號只能使用一次的限制，以及城市中心等級條件。</div>
+          <summary>代碼無法使用。</summary>
+          <div class="note-txt">請確認代碼是否完整輸入並檢查大小寫，也請同時確認是否已過期（UTC）、是否有每個帳號只能使用一次的限制，以及城市中心等級條件。</div>
         </details>
 
         <details>
-          <summary id="faq-q3">新的禮包碼多久會出一次？</summary>
-          <div class="note-txt" id="faq-a3">發布時間不固定，確認後會立即更新到此頁。建議加入書籤，方便最快查看。</div>
+          <summary>新的禮包碼多久會出一次？</summary>
+          <div class="note-txt">發布時間不固定，確認後會立即更新到此頁。建議加入書籤，方便最快查看。</div>
         </details>
 
         <details>
-          <summary id="faq-q4">為什麼要保留已過期活動碼？</summary>
-          <div class="note-txt" id="faq-a4">這是作為過去活動發放代碼的紀錄。是否再次發放僅以官方公告為準，紀錄區則保留作為查詢與參考用途。</div>
+          <summary>為什麼要保留已過期活動碼？</summary>
+          <div class="note-txt">這是作為過去活動發放代碼的紀錄。是否再次發放僅以官方公告為準，紀錄區則保留作為查詢與參考用途。</div>
         </details>
       </section>
 
@@ -794,99 +808,17 @@
   </div>
 
   <script>
-    const PAGE_LANG = "zh-TW";
-    const COUPON_TIMER_LANG = "zh-tw";
-
-    const LANG_DATA = {
-      "zh-TW": {
-        metaTitle: "Kingshot 禮包碼・最新兌換碼、輸入方式、過期碼紀錄整理",
-        metaDesc: "Kingshot 最新禮包碼與兌換碼輸入方式整理在同一頁。可查看目前可用代碼、已過期活動碼紀錄、官方兌換頁面連結，以及常見問題與排錯說明。",
-        ogTitle: "Kingshot 禮包碼・最新兌換碼、輸入方式、過期碼紀錄整理",
-        ogDesc: "一次查看 Kingshot 最新禮包碼、已過期活動碼紀錄、官方兌換方式與 FAQ。",
-        twTitle: "Kingshot 禮包碼・最新兌換碼、輸入方式、過期碼紀錄整理",
-        twDesc: "查看 Kingshot 最新禮包碼、輸入方式、過期活動碼紀錄與官方兌換連結。",
-        h1: "Kingshot 禮包碼・最新兌換碼、輸入方式、過期碼紀錄整理",
-        lead: "官方兌換頁面連結、最新代碼、已過期活動碼紀錄、輸入方式與常見排錯一次整理完成。",
-        heroQuote: "只整理已確認的最新代碼放在頁面上方，狀態不明的代碼不會列入有效清單。",
-        countdownKicker: "LIVE COUPON TIMER",
-        countdownTitle: "Kingshot 代碼倒數計時",
-        countdownDesc: "即時查看目前可用代碼與剩餘有效時間。",
-        countdownCta: "查看倒數 →",
-        countdownHref: "https://kingshotdata.kr/tools/coupon-countdown.html?lang=zh-tw",
-        newBadge: "NEW",
-        newText: "一旦確認有最新代碼，這個頁面會立即更新。",
-        lastCheckedLabel: "最後確認",
-        lastCheckedValue: "2026-03-15 09:20 KST",
-        policy1: "本頁僅將已確認的最新代碼顯示在上方。",
-        policy2: "狀態不明的代碼不會列入有效清單，已過期活動碼僅作為紀錄保存。",
-        policy3: "代碼過期時間以 UTC 為準，最後確認時間之後狀態仍可能變動。",
-        intro1: "這個頁面優先整理<strong>目前可使用的 Kingshot 代碼</strong>，同時也保留<strong>已過期的紀念／活動代碼紀錄</strong>，方便一起查看。",
-        intro2: "讓從搜尋進來的使用者能快速確認代碼狀態，並直接前往官方兌換頁面。",
-        heroTitle: "從這裡輸入代碼",
-        heroDesc: "前往官方兌換頁面，直接輸入代碼兌換。",
-        ctaText: "前往官方兌換頁",
-        currentTitle: "目前可使用的代碼",
-        currentNote: "※ 部分代碼可能會依地區、伺服器或帳號狀態而限制使用。",
-        howTitle: "輸入方式",
-        how1: "前往遊戲內的<strong>個人資料 → 設定 → 禮包碼兌換</strong>，或進入官方兌換頁面。",
-        how2: "正確輸入禮包碼。",
-        how3: "到信箱領取獎勵。",
-        howTip: "Tip：可先按複製按鈕，再貼到輸入欄，會更方便。",
-        fixTitle: "代碼無法使用時的快速排查",
-        fixLead: "照著下面順序檢查，大多數情況都能解決。",
-        fix1: "<strong>請完整輸入代碼</strong>，並確認<strong>大小寫</strong>是否正確。",
-        fix2: "<strong>確認是否已過期（UTC 基準）</strong>。",
-        fix3: "<strong>確認是否有限制每個帳號只能使用一次</strong>。",
-        fix4: "<strong>有些代碼會有城市中心等級條件</strong>。",
-        topupTitle: "儲值前也值得先看的指南",
-        topupDesc: "確認代碼後，如果想更有效率地規劃，也可以一起查看儲值指南與折扣儲值頁面。",
-        topupGuideBtn: "查看儲值指南",
-        topupDirectBtn: "前往折扣儲值",
-        commTitle: "過去活動代碼紀錄（目前已過期）",
-        commNote: "這些代碼曾在 Facebook、Discord 與各類紀念活動中公開。以下代碼目前大多已過期，保留僅供查詢與紀錄使用。",
-        relatedTitle: "查看代碼後最常一起閱讀的指南",
-        relatedLead: "不只看禮包碼，也可以順便查看接下來最常用到的攻略與儲值指南。",
-        faqTitle: "常見問題",
-        faqQ1: "有永久有效的代碼嗎？",
-        faqA1: "本頁僅整理狀態明確確認過的有效代碼與已過期活動碼紀錄。狀態不明的代碼不會列入有效清單。",
-        faqQ2: "代碼無法使用。",
-        faqA2: "請確認代碼是否完整輸入並檢查大小寫，也請同時確認是否已過期（UTC）、是否有每個帳號只能使用一次的限制，以及城市中心等級條件。",
-        faqQ3: "新的禮包碼多久會出一次？",
-        faqA3: "發布時間不固定，確認後會立即更新到此頁。建議加入書籤，方便最快查看。",
-        faqQ4: "為什麼要保留已過期活動碼？",
-        faqA4: "這是作為過去活動發放代碼的紀錄。是否再次發放僅以官方公告為準，紀錄區則保留作為查詢與參考用途。",
-        copy: "複製",
-        copied: "已複製",
-        redeem: "兌換",
-        activeBadge: "可使用",
-        expiredBadge: "已過期",
-        until: "到期時間",
-        empty: "目前沒有可顯示的代碼。",
-        loadFail: "無法載入代碼資料。請確認 /data/coupons.json 路徑。",
-        loading: "載入中…"
-      }
-    };
-
-    function stripHtml(html){
-      const div = document.createElement("div");
-      div.innerHTML = String(html || "");
-      return (div.textContent || "").trim();
-    }
-
-    function setFaqJsonLd(t){
-      const json = {
-        "@context":"https://schema.org",
-        "@type":"FAQPage",
-        "mainEntity":[
-          {"@type":"Question","name":t.faqQ1,"acceptedAnswer":{"@type":"Answer","text":stripHtml(t.faqA1)}},
-          {"@type":"Question","name":t.faqQ2,"acceptedAnswer":{"@type":"Answer","text":stripHtml(t.faqA2)}},
-          {"@type":"Question","name":t.faqQ3,"acceptedAnswer":{"@type":"Answer","text":stripHtml(t.faqA3)}},
-          {"@type":"Question","name":t.faqQ4,"acceptedAnswer":{"@type":"Answer","text":stripHtml(t.faqA4)}}
-        ]
-      };
-      const tag = document.getElementById("faq-jsonld");
-      if (tag) tag.textContent = JSON.stringify(json);
-    }
+    const COMMEMORATIVE_CODES = [
+      ["JackKaoAndKS", "紀念活動代碼 · 目前已過期"],
+      ["KSFB150K", "Facebook 活動代碼 · 目前已過期"],
+      ["KSFB200K", "Facebook 活動代碼 · 目前已過期"],
+      ["KSDC100K", "Discord 紀念代碼 · 目前已過期"],
+      ["KSFB300K", "Facebook 活動代碼 · 目前已過期"],
+      ["WEHIT400", "紀念活動代碼 · 目前已過期"],
+      ["WEHIT1K", "紀念活動代碼 · 目前已過期"],
+      ["tgs2025ks1st", "紀念活動代碼 · 目前已過期"],
+      ["KS2025award", "紀念活動代碼 · 目前已過期"]
+    ];
 
     function safeText(s){ return String(s ?? "").trim(); }
 
@@ -946,26 +878,13 @@
       }
     }
 
-    const COMMEMORATIVE_CODES = [
-      ["JackKaoAndKS", "紀念活動代碼 · 目前已過期"],
-      ["KSFB150K", "Facebook 活動代碼 · 目前已過期"],
-      ["KSFB200K", "Facebook 活動代碼 · 目前已過期"],
-      ["KSDC100K", "Discord 紀念代碼 · 目前已過期"],
-      ["KSFB300K", "Facebook 活動代碼 · 目前已過期"],
-      ["WEHIT400", "紀念活動代碼 · 目前已過期"],
-      ["WEHIT1K", "紀念活動代碼 · 目前已過期"],
-      ["tgs2025ks1st", "紀念活動代碼 · 目前已過期"],
-      ["KS2025award", "紀念活動代碼 · 目前已過期"]
-    ];
-
     function makeArchiveCard(code, label){
-      const t = LANG_DATA[PAGE_LANG];
       const card = document.createElement("div");
       card.className = "card expired";
       card.innerHTML = `
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <div class="code">${escapeHTML(code)}</div>
-          <span class="badge expired">${escapeHTML(t.expiredBadge)}</span>
+          <span class="badge expired">已過期</span>
         </div>
         <div class="until">${escapeHTML(label)}</div>
       `;
@@ -982,7 +901,6 @@
     }
 
     function renderCodes(active){
-      const t = LANG_DATA[PAGE_LANG];
       const grid = document.getElementById("couponGrid");
       if (!grid) return;
       grid.innerHTML = "";
@@ -992,7 +910,7 @@
         const empty = document.createElement("div");
         empty.className = "note-txt";
         empty.style.gridColumn = "1 / -1";
-        empty.textContent = t.empty;
+        empty.textContent = "目前沒有可顯示的代碼。";
         grid.appendChild(empty);
         return;
       }
@@ -1005,20 +923,20 @@
         card.innerHTML = `
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
             <div class="code">${escapeHTML(c.code || "")}</div>
-            <span class="badge active">${escapeHTML(t.activeBadge)}</span>
+            <span class="badge active">可使用</span>
           </div>
-          <div class="until">${escapeHTML(t.until)}: ${exp ? new Date(exp).toISOString().replace("T"," ").slice(0,16) + " UTC" : "—"}</div>
+          <div class="until">到期時間: ${exp ? new Date(exp).toISOString().replace("T"," ").slice(0,16) + " UTC" : "—"}</div>
           ${reward ? `<div class="until">${escapeHTML(reward)}</div>` : ""}
           <div class="actions">
-            <button class="btn" type="button">${escapeHTML(t.copy)}</button>
-            <a class="btn" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow">${escapeHTML(t.redeem)}</a>
+            <button class="btn" type="button">複製</button>
+            <a class="btn" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow">兌換</a>
           </div>
         `;
         const btn = card.querySelector("button");
         btn.addEventListener("click", async () => {
           await copyText(c.code || "");
-          btn.textContent = t.copied;
-          setTimeout(() => { btn.textContent = t.copy; }, 1200);
+          btn.textContent = "已複製";
+          setTimeout(() => { btn.textContent = "複製"; }, 1200);
         });
         grid.appendChild(card);
       });
@@ -1038,71 +956,6 @@
         startAt: x.startAt,
         reward: x.reward
       })).filter(x => x.code);
-    }
-
-    function applyLanguage(lang){
-      const t = LANG_DATA[lang] || LANG_DATA[PAGE_LANG];
-      document.documentElement.setAttribute("lang", PAGE_LANG);
-
-      document.title = t.metaTitle;
-      document.querySelector('meta[name="description"]').setAttribute("content", t.metaDesc);
-      document.querySelector('meta[property="og:title"]').setAttribute("content", t.ogTitle);
-      document.querySelector('meta[property="og:description"]').setAttribute("content", t.ogDesc);
-      document.querySelector('meta[name="twitter:title"]').setAttribute("content", t.twTitle);
-      document.querySelector('meta[name="twitter:description"]').setAttribute("content", t.twDesc);
-
-      document.getElementById("h1").textContent = t.h1;
-      document.getElementById("lead").textContent = t.lead;
-      document.getElementById("hero-quote").textContent = t.heroQuote;
-      document.getElementById("countdown-kicker").textContent = t.countdownKicker;
-      document.getElementById("countdown-title").textContent = t.countdownTitle;
-      document.getElementById("countdown-desc").textContent = t.countdownDesc;
-      document.getElementById("countdown-cta").textContent = t.countdownCta;
-      document.getElementById("countdownBannerLink").href = t.countdownHref;
-      document.getElementById("new-badge").textContent = t.newBadge;
-      document.getElementById("new-text").textContent = t.newText;
-      document.getElementById("last-checked-label").textContent = t.lastCheckedLabel;
-      document.getElementById("lastCheckedValue").textContent = t.lastCheckedValue;
-      document.getElementById("policy-1").textContent = t.policy1;
-      document.getElementById("policy-2").textContent = t.policy2;
-      document.getElementById("policy-3").textContent = t.policy3;
-      document.getElementById("intro-1").innerHTML = t.intro1;
-      document.getElementById("intro-2").textContent = t.intro2;
-      document.getElementById("hero-title").textContent = t.heroTitle;
-      document.getElementById("hero-desc").textContent = t.heroDesc;
-      document.getElementById("cta-text").textContent = t.ctaText;
-      document.getElementById("current-title").textContent = t.currentTitle;
-      document.getElementById("current-note").textContent = t.currentNote;
-      document.getElementById("how-title").textContent = t.howTitle;
-      document.getElementById("how-1").innerHTML = t.how1;
-      document.getElementById("how-2").textContent = t.how2;
-      document.getElementById("how-3").textContent = t.how3;
-      document.getElementById("how-tip").textContent = t.howTip;
-      document.getElementById("fix-title").textContent = t.fixTitle;
-      document.getElementById("fix-lead").textContent = t.fixLead;
-      document.getElementById("fix-1").innerHTML = t.fix1;
-      document.getElementById("fix-2").innerHTML = t.fix2;
-      document.getElementById("fix-3").innerHTML = t.fix3;
-      document.getElementById("fix-4").innerHTML = t.fix4;
-      document.getElementById("topup-title").textContent = t.topupTitle;
-      document.getElementById("topup-desc").textContent = t.topupDesc;
-      document.getElementById("topup-guide-btn").textContent = t.topupGuideBtn;
-      document.getElementById("topup-direct-btn").textContent = t.topupDirectBtn;
-      document.getElementById("comm-title").textContent = t.commTitle;
-      document.getElementById("comm-note").textContent = t.commNote;
-      document.getElementById("related-title").textContent = t.relatedTitle;
-      document.getElementById("related-lead").textContent = t.relatedLead;
-      document.getElementById("faq-title").textContent = t.faqTitle;
-      document.getElementById("faq-q1").textContent = t.faqQ1;
-      document.getElementById("faq-a1").textContent = t.faqA1;
-      document.getElementById("faq-q2").textContent = t.faqQ2;
-      document.getElementById("faq-a2").textContent = t.faqA2;
-      document.getElementById("faq-q3").textContent = t.faqQ3;
-      document.getElementById("faq-a3").textContent = t.faqA3;
-      document.getElementById("faq-q4").textContent = t.faqQ4;
-      document.getElementById("faq-a4").textContent = t.faqA4;
-
-      setFaqJsonLd(t);
     }
 
     (function(){
@@ -1146,7 +999,6 @@
 
       async function init(){
         try{
-          applyLanguage(PAGE_LANG);
           initStickyObservers();
           renderArchive();
 
@@ -1164,7 +1016,7 @@
           const grid = document.getElementById("couponGrid");
           if (grid) {
             grid.setAttribute("aria-busy", "false");
-            grid.innerHTML = `<div class="note-txt" style="grid-column:1 / -1;">${escapeHTML(LANG_DATA[PAGE_LANG].loadFail)}</div>`;
+            grid.innerHTML = `<div class="note-txt" style="grid-column:1 / -1;">無法載入代碼資料。請確認 /data/coupons.json 路徑。</div>`;
           }
         }
       }
