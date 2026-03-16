@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="ko" data-lang="ko">
+<html lang="ko">
 <head>
   <base href="/" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
   <title>KingshotData.kr — Guides</title>
-
+  <!-- GA4 -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
   <script>
@@ -15,6 +15,7 @@
     gtag('js', new Date());
     gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
   </script>
+
 </head>
 
 <body>
@@ -257,8 +258,8 @@
   html[lang^="ja" i] .lang-ja,
   html[data-lang^="ja" i] .lang-ja{ display:inline !important; }
 
-  html[lang^="zh-tw" i] .lang-zh-tw,
-  html[data-lang^="zh-tw" i] .lang-zh-tw{ display:inline !important; }
+  html[lang="zh-TW" i] .lang-zh-TW,
+  html[data-lang="zh-TW" i] .lang-zh-TW{ display:inline !important; }
 
   html:not([lang]):not([data-lang]) .lang-ko{ display:inline !important; }
   </style>
@@ -268,7 +269,7 @@
       <span class="lang lang-ko">가이드</span>
       <span class="lang lang-en">Guides</span>
       <span class="lang lang-ja">ガイド</span>
-      <span class="lang lang-zh-tw">指南</span>
+      <span class="lang lang-zh-TW">指南</span>
     </h1>
 
     <div class="guides-tools">
@@ -281,14 +282,14 @@
         <span class="lang lang-ko">추천</span>
         <span class="lang lang-en">Top</span>
         <span class="lang lang-ja">おすすめ</span>
-        <span class="lang lang-zh-tw">推薦</span>
+        <span class="lang lang-zh-TW">推薦</span>
       </div>
       <div id="guide-reco"></div>
       <div id="guide-reco-empty" class="muted" style="display:none;font-size:13px;">
-        <span class="lang lang-ko">아직 추천 데이터가 없어. 가이드를 몇 번 클릭하면 TOP5가 자동으로 잡혀</span>
-        <span class="lang lang-en">No data yet. Click a few guides and Top 5 will appear.</span>
-        <span class="lang lang-ja">まだデータがありません。いくつかクリックするとTOP5が表示されます</span>
-        <span class="lang lang-zh-tw">暫無資料。點擊幾次後會自動顯示 Top 5</span>
+        <span class="lang lang-ko">아직 추천 데이터가 없어. (가이드를 몇 번 클릭하면 TOP5가 자동으로 잡혀)</span>
+        <span class="lang lang-en">No data yet. (Click a few guides and Top 5 will appear.)</span>
+        <span class="lang lang-ja">まだデータがありません。（いくつかクリックするとTOP5が表示されます）</span>
+        <span class="lang lang-zh-TW">暫無資料。（點擊幾次後會自動顯示Top 5）</span>
       </div>
     </div>
 
@@ -301,231 +302,250 @@
     <div class="guides-list" id="guide-list">
 
       <section class="g-block" id="mobile-topup-guide" data-guide="mobile-topup-guide" data-toc="false"
-        data-title-ko="킹샷 충전 가이드" data-title-en="Kingshot Top-Up Guide" data-title-ja="Kingshot チャージガイド" data-title-zh-tw="Kingshot 儲值指南"
-        data-slug="topup-guide">
-        <a class="g-link" data-router-ignore="true" href="/ko/guides/topup-guide.html" aria-label="Open Kingshot Top-Up Guide">
+        data-title-ko="충전 가이드" data-title-en="Top-Up Guide" data-title-ja="チャージガイド" data-title-zh-tw="儲值指南"
+        data-href="/pages/guides/topup-guide.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/topup-guide.html" aria-label="Open Top-up Guide">
           <div class="tile-icon" aria-hidden="true">
             <img src="/img/guide/topup.png" alt="" loading="lazy" decoding="async">
             <div class="tile-fallback">₩</div>
           </div>
           <div class="tile-title">
             <h2 class="g-title">
-              <span class="lang lang-ko">킹샷 충전 가이드</span>
-              <span class="lang lang-en">Kingshot Top-Up Guide</span>
-              <span class="lang lang-ja">Kingshot チャージガイド</span>
-              <span class="lang lang-zh-tw">Kingshot 儲值指南</span>
+              <span class="lang lang-ko">충전 가이드</span>
+              <span class="lang lang-en">Top-Up Guide</span>
+              <span class="lang lang-ja">チャージガイド</span>
+              <span class="lang lang-zh-TW">儲值指南</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="bear-tier" data-guide="bear-tier" data-toc="false"
+        data-title-ko="곰사냥 티어표" data-title-en="Bear Tier List" data-title-ja="ベアティア表" data-title-zh-tw="狩熊梯隊表"
+        data-href="/pages/guides/kingshot-bear-hunt-tierlist.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/kingshot-bear-hunt-tierlist.html" aria-label="Open Bear Tier List">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/bear-hunt-icon.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">T</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">곰사냥 티어표</span>
+              <span class="lang lang-en">Bear Tier List</span>
+              <span class="lang lang-ja">ベアティア表</span>
+              <span class="lang lang-zh-TW">狩熊梯隊表</span>
             </h2>
           </div>
         </a>
       </section>
 
       <section class="g-block" id="giftcode" data-guide="giftcode" data-toc="true"
-        data-title-ko="킹샷 기프트코드" data-title-en="Kingshot Gift Codes" data-title-ja="Kingshot ギフトコード" data-title-zh-tw="Kingshot 禮包碼"
-        data-slug="kingshot-giftcode">
-        <a class="g-link" data-router-ignore="true" href="/ko/guides/kingshot-giftcode.html" aria-label="Open Kingshot Gift Codes">
+        data-title-ko="기프트코드" data-title-en="Gift Codes" data-title-ja="ギフトコード" data-title-zh-tw="禮包碼"
+        data-href="/pages/guides/kingshot-giftcode.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/kingshot-giftcode.html" aria-label="Open Gift Codes">
           <div class="tile-icon" aria-hidden="true">
             <img src="/img/guide/gift-code-button.webp" alt="" loading="lazy" decoding="async">
             <div class="tile-fallback">C</div>
           </div>
           <div class="tile-title">
             <h2 class="g-title">
-              <span class="lang lang-ko">킹샷 기프트코드</span>
-              <span class="lang lang-en">Kingshot Gift Codes</span>
-              <span class="lang lang-ja">Kingshot ギフトコード</span>
-              <span class="lang lang-zh-tw">Kingshot 禮包碼</span>
+              <span class="lang lang-ko">기프트코드</span>
+              <span class="lang lang-en">Gift Codes</span>
+              <span class="lang lang-ja">ギフトコード</span>
+              <span class="lang lang-zh-TW">禮包碼</span>
             </h2>
           </div>
         </a>
       </section>
 
-      <section class="g-block" id="f2p-guide" data-guide="f2p-guide" data-toc="true"
-        data-title-ko="킹샷 초보자 가이드" data-title-en="Kingshot Beginner Guide" data-title-ja="Kingshot 初心者ガイド" data-title-zh-tw="Kingshot 新手指南"
-        data-slug="kingshot-f2p-guide">
-        <a class="g-link" data-router-ignore="true" href="/ko/guides/kingshot-f2p-guide.html" aria-label="Open Kingshot Beginner Guide">
+      <section class="g-block" id="f2p-route-g4" data-guide="f2p-route-g4" data-toc="true"
+        data-title-ko="F2P 루트" data-title-en="F2P Route" data-title-ja="F2Pルート" data-title-zh-tw="F2P路線"
+        data-href="/pages/guides/kingshot-f2p-route-g4.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/kingshot-f2p-route-g4.html" aria-label="Open F2P Route">
           <div class="tile-icon" aria-hidden="true">
             <img src="/img/guide/double-time-decree-in-kingshot.webp" alt="" loading="lazy" decoding="async">
-            <div class="tile-fallback">G4</div>
+            <div class="tile-fallback">R</div>
           </div>
           <div class="tile-title">
             <h2 class="g-title">
-              <span class="lang lang-ko">킹샷 초보자 가이드</span>
-              <span class="lang lang-en">Kingshot Beginner Guide</span>
-              <span class="lang lang-ja">Kingshot 初心者ガイド</span>
-              <span class="lang lang-zh-tw">Kingshot 新手指南</span>
-            </h2>
-          </div>
-        </a>
-      </section>
-
-      <section class="g-block" id="giant-bear" data-guide="giant-bear" data-toc="true"
-        data-title-ko="킹샷 자이언트 베어 공략" data-title-en="Kingshot Giant Bear Guide" data-title-ja="Kingshot ジャイアントベア攻略" data-title-zh-tw="Kingshot 巨熊攻略"
-        data-slug="kingshot-bearhunt">
-        <a class="g-link" data-router-ignore="true" href="/ko/guides/kingshot-bearhunt.html" aria-label="Open Kingshot Giant Bear Guide">
-          <div class="tile-icon" aria-hidden="true">
-            <img src="/img/guide/bear-hunt-icon.webp" alt="" loading="lazy" decoding="async">
-            <div class="tile-fallback">B</div>
-          </div>
-          <div class="tile-title">
-            <h2 class="g-title">
-              <span class="lang lang-ko">킹샷 자이언트 베어 공략</span>
-              <span class="lang lang-en">Kingshot Giant Bear Guide</span>
-              <span class="lang lang-ja">Kingshot ジャイアントベア攻略</span>
-              <span class="lang lang-zh-tw">Kingshot 巨熊攻略</span>
+              <span class="lang lang-ko">초보자 가이드</span>
+              <span class="lang lang-en">Beginner Guide</span>
+              <span class="lang lang-ja">初心者ガイド</span>
+              <span class="lang lang-zh-TW">新手指南</span>
             </h2>
           </div>
         </a>
       </section>
 
       <section class="g-block" id="ruins" data-guide="ruins" data-toc="true"
-        data-title-ko="킹샷 사라진 유적 공략" data-title-en="Kingshot Lost Ruins Guide" data-title-ja="Kingshot 失われた遺跡攻略" data-title-zh-tw="Kingshot 失落遺跡攻略"
-        data-slug="kingshot-ruins-tip">
-        <a class="g-link" data-router-ignore="true" href="/ko/guides/kingshot-ruins-tip.html" aria-label="Open Kingshot Lost Ruins Guide">
+        data-title-ko="사라진 유적" data-title-en="Lost Ruins" data-title-ja="失われた遺跡" data-title-zh-tw="失落遺跡"
+        data-href="/pages/guides/kingshot-ruins-tip.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/kingshot-ruins-tip.html" aria-label="Open Lost Ruins">
           <div class="tile-icon" aria-hidden="true">
             <img src="/img/guide/eternitys-reach-guide.webp" alt="" loading="lazy" decoding="async">
             <div class="tile-fallback">U</div>
           </div>
           <div class="tile-title">
             <h2 class="g-title">
-              <span class="lang lang-ko">킹샷 사라진 유적 공략</span>
-              <span class="lang lang-en">Kingshot Lost Ruins Guide</span>
-              <span class="lang lang-ja">Kingshot 失われた遺跡攻略</span>
-              <span class="lang lang-zh-tw">Kingshot 失落遺跡攻略</span>
+              <span class="lang lang-ko">사라진 유적</span>
+              <span class="lang lang-en">Eternity’s Reach</span>
+              <span class="lang lang-ja">失われた遺跡</span>
+              <span class="lang lang-zh-TW">失落遺跡</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="bear" data-guide="bear" data-toc="true"
+        data-title-ko="곰사냥 조합" data-title-en="Bear Comps" data-title-ja="ベア編成" data-title-zh-tw="狩熊陣容"
+        data-href="/pages/guides/bear-hunt-guide.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/bear-hunt-guide.html" aria-label="Open Bear Comps">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/bear-hunt-icon.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">B</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">곰사냥 조합</span>
+              <span class="lang lang-en">Bear Comps</span>
+              <span class="lang lang-ja">ベア編成</span>
+              <span class="lang lang-zh-TW">狩熊陣容</span>
             </h2>
           </div>
         </a>
       </section>
 
       <section class="g-block" id="hallofgovernors" data-guide="hallofgovernors" data-toc="true"
-        data-title-ko="킹샷 최강영주 공략" data-title-en="Kingshot Hall of Governors Guide" data-title-ja="Kingshot 最強総督攻略" data-title-zh-tw="Kingshot 最強總督攻略"
-        data-slug="hallofgovernors">
-        <a class="g-link" data-router-ignore="true" href="/ko/guides/hallofgovernors.html" aria-label="Open Kingshot Hall of Governors Guide">
+        data-title-ko="최강영주 공략" data-title-en="Hall of Governors" data-title-ja="最強総督攻略" data-title-zh-tw="最強總督攻略"
+        data-href="/pages/guides/hallofgovernors.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/hallofgovernors.html" aria-label="Open Hall of Governors Guide">
           <div class="tile-icon" aria-hidden="true">
             <img src="/img/guide/hallofgovernors.webp" alt="" loading="lazy" decoding="async">
             <div class="tile-fallback">H</div>
           </div>
           <div class="tile-title">
             <h2 class="g-title">
-              <span class="lang lang-ko">킹샷 최강영주 공략</span>
-              <span class="lang lang-en">Kingshot Hall of Governors Guide</span>
-              <span class="lang lang-ja">Kingshot 最強総督攻略</span>
-              <span class="lang lang-zh-tw">Kingshot 最強總督攻略</span>
+              <span class="lang lang-ko">최강영주 공략</span>
+              <span class="lang lang-en">Hall of Governors</span>
+              <span class="lang lang-ja">最強総督攻略</span>
+              <span class="lang lang-zh-TW">最強總督攻略</span>
             </h2>
           </div>
         </a>
       </section>
 
       <section class="g-block" id="truegold2026" data-guide="truegold2026" data-toc="true"
-        data-title-ko="킹샷 2026 순금 소모표" data-title-en="Kingshot 2026 Truegold Cost Chart" data-title-ja="Kingshot 2026 純金消費表" data-title-zh-tw="Kingshot 2026 純金消耗表"
-        data-slug="truegold">
-        <a class="g-link" data-router-ignore="true" href="/ko/guides/truegold.html" aria-label="Open Kingshot 2026 Truegold Cost Chart">
+        data-title-ko="2026 순금 소모표" data-title-en="2026 Truegold Cost Chart" data-title-ja="2026 純金消費表" data-title-zh-tw="2026 純金消耗表"
+        data-href="/pages/guides/truegold.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/truegold.html" aria-label="Open 2026 Truegold Cost Chart">
           <div class="tile-icon" aria-hidden="true">
             <img src="/img/guide/Ttruegold-kingshot.webp" alt="" loading="lazy" decoding="async">
             <div class="tile-fallback">TG</div>
           </div>
           <div class="tile-title">
             <h2 class="g-title">
-              <span class="lang lang-ko">킹샷 2026 순금 소모표</span>
-              <span class="lang lang-en">Kingshot 2026 Truegold Cost Chart</span>
-              <span class="lang lang-ja">Kingshot 2026 純金消費表</span>
-              <span class="lang lang-zh-tw">Kingshot 2026 純金消耗表</span>
+              <span class="lang lang-ko">2026 순금 소모표</span>
+              <span class="lang lang-en">2026 Truegold Cost Chart</span>
+              <span class="lang lang-ja">2026 純金消費表</span>
+              <span class="lang lang-zh-TW">2026 純金消耗表</span>
             </h2>
           </div>
         </a>
       </section>
 
       <section class="g-block" id="atob" data-guide="atob" data-toc="true"
-        data-title-ko="킹샷 SSR 영웅 비교표" data-title-en="Kingshot SSR Hero Comparison Chart" data-title-ja="Kingshot SSR英雄比較表" data-title-zh-tw="Kingshot SSR英雄比較表"
-        data-slug="ssr-hero-vs">
-        <a class="g-link" data-router-ignore="true" href="/ko/guides/ssr-hero-vs.html" aria-label="Open Kingshot SSR Hero Comparison Chart">
+        data-title-ko="SSR 영웅 A vs B 비교 계산기" data-title-en="SSR Hero A vs B Comparator" data-title-ja="SSR英雄 A vs B 比較計算機" data-title-zh-tw="SSR英雄 A 與 B 比較計算器"
+        data-href="/pages/guides/ssr-hero-vs.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/ssr-hero-vs.html" aria-label="Open SSR Hero A vs B Comparator">
           <div class="tile-icon" aria-hidden="true">
             <img src="/img/guide/yang.webp" alt="" loading="lazy" decoding="async">
             <div class="tile-fallback">A/B</div>
           </div>
           <div class="tile-title">
             <h2 class="g-title">
-              <span class="lang lang-ko">킹샷 SSR 영웅 비교표</span>
-              <span class="lang lang-en">Kingshot SSR Hero Comparison Chart</span>
-              <span class="lang lang-ja">Kingshot SSR英雄比較表</span>
-              <span class="lang lang-zh-tw">Kingshot SSR英雄比較表</span>
+              <span class="lang lang-ko">SSR 영웅 A vs B 비교 계산기</span>
+              <span class="lang lang-en">SSR Hero A vs B Comparator</span>
+              <span class="lang lang-ja">SSR英雄 A vs B 比較計算機</span>
+              <span class="lang lang-zh-TW">SSR英雄 A 與 B 比較計算器</span>
             </h2>
           </div>
         </a>
       </section>
 
       <section class="g-block" id="tri-alliance-clash" data-guide="tri-alliance-clash" data-toc="true"
-        data-title-ko="킹샷 삼대연맹전 공략" data-title-en="Kingshot Tri-Alliance Clash Guide" data-title-ja="Kingshot トライ・アライアンス・クラッシュ攻略" data-title-zh-tw="Kingshot 三聯盟爭奪戰攻略"
-        data-slug="Tri-Alliance-Clash">
-        <a class="g-link" data-router-ignore="true" href="/ko/guides/Tri-Alliance-Clash.html" aria-label="Open Kingshot Tri-Alliance Clash Guide">
+        data-title-ko="Tri-Alliance Clash 승리 가이드" data-title-en="How to Win Tri-Alliance Clash" data-title-ja="トライ・アライアンス・クラッシュ 勝利ガイド" data-title-zh-tw="三聯盟爭奪戰 勝利指南"
+        data-href="/pages/guides/Tri-Alliance-Clash.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/Tri-Alliance-Clash.html" aria-label="Open Tri-Alliance Clash Guide">
           <div class="tile-icon" aria-hidden="true">
             <img src="/img/guide/tri-alliance-clash-icon.webp" alt="" loading="lazy" decoding="async">
             <div class="tile-fallback">TAC</div>
           </div>
           <div class="tile-title">
             <h2 class="g-title">
-              <span class="lang lang-ko">킹샷 삼대연맹전 공략</span>
-              <span class="lang lang-en">Kingshot Tri-Alliance Clash Guide</span>
-              <span class="lang lang-ja">Kingshot トライ・アライアンス・クラッシュ攻略</span>
-              <span class="lang lang-zh-tw">Kingshot 三聯盟爭奪戰攻略</span>
+              <span class="lang lang-ko">삼대연맹전 승리 가이드</span>
+              <span class="lang lang-en">How to Win Tri-Alliance Clash</span>
+              <span class="lang lang-ja">トライ・アライアンス・クラッシュ 勝利ガイド</span>
+              <span class="lang lang-zh-TW">三聯盟爭奪戰 勝利指南</span>
             </h2>
           </div>
         </a>
       </section>
 
       <section class="g-block" id="viking-vengeance" data-guide="viking-vengeance" data-toc="true"
-        data-title-ko="킹샷 바이킹의 약탈 공략" data-title-en="Kingshot Viking Vengeance Guide" data-title-ja="Kingshot バイキングの略奪攻略" data-title-zh-tw="Kingshot 維京復仇攻略"
-        data-slug="viking">
-        <a class="g-link" data-router-ignore="true" href="/ko/guides/viking.html" aria-label="Open Kingshot Viking Vengeance Guide">
+        data-title-ko="바이킹의 약탈 최적 공략" data-title-en="Viking Vengeance Best Strategy" data-title-ja="バイキングの略奪 最適攻略" data-title-zh-tw="維京復仇 最佳攻略"
+        data-href="/pages/guides/viking.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/viking.html" aria-label="Open Viking Vengeance Guide">
           <div class="tile-icon" aria-hidden="true">
             <img src="/img/guide/viking-vengeance-event.webp" alt="" loading="lazy" decoding="async">
             <div class="tile-fallback">VIK</div>
           </div>
           <div class="tile-title">
             <h2 class="g-title">
-              <span class="lang lang-ko">킹샷 바이킹의 약탈 공략</span>
-              <span class="lang lang-en">Kingshot Viking Vengeance Guide</span>
-              <span class="lang lang-ja">Kingshot バイキングの略奪攻略</span>
-              <span class="lang lang-zh-tw">Kingshot 維京復仇攻略</span>
+              <span class="lang lang-ko">바이킹의 약탈 최적 공략</span>
+              <span class="lang lang-en">Viking Vengeance Best Strategy</span>
+              <span class="lang lang-ja">バイキングの略奪 最適攻略</span>
+              <span class="lang lang-zh-TW">維京復仇 最佳攻略</span>
             </h2>
           </div>
         </a>
       </section>
 
       <section class="g-block" id="transfer" data-guide="transfer" data-toc="true"
-        data-title-ko="킹샷 왕국 이민 가이드" data-title-en="Kingshot Kingdom Transfer Guide" data-title-ja="Kingshot 王国移民ガイド" data-title-zh-tw="Kingshot 王國轉移指南"
-        data-slug="transfer">
-        <a class="g-link" data-router-ignore="true" href="/ko/guides/transfer.html" aria-label="Open Kingshot Kingdom Transfer Guide">
+        data-title-ko="왕국 이민 심화 가이드" data-title-en="Kingdom Transfer Guide" data-title-ja="王国移民ガイド" data-title-zh-tw="王國轉移指南"
+        data-href="/pages/guides/transfer.html">
+        <a class="g-link" data-router-ignore="true" href="/pages/guides/transfer.html" aria-label="Open Kingdom Transfer Guide">
           <div class="tile-icon" aria-hidden="true">
             <img src="/img/guide/transfer.webp" alt="" loading="lazy" decoding="async">
             <div class="tile-fallback">TR</div>
           </div>
           <div class="tile-title">
             <h2 class="g-title">
-              <span class="lang lang-ko">킹샷 왕국 이민 가이드</span>
-              <span class="lang lang-en">Kingshot Kingdom Transfer Guide</span>
-              <span class="lang lang-ja">Kingshot 王国移民ガイド</span>
-              <span class="lang lang-zh-tw">Kingshot 王國轉移指南</span>
+              <span class="lang lang-ko">왕국 이민 심화 가이드</span>
+              <span class="lang lang-en">Kingdom Transfer Guide</span>
+              <span class="lang lang-ja">王国移民ガイド</span>
+              <span class="lang lang-zh-TW">王國轉移指南</span>
             </h2>
           </div>
         </a>
       </section>
 
       <section class="g-block" id="server-timeline" data-guide="server-timeline" data-toc="true"
-        data-title-ko="킹샷 서버 성장 타임라인"
-        data-title-en="Kingshot Server Timeline"
-        data-title-ja="Kingshot サーバー成長タイムライン"
-        data-title-zh-tw="Kingshot 伺服器成長時間線"
-        data-slug="server-timeline">
-        <a class="g-link" data-router-ignore="true" href="/ko/guides/server-timeline.html" aria-label="Open Kingshot Server Timeline">
+        data-title-ko="서버 성장 타임라인"
+        data-title-en="Server Timeline"
+        data-title-ja="サーバー成長タイムライン"
+        data-title-zh-tw="伺服器成長時間線"
+        data-href="/ko/guides/server-timeline.html">
+        <a class="g-link" data-router-ignore="true" href="/ko/guides/server-timeline.html" aria-label="Open Server Timeline Guide">
           <div class="tile-icon" aria-hidden="true">
-            <img src="/img/guide/server-timeline.webp" alt="" loading="lazy" decoding="async">
+            <img src="/img/guides/server-timeline.webp" alt="" loading="lazy" decoding="async">
             <div class="tile-fallback">TL</div>
           </div>
           <div class="tile-title">
             <h2 class="g-title">
-              <span class="lang lang-ko">킹샷 서버 성장 타임라인</span>
-              <span class="lang lang-en">Kingshot Server Timeline</span>
-              <span class="lang lang-ja">Kingshot サーバー成長タイムライン</span>
-              <span class="lang lang-zh-tw">Kingshot 伺服器成長時間線</span>
+              <span class="lang lang-ko">서버 성장 타임라인</span>
+              <span class="lang lang-en">Server Timeline</span>
+              <span class="lang lang-ja">サーバー成長タイムライン</span>
+              <span class="lang lang-zh-TW">伺服器成長時間線</span>
             </h2>
           </div>
         </a>
@@ -533,185 +553,5 @@
 
     </div>
   </div>
-
-  <script>
-  (function () {
-    'use strict';
-
-    function getLangCode() {
-      var params = new URLSearchParams(location.search);
-      var qLang = (params.get('lang') || '').toLowerCase();
-      if (qLang === 'ja') return 'ja';
-      if (qLang === 'en') return 'en';
-      if (qLang === 'ko') return 'ko';
-      if (qLang === 'zh-tw' || qLang === 'zh_tw' || qLang === 'zhtw') return 'zh-tw';
-
-      var htmlLang = (document.documentElement.getAttribute('lang') || document.documentElement.getAttribute('data-lang') || '').toLowerCase();
-      if (htmlLang.indexOf('ja') === 0) return 'ja';
-      if (htmlLang === 'zh-tw' || htmlLang === 'zh_hant' || htmlLang === 'zh-hant') return 'zh-tw';
-      if (htmlLang.indexOf('en') === 0) return 'en';
-      if (htmlLang.indexOf('ko') === 0) return 'ko';
-
-      var path = location.pathname || '';
-      var m = path.match(/^\/(ko|en|ja|zh-tw)\//i);
-      if (m) return String(m[1]).toLowerCase();
-
-      return 'ko';
-    }
-
-    function buildGuideHref(lang, slug) {
-      return '/' + lang + '/guides/' + slug + '.html';
-    }
-
-    function applyGuideLangLinks() {
-      var lang = getLangCode();
-      var cards = document.querySelectorAll('.g-block[data-slug]');
-
-      for (var i = 0; i < cards.length; i++) {
-        var card = cards[i];
-        var slug = card.getAttribute('data-slug');
-        if (!slug) continue;
-
-        var href = buildGuideHref(lang, slug);
-        card.setAttribute('data-href', href);
-
-        var link = card.querySelector('a.g-link');
-        if (link) {
-          link.setAttribute('href', href);
-        }
-      }
-    }
-
-    function getVisibleTitle(card, lang) {
-      var key = 'data-title-' + lang;
-      return (
-        card.getAttribute(key) ||
-        card.getAttribute('data-title-ko') ||
-        ''
-      );
-    }
-
-    function buildToc() {
-      var lang = getLangCode();
-      var toc = document.getElementById('guide-toc');
-      if (!toc) return;
-
-      var cards = document.querySelectorAll('.g-block[data-toc="true"]');
-      var html = '';
-
-      for (var i = 0; i < cards.length; i++) {
-        var card = cards[i];
-        var title = getVisibleTitle(card, lang);
-        var href = card.getAttribute('data-href') || '#';
-        html += '<a class="chip" data-router-ignore="true" href="' + href + '">' + title + '</a>';
-      }
-
-      toc.innerHTML = html;
-    }
-
-    function buildReco() {
-      var lang = getLangCode();
-      var recoWrap = document.getElementById('guide-reco');
-      var recoEmpty = document.getElementById('guide-reco-empty');
-      if (!recoWrap || !recoEmpty) return;
-
-      var raw = null;
-      try {
-        raw = JSON.parse(localStorage.getItem('ks-guide-clicks') || '{}');
-      } catch (_) {
-        raw = {};
-      }
-
-      var arr = [];
-      for (var key in raw) {
-        if (Object.prototype.hasOwnProperty.call(raw, key)) {
-          arr.push({ id: key, count: Number(raw[key] || 0) });
-        }
-      }
-
-      arr.sort(function (a, b) { return b.count - a.count; });
-      arr = arr.slice(0, 5);
-
-      if (!arr.length) {
-        recoWrap.innerHTML = '';
-        recoEmpty.style.display = '';
-        return;
-      }
-
-      recoEmpty.style.display = 'none';
-
-      var html = '';
-      for (var i = 0; i < arr.length; i++) {
-        var card = document.querySelector('.g-block[data-guide="' + arr[i].id + '"]');
-        if (!card) continue;
-
-        var title = getVisibleTitle(card, lang);
-        var href = card.getAttribute('data-href') || '#';
-        html += '<a class="chip" data-router-ignore="true" href="' + href + '">' + title + '</a>';
-      }
-      recoWrap.innerHTML = html;
-    }
-
-    function bindClicks() {
-      var cards = document.querySelectorAll('.g-block[data-guide]');
-      for (var i = 0; i < cards.length; i++) {
-        (function (card) {
-          var guideId = card.getAttribute('data-guide');
-          var link = card.querySelector('a.g-link');
-          if (!guideId || !link) return;
-
-          link.addEventListener('click', function () {
-            try {
-              var raw = JSON.parse(localStorage.getItem('ks-guide-clicks') || '{}');
-              raw[guideId] = Number(raw[guideId] || 0) + 1;
-              localStorage.setItem('ks-guide-clicks', JSON.stringify(raw));
-            } catch (_) {}
-          });
-        })(cards[i]);
-      }
-    }
-
-    function bindSearch() {
-      var input = document.getElementById('guide-search');
-      var count = document.getElementById('guide-count');
-      var list = document.getElementById('guide-list');
-      if (!input || !count || !list) return;
-
-      function update() {
-        var q = String(input.value || '').toLowerCase().trim();
-        var lang = getLangCode();
-        var cards = list.querySelectorAll('.g-block');
-        var shown = 0;
-
-        for (var i = 0; i < cards.length; i++) {
-          var card = cards[i];
-          var title = getVisibleTitle(card, lang).toLowerCase();
-          var visible = !q || title.indexOf(q) !== -1;
-          card.style.display = visible ? '' : 'none';
-          if (visible) shown++;
-        }
-
-        count.textContent = shown + ' / ' + cards.length;
-      }
-
-      input.addEventListener('input', update);
-      update();
-    }
-
-    function initGuideIndex() {
-      applyGuideLangLinks();
-      buildToc();
-      buildReco();
-      bindClicks();
-      bindSearch();
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initGuideIndex);
-    } else {
-      initGuideIndex();
-    }
-  })();
-  </script>
 </body>
 </html>

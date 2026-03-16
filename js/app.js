@@ -1,5 +1,5 @@
 // /public/js/app.js — SPA Router (History API) for KingshotData.kr
-// v2026-03-16 (TW 상세 페이지 언어 고정 보정 포함)
+// v2026-03-16 (guides 상세 html 브라우저 기본 이동 처리 포함)
 // ES5-compatible (no arrow functions / optional chaining)
 (function () {
   'use strict';
@@ -962,8 +962,11 @@
 
     if (href.charAt(0) === '#') return;
 
-    // 언어별 guides html은 브라우저 기본 이동 허용
-    if (/^\/(ko|en|ja|zh-TW|zh-tw)\/guides\/.+\.html$/i.test(href)) {
+    // 모든 언어 guides 상세 html 문서는 브라우저 기본 이동 허용
+    if (
+      /^\/guides\/(?!index\.html$).+\.html$/i.test(href) ||
+      /^\/(ko|en|ja|zh-tw|zh-TW)\/guides\/(?!index\.html$).+\.html$/i.test(href)
+    ) {
       return;
     }
 

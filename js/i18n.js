@@ -7,7 +7,7 @@
 
   // ===== State =====
   var dict = {};
-  var current = 'ko';
+  var current = 'en';
   var supported = ['ko', 'en', 'ja', 'zh-CN', 'zh-TW'];
 
   // 현재까지 실제 사용된 ns만 기록
@@ -288,10 +288,10 @@
 
     var pref = opts.lang;
     if (!pref) {
-      try { pref = localStorage.getItem('lang') || 'ko'; } catch (_) { pref = 'ko'; }
+      try { pref = localStorage.getItem('lang') || 'en'; } catch (_) { pref = 'en'; }
     }
 
-    current = supported.indexOf(pref) >= 0 ? pref : supported[0];
+    current = supported.indexOf(pref) >= 0 ? pref : (supported.indexOf('en') >= 0 ? 'en' : supported[0]);
     try { localStorage.setItem('lang', current); } catch (_) {}
 
     try {
@@ -366,7 +366,7 @@
       try {
         var sp = new URLSearchParams(location.search);
         sp.set('lang', lang);
-        history.replaceState(null, '', location.pathname + '?' + sp);
+        history.replaceState(null, '', location.pathname + '?' + sp.toString());
       } catch (_) {}
       try { document.dispatchEvent(new CustomEvent('i18n:changed', { detail: { lang: lang } })); } catch(_){}
       return true;
