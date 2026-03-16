@@ -1,14 +1,22 @@
-<!-- pages/heroes.html — 단독 진입 시 홈으로 리다이렉트, SPA 내부 include 시 정상 동작 -->
+<!-- pages/heroes.html — 단독 진입 시 홈의 heroes 섹션으로 리다이렉트, SPA 내부 include 시 정상 동작 -->
 <script>
 (function () {
   try {
     if (window === window.top) {
       const p = location.pathname || "";
-      if (p.endsWith("/pages/heroes.html") || p.endsWith("/pages/heroes.html/") || /\/pages\/heroes\.html$/i.test(p)) {
-        const usp  = new URLSearchParams(location.search);
-        const lang = usp.get("lang");
-        const dest = lang ? `/?lang=${encodeURIComponent(lang)}#heroes` : "/#heroes";
-        location.replace(dest);
+      if (
+        p.endsWith("/pages/heroes.html") ||
+        p.endsWith("/pages/heroes.html/") ||
+        /\/pages\/heroes\.html$/i.test(p)
+      ) {
+        const usp = new URLSearchParams(location.search);
+        let lang = (usp.get("lang") || "").toLowerCase();
+
+        if (!/^(ko|en|ja|zh-tw)$/.test(lang)) {
+          lang = "ko";
+        }
+
+        location.replace("/?lang=" + encodeURIComponent(lang) + "#heroes");
       }
     }
   } catch (_) {}
@@ -216,7 +224,6 @@
       min-width:0 !important;
     }
 
-    /* 홀수 개일 때 마지막 1장을 가운데 정렬 */
     #heroes-root .heroes-grid:not(.sr-grid) .card:last-child:nth-child(odd){
       grid-column:1 / -1 !important;
       width:calc((100% - var(--mobile-gap)) / 2) !important;
