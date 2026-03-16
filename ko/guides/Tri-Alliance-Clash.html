@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>삼대연맹전 승리 가이드 | Tri-Alliance Clash 공략</title>
+  <meta name="description" content="킹샷 삼대연맹전(Tri-Alliance Clash) 승리 가이드. 맵 구조, 4단계 전투 흐름, 수비대 20분, 천공 40분, 에너지 운영, 팀 편성, FAQ까지 한 페이지에 정리했습니다." />
+  <meta name="keywords" content="킹샷 삼대연맹전, Tri-Alliance Clash, Kingshot 삼대연맹전 공략, Kingshot TAC, 킹샷 연맹전, 킹샷 수비대 공략, 킹샷 천공 공략" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="zh-CN" href="https://kingshotdata.kr/zh-cn/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/Tri-Alliance-Clash.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="삼대연맹전 승리 가이드 | Tri-Alliance Clash 공략" />
+  <meta property="og:description" content="맵 구조, 4단계 전투 흐름, 수비대 20분, 천공 40분, 에너지 운영, 팀 편성, FAQ까지 정리한 킹샷 삼대연맹전 실전 가이드." />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/guides/Tri-Alliance-Clash.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --line:#e7ecf5;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+      --warn:#b45309;
+      --warn-bg:rgba(245,158,11,.08);
+
+      --radius:16px;
+      --radius2:14px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.7 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(26px,4vw,40px);
+      line-height:1.15;
+      color:var(--text);
+    }
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:16px 0 0;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .k{font-weight:900;color:var(--text)}
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    h2{
+      margin:0 0 10px;
+      font-size:clamp(20px,2.4vw,28px);
+      color:var(--accent);
+      line-height:1.25;
+    }
+    h3{
+      font-size:clamp(16px,2vw,20px);
+      margin:18px 0 8px;
+      line-height:1.35;
+    }
+    p{margin:8px 0}
+
+    .toc{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .toc strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:15px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin:12px 0;
+    }
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      background:#fff;
+      padding:14px;
+    }
+    .card .title{
+      margin:0 0 6px;
+      font-weight:900;
+    }
+
+    .note,.callout{
+      font-size:14px;
+      color:var(--muted);
+      background:var(--warn-bg);
+      padding:12px 14px;
+      border-left:4px solid var(--warn);
+      border-radius:10px;
+      margin:16px 0 0;
+    }
+
+    .imgbox{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:#fff;
+      box-shadow:var(--shadow);
+      padding:12px;
+      margin-top:22px;
+    }
+    figure{margin:0}
+    figure img{
+      width:100%;
+      max-width:100%;
+      height:auto;
+      border-radius:12px;
+      display:block;
+      border:1px solid var(--border);
+    }
+    figcaption{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:8px;
+      line-height:1.6;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:10px 0 0;
+    }
+    th,td{
+      border:1px solid var(--border);
+      padding:10px;
+      vertical-align:top;
+    }
+    th{
+      background:#f8fafc;
+      text-align:left;
+      font-weight:900;
+    }
+
+    ul{margin:8px 0;padding-left:18px}
+    li{margin:6px 0}
+
+    .hr{
+      height:1px;
+      background:var(--border);
+      margin:18px 0;
+    }
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--text);
+      font-size:13px;
+      font-weight:800;
+      text-decoration:none;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+        padding:10px 16px 12px;
+        margin:0 -16px;
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -16px;
+        padding:6px 16px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      .grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section,.toc,.imgbox{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"삼대연맹전 승리 가이드 | Tri-Alliance Clash 공략",
+    "inLanguage":"ko",
+    "description":"킹샷 삼대연맹전(Tri-Alliance Clash)에서 승률을 높이기 위한 실전 운영 공략.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ko/guides/Tri-Alliance-Clash.html"
+    },
+    "author":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/Tri-Alliance-Clash.html">EN</a>
+        <a href="/ko/guides/Tri-Alliance-Clash.html" aria-current="page">KO</a>
+        <a href="/ja/guides/Tri-Alliance-Clash.html">JA</a>
+        <a href="/zh-tw/guides/Tri-Alliance-Clash.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#summary">규칙 요약</a>
+      <a href="#stages">전투 단계</a>
+      <a href="#map">맵 구조</a>
+      <a href="#setup">사전 준비</a>
+      <a href="#team">팀 편성</a>
+      <a href="#strategy">운영 전략</a>
+      <a href="#tips">실전 팁</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/guides/">가이드</a> <span class="muted">›</span>
+        <span>삼대연맹전</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>삼대연맹전 승리 가이드</h1>
+          <p class="subtitle">3개 연맹이 건물 점령으로 점수를 겨루는 서버 이벤트입니다. 1시간 전투 종료 시 누적 포인트가 가장 높은 연맹이 승리합니다.</p>
+
+          <div class="meta">
+            <span class="badge"><span class="k">핵심</span> 에너지 관리 · 주둔(캡틴) · 20분 수비대 · 40분 천공</span>
+            <span class="badge"><span class="k">전투 시간</span> 오픈 후 1시간</span>
+            <span class="badge"><span class="k">전투일</span> 선택된 시간대의 토요일</span>
+          </div>
+
+          <div class="jump">
+            <a href="#summary">규칙 요약</a><span class="dotsep">•</span>
+            <a href="#stages">전투 단계</a><span class="dotsep">•</span>
+            <a href="#map">맵 구조</a><span class="dotsep">•</span>
+            <a href="#strategy">운영 전략</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="toc">
+        <strong>목차</strong>
+        <ul>
+          <li><a href="#summary">한눈에 보는 규칙 요약</a></li>
+          <li><a href="#stages">전투 단계(4스테이지)</a></li>
+          <li><a href="#map">맵 구조와 핵심 포인트</a></li>
+          <li><a href="#setup">사전 준비(등록 / 인원 / 음성)</a></li>
+          <li><a href="#team">팀 편성 추천</a></li>
+          <li><a href="#strategy">스테이지별 운영 전략</a></li>
+          <li><a href="#tips">실전 팁(에너지 / 회복 / 재진입)</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <section class="imgbox" id="map">
+        <figure>
+          <img src="/img/tri_alliance_clash_map.png" alt="Tri-Alliance Clash 규칙 및 맵 요약 이미지" />
+          <figcaption>
+            핵심 오브젝트(중계 거점 / 수비대 / 파도 신전 / 천공 진입 루트)를 한 장에 정리한 지도입니다. 좌표(A1/B1/C1, A24/B24/C24 등)는 전장 내 표기를 기준으로 합니다.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="summary" class="anchor">
+        <h2>한눈에 보는 규칙 요약</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">참전 조건(요약)</p>
+            <ul>
+              <li>연맹 전투력 상위 20위</li>
+              <li>자동: 제1군 기본 해제</li>
+              <li>2군단 해제 예시: 연맹 Lv.6 이상 + 누적 접속 인원 40명</li>
+              <li>군단: <span class="k">참전자 + 후보자 합계 15명 이상</span>이면 2개 군단 인원 별도 계산</li>
+              <li>개인: 연맹 가입 + 도시센터 Lv.16 이상, 5일 이상 미접속은 참가 제한 가능</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">기본 규칙(운영)</p>
+            <ul>
+              <li>투표 / 신청 / 매칭 / 전투는 서버 캘린더에 따라 진행</li>
+              <li>R4 이상: 신청 및 참여 인원 조정 가능</li>
+              <li>최대 30인 참가 + 후보자 10인(서버 규칙에 따라 상이)</li>
+              <li>연맹당 최대 2개 군단으로 다른 전장 동시 진행 가능</li>
+              <li>영주는 <span class="k">총 3개 부대</span>를 전장에 투입 가능</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout">
+          <p><span class="k">요점</span> 인원 등록이 승패에 직결됩니다. 실제 참여 가능한 인원만 등록하세요.</p>
+        </div>
+      </section>
+
+      <section id="stages" class="anchor">
+        <h2>전투 단계(4스테이지)</h2>
+
+        <table aria-label="Tri-Alliance Clash 단계 요약">
+          <thead>
+            <tr>
+              <th>단계</th>
+              <th>시간</th>
+              <th>핵심 목표</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1) 준비</td>
+              <td>3분</td>
+              <td>역할 분배, 이동 루트 확인, 초기 점령 동선 정리</td>
+            </tr>
+            <tr>
+              <td>2) 점령 확장</td>
+              <td>17분</td>
+              <td>아군 구역 선점 + 적 구역 소형 건물 일부 탈취(가리슨은 보호)</td>
+            </tr>
+            <tr>
+              <td>3) 수비대 점령</td>
+              <td>20분</td>
+              <td><span class="k">A24 / B24 / C24</span> 개방. 수비대는 분당 점수가 높아 승부처가 됨</td>
+            </tr>
+            <tr>
+              <td>4) 천공 공세</td>
+              <td>20분</td>
+              <td>40분에 <span class="k">파도 신전(천공)</span> 개방. 최초 점령 + 유지 점수로 최종 승부</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <p><span class="k">핵심 타이밍</span> 20분(수비대) / 40분(천공). 이 타이밍에 에너지를 남겨두는 것이 승리의 핵심입니다.</p>
+        </div>
+      </section>
+
+      <section id="setup" class="anchor">
+        <h2>사전 준비(등록 / 인원 / 음성)</h2>
+
+        <h3>1) 등록</h3>
+        <ul>
+          <li>실제 참여 가능한 인원만 등록하세요. 유령 등록은 매칭과 전투 양쪽 모두 손해입니다.</li>
+          <li>R4 이상 참여를 권장합니다. 점령 후 <span class="k">지휘관(캡틴)</span> 임명이 가능해 에너지 회복에서 이점이 생깁니다.</li>
+        </ul>
+
+        <h3>2) 음성 채널</h3>
+        <ul>
+          <li>디스코드 보이스 사용을 권장합니다. 최소 리더 1~3명이라도 실시간 콜이 가능해야 합니다.</li>
+          <li>실시간 지시는 채팅보다 훨씬 빠르기 때문에, 수비대와 천공 타이밍에서 체감 차이가 큽니다.</li>
+        </ul>
+      </section>
+
+      <section id="team" class="anchor">
+        <h2>팀 편성 추천</h2>
+        <p>목표는 점수 생산(점령 / 유지)과 핵심 오브젝트 방어를 동시에 굴리는 것입니다.</p>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">공격팀</p>
+            <ul>
+              <li>적 구역 진입 → 건물 탈취 → 20분 수비대 공략 → 40분 천공 러시</li>
+              <li>가장 강한 부대를 우선 배치</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">수비팀 1 / 2</p>
+            <ul>
+              <li>아군 핵심 루트와 중계 거점 방어</li>
+              <li>특히 20분 이후 수비대 사수가 최우선</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">플로터</p>
+            <ul>
+              <li>백업 / 증원 담당, 상황에 따라 공격 또는 수비 지원</li>
+              <li>에너지를 아껴두고 급변 상황에 반응</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">영웅 / 부대 선택</p>
+            <ul>
+              <li>각 영주는 3개 부대(총 9영웅)를 운용</li>
+              <li>가장 강한 1개 부대는 수비대 / 천공 타이밍용으로 아껴두는 운영도 유효</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="strategy" class="anchor">
+        <h2>스테이지별 운영 전략</h2>
+
+        <h3>스테이지 1~2 (0~20분): 준비 + 점령 확장</h3>
+        <ul>
+          <li>시작 즉시 아군 구역 건물을 선점하고 중계 거점(Transit Hubs)을 확보합니다.</li>
+          <li>공격팀은 적 구역 소형 건물 일부를 탈취해 점수와 동선 이득을 가져갑니다.</li>
+          <li>초반 목표는 분당 점수 우위를 만드는 것입니다.</li>
+          <li><span class="k">에너지 과소모 금지:</span> 20분 타이밍을 위해 에너지 30~40%를 남기는 운영이 좋습니다.</li>
+        </ul>
+
+        <h3>스테이지 3 (20~40분): 수비대</h3>
+        <ul>
+          <li>20분에 수비대(A24 / B24 / C24)가 개방됩니다.</li>
+          <li>우선순위 1: <span class="k">내 수비대 방어</span>. 잃으면 점수 차가 바로 뒤집힐 수 있습니다.</li>
+          <li>우선순위 2: 가능하면 <span class="k">적 수비대 탈취</span>로 격차를 벌립니다.</li>
+          <li>플로터는 교전이 밀리는 구역에 즉시 투입합니다.</li>
+        </ul>
+
+        <h3>스테이지 4 (40~60분): 천공(파도 신전)</h3>
+        <ul>
+          <li>40분에 천공(파도 신전)이 개방됩니다. <span class="k">최초 점령 포인트</span>가 커서 러시 타이밍이 중요합니다.</li>
+          <li>공격팀은 천공 러시 / 유지, 수비팀은 진입로(A29 / B29 / C29) 유지에 집중합니다.</li>
+          <li>플로터는 적 증원을 차단하고, 연결 건물 탈환 / 재점령과 천공 수비 보강을 맡습니다.</li>
+        </ul>
+
+        <div class="callout">
+          <p><span class="k">승리 공식</span> (수비대 유지) + (천공 최초 점령) + (천공 유지) + (진입로 방어) 4가지를 동시에 만족하면 승률이 크게 올라갑니다.</p>
+        </div>
+      </section>
+
+      <section id="tips" class="anchor">
+        <h2>실전 팁(에너지 / 회복 / 재진입)</h2>
+
+        <h3>에너지 관리</h3>
+        <ul>
+          <li>에너지는 이동, 점령, 돌진, 철수, 즉시 부활 등에 소모됩니다.</li>
+          <li>점령 후 <span class="k">지휘관(캡틴)</span>을 임명하면 에너지 회복에서 유리합니다.</li>
+        </ul>
+
+        <h3>재진입 / 버프</h3>
+        <ul>
+          <li>전장을 나가면 쿨타임 후 재입장이 가능합니다. 예시로 12분 규칙이 적용되는 경우가 있습니다.</li>
+          <li>출정 가속 / 수용량 관련 일부를 제외하면 대부분의 버프는 유효한 편이며, 최종 기준은 서버 룰을 따릅니다.</li>
+        </ul>
+
+        <h3>부상 / 회복 운영</h3>
+        <ul>
+          <li>크게 밀리면 전 건물로 후퇴 → 회복 → 재진입이 즉시 부활보다 손실이 적을 때가 많습니다.</li>
+          <li>회복 / 징집은 교전이 잠시 끊기는 구간에 맞추면 훨씬 효율적입니다.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="anchor">
+        <h2>FAQ</h2>
+
+        <h3>Q. 왜 각 팀의 유적 군집(Ruin Clusters) 수가 다르게 배치되나요?</h3>
+        <p>
+          맵 밸런스는 완전히 같은 개수보다, 경로 길이, 중계 거점 접근성, 수비대 방어 난이도, 천공 진입 안정성을 함께 맞추는 방식으로 설계되는 경우가 많습니다.
+          즉 유적 군집이 더 많아 보이는 구역은 그만큼 방어 부담이 크거나 핵심 연결 지점 관리 난이도가 높게 잡혀 있을 수 있습니다.
+          실제 승부는 유적 개수보다 <span class="k">20분 수비대</span>와 <span class="k">40분 천공</span> 운영에서 갈리는 경우가 많습니다.
+        </p>
+
+        <div class="hr"></div>
+
+        <h3>Q. 이 이벤트에서 가장 중요한 한 가지는?</h3>
+        <p>
+          <span class="k">에너지</span>입니다. 초반에 에너지를 다 써버리면 20분 / 40분 타이밍에 아무것도 못합니다.
+          점령 후 캡틴 임명, 역할 분담, 플로터 운영으로 에너지를 남겨두는 것이 승리의 핵심입니다.
+        </p>
+      </section>
+
+      <section id="related">
+        <h2>함께 보면 좋은 가이드</h2>
+        <div class="related">
+          <a class="pill" href="/ko/guides/viking.html">바이킹의 약탈 공략</a>
+          <a class="pill" href="/ko/guides/truegold.html">순금 소모표</a>
+          <a class="pill" href="/ko/guides/topup-guide.html">충전 가이드</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

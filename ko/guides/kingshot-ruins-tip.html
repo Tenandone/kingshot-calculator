@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>킹샷 사라진 유적 공략 · 광맥 점령, 궁전 대응, 스킬 타이밍 요약 | Kingshot Data</title>
+  <meta name="description" content="킹샷 사라진 유적 공략 가이드. 광맥 점령, 체사레 수비병, 불안정 광맥 등장 시간, 궁전 대응, 스킬 트리와 타이밍, 무과금·고과금 운영 루틴까지 핵심만 정리했습니다." />
+  <meta name="keywords" content="킹샷 사라진 유적, 킹샷 사라진 유적 공략, Kingshot Lost Ruins, 킹샷 광맥 공략, 킹샷 궁전 공략, 킹샷 스킬 타이밍, 킹샷 체사레 수비병, 킹샷 불안정 광맥" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="zh-CN" href="https://kingshotdata.kr/zh-cn/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/kingshot-ruins-tip.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="킹샷 사라진 유적 공략 · 광맥 점령, 궁전 대응, 스킬 타이밍 요약" />
+  <meta property="og:description" content="광맥 점령, 체사레 수비병, 불안정 광맥 시간, 궁전 대응, 스킬 루틴까지 사라진 유적 핵심만 빠르게 정리한 킹샷 공략." />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/guides/kingshot-ruins-tip.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Kingshot Data 대표 이미지" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="킹샷 사라진 유적 공략 · 광맥 점령, 궁전 대응, 스킬 타이밍 요약" />
+  <meta name="twitter:description" content="광맥 점령, 체사레 수비병, 불안정 광맥 시간, 궁전 대응, 스킬 루틴까지 사라진 유적 핵심만 빠르게 정리한 킹샷 공략." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/kingshotdata-og-v5.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --ok:#ecfdf5;
+      --warn:#fff7ed;
+      --note:#f8fafc;
+      --info:#eff6ff;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.68 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block; max-width:100%; height:auto}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(26px,3.4vw,40px);
+      line-height:1.18;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:32px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-side{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      padding:14px;
+    }
+    .hero-side h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-side ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .hero-side li{margin:6px 0}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note);
+    }
+    .callout.ok{background:var(--ok)}
+    .callout.warn{background:var(--warn)}
+    .callout.info{background:var(--info)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0; padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0; padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text); font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul, section.block ol{margin:8px 0; padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .pill-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .summary-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .summary-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:12px 14px;
+    }
+    .summary-card h3{
+      margin:0 0 8px;
+      font-size:14px;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    .foot{
+      margin:18px 0 8px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:var(--note);
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+
+    @media (max-width:940px){
+      .hero,
+      .grid,
+      .summary-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+    }
+
+    @media (max-width:600px){
+      h1{font-size:26px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"킹샷 사라진 유적 공략 · 광맥 점령, 궁전 대응, 스킬 타이밍 요약",
+    "inLanguage":"ko",
+    "description":"킹샷 사라진 유적 공략 가이드. 광맥 점령, 체사레 수비병, 불안정 광맥 등장 시간, 궁전 대응, 스킬 트리와 타이밍, 무과금·고과금 운영 루틴까지 핵심만 정리했습니다.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ko/guides/kingshot-ruins-tip.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"},
+    "dateModified":"2025-09-06"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
+      {"@type":"ListItem","position":2,"name":"가이드","item":"https://kingshotdata.kr/ko/guides/"},
+      {"@type":"ListItem","position":3,"name":"사라진 유적 공략","item":"https://kingshotdata.kr/ko/guides/kingshot-ruins-tip.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"사라진 유적에서 무과금은 어떻게 운영해야 하나요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"무과금이나 저전투력 유저는 궁전 경쟁보다 1~2레벨 광맥 채집 루틴과 안전한 수비병 처리에 집중하는 편이 안정적인 점수를 만들기 좋습니다."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"사라진 유적 스킬 순서는 어떻게 찍나요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"기본 추천 루트는 오-오-왼-왼-오입니다. 수비병 처치 보너스, 이동 속도, 점령 보너스, 채집 효율, 채집 속도 강화 순으로 가져가는 방식입니다."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"불안정 광맥은 언제 나오나요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"불안정 광맥은 보통 남은 20·19·18분, 그리고 10·9·8분 구간에 등장합니다. 등장 즉시 전 부대를 투입하는 것이 좋습니다."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- GA4 -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/kingshot-ruins-tip.html">EN</a>
+        <a href="/ko/guides/kingshot-ruins-tip.html" aria-current="page">KO</a>
+        <a href="/ja/guides/kingshot-ruins-tip.html">JA</a>
+        <a href="/zh-tw/guides/kingshot-ruins-tip.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">개요</a>
+      <a href="#strategy">기본 전략</a>
+      <a href="#palace">궁전</a>
+      <a href="#skills">스킬</a>
+      <a href="#unstable">불안정 광맥</a>
+      <a href="#tips">팁</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/guides/">가이드</a> <span class="muted">›</span>
+        <span>사라진 유적 공략</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>킹샷 사라진 유적 공략 · 광맥 점령, 궁전 대응, 스킬 타이밍 요약</h1>
+          <p class="sub">
+            사라진 유적은 2주 주기로 열리는 개인 콘텐츠다. 핵심은 청동석을 최대한 많이 확보하는 것이다.
+            광맥 점령, 체사레 수비병 처치, 불안정 광맥 등장 시간, 궁전 진입 판단, 스킬 루틴만 익혀도 안정적으로 상위권을 노릴 수 있다.
+          </p>
+
+          <div class="meta">
+            <span class="tag">사라진 유적</span>
+            <span class="tag">개인 콘텐츠</span>
+            <span class="tag">스킬 루틴</span>
+            <span class="tag">광맥 우선순위</span>
+            <span class="tag">궁전 대응</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <h2>한 줄 핵심</h2>
+          <ul>
+            <li>강한 유저는 3레벨 광맥과 수비병, 약한 유저는 1~2레벨 안정 채집 루틴이 핵심이다.</li>
+            <li>스킬 추천 루트는 오-오-왼-왼-오, 핵심 타이밍은 20/15/10/5분이다.</li>
+            <li>불안정 광맥과 손모양 드랍 회수 속도가 최종 순위를 크게 가른다.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>먼저 이것만 기억하면 된다</h3>
+            <ul>
+              <li><strong>목표는 청동석 최대 채집</strong>이다. 전투 자체보다 동선과 타이밍이 더 중요하다.</li>
+              <li><strong>강한 유저</strong>는 3레벨 광맥 + 체사레 수비병 + 궁전 진입을 본다.</li>
+              <li><strong>약한 유저</strong>는 1~2레벨 광맥 반복 점령과 안전한 수비병 처치로 점수를 쌓는다.</li>
+              <li><strong>불안정 광맥</strong>이 뜨는 구간에는 곧바로 부대를 넣어야 한다.</li>
+              <li><strong>스킬 15분 타이밍</strong>을 제대로 맞추는 것만으로도 점수 차이가 크게 난다.</li>
+            </ul>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>가장 많이 망하는 패턴</h3>
+            <ul>
+              <li>시작 3분 동안 자리 선점을 안 해서 애매한 광맥만 돌게 된다.</li>
+              <li>약한 영웅으로 수비병을 무리하게 치다가 5분 봉쇄를 먹는다.</li>
+              <li>불안정 광맥 알림을 놓쳐 핵심 청동석 구간을 통째로 날린다.</li>
+              <li>궁전이 안 되는 전투력인데 무리하게 들어가 채집 루틴까지 무너진다.</li>
+            </ul>
+          </div>
+
+          <div class="pill-row" aria-label="Quick links">
+            <a class="pill" href="#overview">개요</a>
+            <a class="pill" href="#strategy">기본 전략</a>
+            <a class="pill" href="#palace">궁전 대응</a>
+            <a class="pill" href="#skills">스킬 루틴</a>
+            <a class="pill" href="#unstable">불안정 광맥</a>
+            <a class="pill" href="#tips">핵심 팁</a>
+            <a class="pill" href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <nav class="toc card" aria-label="Table of contents">
+          <h2>목차</h2>
+          <ul>
+            <li><a href="#overview">1) 기본 정보와 목표</a></li>
+            <li><a href="#strategy">2) 전투력별 기본 전략</a></li>
+            <li><a href="#palace">3) 궁전 대응 전략</a></li>
+            <li><a href="#skills">4) 스킬 트리와 사용 타이밍</a></li>
+            <li><a href="#unstable">5) 불안정 광맥 타이밍</a></li>
+            <li><a href="#tips">6) 실전 팁과 운영 요령</a></li>
+            <li><a href="#summary">7) 최종 요약</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="overview" class="block anchor">
+        <h2>1) 기본 정보와 목표</h2>
+        <p>
+          사라진 유적은 <strong>개인 콘텐츠</strong>이며, 보통 <strong>2주 주기</strong>로 열리고 <strong>30분 동안 진행</strong>된다.
+          핵심 목표는 청동석을 최대한 많이 모아 <strong>영주 보석 성장 재화</strong>를 확보하는 것이다.
+        </p>
+
+        <ul>
+          <li>광맥은 <strong>1레벨~3레벨</strong>로 구성된다.</li>
+          <li>레벨이 높을수록 청동석 수급량은 늘어나지만, 방어도 강해진다.</li>
+          <li>광맥 점령 시 손모양 청동석 드랍이 발생하며, 이는 <strong>누구나 즉시 줍기 가능</strong>하다.</li>
+          <li>즉, 단순 채집만이 아니라 <strong>점령 + 드랍 회수</strong>까지 포함한 동선 설계가 중요하다.</li>
+        </ul>
+
+        <div class="callout info">
+          <h3>핵심 목표 한 줄</h3>
+          <p>광맥을 얼마나 오래 붙잡느냐보다, <strong>좋은 광맥을 얼마나 빠르게 반복 점령하고 회수하느냐</strong>가 더 중요하다.</p>
+        </div>
+      </section>
+
+      <section id="strategy" class="block anchor">
+        <h2>2) 전투력별 기본 전략</h2>
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <h3>강한 유저 운영</h3>
+            <ul>
+              <li>3레벨 광맥 밀집 구역 선점</li>
+              <li>체사레 수비병 반복 처치</li>
+              <li>20분 전 스킬 5레벨 목표</li>
+              <li>남은 7분 궁전 진입 준비</li>
+            </ul>
+          </div>
+
+          <div class="summary-card">
+            <h3>무과금/저전투력 운영</h3>
+            <ul>
+              <li>1~2레벨 광맥 중심 안정 루틴</li>
+              <li>안전한 수비병만 선택 처치</li>
+              <li>궁전 경쟁은 대부분 포기</li>
+              <li>불안정 광맥과 손드랍 회수 집중</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>시작 3분 대기 시간 활용</h3>
+        <p>
+          시작 직후 3분 대기 시간에는 무작정 기다리지 말고 <strong>2~3레벨 광맥과 수비병 밀집 지역</strong>을 먼저 확인해야 한다.
+          이후 도시 이전으로 유리한 위치를 선점하면 초반 동선이 훨씬 좋아진다.
+        </p>
+
+        <div class="callout ok">
+          <h3>체사레 수비병의 의미</h3>
+          <ul>
+            <li>처치 시 <strong>스킬 경험치</strong>를 준다.</li>
+            <li>패배 시 해당 영웅은 <strong>5분 동안 사용 불가</strong>다.</li>
+            <li>그래서 강한 계정은 수비병을 적극 활용하지만, 약한 계정은 선별적으로 쳐야 한다.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="palace" class="block anchor">
+        <h2>3) 궁전 대응 전략</h2>
+        <p>
+          궁전은 강한 유저에게는 큰 점수 구간이지만, 약한 유저에게는 루틴을 망치는 함정이 될 수도 있다.
+          그래서 <strong>내 전투력 기준으로 궁전 진입 여부를 미리 정해두는 것</strong>이 중요하다.
+        </p>
+
+        <ul>
+          <li><strong>강한 유저:</strong> 보통 남은 7분 시점부터 중앙 궁전 진입을 준비한다.</li>
+          <li><strong>행군 가속 50%</strong>를 3~4개 쓰면, 거리와 맵에 따라 약 2초 정도 남기고 도착 가능하다.</li>
+          <li><strong>약한 유저:</strong> 궁전 경쟁은 포기하고 광맥 채집과 드랍 회수에 집중하는 편이 훨씬 안정적이다.</li>
+        </ul>
+
+        <div class="callout warn">
+          <h3>궁전은 선택이지 필수가 아니다</h3>
+          <p>궁전에서 밀릴 계정이 무리하게 들어가면, 본래 잘 돌던 광맥 루틴과 수비병 루틴까지 무너진다.</p>
+        </div>
+      </section>
+
+      <section id="skills" class="block anchor">
+        <h2>4) 스킬 트리와 사용 타이밍</h2>
+
+        <div class="callout ok">
+          <h3>추천 스킬 순서</h3>
+          <p><strong>오 - 오 - 왼 - 왼 - 오</strong></p>
+        </div>
+
+        <ol>
+          <li><strong>Lv1 (오):</strong> 수비병 처치 시 청동석 추가</li>
+          <li><strong>Lv2 (오):</strong> 부대 이동속도 +25%</li>
+          <li><strong>Lv3 (왼):</strong> 점령 성공 시 청동석 추가 (쿨타임 1분)</li>
+          <li><strong>Lv4 (왼):</strong> 채집 효율 +15%</li>
+          <li><strong>Lv5 (오):</strong> 채집 속도 +50% (60초, 쿨 5분)</li>
+        </ol>
+
+        <h3>가장 중요한 타이밍</h3>
+        <ul>
+          <li><strong>남은 20분</strong></li>
+          <li><strong>남은 15분</strong></li>
+          <li><strong>남은 10분</strong></li>
+          <li><strong>남은 5분</strong></li>
+        </ul>
+
+        <div class="callout info">
+          <h3>실전 포인트</h3>
+          <ul>
+            <li>특히 <strong>15분 타이밍</strong>만 정확히 맞춰도 상위권 경쟁력이 생긴다.</li>
+            <li>목표는 <strong>20분 전까지 스킬 5레벨 달성</strong>이다.</li>
+            <li>이를 위해 초반 수비병 처치로 경험치를 빠르게 모아야 한다.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="unstable" class="block anchor">
+        <h2>5) 불안정 광맥 타이밍</h2>
+        <p>
+          불안정 광맥은 채집 속도가 빠르기 때문에 사라진 유적에서 <strong>가장 우선순위가 높은 점령 대상</strong>이다.
+        </p>
+
+        <ul>
+          <li>등장 구간은 보통 <strong>남은 20·19·18분</strong> / <strong>10·9·8분</strong>이다.</li>
+          <li>등장 알림이 뜨면 전 부대를 가능한 한 빠르게 투입해야 한다.</li>
+          <li>점령 후 손모양 드랍까지 바로 회수해야 실제 이득이 커진다.</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>불안정 광맥 운영 공식</h3>
+          <p><strong>등장 확인 → 즉시 전 부대 투입 → 점령 → 손드랍 회수 → 다음 광맥 회전</strong></p>
+        </div>
+      </section>
+
+      <section id="tips" class="block anchor">
+        <h2>6) 실전 팁과 운영 요령</h2>
+
+        <h3>동선은 원형 루틴으로</h3>
+        <p>
+          광맥, 수비병, 손모양 드랍 위치를 끊어서 보지 말고 하나의 <strong>원형 이동 루틴</strong>으로 묶어서 생각하는 것이 좋다.
+          한 지역에서 계속 머무는 것보다, 효율 좋은 순환 구조를 만드는 편이 점수가 더 잘 나온다.
+        </p>
+
+        <h3>약한 영웅은 교전보다 채집</h3>
+        <p>
+          패배 리스크가 있는 영웅은 수비병과 싸우지 말고 <strong>채집과 드랍 회수</strong>에 집중하는 편이 더 낫다.
+          괜히 5분 봉쇄를 당하면 전체 루틴이 꼬인다.
+        </p>
+
+        <h3>과열 지역은 바로 버리기</h3>
+        <p>
+          경쟁이 심한 구역에서 계속 싸우기보다, 인접한 대체 광맥으로 빠르게 이동하는 것이 더 효율적일 때가 많다.
+          특히 무과금은 <strong>싸움보다 빈자리 선점</strong>이 중요하다.
+        </p>
+
+        <div class="callout warn">
+          <h3>핵심 주의사항</h3>
+          <p>체사레 수비병에게 패배하면 해당 영웅은 5분 동안 사용할 수 없다. 주력 조합으로 무리한 교전을 걸지 않는 것이 중요하다.</p>
+        </div>
+      </section>
+
+      <section id="summary" class="block anchor">
+        <h2>7) 최종 요약</h2>
+        <ul>
+          <li><strong>강한 유저:</strong> 3레벨 광맥 + 수비병 + 남은 7분 궁전 진입</li>
+          <li><strong>약한 유저:</strong> 1~2레벨 광맥 안정 채집 루틴 + 안전한 수비병 처리</li>
+          <li><strong>스킬 순서:</strong> 오 - 오 - 왼 - 왼 - 오</li>
+          <li><strong>스킬 타이밍:</strong> 20 / 15 / 10 / 5분</li>
+          <li><strong>핵심 포인트:</strong> 불안정 광맥 알림과 손모양 드랍 회수 속도</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>진짜 한 줄 결론</h3>
+          <p><strong>오-오-왼-왼-오</strong>와 <strong>20/15/10/5분</strong>만 확실히 기억해도, 사라진 유적 운영 퀄리티가 확 올라간다.</p>
+        </div>
+      </section>
+
+      <section id="faq" class="block anchor">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>사라진 유적에서 무과금은 어떻게 운영해야 하나요?</summary>
+          <p>무과금이나 저전투력 유저는 궁전 경쟁보다 1~2레벨 광맥 채집 루틴과 안전한 수비병 처리에 집중하는 편이 안정적인 점수를 만들기 좋다.</p>
+        </details>
+
+        <details>
+          <summary>사라진 유적 스킬 순서는 어떻게 찍나요?</summary>
+          <p>기본 추천 루트는 오-오-왼-왼-오다. 수비병 처치 보너스, 이동 속도, 점령 보너스, 채집 효율, 채집 속도 강화 순으로 가져가는 방식이다.</p>
+        </details>
+
+        <details>
+          <summary>불안정 광맥은 언제 나오나요?</summary>
+          <p>불안정 광맥은 보통 남은 20·19·18분, 그리고 10·9·8분 구간에 등장한다. 등장 즉시 전 부대를 투입하는 것이 좋다.</p>
+        </details>
+      </section>
+
+      <section class="block" id="related">
+        <h2>관련 가이드</h2>
+        <div class="pill-row">
+          <a class="pill" href="/ko/guides/kingshot-bearhunt.html">곰사냥 고득점 가이드</a>
+          <a class="pill" href="/ko/guides/hallofgovernors.html">최강영주 가이드</a>
+          <a class="pill" href="/ko/guides/kingshot-f2p-guide.html">무과금/소과금 성장 가이드</a>
+          <a class="pill" href="/ko/guides/">가이드 전체 보기</a>
+        </div>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        본 문서는 공식이 아닌, 플레이 경험을 바탕으로 정리한 팬 가이드다.
+        서버 환경, 경쟁 강도, 계정 전투력에 따라 최적 루트는 달라질 수 있다.
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="ja" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot 王国移民 深化ガイド | 移民条件・特別招待・戦闘力制限・チェックリスト | Kingshot Data</title>
+  <meta name="description" content="Kingshot 王国移民の深化ガイドです。王国移民の条件、通常招待と特別招待、移民戦闘力制限、管理者視点の運営ポイント、移民前チェックリストまで1ページで整理しました。" />
+  <meta name="keywords" content="Kingshot 王国移民, Kingshot 移民ガイド, Kingshot 特別招待, Kingshot 通常招待, Kingshot 移民 戦闘力制限, Kingshot サーバー移民, Kingshot kingdom transfer, Kingshot transfer guide" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ja/guides/transfer.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/transfer.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/transfer.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/transfer.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/transfer.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/transfer.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot 王国移民 深化ガイド | 移民条件・特別招待・戦闘力制限・チェックリスト" />
+  <meta property="og:description" content="Kingshot 王国移民の基本構造と実戦的な運営ポイントを整理しました。移民条件、通常招待と特別招待、戦闘力制限、管理者基準の優先順位、移民前チェックリストをまとめて確認できます。" />
+  <meta property="og:url" content="https://kingshotdata.kr/ja/guides/transfer.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guide/transfer-guide.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Kingshot 王国移民 深化ガイド代表画像" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kingshot 王国移民 深化ガイド | 移民条件・特別招待・戦闘力制限・チェックリスト" />
+  <meta name="twitter:description" content="Kingshot 王国移民の基本構造と実戦的な運営ポイントを整理しました。移民条件、通常招待と特別招待、戦闘力制限、管理者基準の優先順位、移民前チェックリストを確認できます。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guide/transfer-guide.webp" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guide/transfer-guide.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --panel3:#fbfdff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --note-bg:#fff7ed;
+      --note-border:rgba(245,158,11,.35);
+      --ok-bg:#f0fdf4;
+      --ok-border:#bbf7d0;
+      --blue-bg:#eff6ff;
+      --blue-border:#bfdbfe;
+      --danger:#ef4444;
+      --success:#16a34a;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.65 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      word-break:keep-all;
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      justify-content:flex-end;
+    }
+    nav.lang a{
+      width:64px;
+      min-width:64px;
+      height:36px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:800;
+      text-align:center;
+      white-space:nowrap;
+      flex:0 0 64px;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:900;
+      border-color:#c7d2fe;
+      background:#f8fbff;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+      scrollbar-width:none;
+    }
+    nav.section-tabs::-webkit-scrollbar{display:none}
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+      flex:0 0 auto;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px;
+      height:160px;
+      object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+
+    h1{margin:0 0 8px;font-size:28px;line-height:1.15}
+    h2{margin:0 0 10px;font-size:20px;line-height:1.3}
+    h3{margin:0 0 10px;font-size:16px;line-height:1.35}
+    .sub{margin:0;color:var(--muted)}
+    .muted{color:var(--muted)}
+
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .jump{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section p{margin:8px 0}
+
+    .summary-grid,
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+    .summary-grid.summary-4{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:14px;
+      min-width:0;
+    }
+
+    .mini-title{
+      margin:0 0 8px;
+      font-size:15px;
+      font-weight:900;
+      line-height:1.35;
+    }
+
+    .summary-card{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      min-height:100%;
+    }
+    .summary-label{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .summary-value{
+      font-size:22px;
+      font-weight:1000;
+      line-height:1.1;
+    }
+    .summary-desc{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .note,
+    .ok-box,
+    .blue-box{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note{
+      border:1px solid var(--note-border);
+      background:rgba(245,158,11,.08);
+    }
+    .ok-box{
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+    }
+    .blue-box{
+      border:1px solid var(--blue-border);
+      background:var(--blue-bg);
+    }
+    .note strong,.ok-box strong,.blue-box strong{font-weight:900}
+    .note .note-ico{
+      width:18px;height:18px;flex:0 0 18px;
+      margin-top:2px;color:#b45309;
+    }
+
+    .toc{
+      display:grid;
+      gap:8px;
+      margin-top:12px;
+    }
+    .toc a{
+      display:inline-flex;
+      align-items:center;
+      width:fit-content;
+      max-width:100%;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--text);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    ul.clean{margin:0;padding-left:18px}
+    ul.clean li{margin:6px 0}
+
+    .compare-table-wrap,
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+      margin-top:10px;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+      min-width:720px;
+    }
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:12px 12px;
+      border-bottom:1px solid var(--border);
+      font-size:13px;
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td{
+      padding:12px 12px;
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:14px;
+      line-height:1.6;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:last-child td{border-bottom:0}
+
+    .phase-col{width:86px}
+    .name-col{width:180px}
+
+    .diff-normal{color:var(--success);font-weight:900}
+    .diff-special{color:var(--danger);font-weight:900}
+
+    .mobile-compare{
+      display:none;
+      gap:12px;
+      margin-top:10px;
+    }
+    .compare-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:14px;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+    }
+    .compare-badge{
+      display:inline-flex;
+      align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      margin-bottom:10px;
+      border:1px solid var(--border);
+    }
+    .compare-badge.normal{
+      color:var(--success);
+      background:#f0fdf4;
+      border-color:#bbf7d0;
+    }
+    .compare-badge.special{
+      color:var(--danger);
+      background:#fef2f2;
+      border-color:#fecaca;
+    }
+    .compare-list{
+      display:grid;
+      gap:8px;
+    }
+    .compare-row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:9px 10px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      font-size:13px;
+    }
+    .compare-row .k{
+      color:var(--muted);
+      font-weight:700;
+      flex:0 0 92px;
+    }
+    .compare-row .v{
+      text-align:right;
+      font-weight:900;
+      flex:1 1 auto;
+    }
+
+    .related{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .seo-copy{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:1024px){
+      .summary-grid.summary-4{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        flex-wrap:wrap;
+        align-items:flex-start;
+      }
+      .brand{width:100%}
+      nav.lang{
+        width:100%;
+        justify-content:flex-start;
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+      .grid,
+      .summary-grid,
+      .summary-grid.summary-4{
+        grid-template-columns:1fr;
+      }
+      .mobile-compare{
+        display:grid;
+      }
+      .compare-table-wrap{
+        display:none;
+      }
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      h2{font-size:19px}
+      section{padding:14px}
+      .hero{padding:14px}
+      .card{padding:12px}
+      nav.lang{gap:6px}
+      nav.lang a{
+        width:58px;
+        min-width:58px;
+        flex:0 0 58px;
+        height:34px;
+        font-size:12px;
+      }
+      .summary-value{font-size:20px}
+      .compare-row .k{flex:0 0 86px}
+      .toc a{
+        width:100%;
+        justify-content:center;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot 王国移民 深化ガイド | 移民条件・特別招待・戦闘力制限・チェックリスト",
+    "description":"Kingshot 王国移民の深化ガイドです。王国移民の条件、通常招待と特別招待、移民戦闘力制限、管理者視点の運営ポイント、移民前チェックリストまで1ページで整理しました。",
+    "inLanguage":"ja",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ja/guides/transfer.html"
+    },
+    "author":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Kingshot Data",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+      }
+    },
+    "image":"https://kingshotdata.kr/img/guide/transfer-guide.webp"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Kingshot の王国移民は同じグループ同士でしかできませんか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"はい。王国移民は同じ進行度グループ内でのみ可能です。真金段階や英雄世代の進行状況が近い王国同士が同じ移民グループにまとめられる構造と考えるとわかりやすいです。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"特別招待はいつ必要ですか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"特別招待は移民戦闘力制限を超える対象を受け入れるときに必要です。通常招待は制限以下の対象にのみ使用できます。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"移民戦闘力制限には何が含まれますか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"領主戦闘力だけでなく、病院の負傷兵や徴兵所の予備兵まで含めて判定される構造と考えると安全です。実際の移民前には負傷兵や予備兵の整理状況まで確認しておくのがおすすめです。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"移民準備で最も重要なことは何ですか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"同じグループかどうかの確認、戦闘力制限の達成、タウンセンターレベル条件、同盟脱退の有無、クールタイム、移民先王国のキャラクター数、移民チケット確保を優先して確認することです。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"ホーム",
+        "item":"https://kingshotdata.kr/ja/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"ガイド",
+        "item":"https://kingshotdata.kr/ja/guides/"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"王国移民 深化ガイド",
+        "item":"https://kingshotdata.kr/ja/guides/transfer.html"
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"></path>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"></path>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ja/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/transfer.html">EN</a>
+        <a href="/ko/guides/transfer.html">KO</a>
+        <a href="/ja/guides/transfer.html" aria-current="page">JA</a>
+        <a href="/zh-tw/guides/transfer.html">TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概要</a>
+      <a href="#rules">基本ルール</a>
+      <a href="#manager">管理者視点</a>
+      <a href="#migrant">移民準備</a>
+      <a href="#checklist">チェックリスト</a>
+      <a href="#faq">FAQ</a>
+      <a href="#related">関連</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ja/">ホーム</a> <span class="muted">›</span>
+        <a href="/ja/guides/">ガイド</a> <span class="muted">›</span>
+        <span>王国移民 深化ガイド</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/guide/transfer-guide.webp" alt="Kingshot 王国移民 深化ガイド代表画像" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>Kingshot 王国移民 深化ガイド</h1>
+          <p class="sub">
+            王国移民の基本条件から通常招待と特別招待の違い、移民戦闘力制限、
+            管理者視点での実戦的な運営基準、そして実際に移民を準備するプレイヤーが確認すべきポイントまで
+            一度に整理した深化ガイドです。
+          </p>
+
+          <div class="quote">
+            このページは単なるルールの要約ではなく、実際のサーバー運営と移民準備の経験をもとに、
+            誰を受け入れるべきか、どこへ行くべきか、何を先に確認すべきかまで整理した実戦向けガイドです。
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">概要</a><span class="dotsep">•</span>
+            <a href="#rules">基本ルール</a><span class="dotsep">•</span>
+            <a href="#manager">管理者視点</a><span class="dotsep">•</span>
+            <a href="#migrant">移民準備</a><span class="dotsep">•</span>
+            <a href="#faq">FAQ</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>概要</h2>
+        <p>
+          Kingshot の王国移民は、同じ進行度グループ内で別の王国へ都市を移動するシステムです。
+          表面上は移民チケットと条件さえ揃えばよいように見えますが、実際にはサーバーの雰囲気、管理者の方針、
+          特別招待の使用可能回数、移民戦闘力制限、同盟内の受け入れ枠まで含めて考える必要があります。
+        </p>
+        <p class="seo-copy">
+          特に Kingshot の王国移民シーズンでは、単純に戦闘力が高いプレイヤーだけが好まれるわけではなく、
+          サーバー適応力、コミュニケーション力、同盟との相性、既存メンバーとの衝突可能性、管理者からの信頼まで
+          一緒に見られることが多いです。だからこそ Kingshot の移民ガイドは、ルール整理だけで終わらせず、
+          管理者視点と移民希望者視点を一緒に理解する形のほうが実戦的です。
+        </p>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>要点:</strong>
+            移民は単なる移動ではなく、サーバーと同盟が人を選ぶ過程でもあります。
+            条件達成と同じくらい、評判、コミュニケーション、サーバー適応力、そして管理者との信頼が重要です。
+          </div>
+        </div>
+
+        <div class="summary-grid summary-4">
+          <article class="card summary-card">
+            <div class="summary-label">ポイント 1</div>
+            <div class="summary-value">同じグループ</div>
+            <div class="summary-desc">王国移民は同じ進行度グループ同士でのみ可能です。</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">ポイント 2</div>
+            <div class="summary-value">通常 / 特別招待</div>
+            <div class="summary-desc">戦闘力制限以下か超過かで必要な招待方式が変わります。</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">ポイント 3</div>
+            <div class="summary-value">戦闘力制限</div>
+            <div class="summary-desc">表示戦闘力だけでなく、負傷兵や予備兵まで確認するのが安全です。</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">ポイント 4</div>
+            <div class="summary-value">運営と信頼</div>
+            <div class="summary-desc">特別招待の使い方は、サーバー方針と管理者の信頼を示す指標にもなります。</div>
+          </article>
+        </div>
+
+        <div class="toc" aria-label="本文目次">
+          <a href="#rules">基本ルール整理</a>
+          <a href="#invite-compare">通常招待 vs 特別招待 比較</a>
+          <a href="#manager">管理者ならどう運営するか</a>
+          <a href="#migrant">移民を準備する側が見るべき点</a>
+          <a href="#checklist">移民前チェックリスト</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </section>
+
+      <section id="rules">
+        <span class="anchor"></span>
+        <h2>基本ルール整理</h2>
+
+        <div class="grid">
+          <article class="card">
+            <p class="mini-title">移民の基本構造</p>
+            <ul class="clean">
+              <li>移民は同じ進行度グループ内でのみ可能です。</li>
+              <li>王国は強勢王国と一般王国に分かれ、受け入れ人数の構造が異なる場合があります。</li>
+              <li>通常招待と特別招待は用途が異なり、戦闘力制限を基準に区分されます。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">移民前の条件</p>
+            <ul class="clean">
+              <li>移民戦闘力制限を超えると、通常は移動が難しくなります。</li>
+              <li>タウンセンターレベル、非戦闘状態、同盟脱退、移民クールタイムなど基本条件を満たす必要があります。</li>
+              <li>移民先王国内の所持キャラクター数と移民チケット数も事前に確認する必要があります。</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="table-wrap" aria-label="王国移民 基本ルール表">
+          <table>
+            <thead>
+              <tr>
+                <th class="phase-col">区分</th>
+                <th class="name-col">項目</th>
+                <th>説明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>グループ</td>
+                <td>同じ進行度</td>
+                <td>王国移民は同じ進行度グループ同士でのみ可能で、真金段階や英雄世代の解放状況が近い王国同士が同じ移民グループにまとめられる構造と考えるとわかりやすいです。</td>
+              </tr>
+              <tr>
+                <td>招待</td>
+                <td>通常招待</td>
+                <td>移民戦闘力制限以下の対象を受け入れるときに使います。枠があるからといって無条件で受け入れるわけではなく、サーバー基準や同盟の優先順位も一緒に反映されます。</td>
+              </tr>
+              <tr>
+                <td>招待</td>
+                <td>特別招待</td>
+                <td>移民戦闘力制限を超える対象を受け入れるときに必要です。回数が限られているため、管理者は誰に使うかを非常に慎重に判断します。</td>
+              </tr>
+              <tr>
+                <td>戦闘力</td>
+                <td>判定基準</td>
+                <td>領主戦闘力だけでなく、病院の負傷兵や徴兵所の予備兵まで含めて判定されることがあるため、単純に表示戦闘力だけで判断するとミスにつながる可能性があります。</td>
+              </tr>
+              <tr>
+                <td>基本条件</td>
+                <td>状態確認</td>
+                <td>タウンセンターレベル、戦闘状態の有無、外部派遣部隊、同盟加入状態、国王や管理者権限の有無、前回移民からの日数なども合わせて確認する必要があります。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="invite-compare">
+        <span class="anchor"></span>
+        <h2>通常招待 vs 特別招待</h2>
+        <p class="seo-copy">
+          Kingshot の特別招待と通常招待の違いを正確に理解しておくと、移民シーズンの判断がかなりしやすくなります。
+          特に Kingshot の移民戦闘力制限を超えるプレイヤーを受け入れるには特別招待が必要なため、
+          管理者はこの権限を誰に使うかを事前に計画し、移民希望者も自分がどのカテゴリに入るのかを先に把握しておく必要があります。
+        </p>
+
+        <div class="compare-table-wrap" aria-label="通常招待と特別招待の比較表">
+          <table>
+            <thead>
+              <tr>
+                <th>項目</th>
+                <th>通常招待</th>
+                <th>特別招待</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>基本対象</td>
+                <td class="diff-normal">移民戦闘力制限以下</td>
+                <td class="diff-special">移民戦闘力制限超過</td>
+              </tr>
+              <tr>
+                <td>使用難度</td>
+                <td>比較的一般的</td>
+                <td>希少リソースのように扱われることが多い</td>
+              </tr>
+              <tr>
+                <td>運営上の意味</td>
+                <td>基本受け入れと枠調整</td>
+                <td>中核人材の確保またはプロジェクト性のある勧誘</td>
+              </tr>
+              <tr>
+                <td>管理者の判断要素</td>
+                <td>枠、適応力、コミュニケーション、サーバールール順守</td>
+                <td>戦闘力、影響力、既存メンバーの反応、サーバー方針</td>
+              </tr>
+              <tr>
+                <td>移民希望者の視点</td>
+                <td>条件を満たせば可能性が高くなる</td>
+                <td>なぜ自分を受け入れるべきかという説得材料がより必要</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mobile-compare" aria-label="モバイル比較カード">
+          <article class="compare-card">
+            <div class="compare-badge normal">通常招待</div>
+            <div class="compare-list">
+              <div class="compare-row"><span class="k">対象</span><span class="v">戦闘力制限以下</span></div>
+              <div class="compare-row"><span class="k">難度</span><span class="v">比較的一般的</span></div>
+              <div class="compare-row"><span class="k">意味</span><span class="v">基本受け入れと枠調整</span></div>
+              <div class="compare-row"><span class="k">判断</span><span class="v">枠、適応力、コミュ力</span></div>
+            </div>
+          </article>
+
+          <article class="compare-card">
+            <div class="compare-badge special">特別招待</div>
+            <div class="compare-list">
+              <div class="compare-row"><span class="k">対象</span><span class="v">戦闘力制限超過</span></div>
+              <div class="compare-row"><span class="k">難度</span><span class="v">希少リソース扱い</span></div>
+              <div class="compare-row"><span class="k">意味</span><span class="v">中核勧誘 / プロジェクト勧誘</span></div>
+              <div class="compare-row"><span class="k">判断</span><span class="v">影響力、方針、信頼</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="blue-box">
+          <div>
+            <strong>実戦ポイント</strong>
+            <p style="margin:6px 0 0">
+              特別招待は、単純に戦闘力が高いから使うカードではありません。
+              サーバー全体の雰囲気や同盟内の相性まで含めて見る必要があり、
+              使い方を誤ると既存メンバーの離脱につながることもあります。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="manager">
+        <span class="anchor"></span>
+        <h2>自分が管理者なら</h2>
+
+        <article class="card">
+          <p class="mini-title">1. 自分がトップ課金者でなくても、望む方向で移民を進めたいならまず立場を作るべき</p>
+          <p>
+            同盟内、そしてサーバー内で自分の立場を固めると同時に、サーバーの実力者たちに
+            自分がどれだけ重要な存在かを伝える必要があります。ここで大事なのは、結局は人として好かれることです。
+            すべてのプレイヤーに丁寧に接し、サーバー全体に不要な摩擦を生まない姿勢が重要です。
+          </p>
+          <p>
+            実力者たちも結局は人なので、一緒に遊びやすい人を好みます。
+            だからこそ普段どう行動してきたかによって、移民シーズンに行使できる影響力の大きさが決まります。
+            課金規模だけで全てが決まらない理由はここにあります。
+          </p>
+        </article>
+
+        <article class="card" style="margin-top:14px">
+          <p class="mini-title">2. 移民の優先順位を決めておくべき</p>
+          <p>
+            移民シーズンが始まると、想像以上に多くの問い合わせが入ることがあります。
+            そのため、事前にメモやシートで固有ID、サーバー番号、希望同盟、推薦人の有無などを記録し、
+            実際に自サーバーや同盟の連絡部屋に入って適応が良い人に優先順位を与える形で整理すると効率的です。
+          </p>
+
+          <div class="ok-box">
+            <div>
+              <strong>優先順位の例</strong>
+              <ul class="clean" style="margin-top:8px">
+                <li>1位: 人柄の良い高課金者</li>
+                <li>2位: 同盟メンバーとコミュニケーションが取りやすい人</li>
+                <li>3位: すでに移民してきた高課金者、またはそのファミリーが望む人</li>
+                <li>4位: その他</li>
+              </ul>
+            </div>
+          </div>
+
+          <p>
+            結局は国王と継続的に連携し、今回の移民で特別招待を何枚使えるのか、
+            通常受け入れ枠はどれくらいあるのかを確定させたうえで計算する必要があります。
+          </p>
+        </article>
+
+        <article class="card" style="margin-top:14px">
+          <p class="mini-title">3. 高課金者を自分の同盟へ団体移民で迎えたいなら、欲しい人物は必ず交差確認するべき</p>
+          <p>
+            一人の問題行動が原因で同盟メンバーが離れていくケースは思った以上に多いです。
+            特に移民の時期は、サーバー内でさまざまな噂やドラマが起こりやすくなります。
+            だから特定の高課金者が望んでいるからといって無条件で受け入れるのではなく、
+            他の高課金者や既存サーバーメンバーの反応も見ながら検証する過程が必要です。
+          </p>
+          <p>
+            同盟全体に負担になる人物なら、優先順位を後ろに回すのも一つの運営です。
+            移民は一人を受け入れる問題ではなく、その人を受け入れたときに既存メンバーがどれだけ安定して一緒に進めるかの問題だからです。
+          </p>
+        </article>
+
+        <article class="card" style="margin-top:14px">
+          <p class="mini-title">4. 高課金者を迎えるなら、プロジェクトとして提示するべき</p>
+          <p>
+            課金規模の大きいプレイヤーほど、移民効率が悪いと判断すると決断を長く保留します。
+            そのため管理者は、自分たちの同盟の方向性、管理スタイル、NAP構造、イベント運営基準、
+            サーバーの雰囲気などを一つのプロジェクトのように説明する必要があります。
+          </p>
+          <p>
+            ただ来てくださいではなく、来たらどんな戦争環境でどんな役割を担うのか、
+            どんな方向のサーバーを作りたいのかまで見せることで信頼が生まれます。
+            その人たちが来れば、同盟だけでなくサーバー全体にとっても大きな力になるからです。
+          </p>
+        </article>
+      </section>
+
+      <section id="migrant">
+        <span class="anchor"></span>
+        <h2>移民を準備する立場</h2>
+
+        <div class="grid">
+          <article class="card">
+            <p class="mini-title">1. サーバーが安定しているかを確認するべき</p>
+            <p>
+              必ず交差確認が必要です。少なくとも1か月以上過ごす場所になる可能性が高いため、
+              表面的な戦闘力よりも、サーバーの雰囲気、戦争頻度、攻撃的なプレイヤー比率、NAPの安定性を先に見るべきです。
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">2. 管理者の性向を見るべき</p>
+            <p>
+              管理者が同盟メンバーにどれだけ本気で向き合っているか、言動が一致しているかを確認する必要があります。
+              移民シーズンのときだけ親切なのか、普段から継続して運営しているのかを見ることが重要です。
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">3. 行きたい同盟が自分に合うか確認するべき</p>
+            <p>
+              厳格なルールを持つ同盟もあれば、NAP基準で比較的自由な雰囲気の同盟もあります。
+              自分の性格と合わない場所に入ると、戦闘力に関係なく長続きしにくくなります。
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">4. その同盟のサーバー内での立場を確認するべき</p>
+            <p>
+              立場が強い同盟なら、全軍出撃や想定外の攻撃を受けたときにも被害を減らしやすくなります。
+              単純なランキングだけではなく、その同盟がサーバー内でどれだけ保護されているかも一緒に見てください。
+            </p>
+          </article>
+        </div>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>補足:</strong>
+            通常招待と特別招待は単なる数字ではなく、一つの約束でもあります。
+            その約束をどう使うかが、そのサーバーや同盟の信頼度を示す指標になることもあります。
+          </div>
+        </div>
+
+        <p class="seo-copy">
+          Kingshot の王国移民を準備するプレイヤーなら、戦闘力だけを見るのではなく、
+          Kingshot の特別招待を使ってでも自分を欲しがっているサーバーなのか、
+          Kingshot の移民戦闘力制限に合わせるために何を調整する必要があるのか、
+          そして目標同盟が実際に自分と相性が良いのかまで合わせて確認するべきです。
+          結局、長く定着する移民は数字ではなく環境選びで決まります。
+        </p>
+      </section>
+
+      <section id="checklist">
+        <span class="anchor"></span>
+        <h2>移民前チェックリスト</h2>
+
+        <div class="summary-grid">
+          <article class="card summary-card">
+            <div class="summary-label">STEP 1</div>
+            <div class="summary-value">グループ確認</div>
+            <div class="summary-desc">自分の王国と目標王国が同じ移民グループかを最初に確認します。</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">STEP 2</div>
+            <div class="summary-value">戦闘力確認</div>
+            <div class="summary-desc">移民戦闘力制限と、負傷兵・予備兵の含有判定を一緒に確認します。</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">STEP 3</div>
+            <div class="summary-value">状態整理</div>
+            <div class="summary-desc">同盟脱退、非戦闘状態、管理権限の有無を整理します。</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">STEP 4</div>
+            <div class="summary-value">事前調整</div>
+            <div class="summary-desc">目標同盟と枠、優先順位、招待種類をあらかじめ合わせておきます。</div>
+          </article>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <p class="mini-title">基本条件</p>
+            <ul class="clean">
+              <li>自分の王国と目標王国が同じ移民グループか確認</li>
+              <li>タウンセンターレベル条件を満たしているか確認</li>
+              <li>移民戦闘力制限を満たしているか確認</li>
+              <li>負傷兵と予備兵の扱いまで含めて確認</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">状態確認</p>
+            <ul class="clean">
+              <li>現在戦闘状態でないか確認</li>
+              <li>外部派遣部隊や特殊状態が残っていないか確認</li>
+              <li>同盟脱退が完了しているか確認</li>
+              <li>国王または移民管理者権限の状態ではないか確認</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">アカウント / アイテム</p>
+            <ul class="clean">
+              <li>移民先王国内の所持キャラクター数を確認</li>
+              <li>移民チケット数を確保</li>
+              <li>特別招待または通常招待が必要か事前確認</li>
+              <li>移民後に資源保護上限を超える分の処理計画を立てる</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">事前コミュニケーション</p>
+            <ul class="clean">
+              <li>目標同盟の管理者と優先順位を確認</li>
+              <li>自分がどのポジションで入るのか確認</li>
+              <li>既存メンバーとの雰囲気が合うか確認</li>
+              <li>サーバールールとNAPルールを把握</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="faq">
+        <span class="anchor"></span>
+        <h2>FAQ</h2>
+
+        <div class="grid">
+          <article class="card">
+            <p class="mini-title">同じグループ同士でしか移民できませんか？</p>
+            <p>
+              はい。基本的には同じ進行度グループ内でのみ移民が可能です。
+              そのため、まずは目標王国が自分のサーバーと同じグループかどうかを確認する必要があります。
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">特別招待は誰に使うべきですか？</p>
+            <p>
+              一般的には、戦闘力制限を超える中核人材、サーバー貢献度の高いプレイヤー、
+              または同盟プロジェクト上どうしても必要な人材に優先して配分されることが多いです。
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">戦闘力が高ければ優先順位も上がりますか？</p>
+            <p>
+              必ずしもそうではありません。人柄、コミュニケーション、既存メンバーとの相性、サーバー適応力、
+              そして推薦人の信頼度も、実際の優先順位に大きく影響します。
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">移民先サーバーを選ぶときに最も大事なのは何ですか？</p>
+            <p>
+              安定性です。戦闘力ランキングよりも、サーバーの雰囲気、管理者の運営方式、
+              同盟の立場、攻撃頻度、NAPの安定性を先に見るのがおすすめです。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="seo-copy">
+        <h2>Kingshot 王国移民を準備するときに必ず知っておきたいこと</h2>
+        <p>
+          Kingshot の王国移民は、単に移民チケットを準備するだけで終わるコンテンツではありません。
+          実際にはサーバーごとの雰囲気の違い、特別招待の運用、管理者とのコミュニケーション、同盟内での立場、
+          そして移民戦闘力制限の調整まで含めて合わせる必要があり、それによって望む結果を得やすくなります。
+        </p>
+        <p>
+          そのため Kingshot の移民ガイドを探しているプレイヤーなら、単純なルールだけでなく、
+          どのサーバーが安定しているか、どの同盟が自分に合っているか、管理者がどれだけ信頼できるかまで
+          一緒に見る習慣が重要です。特に Kingshot の特別招待と通常招待は、サーバーが誰をどれだけ必要としているかを示す指標でもあるため、
+          移民シーズンでは数字よりも関係性と信頼が大きく影響することが少なくありません。
+        </p>
+        <p>
+          このページは、Kingshot 王国移民の条件、特別招待を使う判断、管理者視点の優先順位、実際の移民者向けチェックリストを
+          一緒に整理した深化型ガイドです。移民を控えているなら、本文の内容を基準に
+          自分の条件、目標サーバー、目標同盟、移民チケット、戦闘力状態を順番に確認してみることをおすすめします。
+        </p>
+      </section>
+
+      <section id="related">
+        <h2>関連ガイド / ページ</h2>
+        <div class="related">
+          <a class="pill" href="/ja/guides/hallofgovernors.html">最強領主ガイド</a>
+          <a class="pill" href="/ja/guides/kingshot-f2p-guide.html">無課金 / 微課金 成長ガイド</a>
+          <a class="pill" href="/ja/guides/svs-guide.html">サーバー戦ガイド</a>
+          <a class="pill" href="/ja/guides/gift-code.html">ギフトコードガイド</a>
+          <a class="pill" href="/ja/guides/kingdom-migration-notice.html">王国移民告知まとめ</a>
+          <a class="pill" href="/ja/heroes/">英雄一覧</a>
+          <a class="pill" href="/ja/buildings/">建物一覧</a>
+          <a class="pill" href="/ja/guides/">ガイド一覧</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

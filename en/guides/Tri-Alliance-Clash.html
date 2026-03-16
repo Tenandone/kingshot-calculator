@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>How to Win Tri-Alliance Clash | Kingshot Strategy Guide</title>
+  <meta name="description" content="Kingshot Tri-Alliance Clash strategy guide. Learn the map structure, 4 battle stages, 20-minute Garrisons, 40-minute Temple timing, energy management, team setup, and key practical tips to improve your win rate." />
+  <meta name="keywords" content="Kingshot Tri-Alliance Clash, Tri-Alliance Clash guide, Kingshot TAC strategy, Kingshot alliance war, Kingshot Garrison guide, Kingshot Temple guide" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/en/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="zh-CN" href="https://kingshotdata.kr/zh-cn/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/Tri-Alliance-Clash.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How to Win Tri-Alliance Clash | Kingshot Strategy Guide" />
+  <meta property="og:description" content="A practical Kingshot Tri-Alliance Clash guide covering the map, 4 battle stages, Garrisons at 20 minutes, Temple timing at 40 minutes, energy management, team setup, and FAQ." />
+  <meta property="og:url" content="https://kingshotdata.kr/en/guides/Tri-Alliance-Clash.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="en_US" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --line:#e7ecf5;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+      --warn:#b45309;
+      --warn-bg:rgba(245,158,11,.08);
+
+      --radius:16px;
+      --radius2:14px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.7 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(26px,4vw,40px);
+      line-height:1.15;
+      color:var(--text);
+    }
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:16px 0 0;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .k{font-weight:900;color:var(--text)}
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    h2{
+      margin:0 0 10px;
+      font-size:clamp(20px,2.4vw,28px);
+      color:var(--accent);
+      line-height:1.25;
+    }
+    h3{
+      font-size:clamp(16px,2vw,20px);
+      margin:18px 0 8px;
+      line-height:1.35;
+    }
+    p{margin:8px 0}
+
+    .toc{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .toc strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:15px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin:12px 0;
+    }
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      background:#fff;
+      padding:14px;
+    }
+    .card .title{
+      margin:0 0 6px;
+      font-weight:900;
+    }
+
+    .note,.callout{
+      font-size:14px;
+      color:var(--muted);
+      background:var(--warn-bg);
+      padding:12px 14px;
+      border-left:4px solid var(--warn);
+      border-radius:10px;
+      margin:16px 0 0;
+    }
+
+    .imgbox{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:#fff;
+      box-shadow:var(--shadow);
+      padding:12px;
+      margin-top:22px;
+    }
+    figure{margin:0}
+    figure img{
+      width:100%;
+      max-width:100%;
+      height:auto;
+      border-radius:12px;
+      display:block;
+      border:1px solid var(--border);
+    }
+    figcaption{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:8px;
+      line-height:1.6;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:10px 0 0;
+    }
+    th,td{
+      border:1px solid var(--border);
+      padding:10px;
+      vertical-align:top;
+    }
+    th{
+      background:#f8fafc;
+      text-align:left;
+      font-weight:900;
+    }
+
+    ul{margin:8px 0;padding-left:18px}
+    li{margin:6px 0}
+
+    .hr{
+      height:1px;
+      background:var(--border);
+      margin:18px 0;
+    }
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--text);
+      font-size:13px;
+      font-weight:800;
+      text-decoration:none;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+        padding:10px 16px 12px;
+        margin:0 -16px;
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -16px;
+        padding:6px 16px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      .grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section,.toc,.imgbox{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"How to Win Tri-Alliance Clash | Kingshot Strategy Guide",
+    "inLanguage":"en",
+    "description":"A practical Kingshot Tri-Alliance Clash guide focused on improving win rate through better team operation and timing.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/en/guides/Tri-Alliance-Clash.html"
+    },
+    "author":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/en/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/Tri-Alliance-Clash.html" aria-current="page">EN</a>
+        <a href="/ko/guides/Tri-Alliance-Clash.html">KO</a>
+        <a href="/ja/guides/Tri-Alliance-Clash.html">JA</a>
+        <a href="/zh-tw/guides/Tri-Alliance-Clash.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#summary">Rules</a>
+      <a href="#stages">Stages</a>
+      <a href="#map">Map</a>
+      <a href="#setup">Setup</a>
+      <a href="#team">Teams</a>
+      <a href="#strategy">Strategy</a>
+      <a href="#tips">Tips</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/en/">Home</a> <span class="muted">›</span>
+        <a href="/en/guides/">Guides</a> <span class="muted">›</span>
+        <span>Tri-Alliance Clash</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>How to Win Tri-Alliance Clash</h1>
+          <p class="subtitle">This is a server event where 3 alliances compete by capturing buildings. At the end of the 1-hour battle, the alliance with the highest total score wins.</p>
+
+          <div class="meta">
+            <span class="badge"><span class="k">Core</span> Energy management · Captains · 20-minute Garrisons · 40-minute Temple</span>
+            <span class="badge"><span class="k">Battle Length</span> 1 hour after opening</span>
+            <span class="badge"><span class="k">Battle Day</span> Saturday in the selected time slot</span>
+          </div>
+
+          <div class="jump">
+            <a href="#summary">Rules</a><span class="dotsep">•</span>
+            <a href="#stages">Battle Stages</a><span class="dotsep">•</span>
+            <a href="#map">Map</a><span class="dotsep">•</span>
+            <a href="#strategy">Strategy</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="toc">
+        <strong>Contents</strong>
+        <ul>
+          <li><a href="#summary">Rules at a Glance</a></li>
+          <li><a href="#stages">4 Battle Stages</a></li>
+          <li><a href="#map">Map Structure and Key Points</a></li>
+          <li><a href="#setup">Registration, Attendance, and Voice Setup</a></li>
+          <li><a href="#team">Recommended Team Setup</a></li>
+          <li><a href="#strategy">Stage-by-Stage Strategy</a></li>
+          <li><a href="#tips">Practical Tips (Energy / Healing / Re-entry)</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <section class="imgbox" id="map">
+        <figure>
+          <img src="/img/tri_alliance_clash_map.png" alt="Tri-Alliance Clash rules and map summary image" />
+          <figcaption>
+            This map highlights the main objectives, including Transit Hubs, Garrisons, the Temple of Tides, and the route into the late-game center. Coordinates such as A1/B1/C1 and A24/B24/C24 follow the in-game battlefield labels.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="summary" class="anchor">
+        <h2>Rules at a Glance</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">Entry Requirements (Summary)</p>
+            <ul>
+              <li>Alliance must rank in the top 20 by alliance power</li>
+              <li>Squad 1 is usually unlocked by default</li>
+              <li>Example unlock for Squad 2: Alliance Lv.6+ and 40 cumulative active logins</li>
+              <li>If <span class="k">participants + substitutes total 15 or more</span>, Squad 2 can be counted separately</li>
+              <li>Players must be in an alliance and usually need City Center Lv.16+, while 5+ days of inactivity may restrict entry</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">Basic Rules (Operations)</p>
+            <ul>
+              <li>Voting, sign-up, matchmaking, and battle timing follow the server calendar</li>
+              <li>R4+ members can usually adjust sign-ups and participant lists</li>
+              <li>Up to 30 participants plus 10 substitutes may be allowed, depending on server rules</li>
+              <li>Each alliance can operate up to 2 squads in separate battlefields</li>
+              <li>Each Governor can deploy <span class="k">up to 3 marches</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout">
+          <p><span class="k">Key Point</span> Registration affects the result directly. Only register players who can actually show up and fight.</p>
+        </div>
+      </section>
+
+      <section id="stages" class="anchor">
+        <h2>4 Battle Stages</h2>
+
+        <table aria-label="Tri-Alliance Clash stage summary">
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Time</th>
+              <th>Main Goal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1) Preparation</td>
+              <td>3 min</td>
+              <td>Assign roles, confirm routes, and organize opening capture plans</td>
+            </tr>
+            <tr>
+              <td>2) Seize &amp; Conquer</td>
+              <td>17 min</td>
+              <td>Secure your own zone and steal some smaller enemy buildings while Garrisons are still protected</td>
+            </tr>
+            <tr>
+              <td>3) Garrison Occupation</td>
+              <td>20 min</td>
+              <td><span class="k">A24 / B24 / C24</span> unlock. Garrisons give strong points per minute and often decide the match</td>
+            </tr>
+            <tr>
+              <td>4) Temple Onslaught</td>
+              <td>20 min</td>
+              <td>At 40 minutes, the <span class="k">Temple of Tides</span> opens. First capture plus hold points decide the final outcome</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <p><span class="k">Key Timings</span> 20 minutes (Garrisons) / 40 minutes (Temple). Saving energy for these moments is one of the biggest win conditions.</p>
+        </div>
+      </section>
+
+      <section id="setup" class="anchor">
+        <h2>Registration, Attendance, and Voice Setup</h2>
+
+        <h3>1) Registration</h3>
+        <ul>
+          <li>Only register players who can really attend. Fake or inactive sign-ups hurt both matchmaking and actual battle performance.</li>
+          <li>Having R4+ members present is recommended because they can assign <span class="k">Captains</span> after capturing objectives, which helps energy recovery.</li>
+        </ul>
+
+        <h3>2) Voice Communication</h3>
+        <ul>
+          <li>Discord voice is highly recommended. Ideally, at least 1 to 3 leaders should be able to make real-time calls.</li>
+          <li>Real-time voice is much faster than chat, especially during the 20-minute Garrison fights and the 40-minute Temple timing.</li>
+        </ul>
+      </section>
+
+      <section id="team" class="anchor">
+        <h2>Recommended Team Setup</h2>
+        <p>The main goal is to run both point production (capture / hold) and key-object defense at the same time.</p>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">Attack Team</p>
+            <ul>
+              <li>Push into enemy territory → take buildings → pressure Garrisons at 20 minutes → rush the Temple at 40 minutes</li>
+              <li>Your strongest marches should usually go here first</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">Defense Team 1 / 2</p>
+            <ul>
+              <li>Defend your key routes and Transit Hubs</li>
+              <li>After 20 minutes, holding your own Garrison becomes the top priority</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">Floaters</p>
+            <ul>
+              <li>Backup / reinforcement role that supports offense or defense depending on the situation</li>
+              <li>They should save energy and react to sudden swings in the match</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">Heroes / March Choice</p>
+            <ul>
+              <li>Each Governor uses 3 marches, which means a total of 9 heroes in the battlefield rotation</li>
+              <li>It is often effective to save one strongest march for Garrison and Temple timing</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="strategy" class="anchor">
+        <h2>Stage-by-Stage Strategy</h2>
+
+        <h3>Stage 1–2 (0–20 min): Preparation + Early Expansion</h3>
+        <ul>
+          <li>At the start, secure your own-side buildings and take your Transit Hubs as quickly as possible.</li>
+          <li>Your Attack Team should steal a few smaller enemy buildings to gain early score and route advantage.</li>
+          <li>The early objective is to establish a points-per-minute lead.</li>
+          <li><span class="k">Do not overspend energy:</span> it is usually best to save around 30–40% for the 20-minute timing.</li>
+        </ul>
+
+        <h3>Stage 3 (20–40 min): Garrisons</h3>
+        <ul>
+          <li>At 20 minutes, the Garrisons (A24 / B24 / C24) unlock.</li>
+          <li>Priority 1: <span class="k">Hold your own Garrison</span>. If you lose it, the score can swing very quickly.</li>
+          <li>Priority 2: If possible, <span class="k">capture an enemy Garrison</span> to widen the score gap.</li>
+          <li>Floaters should be sent immediately to the area where the fight is starting to collapse.</li>
+        </ul>
+
+        <h3>Stage 4 (40–60 min): Temple of Tides</h3>
+        <ul>
+          <li>At 40 minutes, the Temple of Tides opens. <span class="k">First-capture points</span> are large, so timing the rush matters a lot.</li>
+          <li>The Attack Team should focus on rushing and holding the Temple, while Defense teams protect the access routes (A29 / B29 / C29).</li>
+          <li>Floaters should cut enemy reinforcements, retake or support connector buildings, and reinforce Temple defense.</li>
+        </ul>
+
+        <div class="callout">
+          <p><span class="k">Win Formula</span> If you can do all four at once — hold your Garrison, secure first Temple capture, hold the Temple, and defend the access route — your win rate goes up sharply.</p>
+        </div>
+      </section>
+
+      <section id="tips" class="anchor">
+        <h2>Practical Tips (Energy / Healing / Re-entry)</h2>
+
+        <h3>Energy Management</h3>
+        <ul>
+          <li>Energy is consumed by movement, capturing, charging, retreating, and instant revive.</li>
+          <li>After capturing a point, assigning a <span class="k">Captain</span> helps with better energy recovery.</li>
+        </ul>
+
+        <h3>Re-entry / Buffs</h3>
+        <ul>
+          <li>Once you leave the battlefield, there is usually a cooldown before re-entry. A 12-minute example rule is commonly used.</li>
+          <li>Most buffs still apply except for some march speed or capacity related effects, but final rules always depend on the server version.</li>
+        </ul>
+
+        <h3>Wounds / Recovery</h3>
+        <ul>
+          <li>If your troops are heavily damaged, retreating to a rear building, healing, and returning is often more efficient than instant revive.</li>
+          <li>Healing and conscription are most efficient when done during small gaps between active fights.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="anchor">
+        <h2>FAQ</h2>
+
+        <h3>Q. Why does each side seem to have a different number of Ruin Clusters?</h3>
+        <p>
+          Map balance is often built around route distance, Transit Hub access, Garrison defense difficulty, and Temple entry stability, not just raw building count.
+          That means a side with more Ruin Clusters may also carry more defense burden or harder control over critical connector routes.
+          In practice, matches are usually decided less by ruin count and more by <span class="k">20-minute Garrison control</span> and <span class="k">40-minute Temple execution</span>.
+        </p>
+
+        <div class="hr"></div>
+
+        <h3>Q. What is the single most important thing in this event?</h3>
+        <p>
+          <span class="k">Energy</span>. If you spend too much of it early, you will have nothing left for the 20-minute and 40-minute swing points.
+          Saving energy through Captain assignment, clear role separation, and proper Floater usage is one of the biggest keys to winning.
+        </p>
+      </section>
+
+      <section id="related">
+        <h2>Related Guides</h2>
+        <div class="related">
+          <a class="pill" href="/en/guides/viking.html">Viking Vengeance Guide</a>
+          <a class="pill" href="/en/guides/truegold.html">Truegold Cost Chart</a>
+          <a class="pill" href="/en/guides/topup-guide.html">Top-Up Guide</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

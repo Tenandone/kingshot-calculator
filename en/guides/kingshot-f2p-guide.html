@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot Beginner Guide · F2P / Low-Spender Growth Guide (Alliance, VIP7, Arena, Hammers, Shop Efficiency)</title>
+  <meta name="description" content="Kingshot beginner guide for free-to-play and low-spender players. Learn alliance priority, VIP7 value, arena rewards, hammers (hero gear), town center growth, shop efficiency, and event planning in one page." />
+  <meta name="keywords" content="Kingshot beginner guide, Kingshot f2p guide, Kingshot low spender guide, Kingshot VIP7, Kingshot arena, Kingshot hammers, Kingshot hero gear, Kingshot shop efficiency, Kingshot VIP shop, Kingshot arena shop, Kingshot wandering merchant" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/en/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/kingshot-f2p-guide.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot Beginner Guide · F2P / Low-Spender Growth Guide" />
+  <meta property="og:description" content="A Kingshot beginner guide covering top alliances, VIP7, arena, hammers, town center growth, shop efficiency, and event planning for free-to-play and low-spender players." />
+  <meta property="og:url" content="https://kingshotdata.kr/en/guides/kingshot-f2p-guide.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="en_US" />
+
+  <style>
+    *{box-sizing:border-box}
+
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --ok:#ecfdf5;
+      --warn:#fff7ed;
+      --note:#f8fafc;
+      --info:#eff6ff;
+
+      --shadow:0 10px 25px rgba(0,0,0,.06);
+      --radius:16px;
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --ok:#0f1e16;
+        --warn:#1a140c;
+        --note:#141414;
+        --info:#111827;
+        --shadow:0 10px 25px rgba(0,0,0,.35);
+      }
+    }
+
+    html,body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:15px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+    }
+
+    html{scroll-behavior:smooth}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(26px,3.4vw,40px);
+      line-height:1.18;
+      letter-spacing:-0.02em;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:32px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-side{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      padding:14px;
+    }
+    .hero-side h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-side ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .hero-side li{margin:6px 0}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note);
+    }
+    .callout.ok{background:var(--ok)}
+    .callout.warn{background:var(--warn)}
+    .callout.info{background:var(--info)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0;padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text);font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .checklist{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .check{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:12px 14px;
+    }
+    .check h3{
+      margin:0 0 8px;
+      font-size:14px;
+    }
+
+    .center-link-card{
+      display:grid;
+      grid-template-columns:120px 1fr;
+      gap:14px;
+      align-items:center;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      padding:14px;
+      margin-top:12px;
+    }
+    .center-link-card img{
+      width:120px;
+      height:120px;
+      object-fit:contain;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#f8fafc;
+      padding:10px;
+    }
+    .center-link-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+      color:var(--text);
+    }
+    .center-link-card p{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .shop-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .shop-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:14px;
+    }
+    .shop-card h3{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--text);
+    }
+    .shop-priority{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:8px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:1000;
+      border:1px solid var(--border);
+      background:var(--panel);
+    }
+    .badge.must{background:var(--ok)}
+    .badge.optional{background:var(--warn)}
+    .badge.skip{background:#fee2e2;color:#991b1b}
+    .btn-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:40px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      color:var(--text);
+      font-weight:1000;
+      text-decoration:none !important;
+      font-size:14px;
+      line-height:1;
+    }
+    .btn-link:hover{
+      border-color:#c7d2fe;
+      transform:translateY(-1px);
+    }
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:var(--note);
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+
+    .faq{
+      margin-top:10px;
+    }
+
+    .foot{
+      margin:18px 0 8px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:940px){
+      .hero,
+      .grid,
+      .checklist,
+      .center-link-card,
+      .shop-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+    }
+
+    @media (max-width:600px){
+      h1{font-size:26px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot Beginner Guide · F2P / Low-Spender Growth Guide",
+    "inLanguage":"en",
+    "description":"A Kingshot beginner guide covering top alliances, VIP7, arena, hammers, town center growth, shop efficiency, and event planning for free-to-play and low-spender players.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/en/guides/kingshot-f2p-guide.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://kingshotdata.kr/en/"},
+      {"@type":"ListItem","position":2,"name":"Guides","item":"https://kingshotdata.kr/en/guides/"},
+      {"@type":"ListItem","position":3,"name":"Kingshot Beginner Guide","item":"https://kingshotdata.kr/en/guides/kingshot-f2p-guide.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Which alliance should a Kingshot F2P player join?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"If possible, join the #1 alliance. At minimum, aim for a top 2 or top 3 alliance. Alliance gifts, treasure chests, HELP speed, rally frequency, and sanctuary or ruins buffs create a major growth gap over time."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why is VIP7 important?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Once you reach VIP7, you can build a daily routine of getting 1 Legendary universal shard every day. For F2P and low-spender players, this is one of the most important long-term growth breakpoints."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Is arena really necessary?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. Arena is one of the most important ways for F2P and low-spender players to steadily obtain Legendary hero gear and core resources. Hammers and gear upgrades also directly help your arena ranking."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why are hammers so important?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Heroes change with each generation, but gear and mastery stay. That is why hammers are extremely important for long-term account growth and maintaining combat strength."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What should I buy first in shops?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"For F2P and low-spender players, top priorities are Legendary chests from the arena shop, Legendary universal shards and hammers from the VIP shop, resource purchases from the wandering merchant, and Mithril from the trial shop."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/en/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/kingshot-f2p-guide.html" aria-current="page">EN</a>
+        <a href="/ko/guides/kingshot-f2p-guide.html">KO</a>
+        <a href="/ja/guides/kingshot-f2p-guide.html">JA</a>
+        <a href="/zh-tw/guides/kingshot-f2p-guide.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#sec-0">Overview</a>
+      <a href="#sec-1">Alliance</a>
+      <a href="#sec-2">VIP7</a>
+      <a href="#sec-3">Arena</a>
+      <a href="#sec-4">Hammers</a>
+      <a href="#sec-5">Center</a>
+      <a href="#sec-6">Events</a>
+      <a href="#sec-7">Shops</a>
+      <a href="#sec-8">Rallies</a>
+      <a href="#sec-9">Alliance Basics</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main>
+      <div class="crumbs">
+        <a href="/en/">Home</a> <span class="muted">›</span>
+        <a href="/en/guides/">Guides</a> <span class="muted">›</span>
+        <span>Kingshot Beginner Guide</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>Kingshot Beginner Guide · F2P / Low-Spender Growth Guide</h1>
+          <p class="sub">
+            This page covers the core growth path for free-to-play and low-spender players:
+            top alliances, VIP7, arena, hammers, town center progression, shop efficiency, and event planning.
+          </p>
+
+          <div class="meta">
+            <span class="tag">Beginner Roadmap</span>
+            <span class="tag">F2P / Low-Spender</span>
+            <span class="tag">VIP7 Priority</span>
+            <span class="tag">Arena Core</span>
+            <span class="tag">Shop Efficiency</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <h2>One-line summary</h2>
+          <ul>
+            <li>The faster you enter a top alliance, the faster your account grows through chests, speedups, and buffs.</li>
+            <li>VIP7 and arena are the two biggest growth pillars for F2P and low-spender accounts.</li>
+            <li>Knowing hammer, gear, and shop priorities dramatically improves long-term efficiency.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>Remember these first</h3>
+            <ul>
+              <li><b>Construction queue + march queue</b> are essential. They change your entire account pace.</li>
+              <li><b>Join a top 1–3 alliance</b> as early as possible. Chest, speedup, and gem income difference is huge.</li>
+              <li><b>VIP 7</b> is the first major goal. A daily Legendary universal shard matters a lot.</li>
+              <li><b>Arena</b> is a core source of Legendary gear and important resources. For low spenders, it is close to a lifeline.</li>
+              <li><b>Hammers</b> are a long-term priority because heroes change, but gear stays.</li>
+              <li><b>Shop efficiency</b> decides how far your account goes with the same amount of resources.</li>
+            </ul>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>The most common beginner mistakes</h3>
+            <ul>
+              <li>Staying too long in a random alliance → chest, speedup, and buff losses keep stacking.</li>
+              <li>Spending a little in every event → you never secure first place in short events.</li>
+              <li>Splitting investment across too many heroes, gear pieces, and gems → arena ranking stalls and key resources dry up.</li>
+              <li>Buying whatever looks good in shops → long-term VIP, shard, and hammer efficiency falls apart.</li>
+            </ul>
+          </div>
+
+          <div class="related" aria-label="Quick links">
+            <a class="pill" href="#sec-0">0) Overview</a>
+            <a class="pill" href="#sec-1">1) Alliance</a>
+            <a class="pill" href="#sec-2">2) VIP7</a>
+            <a class="pill" href="#sec-3">3) Arena</a>
+            <a class="pill" href="#sec-4">4) Hammers</a>
+            <a class="pill" href="#sec-5">5) Center</a>
+            <a class="pill" href="#sec-6">6) Events</a>
+            <a class="pill" href="#sec-7">7) Shops</a>
+            <a class="pill" href="#sec-8">8) Rallies</a>
+            <a class="pill" href="#sec-9">9) Alliance Basics</a>
+            <a class="pill" href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <nav class="toc card" aria-label="Table of contents">
+          <h2>Table of Contents</h2>
+          <ul>
+            <li><a href="#sec-0">0) The overall growth flow</a></li>
+            <li><a href="#sec-1">1) Join a top 1–3 alliance</a></li>
+            <li><a href="#sec-2">2) Reach VIP 7 as early as possible</a></li>
+            <li><a href="#sec-3">3) Why arena matters so much</a></li>
+            <li><a href="#sec-4">4) Why hammers are a long-term priority</a></li>
+            <li><a href="#sec-5">5) Push town center to unlock better troop tiers sooner</a></li>
+            <li><a href="#sec-6">6) Event planning: win short events, not everything</a></li>
+            <li><a href="#sec-7">7) Shop efficiency guide</a></li>
+            <li><a href="#sec-8">8) Basic hero, skill, and rally structure</a></li>
+            <li><a href="#sec-9">9) Alliance basics you must do</a></li>
+            <li><a href="#related-links">Internal links</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="sec-0" class="block anchor">
+        <h2>0) The overall growth flow</h2>
+        <p>
+          The core F2P and low-spender growth loop is simple.
+          <b>Alliance income and buffs → arena gear → hammer mastery → higher arena rank</b>.
+          That loop keeps repeating, and the account gap gets bigger over time.
+        </p>
+
+        <div class="callout">
+          <h3>An easy 3-step structure for beginners</h3>
+          <ul>
+            <li><b>Step 1:</b> Open key queues, push town center, and enter a top alliance.</li>
+            <li><b>Step 2:</b> Build your VIP7 routine and improve your arena rank.</li>
+            <li><b>Step 3:</b> Stack hammers and gear mastery so your account stays strong across hero generations.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-1" class="block anchor">
+        <h2>1) Join a top 1–3 alliance</h2>
+        <p><b>This alone covers a huge part of your growth.</b> If possible, join the #1 alliance. At minimum, aim for top 2–3.</p>
+
+        <h3>Why top alliances matter</h3>
+        <ul>
+          <li><b>Alliance gifts and treasure chests</b> constantly add gems, speedups, and useful items.</li>
+          <li><b>HELP speed</b> and <b>rally frequency</b> are much better.</li>
+          <li><b>Sanctuary and ruins buffs</b> improve building, training, and gathering efficiency.</li>
+        </ul>
+
+        <div class="callout warn">
+          <h3>Warning</h3>
+          <p>If you stay too long in a mid-tier alliance, politics, wars, and raid pressure can slow your account badly.</p>
+        </div>
+
+        <h3>What to do right after joining</h3>
+        <ul>
+          <li><b>Move your city fully inside alliance territory</b></li>
+          <li>Relocate near the <b>leader or core members</b> so rally participation is easier</li>
+        </ul>
+      </section>
+
+      <section id="sec-2" class="block anchor">
+        <h2>2) Reach VIP 7 as early as possible</h2>
+        <p>Your first major account goal should be <b>VIP 7</b>.</p>
+
+        <h3>Why VIP 7 matters</h3>
+        <ul>
+          <li>VIP 7 lets you build a <b>daily Legendary universal shard routine</b>.</li>
+          <li>That one daily habit creates a major long-term account gap.</li>
+        </ul>
+
+        <details>
+          <summary>A practical VIP path for low spenders</summary>
+          <ul>
+            <li>Claim VIP points every day without missing them.</li>
+            <li>Prioritize discounted VIP points from the alliance shop and wandering merchant.</li>
+          </ul>
+        </details>
+
+        <div class="callout ok">
+          <h3>Simple conclusion</h3>
+          <p>The sooner you reach <b>VIP 7</b>, the sooner your account starts compounding with daily Legendary shards.</p>
+        </div>
+      </section>
+
+      <section id="sec-3" class="block anchor">
+        <h2>3) Why arena matters so much</h2>
+        <p>Arena is one of the most important routes for low spenders to steadily obtain <b>Legendary hero gear</b>.</p>
+
+        <div class="callout ok">
+          <h3>Recommended early direction</h3>
+          <ul>
+            <li>Early on, consider prioritizing <b>Marksman / Cavalry</b> gear</li>
+            <li>Use hammers and upgrades in ways that actually raise your arena rank</li>
+            <li>A realistic target is the <b>top 100–500 range</b></li>
+          </ul>
+        </div>
+
+        <h3>Why arena is so important</h3>
+        <ul>
+          <li>Higher arena rank means more stable Legendary gear and resource income.</li>
+          <li>The gear you earn in arena helps you climb higher in arena again.</li>
+          <li>That makes arena one of the central growth engines for F2P and low-spender accounts.</li>
+        </ul>
+      </section>
+
+      <section id="sec-4" class="block anchor">
+        <h2>4) Why hammers are a long-term priority</h2>
+        <p>Heroes get replaced by newer generations, but gear does not. That is why <b>mastery accumulation</b> creates long-term account gaps.</p>
+
+        <div class="callout">
+          <h3>Hammer routine</h3>
+          <ul>
+            <li>Do Bear Hunt consistently.</li>
+            <li>Focus upgrades on the troop types and arena heroes you actually use.</li>
+            <li>Even if the gain feels small now, gear remains valuable across future generations.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-5" class="block anchor">
+        <h2>5) Push town center to unlock better troop tiers sooner</h2>
+        <p>In the long run, one of the biggest power spikes comes from <b>troop tier progression</b>.</p>
+
+        <div class="center-link-card">
+          <a href="/en/buildings/town-center/" aria-label="Go to Town Center page">
+            <img src="/img/buildings/town-center.webp" alt="Town Center (Kingshot)" loading="lazy" width="120" height="120" />
+          </a>
+
+          <div>
+            <h3>Check town center requirements first</h3>
+            <p>
+              If you understand town center requirements, prerequisite buildings, resources, and upgrade flow first,
+              you can waste far fewer speedups and build a cleaner growth route.
+            </p>
+            <a class="btn-link" href="/en/buildings/town-center/">Go to Town Center Details</a>
+          </div>
+        </div>
+
+        <details>
+          <summary>Early speedup priority</summary>
+          <ul>
+            <li>Building &gt; Research &gt; Troops / Healing</li>
+          </ul>
+        </details>
+
+        <div class="callout warn">
+          <h3>A common early mistake</h3>
+          <p>Do not spread speedups everywhere. Concentrating them on town center and core prerequisites is much more efficient.</p>
+        </div>
+      </section>
+
+      <section id="sec-6" class="block anchor">
+        <h2>6) Event planning: win short events, not everything</h2>
+
+        <div class="callout ok">
+          <h3>Core mindset</h3>
+          <ul>
+            <li>Always collect the baseline rewards.</li>
+            <li>Do not try to take first place in every event. Focus only on <b>short events you can realistically win</b>.</li>
+            <li>If you split shards, speedups, and gems everywhere, you usually end up winning nothing meaningful.</li>
+          </ul>
+        </div>
+
+        <h3>How to approach events</h3>
+        <ul>
+          <li>Save resources so you can fully commit when a short event is actually winnable.</li>
+          <li>Watch your server competition and only push hard when the timing looks favorable.</li>
+          <li>Do not aim to win every event. The better structure is <b>baseline rewards + selected event first places</b>.</li>
+        </ul>
+      </section>
+
+      <section id="sec-7" class="block anchor">
+        <h2>7) Shop efficiency guide</h2>
+        <p>
+          For F2P and low-spender players, shop choices matter a lot.
+          Two players can spend the same amount of resources, but the one buying <b>long-term account value</b> will pull ahead hard over time.
+        </p>
+
+        <div class="callout info">
+          <h3>One-line shop summary</h3>
+          <p>
+            <b>Arena shop, VIP shop, trial shop, and wandering merchant resource purchases</b> are high priority.
+            <b>Gem shop</b> is usually low priority for F2P and low spenders.
+          </p>
+        </div>
+
+        <div class="shop-grid">
+          <div class="shop-card">
+            <h3>Wandering Merchant</h3>
+            <div class="shop-priority">
+              <span class="badge must">Prioritize resource buys</span>
+              <span class="badge skip">Direct gem buys are weak</span>
+            </div>
+            <ul>
+              <li>Items bought with resources can be efficient in the early and mid game.</li>
+              <li>After castle level 30, resource pressure becomes much heavier, so blind buying is risky.</li>
+              <li>Items bought directly with gems are usually poor value.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>Mystery Shop</h3>
+            <div class="shop-priority">
+              <span class="badge must">Discounted exclusive weapon items first</span>
+              <span class="badge optional">Use refresh carefully</span>
+            </div>
+            <ul>
+              <li>Discounted exclusive weapon items are the main target.</li>
+              <li>Refreshing too much quickly destroys efficiency.</li>
+              <li>Take the valuable items and leave. Do not overcommit.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>Arena Shop</h3>
+            <div class="shop-priority">
+              <span class="badge must">Legendary chests first</span>
+              <span class="badge optional">Mithril with leftovers</span>
+            </div>
+            <ul>
+              <li>Legendary chests are the first priority.</li>
+              <li>Depending on your gear situation, Mithril can also be a strong purchase.</li>
+              <li>This is one of the most important gear-growth shops for F2P and low spenders.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>VIP Shop</h3>
+            <div class="shop-priority">
+              <span class="badge must">Legendary universal shards</span>
+              <span class="badge must">Hammers / upgrade materials</span>
+            </div>
+            <ul>
+              <li>Legendary universal shards are close to mandatory value buys.</li>
+              <li>Hammers and enhancement materials also have strong long-term value.</li>
+              <li>Speedup items are usually lower priority unless you spend a lot more.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>Champion Shop</h3>
+            <div class="shop-priority">
+              <span class="badge must">Balance Gold Thread / Silk</span>
+              <span class="badge optional">Blueprints if you have room</span>
+            </div>
+            <ul>
+              <li>The key is maintaining the right material balance for gear growth.</li>
+              <li>Do not let Gold Thread and Silk go too far out of sync.</li>
+              <li>Blueprint-type materials are usually secondary if resources are tight.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>Sacred Sword Shop</h3>
+            <div class="shop-priority">
+              <span class="badge must">Hero gear materials first</span>
+              <span class="badge optional">Some gem materials</span>
+            </div>
+            <ul>
+              <li>Hero gear materials are usually the best-value focus.</li>
+              <li>Some gem materials can also be high priority depending on account stage.</li>
+              <li>Other items should be evaluated based on your account needs.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>Hall of Governors Shop</h3>
+            <div class="shop-priority">
+              <span class="badge must">Combat power growth materials first</span>
+              <span class="badge optional">Hero gear materials</span>
+            </div>
+            <ul>
+              <li>Start with the items that give the strongest combat power growth.</li>
+              <li>After that, shift into hero gear-related materials based on your account.</li>
+              <li>Do not buy the same item blindly every time. Adjust to your real needs.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>Skin Shop</h3>
+            <div class="shop-priority">
+              <span class="badge optional">Long-term accumulation</span>
+              <span class="badge skip">Low short-term impact</span>
+            </div>
+            <ul>
+              <li>Skin shop is a long-term goal shop, not a short-term power spike shop.</li>
+              <li>Its value comes from steady accumulation, not partial progress.</li>
+              <li>If your account urgently needs immediate strength, this is lower priority.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>Wave Shop</h3>
+            <div class="shop-priority">
+              <span class="badge must">Rare pet resources first</span>
+              <span class="badge optional">Medals / Nutrients / Premium Records</span>
+            </div>
+            <ul>
+              <li>Focus mainly on pet-related items.</li>
+              <li>Rare pet materials are especially valuable because they are harder to obtain elsewhere.</li>
+              <li>Other items should be bought selectively based on account state.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>Trial Shop</h3>
+            <div class="shop-priority">
+              <span class="badge must">Mithril first</span>
+              <span class="badge optional">High-value shard materials</span>
+            </div>
+            <ul>
+              <li>Mithril is the main priority here.</li>
+              <li>Some other high-end materials also have solid value.</li>
+              <li>From a long-term gear progression view, this shop is very efficient.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>Gem Shop</h3>
+            <div class="shop-priority">
+              <span class="badge skip">Usually low priority</span>
+              <span class="badge optional">Emergency event use only</span>
+            </div>
+            <ul>
+              <li>Outside urgent situations, this shop is usually not great for F2P and low spenders.</li>
+              <li>Think of it as an emergency option for event thresholds or last-minute gaps.</li>
+              <li>Regular gem shop spending usually hurts long-term account efficiency.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout warn" style="margin-top:12px">
+          <h3>Main shop conclusion</h3>
+          <p>
+            F2P and low-spender players should prioritize <b>things that stay on the account</b>, not just items that feel useful for one moment.
+            That is why universal shards, hammers, Legendary chests, Mithril, and gear materials are so often the best choices.
+          </p>
+        </div>
+      </section>
+
+      <section id="sec-8" class="block anchor">
+        <h2>8) Basic hero, skill, and rally structure</h2>
+
+        <div class="callout">
+          <h3>Core rally-participant goal</h3>
+          <p>A practical low-spender target is <b>SR 4-star → first skill level 5</b> plus <b>higher troop tier progression</b>.</p>
+        </div>
+
+        <ul>
+          <li>Do not try to build too many heroes at once. Focus on the ones you actually use often.</li>
+          <li>For rally participation, first skill value matters a lot.</li>
+          <li>Do not judge only by raw power numbers. Spend resources based on whether the hero is truly used in rallies and arena.</li>
+        </ul>
+
+        <div class="related">
+          <a class="pill" href="/en/guides/kingshot-bearhunt.html">Bear Hunt High Score Guide</a>
+          <a class="pill" href="/en/guides/hallofgovernors.html">Hall of Governors Guide</a>
+        </div>
+      </section>
+
+      <section id="sec-9" class="block anchor">
+        <h2>9) Alliance basics you must do</h2>
+
+        <ul>
+          <li><b>Donate</b> (gems / coins)</li>
+          <li><b>HELP</b> (for coin value and faster progress)</li>
+          <li><b>Join rallies</b> (for rewards and hammer income)</li>
+        </ul>
+
+        <div class="callout warn">
+          <h3>Warning</h3>
+          <p>If your alliance schedule does not match your real play time, the long-term loss is bigger than most beginners expect. Time zone and activity timing matter.</p>
+        </div>
+      </section>
+
+      <section id="related-links" class="block anchor">
+        <h2>Internal Links</h2>
+        <p class="muted">Related pages that pair well with this guide</p>
+        <div class="related">
+          <a class="pill" href="/en/buildings/town-center/">Town Center Requirements</a>
+          <a class="pill" href="/en/buildings/academy/">Academy Upgrades</a>
+          <a class="pill" href="/en/guides/kingshot-bearhunt.html">Bear Hunt High Score Guide</a>
+          <a class="pill" href="/en/guides/hallofgovernors.html">Hall of Governors Guide</a>
+          <a class="pill" href="/en/buildings/">All Buildings</a>
+          <a class="pill" href="/en/guides/">All Guides</a>
+        </div>
+      </section>
+
+      <section id="faq" class="block anchor faq">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>Which alliance should a Kingshot F2P player join?</summary>
+          <p>If possible, join the #1 alliance. At minimum, aim for a top 2 or top 3 alliance. Alliance gifts, treasure chests, HELP speed, rally frequency, and sanctuary or ruins buffs create a major growth gap over time.</p>
+        </details>
+
+        <details>
+          <summary>Why is VIP7 important?</summary>
+          <p>Once you reach VIP7, you can build a daily routine of getting 1 Legendary universal shard every day. For F2P and low-spender players, this is one of the most important long-term growth breakpoints.</p>
+        </details>
+
+        <details>
+          <summary>Is arena really necessary?</summary>
+          <p>Yes. Arena is one of the most important ways for F2P and low-spender players to steadily obtain Legendary hero gear and core resources. Hammers and gear upgrades also directly help your arena ranking.</p>
+        </details>
+
+        <details>
+          <summary>Why are hammers so important?</summary>
+          <p>Heroes change with each generation, but gear and mastery stay. That is why hammers are extremely important for long-term account growth and maintaining combat strength.</p>
+        </details>
+
+        <details>
+          <summary>What should I buy first in shops?</summary>
+          <p>For F2P and low-spender players, top priorities are Legendary chests from the arena shop, Legendary universal shards and hammers from the VIP shop, resource purchases from the wandering merchant, and Mithril from the trial shop.</p>
+        </details>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        This document is not official. It is a beginner operation guide based on actual play experience.
+        Best choices can change depending on server environment, meta, and future updates.
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

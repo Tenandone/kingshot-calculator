@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="ja" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot ジャイアントベア高得点ガイド · 集結長ティア表 / 集結員ティア表 / 弓兵編成</title>
+  <meta name="description" content="Kingshot ジャイアントベアで点数を伸ばす実戦ガイド。集結長ティア表、集結員ティア表、弓兵中心編成、攻撃型英雄の1枠目配置、部隊保存、再参加タイミング、高得点運用のコツまで1ページに整理。" />
+  <meta name="keywords" content="Kingshot Giant Bear, Kingshot Bear Hunt, ジャイアントベア, ベアハント, 高得点, 集結長ティア, 集結員ティア, アマデウス, チェンコ, ヨヌ, アマネ, マルゴ, ビビアン" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ja/guides/kingshot-bearhunt.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/kingshot-bearhunt.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/kingshot-bearhunt.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/kingshot-bearhunt.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/kingshot-bearhunt.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot ジャイアントベア高得点ガイド" />
+  <meta property="og:description" content="集結長ティア表、集結員ティア表、弓兵編成、攻撃型英雄の1枠目配置、部隊保存、再参加タイミングまで1ページに整理。" />
+  <meta property="og:url" content="https://kingshotdata.kr/ja/guides/kingshot-bearhunt.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ja_JP" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:16px;
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+
+      --best:#db2777;
+      --a:#16a34a;
+      --b:#f59e0b;
+      --c:#3b82f6;
+      --w:#ef4444;
+
+      --bluebg:#eff6ff;
+      --greenbg:#ecfdf5;
+      --yellowbg:#fffbeb;
+      --redbg:#fef2f2;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --bluebg:#0f172a;
+        --greenbg:#0f1e16;
+        --yellowbg:#20180a;
+        --redbg:#221212;
+      }
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.7 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{width:28px;height:28px;border-radius:8px}
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(24px,3.2vw,38px);
+      line-height:1.16;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:30px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:rgba(255,255,255,.72);
+      padding:14px;
+    }
+    .hero-card h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-card ul{margin:0;padding-left:18px}
+    .hero-card li{margin:6px 0}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section.block h2{
+      margin:0 0 12px;
+      font-size:21px;
+      color:var(--accent);
+      letter-spacing:-.02em;
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      margin:12px 0;
+      background:var(--bluebg);
+    }
+    .callout.green{background:var(--greenbg)}
+    .callout.yellow{background:var(--yellowbg)}
+    .callout.red{background:var(--redbg)}
+    .callout strong{font-weight:1000}
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .hero-strip{
+      display:grid;
+      grid-template-columns:repeat(6,minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+    .hero-box{
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:linear-gradient(180deg,#fff,#f8fafc);
+      padding:10px;
+      text-align:center;
+      box-shadow:0 8px 20px rgba(0,0,0,.05);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-box::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top, rgba(37,99,235,.10), transparent 55%);
+      pointer-events:none;
+    }
+    .hero-frame{
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(37,99,235,.18);
+      box-shadow:0 10px 20px rgba(37,99,235,.12);
+      margin-bottom:8px;
+      background:#fff;
+    }
+    .hero-frame img{
+      width:100%;
+      aspect-ratio:1/1;
+      object-fit:cover;
+      transform:scale(1.02);
+    }
+    .hero-name{
+      font-size:13px;
+      font-weight:1000;
+      line-height:1.25;
+    }
+    .hero-skill{
+      margin-top:4px;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+      line-height:1.35;
+    }
+
+    .score-list{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+    .score-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:12px;
+      text-align:center;
+    }
+    .score-card .big{
+      font-size:18px;
+      font-weight:1000;
+      color:#db2777;
+      line-height:1.1;
+      margin-bottom:6px;
+    }
+    .score-card .small{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+    }
+
+    .tier{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      margin:16px 0;
+      overflow:hidden;
+    }
+    .tier>header{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+    }
+    .tier-tag{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 10px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:13px;
+      color:#fff;
+    }
+    .best{background:var(--best)}
+    .a{background:var(--a)}
+    .b{background:var(--b)}
+    .c{background:var(--c)}
+    .w{background:var(--w)}
+    .desc{
+      font-size:13px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+      gap:12px;
+      padding:14px;
+      justify-items:center;
+    }
+    .card{
+      border:1px solid var(--border);
+      background:#f8fafc;
+      border-radius:12px;
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      text-align:center;
+      width:100%;
+    }
+    .img{
+      width:92px;
+      height:92px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      object-fit:cover;
+      background:#fff;
+      margin:0 auto;
+    }
+    .name{
+      font-weight:800;
+      font-size:13px;
+      text-align:center;
+    }
+    .hint{
+      font-size:12px;
+      color:var(--muted);
+      text-align:center;
+      font-weight:700;
+    }
+
+    .checklist{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .check-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:14px;
+    }
+    .check-card h3{
+      margin:0 0 8px;
+      font-size:15px;
+    }
+
+    .foot{
+      margin-top:18px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:1100px){
+      .hero-strip{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .score-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      .hero{grid-template-columns:1fr}
+      .grid-2,.checklist{grid-template-columns:1fr}
+    }
+    @media (max-width:700px){
+      .hero-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .score-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width:600px){
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot ジャイアントベア高得点ガイド",
+    "inLanguage":"ja",
+    "description":"集結長ティア表、集結員ティア表、弓兵編成、攻撃型英雄の1枠目配置、部隊保存、再参加タイミングまで1ページに整理。",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ja/guides/kingshot-bearhunt.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ja/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/kingshot-bearhunt.html">EN</a>
+        <a href="/ko/guides/kingshot-bearhunt.html">KO</a>
+        <a href="/ja/guides/kingshot-bearhunt.html" aria-current="page">JA</a>
+        <a href="/zh-tw/guides/kingshot-bearhunt.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概要</a>
+      <a href="#priority">兵種</a>
+      <a href="#leader-tier">集結長</a>
+      <a href="#joiner-tier">集結員</a>
+      <a href="#summary">要約</a>
+    </nav>
+
+    <main>
+      <div class="crumbs">
+        <a href="/ja/">ホーム</a> <span class="muted">›</span>
+        <a href="/ja/guides/">ガイド</a> <span class="muted">›</span>
+        <span>ジャイアントベア</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>[攻略] Kingshot ジャイアントベア高得点ガイド</h1>
+          <p class="sub">
+            弓兵編成、集結参加の優先順位、英雄配置、部隊保存、再参加タイミング、
+            そして集結長ティア表 / 集結員ティア表まで一度に整理した実戦向けガイドです。
+          </p>
+
+          <div class="meta">
+            <span class="tag">集結長ティア表</span>
+            <span class="tag">集結員ティア表</span>
+            <span class="tag">弓兵中心編成</span>
+            <span class="tag">攻撃型英雄1枠目</span>
+            <span class="tag">再参加タイミング</span>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h2>このページの要点</h2>
+          <ul>
+            <li>ベアは反撃しないため、戦争編成ではなく弓兵中心の専用編成が有利です。</li>
+            <li>自分の最強弓兵部隊は、最も強い集結長に乗せるのが最も効率的です。</li>
+            <li>参加時は1枠目に攻撃型バフ英雄を入れることが核心です。</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="overview" class="block anchor">
+        <h2>1. ジャイアントベアの基本メカニズム</h2>
+        <p>
+          ジャイアントベアは通常戦闘と異なり、ベアが反撃せず一方的に攻撃を受ける構造です。
+          そのため、通常の戦争編成ではなく <strong>ベア専用の部隊編成</strong> が必要になります。
+        </p>
+        <p>
+          また、ベアハントでは <strong>自分が開いた集結は自分の出征枠に含まれません。</strong>
+          たとえば出征枠が6なら、自分の集結を含めて合計7部隊を運用できます。
+        </p>
+
+        <div class="callout">
+          <strong>核心:</strong> 同盟内上位戦力でないなら、自分で集結を開くよりも
+          <strong>強い集結に参加する方が効率的</strong> です。
+        </div>
+      </section>
+
+      <section id="priority" class="block anchor">
+        <h2>2. ジャイアントベアの兵種優先順位</h2>
+        <p>ジャイアントベアのダメージ優先順位は、通常以下の通りです。</p>
+
+        <div class="score-list">
+          <div class="score-card">
+            <div class="big">1位</div>
+            <div class="small">弓兵</div>
+          </div>
+          <div class="score-card">
+            <div class="big">2位</div>
+            <div class="small">騎兵</div>
+          </div>
+          <div class="score-card">
+            <div class="big">3位</div>
+            <div class="small">歩兵</div>
+          </div>
+          <div class="score-card">
+            <div class="big">核心</div>
+            <div class="small">弓兵比率最大化</div>
+          </div>
+          <div class="score-card">
+            <div class="big">原則</div>
+            <div class="small">弓兵 → 騎兵 → 歩兵</div>
+          </div>
+        </div>
+
+        <div class="callout green">
+          <strong>整理:</strong> ベアで高得点を狙うなら弓兵比率が最も重要です。
+          兵力が増えるほど歩兵効率は相対的に落ち、弓兵中心編成の方が点数に有利です。
+        </div>
+
+        <div class="callout yellow">
+          <strong>補足:</strong> ある時期には騎兵英雄のスキル効率が上がり、一時的に騎兵が主流に見える区間があるかもしれません。
+          ただし、<strong>まずは弓兵中心編成が最も安全で汎用的な最適解</strong> と考えるのが無難です。
+        </div>
+      </section>
+
+      <section id="leader-tier" class="block anchor">
+        <h2>3. 集結長ティア表</h2>
+        <p>
+          自分で集結を開く場合は、兵種ごとに最も強い英雄を配置するのが基本で、
+          実際には <strong>強い集結長ほど集結員全体の点数も伸びやすい</strong> です。
+        </p>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag best">Best</span>
+            <div class="desc">現時点での最上位集結長組み合わせ</div>
+          </header>
+
+          <div class="grid">
+            <div class="card">
+              <img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" class="img">
+              <div class="name">Amadeus</div>
+            </div>
+            <div class="card">
+              <img src="/img/heroes/Yang/img_001.webp" alt="Yang" class="img">
+              <div class="name">Yang</div>
+            </div>
+            <div class="card">
+              <img src="/img/heroes/Petra/img_001.webp" alt="Petra" class="img">
+              <div class="name">Petra</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>なぜ重要か?</strong><br>
+          集結長の英雄3人だけでなく、領主装備、領主バフ、研究、戦闘関連能力値まで集結員に反映されます。
+          つまり、<strong>強いプレイヤーが開いた集結ほど全体期待値が高い</strong> です。
+        </div>
+      </section>
+
+      <section id="joiner-tier" class="block anchor">
+        <h2>4. 集結員ティア表</h2>
+        <p>
+          他人の集結に参加する時は、<strong>1枠目</strong> が最も重要です。
+          参加者の1枠目英雄の野外スキルのうち、<strong>1番スキルだけが集結全体に適用</strong> されるためです。
+        </p>
+
+        <h3>4-1. 核心となる攻撃型集結員英雄</h3>
+        <div class="hero-strip" aria-label="おすすめ攻撃型英雄">
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" loading="lazy"></div>
+            <div class="hero-name">アマデウス</div>
+            <div class="hero-skill">破壊力 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Chenko/img_001.webp" alt="Chenko" loading="lazy"></div>
+            <div class="hero-name">チェンコ</div>
+            <div class="hero-skill">破壊力 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Yeonwoo/img_001.webp" alt="Yeonwoo" loading="lazy"></div>
+            <div class="hero-name">ヨヌ</div>
+            <div class="hero-skill">破壊力 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Amane/img_001.webp" alt="Amane" loading="lazy"></div>
+            <div class="hero-name">アマネ</div>
+            <div class="hero-skill">攻撃力 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Margot/img_001.webp" alt="Margot" loading="lazy"></div>
+            <div class="hero-name">マルゴ</div>
+            <div class="hero-skill">攻撃力 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Vivian/img_001.webp" alt="Vivian" loading="lazy"></div>
+            <div class="hero-name">ビビアン</div>
+            <div class="hero-skill">ダメージ 25%</div>
+          </article>
+        </div>
+
+        <div class="callout yellow">
+          <strong>重要:</strong> 集結員としてなぜ <strong>破壊力 25% / 攻撃力 25% / ダメージ 25%</strong> を使うべきか理解できたなら、
+          <strong>ベアハントはもうマスターしたと言っていいです。</strong>
+        </div>
+
+        <h3>4-2. A/B/C/集結禁止ティア</h3>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag a">Aティア</span>
+            <div class="desc">推奨: ベアハントで必須級の集結員</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" class="img"><div class="name">Amadeus</div><div class="hint">破壊力 25%</div></div>
+            <div class="card"><img src="/img/heroes/Chenko/img_001.webp" alt="Chenko" class="img"><div class="name">Chenko</div><div class="hint">破壊力 25%</div></div>
+            <div class="card"><img src="/img/heroes/Yeonwoo/img_001.webp" alt="Yeonwoo" class="img"><div class="name">Yeonwoo</div><div class="hint">破壊力 25%</div></div>
+            <div class="card"><img src="/img/heroes/Amane/img_001.webp" alt="Amane" class="img"><div class="name">Amane</div><div class="hint">攻撃力 25%</div></div>
+            <div class="card"><img src="/img/heroes/Margot/img_001.webp" alt="Margot" class="img"><div class="name">Margot</div><div class="hint">攻撃力 25%</div></div>
+            <div class="card"><img src="/img/heroes/Vivian/img_001.webp" alt="Vivian" class="img"><div class="name">Vivian</div><div class="hint">ダメージ 25%</div></div>
+          </div>
+        </div>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag b">Bティア</span>
+            <div class="desc">条件付き推奨: 編成と状況次第</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Hilde/img_001.webp" alt="Hilde" class="img"><div class="name">Hilde</div><div class="hint">攻撃力 15%</div></div>
+            <div class="card"><img src="/img/heroes/Yang/img_001.webp" alt="Yang" class="img"><div class="name">Yang</div><div class="hint">Bティア</div></div>
+          </div>
+        </div>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag c">Cティア</span>
+            <div class="desc">補助枠: 代替 / 補完用</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Zoe/img_001.webp" alt="Zoe" class="img"><div class="name">Zoe</div><div class="hint">確率ダメージ</div></div>
+            <div class="card"><img src="/img/heroes/Marlin/img_001.webp" alt="Marlin" class="img"><div class="name">Marlin</div><div class="hint">確率ダメージ</div></div>
+            <div class="card"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" class="img"><div class="name">Petra</div><div class="hint">確率ダメージ</div></div>
+            <div class="card"><img src="/img/heroes/Rosa/img_001.webp" alt="Rosa" class="img"><div class="name">Rosa</div><div class="hint">確率ダメージ</div></div>
+            <div class="card"><img src="/img/heroes/Jaeger/img_001.webp" alt="Jaeger" class="img"><div class="name">Jaeger</div><div class="hint">確率ダメージ</div></div>
+            <div class="card"><img src="/img/heroes/Longfei/img_001.webp" alt="Longfei" class="img"><div class="name">Longfei</div><div class="hint">Cティア</div></div>
+            <div class="card"><img src="/img/heroes/Thrud/img_001.webp" alt="Thrud" class="img"><div class="name">Thrud</div><div class="hint">Cティア</div></div>
+          </div>
+        </div>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag w">絶対に集結に入れない</span>
+            <div class="desc">非推奨: 集結効率低下</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Alcar/img_001.webp" alt="Alcar" class="img"><div class="name">Alcar</div></div>
+            <div class="card"><img src="/img/heroes/Diana/img_001.webp" alt="Diana" class="img"><div class="name">Diana</div></div>
+            <div class="card"><img src="/img/heroes/Edwin/img_001.webp" alt="Edwin" class="img"><div class="name">Edwin</div></div>
+            <div class="card"><img src="/img/heroes/Eric/img_001.webp" alt="Eric" class="img"><div class="name">Eric</div></div>
+            <div class="card"><img src="/img/heroes/Fahd/img_001.webp" alt="Fahd" class="img"><div class="name">Fahd</div></div>
+            <div class="card"><img src="/img/heroes/Forrest/img_001.webp" alt="Forrest" class="img"><div class="name">Forrest</div></div>
+            <div class="card"><img src="/img/heroes/Gordon/img_001.webp" alt="Gordon" class="img"><div class="name">Gordon</div></div>
+            <div class="card"><img src="/img/heroes/Helga/img_001.webp" alt="Helga" class="img"><div class="name">Helga</div></div>
+            <div class="card"><img src="/img/heroes/Howard/img_001.webp" alt="Howard" class="img"><div class="name">Howard</div></div>
+            <div class="card"><img src="/img/heroes/Jabel/img_001.webp" alt="Jabel" class="img"><div class="name">Jabel</div></div>
+            <div class="card"><img src="/img/heroes/Olive/img_001.webp" alt="Olive" class="img"><div class="name">Olive</div></div>
+            <div class="card"><img src="/img/heroes/Quinn/img_001.webp" alt="Quinn" class="img"><div class="name">Quinn</div></div>
+            <div class="card"><img src="/img/heroes/Saul/img_001.webp" alt="Saul" class="img"><div class="name">Saul</div></div>
+            <div class="card"><img src="/img/heroes/Seth/img_001.webp" alt="Seth" class="img"><div class="name">Seth</div></div>
+            <div class="card"><img src="/img/heroes/Triton/img_001.webp" alt="Triton" class="img"><div class="name">Triton</div><div class="hint">禁止</div></div>
+            <div class="card"><img src="/img/heroes/Sophia/img_001.webp" alt="Sophia" class="img"><div class="name">Sophia</div><div class="hint">集結禁止</div></div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="callout">
+            <strong>1枠目</strong><br>
+            攻撃型英雄を入れます。この枠だけが集結全体効率に直接影響します。
+          </div>
+          <div class="callout green">
+            <strong>2枠目・3枠目</strong><br>
+            主にレベルの高い英雄を入れ、出征兵力数を補う役割で使います。
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>5. ジャイアントベア部隊編成の核心</h2>
+        <p>ベア専用部隊は弓兵中心で編成するのが核心です。</p>
+
+        <div class="checklist">
+          <div class="check-card">
+            <h3>編成優先順位</h3>
+            <ul>
+              <li>1枠目には攻撃型英雄を配置</li>
+              <li>兵力は弓兵を最優先、可能な限り100%に近く編成</li>
+              <li>弓兵が足りなければ騎兵を追加</li>
+              <li>騎兵も足りなければ最後に歩兵を編成</li>
+            </ul>
+          </div>
+
+          <div class="check-card">
+            <h3>実戦原則</h3>
+            <ul>
+              <li>最も強い部隊ほど弓兵比率を高く維持</li>
+              <li>主力弓兵部隊は最上位集結長へ送る</li>
+              <li>弱い部隊は次順位の集結へ分散</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>6. ベア開始前の準備方法</h2>
+        <p>ベア開始前にやっておくべき準備は以下の通りです。</p>
+        <ul>
+          <li>採集中の部隊をすべて撤収</li>
+          <li>集結自動参加を解除</li>
+          <li>都市近くの資源タイル占領画面で部隊プリセット保存</li>
+          <li>重複編成防止のため保存後に一度出兵</li>
+          <li>ベア開始前に部隊帰還を完了</li>
+        </ul>
+
+        <div class="callout">
+          <strong>なぜ重要か?</strong><br>
+          この準備をしておくと、開始後の部隊編成が速くなりミスも減ります。
+          結局 <strong>素早い再出兵 = 良い集結への参加回数増加 = 高得点</strong> につながります。
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>7. 集結参加の優先順位</h2>
+        <p>
+          弓兵で埋まった最強部隊は、<strong>最も強い集結長</strong> に送るのが最も効率的です。
+        </p>
+        <p>
+          同盟内で点数が伸びる集結長を確認し、
+          1ティア、2ティアのように優先順位を決めて参加すると効果的です。
+        </p>
+
+        <div class="grid-2">
+          <div class="check-card">
+            <h3>おすすめ方式</h3>
+            <ul>
+              <li>主力弓兵部隊 → 1ティア集結</li>
+              <li>次の部隊 → 2ティア集結</li>
+              <li>残り部隊 → 状況に応じて追加参加</li>
+            </ul>
+          </div>
+          <div class="check-card">
+            <h3>非推奨方式</h3>
+            <ul>
+              <li>空きがある集結に即参加する</li>
+              <li>強い集結を確認せず空きだけ見て入る</li>
+              <li>主力弓兵部隊を弱い集結に使う</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout green">
+          <strong>核心:</strong> とりあえずすぐ乗るよりも、
+          <strong>強い集結を優先して参加する方が点数効率は高い</strong> です。
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>8. 集結再参加タイミング</h2>
+        <p>
+          乗りたい集結にすぐ乗れなかったからといって、弱い集結に急いで入る必要はありません。
+          むしろ <strong>狙った集結長の次の集結に合わせて参加</strong> した方が高得点につながる場合があります。
+        </p>
+
+        <ul>
+          <li>ベアトラップに近い集結は帰還と再参加が速いです。</li>
+          <li>帰還時間計算が速いほど、反復参加効率が良くなります。</li>
+          <li>単純な戦力数字だけでなく、集結生成タイミングと移動距離も重要です。</li>
+        </ul>
+
+        <div class="callout yellow">
+          <strong>重要ポイント:</strong>
+          集結参加で大事なのは戦力数字だけではなく、
+          <strong>帰還時間計算 + 集結生成タイミング + 速い再参加</strong> です。
+        </div>
+      </section>
+
+      <section id="summary" class="block anchor">
+        <h2>9. ジャイアントベア高得点の核心要約</h2>
+
+        <div class="score-list">
+          <div class="score-card">
+            <div class="big">1</div>
+            <div class="small">弓兵兵力を最大限確保</div>
+          </div>
+          <div class="score-card">
+            <div class="big">2</div>
+            <div class="small">攻撃型英雄を1枠目に配置</div>
+          </div>
+          <div class="score-card">
+            <div class="big">3</div>
+            <div class="small">開始前に部隊編成を保存</div>
+          </div>
+          <div class="score-card">
+            <div class="big">4</div>
+            <div class="small">強い集結長を優先して参加</div>
+          </div>
+          <div class="score-card">
+            <div class="big">5</div>
+            <div class="small">逃した集結は次のタイミングを狙う</div>
+          </div>
+        </div>
+
+        <h3>まとめ</h3>
+        <p>
+          ジャイアントベアは単に兵力が多いだけではなく、
+          <strong>弓兵中心編成、攻撃型英雄配置、強い集結優先参加、帰還タイミング計算</strong> が点数差を作ります。
+        </p>
+        <p>
+          ベアの点数が伸びないなら、まず次の3つだけでもすぐ試してみてください。
+        </p>
+        <ul>
+          <li>弓兵中心部隊編成</li>
+          <li>攻撃型英雄を1枠目に固定</li>
+          <li>強い集結を優先して参加</li>
+        </ul>
+
+        <div class="callout green">
+          <strong>結論:</strong> この3つを変えるだけでも、ジャイアントベアの点数は確実に変わります。
+        </div>
+      </section>
+
+      <p class="foot">
+        本文書は実戦経験をもとに整理した非公式ガイドであり、サーバー状況や英雄世代アップデートにより最適編成は変わる場合があります。
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

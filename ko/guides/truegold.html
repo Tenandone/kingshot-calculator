@@ -1,0 +1,1480 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>2026 순금 소모표 | Kingshot Data</title>
+  <meta name="description" content="킹샷 2026 순금 소모표입니다. 도시센터, 대사관, 지휘부, 야전병원, 보병대, 기병대, 궁병대, 전쟁 아카데미의 TG1~TG10 순금 및 담금질 순금 소모량을 한 번에 확인할 수 있습니다." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/truegold.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/truegold.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/truegold.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/truegold.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/truegold.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <style>
+    :root{
+      --bg:#f6f8fc;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --line:#e7ecf5;
+      --line2:#eef2fb;
+
+      --txt:#111827;
+      --mut:#6b7280;
+
+      --shadow:0 14px 34px rgba(16,24,40,.08);
+      --radius:18px;
+      --radius2:14px;
+
+      --brand:#2563eb;
+      --gold:#b7791f;
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 700px at 20% 0%, rgba(37,99,235,.08), transparent 55%),
+        radial-gradient(900px 600px at 85% 10%, rgba(245,158,11,.08), transparent 55%),
+        var(--bg);
+      color:var(--txt);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+    }
+    a{ color:var(--brand); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .wrap{
+      max-width:1280px;
+      margin:22px auto 36px;
+      padding:0 16px;
+    }
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--line);
+      background:transparent;
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--txt);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--mut);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--mut);
+      padding:8px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--txt);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:transparent;
+      border-bottom:1px solid var(--line);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+      color:var(--mut);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{ color:var(--txt); }
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--mut);
+      font-size:13px;
+    }
+    .crumbs a{ color:var(--mut); }
+
+    .section{
+      border:1px solid var(--line);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:18px;
+      background:linear-gradient(180deg,#ffffff,var(--panel2));
+      border-bottom:1px solid var(--line);
+    }
+    .hero-visual{
+      width:160px;
+      height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--line);
+      padding:14px;
+    }
+    .hero-visual img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+    }
+    .hero h1{
+      margin:0 0 8px;
+      font-size:30px;
+      line-height:1.15;
+      font-weight:1000;
+    }
+    .hero-lead{
+      margin:0 0 8px;
+      font-size:17px;
+      font-weight:900;
+      line-height:1.45;
+      color:var(--txt);
+    }
+    .hero-sub{
+      margin:0;
+      color:var(--mut);
+      line-height:1.6;
+    }
+    .hero-quote{
+      margin:12px 0 0;
+      padding:12px 14px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--mut);
+      font-size:13px;
+    }
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--mut);
+    }
+    .jump a{ color:var(--mut); }
+    .jump a:hover{ color:var(--txt); }
+    .dotsep{ opacity:.5; }
+
+    .slider-wrap{
+      padding:14px 16px 16px;
+      border-bottom:1px solid var(--line);
+      background:#fff;
+    }
+
+    .slider-card{
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      background:linear-gradient(180deg,#ffffff,#fbfcff);
+      padding:14px;
+    }
+
+    .slider-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .tg-display{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:240px;
+    }
+    .tg-ico{
+      width:52px;
+      height:52px;
+      object-fit:contain;
+      border-radius:16px;
+      background:#f2f5ff;
+      border:1px solid #dbeafe;
+      padding:7px;
+      flex:0 0 auto;
+    }
+    .tg-meta{ min-width:0; }
+    .tg-label{
+      font-weight:1000;
+      font-size:14px;
+      margin:0;
+    }
+    .tg-help{
+      margin-top:4px;
+      font-size:12px;
+      color:var(--mut);
+      line-height:1.35;
+    }
+
+    .totals{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      gap:12px;
+      flex-wrap:nowrap;
+      min-width:260px;
+    }
+
+    .total-chip{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#ffffff;
+      box-shadow:0 10px 22px rgba(16,24,40,.06);
+      flex:0 0 auto;
+    }
+    .total-chip .ico{
+      width:30px;
+      height:30px;
+      object-fit:contain;
+      border-radius:10px;
+      background:#f3f4f6;
+      border:1px solid var(--line2);
+      padding:5px;
+      flex:0 0 auto;
+    }
+    .total-chip .label{
+      font-size:12px;
+      color:var(--mut);
+      line-height:1.1;
+      white-space:nowrap;
+    }
+    .total-chip .value{
+      font-size:28px;
+      font-weight:1000;
+      font-variant-numeric:tabular-nums;
+      letter-spacing:.2px;
+      color:var(--txt);
+      line-height:1;
+      white-space:nowrap;
+    }
+    .total-chip.temper .value{ color:var(--gold); }
+    .total-chip.is-hidden{ display:none; }
+
+    .slider-row{
+      margin-top:12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    input[type="range"]{
+      width:100%;
+      accent-color:var(--brand);
+    }
+
+    .ticks{
+      display:flex;
+      justify-content:space-between;
+      gap:6px;
+      padding:0 2px;
+      user-select:none;
+    }
+    .tick{
+      font-size:12px;
+      color:var(--mut);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+      min-width:0;
+    }
+    .tick img{
+      width:22px;
+      height:22px;
+      object-fit:contain;
+      border-radius:8px;
+      background:#f3f4f6;
+      border:1px solid var(--line2);
+      padding:3px;
+    }
+
+    .soft-cta-wrap{
+      padding:0 16px 16px;
+      background:#fff;
+      border-bottom:1px solid var(--line);
+    }
+    .soft-cta{
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      background:linear-gradient(180deg,#ffffff,#f8fbff);
+      padding:14px;
+    }
+    .soft-cta h2{
+      margin:0 0 6px;
+      font-size:16px;
+      font-weight:1000;
+    }
+    .soft-cta p{
+      margin:0;
+      color:var(--mut);
+      font-size:13px;
+      line-height:1.6;
+    }
+    .soft-cta-row{
+      margin-top:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .soft-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--txt);
+      font-weight:900;
+      text-decoration:none !important;
+      font-size:13px;
+      line-height:1;
+    }
+    .soft-btn.primary{
+      background:#111827;
+      border-color:#111827;
+      color:#fff;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      min-width:1180px;
+      border-collapse:collapse;
+      table-layout:fixed;
+    }
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      z-index:3;
+      background:#ffffff;
+      border-bottom:1px solid var(--line);
+      padding:10px 8px;
+      text-align:center;
+      font-weight:1000;
+      font-size:12px;
+      color:var(--txt);
+    }
+    th.building-col{
+      left:0;
+      z-index:4;
+      text-align:left;
+      padding-left:12px;
+      width:260px;
+      min-width:260px;
+      border-right:1px solid var(--line2);
+      background:#fff;
+    }
+    tbody td, tbody th{
+      border-bottom:1px solid var(--line2);
+      padding:10px 8px;
+      text-align:center;
+      vertical-align:middle;
+      background:#fff;
+    }
+    tbody th{
+      position:sticky;
+      left:0;
+      z-index:2;
+      text-align:left;
+      padding-left:12px;
+      font-weight:1000;
+      border-right:1px solid var(--line2);
+      background:#fff;
+    }
+    tbody tr:hover td,
+    tbody tr:hover th{
+      background:#fbfcff;
+    }
+
+    .bcell{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+    .bicons{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex:0 0 auto;
+    }
+    .bicon{
+      width:34px;
+      height:34px;
+      object-fit:contain;
+      border-radius:10px;
+      background:#f3f4f6;
+      border:1px solid var(--line2);
+      padding:5px;
+    }
+    .bname-link{
+      min-width:0;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      font-size:13px;
+      font-weight:1000;
+      color:var(--txt);
+      text-decoration:none;
+    }
+    .bname-link:hover{
+      color:var(--brand);
+      text-decoration:underline;
+    }
+
+    .tghead{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+    }
+    .tghead img{
+      width:34px;
+      height:34px;
+      object-fit:contain;
+      display:block;
+      margin:0 auto;
+    }
+    .tg-fallback{
+      display:none;
+      min-width:40px;
+      height:34px;
+      align-items:center;
+      justify-content:center;
+      border-radius:10px;
+      background:#f3f4f6;
+      border:1px solid var(--line2);
+      font-weight:1000;
+      font-size:11px;
+      color:var(--txt);
+      padding:0 6px;
+    }
+
+    .cell{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      min-height:44px;
+    }
+    .line{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      width:100%;
+      white-space:nowrap;
+    }
+    .num{
+      font-variant-numeric:tabular-nums;
+      font-weight:950;
+      letter-spacing:.2px;
+      color:var(--txt);
+    }
+    .line.temper{ color:var(--gold); }
+    .line.temper .num{ color:var(--gold); }
+    .ico-mini{
+      width:16px;
+      height:16px;
+      object-fit:contain;
+      vertical-align:middle;
+      opacity:.95;
+    }
+
+    .tg-card-list{
+      display:none;
+      padding:16px;
+      background:#fff;
+      gap:12px;
+      flex-direction:column;
+    }
+    .tg-card{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:linear-gradient(180deg,#fff,#fbfcff);
+      overflow:hidden;
+      box-shadow:0 10px 24px rgba(16,24,40,.05);
+    }
+    .tg-card-head{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:14px;
+      border-bottom:1px solid var(--line);
+      background:#fff;
+    }
+    .tg-card-title{
+      min-width:0;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:1;
+    }
+    .tg-card-title .bicon{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+    }
+    .tg-card-title a{
+      min-width:0;
+      color:var(--txt);
+      font-size:14px;
+      font-weight:1000;
+      text-decoration:none;
+      line-height:1.3;
+    }
+    .tg-card-title a:hover{
+      color:var(--brand);
+      text-decoration:underline;
+    }
+
+    .tg-card-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      padding:12px;
+    }
+
+    .tg-stage{
+      border:1px solid var(--line2);
+      border-radius:14px;
+      background:#fbfdff;
+      padding:12px;
+    }
+
+    .tg-stage-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      margin-bottom:10px;
+      padding-bottom:8px;
+      border-bottom:1px solid var(--line2);
+    }
+
+    .tg-stage-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      min-width:0;
+      font-size:12px;
+      font-weight:1000;
+      color:var(--txt);
+      line-height:1.1;
+    }
+    .tg-stage-badge img{
+      width:20px;
+      height:20px;
+      object-fit:contain;
+      flex:0 0 auto;
+    }
+
+    .tg-stage-body{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .tg-stat{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      min-height:18px;
+      font-size:12px;
+      line-height:1.25;
+    }
+
+    .tg-stat-label{
+      color:var(--mut);
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .tg-stat-value{
+      color:var(--txt);
+      font-weight:1000;
+      font-variant-numeric:tabular-nums;
+      letter-spacing:.2px;
+      text-align:right;
+      white-space:nowrap;
+    }
+
+    .tg-stat.temper .tg-stat-label,
+    .tg-stat.temper .tg-stat-value{
+      color:var(--gold);
+    }
+
+    .tg-tip{
+      background:#fff;
+      border-top:1px solid var(--line);
+    }
+    .tg-tip__inner{
+      padding:18px 16px 22px;
+    }
+    .tg-tip__head{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      background:linear-gradient(180deg,#fff,#fbfcff);
+    }
+    .tg-tip__img{
+      width:56px;
+      height:56px;
+      border-radius:16px;
+      object-fit:contain;
+      background:#f3f4f6;
+      border:1px solid var(--line2);
+      padding:8px;
+      flex:0 0 auto;
+    }
+    .tg-tip__title{
+      margin:0;
+      font-size:16px;
+      font-weight:1000;
+    }
+    .tg-tip__sub{
+      margin:6px 0 0;
+      color:var(--mut);
+      font-size:12.5px;
+      line-height:1.5;
+    }
+
+    .tg-tip__grid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+    .tg-tip__card{
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      background:#fff;
+      padding:12px;
+    }
+    .tg-tip__card h3{
+      margin:0 0 8px;
+      font-size:13px;
+      font-weight:1000;
+    }
+    .tg-tip__card ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--txt);
+      font-size:12.5px;
+      line-height:1.6;
+    }
+    .tg-tip__p{
+      margin:0;
+      color:var(--txt);
+      font-size:12.5px;
+      line-height:1.6;
+    }
+    .tg-tip__card b{ font-weight:1000; }
+
+    .tg-tip__tier{
+      margin-top:14px;
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      padding:12px;
+      background:#fff;
+    }
+    .tg-tip__tierTitle{
+      margin:0 0 10px;
+      font-size:13px;
+      font-weight:1000;
+    }
+    .tg-tip__tierRow{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:10px;
+    }
+    .tg-tier{
+      border:1px solid var(--line2);
+      border-radius:12px;
+      padding:10px;
+      background:#fbfcff;
+      font-size:12px;
+      line-height:1.35;
+    }
+    .tg-tier b{ display:block; font-weight:1000; }
+    .tg-tier span{ display:block; color:var(--mut); margin-top:2px; }
+    .tg-tier em{
+      display:block;
+      margin-top:6px;
+      font-style:normal;
+      font-weight:1000;
+    }
+    .tg-tip__note{
+      margin:10px 0 0;
+      color:var(--mut);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .tg-tip__strategy{
+      margin-top:14px;
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      padding:12px;
+      background:#fff;
+    }
+    .tg-tip__strategy h3{
+      margin:0 0 8px;
+      font-size:13px;
+      font-weight:1000;
+    }
+    .tg-tip__strategy ol{
+      margin:0;
+      padding-left:18px;
+      font-size:12.5px;
+      line-height:1.7;
+    }
+    .tg-tip__warn{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line2);
+      background:linear-gradient(180deg,#fff,#fff7ed);
+      font-size:12.5px;
+      line-height:1.6;
+    }
+    .tg-tip__warn b{ font-weight:1000; }
+
+    .tg-tip__check{
+      margin-top:14px;
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      padding:12px;
+      background:#fff;
+    }
+    .tg-tip__check h3{
+      margin:0 0 8px;
+      font-size:13px;
+      font-weight:1000;
+    }
+    .tg-tip__check ul{
+      margin:0;
+      padding-left:18px;
+      font-size:12.5px;
+      line-height:1.7;
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -16px;
+        background:rgba(246,248,252,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -16px;
+        padding:6px 16px;
+        background:rgba(246,248,252,.92);
+        backdrop-filter:blur(10px);
+      }
+      .hero{
+        grid-template-columns:1fr;
+      }
+      .hero-visual{
+        width:120px;
+        height:120px;
+      }
+    }
+
+    @media (max-width:720px){
+      .tg-tip__grid{ grid-template-columns:1fr; }
+      .tg-tip__tierRow{ grid-template-columns:1fr; }
+      .totals{
+        width:100%;
+        min-width:0;
+        justify-content:flex-start;
+        flex-wrap:wrap;
+      }
+      .total-chip{
+        flex:1 1 100%;
+        border-radius:16px;
+      }
+      .total-chip .value{
+        font-size:24px;
+      }
+      .soft-cta-row{ flex-direction:column; align-items:stretch; }
+      .soft-btn{ justify-content:center; }
+      .hero h1{ font-size:24px; }
+      .hero-lead{ font-size:16px; }
+
+      .table-wrap{
+        display:none;
+      }
+      .tg-card-list{
+        display:flex;
+      }
+    }
+
+    @media (max-width:420px){
+      .tg-card-grid{
+        grid-template-columns:1fr;
+      }
+      .tick span{
+        font-size:11px;
+      }
+      .tg-display{
+        min-width:0;
+      }
+    }
+  </style>
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/truegold.html">EN</a>
+        <a href="/ko/guides/truegold.html" aria-current="page">KO</a>
+        <a href="/ja/guides/truegold.html">JA</a>
+        <a href="/zh-tw/guides/truegold.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#hero">개요</a>
+      <a href="#tg-slider">총합 비용</a>
+      <a href="#tg-table">건물 표</a>
+      <a href="#tg-tip">담금질 순금</a>
+    </nav>
+
+    <div class="crumbs">
+      <a href="/ko/">홈</a> <span style="opacity:.5">›</span>
+      <a href="/ko/guides/">가이드</a> <span style="opacity:.5">›</span>
+      <span>2026 순금 소모표</span>
+    </div>
+
+    <section class="section" aria-label="Truegold Chart">
+      <section id="hero" class="hero" style="margin-top:0;border:none;border-radius:0;box-shadow:none;">
+        <div class="hero-visual">
+          <img src="/img/icons/truegold-kingshot.webp" alt="순금 아이콘" loading="eager" fetchpriority="high" onerror="this.style.display='none'">
+        </div>
+        <div>
+          <h1 id="pageTitle">2026 순금 소모표</h1>
+          <p class="hero-lead">TG1부터 TG10까지 건물별 순금과 담금질 순금 소모량을 한 번에 확인할 수 있습니다.</p>
+          <p class="hero-sub">이 표는 도시센터, 대사관, 지휘부, 야전병원, 보병대, 기병대, 궁병대, 전쟁 아카데미 기준으로 정리되어 있으며, 슬라이더를 통해 각 TG 단계의 총 소모량도 빠르게 확인할 수 있습니다.</p>
+          <div class="hero-quote">
+            TG5 이후부터는 담금질 순금이 추가로 필요하므로, 기본 순금만이 아니라 담금질 순금까지 함께 계산해서 미리 준비하는 것이 중요합니다.
+          </div>
+          <div class="jump">
+            <a href="#tg-slider">총합 비용 보기</a><span class="dotsep">•</span>
+            <a href="#tg-table">건물 표 보기</a><span class="dotsep">•</span>
+            <a href="#tg-tip">담금질 순금이란?</a>
+          </div>
+        </div>
+      </section>
+
+      <div id="tg-slider" class="slider-wrap">
+        <div class="slider-card" aria-label="TG totals slider">
+          <div class="slider-top">
+            <div class="tg-display">
+              <img id="tgIcon" class="tg-ico" src="/img/icons/truegold_level_1.webp" alt="TG1" onerror="this.style.display='none'">
+              <div class="tg-meta">
+                <p id="tgLabel" class="tg-label">TG1 총 소모량</p>
+                <div class="tg-help">
+                  슬라이더를 움직이면 선택한 TG 단계의 총 소모량을 볼 수 있습니다.
+                </div>
+              </div>
+            </div>
+
+            <div id="tgTotals" class="totals"></div>
+          </div>
+
+          <div class="slider-row">
+            <input id="tgRange" type="range" min="1" max="10" value="1" step="1" aria-label="TG level slider" />
+            <div class="ticks" aria-hidden="true" id="ticks"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="soft-cta-wrap">
+        <div class="soft-cta">
+          <h2>순금을 더 준비해야 한다면 관련 가이드도 같이 확인해보세요</h2>
+          <p>현재 TG 단계 비용을 확인한 뒤에는 충전 가이드, 최신 기프트코드, 누적 충전 공지를 함께 보면 앞으로의 준비 계획을 세우기가 훨씬 쉬워집니다.</p>
+          <div class="soft-cta-row">
+            <a class="soft-btn" href="/ko/guides/topup-guide.html">충전 가이드 보기</a>
+            <a class="soft-btn" href="/ko/guides/kingshot-giftcode.html">최신 기프트코드 보기</a>
+            <a class="soft-btn" href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">누적 충전 / 쿠폰 공지</a>
+            <a class="soft-btn primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">킹샷 충전 페이지</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="tg-table" class="table-wrap" role="region" aria-label="TG1–TG10 table" tabindex="0">
+        <table id="tgTable">
+          <colgroup>
+            <col style="width:260px">
+            <col span="10" style="width:92px">
+          </colgroup>
+          <thead id="tgThead"></thead>
+          <tbody id="tgTbody"></tbody>
+        </table>
+      </div>
+
+      <div id="tgCardList" class="tg-card-list" aria-label="TG card list for mobile"></div>
+
+      <section id="tg-tip" class="tg-tip" aria-label="Tempered Truegold Tip">
+        <div class="tg-tip__inner">
+          <div class="tg-tip__head">
+            <img class="tg-tip__img" src="/img/icons/Ttruegold-kingshot.webp" alt="담금질 순금" loading="lazy" onerror="this.style.display='none';">
+            <div class="tg-tip__titlebox">
+              <h2 class="tg-tip__title">담금질 순금이란?</h2>
+              <p class="tg-tip__sub">
+                TG5 이후 건물 업그레이드에 추가로 들어가는 특수 재료입니다. 순금을 한 단계 더 정련한 상위 재료라고 보면 됩니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="tg-tip__grid">
+            <div class="tg-tip__card">
+              <h3>언제부터 필요한가?</h3>
+              <ul>
+                <li><b>TG5 이전</b>: 순금과 일반 자원만 사용</li>
+                <li><b>TG5 이후</b>: 담금질 순금이 업그레이드 재료에 추가됨</li>
+                <li><b>TG8 이상</b>: 후반으로 갈수록 요구량이 커져서 사전 계산이 더 중요해짐</li>
+              </ul>
+            </div>
+
+            <div class="tg-tip__card">
+              <h3>담금질 순금 설명</h3>
+              <p class="tg-tip__p">
+                순금을 왕실 정련소에서 한 번 더 정제해 경도와 연성을 강화한 고급 재료입니다.
+              </p>
+            </div>
+
+            <div class="tg-tip__card">
+              <h3>획득 방법</h3>
+              <ul>
+                <li><b>1차 정련(골든 퍼니스)</b> — 메인 획득 경로</li>
+                <li><b>Golden Glaive 이벤트</b> — 보조 획득 경로</li>
+              </ul>
+            </div>
+
+            <div class="tg-tip__card">
+              <h3>1차 정련 기본 팁</h3>
+              <ul>
+                <li>주간 정련 횟수가 늘어날수록 티어가 올라가고, 순금 소모도 함께 증가합니다</li>
+                <li>한 번에 몰아서 다 하는 것을 막는 구조라서, 티어 관리가 곧 효율입니다</li>
+                <li>매일 첫 정련은 순금 소모가 50% 할인됩니다</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tg-tip__tier">
+            <h3 class="tg-tip__tierTitle">1차 정련 티어 구간</h3>
+
+            <div class="tg-tip__tierRow">
+              <div class="tg-tier">
+                <b>티어 1</b><span>(1~20회)</span>
+                <em>순금 20 → 담금질 순금 1~3</em>
+              </div>
+              <div class="tg-tier">
+                <b>티어 2</b><span>(21~40회)</span>
+                <em>순금 50 → 담금질 순금 2~3</em>
+              </div>
+              <div class="tg-tier">
+                <b>티어 3</b><span>(41~60회)</span>
+                <em>순금 100 → 담금질 순금 3~6</em>
+              </div>
+              <div class="tg-tier">
+                <b>티어 4</b><span>(61~80회)</span>
+                <em>순금 130 → 담금질 순금 3~9</em>
+              </div>
+              <div class="tg-tier">
+                <b>티어 5</b><span>(81~100회)</span>
+                <em>순금 160 → 담금질 순금 3~12</em>
+              </div>
+            </div>
+
+            <p class="tg-tip__note">
+              예시: 주간 누적 정련이 20회까지는 티어 1이며, 21회째부터 티어 2로 넘어갑니다.
+            </p>
+          </div>
+
+          <div class="tg-tip__strategy">
+            <h3>추천 운영 방식</h3>
+            <ol>
+              <li><b>월요일</b>: 먼저 20회까지 정련해서 티어 1 구간 효율을 최대한 활용</li>
+              <li><b>이후</b>: 매일 1회씩만 진행해서 첫 정련 50% 할인 유지</li>
+              <li>초중반 티어 2 부근을 유지하며 담금질 순금을 천천히 안정적으로 확보</li>
+            </ol>
+
+            <div class="tg-tip__warn">
+              <b>결론:</b>
+              주간 100회를 한 번에 몰아서 정련하면 티어가 급격히 올라가고 순금 소모도 크게 증가합니다.
+              무과금 / 소과금 유저는 티어 1 → 초반 티어 2 구간을 유지하는 것이 핵심입니다.
+            </div>
+          </div>
+
+          <div class="tg-tip__check">
+            <h3>실전 체크리스트</h3>
+            <ul>
+              <li>월요일: 20회 구간까지 최대 효율로 정련</li>
+              <li>그 이후: 매일 1회씩 정련해서 할인 유지</li>
+              <li>업그레이드 전: 목표 TG까지 필요한 담금질 순금 총량을 먼저 계산</li>
+              <li>주의: 한 번에 몰아서 정련할수록 이후 티어가 빨리 올라가고 순금 소모도 더 커짐</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </section>
+  </div>
+
+  <script>
+  (function(){
+    const ICONS = {
+      tgLevel: (n) => `/img/icons/truegold_level_${n}.webp`,
+      truegold: '/img/icons/truegold-kingshot.webp',
+      tempered: '/img/icons/Ttruegold-kingshot.webp'
+    };
+
+    const TG_MAX = 10;
+
+    const BUILDINGS = [
+      {
+        key:'towncenter',
+        name:'도시센터',
+        href:'/ko/buildings/town-center.html',
+        icons:['/img/buildings/towncenter-kingshot.webp']
+      },
+      {
+        key:'embassy',
+        name:'대사관',
+        href:'/ko/buildings/embassy.html',
+        icons:['/img/buildings/embassy-kingshot.webp']
+      },
+      {
+        key:'commandcenter',
+        name:'지휘부',
+        href:'/ko/buildings/commandcenter.html',
+        icons:['/img/buildings/commandcenter-kingshot.webp']
+      },
+      {
+        key:'infirmary',
+        name:'야전병원',
+        href:'/ko/buildings/infirmary.html',
+        icons:['/img/buildings/infirmary-kingshot.webp']
+      },
+      {
+        key:'barracks',
+        name:'보병대',
+        href:'/ko/buildings/barracks.html',
+        icons:['/img/buildings/barracks-kingshot.webp']
+      },
+      {
+        key:'stable',
+        name:'기병대',
+        href:'/ko/buildings/stable.html',
+        icons:['/img/buildings/stable-kingshot.webp']
+      },
+      {
+        key:'range',
+        name:'궁병대',
+        href:'/ko/buildings/range.html',
+        icons:['/img/buildings/range-kingshot.webp']
+      },
+      {
+        key:'waracademy',
+        name:'전쟁 아카데미',
+        href:'/ko/buildings/war-academy.html',
+        icons:['/img/buildings/war-academy.webp']
+      }
+    ];
+
+    const DATA = {
+      towncenter: {
+        truegold:[660,790,1190,1400,1675,900,1080,1080,1260,1575],
+        tempered:[null,null,null,null,null,60,90,120,180,420]
+      },
+      embassy: {
+        truegold:[165,195,295,350,415,225,270,270,315,391],
+        tempered:[null,null,null,null,null,13,19,24,43,103]
+      },
+      commandcenter: {
+        truegold:[130,155,235,280,335,180,216,216,252,315],
+        tempered:[null,null,null,null,null,13,19,24,36,84]
+      },
+      infirmary: {
+        truegold:[130,155,235,280,335,180,216,216,252,315],
+        tempered:[null,null,null,null,null,13,19,24,36,84]
+      },
+      barracks: {
+        truegold:[295,355,535,630,750,405,486,486,567,706],
+        tempered:[null,null,null,null,null,25,37,54,79,187]
+      },
+      stable: {
+        truegold:[295,355,535,630,750,405,486,486,567,706],
+        tempered:[null,null,null,null,null,25,37,54,79,187]
+      },
+      range: {
+        truegold:[295,355,535,630,750,405,486,486,567,706],
+        tempered:[null,null,null,null,null,25,37,54,79,187]
+      },
+      waracademy: {
+        truegold:[null,71,107,126,150,45,54,54,567,706],
+        tempered:[null,null,null,null,null,9,13,18,79,187]
+      }
+    };
+
+    function fmt(n){
+      const v = Number(n);
+      if (!Number.isFinite(v)) return '—';
+      return v.toLocaleString('ko-KR');
+    }
+
+    function isNum(x){
+      return Number.isFinite(Number(x));
+    }
+
+    function buildIconsHTML(icons, alt){
+      return `
+        <div class="bicons">
+          ${icons.map(src => `
+            <img class="bicon" src="${src}" alt="${alt}" loading="lazy" onerror="this.style.display='none'">
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function tgHeaderCell(tg){
+      const label = `TG${tg}`;
+      const src = ICONS.tgLevel(tg);
+      return `
+        <div class="tghead">
+          <img src="${src}" alt="${label}"
+               onerror="this.style.display='none'; this.parentNode.querySelector('.tg-fallback').style.display='inline-flex';">
+          <span class="tg-fallback">${label}</span>
+        </div>
+      `;
+    }
+
+    function cellHTML(tgIndex, truegoldVal, temperedVal){
+      const tgOK = isNum(truegoldVal);
+      const tpOK = isNum(temperedVal);
+
+      if (!tgOK && !tpOK){
+        return `<div class="cell"><span class="num">—</span></div>`;
+      }
+
+      if (tgIndex <= 4 || !tpOK){
+        return `
+          <div class="cell">
+            <div class="line">
+              <img class="ico-mini" src="${ICONS.truegold}" alt="순금" onerror="this.style.display='none'">
+              <span class="num">${fmt(truegoldVal)}</span>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="cell">
+          <div class="line">
+            <img class="ico-mini" src="${ICONS.truegold}" alt="순금" onerror="this.style.display='none'">
+            <span class="num">${fmt(truegoldVal)}</span>
+          </div>
+          <div class="line temper">
+            <img class="ico-mini" src="${ICONS.tempered}" alt="담금질 순금" onerror="this.style.display='none'">
+            <span class="num">${fmt(temperedVal)}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTable(){
+      const thead = document.getElementById('tgThead');
+      const tbody = document.getElementById('tgTbody');
+
+      thead.innerHTML = `
+        <tr>
+          <th class="building-col">건물</th>
+          ${Array.from({length: TG_MAX}, (_, i) => `<th>${tgHeaderCell(i + 1)}</th>`).join('')}
+        </tr>
+      `;
+
+      tbody.innerHTML = BUILDINGS.map(b => {
+        const row = DATA[b.key];
+
+        const tds = Array.from({length: TG_MAX}, (_, i) => {
+          return `<td>${cellHTML(i, row.truegold[i], row.tempered[i])}</td>`;
+        }).join('');
+
+        return `
+          <tr>
+            <th>
+              <div class="bcell">
+                ${buildIconsHTML(b.icons, b.name)}
+                <a class="bname-link" href="${b.href}" title="${b.name} 페이지로 이동">${b.name}</a>
+              </div>
+            </th>
+            ${tds}
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderCards(){
+      const root = document.getElementById('tgCardList');
+
+      root.innerHTML = BUILDINGS.map(b => {
+        const row = DATA[b.key];
+
+        const stages = Array.from({length: TG_MAX}, (_, i) => {
+          const tg = i + 1;
+          const tVal = row.truegold[i];
+          const pVal = row.tempered[i];
+
+          return `
+            <div class="tg-stage">
+              <div class="tg-stage-top">
+                <div class="tg-stage-badge">
+                  <img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">
+                  <span>TG${tg}</span>
+                </div>
+              </div>
+
+              <div class="tg-stage-body">
+                <div class="tg-stat">
+                  <span class="tg-stat-label">순금</span>
+                  <span class="tg-stat-value">${isNum(tVal) ? fmt(tVal) : '—'}</span>
+                </div>
+
+                ${tg >= 6
+                  ? `
+                    <div class="tg-stat temper">
+                      <span class="tg-stat-label">담금질</span>
+                      <span class="tg-stat-value">${isNum(pVal) ? fmt(pVal) : '—'}</span>
+                    </div>
+                  `
+                  : ''
+                }
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <article class="tg-card">
+            <div class="tg-card-head">
+              <div class="tg-card-title">
+                ${buildIconsHTML(b.icons, b.name)}
+                <a href="${b.href}" title="${b.name} 페이지로 이동">${b.name}</a>
+              </div>
+            </div>
+            <div class="tg-card-grid">
+              ${stages}
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function calcTotalsPerTG(){
+      const out = Array.from({length: TG_MAX}, () => ({ truegold:0, tempered:0, hasTruegold:false, hasTempered:false }));
+
+      for (let i = 0; i < TG_MAX; i++){
+        let tgSum = 0;
+        let tpSum = 0;
+        let hasTg = false;
+        let hasTp = false;
+
+        for (const b of BUILDINGS){
+          const r = DATA[b.key];
+          const tv = r.truegold[i];
+          const pv = r.tempered[i];
+
+          if (isNum(tv)){
+            tgSum += Number(tv);
+            hasTg = true;
+          }
+          if (isNum(pv)){
+            tpSum += Number(pv);
+            hasTp = true;
+          }
+        }
+
+        out[i].truegold = tgSum;
+        out[i].tempered = tpSum;
+        out[i].hasTruegold = hasTg;
+        out[i].hasTempered = hasTp;
+      }
+
+      return out;
+    }
+
+    function renderTicks(){
+      const root = document.getElementById('ticks');
+      root.innerHTML = Array.from({length: TG_MAX}, (_, i) => {
+        const tg = i + 1;
+        return `
+          <div class="tick">
+            <img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">
+            <span>${tg}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function chipHTML(icon, label, value, extraClass){
+      return `
+        <div class="total-chip ${extraClass || ''}">
+          <img class="ico" src="${icon}" alt="${label}" onerror="this.style.display='none'">
+          <div>
+            <div class="label">${label}</div>
+            <div class="value">${fmt(value)}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function updateSliderUI(tg, totals){
+      const idx = tg - 1;
+
+      const tgIcon = document.getElementById('tgIcon');
+      const tgLabel = document.getElementById('tgLabel');
+      const tgTotals = document.getElementById('tgTotals');
+
+      const curT = totals[idx].truegold;
+      const curP = totals[idx].tempered;
+      const hideTemper = (tg <= 5) || !totals[idx].hasTempered;
+
+      tgIcon.src = ICONS.tgLevel(tg);
+      tgIcon.alt = `TG${tg}`;
+      tgLabel.textContent = `TG${tg} 총 소모량`;
+
+      tgTotals.innerHTML =
+        chipHTML(ICONS.tempered, '담금질 순금', curP, hideTemper ? 'temper is-hidden' : 'temper') +
+        chipHTML(ICONS.truegold, '순금', curT, '');
+    }
+
+    function initSlider(){
+      const totals = calcTotalsPerTG();
+      const range = document.getElementById('tgRange');
+
+      const sync = () => updateSliderUI(Number(range.value), totals);
+      range.addEventListener('input', sync);
+      sync();
+    }
+
+    function setStickyTop(){
+      const header = document.querySelector('header.top');
+      const tabs = document.querySelector('nav.section-tabs');
+      const isMobile = window.matchMedia('(max-width: 900px)').matches;
+
+      const hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+      const th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+      document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+      document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+      document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+    }
+
+    renderTable();
+    renderCards();
+    renderTicks();
+    initSlider();
+    setStickyTop();
+
+    window.addEventListener('load', setStickyTop);
+    window.addEventListener('resize', setStickyTop);
+
+    if (window.ResizeObserver){
+      const ro = new ResizeObserver(() => setStickyTop());
+      const header = document.querySelector('header.top');
+      const tabs = document.querySelector('nav.section-tabs');
+      if (header) ro.observe(header);
+      if (tabs) ro.observe(tabs);
+    }
+  })();
+  </script>
+</body>
+</html>

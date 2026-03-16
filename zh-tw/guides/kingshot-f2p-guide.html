@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="zh-Hant" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot 新手攻略 · 無課金／小課成長指南（聯盟、VIP7、競技場、鐵鎚、商店效率）</title>
+  <meta name="description" content="Kingshot 新手專用的無課金、小課成長指南。整理上位聯盟選擇、VIP7 優先度、競技場獎勵、鐵鎚（英雄裝備）、城市中心發展、商店效率與活動規劃。" />
+  <meta name="keywords" content="Kingshot 新手攻略, Kingshot 無課攻略, Kingshot 小課攻略, Kingshot beginner guide, Kingshot f2p guide, Kingshot VIP7, Kingshot arena, Kingshot hammer, Kingshot hero gear, Kingshot shop efficiency, Kingshot VIP shop, Kingshot arena shop, Kingshot wandering merchant" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/kingshot-f2p-guide.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot 新手攻略 · 無課金／小課成長指南" />
+  <meta property="og:description" content="整理上位聯盟、VIP7、競技場、鐵鎚（英雄裝備）、城市中心、商店效率與活動規劃的 Kingshot 新手成長路線。" />
+  <meta property="og:url" content="https://kingshotdata.kr/zh-tw/guides/kingshot-f2p-guide.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="zh_TW" />
+
+  <style>
+    *{box-sizing:border-box}
+
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --ok:#ecfdf5;
+      --warn:#fff7ed;
+      --note:#f8fafc;
+      --info:#eff6ff;
+
+      --shadow:0 10px 25px rgba(0,0,0,.06);
+      --radius:16px;
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --ok:#0f1e16;
+        --warn:#1a140c;
+        --note:#141414;
+        --info:#111827;
+        --shadow:0 10px 25px rgba(0,0,0,.35);
+      }
+    }
+
+    html,body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:15px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","Noto Sans CJK TC","Microsoft JhengHei",Pretendard,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+    }
+
+    html{scroll-behavior:smooth}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(26px,3.4vw,40px);
+      line-height:1.18;
+      letter-spacing:-0.02em;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:32px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-side{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      padding:14px;
+    }
+    .hero-side h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-side ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .hero-side li{margin:6px 0}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note);
+    }
+    .callout.ok{background:var(--ok)}
+    .callout.warn{background:var(--warn)}
+    .callout.info{background:var(--info)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0;padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text);font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .checklist{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .check{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:12px 14px;
+    }
+    .check h3{
+      margin:0 0 8px;
+      font-size:14px;
+    }
+
+    .center-link-card{
+      display:grid;
+      grid-template-columns:120px 1fr;
+      gap:14px;
+      align-items:center;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      padding:14px;
+      margin-top:12px;
+    }
+    .center-link-card img{
+      width:120px;
+      height:120px;
+      object-fit:contain;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#f8fafc;
+      padding:10px;
+    }
+    .center-link-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+      color:var(--text);
+    }
+    .center-link-card p{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .shop-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .shop-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:14px;
+    }
+    .shop-card h3{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--text);
+    }
+    .shop-priority{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:8px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:1000;
+      border:1px solid var(--border);
+      background:var(--panel);
+    }
+    .badge.must{background:var(--ok)}
+    .badge.optional{background:var(--warn)}
+    .badge.skip{background:#fee2e2;color:#991b1b}
+    .btn-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:40px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      color:var(--text);
+      font-weight:1000;
+      text-decoration:none !important;
+      font-size:14px;
+      line-height:1;
+    }
+    .btn-link:hover{
+      border-color:#c7d2fe;
+      transform:translateY(-1px);
+    }
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:var(--note);
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+
+    .faq{
+      margin-top:10px;
+    }
+
+    .foot{
+      margin:18px 0 8px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:940px){
+      .hero,
+      .grid,
+      .checklist,
+      .center-link-card,
+      .shop-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+    }
+
+    @media (max-width:600px){
+      h1{font-size:26px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot 新手攻略 · 無課金／小課成長指南",
+    "inLanguage":"zh-Hant",
+    "description":"整理上位聯盟、VIP7、競技場、鐵鎚（英雄裝備）、城市中心、商店效率與活動規劃的 Kingshot 新手成長路線。",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/zh-tw/guides/kingshot-f2p-guide.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"首頁","item":"https://kingshotdata.kr/zh-tw/"},
+      {"@type":"ListItem","position":2,"name":"攻略","item":"https://kingshotdata.kr/zh-tw/guides/"},
+      {"@type":"ListItem","position":3,"name":"Kingshot 新手攻略","item":"https://kingshotdata.kr/zh-tw/guides/kingshot-f2p-guide.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Kingshot 無課金應該加入哪種聯盟？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"最好加入排名第1的聯盟，至少也要進入第2～3名聯盟。因為聯盟禮包、寶箱、HELP 速度、集結頻率，以及聖地與遺跡增益，都會直接影響成長速度。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"為什麼 VIP7 很重要？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"達到 VIP7 後，可以建立每天固定獲得 1 個傳說通用碎片的日常循環。對無課金與小課玩家來說，這是長期成長的重要分水嶺。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"競技場一定要打嗎？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"要。競技場是無課金與小課玩家穩定獲得傳說英雄裝備與核心資源的重要路線。鐵鎚與裝備強化也會直接影響競技場排名。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"為什麼鐵鎚（英雄裝備）這麼重要？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"英雄會隨版本與世代更替，但裝備與精通會一直保留下來。因此鐵鎚對長期帳號成長與戰力維持非常重要。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"商店應該先買什麼？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"以無課金與小課玩家來說，優先考慮競技場商店的傳說寶箱、VIP 商店的傳說通用碎片與鐵鎚、流浪商人的資源購買，以及試煉商店的秘銀這類長期成長資源。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/kingshot-f2p-guide.html">EN</a>
+        <a href="/ko/guides/kingshot-f2p-guide.html">KO</a>
+        <a href="/ja/guides/kingshot-f2p-guide.html">JA</a>
+        <a href="/zh-tw/guides/kingshot-f2p-guide.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#sec-0">整體流程</a>
+      <a href="#sec-1">聯盟</a>
+      <a href="#sec-2">VIP7</a>
+      <a href="#sec-3">競技場</a>
+      <a href="#sec-4">鐵鎚</a>
+      <a href="#sec-5">中心</a>
+      <a href="#sec-6">活動</a>
+      <a href="#sec-7">商店</a>
+      <a href="#sec-8">集結</a>
+      <a href="#sec-9">聯盟基礎</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main>
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/guides/">攻略</a> <span class="muted">›</span>
+        <span>Kingshot 新手攻略</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>Kingshot 新手攻略 · 無課金／小課成長指南</h1>
+          <p class="sub">
+            上位聯盟、VIP7、競技場、鐵鎚（英雄裝備）、城市中心成長、商店效率與活動規劃，
+            這篇整理了無課金與小課玩家穩定變強的核心成長路線。
+          </p>
+
+          <div class="meta">
+            <span class="tag">新手路線圖</span>
+            <span class="tag">無課金／小課</span>
+            <span class="tag">VIP7 優先</span>
+            <span class="tag">競技場核心</span>
+            <span class="tag">商店效率</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <h2>這篇重點一句話</h2>
+          <ul>
+            <li>越早加入上位聯盟，寶箱、加速與增益差距就會越快拉開成長速度。</li>
+            <li>VIP7 與競技場，是無課金與小課帳號最重要的兩條成長主軸。</li>
+            <li>只要懂鐵鎚、裝備與商店購買優先順序，長期效率就會大幅提升。</li>
+          </ul>
+        </aside>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>先記住這幾點，就已經成功一半</h3>
+            <ul>
+              <li><b>建造佇列 + 行軍佇列</b>很重要，會直接改變整體發展速度。</li>
+              <li><b>盡快進入前 1～3 名聯盟</b>。寶箱、加速、鑽石獲取差距很大。</li>
+              <li><b>VIP 7</b> 是第一個大目標。每天穩定拿 1 個傳說通用碎片非常關鍵。</li>
+              <li><b>競技場</b>是傳說裝備與核心資源的重要來源，幾乎是小課玩家的生命線。</li>
+              <li><b>鐵鎚（英雄裝備）</b>是長期戰力核心，因為英雄會換，但裝備會留下。</li>
+              <li><b>懂商店效率</b>，同樣的資源就能走得比別人更遠。</li>
+            </ul>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>新手最常翻車的幾種模式</h3>
+            <ul>
+              <li>聯盟隨便加、待太久 → 寶箱、加速、增益損失會一直累積。</li>
+              <li>每個活動都花一點 → 最後什麼第一都拿不到。</li>
+              <li>英雄、裝備、鑽石分散投資 → 競技場排名上不去，核心資源會卡住。</li>
+              <li>商店看到什麼買什麼 → 長期來看 VIP、碎片、鐵鎚效率都會崩掉。</li>
+            </ul>
+          </div>
+
+          <div class="related" aria-label="Quick links">
+            <a class="pill" href="#sec-0">0) 整體流程</a>
+            <a class="pill" href="#sec-1">1) 聯盟</a>
+            <a class="pill" href="#sec-2">2) VIP7</a>
+            <a class="pill" href="#sec-3">3) 競技場</a>
+            <a class="pill" href="#sec-4">4) 鐵鎚</a>
+            <a class="pill" href="#sec-5">5) 中心</a>
+            <a class="pill" href="#sec-6">6) 活動</a>
+            <a class="pill" href="#sec-7">7) 商店</a>
+            <a class="pill" href="#sec-8">8) 集結</a>
+            <a class="pill" href="#sec-9">9) 聯盟基礎</a>
+            <a class="pill" href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <nav class="toc card" aria-label="Table of contents">
+          <h2>目錄</h2>
+          <ul>
+            <li><a href="#sec-0">0) 新手成長的整體流程</a></li>
+            <li><a href="#sec-1">1) 聯盟要進前 1～3 名</a></li>
+            <li><a href="#sec-2">2) 盡快把 VIP 升到 7</a></li>
+            <li><a href="#sec-3">3) 為什麼一定要重視競技場</a></li>
+            <li><a href="#sec-4">4) 鐵鎚（英雄裝備）是長期核心</a></li>
+            <li><a href="#sec-5">5) 拉高城市中心，提早解鎖兵種階級</a></li>
+            <li><a href="#sec-6">6) 活動規劃：短期活動搶第一策略</a></li>
+            <li><a href="#sec-7">7) 商店效率指南</a></li>
+            <li><a href="#sec-8">8) 英雄／技能／集結基礎</a></li>
+            <li><a href="#sec-9">9) 聯盟系統：這些一定要做</a></li>
+            <li><a href="#related-links">內部連結整理</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="sec-0" class="block anchor">
+        <h2>0) 新手成長的整體流程</h2>
+        <p>
+          無課金與小課玩家變強的邏輯其實很簡單。
+          <b>聯盟（寶箱／增益）→ 競技場（傳說裝備）→ 鐵鎚（精通）→ 更高的競技場排名</b>，
+          這個循環會持續擴大帳號差距。
+        </p>
+
+        <div class="callout">
+          <h3>新手最容易照著走的 3 個階段</h3>
+          <ul>
+            <li><b>第 1 階段：</b>先打開城市中心與各種佇列，然後進入上位聯盟。</li>
+            <li><b>第 2 階段：</b>建立 VIP7 日常循環，並開始提升競技場排名。</li>
+            <li><b>第 3 階段：</b>累積鐵鎚與裝備精通，讓帳號即使跨世代也能持續變強。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-1" class="block anchor">
+        <h2>1) 聯盟要進前 1～3 名</h2>
+        <p><b>這裡基本就先贏一半。</b> 最好能進第 1 名聯盟，至少也要進第 2～3 名聯盟。</p>
+
+        <h3>為什麼一定要進上位聯盟</h3>
+        <ul>
+          <li><b>聯盟禮包／寶箱</b>會每天穩定累積鑽石、加速與道具。</li>
+          <li><b>HELP 速度</b>與<b>集結頻率</b>完全不一樣。</li>
+          <li><b>聖地／遺跡增益</b>會直接影響建造、訓練與採集效率。</li>
+        </ul>
+
+        <div class="callout warn">
+          <h3>注意</h3>
+          <p>如果長時間待在不上不下的中段聯盟，常常會因為政治、戰爭、被掠奪等問題，讓成長節奏變得很亂。</p>
+        </div>
+
+        <h3>進聯盟後馬上要做的事</h3>
+        <ul>
+          <li><b>把城市完整搬進聯盟領地內</b></li>
+          <li>為了方便參加集結，盡量移到<b>盟主或核心成員附近</b></li>
+        </ul>
+      </section>
+
+      <section id="sec-2" class="block anchor">
+        <h2>2) 盡快把 VIP 升到 7</h2>
+        <p>新手的第一階段目標就是<b>VIP 7</b>。</p>
+
+        <h3>VIP 7 為什麼這麼重要</h3>
+        <ul>
+          <li>啟用 VIP 7 後，就能建立<b>每天 1 個傳說通用碎片</b>的固定循環。</li>
+          <li>光這個日常，就足以讓長期帳號成長差距越拉越大。</li>
+        </ul>
+
+        <details>
+          <summary>小課玩家提升 VIP 的路線</summary>
+          <ul>
+            <li>每天固定領取 VIP 點數。</li>
+            <li>優先在聯盟商店與流浪商人那裡購買折扣 VIP 點數。</li>
+          </ul>
+        </details>
+
+        <div class="callout ok">
+          <h3>一句話結論</h3>
+          <p><b>越早到 VIP 7</b>，你的帳號就越早進入「每天都在穩定累積碎片」的狀態。</p>
+        </div>
+      </section>
+
+      <section id="sec-3" class="block anchor">
+        <h2>3) 為什麼一定要重視競技場</h2>
+        <p>對小課玩家來說，持續取得<b>傳說英雄裝備</b>的核心路線就是競技場。</p>
+
+        <div class="callout ok">
+          <h3>新手推薦方向</h3>
+          <ul>
+            <li>前期可以優先考慮<b>弓兵／騎兵</b>裝備</li>
+            <li>鐵鎚與裝備強化，要用在能提升競技場排名的地方</li>
+            <li>比較現實的目標是先打進<b>100～500 名</b></li>
+          </ul>
+        </div>
+
+        <h3>競技場為什麼重要</h3>
+        <ul>
+          <li>競技場排名越高，傳說裝備與相關資源的獲取就越穩定。</li>
+          <li>在競技場拿到的裝備，又能反過來幫你提高競技場排名。</li>
+          <li>因此對無課金與小課玩家來說，競技場就是帳號成長的核心樞紐之一。</li>
+        </ul>
+      </section>
+
+      <section id="sec-4" class="block anchor">
+        <h2>4) 鐵鎚（英雄裝備）是長期核心</h2>
+        <p>英雄會換代，但裝備不會消失。所以真正拉開長期差距的，是<b>精通的累積</b>。</p>
+
+        <div class="callout">
+          <h3>鐵鎚日常節奏</h3>
+          <ul>
+            <li>Bear Hunt 要穩定參加，別偷懶。</li>
+            <li>裝備強化集中給常用兵種與競技場主力英雄。</li>
+            <li>就算現在看起來提升不明顯，裝備依然會隨著帳號一路保留下去。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-5" class="block anchor">
+        <h2>5) 拉高城市中心，提早解鎖兵種階級</h2>
+        <p>玩到後面最有感的差距，其實還是<b>兵種階級</b>。</p>
+
+        <div class="center-link-card">
+          <a href="/zh-tw/buildings/town-center/" aria-label="前往城市中心頁面">
+            <img src="/img/buildings/town-center.webp" alt="城市中心 (Kingshot)" loading="lazy" width="120" height="120" />
+          </a>
+
+          <div>
+            <h3>先看城市中心升級條件</h3>
+            <p>
+              先弄清楚城市中心等級需求、前置建築、資源與升級順序，
+              無課金與小課玩家才能更少浪費加速，更有效安排成長路線。
+            </p>
+            <a class="btn-link" href="/zh-tw/buildings/town-center/">前往城市中心詳細頁面</a>
+          </div>
+        </div>
+
+        <details>
+          <summary>前期加速優先順序</summary>
+          <ul>
+            <li>建造 &gt; 研究 &gt; 士兵／治療</li>
+          </ul>
+        </details>
+
+        <div class="callout warn">
+          <h3>避免前期浪費</h3>
+          <p>不要把加速分散亂用，集中投在城市中心與關鍵前置建築，效率會高很多。</p>
+        </div>
+      </section>
+
+      <section id="sec-6" class="block anchor">
+        <h2>6) 活動規劃：短期活動搶第一策略</h2>
+
+        <div class="callout ok">
+          <h3>核心思路</h3>
+          <ul>
+            <li>基礎獎勵全部都要拿。</li>
+            <li>第一名不要每個活動都想搶，只挑<b>自己打得贏的短期活動</b>集中火力。</li>
+            <li>碎片、加速、鑽石一旦分散消耗，最後通常什麼都拿不到。</li>
+          </ul>
+        </div>
+
+        <h3>操作重點</h3>
+        <ul>
+          <li>平時先存資源，等有機會在短期活動衝第一時再一次爆發。</li>
+          <li>先觀察伺服器競爭狀況，只在「這次有機會拿下」的活動重壓。</li>
+          <li>不要妄想全部活動都贏，正確思路是<b>基礎獎勵全拿 + 特定活動搶第一</b>。</li>
+        </ul>
+      </section>
+
+      <section id="sec-7" class="block anchor">
+        <h2>7) 商店效率指南</h2>
+        <p>
+          對無課金與小課玩家來說，商店買什麼真的差很多。
+          同樣的資源，拿去買<b>長期成長資源</b>的人，和拿去亂買即時用品的人，時間一久差距就會越來越大。
+        </p>
+
+        <div class="callout info">
+          <h3>商店效率一句話總結</h3>
+          <p>
+            <b>競技場商店、VIP 商店、試煉商店、流浪商人（買資源）</b>優先度高，
+            <b>鑽石商店</b>平常幾乎都不建議碰。
+          </p>
+        </div>
+
+        <div class="shop-grid">
+          <div class="shop-card">
+            <h3>流浪商人</h3>
+            <div class="shop-priority">
+              <span class="badge must">優先買資源</span>
+              <span class="badge skip">不推薦直接花鑽石</span>
+            </div>
+            <ul>
+              <li>能用資源買的東西，在前中期通常很划算。</li>
+              <li>城堡 30 級以後資源壓力變大，不建議無腦全買。</li>
+              <li>直接花鑽石買的商品大多效率偏低，能避就避。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>神秘商店</h3>
+            <div class="shop-priority">
+              <span class="badge must">專武折扣優先</span>
+              <span class="badge optional">刷新要節制</span>
+            </div>
+            <ul>
+              <li>專屬武器折扣商品是重點。</li>
+              <li>刷新太多次，效率會明顯下降。</li>
+              <li>只撿需要的東西帶走，才是最穩的方式。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>競技場商店</h3>
+            <div class="shop-priority">
+              <span class="badge must">傳說寶箱最優先</span>
+              <span class="badge optional">剩餘資源可補秘銀</span>
+            </div>
+            <ul>
+              <li>第一優先就是傳說寶箱。</li>
+              <li>依照裝備與熟練度需求，秘銀也是很強的選擇。</li>
+              <li>這裡是無課金與小課玩家裝備成長的核心商店之一。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>VIP 商店</h3>
+            <div class="shop-priority">
+              <span class="badge must">傳說通用碎片</span>
+              <span class="badge must">鐵鎚／強化材料</span>
+            </div>
+            <ul>
+              <li>傳說通用碎片幾乎算是必買。</li>
+              <li>鐵鎚與強化材料的長期效率也非常高。</li>
+              <li>除非課金量高，不然加速類商品優先度偏低。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>冠軍商店</h3>
+            <div class="shop-priority">
+              <span class="badge must">金絲／絲綢比例要抓好</span>
+              <span class="badge optional">草圖有餘裕再買</span>
+            </div>
+            <ul>
+              <li>關鍵在於調整裝備成長材料的比例。</li>
+              <li>金絲與絲綢不要失衡，這點很重要。</li>
+              <li>設計草圖類型的材料，通常是資源有餘裕後再補。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>聖劍商店</h3>
+            <div class="shop-priority">
+              <span class="badge must">英雄裝備材料優先</span>
+              <span class="badge optional">部分寶石材料</span>
+            </div>
+            <ul>
+              <li>優先看英雄裝備材料，效率比較好。</li>
+              <li>部分寶石材料在特定階段也有很高價值。</li>
+              <li>其他商品就要依照自己帳號需求再判斷。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>最強領主商店</h3>
+            <div class="shop-priority">
+              <span class="badge must">優先買能漲戰力的資源</span>
+              <span class="badge optional">英雄裝備材料</span>
+            </div>
+            <ul>
+              <li>先買戰力提升效率高的資源會更划算。</li>
+              <li>接著再把比重放到英雄裝備相關商品上。</li>
+              <li>不是永遠固定買同一樣，而是要配合自己帳號狀態調整。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>造型商店</h3>
+            <div class="shop-priority">
+              <span class="badge optional">長期累積型</span>
+              <span class="badge skip">短期效率偏低</span>
+            </div>
+            <ul>
+              <li>造型商店比較偏向長期目標，不是短期爆發型。</li>
+              <li>要持續累積、不半途而廢，才有意義。</li>
+              <li>如果你現在急著衝戰力，這裡的優先度就不高。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>浪潮商店</h3>
+            <div class="shop-priority">
+              <span class="badge must">寵物稀有資源優先</span>
+              <span class="badge optional">徽章／營養劑／高級紀錄</span>
+            </div>
+            <ul>
+              <li>以寵物相關商品為優先考量。</li>
+              <li>尤其是那些平常不容易取得的稀有材料。</li>
+              <li>其他則依照帳號情況選擇性購買。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>試煉商店</h3>
+            <div class="shop-priority">
+              <span class="badge must">秘銀最優先</span>
+              <span class="badge optional">高級碎片類</span>
+            </div>
+            <ul>
+              <li>秘銀是最核心的選擇。</li>
+              <li>其他高級資源價值也不低。</li>
+              <li>如果從長期裝備成長來看，這個商店效率相當不錯。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>鑽石商店</h3>
+            <div class="shop-priority">
+              <span class="badge skip">平常不建議</span>
+              <span class="badge optional">特殊活動才例外</span>
+            </div>
+            <ul>
+              <li>除非真的很急，不然平常不建議在這裡消耗鑽石。</li>
+              <li>比較適合拿來補特殊活動、或截止前差一點點時補缺口。</li>
+              <li>無課金與小課玩家如果日常常逛鑽石商店，效率很容易直接崩掉。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout warn" style="margin-top:12px">
+          <h3>商店規劃的核心結論</h3>
+          <p>
+            無課金與小課玩家在商店裡，應該優先買<b>會永久留在帳號上的東西</b>，
+            而不是只看眼前急用。所以通用碎片、鐵鎚、傳說寶箱、秘銀、裝備材料，通常都會排在最前面。
+          </p>
+        </div>
+      </section>
+
+      <section id="sec-8" class="block anchor">
+        <h2>8) 英雄／技能／集結基礎（新手版）</h2>
+
+        <div class="callout">
+          <h3>集結手的核心目標</h3>
+          <p>對小課玩家來說，比較現實的目標是<b>SR 4 星 → 第一技能 LV5</b> + <b>提高兵種階級</b>。</p>
+        </div>
+
+        <ul>
+          <li>不要貪心養太多英雄，集中投資在真正常用的英雄上更重要。</li>
+          <li>集結參與英雄最看重的是第一技能效果。</li>
+          <li>分配資源時，不要只看戰力數字，而要看這個英雄是否真的會用在集結與競技場。</li>
+        </ul>
+
+        <div class="related">
+          <a class="pill" href="/zh-tw/guides/kingshot-bearhunt.html">Bear Hunt 高分攻略</a>
+          <a class="pill" href="/zh-tw/guides/hallofgovernors.html">最強領主攻略</a>
+        </div>
+      </section>
+
+      <section id="sec-9" class="block anchor">
+        <h2>9) 聯盟系統：這些一定要做</h2>
+
+        <ul>
+          <li><b>捐獻</b>（鑽石／硬幣）</li>
+          <li><b>HELP</b>（賺硬幣）</li>
+          <li><b>參加集結</b>（拿獎勵／拿鐵鎚）</li>
+        </ul>
+
+        <div class="callout warn">
+          <h3>注意</h3>
+          <p>如果活動時間跟你的作息完全對不上，長期來說損失會很大。所以選聯盟時，也一定要看活動時段是否適合自己。</p>
+        </div>
+      </section>
+
+      <section id="related-links" class="block anchor">
+        <h2>內部連結整理</h2>
+        <p class="muted">搭配這篇一起看會更有幫助的相關頁面</p>
+        <div class="related">
+          <a class="pill" href="/zh-tw/buildings/town-center/">城市中心升級條件</a>
+          <a class="pill" href="/zh-tw/buildings/academy/">學院升級</a>
+          <a class="pill" href="/zh-tw/guides/kingshot-bearhunt.html">Bear Hunt 高分攻略</a>
+          <a class="pill" href="/zh-tw/guides/hallofgovernors.html">最強領主攻略</a>
+          <a class="pill" href="/zh-tw/buildings/">全部建築</a>
+          <a class="pill" href="/zh-tw/guides/">全部攻略</a>
+        </div>
+      </section>
+
+      <section id="faq" class="block anchor faq">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>Kingshot 無課金應該加入哪種聯盟？</summary>
+          <p>最好加入第 1 名聯盟，至少也要進第 2～3 名聯盟。聯盟禮包、寶箱、HELP 速度、集結頻率，以及聖地與遺跡增益，都會明顯影響成長速度。</p>
+        </details>
+
+        <details>
+          <summary>為什麼 VIP7 很重要？</summary>
+          <p>達到 VIP7 後，可以建立每天穩定獲得 1 個傳說通用碎片的日常循環。對無課金與小課玩家來說，這是長期成長的重要分水嶺。</p>
+        </details>
+
+        <details>
+          <summary>競技場一定要打嗎？</summary>
+          <p>要。競技場是無課金與小課玩家穩定獲得傳說英雄裝備與核心資源的重要路線，而鐵鎚與裝備強化也會直接影響競技場排名。</p>
+        </details>
+
+        <details>
+          <summary>為什麼鐵鎚（英雄裝備）很重要？</summary>
+          <p>因為英雄會換代，但裝備與精通會一直留下來。所以鐵鎚對長期帳號成長與戰力維持非常重要。</p>
+        </details>
+
+        <details>
+          <summary>商店應該先買什麼？</summary>
+          <p>以無課金與小課玩家來說，競技場商店的傳說寶箱、VIP 商店的傳說通用碎片與鐵鎚、流浪商人的資源購買，以及試煉商店的秘銀，通常都是優先順序最高的項目。</p>
+        </details>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        本文不是官方文件，而是根據實際遊玩經驗整理的新手營運指南。
+        不同伺服器、版本環境與更新內容，最佳解答都可能有所不同。
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

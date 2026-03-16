@@ -441,7 +441,7 @@
           + '<div class="db-detail">' + bodyHTML + '</div>';
 
         var internals = el.querySelectorAll('[data-db-internal]');
-        for (var i=0;i<internals.length;i++){
+        for (var ii=0;ii<internals.length;ii++){
           (function(a){
             a.addEventListener('click', function(e){
               e.preventDefault();
@@ -452,7 +452,7 @@
                 window.navigate('/db/' + encodeURIComponent(mappedFolder) + '/' + safeNext);
               }
             }, { passive: false });
-          })(internals[i]);
+          })(internals[ii]);
         }
       });
     });
@@ -593,7 +593,7 @@
 
     var segs = p.split('/').filter(Boolean);
 
-    if (segs[0] === 'en' || segs[0] === 'ko' || segs[0] === 'ja' || segs[0] === 'zh-tw') {
+    if (segs[0] === 'en' || segs[0] === 'ko' || segs[0] === 'ja' || segs[0] === 'zh-tw' || segs[0] === 'zh-TW') {
       if ((segs[1] === 'buildings' || segs[1] === 'building') && segs[2]) {
         u.pathname = '/' + segs[0] + '/' + segs[1] + '/' + segs.slice(2).join('/');
         return u;
@@ -609,8 +609,9 @@
         return u;
       }
 
+      // 언어별 guides html은 그대로 유지
       if (segs[1] === 'guides' && segs[2]) {
-        u.pathname = '/guides/' + segs.slice(2).join('/').replace(/\.html$/i, '');
+        u.pathname = '/' + segs[0] + '/guides/' + segs.slice(2).join('/');
         return u;
       }
 
@@ -939,7 +940,8 @@
 
     if (href.charAt(0) === '#') return;
 
-    if (href.indexOf('/pages/guides/') === 0) {
+    // 언어별 guides html은 브라우저 기본 이동 허용
+    if (/^\/(ko|en|ja|zh-TW|zh-tw)\/guides\/.+\.html$/i.test(href)) {
       return;
     }
 
@@ -975,7 +977,7 @@
 
       var p = location.pathname || '';
       var m1 = p.match(/^\/buildings\/[^\/?#]+(\.html)?$/i) || p.match(/^\/building\/[^\/?#]+(\.html)?$/i);
-      var m2 = p.match(/^\/(en|ko|ja|zh-tw)\/buildings\/[^\/?#]+(\.html)?$/i) || p.match(/^\/(en|ko|ja|zh-tw)\/building\/[^\/?#]+(\.html)?$/i);
+      var m2 = p.match(/^\/(en|ko|ja|zh-tw|zh-TW)\/buildings\/[^\/?#]+(\.html)?$/i) || p.match(/^\/(en|ko|ja|zh-tw|zh-TW)\/building\/[^\/?#]+(\.html)?$/i);
       var m3 = p.match(/^\/db\/[^\/?#]+(\/.*)?$/i);
 
       if (m1 || m2 || m3) {

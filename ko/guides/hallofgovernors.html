@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>킹샷 최강영주(Hall of Governors) 가이드 · 스테이지/점수/보상/팁</title>
+  <meta name="description" content="Kingshot Hall of Governors(최강영주) 가이드: 1~5회차 스테이지별 점수표, 아마데우스/힐데 보상, 영주장비/보석(Charm) 업그레이드 점수, TOP10/100 조건, 소과금/과금 운영 팁까지 한 번에 정리." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/hallofgovernors.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/hallofgovernors.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/hallofgovernors.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/hallofgovernors.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/hallofgovernors.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="킹샷 최강영주(Hall of Governors) 가이드" />
+  <meta property="og:description" content="1~5회차 점수표, 아마데우스/힐데 해금 조건, 영주장비/보석 점수표, 과금·무과금 운영 팁까지 한 번에 정리." />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/guides/hallofgovernors.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --line:#e7ecf5;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:16px;
+      --radius2:14px;
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+
+      --ok-bg:#ecfdf5;
+      --warn-bg:#fff7ed;
+      --note-bg:#f8fafc;
+      --table-head:#f3f4f6;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --line:#2f3540;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --note-bg:#161616;
+        --ok-bg:#0f1e16;
+        --warn-bg:#1d1710;
+        --table-head:#1b1b1b;
+      }
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:15px/1.7 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(24px,3.2vw,38px);
+      line-height:1.2;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:14px 0 0;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:30px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-cta{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      color:var(--text);
+      font-weight:1000;
+      text-decoration:none !important;
+      font-size:14px;
+      line-height:1;
+    }
+    .btn.primary{
+      background:#111827;
+      border-color:#111827;
+      color:#fff;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note-bg);
+    }
+    .callout.ok{background:var(--ok-bg)}
+    .callout.warn{background:var(--warn-bg)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0;padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text);font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .small{font-size:13px}
+    .muted{color:var(--muted)}
+    .k{font-weight:1000}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note-bg);
+      padding:10px 12px;
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      margin:10px 0;
+    }
+    thead th{
+      background:var(--table-head);
+      font-size:13px;
+      font-weight:1000;
+      text-align:left;
+      padding:10px;
+      border-bottom:1px solid var(--border);
+    }
+    tbody td{
+      padding:9px 10px;
+      border-bottom:1px solid var(--border);
+      font-size:13px;
+      vertical-align:top;
+    }
+    tbody tr:last-child td{border-bottom:0}
+    .td-num{
+      text-align:right;
+      white-space:nowrap;
+      font-variant-numeric:tabular-nums;
+    }
+
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+    .foot{
+      font-size:12.5px;
+      color:var(--muted);
+      margin:10px 0 6px;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"킹샷 최강영주(Hall of Governors) 가이드",
+    "inLanguage":"ko",
+    "description":"1~5회차 점수표, 아마데우스/힐데 해금 조건, 영주 장비/보석 점수표, 과금·무과금 운영 팁 정리.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ko/guides/hallofgovernors.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/hallofgovernors.html">EN</a>
+        <a href="/ko/guides/hallofgovernors.html" aria-current="page">KO</a>
+        <a href="/ja/guides/hallofgovernors.html">JA</a>
+        <a href="/zh-tw/guides/hallofgovernors.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#sec-1">개요</a>
+      <a href="#sec-2">점수</a>
+      <a href="#sec-3">회차표</a>
+      <a href="#sec-4">장비</a>
+      <a href="#sec-5">보석</a>
+      <a href="#sec-6">해금</a>
+      <a href="#sec-7">팁</a>
+    </nav>
+
+    <main class="container">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/guides/">가이드</a> <span class="muted">›</span>
+        <span>최강영주</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>킹샷 최강영주(Hall of Governors) 가이드</h1>
+          <p class="sub">
+            1~5회차 스테이지별 점수표, 시즌 영웅 아마데우스/힐데 해금 구조, 영주 장비·보석 점수, 그리고 실제 운영 팁까지 한 번에 정리한 실전형 가이드다.
+          </p>
+
+          <div class="meta">
+            <span class="tag">2주 단위 이벤트</span>
+            <span class="tag">스테이지별 점수표</span>
+            <span class="tag">TOP10 / TOP100</span>
+            <span class="tag">무과금 / 과금 운영</span>
+          </div>
+
+          <div class="hero-cta">
+            <a class="btn" href="#sec-3">점수표 바로 보기</a>
+            <a class="btn primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">킹샷 충전 페이지</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>이 가이드 한 줄 요약</h3>
+            <ul>
+              <li>최강영주(Hall of Governors)는 보통 2주 간격으로 열리며, 날짜와 구성은 서버마다 달라질 수 있다.</li>
+              <li>아마데우스(시즌1)는 단순 완주 보상이 아니라, 누적 점수 순위 조건이 핵심인 시즌이 많다.</li>
+              <li>고득점은 가속, 조각, 제작망치, 룰렛 재화를 미리 모아 두었다가 맞는 스테이지에 몰아 쓰는 방식이 가장 효율적이다.</li>
+            </ul>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>자주 하는 오해</h3>
+            <p>
+              많은 사람이 이벤트 미션만 다 하면 아마데우스를 얻는다고 생각하지만,
+              실제로는 시즌1 아마데우스 보상 구간에서 <span class="k">TOP10 같은 순위 조건</span>이 사실상 핵심이다.
+            </p>
+          </div>
+
+          <div class="callout" style="margin-top:12px">
+            <h3>시즌1 아마데우스를 노린다면</h3>
+            <p>
+              시즌1 최강영주 보상으로 아마데우스를 노리려면, 대부분의 서버 환경에서는 <span class="k">실질적으로 과금이 거의 필수</span>에 가깝다.
+              경쟁 서버에서는 가속, 조각, 룰렛 재화만으로는 TOP10 컷을 맞추기 어려운 경우가 많다.
+            </p>
+            <p>
+              아마데우스를 확실하게 노리고 싶다면, 충전 타이밍을 최강영주와 맞춰서 준비하는 편이 낫다.
+            </p>
+            <p style="margin-top:10px">
+              <a class="btn primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">아마데우스 노릴 때 충전 준비하기</a>
+            </p>
+          </div>
+        </div>
+
+        <nav class="card toc" aria-label="Table of contents">
+          <h2>목차</h2>
+          <ul>
+            <li><a href="#sec-1">1) 이벤트 개요 · 일정 · 시즌 영웅</a></li>
+            <li><a href="#sec-2">2) 점수 획득 방식(요약)</a></li>
+            <li><a href="#sec-3">3) 1~5회차 스테이지/점수표</a></li>
+            <li><a href="#sec-4">4) 영주 장비 업그레이드 점수표</a></li>
+            <li><a href="#sec-5">5) 영주 보석(Charm) 업그레이드 점수표</a></li>
+            <li><a href="#sec-6">6) 시즌 영웅 해금 조건(TOP10/100)</a></li>
+            <li><a href="#sec-7">7) 운영 Q&A + 소과금/과금 팁</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="sec-1" class="block anchor">
+        <h2>1) 이벤트 개요 · 일정 · 시즌 영웅</h2>
+        <p>
+          Hall of Governors(최강영주)는 킹샷에서 2주 단위로 열리는 대표 성장 이벤트다.
+          기간 동안 스테이지별 미션을 수행해 점수를 쌓고, 누적 점수로 마일스톤 보상을 받는다.
+        </p>
+
+        <ul>
+          <li><b>1회차</b>: 왕국 생성 후 <b>6일차</b> 시작(서버 기준). 시즌 영웅: <b>아마데우스</b></li>
+          <li><b>2회차</b>: 1회차로부터 약 2주 후. 시즌 영웅: <b>아마데우스</b></li>
+          <li><b>3회차</b>: 보통 2세대 구간(서버에 따라 1세대일 수도 있음). 시즌 영웅: <b>아마데우스</b>, 보통 7일 진행</li>
+          <li><b>4~5회차</b>: 유사한 미션 구조. 시즌 영웅: <b>힐데</b>(보통 TOP100 순위 보상)</li>
+        </ul>
+
+        <div class="callout">
+          <h3>주의</h3>
+          <p>서버, 버전, 운영 정책에 따라 스테이지 순서나 점수표가 조정될 수 있다. 실제 이벤트 시작 전에는 반드시 게임 내 공지를 최우선으로 확인하는 것이 좋다.</p>
+        </div>
+      </section>
+
+      <section id="sec-2" class="block anchor">
+        <h2>2) 점수 획득 방식(요약)</h2>
+        <p>대표적인 점수 항목은 다음과 같다.</p>
+        <ul>
+          <li>건물 업그레이드(건설 전투력 상승)</li>
+          <li>기술 연구(연구 전투력 상승)</li>
+          <li>병력 훈련/승급(병력 전투력 상승)</li>
+          <li>가속 아이템 사용(회차와 스테이지에 따라 반영)</li>
+          <li>영웅 승급(조각 사용)</li>
+          <li>영웅 장비 제작망치 / 강화 XP / 전용 장비 재료 사용</li>
+          <li>영웅 룰렛(게임 내 룰렛)</li>
+          <li>영주 장비 평점 증가</li>
+          <li>영주 보석(Charm) 평점 증가</li>
+        </ul>
+      </section>
+
+      <section id="sec-3" class="block anchor">
+        <h2>3) 1~5회차 스테이지/점수표</h2>
+
+        <details open>
+          <summary>1회차 Hall of Governors (시즌 영웅: 아마데우스)</summary>
+
+          <h3>Stage 1: 도시 건설</h3>
+          <table>
+            <thead>
+              <tr><th>항목</th><th class="td-num">점수</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>건설로 전투력 1 상승</td><td class="td-num">45</td></tr>
+              <tr><td>연구로 전투력 1 상승</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 2: 영웅 육성</h3>
+          <table>
+            <thead>
+              <tr><th>항목</th><th class="td-num">점수</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>영웅 룰렛 1회 진행</td><td class="td-num">90,000</td></tr>
+              <tr><td>희귀 영웅 조각 1개 사용</td><td class="td-num">4,000</td></tr>
+              <tr><td>에픽 영웅 조각 1개 사용</td><td class="td-num">14,000</td></tr>
+              <tr><td>레전드 영웅 조각 1개 사용</td><td class="td-num">35,000</td></tr>
+              <tr><td>야외에서 빵 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 나무 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 석재 10 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 철 2 채집</td><td class="td-num">3</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 3: 병력 훈련 (병사 1명당 점수)</h3>
+          <div class="small muted">각 티어 병력 1명 훈련 기준 점수다.</div>
+          <table>
+            <thead>
+              <tr><th>병사 티어</th><th class="td-num">점수</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+              <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+              <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+              <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+              <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+              <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+              <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+              <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+              <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+              <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 4: 야수 처치</h3>
+          <table>
+            <thead>
+              <tr><th>항목</th><th class="td-num">점수</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>레벨 1~30 야수 처치</td><td class="td-num">30,000</td></tr>
+              <tr><td>집결을 열어 Terror 1회 처치</td><td class="td-num">90,000</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 5: 전투력 부스트</h3>
+          <table>
+            <thead>
+              <tr><th>항목</th><th class="td-num">점수</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>건설로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>연구로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>병력 훈련/승급으로 전투력 1 상승</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+        </details>
+
+        <details>
+          <summary>2회차 Hall of Governors (시즌 영웅: 아마데우스)</summary>
+
+          <h3>Stage 1: 도시 건설</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>건설로 전투력 1 상승</td><td class="td-num">45</td></tr>
+              <tr><td>연구로 전투력 1 상승</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 2: 영웅 육성</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>영웅 룰렛 진행</td><td class="td-num">90,000</td></tr>
+              <tr><td>희귀 영웅 조각 1개 사용</td><td class="td-num">4,000</td></tr>
+              <tr><td>에픽 영웅 조각 1개 사용</td><td class="td-num">14,000</td></tr>
+              <tr><td>레전드 영웅 조각 1개 사용</td><td class="td-num">35,000</td></tr>
+              <tr><td>야외에서 빵 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 나무 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 석재 10 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 철 2 채집</td><td class="td-num">3</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 3: 병력 훈련 (병사 1명당 점수)</h3>
+          <div class="small muted">각 티어 병력 1명 훈련 기준 점수다.</div>
+          <table>
+            <thead><tr><th>병사 티어</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+              <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+              <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+              <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+              <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+              <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+              <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+              <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+              <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+              <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 4: 자원 채집</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>야외에서 빵 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 나무 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 석재 10 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 철 2 채집</td><td class="td-num">3</td></tr>
+              <tr><td>연구로 전투력 1 상승</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 5: 전투력 부스트</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>영웅 장비 제작망치 1개 사용</td><td class="td-num">50,000</td></tr>
+              <tr><td>영웅 장비 강화 XP 100 사용</td><td class="td-num">30,000</td></tr>
+              <tr><td>영웅 전용 장비 재료 1개 사용</td><td class="td-num">100,000</td></tr>
+              <tr><td>건설로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>연구로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>병력 훈련/승급으로 전투력 1 상승</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 6: 영주 장비 업그레이드</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>영주 장비 최대 평점 1 상승</td><td class="td-num">500</td></tr>
+              <tr><td>건설로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>연구로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>병력 훈련/승급으로 전투력 1 상승</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <div class="small muted">영주 장비 희귀도별 레벨업 점수는 아래 4번 섹션 표를 참고하면 된다.</div>
+        </details>
+
+        <details>
+          <summary>3회차 Hall of Governors (시즌 영웅: 아마데우스, 보통 7일)</summary>
+
+          <h3>Stage 1: 전투력 부스트</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>건설로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>연구로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>병력 훈련/승급으로 전투력 1 상승</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 2: 영웅 육성</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>영웅 룰렛 진행</td><td class="td-num">90,000</td></tr>
+              <tr><td>희귀 영웅 조각 1개 사용</td><td class="td-num">4,000</td></tr>
+              <tr><td>에픽 영웅 조각 1개 사용</td><td class="td-num">14,000</td></tr>
+              <tr><td>레전드 영웅 조각 1개 사용</td><td class="td-num">35,000</td></tr>
+              <tr><td>야외에서 빵 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 나무 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 석재 10 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 철 2 채집</td><td class="td-num">3</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 3: 병력 훈련 (병사 1명당 점수)</h3>
+          <div class="small muted">각 티어 병력 1명 훈련 기준 점수다.</div>
+          <table>
+            <thead><tr><th>병사 티어</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+              <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+              <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+              <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+              <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+              <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+              <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+              <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+              <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+              <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 4: 자원 채집</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>야외에서 빵 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 나무 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 석재 10 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 철 2 채집</td><td class="td-num">3</td></tr>
+              <tr><td>연구로 전투력 1 상승</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 5: 전투력 부스트</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>영웅 장비 제작망치 1개 사용</td><td class="td-num">50,000</td></tr>
+              <tr><td>영웅 전용 장비 재료 1개 사용</td><td class="td-num">100,000</td></tr>
+              <tr><td>건설로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>연구로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>병력 훈련/승급으로 전투력 1 상승</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 6: 영주 장비 업그레이드</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>영주 장비 최대 평점 1 상승</td><td class="td-num">500</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 7: 영웅 육성(가속 포함)</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>희귀 영웅 조각 1개 사용</td><td class="td-num">4,000</td></tr>
+              <tr><td>에픽 영웅 조각 1개 사용</td><td class="td-num">14,000</td></tr>
+              <tr><td>레전드 영웅 조각 1개 사용</td><td class="td-num">35,000</td></tr>
+              <tr><td>건설 가속 1분 사용</td><td class="td-num">300</td></tr>
+              <tr><td>연구 가속 1분 사용</td><td class="td-num">300</td></tr>
+              <tr><td>훈련/승급 가속 1분 사용</td><td class="td-num">300</td></tr>
+            </tbody>
+          </table>
+
+          <div class="small muted">영주 장비 희귀도별 레벨업 점수는 아래 4번 섹션 표를 참고하면 된다.</div>
+        </details>
+
+        <details>
+          <summary>4~5회차 Hall of Governors (시즌 영웅: 힐데)</summary>
+
+          <h3>Stage 1: 전투력 부스트</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>건설로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>연구로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>병력 훈련/승급으로 전투력 1 상승</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 2: 영웅 육성</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>영웅 룰렛 진행</td><td class="td-num">90,000</td></tr>
+              <tr><td>희귀 영웅 조각 1개 사용</td><td class="td-num">4,000</td></tr>
+              <tr><td>에픽 영웅 조각 1개 사용</td><td class="td-num">14,000</td></tr>
+              <tr><td>레전드 영웅 조각 1개 사용</td><td class="td-num">35,000</td></tr>
+              <tr><td>야외에서 빵 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 나무 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 석재 10 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 철 2 채집</td><td class="td-num">3</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 3: 병력 훈련 (병사 1명당 점수)</h3>
+          <div class="small muted">각 티어 병력 1명 훈련 기준 점수다.</div>
+          <table>
+            <thead><tr><th>병사 티어</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+              <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+              <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+              <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+              <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+              <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+              <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+              <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+              <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+              <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 4: 보석(Charm) 업그레이드</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>영주 보석(Charm) 최대 평점 1 상승</td><td class="td-num">1,000</td></tr>
+              <tr><td>야외에서 빵 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 나무 50 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 석재 10 채집</td><td class="td-num">3</td></tr>
+              <tr><td>야외에서 철 2 채집</td><td class="td-num">3</td></tr>
+              <tr><td>연구로 전투력 1 상승</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <div class="small muted">보석(Charm) 레벨별 레벨업 점수는 아래 5번 섹션 표를 참고하면 된다.</div>
+
+          <h3>Stage 5: 전투력 부스트</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>영웅 장비 제작망치 1개 사용</td><td class="td-num">50,000</td></tr>
+              <tr><td>영웅 전용 장비 재료 1개 사용</td><td class="td-num">100,000</td></tr>
+              <tr><td>건설로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>연구로 전투력 1 상승</td><td class="td-num">30</td></tr>
+              <tr><td>병력 훈련/승급으로 전투력 1 상승</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 6: 영주 장비 업그레이드</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>영주 장비 최대 평점 1 상승</td><td class="td-num">500</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 7: 영웅 육성(가속 포함)</h3>
+          <table>
+            <thead><tr><th>항목</th><th class="td-num">점수</th></tr></thead>
+            <tbody>
+              <tr><td>희귀 영웅 조각 1개 사용</td><td class="td-num">4,000</td></tr>
+              <tr><td>에픽 영웅 조각 1개 사용</td><td class="td-num">14,000</td></tr>
+              <tr><td>레전드 영웅 조각 1개 사용</td><td class="td-num">35,000</td></tr>
+              <tr><td>건설 가속 1분 사용</td><td class="td-num">300</td></tr>
+              <tr><td>연구 가속 1분 사용</td><td class="td-num">300</td></tr>
+              <tr><td>훈련/승급 가속 1분 사용</td><td class="td-num">300</td></tr>
+            </tbody>
+          </table>
+        </details>
+
+        <div class="callout">
+          <h3>운영 팁(공통)</h3>
+          <ul>
+            <li>점수 스테이지에 맞춰 해당 재화만 집중 사용하면, 같은 재화로도 더 높은 점수를 만들 수 있다.</li>
+            <li>연맹총동원, 연구 이벤트, 병력 이벤트와 시기가 겹치면 효율이 더 좋아질 수 있다.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-4" class="block anchor">
+        <h2>4) 영주 장비 업그레이드 점수표</h2>
+        <p class="muted small">회차와 스테이지에 따라 영주 장비 평점(Score) 증가가 점수로 잡히는 구간이 있다.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>영주 장비 등급</th>
+              <th class="td-num">레벨업 점수</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>일반</td><td class="td-num">1,125</td></tr>
+            <tr><td>일반 1성</td><td class="td-num">1,875</td></tr>
+            <tr><td>레어</td><td class="td-num">3,000</td></tr>
+            <tr><td>레어 1성</td><td class="td-num">4,500</td></tr>
+            <tr><td>레어 2성</td><td class="td-num">5,100</td></tr>
+            <tr><td>레어 3성</td><td class="td-num">5,400</td></tr>
+            <tr><td>에픽</td><td class="td-num">3,230</td></tr>
+            <tr><td>에픽 1성</td><td class="td-num">3,230</td></tr>
+            <tr><td>에픽 2성</td><td class="td-num">3,225</td></tr>
+            <tr><td>에픽 3성</td><td class="td-num">3,225</td></tr>
+            <tr><td>에픽 T1</td><td class="td-num">3,440</td></tr>
+            <tr><td>에픽 T1 1성</td><td class="td-num">3,440</td></tr>
+            <tr><td>에픽 T1 2성</td><td class="td-num">4,085</td></tr>
+            <tr><td>에픽 T1 3성</td><td class="td-num">4,085</td></tr>
+            <tr><td>레전드</td><td class="td-num">6,250</td></tr>
+            <tr><td>레전드 1성</td><td class="td-num">6,250</td></tr>
+            <tr><td>레전드 2성</td><td class="td-num">6,250</td></tr>
+            <tr><td>레전드 3성</td><td class="td-num">6,250</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="sec-5" class="block anchor">
+        <h2>5) 영주 보석(Charm) 업그레이드 점수표</h2>
+        <p class="muted small">4~5회차에는 보석(Charm) 평점 증가가 직접 점수로 잡히는 스테이지가 나온다.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>영주 보석(Charm) 레벨</th>
+              <th class="td-num">레벨업 점수</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td class="td-num">625</td></tr>
+            <tr><td>2</td><td class="td-num">1,250</td></tr>
+            <tr><td>3</td><td class="td-num">3,125</td></tr>
+            <tr><td>4</td><td class="td-num">8,750</td></tr>
+            <tr><td>5</td><td class="td-num">11,250</td></tr>
+            <tr><td>6</td><td class="td-num">12,500</td></tr>
+            <tr><td>7</td><td class="td-num">12,500</td></tr>
+            <tr><td>8</td><td class="td-num">13,000</td></tr>
+            <tr><td>9</td><td class="td-num">14,000</td></tr>
+            <tr><td>10</td><td class="td-num">15,000</td></tr>
+            <tr><td>11</td><td class="td-num">16,000</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="sec-6" class="block anchor">
+        <h2>6) 시즌 영웅 해금 조건(TOP10/100)</h2>
+
+        <div class="callout warn">
+          <h3>아마데우스(시즌1) 해금</h3>
+          <p>
+            아마데우스는 미션 완주 보상으로 자동 획득되는 구조가 아니라,
+            이벤트 기간 누적 점수 <span class="k">TOP10</span> 같은 순위 조건을 만족해야 해금되는 시즌이 많다.
+          </p>
+        </div>
+
+        <div class="callout" style="margin-top:12px">
+          <h3>힐데(4~5회차) 보상</h3>
+          <p>
+            4~5회차는 힐데가 시즌 영웅으로 등장하며, 보통 <span class="k">TOP100</span> 순위 보상으로 조각을 받을 수 있다.
+          </p>
+        </div>
+
+        <p class="muted small">정확한 컷과 보상 구조는 서버마다 달라질 수 있으니, 반드시 게임 내 공지를 기준으로 확인해야 한다.</p>
+      </section>
+
+      <section id="sec-7" class="block anchor">
+        <h2>7) 운영 Q&A + 소과금/과금 팁</h2>
+
+        <details open>
+          <summary>최강영주 Q&A 요약(실전용)</summary>
+
+          <h3>Q1. 최강영주 이벤트는 언제 열리나요?</h3>
+          <p>A. 보통 연맹총동원 이후, 약 2주 간격으로 열리는 경우가 많다. 다만 서버 상황에 따라 일정은 달라질 수 있으니 항상 공지를 우선 확인하는 것이 좋다.</p>
+
+          <h3>Q2. 참여 조건은 무엇인가요?</h3>
+          <p>A. 서버 내 모든 영주가 자동으로 참여한다. 이벤트 기간 동안 획득한 점수로 순위가 정해지고 보상이 지급된다.</p>
+
+          <h3>Q3. 점수는 어떻게 획득하나요?</h3>
+          <p>A. 병력 훈련, 건물 업그레이드, 기술 연구, 가속 사용, 영웅 승급, 제작망치, 룰렛, 영주 장비/보석 평점 증가 등으로 획득한다. 단, 어떤 항목이 유효한지는 스테이지마다 다르다.</p>
+
+          <h3>Q4. 고득점을 위한 준비 방법은?</h3>
+          <ul>
+            <li>속도 아이템과 자원을 미리 충분히 모아 두고, 이벤트 시작일과 스테이지 타이밍에 맞춰 집중 사용한다.</li>
+            <li>병력 훈련 이벤트나 연구 성장 이벤트와 겹치면 점수 효율이 좋아진다.</li>
+            <li>건설/훈련/연구 가속, 제작망치, 룰렛용 다이아와 티켓을 사전에 준비해 두는 편이 좋다.</li>
+          </ul>
+
+          <h3>Q5. 어떤 보상이 주어지나요?</h3>
+          <p>A. 순위에 따라 다이아, 속도 아이템, 영웅 조각 등이 지급된다. 영주 장비 재료는 보상에 포함되지 않는 경우가 많다.</p>
+
+          <h3>Q6. TOP10에 필요한 점수는 어느 정도인가요?</h3>
+          <p>A. 서버마다 차이가 있지만, TOP10 평균 컷이 약 5억 점 이상인 경우가 많다. 특히 신규 서버일수록 경쟁이 매우 치열한 편이다.</p>
+
+          <h3>Q7. 무조건 상위권을 노려야 하나요?</h3>
+          <p>
+            A. 반드시 그렇지는 않다. 시즌1 아마데우스처럼 순위 보상이 정말 중요한 구간을 제외하면,
+            이후 세대 영웅은 공용 조각으로도 승급이 가능하기 때문에 무리해서 순위를 노리기보다 기본 보상을 안정적으로 가져가는 전략이 더 효율적일 수 있다.
+          </p>
+
+          <h3>Q8. 사전 준비해야 할 다이아는 어느 정도인가요?</h3>
+          <p>A. 최강영주와 영웅 룰렛이 함께 열리는 경우가 많아, 최소 162,000 다이아 이상을 준비해두면 운영이 훨씬 편해진다.</p>
+        </details>
+
+        <div class="callout ok">
+          <h3>과금할 마음이 있다면(핵심)</h3>
+          <p>
+            과금을 하기로 마음먹었다면, 시즌1 아마데우스 보상은 가능하면 꼭 챙기는 편이 좋다.
+            단기간에 강하게 투자하는 유저라면, 아마데우스를 빠르게 고성까지 올려 시즌1~시즌2 구간에서 확실한 체감 우위를 만들 수 있다.
+          </p>
+          <p>
+            특히 시즌1 최강영주 TOP10을 현실적으로 노리려면, 재화 준비만으로는 한계가 있는 경우가 많아서
+            <span class="k">충전 타이밍을 최강영주에 맞춰 계획적으로 가져가는 것</span>이 중요하다.
+          </p>
+          <p style="margin-top:10px">
+            <a class="btn primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">최강영주용 충전 준비하기</a>
+          </p>
+        </div>
+
+        <div class="callout warn" style="margin-top:12px">
+          <h3>F2P(무/소과금) 핵심 한 줄</h3>
+          <p>
+            F2P는 룰렛 영웅을 세대마다 꼭 챙기는 게 중요하다.
+            룰렛 영웅을 놓치면, 잘 키운 무과금 유저에게도 경기장과 전투에서 밀릴 수 있다.
+          </p>
+        </div>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        본 문서는 공식이 아닌, 공개된 정보와 실제 운영 경험을 바탕으로 정리한 가이드다.
+        서버, 버전, 운영 정책에 따라 내용은 변경될 수 있다.
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

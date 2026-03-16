@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot Hall of Governors Guide · Stages / Scores / Rewards / Tips</title>
+  <meta name="description" content="Kingshot Hall of Governors guide: stage-by-stage score tables for runs 1–5, Amadeus / Hilde rewards, Lord Gear / Charm upgrade scores, TOP10 / TOP100 conditions, and practical F2P / spender tips in one place." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/en/guides/hallofgovernors.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/hallofgovernors.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/hallofgovernors.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/hallofgovernors.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/hallofgovernors.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot Hall of Governors Guide" />
+  <meta property="og:description" content="Runs 1–5 score tables, Amadeus / Hilde unlock conditions, Lord Gear / Charm scores, and practical spender / F2P tips in one guide." />
+  <meta property="og:url" content="https://kingshotdata.kr/en/guides/hallofgovernors.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="en_US" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --line:#e7ecf5;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:16px;
+      --radius2:14px;
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+
+      --ok-bg:#ecfdf5;
+      --warn-bg:#fff7ed;
+      --note-bg:#f8fafc;
+      --table-head:#f3f4f6;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --line:#2f3540;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --note-bg:#161616;
+        --ok-bg:#0f1e16;
+        --warn-bg:#1d1710;
+        --table-head:#1b1b1b;
+      }
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:15px/1.7 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(24px,3.2vw,38px);
+      line-height:1.2;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:14px 0 0;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:30px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-cta{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      color:var(--text);
+      font-weight:1000;
+      text-decoration:none !important;
+      font-size:14px;
+      line-height:1;
+    }
+    .btn.primary{
+      background:#111827;
+      border-color:#111827;
+      color:#fff;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note-bg);
+    }
+    .callout.ok{background:var(--ok-bg)}
+    .callout.warn{background:var(--warn-bg)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0;padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text);font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .small{font-size:13px}
+    .muted{color:var(--muted)}
+    .k{font-weight:1000}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note-bg);
+      padding:10px 12px;
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      margin:10px 0;
+    }
+    thead th{
+      background:var(--table-head);
+      font-size:13px;
+      font-weight:1000;
+      text-align:left;
+      padding:10px;
+      border-bottom:1px solid var(--border);
+    }
+    tbody td{
+      padding:9px 10px;
+      border-bottom:1px solid var(--border);
+      font-size:13px;
+      vertical-align:top;
+    }
+    tbody tr:last-child td{border-bottom:0}
+    .td-num{
+      text-align:right;
+      white-space:nowrap;
+      font-variant-numeric:tabular-nums;
+    }
+
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+    .foot{
+      font-size:12.5px;
+      color:var(--muted);
+      margin:10px 0 6px;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot Hall of Governors Guide",
+    "inLanguage":"en",
+    "description":"Runs 1–5 score tables, Amadeus / Hilde unlock conditions, Lord Gear / Charm scores, and practical spender / F2P tips.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/en/guides/hallofgovernors.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/en/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/hallofgovernors.html" aria-current="page">EN</a>
+        <a href="/ko/guides/hallofgovernors.html">KO</a>
+        <a href="/ja/guides/hallofgovernors.html">JA</a>
+        <a href="/zh-tw/guides/hallofgovernors.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#sec-1">Overview</a>
+      <a href="#sec-2">Scoring</a>
+      <a href="#sec-3">Runs</a>
+      <a href="#sec-4">Gear</a>
+      <a href="#sec-5">Charm</a>
+      <a href="#sec-6">Unlocks</a>
+      <a href="#sec-7">Tips</a>
+    </nav>
+
+    <main class="container">
+      <div class="crumbs">
+        <a href="/en/">Home</a> <span class="muted">›</span>
+        <a href="/en/guides/">Guides</a> <span class="muted">›</span>
+        <span>Hall of Governors</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>Kingshot Hall of Governors Guide</h1>
+          <p class="sub">
+            A practical guide covering run 1–5 stage score tables, season hero unlock structure for Amadeus and Hilde, Lord Gear and Charm scores, and real progression tips in one place.
+          </p>
+
+          <div class="meta">
+            <span class="tag">Biweekly Event</span>
+            <span class="tag">Stage Score Tables</span>
+            <span class="tag">TOP10 / TOP100</span>
+            <span class="tag">F2P / Spender</span>
+          </div>
+
+          <div class="hero-cta">
+            <a class="btn" href="#sec-3">View Score Tables</a>
+            <a class="btn primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Kingshot Top-Up Page</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>One-Line Summary</h3>
+            <ul>
+              <li>Hall of Governors is usually a biweekly event, but timing and structure can vary by server.</li>
+              <li>Amadeus in Season 1 is often not a simple milestone reward. In many cases, total ranking is the real requirement.</li>
+              <li>The most efficient way to score high is to stockpile speedups, shards, hammers, and roulette resources, then spend them only on the right stages.</li>
+            </ul>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>Common Misunderstanding</h3>
+            <p>
+              Many players think finishing all event missions is enough to get Amadeus,
+              but in Season 1 reward structures, <span class="k">ranking requirements such as TOP10</span> are often the real key.
+            </p>
+          </div>
+
+          <div class="callout" style="margin-top:12px">
+            <h3>If You Want Amadeus in Season 1</h3>
+            <p>
+              If your goal is to get Amadeus from Season 1 Hall of Governors rewards, then on many servers <span class="k">spending is close to mandatory</span>.
+              On competitive servers, speedups, shards, and roulette resources alone are often not enough to reach TOP10.
+            </p>
+            <p>
+              If you want a more reliable shot at Amadeus, it is better to line up your top-up timing with Hall of Governors.
+            </p>
+            <p style="margin-top:10px">
+              <a class="btn primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Prepare Top-Up for Amadeus</a>
+            </p>
+          </div>
+        </div>
+
+        <nav class="card toc" aria-label="Table of contents">
+          <h2>Contents</h2>
+          <ul>
+            <li><a href="#sec-1">1) Event Overview · Timing · Season Heroes</a></li>
+            <li><a href="#sec-2">2) How Scoring Works (Summary)</a></li>
+            <li><a href="#sec-3">3) Runs 1–5 Stage / Score Tables</a></li>
+            <li><a href="#sec-4">4) Lord Gear Upgrade Score Table</a></li>
+            <li><a href="#sec-5">5) Lord Charm Upgrade Score Table</a></li>
+            <li><a href="#sec-6">6) Season Hero Unlock Conditions (TOP10 / TOP100)</a></li>
+            <li><a href="#sec-7">7) Q&A + F2P / Spender Tips</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="sec-1" class="block anchor">
+        <h2>1) Event Overview · Timing · Season Heroes</h2>
+        <p>
+          Hall of Governors is one of the main growth events in Kingshot and is usually held on a two-week cycle.
+          During the event, you complete stage-specific tasks to earn points and claim milestone rewards from your total score.
+        </p>
+
+        <ul>
+          <li><b>Run 1</b>: Starts on <b>Day 6</b> after kingdom creation (server 기준). Season hero: <b>Amadeus</b></li>
+          <li><b>Run 2</b>: About two weeks after Run 1. Season hero: <b>Amadeus</b></li>
+          <li><b>Run 3</b>: Usually in the Generation 2 period, though some servers may still treat it differently. Season hero: <b>Amadeus</b>, usually 7 days long</li>
+          <li><b>Runs 4–5</b>: Similar stage structure. Season hero: <b>Hilde</b>, usually tied to <b>TOP100</b> ranking rewards</li>
+        </ul>
+
+        <div class="callout">
+          <h3>Note</h3>
+          <p>Stage order, score values, and reward structure can change depending on server, version, and live operations. Always treat in-game notices as the final source of truth.</p>
+        </div>
+      </section>
+
+      <section id="sec-2" class="block anchor">
+        <h2>2) How Scoring Works (Summary)</h2>
+        <p>Main scoring categories usually include the following.</p>
+        <ul>
+          <li>Building upgrades (construction power gain)</li>
+          <li>Research upgrades (research power gain)</li>
+          <li>Troop training / promotion (troop power gain)</li>
+          <li>Using speedups (depending on run and stage)</li>
+          <li>Hero promotion (using shards)</li>
+          <li>Hero gear hammers / gear XP / exclusive gear materials</li>
+          <li>Hero roulette spins</li>
+          <li>Lord Gear score increase</li>
+          <li>Lord Charm score increase</li>
+        </ul>
+      </section>
+
+      <section id="sec-3" class="block anchor">
+        <h2>3) Runs 1–5 Stage / Score Tables</h2>
+
+        <details open>
+          <summary>Run 1 Hall of Governors (Season Hero: Amadeus)</summary>
+
+          <h3>Stage 1: City Building</h3>
+          <table>
+            <thead>
+              <tr><th>Category</th><th class="td-num">Score</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Gain 1 power from construction</td><td class="td-num">45</td></tr>
+              <tr><td>Gain 1 power from research</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 2: Hero Growth</h3>
+          <table>
+            <thead>
+              <tr><th>Category</th><th class="td-num">Score</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Complete 1 Hero Roulette action</td><td class="td-num">90,000</td></tr>
+              <tr><td>Use 1 Rare Hero Shard</td><td class="td-num">4,000</td></tr>
+              <tr><td>Use 1 Epic Hero Shard</td><td class="td-num">14,000</td></tr>
+              <tr><td>Use 1 Mythic Hero Shard</td><td class="td-num">35,000</td></tr>
+              <tr><td>Gather 50 Bread in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 50 Wood in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 10 Stone in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 2 Iron in the wilderness</td><td class="td-num">3</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 3: Troop Training (Score per troop)</h3>
+          <div class="small muted">These are the points for training 1 troop of each tier.</div>
+          <table>
+            <thead>
+              <tr><th>Troop Tier</th><th class="td-num">Score</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+              <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+              <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+              <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+              <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+              <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+              <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+              <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+              <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+              <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 4: Beast Hunting</h3>
+          <table>
+            <thead>
+              <tr><th>Category</th><th class="td-num">Score</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Defeat a Lv 1–30 beast</td><td class="td-num">30,000</td></tr>
+              <tr><td>Start a rally and defeat Terror once</td><td class="td-num">90,000</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 5: Power Boost</h3>
+          <table>
+            <thead>
+              <tr><th>Category</th><th class="td-num">Score</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Gain 1 power from construction</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from research</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from troop training / promotion</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+        </details>
+
+        <details>
+          <summary>Run 2 Hall of Governors (Season Hero: Amadeus)</summary>
+
+          <h3>Stage 1: City Building</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Gain 1 power from construction</td><td class="td-num">45</td></tr>
+              <tr><td>Gain 1 power from research</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 2: Hero Growth</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Complete Hero Roulette</td><td class="td-num">90,000</td></tr>
+              <tr><td>Use 1 Rare Hero Shard</td><td class="td-num">4,000</td></tr>
+              <tr><td>Use 1 Epic Hero Shard</td><td class="td-num">14,000</td></tr>
+              <tr><td>Use 1 Mythic Hero Shard</td><td class="td-num">35,000</td></tr>
+              <tr><td>Gather 50 Bread in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 50 Wood in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 10 Stone in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 2 Iron in the wilderness</td><td class="td-num">3</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 3: Troop Training (Score per troop)</h3>
+          <div class="small muted">These are the points for training 1 troop of each tier.</div>
+          <table>
+            <thead><tr><th>Troop Tier</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+              <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+              <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+              <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+              <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+              <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+              <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+              <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+              <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+              <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 4: Resource Gathering</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Gather 50 Bread in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 50 Wood in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 10 Stone in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 2 Iron in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gain 1 power from research</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 5: Power Boost</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Use 1 Hero Gear Hammer</td><td class="td-num">50,000</td></tr>
+              <tr><td>Use 100 Hero Gear XP</td><td class="td-num">30,000</td></tr>
+              <tr><td>Use 1 Hero Exclusive Gear Material</td><td class="td-num">100,000</td></tr>
+              <tr><td>Gain 1 power from construction</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from research</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from troop training / promotion</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 6: Lord Gear Upgrade</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Increase max Lord Gear score by 1</td><td class="td-num">500</td></tr>
+              <tr><td>Gain 1 power from construction</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from research</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from troop training / promotion</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <div class="small muted">For Lord Gear upgrade score values by rarity, see section 4 below.</div>
+        </details>
+
+        <details>
+          <summary>Run 3 Hall of Governors (Season Hero: Amadeus, usually 7 days)</summary>
+
+          <h3>Stage 1: Power Boost</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Gain 1 power from construction</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from research</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from troop training / promotion</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 2: Hero Growth</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Complete Hero Roulette</td><td class="td-num">90,000</td></tr>
+              <tr><td>Use 1 Rare Hero Shard</td><td class="td-num">4,000</td></tr>
+              <tr><td>Use 1 Epic Hero Shard</td><td class="td-num">14,000</td></tr>
+              <tr><td>Use 1 Mythic Hero Shard</td><td class="td-num">35,000</td></tr>
+              <tr><td>Gather 50 Bread in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 50 Wood in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 10 Stone in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 2 Iron in the wilderness</td><td class="td-num">3</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 3: Troop Training (Score per troop)</h3>
+          <div class="small muted">These are the points for training 1 troop of each tier.</div>
+          <table>
+            <thead><tr><th>Troop Tier</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+              <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+              <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+              <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+              <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+              <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+              <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+              <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+              <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+              <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 4: Resource Gathering</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Gather 50 Bread in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 50 Wood in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 10 Stone in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 2 Iron in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gain 1 power from research</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 5: Power Boost</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Use 1 Hero Gear Hammer</td><td class="td-num">50,000</td></tr>
+              <tr><td>Use 1 Hero Exclusive Gear Material</td><td class="td-num">100,000</td></tr>
+              <tr><td>Gain 1 power from construction</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from research</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from troop training / promotion</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 6: Lord Gear Upgrade</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Increase max Lord Gear score by 1</td><td class="td-num">500</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 7: Hero Growth (with speedups)</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Use 1 Rare Hero Shard</td><td class="td-num">4,000</td></tr>
+              <tr><td>Use 1 Epic Hero Shard</td><td class="td-num">14,000</td></tr>
+              <tr><td>Use 1 Mythic Hero Shard</td><td class="td-num">35,000</td></tr>
+              <tr><td>Use 1 minute of Construction Speedup</td><td class="td-num">300</td></tr>
+              <tr><td>Use 1 minute of Research Speedup</td><td class="td-num">300</td></tr>
+              <tr><td>Use 1 minute of Training / Promotion Speedup</td><td class="td-num">300</td></tr>
+            </tbody>
+          </table>
+
+          <div class="small muted">For Lord Gear upgrade score values by rarity, see section 4 below.</div>
+        </details>
+
+        <details>
+          <summary>Runs 4–5 Hall of Governors (Season Hero: Hilde)</summary>
+
+          <h3>Stage 1: Power Boost</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Gain 1 power from construction</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from research</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from troop training / promotion</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 2: Hero Growth</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Complete Hero Roulette</td><td class="td-num">90,000</td></tr>
+              <tr><td>Use 1 Rare Hero Shard</td><td class="td-num">4,000</td></tr>
+              <tr><td>Use 1 Epic Hero Shard</td><td class="td-num">14,000</td></tr>
+              <tr><td>Use 1 Mythic Hero Shard</td><td class="td-num">35,000</td></tr>
+              <tr><td>Gather 50 Bread in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 50 Wood in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 10 Stone in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 2 Iron in the wilderness</td><td class="td-num">3</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 3: Troop Training (Score per troop)</h3>
+          <div class="small muted">These are the points for training 1 troop of each tier.</div>
+          <table>
+            <thead><tr><th>Troop Tier</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+              <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+              <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+              <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+              <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+              <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+              <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+              <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+              <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+              <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 4: Charm Upgrade</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Increase max Lord Charm score by 1</td><td class="td-num">1,000</td></tr>
+              <tr><td>Gather 50 Bread in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 50 Wood in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 10 Stone in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gather 2 Iron in the wilderness</td><td class="td-num">3</td></tr>
+              <tr><td>Gain 1 power from research</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <div class="small muted">For Charm level-up score values, see section 5 below.</div>
+
+          <h3>Stage 5: Power Boost</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Use 1 Hero Gear Hammer</td><td class="td-num">50,000</td></tr>
+              <tr><td>Use 1 Hero Exclusive Gear Material</td><td class="td-num">100,000</td></tr>
+              <tr><td>Gain 1 power from construction</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from research</td><td class="td-num">30</td></tr>
+              <tr><td>Gain 1 power from troop training / promotion</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 6: Lord Gear Upgrade</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Increase max Lord Gear score by 1</td><td class="td-num">500</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 7: Hero Growth (with speedups)</h3>
+          <table>
+            <thead><tr><th>Category</th><th class="td-num">Score</th></tr></thead>
+            <tbody>
+              <tr><td>Use 1 Rare Hero Shard</td><td class="td-num">4,000</td></tr>
+              <tr><td>Use 1 Epic Hero Shard</td><td class="td-num">14,000</td></tr>
+              <tr><td>Use 1 Mythic Hero Shard</td><td class="td-num">35,000</td></tr>
+              <tr><td>Use 1 minute of Construction Speedup</td><td class="td-num">300</td></tr>
+              <tr><td>Use 1 minute of Research Speedup</td><td class="td-num">300</td></tr>
+              <tr><td>Use 1 minute of Training / Promotion Speedup</td><td class="td-num">300</td></tr>
+            </tbody>
+          </table>
+        </details>
+
+        <div class="callout">
+          <h3>General Efficiency Tips</h3>
+          <ul>
+            <li>If you only spend the matching resource on the correct scoring stage, you can get much more value from the same stockpile.</li>
+            <li>Efficiency can get even better when Hall of Governors overlaps with other alliance, research, or troop events.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-4" class="block anchor">
+        <h2>4) Lord Gear Upgrade Score Table</h2>
+        <p class="muted small">In some runs and stages, increases to Lord Gear score directly count toward event points.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Lord Gear Rank</th>
+              <th class="td-num">Level-Up Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Common</td><td class="td-num">1,125</td></tr>
+            <tr><td>Common 1-Star</td><td class="td-num">1,875</td></tr>
+            <tr><td>Rare</td><td class="td-num">3,000</td></tr>
+            <tr><td>Rare 1-Star</td><td class="td-num">4,500</td></tr>
+            <tr><td>Rare 2-Star</td><td class="td-num">5,100</td></tr>
+            <tr><td>Rare 3-Star</td><td class="td-num">5,400</td></tr>
+            <tr><td>Epic</td><td class="td-num">3,230</td></tr>
+            <tr><td>Epic 1-Star</td><td class="td-num">3,230</td></tr>
+            <tr><td>Epic 2-Star</td><td class="td-num">3,225</td></tr>
+            <tr><td>Epic 3-Star</td><td class="td-num">3,225</td></tr>
+            <tr><td>Epic T1</td><td class="td-num">3,440</td></tr>
+            <tr><td>Epic T1 1-Star</td><td class="td-num">3,440</td></tr>
+            <tr><td>Epic T1 2-Star</td><td class="td-num">4,085</td></tr>
+            <tr><td>Epic T1 3-Star</td><td class="td-num">4,085</td></tr>
+            <tr><td>Mythic</td><td class="td-num">6,250</td></tr>
+            <tr><td>Mythic 1-Star</td><td class="td-num">6,250</td></tr>
+            <tr><td>Mythic 2-Star</td><td class="td-num">6,250</td></tr>
+            <tr><td>Mythic 3-Star</td><td class="td-num">6,250</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="sec-5" class="block anchor">
+        <h2>5) Lord Charm Upgrade Score Table</h2>
+        <p class="muted small">In Runs 4–5, Charm score gain appears as a direct scoring category.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Lord Charm Level</th>
+              <th class="td-num">Level-Up Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td class="td-num">625</td></tr>
+            <tr><td>2</td><td class="td-num">1,250</td></tr>
+            <tr><td>3</td><td class="td-num">3,125</td></tr>
+            <tr><td>4</td><td class="td-num">8,750</td></tr>
+            <tr><td>5</td><td class="td-num">11,250</td></tr>
+            <tr><td>6</td><td class="td-num">12,500</td></tr>
+            <tr><td>7</td><td class="td-num">12,500</td></tr>
+            <tr><td>8</td><td class="td-num">13,000</td></tr>
+            <tr><td>9</td><td class="td-num">14,000</td></tr>
+            <tr><td>10</td><td class="td-num">15,000</td></tr>
+            <tr><td>11</td><td class="td-num">16,000</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="sec-6" class="block anchor">
+        <h2>6) Season Hero Unlock Conditions (TOP10 / TOP100)</h2>
+
+        <div class="callout warn">
+          <h3>Amadeus (Season 1) Unlock</h3>
+          <p>
+            Amadeus is often not awarded automatically just for clearing milestones.
+            In many Season 1 formats, you need to place in a ranking bracket such as <span class="k">TOP10</span> to unlock him.
+          </p>
+        </div>
+
+        <div class="callout" style="margin-top:12px">
+          <h3>Hilde (Runs 4–5) Reward</h3>
+          <p>
+            In Runs 4–5, Hilde appears as the season hero, and her shards are often tied to <span class="k">TOP100</span> ranking rewards.
+          </p>
+        </div>
+
+        <p class="muted small">Exact score cutoffs and reward structure can differ by server, so always check the in-game notice for your own kingdom.</p>
+      </section>
+
+      <section id="sec-7" class="block anchor">
+        <h2>7) Q&A + F2P / Spender Tips</h2>
+
+        <details open>
+          <summary>Hall of Governors Q&A Summary</summary>
+
+          <h3>Q1. When does Hall of Governors happen?</h3>
+          <p>A. It often appears after Alliance Mobilization and usually returns on a roughly two-week cycle. Actual timing can vary by server, so always check announcements first.</p>
+
+          <h3>Q2. Who can participate?</h3>
+          <p>A. All governors on the server participate automatically. Your event score during the period determines your ranking and rewards.</p>
+
+          <h3>Q3. How do you earn points?</h3>
+          <p>A. Through troop training, building upgrades, research, speedup usage, hero promotion, hammers, roulette, and Lord Gear / Charm score increases. The exact valid categories depend on the current stage.</p>
+
+          <h3>Q4. How should you prepare for high scores?</h3>
+          <ul>
+            <li>Save speedups and resources in advance, then spend them only when the right stage opens.</li>
+            <li>Your efficiency gets better when troop or research growth events overlap with Hall of Governors.</li>
+            <li>It helps to prepare construction, training, and research speedups, gear hammers, and enough diamonds or tickets for roulette ahead of time.</li>
+          </ul>
+
+          <h3>Q5. What rewards do you get?</h3>
+          <p>A. Rewards usually include diamonds, speedups, and hero shards based on ranking. Lord Gear materials are often not included as direct ranking rewards.</p>
+
+          <h3>Q6. How many points do you need for TOP10?</h3>
+          <p>A. It varies by server, but TOP10 cutoffs are often around 500M points or higher. Competition is usually much harsher on newer servers.</p>
+
+          <h3>Q7. Do you always need to push for top ranks?</h3>
+          <p>
+            A. Not always. Outside of important windows such as Season 1 Amadeus,
+            later-generation heroes can often be upgraded with universal shards, so taking stable rewards may be more efficient than forcing a rank push.
+          </p>
+
+          <h3>Q8. How many diamonds should you prepare?</h3>
+          <p>A. Since Hall of Governors often overlaps with Hero Roulette, having at least 162,000 diamonds prepared makes planning much easier.</p>
+        </details>
+
+        <div class="callout ok">
+          <h3>If You Plan to Spend</h3>
+          <p>
+            If you are already willing to spend, then Season 1 Amadeus is usually worth prioritizing.
+            For players investing hard early, getting Amadeus to a strong star level quickly can create a real advantage through the Season 1 to Season 2 period.
+          </p>
+          <p>
+            In particular, if you want a realistic shot at Season 1 TOP10,
+            stockpiled resources alone are often not enough, so <span class="k">planning your top-up timing around Hall of Governors</span> matters a lot.
+          </p>
+          <p style="margin-top:10px">
+            <a class="btn primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Prepare Top-Up for Hall of Governors</a>
+          </p>
+        </div>
+
+        <div class="callout warn" style="margin-top:12px">
+          <h3>F2P Core Advice</h3>
+          <p>
+            If you are F2P or light-spend, securing the roulette hero each generation matters a lot.
+            Missing roulette heroes can leave you behind even against well-built low-spend accounts in arena and combat.
+          </p>
+        </div>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        This guide is unofficial and based on public information plus practical gameplay experience.
+        Content may change depending on server settings, patches, and live operations.
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

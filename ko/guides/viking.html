@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>킹샷 바이킹의 약탈 공략 | Viking Vengeance 고득점 실전 가이드</title>
+  <meta name="description" content="킹샷 바이킹의 약탈(Viking Vengeance) 고득점 공략. 20라운드 방어 이벤트에서 본성 비우기, 접속자 우선 지원, 10/20 HQ 방어, 영웅과 병력 설정까지 한 번에 정리했습니다." />
+  <meta name="keywords" content="킹샷 바이킹의 약탈, Kingshot Viking Vengeance, 킹샷 바이킹 공략, 킹샷 HQ 방어, 킹샷 연맹 이벤트, 킹샷 고득점 공략" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/viking.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/viking.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/viking.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/viking.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/viking.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/viking.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="킹샷 바이킹의 약탈 공략 | Viking Vengeance 고득점 실전 가이드" />
+  <meta property="og:description" content="본성 비우기, 접속자 우선 지원, 10/20 HQ 방어, 영웅과 병력 설정까지 정리한 킹샷 바이킹의 약탈 고득점 공략입니다." />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/guides/viking.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --line:#e7ecf5;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+      --warn:#b45309;
+      --warn-bg:rgba(245,158,11,.08);
+
+      --radius:16px;
+      --radius2:14px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.7 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(26px,4vw,40px);
+      line-height:1.15;
+      color:var(--text);
+    }
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:16px 0 0;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .k{font-weight:900;color:var(--text)}
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    h2{
+      margin:0 0 10px;
+      font-size:clamp(20px,2.4vw,28px);
+      color:var(--accent);
+      line-height:1.25;
+    }
+    h3{
+      font-size:clamp(16px,2vw,20px);
+      margin:18px 0 8px;
+      line-height:1.35;
+    }
+    p{margin:8px 0}
+
+    .toc{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .toc strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:15px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin:12px 0;
+    }
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      background:#fff;
+      padding:14px;
+    }
+    .card .title{
+      margin:0 0 6px;
+      font-weight:900;
+    }
+
+    .note{
+      font-size:14px;
+      color:var(--muted);
+      background:var(--warn-bg);
+      padding:12px 14px;
+      border-left:4px solid var(--warn);
+      border-radius:10px;
+      margin:16px 0 0;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:10px 0 0;
+    }
+    th,td{
+      border:1px solid var(--border);
+      padding:10px;
+      vertical-align:top;
+    }
+    th{
+      background:#f8fafc;
+      text-align:left;
+      font-weight:900;
+    }
+
+    ul{margin:8px 0;padding-left:18px}
+    li{margin:6px 0}
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--text);
+      font-size:13px;
+      font-weight:800;
+      text-decoration:none;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+        padding:10px 16px 12px;
+        margin:0 -16px;
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -16px;
+        padding:6px 16px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      .grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section,.toc{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"킹샷 바이킹의 약탈 공략 | Viking Vengeance 고득점 실전 가이드",
+    "inLanguage":"ko",
+    "description":"킹샷 바이킹의 약탈(Viking Vengeance) 20라운드 방어 이벤트에서 점수를 최대화하는 고득점 협력 공략.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ko/guides/viking.html"
+    },
+    "author":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/viking.html">EN</a>
+        <a href="/ko/guides/viking.html" aria-current="page">KO</a>
+        <a href="/ja/guides/viking.html">JA</a>
+        <a href="/zh-tw/guides/viking.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">개요</a>
+      <a href="#waves">라운드</a>
+      <a href="#points">점수</a>
+      <a href="#flow">흐름</a>
+      <a href="#hq">HQ 방어</a>
+      <a href="#city">본성 설정</a>
+      <a href="#heroes">영웅</a>
+      <a href="#checklist">체크</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/guides/">가이드</a> <span class="muted">›</span>
+        <span>바이킹의 약탈</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>바이킹의 약탈(Viking Vengeance) 최적 공략</h1>
+          <p class="subtitle">20라운드 방어 이벤트에서 점수를 최대화하는 고득점 협업 운영 가이드입니다.</p>
+
+          <div class="meta">
+            <span class="badge"><span class="k">주기</span> 2주마다 화 / 목 (서버 설정에 따라 달라질 수 있음)</span>
+            <span class="badge"><span class="k">핵심</span> 본성 비우기 · 지원 점수 · 10/20 HQ 방어 · 접속자 우선 지원</span>
+            <span class="badge"><span class="k">목표</span> 연맹 전체 점수 극대화 (서로 점수 몰아주기 가능)</span>
+          </div>
+
+          <div class="jump">
+            <a href="#overview">이벤트 개요</a><span class="dotsep">•</span>
+            <a href="#waves">공격 라운드</a><span class="dotsep">•</span>
+            <a href="#points">점수 구조</a><span class="dotsep">•</span>
+            <a href="#flow">실전 흐름</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="toc">
+        <strong>목차</strong>
+        <ul>
+          <li><a href="#overview">이벤트 개요</a></li>
+          <li><a href="#waves">공격 라운드(타겟) 안내</a></li>
+          <li><a href="#points">점수 구조</a></li>
+          <li><a href="#flow">고득점 플레이 흐름(Step 1~4)</a></li>
+          <li><a href="#hq">10/20 라운드 HQ 방어</a></li>
+          <li><a href="#city">본성 수성(병력) 세팅</a></li>
+          <li><a href="#heroes">영웅 운용(지원/수비)</a></li>
+          <li><a href="#checklist">최종 체크리스트</a></li>
+        </ul>
+      </div>
+
+      <section id="overview" class="anchor">
+        <h2>이벤트 개요</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">기본 규칙</p>
+            <ul>
+              <li>총 20웨이브의 AI 바이킹이 공격해옵니다.</li>
+              <li>각 웨이브 방어 성공 조건은 공격 병력의 50% 이상 처치입니다.</li>
+              <li>공격 대상은 전체 멤버, 접속자만, HQ 전용 라운드로 나뉘어 등장합니다.</li>
+              <li>2번 패배하면 내 도시의 추가 공격이 멈출 수 있지만, 이후에도 지원으로 점수 획득은 가능합니다.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">핵심 개념</p>
+            <ul>
+              <li>내 점수는 내 성에서 죽은 바이킹 수의 영향을 받습니다.</li>
+              <li>하지만 최고점은 남을 지원하며 얻는 지원 점수에서 크게 갈립니다.</li>
+              <li>그래서 실전에서는 본성 비우기 + 접속자 우선 지원이 가장 강한 운영에 가깝습니다.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          요점: 내 성에 보병이나 기병이 남아 있으면 지원군의 킬을 가져가서 동료 점수를 깎습니다. 가능한 한 본성을 비우는 구조로 운영하는 것이 유리합니다.
+        </div>
+      </section>
+
+      <section id="waves" class="anchor">
+        <h2>공격 라운드(타겟) 안내</h2>
+        <p>웨이브는 전체 멤버, 접속자만, HQ 전용으로 타겟이 바뀝니다. 특히 7·14·17은 접속자만 공격하고, 10·20은 HQ만 공격합니다.</p>
+
+        <table aria-label="Wave targets">
+          <thead>
+            <tr>
+              <th>구간</th>
+              <th>타겟</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1~6</td><td>전체 멤버</td></tr>
+            <tr><td>7 / 14 / 17</td><td>접속 중인 멤버만</td></tr>
+            <tr><td>8~9 / 11~13 / 15~16 / 18~19</td><td>전체 멤버</td></tr>
+            <tr><td>10 / 20</td><td>연맹 HQ만</td></tr>
+            <tr><td>비접속자</td><td>7·14·17 라운드에서는 공격을 받지 않음</td></tr>
+            <tr><td>권장 HQ</td><td>평원(Plains) HQ 선호</td></tr>
+          </tbody>
+        </table>
+
+        <div class="note">
+          팁: 접속자만 공격하는 라운드가 있기 때문에, 지원은 접속자부터 넣는 것이 가장 효율적입니다.
+        </div>
+      </section>
+
+      <section id="points" class="anchor">
+        <h2>점수 구조</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">내 성 점수(기본)</p>
+            <ul>
+              <li>내 성에서 바이킹이 죽을수록 내 점수가 올라갑니다.</li>
+              <li>100% 처리하면 가능한 점수도 100%에 가깝게 챙길 수 있습니다.</li>
+              <li>다만 진짜 고득점 차이는 지원 점수에서 크게 벌어집니다.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">지원 점수(핵심)</p>
+            <ul>
+              <li>남을 지원해도 상대 점수를 빼앗는 구조는 아닙니다.</li>
+              <li>대신 지원군이 만든 킬은 내 지원 점수로 별도 생성됩니다.</li>
+              <li>그래서 역할 분담이 잘 되면 양쪽 모두 점수를 크게 끌어올릴 수 있습니다.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          고득점 결론: 내 성은 비우고, 연맹원에게 지원을 돌려서 킬을 지원군이 먹게 만들어야 점수가 가장 잘 올라갑니다.
+        </div>
+      </section>
+
+      <section id="flow" class="anchor">
+        <h2>고득점 플레이 흐름(Step 1~4)</h2>
+
+        <h3>Step 1 — 초기 지원(0~19라운드 유지)</h3>
+        <ul>
+          <li>접속 중인 연맹원 6명 전후에게 지원을 보냅니다.</li>
+          <li>지원 병력은 보병 + 기병 중심이 좋고, 초보 / 신서버는 보병 100%도 효율적입니다.</li>
+          <li>내 성에 보병 / 기병이 남아 있으면 지원군 점수를 뺏어가니, 가능한 한 먼저 밖으로 빼주세요.</li>
+        </ul>
+
+        <h3>Step 2 — 본부 방어 라운드(10/20)</h3>
+        <ul>
+          <li>10라운드와 20라운드에는 바이킹 왕이 HQ만 공격합니다.</li>
+          <li>9/19라운드가 완전히 끝난 뒤, 강한 1개 행군(보병 위주)을 HQ로 보내 방어합니다.</li>
+        </ul>
+
+        <h3>Step 3 — 연맹 협업 문구(복붙용)</h3>
+        <ul>
+          <li>내가 19라운드까지 지원 유지할게요. 궁병 제외한 보/기는 다른 곳으로 지원 보내서 성을 비워주세요.</li>
+          <li>오프라인 유저는 병력이 성에 남아 있을 확률이 높아서, 가능하면 접속자부터 협업하는 것이 좋습니다.</li>
+        </ul>
+
+        <h3>Step 4 — 본성 수성(점수 몰아주기)</h3>
+        <ul>
+          <li>내 성 방어는 궁병 100% 배치로 운영해도 괜찮습니다. 고웨이브에서 3턴까지 가더라도 점수 영향은 크게 나타나지 않는 경우가 많습니다.</li>
+          <li>친한 유저에게 보병 지원을 받아 내 성 점수를 몰아주는 운영도 가능합니다.</li>
+          <li>지원군이 약하면 궁병 턴까지 가서 궁병이 킬을 먹을 수 있는데, 이건 지원군 세기가 부족한 경우입니다.</li>
+        </ul>
+
+        <div class="note">
+          핵심 정리: (1) 내 보/기는 최대한 밖으로 빼기 (2) 지원은 접속자 위주 (3) 10/20은 HQ 방어로 전환.
+        </div>
+      </section>
+
+      <section id="hq" class="anchor">
+        <h2>10/20 라운드 HQ 방어</h2>
+        <ul>
+          <li>10라운드와 20라운드는 HQ만 공격하므로 HQ 방어 준비가 매우 중요합니다.</li>
+          <li>9/19가 완전히 끝난 뒤에만 병력을 회수해야 합니다. 너무 일찍 회수하면 지원 점수 손해가 납니다.</li>
+          <li>HQ 방어가 끝나면 다시 원래 지원하던 연맹원에게 복귀하는 흐름이 가장 안정적입니다.</li>
+        </ul>
+
+        <div class="note">
+          권장: HQ 방어용 강한 1개 행군을 따로 정해두고, 끝나면 즉시 지원으로 복귀하세요.
+        </div>
+      </section>
+
+      <section id="city" class="anchor">
+        <h2>본성 수성(병력) 세팅</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">왜 성 비우기가 중요한가</p>
+            <ul>
+              <li>내 성에 병력이 남아 있으면 바이킹과 싸우며 킬을 가져갑니다.</li>
+              <li>그 킬은 내게 큰 이득이 되기보다, 지원해준 동료 점수를 깎는 쪽에 가깝습니다.</li>
+              <li>그래서 보병 / 기병은 최대한 빼고, 필요 시 궁병만 남기는 구조가 유리합니다.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">병과 효율(실전 메모)</p>
+            <ul>
+              <li>보 / 기 / 궁 모두 데미지는 정상 적용됩니다.</li>
+              <li>신규 서버나 낮은 난이도에서는 보병 100%가 매우 효율적이며, 고난이도에서도 보병은 강한 편입니다.</li>
+              <li>후반 웨이브에서 궁병 턴까지 가더라도 점수 영향은 생각보다 크지 않은 경우가 많습니다.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          중요: 이벤트 도중에는 치료를 하지 않는 것이 안전합니다. 치료로 병력이 복귀하면 지원군 점수를 뺏는 상황이 생길 수 있습니다.
+        </div>
+      </section>
+
+      <section id="heroes" class="anchor">
+        <h2>영웅 운용(지원 / 수비)</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">지원 보낼 때(공격형 우선)</p>
+            <ul>
+              <li>목표는 킬 확보이므로 공격 관련 리더 / 합류형 영웅이 유리합니다.</li>
+              <li>예: Chenko, Amadeus, Yeonwoo, Amane 같은 공격 기여 영웅 선호</li>
+              <li>방어형 영웅은 이 이벤트에서는 효율이 낮은 편입니다.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">내 성에 남길 때(수비 3명만)</p>
+            <ul>
+              <li>도시에는 최강 수비 영웅 3명만 남기고, 나머지는 지원 또는 출정에 활용합니다.</li>
+              <li>예(Gen1): F2P는 Jabel / Howard / Quinn, P2W는 Amadeus(or Helga) / Jabel / Saul</li>
+              <li>내 성에서 킬을 먹기보다 지원군이 킬을 먹게 만드는 쪽이 전체 점수에 더 유리합니다.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          한 줄 결론: 지원은 공격형(킬), 성 수비는 최소(3영웅), 보·기는 비우기.
+        </div>
+      </section>
+
+      <section id="checklist" class="anchor">
+        <h2>최종 체크리스트</h2>
+        <div class="card">
+          <ul>
+            <li>이벤트 시작 전: 접속 가능한 인원이 많은 시간대를 선택</li>
+            <li>0~19: 접속자에게 보/기 지원을 넣고 내 성 보/기는 최대한 비우기</li>
+            <li>7/14/17: 접속자만 공격 → 접속자 우선 지원 유지</li>
+            <li>10/20: 9/19 완전 종료 후 강한 1개 행군을 HQ로 보내 방어</li>
+            <li>이벤트 중: 치료는 최대한 미루고, HQ 방어 끝나면 지원 복귀</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="related">
+        <h2>함께 보면 좋은 가이드</h2>
+        <div class="related">
+          <a class="pill" href="/ko/guides/truegold.html">순금 소모표</a>
+          <a class="pill" href="/ko/guides/kingshot-giftcode.html">최신 기프트코드</a>
+          <a class="pill" href="/ko/guides/topup-guide.html">충전 가이드</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

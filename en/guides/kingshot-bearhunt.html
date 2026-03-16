@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot Giant Bear High Score Guide · Rally Leader Tier List / Rally Joiner Tier List / Archer Setup</title>
+  <meta name="description" content="A practical Kingshot Giant Bear high score guide. Includes rally leader tier list, rally joiner tier list, archer-focused setups, first-slot attack hero priority, troop preset prep, rejoin timing, and score optimization tips in one page." />
+  <meta name="keywords" content="Kingshot Giant Bear, Kingshot Bear Hunt, high score guide, rally leader tier list, rally joiner tier list, Amadeus, Chenko, Yeonwoo, Amane, Margot, Vivian" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/en/guides/kingshot-bearhunt.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/kingshot-bearhunt.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/kingshot-bearhunt.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/kingshot-bearhunt.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/kingshot-bearhunt.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot Giant Bear High Score Guide" />
+  <meta property="og:description" content="Rally leader tier list, rally joiner tier list, archer setup, first-slot attack hero priority, troop preset prep, and rejoin timing in one page." />
+  <meta property="og:url" content="https://kingshotdata.kr/en/guides/kingshot-bearhunt.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="en_US" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:16px;
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+
+      --best:#db2777;
+      --a:#16a34a;
+      --b:#f59e0b;
+      --c:#3b82f6;
+      --w:#ef4444;
+
+      --bluebg:#eff6ff;
+      --greenbg:#ecfdf5;
+      --yellowbg:#fffbeb;
+      --redbg:#fef2f2;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --bluebg:#0f172a;
+        --greenbg:#0f1e16;
+        --yellowbg:#20180a;
+        --redbg:#221212;
+      }
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.7 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{width:28px;height:28px;border-radius:8px}
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(24px,3.2vw,38px);
+      line-height:1.16;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:30px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:rgba(255,255,255,.72);
+      padding:14px;
+    }
+    .hero-card h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-card ul{margin:0;padding-left:18px}
+    .hero-card li{margin:6px 0}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section.block h2{
+      margin:0 0 12px;
+      font-size:21px;
+      color:var(--accent);
+      letter-spacing:-.02em;
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      margin:12px 0;
+      background:var(--bluebg);
+    }
+    .callout.green{background:var(--greenbg)}
+    .callout.yellow{background:var(--yellowbg)}
+    .callout.red{background:var(--redbg)}
+    .callout strong{font-weight:1000}
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .hero-strip{
+      display:grid;
+      grid-template-columns:repeat(6,minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+    .hero-box{
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:linear-gradient(180deg,#fff,#f8fafc);
+      padding:10px;
+      text-align:center;
+      box-shadow:0 8px 20px rgba(0,0,0,.05);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-box::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top, rgba(37,99,235,.10), transparent 55%);
+      pointer-events:none;
+    }
+    .hero-frame{
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(37,99,235,.18);
+      box-shadow:0 10px 20px rgba(37,99,235,.12);
+      margin-bottom:8px;
+      background:#fff;
+    }
+    .hero-frame img{
+      width:100%;
+      aspect-ratio:1/1;
+      object-fit:cover;
+      transform:scale(1.02);
+    }
+    .hero-name{
+      font-size:13px;
+      font-weight:1000;
+      line-height:1.25;
+    }
+    .hero-skill{
+      margin-top:4px;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+      line-height:1.35;
+    }
+
+    .score-list{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+    .score-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:12px;
+      text-align:center;
+    }
+    .score-card .big{
+      font-size:18px;
+      font-weight:1000;
+      color:#db2777;
+      line-height:1.1;
+      margin-bottom:6px;
+    }
+    .score-card .small{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+    }
+
+    .tier{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      margin:16px 0;
+      overflow:hidden;
+    }
+    .tier>header{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+    }
+    .tier-tag{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 10px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:13px;
+      color:#fff;
+    }
+    .best{background:var(--best)}
+    .a{background:var(--a)}
+    .b{background:var(--b)}
+    .c{background:var(--c)}
+    .w{background:var(--w)}
+    .desc{
+      font-size:13px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+      gap:12px;
+      padding:14px;
+      justify-items:center;
+    }
+    .card{
+      border:1px solid var(--border);
+      background:#f8fafc;
+      border-radius:12px;
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      text-align:center;
+      width:100%;
+    }
+    .img{
+      width:92px;
+      height:92px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      object-fit:cover;
+      background:#fff;
+      margin:0 auto;
+    }
+    .name{
+      font-weight:800;
+      font-size:13px;
+      text-align:center;
+    }
+    .hint{
+      font-size:12px;
+      color:var(--muted);
+      text-align:center;
+      font-weight:700;
+    }
+
+    .checklist{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .check-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:14px;
+    }
+    .check-card h3{
+      margin:0 0 8px;
+      font-size:15px;
+    }
+
+    .foot{
+      margin-top:18px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:1100px){
+      .hero-strip{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .score-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      .hero{grid-template-columns:1fr}
+      .grid-2,.checklist{grid-template-columns:1fr}
+    }
+    @media (max-width:700px){
+      .hero-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .score-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width:600px){
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot Giant Bear High Score Guide",
+    "inLanguage":"en",
+    "description":"Rally leader tier list, rally joiner tier list, archer setup, first-slot attack hero priority, troop preset prep, and rejoin timing in one page.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/en/guides/kingshot-bearhunt.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/en/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/kingshot-bearhunt.html" aria-current="page">EN</a>
+        <a href="/ko/guides/kingshot-bearhunt.html">KO</a>
+        <a href="/ja/guides/kingshot-bearhunt.html">JA</a>
+        <a href="/zh-tw/guides/kingshot-bearhunt.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">Overview</a>
+      <a href="#priority">Troops</a>
+      <a href="#leader-tier">Leaders</a>
+      <a href="#joiner-tier">Joiners</a>
+      <a href="#summary">Summary</a>
+    </nav>
+
+    <main>
+      <div class="crumbs">
+        <a href="/en/">Home</a> <span class="muted">›</span>
+        <a href="/en/guides/">Guides</a> <span class="muted">›</span>
+        <span>Giant Bear</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>[Guide] Kingshot Giant Bear High Score Guide</h1>
+          <p class="sub">
+            A practical guide covering archer setups, rally participation priority, hero placement,
+            troop preset prep, rejoin timing, and both rally leader and rally joiner tier lists in one page.
+          </p>
+
+          <div class="meta">
+            <span class="tag">Rally Leader Tier List</span>
+            <span class="tag">Rally Joiner Tier List</span>
+            <span class="tag">Archer-Focused Setup</span>
+            <span class="tag">Attack Hero First Slot</span>
+            <span class="tag">Rejoin Timing</span>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h2>One-page takeaway</h2>
+          <ul>
+            <li>The bear does not counterattack, so an archer-focused bear setup is stronger than a normal war setup.</li>
+            <li>Your strongest archer march should go to the strongest rally leader for the best score efficiency.</li>
+            <li>When joining, putting an attack-focused hero in the first slot is the core mechanic.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="overview" class="block anchor">
+        <h2>1. Giant Bear Basic Mechanics</h2>
+        <p>
+          Giant Bear works differently from normal combat. The bear does not fight back and only takes damage.
+          Because of that, you need a <strong>bear-specific troop setup</strong> rather than a normal war setup.
+        </p>
+        <p>
+          Also, in Bear Hunt, <strong>the rally you start yourself does not consume one of your march slots.</strong>
+          For example, if you have 6 march slots, you can operate a total of 7 marches including your own rally.
+        </p>
+
+        <div class="callout">
+          <strong>Core point:</strong> If you are not one of the alliance’s top power players,
+          joining a strong rally is usually more efficient than opening your own.
+        </div>
+      </section>
+
+      <section id="priority" class="block anchor">
+        <h2>2. Giant Bear Troop Priority</h2>
+        <p>The usual damage priority for Giant Bear is the following.</p>
+
+        <div class="score-list">
+          <div class="score-card">
+            <div class="big">#1</div>
+            <div class="small">Archers</div>
+          </div>
+          <div class="score-card">
+            <div class="big">#2</div>
+            <div class="small">Cavalry</div>
+          </div>
+          <div class="score-card">
+            <div class="big">#3</div>
+            <div class="small">Infantry</div>
+          </div>
+          <div class="score-card">
+            <div class="big">Core</div>
+            <div class="small">Max Archer Ratio</div>
+          </div>
+          <div class="score-card">
+            <div class="big">Rule</div>
+            <div class="small">Archers → Cavalry → Infantry</div>
+          </div>
+        </div>
+
+        <div class="callout green">
+          <strong>Summary:</strong> If you want higher bear scores, archer ratio matters the most.
+          As your total troop count increases, infantry efficiency becomes relatively weaker, and archer-focused setups usually score better.
+        </div>
+
+        <div class="callout yellow">
+          <strong>Extra note:</strong> There may be certain periods where cavalry heroes become stronger enough that cavalry briefly feels dominant.
+          Even then, <strong>an archer-focused setup is still the safest and most broadly reliable default choice</strong>.
+        </div>
+      </section>
+
+      <section id="leader-tier" class="block anchor">
+        <h2>3. Rally Leader Tier List</h2>
+        <p>
+          If you open your own rally, the basic rule is still to place the strongest heroes for each role,
+          and in practice <strong>stronger rally leaders tend to produce better overall scores for everyone joining.</strong>
+        </p>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag best">Best</span>
+            <div class="desc">Current top-tier rally leader lineup</div>
+          </header>
+
+          <div class="grid">
+            <div class="card">
+              <img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" class="img">
+              <div class="name">Amadeus</div>
+            </div>
+            <div class="card">
+              <img src="/img/heroes/Yang/img_001.webp" alt="Yang" class="img">
+              <div class="name">Yang</div>
+            </div>
+            <div class="card">
+              <img src="/img/heroes/Petra/img_001.webp" alt="Petra" class="img">
+              <div class="name">Petra</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Why this matters:</strong><br>
+          It is not only the leader’s 3 heroes that matter.
+          Lord gear, lord buffs, research, and other combat-related stats also affect rally joiners.
+          In other words, <strong>the stronger the player opening the rally, the higher the group’s score potential.</strong>
+        </div>
+      </section>
+
+      <section id="joiner-tier" class="block anchor">
+        <h2>4. Rally Joiner Tier List</h2>
+        <p>
+          When joining someone else’s rally, the <strong>first hero slot</strong> is the most important.
+          That is because only the <strong>first Expedition skill of the hero in the first slot</strong> applies to the full rally.
+        </p>
+
+        <h3>4-1. Core Attack-Type Joiner Heroes</h3>
+        <div class="hero-strip" aria-label="Recommended attack-type heroes">
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" loading="lazy"></div>
+            <div class="hero-name">Amadeus</div>
+            <div class="hero-skill">Destructive Power 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Chenko/img_001.webp" alt="Chenko" loading="lazy"></div>
+            <div class="hero-name">Chenko</div>
+            <div class="hero-skill">Destructive Power 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Yeonwoo/img_001.webp" alt="Yeonwoo" loading="lazy"></div>
+            <div class="hero-name">Yeonwoo</div>
+            <div class="hero-skill">Destructive Power 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Amane/img_001.webp" alt="Amane" loading="lazy"></div>
+            <div class="hero-name">Amane</div>
+            <div class="hero-skill">Attack 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Margot/img_001.webp" alt="Margot" loading="lazy"></div>
+            <div class="hero-name">Margot</div>
+            <div class="hero-skill">Attack 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Vivian/img_001.webp" alt="Vivian" loading="lazy"></div>
+            <div class="hero-name">Vivian</div>
+            <div class="hero-skill">Damage 25%</div>
+          </article>
+        </div>
+
+        <div class="callout yellow">
+          <strong>Important:</strong> Once you understand why joiners want <strong>Destructive Power 25% / Attack 25% / Damage 25%</strong>,
+          you can say you truly understand Bear Hunt.
+        </div>
+
+        <h3>4-2. A / B / C / No-Go Tier List</h3>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag a">A Tier</span>
+            <div class="desc">Recommended: near-mandatory Bear Hunt joiners</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" class="img"><div class="name">Amadeus</div><div class="hint">Destructive Power 25%</div></div>
+            <div class="card"><img src="/img/heroes/Chenko/img_001.webp" alt="Chenko" class="img"><div class="name">Chenko</div><div class="hint">Destructive Power 25%</div></div>
+            <div class="card"><img src="/img/heroes/Yeonwoo/img_001.webp" alt="Yeonwoo" class="img"><div class="name">Yeonwoo</div><div class="hint">Destructive Power 25%</div></div>
+            <div class="card"><img src="/img/heroes/Amane/img_001.webp" alt="Amane" class="img"><div class="name">Amane</div><div class="hint">Attack 25%</div></div>
+            <div class="card"><img src="/img/heroes/Margot/img_001.webp" alt="Margot" class="img"><div class="name">Margot</div><div class="hint">Attack 25%</div></div>
+            <div class="card"><img src="/img/heroes/Vivian/img_001.webp" alt="Vivian" class="img"><div class="name">Vivian</div><div class="hint">Damage 25%</div></div>
+          </div>
+        </div>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag b">B Tier</span>
+            <div class="desc">Conditionally useful depending on comp and timing</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Hilde/img_001.webp" alt="Hilde" class="img"><div class="name">Hilde</div><div class="hint">Attack 15%</div></div>
+            <div class="card"><img src="/img/heroes/Yang/img_001.webp" alt="Yang" class="img"><div class="name">Yang</div><div class="hint">B Tier</div></div>
+          </div>
+        </div>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag c">C Tier</span>
+            <div class="desc">Support choices: backup or filler picks</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Zoe/img_001.webp" alt="Zoe" class="img"><div class="name">Zoe</div><div class="hint">Chance Damage</div></div>
+            <div class="card"><img src="/img/heroes/Marlin/img_001.webp" alt="Marlin" class="img"><div class="name">Marlin</div><div class="hint">Chance Damage</div></div>
+            <div class="card"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" class="img"><div class="name">Petra</div><div class="hint">Chance Damage</div></div>
+            <div class="card"><img src="/img/heroes/Rosa/img_001.webp" alt="Rosa" class="img"><div class="name">Rosa</div><div class="hint">Chance Damage</div></div>
+            <div class="card"><img src="/img/heroes/Jaeger/img_001.webp" alt="Jaeger" class="img"><div class="name">Jaeger</div><div class="hint">Chance Damage</div></div>
+            <div class="card"><img src="/img/heroes/Longfei/img_001.webp" alt="Longfei" class="img"><div class="name">Longfei</div><div class="hint">C Tier</div></div>
+            <div class="card"><img src="/img/heroes/Thrud/img_001.webp" alt="Thrud" class="img"><div class="name">Thrud</div><div class="hint">C Tier</div></div>
+          </div>
+        </div>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag w">Do Not Put in the Rally</span>
+            <div class="desc">Not recommended: lowers rally efficiency</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Alcar/img_001.webp" alt="Alcar" class="img"><div class="name">Alcar</div></div>
+            <div class="card"><img src="/img/heroes/Diana/img_001.webp" alt="Diana" class="img"><div class="name">Diana</div></div>
+            <div class="card"><img src="/img/heroes/Edwin/img_001.webp" alt="Edwin" class="img"><div class="name">Edwin</div></div>
+            <div class="card"><img src="/img/heroes/Eric/img_001.webp" alt="Eric" class="img"><div class="name">Eric</div></div>
+            <div class="card"><img src="/img/heroes/Fahd/img_001.webp" alt="Fahd" class="img"><div class="name">Fahd</div></div>
+            <div class="card"><img src="/img/heroes/Forrest/img_001.webp" alt="Forrest" class="img"><div class="name">Forrest</div></div>
+            <div class="card"><img src="/img/heroes/Gordon/img_001.webp" alt="Gordon" class="img"><div class="name">Gordon</div></div>
+            <div class="card"><img src="/img/heroes/Helga/img_001.webp" alt="Helga" class="img"><div class="name">Helga</div></div>
+            <div class="card"><img src="/img/heroes/Howard/img_001.webp" alt="Howard" class="img"><div class="name">Howard</div></div>
+            <div class="card"><img src="/img/heroes/Jabel/img_001.webp" alt="Jabel" class="img"><div class="name">Jabel</div></div>
+            <div class="card"><img src="/img/heroes/Olive/img_001.webp" alt="Olive" class="img"><div class="name">Olive</div></div>
+            <div class="card"><img src="/img/heroes/Quinn/img_001.webp" alt="Quinn" class="img"><div class="name">Quinn</div></div>
+            <div class="card"><img src="/img/heroes/Saul/img_001.webp" alt="Saul" class="img"><div class="name">Saul</div></div>
+            <div class="card"><img src="/img/heroes/Seth/img_001.webp" alt="Seth" class="img"><div class="name">Seth</div></div>
+            <div class="card"><img src="/img/heroes/Triton/img_001.webp" alt="Triton" class="img"><div class="name">Triton</div><div class="hint">No-Go</div></div>
+            <div class="card"><img src="/img/heroes/Sophia/img_001.webp" alt="Sophia" class="img"><div class="name">Sophia</div><div class="hint">Do Not Join</div></div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="callout">
+            <strong>First slot</strong><br>
+            Always put an attack-type hero here. This slot is the only one that directly affects the whole rally.
+          </div>
+          <div class="callout green">
+            <strong>Second and third slots</strong><br>
+            These are mainly for higher-level heroes to help maximize troop count.
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>5. Giant Bear Troop Setup Core</h2>
+        <p>The core of a proper bear setup is building around archers.</p>
+
+        <div class="checklist">
+          <div class="check-card">
+            <h3>Setup priority</h3>
+            <ul>
+              <li>Put an attack-type hero in the first hero slot</li>
+              <li>Make the troop setup as close to 100% archers as possible</li>
+              <li>If you lack archers, add cavalry next</li>
+              <li>If cavalry is also lacking, only then add infantry last</li>
+            </ul>
+          </div>
+
+          <div class="check-card">
+            <h3>Practical rule</h3>
+            <ul>
+              <li>The stronger the march, the more archer-heavy it should stay</li>
+              <li>Your best archer march should go to the top-tier rally leader</li>
+              <li>Weaker marches can be assigned to lower-priority rallies</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>6. Pre-Bear Preparation</h2>
+        <p>Before the bear starts, prepare the following.</p>
+        <ul>
+          <li>Recall all gathering marches</li>
+          <li>Turn off auto-join rally</li>
+          <li>Save troop presets using nearby resource-tile march screens</li>
+          <li>Send them out once after saving to avoid duplicated setup mistakes</li>
+          <li>Make sure all marches are back before the bear starts</li>
+        </ul>
+
+        <div class="callout">
+          <strong>Why it matters:</strong><br>
+          Doing this makes troop setup faster and reduces mistakes once the event starts.
+          In practice that means <strong>faster relaunches = more good rally entries = better scores</strong>.
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>7. Rally Participation Priority</h2>
+        <p>
+          Your strongest full-archer march should go to the <strong>strongest rally leader</strong>.
+        </p>
+        <p>
+          Check which rally leaders in your alliance produce the best scores,
+          then rank them into first-tier, second-tier, and so on before assigning marches.
+        </p>
+
+        <div class="grid-2">
+          <div class="check-card">
+            <h3>Recommended approach</h3>
+            <ul>
+              <li>Main archer march → first-tier rally</li>
+              <li>Next march → second-tier rally</li>
+              <li>Remaining marches → extra joins depending on situation</li>
+            </ul>
+          </div>
+          <div class="check-card">
+            <h3>What not to do</h3>
+            <ul>
+              <li>Jump into the first open rally you see</li>
+              <li>Join based only on open slots without checking strength</li>
+              <li>Waste your best archer march on a weak rally</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout green">
+          <strong>Core idea:</strong> Joining the strongest rallies first is usually far better than joining immediately without checking.
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>8. Rally Rejoin Timing</h2>
+        <p>
+          If you miss the rally you wanted, you do not need to panic-join a weaker one.
+          In many cases, it is better to <strong>wait for that same strong rally leader’s next rally</strong>.
+        </p>
+
+        <ul>
+          <li>Rallies closer to the bear trap often allow faster return and rejoin cycles.</li>
+          <li>The better you calculate return timing, the better your repeated participation efficiency becomes.</li>
+          <li>Do not look only at raw power. Rally timing and march distance matter too.</li>
+        </ul>
+
+        <div class="callout yellow">
+          <strong>Key point:</strong>
+          Rally participation is not only about power numbers.
+          <strong>Return timing, rally creation timing, and fast re-entry</strong> matter just as much.
+        </div>
+      </section>
+
+      <section id="summary" class="block anchor">
+        <h2>9. Giant Bear High Score Core Summary</h2>
+
+        <div class="score-list">
+          <div class="score-card">
+            <div class="big">1</div>
+            <div class="small">Maximize archer troop count</div>
+          </div>
+          <div class="score-card">
+            <div class="big">2</div>
+            <div class="small">Put an attack hero in slot one</div>
+          </div>
+          <div class="score-card">
+            <div class="big">3</div>
+            <div class="small">Save troop presets before the event</div>
+          </div>
+          <div class="score-card">
+            <div class="big">4</div>
+            <div class="small">Prioritize stronger rally leaders</div>
+          </div>
+          <div class="score-card">
+            <div class="big">5</div>
+            <div class="small">If you miss one, aim for the next cycle</div>
+          </div>
+        </div>
+
+        <h3>Final note</h3>
+        <p>
+          Giant Bear is not only about having more troops.
+          The real score gap comes from <strong>archer-focused setups, attack hero placement, strong rally priority, and return timing management</strong>.
+        </p>
+        <p>
+          If your bear score is low, start by fixing just these three things first.
+        </p>
+        <ul>
+          <li>Switch to archer-focused marches</li>
+          <li>Lock an attack-type hero into the first slot</li>
+          <li>Prioritize stronger rallies</li>
+        </ul>
+
+        <div class="callout green">
+          <strong>Conclusion:</strong> Changing just these three things can make a very noticeable difference in Giant Bear scores.
+        </div>
+      </section>
+
+      <p class="foot">
+        This is an unofficial guide based on practical experience. Optimal setups may change depending on server environment and future hero generation updates.
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

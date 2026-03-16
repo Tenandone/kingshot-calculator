@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="zh-Hant" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot 消失遺跡攻略 · 礦脈佔領、宮殿應對、技能時機總整理 | Kingshot Data</title>
+  <meta name="description" content="Kingshot 消失遺跡攻略指南。整理礦脈佔領、切薩雷守衛、不穩定礦脈出現時間、宮殿應對、技能樹與施放時機，以及無課與高戰玩家的核心運營路線。" />
+  <meta name="keywords" content="Kingshot 消失遺跡, Kingshot Lost Ruins, Kingshot 礦脈攻略, Kingshot 宮殿攻略, Kingshot 技能時機, Kingshot 切薩雷守衛, Kingshot 不穩定礦脈" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="zh-CN" href="https://kingshotdata.kr/zh-cn/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/kingshot-ruins-tip.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot 消失遺跡攻略 · 礦脈佔領、宮殿應對、技能時機總整理" />
+  <meta property="og:description" content="快速整理消失遺跡的礦脈佔領、切薩雷守衛、不穩定礦脈時間、宮殿應對與技能路線等核心重點。" />
+  <meta property="og:url" content="https://kingshotdata.kr/zh-tw/guides/kingshot-ruins-tip.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Kingshot Data 代表圖片" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kingshot 消失遺跡攻略 · 礦脈佔領、宮殿應對、技能時機總整理" />
+  <meta name="twitter:description" content="快速整理消失遺跡的礦脈佔領、切薩雷守衛、不穩定礦脈時間、宮殿應對與技能路線等核心重點。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/kingshotdata-og-v5.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --ok:#ecfdf5;
+      --warn:#fff7ed;
+      --note:#f8fafc;
+      --info:#eff6ff;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.68 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","Microsoft JhengHei","PingFang TC","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block; max-width:100%; height:auto}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(26px,3.4vw,40px);
+      line-height:1.18;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:32px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-side{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      padding:14px;
+    }
+    .hero-side h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-side ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .hero-side li{margin:6px 0}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note);
+    }
+    .callout.ok{background:var(--ok)}
+    .callout.warn{background:var(--warn)}
+    .callout.info{background:var(--info)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0; padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0; padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text); font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul, section.block ol{margin:8px 0; padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .pill-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .summary-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .summary-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:12px 14px;
+    }
+    .summary-card h3{
+      margin:0 0 8px;
+      font-size:14px;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    .foot{
+      margin:18px 0 8px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:var(--note);
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+
+    @media (max-width:940px){
+      .hero,
+      .grid,
+      .summary-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+    }
+
+    @media (max-width:600px){
+      h1{font-size:26px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot 消失遺跡攻略 · 礦脈佔領、宮殿應對、技能時機總整理",
+    "inLanguage":"zh-Hant",
+    "description":"Kingshot 消失遺跡攻略指南。整理礦脈佔領、切薩雷守衛、不穩定礦脈出現時間、宮殿應對、技能樹與施放時機，以及無課與高戰玩家的核心運營路線。",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/zh-tw/guides/kingshot-ruins-tip.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"},
+    "dateModified":"2025-09-06"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"首頁","item":"https://kingshotdata.kr/zh-tw/"},
+      {"@type":"ListItem","position":2,"name":"攻略","item":"https://kingshotdata.kr/zh-tw/guides/"},
+      {"@type":"ListItem","position":3,"name":"消失遺跡攻略","item":"https://kingshotdata.kr/zh-tw/guides/kingshot-ruins-tip.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"消失遺跡裡無課玩家該怎麼打？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"無課或低戰力玩家，與其硬搶宮殿，不如專注在1到2級礦脈採集循環與安全擊殺守衛，通常更容易穩定拉高分數。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"消失遺跡的技能順序怎麼點？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"基本推薦路線是右-右-左-左-右。也就是先拿守衛擊殺加成、移動速度、占領加成、採集效率，最後補上採集速度強化。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"不穩定礦脈什麼時候出現？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"不穩定礦脈通常會在剩餘20・19・18分鐘，以及10・9・8分鐘這兩段時間出現。看到提示後應該立刻投入所有可用部隊。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- GA4 -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/kingshot-ruins-tip.html">EN</a>
+        <a href="/ko/guides/kingshot-ruins-tip.html">KO</a>
+        <a href="/ja/guides/kingshot-ruins-tip.html">JA</a>
+        <a href="/zh-tw/guides/kingshot-ruins-tip.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概覽</a>
+      <a href="#strategy">基本策略</a>
+      <a href="#palace">宮殿</a>
+      <a href="#skills">技能</a>
+      <a href="#unstable">不穩定礦脈</a>
+      <a href="#tips">技巧</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/guides/">攻略</a> <span class="muted">›</span>
+        <span>消失遺跡攻略</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>Kingshot 消失遺跡攻略 · 礦脈佔領、宮殿應對、技能時機總整理</h1>
+          <p class="sub">
+            消失遺跡是每兩週開一次的個人玩法，核心目標就是盡可能多拿青銅石。
+            只要掌握礦脈佔領、切薩雷守衛處理、不穩定礦脈出現時間、是否進宮殿的判斷，以及技能循環，就有機會穩定衝到前排。
+          </p>
+
+          <div class="meta">
+            <span class="tag">消失遺跡</span>
+            <span class="tag">個人玩法</span>
+            <span class="tag">技能路線</span>
+            <span class="tag">礦脈優先</span>
+            <span class="tag">宮殿應對</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <h2>一句話重點</h2>
+          <ul>
+            <li>高戰玩家以3級礦脈與守衛為核心，低戰玩家以1到2級穩定採集循環為主。</li>
+            <li>推薦技能順序是右-右-左-左-右，關鍵施放時間是20/15/10/5分鐘。</li>
+            <li>不穩定礦脈與手型掉落的回收速度，會直接影響最終排名。</li>
+          </ul>
+        </aside>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>先記住這些就夠了</h3>
+            <ul>
+              <li><strong>目標就是最大化青銅石採集</strong>，比起單純打架，動線和時機更重要。</li>
+              <li><strong>高戰玩家</strong>看的是3級礦脈 + 切薩雷守衛 + 宮殿進場。</li>
+              <li><strong>低戰玩家</strong>重點是1到2級礦脈反覆佔領，加上安全擊殺守衛慢慢累分。</li>
+              <li><strong>不穩定礦脈</strong>一出現，就要立刻把部隊投進去。</li>
+              <li><strong>15分鐘技能節點</strong>如果抓得準，分數差距會非常明顯。</li>
+            </ul>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>最常翻車的幾種情況</h3>
+            <ul>
+              <li>開局3分鐘沒有先搶好位置，結果只能一直繞普通礦脈。</li>
+              <li>用弱英雄硬打守衛，結果吃到5分鐘封鎖。</li>
+              <li>漏掉不穩定礦脈提示，直接損失最重要的青銅石區段。</li>
+              <li>明明宮殿打不贏還硬進，連原本的採集節奏也一起崩掉。</li>
+            </ul>
+          </div>
+
+          <div class="pill-row" aria-label="Quick links">
+            <a class="pill" href="#overview">概覽</a>
+            <a class="pill" href="#strategy">基本策略</a>
+            <a class="pill" href="#palace">宮殿應對</a>
+            <a class="pill" href="#skills">技能路線</a>
+            <a class="pill" href="#unstable">不穩定礦脈</a>
+            <a class="pill" href="#tips">核心技巧</a>
+            <a class="pill" href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <nav class="toc card" aria-label="Table of contents">
+          <h2>目錄</h2>
+          <ul>
+            <li><a href="#overview">1) 基本資訊與目標</a></li>
+            <li><a href="#strategy">2) 依戰力區分的基本策略</a></li>
+            <li><a href="#palace">3) 宮殿應對方式</a></li>
+            <li><a href="#skills">4) 技能樹與施放時機</a></li>
+            <li><a href="#unstable">5) 不穩定礦脈時間點</a></li>
+            <li><a href="#tips">6) 實戰技巧與運營重點</a></li>
+            <li><a href="#summary">7) 最終總結</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="overview" class="block anchor">
+        <h2>1) 基本資訊與目標</h2>
+        <p>
+          消失遺跡是<strong>個人玩法</strong>，通常以<strong>兩週一次</strong>的節奏開放，並且整場持續<strong>30分鐘</strong>。
+          最重要的目的，就是盡可能多收集青銅石，作為<strong>領主寶石成長資源</strong>。
+        </p>
+
+        <ul>
+          <li>礦脈分成<strong>1級到3級</strong>。</li>
+          <li>等級越高，青銅石越多，但防守也越強。</li>
+          <li>佔領礦脈時會掉出手型青銅石，這些掉落<strong>任何人都能立刻撿</strong>。</li>
+          <li>所以重點不只是單純採集，而是<strong>佔領 + 掉落回收</strong>一起思考。</li>
+        </ul>
+
+        <div class="callout info">
+          <h3>一句話理解玩法</h3>
+          <p>比起一直守著同一個礦脈，<strong>更重要的是快速反覆佔領優質礦脈並把掉落收乾淨</strong>。</p>
+        </div>
+      </section>
+
+      <section id="strategy" class="block anchor">
+        <h2>2) 依戰力區分的基本策略</h2>
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <h3>高戰玩家的運營</h3>
+            <ul>
+              <li>優先搶3級礦脈密集區</li>
+              <li>反覆擊殺切薩雷守衛</li>
+              <li>目標是在20分鐘前把技能升到5級</li>
+              <li>剩下7分鐘時準備進宮殿</li>
+            </ul>
+          </div>
+
+          <div class="summary-card">
+            <h3>無課 / 低戰玩家的運營</h3>
+            <ul>
+              <li>以1到2級礦脈穩定循環為主</li>
+              <li>只打能穩贏的守衛</li>
+              <li>宮殿競爭通常直接放掉</li>
+              <li>把重點放在不穩定礦脈與掉落回收</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>開局3分鐘等待期要做什麼</h3>
+        <p>
+          開局那3分鐘不是發呆時間，而是要先看清楚<strong>2到3級礦脈與守衛密集區</strong>在哪裡。
+          接著再用城市遷移去搶一個有利位置，這樣前期動線會順很多。
+        </p>
+
+        <div class="callout ok">
+          <h3>切薩雷守衛的價值</h3>
+          <ul>
+            <li>擊殺後可以拿到<strong>技能經驗</strong>。</li>
+            <li>如果打輸，該英雄會被<strong>封鎖5分鐘</strong>。</li>
+            <li>所以強帳號能積極利用，弱帳號則要挑能穩打的目標。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="palace" class="block anchor">
+        <h2>3) 宮殿應對方式</h2>
+        <p>
+          宮殿對高戰玩家來說是高分區，但對低戰玩家來說，常常是把整個採集節奏打亂的陷阱。
+          所以最重要的是，<strong>先判斷自己到底該不該進宮殿</strong>。
+        </p>
+
+        <ul>
+          <li><strong>高戰玩家:</strong> 通常會在剩餘7分鐘左右開始準備往中央宮殿移動。</li>
+          <li><strong>50% 行軍加速</strong>如果用3到4個，依距離與地圖不同，通常可以在剩下約2秒時抵達。</li>
+          <li><strong>低戰玩家:</strong> 多半不建議硬搶宮殿，把重心放回礦脈採集和掉落回收會更穩。</li>
+        </ul>
+
+        <div class="callout warn">
+          <h3>宮殿不是必做項目</h3>
+          <p>如果本來就打不過，硬擠宮殿只會讓原本順的礦脈循環和守衛節奏一起壞掉。</p>
+        </div>
+      </section>
+
+      <section id="skills" class="block anchor">
+        <h2>4) 技能樹與施放時機</h2>
+
+        <div class="callout ok">
+          <h3>推薦技能順序</h3>
+          <p><strong>右 - 右 - 左 - 左 - 右</strong></p>
+        </div>
+
+        <ol>
+          <li><strong>Lv1（右）:</strong> 擊殺守衛時額外獲得青銅石</li>
+          <li><strong>Lv2（右）:</strong> 部隊移動速度 +25%</li>
+          <li><strong>Lv3（左）:</strong> 成功佔領時額外獲得青銅石（冷卻1分鐘）</li>
+          <li><strong>Lv4（左）:</strong> 採集效率 +15%</li>
+          <li><strong>Lv5（右）:</strong> 採集速度 +50%（持續60秒，冷卻5分鐘）</li>
+        </ol>
+
+        <h3>最關鍵的施放時間</h3>
+        <ul>
+          <li><strong>剩餘20分鐘</strong></li>
+          <li><strong>剩餘15分鐘</strong></li>
+          <li><strong>剩餘10分鐘</strong></li>
+          <li><strong>剩餘5分鐘</strong></li>
+        </ul>
+
+        <div class="callout info">
+          <h3>實戰要點</h3>
+          <ul>
+            <li>尤其<strong>15分鐘節點</strong>只要抓得準，就能大幅提升衝排名的能力。</li>
+            <li>目標是<strong>在20分鐘前把技能升到5級</strong>。</li>
+            <li>這就代表你前期必須靠守衛擊殺盡快把技能經驗刷起來。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="unstable" class="block anchor">
+        <h2>5) 不穩定礦脈時間點</h2>
+        <p>
+          不穩定礦脈因為採集速度更快，所以在消失遺跡裡屬於<strong>最優先要搶的礦脈</strong>。
+        </p>
+
+        <ul>
+          <li>通常會出現在<strong>剩餘20・19・18分鐘</strong>，以及<strong>10・9・8分鐘</strong>這兩段。</li>
+          <li>一看到提示，就要盡可能把所有可用部隊快速派過去。</li>
+          <li>佔下來之後，手型掉落也要一起撿完，這樣才是真的賺滿。</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>不穩定礦脈標準流程</h3>
+          <p><strong>看到出現 → 全軍立刻投入 → 佔領 → 回收手型掉落 → 轉下一個礦脈</strong></p>
+        </div>
+      </section>
+
+      <section id="tips" class="block anchor">
+        <h2>6) 實戰技巧與運營重點</h2>
+
+        <h3>動線要設計成環狀</h3>
+        <p>
+          不要把礦脈、守衛和手型掉落分開看，而是把它們串成一個<strong>環狀循環路線</strong>。
+          比起死守一個區域，能夠穩定輪轉的路線通常更容易打出高分。
+        </p>
+
+        <h3>弱英雄不要拿去硬打</h3>
+        <p>
+          如果某個英雄存在明顯戰敗風險，就不要拿去碰守衛，直接讓他專心負責<strong>採集與掉落回收</strong>會更穩。
+          因為一旦被封5分鐘，整個循環就很容易亂掉。
+        </p>
+
+        <h3>競爭太熱的點就直接放</h3>
+        <p>
+          在熱門區域一直纏鬥，不一定比立刻轉去旁邊替代礦脈划算。
+          對無課來說，<strong>搶空位通常比正面硬碰更重要</strong>。
+        </p>
+
+        <div class="callout warn">
+          <h3>關鍵提醒</h3>
+          <p>如果敗給切薩雷守衛，該英雄會有5分鐘無法使用。主力隊伍不要隨便去打沒有把握的戰鬥。</p>
+        </div>
+      </section>
+
+      <section id="summary" class="block anchor">
+        <h2>7) 最終總結</h2>
+        <ul>
+          <li><strong>高戰玩家:</strong> 3級礦脈 + 守衛 + 剩餘7分鐘進宮殿</li>
+          <li><strong>低戰玩家:</strong> 1到2級礦脈穩定循環 + 安全處理守衛</li>
+          <li><strong>技能順序:</strong> 右 - 右 - 左 - 左 - 右</li>
+          <li><strong>技能節點:</strong> 20 / 15 / 10 / 5分鐘</li>
+          <li><strong>核心勝負點:</strong> 不穩定礦脈提示與手型掉落回收速度</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>真正的一句話結論</h3>
+          <p><strong>右-右-左-左-右</strong>和<strong>20/15/10/5分鐘</strong>這兩件事記牢，消失遺跡的整體操作品質就會直接提升一大截。</p>
+        </div>
+      </section>
+
+      <section id="faq" class="block anchor">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>消失遺跡裡無課玩家該怎麼打？</summary>
+          <p>無課或低戰力玩家，與其硬搶宮殿，不如專注在1到2級礦脈採集循環與安全擊殺守衛，通常更容易穩定拉高分數。</p>
+        </details>
+
+        <details>
+          <summary>消失遺跡的技能順序怎麼點？</summary>
+          <p>基本推薦路線是右-右-左-左-右。也就是先拿守衛擊殺加成、移動速度、占領加成、採集效率，最後補上採集速度強化。</p>
+        </details>
+
+        <details>
+          <summary>不穩定礦脈什麼時候出現？</summary>
+          <p>不穩定礦脈通常會在剩餘20・19・18分鐘，以及10・9・8分鐘這兩段時間出現。看到提示後應該立刻投入所有可用部隊。</p>
+        </details>
+      </section>
+
+      <section class="block" id="related">
+        <h2>相關攻略</h2>
+        <div class="pill-row">
+          <a class="pill" href="/zh-tw/guides/kingshot-bearhunt.html">Bear Hunt 高分攻略</a>
+          <a class="pill" href="/zh-tw/guides/hallofgovernors.html">最強領主攻略</a>
+          <a class="pill" href="/zh-tw/guides/kingshot-f2p-guide.html">無課 / 小課 成長指南</a>
+          <a class="pill" href="/zh-tw/guides/">查看全部攻略</a>
+        </div>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        本文並非官方內容，而是根據實際遊玩經驗整理的玩家攻略。
+        伺服器環境、競爭強度與帳號戰力不同，最佳路線也可能會有所差異。
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

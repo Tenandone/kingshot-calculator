@@ -1,108 +1,277 @@
 <!doctype html>
-<html lang="ko" dir="ltr">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="color-scheme" content="light dark">
-  <title>모바일 게임 유저들을 위한 합리적인 충전 가이드</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kingshot Self Top-Up Guide | Kingshot Data</title>
+  <meta name="description" content="A complete guide to Kingshot LootBar self top-up, including required account checks, Google/Facebook 2-step verification, Google Play Games limitation, and the full top-up process." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/en/guides/topup-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/topup-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/topup-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/topup-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/topup-guide.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/lootbar/step1.png" />
 
   <style>
-    *{box-sizing:border-box}
     :root{
-      --brand:#0b57d0;--text:#222;--muted:#555;
-      --surface:#fff;--bg:#fff;--border:#e6e6e6;--note-bg:#f9f9f9;
-      --btn:#111;--btnText:#fff;--btnGhostBg:transparent;--btnGhostText:#111;
-      --shadow:0 10px 26px rgba(0,0,0,.10);
-      --radius:14px;
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --brand-strong:#1d4ed8;
+      --accent:#111827;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+
+      --warn-bg:rgba(245,158,11,.08);
+      --warn-border:rgba(245,158,11,.35);
+      --soft-bg:#f8fbff;
+      --soft-border:#dbeafe;
+      --ok-bg:#f0fdf4;
+      --ok-border:#bbf7d0;
     }
-    @media(prefers-color-scheme:dark){
-      :root{
-        --text:#e8eaed;--muted:#c2c7d0;
-        --surface:#121212;--bg:#0b0b0b;
-        --border:#2a2a2a;--note-bg:#1a1a1a;
-        --btn:#e8eaed;--btnText:#0b0b0b;--btnGhostText:#e8eaed;
-        --shadow:0 10px 26px rgba(0,0,0,.35);
-      }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
     }
-    html,body{
-      margin:0;background:var(--bg);color:var(--text);
-      font-family:system-ui,-apple-system,"Segoe UI",Roboto,
-        "Noto Sans KR","Noto Sans JP","Noto Sans SC","Noto Sans TC","Noto Naskh Arabic",
-        Arial,sans-serif;
-      line-height:1.65
-    }
-    a{color:var(--brand);font-weight:700;text-decoration:none}
+    a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
 
-    /* ===== Topbar (LEFT: back / RIGHT: language) ===== */
-    .topbar{
-      position:sticky;top:0;z-index:10;
-      background:var(--surface);
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;align-items:center;gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block;width:28px;height:28px;border-radius:8px}
+
+    nav.lang{
+      display:flex;gap:8px;flex-wrap:wrap;
+      color:var(--muted);font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text);font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
       border-bottom:1px solid var(--border);
     }
-    .topbar-inner{
-      max-width:1000px;margin:0 auto;
-      padding:10px 16px;
-      display:flex;justify-content:space-between;align-items:center;
-      gap:12px;
-    }
-    .backlink{
-      font:700 14px/1 system-ui;
-      color:var(--brand);
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
       white-space:nowrap;
-    }
-    .langbox{
-      display:flex;align-items:center;gap:10px;
-      white-space:nowrap;
-    }
-    .langbox label{font-size:14px;color:var(--muted)}
-    select{
-      padding:8px 10px;border-radius:10px;
+      padding:8px 10px;
       border:1px solid var(--border);
-      background:var(--surface);color:var(--text)
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
     }
-    [dir="rtl"] .topbar-inner{flex-direction:row-reverse}
-    [dir="rtl"] .langbox{direction:rtl}
+    nav.section-tabs a:hover{color:var(--text)}
 
-    /* ===== Content ===== */
-    .container{max-width:1000px;margin:0 auto;padding:16px}
-    h1{font-size:clamp(22px,3vw,36px);color:var(--brand);margin:14px 0 16px}
-    h2{font-size:clamp(18px,2.4vw,26px);color:var(--brand);margin-top:28px;margin-bottom:10px}
-    .step{margin-bottom:36px}
-    .note{
-      font-size:14px;color:var(--muted);
-      background:var(--note-bg);padding:12px 14px;
-      border-left:4px solid var(--brand);border-radius:6px;margin:16px 0
+    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
     }
-    [dir="rtl"] .note{border-left:0;border-right:4px solid var(--brand)}
-    .note .line{margin:6px 0}
+    .hero-visual{
+      width:160px;
+      height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:14px;
+    }
+    .hero-visual img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+    }
+    h1{margin:0 0 8px;font-size:30px;line-height:1.15}
+    .hero-lead{
+      margin:0 0 8px;
+      font-size:17px;
+      font-weight:900;
+      color:var(--accent);
+      line-height:1.45;
+    }
+    .sub{margin:0;color:var(--muted)}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:12px 0 0;
+      padding:12px 14px;
+      border:1px solid var(--soft-border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .jump{
+      margin-top:12px;
+      display:flex;gap:10px;flex-wrap:wrap;
+      font-size:13px;color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px;font-size:20px}
+    section h3{margin:18px 0 8px;font-size:17px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid var(--warn-border);
+      background:var(--warn-bg);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px;height:18px;flex:0 0 18px;
+      margin-top:2px;color:#b45309;
+    }
+
+    .ok-note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+
+    .panel{
+      border:1px solid var(--soft-border);
+      background:var(--soft-bg);
+      border-radius:14px;
+      padding:14px 16px;
+      margin:10px 0 14px;
+    }
+
     .imgrow{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:12px;margin:12px 0
+      gap:12px;
+      margin:12px 0;
     }
-    .imgrow img{width:100%;border:1px solid var(--border);border-radius:8px}
+    .imgrow img{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      display:block;
+    }
+
+    .guide-list{margin:0;padding-left:18px}
+    .guide-list li{margin:6px 0}
+
+    .faq-list{
+      display:grid;
+      gap:12px;
+    }
+    .faq-item{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+    }
+    .faq-q{
+      font-weight:900;
+      margin:0 0 6px;
+    }
+    .faq-a{
+      margin:0;
+      color:var(--muted);
+    }
 
     .links{
-      background:color-mix(in srgb,var(--surface) 85%,var(--brand) 5%);
-      padding:16px;border-radius:10px;margin-top:28px;
-      border:1px solid color-mix(in srgb,var(--border) 70%,transparent);
+      background:#f8fbff;
+      padding:16px;
+      border-radius:14px;
+      margin-top:28px;
+      border:1px solid var(--soft-border);
     }
     .links h2{color:var(--text);margin-top:0}
     .links a{font-weight:900}
-    ul{padding-inline-start:18px}
 
-    /* ===== Bottom CTA ===== */
     .bottom-cta{
       margin-top:22px;
       border-radius:18px;
       border:1px solid var(--border);
-      background:linear-gradient(180deg, color-mix(in srgb,var(--surface) 96%,transparent), color-mix(in srgb,var(--surface) 88%,transparent));
+      background:linear-gradient(180deg,#ffffff,#fafcff);
       box-shadow:var(--shadow);
       padding:18px;
     }
     .bottom-cta .title{
-      font-size:18px;
+      font-size:20px;
       font-weight:900;
       color:var(--text);
       margin:0 0 8px;
@@ -131,19 +300,13 @@
       text-decoration:none !important;
       line-height:1;
       user-select:none;
+      background:#fff;
+      color:var(--text);
     }
     .btn-primary{
-      background:var(--btn);
-      color:var(--btnText) !important;
-      border-color:color-mix(in srgb,var(--btn) 70%, var(--border));
-    }
-    .btn-ghost{
-      background:var(--btnGhostBg);
-      color:var(--btnGhostText) !important;
-    }
-    .btn small{
-      font-weight:800;
-      opacity:.85;
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
     }
     .cta-badges{
       margin-top:10px;
@@ -157,21 +320,67 @@
       border-radius:999px;
       border:1px solid var(--border);
       color:var(--muted);
-      background:color-mix(in srgb,var(--surface) 70%, transparent);
+      background:#fff;
     }
     .kbd{
       font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
       font-weight:900;
       color:var(--text);
-      background:color-mix(in srgb,var(--surface) 75%, transparent);
+      background:#fff;
       border:1px solid var(--border);
       border-bottom-width:2px;
       padding:2px 6px;
       border-radius:8px;
       display:inline-block;
     }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      header.top{position:sticky;top:0;z-index:40}
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero-visual{width:120px;height:120px}
+      h1{font-size:26px}
+      .hero-lead{font-size:16px}
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+      .bottom-cta .title{font-size:18px}
+    }
   </style>
-  <!-- GA4 -->
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Kingshot Self Top-Up Guide",
+    "inLanguage":"en",
+    "description":"A guide page covering Kingshot LootBar self top-up requirements, 2-step verification checks, account linking conditions, and the full top-up process.",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://kingshotdata.kr/en/"},
+        {"@type":"ListItem","position":2,"name":"Guides","item":"https://kingshotdata.kr/en/guides/"},
+        {"@type":"ListItem","position":3,"name":"Self Top-Up Guide","item":"https://kingshotdata.kr/en/guides/topup-guide.html"}
+      ]
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
   <script>
@@ -180,205 +389,322 @@
     gtag('js', new Date());
     gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
   </script>
-
 </head>
 
 <body>
-  <!-- ✅ 표준 가이드 Topbar: 좌측(가이드로) / 우측(언어) -->
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a id="backLink" class="backlink" href="/guides" aria-label="Back to guides">← Kingshot Guides</a>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
 
-      <div class="langbox">
-        <label for="langSwitcher" id="langLabel">언어</label>
-        <select id="langSwitcher" aria-label="Language">
-          <option value="ko" selected>한국어</option>
-          <option value="en">English</option>
-          <option value="ja">日本語</option>
-          <option value="zh-CN">简体中文</option>
-          <option value="zh-TW">繁體中文</option>
-          <option value="ar">العربية</option>
-        </select>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/en/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
       </div>
-    </div>
-  </header>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/topup-guide.html" aria-current="page">EN</a>
+        <a href="/ko/guides/topup-guide.html">KO</a>
+        <a href="/ja/guides/topup-guide.html">JA</a>
+        <a href="/zh-tw/guides/topup-guide.html">ZH-TW</a>
+      </nav>
+    </header>
 
-  <main class="container">
-    <h1>모바일 게임 유저들을 위한 합리적인 충전 가이드</h1>
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">Requirements</a>
+      <a href="#security">2-Step Verification</a>
+      <a href="#howto">How to Top Up</a>
+      <a href="#help">Help</a>
+    </nav>
 
-    <!-- NOTE: 링크는 HTML에 고정 / 텍스트만 ko 고정 -->
-    <div class="note">
-      <div class="line">
-        <a id="signupLink"
-           href="https://lootbar.gg/ko/top-up/kingshot?utm_source=ten"
-           target="_blank"
-           rel="noopener noreferrer">[루트바 가입 링크]</a>
-        로 가입하세요.
-      </div>
-      <div class="line">검색창에 <span class="kbd">#s4qU</span> 입력 시 추가 쿠폰을 받을 수 있습니다.</div>
-    </div>
-
-    <!-- Step 1 -->
-    <section class="step">
-      <h2>1. 단품 충전</h2>
-      <p>충전하고 싶은 패키지를 선택한 뒤 Top-up Now를 누릅니다.</p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step1.png" alt="step1">
-      </div>
-    </section>
-
-    <!-- Step 2 -->
-    <section class="step">
-      <h2>2. 다품 충전</h2>
-      <p>장바구니 버튼으로 원하는 패키지를 여러 개 추가합니다.</p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step2.png" alt="step2">
-      </div>
-    </section>
-
-    <!-- Step 3 -->
-    <section class="step">
-      <h2>3. 결제 진행</h2>
-      <p>결제 수단을 카드 또는 PayPal 중 선택한 뒤 Pay Now를 누릅니다.</p>
-      <p>좌측은 셀프탑업(내가 직접 충전), 우측은 상담원 충전입니다. 셀프탑업을 선택하세요.</p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step3.png" alt="step3">
-        <img src="/img/lootbar/step8.png" alt="step8">
-      </div>
-    </section>
-
-    <!-- Step 4 -->
-    <section class="step">
-      <h2>4. 로그인</h2>
-      <p>셀프탑업 선택 시 로그인 화면이 표시됩니다. 구글 로그인이 가장 편리합니다.</p>
-      <ul>
-        <li>구글 이메일 입력</li>
-        <li>비밀번호 입력</li>
-      </ul>
-      <p class="note">※ 초반에는 비밀번호를 미리 정확히 확인 후 진행하세요.</p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step4.png" alt="step4">
-        <img src="/img/lootbar/step5.png" alt="step5">
-        <img src="/img/lootbar/step6.png" alt="step6">
-      </div>
-    </section>
-
-    <!-- Step 5 -->
-    <section class="step">
-      <h2>5. 장바구니 충전</h2>
-      <p>장바구니에 담긴 금액(합계)만큼 충전합니다.</p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step7.png" alt="step7">
-        <img src="/img/lootbar/step9.png" alt="step9">
-        <img src="/img/lootbar/step10.png" alt="step10">
-      </div>
-    </section>
-
-    <!-- Step 6 -->
-    <section class="step">
-      <h2>6. 구매 완료</h2>
-      <p>확인 후 결제가 진행되며, 완료 화면에서 Got it을 누르면 종료됩니다.</p>
-      <p><strong>충전 완료!</strong></p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step12.png" alt="step12">
-        <img src="/img/lootbar/step13.png" alt="step13">
-        <img src="/img/lootbar/step14.png" alt="step14">
-      </div>
-    </section>
-
-    <!-- Final -->
-    <section class="step">
-      <h2>최종 완료</h2>
-      <p><strong>모든 과정이 완료되었습니다. 게임에서 충전된 패키지를 확인하세요.</strong></p>
-      <div class="imgrow">
-        <img src="/img/lootbar/step15.png" alt="step15">
-      </div>
-    </section>
-
-    <div class="note">
-      <div class="line">셀프충전은 매우 간단합니다.</div>
-      <div class="line">문의가 많아 본 가이드로 안내를 대신합니다.</div>
-    </div>
-
-    <!-- cumulative: 링크는 HTML 고정 -->
-    <div class="note">
-      <div class="line">
-        <a id="cumLink"
-           href="https://lootbar.gg/ko/top-up/kingshot?utm_source=ten"
-           target="_blank"
-           rel="noopener noreferrer">[누적충전 바로가기 링크]</a>
-        를 즐겨찾기(북마크) 해두세요.
-      </div>
-      <div class="line">매월 말 집계하여 $4.99~$99.99 패키지를 추가로 증정합니다.</div>
-    </div>
-
-    <!-- mobile discount -->
-    <div class="links">
-      <h2>모바일게임 할인 링크 안내</h2>
-      <a href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">모바일게임 할인 바로가기</a>
-    </div>
-
-    <!-- ✅ NEW: 하단 충전 페이지 CTA (KO 고정) -->
-    <section class="bottom-cta" aria-label="Top-up CTA">
-      <p class="title">지금 바로 충전 페이지로 이동하기</p>
-      <p class="desc">
-        아래 버튼을 누르면 Kingshot 전용 충전 페이지로 바로 이동합니다.
-        (추가 쿠폰은 검색창에 <span class="kbd">#s4qU</span> 입력)
-      </p>
-      <div class="cta-row">
-        <a class="btn btn-primary"
-           href="https://lootbar.gg/ko/top-up/kingshot?utm_source=ten"
-           target="_blank"
-           rel="noopener noreferrer">충전 페이지 열기</a>
-
-        <a class="btn btn-ghost"
-           href="https://lootbar.gg/shop/ten"
-           target="_blank"
-           rel="noopener noreferrer">모바일게임 할인 페이지</a>
-
-        <a class="btn btn-ghost"
-           href="/coupons"
-           rel="noopener">쿠폰 모음 보기</a>
+    <main id="main">
+      <div class="crumbs">
+        <a href="/en/">Home</a> <span class="muted">›</span>
+        <a href="/en/guides/">Guides</a> <span class="muted">›</span>
+        <span>Self Top-Up Guide</span>
       </div>
 
-      <div class="cta-badges" aria-label="quick notes">
-        <span class="badge">셀프탑업 추천</span>
-        <span class="badge">즐겨찾기 권장</span>
-        <span class="badge">업데이트: 수시 반영</span>
+      <div class="hero">
+        <div class="hero-visual">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot logo" loading="eager" fetchpriority="high" width="160" height="160">
+        </div>
+        <div>
+          <h1>Kingshot Self Top-Up Guide</h1>
+          <p class="hero-lead">If you check the common problem points first, self top-up is much easier than it looks.</p>
+          <p class="sub">
+            This guide covers account linking requirements, Google / Facebook 2-step verification checks,
+            the Google Play Games limitation, and the full self top-up process.
+          </p>
+          <div class="quote">
+            Most self top-up issues are not caused by the payment steps themselves, but by account linking status and 2-step verification settings.
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">Requirements</a><span class="dotsep">•</span>
+            <a href="#security">2-Step Verification</a><span class="dotsep">•</span>
+            <a href="#howto">How to Top Up</a><span class="dotsep">•</span>
+            <a href="#help">Help</a>
+          </div>
+        </div>
       </div>
-    </section>
-  </main>
 
-<script>
-/*
-  ✅ KO 버전 고정:
-  - 번역 스크립트는 제거(원하면 다시 붙일 수 있음)
-  - 언어 셀렉트는 남겨두되, 선택 시 해당 언어 페이지로 이동하도록만 처리
-  - 네 사이트 라우터 규칙에 맞춰 경로만 바꿔서 쓰면 됨
-*/
-(function(){
-  const select = document.getElementById("langSwitcher");
-  if(!select) return;
+      <section id="overview">
+        <h2>Please check these first before using self top-up</h2>
 
-  // 현재는 ko 고정이므로, 다른 언어 선택 시 같은 문서의 언어판 경로로 이동만 시킴
-  // 필요 시 너 라우터 규칙에 맞게 아래 매핑만 수정하면 됨.
-  const map = {
-    "ko": "/guides/topup.html",
-    "en": "/en/guides/topup.html",
-    "ja": "/ja/guides/topup.html",
-    "zh-CN": "/zh-cn/guides/topup.html",
-    "zh-TW": "/tw/guides/topup.html",
-    "ar": "/ar/guides/topup.html"
-  };
+        <div class="note" role="note" aria-label="Important notice">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Important:</strong>
+            Please manage your own personal information and account security carefully. Before you start self top-up, make sure the following 2 conditions are met.
+          </div>
+        </div>
 
-  select.value = "ko";
-  select.addEventListener("change", (e)=>{
-    const v = e.target.value;
-    const url = map[v] || map.ko;
-    location.href = url;
-  });
-})();
-</script>
+        <div class="panel">
+          <ul class="guide-list">
+            <li>Your Kingshot account must be linked to <strong>Google or Facebook</strong>.</li>
+            <li>Your linked Google or Facebook account must have <strong>2-step verification</strong> enabled.</li>
+          </ul>
+        </div>
 
+        <p>This is explained first because most self top-up issues happen not because of the payment flow itself, but because of <strong>account linking status</strong> or <strong>missing 2-step verification</strong>.</p>
+
+        <h3>Account linking requirement</h3>
+        <p>LootBar self top-up is currently available <strong>only for accounts directly linked to Google or Facebook</strong>.</p>
+
+        <div class="faq-list">
+          <article class="faq-item">
+            <p class="faq-q">Q. My account is linked through Google Play Games.</p>
+            <p class="faq-a">Yes. <strong>Accounts linked through Google Play Games cannot use LootBar self top-up</strong>. At the moment, only accounts linked directly to <strong>Google or Facebook</strong> are supported.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="security">
+        <span class="anchor"></span>
+        <h2>Why Google / Facebook 2-step verification is required</h2>
+        <p>LootBar self top-up requires a security check during login.</p>
+        <p>That is why your linked Google or Facebook account must have <strong>2-step verification enabled before you can proceed normally.</strong></p>
+
+        <h3>How to enable Google 2-step verification</h3>
+        <ul class="guide-list">
+          <li>Open your Google Account management page.</li>
+          <li>Go to the Security menu.</li>
+          <li>Find the 2-Step Verification section.</li>
+          <li>Set up your preferred verification method, such as a phone number or authenticator app.</li>
+          <li>After setup, confirm that it has been applied correctly.</li>
+        </ul>
+
+        <h3>How to enable Facebook 2-step verification</h3>
+        <ul class="guide-list">
+          <li>Open Facebook Settings & Privacy.</li>
+          <li>Go to Password and Security.</li>
+          <li>Find the two-factor authentication setting.</li>
+          <li>Set up your preferred verification method, such as SMS or an authenticator app.</li>
+          <li>After setup, confirm that it has been applied correctly.</li>
+        </ul>
+
+        <h3>How to check whether 2-step verification is enabled</h3>
+        <p>The easiest way is to try logging in through <strong>incognito mode</strong>.</p>
+        <ul class="guide-list">
+          <li>Open Chrome or your browser in incognito mode.</li>
+          <li>Go to the <a href="https://accounts.google.com/" target="_blank" rel="noopener noreferrer">Google login page</a> or the <a href="https://www.facebook.com/login/" target="_blank" rel="noopener noreferrer">Facebook login page</a>.</li>
+          <li>Try signing in with your account.</li>
+          <li>If you receive an extra verification request by phone, email, or authenticator app, <strong>that account already has 2-step verification enabled</strong>.</li>
+        </ul>
+
+        <div class="ok-note" role="note" aria-label="2FA check note">
+          <div>
+            <strong>Check result:</strong> If you see phone verification, email verification, or an authenticator app approval request, then 2-step verification is active.
+          </div>
+        </div>
+      </section>
+
+      <section id="help">
+        <h2>I’m confused. Please show me how to top up</h2>
+        <p>If all of the conditions above are already confirmed, just follow the steps below in order.</p>
+
+        <div class="note" role="note" aria-label="Discord help">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>If you get stuck in the middle, please ask in Discord.</strong><br>
+            <a href="https://discord.gg/vgzASAwx" target="_blank" rel="noopener noreferrer">Go to Discord support</a><br>
+            Tell us which step you are stuck on, and we will help explain it.
+          </div>
+        </div>
+      </section>
+
+      <section id="howto">
+        <h2>Actual self top-up process</h2>
+
+        <div class="panel">
+          <p style="margin:0 0 8px"><strong>LootBar Link</strong></p>
+          <p style="margin:0 0 8px">
+            <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Open the LootBar Kingshot top-up page</a>
+          </p>
+          <p style="margin:0">Enter <span class="kbd">#s4qU</span> in the search bar to receive an extra coupon.</p>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="quick reassurance">
+          <div>
+            <strong>Don’t worry.</strong> If the conditions above are met, most users can complete the process just by following the steps below.
+          </div>
+        </div>
+
+        <h3>1. Single item top-up</h3>
+        <p>Select the package you want and click Top-up Now.</p>
+        <div class="imgrow">
+          <img src="/img/lootbar/step1.png" alt="Single item package selection screen" loading="lazy">
+        </div>
+
+        <h3>2. Multiple item top-up</h3>
+        <p>Use the cart button to add multiple packages you want.</p>
+        <div class="imgrow">
+          <img src="/img/lootbar/step2.png" alt="Cart screen for multiple item top-up" loading="lazy">
+        </div>
+
+        <h3>3. Proceed to payment</h3>
+        <p>Select your payment method, either card or PayPal, then click Pay Now.</p>
+        <p>The left option is self top-up, and the right option is operator top-up. <strong>Please choose self top-up.</strong></p>
+        <div class="imgrow">
+          <img src="/img/lootbar/step3.png" alt="Payment method selection screen" loading="lazy">
+          <img src="/img/lootbar/step8.png" alt="Self top-up selection screen" loading="lazy">
+        </div>
+
+        <h3>4. Sign in</h3>
+        <p>After choosing self top-up, the login screen will appear. Google login is the easiest option.</p>
+        <ul class="guide-list">
+          <li>Enter your Google email</li>
+          <li>Enter your password</li>
+        </ul>
+        <div class="note" role="note" aria-label="Password note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div><strong>Tip:</strong> At the beginning, it is best to confirm your password first before continuing.</div>
+        </div>
+        <div class="imgrow">
+          <img src="/img/lootbar/step4.png" alt="Google login screen" loading="lazy">
+          <img src="/img/lootbar/step5.png" alt="Google email input screen" loading="lazy">
+          <img src="/img/lootbar/step6.png" alt="Google password input screen" loading="lazy">
+        </div>
+
+        <h3>5. Cart payment</h3>
+        <p>Complete the payment based on the total amount in your cart.</p>
+        <div class="imgrow">
+          <img src="/img/lootbar/step7.png" alt="Cart confirmation screen" loading="lazy">
+          <img src="/img/lootbar/step9.png" alt="Top-up amount confirmation screen" loading="lazy">
+          <img src="/img/lootbar/step10.png" alt="Final payment screen" loading="lazy">
+        </div>
+
+        <h3>6. Purchase completed</h3>
+        <p>After confirming, the payment will finish, and you can press Got it on the final screen.</p>
+        <p><strong>Top-up completed!</strong></p>
+        <div class="imgrow">
+          <img src="/img/lootbar/step12.png" alt="Payment completed screen" loading="lazy">
+          <img src="/img/lootbar/step13.png" alt="Completion notice screen" loading="lazy">
+          <img src="/img/lootbar/step14.png" alt="Final completion screen" loading="lazy">
+        </div>
+
+        <h3>Final step</h3>
+        <p><strong>Once everything is done, check your game account to confirm that the package has been delivered.</strong></p>
+        <div class="imgrow">
+          <img src="/img/lootbar/step15.png" alt="In-game top-up confirmation screen" loading="lazy">
+        </div>
+      </section>
+
+      <section>
+        <h2>Additional information</h2>
+
+        <div class="note" role="note" aria-label="Self top-up note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Self top-up is actually very simple.</strong><br>
+            Since many users ask about it, this guide was made to explain everything in one place.
+          </div>
+        </div>
+
+        <div class="note" role="note" aria-label="Cumulative top-up note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Cumulative top-up and monthly coupon notice:</strong><br>
+            More benefit details can be checked through the link below.<br>
+            You can also use your browser’s translation feature or AI translation tools to read the notice more easily.<br>
+            <a href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">View the community notice followed by 20,000+ Kingshot players</a>
+          </div>
+        </div>
+
+        <div class="links">
+          <h2>Mobile game discount link</h2>
+          <a href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">Go to the mobile game discount page</a>
+        </div>
+
+        <section class="bottom-cta" aria-label="Top-up CTA">
+          <p class="title">Go to the Kingshot top-up page now</p>
+          <p class="desc">
+            Click the button below to open the Kingshot top-up page directly.
+            To use the extra coupon, enter <span class="kbd">#s4qU</span> in the search bar and apply it.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Open top-up page</a>
+            <a class="btn" href="https://discord.gg/vgzASAwx" target="_blank" rel="noopener noreferrer">Discord support</a>
+            <a class="btn" href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">Cumulative top-up / coupon notice</a>
+            <a class="btn" href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">Mobile game discount page</a>
+            <a class="btn" href="/en/guides/kingshot-giftcode.html" rel="noopener">View latest gift codes</a>
+          </div>
+
+          <div class="cta-badges" aria-label="quick notes">
+            <span class="badge">Self top-up recommended</span>
+            <span class="badge">Google / Facebook required</span>
+            <span class="badge">2-step verification required</span>
+            <span class="badge">Ask in Discord if stuck</span>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
 </body>
 </html>

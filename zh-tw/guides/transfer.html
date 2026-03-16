@@ -1,0 +1,1215 @@
+<!doctype html>
+<html lang="zh-Hant" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot 王國移民深度指南 | 移民條件、特殊邀請、戰力限制、檢查清單 | Kingshot Data</title>
+  <meta name="description" content="這是一篇 Kingshot 王國移民深度指南，整理了王國移民條件、一般邀請與特殊邀請、移民戰力限制、管理者視角的實戰營運重點，以及移民前檢查清單。" />
+  <meta name="keywords" content="Kingshot 王國移民, Kingshot 移民指南, Kingshot 特殊邀請, Kingshot 一般邀請, Kingshot 移民戰力限制, Kingshot 伺服器移民, Kingshot transfer guide, Kingshot kingdom transfer" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/guides/transfer.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/transfer.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/transfer.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/transfer.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/transfer.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/transfer.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot 王國移民深度指南 | 移民條件、特殊邀請、戰力限制、檢查清單" />
+  <meta property="og:description" content="整理了 Kingshot 王國移民的核心結構與實戰營運重點。你可以一次掌握移民條件、一般／特殊邀請、戰力限制、管理者判斷優先順序，以及移民前檢查清單。" />
+  <meta property="og:url" content="https://kingshotdata.kr/zh-tw/guides/transfer.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guide/transfer-guide.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Kingshot 王國移民深度指南代表圖片" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kingshot 王國移民深度指南 | 移民條件、特殊邀請、戰力限制、檢查清單" />
+  <meta name="twitter:description" content="整理了 Kingshot 王國移民的核心結構與實戰營運重點。確認移民條件、一般／特殊邀請、戰力限制與移民前檢查清單。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guide/transfer-guide.webp" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guide/transfer-guide.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --panel3:#fbfdff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --note-bg:#fff7ed;
+      --note-border:rgba(245,158,11,.35);
+      --ok-bg:#f0fdf4;
+      --ok-border:#bbf7d0;
+      --blue-bg:#eff6ff;
+      --blue-border:#bfdbfe;
+      --danger:#ef4444;
+      --success:#16a34a;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.65 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","Noto Sans CJK TC","Microsoft JhengHei","PingFang TC","Heiti TC","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      word-break:keep-all;
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      justify-content:flex-end;
+    }
+    nav.lang a{
+      width:64px;
+      min-width:64px;
+      height:36px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:800;
+      text-align:center;
+      white-space:nowrap;
+      flex:0 0 64px;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:900;
+      border-color:#c7d2fe;
+      background:#f8fbff;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+      scrollbar-width:none;
+    }
+    nav.section-tabs::-webkit-scrollbar{display:none}
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+      flex:0 0 auto;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px;
+      height:160px;
+      object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+
+    h1{margin:0 0 8px;font-size:28px;line-height:1.15}
+    h2{margin:0 0 10px;font-size:20px;line-height:1.3}
+    h3{margin:0 0 10px;font-size:16px;line-height:1.35}
+    .sub{margin:0;color:var(--muted)}
+    .muted{color:var(--muted)}
+
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .jump{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section p{margin:8px 0}
+
+    .summary-grid,
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+    .summary-grid.summary-4{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:14px;
+      min-width:0;
+    }
+
+    .mini-title{
+      margin:0 0 8px;
+      font-size:15px;
+      font-weight:900;
+      line-height:1.35;
+    }
+
+    .summary-card{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      min-height:100%;
+    }
+    .summary-label{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .summary-value{
+      font-size:22px;
+      font-weight:1000;
+      line-height:1.1;
+    }
+    .summary-desc{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .note,
+    .ok-box,
+    .blue-box{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note{
+      border:1px solid var(--note-border);
+      background:rgba(245,158,11,.08);
+    }
+    .ok-box{
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+    }
+    .blue-box{
+      border:1px solid var(--blue-border);
+      background:var(--blue-bg);
+    }
+    .note strong,.ok-box strong,.blue-box strong{font-weight:900}
+    .note .note-ico{
+      width:18px;height:18px;flex:0 0 18px;
+      margin-top:2px;color:#b45309;
+    }
+
+    .toc{
+      display:grid;
+      gap:8px;
+      margin-top:12px;
+    }
+    .toc a{
+      display:inline-flex;
+      align-items:center;
+      width:fit-content;
+      max-width:100%;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--text);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    ul.clean{margin:0;padding-left:18px}
+    ul.clean li{margin:6px 0}
+
+    .compare-table-wrap,
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+      margin-top:10px;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+      min-width:720px;
+    }
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:12px 12px;
+      border-bottom:1px solid var(--border);
+      font-size:13px;
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td{
+      padding:12px 12px;
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:14px;
+      line-height:1.6;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:last-child td{border-bottom:0}
+
+    .phase-col{width:86px}
+    .name-col{width:180px}
+
+    .diff-normal{color:var(--success);font-weight:900}
+    .diff-special{color:var(--danger);font-weight:900}
+
+    .mobile-compare{
+      display:none;
+      gap:12px;
+      margin-top:10px;
+    }
+    .compare-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:14px;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+    }
+    .compare-badge{
+      display:inline-flex;
+      align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      margin-bottom:10px;
+      border:1px solid var(--border);
+    }
+    .compare-badge.normal{
+      color:var(--success);
+      background:#f0fdf4;
+      border-color:#bbf7d0;
+    }
+    .compare-badge.special{
+      color:var(--danger);
+      background:#fef2f2;
+      border-color:#fecaca;
+    }
+    .compare-list{
+      display:grid;
+      gap:8px;
+    }
+    .compare-row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:9px 10px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      font-size:13px;
+    }
+    .compare-row .k{
+      color:var(--muted);
+      font-weight:700;
+      flex:0 0 92px;
+    }
+    .compare-row .v{
+      text-align:right;
+      font-weight:900;
+      flex:1 1 auto;
+    }
+
+    .related{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .seo-copy{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:1024px){
+      .summary-grid.summary-4{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        flex-wrap:wrap;
+        align-items:flex-start;
+      }
+      .brand{width:100%}
+      nav.lang{
+        width:100%;
+        justify-content:flex-start;
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+      .grid,
+      .summary-grid,
+      .summary-grid.summary-4{
+        grid-template-columns:1fr;
+      }
+      .mobile-compare{
+        display:grid;
+      }
+      .compare-table-wrap{
+        display:none;
+      }
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      h2{font-size:19px}
+      section{padding:14px}
+      .hero{padding:14px}
+      .card{padding:12px}
+      nav.lang{gap:6px}
+      nav.lang a{
+        width:58px;
+        min-width:58px;
+        flex:0 0 58px;
+        height:34px;
+        font-size:12px;
+      }
+      .summary-value{font-size:20px}
+      .compare-row .k{flex:0 0 86px}
+      .toc a{
+        width:100%;
+        justify-content:center;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot 王國移民深度指南 | 移民條件、特殊邀請、戰力限制、檢查清單",
+    "description":"這是一篇 Kingshot 王國移民深度指南，整理了王國移民條件、一般邀請與特殊邀請、移民戰力限制、管理者視角的實戰營運重點，以及移民前檢查清單。",
+    "inLanguage":"zh-Hant",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/zh-tw/guides/transfer.html"
+    },
+    "author":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Kingshot Data",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+      }
+    },
+    "image":"https://kingshotdata.kr/img/guide/transfer-guide.webp"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Kingshot 王國移民只能在同一組別之間進行嗎？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"是的。王國移民基本上只能在相同進度組別內進行。你可以理解為金階段進度或英雄世代開放狀態相近的王國，才會被分到同一個移民組別。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"什麼時候需要特殊邀請？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"當你要接收超過移民戰力限制的玩家時，就需要使用特殊邀請。一般邀請通常只能用在戰力限制以下的對象。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"移民戰力限制會包含哪些內容？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"不只領主表面戰力，通常連醫院傷兵與徵兵所預備兵也會被計入判定。所以在實際移民前，最好先確認傷兵與預備兵是否已整理完畢。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"移民準備時最重要的是什麼？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"最優先要確認的是是否屬於同一組別、是否符合戰力限制、城市中心等級條件、是否已退出聯盟、冷卻時間、目標王國角色數量限制，以及是否備妥移民票。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"首頁",
+        "item":"https://kingshotdata.kr/zh-tw/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"指南",
+        "item":"https://kingshotdata.kr/zh-tw/guides/"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"王國移民深度指南",
+        "item":"https://kingshotdata.kr/zh-tw/guides/transfer.html"
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"></path>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"></path>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/transfer.html">EN</a>
+        <a href="/ko/guides/transfer.html">KO</a>
+        <a href="/ja/guides/transfer.html">JA</a>
+        <a href="/zh-tw/guides/transfer.html" aria-current="page">TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概要</a>
+      <a href="#rules">核心規則</a>
+      <a href="#manager">管理者視角</a>
+      <a href="#migrant">移民準備</a>
+      <a href="#checklist">檢查清單</a>
+      <a href="#faq">FAQ</a>
+      <a href="#related">相關內容</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/guides/">指南</a> <span class="muted">›</span>
+        <span>王國移民深度指南</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/guide/transfer-guide.webp" alt="Kingshot 王國移民深度指南代表圖片" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>Kingshot 王國移民深度指南</h1>
+          <p class="sub">
+            從王國移民的基本條件，到一般邀請與特殊邀請的差異、移民戰力限制、管理者視角下的實戰營運標準，
+            再到實際準備移民的玩家應該確認的重點，這篇內容一次整理給你。
+          </p>
+
+          <div class="quote">
+            這一頁不只是單純的規則整理，而是根據實際伺服器經營與移民準備經驗，
+            幫你釐清該收誰、該去哪裡，以及哪些事情要優先確認的實戰型指南。
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">概要</a><span class="dotsep">•</span>
+            <a href="#rules">核心規則</a><span class="dotsep">•</span>
+            <a href="#manager">管理者視角</a><span class="dotsep">•</span>
+            <a href="#migrant">移民準備</a><span class="dotsep">•</span>
+            <a href="#faq">FAQ</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>概要</h2>
+        <p>
+          Kingshot 王國移民，是在相同進度組別內將城市移動到其他王國的系統。
+          表面上看起來像是只要有移民票並符合條件就能完成，但實際上還要一起考慮伺服器氛圍、管理者風格、
+          特殊邀請可用次數、移民戰力限制，以及聯盟內的位置安排，整體結果才會更理想。
+        </p>
+        <p class="seo-copy">
+          尤其在 Kingshot 王國移民季中，受歡迎的不一定只有高戰力玩家，
+          很多時候還會同時評估伺服器適應力、溝通能力、與聯盟的契合度、是否容易和既有成員產生衝突，以及管理者對你的信任程度。
+          所以 Kingshot 移民指南不應只停留在規則整理，能同時理解管理者與移民者兩邊視角，才更貼近實戰。
+        </p>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>重點：</strong>
+            移民不只是單純移動，而是伺服器與聯盟在挑選玩家的過程。
+            除了規則是否符合，評價、溝通能力、伺服器適應力，以及與管理者之間的信任也非常重要。
+          </div>
+        </div>
+
+        <div class="summary-grid summary-4">
+          <article class="card summary-card">
+            <div class="summary-label">重點 1</div>
+            <div class="summary-value">同一組別</div>
+            <div class="summary-desc">王國移民只能在相同進度組別之間進行。</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">重點 2</div>
+            <div class="summary-value">一般 / 特殊邀請</div>
+            <div class="summary-desc">是否低於或高於戰力限制，會決定你需要哪一種邀請方式。</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">重點 3</div>
+            <div class="summary-value">戰力限制</div>
+            <div class="summary-desc">不只看表面戰力，傷兵與預備兵也要一起檢查才安全。</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">重點 4</div>
+            <div class="summary-value">營運與信任</div>
+            <div class="summary-desc">是否使用特殊邀請，往往也反映出伺服器方向與管理者判斷。</div>
+          </article>
+        </div>
+
+        <div class="toc" aria-label="本文目錄">
+          <a href="#rules">核心規則整理</a>
+          <a href="#invite-compare">一般邀請 vs 特殊邀請比較</a>
+          <a href="#manager">如果你是管理者該怎麼做</a>
+          <a href="#migrant">從移民者角度該看什麼</a>
+          <a href="#checklist">移民前檢查清單</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </section>
+
+      <section id="rules">
+        <span class="anchor"></span>
+        <h2>核心規則整理</h2>
+
+        <div class="grid">
+          <article class="card">
+            <p class="mini-title">移民基本結構</p>
+            <ul class="clean">
+              <li>移民只能在相同進度組別內進行。</li>
+              <li>王國可能會分成強勢王國與一般王國，收人容量結構也可能不同。</li>
+              <li>一般邀請與特殊邀請用途不同，通常以戰力限制作為區分標準。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">移民前條件</p>
+            <ul class="clean">
+              <li>若超過移民戰力限制，通常就無法透過一般方式移動。</li>
+              <li>必須滿足城市中心等級、非戰鬥狀態、退出聯盟、移民冷卻時間等基本條件。</li>
+              <li>也要事先確認目標王國內已有角色數量與移民票數量是否足夠。</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="table-wrap" aria-label="王國移民核心規則表">
+          <table>
+            <thead>
+              <tr>
+                <th class="phase-col">分類</th>
+                <th class="name-col">項目</th>
+                <th>說明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>組別</td>
+                <td>相同進度</td>
+                <td>王國移民只能在相同進度組別之間進行。你可以理解為金階段進度或英雄世代開放狀態相近的王國，才會被分進同一個移民組別。</td>
+              </tr>
+              <tr>
+                <td>邀請</td>
+                <td>一般邀請</td>
+                <td>用於接收低於移民戰力限制的玩家。不是有空位就一定會收，通常還會一起考慮伺服器標準與聯盟優先順序。</td>
+              </tr>
+              <tr>
+                <td>邀請</td>
+                <td>特殊邀請</td>
+                <td>當要接收超過移民戰力限制的玩家時就需要使用。由於次數有限，管理者通常會非常慎重地決定要用在誰身上。</td>
+              </tr>
+              <tr>
+                <td>戰力</td>
+                <td>判定標準</td>
+                <td>不只領主表面戰力，連醫院傷兵、徵兵所預備兵等也可能一起被計入，因此如果只看表面戰力，很容易誤判。</td>
+              </tr>
+              <tr>
+                <td>基本條件</td>
+                <td>狀態檢查</td>
+                <td>需要一併確認城市中心等級、是否處於戰鬥狀態、外部衝擊部隊、聯盟加入狀態、是否為國王／管理者，以及上次移民後經過了多少天。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="invite-compare">
+        <span class="anchor"></span>
+        <h2>一般邀請 vs 特殊邀請</h2>
+        <p class="seo-copy">
+          只要正確理解 Kingshot 特殊邀請與一般邀請的差異，移民季的判斷就會容易很多。
+          特別是當你要接收超過 Kingshot 移民戰力限制的玩家時，就一定要用到特殊邀請，
+          因此管理者必須先規劃這個權限要用在誰身上，而移民者也要先判斷自己屬於哪一類。
+        </p>
+
+        <div class="compare-table-wrap" aria-label="一般邀請與特殊邀請比較表">
+          <table>
+            <thead>
+              <tr>
+                <th>項目</th>
+                <th>一般邀請</th>
+                <th>特殊邀請</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>基本對象</td>
+                <td class="diff-normal">移民戰力限制以下</td>
+                <td class="diff-special">移民戰力限制以上</td>
+              </tr>
+              <tr>
+                <td>使用難度</td>
+                <td>相對常見</td>
+                <td>通常會被視為稀有資源</td>
+              </tr>
+              <tr>
+                <td>營運意義</td>
+                <td>基本收人與位置安排</td>
+                <td>核心成員招募或專案型引進</td>
+              </tr>
+              <tr>
+                <td>管理者判斷因素</td>
+                <td>空位、適應力、溝通能力、是否遵守伺服器規則</td>
+                <td>戰力、影響力、既有成員反應、伺服器整體方向</td>
+              </tr>
+              <tr>
+                <td>移民者視角重點</td>
+                <td>只要條件符合，成功機率通常會比較高</td>
+                <td>需要更明確說明為什麼伺服器應該收你</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mobile-compare" aria-label="手機版比較卡片">
+          <article class="compare-card">
+            <div class="compare-badge normal">一般邀請</div>
+            <div class="compare-list">
+              <div class="compare-row"><span class="k">對象</span><span class="v">戰力限制以下</span></div>
+              <div class="compare-row"><span class="k">難度</span><span class="v">相對常見</span></div>
+              <div class="compare-row"><span class="k">意義</span><span class="v">基本收人與位置安排</span></div>
+              <div class="compare-row"><span class="k">判斷</span><span class="v">空位、適應力、溝通</span></div>
+            </div>
+          </article>
+
+          <article class="compare-card">
+            <div class="compare-badge special">特殊邀請</div>
+            <div class="compare-list">
+              <div class="compare-row"><span class="k">對象</span><span class="v">戰力限制以上</span></div>
+              <div class="compare-row"><span class="k">難度</span><span class="v">視為稀有資源</span></div>
+              <div class="compare-row"><span class="k">意義</span><span class="v">核心招募 / 專案型招募</span></div>
+              <div class="compare-row"><span class="k">判斷</span><span class="v">影響力、方向、信任</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="blue-box">
+          <div>
+            <strong>實戰重點</strong>
+            <p style="margin:6px 0 0">
+              特殊邀請不是因為對方高戰力就一定值得使用。
+              還要一起看伺服器氛圍與聯盟內的整體契合度，否則用錯對象，甚至可能導致既有成員流失。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="manager">
+        <span class="anchor"></span>
+        <h2>如果你是管理者</h2>
+
+        <article class="card">
+          <p class="mini-title">1. 就算你不是課金大佬，想主導移民方向也得先建立自己的地位</p>
+          <p>
+            你必須一邊在聯盟內、一邊在整個伺服器內建立自己的存在感，同時讓伺服器核心人物知道你有多重要。
+            這裡的關鍵，說到底還是人品。對所有玩家保持友善，
+            不在整個伺服器中製造不必要的摩擦，這些都非常重要。
+          </p>
+          <p>
+            核心玩家說到底也都是人，他們更傾向和一起玩起來舒服的人合作。
+            所以你平常怎麼行動，往往就會決定你在移民季能發揮多大的影響力。
+            這也是為什麼並不是只有課金規模，才能決定一切。
+          </p>
+        </article>
+
+        <article class="card" style="margin-top:14px">
+          <p class="mini-title">2. 你必須先排好移民優先順序</p>
+          <p>
+            到了移民季，實際收到的詢問通常會比預期多得多。
+            所以建議先用記事本或表格整理玩家的 ID、伺服器、想加入的聯盟、是否有推薦人等資訊，
+            再把已經加入你們伺服器或聯盟交流群、且適應良好的玩家放在較高優先序，這樣管理效率會更高。
+          </p>
+
+          <div class="ok-box">
+            <div>
+              <strong>優先順序範例</strong>
+              <ul class="clean" style="margin-top:8px">
+                <li>第 1 優先：人品好的高課玩家</li>
+                <li>第 2 優先：和聯盟成員溝通順暢的人</li>
+                <li>第 3 優先：已經移入的高課玩家，或他們指定想帶來的人</li>
+                <li>第 4 優先：其他對象</li>
+              </ul>
+            </div>
+          </div>
+
+          <p>
+            最後還是要持續和國王溝通，確認這次移民能使用多少特殊邀請、
+            可以接收多少一般名額，再據此做實際計算與安排。
+          </p>
+        </article>
+
+        <article class="card" style="margin-top:14px">
+          <p class="mini-title">3. 若要整批引進高課玩家，對方想帶的人也必須交叉驗證</p>
+          <p>
+            因為單一個人的問題行為，導致聯盟成員流失的案例其實比想像中還多。
+            特別是在移民開始前後，伺服器內本來就容易出現各種流言與戲劇性事件。
+            所以就算是某位高課玩家點名想帶的人，也不建議直接無條件接收，還是應該同時觀察其他高課玩家與既有成員的反應，做交叉驗證。
+          </p>
+          <p>
+            如果某個人對聯盟整體來說是負擔，把他的優先順序往後放，也是一種合理的營運方式。
+            因為移民從來不是只看「能不能收這個人」，而是看「收了之後，既有成員還能不能穩定一起走下去」。
+          </p>
+        </article>
+
+        <article class="card" style="margin-top:14px">
+          <p class="mini-title">4. 想吸引高課玩家，就要提出一個清楚的伺服器企劃</p>
+          <p>
+            課金規模越大的玩家，越不會輕易移民到效率不高的環境。
+            所以作為管理者，你需要把你們聯盟的方向、管理方式、NAP 結構、活動運作標準、
+            以及整體伺服器氛圍，像企劃案一樣清楚說明出來。
+          </p>
+          <p>
+            不能只是說歡迎來，而是要讓對方知道，來了之後會進入什麼樣的戰爭環境、扮演什麼角色、
+            以及你們想把伺服器經營成什麼樣子。這樣才更容易建立信任。
+            畢竟這些玩家一旦加入，不只是對聯盟有幫助，對整個伺服器也可能帶來很大的影響力。
+          </p>
+        </article>
+      </section>
+
+      <section id="migrant">
+        <span class="anchor"></span>
+        <h2>從移民者角度來看</h2>
+
+        <div class="grid">
+          <article class="card">
+            <p class="mini-title">1. 先確認目標伺服器是否穩定</p>
+            <p>
+              一定要做交叉驗證。因為你至少會在那裡待上一段不短的時間，
+              所以比起表面戰力，更應該先看伺服器氛圍、戰爭頻率、好戰玩家比例，以及 NAP 是否穩定。
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">2. 觀察管理者的風格</p>
+            <p>
+              要看管理者是不是真的在乎聯盟成員，以及他說的和做的是否一致。
+              不是只在移民季表現得特別熱情，而是平常的管理是否也穩定持續，這點很重要。
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">3. 想加入的聯盟必須適合你自己</p>
+            <p>
+              有些聯盟紀律很嚴，有些聯盟則在 NAP 規則下偏向比較自由的風格。
+              如果聯盟文化和你的個性不合，就算戰力再高，也很難長久待下去。
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">4. 確認該聯盟在伺服器內的地位</p>
+            <p>
+              如果聯盟在伺服器中的立場夠穩，當發生全軍出擊或突發攻擊時，你受到的衝擊通常也會較小。
+              不要只看排名，還要看這個聯盟在伺服器中到底受到多少保護與支持。
+            </p>
+          </article>
+        </div>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>補充：</strong>
+            一般邀請與特殊邀請，不只是單純的數量資源，也是一種承諾。
+            這種承諾如何分配與使用，往往也反映出該伺服器與聯盟的可信度。
+          </div>
+        </div>
+
+        <p class="seo-copy">
+          如果你正準備進行 Kingshot 王國移民，不要只看戰力，
+          還要一起確認目標伺服器是否願意為你使用 Kingshot 特殊邀請、你需要怎麼調整才能符合 Kingshot 移民戰力限制，
+          以及目標聯盟是否真的適合你。能長久留下來的移民，最後通常不是由數字決定，而是由環境決定。
+        </p>
+      </section>
+
+      <section id="checklist">
+        <span class="anchor"></span>
+        <h2>移民前檢查清單</h2>
+
+        <div class="summary-grid">
+          <article class="card summary-card">
+            <div class="summary-label">第 1 步</div>
+            <div class="summary-value">確認組別</div>
+            <div class="summary-desc">先確認你的伺服器與目標伺服器是否屬於同一移民組別。</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">第 2 步</div>
+            <div class="summary-value">檢查戰力</div>
+            <div class="summary-desc">要一起看移民戰力限制，以及傷兵／預備兵是否計入。</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">第 3 步</div>
+            <div class="summary-value">整理狀態</div>
+            <div class="summary-desc">退出聯盟、確認非戰鬥狀態、解除管理權限等都要先處理。</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">第 4 步</div>
+            <div class="summary-value">事前溝通</div>
+            <div class="summary-desc">先和目標聯盟確認空位、優先順序以及需要哪一種邀請。</div>
+          </article>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <p class="mini-title">基本條件</p>
+            <ul class="clean">
+              <li>確認自己王國與目標王國是否屬於同一移民組別</li>
+              <li>符合城市中心等級條件</li>
+              <li>符合移民戰力限制</li>
+              <li>連傷兵與預備兵是否計入也一併確認</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">狀態檢查</p>
+            <ul class="clean">
+              <li>確認目前不是戰鬥狀態</li>
+              <li>確認沒有殘留外部衝擊部隊或特殊狀態</li>
+              <li>確認已退出聯盟</li>
+              <li>確認自己不是國王或移民管理者狀態</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">帳號 / 道具</p>
+            <ul class="clean">
+              <li>確認目標王國內已擁有的角色數量</li>
+              <li>備妥足夠的移民票</li>
+              <li>事先確認需要一般邀請還是特殊邀請</li>
+              <li>規劃好移民後超出資源保護上限的處理方式</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">事前溝通</p>
+            <ul class="clean">
+              <li>和目標聯盟管理者確認自己是否在優先名單內</li>
+              <li>確認自己加入後會擔任什麼位置</li>
+              <li>確認和既有成員的氛圍是否合得來</li>
+              <li>先熟悉伺服器規則與 NAP 規則</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="faq">
+        <span class="anchor"></span>
+        <h2>FAQ</h2>
+
+        <div class="grid">
+          <article class="card">
+            <p class="mini-title">只能在同一組別之間移民嗎？</p>
+            <p>
+              是的。基本上移民只能在相同進度組別內進行。
+              所以第一步一定是先確認目標王國是否與你的伺服器屬於同一組。
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">特殊邀請應該給誰？</p>
+            <p>
+              通常會優先分配給超過戰力限制的核心成員、對伺服器有明顯貢獻的玩家，
+              或者在聯盟整體計畫中不可或缺的人。
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">只要戰力高，優先順序就一定更高嗎？</p>
+            <p>
+              不一定。人品、溝通能力、與既有成員的契合度、伺服器適應力，
+              以及推薦人的可信度，很多時候都會實際影響優先順序。
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">選擇移民伺服器時，最重要的是什麼？</p>
+            <p>
+              是穩定性。比起戰力排名，更建議優先觀察伺服器氛圍、管理方式、
+              聯盟地位、被攻擊頻率，以及 NAP 是否穩定。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="seo-copy">
+        <h2>準備 Kingshot 王國移民時一定要知道的事</h2>
+        <p>
+          Kingshot 王國移民不是只要準備好移民票就能結束的內容。
+          實際上，還要一起配合伺服器間的氛圍差異、特殊邀請運用方式、與管理者的溝通、聯盟中的位置，
+          以及移民戰力限制的調整，才更容易得到理想結果。
+        </p>
+        <p>
+          所以，如果你正在找 Kingshot 移民指南，比起只看規則，
+          更重要的是培養判斷習慣：例如哪個伺服器較穩定、哪個聯盟適合自己、管理者是否值得信任。
+          特別是 Kingshot 特殊邀請與一般邀請，本身也能反映伺服器到底有多想要你加入，
+          因此到了移民季，很多時候關係與信任的影響，甚至會比數字本身更大。
+        </p>
+        <p>
+          這一頁整理了 Kingshot 王國移民條件、特殊邀請判斷方式、管理者視角的優先順序，以及實際移民者的檢查清單，是一篇偏實戰型的深度指南。
+          如果你正準備移民，建議依照本文順序，逐一確認自己的條件、目標伺服器、目標聯盟、移民票與戰力狀態。
+        </p>
+      </section>
+
+      <section id="related">
+        <h2>相關指南 / 頁面</h2>
+        <div class="related">
+          <a class="pill" href="/zh-tw/guides/hallofgovernors.html">最強領主指南</a>
+          <a class="pill" href="/zh-tw/guides/kingshot-f2p-guide.html">無課 / 小課成長指南</a>
+          <a class="pill" href="/zh-tw/guides/svs-guide.html">伺服器戰指南</a>
+          <a class="pill" href="/zh-tw/guides/gift-code.html">禮包碼指南</a>
+          <a class="pill" href="/zh-tw/guides/kingdom-migration-notice.html">王國移民公告整理</a>
+          <a class="pill" href="/zh-tw/heroes/">查看全部英雄</a>
+          <a class="pill" href="/zh-tw/buildings/">查看全部建築</a>
+          <a class="pill" href="/zh-tw/guides/">查看全部指南</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

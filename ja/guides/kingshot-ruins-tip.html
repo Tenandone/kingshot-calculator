@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="ja" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot 消えた遺跡 攻略 · 鉱脈占領、宮殿対応、スキルタイミングまとめ | Kingshot Data</title>
+  <meta name="description" content="Kingshot 消えた遺跡の攻略ガイド。鉱脈占領、チェーザレ守衛、不安定鉱脈の出現時間、宮殿対応、スキルツリーとタイミング、無課金・重課金向けの運用ルートまで要点だけを整理しました。" />
+  <meta name="keywords" content="Kingshot 消えた遺跡, Kingshot Lost Ruins, Kingshot 遺跡 攻略, Kingshot 鉱脈, Kingshot 宮殿, Kingshot スキルタイミング, Kingshot チェーザレ守衛, Kingshot 不安定鉱脈" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ja/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="zh-CN" href="https://kingshotdata.kr/zh-cn/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/kingshot-ruins-tip.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/kingshot-ruins-tip.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot 消えた遺跡 攻略 · 鉱脈占領、宮殿対応、スキルタイミングまとめ" />
+  <meta property="og:description" content="鉱脈占領、チェーザレ守衛、不安定鉱脈の時間、宮殿対応、スキルルートまで、消えた遺跡の要点だけを素早く整理したKingshot攻略。" />
+  <meta property="og:url" content="https://kingshotdata.kr/ja/guides/kingshot-ruins-tip.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Kingshot Data 代表画像" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kingshot 消えた遺跡 攻略 · 鉱脈占領、宮殿対応、スキルタイミングまとめ" />
+  <meta name="twitter:description" content="鉱脈占領、チェーザレ守衛、不安定鉱脈の時間、宮殿対応、スキルルートまで、消えた遺跡の要点だけを素早く整理したKingshot攻略。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/kingshotdata-og-v5.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --ok:#ecfdf5;
+      --warn:#fff7ed;
+      --note:#f8fafc;
+      --info:#eff6ff;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.68 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP","Noto Sans KR","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block; max-width:100%; height:auto}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex; align-items:center; gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(26px,3.4vw,40px);
+      line-height:1.18;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:32px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-side{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      padding:14px;
+    }
+    .hero-side h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-side ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .hero-side li{margin:6px 0}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note);
+    }
+    .callout.ok{background:var(--ok)}
+    .callout.warn{background:var(--warn)}
+    .callout.info{background:var(--info)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0; padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0; padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text); font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul, section.block ol{margin:8px 0; padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .pill-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .summary-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .summary-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:12px 14px;
+    }
+    .summary-card h3{
+      margin:0 0 8px;
+      font-size:14px;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    .foot{
+      margin:18px 0 8px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:var(--note);
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+
+    @media (max-width:940px){
+      .hero,
+      .grid,
+      .summary-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+    }
+
+    @media (max-width:600px){
+      h1{font-size:26px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot 消えた遺跡 攻略 · 鉱脈占領、宮殿対応、スキルタイミングまとめ",
+    "inLanguage":"ja",
+    "description":"Kingshot 消えた遺跡の攻略ガイド。鉱脈占領、チェーザレ守衛、不安定鉱脈の出現時間、宮殿対応、スキルツリーとタイミング、無課金・重課金向けの運用ルートまで要点だけを整理しました。",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ja/guides/kingshot-ruins-tip.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"},
+    "dateModified":"2025-09-06"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"ホーム","item":"https://kingshotdata.kr/ja/"},
+      {"@type":"ListItem","position":2,"name":"ガイド","item":"https://kingshotdata.kr/ja/guides/"},
+      {"@type":"ListItem","position":3,"name":"消えた遺跡 攻略","item":"https://kingshotdata.kr/ja/guides/kingshot-ruins-tip.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"消えた遺跡で無課金はどう動けばいいですか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"無課金や低戦力プレイヤーは、宮殿争いよりも1〜2レベル鉱脈の採集ループと安全な守衛処理に集中した方が、安定してスコアを伸ばしやすいです。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"消えた遺跡のスキル順はどう取ればいいですか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"基本のおすすめルートは右-右-左-左-右です。守衛撃破ボーナス、移動速度、占領ボーナス、採集効率、採集速度強化の順で取る形です。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"不安定鉱脈はいつ出ますか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"不安定鉱脈は通常、残り20・19・18分と10・9・8分の区間に出現します。出現通知が出たらすぐ全軍を投入するのが重要です。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- GA4 -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ja/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/kingshot-ruins-tip.html">EN</a>
+        <a href="/ko/guides/kingshot-ruins-tip.html">KO</a>
+        <a href="/ja/guides/kingshot-ruins-tip.html" aria-current="page">JA</a>
+        <a href="/zh-tw/guides/kingshot-ruins-tip.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概要</a>
+      <a href="#strategy">基本戦略</a>
+      <a href="#palace">宮殿</a>
+      <a href="#skills">スキル</a>
+      <a href="#unstable">不安定鉱脈</a>
+      <a href="#tips">コツ</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ja/">ホーム</a> <span class="muted">›</span>
+        <a href="/ja/guides/">ガイド</a> <span class="muted">›</span>
+        <span>消えた遺跡 攻略</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>Kingshot 消えた遺跡 攻略 · 鉱脈占領、宮殿対応、スキルタイミングまとめ</h1>
+          <p class="sub">
+            消えた遺跡は2週間ごとに開催される個人コンテンツだ。目的は青銅石をできるだけ多く確保すること。
+            鉱脈占領、チェーザレ守衛の処理、不安定鉱脈の出現時間、宮殿に入る判断、スキルルートだけ理解しておけば、安定して上位を狙える。
+          </p>
+
+          <div class="meta">
+            <span class="tag">消えた遺跡</span>
+            <span class="tag">個人コンテンツ</span>
+            <span class="tag">スキルルート</span>
+            <span class="tag">鉱脈優先</span>
+            <span class="tag">宮殿対応</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <h2>要点ひとつ</h2>
+          <ul>
+            <li>強いプレイヤーはLv3鉱脈と守衛、弱いプレイヤーはLv1〜2の安定採集ループが重要。</li>
+            <li>おすすめスキル順は右-右-左-左-右、重要タイミングは20/15/10/5分。</li>
+            <li>不安定鉱脈と手アイコンドロップの回収速度が最終順位を大きく左右する。</li>
+          </ul>
+        </aside>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>まずこれだけ覚えればいい</h3>
+            <ul>
+              <li><strong>目的は青銅石の最大採集</strong>。戦闘そのものより動線とタイミングが重要。</li>
+              <li><strong>強いプレイヤー</strong>はLv3鉱脈 + チェーザレ守衛 + 宮殿進入を狙う。</li>
+              <li><strong>弱いプレイヤー</strong>はLv1〜2鉱脈の反復占領と安全な守衛処理で点数を積む。</li>
+              <li><strong>不安定鉱脈</strong>が出る区間では即座に部隊を入れる必要がある。</li>
+              <li><strong>15分タイミングのスキル使用</strong>を正確に合わせるだけでも差が出る。</li>
+            </ul>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>よくある失敗パターン</h3>
+            <ul>
+              <li>開始3分で位置取りをしないせいで、微妙な鉱脈しか回れなくなる。</li>
+              <li>弱い英雄で守衛に無理に突っ込み、5分封鎖を受ける。</li>
+              <li>不安定鉱脈の通知を見逃し、重要な青銅石区間を丸ごと落とす。</li>
+              <li>宮殿を取れない戦力なのに無理に入って、採集ループまで崩れる。</li>
+            </ul>
+          </div>
+
+          <div class="pill-row" aria-label="Quick links">
+            <a class="pill" href="#overview">概要</a>
+            <a class="pill" href="#strategy">基本戦略</a>
+            <a class="pill" href="#palace">宮殿対応</a>
+            <a class="pill" href="#skills">スキルルート</a>
+            <a class="pill" href="#unstable">不安定鉱脈</a>
+            <a class="pill" href="#tips">重要ポイント</a>
+            <a class="pill" href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <nav class="toc card" aria-label="Table of contents">
+          <h2>目次</h2>
+          <ul>
+            <li><a href="#overview">1) 基本情報と目的</a></li>
+            <li><a href="#strategy">2) 戦力別の基本戦略</a></li>
+            <li><a href="#palace">3) 宮殿対応</a></li>
+            <li><a href="#skills">4) スキルツリーと使用タイミング</a></li>
+            <li><a href="#unstable">5) 不安定鉱脈のタイミング</a></li>
+            <li><a href="#tips">6) 実戦のコツと運用</a></li>
+            <li><a href="#summary">7) 最終まとめ</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="overview" class="block anchor">
+        <h2>1) 基本情報と目的</h2>
+        <p>
+          消えた遺跡は<strong>個人コンテンツ</strong>で、通常は<strong>2週間周期</strong>で開催され、<strong>30分間進行</strong>する。
+          最大の目的は青銅石をできるだけ多く集めて、<strong>領主ジェム成長用の資源</strong>を確保することだ。
+        </p>
+
+        <ul>
+          <li>鉱脈は<strong>Lv1〜Lv3</strong>で構成される。</li>
+          <li>レベルが高いほど青銅石の量は増えるが、防衛も強くなる。</li>
+          <li>鉱脈占領時には手アイコンの青銅石ドロップが発生し、<strong>誰でもすぐ拾える</strong>。</li>
+          <li>つまり単純な採集だけでなく、<strong>占領 + ドロップ回収</strong>まで含めた動線設計が重要になる。</li>
+        </ul>
+
+        <div class="callout info">
+          <h3>ひとことで言うと</h3>
+          <p>鉱脈をどれだけ長く持つかよりも、<strong>良い鉱脈をどれだけ速く何度も占領し回収するか</strong>の方が重要だ。</p>
+        </div>
+      </section>
+
+      <section id="strategy" class="block anchor">
+        <h2>2) 戦力別の基本戦略</h2>
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <h3>強いプレイヤーの運用</h3>
+            <ul>
+              <li>Lv3鉱脈の密集地を先に確保</li>
+              <li>チェーザレ守衛を反復処理</li>
+              <li>20分前にスキルLv5を目標</li>
+              <li>残り7分で宮殿進入準備</li>
+            </ul>
+          </div>
+
+          <div class="summary-card">
+            <h3>無課金 / 低戦力の運用</h3>
+            <ul>
+              <li>Lv1〜2鉱脈中心の安定ループ</li>
+              <li>安全な守衛だけ選んで処理</li>
+              <li>宮殿争いは基本的に回避</li>
+              <li>不安定鉱脈と手ドロップ回収に集中</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>開始3分の待機時間を使う</h3>
+        <p>
+          開始直後の3分待機時間は、ただ待つのではなく、<strong>Lv2〜3鉱脈と守衛の密集地帯</strong>を確認する時間に使うべきだ。
+          その後、都市移転で有利な位置を取れれば序盤の動線がかなり楽になる。
+        </p>
+
+        <div class="callout ok">
+          <h3>チェーザレ守衛の意味</h3>
+          <ul>
+            <li>倒すと<strong>スキル経験値</strong>を得られる。</li>
+            <li>負けるとその英雄は<strong>5分間使用不可</strong>になる。</li>
+            <li>だから強いアカウントは積極活用、弱いアカウントは選んで戦うのが基本。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="palace" class="block anchor">
+        <h2>3) 宮殿対応</h2>
+        <p>
+          宮殿は強いプレイヤーには大きな得点源だが、弱いプレイヤーには採集ループを壊す原因にもなる。
+          だからこそ、<strong>自分の戦力で宮殿に入るかどうかを事前に決めておく</strong>ことが大切だ。
+        </p>
+
+        <ul>
+          <li><strong>強いプレイヤー:</strong> 通常は残り7分前後から中央宮殿への進入を準備する。</li>
+          <li><strong>行軍加速50%</strong>を3〜4個使えば、距離やマップ次第で残り約2秒で到着可能。</li>
+          <li><strong>弱いプレイヤー:</strong> 宮殿争いは切って、鉱脈採集とドロップ回収に集中した方が安定する。</li>
+        </ul>
+
+        <div class="callout warn">
+          <h3>宮殿は必須ではない</h3>
+          <p>取れない戦力で無理に入ると、元々回っていた鉱脈ループと守衛ループまで崩れる。</p>
+        </div>
+      </section>
+
+      <section id="skills" class="block anchor">
+        <h2>4) スキルツリーと使用タイミング</h2>
+
+        <div class="callout ok">
+          <h3>おすすめスキル順</h3>
+          <p><strong>右 - 右 - 左 - 左 - 右</strong></p>
+        </div>
+
+        <ol>
+          <li><strong>Lv1 (右):</strong> 守衛撃破時に青銅石追加</li>
+          <li><strong>Lv2 (右):</strong> 部隊移動速度 +25%</li>
+          <li><strong>Lv3 (左):</strong> 占領成功時に青銅石追加（クールタイム1分）</li>
+          <li><strong>Lv4 (左):</strong> 採集効率 +15%</li>
+          <li><strong>Lv5 (右):</strong> 採集速度 +50%（60秒、クール5分）</li>
+        </ol>
+
+        <h3>最重要タイミング</h3>
+        <ul>
+          <li><strong>残り20分</strong></li>
+          <li><strong>残り15分</strong></li>
+          <li><strong>残り10分</strong></li>
+          <li><strong>残り5分</strong></li>
+        </ul>
+
+        <div class="callout info">
+          <h3>実戦ポイント</h3>
+          <ul>
+            <li>特に<strong>15分タイミング</strong>を正確に合わせるだけでも上位争いの力になる。</li>
+            <li>目標は<strong>20分前までにスキルLv5達成</strong>。</li>
+            <li>そのために序盤は守衛処理で経験値を早く集める必要がある。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="unstable" class="block anchor">
+        <h2>5) 不安定鉱脈のタイミング</h2>
+        <p>
+          不安定鉱脈は採集速度が速いため、消えた遺跡では<strong>最優先で確保すべき鉱脈</strong>だ。
+        </p>
+
+        <ul>
+          <li>出現区間は通常、<strong>残り20・19・18分</strong> / <strong>10・9・8分</strong>。</li>
+          <li>出現通知が出たら、できるだけ早く全軍を投入したい。</li>
+          <li>占領後は手アイコンのドロップまで回収して初めて実際の得になる。</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>不安定鉱脈の基本公式</h3>
+          <p><strong>出現確認 → 即全軍投入 → 占領 → 手ドロップ回収 → 次の鉱脈へ回転</strong></p>
+        </div>
+      </section>
+
+      <section id="tips" class="block anchor">
+        <h2>6) 実戦のコツと運用</h2>
+
+        <h3>動線は円形ループで考える</h3>
+        <p>
+          鉱脈、守衛、手アイコンドロップを別々に見るのではなく、ひとつの<strong>円形移動ループ</strong>として考えるといい。
+          一か所に居続けるより、効率の良い循環構造を作った方が点数は伸びやすい。
+        </p>
+
+        <h3>弱い英雄は戦闘より採集</h3>
+        <p>
+          負ける可能性がある英雄は守衛に当てず、<strong>採集とドロップ回収</strong>に回した方がいい。
+          5分封鎖を受けると全体のループが崩れやすい。
+        </p>
+
+        <h3>過熱地帯はすぐ捨てる</h3>
+        <p>
+          競争が激しい場所で粘るより、隣の代替鉱脈へ素早く移った方が効率的なことが多い。
+          特に無課金は<strong>戦うことより空き場所の先取り</strong>が大事だ。
+        </p>
+
+        <div class="callout warn">
+          <h3>重要な注意点</h3>
+          <p>チェーザレ守衛に敗北すると、その英雄は5分間使用できない。主力編成で無理な交戦を仕掛けないことが重要。</p>
+        </div>
+      </section>
+
+      <section id="summary" class="block anchor">
+        <h2>7) 最終まとめ</h2>
+        <ul>
+          <li><strong>強いプレイヤー:</strong> Lv3鉱脈 + 守衛 + 残り7分で宮殿進入</li>
+          <li><strong>弱いプレイヤー:</strong> Lv1〜2鉱脈の安定採集ループ + 安全な守衛処理</li>
+          <li><strong>スキル順:</strong> 右 - 右 - 左 - 左 - 右</li>
+          <li><strong>スキルタイミング:</strong> 20 / 15 / 10 / 5分</li>
+          <li><strong>核心ポイント:</strong> 不安定鉱脈通知と手アイコンドロップ回収速度</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>本当のひとこと結論</h3>
+          <p><strong>右-右-左-左-右</strong>と<strong>20/15/10/5分</strong>だけ確実に覚えておけば、消えた遺跡の運用品質はかなり上がる。</p>
+        </div>
+      </section>
+
+      <section id="faq" class="block anchor">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>消えた遺跡で無課金はどう動けばいいですか？</summary>
+          <p>無課金や低戦力プレイヤーは、宮殿争いよりも1〜2レベル鉱脈の採集ループと安全な守衛処理に集中した方が、安定してスコアを伸ばしやすい。</p>
+        </details>
+
+        <details>
+          <summary>消えた遺跡のスキル順はどう取ればいいですか？</summary>
+          <p>基本のおすすめルートは右-右-左-左-右だ。守衛撃破ボーナス、移動速度、占領ボーナス、採集効率、採集速度強化の順で取る形になる。</p>
+        </details>
+
+        <details>
+          <summary>不安定鉱脈はいつ出ますか？</summary>
+          <p>不安定鉱脈は通常、残り20・19・18分、そして10・9・8分の区間に出現する。通知が出たら即座に全軍を投入したい。</p>
+        </details>
+      </section>
+
+      <section class="block" id="related">
+        <h2>関連ガイド</h2>
+        <div class="pill-row">
+          <a class="pill" href="/ja/guides/kingshot-bearhunt.html">Bear Hunt 高得点ガイド</a>
+          <a class="pill" href="/ja/guides/hallofgovernors.html">最強領主ガイド</a>
+          <a class="pill" href="/ja/guides/kingshot-f2p-guide.html">無課金 / 微課金 成長ガイド</a>
+          <a class="pill" href="/ja/guides/">ガイド一覧</a>
+        </div>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        この文書は公式ではなく、実際のプレイ経験をもとに整理したファンガイドです。
+        サーバー環境、競争強度、アカウント戦力によって最適ルートは変わる場合があります。
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>三聯盟爭奪戰 勝利指南 | Tri-Alliance Clash 攻略</title>
+  <meta name="description" content="Kingshot 三聯盟爭奪戰(Tri-Alliance Clash)勝利指南。整理地圖結構、4階段戰鬥流程、20分鐘要塞、40分鐘神殿、能量運營、隊伍配置與 FAQ，一頁看懂實戰重點。" />
+  <meta name="keywords" content="Kingshot 三聯盟爭奪戰, Tri-Alliance Clash, Kingshot TAC 攻略, Kingshot 聯盟戰, Kingshot 要塞攻略, Kingshot 神殿攻略" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="zh-CN" href="https://kingshotdata.kr/zh-cn/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/Tri-Alliance-Clash.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/Tri-Alliance-Clash.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="三聯盟爭奪戰 勝利指南 | Tri-Alliance Clash 攻略" />
+  <meta property="og:description" content="整理地圖結構、4階段戰鬥流程、20分鐘要塞、40分鐘神殿、能量運營、隊伍配置與 FAQ 的 Kingshot 三聯盟爭奪戰實戰指南。" />
+  <meta property="og:url" content="https://kingshotdata.kr/zh-tw/guides/Tri-Alliance-Clash.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="zh_TW" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --line:#e7ecf5;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+      --warn:#b45309;
+      --warn-bg:rgba(245,158,11,.08);
+
+      --radius:16px;
+      --radius2:14px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.7 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(26px,4vw,40px);
+      line-height:1.15;
+      color:var(--text);
+    }
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:16px 0 0;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .k{font-weight:900;color:var(--text)}
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    h2{
+      margin:0 0 10px;
+      font-size:clamp(20px,2.4vw,28px);
+      color:var(--accent);
+      line-height:1.25;
+    }
+    h3{
+      font-size:clamp(16px,2vw,20px);
+      margin:18px 0 8px;
+      line-height:1.35;
+    }
+    p{margin:8px 0}
+
+    .toc{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .toc strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:15px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin:12px 0;
+    }
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      background:#fff;
+      padding:14px;
+    }
+    .card .title{
+      margin:0 0 6px;
+      font-weight:900;
+    }
+
+    .note,.callout{
+      font-size:14px;
+      color:var(--muted);
+      background:var(--warn-bg);
+      padding:12px 14px;
+      border-left:4px solid var(--warn);
+      border-radius:10px;
+      margin:16px 0 0;
+    }
+
+    .imgbox{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:#fff;
+      box-shadow:var(--shadow);
+      padding:12px;
+      margin-top:22px;
+    }
+    figure{margin:0}
+    figure img{
+      width:100%;
+      max-width:100%;
+      height:auto;
+      border-radius:12px;
+      display:block;
+      border:1px solid var(--border);
+    }
+    figcaption{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:8px;
+      line-height:1.6;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:10px 0 0;
+    }
+    th,td{
+      border:1px solid var(--border);
+      padding:10px;
+      vertical-align:top;
+    }
+    th{
+      background:#f8fafc;
+      text-align:left;
+      font-weight:900;
+    }
+
+    ul{margin:8px 0;padding-left:18px}
+    li{margin:6px 0}
+
+    .hr{
+      height:1px;
+      background:var(--border);
+      margin:18px 0;
+    }
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--text);
+      font-size:13px;
+      font-weight:800;
+      text-decoration:none;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+        padding:10px 16px 12px;
+        margin:0 -16px;
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -16px;
+        padding:6px 16px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      .grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section,.toc,.imgbox{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"三聯盟爭奪戰 勝利指南 | Tri-Alliance Clash 攻略",
+    "inLanguage":"zh-TW",
+    "description":"Kingshot 三聯盟爭奪戰(Tri-Alliance Clash)提升勝率的實戰運營指南。",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/zh-tw/guides/Tri-Alliance-Clash.html"
+    },
+    "author":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/Tri-Alliance-Clash.html">EN</a>
+        <a href="/ko/guides/Tri-Alliance-Clash.html">KO</a>
+        <a href="/ja/guides/Tri-Alliance-Clash.html">JA</a>
+        <a href="/zh-tw/guides/Tri-Alliance-Clash.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#summary">規則摘要</a>
+      <a href="#stages">戰鬥階段</a>
+      <a href="#map">地圖結構</a>
+      <a href="#setup">事前準備</a>
+      <a href="#team">隊伍編成</a>
+      <a href="#strategy">運營策略</a>
+      <a href="#tips">實戰技巧</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/guides/">指南</a> <span class="muted">›</span>
+        <span>三聯盟爭奪戰</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>三聯盟爭奪戰 勝利指南</h1>
+          <p class="subtitle">這是 3 個聯盟透過佔領建築來競爭分數的伺服器活動。1 小時戰鬥結束時，累積分數最高的聯盟獲勝。</p>
+
+          <div class="meta">
+            <span class="badge"><span class="k">核心</span> 能量管理 · 駐守(隊長) · 20分鐘要塞 · 40分鐘神殿</span>
+            <span class="badge"><span class="k">戰鬥時間</span> 開戰後 1 小時</span>
+            <span class="badge"><span class="k">戰鬥日</span> 選定時段的星期六</span>
+          </div>
+
+          <div class="jump">
+            <a href="#summary">規則摘要</a><span class="dotsep">•</span>
+            <a href="#stages">戰鬥階段</a><span class="dotsep">•</span>
+            <a href="#map">地圖結構</a><span class="dotsep">•</span>
+            <a href="#strategy">運營策略</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="toc">
+        <strong>目錄</strong>
+        <ul>
+          <li><a href="#summary">一眼看懂規則摘要</a></li>
+          <li><a href="#stages">戰鬥階段（4 階段）</a></li>
+          <li><a href="#map">地圖結構與關鍵重點</a></li>
+          <li><a href="#setup">事前準備（報名 / 人員 / 語音）</a></li>
+          <li><a href="#team">推薦隊伍編成</a></li>
+          <li><a href="#strategy">分階段運營策略</a></li>
+          <li><a href="#tips">實戰技巧（能量 / 回復 / 再進場）</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <section class="imgbox" id="map">
+        <figure>
+          <img src="/img/tri_alliance_clash_map.png" alt="Tri-Alliance Clash 規則與地圖摘要圖片" />
+          <figcaption>
+            這張地圖整理了核心目標（中繼樞紐 / 要塞 / 潮汐神殿 / 天空進入路線）。座標（A1/B1/C1、A24/B24/C24 等）以戰場內標示為準。
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="summary" class="anchor">
+        <h2>一眼看懂規則摘要</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">參戰條件（摘要）</p>
+            <ul>
+              <li>聯盟戰力前 20 名</li>
+              <li>自動：第 1 軍團基礎解鎖</li>
+              <li>第 2 軍團解鎖示例：聯盟 Lv.6 以上 + 累計登入 40 人</li>
+              <li>軍團：<span class="k">參戰者 + 候補者合計 15 人以上</span>時可將第 2 軍團獨立計算</li>
+              <li>個人：已加入聯盟 + 城市中心 Lv.16 以上，超過 5 天未登入可能受限</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">基本規則（運營）</p>
+            <ul>
+              <li>投票 / 報名 / 配對 / 戰鬥依伺服器日曆進行</li>
+              <li>R4 以上可調整報名與參戰人數</li>
+              <li>最多 30 人參戰 + 10 名候補（依伺服器規則可能不同）</li>
+              <li>每個聯盟最多可用 2 個軍團在不同戰場同時作戰</li>
+              <li>每位領主可投入<span class="k">共 3 支部隊</span>進場</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout">
+          <p><span class="k">重點</span> 人員報名會直接影響勝負。只報名真正能實際參加的人。</p>
+        </div>
+      </section>
+
+      <section id="stages" class="anchor">
+        <h2>戰鬥階段（4 階段）</h2>
+
+        <table aria-label="Tri-Alliance Clash stage summary">
+          <thead>
+            <tr>
+              <th>階段</th>
+              <th>時間</th>
+              <th>核心目標</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1) 準備</td>
+              <td>3 分鐘</td>
+              <td>分配角色、確認移動路線、整理開局佔領動線</td>
+            </tr>
+            <tr>
+              <td>2) 擴張佔領</td>
+              <td>17 分鐘</td>
+              <td>先占己方區域 + 奪取部分敵方小型建築（要塞仍受保護）</td>
+            </tr>
+            <tr>
+              <td>3) 要塞爭奪</td>
+              <td>20 分鐘</td>
+              <td><span class="k">A24 / B24 / C24</span> 開放。要塞每分鐘得分很高，是勝負關鍵點</td>
+            </tr>
+            <tr>
+              <td>4) 天空攻勢</td>
+              <td>20 分鐘</td>
+              <td>40 分鐘開放 <span class="k">潮汐神殿（天空）</span>。首占 + 持有分決定最終勝負</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <p><span class="k">關鍵時間點</span> 20 分鐘（要塞）/ 40 分鐘（天空）。必須把能量留到這兩個時間點，勝率才會明顯上升。</p>
+        </div>
+      </section>
+
+      <section id="setup" class="anchor">
+        <h2>事前準備（報名 / 人員 / 語音）</h2>
+
+        <h3>1) 報名</h3>
+        <ul>
+          <li>只登記真正能參加的人。虛報名額會同時拖累配對與實戰。</li>
+          <li>建議讓 R4 以上成員到場，因為佔領後可任命 <span class="k">隊長</span>，對能量恢復更有利。</li>
+        </ul>
+
+        <h3>2) 語音頻道</h3>
+        <ul>
+          <li>建議使用 Discord 語音，至少讓 1～3 位核心指揮能即時溝通。</li>
+          <li>即時語音的速度遠快於打字，在要塞與天空的關鍵時點差距非常明顯。</li>
+        </ul>
+      </section>
+
+      <section id="team" class="anchor">
+        <h2>推薦隊伍編成</h2>
+        <p>目標是同時運行得分生產（佔領 / 持有）與關鍵目標防守。</p>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">進攻隊</p>
+            <ul>
+              <li>進入敵區 → 奪取建築 → 20 分鐘進攻要塞 → 40 分鐘衝刺天空</li>
+              <li>優先配置最強部隊</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">防守隊 1 / 2</p>
+            <ul>
+              <li>防守己方關鍵路線與中繼樞紐</li>
+              <li>尤其 20 分鐘後要以守住己方要塞為優先</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">機動隊（Floaters）</p>
+            <ul>
+              <li>負責備援 / 增援，依情況支援進攻或防守</li>
+              <li>預留能量，專門應對戰況突變</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">英雄 / 部隊選擇</p>
+            <ul>
+              <li>每位領主運用 3 支部隊（共 9 名英雄）</li>
+              <li>最強的 1 支部隊也可以保留給要塞 / 天空關鍵時點使用</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="strategy" class="anchor">
+        <h2>分階段運營策略</h2>
+
+        <h3>階段 1～2（0～20 分鐘）：準備 + 擴張佔領</h3>
+        <ul>
+          <li>開局先占己方建築，並拿下中繼樞紐（Transit Hubs）。</li>
+          <li>進攻隊去奪取部分敵方小型建築，搶分數與路線優勢。</li>
+          <li>前期目標是建立每分鐘得分優勢。</li>
+          <li><span class="k">不要過度消耗能量：</span>建議為 20 分鐘時點保留 30～40% 能量。</li>
+        </ul>
+
+        <h3>階段 3（20～40 分鐘）：要塞</h3>
+        <ul>
+          <li>20 分鐘時要塞（A24 / B24 / C24）開放。</li>
+          <li>優先順位 1：<span class="k">守住己方要塞</span>。如果失守，分差可能會被迅速翻盤。</li>
+          <li>優先順位 2：有機會就去 <span class="k">奪取敵方要塞</span>，進一步擴大差距。</li>
+          <li>機動隊需要立即補到吃緊區域。</li>
+        </ul>
+
+        <h3>階段 4（40～60 分鐘）：天空（潮汐神殿）</h3>
+        <ul>
+          <li>40 分鐘時開放天空（潮汐神殿）。<span class="k">首占積分</span>很高，所以衝點時機非常重要。</li>
+          <li>進攻隊負責神殿衝刺 / 佔領維持，防守隊負責守住進入路線（A29 / B29 / C29）。</li>
+          <li>機動隊負責切斷敵方增援，並重新奪回或補強連結建築與神殿防守。</li>
+        </ul>
+
+        <div class="callout">
+          <p><span class="k">勝利公式</span> 同時做到（守住要塞）+（首占天空）+（守住天空）+（防守進入路線），勝率會大幅上升。</p>
+        </div>
+      </section>
+
+      <section id="tips" class="anchor">
+        <h2>實戰技巧（能量 / 回復 / 再進場）</h2>
+
+        <h3>能量管理</h3>
+        <ul>
+          <li>能量會消耗在移動、佔領、衝鋒、撤退、立即復活等行動上。</li>
+          <li>佔領後任命 <span class="k">隊長</span>，能在能量恢復上取得優勢。</li>
+        </ul>
+
+        <h3>再進場 / 增益</h3>
+        <ul>
+          <li>離開戰場後，會經過冷卻時間才能再進場。某些規則下常見是 12 分鐘。</li>
+          <li>除了部分行軍速度 / 容量類效果外，多數增益通常仍有效，最終請以伺服器規則為準。</li>
+        </ul>
+
+        <h3>受傷 / 回復運營</h3>
+        <ul>
+          <li>如果損傷太大，先撤到後方建築回復，再重新進場，往往比立刻復活更划算。</li>
+          <li>回血 / 徵兵最好卡在交戰暫時中斷的短空檔內進行，效率更高。</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="anchor">
+        <h2>FAQ</h2>
+
+        <h3>Q. 為什麼每個隊伍的 Ruin Clusters 數量看起來不一樣？</h3>
+        <p>
+          地圖平衡通常不是單純追求數量完全一致，而是會把路線距離、中繼樞紐的可達性、要塞防守難度、天空進入穩定性一起考慮。
+          所以看起來遺跡群較多的一側，可能也同時承擔更高的防守壓力，或更難管理關鍵連結點。
+          真正的勝負通常不是由遺跡數量決定，而是由 <span class="k">20 分鐘要塞</span> 與 <span class="k">40 分鐘天空</span> 的運營決定。
+        </p>
+
+        <div class="hr"></div>
+
+        <h3>Q. 這個活動裡最重要的一件事是什麼？</h3>
+        <p>
+          <span class="k">能量</span>。如果前期就把能量花光，20 分鐘 / 40 分鐘這兩個關鍵時點就什麼也做不了。
+          透過佔領後任命隊長、明確分工、機動隊補位來保留能量，才是勝利的核心。
+        </p>
+      </section>
+
+      <section id="related">
+        <h2>一起看會更有幫助的指南</h2>
+        <div class="related">
+          <a class="pill" href="/zh-tw/guides/viking.html">維京復仇攻略</a>
+          <a class="pill" href="/zh-tw/guides/truegold.html">真金消耗表</a>
+          <a class="pill" href="/zh-tw/guides/topup-guide.html">儲值指南</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

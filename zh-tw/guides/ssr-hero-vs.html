@@ -1,0 +1,1855 @@
+<!doctype html>
+<html lang="zh-Hant" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot SSR 英雄比較表 · 含專屬武器數值比較計算器 | Kingshot Data</title>
+  <meta name="description" content="Kingshot SSR 英雄比較表。可依步兵、騎兵、弓兵分類，比較含專屬武器在內的 SSR 英雄數值，並一次查看攻擊、防禦、生命、破壞力與總數值差異。" />
+  <meta name="keywords" content="Kingshot SSR 英雄比較表, Kingshot SSR 英雄比較計算器, Kingshot 英雄比較, Kingshot hero compare, Kingshot 專屬武器比較, Kingshot 步兵比較, Kingshot 騎兵比較, Kingshot 弓兵比較, Kingshot SSR 推薦" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/guides/ssr-hero-vs.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/ssr-hero-vs.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/ssr-hero-vs.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/ssr-hero-vs.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/ssr-hero-vs.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot SSR 英雄比較表 · 含專屬武器數值比較計算器" />
+  <meta property="og:description" content="可依步兵、騎兵、弓兵分類，比較含專屬武器在內的 SSR 英雄，快速查看攻擊、防禦、生命、破壞力與總數值差異。" />
+  <meta property="og:url" content="https://kingshotdata.kr/zh-tw/guides/ssr-hero-vs.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guide/yang.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Kingshot SSR 英雄比較代表圖片" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kingshot SSR 英雄比較表 · 含專屬武器數值比較計算器" />
+  <meta name="twitter:description" content="可依步兵、騎兵、弓兵分類，比較含專屬武器在內的 SSR 英雄，快速查看攻擊、防禦、生命、破壞力與總數值差異。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guide/yang.webp" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guide/yang.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --ok:#ecfdf5;
+      --warn:#fff7ed;
+      --note:#f8fafc;
+      --info:#eff6ff;
+      --danger:#ef4444;
+      --success:#22c55e;
+      --total:#b45309;
+      --total-bg:#fff7ed;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","Noto Sans CJK TC","Microsoft JhengHei","PingFang TC","Heiti TC",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      justify-content:flex-end;
+    }
+    nav.lang a{
+      width:64px;
+      min-width:64px;
+      height:36px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:800;
+      text-align:center;
+      white-space:nowrap;
+      flex:0 0 64px;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:900;
+      border-color:#c7d2fe;
+      background:#f8fbff;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px;
+      height:160px;
+      object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 8px;font-size:28px;line-height:1.15}
+    .sub{margin:0;color:var(--muted)}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .jump{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px;font-size:20px}
+    section h3{margin:0 0 10px;font-size:16px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(245,158,11,.35);
+      background:rgba(245,158,11,.08);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px;height:18px;flex:0 0 18px;
+      margin-top:2px;color:#b45309;
+    }
+
+    .seo-copy{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .lane{
+      margin-top:18px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      overflow:hidden;
+    }
+    .lane-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border-bottom:1px solid var(--border);
+      background:#fbfcff;
+    }
+    .lane-head h3{
+      margin:0;
+      font-size:18px;
+    }
+
+    .compare-wrap{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      padding:16px;
+    }
+
+    .hero-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:14px;
+    }
+    .hero-card.is-better{
+      border-color:#c7d2fe;
+      box-shadow:0 0 0 3px rgba(37,99,235,.08);
+    }
+
+    .hero-top{
+      display:grid;
+      grid-template-columns:96px 1fr;
+      gap:14px;
+      align-items:start;
+    }
+    .portrait{
+      width:96px;height:96px;object-fit:cover;
+      border-radius:12px;border:1px solid var(--border);
+      background:#f8fafc;
+    }
+
+    .title-row{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:8px;
+    }
+
+    .select{
+      min-width:220px;
+      padding:9px 10px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      font-size:14px;
+      width:100%;
+      background:var(--panel);
+      color:var(--text);
+    }
+
+    .meta-line{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .mini-badge{
+      display:inline-flex;
+      align-items:center;
+      height:28px;
+      padding:0 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .control-box{
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfcff;
+      padding:12px;
+    }
+    .control-box h4{
+      margin:0 0 10px;
+      font-size:14px;
+    }
+
+    .control-line{margin-top:10px}
+    .control-line:first-child{margin-top:0}
+
+    .line-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+      font-size:13px;
+    }
+    .line-head strong{font-size:13px}
+    .val-badge{
+      display:inline-flex;
+      align-items:center;
+      height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-size:12px;
+      font-weight:900;
+    }
+
+    input[type="range"]{
+      width:100%;
+      accent-color:var(--brand);
+    }
+
+    .stars{
+      display:flex;
+      gap:4px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .star{
+      width:24px;height:24px;display:inline-block;
+      background-size:contain;background-repeat:no-repeat;background-position:center;
+    }
+    .star[data-lv="0"]{background-image:url('/img/star/0.webp')}
+    .star[data-lv="1"]{background-image:url('/img/star/1.webp')}
+    .star[data-lv="2"]{background-image:url('/img/star/2.webp')}
+    .star[data-lv="3"]{background-image:url('/img/star/3.webp')}
+    .star[data-lv="4"]{background-image:url('/img/star/4.webp')}
+    .star[data-lv="5"]{background-image:url('/img/star/5.webp')}
+    .star[data-lv="6"]{background-image:url('/img/star/6.webp')}
+
+    .gear-wrap{
+      display:grid;
+      grid-template-columns:52px 1fr;
+      gap:10px;
+      align-items:center;
+      margin-top:8px;
+    }
+    .gear-icon{
+      width:52px;height:52px;object-fit:cover;
+      border-radius:10px;border:1px solid var(--border);
+      background:#f8fafc;
+    }
+
+    .result-box{
+      margin:0 16px 16px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .result-head{
+      padding:14px 16px;
+      border-bottom:1px solid var(--border);
+      background:#fbfcff;
+    }
+    .result-head h4{
+      margin:0 0 6px;
+      font-size:17px;
+    }
+    .result-head p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .table-scroll{
+      width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    .result-table{
+      width:100%;
+      min-width:680px;
+      border-collapse:collapse;
+    }
+    .result-table th,
+    .result-table td{
+      padding:14px 16px;
+      border-bottom:1px solid var(--border);
+      text-align:center;
+      font-size:14px;
+      vertical-align:middle;
+    }
+    .result-table th:first-child,
+    .result-table td:first-child{
+      text-align:left;
+      font-weight:800;
+      position:sticky;
+      left:0;
+      background:#fff;
+      z-index:1;
+    }
+    .result-table thead th:first-child{
+      z-index:2;
+    }
+    .result-table tbody tr:last-child td{border-bottom:0}
+    .result-table .neg{color:var(--danger);font-weight:900}
+    .result-table .pos{color:var(--success);font-weight:900}
+    .result-table .total-row td{
+      font-weight:1000;
+      background:#fffdf5;
+    }
+    .result-table .total-row td:first-child{
+      background:#fffdf5;
+    }
+
+    .hero-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:800;
+      justify-content:center;
+    }
+    .hero-chip img{
+      width:32px;
+      height:32px;
+      border-radius:999px;
+      object-fit:cover;
+      border:1px solid var(--border);
+      background:#f8fafc;
+      flex:0 0 32px;
+    }
+
+    .mobile-cards{
+      display:none;
+      padding:12px;
+      gap:10px;
+      background:#fff;
+    }
+    .mobile-compact-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      overflow:hidden;
+    }
+    .mobile-compact-card.is-total{
+      border-color:#fed7aa;
+      background:linear-gradient(180deg,#fffaf3 0%, #ffffff 100%);
+    }
+    .mobile-compact-head{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      background:#fbfcff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .mobile-compact-card.is-total .mobile-compact-head{
+      background:var(--total-bg);
+    }
+    .mobile-compact-head strong{
+      font-size:15px;
+    }
+    .mobile-diff-badge{
+      font-size:12px;
+      font-weight:900;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      white-space:nowrap;
+    }
+    .mobile-diff-badge.pos{
+      color:var(--success);
+      border-color:#bbf7d0;
+      background:#f0fdf4;
+    }
+    .mobile-diff-badge.neg{
+      color:var(--danger);
+      border-color:#fecaca;
+      background:#fef2f2;
+    }
+    .mobile-compact-body{
+      padding:12px 14px;
+      display:grid;
+      gap:10px;
+    }
+    .mobile-hero-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .mobile-hero{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-width:0;
+      font-weight:900;
+    }
+    .mobile-hero img{
+      width:28px;
+      height:28px;
+      border-radius:999px;
+      object-fit:cover;
+      border:1px solid var(--border);
+      background:#f8fafc;
+      flex:0 0 28px;
+    }
+    .mobile-hero span{
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .mobile-value{
+      font-weight:1000;
+      text-align:right;
+      white-space:nowrap;
+      flex:0 0 auto;
+    }
+    .mobile-compact-card.is-total .mobile-value{
+      color:var(--total);
+    }
+
+    .faq-list{
+      display:grid;
+      gap:12px;
+      margin-top:8px;
+    }
+    .faq-item{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+    }
+    .faq-item h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .faq-item p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .related{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .pill{
+      display:inline-flex;align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    ul.clean{margin:0;padding-left:18px}
+    ul.clean li{margin:6px 0}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width: 900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        flex-wrap:wrap;
+        align-items:flex-start;
+      }
+      .brand{width:100%}
+      nav.lang{
+        width:100%;
+        justify-content:flex-start;
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+      .compare-wrap{grid-template-columns:1fr}
+      .hero-top{grid-template-columns:1fr}
+      .result-table th,
+      .result-table td{padding:12px 10px;font-size:13px}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+      .gear-wrap{grid-template-columns:44px 1fr}
+      .gear-icon{width:44px;height:44px}
+      .portrait{width:84px;height:84px}
+      .lane-head{padding:12px 14px}
+      .compare-wrap{padding:14px}
+      .result-box{margin:0 14px 14px}
+      .result-head{padding:12px 14px}
+      .table-scroll{display:none}
+      .mobile-cards{display:grid}
+      nav.lang{gap:6px}
+      nav.lang a{
+        width:58px;
+        min-width:58px;
+        flex:0 0 58px;
+        height:34px;
+        font-size:12px;
+      }
+      .mobile-compact-head{
+        padding:11px 12px;
+      }
+      .mobile-compact-body{
+        padding:11px 12px;
+      }
+      .mobile-diff-badge{
+        font-size:11px;
+        padding:5px 8px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot SSR 英雄比較表 · 含專屬武器數值比較計算器",
+    "description":"Kingshot SSR 英雄比較表。可依步兵、騎兵、弓兵分類，比較含專屬武器在內的 SSR 英雄數值，並一次查看攻擊、防禦、生命、破壞力與總數值差異。",
+    "inLanguage":"zh-Hant",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/zh-tw/guides/ssr-hero-vs.html"
+    },
+    "author":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Kingshot Data",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+      }
+    },
+    "image":"https://kingshotdata.kr/img/guide/yang.webp"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Kingshot SSR 英雄比較表是依什麼基準計算的？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"攻擊與防禦依英雄遠征數值計算，生命與破壞力則依專屬武器屬性反映。總數值為攻擊、防禦、生命、破壞力四項的合計。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"一定要比較同兵種的英雄嗎？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"是的。本頁面是為了讓步兵、騎兵、弓兵 SSR 英雄能在各自相同兵種內進行比較而製作。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"會反映專屬武器等級嗎？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"會。支援反映專屬武器從 0 強到 10 強，並套用到生命與破壞力比較中。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"總數值較高就一定是更好的英雄嗎？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"不一定。總數值只是快速比較用指標，實際運用時還要一併考慮技能組成、戰鬥情境、隊伍搭配與培養優先順序。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/ssr-hero-vs.html">EN</a>
+        <a href="/ko/guides/ssr-hero-vs.html">KO</a>
+        <a href="/ja/guides/ssr-hero-vs.html">JA</a>
+        <a href="/zh-tw/guides/ssr-hero-vs.html" aria-current="page">TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概要</a>
+      <a href="#infantry">步兵</a>
+      <a href="#cavalry">騎兵</a>
+      <a href="#archer">弓兵</a>
+      <a href="#guide">使用指南</a>
+      <a href="#faq">FAQ</a>
+      <a href="#related">相關</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/guides/">指南</a> <span class="muted">›</span>
+        <span>SSR 英雄比較表</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/guide/yang.webp" alt="Kingshot SSR 英雄比較表代表圖片" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>Kingshot SSR 英雄比較表</h1>
+          <p class="sub">
+            這是一個可依步兵、騎兵、弓兵分類，比較含專屬武器在內的 SSR 英雄數值的頁面。
+            可以一次查看攻擊、防禦、生命、破壞力與總數值差異。
+          </p>
+          <div class="quote">
+            本頁面是用來比較相同兵種的 SSR 英雄。也會一併反映專屬武器 0 強到 10 強。
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">概要</a><span class="dotsep">•</span>
+            <a href="#infantry">步兵</a><span class="dotsep">•</span>
+            <a href="#cavalry">騎兵</a><span class="dotsep">•</span>
+            <a href="#archer">弓兵</a><span class="dotsep">•</span>
+            <a href="#faq">FAQ</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>概要</h2>
+        <p>
+          這個 Kingshot SSR 英雄比較表，是為了讓你能在相同兵種內快速比較步兵、騎兵、弓兵英雄而製作的數值比較頁面。
+          攻擊與防禦以英雄遠征數值為基準，生命與破壞力則依專屬武器屬性計算。
+        </p>
+        <p class="seo-copy">
+          當你在 Kingshot 裡猶豫該先培養哪一位 SSR 英雄時，可以透過同兵種比較，快速看出含專屬武器在內的數值差異，進而決定培養優先順序。
+          特別是連專屬武器強化階段也一起反映，因此很適合拿來作為培養方向判斷時的快速比較工具。
+        </p>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>說明：</strong>
+            攻擊 / 防禦以英雄遠征數值為基準，生命 / 破壞力以專屬武器屬性為基準。
+            總數值是這四項的單純合計，適合用於快速比較。
+          </div>
+        </div>
+      </section>
+
+      <section id="infantry">
+        <span class="anchor"></span>
+        <div class="lane">
+          <div class="lane-head">
+            <h3>步兵</h3>
+          </div>
+
+          <div class="compare-wrap">
+            <article class="hero-card" id="card-infantry-A">
+              <div class="hero-top">
+                <img class="portrait" id="portrait-infantry-A" src="" alt="步兵英雄 1 頭像" width="96" height="96" />
+                <div>
+                  <div class="title-row">
+                    <select class="select hero-select" data-lane="infantry" data-side="A" aria-label="選擇步兵英雄 1"></select>
+                  </div>
+                  <div class="meta-line">
+                    <span class="mini-badge" id="gen-infantry-A">世代 -</span>
+                    <span class="mini-badge">步兵</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-box">
+                <h4>英雄階段</h4>
+                <div class="control-line">
+                  <div class="line-head">
+                    <strong>星級 / 階段</strong>
+                    <span class="val-badge" id="level-label-infantry-A">0★ T1</span>
+                  </div>
+                  <input type="range" min="1" max="30" step="1" value="1" class="hero-level" data-lane="infantry" data-side="A" aria-label="步兵英雄 1 階段" />
+                  <div class="stars" id="stars-infantry-A" aria-label="步兵英雄 1 星級">
+                    <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-box">
+                <h4>專屬武器</h4>
+                <div class="gear-wrap">
+                  <img class="gear-icon" id="gear-icon-infantry-A" src="" alt="步兵專屬武器 1" width="52" height="52" />
+                  <div>
+                    <div class="line-head" style="margin-bottom:6px">
+                      <strong id="gear-name-infantry-A">專屬武器</strong>
+                      <span class="val-badge" id="gear-label-infantry-A">0強</span>
+                    </div>
+                    <input type="range" min="0" max="10" step="1" value="0" class="gear-level" data-lane="infantry" data-side="A" aria-label="步兵專屬武器 1 強化階段" />
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="hero-card" id="card-infantry-B">
+              <div class="hero-top">
+                <img class="portrait" id="portrait-infantry-B" src="" alt="步兵英雄 2 頭像" width="96" height="96" />
+                <div>
+                  <div class="title-row">
+                    <select class="select hero-select" data-lane="infantry" data-side="B" aria-label="選擇步兵英雄 2"></select>
+                  </div>
+                  <div class="meta-line">
+                    <span class="mini-badge" id="gen-infantry-B">世代 -</span>
+                    <span class="mini-badge">步兵</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-box">
+                <h4>英雄階段</h4>
+                <div class="control-line">
+                  <div class="line-head">
+                    <strong>星級 / 階段</strong>
+                    <span class="val-badge" id="level-label-infantry-B">0★ T1</span>
+                  </div>
+                  <input type="range" min="1" max="30" step="1" value="1" class="hero-level" data-lane="infantry" data-side="B" aria-label="步兵英雄 2 階段" />
+                  <div class="stars" id="stars-infantry-B" aria-label="步兵英雄 2 星級">
+                    <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-box">
+                <h4>專屬武器</h4>
+                <div class="gear-wrap">
+                  <img class="gear-icon" id="gear-icon-infantry-B" src="" alt="步兵專屬武器 2" width="52" height="52" />
+                  <div>
+                    <div class="line-head" style="margin-bottom:6px">
+                      <strong id="gear-name-infantry-B">專屬武器</strong>
+                      <span class="val-badge" id="gear-label-infantry-B">0強</span>
+                    </div>
+                    <input type="range" min="0" max="10" step="1" value="0" class="gear-level" data-lane="infantry" data-side="B" aria-label="步兵專屬武器 2 強化階段" />
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="result-box">
+            <div class="result-head">
+              <h4>比較結果</h4>
+              <p>依步兵英雄的基本數值與專屬武器數值進行比較。</p>
+            </div>
+
+            <div class="table-scroll">
+              <table class="result-table" aria-label="步兵英雄比較結果表">
+                <thead>
+                  <tr>
+                    <th>數值</th>
+                    <th>
+                      <span class="hero-chip">
+                        <img id="head-img-infantry-A" src="" alt="" />
+                        <span id="head-name-infantry-A">英雄 1</span>
+                      </span>
+                    </th>
+                    <th>
+                      <span class="hero-chip">
+                        <img id="head-img-infantry-B" src="" alt="" />
+                        <span id="head-name-infantry-B">英雄 2</span>
+                      </span>
+                    </th>
+                    <th>差異</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>攻擊</td><td id="row-infantry-atk-A">0.00%</td><td id="row-infantry-atk-B">0.00%</td><td id="row-infantry-atk-diff">0.00%</td></tr>
+                  <tr><td>防禦</td><td id="row-infantry-def-A">0.00%</td><td id="row-infantry-def-B">0.00%</td><td id="row-infantry-def-diff">0.00%</td></tr>
+                  <tr><td>生命</td><td id="row-infantry-hp-A">0.00%</td><td id="row-infantry-hp-B">0.00%</td><td id="row-infantry-hp-diff">0.00%</td></tr>
+                  <tr><td>破壞力</td><td id="row-infantry-might-A">0.00%</td><td id="row-infantry-might-B">0.00%</td><td id="row-infantry-might-diff">0.00%</td></tr>
+                  <tr class="total-row"><td>總數值</td><td id="row-infantry-total-A">0.00%</td><td id="row-infantry-total-B">0.00%</td><td id="row-infantry-total-diff">0.00%</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mobile-cards" id="mobile-cards-infantry" aria-label="步兵手機版比較結果"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cavalry">
+        <span class="anchor"></span>
+        <div class="lane">
+          <div class="lane-head">
+            <h3>騎兵</h3>
+          </div>
+
+          <div class="compare-wrap">
+            <article class="hero-card" id="card-cavalry-A">
+              <div class="hero-top">
+                <img class="portrait" id="portrait-cavalry-A" src="" alt="騎兵英雄 1 頭像" width="96" height="96" />
+                <div>
+                  <div class="title-row">
+                    <select class="select hero-select" data-lane="cavalry" data-side="A" aria-label="選擇騎兵英雄 1"></select>
+                  </div>
+                  <div class="meta-line">
+                    <span class="mini-badge" id="gen-cavalry-A">世代 -</span>
+                    <span class="mini-badge">騎兵</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-box">
+                <h4>英雄階段</h4>
+                <div class="control-line">
+                  <div class="line-head">
+                    <strong>星級 / 階段</strong>
+                    <span class="val-badge" id="level-label-cavalry-A">0★ T1</span>
+                  </div>
+                  <input type="range" min="1" max="30" step="1" value="1" class="hero-level" data-lane="cavalry" data-side="A" aria-label="騎兵英雄 1 階段" />
+                  <div class="stars" id="stars-cavalry-A" aria-label="騎兵英雄 1 星級">
+                    <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-box">
+                <h4>專屬武器</h4>
+                <div class="gear-wrap">
+                  <img class="gear-icon" id="gear-icon-cavalry-A" src="" alt="騎兵專屬武器 1" width="52" height="52" />
+                  <div>
+                    <div class="line-head" style="margin-bottom:6px">
+                      <strong id="gear-name-cavalry-A">專屬武器</strong>
+                      <span class="val-badge" id="gear-label-cavalry-A">0強</span>
+                    </div>
+                    <input type="range" min="0" max="10" step="1" value="0" class="gear-level" data-lane="cavalry" data-side="A" aria-label="騎兵專屬武器 1 強化階段" />
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="hero-card" id="card-cavalry-B">
+              <div class="hero-top">
+                <img class="portrait" id="portrait-cavalry-B" src="" alt="騎兵英雄 2 頭像" width="96" height="96" />
+                <div>
+                  <div class="title-row">
+                    <select class="select hero-select" data-lane="cavalry" data-side="B" aria-label="選擇騎兵英雄 2"></select>
+                  </div>
+                  <div class="meta-line">
+                    <span class="mini-badge" id="gen-cavalry-B">世代 -</span>
+                    <span class="mini-badge">騎兵</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-box">
+                <h4>英雄階段</h4>
+                <div class="control-line">
+                  <div class="line-head">
+                    <strong>星級 / 階段</strong>
+                    <span class="val-badge" id="level-label-cavalry-B">0★ T1</span>
+                  </div>
+                  <input type="range" min="1" max="30" step="1" value="1" class="hero-level" data-lane="cavalry" data-side="B" aria-label="騎兵英雄 2 階段" />
+                  <div class="stars" id="stars-cavalry-B" aria-label="騎兵英雄 2 星級">
+                    <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-box">
+                <h4>專屬武器</h4>
+                <div class="gear-wrap">
+                  <img class="gear-icon" id="gear-icon-cavalry-B" src="" alt="騎兵專屬武器 2" width="52" height="52" />
+                  <div>
+                    <div class="line-head" style="margin-bottom:6px">
+                      <strong id="gear-name-cavalry-B">專屬武器</strong>
+                      <span class="val-badge" id="gear-label-cavalry-B">0強</span>
+                    </div>
+                    <input type="range" min="0" max="10" step="1" value="0" class="gear-level" data-lane="cavalry" data-side="B" aria-label="騎兵專屬武器 2 強化階段" />
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="result-box">
+            <div class="result-head">
+              <h4>比較結果</h4>
+              <p>依騎兵英雄的基本數值與專屬武器數值進行比較。</p>
+            </div>
+
+            <div class="table-scroll">
+              <table class="result-table" aria-label="騎兵英雄比較結果表">
+                <thead>
+                  <tr>
+                    <th>數值</th>
+                    <th>
+                      <span class="hero-chip">
+                        <img id="head-img-cavalry-A" src="" alt="" />
+                        <span id="head-name-cavalry-A">英雄 1</span>
+                      </span>
+                    </th>
+                    <th>
+                      <span class="hero-chip">
+                        <img id="head-img-cavalry-B" src="" alt="" />
+                        <span id="head-name-cavalry-B">英雄 2</span>
+                      </span>
+                    </th>
+                    <th>差異</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>攻擊</td><td id="row-cavalry-atk-A">0.00%</td><td id="row-cavalry-atk-B">0.00%</td><td id="row-cavalry-atk-diff">0.00%</td></tr>
+                  <tr><td>防禦</td><td id="row-cavalry-def-A">0.00%</td><td id="row-cavalry-def-B">0.00%</td><td id="row-cavalry-def-diff">0.00%</td></tr>
+                  <tr><td>生命</td><td id="row-cavalry-hp-A">0.00%</td><td id="row-cavalry-hp-B">0.00%</td><td id="row-cavalry-hp-diff">0.00%</td></tr>
+                  <tr><td>破壞力</td><td id="row-cavalry-might-A">0.00%</td><td id="row-cavalry-might-B">0.00%</td><td id="row-cavalry-might-diff">0.00%</td></tr>
+                  <tr class="total-row"><td>總數值</td><td id="row-cavalry-total-A">0.00%</td><td id="row-cavalry-total-B">0.00%</td><td id="row-cavalry-total-diff">0.00%</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mobile-cards" id="mobile-cards-cavalry" aria-label="騎兵手機版比較結果"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="archer">
+        <span class="anchor"></span>
+        <div class="lane">
+          <div class="lane-head">
+            <h3>弓兵</h3>
+          </div>
+
+          <div class="compare-wrap">
+            <article class="hero-card" id="card-archer-A">
+              <div class="hero-top">
+                <img class="portrait" id="portrait-archer-A" src="" alt="弓兵英雄 1 頭像" width="96" height="96" />
+                <div>
+                  <div class="title-row">
+                    <select class="select hero-select" data-lane="archer" data-side="A" aria-label="選擇弓兵英雄 1"></select>
+                  </div>
+                  <div class="meta-line">
+                    <span class="mini-badge" id="gen-archer-A">世代 -</span>
+                    <span class="mini-badge">弓兵</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-box">
+                <h4>英雄階段</h4>
+                <div class="control-line">
+                  <div class="line-head">
+                    <strong>星級 / 階段</strong>
+                    <span class="val-badge" id="level-label-archer-A">0★ T1</span>
+                  </div>
+                  <input type="range" min="1" max="30" step="1" value="1" class="hero-level" data-lane="archer" data-side="A" aria-label="弓兵英雄 1 階段" />
+                  <div class="stars" id="stars-archer-A" aria-label="弓兵英雄 1 星級">
+                    <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-box">
+                <h4>專屬武器</h4>
+                <div class="gear-wrap">
+                  <img class="gear-icon" id="gear-icon-archer-A" src="" alt="弓兵專屬武器 1" width="52" height="52" />
+                  <div>
+                    <div class="line-head" style="margin-bottom:6px">
+                      <strong id="gear-name-archer-A">專屬武器</strong>
+                      <span class="val-badge" id="gear-label-archer-A">0強</span>
+                    </div>
+                    <input type="range" min="0" max="10" step="1" value="0" class="gear-level" data-lane="archer" data-side="A" aria-label="弓兵專屬武器 1 強化階段" />
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="hero-card" id="card-archer-B">
+              <div class="hero-top">
+                <img class="portrait" id="portrait-archer-B" src="" alt="弓兵英雄 2 頭像" width="96" height="96" />
+                <div>
+                  <div class="title-row">
+                    <select class="select hero-select" data-lane="archer" data-side="B" aria-label="選擇弓兵英雄 2"></select>
+                  </div>
+                  <div class="meta-line">
+                    <span class="mini-badge" id="gen-archer-B">世代 -</span>
+                    <span class="mini-badge">弓兵</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-box">
+                <h4>英雄階段</h4>
+                <div class="control-line">
+                  <div class="line-head">
+                    <strong>星級 / 階段</strong>
+                    <span class="val-badge" id="level-label-archer-B">0★ T1</span>
+                  </div>
+                  <input type="range" min="1" max="30" step="1" value="1" class="hero-level" data-lane="archer" data-side="B" aria-label="弓兵英雄 2 階段" />
+                  <div class="stars" id="stars-archer-B" aria-label="弓兵英雄 2 星級">
+                    <span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span><span class="star" data-lv="0"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-box">
+                <h4>專屬武器</h4>
+                <div class="gear-wrap">
+                  <img class="gear-icon" id="gear-icon-archer-B" src="" alt="弓兵專屬武器 2" width="52" height="52" />
+                  <div>
+                    <div class="line-head" style="margin-bottom:6px">
+                      <strong id="gear-name-archer-B">專屬武器</strong>
+                      <span class="val-badge" id="gear-label-archer-B">0強</span>
+                    </div>
+                    <input type="range" min="0" max="10" step="1" value="0" class="gear-level" data-lane="archer" data-side="B" aria-label="弓兵專屬武器 2 強化階段" />
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="result-box">
+            <div class="result-head">
+              <h4>比較結果</h4>
+              <p>依弓兵英雄的基本數值與專屬武器數值進行比較。</p>
+            </div>
+
+            <div class="table-scroll">
+              <table class="result-table" aria-label="弓兵英雄比較結果表">
+                <thead>
+                  <tr>
+                    <th>數值</th>
+                    <th>
+                      <span class="hero-chip">
+                        <img id="head-img-archer-A" src="" alt="" />
+                        <span id="head-name-archer-A">英雄 1</span>
+                      </span>
+                    </th>
+                    <th>
+                      <span class="hero-chip">
+                        <img id="head-img-archer-B" src="" alt="" />
+                        <span id="head-name-archer-B">英雄 2</span>
+                      </span>
+                    </th>
+                    <th>差異</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>攻擊</td><td id="row-archer-atk-A">0.00%</td><td id="row-archer-atk-B">0.00%</td><td id="row-archer-atk-diff">0.00%</td></tr>
+                  <tr><td>防禦</td><td id="row-archer-def-A">0.00%</td><td id="row-archer-def-B">0.00%</td><td id="row-archer-def-diff">0.00%</td></tr>
+                  <tr><td>生命</td><td id="row-archer-hp-A">0.00%</td><td id="row-archer-hp-B">0.00%</td><td id="row-archer-hp-diff">0.00%</td></tr>
+                  <tr><td>破壞力</td><td id="row-archer-might-A">0.00%</td><td id="row-archer-might-B">0.00%</td><td id="row-archer-might-diff">0.00%</td></tr>
+                  <tr class="total-row"><td>總數值</td><td id="row-archer-total-A">0.00%</td><td id="row-archer-total-B">0.00%</td><td id="row-archer-total-diff">0.00%</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mobile-cards" id="mobile-cards-archer" aria-label="弓兵手機版比較結果"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="guide">
+        <h2>使用指南</h2>
+        <ul class="clean">
+          <li>請比較相同兵種的 SSR 英雄。</li>
+          <li>會一併反映專屬武器 0 強到 10 強。</li>
+          <li>總數值是快速比較用指標，實際運用時也要一起考慮技能與隊伍搭配。</li>
+        </ul>
+      </section>
+
+      <section id="faq">
+        <h2>FAQ</h2>
+        <div class="faq-list">
+          <article class="faq-item">
+            <h3>Kingshot SSR 英雄比較表是依什麼基準計算的？</h3>
+            <p>攻擊與防禦依英雄遠征數值計算，生命與破壞力則依專屬武器屬性反映。總數值為攻擊、防禦、生命、破壞力四項的合計。</p>
+          </article>
+
+          <article class="faq-item">
+            <h3>一定要比較同兵種的英雄嗎？</h3>
+            <p>是的。本頁面是為了讓步兵、騎兵、弓兵 SSR 英雄能在各自相同兵種內進行比較而製作。</p>
+          </article>
+
+          <article class="faq-item">
+            <h3>會反映專屬武器等級嗎？</h3>
+            <p>會。支援反映專屬武器從 0 強到 10 強，並套用到生命與破壞力比較中。</p>
+          </article>
+
+          <article class="faq-item">
+            <h3>總數值較高就一定是更好的英雄嗎？</h3>
+            <p>不一定。總數值只是快速比較用指標，實際運用時還要一併考慮技能組成、戰鬥情境、隊伍搭配與培養優先順序。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="related">
+        <h2>相關指南 / 頁面</h2>
+        <div class="related">
+          <a class="pill" href="/zh-tw/guides/kingshot-f2p-guide.html">無課 / 微課成長指南</a>
+          <a class="pill" href="/zh-tw/guides/hallofgovernors.html">最強領主指南</a>
+          <a class="pill" href="/zh-tw/heroes/">查看全部英雄</a>
+          <a class="pill" href="/zh-tw/guides/">查看全部指南</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      const HEROES = [
+        {name:'Yang',slug:'yang',image:'/img/heroes/Yang/img_001.webp',generation:6,exclusiveGear:{name:'Yang Exclusive Gear',icon:'/img/heroes/Yang/img_008.webp',stats:[{label:'heroes.col.archerMight',value:'+133.50%'},{label:'heroes.col.archerTroopHp',value:'+133.50%'}]}},
+        {name:'Triton',slug:'triton',image:'/img/heroes/Triton/img_001.webp',generation:6,exclusiveGear:{name:'Triton Exclusive Gear',icon:'/img/heroes/Triton/img_008.webp',stats:[{label:'heroes.col.infantryMight',value:'+133.50%'},{label:'heroes.col.infantryTroopHp',value:'+133.50%'}]}},
+        {name:'Sophia',slug:'sophia',image:'/img/heroes/Sophia/img_001.webp',generation:6,exclusiveGear:{name:'Sophia Exclusive Gear',icon:'/img/heroes/Sophia/img_008.webp',stats:[{label:'heroes.col.cavalryMight',value:'+133.50%'},{label:'heroes.col.cavalryTroopHp',value:'+133.50%'}]}},
+        {name:'Vivian',slug:'vivian',image:'/img/heroes/Vivian/img_001.webp',generation:5,exclusiveGear:{name:'Vivian Exclusive Gear',icon:'/img/heroes/Vivian/img_008.webp',stats:[{label:'heroes.col.archerMight',value:'+111.00%'},{label:'heroes.col.archerTroopHp',value:'+111.00%'}]}},
+        {name:'Thrud',slug:'thrud',image:'/img/heroes/Thrud/img_001.webp',generation:5,exclusiveGear:{name:'Thrud Exclusive Gear',icon:'/img/heroes/Thrud/img_008.webp',stats:[{label:'heroes.col.cavalryMight',value:'+111.00%'},{label:'heroes.col.cavalryTroopHp',value:'+111.00%'}]}},
+        {name:'Longfei',slug:'longfei',image:'/img/heroes/Longfei/img_001.webp',generation:5,exclusiveGear:{name:'Longfei Exclusive Gear',icon:'/img/heroes/Longfei/img_008.webp',stats:[{label:'heroes.col.infantryMight',value:'+111.00%'},{label:'heroes.col.infantryTroopHp',value:'+111.00%'}]}},
+        {name:'Rosa',slug:'rosa',image:'/img/heroes/Rosa/img_001.webp',generation:4,exclusiveGear:{name:'Rosa Exclusive Gear',icon:'/img/heroes/Rosa/img_008.webp',stats:[{label:'heroes.col.archerMight',value:'+92.50%'},{label:'heroes.col.archerTroopHp',value:'+92.50%'}]}},
+        {name:'Margot',slug:'margot',image:'/img/heroes/Margot/img_001.webp',generation:4,exclusiveGear:{name:'Margot Exclusive Gear',icon:'/img/heroes/Margot/img_008.webp',stats:[{label:'heroes.col.cavalryMight',value:'+92.50%'},{label:'heroes.col.cavalryTroopHp',value:'+92.50%'}]}},
+        {name:'Alcar',slug:'alcar',image:'/img/heroes/Alcar/img_001.webp',generation:4,exclusiveGear:{name:'Alcar Exclusive Gear',icon:'/img/heroes/Alcar/img_008.webp',stats:[{label:'heroes.col.infantryMight',value:'+92.50%'},{label:'heroes.col.infantryTroopHp',value:'+92.50%'}]}},
+        {name:'Jaeger',slug:'jaeger',image:'/img/heroes/Jaeger/img_001.webp',generation:3,exclusiveGear:{name:'Jaeger Exclusive Gear',icon:'/img/heroes/Jaeger/img_008.webp',stats:[{label:'heroes.col.archerMight',value:'+70.00%'},{label:'heroes.col.archerTroopHp',value:'+70.00%'}]}},
+        {name:'Eric',slug:'eric',image:'/img/heroes/Eric/img_001.webp',generation:3,exclusiveGear:{name:'Eric Exclusive Gear',icon:'/img/heroes/Eric/img_008.webp',stats:[{label:'heroes.col.infantryMight',value:'+70.00%'},{label:'heroes.col.infantryTroopHp',value:'+70.00%'}]}},
+        {name:'Petra',slug:'petra',image:'/img/heroes/Petra/img_001.webp',generation:3,exclusiveGear:{name:'Petra Exclusive Gear',icon:'/img/heroes/Petra/img_008.webp',stats:[{label:'heroes.col.cavalryMight',value:'+70.00%'},{label:'heroes.col.cavalryTroopHp',value:'+70.00%'}]}},
+        {name:'Hilde',slug:'hilde',image:'/img/heroes/Hilde/img_001.webp',generation:2,exclusiveGear:{name:'Hilde Exclusive Gear',icon:'/img/heroes/Hilde/img_008.webp',stats:[{label:'heroes.col.cavalryMight',value:'+60.00%'},{label:'heroes.col.cavalryTroopHp',value:'+60.00%'}]}},
+        {name:'Zoe',slug:'zoe',image:'/img/heroes/Zoe/img_001.webp',generation:2,exclusiveGear:{name:'Zoe Exclusive Gear',icon:'/img/heroes/Zoe/img_008.webp',stats:[{label:'heroes.col.infantryMight',value:'+60.00%'},{label:'heroes.col.infantryTroopHp',value:'+60.00%'}]}},
+        {name:'Marlin',slug:'marlin',image:'/img/heroes/Marlin/img_001.webp',generation:2,exclusiveGear:{name:'Marlin Exclusive Gear',icon:'/img/heroes/Marlin/img_008.webp',stats:[{label:'heroes.col.archerMight',value:'+60.00%'},{label:'heroes.col.archerTroopHp',value:'+60.00%'}]}},
+        {name:'Jabel',slug:'jabel',image:'/img/heroes/Jabel/img_001.webp',generation:1,exclusiveGear:{name:'Jabel Exclusive Gear',icon:'/img/heroes/Jabel/img_008.webp',stats:[{label:'heroes.col.cavalryMight',value:'+50.00%'},{label:'heroes.col.cavalryTroopHp',value:'+50.00%'}]}},
+        {name:'Amadeus',slug:'amadeus',image:'/img/heroes/Amadeus/img_001.webp',generation:1,exclusiveGear:{name:'Amadeus Exclusive Gear',icon:'/img/heroes/Amadeus/img_009.webp',stats:[{label:'heroes.col.infantryMight',value:'+62.50%'},{label:'heroes.col.infantryTroopHp',value:'+62.50%'}]}},
+        {name:'Helga',slug:'helga',image:'/img/heroes/Helga/img_001.webp',generation:1,exclusiveGear:{name:'Helga Exclusive Gear',icon:'/img/heroes/Helga/img_009.webp',stats:[{label:'heroes.col.infantryMight',value:'+55.50%'},{label:'heroes.col.infantryTroopHp',value:'+55.50%'}]}},
+        {name:'Saul',slug:'saul',image:'/img/heroes/Saul/img_001.webp',generation:1,exclusiveGear:{name:'Saul Exclusive Gear',icon:'/img/heroes/Saul/img_008.webp',stats:[{label:'heroes.col.archerMight',value:'+50.00%'},{label:'heroes.col.archerTroopHp',value:'+50.00%'}]}}
+      ];
+
+      const META = {
+        Amadeus:{type:'infantry',ko:'阿瑪迪斯'},
+        Helga:{type:'infantry',ko:'海爾嘉'},
+        Jabel:{type:'cavalry',ko:'傑貝爾'},
+        Saul:{type:'archer',ko:'索爾'},
+        Zoe:{type:'infantry',ko:'柔伊'},
+        Hilde:{type:'cavalry',ko:'希爾德'},
+        Marlin:{type:'archer',ko:'馬林'},
+        Eric:{type:'infantry',ko:'艾瑞克'},
+        Petra:{type:'cavalry',ko:'佩特拉'},
+        Jaeger:{type:'archer',ko:'耶格'},
+        Alcar:{type:'infantry',ko:'阿爾卡'},
+        Margot:{type:'cavalry',ko:'瑪歌特'},
+        Rosa:{type:'archer',ko:'蘿莎'},
+        Longfei:{type:'infantry',ko:'龍飛'},
+        Thrud:{type:'cavalry',ko:'斯露德'},
+        Vivian:{type:'archer',ko:'薇薇安'},
+        Triton:{type:'infantry',ko:'特里同'},
+        Sophia:{type:'cavalry',ko:'蘇菲亞'},
+        Yang:{type:'archer',ko:'楊'}
+      };
+
+      const SEG = {
+        Helga:{base:25.25,seg:[[1,5,2.35],[6,6,4.23],[7,11,3.29],[12,12,5.92],[13,17,4.6069],[18,18,8.29],[19,23,6.4494],[24,24,11.61],[25,29,9.0294],[30,30,16.25]]},
+        Amadeus:{base:32.82,seg:[[1,5,3.0569],[6,6,5.49],[7,11,4.2775],[12,12,7.7],[13,17,5.9869],[18,18,10.78],[19,23,8.3825],[24,24,15.1],[25,29,11.7388],[30,30,21.12]]},
+        Jabel:{base:25.25,seg:[[1,5,2.35],[6,6,4.23],[7,11,3.29],[12,12,5.92],[13,17,4.6069],[18,18,8.29],[19,23,6.4494],[24,24,11.61],[25,29,9.0294],[30,30,16.25]]},
+        Saul:{base:25.25,seg:[[1,5,2.35],[6,6,4.23],[7,11,3.29],[12,12,5.92],[13,17,4.6069],[18,18,8.29],[19,23,6.4494],[24,24,11.61],[25,29,9.0294],[30,30,16.25]]},
+
+        Hilde:{base:30.30,seg:[[1,5,2.82],[6,6,5.07],[7,11,3.9475],[12,12,7.11],[13,17,5.5269],[18,18,9.95],[19,23,7.7394],[24,24,13.93],[25,26,10.83],[27,27,3.84],[28,28,17.83],[29,29,10.84],[30,30,19.41]]},
+        Marlin:{base:30.30,seg:[[1,5,2.82],[6,6,5.07],[7,11,3.9475],[12,12,7.11],[13,17,5.5269],[18,18,9.95],[19,23,7.7394],[24,24,13.93],[25,26,10.83],[27,27,3.84],[28,28,17.83],[29,29,10.84],[30,30,19.41]]},
+        Zoe:{base:30.30,seg:[[1,5,2.82],[6,6,5.07],[7,11,3.9475],[12,12,7.11],[13,17,5.5269],[18,18,9.95],[19,23,7.7394],[24,24,13.93],[25,26,10.83],[27,27,3.84],[28,28,17.83],[29,29,10.84],[30,30,19.41]]},
+
+        Eric:{base:36.61,seg:[[1,5,3.4094],[6,6,6.13],[7,11,4.77],[12,12,8.59],[13,17,6.6819],[18,18,12.02],[19,23,9.3544],[24,24,16.83],[25,26,13.085]]},
+        Petra:{base:36.61,seg:[[1,5,3.4094],[6,6,6.13],[7,11,4.77],[12,12,8.59],[13,17,6.6819],[18,18,12.02],[19,23,9.3544],[24,24,16.83],[25,26,13.085]]},
+        Jaeger:{base:36.61,seg:[[1,5,3.4094],[6,6,6.13],[7,11,4.77],[12,12,8.59],[13,17,6.6819],[18,18,12.02],[19,23,9.3544],[24,24,16.83],[25,26,13.085]]}
+      };
+
+      const GEN3_REF='Jaeger';
+      const GEN3_L30=290.23, GEN4_L30=370.29, GEN5_L30=444.35, GEN6_L30=540.43;
+
+      function statAtSegments(H,L){
+        let s=H.base;
+        for(const item of H.seg){
+          const f=item[0], t=item[1], d=item[2];
+          if(L<f) break;
+          const u=Math.min(L,t);
+          s += (u-f+1)*d;
+          if(L<=t) break;
+        }
+        return s;
+      }
+
+      function deltaAt(H,L){
+        for(const item of H.seg){
+          if(L>=item[0] && L<=item[1]) return item[2];
+        }
+        return null;
+      }
+
+      function anchorLevel(name, level, target){
+        const H=SEG[name];
+        if(!H) return;
+        let i=-1;
+        for(let idx=0; idx<H.seg.length; idx++){
+          const f=H.seg[idx][0], t=H.seg[idx][1];
+          if(level>=f && level<=t){ i=idx; break; }
+        }
+        if(i>=0){
+          const seg=H.seg[i];
+          const f=seg[0], t=seg[1], d=seg[2];
+          if(!(f===level && t===level)){
+            const left=(level-1>=f)?[f,level-1,d]:null;
+            const right=(level<=t)?[level,t,d]:null;
+            const repl=[];
+            if(left) repl.push(left);
+            if(right) repl.push(right);
+            H.seg.splice(i,1);
+            for(let r=repl.length-1;r>=0;r--) H.seg.splice(i,0,repl[r]);
+          }
+        }
+        const need=+(target - statAtSegments(H,level-1)).toFixed(4);
+        let j=-1;
+        for(let idx=0; idx<H.seg.length; idx++){
+          if(H.seg[idx][0]===level && H.seg[idx][1]===level){ j=idx; break; }
+        }
+        const fixed=[level,level,need];
+        if(j>=0) H.seg[j]=fixed; else H.seg.push(fixed);
+      }
+
+      function fillLastCycleFromGen2(name){
+        const H=SEG[name];
+        const G2=SEG.Hilde;
+        if(!H || !G2) return;
+        const d2526 = deltaAt(H,25);
+        const g22526 = deltaAt(G2,25);
+        if(d2526==null || g22526==null) return;
+        const patt = [deltaAt(G2,27), deltaAt(G2,28), deltaAt(G2,29)];
+        const k = d2526 / g22526;
+        [27,28,29].forEach(function(L, idx){
+          if(deltaAt(H,L)!=null) return;
+          const d = +((patt[idx]||0) * k).toFixed(4);
+          H.seg.push([L,L,d]);
+        });
+        H.seg.sort(function(a,b){ return a[0]-b[0]; });
+      }
+
+      ['Eric','Petra','Jaeger'].forEach(fillLastCycleFromGen2);
+      ['Eric','Petra','Jaeger'].forEach(function(h){ anchorLevel(h,30,GEN3_L30); });
+
+      (function buildGen4(){
+        const ref=SEG[GEN3_REF];
+        if(!ref) return;
+        const current=statAtSegments(ref,30);
+        const k=GEN4_L30/current;
+        ['Alcar','Margot','Rosa'].forEach(function(n){
+          SEG[n]={
+            base:+(ref.base*k).toFixed(4),
+            seg:ref.seg.map(function(v){ return [v[0],v[1],+(v[2]*k).toFixed(4)]; })
+          };
+          anchorLevel(n,30,GEN4_L30);
+        });
+      })();
+
+      (function buildGen5(){
+        const ref = SEG.Rosa || SEG.Margot || SEG.Alcar;
+        if(!ref) return;
+        const current = statAtSegments(ref,30);
+        const k = GEN5_L30 / current;
+        ['Longfei','Thrud','Vivian'].forEach(function(n){
+          SEG[n]={
+            base:+(ref.base*k).toFixed(4),
+            seg:ref.seg.map(function(v){ return [v[0],v[1],+(v[2]*k).toFixed(4)]; })
+          };
+          anchorLevel(n,30,GEN5_L30);
+        });
+      })();
+
+      (function buildGen6(){
+        const ref = SEG.Vivian || SEG.Thrud || SEG.Longfei;
+        if(!ref) return;
+        const current = statAtSegments(ref,30);
+        const k = GEN6_L30 / current;
+        ['Yang','Triton','Sophia'].forEach(function(n){
+          SEG[n]={
+            base:+(ref.base*k).toFixed(4),
+            seg:ref.seg.map(function(v){ return [v[0],v[1],+(v[2]*k).toFixed(4)]; })
+          };
+          anchorLevel(n,30,GEN6_L30);
+        });
+      })();
+
+      const heroMap = {};
+      HEROES.forEach(function(h){ heroMap[h.name] = h; });
+
+      function heroName(name){
+        return (META[name] && META[name].ko) || name;
+      }
+
+      function listHeroesByLane(lane){
+        return Object.keys(META)
+          .filter(function(name){ return META[name].type === lane && !!SEG[name]; })
+          .sort(function(a,b){
+            const ga=(heroMap[a] && heroMap[a].generation) || 0;
+            const gb=(heroMap[b] && heroMap[b].generation) || 0;
+            if(ga !== gb) return gb - ga;
+            return heroName(a).localeCompare(heroName(b), 'zh-Hant');
+          });
+      }
+
+      function fmtPct(v){
+        return Number(v).toFixed(2) + '%';
+      }
+
+      function fmtSignedPct(v){
+        const n = Number(v);
+        if(n > 0) return '+' + n.toFixed(2) + '%';
+        return n.toFixed(2) + '%';
+      }
+
+      function levelLabel(L){
+        const star = Math.floor((L - 1) / 6);
+        const tier = ((L - 1) % 6) + 1;
+        if (tier === 6 || L === 30) return (star + 1) + '星';
+        return star + '★ T' + tier;
+      }
+
+      function setStars(boxEl, L){
+        const stars = boxEl.querySelectorAll('.star');
+        if(L === 30){
+          stars.forEach(function(el){ el.setAttribute('data-lv','6'); });
+          return;
+        }
+        const s = Math.floor((L - 1) / 6);
+        const t = ((L - 1) % 6) + 1;
+        stars.forEach(function(el, i){
+          let lv=0;
+          if(i < s) lv=6;
+          else if(i === s) lv=t;
+          else lv=0;
+          el.setAttribute('data-lv', String(lv));
+        });
+      }
+
+      function getHeroExpeditionStat(heroNameKey, level){
+        const H = SEG[heroNameKey];
+        if(!H) return 0;
+        return statAtSegments(H, level);
+      }
+
+      function parsePct(text){
+        if(text == null) return 0;
+        const n = parseFloat(String(text).replace(/[^\d.-]/g,''));
+        return Number.isFinite(n) ? n : 0;
+      }
+
+      function getGearMaxStats(heroNameKey){
+        const hero = heroMap[heroNameKey];
+        const type = META[heroNameKey] ? META[heroNameKey].type : null;
+        const result = {might:0, hp:0, gearName:'專屬武器', gearIcon:''};
+
+        if(!hero || !hero.exclusiveGear) return result;
+
+        result.gearName = hero.exclusiveGear.name || '專屬武器';
+        result.gearIcon = hero.exclusiveGear.icon || '';
+
+        (hero.exclusiveGear.stats || []).forEach(function(s){
+          const label = s.label || '';
+          const val = parsePct(s.value || '0');
+          if(type === 'infantry'){
+            if(label === 'heroes.col.infantryMight') result.might = val;
+            if(label === 'heroes.col.infantryTroopHp') result.hp = val;
+          }else if(type === 'cavalry'){
+            if(label === 'heroes.col.cavalryMight') result.might = val;
+            if(label === 'heroes.col.cavalryTroopHp') result.hp = val;
+          }else if(type === 'archer'){
+            if(label === 'heroes.col.archerMight') result.might = val;
+            if(label === 'heroes.col.archerTroopHp') result.hp = val;
+          }
+        });
+
+        return result;
+      }
+
+      function gearStatAtLevel(heroNameKey, gearLevel){
+        const max = getGearMaxStats(heroNameKey);
+        if(gearLevel <= 0){
+          return {
+            might:0,
+            hp:0,
+            gearName:max.gearName,
+            gearIcon:max.gearIcon
+          };
+        }
+
+        return {
+          might:+((max.might / 10) * gearLevel).toFixed(2),
+          hp:+((max.hp / 10) * gearLevel).toFixed(2),
+          gearName:max.gearName,
+          gearIcon:max.gearIcon
+        };
+      }
+
+      function heroStats(heroNameKey, heroLevel, gearLevel){
+        const base = getHeroExpeditionStat(heroNameKey, heroLevel);
+        const gear = gearStatAtLevel(heroNameKey, gearLevel);
+        const atk = +base.toFixed(2);
+        const def = +base.toFixed(2);
+        const hp = +gear.hp.toFixed(2);
+        const might = +gear.might.toFixed(2);
+        const total = +(atk + def + hp + might).toFixed(2);
+
+        return {
+          atk:atk,
+          def:def,
+          hp:hp,
+          might:might,
+          total:total,
+          gearName:gear.gearName,
+          gearIcon:gear.gearIcon
+        };
+      }
+
+      function setImgWithFallback(imgEl, src, altText){
+        imgEl.alt = altText;
+        imgEl.src = src || '/img/guide/yang.webp';
+        imgEl.onerror = function(){
+          imgEl.onerror = null;
+          imgEl.src = '/img/guide/yang.webp';
+        };
+      }
+
+      function setDiffCell(el, value){
+        el.textContent = fmtSignedPct(value);
+        el.classList.remove('pos','neg');
+        if(value > 0.005) el.classList.add('pos');
+        else if(value < -0.005) el.classList.add('neg');
+      }
+
+      function diffClassName(value){
+        if(value > 0.005) return 'pos';
+        if(value < -0.005) return 'neg';
+        return '';
+      }
+
+      function renderMobileCards(lane, heroA, heroB, a, b){
+        const wrap = document.getElementById('mobile-cards-' + lane);
+        if(!wrap) return;
+
+        const rows = [
+          {label:'攻擊', a:a.atk, b:b.atk, diff:a.atk - b.atk, total:false},
+          {label:'防禦', a:a.def, b:b.def, diff:a.def - b.def, total:false},
+          {label:'生命', a:a.hp, b:b.hp, diff:a.hp - b.hp, total:false},
+          {label:'破壞力', a:a.might, b:b.might, diff:a.might - b.might, total:false},
+          {label:'總數值', a:a.total, b:b.total, diff:a.total - b.total, total:true}
+        ];
+
+        wrap.innerHTML = rows.map(function(row){
+          return '' +
+            '<div class="mobile-compact-card' + (row.total ? ' is-total' : '') + '">' +
+              '<div class="mobile-compact-head">' +
+                '<strong>' + row.label + '</strong>' +
+                '<span class="mobile-diff-badge ' + diffClassName(row.diff) + '">' + fmtSignedPct(row.diff) + '</span>' +
+              '</div>' +
+              '<div class="mobile-compact-body">' +
+                '<div class="mobile-hero-row">' +
+                  '<div class="mobile-hero">' +
+                    '<img src="' + ((heroMap[heroA] && heroMap[heroA].image) || '/img/guide/yang.webp') + '" alt="' + heroName(heroA) + '">' +
+                    '<span>' + heroName(heroA) + '</span>' +
+                  '</div>' +
+                  '<div class="mobile-value">' + fmtPct(row.a) + '</div>' +
+                '</div>' +
+                '<div class="mobile-hero-row">' +
+                  '<div class="mobile-hero">' +
+                    '<img src="' + ((heroMap[heroB] && heroMap[heroB].image) || '/img/guide/yang.webp') + '" alt="' + heroName(heroB) + '">' +
+                    '<span>' + heroName(heroB) + '</span>' +
+                  '</div>' +
+                  '<div class="mobile-value">' + fmtPct(row.b) + '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>';
+        }).join('');
+      }
+
+      function renderLane(lane){
+        const heroSelA = document.querySelector('.hero-select[data-lane="'+ lane +'"][data-side="A"]');
+        const heroSelB = document.querySelector('.hero-select[data-lane="'+ lane +'"][data-side="B"]');
+        const levelA = document.querySelector('.hero-level[data-lane="'+ lane +'"][data-side="A"]');
+        const levelB = document.querySelector('.hero-level[data-lane="'+ lane +'"][data-side="B"]');
+        const gearA = document.querySelector('.gear-level[data-lane="'+ lane +'"][data-side="A"]');
+        const gearB = document.querySelector('.gear-level[data-lane="'+ lane +'"][data-side="B"]');
+
+        const heroA = heroSelA.value;
+        const heroB = heroSelB.value;
+        const levelValueA = +levelA.value;
+        const levelValueB = +levelB.value;
+        const gearValueA = +gearA.value;
+        const gearValueB = +gearB.value;
+
+        document.getElementById('level-label-' + lane + '-A').textContent = levelLabel(levelValueA);
+        document.getElementById('level-label-' + lane + '-B').textContent = levelLabel(levelValueB);
+        document.getElementById('gear-label-' + lane + '-A').textContent = gearValueA + '強';
+        document.getElementById('gear-label-' + lane + '-B').textContent = gearValueB + '強';
+
+        setStars(document.getElementById('stars-' + lane + '-A'), levelValueA);
+        setStars(document.getElementById('stars-' + lane + '-B'), levelValueB);
+
+        document.getElementById('gen-' + lane + '-A').textContent = ((heroMap[heroA] && heroMap[heroA].generation) ? heroMap[heroA].generation : '-') + '世代';
+        document.getElementById('gen-' + lane + '-B').textContent = ((heroMap[heroB] && heroMap[heroB].generation) ? heroMap[heroB].generation : '-') + '世代';
+
+        setImgWithFallback(
+          document.getElementById('portrait-' + lane + '-A'),
+          heroMap[heroA] ? heroMap[heroA].image : '',
+          heroName(heroA) + ' 頭像'
+        );
+        setImgWithFallback(
+          document.getElementById('portrait-' + lane + '-B'),
+          heroMap[heroB] ? heroMap[heroB].image : '',
+          heroName(heroB) + ' 頭像'
+        );
+
+        const gearInfoA = getGearMaxStats(heroA);
+        const gearInfoB = getGearMaxStats(heroB);
+
+        setImgWithFallback(
+          document.getElementById('gear-icon-' + lane + '-A'),
+          gearInfoA.gearIcon,
+          heroName(heroA) + ' 專屬武器'
+        );
+        setImgWithFallback(
+          document.getElementById('gear-icon-' + lane + '-B'),
+          gearInfoB.gearIcon,
+          heroName(heroB) + ' 專屬武器'
+        );
+
+        document.getElementById('gear-name-' + lane + '-A').textContent = heroName(heroA) + ' 專屬武器';
+        document.getElementById('gear-name-' + lane + '-B').textContent = heroName(heroB) + ' 專屬武器';
+
+        const a = heroStats(heroA, levelValueA, gearValueA);
+        const b = heroStats(heroB, levelValueB, gearValueB);
+
+        setImgWithFallback(document.getElementById('head-img-' + lane + '-A'), heroMap[heroA] ? heroMap[heroA].image : '', heroName(heroA));
+        setImgWithFallback(document.getElementById('head-img-' + lane + '-B'), heroMap[heroB] ? heroMap[heroB].image : '', heroName(heroB));
+        document.getElementById('head-name-' + lane + '-A').textContent = heroName(heroA);
+        document.getElementById('head-name-' + lane + '-B').textContent = heroName(heroB);
+
+        document.getElementById('row-' + lane + '-atk-A').textContent = fmtPct(a.atk);
+        document.getElementById('row-' + lane + '-atk-B').textContent = fmtPct(b.atk);
+        setDiffCell(document.getElementById('row-' + lane + '-atk-diff'), a.atk - b.atk);
+
+        document.getElementById('row-' + lane + '-def-A').textContent = fmtPct(a.def);
+        document.getElementById('row-' + lane + '-def-B').textContent = fmtPct(b.def);
+        setDiffCell(document.getElementById('row-' + lane + '-def-diff'), a.def - b.def);
+
+        document.getElementById('row-' + lane + '-hp-A').textContent = fmtPct(a.hp);
+        document.getElementById('row-' + lane + '-hp-B').textContent = fmtPct(b.hp);
+        setDiffCell(document.getElementById('row-' + lane + '-hp-diff'), a.hp - b.hp);
+
+        document.getElementById('row-' + lane + '-might-A').textContent = fmtPct(a.might);
+        document.getElementById('row-' + lane + '-might-B').textContent = fmtPct(b.might);
+        setDiffCell(document.getElementById('row-' + lane + '-might-diff'), a.might - b.might);
+
+        document.getElementById('row-' + lane + '-total-A').textContent = fmtPct(a.total);
+        document.getElementById('row-' + lane + '-total-B').textContent = fmtPct(b.total);
+        setDiffCell(document.getElementById('row-' + lane + '-total-diff'), a.total - b.total);
+
+        renderMobileCards(lane, heroA, heroB, a, b);
+
+        const cardA = document.getElementById('card-' + lane + '-A');
+        const cardB = document.getElementById('card-' + lane + '-B');
+        cardA.classList.remove('is-better');
+        cardB.classList.remove('is-better');
+
+        if(a.total > b.total + 0.005){
+          cardA.classList.add('is-better');
+        }else if(b.total > a.total + 0.005){
+          cardB.classList.add('is-better');
+        }
+      }
+
+      function populateLane(lane, defaultA, defaultB){
+        const list = listHeroesByLane(lane);
+        const options = list.map(function(name){
+          const gen = (heroMap[name] && heroMap[name].generation) || 0;
+          return '<option value="' + name + '">' + heroName(name) + ' (' + name + ') · ' + gen + '世代</option>';
+        }).join('');
+
+        const selA = document.querySelector('.hero-select[data-lane="'+ lane +'"][data-side="A"]');
+        const selB = document.querySelector('.hero-select[data-lane="'+ lane +'"][data-side="B"]');
+
+        selA.innerHTML = options;
+        selB.innerHTML = options;
+
+        selA.value = defaultA;
+        selB.value = defaultB;
+
+        document.querySelector('.hero-level[data-lane="'+ lane +'"][data-side="A"]').value = 30;
+        document.querySelector('.hero-level[data-lane="'+ lane +'"][data-side="B"]').value = 30;
+        document.querySelector('.gear-level[data-lane="'+ lane +'"][data-side="A"]').value = 10;
+        document.querySelector('.gear-level[data-lane="'+ lane +'"][data-side="B"]').value = 10;
+      }
+
+      function bindLane(lane){
+        document.querySelectorAll('[data-lane="'+ lane +'"]').forEach(function(el){
+          el.addEventListener('input', function(){ renderLane(lane); });
+          el.addEventListener('change', function(){ renderLane(lane); });
+        });
+      }
+
+      function init(){
+        initStickyObservers();
+
+        populateLane('infantry', 'Amadeus', 'Triton');
+        populateLane('cavalry', 'Jabel', 'Sophia');
+        populateLane('archer', 'Saul', 'Yang');
+
+        bindLane('infantry');
+        bindLane('cavalry');
+        bindLane('archer');
+
+        renderLane('infantry');
+        renderLane('cavalry');
+        renderLane('archer');
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

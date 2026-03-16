@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="zh-Hant" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot 巨熊高分攻略 · 集結發起者梯表 / 集結員梯表 / 弓兵編成</title>
+  <meta name="description" content="Kingshot 巨熊高分實戰攻略。整理集結發起者梯表、集結員梯表、弓兵核心編成、攻擊型英雄第一格配置、部隊保存、再次參與時機與高分操作重點。" />
+  <meta name="keywords" content="Kingshot Giant Bear, Kingshot Bear Hunt, 巨熊, 熊狩, 高分攻略, 集結發起者梯表, 集結員梯表, 阿瑪迪斯, 첸코, 연우, 아마네, 마르고, 비비안" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/guides/kingshot-bearhunt.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/kingshot-bearhunt.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/kingshot-bearhunt.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/kingshot-bearhunt.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/kingshot-bearhunt.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot 巨熊高分攻略" />
+  <meta property="og:description" content="集結發起者梯表、集結員梯表、弓兵編成、攻擊型英雄第一格配置、部隊保存、再次參與時機，全部整理在同一頁。" />
+  <meta property="og:url" content="https://kingshotdata.kr/zh-tw/guides/kingshot-bearhunt.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="zh_TW" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:16px;
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+
+      --best:#db2777;
+      --a:#16a34a;
+      --b:#f59e0b;
+      --c:#3b82f6;
+      --w:#ef4444;
+
+      --bluebg:#eff6ff;
+      --greenbg:#ecfdf5;
+      --yellowbg:#fffbeb;
+      --redbg:#fef2f2;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --bluebg:#0f172a;
+        --greenbg:#0f1e16;
+        --yellowbg:#20180a;
+        --redbg:#221212;
+      }
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.7 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","Noto Sans","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{width:28px;height:28px;border-radius:8px}
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(24px,3.2vw,38px);
+      line-height:1.16;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:30px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:rgba(255,255,255,.72);
+      padding:14px;
+    }
+    .hero-card h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-card ul{margin:0;padding-left:18px}
+    .hero-card li{margin:6px 0}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section.block h2{
+      margin:0 0 12px;
+      font-size:21px;
+      color:var(--accent);
+      letter-spacing:-.02em;
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      margin:12px 0;
+      background:var(--bluebg);
+    }
+    .callout.green{background:var(--greenbg)}
+    .callout.yellow{background:var(--yellowbg)}
+    .callout.red{background:var(--redbg)}
+    .callout strong{font-weight:1000}
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .hero-strip{
+      display:grid;
+      grid-template-columns:repeat(6,minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+    .hero-box{
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:linear-gradient(180deg,#fff,#f8fafc);
+      padding:10px;
+      text-align:center;
+      box-shadow:0 8px 20px rgba(0,0,0,.05);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-box::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top, rgba(37,99,235,.10), transparent 55%);
+      pointer-events:none;
+    }
+    .hero-frame{
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(37,99,235,.18);
+      box-shadow:0 10px 20px rgba(37,99,235,.12);
+      margin-bottom:8px;
+      background:#fff;
+    }
+    .hero-frame img{
+      width:100%;
+      aspect-ratio:1/1;
+      object-fit:cover;
+      transform:scale(1.02);
+    }
+    .hero-name{
+      font-size:13px;
+      font-weight:1000;
+      line-height:1.25;
+    }
+    .hero-skill{
+      margin-top:4px;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+      line-height:1.35;
+    }
+
+    .score-list{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+    .score-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:12px;
+      text-align:center;
+    }
+    .score-card .big{
+      font-size:18px;
+      font-weight:1000;
+      color:#db2777;
+      line-height:1.1;
+      margin-bottom:6px;
+    }
+    .score-card .small{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+    }
+
+    .tier{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      margin:16px 0;
+      overflow:hidden;
+    }
+    .tier>header{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+    }
+    .tier-tag{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 10px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:13px;
+      color:#fff;
+    }
+    .best{background:var(--best)}
+    .a{background:var(--a)}
+    .b{background:var(--b)}
+    .c{background:var(--c)}
+    .w{background:var(--w)}
+    .desc{
+      font-size:13px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+      gap:12px;
+      padding:14px;
+      justify-items:center;
+    }
+    .card{
+      border:1px solid var(--border);
+      background:#f8fafc;
+      border-radius:12px;
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      text-align:center;
+      width:100%;
+    }
+    .img{
+      width:92px;
+      height:92px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      object-fit:cover;
+      background:#fff;
+      margin:0 auto;
+    }
+    .name{
+      font-weight:800;
+      font-size:13px;
+      text-align:center;
+    }
+    .hint{
+      font-size:12px;
+      color:var(--muted);
+      text-align:center;
+      font-weight:700;
+    }
+
+    .checklist{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .check-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:14px;
+    }
+    .check-card h3{
+      margin:0 0 8px;
+      font-size:15px;
+    }
+
+    .foot{
+      margin-top:18px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:1100px){
+      .hero-strip{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .score-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      .hero{grid-template-columns:1fr}
+      .grid-2,.checklist{grid-template-columns:1fr}
+    }
+    @media (max-width:700px){
+      .hero-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .score-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width:600px){
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot 巨熊高分攻略",
+    "inLanguage":"zh-Hant",
+    "description":"集結發起者梯表、集結員梯表、弓兵編成、攻擊型英雄第一格配置、部隊保存、再次參與時機，全部整理在同一頁。",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/zh-tw/guides/kingshot-bearhunt.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/kingshot-bearhunt.html">EN</a>
+        <a href="/ko/guides/kingshot-bearhunt.html">KO</a>
+        <a href="/ja/guides/kingshot-bearhunt.html">JA</a>
+        <a href="/zh-tw/guides/kingshot-bearhunt.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概要</a>
+      <a href="#priority">兵種</a>
+      <a href="#leader-tier">集結長</a>
+      <a href="#joiner-tier">集結員</a>
+      <a href="#summary">總結</a>
+    </nav>
+
+    <main>
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/guides/">指南</a> <span class="muted">›</span>
+        <span>巨熊</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>[攻略] Kingshot 巨熊高分指南</h1>
+          <p class="sub">
+            把弓兵編成、集結參與優先順序、英雄配置、部隊保存、再次參與時機，
+            以及集結發起者梯表 / 集結員梯表一次整理好的實戰型指南。
+          </p>
+
+          <div class="meta">
+            <span class="tag">集結發起者梯表</span>
+            <span class="tag">集結員梯表</span>
+            <span class="tag">弓兵核心編成</span>
+            <span class="tag">攻擊型英雄第一格</span>
+            <span class="tag">再次參與時機</span>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h2>這篇的重點</h2>
+          <ul>
+            <li>巨熊不會反擊，所以比起戰爭編成，弓兵核心的專用編成更有利。</li>
+            <li>你的最強弓兵部隊應優先上最強的集結發起者，得分效率最高。</li>
+            <li>參與別人集結時，把攻擊型英雄放在第一格才是核心。</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="overview" class="block anchor">
+        <h2>1. 巨熊基本機制</h2>
+        <p>
+          巨熊和一般戰鬥不同，牠不會反擊，只會一直挨打。
+          所以和一般戰爭編成不同，這裡需要的是 <strong>專門打熊的部隊編成</strong>。
+        </p>
+        <p>
+          另外，在熊狩中，<strong>自己開的集結不會佔用自己的出征欄位。</strong>
+          例如你有 6 個出征欄位，就代表連同自己開的集結在內，總共可以運用 7 支部隊。
+        </p>
+
+        <div class="callout">
+          <strong>核心:</strong> 如果你不是聯盟內前段戰力，
+          通常比起自己開集結，<strong>優先上強者的集結會更有效率。</strong>
+        </div>
+      </section>
+
+      <section id="priority" class="block anchor">
+        <h2>2. 巨熊兵種優先順序</h2>
+        <p>巨熊輸出優先順序一般來說如下。</p>
+
+        <div class="score-list">
+          <div class="score-card">
+            <div class="big">第1位</div>
+            <div class="small">弓兵</div>
+          </div>
+          <div class="score-card">
+            <div class="big">第2位</div>
+            <div class="small">騎兵</div>
+          </div>
+          <div class="score-card">
+            <div class="big">第3位</div>
+            <div class="small">步兵</div>
+          </div>
+          <div class="score-card">
+            <div class="big">核心</div>
+            <div class="small">弓兵比例最大化</div>
+          </div>
+          <div class="score-card">
+            <div class="big">原則</div>
+            <div class="small">弓兵 → 騎兵 → 步兵</div>
+          </div>
+        </div>
+
+        <div class="callout green">
+          <strong>整理:</strong> 想把巨熊分數拉高，弓兵比例最重要。
+          隨著兵力規模增加，步兵效率相對更低，弓兵中心編成通常會更有利於得分。
+        </div>
+
+        <div class="callout yellow">
+          <strong>補充:</strong> 某些時期可能會因為騎兵英雄技能效率變高，讓騎兵短暫成為主流。
+          但就目前來說，<strong>先把弓兵核心編成當作最穩定、最泛用的最佳解</strong> 會更合理。
+        </div>
+      </section>
+
+      <section id="leader-tier" class="block anchor">
+        <h2>3. 集結發起者梯表</h2>
+        <p>
+          自己開集結時，基本原則就是每個兵種都放最強的英雄，
+          而實際上 <strong>越強的集結發起者，整體集結分數通常也越高。</strong>
+        </p>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag best">Best</span>
+            <div class="desc">目前版本最上位集結發起者組合</div>
+          </header>
+
+          <div class="grid">
+            <div class="card">
+              <img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" class="img">
+              <div class="name">Amadeus</div>
+            </div>
+            <div class="card">
+              <img src="/img/heroes/Yang/img_001.webp" alt="Yang" class="img">
+              <div class="name">Yang</div>
+            </div>
+            <div class="card">
+              <img src="/img/heroes/Petra/img_001.webp" alt="Petra" class="img">
+              <div class="name">Petra</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>為什麼重要?</strong><br>
+          不只是集結長的 3 位英雄會影響結果，
+          連領主裝備、領主增益、研究、戰鬥相關能力值也會一起套用到集結員身上。
+          也就是說，<strong>越強的玩家開的集結，整體期望分數就越高。</strong>
+        </div>
+      </section>
+
+      <section id="joiner-tier" class="block anchor">
+        <h2>4. 集結員梯表</h2>
+        <p>
+          參加別人集結時，<strong>第一格</strong> 最重要。
+          因為參與者第一格英雄的野外技能中，<strong>只有第一個技能會套用到整個集結</strong>。
+        </p>
+
+        <h3>4-1. 核心攻擊型集結員英雄</h3>
+        <div class="hero-strip" aria-label="推薦攻擊型英雄">
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" loading="lazy"></div>
+            <div class="hero-name">阿瑪迪斯</div>
+            <div class="hero-skill">破壞力 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Chenko/img_001.webp" alt="Chenko" loading="lazy"></div>
+            <div class="hero-name">첸코</div>
+            <div class="hero-skill">破壞力 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Yeonwoo/img_001.webp" alt="Yeonwoo" loading="lazy"></div>
+            <div class="hero-name">연우</div>
+            <div class="hero-skill">破壞力 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Amane/img_001.webp" alt="Amane" loading="lazy"></div>
+            <div class="hero-name">아마네</div>
+            <div class="hero-skill">攻擊力 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Margot/img_001.webp" alt="Margot" loading="lazy"></div>
+            <div class="hero-name">마르고</div>
+            <div class="hero-skill">攻擊力 25%</div>
+          </article>
+
+          <article class="hero-box">
+            <div class="hero-frame"><img src="/img/heroes/Vivian/img_001.webp" alt="Vivian" loading="lazy"></div>
+            <div class="hero-name">비비안</div>
+            <div class="hero-skill">傷害 25%</div>
+          </article>
+        </div>
+
+        <div class="callout yellow">
+          <strong>重要:</strong> 當你理解為什麼集結員要優先用 <strong>破壞力 25% / 攻擊力 25% / 傷害 25%</strong> 這些效果時，
+          <strong>就代表你已經算是把熊狩玩懂了。</strong>
+        </div>
+
+        <h3>4-2. A/B/C/禁止上車梯表</h3>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag a">A級</span>
+            <div class="desc">推薦: 熊狩幾乎必帶的集結員</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" class="img"><div class="name">Amadeus</div><div class="hint">破壞力 25%</div></div>
+            <div class="card"><img src="/img/heroes/Chenko/img_001.webp" alt="Chenko" class="img"><div class="name">Chenko</div><div class="hint">破壞力 25%</div></div>
+            <div class="card"><img src="/img/heroes/Yeonwoo/img_001.webp" alt="Yeonwoo" class="img"><div class="name">Yeonwoo</div><div class="hint">破壞力 25%</div></div>
+            <div class="card"><img src="/img/heroes/Amane/img_001.webp" alt="Amane" class="img"><div class="name">Amane</div><div class="hint">攻擊力 25%</div></div>
+            <div class="card"><img src="/img/heroes/Margot/img_001.webp" alt="Margot" class="img"><div class="name">Margot</div><div class="hint">攻擊力 25%</div></div>
+            <div class="card"><img src="/img/heroes/Vivian/img_001.webp" alt="Vivian" class="img"><div class="name">Vivian</div><div class="hint">傷害 25%</div></div>
+          </div>
+        </div>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag b">B級</span>
+            <div class="desc">條件推薦: 依編成與情況而定</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Hilde/img_001.webp" alt="Hilde" class="img"><div class="name">Hilde</div><div class="hint">攻擊力 15%</div></div>
+            <div class="card"><img src="/img/heroes/Yang/img_001.webp" alt="Yang" class="img"><div class="name">Yang</div><div class="hint">B級</div></div>
+          </div>
+        </div>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag c">C級</span>
+            <div class="desc">補助選擇: 替代 / 補位用</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Zoe/img_001.webp" alt="Zoe" class="img"><div class="name">Zoe</div><div class="hint">機率傷害</div></div>
+            <div class="card"><img src="/img/heroes/Marlin/img_001.webp" alt="Marlin" class="img"><div class="name">Marlin</div><div class="hint">機率傷害</div></div>
+            <div class="card"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" class="img"><div class="name">Petra</div><div class="hint">機率傷害</div></div>
+            <div class="card"><img src="/img/heroes/Rosa/img_001.webp" alt="Rosa" class="img"><div class="name">Rosa</div><div class="hint">機率傷害</div></div>
+            <div class="card"><img src="/img/heroes/Jaeger/img_001.webp" alt="Jaeger" class="img"><div class="name">Jaeger</div><div class="hint">機率傷害</div></div>
+            <div class="card"><img src="/img/heroes/Longfei/img_001.webp" alt="Longfei" class="img"><div class="name">Longfei</div><div class="hint">C級</div></div>
+            <div class="card"><img src="/img/heroes/Thrud/img_001.webp" alt="Thrud" class="img"><div class="name">Thrud</div><div class="hint">C級</div></div>
+          </div>
+        </div>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag w">絕對不要上車</span>
+            <div class="desc">不推薦: 會降低集結效率</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Alcar/img_001.webp" alt="Alcar" class="img"><div class="name">Alcar</div></div>
+            <div class="card"><img src="/img/heroes/Diana/img_001.webp" alt="Diana" class="img"><div class="name">Diana</div></div>
+            <div class="card"><img src="/img/heroes/Edwin/img_001.webp" alt="Edwin" class="img"><div class="name">Edwin</div></div>
+            <div class="card"><img src="/img/heroes/Eric/img_001.webp" alt="Eric" class="img"><div class="name">Eric</div></div>
+            <div class="card"><img src="/img/heroes/Fahd/img_001.webp" alt="Fahd" class="img"><div class="name">Fahd</div></div>
+            <div class="card"><img src="/img/heroes/Forrest/img_001.webp" alt="Forrest" class="img"><div class="name">Forrest</div></div>
+            <div class="card"><img src="/img/heroes/Gordon/img_001.webp" alt="Gordon" class="img"><div class="name">Gordon</div></div>
+            <div class="card"><img src="/img/heroes/Helga/img_001.webp" alt="Helga" class="img"><div class="name">Helga</div></div>
+            <div class="card"><img src="/img/heroes/Howard/img_001.webp" alt="Howard" class="img"><div class="name">Howard</div></div>
+            <div class="card"><img src="/img/heroes/Jabel/img_001.webp" alt="Jabel" class="img"><div class="name">Jabel</div></div>
+            <div class="card"><img src="/img/heroes/Olive/img_001.webp" alt="Olive" class="img"><div class="name">Olive</div></div>
+            <div class="card"><img src="/img/heroes/Quinn/img_001.webp" alt="Quinn" class="img"><div class="name">Quinn</div></div>
+            <div class="card"><img src="/img/heroes/Saul/img_001.webp" alt="Saul" class="img"><div class="name">Saul</div></div>
+            <div class="card"><img src="/img/heroes/Seth/img_001.webp" alt="Seth" class="img"><div class="name">Seth</div></div>
+            <div class="card"><img src="/img/heroes/Triton/img_001.webp" alt="Triton" class="img"><div class="name">Triton</div><div class="hint">禁止</div></div>
+            <div class="card"><img src="/img/heroes/Sophia/img_001.webp" alt="Sophia" class="img"><div class="name">Sophia</div><div class="hint">禁止上車</div></div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="callout">
+            <strong>第一格</strong><br>
+            一定要放攻擊型英雄。只有這一格會直接影響整個集結效率。
+          </div>
+          <div class="callout green">
+            <strong>第二格・第三格</strong><br>
+            主要放等級高的英雄，用來補出征兵力數量。
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>5. 巨熊部隊編成核心</h2>
+        <p>打熊專用部隊的核心就是以弓兵為主去編成。</p>
+
+        <div class="checklist">
+          <div class="check-card">
+            <h3>編成優先順序</h3>
+            <ul>
+              <li>第一格一定放攻擊型英雄</li>
+              <li>兵力盡量以弓兵接近 100% 為優先</li>
+              <li>弓兵不夠時再補騎兵</li>
+              <li>騎兵也不夠時最後才補步兵</li>
+            </ul>
+          </div>
+
+          <div class="check-card">
+            <h3>實戰原則</h3>
+            <ul>
+              <li>越強的部隊越要維持高弓兵比例</li>
+              <li>主力弓兵部隊送去最上位集結長</li>
+              <li>較弱部隊再分給次順位集結</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>6. 熊開始前的準備方式</h2>
+        <p>熊開始前建議先完成以下準備。</p>
+        <ul>
+          <li>正在採集的部隊全部撤回</li>
+          <li>關閉集結自動參加</li>
+          <li>在城市附近資源地佔領畫面先存好部隊預設</li>
+          <li>為了防止重複編成，保存後先出兵一次</li>
+          <li>熊開始前確保部隊都已返城</li>
+        </ul>
+
+        <div class="callout">
+          <strong>為什麼重要?</strong><br>
+          這樣做之後，熊開始時編隊速度會快很多，失誤也會少很多。
+          最終就會變成 <strong>更快再出兵 = 更多次搭上好集結 = 更高分</strong>。
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>7. 集結參與優先順序</h2>
+        <p>
+          弓兵塞滿的最強部隊，最適合送去 <strong>最強的集結發起者</strong>。
+        </p>
+        <p>
+          先在聯盟內確認哪幾位集結長最會出分，
+          再分成 1 階、2 階這樣安排優先順序，效率會更好。
+        </p>
+
+        <div class="grid-2">
+          <div class="check-card">
+            <h3>推薦方式</h3>
+            <ul>
+              <li>主力弓兵部隊 → 1 階集結</li>
+              <li>下一隊 → 2 階集結</li>
+              <li>剩餘部隊 → 視情況補上其他集結</li>
+            </ul>
+          </div>
+          <div class="check-card">
+            <h3>不推薦方式</h3>
+            <ul>
+              <li>看到空位就立刻上車</li>
+              <li>不看強度，只看有沒有位置</li>
+              <li>把主力弓兵部隊浪費在弱集結上</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout green">
+          <strong>核心:</strong> 不是有車就上，而是
+          <strong>優先上強的集結，點數效率才會更高。</strong>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>8. 集結再次參與時機</h2>
+        <p>
+          如果當下沒搭到想上的集結，也不用急著隨便上弱集結。
+          反而 <strong>等目標集結長開下一輪集結再上</strong>，通常更容易打出高分。
+        </p>
+
+        <ul>
+          <li>離熊陷阱近的集結，回城與再次參與速度通常更快。</li>
+          <li>越能精準計算返城時間，重複參與效率就越高。</li>
+          <li>不只看戰力數字，集結生成時間與移動距離也很重要。</li>
+        </ul>
+
+        <div class="callout yellow">
+          <strong>重點:</strong>
+          集結參與最重要的不只是戰力數字，
+          還有 <strong>返城時間計算 + 集結生成時機 + 快速再次參與</strong>。
+        </div>
+      </section>
+
+      <section id="summary" class="block anchor">
+        <h2>9. 巨熊高分核心總結</h2>
+
+        <div class="score-list">
+          <div class="score-card">
+            <div class="big">1</div>
+            <div class="small">盡量 확보弓兵兵力</div>
+          </div>
+          <div class="score-card">
+            <div class="big">2</div>
+            <div class="small">攻擊型英雄放第一格</div>
+          </div>
+          <div class="score-card">
+            <div class="big">3</div>
+            <div class="small">開始前先存好部隊編成</div>
+          </div>
+          <div class="score-card">
+            <div class="big">4</div>
+            <div class="small">優先參與強集結長</div>
+          </div>
+          <div class="score-card">
+            <div class="big">5</div>
+            <div class="small">沒搭到就等下一輪</div>
+          </div>
+        </div>
+
+        <h3>結語</h3>
+        <p>
+          巨熊不是單純兵力多就夠了，
+          真正拉開差距的是 <strong>弓兵中心編成、攻擊型英雄配置、強集結優先參與、返城時間計算</strong>。
+        </p>
+        <p>
+          如果你的熊分數一直上不去，先從下面 3 件事開始改。
+        </p>
+        <ul>
+          <li>改成弓兵中心部隊</li>
+          <li>把攻擊型英雄固定在第一格</li>
+          <li>優先搭強集結</li>
+        </ul>
+
+        <div class="callout green">
+          <strong>結論:</strong> 只要先把這 3 點改好，巨熊分數通常就會很明顯提升。
+        </div>
+      </section>
+
+      <p class="foot">
+        本文為依據實戰經驗整理的非官方指南，最適配置仍可能因伺服器環境與英雄世代更新而變動。
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

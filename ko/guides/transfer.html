@@ -1,0 +1,1215 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>킹샷 왕국 이민 심화 가이드 | 이민 조건, 특별 초대, 전투력 제한, 체크리스트 | Kingshot Data</title>
+  <meta name="description" content="킹샷 왕국 이민 심화 가이드입니다. 왕국 이민 조건, 일반 초대와 특별 초대, 이민 전투력 제한, 관리자 관점 운영 팁, 이민 준비 체크리스트까지 한 페이지에서 정리했습니다." />
+  <meta name="keywords" content="킹샷 왕국 이민, 킹샷 이민 가이드, 킹샷 특별 초대, 킹샷 일반 초대, 킹샷 이민 전투력 제한, 킹샷 서버 이민, Kingshot transfer guide, Kingshot kingdom transfer" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/transfer.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/transfer.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/transfer.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/transfer.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/transfer.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/transfer.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="킹샷 왕국 이민 심화 가이드 | 이민 조건, 특별 초대, 전투력 제한, 체크리스트" />
+  <meta property="og:description" content="킹샷 왕국 이민의 핵심 구조와 실전 운영 팁을 정리했습니다. 이민 조건, 일반/특별 초대, 전투력 제한, 관리자 기준 우선순위, 이민 전 체크리스트를 한 번에 확인하세요." />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/guides/transfer.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guide/transfer-guide.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="킹샷 왕국 이민 심화 가이드 대표 이미지" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="킹샷 왕국 이민 심화 가이드 | 이민 조건, 특별 초대, 전투력 제한, 체크리스트" />
+  <meta name="twitter:description" content="킹샷 왕국 이민의 핵심 구조와 실전 운영 팁을 정리했습니다. 이민 조건, 일반/특별 초대, 전투력 제한, 관리자 기준 우선순위, 이민 전 체크리스트를 확인하세요." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guide/transfer-guide.webp" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guide/transfer-guide.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --panel3:#fbfdff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --note-bg:#fff7ed;
+      --note-border:rgba(245,158,11,.35);
+      --ok-bg:#f0fdf4;
+      --ok-border:#bbf7d0;
+      --blue-bg:#eff6ff;
+      --blue-border:#bfdbfe;
+      --danger:#ef4444;
+      --success:#16a34a;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.65 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      word-break:keep-all;
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      justify-content:flex-end;
+    }
+    nav.lang a{
+      width:64px;
+      min-width:64px;
+      height:36px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:800;
+      text-align:center;
+      white-space:nowrap;
+      flex:0 0 64px;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:900;
+      border-color:#c7d2fe;
+      background:#f8fbff;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+      scrollbar-width:none;
+    }
+    nav.section-tabs::-webkit-scrollbar{display:none}
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+      flex:0 0 auto;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px;
+      height:160px;
+      object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+
+    h1{margin:0 0 8px;font-size:28px;line-height:1.15}
+    h2{margin:0 0 10px;font-size:20px;line-height:1.3}
+    h3{margin:0 0 10px;font-size:16px;line-height:1.35}
+    .sub{margin:0;color:var(--muted)}
+    .muted{color:var(--muted)}
+
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .jump{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section p{margin:8px 0}
+
+    .summary-grid,
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+    .summary-grid.summary-4{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+      padding:14px;
+      min-width:0;
+    }
+
+    .mini-title{
+      margin:0 0 8px;
+      font-size:15px;
+      font-weight:900;
+      line-height:1.35;
+    }
+
+    .summary-card{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      min-height:100%;
+    }
+    .summary-label{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .summary-value{
+      font-size:22px;
+      font-weight:1000;
+      line-height:1.1;
+    }
+    .summary-desc{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .note,
+    .ok-box,
+    .blue-box{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note{
+      border:1px solid var(--note-border);
+      background:rgba(245,158,11,.08);
+    }
+    .ok-box{
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+    }
+    .blue-box{
+      border:1px solid var(--blue-border);
+      background:var(--blue-bg);
+    }
+    .note strong,.ok-box strong,.blue-box strong{font-weight:900}
+    .note .note-ico{
+      width:18px;height:18px;flex:0 0 18px;
+      margin-top:2px;color:#b45309;
+    }
+
+    .toc{
+      display:grid;
+      gap:8px;
+      margin-top:12px;
+    }
+    .toc a{
+      display:inline-flex;
+      align-items:center;
+      width:fit-content;
+      max-width:100%;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--text);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    ul.clean{margin:0;padding-left:18px}
+    ul.clean li{margin:6px 0}
+
+    .compare-table-wrap,
+    .table-wrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#fff;
+      margin-top:10px;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+      min-width:720px;
+    }
+    thead th{
+      position:sticky;
+      top:var(--sticky-top);
+      background:#f8fafc;
+      text-align:left;
+      padding:12px 12px;
+      border-bottom:1px solid var(--border);
+      font-size:13px;
+      white-space:nowrap;
+      z-index:3;
+    }
+    tbody td{
+      padding:12px 12px;
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:14px;
+      line-height:1.6;
+    }
+    tbody tr:nth-child(even) td{background:#fcfcfd}
+    tbody tr:last-child td{border-bottom:0}
+
+    .phase-col{width:86px}
+    .name-col{width:180px}
+
+    .diff-normal{color:var(--success);font-weight:900}
+    .diff-special{color:var(--danger);font-weight:900}
+
+    .mobile-compare{
+      display:none;
+      gap:12px;
+      margin-top:10px;
+    }
+    .compare-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:14px;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+    }
+    .compare-badge{
+      display:inline-flex;
+      align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      margin-bottom:10px;
+      border:1px solid var(--border);
+    }
+    .compare-badge.normal{
+      color:var(--success);
+      background:#f0fdf4;
+      border-color:#bbf7d0;
+    }
+    .compare-badge.special{
+      color:var(--danger);
+      background:#fef2f2;
+      border-color:#fecaca;
+    }
+    .compare-list{
+      display:grid;
+      gap:8px;
+    }
+    .compare-row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:9px 10px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      font-size:13px;
+    }
+    .compare-row .k{
+      color:var(--muted);
+      font-weight:700;
+      flex:0 0 92px;
+    }
+    .compare-row .v{
+      text-align:right;
+      font-weight:900;
+      flex:1 1 auto;
+    }
+
+    .related{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .seo-copy{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:1024px){
+      .summary-grid.summary-4{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        flex-wrap:wrap;
+        align-items:flex-start;
+      }
+      .brand{width:100%}
+      nav.lang{
+        width:100%;
+        justify-content:flex-start;
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px;height:120px}
+      .grid,
+      .summary-grid,
+      .summary-grid.summary-4{
+        grid-template-columns:1fr;
+      }
+      .mobile-compare{
+        display:grid;
+      }
+      .compare-table-wrap{
+        display:none;
+      }
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      h2{font-size:19px}
+      section{padding:14px}
+      .hero{padding:14px}
+      .card{padding:12px}
+      nav.lang{gap:6px}
+      nav.lang a{
+        width:58px;
+        min-width:58px;
+        flex:0 0 58px;
+        height:34px;
+        font-size:12px;
+      }
+      .summary-value{font-size:20px}
+      .compare-row .k{flex:0 0 86px}
+      .toc a{
+        width:100%;
+        justify-content:center;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"킹샷 왕국 이민 심화 가이드 | 이민 조건, 특별 초대, 전투력 제한, 체크리스트",
+    "description":"킹샷 왕국 이민 심화 가이드입니다. 왕국 이민 조건, 일반 초대와 특별 초대, 이민 전투력 제한, 관리자 관점 운영 팁, 이민 준비 체크리스트까지 한 페이지에서 정리했습니다.",
+    "inLanguage":"ko",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ko/guides/transfer.html"
+    },
+    "author":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Kingshot Data",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+      }
+    },
+    "image":"https://kingshotdata.kr/img/guide/transfer-guide.webp"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"킹샷 왕국 이민은 같은 그룹끼리만 가능한가요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"네. 왕국 이민은 같은 진행도 그룹 안에서만 가능합니다. 순금 단계나 영웅 세대 진행도가 비슷한 왕국끼리 같은 이민 그룹으로 묶이는 구조로 이해하면 편합니다."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"특별 초대는 언제 필요한가요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"특별 초대는 이민 전투력 제한을 초과하는 대상을 받을 때 사용합니다. 일반 초대는 제한 이하 대상에게만 사용할 수 있습니다."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"이민 전투력 제한은 무엇까지 포함되나요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"영주 전투력뿐 아니라 병원 부상병과 징병소 예비병까지 포함해 판정되는 구조로 이해하면 됩니다. 실제 이민 전에는 부상병과 예비병 정리 여부까지 확인하는 것이 안전합니다."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"이민 준비에서 가장 중요한 것은 무엇인가요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"같은 그룹 여부 확인, 전투력 제한 충족, 도시센터 레벨 조건, 연맹 탈퇴 여부, 쿨타임, 목표 왕국 캐릭터 수, 이민권 확보를 우선 확인해야 합니다."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"홈",
+        "item":"https://kingshotdata.kr/ko/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"가이드",
+        "item":"https://kingshotdata.kr/ko/guides/"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"왕국 이민 심화 가이드",
+        "item":"https://kingshotdata.kr/ko/guides/transfer.html"
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"></path>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"></path>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/transfer.html">EN</a>
+        <a href="/ko/guides/transfer.html" aria-current="page">KO</a>
+        <a href="/ja/guides/transfer.html">JA</a>
+        <a href="/zh-tw/guides/transfer.html">TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">개요</a>
+      <a href="#rules">핵심 규칙</a>
+      <a href="#manager">관리자 관점</a>
+      <a href="#migrant">이민 준비</a>
+      <a href="#checklist">체크리스트</a>
+      <a href="#faq">FAQ</a>
+      <a href="#related">관련</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/guides/">가이드</a> <span class="muted">›</span>
+        <span>왕국 이민 심화 가이드</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/guide/transfer-guide.webp" alt="킹샷 왕국 이민 심화 가이드 대표 이미지" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>킹샷 왕국 이민 심화 가이드</h1>
+          <p class="sub">
+            왕국 이민의 기본 조건부터 일반 초대와 특별 초대의 차이, 이민 전투력 제한, 관리자 입장에서의 실전 운영 기준,
+            실제로 이민을 준비하는 유저가 확인해야 할 체크포인트까지 한 번에 정리한 심화 가이드입니다.
+          </p>
+
+          <div class="quote">
+            이 페이지는 단순 규칙 요약이 아니라, 실제 서버 운영과 이민 준비 경험을 바탕으로
+            누굴 받을지, 어디로 갈지, 무엇을 먼저 확인해야 하는지를 정리한 실전형 안내서입니다.
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">개요</a><span class="dotsep">•</span>
+            <a href="#rules">핵심 규칙</a><span class="dotsep">•</span>
+            <a href="#manager">관리자 관점</a><span class="dotsep">•</span>
+            <a href="#migrant">이민 준비</a><span class="dotsep">•</span>
+            <a href="#faq">FAQ</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>개요</h2>
+        <p>
+          킹샷 왕국 이민은 같은 진행도 그룹 안에서 다른 왕국으로 도시를 이동하는 시스템입니다.
+          표면적으로는 이민권과 조건만 맞추면 되는 것처럼 보이지만, 실제로는 서버 분위기, 관리자 성향,
+          특별 초대 사용 가능 횟수, 이민 전투력 제한, 연맹 내 자리 배치까지 함께 고려해야 결과가 좋습니다.
+        </p>
+        <p class="seo-copy">
+          특히 킹샷 왕국 이민 시즌에는 단순히 전투력이 높은 유저만 선호되는 것이 아니라,
+          서버 적응력, 소통 능력, 연맹과의 합, 기존 멤버와의 충돌 가능성, 관리자 신뢰도까지 같이 평가되는 경우가 많습니다.
+          그래서 킹샷 이민 가이드는 규칙 정리만으로 끝내기보다, 관리자 입장과 이민자 입장을 함께 이해하는 방식이 더 실전적입니다.
+        </p>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>핵심:</strong>
+            이민은 단순 이동이 아니라 서버와 연맹이 사람을 고르는 과정이기도 합니다.
+            규칙 충족만큼이나 평판, 소통, 서버 적응력, 그리고 관리자와의 신뢰가 중요합니다.
+          </div>
+        </div>
+
+        <div class="summary-grid summary-4">
+          <article class="card summary-card">
+            <div class="summary-label">핵심 1</div>
+            <div class="summary-value">같은 그룹</div>
+            <div class="summary-desc">왕국 이민은 같은 진행도 그룹끼리만 가능합니다.</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">핵심 2</div>
+            <div class="summary-value">일반 / 특별 초대</div>
+            <div class="summary-desc">전투력 제한 이하인지 초과인지에 따라 필요한 초대 방식이 달라집니다.</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">핵심 3</div>
+            <div class="summary-value">전투력 제한</div>
+            <div class="summary-desc">표기 전투력만이 아니라 부상병과 예비병까지 함께 점검해야 안전합니다.</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">핵심 4</div>
+            <div class="summary-value">운영과 신뢰</div>
+            <div class="summary-desc">특별 초대 사용은 서버 방향과 관리자 신뢰를 보여주는 지표가 됩니다.</div>
+          </article>
+        </div>
+
+        <div class="toc" aria-label="본문 목차">
+          <a href="#rules">핵심 규칙 정리</a>
+          <a href="#invite-compare">일반 초대 vs 특별 초대 비교</a>
+          <a href="#manager">관리자라면 어떻게 운영할지</a>
+          <a href="#migrant">이민을 준비하는 입장에서 볼 것</a>
+          <a href="#checklist">이민 전 체크리스트</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </section>
+
+      <section id="rules">
+        <span class="anchor"></span>
+        <h2>핵심 규칙 정리</h2>
+
+        <div class="grid">
+          <article class="card">
+            <p class="mini-title">이민 기본 구조</p>
+            <ul class="clean">
+              <li>같은 진행도 그룹 안에서만 이민이 가능합니다.</li>
+              <li>왕국은 강성 왕국과 일반 왕국으로 나뉘며 수용 인원 구조가 다를 수 있습니다.</li>
+              <li>일반 초대와 특별 초대는 쓰임이 다르며, 전투력 제한을 기준으로 구분됩니다.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">이민 전 조건</p>
+            <ul class="clean">
+              <li>이민 전투력 제한을 초과하면 일반적으로 이동이 어렵습니다.</li>
+              <li>도시센터 레벨, 비전투 상태, 연맹 탈퇴, 이민 쿨타임 등 기본 조건을 충족해야 합니다.</li>
+              <li>목표 왕국 내 보유 캐릭터 수와 이민권 수량도 미리 확인해야 합니다.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="table-wrap" aria-label="왕국 이민 핵심 규칙 표">
+          <table>
+            <thead>
+              <tr>
+                <th class="phase-col">구분</th>
+                <th class="name-col">항목</th>
+                <th>설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>그룹</td>
+                <td>같은 진행도</td>
+                <td>왕국 이민은 같은 진행도 그룹끼리만 가능하며, 순금 단계나 영웅 세대 해금 상태가 비슷한 왕국끼리 묶이는 구조로 이해하면 편합니다.</td>
+              </tr>
+              <tr>
+                <td>초대</td>
+                <td>일반 초대</td>
+                <td>이민 전투력 제한 이하인 대상을 받는 데 사용합니다. 자리만 있다고 무조건 받는 것이 아니라 서버 기준과 연맹 우선순위가 같이 반영됩니다.</td>
+              </tr>
+              <tr>
+                <td>초대</td>
+                <td>특별 초대</td>
+                <td>이민 전투력 제한을 초과하는 대상을 받을 때 필요합니다. 횟수가 제한적이기 때문에 관리자가 누구에게 쓸지 매우 신중히 판단합니다.</td>
+              </tr>
+              <tr>
+                <td>전투력</td>
+                <td>판정 기준</td>
+                <td>영주 전투력뿐 아니라 병원 부상병, 징병소 예비병 등까지 포함해 판정될 수 있으므로, 단순 표기 전투력만 보고 판단하면 실수가 날 수 있습니다.</td>
+              </tr>
+              <tr>
+                <td>기본 조건</td>
+                <td>상태 점검</td>
+                <td>도시센터 레벨, 전투 상태 여부, 외부 충격 부대, 연맹 가입 상태, 국왕/관리자 여부, 최근 이민 후 경과 일수 등을 함께 점검해야 합니다.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="invite-compare">
+        <span class="anchor"></span>
+        <h2>일반 초대 vs 특별 초대</h2>
+        <p class="seo-copy">
+          킹샷 특별 초대와 일반 초대의 차이를 정확히 이해해야 이민 시즌 판단이 쉬워집니다.
+          특히 킹샷 이민 전투력 제한을 넘는 유저를 받으려면 특별 초대가 필요하기 때문에,
+          관리자는 이 권한을 누구에게 쓸지 미리 계획해야 하고 이민자도 본인이 어느 범주인지 먼저 파악해야 합니다.
+        </p>
+
+        <div class="compare-table-wrap" aria-label="일반 초대와 특별 초대 비교표">
+          <table>
+            <thead>
+              <tr>
+                <th>항목</th>
+                <th>일반 초대</th>
+                <th>특별 초대</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>기본 대상</td>
+                <td class="diff-normal">이민 전투력 제한 이하</td>
+                <td class="diff-special">이민 전투력 제한 초과</td>
+              </tr>
+              <tr>
+                <td>사용 난도</td>
+                <td>상대적으로 일반적</td>
+                <td>희소 자원처럼 취급되는 경우가 많음</td>
+              </tr>
+              <tr>
+                <td>운영 의미</td>
+                <td>기본 수용 및 자리 배치</td>
+                <td>핵심 인원 확보 또는 프로젝트성 영입</td>
+              </tr>
+              <tr>
+                <td>관리자 판단 요소</td>
+                <td>자리, 적응력, 소통, 서버 규칙 준수</td>
+                <td>전투력, 영향력, 기존 멤버 반응, 서버 방향성</td>
+              </tr>
+              <tr>
+                <td>이민자 입장 포인트</td>
+                <td>조건만 맞추면 가능성이 높아짐</td>
+                <td>왜 나를 받아야 하는지 설득 포인트가 더 필요함</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mobile-compare" aria-label="모바일 비교 카드">
+          <article class="compare-card">
+            <div class="compare-badge normal">일반 초대</div>
+            <div class="compare-list">
+              <div class="compare-row"><span class="k">대상</span><span class="v">전투력 제한 이하</span></div>
+              <div class="compare-row"><span class="k">난도</span><span class="v">상대적으로 일반적</span></div>
+              <div class="compare-row"><span class="k">의미</span><span class="v">기본 수용 및 자리 배치</span></div>
+              <div class="compare-row"><span class="k">판단</span><span class="v">자리, 적응력, 소통</span></div>
+            </div>
+          </article>
+
+          <article class="compare-card">
+            <div class="compare-badge special">특별 초대</div>
+            <div class="compare-list">
+              <div class="compare-row"><span class="k">대상</span><span class="v">전투력 제한 초과</span></div>
+              <div class="compare-row"><span class="k">난도</span><span class="v">희소 자원처럼 취급</span></div>
+              <div class="compare-row"><span class="k">의미</span><span class="v">핵심 영입 / 프로젝트성 영입</span></div>
+              <div class="compare-row"><span class="k">판단</span><span class="v">영향력, 방향성, 신뢰</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="blue-box">
+          <div>
+            <strong>실전 포인트</strong>
+            <p style="margin:6px 0 0">
+              특별 초대는 단순히 전투력이 높다고 무조건 쓰는 카드가 아닙니다.
+              서버 분위기와 연맹 내 합까지 함께 봐야 하며, 잘못 쓰면 기존 멤버들이 이탈할 수도 있습니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="manager">
+        <span class="anchor"></span>
+        <h2>본인이 관리자라면</h2>
+
+        <article class="card">
+          <p class="mini-title">1. 본인이 고래가 아니더라도, 원하는 방향으로 이민을 진행하려면 입지를 먼저 만들어야 한다</p>
+          <p>
+            연맹에서 그리고 서버에서 자신의 입지를 다지는 것과 동시에, 서버 실세들에게 본인이 얼마나 중요한지 어필해야 합니다.
+            여기서 핵심은 결국 사람이 좋아야 한다는 점입니다. 모든 플레이어에게 친절하고,
+            서버 전체에 불필요한 마찰을 만들지 않는 태도가 중요합니다.
+          </p>
+          <p>
+            실세들도 결국 사람이라 같이 게임하기 좋은 사람을 선호합니다.
+            그래서 평소 어떻게 행동했는지에 따라 이민 시즌에 행사할 수 있는 힘의 크기가 결정됩니다.
+            단순히 과금 규모만으로 모든 것이 정해지지 않는 이유가 여기에 있습니다.
+          </p>
+        </article>
+
+        <article class="card" style="margin-top:14px">
+          <p class="mini-title">2. 이민 우선순위를 정해야 한다</p>
+          <p>
+            이민 시즌이 열리면 예상보다 훨씬 많은 문의가 들어올 수 있습니다.
+            그래서 미리 메모장이나 시트에 고유 ID, 서버, 원하는 연맹, 추천인 여부 등을 기록하고,
+            실제로 우리 서버 또는 연맹 소통방에 들어와 적응을 잘하는 사람에게 우선순위를 부여하는 식으로 정리하는 것이 효율적입니다.
+          </p>
+
+          <div class="ok-box">
+            <div>
+              <strong>예시 우선순위</strong>
+              <ul class="clean" style="margin-top:8px">
+                <li>1순위: 인성 좋은 고래</li>
+                <li>2순위: 연맹원들과 소통이 잘 되는 사람</li>
+                <li>3순위: 이미 넘어온 고래 또는 그 패밀리들이 원하는 사람</li>
+                <li>4순위: 그 외</li>
+              </ul>
+            </div>
+          </div>
+
+          <p>
+            결국 국왕과 지속적으로 소통하면서 이번 이민에서 특별 초대권을 얼마나 사용할 수 있는지,
+            일반권은 얼마나 받을 수 있는지 확정받고 계산해야 합니다.
+          </p>
+        </article>
+
+        <article class="card" style="margin-top:14px">
+          <p class="mini-title">3. 고래를 본인 연맹에 단체 이민으로 모시고, 원하는 사람이 있다면 교차 검증을 들어가라</p>
+          <p>
+            하나의 일탈 사건이 연맹원들을 떨어지게 만든 사례는 생각보다 많습니다.
+            특히 이민이 진행될 즈음에는 서버에 여러 말과 드라마가 함께 생기기 쉽습니다.
+            그래서 특정 고래가 원한다고 해서 무조건 받기보다, 다른 고래와 기존 서버 멤버들 반응을 함께 보면서 검증하는 과정이 필요합니다.
+          </p>
+          <p>
+            연맹 전체에 부담이 되는 인물이라면 우선순위를 뒤로 미루는 것도 하나의 운영입니다.
+            이민은 한 명을 받는 문제가 아니라, 받았을 때 기존 멤버들이 얼마나 안정적으로 같이 갈 수 있는지의 문제이기 때문입니다.
+          </p>
+        </article>
+
+        <article class="card" style="margin-top:14px">
+          <p class="mini-title">4. 고래를 모시려면 프로젝트를 제시하라</p>
+          <p>
+            과금 규모가 큰 유저일수록 이민 효율이 안 좋으면 결정을 오래 미룹니다.
+            그래서 관리자는 우리 연맹의 방향, 관리 방식, NAP 구조, 이벤트 운영 기준,
+            서버 분위기 같은 것을 하나의 프로젝트처럼 설명할 필요가 있습니다.
+          </p>
+          <p>
+            그냥 오시면 됩니다가 아니라, 오시면 어떤 전쟁 환경에서 어떤 역할을 하게 되고,
+            어떤 방향으로 서버를 만들고 싶은지까지 보여줘야 신뢰가 생깁니다.
+            그분들이 오신다면 연맹뿐 아니라 서버 전체에도 큰 힘이 되기 때문입니다.
+          </p>
+        </article>
+      </section>
+
+      <section id="migrant">
+        <span class="anchor"></span>
+        <h2>이민을 준비하는 입장</h2>
+
+        <div class="grid">
+          <article class="card">
+            <p class="mini-title">1. 서버가 안정된 곳인지 확인해야 한다</p>
+            <p>
+              항상 교차 검증을 해야 합니다. 최소 한 달 이상은 지내야 할 곳이기 때문에,
+              겉으로 보이는 전투력보다 서버 분위기와 전쟁 빈도, 공격적인 유저 비율, NAP 안정성을 먼저 봐야 합니다.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">2. 관리자의 성향을 봐야 한다</p>
+            <p>
+              관리자가 연맹원들에게 얼마나 진심인지, 말과 행동이 일치하는지 확인해야 합니다.
+              이민 시즌에만 친절한지, 평소에도 운영이 꾸준한지 보는 것이 중요합니다.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">3. 가고자 하는 연맹이 본인과 맞아야 한다</p>
+            <p>
+              어떤 연맹은 규율이 엄격하고, 어떤 연맹은 NAP 기준으로 자유로운 분위기가 있습니다.
+              본인 성향과 맞지 않는 곳에 들어가면 전투력과 무관하게 오래 버티기 어렵습니다.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">4. 본인 연맹의 입지를 확인해야 한다</p>
+            <p>
+              입지가 좋다면 전군 출격이나 예상치 못한 공격이 들어올 때 피해를 줄일 수 있습니다.
+              단순히 랭킹만 보지 말고, 서버 내에서 그 연맹이 얼마나 보호받고 있는지도 함께 보세요.
+            </p>
+          </article>
+        </div>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>추가:</strong>
+            일반권과 특별 초대권은 단순한 숫자가 아니라 하나의 약속입니다.
+            이 약속을 어떻게 쓰는지가 그 서버와 연맹의 신뢰도를 보여주는 지표가 되기도 합니다.
+          </div>
+        </div>
+
+        <p class="seo-copy">
+          킹샷 왕국 이민을 준비하는 유저라면 전투력만 보지 말고, 킹샷 특별 초대를 써줄 만큼 서버가 나를 원하는지,
+          킹샷 이민 전투력 제한을 맞추기 위해 어떤 조정이 필요한지, 그리고 목표 연맹이 나와 실제로 잘 맞는지까지 같이 확인해야 합니다.
+          결국 오래 남는 이민은 숫자가 아니라 환경 선택에서 결정됩니다.
+        </p>
+      </section>
+
+      <section id="checklist">
+        <span class="anchor"></span>
+        <h2>이민 전 체크리스트</h2>
+
+        <div class="summary-grid">
+          <article class="card summary-card">
+            <div class="summary-label">1단계</div>
+            <div class="summary-value">그룹 확인</div>
+            <div class="summary-desc">내 서버와 목표 서버가 같은 이민 그룹인지 먼저 확인합니다.</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">2단계</div>
+            <div class="summary-value">전투력 점검</div>
+            <div class="summary-desc">이민 전투력 제한과 부상병·예비병 포함 여부를 같이 봅니다.</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">3단계</div>
+            <div class="summary-value">상태 정리</div>
+            <div class="summary-desc">연맹 탈퇴, 비전투 상태, 관리자 권한 여부를 정리합니다.</div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-label">4단계</div>
+            <div class="summary-value">사전 소통</div>
+            <div class="summary-desc">목표 연맹과 자리, 우선순위, 초대 종류를 먼저 맞춰둡니다.</div>
+          </article>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <p class="mini-title">기본 조건</p>
+            <ul class="clean">
+              <li>내 왕국과 목표 왕국이 같은 이민 그룹인지 확인</li>
+              <li>도시센터 레벨 조건 충족</li>
+              <li>이민 전투력 제한 충족</li>
+              <li>부상병과 예비병 포함 여부까지 확인</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">상태 점검</p>
+            <ul class="clean">
+              <li>현재 전투 상태가 아닌지 확인</li>
+              <li>외부 충격 부대나 특수 상태가 남아 있지 않은지 확인</li>
+              <li>연맹 탈퇴 완료 여부 확인</li>
+              <li>국왕 또는 이민 관리자 권한 상태가 아닌지 확인</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">계정/아이템</p>
+            <ul class="clean">
+              <li>목표 왕국 내 보유 캐릭터 수 확인</li>
+              <li>이민권 수량 확보</li>
+              <li>특별 초대 또는 일반 초대 필요 여부 사전 확인</li>
+              <li>이민 후 자원 보호 한도 초과분 처리 계획 세우기</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">사전 커뮤니케이션</p>
+            <ul class="clean">
+              <li>목표 연맹 관리자와 우선순위 여부 확인</li>
+              <li>내가 어느 포지션으로 들어가는지 확인</li>
+              <li>기존 멤버들과 분위기가 맞는지 확인</li>
+              <li>서버 규칙과 NAP 규칙 숙지</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="faq">
+        <span class="anchor"></span>
+        <h2>FAQ</h2>
+
+        <div class="grid">
+          <article class="card">
+            <p class="mini-title">같은 그룹끼리만 이민 가능한가요?</p>
+            <p>
+              네. 기본적으로 같은 진행도 그룹 안에서만 이민이 가능합니다.
+              그래서 먼저 목표 왕국이 내 서버와 같은 그룹인지부터 확인해야 합니다.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">특별 초대는 누구에게 써야 하나요?</p>
+            <p>
+              보통은 전투력 제한을 넘는 핵심 인원, 서버 기여도가 높은 유저,
+              혹은 연맹 프로젝트상 꼭 필요한 인원에게 우선 배정하는 경우가 많습니다.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">전투력만 높으면 우선순위가 올라가나요?</p>
+            <p>
+              꼭 그렇지는 않습니다. 인성, 소통, 기존 멤버와의 합, 서버 적응력,
+              그리고 추천인의 신뢰도도 실제 우선순위에 큰 영향을 줍니다.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="mini-title">이민할 서버를 고를 때 가장 중요한 것은 무엇인가요?</p>
+            <p>
+              안정성입니다. 전투력 랭킹보다 서버 분위기, 관리자 운영 방식,
+              연맹의 입지, 공격 빈도와 NAP 안정성을 먼저 보는 것이 좋습니다.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="seo-copy">
+        <h2>킹샷 왕국 이민을 준비할 때 꼭 알아야 할 점</h2>
+        <p>
+          킹샷 왕국 이민은 단순히 이민권만 준비한다고 끝나는 콘텐츠가 아닙니다.
+          실제로는 서버 간 분위기 차이, 특별 초대 운용, 관리자와의 소통, 연맹 내 입지,
+          그리고 이민 전투력 제한 조절까지 함께 맞춰야 원하는 결과를 얻기 쉽습니다.
+        </p>
+        <p>
+          그래서 킹샷 이민 가이드를 찾는 유저라면, 단순 규칙보다도
+          어떤 서버가 안정적인지, 어떤 연맹이 본인과 맞는지, 관리자가 얼마나 신뢰할 만한지까지 함께 보는 습관이 중요합니다.
+          특히 킹샷 특별 초대와 킹샷 일반 초대는 서버가 누구를 얼마나 원하고 있는지를 보여주는 지표이기도 하므로,
+          이민 시즌에는 숫자보다 관계와 신뢰가 더 큰 영향을 미칠 때가 많습니다.
+        </p>
+        <p>
+          이 페이지는 킹샷 왕국 이민 조건, 특별 초대 사용 판단, 관리자 관점 우선순위, 실제 이민자 체크리스트를 함께 정리한 심화형 안내서입니다.
+          이민을 앞두고 있다면 본문 내용을 기준으로 내 조건, 목표 서버, 목표 연맹, 이민권, 전투력 상태를 차례대로 점검해보는 것을 추천합니다.
+        </p>
+      </section>
+
+      <section id="related">
+        <h2>관련 가이드 / 페이지</h2>
+        <div class="related">
+          <a class="pill" href="/ko/guides/hallofgovernors.html">최강영주 가이드</a>
+          <a class="pill" href="/ko/guides/kingshot-f2p-guide.html">무과금 / 소과금 성장 가이드</a>
+          <a class="pill" href="/ko/guides/svs-guide.html">서버전 가이드</a>
+          <a class="pill" href="/ko/guides/gift-code.html">기프트코드 가이드</a>
+          <a class="pill" href="/ko/guides/kingdom-migration-notice.html">왕국 이민 공지 정리</a>
+          <a class="pill" href="/ko/heroes/">영웅 전체 보기</a>
+          <a class="pill" href="/ko/buildings/">건물 전체 보기</a>
+          <a class="pill" href="/ko/guides/">가이드 전체 보기</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', setStickyTop);
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', init);
+      }else{
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

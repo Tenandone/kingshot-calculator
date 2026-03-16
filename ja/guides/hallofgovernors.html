@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot 最強領主(Hall of Governors)ガイド · ステージ / スコア / 報酬 / 攻略</title>
+  <meta name="description" content="Kingshot Hall of Governors(最強領主)ガイド: 1～5回目のステージ別スコア表、アマデウス / ヒルデ報酬、領主装備 / チャーム強化スコア、TOP10 / TOP100条件、微課金 / 重課金向け運用のコツまで一度に整理。" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ja/guides/hallofgovernors.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/hallofgovernors.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/hallofgovernors.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/hallofgovernors.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/hallofgovernors.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot 最強領主(Hall of Governors)ガイド" />
+  <meta property="og:description" content="1～5回目のスコア表、アマデウス / ヒルデ解放条件、領主装備 / チャームスコア、課金・無課金向け運用のコツまで一度に整理。" />
+  <meta property="og:url" content="https://kingshotdata.kr/ja/guides/hallofgovernors.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ja_JP" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --line:#e7ecf5;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:16px;
+      --radius2:14px;
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+
+      --ok-bg:#ecfdf5;
+      --warn-bg:#fff7ed;
+      --note-bg:#f8fafc;
+      --table-head:#f3f4f6;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --line:#2f3540;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --note-bg:#161616;
+        --ok-bg:#0f1e16;
+        --warn-bg:#1d1710;
+        --table-head:#1b1b1b;
+      }
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:15px/1.7 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,"Noto Sans JP","Noto Sans",Arial,sans-serif;
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(24px,3.2vw,38px);
+      line-height:1.2;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:14px 0 0;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:30px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-cta{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      color:var(--text);
+      font-weight:1000;
+      text-decoration:none !important;
+      font-size:14px;
+      line-height:1;
+    }
+    .btn.primary{
+      background:#111827;
+      border-color:#111827;
+      color:#fff;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note-bg);
+    }
+    .callout.ok{background:var(--ok-bg)}
+    .callout.warn{background:var(--warn-bg)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0;padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text);font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .small{font-size:13px}
+    .muted{color:var(--muted)}
+    .k{font-weight:1000}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note-bg);
+      padding:10px 12px;
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      margin:10px 0;
+    }
+    thead th{
+      background:var(--table-head);
+      font-size:13px;
+      font-weight:1000;
+      text-align:left;
+      padding:10px;
+      border-bottom:1px solid var(--border);
+    }
+    tbody td{
+      padding:9px 10px;
+      border-bottom:1px solid var(--border);
+      font-size:13px;
+      vertical-align:top;
+    }
+    tbody tr:last-child td{border-bottom:0}
+    .td-num{
+      text-align:right;
+      white-space:nowrap;
+      font-variant-numeric:tabular-nums;
+    }
+
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+    .foot{
+      font-size:12.5px;
+      color:var(--muted);
+      margin:10px 0 6px;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot 最強領主(Hall of Governors)ガイド",
+    "inLanguage":"ja",
+    "description":"1～5回目のスコア表、アマデウス / ヒルデ解放条件、領主装備 / チャームスコア、課金・無課金向け運用のコツを整理。",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ja/guides/hallofgovernors.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ja/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/hallofgovernors.html">EN</a>
+        <a href="/ko/guides/hallofgovernors.html">KO</a>
+        <a href="/ja/guides/hallofgovernors.html" aria-current="page">JA</a>
+        <a href="/zh-tw/guides/hallofgovernors.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#sec-1">概要</a>
+      <a href="#sec-2">スコア</a>
+      <a href="#sec-3">回次表</a>
+      <a href="#sec-4">装備</a>
+      <a href="#sec-5">チャーム</a>
+      <a href="#sec-6">解放</a>
+      <a href="#sec-7">コツ</a>
+    </nav>
+
+    <main class="container">
+      <div class="crumbs">
+        <a href="/ja/">ホーム</a> <span class="muted">›</span>
+        <a href="/ja/guides/">ガイド</a> <span class="muted">›</span>
+        <span>最強領主</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>Kingshot 最強領主(Hall of Governors)ガイド</h1>
+          <p class="sub">
+            1～5回目のステージ別スコア表、シーズン英雄アマデウス / ヒルデの解放構造、領主装備・チャームのスコア、そして実戦向けの運用のコツまで一度にまとめたガイド。
+          </p>
+
+          <div class="meta">
+            <span class="tag">2週間周期イベント</span>
+            <span class="tag">ステージ別スコア表</span>
+            <span class="tag">TOP10 / TOP100</span>
+            <span class="tag">無課金 / 課金</span>
+          </div>
+
+          <div class="hero-cta">
+            <a class="btn" href="#sec-3">スコア表を見る</a>
+            <a class="btn primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Kingshotチャージページ</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>このガイドの一行要約</h3>
+            <ul>
+              <li>最強領主(Hall of Governors)は通常2週間おきに開催されるが、日程と構成はサーバーごとに異なる場合がある。</li>
+              <li>アマデウス(シーズン1)は単なる完走報酬ではなく、累計スコア順位条件が重要になるシーズンが多い。</li>
+              <li>高得点を狙うなら、加速、欠片、製作ハンマー、ルーレット資源を事前に貯めて、該当ステージでまとめて使うのが最も効率的。</li>
+            </ul>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>よくある勘違い</h3>
+            <p>
+              イベントミッションをすべて終えればアマデウスを獲得できると思われがちだが、
+              実際にはシーズン1アマデウス報酬区間では <span class="k">TOP10のような順位条件</span> が事実上の核心になる。
+            </p>
+          </div>
+
+          <div class="callout" style="margin-top:12px">
+            <h3>シーズン1でアマデウスを狙うなら</h3>
+            <p>
+              シーズン1最強領主報酬でアマデウスを狙う場合、多くのサーバー環境では <span class="k">実質的に課金がほぼ必須</span> に近い。
+              競争が激しいサーバーでは、加速・欠片・ルーレット資源だけでTOP10ラインに届かないことが多い。
+            </p>
+            <p>
+              アマデウスを確実に狙いたいなら、チャージのタイミングを最強領主に合わせて準備するほうが良い。
+            </p>
+            <p style="margin-top:10px">
+              <a class="btn primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">アマデウス狙いのチャージ準備</a>
+            </p>
+          </div>
+        </div>
+
+        <nav class="card toc" aria-label="Table of contents">
+          <h2>目次</h2>
+          <ul>
+            <li><a href="#sec-1">1) イベント概要・日程・シーズン英雄</a></li>
+            <li><a href="#sec-2">2) スコア獲得方法(要約)</a></li>
+            <li><a href="#sec-3">3) 1～5回目ステージ / スコア表</a></li>
+            <li><a href="#sec-4">4) 領主装備強化スコア表</a></li>
+            <li><a href="#sec-5">5) 領主チャーム強化スコア表</a></li>
+            <li><a href="#sec-6">6) シーズン英雄解放条件(TOP10 / 100)</a></li>
+            <li><a href="#sec-7">7) 運用Q&A + 微課金 / 課金のコツ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="sec-1" class="block anchor">
+        <h2>1) イベント概要・日程・シーズン英雄</h2>
+        <p>
+          Hall of Governors(最強領主)は、Kingshotで2週間周期で開催される代表的な成長イベントだ。
+          開催期間中にステージごとのミッションを進めてスコアを稼ぎ、累計スコアでマイルストーン報酬を受け取る。
+        </p>
+
+        <ul>
+          <li><b>1回目</b>: 王国生成後 <b>6日目</b> に開始(サーバー基準)。シーズン英雄: <b>アマデウス</b></li>
+          <li><b>2回目</b>: 1回目から約2週間後。シーズン英雄: <b>アマデウス</b></li>
+          <li><b>3回目</b>: 通常は第2世代区間(サーバーによっては第1世代の場合もある)。シーズン英雄: <b>アマデウス</b>、通常7日進行</li>
+          <li><b>4～5回目</b>: 類似したミッション構成。シーズン英雄: <b>ヒルデ</b>(通常TOP100順位報酬)</li>
+        </ul>
+
+        <div class="callout">
+          <h3>注意</h3>
+          <p>サーバー、バージョン、運営方針により、ステージ順序やスコア表が調整される場合がある。実際のイベント開始前には必ずゲーム内告知を最優先で確認したい。</p>
+        </div>
+      </section>
+
+      <section id="sec-2" class="block anchor">
+        <h2>2) スコア獲得方法(要約)</h2>
+        <p>代表的なスコア項目は次の通り。</p>
+        <ul>
+          <li>建物アップグレード(建設戦力上昇)</li>
+          <li>技術研究(研究戦力上昇)</li>
+          <li>兵士訓練 / 昇級(兵力戦力上昇)</li>
+          <li>加速アイテム使用(回次とステージによって反映)</li>
+          <li>英雄昇級(欠片使用)</li>
+          <li>英雄装備製作ハンマー / 強化XP / 専用装備素材の使用</li>
+          <li>英雄ルーレット(ゲーム内ルーレット)</li>
+          <li>領主装備スコア上昇</li>
+          <li>領主チャーム(Charm)スコア上昇</li>
+        </ul>
+      </section>
+
+      <section id="sec-3" class="block anchor">
+        <h2>3) 1～5回目ステージ / スコア表</h2>
+
+        <details open>
+          <summary>1回目 Hall of Governors (シーズン英雄: アマデウス)</summary>
+
+          <h3>Stage 1: 都市建設</h3>
+          <table>
+            <thead>
+              <tr><th>項目</th><th class="td-num">スコア</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>建設で戦力1上昇</td><td class="td-num">45</td></tr>
+              <tr><td>研究で戦力1上昇</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 2: 英雄育成</h3>
+          <table>
+            <thead>
+              <tr><th>項目</th><th class="td-num">スコア</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>英雄ルーレット1回実行</td><td class="td-num">90,000</td></tr>
+              <tr><td>レア英雄の欠片1個使用</td><td class="td-num">4,000</td></tr>
+              <tr><td>エピック英雄の欠片1個使用</td><td class="td-num">14,000</td></tr>
+              <tr><td>レジェンド英雄の欠片1個使用</td><td class="td-num">35,000</td></tr>
+              <tr><td>フィールドでパン50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで木材50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで石材10採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで鉄2採集</td><td class="td-num">3</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 3: 兵士訓練 (兵士1体あたりのスコア)</h3>
+          <div class="small muted">各兵士ティア1体訓練あたりのスコア。</div>
+          <table>
+            <thead>
+              <tr><th>兵士ティア</th><th class="td-num">スコア</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+              <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+              <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+              <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+              <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+              <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+              <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+              <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+              <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+              <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 4: 野獣討伐</h3>
+          <table>
+            <thead>
+              <tr><th>項目</th><th class="td-num">スコア</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>レベル1～30の野獣を討伐</td><td class="td-num">30,000</td></tr>
+              <tr><td>集結を開いてTerrorを1回討伐</td><td class="td-num">90,000</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 5: 戦力ブースト</h3>
+          <table>
+            <thead>
+              <tr><th>項目</th><th class="td-num">スコア</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>建設で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>研究で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>兵士訓練 / 昇級で戦力1上昇</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+        </details>
+
+        <details>
+          <summary>2回目 Hall of Governors (シーズン英雄: アマデウス)</summary>
+
+          <h3>Stage 1: 都市建設</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>建設で戦力1上昇</td><td class="td-num">45</td></tr>
+              <tr><td>研究で戦力1上昇</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 2: 英雄育成</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>英雄ルーレット実行</td><td class="td-num">90,000</td></tr>
+              <tr><td>レア英雄の欠片1個使用</td><td class="td-num">4,000</td></tr>
+              <tr><td>エピック英雄の欠片1個使用</td><td class="td-num">14,000</td></tr>
+              <tr><td>レジェンド英雄の欠片1個使用</td><td class="td-num">35,000</td></tr>
+              <tr><td>フィールドでパン50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで木材50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで石材10採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで鉄2採集</td><td class="td-num">3</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 3: 兵士訓練 (兵士1体あたりのスコア)</h3>
+          <div class="small muted">各兵士ティア1体訓練あたりのスコア。</div>
+          <table>
+            <thead><tr><th>兵士ティア</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+              <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+              <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+              <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+              <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+              <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+              <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+              <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+              <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+              <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 4: 資源採集</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>フィールドでパン50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで木材50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで石材10採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで鉄2採集</td><td class="td-num">3</td></tr>
+              <tr><td>研究で戦力1上昇</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 5: 戦力ブースト</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>英雄装備製作ハンマー1個使用</td><td class="td-num">50,000</td></tr>
+              <tr><td>英雄装備強化XP 100使用</td><td class="td-num">30,000</td></tr>
+              <tr><td>英雄専用装備素材1個使用</td><td class="td-num">100,000</td></tr>
+              <tr><td>建設で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>研究で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>兵士訓練 / 昇級で戦力1上昇</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 6: 領主装備強化</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>領主装備の最大スコア1上昇</td><td class="td-num">500</td></tr>
+              <tr><td>建設で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>研究で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>兵士訓練 / 昇級で戦力1上昇</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <div class="small muted">領主装備のレアリティ別レベルアップスコアは、下の4番セクション表を参照。</div>
+        </details>
+
+        <details>
+          <summary>3回目 Hall of Governors (シーズン英雄: アマデウス、通常7日)</summary>
+
+          <h3>Stage 1: 戦力ブースト</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>建設で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>研究で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>兵士訓練 / 昇級で戦力1上昇</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 2: 英雄育成</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>英雄ルーレット実行</td><td class="td-num">90,000</td></tr>
+              <tr><td>レア英雄の欠片1個使用</td><td class="td-num">4,000</td></tr>
+              <tr><td>エピック英雄の欠片1個使用</td><td class="td-num">14,000</td></tr>
+              <tr><td>レジェンド英雄の欠片1個使用</td><td class="td-num">35,000</td></tr>
+              <tr><td>フィールドでパン50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで木材50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで石材10採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで鉄2採集</td><td class="td-num">3</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 3: 兵士訓練 (兵士1体あたりのスコア)</h3>
+          <div class="small muted">各兵士ティア1体訓練あたりのスコア。</div>
+          <table>
+            <thead><tr><th>兵士ティア</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+              <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+              <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+              <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+              <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+              <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+              <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+              <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+              <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+              <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 4: 資源採集</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>フィールドでパン50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで木材50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで石材10採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで鉄2採集</td><td class="td-num">3</td></tr>
+              <tr><td>研究で戦力1上昇</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 5: 戦力ブースト</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>英雄装備製作ハンマー1個使用</td><td class="td-num">50,000</td></tr>
+              <tr><td>英雄専用装備素材1個使用</td><td class="td-num">100,000</td></tr>
+              <tr><td>建設で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>研究で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>兵士訓練 / 昇級で戦力1上昇</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 6: 領主装備強化</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>領主装備の最大スコア1上昇</td><td class="td-num">500</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 7: 英雄育成(加速含む)</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>レア英雄の欠片1個使用</td><td class="td-num">4,000</td></tr>
+              <tr><td>エピック英雄の欠片1個使用</td><td class="td-num">14,000</td></tr>
+              <tr><td>レジェンド英雄の欠片1個使用</td><td class="td-num">35,000</td></tr>
+              <tr><td>建設加速1分使用</td><td class="td-num">300</td></tr>
+              <tr><td>研究加速1分使用</td><td class="td-num">300</td></tr>
+              <tr><td>訓練 / 昇級加速1分使用</td><td class="td-num">300</td></tr>
+            </tbody>
+          </table>
+
+          <div class="small muted">領主装備のレアリティ別レベルアップスコアは、下の4番セクション表を参照。</div>
+        </details>
+
+        <details>
+          <summary>4～5回目 Hall of Governors (シーズン英雄: ヒルデ)</summary>
+
+          <h3>Stage 1: 戦力ブースト</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>建設で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>研究で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>兵士訓練 / 昇級で戦力1上昇</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 2: 英雄育成</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>英雄ルーレット実行</td><td class="td-num">90,000</td></tr>
+              <tr><td>レア英雄の欠片1個使用</td><td class="td-num">4,000</td></tr>
+              <tr><td>エピック英雄の欠片1個使用</td><td class="td-num">14,000</td></tr>
+              <tr><td>レジェンド英雄の欠片1個使用</td><td class="td-num">35,000</td></tr>
+              <tr><td>フィールドでパン50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで木材50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで石材10採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで鉄2採集</td><td class="td-num">3</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 3: 兵士訓練 (兵士1体あたりのスコア)</h3>
+          <div class="small muted">各兵士ティア1体訓練あたりのスコア。</div>
+          <table>
+            <thead><tr><th>兵士ティア</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>Lv 1</td><td class="td-num">90</td></tr>
+              <tr><td>Lv 2</td><td class="td-num">120</td></tr>
+              <tr><td>Lv 3</td><td class="td-num">180</td></tr>
+              <tr><td>Lv 4</td><td class="td-num">265</td></tr>
+              <tr><td>Lv 5</td><td class="td-num">385</td></tr>
+              <tr><td>Lv 6</td><td class="td-num">595</td></tr>
+              <tr><td>Lv 7</td><td class="td-num">830</td></tr>
+              <tr><td>Lv 8</td><td class="td-num">1,130</td></tr>
+              <tr><td>Lv 9</td><td class="td-num">1,485</td></tr>
+              <tr><td>Lv 10</td><td class="td-num">1,960</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 4: チャーム(Charm)強化</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>領主チャーム(Charm)の最大スコア1上昇</td><td class="td-num">1,000</td></tr>
+              <tr><td>フィールドでパン50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで木材50採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで石材10採集</td><td class="td-num">3</td></tr>
+              <tr><td>フィールドで鉄2採集</td><td class="td-num">3</td></tr>
+              <tr><td>研究で戦力1上昇</td><td class="td-num">45</td></tr>
+            </tbody>
+          </table>
+
+          <div class="small muted">チャーム(Charm)のレベル別レベルアップスコアは、下の5番セクション表を参照。</div>
+
+          <h3>Stage 5: 戦力ブースト</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>英雄装備製作ハンマー1個使用</td><td class="td-num">50,000</td></tr>
+              <tr><td>英雄専用装備素材1個使用</td><td class="td-num">100,000</td></tr>
+              <tr><td>建設で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>研究で戦力1上昇</td><td class="td-num">30</td></tr>
+              <tr><td>兵士訓練 / 昇級で戦力1上昇</td><td class="td-num">20</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 6: 領主装備強化</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>領主装備の最大スコア1上昇</td><td class="td-num">500</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Stage 7: 英雄育成(加速含む)</h3>
+          <table>
+            <thead><tr><th>項目</th><th class="td-num">スコア</th></tr></thead>
+            <tbody>
+              <tr><td>レア英雄の欠片1個使用</td><td class="td-num">4,000</td></tr>
+              <tr><td>エピック英雄の欠片1個使用</td><td class="td-num">14,000</td></tr>
+              <tr><td>レジェンド英雄の欠片1個使用</td><td class="td-num">35,000</td></tr>
+              <tr><td>建設加速1分使用</td><td class="td-num">300</td></tr>
+              <tr><td>研究加速1分使用</td><td class="td-num">300</td></tr>
+              <tr><td>訓練 / 昇級加速1分使用</td><td class="td-num">300</td></tr>
+            </tbody>
+          </table>
+        </details>
+
+        <div class="callout">
+          <h3>運用のコツ(共通)</h3>
+          <ul>
+            <li>スコアステージに合わせて該当資源だけを集中して使えば、同じ資源でもより高いスコアを作れる。</li>
+            <li>同盟総動員、研究イベント、兵力イベントと時期が重なると効率がさらに良くなることがある。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-4" class="block anchor">
+        <h2>4) 領主装備強化スコア表</h2>
+        <p class="muted small">回次とステージによって、領主装備スコア上昇がそのままポイントとして反映される区間がある。</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>領主装備ランク</th>
+              <th class="td-num">レベルアップスコア</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>ノーマル</td><td class="td-num">1,125</td></tr>
+            <tr><td>ノーマル 1星</td><td class="td-num">1,875</td></tr>
+            <tr><td>レア</td><td class="td-num">3,000</td></tr>
+            <tr><td>レア 1星</td><td class="td-num">4,500</td></tr>
+            <tr><td>レア 2星</td><td class="td-num">5,100</td></tr>
+            <tr><td>レア 3星</td><td class="td-num">5,400</td></tr>
+            <tr><td>エピック</td><td class="td-num">3,230</td></tr>
+            <tr><td>エピック 1星</td><td class="td-num">3,230</td></tr>
+            <tr><td>エピック 2星</td><td class="td-num">3,225</td></tr>
+            <tr><td>エピック 3星</td><td class="td-num">3,225</td></tr>
+            <tr><td>エピック T1</td><td class="td-num">3,440</td></tr>
+            <tr><td>エピック T1 1星</td><td class="td-num">3,440</td></tr>
+            <tr><td>エピック T1 2星</td><td class="td-num">4,085</td></tr>
+            <tr><td>エピック T1 3星</td><td class="td-num">4,085</td></tr>
+            <tr><td>レジェンド</td><td class="td-num">6,250</td></tr>
+            <tr><td>レジェンド 1星</td><td class="td-num">6,250</td></tr>
+            <tr><td>レジェンド 2星</td><td class="td-num">6,250</td></tr>
+            <tr><td>レジェンド 3星</td><td class="td-num">6,250</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="sec-5" class="block anchor">
+        <h2>5) 領主チャーム(Charm)強化スコア表</h2>
+        <p class="muted small">4～5回目では、チャーム(Charm)スコア上昇が直接ポイントとして反映されるステージが登場する。</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>領主チャーム(Charm)レベル</th>
+              <th class="td-num">レベルアップスコア</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td class="td-num">625</td></tr>
+            <tr><td>2</td><td class="td-num">1,250</td></tr>
+            <tr><td>3</td><td class="td-num">3,125</td></tr>
+            <tr><td>4</td><td class="td-num">8,750</td></tr>
+            <tr><td>5</td><td class="td-num">11,250</td></tr>
+            <tr><td>6</td><td class="td-num">12,500</td></tr>
+            <tr><td>7</td><td class="td-num">12,500</td></tr>
+            <tr><td>8</td><td class="td-num">13,000</td></tr>
+            <tr><td>9</td><td class="td-num">14,000</td></tr>
+            <tr><td>10</td><td class="td-num">15,000</td></tr>
+            <tr><td>11</td><td class="td-num">16,000</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="sec-6" class="block anchor">
+        <h2>6) シーズン英雄解放条件(TOP10 / 100)</h2>
+
+        <div class="callout warn">
+          <h3>アマデウス(シーズン1)解放</h3>
+          <p>
+            アマデウスはミッション完走報酬で自動獲得できる構造ではなく、
+            イベント期間の累計スコアで <span class="k">TOP10</span> のような順位条件を満たして解放されるシーズンが多い。
+          </p>
+        </div>
+
+        <div class="callout" style="margin-top:12px">
+          <h3>ヒルデ(4～5回目)報酬</h3>
+          <p>
+            4～5回目ではヒルデがシーズン英雄として登場し、通常は <span class="k">TOP100</span> 順位報酬として欠片を獲得できる。
+          </p>
+        </div>
+
+        <p class="muted small">正確なラインや報酬構造はサーバーごとに異なる場合があるため、必ずゲーム内告知を基準に確認したい。</p>
+      </section>
+
+      <section id="sec-7" class="block anchor">
+        <h2>7) 運用Q&A + 微課金 / 課金のコツ</h2>
+
+        <details open>
+          <summary>最強領主 Q&A 要約(実戦用)</summary>
+
+          <h3>Q1. 最強領主イベントはいつ開催されますか?</h3>
+          <p>A. 通常は同盟総動員の後、約2週間間隔で開催されることが多い。ただしサーバー状況により日程は変わるため、常に告知を優先して確認したい。</p>
+
+          <h3>Q2. 参加条件は何ですか?</h3>
+          <p>A. サーバー内のすべての領主が自動参加となる。イベント期間中に獲得したスコアで順位が決まり、報酬が配布される。</p>
+
+          <h3>Q3. スコアはどうやって獲得しますか?</h3>
+          <p>A. 兵士訓練、建物アップグレード、技術研究、加速使用、英雄昇級、製作ハンマー、ルーレット、領主装備 / チャームスコア上昇などで獲得する。ただし、どの項目が有効かはステージごとに異なる。</p>
+
+          <h3>Q4. 高得点を狙うための準備方法は?</h3>
+          <ul>
+            <li>加速アイテムと資源を事前に十分貯めておき、イベント開始日とステージのタイミングに合わせて集中使用する。</li>
+            <li>兵士訓練イベントや研究成長イベントと重なると、スコア効率が良くなる。</li>
+            <li>建設 / 訓練 / 研究加速、製作ハンマー、ルーレット用ダイヤとチケットを事前に準備しておくと良い。</li>
+          </ul>
+
+          <h3>Q5. どんな報酬がもらえますか?</h3>
+          <p>A. 順位に応じてダイヤ、加速アイテム、英雄欠片などが支給される。領主装備素材は報酬に含まれない場合が多い。</p>
+
+          <h3>Q6. TOP10に必要なスコアはどれくらいですか?</h3>
+          <p>A. サーバーごとに差はあるが、TOP10平均ラインが約5億点以上になる場合が多い。特に新規サーバーほど競争が非常に激しい傾向がある。</p>
+
+          <h3>Q7. 必ず上位を狙うべきですか?</h3>
+          <p>
+            A. 必ずしもそうではない。シーズン1アマデウスのように順位報酬が非常に重要な区間を除けば、
+            以後の世代英雄は共通欠片でも昇級可能なため、無理に順位を狙うより基本報酬を安定して取る戦略のほうが効率的なことも多い。
+          </p>
+
+          <h3>Q8. 事前に準備すべきダイヤはどれくらいですか?</h3>
+          <p>A. 最強領主と英雄ルーレットが同時開催されることが多いため、最低でも162,000ダイヤ以上を準備しておくと運用しやすい。</p>
+        </details>
+
+        <div class="callout ok">
+          <h3>課金するつもりなら(核心)</h3>
+          <p>
+            課金するなら、シーズン1アマデウス報酬はできるだけ確保したい。
+            短期間で強く投資するプレイヤーなら、アマデウスを早く高星まで上げてシーズン1～シーズン2区間で明確な体感差を作れる。
+          </p>
+          <p>
+            特にシーズン1最強領主TOP10を現実的に狙うには、資源準備だけでは限界があることが多いため、
+            <span class="k">チャージのタイミングを最強領主に合わせて計画的に進めること</span> が重要。
+          </p>
+          <p style="margin-top:10px">
+            <a class="btn primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">最強領主向けチャージ準備</a>
+          </p>
+        </div>
+
+        <div class="callout warn" style="margin-top:12px">
+          <h3>F2P(無 / 微課金)の核心一言</h3>
+          <p>
+            F2Pは、各世代のルーレット英雄を必ず確保することが重要。
+            ルーレット英雄を逃すと、しっかり育成した無課金プレイヤー相手でもアリーナや戦闘で押されることがある。
+          </p>
+        </div>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        本文書は公式ではなく、公開情報と実際の運用経験をもとに整理したガイド。
+        サーバー、バージョン、運営方針によって内容は変更される場合がある。
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

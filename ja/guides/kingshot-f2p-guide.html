@@ -1,0 +1,1136 @@
+<!doctype html>
+<html lang="ja" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot 初心者ガイド · 無課金・微課金向け成長攻略（同盟、VIP7、アリーナ、ハンマー、ショップ効率）</title>
+  <meta name="description" content="Kingshot初心者向けの無課金・微課金成長ガイド。上位同盟の選び方、VIP7の優先度、アリーナ報酬、ハンマー（英雄装備）、都市センター育成、ショップ効率表、イベント運用まで1ページで整理。" />
+  <meta name="keywords" content="Kingshot 初心者ガイド, Kingshot 無課金 攻略, Kingshot 微課金 攻略, Kingshot beginner guide, Kingshot f2p guide, Kingshot VIP7, Kingshot arena, Kingshot hammer, Kingshot hero gear, Kingshot shop efficiency, Kingshot VIP shop, Kingshot arena shop, Kingshot wandering merchant" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ja/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/kingshot-f2p-guide.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot 初心者ガイド · 無課金・微課金向け成長攻略" />
+  <meta property="og:description" content="上位同盟、VIP7、アリーナ、ハンマー（英雄装備）、都市センター、ショップ効率、イベント運用まで、無課金・微課金の成長ルートを整理したKingshot初心者ガイド。" />
+  <meta property="og:url" content="https://kingshotdata.kr/ja/guides/kingshot-f2p-guide.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ja_JP" />
+
+  <style>
+    *{box-sizing:border-box}
+
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --ok:#ecfdf5;
+      --warn:#fff7ed;
+      --note:#f8fafc;
+      --info:#eff6ff;
+
+      --shadow:0 10px 25px rgba(0,0,0,.06);
+      --radius:16px;
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --ok:#0f1e16;
+        --warn:#1a140c;
+        --note:#141414;
+        --info:#111827;
+        --shadow:0 10px 25px rgba(0,0,0,.35);
+      }
+    }
+
+    html,body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:15px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP",Pretendard,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+    }
+
+    html{scroll-behavior:smooth}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(26px,3.4vw,40px);
+      line-height:1.18;
+      letter-spacing:-0.02em;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:32px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-side{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      padding:14px;
+    }
+    .hero-side h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-side ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .hero-side li{margin:6px 0}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note);
+    }
+    .callout.ok{background:var(--ok)}
+    .callout.warn{background:var(--warn)}
+    .callout.info{background:var(--info)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0;padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text);font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .checklist{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .check{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:12px 14px;
+    }
+    .check h3{
+      margin:0 0 8px;
+      font-size:14px;
+    }
+
+    .center-link-card{
+      display:grid;
+      grid-template-columns:120px 1fr;
+      gap:14px;
+      align-items:center;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      padding:14px;
+      margin-top:12px;
+    }
+    .center-link-card img{
+      width:120px;
+      height:120px;
+      object-fit:contain;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#f8fafc;
+      padding:10px;
+    }
+    .center-link-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+      color:var(--text);
+    }
+    .center-link-card p{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .shop-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .shop-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:14px;
+    }
+    .shop-card h3{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--text);
+    }
+    .shop-priority{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:8px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:1000;
+      border:1px solid var(--border);
+      background:var(--panel);
+    }
+    .badge.must{background:var(--ok)}
+    .badge.optional{background:var(--warn)}
+    .badge.skip{background:#fee2e2;color:#991b1b}
+    .btn-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:40px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      color:var(--text);
+      font-weight:1000;
+      text-decoration:none !important;
+      font-size:14px;
+      line-height:1;
+    }
+    .btn-link:hover{
+      border-color:#c7d2fe;
+      transform:translateY(-1px);
+    }
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:var(--note);
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+
+    .faq{
+      margin-top:10px;
+    }
+
+    .foot{
+      margin:18px 0 8px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:940px){
+      .hero,
+      .grid,
+      .checklist,
+      .center-link-card,
+      .shop-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+    }
+
+    @media (max-width:600px){
+      h1{font-size:26px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot 初心者ガイド · 無課金・微課金向け成長攻略",
+    "inLanguage":"ja",
+    "description":"上位同盟、VIP7、アリーナ、ハンマー（英雄装備）、都市センター、ショップ効率、イベント運用まで、無課金・微課金の成長ルートを整理したKingshot初心者ガイド。",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ja/guides/kingshot-f2p-guide.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"ホーム","item":"https://kingshotdata.kr/ja/"},
+      {"@type":"ListItem","position":2,"name":"ガイド","item":"https://kingshotdata.kr/ja/guides/"},
+      {"@type":"ListItem","position":3,"name":"Kingshot 初心者ガイド","item":"https://kingshotdata.kr/ja/guides/kingshot-f2p-guide.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Kingshotの無課金はどの同盟に入るべきですか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"できれば1位同盟、最低でも2～3位の同盟に入るのがおすすめです。同盟ギフト、宝箱、HELP速度、集結頻度、聖地や遺跡バフの差で成長速度が大きく変わります。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"VIP7はなぜ重要ですか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"VIP7に到達すると、毎日レジェンド共通欠片を1個ずつ確保するルーティンが作れます。無課金・微課金にとって長期成長の重要な区間です。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"アリーナは必ずやるべきですか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"はい。アリーナは無課金・微課金がレジェンド英雄装備と重要資源を継続的に確保できる重要なルートです。ハンマーと装備強化はアリーナ順位の上昇にも直結します。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"ハンマー（英雄装備）はなぜ重要ですか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"英雄は世代交代しても、装備とマスタリーは残ります。そのためハンマーは長期的なアカウント成長と戦力維持に非常に重要です。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"ショップでは何から買うべきですか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"無課金・微課金基準では、アリーナショップのレジェンド宝箱、VIPショップのレジェンド共通欠片とハンマー、放浪商人の資源購入、試練ショップのミスリルのような長期成長資源を優先するのが良いです。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ja/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/kingshot-f2p-guide.html">EN</a>
+        <a href="/ko/guides/kingshot-f2p-guide.html">KO</a>
+        <a href="/ja/guides/kingshot-f2p-guide.html" aria-current="page">JA</a>
+        <a href="/zh-tw/guides/kingshot-f2p-guide.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#sec-0">全体の流れ</a>
+      <a href="#sec-1">同盟</a>
+      <a href="#sec-2">VIP7</a>
+      <a href="#sec-3">アリーナ</a>
+      <a href="#sec-4">ハンマー</a>
+      <a href="#sec-5">センター</a>
+      <a href="#sec-6">イベント</a>
+      <a href="#sec-7">ショップ</a>
+      <a href="#sec-8">集結</a>
+      <a href="#sec-9">同盟基本</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main>
+      <div class="crumbs">
+        <a href="/ja/">ホーム</a> <span class="muted">›</span>
+        <a href="/ja/guides/">ガイド</a> <span class="muted">›</span>
+        <span>Kingshot 初心者ガイド</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>Kingshot 初心者ガイド · 無課金・微課金向け成長攻略</h1>
+          <p class="sub">
+            上位同盟、VIP7、アリーナ、ハンマー（英雄装備）、都市センター育成、ショップ効率、イベント運用まで、
+            無課金・微課金プレイヤーが着実に強くなるための成長ルートを1ページに整理した。
+          </p>
+
+          <div class="meta">
+            <span class="tag">初心者ロードマップ</span>
+            <span class="tag">無課金・微課金</span>
+            <span class="tag">VIP7優先</span>
+            <span class="tag">アリーナ重視</span>
+            <span class="tag">ショップ効率</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <h2>このページの要点</h2>
+          <ul>
+            <li>上位同盟に早く入るほど、宝箱・加速・バフ差で成長速度が大きく開く。</li>
+            <li>VIP7とアリーナは、無課金・微課金アカウントの中核になる成長軸。</li>
+            <li>ハンマー、装備、ショップの優先順位を知るだけで長期効率が大きく変わる。</li>
+          </ul>
+        </aside>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>まずこれだけ覚えれば半分は成功</h3>
+            <ul>
+              <li><b>建設キュー + 行軍キュー</b>は必須。ゲーム全体の速度が変わる。</li>
+              <li><b>上位1～3位同盟</b>にはできるだけ早く入るべき。宝箱、加速、ダイヤ収入の差が大きい。</li>
+              <li><b>VIP 7</b>は最初の目標。毎日レジェンド共通欠片1個のルーティンが重要。</li>
+              <li><b>アリーナ</b>はレジェンド装備と欠片の供給源。微課金にとって生命線に近い。</li>
+              <li><b>ハンマー（英雄装備）</b>は長期戦の核心。英雄が変わっても装備は残る。</li>
+              <li><b>ショップ効率</b>を知っているだけで、同じ資源でもはるかに先まで伸びる。</li>
+            </ul>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>初心者が崩れやすい典型パターン</h3>
+            <ul>
+              <li>同盟を適当に選んで長く居座る → 宝箱・加速・バフの損失がずっと積み重なる。</li>
+              <li>イベントごとに少しずつ使って何も取れない → 短期イベント1位のタイミングを逃す。</li>
+              <li>英雄・装備・ダイヤを分散投資する → アリーナ順位が上がらず、重要資源が止まる。</li>
+              <li>ショップで表示されたものを何でも買う → 長期的にVIP、欠片、ハンマー効率が崩れる。</li>
+            </ul>
+          </div>
+
+          <div class="related" aria-label="Quick links">
+            <a class="pill" href="#sec-0">0) 全体の流れ</a>
+            <a class="pill" href="#sec-1">1) 同盟</a>
+            <a class="pill" href="#sec-2">2) VIP7</a>
+            <a class="pill" href="#sec-3">3) アリーナ</a>
+            <a class="pill" href="#sec-4">4) ハンマー</a>
+            <a class="pill" href="#sec-5">5) センター</a>
+            <a class="pill" href="#sec-6">6) イベント</a>
+            <a class="pill" href="#sec-7">7) ショップ</a>
+            <a class="pill" href="#sec-8">8) 集結</a>
+            <a class="pill" href="#sec-9">9) 同盟基本</a>
+            <a class="pill" href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <nav class="toc card" aria-label="Table of contents">
+          <h2>目次</h2>
+          <ul>
+            <li><a href="#sec-0">0) 初心者運用の全体像</a></li>
+            <li><a href="#sec-1">1) 同盟は1～3位へ</a></li>
+            <li><a href="#sec-2">2) VIP 7をできるだけ早く</a></li>
+            <li><a href="#sec-3">3) アリーナに集中すべき理由</a></li>
+            <li><a href="#sec-4">4) ハンマー（英雄装備）が長期戦の核心</a></li>
+            <li><a href="#sec-5">5) センターを上げて兵士ティアを前倒しする</a></li>
+            <li><a href="#sec-6">6) イベント運用：短期イベント1位戦略</a></li>
+            <li><a href="#sec-7">7) ショップ効率ガイド</a></li>
+            <li><a href="#sec-8">8) 英雄・スキル・集結の基礎</a></li>
+            <li><a href="#sec-9">9) 同盟システム：これだけは必須</a></li>
+            <li><a href="#related-links">内部リンクまとめ</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="sec-0" class="block anchor">
+        <h2>0) 初心者運用の全体像</h2>
+        <p>
+          無課金・微課金が強くなる構造はシンプルだ。
+          <b>同盟（宝箱・バフ）→ アリーナ（レジェンド装備）→ ハンマー（マスタリー）→ さらに高いアリーナ順位</b>を繰り返しながら、アカウント差が広がっていく。
+        </p>
+
+        <div class="callout">
+          <h3>初心者が追いやすい3ステップ</h3>
+          <ul>
+            <li><b>1段階目:</b> 都市センターと各種キューを開放し、上位同盟に入る。</li>
+            <li><b>2段階目:</b> VIP7のルーティンを作り、アリーナ順位を上げる。</li>
+            <li><b>3段階目:</b> ハンマーと装備マスタリーを積み上げ、世代交代後も強いアカウントを作る。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-1" class="block anchor">
+        <h2>1) 同盟は1～3位へ</h2>
+        <p><b>ここで最低でも半分は決まる。</b> 可能なら1位、最低でも2～3位の同盟に入るのが理想だ。</p>
+
+        <h3>なぜ上位同盟でなければいけないのか</h3>
+        <ul>
+          <li><b>同盟ギフト / 宝箱</b>でダイヤ、加速、各種アイテムが毎日積み上がる。</li>
+          <li><b>HELP速度</b>と<b>集結頻度</b>が違う。</li>
+          <li><b>聖地 / 遺跡バフ</b>で建設、訓練、採集効率が大きく変わる。</li>
+        </ul>
+
+        <div class="callout warn">
+          <h3>注意</h3>
+          <p>中途半端な中位同盟に長くいると、政治、戦争、略奪対象の問題で成長テンポがかなり乱れやすい。</p>
+        </div>
+
+        <h3>同盟に入ったらすぐやること</h3>
+        <ul>
+          <li><b>同盟領地の中に都市を完全に入れる</b></li>
+          <li>集結参加のために<b>盟主または主要メンバーの近く</b>へ移転する</li>
+        </ul>
+      </section>
+
+      <section id="sec-2" class="block anchor">
+        <h2>2) VIP 7をできるだけ早く</h2>
+        <p>初心者の最初の目標は<b>VIP 7</b>だ。</p>
+
+        <h3>VIP 7が重要な理由</h3>
+        <ul>
+          <li>VIP 7を有効化すると、<b>毎日レジェンド共通欠片1個</b>のルーティンが可能になる。</li>
+          <li>このルーティン1つだけでも、長期的なアカウント成長差はかなり大きくなる。</li>
+        </ul>
+
+        <details>
+          <summary>微課金のVIP上げルート</summary>
+          <ul>
+            <li>毎日VIPポイントを欠かさず受け取る。</li>
+            <li>同盟ショップと放浪商人で割引VIPポイントを優先購入する。</li>
+          </ul>
+        </details>
+
+        <div class="callout ok">
+          <h3>一言で結論</h3>
+          <p><b>VIP 7</b>を早く作れば、「毎日欠片が積み上がるアカウント」になる。</p>
+        </div>
+      </section>
+
+      <section id="sec-3" class="block anchor">
+        <h2>3) アリーナに集中すべき理由</h2>
+        <p>微課金が<b>レジェンド英雄装備</b>を継続的に受け取るための最重要ルートがアリーナだ。</p>
+
+        <div class="callout ok">
+          <h3>おすすめ方針（初心者基準）</h3>
+          <ul>
+            <li>序盤は<b>弓兵 / 騎兵</b>装備を優先的に考える</li>
+            <li>ハンマーと装備強化は、アリーナ順位が上がるように使う</li>
+            <li>現実的な目標は<b>100～500位圏</b>だ。</li>
+          </ul>
+        </div>
+
+        <h3>なぜアリーナが重要なのか</h3>
+        <ul>
+          <li>アリーナ順位が高いほど、レジェンド装備と関連資源の供給が安定する。</li>
+          <li>アリーナで得た装備は、そのまま次のアリーナ順位上昇に使える。</li>
+          <li>結局アリーナは、無課金・微課金アカウントの中核成長ハブになる。</li>
+        </ul>
+      </section>
+
+      <section id="sec-4" class="block anchor">
+        <h2>4) ハンマー（英雄装備）が長期戦の核心</h2>
+        <p>英雄は世代が変わっても装備は残る。だからこそ<b>マスタリーの蓄積</b>が、最終的な長期差を作る。</p>
+
+        <div class="callout">
+          <h3>ハンマールーティン</h3>
+          <ul>
+            <li>Bear Huntは真面目に継続して参加する。</li>
+            <li>装備強化は、よく使う兵種とアリーナ主力英雄に集中する。</li>
+            <li>今は弱く見えても、装備は世代が変わってもアカウントに残り続ける。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-5" class="block anchor">
+        <h2>5) センターを上げて兵士ティアを前倒しする</h2>
+        <p>後から最も大きく体感するのは、結局<b>兵士ティア</b>だ。</p>
+
+        <div class="center-link-card">
+          <a href="/ja/buildings/town-center/" aria-label="都市センターページへ移動">
+            <img src="/img/buildings/town-center.webp" alt="都市センター (Kingshot)" loading="lazy" width="120" height="120" />
+          </a>
+
+          <div>
+            <h3>都市センター条件を先に確認する</h3>
+            <p>
+              都市センターのレベル条件、先行建物、資源、アップグレードの流れを先に見ておけば、
+              無課金・微課金でも加速を無駄にせず、成長ルートを組みやすくなる。
+            </p>
+            <a class="btn-link" href="/ja/buildings/town-center/">都市センター詳細ページへ</a>
+          </div>
+        </div>
+
+        <details>
+          <summary>加速の優先順位（序盤）</summary>
+          <ul>
+            <li>建設 &gt; 研究 &gt; 兵士 / 治療</li>
+          </ul>
+        </details>
+
+        <div class="callout warn">
+          <h3>序盤のミス防止</h3>
+          <p>あちこちに分散して加速を使うより、センターと重要な先行建物に集中した方がはるかに効率が良い。</p>
+        </div>
+      </section>
+
+      <section id="sec-6" class="block anchor">
+        <h2>6) イベント運用：短期イベント1位戦略</h2>
+
+        <div class="callout ok">
+          <h3>基本の考え方</h3>
+          <ul>
+            <li>基本報酬は全部回収する。</li>
+            <li>1位はどのイベントでも狙わず、<b>勝てる短期イベント</b>だけに集中する。</li>
+            <li>欠片、加速、ダイヤを分散消費すると、結局どれも取り切れない。</li>
+          </ul>
+        </div>
+
+        <h3>運用ポイント</h3>
+        <ul>
+          <li>短期イベントで1位を取れるタイミングを作るために、資源を貯める。</li>
+          <li>サーバーの競争状況を見て、「今回は取れる」と思えるイベントだけ強く行く。</li>
+          <li>すべてのイベントに勝とうとせず、<b>基本報酬 + 選んだイベントで1位</b>の形で運用する。</li>
+        </ul>
+      </section>
+
+      <section id="sec-7" class="block anchor">
+        <h2>7) ショップ効率ガイド</h2>
+        <p>
+          無課金・微課金にとって、ショップで何を買うかは本当に重要だ。
+          同じ資源を使っても、<b>長期成長資源</b>を買う人と、その場しのぎで買う人では、時間が経つほど差が大きくなる。
+        </p>
+
+        <div class="callout info">
+          <h3>ショップ効率の一言まとめ</h3>
+          <p>
+            <b>アリーナショップ、VIPショップ、試練ショップ、放浪商人（資源購入）</b>の優先度は高く、
+            <b>ダイヤショップ</b>は普段ほぼ非推奨だ。
+          </p>
+        </div>
+
+        <div class="shop-grid">
+          <div class="shop-card">
+            <h3>放浪商人</h3>
+            <div class="shop-priority">
+              <span class="badge must">資源購入優先</span>
+              <span class="badge skip">ダイヤ直接購入は非推奨</span>
+            </div>
+            <ul>
+              <li>資源で買える商品は序中盤ではかなり効率が良い。</li>
+              <li>城レベル30以降は資源圧が大きくなるため、無差別購入は非推奨。</li>
+              <li>ダイヤで直接買う商品は効率が低く、避けた方が良い。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>神秘のショップ</h3>
+            <div class="shop-priority">
+              <span class="badge must">専用武器割引優先</span>
+              <span class="badge optional">更新は限定的に</span>
+            </div>
+            <ul>
+              <li>専用武器の割引商品が最重要。</li>
+              <li>更新を回しすぎると効率が急激に落ちる。</li>
+              <li>必要なものだけ取って抜ける形が安全。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>アリーナショップ</h3>
+            <div class="shop-priority">
+              <span class="badge must">レジェンド宝箱最優先</span>
+              <span class="badge optional">余りはミスリル</span>
+            </div>
+            <ul>
+              <li>最優先はレジェンド宝箱。</li>
+              <li>熟練度や装備状況によってはミスリルも非常に強い選択肢。</li>
+              <li>無課金・微課金の装備成長における中核ショップ。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>VIPショップ</h3>
+            <div class="shop-priority">
+              <span class="badge must">レジェンド共通欠片</span>
+              <span class="badge must">ハンマー / 強化素材</span>
+            </div>
+            <ul>
+              <li>レジェンド共通欠片は実質必須購入に近い。</li>
+              <li>ハンマーと強化素材も長期効率が非常に高い。</li>
+              <li>加速商品は課金額が高くない限り優先度が低い。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>チャンピオンショップ</h3>
+            <div class="shop-priority">
+              <span class="badge must">ゴールドシルク / シルクの比率調整</span>
+              <span class="badge optional">設計図は余裕がある時</span>
+            </div>
+            <ul>
+              <li>装備成長素材の比率を合わせて買うのが重要。</li>
+              <li>ゴールドシルクとシルクのバランスが崩れないように見るべき。</li>
+              <li>設計図系は余裕ができてから追うくらいで良い。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>聖剣ショップ</h3>
+            <div class="shop-priority">
+              <span class="badge must">英雄装備素材優先</span>
+              <span class="badge optional">宝石素材の一部</span>
+            </div>
+            <ul>
+              <li>英雄装備素材中心で見るのが効率的。</li>
+              <li>宝石素材5種も状況によって優先度が高い。</li>
+              <li>他の商品はアカウント状況を見て選ぶべき。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>最強領主ショップ</h3>
+            <div class="shop-priority">
+              <span class="badge must">戦力上昇資源優先</span>
+              <span class="badge optional">英雄装備素材</span>
+            </div>
+            <ul>
+              <li>戦力上昇効率が高い資源から優先するのが良い。</li>
+              <li>次に英雄装備関連商品へ配分を調整する。</li>
+              <li>何か1つを固定で買うのではなく、自分のアカウント状況も一緒に見るべき。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>スキンショップ</h3>
+            <div class="shop-priority">
+              <span class="badge optional">長期蓄積型</span>
+              <span class="badge skip">短期効率は低い</span>
+            </div>
+            <ul>
+              <li>スキンショップは短期効率より長期目標向けのショップ。</li>
+              <li>途中でやめずに継続して蓄積してこそ意味がある。</li>
+              <li>今すぐ戦力を伸ばしたいアカウントなら優先度は低い。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>波ショップ</h3>
+            <div class="shop-priority">
+              <span class="badge must">ペット希少資源優先</span>
+              <span class="badge optional">メダル / 栄養剤 / 高級記録</span>
+            </div>
+            <ul>
+              <li>ペット関連商品を中心に見る。</li>
+              <li>特に入手が難しい希少素材を優先するのが良い。</li>
+              <li>残りはアカウント状況に応じて選択購入。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>試練ショップ</h3>
+            <div class="shop-priority">
+              <span class="badge must">ミスリル最優先</span>
+              <span class="badge optional">高級欠片系</span>
+            </div>
+            <ul>
+              <li>最重要はミスリル。</li>
+              <li>他の高級資源も価値は高い方だ。</li>
+              <li>長期的な装備成長の観点では、かなり効率が良い。</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>ダイヤショップ</h3>
+            <div class="shop-priority">
+              <span class="badge skip">普段は非推奨</span>
+              <span class="badge optional">イベント対応時のみ例外</span>
+            </div>
+            <ul>
+              <li>本当に急ぎでない限り、普段の購入は非推奨。</li>
+              <li>特定イベント対応や締切直前の不足分補充程度に留めるのが良い。</li>
+              <li>無課金・微課金が普段からダイヤショップに手を出すと、効率が大きく崩れやすい。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout warn" style="margin-top:12px">
+          <h3>ショップ運用の結論</h3>
+          <p>
+            無課金・微課金は、<b>今すぐ必要なものより、アカウントに残り続けるもの</b>を先に買うべきだ。
+            だからこそ共通欠片、ハンマー、レジェンド宝箱、ミスリル、装備素材のような品目が常に優先になる。
+          </p>
+        </div>
+      </section>
+
+      <section id="sec-8" class="block anchor">
+        <h2>8) 英雄・スキル・集結の基礎（初心者向け）</h2>
+
+        <div class="callout">
+          <h3>集結参加側の要点</h3>
+          <p>微課金の現実目標は<b>SR 4星 → 第1スキルLV5</b> + <b>兵士ティア上げ</b>だ。</p>
+        </div>
+
+        <ul>
+          <li>むやみに多くの英雄を育てるより、実際によく使う英雄に絞って育成するべき。</li>
+          <li>集結参加用英雄は第1スキル効率が重要。</li>
+          <li>戦力の数字だけでなく、実際に集結やアリーナで使うかを基準に資源配分を決めるべきだ。</li>
+        </ul>
+
+        <div class="related">
+          <a class="pill" href="/ja/guides/kingshot-bearhunt.html">Bear Hunt 高得点ガイド</a>
+          <a class="pill" href="/ja/guides/hallofgovernors.html">最強領主ガイド</a>
+        </div>
+      </section>
+
+      <section id="sec-9" class="block anchor">
+        <h2>9) 同盟システム：これだけは必須</h2>
+
+        <ul>
+          <li><b>寄付</b>（ダイヤ / コイン）</li>
+          <li><b>HELP</b>（コイン収入）</li>
+          <li><b>集結参加</b>（報酬 / ハンマー獲得）</li>
+        </ul>
+
+        <div class="callout warn">
+          <h3>注意</h3>
+          <p>イベント時間が自分の生活時間帯と合わない同盟は、長期的に大きな損になる。活動時間帯が合っているかも必ず確認したい。</p>
+        </div>
+      </section>
+
+      <section id="related-links" class="block anchor">
+        <h2>内部リンクまとめ</h2>
+        <p class="muted">このページと一緒に見ると役立つ関連ページ</p>
+        <div class="related">
+          <a class="pill" href="/ja/buildings/town-center/">都市センター条件</a>
+          <a class="pill" href="/ja/buildings/academy/">アカデミーアップグレード</a>
+          <a class="pill" href="/ja/guides/kingshot-bearhunt.html">Bear Hunt 高得点ガイド</a>
+          <a class="pill" href="/ja/guides/hallofgovernors.html">最強領主ガイド</a>
+          <a class="pill" href="/ja/buildings/">建物一覧</a>
+          <a class="pill" href="/ja/guides/">ガイド一覧</a>
+        </div>
+      </section>
+
+      <section id="faq" class="block anchor faq">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>Kingshotの無課金はどの同盟に入るべきですか？</summary>
+          <p>できれば1位同盟、最低でも2～3位の同盟に入るのが良い。同盟ギフト、宝箱、HELP速度、集結頻度、聖地や遺跡バフの差で成長速度が大きく変わる。</p>
+        </details>
+
+        <details>
+          <summary>VIP7はなぜ重要ですか？</summary>
+          <p>VIP7に到達すると、毎日レジェンド共通欠片を1個ずつ確保するルーティンが作れる。無課金・微課金にとって長期成長の重要区間だ。</p>
+        </details>
+
+        <details>
+          <summary>アリーナは必ずやるべきですか？</summary>
+          <p>はい。アリーナは無課金・微課金がレジェンド英雄装備と重要資源を継続的に確保できる重要ルートだ。ハンマーと装備強化もアリーナ順位上昇に直結する。</p>
+        </details>
+
+        <details>
+          <summary>ハンマー（英雄装備）はなぜ重要ですか？</summary>
+          <p>英雄は世代交代しても、装備とマスタリーは残る。だからハンマーは長期的なアカウント成長と戦力維持で非常に重要だ。</p>
+        </details>
+
+        <details>
+          <summary>ショップでは何から買うべきですか？</summary>
+          <p>無課金・微課金基準では、アリーナショップのレジェンド宝箱、VIPショップのレジェンド共通欠片とハンマー、放浪商人の資源購入、試練ショップのミスリルのような長期成長資源を優先するのが良い。</p>
+        </details>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        この文書は公式ではなく、プレイ経験をもとに整理した初心者向け運用ガイドです。
+        サーバー、メタ、アップデートによって最適解は変わる場合があります。
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot Viking Vengeance Guide | High Score Strategy Guide</title>
+  <meta name="description" content="Kingshot Viking Vengeance high score guide. Learn the best strategy for the 20-wave defense event, including empty-city setup, online-first reinforcements, Wave 10/20 HQ defense, hero picks, and troop setup." />
+  <meta name="keywords" content="Kingshot Viking Vengeance, Kingshot Viking guide, Kingshot HQ defense, Kingshot alliance event, Kingshot high score guide, Viking Vengeance strategy" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/en/guides/viking.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/viking.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/viking.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/viking.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/viking.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/viking.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot Viking Vengeance Guide | High Score Strategy Guide" />
+  <meta property="og:description" content="A practical high score strategy guide for Kingshot Viking Vengeance, covering empty-city setup, online-first reinforcements, Wave 10/20 HQ defense, heroes, and troop setup." />
+  <meta property="og:url" content="https://kingshotdata.kr/en/guides/viking.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="en_US" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --line:#e7ecf5;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+      --warn:#b45309;
+      --warn-bg:rgba(245,158,11,.08);
+
+      --radius:16px;
+      --radius2:14px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.7 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(26px,4vw,40px);
+      line-height:1.15;
+      color:var(--text);
+    }
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:16px 0 0;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .k{font-weight:900;color:var(--text)}
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    h2{
+      margin:0 0 10px;
+      font-size:clamp(20px,2.4vw,28px);
+      color:var(--accent);
+      line-height:1.25;
+    }
+    h3{
+      font-size:clamp(16px,2vw,20px);
+      margin:18px 0 8px;
+      line-height:1.35;
+    }
+    p{margin:8px 0}
+
+    .toc{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .toc strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:15px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin:12px 0;
+    }
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      background:#fff;
+      padding:14px;
+    }
+    .card .title{
+      margin:0 0 6px;
+      font-weight:900;
+    }
+
+    .note{
+      font-size:14px;
+      color:var(--muted);
+      background:var(--warn-bg);
+      padding:12px 14px;
+      border-left:4px solid var(--warn);
+      border-radius:10px;
+      margin:16px 0 0;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:10px 0 0;
+    }
+    th,td{
+      border:1px solid var(--border);
+      padding:10px;
+      vertical-align:top;
+    }
+    th{
+      background:#f8fafc;
+      text-align:left;
+      font-weight:900;
+    }
+
+    ul{margin:8px 0;padding-left:18px}
+    li{margin:6px 0}
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--text);
+      font-size:13px;
+      font-weight:800;
+      text-decoration:none;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+        padding:10px 16px 12px;
+        margin:0 -16px;
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -16px;
+        padding:6px 16px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      .grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section,.toc{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot Viking Vengeance Guide | High Score Strategy Guide",
+    "inLanguage":"en",
+    "description":"A high score team strategy guide for Kingshot Viking Vengeance, explaining how to maximize points in the 20-wave defense event.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/en/guides/viking.html"
+    },
+    "author":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/en/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/viking.html" aria-current="page">EN</a>
+        <a href="/ko/guides/viking.html">KO</a>
+        <a href="/ja/guides/viking.html">JA</a>
+        <a href="/zh-tw/guides/viking.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">Overview</a>
+      <a href="#waves">Rounds</a>
+      <a href="#points">Points</a>
+      <a href="#flow">Flow</a>
+      <a href="#hq">HQ Defense</a>
+      <a href="#city">City Setup</a>
+      <a href="#heroes">Heroes</a>
+      <a href="#checklist">Checklist</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/en/">Home</a> <span class="muted">›</span>
+        <a href="/en/guides/">Guides</a> <span class="muted">›</span>
+        <span>Viking Vengeance</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>Viking Vengeance Best Strategy Guide</h1>
+          <p class="subtitle">A practical high score teamwork guide for the 20-wave defense event.</p>
+
+          <div class="meta">
+            <span class="badge"><span class="k">Schedule</span> Every 2 weeks on Tue / Thu (may vary by server settings)</span>
+            <span class="badge"><span class="k">Core</span> Empty city · Reinforcement points · Wave 10/20 HQ defense · Online-first reinforcements</span>
+            <span class="badge"><span class="k">Goal</span> Maximize alliance-wide score (score funneling is possible)</span>
+          </div>
+
+          <div class="jump">
+            <a href="#overview">Event Overview</a><span class="dotsep">•</span>
+            <a href="#waves">Wave Targets</a><span class="dotsep">•</span>
+            <a href="#points">Point Structure</a><span class="dotsep">•</span>
+            <a href="#flow">Practical Flow</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="toc">
+        <strong>Contents</strong>
+        <ul>
+          <li><a href="#overview">Event Overview</a></li>
+          <li><a href="#waves">Wave Targets</a></li>
+          <li><a href="#points">How Points Work</a></li>
+          <li><a href="#flow">High Score Flow (Step 1–4)</a></li>
+          <li><a href="#hq">Wave 10/20 HQ Defense</a></li>
+          <li><a href="#city">City Defense Setup</a></li>
+          <li><a href="#heroes">Hero Usage</a></li>
+          <li><a href="#checklist">Final Checklist</a></li>
+        </ul>
+      </div>
+
+      <section id="overview" class="anchor">
+        <h2>Event Overview</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">Basic Rules</p>
+            <ul>
+              <li>A total of 20 waves of AI Vikings will attack.</li>
+              <li>You clear a wave by defeating at least 50% of the attacking troops.</li>
+              <li>Targets rotate between all members, online-only players, and HQ-only rounds.</li>
+              <li>After 2 losses, extra attacks on your city may stop, but you can still keep earning points through reinforcements.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">Core Concept</p>
+            <ul>
+              <li>Your own score is affected by how many Vikings die in your city.</li>
+              <li>However, the biggest score gap comes from reinforcement points.</li>
+              <li>That is why the strongest practical strategy is an empty-city setup plus online-first reinforcements.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          Key point: If Infantry or Cavalry stay inside your city, they steal kills from your reinforcements and reduce your allies’ score. Emptying your city is usually the better setup.
+        </div>
+      </section>
+
+      <section id="waves" class="anchor">
+        <h2>Wave Targets</h2>
+        <p>Each wave rotates between all members, online-only players, and HQ-only rounds. The most important ones are Wave 7, 14, and 17, which only attack online players, and Wave 10 and 20, which only attack HQ.</p>
+
+        <table aria-label="Wave targets">
+          <thead>
+            <tr>
+              <th>Range</th>
+              <th>Target</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1–6</td><td>All members</td></tr>
+            <tr><td>7 / 14 / 17</td><td>Online members only</td></tr>
+            <tr><td>8–9 / 11–13 / 15–16 / 18–19</td><td>All members</td></tr>
+            <tr><td>10 / 20</td><td>Alliance HQ only</td></tr>
+            <tr><td>Offline players</td><td>They are not attacked during Wave 7, 14, and 17</td></tr>
+            <tr><td>Recommended HQ</td><td>Plains HQ is preferred</td></tr>
+          </tbody>
+        </table>
+
+        <div class="note">
+          Tip: Because some rounds only attack online players, sending reinforcements to online members first is the most efficient choice.
+        </div>
+      </section>
+
+      <section id="points" class="anchor">
+        <h2>How Points Work</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">City Points (Base)</p>
+            <ul>
+              <li>The more Vikings die in your city, the higher your score becomes.</li>
+              <li>If you clear 100% of the wave, you can secure nearly the full point value for that round.</li>
+              <li>Still, the real high score gap usually comes from reinforcement points.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">Reinforcement Points (Core)</p>
+            <ul>
+              <li>Reinforcing another player does not steal their score.</li>
+              <li>Instead, kills made by your reinforcing troops generate separate reinforcement points for you.</li>
+              <li>That means good role splitting lets both sides increase their score at the same time.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          High score conclusion: Empty your own city, keep reinforcing alliance members, and let the reinforcements secure the kills whenever possible.
+        </div>
+      </section>
+
+      <section id="flow" class="anchor">
+        <h2>High Score Flow (Step 1–4)</h2>
+
+        <h3>Step 1 — Early Reinforcement (Keep until Wave 19)</h3>
+        <ul>
+          <li>Send reinforcements to around 6 online alliance members.</li>
+          <li>Infantry + Cavalry is the standard setup, and on new servers or lower difficulty, Infantry-only can also be very efficient.</li>
+          <li>If Infantry or Cavalry stay in your city, they take kills away from your reinforcements, so move them out first whenever possible.</li>
+        </ul>
+
+        <h3>Step 2 — HQ Defense Round (10/20)</h3>
+        <ul>
+          <li>During Wave 10 and 20, the Viking King attacks HQ only.</li>
+          <li>After Wave 9 / 19 fully ends, pull back one strong march, usually Infantry-focused, and send it to defend HQ.</li>
+        </ul>
+
+        <h3>Step 3 — Alliance Coordination Message (Copy-Paste)</h3>
+        <ul>
+          <li>I’ll keep reinforcing until Wave 19. Please send out your Infantry/Cavalry elsewhere and leave your city as empty as possible except for Archers.</li>
+          <li>Offline players are more likely to keep troops at home, so it is usually better to coordinate with online members first.</li>
+        </ul>
+
+        <h3>Step 4 — City Defense (Score Funneling)</h3>
+        <ul>
+          <li>If needed, you can defend your city with an Archer-only setup. Even if later waves reach the Archer turn, the score impact is often smaller than expected.</li>
+          <li>You can also receive strong Infantry reinforcements from trusted allies and funnel score into your city setup.</li>
+          <li>If the reinforcements are too weak, your Archers may start taking kills. That usually means the reinforcement strength is not high enough.</li>
+        </ul>
+
+        <div class="note">
+          Core summary: (1) Move your Infantry/Cavalry out whenever possible, (2) reinforce online members first, (3) switch to HQ defense on Wave 10 and 20.
+        </div>
+      </section>
+
+      <section id="hq" class="anchor">
+        <h2>Wave 10/20 HQ Defense</h2>
+        <ul>
+          <li>Wave 10 and 20 only target HQ, so HQ defense preparation is extremely important.</li>
+          <li>You should only recall troops after Wave 9 / 19 is completely finished. Recalling too early means losing reinforcement points.</li>
+          <li>Once HQ defense is done, return that march to its previous reinforcement target to maintain your overall flow.</li>
+        </ul>
+
+        <div class="note">
+          Recommended setup: Assign one strong march as your dedicated HQ defense march, then send it straight back to reinforcements once HQ defense is over.
+        </div>
+      </section>
+
+      <section id="city" class="anchor">
+        <h2>City Defense Setup</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">Why Empty City Matters</p>
+            <ul>
+              <li>If troops remain inside your city, they will take kills while fighting the Vikings.</li>
+              <li>Those kills do not help you enough to justify the score loss on the ally reinforcing you.</li>
+              <li>That is why Infantry and Cavalry should usually be moved out, leaving only Archers if necessary.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">Troop Efficiency Notes</p>
+            <ul>
+              <li>Infantry, Cavalry, and Archers all deal normal damage in this event.</li>
+              <li>On newer servers and lower difficulty, Infantry-only setups can be very strong, and Infantry remains strong even on higher difficulty.</li>
+              <li>Even if later waves reach the Archer turn, the overall score impact is often smaller than people expect.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          Important: It is usually safer not to heal during the event. If healed troops return to your city mid-run, they may start taking kills away from your reinforcements.
+        </div>
+      </section>
+
+      <section id="heroes" class="anchor">
+        <h2>Hero Usage</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">When Sending Reinforcements (Attack-Oriented First)</p>
+            <ul>
+              <li>Your main goal is securing kills, so attack-oriented leaders or rally-style contributors are better here.</li>
+              <li>Examples: Chenko, Amadeus, Yeonwoo, and Amane are strong examples of heroes with offensive contribution.</li>
+              <li>Pure defensive heroes are generally less efficient in this event.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">When Leaving Heroes in Your City (Only 3 Defenders)</p>
+            <ul>
+              <li>Leave only your 3 strongest defense heroes inside the city and use the rest for reinforcements or marches.</li>
+              <li>Example (Gen1): F2P can use Jabel / Howard / Quinn, while P2W can use Amadeus(or Helga) / Jabel / Saul.</li>
+              <li>Letting reinforcements secure the kills is better for total alliance score than trying to score kills with your own city troops.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          One-line conclusion: Use attack-type heroes for reinforcements, keep city defense minimal, and move Infantry/Cavalry out.
+        </div>
+      </section>
+
+      <section id="checklist" class="anchor">
+        <h2>Final Checklist</h2>
+        <div class="card">
+          <ul>
+            <li>Before the event starts: Choose a time when the largest number of members can be online</li>
+            <li>Wave 0–19: Reinforce online members first and keep your own Infantry/Cavalry out of your city</li>
+            <li>Wave 7 / 14 / 17: Online-only attack rounds → keep online members as the priority</li>
+            <li>Wave 10 / 20: After Wave 9 / 19 fully ends, send one strong march to HQ for defense</li>
+            <li>During the event: Delay healing as much as possible, and return to reinforcements as soon as HQ defense ends</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="related">
+        <h2>Related Guides</h2>
+        <div class="related">
+          <a class="pill" href="/en/guides/truegold.html">Truegold Cost Chart</a>
+          <a class="pill" href="/en/guides/kingshot-giftcode.html">Latest Gift Codes</a>
+          <a class="pill" href="/en/guides/topup-guide.html">Top-Up Guide</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

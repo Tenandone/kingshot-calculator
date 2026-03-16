@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>킹샷 초보 공략 · 무과금/소과금 성장 가이드 (연맹, VIP7, 경기장, 망치, 상점 효율)</title>
+  <meta name="description" content="킹샷 초보자용 무과금·소과금 성장 가이드. 상위 연맹 선택, VIP7 우선순위, 경기장 보상, 망치(영웅 장비), 도시센터 성장, 상점 효율표, 이벤트 운영법까지 한 페이지에 정리." />
+  <meta name="keywords" content="킹샷 초보 공략, 킹샷 무과금 공략, 킹샷 소과금 공략, Kingshot beginner guide, Kingshot f2p guide, 킹샷 VIP7, 킹샷 경기장, 킹샷 망치, 킹샷 영웅장비, 킹샷 상점 효율, 킹샷 VIP 상점, 킹샷 경기장 상점, 킹샷 떠돌이 상인" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/kingshot-f2p-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/kingshot-f2p-guide.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="킹샷 초보 공략 · 무과금/소과금 성장 가이드" />
+  <meta property="og:description" content="상위 연맹, VIP7, 경기장, 망치(영웅 장비), 도시센터, 상점 효율, 이벤트 운영까지 무과금·소과금 핵심 성장 루트를 정리한 킹샷 초보 공략." />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/guides/kingshot-f2p-guide.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <style>
+    *{box-sizing:border-box}
+
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --ok:#ecfdf5;
+      --warn:#fff7ed;
+      --note:#f8fafc;
+      --info:#eff6ff;
+
+      --shadow:0 10px 25px rgba(0,0,0,.06);
+      --radius:16px;
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --ok:#0f1e16;
+        --warn:#1a140c;
+        --note:#141414;
+        --info:#111827;
+        --shadow:0 10px 25px rgba(0,0,0,.35);
+      }
+    }
+
+    html,body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:15px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+    }
+
+    html{scroll-behavior:smooth}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(26px,3.4vw,40px);
+      line-height:1.18;
+      letter-spacing:-0.02em;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:32px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-side{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      padding:14px;
+    }
+    .hero-side h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-side ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .hero-side li{margin:6px 0}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note);
+    }
+    .callout.ok{background:var(--ok)}
+    .callout.warn{background:var(--warn)}
+    .callout.info{background:var(--info)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0;padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text);font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:20px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .checklist{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .check{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:12px 14px;
+    }
+    .check h3{
+      margin:0 0 8px;
+      font-size:14px;
+    }
+
+    .center-link-card{
+      display:grid;
+      grid-template-columns:120px 1fr;
+      gap:14px;
+      align-items:center;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      padding:14px;
+      margin-top:12px;
+    }
+    .center-link-card img{
+      width:120px;
+      height:120px;
+      object-fit:contain;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#f8fafc;
+      padding:10px;
+    }
+    .center-link-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+      color:var(--text);
+    }
+    .center-link-card p{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .shop-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .shop-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:14px;
+    }
+    .shop-card h3{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--text);
+    }
+    .shop-priority{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:8px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:1000;
+      border:1px solid var(--border);
+      background:var(--panel);
+    }
+    .badge.must{background:var(--ok)}
+    .badge.optional{background:var(--warn)}
+    .badge.skip{background:#fee2e2;color:#991b1b}
+    .btn-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:40px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      color:var(--text);
+      font-weight:1000;
+      text-decoration:none !important;
+      font-size:14px;
+      line-height:1;
+    }
+    .btn-link:hover{
+      border-color:#c7d2fe;
+      transform:translateY(-1px);
+    }
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:var(--note);
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+
+    .faq{
+      margin-top:10px;
+    }
+
+    .foot{
+      margin:18px 0 8px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:940px){
+      .hero,
+      .grid,
+      .checklist,
+      .center-link-card,
+      .shop-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+    }
+
+    @media (max-width:600px){
+      h1{font-size:26px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"킹샷 초보 공략 · 무과금/소과금 성장 가이드",
+    "inLanguage":"ko",
+    "description":"상위 연맹, VIP7, 경기장, 망치(영웅 장비), 도시센터, 상점 효율, 이벤트 운영까지 무과금·소과금 핵심 성장 루트를 정리한 킹샷 초보 공략.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ko/guides/kingshot-f2p-guide.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
+      {"@type":"ListItem","position":2,"name":"가이드","item":"https://kingshotdata.kr/ko/guides/"},
+      {"@type":"ListItem","position":3,"name":"킹샷 초보 공략","item":"https://kingshotdata.kr/ko/guides/kingshot-f2p-guide.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"킹샷 무과금은 어떤 연맹에 들어가야 하나요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"가능하면 1위 연맹, 최소 2~3위 연맹에 들어가는 것이 좋습니다. 연맹 선물, 보물상자, HELP 속도, 집결 빈도, 성소 및 유적 버프 차이로 성장 속도가 크게 달라집니다."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"킹샷 VIP7은 왜 중요한가요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"VIP7을 달성하면 매일 레전드 공용 조각 1개를 꾸준히 확보하는 루틴을 만들 수 있습니다. 무과금과 소과금에게 장기 성장의 핵심 구간입니다."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"킹샷 경기장을 꼭 해야 하나요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"네. 경기장은 소과금과 무과금이 레전드 영웅 장비와 핵심 재화를 꾸준히 수급할 수 있는 중요한 루트입니다. 망치와 장비 강화는 경기장 순위 상승에 직접 연결됩니다."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"킹샷 망치(영웅 장비)는 왜 중요한가요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"영웅은 세대가 바뀌어도 장비와 마스터리는 계속 남습니다. 그래서 망치는 장기적인 계정 성장과 전투력 유지에서 매우 중요합니다."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"킹샷 상점은 무엇부터 사야 하나요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"무과금과 소과금 기준으로는 경기장 상점의 레전드 상자, VIP 상점의 레전드 공용 조각과 망치, 떠돌이 상인의 자원 구매, 시련 상점의 미스릴 같은 장기 성장 재화를 우선하는 것이 좋습니다."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- GA4 -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/kingshot-f2p-guide.html">EN</a>
+        <a href="/ko/guides/kingshot-f2p-guide.html" aria-current="page">KO</a>
+        <a href="/ja/guides/kingshot-f2p-guide.html">JA</a>
+        <a href="/zh-tw/guides/kingshot-f2p-guide.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#sec-0">전체 흐름</a>
+      <a href="#sec-1">연맹</a>
+      <a href="#sec-2">VIP7</a>
+      <a href="#sec-3">경기장</a>
+      <a href="#sec-4">망치</a>
+      <a href="#sec-5">센터</a>
+      <a href="#sec-6">이벤트</a>
+      <a href="#sec-7">상점</a>
+      <a href="#sec-8">집결</a>
+      <a href="#sec-9">연맹 기본</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main>
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/guides/">가이드</a> <span class="muted">›</span>
+        <span>킹샷 초보 공략</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>킹샷 초보 공략 · 무과금/소과금 성장 가이드</h1>
+          <p class="sub">
+            상위 연맹, VIP7, 경기장, 망치(영웅 장비), 도시센터 성장, 상점 효율, 이벤트 운영까지
+            무과금·소과금 유저가 꾸준히 강해지는 핵심 성장 루트를 한 페이지에 정리했다.
+          </p>
+
+          <div class="meta">
+            <span class="tag">초보자 로드맵</span>
+            <span class="tag">무과금/소과금</span>
+            <span class="tag">VIP7 우선</span>
+            <span class="tag">경기장 핵심</span>
+            <span class="tag">상점 효율</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <h2>이 글 한 줄 요약</h2>
+          <ul>
+            <li>상위 연맹에 빨리 들어가야 상자, 가속, 버프 차이로 성장 속도가 벌어진다.</li>
+            <li>VIP7과 경기장은 소과금/무과금 계정의 핵심 성장 축이다.</li>
+            <li>망치, 장비, 상점 구매 우선순위를 알면 장기 성장 효율이 크게 좋아진다.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>먼저 이것만 기억하면 절반은 성공</h3>
+            <ul>
+              <li><b>건설 대기 + 행렬 대기</b>는 필수다. 게임 전체 속도가 달라진다.</li>
+              <li><b>상위 1~3위 연맹</b>에 최대한 빨리 들어가야 한다. 상자, 가속, 다이아 수급 차이가 크다.</li>
+              <li><b>VIP 7</b>은 1차 목표다. 매일 레전드 공용 조각 1개 루틴이 핵심이다.</li>
+              <li><b>경기장</b>은 레전드 장비와 조각 수급 루트다. 소과금의 생명줄에 가깝다.</li>
+              <li><b>망치(영웅 장비)</b>는 장기전 핵심이다. 영웅이 바뀌어도 장비는 남는다.</li>
+              <li><b>상점 효율</b>을 알면 같은 재화로도 훨씬 멀리 간다.</li>
+            </ul>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>초보가 가장 많이 무너지는 패턴</h3>
+            <ul>
+              <li>연맹을 아무 데나 오래 머무른다 → 상자/가속/버프 손해가 계속 누적된다.</li>
+              <li>이벤트마다 조금씩 써서 아무것도 못 먹는다 → 짧은 이벤트 1등 타이밍이 사라진다.</li>
+              <li>영웅/장비/다이아를 분산 투자한다 → 경기장 순위가 안 올라 핵심 재화가 막힌다.</li>
+              <li>상점에서 보여주는 대로 아무거나 산다 → 장기적으로 VIP, 조각, 망치 효율이 망가진다.</li>
+            </ul>
+          </div>
+
+          <div class="related" aria-label="Quick links">
+            <a class="pill" href="#sec-0">0) 전체 흐름</a>
+            <a class="pill" href="#sec-1">1) 연맹</a>
+            <a class="pill" href="#sec-2">2) VIP7</a>
+            <a class="pill" href="#sec-3">3) 경기장</a>
+            <a class="pill" href="#sec-4">4) 망치</a>
+            <a class="pill" href="#sec-5">5) 센터</a>
+            <a class="pill" href="#sec-6">6) 이벤트</a>
+            <a class="pill" href="#sec-7">7) 상점</a>
+            <a class="pill" href="#sec-8">8) 집결</a>
+            <a class="pill" href="#sec-9">9) 연맹 기본</a>
+            <a class="pill" href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <nav class="toc card" aria-label="Table of contents">
+          <h2>목차</h2>
+          <ul>
+            <li><a href="#sec-0">0) 초보 운영의 전체 흐름</a></li>
+            <li><a href="#sec-1">1) 연맹은 1~3위로</a></li>
+            <li><a href="#sec-2">2) VIP 7을 최대한 빨리</a></li>
+            <li><a href="#sec-3">3) 경기장(아레나)에 집중해야 하는 이유</a></li>
+            <li><a href="#sec-4">4) 망치(영웅장비)가 장기전의 핵심</a></li>
+            <li><a href="#sec-5">5) 센터를 올려 티어를 앞당기기</a></li>
+            <li><a href="#sec-6">6) 이벤트 운영: 짧은 이벤트 1등 전략</a></li>
+            <li><a href="#sec-7">7) 상점 효율 가이드</a></li>
+            <li><a href="#sec-8">8) 영웅/스킬/집결 구조</a></li>
+            <li><a href="#sec-9">9) 연맹 시스템: 이것만은 꼭</a></li>
+            <li><a href="#related-links">내부링크 모음</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="sec-0" class="block anchor">
+        <h2>0) 초보 운영의 전체 흐름</h2>
+        <p>
+          소과금/무과금이 강해지는 구조는 단순하다.
+          <b>연맹(상자/버프) → 경기장(레전드 장비) → 망치(마스터리) → 더 높은 경기장 순위</b>가 반복되면서 계정 격차가 벌어진다.
+        </p>
+
+        <div class="callout">
+          <h3>초보가 따라가기 쉬운 3단계</h3>
+          <ul>
+            <li><b>1단계:</b> 도시센터와 각종 대기열을 뚫고, 상위 연맹에 진입한다.</li>
+            <li><b>2단계:</b> VIP7 루틴을 만들고, 경기장 순위를 올린다.</li>
+            <li><b>3단계:</b> 망치와 장비 마스터리를 누적해 세대가 지나도 강한 계정을 만든다.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-1" class="block anchor">
+        <h2>1) 연맹은 1~3위로</h2>
+        <p><b>여기서 최소 절반은 먹고 들어간다.</b> 가능하면 1위, 최소 2~3위 안에 들어가는 게 좋다.</p>
+
+        <h3>왜 꼭 상위 연맹이어야 하나</h3>
+        <ul>
+          <li><b>연맹 선물/보물상자</b>로 다이아, 가속, 아이템이 매일 쌓인다.</li>
+          <li><b>HELP 속도</b>와 <b>집결 빈도</b>가 다르다.</li>
+          <li><b>성소/유적 버프</b>로 건설, 훈련, 채집 효율이 크게 달라진다.</li>
+        </ul>
+
+        <div class="callout warn">
+          <h3>주의</h3>
+          <p>애매한 중위권 연맹에 오래 있으면 정치, 전쟁, 약탈 대상 이슈로 성장 템포가 많이 흔들릴 수 있다.</p>
+        </div>
+
+        <h3>연맹 들어가면 바로 해야 할 것</h3>
+        <ul>
+          <li><b>연맹 영지 안으로 도시를 완전히 넣기</b></li>
+          <li>집결 참여를 위해 <b>연맹장 또는 핵심 인원 근처</b>로 이동하기</li>
+        </ul>
+      </section>
+
+      <section id="sec-2" class="block anchor">
+        <h2>2) VIP 7을 최대한 빨리</h2>
+        <p>초보자의 1차 목표는 <b>VIP 7</b>이다.</p>
+
+        <h3>VIP 7이 중요한 이유</h3>
+        <ul>
+          <li>VIP 7 활성화 시 <b>매일 레전드 공용 조각 1개</b> 루틴이 가능해진다.</li>
+          <li>이 루틴 하나만으로도 장기 계정 성장 차이가 꽤 크게 벌어진다.</li>
+        </ul>
+
+        <details>
+          <summary>소과금 VIP 올리는 루트</summary>
+          <ul>
+            <li>매일 VIP 포인트를 연속 수령한다.</li>
+            <li>연맹 상점과 떠돌이 상점에서 할인된 VIP 포인트를 우선 구매한다.</li>
+          </ul>
+        </details>
+
+        <div class="callout ok">
+          <h3>한 줄 결론</h3>
+          <p><b>VIP 7</b>을 빨리 찍으면 “매일 조각이 쌓이는 계정”이 된다.</p>
+        </div>
+      </section>
+
+      <section id="sec-3" class="block anchor">
+        <h2>3) 경기장(아레나)에 집중해야 하는 이유</h2>
+        <p>소과금이 <b>레전드 영웅장비</b>를 꾸준히 받는 핵심 루트가 경기장이다.</p>
+
+        <div class="callout ok">
+          <h3>추천 방향(초보 기준)</h3>
+          <ul>
+            <li>초반은 <b>궁병/기병</b> 장비 우선 고려</li>
+            <li>망치와 장비 강화는 경기장 순위 상승에 도움이 되게 사용</li>
+            <li>현실 목표는 <b>100~500위권</b>이다.</li>
+          </ul>
+        </div>
+
+        <h3>왜 경기장이 중요하나</h3>
+        <ul>
+          <li>경기장 순위가 높아질수록 레전드 장비와 관련 재화 수급 루트가 안정된다.</li>
+          <li>경기장에서 얻은 장비는 다시 경기장 순위를 올리는 데 쓰인다.</li>
+          <li>결국 경기장은 무과금·소과금 계정의 핵심 성장 허브다.</li>
+        </ul>
+      </section>
+
+      <section id="sec-4" class="block anchor">
+        <h2>4) 망치(영웅장비)가 장기전의 핵심</h2>
+        <p>영웅은 세대가 바뀌어도 장비는 남는다. 그래서 <b>마스터리 누적</b>이 결국 장기 격차를 만든다.</p>
+
+        <div class="callout">
+          <h3>망치 루틴</h3>
+          <ul>
+            <li>곰사냥은 성실하게 꾸준히 챙긴다.</li>
+            <li>장비 강화는 자주 쓰는 병과와 경기장 주력 영웅 중심으로 집중한다.</li>
+            <li>지금 당장 약해 보여도 장비는 세대가 바뀌어도 계속 계정에 남는다.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec-5" class="block anchor">
+        <h2>5) 센터를 올려 티어를 앞당기기</h2>
+        <p>나중에 가장 크게 체감되는 건 결국 <b>병사 티어</b>다.</p>
+
+        <div class="center-link-card">
+          <a href="/ko/buildings/town-center/" aria-label="도시센터 페이지로 이동">
+            <img src="/img/buildings/town-center.webp" alt="도시센터 (Kingshot)" loading="lazy" width="120" height="120" />
+          </a>
+
+          <div>
+            <h3>도시센터 요구조건 바로 보기</h3>
+            <p>
+              도시센터 레벨 조건과 선행 건물, 자원, 업그레이드 흐름을 먼저 확인하면
+              무과금·소과금도 가속을 훨씬 덜 낭비하면서 성장 루트를 잡을 수 있다.
+            </p>
+            <a class="btn-link" href="/ko/buildings/town-center/">도시센터 상세 페이지 이동</a>
+          </div>
+        </div>
+
+        <details>
+          <summary>가속 우선순위(초반)</summary>
+          <ul>
+            <li>건설 &gt; 기술 &gt; 병사/치유</li>
+          </ul>
+        </details>
+
+        <div class="callout warn">
+          <h3>초반 실수 방지</h3>
+          <p>괜히 여러 군데 분산해서 가속을 쓰기보다, 센터와 핵심 선행 건물에 집중하는 편이 훨씬 낫다.</p>
+        </div>
+      </section>
+
+      <section id="sec-6" class="block anchor">
+        <h2>6) 이벤트 운영: 짧은 이벤트 1등 전략</h2>
+
+        <div class="callout ok">
+          <h3>핵심 사고방식</h3>
+          <ul>
+            <li>기본보상은 전부 챙긴다.</li>
+            <li>1등은 아무 이벤트나 노리지 말고, <b>이길 수 있는 짧은 이벤트</b>에만 선택과 집중한다.</li>
+            <li>조각, 가속, 다이아를 분산 소비하면 결국 아무것도 못 먹는다.</li>
+          </ul>
+        </div>
+
+        <h3>운영 포인트</h3>
+        <ul>
+          <li>짧은 이벤트에서 1등 가능한 타이밍을 만들기 위해 재화를 모은다.</li>
+          <li>서버 경쟁 상황을 보고 “이번엔 먹는다” 싶은 이벤트만 강하게 간다.</li>
+          <li>이벤트 전부를 이기려 하지 말고, <b>기본보상 + 선택 이벤트 1등</b> 구조로 운영한다.</li>
+        </ul>
+      </section>
+
+      <section id="sec-7" class="block anchor">
+        <h2>7) 상점 효율 가이드</h2>
+        <p>
+          무과금·소과금은 상점에서 무엇을 사느냐가 정말 중요하다.
+          같은 재화를 써도 <b>장기 성장 재화</b>를 사는 사람과, 즉흥적으로 사는 사람의 차이는 시간이 갈수록 크게 벌어진다.
+        </p>
+
+        <div class="callout info">
+          <h3>상점 효율 한 줄 요약</h3>
+          <p>
+            <b>경기장 상점, VIP 상점, 시련 상점, 떠돌이 상인(자원 구매)</b>은 우선순위가 높고,
+            <b>다이아 상점</b>은 평소엔 거의 비추천이다.
+          </p>
+        </div>
+
+        <div class="shop-grid">
+          <div class="shop-card">
+            <h3>떠돌이 상인</h3>
+            <div class="shop-priority">
+              <span class="badge must">자원 구매 우선</span>
+              <span class="badge skip">다이아 직구매 비추천</span>
+            </div>
+            <ul>
+              <li>자원으로 살 수 있는 건 초중반에 꽤 효율적이다.</li>
+              <li>성 레벨 30 이후에는 자원 압박이 커져서 무지성 구매는 비추천.</li>
+              <li>보석으로 바로 사는 상품은 효율이 낮아 피하는 편이 좋다.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>신비한 상점</h3>
+            <div class="shop-priority">
+              <span class="badge must">전용 무기 할인 우선</span>
+              <span class="badge optional">리프레시 제한적 사용</span>
+            </div>
+            <ul>
+              <li>전용 무기 할인 상품이 핵심이다.</li>
+              <li>새로고침을 너무 많이 하면 효율이 급격히 떨어진다.</li>
+              <li>필요한 것만 뽑아먹고 빠지는 식으로 운영하는 게 안전하다.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>경기장 상점</h3>
+            <div class="shop-priority">
+              <span class="badge must">레전드 상자 최우선</span>
+              <span class="badge optional">남는 재화는 미스릴</span>
+            </div>
+            <ul>
+              <li>첫 번째 우선순위는 레전드 상자다.</li>
+              <li>숙련도나 장비 흐름에 따라 미스릴도 강한 선택지다.</li>
+              <li>무과금·소과금 장비 성장의 핵심 상점이다.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>VIP 상점</h3>
+            <div class="shop-priority">
+              <span class="badge must">레전드 공용 조각</span>
+              <span class="badge must">망치 / 강화재료</span>
+            </div>
+            <ul>
+              <li>레전드 공용 조각은 사실상 필수 구매에 가깝다.</li>
+              <li>망치와 강화 용품도 장기 효율이 매우 좋다.</li>
+              <li>가속 상품은 과금 유저가 아니라면 우선순위가 낮다.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>챔피언 상점</h3>
+            <div class="shop-priority">
+              <span class="badge must">금사 / 비단 비율 맞춰 구매</span>
+              <span class="badge optional">스케치는 여유 있을 때</span>
+            </div>
+            <ul>
+              <li>장비 성장 재료 비율을 맞춰서 사는 게 핵심이다.</li>
+              <li>금사와 비단이 어긋나지 않게 보는 게 중요하다.</li>
+              <li>스케치류는 여유가 생기면 따라붙는 정도로 생각하면 된다.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>성검 상점</h3>
+            <div class="shop-priority">
+              <span class="badge must">영웅 장비 재료 우선</span>
+              <span class="badge optional">보석 재료 일부</span>
+            </div>
+            <ul>
+              <li>영웅 장비 재료 위주로 보는 것이 효율이 좋다.</li>
+              <li>보석 재료 5종도 상황 따라 우선순위가 높다.</li>
+              <li>나머지 상품은 계정 상황을 보고 골라야 한다.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>최강영주 상점</h3>
+            <div class="shop-priority">
+              <span class="badge must">전투력 상승 재화 우선</span>
+              <span class="badge optional">영웅 장비 재료</span>
+            </div>
+            <ul>
+              <li>전투력 상승 효율이 높은 재화부터 보는 편이 좋다.</li>
+              <li>그다음은 영웅 장비 관련 상품 쪽으로 비중 조절.</li>
+              <li>무조건 하나만 사는 게 아니라 내 계정 상태를 같이 봐야 한다.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>스킨 상점</h3>
+            <div class="shop-priority">
+              <span class="badge optional">장기 누적형</span>
+              <span class="badge skip">단기 효율 낮음</span>
+            </div>
+            <ul>
+              <li>스킨 상점은 단기 효율보다는 장기 목표형 상점이다.</li>
+              <li>중간에 포기하지 않고 누적해야 의미가 있다.</li>
+              <li> 당장 전투력 급성장이 필요한 계정이면 우선순위는 낮다.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>파도 상점</h3>
+            <div class="shop-priority">
+              <span class="badge must">펫 희귀 재화 우선</span>
+              <span class="badge optional">메달 / 영양제 / 고급 기록</span>
+            </div>
+            <ul>
+              <li>펫 관련 상품 위주로 본다.</li>
+              <li>특히 획득이 어려운 희귀 재료를 우선하는 방식이 좋다.</li>
+              <li>나머지는 계정 상황에 따라 선택적으로 구매.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>시련 상점</h3>
+            <div class="shop-priority">
+              <span class="badge must">미스릴 최우선</span>
+              <span class="badge optional">고급 조각류</span>
+            </div>
+            <ul>
+              <li>미스릴이 가장 핵심이다.</li>
+              <li>그 외 고급 재화도 가치가 높은 편이다.</li>
+              <li>장기 장비 성장 관점에서 보면 효율이 꽤 좋다.</li>
+            </ul>
+          </div>
+
+          <div class="shop-card">
+            <h3>다이아 상점</h3>
+            <div class="shop-priority">
+              <span class="badge skip">평소 비추천</span>
+              <span class="badge optional">이벤트 대응용 예외</span>
+            </div>
+            <ul>
+              <li>정말 급한 상황이 아니면 평소 구매는 비추천이다.</li>
+              <li>특정 이벤트 대응, 마감 직전 부족분 보충 정도로만 생각하는 편이 좋다.</li>
+              <li>무과금·소과금이 평소 다이아 상점에 손대면 효율이 크게 무너질 수 있다.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout warn" style="margin-top:12px">
+          <h3>상점 운영 핵심 결론</h3>
+          <p>
+            무과금·소과금은 <b>상점에서 당장 필요한 것보다, 계정에 계속 남는 것</b>을 먼저 사야 한다.
+            그래서 공용 조각, 망치, 레전드 상자, 미스릴, 장비 재료 같은 품목이 항상 우선이다.
+          </p>
+        </div>
+      </section>
+
+      <section id="sec-8" class="block anchor">
+        <h2>8) 영웅/스킬/집결 구조(초보용)</h2>
+
+        <div class="callout">
+          <h3>집결원 핵심</h3>
+          <p>소과금 현실 목표는 <b>SR 4성 → 첫 스킬 LV5</b> + <b>병사 티어 올리기</b>다.</p>
+        </div>
+
+        <ul>
+          <li>무작정 많은 영웅을 키우기보다, 실제로 자주 쓰는 영웅 중심으로 압축해야 한다.</li>
+          <li>집결 참여용 영웅은 첫 스킬 효율이 중요하다.</li>
+          <li>전투력 숫자만 보는 게 아니라, 실제로 집결과 경기장에 쓰이는가를 기준으로 자원을 배분해야 한다.</li>
+        </ul>
+
+        <div class="related">
+          <a class="pill" href="/ko/guides/kingshot-bearhunt.html">곰사냥 고득점 가이드</a>
+          <a class="pill" href="/ko/guides/hallofgovernors.html">최강영주 가이드</a>
+        </div>
+      </section>
+
+      <section id="sec-9" class="block anchor">
+        <h2>9) 연맹 시스템: 이것만은 꼭</h2>
+
+        <ul>
+          <li><b>기부</b>(다이아/코인)</li>
+          <li><b>HELP</b>(코인 수급)</li>
+          <li><b>집결 참여</b>(보상/망치 수급)</li>
+        </ul>
+
+        <div class="callout warn">
+          <h3>주의</h3>
+          <p>이벤트 시간이 내 시간대와 안 맞는 연맹이면 장기적으로 손해가 크다. 활동 시간대가 맞는 연맹인지도 꼭 확인해야 한다.</p>
+        </div>
+      </section>
+
+      <section id="related-links" class="block anchor">
+        <h2>내부링크 모음</h2>
+        <p class="muted">이 글과 함께 보면 좋은 관련 페이지들</p>
+        <div class="related">
+          <a class="pill" href="/ko/buildings/town-center/">도시센터 요구조건</a>
+          <a class="pill" href="/ko/buildings/academy/">아카데미 업그레이드</a>
+          <a class="pill" href="/ko/guides/kingshot-bearhunt.html">곰사냥 고득점 가이드</a>
+          <a class="pill" href="/ko/guides/hallofgovernors.html">최강영주 가이드</a>
+          <a class="pill" href="/ko/buildings/">건물 전체 보기</a>
+          <a class="pill" href="/ko/guides/">가이드 전체 보기</a>
+        </div>
+      </section>
+
+      <section id="faq" class="block anchor faq">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>킹샷 무과금은 어떤 연맹에 들어가야 하나요?</summary>
+          <p>가능하면 1위 연맹, 최소 2~3위 연맹에 들어가는 것이 좋다. 연맹 선물, 보물상자, HELP 속도, 집결 빈도, 성소 및 유적 버프 차이로 성장 속도가 크게 달라진다.</p>
+        </details>
+
+        <details>
+          <summary>킹샷 VIP7은 왜 중요한가요?</summary>
+          <p>VIP7을 달성하면 매일 레전드 공용 조각 1개를 꾸준히 확보하는 루틴을 만들 수 있다. 무과금과 소과금에게 장기 성장의 핵심 구간이다.</p>
+        </details>
+
+        <details>
+          <summary>킹샷 경기장을 꼭 해야 하나요?</summary>
+          <p>네. 경기장은 소과금과 무과금이 레전드 영웅 장비와 핵심 재화를 꾸준히 수급할 수 있는 중요한 루트다. 망치와 장비 강화도 경기장 순위 상승에 직접 연결된다.</p>
+        </details>
+
+        <details>
+          <summary>킹샷 망치(영웅 장비)는 왜 중요한가요?</summary>
+          <p>영웅은 세대가 바뀌어도 장비와 마스터리는 계속 남는다. 그래서 망치는 장기적인 계정 성장과 전투력 유지에서 매우 중요하다.</p>
+        </details>
+
+        <details>
+          <summary>킹샷 상점은 무엇부터 사야 하나요?</summary>
+          <p>무과금과 소과금 기준으로는 경기장 상점의 레전드 상자, VIP 상점의 레전드 공용 조각과 망치, 떠돌이 상인의 자원 구매, 시련 상점의 미스릴 같은 장기 성장 재화를 우선하는 것이 좋다.</p>
+        </details>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        본 문서는 공식이 아닌, 플레이 경험을 바탕으로 정리한 초보자 운영 가이드다.
+        서버, 메타, 업데이트에 따라 최적 해답은 달라질 수 있다.
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>  

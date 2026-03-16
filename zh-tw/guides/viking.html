@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot 維京復仇攻略 | Viking Vengeance 高分實戰指南</title>
+  <meta name="description" content="Kingshot 維京復仇(Viking Vengeance)高分攻略。整理 20 波防守活動中的清空主城、優先支援線上玩家、10/20 HQ 防守、英雄與兵力配置等實戰重點。" />
+  <meta name="keywords" content="Kingshot 維京復仇, Kingshot Viking Vengeance, Kingshot 維京攻略, Kingshot HQ防守, Kingshot 聯盟活動, Kingshot 高分攻略" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/guides/viking.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/viking.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/viking.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/viking.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/viking.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/viking.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot 維京復仇攻略 | Viking Vengeance 高分實戰指南" />
+  <meta property="og:description" content="從清空主城、優先支援線上玩家，到 10/20 HQ 防守與英雄兵力配置，完整整理 Kingshot 維京復仇高分打法。" />
+  <meta property="og:url" content="https://kingshotdata.kr/zh-tw/guides/viking.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="zh_TW" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --line:#e7ecf5;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+      --warn:#b45309;
+      --warn-bg:rgba(245,158,11,.08);
+
+      --radius:16px;
+      --radius2:14px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.7 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(26px,4vw,40px);
+      line-height:1.15;
+      color:var(--text);
+    }
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:16px 0 0;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .k{font-weight:900;color:var(--text)}
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    h2{
+      margin:0 0 10px;
+      font-size:clamp(20px,2.4vw,28px);
+      color:var(--accent);
+      line-height:1.25;
+    }
+    h3{
+      font-size:clamp(16px,2vw,20px);
+      margin:18px 0 8px;
+      line-height:1.35;
+    }
+    p{margin:8px 0}
+
+    .toc{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .toc strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:15px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin:12px 0;
+    }
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      background:#fff;
+      padding:14px;
+    }
+    .card .title{
+      margin:0 0 6px;
+      font-weight:900;
+    }
+
+    .note{
+      font-size:14px;
+      color:var(--muted);
+      background:var(--warn-bg);
+      padding:12px 14px;
+      border-left:4px solid var(--warn);
+      border-radius:10px;
+      margin:16px 0 0;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:10px 0 0;
+    }
+    th,td{
+      border:1px solid var(--border);
+      padding:10px;
+      vertical-align:top;
+    }
+    th{
+      background:#f8fafc;
+      text-align:left;
+      font-weight:900;
+    }
+
+    ul{margin:8px 0;padding-left:18px}
+    li{margin:6px 0}
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--text);
+      font-size:13px;
+      font-weight:800;
+      text-decoration:none;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+        padding:10px 16px 12px;
+        margin:0 -16px;
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -16px;
+        padding:6px 16px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      .grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section,.toc{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot 維京復仇攻略 | Viking Vengeance 高分實戰指南",
+    "inLanguage":"zh-Hant",
+    "description":"Kingshot 維京復仇(Viking Vengeance)20波防守活動中，最大化分數的高分協作攻略。",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/zh-tw/guides/viking.html"
+    },
+    "author":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Kingshot Data"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/viking.html">EN</a>
+        <a href="/ko/guides/viking.html">KO</a>
+        <a href="/ja/guides/viking.html">JA</a>
+        <a href="/zh-tw/guides/viking.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概覽</a>
+      <a href="#waves">回合</a>
+      <a href="#points">積分</a>
+      <a href="#flow">流程</a>
+      <a href="#hq">HQ防守</a>
+      <a href="#city">主城配置</a>
+      <a href="#heroes">英雄</a>
+      <a href="#checklist">清單</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/guides/">攻略</a> <span class="muted">›</span>
+        <span>維京復仇</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>維京復仇(Viking Vengeance) 最佳攻略</h1>
+          <p class="subtitle">這是一份針對 20 波防守活動、幫助你最大化分數的高分協作實戰指南。</p>
+
+          <div class="meta">
+            <span class="badge"><span class="k">週期</span> 每兩週週二 / 週四（可能依伺服器設定不同）</span>
+            <span class="badge"><span class="k">核心</span> 清空主城 · 支援積分 · 10/20 HQ 防守 · 優先支援線上玩家</span>
+            <span class="badge"><span class="k">目標</span> 最大化聯盟總分（也可進行互相餵分）</span>
+          </div>
+
+          <div class="jump">
+            <a href="#overview">活動概覽</a><span class="dotsep">•</span>
+            <a href="#waves">攻擊回合</a><span class="dotsep">•</span>
+            <a href="#points">積分結構</a><span class="dotsep">•</span>
+            <a href="#flow">實戰流程</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="toc">
+        <strong>目錄</strong>
+        <ul>
+          <li><a href="#overview">活動概覽</a></li>
+          <li><a href="#waves">攻擊回合（目標）說明</a></li>
+          <li><a href="#points">積分結構</a></li>
+          <li><a href="#flow">高分玩法流程（Step 1～4）</a></li>
+          <li><a href="#hq">10/20 回合 HQ 防守</a></li>
+          <li><a href="#city">主城防守（兵力）配置</a></li>
+          <li><a href="#heroes">英雄運用（支援/防守）</a></li>
+          <li><a href="#checklist">最終檢查清單</a></li>
+        </ul>
+      </div>
+
+      <section id="overview" class="anchor">
+        <h2>活動概覽</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">基本規則</p>
+            <ul>
+              <li>總共會有 20 波 AI 維京發動攻擊。</li>
+              <li>每波防守成功條件為擊殺至少 50% 的進攻兵力。</li>
+              <li>攻擊目標會分成全體成員、僅線上玩家，以及 HQ 專屬回合。</li>
+              <li>失敗 2 次後，你的城市可能不再繼續被攻擊，但之後仍可透過支援繼續拿分。</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">核心概念</p>
+            <ul>
+              <li>你的分數會受到在你城裡死亡的維京數量影響。</li>
+              <li>但真正拉開差距的高分通常來自支援積分。</li>
+              <li>所以實戰上最有效的玩法，就是清空主城 + 優先支援線上玩家。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          重點：如果你的主城裡還留有步兵或騎兵，就會搶走支援軍的擊殺，進而降低隊友的分數。能清空就盡量清空。
+        </div>
+      </section>
+
+      <section id="waves" class="anchor">
+        <h2>攻擊回合（目標）說明</h2>
+        <p>每一波的攻擊目標會在全體成員、僅線上玩家與 HQ 專屬回合之間切換。特別要注意的是 7、14、17 只會攻擊線上玩家，而 10、20 則只會攻擊 HQ。</p>
+
+        <table aria-label="Wave targets">
+          <thead>
+            <tr>
+              <th>區間</th>
+              <th>目標</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1～6</td><td>全體成員</td></tr>
+            <tr><td>7 / 14 / 17</td><td>僅線上成員</td></tr>
+            <tr><td>8～9 / 11～13 / 15～16 / 18～19</td><td>全體成員</td></tr>
+            <tr><td>10 / 20</td><td>僅聯盟 HQ</td></tr>
+            <tr><td>離線成員</td><td>在 7、14、17 回合不會被攻擊</td></tr>
+            <tr><td>推薦 HQ</td><td>平原（Plains）HQ 較佳</td></tr>
+          </tbody>
+        </table>
+
+        <div class="note">
+          小技巧：因為有只打線上玩家的回合，所以支援時應優先給線上成員，效率最高。
+        </div>
+      </section>
+
+      <section id="points" class="anchor">
+        <h2>積分結構</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">主城積分（基礎）</p>
+            <ul>
+              <li>在你主城裡死亡的維京越多，你的分數就越高。</li>
+              <li>如果能做到 100% 擊殺，理論上就能拿到最完整的分數。</li>
+              <li>但真正的高分差距，通常還是來自支援積分。</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">支援積分（核心）</p>
+            <ul>
+              <li>你支援別人時，不會把對方的分數搶走。</li>
+              <li>相反地，支援軍造成的擊殺會額外轉成你的支援積分。</li>
+              <li>因此只要分工合作得當，雙方都能把分數拉高。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          高分結論：把自己的主城盡量清空，讓支援軍去吃掉擊殺，這樣最容易把總分拉高。
+        </div>
+      </section>
+
+      <section id="flow" class="anchor">
+        <h2>高分玩法流程（Step 1～4）</h2>
+
+        <h3>Step 1 — 前期支援（維持到第 19 波）</h3>
+        <ul>
+          <li>把支援送給大約 6 名線上的盟友。</li>
+          <li>支援兵力以步兵 + 騎兵為主；新服或低難度時，步兵 100% 也很有效。</li>
+          <li>如果你的主城裡還留有步兵 / 騎兵，就會搶掉支援軍的擊殺，所以要先盡量送出去。</li>
+        </ul>
+
+        <h3>Step 2 — HQ 防守回合（10/20）</h3>
+        <ul>
+          <li>第 10 與第 20 波時，維京王只會攻擊 HQ。</li>
+          <li>請在第 9 / 19 波完全結束後，再把一支強力隊伍（以步兵為主）抽回去守 HQ。</li>
+        </ul>
+
+        <h3>Step 3 — 聯盟協作文案（可直接複製）</h3>
+        <ul>
+          <li>我會支援到第19波。請把除弓兵外的步/騎都派去支援，盡量把主城清空。</li>
+          <li>離線玩家通常比較容易把兵留在城裡，所以建議優先和線上玩家協作。</li>
+        </ul>
+
+        <h3>Step 4 — 主城防守（餵分玩法）</h3>
+        <ul>
+          <li>如果需要守城，可以使用弓兵 100% 配置。即使高波次打到弓兵回合，對分數的影響通常也不算大。</li>
+          <li>也可以讓熟識的盟友用強力步兵來支援你，作為互相餵分的玩法。</li>
+          <li>如果支援軍太弱，弓兵就會開始搶擊殺，這通常代表支援軍強度不足。</li>
+        </ul>
+
+        <div class="note">
+          核心整理：（1）步兵 / 騎兵盡量外派 （2）支援優先給線上玩家 （3）10 / 20 切換去防守 HQ。
+        </div>
+      </section>
+
+      <section id="hq" class="anchor">
+        <h2>10/20 回合 HQ 防守</h2>
+        <ul>
+          <li>第 10 與第 20 波只會打 HQ，所以 HQ 防守準備非常重要。</li>
+          <li>只有在第 9 / 19 波完全結束後才回收兵力，太早回收會損失支援積分。</li>
+          <li>HQ 防守完成後，應立刻回到原本的支援目標，保持整體節奏。</li>
+        </ul>
+
+        <div class="note">
+          建議：提前指定一支專門用來守 HQ 的強力隊伍，打完後馬上回到支援位置。
+        </div>
+      </section>
+
+      <section id="city" class="anchor">
+        <h2>主城防守（兵力）配置</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">為什麼要清空主城</p>
+            <ul>
+              <li>如果主城裡還留有兵力，就會在與維京交戰時搶走支援軍的擊殺。</li>
+              <li>那些擊殺對你本身的收益有限，卻會直接降低支援你的隊友得分。</li>
+              <li>因此步兵 / 騎兵應盡量外派，必要時只留弓兵守城會更有利。</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">兵種效率（實戰提示）</p>
+            <ul>
+              <li>步 / 騎 / 弓三種兵種的傷害都會正常生效。</li>
+              <li>在新服或低難度時，步兵 100% 非常有效，高難度中步兵通常也仍然很強。</li>
+              <li>就算後期回合打到弓兵出手，對總分的影響通常沒有想像中那麼大。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          重要：活動進行中盡量不要治療。因為治療後回城的兵力，可能會開始搶支援軍的擊殺。
+        </div>
+      </section>
+
+      <section id="heroes" class="anchor">
+        <h2>英雄運用（支援 / 防守）</h2>
+
+        <div class="grid">
+          <div class="card">
+            <p class="title">派去支援時（優先攻擊型）</p>
+            <ul>
+              <li>目標是確保擊殺，因此偏輸出或增傷的英雄會更有利。</li>
+              <li>例如：Chenko、Amadeus、Yeonwoo、Amane 這類有明顯攻擊貢獻的英雄。</li>
+              <li>純防禦型英雄在這個活動中的效率通常偏低。</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="title">留在主城時（只留 3 名防守）</p>
+            <ul>
+              <li>主城只需要留下最強的 3 名防守英雄，其餘都可以拿去支援或出征。</li>
+              <li>例如（Gen1）：F2P 可用 Jabel / Howard / Quinn，P2W 可用 Amadeus(或 Helga) / Jabel / Saul。</li>
+              <li>與其讓主城自己吃擊殺，不如讓支援軍拿擊殺，對聯盟總分更有幫助。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          一句話總結：支援用攻擊型（吃擊殺），主城防守降到最低（3 英雄），步兵 / 騎兵盡量清空。
+        </div>
+      </section>
+
+      <section id="checklist" class="anchor">
+        <h2>最終檢查清單</h2>
+        <div class="card">
+          <ul>
+            <li>活動開始前：先挑選多數成員能線上的時間</li>
+            <li>0～19：優先支援線上成員，並把自己的步兵 / 騎兵盡量外派</li>
+            <li>7 / 14 / 17：僅線上玩家會被攻擊 → 支援仍然優先給線上玩家</li>
+            <li>10 / 20：確認 9 / 19 波完全結束後，再派最強的一支隊伍去守 HQ</li>
+            <li>活動中：盡量不要治療；HQ 防守結束後要快速回到支援節奏</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="related">
+        <h2>一起看會更有幫助的攻略</h2>
+        <div class="related">
+          <a class="pill" href="/zh-tw/guides/truegold.html">真金消耗表</a>
+          <a class="pill" href="/zh-tw/guides/kingshot-giftcode.html">最新禮包碼</a>
+          <a class="pill" href="/zh-tw/guides/topup-guide.html">儲值攻略</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>
