@@ -1,12 +1,772 @@
 <!doctype html>
-<html lang="zh-tw">
+<html lang="zh-Hant" dir="ltr">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=/guides/index.html?lang=zh-tw">
+  <base href="/" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Kingshot Data | 指南</title>
+
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/guides/" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/guides/" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/" />
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
   <script>
-    location.replace('/guides/index.html?lang=zh-tw');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
   </script>
-  <title>Redirecting...</title>
 </head>
-<body></body>
+
+<body>
+  <style>
+  *{ box-sizing:border-box; }
+
+  :root{
+    --brand:#0b57d0;
+    --text:#111827;
+    --muted:#6b7280;
+
+    --bg:#ffffff;
+    --surface:#ffffff;
+
+    --tile-border:#5b5e73;
+
+    --border:#e5e7eb;
+    --chip:#f3f4f6;
+
+    --shadow:0 10px 25px rgba(0,0,0,.06);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root{
+      --brand:#0b57d0;
+      --text:#111827;
+      --muted:#6b7280;
+
+      --bg:#ffffff;
+      --surface:#ffffff;
+
+      --tile-border:#5b5e73;
+
+      --border:#e5e7eb;
+      --chip:#f3f4f6;
+
+      --shadow:0 10px 25px rgba(0,0,0,.06);
+    }
+  }
+
+  html,body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font:15px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,"Noto Sans TC","Microsoft JhengHei","PingFang TC",Arial,sans-serif;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+  .muted{ color:var(--muted); }
+
+  .guides-head{
+    max-width:1100px;
+    margin:0 auto;
+    padding:22px 16px 10px;
+  }
+  #page-title{
+    margin:0 0 12px;
+    font-size:clamp(24px,3vw,34px);
+    letter-spacing:-0.02em;
+  }
+
+  .guides-tools{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+  #guide-search{
+    flex:1 1 240px;
+    height:42px;
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:var(--surface);
+    color:var(--text);
+    outline:none;
+  }
+  #guide-search:focus{
+    border-color:color-mix(in srgb, var(--brand) 55%, var(--border));
+    box-shadow:0 0 0 4px color-mix(in srgb, var(--brand) 18%, transparent);
+  }
+  #guide-count{
+    font-size:14px;
+    white-space:nowrap;
+  }
+
+  .reco-wrap{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    padding:6px 0 12px;
+  }
+  .reco-title{
+    font-size:13px;
+    font-weight:800;
+    color:var(--muted);
+    letter-spacing:-0.01em;
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  #guide-reco{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    height:34px;
+    padding:0 12px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background:var(--chip);
+    color:var(--text);
+    font-weight:700;
+    font-size:13px;
+    cursor:pointer;
+    user-select:none;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .chip:hover{
+    border-color:color-mix(in srgb, var(--brand) 40%, var(--border));
+    transform:translateY(-1px);
+  }
+
+  #guide-toc{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    padding:0 0 6px;
+  }
+
+  .sep{
+    border:0;
+    border-top:1px solid var(--border);
+    margin:0;
+  }
+
+  .guides-wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:16px;
+  }
+
+  .guides-list{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:18px;
+    padding:10px 0 24px;
+  }
+  @media (max-width: 980px){
+    .guides-list{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 640px){
+    .guides-list{ grid-template-columns:1fr; }
+  }
+
+  .g-block{
+    background:var(--surface);
+    border:2px solid var(--tile-border);
+    border-radius:26px;
+    overflow:hidden;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .g-block:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow);
+  }
+
+  .g-link{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    gap:12px;
+    padding:24px;
+    min-height:190px;
+  }
+
+  .tile-icon{
+    flex:0 0 auto;
+    width:100%;
+    height:160px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  .tile-icon img{
+    max-width:140px;
+    max-height:140px;
+    width:auto;
+    height:auto;
+    display:block;
+    object-fit:contain;
+    filter:drop-shadow(0 8px 12px rgba(0,0,0,.18));
+  }
+
+  .tile-fallback{
+    display:none;
+    width:140px;
+    height:140px;
+    border-radius:22px;
+    border:1px solid var(--border);
+    background:color-mix(in srgb, var(--surface) 90%, var(--brand) 6%);
+    color:var(--brand);
+    font-weight:900;
+    font-size:34px;
+    align-items:center;
+    justify-content:center;
+    user-select:none;
+  }
+
+  .tile-icon.is-fallback img{ display:none; }
+  .tile-icon.is-fallback .tile-fallback{ display:flex; }
+
+  .tile-title{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    min-width:0;
+    padding:0 8px;
+  }
+
+  .g-title{
+    margin:0;
+    font-size:18px;
+    font-weight:800;
+    line-height:1.25;
+    letter-spacing:-0.02em;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+
+  .lang{ display:none !important; }
+
+  html[lang^="ko" i] .lang-ko,
+  html[data-lang^="ko" i] .lang-ko{ display:inline !important; }
+
+  html[lang^="en" i] .lang-en,
+  html[data-lang^="en" i] .lang-en{ display:inline !important; }
+
+  html[lang^="ja" i] .lang-ja,
+  html[data-lang^="ja" i] .lang-ja{ display:inline !important; }
+
+  html[lang^="zh-tw" i] .lang-zh-tw,
+  html[data-lang^="zh-tw" i] .lang-zh-tw,
+  html[lang="zh-TW" i] .lang-zh-tw,
+  html[data-lang="zh-TW" i] .lang-zh-tw,
+  html[lang="zh-Hant" i] .lang-zh-tw,
+  html[data-lang="zh-Hant" i] .lang-zh-tw{ display:inline !important; }
+
+  html:not([lang]):not([data-lang]) .lang-en{ display:inline !important; }
+  </style>
+
+  <section class="guides-head" data-ks-guides-root="1">
+    <h1 id="page-title">
+      <span class="lang lang-ko">가이드</span>
+      <span class="lang lang-en">Guides</span>
+      <span class="lang lang-ja">ガイド</span>
+      <span class="lang lang-zh-tw">指南</span>
+    </h1>
+
+    <div class="guides-tools">
+      <input id="guide-search" type="search" placeholder="搜尋...">
+      <span id="guide-count" class="muted"></span>
+    </div>
+
+    <div class="reco-wrap" aria-label="Top guides">
+      <div class="reco-title">
+        <span class="lang lang-ko">추천</span>
+        <span class="lang lang-en">Top</span>
+        <span class="lang lang-ja">おすすめ</span>
+        <span class="lang lang-zh-tw">推薦</span>
+      </div>
+      <div id="guide-reco"></div>
+      <div id="guide-reco-empty" class="muted" style="display:none;font-size:13px;">
+        <span class="lang lang-ko">아직 추천 데이터가 없어. 가이드를 몇 번 클릭하면 TOP5가 자동으로 잡혀</span>
+        <span class="lang lang-en">No data yet. Click a few guides and Top 5 will appear.</span>
+        <span class="lang lang-ja">まだデータがありません。いくつかクリックするとTOP5が表示されます</span>
+        <span class="lang lang-zh-tw">目前還沒有資料，點幾次指南後會自動顯示 TOP5</span>
+      </div>
+    </div>
+
+    <nav id="guide-toc" aria-label="toc"></nav>
+  </section>
+
+  <hr class="sep">
+
+  <div class="guides-wrap" data-ks-guides-root="1">
+    <div class="guides-list" id="guide-list">
+
+      <section class="g-block" id="mobile-topup-guide" data-guide="mobile-topup-guide" data-toc="false"
+        data-title-ko="킹샷 충전 가이드" data-title-en="Kingshot Top-Up Guide" data-title-ja="Kingshot チャージガイド" data-title-zh-tw="Kingshot 儲值指南"
+        data-slug="topup-guide">
+        <a class="g-link" href="/zh-tw/guides/topup-guide.html" aria-label="Open Kingshot Top-Up Guide" onclick="window.location.assign(this.href); return false;">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/topup.png" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">₩</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">킹샷 충전 가이드</span>
+              <span class="lang lang-en">Kingshot Top-Up Guide</span>
+              <span class="lang lang-ja">Kingshot チャージガイド</span>
+              <span class="lang lang-zh-tw">Kingshot 儲值指南</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="giftcode" data-guide="giftcode" data-toc="true"
+        data-title-ko="킹샷 기프트코드" data-title-en="Kingshot Gift Codes" data-title-ja="Kingshot ギフトコード" data-title-zh-tw="Kingshot 禮包碼"
+        data-slug="kingshot-giftcode">
+        <a class="g-link" href="/zh-tw/guides/kingshot-giftcode.html" aria-label="Open Kingshot Gift Codes" onclick="window.location.assign(this.href); return false;">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/gift-code-button.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">C</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">킹샷 기프트코드</span>
+              <span class="lang lang-en">Kingshot Gift Codes</span>
+              <span class="lang lang-ja">Kingshot ギフトコード</span>
+              <span class="lang lang-zh-tw">Kingshot 禮包碼</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="f2p-guide" data-guide="f2p-guide" data-toc="true"
+        data-title-ko="킹샷 초보자 가이드" data-title-en="Kingshot Beginner Guide" data-title-ja="Kingshot 初心者ガイド" data-title-zh-tw="Kingshot 新手指南"
+        data-slug="kingshot-f2p-guide">
+        <a class="g-link" href="/zh-tw/guides/kingshot-f2p-guide.html" aria-label="Open Kingshot Beginner Guide" onclick="window.location.assign(this.href); return false;">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/double-time-decree-in-kingshot.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">G4</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">킹샷 초보자 가이드</span>
+              <span class="lang lang-en">Kingshot Beginner Guide</span>
+              <span class="lang lang-ja">Kingshot 初心者ガイド</span>
+              <span class="lang lang-zh-tw">Kingshot 新手指南</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="giant-bear" data-guide="giant-bear" data-toc="true"
+        data-title-ko="킹샷 자이언트 베어 공략" data-title-en="Kingshot Giant Bear Guide" data-title-ja="Kingshot ジャイアントベア攻略" data-title-zh-tw="Kingshot 巨熊攻略"
+        data-slug="kingshot-bearhunt">
+        <a class="g-link" href="/zh-tw/guides/kingshot-bearhunt.html" aria-label="Open Kingshot Giant Bear Guide" onclick="window.location.assign(this.href); return false;">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/bear-hunt-icon.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">B</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">킹샷 자이언트 베어 공략</span>
+              <span class="lang lang-en">Kingshot Giant Bear Guide</span>
+              <span class="lang lang-ja">Kingshot ジャイアントベア攻略</span>
+              <span class="lang lang-zh-tw">Kingshot 巨熊攻略</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="ruins" data-guide="ruins" data-toc="true"
+        data-title-ko="킹샷 사라진 유적 공략" data-title-en="Kingshot Lost Ruins Guide" data-title-ja="Kingshot 失われた遺跡攻略" data-title-zh-tw="Kingshot 失落遺跡攻略"
+        data-slug="kingshot-ruins-tip">
+        <a class="g-link" href="/zh-tw/guides/kingshot-ruins-tip.html" aria-label="Open Kingshot Lost Ruins Guide" onclick="window.location.assign(this.href); return false;">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/eternitys-reach-guide.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">U</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">킹샷 사라진 유적 공략</span>
+              <span class="lang lang-en">Kingshot Lost Ruins Guide</span>
+              <span class="lang lang-ja">Kingshot 失われた遺跡攻略</span>
+              <span class="lang lang-zh-tw">Kingshot 失落遺跡攻略</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="hallofgovernors" data-guide="hallofgovernors" data-toc="true"
+        data-title-ko="킹샷 최강영주 공략" data-title-en="Kingshot Hall of Governors Guide" data-title-ja="Kingshot 最強総督攻略" data-title-zh-tw="Kingshot 最強總督攻略"
+        data-slug="hallofgovernors">
+        <a class="g-link" href="/zh-tw/guides/hallofgovernors.html" aria-label="Open Kingshot Hall of Governors Guide" onclick="window.location.assign(this.href); return false;">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/hallofgovernors.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">H</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">킹샷 최강영주 공략</span>
+              <span class="lang lang-en">Kingshot Hall of Governors Guide</span>
+              <span class="lang lang-ja">Kingshot 最強総督攻略</span>
+              <span class="lang lang-zh-tw">Kingshot 最強總督攻略</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="truegold2026" data-guide="truegold2026" data-toc="true"
+        data-title-ko="킹샷 2026 순금 소모표" data-title-en="Kingshot 2026 Truegold Cost Chart" data-title-ja="Kingshot 2026 純金消費表" data-title-zh-tw="Kingshot 2026 純金消耗表"
+        data-slug="truegold">
+        <a class="g-link" href="/zh-tw/guides/truegold.html" aria-label="Open Kingshot 2026 Truegold Cost Chart" onclick="window.location.assign(this.href); return false;">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/Ttruegold-kingshot.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">TG</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">킹샷 2026 순금 소모표</span>
+              <span class="lang lang-en">Kingshot 2026 Truegold Cost Chart</span>
+              <span class="lang lang-ja">Kingshot 2026 純金消費表</span>
+              <span class="lang lang-zh-tw">Kingshot 2026 純金消耗表</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="atob" data-guide="atob" data-toc="true"
+        data-title-ko="킹샷 SSR 영웅 비교표" data-title-en="Kingshot SSR Hero Comparison Chart" data-title-ja="Kingshot SSR英雄比較表" data-title-zh-tw="Kingshot SSR英雄比較表"
+        data-slug="ssr-hero-vs">
+        <a class="g-link" href="/zh-tw/guides/ssr-hero-vs.html" aria-label="Open Kingshot SSR Hero Comparison Chart" onclick="window.location.assign(this.href); return false;">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/yang.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">A/B</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">킹샷 SSR 영웅 비교표</span>
+              <span class="lang lang-en">Kingshot SSR Hero Comparison Chart</span>
+              <span class="lang lang-ja">Kingshot SSR英雄比較表</span>
+              <span class="lang lang-zh-tw">Kingshot SSR英雄比較表</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="tri-alliance-clash" data-guide="tri-alliance-clash" data-toc="true"
+        data-title-ko="킹샷 삼대연맹전 공략" data-title-en="Kingshot Tri-Alliance Clash Guide" data-title-ja="Kingshot トライ・アライアンス・クラッシュ攻略" data-title-zh-tw="Kingshot 三聯盟爭奪戰攻略"
+        data-slug="Tri-Alliance-Clash">
+        <a class="g-link" href="/zh-tw/guides/Tri-Alliance-Clash.html" aria-label="Open Kingshot Tri-Alliance Clash Guide" onclick="window.location.assign(this.href); return false;">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/tri-alliance-clash-icon.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">TAC</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">킹샷 삼대연맹전 공략</span>
+              <span class="lang lang-en">Kingshot Tri-Alliance Clash Guide</span>
+              <span class="lang lang-ja">Kingshot トライ・アライアンス・クラッシュ攻略</span>
+              <span class="lang lang-zh-tw">Kingshot 三聯盟爭奪戰攻略</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="viking-vengeance" data-guide="viking-vengeance" data-toc="true"
+        data-title-ko="킹샷 바이킹의 약탈 공략" data-title-en="Kingshot Viking Vengeance Guide" data-title-ja="Kingshot バイキングの略奪攻略" data-title-zh-tw="Kingshot 維京復仇攻略"
+        data-slug="viking">
+        <a class="g-link" href="/zh-tw/guides/viking.html" aria-label="Open Kingshot Viking Vengeance Guide" onclick="window.location.assign(this.href); return false;">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/viking-vengeance-event.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">VIK</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">킹샷 바이킹의 약탈 공략</span>
+              <span class="lang lang-en">Kingshot Viking Vengeance Guide</span>
+              <span class="lang lang-ja">Kingshot バイキングの略奪攻略</span>
+              <span class="lang lang-zh-tw">Kingshot 維京復仇攻略</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="transfer" data-guide="transfer" data-toc="true"
+        data-title-ko="킹샷 왕국 이민 가이드" data-title-en="Kingshot Kingdom Transfer Guide" data-title-ja="Kingshot 王国移民ガイド" data-title-zh-tw="Kingshot 王國轉移指南"
+        data-slug="transfer">
+        <a class="g-link" href="/zh-tw/guides/transfer.html" aria-label="Open Kingshot Kingdom Transfer Guide" onclick="window.location.assign(this.href); return false;">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/transfer.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">TR</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">킹샷 왕국 이민 가이드</span>
+              <span class="lang lang-en">Kingshot Kingdom Transfer Guide</span>
+              <span class="lang lang-ja">Kingshot 王国移民ガイド</span>
+              <span class="lang lang-zh-tw">Kingshot 王國轉移指南</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+      <section class="g-block" id="server-timeline" data-guide="server-timeline" data-toc="true"
+        data-title-ko="킹샷 서버 성장 타임라인"
+        data-title-en="Kingshot Server Timeline"
+        data-title-ja="Kingshot サーバー成長タイムライン"
+        data-title-zh-tw="Kingshot 伺服器成長時間線"
+        data-slug="server-timeline">
+        <a class="g-link" href="/zh-tw/guides/server-timeline.html" aria-label="Open Kingshot Server Timeline" onclick="window.location.assign(this.href); return false;">
+          <div class="tile-icon" aria-hidden="true">
+            <img src="/img/guide/server-timeline.webp" alt="" loading="lazy" decoding="async">
+            <div class="tile-fallback">TL</div>
+          </div>
+          <div class="tile-title">
+            <h2 class="g-title">
+              <span class="lang lang-ko">킹샷 서버 성장 타임라인</span>
+              <span class="lang lang-en">Kingshot Server Timeline</span>
+              <span class="lang lang-ja">Kingshot サーバー成長タイムライン</span>
+              <span class="lang lang-zh-tw">Kingshot 伺服器成長時間線</span>
+            </h2>
+          </div>
+        </a>
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    function normalizeLang(value) {
+      var lang = String(value || '').trim().toLowerCase();
+
+      if (!lang) return '';
+      if (lang === 'zh_tw' || lang === 'zhtw' || lang === 'tw') return 'zh-tw';
+      if (lang === 'zh-hant' || lang === 'zh_hant') return 'zh-tw';
+      if (lang === 'zh-tw') return 'zh-tw';
+      if (lang.indexOf('zh-tw') === 0) return 'zh-tw';
+      if (lang.indexOf('zh-hant') === 0) return 'zh-tw';
+      if (lang.indexOf('ja') === 0) return 'ja';
+      if (lang.indexOf('en') === 0) return 'en';
+      if (lang.indexOf('ko') === 0) return 'ko';
+
+      return '';
+    }
+
+    function getLangCode() {
+      var htmlLang = normalizeLang(
+        document.documentElement.getAttribute('data-lang') ||
+        document.documentElement.getAttribute('lang')
+      );
+      if (htmlLang) return htmlLang;
+
+      var path = (location.pathname || '').toLowerCase();
+
+      if (path.indexOf('/ja/') === 0) return 'ja';
+      if (path.indexOf('/en/') === 0) return 'en';
+      if (path.indexOf('/zh-tw/') === 0) return 'zh-tw';
+
+      var params = new URLSearchParams(location.search);
+      var qLang = normalizeLang(params.get('lang'));
+      if (qLang) return qLang;
+
+      return 'ko';
+    }
+
+    function getLangPrefix(lang) {
+      if (lang === 'en') return '/en';
+      if (lang === 'ja') return '/ja';
+      if (lang === 'zh-tw') return '/zh-tw';
+      return '';
+    }
+
+    function buildGuideHref(lang, slug) {
+      return getLangPrefix(lang) + '/guides/' + slug + '.html';
+    }
+
+    function setHardNavigate(el, href) {
+      if (!el || !href) return;
+      el.setAttribute('href', href);
+      el.setAttribute('onclick', 'window.location.assign(this.href); return false;');
+    }
+
+    function applyGuideLangLinks() {
+      var lang = getLangCode();
+      var cards = document.querySelectorAll('.g-block[data-slug]');
+
+      for (var i = 0; i < cards.length; i++) {
+        var card = cards[i];
+        var slug = card.getAttribute('data-slug');
+        if (!slug) continue;
+
+        var href = buildGuideHref(lang, slug);
+        card.setAttribute('data-href', href);
+
+        var link = card.querySelector('a.g-link');
+        if (link) {
+          setHardNavigate(link, href);
+        }
+      }
+    }
+
+    function getVisibleTitle(card, lang) {
+      var key = 'data-title-' + lang;
+      return (
+        card.getAttribute(key) ||
+        card.getAttribute('data-title-ko') ||
+        ''
+      );
+    }
+
+    function buildToc() {
+      var lang = getLangCode();
+      var toc = document.getElementById('guide-toc');
+      if (!toc) return;
+
+      var cards = document.querySelectorAll('.g-block[data-toc="true"]');
+      var html = '';
+
+      for (var i = 0; i < cards.length; i++) {
+        var card = cards[i];
+        var title = getVisibleTitle(card, lang);
+        var href = card.getAttribute('data-href') || '#';
+        html += '<a class="chip" href="' + href + '" onclick="window.location.assign(this.href); return false;">' + title + '</a>';
+      }
+
+      toc.innerHTML = html;
+    }
+
+    function buildReco() {
+      var lang = getLangCode();
+      var recoWrap = document.getElementById('guide-reco');
+      var recoEmpty = document.getElementById('guide-reco-empty');
+      if (!recoWrap || !recoEmpty) return;
+
+      var raw = null;
+      try {
+        raw = JSON.parse(localStorage.getItem('ks-guide-clicks') || '{}');
+      } catch (_) {
+        raw = {};
+      }
+
+      var arr = [];
+      for (var key in raw) {
+        if (Object.prototype.hasOwnProperty.call(raw, key)) {
+          arr.push({ id: key, count: Number(raw[key] || 0) });
+        }
+      }
+
+      arr.sort(function (a, b) { return b.count - a.count; });
+      arr = arr.slice(0, 5);
+
+      if (!arr.length) {
+        recoWrap.innerHTML = '';
+        recoEmpty.style.display = '';
+        return;
+      }
+
+      recoEmpty.style.display = 'none';
+
+      var html = '';
+      for (var i = 0; i < arr.length; i++) {
+        var card = document.querySelector('.g-block[data-guide="' + arr[i].id + '"]');
+        if (!card) continue;
+
+        var title = getVisibleTitle(card, lang);
+        var href = card.getAttribute('data-href') || '#';
+        html += '<a class="chip" href="' + href + '" onclick="window.location.assign(this.href); return false;">' + title + '</a>';
+      }
+      recoWrap.innerHTML = html;
+    }
+
+    function bindClicks() {
+      var cards = document.querySelectorAll('.g-block[data-guide]');
+      for (var i = 0; i < cards.length; i++) {
+        (function (card) {
+          var guideId = card.getAttribute('data-guide');
+          var link = card.querySelector('a.g-link');
+          if (!guideId || !link) return;
+
+          link.addEventListener('click', function () {
+            try {
+              var raw = JSON.parse(localStorage.getItem('ks-guide-clicks') || '{}');
+              raw[guideId] = Number(raw[guideId] || 0) + 1;
+              localStorage.setItem('ks-guide-clicks', JSON.stringify(raw));
+            } catch (_) {}
+          }, { passive: true });
+        })(cards[i]);
+      }
+    }
+
+    function bindSearch() {
+      var input = document.getElementById('guide-search');
+      var count = document.getElementById('guide-count');
+      var list = document.getElementById('guide-list');
+      if (!input || !count || !list) return;
+
+      function update() {
+        var q = String(input.value || '').toLowerCase().trim();
+        var lang = getLangCode();
+        var cards = list.querySelectorAll('.g-block');
+        var shown = 0;
+
+        for (var i = 0; i < cards.length; i++) {
+          var card = cards[i];
+          var title = getVisibleTitle(card, lang).toLowerCase();
+          var visible = !q || title.indexOf(q) !== -1;
+          card.style.display = visible ? '' : 'none';
+          if (visible) shown++;
+        }
+
+        count.textContent = shown + ' / ' + cards.length;
+      }
+
+      input.addEventListener('input', update);
+      update();
+    }
+
+    function initGuideIndex() {
+      var lang = getLangCode();
+      document.documentElement.setAttribute('lang', 'zh-Hant');
+      document.documentElement.setAttribute('data-lang', 'zh-tw');
+
+      applyGuideLangLinks();
+      buildToc();
+      buildReco();
+      bindClicks();
+      bindSearch();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initGuideIndex);
+    } else {
+      initGuideIndex();
+    }
+  })();
+  </script>
+</body>
 </html>

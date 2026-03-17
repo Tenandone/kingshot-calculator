@@ -1,5 +1,5 @@
 // /public/js/app.js — SPA Router (History API) for KingshotData.kr
-// v2026-03-16 (guides 상세 html 브라우저 기본 이동 처리 포함)
+// v2026-03-17 (guides detail hard-redirect follows current site language)
 // ES5-compatible (no arrow functions / optional chaining)
 (function () {
   'use strict';
@@ -171,6 +171,15 @@
       if (htmlLang === 'ko' || htmlLang.indexOf('ko-') === 0) return 'ko';
       if (htmlLang === 'ja' || htmlLang.indexOf('ja-') === 0) return 'ja';
       if (htmlLang === 'zh-tw' || htmlLang === 'zh-hant' || htmlLang === 'tw') return 'zh-tw';
+      if (htmlLang === 'en' || htmlLang.indexOf('en-') === 0) return 'en';
+    } catch (_) {}
+
+    try {
+      var dataLang = (document.documentElement.getAttribute('data-lang') || '').toLowerCase();
+      if (dataLang === 'ko' || dataLang.indexOf('ko-') === 0) return 'ko';
+      if (dataLang === 'ja' || dataLang.indexOf('ja-') === 0) return 'ja';
+      if (dataLang === 'zh-tw' || dataLang === 'zh-hant' || dataLang === 'tw') return 'zh-tw';
+      if (dataLang === 'en' || dataLang.indexOf('en-') === 0) return 'en';
     } catch (_) {}
 
     try {
@@ -179,6 +188,7 @@
       if (cur === 'ko') return 'ko';
       if (cur === 'ja') return 'ja';
       if (cur === 'zh-tw' || cur === 'zh-hant' || cur === 'tw') return 'zh-tw';
+      if (cur === 'en') return 'en';
     } catch (_) {}
 
     try {
@@ -187,6 +197,7 @@
       if (saved === 'ko') return 'ko';
       if (saved === 'ja') return 'ja';
       if (saved === 'zh-tw' || saved === 'zh-hant' || saved === 'tw') return 'zh-tw';
+      if (saved === 'en') return 'en';
     } catch (_) {}
 
     return 'en';
@@ -261,6 +272,38 @@
     }
   }
 
+  function getGuideHrefByLang(slug) {
+    var lang = 'en';
+
+    try {
+      var pathLang = detectLangFromPath(location.pathname);
+      if (pathLang) lang = normalizeLanguage(pathLang);
+    } catch (_) {}
+
+    try {
+      var i18nLang = (window.I18N && (window.I18N.current || window.I18N.lang)) || '';
+      if (i18nLang) lang = normalizeLanguage(i18nLang);
+    } catch (_) {}
+
+    try {
+      var dataLang = document.documentElement.getAttribute('data-lang') || '';
+      if (dataLang) lang = normalizeLanguage(dataLang);
+    } catch (_) {}
+
+    try {
+      var htmlLang = document.documentElement.getAttribute('lang') || '';
+      if (htmlLang) lang = normalizeLanguage(htmlLang);
+    } catch (_) {}
+
+    try {
+      var savedLang = localStorage.getItem('lang') || '';
+      if (savedLang) lang = normalizeLanguage(savedLang);
+    } catch (_) {}
+
+    if (lang === 'zh-TW') return '/zh-tw/guides/' + slug + '.html';
+    return '/' + lang + '/guides/' + slug + '.html';
+  }
+
   function rewriteMountedInternalLinks(root, options) {
     options = options || {};
 
@@ -270,6 +313,8 @@
         var href = a.getAttribute('href') || '';
         if (!href) return;
         if (/^(https?:|mailto:|tel:|#)/i.test(href)) return;
+        if (a.__kdMountedLinkBound) return;
+        a.__kdMountedLinkBound = true;
 
         a.addEventListener('click', function(e){
           e.preventDefault();
@@ -285,7 +330,7 @@
                 return window.navigate('/db/' + targetSlug);
               }
               if (sec === 'guides') {
-                return window.navigate('/guides/' + targetSlug);
+                return window.location.assign(getGuideHrefByLang(targetSlug));
               }
               if (sec === 'heroes') {
                 return window.navigate('/hero/' + targetSlug);
@@ -297,7 +342,7 @@
           } catch (_) {}
 
           if (window.navigate) window.navigate(href);
-        }, { passive: false });
+        }, { passive: false, capture: true });
       })(links[i]);
     }
   }
@@ -936,6 +981,44 @@
     var href = a.getAttribute('href');
     if (!href) return;
 
+    // guides 상세 링크는 router-ignore 여부와 상관없이 현재 사이트 언어 기준으로 강제 이동
+    if (
+      /^\/guides\/(?!index\.html$).+\.html$/i.test(href) ||
+      /^\/(ko|en|ja|zh-tw|zh-TW)\/guides\/(?!index\.html$).+\.html$/i.test(href)
+    ) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+
+      try {
+        var slug = '';
+        var dataSlug = a.getAttribute('data-guide-slug');
+        if (dataSlug) slug = String(dataSlug).replace(/\.html$/i, '');
+
+        if (!slug) {
+          var block = a.closest && a.closest('.g-block[data-slug]');
+          if (block) slug = String(block.getAttribute('data-slug') || '').replace(/\.html$/i, '');
+        }
+
+        if (!slug) {
+          var uGuide = new URL(href, location.origin);
+          var parts = uGuide.pathname.split('/').filter(Boolean);
+          if (parts.length >= 3 && parts[1] === 'guides') {
+            slug = String(parts[2] || '').replace(/\.html$/i, '');
+          } else if (parts.length >= 2 && parts[0] === 'guides') {
+            slug = String(parts[1] || '').replace(/\.html$/i, '');
+          }
+        }
+
+        if (slug) {
+          window.location.assign(getGuideHrefByLang(slug));
+          return;
+        }
+      } catch (_) {}
+
+      return;
+    }
+
     var target = (a.getAttribute('target') || '').toLowerCase();
     var rel    = (a.getAttribute('rel') || '').toLowerCase();
     if (target && target !== '_self') return;
@@ -946,6 +1029,12 @@
 
     if (/^(mailto:|tel:|data:|blob:|javascript:)/i.test(href)) return;
     if (/^(https?:)?\/\//i.test(href)) return;
+
+    if (href.charAt(0) === '#') return;
+
+    if (href === '/guides') {
+      reinforceLang(getCurrentContentLang());
+    }
 
     var hashIdx = href.indexOf('#/');
     if (hashIdx === 0) {
@@ -960,23 +1049,13 @@
       return window.navigate(uMix.pathname + uMix.search + uMix.hash);
     }
 
-    if (href.charAt(0) === '#') return;
-
-    // 모든 언어 guides 상세 html 문서는 브라우저 기본 이동 허용
-    if (
-      /^\/guides\/(?!index\.html$).+\.html$/i.test(href) ||
-      /^\/(ko|en|ja|zh-tw|zh-TW)\/guides\/(?!index\.html$).+\.html$/i.test(href)
-    ) {
-      return;
-    }
-
     if (href.charAt(0) === '/') {
       e.preventDefault();
       var uAbs = canonicalize(href);
       return window.navigate(uAbs.pathname + uAbs.search + uAbs.hash);
     }
 
-  }, { passive: false });
+  }, { passive: false, capture: true });
 
   try { history.scrollRestoration = 'manual'; } catch (_e){}
   window.addEventListener('popstate', function(){

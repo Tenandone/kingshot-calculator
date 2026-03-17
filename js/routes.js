@@ -200,6 +200,27 @@
       return 'ko';
     }
 
+    function reinforceLang(lang){
+      var finalLang = normLangCode(lang) || getCurrentLang() || 'ko';
+
+      try {
+        if (window.I18N && typeof window.I18N.setLang === 'function') {
+          window.I18N.setLang(finalLang);
+        }
+      } catch (_) {}
+
+      try {
+        localStorage.setItem('lang', finalLang);
+      } catch (_) {}
+
+      try {
+        document.documentElement.setAttribute('lang', finalLang === 'zh-tw' ? 'zh-TW' : finalLang);
+        document.documentElement.setAttribute('data-lang', finalLang === 'zh-tw' ? 'zh-TW' : finalLang);
+      } catch (_) {}
+
+      return finalLang;
+    }
+
     function normalizeBuildingSlug(slug){
       slug = String(slug || '').trim();
       if(!slug) return slug;
@@ -449,6 +470,20 @@
           }
 
           if (isStale(token)) return;
+
+          if (!el.__homeGuidesLangBound) {
+            el.__homeGuidesLangBound = true;
+
+            el.addEventListener('click', function (e) {
+              var a = e.target.closest && e.target.closest('a[href]');
+              if (!a) return;
+
+              var href = a.getAttribute('href') || '';
+              if (href !== '/guides') return;
+
+              reinforceLang(getCurrentLang());
+            }, true);
+          }
 
           apply(el);
           setTitle('title.home', '홈 - KingshotData.kr');
@@ -784,15 +819,31 @@
           if (trail) {
             el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
             var slug = decodeURIComponent(trail);
+            var wantedLang = getCurrentLang();
+            var intentLang = wantedLang;
 
-            var html = await loadHTMLCached([
+            var cands = [
+              '/' + intentLang + '/guides/' + slug + '.html',
+              '/' + intentLang + '/guides/' + slug + '/index.html'
+            ];
+
+            if (intentLang === 'zh-tw') {
+              cands.unshift('/zh-TW/guides/' + slug + '.html');
+              cands.unshift('/zh-TW/guides/' + slug + '/index.html');
+            }
+
+            cands.push(
+              '/en/guides/' + slug + '.html',
+              '/en/guides/' + slug + '/index.html',
               'pages/guides/' + slug + '.html',
               '/pages/guides/' + slug + '.html',
               'pages/guides/' + slug + '/index.html',
               '/pages/guides/' + slug + '/index.html',
               'pages/guide/' + slug + '.html',
               '/pages/guide/' + slug + '.html'
-            ]);
+            );
+
+            var html = await loadHTMLCached(cands);
             if (isStale(token)) return;
 
             if (!html) {
@@ -802,7 +853,7 @@
                     '<a class="btn btn-icon" href="/guides" data-smart-back="/guides" aria-label="Back" title="Back">←</a>' +
                   '</div>' +
                   '<h2 data-i18n="guides.notFound">가이드를 찾을 수 없습니다.</h2>' +
-                  '<p class="muted">/pages/guides/' + slug + '.html 경로를 확인하세요.</p>' +
+                  '<p class="muted">/' + intentLang + '/guides/' + slug + '.html 경로를 확인하세요.</p>' +
                 '</div>';
               setTitle('guides.title', '가이드 - KingshotData.kr');
               apply(el);
@@ -817,6 +868,8 @@
                 htmlBodyOnly(html) +
               '</section>';
 
+            reinforceLang(intentLang);
+
             await loadGuidesDeps();
             if (isStale(token)) return;
 
@@ -830,6 +883,9 @@
           }
 
           el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+
+          reinforceLang(getCurrentLang());
+
           var listHTML = await loadHTMLCached(['pages/guides.html', '/pages/guides.html', '/pages/guide.html']);
           if (isStale(token)) return;
 

@@ -12,6 +12,9 @@
   <script src="/js/asset-loader.js?v=2026030801" defer></script>
   <script src="/js/html-loader.js?v=2026030801" defer></script>
 
+  <!-- guide engine -->
+  <script src="/js/guide-engine.js?v=2026030801" defer></script>
+
   <!-- Adsense -->
   <script async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189957764761115"
@@ -111,7 +114,13 @@
       }
 
       function setHtmlLang(lang){
+        if (lang === 'zh-TW') {
+          document.documentElement.setAttribute('lang', 'zh-Hant');
+          document.documentElement.setAttribute('data-lang', 'zh-TW');
+          return;
+        }
         document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('data-lang', lang);
       }
 
       function setUrlParamLang(lang){
@@ -139,6 +148,7 @@
         if (!opts.noUrl) setUrlParamLang(lang);
 
         try { window.KD_SEO_SYNC && window.KD_SEO_SYNC(); } catch(_){}
+        try { window.KD_GUIDE_ENGINE && window.KD_GUIDE_ENGINE.patchAll && window.KD_GUIDE_ENGINE.patchAll(document, lang); } catch(_){}
         broadcastChanged();
 
         return lang;
@@ -152,7 +162,6 @@
 
         try { savedRaw = localStorage.getItem('lang'); } catch(_){}
 
-        // 경로 언어를 최우선으로 사용
         var initial = normalizeLang(pathLang || urlLangRaw || savedRaw || 'en');
         setHtmlLang(initial);
 
@@ -160,7 +169,6 @@
           window.I18N.init({ lang: initial, supported: ['ko','en','ja','zh-TW'] });
         }
 
-        // 경로 기반 진입이면 query를 경로 언어와 동기화
         try{
           if (pathLang) {
             setUrlParamLang(initial);
@@ -176,6 +184,7 @@
         }catch(_){}
 
         try { window.KD_SEO_SYNC && window.KD_SEO_SYNC(); } catch(_){}
+        try { window.KD_GUIDE_ENGINE && window.KD_GUIDE_ENGINE.patchAll && window.KD_GUIDE_ENGINE.patchAll(document, initial); } catch(_){}
         broadcastChanged();
 
         return initial;
@@ -221,18 +230,20 @@
       }
 
       function getLangPath(){
-        var htmlLang = document.documentElement.getAttribute('lang') || 'en';
+        var htmlLang = document.documentElement.getAttribute('data-lang')
+          || document.documentElement.getAttribute('lang')
+          || 'en';
+
+        if (String(htmlLang).toLowerCase() === 'zh-hant') return 'zh-tw';
         return langToPath(htmlLang);
       }
 
       function stripLangPrefix(pathname){
-        return pathname.replace(/^\/(en|ja|zh-tw)(\/|$)/i, '/');
+        return pathname.replace(/^\/(ko|en|ja|zh-tw)(\/|$)/i, '/');
       }
 
       function buildUrlFor(langPath, basePath, search){
-        var p = (langPath === 'ko')
-          ? basePath
-          : ('/' + langPath + basePath.replace(/^\//, '/'));
+        var p = '/' + langPath + basePath.replace(/^\//, '/');
         p = p.replace(/\/{2,}/g, '/');
         return ORIGIN + p + (search || '');
       }
@@ -666,6 +677,7 @@
       function getCurrentLang(){
         return normalizeLang(
           (window.I18N && window.I18N.current) ||
+          document.documentElement.getAttribute('data-lang') ||
           document.documentElement.getAttribute('lang') ||
           'en'
         );
@@ -706,6 +718,33 @@
 
         document.addEventListener('i18n:changed', syncAll);
       });
+    })();
+  </script>
+
+  <script>
+    (function(){
+      function patchGuideLinksNow(){
+        try {
+          if (window.KD_GUIDE_ENGINE && typeof window.KD_GUIDE_ENGINE.patchAll === 'function') {
+            window.KD_GUIDE_ENGINE.patchAll(document);
+          }
+        } catch(_) {}
+      }
+
+      function bindGuideEngineEvents(){
+        document.addEventListener('i18n:changed', patchGuideLinksNow);
+        window.addEventListener('popstate', patchGuideLinksNow);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function(){
+          patchGuideLinksNow();
+          bindGuideEngineEvents();
+        });
+      } else {
+        patchGuideLinksNow();
+        bindGuideEngineEvents();
+      }
     })();
   </script>
 </body>

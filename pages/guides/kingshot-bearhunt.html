@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot Giant Bear Guide | KO · EN · JA · ZH-TW Integrated Version</title>
+  <meta name="description" content="Kingshot Giant Bear high score guide in one integrated page. Includes Korean, English, Japanese, and Traditional Chinese sections with rally leader tier, rally joiner tier, archer-focused setup, and score optimization tips." />
+  <meta name="keywords" content="Kingshot Giant Bear, Kingshot Bear Hunt, giant bear guide, rally leader tier, rally joiner tier, 궁병 편성, キングショット ジャイアントベア, Kingshot 巨熊攻略" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/guides/kingshot-bearhunt-global.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot Giant Bear Guide | KO · EN · JA · ZH-TW" />
+  <meta property="og:description" content="One integrated multilingual guide for Kingshot Giant Bear scoring, rally leader tier, rally joiner tier, archer setup, and practical timing tips." />
+  <meta property="og:url" content="https://kingshotdata.kr/guides/kingshot-bearhunt-global.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:16px;
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+
+      --best:#db2777;
+      --a:#16a34a;
+      --b:#f59e0b;
+      --c:#3b82f6;
+      --w:#ef4444;
+
+      --bluebg:#eff6ff;
+      --greenbg:#ecfdf5;
+      --yellowbg:#fffbeb;
+      --redbg:#fef2f2;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --bluebg:#0f172a;
+        --greenbg:#0f1e16;
+        --yellowbg:#20180a;
+        --redbg:#221212;
+      }
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.7 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans JP","Noto Sans TC","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{width:28px;height:28px;border-radius:8px}
+
+    .lang-badge{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .lang-badge span{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(24px,3.2vw,38px);
+      line-height:1.16;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:30px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:rgba(255,255,255,.72);
+      padding:14px;
+    }
+    .hero-card h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-card ul{margin:0;padding-left:18px}
+    .hero-card li{margin:6px 0}
+
+    .lang-switcher{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    .lang-switcher button{
+      appearance:none;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--muted);
+      padding:8px 12px;
+      border-radius:999px;
+      font:13px/1.1 inherit;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .lang-switcher button.is-active{
+      color:var(--text);
+      border-color:color-mix(in srgb,var(--brand) 35%, var(--border));
+      box-shadow:0 6px 14px rgba(37,99,235,.10);
+    }
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section.block h2{
+      margin:0 0 12px;
+      font-size:21px;
+      color:var(--accent);
+      letter-spacing:-.02em;
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      margin:12px 0;
+      background:var(--bluebg);
+    }
+    .callout.green{background:var(--greenbg)}
+    .callout.yellow{background:var(--yellowbg)}
+    .callout.red{background:var(--redbg)}
+    .callout strong{font-weight:1000}
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .hero-strip{
+      display:grid;
+      grid-template-columns:repeat(6,minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+    .hero-box{
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:linear-gradient(180deg,#fff,#f8fafc);
+      padding:10px;
+      text-align:center;
+      box-shadow:0 8px 20px rgba(0,0,0,.05);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-box::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top, rgba(37,99,235,.10), transparent 55%);
+      pointer-events:none;
+    }
+    .hero-frame{
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(37,99,235,.18);
+      box-shadow:0 10px 20px rgba(37,99,235,.12);
+      margin-bottom:8px;
+      background:#fff;
+    }
+    .hero-frame img{
+      width:100%;
+      aspect-ratio:1/1;
+      object-fit:cover;
+      transform:scale(1.02);
+    }
+    .hero-name{
+      font-size:13px;
+      font-weight:1000;
+      line-height:1.25;
+    }
+    .hero-skill{
+      margin-top:4px;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+      line-height:1.35;
+    }
+
+    .score-list{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+    .score-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:12px;
+      text-align:center;
+    }
+    .score-card .big{
+      font-size:18px;
+      font-weight:1000;
+      color:#db2777;
+      line-height:1.1;
+      margin-bottom:6px;
+    }
+    .score-card .small{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+    }
+
+    .tier{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      margin:16px 0;
+      overflow:hidden;
+    }
+    .tier>header{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+    }
+    .tier-tag{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 10px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:13px;
+      color:#fff;
+    }
+    .best{background:var(--best)}
+    .a{background:var(--a)}
+    .b{background:var(--b)}
+    .c{background:var(--c)}
+    .w{background:var(--w)}
+    .desc{
+      font-size:13px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+      gap:12px;
+      padding:14px;
+      justify-items:center;
+    }
+    .card{
+      border:1px solid var(--border);
+      background:#f8fafc;
+      border-radius:12px;
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      text-align:center;
+      width:100%;
+    }
+    .img{
+      width:92px;
+      height:92px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      object-fit:cover;
+      background:#fff;
+      margin:0 auto;
+    }
+    .name{
+      font-weight:800;
+      font-size:13px;
+      text-align:center;
+    }
+    .hint{
+      font-size:12px;
+      color:var(--muted);
+      text-align:center;
+      font-weight:700;
+    }
+
+    .checklist{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .check-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:14px;
+    }
+    .check-card h3{
+      margin:0 0 8px;
+      font-size:15px;
+    }
+
+    .multi-lang{
+      display:none;
+    }
+    .multi-lang.is-active{
+      display:block;
+    }
+
+    .foot{
+      margin-top:18px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:1100px){
+      .hero-strip{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .score-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      .hero{grid-template-columns:1fr}
+      .grid-2,.checklist{grid-template-columns:1fr}
+    }
+    @media (max-width:700px){
+      .hero-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .score-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width:600px){
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot Giant Bear Guide | KO · EN · JA · ZH-TW Integrated Version",
+    "inLanguage":"en",
+    "description":"Integrated multilingual guide for Kingshot Giant Bear scoring, rally leader tier, rally joiner tier, archer setup, and practical timing tips.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/guides/kingshot-bearhunt-global.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <main class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <div class="lang-badge" aria-label="Integrated languages">
+        <span>KO</span>
+        <span>EN</span>
+        <span>JA</span>
+        <span>ZH-TW</span>
+      </div>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">Overview</a>
+      <a href="#priority">Troops</a>
+      <a href="#leader-tier">Leader Tier</a>
+      <a href="#joiner-tier">Joiner Tier</a>
+      <a href="#summary">Summary</a>
+    </nav>
+
+    <div class="crumbs">
+      <a href="/">Home</a> <span class="muted">›</span>
+      <a href="/guides/">Guides</a> <span class="muted">›</span>
+      <span>Giant Bear</span>
+    </div>
+
+    <section class="hero">
+      <div>
+        <h1>Kingshot Giant Bear High Score Guide</h1>
+        <p class="sub">
+          Integrated multilingual version covering Korean, English, Japanese, and Traditional Chinese.
+          Includes rally leader tier, rally joiner tier, archer-focused setup, first-slot attack heroes,
+          troop preset tips, rejoin timing, and high score optimization.
+        </p>
+
+        <div class="meta">
+          <span class="tag">KO · EN · JA · ZH-TW</span>
+          <span class="tag">Rally Leader Tier</span>
+          <span class="tag">Rally Joiner Tier</span>
+          <span class="tag">Archer Setup</span>
+          <span class="tag">Timing Tips</span>
+        </div>
+
+        <div class="lang-switcher" aria-label="Language switcher">
+          <button type="button" class="is-active" data-lang-tab="ko">한국어</button>
+          <button type="button" data-lang-tab="en">English</button>
+          <button type="button" data-lang-tab="ja">日本語</button>
+          <button type="button" data-lang-tab="zh-tw">繁體中文</button>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <h2>Quick Summary</h2>
+        <ul>
+          <li>Bear does not counterattack, so an archer-focused setup is usually best.</li>
+          <li>Your strongest archer march should join the strongest rally leader for better score efficiency.</li>
+          <li>The first hero slot matters most for rally joining because only the first expedition skill applies.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- KO -->
+    <div class="multi-lang is-active" data-lang-panel="ko">
+      <section id="overview" class="block anchor">
+        <h2>1. 자이언트 베어 기본 메커니즘</h2>
+        <p>
+          자이언트 베어는 일반 전투와 다르게 곰이 반격하지 않고 맞기만 하는 구조다.
+          그래서 일반 전쟁 편성과는 다르게 <strong>곰 전용 부대 편성</strong>이 필요하다.
+        </p>
+        <p>
+          또한 곰 사냥에서 <strong>본인이 연 집결은 내 출정 슬롯 수에 포함되지 않는다.</strong>
+          예를 들어 출정 슬롯이 6개라면, 본인 집결까지 포함해 총 7개 부대를 운용할 수 있다.
+        </p>
+
+        <div class="callout">
+          <strong>핵심:</strong> 연맹 전투력 상위권이 아니라면 직접 집결을 여는 것보다
+          <strong>강한 집결에 참여하는 방식</strong>이 더 효율적이다.
+        </div>
+      </section>
+
+      <section id="priority" class="block anchor">
+        <h2>2. 자이언트 베어 병과 우선순위</h2>
+        <p>자이언트 베어 딜 우선순위는 보통 다음과 같다.</p>
+
+        <div class="score-list">
+          <div class="score-card"><div class="big">1위</div><div class="small">궁병</div></div>
+          <div class="score-card"><div class="big">2위</div><div class="small">기병</div></div>
+          <div class="score-card"><div class="big">3위</div><div class="small">보병</div></div>
+          <div class="score-card"><div class="big">핵심</div><div class="small">궁병 비중 최대화</div></div>
+          <div class="score-card"><div class="big">원칙</div><div class="small">궁병 → 기병 → 보병</div></div>
+        </div>
+
+        <div class="callout green">
+          <strong>정리:</strong> 곰 점수를 높이려면 궁병 비중이 가장 중요하다.
+          병력이 많아질수록 보병 효율은 상대적으로 낮아지고, 궁병 중심 편성이 점수에 더 유리하다.
+        </div>
+      </section>
+
+      <section id="leader-tier" class="block anchor">
+        <h2>3. 집결장 티어표</h2>
+        <p>
+          직접 집결을 열 경우에는 병과별로 가장 강한 영웅을 배치하는 것이 기본이며,
+          실제로는 <strong>강한 집결장일수록 집결원 전체 점수가 더 잘 나온다.</strong>
+        </p>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag best">Best</span>
+            <div class="desc">현재 기준 최상위 집결장 조합</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" class="img"><div class="name">Amadeus</div></div>
+            <div class="card"><img src="/img/heroes/Yang/img_001.webp" alt="Yang" class="img"><div class="name">Yang</div></div>
+            <div class="card"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" class="img"><div class="name">Petra</div></div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>왜 중요한가?</strong><br>
+          집결장의 영웅 3명뿐 아니라 영주 장비, 영주 버프, 과학기술, 전투 관련 능력치까지 집결원에게 반영된다.
+          즉, <strong>강한 유저가 연 집결일수록 전체 기대 점수가 높다.</strong>
+        </div>
+      </section>
+
+      <section id="joiner-tier" class="block anchor">
+        <h2>4. 집결원 티어표</h2>
+        <p>
+          다른 사람 집결에 참여할 때는 <strong>첫 번째 슬롯</strong>이 가장 중요하다.
+          참여자의 첫 번째 칸 영웅 야외 스킬 중 <strong>첫 번째 스킬만 집결 전체에 적용</strong>되기 때문이다.
+        </p>
+
+        <h3>4-1. 핵심 공격형 집결원 영웅</h3>
+        <div class="hero-strip">
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus"></div><div class="hero-name">아마데우스</div><div class="hero-skill">파괴력 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Chenko/img_001.webp" alt="Chenko"></div><div class="hero-name">첸코</div><div class="hero-skill">파괴력 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Yeonwoo/img_001.webp" alt="Yeonwoo"></div><div class="hero-name">연우</div><div class="hero-skill">파괴력 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Amane/img_001.webp" alt="Amane"></div><div class="hero-name">아마네</div><div class="hero-skill">공격력 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Margot/img_001.webp" alt="Margot"></div><div class="hero-name">마르고</div><div class="hero-skill">공격력 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Vivian/img_001.webp" alt="Vivian"></div><div class="hero-name">비비안</div><div class="hero-skill">피해 25%</div></article>
+        </div>
+
+        <div class="callout yellow">
+          <strong>중요:</strong> 집결원으로 왜 <strong>파괴력 25% / 공격력 25% / 피해 25%</strong>를 사용해야 하는지 알게되면
+          <strong>곰사냥은 마스터 하신겁니다.</strong>
+        </div>
+      </section>
+
+      <section id="summary" class="block anchor">
+        <h2>5. 자이언트 베어 고득점 핵심 요약</h2>
+        <div class="score-list">
+          <div class="score-card"><div class="big">1</div><div class="small">궁병 병력 수를 최대한 확보</div></div>
+          <div class="score-card"><div class="big">2</div><div class="small">공격형 영웅을 첫 번째 슬롯에 배치</div></div>
+          <div class="score-card"><div class="big">3</div><div class="small">곰 시작 전 부대 편성 미리 저장</div></div>
+          <div class="score-card"><div class="big">4</div><div class="small">강한 집결장 집결에 우선 참여</div></div>
+          <div class="score-card"><div class="big">5</div><div class="small">놓친 집결은 다음 타이밍 노리기</div></div>
+        </div>
+
+        <div class="callout green">
+          <strong>결론:</strong> 궁병 중심 편성, 공격형 영웅 첫 슬롯, 강한 집결 우선 참여만 잘 지켜도 점수 차이가 확실히 난다.
+        </div>
+      </section>
+    </div>
+
+    <!-- EN -->
+    <div class="multi-lang" data-lang-panel="en">
+      <section class="block anchor">
+        <h2>1. Giant Bear Core Mechanics</h2>
+        <p>
+          Giant Bear works differently from normal combat because the bear does not counterattack.
+          It only takes damage, which means you need a <strong>bear-specific troop setup</strong> instead of a normal war setup.
+        </p>
+        <p>
+          Also, the rally you personally start does <strong>not</strong> consume one of your normal march participation slots.
+          If you have 6 march slots, you can effectively operate 7 bear-related marches including your own rally.
+        </p>
+
+        <div class="callout">
+          <strong>Key point:</strong> Unless you are one of the strongest players in the alliance,
+          joining a stronger rally is often more efficient than opening your own.
+        </div>
+      </section>
+
+      <section class="block anchor">
+        <h2>2. Troop Priority for Giant Bear</h2>
+        <p>The usual damage priority for Giant Bear is:</p>
+
+        <div class="score-list">
+          <div class="score-card"><div class="big">#1</div><div class="small">Archers</div></div>
+          <div class="score-card"><div class="big">#2</div><div class="small">Cavalry</div></div>
+          <div class="score-card"><div class="big">#3</div><div class="small">Infantry</div></div>
+          <div class="score-card"><div class="big">Core</div><div class="small">Maximize archer share</div></div>
+          <div class="score-card"><div class="big">Rule</div><div class="small">Archers → Cavalry → Infantry</div></div>
+        </div>
+
+        <div class="callout green">
+          <strong>Summary:</strong> If you want a better score, archers matter most.
+          As troop count grows, infantry efficiency tends to fall behind, while an archer-focused setup remains strong.
+        </div>
+      </section>
+
+      <section class="block anchor">
+        <h2>3. Rally Leader Tier</h2>
+        <p>
+          If you open a rally yourself, using the strongest possible hero setup is the default.
+          In practice, the stronger the rally leader, the better the overall score for rally joiners.
+        </p>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag best">Best</span>
+            <div class="desc">Top rally leader setup at the current stage</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" class="img"><div class="name">Amadeus</div></div>
+            <div class="card"><img src="/img/heroes/Yang/img_001.webp" alt="Yang" class="img"><div class="name">Yang</div></div>
+            <div class="card"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" class="img"><div class="name">Petra</div></div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Why it matters:</strong><br>
+          Not only the rally leader’s three heroes, but also lord gear, lord buffs, research, and battle stats influence the rally outcome.
+          That is why stronger rally leaders usually give better expected scores to everyone joining.
+        </div>
+      </section>
+
+      <section class="block anchor">
+        <h2>4. Rally Joiner Tier</h2>
+        <p>
+          For joining someone else’s rally, the <strong>first hero slot</strong> is the most important.
+          Only the first expedition skill of your first hero slot applies to the rally.
+        </p>
+
+        <h3>4-1. Key offensive joiner heroes</h3>
+        <div class="hero-strip">
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus"></div><div class="hero-name">Amadeus</div><div class="hero-skill">25% Lethality</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Chenko/img_001.webp" alt="Chenko"></div><div class="hero-name">Chenko</div><div class="hero-skill">25% Lethality</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Yeonwoo/img_001.webp" alt="Yeonwoo"></div><div class="hero-name">Yeonwoo</div><div class="hero-skill">25% Lethality</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Amane/img_001.webp" alt="Amane"></div><div class="hero-name">Amane</div><div class="hero-skill">25% Attack</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Margot/img_001.webp" alt="Margot"></div><div class="hero-name">Margot</div><div class="hero-skill">25% Attack</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Vivian/img_001.webp" alt="Vivian"></div><div class="hero-name">Vivian</div><div class="hero-skill">25% Damage</div></article>
+        </div>
+
+        <div class="callout yellow">
+          <strong>Important:</strong> Once you understand why rally joiners should prioritize
+          <strong>25% Lethality / 25% Attack / 25% Damage</strong>, you are already close to mastering Bear Hunt.
+        </div>
+      </section>
+
+      <section class="block anchor">
+        <h2>5. High Score Summary</h2>
+        <div class="score-list">
+          <div class="score-card"><div class="big">1</div><div class="small">Maximize archer troop count</div></div>
+          <div class="score-card"><div class="big">2</div><div class="small">Place attack heroes in slot one</div></div>
+          <div class="score-card"><div class="big">3</div><div class="small">Save troop presets before the event</div></div>
+          <div class="score-card"><div class="big">4</div><div class="small">Join the strongest rally leaders first</div></div>
+          <div class="score-card"><div class="big">5</div><div class="small">If missed, aim for the next cycle</div></div>
+        </div>
+
+        <div class="callout green">
+          <strong>Conclusion:</strong> Archer-heavy setup, offensive first-slot heroes, and strong rally priority are the three biggest score boosters.
+        </div>
+      </section>
+    </div>
+
+    <!-- JA -->
+    <div class="multi-lang" data-lang-panel="ja">
+      <section class="block anchor">
+        <h2>1. ジャイアントベアの基本メカニズム</h2>
+        <p>
+          ジャイアントベアは通常戦闘と違い、ベアが反撃しません。
+          そのため通常の戦争編成ではなく、<strong>ベア専用の部隊編成</strong>が必要です。
+        </p>
+        <p>
+          また、自分が開いた集結は通常の出征枠に含まれません。
+          たとえば出征枠が6なら、自分の集結を含めて実質7部隊を運用できます。
+        </p>
+
+        <div class="callout">
+          <strong>ポイント:</strong> 連盟上位の強者でないなら、自分で集結を開くより
+          <strong>強い集結に参加する方が効率的</strong>な場合が多いです。
+        </div>
+      </section>
+
+      <section class="block anchor">
+        <h2>2. ジャイアントベアの兵種優先順位</h2>
+        <p>一般的なダメージ優先順位は次の通りです。</p>
+
+        <div class="score-list">
+          <div class="score-card"><div class="big">1位</div><div class="small">弓兵</div></div>
+          <div class="score-card"><div class="big">2位</div><div class="small">騎兵</div></div>
+          <div class="score-card"><div class="big">3位</div><div class="small">歩兵</div></div>
+          <div class="score-card"><div class="big">核心</div><div class="small">弓兵比率を最大化</div></div>
+          <div class="score-card"><div class="big">原則</div><div class="small">弓兵 → 騎兵 → 歩兵</div></div>
+        </div>
+
+        <div class="callout green">
+          <strong>要点:</strong> 高得点を狙うなら弓兵が最重要です。
+          部隊数が増えるほど歩兵効率は相対的に落ちやすく、弓兵中心編成が有利です。
+        </div>
+      </section>
+
+      <section class="block anchor">
+        <h2>3. 集結主ティア</h2>
+        <p>
+          自分で集結を開く場合は、兵種に合った最強の英雄構成が基本です。
+          実戦では<strong>強い集結主ほど参加者全体のスコアも伸びやすい</strong>です。
+        </p>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag best">Best</span>
+            <div class="desc">現時点の最上位集結主編成</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" class="img"><div class="name">Amadeus</div></div>
+            <div class="card"><img src="/img/heroes/Yang/img_001.webp" alt="Yang" class="img"><div class="name">Yang</div></div>
+            <div class="card"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" class="img"><div class="name">Petra</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block anchor">
+        <h2>4. 集結参加ティア</h2>
+        <p>
+          他人の集結に参加する時は、<strong>1枠目</strong>が最も重要です。
+          1枠目英雄の野外スキル1つ目だけが集結全体に適用されます。
+        </p>
+
+        <h3>4-1. 重要な攻撃型参加英雄</h3>
+        <div class="hero-strip">
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus"></div><div class="hero-name">アマデウス</div><div class="hero-skill">破壊力 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Chenko/img_001.webp" alt="Chenko"></div><div class="hero-name">チェンコ</div><div class="hero-skill">破壊力 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Yeonwoo/img_001.webp" alt="Yeonwoo"></div><div class="hero-name">ヨヌ</div><div class="hero-skill">破壊力 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Amane/img_001.webp" alt="Amane"></div><div class="hero-name">アマネ</div><div class="hero-skill">攻撃力 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Margot/img_001.webp" alt="Margot"></div><div class="hero-name">マルゴ</div><div class="hero-skill">攻撃力 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Vivian/img_001.webp" alt="Vivian"></div><div class="hero-name">ヴィヴィアン</div><div class="hero-skill">ダメージ 25%</div></article>
+        </div>
+
+        <div class="callout yellow">
+          <strong>重要:</strong> なぜ参加英雄で
+          <strong>破壊力25% / 攻撃力25% / ダメージ25%</strong>
+          を優先するのか理解できれば、ベアハントの核心に近づけます。
+        </div>
+      </section>
+
+      <section class="block anchor">
+        <h2>5. 高得点の要点まとめ</h2>
+        <div class="score-list">
+          <div class="score-card"><div class="big">1</div><div class="small">弓兵数を最大化</div></div>
+          <div class="score-card"><div class="big">2</div><div class="small">1枠目に攻撃型英雄</div></div>
+          <div class="score-card"><div class="big">3</div><div class="small">事前に部隊保存</div></div>
+          <div class="score-card"><div class="big">4</div><div class="small">強い集結主を優先</div></div>
+          <div class="score-card"><div class="big">5</div><div class="small">逃したら次の回を狙う</div></div>
+        </div>
+
+        <div class="callout green">
+          <strong>結論:</strong> 弓兵中心編成、攻撃型1枠目、強い集結優先の3つが最も大きい差を生みます。
+        </div>
+      </section>
+    </div>
+
+    <!-- ZH-TW -->
+    <div class="multi-lang" data-lang-panel="zh-tw">
+      <section class="block anchor">
+        <h2>1. 巨熊的基本機制</h2>
+        <p>
+          巨熊和一般戰鬥不同，熊不會反擊，只會承受傷害。
+          所以你需要的是<strong>巨熊專用部隊配置</strong>，而不是一般戰爭配置。
+        </p>
+        <p>
+          此外，自己發起的集結不會占用一般出征參與上限。
+          例如你有 6 隊出征欄位，實際上包含自己集結可運作到 7 隊。
+        </p>
+
+        <div class="callout">
+          <strong>重點:</strong> 如果你不是聯盟最強戰力之一，
+          通常參加強力玩家的集結會比自己開集結更有效率。
+        </div>
+      </section>
+
+      <section class="block anchor">
+        <h2>2. 巨熊兵種優先順位</h2>
+        <p>一般的輸出優先順序如下：</p>
+
+        <div class="score-list">
+          <div class="score-card"><div class="big">第1</div><div class="small">弓兵</div></div>
+          <div class="score-card"><div class="big">第2</div><div class="small">騎兵</div></div>
+          <div class="score-card"><div class="big">第3</div><div class="small">步兵</div></div>
+          <div class="score-card"><div class="big">核心</div><div class="small">弓兵占比最大化</div></div>
+          <div class="score-card"><div class="big">原則</div><div class="small">弓兵 → 騎兵 → 步兵</div></div>
+        </div>
+
+        <div class="callout green">
+          <strong>整理:</strong> 如果想提高分數，弓兵最重要。
+          隊伍越大，步兵效率通常越低，而弓兵核心配置更穩定。
+        </div>
+      </section>
+
+      <section class="block anchor">
+        <h2>3. 集結主 Tier</h2>
+        <p>
+          若你自己開集結，基礎原則就是使用最強的英雄組合。
+          實戰上，<strong>越強的集結主通常能讓整體參與者拿到更高分數。</strong>
+        </p>
+
+        <div class="tier">
+          <header>
+            <span class="tier-tag best">Best</span>
+            <div class="desc">目前版本的頂級集結主配置</div>
+          </header>
+          <div class="grid">
+            <div class="card"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus" class="img"><div class="name">Amadeus</div></div>
+            <div class="card"><img src="/img/heroes/Yang/img_001.webp" alt="Yang" class="img"><div class="name">Yang</div></div>
+            <div class="card"><img src="/img/heroes/Petra/img_001.webp" alt="Petra" class="img"><div class="name">Petra</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block anchor">
+        <h2>4. 集結參與 Tier</h2>
+        <p>
+          加入別人的集結時，<strong>第一格英雄</strong>最重要。
+          因為只有第一格英雄的第一個野外技能會套用到整個集結。
+        </p>
+
+        <h3>4-1. 核心攻擊型參與英雄</h3>
+        <div class="hero-strip">
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Amadeus/img_001.webp" alt="Amadeus"></div><div class="hero-name">Amadeus</div><div class="hero-skill">破壞力 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Chenko/img_001.webp" alt="Chenko"></div><div class="hero-name">Chenko</div><div class="hero-skill">破壞力 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Yeonwoo/img_001.webp" alt="Yeonwoo"></div><div class="hero-name">Yeonwoo</div><div class="hero-skill">破壞力 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Amane/img_001.webp" alt="Amane"></div><div class="hero-name">Amane</div><div class="hero-skill">攻擊力 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Margot/img_001.webp" alt="Margot"></div><div class="hero-name">Margot</div><div class="hero-skill">攻擊力 25%</div></article>
+          <article class="hero-box"><div class="hero-frame"><img src="/img/heroes/Vivian/img_001.webp" alt="Vivian"></div><div class="hero-name">Vivian</div><div class="hero-skill">傷害 25%</div></article>
+        </div>
+
+        <div class="callout yellow">
+          <strong>重點:</strong> 當你理解為什麼集結參與英雄要優先考慮
+          <strong>破壞力25% / 攻擊力25% / 傷害25%</strong>，
+          你就已經掌握巨熊玩法的核心了。
+        </div>
+      </section>
+
+      <section class="block anchor">
+        <h2>5. 高分重點總結</h2>
+        <div class="score-list">
+          <div class="score-card"><div class="big">1</div><div class="small">盡量提高弓兵數量</div></div>
+          <div class="score-card"><div class="big">2</div><div class="small">第一格放攻擊型英雄</div></div>
+          <div class="score-card"><div class="big">3</div><div class="small">活動前先存部隊預設</div></div>
+          <div class="score-card"><div class="big">4</div><div class="small">優先加入強集結主</div></div>
+          <div class="score-card"><div class="big">5</div><div class="small">錯過就等下一輪</div></div>
+        </div>
+
+        <div class="callout green">
+          <strong>結論:</strong> 弓兵核心配置、第一格攻擊英雄、強集結優先，是提高分數最有效的三件事。
+        </div>
+      </section>
+    </div>
+
+    <p class="foot">
+      This integrated version is a multilingual launch format for fast public release. Future language-specific pages can be separated later if needed.
+    </p>
+  </main>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function switchLang(lang){
+        var buttons = document.querySelectorAll('[data-lang-tab]');
+        var panels = document.querySelectorAll('[data-lang-panel]');
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].classList.toggle('is-active', buttons[i].getAttribute('data-lang-tab') === lang);
+        }
+        for (var j = 0; j < panels.length; j++) {
+          panels[j].classList.toggle('is-active', panels[j].getAttribute('data-lang-panel') === lang);
+        }
+      }
+
+      var btns = document.querySelectorAll('[data-lang-tab]');
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', function(){
+          switchLang(this.getAttribute('data-lang-tab'));
+        });
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>
