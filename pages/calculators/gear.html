@@ -4,12 +4,11 @@
 <head>
   <meta charset="utf-8" />
   <script>
-if (location.pathname.startsWith('/pages/')) {
-  location.replace('/?p=' + location.pathname + location.search);
-}
-</script>
+    if (location.pathname.startsWith('/pages/')) {
+      location.replace('/?p=' + location.pathname + location.search);
+    }
+  </script>
 
-  
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-i18n="calcGear.meta.title">Kingshot 영주 장비 계산기</title>
 
@@ -19,11 +18,9 @@ if (location.pathname.startsWith('/pages/')) {
     .calc-wrap{max-width:1080px;margin:0 auto;padding:20px 14px 60px}
     .calc-card{border:1px solid var(--bd);border-radius:12px;background:#fff;padding:16px;margin:12px 0}
     .calc-title{margin:0 0 8px;font-size:20px}
-    .calc-desc{margin:6px 0;color:#444}
-    .notice-box{background:#f8fafc;border:1px solid var(--bd);border-radius:10px;padding:12px}
-    .notice-list{margin:6px 0 0 18px}
-    .muted{color:#6b7280}
+    .calc-desc{margin:6px 0;color:#444;line-height:1.6}
   </style>
+
   <!-- GA4 -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
@@ -33,42 +30,16 @@ if (location.pathname.startsWith('/pages/')) {
     gtag('js', new Date());
     gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
   </script>
-
 </head>
 <body>
   <main id="calc-ui" class="calc-wrap" aria-labelledby="gear-title">
     <section class="calc-card">
-      <h2 id="gear-title" class="calc-title" data-i18n="calcGear.title">영주 장비 계산기</h2>
-      <p class="calc-desc" data-i18n="calcGear.desc">아래 간편한 킹샷 영주 장비 계산기를 사용해보세요.</p>
-
-      <h3 class="calc-desc" data-i18n="calcGear.howto.title">사용 방법</h3>
-      <ol class="calc-desc" style="margin-left:18px">
-        <li data-i18n="calcGear.howto.step1">현재 보유한 영주 장비 <strong>단계</strong>를 선택하세요.</li>
-        <li data-i18n="calcGear.howto.step2">업그레이드하려는 <strong>목표 단계</strong>를 선택하세요.</li>
-        <li data-i18n="calcGear.howto.step3">
-          상단 탭에서 업그레이드할 <strong>장비 슬롯</strong>을 고르세요.<br>
-          <span class="help" data-i18n="calcGear.howto.slotsHelp">
-            슬롯: 모자·목걸이(기병), 상의·하의(보병), 반지·지팡이(궁병)
-          </span>
-        </li>
-        <li data-i18n="calcGear.howto.step4"><strong>계산하기</strong> 버튼을 누르세요.</li>
-      </ol>
+      <h2 id="gear-title" class="calc-title" data-i18n="calcGear.title">킹샷 영주 장비 계산기</h2>
+      <p class="calc-desc" data-i18n="calcGear.desc">영주 장비 일반부터 신화 T6 3성까지 계산해보고, 계산된 수치를 공유해보세요.</p>
     </section>
 
     <section class="calc-card" style="margin-top:14px">
       <div id="gear-calc" aria-live="polite"></div>
-    </section>
-
-    <section class="calc-card" style="margin-top:14px">
-      <h3 class="calc-title" style="font-size:18px" data-i18n="calcGear.notice.title">주의사항</h3>
-      <div class="notice-box">
-        <p data-i18n="calcGear.notice.p1">본 자료는 인게임 표기값을 기반으로 정리한 팬메이드 데이터입니다.</p>
-        <ul class="notice-list">
-          <li data-i18n="calcGear.notice.li1">패치/밸런스 조정에 따라 수치가 달라질 수 있습니다.</li>
-          <li data-i18n="calcGear.notice.li2">오타·오류 제보는 문의하기로 부탁드립니다.</li>
-        </ul>
-        <p class="muted"><a href="/about" data-i18n="calcGear.notice.contact">문의하기</a></p>
-      </div>
     </section>
   </main>
 
@@ -76,36 +47,40 @@ if (location.pathname.startsWith('/pages/')) {
   (function () {
     var DEV = /localhost|127\.0\.0\.1/.test(location.hostname);
 
-    // ---- 최신 스탬프 확보: window.v > window.__V > /v.txt > Date.now ----
+    // 최신 스탬프 확보
     var STAMP = (window.__V || window.__v || window.__VERSION || '');
+
     function ensureStamp() {
-      if (DEV) return Promise.resolve();                           // dev는 항상 no-cache
-      if (typeof window.v === 'function') return Promise.resolve(); // 전역 v()가 있으면 그걸 사용
-      if (STAMP) return Promise.resolve();                         // 이미 있으면 끝
+      if (DEV) return Promise.resolve();
+      if (typeof window.v === 'function') return Promise.resolve();
+      if (STAMP) return Promise.resolve();
 
       return fetch('/v.txt?_=' + Date.now(), { cache: 'no-store' }).then(function(r){
-        if (r.ok) return r.text().then(function(t){
-          STAMP = (window.__V = (t || '').trim());
-        });
+        if (r.ok) {
+          return r.text().then(function(t){
+            STAMP = (window.__V = (t || '').trim());
+          });
+        }
       })["catch"](function(){})
       .then(function(){
-        if (!STAMP) STAMP = String(Date.now());    // 최후: 지금 시각으로 강제 신선화
+        if (!STAMP) STAMP = String(Date.now());
       });
     }
 
-    // ---- ver 헬퍼: 전역 v() 우선, 없으면 스탬프/타임스탬프 사용 ----
+    // 버전 헬퍼
     function ver(p) {
       if (typeof window.v === 'function') return window.v(p);
       if (DEV) return p + '?_=' + Date.now();
       return p + '?v=' + encodeURIComponent(STAMP);
     }
 
-    // ---- 중복 로드 방지 ----
+    // 중복 로드 방지
     var loaded = {};
     function loadScriptOnce(src) {
       return new Promise(function (resolve, reject) {
         var base = (src || '').split('?')[0];
         if (loaded[base]) return resolve();
+
         var s = document.createElement('script');
         s.src = src;
         s.async = true;
@@ -115,55 +90,60 @@ if (location.pathname.startsWith('/pages/')) {
       });
     }
 
-    // ---- 드롭다운 옵션에 data-i18n 부여 + 번역 적용 ----
+    // 드롭다운 옵션에 data-i18n 부여 + 번역 적용
     function tagTierOptionsAsI18N(root) {
       try {
         if (!root) return;
         var opts = root.querySelectorAll('select option');
-        for (var i=0;i<opts.length;i++){
+        for (var i = 0; i < opts.length; i++) {
           var opt = opts[i];
           if (opt.hasAttribute('data-i18n')) continue;
+
           var txt = (opt.textContent || '').trim();
-          // governor-gear.json은 i18n 키(calcGear.tiers.*)로 이미 구성됨
           if (/^(calcGear\.tiers|calc\.tiers)\./.test(txt)) {
             opt.setAttribute('data-i18n', txt);
-            // textContent는 그대로 두어도 되지만, 즉시 치환을 위해 아래에서 I18N.applyTo 호출
           }
         }
-      } catch(_e){}
+      } catch (_e) {}
     }
+
     function applyI18NToGear(root) {
       try {
         tagTierOptionsAsI18N(root);
         if (window.I18N && typeof window.I18N.applyTo === 'function') {
           window.I18N.applyTo(root);
         }
-      } catch(_e){}
+      } catch (_e) {}
     }
+
     function setupI18NChangeReapply(root) {
       document.addEventListener('i18n:changed', function(){
         applyI18NToGear(root);
       }, false);
     }
+
     function setupObserverForDynamicOptions(root) {
       if (!root || !window.MutationObserver) return null;
+
       var obs = new MutationObserver(function(){
         applyI18NToGear(root);
       });
+
       try {
         obs.observe(root, { subtree: true, childList: true });
-      } catch(_e){}
+      } catch (_e) {}
+
       return obs;
     }
 
     function boot() {
       ensureStamp().then(function(){
-        // i18n (calc, calcGear 둘 다 시도하면 파일 구성 바뀌어도 안전)
         try {
           if (window.I18N && typeof I18N.init === 'function') {
-            var raw = (localStorage.getItem('lang') || document.documentElement.getAttribute('lang') || navigator.language || 'ko').replace('_','-');
+            var raw = (localStorage.getItem('lang') || document.documentElement.getAttribute('lang') || navigator.language || 'ko').replace('_', '-');
             var isZh = /^zh/i.test(raw);
             var lang = isZh ? (/-((tw|hk|mo))/i.test(raw) ? 'zh-TW' : 'zh-CN') : ((raw.split('-')[0] || 'ko'));
+
             I18N.init({ lang: lang }).then(function(){
               if (typeof I18N.loadNamespace === 'function') {
                 var p = Promise.resolve();
@@ -175,15 +155,20 @@ if (location.pathname.startsWith('/pages/')) {
               if (typeof I18N.applyTo === 'function') I18N.applyTo(document);
               document.title = (I18N.t ? I18N.t('calcGear.meta.title', document.title) : document.title);
               try { document.dispatchEvent(new Event('i18n:changed')); } catch(_e){}
-            })["catch"](function(e){ console.warn('[gear.html] i18n init skipped:', e); });
+            })["catch"](function(e){
+              console.warn('[gear.html] i18n init skipped:', e);
+            });
           }
         } catch (e) {
           console.warn('[gear.html] i18n init skipped:', e);
         }
 
-        return loadScriptOnce( ver('/js/gear-calculator.js') );
+        return loadScriptOnce(ver('/js/gear-calculator.js'));
       }).then(function(){
-        var t = function(k, fb){ return (window.I18N && I18N.t ? I18N.t(k, fb || k) : (fb || k)); };
+        var t = function(k, fb){
+          return (window.I18N && I18N.t ? I18N.t(k, fb || k) : (fb || k));
+        };
+
         var slots = [
           t('calcGear.slots.hat', '모자'),
           t('calcGear.slots.necklace', '목걸이'),
@@ -196,7 +181,6 @@ if (location.pathname.startsWith('/pages/')) {
         var jsonUrl = ver('/data/governor-gear.json');
         var root = document.getElementById('gear-calc');
 
-        // 옵션/라벨 동적 변경 감지 → i18n 재적용
         setupObserverForDynamicOptions(root);
         setupI18NChangeReapply(root);
 
@@ -207,21 +191,19 @@ if (location.pathname.startsWith('/pages/')) {
             slots: slots,
             fetchOptions: DEV ? { cache: 'no-store' } : undefined,
             onDataLoaded: function(){
-              // 데이터 로드 후 최초 옵션 생성 시점에 i18n 키를 data-i18n으로 매핑
-              // (gear-calculator가 옵션을 렌더한 직후를 보장하려고 frame 딜레이 사용)
               try {
                 setTimeout(function(){ applyI18NToGear(root); }, 0);
                 setTimeout(function(){ applyI18NToGear(root); }, 60);
                 setTimeout(function(){ applyI18NToGear(root); }, 200);
-              } catch(_e){}
+              } catch (_e) {}
             }
           });
-          // init 직후에도 한 번 적용 시도 (초기 틱 대응)
+
           applyI18NToGear(root);
         } else {
           var container = document.querySelector('#gear-calc');
           if (container && container.insertAdjacentHTML) {
-            container.insertAdjacentHTML('beforebegin', '<div class="muted">initGearCalculator()가 없습니다.</div>');
+            container.insertAdjacentHTML('beforebegin', '<div style="color:#6b7280;">initGearCalculator()가 없습니다.</div>');
           }
         }
       });

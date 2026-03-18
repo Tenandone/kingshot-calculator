@@ -1,1 +1,55 @@
-{}
+{
+  "calcCharm": {
+    "meta": {
+      "title": "영주 보석 계산기 | 킹샷데이터코리아"
+    },
+    "title": "영주 보석 계산기",
+    "desc": "현재 보석 레벨과 목표 레벨, 병종별 보석 개수를 입력하면 필요한 보석 매뉴얼, 보석 도면, 목표 레벨 속성과 병종별 속성을 계산합니다.",
+    "charms": {
+      "cavalry": "수호 보석",
+      "infantry": "예리한 보석",
+      "archer": "호크아이 보석"
+    },
+    "classes": {
+      "cavalry": "기병",
+      "infantry": "보병",
+      "archer": "궁병"
+    },
+    "form": {
+      "counts": {
+        "title": "보석 개수"
+      },
+      "currentLevel": {
+        "label": "현재 레벨"
+      },
+      "targetLevel": {
+        "label": "목표 레벨"
+      },
+      "actions": {
+        "fill18": "기본 6·6·6",
+        "clear": "초기화"
+      }
+    },
+    "result": {
+      "manual": "보석 매뉴얼",
+      "design": "보석 도면",
+      "attribute": "목표 레벨 속성",
+      "infantryAttr": "보병 속성",
+      "cavalryAttr": "기병 속성",
+      "archerAttr": "궁병 속성"
+    },
+    "table": {
+      "level": "레벨",
+      "manual": "보석 매뉴얼",
+      "design": "보석 도면",
+      "infantryAttr": "보병 속성",
+      "cavalryAttr": "기병 속성",
+      "archerAttr": "궁병 속성",
+      "total": "합계"
+    },
+    "note": "전체 보석은 병종별 6개씩, 총 18개 기준으로 계산할 수 있습니다.",
+    "error": {
+      "load": "데이터를 불러오지 못했습니다."
+    }
+  }
+}

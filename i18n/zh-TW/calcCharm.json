@@ -1,1 +1,55 @@
-{}
+{
+  "calcCharm": {
+    "meta": {
+      "title": "領主寶石計算機 | KingshotData"
+    },
+    "title": "領主寶石計算機",
+    "desc": "輸入目前寶石等級、目標等級與兵種별寶石數量後，即可計算所需的寶石手冊、寶石設計圖、目標等級屬性與兵種別屬性。",
+    "charms": {
+      "cavalry": "守護寶石",
+      "infantry": "銳利寶石",
+      "archer": "鷹眼寶石"
+    },
+    "classes": {
+      "cavalry": "騎兵",
+      "infantry": "步兵",
+      "archer": "弓兵"
+    },
+    "form": {
+      "counts": {
+        "title": "寶石數量"
+      },
+      "currentLevel": {
+        "label": "目前等級"
+      },
+      "targetLevel": {
+        "label": "目標等級"
+      },
+      "actions": {
+        "fill18": "基本 6・6・6",
+        "clear": "重設"
+      }
+    },
+    "result": {
+      "manual": "寶石手冊",
+      "design": "寶石設計圖",
+      "attribute": "目標等級屬性",
+      "infantryAttr": "步兵屬性",
+      "cavalryAttr": "騎兵屬性",
+      "archerAttr": "弓兵屬性"
+    },
+    "table": {
+      "level": "等級",
+      "manual": "寶石手冊",
+      "design": "寶石設計圖",
+      "infantryAttr": "步兵屬性",
+      "cavalryAttr": "騎兵屬性",
+      "archerAttr": "弓兵屬性",
+      "total": "合計"
+    },
+    "note": "寶石可依兵種各 6 個，總計 18 個為基準進行計算。",
+    "error": {
+      "load": "無法載入資料。"
+    }
+  }
+}

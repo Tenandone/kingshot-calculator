@@ -8,7 +8,7 @@
   // ===== State =====
   var dict = {};
   var current = 'en';
-  var supported = ['ko', 'en', 'ja', 'zh-CN', 'zh-TW'];
+  var supported = ['ko', 'en', 'ja', 'zh-TW'];
 
   // 현재까지 실제 사용된 ns만 기록
   var loadedNamespaces = ['common'];
@@ -399,7 +399,7 @@
     get current() { return current; }
   };
 
-  // --- v1.8 compat layer ---
+  // --- compat layer ---
   (function (global) {
     function compatApply(root) {
       try { global.I18N.applyTo(root || document); } catch (_) {}

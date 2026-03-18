@@ -1,28 +1,20 @@
 {
   "calcGear": {
-    "meta": { "title": "Governor Gear Calculator | KingshotData KR" },
-    "title": "Governor Gear Calculator",
-    "desc": "Try out this easy Kingshot Governor Gear Calculator.",
-    "howto": {
-      "title": "How to Use",
-      "step1": "Select the current governor gear level you own.",
-      "step2": "Select the target level you want to upgrade to.",
-      "step3": "Choose the gear slot you want to upgrade from the top tabs.",
-      "slotsHelp": "Slots: Hat·Necklace (Cavalry), Armor·Pants (Infantry), Ring·Staff (Archer)",
-      "step4": "Click the Calculate button."
+    "meta": {
+      "title": "Governor Gear Calculator | KingshotData"
     },
-    "notice": {
-      "title": "Notice",
-      "p1": "This data is a fan-made resource compiled based on in-game values.",
-      "li1": "Values may change depending on patches or balance adjustments.",
-      "li2": "Please report typos or errors through Contact.",
-      "contact": "Contact"
+    "title": "Kingshot Governor Gear Calculator",
+    "desc": "Calculate Governor Gear upgrade costs from Basic up to Legendary T6 3-Star and share your results.",
+    "quick": {
+      "title": "Quick Select",
+      "all": "Select All",
+      "clear": "Clear All"
     },
     "slots": {
       "hat": "Hat",
       "necklace": "Necklace",
-      "armor": "Armor",
-      "pants": "Pants",
+      "armor": "Top",
+      "pants": "Bottom",
       "ring": "Ring",
       "staff": "Staff"
     },
@@ -32,13 +24,12 @@
       "archer": "Archer"
     },
     "actions": {
-      "calculate": "Calculate",
-      "clear": "Clear",
-      "showDetail": "Show Detail",
-      "hideDetail": "Hide Detail"
+      "reset": "Reset",
+      "copy": "Copy Result",
+      "copied": "Copied"
     },
     "kpi": {
-      "satin": "Silk",
+      "satin": "Satin",
       "thread": "Gold Thread",
       "sketch": "Design Sketch",
       "score": "Gear Score"
@@ -46,132 +37,93 @@
     "cols": {
       "slot": "Slot",
       "class": "Class",
-      "satin": "Silk",
+      "satin": "Satin",
       "thread": "Gold Thread",
       "sketch": "Design Sketch",
-      "score": "Score",
+      "score": "Gear Score",
       "total": "Total",
-      "selected": "{n} Selected",
-      "current": "Current Level",
-      "target": "Target Level",
-      "manual": "Manual Required",
-      "blueprint": "Blueprint Required",
-      "attribute": "Attribute Increase"
+      "selected": "{n} selected",
+      "current": "Current Tier",
+      "target": "Target Tier"
     },
     "alerts": {
       "needSlot": "Please select at least one slot.",
-      "invalidRange": "The current level must be lower than the target level.",
+      "invalidRange": "The current tier must be lower than the target tier.",
       "loadFail": "Failed to load data."
     },
-    "misc": {
-      "from": "From",
-      "to": "To",
-      "hint": "You can calculate multiple slots at once. If costs differ per slot, provide slot-specific steps with stepsMap."
-    },
     "tiers": {
-  "calcGear.tiers.basic": "Advanced",
-  "calcGear.tiers.basic_1": "Advanced (★1)",
+      "basic": "Basic",
+      "basic_1": "Basic (★1)",
 
-  "calcGear.tiers.rare": "Rare",
-  "calcGear.tiers.rare_1": "Rare (★1)",
-  "calcGear.tiers.rare_2": "Rare (★2)",
-  "calcGear.tiers.rare_3": "Rare (★3)",
+      "rare": "Rare",
+      "rare_1": "Rare (★1)",
+      "rare_2": "Rare (★2)",
+      "rare_3": "Rare (★3)",
 
-  "calcGear.tiers.epic": "Epic",
-  "calcGear.tiers.epic_1": "Epic (★1)",
-  "calcGear.tiers.epic_2": "Epic (★2)",
-  "calcGear.tiers.epic_3": "Epic (★3)",
+      "epic": "Epic",
+      "epic_1": "Epic (★1)",
+      "epic_2": "Epic (★2)",
+      "epic_3": "Epic (★3)",
 
-  "calcGear.tiers.epicT1": "Epic T1",
-  "calcGear.tiers.epicT1_1": "Epic T1 (★1)",
-  "calcGear.tiers.epicT1_2": "Epic T1 (★2)",
-  "calcGear.tiers.epicT1_3": "Epic T1 (★3)",
+      "epicT1": "Epic T1",
+      "epicT1_1": "Epic T1 (★1)",
+      "epicT1_2": "Epic T1 (★2)",
+      "epicT1_3": "Epic T1 (★3)",
 
-  "calcGear.tiers.legendaryary": "Legendary",
-  "calcGear.tiers.legendaryary_1": "Legendary (★1)",
-  "calcGear.tiers.legendaryary_2": "Legendary (★2)",
-  "calcGear.tiers.legendaryary_3": "Legendary (★3)",
+      "mythic": "Mythic",
+      "mythic_1": "Mythic (★1)",
+      "mythic_2": "Mythic (★2)",
+      "mythic_3": "Mythic (★3)",
 
-  "calcGear.tiers.legendaryaryT1": "Legendary T1",
-  "calcGear.tiers.legendaryaryT1_1": "Legendary T1 (★1)",
-  "calcGear.tiers.legendaryaryT1_2": "Legendary T1 (★2)",
-  "calcGear.tiers.legendaryaryT1_3": "Legendary T1 (★3)",
+      "mythicT1": "Mythic T1",
+      "mythicT1_1": "Mythic T1 (★1)",
+      "mythicT1_2": "Mythic T1 (★2)",
+      "mythicT1_3": "Mythic T1 (★3)",
 
-  "calcGear.tiers.legendaryaryT2": "Legendary T2",
-  "calcGear.tiers.legendaryaryT2_1": "Legendary T2 (★1)",
-  "calcGear.tiers.legendaryaryT2_2": "Legendary T2 (★2)",
-  "calcGear.tiers.legendaryaryT2_3": "Legendary T2 (★3)",
+      "mythicT2": "Mythic T2",
+      "mythicT2_1": "Mythic T2 (★1)",
+      "mythicT2_2": "Mythic T2 (★2)",
+      "mythicT2_3": "Mythic T2 (★3)",
 
-  "calcGear.tiers.legendaryaryT3": "Legendary T3",
-  "calcGear.tiers.legendaryaryT3_1": "Legendary T3 (★1)",
-  "calcGear.tiers.legendaryaryT3_2": "Legendary T3 (★2)",
-  "calcGear.tiers.legendaryaryT3_3": "Legendary T3 (★3)",
+      "mythicT3": "Mythic T3",
+      "mythicT3_1": "Mythic T3 (★1)",
+      "mythicT3_2": "Mythic T3 (★2)",
+      "mythicT3_3": "Mythic T3 (★3)",
 
-  "calcGear.tiers.mythic": "Mythic",
-  "calcGear.tiers.mythic_1": "Mythic (★1)",
-  "calcGear.tiers.mythic_2": "Mythic (★2)",
-  "calcGear.tiers.mythic_3": "Mythic (★3)",
+      "legendary": "Legendary",
+      "legendary_1": "Legendary (★1)",
+      "legendary_2": "Legendary (★2)",
+      "legendary_3": "Legendary (★3)",
 
-  "calcGear.tiers.mythicT1": "Mythic T1",
-  "calcGear.tiers.mythicT1_1": "Mythic T1 (★1)",
-  "calcGear.tiers.mythicT1_2": "Mythic T1 (★2)",
-  "calcGear.tiers.mythicT1_3": "Mythic T1 (★3)",
+      "legendaryT1": "Legendary T1",
+      "legendaryT1_1": "Legendary T1 (★1)",
+      "legendaryT1_2": "Legendary T1 (★2)",
+      "legendaryT1_3": "Legendary T1 (★3)",
 
-  "calcGear.tiers.mythicT2": "Mythic T2",
-  "calcGear.tiers.mythicT2_1": "Mythic T2 (★1)",
-  "calcGear.tiers.mythicT2_2": "Mythic T2 (★2)",
-  "calcGear.tiers.mythicT2_3": "Mythic T2 (★3)",
+      "legendaryT2": "Legendary T2",
+      "legendaryT2_1": "Legendary T2 (★1)",
+      "legendaryT2_2": "Legendary T2 (★2)",
+      "legendaryT2_3": "Legendary T2 (★3)",
 
-  "calcGear.tiers.mythicT3": "Mythic T3",
-  "calcGear.tiers.mythicT3_1": "Mythic T3 (★1)",
-  "calcGear.tiers.mythicT3_2": "Mythic T3 (★2)",
-  "calcGear.tiers.mythicT3_3": "Mythic T3 (★3)",
+      "legendaryT3": "Legendary T3",
+      "legendaryT3_1": "Legendary T3 (★1)",
+      "legendaryT3_2": "Legendary T3 (★2)",
+      "legendaryT3_3": "Legendary T3 (★3)",
 
-  "calcGear.tiers.mythicT4": "Mythic T4",
-  "calcGear.tiers.mythicT4_1": "Mythic T4 (★1)",
-  "calcGear.tiers.mythicT4_2": "Mythic T4 (★2)",
-  "calcGear.tiers.mythicT4_3": "Mythic T4 (★3)",
+      "legendaryT4": "Legendary T4",
+      "legendaryT4_1": "Legendary T4 (★1)",
+      "legendaryT4_2": "Legendary T4 (★2)",
+      "legendaryT4_3": "Legendary T4 (★3)",
 
-  "calcGear.tiers.mythicT5": "Mythic T5",
-  "calcGear.tiers.mythicT5_1": "Mythic T5 (★1)",
-  "calcGear.tiers.mythicT5_2": "Mythic T5 (★2)",
-  "calcGear.tiers.mythicT5_3": "Mythic T5 (★3)",
+      "legendaryT5": "Legendary T5",
+      "legendaryT5_1": "Legendary T5 (★1)",
+      "legendaryT5_2": "Legendary T5 (★2)",
+      "legendaryT5_3": "Legendary T5 (★3)",
 
-  "calcGear.tiers.mythicT6": "Mythic T6",
-  "calcGear.tiers.mythicT6_1": "Mythic T6 (★1)",
-  "calcGear.tiers.mythicT6_2": "Mythic T6 (★2)",
-  "calcGear.tiers.mythicT6_3": "Mythic T6 (★3)",
-
-  "legendaryary": "Legendary",
-      "legendaryary_1": "Legendary (★1)",
-      "legendaryary_2": "Legendary (★2)",
-      "legendaryary_3": "Legendary (★3)",
-
-      "legendaryaryT1": "Legendary T1",
-      "legendaryaryT1_1": "Legendary T1 (★1)",
-      "legendaryaryT1_2": "Legendary T1 (★2)",
-      "legendaryaryT1_3": "Legendary T1 (★3)",
-
-      "legendaryaryT2": "Legendary T2",
-      "legendaryaryT2_1": "Legendary T2 (★1)",
-      "legendaryaryT2_2": "Legendary T2 (★2)",
-      "legendaryaryT2_3": "Legendary T2 (★3)",
-
-      "legendaryaryT3": "Legendary T3",
-      "legendaryaryT3_1": "Legendary T3 (★1)",
-      "legendaryaryT3_2": "Legendary T3 (★2)",
-      "legendaryaryT3_3": "Legendary T3 (★3)",
-
-      "mythicT5": "Mythic T5",
-      "mythicT5_1": "Mythic T5 (★1)",
-      "mythicT5_2": "Mythic T5 (★2)",
-      "mythicT5_3": "Mythic T5 (★3)",
-
-      "mythicT6": "Mythic T6",
-      "mythicT6_1": "Mythic T6 (★1)",
-      "mythicT6_2": "Mythic T6 (★2)",
-      "mythicT6_3": "Mythic T6 (★3)"
-}
-
+      "legendaryT6": "Legendary T6",
+      "legendaryT6_1": "Legendary T6 (★1)",
+      "legendaryT6_2": "Legendary T6 (★2)",
+      "legendaryT6_3": "Legendary T6 (★3)"
+    }
   }
 }

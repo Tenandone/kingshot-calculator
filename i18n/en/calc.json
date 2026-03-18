@@ -1,6 +1,6 @@
 {
   "calc": {
-    "meta": { "title": "Building Calculator | KingshotData KR" },
+    "meta": { "title": "Building Calculator | KingshotData" },
     "title": "Building Calculator",
     "desc": "Check the resources and time required for upgrades.",
     "howto": {
@@ -106,209 +106,9 @@
       "load": "Failed to load data."
     }
   },
- 
-  "calcCharm": {
-  "meta": { "title": "Governor Charm Calculator | KingshotData KR" },
-  "title": "Governor Charm Calculator",
-  "desc": "Enter the current charm level, target level, and the number of units per troop type to calculate the required Charm Manuals/Charm Blueprints and total attribute increase.",
-  "howto": {
-    "title": "How to Use",
-    "step1": "Select the current charm level and the target level.",
-    "step2": "Enter the number of charms for each troop type (Cavalry · Infantry · Archer / e.g., 3·3·3).",
-    "step3": "Click the Calculate button."
-  },
-  "form": {
-    "currentLevel": { "label": "Current Level", "placeholder": "Select current level" },
-    "targetLevel": { "label": "Target Level", "placeholder": "Select target level" },
-    "counts": {
-      "label": "Troop Type Counts",
-      "placeholder": "e.g., 3·3·3",
-      "cavalry": "Cavalry",
-      "infantry": "Infantry",
-      "archer": "Archer"
-    },
-    "actions": {
-      "calculate": "Calculate",
-      "clear": "Clear",
-      "fill9": "Default 3·3·3",
-      "fill9Title": "Fill all troop types with 3",
-      "clearTitle": "Reset troop counts"
-    }
-  },
-  "result": {
-    "title": "Results",
-    "manual": "Required Charm Manuals",
-    "blueprint": "Required Charm Blueprints",
-    "attribute": "Total Attribute Increase"
-  },
-  "detail": {
-    "level": "Level (Reached)",
-    "manual": "Required Manuals",
-    "blueprint": "Required Blueprints",
-    "attr": "Attribute % at this Level"
-  },
-  
-  "table": {
-    "level": "Level",
-    "manual": "Charm Manual",
-    "blueprint": "Charm Blueprint",
-    "attr": "Attribute (%)"
-  
-},
-  "hint": "※ Cost = Sum of upgrade steps from current → target × (total count). Attribute = (Target% − Current%) × total count.",
-  "notice": {
-    "title": "Notice",
-    "p1": "This data is fan-made based on in-game values.",
-    "li1": "Values may change due to patches/balance adjustments.",
-    "li2": "Please report typos or errors through the contact form."
-  },
-  "alert": {
-    "targetGtStart": "Target level must be higher than the current level.",
-    "noTroop": "Enter at least one among Cavalry/Infantry/Archer.",
-    "load": "Failed to load data."
-  }
-}
-,
 
-
-  "calcGear": {
-    "meta": { "title": "Governor Gear Calculator | KingshotData KR" },
-    "title": "Governor Gear Calculator",
-    "desc": "Use this quick Kingshot governor gear calculator.",
-    "howto": {
-      "title": "How to Use",
-      "step1": "Select your current governor gear level.",
-      "step2": "Select the target level you want to upgrade to.",
-      "step3": "Choose the gear slots to upgrade from the tabs.",
-      "slotsHelp": "Slots: Hat·Necklace (Cavalry), Armor·Pants (Infantry), Ring·Staff (Archer)",
-      "step4": "Click Calculate."
-    },
-    "notice": {
-      "title": "Notes",
-      "p1": "This is fan-made data based on in-game values.",
-      "li1": "Numbers may change due to patches/balance adjustments.",
-      "li2": "Please report typos or errors via Contact.",
-      "contact": "Contact"
-    },
-    "slots": {
-      "hat": "Hat",
-      "necklace": "Necklace",
-      "armor": "Armor",
-      "pants": "Pants",
-      "ring": "Ring",
-      "staff": "Staff"
-    },
-    "classes": {
-      "cavalry": "Cavalry",
-      "infantry": "Infantry",
-      "archer": "Archer"
-    },
-    "actions": {
-      "calculate": "Calculate",
-      "clear": "Clear",
-      "showDetail": "Show Details",
-      "hideDetail": "Hide Details"
-    },
-    "kpi": {
-      "satin": "Satin",
-      "thread": "Gold Thread",
-      "sketch": "Design Sketch",
-      "score": "Gear Score"
-    },
-    "cols": {
-      "slot": "Slot",
-      "class": "Class",
-      "satin": "Satin",
-      "thread": "Gold Thread",
-      "sketch": "Design Sketch",
-      "score": "Score",
-      "total": "Total",
-      "selected": "Selected {n}",
-      "current": "Current Level",
-      "target": "Target Level",
-      "manual": "Manual Needed",
-      "blueprint": "Blueprint Needed",
-      "attribute": "Attribute Gain"
-    },
-    "alerts": {
-      "needSlot": "Select at least one slot.",
-      "invalidRange": "The current level must be lower than the target level.",
-      "loadFail": "Failed to load data."
-    },
-    "misc": {
-      "from": "Current Level",
-      "to": "Target Level",
-      "hint": "Sum multiple slots at once. If costs differ by slot, provide per-slot steps via stepsMap."
-    },
-    "tiers": {
-      "basic": "Basic",
-      "basic_1": "Basic (★1)",
-
-      "rare": "Rare",
-      "rare_1": "Rare (★1)",
-      "rare_2": "Rare (★2)",
-      "rare_3": "Rare (★3)",
-
-      "epic": "Epic",
-      "epic_1": "Epic (★1)",
-      "epic_2": "Epic (★2)",
-      "epic_3": "Epic (★3)",
-
-      "epicT1": "Epic T1",
-      "epicT1_1": "Epic T1 (★1)",
-      "epicT1_2": "Epic T1 (★2)",
-      "epicT1_3": "Epic T1 (★3)",
-
-      "legend": "legend",
-      "legend_1": "legend (★1)",
-      "legend_2": "legend (★2)",
-      "legend_3": "legend (★3)",
-
-      "legendT1": "legend T1",
-      "legendT1_1": "legend T1 (★1)",
-      "legendT1_2": "legend T1 (★2)",
-      "legendT1_3": "legend T1 (★3)",
-
-      "legendT2": "legend T2",
-      "legendT2_1": "legend T2 (★1)",
-      "legendT2_2": "legend T2 (★2)",
-      "legendT2_3": "legend T2 (★3)",
-
-      "legendT3": "legend T3",
-      "legendT3_1": "legend T3 (★1)",
-      "legendT3_2": "legend T3 (★2)",
-      "legendT3_3": "legend T3 (★3)",
-
-      "mythic": "Mythic",
-      "mythic_1": "Mythic (★1)",
-      "mythic_2": "Mythic (★2)",
-      "mythic_3": "Mythic (★3)",
-
-      "mythicT1": "Mythic T1",
-      "mythicT1_1": "Mythic T1 (★1)",
-      "mythicT1_2": "Mythic T1 (★2)",
-      "mythicT1_3": "Mythic T1 (★3)",
-
-      "mythicT2": "Mythic T2",
-      "mythicT2_1": "Mythic T2 (★1)",
-      "mythicT2_2": "Mythic T2 (★2)",
-      "mythicT2_3": "Mythic T2 (★3)",
-
-      "mythicT3": "Mythic T3",
-      "mythicT3_1": "Mythic T3 (★1)",
-      "mythicT3_2": "Mythic T3 (★2)",
-      "mythicT3_3": "Mythic T3 (★3)",
-
-      "mythicT4": "Mythic T4",
-      "mythicT4_1": "Mythic T4 (★1)",
-      "mythicT4_2": "Mythic T4 (★2)",
-      "mythicT4_3": "Mythic T4 (★3)"
-    }
-  }
-,
-  
   "trainCalc": {
-    "meta": { "title": "Kingshot Training & Promotion Calculator | KingshotData KR" },
+    "meta": { "title": "Kingshot Training & Promotion Calculator | KingshotData" },
     "title": "Kingshot Training & Promotion Calculator",
     "badge": "Speedup Days ↔ Troop Count",
 
@@ -378,13 +178,14 @@
       "needAccelTime": "Required Speedup Time"
     }
   },
-"calcHub": {
-    "meta": { "title": "Calculators | KingshotData KR", "desc": "Kingshot calculator hub" },
+
+  "calcHub": {
+    "meta": { "title": "Calculators | KingshotData", "desc": "Kingshot calculator hub" },
     "title": "Calculators",
     "cards": {
       "building": { "title": "Buildings Calculator" },
-      "gear":     { "title": "Governor Gear Calculator" },
-      "charm":    { "title": "Governor Charms Calculator" },
+      "gear": { "title": "Governor Gear Calculator" },
+      "charm": { "title": "Governor Charms Calculator" },
       "training": { "title": "Training & Promotion Calculator" }
     }
   }

@@ -1,22 +1,14 @@
 {
   "calcGear": {
-    "meta": { "title": "영주 장비 계산기 | KingshotData KR" },
-    "title": "영주 장비 계산기",
-    "desc": "간편한 킹샷 영주 장비 계산기를 사용해보세요.",
-    "howto": {
-      "title": "사용 방법",
-      "step1": "현재 보유한 영주 장비 단계를 선택하세요.",
-      "step2": "업그레이드하려는 목표 단계를 선택하세요.",
-      "step3": "상단 탭에서 업그레이드할 장비 슬롯을 고르세요.",
-      "slotsHelp": "슬롯: 모자·목걸이(기병), 상의·하의(보병), 반지·지팡이(궁병)",
-      "step4": "계산하기 버튼을 누르세요."
+    "meta": {
+      "title": "영주 장비 계산기 | 킹샷데이터코리아"
     },
-    "notice": {
-      "title": "주의사항",
-      "p1": "본 자료는 인게임 표기값을 기반으로 정리한 팬메이드 데이터입니다.",
-      "li1": "패치/밸런스 조정에 따라 수치가 달라질 수 있습니다.",
-      "li2": "오타·오류 제보는 문의하기로 부탁드립니다.",
-      "contact": "문의하기"
+    "title": "킹샷 영주 장비 계산기",
+    "desc": "영주 장비 일반부터 신화 T6 3성까지 계산해보고, 계산된 수치를 공유해보세요.",
+    "quick": {
+      "title": "빠른 선택",
+      "all": "전체 선택",
+      "clear": "전체 해제"
     },
     "slots": {
       "hat": "모자",
@@ -32,10 +24,9 @@
       "archer": "궁병"
     },
     "actions": {
-      "calculate": "계산하기",
-      "clear": "초기화",
-      "showDetail": "상세 보기",
-      "hideDetail": "상세 숨기기"
+      "reset": "초기화",
+      "copy": "결과 복사",
+      "copied": "복사 완료"
     },
     "kpi": {
       "satin": "비단",
@@ -49,129 +40,90 @@
       "satin": "비단",
       "thread": "금사",
       "sketch": "설계 스케치",
-      "score": "점수",
+      "score": "장비 평점",
       "total": "합계",
-      "selected": "선택 {n}개",
+      "selected": "{n}개 선택",
       "current": "현재 단계",
-      "target": "목표 단계",
-      "manual": "설명서 필요량",
-      "blueprint": "도면 필요량",
-      "attribute": "속성 증가"
+      "target": "목표 단계"
     },
     "alerts": {
       "needSlot": "슬롯을 하나 이상 선택하세요.",
       "invalidRange": "현재 단계는 목표 단계보다 낮아야 합니다.",
       "loadFail": "데이터를 불러오지 못했습니다."
     },
-    "misc": {
-      "from": "현재 단계",
-      "to": "목표 단계",
-      "hint": "여러 슬롯을 한 번에 합산할 수 있습니다. 슬롯별 비용이 다르면 stepsMap으로 슬롯별 단계를 제공하세요."
-    },
     "tiers": {
-  "calcGear.tiers.basic": "고급",
-  "calcGear.tiers.basic_1": "고급 (★1)",
+      "basic": "고급",
+      "basic_1": "고급 (★1)",
 
-  "calcGear.tiers.rare": "레어",
-  "calcGear.tiers.rare_1": "레어 (★1)",
-  "calcGear.tiers.rare_2": "레어 (★2)",
-  "calcGear.tiers.rare_3": "레어 (★3)",
+      "rare": "레어",
+      "rare_1": "레어 (★1)",
+      "rare_2": "레어 (★2)",
+      "rare_3": "레어 (★3)",
 
-  "calcGear.tiers.epic": "에픽",
-  "calcGear.tiers.epic_1": "에픽 (★1)",
-  "calcGear.tiers.epic_2": "에픽 (★2)",
-  "calcGear.tiers.epic_3": "에픽 (★3)",
+      "epic": "에픽",
+      "epic_1": "에픽 (★1)",
+      "epic_2": "에픽 (★2)",
+      "epic_3": "에픽 (★3)",
 
-  "calcGear.tiers.epicT1": "에픽 T1",
-  "calcGear.tiers.epicT1_1": "에픽 T1 (★1)",
-  "calcGear.tiers.epicT1_2": "에픽 T1 (★2)",
-  "calcGear.tiers.epicT1_3": "에픽 T1 (★3)",
+      "epicT1": "에픽 T1",
+      "epicT1_1": "에픽 T1 (★1)",
+      "epicT1_2": "에픽 T1 (★2)",
+      "epicT1_3": "에픽 T1 (★3)",
 
-  "calcGear.tiers.legendaryary": "레전더리",
-  "calcGear.tiers.legendaryary_1": "레전더리 (★1)",
-  "calcGear.tiers.legendaryary_2": "레전더리 (★2)",
-  "calcGear.tiers.legendaryary_3": "레전더리 (★3)",
+      "mythic": "레전드",
+      "mythic_1": "레전드 (★1)",
+      "mythic_2": "레전드 (★2)",
+      "mythic_3": "레전드 (★3)",
 
-  "calcGear.tiers.legendaryaryT1": "레전더리 T1",
-  "calcGear.tiers.legendaryaryT1_1": "레전더리 T1 (★1)",
-  "calcGear.tiers.legendaryaryT1_2": "레전더리 T1 (★2)",
-  "calcGear.tiers.legendaryaryT1_3": "레전더리 T1 (★3)",
+      "mythicT1": "레전드 T1",
+      "mythicT1_1": "레전드 T1 (★1)",
+      "mythicT1_2": "레전드 T1 (★2)",
+      "mythicT1_3": "레전드 T1 (★3)",
 
-  "calcGear.tiers.legendaryaryT2": "레전더리 T2",
-  "calcGear.tiers.legendaryaryT2_1": "레전더리 T2 (★1)",
-  "calcGear.tiers.legendaryaryT2_2": "레전더리 T2 (★2)",
-  "calcGear.tiers.legendaryaryT2_3": "레전더리 T2 (★3)",
+      "mythicT2": "레전드 T2",
+      "mythicT2_1": "레전드 T2 (★1)",
+      "mythicT2_2": "레전드 T2 (★2)",
+      "mythicT2_3": "레전드 T2 (★3)",
 
-  "calcGear.tiers.legendaryaryT3": "레전더리 T3",
-  "calcGear.tiers.legendaryaryT3_1": "레전더리 T3 (★1)",
-  "calcGear.tiers.legendaryaryT3_2": "레전더리 T3 (★2)",
-  "calcGear.tiers.legendaryaryT3_3": "레전더리 T3 (★3)",
+      "mythicT3": "레전드 T3",
+      "mythicT3_1": "레전드 T3 (★1)",
+      "mythicT3_2": "레전드 T3 (★2)",
+      "mythicT3_3": "레전드 T3 (★3)",
 
-  "calcGear.tiers.mythic": "신화",
-  "calcGear.tiers.mythic_1": "신화 (★1)",
-  "calcGear.tiers.mythic_2": "신화 (★2)",
-  "calcGear.tiers.mythic_3": "신화 (★3)",
+      "legendary": "신화",
+      "legendary_1": "신화 (★1)",
+      "legendary_2": "신화 (★2)",
+      "legendary_3": "신화 (★3)",
 
-  "calcGear.tiers.mythicT1": "신화 T1",
-  "calcGear.tiers.mythicT1_1": "신화 T1 (★1)",
-  "calcGear.tiers.mythicT1_2": "신화 T1 (★2)",
-  "calcGear.tiers.mythicT1_3": "신화 T1 (★3)",
+      "legendaryT1": "신화 T1",
+      "legendaryT1_1": "신화 T1 (★1)",
+      "legendaryT1_2": "신화 T1 (★2)",
+      "legendaryT1_3": "신화 T1 (★3)",
 
-  "calcGear.tiers.mythicT2": "신화 T2",
-  "calcGear.tiers.mythicT2_1": "신화 T2 (★1)",
-  "calcGear.tiers.mythicT2_2": "신화 T2 (★2)",
-  "calcGear.tiers.mythicT2_3": "신화 T2 (★3)",
+      "legendaryT2": "신화 T2",
+      "legendaryT2_1": "신화 T2 (★1)",
+      "legendaryT2_2": "신화 T2 (★2)",
+      "legendaryT2_3": "신화 T2 (★3)",
 
-  "calcGear.tiers.mythicT3": "신화 T3",
-  "calcGear.tiers.mythicT3_1": "신화 T3 (★1)",
-  "calcGear.tiers.mythicT3_2": "신화 T3 (★2)",
-  "calcGear.tiers.mythicT3_3": "신화 T3 (★3)",
+      "legendaryT3": "신화 T3",
+      "legendaryT3_1": "신화 T3 (★1)",
+      "legendaryT3_2": "신화 T3 (★2)",
+      "legendaryT3_3": "신화 T3 (★3)",
 
-  "calcGear.tiers.mythicT4": "신화 T4",
-  "calcGear.tiers.mythicT4_1": "신화 T4 (★1)",
-  "calcGear.tiers.mythicT4_2": "신화 T4 (★2)",
-  "calcGear.tiers.mythicT4_3": "신화 T4 (★3)",
+      "legendaryT4": "신화 T4",
+      "legendaryT4_1": "신화 T4 (★1)",
+      "legendaryT4_2": "신화 T4 (★2)",
+      "legendaryT4_3": "신화 T4 (★3)",
 
-  "calcGear.tiers.mythicT5": "신화 T5",
-  "calcGear.tiers.mythicT5_1": "신화 T5 (★1)",
-  "calcGear.tiers.mythicT5_2": "신화 T5 (★2)",
-  "calcGear.tiers.mythicT5_3": "신화 T5 (★3)",
+      "legendaryT5": "신화 T5",
+      "legendaryT5_1": "신화 T5 (★1)",
+      "legendaryT5_2": "신화 T5 (★2)",
+      "legendaryT5_3": "신화 T5 (★3)",
 
-  "calcGear.tiers.mythicT6": "신화 T6",
-  "calcGear.tiers.mythicT6_1": "신화 T6 (★1)",
-  "calcGear.tiers.mythicT6_2": "신화 T6 (★2)",
-  "calcGear.tiers.mythicT6_3": "신화 T6 (★3)",
-
-  "legendaryary": "레전더리",
-  "legendaryary_1": "레전더리 (★1)",
-  "legendaryary_2": "레전더리 (★2)",
-  "legendaryary_3": "레전더리 (★3)",
-
-  "legendaryaryT1": "레전더리 T1",
-  "legendaryaryT1_1": "레전더리 T1 (★1)",
-  "legendaryaryT1_2": "레전더리 T1 (★2)",
-  "legendaryaryT1_3": "레전더리 T1 (★3)",
-
-  "legendaryaryT2": "레전더리 T2",
-  "legendaryaryT2_1": "레전더리 T2 (★1)",
-  "legendaryaryT2_2": "레전더리 T2 (★2)",
-  "legendaryaryT2_3": "레전더리 T2 (★3)",
-
-  "legendaryaryT3": "레전더리 T3",
-  "legendaryaryT3_1": "레전더리 T3 (★1)",
-  "legendaryaryT3_2": "레전더리 T3 (★2)",
-  "legendaryaryT3_3": "레전더리 T3 (★3)",
-
-  "mythicT5": "신화 T5",
-  "mythicT5_1": "신화 T5 (★1)",
-  "mythicT5_2": "신화 T5 (★2)",
-  "mythicT5_3": "신화 T5 (★3)",
-
-  "mythicT6": "신화 T6",
-  "mythicT6_1": "신화 T6 (★1)",
-  "mythicT6_2": "신화 T6 (★2)",
-  "mythicT6_3": "신화 T6 (★3)"
-}
-
+      "legendaryT6": "신화 T6",
+      "legendaryT6_1": "신화 T6 (★1)",
+      "legendaryT6_2": "신화 T6 (★2)",
+      "legendaryT6_3": "신화 T6 (★3)"
+    }
   }
 }

@@ -1,1 +1,54 @@
-{}
+{
+  "calcCharm": {
+    "meta": {
+      "title": "Governor Charm Calculator | KingshotData"
+    },
+    "title": "Governor Charm Calculator",
+    "desc": "Enter your current charm level, target level, and the number of charms by troop type to calculate the required Charm Manuals, Charm Designs, target-level attribute, and troop-specific attributes.",
+    "charms": {
+      "infantry": "Protection Charm",
+      "cavalry": "Keenness Charm",
+      "archer": "Vision Charm"
+    },
+    "classes": {
+      "infantry": "Infantry",
+      "cavalry": "Cavalry",
+      "archer": "Archer"
+    },
+    "form": {
+      "counts": {
+        "title": "Charm Count"
+      },
+      "currentLevel": {
+        "label": "Current Level"
+      },
+      "targetLevel": {
+        "label": "Target Level"
+      },
+      "actions": {
+        "fill18": "Default 6·6·6",
+        "clear": "Reset"
+      }
+    },
+    "result": {
+      "manual": "Charm Guide",
+      "design": "Charm Design",
+      "attribute": "Target Level Attribute",
+      "infantryAttr": "Infantry Attribute",
+      "cavalryAttr": "Cavalry Attribute",
+      "archerAttr": "Archer Attribute"
+    },
+    "table": {
+      "level": "Level",
+      "manual": "Charm Guide",
+      "design": "Charm Design",
+      "infantryAttr": "Infantry Attribute",
+      "cavalryAttr": "Cavalry Attribute",
+      "archerAttr": "Archer Attribute",
+      "total": "Total"
+    },
+    "error": {
+      "load": "Failed to load data."
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "calc": {
-    "meta": { "title": "건물 계산기 | KingshotData KR" },
+    "meta": { "title": "건물 계산기 | 킹샷데이터코리아" },
     "title": "건물 계산기",
     "desc": "업그레이드에 필요한 자원과 소요 시간을 확인하세요.",
     "howto": {
@@ -102,211 +102,8 @@
     }
   },
 
-  "calcCharm": {
-  "meta": { "title": "영주 보석 계산기 | KingshotData KR" },
-  "title": "영주 보석 계산기",
-  "desc": "현재 보석 레벨, 목표 레벨, 병종별 개수를 입력하면 필요한 보석 매뉴얼/보석 도면과 총 속성 증가를 계산합니다.",
-  "howto": {
-    "title": "사용 방법",
-    "step1": "현재 보석 레벨과 목표 레벨을 선택하세요.",
-    "step2": "업그레이드할 보석의 병종별 개수를 입력하세요. (기병·보병·궁병 / 예: 3·3·3)",
-    "step3": "계산하기 버튼을 누르세요."
-  },
-  "form": {
-    "currentLevel": { "label": "현재 레벨", "placeholder": "현재 레벨 선택" },
-    "targetLevel": { "label": "목표 레벨", "placeholder": "목표 레벨 선택" },
-    "counts": {
-      "label": "병종별 개수",
-      "placeholder": "예: 3·3·3",
-      "cavalry": "기병",
-      "infantry": "보병",
-      "archer": "궁병"
-    },
-    "actions": {
-      "calculate": "계산하기",
-      "clear": "초기화",
-      "fill9": "기본 3·3·3",
-      "fill9Title": "세 병종 모두 3개로 채우기",
-      "clearTitle": "세 병종 개수 초기화"
-    }
-  },
-  "result": {
-    "title": "결과",
-    "manual": "필요 보석 매뉴얼",
-    "blueprint": "필요 보석 도면",
-    "attribute": "총 속성 증가"
-  },
-  "detail": {
-    "level": "레벨(도달)",
-    "manual": "필요 매뉴얼",
-    "blueprint": "필요 도면",
-    "attr": "해당 레벨 속성%"
-  },
-  
-  "table": {
-    "level": "레벨",
-    "manual": "보석매뉴얼",
-    "blueprint": "보석도면",
-    "attr": "속성(%)"
-  },
-  "hint": "※ 비용은 현재→목표 업그레이드 구간 합 × (총 개수). 속성은 (목표% − 현재%) × 총 개수.",
-  "notice": {
-    "title": "주의사항",
-    "p1": "본 자료는 인게임 표기값을 기반으로 정리한 팬메이드 데이터입니다.",
-    "li1": "패치/밸런스 조정에 따라 수치가 달라질 수 있습니다.",
-    "li2": "오타·오류 제보는 문의하기로 부탁드립니다."
-  },
-  "alert": {
-    "targetGtStart": "목표 레벨이 현재 레벨보다 높아야 합니다.",
-    "noTroop": "기병/보병/궁병 중 최소 1개 이상을 입력하세요.",
-    "load": "데이터를 불러오지 못했습니다."
-  }
-},
-
-  
-  
-  "calcGear": {
-    "meta": { "title": "영주 장비 계산기 | KingshotData KR" },
-    "title": "영주 장비 계산기",
-    "desc": "간편한 킹샷 영주 장비 계산기를 사용해보세요.",
-    "howto": {
-      "title": "사용 방법",
-      "step1": "현재 보유한 영주 장비 단계를 선택하세요.",
-      "step2": "업그레이드하려는 목표 단계를 선택하세요.",
-      "step3": "상단 탭에서 업그레이드할 장비 슬롯을 고르세요.",
-      "slotsHelp": "슬롯: 모자·목걸이(기병), 상의·하의(보병), 반지·지팡이(궁병)",
-      "step4": "계산하기 버튼을 누르세요."
-    },
-    "notice": {
-      "title": "주의사항",
-      "p1": "본 자료는 인게임 표기값을 기반으로 정리한 팬메이드 데이터입니다.",
-      "li1": "패치/밸런스 조정에 따라 수치가 달라질 수 있습니다.",
-      "li2": "오타·오류 제보는 문의하기로 부탁드립니다.",
-      "contact": "문의하기"
-    },
-    "slots": {
-      "hat": "모자",
-      "necklace": "목걸이",
-      "armor": "상의",
-      "pants": "하의",
-      "ring": "반지",
-      "staff": "지팡이"
-    },
-    "classes": {
-      "cavalry": "기병",
-      "infantry": "보병",
-      "archer": "궁병"
-    },
-    "actions": {
-      "calculate": "계산하기",
-      "clear": "초기화",
-      "showDetail": "상세 보기",
-      "hideDetail": "상세 숨기기"
-    },
-    "kpi": {
-      "satin": "비단",
-      "thread": "금사",
-      "sketch": "설계 스케치",
-      "score": "장비 평점"
-    },
-    "cols": {
-      "slot": "슬롯",
-      "class": "병종",
-      "satin": "비단",
-      "thread": "금사",
-      "sketch": "설계 스케치",
-      "score": "점수",
-      "total": "합계",
-      "selected": "선택 {n}개",
-      "current": "현재 단계",
-      "target": "목표 단계",
-      "manual": "설명서 필요량",
-      "blueprint": "도면 필요량",
-      "attribute": "속성 증가"
-    },
-    "alerts": {
-      "needSlot": "슬롯을 하나 이상 선택하세요.",
-      "invalidRange": "현재 단계는 목표 단계보다 낮아야 합니다.",
-      "loadFail": "데이터를 불러오지 못했습니다."
-    },
-    "misc": {
-      "from": "현재 단계",
-      "to": "목표 단계",
-      "hint": "여러 슬롯을 한 번에 합산할 수 있습니다. 슬롯별 비용이 다르면 stepsMap으로 슬롯별 단계를 제공하세요."
-    },
-    "tiers": {
-      "basic": "고급",
-      "basic_1": "고급 (★1)",
-
-      "rare": "레어",
-      "rare_1": "레어 (★1)",
-      "rare_2": "레어 (★2)",
-      "rare_3": "레어 (★3)",
-
-      "epic": "에픽",
-      "epic_1": "에픽 (★1)",
-      "epic_2": "에픽 (★2)",
-      "epic_3": "에픽 (★3)",
-
-      "epicT1": "에픽 T1",
-      "epicT1_1": "에픽 T1 (★1)",
-      "epicT1_2": "에픽 T1 (★2)",
-      "epicT1_3": "에픽 T1 (★3)",
-
-      "legend": "레전드",
-      "legend_1": "레전드 (★1)",
-      "legend_2": "레전드 (★2)",
-      "legend_3": "레전드 (★3)",
-
-      "legendT1": "레전드 T1",
-      "legendT1_1": "레전드 T1 (★1)",
-      "legendT1_2": "레전드 T1 (★2)",
-      "legendT1_3": "레전드 T1 (★3)",
-
-      "legendT2": "레전드 T2",
-      "legendT2_1": "레전드 T2 (★1)",
-      "legendT2_2": "레전드 T2 (★2)",
-      "legendT2_3": "레전드 T2 (★3)",
-
-      "legendT3": "레전드 T3",
-      "legendT3_1": "레전드 T3 (★1)",
-      "legendT3_2": "레전드 T3 (★2)",
-      "legendT3_3": "레전드 T3 (★3)",
-
-      "mythic": "신화",
-      "mythic_1": "신화 (★1)",
-      "mythic_2": "신화 (★2)",
-      "mythic_3": "신화 (★3)",
-
-      "mythicT1": "신화 T1",
-      "mythicT1_1": "신화 T1 (★1)",
-      "mythicT1_2": "신화 T1 (★2)",
-      "mythicT1_3": "신화 T1 (★3)",
-
-      "mythicT2": "신화 T2",
-      "mythicT2_1": "신화 T2 (★1)",
-      "mythicT2_2": "신화 T2 (★2)",
-      "mythicT2_3": "신화 T2 (★3)",
-
-      "mythicT3": "신화 T3",
-      "mythicT3_1": "신화 T3 (★1)",
-      "mythicT3_2": "신화 T3 (★2)",
-      "mythicT3_3": "신화 T3 (★3)",
-
-      "mythicT4": "신화 T4",
-      "mythicT4_1": "신화 T4 (★1)",
-      "mythicT4_2": "신화 T4 (★2)",
-      "mythicT4_3": "신화 T4 (★3)"
-    }
-  }
-,
-
-
-
-
-
   "trainCalc": {
-    "meta": { "title": "킹샷 훈련·승급 계산기 | KingshotData KR" },
+    "meta": { "title": "킹샷 훈련·승급 계산기 | 킹샷데이터코리아" },
     "title": "킹샷 훈련·승급 계산기",
     "badge": "가속일수 ↔ 병력수",
 
@@ -376,15 +173,15 @@
       "needAccelTime": "필요 가속 시간"
     }
   },
-"calcHub": {
-    "meta": { "title": "계산기 | KingshotData KR", "desc": "킹샷 계산기 허브" },
+
+  "calcHub": {
+    "meta": { "title": "계산기 | 킹샷테이터코리아", "desc": "킹샷 계산기 허브" },
     "title": "계산기",
     "cards": {
       "building": { "title": "건물계산기" },
-      "gear":     { "title": "영주장비계산기" },
-      "charm":    { "title": "영주보석계산기" },
+      "gear": { "title": "영주장비계산기" },
+      "charm": { "title": "영주보석계산기" },
       "training": { "title": "병력훈련계산기" }
     }
   }
 }
-

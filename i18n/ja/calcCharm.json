@@ -1,1 +1,55 @@
-{}
+{
+  "calcCharm": {
+    "meta": {
+      "title": "領主宝石計算機 | KingshotData"
+    },
+    "title": "領主宝石計算機",
+    "desc": "現在の宝石レベル、目標レベル、兵種別の宝石数を入力すると、必要な宝石マニュアル、宝石設計図、目標レベル属性、兵種別属性を計算できます。",
+    "charms": {
+      "cavalry": "守護の宝石",
+      "infantry": "鋭利な宝石",
+      "archer": "ホークアイの宝石"
+    },
+    "classes": {
+      "cavalry": "騎兵",
+      "infantry": "歩兵",
+      "archer": "弓兵"
+    },
+    "form": {
+      "counts": {
+        "title": "宝石数"
+      },
+      "currentLevel": {
+        "label": "現在レベル"
+      },
+      "targetLevel": {
+        "label": "目標レベル"
+      },
+      "actions": {
+        "fill18": "基本 6・6・6",
+        "clear": "リセット"
+      }
+    },
+    "result": {
+      "manual": "宝石マニュアル",
+      "design": "宝石設計図",
+      "attribute": "目標レベル属性",
+      "infantryAttr": "歩兵属性",
+      "cavalryAttr": "騎兵属性",
+      "archerAttr": "弓兵属性"
+    },
+    "table": {
+      "level": "レベル",
+      "manual": "宝石マニュアル",
+      "design": "宝石設計図",
+      "infantryAttr": "歩兵属性",
+      "cavalryAttr": "騎兵属性",
+      "archerAttr": "弓兵属性",
+      "total": "合計"
+    },
+    "note": "宝石は兵種ごとに6個、合計18個基準で計算できます。",
+    "error": {
+      "load": "データを読み込めませんでした。"
+    }
+  }
+}
