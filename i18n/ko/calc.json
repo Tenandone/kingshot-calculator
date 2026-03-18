@@ -20,7 +20,12 @@
       "tg2": "TG 2 = Lv. 40",
       "tg3": "TG 3 = Lv. 45",
       "tg4": "TG 4 = Lv. 50",
-      "tg5": "TG 5 = Lv. 55"
+      "tg5": "TG 5 = Lv. 55",
+      "tg6": "TG 6 = Lv. 60",
+      "tg7": "TG 7 = Lv. 65",
+      "tg8": "TG 8 = Lv. 70",
+      "tg9": "TG 9 = Lv. 75",
+      "tg10": "TG 10 = Lv. 80"
     },
     "form": {
       "building": {
@@ -45,7 +50,10 @@
       "positionBonus": { "label": "국왕/관직 보너스 (%)" },
       "doubleTime": { "label": "건설 법령 적용(시간 20% 감소)" },
       "includePrereq": { "label": "선행 건물 포함" },
-      "actions": { "calculate": "업그레이드 계산하기", "clear": "업그레이드 초기화" }
+      "actions": {
+        "calculate": "업그레이드 계산하기",
+        "clear": "업그레이드 초기화"
+      }
     },
     "prereq": {
       "summary": "선행 건물 레벨 (내 현재 레벨)",
@@ -73,9 +81,17 @@
     "table": {
       "title": "상세 내역",
       "titleWithPrereq": "상세 내역 (선행 포함)",
+      "levelNote": "레벨 표기는 TC1부터 TG10까지 기준입니다.",
+      "timeMinuteRemoved": "건설시간 분단위는 제거하였습니다.",
       "col": {
         "building": "건물",
         "level": "레벨",
+        "bread": "빵",
+        "wood": "나무",
+        "stone": "석재",
+        "iron": "철",
+        "truegold": "순금",
+        "tempered_truegold": "담금질 된 순금",
         "time": "건설 시간"
       }
     },
@@ -95,7 +111,8 @@
     "alert": {
       "invalidLevel": "레벨 입력이 올바르지 않습니다.",
       "targetGtStart": "목표 레벨은 시작 레벨보다 커야 합니다.",
-      "noData": "데이터가 없습니다"
+      "noData": "데이터가 없습니다",
+      "prereqTooHigh": "선행 건물 레벨은 목표 레벨 이상으로 입력할 수 없습니다."
     },
     "error": {
       "load": "데이터 로드 실패"
@@ -175,7 +192,10 @@
   },
 
   "calcHub": {
-    "meta": { "title": "계산기 | 킹샷테이터코리아", "desc": "킹샷 계산기 허브" },
+    "meta": {
+      "title": "계산기 | 킹샷데이터코리아",
+      "desc": "킹샷 계산기 허브"
+    },
     "title": "계산기",
     "cards": {
       "building": { "title": "건물계산기" },

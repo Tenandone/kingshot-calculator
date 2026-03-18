@@ -2,17 +2,17 @@
   "calc": {
     "meta": { "title": "建物計算機 | KingshotData" },
     "title": "建物計算機",
-    "desc": "アップグレードに必要な資源と時間を確認できます。",
+    "desc": "アップグレードに必要な資源と所要時間を確認できます。",
     "howto": {
-      "title": "使用方法",
+      "title": "使い方",
       "step1": "アップグレードする建物を選択してください。",
       "step2": "現在レベルと目標レベルを入力してください。",
       "step3": {
         "head": "建設速度ボーナスを入力してください。",
-        "help": "プロフィール → 戦力画面下部で建設速度ボーナスを確認できます。（サウル/ウルフ/研究/国王・官職などを含む）"
+        "help": "プロフィール → 戦闘力（パワー）画面の下部で建設速度ボーナスを確認できます。（サウル／オオカミ／研究／国王・官職などをすべて含む）"
       },
-      "step4": "タウンセンターをアップグレードする場合、「前提建物を含む」オプションをチェックできます。",
-      "step5": "ペットバフが無効の場合は手動で追加できます。布告バフは手動でチェックする必要があります。"
+      "step4": "都市センターをアップグレードする場合は「先行建物を含む」オプションをチェックできます。",
+      "step5": "ペットバフが無効な場合はペットバフを追加でき、法令バフは手動でチェックする必要があります。"
     },
     "levelGuide": {
       "title": "レベルガイド",
@@ -20,48 +20,56 @@
       "tg2": "TG 2 = Lv. 40",
       "tg3": "TG 3 = Lv. 45",
       "tg4": "TG 4 = Lv. 50",
-      "tg5": "TG 5 = Lv. 55"
+      "tg5": "TG 5 = Lv. 55",
+      "tg6": "TG 6 = Lv. 60",
+      "tg7": "TG 7 = Lv. 65",
+      "tg8": "TG 8 = Lv. 70",
+      "tg9": "TG 9 = Lv. 75",
+      "tg10": "TG 10 = Lv. 80"
     },
     "form": {
       "building": {
         "label": "建物選択",
         "option": {
-          "towncenter": "タウンセンター",
+          "towncenter": "都市センター",
           "embassy": "大使館",
           "command": "司令部",
-          "barracks": "歩兵兵営",
-          "stable": "騎兵兵営",
-          "range": "弓兵射場",
+          "barracks": "歩兵隊",
+          "stable": "騎兵隊",
+          "range": "弓兵隊",
           "academy": "アカデミー",
-          "infirmary": "診療所",
+          "infirmary": "野戦病院",
           "war-academy": "戦争アカデミー"
         }
       },
       "startLevel": { "label": "現在レベル", "placeholder": "現在レベルを入力" },
       "targetLevel": { "label": "目標レベル", "placeholder": "目標レベルを入力" },
       "speedBonus": { "label": "建設速度ボーナス (%)" },
-      "saulBonus": { "label": "サウルスキルボーナス (%) — 建設コストに適用" },
-      "wolfBonus": { "label": "ウルフスキルボーナス (%)" },
-      "positionBonus": { "label": "国王/官職ボーナス (%)" },
-      "doubleTime": { "label": "布告適用（時間20%短縮）" },
-      "includePrereq": { "label": "前提建物を含む" },
-      "actions": { "calculate": "アップグレード計算", "clear": "入力クリア" }
+      "saulBonus": { "label": "サウルスキルボーナス (%) — 建設コスト適用" },
+      "wolfBonus": { "label": "オオカミスキルボーナス (%)" },
+      "positionBonus": { "label": "国王／官職ボーナス (%)" },
+      "doubleTime": { "label": "建設法令適用（時間20%減少）" },
+      "includePrereq": { "label": "先行建物を含む" },
+      "actions": {
+        "calculate": "アップグレード計算",
+        "clear": "アップグレード初期化"
+      }
     },
     "prereq": {
-      "summary": "前提建物レベル（現在のレベル）",
+      "summary": "先行建物レベル（自分の現在レベル）",
       "academy": "アカデミー",
-      "range": "弓兵射場",
-      "stable": "騎兵兵営",
-      "barracks": "歩兵兵営",
+      "range": "弓兵隊",
+      "stable": "騎兵隊",
+      "barracks": "歩兵隊",
       "embassy": "大使館",
-      "note": "* 空欄の場合は0として扱われます。"
+      "note": "* 空欄の場合は0として扱います。"
     },
     "prereqBox": {
-      "title": "前提条件",
-      "empty": "前提条件なし"
+      "title": "先行条件",
+      "empty": "先行条件なし"
     },
     "prereqSummary": {
-      "title": "前提建物の概要",
+      "title": "先行建物まとめ",
       "current": "現在",
       "required": "必要"
     },
@@ -71,17 +79,20 @@
       "totalWithSaul": "総資源消費量（サウル適用）"
     },
     "table": {
-      "title": "詳細",
-      "titleWithPrereq": "詳細（前提条件を含む）",
+      "title": "詳細内訳",
+      "titleWithPrereq": "詳細内訳（先行含む）",
+      "levelNote": "レベル表記はTC1からTG10基準です。",
+      "timeMinuteRemoved": "建設時間の分単位は除外しました。",
       "col": {
         "building": "建物",
         "level": "レベル",
-        "time": "建設時間",
         "bread": "パン",
         "wood": "木材",
         "stone": "石材",
         "iron": "鉄",
-        "truegold": "トゥルーゴールド"
+        "truegold": "純金",
+        "tempered_truegold": "焼入れ純金",
+        "time": "建設時間"
       }
     },
     "common": {
@@ -99,53 +110,54 @@
     },
     "alert": {
       "invalidLevel": "レベル入力が正しくありません。",
-      "targetGtStart": "目標レベルは開始レベルより大きくなければなりません。",
-      "noData": "データがありません。"
+      "targetGtStart": "目標レベルは開始レベルより高くなければなりません。",
+      "noData": "データがありません",
+      "prereqTooHigh": "先行建物レベルは目標レベル以上で入力できません。"
     },
     "error": {
-      "load": "データ読み込み失敗"
+      "load": "データの読み込みに失敗しました"
     }
   },
 
   "trainCalc": {
-    "meta": { "title": "Kingshot 訓練・昇格計算機 | KingshotData" },
-    "title": "Kingshot 訓練・昇格計算機",
+    "meta": { "title": "キングショット訓練・昇級計算機 | KingshotData" },
+    "title": "キングショット訓練・昇級計算機",
     "badge": "加速日数 ↔ 兵力数",
 
     "about": {
-      "title": "何を計算できますか？",
-      "p1": "新規に兵を訓練するか、既存の兵を昇格させるかの判断に役立つよう、兵力数、1人あたりの所要時間、戦力増加、イベントポイント（HoG／KvK（準備）／Governor）を計算します。",
-      "li1": "モードを選択：訓練／昇格。",
-      "li2": "訓練は Lv1–10、昇格は Lv1–9 → Lv10 に対応。",
-      "li3": "訓練速度（%）を入力してください。",
-      "li4": "入力方式を選び、値を入れて「計算」をクリックしてください。",
-      "note": "* 1人あたりの所要時間は訓練速度 0% を前提とし、入力値に応じて自動調整されます。"
+      "title": "何を計算しますか？",
+      "p1": "兵士を新たに訓練するか、既存兵士を昇級するか判断しやすいように、兵力数、1名あたりの所要時間、戦闘力増加、イベントポイント（最強領主／最強王国〈準備戦〉／至高の領主）を計算します。",
+      "li1": "モードを選択してください: 訓練 / 昇級。",
+      "li2": "訓練はLv1〜10、昇級はLv1〜9 → Lv10に対応します。",
+      "li3": "訓練速度(%)を入力してください。",
+      "li4": "入力方式を選び、値を入力してから計算ボタンを押してください。",
+      "note": "* 1名あたりの所要時間は訓練速度0%基準で、入力した訓練速度(%)が自動反映されます。"
     },
 
     "form": {
       "mode": "モード",
-      "fromTier": "現在ティア（from）",
-      "toTier": "目標ティア（to）",
-      "trainSpeed": "訓練速度（%）",
+      "fromTier": "現在ティア (from)",
+      "toTier": "目標ティア (to)",
+      "trainSpeed": "訓練速度 (%)",
       "inputMode": "入力方式",
-      "modeTime": "加速日数 → 兵力数を算出",
+      "modeTime": "加速日数 → 兵力数計算",
       "modeTroops": "兵力数 → 必要加速日数",
-      "baseNote": "基準：1人あたりの所要時間は訓練速度 0% 前提",
-      "speedDays": "加速日数（日）",
-      "count": "兵力数"
+      "baseNote": "基準: 1名あたり所要時間は訓練速度0%基準",
+      "speedDays": "加速日数 (日)",
+      "count": "兵力数 (名)"
     },
 
     "mode": {
-      "training": "訓練",
-      "promotion": "昇格"
+      "training": "訓練 (Training)",
+      "promotion": "昇級 (Promotion)"
     },
 
     "actions": {
-      "calculate": "計算"
+      "calculate": "計算する"
     },
 
     "summary": {
-      "selPrefix": "選択："
+      "selPrefix": "選択:"
     },
 
     "warn": {
@@ -154,7 +166,7 @@
 
     "table": {
       "metric": "指標",
-      "perOne": "1人あたり",
+      "perOne": "1名基準",
       "total": "合計"
     },
 
@@ -168,25 +180,28 @@
     "level": "Lv {n}",
 
     "rows": {
-      "possibleTroops": "可能兵力数（加速日数から）",
-      "hogPoints": "HoGポイント",
-      "kvkPoints": "KvK（準備）ポイント",
-      "govPoints": "Governorポイント",
-      "powerInc": "戦力増加",
-      "timePerOneApplied": "1人あたり所要時間（速度適用後）",
-      "inputTroops": "入力した兵力数",
+      "possibleTroops": "可能兵力数（加速日数基準）",
+      "hogPoints": "最強領主ポイント",
+      "kvkPoints": "最強王国（準備戦）ポイント",
+      "govPoints": "至高の領主ポイント",
+      "powerInc": "戦闘力増加",
+      "timePerOneApplied": "1名あたり所要時間（速度適用）",
+      "inputTroops": "入力兵力数",
       "needAccelTime": "必要加速時間"
     }
   },
 
   "calcHub": {
-    "meta": { "title": "計算機 | KingshotData", "desc": "Kingshot 計算機ハブ" },
+    "meta": {
+      "title": "計算機 | KingshotData",
+      "desc": "キングショット計算機ハブ"
+    },
     "title": "計算機",
     "cards": {
       "building": { "title": "建物計算機" },
-      "gear": { "title": "総督装備計算機" },
-      "charm": { "title": "総督チャーム計算機" },
-      "training": { "title": "訓練・昇格計算機" }
+      "gear": { "title": "領主装備計算機" },
+      "charm": { "title": "領主宝石計算機" },
+      "training": { "title": "兵力訓練計算機" }
     }
   }
 }

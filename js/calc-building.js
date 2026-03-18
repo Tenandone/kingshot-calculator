@@ -15,40 +15,30 @@
   window.__buildingCalculatorUILoaded__ = true;
 
   // ========= 기능 플래그(코어 전달용) =========
-  // - TG 최대치: 8
-  // - 정련순금(tempered truegold) 사용: true
-  // 코어(calculator.js)가 이 값을 읽거나, 아래 훅 호출을 받으면 TG8/정련순금까지 계산 가능.
+  // - TG 최대치: 10
+  // - 담금질 된 순금 사용: true
   var KSD_CALC_FEATURES = {
-    maxTG: 8,
+    maxTG: 10,
     hasTemperedTruegold: true
   };
   window.__KSD_CALC_FEATURES__ = KSD_CALC_FEATURES;
-  window.__KSD_MAX_TG__ = 8;
+  window.__KSD_MAX_TG__ = 10;
   window.__KSD_HAS_TEMPERED_TRUEGOLD__ = true;
 
   // ========= 선택자/키 상수 =========
-  // 기존/신규 페이지 마크업 모두 자동 부트되도록 루트 후보를 넓게 탐색
   var ROOT_SELECTOR = '#calc-ui, #calc-root, [data-calc="buildings"], [data-calc-root]';
 
-  // UI 셀렉트에 주입할 빌딩 옵션 목록 (라벨은 i18n.calc.* 키로 치환)
-  // ✅ barracks에 aliases로 묶어둔 infantry/cavalry/archer를 "선택값"으로도 제공
-  //    - 코어가 alias → slug(barracks)로 매핑하면 그대로 계산됨
+  // JSON slug 그대로 사용
   var BUILDING_OPTIONS = [
-    { value: 'towncenter',  key: 'calc.form.building.option.towncenter' },
-    { value: 'embassy',     key: 'calc.form.building.option.embassy'    },
-    { value: 'academy',     key: 'calc.form.building.option.academy'    },
-    { value: 'command',     key: 'calc.form.building.option.command'    },
-
-    // 병영(공통 slug) + 병종(alias) 선택
-    { value: 'barracks',    key: 'calc.form.building.option.barracks'   },
-    { value: 'infantry',    key: 'calc.form.building.option.infantry'   },
-    { value: 'cavalry',     key: 'calc.form.building.option.cavalry'    },
-    { value: 'archer',      key: 'calc.form.building.option.archer'     },
-
-    { value: 'stable',      key: 'calc.form.building.option.stable'     },
-    { value: 'range',       key: 'calc.form.building.option.range'      },
-    { value: 'infirmary',   key: 'calc.form.building.option.infirmary'  },
-    { value: 'war-academy', key: 'calc.form.building.option.war-academy' }
+    { value: 'towncenter',    key: 'calc.form.building.option.towncenter' },
+    { value: 'embassy',       key: 'calc.form.building.option.embassy' },
+    { value: 'academy',       key: 'calc.form.building.option.academy' },
+    { value: 'commandcenter', key: 'calc.form.building.option.command' },
+    { value: 'barracks',      key: 'calc.form.building.option.barracks' },
+    { value: 'stable',        key: 'calc.form.building.option.stable' },
+    { value: 'range',         key: 'calc.form.building.option.range' },
+    { value: 'infirmary',     key: 'calc.form.building.option.infirmary' },
+    { value: 'waracademy',    key: 'calc.form.building.option.war-academy' }
   ];
 
   // ========= 간단 헬퍼 =========
@@ -56,7 +46,6 @@
   function hasFn(obj, fn) { return !!(obj && typeof obj[fn] === 'function'); }
   function i18n() { return window.I18N || null; }
 
-  // ✅ 현재 언어 읽기(ko면 한글 폴백, 아니면 영어 폴백)
   function getLang() {
     var I = i18n();
     var lng =
@@ -65,35 +54,26 @@
       'en';
     return String(lng || 'en').toLowerCase();
   }
-  function isKO() { return getLang().startsWith('ko'); }
+  function isKO() { return getLang().indexOf('ko') === 0; }
 
-  // 통일된 t() — 키 존재여부까지 확인해서 "진짜 미번역"이면 fallback 사용
   function t(k, fb) {
     var I = i18n();
     try {
       if (I && typeof I.t === 'function') {
-        // ✅ i18next 계열이면 exists()가 있음 → "진짜로 번역 키가 존재하는지" 먼저 확인
-        if (typeof I.exists === 'function') {
-          if (!I.exists(k)) return (fb != null ? fb : k);
-        }
-
+        if (typeof I.exists === 'function' && !I.exists(k)) return (fb != null ? fb : k);
         var txt = I.t(k);
-
-        // ✅ 미해결 키(키 그대로) 또는 빈 값이면 fallback
         if ((txt === k || txt == null || txt === '') && fb != null) return fb;
-
         return txt;
       }
     } catch (e) {}
     return (fb != null ? fb : k);
   }
 
-  // requestAnimationFrame 폴백
   var raf = window.requestAnimationFrame || function (fn) { return setTimeout(fn, 16); };
   var caf = window.cancelAnimationFrame || clearTimeout;
   function nowTime() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
 
-  // ========= i18n 준비(오류 무시) =========
+  // ========= i18n 준비 =========
   function ensureI18NReady(done) {
     try {
       var I = i18n();
@@ -146,7 +126,7 @@
     }
   }
 
-  // ========= core(calculator.js)의 init 노출을 대기 =========
+  // ========= core(calculator.js)의 init 대기 =========
   function waitForCore(timeoutMs, onOk, onFail) {
     var t0 = nowTime();
     (function tick() {
@@ -162,13 +142,15 @@
     })();
   }
 
-  // ========= SPA 렌더 이후 calc 루트를 기다림 =========
+  // ========= SPA 렌더 이후 calc 루트 대기 =========
   function waitForRoot(scope, timeoutMs, onOk, onFail) {
     var sc = scope || document;
     var t0 = nowTime();
+
     function findRoot() {
       try { return sc.querySelector(ROOT_SELECTOR); } catch (e) { return null; }
     }
+
     var found = findRoot();
     if (found) { if (onOk) onOk(found); return; }
 
@@ -183,14 +165,14 @@
     })();
   }
 
-  // ========= UI 라벨/ARIA/i18n 재적용(텍스트와 placeholder만) =========
+  // ========= UI 라벨/ARIA/i18n =========
   function applyI18NLabels() {
     var title = byId('calc-title');
-    if (title) { title.textContent = t('calc.title', '건물 계산기'); }
+    if (title) title.textContent = t('calc.title', '건물 계산기');
 
     var desc = null;
     try { desc = document.querySelector('.calc-desc'); } catch (e) {}
-    if (desc) { desc.textContent = t('calc.desc', '업그레이드에 필요한 자원과 소요 시간을 확인하세요.'); }
+    if (desc) desc.textContent = t('calc.desc', '업그레이드에 필요한 자원과 소요 시간을 확인하세요.');
 
     var labelMap = [
       ['label-building', 'calc.form.building.label',  '건물 선택'],
@@ -203,6 +185,7 @@
       ['label-double',   'calc.form.doubleTime',      '이중법령(시간 20% 감소)'],
       ['label-include',  'calc.form.includePrereq',   '선행 건물 포함']
     ];
+
     for (var i = 0; i < labelMap.length; i++) {
       var el = byId(labelMap[i][0]);
       if (!el) continue;
@@ -213,7 +196,6 @@
       if (!el.getAttribute('aria-label')) el.setAttribute('aria-label', lbl);
     }
 
-    // ✅ 계산하기 / 초기화: ko면 한글, 그 외 언어는 START/RESET 폴백
     var calcBtn = byId('calcBtn');
     if (calcBtn) {
       var fbCalc = isKO() ? '계산하기' : 'START';
@@ -231,7 +213,7 @@
     }
 
     var prereqTitle = byId('prereq-title');
-    if (prereqTitle) { prereqTitle.textContent = t('calc.prereqBox.title', '선행 건물 요구사항'); }
+    if (prereqTitle) prereqTitle.textContent = t('calc.prereqBox.title', '선행 건물 요구사항');
 
     var ph = {
       startLevel:    ['calc.form.placeholder.start',    '현재 레벨'],
@@ -241,6 +223,7 @@
       wolfBonus:     ['calc.form.placeholder.wolf',     '0'],
       positionBonus: ['calc.form.placeholder.position', '0']
     };
+
     for (var id in ph) {
       if (!ph.hasOwnProperty(id)) continue;
       var input = byId(id);
@@ -252,7 +235,7 @@
     }
   }
 
-  // ========= 빌딩 옵션 주입 / 재라벨링(초기 1회) =========
+  // ========= 빌딩 옵션 주입 =========
   function ensureBuildingOptions() {
     var sel = byId('building');
     if (!sel) return;
@@ -278,6 +261,7 @@
     for (i = 0; i < BUILDING_OPTIONS.length; i++) {
       labelMapByValue[BUILDING_OPTIONS[i].value] = t(BUILDING_OPTIONS[i].key, BUILDING_OPTIONS[i].value);
     }
+
     for (i = 0; i < (sel.options ? sel.options.length : 0); i++) {
       o = sel.options[i];
       if (!o) continue;
@@ -289,7 +273,7 @@
     sel.setAttribute('aria-label', t('calc.form.building.label', '건물 선택'));
   }
 
-  // ========= “진입 시 폼 초기화” =========
+  // ========= 진입 시 폼 초기화 =========
   function resetFormToDefaults() {
     var form = byId('calc-form');
     try {
@@ -308,26 +292,29 @@
       if (el1) el1.value = 1;
     }
 
-    var idsZero = ['speedBonus','saulBonus','wolfBonus','positionBonus'];
+    var idsZero = ['speedBonus', 'saulBonus', 'wolfBonus', 'positionBonus'];
     for (i = 0; i < idsZero.length; i++) {
       var el0 = byId(idsZero[i]);
       if (el0) el0.value = 0;
     }
 
-    var idsCheckFalse = ['doubleTime','includePrereq'];
+    var idsCheckFalse = ['doubleTime', 'includePrereq'];
     for (i = 0; i < idsCheckFalse.length; i++) {
       var chk = byId(idsCheckFalse[i]);
       if (chk) chk.checked = false;
     }
 
-    var prereqIds = ['prereqAcademy','prereqRange','prereqStable','prereqBarracks','prereqEmbassy'];
+    var prereqIds = ['prereqAcademy', 'prereqRange', 'prereqStable', 'prereqBarracks', 'prereqEmbassy'];
     for (i = 0; i < prereqIds.length; i++) {
       var pre = byId(prereqIds[i]);
       if (pre) pre.value = '';
     }
 
-    var r = byId('result'); if (r) r.innerHTML = '';
-    var pl = byId('prereq-list'); if (pl) pl.innerHTML = '';
+    var r = byId('result');
+    if (r) r.innerHTML = '';
+
+    var pl = byId('prereq-list');
+    if (pl) pl.innerHTML = '';
 
     var details = byId('prereq-details');
     if (details) {
@@ -338,37 +325,46 @@
     }
   }
 
-  // ========= 언어 재적용(공개 API) =========
+  // ========= 언어 재적용 =========
   var _reapplyRaf = null;
   function reapplyI18N() {
-    if (_reapplyRaf) { try { caf(_reapplyRaf); } catch (e) {} }
+    if (_reapplyRaf) {
+      try { caf(_reapplyRaf); } catch (e) {}
+    }
     _reapplyRaf = raf(function () {
       applyI18NLabels();
       try { ensureBuildingOptions(); } catch (e) {}
+      try {
+        if (typeof window.reapplyCalculatorI18N === 'function') {
+          window.reapplyCalculatorI18N();
+        }
+      } catch (e2) {}
     });
   }
 
-  // ========= 코어에 기능 전달(있으면 호출) =========
+  // ========= 코어에 기능 전달 =========
   function pushFeaturesToCoreIfPossible() {
     try {
-      // 1) KSD.calc 훅이 있으면 호출
       if (window.KSD && window.KSD.calc) {
-        if (typeof window.KSD.calc.setMaxTG === 'function') window.KSD.calc.setMaxTG(8);
+        if (typeof window.KSD.calc.setMaxTG === 'function') window.KSD.calc.setMaxTG(10);
         if (typeof window.KSD.calc.setFeatures === 'function') {
-          window.KSD.calc.setFeatures({ maxTG: 8, hasTemperedTruegold: true });
+          window.KSD.calc.setFeatures({
+            maxTG: 10,
+            hasTemperedTruegold: true
+          });
         }
       }
 
-      // 2) 전역 config 훅이 있으면 세팅
       if (window.CALC_CONFIG && typeof window.CALC_CONFIG === 'object') {
-        window.CALC_CONFIG.maxTG = 8;
+        window.CALC_CONFIG.maxTG = 10;
         window.CALC_CONFIG.hasTemperedTruegold = true;
       }
     } catch (e) {}
   }
 
-  // ========= 부트(멱등 + 재진입시 폼 초기화 지원) =========
+  // ========= 부트 =========
   var _bootedOnce = false;
+
   function boot(scope, opts) {
     if (opts == null) opts = {};
     var resetOnEntry = (opts.resetOnEntry === false) ? false : true;
@@ -376,7 +372,6 @@
     if (_bootedOnce) {
       if (resetOnEntry) resetFormToDefaults();
       pushFeaturesToCoreIfPossible();
-      // ✅ 재진입에서도 라벨 재적용
       reapplyI18N();
       return;
     }
@@ -388,20 +383,18 @@
 
         waitForCore(8000, function () {
           try {
-            // 코어 init 전에 플래그 push
             pushFeaturesToCoreIfPossible();
 
             if (typeof window.initCalculator === 'function') {
               window.initCalculator();
             }
 
-            // init 이후 훅이 생기는 구현도 있으니 한 번 더 push
             pushFeaturesToCoreIfPossible();
-
-            // ✅ 핵심: 코어가 DOM을 다시 그렸을 수 있으니 "init 직후" 다시 번역 재적용
             reapplyI18N();
           } catch (e) {
-            if (window.console && console.warn) console.warn('[calc] initCalculator failed:', e && e.message ? e.message : e);
+            if (window.console && console.warn) {
+              console.warn('[calc] initCalculator failed:', e && e.message ? e.message : e);
+            }
           }
 
           if (resetOnEntry) resetFormToDefaults();
@@ -425,21 +418,22 @@
         }, function () {
           if (resetOnEntry) resetFormToDefaults();
           _bootedOnce = true;
-          if (window.console && console.warn) console.warn('[calc] core not ready — UI labels applied, form reset done');
+          if (window.console && console.warn) {
+            console.warn('[calc] core not ready — UI labels applied, form reset done');
+          }
         });
       });
     }, function () {
-      // 루트가 없으면 이 페이지가 아님 — 조용히 패스
+      // 루트 없으면 조용히 패스
     });
   }
 
   // ========= 자동 부트 =========
-  // ✅ SPA에서도 루트를 기다릴 수 있게 maybe 체크 제거하고 무조건 boot
   document.addEventListener('DOMContentLoaded', function () {
     boot(document, { resetOnEntry: true });
   });
 
-  // ========= 전역 API 노출 =========
+  // ========= 전역 API =========
   window.KSD.buildingUI = window.KSD.buildingUI || {};
   window.KSD.buildingUI.boot = boot;
   window.KSD.buildingUI.reapplyI18N = reapplyI18N;

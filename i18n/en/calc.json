@@ -2,17 +2,17 @@
   "calc": {
     "meta": { "title": "Building Calculator | KingshotData" },
     "title": "Building Calculator",
-    "desc": "Check the resources and time required for upgrades.",
+    "desc": "Check the resources and construction time needed for upgrades.",
     "howto": {
       "title": "How to Use",
-      "step1": "Select the building to upgrade.",
-      "step2": "Enter the current level and target level.",
+      "step1": "Select the building you want to upgrade.",
+      "step2": "Enter your current level and target level.",
       "step3": {
-        "head": "Enter the construction speed bonus.",
-        "help": "Go to Profile → Power screen to check your construction speed bonus. (Includes Saul/Wolf/Research/King & Position bonuses)"
+        "head": "Enter your construction speed bonus.",
+        "help": "You can check your construction speed bonus at the bottom of the Profile → Power screen. (Includes Saul / Wolf / research / king or position bonuses, etc.)"
       },
-      "step4": "If upgrading the Town Center, you can check the \"Include Prerequisite Buildings\" option.",
-      "step5": "If pet buffs are disabled, you can add pet buffs manually. Decree buffs must be checked manually."
+      "step4": "If you are upgrading the Town Center, you can check the \"Include Prerequisites\" option.",
+      "step5": "If pet buffs are inactive, you can add pet buffs separately, and law buffs must be checked manually."
     },
     "levelGuide": {
       "title": "Level Guide",
@@ -20,7 +20,12 @@
       "tg2": "TG 2 = Lv. 40",
       "tg3": "TG 3 = Lv. 45",
       "tg4": "TG 4 = Lv. 50",
-      "tg5": "TG 5 = Lv. 55"
+      "tg5": "TG 5 = Lv. 55",
+      "tg6": "TG 6 = Lv. 60",
+      "tg7": "TG 7 = Lv. 65",
+      "tg8": "TG 8 = Lv. 70",
+      "tg9": "TG 9 = Lv. 75",
+      "tg10": "TG 10 = Lv. 80"
     },
     "form": {
       "building": {
@@ -40,56 +45,62 @@
       "startLevel": { "label": "Current Level", "placeholder": "Enter current level" },
       "targetLevel": { "label": "Target Level", "placeholder": "Enter target level" },
       "speedBonus": { "label": "Construction Speed Bonus (%)" },
-      "saulBonus": { "label": "Saul Skill Bonus (%) — Applies to construction cost" },
+      "saulBonus": { "label": "Saul Skill Bonus (%) — Applied to Construction Cost" },
       "wolfBonus": { "label": "Wolf Skill Bonus (%)" },
-      "positionBonus": { "label": "King/Position Bonus (%)" },
-      "doubleTime": { "label": "Decree Applied (20% time reduction)" },
-      "includePrereq": { "label": "Include Prerequisite Buildings" },
-      "actions": { "calculate": "Calculate Upgrade", "clear": "Clear Form" }
+      "positionBonus": { "label": "King / Position Bonus (%)" },
+      "doubleTime": { "label": "Apply Construction Law (20% Time Reduction)" },
+      "includePrereq": { "label": "Include Prerequisites" },
+      "actions": {
+        "calculate": "Calculate Upgrade",
+        "clear": "Reset Upgrade"
+      }
     },
     "prereq": {
-      "summary": "Prerequisite Building Levels (Your Current Levels)",
+      "summary": "Prerequisite Building Levels (My Current Levels)",
       "academy": "Academy",
       "range": "Range",
       "stable": "Stable",
       "barracks": "Barracks",
       "embassy": "Embassy",
-      "note": "* If left blank, treated as 0."
+      "note": "* If left blank, it will be treated as 0."
     },
     "prereqBox": {
       "title": "Prerequisites",
       "empty": "No prerequisites"
     },
     "prereqSummary": {
-      "title": "Prerequisite Summary",
+      "title": "Prerequisite Building Summary",
       "current": "Current",
       "required": "Required"
     },
     "result": {
       "upgrade": "Upgrade:",
       "time": "Construction Time:",
-      "totalWithSaul": "Total Resources (with Saul applied)"
+      "totalWithSaul": "Total Resource Cost (Saul Applied)"
     },
     "table": {
       "title": "Details",
-      "titleWithPrereq": "Details (with prerequisites)",
+      "titleWithPrereq": "Details (Including Prerequisites)",
+      "levelNote": "Level notation is based on TC1 through TG10.",
+      "timeMinuteRemoved": "Minutes have been removed from construction time.",
       "col": {
         "building": "Building",
         "level": "Level",
-        "time": "Construction Time",
         "bread": "Bread",
         "wood": "Wood",
         "stone": "Stone",
         "iron": "Iron",
-        "truegold": "Truegold"
+        "truegold": "True",
+        "tempered_truegold": "Tempered",
+        "time": "Construction Time"
       }
     },
     "common": {
       "lv": "Lv.",
       "percentZero": "0",
-      "example25": "Ex: 25",
-      "example20": "Ex: 20",
-      "example15": "Ex: 15"
+      "example25": "e.g. 25",
+      "example20": "e.g. 20",
+      "example15": "e.g. 15"
     },
     "time": {
       "daySuffix": "d",
@@ -98,12 +109,13 @@
       "secSuffix": "s"
     },
     "alert": {
-      "invalidLevel": "Invalid level input.",
-      "targetGtStart": "Target level must be higher than start level.",
-      "noData": "No data available."
+      "invalidLevel": "The level input is invalid.",
+      "targetGtStart": "The target level must be higher than the starting level.",
+      "noData": "No data available",
+      "prereqTooHigh": "Prerequisite building levels cannot be entered at or above the target level."
     },
     "error": {
-      "load": "Failed to load data."
+      "load": "Failed to load data"
     }
   },
 
@@ -114,12 +126,12 @@
 
     "about": {
       "title": "What does this calculate?",
-      "p1": "Helps you decide whether to train new troops or promote existing ones by calculating troop count, time per troop, power increase, and event points (HoG / KvK-Preparation / Governor).",
-      "li1": "Choose a mode: Training or Promotion.",
-      "li2": "Training supports Lv1–10; Promotion supports Lv1–9 → Lv10.",
-      "li3": "Enter your Training Speed (%).",
-      "li4": "Choose an input method, enter a value, and click Calculate.",
-      "note": "* Time per troop assumes Training Speed 0% and is adjusted by the value you enter."
+      "p1": "This calculator helps you compare whether it is better to train new troops or promote existing ones by calculating troop count, time per troop, power increase, and event points (Strongest Governor / Kingdom of Power Preparation Stage / Supreme Governor).",
+      "li1": "Choose a mode: Training / Promotion.",
+      "li2": "Training supports Lv1~10, and Promotion supports Lv1~9 → Lv10.",
+      "li3": "Enter your training speed (%).",
+      "li4": "Choose an input mode, enter the value, then press calculate.",
+      "note": "* Time per troop is based on 0% training speed and is automatically adjusted by the training speed (%) you enter."
     },
 
     "form": {
@@ -127,11 +139,11 @@
       "fromTier": "Current Tier (from)",
       "toTier": "Target Tier (to)",
       "trainSpeed": "Training Speed (%)",
-      "inputMode": "Input Method",
-      "modeTime": "Speedup Days → Troop Count",
-      "modeTroops": "Troop Count → Required Speedup Days",
-      "baseNote": "Baseline: time per troop assumes Training Speed 0%",
-      "speedDays": "Speedup Days (days)",
+      "inputMode": "Input Mode",
+      "modeTime": "Speedup Days → Calculate Troop Count",
+      "modeTroops": "Troop Count → Calculate Required Speedup Days",
+      "baseNote": "Base: Time per troop is based on 0% training speed",
+      "speedDays": "Speedup Days",
       "count": "Troop Count"
     },
 
@@ -149,12 +161,12 @@
     },
 
     "warn": {
-      "noData": "No matching data. Please check the tier/mode."
+      "noData": "No matching data found. Please check the tier and mode."
     },
 
     "table": {
       "metric": "Metric",
-      "perOne": "Per Troop",
+      "perOne": "Per 1 Troop",
       "total": "Total"
     },
 
@@ -168,25 +180,28 @@
     "level": "Lv {n}",
 
     "rows": {
-      "possibleTroops": "Possible Troops (from speedup days)",
-      "hogPoints": "HoG Points",
-      "kvkPoints": "KvK (Preparation) Points",
-      "govPoints": "Governor Points",
+      "possibleTroops": "Possible Troop Count (Based on Speedup Days)",
+      "hogPoints": "Strongest Governor Points",
+      "kvkPoints": "Kingdom of Power (Preparation Stage) Points",
+      "govPoints": "Supreme Governor Points",
       "powerInc": "Power Increase",
-      "timePerOneApplied": "Time per Troop (after speed applied)",
-      "inputTroops": "Input Troop Count",
+      "timePerOneApplied": "Time per Troop (Speed Applied)",
+      "inputTroops": "Entered Troop Count",
       "needAccelTime": "Required Speedup Time"
     }
   },
 
   "calcHub": {
-    "meta": { "title": "Calculators | KingshotData", "desc": "Kingshot calculator hub" },
+    "meta": {
+      "title": "Calculators | KingshotData",
+      "desc": "Kingshot calculator hub"
+    },
     "title": "Calculators",
     "cards": {
-      "building": { "title": "Buildings Calculator" },
-      "gear": { "title": "Governor Gear Calculator" },
-      "charm": { "title": "Governor Charms Calculator" },
-      "training": { "title": "Training & Promotion Calculator" }
+      "building": { "title": "Building Calculator" },
+      "gear": { "title": "Chief Gear Calculator" },
+      "charm": { "title": "Chief Charm Calculator" },
+      "training": { "title": "Troop Training Calculator" }
     }
   }
 }
