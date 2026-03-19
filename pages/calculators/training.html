@@ -9,6 +9,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="킹샷 훈련 및 승급에 필요한 가속 일수 기준으로 병력 수, 전투력 증가, 최강영주·최강왕국(준비전)·지고의영주 점수를 계산할 수 있는 도구입니다." />
+  <meta name="i18n-ns" content="common,trainCalc" />
 
   <title data-i18n="trainCalc.meta.title">Kingshot 훈련·승급 계산기</title>
   <link rel="stylesheet" href="/css/kingshot_calc.css?v=20250913">
@@ -108,22 +109,18 @@
       margin-bottom:10px;
     }
 
-    #training-calc .result-caption{
-      margin:0 0 12px;
-      font-size:13px;
-      color:#6b7280;
-    }
-
     #training-calc .input-troops{
       display:none !important;
     }
 
     #training-calc #calcBtn{
+      display:none;
       height:48px;
       font-weight:800;
     }
 
     #training-calc #result{
+      display:none;
       margin-top:0;
     }
 
@@ -369,15 +366,15 @@
   <div id="training-calc">
     <h1>
       <span data-i18n="trainCalc.title">킹샷 훈련·승급 계산기</span>
-      <span class="badge">가속일수 ↔ 병력수</span>
+      <span class="badge" data-i18n="trainCalc.badge">가속일수 ↔ 병력수</span>
     </h1>
 
     <div class="card">
       <h2 style="margin:0 0 8px;font-size:20px;" data-i18n="trainCalc.about.title">계산 안내</h2>
-      <p class="muted" style="margin:0;">
+      <p class="muted" style="margin:0;" data-i18n="trainCalc.about.p1">
         가속 일수 기준으로 훈련 또는 승급 가능한 병력 수와 전투력 증가, 최강영주·최강왕국(준비전)·지고의영주 점수를 계산합니다.
       </p>
-      <div class="muted about-note">
+      <div class="muted about-note" data-i18n="trainCalc.about.note">
         입력한 훈련 속도는 자동 반영되며, 병력 수 입력 방식은 사용하지 않습니다.
       </div>
     </div>
@@ -410,8 +407,8 @@
         <div class="col-12" style="display:none;">
           <label data-i18n="trainCalc.form.inputMode">입력 방식</label>
           <div class="toggle">
-            <span class="pill active" id="modeTime">가속 일수 → 병력 수 계산</span>
-            <span class="pill" id="modeTroops">병력 수 → 필요 가속 일수</span>
+            <span class="pill active" id="modeTime" data-i18n="trainCalc.form.modeTime">가속 일수 → 병력 수 계산</span>
+            <span class="pill" id="modeTroops" data-i18n="trainCalc.form.modeTroops">병력 수 → 필요 가속 일수</span>
           </div>
         </div>
 
@@ -421,7 +418,7 @@
         </div>
 
         <div class="col-3 input-troops">
-          <label for="count">병력 수 (명)</label>
+          <label for="count" data-i18n="trainCalc.form.count">병력 수 (명)</label>
           <input type="number" id="count" value="100000" min="1" step="1" />
         </div>
 
@@ -432,12 +429,11 @@
     </div>
 
     <div id="summary" class="card">
-      <div id="warn" class="warn" style="display:none;">
+      <div id="warn" class="warn" style="display:none;" data-i18n="trainCalc.warn.noData">
         매칭되는 데이터가 없습니다. 티어와 모드를 확인하세요.
       </div>
 
-      
-
+      <div id="result" style="display:none;">
         <table>
           <thead>
             <tr>
@@ -451,11 +447,17 @@
     </div>
   </div>
 
+  <script src="/js/i18n.js?v=20260319"></script>
   <script src="/js/training-calculator.js?v=20260319-final"></script>
   <script>
-    window.initTrainingCalculator({
-      mount: '#training-calc',
-      jsonUrl: '/data/calculators/training.json'
+    window.I18N.init({
+      namespaces: ['common', 'trainCalc'],
+      root: document
+    }).then(function () {
+      window.initTrainingCalculator({
+        mount: '#training-calc',
+        jsonUrl: '/data/calculators/training.json'
+      });
     });
   </script>
 </body>

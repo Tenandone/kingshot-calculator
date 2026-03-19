@@ -1,5 +1,5 @@
 // /js/training-calculator.js
-// v2026-03-19-clean-ui-days-only-final-fixed2
+// v2026-03-19-clean-ui-days-only-final-fixed3
 
 window.initTrainingCalculator = function initTrainingCalculator(opts) {
   'use strict';
@@ -24,6 +24,7 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
   var DATA = null;
 
   function q(sel) { return root.querySelector(sel); }
+
   function fmt(n) {
     if (n == null || isNaN(n)) return '-';
     return Math.round(Number(n)).toLocaleString('ko-KR');
@@ -56,10 +57,6 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
     if (m) parts.push(m + T('trainCalc.units.min', '분'));
     if (s || !parts.length) parts.push(s + T('trainCalc.units.sec', '초'));
     return parts.join(' ');
-  }
-
-  function safeText(el, text) {
-    if (el) el.textContent = text;
   }
 
   function escHtml(str) {
@@ -237,25 +234,11 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
     resultEl.style.display = show ? '' : 'none';
   }
 
-  function getRecordImage(rec, mode, toTier) {
-    if (rec && rec.image) return rec.image;
-    if (rec && rec.icon) return rec.icon;
-    if (rec && rec.img) return rec.img;
-    if (rec && rec.thumbnail) return rec.thumbnail;
-    if (rec && rec.thumb) return rec.thumb;
-
-    var tier = normalizeTierValue(toTier);
-    if (mode === 'training' || mode === 'promotion') {
-      return '/img/troops/t' + tier + '.webp';
-    }
-    return '/img/troops/t11.webp';
-  }
-
   function injectStylesOnce() {
-    if (document.getElementById('kscalc-style-final-v3')) return;
+    if (document.getElementById('kscalc-style-final-v4')) return;
 
     var style = document.createElement('style');
-    style.id = 'kscalc-style-final-v3';
+    style.id = 'kscalc-style-final-v4';
     style.textContent = [
       '#training-calc{max-width:1180px;width:100%;margin:0 auto;}',
       '#training-calc .grid{display:grid !important;grid-template-columns:repeat(4,minmax(0,1fr)) !important;gap:12px !important;max-width:none !important;}',
@@ -265,18 +248,11 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
       '#training-calc #modeTroops{display:none !important;}',
       '#training-calc #modeTime{display:none !important;}',
       '#training-calc .toggle{display:none !important;}',
-      '#training-calc #calcBtn{display:block;width:100%;margin-top:0 !important;}',
+      '#training-calc #calcBtn{display:none !important;}',
       '#training-calc label{display:block;margin:0 0 6px;font-weight:700;color:#374151;}',
       '#training-calc .input-time{display:block !important;margin-top:0 !important;}',
       '#training-calc #fromTierWrap[style*="display: none"]{display:none !important;}',
       '#training-calc .row{grid-column:1 / -1;}',
-
-      '.kscalc-summary-head{display:flex;align-items:center;gap:14px;padding:16px 18px;margin:0 0 14px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;box-shadow:0 4px 14px rgba(0,0,0,.04);}',
-      '.kscalc-summary-head .thumb{width:56px;height:56px;flex:0 0 56px;border-radius:12px;overflow:hidden;background:#f3f4f6;display:flex;align-items:center;justify-content:center;}',
-      '.kscalc-summary-head .thumb img{width:100%;height:100%;object-fit:cover;display:block;}',
-      '.kscalc-summary-head .meta{min-width:0;flex:1;}',
-      '.kscalc-summary-head .title{font-size:18px;font-weight:800;color:#111827;margin:0;line-height:1.35;}',
-      '.kscalc-summary-head .eyebrow,.kscalc-summary-head .desc{display:none !important;}',
 
       '.kscalc-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:0 0 16px;}',
       '.kscalc-card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:14px;box-shadow:0 4px 14px rgba(0,0,0,.04);min-width:0;}',
@@ -302,7 +278,6 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
       '@media (max-width:640px){',
       '  #training-calc .grid{grid-template-columns:1fr !important;}',
       '  .kscalc-cards{grid-template-columns:1fr;}',
-      '  .kscalc-summary-head{align-items:flex-start;}',
       '}'
     ].join('');
     document.head.appendChild(style);
@@ -339,42 +314,16 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
     var result = q('#result');
     if (!result) return;
 
-    var resultHead = q('#kscalc-summary-head');
-    if (!resultHead) {
-      resultHead = document.createElement('div');
-      resultHead.id = 'kscalc-summary-head';
-      resultHead.className = 'kscalc-summary-head';
-      result.insertBefore(resultHead, result.firstChild);
-    }
+    var oldHead = q('#kscalc-summary-head');
+    if (oldHead) oldHead.remove();
 
     var cardGrid = q('#kscalc-cards');
     if (!cardGrid) {
       cardGrid = document.createElement('div');
       cardGrid.id = 'kscalc-cards';
       cardGrid.className = 'kscalc-cards';
-      result.insertBefore(cardGrid, resultHead.nextSibling);
+      result.insertBefore(cardGrid, result.firstChild);
     }
-  }
-
-  function renderSummaryHead(rec, mode, fromTier, toTier) {
-    var head = q('#kscalc-summary-head');
-    if (!head) return;
-
-    var modeLabel = mode === 'training'
-      ? T('trainCalc.mode.training', '훈련')
-      : T('trainCalc.mode.promotion', '승급');
-
-    var title = mode === 'training'
-      ? 'T' + toTier
-      : modeLabel + ' · T' + fromTier + ' → T' + toTier;
-
-    var img = getRecordImage(rec, mode, toTier);
-
-    head.innerHTML =
-      '<div class="thumb"><img src="' + escHtml(img) + '" alt="' + escHtml(title) + '" loading="lazy" decoding="async"></div>' +
-      '<div class="meta">' +
-        '<h3 class="title">' + escHtml(title) + '</h3>' +
-      '</div>';
   }
 
   function renderResultCards(items) {
@@ -409,7 +358,6 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
   var pillTime = q('#modeTime');
   var pillTroops = q('#modeTroops');
 
-  var selText = q('#selText');
   var warnEl = q('#warn');
   var resultEl = q('#result');
   var tbody = q('#tbody');
@@ -483,8 +431,6 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
 
     if (trainSpeed) trainSpeed.value = String(speedPct);
 
-    safeText(selText, '');
-
     var rec = findRecord(mode, fromTier, toTier);
 
     if (!rec || rec.time_sec_per_troop == null) {
@@ -524,47 +470,45 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
 
     var icons = getMetricIcons();
 
-    renderSummaryHead(rec, mode, fromTier, toTier);
-
     renderResultCards([
       {
-        label: '가능 병력 수',
+        label: T('trainCalc.rows.possibleTroops', '가능 병력 수'),
         value: fmt(n),
-        sub: '입력 가속 기준',
+        sub: T('trainCalc.card.byInputDays', '입력 가속 기준'),
         icon: icons.troops
       },
       {
-        label: '최강영주 점수',
+        label: T('trainCalc.rows.hogPoints', '최강영주 점수'),
         value: fmt(hog1 == null ? null : hog1 * n),
         sub: '',
         icon: icons.hog
       },
       {
-        label: '지고의영주 점수',
+        label: T('trainCalc.rows.kvkPoints', '지고의영주 점수'),
         value: fmt(kvk1 == null ? null : kvk1 * n),
         sub: '',
         icon: icons.kvk
       },
       {
-        label: '최강왕국(준비전) 점수',
+        label: T('trainCalc.rows.govPoints', '최강왕국(준비전) 점수'),
         value: fmt(prep1 == null ? null : prep1 * n),
         sub: '',
         icon: icons.prep
       },
       {
-        label: '총 소요 시간',
+        label: T('trainCalc.rows.timePerOneApplied', '총 소요 시간'),
         value: secToDHMS(tN),
         sub: '',
         icon: icons.time
       }
     ]);
 
-    addRow('가능 병력 수', fmt(n), icons.troops);
-    addRow('최강영주 점수', fmt(hog1 == null ? null : hog1 * n), icons.hog);
-    addRow('지고의영주 점수', fmt(kvk1 == null ? null : kvk1 * n), icons.kvk);
-    addRow('최강왕국(준비전) 점수', fmt(prep1 == null ? null : prep1 * n), icons.prep);
-    addRow('총 소요 시간', secToDHMS(tN), icons.time);
-    addRow('전투력 증가', fmt(pow1 == null ? null : pow1 * n), null);
+    addRow(T('trainCalc.rows.possibleTroops', '가능 병력 수'), fmt(n), icons.troops);
+    addRow(T('trainCalc.rows.hogPoints', '최강영주 점수'), fmt(hog1 == null ? null : hog1 * n), icons.hog);
+    addRow(T('trainCalc.rows.kvkPoints', '지고의영주 점수'), fmt(kvk1 == null ? null : kvk1 * n), icons.kvk);
+    addRow(T('trainCalc.rows.govPoints', '최강왕국(준비전) 점수'), fmt(prep1 == null ? null : prep1 * n), icons.prep);
+    addRow(T('trainCalc.rows.timePerOneApplied', '총 소요 시간'), secToDHMS(tN), icons.time);
+    addRow(T('trainCalc.rows.powerInc', '전투력 증가'), fmt(pow1 == null ? null : pow1 * n), null);
   }
 
   function bind() {
