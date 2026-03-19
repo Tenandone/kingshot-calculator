@@ -1,0 +1,1253 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>최강왕국 준비단계 최신 권장표 | 킹샷데이터코리아</title>
+  <meta name="description" content="Kingshot 최강왕국 준비단계 최신 권장표. 건설, 연구, 훈련, 영웅 장비, 영주 장비, 보석, 펫, 채집, 정보 이벤트 기준으로 날짜별 권장 사용처를 한눈에 정리했습니다." />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/kingdom-of-power-prep.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/kingdom-of-power-prep.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/kingdom-of-power-prep.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/kingdom-of-power-prep.html" />
+  <link rel="alternate" hreflang="zh-tw" href="https://kingshotdata.kr/zh-tw/guides/kingdom-of-power-prep.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/kingdom/kingdom.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --soft:#f8fafc;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{
+      width:160px;
+      height:160px;
+      object-fit:contain;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted)}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .jump{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section h2{margin:0 0 10px; font-size:20px}
+    section p{margin:8px 0}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(37,99,235,.18);
+      background:rgba(37,99,235,.05);
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+    .note strong{font-weight:900}
+    .note .note-ico{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      margin-top:2px;
+      color:#2563eb;
+    }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    .mobile-table-preview{
+      display:none;
+      margin-top:12px;
+    }
+
+    .mobile-preview-button{
+      display:block;
+      width:100%;
+      padding:0;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      text-align:inherit;
+      font:inherit;
+      color:inherit;
+    }
+
+    .mobile-preview-note{
+      margin:0 0 10px;
+      font-size:12px;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    .mobile-preview-shell{
+      overflow:hidden;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+    }
+
+    .mobile-preview-stage{
+      transform-origin:top left;
+      pointer-events:none;
+      will-change:transform;
+    }
+
+    .guide-table-wrap{
+      overflow-x:auto;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    .guide-table{
+      width:100%;
+      min-width:980px;
+      border-collapse:collapse;
+      table-layout:fixed;
+      background:#fff;
+    }
+
+    .guide-table th,
+    .guide-table td{
+      border:1px solid #d1d5db;
+      text-align:center;
+      vertical-align:middle;
+      padding:8px 6px;
+      font-size:15px;
+      font-weight:700;
+      height:110px;
+      word-break:keep-all;
+      background:#d9d9d9;
+    }
+
+    .guide-table .top-title{
+      background:#efefef;
+      height:88px;
+      padding:0;
+    }
+
+    .guide-table .side-head{
+      background:#e8e8e8;
+      width:180px;
+    }
+
+    .guide-table .day-head{
+      background:#e8e8e8;
+      height:64px;
+      font-size:26px;
+      font-weight:900;
+    }
+
+    .guide-table .cell-item{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:82px;
+      line-height:1.2;
+      position:relative;
+    }
+
+    .guide-table .cell-item img{
+      width:70px;
+      height:70px;
+      object-fit:contain;
+      display:block;
+    }
+
+    .guide-table .cell-item span{
+      display:block;
+      font-size:14px;
+      font-weight:800;
+      color:#111;
+    }
+
+    .guide-table .cell-item.multi{
+      gap:6px;
+    }
+
+    .guide-table .cell-item.multi .icon-row{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:4px;
+      flex-wrap:nowrap;
+      width:100%;
+    }
+
+    .guide-table .cell-item.multi .icon-row img{
+      width:38px;
+      height:38px;
+      object-fit:contain;
+      display:block;
+      flex:0 0 auto;
+    }
+
+    .soft-icon img,
+    img.soft-icon{
+      opacity:.32;
+      filter:grayscale(18%) brightness(1.08) saturate(.72);
+    }
+
+    .title-grid{
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      width:100%;
+      height:100%;
+      padding:0 18px;
+      gap:12px;
+    }
+
+    .title-main{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      font-size:26px;
+      font-weight:900;
+      letter-spacing:-.4px;
+      color:#111;
+      text-align:center;
+      line-height:1.2;
+    }
+
+    .title-main img{
+      width:44px;
+      height:44px;
+      object-fit:contain;
+      display:block;
+      flex:0 0 auto;
+    }
+
+    .title-spacer{min-width:1px}
+
+    .no-bottom{border-bottom:none !important}
+
+    .castle-cell{
+      background:#d9d9d9;
+      border-left:1px solid #d1d5db;
+      border-right:1px solid #d1d5db;
+      border-top:1px solid #d1d5db;
+      border-bottom:1px solid #d1d5db;
+      padding:0;
+    }
+
+    .castle-wrap{
+      height:100%;
+      min-height:1210px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+      background:#d9d9d9;
+      padding:20px 8px;
+      position:relative;
+    }
+
+    .castle-wrap img{
+      width:110px;
+      height:110px;
+      object-fit:contain;
+      display:block;
+    }
+
+    .brand-cell{
+      padding:0;
+      background:#d9d9d9;
+    }
+
+    .brand-text{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      height:100%;
+      font-size:18px;
+      font-weight:700;
+      color:rgba(17,17,17,.42);
+      letter-spacing:0;
+      line-height:1;
+      user-select:none;
+    }
+
+    .sr-only{
+      position:absolute !important;
+      width:1px !important;
+      height:1px !important;
+      padding:0 !important;
+      margin:-1px !important;
+      overflow:hidden !important;
+      clip:rect(0,0,0,0) !important;
+      white-space:nowrap !important;
+      border:0 !important;
+    }
+
+    .pet-grid{gap:4px}
+    .pet-grid .icon-row{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:4px;
+      width:100%;
+    }
+    .pet-grid .icon-row img{
+      width:30px;
+      height:30px;
+      object-fit:contain;
+      display:block;
+    }
+
+    .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    .fullscreen-modal{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:none;
+      background:rgba(17,24,39,.9);
+    }
+
+    .fullscreen-modal.is-open{
+      display:flex;
+      flex-direction:column;
+    }
+
+    .fullscreen-modal__bar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 14px;
+      background:rgba(255,255,255,.08);
+      backdrop-filter:blur(8px);
+      color:#fff;
+      flex:0 0 auto;
+    }
+
+    .fullscreen-modal__title{
+      font-size:14px;
+      font-weight:800;
+      line-height:1.3;
+    }
+
+    .fullscreen-modal__close{
+      appearance:none;
+      border:0;
+      background:#fff;
+      color:#111827;
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+      line-height:1;
+      flex:0 0 auto;
+    }
+
+    .fullscreen-modal__body{
+      flex:1 1 auto;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      padding:14px;
+    }
+
+    .fullscreen-modal__table-wrap{
+      min-width:980px;
+      background:#fff;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,.22);
+    }
+
+    ul.clean{margin:0; padding-left:18px}
+    ul.clean li{margin:6px 0}
+
+    @media (max-width: 900px){
+      header.top{position:sticky; top:0; z-index:40}
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+      .hero{grid-template-columns:1fr}
+      .hero img{width:120px; height:120px}
+    }
+
+    @media (max-width: 768px){
+      .guide-table-wrap.desktop-table{
+        display:none;
+      }
+
+      .mobile-table-preview{
+        display:block;
+      }
+
+      .guide-table th,
+      .guide-table td{
+        font-size:13px;
+        height:96px;
+        padding:6px 4px;
+      }
+
+      .guide-table .top-title{height:72px}
+      .guide-table .day-head{font-size:20px}
+
+      .guide-table .cell-item img{
+        width:52px;
+        height:52px;
+      }
+
+      .guide-table .cell-item span{font-size:12px}
+
+      .guide-table .cell-item.multi .icon-row{gap:3px}
+
+      .guide-table .cell-item.multi .icon-row img{
+        width:26px;
+        height:26px;
+      }
+
+      .castle-wrap{min-height:1050px}
+      .castle-wrap img{
+        width:72px;
+        height:72px;
+      }
+
+      .brand-text{font-size:14px}
+
+      .title-grid{
+        grid-template-columns:auto 1fr auto;
+        gap:8px;
+        padding:0 10px;
+      }
+
+      .title-main{
+        font-size:18px;
+        gap:6px;
+      }
+
+      .title-main img{
+        width:32px;
+        height:32px;
+      }
+
+      .pet-grid .icon-row img{
+        width:22px;
+        height:22px;
+      }
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:24px}
+      section{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"최강왕국 준비단계 최신 권장표",
+    "inLanguage":"ko",
+    "description":"Kingshot 최강왕국 준비단계 최신 권장표. 날짜별 권장 사용처를 한눈에 정리한 가이드입니다.",
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
+        {"@type":"ListItem","position":2,"name":"가이드","item":"https://kingshotdata.kr/ko/guides/"},
+        {"@type":"ListItem","position":3,"name":"최강왕국 준비단계 최신 권장표","item":"https://kingshotdata.kr/ko/guides/kingdom-of-power-prep.html"}
+      ]
+    }
+  }
+  </script>
+
+  <!-- GA4 -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"></path>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"></path>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/kingdom-of-power-prep.html">EN</a>
+        <a href="/ko/guides/kingdom-of-power-prep.html" aria-current="page">KO</a>
+        <a href="/ja/guides/kingdom-of-power-prep.html">JA</a>
+        <a href="/zh-tw/guides/kingdom-of-power-prep.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">개요</a>
+      <a href="#prep-table">권장표</a>
+      <a href="#related">관련 가이드</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/guides/">가이드</a> <span class="muted">›</span>
+        <span>최강왕국 준비단계 최신 권장표</span>
+      </div>
+
+      <div class="hero">
+        <img src="/img/kingdom/kingdom.webp" alt="최강왕국 준비단계 최신 권장표" loading="eager" fetchpriority="high" width="160" height="160" />
+        <div>
+          <h1>최강왕국 준비단계 최신 권장표</h1>
+          <p class="sub">
+            최강왕국 준비 단계에서 어떤 재화를 어느 날 사용하는 게 좋은지 헷갈리는 분들을 위해 날짜별 권장 사용처를 한눈에 볼 수 있게 정리했습니다.
+          </p>
+          <div class="quote">
+            건설, 연구, 훈련, 영웅 장비, 영주 장비, 보석, 펫, 채집, 정보 이벤트 기준으로 정리했으며, 준비 단계 운영 시 참고용으로 활용하시면 됩니다.
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">개요</a><span class="dotsep">•</span>
+            <a href="#prep-table">권장표</a><span class="dotsep">•</span>
+            <a href="#related">관련 가이드</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <h2>개요</h2>
+        <p>
+          최강왕국은 매칭 단계, 준비 단계, 전투 단계, 야전 치료 단계로 진행됩니다.
+          이 페이지는 그중 <strong>준비 단계 5일 운영</strong>에 집중한 요약 가이드입니다.
+        </p>
+
+        <div class="note" role="note" aria-label="Note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>안내:</strong>
+            세부 점수와 보상은 인게임 이벤트 표기를 우선으로 확인해주세요. 본 표는 실제 운영 시 빠르게 참고하기 위한 권장 정리본입니다.
+          </div>
+        </div>
+
+        <ul class="clean">
+          <li><strong>1일차:</strong> 건설, 영주보석, 정보이벤트 중심</li>
+          <li><strong>2일차:</strong> 연구, 룰렛, 영웅조각, 채집 중심</li>
+          <li><strong>3일차:</strong> 펫강화, 룰렛, 영웅조각, 보석, 정보이벤트 중심</li>
+          <li><strong>4일차:</strong> 훈련, 영웅장비강화, 채집 중심</li>
+          <li><strong>5일차:</strong> 건설, 연구, 훈련, 펫, 영웅장비, 영주장비, 채집, 정보이벤트 종합</li>
+        </ul>
+      </section>
+
+      <section id="prep-table">
+        <span class="anchor"></span>
+        <h2>최강왕국 준비단계 권장표</h2>
+        <p class="muted" style="margin-top:-2px">날짜별 권장 사용처를 한눈에 보는 요약 표</p>
+
+        <div class="mobile-table-preview">
+          <button type="button" class="mobile-preview-button" id="mobile-preview-open" aria-label="최강왕국 준비단계 권장표 확대 보기">
+            <p class="mobile-preview-note">
+              모바일에서는 축소 미리보기로 제공됩니다.<br>
+              표를 누르면 확대해서 볼 수 있으며, 고화질 캡처가 필요하다면 PC에서 확인해주세요.
+            </p>
+            <div class="mobile-preview-shell" id="mobile-preview-shell">
+              <div class="mobile-preview-stage" id="mobile-preview-stage"></div>
+            </div>
+          </button>
+        </div>
+
+        <div class="guide-table-wrap desktop-table" aria-label="최강왕국 준비단계 권장표">
+          <table class="guide-table" id="prep-guide-table">
+            <tr>
+              <th class="top-title" colspan="7">
+                <div class="title-grid">
+                  <div class="title-spacer"></div>
+                  <div class="title-main">
+                    <img src="/img/kingdom/kingdom.webp" alt="최강왕국 로고" />
+                    <span>최강왕국 준비단계 권장 표</span>
+                  </div>
+                </div>
+              </th>
+            </tr>
+
+            <tr>
+              <th class="side-head">
+                <div class="cell-item">
+                  <img src="/img/kingdom/kingshotdata-logo.png" alt="Ten 로고" />
+                  <span class="sr-only">Ten 로고</span>
+                </div>
+              </th>
+              <th class="day-head">Ⅰ</th>
+              <th class="day-head">Ⅱ</th>
+              <th class="day-head">Ⅲ</th>
+              <th class="day-head">Ⅳ</th>
+              <th class="day-head">Ⅴ</th>
+              <th class="day-head">Ⅵ</th>
+            </tr>
+
+            <tr>
+              <th class="side-head no-bottom">
+                <div class="cell-item">
+                  <img src="/img/kingdom/build.webp" alt="건설" />
+                  <span>건설</span>
+                </div>
+              </th>
+              <td class="cell-gray">
+                <div class="cell-item multi">
+                  <div class="icon-row">
+                    <img src="/img/kingdom/truegold.webp" alt="순금" />
+                    <img src="/img/kingdom/tempered.webp" alt="담금질" />
+                    <img src="/img/kingdom/buildspeed.webp" alt="건설가속" />
+                  </div>
+                  <span class="sr-only">1일차 건설 재료: 순금, 담금질, 건설가속</span>
+                </div>
+              </td>
+              <td class="cell-gray">
+                <div class="cell-item soft-icon">
+                  <img src="/img/kingdom/build.webp" alt="건설" />
+                  <span class="sr-only">2일차 건설</span>
+                </div>
+              </td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">3일차 건설 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">4일차 건설 없음</span></div></td>
+              <td class="cell-gray">
+                <div class="cell-item soft-icon">
+                  <img src="/img/kingdom/build.webp" alt="건설" />
+                  <span class="sr-only">5일차 건설</span>
+                </div>
+              </td>
+              <td class="castle-cell" rowspan="11">
+                <div class="castle-wrap">
+                  <img src="/img/kingdom/cattle.webp" alt="6일차 캐슬전" />
+                  <span class="sr-only">6일차 캐슬전</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th class="side-head no-bottom">
+                <div class="cell-item">
+                  <img src="/img/kingdom/tech.webp" alt="연구" />
+                  <span>연구</span>
+                </div>
+              </th>
+              <td class="cell-gray">
+                <div class="cell-item soft-icon">
+                  <img src="/img/kingdom/tech.webp" alt="연구" />
+                  <span class="sr-only">1일차 연구</span>
+                </div>
+              </td>
+              <td class="cell-gray">
+                <div class="cell-item multi">
+                  <div class="icon-row">
+                    <img src="/img/kingdom/dust.webp" alt="연구재료" />
+                    <img src="/img/kingdom/techspeed.webp" alt="연구가속" />
+                  </div>
+                  <span class="sr-only">2일차 연구 재료: 연구재료, 연구가속</span>
+                </div>
+              </td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">3일차 연구 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">4일차 연구 없음</span></div></td>
+              <td class="cell-gray">
+                <div class="cell-item soft-icon">
+                  <img src="/img/kingdom/tech.webp" alt="연구" />
+                  <span class="sr-only">5일차 연구</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th class="side-head no-bottom">
+                <div class="cell-item">
+                  <img src="/img/kingdom/train.webp" alt="훈련" />
+                  <span>훈련</span>
+                </div>
+              </th>
+              <td class="cell-gray">
+                <div class="cell-item soft-icon">
+                  <img src="/img/kingdom/train.webp" alt="훈련" />
+                  <span class="sr-only">1일차 훈련</span>
+                </div>
+              </td>
+              <td class="cell-gray">
+                <div class="cell-item soft-icon">
+                  <img src="/img/kingdom/train.webp" alt="훈련" />
+                  <span class="sr-only">2일차 훈련</span>
+                </div>
+              </td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">3일차 훈련 없음</span></div></td>
+              <td class="cell-gray">
+                <div class="cell-item">
+                  <img src="/img/kingdom/trainspeed.webp" alt="훈련가속" />
+                  <span class="sr-only">4일차 훈련 재료: 훈련가속</span>
+                </div>
+              </td>
+              <td class="cell-gray">
+                <div class="cell-item soft-icon">
+                  <img src="/img/kingdom/train.webp" alt="훈련" />
+                  <span class="sr-only">5일차 훈련</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th class="side-head">
+                <div class="cell-item">
+                  <img src="/img/kingdom/roulette.webp" alt="룰렛" />
+                  <span>룰렛</span>
+                </div>
+              </th>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">1일차 룰렛 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/roulette.webp" alt="룰렛" /><span class="sr-only">2일차 룰렛</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/roulette.webp" alt="룰렛" /><span class="sr-only">3일차 룰렛</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">4일차 룰렛 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">5일차 룰렛 없음</span></div></td>
+            </tr>
+
+            <tr>
+              <th class="side-head">
+                <div class="cell-item">
+                  <img src="/img/kingdom/shard.webp" alt="영웅조각소모" />
+                  <span>영웅조각소모</span>
+                </div>
+              </th>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">1일차 영웅조각소모 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/shard.webp" alt="영웅조각소모" /><span class="sr-only">2일차 영웅조각소모</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/shard.webp" alt="영웅조각소모" /><span class="sr-only">3일차 영웅조각소모</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">4일차 영웅조각소모 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">5일차 영웅조각소모 없음</span></div></td>
+            </tr>
+
+            <tr>
+              <th class="side-head no-bottom">
+                <div class="cell-item">
+                  <img src="/img/kingdom/steel.webp" alt="영웅장비강화" />
+                  <span>영웅장비강화</span>
+                </div>
+              </th>
+              <td class="brand-cell" colspan="3">
+                <div class="brand-text">kingshotdata.kr</div>
+              </td>
+              <td class="cell-gray">
+                <div class="cell-item multi">
+                  <div class="icon-row">
+                    <img src="/img/kingdom/forgehammer.webp" alt="망치" />
+                    <img src="/img/kingdom/mithri.webp" alt="미스릴" />
+                    <img src="/img/kingdom/widget.webp" alt="전용무기" />
+                  </div>
+                  <span class="sr-only">4일차 영웅장비강화 재료: 망치, 미스릴, 전용무기</span>
+                </div>
+              </td>
+              <td class="cell-gray">
+                <div class="cell-item multi">
+                  <div class="icon-row">
+                    <img src="/img/kingdom/forgehammer.webp" alt="망치" />
+                    <img src="/img/kingdom/mithri.webp" alt="미스릴" />
+                    <img src="/img/kingdom/widget.webp" alt="전용무기" />
+                  </div>
+                  <span class="sr-only">5일차 영웅장비강화 재료: 망치, 미스릴, 전용무기</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th class="side-head no-bottom">
+                <div class="cell-item">
+                  <img src="/img/kingdom/take.webp" alt="채집" />
+                  <span>채집</span>
+                </div>
+              </th>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">1일차 채집 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/take.webp" alt="채집" /><span class="sr-only">2일차 채집</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">3일차 채집 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/take.webp" alt="채집" /><span class="sr-only">4일차 채집</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/take.webp" alt="채집" /><span class="sr-only">5일차 채집</span></div></td>
+            </tr>
+
+            <tr>
+              <th class="side-head">
+                <div class="cell-item">
+                  <img src="/img/kingdom/pet.webp" alt="펫강화" />
+                  <span>펫강화</span>
+                </div>
+              </th>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">1일차 펫강화 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">2일차 펫강화 없음</span></div></td>
+              <td class="cell-gray">
+                <div class="cell-item multi pet-grid">
+                  <div class="icon-row">
+                    <img src="/img/kingdom/pet1.webp" alt="펫 재료 1" />
+                    <img src="/img/kingdom/pet2.webp" alt="펫 재료 2" />
+                  </div>
+                  <div class="icon-row">
+                    <img src="/img/kingdom/pet3.webp" alt="펫 재료 3" />
+                    <img src="/img/kingdom/pet4.webp" alt="펫 재료 4" />
+                  </div>
+                  <span class="sr-only">3일차 펫강화 재료: 펫 재료 1, 펫 재료 2, 펫 재료 3, 펫 재료 4</span>
+                </div>
+              </td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">4일차 펫강화 없음</span></div></td>
+              <td class="cell-gray">
+                <div class="cell-item multi pet-grid">
+                  <div class="icon-row">
+                    <img src="/img/kingdom/pet1.webp" alt="펫 재료 1" />
+                    <img src="/img/kingdom/pet2.webp" alt="펫 재료 2" />
+                  </div>
+                  <div class="icon-row">
+                    <img src="/img/kingdom/pet3.webp" alt="펫 재료 3" />
+                    <img src="/img/kingdom/pet4.webp" alt="펫 재료 4" />
+                  </div>
+                  <span class="sr-only">5일차 펫강화 재료: 펫 재료 1, 펫 재료 2, 펫 재료 3, 펫 재료 4</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th class="side-head">
+                <div class="cell-item">
+                  <img src="/img/kingdom/gear.webp" alt="영주장비" />
+                  <span>영주장비</span>
+                </div>
+              </th>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">1일차 영주장비 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">2일차 영주장비 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">3일차 영주장비 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">4일차 영주장비 없음</span></div></td>
+              <td class="cell-gray">
+                <div class="cell-item multi">
+                  <div class="icon-row">
+                    <img src="/img/kingdom/vision.webp" alt="설계도" />
+                    <img src="/img/kingdom/threads.webp" alt="실" />
+                    <img src="/img/kingdom/satin.webp" alt="비단" />
+                  </div>
+                  <span class="sr-only">5일차 영주장비 재료: 설계도, 실, 비단</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th class="side-head no-bottom">
+                <div class="cell-item">
+                  <img src="/img/kingdom/charm.webp" alt="영주보석" />
+                  <span>영주보석</span>
+                </div>
+              </th>
+              <td class="cell-gray">
+                <div class="cell-item multi">
+                  <div class="icon-row">
+                    <img src="/img/kingdom/charmdesign.webp" alt="보석 설계도" />
+                    <img src="/img/kingdom/charmguide.webp" alt="보석 가이드" />
+                  </div>
+                  <span class="sr-only">1일차 영주보석 재료: 보석 설계도, 보석 가이드</span>
+                </div>
+              </td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">2일차 영주보석 없음</span></div></td>
+              <td class="cell-gray">
+                <div class="cell-item multi">
+                  <div class="icon-row">
+                    <img src="/img/kingdom/charmdesign.webp" alt="보석 설계도" />
+                    <img src="/img/kingdom/charmguide.webp" alt="보석 가이드" />
+                  </div>
+                  <span class="sr-only">3일차 영주보석 재료: 보석 설계도, 보석 가이드</span>
+                </div>
+              </td>
+              <td class="cell-gray">
+                <div class="cell-item multi">
+                  <div class="icon-row">
+                    <img src="/img/kingdom/charmdesign.webp" alt="보석 설계도" />
+                    <img src="/img/kingdom/charmguide.webp" alt="보석 가이드" />
+                  </div>
+                  <span class="sr-only">4일차 영주보석 재료: 보석 설계도, 보석 가이드</span>
+                </div>
+              </td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">5일차 영주보석 없음</span></div></td>
+            </tr>
+
+            <tr>
+              <th class="side-head">
+                <div class="cell-item">
+                  <img src="/img/kingdom/intel.webp" alt="정보이벤트" />
+                  <span>정보이벤트</span>
+                </div>
+              </th>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/intel.webp" alt="정보이벤트" /><span class="sr-only">1일차 정보이벤트</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">2일차 정보이벤트 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/intel.webp" alt="정보이벤트" /><span class="sr-only">3일차 정보이벤트</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">4일차 정보이벤트 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/intel.webp" alt="정보이벤트" /><span class="sr-only">5일차 정보이벤트</span></div></td>
+            </tr>
+
+            <tr>
+              <th class="side-head">
+                <div class="cell-item">
+                  <img src="/img/kingdom/king.webp" alt="국왕버프" />
+                  <span>국왕버프</span>
+                </div>
+              </th>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/kingbuild.webp" alt="건설" /><span class="sr-only">1일차 국왕버프 건설</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/kingtech.webp" alt="연구" /><span class="sr-only">2일차 국왕버프 연구</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">3일차 국왕버프 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/kingtrain.webp" alt="훈련" /><span class="sr-only">4일차 국왕버프 훈련</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><span class="sr-only">5일차 국왕버프 없음</span></div></td>
+              <td class="cell-gray"><div class="cell-item"><img src="/img/kingdom/kingbuff.webp" alt="치료" /><span class="sr-only">6일차 국왕버프 치료</span></div></td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="related">
+        <h2>관련 가이드</h2>
+        <div class="related">
+          <a class="pill" href="/ko/guides/server-timeline.html">서버 타임라인</a>
+          <a class="pill" href="/ko/guides/transfer.html">왕국 이민</a>
+          <a class="pill" href="/ko/guides/topup-guide.html">충전 가이드</a>
+          <a class="pill" href="/ko/guides/kingshot-ruins-tip.html">사라진 유적 공략</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="fullscreen-modal" id="table-modal" aria-hidden="true">
+    <div class="fullscreen-modal__bar">
+      <div class="fullscreen-modal__title">최강왕국 준비단계 권장표 확대 보기</div>
+      <button type="button" class="fullscreen-modal__close" id="table-modal-close" aria-label="닫기">닫기</button>
+    </div>
+    <div class="fullscreen-modal__body">
+      <div class="fullscreen-modal__table-wrap" id="table-modal-content"></div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function setupMobilePreview(){
+        var shell = document.getElementById('mobile-preview-shell');
+        var stage = document.getElementById('mobile-preview-stage');
+        var sourceTable = document.getElementById('prep-guide-table');
+        if(!shell || !stage || !sourceTable) return;
+
+        if(window.innerWidth > 768){
+          stage.innerHTML = '';
+          shell.style.height = '';
+          return;
+        }
+
+        stage.innerHTML = '';
+        var clone = sourceTable.cloneNode(true);
+        clone.removeAttribute('id');
+        clone.setAttribute('aria-hidden', 'true');
+        stage.appendChild(clone);
+
+        var baseWidth = clone.offsetWidth || 980;
+        var shellWidth = shell.clientWidth || (window.innerWidth - 28);
+        var scale = Math.min(shellWidth / baseWidth, 1);
+        if(scale < 0.28) scale = 0.28;
+
+        stage.style.transform = 'scale(' + scale + ')';
+        stage.style.width = baseWidth + 'px';
+        shell.style.height = Math.ceil(clone.offsetHeight * scale) + 'px';
+      }
+
+      function openTableModal(){
+        var modal = document.getElementById('table-modal');
+        var content = document.getElementById('table-modal-content');
+        var sourceTable = document.getElementById('prep-guide-table');
+        if(!modal || !content || !sourceTable) return;
+
+        content.innerHTML = '';
+        var clone = sourceTable.cloneNode(true);
+        clone.removeAttribute('id');
+        clone.setAttribute('aria-hidden', 'true');
+        content.appendChild(clone);
+
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeTableModal(){
+        var modal = document.getElementById('table-modal');
+        var content = document.getElementById('table-modal-content');
+        if(!modal || !content) return;
+
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        content.innerHTML = '';
+        document.body.style.overflow = '';
+      }
+
+      function bindModalEvents(){
+        var openBtn = document.getElementById('mobile-preview-open');
+        var closeBtn = document.getElementById('table-modal-close');
+        var modal = document.getElementById('table-modal');
+
+        if(openBtn){
+          openBtn.addEventListener('click', function(){
+            if(window.innerWidth <= 768){
+              openTableModal();
+            }
+          });
+        }
+
+        if(closeBtn){
+          closeBtn.addEventListener('click', closeTableModal);
+        }
+
+        if(modal){
+          modal.addEventListener('click', function(e){
+            if(e.target === modal){
+              closeTableModal();
+            }
+          });
+        }
+
+        document.addEventListener('keydown', function(e){
+          if(e.key === 'Escape'){
+            closeTableModal();
+          }
+        });
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if(mqMobile && mqMobile.addEventListener){
+          mqMobile.addEventListener('change', function(){
+            setStickyTop();
+            setupMobilePreview();
+            closeTableModal();
+          });
+        }else if(mqMobile && mqMobile.addListener){
+          mqMobile.addListener(function(){
+            setStickyTop();
+            setupMobilePreview();
+            closeTableModal();
+          });
+        }
+
+        if(window.ResizeObserver){
+          var ro = new ResizeObserver(function(){
+            setStickyTop();
+            setupMobilePreview();
+          });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          var shell = document.getElementById('mobile-preview-shell');
+          if(header) ro.observe(header);
+          if(tabs) ro.observe(tabs);
+          if(shell) ro.observe(shell);
+        }
+
+        window.addEventListener('load', function(){
+          setStickyTop();
+          setupMobilePreview();
+        });
+        window.addEventListener('resize', function(){
+          setStickyTop();
+          setupMobilePreview();
+        });
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', function(){
+          initStickyObservers();
+          setupMobilePreview();
+          bindModalEvents();
+        });
+      }else{
+        initStickyObservers();
+        setupMobilePreview();
+        bindModalEvents();
+      }
+    })();
+  </script>
+</body>
+</html>
