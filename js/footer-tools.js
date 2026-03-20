@@ -93,20 +93,88 @@
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4c-4.97 0-9 3.13-9 7 0 2.19 1.29 4.15 3.31 5.44l-.73 3.45c-.09.43.38.77.77.57l4.02-2.18c.53.07 1.07.11 1.63.11 4.97 0 9-3.13 9-7s-4.03-7-9-7z"/></svg>';
   }
 
+  function parseExpiryMs(c) {
+    if (!c) return null;
+
+    var expiresAt = String(c.expiresAt || '').trim();
+    if (expiresAt) {
+      var ts = Date.parse(expiresAt);
+      if (Number.isFinite(ts)) return ts;
+    }
+
+    var until = String(c.until || '').trim();
+    if (until) {
+      if (isForever(until)) return Infinity;
+
+      var p = until.split('-');
+      if (p.length === 3) {
+        var y = p[0];
+        var m = String(p[1]).padStart(2, '0');
+        var d = String(p[2]).padStart(2, '0');
+        var ts2 = Date.parse(y + '-' + m + '-' + d + 'T23:59:59Z');
+        if (Number.isFinite(ts2)) return ts2;
+      }
+
+      var ts3 = Date.parse(until);
+      if (Number.isFinite(ts3)) return ts3;
+    }
+
+    return null;
+  }
+
+  function parseStartMs(c) {
+    if (!c) return null;
+
+    var startAt = String(c.startAt || '').trim();
+    if (!startAt) return null;
+
+    var ts = Date.parse(startAt);
+    return Number.isFinite(ts) ? ts : null;
+  }
+
+  function isActiveCoupon(c, nowMs) {
+    if (!c || !c.code) return false;
+
+    var expMs = parseExpiryMs(c);
+    if (expMs == null) return false;
+    if (expMs !== Infinity && nowMs >= expMs) return false;
+
+    var startMs = parseStartMs(c);
+    if (startMs != null && nowMs < startMs) return false;
+
+    return true;
+  }
+
   async function fetchCoupons(url) {
     try {
       var res = await fetch(url, { cache: 'no-store' });
       if (!res.ok) throw 0;
+
       var data = await res.json();
-      return Array.isArray(data && data.coupons) ? data.coupons.slice(0, 3) : [];
+      var list = Array.isArray(data && data.coupons) ? data.coupons : [];
+      var nowMs = Date.now();
+
+      return list
+        .filter(function (c) {
+          return isActiveCoupon(c, nowMs);
+        })
+        .sort(function (a, b) {
+          var aMs = parseExpiryMs(a);
+          var bMs = parseExpiryMs(b);
+
+          if (aMs === Infinity && bMs === Infinity) return 0;
+          if (aMs === Infinity) return 1;
+          if (bMs === Infinity) return -1;
+          if (aMs == null && bMs == null) return 0;
+          if (aMs == null) return 1;
+          if (bMs == null) return -1;
+
+          return aMs - bMs;
+        })
+        .slice(0, 3);
     } catch (_e) {
       return [];
     }
-  }
-
-  function isExpiredUTC(until) {
-    if (isForever(until)) return false;
-    return new Date() >= new Date(String(until).trim() + 'T00:00:00Z');
   }
 
   function getGiftLabel(lang) {
@@ -135,6 +203,32 @@
     return 'https://discord.gg/vgzASAwx';
   }
 
+  function getCouponDisplayDate(c) {
+    if (!c) return '';
+
+    if (c.until != null && String(c.until).trim()) {
+      return fmtDate(c.until);
+    }
+
+    if (c.expiresAt != null && String(c.expiresAt).trim()) {
+      try {
+        var lang = getLangSafe();
+        var d = new Date(String(c.expiresAt).trim());
+        if (!isNaN(d)) {
+          return new Intl.DateTimeFormat(lang, {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            timeZone: 'UTC'
+          }).format(d);
+        }
+      } catch (_e) {}
+      return String(c.expiresAt).trim();
+    }
+
+    return foreverText();
+  }
+
   async function renderInto(container, opts) {
     opts = opts || {};
     if (!container) return;
@@ -161,10 +255,10 @@
     } else {
       coupons.forEach(function (c) {
         var d = document.createElement('div');
-        d.className = 'footer-coupon' + (isExpiredUTC(c.until) ? ' expired' : '');
+        d.className = 'footer-coupon';
         d.innerHTML =
           '<span class="code">' + escapeHtml(c.code) + '</span>' +
-          '<span class="until">' + escapeHtml(fmtDate(c.until)) + '</span>';
+          '<span class="until">' + escapeHtml(getCouponDisplayDate(c)) + '</span>';
         couponWrap.appendChild(d);
       });
     }
