@@ -145,6 +145,80 @@
     return true;
   }
 
+  function isExpiredCoupon(c, nowMs) {
+    if (!c || !c.code) return false;
+
+    var expMs = parseExpiryMs(c);
+    if (expMs == null || expMs === Infinity) return false;
+
+    return nowMs >= expMs;
+  }
+
+  function getStatusIcon(c, nowMs) {
+    if (isActiveCoupon(c, nowMs)) return '🟢';
+    return '⚫';
+  }
+
+  function isPermanentCoupon(c) {
+    if (!c) return false;
+    if (isForever(c.until)) return true;
+    if (isForever(c.expiresAt)) return true;
+    return false;
+  }
+
+  function getCouponDisplayDate(c) {
+    if (!c) return '';
+
+    if (isPermanentCoupon(c)) return '♾️';
+
+    if (c.until != null && String(c.until).trim()) {
+      return fmtDate(c.until);
+    }
+
+    if (c.expiresAt != null && String(c.expiresAt).trim()) {
+      try {
+        var lang = getLangSafe();
+        var d = new Date(String(c.expiresAt).trim());
+        if (!isNaN(d)) {
+          return new Intl.DateTimeFormat(lang, {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            timeZone: 'UTC'
+          }).format(d);
+        }
+      } catch (_e) {}
+      return String(c.expiresAt).trim();
+    }
+
+    return '';
+  }
+
+  function sortActiveCoupons(a, b) {
+    var aMs = parseExpiryMs(a);
+    var bMs = parseExpiryMs(b);
+
+    if (aMs === Infinity && bMs === Infinity) return 0;
+    if (aMs === Infinity) return 1;
+    if (bMs === Infinity) return -1;
+    if (aMs == null && bMs == null) return 0;
+    if (aMs == null) return 1;
+    if (bMs == null) return -1;
+
+    return aMs - bMs;
+  }
+
+  function sortExpiredCoupons(a, b) {
+    var aMs = parseExpiryMs(a);
+    var bMs = parseExpiryMs(b);
+
+    if (aMs == null && bMs == null) return 0;
+    if (aMs == null) return 1;
+    if (bMs == null) return -1;
+
+    return bMs - aMs;
+  }
+
   async function fetchCoupons(url) {
     try {
       var res = await fetch(url, { cache: 'no-store' });
@@ -154,24 +228,19 @@
       var list = Array.isArray(data && data.coupons) ? data.coupons : [];
       var nowMs = Date.now();
 
-      return list
+      var active = list
         .filter(function (c) {
           return isActiveCoupon(c, nowMs);
         })
-        .sort(function (a, b) {
-          var aMs = parseExpiryMs(a);
-          var bMs = parseExpiryMs(b);
+        .sort(sortActiveCoupons);
 
-          if (aMs === Infinity && bMs === Infinity) return 0;
-          if (aMs === Infinity) return 1;
-          if (bMs === Infinity) return -1;
-          if (aMs == null && bMs == null) return 0;
-          if (aMs == null) return 1;
-          if (bMs == null) return -1;
-
-          return aMs - bMs;
+      var expired = list
+        .filter(function (c) {
+          return isExpiredCoupon(c, nowMs);
         })
-        .slice(0, 3);
+        .sort(sortExpiredCoupons);
+
+      return active.concat(expired).slice(0, 3);
     } catch (_e) {
       return [];
     }
@@ -203,32 +272,6 @@
     return 'https://discord.gg/vgzASAwx';
   }
 
-  function getCouponDisplayDate(c) {
-    if (!c) return '';
-
-    if (c.until != null && String(c.until).trim()) {
-      return fmtDate(c.until);
-    }
-
-    if (c.expiresAt != null && String(c.expiresAt).trim()) {
-      try {
-        var lang = getLangSafe();
-        var d = new Date(String(c.expiresAt).trim());
-        if (!isNaN(d)) {
-          return new Intl.DateTimeFormat(lang, {
-            year: 'numeric',
-            month: 'short',
-            day: '2-digit',
-            timeZone: 'UTC'
-          }).format(d);
-        }
-      } catch (_e) {}
-      return String(c.expiresAt).trim();
-    }
-
-    return foreverText();
-  }
-
   async function renderInto(container, opts) {
     opts = opts || {};
     if (!container) return;
@@ -246,19 +289,31 @@
     couponWrap.className = 'footer-coupons';
 
     var coupons = await fetchCoupons('/data/coupons.json?v=' + Date.now());
+    var nowMs = Date.now();
 
     if (!coupons.length) {
       var empty = document.createElement('div');
       empty.className = 'empty';
-      empty.textContent = t('footer.coupons.empty', 'No active coupons at the moment.');
+      empty.textContent = t('footer.coupons.empty', 'No coupons');
       couponWrap.appendChild(empty);
     } else {
       coupons.forEach(function (c) {
+        var statusIcon = getStatusIcon(c, nowMs);
+        var dateText = getCouponDisplayDate(c);
+        var permanentMark = isPermanentCoupon(c) ? ' ♾️' : '';
+        var isActive = isActiveCoupon(c, nowMs);
+
         var d = document.createElement('div');
-        d.className = 'footer-coupon';
+        d.className = 'footer-coupon' + (isActive ? ' is-active' : ' is-expired');
+
         d.innerHTML =
-          '<span class="code">' + escapeHtml(c.code) + '</span>' +
-          '<span class="until">' + escapeHtml(getCouponDisplayDate(c)) + '</span>';
+          '<span class="code">' +
+            escapeHtml(statusIcon + ' ' + c.code + permanentMark) +
+          '</span>' +
+          (dateText
+            ? '<span class="until">' + escapeHtml(dateText) + '</span>'
+            : '');
+
         couponWrap.appendChild(d);
       });
     }
