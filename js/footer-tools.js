@@ -85,8 +85,12 @@
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v8a2 2 0 0 1-2 2h-5v-10h7zM11 22H6a2 2 0 0 1-2-2v-8h7v10zM21 8h-3.17A3 3 0 1 0 12 6a3 3 0 1 0-5.83 2H3a1 1 0 0 0 0 2h18a1 1 0 1 0 0-2Z"/></svg>';
   }
 
-  function iconBubble() {
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C7.03 3 3 6.13 3 10c0 2.19 1.29 4.15 3.31 5.44L5.6 20.5c-.08.44.39.77.78.56l4.33-2.38c.42.05.85.08 1.29.08 4.97 0 9-3.13 9-7s-4.03-7-9-7z"/></svg>';
+  function iconDiscord() {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 4.37A19.8 19.8 0 0 0 15.4 3a13.7 13.7 0 0 0-.63 1.3 18.4 18.4 0 0 0-5.54 0A13.7 13.7 0 0 0 8.6 3a19.8 19.8 0 0 0-4.9 1.37C.58 9.08-.26 13.67.16 18.2A19.9 19.9 0 0 0 6.2 21a14.7 14.7 0 0 0 1.3-2.12 12.9 12.9 0 0 1-2.04-.98c.17-.13.33-.27.49-.41a14.2 14.2 0 0 0 12.1 0c.16.14.32.28.49.41-.65.39-1.34.72-2.04.98.38.73.81 1.43 1.3 2.12a19.9 19.9 0 0 0 6.04-2.8c.5-5.24-.86-9.8-3.54-13.83ZM8.68 15.47c-1.18 0-2.15-1.08-2.15-2.4s.95-2.4 2.15-2.4c1.21 0 2.17 1.09 2.15 2.4 0 1.32-.95 2.4-2.15 2.4Zm6.64 0c-1.18 0-2.15-1.08-2.15-2.4s.95-2.4 2.15-2.4c1.21 0 2.17 1.09 2.15 2.4 0 1.32-.94 2.4-2.15 2.4Z"/></svg>';
+  }
+
+  function iconKakao() {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4c-4.97 0-9 3.13-9 7 0 2.19 1.29 4.15 3.31 5.44l-.73 3.45c-.09.43.38.77.77.57l4.02-2.18c.53.07 1.07.11 1.63.11 4.97 0 9-3.13 9-7s-4.03-7-9-7z"/></svg>';
   }
 
   async function fetchCoupons(url) {
@@ -113,6 +117,10 @@
   function getCommunityLabel(lang) {
     if (lang === 'ko') return '카카오톡';
     return 'Discord';
+  }
+
+  function getCommunityIcon(lang) {
+    return lang === 'ko' ? iconKakao() : iconDiscord();
   }
 
   function getGiftGuideHref(lang) {
@@ -169,7 +177,7 @@
         '<strong>' + escapeHtml(getGiftLabel(lang)) + '</strong>' +
       '</a>' +
       '<a class="footer-cta footer-cta-community" href="' + getCommunityHref(lang) + '" target="_blank" rel="noopener noreferrer">' +
-        iconBubble() +
+        getCommunityIcon(lang) +
         '<strong>' + escapeHtml(getCommunityLabel(lang)) + '</strong>' +
       '</a>';
 
