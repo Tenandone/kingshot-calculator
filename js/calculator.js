@@ -808,7 +808,7 @@
     el = document.createElement('span');
     el.id = id;
     el.className = 'ks-calc-levelhint is-empty';
-    el.textContent = 'TC1';
+    el.textContent = '-';
 
     if (inputEl.parentNode) {
       if (inputEl.nextSibling) {
@@ -826,11 +826,14 @@
     if (!inputEl || !hintEl) return;
 
     const lv = labelToLevelNumber(inputEl.value);
-    const label = formatLevelLabel(lv || 1) || 'TC1';
-    hintEl.textContent = label;
 
-    if (lv > 0) hintEl.classList.remove('is-empty');
-    else hintEl.classList.add('is-empty');
+    if (lv > 0) {
+      hintEl.textContent = formatLevelLabel(lv) || 'TC1';
+      hintEl.classList.remove('is-empty');
+    } else {
+      hintEl.textContent = '-';
+      hintEl.classList.add('is-empty');
+    }
   }
 
   function updateAllLevelHints() {
@@ -980,7 +983,11 @@
   }
 
   function clampPrereqInputs(targetLevel) {
-    const maxLv = Math.max(PREREQ_MIN_LV, Math.max(1, Number(targetLevel) || 1) - 1);
+    const normalizedTarget = Number(targetLevel) || 0;
+    const maxLv = normalizedTarget > 0
+      ? Math.max(PREREQ_MIN_LV, normalizedTarget - 1)
+      : MAX_LV;
+
     const ids = ['prereqAcademy', 'prereqRange', 'prereqStable', 'prereqBarracks', 'prereqEmbassy'];
 
     ids.forEach(function (id) {
@@ -990,7 +997,7 @@
       try { el.setAttribute('max', String(maxLv)); } catch (_) {}
 
       const raw = labelToLevelNumber(el.value);
-      if (raw > maxLv) {
+      if (raw > 0 && raw > maxLv) {
         el.value = String(maxLv);
       }
     });
@@ -1336,25 +1343,28 @@
     function refreshPrereqUI() {
       const uiKey = normalizeUiKey(buildingEl.value);
 
-      const start = clampLv(startEl.value || 1);
-      const to = clampLv(targetEl.value || 1);
-      startEl.value = String(start);
-      targetEl.value = String(to);
+      // 모바일에서는 숫자 입력 중 빈 문자열 상태가 잠깐 생길 수 있으므로
+      // input 단계에서 값을 강제로 1로 되돌리지 않는다.
+      const rawStart = labelToLevelNumber(startEl.value);
+      const rawTarget = labelToLevelNumber(targetEl.value);
+
+      const start = rawStart > 0 ? clampLv(rawStart) : 0;
+      const to = rawTarget > 0 ? clampLv(rawTarget) : 0;
 
       updateAllLevelHints();
-      clampPrereqInputs(to);
+      clampPrereqInputs(to > 0 ? to : 0);
 
       const dataKey = uiKey;
+      const ul = document.getElementById('prereq-list');
 
-      if (to > start) {
+      if (start > 0 && to > 0 && to > start) {
         renderPrereqBox(dataKey, start, to);
-      } else {
-        const ul = document.getElementById('prereq-list');
-        if (ul) ul.innerHTML = '';
+      } else if (ul) {
+        ul.innerHTML = '';
       }
 
       const inc = incEl ? incEl.checked : false;
-      syncPrereqDetailsVisibility(Boolean(inc && to > start));
+      syncPrereqDetailsVisibility(Boolean(inc && start > 0 && to > 0 && to > start));
     }
 
     window.__calcRefreshPrereqUI = refreshPrereqUI;
@@ -1372,17 +1382,17 @@
       if (!el) return;
 
       bindOnce(el, 'input', function () {
-        const target = clampLv(targetEl.value || 1);
-        const maxLv = Math.max(PREREQ_MIN_LV, target - 1);
+        const rawTarget = labelToLevelNumber(targetEl.value);
+        const maxLv = rawTarget > 0 ? Math.max(PREREQ_MIN_LV, rawTarget - 1) : MAX_LV;
         const raw = labelToLevelNumber(el.value);
-        if (raw > maxLv) el.value = String(maxLv);
+        if (raw > 0 && raw > maxLv) el.value = String(maxLv);
       });
 
       bindOnce(el, 'change', function () {
-        const target = clampLv(targetEl.value || 1);
-        const maxLv = Math.max(PREREQ_MIN_LV, target - 1);
+        const rawTarget = labelToLevelNumber(targetEl.value);
+        const maxLv = rawTarget > 0 ? Math.max(PREREQ_MIN_LV, rawTarget - 1) : MAX_LV;
         const raw = labelToLevelNumber(el.value);
-        if (raw > maxLv) el.value = String(maxLv);
+        if (raw > 0 && raw > maxLv) el.value = String(maxLv);
       });
     });
 
@@ -1476,7 +1486,7 @@
     if (clearBtn) bindOnce(clearBtn, 'click', function () {
       resetFormToDefaults();
       applyI18NLabels();
-      clampPrereqInputs(clampLv(targetEl && targetEl.value ? targetEl.value : 1));
+      clampPrereqInputs(labelToLevelNumber(targetEl && targetEl.value ? targetEl.value : 0));
       updateAllLevelHints();
     });
 
