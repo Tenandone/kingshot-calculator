@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>킹샷 플레이 성향 테스트 (중독테스트)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="짧고 직관적인 그렇다 / 아니다 방식으로 확인하는 킹샷 플레이 성향 테스트 (중독테스트)." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/kingshot-play-style" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --type1-bg:#e0f2fe; --type1-ink:#075985;
+      --type2-bg:#ecfccb; --type2-ink:#3f6212;
+      --type3-bg:#fff7ed; --type3-ink:#c2410c;
+      --type4-bg:#fef3c7; --type4-ink:#92400e;
+      --type5-bg:#fee2e2; --type5-ink:#b91c1c;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      -webkit-tap-highlight-color:transparent;
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:980px;margin:0 auto;padding:18px 16px 110px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{display:block;width:28px;height:28px;border-radius:8px}
+
+    .hero{
+      margin-top:18px;
+      padding:20px 18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(24px,4vw,34px);
+      line-height:1.14;
+      letter-spacing:-.03em;
+    }
+    .sub{margin:0;color:var(--muted)}
+
+    .meter{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin:14px 0 0;
+    }
+    .meter-bar{
+      flex:1;
+      height:10px;
+      background:#e9edf6;
+      border-radius:999px;
+      overflow:hidden;
+    }
+    .meter-bar > span{
+      display:block;
+      width:0%;
+      height:100%;
+      background:linear-gradient(90deg,var(--brand),#60a5fa);
+      transition:width .25s ease;
+    }
+    .meter-text{
+      min-width:76px;
+      text-align:right;
+      color:#64748b;
+      font-size:13px;
+      font-weight:800;
+    }
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section.block h2{
+      margin:0 0 12px;
+      font-size:20px;
+      color:var(--brand);
+      letter-spacing:-.02em;
+    }
+
+    .question{
+      margin:14px 0;
+      padding:16px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:0 6px 18px rgba(0,0,0,.04);
+      transition:border-color .2s ease, box-shadow .2s ease;
+    }
+    .question h3{
+      margin:0 0 12px;
+      font-size:17px;
+      line-height:1.45;
+      letter-spacing:-.01em;
+    }
+    .question.unanswered{
+      border-color:#fecaca;
+      box-shadow:0 0 0 3px rgba(239,68,68,.12), 0 6px 18px rgba(0,0,0,.04);
+    }
+
+    .choices{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    .choice{
+      display:block;
+      cursor:pointer;
+    }
+    .choice input{
+      position:absolute;
+      opacity:0;
+      pointer-events:none;
+    }
+    .choice-card{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-height:72px;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:#fff;
+      transition:border-color .2s ease, box-shadow .2s ease, transform .05s ease;
+    }
+    .choice:active .choice-card{transform:scale(.99)}
+    .choice input:checked + .choice-card{
+      border-color:var(--brand);
+      box-shadow:0 0 0 3px rgba(37,99,235,.12);
+      background:#f8fbff;
+    }
+
+    .badge{
+      width:34px;
+      height:34px;
+      flex:0 0 34px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      font-size:14px;
+      font-weight:900;
+      color:#fff;
+      background:linear-gradient(135deg,var(--brand),#60a5fa);
+    }
+    .choice-text{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+    .choice-main{
+      font-size:15px;
+      font-weight:900;
+      color:#0f172a;
+      line-height:1.3;
+    }
+    .choice-sub{
+      font-size:12px;
+      color:#64748b;
+      line-height:1.35;
+    }
+
+    .actionbar{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:30;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      padding:12px calc(16px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));
+      background:rgba(255,255,255,.96);
+      border-top:1px solid var(--border);
+      backdrop-filter:saturate(1.2) blur(8px);
+    }
+
+    .btn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      min-width:180px;
+      padding:14px 18px;
+      border-radius:14px;
+      font-size:15px;
+      font-weight:800;
+      background:linear-gradient(135deg,var(--brand),#60a5fa);
+      color:#fff;
+      box-shadow:0 10px 22px rgba(37,99,235,.22);
+    }
+    .btn-subtle{
+      background:#eef3ff;
+      color:#24427a;
+      box-shadow:none;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      top:14px;
+      transform:translateX(-50%);
+      z-index:50;
+      padding:10px 14px;
+      border-radius:999px;
+      background:#111827;
+      color:#fff;
+      font-size:13px;
+      box-shadow:0 10px 20px rgba(0,0,0,.2);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease;
+    }
+    .toast.show{opacity:1}
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      z-index:90;
+      background:rgba(0,0,0,.46);
+      backdrop-filter:blur(3px);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease;
+    }
+    .overlay.open{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .modal{
+      position:fixed;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%) scale(.98);
+      width:min(94vw, 640px);
+      max-height:min(88vh, 860px);
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      z-index:100;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:20px;
+      box-shadow:0 24px 60px rgba(0,0,0,.22);
+      padding:18px;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease, transform .2s ease;
+    }
+    .modal.open{
+      opacity:1;
+      pointer-events:auto;
+      transform:translate(-50%,-50%) scale(1);
+    }
+
+    .modal header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+      position:sticky;
+      top:0;
+      background:#fff;
+      z-index:2;
+      padding-bottom:4px;
+    }
+    .modal header h3{
+      margin:0;
+      font-size:20px;
+      letter-spacing:-.02em;
+    }
+
+    .close{
+      appearance:none;
+      border:none;
+      background:transparent;
+      font-size:24px;
+      line-height:1;
+      cursor:pointer;
+      padding:6px;
+      border-radius:10px;
+    }
+
+    .result-wrap{
+      border-radius:18px;
+      padding:16px;
+      margin:8px 0 14px;
+    }
+    .modal.type1 .result-wrap{ background:var(--type1-bg); color:var(--type1-ink); border:1px solid #bae6fd; }
+    .modal.type2 .result-wrap{ background:var(--type2-bg); color:var(--type2-ink); border:1px solid #d9f99d; }
+    .modal.type3 .result-wrap{ background:var(--type3-bg); color:var(--type3-ink); border:1px solid #fed7aa; }
+    .modal.type4 .result-wrap{ background:var(--type4-bg); color:var(--type4-ink); border:1px solid #fde68a; }
+    .modal.type5 .result-wrap{ background:var(--type5-bg); color:var(--type5-ink); border:1px solid #fecaca; }
+
+    .result-box{text-align:center}
+    .result-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:6px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+      font-size:12px;
+      font-weight:900;
+      margin-bottom:8px;
+    }
+    .result-score{
+      font-size:40px;
+      font-weight:900;
+      line-height:1;
+      margin:6px 0 4px;
+    }
+    .result-main{
+      font-size:24px;
+      font-weight:900;
+      line-height:1.2;
+      margin:4px 0 8px;
+      letter-spacing:-.02em;
+    }
+    .result-sub{
+      font-size:14px;
+      line-height:1.65;
+      opacity:.95;
+      white-space:pre-line;
+    }
+
+    .tips,
+    .share-box{
+      margin-top:14px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px;
+    }
+    .tips h4,
+    .share-box h4{
+      margin:0 0 8px;
+      font-size:15px;
+      color:#0f172a;
+    }
+    .tips ul{
+      margin:0;
+      padding-left:18px;
+      color:#475569;
+      font-size:14px;
+    }
+    .tips li{margin:6px 0}
+
+    .share-preview{
+      margin:10px 0 12px;
+      padding:12px;
+      border-radius:12px;
+      background:#f8fafc;
+      border:1px solid #e5e7eb;
+      color:#334155;
+      font-size:13px;
+      white-space:pre-line;
+      line-height:1.6;
+    }
+
+    .share-actions{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .share-actions .btn{
+      min-width:180px;
+      padding:12px 14px;
+      font-size:14px;
+    }
+
+    .modal-actions{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .modal-actions .btn{min-width:150px}
+
+    .sr-only{
+      position:absolute !important;
+      width:1px;
+      height:1px;
+      margin:-1px;
+      padding:0;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+
+    @media (max-width:760px){
+      .choices{grid-template-columns:1fr}
+      .actionbar{flex-direction:column}
+      .btn{min-width:0}
+      .modal{
+        width:min(96vw, 640px);
+        max-height:88vh;
+        padding:14px;
+      }
+      .result-score{font-size:34px}
+      .result-main{font-size:22px}
+    }
+
+    @media (max-width:600px){
+      .wrap{padding:14px 12px 110px}
+      h1{font-size:24px}
+      section.block{padding:14px}
+      .question{padding:14px}
+      .choice-card{min-height:64px;padding:12px}
+      .modal header h3{font-size:18px}
+      .modal-actions{flex-direction:column}
+      .modal-actions .btn{width:100%}
+      .share-actions .btn{
+        width:100%;
+        min-width:0;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"킹샷 플레이 성향 테스트 (중독테스트)",
+    "inLanguage":"ko",
+    "description":"짧고 직관적인 그렇다 / 아니다 방식으로 확인하는 킹샷 플레이 성향 테스트 (중독테스트)."
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div>
+          <h1>킹샷 플레이 성향 테스트 (중독테스트)</h1>
+          <p class="sub">
+            짧고 직관적인 그렇다 / 아니다 방식으로, 내가 어떤 타입으로 킹샷을 즐기고 있는지 가볍게 확인해보자.
+          </p>
+
+          <div class="meter" aria-hidden="true">
+            <div class="meter-bar"><span id="meterFill" style="width:0%"></span></div>
+            <div class="meter-text"><span id="answered">0</span> / 8</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>질문에 답해보세요</h2>
+
+        <div class="question" id="qbox1">
+          <h3>1. 자려고 누웠는데 킹샷을 한 번만 더 켠 적이 있다.</h3>
+          <div class="choices">
+            <label class="choice">
+              <input type="radio" name="q1" value="1">
+              <span class="choice-card">
+                <span class="badge">A</span>
+                <span class="choice-text">
+                  <span class="choice-main">그렇다</span>
+                  <span class="choice-sub">한 번쯤은 해봤다</span>
+                </span>
+              </span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="q1" value="0">
+              <span class="choice-card">
+                <span class="badge">B</span>
+                <span class="choice-text">
+                  <span class="choice-main">아니다</span>
+                  <span class="choice-sub">딱 끄면 끝이다</span>
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question" id="qbox2">
+          <h3>2. 일일 퀘스트는 놓치지 않는다.</h3>
+          <div class="choices">
+            <label class="choice">
+              <input type="radio" name="q2" value="1">
+              <span class="choice-card">
+                <span class="badge">A</span>
+                <span class="choice-text">
+                  <span class="choice-main">그렇다</span>
+                  <span class="choice-sub">웬만하면 꼭 챙긴다</span>
+                </span>
+              </span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="q2" value="0">
+              <span class="choice-card">
+                <span class="badge">B</span>
+                <span class="choice-text">
+                  <span class="choice-main">아니다</span>
+                  <span class="choice-sub">가끔은 그냥 넘긴다</span>
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question" id="qbox3">
+          <h3>3. 곰사냥 집결을 놓치면 생각보다 기분이 남는다.</h3>
+          <div class="choices">
+            <label class="choice">
+              <input type="radio" name="q3" value="1">
+              <span class="choice-card">
+                <span class="badge">A</span>
+                <span class="choice-text">
+                  <span class="choice-main">그렇다</span>
+                  <span class="choice-sub">은근 아쉽고 짜증난다</span>
+                </span>
+              </span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="q3" value="0">
+              <span class="choice-card">
+                <span class="badge">B</span>
+                <span class="choice-text">
+                  <span class="choice-main">아니다</span>
+                  <span class="choice-sub">다음 기회를 보면 된다</span>
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question" id="qbox4">
+          <h3>4. 패키지 효율이 좋으면 안 사도 마음이 흔들린다.</h3>
+          <div class="choices">
+            <label class="choice">
+              <input type="radio" name="q4" value="1">
+              <span class="choice-card">
+                <span class="badge">A</span>
+                <span class="choice-text">
+                  <span class="choice-main">그렇다</span>
+                  <span class="choice-sub">놓치면 손해 같아진다</span>
+                </span>
+              </span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="q4" value="0">
+              <span class="choice-card">
+                <span class="badge">B</span>
+                <span class="choice-text">
+                  <span class="choice-main">아니다</span>
+                  <span class="choice-sub">그냥 넘길 수 있다</span>
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question" id="qbox5">
+          <h3>5. 경기장이나 이벤트 결과가 하루 기분에 영향을 준다.</h3>
+          <div class="choices">
+            <label class="choice">
+              <input type="radio" name="q5" value="1">
+              <span class="choice-card">
+                <span class="badge">A</span>
+                <span class="choice-text">
+                  <span class="choice-main">그렇다</span>
+                  <span class="choice-sub">승패가 생각보다 남는다</span>
+                </span>
+              </span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="q5" value="0">
+              <span class="choice-card">
+                <span class="badge">B</span>
+                <span class="choice-text">
+                  <span class="choice-main">아니다</span>
+                  <span class="choice-sub">게임은 게임일 뿐이다</span>
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question" id="qbox6">
+          <h3>6. 나는 저녁식사 중 캐슬 때문에 화장실에서 킹샷을 한 적이 있다.</h3>
+          <div class="choices">
+            <label class="choice">
+              <input type="radio" name="q6" value="1">
+              <span class="choice-card">
+                <span class="badge">A</span>
+                <span class="choice-text">
+                  <span class="choice-main">그렇다</span>
+                  <span class="choice-sub">타이밍 때문에 자리를 비운 적 있다</span>
+                </span>
+              </span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="q6" value="0">
+              <span class="choice-card">
+                <span class="badge">B</span>
+                <span class="choice-text">
+                  <span class="choice-main">아니다</span>
+                  <span class="choice-sub">식사 시간은 식사에 집중한다</span>
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question" id="qbox7">
+          <h3>7. 연맹원들과 직접 약속하지 않았어도, 괜히 미안해서 접속한 적이 있다.</h3>
+          <div class="choices">
+            <label class="choice">
+              <input type="radio" name="q7" value="1">
+              <span class="choice-card">
+                <span class="badge">A</span>
+                <span class="choice-text">
+                  <span class="choice-main">그렇다</span>
+                  <span class="choice-sub">신경이 쓰여서 들어간 적 있다</span>
+                </span>
+              </span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="q7" value="0">
+              <span class="choice-card">
+                <span class="badge">B</span>
+                <span class="choice-text">
+                  <span class="choice-main">아니다</span>
+                  <span class="choice-sub">접속은 내 일정에 맞춘다</span>
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question" id="qbox8">
+          <h3>8. 킹샷을 시작하고 지갑이 얇아졌다.</h3>
+          <div class="choices">
+            <label class="choice">
+              <input type="radio" name="q8" value="1">
+              <span class="choice-card">
+                <span class="badge">A</span>
+                <span class="choice-text">
+                  <span class="choice-main">그렇다</span>
+                  <span class="choice-sub">예전보다 지출이 늘었다</span>
+                </span>
+              </span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="q8" value="0">
+              <span class="choice-card">
+                <span class="badge">B</span>
+                <span class="choice-text">
+                  <span class="choice-main">아니다</span>
+                  <span class="choice-sub">지출은 크게 달라지지 않았다</span>
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="actionbar" role="region" aria-label="테스트 동작">
+    <button id="resetBtn" class="btn btn-subtle" type="button">초기화</button>
+    <button id="submitBtn" class="btn" type="button">결과 보기</button>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">모든 문항에 답해주세요.</div>
+
+  <div id="overlay" class="overlay" hidden></div>
+
+  <div id="resultModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="resultTitle" aria-describedby="resultDesc" hidden>
+    <header>
+      <h3 id="resultTitle">테스트 결과</h3>
+      <button class="close" type="button" aria-label="닫기" id="closeModalBtn">×</button>
+    </header>
+
+    <div class="result-wrap" id="resultCard">
+      <div class="result-box">
+        <div class="result-badge">킹샷 플레이 성향</div>
+        <div class="result-score" id="score">0 / 8</div>
+        <div class="result-main" id="mainMsg"></div>
+        <div class="result-sub" id="subMsg"></div>
+      </div>
+    </div>
+
+    <div class="tips">
+      <h4>이런 식으로 해보면 좋아요</h4>
+      <ul id="tipsList"></ul>
+    </div>
+
+    <div class="share-box">
+      <h4>결과 공유하기</h4>
+      <div class="share-preview" id="sharePreview"></div>
+      <div class="share-actions">
+        <button type="button" class="btn btn-subtle" id="copyBtn">결과 문구 복사</button>
+        <button type="button" class="btn" id="cafeBtn">네이버카페에 공유하기</button>
+      </div>
+    </div>
+
+    <p id="resultDesc" class="sr-only">점수와 성향 결과가 표시됩니다.</p>
+
+    <div class="modal-actions">
+      <button type="button" class="btn btn-subtle" id="editBtn">답변 수정</button>
+      <button type="button" class="btn" id="retakeBtn">다시 하기</button>
+    </div>
+  </div>
+
+  <script>
+    var SHARE_URL = 'https://kingshotdata.kr/kingshot-play-style';
+    var CAFE_URL = 'https://cafe.naver.com/f-e/cafes/31423888/menus/14?viewType=L';
+    var currentResultText = '';
+
+    var RESULTS = [
+      {
+        max: 1,
+        typeClass: 'type1',
+        name: '평온한 관찰형',
+        desc: '아직은 킹샷을 즐기되 생활이 끌려가지는 않는 타입이다.\n재미는 느끼지만 리듬의 중심은 여전히 현실 쪽에 가깝다.',
+        tips: [
+          '지금처럼 게임과 생활의 순서를 크게 흔들지 않는 선을 유지해보기',
+          '이벤트를 다 챙기지 못해도 손해보다 선택으로 받아들이기',
+          '재미가 줄어들면 억지로 붙잡기보다 쉬었다 다시 보기'
+        ]
+      },
+      {
+        max: 3,
+        typeClass: 'type2',
+        name: '은근 몰입형',
+        desc: '가볍게 한다고 생각하지만 하루 리듬 곳곳에 킹샷이 스며든 타입이다.\n아직 부담은 크지 않지만 놓치기 싫은 마음이 조금씩 커지고 있다.',
+        tips: [
+          '하루에 꼭 챙길 것 2~3개만 정하고 나머지는 가볍게 넘기기',
+          '자기 전 마지막 확인 시간을 정해두고 그 이후엔 끄기',
+          '놓친 콘텐츠를 다음 기회로 넘기는 연습하기'
+        ]
+      },
+      {
+        max: 5,
+        typeClass: 'type3',
+        name: '효율 집착형',
+        desc: '게임 자체보다도 손해 보지 않는 것, 놓치지 않는 것이 크게 작동하는 타입이다.\n효율 계산이 재미를 밀어내기 시작하면 피로가 빨리 올 수 있다.',
+        tips: [
+          '패키지나 이벤트는 10분 보류 후 다시 보는 습관 만들기',
+          '일일 퀘스트와 루틴을 하루 핵심 체크만 남기기',
+          '완벽하게 다 챙기기보다 중요한 것만 남기는 기준 세우기'
+        ]
+      },
+      {
+        max: 7,
+        typeClass: 'type4',
+        name: '감정 과열형',
+        desc: '이벤트와 승패 결과가 생각보다 오래 마음에 남는 타입이다.\n게임이 재밌는 만큼 감정 소모도 커져서 하루 컨디션까지 흔들 수 있다.',
+        tips: [
+          '경기장이나 곰사냥 결과는 바로 반응하지 말고 잠깐 텀 두기',
+          '집결이나 경쟁 목표를 무조건 최고점보다 현실적인 선으로 낮추기',
+          '기분이 흔들린 날은 접속 시간을 짧게 끊어서 플레이하기'
+        ]
+      },
+      {
+        max: 8,
+        typeClass: 'type5',
+        name: '킹샷 중심형',
+        desc: '생활보다 킹샷 일정과 소비가 먼저 떠오를 때가 많은 타입이다.\n재미를 넘어서 루틴과 지출의 중심이 게임 쪽으로 기울고 있을 가능성이 있다.',
+        tips: [
+          '취침 전 30분은 게임을 끄는 고정 구간 만들기',
+          '식사·약속 시간엔 접속 체크를 잠시 끄기',
+          '하루 총 플레이 시간과 과금 기준을 먼저 정하고 움직이기'
+        ]
+      }
+    ];
+
+    function showToast(msg){
+      var t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(function(){
+        t.classList.remove('show');
+      }, 1800);
+    }
+
+    function updateProgress(){
+      var answered = 0;
+      for(var i=1;i<=8;i++){
+        var sel = document.querySelector('input[name="q'+i+'"]:checked');
+        if(sel) answered++;
+      }
+      var percent = Math.round((answered/8)*100);
+      document.getElementById('answered').textContent = answered;
+      document.getElementById('meterFill').style.width = percent + '%';
+    }
+
+    function getFirstUnanswered(){
+      for(var i=1;i<=8;i++){
+        var sel = document.querySelector('input[name="q'+i+'"]:checked');
+        if(!sel) return i;
+      }
+      return null;
+    }
+
+    function markUnanswered(index){
+      for(var i=1;i<=8;i++){
+        document.getElementById('qbox'+i).classList.remove('unanswered');
+      }
+      if(index){
+        var box = document.getElementById('qbox'+index);
+        box.classList.add('unanswered');
+        box.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+    }
+
+    var overlay = document.getElementById('overlay');
+    var modal = document.getElementById('resultModal');
+    var closeBtn = document.getElementById('closeModalBtn');
+    var editBtn = document.getElementById('editBtn');
+    var retakeBtn = document.getElementById('retakeBtn');
+    var lastActive = null;
+    var trapHandler = null;
+
+    function openModal(){
+      lastActive = document.activeElement;
+      overlay.hidden = false;
+      modal.hidden = false;
+      overlay.classList.add('open');
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+
+      var focusables = modal.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])');
+      var first = focusables[0];
+      var last = focusables[focusables.length - 1];
+      (first || closeBtn).focus();
+
+      trapHandler = function(e){
+        if(e.key === 'Escape'){
+          e.preventDefault();
+          closeModal();
+          return;
+        }
+        if(e.key !== 'Tab') return;
+        if(focusables.length === 0) return;
+
+        if(e.shiftKey){
+          if(document.activeElement === first){
+            e.preventDefault();
+            last.focus();
+          }
+        }else{
+          if(document.activeElement === last){
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      };
+      modal.addEventListener('keydown', trapHandler);
+    }
+
+    function closeModal(){
+      overlay.classList.remove('open');
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(function(){
+        overlay.hidden = true;
+        modal.hidden = true;
+      }, 180);
+
+      if(trapHandler){
+        modal.removeEventListener('keydown', trapHandler);
+        trapHandler = null;
+      }
+      if(lastActive) lastActive.focus();
+    }
+
+    overlay.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeModal);
+    editBtn.addEventListener('click', closeModal);
+
+    retakeBtn.addEventListener('click', function(){
+      for(var i=1;i<=8;i++){
+        var radios = document.querySelectorAll('input[name="q'+i+'"]');
+        radios.forEach(function(r){ r.checked = false; });
+      }
+      markUnanswered(null);
+      updateProgress();
+      closeModal();
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    function getResultByScore(score){
+      for(var i=0;i<RESULTS.length;i++){
+        if(score <= RESULTS[i].max) return RESULTS[i];
+      }
+      return RESULTS[RESULTS.length - 1];
+    }
+
+    function buildShareText(result, score){
+      return '킹샷 플레이 성향 테스트 해봤는데 저는 [' + result.name + '] 나왔네요.\n\n'
+        + result.desc.replace(/\n/g, ' ') + '\n\n'
+        + '제 점수는 ' + score + ' / 8 이었습니다.\n'
+        + '여러분은 어떤 유형 나오셨나요?\n\n'
+        + SHARE_URL;
+    }
+
+    function renderTips(tips){
+      var el = document.getElementById('tipsList');
+      el.innerHTML = '';
+      for(var i=0;i<tips.length;i++){
+        var li = document.createElement('li');
+        li.textContent = tips[i];
+        el.appendChild(li);
+      }
+    }
+
+    function calculateResult(){
+      var total = 0;
+      var answered = 0;
+      var firstUnans = null;
+
+      for(var i=1;i<=8;i++){
+        var selected = document.querySelector('input[name="q'+i+'"]:checked');
+        if(selected){
+          total += parseInt(selected.value, 10);
+          answered++;
+        }else if(!firstUnans){
+          firstUnans = i;
+        }
+      }
+
+      if(answered < 8){
+        markUnanswered(firstUnans);
+        showToast('모든 문항에 답해주세요.');
+        return;
+      }
+
+      markUnanswered(null);
+
+      var result = getResultByScore(total);
+
+      modal.classList.remove('type1','type2','type3','type4','type5');
+      modal.classList.add(result.typeClass);
+
+      document.getElementById('score').textContent = total + ' / 8';
+      document.getElementById('mainMsg').textContent = result.name;
+      document.getElementById('subMsg').textContent = result.desc;
+      renderTips(result.tips);
+
+      currentResultText = buildShareText(result, total);
+      document.getElementById('sharePreview').textContent = currentResultText;
+
+      openModal();
+    }
+
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      for(var i=1;i<=8;i++){
+        var radios = document.querySelectorAll('input[name="q'+i+'"]');
+        radios.forEach(function(r){ r.checked = false; });
+      }
+      markUnanswered(null);
+      updateProgress();
+      showToast('초기화되었습니다.');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    document.getElementById('submitBtn').addEventListener('click', calculateResult);
+
+    document.addEventListener('change', function(e){
+      if(e.target && e.target.matches('input[type="radio"]')){
+        var name = e.target.name;
+        var idx = parseInt(name.replace('q',''), 10);
+        if(idx) document.getElementById('qbox'+idx).classList.remove('unanswered');
+        updateProgress();
+      }
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', async function(){
+      try{
+        await navigator.clipboard.writeText(currentResultText);
+        showToast('결과 문구가 복사되었습니다.');
+      }catch(_){
+        showToast('복사에 실패했습니다.');
+      }
+    });
+
+    document.getElementById('cafeBtn').addEventListener('click', async function(){
+      try{
+        await navigator.clipboard.writeText(currentResultText);
+        showToast('결과 문구를 복사하고 네이버카페로 이동합니다.');
+      }catch(_){
+        showToast('네이버카페로 이동합니다.');
+      }
+      setTimeout(function(){
+        window.open(CAFE_URL, '_blank', 'noopener');
+      }, 250);
+    });
+
+    updateProgress();
+  </script>
+</body>
+</html>
