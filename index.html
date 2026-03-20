@@ -221,40 +221,32 @@
           title: 'Kingshot Gift Codes, Coupon Codes & Top Up Guide | KingshotData',
           description: 'Find Kingshot gift codes, coupon codes, redeem help, and top up guides in one place with KingshotData.',
           ogLocale: 'en_US',
-          h1: 'Kingshot Gift Codes, Coupon Codes & Top Up Guide',
-          intro1: 'Find Kingshot gift codes, coupon codes, redeem help, and top up guides in one place with KingshotData.',
-          intro2: 'Use KingshotData to quickly check coupon pages, top up information, and essential Kingshot resources.',
-          hidden: 'KingshotData covers Kingshot gift codes, coupon codes, redeem help, top up guides, and player reference content.'
+          seoLabel: 'Kingshot gift codes, coupon codes, and top up guide.',
+          noscriptLabel: 'Quick access links for KingshotData.'
         },
         ko: {
           brand: '킹샷데이터코리아',
           title: '킹샷 기프트코드, 쿠폰코드, 충전 가이드 | 킹샷데이터코리아',
           description: '킹샷 기프트코드, 쿠폰코드, 교환 방법, 충전 가이드를 한곳에서 확인하세요. 킹샷데이터코리아에서 빠르게 찾을 수 있습니다.',
           ogLocale: 'ko_KR',
-          h1: '킹샷 기프트코드, 쿠폰코드, 충전 가이드',
-          intro1: '킹샷 기프트코드, 쿠폰코드, 교환 방법, 충전 가이드를 한곳에서 확인할 수 있는 킹샷데이터코리아입니다.',
-          intro2: '쿠폰 페이지, 충전 정보, 기본 공략과 필요한 킹샷 자료를 빠르게 찾을 수 있도록 정리했습니다.',
-          hidden: '킹샷데이터코리아는 킹샷 기프트코드, 쿠폰코드, 교환 방법, 충전 가이드와 주요 참고 정보를 제공합니다.'
+          seoLabel: '킹샷 기프트코드, 쿠폰코드, 충전 가이드.',
+          noscriptLabel: '킹샷데이터코리아 빠른 이동 링크.'
         },
         ja: {
           brand: 'KingshotData',
           title: 'キングショット ギフトコード・クーポンコード・チャージガイド | KingshotData',
           description: 'キングショットのギフトコード、クーポンコード、交換方法、チャージガイドを一か所で確認できます。',
           ogLocale: 'ja_JP',
-          h1: 'キングショット ギフトコード・クーポンコード・チャージガイド',
-          intro1: 'KingshotDataでは、キングショットのギフトコード、クーポンコード、交換方法、チャージガイドをまとめて確認できます。',
-          intro2: 'クーポンページ、チャージ情報、基本ガイドなど、必要な情報を見つけやすく整理しています。',
-          hidden: 'KingshotDataはキングショットのギフトコード、クーポンコード、交換方法、チャージガイドをまとめた情報サイトです。'
+          seoLabel: 'キングショット ギフトコード・クーポンコード・チャージガイド。',
+          noscriptLabel: 'KingshotData のクイックリンク。'
         },
         'zh-TW': {
           brand: 'KingshotData',
           title: 'Kingshot 禮包碼、優惠碼、儲值指南 | KingshotData',
           description: '在 KingshotData 一次查看 Kingshot 禮包碼、優惠碼、兌換方式與儲值指南。',
           ogLocale: 'zh_TW',
-          h1: 'Kingshot 禮包碼、優惠碼、儲值指南',
-          intro1: '在 KingshotData 可以一次查看 Kingshot 禮包碼、優惠碼、兌換方式與儲值指南。',
-          intro2: '已整理優惠碼頁面、儲值資訊與常用 Kingshot 參考內容，方便快速查找。',
-          hidden: 'KingshotData 整理了 Kingshot 禮包碼、優惠碼、兌換方式、儲值指南與玩家常用資訊。'
+          seoLabel: 'Kingshot 禮包碼、優惠碼、儲值指南。',
+          noscriptLabel: 'KingshotData 快速連結。'
         }
       };
 
@@ -341,12 +333,8 @@
 
       function syncHomeContent(langCode){
         var meta = HOME_HEAD[langCode] || HOME_HEAD.en;
-        setText('home-seo-title', meta.h1);
-        setText('home-seo-intro-1', meta.intro1);
-        setText('home-seo-intro-2', meta.intro2);
-        setText('home-seo-hidden', meta.hidden);
-        setText('home-noscript-title', meta.h1);
-        setText('home-noscript-intro', meta.intro1);
+        setText('home-seo-keywords', meta.seoLabel);
+        setText('home-noscript-label', meta.noscriptLabel);
       }
 
       function syncHomeHead(langCode){
@@ -861,21 +849,24 @@
         aria-label="Main content"
         data-i18n-attr="aria-label:aria.main">
 
-    <section class="visually-hidden-seo" aria-labelledby="home-seo-title">
-      <h1 id="home-seo-title">Kingshot Gift Codes, Coupon Codes & Top Up Guide</h1>
-      <p id="home-seo-intro-1">Find Kingshot gift codes, coupon codes, redeem help, and top up guides in one place with KingshotData.</p>
-      <p id="home-seo-intro-2">Use KingshotData to quickly check coupon pages, top up information, and essential Kingshot resources.</p>
-      <p id="home-seo-hidden">KingshotData covers Kingshot gift codes, coupon codes, redeem help, top up guides, and player reference content.</p>
+    <section class="visually-hidden-seo" aria-label="SEO summary">
+      <p id="home-seo-keywords">Kingshot gift codes, coupon codes, and top up guide.</p>
     </section>
 
     <div id="couponBarMount"></div>
 
     <div id="content" class="panel">
       <noscript>
-        <section aria-label="KingshotData fallback content">
-          <h1 id="home-noscript-title">Kingshot Gift Codes, Coupon Codes & Top Up Guide</h1>
-          <p id="home-noscript-intro">Find Kingshot gift codes, coupon codes, redeem help, and top up guides in one place with KingshotData.</p>
-          <p><a href="/guides">Guides</a> · <a href="/calculator">Calculators</a> · <a href="/buildings">Building Data</a> · <a href="/heroes">Hero Tools</a> · <a href="/database">Database</a> · <a href="/about">About</a></p>
+        <section aria-label="KingshotData fallback links">
+          <p id="home-noscript-label">Quick access links for KingshotData.</p>
+          <nav aria-label="Fallback links">
+            <a href="/guides">Guides</a> ·
+            <a href="/calculator">Calculators</a> ·
+            <a href="/buildings">Building Data</a> ·
+            <a href="/heroes">Hero Tools</a> ·
+            <a href="/database">Database</a> ·
+            <a href="/about">About</a>
+          </nav>
         </section>
       </noscript>
     </div>
