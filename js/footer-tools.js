@@ -31,8 +31,11 @@
   }
 
   function isForever(val) {
-    if (!val) return true;
+    if (val == null) return false;
+
     var v = String(val).trim().toLowerCase();
+    if (!v) return false;
+
     return [
       'permanent',
       'infinite',
@@ -98,6 +101,7 @@
 
     var expiresAt = String(c.expiresAt || '').trim();
     if (expiresAt) {
+      if (isForever(expiresAt)) return Infinity;
       var ts = Date.parse(expiresAt);
       if (Number.isFinite(ts)) return ts;
     }
@@ -155,14 +159,13 @@
   }
 
   function getStatusIcon(c, nowMs) {
-    if (isActiveCoupon(c, nowMs)) return '🟢';
-    return '⚫';
+    return isActiveCoupon(c, nowMs) ? '🟢' : '⚫';
   }
 
   function isPermanentCoupon(c) {
     if (!c) return false;
-    if (isForever(c.until)) return true;
-    if (isForever(c.expiresAt)) return true;
+    if (c.until != null && isForever(c.until)) return true;
+    if (c.expiresAt != null && isForever(c.expiresAt)) return true;
     return false;
   }
 
@@ -300,7 +303,6 @@
       coupons.forEach(function (c) {
         var statusIcon = getStatusIcon(c, nowMs);
         var dateText = getCouponDisplayDate(c);
-        var permanentMark = isPermanentCoupon(c) ? ' ♾️' : '';
         var isActive = isActiveCoupon(c, nowMs);
 
         var d = document.createElement('div');
@@ -308,7 +310,7 @@
 
         d.innerHTML =
           '<span class="code">' +
-            escapeHtml(statusIcon + ' ' + c.code + permanentMark) +
+            escapeHtml(statusIcon + ' ' + c.code) +
           '</span>' +
           (dateText
             ? '<span class="until">' + escapeHtml(dateText) + '</span>'
