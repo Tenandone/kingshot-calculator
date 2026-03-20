@@ -5,89 +5,76 @@
     },
     "title": "Kingshot Training & Promotion Calculator",
     "badge": "Speedup Days ↔ Troop Count",
-
     "about": {
       "title": "What can this calculate?",
-      "p1": "Based on your speedup days, this calculator shows how many troops you can train or promote, how much power you gain, and how many event points you can earn for Strongest Governor, Supreme Governor, and Kingdom of Power Preparation.",
-      "li1": "Choose a mode: Training or Promotion.",
-      "li2": "Select your target tier.",
-      "li3": "In Promotion mode, also choose your current tier.",
-      "li4": "Enter your training speed and speedup days, then click Calculate.",
-      "note": "* Troop-count input mode is not used, and your entered training speed (%) is applied automatically."
+      "p1": "Based on speedup days, this calculates possible troop count, power increase, and event points (Strongest Governor / Supreme Power / Strongest Kingdom Preparation Phase) when training new troops or promoting existing troops.",
+      "li1": "Select a mode: Training / Promotion",
+      "li2": "Select the target tier.",
+      "li3": "In Promotion mode, also select the current tier.",
+      "li4": "Enter training speed and speedup days, then click Calculate.",
+      "note": "* Troop count input mode is not used, and the training speed (%) you enter is applied automatically."
     },
-
     "form": {
       "mode": "Mode",
       "fromTier": "Current Tier (from)",
       "toTier": "Target Tier (to)",
       "trainSpeed": "Training Speed (%)",
       "inputMode": "Input Mode",
-      "modeTime": "Speedup Days → Calculate Troops",
-      "modeTroops": "Troops → Calculate Required Speedups",
+      "modeTime": "Speedup Days → Calculate Troop Count",
+      "modeTroops": "Troop Count → Calculate Required Speedup Days",
       "baseNote": "Base: Calculated from speedup days",
-      "speedDays": "Speedup Days",
+      "speedDays": "Speedup Days (days)",
       "count": "Troop Count"
     },
-
     "mode": {
       "training": "Training",
       "promotion": "Promotion"
     },
-
     "actions": {
       "calculate": "Calculate"
     },
-
     "summary": {
       "selected": "Selected Conditions",
       "selPrefix": "Selected:"
     },
-
     "warn": {
-      "noData": "No matching data found. Please check the tier and mode."
+      "noData": "No matching data found. Please check the tier / mode."
     },
-
     "errors": {
-      "noData": "No data found for the selected conditions."
+      "noData": "No data available for the selected conditions."
     },
-
     "table": {
-      "metric": "Metric",
+      "metric": "Item",
       "perOne": "Per 1 Troop",
       "total": "Total"
     },
-
     "units": {
       "day": "d",
       "hour": "h",
       "min": "m",
       "sec": "s"
     },
-
     "tier": "T{n}",
     "level": "Lv {n}",
-
     "rows": {
-      "possibleTroops": "Trainable Troops",
+      "possibleTroops": "Possible Troop Count",
       "hogPoints": "Strongest Governor Points",
-      "kvkPoints": "Supreme Governor Points",
-      "govPoints": "Kingdom of Power (Preparation) Points",
+      "kvkPoints": "Supreme Power Points",
+      "govPoints": "Strongest Kingdom",
       "powerInc": "Power Increase",
-      "timePerOneApplied": "Total Time Required",
-      "inputTroops": "Entered Troop Count",
+      "timePerOneApplied": "Total Time",
+      "inputTroops": "Input Troop Count",
       "needAccelTime": "Required Speedup Time"
     },
-
     "result": {
-      "caption": "Only total results based on your input are shown."
+      "caption": "Only totals based on the entered conditions are shown."
     },
-
     "card": {
-      "byInputDays": "Based on entered speedups",
-      "inputTroops": "Based on direct troop input",
-      "perTroop": "Per troop ",
-      "supremePower": "Power based",
-      "perUnitTime": "Per 1 unit "
+      "byInputDays": "",
+      "inputTroops": "",
+      "perTroop": "",
+      "supremePower": "",
+      "perUnitTime": ""
     }
   }
 }

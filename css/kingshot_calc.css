@@ -95,6 +95,59 @@
   border-radius:10px;
 }
 
+/* 결과 카드 */
+#training-calc .kscalc-cards{
+  display:grid;
+  grid-template-columns:repeat(5, minmax(0, 1fr));
+  gap:12px;
+  margin:0 0 16px;
+}
+
+#training-calc .kscalc-card{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:16px;
+  padding:14px;
+  box-shadow:0 4px 14px rgba(0,0,0,.04);
+  min-width:0;
+}
+
+#training-calc .kscalc-card-top{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:8px;
+}
+
+#training-calc .kscalc-card-icon{
+  width:20px;
+  height:20px;
+  object-fit:contain;
+  flex:0 0 20px;
+}
+
+#training-calc .kscalc-card-label{
+  font-size:12px;
+  line-height:1.35;
+  color:#6b7280;
+}
+
+#training-calc .kscalc-card-value{
+  font-size:18px;
+  line-height:1.25;
+  font-weight:800;
+  color:#111827;
+  word-break:break-word;
+}
+
+#training-calc .kscalc-card-sub{
+  font-size:12px;
+  line-height:1.4;
+  color:#9ca3af;
+  margin-top:6px;
+}
+
+/* 결과 표 */
 #training-calc table{
   width:100%;
   border-collapse:collapse;
@@ -106,6 +159,7 @@
   border-bottom:1px solid #e5e7eb;
   padding:12px 14px;
   text-align:left;
+  vertical-align:middle;
 }
 
 #training-calc th.num,
@@ -114,30 +168,84 @@
   font-variant-numeric:tabular-nums;
 }
 
-#training-calc #result table{
+#training-calc .kscalc-table-wrap{
+  margin-top:14px;
+  overflow:visible;
+}
+
+#training-calc .kscalc-result-table{
+  width:100%;
+  min-width:0;
   max-width:none;
   margin:0;
   table-layout:fixed;
+  border-collapse:collapse;
 }
 
-#training-calc #result thead th:first-child,
-#training-calc #result tbody td:first-child{
+#training-calc .kscalc-result-table th:first-child,
+#training-calc .kscalc-result-table td:first-child{
   width:68%;
 }
 
-#training-calc #result thead th:nth-child(2),
-#training-calc #result tbody td:nth-child(2){
+#training-calc .kscalc-result-table th:nth-child(2),
+#training-calc .kscalc-result-table td:nth-child(2){
   width:32%;
 }
 
-#training-calc #result thead th:nth-child(3),
-#training-calc #result tbody td:nth-child(3){
-  width:auto;
+#training-calc .kscalc-row-label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-width:0;
+}
+
+#training-calc .kscalc-row-icon{
+  width:20px;
+  height:20px;
+  object-fit:contain;
+  flex:0 0 20px;
+}
+
+#training-calc .kscalc-row-label span{
+  min-width:0;
+  word-break:keep-all;
+  overflow-wrap:anywhere;
+}
+
+/* 반응형 */
+@media (max-width:1100px){
+  #training-calc .kscalc-cards{
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width:860px){
   #training-calc .grid{
     grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+
+  #training-calc .kscalc-cards{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+
+  #training-calc .kscalc-result-table{
+    min-width:0;
+  }
+
+  #training-calc .kscalc-result-table th,
+  #training-calc .kscalc-result-table td{
+    padding:12px 10px;
+    font-size:12px;
+  }
+
+  #training-calc .kscalc-result-table th:first-child,
+  #training-calc .kscalc-result-table td:first-child{
+    width:64%;
+  }
+
+  #training-calc .kscalc-result-table th:nth-child(2),
+  #training-calc .kscalc-result-table td:nth-child(2){
+    width:36%;
   }
 }
 
@@ -155,13 +263,42 @@
     border-radius:14px;
   }
 
-  #training-calc #result thead th:first-child,
-  #training-calc #result tbody td:first-child{
-    width:60%;
+  #training-calc .kscalc-cards{
+    grid-template-columns:1fr;
   }
 
-  #training-calc #result thead th:nth-child(2),
-  #training-calc #result tbody td:nth-child(2){
-    width:40%;
+  #training-calc .kscalc-table-wrap{
+    overflow:visible;
+  }
+
+  #training-calc .kscalc-result-table{
+    min-width:0;
+    font-size:12px;
+  }
+
+  #training-calc .kscalc-result-table th,
+  #training-calc .kscalc-result-table td{
+    padding:10px 8px;
+  }
+
+  #training-calc .kscalc-result-table th:first-child,
+  #training-calc .kscalc-result-table td:first-child{
+    width:58%;
+  }
+
+  #training-calc .kscalc-result-table th:nth-child(2),
+  #training-calc .kscalc-result-table td:nth-child(2){
+    width:42%;
+  }
+
+  #training-calc .kscalc-row-label{
+    gap:6px;
+  }
+
+  #training-calc .kscalc-card-icon,
+  #training-calc .kscalc-row-icon{
+    width:18px;
+    height:18px;
+    flex:0 0 18px;
   }
 }

@@ -1,5 +1,5 @@
 // /js/training-calculator.js
-// v2026-03-19-clean-ui-days-only-final-fixed3
+// v2026-03-19-clean-ui-days-only-final-fixed5
 
 window.initTrainingCalculator = function initTrainingCalculator(opts) {
   'use strict';
@@ -203,11 +203,12 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
 
   function getMetricIcons() {
     return {
-      troops: '/img/troops/t11.webp',
+      troops: '/img/train/kingtrain.webp',
       hog: '/img/train/strongest.webp',
       prep: '/img/train/kingdom.webp',
       kvk: '/img/train/hall.webp',
-      time: '/img/train/trainspeed.webp'
+      time: '/img/train/trainspeed.webp',
+      power: '/img/train/score.webp'
     };
   }
 
@@ -235,10 +236,10 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
   }
 
   function injectStylesOnce() {
-    if (document.getElementById('kscalc-style-final-v4')) return;
+    if (document.getElementById('kscalc-style-final-v5')) return;
 
     var style = document.createElement('style');
-    style.id = 'kscalc-style-final-v4';
+    style.id = 'kscalc-style-final-v5';
     style.textContent = [
       '#training-calc{max-width:1180px;width:100%;margin:0 auto;}',
       '#training-calc .grid{display:grid !important;grid-template-columns:repeat(4,minmax(0,1fr)) !important;gap:12px !important;max-width:none !important;}',
@@ -257,27 +258,34 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
       '.kscalc-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:0 0 16px;}',
       '.kscalc-card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:14px;box-shadow:0 4px 14px rgba(0,0,0,.04);min-width:0;}',
       '.kscalc-card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;}',
-      '.kscalc-card-icon{width:18px;height:18px;object-fit:contain;flex:0 0 18px;}',
       '.kscalc-card-label{font-size:12px;line-height:1.35;color:#6b7280;}',
       '.kscalc-card-value{font-size:18px;line-height:1.25;font-weight:800;color:#111827;word-break:break-word;}',
       '.kscalc-card-sub{font-size:12px;line-height:1.4;color:#9ca3af;margin-top:6px;}',
 
-      '.kscalc-table-wrap{margin-top:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;}',
-      '.kscalc-result-table{width:100%;min-width:720px;table-layout:fixed;border-collapse:collapse;}',
+      '.kscalc-table-wrap{margin-top:14px;overflow:visible;}',
+      '.kscalc-result-table{width:100%;min-width:0;table-layout:fixed;border-collapse:collapse;}',
       '.kscalc-result-table th,.kscalc-result-table td{padding:14px 12px;border-bottom:1px solid rgba(0,0,0,.08);vertical-align:middle;}',
       '.kscalc-result-table th:first-child,.kscalc-result-table td:first-child{width:68%;}',
       '.kscalc-result-table th.num,.kscalc-result-table td.num{text-align:right;}',
-      '.kscalc-row-label{display:flex;align-items:center;gap:8px;}',
-      '.kscalc-row-icon{width:18px;height:18px;object-fit:contain;flex:0 0 18px;}',
+      '.kscalc-row-label{display:flex;align-items:center;gap:8px;min-width:0;}',
+      '.kscalc-row-label span{min-width:0;word-break:keep-all;overflow-wrap:anywhere;}',
 
       '@media (max-width:1100px){.kscalc-cards{grid-template-columns:repeat(3,minmax(0,1fr));}}',
       '@media (max-width:860px){',
       '  #training-calc .grid{grid-template-columns:1fr 1fr !important;}',
       '  .kscalc-cards{grid-template-columns:repeat(2,minmax(0,1fr));}',
+      '  .kscalc-result-table th,.kscalc-result-table td{padding:12px 10px;font-size:12px;}',
+      '  .kscalc-result-table th:first-child,.kscalc-result-table td:first-child{width:64%;}',
       '}',
       '@media (max-width:640px){',
       '  #training-calc .grid{grid-template-columns:1fr !important;}',
       '  .kscalc-cards{grid-template-columns:1fr;}',
+      '  .kscalc-table-wrap{overflow:visible;}',
+      '  .kscalc-result-table{min-width:0;font-size:12px;}',
+      '  .kscalc-result-table th,.kscalc-result-table td{padding:10px 8px;}',
+      '  .kscalc-result-table th:first-child,.kscalc-result-table td:first-child{width:58%;}',
+      '  .kscalc-result-table th:last-child,.kscalc-result-table td:last-child{width:42%;}',
+      '  .kscalc-row-label{gap:6px;}',
       '}'
     ].join('');
     document.head.appendChild(style);
@@ -292,7 +300,7 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
       var tr = thead.querySelector('tr');
       if (tr) {
         tr.innerHTML =
-          '<th>' + escHtml(T('trainCalc.table.metric', '지표')) + '</th>' +
+          '<th>' + escHtml(T('trainCalc.table.metric', '항목')) + '</th>' +
           '<th class="num">' + escHtml(T('trainCalc.table.total', '총합')) + '</th>';
       }
     }
@@ -508,7 +516,7 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
     addRow(T('trainCalc.rows.kvkPoints', '지고의영주 점수'), fmt(kvk1 == null ? null : kvk1 * n), icons.kvk);
     addRow(T('trainCalc.rows.govPoints', '최강왕국(준비전) 점수'), fmt(prep1 == null ? null : prep1 * n), icons.prep);
     addRow(T('trainCalc.rows.timePerOneApplied', '총 소요 시간'), secToDHMS(tN), icons.time);
-    addRow(T('trainCalc.rows.powerInc', '전투력 증가'), fmt(pow1 == null ? null : pow1 * n), null);
+    addRow(T('trainCalc.rows.powerInc', '전투력 증가'), fmt(pow1 == null ? null : pow1 * n), icons.power);
   }
 
   function bind() {

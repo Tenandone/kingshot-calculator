@@ -4,90 +4,77 @@
       "title": "Kingshot 訓練・晉升計算機 | KingshotData"
     },
     "title": "Kingshot 訓練・晉升計算機",
-    "badge": "加速天數 ↔ 士兵數量",
-
+    "badge": "加速天數 ↔ 士兵數",
     "about": {
       "title": "可以計算什麼？",
-      "p1": "可依照加速天數，計算新訓練或既有士兵晉升時可獲得的士兵數量、戰力提升，以及活動分數（最強領主 / 至高領主 / 最強王國準備階段）。",
+      "p1": "可依加速天數，計算新訓練或既有士兵晉升時的可訓練士兵數、戰力提升，以及活動分數（最強領主 / 至高領主 / 最強王國準備階段）。",
       "li1": "請選擇模式：訓練 / 晉升",
       "li2": "請選擇目標階級。",
-      "li3": "在晉升模式下，也請一併選擇目前階級。",
-      "li4": "輸入訓練速度與加速天數後，點擊「開始計算」。",
-      "note": "* 不使用士兵數量輸入方式，輸入的訓練速度（%）會自動套用。"
+      "li3": "在晉升模式中，也請一併選擇目前階級。",
+      "li4": "輸入訓練速度與加速天數後，點擊計算。",
+      "note": "* 不使用士兵數輸入方式，輸入的訓練速度（%）會自動套用。"
     },
-
     "form": {
       "mode": "模式",
       "fromTier": "目前階級 (from)",
       "toTier": "目標階級 (to)",
       "trainSpeed": "訓練速度 (%)",
       "inputMode": "輸入方式",
-      "modeTime": "加速天數 → 計算士兵數量",
-      "modeTroops": "士兵數量 → 計算所需加速天數",
+      "modeTime": "加速天數 → 計算士兵數",
+      "modeTroops": "士兵數 → 計算所需加速天數",
       "baseNote": "基準：依加速天數計算",
       "speedDays": "加速天數（日）",
-      "count": "士兵數量（名）"
+      "count": "士兵數（名）"
     },
-
     "mode": {
       "training": "訓練 (Training)",
       "promotion": "晉升 (Promotion)"
     },
-
     "actions": {
       "calculate": "開始計算"
     },
-
     "summary": {
       "selected": "已選條件",
-      "selPrefix": "選擇:"
+      "selPrefix": "已選："
     },
-
     "warn": {
-      "noData": "找不到符合的資料，請確認階級 / 模式是否正確。"
+      "noData": "找不到相符資料，請確認階級 / 模式。"
     },
-
     "errors": {
       "noData": "找不到所選條件的資料。"
     },
-
     "table": {
       "metric": "項目",
       "perOne": "每 1 名",
       "total": "總計"
     },
-
     "units": {
       "day": "日",
       "hour": "小時",
       "min": "分",
       "sec": "秒"
     },
-
     "tier": "T{n}",
     "level": "Lv {n}",
-
     "rows": {
-      "possibleTroops": "可訓練士兵數量",
+      "possibleTroops": "可訓練士兵數",
       "hogPoints": "最強領主分數",
       "kvkPoints": "至高領主分數",
       "govPoints": "最強王國（準備階段）分數",
       "powerInc": "戰力提升",
-      "timePerOneApplied": "總耗時",
-      "inputTroops": "輸入士兵數量",
+      "timePerOneApplied": "總所需時間",
+      "inputTroops": "輸入士兵數",
       "needAccelTime": "所需加速時間"
     },
-
     "result": {
-      "caption": "僅顯示依輸入條件計算出的總計。"
+      "caption": "僅顯示依輸入條件計算的總計。"
     },
-
     "card": {
-      "byInputDays": "依輸入加速計算",
-      "inputTroops": "依直接輸入計算",
-      "perTroop": "每名士兵 ",
-      "supremePower": "依戰力計算",
-      "perUnitTime": "每 1 個 "
+      "byInputDays": "",
+      "inputTroops": "",
+      "perTroop": "",
+      "supremePower": "",
+      "perUnitTime": ""
     }
   }
 }
