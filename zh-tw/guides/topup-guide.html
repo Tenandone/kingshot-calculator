@@ -162,6 +162,32 @@
       font-size:13px;
     }
 
+    .hero-cta{
+      margin-top:14px;
+      padding:14px 16px;
+      border:1px solid var(--soft-border);
+      border-radius:14px;
+      background:#f8fbff;
+    }
+    .hero-cta p{
+      margin:0 0 10px;
+      color:var(--text);
+      font-weight:700;
+    }
+    .hero-cta .hero-cta-sub{
+      color:var(--muted);
+      font-weight:400;
+      font-size:13px;
+      margin-top:-2px;
+      margin-bottom:10px;
+    }
+    .hero-proof{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:10px;
+    }
+
     .jump{
       margin-top:12px;
       display:flex;gap:10px;flex-wrap:wrap;
@@ -436,13 +462,25 @@
         </div>
         <div>
           <h1>Kingshot 自助儲值指南</h1>
-          <p class="hero-lead">先確認容易卡住的地方，自助儲值其實比想像中簡單。</p>
+          <p class="hero-lead">先確認最容易卡住的地方，自助儲值其實比想像中簡單。</p>
           <p class="sub">
             這裡整理了帳號綁定條件、Google / Facebook 二步驟驗證確認方式、
             Google Play Games 綁定帳號無法使用的說明，以及實際儲值流程。
           </p>
           <div class="quote">
             自助儲值最常卡住的原因，通常不是儲值流程本身，而是帳號綁定方式與二步驟驗證設定狀態。
+          </div>
+
+          <div class="hero-cta" aria-label="Hero top-up CTA">
+            <p>如果 LootBar 比遊戲內儲值更划算，同樣的預算就能發揮更高效率。只要帳號條件準備完成，就可以從下方頁面直接開始自助儲值。</p>
+            <p class="hero-cta-sub">先確認一次必要條件，再用最快的方式完成更划算的儲值。</p>
+
+            <div class="hero-proof" aria-label="top-up trust signals">
+              <span class="badge">20,000+ Kingshot 玩家持續關注</span>
+              <span class="badge">卡住可到 Discord 詢問</span>
+            </div>
+
+            <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">打開 Kingshot 儲值頁面</a>
           </div>
 
           <div class="jump" aria-label="Quick jump links">
@@ -631,7 +669,7 @@
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
           <div>
             <strong>累積儲值與每月優惠券發放說明:</strong><br>
-            額外福利資訊可透過下方連結查看。<br>
+            最新的額外福利、優惠券更新與社群公告，都可以透過下方連結查看。<br>
             你也可以使用瀏覽器翻譯功能或 AI 翻譯工具，更輕鬆閱讀公告內容。<br>
             <a href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">查看 20,000+ Kingshot 玩家關注的社群公告</a>
           </div>
@@ -639,25 +677,25 @@
 
         <div class="links">
           <h2>手機遊戲折扣連結</h2>
-          <a href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">前往手機遊戲折扣頁面</a>
+          <a href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">查看更多手機遊戲折扣</a>
         </div>
 
         <section class="bottom-cta" aria-label="Top-up CTA">
           <p class="title">立即前往 Kingshot 儲值頁面</p>
           <p class="desc">
-            點擊下方按鈕即可直接進入 Kingshot 專用儲值頁面。
-            額外優惠券請在搜尋欄輸入 <span class="kbd">#s4qU</span> 後套用。
+            如果 LootBar 比遊戲內儲值更划算，同樣的預算就能換到更高效率。
+            請先在搜尋欄輸入 <span class="kbd">#s4qU</span>，並在結帳前套用額外優惠券。
           </p>
           <div class="cta-row">
-            <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">打開儲值頁面</a>
-            <a class="btn" href="https://discord.gg/vgzASAwx" target="_blank" rel="noopener noreferrer">Discord 詢問</a>
-            <a class="btn" href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">累積儲值 / 優惠券說明</a>
-            <a class="btn" href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">手機遊戲折扣頁面</a>
+            <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">打開 Kingshot 儲值頁面</a>
+            <a class="btn" href="https://discord.gg/vgzASAwx" target="_blank" rel="noopener noreferrer">前往 Discord 詢問</a>
+            <a class="btn" href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">最新累積儲值 / 優惠券說明</a>
+            <a class="btn" href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">查看更多手機遊戲折扣</a>
             <a class="btn" href="/zh-tw/guides/kingshot-giftcode.html" rel="noopener">查看最新禮包碼</a>
           </div>
 
           <div class="cta-badges" aria-label="quick notes">
-            <span class="badge">推薦自助儲值</span>
+            <span class="badge">更划算的儲值方式</span>
             <span class="badge">必須綁定 Google / Facebook</span>
             <span class="badge">必須確認二步驟驗證</span>
             <span class="badge">卡住可到 Discord 詢問</span>
