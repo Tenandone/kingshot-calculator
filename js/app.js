@@ -1,5 +1,5 @@
 // /public/js/app.js — SPA Router (History API) for KingshotData.kr
-// v2026-03-17 (guides detail hard-redirect follows current site language)
+// v2026-03-20 (guides detail hard-redirect follows current site language, non-.html slug supported)
 // ES5-compatible (no arrow functions / optional chaining)
 (function () {
   'use strict';
@@ -981,10 +981,10 @@
     var href = a.getAttribute('href');
     if (!href) return;
 
-    // guides 상세 링크는 router-ignore 여부와 상관없이 현재 사이트 언어 기준으로 강제 이동
+    // guides 상세 링크는 router-ignore 여부와 상관없이 현재 사이트 언어 기준으로 강제 전체 이동
     if (
-      /^\/guides\/(?!index\.html$).+\.html$/i.test(href) ||
-      /^\/(ko|en|ja|zh-tw|zh-TW)\/guides\/(?!index\.html$).+\.html$/i.test(href)
+      /^\/guides\/(?!$)(?!index(?:\.html)?$)[^\/?#]+(?:\.html)?(?:[?#].*)?$/i.test(href) ||
+      /^\/(ko|en|ja|zh-tw|zh-TW)\/guides\/(?!$)(?!index(?:\.html)?$)[^\/?#]+(?:\.html)?(?:[?#].*)?$/i.test(href)
     ) {
       e.preventDefault();
       e.stopPropagation();
@@ -993,20 +993,21 @@
       try {
         var slug = '';
         var dataSlug = a.getAttribute('data-guide-slug');
-        if (dataSlug) slug = String(dataSlug).replace(/\.html$/i, '');
+        if (dataSlug) slug = String(dataSlug).replace(/\.html$/i, '').replace(/\/+$/,'').trim();
 
         if (!slug) {
           var block = a.closest && a.closest('.g-block[data-slug]');
-          if (block) slug = String(block.getAttribute('data-slug') || '').replace(/\.html$/i, '');
+          if (block) slug = String(block.getAttribute('data-slug') || '').replace(/\.html$/i, '').replace(/\/+$/,'').trim();
         }
 
         if (!slug) {
           var uGuide = new URL(href, location.origin);
           var parts = uGuide.pathname.split('/').filter(Boolean);
+
           if (parts.length >= 3 && parts[1] === 'guides') {
-            slug = String(parts[2] || '').replace(/\.html$/i, '');
+            slug = String(parts[2] || '').replace(/\.html$/i, '').replace(/\/+$/,'').trim();
           } else if (parts.length >= 2 && parts[0] === 'guides') {
-            slug = String(parts[1] || '').replace(/\.html$/i, '');
+            slug = String(parts[1] || '').replace(/\.html$/i, '').replace(/\/+$/,'').trim();
           }
         }
 
