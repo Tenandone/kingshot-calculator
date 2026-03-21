@@ -1,0 +1,1649 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>카페 이벤트 슬롯 추첨기</title>
+  <style>
+    :root{
+      --bg1:#2a0f0f;
+      --bg2:#140a0b;
+      --bg3:#0d0909;
+      --panel:#1b1213;
+      --line:rgba(255,255,255,.08);
+      --text:#fff8ef;
+      --muted:#d9c7b8;
+      --red1:#d64040;
+      --red2:#981417;
+      --black1:#2a2a2a;
+      --black2:#080808;
+      --green1:#4ab56f;
+      --green2:#1b7a3d;
+      --shadow:0 16px 40px rgba(0,0,0,.45);
+      --radius:22px;
+      --slot-width:460px;
+      --row-height:82px;
+      --frame-height:98px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:Arial,"Malgun Gothic",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,186,120,.15), transparent 28%),
+        radial-gradient(circle at 100% 0%, rgba(255,90,90,.12), transparent 24%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+      min-height:100vh;
+    }
+
+    .app{
+      width:min(1380px, calc(100% - 28px));
+      margin:18px auto 40px;
+    }
+
+    .topbar{
+      padding:16px 20px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      margin-bottom:14px;
+    }
+
+    .title{
+      margin:0;
+      font-size:30px;
+      font-weight:900;
+      letter-spacing:-.02em;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:380px minmax(0,1fr);
+      gap:14px;
+      align-items:start;
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
+        linear-gradient(180deg, #251415, #181011);
+      box-shadow:var(--shadow);
+    }
+
+    .section{padding:16px}
+
+    .mode-grid,
+    .count-row,
+    .action-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .toolbar{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .mode-btn,.count-btn,.action-btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.1);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
+      color:var(--text);
+      border-radius:16px;
+      padding:14px 12px;
+      font-weight:800;
+      font-size:14px;
+      cursor:pointer;
+      transition:.2s ease;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    .mode-btn.active,
+    .count-btn.active{
+      border-color:rgba(216,176,107,.55);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,215,120,.22), transparent 56%),
+        linear-gradient(180deg, rgba(216,176,107,.18), rgba(216,176,107,.05));
+      color:#fff7df;
+    }
+
+    .mode-btn .big,.count-btn .big{
+      display:block;
+      font-size:16px;
+      margin-bottom:4px;
+      font-weight:900;
+    }
+
+    .mode-btn .small,.count-btn .small{
+      display:block;
+      font-size:11px;
+      color:var(--muted);
+      line-height:1.45;
+    }
+
+    .action-btn.primary{
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,214,132,.28), transparent 55%),
+        linear-gradient(180deg, #6a3a12, #3e2411 55%, #28170e 100%);
+      border-color:rgba(255,209,122,.4);
+    }
+    .action-btn.secondary{ background:linear-gradient(180deg, #4e1d1f, #311416); }
+    .action-btn.ghost{ background:linear-gradient(180deg, #2a2526, #171213); }
+
+    textarea{
+      width:100%;
+      min-height:240px;
+      margin-top:12px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:14px;
+      resize:vertical;
+      background:#120d0e;
+      color:var(--text);
+      font-size:13px;
+      line-height:1.65;
+      outline:none;
+    }
+
+    .status{
+      margin-top:10px;
+      font-size:12px;
+      color:#f4d7b1;
+      line-height:1.55;
+    }
+
+    .slot-panel{
+      padding:14px;
+      overflow:hidden;
+    }
+
+    .slot-area{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 320px;
+      gap:14px;
+      align-items:start;
+    }
+
+    .machine-stage{
+      position:relative;
+      padding:24px 20px;
+      border-radius:20px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,219,149,.12), transparent 40%),
+        radial-gradient(circle at 50% 100%, rgba(0,0,0,.35), transparent 50%),
+        linear-gradient(180deg, #2b1415 0%, #1a1011 60%, #130d0e 100%);
+      min-height:640px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .machine-wrap{
+      width:min(100%, 560px);
+      position:relative;
+    }
+
+    .slot-shell{
+      position:relative;
+      border-radius:36px;
+      padding:22px;
+      background:
+        linear-gradient(145deg, #6b381d, #2d160e 34%, #7c4725 50%, #2c140e 68%, #5a311c 100%);
+      box-shadow:
+        inset 0 0 0 2px rgba(255,239,203,.18),
+        inset 0 0 0 10px rgba(46,16,10,.68),
+        0 18px 40px rgba(0,0,0,.5);
+    }
+
+    .slot-shell::before{
+      content:"";
+      position:absolute;
+      inset:10px;
+      border-radius:30px;
+      background:
+        linear-gradient(145deg, #f2e1bf, #8f6f4c 24%, #fff1d2 36%, #82633d 55%, #f4dfbc 72%, #7d5d36 100%);
+      opacity:.22;
+      pointer-events:none;
+    }
+
+    .slot-glass{
+      position:relative;
+      border-radius:28px;
+      padding:20px 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+        linear-gradient(180deg, #191113 0%, #110c0d 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.06),
+        inset 0 8px 20px rgba(255,255,255,.04),
+        inset 0 -12px 24px rgba(0,0,0,.32);
+    }
+
+    .slot-window{
+      position:relative;
+      width:min(100%, var(--slot-width));
+      height:calc(var(--row-height) * 3);
+      margin:0 auto;
+      overflow:hidden;
+      border-radius:24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)),
+        linear-gradient(180deg, #1b1012 0%, #10090a 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.05),
+        inset 0 18px 30px rgba(255,255,255,.02),
+        inset 0 -18px 30px rgba(0,0,0,.26);
+    }
+
+    .slot-window::before,
+    .slot-window::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      height:calc(var(--row-height) * 0.95);
+      z-index:3;
+      pointer-events:none;
+    }
+
+    .slot-window::before{
+      top:0;
+      background:linear-gradient(180deg, rgba(11,7,8,.95), rgba(11,7,8,.1));
+    }
+
+    .slot-window::after{
+      bottom:0;
+      background:linear-gradient(180deg, rgba(11,7,8,0), rgba(11,7,8,.96));
+    }
+
+    .slot-track{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      will-change:transform;
+      transform:translateY(0);
+      z-index:1;
+    }
+
+    .slot-row{
+      height:var(--row-height);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 14px;
+    }
+
+    .slot-token{
+      width:100%;
+      height:62px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff9ef;
+      font-weight:900;
+      font-size:26px;
+      letter-spacing:-.03em;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 4px 10px rgba(0,0,0,.22);
+      user-select:none;
+      padding:0 18px;
+    }
+
+    .slot-token.red{ background:linear-gradient(180deg, var(--red1), var(--red2) 74%); }
+    .slot-token.black{ background:linear-gradient(180deg, var(--black1), var(--black2) 74%); }
+    .slot-token.green{ background:linear-gradient(180deg, var(--green1), var(--green2) 74%); }
+
+    .slot-author{
+      width:100%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      text-align:center;
+    }
+
+    .slot-center-frame{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:calc(100% - 14px);
+      height:var(--frame-height);
+      transform:translate(-50%, -50%);
+      border-radius:22px;
+      z-index:4;
+      pointer-events:none;
+      box-shadow:
+        0 0 0 2px rgba(255,236,196,.96),
+        0 0 0 8px rgba(201,138,58,.14),
+        0 10px 24px rgba(0,0,0,.28),
+        0 0 24px rgba(255,214,120,.18);
+      background:linear-gradient(180deg, rgba(255,244,213,.05), rgba(255,244,213,.015));
+    }
+
+    .slot-center-frame::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:22px;
+      border:2px solid rgba(126,78,28,.68);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.2);
+    }
+
+    .slot-center-line{
+      position:absolute;
+      left:50%;
+      top:10px;
+      bottom:10px;
+      width:4px;
+      transform:translateX(-50%);
+      border-radius:999px;
+      background:linear-gradient(180deg, #fff6dd, #f1c671 52%, #fff6dd);
+      box-shadow:0 0 12px rgba(255,220,140,.45);
+      opacity:.95;
+    }
+
+    .slot-center-frame.glow{
+      box-shadow:
+        0 0 0 2px rgba(255,236,196,.98),
+        0 0 0 8px rgba(201,138,58,.16),
+        0 10px 24px rgba(0,0,0,.28),
+        0 0 40px rgba(255,214,120,.38);
+    }
+
+    .machine-header{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:16px;
+    }
+
+    .machine-logo{
+      width:114px;
+      height:114px;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 40% 35%, rgba(255,255,255,.32), transparent 18%),
+        linear-gradient(145deg, #ffefcd, #8e6f49 24%, #fff6df 37%, #8a673b 58%, #fff0cb 79%, #89673d 100%);
+      box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,.28),
+        inset 0 8px 18px rgba(255,255,255,.24),
+        0 10px 16px rgba(0,0,0,.22);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px;
+      overflow:hidden;
+    }
+
+    .machine-logo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:50%;
+      display:block;
+    }
+
+    .side-box{
+      display:grid;
+      gap:12px;
+    }
+
+    .candidate-box,
+    .live-box{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      padding:14px;
+    }
+
+    .box-title{
+      margin:0 0 10px;
+      font-size:17px;
+      font-weight:900;
+    }
+
+    .live-name{
+      font-size:32px;
+      font-weight:900;
+      line-height:1.1;
+      color:#fff7df;
+      text-shadow:0 1px 2px rgba(0,0,0,.5);
+      min-height:70px;
+      display:flex;
+      align-items:center;
+      word-break:break-word;
+    }
+
+    .live-sub{
+      margin-top:8px;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.55;
+      min-height:44px;
+    }
+
+    .candidate-list{
+      display:grid;
+      gap:8px;
+      max-height:540px;
+      overflow:auto;
+      padding-right:4px;
+    }
+
+    .candidate-item{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .candidate-no{
+      min-width:34px;
+      height:34px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      font-size:12px;
+      font-weight:900;
+      color:#2a140a;
+      background:linear-gradient(180deg, #ffe3b2, #b07a36);
+      flex:0 0 34px;
+    }
+
+    .candidate-text{
+      min-width:0;
+      flex:1;
+    }
+
+    .candidate-name{
+      font-size:15px;
+      font-weight:900;
+      color:#fffaf1;
+      margin-bottom:3px;
+      word-break:break-word;
+    }
+
+    .candidate-meta{
+      font-size:12px;
+      color:var(--muted);
+      word-break:break-word;
+    }
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .mini-box{
+      padding:14px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+
+    .mini-box .label{
+      font-size:11px;
+      color:#f0c989;
+      letter-spacing:.08em;
+      margin-bottom:6px;
+      font-weight:800;
+    }
+
+    .mini-box .main{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.4;
+      margin-bottom:4px;
+      word-break:break-word;
+    }
+
+    .mini-box .meta{
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.5;
+      word-break:break-word;
+    }
+
+    .result-list{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .result-item{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+    }
+
+    .result-rank{
+      width:34px;
+      height:34px;
+      flex:0 0 34px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      font-size:13px;
+      font-weight:900;
+      color:#2a140a;
+      background:linear-gradient(180deg, #ffe3b2, #b07a36);
+      box-shadow:inset 0 1px 2px rgba(255,255,255,.35);
+    }
+
+    .result-text{
+      min-width:0;
+      flex:1;
+    }
+
+    .result-title{
+      font-size:14px;
+      font-weight:900;
+      line-height:1.4;
+      margin-bottom:4px;
+      word-break:break-word;
+    }
+
+    .result-meta{
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.5;
+      word-break:break-word;
+    }
+
+    .hide{display:none !important}
+
+    .popup{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:100;
+      background:rgba(0,0,0,.6);
+      backdrop-filter:blur(6px);
+    }
+
+    .popup.show{display:flex}
+
+    .popup-card{
+      width:min(100%, 560px);
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,214,132,.18), transparent 40%),
+        linear-gradient(180deg, #2a1516 0%, #160e0f 100%);
+      box-shadow:0 20px 60px rgba(0,0,0,.55);
+      padding:18px 16px 16px;
+    }
+
+    .popup-title{
+      margin:0 0 8px;
+      text-align:center;
+      font-size:22px;
+      font-weight:900;
+    }
+
+    .popup-sub{
+      text-align:center;
+      color:#f4d7b1;
+      font-size:13px;
+      line-height:1.6;
+      margin-bottom:14px;
+    }
+
+    .popup-link{
+      display:block;
+      text-align:center;
+      font-size:13px;
+      color:#ffe2b0;
+      margin-bottom:14px;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    .popup-list{
+      display:grid;
+      gap:10px;
+      margin-bottom:16px;
+      max-height:420px;
+      overflow:auto;
+    }
+
+    .popup-item{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      padding:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    }
+
+    .popup-item strong{
+      display:block;
+      font-size:14px;
+      line-height:1.45;
+      margin-bottom:4px;
+      word-break:break-word;
+    }
+
+    .popup-item span{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.5;
+      word-break:break-word;
+    }
+
+    .popup-close{
+      width:100%;
+      border:0;
+      border-radius:16px;
+      padding:14px 12px;
+      font-size:14px;
+      font-weight:900;
+      cursor:pointer;
+      color:#2a140a;
+      background:linear-gradient(180deg, #ffe3b2, #b07a36);
+    }
+
+    @media (max-width: 1180px){
+      .app{width:min(100%, calc(100% - 20px))}
+      .layout{grid-template-columns:1fr}
+      .slot-area{grid-template-columns:1fr}
+      .machine-stage{min-height:auto}
+      .candidate-list{max-height:280px}
+    }
+
+    @media (max-width: 720px){
+      :root{
+        --slot-width:min(100%, 360px);
+        --row-height:72px;
+        --frame-height:88px;
+      }
+
+      .slot-token{
+        height:56px;
+        font-size:22px;
+      }
+
+      .live-name{
+        font-size:24px;
+        min-height:56px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <h1 class="title">카페 이벤트 슬롯 추첨기</h1>
+    </div>
+
+    <div class="layout">
+      <div class="panel section">
+        <div class="mode-grid">
+          <button class="mode-btn active" id="modeTopBtn" type="button">
+            <span class="big">각 부분 1등 뽑기</span>
+            <span class="small">좋아요 1등<br>조회수 1등<br>댓글수 1등</span>
+          </button>
+          <button class="mode-btn" id="modeAllBtn" type="button">
+            <span class="big">모두 추첨</span>
+            <span class="small">작성자 기준<br>중복 없이 추첨</span>
+          </button>
+        </div>
+
+        <div class="toolbar">
+          <div class="count-row" id="countRow">
+            <button class="count-btn active" id="count5Btn" type="button">
+              <span class="big">5명</span>
+              <span class="small">작성자 기준 5명 추첨</span>
+            </button>
+            <button class="count-btn" id="count7Btn" type="button">
+              <span class="big">7명</span>
+              <span class="small">1등 제외 후 7명 추첨</span>
+            </button>
+          </div>
+
+          <div class="action-row">
+            <button class="action-btn primary" id="parseBtn" type="button">데이터 분석</button>
+            <button class="action-btn secondary" id="spinBtn" type="button" disabled>슬롯 시작</button>
+          </div>
+
+          <div class="action-row">
+            <button class="action-btn ghost" id="autoBtn" type="button" disabled>자동 진행</button>
+            <button class="action-btn ghost" id="resetBtn" type="button">초기화</button>
+          </div>
+        </div>
+
+        <textarea id="rawInput">14608
+[오늘하루]오늘 하루 끄적끄적 -2댓글수[1]
+고사리손
+2026.03.18.	86	3
+
+14593
+[오늘하루]1주년 스킨과 G-드래곤 싱크로율댓글수[4]
+블루리스
+2026.03.18.	885	7
+
+14586
+[오늘하루]오늘은 곰 신기록을 세웠다(버프빨)댓글수[5]
+던져버려요
+2026.03.17.	942	5
+
+14584
+[오늘하루]오늘하루 끄적끄적 -1댓글수[2]
+고사리손
+2026.03.17.	89	4
+
+14564
+[오늘하루]일 끝나면 한잔해야겠네요댓글수[36]
+Ten
+2026.03.17.	584	28
+
+14545
+[오늘하루]8시 55분 알람댓글수[2]
+미니미니지니
+2026.03.17.	282	1
+
+14537
+[오늘하루]약 3시간 동안 총동원 임무 새로고침만 했습니댜 하하댓글수[6]
+킹샤샤
+2026.03.16.	916	2
+
+14477
+[오늘하루]양 올인댓글수[5]
+던져버려요
+2026.03.15.	754	1
+
+14461
+[오늘하루]하루 루틴댓글수[4]
+멋과맛
+2026.03.15.	135	3</textarea>
+
+        <div class="status" id="statusText">대기 중</div>
+      </div>
+
+      <div class="panel slot-panel">
+        <div class="slot-area">
+          <div class="machine-stage">
+            <div class="machine-wrap">
+              <div class="machine-header">
+                <div class="machine-logo">
+                  <img src="/img/kingshotdata-logo.png" alt="KingshotData 로고" onerror="this.style.display='none'">
+                </div>
+              </div>
+
+              <div class="slot-shell">
+                <div class="slot-glass">
+                  <div class="slot-window" id="slotWindow">
+                    <div class="slot-track" id="slotTrack"></div>
+                    <div class="slot-center-frame" id="slotFrame">
+                      <div class="slot-center-line"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="side-box">
+            <div class="live-box">
+              <h3 class="box-title">현재 선택</h3>
+              <div class="live-name" id="liveName">대기 중</div>
+              <div class="live-sub" id="liveSub">데이터 분석 후 슬롯을 시작해줘</div>
+            </div>
+
+            <div class="candidate-box">
+              <h3 class="box-title">추첨 대상 작성자 목록</h3>
+              <div class="candidate-list" id="candidateList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mini-grid">
+      <div class="panel mini-box">
+        <div class="label">좋아요 1등</div>
+        <div class="main" id="topLikeTitle">-</div>
+        <div class="meta" id="topLikeMeta">-</div>
+      </div>
+
+      <div class="panel mini-box">
+        <div class="label">조회수 1등</div>
+        <div class="main" id="topViewTitle">-</div>
+        <div class="meta" id="topViewMeta">-</div>
+      </div>
+
+      <div class="panel mini-box">
+        <div class="label">댓글수 1등</div>
+        <div class="main" id="topCommentTitle">-</div>
+        <div class="meta" id="topCommentMeta">-</div>
+      </div>
+    </div>
+
+    <div class="panel section" style="margin-top:12px;">
+      <h2 style="margin:0;font-size:19px">당첨 결과</h2>
+      <div class="result-list" id="resultList"></div>
+    </div>
+  </div>
+
+  <div class="popup" id="popup">
+    <div class="popup-card">
+      <h2 class="popup-title">당첨자 명단</h2>
+      <div class="popup-sub">네이버킹샷카페 오늘하루 이벤트</div>
+      <a class="popup-link" href="https://cafe.naver.com/kingshot1" target="_blank" rel="noopener">https://cafe.naver.com/kingshot1</a>
+      <div class="popup-list" id="popupList"></div>
+      <button class="popup-close" id="popupClose" type="button">확인</button>
+    </div>
+  </div>
+
+  <script>
+    const state = {
+      mode: 'top',
+      extraMode: '5',
+      posts: [],
+      autoWinners: { like: null, view: null, comment: null },
+      excludedAuthors: new Set(),
+      remainingAuthors: [],
+      results: [],
+      spinning: false,
+      currentTrackItems: [],
+      currentOffset: 0,
+      popupLocked: false,
+      topFinished: false
+    };
+
+    const els = {
+      modeTopBtn: document.getElementById('modeTopBtn'),
+      modeAllBtn: document.getElementById('modeAllBtn'),
+      count5Btn: document.getElementById('count5Btn'),
+      count7Btn: document.getElementById('count7Btn'),
+      countRow: document.getElementById('countRow'),
+      parseBtn: document.getElementById('parseBtn'),
+      spinBtn: document.getElementById('spinBtn'),
+      autoBtn: document.getElementById('autoBtn'),
+      resetBtn: document.getElementById('resetBtn'),
+      rawInput: document.getElementById('rawInput'),
+      statusText: document.getElementById('statusText'),
+      slotTrack: document.getElementById('slotTrack'),
+      slotFrame: document.getElementById('slotFrame'),
+      liveName: document.getElementById('liveName'),
+      liveSub: document.getElementById('liveSub'),
+      candidateList: document.getElementById('candidateList'),
+      topLikeTitle: document.getElementById('topLikeTitle'),
+      topLikeMeta: document.getElementById('topLikeMeta'),
+      topViewTitle: document.getElementById('topViewTitle'),
+      topViewMeta: document.getElementById('topViewMeta'),
+      topCommentTitle: document.getElementById('topCommentTitle'),
+      topCommentMeta: document.getElementById('topCommentMeta'),
+      resultList: document.getElementById('resultList'),
+      popup: document.getElementById('popup'),
+      popupList: document.getElementById('popupList'),
+      popupClose: document.getElementById('popupClose')
+    };
+
+    function escapeHtml(str){
+      return String(str ?? '')
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#39;");
+    }
+
+    function sleep(ms){
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function formatNo(no){
+      return String(no).padStart(2, '0');
+    }
+
+    function cleanTitle(raw){
+      return String(raw || '').replace(/댓글수\[\d+\]/g, '').trim();
+    }
+
+    function easeOutCubic(t){
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function getRowHeight(){
+      const v = getComputedStyle(document.documentElement).getPropertyValue('--row-height').trim();
+      return parseFloat(v) || 82;
+    }
+
+    function getCenterIndexForWindow(){
+      return 1;
+    }
+
+    function parsePosts(raw){
+      const normalized = String(raw || '').replace(/\r/g, '');
+      const blocks = normalized.split(/\n\s*\n+/).map(v => v.trim()).filter(Boolean);
+      const posts = [];
+
+      for(const block of blocks){
+        const lines = block.split('\n').map(v => v.trim()).filter(Boolean);
+        if(lines.length < 4) continue;
+
+        const idLine = lines[0];
+        const titleLine = lines[1];
+        const authorLine = lines[2];
+        const metaLine = lines[3];
+
+        const idMatch = idLine.match(/^(\d+)$/);
+        const commentMatch = titleLine.match(/댓글수\[(\d+)\]/);
+        const metaMatch = metaLine.match(/^(\d{4}\.\d{2}\.\d{2}\.)\s+(\d+)\s+(\d+)$/);
+
+        if(!idMatch || !commentMatch || !metaMatch) continue;
+
+        posts.push({
+          id: Number(idMatch[1]),
+          title: cleanTitle(titleLine),
+          author: authorLine,
+          date: metaMatch[1],
+          views: Number(metaMatch[2]),
+          likes: Number(metaMatch[3]),
+          comments: Number(commentMatch[1])
+        });
+      }
+
+      return posts;
+    }
+
+    function assignFixedNumbers(posts){
+      return posts.map((post, idx) => ({
+        ...post,
+        fixedNo: idx + 1
+      }));
+    }
+
+    function sortByMetric(posts, metric){
+      return [...posts].sort((a, b) => {
+        if(b[metric] !== a[metric]) return b[metric] - a[metric];
+        if(b.views !== a.views) return b.views - a.views;
+        if(b.likes !== a.likes) return b.likes - a.likes;
+        if(b.comments !== a.comments) return b.comments - a.comments;
+        return a.id - b.id;
+      });
+    }
+
+    function pickTop(posts, metric, excludedAuthors = new Set()){
+      const filtered = posts.filter(p => !excludedAuthors.has(p.author));
+      return sortByMetric(filtered, metric)[0] || null;
+    }
+
+    function uniqueAuthorEntries(posts, excludedAuthors = new Set(), excludedWinnerAuthors = new Set()){
+      const map = new Map();
+
+      for(const post of posts){
+        if(excludedAuthors.has(post.author)) continue;
+        if(excludedWinnerAuthors.has(post.author)) continue;
+        if(!map.has(post.author)){
+          map.set(post.author, {
+            author: post.author,
+            representative: post,
+            posts: [post]
+          });
+        }else{
+          map.get(post.author).posts.push(post);
+        }
+      }
+
+      return [...map.values()];
+    }
+
+    function buildAutoWinners(){
+      state.autoWinners = { like: null, view: null, comment: null };
+      state.excludedAuthors = new Set();
+
+      const likeWinner = pickTop(state.posts, 'likes', state.excludedAuthors);
+      if(likeWinner) state.excludedAuthors.add(likeWinner.author);
+
+      const viewWinner = pickTop(state.posts, 'views', state.excludedAuthors);
+      if(viewWinner) state.excludedAuthors.add(viewWinner.author);
+
+      const commentWinner = pickTop(state.posts, 'comments', state.excludedAuthors);
+      if(commentWinner) state.excludedAuthors.add(commentWinner.author);
+
+      state.autoWinners.like = likeWinner;
+      state.autoWinners.view = viewWinner;
+      state.autoWinners.comment = commentWinner;
+
+      state.remainingAuthors = uniqueAuthorEntries(state.posts, state.excludedAuthors, new Set());
+    }
+
+    function getCountTarget(){
+      if(state.mode !== 'all') return 0;
+      return state.extraMode === '5' ? 5 : 7;
+    }
+
+    function getCurrentWinnerAuthors(){
+      return new Set(state.results.map(v => v.author));
+    }
+
+    function getAuthorPoolForCurrentAllMode(){
+      const resultAuthors = getCurrentWinnerAuthors();
+
+      if(state.extraMode === '5'){
+        return uniqueAuthorEntries(state.posts, new Set(), resultAuthors);
+      }
+
+      return uniqueAuthorEntries(state.posts, state.excludedAuthors, resultAuthors);
+    }
+
+    function getTokenType(idx){
+      return idx === 0 ? 'green' : (idx % 2 ? 'red' : 'black');
+    }
+
+    function buildTrackItems(sourceEntries){
+      if(!sourceEntries.length){
+        return [{
+          author: '',
+          label: '대기 중',
+          representative: null,
+          posts: [],
+          type: 'green'
+        }];
+      }
+
+      return sourceEntries.map((entry, idx) => ({
+        author: entry.author,
+        label: entry.author,
+        representative: entry.representative,
+        posts: entry.posts,
+        type: getTokenType(idx)
+      }));
+    }
+
+    function renderTrack(items){
+      state.currentTrackItems = items;
+
+      const repeated = [];
+      const repeatCount = items.length === 1 ? 7 : 30;
+
+      for(let r = 0; r < repeatCount; r++){
+        for(let i = 0; i < items.length; i++){
+          repeated.push({
+            ...items[i],
+            renderKey: `${r}-${i}`
+          });
+        }
+      }
+
+      els.slotTrack.innerHTML = repeated.map(item => `
+        <div class="slot-row" data-author="${escapeHtml(item.author)}">
+          <div class="slot-token ${item.type}">
+            <span class="slot-author">${escapeHtml(item.label)}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setTrackOffset(offset){
+      state.currentOffset = offset;
+      els.slotTrack.style.transform = `translateY(${offset}px)`;
+    }
+
+    function getTrackCenterOffsetForAbsoluteIndex(index){
+      const rowH = getRowHeight();
+      const centerIndex = getCenterIndexForWindow();
+      return -((index - centerIndex) * rowH);
+    }
+
+    function renderTrackPreview(){
+      if(state.mode === 'top'){
+        const list = [
+          state.autoWinners.like,
+          state.autoWinners.view,
+          state.autoWinners.comment
+        ].filter(Boolean).map(post => ({
+          author: post.author,
+          representative: post,
+          posts: [post]
+        }));
+        renderTrack(buildTrackItems(list));
+      } else {
+        renderTrack(buildTrackItems(getAuthorPoolForCurrentAllMode()));
+      }
+
+      setTrackOffset(state.currentOffset);
+    }
+
+    function renderCandidateList(){
+      const source = state.mode === 'top'
+        ? [state.autoWinners.like, state.autoWinners.view, state.autoWinners.comment].filter(Boolean).map(post => ({
+            author: post.author,
+            representative: post,
+            posts: [post]
+          }))
+        : getAuthorPoolForCurrentAllMode();
+
+      if(!source.length){
+        els.candidateList.innerHTML = `
+          <div class="candidate-item">
+            <div class="candidate-no">-</div>
+            <div class="candidate-text">
+              <div class="candidate-name">후보 없음</div>
+              <div class="candidate-meta">데이터 분석 후 표시돼</div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      els.candidateList.innerHTML = source.map((entry, idx) => `
+        <div class="candidate-item">
+          <div class="candidate-no">${formatNo(idx + 1)}</div>
+          <div class="candidate-text">
+            <div class="candidate-name">${escapeHtml(entry.author)}</div>
+            <div class="candidate-meta">게시글 ${entry.posts.length}개 | 대표글: ${escapeHtml(entry.representative.title)}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderTopBoxes(){
+      const like = state.autoWinners.like;
+      const view = state.autoWinners.view;
+      const comment = state.autoWinners.comment;
+
+      els.topLikeTitle.textContent = like ? like.author : '-';
+      els.topLikeMeta.textContent = like ? `${like.title} | 좋아요 ${like.likes}` : '-';
+
+      els.topViewTitle.textContent = view ? view.author : '-';
+      els.topViewMeta.textContent = view ? `${view.title} | 조회수 ${view.views}` : '-';
+
+      els.topCommentTitle.textContent = comment ? comment.author : '-';
+      els.topCommentMeta.textContent = comment ? `${comment.title} | 댓글 ${comment.comments}` : '-';
+    }
+
+    function renderResults(){
+      if(state.mode === 'top'){
+        if(!state.topFinished){
+          els.resultList.innerHTML = `
+            <div class="result-item">
+              <div class="result-rank">-</div>
+              <div class="result-text">
+                <div class="result-title">아직 결과가 없어</div>
+                <div class="result-meta">슬롯 시작 후 최종 결과가 표시돼</div>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        const resultItems = [];
+        if(state.autoWinners.like) resultItems.push({ rank:'L', label:'좋아요 1등', post:state.autoWinners.like });
+        if(state.autoWinners.view) resultItems.push({ rank:'V', label:'조회수 1등', post:state.autoWinners.view });
+        if(state.autoWinners.comment) resultItems.push({ rank:'C', label:'댓글수 1등', post:state.autoWinners.comment });
+
+        els.resultList.innerHTML = resultItems.map(item => `
+          <div class="result-item">
+            <div class="result-rank">${item.rank}</div>
+            <div class="result-text">
+              <div class="result-title">${escapeHtml(item.post.author)} - ${escapeHtml(item.post.title)}</div>
+              <div class="result-meta">${escapeHtml(item.label)} | 게시글 기준 선정 | 고정번호 #${formatNo(item.post.fixedNo)} | ${escapeHtml(item.post.date)} | 조회수 ${item.post.views} | 좋아요 ${item.post.likes} | 댓글 ${item.post.comments}</div>
+            </div>
+          </div>
+        `).join('');
+        return;
+      }
+
+      if(!state.results.length){
+        const meta = state.extraMode === '5'
+          ? '작성자 기준으로 중복 없이 5명을 추첨해'
+          : '1등 작성자 제외 후 남은 작성자 중 7명을 추첨해';
+
+        els.resultList.innerHTML = `
+          <div class="result-item">
+            <div class="result-rank">-</div>
+            <div class="result-text">
+              <div class="result-title">추가 추첨 결과가 아직 없어</div>
+              <div class="result-meta">${meta}</div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      els.resultList.innerHTML = state.results.map((entry, idx) => `
+        <div class="result-item">
+          <div class="result-rank">${idx + 1}</div>
+          <div class="result-text">
+            <div class="result-title">${escapeHtml(entry.author)} - 대표글: ${escapeHtml(entry.representative.title)}</div>
+            <div class="result-meta">작성자 기준 당첨 | 해당 작성자 게시글 ${entry.posts.length}개 | 대표글 고정번호 #${formatNo(entry.representative.fixedNo)} | ${escapeHtml(entry.representative.date)} | 조회수 ${entry.representative.views} | 좋아요 ${entry.representative.likes} | 댓글 ${entry.representative.comments}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateButtons(){
+      const hasPosts = state.posts.length > 0;
+      const canSpinTop = hasPosts && state.mode === 'top' && !state.spinning;
+      const targetCount = getCountTarget();
+      const currentPool = getAuthorPoolForCurrentAllMode();
+      const canSpinAll = hasPosts && state.mode === 'all' && !state.spinning && state.results.length < targetCount && currentPool.length > 0;
+
+      els.spinBtn.disabled = !(canSpinTop || canSpinAll);
+      els.autoBtn.disabled = !(hasPosts && !state.spinning && (
+        state.mode === 'top' || (state.mode === 'all' && state.results.length < targetCount && currentPool.length > 0)
+      ));
+    }
+
+    function setLiveEntry(entry, prefix = ''){
+      if(!entry){
+        els.liveName.textContent = '대기 중';
+        els.liveSub.textContent = '데이터 분석 후 슬롯을 시작해줘';
+        return;
+      }
+
+      const rep = entry.representative;
+      els.liveName.textContent = prefix ? `${prefix} ${entry.author}` : entry.author;
+      if(rep){
+        els.liveSub.textContent = `게시글 ${entry.posts.length}개 | 대표글: ${rep.title} | 고정번호 #${formatNo(rep.fixedNo)} | ${rep.date}`;
+      } else {
+        els.liveSub.textContent = '대표글 정보 없음';
+      }
+    }
+
+    function setLivePost(post, prefix = ''){
+      if(!post){
+        els.liveName.textContent = '대기 중';
+        els.liveSub.textContent = '데이터 분석 후 슬롯을 시작해줘';
+        return;
+      }
+
+      els.liveName.textContent = prefix ? `${prefix} ${post.author}` : post.author;
+      els.liveSub.textContent = `${post.title} | 고정번호 #${formatNo(post.fixedNo)} | ${post.date} | 조회수 ${post.views} | 좋아요 ${post.likes} | 댓글 ${post.comments}`;
+    }
+
+    function closePopup(force = false){
+      if(state.popupLocked && !force) return;
+      els.popup.classList.remove('show');
+    }
+
+    async function showWinnerPopup(label, entryOrPost, autoClose = true){
+      const isAuthorEntry = entryOrPost && Array.isArray(entryOrPost.posts);
+
+      if(isAuthorEntry){
+        const rep = entryOrPost.representative;
+        els.popupList.innerHTML = `
+          <div class="popup-item">
+            <strong>${escapeHtml(label)} | ${escapeHtml(entryOrPost.author)}</strong>
+            <span>작성자 기준 당첨 | 게시글 ${entryOrPost.posts.length}개 | 대표글: ${escapeHtml(rep.title)} | 고정번호 #${formatNo(rep.fixedNo)} | ${escapeHtml(rep.date)}</span>
+          </div>
+        `;
+      } else {
+        const post = entryOrPost;
+        els.popupList.innerHTML = `
+          <div class="popup-item">
+            <strong>${escapeHtml(label)} | ${escapeHtml(post.author)}</strong>
+            <span>${escapeHtml(post.title)} | 고정번호 #${formatNo(post.fixedNo)} | ${escapeHtml(post.date)} | 조회수 ${post.views} | 좋아요 ${post.likes} | 댓글 ${post.comments}</span>
+          </div>
+        `;
+      }
+
+      els.popup.classList.add('show');
+
+      if(!autoClose) return;
+
+      state.popupLocked = true;
+      await sleep(1300);
+      state.popupLocked = false;
+      closePopup(true);
+      await sleep(180);
+    }
+
+    function showFinalTopPopup(){
+      const list = [];
+      if(state.autoWinners.like) list.push({ label:'좋아요 1등', post:state.autoWinners.like });
+      if(state.autoWinners.view) list.push({ label:'조회수 1등', post:state.autoWinners.view });
+      if(state.autoWinners.comment) list.push({ label:'댓글수 1등', post:state.autoWinners.comment });
+
+      els.popupList.innerHTML = list.map((item, idx) => `
+        <div class="popup-item">
+          <strong>${formatNo(idx + 1)} | ${escapeHtml(item.label)} - ${escapeHtml(item.post.author)}</strong>
+          <span>${escapeHtml(item.post.title)} | 고정번호 #${formatNo(item.post.fixedNo)} | ${escapeHtml(item.post.date)} | 조회수 ${item.post.views} | 좋아요 ${item.post.likes} | 댓글 ${item.post.comments}</span>
+        </div>
+      `).join('');
+
+      els.popup.classList.add('show');
+    }
+
+    function showFinalAllPopup(){
+      els.popupList.innerHTML = state.results.map((entry, idx) => `
+        <div class="popup-item">
+          <strong>${formatNo(idx + 1)} | ${escapeHtml(entry.author)}</strong>
+          <span>작성자 기준 당첨 | 게시글 ${entry.posts.length}개 | 대표글: ${escapeHtml(entry.representative.title)} | 고정번호 #${formatNo(entry.representative.fixedNo)} | ${escapeHtml(entry.representative.date)}</span>
+        </div>
+      `).join('');
+
+      els.popup.classList.add('show');
+    }
+
+    async function animateTrack(fromOffset, toOffset, duration, easingFn){
+      return new Promise(resolve => {
+        const startTs = performance.now();
+
+        function frame(now){
+          const elapsed = now - startTs;
+          const t = Math.min(1, elapsed / duration);
+          const eased = easingFn(t);
+          const current = fromOffset + (toOffset - fromOffset) * eased;
+          setTrackOffset(current);
+
+          if(t < 1){
+            requestAnimationFrame(frame);
+          }else{
+            resolve();
+          }
+        }
+
+        requestAnimationFrame(frame);
+      });
+    }
+
+    async function animateSlotAndGetWinner(){
+      const items = state.currentTrackItems;
+      const total = items.length;
+
+      if(!total){
+        return { winnerIndex: 0, winnerEntry: null };
+      }
+
+      if(total === 1){
+        const centerAbsoluteIndex = 1;
+        const centerOffset = getTrackCenterOffsetForAbsoluteIndex(centerAbsoluteIndex);
+        setTrackOffset(centerOffset);
+
+        const winnerEntry = items[0] || null;
+        if(winnerEntry) setLiveEntry(winnerEntry, '당첨');
+        return { winnerIndex: 0, winnerEntry };
+      }
+
+      const rowH = getRowHeight();
+      const start = state.currentOffset;
+      const baseLoops = 12 + Math.floor(Math.random() * 3);
+      const winnerIndex = Math.floor(Math.random() * total);
+
+      const absoluteIndexForWinner = baseLoops * total + winnerIndex + getCenterIndexForWindow();
+      const finalTarget = getTrackCenterOffsetForAbsoluteIndex(absoluteIndexForWinner);
+      const overshoot = rowH * (0.22 + Math.random() * 0.12);
+
+      const phase1 = finalTarget - overshoot;
+      const phase2 = finalTarget + (overshoot * 0.35);
+
+      els.slotFrame.classList.add('glow');
+
+      await animateTrack(start, phase1, 4200, easeOutCubic);
+      await animateTrack(phase1, phase2, 260, easeOutCubic);
+      await animateTrack(phase2, finalTarget, 190, easeOutCubic);
+
+      els.slotFrame.classList.remove('glow');
+      setTrackOffset(finalTarget);
+
+      const winnerEntry = items[winnerIndex] || null;
+      if(winnerEntry){
+        setLiveEntry(winnerEntry, '당첨');
+      }
+
+      return { winnerIndex, winnerEntry };
+    }
+
+    function resetRunOnly(){
+      state.results = [];
+      state.currentOffset = 0;
+      state.topFinished = false;
+      closePopup(true);
+      renderTrackPreview();
+      renderCandidateList();
+      renderResults();
+      setLiveEntry(null);
+      updateButtons();
+    }
+
+    function analyzeData(){
+      const parsed = parsePosts(els.rawInput.value);
+      const posts = assignFixedNumbers(parsed);
+
+      state.posts = posts;
+      state.results = [];
+      state.spinning = false;
+      state.currentOffset = 0;
+      state.popupLocked = false;
+      state.topFinished = false;
+
+      if(!posts.length){
+        els.statusText.textContent = '파싱 실패. 붙여넣은 형식을 다시 확인해줘.';
+        renderTopBoxes();
+        renderTrack(buildTrackItems([]));
+        renderCandidateList();
+        renderResults();
+        setLiveEntry(null);
+        updateButtons();
+        return;
+      }
+
+      buildAutoWinners();
+      renderTopBoxes();
+      renderTrackPreview();
+      renderCandidateList();
+      renderResults();
+      setLiveEntry(null);
+
+      const totalAuthors = uniqueAuthorEntries(state.posts).length;
+      els.statusText.textContent = `분석 완료 | 전체 게시글 ${state.posts.length}개 | 전체 작성자 ${totalAuthors}명`;
+      updateButtons();
+    }
+
+    async function spinTopMode(){
+      const sequence = [
+        { label:'좋아요 1등', post:state.autoWinners.like },
+        { label:'조회수 1등', post:state.autoWinners.view },
+        { label:'댓글수 1등', post:state.autoWinners.comment }
+      ].filter(v => v.post);
+
+      if(!sequence.length) return;
+
+      state.spinning = true;
+      updateButtons();
+
+      for(let i = 0; i < sequence.length; i++){
+        const step = sequence[i];
+        const singleEntry = {
+          author: step.post.author,
+          representative: step.post,
+          posts: [step.post]
+        };
+
+        renderTrack(buildTrackItems([singleEntry]));
+        renderCandidateList();
+        state.currentOffset = 0;
+        setTrackOffset(getTrackCenterOffsetForAbsoluteIndex(1));
+        setLivePost(step.post, '당첨');
+
+        await sleep(260);
+        await showWinnerPopup(step.label, step.post, true);
+
+        if(i < sequence.length - 1){
+          await sleep(160);
+        }
+      }
+
+      state.spinning = false;
+      state.currentOffset = 0;
+      state.topFinished = true;
+      renderTrackPreview();
+      renderCandidateList();
+      renderResults();
+      updateButtons();
+      showFinalTopPopup();
+    }
+
+    async function spinAllModeOnce(){
+      const pool = getAuthorPoolForCurrentAllMode();
+      const targetCount = getCountTarget();
+
+      if(!pool.length) return;
+      if(state.results.length >= targetCount) return;
+
+      state.spinning = true;
+      updateButtons();
+
+      renderTrack(buildTrackItems(pool));
+      renderCandidateList();
+
+      const spinResult = await animateSlotAndGetWinner();
+      const winnerEntry = spinResult.winnerEntry;
+
+      if(!winnerEntry){
+        state.spinning = false;
+        updateButtons();
+        return;
+      }
+
+      if(!state.results.some(v => v.author === winnerEntry.author)){
+        state.results.push(winnerEntry);
+      }
+
+      renderResults();
+      await showWinnerPopup(`${state.results.length}번째 당첨`, winnerEntry, true);
+
+      state.currentOffset = 0;
+      renderTrackPreview();
+      renderCandidateList();
+
+      const remain = targetCount - state.results.length;
+      const leftPool = getAuthorPoolForCurrentAllMode();
+      const leftNames = leftPool.map(v => v.author).join(', ');
+      els.statusText.textContent = `추첨 진행 중 | 당첨자 ${winnerEntry.author} 제거 완료 | 남은 ${remain}명 | 남은 작성자 ${leftNames || '-'}`;
+
+      state.spinning = false;
+      updateButtons();
+
+      if(state.results.length >= targetCount || getAuthorPoolForCurrentAllMode().length === 0){
+        showFinalAllPopup();
+      }
+    }
+
+    async function spinMain(){
+      if(state.spinning) return;
+      if(!state.posts.length) return;
+
+      closePopup(true);
+
+      if(state.mode === 'top'){
+        await spinTopMode();
+      } else {
+        await spinAllModeOnce();
+      }
+    }
+
+    async function autoRun(){
+      if(state.spinning || !state.posts.length) return;
+
+      closePopup(true);
+
+      if(state.mode === 'top'){
+        await spinTopMode();
+        return;
+      }
+
+      while(!state.spinning && state.results.length < getCountTarget() && getAuthorPoolForCurrentAllMode().length > 0){
+        await spinAllModeOnce();
+
+        if(state.results.length < getCountTarget()){
+          closePopup(true);
+          await sleep(500);
+        }
+      }
+    }
+
+    function resetAll(){
+      state.posts = [];
+      state.autoWinners = { like: null, view: null, comment: null };
+      state.excludedAuthors = new Set();
+      state.remainingAuthors = [];
+      state.results = [];
+      state.spinning = false;
+      state.currentTrackItems = [];
+      state.currentOffset = 0;
+      state.popupLocked = false;
+      state.topFinished = false;
+
+      els.statusText.textContent = '초기화 완료';
+      els.topLikeTitle.textContent = '-';
+      els.topLikeMeta.textContent = '-';
+      els.topViewTitle.textContent = '-';
+      els.topViewMeta.textContent = '-';
+      els.topCommentTitle.textContent = '-';
+      els.topCommentMeta.textContent = '-';
+
+      closePopup(true);
+
+      renderTrack(buildTrackItems([]));
+      renderCandidateList();
+      renderResults();
+      setLiveEntry(null);
+      updateButtons();
+    }
+
+    function setMode(mode){
+      state.mode = mode;
+      els.modeTopBtn.classList.toggle('active', mode === 'top');
+      els.modeAllBtn.classList.toggle('active', mode === 'all');
+      els.countRow.classList.toggle('hide', mode !== 'all');
+      resetRunOnly();
+    }
+
+    function setExtraMode(value){
+      state.extraMode = value;
+      els.count5Btn.classList.toggle('active', value === '5');
+      els.count7Btn.classList.toggle('active', value === '7');
+      resetRunOnly();
+    }
+
+    els.modeTopBtn.addEventListener('click', () => setMode('top'));
+    els.modeAllBtn.addEventListener('click', () => setMode('all'));
+    els.count5Btn.addEventListener('click', () => setExtraMode('5'));
+    els.count7Btn.addEventListener('click', () => setExtraMode('7'));
+    els.parseBtn.addEventListener('click', analyzeData);
+    els.spinBtn.addEventListener('click', spinMain);
+    els.autoBtn.addEventListener('click', autoRun);
+    els.resetBtn.addEventListener('click', resetAll);
+    els.popupClose.addEventListener('click', () => closePopup());
+    els.popup.addEventListener('click', (e) => {
+      if(e.target === els.popup) closePopup();
+    });
+
+    setMode('top');
+    setExtraMode('5');
+    renderTrack(buildTrackItems([]));
+    renderCandidateList();
+    renderResults();
+    setLiveEntry(null);
+    updateButtons();
+  </script>
+</body>
+</html>

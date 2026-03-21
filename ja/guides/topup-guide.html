@@ -3,24 +3,39 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Kingshot セルフトップアップガイド | Kingshot Data</title>
-  <meta name="description" content="KingshotのLootBarセルフトップアップ前に確認すべき必須項目、Google/Facebookの二段階認証確認方法、Google Play Games連携アカウント利用不可案内、実際のセルフトップアップ手順までまとめたガイドです." />
+  <title>Kingshot チャージガイド | セルフトップアップ手順・利用条件・二段階認証・クーポン案内 | KingshotData</title>
+  <meta name="description" content="KingshotのLootBarセルフトップアップを始める前に確認したい利用条件、GoogleまたはFacebook連携、二段階認証、Google Play Games連携不可、実際のチャージ手順、クーポン適用方法、問い合わせ先までまとめたガイドです。" />
 
   <link rel="canonical" href="https://kingshotdata.kr/ja/guides/topup-guide.html" />
   <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/topup-guide.html" />
   <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/topup-guide.html" />
   <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/topup-guide.html" />
   <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/topup-guide.html" />
-  <meta name="robots" content="index,follow" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="theme-color" content="#ffffff" />
 
   <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
   <link rel="preload" as="image" href="/img/lootbar/step1.png" />
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot チャージガイド | セルフトップアップ手順・利用条件・二段階認証・クーポン案内" />
+  <meta property="og:description" content="Kingshotのセルフトップアップ前に確認したい利用条件、二段階認証、Google Play Games連携不可、実際の手順、クーポン適用方法まで分かりやすくまとめたガイドです。" />
+  <meta property="og:url" content="https://kingshotdata.kr/ja/guides/topup-guide.html" />
+  <meta property="og:site_name" content="KingshotData" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-logo.png" />
+  <meta property="og:locale" content="ja_JP" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kingshot チャージガイド | セルフトップアップ手順・利用条件・二段階認証・クーポン案内" />
+  <meta name="twitter:description" content="KingshotのLootBarセルフトップアップガイド。GoogleまたはFacebook連携条件、二段階認証、手順画像、クーポン、問い合わせ先までまとめています。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-logo.png" />
 
   <style>
     :root{
       --bg:#ffffff;
       --panel:#ffffff;
+      --panel-soft:#fbfdff;
       --border:#e5e7eb;
       --text:#111827;
       --muted:#6b7280;
@@ -28,7 +43,7 @@
       --brand-strong:#1d4ed8;
       --accent:#111827;
 
-      --radius:16px;
+      --radius:18px;
       --shadow:0 10px 24px rgba(0,0,0,.06);
 
       --header-h:0px;
@@ -47,10 +62,14 @@
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP","Noto Sans KR","Noto Sans",Arial;
+      font:15px/1.68 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP","Noto Sans KR","Noto Sans",Arial,sans-serif;
       color:var(--text);
       background:var(--bg);
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
     }
+
+    img{max-width:100%}
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
 
@@ -65,19 +84,32 @@
       border-bottom:1px solid var(--border);
       background:var(--bg);
     }
+
     .brand a{
-      display:flex;align-items:center;gap:10px;
+      display:flex;
+      align-items:center;
+      gap:10px;
       color:var(--text);
       text-decoration:none;
       font-weight:900;
       letter-spacing:.1px;
     }
-    .brand img{display:block;width:28px;height:28px;border-radius:8px}
+
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
 
     nav.lang{
-      display:flex;gap:8px;flex-wrap:wrap;
-      color:var(--muted);font-size:13px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
     }
+
     nav.lang a{
       color:var(--muted);
       padding:8px 10px;
@@ -86,18 +118,23 @@
       background:#fff;
       text-decoration:none;
     }
-    nav.lang a[aria-current="page"]{color:var(--text);font-weight:800}
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
 
     nav.section-tabs{
       display:none;
       gap:8px;
-      padding:6px 0;
+      padding:8px 0;
       margin:0;
       overflow:auto;
       -webkit-overflow-scrolling:touch;
       background:var(--bg);
       border-bottom:1px solid var(--border);
     }
+
     nav.section-tabs a{
       display:inline-flex;
       align-items:center;
@@ -110,92 +147,122 @@
       font-size:13px;
       text-decoration:none;
     }
+
     nav.section-tabs a:hover{color:var(--text)}
 
-    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
     .crumbs a{color:var(--muted)}
 
     .hero{
       display:grid;
       grid-template-columns:160px 1fr;
       gap:18px;
-      padding:18px;
+      padding:20px;
       background:var(--panel);
       border:1px solid var(--border);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
     }
+
     .hero-visual{
       width:160px;
       height:160px;
       display:flex;
       align-items:center;
       justify-content:center;
-      border-radius:14px;
+      border-radius:16px;
       background:#f8fafc;
       border:1px solid var(--border);
       padding:14px;
     }
+
     .hero-visual img{
       display:block;
       width:100%;
       height:100%;
       object-fit:contain;
     }
-    h1{margin:0 0 8px;font-size:30px;line-height:1.15}
+
+    h1{
+      margin:0 0 10px;
+      font-size:32px;
+      line-height:1.14;
+      letter-spacing:-.02em;
+    }
+
     .hero-lead{
-      margin:0 0 8px;
-      font-size:17px;
+      margin:0 0 10px;
+      font-size:18px;
       font-weight:900;
       color:var(--accent);
       line-height:1.45;
     }
-    .sub{margin:0;color:var(--muted)}
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+    }
+
     .muted{color:var(--muted)}
+
     .quote{
-      margin:12px 0 0;
-      padding:12px 14px;
+      margin:14px 0 0;
+      padding:13px 15px;
       border:1px solid var(--soft-border);
       border-radius:14px;
       background:#fbfdff;
       color:var(--muted);
-      font-size:13px;
+      font-size:14px;
     }
 
     .hero-cta{
       margin-top:14px;
-      padding:14px 16px;
+      padding:16px;
       border:1px solid var(--soft-border);
-      border-radius:14px;
-      background:#f8fbff;
+      border-radius:16px;
+      background:var(--soft-bg);
     }
+
     .hero-cta p{
       margin:0 0 10px;
       color:var(--text);
       font-weight:700;
     }
+
     .hero-cta .hero-cta-sub{
       color:var(--muted);
       font-weight:400;
-      font-size:13px;
+      font-size:14px;
       margin-top:-2px;
-      margin-bottom:10px;
+      margin-bottom:12px;
     }
-    .hero-proof{
+
+    .hero-proof,
+    .cta-badges{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
-      margin-bottom:10px;
     }
+
+    .hero-proof{margin-bottom:12px}
 
     .jump{
       margin-top:12px;
-      display:flex;gap:10px;flex-wrap:wrap;
-      font-size:13px;color:var(--muted);
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
     }
+
     .jump a{color:var(--muted)}
     .jump a:hover{color:var(--text)}
-    .dotsep{opacity:.5}
+    .dotsep{opacity:.45}
 
     section{
       margin-top:22px;
@@ -203,35 +270,59 @@
       border:1px solid var(--border);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      padding:18px;
+      padding:20px;
     }
-    section h2{margin:0 0 10px;font-size:20px}
-    section h3{margin:18px 0 8px;font-size:17px}
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.25;
+      letter-spacing:-.01em;
+    }
+
+    section h3{
+      margin:18px 0 8px;
+      font-size:18px;
+      line-height:1.35;
+    }
+
     section p{margin:8px 0}
 
-    .note{
-      display:flex;
-      gap:10px;
-      padding:12px 14px;
-      border:1px solid var(--warn-border);
-      background:var(--warn-bg);
-      border-radius:14px;
-      margin:10px 0 14px;
-    }
-    .note strong{font-weight:900}
-    .note .note-ico{
-      width:18px;height:18px;flex:0 0 18px;
-      margin-top:2px;color:#b45309;
+    .lead-block{
+      margin:0 0 12px;
+      color:var(--muted);
     }
 
+    .note,
     .ok-note{
       display:flex;
       gap:10px;
-      padding:12px 14px;
-      border:1px solid var(--ok-border);
-      background:var(--ok-bg);
+      padding:13px 14px;
       border-radius:14px;
       margin:10px 0 14px;
+    }
+
+    .note{
+      border:1px solid var(--warn-border);
+      background:var(--warn-bg);
+    }
+
+    .ok-note{
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+    }
+
+    .note strong,
+    .ok-note strong{
+      font-weight:900;
+    }
+
+    .note .note-ico{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      margin-top:2px;
+      color:#b45309;
     }
 
     .panel{
@@ -242,12 +333,38 @@
       margin:10px 0 14px;
     }
 
+    .check-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .check-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+    }
+
+    .check-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+
+    .check-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
     .imgrow{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
       gap:12px;
       margin:12px 0;
     }
+
     .imgrow img{
       width:100%;
       border:1px solid var(--border);
@@ -256,63 +373,86 @@
       display:block;
     }
 
-    .guide-list{margin:0;padding-left:18px}
+    .guide-list{
+      margin:0;
+      padding-left:18px;
+    }
+
     .guide-list li{margin:6px 0}
 
     .faq-list{
       display:grid;
       gap:12px;
     }
+
     .faq-item{
       border:1px solid var(--border);
       border-radius:14px;
       background:#fff;
       padding:14px;
     }
+
     .faq-q{
       font-weight:900;
       margin:0 0 6px;
     }
+
     .faq-a{
       margin:0;
       color:var(--muted);
     }
 
     .links{
-      background:#f8fbff;
+      background:var(--soft-bg);
       padding:16px;
       border-radius:14px;
-      margin-top:28px;
+      margin-top:14px;
       border:1px solid var(--soft-border);
     }
-    .links h2{color:var(--text);margin-top:0}
+
+    .links h3{
+      color:var(--text);
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .links p{
+      margin:0 0 10px;
+      color:var(--muted);
+    }
+
     .links a{font-weight:900}
 
     .bottom-cta{
-      margin-top:22px;
+      margin-top:18px;
       border-radius:18px;
       border:1px solid var(--border);
       background:linear-gradient(180deg,#ffffff,#fafcff);
       box-shadow:var(--shadow);
       padding:18px;
     }
+
     .bottom-cta .title{
-      font-size:20px;
+      font-size:21px;
       font-weight:900;
       color:var(--text);
       margin:0 0 8px;
+      line-height:1.3;
     }
+
     .bottom-cta .desc{
       margin:0 0 14px;
       color:var(--muted);
       font-size:14px;
     }
+
     .cta-row{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
       align-items:center;
     }
+
     .btn{
       display:inline-flex;
       align-items:center;
@@ -328,18 +468,26 @@
       user-select:none;
       background:#fff;
       color:var(--text);
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
     }
+
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
     .btn-primary{
       background:#111827;
       color:#fff;
       border-color:#111827;
     }
-    .cta-badges{
-      margin-top:10px;
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
+
+    .btn-primary:hover{border-color:#111827}
+
+    .cta-badges{margin-top:10px}
+
     .badge{
       font-size:12px;
       padding:6px 10px;
@@ -348,6 +496,7 @@
       color:var(--muted);
       background:#fff;
     }
+
     .kbd{
       font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
       font-weight:900;
@@ -367,47 +516,109 @@
     }
 
     @media (max-width:900px){
-      header.top{position:sticky;top:0;z-index:40}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
       nav.section-tabs{
         display:flex;
         position:sticky;
         top:var(--header-h);
         z-index:35;
       }
+
       .hero{grid-template-columns:1fr}
       .hero-visual{width:120px;height:120px}
-      h1{font-size:26px}
-      .hero-lead{font-size:16px}
+      h1{font-size:28px}
+      .hero-lead{font-size:17px}
+      .check-grid{grid-template-columns:1fr}
     }
 
     @media (max-width:600px){
       body{font-size:15px}
       .wrap{padding:14px 12px 56px}
-      h1{font-size:24px}
-      section{padding:14px}
-      .bottom-cta .title{font-size:18px}
+      h1{font-size:25px}
+      section{padding:15px}
+      .bottom-cta .title{font-size:19px}
+      .cta-row .btn{width:100%}
     }
   </style>
 
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"WebPage",
-    "name":"Kingshot セルフトップアップガイド",
-    "inLanguage":"ja",
-    "description":"KingshotのLootBarセルフトップアップ前に確認すべき必須項目、二段階認証確認方法、連携条件、実際のトップアップ手順をまとめたガイドページです。",
-    "breadcrumb":{
-      "@type":"BreadcrumbList",
-      "itemListElement":[
-        {"@type":"ListItem","position":1,"name":"ホーム","item":"https://kingshotdata.kr/ja/"},
-        {"@type":"ListItem","position":2,"name":"ガイド","item":"https://kingshotdata.kr/ja/guides/"},
-        {"@type":"ListItem","position":3,"name":"セルフトップアップガイド","item":"https://kingshotdata.kr/ja/guides/topup-guide.html"}
-      ]
-    }
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"ホーム","item":"https://kingshotdata.kr/ja/"},
+          {"@type":"ListItem","position":2,"name":"ガイド","item":"https://kingshotdata.kr/ja/guides/"},
+          {"@type":"ListItem","position":3,"name":"Kingshot チャージガイド","item":"https://kingshotdata.kr/ja/guides/topup-guide.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"Kingshot チャージガイド",
+        "description":"KingshotのLootBarセルフトップアップ前に確認したい利用条件、二段階認証、Google Play Games連携不可案内、実際の手順、クーポン適用方法までまとめたガイドです。",
+        "mainEntityOfPage":"https://kingshotdata.kr/ja/guides/topup-guide.html",
+        "inLanguage":"ja",
+        "author":{
+          "@type":"Organization",
+          "name":"KingshotData"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"KingshotData",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+          }
+        },
+        "image":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"Google Play Gamesで連携したアカウントでもLootBarセルフトップアップは使えますか？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"いいえ。Google Play Gamesで連携したKingshotアカウントはLootBarセルフトップアップに対応していません。現在対応しているのはGoogleまたはFacebookに直接連携されたアカウントのみです。"
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"なぜ二段階認証が必要ですか？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"LootBarセルフトップアップではログイン時にセキュリティ確認が行われます。そのため、GoogleまたはFacebookの連携アカウントに二段階認証が有効になっている必要があります。"
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"二段階認証が有効かどうかはどう確認できますか？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"シークレットモードでGoogleまたはFacebookにログインを試し、電話認証、メール認証、認証アプリ承認など追加確認が表示されれば二段階認証は有効です。"
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"途中で分からなくなった場合はどうすればいいですか？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"まず連携方法と二段階認証を再確認してください。それでも解決しない場合はDiscordサポートチャンネルで問い合わせることができます。"
+            }
+          }
+        ]
+      }
+    ]
   }
   </script>
 
-  <link rel="preconnect" href="https://www.googletagmanager.com">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -429,11 +640,12 @@
   <div class="wrap">
     <header class="top">
       <div class="brand">
-        <a href="/ja/" aria-label="Kingshot Data Home">
-          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
-          <span>Kingshot Data</span>
+        <a href="/ja/" aria-label="KingshotData Home">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>KingshotData</span>
         </a>
       </div>
+
       <nav class="lang" aria-label="Language">
         <a href="/en/guides/topup-guide.html">EN</a>
         <a href="/ko/guides/topup-guide.html">KO</a>
@@ -445,260 +657,314 @@
     <nav class="section-tabs" aria-label="Section navigation">
       <a href="#overview">事前確認</a>
       <a href="#security">二段階認証</a>
-      <a href="#howto">チャージ方法</a>
-      <a href="#help">問い合わせ</a>
+      <a href="#howto">チャージ手順</a>
+      <a href="#faq">FAQ</a>
+      <a href="#help">サポート</a>
     </nav>
 
     <main id="main">
       <div class="crumbs">
         <a href="/ja/">ホーム</a> <span class="muted">›</span>
         <a href="/ja/guides/">ガイド</a> <span class="muted">›</span>
-        <span>セルフトップアップガイド</span>
+        <span>Kingshot チャージガイド</span>
       </div>
 
       <div class="hero">
         <div class="hero-visual">
-          <img src="/img/kingshotdata-logo.png" alt="Kingshot ロゴ" loading="eager" fetchpriority="high" width="160" height="160">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData ガイドロゴ" loading="eager" fetchpriority="high" width="160" height="160">
         </div>
+
         <div>
-          <h1>Kingshot セルフトップアップガイド</h1>
-          <p class="hero-lead">つまずきやすいポイントだけ先に確認すれば、セルフトップアップは思ったより簡単です。</p>
+          <h1>Kingshot チャージガイド</h1>
+          <p class="hero-lead">セルフトップアップでつまずく原因の多くは、決済そのものではなく、利用条件の見落としです。</p>
           <p class="sub">
-            アカウント連携条件、Google / Facebookの二段階認証確認方法、
-            Google Play Games連携アカウント利用不可案内、実際のチャージ手順をまとめています。
+            このページでは、LootBarでKingshotをセルフトップアップする前に確認しておきたい条件を先に整理し、
+            GoogleまたはFacebook連携、二段階認証、Google Play Games連携不可、実際のチャージ手順まで順番にまとめています。
           </p>
+
           <div class="quote">
-            セルフトップアップで止まりやすい原因は、チャージ方法そのものではなく、アカウント連携方式と二段階認証設定の有無であることがほとんどです。
+            連携方法と二段階認証が正しく準備できていれば、Kingshotのセルフトップアップはそこまで難しくありません。
           </div>
 
           <div class="hero-cta" aria-label="Hero top-up CTA">
-            <p>LootBarのほうがゲーム内チャージよりお得なら、同じ予算でもより効率よく進められます。アカウント準備ができていれば、下のページからすぐにセルフトップアップを始められます。</p>
-            <p class="hero-cta-sub">必要条件を一度だけ確認して、よりお得なチャージを最短で進めてください。</p>
+            <p>このガイドは、Kingshotのセルフトップアップをできるだけ分かりやすく、落ち着いて進めたい人向けに作成しています。</p>
+            <p class="hero-cta-sub">先に利用条件だけ確認し、画像つきの手順どおりに進めれば、途中で迷う可能性をかなり減らせます。</p>
 
             <div class="hero-proof" aria-label="top-up trust signals">
-              <span class="badge">20,000人以上のKingshotプレイヤーが確認中</span>
-              <span class="badge">困ったらDiscordで案内可能</span>
+              <span class="badge">Google / Facebook直接連携が必要</span>
+              <span class="badge">二段階認証が必要</span>
+              <span class="badge">画像つき手順あり</span>
+              <span class="badge">困ったときはDiscordで案内</span>
             </div>
 
-            <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Kingshotチャージページを開く</a>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">セルフトップアップ手順へ進む</a>
+              <a class="btn" href="#overview">利用条件を確認する</a>
+              <a class="btn" href="#help">困ったときはこちら</a>
+            </div>
           </div>
 
           <div class="jump" aria-label="Quick jump links">
             <a href="#overview">事前確認</a><span class="dotsep">•</span>
             <a href="#security">二段階認証</a><span class="dotsep">•</span>
-            <a href="#howto">チャージ方法</a><span class="dotsep">•</span>
-            <a href="#help">問い合わせ</a>
+            <a href="#howto">チャージ手順</a><span class="dotsep">•</span>
+            <a href="#faq">FAQ</a><span class="dotsep">•</span>
+            <a href="#help">サポート</a>
           </div>
         </div>
       </div>
 
       <section id="overview">
-        <h2>セルフトップアップ前に必ず確認してください</h2>
+        <span class="anchor"></span>
+        <h2>始める前にこの2点を確認してください</h2>
+        <p class="lead-block">
+          セルフトップアップ前にこの2つだけ確認しておくと、ログイン失敗や途中停止の多くを事前に避けやすくなります。
+        </p>
 
         <div class="note" role="note" aria-label="Important notice">
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
           <div>
             <strong>重要:</strong>
-            個人情報とアカウントセキュリティはご自身で管理してください。セルフトップアップを進める前に、以下の2点を必ず確認してください。
+            個人情報やアカウント管理はご自身で行ってください。決済前にログイン方法とセキュリティ設定が正しいか確認しておくことが大切です。
           </div>
         </div>
 
-        <div class="panel">
-          <ul class="guide-list">
-            <li>Kingshotアカウントが <strong>GoogleメールまたはFacebook</strong> に連携されている必要があります。</li>
-            <li>連携されているGoogleメールまたはFacebookアカウントに <strong>二段階認証</strong> が設定されている必要があります。</li>
-          </ul>
+        <div class="check-grid">
+          <div class="check-card">
+            <h3>1. 直接連携アカウントか確認</h3>
+            <p>Kingshotアカウントは <strong>Google</strong> または <strong>Facebook</strong> に直接連携されている必要があります。</p>
+          </div>
+          <div class="check-card">
+            <h3>2. 二段階認証が有効か確認</h3>
+            <p>連携しているGoogleまたはFacebookアカウントで <strong>二段階認証</strong> が有効になっている必要があります。</p>
+          </div>
         </div>
 
-        <p>この案内を最初に載せている理由は、セルフトップアップで止まる多くのケースが、チャージ方法そのものではなく <strong>アカウント連携状態</strong> や <strong>二段階認証未設定</strong> によるものだからです。</p>
-
-        <h3>アカウント連携条件</h3>
-        <p>LootBarのセルフトップアップは、<strong>GoogleメールまたはFacebookに直接連携されたアカウントのみ利用可能</strong>です。</p>
+        <h3>利用できる連携方法</h3>
+        <p>LootBarのセルフトップアップに対応しているのは、<strong>GoogleまたはFacebookに直接連携されたKingshotアカウント</strong>のみです。</p>
 
         <div class="faq-list">
           <article class="faq-item">
-            <p class="faq-q">Q. Google Play Gamesで連携しています。</p>
-            <p class="faq-a">はい。LootBarでは <strong>Google Play Gamesで連携されたアカウントはセルフトップアップできません</strong>。現在は <strong>GoogleメールまたはFacebookに連携されたアカウントのみ</strong> セルフトップアップが可能です。</p>
+            <p class="faq-q">Google Play Gamesで連携している場合も使えますか？</p>
+            <p class="faq-a">いいえ。<strong>Google Play Gamesで連携したアカウントはLootBarセルフトップアップの対象外</strong>です。現在対応しているのは、<strong>GoogleまたはFacebookに直接連携されたアカウントのみ</strong>です。</p>
           </article>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="Ready account note">
+          <div>
+            <strong>簡単チェック:</strong> GoogleまたはFacebookで直接ログインしていて、ログイン時に追加認証が表示されるなら、準備はほぼ整っています。
+          </div>
         </div>
       </section>
 
       <section id="security">
         <span class="anchor"></span>
-        <h2>Googleメール / Facebookの二段階認証が必要な理由</h2>
-        <p>LootBarのセルフトップアップでは、ログイン時にセキュリティ確認が必要です。</p>
-        <p>そのため、連携済みのGoogleメールまたはFacebookアカウントに <strong>二段階認証が設定されている必要があります。</strong></p>
+        <h2>二段階認証が必要な理由</h2>
+        <p>LootBarのセルフトップアップでは、ログイン時にセキュリティ確認が行われます。</p>
+        <p>そのため、連携しているGoogleまたはFacebookアカウントで <strong>二段階認証が有効になっていること</strong> が必要です。</p>
 
-        <h3>Googleメールの二段階認証設定方法</h3>
+        <h3>Googleの二段階認証を設定する方法</h3>
         <ul class="guide-list">
-          <li>Googleアカウント管理ページにアクセスします。</li>
-          <li>セキュリティメニューに移動します。</li>
-          <li>2段階認証の項目を探します。</li>
-          <li>電話番号、認証アプリなど希望する認証手段を登録します。</li>
-          <li>設定後、正常に適用されているか確認します。</li>
+          <li>Googleアカウント管理ページを開きます。</li>
+          <li><strong>セキュリティ</strong> メニューに進みます。</li>
+          <li><strong>2段階認証プロセス</strong> を探します。</li>
+          <li>電話番号や認証アプリなど、希望する認証方法を設定します。</li>
+          <li>設定後、正常に有効化されたか確認します。</li>
         </ul>
 
-        <h3>Facebookの二段階認証設定方法</h3>
+        <h3>Facebookの二段階認証を設定する方法</h3>
         <ul class="guide-list">
-          <li>Facebookの設定とプライバシーに進みます。</li>
-          <li>パスワードとセキュリティメニューに移動します。</li>
-          <li>二段階認証の使用項目を選択します。</li>
-          <li>SMS、認証アプリなど希望する認証方法を登録します。</li>
-          <li>設定後、正常に適用されているか確認します。</li>
+          <li>Facebookの <strong>設定とプライバシー</strong> を開きます。</li>
+          <li><strong>パスワードとセキュリティ</strong> に進みます。</li>
+          <li>二段階認証の設定項目を探します。</li>
+          <li>SMSまたは認証アプリなど、希望する方法を設定します。</li>
+          <li>設定後、正常に有効化されたか確認します。</li>
         </ul>
 
-        <h3>二段階認証が設定されているか確認する方法</h3>
-        <p>一番簡単な方法は、<strong>シークレットモード</strong> で直接ログインを試すことです。</p>
+        <h3>二段階認証が有効かどうか確認する方法</h3>
+        <p>一番分かりやすい方法は、<strong>シークレットモード</strong>で直接ログインを試すことです。</p>
+
         <ul class="guide-list">
           <li>Chromeまたは利用中のブラウザでシークレットモードを開きます。</li>
-          <li><a href="https://accounts.google.com/" target="_blank" rel="noopener noreferrer">Googleログインページ</a> または <a href="https://www.facebook.com/login/" target="_blank" rel="noopener noreferrer">Facebookログインページ</a> に移動します。</li>
-          <li>自分のアカウントでログインを試します。</li>
-          <li>ログイン中に電話、メール、または認証アプリで追加認証が求められれば、<strong>そのアカウントには二段階認証が設定されています。</strong></li>
+          <li><a href="https://accounts.google.com/" target="_blank" rel="noopener noreferrer">Googleログインページ</a> または <a href="https://www.facebook.com/login/" target="_blank" rel="noopener noreferrer">Facebookログインページ</a> を開きます。</li>
+          <li>Kingshotに連携しているアカウントでログインします。</li>
+          <li>電話認証、メール認証、認証アプリ承認など追加確認が表示されれば、<strong>二段階認証は有効です</strong>。</li>
         </ul>
 
         <div class="ok-note" role="note" aria-label="2FA check note">
           <div>
-            <strong>確認基準:</strong> 電話認証、メール認証、認証アプリ承認のいずれかが表示されれば、二段階認証が適用されています。
-          </div>
-        </div>
-      </section>
-
-      <section id="help">
-        <h2>少し分かりにくいです。チャージ方法を教えてください</h2>
-        <p>上記条件をすべて確認できたら、以下の順番で進めてください。</p>
-
-        <div class="note" role="note" aria-label="Discord help">
-          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
-          <div>
-            <strong>途中で詰まった場合は、Discordでお問い合わせください。</strong><br>
-            <a href="https://discord.gg/vgzASAwx" target="_blank" rel="noopener noreferrer">Discordで問い合わせる</a><br>
-            どの段階で止まったか教えていただければ、ご案内します。
+            <strong>確認の目安:</strong> 電話、メール、認証アプリなどの追加確認が出れば、二段階認証は正常に有効化されています。
           </div>
         </div>
       </section>
 
       <section id="howto">
-        <h2>実際のセルフトップアップ手順</h2>
+        <span class="anchor"></span>
+        <h2>実際のチャージ手順</h2>
+        <p class="lead-block">
+          連携条件と二段階認証を確認できたら、あとは順番どおり進めれば大丈夫です。以下の画像つき手順を上から見ていってください。
+        </p>
 
         <div class="panel">
-          <p style="margin:0 0 8px"><strong>LootBarリンク</strong></p>
+          <p style="margin:0 0 8px"><strong>チャージページ</strong></p>
           <p style="margin:0 0 8px">
-            <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">LootBar Kingshotチャージページへ移動</a>
+            <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">LootBar Kingshotチャージページを開く</a>
           </p>
-          <p style="margin:0">検索欄に <span class="kbd">#s4qU</span> を入力すると追加クーポンを受け取れます。</p>
+          <p style="margin:0">検索欄に <span class="kbd">#s4qU</span> を入力すると、決済前に追加クーポンを適用できます。</p>
         </div>
 
         <div class="ok-note" role="note" aria-label="quick reassurance">
           <div>
-            <strong>ご安心ください。</strong> 上記条件だけ満たしていれば、ほとんどの場合は以下の手順どおり進めれば問題ありません。
+            <strong>安心ポイント:</strong> 条件がそろっていれば、多くの場合は以下の手順だけでセルフトップアップを完了できます。
           </div>
         </div>
 
-        <h3>1. 単品チャージ</h3>
-        <p>チャージしたいパッケージを選択し、Top-up Nowを押します。</p>
+        <h3>1. 単品パッケージを選ぶ</h3>
+        <p>希望するパッケージを選択し、<strong>Top-up Now</strong> を押します。</p>
         <div class="imgrow">
-          <img src="/img/lootbar/step1.png" alt="単品チャージパッケージ選択画面" loading="lazy">
+          <img src="/img/lootbar/step1.png" alt="LootBarでKingshotの単品パッケージを選ぶ画面" loading="lazy">
         </div>
 
-        <h3>2. 複数商品チャージ</h3>
-        <p>カートボタンで希望するパッケージを複数追加します。</p>
+        <h3>2. 複数パッケージを追加する場合</h3>
+        <p>複数商品をまとめて購入したい場合は、カートボタンで必要なパッケージを追加します。</p>
         <div class="imgrow">
-          <img src="/img/lootbar/step2.png" alt="複数商品チャージ用カート追加画面" loading="lazy">
+          <img src="/img/lootbar/step2.png" alt="Kingshot複数パッケージをカートに追加する画面" loading="lazy">
         </div>
 
-        <h3>3. 決済へ進む</h3>
-        <p>支払い方法をカードまたはPayPalから選び、Pay Nowを押します。</p>
-        <p>左側はセルフトップアップ、右側はオペレーター充電です。<strong>セルフトップアップを選択してください。</strong></p>
+        <h3>3. 決済に進む</h3>
+        <p>支払い方法をカードまたはPayPalなどから選び、<strong>Pay Now</strong> を押します。</p>
+        <p>左側が <strong>セルフトップアップ</strong>、右側が代行方式です。<strong>セルフトップアップ</strong> を選択してください。</p>
         <div class="imgrow">
-          <img src="/img/lootbar/step3.png" alt="支払い方法選択画面" loading="lazy">
-          <img src="/img/lootbar/step8.png" alt="セルフトップアップ選択画面" loading="lazy">
+          <img src="/img/lootbar/step3.png" alt="LootBarの支払い方法選択画面" loading="lazy">
+          <img src="/img/lootbar/step8.png" alt="Kingshotセルフトップアップ選択画面" loading="lazy">
         </div>
 
-        <h3>4. ログイン</h3>
-        <p>セルフトップアップを選択するとログイン画面が表示されます。Googleログインが最も簡単です。</p>
+        <h3>4. 連携アカウントでログインする</h3>
+        <p>セルフトップアップを選ぶとログイン画面が表示されます。多くの人にとってはGoogleログインが分かりやすいです。</p>
         <ul class="guide-list">
-          <li>Googleメールアドレス入力</li>
-          <li>パスワード入力</li>
+          <li>Googleメールアドレスを入力します。</li>
+          <li>パスワードを入力します。</li>
         </ul>
+
         <div class="note" role="note" aria-label="Password note">
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
-          <div><strong>案内:</strong> 最初はパスワードを事前に正確に確認してから進めてください。</div>
+          <div>
+            <strong>案内:</strong> パスワードに不安がある場合は、決済に進む前に一度確認しておくと途中で止まりにくくなります。
+          </div>
         </div>
+
         <div class="imgrow">
-          <img src="/img/lootbar/step4.png" alt="Googleログイン画面" loading="lazy">
+          <img src="/img/lootbar/step4.png" alt="Kingshotセルフトップアップ時のGoogleログイン画面" loading="lazy">
           <img src="/img/lootbar/step5.png" alt="Googleメールアドレス入力画面" loading="lazy">
           <img src="/img/lootbar/step6.png" alt="Googleパスワード入力画面" loading="lazy">
         </div>
 
-        <h3>5. カート決済</h3>
-        <p>カートに入っている合計金額分をチャージします。</p>
+        <h3>5. カート内容を決済する</h3>
+        <p>カート内の合計金額を確認し、そのまま決済を完了します。</p>
         <div class="imgrow">
-          <img src="/img/lootbar/step7.png" alt="カート確認画面" loading="lazy">
-          <img src="/img/lootbar/step9.png" alt="チャージ金額確認画面" loading="lazy">
-          <img src="/img/lootbar/step10.png" alt="最終決済直前画面" loading="lazy">
+          <img src="/img/lootbar/step7.png" alt="Kingshotチャージ前のカート確認画面" loading="lazy">
+          <img src="/img/lootbar/step9.png" alt="Kingshotチャージ金額確認画面" loading="lazy">
+          <img src="/img/lootbar/step10.png" alt="Kingshotセルフトップアップ最終決済画面" loading="lazy">
         </div>
 
-        <h3>6. 購入完了</h3>
-        <p>確認後に決済が進行し、完了画面でGot itを押すと終了します。</p>
-        <p><strong>チャージ完了！</strong></p>
+        <h3>6. 完了画面を確認する</h3>
+        <p>決済が承認されると完了画面が表示されます。必要に応じて <strong>Got it</strong> を押してください。</p>
+        <p><strong>これでチャージ完了です。</strong></p>
         <div class="imgrow">
-          <img src="/img/lootbar/step12.png" alt="決済完了画面" loading="lazy">
-          <img src="/img/lootbar/step13.png" alt="完了案内画面" loading="lazy">
-          <img src="/img/lootbar/step14.png" alt="最終完了画面" loading="lazy">
+          <img src="/img/lootbar/step12.png" alt="Kingshotセルフトップアップ決済完了画面" loading="lazy">
+          <img src="/img/lootbar/step13.png" alt="セルフトップアップ完了案内画面" loading="lazy">
+          <img src="/img/lootbar/step14.png" alt="Kingshotチャージ最終完了画面" loading="lazy">
         </div>
 
-        <h3>最終完了</h3>
-        <p><strong>すべての手順が完了しました。ゲーム内でチャージ済みパッケージを確認してください。</strong></p>
+        <h3>7. ゲーム内で反映を確認する</h3>
+        <p>Kingshotを開き、購入したパッケージが正常に反映されているか確認してください。</p>
         <div class="imgrow">
-          <img src="/img/lootbar/step15.png" alt="ゲーム内チャージ完了確認画面" loading="lazy">
+          <img src="/img/lootbar/step15.png" alt="Kingshotゲーム内でチャージ反映を確認する画面" loading="lazy">
         </div>
       </section>
 
-      <section>
-        <h2>追加案内</h2>
+      <section id="faq">
+        <span class="anchor"></span>
+        <h2>よくある質問</h2>
 
-        <div class="note" role="note" aria-label="Self top-up note">
-          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
-          <div>
-            <strong>セルフトップアップはとても簡単です。</strong><br>
-            お問い合わせが多いため、このガイドでまとめてご案内しています。
-          </div>
+        <div class="faq-list">
+          <article class="faq-item">
+            <p class="faq-q">なぜセルフトップアップで止まる人がいるのですか？</p>
+            <p class="faq-a">多くの場合、原因は決済処理ではなく、連携方法の違いや二段階認証未設定です。</p>
+          </article>
+
+          <article class="faq-item">
+            <p class="faq-q">Google Play Games連携は使えますか？</p>
+            <p class="faq-a">いいえ。LootBarセルフトップアップに対応しているのは、GoogleまたはFacebookに直接連携したアカウントのみです。</p>
+          </article>
+
+          <article class="faq-item">
+            <p class="faq-q">二段階認証が有効かどうかはどう確認できますか？</p>
+            <p class="faq-a">シークレットモードでログインし、電話、メール、認証アプリなど追加認証が出れば有効です。</p>
+          </article>
+
+          <article class="faq-item">
+            <p class="faq-q">クーポンはどこで入力すればいいですか？</p>
+            <p class="faq-a">LootBarの検索欄に <span class="kbd">#s4qU</span> を入力してから決済に進んでください。</p>
+          </article>
+
+          <article class="faq-item">
+            <p class="faq-q">途中で分からなくなった場合はどうすればいいですか？</p>
+            <p class="faq-a">まず連携方法と二段階認証を再確認し、それでも不明な場合はDiscordサポートで問い合わせてください。</p>
+          </article>
         </div>
+      </section>
 
-        <div class="note" role="note" aria-label="Cumulative top-up note">
+      <section id="help">
+        <span class="anchor"></span>
+        <h2>サポートと追加案内</h2>
+        <p class="lead-block">
+          条件を確認しても不安が残る場合は、下のサポートリンクを使ってください。目的ごとに分けてあります。
+        </p>
+
+        <div class="note" role="note" aria-label="Discord help">
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
           <div>
-            <strong>累計チャージおよび毎月のクーポン配布案内:</strong><br>
-            最新の追加特典、クーポン更新、コミュニティ告知は以下のリンクから確認できます。<br>
-            必要に応じてブラウザ翻訳機能やAI翻訳ツールも利用できます。<br>
-            <a href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">20,000人以上のKingshotプレイヤーが確認しているコミュニティ告知を見る</a>
+            <strong>セルフトップアップで困った場合</strong><br>
+            <a href="https://discord.gg/vgzASAwx" target="_blank" rel="noopener noreferrer">Discordサポートチャンネルで問い合わせる</a><br>
+            どの段階で止まったかを伝えると、案内がよりスムーズになります。
           </div>
         </div>
 
         <div class="links">
-          <h2>モバイルゲーム割引リンク案内</h2>
+          <h3>最新の累計チャージ特典やクーポン案内を見たい場合</h3>
+          <p>累計チャージ特典、毎月のクーポン更新、関連告知はコミュニティ案内ページで確認できます。</p>
+          <a href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">最新の累計チャージ / クーポン案内を見る</a>
+        </div>
+
+        <div class="links">
+          <h3>ほかのモバイルゲーム割引も見たい場合</h3>
+          <p>LootBar内のほかの対応ゲームチャージページも、下のリンクからまとめて確認できます。</p>
           <a href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">さらにモバイルゲーム割引を見る</a>
         </div>
 
         <section class="bottom-cta" aria-label="Top-up CTA">
-          <p class="title">今すぐKingshotチャージページへ移動</p>
+          <p class="title">セルフトップアップを始める準備はできましたか？</p>
           <p class="desc">
-            もしLootBarのほうがゲーム内チャージよりお得なら、同じ予算でもより効率よく進められます。
-            検索欄に <span class="kbd">#s4qU</span> を入力して、決済前に追加クーポンを適用してください。
+            KingshotアカウントがGoogleまたはFacebookに直接連携されていて、二段階認証も有効になっていれば、
+            ここからそのままセルフトップアップを進めやすくなります。
+            決済前に <span class="kbd">#s4qU</span> を入力してクーポンも忘れずに適用してください。
           </p>
+
           <div class="cta-row">
             <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Kingshotチャージページを開く</a>
             <a class="btn" href="https://discord.gg/vgzASAwx" target="_blank" rel="noopener noreferrer">Discordで問い合わせる</a>
-            <a class="btn" href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">最新の累計チャージ / クーポン案内</a>
+            <a class="btn" href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">累計チャージ / クーポン案内</a>
             <a class="btn" href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">さらにモバイルゲーム割引を見る</a>
             <a class="btn" href="/ja/guides/kingshot-giftcode.html" rel="noopener">最新ギフトコードを見る</a>
           </div>
 
           <div class="cta-badges" aria-label="quick notes">
-            <span class="badge">よりお得なチャージ方法</span>
-            <span class="badge">Google / Facebook連携必須</span>
-            <span class="badge">二段階認証確認必須</span>
-            <span class="badge">困ったらDiscordで案内</span>
+            <span class="badge">Google / Facebook直接連携のみ対応</span>
+            <span class="badge">二段階認証が必要</span>
+            <span class="badge">Google Play Gamesは非対応</span>
+            <span class="badge">画像つき手順あり</span>
+            <span class="badge">困ったときはDiscordで案内</span>
           </div>
         </section>
       </section>
@@ -726,18 +992,18 @@
       requestAnimationFrame(setStickyTop);
       setTimeout(setStickyTop, 60);
 
-      if(mqMobile && mqMobile.addEventListener){
+      if (mqMobile && mqMobile.addEventListener) {
         mqMobile.addEventListener('change', setStickyTop);
-      }else if(mqMobile && mqMobile.addListener){
+      } else if (mqMobile && mqMobile.addListener) {
         mqMobile.addListener(setStickyTop);
       }
 
-      if(window.ResizeObserver){
+      if (window.ResizeObserver) {
         var ro = new ResizeObserver(function(){ setStickyTop(); });
         var header = document.querySelector('header.top');
         var tabs = document.querySelector('nav.section-tabs');
-        if(header) ro.observe(header);
-        if(tabs) ro.observe(tabs);
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
       }
 
       window.addEventListener('load', setStickyTop);

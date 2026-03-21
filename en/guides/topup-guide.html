@@ -3,24 +3,39 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Kingshot Self Top-Up Guide | Kingshot Data</title>
-  <meta name="description" content="A complete guide to Kingshot LootBar self top-up, including required account checks, Google/Facebook 2-step verification, Google Play Games limitation, and the full top-up process." />
+  <title>Kingshot Top Up Guide | Safe Self Top-Up, LootBar Steps, Login Checks & Coupons | KingshotData</title>
+  <meta name="description" content="Complete Kingshot top up guide for LootBar self top-up. Learn Google or Facebook login requirements, 2-step verification checks, Google Play Games limitation, payment steps, coupon use, and help options." />
 
   <link rel="canonical" href="https://kingshotdata.kr/en/guides/topup-guide.html" />
   <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/topup-guide.html" />
   <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/topup-guide.html" />
   <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/topup-guide.html" />
   <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/topup-guide.html" />
-  <meta name="robots" content="index,follow" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="theme-color" content="#ffffff" />
 
   <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
   <link rel="preload" as="image" href="/img/lootbar/step1.png" />
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot Top Up Guide | Safe Self Top-Up, LootBar Steps, Login Checks & Coupons" />
+  <meta property="og:description" content="Check Kingshot self top-up requirements, 2-step verification, Google Play Games limitation, coupon use, and the full LootBar payment flow." />
+  <meta property="og:url" content="https://kingshotdata.kr/en/guides/topup-guide.html" />
+  <meta property="og:site_name" content="KingshotData" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-logo.png" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kingshot Top Up Guide | Safe Self Top-Up, LootBar Steps, Login Checks & Coupons" />
+  <meta name="twitter:description" content="Complete Kingshot LootBar self top-up guide with login checks, 2-step verification, step-by-step payment screenshots, and coupon tips." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-logo.png" />
 
   <style>
     :root{
       --bg:#ffffff;
       --panel:#ffffff;
+      --panel-soft:#fbfdff;
       --border:#e5e7eb;
       --text:#111827;
       --muted:#6b7280;
@@ -28,7 +43,7 @@
       --brand-strong:#1d4ed8;
       --accent:#111827;
 
-      --radius:16px;
+      --radius:18px;
       --shadow:0 10px 24px rgba(0,0,0,.06);
 
       --header-h:0px;
@@ -47,10 +62,14 @@
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Arial;
+      font:15px/1.68 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Arial,sans-serif;
       color:var(--text);
       background:var(--bg);
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
     }
+
+    img{max-width:100%}
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
 
@@ -65,19 +84,32 @@
       border-bottom:1px solid var(--border);
       background:var(--bg);
     }
+
     .brand a{
-      display:flex;align-items:center;gap:10px;
+      display:flex;
+      align-items:center;
+      gap:10px;
       color:var(--text);
       text-decoration:none;
       font-weight:900;
       letter-spacing:.1px;
     }
-    .brand img{display:block;width:28px;height:28px;border-radius:8px}
+
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
 
     nav.lang{
-      display:flex;gap:8px;flex-wrap:wrap;
-      color:var(--muted);font-size:13px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
     }
+
     nav.lang a{
       color:var(--muted);
       padding:8px 10px;
@@ -86,18 +118,23 @@
       background:#fff;
       text-decoration:none;
     }
-    nav.lang a[aria-current="page"]{color:var(--text);font-weight:800}
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
 
     nav.section-tabs{
       display:none;
       gap:8px;
-      padding:6px 0;
+      padding:8px 0;
       margin:0;
       overflow:auto;
       -webkit-overflow-scrolling:touch;
       background:var(--bg);
       border-bottom:1px solid var(--border);
     }
+
     nav.section-tabs a{
       display:inline-flex;
       align-items:center;
@@ -110,92 +147,126 @@
       font-size:13px;
       text-decoration:none;
     }
-    nav.section-tabs a:hover{color:var(--text)}
 
-    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    nav.section-tabs a:hover{
+      color:var(--text);
+    }
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
     .crumbs a{color:var(--muted)}
 
     .hero{
       display:grid;
       grid-template-columns:160px 1fr;
       gap:18px;
-      padding:18px;
+      padding:20px;
       background:var(--panel);
       border:1px solid var(--border);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
     }
+
     .hero-visual{
       width:160px;
       height:160px;
       display:flex;
       align-items:center;
       justify-content:center;
-      border-radius:14px;
+      border-radius:16px;
       background:#f8fafc;
       border:1px solid var(--border);
       padding:14px;
     }
+
     .hero-visual img{
       display:block;
       width:100%;
       height:100%;
       object-fit:contain;
     }
-    h1{margin:0 0 8px;font-size:30px;line-height:1.15}
+
+    h1{
+      margin:0 0 10px;
+      font-size:32px;
+      line-height:1.14;
+      letter-spacing:-.02em;
+    }
+
     .hero-lead{
-      margin:0 0 8px;
-      font-size:17px;
+      margin:0 0 10px;
+      font-size:18px;
       font-weight:900;
       color:var(--accent);
       line-height:1.45;
     }
-    .sub{margin:0;color:var(--muted)}
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+    }
+
     .muted{color:var(--muted)}
+
     .quote{
-      margin:12px 0 0;
-      padding:12px 14px;
+      margin:14px 0 0;
+      padding:13px 15px;
       border:1px solid var(--soft-border);
       border-radius:14px;
       background:#fbfdff;
       color:var(--muted);
-      font-size:13px;
+      font-size:14px;
     }
 
     .hero-cta{
       margin-top:14px;
-      padding:14px 16px;
+      padding:16px;
       border:1px solid var(--soft-border);
-      border-radius:14px;
-      background:#f8fbff;
+      border-radius:16px;
+      background:var(--soft-bg);
     }
+
     .hero-cta p{
       margin:0 0 10px;
       color:var(--text);
       font-weight:700;
     }
+
     .hero-cta .hero-cta-sub{
       color:var(--muted);
       font-weight:400;
-      font-size:13px;
+      font-size:14px;
       margin-top:-2px;
-      margin-bottom:10px;
+      margin-bottom:12px;
     }
-    .hero-proof{
+
+    .hero-proof,
+    .cta-badges{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
-      margin-bottom:10px;
+    }
+
+    .hero-proof{
+      margin-bottom:12px;
     }
 
     .jump{
       margin-top:12px;
-      display:flex;gap:10px;flex-wrap:wrap;
-      font-size:13px;color:var(--muted);
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
     }
+
     .jump a{color:var(--muted)}
     .jump a:hover{color:var(--text)}
-    .dotsep{opacity:.5}
+    .dotsep{opacity:.45}
 
     section{
       margin-top:22px;
@@ -203,35 +274,59 @@
       border:1px solid var(--border);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      padding:18px;
+      padding:20px;
     }
-    section h2{margin:0 0 10px;font-size:20px}
-    section h3{margin:18px 0 8px;font-size:17px}
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.25;
+      letter-spacing:-.01em;
+    }
+
+    section h3{
+      margin:18px 0 8px;
+      font-size:18px;
+      line-height:1.35;
+    }
+
     section p{margin:8px 0}
 
-    .note{
-      display:flex;
-      gap:10px;
-      padding:12px 14px;
-      border:1px solid var(--warn-border);
-      background:var(--warn-bg);
-      border-radius:14px;
-      margin:10px 0 14px;
-    }
-    .note strong{font-weight:900}
-    .note .note-ico{
-      width:18px;height:18px;flex:0 0 18px;
-      margin-top:2px;color:#b45309;
+    .lead-block{
+      margin:0 0 12px;
+      color:var(--muted);
     }
 
+    .note,
     .ok-note{
       display:flex;
       gap:10px;
-      padding:12px 14px;
-      border:1px solid var(--ok-border);
-      background:var(--ok-bg);
+      padding:13px 14px;
       border-radius:14px;
       margin:10px 0 14px;
+    }
+
+    .note{
+      border:1px solid var(--warn-border);
+      background:var(--warn-bg);
+    }
+
+    .ok-note{
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+    }
+
+    .note strong,
+    .ok-note strong{
+      font-weight:900;
+    }
+
+    .note .note-ico{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      margin-top:2px;
+      color:#b45309;
     }
 
     .panel{
@@ -242,12 +337,38 @@
       margin:10px 0 14px;
     }
 
+    .check-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .check-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+    }
+
+    .check-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+
+    .check-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
     .imgrow{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
       gap:12px;
       margin:12px 0;
     }
+
     .imgrow img{
       width:100%;
       border:1px solid var(--border);
@@ -256,63 +377,90 @@
       display:block;
     }
 
-    .guide-list{margin:0;padding-left:18px}
-    .guide-list li{margin:6px 0}
+    .guide-list{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .guide-list li{
+      margin:6px 0;
+    }
 
     .faq-list{
       display:grid;
       gap:12px;
     }
+
     .faq-item{
       border:1px solid var(--border);
       border-radius:14px;
       background:#fff;
       padding:14px;
     }
+
     .faq-q{
       font-weight:900;
       margin:0 0 6px;
     }
+
     .faq-a{
       margin:0;
       color:var(--muted);
     }
 
     .links{
-      background:#f8fbff;
+      background:var(--soft-bg);
       padding:16px;
       border-radius:14px;
-      margin-top:28px;
+      margin-top:14px;
       border:1px solid var(--soft-border);
     }
-    .links h2{color:var(--text);margin-top:0}
-    .links a{font-weight:900}
+
+    .links h3{
+      color:var(--text);
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .links p{
+      margin:0 0 10px;
+      color:var(--muted);
+    }
+
+    .links a{
+      font-weight:900;
+    }
 
     .bottom-cta{
-      margin-top:22px;
+      margin-top:18px;
       border-radius:18px;
       border:1px solid var(--border);
       background:linear-gradient(180deg,#ffffff,#fafcff);
       box-shadow:var(--shadow);
       padding:18px;
     }
+
     .bottom-cta .title{
-      font-size:20px;
+      font-size:21px;
       font-weight:900;
       color:var(--text);
       margin:0 0 8px;
+      line-height:1.3;
     }
+
     .bottom-cta .desc{
       margin:0 0 14px;
       color:var(--muted);
       font-size:14px;
     }
+
     .cta-row{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
       align-items:center;
     }
+
     .btn{
       display:inline-flex;
       align-items:center;
@@ -328,18 +476,30 @@
       user-select:none;
       background:#fff;
       color:var(--text);
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
     }
+
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
     .btn-primary{
       background:#111827;
       color:#fff;
       border-color:#111827;
     }
+
+    .btn-primary:hover{
+      border-color:#111827;
+    }
+
     .cta-badges{
       margin-top:10px;
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
     }
+
     .badge{
       font-size:12px;
       padding:6px 10px;
@@ -348,6 +508,7 @@
       color:var(--muted);
       background:#fff;
     }
+
     .kbd{
       font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
       font-weight:900;
@@ -366,48 +527,129 @@
       scroll-margin-top:calc(var(--sticky-top) + 12px);
     }
 
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+
     @media (max-width:900px){
-      header.top{position:sticky;top:0;z-index:40}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
       nav.section-tabs{
         display:flex;
         position:sticky;
         top:var(--header-h);
         z-index:35;
       }
-      .hero{grid-template-columns:1fr}
-      .hero-visual{width:120px;height:120px}
-      h1{font-size:26px}
-      .hero-lead{font-size:16px}
+
+      .hero{
+        grid-template-columns:1fr;
+      }
+
+      .hero-visual{
+        width:120px;
+        height:120px;
+      }
+
+      h1{font-size:28px}
+      .hero-lead{font-size:17px}
+      .check-grid{grid-template-columns:1fr}
     }
 
     @media (max-width:600px){
       body{font-size:15px}
       .wrap{padding:14px 12px 56px}
-      h1{font-size:24px}
-      section{padding:14px}
-      .bottom-cta .title{font-size:18px}
+      h1{font-size:25px}
+      section{padding:15px}
+      .bottom-cta .title{font-size:19px}
+      .cta-row .btn{width:100%}
     }
   </style>
 
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"WebPage",
-    "name":"Kingshot Self Top-Up Guide",
-    "inLanguage":"en",
-    "description":"A guide page covering Kingshot LootBar self top-up requirements, 2-step verification checks, account linking conditions, and the full top-up process.",
-    "breadcrumb":{
-      "@type":"BreadcrumbList",
-      "itemListElement":[
-        {"@type":"ListItem","position":1,"name":"Home","item":"https://kingshotdata.kr/en/"},
-        {"@type":"ListItem","position":2,"name":"Guides","item":"https://kingshotdata.kr/en/guides/"},
-        {"@type":"ListItem","position":3,"name":"Self Top-Up Guide","item":"https://kingshotdata.kr/en/guides/topup-guide.html"}
-      ]
-    }
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://kingshotdata.kr/en/"},
+          {"@type":"ListItem","position":2,"name":"Guides","item":"https://kingshotdata.kr/en/guides/"},
+          {"@type":"ListItem","position":3,"name":"Kingshot Top Up Guide","item":"https://kingshotdata.kr/en/guides/topup-guide.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"Kingshot Top Up Guide",
+        "description":"Complete Kingshot LootBar self top-up guide covering login requirements, 2-step verification, Google Play Games limitation, coupon use, and step-by-step payment screenshots.",
+        "mainEntityOfPage":"https://kingshotdata.kr/en/guides/topup-guide.html",
+        "inLanguage":"en",
+        "author":{
+          "@type":"Organization",
+          "name":"KingshotData"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"KingshotData",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+          }
+        },
+        "image":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"Can I use LootBar self top-up if my account is linked through Google Play Games?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"No. Kingshot accounts linked through Google Play Games cannot use LootBar self top-up. Only accounts linked directly to Google or Facebook are supported."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why is 2-step verification required?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"LootBar self top-up uses a security check during login. Your linked Google or Facebook account must have 2-step verification enabled to complete the process normally."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How can I check whether 2-step verification is already enabled?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Open an incognito browser window and try signing in to your Google or Facebook account. If you receive an extra verification request by phone, email, or authenticator app, 2-step verification is active."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What should I do if I get stuck during self top-up?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Check that your Kingshot account is linked directly to Google or Facebook, confirm that 2-step verification is active, and then retry the login. If you still need help, ask in the Discord support channel."
+            }
+          }
+        ]
+      }
+    ]
   }
   </script>
 
-  <link rel="preconnect" href="https://www.googletagmanager.com">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -429,11 +671,12 @@
   <div class="wrap">
     <header class="top">
       <div class="brand">
-        <a href="/en/" aria-label="Kingshot Data Home">
-          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
-          <span>Kingshot Data</span>
+        <a href="/en/" aria-label="KingshotData Home">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>KingshotData</span>
         </a>
       </div>
+
       <nav class="lang" aria-label="Language">
         <a href="/en/guides/topup-guide.html" aria-current="page">EN</a>
         <a href="/ko/guides/topup-guide.html">KO</a>
@@ -446,6 +689,7 @@
       <a href="#overview">Requirements</a>
       <a href="#security">2-Step Verification</a>
       <a href="#howto">How to Top Up</a>
+      <a href="#faq">FAQ</a>
       <a href="#help">Help</a>
     </nav>
 
@@ -453,252 +697,305 @@
       <div class="crumbs">
         <a href="/en/">Home</a> <span class="muted">›</span>
         <a href="/en/guides/">Guides</a> <span class="muted">›</span>
-        <span>Self Top-Up Guide</span>
+        <span>Kingshot Top Up Guide</span>
       </div>
 
       <div class="hero">
         <div class="hero-visual">
-          <img src="/img/kingshotdata-logo.png" alt="Kingshot logo" loading="eager" fetchpriority="high" width="160" height="160">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData guide logo" loading="eager" fetchpriority="high" width="160" height="160">
         </div>
+
         <div>
-          <h1>Kingshot Self Top-Up Guide</h1>
-          <p class="hero-lead">If you check the common problem points first, self top-up is much easier than it looks.</p>
+          <h1>Kingshot Top Up Guide</h1>
+          <p class="hero-lead">Most self top-up failures happen before payment, not during payment.</p>
           <p class="sub">
-            This guide covers account linking requirements, Google / Facebook 2-step verification checks,
-            the Google Play Games limitation, and the full self top-up process.
+            This guide helps Kingshot players complete LootBar self top-up safely by checking the two most important requirements first:
+            direct Google or Facebook account linking and active 2-step verification.
           </p>
+
           <div class="quote">
-            Most self top-up issues are not caused by the payment steps themselves, but by account linking status and 2-step verification settings.
+            If your account is linked correctly and your security verification is ready, the actual Kingshot top-up flow is usually simple.
           </div>
 
           <div class="hero-cta" aria-label="Hero top-up CTA">
-            <p>If LootBar is cheaper than in-game top-up, the same budget can go further over time. If your account is ready, start self top-up below.</p>
-            <p class="hero-cta-sub">Check the requirements once, then take the fastest path to lower-cost top-up.</p>
+            <p>This page is for players who want a safer, simpler, lower-friction way to complete Kingshot self top-up and avoid the most common login errors.</p>
+            <p class="hero-cta-sub">Review the requirements once, follow the screenshot steps, and use the support links only if you get stuck.</p>
 
             <div class="hero-proof" aria-label="top-up trust signals">
-              <span class="badge">Trusted by 20,000+ Kingshot players</span>
-              <span class="badge">Ask in Discord if stuck</span>
+              <span class="badge">Direct Google / Facebook required</span>
+              <span class="badge">2-step verification required</span>
+              <span class="badge">Step-by-step screenshots included</span>
+              <span class="badge">Discord help available</span>
             </div>
 
-            <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Open Kingshot Top-Up Page</a>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Start Kingshot Self Top-Up</a>
+              <a class="btn" href="#overview">Check Requirements First</a>
+              <a class="btn" href="#help">Get Help</a>
+            </div>
           </div>
 
           <div class="jump" aria-label="Quick jump links">
             <a href="#overview">Requirements</a><span class="dotsep">•</span>
             <a href="#security">2-Step Verification</a><span class="dotsep">•</span>
             <a href="#howto">How to Top Up</a><span class="dotsep">•</span>
+            <a href="#faq">FAQ</a><span class="dotsep">•</span>
             <a href="#help">Help</a>
           </div>
         </div>
       </div>
 
       <section id="overview">
-        <h2>Please check these first before using self top-up</h2>
+        <span class="anchor"></span>
+        <h2>Check these requirements before you start</h2>
+        <p class="lead-block">
+          Before opening the Kingshot top-up page, confirm these two conditions first. This removes most of the common login and verification problems.
+        </p>
 
         <div class="note" role="note" aria-label="Important notice">
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
           <div>
             <strong>Important:</strong>
-            Please manage your own personal information and account security carefully. Before you start self top-up, make sure the following 2 conditions are met.
+            Keep your own account and personal information secure. Self top-up works best when your login method and security settings are already confirmed before payment.
           </div>
         </div>
 
-        <div class="panel">
-          <ul class="guide-list">
-            <li>Your Kingshot account must be linked to <strong>Google or Facebook</strong>.</li>
-            <li>Your linked Google or Facebook account must have <strong>2-step verification</strong> enabled.</li>
-          </ul>
+        <div class="check-grid">
+          <div class="check-card">
+            <h3>1. Direct account link</h3>
+            <p>Your Kingshot account must be linked directly to <strong>Google</strong> or <strong>Facebook</strong>.</p>
+          </div>
+          <div class="check-card">
+            <h3>2. Security verification ready</h3>
+            <p>Your linked Google or Facebook account must have <strong>2-step verification</strong> enabled.</p>
+          </div>
         </div>
 
-        <p>This is explained first because most self top-up issues happen not because of the payment flow itself, but because of <strong>account linking status</strong> or <strong>missing 2-step verification</strong>.</p>
-
         <h3>Account linking requirement</h3>
-        <p>LootBar self top-up is currently available <strong>only for accounts directly linked to Google or Facebook</strong>.</p>
+        <p>LootBar self top-up currently supports only accounts linked directly to <strong>Google</strong> or <strong>Facebook</strong>.</p>
 
         <div class="faq-list">
           <article class="faq-item">
-            <p class="faq-q">Q. My account is linked through Google Play Games.</p>
-            <p class="faq-a">Yes. <strong>Accounts linked through Google Play Games cannot use LootBar self top-up</strong>. At the moment, only accounts linked directly to <strong>Google or Facebook</strong> are supported.</p>
+            <p class="faq-q">Can I use LootBar self top-up if my account is linked through Google Play Games?</p>
+            <p class="faq-a">No. Accounts linked through <strong>Google Play Games</strong> cannot use LootBar self top-up. At the moment, only accounts linked directly to <strong>Google</strong> or <strong>Facebook</strong> are supported.</p>
           </article>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="Ready account note">
+          <div>
+            <strong>Fast check:</strong> If your Kingshot account uses direct Google or Facebook login and that login already asks for an extra verification step, you are probably ready to continue.
+          </div>
         </div>
       </section>
 
       <section id="security">
         <span class="anchor"></span>
-        <h2>Why Google / Facebook 2-step verification is required</h2>
-        <p>LootBar self top-up requires a security check during login.</p>
-        <p>That is why your linked Google or Facebook account must have <strong>2-step verification enabled before you can proceed normally.</strong></p>
+        <h2>Why 2-step verification is required</h2>
+        <p>LootBar self top-up includes a security check during login.</p>
+        <p>Because of that, your linked Google or Facebook account should have <strong>2-step verification enabled before you try to complete payment</strong>.</p>
 
         <h3>How to enable Google 2-step verification</h3>
         <ul class="guide-list">
           <li>Open your Google Account management page.</li>
-          <li>Go to the Security menu.</li>
-          <li>Find the 2-Step Verification section.</li>
-          <li>Set up your preferred verification method, such as a phone number or authenticator app.</li>
-          <li>After setup, confirm that it has been applied correctly.</li>
+          <li>Go to the <strong>Security</strong> menu.</li>
+          <li>Find <strong>2-Step Verification</strong>.</li>
+          <li>Choose a verification method such as a phone number or authenticator app.</li>
+          <li>Finish setup and confirm that it is active.</li>
         </ul>
 
         <h3>How to enable Facebook 2-step verification</h3>
         <ul class="guide-list">
-          <li>Open Facebook Settings & Privacy.</li>
-          <li>Go to Password and Security.</li>
+          <li>Open <strong>Settings &amp; Privacy</strong> in Facebook.</li>
+          <li>Go to <strong>Password and Security</strong>.</li>
           <li>Find the two-factor authentication setting.</li>
-          <li>Set up your preferred verification method, such as SMS or an authenticator app.</li>
-          <li>After setup, confirm that it has been applied correctly.</li>
+          <li>Choose a verification method such as SMS or an authenticator app.</li>
+          <li>Finish setup and confirm that it is active.</li>
         </ul>
 
-        <h3>How to check whether 2-step verification is enabled</h3>
-        <p>The easiest way is to try logging in through <strong>incognito mode</strong>.</p>
+        <h3>How to check whether 2-step verification is already enabled</h3>
+        <p>The simplest way is to test your login in <strong>incognito mode</strong>.</p>
+
         <ul class="guide-list">
           <li>Open Chrome or your browser in incognito mode.</li>
           <li>Go to the <a href="https://accounts.google.com/" target="_blank" rel="noopener noreferrer">Google login page</a> or the <a href="https://www.facebook.com/login/" target="_blank" rel="noopener noreferrer">Facebook login page</a>.</li>
-          <li>Try signing in with your account.</li>
-          <li>If you receive an extra verification request by phone, email, or authenticator app, <strong>that account already has 2-step verification enabled</strong>.</li>
+          <li>Sign in with the same account linked to Kingshot.</li>
+          <li>If you receive an extra verification request by phone, email, or authenticator app, <strong>2-step verification is active</strong>.</li>
         </ul>
 
         <div class="ok-note" role="note" aria-label="2FA check note">
           <div>
-            <strong>Check result:</strong> If you see phone verification, email verification, or an authenticator app approval request, then 2-step verification is active.
+            <strong>Check result:</strong> If you see phone verification, email verification, or an authenticator app approval request, your security verification is turned on and working.
           </div>
         </div>
       </section>
 
+      <section id="howto">
+        <span class="anchor"></span>
+        <h2>How to top up step by step</h2>
+        <p class="lead-block">
+          Once your login method and 2-step verification are confirmed, the rest of the process is usually straightforward. Follow the steps below in order.
+        </p>
+
+        <div class="panel">
+          <p style="margin:0 0 8px"><strong>Top-up page</strong></p>
+          <p style="margin:0 0 8px">
+            <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Open the LootBar Kingshot top-up page</a>
+          </p>
+          <p style="margin:0">Enter <span class="kbd">#s4qU</span> in the search bar to apply an extra coupon before checkout.</p>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="quick reassurance">
+          <div>
+            <strong>Good news:</strong> If your account is ready, most users can finish self top-up just by following the steps below.
+          </div>
+        </div>
+
+        <h3>1. Choose one package</h3>
+        <p>Select the package you want and click <strong>Top-up Now</strong>.</p>
+        <div class="imgrow">
+          <img src="/img/lootbar/step1.png" alt="Kingshot single package selection screen on LootBar" loading="lazy">
+        </div>
+
+        <h3>2. Add multiple packages if needed</h3>
+        <p>If you want more than one package, use the cart button and add the items you need.</p>
+        <div class="imgrow">
+          <img src="/img/lootbar/step2.png" alt="Kingshot cart screen for multiple package top-up" loading="lazy">
+        </div>
+
+        <h3>3. Continue to payment</h3>
+        <p>Select your payment method, such as card or PayPal, and then click <strong>Pay Now</strong>.</p>
+        <p>The left option is <strong>self top-up</strong> and the right option is operator top-up. Be sure to select <strong>self top-up</strong>.</p>
+        <div class="imgrow">
+          <img src="/img/lootbar/step3.png" alt="LootBar payment method selection screen" loading="lazy">
+          <img src="/img/lootbar/step8.png" alt="Self top-up selection screen on LootBar" loading="lazy">
+        </div>
+
+        <h3>4. Sign in with your linked account</h3>
+        <p>After selecting self top-up, the login screen will appear. For most users, Google login is the easiest option.</p>
+        <ul class="guide-list">
+          <li>Enter your Google email address.</li>
+          <li>Enter your password.</li>
+        </ul>
+
+        <div class="note" role="note" aria-label="Password note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Tip:</strong> If you are not sure about your password, confirm it first before continuing. This can save time during payment.
+          </div>
+        </div>
+
+        <div class="imgrow">
+          <img src="/img/lootbar/step4.png" alt="Google sign-in screen during Kingshot self top-up" loading="lazy">
+          <img src="/img/lootbar/step5.png" alt="Google email entry screen during self top-up" loading="lazy">
+          <img src="/img/lootbar/step6.png" alt="Google password entry screen during self top-up" loading="lazy">
+        </div>
+
+        <h3>5. Complete cart payment</h3>
+        <p>Review the total amount in your cart and finish payment.</p>
+        <div class="imgrow">
+          <img src="/img/lootbar/step7.png" alt="Kingshot cart confirmation screen before payment" loading="lazy">
+          <img src="/img/lootbar/step9.png" alt="Top-up amount confirmation screen for Kingshot" loading="lazy">
+          <img src="/img/lootbar/step10.png" alt="Final payment screen for Kingshot self top-up" loading="lazy">
+        </div>
+
+        <h3>6. Confirm completion</h3>
+        <p>After payment is approved, the final confirmation screen will appear. Press <strong>Got it</strong> if needed.</p>
+        <p><strong>Your top-up should now be completed.</strong></p>
+        <div class="imgrow">
+          <img src="/img/lootbar/step12.png" alt="Payment completed screen after Kingshot self top-up" loading="lazy">
+          <img src="/img/lootbar/step13.png" alt="Completion notice screen after self top-up" loading="lazy">
+          <img src="/img/lootbar/step14.png" alt="Final completion confirmation screen for Kingshot top-up" loading="lazy">
+        </div>
+
+        <h3>7. Check your game account</h3>
+        <p>Open Kingshot and confirm that the purchased package has been delivered correctly.</p>
+        <div class="imgrow">
+          <img src="/img/lootbar/step15.png" alt="In-game confirmation screen after Kingshot top-up delivery" loading="lazy">
+        </div>
+      </section>
+
+      <section id="faq">
+        <span class="anchor"></span>
+        <h2>Frequently asked questions</h2>
+
+        <div class="faq-list">
+          <article class="faq-item">
+            <p class="faq-q">Why does self top-up fail for some users?</p>
+            <p class="faq-a">Most failures are caused by the wrong login type or missing 2-step verification, not by the payment step itself.</p>
+          </article>
+
+          <article class="faq-item">
+            <p class="faq-q">Is Google Play Games supported?</p>
+            <p class="faq-a">No. Only accounts linked directly to Google or Facebook are supported for LootBar self top-up.</p>
+          </article>
+
+          <article class="faq-item">
+            <p class="faq-q">How do I know whether 2-step verification is active?</p>
+            <p class="faq-a">Try signing in through an incognito browser window. If you get an extra phone, email, or authenticator check, it is active.</p>
+          </article>
+
+          <article class="faq-item">
+            <p class="faq-q">Where do I enter the coupon?</p>
+            <p class="faq-a">Enter <span class="kbd">#s4qU</span> in the search bar on LootBar before checkout so the extra coupon can be applied.</p>
+          </article>
+
+          <article class="faq-item">
+            <p class="faq-q">What should I do if I still get stuck?</p>
+            <p class="faq-a">Double-check your login method, verify that 2-step verification is active, and then ask in the Discord help channel if you still need support.</p>
+          </article>
+        </div>
+      </section>
+
       <section id="help">
-        <h2>I’m confused. Please show me how to top up</h2>
-        <p>If all of the conditions above are already confirmed, just follow the steps below in order.</p>
+        <span class="anchor"></span>
+        <h2>Help, support, and extra info</h2>
+        <p class="lead-block">
+          If you already checked the requirements but still feel unsure, use the support links below. Choose the one that matches what you need.
+        </p>
 
         <div class="note" role="note" aria-label="Discord help">
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
           <div>
             <strong>Need help with self top-up?</strong><br>
             <a href="https://discord.gg/vgzASAwx" target="_blank" rel="noopener noreferrer">Ask in our Discord support channel</a><br>
-            Tell us which step you are stuck on, and we will help explain it.
-          </div>
-        </div>
-      </section>
-
-      <section id="howto">
-        <h2>Actual self top-up process</h2>
-
-        <div class="panel">
-          <p style="margin:0 0 8px"><strong>LootBar Link</strong></p>
-          <p style="margin:0 0 8px">
-            <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Open the LootBar Kingshot top-up page</a>
-          </p>
-          <p style="margin:0">Enter <span class="kbd">#s4qU</span> in the search bar to receive an extra coupon.</p>
-        </div>
-
-        <div class="ok-note" role="note" aria-label="quick reassurance">
-          <div>
-            <strong>Don’t worry.</strong> If the conditions above are met, most users can complete the process just by following the steps below.
-          </div>
-        </div>
-
-        <h3>1. Single item top-up</h3>
-        <p>Select the package you want and click Top-up Now.</p>
-        <div class="imgrow">
-          <img src="/img/lootbar/step1.png" alt="Single item package selection screen" loading="lazy">
-        </div>
-
-        <h3>2. Multiple item top-up</h3>
-        <p>Use the cart button to add multiple packages you want.</p>
-        <div class="imgrow">
-          <img src="/img/lootbar/step2.png" alt="Cart screen for multiple item top-up" loading="lazy">
-        </div>
-
-        <h3>3. Proceed to payment</h3>
-        <p>Select your payment method, either card or PayPal, then click Pay Now.</p>
-        <p>The left option is self top-up, and the right option is operator top-up. <strong>Please choose self top-up.</strong></p>
-        <div class="imgrow">
-          <img src="/img/lootbar/step3.png" alt="Payment method selection screen" loading="lazy">
-          <img src="/img/lootbar/step8.png" alt="Self top-up selection screen" loading="lazy">
-        </div>
-
-        <h3>4. Sign in</h3>
-        <p>After choosing self top-up, the login screen will appear. Google login is the easiest option.</p>
-        <ul class="guide-list">
-          <li>Enter your Google email</li>
-          <li>Enter your password</li>
-        </ul>
-        <div class="note" role="note" aria-label="Password note">
-          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
-          <div><strong>Tip:</strong> At the beginning, it is best to confirm your password first before continuing.</div>
-        </div>
-        <div class="imgrow">
-          <img src="/img/lootbar/step4.png" alt="Google login screen" loading="lazy">
-          <img src="/img/lootbar/step5.png" alt="Google email input screen" loading="lazy">
-          <img src="/img/lootbar/step6.png" alt="Google password input screen" loading="lazy">
-        </div>
-
-        <h3>5. Cart payment</h3>
-        <p>Complete the payment based on the total amount in your cart.</p>
-        <div class="imgrow">
-          <img src="/img/lootbar/step7.png" alt="Cart confirmation screen" loading="lazy">
-          <img src="/img/lootbar/step9.png" alt="Top-up amount confirmation screen" loading="lazy">
-          <img src="/img/lootbar/step10.png" alt="Final payment screen" loading="lazy">
-        </div>
-
-        <h3>6. Purchase completed</h3>
-        <p>After confirming, the payment will finish, and you can press Got it on the final screen.</p>
-        <p><strong>Top-up completed!</strong></p>
-        <div class="imgrow">
-          <img src="/img/lootbar/step12.png" alt="Payment completed screen" loading="lazy">
-          <img src="/img/lootbar/step13.png" alt="Completion notice screen" loading="lazy">
-          <img src="/img/lootbar/step14.png" alt="Final completion screen" loading="lazy">
-        </div>
-
-        <h3>Final step</h3>
-        <p><strong>Once everything is done, check your game account to confirm that the package has been delivered.</strong></p>
-        <div class="imgrow">
-          <img src="/img/lootbar/step15.png" alt="In-game top-up confirmation screen" loading="lazy">
-        </div>
-      </section>
-
-      <section>
-        <h2>Additional information</h2>
-
-        <div class="note" role="note" aria-label="Self top-up note">
-          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
-          <div>
-            <strong>Self top-up is actually very simple.</strong><br>
-            Since many users ask about it, this guide was made to explain everything in one place.
-          </div>
-        </div>
-
-        <div class="note" role="note" aria-label="Cumulative top-up note">
-          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
-          <div>
-            <strong>Cumulative top-up and monthly coupon notice:</strong><br>
-            Check the latest recharge benefits, coupon updates, and community notice followed by 20,000+ Kingshot players.<br>
-            You can use your browser translation feature or AI translation tools if needed.<br>
-            <a href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">Check the community notice trusted by 20,000+ Kingshot players</a>
+            Tell us exactly which step you are stuck on, and the explanation will be much faster.
           </div>
         </div>
 
         <div class="links">
-          <h2>Mobile game discount link</h2>
+          <h3>Looking for the latest recharge benefits and coupon notice?</h3>
+          <p>Check the community notice for cumulative recharge benefits, monthly coupon updates, and related announcements.</p>
+          <a href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">See the latest recharge and coupon notice</a>
+        </div>
+
+        <div class="links">
+          <h3>Want more mobile game discounts?</h3>
+          <p>You can also browse other supported game top-up pages from the same shop link below.</p>
           <a href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">View more mobile game discounts</a>
         </div>
 
         <section class="bottom-cta" aria-label="Top-up CTA">
-          <p class="title">Go to the Kingshot top-up page now</p>
+          <p class="title">Ready to start Kingshot self top-up?</p>
           <p class="desc">
-            If LootBar is cheaper than in-game top-up for your package, this is the easiest way to turn the same budget into better value.
-            Enter <span class="kbd">#s4qU</span> in the search bar and apply it before checkout.
+            If your Kingshot account is linked directly to Google or Facebook and 2-step verification is already active,
+            this is usually the fastest path to complete self top-up with fewer login issues.
+            Enter <span class="kbd">#s4qU</span> before checkout to apply the coupon.
           </p>
+
           <div class="cta-row">
-            <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Open Kingshot top-up page</a>
-            <a class="btn" href="https://discord.gg/vgzASAwx" target="_blank" rel="noopener noreferrer">Get help in Discord</a>
-            <a class="btn" href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">See latest recharge & coupon notice</a>
-            <a class="btn" href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">View more mobile game discounts</a>
-            <a class="btn" href="/en/guides/kingshot-giftcode.html" rel="noopener">View latest gift codes</a>
+            <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">Open Kingshot Top-Up Page</a>
+            <a class="btn" href="https://discord.gg/vgzASAwx" target="_blank" rel="noopener noreferrer">Get Help in Discord</a>
+            <a class="btn" href="https://cafe.naver.com/kingshot1/5567" target="_blank" rel="noopener noreferrer">See Recharge & Coupon Notice</a>
+            <a class="btn" href="https://lootbar.gg/shop/ten" target="_blank" rel="noopener noreferrer">More Game Discounts</a>
+            <a class="btn" href="/en/guides/kingshot-giftcode.html" rel="noopener">Latest Gift Codes</a>
           </div>
 
           <div class="cta-badges" aria-label="quick notes">
-            <span class="badge">Lower-cost top-up option</span>
-            <span class="badge">Google / Facebook required</span>
+            <span class="badge">Direct Google / Facebook only</span>
             <span class="badge">2-step verification required</span>
-            <span class="badge">Ask in Discord if stuck</span>
+            <span class="badge">Google Play Games not supported</span>
+            <span class="badge">Screenshot guide included</span>
+            <span class="badge">Discord help available</span>
           </div>
         </section>
       </section>
@@ -726,18 +1023,18 @@
       requestAnimationFrame(setStickyTop);
       setTimeout(setStickyTop, 60);
 
-      if(mqMobile && mqMobile.addEventListener){
+      if (mqMobile && mqMobile.addEventListener) {
         mqMobile.addEventListener('change', setStickyTop);
-      }else if(mqMobile && mqMobile.addListener){
+      } else if (mqMobile && mqMobile.addListener) {
         mqMobile.addListener(setStickyTop);
       }
 
-      if(window.ResizeObserver){
+      if (window.ResizeObserver) {
         var ro = new ResizeObserver(function(){ setStickyTop(); });
         var header = document.querySelector('header.top');
         var tabs = document.querySelector('nav.section-tabs');
-        if(header) ro.observe(header);
-        if(tabs) ro.observe(tabs);
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
       }
 
       window.addEventListener('load', setStickyTop);
