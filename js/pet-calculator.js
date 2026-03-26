@@ -217,15 +217,51 @@
     return rows;
   }
 
+  function isBreakthroughRow(row) {
+    return !!(row && row.type === 'breakthrough');
+  }
+
+  function getLevelLabelBase(level) {
+    return T('calcPet.form.level.prefix', 'Lv.') + ' ' + level;
+  }
+
   function getDisplayLabel(row) {
     if (!row) return '';
     if (row.label) return row.label;
 
     const level = toNum(row.level);
-    if (row.type === 'breakthrough') {
-      return T('calcPet.form.level.prefix', 'Lv.') + ' ' + level + ' ↑';
+    if (isBreakthroughRow(row)) {
+      return getLevelLabelBase(level) + ' ▲';
     }
-    return T('calcPet.form.level.prefix', 'Lv.') + ' ' + level;
+    return getLevelLabelBase(level);
+  }
+
+  // 같은 레벨 중복 제거용
+  // 원칙:
+  // 1) breakthrough 행이 있으면 그 행을 select에 노출
+  // 2) 일반 행만 있으면 일반 행을 노출
+  // 즉 Lv.100 과 Lv.100 ▲ 가 같이 뜨지 않게 하고,
+  // 같은 레벨에서는 breakthrough를 우선으로 선택지에 사용한다.
+  function getVisibleLevelOptions(rows) {
+    const byLevel = new Map();
+
+    rows.forEach(function (row, idx) {
+      const level = toNum(row.level);
+      const existing = byLevel.get(level);
+
+      if (!existing) {
+        byLevel.set(level, { row: row, idx: idx });
+        return;
+      }
+
+      if (isBreakthroughRow(row) && !isBreakthroughRow(existing.row)) {
+        byLevel.set(level, { row: row, idx: idx });
+      }
+    });
+
+    return Array.from(byLevel.values()).sort(function (a, b) {
+      return toNum(a.row.level) - toNum(b.row.level);
+    });
   }
 
   function getCurrentLangFolder() {
@@ -324,29 +360,38 @@
     if (!fromSel || !toSel || !petSel) return;
 
     const rows = getLevelArrayByPet(STATE.data, petSel.value);
+    const visibleRows = getVisibleLevelOptions(rows);
     const prevFrom = fromSel.value;
     const prevTo = toSel.value;
 
     fromSel.innerHTML = '';
     toSel.innerHTML = '';
 
-    rows.forEach(function (row, idx) {
-      const label = getDisplayLabel(row);
-      fromSel.appendChild(h('option', { value: String(idx), text: label }));
-      toSel.appendChild(h('option', { value: String(idx), text: label }));
+    visibleRows.forEach(function (item) {
+      const label = getDisplayLabel(item.row);
+      fromSel.appendChild(h('option', { value: String(item.idx), text: label }));
+      toSel.appendChild(h('option', { value: String(item.idx), text: label }));
     });
 
-    if (!rows.length) {
+    if (!visibleRows.length) {
       fromSel.value = '';
       toSel.value = '';
       return;
     }
 
-    const fromIdx = Math.min(parseInt(prevFrom || '0', 10) || 0, rows.length - 1);
-    const toIdx = Math.min(parseInt(prevTo || String(rows.length - 1), 10) || 0, rows.length - 1);
+    const optionValues = visibleRows.map(function (item) {
+      return String(item.idx);
+    });
 
-    fromSel.value = String(fromIdx);
-    toSel.value = String(Math.max(fromIdx, toIdx));
+    const firstValue = optionValues[0];
+    const lastValue = optionValues[optionValues.length - 1];
+
+    fromSel.value = optionValues.indexOf(String(prevFrom)) > -1 ? String(prevFrom) : firstValue;
+    toSel.value = optionValues.indexOf(String(prevTo)) > -1 ? String(prevTo) : lastValue;
+
+    if (toNum(toSel.value) < toNum(fromSel.value)) {
+      toSel.value = fromSel.value;
+    }
   }
 
   function buildDetailHeadHTML(metricKey) {
@@ -1466,8 +1511,13 @@
       updatePetActiveState();
       renderSelectedPet();
       rebuildLevelOptions();
-      S.els.fromSel.value = String(S.last.fromIdx);
-      S.els.toSel.value = String(S.last.toIdx);
+
+      if ([...S.els.fromSel.options].some(function (o) { return o.value === String(S.last.fromIdx); })) {
+        S.els.fromSel.value = String(S.last.fromIdx);
+      }
+      if ([...S.els.toSel.options].some(function (o) { return o.value === String(S.last.toIdx); })) {
+        S.els.toSel.value = String(S.last.toIdx);
+      }
 
       const evt = document.createEvent('Event');
       evt.initEvent('change', true, true);
