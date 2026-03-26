@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>킹샷 충전 전 필수 | 전용 링크만 거치면 추가 쿠폰 자동 집계</title>
+  <meta name="description" content="킹샷 충전 전에 전용 링크로 접속하면 추가 쿠폰과 구매 혜택이 자동 집계됩니다. 평소처럼 충전하면 되고, 신규가입자는 코드 #s4qU 추가 혜택도 받을 수 있습니다." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/topup-promotion.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/topup-promotion.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/topup-promotion.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/topup-promotion.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/topup-promotion.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/topup-promotion.html" />
+
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="//lootbar.gg" />
+  <link rel="preconnect" href="https://lootbar.gg" crossorigin />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="킹샷데이터코리아" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:title" content="킹샷 충전 전 필수 | 전용 링크만 거치면 추가 쿠폰 자동 집계" />
+  <meta property="og:description" content="어차피 충전할 거라면 전용 링크로 들어가 추가 쿠폰과 구매 혜택까지 챙기세요. 별도 신청 없이 자동 집계됩니다." />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/guides/topup-promotion.html" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-logo.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="킹샷 충전 전 필수 | 추가 쿠폰 자동 집계" />
+  <meta name="twitter:description" content="전용 링크만 거치면 추가 쿠폰과 구매 혜택 자동 집계. 신규가입자는 코드 #s4qU 추가 혜택 가능." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel-soft:#f8fafc;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --alert-bg:#fff7ed;
+      --alert-border:#fed7aa;
+      --alert-text:#9a3412;
+      --info-bg:#eff6ff;
+      --info-border:#bfdbfe;
+      --radius:18px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-visual{
+      width:160px;
+      height:160px;
+      border-radius:20px;
+      background:linear-gradient(180deg,#f8fbff 0%,#eef5ff 100%);
+      border:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .hero-visual img{
+      width:96px;
+      height:96px;
+      object-fit:contain;
+      display:block;
+    }
+
+    h1{
+      margin:0;
+      font-size:34px;
+      line-height:1.15;
+      letter-spacing:-0.02em;
+    }
+
+    .hero-lead{
+      margin:10px 0 0;
+      font-size:18px;
+      color:#1f2937;
+      font-weight:700;
+    }
+
+    .hero-desc{
+      margin:12px 0 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.75;
+    }
+
+    .top-alert{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid var(--alert-border);
+      background:var(--alert-bg);
+      color:var(--alert-text);
+      font-weight:800;
+      line-height:1.6;
+    }
+
+    .top-alert strong{color:#7c2d12}
+
+    .cta-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:46px;
+      padding:0 16px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:#111827;
+      font-weight:800;
+      text-decoration:none;
+      line-height:1;
+      user-select:none;
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .cta-badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:#fff;
+      white-space:nowrap;
+    }
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-0.02em;
+    }
+
+    section h3{
+      margin:18px 0 8px;
+      font-size:18px;
+      letter-spacing:-0.01em;
+    }
+
+    .muted{color:var(--muted)}
+
+    .summary-box{
+      border:1px solid rgba(37,99,235,.18);
+      background:rgba(37,99,235,.05);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .summary-box ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .summary-box li{margin:8px 0}
+
+    .widget-desktop{display:block}
+    .widget-mobile{display:none}
+
+    .embed-wrap{
+      width:100%;
+      max-width:1280px;
+      margin:0 auto;
+      overflow:hidden;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:#fff;
+      min-height:426px;
+      position:relative;
+    }
+
+    .embed-placeholder{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#fff;
+      transition:opacity .2s ease, visibility .2s ease;
+    }
+
+    .embed-placeholder.is-hidden{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
+
+    .embed-placeholder-link{
+      display:block;
+      width:100%;
+      height:100%;
+    }
+
+    .embed-placeholder-image{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .embed-iframe{
+  display:block;
+  width:100%;
+  height:426px;
+}
+
+    .condition-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .condition-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px;
+      background:#fff;
+    }
+
+    .condition-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+
+    .condition-top strong{
+      font-size:18px;
+      line-height:1.2;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:72px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      border:1px solid var(--border);
+      background:#f9fafb;
+      color:#374151;
+    }
+
+    .tag.gold{background:#fff7ed;color:#9a3412;border-color:#fed7aa}
+    .tag.silver{background:#f8fafc;color:#334155;border-color:#cbd5e1}
+    .tag.blue{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
+
+    .condition-card p{
+      margin:8px 0 0;
+      color:var(--muted);
+    }
+
+    .steps{
+      display:grid;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .step{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px;
+      background:#fff;
+    }
+
+    .step-num{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:30px;
+      height:30px;
+      border-radius:999px;
+      background:#111827;
+      color:#fff;
+      font-size:13px;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    .step p{margin:0;color:#374151}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(37,99,235,.18);
+      background:rgba(37,99,235,.05);
+      border-radius:14px;
+      margin-top:14px;
+    }
+
+    .link-box{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--info-border);
+      background:var(--info-bg);
+      color:#1e3a8a;
+      line-height:1.7;
+    }
+
+    .link-box strong{color:#1d4ed8}
+    .link-box a{
+      word-break:break-all;
+      font-weight:800;
+      text-decoration:underline;
+    }
+
+    .guide-list{
+      margin:10px 0 0;
+      padding-left:18px;
+    }
+
+    .guide-list li{margin:8px 0}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:12px 14px;
+    }
+
+    details + details{margin-top:12px}
+
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      color:var(--text);
+      list-style:none;
+    }
+
+    summary::-webkit-details-marker{display:none}
+
+    details p{
+      margin:10px 0 0;
+      color:var(--muted);
+    }
+
+    .bottom-cta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:linear-gradient(180deg,#fbfdff 0%,#f8fbff 100%);
+    }
+
+    .bottom-cta .title{
+      margin:0 0 6px;
+      font-size:20px;
+      letter-spacing:-0.02em;
+    }
+
+    .bottom-cta p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    .pill:hover{border-color:#c7d2fe}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+
+      .hero{
+        grid-template-columns:1fr;
+      }
+
+      .hero-visual{
+        width:120px;
+        height:120px;
+        margin:0 auto 6px;
+      }
+
+      h1{
+        font-size:28px;
+      }
+
+      .hero-lead{
+        font-size:17px;
+      }
+
+      .condition-grid{
+        grid-template-columns:1fr;
+      }
+
+      .bottom-cta{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .cta-row .btn{
+        width:auto;
+      }
+
+      .widget-desktop{
+        display:none;
+      }
+
+      .widget-mobile{
+        display:block;
+      }
+    }
+
+    @media (max-width:640px){
+      body{
+        font-size:15px;
+      }
+
+      .wrap{
+        padding:14px 12px 56px;
+      }
+
+      .hero{
+        padding:18px 16px;
+      }
+
+      h1{
+        font-size:23px;
+        line-height:1.28;
+        letter-spacing:-0.03em;
+        word-break:keep-all;
+      }
+
+      section{
+        padding:15px;
+      }
+
+      .hero-lead{
+        font-size:16px;
+        line-height:1.65;
+      }
+
+      .hero-desc{
+        font-size:14px;
+        line-height:1.7;
+      }
+
+      .bottom-cta .title{
+        font-size:19px;
+      }
+
+      .cta-row .btn{
+        width:100%;
+      }
+
+      .hero-desc,
+      .summary-box li,
+      .condition-card p,
+      .step p,
+      .link-box,
+      details p,
+      .note{
+        font-size:15px;
+        line-height:1.75;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
+          {"@type":"ListItem","position":2,"name":"가이드","item":"https://kingshotdata.kr/ko/guides/"},
+          {"@type":"ListItem","position":3,"name":"킹샷 충전 전 필수 | 전용 링크만 거치면 추가 쿠폰 자동 집계","item":"https://kingshotdata.kr/ko/guides/topup-promotion.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"킹샷 충전 전 필수 | 전용 링크만 거치면 추가 쿠폰 자동 집계",
+        "description":"킹샷 충전 전에 전용 링크로 접속하면 추가 쿠폰과 구매 혜택이 자동 집계됩니다. 평소처럼 충전하면 되고, 신규가입자는 코드 #s4qU 추가 혜택도 받을 수 있습니다.",
+        "inLanguage":"ko",
+        "mainEntityOfPage":{
+          "@type":"WebPage",
+          "@id":"https://kingshotdata.kr/ko/guides/topup-promotion.html"
+        },
+        "author":{
+          "@type":"Organization",
+          "name":"킹샷데이터코리아"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"킹샷데이터코리아",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+          }
+        },
+        "image":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"월초인데 쿠폰이나 패키지가 아직 지급되지 않았습니다. 왜 그런가요?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"쿠폰과 패키지는 전용 누적 충전 프로모션 링크를 통해 가입 및 충전한 내역만 집계되어 지급됩니다. 할인 쿠폰은 매달 15일, 패키지 쿠폰은 다음 달 초에 쿠폰함으로 자동 지급됩니다."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"모바일이나 PC에서 전용 링크로 접속해도 되나요?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"네. 모바일과 PC 모두 이용할 수 있습니다. 브라우저에 전용 누적 충전 프로모션 링크를 즐겨찾기 또는 북마크해 두면 매번 다시 찾지 않아도 해당 링크로 접속한 결제 내역은 정상 반영됩니다."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"어떤 링크로 참여해야 하나요?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"추가 쿠폰 자동 집계를 위해서는 반드시 https://lootbar.gg/shop/ten/top-up/kingshot 링크를 통해 가입 및 충전을 진행해야 합니다. 링크로 접속 후 바로 충전해야 하며, 뒤로가기 후 다른 경로로 이동하면 집계가 풀릴 수 있습니다."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"신규가입자도 추가 혜택이 있나요?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"네. 신규가입자라면 신규 가입 후 루트바 검색창에 코드 #s4qU 를 입력하면 추가 쿠폰이 지급됩니다. 다만 추가 쿠폰 자동 집계를 위해서는 반드시 전용 프로모션 링크를 통해 가입 및 충전을 진행해야 합니다."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="킹샷데이터코리아 홈">
+          <img src="/img/kingshotdata-logo.png" alt="킹샷데이터코리아" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>킹샷데이터코리아</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/topup-promotion.html">EN</a>
+        <a href="/ko/guides/topup-promotion.html" aria-current="page">KO</a>
+        <a href="/ja/guides/topup-promotion.html">JA</a>
+        <a href="/zh-tw/guides/topup-promotion.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">핵심 요약</a>
+      <a href="#widget">바로 참여</a>
+      <a href="#reward">지급 조건</a>
+      <a href="#howto">참여 방법</a>
+      <a href="#faq">FAQ</a>
+      <a href="#related">관련 링크</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/guides/">가이드</a> <span class="muted">›</span>
+        <span>킹샷 충전 전 필수</span>
+      </div>
+
+      <div class="hero">
+        <div class="hero-visual">
+          <img src="/img/kingshotdata-logo.png" alt="킹샷데이터코리아 로고" loading="eager" fetchpriority="high" width="96" height="96" />
+        </div>
+
+        <div>
+          <h1>킹샷 충전 전 필수</h1>
+
+          <p class="hero-lead">
+            어차피 충전할 거라면 전용 링크로 들어가 추가 쿠폰과 구매 혜택까지 같이 챙기면 됩니다.
+          </p>
+
+          <p class="hero-desc">
+            별도 복잡한 신청 없이 자동 집계되며, 신규가입자는 루트바 검색창에 <strong>#s4qU</strong> 입력 시 추가 쿠폰도 받을 수 있습니다.
+          </p>
+
+          <div class="top-alert">
+            <strong>중요:</strong>
+            반드시 <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">전용 링크</a>로 들어간 뒤 바로 가입 및 충전을 진행해 주세요.
+            다른 경로로 벗어나면 집계가 풀릴 수 있습니다.
+          </div>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">추가 혜택 받고 충전하기</a>
+            <a class="btn" href="/ko/guides/topup-guide.html">충전 방법 보기</a>
+          </div>
+
+          <div class="cta-badges">
+            <span class="badge">전용 링크 경유 시 자동 집계</span>
+            <span class="badge">쿠폰 지급일: 매달 15일</span>
+            <span class="badge">신규가입자 코드: #s4qU</span>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <span class="anchor"></span>
+        <h2>핵심 요약</h2>
+
+        <div class="summary-box">
+          <ul>
+            <li>쿠폰은 <strong>매달 15일</strong>에 지급됩니다.</li>
+            <li>패키지 쿠폰은 <strong>월 누적 충전 금액</strong> 기준으로 <strong>다음 달 초</strong> 쿠폰함에 자동 지급됩니다.</li>
+            <li>반드시 <strong><a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">전용 링크</a></strong>를 통해 가입 및 충전해야 자동 집계됩니다.</li>
+            <li>루트바에서 당월 결제 내역을 자동 집계한 뒤 <strong>쿠폰함으로 직접 지급</strong>합니다.</li>
+            <li>신규가입자라면 루트바 검색창에 <strong>#s4qU</strong> 를 입력하면 <strong>추가 쿠폰</strong>이 지급됩니다.</li>
+          </ul>
+        </div>
+
+        <div class="note">
+          <div>
+            <strong>참고:</strong> 할인 쿠폰과 당첨 패키지는 루트바에서 직접 발급하며,
+            발급 화면에는 <strong>킹샷데이터코리아 로고</strong>가 포함됩니다.
+          </div>
+        </div>
+      </section>
+
+      <section id="widget">
+        <span class="anchor"></span>
+        <h2>바로 확인하고 충전하기</h2>
+
+        <div class="widget-desktop">
+          <div class="embed-wrap">
+            <div class="embed-placeholder" data-placeholder>
+              <a class="embed-placeholder-link" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener" aria-label="전용 링크로 바로 이동하기">
+                <img class="embed-placeholder-image" src="/img/lootbarpc.png" alt="킹샷 충전 배너" loading="eager" />
+              </a>
+            </div>
+            <iframe
+              class="embed-iframe"
+              data-embed-iframe
+              src="https://lootbar.gg/embed.html?game=king-shot-top-up&theme=dark&aff_short=ten"
+              width="100%"
+              height="426"
+              style="border: none;"
+              title="Kingshot LootBar Top-up"
+              loading="eager"
+            ></iframe>
+          </div>
+        </div>
+
+        <div class="widget-mobile">
+          <div class="embed-wrap">
+            <div class="embed-placeholder" data-placeholder>
+              <a class="embed-placeholder-link" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener" aria-label="전용 링크로 바로 이동하기">
+                <img class="embed-placeholder-image" src="/img/lootbarmo.png" alt="킹샷 충전 배너" loading="eager" />
+              </a>
+            </div>
+            <iframe
+              class="embed-iframe"
+              data-embed-iframe
+              src="https://lootbar.gg/embed.html?game=king-shot-top-up&theme=dark&aff_short=ten"
+              width="100%"
+              height="426"
+              style="border: none;"
+              title="Kingshot LootBar Top-up Mobile"
+              loading="eager"
+            ></iframe>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">전용 링크로 바로 가기</a>
+          <a class="btn" href="/ko/guides/topup-guide.html">충전 방법 보기</a>
+        </div>
+      </section>
+
+      <section id="reward">
+        <span class="anchor"></span>
+        <h2>지급 조건</h2>
+        <p class="muted">월 누적 충전 금액에 따라 아래 조건으로 패키지 쿠폰이 추가 지급됩니다.</p>
+
+        <div class="condition-grid">
+          <article class="condition-card">
+            <div class="condition-top">
+              <strong>$500 이상</strong>
+              <span class="tag blue">$4.99 쿠폰</span>
+            </div>
+            <p>월 누적 충전 금액이 <strong>$500 이상</strong>인 회원 중 <strong>20명</strong>에게 지급됩니다.</p>
+            <p>단, <strong>상위 당첨 회원은 제외</strong>됩니다.</p>
+          </article>
+
+          <article class="condition-card">
+            <div class="condition-top">
+              <strong>$1,000 이상</strong>
+              <span class="tag silver">$9.99 쿠폰</span>
+            </div>
+            <p>월 누적 충전 금액이 <strong>$1,000 이상</strong>인 회원 중 <strong>10명</strong>에게 지급됩니다.</p>
+            <p>단, <strong>누적 충전 상위 3명은 제외</strong>됩니다.</p>
+          </article>
+
+          <article class="condition-card">
+            <div class="condition-top">
+              <strong>$2,000 이상</strong>
+              <span class="tag gold">$99.99 쿠폰</span>
+            </div>
+            <p>월 누적 충전 금액이 <strong>$2,000 이상</strong>인 회원 중 <strong>누적 충전 상위 3명</strong>에게 지급됩니다.</p>
+            <p>보상은 <strong>다음 달 초</strong> 쿠폰함에 자동 지급됩니다.</p>
+          </article>
+        </div>
+
+        <div class="note">
+          <div>
+            <strong>지급 방식:</strong> 할인 쿠폰은 매달 15일, 패키지 쿠폰은 다음 달 초 쿠폰함으로 자동 지급됩니다.
+          </div>
+        </div>
+      </section>
+
+      <section id="howto">
+        <span class="anchor"></span>
+        <h2>참여 방법</h2>
+
+        <div class="steps">
+          <article class="step">
+            <div class="step-num">1</div>
+            <p><strong><a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">전용 링크</a></strong>로 접속합니다.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-num">2</div>
+            <p>전용 링크를 통해 <strong>가입 및 로그인</strong>을 진행합니다.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-num">3</div>
+            <p>신규가입자라면 가입 후 루트바 검색창에 <strong>#s4qU</strong> 를 입력해 추가 쿠폰 지급 대상 여부를 확인합니다.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-num">4</div>
+            <p>원하는 상품 또는 충전 금액을 선택합니다.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-num">5</div>
+            <p>링크를 벗어나지 말고 그대로 결제를 완료합니다.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-num">6</div>
+            <p>루트바에서 당월 결제 내역을 자동 집계한 뒤, 조건에 맞는 보상을 쿠폰함으로 지급합니다.</p>
+          </article>
+        </div>
+
+        <div class="link-box">
+          <strong>참여 링크</strong><br>
+          <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">전용 링크로 바로 이동하기</a><br>
+          링크로 접속한 뒤 바로 충전해 주세요.
+        </div>
+
+        <h3>권장 사항</h3>
+        <ul class="guide-list">
+          <li>전용 링크를 브라우저에 <strong>즐겨찾기 또는 북마크</strong>해 두세요.</li>
+          <li>모바일과 PC 모두 같은 링크를 사용할 수 있습니다.</li>
+          <li>처음 이용하는 경우, 먼저 <a href="/ko/guides/topup-guide.html">셀프충전 가이드</a>를 확인하면 훨씬 편합니다.</li>
+        </ul>
+      </section>
+
+      <section id="notice">
+        <span class="anchor"></span>
+        <h2>유의사항</h2>
+
+        <ul class="guide-list">
+          <li>본 프로모션은 <strong>킹샷데이터코리아 이용자 전용</strong>입니다.</li>
+          <li>반드시 <strong><a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">전용 링크</a></strong>를 통해 가입 및 충전해야 정상 집계됩니다.</li>
+          <li>링크를 벗어나 다른 경로로 이동하면 집계가 풀릴 수 있습니다.</li>
+          <li>모든 보상은 <strong>당월 누적 충전 실적</strong>을 기준으로 지급됩니다.</li>
+          <li>신규가입자라면 가입 후 루트바 검색창에 <strong>#s4qU</strong> 를 입력하면 추가 쿠폰이 지급됩니다.</li>
+        </ul>
+      </section>
+
+      <section id="faq">
+        <span class="anchor"></span>
+        <h2>Q&amp;A</h2>
+
+        <details open>
+          <summary>Q. 월초인데 쿠폰이나 패키지가 아직 지급되지 않았습니다. 왜 그런가요?</summary>
+          <p>
+            할인 쿠폰은 <strong>매달 15일</strong>, 패키지 쿠폰은 <strong>다음 달 초</strong> 쿠폰함에 자동 지급됩니다.
+            또한 반드시 <strong><a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">전용 링크</a></strong>를 통해 가입 및 충전한 내역만 집계됩니다.
+          </p>
+        </details>
+
+        <details>
+          <summary>Q. 모바일이나 PC에서 전용 링크로 접속해도 되나요?</summary>
+          <p>
+            네. 모바일과 PC 모두 이용할 수 있습니다.
+            브라우저에 전용 링크를 즐겨찾기 또는 북마크해 두면 매번 다시 찾지 않아도 됩니다.
+          </p>
+        </details>
+
+        <details>
+          <summary>Q. 어떤 링크로 참여해야 하나요?</summary>
+          <p>
+            아래 링크를 통해 가입 및 충전해야 정상 집계됩니다.<br>
+            <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener"><strong>전용 링크로 바로 이동하기</strong></a><br>
+            링크로 접속한 뒤 다른 경로로 벗어나지 말고 바로 결제를 진행해 주세요.
+          </p>
+        </details>
+
+        <details>
+          <summary>Q. 신규가입자도 추가 혜택이 있나요?</summary>
+          <p>
+            네. 신규가입자라면 신규 가입 후 루트바 검색창에 <strong>#s4qU</strong> 를 입력하면 추가 쿠폰이 지급됩니다.
+            다만 자동 집계를 위해서는 반드시 전용 링크를 통해 가입 및 충전을 진행해야 합니다.
+          </p>
+        </details>
+      </section>
+
+      <section id="help">
+        <span class="anchor"></span>
+        <h2>처음이라면 여기부터</h2>
+
+        <div class="bottom-cta">
+          <div>
+            <h3 class="title">처음 하는 분은 충전 방법만 확인하고 바로 진행하면 됩니다.</h3>
+            <p>계정 연동 방식, 2차인증 확인, 실제 결제 순서, 쿠폰 입력 방법까지 단계별로 정리되어 있습니다.</p>
+          </div>
+
+          <div class="cta-row" style="margin-top:0">
+            <a class="btn btn-primary" href="/ko/guides/topup-guide.html">충전 방법 보기</a>
+            <a class="btn" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">전용 링크 열기</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="related">
+        <span class="anchor"></span>
+        <h2>관련 링크</h2>
+
+        <div class="related">
+          <a class="pill" href="/ko/guides/topup-guide.html">킹샷 충전 가이드</a>
+          <a class="pill" href="/ko/guides/">가이드 목록</a>
+          <a class="pill" href="/gift-codes">킹샷 기프트코드</a>
+          <a class="pill" href="/calc-pet">펫 계산기</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+  (function(){
+    document.documentElement.classList.add('js');
+
+    var mqMobile = window.matchMedia('(max-width: 900px)');
+
+    function setStickyTop(){
+      var header = document.querySelector('header.top');
+      var tabs = document.querySelector('nav.section-tabs');
+      var isMobile = mqMobile.matches;
+
+      var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+      var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+      document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+      document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+      document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+    }
+
+    function initStickyObservers(){
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if (mqMobile && mqMobile.addEventListener) {
+        mqMobile.addEventListener('change', setStickyTop);
+      } else if (mqMobile && mqMobile.addListener) {
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    }
+
+    function initEmbeds(){
+      var iframes = document.querySelectorAll('[data-embed-iframe]');
+
+      iframes.forEach(function(iframe){
+        var wrap = iframe.closest('.embed-wrap');
+        if (!wrap) return;
+
+        var placeholder = wrap.querySelector('[data-placeholder]');
+        if (!placeholder) return;
+
+        var revealed = false;
+
+        function hidePlaceholder(){
+          if (revealed) return;
+          revealed = true;
+          placeholder.classList.add('is-hidden');
+        }
+
+        iframe.addEventListener('load', function(){
+          setTimeout(hidePlaceholder, 1200);
+        }, { once:true });
+
+        setTimeout(hidePlaceholder, 8000);
+      });
+    }
+
+    function init(){
+      initStickyObservers();
+      initEmbeds();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+</body>
+</html>

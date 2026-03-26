@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Kingshot課金前に必ず確認 | 専用リンク経由で追加特典を自動集計</title>
+  <meta name="description" content="Kingshotで課金する前に専用リンク経由で進むと、追加クーポンや購入特典が自動で集計されます。通常どおりチャージするだけでよく、新規登録ユーザーはコード #s4qU で追加特典も受け取れます。" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ja/guides/topup-promotion.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/topup-promotion.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/topup-promotion.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/topup-promotion.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/topup-promotion.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/topup-promotion.html" />
+
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="//lootbar.gg" />
+  <link rel="preconnect" href="https://lootbar.gg" crossorigin />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="KingshotData" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:title" content="Kingshot課金前に必ず確認 | 専用リンク経由で追加特典を自動集計" />
+  <meta property="og:description" content="課金するなら、専用リンク経由で追加クーポンや購入特典まで受け取りましょう。面倒な申請は不要で、自動で集計されます。" />
+  <meta property="og:url" content="https://kingshotdata.kr/ja/guides/topup-promotion.html" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-logo.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kingshot課金前に必ず確認 | 追加特典を自動集計" />
+  <meta name="twitter:description" content="専用リンク経由で進むと、追加クーポンと購入特典が自動集計されます。新規登録ならコード #s4qU で追加特典も受け取れます。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel-soft:#f8fafc;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --alert-bg:#fff7ed;
+      --alert-border:#fed7aa;
+      --alert-text:#9a3412;
+      --info-bg:#eff6ff;
+      --info-border:#bfdbfe;
+      --radius:18px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.7 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-visual{
+      width:160px;
+      height:160px;
+      border-radius:20px;
+      background:linear-gradient(180deg,#f8fbff 0%,#eef5ff 100%);
+      border:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .hero-visual img{
+      width:96px;
+      height:96px;
+      object-fit:contain;
+      display:block;
+    }
+
+    h1{
+      margin:0;
+      font-size:34px;
+      line-height:1.15;
+      letter-spacing:-0.02em;
+    }
+
+    .hero-lead{
+      margin:10px 0 0;
+      font-size:18px;
+      color:#1f2937;
+      font-weight:700;
+    }
+
+    .hero-desc{
+      margin:12px 0 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.8;
+    }
+
+    .top-alert{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid var(--alert-border);
+      background:var(--alert-bg);
+      color:var(--alert-text);
+      font-weight:800;
+      line-height:1.7;
+    }
+
+    .top-alert strong{color:#7c2d12}
+
+    .cta-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:46px;
+      padding:0 16px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:#111827;
+      font-weight:800;
+      text-decoration:none;
+      line-height:1;
+      user-select:none;
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .cta-badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:#fff;
+      white-space:nowrap;
+    }
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-0.02em;
+    }
+
+    section h3{
+      margin:18px 0 8px;
+      font-size:18px;
+      letter-spacing:-0.01em;
+    }
+
+    .muted{color:var(--muted)}
+
+    .summary-box{
+      border:1px solid rgba(37,99,235,.18);
+      background:rgba(37,99,235,.05);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .summary-box ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .summary-box li{margin:8px 0}
+
+    .widget-desktop{display:block}
+    .widget-mobile{display:none}
+
+    .embed-wrap{
+      width:100%;
+      max-width:1280px;
+      margin:0 auto;
+      overflow:hidden;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:#fff;
+      min-height:426px;
+      position:relative;
+    }
+
+    .embed-placeholder{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#fff;
+      transition:opacity .2s ease, visibility .2s ease;
+    }
+
+    .embed-placeholder.is-hidden{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
+
+    .embed-placeholder-link{
+      display:block;
+      width:100%;
+      height:100%;
+    }
+
+    .embed-placeholder-image{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .embed-iframe{
+      display:block;
+      width:100%;
+      height:426px;
+    }
+
+    .condition-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .condition-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px;
+      background:#fff;
+    }
+
+    .condition-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+
+    .condition-top strong{
+      font-size:18px;
+      line-height:1.2;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:72px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      border:1px solid var(--border);
+      background:#f9fafb;
+      color:#374151;
+    }
+
+    .tag.gold{background:#fff7ed;color:#9a3412;border-color:#fed7aa}
+    .tag.silver{background:#f8fafc;color:#334155;border-color:#cbd5e1}
+    .tag.blue{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
+
+    .condition-card p{
+      margin:8px 0 0;
+      color:var(--muted);
+    }
+
+    .steps{
+      display:grid;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .step{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px;
+      background:#fff;
+    }
+
+    .step-num{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:30px;
+      height:30px;
+      border-radius:999px;
+      background:#111827;
+      color:#fff;
+      font-size:13px;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    .step p{margin:0;color:#374151}
+
+    .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(37,99,235,.18);
+      background:rgba(37,99,235,.05);
+      border-radius:14px;
+      margin-top:14px;
+    }
+
+    .link-box{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--info-border);
+      background:var(--info-bg);
+      color:#1e3a8a;
+      line-height:1.8;
+    }
+
+    .link-box strong{color:#1d4ed8}
+    .link-box a{
+      word-break:break-all;
+      font-weight:800;
+      text-decoration:underline;
+    }
+
+    .guide-list{
+      margin:10px 0 0;
+      padding-left:18px;
+    }
+
+    .guide-list li{margin:8px 0}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:12px 14px;
+    }
+
+    details + details{margin-top:12px}
+
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      color:var(--text);
+      list-style:none;
+    }
+
+    summary::-webkit-details-marker{display:none}
+
+    details p{
+      margin:10px 0 0;
+      color:var(--muted);
+    }
+
+    .bottom-cta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:linear-gradient(180deg,#fbfdff 0%,#f8fbff 100%);
+    }
+
+    .bottom-cta .title{
+      margin:0 0 6px;
+      font-size:20px;
+      letter-spacing:-0.02em;
+    }
+
+    .bottom-cta p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    .pill:hover{border-color:#c7d2fe}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+
+      .hero{
+        grid-template-columns:1fr;
+      }
+
+      .hero-visual{
+        width:120px;
+        height:120px;
+        margin:0 auto 6px;
+      }
+
+      h1{
+        font-size:28px;
+      }
+
+      .hero-lead{
+        font-size:17px;
+      }
+
+      .condition-grid{
+        grid-template-columns:1fr;
+      }
+
+      .bottom-cta{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .cta-row .btn{
+        width:auto;
+      }
+
+      .widget-desktop{
+        display:none;
+      }
+
+      .widget-mobile{
+        display:block;
+      }
+    }
+
+    @media (max-width:640px){
+      body{
+        font-size:15px;
+      }
+
+      .wrap{
+        padding:14px 12px 56px;
+      }
+
+      .hero{
+        padding:18px 16px;
+      }
+
+      h1{
+        font-size:23px;
+        line-height:1.28;
+        letter-spacing:-0.03em;
+        word-break:keep-all;
+      }
+
+      section{
+        padding:15px;
+      }
+
+      .hero-lead{
+        font-size:16px;
+        line-height:1.65;
+      }
+
+      .hero-desc{
+        font-size:14px;
+        line-height:1.7;
+      }
+
+      .bottom-cta .title{
+        font-size:19px;
+      }
+
+      .cta-row .btn{
+        width:100%;
+      }
+
+      .hero-desc,
+      .summary-box li,
+      .condition-card p,
+      .step p,
+      .link-box,
+      details p,
+      .note{
+        font-size:15px;
+        line-height:1.75;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"ホーム","item":"https://kingshotdata.kr/ja/"},
+          {"@type":"ListItem","position":2,"name":"ガイド","item":"https://kingshotdata.kr/ja/guides/"},
+          {"@type":"ListItem","position":3,"name":"Kingshot課金前に必ず確認 | 専用リンク経由で追加特典を自動集計","item":"https://kingshotdata.kr/ja/guides/topup-promotion.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"Kingshot課金前に必ず確認 | 専用リンク経由で追加特典を自動集計",
+        "description":"Kingshotで課金する前に専用リンク経由で進むと、追加クーポンや購入特典が自動で集計されます。通常どおりチャージするだけでよく、新規登録ユーザーはコード #s4qU で追加特典も受け取れます。",
+        "inLanguage":"ja",
+        "mainEntityOfPage":{
+          "@type":"WebPage",
+          "@id":"https://kingshotdata.kr/ja/guides/topup-promotion.html"
+        },
+        "author":{
+          "@type":"Organization",
+          "name":"KingshotData"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"KingshotData",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+          }
+        },
+        "image":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"月初なのにクーポンやパッケージがまだ配布されていません。なぜですか？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"クーポンとパッケージは、専用累計チャージプロモーションリンク経由で登録およびチャージした履歴のみ集計対象になります。割引クーポンは毎月15日、パッケージクーポンは翌月初めにクーポンボックスへ自動配布されます。"
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"モバイルやPCから専用リンクにアクセスしても大丈夫ですか？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"はい。モバイルとPCのどちらでも利用できます。専用累計チャージプロモーションリンクをブラウザのお気に入りやブックマークに登録しておけば、毎回探し直さなくてもそのリンク経由の決済履歴が正常に反映されます。"
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"どのリンクから利用すればいいですか？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"追加特典を自動集計するためには、必ず https://lootbar.gg/shop/ten/top-up/kingshot のリンク経由で登録およびチャージを進めてください。リンクにアクセスした後、そのままチャージを完了する必要があり、別の経路へ移動すると集計対象から外れる場合があります。"
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"新規登録ユーザー向けの追加特典はありますか？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"はい。新規登録ユーザーは登録後にLootBarの検索欄でコード #s4qU を入力すると追加クーポンを受け取れます。ただし、追加特典を自動集計するためには必ず専用プロモーションリンク経由で登録およびチャージを進めてください。"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ja/" aria-label="KingshotData ホーム">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>KingshotData</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/topup-promotion.html">EN</a>
+        <a href="/ko/guides/topup-promotion.html">KO</a>
+        <a href="/ja/guides/topup-promotion.html" aria-current="page">JA</a>
+        <a href="/zh-tw/guides/topup-promotion.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">要点まとめ</a>
+      <a href="#widget">すぐに利用</a>
+      <a href="#reward">配布条件</a>
+      <a href="#howto">利用方法</a>
+      <a href="#faq">FAQ</a>
+      <a href="#related">関連リンク</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ja/">ホーム</a> <span class="muted">›</span>
+        <a href="/ja/guides/">ガイド</a> <span class="muted">›</span>
+        <span>課金前に必ず確認</span>
+      </div>
+
+      <div class="hero">
+        <div class="hero-visual">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData ロゴ" loading="eager" fetchpriority="high" width="96" height="96" />
+        </div>
+
+        <div>
+          <h1>Kingshot課金前に必ず確認</h1>
+
+          <p class="hero-lead">
+            いつものようにチャージする前に、専用リンク経由で進むだけで追加クーポンや購入特典までまとめて受け取れます。
+          </p>
+
+          <p class="hero-desc">
+            面倒な申請は不要で、自動で集計されます。新規登録の場合は、LootBarの検索欄で <strong>#s4qU</strong> を入力すると追加クーポンも受け取れます。
+          </p>
+
+          <div class="top-alert">
+            <strong>重要:</strong>
+            必ず <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">専用リンク</a> にアクセスした後、そのまま登録とチャージを進めてください。
+            別の経路へ移動すると、集計対象から外れる場合があります。
+          </div>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">特典を受け取ってチャージする</a>
+            <a class="btn" href="/ja/guides/topup-guide.html">チャージ方法を見る</a>
+          </div>
+
+          <div class="cta-badges">
+            <span class="badge">専用リンク経由で自動集計</span>
+            <span class="badge">クーポン配布日: 毎月15日</span>
+            <span class="badge">新規コード: #s4qU</span>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <span class="anchor"></span>
+        <h2>要点まとめ</h2>
+
+        <div class="summary-box">
+          <ul>
+            <li>クーポンは <strong>毎月15日</strong> に配布されます。</li>
+            <li>パッケージクーポンは <strong>月間累計チャージ金額</strong> を基準に、<strong>翌月初め</strong> にクーポンボックスへ自動配布されます。</li>
+            <li>必ず <strong><a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">専用リンク</a></strong> 経由で登録とチャージを行う必要があります。</li>
+            <li>LootBarが当月の決済履歴を自動集計し、<strong>クーポンボックスへ直接配布</strong> します。</li>
+            <li>新規登録ユーザーは、LootBarの検索欄で <strong>#s4qU</strong> を入力すると <strong>追加クーポン</strong> を受け取れます。</li>
+          </ul>
+        </div>
+
+        <div class="note">
+          <div>
+            <strong>参考:</strong> 割引クーポンと当選パッケージはLootBarが直接発行し、
+            配布画面には <strong>KingshotData</strong> のロゴが表示されます。
+          </div>
+        </div>
+      </section>
+
+      <section id="widget">
+        <span class="anchor"></span>
+        <h2>そのまま確認してチャージ</h2>
+
+        <div class="widget-desktop">
+          <div class="embed-wrap">
+            <div class="embed-placeholder" data-placeholder>
+              <a class="embed-placeholder-link" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener" aria-label="専用リンクへ移動">
+                <img class="embed-placeholder-image" src="/img/lootbarpc.png" alt="Kingshot チャージバナー" loading="eager" />
+              </a>
+            </div>
+            <iframe
+              class="embed-iframe"
+              data-embed-iframe
+              src="https://lootbar.gg/embed.html?game=king-shot-top-up&theme=dark&aff_short=ten"
+              width="100%"
+              height="426"
+              style="border: none;"
+              title="Kingshot LootBar Top-up"
+              loading="eager"
+            ></iframe>
+          </div>
+        </div>
+
+        <div class="widget-mobile">
+          <div class="embed-wrap">
+            <div class="embed-placeholder" data-placeholder>
+              <a class="embed-placeholder-link" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener" aria-label="専用リンクへ移動">
+                <img class="embed-placeholder-image" src="/img/lootbarmo.png" alt="Kingshot チャージバナー" loading="eager" />
+              </a>
+            </div>
+            <iframe
+              class="embed-iframe"
+              data-embed-iframe
+              src="https://lootbar.gg/embed.html?game=king-shot-top-up&theme=dark&aff_short=ten"
+              width="100%"
+              height="426"
+              style="border: none;"
+              title="Kingshot LootBar Top-up Mobile"
+              loading="eager"
+            ></iframe>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">専用リンクへ進む</a>
+          <a class="btn" href="/ja/guides/topup-guide.html">チャージ方法を見る</a>
+        </div>
+      </section>
+
+      <section id="reward">
+        <span class="anchor"></span>
+        <h2>配布条件</h2>
+        <p class="muted">月間累計チャージ金額に応じて、以下の条件でパッケージクーポンが追加配布されます。</p>
+
+        <div class="condition-grid">
+          <article class="condition-card">
+            <div class="condition-top">
+              <strong>$500 以上</strong>
+              <span class="tag blue">$4.99 クーポン</span>
+            </div>
+            <p>月間累計チャージ金額が <strong>$500 以上</strong> のユーザーのうち、<strong>20名</strong> に配布されます。</p>
+            <p>ただし、<strong>上位当選者は除外</strong> されます。</p>
+          </article>
+
+          <article class="condition-card">
+            <div class="condition-top">
+              <strong>$1,000 以上</strong>
+              <span class="tag silver">$9.99 クーポン</span>
+            </div>
+            <p>月間累計チャージ金額が <strong>$1,000 以上</strong> のユーザーのうち、<strong>10名</strong> に配布されます。</p>
+            <p>ただし、<strong>累計チャージ上位3名は除外</strong> されます。</p>
+          </article>
+
+          <article class="condition-card">
+            <div class="condition-top">
+              <strong>$2,000 以上</strong>
+              <span class="tag gold">$99.99 クーポン</span>
+            </div>
+            <p>月間累計チャージ金額が <strong>$2,000 以上</strong> のユーザーのうち、<strong>累計チャージ上位3名</strong> に配布されます。</p>
+            <p>報酬は <strong>翌月初め</strong> にクーポンボックスへ自動配布されます。</p>
+          </article>
+        </div>
+
+        <div class="note">
+          <div>
+            <strong>配布方法:</strong> 割引クーポンは毎月15日、パッケージクーポンは翌月初めにクーポンボックスへ自動配布されます。
+          </div>
+        </div>
+      </section>
+
+      <section id="howto">
+        <span class="anchor"></span>
+        <h2>利用方法</h2>
+
+        <div class="steps">
+          <article class="step">
+            <div class="step-num">1</div>
+            <p><strong><a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">専用リンク</a></strong> にアクセスします。</p>
+          </article>
+
+          <article class="step">
+            <div class="step-num">2</div>
+            <p>専用リンク経由で <strong>登録とログイン</strong> を進めます。</p>
+          </article>
+
+          <article class="step">
+            <div class="step-num">3</div>
+            <p>新規登録ユーザーは、登録後にLootBarの検索欄で <strong>#s4qU</strong> を入力し、追加クーポン対象か確認します。</p>
+          </article>
+
+          <article class="step">
+            <div class="step-num">4</div>
+            <p>希望する商品またはチャージ金額を選択します。</p>
+          </article>
+
+          <article class="step">
+            <div class="step-num">5</div>
+            <p>別の経路へ移動せず、そのまま決済を完了します。</p>
+          </article>
+
+          <article class="step">
+            <div class="step-num">6</div>
+            <p>LootBarが当月の決済履歴を自動集計し、条件に合った報酬をクーポンボックスへ配布します。</p>
+          </article>
+        </div>
+
+        <div class="link-box">
+          <strong>利用リンク</strong><br>
+          <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">専用リンクへ移動する</a><br>
+          リンクにアクセスした後、そのままチャージを進めてください。
+        </div>
+
+        <h3>おすすめ</h3>
+        <ul class="guide-list">
+          <li>専用リンクはブラウザの <strong>お気に入りまたはブックマーク</strong> に登録しておくのがおすすめです。</li>
+          <li>モバイルとPCのどちらでも同じリンクを使えます。</li>
+          <li>初めて利用する場合は、先に <a href="/ja/guides/topup-guide.html">セルフチャージガイド</a> を確認するとスムーズです。</li>
+        </ul>
+      </section>
+
+      <section id="notice">
+        <span class="anchor"></span>
+        <h2>注意事項</h2>
+
+        <ul class="guide-list">
+          <li>本プロモーションは <strong>KingshotData 利用者向け</strong> です。</li>
+          <li>必ず <strong><a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">専用リンク</a></strong> 経由で登録とチャージを行ってください。</li>
+          <li>別の経路へ移動すると、集計対象から外れる場合があります。</li>
+          <li>すべての報酬は <strong>当月累計チャージ実績</strong> を基準に配布されます。</li>
+          <li>新規登録ユーザーは、登録後にLootBarの検索欄で <strong>#s4qU</strong> を入力すると追加クーポンを受け取れます。</li>
+        </ul>
+      </section>
+
+      <section id="faq">
+        <span class="anchor"></span>
+        <h2>Q&amp;A</h2>
+
+        <details open>
+          <summary>Q. 月初なのにクーポンやパッケージがまだ配布されていません。なぜですか？</summary>
+          <p>
+            割引クーポンは <strong>毎月15日</strong>、パッケージクーポンは <strong>翌月初め</strong> にクーポンボックスへ自動配布されます。
+            また、必ず <strong><a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">専用リンク</a></strong> 経由で登録およびチャージした履歴のみが集計対象になります。
+          </p>
+        </details>
+
+        <details>
+          <summary>Q. モバイルやPCから専用リンクにアクセスしても大丈夫ですか？</summary>
+          <p>
+            はい。モバイルとPCのどちらでも利用できます。
+            専用リンクをお気に入りやブックマークに登録しておけば、毎回探し直さなくても済みます。
+          </p>
+        </details>
+
+        <details>
+          <summary>Q. どのリンクから利用すればいいですか？</summary>
+          <p>
+            以下のリンク経由で登録およびチャージを進める必要があります。<br>
+            <a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener"><strong>専用リンクへ移動する</strong></a><br>
+            リンクにアクセスした後、別の経路へ移動せず、そのまま決済を完了してください。
+          </p>
+        </details>
+
+        <details>
+          <summary>Q. 新規登録ユーザー向けの追加特典はありますか？</summary>
+          <p>
+            はい。新規登録ユーザーは登録後にLootBarの検索欄で <strong>#s4qU</strong> を入力すると追加クーポンを受け取れます。
+            ただし、自動集計の対象になるためには、必ず専用リンク経由で登録およびチャージを進める必要があります。
+          </p>
+        </details>
+      </section>
+
+      <section id="help">
+        <span class="anchor"></span>
+        <h2>初めてならこちらから</h2>
+
+        <div class="bottom-cta">
+          <div>
+            <h3 class="title">初めての方は、チャージ方法だけ確認してそのまま進めれば大丈夫です。</h3>
+            <p>アカウント連携、二段階認証確認、実際の決済手順、クーポン入力方法まで順番にまとめています。</p>
+          </div>
+
+          <div class="cta-row" style="margin-top:0">
+            <a class="btn btn-primary" href="/ja/guides/topup-guide.html">チャージ方法を見る</a>
+            <a class="btn" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="nofollow sponsored noopener">専用リンクを開く</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="related">
+        <span class="anchor"></span>
+        <h2>関連リンク</h2>
+
+        <div class="related">
+          <a class="pill" href="/ja/guides/topup-guide.html">Kingshot チャージガイド</a>
+          <a class="pill" href="/ja/guides/">ガイド一覧</a>
+          <a class="pill" href="/gift-codes">Kingshot ギフトコード</a>
+          <a class="pill" href="/calc-pet">ペット計算機</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if (mqMobile && mqMobile.addEventListener) {
+          mqMobile.addEventListener('change', setStickyTop);
+        } else if (mqMobile && mqMobile.addListener) {
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if (window.ResizeObserver) {
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('header.top');
+          var tabs = document.querySelector('nav.section-tabs');
+          if (header) ro.observe(header);
+          if (tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function initEmbeds(){
+        var iframes = document.querySelectorAll('[data-embed-iframe]');
+
+        iframes.forEach(function(iframe){
+          var wrap = iframe.closest('.embed-wrap');
+          if (!wrap) return;
+
+          var placeholder = wrap.querySelector('[data-placeholder]');
+          if (!placeholder) return;
+
+          var revealed = false;
+
+          function hidePlaceholder(){
+            if (revealed) return;
+            revealed = true;
+            placeholder.classList.add('is-hidden');
+          }
+
+          iframe.addEventListener('load', function(){
+            setTimeout(hidePlaceholder, 1200);
+          }, { once:true });
+
+          setTimeout(hidePlaceholder, 8000);
+        });
+      }
+
+      function init(){
+        initStickyObservers();
+        initEmbeds();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
