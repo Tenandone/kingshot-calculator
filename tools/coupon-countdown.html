@@ -222,6 +222,26 @@
       justify-content:center;
     }
 
+    .promoSlimWrap{
+      width:100%;
+      max-width:816px;
+      margin:0 auto;
+    }
+    .promoSlimLink{
+      display:block;
+      width:100%;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:0 14px 34px rgba(0,0,0,.32);
+      background:rgba(0,0,0,.18);
+    }
+    .promoSlimImg{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
     .codesWrap{ border-top: 1px solid rgba(255,255,255,.10); padding: 22px 0 10px; }
     .codesTitle{
       text-align:center;
@@ -327,6 +347,41 @@
       color: var(--ctaText);
       backdrop-filter:none;
       font-weight: 1400;
+    }
+
+    .iframeSection{
+      margin: 28px auto 0;
+      max-width: 816px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top: 18px;
+    }
+    .iframeCard{
+      width:100%;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.32);
+      box-shadow:0 14px 40px rgba(0,0,0,.28);
+    }
+    .iframeCard iframe{
+      display:block;
+      width:100%;
+      height:426px;
+      border:none;
+    }
+    @media (max-width:640px){
+      .iframeSection{
+        margin-top:24px;
+        padding-top:16px;
+      }
+      .iframeCard iframe{
+        height:360px;
+      }
+    }
+    @media (max-width:480px){
+      .iframeCard iframe{
+        height:320px;
+      }
     }
 
     .footerLinks{
@@ -629,14 +684,11 @@
       <div class="metaLine" id="aLine"><span id="aLineK">만료 시각:</span> <b id="aWhen">—</b> <span class="soft" id="aTz">(GMT+9)</span></div>
 
       <div class="midBanner">
-        <iframe
-          src="https://lootbar.gg/embed.html?game=king-shot-top-up&theme=dark&aff_short=ten"
-          width="100%"
-          height="426"
-          style="border:none;display:block;"
-          title="Kingshot LootBar Top-up"
-          loading="eager"
-        ></iframe>
+        <div class="promoSlimWrap">
+          <a class="promoSlimLink" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener">
+            <img class="promoSlimImg" src="/img/lootbar.png" alt="킹샷 할인 충전 배너" loading="eager" decoding="async" />
+          </a>
+        </div>
       </div>
     </section>
 
@@ -670,6 +722,17 @@
         <button class="btnSmall" id="btnShare" type="button">공유</button>
         <a class="btnSmall" id="btnRedeem" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener">교환하러가기</a>
         <a class="btnSmall cta" id="btnGuide" href="/ko/guides/topup-guide.html" target="_blank" rel="noopener">할인 충전 가이드</a>
+      </div>
+
+      <div class="iframeSection">
+        <div class="iframeCard">
+          <iframe
+            src="https://lootbar.gg/embed.html?game=king-shot-top-up&theme=dark&aff_short=ten"
+            title="Kingshot LootBar Top-up"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
+        </div>
       </div>
 
       <div class="footerLinks" aria-label="Footer links">
