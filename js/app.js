@@ -1,13 +1,10 @@
 // /public/js/app.js — SPA Router (History API) for KingshotData.kr
-// v2026-03-20 (guides detail hard-redirect follows current site language, non-.html slug supported)
-// ES5-compatible (no arrow functions / optional chaining)
+// v2026-03-26 (pet detail served in SPA + preserve .pet-page wrapper)
 (function () {
   'use strict';
 
-  // ===== small DOM utils =====
   function $(sel) { return document.querySelector(sel); }
 
-  // ===== Asset version (캐시 무효화) — URL API로 안전 처리 =====
   var ASSET_VER = window.__V || 'now';
   function v(url) {
     if (!url) return url;
@@ -25,10 +22,8 @@
   }
   if (!window.v) window.v = v;
 
-  // ===== CSS 경로 =====
   var CALC_CSS_HREF = '/css/calculator.css';
 
-  // ===== bootstrap =====
   document.addEventListener('DOMContentLoaded', function () {
     ensureCSS('calculator-css', CALC_CSS_HREF)
       .then(function(){ return ensureI18N(); })
@@ -45,7 +40,6 @@
       });
   });
 
-  // ===== header utils =====
   var yearEl = $('#y');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
@@ -58,7 +52,6 @@
     });
   }
 
-  // ===== dynamic <script> loader =====
   var inFlightScripts = new Map();
 
   function normalizeScriptKey(src) {
@@ -99,7 +92,6 @@
     });
   }
 
-  // ===== dynamic CSS =====
   function ensureCSS(id, href) {
     return new Promise(function (resolve) {
       var had = document.getElementById(id);
@@ -120,7 +112,6 @@
     if (node && node.parentNode) node.parentNode.removeChild(node);
   }
 
-  // ===== HTML fetch (LRU) =====
   var HTML_CACHE_MAX = 32;
   var htmlCache = new Map();
   function setHtmlCache(key, val) {
@@ -148,7 +139,6 @@
     })(0);
   }
 
-  // ===== icon util =====
   function escapeAttr(s) {
     return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
@@ -156,7 +146,6 @@
     return '<img src="' + v(src) + '" alt="' + escapeAttr(alt) + '" class="cat-icon__img" loading="lazy" decoding="async">';
   }
 
-  // ===== shared html mount engine =====
   function getCurrentContentLang() {
     try {
       var pathLang = detectLangFromPath(location.pathname);
@@ -304,6 +293,71 @@
     return '/' + lang + '/guides/' + slug + '.html';
   }
 
+  function getPetHrefByLang(slug) {
+    var lang = 'en';
+
+    try {
+      var pathLang = detectLangFromPath(location.pathname);
+      if (pathLang) lang = normalizeLanguage(pathLang);
+    } catch (_) {}
+
+    try {
+      var i18nLang = (window.I18N && (window.I18N.current || window.I18N.lang)) || '';
+      if (i18nLang) lang = normalizeLanguage(i18nLang);
+    } catch (_) {}
+
+    try {
+      var dataLang = document.documentElement.getAttribute('data-lang') || '';
+      if (dataLang) lang = normalizeLanguage(dataLang);
+    } catch (_) {}
+
+    try {
+      var htmlLang = document.documentElement.getAttribute('lang') || '';
+      if (htmlLang) lang = normalizeLanguage(htmlLang);
+    } catch (_) {}
+
+    try {
+      var savedLang = localStorage.getItem('lang') || '';
+      if (savedLang) lang = normalizeLanguage(savedLang);
+    } catch (_) {}
+
+    if (lang === 'zh-TW') return '/zh-tw/pet/' + slug;
+    return '/' + lang + '/pet/' + slug;
+  }
+
+  function isPetDetailPath(pathname) {
+    var p = String(pathname || '');
+    return (
+      /^\/pet\/[^\/?#]+(?:\.html)?$/i.test(p) ||
+      /^\/(ko|en|ja|zh-tw|zh-TW)\/pet\/[^\/?#]+(?:\.html)?$/i.test(p)
+    );
+  }
+
+  function renderPetDetail(el, slug, lang, token) {
+    var safeSlug = stripHtmlExt(String(slug || '').replace(/^\/+|\/+$/g, ''));
+    var langFolder = normalizeLangFolder(lang || getCurrentContentLang());
+
+    if (!safeSlug) {
+      el.innerHTML = '<div class="placeholder"><h2>Pet</h2><p class="muted">잘못된 펫 경로입니다.</p></div>';
+      return Promise.resolve();
+    }
+
+    return window.KD_ROUTE_MOUNT_LOCALIZED_HTML(el, {
+      token: token,
+      candidates: [
+        '/' + langFolder + '/pet/' + safeSlug + '.html',
+        '/en/pet/' + safeSlug + '.html'
+      ],
+      pageURL: '/' + langFolder + '/pet/' + safeSlug,
+      assetKey: 'pet-' + langFolder + '-' + safeSlug,
+      routeType: 'pet',
+      slug: safeSlug,
+      runScripts: true,
+      titleFallback: 'Pet',
+      removeSelectors: []
+    });
+  }
+
   function rewriteMountedInternalLinks(root, options) {
     options = options || {};
 
@@ -317,14 +371,15 @@
         a.__kdMountedLinkBound = true;
 
         a.addEventListener('click', function(e){
-          e.preventDefault();
-
           try {
             var u = new URL(href, location.origin);
             var segs = u.pathname.split('/').filter(Boolean);
+
             if (segs.length >= 3) {
               var sec = segs[1];
               var targetSlug = String(segs[2] || '').replace(/\.html$/i, '');
+
+              e.preventDefault();
 
               if (sec === 'database') {
                 return window.navigate('/db/' + targetSlug);
@@ -338,9 +393,19 @@
               if (sec === 'buildings' || sec === 'building') {
                 return window.navigate('/buildings/' + targetSlug);
               }
+              if (sec === 'pet') {
+                return window.navigate(getPetHrefByLang(targetSlug));
+              }
             }
           } catch (_) {}
 
+          if (/^\/(ko|en|ja|zh-tw|zh-TW)\/pet\/[^\/?#]+(?:\.html)?$/i.test(href) || /^\/pet\/[^\/?#]+(?:\.html)?$/i.test(href)) {
+            e.preventDefault();
+            if (window.navigate) window.navigate(href);
+            return;
+          }
+
+          e.preventDefault();
           if (window.navigate) window.navigate(href);
         }, { passive: false, capture: true });
       })(links[i]);
@@ -370,13 +435,33 @@
     }
   }
 
+  function pickMountScope(doc, options) {
+    options = options || {};
+
+    if (options.scopeSelector) {
+      var forced = doc.querySelector(options.scopeSelector);
+      if (forced) return forced.cloneNode(true);
+    }
+
+    if (options.routeType === 'pet') {
+      var petWrapper = doc.querySelector('.pet-page');
+      if (petWrapper) return petWrapper.cloneNode(true);
+    }
+
+    var main = doc.querySelector('main');
+    if (main) return main.cloneNode(true);
+
+    if (doc.body) return doc.body.cloneNode(true);
+
+    return null;
+  }
+
   function mountLocalizedHtmlPage(el, html, options) {
     options = options || {};
     var parser = new DOMParser();
     var doc = parser.parseFromString(html, 'text/html');
     var assetKey = options.assetKey || ('html-page-' + Date.now());
-    var main = doc.querySelector('main') || doc.body;
-    var scope = main ? main.cloneNode(true) : (doc.body ? doc.body.cloneNode(true) : null);
+    var scope = pickMountScope(doc, options);
 
     if (!scope) {
       el.innerHTML = '<div class="placeholder"><h2>불러오기 실패</h2><p class="muted">문서 내용을 표시할 수 없습니다.</p></div>';
@@ -385,7 +470,9 @@
 
     injectHtmlHeadAssets(doc, assetKey);
     stripMountedPageChrome(scope, options.removeSelectors || []);
-    el.innerHTML = scope.innerHTML;
+
+    el.innerHTML = '';
+    el.appendChild(scope);
 
     if (options.runScripts !== false) {
       runMountedInlineScripts(el, assetKey);
@@ -399,7 +486,99 @@
     return Promise.resolve();
   }
 
-  // ===== DB 상세 렌더 =====
+  window.KD_ROUTE_MOUNT_LOCALIZED_HTML = function (el, options) {
+    options = options || {};
+
+    var token = options.token;
+    var candidates = options.candidates || [];
+    var pageURL = options.pageURL || '';
+    var assetKey = options.assetKey || (String(options.routeType || 'html') + '-' + String(options.slug || 'page'));
+    var removeSelectors = options.removeSelectors || [];
+    var runScripts = options.runScripts !== false;
+    var titleFallback = options.titleFallback || 'Not Found';
+
+    function isTokenStale() {
+      return token != null && token !== navVer;
+    }
+
+    el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+
+    return loadHTML(candidates).then(function (html) {
+      if (isTokenStale()) return;
+
+      if (!html) {
+        el.innerHTML =
+          '<div class="placeholder">' +
+            '<h2>Not Found</h2>' +
+            '<p class="muted">Missing: ' + candidates.join(' , ') + '</p>' +
+          '</div>';
+        return;
+      }
+
+      return mountLocalizedHtmlPage(el, html, {
+        assetKey: assetKey,
+        runScripts: runScripts,
+        removeSelectors: removeSelectors,
+        pageURL: pageURL,
+        routeType: options.routeType,
+        scopeSelector: options.scopeSelector,
+        afterMount: function (mountRoot, doc) {
+          try {
+            var title = (doc.querySelector('title') && doc.querySelector('title').textContent) || '';
+            if (title) document.title = title;
+            else document.title = titleFallback;
+          } catch (_) {}
+
+          try {
+            var desc = doc.querySelector('meta[name="description"]');
+            if (desc && desc.content) {
+              var meta = document.querySelector('meta[name="description"]');
+              if (!meta) {
+                meta = document.createElement('meta');
+                meta.setAttribute('name', 'description');
+                document.head.appendChild(meta);
+              }
+              meta.setAttribute('content', desc.content);
+            }
+          } catch (_) {}
+
+          try {
+            var can = doc.querySelector('link[rel="canonical"]');
+            if (can && can.href) {
+              var link = document.querySelector('link[rel="canonical"]');
+              if (!link) {
+                link = document.createElement('link');
+                link.rel = 'canonical';
+                document.head.appendChild(link);
+              }
+              link.href = can.href;
+            } else if (pageURL) {
+              var link2 = document.querySelector('link[rel="canonical"]');
+              if (!link2) {
+                link2 = document.createElement('link');
+                link2.rel = 'canonical';
+                document.head.appendChild(link2);
+              }
+              link2.href = location.origin + pageURL;
+            }
+          } catch (_) {}
+
+          if (typeof options.afterMount === 'function') {
+            try { options.afterMount(mountRoot, doc); } catch (e) { console.error(e); }
+          }
+        }
+      }).then(function () {
+        if (isTokenStale()) return;
+        try {
+          if (window.I18N && typeof window.I18N.applyTo === 'function') {
+            window.I18N.applyTo(el);
+          }
+        } catch (_) {}
+        try { window.scrollTo({ top: 0 }); } catch (_) {}
+      });
+    });
+  };
+
   function rewriteRelativeUrls(doc, base) {
     function isAbs(u){ return /^https?:\/\//i.test(u) || /^(data:|blob:|#)/i.test(u) || u.indexOf('/') === 0; }
     function joinBase(u){ return base + u.replace(/^\.?\//,''); }
@@ -511,7 +690,6 @@
     });
   }
 
-  // ===== i18n helpers =====
   function normalizeLanguage(input) {
     var raw = String(input || '').replace('_','-').toLowerCase();
     if (!raw) return 'ko';
@@ -666,6 +844,11 @@
         return u;
       }
 
+      if (segs[1] === 'pet' && segs[2]) {
+        u.pathname = '/' + segs[0] + '/pet/' + segs.slice(2).join('/').replace(/\.html$/i, '');
+        return u;
+      }
+
       if (segs[1] === 'database' && segs[2]) {
         u.pathname = '/db/' + segs.slice(2).join('/').replace(/\.html$/i, '');
         return u;
@@ -676,7 +859,6 @@
         return u;
       }
 
-      // 언어별 guides html은 그대로 유지
       if (segs[1] === 'guides' && segs[2]) {
         u.pathname = '/' + segs[0] + '/guides/' + segs.slice(2).join('/');
         return u;
@@ -690,19 +872,26 @@
       u.pathname = '/hero/' + segs.slice(1).join('/');
       return u;
     }
+
+    if (segs[0] === 'pet' && segs[1]) {
+      u.pathname = '/' + normalizeLangFolder(getCurrentContentLang()) + '/pet/' + segs.slice(1).join('/').replace(/\.html$/i, '');
+      return u;
+    }
+
     if (segs[0] === 'database' && segs[1]) {
       u.pathname = '/db/' + segs.slice(1).join('/');
       return u;
     }
+
     if (segs[0] === 'building') {
       u.pathname = '/buildings' + (segs[1] ? '/' + segs.slice(1).join('/') : '');
       return u;
     }
+
     u.pathname = p || '/';
     return u;
   }
 
-  // ===== 라우트 번들 로더 =====
   var routes = null;
   var __routeBundle = '';
 
@@ -766,10 +955,9 @@
     routes = initialRoutes;
   }
 
-  // ===== 프록시 라우트 =====
   var proxyRoutes = (function(){
     var map = {};
-    var keys = ['/calculator','/calc-building','/calc-gear','/calc-charm','/calc-training'];
+    var keys = ['/calculator','/calc-building','/calc-gear','/calc-charm','/calc-training','/calc-pet'];
 
     function makeProxyRoute(key) {
       return {
@@ -829,6 +1017,11 @@
     if (b && b.parentNode) b.parentNode.removeChild(b);
   }
 
+  function removePetScopedStyleIfAny() {
+    var p = document.getElementById('pet-index-style');
+    if (p && p.parentNode) p.parentNode.removeChild(p);
+  }
+
   function stripHtmlExt(s) {
     var x = String(s || '');
     return x.replace(/\.html$/i, '');
@@ -856,7 +1049,6 @@
       var segs = pathNorm.split('/').filter(Boolean);
       var el = document.getElementById('content') || document.body;
 
-      // /buildings/:slug
       if (pathNorm.indexOf('/buildings/') === 0 && segs.length >= 2) {
         removeCSS('calc-css');
         var slug1 = stripHtmlExt(segs.slice(1).join('/'));
@@ -865,7 +1057,6 @@
         }
       }
 
-      // /building/:slug
       if (pathNorm.indexOf('/building/') === 0 && segs.length >= 2) {
         removeCSS('calc-css');
         var slug1b = stripHtmlExt(segs.slice(1).join('/'));
@@ -874,7 +1065,6 @@
         }
       }
 
-      // /{lang}/buildings/:slug or /{lang}/building/:slug
       if (segs.length >= 3 && (segs[1] === 'buildings' || segs[1] === 'building')) {
         var lang = normalizeLangFolder(segs[0]);
         if (lang === 'en' || lang === 'ko' || lang === 'ja' || lang === 'zh-tw') {
@@ -886,13 +1076,45 @@
         }
       }
 
-      // /db/:slug
+      if (isPetDetailPath(pathNorm)) {
+        removeCSS('calc-css');
+
+        var petLang = 'en';
+        var petSlug = '';
+
+        if (segs.length >= 3 && (segs[0] === 'ko' || segs[0] === 'en' || segs[0] === 'ja' || segs[0] === 'zh-tw' || segs[0] === 'zh-TW') && segs[1] === 'pet') {
+          petLang = normalizeLangFolder(segs[0]);
+          petSlug = stripHtmlExt(segs.slice(2).join('/'));
+        } else if (segs.length >= 2 && segs[0] === 'pet') {
+          petLang = normalizeLangFolder(getCurrentContentLang());
+          petSlug = stripHtmlExt(segs.slice(1).join('/'));
+        }
+
+        return Promise.resolve(renderPetDetail(el, petSlug, petLang, myVer)).then(function(){
+          if (myVer !== navVer) return;
+
+          setActiveByPath(pathNorm);
+
+          if (nav && toggle) {
+            nav.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+
+          try {
+            if (window.I18N && typeof window.I18N.applyTo === 'function') {
+              window.I18N.applyTo(document.body);
+            }
+          } catch (_) {}
+        });
+      }
+
       if (pathNorm.indexOf('/db/') === 0 && segs.length >= 2) {
         removeCSS('calc-css');
         return Promise.resolve(renderDbDetail(el, stripHtmlExt(segs[1]), segs.length >= 3 ? segs.slice(2).join('/') : ''));
       }
 
       removeBuildingScopedStyleIfAny();
+      removePetScopedStyleIfAny();
 
       var key  = '/' + (segs[0] || '');
       if (key === '//') key = '/';
@@ -981,7 +1203,6 @@
     var href = a.getAttribute('href');
     if (!href) return;
 
-    // guides 상세 링크는 router-ignore 여부와 상관없이 현재 사이트 언어 기준으로 강제 전체 이동
     if (
       /^\/guides\/(?!$)(?!index(?:\.html)?$)[^\/?#]+(?:\.html)?(?:[?#].*)?$/i.test(href) ||
       /^\/(ko|en|ja|zh-tw|zh-TW)\/guides\/(?!$)(?!index(?:\.html)?$)[^\/?#]+(?:\.html)?(?:[?#].*)?$/i.test(href)
@@ -1020,6 +1241,15 @@
       return;
     }
 
+    if (isPetDetailPath(href)) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+
+      var uPet = canonicalize(href);
+      return window.navigate(uPet.pathname + uPet.search + uPet.hash);
+    }
+
     var target = (a.getAttribute('target') || '').toLowerCase();
     var rel    = (a.getAttribute('rel') || '').toLowerCase();
     if (target && target !== '_self') return;
@@ -1032,10 +1262,6 @@
     if (/^(https?:)?\/\//i.test(href)) return;
 
     if (href.charAt(0) === '#') return;
-
-    if (href === '/guides') {
-      reinforceLang(getCurrentContentLang());
-    }
 
     var hashIdx = href.indexOf('#/');
     if (hashIdx === 0) {
@@ -1084,8 +1310,10 @@
       var m1 = p.match(/^\/buildings\/[^\/?#]+(\.html)?$/i) || p.match(/^\/building\/[^\/?#]+(\.html)?$/i);
       var m2 = p.match(/^\/(en|ko|ja|zh-tw|zh-TW)\/buildings\/[^\/?#]+(\.html)?$/i) || p.match(/^\/(en|ko|ja|zh-tw|zh-TW)\/building\/[^\/?#]+(\.html)?$/i);
       var m3 = p.match(/^\/db\/[^\/?#]+(\/.*)?$/i);
+      var m4 = p.match(/^\/pet\/[^\/?#]+(\.html)?$/i);
+      var m5 = p.match(/^\/(en|ko|ja|zh-tw|zh-TW)\/pet\/[^\/?#]+(\.html)?$/i);
 
-      if (m1 || m2 || m3) {
+      if (m1 || m2 || m3 || m4 || m5) {
         dispatch();
       }
     } catch (_e) {}

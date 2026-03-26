@@ -5,7 +5,6 @@
   <title data-i18n="privacy.title">개인정보처리방침</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- standalone-bridge가 이미 i18n을 올려주는 구조라면 유지 -->
   <script src="./js/standalone-bridge.js?v=202509120604" defer></script>
 
   <style>
@@ -28,6 +27,7 @@
     hr{border:none;border-top:1px solid var(--border);margin:22px 0}
     small{color:var(--muted)}
   </style>
+
   <!-- GA4 -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
@@ -37,14 +37,9 @@
     gtag('js', new Date());
     gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
   </script>
-
 </head>
 
 <body>
-  <a href="/" class="kd-home-link" style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
-    ← <span data-i18n="privacy.backHome">KingshotData Korea</span>
-  </a>
-
   <section class="container" id="top">
     <h1 data-i18n="privacy.h1">개인정보처리방침 (Privacy Policy)</h1>
 
@@ -126,8 +121,6 @@
     <p data-i18n="privacy.s11.p1"></p>
 
     <hr>
-
-    
 
     <p class="muted">
       <small data-i18n="privacy.footerNote"></small>

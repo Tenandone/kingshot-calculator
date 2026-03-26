@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Cheetah Pet Guide, Materials & Calculator | KingshotData</title>
+  <meta name="description" content="Kingshot Cheetah pet guide with unlock timing, max level, pet food skill effect, total materials from Level 1 to 70, and pet calculator link." />
+  <meta name="keywords" content="Kingshot Cheetah, Kingshot pet guide, Kingshot pet materials, Kingshot pet calculator, Cheetah pet food" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/en/pet/cheetah.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/pet/cheetah.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/pet/cheetah.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/pet/cheetah.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/pet/cheetah.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/pet/cheetah.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="KingshotData" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Cheetah Pet Guide, Materials & Calculator | KingshotData" />
+  <meta property="og:description" content="Check the Cheetah unlock timing, max level, pet food skill effect, total upgrade materials, and pet calculator link." />
+  <meta property="og:url" content="https://kingshotdata.kr/en/pet/cheetah.html" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/pet/cheetah.webp" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cheetah Pet Guide, Materials & Calculator | KingshotData" />
+  <meta name="twitter:description" content="Kingshot Cheetah guide with skill effect, total materials, and pet calculator link." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/pet/cheetah.webp" />
+
+  <link rel="preload" as="image" href="/img/pet/cheetah.webp" />
+  <link rel="preload" as="image" href="/img/pet/cheetahskill.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel-soft:#f8fafc;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#10b981;
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .pet-page .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    .pet-page header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .pet-page .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .pet-page .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    .pet-page nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .pet-page nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    .pet-page nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    .pet-page nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    .pet-page nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    .pet-page nav.section-tabs a:hover{color:var(--text)}
+
+    .pet-page .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
+    .pet-page .crumbs a{color:var(--muted)}
+
+    .pet-page .hero{
+      display:grid;
+      grid-template-columns:180px 1fr;
+      gap:18px;
+      padding:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .pet-page .hero img{
+      width:180px;
+      height:180px;
+      object-fit:contain;
+      border-radius:14px;
+      background:var(--panel-soft);
+      border:1px solid var(--border);
+      padding:10px;
+    }
+
+    .pet-page h1{margin:0 0 6px;font-size:28px;line-height:1.15}
+    .pet-page .sub{margin:0;color:var(--muted)}
+    .pet-page .muted{color:var(--muted)}
+    .pet-page .quote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .pet-page .jump{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .pet-page .jump a{color:var(--muted)}
+    .pet-page .jump a:hover{color:var(--text)}
+    .pet-page .dotsep{opacity:.5}
+
+    .pet-page section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    .pet-page section h2{margin:0 0 10px;font-size:20px}
+    .pet-page section p{margin:8px 0}
+
+    .pet-page .overview-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+    .pet-page .stat-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+      background:#fff;
+    }
+    .pet-page .stat-label{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:4px;
+    }
+    .pet-page .stat-value{
+      font-size:18px;
+      font-weight:900;
+      line-height:1.2;
+    }
+
+    .pet-page .skill-panel{
+      text-align:center;
+      padding:8px 0 4px;
+    }
+    .pet-page .skill-icon{
+      width:88px;
+      height:88px;
+      object-fit:contain;
+      display:block;
+      margin:0 auto 14px;
+    }
+    .pet-page .skill-desc{
+      max-width:980px;
+      margin:0 auto;
+      font-size:16px;
+      line-height:1.8;
+      color:#4b5563;
+    }
+    .pet-page .skill-desc .accent{
+      color:var(--accent);
+      font-weight:800;
+    }
+    .pet-page .skill-preview-title{
+      margin-top:26px;
+      font-size:18px;
+      font-weight:900;
+      color:#374151;
+    }
+    .pet-page .skill-preview-line{
+      margin-top:16px;
+      font-size:18px;
+      line-height:1.8;
+      color:#4b5563;
+    }
+    .pet-page .skill-preview-line .accent{
+      color:var(--accent);
+      font-weight:800;
+    }
+
+    .pet-page .materials-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+    .pet-page .material-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:16px 16px 14px;
+      background:#fff;
+    }
+    .pet-page .material-head{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:10px;
+      font-size:15px;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .pet-page .material-head img{
+      width:20px;
+      height:20px;
+      object-fit:contain;
+      display:block;
+    }
+    .pet-page .material-total{
+      font-size:34px;
+      line-height:1.1;
+      font-weight:900;
+      font-variant-numeric:tabular-nums;
+      letter-spacing:-0.02em;
+    }
+
+    .pet-page .note{
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid rgba(37,99,235,.18);
+      background:rgba(37,99,235,.05);
+      border-radius:14px;
+      margin-top:14px;
+    }
+
+    .pet-page .cta-box{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:16px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:linear-gradient(180deg,#fbfdff 0%,#f8fbff 100%);
+    }
+    .pet-page .cta-copy h3{
+      margin:0 0 6px;
+      font-size:18px;
+    }
+    .pet-page .cta-copy p{
+      margin:0;
+      color:var(--muted);
+    }
+    .pet-page .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:0 16px;
+      border-radius:12px;
+      background:#2563eb;
+      color:#fff;
+      font-weight:800;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .pet-page .btn:hover{
+      text-decoration:none;
+      background:#1d4ed8;
+    }
+
+    .pet-page .related{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pet-page .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pet-page .pill:hover{border-color:#c7d2fe}
+
+    .pet-page .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    .pet-page .faq-list{
+      display:grid;
+      gap:12px;
+      margin-top:12px;
+    }
+    .pet-page details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:12px 14px;
+    }
+    .pet-page summary{
+      cursor:pointer;
+      font-weight:800;
+      color:var(--text);
+      list-style:none;
+    }
+    .pet-page summary::-webkit-details-marker{display:none}
+    .pet-page details p{
+      margin:10px 0 0;
+      color:var(--muted);
+    }
+
+    @media (max-width: 900px){
+      .pet-page header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+      .pet-page nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+      .pet-page .hero{grid-template-columns:1fr}
+      .pet-page .hero img{width:140px;height:140px}
+      .pet-page .overview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .pet-page .materials-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .pet-page .cta-box{flex-direction:column;align-items:flex-start}
+      .pet-page .skill-desc,
+      .pet-page .skill-preview-line{font-size:17px}
+    }
+
+    @media (max-width: 600px){
+      body{font-size:15px}
+      .pet-page .wrap{padding:14px 12px 56px}
+      .pet-page h1{font-size:24px}
+      .pet-page section{padding:14px}
+      .pet-page .overview-grid{grid-template-columns:1fr}
+      .pet-page .materials-grid{grid-template-columns:1fr}
+      .pet-page .skill-icon{
+        width:78px;
+        height:78px;
+      }
+      .pet-page .skill-desc,
+      .pet-page .skill-preview-line{
+        font-size:15px;
+        line-height:1.75;
+      }
+      .pet-page .skill-preview-title{
+        font-size:17px;
+      }
+      .pet-page .material-card{
+        padding:16px 16px 15px;
+      }
+      .pet-page .material-head{
+        font-size:15px;
+        margin-bottom:8px;
+      }
+      .pet-page .material-head img{
+        width:20px;
+        height:20px;
+      }
+      .pet-page .material-total{
+        font-size:36px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://kingshotdata.kr/en/"},
+          {"@type":"ListItem","position":2,"name":"Pet","item":"https://kingshotdata.kr/en/pet/"},
+          {"@type":"ListItem","position":3,"name":"Cheetah","item":"https://kingshotdata.kr/en/pet/cheetah.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"Cheetah Pet Guide, Materials & Calculator",
+        "description":"Kingshot Cheetah pet guide with unlock timing, max level, pet food skill effect, total materials from Level 1 to 70, and pet calculator link.",
+        "inLanguage":"en",
+        "mainEntityOfPage":{
+          "@type":"WebPage",
+          "@id":"https://kingshotdata.kr/en/pet/cheetah.html"
+        },
+        "author":{
+          "@type":"Organization",
+          "name":"KingshotData"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"KingshotData",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+          }
+        },
+        "image":"https://kingshotdata.kr/img/pet/cheetah.webp"
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"When does Cheetah unlock in Kingshot?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Cheetah is a Generation 2 pet in Kingshot that becomes available when your state is around 80 days old."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is the max level of Cheetah?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Cheetah can be leveled up to Level 70."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What does Cheetah's skill do?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Cheetah uses Scent Mastery to instantly locate pet food. At max upgrade, the skill gives 500 pet food every 23 hours."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Where can I calculate Cheetah upgrade materials?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"You can use the Kingshot pet calculator to check the exact materials needed from your current level to your target level."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+<body class="theme-default">
+  <div class="pet-page">
+    <div class="wrap">
+      <header class="top">
+        <div class="brand">
+          <a href="/en/" aria-label="Kingshot Data Home">
+            <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+            <span>Kingshot Data</span>
+          </a>
+        </div>
+        <nav class="lang" aria-label="Language switcher">
+          <a href="/en/pet/cheetah.html" aria-current="page">EN</a>
+          <a href="/ko/pet/cheetah.html">KO</a>
+          <a href="/ja/pet/cheetah.html">JA</a>
+          <a href="/zh-tw/pet/cheetah.html">ZH-TW</a>
+        </nav>
+      </header>
+
+      <nav class="section-tabs" aria-label="Section navigation">
+        <a href="#overview">Overview</a>
+        <a href="#skill">Skill</a>
+        <a href="#materials">Materials</a>
+        <a href="#calculator">Calculator</a>
+        <a href="#faq">FAQ</a>
+        <a href="#related">Related</a>
+      </nav>
+
+      <main id="main">
+        <div class="crumbs">
+          <a href="/en/">Home</a> <span class="muted">›</span>
+          <a href="/en/pet/">Pet</a> <span class="muted">›</span>
+          <span>Cheetah</span>
+        </div>
+
+        <div class="hero">
+          <img src="/img/pet/cheetah.webp" alt="Kingshot Cheetah pet image" loading="eager" fetchpriority="high" width="180" height="180" />
+          <div>
+            <h1>Cheetah</h1>
+            <p class="sub">
+              Cheetah is a Generation 2 pet in Kingshot that becomes available when your state is around 80 days old.
+              You can level him up to 70, and his skill gives you free pet food every 23 hours.
+            </p>
+            <div class="quote">
+              This page summarizes Cheetah's skill effect, total upgrade materials, and the pet calculator link in one place.
+            </div>
+
+            <div class="jump" aria-label="Quick links">
+              <a href="#overview">Overview</a><span class="dotsep">•</span>
+              <a href="#skill">Skill</a><span class="dotsep">•</span>
+              <a href="#materials">Materials</a><span class="dotsep">•</span>
+              <a href="#calculator">Calculator</a><span class="dotsep">•</span>
+              <a href="#faq">FAQ</a><span class="dotsep">•</span>
+              <a href="#related">Related</a>
+            </div>
+          </div>
+        </div>
+
+        <section id="overview">
+          <span class="anchor"></span>
+          <h2>Overview</h2>
+
+          <div class="overview-grid">
+            <div class="stat-card">
+              <div class="stat-label">Generation</div>
+              <div class="stat-value">Gen 2</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Unlock Timing</div>
+              <div class="stat-value">Around Day 80</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Max Level</div>
+              <div class="stat-value">70</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Main Use</div>
+              <div class="stat-value">Pet Food Supply</div>
+            </div>
+          </div>
+
+          <p>
+            Cheetah is a useful Generation 2 pet for players who want a steady source of pet food.
+            His skill gives free pet food on a fixed cooldown, making long-term pet progression a little easier.
+          </p>
+        </section>
+
+        <section id="skill">
+          <span class="anchor"></span>
+          <h2>Skill Effect</h2>
+
+          <div class="skill-panel">
+            <img class="skill-icon" src="/img/pet/cheetahskill.webp" alt="Cheetah skill icon" loading="lazy" width="88" height="88" />
+
+            <p class="skill-desc">
+              <strong>Scent Mastery</strong><br />
+              As a natural predator, its keen sense of smell allows it to instantly locate
+              <span class="accent">500 pet food</span>.
+              <span class="muted">(Cooldown: 23h)</span>
+            </p>
+
+            <div class="skill-preview-title">Upgrade Preview</div>
+
+            <p class="skill-preview-line">
+              Pet Food:
+              <span class="accent">200 / 250 / 300 / 350 / 400 / 450 / 500</span>
+            </p>
+          </div>
+
+          <p>
+            As Cheetah advances, the amount of pet food gained from the skill increases steadily.
+            This makes him valuable if you want more consistent pet growth materials over time.
+          </p>
+        </section>
+
+        <section id="materials">
+          <span class="anchor"></span>
+          <h2>Total Upgrade Materials</h2>
+          <p class="muted" style="margin-top:-2px">The totals below are for upgrading Cheetah from Level 1 to Level 70.</p>
+
+          <div class="materials-grid">
+            <div class="material-card">
+              <div class="material-head">
+                <img src="/img/pet/food.png" alt="" aria-hidden="true" width="20" height="20" />
+                <span>Pet Food</span>
+              </div>
+              <div class="material-total">144,660</div>
+            </div>
+
+            <div class="material-card">
+              <div class="material-head">
+                <img src="/img/pet/manual.png" alt="" aria-hidden="true" width="20" height="20" />
+                <span>Growth Manual</span>
+              </div>
+              <div class="material-total">860</div>
+            </div>
+
+            <div class="material-card">
+              <div class="material-head">
+                <img src="/img/pet/potion.png" alt="" aria-hidden="true" width="20" height="20" />
+                <span>Nutrient Potion</span>
+              </div>
+              <div class="material-total">190</div>
+            </div>
+
+            <div class="material-card">
+              <div class="material-head">
+                <img src="/img/pet/medal.png" alt="" aria-hidden="true" width="20" height="20" />
+                <span>Promotion Medallion</span>
+              </div>
+              <div class="material-total">70</div>
+            </div>
+          </div>
+
+          <div class="note">
+            <div>
+              For exact material requirements between your current level and target level, use the pet calculator below.
+            </div>
+          </div>
+        </section>
+
+        <section id="calculator">
+          <span class="anchor"></span>
+          <h2>Pet Calculator</h2>
+          <p class="muted" style="margin-top:-2px">Check the exact materials needed from your current level to your target level.</p>
+
+          <div class="cta-box">
+            <div class="cta-copy">
+              <h3>Need a level-by-level material check?</h3>
+              <p>
+                Open the Kingshot pet calculator, choose your current level and target level,
+                and instantly see the exact amount of Pet Food, Growth Manual, Nutrient Potion, and Promotion Medallion required.
+              </p>
+            </div>
+            <a class="btn" href="/calc-pet">Open Pet Calculator</a>
+          </div>
+        </section>
+
+        <section id="faq">
+          <span class="anchor"></span>
+          <h2>Cheetah FAQ</h2>
+          <p class="muted" style="margin-top:-2px">Quick answers to common questions about Cheetah.</p>
+
+          <div class="faq-list">
+            <details open>
+              <summary>When does Cheetah unlock in Kingshot?</summary>
+              <p>Cheetah is a Generation 2 pet in Kingshot that becomes available when your state is around 80 days old.</p>
+            </details>
+
+            <details>
+              <summary>What is the max level of Cheetah?</summary>
+              <p>Cheetah can be leveled up to Level 70.</p>
+            </details>
+
+            <details>
+              <summary>What does Cheetah's skill do?</summary>
+              <p>Cheetah uses Scent Mastery to instantly locate pet food. At the highest upgrade level, the skill gives 500 pet food every 23 hours.</p>
+            </details>
+
+            <details>
+              <summary>Where can I calculate the exact upgrade materials?</summary>
+              <p>You can use the Kingshot pet calculator to check the exact materials needed from your current level to your target level.</p>
+            </details>
+          </div>
+        </section>
+
+        <section id="related">
+          <span class="anchor"></span>
+          <h2>Related Links</h2>
+          <div class="related">
+            <a class="pill" href="/en/pet/">All Pet List</a>
+            <a class="btn" href="/calc-pet">Open Pet Calculator</a>
+            <a class="pill" href="/en/guides/">Guides</a>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('.pet-page header.top');
+        var tabs = document.querySelector('.pet-page nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      function initStickyObservers(){
+        setStickyTop();
+        requestAnimationFrame(setStickyTop);
+        setTimeout(setStickyTop, 60);
+
+        if (mqMobile && mqMobile.addEventListener) {
+          mqMobile.addEventListener('change', setStickyTop);
+        } else if (mqMobile && mqMobile.addListener) {
+          mqMobile.addListener(setStickyTop);
+        }
+
+        if (window.ResizeObserver) {
+          var ro = new ResizeObserver(function(){ setStickyTop(); });
+          var header = document.querySelector('.pet-page header.top');
+          var tabs = document.querySelector('.pet-page nav.section-tabs');
+          if (header) ro.observe(header);
+          if (tabs) ro.observe(tabs);
+        }
+
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
+      }
+
+      function init(){
+        initStickyObservers();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

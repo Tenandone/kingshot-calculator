@@ -1,28 +1,19 @@
 /*!
  * /public/js/routes.calculators.js
  * 계산기 전용 라우트 번들 (lazy-load, 독립 라우트 전용)
- * ES5 호환 (화살표/옵셔널 체이닝/async-await 등 최신 문법 미사용)
- *
- * 전역(window)에 buildCalculatorRoutes 노출:
- *   window.buildCalculatorRoutes = function (opts) { ... return routes; }
+ * ES5 호환
  *
  * 포함 라우트:
- * - /calculator      → 계산기 허브
- * - /calc-building   → 건물 계산기
- * - /calc-gear       → 영주 장비 계산기 (외부 gear-calculator.js 로드)
- * - /calc-charm      → 영주 보석 계산기
- * - /calc-training   → 훈련/승급 계산기
- *
- * i18n 규칙:
- * - 각 render 마지막에 localI18nApply(el, { includeCalc:true })
- * - i18n:changed 시 includeCalc:true로 재적용
- *
- * VIP 관련 라우트/패턴은 전부 제거됨.
+ * - /calculator
+ * - /calc-building
+ * - /calc-gear
+ * - /calc-charm
+ * - /calc-training
+ * - /calc-pet
  */
 (function () {
   'use strict';
 
-  // ---- 안전 더미 정의(로드 순서 이슈 대비) ----
   if (typeof window.buildCalculatorRoutes !== 'function') {
     window.buildCalculatorRoutes = function () {
       try { console.warn('[routes.calculators] 더미 buildCalculatorRoutes 실행'); } catch (_e) {}
@@ -31,11 +22,6 @@
   }
   try { console.log('[routes.calculators] 로드됨'); } catch (_e) {}
 
-  // =========================================================================
-  // 공통 유틸
-  // =========================================================================
-
-  // ----- BASE / ver / join -----
   function getBaseHref() {
     try {
       var baseEl = document.querySelector('base');
@@ -51,7 +37,6 @@
   function j(p)     { if (isAbs(p)) return p; if (p && p.charAt(0)==='/') return BASE + p.slice(1); return BASE + (p||''); }
   function ver(p)   { return (typeof window.v === 'function') ? window.v(p) : p; }
 
-  // ----- HTML <body>만 추출 -----
   function htmlBodyOnly(html) {
     if (!html) return html;
     try {
@@ -60,7 +45,6 @@
     } catch(e){ return html; }
   }
 
-  // ----- closest (ES5) -----
   function closest(el, selector) {
     if (!el) return null;
     if (el.closest) return el.closest(selector);
@@ -73,12 +57,11 @@
     return null;
   }
 
-  // ----- i18n 부분 적용(옵션: includeCalc) -----
   function localI18nApply(el, opts) {
     if (!(window.I18N && typeof window.I18N.t === 'function')) return;
     opts = opts || {};
     var includeCalc = !!opts.includeCalc;
-    var SKIP = includeCalc ? '' : '#calc-ui, #gear-calc, #charm-calc, #training-calc';
+    var SKIP = includeCalc ? '' : '#calc-ui, #gear-calc, #charm-calc, #training-calc, #pet-calc';
 
     function isInAnySelector(node, selectorListCsv) {
       if (!selectorListCsv) return false;
@@ -118,7 +101,6 @@
     }
   }
 
-  // ----- 스크립트/HTML 후보 순차 로더 -----
   function loadScriptCandidates(cands, loadScriptOnce) {
     return new Promise(function(resolve){
       var i = 0, lastErr = null;
@@ -162,7 +144,6 @@
     });
   }
 
-  // ----- History 보조/해시 보정 -----
   function pushAndPing(path){
     if (typeof window.navigate === 'function') return window.navigate(path);
     if ((location.pathname || '') === path) {
@@ -207,7 +188,7 @@
   function normalizeWeirdHash(){
     try {
       var h = location.hash || '';
-      var m = h.match(/^#\/?(calc-(?:building|gear|charm|training)|calculator)\b/i);
+      var m = h.match(/^#\/?(calc-(?:building|gear|charm|training|pet)|calculator)\b/i);
       if (m) {
         var fixed = '#/' + h.replace(/^#\/?/, '');
         replaceHashAndPing(fixed);
@@ -218,11 +199,9 @@
     } catch (_e) {}
   }
 
-  // ----- 옛 링크 정규화 + 클릭 인터셉트 -----
   function bindLegacyCalcLinks(el) {
     if (!el) return;
 
-    // 마크업 href 보정
     var anchors = el.querySelectorAll('a[href]');
     for (var i=0;i<anchors.length;i++){
       var a = anchors[i];
@@ -231,15 +210,15 @@
       var mid = h.indexOf('#/');
       if (mid > -1) {
         var tail = h.slice(mid + 2);
-        if (/^calc-(building|gear|charm|training)\b/i.test(tail)) { a.setAttribute('href', '/' + tail); continue; }
+        if (/^calc-(building|gear|charm|training|pet)\b/i.test(tail)) { a.setAttribute('href', '/' + tail); continue; }
         if (/^calculator\b/i.test(tail)) { a.setAttribute('href', '/calculator'); continue; }
       }
-      if (/^#(calc-(building|gear|charm|training)\b.*)/i.test(h)) { a.setAttribute('href', '/' + h.replace(/^#/, '')); continue; }
+      if (/^#(calc-(building|gear|charm|training|pet)\b.*)/i.test(h)) { a.setAttribute('href', '/' + h.replace(/^#/, '')); continue; }
       if (/^#calculator\b/i.test(h)) { a.setAttribute('href', '/calculator'); continue; }
       if (/^#gear\b/i.test(h)) { a.setAttribute('href', '/' + h.replace(/^#gear\b/i, 'calc-gear')); continue; }
+      if (/^#pet\b/i.test(h)) { a.setAttribute('href', '/' + h.replace(/^#pet\b/i, 'calc-pet')); continue; }
     }
 
-    // 클릭 인터셉트
     el.addEventListener('click', function(e){
       if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       if (e.button !== 0) return;
@@ -254,10 +233,11 @@
             var tail = mid2 > -1 ? hh.slice(mid2 + 2) : hh.slice(2);
             return pushAndPing(/^calculator\b/i.test(tail) ? '/calculator' : '/' + tail);
           }
-          if (/^#(calc-|calculator|gear)/i.test(hh)) {
+          if (/^#(calc-|calculator|gear|pet)/i.test(hh)) {
             e.preventDefault();
             var t2 = hh.replace(/^#/, '');
             if (/^gear\b/i.test(t2)) t2 = t2.replace(/^gear\b/i, 'calc-gear');
+            if (/^pet\b/i.test(t2)) t2 = t2.replace(/^pet\b/i, 'calc-pet');
             return pushAndPing('/' + t2);
           }
         }
@@ -277,7 +257,6 @@
     }, false);
   }
 
-  // ----- 렌더 레이스 가드 -----
   var __calcRenderSeq = 0;
   function createRenderGuard(el, validPaths) {
     var token = ++__calcRenderSeq;
@@ -294,17 +273,14 @@
     return { isAlive: isAlive };
   }
 
-  // =========================================================================
-  // 라우트 빌더
-  // =========================================================================
   window.buildCalculatorRoutes = function (opts) {
     opts = opts || {};
-    var loadHTML         = opts.loadHTML;          // 필수
-    var loadScriptOnce   = opts.loadScriptOnce;    // 필수
-    var apply            = opts.apply;             // 선택
-    var setTitle         = opts.setTitle;          // 선택
-    var ensureI18NReady  = opts.ensureI18NReady;   // 선택
-    var TIER_KEY_MAP_KO  = opts.TIER_KEY_MAP_KO;   // 선택(gear-calculator.js가 지원할 때)
+    var loadHTML         = opts.loadHTML;
+    var loadScriptOnce   = opts.loadScriptOnce;
+    var apply            = opts.apply;
+    var setTitle         = opts.setTitle;
+    var ensureI18NReady  = opts.ensureI18NReady;
+    var TIER_KEY_MAP_KO  = opts.TIER_KEY_MAP_KO;
 
     function makeEnsureLangAndNamespaces(ensureFn) {
       return function (nsList) {
@@ -342,8 +318,6 @@
 
     var routes = {};
 
-    // ---------------------------
-    // /calculator (허브)
     routes['/calculator'] = {
       title: '계산기 - KingshotData.kr',
       render: function (el) {
@@ -372,7 +346,7 @@
           } catch(_e){}
 
           bindLegacyCalcLinks(el);
-          if (typeof setTitle === 'function') setTitle('calc.meta.title', '계산기 | KingshotData KR');
+          if (typeof setTitle === 'function') setTitle('calcHub.meta.title', '계산기 | KingshotData KR');
           try { window.scrollTo(0, 0); } catch(_){}
 
           if (!window.__calcHubReapplyBound) {
@@ -388,8 +362,6 @@
       }
     };
 
-    // ---------------------------
-    // /calc-building
     routes['/calc-building'] = {
       title: '건물계산기 - KingshotData.kr',
       render: function (el) {
@@ -451,16 +423,12 @@
       }
     };
 
-    // ---------------------------
-    // /calc-gear (외부 gear-calculator.js UI 적용)
     routes['/calc-gear'] = {
       title: '영주장비계산기 - KingshotData.kr',
       render: function (el) {
         normalizeWeirdHash();
 
         var guard = createRenderGuard(el, ['/calc-gear']);
-
-        // 현재 경로에서 slug 추출 (/calc-gear/:slug)
         var slug = '';
         try {
           var p = location.pathname || '';
@@ -487,7 +455,6 @@
 
           if (!guard.isAlive()) return;
 
-          // 내부 옛 링크 → /calc-gear/:slug 경로로 전환
           el.addEventListener('click', function(e){
             var a = closest(e.target, 'a[href^="#/calc-gear/"], a[href^="#/gear/"]');
             if (a) {
@@ -497,7 +464,6 @@
             }
           }, false);
 
-          // slug가 있으면 해시 동기화
           if (slug) {
             setHashAndPing('/calc-gear');
             setTimeout(function(){
@@ -505,7 +471,6 @@
             }, 50);
           }
 
-          // 외부 스크립트 로드
           return loadScriptCandidates([
             j('js/gear-calculator.js'),'js/gear-calculator.js','/js/gear-calculator.js',
             j('public/js/gear-calculator.js'),'public/js/gear-calculator.js','/public/js/gear-calculator.js'
@@ -530,7 +495,6 @@
             el.insertAdjacentHTML('beforeend', '<div class="error" data-i18n="calcGear.error.initMissing">initGearCalculator()가 없습니다.</div>');
           }
 
-          // slug 내비게이션 폴백
           if (slug) {
             try {
               if (window.GEAR && typeof window.GEAR.navigateToSlug === 'function') {
@@ -544,14 +508,12 @@
             }
           }
 
-          // i18n 적용 + 기타
           try { if (typeof apply === 'function') apply(el); } catch(_e){}
           localI18nApply(el, { includeCalc: true });
           bindLegacyCalcLinks(el);
           if (typeof setTitle === 'function') setTitle('calcGear.meta.title', '영주 장비 계산기 | KingshotData KR');
           try { window.scrollTo(0, 0); } catch(_){}
 
-          // 언어 전환 시 재적용
           if (!window.__calcGearReapplyBound) {
             document.addEventListener('i18n:changed', function () {
               if (location.pathname.indexOf('/calc-gear') === 0) {
@@ -568,8 +530,6 @@
       }
     };
 
-    // ---------------------------
-    // /calc-charm
     routes['/calc-charm'] = {
       title: '영주보석계산기 - KingshotData.kr',
       render: function (el) {
@@ -628,8 +588,6 @@
       }
     };
 
-    // ---------------------------
-    // /calc-training
     routes['/calc-training'] = {
       title: '병력 훈련/승급 계산기 - KingshotData.kr',
       render: function (el) {
@@ -692,7 +650,83 @@
       }
     };
 
-    // 최종
-    return routes;
-  };
+    routes['/calc-pet'] = {
+  title: '펫계산기 - KingshotData.kr',
+  render: function (el) {
+    var guard = createRenderGuard(el, ['/calc-pet']);
+    normalizeWeirdHash();
+
+    return ensureLangAndNamespaces(['calcPet', 'calc']).then(function () {
+      if (!guard.isAlive()) return;
+
+      return loadHTMLCandidates(loadHTML, [
+        j('pages/calculators/pet.html'),
+        j('/pages/calculators/pet.html')
+      ]);
+    }).then(function (res) {
+      if (!guard.isAlive()) return;
+
+      el.innerHTML = (res && res.ok)
+        ? htmlBodyOnly(res.html)
+        : '<div class="placeholder"><h2 data-i18n="calcPet.title">펫계산기</h2><p class="muted" data-i18n="calcPet.error.notFound">pet.html을 찾을 수 없습니다.</p></div>';
+
+      if (!guard.isAlive()) return;
+
+      return loadScriptCandidates([
+        j('js/pet-calculator.js'), 'js/pet-calculator.js', '/js/pet-calculator.js',
+        j('public/js/pet-calculator.js'), 'public/js/pet-calculator.js', '/public/js/pet-calculator.js'
+      ], loadScriptOnce);
+    }).then(function (s) {
+      if (!guard.isAlive()) return;
+
+      if (s && s.ok && typeof window.initPetCalculator === 'function') {
+        try {
+          window.initPetCalculator({
+            mount: '#pet-calc',
+            jsonUrl: j('data/pet-upgrade.json')
+          });
+        } catch (e2) {
+          console.error('[calc-pet] initPetCalculator error:', e2);
+          el.insertAdjacentHTML('beforeend', '<div class="error" data-i18n="calcPet.error.initError">initPetCalculator 오류</div>');
+        }
+      } else {
+        el.insertAdjacentHTML('beforeend', '<div class="error" data-i18n="calcPet.error.initMissing">initPetCalculator 없음</div>');
+      }
+
+      bindLegacyCalcLinks(el);
+
+      if (typeof setTitle === 'function') {
+        setTitle('calcPet.meta.title', '킹샷 펫 계산기 | KingshotData KR');
+      }
+
+      try {
+        if (typeof apply === 'function') apply(el);
+      } catch (_e) {}
+
+      localI18nApply(el, { includeCalc: true });
+
+      if (typeof window.reapplyPetCalculatorI18N === 'function') {
+        try { window.reapplyPetCalculatorI18N(); } catch (_) {}
+      }
+
+      try { window.scrollTo(0, 0); } catch (_) {}
+
+      if (!window.__calcPetReapplyBound) {
+        document.addEventListener('i18n:changed', function () {
+          if (location.pathname.indexOf('/calc-pet') === 0) {
+            var content = document.getElementById('content');
+            if (content) localI18nApply(content, { includeCalc: true });
+            if (typeof window.reapplyPetCalculatorI18N === 'function') {
+              try { window.reapplyPetCalculatorI18N(); } catch (_) {}
+            }
+          }
+        }, false);
+        window.__calcPetReapplyBound = true;
+      }
+    });
+  }
+};
+
+return routes;
+};
 })();

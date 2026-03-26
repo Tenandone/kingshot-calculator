@@ -12,17 +12,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-i18n="calcHub.meta.title">계산기 | 킹샷데이터코리아</title>
-  <meta name="description" content="킹샷 계산기 허브. 건물, 영주장비, 영주보석, 병력훈련 계산기." data-i18n-attr="content:calcHub.meta.description">
+  <meta name="description" content="킹샷 계산기 허브. 건물, 영주장비, 영주보석, 병력훈련, 펫 계산기." data-i18n-attr="content:calcHub.meta.description">
 
   <script>
   window.__i18n = {
     "calcHub.meta.title": "계산기 | KingshotData KR",
-    "calcHub.meta.description": "킹샷 계산기 허브. 건물, 영주장비, 영주보석, 병력훈련 계산기.",
+    "calcHub.meta.description": "킹샷 계산기 허브. 건물, 영주장비, 영주보석, 병력훈련, 펫 계산기.",
     "calcHub.title": "계산기",
     "calcHub.cards.building.title": "건물계산기",
     "calcHub.cards.gear.title": "영주장비계산기",
     "calcHub.cards.charm.title": "영주보석계산기",
-    "calcHub.cards.training.title": "병력훈련계산기"
+    "calcHub.cards.training.title": "병력훈련계산기",
+    "calcHub.cards.pet.title": "펫계산기"
   };
   </script>
 
@@ -198,7 +199,7 @@
 
     #calc-hub .hub-grid{
       display:grid;
-      grid-template-columns:repeat(4, minmax(0, 1fr));
+      grid-template-columns:repeat(5, minmax(0, 1fr));
       gap:12px;
     }
 
@@ -350,6 +351,15 @@
             <h3 class="hub-card-title" data-i18n="calcHub.cards.training.title">병력훈련계산기</h3>
           </div>
         </a>
+
+        <a class="hub-link" href="/calc-pet">
+  <div class="hub-thumb">
+    <img src="/img/pet/graywolf.webp" alt="펫계산기" loading="lazy" decoding="async">
+  </div>
+  <div class="hub-body">
+    <h3 class="hub-card-title" data-i18n="calcHub.cards.pet.title">펫계산기</h3>
+  </div>
+</a>
       </div>
     </section>
   </main>

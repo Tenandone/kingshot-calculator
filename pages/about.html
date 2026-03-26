@@ -14,6 +14,7 @@
     .about-block h2 { margin: 18px 0 10px; }
     .about-block p { margin: 8px 0; }
   </style>
+
   <!-- GA4 -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
@@ -23,15 +24,9 @@
     gtag('js', new Date());
     gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
   </script>
-
 </head>
 
 <body>
-  <a href="/" class="kd-home-link"
-     style="display:block;padding:10px 14px;font:600 13px/1 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,sans-serif;text-decoration:none;color:#0b57d0">
-    ← KingshotData Korea
-  </a>
-
   <main class="container">
     <header class="about-header">
       <h1 data-i18n="about.title">소개</h1>
@@ -122,7 +117,7 @@
 
       function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
 
-      // ✅ data-i18n → 무조건 textContent로 렌더(줄바꿈 필요 없음)
+      // data-i18n → 무조건 textContent로 렌더
       function renderAll(showMissingKey) {
         var nodes = document.querySelectorAll('[data-i18n]');
         for (var i = 0; i < nodes.length; i++) {
@@ -133,7 +128,6 @@
 
           var val = I18N.t(key, null);
 
-          // 못 찾으면 디버그용으로 키 표시(원하면 false로)
           if (val === null || val === undefined || val === key) {
             el.textContent = showMissingKey ? key : '';
             continue;
@@ -144,7 +138,6 @@
       }
 
       async function boot() {
-        // I18N 준비 대기
         for (var i = 0; i < 200; i++) {
           if (window.I18N && typeof I18N.t === 'function') break;
           await sleep(50);
@@ -154,12 +147,10 @@
           return;
         }
 
-        // 1) 기본 applyTo
         try {
           if (typeof I18N.applyTo === 'function') I18N.applyTo(document);
         } catch (e) {}
 
-        // 2) 최종 렌더(키 누락 시 보이게 해서 바로 잡기)
         renderAll(true);
       }
 

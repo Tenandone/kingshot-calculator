@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>キングショット ペット一覧</title>
+  <meta name="description" content="キングショットの全ペット一覧を確認し、各ペットページでスキル、効果、強化情報をチェックできます。" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ja/pet/" />
+
+  <meta property="og:title" content="キングショット ペット一覧" />
+  <meta property="og:description" content="キングショットの全ペット一覧を確認し、各ペットページでスキル、効果、強化情報をチェックできます。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kingshotdata.kr/ja/pet/" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <link rel="stylesheet" href="/css/common.css?v=202509131858">
+  <link rel="stylesheet" href="/css/category.css?v=202509131858">
+  <link rel="stylesheet" href="/css/database.css?v=202509131858">
+  <link rel="stylesheet" href="/css/mobile-patch.css?v=202509131858">
+  <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
+  <link rel="stylesheet" href="/css/header.css?v=202509131858">
+  <link rel="stylesheet" href="/css/sponsor.css?v=202509131858">
+
+  <style>
+    #pet-page{max-width:1100px;margin:0 auto;padding:28px 16px}
+    #pet-page h1{margin:0 0 10px;font-size:28px;letter-spacing:-.02em}
+    #pet-page .sub{margin:0 0 18px;color:#6b7280}
+
+    #pet-page .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}
+    @media (max-width:980px){#pet-page .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:520px){
+      #pet-page{padding:18px 12px}
+      #pet-page h1{font-size:22px}
+      #pet-page .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    }
+
+    #pet-page .card{
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:16px;
+      background:#fff;
+      overflow:hidden;
+      transition:transform .12s ease,box-shadow .12s ease;
+      height:100%;
+    }
+    #pet-page .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
+    #pet-page .card a{
+      display:flex;
+      flex-direction:column;
+      height:100%;
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #pet-page .imgbox{
+      background:#f2f4f7;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px;
+      aspect-ratio:1/1;
+    }
+
+    #pet-page img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      max-width:100%;
+      max-height:100%;
+    }
+
+    #pet-page .card-name{
+      padding:12px 12px 14px;
+      font-weight:800;
+      font-size:15px;
+      line-height:1.35;
+      min-height:44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      word-break:keep-all;
+    }
+
+    @media (max-width:520px){
+      #pet-page .card-name{
+        font-size:14px;
+        min-height:40px;
+        padding:10px 10px 12px;
+        line-height:1.3;
+      }
+    }
+
+    .visually-hidden{
+      position:absolute !important;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "キングショット ペット一覧",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"グレイウルフ","url":"https://kingshotdata.kr/ja/pet/graywolf/"},
+      {"@type":"ListItem","position":2,"name":"オオヤマネコ","url":"https://kingshotdata.kr/ja/pet/lynx/"},
+      {"@type":"ListItem","position":3,"name":"オックス","url":"https://kingshotdata.kr/ja/pet/bison/"},
+      {"@type":"ListItem","position":4,"name":"チーター","url":"https://kingshotdata.kr/ja/pet/cheetah/"},
+      {"@type":"ListItem","position":5,"name":"ヘラジカ","url":"https://kingshotdata.kr/ja/pet/moose/"},
+      {"@type":"ListItem","position":6,"name":"ライオン","url":"https://kingshotdata.kr/ja/pet/lion/"},
+      {"@type":"ListItem","position":7,"name":"グリズリー","url":"https://kingshotdata.kr/ja/pet/grizzly-bear/"},
+      {"@type":"ListItem","position":8,"name":"巨大戦犀","url":"https://kingshotdata.kr/ja/pet/giant-rhino/"},
+      {"@type":"ListItem","position":9,"name":"巨大蛮牛","url":"https://kingshotdata.kr/ja/pet/mighty-bison/"},
+      {"@type":"ListItem","position":10,"name":"巨大ヘラジカ","url":"https://kingshotdata.kr/ja/pet/great-moose/"},
+      {"@type":"ListItem","position":11,"name":"巨大黒豹","url":"https://kingshotdata.kr/ja/pet/alpha-black-panther/"},
+      {"@type":"ListItem","position":12,"name":"巨大白獅子","url":"https://kingshotdata.kr/ja/pet/regal-white-lion/"},
+      {"@type":"ListItem","position":13,"name":"巨大戦象","url":"https://kingshotdata.kr/ja/pet/ironclad-war-elephant/"},
+      {"@type":"ListItem","position":14,"name":"アンノウン","url":"https://kingshotdata.kr/ja/pet/unknown/"}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body class="theme-default">
+  <main id="pet-page">
+    <h1>キングショット ペット</h1>
+    <p class="sub">全ペット一覧を確認し、各ページでスキル、効果、強化情報をチェックできます。</p>
+
+    <section class="visually-hidden" aria-hidden="false">
+      <h2>全ペット一覧</h2>
+      <p>キングショットの全ペット一覧と各ペット詳細ページへのリンクを確認できます。</p>
+    </section>
+
+    <div id="pet-grid" class="grid">
+      <div class="card"><a href="/ja/pet/graywolf/"><div class="imgbox"><img src="/img/pet/graywolf.webp" alt="グレイウルフ"></div><div class="card-name">グレイウルフ</div></a></div>
+      <div class="card"><a href="/ja/pet/lynx/"><div class="imgbox"><img src="/img/pet/lynx.webp" alt="オオヤマネコ"></div><div class="card-name">オオヤマネコ</div></a></div>
+      <div class="card"><a href="/ja/pet/bison/"><div class="imgbox"><img src="/img/pet/bison.webp" alt="オックス"></div><div class="card-name">オックス</div></a></div>
+      <div class="card"><a href="/ja/pet/cheetah/"><div class="imgbox"><img src="/img/pet/cheetah.webp" alt="チーター"></div><div class="card-name">チーター</div></a></div>
+      <div class="card"><a href="/ja/pet/moose/"><div class="imgbox"><img src="/img/pet/giantmoose.webp" alt="ヘラジカ"></div><div class="card-name">ヘラジカ</div></a></div>
+      <div class="card"><a href="/ja/pet/lion/"><div class="imgbox"><img src="/img/pet/lion.webp" alt="ライオン"></div><div class="card-name">ライオン</div></a></div>
+      <div class="card"><a href="/ja/pet/grizzly-bear/"><div class="imgbox"><img src="/img/pet/grizzly-bear.webp" alt="グリズリー"></div><div class="card-name">グリズリー</div></a></div>
+      <div class="card"><a href="/ja/pet/giant-rhino/"><div class="imgbox"><img src="/img/pet/giant-rhino.webp" alt="巨大戦犀"></div><div class="card-name">巨大戦犀</div></a></div>
+      <div class="card"><a href="/ja/pet/mighty-bison/"><div class="imgbox"><img src="/img/pet/mighty-bison.webp" alt="巨大蛮牛"></div><div class="card-name">巨大蛮牛</div></a></div>
+      <div class="card"><a href="/ja/pet/great-moose/"><div class="imgbox"><img src="/img/pet/great-moose.webp" alt="巨大ヘラジカ"></div><div class="card-name">巨大ヘラジカ</div></a></div>
+      <div class="card"><a href="/ja/pet/alpha-black-panther/"><div class="imgbox"><img src="/img/pet/alpha-black-panther.webp" alt="巨大黒豹"></div><div class="card-name">巨大黒豹</div></a></div>
+      <div class="card"><a href="/ja/pet/regal-white-lion/"><div class="imgbox"><img src="/img/pet/regal-white-lion.webp" alt="巨大白獅子"></div><div class="card-name">巨大白獅子</div></a></div>
+      <div class="card"><a href="/ja/pet/ironclad-war-elephant/"><div class="imgbox"><img src="/img/pet/ironclad-war-elephant.webp" alt="巨大戦象"></div><div class="card-name">巨大戦象</div></a></div>
+      <div class="card"><a href="/ja/pet/unknown/"><div class="imgbox"><img src="/img/pet/unknown.webp" alt="アンノウン"></div><div class="card-name">アンノウン</div></a></div>
+    </div>
+  </main>
+</body>
+</html>

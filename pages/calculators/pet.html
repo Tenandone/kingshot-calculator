@@ -1,0 +1,70 @@
+<!-- pages/calculators/pet.html -->
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <script>
+    if (location.pathname.startsWith('/pages/')) {
+      location.replace('/?p=' + location.pathname + location.search);
+    }
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="calcPet.meta.title">펫 계산기 | 킹샷데이터코리아</title>
+
+  <style>
+    :root{--bd:#e5e7eb}
+    body{
+      margin:0;
+      background:#fff;
+      color:#111;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Pretendard,sans-serif
+    }
+    .calc-wrap{max-width:1080px;margin:0 auto;padding:20px 14px 60px}
+    .calc-card{
+      border:1px solid var(--bd);
+      border-radius:12px;
+      background:#fff;
+      padding:16px;
+      margin:12px 0
+    }
+    .calc-title{margin:0 0 8px;font-size:20px}
+    .calc-desc{margin:6px 0;color:#444;line-height:1.6}
+  </style>
+
+  <!-- GA4 -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+<body>
+  <main id="calc-ui" class="calc-wrap" aria-labelledby="pet-title">
+    <section class="calc-card">
+      <h2 id="pet-title" class="calc-title" data-i18n="calcPet.title">킹샷 펫 계산기</h2>
+      <p class="calc-desc" data-i18n="calcPet.desc">
+        현재 레벨과 목표 레벨을 선택하면 필요한 펫먹이, 육성수첩, 영양제, 승급메달 총합을 계산합니다.
+      </p>
+    </section>
+
+    <section class="calc-card" style="margin-top:14px">
+      <div id="pet-calc" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <!-- routes.js 또는 html-loader 쪽에서 동적 로드/초기화 -->
+  <!-- 단독 테스트용
+  <script src="/js/pet-calculator.js?v=202509120604"></script>
+  <script>
+    window.initPetCalculator?.({
+      mount: '#pet-calc',
+      jsonUrl: '/data/pet-upgrade.json'
+    });
+  </script>
+  -->
+</body>
+</html>
