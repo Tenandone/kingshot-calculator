@@ -1,182 +1,24 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <base href="/" />
   <meta charset="utf-8" />
-
-  <script>
-    if (location.pathname.startsWith('/pages/')) {
-      location.replace('/?p=' + location.pathname + location.search);
-    }
-  </script>
-
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title data-i18n="calcHub.meta.title">계산기 | 킹샷데이터코리아</title>
-  <meta name="description" content="킹샷 계산기 허브. 건물, 영주장비, 영주보석, 병력훈련, 펫 계산기." data-i18n-attr="content:calcHub.meta.description">
-
-  <script>
-  window.__i18n = {
-    "calcHub.meta.title": "계산기 | KingshotData KR",
-    "calcHub.meta.description": "킹샷 계산기 허브. 건물, 영주장비, 영주보석, 병력훈련, 펫 계산기.",
-    "calcHub.title": "계산기",
-    "calcHub.cards.building.title": "건물계산기",
-    "calcHub.cards.gear.title": "영주장비계산기",
-    "calcHub.cards.charm.title": "영주보석계산기",
-    "calcHub.cards.training.title": "병력훈련계산기",
-    "calcHub.cards.pet.title": "펫계산기"
-  };
-  </script>
-
-  <script>
-  (function(){
-    const I18N_VERSION = '2025-09-12';
-    const NS = ['common','calc'];
-    const qs = new URLSearchParams(location.search);
-    const rawLocale = qs.get('lang') || localStorage.getItem('lang') || (navigator.language || 'ko');
-    const LOCALE = rawLocale === 'zh-TW' || rawLocale === 'zh-Hant'
-      ? 'zh-TW'
-      : rawLocale.slice(0,2).replace('_','-') || 'ko';
-
-    const LS_KEY = `i18n:${LOCALE}:dict`;
-    const LS_VER = `i18n:${LOCALE}:ver`;
-
-    function parseAttrMap(str){
-      return (str || '')
-        .split(/[,;]+/)
-        .map(function(s){ return s.trim(); })
-        .filter(Boolean)
-        .map(function(pair){
-          var i = pair.indexOf(':');
-          if (i < 0) return null;
-          return {
-            attr: pair.slice(0, i).trim(),
-            key: pair.slice(i + 1).trim()
-          };
-        })
-        .filter(Boolean);
-    }
-
-    function applyI18n(d, root){
-      root = root || document;
-      if (!d) return;
-
-      root.querySelectorAll('[data-i18n]').forEach(function(el){
-        var k = el.getAttribute('data-i18n');
-        if (d[k] != null) el.textContent = d[k];
-      });
-
-      root.querySelectorAll('[data-i18n-attr]').forEach(function(el){
-        var maps = parseAttrMap(el.getAttribute('data-i18n-attr'));
-        maps.forEach(function(m){
-          var val = d[m.key];
-          if (val == null) return;
-          if (m.attr === 'content' && el.tagName === 'META') {
-            el.setAttribute('content', val);
-          } else {
-            el.setAttribute(m.attr, val);
-          }
-        });
-      });
-    }
-
-    function ready(fn){
-      if (document.readyState !== 'loading') fn();
-      else document.addEventListener('DOMContentLoaded', fn, { once:true });
-    }
-
-    function fetchJSON(url){
-      const ac = new AbortController();
-      const to = setTimeout(function(){
-        try { ac.abort(); } catch(_) {}
-      }, 1200);
-
-      return fetch(url, { signal: ac.signal, cache: 'force-cache' })
-        .then(function(r){
-          return r.ok ? r.json() : Promise.reject(r.status);
-        })
-        .finally(function(){
-          clearTimeout(to);
-        });
-    }
-
-    function urlOf(ns){
-      return '/i18n/' + LOCALE + '/' + ns + '.json?v=' + I18N_VERSION;
-    }
-
-    let dict = window.__i18n ? Object.assign({}, window.__i18n) : {};
-
-    try {
-      if (localStorage.getItem(LS_VER) === I18N_VERSION) {
-        const cached = localStorage.getItem(LS_KEY);
-        if (cached) Object.assign(dict, JSON.parse(cached));
-      }
-    } catch (_) {}
-
-    ready(function(){
-      applyI18n(dict, document);
-    });
-
-    fetchJSON(urlOf('common'))
-      .then(function(json){
-        Object.assign(dict, json);
-        try {
-          localStorage.setItem(LS_KEY, JSON.stringify(dict));
-          localStorage.setItem(LS_VER, I18N_VERSION);
-        } catch (_) {}
-        ready(function(){
-          applyI18n(dict, document);
-        });
-      })
-      .catch(function(){});
-
-    Promise.allSettled(
-      NS.filter(function(ns){ return ns !== 'common'; }).map(function(ns){ return fetchJSON(urlOf(ns)); })
-    ).then(function(results){
-      var changed = false;
-      results.forEach(function(r){
-        if (r.status === 'fulfilled') {
-          Object.assign(dict, r.value);
-          changed = true;
-        }
-      });
-
-      if (changed) {
-        try {
-          localStorage.setItem(LS_KEY, JSON.stringify(dict));
-          localStorage.setItem(LS_VER, I18N_VERSION);
-        } catch (_) {}
-        applyI18n(dict, document.getElementById('calc-hub') || document);
-      }
-    });
-
-    try { localStorage.setItem('lang', LOCALE); } catch (_) {}
-  })();
-  </script>
-
-  <link rel="preconnect" href="https://kingshotdata.kr">
-  <link rel="dns-prefetch" href="//kingshotdata.kr">
-
-  <script src="/js/standalone-bridge.js?v=2025-09-12" defer></script>
-
-  <link rel="preconnect" href="https://www.googletagmanager.com">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
-  </script>
-
+  <title>계산기 | KingshotData</title>
+  <meta name="description" content="건물계산기, 영주장비계산기, 영웅장비계산기, 영주보석계산기, 병력훈련계산기, 펫계산기를 한곳에서 확인하세요." />
+  <meta name="robots" content="index,follow" />
   <style>
-    #calc-hub{
-      max-width:1100px;
-      margin:0 auto;
-      padding:18px 16px 28px;
-      box-sizing:border-box;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:#f8fafc;
+      color:#111827;
+      font:14px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Pretendard,Arial,sans-serif;
     }
 
-    #calc-hub *{
-      box-sizing:border-box;
+    #calc-hub{
+      max-width:1200px;
+      margin:0 auto;
+      padding:18px 16px 32px;
     }
 
     #calc-hub .hub-card{
@@ -184,7 +26,7 @@
       border:1px solid #e5e7eb;
       border-radius:18px;
       padding:18px;
-      box-shadow:0 4px 14px rgba(15,23,42,.04);
+      box-shadow:0 8px 24px rgba(17,24,39,.04);
     }
 
     #calc-hub .hub-title{
@@ -199,7 +41,7 @@
 
     #calc-hub .hub-grid{
       display:grid;
-      grid-template-columns:repeat(5, minmax(0, 1fr));
+      grid-template-columns:repeat(6, minmax(0, 1fr));
       gap:12px;
     }
 
@@ -259,9 +101,9 @@
       overflow-wrap:anywhere;
     }
 
-    @media (max-width:980px){
+    @media (max-width:1100px){
       #calc-hub .hub-grid{
-        grid-template-columns:repeat(2, minmax(0, 1fr));
+        grid-template-columns:repeat(3, minmax(0, 1fr));
       }
     }
 
@@ -334,6 +176,15 @@
           </div>
         </a>
 
+        <a class="hub-link" href="#calc-hero-gear">
+  <div class="hub-thumb">
+    <img src="/img/hero-gear/hero-gear.webp" alt="영웅장비계산기" loading="lazy" decoding="async">
+  </div>
+  <div class="hub-body">
+    <h3 class="hub-card-title" data-i18n="calcHub.cards.heroGear.title">영웅장비계산기</h3>
+  </div>
+</a>
+
         <a class="hub-link" href="#calc-charm">
           <div class="hub-thumb">
             <img src="/img/database/Governor%20Charm/governor-charms-300x282.webp" alt="영주보석계산기" loading="lazy" decoding="async">
@@ -353,13 +204,13 @@
         </a>
 
         <a class="hub-link" href="/calc-pet">
-  <div class="hub-thumb">
-    <img src="/img/pet/graywolf.webp" alt="펫계산기" loading="lazy" decoding="async">
-  </div>
-  <div class="hub-body">
-    <h3 class="hub-card-title" data-i18n="calcHub.cards.pet.title">펫계산기</h3>
-  </div>
-</a>
+          <div class="hub-thumb">
+            <img src="/img/pet/graywolf.webp" alt="펫계산기" loading="lazy" decoding="async">
+          </div>
+          <div class="hub-body">
+            <h3 class="hub-card-title" data-i18n="calcHub.cards.pet.title">펫계산기</h3>
+          </div>
+        </a>
       </div>
     </section>
   </main>

@@ -650,6 +650,67 @@
       }
     };
 
+    routes['/calc-hero-gear'] = {
+  title: '영웅장비계산기 - KingshotData.kr',
+  render: function (el) {
+    var guard = createRenderGuard(el, ['/calc-hero-gear']);
+    normalizeWeirdHash();
+
+    return ensureLangAndNamespaces(['calc', 'common']).then(function () {
+      if (!guard.isAlive()) return;
+
+      return loadHTMLCandidates(loadHTML, [
+        j('pages/calculators/hero-gear-calculator.html'),
+        j('/pages/calculators/hero-gear-calculator.html'),
+        j('pages/calculators/hero-gear.html'),
+        j('/pages/calculators/hero-gear.html')
+      ]);
+    }).then(function (res) {
+      if (!guard.isAlive()) return;
+
+      el.innerHTML = (res && res.ok)
+        ? htmlBodyOnly(res.html)
+        : '<div class="placeholder"><h2>영웅장비계산기</h2><p class="muted">hero-gear-calculator.html을 찾을 수 없습니다.</p></div>';
+
+      if (!guard.isAlive()) return;
+
+      return loadScriptCandidates([
+  j('js/hero-gear-calculator.js'), 'js/hero-gear-calculator.js', '/js/hero-gear-calculator.js',
+  j('public/js/hero-gear-calculator.js'), 'public/js/hero-gear-calculator.js', '/public/js/hero-gear-calculator.js'
+], loadScriptOnce);
+    }).then(function (s) {
+      if (!guard.isAlive()) return;
+
+      if (s && s.ok && typeof window.initHeroGearCalculator === 'function') {
+        try {
+          window.initHeroGearCalculator({
+            root: '#hero-gear-calculator-root',
+            data: window.HERO_GEAR_CALC_DATA
+          });
+        } catch (e2) {
+          console.error('[calc-hero-gear] initHeroGearCalculator error:', e2);
+          el.insertAdjacentHTML('beforeend', '<div class="error">initHeroGearCalculator 오류</div>');
+        }
+      } else {
+        el.insertAdjacentHTML('beforeend', '<div class="error">initHeroGearCalculator 없음</div>');
+      }
+
+      bindLegacyCalcLinks(el);
+
+      if (typeof setTitle === 'function') {
+        setTitle('calcHub.cards.heroGear.title', '영웅장비계산기 | KingshotData KR');
+      }
+
+      try {
+        if (typeof apply === 'function') apply(el);
+      } catch (_e) {}
+
+      localI18nApply(el, { includeCalc: true });
+      try { window.scrollTo(0, 0); } catch (_) {}
+    });
+  }
+};
+
     routes['/calc-pet'] = {
   title: '펫계산기 - KingshotData.kr',
   render: function (el) {

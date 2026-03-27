@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>영웅 장비 계산기 | KingshotData</title>
+  <meta name="description" content="킹샷 영웅 장비 계산기. 일반 강화, 단련, 마스터리 제작 구간별 필요 재료를 빠르게 계산해보세요." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#111827" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/calculators/hero-gear-calculator/" />
+
+  <meta property="og:title" content="영웅 장비 계산기 | KingshotData" />
+  <meta property="og:description" content="일반 강화, 단련, 마스터리 제작 구간별 필요 재료를 빠르게 계산해보세요." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kingshotdata.kr/calculators/hero-gear-calculator/" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="영웅 장비 계산기 | KingshotData" />
+  <meta name="twitter:description" content="영웅 장비 강화 재료를 빠르게 계산해보세요." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <link rel="stylesheet" href="/css/common.css?v=20260327" />
+
+  <style>
+    .hero-gear-page{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --shadow:0 12px 30px rgba(15,23,42,.08);
+    }
+
+    .hero-gear-page,
+    .hero-gear-page *{
+      box-sizing:border-box;
+    }
+
+    .hero-gear-page{
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    .hero-gear-page .wrap{
+      max-width:1200px;
+      margin:0 auto;
+      padding:24px 16px 80px;
+    }
+
+    .hero-gear-page .breadcrumb{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      margin-bottom:18px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .hero-gear-page .breadcrumb a{
+      color:var(--muted);
+      text-decoration:none;
+    }
+
+    .hero-gear-page .panel{
+      padding:22px;
+      border:1px solid var(--border);
+      border-radius:24px;
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-gear-page .calc-mount{
+      margin-top:0;
+    }
+
+    @media (max-width:768px){
+      .hero-gear-page .wrap{
+        padding:18px 14px 64px;
+      }
+
+      .hero-gear-page .panel{
+        padding:16px;
+        border-radius:20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="hero-gear-page">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="브레드크럼">
+        <a href="/">홈</a>
+        <span>/</span>
+        <a href="/calculators/">계산기</a>
+        <span>/</span>
+        <span>영웅 장비 계산기</span>
+      </nav>
+
+      <section class="panel" aria-label="영웅 장비 계산기">
+        <div id="hero-gear-calculator-root" class="calc-mount"></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="/js/hero-gear-calculator.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof window.initHeroGearCalculator === 'function') {
+        window.initHeroGearCalculator({
+          root: '#hero-gear-calculator-root'
+        });
+      }
+    });
+  </script>
+</body>
+</html>
