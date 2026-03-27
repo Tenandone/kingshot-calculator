@@ -1,18 +1,21 @@
 {
   "calc": {
-    "meta": { "title": "건물 계산기 | 킹샷데이터코리아" },
-    "title": "건물 계산기",
-    "desc": "업그레이드에 필요한 자원과 소요 시간을 확인하세요.",
+    "meta": {
+      "title": "킹샷데이터코리아 | 킹샷 건물 계산기",
+      "description": "킹샷 건물 계산기에서 업그레이드에 필요한 자원, 건설 시간, 선행 건물 조건을 확인하세요. 도시센터, 대사관, 지휘부, 아카데미, 병영 건물 계산을 지원합니다."
+    },
+    "title": "킹샷 건물 계산기",
+    "desc": "업그레이드에 필요한 자원, 건설 시간, 선행 건물 조건을 확인하세요.",
     "howto": {
       "title": "사용 방법",
       "step1": "업그레이드할 건물을 선택하세요.",
       "step2": "현재 레벨과 목표 레벨을 입력하세요.",
       "step3": {
         "head": "건설 속도 보너스를 입력하세요.",
-        "help": "프로필 → 전투력(파워) 화면 하단에서 건설 속도 보너스를 확인하세요. (살로/늑대/연구/국왕·관직 등 모두 포함)"
+        "help": "프로필 → 전투력(파워) 화면 하단에서 건설 속도 보너스를 확인하세요. 살로, 늑대, 연구, 국왕, 관직 등 모든 보너스를 포함한 수치를 입력하면 됩니다."
       },
-      "step4": "도시센터를 업그레이드하는 경우 \"선행 건물 포함\" 옵션을 체크할 수 있습니다.",
-      "step5": "펫 버프 비활성화시 펫 버프를 추가 할 수 있으며, 법령버프는 수동으로 체크하여야 합니다."
+      "step4": "도시센터를 업그레이드하는 경우 선행 건물 포함 옵션을 체크할 수 있습니다.",
+      "step5": "펫 버프가 비활성화된 경우 펫 버프를 추가할 수 있으며, 법령 버프는 수동으로 체크해야 합니다."
     },
     "levelGuide": {
       "title": "레벨 가이드",
@@ -42,31 +45,49 @@
           "war-academy": "전쟁아카데미"
         }
       },
-      "startLevel": { "label": "현재 레벨", "placeholder": "현재 레벨 입력" },
-      "targetLevel": { "label": "목표 레벨", "placeholder": "목표 레벨 입력" },
-      "speedBonus": { "label": "건설 속도 보너스 (%)" },
-      "saulBonus": { "label": "살로 스킬 보너스 (%) — 건설 비용 적용" },
-      "wolfBonus": { "label": "늑대 스킬 보너스 (%)" },
-      "positionBonus": { "label": "국왕/관직 보너스 (%)" },
-      "doubleTime": { "label": "건설 법령 적용(시간 20% 감소)" },
-      "includePrereq": { "label": "선행 건물 포함" },
+      "startLevel": {
+        "label": "현재 레벨",
+        "placeholder": "현재 레벨 입력"
+      },
+      "targetLevel": {
+        "label": "목표 레벨",
+        "placeholder": "목표 레벨 입력"
+      },
+      "speedBonus": {
+        "label": "건설 속도 보너스 (%)"
+      },
+      "saulBonus": {
+        "label": "살로 스킬 보너스 (%) · 건설 비용 적용"
+      },
+      "wolfBonus": {
+        "label": "늑대 스킬 보너스 (%)"
+      },
+      "positionBonus": {
+        "label": "국왕 · 관직 보너스 (%)"
+      },
+      "doubleTime": {
+        "label": "건설 법령 적용 · 건설 시간 20% 감소"
+      },
+      "includePrereq": {
+        "label": "선행 건물 포함"
+      },
       "actions": {
         "calculate": "업그레이드 계산하기",
-        "clear": "업그레이드 초기화"
+        "clear": "초기화"
       }
     },
     "prereq": {
-      "summary": "선행 건물 레벨 (내 현재 레벨)",
+      "summary": "선행 건물 레벨 · 현재 보유 레벨",
       "academy": "아카데미",
       "range": "궁병대",
       "stable": "기병대",
       "barracks": "보병대",
       "embassy": "대사관",
-      "note": "* 비워두면 0으로 간주합니다."
+      "note": "비워두면 0레벨로 계산됩니다."
     },
     "prereqBox": {
       "title": "선행 조건",
-      "empty": "선행조건 없음"
+      "empty": "선행 조건 없음"
     },
     "prereqSummary": {
       "title": "선행 건물 요약",
@@ -74,15 +95,15 @@
       "required": "요구"
     },
     "result": {
-      "upgrade": "업그레이드:",
-      "time": "건설 시간:",
-      "totalWithSaul": "총 자원 소모량(살로 적용)"
+      "upgrade": "업그레이드",
+      "time": "건설 시간",
+      "totalWithSaul": "총 자원 소모량 · 살로 적용"
     },
     "table": {
       "title": "상세 내역",
-      "titleWithPrereq": "상세 내역 (선행 포함)",
+      "titleWithPrereq": "상세 내역 · 선행 건물 포함",
       "levelNote": "레벨 표기는 TC1부터 TG10까지 기준입니다.",
-      "timeMinuteRemoved": "건설시간 분단위는 제거하였습니다.",
+      "timeMinuteRemoved": "건설 시간은 분 단위를 제거한 기준으로 표시됩니다.",
       "col": {
         "building": "건물",
         "level": "레벨",
@@ -91,7 +112,7 @@
         "stone": "석재",
         "iron": "철",
         "truegold": "순금",
-        "tempered_truegold": "담금질 된 순금",
+        "tempered_truegold": "담금질된 순금",
         "time": "건설 시간"
       }
     },
@@ -110,30 +131,39 @@
     },
     "alert": {
       "invalidLevel": "레벨 입력이 올바르지 않습니다.",
-      "targetGtStart": "목표 레벨은 시작 레벨보다 커야 합니다.",
-      "noData": "데이터가 없습니다",
+      "targetGtStart": "목표 레벨은 현재 레벨보다 높아야 합니다.",
+      "noData": "데이터가 없습니다.",
       "prereqTooHigh": "선행 건물 레벨은 목표 레벨 이상으로 입력할 수 없습니다."
     },
     "error": {
-      "load": "데이터 로드 실패"
+      "load": "데이터를 불러오지 못했습니다."
     }
   },
-
- 
-
   "calcHub": {
-  "meta": {
-    "title": "킹샷 계산기 | 킹샷데이터코리아",
-    "description": "킹샷 건물 계산기, 영주장비 계산기, 영주보석 계산기, 병력훈련 계산기, 펫계산기를 한곳에서 확인하세요."
-  },
-  "title": "킹샷 계산기",
-  "cards": {
-    "building": { "title": "킹샷 건물 계산기" },
-    "gear": { "title": "킹샷 영주장비 계산기" },
-    "charm": { "title": "킹샷 영주보석 계산기" },
-    "training": { "title": "킹샷 병력훈련 계산기" },
-    "pet": { "title": "킹샷 펫계산기" },
-    "heroGear": { "title": "킹샷 영웅장비계산기" }
+    "meta": {
+      "title": "킹샷데이터코리아 | 킹샷 계산기 모음",
+      "description": "킹샷 건물 계산기, 영주장비 계산기, 영주보석 계산기, 병력 훈련 계산기, 펫 계산기, 영웅장비 계산기를 한곳에서 확인하세요."
+    },
+    "title": "킹샷 계산기",
+    "cards": {
+      "building": {
+        "title": "킹샷 건물 계산기"
+      },
+      "gear": {
+        "title": "킹샷 영주장비 계산기"
+      },
+      "charm": {
+        "title": "킹샷 영주보석 계산기"
+      },
+      "training": {
+        "title": "킹샷 병력 훈련 계산기"
+      },
+      "pet": {
+        "title": "킹샷 펫 계산기"
+      },
+      "heroGear": {
+        "title": "킹샷 영웅장비 계산기"
+      }
+    }
   }
-}
 }
