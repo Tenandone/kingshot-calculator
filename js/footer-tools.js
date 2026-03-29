@@ -272,7 +272,7 @@
 
   function getCommunityHref(lang) {
     if (lang === 'ko') return 'https://open.kakao.com/o/gHPnO4uh';
-    return 'https://discord.gg/vgzASAwx';
+    return 'https://discord.gg/EjqWhTPya';
   }
 
   async function renderInto(container, opts) {
