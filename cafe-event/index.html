@@ -9,7 +9,6 @@
       --bg1:#2a0f0f;
       --bg2:#140a0b;
       --bg3:#0d0909;
-      --panel:#1b1213;
       --line:rgba(255,255,255,.08);
       --text:#fff8ef;
       --muted:#d9c7b8;
@@ -21,9 +20,10 @@
       --green2:#1b7a3d;
       --shadow:0 16px 40px rgba(0,0,0,.45);
       --radius:22px;
-      --slot-width:460px;
-      --row-height:82px;
-      --frame-height:98px;
+      --slot-width:520px;
+      --row-height:88px;
+      --frame-height:104px;
+      --bottom-bar-h:148px;
     }
 
     *{box-sizing:border-box}
@@ -39,31 +39,23 @@
     }
 
     .app{
-      width:min(1380px, calc(100% - 28px));
-      margin:18px auto 40px;
+      width:min(980px, calc(100% - 20px));
+      margin:0 auto;
+      padding:14px 0 calc(var(--bottom-bar-h) + 24px);
     }
 
     .topbar{
-      padding:16px 20px;
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
-      margin-bottom:14px;
+      text-align:center;
+      padding:10px 12px 6px;
     }
 
     .title{
       margin:0;
-      font-size:30px;
+      font-size:28px;
       font-weight:900;
-      letter-spacing:-.02em;
-    }
-
-    .layout{
-      display:grid;
-      grid-template-columns:380px minmax(0,1fr);
-      gap:14px;
-      align-items:start;
+      letter-spacing:-.03em;
+      color:#fff7df;
+      text-shadow:0 2px 8px rgba(0,0,0,.35);
     }
 
     .panel{
@@ -75,119 +67,80 @@
       box-shadow:var(--shadow);
     }
 
-    .section{padding:16px}
-
-    .mode-grid,
-    .count-row,
-    .action-row{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-    }
-
-    .toolbar{
-      display:grid;
-      gap:10px;
-      margin-top:10px;
-    }
-
-    .mode-btn,.count-btn,.action-btn{
-      appearance:none;
-      border:1px solid rgba(255,255,255,.1);
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
-      color:var(--text);
-      border-radius:16px;
-      padding:14px 12px;
-      font-weight:800;
-      font-size:14px;
-      cursor:pointer;
-      transition:.2s ease;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
-    }
-
-    .mode-btn.active,
-    .count-btn.active{
-      border-color:rgba(216,176,107,.55);
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255,215,120,.22), transparent 56%),
-        linear-gradient(180deg, rgba(216,176,107,.18), rgba(216,176,107,.05));
-      color:#fff7df;
-    }
-
-    .mode-btn .big,.count-btn .big{
-      display:block;
-      font-size:16px;
-      margin-bottom:4px;
-      font-weight:900;
-    }
-
-    .mode-btn .small,.count-btn .small{
-      display:block;
-      font-size:11px;
-      color:var(--muted);
-      line-height:1.45;
-    }
-
-    .action-btn.primary{
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255,214,132,.28), transparent 55%),
-        linear-gradient(180deg, #6a3a12, #3e2411 55%, #28170e 100%);
-      border-color:rgba(255,209,122,.4);
-    }
-    .action-btn.secondary{ background:linear-gradient(180deg, #4e1d1f, #311416); }
-    .action-btn.ghost{ background:linear-gradient(180deg, #2a2526, #171213); }
-
-    textarea{
-      width:100%;
-      min-height:240px;
-      margin-top:12px;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:18px;
-      padding:14px;
-      resize:vertical;
-      background:#120d0e;
-      color:var(--text);
-      font-size:13px;
-      line-height:1.65;
-      outline:none;
-    }
-
-    .status{
-      margin-top:10px;
-      font-size:12px;
-      color:#f4d7b1;
-      line-height:1.55;
-    }
-
     .slot-panel{
       padding:14px;
       overflow:hidden;
     }
 
-    .slot-area{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) 320px;
-      gap:14px;
-      align-items:start;
-    }
-
     .machine-stage{
       position:relative;
-      padding:24px 20px;
+      padding:18px 14px 24px;
       border-radius:20px;
       background:
         radial-gradient(circle at 50% 0%, rgba(255,219,149,.12), transparent 40%),
         radial-gradient(circle at 50% 100%, rgba(0,0,0,.35), transparent 50%),
         linear-gradient(180deg, #2b1415 0%, #1a1011 60%, #130d0e 100%);
-      min-height:640px;
+      min-height:650px;
       display:flex;
+      flex-direction:column;
       align-items:center;
       justify-content:center;
     }
 
     .machine-wrap{
-      width:min(100%, 560px);
+      width:min(100%, 620px);
       position:relative;
+    }
+
+    .machine-header{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:14px;
+      gap:12px;
+      flex-direction:column;
+    }
+
+    .machine-logo{
+      width:110px;
+      height:110px;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 40% 35%, rgba(255,255,255,.32), transparent 18%),
+        linear-gradient(145deg, #ffefcd, #8e6f49 24%, #fff6df 37%, #8a673b 58%, #fff0cb 79%, #89673d 100%);
+      box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,.28),
+        inset 0 8px 18px rgba(255,255,255,.24),
+        0 10px 16px rgba(0,0,0,.22);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px;
+      overflow:hidden;
+    }
+
+    .machine-logo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:50%;
+      display:block;
+    }
+
+    .machine-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:10px 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      color:#fff7df;
+      font-weight:900;
+      font-size:16px;
+      letter-spacing:-.02em;
+      text-align:center;
     }
 
     .slot-shell{
@@ -283,14 +236,14 @@
 
     .slot-token{
       width:100%;
-      height:62px;
+      height:66px;
       border-radius:999px;
       display:flex;
       align-items:center;
       justify-content:center;
       color:#fff9ef;
       font-weight:900;
-      font-size:26px;
+      font-size:28px;
       letter-spacing:-.03em;
       border:1px solid rgba(255,255,255,.08);
       box-shadow:
@@ -360,50 +313,14 @@
         0 0 40px rgba(255,214,120,.38);
     }
 
-    .machine-header{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin-bottom:16px;
-    }
-
-    .machine-logo{
-      width:114px;
-      height:114px;
-      border-radius:50%;
-      background:
-        radial-gradient(circle at 40% 35%, rgba(255,255,255,.32), transparent 18%),
-        linear-gradient(145deg, #ffefcd, #8e6f49 24%, #fff6df 37%, #8a673b 58%, #fff0cb 79%, #89673d 100%);
-      box-shadow:
-        inset 0 0 0 2px rgba(255,255,255,.28),
-        inset 0 8px 18px rgba(255,255,255,.24),
-        0 10px 16px rgba(0,0,0,.22);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:12px;
-      overflow:hidden;
-    }
-
-    .machine-logo img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      border-radius:50%;
-      display:block;
-    }
-
-    .side-box{
-      display:grid;
-      gap:12px;
-    }
-
-    .candidate-box,
     .live-box{
+      width:min(100%, 620px);
+      margin:16px auto 0;
       border:1px solid rgba(255,255,255,.08);
       border-radius:18px;
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      padding:14px;
+      padding:16px 14px;
+      text-align:center;
     }
 
     .box-title{
@@ -413,111 +330,105 @@
     }
 
     .live-name{
-      font-size:32px;
+      font-size:34px;
       font-weight:900;
       line-height:1.1;
       color:#fff7df;
       text-shadow:0 1px 2px rgba(0,0,0,.5);
-      min-height:70px;
+      min-height:44px;
       display:flex;
       align-items:center;
+      justify-content:center;
       word-break:break-word;
     }
 
     .live-sub{
       margin-top:8px;
-      font-size:13px;
+      font-size:14px;
       color:var(--muted);
+      line-height:1.6;
+      min-height:24px;
+    }
+
+    .section{
+      margin-top:12px;
+      padding:16px;
+    }
+
+    .section h2{
+      margin:0 0 10px;
+      font-size:19px;
+    }
+
+    textarea{
+      width:100%;
+      min-height:220px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:14px;
+      resize:vertical;
+      background:#120d0e;
+      color:var(--text);
+      font-size:13px;
+      line-height:1.65;
+      outline:none;
+    }
+
+    .status{
+      margin-top:10px;
+      font-size:12px;
+      color:#f4d7b1;
       line-height:1.55;
-      min-height:44px;
+      white-space:pre-line;
     }
 
-    .candidate-list{
+    .ticket-summary{
       display:grid;
-      gap:8px;
-      max-height:540px;
-      overflow:auto;
-      padding-right:4px;
-    }
-
-    .candidate-item{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding:10px 12px;
-      border-radius:14px;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.05);
-      font-size:13px;
-      line-height:1.45;
-    }
-
-    .candidate-no{
-      min-width:34px;
-      height:34px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      font-size:12px;
-      font-weight:900;
-      color:#2a140a;
-      background:linear-gradient(180deg, #ffe3b2, #b07a36);
-      flex:0 0 34px;
-    }
-
-    .candidate-text{
-      min-width:0;
-      flex:1;
-    }
-
-    .candidate-name{
-      font-size:15px;
-      font-weight:900;
-      color:#fffaf1;
-      margin-bottom:3px;
-      word-break:break-word;
-    }
-
-    .candidate-meta{
-      font-size:12px;
-      color:var(--muted);
-      word-break:break-word;
-    }
-
-    .mini-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
       gap:10px;
       margin-top:12px;
     }
 
-    .mini-box{
-      padding:14px;
-      border:1px solid rgba(255,255,255,.08);
+    .ticket-item{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px;
       border-radius:16px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
     }
 
-    .mini-box .label{
-      font-size:11px;
-      color:#f0c989;
-      letter-spacing:.08em;
-      margin-bottom:6px;
-      font-weight:800;
+    .ticket-rank{
+      width:34px;
+      height:34px;
+      flex:0 0 34px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      font-size:13px;
+      font-weight:900;
+      color:#2a140a;
+      background:linear-gradient(180deg, #ffe3b2, #b07a36);
+      box-shadow:inset 0 1px 2px rgba(255,255,255,.35);
     }
 
-    .mini-box .main{
+    .ticket-text{
+      min-width:0;
+      flex:1;
+    }
+
+    .ticket-title{
       font-size:15px;
       font-weight:900;
-      line-height:1.4;
+      line-height:1.45;
       margin-bottom:4px;
       word-break:break-word;
     }
 
-    .mini-box .meta{
-      font-size:12px;
+    .ticket-meta{
+      font-size:13px;
       color:var(--muted);
-      line-height:1.5;
+      line-height:1.6;
       word-break:break-word;
     }
 
@@ -557,21 +468,103 @@
     }
 
     .result-title{
-      font-size:14px;
+      font-size:15px;
       font-weight:900;
-      line-height:1.4;
+      line-height:1.45;
       margin-bottom:4px;
       word-break:break-word;
     }
 
     .result-meta{
-      font-size:12px;
+      font-size:13px;
       color:var(--muted);
-      line-height:1.5;
+      line-height:1.6;
       word-break:break-word;
     }
 
-    .hide{display:none !important}
+    .bottom-bar{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:60;
+      padding:12px 12px calc(12px + env(safe-area-inset-bottom));
+      background:
+        linear-gradient(180deg, rgba(12,8,9,.2), rgba(12,8,9,.92) 24%, rgba(12,8,9,.98) 100%);
+      backdrop-filter:blur(8px);
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    .bottom-inner{
+      width:min(980px, calc(100% - 4px));
+      margin:0 auto;
+      display:grid;
+      gap:10px;
+    }
+
+    .count-row,
+    .action-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .count-btn,.action-btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.1);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
+      color:var(--text);
+      border-radius:16px;
+      padding:14px 12px;
+      font-weight:800;
+      font-size:14px;
+      cursor:pointer;
+      transition:.2s ease;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    .count-btn.active{
+      border-color:rgba(216,176,107,.55);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,215,120,.22), transparent 56%),
+        linear-gradient(180deg, rgba(216,176,107,.18), rgba(216,176,107,.05));
+      color:#fff7df;
+    }
+
+    .count-btn .big{
+      display:block;
+      font-size:18px;
+      margin-bottom:4px;
+      font-weight:900;
+    }
+
+    .count-btn .small{
+      display:block;
+      font-size:11px;
+      color:var(--muted);
+      line-height:1.45;
+    }
+
+    .action-btn.primary{
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,214,132,.28), transparent 55%),
+        linear-gradient(180deg, #6a3a12, #3e2411 55%, #28170e 100%);
+      border-color:rgba(255,209,122,.4);
+    }
+
+    .action-btn.secondary{
+      background:linear-gradient(180deg, #4e1d1f, #311416);
+    }
+
+    .action-btn.ghost{
+      background:linear-gradient(180deg, #2a2526, #171213);
+    }
+
+    .action-btn:disabled,
+    .count-btn:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
 
     .popup{
       position:fixed;
@@ -581,53 +574,72 @@
       justify-content:center;
       padding:16px;
       z-index:100;
-      background:rgba(0,0,0,.6);
+      background:rgba(0,0,0,.66);
       backdrop-filter:blur(6px);
     }
 
     .popup.show{display:flex}
 
     .popup-card{
-      width:min(100%, 560px);
+      width:min(100%, 620px);
       border-radius:24px;
       border:1px solid rgba(255,255,255,.12);
       background:
         radial-gradient(circle at 50% 0%, rgba(255,214,132,.18), transparent 40%),
         linear-gradient(180deg, #2a1516 0%, #160e0f 100%);
       box-shadow:0 20px 60px rgba(0,0,0,.55);
-      padding:18px 16px 16px;
+      padding:20px 18px 18px;
     }
 
     .popup-title{
       margin:0 0 8px;
       text-align:center;
-      font-size:22px;
+      font-size:24px;
       font-weight:900;
+      color:#fff7df;
     }
 
     .popup-sub{
       text-align:center;
       color:#f4d7b1;
-      font-size:13px;
-      line-height:1.6;
+      font-size:14px;
+      line-height:1.7;
       margin-bottom:14px;
     }
 
-    .popup-link{
-      display:block;
-      text-align:center;
-      font-size:13px;
-      color:#ffe2b0;
+    .gift-card-box{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
       margin-bottom:14px;
-      text-decoration:none;
-      font-weight:700;
+    }
+
+    .gift-card-image{
+      width:min(100%, 260px);
+      display:block;
+      border-radius:20px;
+      box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,.12),
+        0 12px 28px rgba(0,0,0,.28);
+    }
+
+    .winner-message{
+      text-align:center;
+      font-size:22px;
+      font-weight:900;
+      color:#fff7df;
+      line-height:1.45;
+      margin-bottom:14px;
+      word-break:keep-all;
     }
 
     .popup-list{
       display:grid;
       gap:10px;
       margin-bottom:16px;
-      max-height:420px;
+      max-height:360px;
       overflow:auto;
     }
 
@@ -640,7 +652,7 @@
 
     .popup-item strong{
       display:block;
-      font-size:14px;
+      font-size:15px;
       line-height:1.45;
       margin-bottom:4px;
       word-break:break-word;
@@ -648,10 +660,19 @@
 
     .popup-item span{
       display:block;
-      font-size:12px;
+      font-size:13px;
       color:var(--muted);
-      line-height:1.5;
+      line-height:1.6;
       word-break:break-word;
+    }
+
+    .popup-bottom-text{
+      text-align:center;
+      color:#f4d7b1;
+      font-size:14px;
+      line-height:1.7;
+      margin:2px 0 14px;
+      word-break:keep-all;
     }
 
     .popup-close{
@@ -666,19 +687,26 @@
       background:linear-gradient(180deg, #ffe3b2, #b07a36);
     }
 
-    @media (max-width: 1180px){
-      .app{width:min(100%, calc(100% - 20px))}
-      .layout{grid-template-columns:1fr}
-      .slot-area{grid-template-columns:1fr}
-      .machine-stage{min-height:auto}
-      .candidate-list{max-height:280px}
-    }
-
     @media (max-width: 720px){
       :root{
         --slot-width:min(100%, 360px);
         --row-height:72px;
         --frame-height:88px;
+        --bottom-bar-h:158px;
+      }
+
+      .title{
+        font-size:22px;
+      }
+
+      .machine-stage{
+        min-height:540px;
+        padding-top:16px;
+      }
+
+      .machine-logo{
+        width:88px;
+        height:88px;
       }
 
       .slot-token{
@@ -687,8 +715,16 @@
       }
 
       .live-name{
-        font-size:24px;
-        min-height:56px;
+        font-size:26px;
+        min-height:34px;
+      }
+
+      .count-btn .big{
+        font-size:16px;
+      }
+
+      .winner-message{
+        font-size:18px;
       }
     }
   </style>
@@ -699,208 +735,144 @@
       <h1 class="title">카페 이벤트 슬롯 추첨기</h1>
     </div>
 
-    <div class="layout">
-      <div class="panel section">
-        <div class="mode-grid">
-          <button class="mode-btn active" id="modeTopBtn" type="button">
-            <span class="big">각 부분 1등 뽑기</span>
-            <span class="small">좋아요 1등<br>조회수 1등<br>댓글수 1등</span>
-          </button>
-          <button class="mode-btn" id="modeAllBtn" type="button">
-            <span class="big">모두 추첨</span>
-            <span class="small">작성자 기준<br>중복 없이 추첨</span>
-          </button>
-        </div>
-
-        <div class="toolbar">
-          <div class="count-row" id="countRow">
-            <button class="count-btn active" id="count5Btn" type="button">
-              <span class="big">5명</span>
-              <span class="small">작성자 기준 5명 추첨</span>
-            </button>
-            <button class="count-btn" id="count7Btn" type="button">
-              <span class="big">7명</span>
-              <span class="small">1등 제외 후 7명 추첨</span>
-            </button>
+    <div class="panel slot-panel main-stage">
+      <div class="machine-stage">
+        <div class="machine-wrap">
+          <div class="machine-header">
+            <div class="machine-logo">
+              <img src="/img/kingshotdata-logo.png" alt="KingshotData 로고" onerror="this.style.display='none'">
+            </div>
+            <div class="machine-badge" id="machineBadge">5명 추첨</div>
           </div>
 
-          <div class="action-row">
-            <button class="action-btn primary" id="parseBtn" type="button">데이터 분석</button>
-            <button class="action-btn secondary" id="spinBtn" type="button" disabled>슬롯 시작</button>
-          </div>
-
-          <div class="action-row">
-            <button class="action-btn ghost" id="autoBtn" type="button" disabled>자동 진행</button>
-            <button class="action-btn ghost" id="resetBtn" type="button">초기화</button>
-          </div>
-        </div>
-
-        <textarea id="rawInput">14608
-[오늘하루]오늘 하루 끄적끄적 -2댓글수[1]
-고사리손
-2026.03.18.	86	3
-
-14593
-[오늘하루]1주년 스킨과 G-드래곤 싱크로율댓글수[4]
-블루리스
-2026.03.18.	885	7
-
-14586
-[오늘하루]오늘은 곰 신기록을 세웠다(버프빨)댓글수[5]
-던져버려요
-2026.03.17.	942	5
-
-14584
-[오늘하루]오늘하루 끄적끄적 -1댓글수[2]
-고사리손
-2026.03.17.	89	4
-
-14564
-[오늘하루]일 끝나면 한잔해야겠네요댓글수[36]
-Ten
-2026.03.17.	584	28
-
-14545
-[오늘하루]8시 55분 알람댓글수[2]
-미니미니지니
-2026.03.17.	282	1
-
-14537
-[오늘하루]약 3시간 동안 총동원 임무 새로고침만 했습니댜 하하댓글수[6]
-킹샤샤
-2026.03.16.	916	2
-
-14477
-[오늘하루]양 올인댓글수[5]
-던져버려요
-2026.03.15.	754	1
-
-14461
-[오늘하루]하루 루틴댓글수[4]
-멋과맛
-2026.03.15.	135	3</textarea>
-
-        <div class="status" id="statusText">대기 중</div>
-      </div>
-
-      <div class="panel slot-panel">
-        <div class="slot-area">
-          <div class="machine-stage">
-            <div class="machine-wrap">
-              <div class="machine-header">
-                <div class="machine-logo">
-                  <img src="/img/kingshotdata-logo.png" alt="KingshotData 로고" onerror="this.style.display='none'">
-                </div>
-              </div>
-
-              <div class="slot-shell">
-                <div class="slot-glass">
-                  <div class="slot-window" id="slotWindow">
-                    <div class="slot-track" id="slotTrack"></div>
-                    <div class="slot-center-frame" id="slotFrame">
-                      <div class="slot-center-line"></div>
-                    </div>
-                  </div>
+          <div class="slot-shell">
+            <div class="slot-glass">
+              <div class="slot-window" id="slotWindow">
+                <div class="slot-track" id="slotTrack"></div>
+                <div class="slot-center-frame" id="slotFrame">
+                  <div class="slot-center-line"></div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="side-box">
-            <div class="live-box">
-              <h3 class="box-title">현재 선택</h3>
-              <div class="live-name" id="liveName">대기 중</div>
-              <div class="live-sub" id="liveSub">데이터 분석 후 슬롯을 시작해줘</div>
-            </div>
-
-            <div class="candidate-box">
-              <h3 class="box-title">추첨 대상 작성자 목록</h3>
-              <div class="candidate-list" id="candidateList"></div>
-            </div>
-          </div>
+        <div class="live-box">
+          <h3 class="box-title">현재 선택</h3>
+          <div class="live-name" id="liveName">대기 중</div>
+          <div class="live-sub" id="liveSub"></div>
         </div>
       </div>
     </div>
 
-    <div class="mini-grid">
-      <div class="panel mini-box">
-        <div class="label">좋아요 1등</div>
-        <div class="main" id="topLikeTitle">-</div>
-        <div class="meta" id="topLikeMeta">-</div>
-      </div>
+    <div class="panel section">
+      <h2>오늘하루 게시판 추첨인원</h2>
+      <textarea id="rawInput" placeholder="여기에 오늘하루 게시판 데이터를 붙여넣어"></textarea>
+      <div class="status" id="statusText">대기 중</div>
+    </div>
 
-      <div class="panel mini-box">
-        <div class="label">조회수 1등</div>
-        <div class="main" id="topViewTitle">-</div>
-        <div class="meta" id="topViewMeta">-</div>
-      </div>
-
-      <div class="panel mini-box">
-        <div class="label">댓글수 1등</div>
-        <div class="main" id="topCommentTitle">-</div>
-        <div class="meta" id="topCommentMeta">-</div>
-      </div>
+    <div class="panel section">
+      <h2>작성자별 추첨권 현황</h2>
+      <div class="ticket-summary" id="ticketSummary"></div>
     </div>
 
     <div class="panel section" style="margin-top:12px;">
-      <h2 style="margin:0;font-size:19px">당첨 결과</h2>
+      <h2>최종 당첨 결과</h2>
       <div class="result-list" id="resultList"></div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="bottom-inner">
+      <div class="count-row">
+        <button class="count-btn active" id="count5Btn" type="button">
+          <span class="big">5명 추첨</span>
+          <span class="small">작성자 중복 없이</span>
+        </button>
+        <button class="count-btn" id="count10Btn" type="button">
+          <span class="big">10명 추첨</span>
+          <span class="small">작성자 중복 없이</span>
+        </button>
+      </div>
+
+      <div class="action-row">
+        <button class="action-btn primary" id="parseBtn" type="button">데이터 분석</button>
+        <button class="action-btn secondary" id="spinBtn" type="button" disabled>슬롯 시작</button>
+      </div>
+
+      <div class="action-row">
+        <button class="action-btn ghost" id="autoBtn" type="button" disabled>자동 진행</button>
+        <button class="action-btn ghost" id="resetBtn" type="button">초기화</button>
+      </div>
     </div>
   </div>
 
   <div class="popup" id="popup">
     <div class="popup-card">
-      <h2 class="popup-title">당첨자 명단</h2>
-      <div class="popup-sub">네이버킹샷카페 오늘하루 이벤트</div>
-      <a class="popup-link" href="https://cafe.naver.com/kingshot1" target="_blank" rel="noopener">https://cafe.naver.com/kingshot1</a>
+      <h2 class="popup-title" id="popupTitle">당첨 안내</h2>
+
+      <div class="gift-card-box">
+        <img
+          class="gift-card-image"
+          src="/img/giftcode.png"
+          alt="구글 기프트카드 1만원"
+          onerror="this.style.display='none'"
+        />
+      </div>
+
+      <div class="winner-message" id="winnerMessage">당첨을 축하합니다.</div>
+
+      <div class="popup-sub" id="popupSub">구글 기프트카드 1만원</div>
+
       <div class="popup-list" id="popupList"></div>
+
+      <div class="popup-bottom-text" id="popupBottomText">
+        킹샷카페 오늘하루 게시판 이벤트 많은 관심 부탁드립니다.
+      </div>
+
       <button class="popup-close" id="popupClose" type="button">확인</button>
     </div>
   </div>
 
   <script>
+    const EXCLUDED_AUTHORS = new Set(['Ten']);
+
     const state = {
-      mode: 'top',
       extraMode: '5',
       posts: [],
-      autoWinners: { like: null, view: null, comment: null },
-      excludedAuthors: new Set(),
-      remainingAuthors: [],
+      authorTickets: [],
       results: [],
       spinning: false,
       currentTrackItems: [],
+      currentRenderedItems: [],
       currentOffset: 0,
-      popupLocked: false,
-      topFinished: false
+      popupLocked: false
     };
 
     const els = {
-      modeTopBtn: document.getElementById('modeTopBtn'),
-      modeAllBtn: document.getElementById('modeAllBtn'),
       count5Btn: document.getElementById('count5Btn'),
-      count7Btn: document.getElementById('count7Btn'),
-      countRow: document.getElementById('countRow'),
+      count10Btn: document.getElementById('count10Btn'),
       parseBtn: document.getElementById('parseBtn'),
       spinBtn: document.getElementById('spinBtn'),
       autoBtn: document.getElementById('autoBtn'),
       resetBtn: document.getElementById('resetBtn'),
       rawInput: document.getElementById('rawInput'),
       statusText: document.getElementById('statusText'),
+      slotWindow: document.getElementById('slotWindow'),
       slotTrack: document.getElementById('slotTrack'),
       slotFrame: document.getElementById('slotFrame'),
       liveName: document.getElementById('liveName'),
       liveSub: document.getElementById('liveSub'),
-      candidateList: document.getElementById('candidateList'),
-      topLikeTitle: document.getElementById('topLikeTitle'),
-      topLikeMeta: document.getElementById('topLikeMeta'),
-      topViewTitle: document.getElementById('topViewTitle'),
-      topViewMeta: document.getElementById('topViewMeta'),
-      topCommentTitle: document.getElementById('topCommentTitle'),
-      topCommentMeta: document.getElementById('topCommentMeta'),
       resultList: document.getElementById('resultList'),
+      ticketSummary: document.getElementById('ticketSummary'),
       popup: document.getElementById('popup'),
+      popupTitle: document.getElementById('popupTitle'),
+      popupSub: document.getElementById('popupSub'),
       popupList: document.getElementById('popupList'),
-      popupClose: document.getElementById('popupClose')
+      popupClose: document.getElementById('popupClose'),
+      popupBottomText: document.getElementById('popupBottomText'),
+      winnerMessage: document.getElementById('winnerMessage'),
+      machineBadge: document.getElementById('machineBadge')
     };
 
     function escapeHtml(str){
@@ -930,7 +902,7 @@ Ten
 
     function getRowHeight(){
       const v = getComputedStyle(document.documentElement).getPropertyValue('--row-height').trim();
-      return parseFloat(v) || 82;
+      return parseFloat(v) || 88;
     }
 
     function getCenterIndexForWindow(){
@@ -978,100 +950,84 @@ Ten
       }));
     }
 
-    function sortByMetric(posts, metric){
-      return [...posts].sort((a, b) => {
-        if(b[metric] !== a[metric]) return b[metric] - a[metric];
-        if(b.views !== a.views) return b.views - a.views;
-        if(b.likes !== a.likes) return b.likes - a.likes;
-        if(b.comments !== a.comments) return b.comments - a.comments;
-        return a.id - b.id;
-      });
-    }
-
-    function pickTop(posts, metric, excludedAuthors = new Set()){
-      const filtered = posts.filter(p => !excludedAuthors.has(p.author));
-      return sortByMetric(filtered, metric)[0] || null;
-    }
-
-    function uniqueAuthorEntries(posts, excludedAuthors = new Set(), excludedWinnerAuthors = new Set()){
-      const map = new Map();
+    function buildAuthorTickets(posts){
+      const authorMap = new Map();
 
       for(const post of posts){
-        if(excludedAuthors.has(post.author)) continue;
-        if(excludedWinnerAuthors.has(post.author)) continue;
-        if(!map.has(post.author)){
-          map.set(post.author, {
+        if(EXCLUDED_AUTHORS.has(post.author)) continue;
+
+        if(!authorMap.has(post.author)){
+          authorMap.set(post.author, {
             author: post.author,
+            ticketCount: 0,
             representative: post,
-            posts: [post]
+            posts: []
           });
-        }else{
-          map.get(post.author).posts.push(post);
         }
+
+        const entry = authorMap.get(post.author);
+        entry.ticketCount += 1;
+        entry.posts.push(post);
       }
 
-      return [...map.values()];
-    }
-
-    function buildAutoWinners(){
-      state.autoWinners = { like: null, view: null, comment: null };
-      state.excludedAuthors = new Set();
-
-      const likeWinner = pickTop(state.posts, 'likes', state.excludedAuthors);
-      if(likeWinner) state.excludedAuthors.add(likeWinner.author);
-
-      const viewWinner = pickTop(state.posts, 'views', state.excludedAuthors);
-      if(viewWinner) state.excludedAuthors.add(viewWinner.author);
-
-      const commentWinner = pickTop(state.posts, 'comments', state.excludedAuthors);
-      if(commentWinner) state.excludedAuthors.add(commentWinner.author);
-
-      state.autoWinners.like = likeWinner;
-      state.autoWinners.view = viewWinner;
-      state.autoWinners.comment = commentWinner;
-
-      state.remainingAuthors = uniqueAuthorEntries(state.posts, state.excludedAuthors, new Set());
-    }
-
-    function getCountTarget(){
-      if(state.mode !== 'all') return 0;
-      return state.extraMode === '5' ? 5 : 7;
+      return [...authorMap.values()].sort((a, b) => {
+        if(b.ticketCount !== a.ticketCount) return b.ticketCount - a.ticketCount;
+        return a.author.localeCompare(b.author, 'ko');
+      });
     }
 
     function getCurrentWinnerAuthors(){
       return new Set(state.results.map(v => v.author));
     }
 
-    function getAuthorPoolForCurrentAllMode(){
-      const resultAuthors = getCurrentWinnerAuthors();
+    function buildAvailableTickets(){
+      const winnerAuthors = getCurrentWinnerAuthors();
+      const tickets = [];
 
-      if(state.extraMode === '5'){
-        return uniqueAuthorEntries(state.posts, new Set(), resultAuthors);
+      for(const entry of state.authorTickets){
+        if(winnerAuthors.has(entry.author)) continue;
+
+        for(let i = 0; i < entry.ticketCount; i++){
+          tickets.push({
+            author: entry.author,
+            representative: entry.representative,
+            ticketNo: i + 1,
+            totalTickets: entry.ticketCount
+          });
+        }
       }
 
-      return uniqueAuthorEntries(state.posts, state.excludedAuthors, resultAuthors);
+      return tickets;
+    }
+
+    function getRemainingAuthorEntries(){
+      const winnerAuthors = getCurrentWinnerAuthors();
+      return state.authorTickets.filter(entry => !winnerAuthors.has(entry.author));
+    }
+
+    function getCountTarget(){
+      return state.extraMode === '5' ? 5 : 10;
     }
 
     function getTokenType(idx){
       return idx === 0 ? 'green' : (idx % 2 ? 'red' : 'black');
     }
 
-    function buildTrackItems(sourceEntries){
-      if(!sourceEntries.length){
+    function buildTrackItems(sourceTickets){
+      if(!sourceTickets.length){
         return [{
           author: '',
           label: '대기 중',
           representative: null,
-          posts: [],
+          ticketNo: 0,
+          totalTickets: 0,
           type: 'green'
         }];
       }
 
-      return sourceEntries.map((entry, idx) => ({
-        author: entry.author,
-        label: entry.author,
-        representative: entry.representative,
-        posts: entry.posts,
+      return sourceTickets.map((ticket, idx) => ({
+        ...ticket,
+        label: ticket.author,
         type: getTokenType(idx)
       }));
     }
@@ -1080,7 +1036,7 @@ Ten
       state.currentTrackItems = items;
 
       const repeated = [];
-      const repeatCount = items.length === 1 ? 7 : 30;
+      const repeatCount = items.length === 1 ? 7 : 18;
 
       for(let r = 0; r < repeatCount; r++){
         for(let i = 0; i < items.length; i++){
@@ -1091,8 +1047,10 @@ Ten
         }
       }
 
-      els.slotTrack.innerHTML = repeated.map(item => `
-        <div class="slot-row" data-author="${escapeHtml(item.author)}">
+      state.currentRenderedItems = repeated;
+
+      els.slotTrack.innerHTML = repeated.map((item, renderIndex) => `
+        <div class="slot-row" data-render-index="${renderIndex}" data-author="${escapeHtml(item.author)}">
           <div class="slot-token ${item.type}">
             <span class="slot-author">${escapeHtml(item.label)}</span>
           </div>
@@ -1112,115 +1070,59 @@ Ten
     }
 
     function renderTrackPreview(){
-      if(state.mode === 'top'){
-        const list = [
-          state.autoWinners.like,
-          state.autoWinners.view,
-          state.autoWinners.comment
-        ].filter(Boolean).map(post => ({
-          author: post.author,
-          representative: post,
-          posts: [post]
-        }));
-        renderTrack(buildTrackItems(list));
-      } else {
-        renderTrack(buildTrackItems(getAuthorPoolForCurrentAllMode()));
-      }
-
-      setTrackOffset(state.currentOffset);
+      const tickets = buildAvailableTickets();
+      renderTrack(buildTrackItems(tickets));
+      setTrackOffset(0);
     }
 
-    function renderCandidateList(){
-      const source = state.mode === 'top'
-        ? [state.autoWinners.like, state.autoWinners.view, state.autoWinners.comment].filter(Boolean).map(post => ({
-            author: post.author,
-            representative: post,
-            posts: [post]
-          }))
-        : getAuthorPoolForCurrentAllMode();
+    function renderTicketSummary(){
+      const entries = getRemainingAuthorEntries();
 
-      if(!source.length){
-        els.candidateList.innerHTML = `
-          <div class="candidate-item">
-            <div class="candidate-no">-</div>
-            <div class="candidate-text">
-              <div class="candidate-name">후보 없음</div>
-              <div class="candidate-meta">데이터 분석 후 표시돼</div>
+      if(!state.authorTickets.length){
+        els.ticketSummary.innerHTML = `
+          <div class="ticket-item">
+            <div class="ticket-rank">-</div>
+            <div class="ticket-text">
+              <div class="ticket-title">표시할 인원이 없어</div>
+              <div class="ticket-meta"></div>
             </div>
           </div>
         `;
         return;
       }
 
-      els.candidateList.innerHTML = source.map((entry, idx) => `
-        <div class="candidate-item">
-          <div class="candidate-no">${formatNo(idx + 1)}</div>
-          <div class="candidate-text">
-            <div class="candidate-name">${escapeHtml(entry.author)}</div>
-            <div class="candidate-meta">게시글 ${entry.posts.length}개 | 대표글: ${escapeHtml(entry.representative.title)}</div>
+      if(!entries.length){
+        els.ticketSummary.innerHTML = `
+          <div class="ticket-item">
+            <div class="ticket-rank">-</div>
+            <div class="ticket-text">
+              <div class="ticket-title">남은 추첨 인원이 없어</div>
+              <div class="ticket-meta"></div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      els.ticketSummary.innerHTML = entries.map((entry, idx) => `
+        <div class="ticket-item">
+          <div class="ticket-rank">${idx + 1}</div>
+          <div class="ticket-text">
+            <div class="ticket-title">${escapeHtml(entry.author)} 추첨권 ${entry.ticketCount}장</div>
+            <div class="ticket-meta">게시글 ${entry.ticketCount}개 작성</div>
           </div>
         </div>
       `).join('');
     }
 
-    function renderTopBoxes(){
-      const like = state.autoWinners.like;
-      const view = state.autoWinners.view;
-      const comment = state.autoWinners.comment;
-
-      els.topLikeTitle.textContent = like ? like.author : '-';
-      els.topLikeMeta.textContent = like ? `${like.title} | 좋아요 ${like.likes}` : '-';
-
-      els.topViewTitle.textContent = view ? view.author : '-';
-      els.topViewMeta.textContent = view ? `${view.title} | 조회수 ${view.views}` : '-';
-
-      els.topCommentTitle.textContent = comment ? comment.author : '-';
-      els.topCommentMeta.textContent = comment ? `${comment.title} | 댓글 ${comment.comments}` : '-';
-    }
-
     function renderResults(){
-      if(state.mode === 'top'){
-        if(!state.topFinished){
-          els.resultList.innerHTML = `
-            <div class="result-item">
-              <div class="result-rank">-</div>
-              <div class="result-text">
-                <div class="result-title">아직 결과가 없어</div>
-                <div class="result-meta">슬롯 시작 후 최종 결과가 표시돼</div>
-              </div>
-            </div>
-          `;
-          return;
-        }
-
-        const resultItems = [];
-        if(state.autoWinners.like) resultItems.push({ rank:'L', label:'좋아요 1등', post:state.autoWinners.like });
-        if(state.autoWinners.view) resultItems.push({ rank:'V', label:'조회수 1등', post:state.autoWinners.view });
-        if(state.autoWinners.comment) resultItems.push({ rank:'C', label:'댓글수 1등', post:state.autoWinners.comment });
-
-        els.resultList.innerHTML = resultItems.map(item => `
-          <div class="result-item">
-            <div class="result-rank">${item.rank}</div>
-            <div class="result-text">
-              <div class="result-title">${escapeHtml(item.post.author)} - ${escapeHtml(item.post.title)}</div>
-              <div class="result-meta">${escapeHtml(item.label)} | 게시글 기준 선정 | 고정번호 #${formatNo(item.post.fixedNo)} | ${escapeHtml(item.post.date)} | 조회수 ${item.post.views} | 좋아요 ${item.post.likes} | 댓글 ${item.post.comments}</div>
-            </div>
-          </div>
-        `).join('');
-        return;
-      }
-
       if(!state.results.length){
-        const meta = state.extraMode === '5'
-          ? '작성자 기준으로 중복 없이 5명을 추첨해'
-          : '1등 작성자 제외 후 남은 작성자 중 7명을 추첨해';
-
         els.resultList.innerHTML = `
           <div class="result-item">
             <div class="result-rank">-</div>
             <div class="result-text">
-              <div class="result-title">추가 추첨 결과가 아직 없어</div>
-              <div class="result-meta">${meta}</div>
+              <div class="result-title">아직 당첨 결과가 없어</div>
+              <div class="result-meta">${getCountTarget()}명 추첨 결과가 여기에 표시돼</div>
             </div>
           </div>
         `;
@@ -1231,8 +1133,8 @@ Ten
         <div class="result-item">
           <div class="result-rank">${idx + 1}</div>
           <div class="result-text">
-            <div class="result-title">${escapeHtml(entry.author)} - 대표글: ${escapeHtml(entry.representative.title)}</div>
-            <div class="result-meta">작성자 기준 당첨 | 해당 작성자 게시글 ${entry.posts.length}개 | 대표글 고정번호 #${formatNo(entry.representative.fixedNo)} | ${escapeHtml(entry.representative.date)} | 조회수 ${entry.representative.views} | 좋아요 ${entry.representative.likes} | 댓글 ${entry.representative.comments}</div>
+            <div class="result-title">${escapeHtml(entry.author)}님 1만원 당첨을 축하합니다.</div>
+            <div class="result-meta">추첨권 ${entry.totalTickets}장</div>
           </div>
         </div>
       `).join('');
@@ -1240,42 +1142,30 @@ Ten
 
     function updateButtons(){
       const hasPosts = state.posts.length > 0;
-      const canSpinTop = hasPosts && state.mode === 'top' && !state.spinning;
       const targetCount = getCountTarget();
-      const currentPool = getAuthorPoolForCurrentAllMode();
-      const canSpinAll = hasPosts && state.mode === 'all' && !state.spinning && state.results.length < targetCount && currentPool.length > 0;
+      const currentPool = buildAvailableTickets();
+      const remainingAuthors = getRemainingAuthorEntries().length;
+      const canSpin = hasPosts && !state.spinning && state.results.length < targetCount && currentPool.length > 0 && remainingAuthors > 0;
 
-      els.spinBtn.disabled = !(canSpinTop || canSpinAll);
-      els.autoBtn.disabled = !(hasPosts && !state.spinning && (
-        state.mode === 'top' || (state.mode === 'all' && state.results.length < targetCount && currentPool.length > 0)
-      ));
+      els.spinBtn.disabled = !canSpin;
+      els.autoBtn.disabled = !canSpin;
+    }
+
+    function updateMachineBadge(){
+      const target = getCountTarget();
+      const remain = Math.max(0, target - state.results.length);
+      els.machineBadge.textContent = `${target}명 추첨 | 남은 인원 ${remain}명`;
     }
 
     function setLiveEntry(entry, prefix = ''){
       if(!entry){
         els.liveName.textContent = '대기 중';
-        els.liveSub.textContent = '데이터 분석 후 슬롯을 시작해줘';
+        els.liveSub.textContent = '';
         return;
       }
 
-      const rep = entry.representative;
       els.liveName.textContent = prefix ? `${prefix} ${entry.author}` : entry.author;
-      if(rep){
-        els.liveSub.textContent = `게시글 ${entry.posts.length}개 | 대표글: ${rep.title} | 고정번호 #${formatNo(rep.fixedNo)} | ${rep.date}`;
-      } else {
-        els.liveSub.textContent = '대표글 정보 없음';
-      }
-    }
-
-    function setLivePost(post, prefix = ''){
-      if(!post){
-        els.liveName.textContent = '대기 중';
-        els.liveSub.textContent = '데이터 분석 후 슬롯을 시작해줘';
-        return;
-      }
-
-      els.liveName.textContent = prefix ? `${prefix} ${post.author}` : post.author;
-      els.liveSub.textContent = `${post.title} | 고정번호 #${formatNo(post.fixedNo)} | ${post.date} | 조회수 ${post.views} | 좋아요 ${post.likes} | 댓글 ${post.comments}`;
+      els.liveSub.textContent = `추첨권 ${entry.totalTickets}장`;
     }
 
     function closePopup(force = false){
@@ -1283,59 +1173,40 @@ Ten
       els.popup.classList.remove('show');
     }
 
-    async function showWinnerPopup(label, entryOrPost, autoClose = true){
-      const isAuthorEntry = entryOrPost && Array.isArray(entryOrPost.posts);
+    async function showWinnerPopup(entry, autoClose = true){
+      els.popupTitle.textContent = `${state.results.length}번째 당첨`;
+      els.winnerMessage.textContent = `${entry.author}님 당첨을 축하합니다.`;
+      els.popupSub.textContent = `구글 기프트카드 1만원`;
+      els.popupBottomText.textContent = `킹샷카페 오늘하루 게시판 이벤트 많은 관심 부탁드립니다.`;
 
-      if(isAuthorEntry){
-        const rep = entryOrPost.representative;
-        els.popupList.innerHTML = `
-          <div class="popup-item">
-            <strong>${escapeHtml(label)} | ${escapeHtml(entryOrPost.author)}</strong>
-            <span>작성자 기준 당첨 | 게시글 ${entryOrPost.posts.length}개 | 대표글: ${escapeHtml(rep.title)} | 고정번호 #${formatNo(rep.fixedNo)} | ${escapeHtml(rep.date)}</span>
-          </div>
-        `;
-      } else {
-        const post = entryOrPost;
-        els.popupList.innerHTML = `
-          <div class="popup-item">
-            <strong>${escapeHtml(label)} | ${escapeHtml(post.author)}</strong>
-            <span>${escapeHtml(post.title)} | 고정번호 #${formatNo(post.fixedNo)} | ${escapeHtml(post.date)} | 조회수 ${post.views} | 좋아요 ${post.likes} | 댓글 ${post.comments}</span>
-          </div>
-        `;
-      }
+      els.popupList.innerHTML = `
+        <div class="popup-item">
+          <strong>${escapeHtml(entry.author)}님 1만원 당첨</strong>
+          <span>추첨권 ${entry.totalTickets}장</span>
+        </div>
+      `;
 
       els.popup.classList.add('show');
 
       if(!autoClose) return;
 
       state.popupLocked = true;
-      await sleep(1300);
+      await sleep(1500);
       state.popupLocked = false;
       closePopup(true);
       await sleep(180);
     }
 
-    function showFinalTopPopup(){
-      const list = [];
-      if(state.autoWinners.like) list.push({ label:'좋아요 1등', post:state.autoWinners.like });
-      if(state.autoWinners.view) list.push({ label:'조회수 1등', post:state.autoWinners.view });
-      if(state.autoWinners.comment) list.push({ label:'댓글수 1등', post:state.autoWinners.comment });
+    function showFinalPopup(){
+      els.popupTitle.textContent = `최종 당첨자 ${state.results.length}명`;
+      els.winnerMessage.textContent = `최종 당첨자 전원 1만원 당첨을 축하합니다.`;
+      els.popupSub.textContent = `구글 기프트카드 1만원`;
+      els.popupBottomText.textContent = `킹샷카페 오늘하루 게시판 이벤트 많은 관심 부탁드립니다.`;
 
-      els.popupList.innerHTML = list.map((item, idx) => `
-        <div class="popup-item">
-          <strong>${formatNo(idx + 1)} | ${escapeHtml(item.label)} - ${escapeHtml(item.post.author)}</strong>
-          <span>${escapeHtml(item.post.title)} | 고정번호 #${formatNo(item.post.fixedNo)} | ${escapeHtml(item.post.date)} | 조회수 ${item.post.views} | 좋아요 ${item.post.likes} | 댓글 ${item.post.comments}</span>
-        </div>
-      `).join('');
-
-      els.popup.classList.add('show');
-    }
-
-    function showFinalAllPopup(){
       els.popupList.innerHTML = state.results.map((entry, idx) => `
         <div class="popup-item">
-          <strong>${formatNo(idx + 1)} | ${escapeHtml(entry.author)}</strong>
-          <span>작성자 기준 당첨 | 게시글 ${entry.posts.length}개 | 대표글: ${escapeHtml(entry.representative.title)} | 고정번호 #${formatNo(entry.representative.fixedNo)} | ${escapeHtml(entry.representative.date)}</span>
+          <strong>${formatNo(idx + 1)}. ${escapeHtml(entry.author)}님</strong>
+          <span>구글 기프트카드 1만원 당첨 | 추첨권 ${entry.totalTickets}장</span>
         </div>
       `).join('');
 
@@ -1355,7 +1226,7 @@ Ten
 
           if(t < 1){
             requestAnimationFrame(frame);
-          }else{
+          } else {
             resolve();
           }
         }
@@ -1364,12 +1235,41 @@ Ten
       });
     }
 
+    function getCenteredRenderedItem(){
+      const rows = els.slotTrack.querySelectorAll('.slot-row');
+      if(!rows.length) return null;
+
+      const frameRect = els.slotFrame.getBoundingClientRect();
+      const frameCenterY = frameRect.top + (frameRect.height / 2);
+
+      let closestRow = null;
+      let closestDistance = Infinity;
+
+      rows.forEach(row => {
+        const rect = row.getBoundingClientRect();
+        const rowCenterY = rect.top + (rect.height / 2);
+        const distance = Math.abs(rowCenterY - frameCenterY);
+
+        if(distance < closestDistance){
+          closestDistance = distance;
+          closestRow = row;
+        }
+      });
+
+      if(!closestRow) return null;
+
+      const renderIndex = Number(closestRow.dataset.renderIndex);
+      if(Number.isNaN(renderIndex)) return null;
+
+      return state.currentRenderedItems[renderIndex] || null;
+    }
+
     async function animateSlotAndGetWinner(){
       const items = state.currentTrackItems;
       const total = items.length;
 
       if(!total){
-        return { winnerIndex: 0, winnerEntry: null };
+        return null;
       }
 
       if(total === 1){
@@ -1379,12 +1279,12 @@ Ten
 
         const winnerEntry = items[0] || null;
         if(winnerEntry) setLiveEntry(winnerEntry, '당첨');
-        return { winnerIndex: 0, winnerEntry };
+        return winnerEntry;
       }
 
       const rowH = getRowHeight();
-      const start = state.currentOffset;
-      const baseLoops = 12 + Math.floor(Math.random() * 3);
+      const start = 0;
+      const baseLoops = 10 + Math.floor(Math.random() * 3);
       const winnerIndex = Math.floor(Math.random() * total);
 
       const absoluteIndexForWinner = baseLoops * total + winnerIndex + getCenterIndexForWindow();
@@ -1396,31 +1296,25 @@ Ten
 
       els.slotFrame.classList.add('glow');
 
-      await animateTrack(start, phase1, 4200, easeOutCubic);
-      await animateTrack(phase1, phase2, 260, easeOutCubic);
-      await animateTrack(phase2, finalTarget, 190, easeOutCubic);
+      await animateTrack(start, phase1, 3900, easeOutCubic);
+      await animateTrack(phase1, phase2, 240, easeOutCubic);
+      await animateTrack(phase2, finalTarget, 180, easeOutCubic);
 
       els.slotFrame.classList.remove('glow');
-      setTrackOffset(finalTarget);
 
-      const winnerEntry = items[winnerIndex] || null;
+      const snappedFinalTarget = Math.round(finalTarget / rowH) * rowH;
+      setTrackOffset(snappedFinalTarget);
+
+      await sleep(30);
+
+      const centeredItem = getCenteredRenderedItem();
+      const winnerEntry = centeredItem || items[winnerIndex] || null;
+
       if(winnerEntry){
         setLiveEntry(winnerEntry, '당첨');
       }
 
-      return { winnerIndex, winnerEntry };
-    }
-
-    function resetRunOnly(){
-      state.results = [];
-      state.currentOffset = 0;
-      state.topFinished = false;
-      closePopup(true);
-      renderTrackPreview();
-      renderCandidateList();
-      renderResults();
-      setLiveEntry(null);
-      updateButtons();
+      return winnerEntry;
     }
 
     function analyzeData(){
@@ -1428,81 +1322,43 @@ Ten
       const posts = assignFixedNumbers(parsed);
 
       state.posts = posts;
+      state.authorTickets = buildAuthorTickets(posts);
       state.results = [];
       state.spinning = false;
       state.currentOffset = 0;
       state.popupLocked = false;
-      state.topFinished = false;
 
       if(!posts.length){
-        els.statusText.textContent = '파싱 실패. 붙여넣은 형식을 다시 확인해줘.';
-        renderTopBoxes();
+        els.statusText.textContent = '파싱 실패';
         renderTrack(buildTrackItems([]));
-        renderCandidateList();
+        renderTicketSummary();
         renderResults();
         setLiveEntry(null);
+        updateMachineBadge();
         updateButtons();
         return;
       }
 
-      buildAutoWinners();
-      renderTopBoxes();
       renderTrackPreview();
-      renderCandidateList();
+      renderTicketSummary();
       renderResults();
       setLiveEntry(null);
 
-      const totalAuthors = uniqueAuthorEntries(state.posts).length;
-      els.statusText.textContent = `분석 완료 | 전체 게시글 ${state.posts.length}개 | 전체 작성자 ${totalAuthors}명`;
+      const totalAuthors = state.authorTickets.length;
+      const totalTickets = state.authorTickets.reduce((sum, entry) => sum + entry.ticketCount, 0);
+      const summaryText = state.authorTickets
+        .map(entry => `${entry.author} 추첨권 ${entry.ticketCount}장`)
+        .join(' | ');
+
+      els.statusText.textContent =
+        `전체 게시글 ${state.posts.length}개 | 전체 작성자 ${totalAuthors}명 | 전체 추첨권 ${totalTickets}장\n${summaryText}`;
+
+      updateMachineBadge();
       updateButtons();
-    }
-
-    async function spinTopMode(){
-      const sequence = [
-        { label:'좋아요 1등', post:state.autoWinners.like },
-        { label:'조회수 1등', post:state.autoWinners.view },
-        { label:'댓글수 1등', post:state.autoWinners.comment }
-      ].filter(v => v.post);
-
-      if(!sequence.length) return;
-
-      state.spinning = true;
-      updateButtons();
-
-      for(let i = 0; i < sequence.length; i++){
-        const step = sequence[i];
-        const singleEntry = {
-          author: step.post.author,
-          representative: step.post,
-          posts: [step.post]
-        };
-
-        renderTrack(buildTrackItems([singleEntry]));
-        renderCandidateList();
-        state.currentOffset = 0;
-        setTrackOffset(getTrackCenterOffsetForAbsoluteIndex(1));
-        setLivePost(step.post, '당첨');
-
-        await sleep(260);
-        await showWinnerPopup(step.label, step.post, true);
-
-        if(i < sequence.length - 1){
-          await sleep(160);
-        }
-      }
-
-      state.spinning = false;
-      state.currentOffset = 0;
-      state.topFinished = true;
-      renderTrackPreview();
-      renderCandidateList();
-      renderResults();
-      updateButtons();
-      showFinalTopPopup();
     }
 
     async function spinAllModeOnce(){
-      const pool = getAuthorPoolForCurrentAllMode();
+      const pool = buildAvailableTickets();
       const targetCount = getCountTarget();
 
       if(!pool.length) return;
@@ -1512,10 +1368,9 @@ Ten
       updateButtons();
 
       renderTrack(buildTrackItems(pool));
-      renderCandidateList();
+      setTrackOffset(0);
 
-      const spinResult = await animateSlotAndGetWinner();
-      const winnerEntry = spinResult.winnerEntry;
+      const winnerEntry = await animateSlotAndGetWinner();
 
       if(!winnerEntry){
         state.spinning = false;
@@ -1523,27 +1378,32 @@ Ten
         return;
       }
 
-      if(!state.results.some(v => v.author === winnerEntry.author)){
-        state.results.push(winnerEntry);
+      const finalWinner = {
+        author: winnerEntry.author,
+        totalTickets: winnerEntry.totalTickets
+      };
+
+      if(!state.results.some(v => v.author === finalWinner.author)){
+        state.results.push(finalWinner);
       }
 
       renderResults();
-      await showWinnerPopup(`${state.results.length}번째 당첨`, winnerEntry, true);
+      renderTicketSummary();
+      updateMachineBadge();
+      await showWinnerPopup(finalWinner, true);
 
       state.currentOffset = 0;
       renderTrackPreview();
-      renderCandidateList();
 
       const remain = targetCount - state.results.length;
-      const leftPool = getAuthorPoolForCurrentAllMode();
-      const leftNames = leftPool.map(v => v.author).join(', ');
-      els.statusText.textContent = `추첨 진행 중 | 당첨자 ${winnerEntry.author} 제거 완료 | 남은 ${remain}명 | 남은 작성자 ${leftNames || '-'}`;
+      const leftPool = buildAvailableTickets().length;
+      els.statusText.textContent = `남은 인원 ${remain}명 | 남은 추첨권 ${leftPool}장`;
 
       state.spinning = false;
       updateButtons();
 
-      if(state.results.length >= targetCount || getAuthorPoolForCurrentAllMode().length === 0){
-        showFinalAllPopup();
+      if(state.results.length >= targetCount || getRemainingAuthorEntries().length === 0){
+        showFinalPopup();
       }
     }
 
@@ -1552,12 +1412,7 @@ Ten
       if(!state.posts.length) return;
 
       closePopup(true);
-
-      if(state.mode === 'top'){
-        await spinTopMode();
-      } else {
-        await spinAllModeOnce();
-      }
+      await spinAllModeOnce();
     }
 
     async function autoRun(){
@@ -1565,69 +1420,57 @@ Ten
 
       closePopup(true);
 
-      if(state.mode === 'top'){
-        await spinTopMode();
-        return;
-      }
-
-      while(!state.spinning && state.results.length < getCountTarget() && getAuthorPoolForCurrentAllMode().length > 0){
+      while(!state.spinning && state.results.length < getCountTarget() && getRemainingAuthorEntries().length > 0){
         await spinAllModeOnce();
 
         if(state.results.length < getCountTarget()){
           closePopup(true);
-          await sleep(500);
+          await sleep(420);
         }
       }
     }
 
     function resetAll(){
       state.posts = [];
-      state.autoWinners = { like: null, view: null, comment: null };
-      state.excludedAuthors = new Set();
-      state.remainingAuthors = [];
+      state.authorTickets = [];
       state.results = [];
       state.spinning = false;
       state.currentTrackItems = [];
+      state.currentRenderedItems = [];
       state.currentOffset = 0;
       state.popupLocked = false;
-      state.topFinished = false;
 
+      els.rawInput.value = '';
       els.statusText.textContent = '초기화 완료';
-      els.topLikeTitle.textContent = '-';
-      els.topLikeMeta.textContent = '-';
-      els.topViewTitle.textContent = '-';
-      els.topViewMeta.textContent = '-';
-      els.topCommentTitle.textContent = '-';
-      els.topCommentMeta.textContent = '-';
-
       closePopup(true);
 
       renderTrack(buildTrackItems([]));
-      renderCandidateList();
+      renderTicketSummary();
       renderResults();
       setLiveEntry(null);
+      updateMachineBadge();
       updateButtons();
-    }
-
-    function setMode(mode){
-      state.mode = mode;
-      els.modeTopBtn.classList.toggle('active', mode === 'top');
-      els.modeAllBtn.classList.toggle('active', mode === 'all');
-      els.countRow.classList.toggle('hide', mode !== 'all');
-      resetRunOnly();
     }
 
     function setExtraMode(value){
       state.extraMode = value;
       els.count5Btn.classList.toggle('active', value === '5');
-      els.count7Btn.classList.toggle('active', value === '7');
-      resetRunOnly();
+      els.count10Btn.classList.toggle('active', value === '10');
+
+      state.results = [];
+      state.currentOffset = 0;
+      closePopup(true);
+
+      renderTrackPreview();
+      renderTicketSummary();
+      renderResults();
+      setLiveEntry(null);
+      updateMachineBadge();
+      updateButtons();
     }
 
-    els.modeTopBtn.addEventListener('click', () => setMode('top'));
-    els.modeAllBtn.addEventListener('click', () => setMode('all'));
     els.count5Btn.addEventListener('click', () => setExtraMode('5'));
-    els.count7Btn.addEventListener('click', () => setExtraMode('7'));
+    els.count10Btn.addEventListener('click', () => setExtraMode('10'));
     els.parseBtn.addEventListener('click', analyzeData);
     els.spinBtn.addEventListener('click', spinMain);
     els.autoBtn.addEventListener('click', autoRun);
@@ -1637,12 +1480,11 @@ Ten
       if(e.target === els.popup) closePopup();
     });
 
-    setMode('top');
-    setExtraMode('5');
     renderTrack(buildTrackItems([]));
-    renderCandidateList();
+    renderTicketSummary();
     renderResults();
     setLiveEntry(null);
+    updateMachineBadge();
     updateButtons();
   </script>
 </body>

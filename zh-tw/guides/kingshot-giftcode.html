@@ -1,26 +1,26 @@
 <!doctype html>
-<html lang="zh-Hant" dir="ltr">
+<html lang="zh-Hant">
 <head>
   <base href="/" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Kingshot 禮包碼・最新兌換碼、輸入方式、過期碼紀錄整理</title>
-  <meta name="description" content="Kingshot 最新禮包碼與兌換碼輸入方式整理在同一頁。可查看目前可用代碼、已過期活動碼紀錄、官方兌換頁面連結，以及常見問題與排錯說明。" />
-  <meta name="keywords" content="Kingshot 禮包碼, Kingshot 兌換碼, Kingshot coupon, Kingshot gift code, Kingshot 代碼, Kingshot 兌換, Kingshot 最新禮包碼" />
+  <title>2026年4月 禮包碼與兌換碼 - Kingshot</title>
+  <meta name="description" content="整理 iOS 與 Android 可用與已過期的 Kingshot 禮包碼與兌換碼，同時提供攻略資訊與官方輸入入口。" />
+  <meta name="keywords" content="Kingshot 禮包碼, Kingshot 兌換碼, Kingshot 優惠碼, Kingshot 最新序號, Kingshot 禮包碼輸入, Kingshot 攻略, Kingshot gift code, Kingshot redeem code, Kingshot coupon, Kingshot guide" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
 
-  <meta property="og:title" content="Kingshot 禮包碼・最新兌換碼、輸入方式、過期碼紀錄整理" />
-  <meta property="og:description" content="一次查看 Kingshot 最新禮包碼、已過期活動碼紀錄、官方兌換方式與 FAQ。" />
+  <meta property="og:title" content="2026年4月 禮包碼與兌換碼 - Kingshot" />
+  <meta property="og:description" content="整理 iOS 與 Android 可用與已過期的 Kingshot 禮包碼與兌換碼，同時提供攻略資訊與官方輸入入口。" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://kingshotdata.kr/zh-tw/guides/kingshot-giftcode.html" />
   <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
-  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:site_name" content="KingshotData" />
   <meta property="og:locale" content="zh_TW" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Kingshot 禮包碼・最新兌換碼、輸入方式、過期碼紀錄整理" />
-  <meta name="twitter:description" content="查看 Kingshot 最新禮包碼、輸入方式、過期活動碼紀錄與官方兌換連結。" />
+  <meta name="twitter:title" content="2026年4月 禮包碼與兌換碼 - Kingshot" />
+  <meta name="twitter:description" content="整理 iOS 與 Android 可用與已過期的 Kingshot 禮包碼與兌換碼，同時提供攻略資訊與官方輸入入口。" />
   <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
 
   <link rel="canonical" href="https://kingshotdata.kr/zh-tw/guides/kingshot-giftcode.html" />
@@ -37,14 +37,15 @@
     :root{
       --bg:#ffffff;
       --panel:#ffffff;
+      --panel-soft:#f8fafc;
       --border:#e5e7eb;
       --text:#111827;
       --muted:#6b7280;
       --brand:#2563eb;
-
+      --brand-strong:#1d4ed8;
       --radius:16px;
+      --radius-sm:12px;
       --shadow:0 10px 24px rgba(0,0,0,.06);
-
       --ok-bg:#ecfdf3;
       --ok-bd:#86efac;
       --ok-fg:#166534;
@@ -54,7 +55,6 @@
       --new-bg:#e8f0fe;
       --new-bd:#b6ccff;
       --new-fg:#0b57d0;
-
       --header-h:0px;
       --tabs-h:0px;
       --sticky-top:0px;
@@ -64,15 +64,15 @@
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,"Noto Sans TC","Microsoft JhengHei","PingFang TC","Noto Sans",Arial,sans-serif;
+      font:14px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei","Noto Sans TC",Arial,sans-serif;
       color:var(--text);
       background:var(--bg);
+      word-break:keep-all;
     }
     img{max-width:100%;height:auto}
-    a{color:var(--brand); text-decoration:none}
+    a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
-
-    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
 
     header.top{
       display:flex;
@@ -84,401 +84,161 @@
       background:var(--bg);
     }
     .brand a{
-      display:flex; align-items:center; gap:10px;
-      color:var(--text);
-      text-decoration:none;
-      font-weight:900;
-      letter-spacing:.1px;
+      display:flex;align-items:center;gap:10px;
+      color:var(--text);text-decoration:none;font-weight:900;letter-spacing:.1px;
     }
-    .brand img{display:block; width:28px; height:28px; border-radius:8px}
+    .brand img{display:block;width:28px;height:28px;border-radius:8px}
 
     nav.lang{
-      display:flex; gap:8px; flex-wrap:wrap;
-      color:var(--muted); font-size:13px;
+      display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:13px;
     }
     nav.lang a{
-      color:var(--muted);
-      padding:8px 10px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      background:#fff;
-      text-decoration:none;
-      font-weight:700;
+      color:var(--muted);padding:8px 10px;border:1px solid var(--border);border-radius:999px;background:#fff;text-decoration:none;font-weight:700;
     }
-    nav.lang a[aria-current="page"]{color:var(--text); font-weight:900}
+    nav.lang a[aria-current="page"]{color:var(--text);font-weight:900}
 
     nav.section-tabs{
-      display:none;
-      gap:8px;
-      padding:6px 0;
-      margin:0;
-      overflow:auto;
-      -webkit-overflow-scrolling:touch;
-      background:var(--bg);
-      border-bottom:1px solid var(--border);
+      display:none;gap:8px;padding:6px 0;margin:0;overflow:auto;-webkit-overflow-scrolling:touch;background:var(--bg);border-bottom:1px solid var(--border);
     }
     nav.section-tabs a{
-      display:inline-flex;
-      align-items:center;
-      white-space:nowrap;
-      padding:8px 10px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      background:#fff;
-      color:var(--muted);
-      font-size:13px;
-      text-decoration:none;
-      font-weight:700;
+      display:inline-flex;align-items:center;white-space:nowrap;padding:8px 10px;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--muted);font-size:13px;text-decoration:none;font-weight:700;
     }
     nav.section-tabs a:hover{color:var(--text)}
 
-    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
+    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
     .crumbs a{color:var(--muted)}
-    .muted{color:var(--muted)}
 
     .hero{
-      display:grid;
-      grid-template-columns:minmax(0,1fr);
-      gap:18px;
-      padding:18px;
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+      display:grid;grid-template-columns:minmax(0,1fr);gap:18px;padding:22px;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);
     }
-    h1{margin:0 0 8px; font-size:30px; line-height:1.18; letter-spacing:-0.02em}
-    .sub{margin:0; color:var(--muted)}
-    .quote{
-      margin:12px 0 0;
-      padding:10px 12px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fbfdff;
-      color:var(--muted);
-      font-size:13px;
-    }
+    h1{margin:0 0 10px;font-size:32px;line-height:1.16;letter-spacing:-0.03em}
+    .sub{margin:0;color:var(--muted);font-size:15px}
 
     .jump{
-      margin-top:12px;
-      display:flex; gap:10px; flex-wrap:wrap;
-      font-size:13px; color:var(--muted);
+      margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted);
     }
     .jump a{color:var(--muted)}
     .jump a:hover{color:var(--text)}
     .dotsep{opacity:.5}
 
-    .countdown-banner-link{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      gap:16px;
-      align-items:center;
-      margin-top:14px;
-      padding:18px 20px;
-      border:1px solid #d7dbe3;
-      border-radius:18px;
-      background:linear-gradient(135deg,#f8fbff 0%,#ffffff 50%,#f6f8fc 100%);
-      box-shadow:0 10px 24px rgba(11,87,208,.06);
-      text-decoration:none;
-    }
-    .countdown-banner-link:hover{
-      text-decoration:none;
-      transform:translateY(-1px);
-      box-shadow:0 14px 30px rgba(11,87,208,.10);
-    }
-    .countdown-banner-kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#0b57d0;
-      margin-bottom:6px;
-    }
-    .countdown-banner-title{
-      margin:0;
-      color:#111;
-      font-size:30px;
-      line-height:1.15;
-      font-weight:700;
-      letter-spacing:-0.02em;
-      font-family:"Georgia","Times New Roman",serif;
-      font-style:italic;
-    }
-    .countdown-banner-desc{
-      margin:8px 0 0;
-      color:#4b5563;
-      font-size:14px;
-      font-weight:600;
-    }
-    .countdown-banner-cta{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      min-width:210px;
-      padding:12px 18px;
-      border-radius:999px;
-      background:#111;
-      color:#fff;
-      font-size:14px;
-      font-weight:900;
-      white-space:nowrap;
-    }
-    .countdown-banner-link:hover .countdown-banner-cta{color:#fff}
-
-    section{
-      margin-top:22px;
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:18px;
-    }
-    section h2{margin:0 0 10px; font-size:20px}
-    section p{margin:8px 0}
-
     .status-bar{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-      margin-top:12px;
+      display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px;
     }
     .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      font-size:12px;
-      padding:5px 10px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      white-space:nowrap;
-      line-height:1.2;
-      font-weight:800;
+      display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:5px 10px;border-radius:999px;border:1px solid var(--border);white-space:nowrap;line-height:1.2;font-weight:800;
     }
     .badge.active{border-color:var(--ok-bd);color:var(--ok-fg);background:var(--ok-bg)}
     .badge.expired{border-color:var(--bad-bd);color:var(--bad-fg);background:var(--bad-bg)}
     .badge.new{border-color:var(--new-bd);color:var(--new-fg);background:var(--new-bg)}
 
-    .intro-box,
-    .policy-box,
-    .quickcheck,
-    .topup-box{
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fbfbfb;
-      padding:14px 16px;
+    section{
+      margin-top:22px;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;
     }
-    .intro-box p,
-    .policy-box p,
-    .topup-box p{margin:0 0 10px}
-    .intro-box p:last-child,
-    .policy-box p:last-child,
-    .topup-box p:last-child{margin-bottom:0}
+    section h2{margin:0 0 10px;font-size:21px;line-height:1.25;letter-spacing:-0.02em}
+    section p{margin:8px 0}
 
     .hero-cta{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      align-items:center;
-      gap:16px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:16px 18px;
-      background:#fafafa;
+      display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px;border:1px solid var(--border);border-radius:14px;padding:16px 18px;background:#fafafa;
     }
     .cta{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:12px 16px;
-      border-radius:999px;
-      background:#111;
-      color:#fff;
-      text-decoration:none;
-      justify-self:end;
-      white-space:nowrap;
-      max-width:100%;
-      font-weight:900;
+      display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:999px;background:#111;color:#fff;text-decoration:none;justify-self:end;white-space:nowrap;max-width:100%;font-weight:900;
     }
     .cta svg{width:18px;height:18px;fill:currentColor}
     .cta:hover{color:#fff;text-decoration:none}
 
     .grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
-      margin-top:16px;
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px;
     }
-
     .card{
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:14px;
-      background:#fff;
-      display:flex;
-      flex-direction:column;
-      align-items:flex-start;
-      gap:10px;
+      border:1px solid var(--border);border-radius:12px;padding:14px;background:#fff;display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-height:136px;
     }
-    .code{font:700 16px/1 ui-monospace,SFMono-Regular,Consolas,monospace}
+    .code{font:700 16px/1 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.01em}
     .until{font-size:12px;color:var(--muted)}
-    .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:auto}
     .btn{
-      padding:8px 10px;
-      border:1px solid var(--border);
-      border-radius:8px;
-      background:#fff;
-      cursor:pointer;
-      white-space:nowrap;
-      text-decoration:none;
-      color:#111;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:800;
+      padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;white-space:nowrap;text-decoration:none;color:#111;display:inline-flex;align-items:center;justify-content:center;font-weight:800;
     }
     .btn:hover{background:#f5f5f5;text-decoration:none}
-    .btn-primary{
-      background:#111;
-      border-color:#111;
-      color:#fff;
-    }
-    .btn-primary:hover{
-      background:#222;
-      color:#fff;
-    }
+    .btn-primary{background:#111;border-color:#111;color:#fff}
+    .btn-primary:hover{background:#222;color:#fff}
     .card.expired .code{text-decoration:line-through;color:var(--muted)}
 
     ol{margin:8px 0 0 18px}
     .note-txt{font-size:13px;color:var(--muted)}
-    .divider{height:1px;background:#eee;margin:24px 0}
+
+    .countdown-banner-link{
+      display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;padding:18px 20px;border:1px solid #d7dbe3;border-radius:18px;background:linear-gradient(135deg,#f8fbff 0%,#ffffff 50%,#f6f8fc 100%);box-shadow:0 10px 24px rgba(11,87,208,.06);text-decoration:none;
+    }
+    .countdown-banner-link:hover{
+      text-decoration:none;transform:translateY(-1px);box-shadow:0 14px 30px rgba(11,87,208,.10);
+    }
+    .countdown-banner-kicker{
+      display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#0b57d0;margin-bottom:6px;
+    }
+    .countdown-banner-title{
+      margin:0;color:#111;font-size:30px;line-height:1.15;font-weight:700;letter-spacing:-0.02em;font-family:"Georgia","Times New Roman",serif;font-style:italic;
+    }
+    .countdown-banner-desc{
+      margin:8px 0 0;color:#4b5563;font-size:14px;font-weight:600;
+    }
+    .countdown-banner-cta{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:220px;padding:12px 18px;border-radius:999px;background:#111;color:#fff;font-size:14px;font-weight:900;white-space:nowrap;
+    }
+    .countdown-banner-link:hover .countdown-banner-cta{color:#fff}
 
     .quickcheck ul{margin:8px 0 0 18px}
     .quickcheck li{margin:6px 0}
 
-    .faq details{
-      border:1px solid var(--border);
-      border-radius:10px;
-      padding:10px;
-      background:#fff;
-      margin:8px 0;
-    }
-    .faq summary{cursor:pointer;font-weight:800}
-
-    .topup-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:12px;
-    }
-    .topup-actions .btn{
-      padding:11px 14px;
-      border-radius:999px;
-      font-weight:900;
-    }
-
     .related-wrap{margin-top:18px}
     .related-lead{margin:4px 0 0;color:var(--muted);font-size:13px}
     .guides-list{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:14px;
-      padding:10px 0 0;
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:10px 0 0;
     }
-
     .g-block{
-      background:#fff;
-      border:2px solid #5b5e73;
-      border-radius:22px;
-      overflow:hidden;
-      transition:transform .18s ease, box-shadow .18s ease;
+      background:#fff;border:2px solid #5b5e73;border-radius:22px;overflow:hidden;transition:transform .18s ease, box-shadow .18s ease;
     }
     .g-block:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,.06)}
-    .g-link{display:flex;align-items:center;gap:10px;padding:18px 18px;min-height:140px}
-    .tile-icon{flex:0 0 132px;height:132px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .g-link{
+      display:flex;align-items:center;gap:10px;padding:18px 18px;min-height:140px;
+    }
+    .tile-icon{
+      flex:0 0 132px;height:132px;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    }
     .tile-icon img{
-      max-width:112px;max-height:112px;width:auto;height:auto;display:block;object-fit:contain;
-      filter:drop-shadow(0 8px 12px rgba(0,0,0,.18));
+      max-width:112px;max-height:112px;width:auto;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 8px 12px rgba(0,0,0,.18));
     }
     .tile-fallback{
-      display:none;width:112px;height:112px;border-radius:18px;border:1px solid var(--border);
-      background:#f7f7f8;color:var(--brand);font-weight:900;font-size:30px;align-items:center;justify-content:center;
-      user-select:none;
+      display:none;width:112px;height:112px;border-radius:18px;border:1px solid var(--border);background:#f7f7f8;color:var(--brand);font-weight:900;font-size:30px;align-items:center;justify-content:center;user-select:none;
     }
     .tile-icon.is-fallback img{display:none}
     .tile-icon.is-fallback .tile-fallback{display:flex}
     .tile-title{
-      flex:1 1 auto;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      min-width:0;
-      padding:0 6px;
+      flex:1 1 auto;display:flex;align-items:center;justify-content:center;text-align:center;min-width:0;padding:0 6px;
     }
     .g-title{
-      margin:0;
-      font-size:16px;
-      font-weight:800;
-      line-height:1.25;
-      letter-spacing:-0.02em;
-      display:-webkit-box;
-      -webkit-line-clamp:2;
-      -webkit-box-orient:vertical;
-      overflow:hidden;
+      margin:0;font-size:16px;font-weight:800;line-height:1.25;letter-spacing:-0.02em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
     }
 
-    .langx{display:none !important}
-    html[lang^="ko" i] .langx-ko{display:inline !important}
-    html[lang^="en" i] .langx-en{display:inline !important}
-    html[lang^="ja" i] .langx-ja{display:inline !important}
-    html[lang^="zh-Hant" i] .langx-zh-TW{display:inline !important}
-    html:not([lang]) .langx-ko{display:inline !important}
+    .faq details{
+      border:1px solid var(--border);border-radius:10px;padding:10px 12px;background:#fff;margin:8px 0;
+    }
+    .faq summary{cursor:pointer;font-weight:800}
 
     @media (max-width:980px){
       .grid{grid-template-columns:1fr 1fr}
       .guides-list{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
-
     @media (max-width:900px){
-      .wrap{padding:14px 12px 56px}
-      header.top{
-        position:sticky;
-        top:0;
-        z-index:40;
-        padding:10px 16px 12px;
-        margin:0 -12px;
-        background:rgba(255,255,255,.92);
-        backdrop-filter:blur(10px);
-      }
-      nav.section-tabs{
-        display:flex;
-        position:sticky;
-        top:var(--header-h);
-        z-index:35;
-        margin:0 -12px;
-        padding:6px 12px;
-        background:rgba(255,255,255,.92);
-        backdrop-filter:blur(10px);
-      }
-      .hero-cta,
-      .countdown-banner-link{
-        grid-template-columns:1fr;
-      }
-      .cta,
-      .countdown-banner-cta{
-        justify-self:stretch;
-        width:100%;
-        min-width:0;
-        text-align:center;
-      }
+      header.top{position:sticky;top:0;z-index:40}
+      nav.section-tabs{display:flex;position:sticky;top:var(--header-h);z-index:35}
+      .hero-cta,.countdown-banner-link{grid-template-columns:1fr}
+      .cta,.countdown-banner-cta{justify-self:stretch;width:100%;min-width:0;text-align:center}
     }
-
     @media (max-width:640px){
-      h1{font-size:26px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:27px}
       section{padding:14px}
+      .hero{padding:18px}
       .grid{grid-template-columns:1fr}
       .guides-list{grid-template-columns:1fr}
       .countdown-banner-title{font-size:26px}
@@ -489,17 +249,14 @@
   {
     "@context":"https://schema.org",
     "@type":"Article",
-    "headline":"Kingshot 禮包碼・最新兌換碼、輸入方式、過期碼紀錄整理",
-    "description":"Kingshot 最新禮包碼、兌換碼輸入方式、過期碼紀錄與官方兌換頁面連結整理在同一頁。",
+    "headline":"2026年4月 禮包碼與兌換碼 - Kingshot",
+    "description":"整理 iOS 與 Android 可用與已過期的 Kingshot 禮包碼與兌換碼，同時提供攻略資訊與官方輸入入口。",
     "inLanguage":"zh-Hant",
-    "mainEntityOfPage":{
-      "@type":"WebPage",
-      "@id":"https://kingshotdata.kr/zh-tw/guides/kingshot-giftcode.html"
-    },
-    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "mainEntityOfPage":"https://kingshotdata.kr/zh-tw/guides/kingshot-giftcode.html",
+    "author":{"@type":"Organization","name":"KingshotData"},
     "publisher":{
       "@type":"Organization",
-      "name":"Kingshot Data",
+      "name":"KingshotData",
       "logo":{"@type":"ImageObject","url":"https://kingshotdata.kr/img/kingshotdata-og-v5.png"}
     },
     "image":"https://kingshotdata.kr/img/kingshotdata-og-v5.png"
@@ -511,10 +268,10 @@
     "@context":"https://schema.org",
     "@type":"FAQPage",
     "mainEntity":[
-      {"@type":"Question","name":"代碼要在哪裡輸入？","acceptedAnswer":{"@type":"Answer","text":"可在遊戲內的個人資料 → 設定 → 禮包碼兌換，或官方兌換頁面（ks-giftcode.centurygame.com）輸入。"}},
-      {"@type":"Question","name":"代碼無法使用。","acceptedAnswer":{"@type":"Answer","text":"請確認代碼是否完整輸入，並檢查大小寫。同時也請確認是否已過期（UTC）、是否有每個帳號只能使用一次的限制，以及是否有城市中心等級條件。"}},
-      {"@type":"Question","name":"有永久有效的代碼嗎？","acceptedAnswer":{"@type":"Answer","text":"本頁僅整理狀態明確確認過的有效代碼與已過期活動碼紀錄。狀態不明的代碼不會列入有效清單。"}},
-      {"@type":"Question","name":"新的禮包碼多久會出一次？","acceptedAnswer":{"@type":"Answer","text":"發布時間不固定，確認後會立即更新到此頁。建議加入書籤，方便最快查看。"}}
+      {"@type":"Question","name":"Kingshot 禮包碼要在哪裡輸入？","acceptedAnswer":{"@type":"Answer","text":"可在遊戲內的個人檔案 → 設定 → 兌換碼功能輸入，或直接前往官方兌換頁面。"}},
+      {"@type":"Question","name":"iOS 版 Kingshot 要怎麼兌換？","acceptedAnswer":{"@type":"Answer","text":"iOS 版無法在遊戲內直接輸入禮包碼，請使用官方兌換頁面完成兌換。"}},
+      {"@type":"Question","name":"Kingshot 禮包碼無法使用怎麼辦？","acceptedAnswer":{"@type":"Answer","text":"請確認是否完整輸入，並檢查英文大小寫是否正確。另外也請確認有效期限（UTC）、每個帳號只能兌換一次，以及是否有城市中心等級限制。"}},
+      {"@type":"Question","name":"為什麼還保留已過期的碼？","acceptedAnswer":{"@type":"Answer","text":"這些內容主要作為記錄用途。我們會在確認後盡快更新 2026 最新可用禮包碼，建議你常回來查看。"}}
     ]
   }
   </script>
@@ -533,242 +290,190 @@
   <div class="wrap">
     <header class="top">
       <div class="brand">
-        <a href="/zh-tw/" aria-label="Kingshot Data Home">
-          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
-          <span>Kingshot Data</span>
+        <a href="/zh-tw/" aria-label="KingshotData Home">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>KingshotData</span>
         </a>
       </div>
 
       <nav class="lang" aria-label="Language">
-        <a href="/en/guides/kingshot-giftcode.html">EN</a>
-        <a href="/ko/guides/kingshot-giftcode.html">KO</a>
-        <a href="/ja/guides/kingshot-giftcode.html">JA</a>
-        <a href="/zh-tw/guides/kingshot-giftcode.html" aria-current="page">ZH-TW</a>
+        <a data-router-ignore="true" href="/ko/guides/kingshot-giftcode.html">KO</a>
+        <a data-router-ignore="true" href="/en/guides/kingshot-giftcode.html">EN</a>
+        <a data-router-ignore="true" href="/ja/guides/kingshot-giftcode.html">JA</a>
+        <a data-router-ignore="true" href="/zh-tw/guides/kingshot-giftcode.html" aria-current="page">ZH-TW</a>
       </nav>
     </header>
 
     <nav class="section-tabs" aria-label="Section navigation">
-      <a href="#overview">概要</a>
-      <a href="#current-codes">目前代碼</a>
+      <a href="#overview">總覽</a>
+      <a href="#current-codes">可用碼</a>
       <a href="#how-to-use">輸入方式</a>
+      <a href="#coupon-countdown">倒數頁</a>
+      <a href="#commemorative-codes">過期碼</a>
       <a href="#faq">FAQ</a>
     </nav>
 
     <main id="main">
       <div class="crumbs">
         <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
-        <a href="/zh-tw/guides/">指南</a> <span class="muted">›</span>
-        <span>禮包碼</span>
+        <a href="/zh-tw/guides">攻略</a> <span class="muted">›</span>
+        <span>Kingshot 禮包碼</span>
       </div>
 
-      <div class="hero anchor" id="overview">
+      <div class="hero" id="overview">
         <div>
-          <h1>Kingshot 禮包碼・最新兌換碼、輸入方式、過期碼紀錄整理</h1>
-          <p class="sub">官方兌換頁面連結、最新代碼、已過期活動碼紀錄、輸入方式與常見排錯一次整理完成。</p>
-
-          <div class="quote">
-            只整理已確認的最新代碼放在頁面上方，狀態不明的代碼不會列入有效清單。
-          </div>
+          <h1 id="h1">2026年4月 禮包碼與兌換碼 - Kingshot</h1>
+          <p class="sub" id="lead">整理 iOS 與 Android 可用與已過期的 Kingshot 禮包碼與兌換碼，同時提供攻略資訊與官方輸入入口。</p>
 
           <div class="jump" aria-label="Quick jump links">
-            <a href="#current-codes">目前代碼</a><span class="dotsep">•</span>
+            <a href="#current-codes">最新禮包碼</a><span class="dotsep">•</span>
             <a href="#how-to-use">輸入方式</a><span class="dotsep">•</span>
-            <a href="#commemorative-codes">過期紀錄</a><span class="dotsep">•</span>
-            <a href="#faq">FAQ</a>
+            <a href="#coupon-countdown">禮包碼倒數頁</a><span class="dotsep">•</span>
+            <a href="#commemorative-codes">過期碼記錄</a><span class="dotsep">•</span>
+            <a href="#faq">Kingshot FAQ</a>
           </div>
 
-          <a
-            class="countdown-banner-link"
-            href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=zh-tw"
-            aria-label="前往 Kingshot 代碼倒數頁面"
-          >
-            <div class="countdown-banner-copy">
-              <div class="countdown-banner-kicker">LIVE COUPON TIMER</div>
-              <h2 class="countdown-banner-title">Kingshot 代碼倒數計時</h2>
-              <p class="countdown-banner-desc">即時查看目前可用代碼與剩餘有效時間。</p>
-            </div>
-            <span class="countdown-banner-cta">查看倒數 →</span>
-          </a>
-
           <div class="status-bar">
-            <span class="badge new">NEW</span>
-            <span class="note-txt">一旦確認有最新代碼，這個頁面會立即更新。</span>
+            <span class="badge new" id="new-badge">NEW</span>
+            <span class="note-txt" id="new-text">2026 最新 Kingshot 禮包碼一經確認就會立即更新。</span>
           </div>
         </div>
       </div>
-
-      <section>
-        <div class="policy-box">
-          <p><strong>最後確認</strong>: <span>2026-03-15 09:20 KST</span></p>
-          <p>本頁僅將已確認的最新代碼顯示在上方。</p>
-          <p>狀態不明的代碼不會列入有效清單，已過期活動碼僅作為紀錄保存。</p>
-          <p>代碼過期時間以 UTC 為準，最後確認時間之後狀態仍可能變動。</p>
-        </div>
-
-        <div class="intro-box" style="margin-top:14px;">
-          <p>這個頁面優先整理<strong>目前可使用的 Kingshot 代碼</strong>，同時也保留<strong>已過期的紀念／活動代碼紀錄</strong>，方便一起查看。</p>
-          <p>讓從搜尋進來的使用者能快速確認代碼狀態，並直接前往官方兌換頁面。</p>
-        </div>
-      </section>
 
       <section>
         <div class="hero-cta" aria-label="Gift code quick actions">
           <div>
-            <strong>從這裡輸入代碼</strong><br>
-            <span class="note-txt">前往官方兌換頁面，直接輸入代碼兌換。</span>
+            <strong id="hero-title">Kingshot 官方兌換入口</strong><br>
+            <span class="note-txt" id="hero-desc">前往官方兌換頁面，立即輸入 Kingshot 禮包碼。</span>
           </div>
           <a class="cta" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow" aria-label="Open Kingshot gift code page">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v8a2 2 0 0 1-2 2h-5v-10h7zM11 22H6a2 2 0 0 1-2-2v-8h7v10zM21 8h-3.17A3 3 0 1 0 12 6a3 3 0 1 0-5.83 2H3a1 1 0 0 0 0 2h18a1 1 0 1 0 0-2ZM9 7a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
-            <span>前往官方兌換頁</span>
+            <span id="cta-text">前往兌換頁面</span>
           </a>
         </div>
       </section>
 
       <section id="current-codes" aria-live="polite" aria-busy="true">
-        <h2>目前可使用的代碼</h2>
-        <div id="couponGrid" class="grid">載入中…</div>
-        <p class="note-txt">※ 部分代碼可能會依地區、伺服器或帳號狀態而限制使用。</p>
-      </section>
-
-      <section id="how-to-use">
-        <h2>輸入方式</h2>
-        <ol>
-          <li>前往遊戲內的<strong>個人資料 → 設定 → 禮包碼兌換</strong>，或進入官方兌換頁面。</li>
-          <li>正確輸入禮包碼。</li>
-          <li>到信箱領取獎勵。</li>
-        </ol>
-        <p class="note-txt">Tip：可先按複製按鈕，再貼到輸入欄，會更方便。</p>
-      </section>
-
-      <section class="quickcheck" aria-label="Quick troubleshooting">
-        <h2>代碼無法使用時的快速排查</h2>
-        <p class="note-txt">照著下面順序檢查，大多數情況都能解決。</p>
-        <ul>
-          <li><strong>請完整輸入代碼</strong>，並確認<strong>大小寫</strong>是否正確。</li>
-          <li><strong>確認是否已過期（UTC 基準）</strong>。</li>
-          <li><strong>確認是否有限制每個帳號只能使用一次</strong>。</li>
-          <li><strong>有些代碼會有城市中心等級條件</strong>。</li>
-        </ul>
-      </section>
-
-      <section class="topup-box" aria-label="Top-up conversion section">
-        <h2>儲值前也值得先看的指南</h2>
-        <p>確認代碼後，如果想更有效率地規劃，也可以一起查看儲值指南與折扣儲值頁面。</p>
-        <div class="topup-actions">
-          <a class="btn btn-primary" href="/zh-tw/guides/topup-guide.html">查看儲值指南</a>
-          <a class="btn" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener nofollow">前往折扣儲值</a>
+        <h2 id="current-title">2026年4月目前可用的 Kingshot 禮包碼</h2>
+        <div id="couponGrid" class="grid">
+          <article class="card" data-static-preview="true">
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <div class="code">VIP777</div>
+              <span class="badge active">可使用</span>
+            </div>
+            <div class="until">常駐序號</div>
+            <div class="actions">
+              <button class="btn" type="button" onclick="navigator.clipboard && navigator.clipboard.writeText('VIP777')">複製</button>
+              <a class="btn" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow">兌換</a>
+            </div>
+          </article>
         </div>
       </section>
 
+      <section id="how-to-use">
+        <h2 id="how-title">Kingshot 禮包碼輸入方式</h2>
+        <ol>
+          <li id="how-1">前往遊戲內<strong>個人檔案 → 設定 → 兌換碼</strong>，或直接開啟官方兌換頁面。</li>
+          <li id="how-2">正確輸入 Kingshot 禮包碼。</li>
+          <li id="how-3">到信箱領取獎勵。</li>
+        </ol>
+        <p class="note-txt" id="how-tip">iOS 版無法在遊戲內直接輸入禮包碼，請使用官方兌換頁面。</p>
+      </section>
+
+      <section class="quickcheck" aria-label="Quick troubleshooting">
+        <h2 id="fix-title">Kingshot 禮包碼無法使用時的快速檢查</h2>
+        <p class="note-txt" id="fix-lead">可以依序檢查以下幾項。</p>
+        <ul>
+          <li id="fix-1"><strong>請完整輸入 Kingshot 禮包碼</strong>，並確認<strong>英文大小寫</strong>是否正確。</li>
+          <li id="fix-2"><strong>請確認是否已過期（UTC 時間）</strong>。</li>
+          <li id="fix-3"><strong>部分禮包碼每個帳號只能兌換一次</strong>。</li>
+          <li id="fix-4"><strong>有些 Kingshot 禮包碼需要城市中心等級達標</strong>才能使用。</li>
+        </ul>
+      </section>
+
+      <section id="coupon-countdown">
+        <a
+          class="countdown-banner-link"
+          id="countdownBannerLink"
+          href="https://kingshotdata.kr/tools/coupon-countdown.html?lang=zh-tw"
+          aria-label="前往 Kingshot 禮包碼倒數頁"
+        >
+          <div class="countdown-banner-copy">
+            <div class="countdown-banner-kicker" id="countdown-kicker">LIVE COUPON TIMER</div>
+            <h2 class="countdown-banner-title" id="countdown-title">Kingshot 禮包碼倒數頁</h2>
+            <p class="countdown-banner-desc" id="countdown-desc">可立即查看目前可用的 Kingshot 禮包碼與剩餘時間。</p>
+          </div>
+          <span class="countdown-banner-cta" id="countdown-cta">查看倒數頁 →</span>
+        </a>
+      </section>
+
       <section id="commemorative-codes">
-        <h2>過去活動代碼紀錄（目前已過期）</h2>
-        <p class="note-txt">這些代碼曾在 Facebook、Discord 與各類紀念活動中公開。以下代碼目前大多已過期，保留僅供查詢與紀錄使用。</p>
+        <h2 id="comm-title">已過期的 Kingshot 活動碼記錄</h2>
+        <p class="note-txt" id="comm-note">此區為記錄用途。我們會在確認後盡快更新 2026 最新可用禮包碼，建議你常回來查看。</p>
         <div class="grid" id="commGrid"></div>
       </section>
 
       <section class="related-wrap" aria-label="Related guides">
-        <h2>查看代碼後最常一起閱讀的指南</h2>
-        <p class="related-lead">不只看禮包碼，也可以順便查看接下來最常用到的攻略與儲值指南。</p>
+        <h2 id="related-title">Kingshot 必看攻略</h2>
+        <p class="related-lead" id="related-lead">看完 Kingshot 禮包碼後，也可以直接接著查看你真正會用到的攻略內容。</p>
 
         <div class="guides-list">
-          <section class="g-block">
-            <a class="g-link" href="/zh-tw/guides/transfer.html" aria-label="Open Kingdom Transfer Guide">
+          <section class="g-block" id="transfer" data-href="/zh-tw/guides/transfer.html">
+            <a class="g-link" data-router-ignore="true" href="/zh-tw/guides/transfer.html" aria-label="Kingshot 王國遷移進階攻略">
               <div class="tile-icon" aria-hidden="true">
                 <img src="/img/guide/transfer.webp" alt="" loading="lazy" decoding="async">
                 <div class="tile-fallback">TR</div>
               </div>
               <div class="tile-title">
-                <h3 class="g-title">
-                  <span class="langx langx-ko">왕국 이민 심화 가이드</span>
-                  <span class="langx langx-en">Kingdom Transfer Guide</span>
-                  <span class="langx langx-ja">王国移民ガイド</span>
-                  <span class="langx langx-zh-TW">王國轉移指南</span>
-                </h3>
+                <h3 class="g-title">Kingshot 王國遷移進階攻略</h3>
               </div>
             </a>
           </section>
 
-          <section class="g-block">
-            <a class="g-link" href="/zh-tw/guides/kingshot-f2p-route-g4.html" aria-label="Open Beginner Guide">
+          <section class="g-block" id="beginners" data-href="/zh-tw/guides/kingshot-f2p-guide.html">
+            <a class="g-link" data-router-ignore="true" href="/zh-tw/guides/kingshot-f2p-guide.html" aria-label="Kingshot 新手攻略">
               <div class="tile-icon" aria-hidden="true">
                 <img src="/img/guide/double-time-decree-in-kingshot.webp" alt="" loading="lazy" decoding="async">
                 <div class="tile-fallback">BG</div>
               </div>
               <div class="tile-title">
-                <h3 class="g-title">
-                  <span class="langx langx-ko">초보자 가이드</span>
-                  <span class="langx langx-en">Beginner Guide</span>
-                  <span class="langx langx-ja">初心者ガイド</span>
-                  <span class="langx langx-zh-TW">新手指南</span>
-                </h3>
+                <h3 class="g-title">Kingshot 新手攻略</h3>
               </div>
             </a>
           </section>
 
-          <section class="g-block">
-            <a class="g-link" href="/zh-tw/guides/viking.html" aria-label="Open Viking Guide">
+          <section class="g-block" id="viking" data-href="/zh-tw/guides/viking.html">
+            <a class="g-link" data-router-ignore="true" href="/zh-tw/guides/viking.html" aria-label="Kingshot 維京掠奪最佳攻略">
               <div class="tile-icon" aria-hidden="true">
                 <img src="/img/guide/viking-vengeance-event.webp" alt="" loading="lazy" decoding="async">
                 <div class="tile-fallback">VIK</div>
               </div>
               <div class="tile-title">
-                <h3 class="g-title">
-                  <span class="langx langx-ko">바이킹의 약탈 최적 공략</span>
-                  <span class="langx langx-en">Viking Vengeance Best Strategy</span>
-                  <span class="langx langx-ja">バイキングの略奪 最適攻略</span>
-                  <span class="langx langx-zh-TW">維京復仇 最佳攻略</span>
-                </h3>
+                <h3 class="g-title">Kingshot 維京掠奪最佳攻略</h3>
               </div>
             </a>
           </section>
 
-          <section class="g-block">
-            <a class="g-link" href="/zh-tw/guides/kingshot-ruins-tip.html" aria-label="Open Ruins Guide">
+          <section class="g-block" id="ruins" data-href="/zh-tw/guides/kingshot-ruins-tip.html">
+            <a class="g-link" data-router-ignore="true" href="/zh-tw/guides/kingshot-ruins-tip.html" aria-label="Kingshot 失落遺跡攻略">
               <div class="tile-icon" aria-hidden="true">
                 <img src="/img/guide/eternitys-reach-guide.webp" alt="" loading="lazy" decoding="async">
                 <div class="tile-fallback">RU</div>
               </div>
               <div class="tile-title">
-                <h3 class="g-title">
-                  <span class="langx langx-ko">사라진 유적</span>
-                  <span class="langx langx-en">Eternity’s Reach</span>
-                  <span class="langx langx-ja">失われた遺跡</span>
-                  <span class="langx langx-zh-TW">失落遺跡</span>
-                </h3>
+                <h3 class="g-title">Kingshot 失落遺跡攻略</h3>
               </div>
             </a>
           </section>
 
-          <section class="g-block">
-            <a class="g-link" href="/zh-tw/guides/hallofgovernors.html" aria-label="Open Hall of Governors Guide">
+          <section class="g-block" id="hallofgovernors" data-href="/zh-tw/guides/hallofgovernors.html">
+            <a class="g-link" data-router-ignore="true" href="/zh-tw/guides/hallofgovernors.html" aria-label="Kingshot 最強總督攻略">
               <div class="tile-icon" aria-hidden="true">
                 <img src="/img/guide/hallofgovernors.webp" alt="" loading="lazy" decoding="async">
                 <div class="tile-fallback">H</div>
               </div>
               <div class="tile-title">
-                <h3 class="g-title">
-                  <span class="langx langx-ko">최강영주 공략</span>
-                  <span class="langx langx-en">Hall of Governors</span>
-                  <span class="langx langx-ja">最強総督攻略</span>
-                  <span class="langx langx-zh-TW">最強總督攻略</span>
-                </h3>
-              </div>
-            </a>
-          </section>
-
-          <section class="g-block">
-            <a class="g-link" href="/zh-tw/guides/topup-guide.html" aria-label="Open Top-Up Guide">
-              <div class="tile-icon" aria-hidden="true">
-                <img src="/img/guide/ten.png" alt="" loading="lazy" decoding="async">
-                <div class="tile-fallback">TOP</div>
-              </div>
-              <div class="tile-title">
-                <h3 class="g-title">
-                  <span class="langx langx-ko">충전 가이드</span>
-                  <span class="langx langx-en">Top-Up Guide</span>
-                  <span class="langx langx-ja">チャージガイド</span>
-                  <span class="langx langx-zh-TW">儲值指南</span>
-                </h3>
+                <h3 class="g-title">Kingshot 最強總督攻略</h3>
               </div>
             </a>
           </section>
@@ -776,51 +481,132 @@
       </section>
 
       <section class="faq" id="faq" aria-label="FAQ">
-        <h2>常見問題</h2>
+        <h2 id="faq-title">Kingshot 禮包碼 FAQ</h2>
 
         <details>
-          <summary>有永久有效的代碼嗎？</summary>
-          <div class="note-txt">本頁僅整理狀態明確確認過的有效代碼與已過期活動碼紀錄。狀態不明的代碼不會列入有效清單。</div>
+          <summary id="faq-q1">Kingshot 禮包碼要在哪裡輸入？</summary>
+          <div class="note-txt" id="faq-a1">可在遊戲內的個人檔案 → 設定 → 兌換碼功能輸入，或直接前往官方兌換頁面。</div>
         </details>
 
         <details>
-          <summary>代碼無法使用。</summary>
-          <div class="note-txt">請確認代碼是否完整輸入並檢查大小寫，也請同時確認是否已過期（UTC）、是否有每個帳號只能使用一次的限制，以及城市中心等級條件。</div>
+          <summary id="faq-q2">iOS 版 Kingshot 要怎麼兌換？</summary>
+          <div class="note-txt" id="faq-a2">iOS 版無法在遊戲內直接輸入禮包碼，請使用官方兌換頁面完成兌換。</div>
         </details>
 
         <details>
-          <summary>新的禮包碼多久會出一次？</summary>
-          <div class="note-txt">發布時間不固定，確認後會立即更新到此頁。建議加入書籤，方便最快查看。</div>
+          <summary id="faq-q3">Kingshot 禮包碼無法使用怎麼辦？</summary>
+          <div class="note-txt" id="faq-a3">請確認是否完整輸入，並檢查英文大小寫是否正確。另外也請確認有效期限（UTC）、每個帳號只能兌換一次，以及是否有城市中心等級限制。</div>
         </details>
 
         <details>
-          <summary>為什麼要保留已過期活動碼？</summary>
-          <div class="note-txt">這是作為過去活動發放代碼的紀錄。是否再次發放僅以官方公告為準，紀錄區則保留作為查詢與參考用途。</div>
+          <summary id="faq-q4">為什麼還保留已過期的碼？</summary>
+          <div class="note-txt" id="faq-a4">這些內容主要作為記錄用途。我們會在確認後盡快更新 2026 最新可用禮包碼，建議你常回來查看。</div>
         </details>
       </section>
 
       <noscript>
         <section>
-          <p class="note-txt">此頁面需要 JavaScript 才能顯示代碼清單。</p>
+          <h2>目前可用的 Kingshot 禮包碼</h2>
+          <div class="grid">
+            <article class="card">
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                <div class="code">VIP777</div>
+                <span class="badge active">可使用</span>
+              </div>
+              <div class="until">常駐序號</div>
+              <div class="actions">
+                <a class="btn" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow">兌換</a>
+              </div>
+            </article>
+          </div>
         </section>
       </noscript>
     </main>
   </div>
 
   <script>
-    const COMMEMORATIVE_CODES = [
-      ["JackKaoAndKS", "紀念活動代碼 · 目前已過期"],
-      ["KSFB150K", "Facebook 活動代碼 · 目前已過期"],
-      ["KSFB200K", "Facebook 活動代碼 · 目前已過期"],
-      ["KSDC100K", "Discord 紀念代碼 · 目前已過期"],
-      ["KSFB300K", "Facebook 活動代碼 · 目前已過期"],
-      ["WEHIT400", "紀念活動代碼 · 目前已過期"],
-      ["WEHIT1K", "紀念活動代碼 · 目前已過期"],
-      ["tgs2025ks1st", "紀念活動代碼 · 目前已過期"],
-      ["KS2025award", "紀念活動代碼 · 目前已過期"]
-    ];
+    const LANG_DATA = {
+      "zh-tw": {
+        metaTitle: "2026年4月 禮包碼與兌換碼 - Kingshot",
+        metaDesc: "整理 iOS 與 Android 可用與已過期的 Kingshot 禮包碼與兌換碼，同時提供攻略資訊與官方輸入入口。",
+        ogTitle: "2026年4月 禮包碼與兌換碼 - Kingshot",
+        ogDesc: "整理 iOS 與 Android 可用與已過期的 Kingshot 禮包碼與兌換碼，同時提供攻略資訊與官方輸入入口。",
+        twTitle: "2026年4月 禮包碼與兌換碼 - Kingshot",
+        twDesc: "整理 iOS 與 Android 可用與已過期的 Kingshot 禮包碼與兌換碼，同時提供攻略資訊與官方輸入入口。",
+        h1: "2026年4月 禮包碼與兌換碼 - Kingshot",
+        lead: "整理 iOS 與 Android 可用與已過期的 Kingshot 禮包碼與兌換碼，同時提供攻略資訊與官方輸入入口。",
+        countdownKicker: "LIVE COUPON TIMER",
+        countdownTitle: "Kingshot 禮包碼倒數頁",
+        countdownDesc: "可立即查看目前可用的 Kingshot 禮包碼與剩餘時間。",
+        countdownCta: "查看倒數頁 →",
+        countdownHref: "https://kingshotdata.kr/tools/coupon-countdown.html?lang=zh-tw",
+        newBadge: "NEW",
+        newText: "2026 最新 Kingshot 禮包碼一經確認就會立即更新。",
+        heroTitle: "Kingshot 官方兌換入口",
+        heroDesc: "前往官方兌換頁面，立即輸入 Kingshot 禮包碼。",
+        ctaText: "前往兌換頁面",
+        currentTitle: "2026年4月目前可用的 Kingshot 禮包碼",
+        howTitle: "Kingshot 禮包碼輸入方式",
+        how1: "前往遊戲內<strong>個人檔案 → 設定 → 兌換碼</strong>，或直接開啟官方兌換頁面。",
+        how2: "正確輸入 Kingshot 禮包碼。",
+        how3: "到信箱領取獎勵。",
+        howTip: "iOS 版無法在遊戲內直接輸入禮包碼，請使用官方兌換頁面。",
+        fixTitle: "Kingshot 禮包碼無法使用時的快速檢查",
+        fixLead: "可以依序檢查以下幾項。",
+        fix1: "<strong>請完整輸入 Kingshot 禮包碼</strong>，並確認<strong>英文大小寫</strong>是否正確。",
+        fix2: "<strong>請確認是否已過期（UTC 時間）</strong>。",
+        fix3: "<strong>部分禮包碼每個帳號只能兌換一次</strong>。",
+        fix4: "<strong>有些 Kingshot 禮包碼需要城市中心等級達標</strong>才能使用。",
+        commTitle: "已過期的 Kingshot 活動碼記錄",
+        commNote: "此區為記錄用途。我們會在確認後盡快更新 2026 最新可用禮包碼，建議你常回來查看。",
+        relatedTitle: "Kingshot 必看攻略",
+        relatedLead: "看完 Kingshot 禮包碼後，也可以直接接著查看你真正會用到的攻略內容。",
+        faqTitle: "Kingshot 禮包碼 FAQ",
+        faqQ1: "Kingshot 禮包碼要在哪裡輸入？",
+        faqA1: "可在遊戲內的個人檔案 → 設定 → 兌換碼功能輸入，或直接前往官方兌換頁面。",
+        faqQ2: "iOS 版 Kingshot 要怎麼兌換？",
+        faqA2: "iOS 版無法在遊戲內直接輸入禮包碼，請使用官方兌換頁面完成兌換。",
+        faqQ3: "Kingshot 禮包碼無法使用怎麼辦？",
+        faqA3: "請確認是否完整輸入，並檢查英文大小寫是否正確。另外也請確認有效期限（UTC）、每個帳號只能兌換一次，以及是否有城市中心等級限制。",
+        faqQ4: "為什麼還保留已過期的碼？",
+        faqA4: "這些內容主要作為記錄用途。我們會在確認後盡快更新 2026 最新可用禮包碼，建議你常回來查看。",
+        copy: "複製",
+        copied: "已複製",
+        redeem: "兌換",
+        activeBadge: "可使用",
+        expiredBadge: "已過期",
+        until: "到期時間",
+        perpetual: "常駐序號",
+        empty: "目前沒有可顯示的 Kingshot 禮包碼。",
+        loadFail: "無法載入禮包碼資料。",
+        loading: "載入中…"
+      }
+    };
 
-    function safeText(s){ return String(s ?? "").trim(); }
+    function stripHtml(html){
+      const div = document.createElement('div');
+      div.innerHTML = String(html || '');
+      return (div.textContent || '').trim();
+    }
+
+    function setFaqJsonLd(t){
+      const json = {
+        "@context":"https://schema.org",
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":t.faqQ1,"acceptedAnswer":{"@type":"Answer","text":stripHtml(t.faqA1)}},
+          {"@type":"Question","name":t.faqQ2,"acceptedAnswer":{"@type":"Answer","text":stripHtml(t.faqA2)}},
+          {"@type":"Question","name":t.faqQ3,"acceptedAnswer":{"@type":"Answer","text":stripHtml(t.faqA3)}},
+          {"@type":"Question","name":t.faqQ4,"acceptedAnswer":{"@type":"Answer","text":stripHtml(t.faqA4)}}
+        ]
+      };
+      const tag = document.getElementById("faq-jsonld");
+      if (tag) tag.textContent = JSON.stringify(json);
+    }
+
+    function safeText(s){
+      return String(s ?? "").trim();
+    }
 
     function parseExpiryMs(c){
       const iso = safeText(c.expiresAt);
@@ -829,20 +615,32 @@
         if (Number.isFinite(t)) return t;
       }
       const until = safeText(c.until);
-      if (until) {
-        const parts = until.split("-");
-        if (parts.length === 3) {
-          const y = parts[0];
-          const m = String(parts[1]).padStart(2,"0");
-          const d = String(parts[2]).padStart(2,"0");
-          const t = Date.parse(`${y}-${m}-${d}T00:00:00Z`);
-          if (Number.isFinite(t)) return t;
-        }
+      if (until && /^\d{4}-\d{2}-\d{2}$/.test(until)) {
+        const t = Date.parse(until + "T00:00:00Z");
+        if (Number.isFinite(t)) return t;
       }
       return null;
     }
 
+    function isPerpetual(c){
+      const until = safeText(c.until).toLowerCase();
+      const exp = safeText(c.expiresAt).toLowerCase();
+      return (
+        until === "permanent" ||
+        until === "perpetual" ||
+        until === "unlimited" ||
+        until === "ongoing" ||
+        until === "indefinite" ||
+        until === "常駐" ||
+        until === "常駐序號" ||
+        until === "永久" ||
+        exp === "permanent" ||
+        exp === "perpetual"
+      );
+    }
+
     function isActive(c, nowMs){
+      if (isPerpetual(c)) return true;
       const exp = parseExpiryMs(c);
       if (exp == null) return false;
       if (nowMs >= exp) return false;
@@ -878,13 +676,26 @@
       }
     }
 
+    const COMMEMORATIVE_CODES = [
+      ["JackKaoAndKS", "Kingshot 紀念活動碼 · 目前已過期"],
+      ["KSFB150K", "Kingshot Facebook 活動碼 · 目前已過期"],
+      ["KSFB200K", "Kingshot Facebook 活動碼 · 目前已過期"],
+      ["KSDC100K", "Kingshot Discord 紀念碼 · 目前已過期"],
+      ["KSFB300K", "Kingshot Facebook 活動碼 · 目前已過期"],
+      ["WEHIT400", "Kingshot 紀念活動碼 · 目前已過期"],
+      ["WEHIT1K", "Kingshot 紀念活動碼 · 目前已過期"],
+      ["tgs2025ks1st", "Kingshot 紀念活動碼 · 目前已過期"],
+      ["KS2025award", "Kingshot 紀念活動碼 · 目前已過期"]
+    ];
+
     function makeArchiveCard(code, label){
-      const card = document.createElement("div");
+      const t = LANG_DATA["zh-tw"];
+      const card = document.createElement("article");
       card.className = "card expired";
       card.innerHTML = `
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <div class="code">${escapeHTML(code)}</div>
-          <span class="badge expired">已過期</span>
+          <span class="badge expired">${escapeHTML(t.expiredBadge)}</span>
         </div>
         <div class="until">${escapeHTML(label)}</div>
       `;
@@ -900,45 +711,51 @@
       });
     }
 
+    function makeCodeCard(c, t){
+      const exp = parseExpiryMs(c);
+      const reward = safeText(c.reward);
+      const perpetual = isPerpetual(c);
+
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <div class="code">${escapeHTML(c.code || "")}</div>
+          <span class="badge active">${escapeHTML(t.activeBadge)}</span>
+        </div>
+        <div class="until">${perpetual ? escapeHTML(t.perpetual) : `${escapeHTML(t.until)}: ${exp ? new Date(exp).toISOString().replace("T"," ").slice(0,16) + " UTC" : "—"}`}</div>
+        ${reward ? `<div class="until">${escapeHTML(reward)}</div>` : ""}
+        <div class="actions">
+          <button class="btn" type="button">${escapeHTML(t.copy)}</button>
+          <a class="btn" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow">${escapeHTML(t.redeem)}</a>
+        </div>
+      `;
+      const btn = card.querySelector("button");
+      btn.addEventListener("click", async () => {
+        await copyText(c.code || "");
+        btn.textContent = t.copied;
+        setTimeout(() => { btn.textContent = t.copy; }, 1200);
+      });
+      return card;
+    }
+
     function renderCodes(active){
+      const t = LANG_DATA["zh-tw"];
       const grid = document.getElementById("couponGrid");
       if (!grid) return;
       grid.innerHTML = "";
-      grid.setAttribute("aria-busy", "false");
 
       if (!active.length) {
         const empty = document.createElement("div");
         empty.className = "note-txt";
         empty.style.gridColumn = "1 / -1";
-        empty.textContent = "目前沒有可顯示的代碼。";
+        empty.textContent = t.empty;
         grid.appendChild(empty);
         return;
       }
 
       active.forEach(c => {
-        const exp = parseExpiryMs(c);
-        const reward = safeText(c.reward);
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-            <div class="code">${escapeHTML(c.code || "")}</div>
-            <span class="badge active">可使用</span>
-          </div>
-          <div class="until">到期時間: ${exp ? new Date(exp).toISOString().replace("T"," ").slice(0,16) + " UTC" : "—"}</div>
-          ${reward ? `<div class="until">${escapeHTML(reward)}</div>` : ""}
-          <div class="actions">
-            <button class="btn" type="button">複製</button>
-            <a class="btn" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow">兌換</a>
-          </div>
-        `;
-        const btn = card.querySelector("button");
-        btn.addEventListener("click", async () => {
-          await copyText(c.code || "");
-          btn.textContent = "已複製";
-          setTimeout(() => { btn.textContent = "複製"; }, 1200);
-        });
-        grid.appendChild(card);
+        grid.appendChild(makeCodeCard(c, t));
       });
     }
 
@@ -946,8 +763,10 @@
       const url = "/data/coupons.json?v=" + Date.now();
       const res = await fetch(url, { cache:"no-store" });
       if (!res.ok) throw new Error("HTTP " + res.status);
+
       const data = await res.json();
       const arr = Array.isArray(data?.coupons) ? data.coupons : (Array.isArray(data) ? data : []);
+
       return arr.map(x => ({
         code: safeText(x.code),
         until: x.until,
@@ -958,20 +777,70 @@
       })).filter(x => x.code);
     }
 
+    function applyLanguage(lang){
+      const t = LANG_DATA[lang] || LANG_DATA["zh-tw"];
+      document.documentElement.setAttribute("lang", "zh-Hant");
+
+      document.title = t.metaTitle;
+      document.querySelector('meta[name="description"]').setAttribute("content", t.metaDesc);
+      document.querySelector('meta[property="og:title"]').setAttribute("content", t.ogTitle);
+      document.querySelector('meta[property="og:description"]').setAttribute("content", t.ogDesc);
+      document.querySelector('meta[name="twitter:title"]').setAttribute("content", t.twTitle);
+      document.querySelector('meta[name="twitter:description"]').setAttribute("content", t.twDesc);
+
+      document.getElementById("h1").textContent = t.h1;
+      document.getElementById("lead").textContent = t.lead;
+      document.getElementById("countdown-kicker").textContent = t.countdownKicker;
+      document.getElementById("countdown-title").textContent = t.countdownTitle;
+      document.getElementById("countdown-desc").textContent = t.countdownDesc;
+      document.getElementById("countdown-cta").textContent = t.countdownCta;
+      document.getElementById("countdownBannerLink").href = t.countdownHref;
+      document.getElementById("new-badge").textContent = t.newBadge;
+      document.getElementById("new-text").textContent = t.newText;
+      document.getElementById("hero-title").textContent = t.heroTitle;
+      document.getElementById("hero-desc").textContent = t.heroDesc;
+      document.getElementById("cta-text").textContent = t.ctaText;
+      document.getElementById("current-title").textContent = t.currentTitle;
+      document.getElementById("how-title").textContent = t.howTitle;
+      document.getElementById("how-1").innerHTML = t.how1;
+      document.getElementById("how-2").textContent = t.how2;
+      document.getElementById("how-3").textContent = t.how3;
+      document.getElementById("how-tip").textContent = t.howTip;
+      document.getElementById("fix-title").textContent = t.fixTitle;
+      document.getElementById("fix-lead").textContent = t.fixLead;
+      document.getElementById("fix-1").innerHTML = t.fix1;
+      document.getElementById("fix-2").innerHTML = t.fix2;
+      document.getElementById("fix-3").innerHTML = t.fix3;
+      document.getElementById("fix-4").innerHTML = t.fix4;
+      document.getElementById("comm-title").textContent = t.commTitle;
+      document.getElementById("comm-note").textContent = t.commNote;
+      document.getElementById("related-title").textContent = t.relatedTitle;
+      document.getElementById("related-lead").textContent = t.relatedLead;
+      document.getElementById("faq-title").textContent = t.faqTitle;
+      document.getElementById("faq-q1").textContent = t.faqQ1;
+      document.getElementById("faq-a1").textContent = t.faqA1;
+      document.getElementById("faq-q2").textContent = t.faqQ2;
+      document.getElementById("faq-a2").textContent = t.faqA2;
+      document.getElementById("faq-q3").textContent = t.faqQ3;
+      document.getElementById("faq-a3").textContent = t.faqA3;
+      document.getElementById("faq-q4").textContent = t.faqQ4;
+      document.getElementById("faq-a4").textContent = t.faqA4;
+
+      setFaqJsonLd(t);
+    }
+
     (function(){
-      const mqMobile = window.matchMedia("(max-width: 900px)");
+      const mqMobile = window.matchMedia('(max-width: 900px)');
 
       function setStickyTop(){
-        const header = document.querySelector("header.top");
-        const tabs = document.querySelector("nav.section-tabs");
+        const header = document.querySelector('header.top');
+        const tabs = document.querySelector('nav.section-tabs');
         const isMobile = mqMobile.matches;
-
         const hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
         const th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
-
-        document.documentElement.style.setProperty("--header-h", Math.round(hh) + "px");
-        document.documentElement.style.setProperty("--tabs-h", Math.round(th) + "px");
-        document.documentElement.style.setProperty("--sticky-top", Math.round(hh + th) + "px");
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
       }
 
       function initStickyObservers(){
@@ -979,50 +848,57 @@
         requestAnimationFrame(setStickyTop);
         setTimeout(setStickyTop, 60);
 
-        if (mqMobile && mqMobile.addEventListener){
-          mqMobile.addEventListener("change", setStickyTop);
-        } else if (mqMobile && mqMobile.addListener){
+        if (mqMobile && mqMobile.addEventListener) {
+          mqMobile.addEventListener('change', setStickyTop);
+        } else if (mqMobile && mqMobile.addListener) {
           mqMobile.addListener(setStickyTop);
         }
 
-        if (window.ResizeObserver){
+        if (window.ResizeObserver) {
           const ro = new ResizeObserver(function(){ setStickyTop(); });
-          const header = document.querySelector("header.top");
-          const tabs = document.querySelector("nav.section-tabs");
+          const header = document.querySelector('header.top');
+          const tabs = document.querySelector('nav.section-tabs');
           if (header) ro.observe(header);
           if (tabs) ro.observe(tabs);
         }
 
-        window.addEventListener("load", setStickyTop);
-        window.addEventListener("resize", setStickyTop);
+        window.addEventListener('load', setStickyTop);
+        window.addEventListener('resize', setStickyTop);
       }
 
       async function init(){
         try{
+          applyLanguage("zh-tw");
           initStickyObservers();
           renderArchive();
 
           const all = await loadCoupons();
           const nowMs = Date.now();
+
           const active = all
             .filter(c => safeText(c.code).toLowerCase() !== "jackkaoandks")
             .filter(c => isActive(c, nowMs))
-            .sort((a,b) => (parseExpiryMs(a) || 0) - (parseExpiryMs(b) || 0));
+            .sort((a, b) => {
+              const ap = isPerpetual(a) ? Number.MAX_SAFE_INTEGER : (parseExpiryMs(a) || 0);
+              const bp = isPerpetual(b) ? Number.MAX_SAFE_INTEGER : (parseExpiryMs(b) || 0);
+              return ap - bp;
+            });
 
           renderCodes(active);
         } catch (e) {
           console.error(e);
           renderArchive();
+
           const grid = document.getElementById("couponGrid");
           if (grid) {
-            grid.setAttribute("aria-busy", "false");
-            grid.innerHTML = `<div class="note-txt" style="grid-column:1 / -1;">無法載入代碼資料。請確認 /data/coupons.json 路徑。</div>`;
+            grid.innerHTML = "";
+            grid.appendChild(makeCodeCard({ code:"VIP777", until:"常駐序號" }, LANG_DATA["zh-tw"]));
           }
         }
       }
 
-      if (document.readyState === "loading"){
-        document.addEventListener("DOMContentLoaded", init);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
       } else {
         init();
       }
