@@ -1,0 +1,1061 @@
+<!doctype html>
+<html lang="ja" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>キングショット 神秘の試練 攻略 | 解放条件・おすすめ比率・週間エリア・実戦Tips</title>
+  <meta name="description" content="キングショット 神秘の試練の攻略ページです。解放条件、エリアごとの適用ステータス、おすすめ比率、レイド報酬、ショップ優先度、最終的には5:2:3の汎用比率に落ち着く実戦感覚までまとめて整理しました。" />
+  <meta name="keywords" content="キングショット 神秘の試練, キングショット 神秘の試練 攻略, キングショット 闘技場, キングショット 生命の森, キングショット クリスタル鉱洞, キングショット 知識の殿堂, キングショット 溶岩要塞, キングショット 光輝の尖塔, キングショット おすすめ比率, キングショット 試練ショップ" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ja/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/mystic-trial.html" />
+
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="キングショット 神秘の試練 攻略 | 解放条件・おすすめ比率・週間エリア・実戦Tips" />
+  <meta property="og:description" content="キングショット 神秘の試練の解放条件、エリア別適用ステータス、おすすめ比率、レイド報酬、ショップ優先度、実戦運用のコツを整理したガイドです。" />
+  <meta property="og:url" content="https://kingshotdata.kr/ja/guides/mystic-trial.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Kingshot Data カバー画像" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="キングショット 神秘の試練 攻略 | 解放条件・おすすめ比率・週間エリア・実戦Tips" />
+  <meta name="twitter:description" content="キングショット 神秘の試練の解放条件、エリア別適用ステータス、おすすめ比率、レイド報酬、ショップ優先度、実戦運用のコツを整理したガイドです。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guide/mystrical-trial.webp" />
+
+  <style>
+    *{box-sizing:border-box}
+
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --ok:#ecfdf5;
+      --warn:#fff7ed;
+      --note:#f8fafc;
+      --info:#eff6ff;
+
+      --shadow:0 10px 25px rgba(0,0,0,.06);
+      --radius:16px;
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --ok:#0f1e16;
+        --warn:#1a140c;
+        --note:#141414;
+        --info:#111827;
+        --shadow:0 10px 25px rgba(0,0,0,.35);
+      }
+    }
+
+    html,body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:15px/1.72 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP","Noto Sans",Arial,sans-serif;
+    }
+
+    html{scroll-behavior:smooth}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(26px,3.4vw,40px);
+      line-height:1.18;
+      letter-spacing:-0.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:32px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-side{
+      display:grid;
+      gap:12px;
+    }
+    .hero-visual,
+    .hero-side-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      overflow:hidden;
+    }
+    .hero-visual img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .hero-side-card{
+      padding:14px;
+    }
+    .hero-side-card h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-side-card ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .hero-side-card li{margin:6px 0}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note);
+    }
+    .callout.ok{background:var(--ok)}
+    .callout.warn{background:var(--warn)}
+    .callout.info{background:var(--info)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0;padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text);font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:21px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul,
+    section.block ol{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .mini-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:12px 14px;
+    }
+    .mini-card h3{
+      margin:0 0 8px;
+      font-size:14px;
+    }
+
+    .zone-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .zone-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:14px;
+    }
+    .zone-card h3{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--text);
+    }
+    .zone-card p{
+      margin:6px 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .ratio-table-wrap{
+      overflow:auto;
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      background:var(--panel);
+      min-width:720px;
+    }
+    th,td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+      vertical-align:top;
+    }
+    th{
+      background:var(--panel2);
+      font-size:13px;
+      letter-spacing:.01em;
+    }
+    tr:last-child td{border-bottom:0}
+
+    .badge-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      min-height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:1000;
+      border:1px solid var(--border);
+      background:var(--panel);
+    }
+    .badge.good{background:var(--ok)}
+    .badge.note{background:var(--info)}
+    .badge.warn{background:var(--warn)}
+
+    .pill-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:var(--note);
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+
+    .foot{
+      margin:18px 0 8px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:980px){
+      .hero,
+      .grid,
+      .mini-grid,
+      .zone-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+    }
+
+    @media (max-width:600px){
+      h1{font-size:26px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"キングショット 神秘の試練 攻略 | 解放条件・おすすめ比率・週間エリア・実戦Tips",
+    "inLanguage":"ja",
+    "description":"キングショット 神秘の試練の解放条件、エリア別適用ステータス、おすすめ比率、レイド報酬、ショップ優先度、実戦運用のコツを整理したガイドです。",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ja/guides/mystic-trial.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"ホーム","item":"https://kingshotdata.kr/ja/"},
+      {"@type":"ListItem","position":2,"name":"ガイド","item":"https://kingshotdata.kr/ja/guides/"},
+      {"@type":"ListItem","position":3,"name":"神秘の試練 攻略","item":"https://kingshotdata.kr/ja/guides/mystic-trial.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"キングショットの神秘の試練はいつ解放されますか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"神秘の試練は都市センター19到達後、指揮所から解放されます。新サーバーでは通常2週間前後で開放されます。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"神秘の試練のおすすめ比率は何から始めればいいですか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"迷う場合は50/20/30から始めるのが無難です。その後、エリアやクリア安定度に合わせて少しずつ調整するとよいです。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"神秘の試練はエリアごとに最後まで比率を細かく分ける必要がありますか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"最初はエリアごとに比率を分けて試すのが役立ちます。ただし続けているとかなり面倒になるため、実際には5:2:3のような汎用比率でほぼ全部を回し、詰まった場面だけ少し調整することが多いです。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"最新のキングショット ギフトコード＆リディームコードはどこで確認できますか？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"有効コード、期限、公式入力ページまでまとめて見られる専用のギフトコードガイドで確認できます。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ja/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/ko/guides/mystic-trial.html">KO</a>
+        <a href="/en/guides/mystic-trial.html">EN</a>
+        <a href="/ja/guides/mystic-trial.html" aria-current="page">JA</a>
+        <a href="/zh-tw/guides/mystic-trial.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概要</a>
+      <a href="#zones">エリア</a>
+      <a href="#ratios">比率</a>
+      <a href="#raid">レイド</a>
+      <a href="#rewards">報酬</a>
+      <a href="#shop">ショップ</a>
+      <a href="#tips">実戦Tips</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main>
+      <div class="crumbs">
+        <a href="/ja/">ホーム</a> <span class="muted">›</span>
+        <a href="/ja/guides/">ガイド</a> <span class="muted">›</span>
+        <span>神秘の試練 攻略</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>キングショット 神秘の試練 攻略 | 解放条件・おすすめ比率・週間エリア・実戦Tips</h1>
+          <p class="sub">
+            神秘の試練は、長期育成に役立つ週次PvEコンテンツです。
+            このページでは、解放条件、エリア別の適用ステータス、おすすめ比率、レイド報酬、ショップ優先度、
+            そして実際には毎回細かく最適化するより、だんだん単純な比率に落ち着いていく運用感までまとめて整理します。
+          </p>
+
+          <div class="meta">
+            <span class="tag">都市センター19解放</span>
+            <span class="tag">週次コンテンツ</span>
+            <span class="tag">おすすめ比率</span>
+            <span class="tag">レイド報酬</span>
+            <span class="tag">試練ショップ</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <div class="hero-visual">
+            <img src="/img/guide/mystrical-trial.webp" alt="キングショット 神秘の試練 攻略の代表画像" loading="eager" fetchpriority="high" width="1200" height="630" />
+          </div>
+
+          <div class="hero-side-card">
+            <h2>まず覚えたい要点</h2>
+            <ul>
+              <li>神秘の試練は、自分の兵力そのものより、各エリアで何のステータスが使われるかが重要です。</li>
+              <li>最初はエリアごとに別の比率を試す価値があります。</li>
+              <li>ただ、続けていくと面倒になり、最終的には5:2:3のような汎用比率でほとんど回すケースが多いです。</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>最初に覚えておくこと</h3>
+            <ul>
+              <li><b>神秘の試練は都市センター19</b>で指揮所から解放されます。</li>
+              <li>各エリアで使われる<b>遠征ステータス</b>が違うため、あるエリアが簡単でも別のエリアが簡単とは限りません。</li>
+              <li><b>光輝の尖塔</b>以外はゲーム側が<b>Lv.10兵士</b>を用意するため、兵そのものよりアカウント側のボーナスが重要です。</li>
+              <li>ステージ進行はリセットされても、<b>ランキング記録そのものは消えません</b>。</li>
+              <li>1〜10ステージをクリアすると<b>レイド</b>が開放され、以後は週次の回収コンテンツ色が強くなります。</li>
+            </ul>
+          </div>
+
+          <div class="callout info" style="margin-top:12px">
+            <h3>最新のギフトコード＆リディームコードも一緒に確認</h3>
+            <p>
+              有効コード、期限、公式入力ページまでまとめて確認したい場合は
+              <a href="/ja/guides/kingshot-giftcode.html">キングショット ギフトコード＆リディームコード</a>
+              のページも合わせて見るのがおすすめです。
+            </p>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>よくある失敗</h3>
+            <ul>
+              <li>全エリアを同じ感覚で見てしまい、エリア別の適用ステータス差を無視すること</li>
+              <li>編成テスト中に<b>配置</b>を押してしまい、1日の挑戦回数を無駄にすること</li>
+              <li>最後まで全部のエリアを細かく最適化し続けて、かえって疲れること</li>
+              <li>試練ショップを軽く見てしまい、週次で積み上がる価値を逃すこと</li>
+            </ul>
+          </div>
+
+          <div class="pill-list">
+            <a class="pill" href="#overview">解放条件</a>
+            <a class="pill" href="#zones">エリア説明</a>
+            <a class="pill" href="#ratios">おすすめ比率</a>
+            <a class="pill" href="#raid">レイド</a>
+            <a class="pill" href="#rewards">報酬</a>
+            <a class="pill" href="#shop">ショップ</a>
+            <a class="pill" href="#tips">実戦Tips</a>
+            <a class="pill" href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <nav class="toc card" aria-label="Table of contents">
+          <h2>目次</h2>
+          <ul>
+            <li><a href="#overview">1) 基本情報と解放条件</a></li>
+            <li><a href="#zones">2) エリア説明と適用ステータス</a></li>
+            <li><a href="#raid">3) ステージ初期化とレイド機能</a></li>
+            <li><a href="#ratios">4) おすすめ比率</a></li>
+            <li><a href="#rewards">5) 報酬と成長構造</a></li>
+            <li><a href="#shop">6) 試練ショップ優先度</a></li>
+            <li><a href="#tips">7) 実戦運用Tips</a></li>
+            <li><a href="#summary">8) 最終まとめ</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="overview" class="block anchor">
+        <h2>1) 基本情報と解放条件</h2>
+        <p>
+          神秘の試練は、<b>都市センター19</b>に到達すると<b>指揮所</b>から解放されます。
+          新サーバーでは、だいたい<b>2週間前後</b>で開放されることが多いです。
+        </p>
+
+        <ul>
+          <li>関連システムがまだ開いていない場合、一部の神秘建物は利用できないことがあります。</li>
+          <li>これは各建物が別々の遠征ステータスソースを参照しているためです。</li>
+          <li><b>アイテムバフ、国王特権、大臣バフ、連盟ボーナス、前哨基地ボーナス</b>は神秘の試練に適用されません。</li>
+        </ul>
+
+        <div class="callout info">
+          <h3>大事な前提</h3>
+          <p>神秘の試練は<b>遠征ステータス基準の戦闘</b>です。征服戦闘でもなく、アリーナ戦闘でもありません。</p>
+        </div>
+      </section>
+
+      <section id="zones" class="block anchor">
+        <h2>2) エリア説明と適用ステータス</h2>
+        <p>
+          神秘の試練がエリアごとに全く違って感じられる理由は単純です。
+          各エリアが読むアカウントの強さの出所が異なるからです。
+          どこかが強く、どこかが弱いなら、その差がそのまま体感になります。
+        </p>
+
+        <div class="zone-grid">
+          <div class="zone-card">
+            <h3>闘技場</h3>
+            <p><b>解放:</b> 即時解放</p>
+            <p><b>適用:</b> 英雄、英雄装備、英雄専用ウィジェット</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>生命の森</h3>
+            <p><b>解放:</b> 初代ペット解放後</p>
+            <p><b>適用:</b> ペット、ペットスキル</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>クリスタル鉱洞</h3>
+            <p><b>解放:</b> 都市センター25</p>
+            <p><b>適用:</b> 領主宝石</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>知識の殿堂</h3>
+            <p><b>解放:</b> 即時解放</p>
+            <p><b>適用:</b> アカデミー研究、戦争アカデミー研究</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>溶岩要塞</h3>
+            <p><b>解放:</b> 都市センター22</p>
+            <p><b>適用:</b> 領主装備</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>光輝の尖塔</h3>
+            <p><b>解放:</b> 即時解放</p>
+            <p><b>適用:</b> 英雄、装備、ウィジェット、ペット、宝石、領主装備、研究、スキン、オアシスボーナス、VIPなどほぼ全体</p>
+          </div>
+        </div>
+
+        <div class="callout ok" style="margin-top:12px">
+          <h3>ペット関連の補足</h3>
+          <p><b>生命の森</b>と<b>光輝の尖塔</b>ではペットスキルが自動で発動します。手動で押してクールタイムを無駄にする必要はありません。</p>
+        </div>
+      </section>
+
+      <section id="raid" class="block anchor">
+        <h2>3) ステージ初期化とレイド機能</h2>
+        <p>
+          神秘の試練は周期的にステージ進行が初期化されます。
+          ただし初期化されても、<b>リーダーボードの順位記録自体は残ります</b>。
+        </p>
+
+        <ul>
+          <li>初期化周期はおおむね<b>7日</b>と見るケースが多いです。</li>
+          <li><b>1〜10ステージ</b>をクリアすると<b>レイド機能</b>が解放されます。</li>
+          <li>その後、再びエリアが開いた時に、既に突破した区間をレイドで素早く回収できるようになります。</li>
+        </ul>
+
+        <div class="callout info">
+          <h3>なぜレイドが重要か</h3>
+          <p>レイドが開くと、神秘の試練は単なる挑戦コンテンツではなく、毎週時短で回せる回収コンテンツとしての意味が強くなります。</p>
+        </div>
+      </section>
+
+      <section id="ratios" class="block anchor">
+        <h2>4) おすすめ比率</h2>
+        <p>
+          <b>光輝の尖塔</b>を除く多くのエリアでは、ゲーム側が<b>Lv.10兵士</b>を提供します。
+          そのため兵の質そのものより、アカウント側の遠征ボーナスやエリア相性の方が重要です。
+        </p>
+
+        <p>
+          AIは基本的に歩兵 / 騎兵 / 弓兵を<b>33 / 33 / 33</b>前後で使うことが多く、
+          10ステージ付近ではおよそ<b>53 / 27 / 20</b>に寄ると見られています。
+        </p>
+
+        <div class="callout ok">
+          <h3>無難な開始比率</h3>
+          <p>迷うなら、まずは<b>50 / 20 / 30</b>から始めるのが安定です。</p>
+        </div>
+
+        <div class="ratio-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>エリア</th>
+                <th>おすすめ比率</th>
+                <th>簡単な見方</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>闘技場</td>
+                <td>50 / 10 / 40</td>
+                <td>後列の比重をやや高めに</td>
+              </tr>
+              <tr>
+                <td>生命の森</td>
+                <td>50 / 15 / 35</td>
+                <td>ペット補助込みのバランス型</td>
+              </tr>
+              <tr>
+                <td>クリスタル鉱洞</td>
+                <td>60 / 20 / 20</td>
+                <td>前列を厚めに</td>
+              </tr>
+              <tr>
+                <td>知識の殿堂</td>
+                <td>50 / 20 / 30</td>
+                <td>標準安定型</td>
+              </tr>
+              <tr>
+                <td>溶岩要塞</td>
+                <td>60 / 15 / 25</td>
+                <td>前線維持力重視</td>
+              </tr>
+              <tr>
+                <td>光輝の尖塔</td>
+                <td>50 / 15 / 35</td>
+                <td>アカウント総合力の影響が大きい</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>挑戦回数を無駄にせず編成を変える方法</h3>
+        <ol>
+          <li><b>挑戦</b>を開く</li>
+          <li><b>編成変更</b>に入る</li>
+          <li>比率を調整する</li>
+          <li><b>配置 / クイック配置</b>は押さない</li>
+          <li>左上の戻るで安全に抜ける</li>
+        </ol>
+
+        <div class="callout warn">
+          <h3>実戦ではこうなりがちです</h3>
+          <p>
+            最初はエリアごとに比率を細かく分けて、かなり真面目に試す人が多いです。
+            ただ、神秘の試練を何度も回していくと、その作業がかなり面倒になってきます。
+            実際には、毎回エリアごとに細かく最適化するよりも、
+            <b>5 : 2 : 3</b>のような汎用比率でほとんどのエリアを回し、詰まったところだけ少し触る形に落ち着くケースが多いです。
+          </p>
+        </div>
+      </section>
+
+      <section id="rewards" class="block anchor">
+        <h2>5) 報酬と成長構造</h2>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>初回クリア報酬</h3>
+            <ul>
+              <li>幸運の英雄装備箱</li>
+              <li>強化XPパーツ</li>
+              <li>霧の結晶</li>
+              <li>神秘XP</li>
+              <li>試練の箱 / 豪華試練の箱</li>
+            </ul>
+          </div>
+
+          <div class="mini-card">
+            <h3>マイルストーン報酬</h3>
+            <ul>
+              <li>小型闘技場の複製</li>
+              <li>強化XPパーツ</li>
+              <li>神話汎用英雄の欠片</li>
+              <li>幸運の英雄装備箱</li>
+              <li>カスタム神話英雄装備箱</li>
+              <li>ミスリル</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>レイド報酬</h3>
+        <p>
+          レイド報酬は各エリアで最も高く突破したステージ基準で決まります。
+          かなりざっくり計算するなら、週あたりの霧の結晶は
+          <b>クリアしたステージ数 × 10</b>くらいで見ておくと分かりやすいです。
+        </p>
+
+        <div class="callout info">
+          <h3>長期的に重要な理由</h3>
+          <p>神秘の試練は一回限りのPvEではなく、進めるほど毎週育成素材を持ってきてくれる蓄積型コンテンツだからです。</p>
+        </div>
+      </section>
+
+      <section id="shop" class="block anchor">
+        <h2>6) 試練ショップ優先度</h2>
+        <p>
+          試練ショップでは<b>霧の結晶</b>を使います。
+          ステージを継続して進めていけば、毎週それなりに必要なものを買えるようになります。
+        </p>
+
+        <div class="badge-row">
+          <span class="badge good">ミスリル優先度高め</span>
+          <span class="badge note">在庫は週次リセット</span>
+          <span class="badge warn">長期価値を重視</span>
+        </div>
+
+        <h3>ショップ解放タイミングの目安</h3>
+        <ul>
+          <li><b>ミスリル</b>は第2世代以降で追加されることが多いです。</li>
+          <li><b>真金の粉</b>は戦争アカデミー解放時期以降に追加されます。</li>
+          <li>下部メニュー、または神秘の試練右上ショートカットから入れます。</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>購入の基本方針</h3>
+          <p>その場しのぎで良さそうな物より、アカウントに長く残る価値を優先して買うのが基本です。多くの場合、最初の優先候補は<b>ミスリル</b>です。</p>
+        </div>
+      </section>
+
+      <section id="tips" class="block anchor">
+        <h2>7) 実戦運用Tips</h2>
+
+        <h3>全エリアを永遠に完璧最適化する必要はありません</h3>
+        <p>
+          理屈だけで言えば、各エリアごとに細かく最適化することは可能です。
+          ただ、神秘の試練が毎週のルーティンになると、最終的には<b>楽に回せて再現しやすい運用</b>の方が重要になります。
+        </p>
+
+        <h3>細かい比率調整は詰まった時だけで十分です</h3>
+        <p>
+          エリアごとの比率調整が最も価値を持つのは、新しい壁を突破したい時です。
+          すでに安定して回せているなら、同じ汎用比率を続けて使う方が圧倒的に楽です。
+        </p>
+
+        <h3>光輝の尖塔は別枠で考えるべきです</h3>
+        <p>
+          光輝の尖塔は自分の実兵力と、より広い範囲のアカウント総合力が反映されるため、
+          他のエリアよりもアカウントの深さがそのまま出やすいです。
+        </p>
+
+        <div class="callout info">
+          <h3>一緒に見ると便利なページ</h3>
+          <p>
+            神秘の試練を進めながら、
+            <a href="/ja/guides/kingshot-giftcode.html">キングショット ギフトコード＆リディームコード</a>
+            のページも確認しておくと、週次育成に役立つ有効コードを見逃しにくくなります。
+          </p>
+        </div>
+
+        <div class="callout warn">
+          <h3>結局大事な考え方</h3>
+          <p>詰まる時はしっかり試して、慣れてきたら思い切って単純化する。その方が長く続きます。</p>
+        </div>
+      </section>
+
+      <section id="summary" class="block anchor">
+        <h2>8) 最終まとめ</h2>
+        <ul>
+          <li><b>解放:</b> 都市センター19 + 指揮所</li>
+          <li><b>核心:</b> エリアごとに参照する遠征ステータスの出所が違う</li>
+          <li><b>安全な開始比率:</b> 50 / 20 / 30</li>
+          <li><b>実戦の汎用比率:</b> 最終的には5 : 2 : 3でほぼ全部回すケースが多い</li>
+          <li><b>週次価値:</b> ステージ進行、レイド報酬、試練ショップ素材が毎週積み上がる</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>一言でまとめると</h3>
+          <p>最初は仕組みを理解して押し、慣れてきたら過度な微調整よりも回しやすいルーティンに寄せるのが一番効率的です。</p>
+        </div>
+      </section>
+
+      <section id="faq" class="block anchor">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>キングショットの神秘の試練はいつ解放されますか？</summary>
+          <p>神秘の試練は都市センター19到達後、指揮所から解放されます。新サーバーでは通常2週間前後で開放されます。</p>
+        </details>
+
+        <details>
+          <summary>神秘の試練のおすすめ比率は何から始めればいいですか？</summary>
+          <p>迷う場合は50/20/30から始めるのが無難です。その後、エリアやクリア安定度に合わせて少しずつ調整するとよいです。</p>
+        </details>
+
+        <details>
+          <summary>神秘の試練はエリアごとに最後まで比率を細かく分ける必要がありますか？</summary>
+          <p>最初はエリアごとに比率を分けて試すのが役立ちます。ただし続けているとかなり面倒になるため、実際には5:2:3のような汎用比率でほぼ全部を回し、詰まった場面だけ少し調整することが多いです。</p>
+        </details>
+
+        <details>
+          <summary>最新のキングショット ギフトコード＆リディームコードはどこで確認できますか？</summary>
+          <p><a href="/ja/guides/kingshot-giftcode.html">キングショット ギフトコード＆リディームコード</a> のページで、有効コード、期限、公式入力ページまでまとめて確認できます。</p>
+        </details>
+      </section>
+
+      <section class="block">
+        <h2>関連ガイド</h2>
+        <div class="pill-list">
+          <a class="pill" href="/ja/guides/kingshot-giftcode.html">キングショット ギフトコード＆リディームコード</a>
+          <a class="pill" href="/ja/guides/kingshot-f2p-guide.html">キングショット 初心者ガイド</a>
+          <a class="pill" href="/ja/guides/hallofgovernors.html">最強領主ガイド</a>
+          <a class="pill" href="/ja/guides/">ガイド一覧を見る</a>
+        </div>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        この文書は公式資料ではなく、実際のプレイ経験とユーザー観察をもとに整理したファンガイドです。
+        アップデート時期やアカウント状況によって、解放タイミング、好まれる比率、体感難度は変わる場合があります。
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

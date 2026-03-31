@@ -1,0 +1,1064 @@
+<!doctype html>
+<html lang="zh-Hant" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot 神秘試煉攻略｜解鎖條件、推薦比例、每週區域、實戰技巧</title>
+  <meta name="description" content="Kingshot 神秘試煉攻略。整理解鎖條件、各區域套用屬性、推薦兵種比例、掃蕩獎勵、商店優先順序，以及最後大多會用 5:2:3 泛用比例去刷的實戰心得。" />
+  <meta name="keywords" content="Kingshot 神秘試煉, Kingshot 神秘試煉攻略, Kingshot 鬥技場, Kingshot 生命之森, Kingshot 水晶礦洞, Kingshot 知識殿堂, Kingshot 熔岩要塞, Kingshot 光輝尖塔, Kingshot 推薦比例, Kingshot 試煉商店" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/mystic-trial.html" />
+
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot 神秘試煉攻略｜解鎖條件、推薦比例、每週區域、實戰技巧" />
+  <meta property="og:description" content="整理 Kingshot 神秘試煉的解鎖條件、各區域套用屬性、推薦比例、掃蕩獎勵、商店優先順序與實戰運用技巧。" />
+  <meta property="og:url" content="https://kingshotdata.kr/zh-tw/guides/mystic-trial.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Kingshot Data 封面圖" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kingshot 神秘試煉攻略｜解鎖條件、推薦比例、每週區域、實戰技巧" />
+  <meta name="twitter:description" content="整理 Kingshot 神秘試煉的解鎖條件、各區域套用屬性、推薦比例、掃蕩獎勵、商店優先順序與實戰運用技巧。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guide/mystrical-trial.webp" />
+
+  <style>
+    *{box-sizing:border-box}
+
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --ok:#ecfdf5;
+      --warn:#fff7ed;
+      --note:#f8fafc;
+      --info:#eff6ff;
+
+      --shadow:0 10px 25px rgba(0,0,0,.06);
+      --radius:16px;
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --ok:#0f1e16;
+        --warn:#1a140c;
+        --note:#141414;
+        --info:#111827;
+        --shadow:0 10px 25px rgba(0,0,0,.35);
+      }
+    }
+
+    html,body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:15px/1.72 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans",Arial,sans-serif;
+    }
+
+    html{scroll-behavior:smooth}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(26px,3.4vw,40px);
+      line-height:1.18;
+      letter-spacing:-0.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:32px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-side{
+      display:grid;
+      gap:12px;
+    }
+    .hero-visual,
+    .hero-side-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      overflow:hidden;
+    }
+    .hero-visual img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .hero-side-card{
+      padding:14px;
+    }
+    .hero-side-card h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-side-card ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .hero-side-card li{margin:6px 0}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note);
+    }
+    .callout.ok{background:var(--ok)}
+    .callout.warn{background:var(--warn)}
+    .callout.info{background:var(--info)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0;padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text);font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:21px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul,
+    section.block ol{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .mini-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:12px 14px;
+    }
+    .mini-card h3{
+      margin:0 0 8px;
+      font-size:14px;
+    }
+
+    .zone-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .zone-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:14px;
+    }
+    .zone-card h3{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--text);
+    }
+    .zone-card p{
+      margin:6px 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .ratio-table-wrap{
+      overflow:auto;
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      background:var(--panel);
+      min-width:720px;
+    }
+    th,td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+      vertical-align:top;
+    }
+    th{
+      background:var(--panel2);
+      font-size:13px;
+      letter-spacing:.01em;
+    }
+    tr:last-child td{border-bottom:0}
+
+    .badge-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      min-height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:1000;
+      border:1px solid var(--border);
+      background:var(--panel);
+    }
+    .badge.good{background:var(--ok)}
+    .badge.note{background:var(--info)}
+    .badge.warn{background:var(--warn)}
+
+    .pill-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:var(--note);
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+
+    .foot{
+      margin:18px 0 8px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:980px){
+      .hero,
+      .grid,
+      .mini-grid,
+      .zone-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+    }
+
+    @media (max-width:600px){
+      h1{font-size:26px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot 神秘試煉攻略｜解鎖條件、推薦比例、每週區域、實戰技巧",
+    "inLanguage":"zh-Hant",
+    "description":"整理 Kingshot 神秘試煉的解鎖條件、各區域套用屬性、推薦比例、掃蕩獎勵、商店優先順序與實戰運用技巧。",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/zh-tw/guides/mystic-trial.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"首頁","item":"https://kingshotdata.kr/zh-tw/"},
+      {"@type":"ListItem","position":2,"name":"攻略","item":"https://kingshotdata.kr/zh-tw/guides/"},
+      {"@type":"ListItem","position":3,"name":"神秘試煉攻略","item":"https://kingshotdata.kr/zh-tw/guides/mystic-trial.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Kingshot 的神秘試煉什麼時候解鎖？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"神秘試煉在城市中心19級後可透過指揮所解鎖。新伺服器通常約在兩週左右開放。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"神秘試煉推薦從什麼兵種比例開始？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"如果沒有把握，先從 50/20/30 開始最穩。之後再依照區域與通關穩定度慢慢調整。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"神秘試煉真的需要每個區域都一直分開細調比例嗎？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"一開始分區測試比例確實有幫助，但打久了會很麻煩。實際上很多人最後都會用 5:2:3 這種泛用比例去刷大部分區域，只有卡關時才做小幅調整。"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"最新的 Kingshot 禮包碼與兌換碼要去哪裡看？",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"可以到專門整理有效代碼、到期時間與官方兌換頁面的禮包碼攻略頁查看。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/ko/guides/mystic-trial.html">KO</a>
+        <a href="/en/guides/mystic-trial.html">EN</a>
+        <a href="/ja/guides/mystic-trial.html">JA</a>
+        <a href="/zh-tw/guides/mystic-trial.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概要</a>
+      <a href="#zones">區域</a>
+      <a href="#ratios">比例</a>
+      <a href="#raid">掃蕩</a>
+      <a href="#rewards">獎勵</a>
+      <a href="#shop">商店</a>
+      <a href="#tips">實戰技巧</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main>
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/guides/">攻略</a> <span class="muted">›</span>
+        <span>神秘試煉攻略</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>Kingshot 神秘試煉攻略｜解鎖條件、推薦比例、每週區域、實戰技巧</h1>
+          <p class="sub">
+            神秘試煉是很有價值的每週 PvE 成長內容。
+            這頁會整理解鎖條件、各區域套用的屬性來源、推薦兵種比例、掃蕩獎勵、商店優先順序，
+            以及實際打久後，大多數玩家都會慢慢簡化操作、最後用泛用比例去刷的實戰感覺。
+          </p>
+
+          <div class="meta">
+            <span class="tag">城市中心19解鎖</span>
+            <span class="tag">每週內容</span>
+            <span class="tag">推薦比例</span>
+            <span class="tag">掃蕩獎勵</span>
+            <span class="tag">試煉商店</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <div class="hero-visual">
+            <img src="/img/guide/mystrical-trial.webp" alt="Kingshot 神秘試煉攻略代表圖片" loading="eager" fetchpriority="high" width="1200" height="630" />
+          </div>
+
+          <div class="hero-side-card">
+            <h2>先記住這幾點</h2>
+            <ul>
+              <li>神秘試煉更看重的是各區域吃到哪些屬性，而不只是你自己有多少兵。</li>
+              <li>一開始分區測試不同兵種比例確實有幫助。</li>
+              <li>但打久之後會覺得很麻煩，最後大多還是會用 5:2:3 這類泛用比例去刷大部分區域。</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>先記住這些</h3>
+            <ul>
+              <li><b>神秘試煉會在城市中心19級</b>透過指揮所解鎖。</li>
+              <li>每個區域吃的<b>遠征屬性</b>不同，所以某一區好打，不代表其他區也會一樣輕鬆。</li>
+              <li>除了<b>光輝尖塔</b>外，遊戲會提供<b>Lv.10 部隊</b>，因此真正重要的是你帳號的加成來源。</li>
+              <li>關卡進度可能會重置，但<b>排行榜成績本身不會被清掉</b>。</li>
+              <li>通過 1～10 關之後會開啟<b>掃蕩</b>，之後整個模式就更像每週穩定回收資源的內容。</li>
+            </ul>
+          </div>
+
+          <div class="callout info" style="margin-top:12px">
+            <h3>最新禮包碼與兌換碼也建議一起看</h3>
+            <p>
+              如果你也想順便確認有效代碼、到期時間與官方輸入頁面，
+              可以一起看
+              <a href="/zh-tw/guides/kingshot-giftcode.html">Kingshot 禮包碼與兌換碼</a>
+              頁面。
+            </p>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>最常見的失誤</h3>
+            <ul>
+              <li>把所有區域都當成同一套思路打，忽略各區域吃的屬性差異。</li>
+              <li>測試編成時不小心按到<b>部署</b>，浪費每日挑戰次數。</li>
+              <li>一直想把每個區域都微調到極致，最後反而打得很累。</li>
+              <li>忽略試煉商店，錯過每週穩定累積的長期價值。</li>
+            </ul>
+          </div>
+
+          <div class="pill-list">
+            <a class="pill" href="#overview">解鎖條件</a>
+            <a class="pill" href="#zones">區域說明</a>
+            <a class="pill" href="#ratios">推薦比例</a>
+            <a class="pill" href="#raid">掃蕩</a>
+            <a class="pill" href="#rewards">獎勵</a>
+            <a class="pill" href="#shop">商店</a>
+            <a class="pill" href="#tips">實戰技巧</a>
+            <a class="pill" href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <nav class="toc card" aria-label="Table of contents">
+          <h2>目錄</h2>
+          <ul>
+            <li><a href="#overview">1) 基本資訊與解鎖條件</a></li>
+            <li><a href="#zones">2) 區域說明與套用屬性</a></li>
+            <li><a href="#raid">3) 關卡重置與掃蕩功能</a></li>
+            <li><a href="#ratios">4) 推薦比例</a></li>
+            <li><a href="#rewards">5) 獎勵與成長結構</a></li>
+            <li><a href="#shop">6) 試煉商店優先順序</a></li>
+            <li><a href="#tips">7) 實戰運用技巧</a></li>
+            <li><a href="#summary">8) 最後總結</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="overview" class="block anchor">
+        <h2>1) 基本資訊與解鎖條件</h2>
+        <p>
+          神秘試煉會在<b>城市中心19級</b>後，透過<b>指揮所</b>解鎖。
+          以新伺服器來看，通常大約在<b>兩週左右</b>會開放。
+        </p>
+
+        <ul>
+          <li>如果相關系統還沒開，部分神秘建築可能暫時無法使用。</li>
+          <li>原因是每棟建築都會讀取不同來源的遠征屬性。</li>
+          <li><b>道具增益、國王特權、官職加成、聯盟加成、哨站加成</b>都不會套用到神秘試煉。</li>
+        </ul>
+
+        <div class="callout info">
+          <h3>重要前提</h3>
+          <p>神秘試煉採用的是<b>遠征屬性戰鬥</b>。不是征戰戰鬥，也不是競技場戰鬥。</p>
+        </div>
+      </section>
+
+      <section id="zones" class="block anchor">
+        <h2>2) 區域說明與套用屬性</h2>
+        <p>
+          神秘試煉在不同區域打起來差很多，原因很簡單：
+          每個區域讀取的戰力來源不同。
+          如果你帳號某一塊特別強、某一塊特別弱，這裡會非常明顯地反映出來。
+        </p>
+
+        <div class="zone-grid">
+          <div class="zone-card">
+            <h3>鬥技場</h3>
+            <p><b>解鎖：</b>直接開放</p>
+            <p><b>套用：</b>英雄、英雄裝備、英雄專屬配件</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>生命之森</h3>
+            <p><b>解鎖：</b>初代寵物解鎖後</p>
+            <p><b>套用：</b>寵物、寵物技能</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>水晶礦洞</h3>
+            <p><b>解鎖：</b>城市中心25級</p>
+            <p><b>套用：</b>領主寶石</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>知識殿堂</h3>
+            <p><b>解鎖：</b>直接開放</p>
+            <p><b>套用：</b>學院研究、戰爭學院研究</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>熔岩要塞</h3>
+            <p><b>解鎖：</b>城市中心22級</p>
+            <p><b>套用：</b>領主裝備</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>光輝尖塔</h3>
+            <p><b>解鎖：</b>直接開放</p>
+            <p><b>套用：</b>英雄、裝備、配件、寵物、寶石、領主裝備、研究、外觀、綠洲加成、VIP 等幾乎全套</p>
+          </div>
+        </div>
+
+        <div class="callout ok" style="margin-top:12px">
+          <h3>寵物補充</h3>
+          <p><b>生命之森</b>與<b>光輝尖塔</b>中的寵物技能會自動生效，不需要自己手動開。</p>
+        </div>
+      </section>
+
+      <section id="raid" class="block anchor">
+        <h2>3) 關卡重置與掃蕩功能</h2>
+        <p>
+          神秘試煉會隨著週期重置關卡進度。
+          但就算重置，<b>排行榜上的成績本身不會消失</b>。
+        </p>
+
+        <ul>
+          <li>多數情況下會視為<b>7天週期</b>。</li>
+          <li>通過<b>1～10關</b>之後就會開啟<b>掃蕩功能</b>。</li>
+          <li>下一次該區域開放時，就能直接掃蕩已通過的關卡來領取重複獎勵。</li>
+        </ul>
+
+        <div class="callout info">
+          <h3>為什麼掃蕩很重要</h3>
+          <p>掃蕩開啟後，神秘試煉就不只是推關內容，而是每週固定回收資源的穩定來源。</p>
+        </div>
+      </section>
+
+      <section id="ratios" class="block anchor">
+        <h2>4) 推薦比例</h2>
+        <p>
+          除了<b>光輝尖塔</b>以外，大部分區域都是由遊戲直接提供<b>Lv.10 部隊</b>。
+          所以真正重要的不是你自己有多少高階兵，而是帳號本身的遠征加成與區域相性。
+        </p>
+
+        <p>
+          AI 通常會以大約<b>33 / 33 / 33</b>的步兵 / 騎兵 / 弓兵比例為基礎，
+          到了第10關左右則會偏向約<b>53 / 27 / 20</b>。
+        </p>
+
+        <div class="callout ok">
+          <h3>安全起手比例</h3>
+          <p>如果你不確定該怎麼配，先從<b>50 / 20 / 30</b>開始最穩。</p>
+        </div>
+
+        <div class="ratio-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>區域</th>
+                <th>推薦比例</th>
+                <th>簡單理解</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>鬥技場</td>
+                <td>50 / 10 / 40</td>
+                <td>後排比重稍高</td>
+              </tr>
+              <tr>
+                <td>生命之森</td>
+                <td>50 / 15 / 35</td>
+                <td>搭配寵物加成的均衡型</td>
+              </tr>
+              <tr>
+                <td>水晶礦洞</td>
+                <td>60 / 20 / 20</td>
+                <td>前排厚一點更穩</td>
+              </tr>
+              <tr>
+                <td>知識殿堂</td>
+                <td>50 / 20 / 30</td>
+                <td>標準穩定型</td>
+              </tr>
+              <tr>
+                <td>熔岩要塞</td>
+                <td>60 / 15 / 25</td>
+                <td>偏向前排承傷</td>
+              </tr>
+              <tr>
+                <td>光輝尖塔</td>
+                <td>50 / 15 / 35</td>
+                <td>更吃整體帳號深度</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>不浪費挑戰次數的改編成方式</h3>
+        <ol>
+          <li>打開<b>挑戰</b></li>
+          <li>進入<b>編輯隊形</b></li>
+          <li>調整你的比例</li>
+          <li><b>不要</b>按部署或快速部署</li>
+          <li>直接用左上角返回離開即可</li>
+        </ol>
+
+        <div class="callout warn">
+          <h3>實戰上通常會變成這樣</h3>
+          <p>
+            一開始很多人都會很認真地把每個區域比例分開測試。
+            但神秘試煉刷久了之後，這件事會變得很麻煩。
+            實際上，多數玩家最後都會放棄每區都精細調整，
+            改用像<b>5 : 2 : 3</b>這樣的泛用比例刷大部分區域，真的卡關時再小修一下就好。
+          </p>
+        </div>
+      </section>
+
+      <section id="rewards" class="block anchor">
+        <h2>5) 獎勵與成長結構</h2>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>首次通關獎勵</h3>
+            <ul>
+              <li>幸運英雄裝備箱</li>
+              <li>強化經驗零件</li>
+              <li>迷霧水晶</li>
+              <li>神秘經驗值</li>
+              <li>試煉寶箱 / 豪華試煉寶箱</li>
+            </ul>
+          </div>
+
+          <div class="mini-card">
+            <h3>里程碑獎勵</h3>
+            <ul>
+              <li>小型鬥技場複製品</li>
+              <li>強化經驗零件</li>
+              <li>神話通用英雄碎片</li>
+              <li>幸運英雄裝備箱</li>
+              <li>自選神話英雄裝備箱</li>
+              <li>秘銀</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>掃蕩獎勵</h3>
+        <p>
+          掃蕩獎勵會依照你在各區域中通過的最高關卡來發放。
+          很簡單的算法是，一週能拿多少迷霧水晶，大致可以用
+          <b>已通關關卡數 × 10</b>來估算。
+        </p>
+
+        <div class="callout info">
+          <h3>為什麼這模式值得長期打</h3>
+          <p>神秘試煉不是一次性的 PvE，而是你推得越高，之後每週都能穩定帶來成長材料的累積型內容。</p>
+        </div>
+      </section>
+
+      <section id="shop" class="block anchor">
+        <h2>6) 試煉商店優先順序</h2>
+        <p>
+          試煉商店使用的是<b>迷霧水晶</b>。
+          只要你持續往上推，每週基本上都能穩定換到一些有用的東西。
+        </p>
+
+        <div class="badge-row">
+          <span class="badge good">秘銀優先度通常很高</span>
+          <span class="badge note">庫存每週重置</span>
+          <span class="badge warn">以長期價值為主</span>
+        </div>
+
+        <h3>商店開放時機補充</h3>
+        <ul>
+          <li><b>秘銀</b>通常會在第二代之後出現。</li>
+          <li><b>真金粉末</b>會在戰爭學院解鎖後的時期加入。</li>
+          <li>可從下方選單或神秘試煉右上角快捷入口進入。</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>購買原則很簡單</h3>
+          <p>先買那些能長期留在帳號價值上的資源，而不是只看眼前好不好用。對多數玩家來說，<b>秘銀</b>通常就是最先考慮的項目。</p>
+        </div>
+      </section>
+
+      <section id="tips" class="block anchor">
+        <h2>7) 實戰運用技巧</h2>
+
+        <h3>不用把每個區域永遠都調到最細</h3>
+        <p>
+          理論上，每個區域都能再拆得更細。
+          但當神秘試煉變成每週固定要打的內容後，
+          最後比起極限最適化，更重要的往往是<b>好刷、穩定、好維持</b>。
+        </p>
+
+        <h3>真的卡住時再做細部調整就好</h3>
+        <p>
+          分區調整比例最有價值的時機，是你正在推新的瓶頸關卡。
+          如果已經能穩穩刷，那就沒必要每區都重新調一次。
+        </p>
+
+        <h3>光輝尖塔要另外看待</h3>
+        <p>
+          光輝尖塔會吃到自己的實際部隊與更完整的帳號深度，
+          所以它比其他區域更能直接反映整體帳號成熟度。
+        </p>
+
+        <div class="callout info">
+          <h3>搭配一起看更方便</h3>
+          <p>
+            在打神秘試煉的同時，
+            也建議順手查看
+            <a href="/zh-tw/guides/kingshot-giftcode.html">Kingshot 禮包碼與兌換碼</a>
+            頁面，避免錯過能幫助每週成長的有效代碼。
+          </p>
+        </div>
+
+        <div class="callout warn">
+          <h3>最後最重要的心態</h3>
+          <p>卡關時認真測，能穩刷後就果斷簡化。這樣打起來最省時間，也最能長久。</p>
+        </div>
+      </section>
+
+      <section id="summary" class="block anchor">
+        <h2>8) 最後總結</h2>
+        <ul>
+          <li><b>解鎖：</b>城市中心19級 + 指揮所</li>
+          <li><b>核心：</b>每個區域讀取的遠征屬性來源不同</li>
+          <li><b>安全起手比例：</b>50 / 20 / 30</li>
+          <li><b>實戰泛用比例：</b>最後多半都會變成用 5 : 2 : 3 去刷大部分區域</li>
+          <li><b>每週價值：</b>推關、掃蕩獎勵、試煉商店資源會一直累積</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>一句話結論</h3>
+          <p>先把機制看懂、把關卡推上去，等穩定後就別再每區都過度微調，直接用好刷的節奏去固定回收每週資源。</p>
+        </div>
+      </section>
+
+      <section id="faq" class="block anchor">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>Kingshot 的神秘試煉什麼時候解鎖？</summary>
+          <p>神秘試煉在城市中心19級後可透過指揮所解鎖。新伺服器通常約在兩週左右開放。</p>
+        </details>
+
+        <details>
+          <summary>神秘試煉推薦從什麼兵種比例開始？</summary>
+          <p>如果沒有把握，先從 50/20/30 開始最穩。之後再依照區域與通關穩定度慢慢調整。</p>
+        </details>
+
+        <details>
+          <summary>神秘試煉真的需要每個區域都一直分開細調比例嗎？</summary>
+          <p>一開始分區測試比例確實有幫助，但打久了會很麻煩。實際上很多人最後都會用 5:2:3 這種泛用比例去刷大部分區域，只有卡關時才做小幅調整。</p>
+        </details>
+
+        <details>
+          <summary>最新的 Kingshot 禮包碼與兌換碼要去哪裡看？</summary>
+          <p><a href="/zh-tw/guides/kingshot-giftcode.html">Kingshot 禮包碼與兌換碼</a>頁面裡會整理有效代碼、到期時間與官方輸入頁面。</p>
+        </details>
+      </section>
+
+      <section class="block">
+        <h2>相關攻略</h2>
+        <div class="pill-list">
+          <a class="pill" href="/zh-tw/guides/kingshot-giftcode.html">Kingshot 禮包碼與兌換碼</a>
+          <a class="pill" href="/zh-tw/guides/kingshot-f2p-guide.html">Kingshot 新手攻略</a>
+          <a class="pill" href="/zh-tw/guides/hallofgovernors.html">最強領主攻略</a>
+          <a class="pill" href="/zh-tw/guides/">查看全部攻略</a>
+        </div>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        這不是官方文件，而是根據實際遊玩經驗與玩家觀察整理出的粉絲攻略。
+        依照更新版本與帳號進度不同，解鎖時機、偏好比例與實際體感難度都可能有所差異。
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

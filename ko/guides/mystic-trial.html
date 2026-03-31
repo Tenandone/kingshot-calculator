@@ -1,0 +1,1060 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>킹샷 신비한 시련 공략 | 해금 조건, 추천 비율, 주간 구역, 실전 팁</title>
+  <meta name="description" content="킹샷 신비한 시련 공략입니다. 해금 조건, 구역별 적용 스탯, 추천 비율, 레이드 보상, 상점 우선순위, 그리고 결국 5:2:3 비율로 돌리게 되는 실전 팁까지 한 번에 정리했습니다." />
+  <meta name="keywords" content="킹샷 신비한 시련, 킹샷 신비한 시련 공략, 킹샷 결투장, 킹샷 생명의 숲, 킹샷 수정 광산, 킹샷 지식의 전당, 킹샷 용암 요새, 킹샷 빛나는 첨탑, 킹샷 추천 비율, 킹샷 시련 상점" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/mystic-trial.html" />
+
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="킹샷 신비한 시련 공략 | 해금 조건, 추천 비율, 주간 구역, 실전 팁" />
+  <meta property="og:description" content="킹샷 신비한 시련 해금 조건, 구역별 적용 스탯, 추천 비율, 레이드 보상, 상점 우선순위, 실전 운영 팁을 정리한 가이드입니다." />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/guides/mystic-trial.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Kingshot Data 대표 이미지" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="킹샷 신비한 시련 공략 | 해금 조건, 추천 비율, 주간 구역, 실전 팁" />
+  <meta name="twitter:description" content="킹샷 신비한 시련 해금 조건, 구역별 적용 스탯, 추천 비율, 레이드 보상, 상점 우선순위, 실전 운영 팁을 정리한 가이드입니다." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guide/mystrical-trial.webp" />
+
+  <style>
+    *{box-sizing:border-box}
+
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --ok:#ecfdf5;
+      --warn:#fff7ed;
+      --note:#f8fafc;
+      --info:#eff6ff;
+
+      --shadow:0 10px 25px rgba(0,0,0,.06);
+      --radius:16px;
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --ok:#0f1e16;
+        --warn:#1a140c;
+        --note:#141414;
+        --info:#111827;
+        --shadow:0 10px 25px rgba(0,0,0,.35);
+      }
+    }
+
+    html,body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:15px/1.72 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+    }
+
+    html{scroll-behavior:smooth}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(26px,3.4vw,40px);
+      line-height:1.18;
+      letter-spacing:-0.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:32px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-side{
+      display:grid;
+      gap:12px;
+    }
+    .hero-visual,
+    .hero-side-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      overflow:hidden;
+    }
+    .hero-visual img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .hero-side-card{
+      padding:14px;
+    }
+    .hero-side-card h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-side-card ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .hero-side-card li{margin:6px 0}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note);
+    }
+    .callout.ok{background:var(--ok)}
+    .callout.warn{background:var(--warn)}
+    .callout.info{background:var(--info)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0;padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text);font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:21px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul,
+    section.block ol{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .mini-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:12px 14px;
+    }
+    .mini-card h3{
+      margin:0 0 8px;
+      font-size:14px;
+    }
+
+    .zone-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .zone-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:14px;
+    }
+    .zone-card h3{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--text);
+    }
+    .zone-card p{
+      margin:6px 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .ratio-table-wrap{
+      overflow:auto;
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      background:var(--panel);
+      min-width:720px;
+    }
+    th,td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+      vertical-align:top;
+    }
+    th{
+      background:var(--panel2);
+      font-size:13px;
+      letter-spacing:.01em;
+    }
+    tr:last-child td{border-bottom:0}
+
+    .badge-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      min-height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:1000;
+      border:1px solid var(--border);
+      background:var(--panel);
+    }
+    .badge.good{background:var(--ok)}
+    .badge.note{background:var(--info)}
+    .badge.warn{background:var(--warn)}
+
+    .pill-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:var(--note);
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+
+    .foot{
+      margin:18px 0 8px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:980px){
+      .hero,
+      .grid,
+      .mini-grid,
+      .zone-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+    }
+
+    @media (max-width:600px){
+      h1{font-size:26px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"킹샷 신비한 시련 공략 | 해금 조건, 추천 비율, 주간 구역, 실전 팁",
+    "inLanguage":"ko",
+    "description":"킹샷 신비한 시련 해금 조건, 구역별 적용 스탯, 추천 비율, 레이드 보상, 상점 우선순위, 실전 운영 팁을 정리한 가이드입니다.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ko/guides/mystic-trial.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
+      {"@type":"ListItem","position":2,"name":"가이드","item":"https://kingshotdata.kr/ko/guides/"},
+      {"@type":"ListItem","position":3,"name":"신비한 시련 공략","item":"https://kingshotdata.kr/ko/guides/mystic-trial.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"킹샷 신비한 시련은 언제 해금되나요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"신비한 시련은 도시센터 19레벨 달성 후 지휘부를 통해 해금됩니다. 신규 서버에서는 보통 약 2주 전후에 열립니다."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"신비한 시련 추천 비율은 무엇으로 시작하면 되나요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"확신이 없다면 50/20/30으로 시작하는 것이 무난합니다. 이후 구역과 클리어 안정성에 따라 조금씩 조정하면 됩니다."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"신비한 시련은 구역마다 비율을 끝까지 따로 맞춰야 하나요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"처음에는 구역마다 비율을 나눠 테스트하는 것이 도움이 됩니다. 하지만 계속 하다 보면 매우 귀찮아지기 때문에, 실제로는 5:2:3 같은 범용 비율로 거의 다 돌리고 막히는 구간에서만 소폭 조정하는 경우가 많습니다."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"최신 킹샷 기프트코드 및 리딤코드는 어디서 확인하나요?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"활성 코드, 만료일, 공식 입력창까지 함께 정리된 킹샷 기프트코드 및 리딤코드 페이지에서 확인할 수 있습니다."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/ko/guides/mystic-trial.html" aria-current="page">KO</a>
+        <a href="/en/guides/mystic-trial.html">EN</a>
+        <a href="/ja/guides/mystic-trial.html">JA</a>
+        <a href="/zh-tw/guides/mystic-trial.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">개요</a>
+      <a href="#zones">구역</a>
+      <a href="#ratios">비율</a>
+      <a href="#raid">레이드</a>
+      <a href="#rewards">보상</a>
+      <a href="#shop">상점</a>
+      <a href="#tips">실전 팁</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main>
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/guides/">가이드</a> <span class="muted">›</span>
+        <span>신비한 시련 공략</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>킹샷 신비한 시련 공략 | 해금 조건, 추천 비율, 주간 구역, 실전 팁</h1>
+          <p class="sub">
+            신비한 시련은 장기 성장에 도움이 되는 주간 PvE 콘텐츠입니다.
+            이 페이지에서는 해금 조건, 구역별 적용 스탯, 추천 비율, 레이드 보상, 상점 우선순위,
+            그리고 실제로는 모든 구역을 끝까지 세세하게 맞추기보다 점점 단순화해서 돌리게 되는 운영 감각까지 함께 정리합니다.
+          </p>
+
+          <div class="meta">
+            <span class="tag">도시센터 19 해금</span>
+            <span class="tag">주간 콘텐츠</span>
+            <span class="tag">추천 비율</span>
+            <span class="tag">레이드 보상</span>
+            <span class="tag">시련 상점</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <div class="hero-visual">
+            <img src="/img/guide/mystrical-trial.webp" alt="킹샷 신비한 시련 공략 대표 이미지" loading="eager" fetchpriority="high" width="1200" height="630" />
+          </div>
+
+          <div class="hero-side-card">
+            <h2>핵심 한줄 요약</h2>
+            <ul>
+              <li>신비한 시련은 내 병력 자체보다 구역별로 어떤 스탯이 적용되는지가 더 중요합니다.</li>
+              <li>처음엔 구역별 비율을 따로 테스트해보는 것이 도움이 됩니다.</li>
+              <li>하지만 계속 하다 보면 귀찮아져서 결국 5:2:3 같은 범용 비율로 거의 다 돌리게 되는 경우가 많습니다.</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>먼저 기억할 것</h3>
+            <ul>
+              <li><b>신비한 시련은 도시센터 19레벨</b>에서 지휘부를 통해 해금됩니다.</li>
+              <li>각 구역은 적용되는 <b>원정 스탯</b>이 다르므로, 한 구역이 쉽다고 다른 구역도 쉬운 것은 아닙니다.</li>
+              <li><b>빛나는 첨탑</b>을 제외하면 게임이 <b>Lv.10 병사</b>를 제공하므로, 내 계정의 보너스 출처가 더 중요합니다.</li>
+              <li>스테이지 진행도는 초기화될 수 있지만, <b>리더보드 기록 자체가 사라지는 것은 아닙니다</b>.</li>
+              <li>1~10단계를 클리어하면 <b>레이드</b>가 열리고, 이후부터는 주간 반복 수급 콘텐츠 느낌이 강해집니다.</li>
+            </ul>
+          </div>
+
+          <div class="callout info" style="margin-top:12px">
+            <h3>최신 킹샷 기프트코드 및 리딤코드도 함께 확인하세요</h3>
+            <p>
+              활성 코드, 만료일, 공식 입력창까지 같이 보려면
+              <a href="/ko/guides/kingshot-giftcode.html">킹샷 기프트코드 및 리딤코드</a> 페이지도 같이 보는 것이 좋습니다.
+            </p>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>가장 흔한 실수</h3>
+            <ul>
+              <li>모든 구역을 똑같이 봐서, 구역별 적용 스탯 차이를 무시하는 것</li>
+              <li>편성 테스트 중에 <b>배치</b>를 눌러 일일 도전 횟수를 날려버리는 것</li>
+              <li>끝까지 모든 구역을 과하게 미세 조정하려다 오히려 피로해지는 것</li>
+              <li>시련 상점을 가볍게 넘겨서 주간 누적 가치를 놓치는 것</li>
+            </ul>
+          </div>
+
+          <div class="pill-list">
+            <a class="pill" href="#overview">해금 조건</a>
+            <a class="pill" href="#zones">구역 설명</a>
+            <a class="pill" href="#ratios">추천 비율</a>
+            <a class="pill" href="#raid">레이드</a>
+            <a class="pill" href="#rewards">보상</a>
+            <a class="pill" href="#shop">상점</a>
+            <a class="pill" href="#tips">실전 팁</a>
+            <a class="pill" href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <nav class="toc card" aria-label="Table of contents">
+          <h2>목차</h2>
+          <ul>
+            <li><a href="#overview">1) 기본 정보와 해금 조건</a></li>
+            <li><a href="#zones">2) 구역 설명과 적용 스탯</a></li>
+            <li><a href="#raid">3) 단계 초기화와 레이드 기능</a></li>
+            <li><a href="#ratios">4) 추천 비율</a></li>
+            <li><a href="#rewards">5) 보상과 성장 구조</a></li>
+            <li><a href="#shop">6) 시련 상점 우선순위</a></li>
+            <li><a href="#tips">7) 실전 운영 팁</a></li>
+            <li><a href="#summary">8) 최종 요약</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="overview" class="block anchor">
+        <h2>1) 기본 정보와 해금 조건</h2>
+        <p>
+          신비한 시련은 <b>도시센터 19레벨</b>을 달성하면 <b>지휘부</b>를 통해 해금됩니다.
+          신규 서버 기준으로는 보통 <b>약 2주 전후</b>에 열리는 편입니다.
+        </p>
+
+        <ul>
+          <li>관련 시스템이 아직 열리지 않은 경우 일부 신비 건물은 비활성 상태일 수 있습니다.</li>
+          <li>이는 각 건물이 서로 다른 원정 스탯 출처를 읽기 때문입니다.</li>
+          <li><b>아이템 버프, 국왕 특권, 장관 버프, 연맹 보너스, 전초기지 보너스</b>는 신비한 시련에 적용되지 않습니다.</li>
+        </ul>
+
+        <div class="callout info">
+          <h3>중요한 전제</h3>
+          <p>신비한 시련은 <b>원정 스탯 기반 전투</b>입니다. 정복 전투도 아니고, 아레나 전투도 아닙니다.</p>
+        </div>
+      </section>
+
+      <section id="zones" class="block anchor">
+        <h2>2) 구역 설명과 적용 스탯</h2>
+        <p>
+          신비한 시련이 구역마다 다르게 느껴지는 이유는 간단합니다.
+          각 구역이 읽는 계정 스펙 출처가 다르기 때문입니다.
+          한쪽은 강하고 다른 한쪽은 약하다면, 그 차이가 바로 체감됩니다.
+        </p>
+
+        <div class="zone-grid">
+          <div class="zone-card">
+            <h3>결투장</h3>
+            <p><b>해금:</b> 즉시 해금</p>
+            <p><b>적용:</b> 영웅, 영웅 장비, 영웅 전용 위젯</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>생명의 숲</h3>
+            <p><b>해금:</b> 1세대 펫 해금 이후</p>
+            <p><b>적용:</b> 펫, 펫 스킬</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>수정 광산</h3>
+            <p><b>해금:</b> 도시센터 25</p>
+            <p><b>적용:</b> 영주 보석</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>지식의 전당</h3>
+            <p><b>해금:</b> 즉시 해금</p>
+            <p><b>적용:</b> 아카데미 연구, 전쟁 아카데미 연구</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>용암 요새</h3>
+            <p><b>해금:</b> 도시센터 22</p>
+            <p><b>적용:</b> 영주 장비</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>빛나는 첨탑</h3>
+            <p><b>해금:</b> 즉시 해금</p>
+            <p><b>적용:</b> 영웅, 장비, 위젯, 펫, 보석, 영주 장비, 연구, 스킨, 오아시스 보너스, VIP 등 거의 전체</p>
+          </div>
+        </div>
+
+        <div class="callout ok" style="margin-top:12px">
+          <h3>펫 관련 참고</h3>
+          <p><b>생명의 숲</b>과 <b>빛나는 첨탑</b>에서는 펫 스킬이 자동으로 적용됩니다. 직접 눌러서 쿨타임을 낭비할 필요가 없습니다.</p>
+        </div>
+      </section>
+
+      <section id="raid" class="block anchor">
+        <h2>3) 단계 초기화와 레이드 기능</h2>
+        <p>
+          신비한 시련은 주기적으로 스테이지 진행도가 초기화됩니다.
+          다만 초기화가 되어도 <b>리더보드 기록 자체는 유지</b>됩니다.
+        </p>
+
+        <ul>
+          <li>초기화 주기는 대체로 <b>7일</b> 기준으로 보는 경우가 많습니다.</li>
+          <li><b>1~10단계</b>를 클리어하면 <b>레이드 기능</b>이 열립니다.</li>
+          <li>이후 다시 구역이 열리면, 이미 클리어한 구간을 레이드로 빠르게 수령할 수 있습니다.</li>
+        </ul>
+
+        <div class="callout info">
+          <h3>왜 레이드가 중요하냐면</h3>
+          <p>레이드가 열리고 나면 신비한 시련은 단순 도전 콘텐츠가 아니라, 매주 시간을 아껴주는 반복 수급 콘텐츠 성격이 강해집니다.</p>
+        </div>
+      </section>
+
+      <section id="ratios" class="block anchor">
+        <h2>4) 추천 비율</h2>
+        <p>
+          <b>빛나는 첨탑</b>을 제외한 대부분 구역은 게임이 <b>Lv.10 병사</b>를 제공하기 때문에,
+          병종 자체보다 내 계정의 원정 보너스와 구역 특성이 더 중요합니다.
+        </p>
+
+        <p>
+          기본적으로 AI는 보병 / 기병 / 궁병을 <b>33 / 33 / 33</b> 비슷하게 사용하는 편이며,
+          10단계쯤 되면 약 <b>53 / 27 / 20</b> 비율로 바뀌는 것으로 보는 경우가 많습니다.
+        </p>
+
+        <div class="callout ok">
+          <h3>무난한 시작 비율</h3>
+          <p>확신이 없다면 우선 <b>50 / 20 / 30</b>으로 시작하는 것이 가장 무난합니다.</p>
+        </div>
+
+        <div class="ratio-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>구역</th>
+                <th>추천 비율</th>
+                <th>간단 해석</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>결투장</td>
+                <td>50 / 10 / 40</td>
+                <td>후열 비중을 조금 더 높게</td>
+              </tr>
+              <tr>
+                <td>생명의 숲</td>
+                <td>50 / 15 / 35</td>
+                <td>펫 보조를 감안한 균형형</td>
+              </tr>
+              <tr>
+                <td>수정 광산</td>
+                <td>60 / 20 / 20</td>
+                <td>전열을 더 두껍게</td>
+              </tr>
+              <tr>
+                <td>지식의 전당</td>
+                <td>50 / 20 / 30</td>
+                <td>기본 안정형</td>
+              </tr>
+              <tr>
+                <td>용암 요새</td>
+                <td>60 / 15 / 25</td>
+                <td>전면 유지력 위주</td>
+              </tr>
+              <tr>
+                <td>빛나는 첨탑</td>
+                <td>50 / 15 / 35</td>
+                <td>계정 스펙 영향이 더 큼</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>도전 횟수 안 날리고 편성 바꾸는 법</h3>
+        <ol>
+          <li><b>도전</b> 진입</li>
+          <li><b>편성 수정</b> 진입</li>
+          <li>비율 조정</li>
+          <li><b>배치 / 빠른 배치</b>는 누르지 않기</li>
+          <li>좌측 상단 뒤로가기로 안전하게 빠져나오기</li>
+        </ol>
+
+        <div class="callout warn">
+          <h3>실전에서는 이렇게 됩니다</h3>
+          <p>
+            처음에는 구역마다 비율을 따로 나눠서 열정적으로 테스트하게 됩니다.
+            그런데 신비한 시련을 계속 돌리다 보면 이 과정이 매우 귀찮아집니다.
+            그래서 실제로는 점점 모든 구역을 세세하게 따로 맞추기보다,
+            <b>5 : 2 : 3</b> 같은 범용 비율로 거의 다 돌리고 막히는 구간에서만 조금 손보는 방식으로 굳어지는 경우가 많습니다.
+          </p>
+        </div>
+      </section>
+
+      <section id="rewards" class="block anchor">
+        <h2>5) 보상과 성장 구조</h2>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>첫 클리어 보상</h3>
+            <ul>
+              <li>행운 영웅 장비 상자</li>
+              <li>강화 경험치 부품</li>
+              <li>안개의 수정</li>
+              <li>신비 경험치</li>
+              <li>시련 상자 / 화려한 시련 상자</li>
+            </ul>
+          </div>
+
+          <div class="mini-card">
+            <h3>마일스톤 보상</h3>
+            <ul>
+              <li>작은 결투장 복제본</li>
+              <li>강화 경험치 부품</li>
+              <li>신화 공용 영웅 조각</li>
+              <li>행운 영웅 장비 상자</li>
+              <li>커스텀 신화 영웅 장비 상자</li>
+              <li>미스릴</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>레이드 보상</h3>
+        <p>
+          레이드 보상은 각 구역에서 가장 높게 클리어한 단계 기준으로 지급됩니다.
+          아주 단순하게 계산하면 주간 안개의 수정 수급량은
+          <b>클리어 단계 × 10</b> 정도로 생각해볼 수 있습니다.
+        </p>
+
+        <div class="callout info">
+          <h3>왜 장기적으로 중요하냐면</h3>
+          <p>신비한 시련은 단순한 PvE가 아니라, 꾸준히 밀어둘수록 매주 성장 재료를 가져다주는 누적형 콘텐츠이기 때문입니다.</p>
+        </div>
+      </section>
+
+      <section id="shop" class="block anchor">
+        <h2>6) 시련 상점 우선순위</h2>
+        <p>
+          시련 상점은 <b>안개의 수정</b>을 사용합니다.
+          스테이지를 꾸준히 밀어두면 매주 무난하게 필요한 것들을 구매할 수 있습니다.
+        </p>
+
+        <div class="badge-row">
+          <span class="badge good">미스릴 우선도가 높음</span>
+          <span class="badge note">재고는 주간 초기화</span>
+          <span class="badge warn">장기 가치 중심 구매</span>
+        </div>
+
+        <h3>상점 오픈 타이밍 참고</h3>
+        <ul>
+          <li><b>미스릴</b>은 2세대 이후 추가되는 경우가 많습니다.</li>
+          <li><b>순금 가루</b>는 전쟁 아카데미 해금 시기 이후에 추가됩니다.</li>
+          <li>하단 메뉴 또는 신비한 시련 우측 상단 바로가기를 통해 진입할 수 있습니다.</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>간단 구매 원칙</h3>
+          <p>순간적으로 좋아 보이는 것보다, 계정에 오래 남는 가치를 우선으로 사는 것이 좋습니다. 많은 경우 시작은 <b>미스릴</b>입니다.</p>
+        </div>
+      </section>
+
+      <section id="tips" class="block anchor">
+        <h2>7) 실전 운영 팁</h2>
+
+        <h3>모든 구역을 끝까지 완벽하게 미세 조정할 필요는 없습니다</h3>
+        <p>
+          이론상으로는 각 구역마다 세세하게 최적화를 할 수 있습니다.
+          하지만 신비한 시련이 매주 반복되는 루틴이 되면, 결국은 <b>편하고 반복 가능한 운영</b>이 더 중요해집니다.
+        </p>
+
+        <h3>정밀 비율 조정은 막힐 때만 하면 됩니다</h3>
+        <p>
+          구역별 비율 조정은 새로운 벽을 뚫을 때 가장 의미가 큽니다.
+          이미 안정적으로 밀고 있다면, 같은 범용 비율을 계속 쓰는 편이 훨씬 편합니다.
+        </p>
+
+        <h3>빛나는 첨탑은 별도로 생각해야 합니다</h3>
+        <p>
+          빛나는 첨탑은 내 실제 병력과 더 넓은 계정 스펙이 반영되기 때문에,
+          다른 구역보다 전체 계정 깊이를 훨씬 더 강하게 보여줍니다.
+        </p>
+
+        <div class="callout info">
+          <h3>같이 보면 좋은 페이지</h3>
+          <p>
+            신비한 시련을 진행하면서
+            <a href="/ko/guides/kingshot-giftcode.html">킹샷 기프트코드 및 리딤코드</a>
+            페이지도 함께 확인해두면, 주간 성장에 도움 되는 활성 코드를 놓치지 않을 수 있습니다.
+          </p>
+        </div>
+
+        <div class="callout warn">
+          <h3>결국 중요한 운영 마인드</h3>
+          <p>막힐 때는 진지하게 테스트하고, 익숙해진 뒤에는 과감하게 단순화하는 것이 제일 오래 갑니다.</p>
+        </div>
+      </section>
+
+      <section id="summary" class="block anchor">
+        <h2>8) 최종 요약</h2>
+        <ul>
+          <li><b>해금:</b> 도시센터 19레벨 + 지휘부</li>
+          <li><b>핵심:</b> 구역마다 적용되는 원정 스탯 출처가 다름</li>
+          <li><b>안전한 시작 비율:</b> 50 / 20 / 30</li>
+          <li><b>실전 범용 비율:</b> 결국 5 : 2 : 3으로 거의 다 돌리게 되는 경우가 많음</li>
+          <li><b>주간 가치:</b> 단계 클리어, 레이드 보상, 시련 상점 재화가 계속 누적됨</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>한 줄 결론</h3>
+          <p>처음에는 구조를 이해하고 밀고, 익숙해지면 과한 미세 조정보다 편한 루틴으로 굴리는 것이 가장 효율적입니다.</p>
+        </div>
+      </section>
+
+      <section id="faq" class="block anchor">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>킹샷 신비한 시련은 언제 해금되나요?</summary>
+          <p>신비한 시련은 도시센터 19레벨 달성 후 지휘부를 통해 해금됩니다. 신규 서버에서는 보통 약 2주 전후에 열립니다.</p>
+        </details>
+
+        <details>
+          <summary>신비한 시련 추천 비율은 무엇으로 시작하면 되나요?</summary>
+          <p>확신이 없다면 50/20/30으로 시작하는 것이 무난합니다. 이후 구역과 클리어 안정성에 따라 조금씩 조정하면 됩니다.</p>
+        </details>
+
+        <details>
+          <summary>신비한 시련은 구역마다 비율을 끝까지 따로 맞춰야 하나요?</summary>
+          <p>처음에는 구역마다 비율을 나눠 테스트하는 것이 도움이 됩니다. 하지만 계속 하다 보면 매우 귀찮아지기 때문에, 실제로는 5:2:3 같은 범용 비율로 거의 다 돌리고 막히는 구간에서만 소폭 조정하는 경우가 많습니다.</p>
+        </details>
+
+        <details>
+          <summary>최신 킹샷 기프트코드 및 리딤코드는 어디서 확인하나요?</summary>
+          <p><a href="/ko/guides/kingshot-giftcode.html">킹샷 기프트코드 및 리딤코드</a> 페이지에서 활성 코드, 만료일, 공식 입력창까지 함께 확인할 수 있습니다.</p>
+        </details>
+      </section>
+
+      <section class="block">
+        <h2>관련 가이드</h2>
+        <div class="pill-list">
+          <a class="pill" href="/ko/guides/kingshot-giftcode.html">킹샷 기프트코드 및 리딤코드</a>
+          <a class="pill" href="/ko/guides/kingshot-f2p-guide.html">킹샷 초보자 가이드</a>
+          <a class="pill" href="/ko/guides/hallofgovernors.html">최강영주 가이드</a>
+          <a class="pill" href="/ko/guides/">가이드 전체 보기</a>
+        </div>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        이 문서는 공식 자료가 아니라, 실전 플레이 경험과 유저 관찰을 바탕으로 정리한 팬 가이드입니다.
+        업데이트 시기나 계정 상태에 따라 해금 시점, 선호 비율, 체감 난이도는 달라질 수 있습니다.
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

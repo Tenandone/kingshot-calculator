@@ -1,0 +1,1058 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kingshot Mystic Trial Guide | Unlocks, Ratios, Weekly Zones, and Practical Tips</title>
+  <meta name="description" content="Kingshot Mystic Trial guide with unlock requirements, zone explanations, troop ratio advice, raid rewards, weekly shop priorities, and practical route tips for Coliseum, Forest of Life, Crystal Cave, Knowledge Nexus, Molten Fort, and Radiant Spire." />
+  <meta name="keywords" content="Kingshot Mystic Trial, Kingshot Mystic Trial guide, Kingshot troop ratio, Kingshot Coliseum, Kingshot Forest of Life, Kingshot Crystal Cave, Kingshot Knowledge Nexus, Kingshot Molten Fort, Kingshot Radiant Spire, Kingshot trial shop" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/en/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/mystic-trial.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/mystic-trial.html" />
+
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot Mystic Trial Guide | Unlocks, Ratios, Weekly Zones, and Practical Tips" />
+  <meta property="og:description" content="A practical Kingshot Mystic Trial guide covering unlock conditions, zone mechanics, troop ratios, raid rewards, and shop priorities." />
+  <meta property="og:url" content="https://kingshotdata.kr/en/guides/mystic-trial.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Kingshot Data cover image" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kingshot Mystic Trial Guide | Unlocks, Ratios, Weekly Zones, and Practical Tips" />
+  <meta name="twitter:description" content="A practical Kingshot Mystic Trial guide covering unlock conditions, zone mechanics, troop ratios, raid rewards, and shop priorities." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guide/mystrical-trial.webp" />
+
+  <style>
+    *{box-sizing:border-box}
+
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+
+      --ok:#ecfdf5;
+      --warn:#fff7ed;
+      --note:#f8fafc;
+      --info:#eff6ff;
+
+      --shadow:0 10px 25px rgba(0,0,0,.06);
+      --radius:16px;
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0b;
+        --panel:#121212;
+        --panel2:#16181d;
+        --border:#2a2a2a;
+        --text:#e8eaed;
+        --muted:#b7bcc6;
+        --ok:#0f1e16;
+        --warn:#1a140c;
+        --note:#141414;
+        --info:#111827;
+        --shadow:0 10px 25px rgba(0,0,0,.35);
+      }
+    }
+
+    html,body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:15px/1.72 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+    }
+
+    html{scroll-behavior:smooth}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(26px,3.4vw,40px);
+      line-height:1.18;
+      letter-spacing:-0.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      height:32px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .hero-side{
+      display:grid;
+      gap:12px;
+    }
+    .hero-visual,
+    .hero-side-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      overflow:hidden;
+    }
+    .hero-visual img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .hero-side-card{
+      padding:14px;
+    }
+    .hero-side-card h2{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .hero-side-card ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .hero-side-card li{margin:6px 0}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .callout{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--note);
+    }
+    .callout.ok{background:var(--ok)}
+    .callout.warn{background:var(--warn)}
+    .callout.info{background:var(--info)}
+    .callout h3{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+    .callout p{margin:6px 0}
+    .callout ul{margin:8px 0 0;padding-left:18px}
+    .callout li{margin:6px 0}
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:1000;
+    }
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+    .toc a{color:var(--text);font-weight:900}
+
+    section.block{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    section.block h2{
+      margin:0 0 10px;
+      font-size:21px;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      color:var(--accent);
+    }
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+    section.block p{margin:8px 0}
+    section.block ul,
+    section.block ol{margin:8px 0;padding-left:18px}
+    section.block li{margin:7px 0}
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .mini-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:12px 14px;
+    }
+    .mini-card h3{
+      margin:0 0 8px;
+      font-size:14px;
+    }
+
+    .zone-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .zone-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--note);
+      padding:14px;
+    }
+    .zone-card h3{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--text);
+    }
+    .zone-card p{
+      margin:6px 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .ratio-table-wrap{
+      overflow:auto;
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      background:var(--panel);
+      min-width:720px;
+    }
+    th,td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+      vertical-align:top;
+    }
+    th{
+      background:var(--panel2);
+      font-size:13px;
+      letter-spacing:.01em;
+    }
+    tr:last-child td{border-bottom:0}
+
+    .badge-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      min-height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:1000;
+      border:1px solid var(--border);
+      background:var(--panel);
+    }
+    .badge.good{background:var(--ok)}
+    .badge.note{background:var(--info)}
+    .badge.warn{background:var(--warn)}
+
+    .pill-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--panel);
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .pill:hover{border-color:#c7d2fe}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:var(--note);
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+    }
+
+    .foot{
+      margin:18px 0 8px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .hr{
+      border:0;
+      border-top:1px solid var(--border);
+      margin:16px 0;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:980px){
+      .hero,
+      .grid,
+      .mini-grid,
+      .zone-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:14px 12px 56px}
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:6px 12px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+    }
+
+    @media (max-width:600px){
+      h1{font-size:26px}
+      section.block{padding:14px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kingshot Mystic Trial Guide | Unlocks, Ratios, Weekly Zones, and Practical Tips",
+    "inLanguage":"en",
+    "description":"A practical Kingshot Mystic Trial guide covering unlock conditions, zone mechanics, troop ratios, raid rewards, and shop priorities.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/en/guides/mystic-trial.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://kingshotdata.kr/en/"},
+      {"@type":"ListItem","position":2,"name":"Guides","item":"https://kingshotdata.kr/en/guides/"},
+      {"@type":"ListItem","position":3,"name":"Mystic Trial Guide","item":"https://kingshotdata.kr/en/guides/mystic-trial.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"When does Mystic Trial unlock in Kingshot?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Mystic Trial unlocks after reaching Town Center 19 and becomes available through the Command Center. New servers usually unlock it after around two weeks."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What troop ratio should I start with in Mystic Trial?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"If you are not sure, start with 50/20/30. From there, adjust slightly based on the zone and your clear stability."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Do I need different troop ratios for every Mystic Trial zone forever?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"At first, many players test different ratios for each zone. But over time it becomes tedious, and many players simply run a practical all-purpose ratio like 5:2:3 unless a stage forces a small adjustment."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Where can I check the latest Kingshot gift codes and redeem codes?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"You can check the latest Kingshot gift codes and redeem codes on the dedicated gift code guide page, which also includes expiry dates and the official redeem page."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/en/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/mystic-trial.html" aria-current="page">EN</a>
+        <a href="/ko/guides/mystic-trial.html">KO</a>
+        <a href="/ja/guides/mystic-trial.html">JA</a>
+        <a href="/zh-tw/guides/mystic-trial.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">Overview</a>
+      <a href="#zones">Zones</a>
+      <a href="#ratios">Ratios</a>
+      <a href="#raid">Raid</a>
+      <a href="#rewards">Rewards</a>
+      <a href="#shop">Shop</a>
+      <a href="#tips">Tips</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <main>
+      <div class="crumbs">
+        <a href="/en/">Home</a> <span class="muted">›</span>
+        <a href="/en/guides/">Guides</a> <span class="muted">›</span>
+        <span>Mystic Trial Guide</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>Kingshot Mystic Trial Guide | Unlocks, Ratios, Weekly Zones, and Practical Tips</h1>
+          <p class="sub">
+            Mystic Trial is one of the most useful weekly PvE systems for long-term account growth.
+            This guide explains unlock requirements, zone-specific stat sources, troop ratio ideas, raid rewards, shop priorities, and the practical reality that most players eventually stop over-tuning every stage.
+          </p>
+
+          <div class="meta">
+            <span class="tag">TC 19 Unlock</span>
+            <span class="tag">Weekly Progress</span>
+            <span class="tag">Zone Ratios</span>
+            <span class="tag">Raid Rewards</span>
+            <span class="tag">Trial Shop</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <div class="hero-visual">
+            <img src="/img/guide/mystrical-trial.webp" alt="Kingshot Mystic Trial guide cover" loading="eager" fetchpriority="high" width="1200" height="630" />
+          </div>
+
+          <div class="hero-side-card">
+            <h2>Core takeaway</h2>
+            <ul>
+              <li>Mystic Trial is less about raw troop ownership and more about the stat source used in each zone.</li>
+              <li>At first, testing a different troop ratio per zone can help.</li>
+              <li>Later, most players get tired of constant tweaking and end up running a simple all-purpose ratio like 5:2:3 unless a stage blocks progress.</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <div class="callout ok">
+            <h3>Remember these first</h3>
+            <ul>
+              <li><b>Mystic Trial unlocks at Town Center 19</b> through the Command Center.</li>
+              <li>Each zone uses a different set of <b>Expedition stats</b>, so the reason you clear one zone easily may not apply to another.</li>
+              <li>Outside Radiant Spire, the game provides <b>Lv. 10 troops</b>, so your bonus sources matter more than raw troop ownership.</li>
+              <li>Stage progress can reset, but your <b>leaderboard standing does not</b>.</li>
+              <li>After clearing stages 1–10, <b>Raid</b> unlocks and becomes a weekly quality-of-life feature.</li>
+            </ul>
+          </div>
+
+          <div class="callout info" style="margin-top:12px">
+            <h3>Need the latest Kingshot gift codes and redeem codes?</h3>
+            <p>
+              If you also want to check active codes, expiry dates, and the official redeem page,
+              visit the <a href="/en/guides/kingshot-giftcode.html">Kingshot Gift Codes &amp; Redeem Codes guide</a>.
+            </p>
+          </div>
+
+          <div class="callout warn" style="margin-top:12px">
+            <h3>Most common mistakes</h3>
+            <ul>
+              <li>Trying to treat every zone the same even though each one uses different stat sources.</li>
+              <li>Clicking <b>Deploy</b> while testing formations and wasting daily attempts.</li>
+              <li>Over-optimizing troop ratios forever instead of using a stable practical ratio once the content becomes routine.</li>
+              <li>Ignoring the Trial Shop and losing a steady weekly source of long-term value.</li>
+            </ul>
+          </div>
+
+          <div class="pill-list">
+            <a class="pill" href="#overview">Unlocks</a>
+            <a class="pill" href="#zones">Zone Guide</a>
+            <a class="pill" href="#ratios">Ratios</a>
+            <a class="pill" href="#raid">Raid</a>
+            <a class="pill" href="#rewards">Rewards</a>
+            <a class="pill" href="#shop">Shop</a>
+            <a class="pill" href="#tips">Practical Tips</a>
+            <a class="pill" href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <nav class="toc card" aria-label="Table of contents">
+          <h2>Table of Contents</h2>
+          <ul>
+            <li><a href="#overview">1) Basic information and unlock requirements</a></li>
+            <li><a href="#zones">2) Zone explanation and stat sources</a></li>
+            <li><a href="#raid">3) Stage reset and raid feature</a></li>
+            <li><a href="#ratios">4) Troop ratio advice</a></li>
+            <li><a href="#rewards">5) Rewards and progression</a></li>
+            <li><a href="#shop">6) Trial Shop priorities</a></li>
+            <li><a href="#tips">7) Practical player advice</a></li>
+            <li><a href="#summary">8) Final summary</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="overview" class="block anchor">
+        <h2>1) Basic information and unlock requirements</h2>
+        <p>
+          Mystic Trial unlocks after reaching <b>Town Center 19</b> and can be accessed from the <b>Command Center</b>.
+          On new servers, it usually appears after around <b>two weeks</b>.
+        </p>
+
+        <ul>
+          <li>Some Mystic buildings may still be unavailable if you have not unlocked the relevant system yet.</li>
+          <li>That is because each building uses a different group of Expedition stat sources.</li>
+          <li>Bonus Items, King’s perks, Ministry positions, Alliance bonuses, and Outpost bonuses <b>do not affect</b> Mystic Trial.</li>
+        </ul>
+
+        <div class="callout info">
+          <h3>Important rule</h3>
+          <p>Mystic Trial uses <b>Expedition stats and Expedition-style combat</b>. It is not Conquest combat and it is not Arena combat.</p>
+        </div>
+      </section>
+
+      <section id="zones" class="block anchor">
+        <h2>2) Zone explanation and stat sources</h2>
+        <p>
+          The reason Mystic Trial feels uneven across zones is simple:
+          each zone reads power from different systems.
+          If one part of your account is strong and another is weak, that difference shows immediately.
+        </p>
+
+        <div class="zone-grid">
+          <div class="zone-card">
+            <h3>Coliseum</h3>
+            <p><b>Unlock:</b> Available immediately</p>
+            <p><b>Uses:</b> Heroes, Hero Gear, Hero Exclusive Widget</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>Forest of Life</h3>
+            <p><b>Unlock:</b> First generation of Pets</p>
+            <p><b>Uses:</b> Pets, Pet Skills</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>Crystal Cave</h3>
+            <p><b>Unlock:</b> TC 25</p>
+            <p><b>Uses:</b> Governor Charm</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>Knowledge Nexus</h3>
+            <p><b>Unlock:</b> Available immediately</p>
+            <p><b>Uses:</b> Academy Tech, War Academy Tech</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>Molten Fort</h3>
+            <p><b>Unlock:</b> TC 22</p>
+            <p><b>Uses:</b> Governor Gear</p>
+          </div>
+
+          <div class="zone-card">
+            <h3>Radiant Spire</h3>
+            <p><b>Unlock:</b> Available immediately</p>
+            <p><b>Uses:</b> Almost everything: Heroes, Gear, Widgets, Pets, Charms, Governor Gear, Academy, War Academy, Skins, Oasis bonuses, VIP, and more</p>
+          </div>
+        </div>
+
+        <div class="callout ok" style="margin-top:12px">
+          <h3>Useful note about pets</h3>
+          <p>Pet skills activate automatically in <b>Forest of Life</b> and <b>Radiant Spire</b>. You do not need to trigger them manually.</p>
+        </div>
+      </section>
+
+      <section id="raid" class="block anchor">
+        <h2>3) Stage reset and Raid feature</h2>
+        <p>
+          Mystic Trial zones can be reset by the game’s schedule.
+          When that happens, your stage progress inside the zone resets, but your <b>leaderboard ranking does not disappear</b>.
+        </p>
+
+        <ul>
+          <li>The reset is generally believed to follow a <b>7-day cycle</b>.</li>
+          <li>After clearing stages <b>1 through 10</b>, the <b>Raid</b> feature unlocks.</li>
+          <li>When the zone opens again, you can raid previously cleared stages for repeat rewards.</li>
+        </ul>
+
+        <div class="callout info">
+          <h3>Why Raid matters</h3>
+          <p>Raid turns Mystic Trial from a pure push-mode into a weekly maintenance source of resources. Once unlocked, it saves time every week.</p>
+        </div>
+      </section>
+
+      <section id="ratios" class="block anchor">
+        <h2>4) Troop ratio advice</h2>
+        <p>
+          In all zones except <b>Radiant Spire</b>, the game provides <b>Lv. 10 troops</b>.
+          That means troop quality is normalized and your account’s Expedition bonuses matter more.
+        </p>
+
+        <p>
+          The AI generally uses a default ratio close to <b>33 / 33 / 33</b> for Infantry / Cavalry / Archer,
+          except the 10th stage where the ratio shifts to around <b>53 / 27 / 20</b>.
+        </p>
+
+        <div class="callout ok">
+          <h3>Safe starting point</h3>
+          <p>If you are not sure what to use, start with <b>50 / 20 / 30</b>.</p>
+        </div>
+
+        <div class="ratio-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Zone</th>
+                <th>Recommended Ratio</th>
+                <th>Simple Reading</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Coliseum</td>
+                <td>50 / 10 / 40</td>
+                <td>More backline weight</td>
+              </tr>
+              <tr>
+                <td>Forest of Life</td>
+                <td>50 / 15 / 35</td>
+                <td>Balanced with pet support</td>
+              </tr>
+              <tr>
+                <td>Crystal Cave</td>
+                <td>60 / 20 / 20</td>
+                <td>Heavier front line</td>
+              </tr>
+              <tr>
+                <td>Knowledge Nexus</td>
+                <td>50 / 20 / 30</td>
+                <td>Default stable setup</td>
+              </tr>
+              <tr>
+                <td>Molten Fort</td>
+                <td>60 / 15 / 25</td>
+                <td>Front-loaded durability</td>
+              </tr>
+              <tr>
+                <td>Radiant Spire</td>
+                <td>50 / 15 / 35</td>
+                <td>Varies more by account strength</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>How to edit troop formation without wasting attempts</h3>
+        <ol>
+          <li>Open <b>Challenge</b></li>
+          <li>Tap <b>Edit Formation</b></li>
+          <li>Adjust your ratios</li>
+          <li>Do <b>not</b> press Deploy or Quick Deploy</li>
+          <li>Use the top-left back arrow to leave safely</li>
+        </ol>
+
+        <div class="callout warn">
+          <h3>The practical reality</h3>
+          <p>
+            At the beginning, many players enthusiastically split ratios by zone and test everything carefully.
+            But after running Mystic Trial for a while, that becomes very annoying.
+            In practice, many players eventually stop over-managing every zone and just run a stable all-purpose ratio like <b>5 : 2 : 3</b>, only making a small adjustment when a stage actually blocks progress.
+          </p>
+        </div>
+      </section>
+
+      <section id="rewards" class="block anchor">
+        <h2>5) Rewards and progression</h2>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>First Clear Rewards</h3>
+            <ul>
+              <li>Lucky Hero Gear Chests</li>
+              <li>Enhancement XP Parts</li>
+              <li>Misty Crystals</li>
+              <li>Mystic XP</li>
+              <li>Trial Chest / Splendid Trial Chest</li>
+            </ul>
+          </div>
+
+          <div class="mini-card">
+            <h3>Milestone Rewards</h3>
+            <ul>
+              <li>Small Coliseum copies</li>
+              <li>Enhancement XP Parts</li>
+              <li>Mythic General Hero Shards</li>
+              <li>Lucky Hero Gear Chests</li>
+              <li>Custom Mythic Hero Gear Chests</li>
+              <li>Mithril</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Raid Rewards</h3>
+        <p>
+          Raid rewards scale with your highest cleared stage in each zone.
+          A very simple rule of thumb is that weekly Misty Crystals can be estimated by multiplying your cleared stages by <b>10</b>.
+        </p>
+
+        <div class="callout info">
+          <h3>Why this mode matters long term</h3>
+          <p>Mystic Trial is not just one more PvE mode. It is a weekly source of progression materials that keeps paying you if you keep clearing farther.</p>
+        </div>
+      </section>
+
+      <section id="shop" class="block anchor">
+        <h2>6) Trial Shop priorities</h2>
+        <p>
+          The Trial Shop uses <b>Misty Crystals</b>.
+          If you keep pushing your stages, you should be able to buy useful things every week without much trouble.
+        </p>
+
+        <div class="badge-row">
+          <span class="badge good">Mithril = common top priority</span>
+          <span class="badge note">Stocks reset weekly</span>
+          <span class="badge warn">Buy for long-term value</span>
+        </div>
+
+        <h3>Shop timing notes</h3>
+        <ul>
+          <li><b>Mithril</b> appears after Gen 2 is released.</li>
+          <li><b>True Gold Dust</b> is added later, around the War Academy unlock period.</li>
+          <li>You can access the shop through the bottom menu or the top-right Mystic Trial shortcut.</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>Simple buying logic</h3>
+          <p>Buy the things that stay valuable on the account for a long time. For many players, that usually starts with <b>Mithril</b>.</p>
+        </div>
+      </section>
+
+      <section id="tips" class="block anchor">
+        <h2>7) Practical player advice</h2>
+
+        <h3>Do not pretend every zone needs perfect micromanagement forever</h3>
+        <p>
+          In theory, yes, every zone can be optimized separately.
+          In reality, once Mystic Trial becomes part of your weekly routine, convenience matters.
+          Most players eventually want a setup that is <b>good enough, easy to repeat, and fast to maintain</b>.
+        </p>
+
+        <h3>Use specific ratios when stuck, not all the time</h3>
+        <p>
+          Zone-by-zone ratio tuning is most useful when you are pushing new walls.
+          If you are already clearing comfortably, using the same practical ratio over and over is usually fine.
+        </p>
+
+        <h3>Radiant Spire deserves extra respect</h3>
+        <p>
+          Radiant Spire is the exception because it uses your own troops and a much wider set of account stats.
+          That zone reflects overall account depth much more than the others.
+        </p>
+
+        <div class="callout info">
+          <h3>Useful side route</h3>
+          <p>
+            While working on Mystic Trial, it is also worth checking the
+            <a href="/en/guides/kingshot-giftcode.html">Kingshot Gift Codes &amp; Redeem Codes page</a>
+            so you do not miss active codes that can help your weekly progression.
+          </p>
+        </div>
+
+        <div class="callout warn">
+          <h3>Best mindset</h3>
+          <p>Test seriously when you are progressing. Simplify aggressively when you are farming.</p>
+        </div>
+      </section>
+
+      <section id="summary" class="block anchor">
+        <h2>8) Final summary</h2>
+        <ul>
+          <li><b>Unlock:</b> TC 19 through Command Center</li>
+          <li><b>Main idea:</b> each zone uses different Expedition stat sources</li>
+          <li><b>Safe starting ratio:</b> 50 / 20 / 30</li>
+          <li><b>Long-term practical ratio:</b> many players eventually default to 5 : 2 : 3 unless a stage needs adjustment</li>
+          <li><b>Weekly value:</b> stage clears, Raid rewards, and Trial Shop materials add up over time</li>
+        </ul>
+
+        <div class="callout ok">
+          <h3>One-line conclusion</h3>
+          <p>Push carefully at first, learn which zones use which stats, then stop overcomplicating the mode and farm it efficiently every week.</p>
+        </div>
+      </section>
+
+      <section id="faq" class="block anchor">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>When does Mystic Trial unlock in Kingshot?</summary>
+          <p>Mystic Trial unlocks after reaching Town Center 19 and becomes available through the Command Center. New servers usually unlock it after around two weeks.</p>
+        </details>
+
+        <details>
+          <summary>What troop ratio should I start with in Mystic Trial?</summary>
+          <p>If you are not sure, start with 50/20/30. From there, adjust slightly based on the zone and your clear stability.</p>
+        </details>
+
+        <details>
+          <summary>Do I need different troop ratios for every Mystic Trial zone forever?</summary>
+          <p>At first, many players test different ratios for each zone. But over time it becomes tedious, and many players simply run a practical all-purpose ratio like 5:2:3 unless a stage forces a small adjustment.</p>
+        </details>
+
+        <details>
+          <summary>Where can I check the latest Kingshot gift codes and redeem codes?</summary>
+          <p>You can check active codes, expiry dates, and the official redeem page on the <a href="/en/guides/kingshot-giftcode.html">Kingshot Gift Codes &amp; Redeem Codes guide</a>.</p>
+        </details>
+      </section>
+
+      <section class="block">
+        <h2>Related Guides</h2>
+        <div class="pill-list">
+          <a class="pill" href="/en/guides/kingshot-giftcode.html">Kingshot Gift Codes &amp; Redeem Codes</a>
+          <a class="pill" href="/en/guides/kingshot-f2p-guide.html">Kingshot Beginner Guide</a>
+          <a class="pill" href="/en/guides/hallofgovernors.html">Hall of Governors Guide</a>
+          <a class="pill" href="/en/guides/">View All Guides</a>
+        </div>
+      </section>
+
+      <div class="hr"></div>
+      <p class="foot">
+        This document is not official. It is a fan guide based on practical play experience and commonly shared player observations.
+        Exact balance, unlock timing, and preferred ratios can change depending on update timing and account stage.
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>
