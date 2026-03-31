@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>킹샷 전쟁아카데미 11티어 황금 병사 만들기 가이드</title>
+  <meta name="description" content="킹샷 전쟁아카데미 11티어 황금 병사 만들기 가이드입니다. 기본 조건, 필요한 재화, 무과금·소과금·중과금 테크 트리, 병종 우선순위, 실제 운영 팁까지 한 번에 정리했습니다." />
+  <meta name="keywords" content="킹샷 전쟁아카데미, 킹샷 11티어, 킹샷 황금 병사, 킹샷 황금 병사 만들기, 킹샷 전쟁아카데미 공략, 킹샷 연구 우선순위, 킹샷 금가루, 킹샷 금화" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/war-academy-t11-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/war-academy-t11-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/war-academy-t11-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/war-academy-t11-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/war-academy-t11-guide.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/war-academy-t11-guide.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="킹샷 전쟁아카데미 11티어 황금 병사 만들기 가이드" />
+  <meta property="og:description" content="기본 조건, 필요한 재화, 병종 우선순위, 무과금·소과금·중과금 테크 트리까지 정리한 킹샷 전쟁아카데미 황금 병사 가이드입니다." />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/guides/war-academy-t11-guide.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="킹샷 전쟁아카데미 11티어 황금 병사 만들기 가이드" />
+  <meta name="twitter:description" content="기본 조건, 필요한 재화, 병종 우선순위, 무과금·소과금·중과금 테크 트리까지 정리한 킹샷 전쟁아카데미 황금 병사 가이드입니다." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f7f9ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#0b57d0;
+      --warn:#fff7ed;
+      --ok:#ecfdf5;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:16px;
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.72 system-ui,-apple-system,"Segoe UI",Roboto,Pretendard,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+    .brand img{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+      padding:20px 18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(28px,4vw,40px);
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:12px;
+      font-weight:800;
+      color:var(--muted);
+    }
+
+    .hero-side{
+      display:grid;
+      gap:12px;
+    }
+    .hero-visual,
+    .hero-box{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      overflow:hidden;
+    }
+    .hero-box{
+      padding:14px;
+    }
+    .hero-box h2{
+      margin:0 0 8px;
+      font-size:16px;
+      color:var(--accent);
+    }
+    .hero-box ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .hero-box li{margin:6px 0}
+
+    section.block{
+      margin-top:22px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:#fff;
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+
+    section.block h2{
+      margin:0 0 12px;
+      font-size:22px;
+      line-height:1.3;
+      color:var(--accent);
+      letter-spacing:-.02em;
+    }
+
+    section.block h3{
+      margin:18px 0 8px;
+      font-size:17px;
+      line-height:1.35;
+      letter-spacing:-.01em;
+    }
+
+    section.block p{margin:8px 0}
+    section.block ul{
+      margin:8px 0 0;
+      padding-left:18px;
+    }
+    section.block li{margin:6px 0}
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .box{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#f8fafc;
+      padding:14px;
+    }
+
+    .callout{
+      margin-top:12px;
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--warn);
+    }
+
+    .callout.ok{background:var(--ok)}
+
+    .order-flow{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:12px;
+    }
+
+    .order-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:14px;
+      text-align:center;
+    }
+
+    .order-card img{
+      margin:0 auto 10px;
+      width:120px;
+      height:120px;
+      object-fit:contain;
+    }
+
+    .pill-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+    }
+
+    .anchor{
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    .foot{
+      margin:18px 0 8px;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+
+    @media (max-width:980px){
+      .hero,.grid-2,.order-flow{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+        padding:10px 16px 12px;
+        margin:0 -16px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -16px;
+        padding:6px 16px;
+        background:rgba(255,255,255,.92);
+        backdrop-filter:blur(10px);
+      }
+    }
+
+    @media (max-width:600px){
+      .wrap{padding:14px 12px 56px}
+      section.block{padding:14px}
+      .order-card img{
+        width:96px;
+        height:96px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"킹샷 전쟁아카데미 11티어 황금 병사 만들기 가이드",
+    "inLanguage":"ko",
+    "description":"기본 조건, 필요한 재화, 병종 우선순위, 무과금·소과금·중과금 테크 트리까지 정리한 킹샷 전쟁아카데미 황금 병사 가이드입니다.",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://kingshotdata.kr/ko/guides/war-academy-t11-guide.html"
+    },
+    "author":{"@type":"Organization","name":"Kingshot Data"},
+    "publisher":{"@type":"Organization","name":"Kingshot Data"}
+  }
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/ko/guides/war-academy-t11-guide.html" aria-current="page">KO</a>
+        <a href="/en/guides/war-academy-t11-guide.html">EN</a>
+        <a href="/ja/guides/war-academy-t11-guide.html">JA</a>
+        <a href="/zh-tw/guides/war-academy-t11-guide.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">개요</a>
+      <a href="#cost">조건·재화</a>
+      <a href="#tree">테크트리</a>
+      <a href="#order">제작 순서</a>
+      <a href="#tips">운영 팁</a>
+      <a href="#links">관련 링크</a>
+    </nav>
+
+    <main>
+      <div class="crumbs">
+        <a href="/ko/">홈</a> ›
+        <a href="/ko/guides/">가이드</a> ›
+        <span>전쟁아카데미 11티어 황금 병사</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>킹샷 전쟁아카데미 11티어 황금 병사 만들기 가이드</h1>
+          <p class="sub">
+            황금 병사 해금 조건, 필요한 재화, 무·소과금 / 중과금용 연구 우선순위,
+            그리고 보병·궁병·기병을 어떤 순서로 열어야 하는지까지
+            한 번에 보기 쉽게 정리한 실전형 가이드입니다.
+          </p>
+
+          <div class="meta">
+            <span class="tag">전쟁아카데미</span>
+            <span class="tag">11티어 황금 병사</span>
+            <span class="tag">연구 우선순위</span>
+            <span class="tag">금가루 운영</span>
+            <span class="tag">병종별 제작 순서</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <div class="hero-visual">
+            <img src="/img/guide/waracademy-t11.webp" alt="킹샷 전쟁아카데미 11티어 황금 병사 만들기 가이드 이미지" loading="eager" fetchpriority="high">
+          </div>
+
+          <div class="hero-box">
+            <h2>핵심 요약</h2>
+            <ul>
+              <li>황금 병사는 단순 해금보다 순서와 재화 운영이 더 중요합니다.</li>
+              <li>무·소과금은 한 번에 전부 열기보다 가장 효율적인 라인을 먼저 밀어야 합니다.</li>
+              <li>중과금 이상은 선택과 집중 타이밍에 금 전환을 섞는 방식이 더 강합니다.</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+
+      <section id="overview" class="block anchor">
+        <h2>1) 이 가이드의 핵심 방향</h2>
+        <p>
+          이 페이지는 연구 수치를 전부 표로 다시 나열하는 페이지가 아니라,
+          <strong>11티어 황금 병사를 실제로 만들 때 무엇을 먼저 보고,
+          어떤 순서로 밀어야 덜 꼬이는지</strong>를 빠르게 이해할 수 있도록 만든 가이드입니다.
+        </p>
+
+        <div class="callout ok">
+          <p>
+            즉, 이 글은 “데이터 사전”이 아니라
+            <strong>실제 제작 루트와 우선순위를 잡기 위한 설명형 가이드</strong>라고 보면 됩니다.
+          </p>
+        </div>
+      </section>
+
+      <section id="cost" class="block anchor">
+        <h2>2) 황금 병사 기본 조건 및 재화</h2>
+
+        <div class="grid-2">
+          <div class="box">
+            <h3>기본 조건</h3>
+            <ul>
+              <li>도시센터 조건 충족</li>
+              <li>전쟁아카데미 레벨 조건 충족</li>
+              <li>병종별 선행 연구 완료</li>
+              <li>필수 분기 연구 먼저 확보</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <h3>주요 재화</h3>
+            <ul>
+              <li>금화</li>
+              <li>금가루</li>
+              <li>연구 시간</li>
+              <li>기본 자원(빵 / 나무 / 석재 / 철)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout">
+          <p>
+            <strong>중요:</strong> 금화는 초반부터 아무 데나 분산 사용하기보다,
+            전쟁아카데미 진행과 직접 연결되는 라인에만 집중하는 쪽이 훨씬 효율적입니다.
+          </p>
+        </div>
+      </section>
+
+      <section id="tree" class="block anchor">
+        <h2>3) 플레이 스타일별 테크트리 방향</h2>
+
+        <h3>무 / 소과금 기준</h3>
+        <ul>
+          <li>황금 병사 우선순위를 먼저 정하고, 도시센터와 금 변환 운영을 꼬이지 않게 가져가는 것이 중요합니다.</li>
+          <li>부대 수용량 관련 연구를 먼저 안정적으로 확보한 뒤, 실제 주력 병종 라인을 밉니다.</li>
+          <li>금 / 공성 선택 구간에서는 궁병 또는 보병 중 계정에 더 맞는 쪽을 먼저 선택합니다.</li>
+          <li>보병을 선택했다면 체력·방어력 우선, 궁병을 선택했다면 파괴력·공격력 우선으로 보는 식이 깔끔합니다.</li>
+        </ul>
+
+        <h3>중과금 기준</h3>
+        <ul>
+          <li>선택과 집중이 가능한 순간에는 소량 금 전환도 고려할 수 있습니다.</li>
+          <li>부대 수용량 3종 관련 라인을 빠르게 밀고, 실제 전투 목적에 맞는 병종을 먼저 완성하는 식이 좋습니다.</li>
+          <li>보병 / 궁병 중 주력 병종을 먼저 세우고, 이후 남은 병종을 따라가는 구조가 안정적입니다.</li>
+        </ul>
+
+        <h3>집결장 / 고래 계정 기준</h3>
+        <ul>
+          <li>집결 수용량 관련 체감이 훨씬 크기 때문에, 해당 라인을 먼저 안정적으로 완성하는 것이 좋습니다.</li>
+          <li>순금 8 이전이라면 최소 2종을 먼저 보고, 이후 핵심 병종을 마무리하는 식이 효율적입니다.</li>
+          <li>고래 계정은 단순 해금보다 집결 효율과 실제 화력 기여를 기준으로 연구 순서를 잡는 것이 중요합니다.</li>
+        </ul>
+      </section>
+
+      <section id="order" class="block anchor">
+        <h2>4) 황금 병사 만드는 순서</h2>
+        <p>
+          기본적인 흐름은 <strong>보병 → 궁병 → 기병</strong> 쪽이 가장 이해하기 쉽고,
+          무·소과금 입장에서도 안정적으로 따라가기 편한 편입니다.
+        </p>
+
+        <div class="order-flow">
+          <div class="order-card">
+            <img src="/img/guide/truegold-infantry.webp" alt="황금 보병">
+            <h3>보병</h3>
+            <p>가장 안정적인 시작점. 전열 유지력과 기본 체감이 좋음.</p>
+          </div>
+
+          <div class="order-card">
+            <img src="/img/guide/truegold-archer.webp" alt="황금 궁병">
+            <h3>궁병</h3>
+            <p>보병 라인 이후 화력 보강용으로 연결하기 좋음.</p>
+          </div>
+
+          <div class="order-card">
+            <img src="/img/guide/truegold-cavalry.webp" alt="황금 기병">
+            <h3>기병</h3>
+            <p>앞선 라인을 안정화한 뒤 확장하는 느낌으로 접근.</p>
+          </div>
+        </div>
+
+        <div class="callout ok">
+          <p>
+            다만 이 순서는 어디까지나 <strong>기본 흐름</strong>이고,
+            실제로는 네 계정이 어떤 병종에 더 투자되어 있는지,
+            어떤 콘텐츠를 우선하는지에 따라 달라질 수 있습니다.
+          </p>
+        </div>
+      </section>
+
+      <section id="tips" class="block anchor">
+        <h2>5) 실전 운영 팁</h2>
+
+        <h3>처음부터 세 병종을 한 번에 보지 마세요</h3>
+        <p>
+          황금 병사를 만들 때 가장 흔한 실수는,
+          보병·궁병·기병을 동시에 다 열려고 하다가
+          금화와 금가루, 연구 시간이 전부 꼬이는 경우입니다.
+        </p>
+
+        <h3>먼저 1개 병종을 ‘완성 느낌’까지 밀어야 체감이 납니다</h3>
+        <p>
+          반쯤 열린 세 병종보다,
+          하나를 먼저 확실하게 올린 뒤 다음 병종으로 넘어가는 편이 훨씬 체감이 좋습니다.
+        </p>
+
+        <h3>순금은 건설보다 연구 전환 가치가 더 클 수 있습니다</h3>
+        <p>
+          특히 전쟁아카데미 구간에서는 순금을 아무 데나 써버리기보다,
+          지금 막히는 연구 구간을 뚫는 데 쓸지 먼저 보는 것이 효율적입니다.
+        </p>
+
+        <div class="callout">
+          <p>
+            한 줄 정리:
+            <strong>가장 많이 쓰는 병종을 먼저 정하고 → 선행 연구를 해당 병종 기준으로 밀고 → 완성 후 다음 병종으로 넘어가는 구조</strong>
+            가 가장 덜 꼬입니다.
+          </p>
+        </div>
+      </section>
+
+      <section id="links" class="block anchor">
+        <h2>6) 함께 보면 좋은 링크</h2>
+        <div class="pill-list">
+          <a class="pill" href="/ko/guides/kingshot-giftcode.html">킹샷 기프트코드 및 리딤코드</a>
+          <a class="pill" href="/ko/guides/truegold.html">순금 소모표</a>
+          <a class="pill" href="/ko/guides/kingshot-f2p-guide.html">초보자 성장 가이드</a>
+          <a class="pill" href="/ko/guides/">가이드 전체 보기</a>
+        </div>
+      </section>
+
+      <p class="foot">
+        이 문서는 공식 자료가 아니라, 실전 플레이 기준으로 보기 쉽게 재정리한 팬 가이드입니다.
+        계정 상태, 과금 수준, 서버 환경에 따라 실제 우선순위는 달라질 수 있습니다.
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if(mqMobile && mqMobile.addEventListener){
+        mqMobile.addEventListener('change', setStickyTop);
+      }else if(mqMobile && mqMobile.addListener){
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if(window.ResizeObserver){
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if(header) ro.observe(header);
+        if(tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

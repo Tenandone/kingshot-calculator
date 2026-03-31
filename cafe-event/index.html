@@ -432,56 +432,6 @@
       word-break:break-word;
     }
 
-    .result-list{
-      display:grid;
-      gap:10px;
-      margin-top:12px;
-    }
-
-    .result-item{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:12px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
-    }
-
-    .result-rank{
-      width:34px;
-      height:34px;
-      flex:0 0 34px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      font-size:13px;
-      font-weight:900;
-      color:#2a140a;
-      background:linear-gradient(180deg, #ffe3b2, #b07a36);
-      box-shadow:inset 0 1px 2px rgba(255,255,255,.35);
-    }
-
-    .result-text{
-      min-width:0;
-      flex:1;
-    }
-
-    .result-title{
-      font-size:15px;
-      font-weight:900;
-      line-height:1.45;
-      margin-bottom:4px;
-      word-break:break-word;
-    }
-
-    .result-meta{
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.6;
-      word-break:break-word;
-    }
-
     .bottom-bar{
       position:fixed;
       left:0;
@@ -534,15 +484,8 @@
     .count-btn .big{
       display:block;
       font-size:18px;
-      margin-bottom:4px;
+      margin-bottom:0;
       font-weight:900;
-    }
-
-    .count-btn .small{
-      display:block;
-      font-size:11px;
-      color:var(--muted);
-      line-height:1.45;
     }
 
     .action-btn.primary{
@@ -666,15 +609,6 @@
       word-break:break-word;
     }
 
-    .popup-bottom-text{
-      text-align:center;
-      color:#f4d7b1;
-      font-size:14px;
-      line-height:1.7;
-      margin:2px 0 14px;
-      word-break:keep-all;
-    }
-
     .popup-close{
       width:100%;
       border:0;
@@ -766,19 +700,14 @@
     </div>
 
     <div class="panel section">
-      <h2>오늘하루 게시판 추첨인원</h2>
-      <textarea id="rawInput" placeholder="여기에 오늘하루 게시판 데이터를 붙여넣어"></textarea>
-      <div class="status" id="statusText">대기 중</div>
-    </div>
-
-    <div class="panel section">
       <h2>작성자별 추첨권 현황</h2>
       <div class="ticket-summary" id="ticketSummary"></div>
     </div>
 
-    <div class="panel section" style="margin-top:12px;">
-      <h2>최종 당첨 결과</h2>
-      <div class="result-list" id="resultList"></div>
+    <div class="panel section">
+      <h2>오늘하루 게시판 추첨인원</h2>
+      <textarea id="rawInput" placeholder="여기에 오늘하루 게시판 데이터를 붙여넣어"></textarea>
+      <div class="status" id="statusText">대기 중</div>
     </div>
   </div>
 
@@ -787,11 +716,9 @@
       <div class="count-row">
         <button class="count-btn active" id="count5Btn" type="button">
           <span class="big">5명 추첨</span>
-          <span class="small">작성자 중복 없이</span>
         </button>
         <button class="count-btn" id="count10Btn" type="button">
           <span class="big">10명 추첨</span>
-          <span class="small">작성자 중복 없이</span>
         </button>
       </div>
 
@@ -826,10 +753,6 @@
 
       <div class="popup-list" id="popupList"></div>
 
-      <div class="popup-bottom-text" id="popupBottomText">
-        킹샷카페 오늘하루 게시판 이벤트 많은 관심 부탁드립니다.
-      </div>
-
       <button class="popup-close" id="popupClose" type="button">확인</button>
     </div>
   </div>
@@ -863,14 +786,12 @@
       slotFrame: document.getElementById('slotFrame'),
       liveName: document.getElementById('liveName'),
       liveSub: document.getElementById('liveSub'),
-      resultList: document.getElementById('resultList'),
       ticketSummary: document.getElementById('ticketSummary'),
       popup: document.getElementById('popup'),
       popupTitle: document.getElementById('popupTitle'),
       popupSub: document.getElementById('popupSub'),
       popupList: document.getElementById('popupList'),
       popupClose: document.getElementById('popupClose'),
-      popupBottomText: document.getElementById('popupBottomText'),
       winnerMessage: document.getElementById('winnerMessage'),
       machineBadge: document.getElementById('machineBadge')
     };
@@ -1115,31 +1036,6 @@
       `).join('');
     }
 
-    function renderResults(){
-      if(!state.results.length){
-        els.resultList.innerHTML = `
-          <div class="result-item">
-            <div class="result-rank">-</div>
-            <div class="result-text">
-              <div class="result-title">아직 당첨 결과가 없어</div>
-              <div class="result-meta">${getCountTarget()}명 추첨 결과가 여기에 표시돼</div>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      els.resultList.innerHTML = state.results.map((entry, idx) => `
-        <div class="result-item">
-          <div class="result-rank">${idx + 1}</div>
-          <div class="result-text">
-            <div class="result-title">${escapeHtml(entry.author)}님 1만원 당첨을 축하합니다.</div>
-            <div class="result-meta">추첨권 ${entry.totalTickets}장</div>
-          </div>
-        </div>
-      `).join('');
-    }
-
     function updateButtons(){
       const hasPosts = state.posts.length > 0;
       const targetCount = getCountTarget();
@@ -1177,7 +1073,6 @@
       els.popupTitle.textContent = `${state.results.length}번째 당첨`;
       els.winnerMessage.textContent = `${entry.author}님 당첨을 축하합니다.`;
       els.popupSub.textContent = `구글 기프트카드 1만원`;
-      els.popupBottomText.textContent = `킹샷카페 오늘하루 게시판 이벤트 많은 관심 부탁드립니다.`;
 
       els.popupList.innerHTML = `
         <div class="popup-item">
@@ -1201,7 +1096,6 @@
       els.popupTitle.textContent = `최종 당첨자 ${state.results.length}명`;
       els.winnerMessage.textContent = `최종 당첨자 전원 1만원 당첨을 축하합니다.`;
       els.popupSub.textContent = `구글 기프트카드 1만원`;
-      els.popupBottomText.textContent = `킹샷카페 오늘하루 게시판 이벤트 많은 관심 부탁드립니다.`;
 
       els.popupList.innerHTML = state.results.map((entry, idx) => `
         <div class="popup-item">
@@ -1332,7 +1226,6 @@
         els.statusText.textContent = '파싱 실패';
         renderTrack(buildTrackItems([]));
         renderTicketSummary();
-        renderResults();
         setLiveEntry(null);
         updateMachineBadge();
         updateButtons();
@@ -1341,7 +1234,6 @@
 
       renderTrackPreview();
       renderTicketSummary();
-      renderResults();
       setLiveEntry(null);
 
       const totalAuthors = state.authorTickets.length;
@@ -1387,7 +1279,6 @@
         state.results.push(finalWinner);
       }
 
-      renderResults();
       renderTicketSummary();
       updateMachineBadge();
       await showWinnerPopup(finalWinner, true);
@@ -1446,7 +1337,6 @@
 
       renderTrack(buildTrackItems([]));
       renderTicketSummary();
-      renderResults();
       setLiveEntry(null);
       updateMachineBadge();
       updateButtons();
@@ -1463,7 +1353,6 @@
 
       renderTrackPreview();
       renderTicketSummary();
-      renderResults();
       setLiveEntry(null);
       updateMachineBadge();
       updateButtons();
@@ -1482,7 +1371,6 @@
 
     renderTrack(buildTrackItems([]));
     renderTicketSummary();
-    renderResults();
     setLiveEntry(null);
     updateMachineBadge();
     updateButtons();
