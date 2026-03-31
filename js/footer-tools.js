@@ -115,7 +115,7 @@
         var y = p[0];
         var m = String(p[1]).padStart(2, '0');
         var d = String(p[2]).padStart(2, '0');
-        var ts2 = Date.parse(y + '-' + m + '-' + d + 'T23:59:59Z');
+        var ts2 = Date.parse(y + '-' + m + '-' + d + 'T00:00:00Z');
         if (Number.isFinite(ts2)) return ts2;
       }
 
