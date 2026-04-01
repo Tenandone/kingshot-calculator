@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>KingShot 春日活動儲值攻略 | 5天達成 3,000 想像幣基準 | KingshotData</title>
+  <meta name="description" content="KingShot 春日活動的城市外觀最低儲值參考。以 5 天為基準，整理出達成想像幣 3,000 枚所需的配置，電腦版用表格呈現，手機版則以卡片方式更直觀顯示。" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="canonical" href="https://kingshotdata.kr/zh-TW/guides/kingshot-easter-event-spending-guide.html" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --soft:#f8fbff;
+      --soft-border:#dbeafe;
+      --ok:#f0fdf4;
+      --ok-border:#bbf7d0;
+      --radius:18px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.68 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      word-break:keep-all;
+      overflow-wrap:anywhere;
+    }
+
+    img{max-width:100%;display:block}
+    a{color:#2563eb;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1180px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+
+    .brand img{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:8px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:180px 1fr;
+      gap:18px;
+      padding:20px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-visual{
+      width:180px;
+      min-height:180px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:16px;
+      background:#fafafa;
+      border:1px solid var(--border);
+      padding:10px;
+    }
+
+    .hero-visual img{
+      width:100%;
+      height:auto;
+      object-fit:contain;
+      border-radius:12px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:30px;
+      line-height:1.16;
+      letter-spacing:-.02em;
+    }
+
+    .hero-lead{
+      margin:0 0 14px;
+      font-size:17px;
+      font-weight:800;
+      line-height:1.5;
+    }
+
+    .hero-cta{
+      padding:14px;
+      border:1px solid var(--soft-border);
+      border-radius:16px;
+      background:var(--soft);
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .jump a{color:var(--muted)}
+    .dotsep{opacity:.45}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.25;
+      letter-spacing:-.01em;
+    }
+
+    .box{
+      padding:14px 16px;
+      border-radius:14px;
+      margin:12px 0 14px;
+      border:1px solid var(--soft-border);
+      background:var(--soft);
+    }
+
+    .box.ok{
+      border-color:var(--ok-border);
+      background:var(--ok);
+    }
+
+    .box strong{font-weight:900}
+
+    .totals{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .total-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+      min-width:0;
+    }
+
+    .total-card .label{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:6px;
+      line-height:1.45;
+    }
+
+    .total-card strong{
+      display:block;
+      font-size:24px;
+      letter-spacing:-.02em;
+      color:var(--text);
+      line-height:1.25;
+    }
+
+    .desktop-table-wrap{
+      margin-top:12px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+    }
+
+    .desktop-table{
+      width:100%;
+      border-collapse:collapse;
+      table-layout:fixed;
+    }
+
+    .desktop-table th,
+    .desktop-table td{
+      padding:10px 8px;
+      text-align:center;
+      border-bottom:1px solid var(--border);
+      font-size:13px;
+      vertical-align:middle;
+      word-break:keep-all;
+      line-height:1.45;
+    }
+
+    .desktop-table th{
+      background:#f9fafb;
+      font-weight:800;
+      color:var(--text);
+    }
+
+    .desktop-table tr:last-child td{border-bottom:0}
+
+    .desktop-table th:nth-child(1),
+    .desktop-table td:nth-child(1){
+      text-align:left;
+      width:20%;
+      padding-left:12px;
+      padding-right:12px;
+    }
+
+    .desktop-table th:nth-child(2),
+    .desktop-table td:nth-child(2){width:11%}
+    .desktop-table th:nth-child(3),
+    .desktop-table td:nth-child(3){width:8%}
+    .desktop-table th:nth-child(4),
+    .desktop-table td:nth-child(4){width:8%}
+    .desktop-table th:nth-child(5),
+    .desktop-table td:nth-child(5){width:10%}
+    .desktop-table th:nth-child(6),
+    .desktop-table td:nth-child(6){width:9%}
+    .desktop-table th:nth-child(7),
+    .desktop-table td:nth-child(7){width:9%}
+    .desktop-table th:nth-child(8),
+    .desktop-table td:nth-child(8){width:9%}
+    .desktop-table th:nth-child(9),
+    .desktop-table td:nth-child(9){width:9%}
+    .desktop-table th:nth-child(10),
+    .desktop-table td:nth-child(10){width:8%}
+    .desktop-table th:nth-child(11),
+    .desktop-table td:nth-child(11){width:9%}
+
+    .coin-head{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      flex-direction:column;
+    }
+
+    .coin-head img{
+      width:20px;
+      height:20px;
+      object-fit:contain;
+      margin:0 auto;
+    }
+
+    .coin-head span{
+      display:block;
+      line-height:1.2;
+    }
+
+    .mobile-cards{
+      display:none;
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .calc-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+      min-width:0;
+    }
+
+    .calc-card h3{
+      margin:0 0 10px;
+      font-size:16px;
+      line-height:1.4;
+    }
+
+    .calc-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px 12px;
+    }
+
+    .calc-item{
+      min-width:0;
+    }
+
+    .calc-item span{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:2px;
+      line-height:1.4;
+    }
+
+    .calc-item strong{
+      display:block;
+      font-size:15px;
+      color:var(--text);
+      line-height:1.4;
+      word-break:break-word;
+      overflow-wrap:anywhere;
+    }
+
+    .calc-card.highlight{
+      border-color:var(--ok-border);
+      background:var(--ok);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      cursor:pointer;
+      font-weight:900;
+      text-decoration:none !important;
+      line-height:1;
+      background:#fff;
+      color:var(--text);
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+      text-decoration:none;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .footer-links{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .footer-link{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px 16px;
+      text-decoration:none;
+      color:var(--text);
+      box-shadow:var(--shadow);
+      min-width:0;
+      overflow:hidden;
+    }
+
+    .footer-link strong{
+      display:block;
+      font-size:15px;
+      margin-bottom:8px;
+      line-height:1.45;
+      letter-spacing:-.01em;
+      word-break:keep-all;
+      overflow-wrap:anywhere;
+    }
+
+    .footer-link span{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.6;
+      word-break:keep-all;
+      overflow-wrap:anywhere;
+    }
+
+    .footer-link:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+    }
+
+    .bottom-cta{
+      margin-top:18px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:linear-gradient(180deg,#ffffff,#fafcff);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+
+    .bottom-cta .title{
+      font-size:21px;
+      font-weight:900;
+      color:var(--text);
+      margin:0 0 8px;
+      line-height:1.35;
+      word-break:keep-all;
+      overflow-wrap:anywhere;
+    }
+
+    .bottom-cta .desc{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+      word-break:keep-all;
+      overflow-wrap:anywhere;
+    }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    .usd{
+      white-space:nowrap;
+      font-weight:800;
+      letter-spacing:-.01em;
+    }
+
+    @media (max-width:1080px){
+      .footer-link strong{font-size:14px}
+      .footer-link span{font-size:12px}
+    }
+
+    @media (max-width:980px){
+      .desktop-table th,
+      .desktop-table td{
+        font-size:12px;
+        padding:9px 6px;
+      }
+      .desktop-table th:nth-child(1),
+      .desktop-table td:nth-child(1){
+        width:18%;
+      }
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+
+      .hero{grid-template-columns:1fr}
+      .hero-visual{width:100%;min-height:auto}
+      h1{font-size:28px}
+      .hero-lead{font-size:16px}
+      .totals{grid-template-columns:1fr 1fr}
+      .desktop-table-wrap{display:none}
+      .mobile-cards{display:grid}
+      .footer-links{grid-template-columns:1fr}
+      .footer-link strong{font-size:16px}
+      .footer-link span{font-size:13px}
+    }
+
+    @media (max-width:680px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:25px}
+      section{padding:15px}
+      .hero{padding:16px}
+      .hero-cta{padding:12px}
+      .bottom-cta .title{font-size:19px}
+      .cta-row .btn{width:100%}
+      .totals{grid-template-columns:1fr}
+      .calc-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-TW/" aria-label="KingshotData Home">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>KingshotData</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/kingshot-easter-event-spending-guide.html">EN</a>
+        <a href="/ko/guides/kingshot-easter-event-spending-guide.html">KO</a>
+        <a href="/ja/guides/kingshot-easter-event-spending-guide.html">JA</a>
+        <a href="/zh-TW/guides/kingshot-easter-event-spending-guide.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#goal">目標</a>
+      <a href="#progress">5天基準計算</a>
+      <a href="#totals">最終整理</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/zh-TW/">首頁</a> <span>›</span>
+        <a href="/zh-TW/guides">攻略</a> <span>›</span>
+        <span>KingShot 春日活動儲值攻略</span>
+      </div>
+
+      <div class="hero">
+        <div class="hero-visual">
+          <img src="/img/guides/easter-event-guide-title.webp" alt="春日活動指南標題圖片" loading="eager" fetchpriority="high">
+        </div>
+
+        <div>
+          <h1>KingShot 春日活動儲值攻略</h1>
+          <p class="hero-lead">以拿到城市外觀為目標的最低儲值參考整理。</p>
+
+          <div class="hero-cta" aria-label="Hero CTA">
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#progress">查看 5 天基準計算</a>
+              <a class="btn" href="#totals">查看最終整理</a>
+            </div>
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#goal">目標</a><span class="dotsep">•</span>
+            <a href="#progress">5天基準計算</a><span class="dotsep">•</span>
+            <a href="#totals">最終整理</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="goal">
+        <span class="anchor"></span>
+        <h2>目標</h2>
+
+        <div class="box">
+          <strong>目標:</strong> 城市外觀需要 <strong>想像幣 3,000 枚</strong>。
+        </div>
+
+        <div class="box ok">
+          <strong>計算條件:</strong> 包含免費禮包、想像幣禮包購買、想像之旅解鎖，以及想像畫室的 5 天基準。
+        </div>
+      </section>
+
+      <section id="progress">
+        <span class="anchor"></span>
+        <h2>5天基準計算</h2>
+
+        <div class="desktop-table-wrap">
+          <table class="desktop-table" aria-label="5天基準計算表">
+            <thead>
+              <tr>
+                <th>組合</th>
+                <th>5天總支出</th>
+                <th>
+                  <div class="coin-head">
+                    <img src="/img/event/imagination-coin.webp" alt="想像幣">
+                    <span>想像幣</span>
+                  </div>
+                </th>
+                <th>
+                  <div class="coin-head">
+                    <img src="/img/event/spring-point.webp" alt="春日積分">
+                    <span>春日積分</span>
+                  </div>
+                </th>
+                <th>春日商鋪累積獎勵</th>
+                <th>每日特訓獎勵</th>
+                <th>每日特訓積分</th>
+                <th>任務獎勵</th>
+                <th>任務積分</th>
+                <th>
+                  <div class="coin-head">
+                    <img src="/img/event/imagination-coin.webp" alt="最終代幣">
+                    <span>最終代幣</span>
+                  </div>
+                </th>
+                <th>距離 3,000 差額</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>僅免費</td>
+                <td><span class="usd">$0</span></td>
+                <td>25</td>
+                <td>25</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>25</td>
+                <td>還差 2,975</td>
+              </tr>
+              <tr>
+                <td><span class="usd">$1</span> × 5天</td>
+                <td><span class="usd">$5</span></td>
+                <td>125</td>
+                <td>125</td>
+                <td>25</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>150</td>
+                <td>還差 2,850</td>
+              </tr>
+              <tr>
+                <td><span class="usd">$1</span> + <span class="usd">$2</span> × 5天</td>
+                <td><span class="usd">$15</span></td>
+                <td>325</td>
+                <td>325</td>
+                <td>100</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>425</td>
+                <td>還差 2,575</td>
+              </tr>
+              <tr>
+                <td><span class="usd">$1</span> + <span class="usd">$2</span> + <span class="usd">$5</span> × 5天</td>
+                <td><span class="usd">$40</span></td>
+                <td>725</td>
+                <td>725</td>
+                <td>250</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>975</td>
+                <td>還差 2,025</td>
+              </tr>
+              <tr>
+                <td><span class="usd">$1</span> + <span class="usd">$2</span> + <span class="usd">$5</span> × 5天 + 想像之旅</td>
+                <td><span class="usd">$45</span></td>
+                <td>725</td>
+                <td>725</td>
+                <td>250</td>
+                <td>200</td>
+                <td>200</td>
+                <td>25</td>
+                <td>25</td>
+                <td>1,200</td>
+                <td>還差 1,800</td>
+              </tr>
+              <tr>
+                <td><span class="usd">$1</span> + <span class="usd">$2</span> + <span class="usd">$5</span> + <span class="usd">$10</span> × 5天 + 想像之旅</td>
+                <td><span class="usd">$95</span></td>
+                <td>1,325</td>
+                <td>1,325</td>
+                <td>450</td>
+                <td>200</td>
+                <td>200</td>
+                <td>25</td>
+                <td>25</td>
+                <td>2,000</td>
+                <td>還差 1,000</td>
+              </tr>
+              <tr>
+                <td><strong>達成 3,000 代幣組合</strong></td>
+                <td><strong><span class="usd">$169</span></strong></td>
+                <td>2,125</td>
+                <td>2,125</td>
+                <td>650</td>
+                <td>200</td>
+                <td>200</td>
+                <td>25</td>
+                <td>25</td>
+                <td><strong>3,000</strong></td>
+                <td><strong>剛好達成</strong></td>
+              </tr>
+              <tr>
+                <td><span class="usd">$1</span> + <span class="usd">$2</span> + <span class="usd">$5</span> + <span class="usd">$10</span> + <span class="usd">$20</span> × 5天 + 想像之旅</td>
+                <td><span class="usd">$195</span></td>
+                <td>2,325</td>
+                <td>2,325</td>
+                <td>750</td>
+                <td>200</td>
+                <td>200</td>
+                <td>25</td>
+                <td>25</td>
+                <td>3,300</td>
+                <td>超出 300</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mobile-cards" aria-label="手機版計算卡片">
+          <article class="calc-card">
+            <h3>僅免費</h3>
+            <div class="calc-grid">
+              <div class="calc-item"><span>總支出</span><strong><span class="usd">$0</span></strong></div>
+              <div class="calc-item"><span>最終代幣</span><strong>25</strong></div>
+              <div class="calc-item"><span>春日積分</span><strong>25</strong></div>
+              <div class="calc-item"><span>差額</span><strong>還差 2,975</strong></div>
+            </div>
+          </article>
+
+          <article class="calc-card">
+            <h3><span class="usd">$1</span> × 5天</h3>
+            <div class="calc-grid">
+              <div class="calc-item"><span>總支出</span><strong><span class="usd">$5</span></strong></div>
+              <div class="calc-item"><span>最終代幣</span><strong>150</strong></div>
+              <div class="calc-item"><span>想像幣</span><strong>125</strong></div>
+              <div class="calc-item"><span>差額</span><strong>還差 2,850</strong></div>
+            </div>
+          </article>
+
+          <article class="calc-card">
+            <h3><span class="usd">$1</span> + <span class="usd">$2</span> × 5天</h3>
+            <div class="calc-grid">
+              <div class="calc-item"><span>總支出</span><strong><span class="usd">$15</span></strong></div>
+              <div class="calc-item"><span>最終代幣</span><strong>425</strong></div>
+              <div class="calc-item"><span>想像幣</span><strong>325</strong></div>
+              <div class="calc-item"><span>差額</span><strong>還差 2,575</strong></div>
+            </div>
+          </article>
+
+          <article class="calc-card">
+            <h3><span class="usd">$1</span> + <span class="usd">$2</span> + <span class="usd">$5</span> × 5天</h3>
+            <div class="calc-grid">
+              <div class="calc-item"><span>總支出</span><strong><span class="usd">$40</span></strong></div>
+              <div class="calc-item"><span>最終代幣</span><strong>975</strong></div>
+              <div class="calc-item"><span>想像幣</span><strong>725</strong></div>
+              <div class="calc-item"><span>差額</span><strong>還差 2,025</strong></div>
+            </div>
+          </article>
+
+          <article class="calc-card">
+            <h3><span class="usd">$1</span> + <span class="usd">$2</span> + <span class="usd">$5</span> × 5天 + 想像之旅</h3>
+            <div class="calc-grid">
+              <div class="calc-item"><span>總支出</span><strong><span class="usd">$45</span></strong></div>
+              <div class="calc-item"><span>最終代幣</span><strong>1,200</strong></div>
+              <div class="calc-item"><span>每日特訓獎勵</span><strong>代幣 200 / 積分 200</strong></div>
+              <div class="calc-item"><span>差額</span><strong>還差 1,800</strong></div>
+            </div>
+          </article>
+
+          <article class="calc-card">
+            <h3><span class="usd">$1</span> + <span class="usd">$2</span> + <span class="usd">$5</span> + <span class="usd">$10</span> × 5天 + 想像之旅</h3>
+            <div class="calc-grid">
+              <div class="calc-item"><span>總支出</span><strong><span class="usd">$95</span></strong></div>
+              <div class="calc-item"><span>最終代幣</span><strong>2,000</strong></div>
+              <div class="calc-item"><span>想像幣</span><strong>1,325</strong></div>
+              <div class="calc-item"><span>差額</span><strong>還差 1,000</strong></div>
+            </div>
+          </article>
+
+          <article class="calc-card highlight">
+            <h3>達成 3,000 代幣組合</h3>
+            <div class="calc-grid">
+              <div class="calc-item"><span>總支出</span><strong><span class="usd">$169</span></strong></div>
+              <div class="calc-item"><span>最終代幣</span><strong>3,000</strong></div>
+              <div class="calc-item"><span>組合</span><strong>最後一天排除 <span class="usd">$20</span>、<span class="usd">$1</span>、<span class="usd">$5</span></strong></div>
+              <div class="calc-item"><span>最終判定</span><strong>剛好達成</strong></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="box">
+          <strong>基準說明:</strong> <span class="usd">$45</span> / <span class="usd">$95</span> / <span class="usd">$195</span> 的組合，是以想像之旅解鎖為基準整理。
+        </div>
+
+        <div class="box">
+          <strong>標示說明:</strong> 為了更方便閱讀，本文金額一律以 <span class="usd">$</span> 為基準標示。本文不是用韓元顯示，而是統一整理為美元標示。
+        </div>
+
+        <div class="box">
+          <strong>禮包換算:</strong> 1,500韓圓 = <span class="usd">$1</span>、3,000韓圓 = <span class="usd">$2</span>、7,500韓圓 = <span class="usd">$5</span>、15,000韓圓 = <span class="usd">$10</span>、30,000韓圓 = <span class="usd">$20</span> 為整理基準。
+        </div>
+      </section>
+
+      <section id="totals">
+        <span class="anchor"></span>
+        <h2>最終整理</h2>
+
+        <div class="totals">
+          <div class="total-card">
+            <span class="label">目標代幣</span>
+            <strong>3,000</strong>
+          </div>
+          <div class="total-card">
+            <span class="label">完整組合基準</span>
+            <strong><span class="usd">$195</span></strong>
+          </div>
+          <div class="total-card">
+            <span class="label">達成 3,000 組合</span>
+            <strong><span class="usd">$169</span></strong>
+          </div>
+        </div>
+
+        <div class="box ok">
+          <strong>達成 3,000 代幣組合:</strong> 以 <span class="usd">$1</span> + <span class="usd">$2</span> + <span class="usd">$5</span> + <span class="usd">$10</span> + <span class="usd">$20</span> × 5天 + 想像之旅 的基準組合來看，<strong>最後一天排除 <span class="usd">$20</span>、<span class="usd">$1</span>、<span class="usd">$5</span></strong>，就能剛好對齊 3,000 代幣。
+        </div>
+
+        <div class="bottom-cta" aria-label="Bottom CTA">
+          <p class="title">春日商鋪 城市外觀 3,000 代幣達成組合 <span class="usd">$169</span></p>
+          <p class="desc"><span class="usd">$1</span> / <span class="usd">$2</span> / <span class="usd">$5</span> / <span class="usd">$10</span> / <span class="usd">$20</span>，再加上想像之旅與想像畫室的基本組合中，最後一天排除 <span class="usd">$20</span>、<span class="usd">$1</span>、<span class="usd">$5</span> 的配置。</p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#progress">再看一次 5 天基準計算表</a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <a class="footer-link" href="/zh-TW/guides/kingshot-giftcode.html">
+            <strong>KingShot 禮包碼與兌換碼</strong>
+            <span>可以一次查看目前可用的 KingShot 禮包碼與兌換碼。</span>
+          </a>
+          <a class="footer-link" href="/zh-TW/guides/topup-guide.html">
+            <strong>KingShot 優惠儲值攻略</strong>
+            <span>整理了更划算的儲值方式，以及儲值前建議先確認的重點內容。</span>
+          </a>
+          <a class="footer-link" href="/zh-TW/guides/topup-promotion.html">
+            <strong>KingShot 儲值優惠整理</strong>
+            <span>可以查看累積儲值與額外加碼福利的相關內容。</span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if (mqMobile && mqMobile.addEventListener) {
+        mqMobile.addEventListener('change', setStickyTop);
+      } else if (mqMobile && mqMobile.addListener) {
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>
