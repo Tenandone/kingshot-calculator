@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>히라가나 연상 + 단어 입력 훈련</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      background: #f4f7fb;
+      color: #111827;
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 18px 80px;
+    }
+
+    .hero,
+    .section {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 24px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
+    }
+
+    .hero {
+      padding: 28px 22px;
+      margin-bottom: 22px;
+      background: linear-gradient(135deg, #ffffff 0%, #edf4ff 100%);
+      border-color: #dbe4f0;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #475569;
+      font-size: 16px;
+    }
+
+    .notice {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e3a8a;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .section {
+      padding: 24px 18px;
+      margin-bottom: 20px;
+    }
+
+    .section h2 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    .section p {
+      margin: 0 0 18px;
+      color: #475569;
+    }
+
+    .grid-5,
+    .grid-3,
+    .word-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .word-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #dbe4f0;
+      border-radius: 20px;
+      padding: 16px 12px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: #93c5fd;
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.08);
+    }
+
+    .jp {
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .sound {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #2563eb;
+      margin-bottom: 10px;
+    }
+
+    .assoc {
+      min-height: 90px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-size: 14px;
+      color: #334155;
+    }
+
+    .assoc strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #0f172a;
+      font-size: 15px;
+    }
+
+    .tip-box {
+      margin-top: 16px;
+      background: #f8fafc;
+      border: 1px dashed #94a3b8;
+      border-radius: 18px;
+      padding: 16px;
+      color: #334155;
+    }
+
+    .tip-box strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+
+    .word-card {
+      background: #f8fafc;
+      border: 1px solid #dbe4f0;
+      border-radius: 20px;
+      padding: 16px;
+    }
+
+    .word-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .word-jp {
+      font-size: 28px;
+      font-weight: 800;
+      color: #111827;
+    }
+
+    .word-read {
+      font-size: 16px;
+      font-weight: 700;
+      color: #2563eb;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      padding: 6px 10px;
+    }
+
+    .word-mean {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .word-flow {
+      font-size: 14px;
+      color: #334155;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .word-flow strong {
+      color: #0f172a;
+    }
+
+    .step-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #334155;
+    }
+
+    .step-list li + li {
+      margin-top: 8px;
+    }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .quiz {
+      background: #fff;
+      border: 1px dashed #94a3b8;
+      border-radius: 16px;
+      padding: 18px 10px;
+      text-align: center;
+      font-size: 34px;
+      font-weight: 800;
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .grid-5, .test-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .word-grid { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { padding: 20px 14px 50px; }
+      .hero h1 { font-size: 28px; }
+      .section h2 { font-size: 22px; }
+      .grid-5, .grid-3, .test-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .jp { font-size: 34px; }
+      .word-jp { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>히라가나 연상 + 단어 입력 훈련</h1>
+      <p>
+        글자만 외우는 방식이 아니라, 글자를 보자마자 소리와 연상 단어가 먼저 떠오르고,
+        바로 실제 단어까지 읽게 만드는 구조로 만든 페이지다.
+      </p>
+      <div class="notice">
+        외우는 순서: 글자 보기 → 연상 떠올리기 → 소리 말하기 → 실제 단어 읽기
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>기본 모음 연상</h2>
+      <p>여기서 끝내면 안 되고, 바로 아래 단어 섹션으로 내려가서 실전 입력까지 붙이면 된다.</p>
+      <div class="grid-5">
+        <div class="card">
+          <div class="jp">あ</div>
+          <div class="sound">아</div>
+          <div class="assoc">
+            <strong>연상: 아!</strong>
+            놀랄 때 아! 하고 입 벌린 느낌
+          </div>
+        </div>
+        <div class="card">
+          <div class="jp">い</div>
+          <div class="sound">이</div>
+          <div class="assoc">
+            <strong>연상: 이빨</strong>
+            세로선이 이빨처럼 보인다고 기억
+          </div>
+        </div>
+        <div class="card">
+          <div class="jp">う</div>
+          <div class="sound">우</div>
+          <div class="assoc">
+            <strong>연상: 우는 입</strong>
+            우 하고 내미는 입모양 느낌
+          </div>
+        </div>
+        <div class="card">
+          <div class="jp">え</div>
+          <div class="sound">에</div>
+          <div class="assoc">
+            <strong>연상: 에?</strong>
+            에? 하고 갸웃하는 꼬인 느낌
+          </div>
+        </div>
+        <div class="card">
+          <div class="jp">お</div>
+          <div class="sound">오</div>
+          <div class="assoc">
+            <strong>연상: 오!</strong>
+            오! 하고 감탄하는 더 큰 느낌
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <strong>핵심</strong>
+        글자만 보면 못 외운다. 반드시 글자와 소리, 그리고 네 머릿속 장면이 같이 붙어야 한다.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>아이우에오가 들어간 실제 단어 읽기</h2>
+      <p>여기서부터가 진짜 중요하다. 글자 하나를 외운 뒤 바로 단어로 읽어봐야 입력이 된다.</p>
+
+      <div class="word-grid">
+        <div class="word-card">
+          <div class="word-top">
+            <div class="word-jp">あい</div>
+            <div class="word-read">아이</div>
+          </div>
+          <div class="word-mean">뜻: 사랑</div>
+          <div class="word-flow">
+            <strong>입력 흐름:</strong><br>
+            あ = 아!<br>
+            い = 이빨<br>
+            그래서 あい = 아이
+          </div>
+        </div>
+
+        <div class="word-card">
+          <div class="word-top">
+            <div class="word-jp">あお</div>
+            <div class="word-read">아오</div>
+          </div>
+          <div class="word-mean">뜻: 파랑 / 푸른색</div>
+          <div class="word-flow">
+            <strong>입력 흐름:</strong><br>
+            あ = 아!<br>
+            お = 오!<br>
+            그래서 あお = 아오
+          </div>
+        </div>
+
+        <div class="word-card">
+          <div class="word-top">
+            <div class="word-jp">いえ</div>
+            <div class="word-read">이에</div>
+          </div>
+          <div class="word-mean">뜻: 집</div>
+          <div class="word-flow">
+            <strong>입력 흐름:</strong><br>
+            い = 이빨<br>
+            え = 에?<br>
+            그래서 いえ = 이에
+          </div>
+        </div>
+
+        <div class="word-card">
+          <div class="word-top">
+            <div class="word-jp">うえ</div>
+            <div class="word-read">우에</div>
+          </div>
+          <div class="word-mean">뜻: 위</div>
+          <div class="word-flow">
+            <strong>입력 흐름:</strong><br>
+            う = 우는 입<br>
+            え = 에?<br>
+            그래서 うえ = 우에
+          </div>
+        </div>
+
+        <div class="word-card">
+          <div class="word-top">
+            <div class="word-jp">え</div>
+            <div class="word-read">에</div>
+          </div>
+          <div class="word-mean">뜻: 그림</div>
+          <div class="word-flow">
+            <strong>입력 흐름:</strong><br>
+            え = 에?<br>
+            그대로 え = 에
+          </div>
+        </div>
+
+        <div class="word-card">
+          <div class="word-top">
+            <div class="word-jp">おい</div>
+            <div class="word-read">오이</div>
+          </div>
+          <div class="word-mean">뜻: 조카</div>
+          <div class="word-flow">
+            <strong>입력 흐름:</strong><br>
+            お = 오!<br>
+            い = 이빨<br>
+            그래서 おい = 오이
+          </div>
+        </div>
+
+        <div class="word-card">
+          <div class="word-top">
+            <div class="word-jp">あう</div>
+            <div class="word-read">아우</div>
+          </div>
+          <div class="word-mean">뜻: 만나다</div>
+          <div class="word-flow">
+            <strong>입력 흐름:</strong><br>
+            あ = 아!<br>
+            う = 우는 입<br>
+            그래서 あう = 아우
+          </div>
+        </div>
+
+        <div class="word-card">
+          <div class="word-top">
+            <div class="word-jp">おう</div>
+            <div class="word-read">오우</div>
+          </div>
+          <div class="word-mean">뜻: 쫓다 / 왕(다른 단어 조합에서 자주 보임)</div>
+          <div class="word-flow">
+            <strong>입력 흐름:</strong><br>
+            お = 오!<br>
+            う = 우는 입<br>
+            그래서 おう = 오우
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <strong>여기서 하는 법</strong>
+        단어를 볼 때 뜻부터 보지 말고, 먼저 글자를 하나씩 끊어서 읽고 그 다음에 합쳐라.<br>
+        예: いえ → 이 / 에 → 이에
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>더 빠르게 입력시키는 1차 훈련</h2>
+      <ul class="step-list">
+        <li>あ 를 보면 바로 아! 라고 말한다.</li>
+        <li>그 다음 い 를 보면 이빨 이라고 속으로 떠올린다.</li>
+        <li>둘을 붙여서 あい = 아이 라고 읽는다.</li>
+        <li>이제 뜻인 사랑을 붙인다.</li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>즉</strong>
+        글자 암기 → 소리 암기 → 단어 읽기 → 뜻 연결<br>
+        이 4단계가 한 번에 이어져야 머리에 박힌다.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>카행도 바로 단어로 연결</h2>
+      <p>이런 식으로 한 줄 외우면 바로 단어 읽기로 넘어가야 한다.</p>
+
+      <div class="grid-5" style="margin-bottom:16px;">
+        <div class="card">
+          <div class="jp">か</div>
+          <div class="sound">카</div>
+          <div class="assoc">
+            <strong>연상: 칼</strong>
+            꺾인 모양을 칼처럼 기억
+          </div>
+        </div>
+        <div class="card">
+          <div class="jp">き</div>
+          <div class="sound">키</div>
+          <div class="assoc">
+            <strong>연상: 키 큰 나무</strong>
+            가지가 달린 느낌
+          </div>
+        </div>
+        <div class="card">
+          <div class="jp">く</div>
+          <div class="sound">쿠</div>
+          <div class="assoc">
+            <strong>연상: 쿠크다스 조각</strong>
+            한 조각처럼 단순한 모양
+          </div>
+        </div>
+        <div class="card">
+          <div class="jp">け</div>
+          <div class="sound">케</div>
+          <div class="assoc">
+            <strong>연상: 케케묵은 지팡이</strong>
+            세로줄이 지팡이 느낌
+          </div>
+        </div>
+        <div class="card">
+          <div class="jp">こ</div>
+          <div class="sound">코</div>
+          <div class="assoc">
+            <strong>연상: 코 두 줄</strong>
+            평행선 두 개로 기억
+          </div>
+        </div>
+      </div>
+
+      <div class="word-grid">
+        <div class="word-card">
+          <div class="word-top">
+            <div class="word-jp">かお</div>
+            <div class="word-read">카오</div>
+          </div>
+          <div class="word-mean">뜻: 얼굴</div>
+          <div class="word-flow">
+            <strong>입력 흐름:</strong><br>
+            か = 칼 = 카<br>
+            お = 오!<br>
+            그래서 かお = 카오
+          </div>
+        </div>
+
+        <div class="word-card">
+          <div class="word-top">
+            <div class="word-jp">こえ</div>
+            <div class="word-read">코에</div>
+          </div>
+          <div class="word-mean">뜻: 목소리</div>
+          <div class="word-flow">
+            <strong>입력 흐름:</strong><br>
+            こ = 코 두 줄 = 코<br>
+            え = 에?<br>
+            그래서 こえ = 코에
+          </div>
+        </div>
+
+        <div class="word-card">
+          <div class="word-top">
+            <div class="word-jp">いけ</div>
+            <div class="word-read">이케</div>
+          </div>
+          <div class="word-mean">뜻: 연못</div>
+          <div class="word-flow">
+            <strong>입력 흐름:</strong><br>
+            い = 이빨<br>
+            け = 케케묵은 지팡이<br>
+            그래서 いけ = 이케
+          </div>
+        </div>
+
+        <div class="word-card">
+          <div class="word-top">
+            <div class="word-jp">あき</div>
+            <div class="word-read">아키</div>
+          </div>
+          <div class="word-mean">뜻: 가을</div>
+          <div class="word-flow">
+            <strong>입력 흐름:</strong><br>
+            あ = 아!<br>
+            き = 키 큰 나무<br>
+            그래서 あき = 아키
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>즉석 읽기 테스트</h2>
+      <p>먼저 소리 내서 읽고, 그 다음 뜻을 확인해라.</p>
+
+      <div class="test-grid">
+        <div class="quiz">あい</div>
+        <div class="quiz">いえ</div>
+        <div class="quiz">うえ</div>
+        <div class="quiz">かお</div>
+        <div class="quiz">こえ</div>
+      </div>
+
+      <div class="tip-box">
+        <strong>정답</strong>
+        あい = 아이 = 사랑<br>
+        いえ = 이에 = 집<br>
+        うえ = 우에 = 위<br>
+        かお = 카오 = 얼굴<br>
+        こえ = 코에 = 목소리
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>이 방식으로 계속 늘리면 됨</h2>
+      <ul class="step-list">
+        <li>히라가나 1글자 외움</li>
+        <li>그 글자가 들어간 쉬운 단어 3개 바로 읽음</li>
+        <li>뜻까지 붙임</li>
+        <li>다음 줄로 넘어감</li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>다음 추천</strong>
+        원하면 다음 단계로<br>
+        사행 단어 세트, 타행 단어 세트, 클릭하면 정답 열리는 퀴즈형까지 이어서 바로 만들어줄 수 있다.
+      </div>
+    </section>
+
+    <p class="footer-note">
+      핵심은 글자 하나를 외우고 끝내는 게 아니라, 바로 실제 단어 읽기로 연결하는 것이다.
+    </p>
+  </div>
+</body>
+</html>

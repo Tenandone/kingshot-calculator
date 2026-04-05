@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>킹샷 해적의 보물 안내 및 소과금 효율 구간 가이드</title>
+  <meta name="description" content="킹샷 해적의 보물 이벤트 구조, 항구 훈련, 해적 현상금, 수수께끼 상점, 해적 열쇠 패키지 구성과 소과금 효율 구간을 한눈에 정리한 가이드입니다." />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+      line-height: 1.75;
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .article {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 24px;
+      padding: 32px 24px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    .hero {
+      padding: 28px 24px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #10223f 0%, #1f4b7d 100%);
+      color: #ffffff;
+      margin-bottom: 28px;
+    }
+
+    .hero .eyebrow {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    h2 {
+      margin: 36px 0 16px;
+      font-size: 26px;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      color: #111827;
+      border-left: 5px solid #2563eb;
+      padding-left: 12px;
+    }
+
+    h3 {
+      margin: 28px 0 12px;
+      font-size: 20px;
+      color: #111827;
+    }
+
+    p {
+      margin: 0 0 14px;
+      font-size: 16px;
+    }
+
+    ul {
+      margin: 0 0 16px 20px;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .info-box,
+    .tip-box,
+    .warn-box,
+    .calc-box {
+      border-radius: 18px;
+      padding: 18px 18px;
+      margin: 18px 0;
+    }
+
+    .info-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+    }
+
+    .tip-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+    }
+
+    .warn-box {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+    }
+
+    .calc-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #1d4ed8;
+    }
+
+    .tip-box .label {
+      color: #15803d;
+    }
+
+    .warn-box .label {
+      color: #c2410c;
+    }
+
+    .calc-box .label {
+      color: #334155;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0 10px;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+    }
+
+    th,
+    td {
+      padding: 14px 12px;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 15px;
+    }
+
+    th {
+      background: #f8fafc;
+      color: #111827;
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .summary-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0 8px;
+    }
+
+    .summary-card {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .summary-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #111827;
+      font-size: 16px;
+    }
+
+    .highlight {
+      color: #dc2626;
+      font-weight: 700;
+    }
+
+    .footer-note {
+      margin-top: 34px;
+      padding-top: 20px;
+      border-top: 1px dashed #d1d5db;
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    @media (max-width: 768px) {
+      .wrap {
+        padding: 20px 14px 60px;
+      }
+
+      .article {
+        padding: 20px 16px;
+        border-radius: 18px;
+      }
+
+      .hero {
+        padding: 22px 18px;
+        border-radius: 16px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      .summary-list {
+        grid-template-columns: 1fr;
+      }
+
+      th,
+      td {
+        font-size: 14px;
+        padding: 12px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <article class="article">
+      <section class="hero">
+        <div class="eyebrow">Kingshot Event Guide</div>
+        <h1>해적의 보물 안내 및 소과금 효율 구간 가이드</h1>
+        <p>
+          해적의 보물은 약 4~6주마다 열리며 7일 동안 진행되는 대형 이벤트입니다.
+          이 글에서는 이벤트 구조, 열쇠 수급 방식, 패키지 구성, 그리고 소과금 기준에서
+          어디까지 구매하는 것이 효율적인지 정리해보겠습니다.
+        </p>
+      </section>
+
+      <div class="info-box">
+        <div class="label">이벤트 핵심 요약</div>
+        <p>
+          해적의 보물 이벤트의 핵심 목표는 <strong>해적 열쇠(Corsair Key)</strong>로 상자를 열고
+          <strong>수수께끼의 진주(Pearl of Enigma)</strong>를 획득하는 것입니다.
+        </p>
+        <p>
+          획득한 진주는 <strong>수수께끼 상점(Emporium of Enigma)</strong>에서
+          행군 스킨, 도시 스킨 등 가치 높은 보상으로 교환할 수 있습니다.
+        </p>
+      </div>
+
+      <h2>이벤트 구성</h2>
+      <p>이벤트는 총 3개의 탭으로 구성됩니다.</p>
+      <ul>
+        <li>항구 훈련 (Harbor Drill)</li>
+        <li>해적 현상금 (Buccaneer Bounty)</li>
+        <li>수수께끼 상점 (Emporium of Enigma)</li>
+      </ul>
+
+      <h2>1. 항구 훈련 (Harbor Drill)</h2>
+      <p>
+        이벤트가 시작되면 가장 먼저 해야 할 일은 <strong>해적 열쇠</strong>를 모으는 것입니다.
+        항구 훈련 탭에서는 <strong>일일 훈련(Daily Drill)</strong> 과제를 통해
+        해적 열쇠와 탐험 포인트(Treasure Hunt Point)를 획득할 수 있습니다.
+      </p>
+
+      <h3>주요 일일 과제 보상</h3>
+      <ul>
+        <li>일일 로그인 → 해적 열쇠 30개, 탐험 포인트 200</li>
+        <li>가속 1,000분 사용 → 해적 열쇠 30개, 탐험 포인트 100</li>
+        <li>야수 10마리 처치 → 해적 열쇠 30개, 탐험 포인트 100</li>
+        <li>에픽 영웅 모집 2회 → 해적 열쇠 30개, 탐험 포인트 100</li>
+        <li>첩보 임무 5회 완료 → 탐험 포인트 100</li>
+        <li>병력 훈련/승급으로 전투력 30,000 증가 → 탐험 포인트 100</li>
+      </ul>
+
+      <p>
+        탐험 포인트를 누적하면 단계별 보상을 받을 수 있으며,
+        추가 해적 열쇠, 가속 아이템, 영웅 경험치, 보석 등을 얻을 수 있습니다.
+      </p>
+
+      <div class="tip-box">
+        <div class="label">유료 패스</div>
+        <p><strong>항구의 서 (Harbor Tome)</strong></p>
+        <p>가격: $4.99</p>
+        <p>
+          효과: 일일 훈련 보상이 2배가 되고, 항구 훈련 단계 보상에 특별 보상(Epic Reward)이 추가됩니다.
+        </p>
+        <p>
+          추가 보상에는 해적 열쇠, 보석, 영웅 조각, 스킬북 등이 포함됩니다.
+        </p>
+      </div>
+
+      <h2>2. 해적 현상금 (Buccaneer Bounty)</h2>
+      <p>
+        모은 해적 열쇠는 해적 현상금 탭에서 사용합니다.
+        이곳에서 상자를 열어 진주와 각종 보상을 획득할 수 있습니다.
+      </p>
+
+      <ul>
+        <li>한 번에 9개의 상자가 등장합니다.</li>
+        <li>상자 종류는 일반, 고급, 최고급으로 나뉩니다.</li>
+        <li>상자 하나를 열 때마다 해적 열쇠 60개가 소모됩니다.</li>
+        <li>상자 등급이 높을수록 수수께끼의 진주 획득 확률이 올라갑니다.</li>
+        <li>최고급(Splendid) 상자는 등장 확률이 낮습니다.</li>
+      </ul>
+
+      <h3>리프레시 규칙</h3>
+      <ul>
+        <li>하루 3회 무료 리프레시 가능</li>
+        <li>이후에는 해적 열쇠를 소모하여 리프레시</li>
+        <li>9개 상자를 모두 열면 자동 무료 리프레시</li>
+      </ul>
+
+      <div class="warn-box">
+        <div class="label">중요 포인트</div>
+        <p>
+          상자를 많이 열수록 누적 보상 구간까지 도달하기 쉬워집니다.
+          특히 <strong>누적 100개 개봉 구간</strong>은 효율을 계산할 때 자주 기준점으로 잡히는 구간입니다.
+        </p>
+      </div>
+
+      <h2>3. 해적 열쇠 구매 (과금 패키지)</h2>
+      <p>
+        열쇠가 부족하면 상점에서 직접 구매할 수 있습니다.
+        아래는 해적 열쇠 패키지 구성입니다.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>가격</th>
+            <th>해적 열쇠</th>
+            <th>VIP 경험치</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$0.99 (1,500원)</td>
+            <td>120개</td>
+            <td>500</td>
+          </tr>
+          <tr>
+            <td>$2.99 (4,400원)</td>
+            <td>360개</td>
+            <td>1,500</td>
+          </tr>
+          <tr>
+            <td>$4.99 (7,500원)</td>
+            <td>500개</td>
+            <td>2,500</td>
+          </tr>
+          <tr>
+            <td>$9.99 (15,000원)</td>
+            <td>900개</td>
+            <td>4,000</td>
+          </tr>
+          <tr>
+            <td>$19.99 (30,000원)</td>
+            <td>1,700개</td>
+            <td>6,000</td>
+          </tr>
+          <tr>
+            <td>$49.99 (79,000원)</td>
+            <td>3,500개</td>
+            <td>12,000</td>
+          </tr>
+          <tr>
+            <td>$99.99 (149,000원)</td>
+            <td>6,000개</td>
+            <td>20,000</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>4. 수수께끼 상점 (Emporium of Enigma)</h2>
+      <p>
+        해적 현상금에서 얻은 <strong>수수께끼의 진주</strong>는 전용 상점에서 사용할 수 있습니다.
+      </p>
+
+      <ul>
+        <li>한정 행군 스킨</li>
+        <li>도시 스킨</li>
+        <li>영웅 성장 아이템</li>
+        <li>기타 희귀 자원</li>
+      </ul>
+
+      <h2>소과금 효율 구간 정리</h2>
+      <p>
+        아래는 소과금 기준으로 많이 고려하는 구간 예시입니다.
+        핵심은 <strong>최소 비용으로 상자 개봉 수를 많이 확보하고</strong>,
+        가능하다면 <strong>누적 보상 100개 구간</strong>까지 접근하는 것입니다.
+      </p>
+
+      <div class="calc-box">
+        <div class="label">예시 계산</div>
+        <p><strong>금액</strong></p>
+        <p>겔프트수훈련 7,500원 구매</p>
+        <p>7일간 1,500원 + 4,400원 매일 열쇠 구매 + 마지막 날 7,500원 추가 구매</p>
+        <p><strong>합계 56,300원</strong></p>
+        <br />
+        <p><strong>획득 열쇠 개수</strong></p>
+        <p>일일 훈련 1일당 240개 = 7일간 1,680개</p>
+        <p>겔프트수훈련 600개</p>
+        <p>열쇠 구매로 1일 480개 = 7일간 3,360개, + 마지막 날 추가 구매 500개</p>
+        <p><strong>합계 6,140개</strong></p>
+      </div>
+
+      <div class="info-box">
+        <div class="label">개봉 수 환산</div>
+        <p>
+          상자 1개당 해적 열쇠 60개가 필요하므로,
+          <strong>6,140개 열쇠로 총 102개 상자</strong>를 열 수 있습니다.
+        </p>
+        <p>
+          즉, 계산상으로는 <strong>누적 100개 개봉 구간</strong>에 도달 가능합니다.
+        </p>
+      </div>
+
+      <div class="warn-box">
+        <div class="label">효율 해석</div>
+        <p>
+          누적 100개 개봉 보상에서 <strong>전용 무기 부품 20개</strong>를 받을 수 있다고 가정하면,
+          전용 무기 부품 5개가 7,500원 가치라는 기준에서
+          이 보상만으로도 <strong>약 30,000원 상당의 체감 가치</strong>를 볼 수 있습니다.
+        </p>
+        <p>
+          물론 실제 효율은 상자에서 추가로 나오는 아이템과 진주 획득 운에 따라 달라질 수 있습니다.
+          다만 <span class="highlight">새로운 칩을 최소화하면서 최대 효율을 노리는 소과금 구간</span>으로는
+          꽤 괜찮은 편입니다.
+        </p>
+      </div>
+
+      <h2>추천 결론</h2>
+      <div class="summary-list">
+        <div class="summary-card">
+          <strong>무과금</strong>
+          항구 훈련 일일 과제와 무료 리프레시 위주로 진행하면서 열쇠를 모으는 방식이 기본입니다.
+        </div>
+        <div class="summary-card">
+          <strong>소과금</strong>
+          항구의 서 + 저가 열쇠 패키지 반복 구매로 누적 개봉 구간을 노리는 방식이 효율적입니다.
+        </div>
+        <div class="summary-card">
+          <strong>핵심 목표</strong>
+          단순히 열쇠를 사는 것이 아니라 누적 보상 기준점까지 도달하는지 계산하고 구매하는 것이 중요합니다.
+        </div>
+        <div class="summary-card">
+          <strong>추천 구간</strong>
+          예시 기준으로 약 5만 원대 중반 구간은 100개 개봉선을 맞추기 쉬운 편이라 소과금 효율 구간으로 볼 수 있습니다.
+        </div>
+      </div>
+
+      <h2>최종 요약</h2>
+      <ul>
+        <li>항구 훈련: 일일 과제로 해적 열쇠 수급</li>
+        <li>해적 현상금: 열쇠로 상자를 열고 진주 획득</li>
+        <li>수수께끼 상점: 진주로 스킨 및 희귀 아이템 교환</li>
+        <li>소과금은 누적 100개 개봉 구간 도달 여부를 기준으로 계산하는 것이 좋음</li>
+      </ul>
+
+      <div class="footer-note">
+        본 글은 해적의 보물 이벤트 구조와 소과금 효율 구간을 이해하기 쉽게 정리한 안내용 문서입니다.
+        실제 보상 효율은 서버 상황, 개인 보유 자원, 상자 등장 운에 따라 달라질 수 있습니다.
+      </div>
+    </article>
+  </div>
+</body>
+</html>
