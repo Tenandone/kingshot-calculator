@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Buccaneer Bounty Guide and Light Spender Efficiency | 60 Corsair Keys per Chest | KingshotData</title>
+  <meta name="description" content="Kingshot Buccaneer Bounty guide covering Corsair Key carryover, skin strategy, Harbor Drill, Emporium of Enigma, key packs, and the best light spender efficiency range." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/en/guides/pirates-treasure-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/pirates-treasure-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/pirates-treasure-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/pirates-treasure-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/pirates-treasure-guide.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guides/buccaneer-bounty-event.webp" />
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Buccaneer Bounty Guide and Light Spender Efficiency" />
+  <meta property="og:description" content="60 Corsair Keys open 1 chest. This guide covers skin-saving strategy, Widget-style priority rewards, and the best light spender range for Buccaneer Bounty." />
+  <meta property="og:url" content="https://kingshotdata.kr/en/guides/pirates-treasure-guide.html" />
+  <meta property="og:site_name" content="KingshotData" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guides/buccaneer-bounty-event.webp" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Buccaneer Bounty Guide and Light Spender Efficiency" />
+  <meta name="twitter:description" content="A practical Kingshot Buccaneer Bounty guide built around the 60 Keys per Chest rule." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guides/buccaneer-bounty-event.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#111827;
+      --danger:#dc2626;
+      --warn:#b45309;
+      --warn-bg:rgba(245,158,11,.08);
+      --warn-border:rgba(245,158,11,.35);
+      --soft-bg:#f8fbff;
+      --soft-border:#dbeafe;
+      --ok-bg:#f0fdf4;
+      --ok-border:#bbf7d0;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:18px;
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.72 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    img{max-width:100%}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:8px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:20px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-visual{
+      width:160px;
+      height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:16px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      overflow:hidden;
+    }
+
+    .hero-visual img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:32px;
+      line-height:1.18;
+      letter-spacing:-.02em;
+    }
+
+    .hero-lead{
+      margin:0 0 10px;
+      font-size:19px;
+      font-weight:900;
+      color:var(--accent);
+      line-height:1.5;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .hero-cta{
+      margin-top:14px;
+      padding:16px;
+      border:1px solid var(--soft-border);
+      border-radius:16px;
+      background:var(--soft-bg);
+    }
+
+    .hero-cta p{
+      margin:0 0 10px;
+      color:var(--text);
+      font-weight:800;
+    }
+
+    .hero-proof{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:12px;
+    }
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.45}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.28;
+      letter-spacing:-.01em;
+    }
+
+    section h3{
+      margin:18px 0 8px;
+      font-size:18px;
+      line-height:1.38;
+    }
+
+    section p{margin:8px 0}
+
+    .note,
+    .ok-note{
+      display:flex;
+      gap:10px;
+      padding:13px 14px;
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+
+    .note{
+      border:1px solid var(--warn-border);
+      background:var(--warn-bg);
+    }
+
+    .ok-note{
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+    }
+
+    .note strong,
+    .ok-note strong{
+      font-weight:900;
+    }
+
+    .note .note-ico{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      margin-top:2px;
+      color:var(--warn);
+    }
+
+    .panel{
+      border:1px solid var(--soft-border);
+      background:var(--soft-bg);
+      border-radius:14px;
+      padding:14px 16px;
+      margin:10px 0 14px;
+    }
+
+    .mini-grid,
+    .stat-grid,
+    .check-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .stat-grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .mini-card,
+    .stat-card,
+    .check-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+    }
+
+    .stat-card .label{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:6px;
+    }
+
+    .stat-card strong{
+      display:block;
+      font-size:24px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+
+    .stat-card em{
+      display:block;
+      margin-top:6px;
+      font-style:normal;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .mini-card h3,
+    .check-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+
+    .mini-card p,
+    .check-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .keyword{
+      color:var(--danger);
+      font-weight:900;
+    }
+
+    .guide-list{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .guide-list li{margin:6px 0}
+
+    .table-wrap{
+      overflow:auto;
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:640px;
+    }
+
+    th,td{
+      padding:12px;
+      border-bottom:1px solid var(--border);
+      text-align:center;
+      vertical-align:middle;
+      white-space:nowrap;
+    }
+
+    th{
+      background:#f8fafc;
+      font-size:14px;
+      font-weight:900;
+    }
+
+    td{
+      font-size:14px;
+    }
+
+    tbody tr:last-child td{border-bottom:none}
+
+    .strong-row td{
+      background:#fafcff;
+      font-weight:900;
+    }
+
+    .links{
+      background:var(--soft-bg);
+      padding:16px;
+      border-radius:14px;
+      margin-top:14px;
+      border:1px solid var(--soft-border);
+    }
+
+    .links h3{
+      color:var(--text);
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .links a{font-weight:900}
+
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:#fff;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      cursor:pointer;
+      font-weight:900;
+      text-decoration:none !important;
+      line-height:1;
+      user-select:none;
+      background:#fff;
+      color:var(--text);
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+
+      .hero{grid-template-columns:1fr}
+      .hero-visual{width:120px;height:120px}
+      h1{font-size:28px}
+      .hero-lead{font-size:17px}
+      .mini-grid,
+      .check-grid,
+      .stat-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:25px}
+      section{padding:15px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://kingshotdata.kr/en/"},
+          {"@type":"ListItem","position":2,"name":"Guides","item":"https://kingshotdata.kr/en/guides/"},
+          {"@type":"ListItem","position":3,"name":"Buccaneer Bounty Guide","item":"https://kingshotdata.kr/en/guides/pirates-treasure-guide.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"Buccaneer Bounty Guide and Light Spender Efficiency",
+        "description":"A practical guide to Corsair Key saving, skin strategy, hero widget-style rewards, paid packs, and the best light spender range for Buccaneer Bounty.",
+        "mainEntityOfPage":"https://kingshotdata.kr/en/guides/pirates-treasure-guide.html",
+        "inLanguage":"en",
+        "author":{
+          "@type":"Organization",
+          "name":"KingshotData"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"KingshotData",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+          }
+        },
+        "image":"https://kingshotdata.kr/img/guides/buccaneer-bounty-event.webp"
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/en/" aria-label="KingshotData Home">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>KingshotData</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/pirates-treasure-guide.html" aria-current="page">EN</a>
+        <a href="/ko/guides/pirates-treasure-guide.html">KO</a>
+        <a href="/ja/guides/pirates-treasure-guide.html">JA</a>
+        <a href="/zh-tw/guides/pirates-treasure-guide.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">Conclusion</a>
+      <a href="#structure">Overview</a>
+      <a href="#skin">Skin Strategy</a>
+      <a href="#packages">Packs</a>
+      <a href="#efficiency">Light Spender</a>
+      <a href="#links">Related Guides</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/en/">Home</a> <span class="muted">›</span>
+        <a href="/en/guides/">Guides</a> <span class="muted">›</span>
+        <span>Buccaneer Bounty Guide</span>
+      </div>
+
+      <div class="hero">
+        <div class="hero-visual">
+          <img src="/img/guides/buccaneer-bounty-event.webp" alt="Kingshot Buccaneer Bounty Event" loading="eager" fetchpriority="high" width="160" height="160">
+        </div>
+
+        <div>
+          <h1>Buccaneer Bounty Guide and Light Spender Efficiency</h1>
+          <p class="hero-lead">Start with this rule: 60 Corsair Keys open 1 chest. If your goal is a skin, the smart move is usually saving keys, not opening chests right away.</p>
+          <p class="sub">
+            Buccaneer Bounty plays very differently depending on whether you want hero-exclusive upgrade materials or you are saving for skins.
+          </p>
+
+          <div class="hero-cta" aria-label="Key summary">
+            <p>These are the points that matter most.</p>
+            <div class="hero-proof" aria-label="quick summary">
+              <span class="badge">1 Chest = 60 Corsair Keys</span>
+              <span class="badge">Do not open early for skins</span>
+              <span class="badge">Keys carry over</span>
+              <span class="badge">Pearls convert at event end</span>
+            </div>
+
+            <div class="jump" aria-label="Quick jump buttons">
+              <a class="btn btn-primary" href="#skin">See Skin Strategy</a>
+              <a class="btn" href="#efficiency">See Light Spender Range</a>
+              <a class="btn" href="#links">Related Guides</a>
+            </div>
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">Conclusion</a><span class="dotsep">•</span>
+            <a href="#structure">Overview</a><span class="dotsep">•</span>
+            <a href="#skin">Skin Strategy</a><span class="dotsep">•</span>
+            <a href="#packages">Packs</a><span class="dotsep">•</span>
+            <a href="#efficiency">Light Spender</a><span class="dotsep">•</span>
+            <a href="#links">Related Guides</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <span class="anchor"></span>
+        <h2>Conclusion</h2>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <span class="label">Chest Rule</span>
+            <strong>60 Keys</strong>
+            <em>opens 1 chest</em>
+          </div>
+          <div class="stat-card">
+            <span class="label">Light Spender Example</span>
+            <strong>$37.95</strong>
+            <em>7-day event plan</em>
+          </div>
+          <div class="stat-card">
+            <span class="label">Main Target</span>
+            <strong>100 Chests</strong>
+            <em>milestone reward line</em>
+          </div>
+        </div>
+
+        <div class="note" role="note" aria-label="Important note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Important:</strong> Buccaneer Bounty is easier to judge by
+            <span class="keyword">how many total chests you can open</span> than by how many keys you happen to be holding.
+          </div>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="price note">
+          <div>
+            <strong>Price note:</strong>
+            This guide uses the in-game USD pack prices. Your final charge may vary depending on your store region and payment platform.
+          </div>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="weapon note">
+          <div>
+            <strong>How most players view it:</strong> Buccaneer Bounty is one of the cheaper ways to stock up on hero-exclusive upgrade materials.
+            Those should usually be your priority, and everything else can be picked based on your account needs.
+          </div>
+        </div>
+      </section>
+
+      <section id="structure">
+        <span class="anchor"></span>
+        <h2>Event Overview</h2>
+
+        <div class="check-grid">
+          <div class="check-card">
+            <h3>Harbor Drill</h3>
+            <p>This is where you complete daily tasks to collect Corsair Keys and Treasure Hunt Points.</p>
+          </div>
+          <div class="check-card">
+            <h3>Buccaneer Bounty</h3>
+            <p>This is the main chest-opening tab where you spend your Corsair Keys.</p>
+          </div>
+          <div class="check-card">
+            <h3>Emporium of Enigma</h3>
+            <p>This is the event shop where you spend Pearls of Enigma on skins and other rewards.</p>
+          </div>
+          <div class="check-card">
+            <h3>Core Math</h3>
+            <p><strong>Every chest costs 60 Corsair Keys</strong></p>
+          </div>
+        </div>
+
+        <h3>Main Harbor Drill Rewards</h3>
+        <ul class="guide-list">
+          <li>Daily Login → 30 Corsair Keys, 200 Treasure Hunt Points</li>
+          <li>Use 1000m of Speedups → 30 Corsair Keys, 100 Treasure Hunt Points</li>
+          <li>Defeat 10 Beasts → 30 Corsair Keys, 100 Treasure Hunt Points</li>
+          <li>Use Epic Recruitment 2 Times → 30 Corsair Keys, 100 Treasure Hunt Points</li>
+          <li>Finish 5 Intel Missions → 100 Treasure Hunt Points</li>
+          <li>Raise 30,000 power by training or promoting troops → 100 Treasure Hunt Points</li>
+        </ul>
+
+        <div class="ok-note" role="note" aria-label="Harbor Tome">
+          <div>
+            <strong>Harbor Tome:</strong> This is the $4.99 event pass. It doubles Daily Drill rewards and unlocks extra milestone rewards.
+          </div>
+        </div>
+      </section>
+
+      <section id="skin">
+        <span class="anchor"></span>
+        <h2>Best Strategy If You Want a Skin</h2>
+
+        <div class="note" role="note" aria-label="Skin target note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>If your goal is a skin, do not rush your chest openings.</strong>
+            A better approach is to buy only the basic value packs, save keys across 3 to 4 events, and then push for the skin when your stock is ready.
+          </div>
+        </div>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>Corsair Keys</h3>
+            <p>Corsair Keys carry over after the event ends, so you can save them for the next Buccaneer Bounty.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Pearls of Enigma</h3>
+            <p>Once you open chests and turn keys into pearls, leftover pearls will not carry over. They get converted into resources when the event ends.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p><strong>In simple terms</strong></p>
+          <p>Skin-focused players are usually better off stacking keys instead of converting them into pearls too early.</p>
+          <p>If you open chests too soon, your pearls will not stay as pearls after the event ends.</p>
+        </div>
+      </section>
+
+      <section id="packages">
+        <span class="anchor"></span>
+        <h2>Corsair Key Packs</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Price</th>
+                <th>Corsair Keys</th>
+                <th>VIP XP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>$0.99</td>
+                <td>120</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>$2.99</td>
+                <td>360</td>
+                <td>1500</td>
+              </tr>
+              <tr>
+                <td>$4.99</td>
+                <td>500</td>
+                <td>2500</td>
+              </tr>
+              <tr>
+                <td>$9.99</td>
+                <td>900</td>
+                <td>4000</td>
+              </tr>
+              <tr>
+                <td>$19.99</td>
+                <td>1700</td>
+                <td>6000</td>
+              </tr>
+              <tr>
+                <td>$49.99</td>
+                <td>3500</td>
+                <td>12000</td>
+              </tr>
+              <tr>
+                <td>$99.99</td>
+                <td>6000</td>
+                <td>20000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="efficiency">
+        <span class="anchor"></span>
+        <h2>Best Light Spender Range</h2>
+
+        <div class="panel">
+          <p><strong>Buy Harbor Tome for $4.99</strong></p>
+          <p>During the 7-day event, buy the $0.99 and $2.99 packs each day</p>
+          <p>Buy one extra $4.99 pack on the last day</p>
+          <p><strong>Total: $37.95</strong></p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th>Details</th>
+                <th>Keys Gained</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Daily Rewards</td>
+                <td>240 per day × 7 days</td>
+                <td>1,680</td>
+              </tr>
+              <tr>
+                <td>Harbor Tome</td>
+                <td>Event pass</td>
+                <td>600</td>
+              </tr>
+              <tr>
+                <td>Daily Packs</td>
+                <td>480 per day × 7 days</td>
+                <td>3,360</td>
+              </tr>
+              <tr>
+                <td>Extra Purchase</td>
+                <td>One $4.99 pack</td>
+                <td>500</td>
+              </tr>
+              <tr class="strong-row">
+                <td>Total</td>
+                <td>-</td>
+                <td>6,140</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="conversion note">
+          <div>
+            <strong>Every chest costs 60 Corsair Keys</strong><br>
+            For planning, this is the only number you really need when checking whether you can reach the 100-chest milestone line.
+          </div>
+        </div>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>Priority Reward</h3>
+            <p>Hero-exclusive upgrade materials are usually the first thing worth taking from this event.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Everything Else</h3>
+            <p>After that, choose the rest of your rewards based on what your account currently needs most.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="links">
+        <span class="anchor"></span>
+        <h2>Related Guides</h2>
+
+        <div class="links">
+          <h3>Latest Gift Codes</h3>
+          <a href="/en/guides/kingshot-giftcode.html">View the latest Kingshot gift codes</a>
+        </div>
+
+        <div class="links">
+          <h3>Kingshot Top-Up Guide</h3>
+          <a href="/en/guides/topup-guide.html">View the Kingshot top-up guide</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if (mqMobile && mqMobile.addEventListener) {
+        mqMobile.addEventListener('change', setStickyTop);
+      } else if (mqMobile && mqMobile.addListener) {
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

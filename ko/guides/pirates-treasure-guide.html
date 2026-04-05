@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>킹샷 해적의 보물 안내 및 소과금 효율 가이드 | 해적 열쇠 60개당 상자 1개 | 킹샷데이터코리아</title>
+  <meta name="description" content="킹샷 해적의 보물 이벤트 구조, 해적 열쇠 보존 방식, 스킨 도전 타이밍, 해적 현상금, 수수께끼 상점, 열쇠 패키지, 소과금 효율 구간을 간결하게 정리한 가이드입니다." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/pirates-treasure-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/pirates-treasure-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/pirates-treasure-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/pirates-treasure-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/pirates-treasure-guide.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guides/buccaneer-bounty-event.webp" />
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="킹샷 해적의 보물 안내 및 소과금 효율 가이드" />
+  <meta property="og:description" content="해적 열쇠 60개당 상자 1개 기준, 스킨 도전 타이밍과 전용무기 수급 관점까지 정리한 해적의 보물 가이드." />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/guides/pirates-treasure-guide.html" />
+  <meta property="og:site_name" content="킹샷데이터코리아" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guides/buccaneer-bounty-event.webp" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="킹샷 해적의 보물 안내 및 소과금 효율 가이드" />
+  <meta name="twitter:description" content="해적 열쇠 60개당 상자 1개 기준으로 보는 해적의 보물 가이드." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guides/buccaneer-bounty-event.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#111827;
+      --danger:#dc2626;
+      --warn:#b45309;
+      --warn-bg:rgba(245,158,11,.08);
+      --warn-border:rgba(245,158,11,.35);
+      --soft-bg:#f8fbff;
+      --soft-border:#dbeafe;
+      --ok-bg:#f0fdf4;
+      --ok-border:#bbf7d0;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:18px;
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.68 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    img{max-width:100%}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:8px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:20px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-visual{
+      width:160px;
+      height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:16px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      overflow:hidden;
+    }
+
+    .hero-visual img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:32px;
+      line-height:1.14;
+      letter-spacing:-.02em;
+    }
+
+    .hero-lead{
+      margin:0 0 10px;
+      font-size:19px;
+      font-weight:900;
+      color:var(--accent);
+      line-height:1.45;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .hero-cta{
+      margin-top:14px;
+      padding:16px;
+      border:1px solid var(--soft-border);
+      border-radius:16px;
+      background:var(--soft-bg);
+    }
+
+    .hero-cta p{
+      margin:0 0 10px;
+      color:var(--text);
+      font-weight:800;
+    }
+
+    .hero-proof{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:12px;
+    }
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.45}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.25;
+      letter-spacing:-.01em;
+    }
+
+    section h3{
+      margin:18px 0 8px;
+      font-size:18px;
+      line-height:1.35;
+    }
+
+    section p{margin:8px 0}
+
+    .note,
+    .ok-note{
+      display:flex;
+      gap:10px;
+      padding:13px 14px;
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+
+    .note{
+      border:1px solid var(--warn-border);
+      background:var(--warn-bg);
+    }
+
+    .ok-note{
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+    }
+
+    .note strong,
+    .ok-note strong{
+      font-weight:900;
+    }
+
+    .note .note-ico{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      margin-top:2px;
+      color:var(--warn);
+    }
+
+    .panel{
+      border:1px solid var(--soft-border);
+      background:var(--soft-bg);
+      border-radius:14px;
+      padding:14px 16px;
+      margin:10px 0 14px;
+    }
+
+    .mini-grid,
+    .stat-grid,
+    .check-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .stat-grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .mini-card,
+    .stat-card,
+    .check-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+    }
+
+    .stat-card .label{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:6px;
+    }
+
+    .stat-card strong{
+      display:block;
+      font-size:24px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+
+    .stat-card em{
+      display:block;
+      margin-top:6px;
+      font-style:normal;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .mini-card h3,
+    .check-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+
+    .mini-card p,
+    .check-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .keyword{
+      color:var(--danger);
+      font-weight:900;
+    }
+
+    .guide-list{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .guide-list li{margin:6px 0}
+
+    .table-wrap{
+      overflow:auto;
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:640px;
+    }
+
+    th,td{
+      padding:12px;
+      border-bottom:1px solid var(--border);
+      text-align:center;
+      vertical-align:middle;
+      white-space:nowrap;
+    }
+
+    th{
+      background:#f8fafc;
+      font-size:14px;
+      font-weight:900;
+    }
+
+    td{
+      font-size:14px;
+    }
+
+    tbody tr:last-child td{border-bottom:none}
+
+    .strong-row td{
+      background:#fafcff;
+      font-weight:900;
+    }
+
+    .links{
+      background:var(--soft-bg);
+      padding:16px;
+      border-radius:14px;
+      margin-top:14px;
+      border:1px solid var(--soft-border);
+    }
+
+    .links h3{
+      color:var(--text);
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .links a{font-weight:900}
+
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:#fff;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      cursor:pointer;
+      font-weight:900;
+      text-decoration:none !important;
+      line-height:1;
+      user-select:none;
+      background:#fff;
+      color:var(--text);
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+
+      .hero{grid-template-columns:1fr}
+      .hero-visual{width:120px;height:120px}
+      h1{font-size:28px}
+      .hero-lead{font-size:17px}
+      .mini-grid,
+      .check-grid,
+      .stat-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:25px}
+      section{padding:15px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
+          {"@type":"ListItem","position":2,"name":"가이드","item":"https://kingshotdata.kr/ko/guides/"},
+          {"@type":"ListItem","position":3,"name":"해적의 보물 가이드","item":"https://kingshotdata.kr/ko/guides/pirates-treasure-guide.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"킹샷 해적의 보물 안내 및 소과금 효율 가이드",
+        "description":"해적 열쇠 수급, 스킨 도전 타이밍, 전용무기 수급 관점, 열쇠 패키지와 소과금 효율 구간을 정리한 가이드입니다.",
+        "mainEntityOfPage":"https://kingshotdata.kr/ko/guides/pirates-treasure-guide.html",
+        "inLanguage":"ko",
+        "author":{
+          "@type":"Organization",
+          "name":"킹샷데이터코리아"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"킹샷데이터코리아",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+          }
+        },
+        "image":"https://kingshotdata.kr/img/guides/buccaneer-bounty-event.webp"
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="킹샷데이터코리아 홈">
+          <img src="/img/kingshotdata-logo.png" alt="킹샷데이터코리아" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>킹샷데이터코리아</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/pirates-treasure-guide.html">EN</a>
+        <a href="/ko/guides/pirates-treasure-guide.html" aria-current="page">KO</a>
+        <a href="/ja/guides/pirates-treasure-guide.html">JA</a>
+        <a href="/zh-tw/guides/pirates-treasure-guide.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">결론</a>
+      <a href="#structure">구조</a>
+      <a href="#skin">스킨</a>
+      <a href="#packages">패키지</a>
+      <a href="#efficiency">효율</a>
+      <a href="#links">링크</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/guides/">가이드</a> <span class="muted">›</span>
+        <span>해적의 보물 가이드</span>
+      </div>
+
+      <div class="hero">
+        <div class="hero-visual">
+          <img src="/img/guides/buccaneer-bounty-event.webp" alt="킹샷 해적의 보물 이벤트" loading="eager" fetchpriority="high" width="160" height="160">
+        </div>
+
+        <div>
+          <h1>킹샷 해적의 보물 안내 및 소과금 효율 가이드</h1>
+          <p class="hero-lead">핵심은 해적 열쇠 60개당 상자 1개, 그리고 스킨을 노릴 때는 상자를 바로 열지 않는 것이다.</p>
+          <p class="sub">
+            해적의 보물은 전용무기 수급과 스킨 도전 방식이 갈리는 이벤트다.
+          </p>
+
+          <div class="hero-cta" aria-label="핵심 요약">
+            <p>빠르게 보면 이 정도만 기억하면 된다.</p>
+            <div class="hero-proof" aria-label="quick summary">
+              <span class="badge">상자 1개 = 열쇠 60개</span>
+              <span class="badge">스킨 목표면 상자 바로 오픈 금지</span>
+              <span class="badge">열쇠는 이벤트 후에도 유지</span>
+              <span class="badge">진주는 이벤트 종료 시 자원 전환</span>
+            </div>
+
+            <div class="jump" aria-label="Quick jump links">
+              <a class="btn btn-primary" href="#skin">스킨 도전 방식 보기</a>
+              <a class="btn" href="#efficiency">소과금 효율 보기</a>
+              <a class="btn" href="#links">관련 링크 보기</a>
+            </div>
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">결론</a><span class="dotsep">•</span>
+            <a href="#structure">구조</a><span class="dotsep">•</span>
+            <a href="#skin">스킨</a><span class="dotsep">•</span>
+            <a href="#packages">패키지</a><span class="dotsep">•</span>
+            <a href="#efficiency">효율</a><span class="dotsep">•</span>
+            <a href="#links">링크</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <span class="anchor"></span>
+        <h2>결론</h2>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <span class="label">상자 기준</span>
+            <strong>열쇠 60개</strong>
+            <em>상자 1개 개봉</em>
+          </div>
+          <div class="stat-card">
+            <span class="label">예시 지출</span>
+            <strong>56,300원</strong>
+            <em>7일 기준</em>
+          </div>
+          <div class="stat-card">
+            <span class="label">핵심 체크</span>
+            <strong>100상자</strong>
+            <em>누적 보상선</em>
+          </div>
+        </div>
+
+        <div class="note" role="note" aria-label="Important note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>중요:</strong> 해적의 보물은 열쇠 개수보다
+            <span class="keyword">상자를 몇 개 열 수 있는지</span>로 계산하는 게 편하다.
+          </div>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="weapon note">
+          <div>
+            <strong>포인트:</strong> 해적의 보물은 저렴한 가격에 영웅 전용무기 수급을 위한 장치로 보는 편이 맞다.
+            전용무기는 필수로 챙기고, 나머지는 본인에게 필요한 것을 선택하면 된다.
+          </div>
+        </div>
+      </section>
+
+      <section id="structure">
+        <span class="anchor"></span>
+        <h2>이벤트 구조</h2>
+
+        <div class="check-grid">
+          <div class="check-card">
+            <h3>항구 훈련</h3>
+            <p>일일 과제로 해적 열쇠와 탐험 포인트를 모으는 구간.</p>
+          </div>
+          <div class="check-card">
+            <h3>해적 현상금</h3>
+            <p>해적 열쇠로 상자를 여는 구간.</p>
+          </div>
+          <div class="check-card">
+            <h3>수수께끼 상점</h3>
+            <p>진주를 행군 스킨, 도시 스킨 등으로 교환하는 구간.</p>
+          </div>
+          <div class="check-card">
+            <h3>핵심 계산법</h3>
+            <p><strong>상자 1개당 해적 열쇠 60개</strong></p>
+          </div>
+        </div>
+
+        <h3>항구 훈련 주요 보상</h3>
+        <ul class="guide-list">
+          <li>일일 로그인 → 해적 열쇠 30개, 탐험 포인트 200</li>
+          <li>가속 1,000분 사용 → 해적 열쇠 30개, 탐험 포인트 100</li>
+          <li>야수 10마리 처치 → 해적 열쇠 30개, 탐험 포인트 100</li>
+          <li>에픽 영웅 모집 2회 → 해적 열쇠 30개, 탐험 포인트 100</li>
+          <li>첩보 임무 5회 완료 → 탐험 포인트 100</li>
+          <li>병력 훈련/승급으로 전투력 30,000 증가 → 탐험 포인트 100</li>
+        </ul>
+
+        <div class="ok-note" role="note" aria-label="Harbor Tome">
+          <div>
+            <strong>항구의 서:</strong> 4.99달러 유료 패스. 일일 훈련 보상 2배, 추가 보상 포함.
+          </div>
+        </div>
+      </section>
+
+      <section id="skin">
+        <span class="anchor"></span>
+        <h2>스킨 목표 유저는 이렇게 보면 된다</h2>
+
+        <div class="note" role="note" aria-label="Skin target note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>스킨 목표면 상자를 바로 열지 말자.</strong>
+            기본 과금만 한 뒤 3~4회 정도 열쇠를 모은 다음, 그때 스킨 도전을 보는 쪽이 맞다.
+          </div>
+        </div>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>열쇠</h3>
+            <p>열쇠는 이벤트가 끝나도 사라지지 않는다.</p>
+          </div>
+          <div class="mini-card">
+            <h3>진주</h3>
+            <p>상자를 열어 진주로 바꾸면, 진주는 이벤트 종료 시 자원으로 전환된다.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p><strong>정리하면</strong></p>
+          <p>스킨을 노리는 유저는 열쇠를 누적시키는 방식이 유리하다.</p>
+          <p>반대로 상자를 미리 열어 진주로 바꿔버리면 이벤트 종료 시 진주가 남지 않는다.</p>
+        </div>
+      </section>
+
+      <section id="packages">
+        <span class="anchor"></span>
+        <h2>해적 열쇠 패키지</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>가격</th>
+                <th>해적 열쇠</th>
+                <th>VIP 경험치</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>$0.99 (1,500원)</td>
+                <td>120개</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>$2.99 (4,400원)</td>
+                <td>360개</td>
+                <td>1,500</td>
+              </tr>
+              <tr>
+                <td>$4.99 (7,500원)</td>
+                <td>500개</td>
+                <td>2,500</td>
+              </tr>
+              <tr>
+                <td>$9.99 (15,000원)</td>
+                <td>900개</td>
+                <td>4,000</td>
+              </tr>
+              <tr>
+                <td>$19.99 (30,000원)</td>
+                <td>1,700개</td>
+                <td>6,000</td>
+              </tr>
+              <tr>
+                <td>$49.99 (79,000원)</td>
+                <td>3,500개</td>
+                <td>12,000</td>
+              </tr>
+              <tr>
+                <td>$99.99 (149,000원)</td>
+                <td>6,000개</td>
+                <td>20,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="efficiency">
+        <span class="anchor"></span>
+        <h2>소과금 효율 구간</h2>
+
+        <div class="panel">
+          <p><strong>항구의 서 7,500원 구매</strong></p>
+          <p>7일 동안 1,500원 + 4,400원 패키지 구매</p>
+          <p>마지막 날 7,500원 패키지 추가 구매</p>
+          <p><strong>합계 56,300원</strong></p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>구분</th>
+                <th>내용</th>
+                <th>획득 열쇠</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>일일 훈련</td>
+                <td>1일 240개 × 7일</td>
+                <td>1,680개</td>
+              </tr>
+              <tr>
+                <td>항구의 서</td>
+                <td>유료 패스</td>
+                <td>600개</td>
+              </tr>
+              <tr>
+                <td>일일 패키지</td>
+                <td>1일 480개 × 7일</td>
+                <td>3,360개</td>
+              </tr>
+              <tr>
+                <td>추가 구매</td>
+                <td>7,500원 패키지</td>
+                <td>500개</td>
+              </tr>
+              <tr class="strong-row">
+                <td>합계</td>
+                <td>-</td>
+                <td>6,140개</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="conversion note">
+          <div>
+            <strong>상자 1개당 해적 열쇠 60개</strong><br>
+            계산할 때는 이 기준으로 누적 100상자 보상선에 들어가는지만 보면 된다.
+          </div>
+        </div>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>전용무기</h3>
+            <p>전용무기는 우선적으로 챙기는 편이 좋다.</p>
+          </div>
+          <div class="mini-card">
+            <h3>나머지 선택</h3>
+            <p>남는 보상은 본인 성장 상태에 맞춰 선택하면 된다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="links">
+        <span class="anchor"></span>
+        <h2>관련 링크</h2>
+
+        <div class="links">
+          <h3>최신 기프트코드</h3>
+          <a href="/ko/guides/kingshot-giftcode.html">킹샷 최신 기프트코드 보기</a>
+        </div>
+
+        <div class="links">
+          <h3>킹샷 충전 가이드</h3>
+          <a href="/ko/guides/topup-guide.html">킹샷 충전 가이드 보기</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if (mqMobile && mqMobile.addEventListener) {
+        mqMobile.addEventListener('change', setStickyTop);
+      } else if (mqMobile && mqMobile.addListener) {
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

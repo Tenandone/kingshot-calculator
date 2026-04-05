@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>【キングショット】海賊の秘宝の進め方と微課金効率 | 秘宝鍵石60個で宝箱1個 | KingshotData</title>
+  <meta name="description" content="キングショットの海賊の秘宝攻略です。秘宝鍵石の持ち越し仕様、スキン交換を狙う進め方、湾岸特訓、秘宝商会、課金パック、微課金効率ラインを日本向けに整理しました。" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ja/guides/pirates-treasure-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/pirates-treasure-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/pirates-treasure-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/pirates-treasure-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/pirates-treasure-guide.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guides/buccaneer-bounty-event.webp" />
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="【キングショット】海賊の秘宝の進め方と微課金効率" />
+  <meta property="og:description" content="秘宝鍵石60個で宝箱1個。スキン交換を狙う貯め方と専用装備パーツ回収の考え方まで整理した海賊の秘宝ガイドです。" />
+  <meta property="og:url" content="https://kingshotdata.kr/ja/guides/pirates-treasure-guide.html" />
+  <meta property="og:site_name" content="KingshotData" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guides/buccaneer-bounty-event.webp" />
+  <meta property="og:locale" content="ja_JP" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="【キングショット】海賊の秘宝の進め方と微課金効率" />
+  <meta name="twitter:description" content="秘宝鍵石60個で宝箱1個基準で見る海賊の秘宝ガイド。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guides/buccaneer-bounty-event.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#111827;
+      --danger:#dc2626;
+      --warn:#b45309;
+      --warn-bg:rgba(245,158,11,.08);
+      --warn-border:rgba(245,158,11,.35);
+      --soft-bg:#f8fbff;
+      --soft-border:#dbeafe;
+      --ok-bg:#f0fdf4;
+      --ok-border:#bbf7d0;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:18px;
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.72 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    img{max-width:100%}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:8px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:20px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-visual{
+      width:160px;
+      height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:16px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      overflow:hidden;
+    }
+
+    .hero-visual img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:32px;
+      line-height:1.18;
+      letter-spacing:-.02em;
+    }
+
+    .hero-lead{
+      margin:0 0 10px;
+      font-size:19px;
+      font-weight:900;
+      color:var(--accent);
+      line-height:1.5;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .hero-cta{
+      margin-top:14px;
+      padding:16px;
+      border:1px solid var(--soft-border);
+      border-radius:16px;
+      background:var(--soft-bg);
+    }
+
+    .hero-cta p{
+      margin:0 0 10px;
+      color:var(--text);
+      font-weight:800;
+    }
+
+    .hero-proof{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:12px;
+    }
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.45}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.28;
+      letter-spacing:-.01em;
+    }
+
+    section h3{
+      margin:18px 0 8px;
+      font-size:18px;
+      line-height:1.38;
+    }
+
+    section p{margin:8px 0}
+
+    .note,
+    .ok-note{
+      display:flex;
+      gap:10px;
+      padding:13px 14px;
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+
+    .note{
+      border:1px solid var(--warn-border);
+      background:var(--warn-bg);
+    }
+
+    .ok-note{
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+    }
+
+    .note strong,
+    .ok-note strong{
+      font-weight:900;
+    }
+
+    .note .note-ico{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      margin-top:2px;
+      color:var(--warn);
+    }
+
+    .panel{
+      border:1px solid var(--soft-border);
+      background:var(--soft-bg);
+      border-radius:14px;
+      padding:14px 16px;
+      margin:10px 0 14px;
+    }
+
+    .mini-grid,
+    .stat-grid,
+    .check-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .stat-grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .mini-card,
+    .stat-card,
+    .check-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+    }
+
+    .stat-card .label{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:6px;
+    }
+
+    .stat-card strong{
+      display:block;
+      font-size:24px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+
+    .stat-card em{
+      display:block;
+      margin-top:6px;
+      font-style:normal;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .mini-card h3,
+    .check-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+
+    .mini-card p,
+    .check-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .keyword{
+      color:var(--danger);
+      font-weight:900;
+    }
+
+    .guide-list{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .guide-list li{margin:6px 0}
+
+    .table-wrap{
+      overflow:auto;
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:640px;
+    }
+
+    th,td{
+      padding:12px;
+      border-bottom:1px solid var(--border);
+      text-align:center;
+      vertical-align:middle;
+      white-space:nowrap;
+    }
+
+    th{
+      background:#f8fafc;
+      font-size:14px;
+      font-weight:900;
+    }
+
+    td{
+      font-size:14px;
+    }
+
+    tbody tr:last-child td{border-bottom:none}
+
+    .strong-row td{
+      background:#fafcff;
+      font-weight:900;
+    }
+
+    .links{
+      background:var(--soft-bg);
+      padding:16px;
+      border-radius:14px;
+      margin-top:14px;
+      border:1px solid var(--soft-border);
+    }
+
+    .links h3{
+      color:var(--text);
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .links a{font-weight:900}
+
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:#fff;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      cursor:pointer;
+      font-weight:900;
+      text-decoration:none !important;
+      line-height:1;
+      user-select:none;
+      background:#fff;
+      color:var(--text);
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+
+      .hero{grid-template-columns:1fr}
+      .hero-visual{width:120px;height:120px}
+      h1{font-size:28px}
+      .hero-lead{font-size:17px}
+      .mini-grid,
+      .check-grid,
+      .stat-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:25px}
+      section{padding:15px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"ホーム","item":"https://kingshotdata.kr/ja/"},
+          {"@type":"ListItem","position":2,"name":"ガイド","item":"https://kingshotdata.kr/ja/guides/"},
+          {"@type":"ListItem","position":3,"name":"海賊の秘宝ガイド","item":"https://kingshotdata.kr/ja/guides/pirates-treasure-guide.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"【キングショット】海賊の秘宝の進め方と微課金効率",
+        "description":"秘宝鍵石の集め方、スキン交換を狙う進め方、専用装備パーツ回収、課金パック、微課金効率ラインを整理したガイドです。",
+        "mainEntityOfPage":"https://kingshotdata.kr/ja/guides/pirates-treasure-guide.html",
+        "inLanguage":"ja",
+        "author":{
+          "@type":"Organization",
+          "name":"KingshotData"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"KingshotData",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+          }
+        },
+        "image":"https://kingshotdata.kr/img/guides/buccaneer-bounty-event.webp"
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ja/" aria-label="KingshotData ホーム">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>KingshotData</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/pirates-treasure-guide.html">EN</a>
+        <a href="/ko/guides/pirates-treasure-guide.html">KO</a>
+        <a href="/ja/guides/pirates-treasure-guide.html" aria-current="page">JA</a>
+        <a href="/zh-tw/guides/pirates-treasure-guide.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">結論</a>
+      <a href="#structure">概要</a>
+      <a href="#skin">スキン狙い</a>
+      <a href="#packages">パック</a>
+      <a href="#efficiency">微課金効率</a>
+      <a href="#links">関連記事</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ja/">ホーム</a> <span class="muted">›</span>
+        <a href="/ja/guides/">ガイド</a> <span class="muted">›</span>
+        <span>海賊の秘宝ガイド</span>
+      </div>
+
+      <div class="hero">
+        <div class="hero-visual">
+          <img src="/img/guides/buccaneer-bounty-event.webp" alt="キングショット 海賊の秘宝" loading="eager" fetchpriority="high" width="160" height="160">
+        </div>
+
+        <div>
+          <h1>【キングショット】海賊の秘宝の進め方と微課金効率</h1>
+          <p class="hero-lead">見るべきポイントは、秘宝鍵石60個で宝箱1個を開けられること。スキン交換を狙うなら、宝箱をすぐに開けない進め方が基本です。</p>
+          <p class="sub">
+            海賊の秘宝は、専用装備パーツを回収する回と、スキン交換を狙って鍵石を貯める回で考え方が変わるイベントです。
+          </p>
+
+          <div class="hero-cta" aria-label="要点まとめ">
+            <p>先に押さえておきたい要点です。</p>
+            <div class="hero-proof" aria-label="quick summary">
+              <span class="badge">宝箱1個 = 秘宝鍵石60個</span>
+              <span class="badge">スキン狙いなら即開封しない</span>
+              <span class="badge">鍵石はイベント後も残る</span>
+              <span class="badge">真珠は終了時に資源へ変換</span>
+            </div>
+
+            <div class="jump" aria-label="Quick jump buttons">
+              <a class="btn btn-primary" href="#skin">スキン狙いの進め方</a>
+              <a class="btn" href="#efficiency">微課金効率を見る</a>
+              <a class="btn" href="#links">関連記事</a>
+            </div>
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">結論</a><span class="dotsep">•</span>
+            <a href="#structure">概要</a><span class="dotsep">•</span>
+            <a href="#skin">スキン狙い</a><span class="dotsep">•</span>
+            <a href="#packages">パック</a><span class="dotsep">•</span>
+            <a href="#efficiency">微課金効率</a><span class="dotsep">•</span>
+            <a href="#links">関連記事</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <span class="anchor"></span>
+        <h2>結論</h2>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <span class="label">宝箱基準</span>
+            <strong>鍵石60個</strong>
+            <em>宝箱1個開封</em>
+          </div>
+          <div class="stat-card">
+            <span class="label">微課金例</span>
+            <strong>$37.95</strong>
+            <em>7日想定</em>
+          </div>
+          <div class="stat-card">
+            <span class="label">目安</span>
+            <strong>100箱</strong>
+            <em>累計報酬ライン</em>
+          </div>
+        </div>
+
+        <div class="note" role="note" aria-label="Important note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>重要:</strong> 海賊の秘宝は鍵石の所持数よりも、
+            <span class="keyword">最終的に何箱開けられるか</span>で見るほうが分かりやすいです。
+          </div>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="price note">
+          <div>
+            <strong>価格表記について:</strong>
+            本記事のパック価格は、ゲーム内表記に合わせてUSD基準で記載しています。実際の決済金額は、ご利用のストアや決済環境によって異なる場合があります。
+          </div>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="weapon note">
+          <div>
+            <strong>ポイント:</strong> 海賊の秘宝は、比較的低いコストで英雄専用装備パーツを確保するためのイベントと考えておくと分かりやすいです。
+            専用装備パーツは優先して確保しておきたい報酬で、その後は自分に必要なものを選べば十分です。
+          </div>
+        </div>
+      </section>
+
+      <section id="structure">
+        <span class="anchor"></span>
+        <h2>イベント概要</h2>
+
+        <div class="check-grid">
+          <div class="check-card">
+            <h3>湾岸特訓</h3>
+            <p>デイリーミッションで秘宝鍵石と宝探しポイントを集めるパートです。</p>
+          </div>
+          <div class="check-card">
+            <h3>海賊の秘宝</h3>
+            <p>秘宝鍵石を使って宝箱を開けるメインパートです。</p>
+          </div>
+          <div class="check-card">
+            <h3>秘宝商会</h3>
+            <p>秘宝真珠を使って行軍スキンや都市スキン、育成素材と交換するパートです。</p>
+          </div>
+          <div class="check-card">
+            <h3>基本計算</h3>
+            <p><strong>宝箱1個につき秘宝鍵石60個</strong></p>
+          </div>
+        </div>
+
+        <h3>湾岸特訓の主な報酬</h3>
+        <ul class="guide-list">
+          <li>デイリーログイン → 秘宝鍵石30個、宝探しポイント200</li>
+          <li>加速1,000分使用 → 秘宝鍵石30個、宝探しポイント100</li>
+          <li>野獣10体討伐 → 秘宝鍵石30個、宝探しポイント100</li>
+          <li>エピック英雄募集2回 → 秘宝鍵石30個、宝探しポイント100</li>
+          <li>諜報任務5回完了 → 宝探しポイント100</li>
+          <li>兵士訓練または昇級で戦力30,000上昇 → 宝探しポイント100</li>
+        </ul>
+
+        <div class="ok-note" role="note" aria-label="Harbor Tome">
+          <div>
+            <strong>湾岸秘聞:</strong> $4.99 の有料パスです。デイリーミッション報酬が2倍になり、追加報酬も解放されます。
+          </div>
+        </div>
+      </section>
+
+      <section id="skin">
+        <span class="anchor"></span>
+        <h2>スキン交換を狙う場合の進め方</h2>
+
+        <div class="note" role="note" aria-label="Skin target note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>スキン交換が目標なら、宝箱をすぐに開けない進め方がおすすめです。</strong>
+            基本課金だけ行い、3〜4回分ほど秘宝鍵石を貯めてから一気に狙うほうが進めやすいです。
+          </div>
+        </div>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>秘宝鍵石</h3>
+            <p>秘宝鍵石はイベント終了後も消えず、そのまま持ち越せます。</p>
+          </div>
+          <div class="mini-card">
+            <h3>秘宝真珠</h3>
+            <p>宝箱を開けて真珠に変えると、真珠はイベント終了時に資源へ変換されます。</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p><strong>要するに</strong></p>
+          <p>スキン狙いのプレイヤーは、鍵石を積み立てる進め方が有利です。</p>
+          <p>先に宝箱を開けて真珠へ変えてしまうと、次回へそのまま持ち越すことはできません。</p>
+        </div>
+      </section>
+
+      <section id="packages">
+        <span class="anchor"></span>
+        <h2>秘宝鍵石パック</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>価格</th>
+                <th>秘宝鍵石</th>
+                <th>VIP経験値</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>$0.99</td>
+                <td>120個</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>$2.99</td>
+                <td>360個</td>
+                <td>1,500</td>
+              </tr>
+              <tr>
+                <td>$4.99</td>
+                <td>500個</td>
+                <td>2,500</td>
+              </tr>
+              <tr>
+                <td>$9.99</td>
+                <td>900個</td>
+                <td>4,000</td>
+              </tr>
+              <tr>
+                <td>$19.99</td>
+                <td>1,700個</td>
+                <td>6,000</td>
+              </tr>
+              <tr>
+                <td>$49.99</td>
+                <td>3,500個</td>
+                <td>12,000</td>
+              </tr>
+              <tr>
+                <td>$99.99</td>
+                <td>6,000個</td>
+                <td>20,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="efficiency">
+        <span class="anchor"></span>
+        <h2>微課金効率ライン</h2>
+
+        <div class="panel">
+          <p><strong>湾岸秘聞 $4.99 を購入</strong></p>
+          <p>7日間、毎日 $0.99 + $2.99 パックを購入</p>
+          <p>最終日に $4.99 パックを追加購入</p>
+          <p><strong>合計 $37.95</strong></p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>区分</th>
+                <th>内容</th>
+                <th>獲得鍵石</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>デイリー報酬</td>
+                <td>1日240個 × 7日</td>
+                <td>1,680個</td>
+              </tr>
+              <tr>
+                <td>湾岸秘聞</td>
+                <td>有料パス</td>
+                <td>600個</td>
+              </tr>
+              <tr>
+                <td>日別パック</td>
+                <td>1日480個 × 7日</td>
+                <td>3,360個</td>
+              </tr>
+              <tr>
+                <td>追加購入</td>
+                <td>$4.99 パック</td>
+                <td>500個</td>
+              </tr>
+              <tr class="strong-row">
+                <td>合計</td>
+                <td>-</td>
+                <td>6,140個</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="conversion note">
+          <div>
+            <strong>宝箱1個につき秘宝鍵石60個</strong><br>
+            計算時は、この基準で累計100箱報酬ラインに届くかどうかを見れば十分です。
+          </div>
+        </div>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>専用装備パーツ</h3>
+            <p>専用装備パーツは優先して確保しておきたい報酬です。</p>
+          </div>
+          <div class="mini-card">
+            <h3>残りの交換先</h3>
+            <p>その後は自分の育成状況に合わせて必要な報酬を選べば問題ありません。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="links">
+        <span class="anchor"></span>
+        <h2>関連記事</h2>
+
+        <div class="links">
+          <h3>最新ギフトコード</h3>
+          <a href="/ja/guides/kingshot-giftcode.html">キングショット最新ギフトコードを見る</a>
+        </div>
+
+        <div class="links">
+          <h3>キングショット課金ガイド</h3>
+          <a href="/ja/guides/topup-guide.html">キングショット課金ガイドを見る</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if (mqMobile && mqMobile.addEventListener) {
+        mqMobile.addEventListener('change', setStickyTop);
+      } else if (mqMobile && mqMobile.addListener) {
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>
