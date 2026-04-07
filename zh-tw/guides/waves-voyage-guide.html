@@ -1,0 +1,1212 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>踏浪之旅攻略｜寶藏獎勵、合成機率、探索進行方式 | KingshotData</title>
+  <meta name="description" content="Kingshot 踏浪之旅活動攻略。整理普通潮汐寶藏、高級潮汐寶藏、精緻潮汐寶藏、卓越潮汐寶藏的獎勵、合成機率、探索流程、196 次收尾方式與 600 次最大獎勵路線。" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/guides/waves-voyage-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/waves-voyage-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/waves-voyage-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/waves-voyage-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/waves-voyage-guide.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guides/waves-voyage-title.webp" />
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="踏浪之旅攻略｜寶藏獎勵、合成機率、探索進行方式" />
+  <meta property="og:description" content="依目前遊戲內容整理踏浪之旅的寶藏獎勵、合成機率與探索進行方式。" />
+  <meta property="og:url" content="https://kingshotdata.kr/zh-tw/guides/waves-voyage-guide.html" />
+  <meta property="og:site_name" content="KingshotData" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guides/waves-voyage-title.webp" />
+  <meta property="og:locale" content="zh_TW" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="踏浪之旅攻略｜寶藏獎勵、合成機率、探索進行方式" />
+  <meta name="twitter:description" content="整理踏浪之旅的寶藏獎勵、196 次收尾方式與 600 次最大獎勵路線。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guides/waves-voyage-title.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#111827;
+      --soft-bg:#f8fbff;
+      --soft-border:#dbeafe;
+      --ok-bg:#f0fdf4;
+      --ok-border:#bbf7d0;
+      --warn-bg:rgba(245,158,11,.08);
+      --warn-border:rgba(245,158,11,.32);
+      --violet-bg:#f5f3ff;
+      --violet-border:#ddd6fe;
+
+      --radius:18px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.75 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+      word-break:keep-all;
+      overflow-wrap:anywhere;
+    }
+
+    img{max-width:100%;display:block}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{
+      max-width:1240px;
+      margin:0 auto;
+      padding:18px 16px 72px;
+    }
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+      min-width:0;
+    }
+
+    .brand img{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+      flex:0 0 auto;
+    }
+
+    .brand span{
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      justify-content:flex-end;
+    }
+
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+      line-height:1;
+    }
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:8px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+
+    nav.section-tabs::-webkit-scrollbar{display:none}
+
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:9px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+      flex:0 0 auto;
+    }
+
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .crumbs a{color:var(--muted)}
+    .muted{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:220px 1fr;
+      gap:18px;
+      padding:20px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-visual{
+      width:220px;
+      height:220px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:16px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:14px;
+      overflow:hidden;
+    }
+
+    .hero-visual img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:32px;
+      line-height:1.2;
+      letter-spacing:-.02em;
+    }
+
+    .hero-lead{
+      margin:0 0 10px;
+      font-size:18px;
+      font-weight:900;
+      color:var(--accent);
+      line-height:1.55;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .quote{
+      margin:14px 0 0;
+      padding:13px 15px;
+      border:1px solid var(--soft-border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .hero-cta{
+      margin-top:14px;
+      padding:16px;
+      border:1px solid var(--soft-border);
+      border-radius:16px;
+      background:var(--soft-bg);
+    }
+
+    .hero-cta p{
+      margin:0 0 10px;
+      color:var(--text);
+      font-weight:700;
+    }
+
+    .hero-cta .hero-cta-sub{
+      color:var(--muted);
+      font-weight:400;
+      font-size:14px;
+      margin-top:-2px;
+      margin-bottom:12px;
+    }
+
+    .hero-proof,
+    .cta-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .hero-proof{margin-bottom:12px}
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.45}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.3;
+      letter-spacing:-.01em;
+    }
+
+    section h3{
+      margin:18px 0 8px;
+      font-size:18px;
+      line-height:1.4;
+    }
+
+    section p{margin:8px 0}
+
+    .lead-block{
+      margin:0 0 12px;
+      color:var(--muted);
+    }
+
+    .note,
+    .ok-note,
+    .violet-note{
+      display:flex;
+      gap:10px;
+      padding:13px 14px;
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+
+    .note{
+      border:1px solid var(--warn-border);
+      background:var(--warn-bg);
+    }
+
+    .ok-note{
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+    }
+
+    .violet-note{
+      border:1px solid var(--violet-border);
+      background:var(--violet-bg);
+    }
+
+    .note strong,
+    .ok-note strong,
+    .violet-note strong{
+      font-weight:900;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .card,
+    .info-item,
+    .prob-card,
+    .plan-card,
+    .summary-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:15px;
+    }
+
+    .card h3,
+    .plan-card h3,
+    .summary-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+
+    .card p,
+    .summary-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .info-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .info-q{
+      font-weight:900;
+      margin:0 0 6px;
+      font-size:16px;
+    }
+
+    .info-a{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .guide-list,
+    .reward-list{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .guide-list li,
+    .reward-list li{
+      margin:6px 0;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:720px;
+    }
+
+    th,td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+      vertical-align:top;
+      font-size:14px;
+    }
+
+    th{
+      background:#f8fafc;
+      font-weight:900;
+      color:var(--text);
+    }
+
+    tbody tr:last-child td{border-bottom:none}
+
+    .prob-grid,
+    .plan-grid,
+    .summary-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .prob-card strong{
+      display:block;
+      font-size:16px;
+      margin-bottom:4px;
+    }
+
+    .prob-card span{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .chest-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .chest-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:16px;
+      box-shadow:0 6px 18px rgba(0,0,0,.04);
+    }
+
+    .chest-card h3{
+      margin:0 0 12px;
+      font-size:19px;
+    }
+
+    .chest-image{
+      width:100%;
+      aspect-ratio:16/10;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      margin-bottom:14px;
+      padding:12px;
+    }
+
+    .chest-image img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+    }
+
+    .plan-card h3{
+      font-size:18px;
+      margin-bottom:8px;
+    }
+
+    .plan-card p{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .links{
+      background:var(--soft-bg);
+      padding:16px;
+      border-radius:14px;
+      margin-top:14px;
+      border:1px solid var(--soft-border);
+    }
+
+    .links h3{
+      color:var(--text);
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .links p{
+      margin:0 0 10px;
+      color:var(--muted);
+    }
+
+    .links a{font-weight:900}
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      cursor:pointer;
+      font-weight:900;
+      text-decoration:none !important;
+      line-height:1.2;
+      user-select:none;
+      background:#fff;
+      color:#111827;
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:#fff;
+    }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      .wrap{
+        padding:14px 12px 64px;
+      }
+
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:8px 12px;
+      }
+
+      .hero{
+        grid-template-columns:1fr;
+        padding:16px;
+      }
+
+      .hero-visual{
+        width:100%;
+        height:auto;
+        aspect-ratio:16/10;
+      }
+
+      h1{font-size:28px}
+      .hero-lead{font-size:17px}
+
+      .grid-2,
+      .prob-grid,
+      .chest-grid,
+      .plan-grid,
+      .summary-grid{
+        grid-template-columns:1fr;
+      }
+
+      section{
+        padding:16px;
+      }
+
+      table{
+        min-width:640px;
+      }
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:12px 10px 60px}
+
+      header.top{
+        gap:10px;
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      nav.lang{
+        width:100%;
+        justify-content:flex-start;
+      }
+
+      .brand span{
+        white-space:normal;
+        overflow:visible;
+        text-overflow:clip;
+      }
+
+      h1{font-size:25px}
+      .hero{gap:14px}
+      .hero-cta{padding:14px}
+
+      .cta-row{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .cta-row .btn{
+        width:100%;
+      }
+
+      .note,
+      .ok-note,
+      .violet-note{
+        padding:12px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"首頁","item":"https://kingshotdata.kr/zh-tw/"},
+          {"@type":"ListItem","position":2,"name":"攻略","item":"https://kingshotdata.kr/zh-tw/guides/"},
+          {"@type":"ListItem","position":3,"name":"踏浪之旅攻略","item":"https://kingshotdata.kr/zh-tw/guides/waves-voyage-guide.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"踏浪之旅攻略",
+        "description":"Kingshot 踏浪之旅活動的寶藏獎勵、合成機率、196 次收尾方式與 600 次最大獎勵路線整理。",
+        "mainEntityOfPage":"https://kingshotdata.kr/zh-tw/guides/waves-voyage-guide.html",
+        "inLanguage":"zh-Hant",
+        "author":{
+          "@type":"Organization",
+          "name":"KingshotData"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"KingshotData",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+          }
+        },
+        "image":"https://kingshotdata.kr/img/guides/waves-voyage-title.webp"
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"踏浪之旅是什麼活動？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"踏浪之旅是持續 5 天的限時活動，依目前更新內容來看，主要可獲得領主寶石相關獎勵。"
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"累計探索次數獎勵到幾次？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"目前累計探索次數獎勵可領到 600 次。"
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"小課玩家怎麼收尾？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"建議從活動第一天開始不使用羅盤持續派遣探索，結束前先把探索次數調整到 196 次，再送出最後 4 隊探索完成收尾。"
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"大課玩家怎麼進行？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"大課玩家直接以最大獎勵的 600 次為目標持續推進即可。"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="KingshotData 首頁">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>KingshotData</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/waves-voyage-guide.html">EN</a>
+        <a href="/ko/guides/waves-voyage-guide.html">KO</a>
+        <a href="/ja/guides/waves-voyage-guide.html">JA</a>
+        <a href="/zh-tw/guides/waves-voyage-guide.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">活動概要</a>
+      <a href="#rules">規則</a>
+      <a href="#probability">機率</a>
+      <a href="#rewards">寶藏獎勵</a>
+      <a href="#plans">進行方式</a>
+      <a href="#tips">簡單攻略</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/guides/">攻略</a> <span class="muted">›</span>
+        <span>踏浪之旅攻略</span>
+      </div>
+
+      <div class="hero">
+        <div class="hero-visual">
+          <img src="/img/guides/waves-voyage-title.webp" alt="踏浪之旅標題圖片" loading="eager" fetchpriority="high" width="220" height="220">
+        </div>
+
+        <div>
+          <h1>踏浪之旅攻略</h1>
+          <p class="hero-lead">盡量多收集高級潮汐寶藏，拿來作為上位寶藏的合成材料，才是這個活動的核心。</p>
+          <p class="sub">
+            踏浪之旅是持續 5 天的限時活動。
+            舊版同類型活動主要以領主裝備作為獎勵，
+            目前更新後的踏浪之旅則改為以領主寶石相關獎勵為主。
+          </p>
+
+          <div class="quote">
+            小課玩家重點在探索次數調整與最後收尾，大課玩家則直接朝最大獎勵的 600 次推進即可。
+          </div>
+
+          <div class="hero-cta" aria-label="Hero guide CTA">
+            <p>本頁整理了探索隊運作、航海羅盤使用方式、寶藏獲得機率、合成結構、196 次收尾流程，以及 600 次最大獎勵路線。</p>
+            <p class="hero-cta-sub">依照頁面順序查看，就能快速理解整個活動該怎麼跑。</p>
+
+            <div class="hero-proof" aria-label="event summary badges">
+              <span class="badge">5 天限時活動</span>
+              <span class="badge">目前主要獎勵：領主寶石</span>
+              <span class="badge">小課收尾基準：196 次</span>
+              <span class="badge">最大獎勵：600 次</span>
+            </div>
+
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#plans">查看進行方式</a>
+              <a class="btn" href="#rewards">查看寶藏獎勵</a>
+              <a class="btn" href="#tips">查看簡單攻略</a>
+            </div>
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">活動概要</a><span class="dotsep">•</span>
+            <a href="#rules">規則</a><span class="dotsep">•</span>
+            <a href="#probability">機率</a><span class="dotsep">•</span>
+            <a href="#rewards">寶藏獎勵</a><span class="dotsep">•</span>
+            <a href="#plans">進行方式</a><span class="dotsep">•</span>
+            <a href="#tips">簡單攻略</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <span class="anchor"></span>
+        <h2>活動概要</h2>
+        <p class="lead-block">
+          踏浪之旅是透過派遣探索隊取得潮汐寶藏，並視情況將低階寶藏合成為高階寶藏的活動。
+        </p>
+
+        <div class="violet-note">
+          <div>
+            <strong>活動變更重點</strong><br>
+            以前的類似活動以領主裝備為主要獎勵，
+            目前版本的踏浪之旅則以領主寶石相關獎勵為主。
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>基本目標</h3>
+            <p>盡量累積高級潮汐寶藏，再合成成精緻潮汐寶藏或卓越潮汐寶藏，取得更重要的資源。</p>
+          </div>
+          <div class="card">
+            <h3>主要獎勵</h3>
+            <p>寶石手冊、寶石圖紙、傳說通用英雄碎片，是這次活動最值得優先關注的內容。</p>
+          </div>
+        </div>
+
+        <div class="ok-note">
+          <div>
+            <strong>快速理解：</strong>普通潮汐寶藏是素材區，高級潮汐寶藏是合成起點，精緻與卓越則是核心獎勵區。
+          </div>
+        </div>
+      </section>
+
+      <section id="rules">
+        <span class="anchor"></span>
+        <h2>規則</h2>
+
+        <div class="info-list">
+          <article class="info-item">
+            <p class="info-q">1. 派遣探索隊</p>
+            <p class="info-a">活動期間可進行 8 小時航行探索。探索隊返回後，會依機率獲得潮汐寶藏，部分獎勵則為 100% 固定獲得。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">2. 開啟與合成寶藏</p>
+            <p class="info-a">取得的潮汐寶藏可以直接開啟，也可以選擇合成成更高品質的寶藏，以爭取更好的獎勵。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">3. 額外探索隊</p>
+            <p class="info-a">每位領主初始擁有 1 隊探索隊。活動期間可消耗鑽石追加雇用，第 2 隊需要 2,000 鑽石，第 3 隊需要 10,000 鑽石。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">4. 航海羅盤</p>
+            <p class="info-a">探索進行中可使用航海羅盤加速，每使用 1 個可縮短 1 小時探索時間。每日可免費獲得 1 個，額外數量需透過包含該道具的禮包取得。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">5. 累計探索次數</p>
+            <p class="info-a">累計探索次數達到 600 次後，即可領完所有累計探索次數獎勵。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">6. 活動結束後</p>
+            <p class="info-a">獎勵領取時間結束後，尚未開啟的寶藏會自動全部開啟，並將獲得的獎勵發放至背包。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">7. 航海羅盤保留</p>
+            <p class="info-a">未使用的航海羅盤會保留在背包中，直到下一次踏浪之旅活動開始。</p>
+          </article>
+        </div>
+
+        <h3>累計探索獎勵</h3>
+        <p>
+          派出的探索越多，可獲得的累計探索次數獎勵也越多。
+          累計獎勵包含經驗強化零件、傳說通用英雄碎片，以及寶石相關材料。
+        </p>
+
+        <h3>寶藏合成規則</h3>
+        <ul class="guide-list">
+          <li>普通潮汐寶藏 3 個 → 高級潮汐寶藏 1 個</li>
+          <li>高級潮汐寶藏 3 個 → 精緻潮汐寶藏 1 個 或 卓越潮汐寶藏 1 個</li>
+          <li>精緻潮汐寶藏機率 75%</li>
+          <li>卓越潮汐寶藏機率 25%</li>
+        </ul>
+      </section>
+
+      <section id="probability">
+        <span class="anchor"></span>
+        <h2>機率說明</h2>
+        <p class="lead-block">
+          透過探索獲得寶藏的機率，以及高級潮汐寶藏合成後出現上位寶藏的機率如下。
+        </p>
+
+        <div class="prob-grid">
+          <div class="prob-card">
+            <strong>普通潮汐寶藏 x1</strong>
+            <span>探索獲得機率 90.00%</span>
+          </div>
+          <div class="prob-card">
+            <strong>高級潮汐寶藏 x1</strong>
+            <span>探索獲得機率 10.00%</span>
+          </div>
+          <div class="prob-card">
+            <strong>普通寶藏 3 個合成</strong>
+            <span>高級潮汐寶藏 x1 100.00%</span>
+          </div>
+          <div class="prob-card">
+            <strong>精緻潮汐寶藏 x1</strong>
+            <span>高級寶藏合成機率 75.00%</span>
+          </div>
+          <div class="prob-card">
+            <strong>卓越潮汐寶藏 x1</strong>
+            <span>高級寶藏合成機率 25.00%</span>
+          </div>
+        </div>
+
+        <div class="note">
+          <div>
+            <strong>重點：</strong>高級潮汐寶藏直接取得的機率不高，所以要靠普通潮汐寶藏慢慢往上合成，穩定累積數量才是關鍵。
+          </div>
+        </div>
+      </section>
+
+      <section id="rewards">
+        <span class="anchor"></span>
+        <h2>各寶藏獎勵</h2>
+        <p class="lead-block">
+          順序與遊戲內一致，依序為普通 → 高級 → 精緻 → 卓越。
+        </p>
+
+        <div class="table-wrap">
+          <table aria-label="踏浪之旅寶藏獎勵列表">
+            <thead>
+              <tr>
+                <th>寶藏等級</th>
+                <th>主要獎勵</th>
+                <th>備註</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>普通潮汐寶藏</td>
+                <td>寶石圖紙 x5 / 5分鐘通用加速 x18 / 鑽石x100 x2</td>
+                <td>基礎素材區</td>
+              </tr>
+              <tr>
+                <td>高級潮汐寶藏</td>
+                <td>寶石手冊 x5 / 寶石圖紙 x10 / 1小時通用加速 x6</td>
+                <td>合成起點重點區</td>
+              </tr>
+              <tr>
+                <td>精緻潮汐寶藏</td>
+                <td>寶石手冊 x15 / 寶石圖紙 x15 / 傳說通用英雄碎片 x2</td>
+                <td>合成 75% 區間</td>
+              </tr>
+              <tr>
+                <td>卓越潮汐寶藏</td>
+                <td>寶石手冊 x50 / 寶石圖紙 x50 / 傳說通用英雄碎片 x6</td>
+                <td>合成 25% 高獎勵區</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="chest-grid">
+          <article class="chest-card">
+            <h3>普通潮汐寶藏</h3>
+            <div class="chest-image">
+              <img src="/img/guides/waves-chest-normal.webp" alt="普通潮汐寶藏圖片" loading="lazy" width="480" height="300">
+            </div>
+            <ul class="reward-list">
+              <li>寶石圖紙 x5</li>
+              <li>5分鐘通用加速 x18</li>
+              <li>鑽石x100 x2</li>
+            </ul>
+          </article>
+
+          <article class="chest-card">
+            <h3>高級潮汐寶藏</h3>
+            <div class="chest-image">
+              <img src="/img/guides/waves-chest-advanced.webp" alt="高級潮汐寶藏圖片" loading="lazy" width="480" height="300">
+            </div>
+            <ul class="reward-list">
+              <li>寶石手冊 x5</li>
+              <li>寶石圖紙 x10</li>
+              <li>1小時通用加速 x6</li>
+            </ul>
+          </article>
+
+          <article class="chest-card">
+            <h3>精緻潮汐寶藏</h3>
+            <div class="chest-image">
+              <img src="/img/guides/waves-chest-precise.webp" alt="精緻潮汐寶藏圖片" loading="lazy" width="480" height="300">
+            </div>
+            <ul class="reward-list">
+              <li>寶石手冊 x15</li>
+              <li>寶石圖紙 x15</li>
+              <li>傳說通用英雄碎片 x2</li>
+            </ul>
+          </article>
+
+          <article class="chest-card">
+            <h3>卓越潮汐寶藏</h3>
+            <div class="chest-image">
+              <img src="/img/guides/waves-chest-elite.webp" alt="卓越潮汐寶藏圖片" loading="lazy" width="480" height="300">
+            </div>
+            <ul class="reward-list">
+              <li>寶石手冊 x50</li>
+              <li>寶石圖紙 x50</li>
+              <li>傳說通用英雄碎片 x6</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="note">
+          <div>
+            <strong>補充：</strong>實際獎勵數量可能會依伺服器進度不同而有所差異。
+          </div>
+        </div>
+      </section>
+
+      <section id="plans">
+        <span class="anchor"></span>
+        <h2>探索活動進行方式</h2>
+        <p class="lead-block">
+          活動總共進行 5 天，所以從第一天開始穩定派出探索隊、持續累積次數，會是最有效率的做法。
+        </p>
+
+        <div class="summary-grid">
+          <article class="summary-card">
+            <h3>基本運作</h3>
+            <p>活動第一天開始先不要使用羅盤，持續派出探索，穩定累積探索次數。</p>
+          </article>
+          <article class="summary-card">
+            <h3>小課收尾方式</h3>
+            <p>結束前先把探索次數調整到 196 次，再送出最後 4 隊探索完成收尾。</p>
+          </article>
+          <article class="summary-card">
+            <h3>大課進行方式</h3>
+            <p>直接以最大獎勵的 600 次為目標，持續推進即可。</p>
+          </article>
+        </div>
+
+        <div class="plan-grid">
+          <article class="plan-card">
+            <h3>基本流程</h3>
+            <p>從活動開始第一天起，不使用航海羅盤，盡量讓探索不要中斷。</p>
+            <ul class="guide-list">
+              <li>探索空位盡量不要放著不用</li>
+              <li>前半段以穩定累積次數為優先</li>
+              <li>羅盤與加速留到最後調整時再用</li>
+            </ul>
+          </article>
+
+          <article class="plan-card">
+            <h3>小課收尾方式</h3>
+            <p>小課玩家的重點在於最後一天的次數微調。</p>
+            <ul class="guide-list">
+              <li>先把探索次數調整到 196 次</li>
+              <li>需要時可使用航海羅盤 + 加速補到 196 次</li>
+              <li>最後再送出 4 隊探索收尾</li>
+            </ul>
+          </article>
+
+          <article class="plan-card">
+            <h3>獎勵領取區間</h3>
+            <p>活動倒數結束後，主要就是整理寶藏與領取獎勵。</p>
+            <ul class="guide-list">
+              <li>倒數結束後，還有 1 天獎勵領取期間</li>
+              <li>此期間只能開啟寶藏與進行合成</li>
+              <li>無法再追加探索，已派出的探索則會持續到完成為止</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="ok-note">
+          <div>
+            <strong>小課核心：</strong>第一天開始慢慢累積，最後再調整到 196 次後送出 4 隊探索，這樣收尾最穩。
+          </div>
+        </div>
+      </section>
+
+      <section id="tips">
+        <span class="anchor"></span>
+        <h2>簡單攻略</h2>
+
+        <div class="info-list">
+          <article class="info-item">
+            <p class="info-q">1. 探索隊越少，累計獎勵速度越慢</p>
+            <p class="info-a">如果只靠初始 1 隊探索，累計獎勵會推得比較慢。有餘力的話，建議開到 4 隊探索，效率會好很多。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">2. 小課玩家重點是第一天就開始穩定跑</p>
+            <p class="info-a">從第一天開始不斷探索，最後一天再補不足的次數，通常會比一開始就亂用羅盤更有效率。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">3. 航海羅盤建議留到最後調整時使用</p>
+            <p class="info-a">航海羅盤不要隨便亂用，拿來補 196 次目標或結束前的最後缺口會更划算。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">4. 高級潮汐寶藏不要急著直接開</p>
+            <p class="info-a">高級潮汐寶藏直接開掉通常不如拿來繼續合成，盡量往精緻潮汐寶藏或卓越潮汐寶藏去拚，效率更高。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">5. 大課玩家直接以 600 次為目標即可</p>
+            <p class="info-a">大課玩法不用想太複雜，直接一路推到 600 次最大獎勵即可。</p>
+          </article>
+        </div>
+
+        <div class="ok-note">
+          <div>
+            <strong>一句話總結：</strong>小課調整到 196 次後再送出 4 隊探索收尾，大課就直接衝 600 次最大獎勵。
+          </div>
+        </div>
+
+        <div class="links">
+          <h3>一起看會更方便的頁面</h3>
+          <p>活動前先確認最新兌換碼與儲值攻略，整體準備會更順。</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="/zh-tw/guides/kingshot-giftcode.html">查看最新禮包碼</a>
+            <a class="btn" href="/zh-tw/guides/topup-guide.html">查看折扣儲值攻略</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if (mqMobile && mqMobile.addEventListener) {
+        mqMobile.addEventListener('change', setStickyTop);
+      } else if (mqMobile && mqMobile.addListener) {
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

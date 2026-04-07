@@ -1,0 +1,1212 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>波越えの旅 攻略 | 宝箱報酬、合成確率、探索進行方法 | KingshotData</title>
+  <meta name="description" content="Kingshotの波越えの旅イベント攻略です。普通潮汐宝箱・上級潮汐宝箱・精巧潮汐宝箱・卓越潮汐宝箱の報酬、合成確率、探索の進め方、196回調整の進行例、600回最大報酬ルートまでまとめて確認できます。" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ja/guides/waves-voyage-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/waves-voyage-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/waves-voyage-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/waves-voyage-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/waves-voyage-guide.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guides/waves-voyage-title.webp" />
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="波越えの旅 攻略 | 宝箱報酬、合成確率、探索進行方法" />
+  <meta property="og:description" content="現在の波越えの旅イベントに合わせて、宝箱報酬、合成確率、探索進行方法を整理した攻略ページです。" />
+  <meta property="og:url" content="https://kingshotdata.kr/ja/guides/waves-voyage-guide.html" />
+  <meta property="og:site_name" content="KingshotData" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guides/waves-voyage-title.webp" />
+  <meta property="og:locale" content="ja_JP" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="波越えの旅 攻略 | 宝箱報酬、合成確率、探索進行方法" />
+  <meta name="twitter:description" content="波越えの旅の宝箱報酬、196回調整の進め方、600回最大報酬ルートをまとめました。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guides/waves-voyage-title.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#111827;
+      --soft-bg:#f8fbff;
+      --soft-border:#dbeafe;
+      --ok-bg:#f0fdf4;
+      --ok-border:#bbf7d0;
+      --warn-bg:rgba(245,158,11,.08);
+      --warn-border:rgba(245,158,11,.32);
+      --violet-bg:#f5f3ff;
+      --violet-border:#ddd6fe;
+
+      --radius:18px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.75 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+      word-break:keep-all;
+      overflow-wrap:anywhere;
+    }
+
+    img{max-width:100%;display:block}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{
+      max-width:1240px;
+      margin:0 auto;
+      padding:18px 16px 72px;
+    }
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+      min-width:0;
+    }
+
+    .brand img{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+      flex:0 0 auto;
+    }
+
+    .brand span{
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      justify-content:flex-end;
+    }
+
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+      line-height:1;
+    }
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:8px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+
+    nav.section-tabs::-webkit-scrollbar{display:none}
+
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:9px 11px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+      flex:0 0 auto;
+    }
+
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .crumbs a{color:var(--muted)}
+    .muted{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:220px 1fr;
+      gap:18px;
+      padding:20px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-visual{
+      width:220px;
+      height:220px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:16px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      padding:14px;
+      overflow:hidden;
+    }
+
+    .hero-visual img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:32px;
+      line-height:1.2;
+      letter-spacing:-.02em;
+    }
+
+    .hero-lead{
+      margin:0 0 10px;
+      font-size:18px;
+      font-weight:900;
+      color:var(--accent);
+      line-height:1.55;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .quote{
+      margin:14px 0 0;
+      padding:13px 15px;
+      border:1px solid var(--soft-border);
+      border-radius:14px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .hero-cta{
+      margin-top:14px;
+      padding:16px;
+      border:1px solid var(--soft-border);
+      border-radius:16px;
+      background:var(--soft-bg);
+    }
+
+    .hero-cta p{
+      margin:0 0 10px;
+      color:var(--text);
+      font-weight:700;
+    }
+
+    .hero-cta .hero-cta-sub{
+      color:var(--muted);
+      font-weight:400;
+      font-size:14px;
+      margin-top:-2px;
+      margin-bottom:12px;
+    }
+
+    .hero-proof,
+    .cta-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .hero-proof{margin-bottom:12px}
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.45}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.3;
+      letter-spacing:-.01em;
+    }
+
+    section h3{
+      margin:18px 0 8px;
+      font-size:18px;
+      line-height:1.4;
+    }
+
+    section p{margin:8px 0}
+
+    .lead-block{
+      margin:0 0 12px;
+      color:var(--muted);
+    }
+
+    .note,
+    .ok-note,
+    .violet-note{
+      display:flex;
+      gap:10px;
+      padding:13px 14px;
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+
+    .note{
+      border:1px solid var(--warn-border);
+      background:var(--warn-bg);
+    }
+
+    .ok-note{
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+    }
+
+    .violet-note{
+      border:1px solid var(--violet-border);
+      background:var(--violet-bg);
+    }
+
+    .note strong,
+    .ok-note strong,
+    .violet-note strong{
+      font-weight:900;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .card,
+    .info-item,
+    .prob-card,
+    .plan-card,
+    .summary-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:15px;
+    }
+
+    .card h3,
+    .plan-card h3,
+    .summary-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+
+    .card p,
+    .summary-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .info-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .info-q{
+      font-weight:900;
+      margin:0 0 6px;
+      font-size:16px;
+    }
+
+    .info-a{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .guide-list,
+    .reward-list{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .guide-list li,
+    .reward-list li{
+      margin:6px 0;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:720px;
+    }
+
+    th,td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+      vertical-align:top;
+      font-size:14px;
+    }
+
+    th{
+      background:#f8fafc;
+      font-weight:900;
+      color:var(--text);
+    }
+
+    tbody tr:last-child td{border-bottom:none}
+
+    .prob-grid,
+    .plan-grid,
+    .summary-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .prob-card strong{
+      display:block;
+      font-size:16px;
+      margin-bottom:4px;
+    }
+
+    .prob-card span{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .chest-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .chest-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:16px;
+      box-shadow:0 6px 18px rgba(0,0,0,.04);
+    }
+
+    .chest-card h3{
+      margin:0 0 12px;
+      font-size:19px;
+    }
+
+    .chest-image{
+      width:100%;
+      aspect-ratio:16/10;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      margin-bottom:14px;
+      padding:12px;
+    }
+
+    .chest-image img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+    }
+
+    .plan-card h3{
+      font-size:18px;
+      margin-bottom:8px;
+    }
+
+    .plan-card p{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .links{
+      background:var(--soft-bg);
+      padding:16px;
+      border-radius:14px;
+      margin-top:14px;
+      border:1px solid var(--soft-border);
+    }
+
+    .links h3{
+      color:var(--text);
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .links p{
+      margin:0 0 10px;
+      color:var(--muted);
+    }
+
+    .links a{font-weight:900}
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      cursor:pointer;
+      font-weight:900;
+      text-decoration:none !important;
+      line-height:1.2;
+      user-select:none;
+      background:#fff;
+      color:#111827;
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:#fff;
+    }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:900px){
+      .wrap{
+        padding:14px 12px 64px;
+      }
+
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+        margin:0 -12px;
+        padding:8px 12px;
+      }
+
+      .hero{
+        grid-template-columns:1fr;
+        padding:16px;
+      }
+
+      .hero-visual{
+        width:100%;
+        height:auto;
+        aspect-ratio:16/10;
+      }
+
+      h1{font-size:28px}
+      .hero-lead{font-size:17px}
+
+      .grid-2,
+      .prob-grid,
+      .chest-grid,
+      .plan-grid,
+      .summary-grid{
+        grid-template-columns:1fr;
+      }
+
+      section{
+        padding:16px;
+      }
+
+      table{
+        min-width:640px;
+      }
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:12px 10px 60px}
+
+      header.top{
+        gap:10px;
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      nav.lang{
+        width:100%;
+        justify-content:flex-start;
+      }
+
+      .brand span{
+        white-space:normal;
+        overflow:visible;
+        text-overflow:clip;
+      }
+
+      h1{font-size:25px}
+      .hero{gap:14px}
+      .hero-cta{padding:14px}
+
+      .cta-row{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .cta-row .btn{
+        width:100%;
+      }
+
+      .note,
+      .ok-note,
+      .violet-note{
+        padding:12px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"ホーム","item":"https://kingshotdata.kr/ja/"},
+          {"@type":"ListItem","position":2,"name":"ガイド","item":"https://kingshotdata.kr/ja/guides/"},
+          {"@type":"ListItem","position":3,"name":"波越えの旅 攻略","item":"https://kingshotdata.kr/ja/guides/waves-voyage-guide.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"波越えの旅 攻略",
+        "description":"Kingshotの波越えの旅イベントの宝箱報酬、合成確率、196回調整の進め方、600回最大報酬ルートを整理したガイドです。",
+        "mainEntityOfPage":"https://kingshotdata.kr/ja/guides/waves-voyage-guide.html",
+        "inLanguage":"ja",
+        "author":{
+          "@type":"Organization",
+          "name":"KingshotData"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"KingshotData",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+          }
+        },
+        "image":"https://kingshotdata.kr/img/guides/waves-voyage-title.webp"
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"波越えの旅はどんなイベントですか？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"波越えの旅は5日間 진행되는期間限定イベントで、現在のアップデート基準では領主宝石関連の報酬を獲得できるイベントです."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"累計探索回数報酬は何回までですか？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"現在の基準では累計探索回数報酬は600回まで獲得できます."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"微課金向けの進め方は？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"イベント初日から羅針盤を使わずに探索を継続し、終了前に探索回数を196回まで合わせた後、最後に探索4枠を送って締める形が効率的です."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"重課金向けの進め方は？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"重課金の場合は最大報酬ラインである600回までそのまま進めれば大丈夫です."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ja/" aria-label="KingshotData ホーム">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>KingshotData</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/waves-voyage-guide.html">EN</a>
+        <a href="/ko/guides/waves-voyage-guide.html">KO</a>
+        <a href="/ja/guides/waves-voyage-guide.html" aria-current="page">JA</a>
+        <a href="/zh-tw/guides/waves-voyage-guide.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">イベント概要</a>
+      <a href="#rules">ルール</a>
+      <a href="#probability">確率</a>
+      <a href="#rewards">宝箱報酬</a>
+      <a href="#plans">進め方</a>
+      <a href="#tips">簡単攻略</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ja/">ホーム</a> <span class="muted">›</span>
+        <a href="/ja/guides/">ガイド</a> <span class="muted">›</span>
+        <span>波越えの旅 攻略</span>
+      </div>
+
+      <div class="hero">
+        <div class="hero-visual">
+          <img src="/img/guides/waves-voyage-title.webp" alt="波越えの旅 タイトル画像" loading="eager" fetchpriority="high" width="220" height="220">
+        </div>
+
+        <div>
+          <h1>波越えの旅 攻略</h1>
+          <p class="hero-lead">上級潮汐宝箱をできるだけ多く集めて、上位宝箱の合成素材として回すのがこのイベントの核心です。</p>
+          <p class="sub">
+            波越えの旅は5日間進行する期間限定イベントです。
+            以前のイベントでは領主装備が中心報酬でしたが、
+            現在のアップデート後の波越えの旅では領主宝石を中心に報酬が構成されています。
+          </p>
+
+          <div class="quote">
+            微課金は探索回数の調整と終了前の締め方が重要で、重課金は最大報酬の600回までそのまま進めれば十分です。
+          </div>
+
+          <div class="hero-cta" aria-label="Hero guide CTA">
+            <p>このページでは、探索隊の運用、航海羅針盤の使い方、宝箱獲得確率、合成構造、196回調整の締め方、600回最大報酬ルートまでまとめて確認できます。</p>
+            <p class="hero-cta-sub">初めて進める人でも流れが分かりやすいように順番に整理しています。</p>
+
+            <div class="hero-proof" aria-label="event summary badges">
+              <span class="badge">5日間イベント</span>
+              <span class="badge">現在の主報酬: 領主宝石</span>
+              <span class="badge">微課金目安: 196回調整</span>
+              <span class="badge">最大報酬: 600回</span>
+            </div>
+
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#plans">進め方を見る</a>
+              <a class="btn" href="#rewards">宝箱報酬を見る</a>
+              <a class="btn" href="#tips">簡単攻略を見る</a>
+            </div>
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">イベント概要</a><span class="dotsep">•</span>
+            <a href="#rules">ルール</a><span class="dotsep">•</span>
+            <a href="#probability">確率</a><span class="dotsep">•</span>
+            <a href="#rewards">宝箱報酬</a><span class="dotsep">•</span>
+            <a href="#plans">進め方</a><span class="dotsep">•</span>
+            <a href="#tips">簡単攻略</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <span class="anchor"></span>
+        <h2>イベント概要</h2>
+        <p class="lead-block">
+          波越えの旅は探索隊を送り、潮汐宝箱を獲得し、必要に応じてより高い等級の宝箱へ合成していく形式のイベントです。
+        </p>
+
+        <div class="violet-note">
+          <div>
+            <strong>イベント変更点</strong><br>
+            以前の類似イベントは領主装備が中心報酬でしたが、
+            現在の波越えの旅は領主宝石系報酬を中心に構成されています。
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>基本目標</h3>
+            <p>上級潮汐宝箱をできるだけ集め、精巧潮汐宝箱または卓越潮汐宝箱へ合成して重要素材を確保することです。</p>
+          </div>
+          <div class="card">
+            <h3>注目報酬</h3>
+            <p>宝石マニュアル、宝石図面、レジェンド汎用英雄欠片がこのイベントで特に重要な報酬です。</p>
+          </div>
+        </div>
+
+        <div class="ok-note">
+          <div>
+            <strong>簡単整理:</strong> 普通潮汐宝箱は素材、上級潮汐宝箱は合成の起点、精巧と卓越は本命報酬区間として考えると分かりやすいです。
+          </div>
+        </div>
+      </section>
+
+      <section id="rules">
+        <span class="anchor"></span>
+        <h2>ルール</h2>
+
+        <div class="info-list">
+          <article class="info-item">
+            <p class="info-q">1. 探索隊の派遣</p>
+            <p class="info-a">イベント期間中、8時間の航海で探索隊を派遣します。探索隊が帰還すると確率に応じて潮汐宝箱を獲得でき、一部報酬は100%で支給されます。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">2. 宝箱の開封と合成</p>
+            <p class="info-a">獲得した潮汐宝箱はそのまま開封することもでき、より大きな報酬を狙うために上位宝箱へ合成することもできます。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">3. 追加探索隊</p>
+            <p class="info-a">各領主は基本で探索隊1枠から始まります。イベント期間中、ダイヤを使うことで2枠目は2,000ダイヤ、3枠目は10,000ダイヤで追加雇用できます。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">4. 航海羅針盤</p>
+            <p class="info-a">探索任務中は航海羅針盤を使って加速できます。航海羅針盤1個につき探索時間が1時間短縮されます。毎日無料で1個受け取れ、追加分は該当アイテムを含むパック購入で確保できます。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">5. 累計探索回数</p>
+            <p class="info-a">累計探索回数が600回に到達すると、累計探索報酬をすべて回収できます。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">6. イベント終了後</p>
+            <p class="info-a">報酬受取時間が終了すると未開封の宝箱は自動ですべて開封され、獲得報酬はバッグに支給されます。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">7. 航海羅針盤の持ち越し</p>
+            <p class="info-a">使わなかった航海羅針盤は次回の波越えの旅イベント開始時までバッグに保管されます。</p>
+          </article>
+        </div>
+
+        <h3>累計探索報酬</h3>
+        <p>
+          探索を多く回すほど累計探索回数報酬も多く獲得できます。
+          累計報酬には経験強化パーツ、レジェンド汎用英雄欠片、宝石関連素材が含まれます。
+        </p>
+
+        <h3>宝箱合成ルール</h3>
+        <ul class="guide-list">
+          <li>普通潮汐宝箱 3個 → 上級潮汐宝箱 1個</li>
+          <li>上級潮汐宝箱 3個 → 精巧潮汐宝箱 1個 または 卓越潮汐宝箱 1個</li>
+          <li>精巧潮汐宝箱の確率 75%</li>
+          <li>卓越潮汐宝箱の確率 25%</li>
+        </ul>
+      </section>
+
+      <section id="probability">
+        <span class="anchor"></span>
+        <h2>確率説明</h2>
+        <p class="lead-block">
+          探索で宝箱を獲得する確率と、上級潮汐宝箱合成時に上位宝箱が出る確率は以下の通りです。
+        </p>
+
+        <div class="prob-grid">
+          <div class="prob-card">
+            <strong>普通潮汐宝箱 x1</strong>
+            <span>探索獲得確率 90.00%</span>
+          </div>
+          <div class="prob-card">
+            <strong>上級潮汐宝箱 x1</strong>
+            <span>探索獲得確率 10.00%</span>
+          </div>
+          <div class="prob-card">
+            <strong>普通宝箱 3個合成</strong>
+            <span>上級潮汐宝箱 x1 100.00%</span>
+          </div>
+          <div class="prob-card">
+            <strong>精巧潮汐宝箱 x1</strong>
+            <span>上級宝箱合成確率 75.00%</span>
+          </div>
+          <div class="prob-card">
+            <strong>卓越潮汐宝箱 x1</strong>
+            <span>上級宝箱合成確率 25.00%</span>
+          </div>
+        </div>
+
+        <div class="note">
+          <div>
+            <strong>重要ポイント:</strong> 上級潮汐宝箱は直接獲得確率が低いため、普通潮汐宝箱を上級へ積み上げながら数を確保する流れが大事です。
+          </div>
+        </div>
+      </section>
+
+      <section id="rewards">
+        <span class="anchor"></span>
+        <h2>宝箱ごとの報酬</h2>
+        <p class="lead-block">
+          表示順はゲーム内と同じく、普通 → 上級 → 精巧 → 卓越の順です。
+        </p>
+
+        <div class="table-wrap">
+          <table aria-label="波越えの旅 宝箱報酬一覧">
+            <thead>
+              <tr>
+                <th>宝箱等級</th>
+                <th>主な報酬</th>
+                <th>メモ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>普通潮汐宝箱</td>
+                <td>宝石図面 x5 / 5分汎用加速 x18 / ダイヤx100 x2</td>
+                <td>基本素材区間</td>
+              </tr>
+              <tr>
+                <td>上級潮汐宝箱</td>
+                <td>宝石マニュアル x5 / 宝石図面 x10 / 1時間汎用加速 x6</td>
+                <td>合成開始の重要区間</td>
+              </tr>
+              <tr>
+                <td>精巧潮汐宝箱</td>
+                <td>宝石マニュアル x15 / 宝石図面 x15 / レジェンド汎用英雄欠片 x2</td>
+                <td>合成75%区間</td>
+              </tr>
+              <tr>
+                <td>卓越潮汐宝箱</td>
+                <td>宝石マニュアル x50 / 宝石図面 x50 / レジェンド汎用英雄欠片 x6</td>
+                <td>合成25%高報酬区間</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="chest-grid">
+          <article class="chest-card">
+            <h3>普通潮汐宝箱</h3>
+            <div class="chest-image">
+              <img src="/img/guides/waves-chest-normal.webp" alt="普通潮汐宝箱 画像" loading="lazy" width="480" height="300">
+            </div>
+            <ul class="reward-list">
+              <li>宝石図面 x5</li>
+              <li>5分汎用加速 x18</li>
+              <li>ダイヤx100 x2</li>
+            </ul>
+          </article>
+
+          <article class="chest-card">
+            <h3>上級潮汐宝箱</h3>
+            <div class="chest-image">
+              <img src="/img/guides/waves-chest-advanced.webp" alt="上級潮汐宝箱 画像" loading="lazy" width="480" height="300">
+            </div>
+            <ul class="reward-list">
+              <li>宝石マニュアル x5</li>
+              <li>宝石図面 x10</li>
+              <li>1時間汎用加速 x6</li>
+            </ul>
+          </article>
+
+          <article class="chest-card">
+            <h3>精巧潮汐宝箱</h3>
+            <div class="chest-image">
+              <img src="/img/guides/waves-chest-precise.webp" alt="精巧潮汐宝箱 画像" loading="lazy" width="480" height="300">
+            </div>
+            <ul class="reward-list">
+              <li>宝石マニュアル x15</li>
+              <li>宝石図面 x15</li>
+              <li>レジェンド汎用英雄欠片 x2</li>
+            </ul>
+          </article>
+
+          <article class="chest-card">
+            <h3>卓越潮汐宝箱</h3>
+            <div class="chest-image">
+              <img src="/img/guides/waves-chest-elite.webp" alt="卓越潮汐宝箱 画像" loading="lazy" width="480" height="300">
+            </div>
+            <ul class="reward-list">
+              <li>宝石マニュアル x50</li>
+              <li>宝石図面 x50</li>
+              <li>レジェンド汎用英雄欠片 x6</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="note">
+          <div>
+            <strong>補足:</strong> サーバー進行度によって実際の報酬数量は変わる場合があります。
+          </div>
+        </div>
+      </section>
+
+      <section id="plans">
+        <span class="anchor"></span>
+        <h2>探索イベントの進め方</h2>
+        <p class="lead-block">
+          合計5日間進行するイベントなので、初日から探索を切らさず回して回数を積み上げる運用が効率的です。
+        </p>
+
+        <div class="summary-grid">
+          <article class="summary-card">
+            <h3>基本運用</h3>
+            <p>イベント開始初日から羅針盤を使わずに探索を継続し、まずは探索回数を安定して積み上げていきます。</p>
+          </article>
+          <article class="summary-card">
+            <h3>微課金の締め方</h3>
+            <p>終了前に探索回数を196回まで合わせ、その後に探索4枠を送って締める流れが目安です。</p>
+          </article>
+          <article class="summary-card">
+            <h3>重課金の進め方</h3>
+            <p>最大報酬ラインである600回までそのまま押し切れば大丈夫です。</p>
+          </article>
+        </div>
+
+        <div class="plan-grid">
+          <article class="plan-card">
+            <h3>基本の進め方</h3>
+            <p>イベント初日から航海羅針盤を使わず、探索を途切れさせない運用が基本です。</p>
+            <ul class="guide-list">
+              <li>探索枠はできるだけ空けない</li>
+              <li>前半は回数を安定して積み上げることを優先</li>
+              <li>羅針盤と加速は最後の調整用に残しておく</li>
+            </ul>
+          </article>
+
+          <article class="plan-card">
+            <h3>微課金の締め方</h3>
+            <p>微課金基準では最後の回数調整が重要です。</p>
+            <ul class="guide-list">
+              <li>探索回数を196回まで合わせておく</li>
+              <li>必要なら航海羅針盤 + 加速を使って196回まで調整する</li>
+              <li>締めに探索4枠を送る</li>
+            </ul>
+          </article>
+
+          <article class="plan-card">
+            <h3>報酬受取区間</h3>
+            <p>イベント終了後は宝箱整理の時間だけを見ればOKです。</p>
+            <ul class="guide-list">
+              <li>カウントダウン終了後、1日間の報酬受取期間が進行</li>
+              <li>この期間は宝箱開封と合成のみ可能</li>
+              <li>追加探索は不可、すでに派遣した探索は終了まで維持</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="ok-note">
+          <div>
+            <strong>微課金の核心:</strong> 初日からコツコツ積み上げて、最後に196回へ合わせてから探索4枠を送る流れで締めれば安定します。
+          </div>
+        </div>
+      </section>
+
+      <section id="tips">
+        <span class="anchor"></span>
+        <h2>簡単攻略</h2>
+
+        <div class="info-list">
+          <article class="info-item">
+            <p class="info-q">1. 探索隊が少ないほど累計報酬の速度は遅くなります</p>
+            <p class="info-a">基本の探索隊1枠だけでは累計報酬の進みが遅いです。余裕があれば7,500円パックなどを利用して4枠運用まで広げる方が効率的です。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">2. 微課金は初日から途切れず回すのが重要です</p>
+            <p class="info-a">初日から羅針盤を使わずに探索を継続し、最後の日だけ不足分を調整する方が無駄が少ないです。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">3. 航海羅針盤は最後の調整用として使う方が効率的です</p>
+            <p class="info-a">航海羅針盤は無計画に使うより、196回合わせや終了直前の不足分補填に回す方が価値があります。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">4. 上級潮汐宝箱はすぐ開けない方が良いです</p>
+            <p class="info-a">上級潮汐宝箱はそのまま開けるより、できるだけ多く集めて精巧潮汐宝箱や卓越潮汐宝箱への合成素材として使う方が効率的です。</p>
+          </article>
+
+          <article class="info-item">
+            <p class="info-q">5. 重課金は600回までそのまま進めればOKです</p>
+            <p class="info-a">重課金向けの進行は複雑に考える必要はなく、最大報酬ラインである600回まで継続して回せば十分です。</p>
+          </article>
+        </div>
+
+        <div class="ok-note">
+          <div>
+            <strong>一行まとめ:</strong> 微課金は196回調整 후 探索4枠で締め、重課金は600回最大報酬まで進めればOKです。
+          </div>
+        </div>
+
+        <div class="links">
+          <h3>一緒に見ておくと便利なページ</h3>
+          <p>イベント前に最新コードやチャージガイドも確認しておくと準備しやすくなります。</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="/ja/guides/kingshot-giftcode.html">最新ギフトコードを見る</a>
+            <a class="btn" href="/ja/guides/topup-guide.html">割引チャージガイド</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if (mqMobile && mqMobile.addEventListener) {
+        mqMobile.addEventListener('change', setStickyTop);
+      } else if (mqMobile && mqMobile.addListener) {
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>
