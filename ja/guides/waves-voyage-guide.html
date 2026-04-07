@@ -342,12 +342,21 @@
       font-weight:900;
     }
 
-    .grid-2{
+    .grid-2,
+    .summary-grid,
+    .prob-grid,
+    .chest-grid,
+    .plan-grid{
       display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
       gap:12px;
       margin-top:12px;
     }
+
+    .grid-2,
+    .chest-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .summary-grid,
+    .prob-grid,
+    .plan-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 
     .card,
     .info-item,
@@ -401,6 +410,17 @@
       margin:6px 0;
     }
 
+    .prob-card strong{
+      display:block;
+      font-size:16px;
+      margin-bottom:4px;
+    }
+
+    .prob-card span{
+      color:var(--muted);
+      font-size:14px;
+    }
+
     .table-wrap{
       overflow:auto;
       margin-top:12px;
@@ -432,31 +452,32 @@
 
     tbody tr:last-child td{border-bottom:none}
 
-    .prob-grid,
-    .plan-grid,
-    .summary-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
+    .compact-table{
+      width:100%;
+      border-collapse:collapse;
       margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
     }
 
-    .prob-card strong{
-      display:block;
-      font-size:16px;
-      margin-bottom:4px;
-    }
-
-    .prob-card span{
-      color:var(--muted);
+    .compact-table th,
+    .compact-table td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
       font-size:14px;
+      vertical-align:top;
     }
 
-    .chest-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:14px;
-      margin-top:14px;
+    .compact-table th{
+      background:#f8fafc;
+      font-weight:900;
+    }
+
+    .compact-table tr:last-child td{
+      border-bottom:none;
     }
 
     .chest-card{
@@ -624,10 +645,6 @@
       section{
         padding:16px;
       }
-
-      table{
-        min-width:640px;
-      }
     }
 
     @media (max-width:600px){
@@ -703,43 +720,6 @@
           }
         },
         "image":"https://kingshotdata.kr/img/guides/waves-voyage-title.webp"
-      },
-      {
-        "@type":"FAQPage",
-        "mainEntity":[
-          {
-            "@type":"Question",
-            "name":"波越えの旅はどんなイベントですか？",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"波越えの旅は5日間 진행되는期間限定イベントで、現在のアップデート基準では領主宝石関連の報酬を獲得できるイベントです."
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"累計探索回数報酬は何回までですか？",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"現在の基準では累計探索回数報酬は600回まで獲得できます."
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"微課金向けの進め方は？",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"イベント初日から羅針盤を使わずに探索を継続し、終了前に探索回数を196回まで合わせた後、最後に探索4枠を送って締める形が効率的です."
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"重課金向けの進め方は？",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"重課金の場合は最大報酬ラインである600回までそのまま進めれば大丈夫です."
-            }
-          }
-        ]
       }
     ]
   }
@@ -778,6 +758,7 @@
       <a href="#probability">確率</a>
       <a href="#rewards">宝箱報酬</a>
       <a href="#plans">進め方</a>
+      <a href="#compare">目標別比較</a>
       <a href="#tips">簡単攻略</a>
     </nav>
 
@@ -819,7 +800,7 @@
 
             <div class="cta-row">
               <a class="btn btn-primary" href="#plans">進め方を見る</a>
-              <a class="btn" href="#rewards">宝箱報酬を見る</a>
+              <a class="btn" href="#compare">目標別比較を見る</a>
               <a class="btn" href="#tips">簡単攻略を見る</a>
             </div>
           </div>
@@ -829,7 +810,7 @@
             <a href="#rules">ルール</a><span class="dotsep">•</span>
             <a href="#probability">確率</a><span class="dotsep">•</span>
             <a href="#rewards">宝箱報酬</a><span class="dotsep">•</span>
-            <a href="#plans">進め方</a><span class="dotsep">•</span>
+            <a href="#compare">目標別比較</a><span class="dotsep">•</span>
             <a href="#tips">簡単攻略</a>
           </div>
         </div>
@@ -1120,6 +1101,62 @@
         </div>
       </section>
 
+      <section id="compare">
+        <span class="anchor"></span>
+        <h2>目標別の時間 / 探索回数比較</h2>
+
+        <div class="summary-grid">
+          <article class="summary-card">
+            <h3>目標 60</h3>
+            <p>必要時間 情報なし</p>
+            <p style="margin-top:8px;color:#111827;font-weight:700;">探索回数 60</p>
+            <p style="margin-top:6px;">普通 54 / 上級 6</p>
+          </article>
+
+          <article class="summary-card">
+            <h3>目標 120</h3>
+            <p>必要時間 480時間</p>
+            <p style="margin-top:8px;color:#111827;font-weight:700;">探索回数 120</p>
+            <p style="margin-top:6px;">普通 108 / 上級 12</p>
+          </article>
+
+          <article class="summary-card">
+            <h3>目標 200</h3>
+            <p>必要時間 1,120時間</p>
+            <p style="margin-top:8px;color:#111827;font-weight:700;">探索回数 200</p>
+            <p style="margin-top:6px;">普通 180 / 上級 20</p>
+          </article>
+        </div>
+
+        <h3>プランの方向性をひと目で確認</h3>
+        <table class="compact-table" aria-label="プラン比較要約表">
+          <thead>
+            <tr>
+              <th>区分</th>
+              <th>非合成プラン</th>
+              <th>合成プラン</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>方向性</td>
+              <td>図面優先型</td>
+              <td>マニュアル優先型</td>
+            </tr>
+            <tr>
+              <td>特徴</td>
+              <td>図面比重が高い</td>
+              <td>マニュアル比重が高い</td>
+            </tr>
+            <tr>
+              <td>おすすめ</td>
+              <td>図面を先に確保したい場合</td>
+              <td>マニュアル比重まで一緒に確保したい場合</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
       <section id="tips">
         <span class="anchor"></span>
         <h2>簡単攻略</h2>
@@ -1146,14 +1183,14 @@
           </article>
 
           <article class="info-item">
-            <p class="info-q">5. 重課金は600回までそのまま進めればOKです</p>
-            <p class="info-a">重課金向けの進行は複雑に考える必要はなく、最大報酬ラインである600回まで継続して回せば十分です。</p>
+            <p class="info-q">5. 目標選びは時間基準で見るのが最も分かりやすいです</p>
+            <p class="info-a">公開用の整理では予想課金額より、必要時間と探索回数を先に見る方が直感的です。まず時間と目標を決めてから、非合成プランか合成プランを選ぶ流れが最も分かりやすいです。</p>
           </article>
         </div>
 
         <div class="ok-note">
           <div>
-            <strong>一行まとめ:</strong> 微課金は196回調整 후 探索4枠で締め、重課金は600回最大報酬まで進めればOKです。
+            <strong>一行まとめ:</strong> 微課金は196回調整後に探索4枠で締め、重課金は600回最大報酬まで進めればOKです。
           </div>
         </div>
 

@@ -342,11 +342,23 @@
       font-weight:900;
     }
 
-    .grid-2{
+    .grid-2,
+    .summary-grid,
+    .prob-grid,
+    .chest-grid,
+    .plan-grid{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
       gap:12px;
       margin-top:12px;
+    }
+
+    .summary-grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .prob-grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
     }
 
     .card,
@@ -401,46 +413,6 @@
       margin:6px 0;
     }
 
-    .table-wrap{
-      overflow:auto;
-      margin-top:12px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fff;
-      -webkit-overflow-scrolling:touch;
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:720px;
-    }
-
-    th,td{
-      padding:12px 14px;
-      border-bottom:1px solid var(--border);
-      text-align:left;
-      vertical-align:top;
-      font-size:14px;
-    }
-
-    th{
-      background:#f8fafc;
-      font-weight:900;
-      color:var(--text);
-    }
-
-    tbody tr:last-child td{border-bottom:none}
-
-    .prob-grid,
-    .plan-grid,
-    .summary-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
-      margin-top:12px;
-    }
-
     .prob-card strong{
       display:block;
       font-size:16px;
@@ -450,13 +422,6 @@
     .prob-card span{
       color:var(--muted);
       font-size:14px;
-    }
-
-    .chest-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:14px;
-      margin-top:14px;
     }
 
     .chest-card{
@@ -503,6 +468,33 @@
       font-size:14px;
     }
 
+    .compact-table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+    }
+
+    .compact-table th,
+    .compact-table td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+      font-size:14px;
+    }
+
+    .compact-table th{
+      background:#f8fafc;
+      font-weight:900;
+    }
+
+    .compact-table tr:last-child td{
+      border-bottom:none;
+    }
+
     .links{
       background:var(--soft-bg);
       padding:16px;
@@ -523,29 +515,6 @@
     }
 
     .links a{font-weight:900}
-
-    .bottom-cta{
-      margin-top:18px;
-      border-radius:18px;
-      border:1px solid var(--border);
-      background:linear-gradient(180deg,#ffffff,#fafcff);
-      box-shadow:var(--shadow);
-      padding:18px;
-    }
-
-    .bottom-cta .title{
-      font-size:21px;
-      font-weight:900;
-      color:var(--text);
-      margin:0 0 8px;
-      line-height:1.3;
-    }
-
-    .bottom-cta .desc{
-      margin:0 0 14px;
-      color:var(--muted);
-      font-size:14px;
-    }
 
     .cta-row{
       display:flex;
@@ -647,10 +616,6 @@
       section{
         padding:16px;
       }
-
-      table{
-        min-width:640px;
-      }
     }
 
     @media (max-width:600px){
@@ -677,7 +642,6 @@
       h1{font-size:25px}
       .hero{gap:14px}
       .hero-cta{padding:14px}
-      .bottom-cta .title{font-size:19px}
 
       .cta-row{
         flex-direction:column;
@@ -727,43 +691,6 @@
           }
         },
         "image":"https://kingshotdata.kr/img/guides/waves-voyage-title.webp"
-      },
-      {
-        "@type":"FAQPage",
-        "mainEntity":[
-          {
-            "@type":"Question",
-            "name":"파도를 가르는 여행은 어떤 이벤트인가요?",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"파도를 가르는 여행은 5일 동안 진행되는 비정기 이벤트로, 현재 업데이트 기준 영주 보석 관련 보상을 얻을 수 있는 이벤트입니다."
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"누적 조사 횟수 보상은 몇 회까지인가요?",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"현재 기준 누적 조사 횟수 보상은 600회까지 획득할 수 있습니다."
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"소과금 유저는 어떻게 마무리하면 되나요?",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"이벤트 첫날부터 나침반 없이 꾸준히 탐사를 보내며 횟수를 쌓고, 마감 전 탐사 횟수를 196회까지 맞춘 뒤 마지막에 탐사 4개를 보내 마무리하는 방식이 효율적입니다."
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"고과금 유저는 어떻게 진행하면 되나요?",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"고과금 유저는 최대 보상인 600회까지 꾸준히 진행하면 됩니다."
-            }
-          }
-        ]
       }
     ]
   }
@@ -802,6 +729,7 @@
       <a href="#probability">확률</a>
       <a href="#rewards">상자 보상</a>
       <a href="#plans">진행 방법</a>
+      <a href="#compare">목표별 비교</a>
       <a href="#tips">간단 공략</a>
     </nav>
 
@@ -843,7 +771,7 @@
 
             <div class="cta-row">
               <a class="btn btn-primary" href="#plans">진행 방법 보기</a>
-              <a class="btn" href="#rewards">상자 보상 보기</a>
+              <a class="btn" href="#compare">목표별 비교 보기</a>
               <a class="btn" href="#tips">간단 공략 보기</a>
             </div>
           </div>
@@ -853,7 +781,7 @@
             <a href="#rules">규칙</a><span class="dotsep">•</span>
             <a href="#probability">확률</a><span class="dotsep">•</span>
             <a href="#rewards">상자 보상</a><span class="dotsep">•</span>
-            <a href="#plans">진행 방법</a><span class="dotsep">•</span>
+            <a href="#compare">목표별 비교</a><span class="dotsep">•</span>
             <a href="#tips">간단 공략</a>
           </div>
         </div>
@@ -992,40 +920,6 @@
           아래 순서는 일반 → 고급 → 정교 → 탁월 순서입니다.
         </p>
 
-        <div class="table-wrap">
-          <table aria-label="파도를 가르는 여행 상자 보상 요약표">
-            <thead>
-              <tr>
-                <th>상자 등급</th>
-                <th>주요 보상</th>
-                <th>비고</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>일반 파도 보물</td>
-                <td>보석 도면 x5 / 5분 공용 가속 x18 / 다이아x100 x2</td>
-                <td>기본 재료 구간</td>
-              </tr>
-              <tr>
-                <td>고급 파도 보물</td>
-                <td>보석 매뉴얼 x5 / 보석 도면 x10 / 1시간 공용 가속 x6</td>
-                <td>합성 시작 핵심 구간</td>
-              </tr>
-              <tr>
-                <td>정교한 파도 보물</td>
-                <td>보석 매뉴얼 x15 / 보석 도면 x15 / 레전드 공용 영웅 조각 x2</td>
-                <td>합성 75% 구간</td>
-              </tr>
-              <tr>
-                <td>탁월한 파도 보물</td>
-                <td>보석 매뉴얼 x50 / 보석 도면 x50 / 레전드 공용 영웅 조각 x6</td>
-                <td>합성 25% 고보상 구간</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
         <div class="chest-grid">
           <article class="chest-card">
             <h3>일반 파도 보물</h3>
@@ -1136,13 +1030,70 @@
             </ul>
           </article>
         </div>
-
-        <div class="ok-note">
-          <div>
-            <strong>소과금 핵심:</strong> 첫날부터 꾸준히 보내고, 마지막 날 196회 조정 후 탐사 4개를 보내 마무리하면 됩니다.
-          </div>
-        </div>
       </section>
+
+      <section id="compare">
+  <span class="anchor"></span>
+  <h2>목표별 시간 / 탐사수 비교</h2>
+
+  <div class="summary-grid">
+    <article class="summary-card">
+      <h3>목표 60</h3>
+      <p>필요시간 정보 없음</p>
+      <p style="margin-top:8px;color:#111827;font-weight:700;">탐사수 60</p>
+      <p style="margin-top:6px;">일반 54 / 고급 6</p>
+    </article>
+
+    <article class="summary-card">
+      <h3>목표 120</h3>
+      <p>필요시간 480시간</p>
+      <p style="margin-top:8px;color:#111827;font-weight:700;">탐사수 120</p>
+      <p style="margin-top:6px;">일반 108 / 고급 12</p>
+    </article>
+
+    <article class="summary-card">
+      <h3>목표 200</h3>
+      <p>필요시간 1,120시간</p>
+      <p style="margin-top:8px;color:#111827;font-weight:700;">탐사수 200</p>
+      <p style="margin-top:6px;">일반 180 / 고급 20</p>
+    </article>
+  </div>
+
+  <div class="ok-note">
+    <div>
+      <strong>읽는 방법:</strong> 목표 수치가 올라갈수록 필요한 시간과 탐사수도 크게 늘어납니다. 그래서 소과금은 60 또는 120 구간, 고과금은 200 이상 구간을 기준으로 보는 것이 편합니다.
+    </div>
+  </div>
+
+  <h3>플랜 성향 한눈에 보기</h3>
+  <table class="compact-table" aria-label="플랜 비교 요약표">
+    <thead>
+      <tr>
+        <th>구분</th>
+        <th>비합성 플랜</th>
+        <th>합성 플랜</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>성향</td>
+        <td>도면 우선형</td>
+        <td>매뉴얼 우선형</td>
+      </tr>
+      <tr>
+        <tr>
+  <td>특징</td>
+  <td>도면 비중이 높음</td>
+  <td>매뉴얼 비중이 높음</td>
+</tr>
+      <tr>
+        <td>추천</td>
+        <td>도면을 먼저 챙기고 싶은 경우</td>
+        <td>매뉴얼 비중까지 함께 챙기고 싶은 경우</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
 
       <section id="tips">
         <span class="anchor"></span>
@@ -1170,8 +1121,8 @@
           </article>
 
           <article class="info-item">
-            <p class="info-q">5. 고과금은 600회까지 밀어주면 됩니다</p>
-            <p class="info-a">고과금용 공략은 별도로 복잡하게 생각할 필요 없이 최대 보상인 600회까지 꾸준히 진행하면 됩니다.</p>
+            <p class="info-q">5. 목표 선택은 시간 기준으로 보는 것이 가장 편합니다</p>
+            <p class="info-a">공개용 정리에서는 예상 과금액보다 필요시간과 탐사수를 먼저 보는 편이 훨씬 직관적입니다. 시간과 목표를 먼저 정한 뒤, 플랜 A 또는 플랜 B를 고르는 방식이 가장 이해하기 쉽습니다.</p>
           </article>
         </div>
 

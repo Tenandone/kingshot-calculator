@@ -342,12 +342,21 @@
       font-weight:900;
     }
 
-    .grid-2{
+    .grid-2,
+    .summary-grid,
+    .prob-grid,
+    .chest-grid,
+    .plan-grid{
       display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
       gap:12px;
       margin-top:12px;
     }
+
+    .grid-2,
+    .chest-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .summary-grid,
+    .prob-grid,
+    .plan-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 
     .card,
     .info-item,
@@ -401,6 +410,17 @@
       margin:6px 0;
     }
 
+    .prob-card strong{
+      display:block;
+      font-size:16px;
+      margin-bottom:4px;
+    }
+
+    .prob-card span{
+      color:var(--muted);
+      font-size:14px;
+    }
+
     .table-wrap{
       overflow:auto;
       margin-top:12px;
@@ -432,31 +452,32 @@
 
     tbody tr:last-child td{border-bottom:none}
 
-    .prob-grid,
-    .plan-grid,
-    .summary-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
+    .compact-table{
+      width:100%;
+      border-collapse:collapse;
       margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
     }
 
-    .prob-card strong{
-      display:block;
-      font-size:16px;
-      margin-bottom:4px;
-    }
-
-    .prob-card span{
-      color:var(--muted);
+    .compact-table th,
+    .compact-table td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
       font-size:14px;
+      vertical-align:top;
     }
 
-    .chest-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:14px;
-      margin-top:14px;
+    .compact-table th{
+      background:#f8fafc;
+      font-weight:900;
+    }
+
+    .compact-table tr:last-child td{
+      border-bottom:none;
     }
 
     .chest-card{
@@ -703,43 +724,6 @@
           }
         },
         "image":"https://kingshotdata.kr/img/guides/waves-voyage-title.webp"
-      },
-      {
-        "@type":"FAQPage",
-        "mainEntity":[
-          {
-            "@type":"Question",
-            "name":"What is Wavebound Voyage?",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"Wavebound Voyage is a 5-day limited-time event. Based on the current update, its main rewards are now centered around Lord Gem materials."
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"How many total runs are needed for the full milestone rewards?",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"The current total exploration milestone rewards go up to 600 runs."
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"How should low spenders finish the event?",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"A low-spend route is to keep exploring steadily from day one without using compasses, adjust your total to 196 runs near the end, then send 4 final exploration teams to finish."
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"How should high spenders run the event?",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"High spenders can simply push all the way to the 600-run maximum reward milestone."
-            }
-          }
-        ]
       }
     ]
   }
@@ -778,6 +762,7 @@
       <a href="#probability">Rates</a>
       <a href="#rewards">Treasure Rewards</a>
       <a href="#plans">How to Run It</a>
+      <a href="#compare">Target Comparison</a>
       <a href="#tips">Quick Tips</a>
     </nav>
 
@@ -819,7 +804,7 @@
 
             <div class="cta-row">
               <a class="btn btn-primary" href="#plans">View Strategy</a>
-              <a class="btn" href="#rewards">View Rewards</a>
+              <a class="btn" href="#compare">View Target Comparison</a>
               <a class="btn" href="#tips">View Quick Tips</a>
             </div>
           </div>
@@ -829,7 +814,7 @@
             <a href="#rules">Rules</a><span class="dotsep">•</span>
             <a href="#probability">Rates</a><span class="dotsep">•</span>
             <a href="#rewards">Treasure Rewards</a><span class="dotsep">•</span>
-            <a href="#plans">How to Run It</a><span class="dotsep">•</span>
+            <a href="#compare">Target Comparison</a><span class="dotsep">•</span>
             <a href="#tips">Quick Tips</a>
           </div>
         </div>
@@ -1120,6 +1105,62 @@
         </div>
       </section>
 
+      <section id="compare">
+        <span class="anchor"></span>
+        <h2>Target Time / Run Comparison</h2>
+
+        <div class="summary-grid">
+          <article class="summary-card">
+            <h3>Target 60</h3>
+            <p>Time unavailable</p>
+            <p style="margin-top:8px;color:#111827;font-weight:700;">Runs 60</p>
+            <p style="margin-top:6px;">Common 54 / Premium 6</p>
+          </article>
+
+          <article class="summary-card">
+            <h3>Target 120</h3>
+            <p>Time 480 hours</p>
+            <p style="margin-top:8px;color:#111827;font-weight:700;">Runs 120</p>
+            <p style="margin-top:6px;">Common 108 / Premium 12</p>
+          </article>
+
+          <article class="summary-card">
+            <h3>Target 200</h3>
+            <p>Time 1,120 hours</p>
+            <p style="margin-top:8px;color:#111827;font-weight:700;">Runs 200</p>
+            <p style="margin-top:6px;">Common 180 / Premium 20</p>
+          </article>
+        </div>
+
+        <h3>Plan Direction at a Glance</h3>
+        <table class="compact-table" aria-label="Plan comparison summary table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Non-Merge Plan</th>
+              <th>Merge Plan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Focus</td>
+              <td>Design-first route</td>
+              <td>Guide-first route</td>
+            </tr>
+            <tr>
+              <td>Trait</td>
+              <td>Higher Design share</td>
+              <td>Higher Guide share</td>
+            </tr>
+            <tr>
+              <td>Recommended for</td>
+              <td>Players who want to secure Designs first</td>
+              <td>Players who also want a higher Guide share</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
       <section id="tips">
         <span class="anchor"></span>
         <h2>Quick Tips</h2>
@@ -1146,8 +1187,8 @@
           </article>
 
           <article class="info-item">
-            <p class="info-q">5. High spenders can simply push to 600</p>
-            <p class="info-a">The high-spend route does not need to be complicated. Just keep going until you reach the 600-run maximum reward line.</p>
+            <p class="info-q">5. Time first, then plan, is the clearest way to read it</p>
+            <p class="info-a">For public-facing guides, time and total runs are easier to understand than estimated spending. Choose your target range first, then decide between the Non-Merge Plan and the Merge Plan.</p>
           </article>
         </div>
 

@@ -342,12 +342,21 @@
       font-weight:900;
     }
 
-    .grid-2{
+    .grid-2,
+    .summary-grid,
+    .prob-grid,
+    .chest-grid,
+    .plan-grid{
       display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
       gap:12px;
       margin-top:12px;
     }
+
+    .grid-2,
+    .chest-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .summary-grid,
+    .prob-grid,
+    .plan-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 
     .card,
     .info-item,
@@ -401,6 +410,17 @@
       margin:6px 0;
     }
 
+    .prob-card strong{
+      display:block;
+      font-size:16px;
+      margin-bottom:4px;
+    }
+
+    .prob-card span{
+      color:var(--muted);
+      font-size:14px;
+    }
+
     .table-wrap{
       overflow:auto;
       margin-top:12px;
@@ -432,31 +452,32 @@
 
     tbody tr:last-child td{border-bottom:none}
 
-    .prob-grid,
-    .plan-grid,
-    .summary-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
+    .compact-table{
+      width:100%;
+      border-collapse:collapse;
       margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
     }
 
-    .prob-card strong{
-      display:block;
-      font-size:16px;
-      margin-bottom:4px;
-    }
-
-    .prob-card span{
-      color:var(--muted);
+    .compact-table th,
+    .compact-table td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
       font-size:14px;
+      vertical-align:top;
     }
 
-    .chest-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:14px;
-      margin-top:14px;
+    .compact-table th{
+      background:#f8fafc;
+      font-weight:900;
+    }
+
+    .compact-table tr:last-child td{
+      border-bottom:none;
     }
 
     .chest-card{
@@ -624,10 +645,6 @@
       section{
         padding:16px;
       }
-
-      table{
-        min-width:640px;
-      }
     }
 
     @media (max-width:600px){
@@ -703,43 +720,6 @@
           }
         },
         "image":"https://kingshotdata.kr/img/guides/waves-voyage-title.webp"
-      },
-      {
-        "@type":"FAQPage",
-        "mainEntity":[
-          {
-            "@type":"Question",
-            "name":"踏浪之旅是什麼活動？",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"踏浪之旅是持續 5 天的限時活動，依目前更新內容來看，主要可獲得領主寶石相關獎勵。"
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"累計探索次數獎勵到幾次？",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"目前累計探索次數獎勵可領到 600 次。"
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"小課玩家怎麼收尾？",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"建議從活動第一天開始不使用羅盤持續派遣探索，結束前先把探索次數調整到 196 次，再送出最後 4 隊探索完成收尾。"
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"大課玩家怎麼進行？",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"大課玩家直接以最大獎勵的 600 次為目標持續推進即可。"
-            }
-          }
-        ]
       }
     ]
   }
@@ -778,6 +758,7 @@
       <a href="#probability">機率</a>
       <a href="#rewards">寶藏獎勵</a>
       <a href="#plans">進行方式</a>
+      <a href="#compare">目標比較</a>
       <a href="#tips">簡單攻略</a>
     </nav>
 
@@ -819,7 +800,7 @@
 
             <div class="cta-row">
               <a class="btn btn-primary" href="#plans">查看進行方式</a>
-              <a class="btn" href="#rewards">查看寶藏獎勵</a>
+              <a class="btn" href="#compare">查看目標比較</a>
               <a class="btn" href="#tips">查看簡單攻略</a>
             </div>
           </div>
@@ -829,7 +810,7 @@
             <a href="#rules">規則</a><span class="dotsep">•</span>
             <a href="#probability">機率</a><span class="dotsep">•</span>
             <a href="#rewards">寶藏獎勵</a><span class="dotsep">•</span>
-            <a href="#plans">進行方式</a><span class="dotsep">•</span>
+            <a href="#compare">目標比較</a><span class="dotsep">•</span>
             <a href="#tips">簡單攻略</a>
           </div>
         </div>
@@ -1120,6 +1101,62 @@
         </div>
       </section>
 
+      <section id="compare">
+        <span class="anchor"></span>
+        <h2>目標別時間 / 探索回數比較</h2>
+
+        <div class="summary-grid">
+          <article class="summary-card">
+            <h3>目標 60</h3>
+            <p>所需時間 資訊 없음</p>
+            <p style="margin-top:8px;color:#111827;font-weight:700;">探索回數 60</p>
+            <p style="margin-top:6px;">普通 54 / 高級 6</p>
+          </article>
+
+          <article class="summary-card">
+            <h3>目標 120</h3>
+            <p>所需時間 480 小時</p>
+            <p style="margin-top:8px;color:#111827;font-weight:700;">探索回數 120</p>
+            <p style="margin-top:6px;">普通 108 / 高級 12</p>
+          </article>
+
+          <article class="summary-card">
+            <h3>目標 200</h3>
+            <p>所需時間 1,120 小時</p>
+            <p style="margin-top:8px;color:#111827;font-weight:700;">探索回數 200</p>
+            <p style="margin-top:6px;">普通 180 / 高級 20</p>
+          </article>
+        </div>
+
+        <h3>方案傾向一眼看懂</h3>
+        <table class="compact-table" aria-label="方案比較摘要表">
+          <thead>
+            <tr>
+              <th>區分</th>
+              <th>非合成方案</th>
+              <th>合成方案</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>傾向</td>
+              <td>圖紙優先型</td>
+              <td>手冊優先型</td>
+            </tr>
+            <tr>
+              <td>特徵</td>
+              <td>圖紙比重較高</td>
+              <td>手冊比重較高</td>
+            </tr>
+            <tr>
+              <td>推薦</td>
+              <td>想先確保圖紙時</td>
+              <td>想連手冊比重也一起拉高時</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
       <section id="tips">
         <span class="anchor"></span>
         <h2>簡單攻略</h2>
@@ -1146,14 +1183,14 @@
           </article>
 
           <article class="info-item">
-            <p class="info-q">5. 大課玩家直接以 600 次為目標即可</p>
-            <p class="info-a">大課玩法不用想太複雜，直接一路推到 600 次最大獎勵即可。</p>
+            <p class="info-q">5. 先看時間，再選方案最直觀</p>
+            <p class="info-a">公開頁面上，比起預估課金額，先看所需時間與探索回數會更直觀。先決定目標區間，再判斷要走非合成方案還是合成方案，理解起來最簡單。</p>
           </article>
         </div>
 
         <div class="ok-note">
           <div>
-            <strong>一句話總結：</strong>小課調整到 196 次後再送出 4 隊探索收尾，大課就直接衝 600 次最大獎勵。
+            <strong>一句話總結：</strong>小課調整到 196 次後再送出 4 隊探索收尾，大課則直接衝 600 次最大獎勵。
           </div>
         </div>
 
