@@ -7,11 +7,14 @@
   var remountTimer = null;
 
   function curLang(){
+    var dataLang = (document.documentElement.getAttribute('data-lang') || '').trim();
+    if (dataLang === 'ko' || dataLang === 'en' || dataLang === 'ja' || dataLang === 'zh-TW') return dataLang;
+
     var l = (document.documentElement.getAttribute('lang') || 'en').trim();
     if (l === 'ko' || l === 'en' || l === 'ja' || l === 'zh-TW') return l;
 
     var low = l.toLowerCase();
-    if (low === 'zh-tw' || low === 'tw' || low === 'zh_tw') return 'zh-TW';
+    if (low === 'zh-hant' || low === 'zh-tw' || low === 'tw' || low === 'zh_tw') return 'zh-TW';
     return 'en';
   }
 
