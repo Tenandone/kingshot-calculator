@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <base href="/" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>킹샷 자이언트베어(곰사냥) 보상 정리 | 48시간 주기 한달 누적 계산 | Kingshot Data</title>
+  <meta name="description" content="킹샷 자이언트베어(곰사냥)는 48시간마다 1회 참여 가능한 콘텐츠입니다. 개인 피해 포인트 175M 이상 기준으로 1회 보상과 한 달 풀참 시 누적 보상을 표로 정리했습니다." />
+  <meta name="keywords" content="킹샷 자이언트베어, 킹샷 곰사냥, 킹샷 자이언트 베어 보상, 킹샷 곰사냥 보상, 킹샷 연맹코인, 킹샷 제작 망치, 킹샷 영웅 장비 상자, 킹샷 강화 부품" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/kingshot-bear-reward.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/kingshot-bear-reward.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/kingshot-bear-reward.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/kingshot-bear-reward.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/kingshot-bear-reward.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/kingshot-bear-reward.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="킹샷 자이언트베어(곰사냥) 보상 정리" />
+  <meta property="og:description" content="48시간마다 1회 참여 가능한 자이언트베어 보상을 개인 피해 포인트 175M 이상 기준으로 1회 보상과 한 달 누적 보상까지 정리했습니다." />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/guides/kingshot-bear-reward.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guide/kingshot-bear-reward.webp" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="킹샷 자이언트베어(곰사냥) 보상 정리" />
+  <meta name="twitter:description" content="개인 피해 포인트 175M 이상 기준 자이언트베어 1회 보상과 한 달 누적 보상을 표로 정리했습니다." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guide/kingshot-bear-reward.webp" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guide/kingshot-bear-reward.webp" />
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel-soft:#f8fafc;
+      --panel-blue:#f4f8ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --brand-strong:#1d4ed8;
+      --ok-bg:#ecfdf3;
+      --ok-bd:#86efac;
+      --ok-fg:#166534;
+      --warn-bg:#fff7ed;
+      --warn-bd:#fed7aa;
+      --warn-fg:#9a3412;
+      --radius:18px;
+      --radius-sm:12px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.68 system-ui,-apple-system,Segoe UI,Roboto,Pretendard,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      word-break:keep-all;
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    img{max-width:100%;height:auto}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:900;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .crumbs a{color:var(--muted)}
+
+    .hero-image{
+      margin-top:14px;
+      border:1px solid var(--border);
+      border-radius:22px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+
+    .hero-image img{
+      width:100%;
+      aspect-ratio:16 / 9;
+      object-fit:cover;
+      display:block;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);
+      gap:18px;
+      padding:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      margin-top:18px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:34px;
+      line-height:1.14;
+      letter-spacing:-.03em;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .jump{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    .meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--muted);
+      font-weight:800;
+    }
+
+    .badge.ok{
+      border-color:var(--ok-bd);
+      background:var(--ok-bg);
+      color:var(--ok-fg);
+    }
+
+    .hero-side{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:var(--panel-soft);
+      padding:16px;
+    }
+
+    .hero-side h2{
+      margin:0 0 10px;
+      font-size:18px;
+      line-height:1.3;
+    }
+
+    .hero-side ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .hero-side li{margin:7px 0}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.25;
+      letter-spacing:-.02em;
+    }
+
+    section p{margin:8px 0}
+
+    .callout{
+      margin:12px 0;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--ok-bd);
+      background:var(--ok-bg);
+      color:var(--ok-fg);
+    }
+
+    .callout.warn{
+      border-color:var(--warn-bd);
+      background:var(--warn-bg);
+      color:var(--warn-fg);
+    }
+
+    .callout strong{font-weight:900}
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .stat-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:16px;
+      text-align:center;
+    }
+
+    .stat-card .big{
+      font-size:28px;
+      line-height:1.1;
+      font-weight:1000;
+      color:var(--brand-strong);
+      margin-bottom:6px;
+    }
+
+    .stat-card .small{
+      color:var(--muted);
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      border:1px solid var(--border);
+      border-radius:16px;
+      margin-top:14px;
+      background:#fff;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:760px;
+    }
+
+    th,td{
+      padding:13px 12px;
+      border-bottom:1px solid var(--border);
+      text-align:center;
+      vertical-align:middle;
+      white-space:nowrap;
+    }
+
+    th{
+      background:var(--panel-blue);
+      font-size:14px;
+      font-weight:900;
+      color:var(--text);
+    }
+
+    td{
+      font-size:14px;
+      color:var(--text);
+      font-weight:700;
+    }
+
+    td:first-child, th:first-child{
+      text-align:left;
+      white-space:normal;
+    }
+
+    tbody tr:nth-child(even){background:#fcfdff}
+    tbody tr:hover{background:#f8fbff}
+
+    .note-txt{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .summary-list{
+      margin:10px 0 0;
+      padding-left:18px;
+    }
+
+    .summary-list li{margin:7px 0}
+
+    .mobile-cards{
+      display:none;
+      margin-top:14px;
+      gap:12px;
+    }
+
+    .reward-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:14px;
+      box-shadow:0 6px 18px rgba(0,0,0,.04);
+    }
+
+    .reward-card + .reward-card{
+      margin-top:12px;
+    }
+
+    .reward-head{
+      margin:0 0 12px;
+      font-size:16px;
+      font-weight:1000;
+      line-height:1.35;
+      color:var(--text);
+    }
+
+    .reward-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+
+    .reward-item{
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:var(--panel-soft);
+      padding:10px 12px;
+    }
+
+    .reward-label{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+      margin-bottom:4px;
+    }
+
+    .reward-value{
+      display:block;
+      font-size:15px;
+      color:var(--text);
+      font-weight:1000;
+      line-height:1.25;
+    }
+
+    .bottom-cta{
+      margin-top:18px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:linear-gradient(180deg,#ffffff,#fafcff);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+
+    .bottom-cta .title{
+      margin:0 0 8px;
+      font-size:22px;
+      line-height:1.3;
+      font-weight:900;
+      color:var(--text);
+    }
+
+    .bottom-cta .desc{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:#111827;
+      font-weight:900;
+      text-decoration:none !important;
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .btn-primary:hover{color:#fff;border-color:#111827}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+    }
+
+    @media (max-width:640px){
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:28px}
+      section{padding:15px}
+      .hero{padding:18px}
+      .bottom-cta .title{font-size:20px}
+      .cta-row .btn{width:100%}
+      .hero-image img{aspect-ratio:4 / 3}
+
+      .table-wrap{
+        display:none;
+      }
+
+      .mobile-cards{
+        display:block;
+      }
+
+      .reward-grid{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
+          {"@type":"ListItem","position":2,"name":"가이드","item":"https://kingshotdata.kr/ko/guides/"},
+          {"@type":"ListItem","position":3,"name":"킹샷 자이언트베어(곰사냥) 보상 정리","item":"https://kingshotdata.kr/ko/guides/kingshot-bear-reward.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"킹샷 자이언트베어(곰사냥) 보상 정리",
+        "description":"개인 피해 포인트 175M 이상 기준 자이언트베어 1회 보상과 한 달 누적 보상을 표로 정리한 가이드입니다.",
+        "mainEntityOfPage":"https://kingshotdata.kr/ko/guides/kingshot-bear-reward.html",
+        "inLanguage":"ko",
+        "author":{"@type":"Organization","name":"Kingshot Data"},
+        "publisher":{
+          "@type":"Organization",
+          "name":"Kingshot Data",
+          "logo":{"@type":"ImageObject","url":"https://kingshotdata.kr/img/kingshotdata-og-v5.png"}
+        },
+        "image":"https://kingshotdata.kr/img/guide/kingshot-bear-reward.webp"
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"자이언트베어는 얼마나 자주 참여할 수 있나요?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"자이언트베어는 48시간마다 1회 참여 가능한 콘텐츠입니다. 즉 2일에 한 번 참여할 수 있습니다."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"한 달 동안 빠짐없이 참여하면 몇 번 플레이할 수 있나요?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"30일 기준으로 계산하면 총 15회 참여할 수 있습니다."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"이 표는 어떤 기준으로 계산했나요?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"개인 피해 포인트 175M 이상 구간을 시작점으로 정리했으며, 제작 망치, 영웅 장비 상자, 강화 부품, 연맹 코인 기준으로 정리했습니다."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>킹샷데이터코리아</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/ko/guides/kingshot-bear-reward.html" aria-current="page">KO</a>
+        <a href="/en/guides/kingshot-bear-reward.html">EN</a>
+        <a href="/ja/guides/kingshot-bear-reward.html">JA</a>
+        <a href="/zh-tw/guides/kingshot-bear-reward.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">개요</a>
+      <a href="#once-reward">1회 보상</a>
+      <a href="#monthly-reward">한달 누적</a>
+      <a href="#summary">요약</a>
+      <a href="#related">다음 링크</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span>›</span>
+        <a href="/ko/guides/">가이드</a> <span>›</span>
+        <span>자이언트베어 보상 정리</span>
+      </div>
+
+      <div class="hero-image">
+        <img src="/img/guide/kingshot-bear-reward.webp" alt="킹샷 자이언트베어 곰사냥 보상 정리 대표 이미지" loading="eager" fetchpriority="high">
+      </div>
+
+      <section class="hero" id="overview">
+        <div>
+          <h1>킹샷 자이언트베어(곰사냥) 보상 정리</h1>
+          <p class="sub">
+            자이언트베어는 48시간마다 1회 참여 가능한 콘텐츠입니다.
+            즉, 2일에 한 번씩 참여할 수 있어 한 달 동안 빠짐없이 진행하면 총 15회 플레이가 가능합니다.
+          </p>
+          <p class="sub" style="margin-top:10px;">
+            이번 정리는 <strong>개인 피해 포인트 175M 이상</strong>을 기준으로 계산했으며,
+            <strong>제작 망치 / 영웅 장비 상자 / 강화 부품 / 연맹 코인</strong> 기준으로 보기 쉽게 정리했습니다.
+          </p>
+
+          <div class="meta">
+            <span class="badge ok">48시간마다 1회</span>
+            <span class="badge">30일 기준 15회</span>
+            <span class="badge">175M 이상 기준</span>
+            <span class="badge">한달 누적 계산 포함</span>
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#once-reward">1회 보상표</a><span class="dotsep">•</span>
+            <a href="#monthly-reward">한달 누적 보상표</a><span class="dotsep">•</span>
+            <a href="#related">다음 링크</a>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <h2>한눈에 보는 핵심</h2>
+          <ul>
+            <li>자이언트베어는 <strong>2일에 한 번</strong> 참여 가능</li>
+            <li>30일 풀참 기준 <strong>총 15회</strong> 진행 가능</li>
+            <li>낮은 구간이라도 누적하면 보상이 꽤 크게 쌓임</li>
+            <li>표 기준 시작 구간은 <strong>개인 피해 포인트 175M 이상</strong></li>
+          </ul>
+        </aside>
+      </section>
+
+      <section>
+        <h2>자이언트베어 참여 기준</h2>
+        <p>
+          자이언트베어는 일반 이벤트처럼 매일 열리는 구조가 아니라,
+          <strong>48시간에 1회</strong> 참여 가능한 주기형 콘텐츠입니다.
+        </p>
+
+        <div class="stats">
+          <article class="stat-card">
+            <div class="big">48시간</div>
+            <div class="small">1회 참여 주기</div>
+          </article>
+          <article class="stat-card">
+            <div class="big">2일</div>
+            <div class="small">체감 기준 참여 간격</div>
+          </article>
+          <article class="stat-card">
+            <div class="big">15회</div>
+            <div class="small">30일 풀참 기준 총 횟수</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="once-reward">
+        <h2>자이언트베어 1회 보상표</h2>
+        <p class="note-txt">
+          아래 표는 개인 피해 포인트 구간별 1회 획득 보상을 정리한 표입니다.
+        </p>
+
+        <div class="table-wrap">
+          <table aria-label="자이언트베어 1회 보상표">
+            <thead>
+              <tr>
+                <th>피해 포인트</th>
+                <th>제작 망치</th>
+                <th>영웅 장비 상자</th>
+                <th>강화 부품</th>
+                <th>연맹 코인</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>175M ~ 330M</td><td>10</td><td>2</td><td>11</td><td>60K</td></tr>
+              <tr><td>330M ~ 635M</td><td>11</td><td>2</td><td>11</td><td>65K</td></tr>
+              <tr><td>635M ~ 1.2B</td><td>12</td><td>2</td><td>12</td><td>70K</td></tr>
+              <tr><td>1.2B ~ 2.4B</td><td>13</td><td>3</td><td>12</td><td>75.6K</td></tr>
+              <tr><td>2.4B ~ 4.8B</td><td>14</td><td>3</td><td>13</td><td>80K</td></tr>
+              <tr><td>4.8B ~ 9.6B</td><td>15</td><td>3</td><td>13</td><td>85K</td></tr>
+              <tr><td>9.6B ~ 19.2B</td><td>16</td><td>3</td><td>14</td><td>90K</td></tr>
+              <tr><td>19.2B ~ 38.4B</td><td>17</td><td>3</td><td>14</td><td>95K</td></tr>
+              <tr><td>38.4B+</td><td>18</td><td>3</td><td>15</td><td>100K</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mobile-cards" aria-label="자이언트베어 1회 보상 카드">
+          <article class="reward-card">
+            <h3 class="reward-head">175M ~ 330M</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">10</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">2</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">11</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">60K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">330M ~ 635M</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">11</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">2</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">11</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">65K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">635M ~ 1.2B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">12</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">2</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">12</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">70K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">1.2B ~ 2.4B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">13</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">3</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">12</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">75.6K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">2.4B ~ 4.8B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">14</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">3</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">13</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">80K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">4.8B ~ 9.6B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">15</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">3</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">13</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">85K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">9.6B ~ 19.2B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">16</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">3</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">14</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">90K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">19.2B ~ 38.4B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">17</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">3</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">14</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">95K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">38.4B+</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">18</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">3</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">15</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">100K</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="callout warn">
+          <strong>체크 포인트:</strong> 피해 포인트 구간이 한 단계만 올라가도
+          제작 망치와 연맹 코인이 꾸준히 늘어나기 때문에,
+          본인 평균 점수 구간을 어디까지 유지할 수 있는지가 누적 보상 차이를 만듭니다.
+        </div>
+      </section>
+
+      <section id="monthly-reward">
+        <h2>자이언트베어 한달 누적 보상표</h2>
+        <p class="note-txt">
+          아래 표는 30일 동안 빠짐없이 참여했을 때, 즉 <strong>총 15회 참여</strong>를 기준으로 계산한 누적 보상입니다.
+        </p>
+
+        <div class="table-wrap">
+          <table aria-label="자이언트베어 한달 누적 보상표">
+            <thead>
+              <tr>
+                <th>피해 포인트</th>
+                <th>제작 망치</th>
+                <th>영웅 장비 상자</th>
+                <th>강화 부품</th>
+                <th>연맹 코인</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>175M ~ 330M</td><td>150</td><td>30</td><td>165</td><td>900K</td></tr>
+              <tr><td>330M ~ 635M</td><td>165</td><td>30</td><td>165</td><td>975K</td></tr>
+              <tr><td>635M ~ 1.2B</td><td>180</td><td>30</td><td>180</td><td>1.05M</td></tr>
+              <tr><td>1.2B ~ 2.4B</td><td>195</td><td>45</td><td>180</td><td>1.134M</td></tr>
+              <tr><td>2.4B ~ 4.8B</td><td>210</td><td>45</td><td>195</td><td>1.2M</td></tr>
+              <tr><td>4.8B ~ 9.6B</td><td>225</td><td>45</td><td>195</td><td>1.275M</td></tr>
+              <tr><td>9.6B ~ 19.2B</td><td>240</td><td>45</td><td>210</td><td>1.35M</td></tr>
+              <tr><td>19.2B ~ 38.4B</td><td>255</td><td>45</td><td>210</td><td>1.425M</td></tr>
+              <tr><td>38.4B+</td><td>270</td><td>45</td><td>225</td><td>1.5M</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mobile-cards" aria-label="자이언트베어 한달 누적 보상 카드">
+          <article class="reward-card">
+            <h3 class="reward-head">175M ~ 330M</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">150</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">30</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">165</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">900K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">330M ~ 635M</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">165</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">30</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">165</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">975K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">635M ~ 1.2B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">180</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">30</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">180</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">1.05M</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">1.2B ~ 2.4B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">195</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">45</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">180</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">1.134M</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">2.4B ~ 4.8B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">210</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">45</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">195</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">1.2M</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">4.8B ~ 9.6B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">225</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">45</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">195</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">1.275M</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">9.6B ~ 19.2B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">240</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">45</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">210</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">1.35M</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">19.2B ~ 38.4B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">255</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">45</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">210</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">1.425M</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">38.4B+</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">제작 망치</span><span class="reward-value">270</span></div>
+              <div class="reward-item"><span class="reward-label">영웅 장비 상자</span><span class="reward-value">45</span></div>
+              <div class="reward-item"><span class="reward-label">강화 부품</span><span class="reward-value">225</span></div>
+              <div class="reward-item"><span class="reward-label">연맹 코인</span><span class="reward-value">1.5M</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="callout">
+          <strong>핵심:</strong> 시작 구간인 175M 이상만 꾸준히 유지해도
+          한 달 기준으로 <strong>제작 망치 150개 / 영웅 장비 상자 30개 / 강화 부품 165개 / 연맹 코인 900K</strong>가 누적됩니다.
+        </div>
+      </section>
+
+      <section id="summary">
+        <h2>요약 정리</h2>
+        <ul class="summary-list">
+          <li>자이언트베어는 <strong>48시간마다 1회</strong>, 즉 <strong>2일에 한 번</strong> 참여 가능</li>
+          <li>30일 기준 빠짐없이 참여하면 <strong>총 15회</strong> 진행 가능</li>
+          <li>이번 표는 <strong>개인 피해 포인트 175M 이상</strong> 기준으로 계산</li>
+          <li>핵심 보상은 <strong>제작 망치 / 영웅 장비 상자 / 강화 부품 / 연맹 코인</strong></li>
+          <li>낮은 구간도 꾸준히 누적하면 체감 보상이 꽤 큰 편</li>
+        </ul>
+
+        <div class="callout">
+          <strong>한줄 정리:</strong> 자이언트베어는 2일 1회 콘텐츠라서,
+          한 달 풀참 기준 총 15번이며 꾸준히만 참여해도 누적 보상이 꽤 크게 쌓입니다.
+        </div>
+      </section>
+
+      <section id="related">
+        <h2>다음으로 이어서 보면 좋은 링크</h2>
+
+        <div class="bottom-cta" aria-label="Related guides CTA">
+          <p class="title">다음으로 이어서 보면 좋은 링크</p>
+          <p class="desc">
+            보상 계산만 보고 끝내기보다, 최신 코드와 할인충전 정보까지 같이 체크해두면
+            실제 체감 이득을 더 챙기기 좋습니다.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="/ko/guides/kingshot-giftcode.html">최신 기프트코드 보기</a>
+            <a class="btn" href="/ko/guides/topup-guide.html">킹샷 할인충전 보기</a>
+            <a class="btn" href="/ko/guides/kingshot-bearhunt.html">자이언트베어 공략 보기</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if (mqMobile && mqMobile.addEventListener) {
+        mqMobile.addEventListener('change', setStickyTop);
+      } else if (mqMobile && mqMobile.addListener) {
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

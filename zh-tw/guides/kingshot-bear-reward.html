@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <base href="/" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Kingshot 巨熊狩獵獎勵整理 | 48小時週期與每月累積計算 | Kingshot Data</title>
+  <meta name="description" content="Kingshot 的巨熊狩獵是每 48 小時可參加 1 次的內容。本文以個人傷害積分 175M 以上為基準，整理單次獎勵與每月全勤參加時的累積獎勵表。" />
+  <meta name="keywords" content="Kingshot 巨熊狩獵, Kingshot Giant Bear, Kingshot 巨熊狩獵獎勵, Kingshot 聯盟幣, Kingshot 製作鐵鎚, Kingshot 英雄裝備箱, Kingshot 強化零件" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/guides/kingshot-bear-reward.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/kingshot-bear-reward.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/kingshot-bear-reward.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/kingshot-bear-reward.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/kingshot-bear-reward.html" />
+  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/guides/kingshot-bear-reward.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot 巨熊狩獵獎勵整理" />
+  <meta property="og:description" content="以個人傷害積分 175M 以上為基準，整理巨熊狩獵從單次獎勵到每月累積獎勵的完整內容。" />
+  <meta property="og:url" content="https://kingshotdata.kr/zh-tw/guides/kingshot-bear-reward.html" />
+  <meta property="og:site_name" content="Kingshot Data" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guide/kingshot-bear-reward.webp" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kingshot 巨熊狩獵獎勵整理" />
+  <meta name="twitter:description" content="以個人傷害積分 175M 以上為基準，整理巨熊狩獵單次獎勵與每月累積獎勵表。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guide/kingshot-bear-reward.webp" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guide/kingshot-bear-reward.webp" />
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel-soft:#f8fafc;
+      --panel-blue:#f4f8ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --brand-strong:#1d4ed8;
+      --ok-bg:#ecfdf3;
+      --ok-bd:#86efac;
+      --ok-fg:#166534;
+      --warn-bg:#fff7ed;
+      --warn-bd:#fed7aa;
+      --warn-fg:#9a3412;
+      --radius:18px;
+      --radius-sm:12px;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.68 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","Microsoft JhengHei","PingFang TC",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      word-break:keep-all;
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    img{max-width:100%;height:auto}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:900;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:6px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .crumbs a{color:var(--muted)}
+
+    .hero-image{
+      margin-top:14px;
+      border:1px solid var(--border);
+      border-radius:22px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+
+    .hero-image img{
+      width:100%;
+      aspect-ratio:16 / 9;
+      object-fit:cover;
+      display:block;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);
+      gap:18px;
+      padding:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      margin-top:18px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:34px;
+      line-height:1.14;
+      letter-spacing:-.03em;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .jump{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.5}
+
+    .meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--muted);
+      font-weight:800;
+    }
+
+    .badge.ok{
+      border-color:var(--ok-bd);
+      background:var(--ok-bg);
+      color:var(--ok-fg);
+    }
+
+    .hero-side{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:var(--panel-soft);
+      padding:16px;
+    }
+
+    .hero-side h2{
+      margin:0 0 10px;
+      font-size:18px;
+      line-height:1.3;
+    }
+
+    .hero-side ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .hero-side li{margin:7px 0}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.25;
+      letter-spacing:-.02em;
+    }
+
+    section p{margin:8px 0}
+
+    .callout{
+      margin:12px 0;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--ok-bd);
+      background:var(--ok-bg);
+      color:var(--ok-fg);
+    }
+
+    .callout.warn{
+      border-color:var(--warn-bd);
+      background:var(--warn-bg);
+      color:var(--warn-fg);
+    }
+
+    .callout strong{font-weight:900}
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .stat-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:16px;
+      text-align:center;
+    }
+
+    .stat-card .big{
+      font-size:28px;
+      line-height:1.1;
+      font-weight:1000;
+      color:var(--brand-strong);
+      margin-bottom:6px;
+    }
+
+    .stat-card .small{
+      color:var(--muted);
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      border:1px solid var(--border);
+      border-radius:16px;
+      margin-top:14px;
+      background:#fff;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:760px;
+    }
+
+    th,td{
+      padding:13px 12px;
+      border-bottom:1px solid var(--border);
+      text-align:center;
+      vertical-align:middle;
+      white-space:nowrap;
+    }
+
+    th{
+      background:var(--panel-blue);
+      font-size:14px;
+      font-weight:900;
+      color:var(--text);
+    }
+
+    td{
+      font-size:14px;
+      color:var(--text);
+      font-weight:700;
+    }
+
+    td:first-child, th:first-child{
+      text-align:left;
+      white-space:normal;
+    }
+
+    tbody tr:nth-child(even){background:#fcfdff}
+    tbody tr:hover{background:#f8fbff}
+
+    .note-txt{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .summary-list{
+      margin:10px 0 0;
+      padding-left:18px;
+    }
+
+    .summary-list li{margin:7px 0}
+
+    .mobile-cards{
+      display:none;
+      margin-top:14px;
+      gap:12px;
+    }
+
+    .reward-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:14px;
+      box-shadow:0 6px 18px rgba(0,0,0,.04);
+    }
+
+    .reward-card + .reward-card{
+      margin-top:12px;
+    }
+
+    .reward-head{
+      margin:0 0 12px;
+      font-size:16px;
+      font-weight:1000;
+      line-height:1.35;
+      color:var(--text);
+    }
+
+    .reward-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+
+    .reward-item{
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:var(--panel-soft);
+      padding:10px 12px;
+    }
+
+    .reward-label{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+      margin-bottom:4px;
+    }
+
+    .reward-value{
+      display:block;
+      font-size:15px;
+      color:var(--text);
+      font-weight:1000;
+      line-height:1.25;
+    }
+
+    .bottom-cta{
+      margin-top:18px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:linear-gradient(180deg,#ffffff,#fafcff);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+
+    .bottom-cta .title{
+      margin:0 0 8px;
+      font-size:22px;
+      line-height:1.3;
+      font-weight:900;
+      color:var(--text);
+    }
+
+    .bottom-cta .desc{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:#111827;
+      font-weight:900;
+      text-decoration:none !important;
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .btn-primary:hover{color:#fff;border-color:#111827}
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+    }
+
+    @media (max-width:640px){
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:28px}
+      section{padding:15px}
+      .hero{padding:18px}
+      .bottom-cta .title{font-size:20px}
+      .cta-row .btn{width:100%}
+      .hero-image img{aspect-ratio:4 / 3}
+
+      .table-wrap{
+        display:none;
+      }
+
+      .mobile-cards{
+        display:block;
+      }
+
+      .reward-grid{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"首頁","item":"https://kingshotdata.kr/zh-tw/"},
+          {"@type":"ListItem","position":2,"name":"攻略","item":"https://kingshotdata.kr/zh-tw/guides/"},
+          {"@type":"ListItem","position":3,"name":"Kingshot 巨熊狩獵獎勵整理","item":"https://kingshotdata.kr/zh-tw/guides/kingshot-bear-reward.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"Kingshot 巨熊狩獵獎勵整理",
+        "description":"以個人傷害積分 175M 以上為基準，整理巨熊狩獵單次獎勵與每月累積獎勵的攻略頁面。",
+        "mainEntityOfPage":"https://kingshotdata.kr/zh-tw/guides/kingshot-bear-reward.html",
+        "inLanguage":"zh-Hant",
+        "author":{"@type":"Organization","name":"Kingshot Data"},
+        "publisher":{
+          "@type":"Organization",
+          "name":"Kingshot Data",
+          "logo":{"@type":"ImageObject","url":"https://kingshotdata.kr/img/kingshotdata-og-v5.png"}
+        },
+        "image":"https://kingshotdata.kr/img/guide/kingshot-bear-reward.webp"
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"巨熊狩獵多久可以參加一次？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"巨熊狩獵是每 48 小時可參加 1 次的內容，也就是每 2 天可以參加一次。"
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"如果一個月都沒有漏掉，總共可以打幾次？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"以 30 天來計算，總共可以參加 15 次。"
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"這份表格是用什麼基準計算的？",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"本表以個人傷害積分 175M 以上區間為起點整理，並以製作鐵鎚、英雄裝備箱、強化零件、聯盟幣為主要整理標準。"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="Kingshot Data Home">
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>Kingshot Data</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/ko/guides/kingshot-bear-reward.html">KO</a>
+        <a href="/en/guides/kingshot-bear-reward.html">EN</a>
+        <a href="/ja/guides/kingshot-bear-reward.html">JA</a>
+        <a href="/zh-tw/guides/kingshot-bear-reward.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">概要</a>
+      <a href="#once-reward">單次獎勵</a>
+      <a href="#monthly-reward">每月累積</a>
+      <a href="#summary">總結</a>
+      <a href="#related">下一步連結</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span>›</span>
+        <a href="/zh-tw/guides/">攻略</a> <span>›</span>
+        <span>巨熊狩獵獎勵整理</span>
+      </div>
+
+      <div class="hero-image">
+        <img src="/img/guide/kingshot-bear-reward.webp" alt="Kingshot 巨熊狩獵獎勵整理代表圖片" loading="eager" fetchpriority="high">
+      </div>
+
+      <section class="hero" id="overview">
+        <div>
+          <h1>Kingshot 巨熊狩獵獎勵整理</h1>
+          <p class="sub">
+            巨熊狩獵是每 48 小時可參加 1 次的內容。
+            也就是說，每 2 天可以參加一次，因此如果一個月都沒有漏掉，總共可以進行 15 次。
+          </p>
+          <p class="sub" style="margin-top:10px;">
+            本篇整理以 <strong>個人傷害積分 175M 以上</strong> 為計算基準，
+            並以 <strong>製作鐵鎚 / 英雄裝備箱 / 強化零件 / 聯盟幣</strong> 為主，方便你快速查看。
+          </p>
+
+          <div class="meta">
+            <span class="badge ok">每 48 小時 1 次</span>
+            <span class="badge">30 天共 15 次</span>
+            <span class="badge">175M 以上基準</span>
+            <span class="badge">含每月累積計算</span>
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#once-reward">單次獎勵表</a><span class="dotsep">•</span>
+            <a href="#monthly-reward">每月累積獎勵表</a><span class="dotsep">•</span>
+            <a href="#related">下一步連結</a>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <h2>重點快速看</h2>
+          <ul>
+            <li>巨熊狩獵是 <strong>2 天 1 次</strong> 的內容</li>
+            <li>30 天全勤基準可打 <strong>共 15 次</strong></li>
+            <li>即使是較低區間，長期累積後獎勵也很可觀</li>
+            <li>本表起始區間為 <strong>個人傷害積分 175M 以上</strong></li>
+          </ul>
+        </aside>
+      </section>
+
+      <section>
+        <h2>巨熊狩獵參加基準</h2>
+        <p>
+          巨熊狩獵不是像一般活動那樣每天都能進行，
+          而是屬於 <strong>每 48 小時才能參加 1 次</strong> 的週期型內容。
+        </p>
+
+        <div class="stats">
+          <article class="stat-card">
+            <div class="big">48小時</div>
+            <div class="small">單次參加週期</div>
+          </article>
+          <article class="stat-card">
+            <div class="big">2天</div>
+            <div class="small">實際體感間隔</div>
+          </article>
+          <article class="stat-card">
+            <div class="big">15次</div>
+            <div class="small">30 天全勤總次數</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="once-reward">
+        <h2>巨熊狩獵單次獎勵表</h2>
+        <p class="note-txt">
+          下表整理的是各個個人傷害積分區間，單次可獲得的獎勵內容。
+        </p>
+
+        <div class="table-wrap">
+          <table aria-label="巨熊狩獵單次獎勵表">
+            <thead>
+              <tr>
+                <th>傷害積分</th>
+                <th>製作鐵鎚</th>
+                <th>英雄裝備箱</th>
+                <th>強化零件</th>
+                <th>聯盟幣</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>175M ~ 330M</td><td>10</td><td>2</td><td>11</td><td>60K</td></tr>
+              <tr><td>330M ~ 635M</td><td>11</td><td>2</td><td>11</td><td>65K</td></tr>
+              <tr><td>635M ~ 1.2B</td><td>12</td><td>2</td><td>12</td><td>70K</td></tr>
+              <tr><td>1.2B ~ 2.4B</td><td>13</td><td>3</td><td>12</td><td>75.6K</td></tr>
+              <tr><td>2.4B ~ 4.8B</td><td>14</td><td>3</td><td>13</td><td>80K</td></tr>
+              <tr><td>4.8B ~ 9.6B</td><td>15</td><td>3</td><td>13</td><td>85K</td></tr>
+              <tr><td>9.6B ~ 19.2B</td><td>16</td><td>3</td><td>14</td><td>90K</td></tr>
+              <tr><td>19.2B ~ 38.4B</td><td>17</td><td>3</td><td>14</td><td>95K</td></tr>
+              <tr><td>38.4B+</td><td>18</td><td>3</td><td>15</td><td>100K</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mobile-cards" aria-label="巨熊狩獵單次獎勵卡片">
+          <article class="reward-card">
+            <h3 class="reward-head">175M ~ 330M</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">10</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">2</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">11</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">60K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">330M ~ 635M</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">11</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">2</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">11</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">65K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">635M ~ 1.2B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">12</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">2</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">12</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">70K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">1.2B ~ 2.4B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">13</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">3</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">12</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">75.6K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">2.4B ~ 4.8B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">14</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">3</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">13</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">80K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">4.8B ~ 9.6B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">15</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">3</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">13</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">85K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">9.6B ~ 19.2B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">16</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">3</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">14</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">90K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">19.2B ~ 38.4B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">17</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">3</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">14</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">95K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">38.4B+</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">18</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">3</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">15</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">100K</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="callout.warn">
+          <strong>檢查重點：</strong> 只要傷害積分區間往上提升一階，
+          製作鐵鎚與聯盟幣就會穩定增加，
+          因此你能把平均分數維持在哪個區間，會直接影響最終的累積獎勵差距。
+        </div>
+      </section>
+
+      <section id="monthly-reward">
+        <h2>巨熊狩獵每月累積獎勵表</h2>
+        <p class="note-txt">
+          下表是以 30 天都沒有漏打，也就是 <strong>總共參加 15 次</strong> 為基準計算的累積獎勵。
+        </p>
+
+        <div class="table-wrap">
+          <table aria-label="巨熊狩獵每月累積獎勵表">
+            <thead>
+              <tr>
+                <th>傷害積分</th>
+                <th>製作鐵鎚</th>
+                <th>英雄裝備箱</th>
+                <th>強化零件</th>
+                <th>聯盟幣</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>175M ~ 330M</td><td>150</td><td>30</td><td>165</td><td>900K</td></tr>
+              <tr><td>330M ~ 635M</td><td>165</td><td>30</td><td>165</td><td>975K</td></tr>
+              <tr><td>635M ~ 1.2B</td><td>180</td><td>30</td><td>180</td><td>1.05M</td></tr>
+              <tr><td>1.2B ~ 2.4B</td><td>195</td><td>45</td><td>180</td><td>1.134M</td></tr>
+              <tr><td>2.4B ~ 4.8B</td><td>210</td><td>45</td><td>195</td><td>1.2M</td></tr>
+              <tr><td>4.8B ~ 9.6B</td><td>225</td><td>45</td><td>195</td><td>1.275M</td></tr>
+              <tr><td>9.6B ~ 19.2B</td><td>240</td><td>45</td><td>210</td><td>1.35M</td></tr>
+              <tr><td>19.2B ~ 38.4B</td><td>255</td><td>45</td><td>210</td><td>1.425M</td></tr>
+              <tr><td>38.4B+</td><td>270</td><td>45</td><td>225</td><td>1.5M</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mobile-cards" aria-label="巨熊狩獵每月累積獎勵卡片">
+          <article class="reward-card">
+            <h3 class="reward-head">175M ~ 330M</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">150</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">30</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">165</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">900K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">330M ~ 635M</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">165</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">30</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">165</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">975K</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">635M ~ 1.2B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">180</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">30</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">180</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">1.05M</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">1.2B ~ 2.4B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">195</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">45</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">180</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">1.134M</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">2.4B ~ 4.8B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">210</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">45</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">195</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">1.2M</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">4.8B ~ 9.6B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">225</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">45</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">195</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">1.275M</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">9.6B ~ 19.2B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">240</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">45</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">210</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">1.35M</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">19.2B ~ 38.4B</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">255</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">45</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">210</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">1.425M</span></div>
+            </div>
+          </article>
+
+          <article class="reward-card">
+            <h3 class="reward-head">38.4B+</h3>
+            <div class="reward-grid">
+              <div class="reward-item"><span class="reward-label">製作鐵鎚</span><span class="reward-value">270</span></div>
+              <div class="reward-item"><span class="reward-label">英雄裝備箱</span><span class="reward-value">45</span></div>
+              <div class="reward-item"><span class="reward-label">強化零件</span><span class="reward-value">225</span></div>
+              <div class="reward-item"><span class="reward-label">聯盟幣</span><span class="reward-value">1.5M</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="callout">
+          <strong>重點：</strong> 只要穩定維持在起始區間 175M 以上，
+          以一個月來看就能累積 <strong>製作鐵鎚 150 個 / 英雄裝備箱 30 個 / 強化零件 165 個 / 聯盟幣 900K</strong>。
+        </div>
+      </section>
+
+      <section id="summary">
+        <h2>總結整理</h2>
+        <ul class="summary-list">
+          <li>巨熊狩獵是 <strong>每 48 小時 1 次</strong>，也就是 <strong>2 天 1 次</strong></li>
+          <li>以 30 天來算，全勤參加可進行 <strong>共 15 次</strong></li>
+          <li>本表是以 <strong>個人傷害積分 175M 以上</strong> 為基準整理</li>
+          <li>核心獎勵為 <strong>製作鐵鎚 / 英雄裝備箱 / 強化零件 / 聯盟幣</strong></li>
+          <li>即使是較低分數區間，只要持續累積，實際體感收益也會很明顯</li>
+        </ul>
+
+        <div class="callout">
+          <strong>一句話總結：</strong> 巨熊狩獵是 2 天 1 次的內容，
+          以每月全勤來算總共 15 次，只要穩定參加，累積起來的獎勵其實非常可觀。
+        </div>
+      </section>
+
+      <section id="related">
+        <h2>接下來可以一起看的連結</h2>
+
+        <div class="bottom-cta" aria-label="Related guides CTA">
+          <p class="title">接下來可以一起看的連結</p>
+          <p class="desc">
+            不只看完獎勵計算就結束，把最新兌換碼和折扣儲值資訊一起確認，
+            更能幫你把實際收益再往上拉。
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="/zh-tw/guides/kingshot-giftcode.html">查看最新禮包碼</a>
+            <a class="btn" href="/zh-tw/guides/topup-guide.html">查看 Kingshot 折扣儲值</a>
+            <a class="btn" href="/zh-tw/guides/kingshot-bearhunt.html">查看巨熊狩獵攻略</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if (mqMobile && mqMobile.addEventListener) {
+        mqMobile.addEventListener('change', setStickyTop);
+      } else if (mqMobile && mqMobile.addListener) {
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+    })();
+  </script>
+</body>
+</html>

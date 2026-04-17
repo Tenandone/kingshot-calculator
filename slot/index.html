@@ -1,0 +1,1801 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>네이버 킹샷 유저커뮤니티 이벤트</title>
+  <style>
+    :root{
+      --bg1:#fff3f6;
+      --bg2:#ffe9f1;
+      --bg3:#ffdfe9;
+      --panel:#fffafc;
+      --panel-soft:#fff7fb;
+      --line:rgba(145,84,107,.12);
+      --text:#4f3340;
+      --muted:#8d6978;
+      --pink1:#ffb7cf;
+      --pink2:#ff94b8;
+      --pink3:#ff7aa7;
+      --mint1:#d8f7ef;
+      --mint2:#a7e7d4;
+      --lav1:#e7ddff;
+      --lav2:#c7b5ff;
+      --peach1:#ffe8d4;
+      --peach2:#ffd2a8;
+      --yellow1:#fff6cf;
+      --yellow2:#ffe79b;
+      --shadow:0 16px 38px rgba(170,102,132,.14);
+      --shadow-strong:0 20px 50px rgba(170,102,132,.2);
+      --radius:24px;
+      --slot-width:520px;
+      --row-height:88px;
+      --frame-height:104px;
+      --bottom-bar-h:148px;
+      --board-width:250px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+
+    body{
+      font-family:Arial,"Malgun Gothic",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(255,183,207,.42), transparent 26%),
+        radial-gradient(circle at 100% 0%, rgba(199,181,255,.34), transparent 24%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 46%, var(--bg3) 100%);
+      min-height:100vh;
+    }
+
+    .app{
+      width:min(1240px, calc(100% - 20px));
+      margin:0 auto;
+      padding:14px 0 calc(var(--bottom-bar-h) + 24px);
+      position:relative;
+      transform-origin:center center;
+    }
+
+    @keyframes cuteEarthquake{
+      0%{transform:translate(0,0) rotate(0deg)}
+      10%{transform:translate(-4px,2px) rotate(-0.4deg)}
+      20%{transform:translate(4px,-2px) rotate(0.35deg)}
+      30%{transform:translate(-5px,1px) rotate(-0.28deg)}
+      40%{transform:translate(4px,2px) rotate(0.22deg)}
+      50%{transform:translate(-3px,-2px) rotate(-0.18deg)}
+      60%{transform:translate(3px,1px) rotate(0.15deg)}
+      70%{transform:translate(-2px,2px) rotate(-0.12deg)}
+      80%{transform:translate(2px,-1px) rotate(0.08deg)}
+      90%{transform:translate(-1px,1px) rotate(-0.05deg)}
+      100%{transform:translate(0,0) rotate(0deg)}
+    }
+
+    .app.earthquake{
+      animation:cuteEarthquake .38s ease;
+    }
+
+    .topbar{
+      text-align:center;
+      padding:8px 12px 14px;
+      position:relative;
+    }
+
+    .rabbit-header{
+      position:relative;
+      display:inline-flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:28px 28px 18px;
+      min-width:min(100%, 720px);
+      border:1px solid rgba(145,84,107,.1);
+      border-radius:30px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.88), transparent 58%),
+        linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,247,251,.96));
+      box-shadow:var(--shadow);
+      isolation:isolate;
+    }
+
+    .rabbit-header::before,
+    .rabbit-header::after{
+      content:"";
+      position:absolute;
+      top:-42px;
+      width:54px;
+      height:92px;
+      border-radius:999px 999px 24px 24px;
+      background:linear-gradient(180deg, #fffafc, #ffdbe8 62%, #ffc5d9 100%);
+      border:1px solid rgba(145,84,107,.1);
+      box-shadow:0 8px 18px rgba(170,102,132,.12);
+      z-index:-1;
+    }
+
+    .rabbit-header::before{
+      left:calc(50% - 92px);
+      transform:rotate(-12deg);
+    }
+
+    .rabbit-header::after{
+      right:calc(50% - 92px);
+      transform:rotate(12deg);
+    }
+
+    .header-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:linear-gradient(180deg, #fff7bf, #ffe28f);
+      color:#84583d;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.02em;
+      margin-bottom:10px;
+      box-shadow:0 6px 12px rgba(170,102,132,.08);
+    }
+
+    .title{
+      margin:0;
+      font-size:30px;
+      font-weight:900;
+      letter-spacing:-.03em;
+      color:#6f4255;
+      text-shadow:0 1px 0 rgba(255,255,255,.8);
+    }
+
+    .main-layout{
+      display:grid;
+      grid-template-columns:var(--board-width) minmax(0, 1fr);
+      gap:14px;
+      align-items:start;
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,248,252,.98)),
+        linear-gradient(180deg, #fffafc, #fff4f8);
+      box-shadow:var(--shadow);
+    }
+
+    .board-panel{
+      position:sticky;
+      top:12px;
+      overflow:hidden;
+    }
+
+    .board-head{
+      padding:16px 16px 12px;
+      border-bottom:1px dashed rgba(145,84,107,.12);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,183,207,.18), transparent 45%),
+        linear-gradient(180deg, #fff7fb, #fff3f8);
+    }
+
+    .board-title{
+      margin:0;
+      font-size:18px;
+      font-weight:900;
+      color:#6a4152;
+    }
+
+    .result-board{
+      padding:14px;
+      display:grid;
+      gap:10px;
+    }
+
+    .result-slot{
+      position:relative;
+      min-height:68px;
+      border-radius:18px;
+      border:1px solid rgba(145,84,107,.1);
+      background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,243,248,.9));
+      padding:12px 12px 12px 46px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      box-shadow:0 8px 20px rgba(170,102,132,.06);
+      overflow:hidden;
+    }
+
+    .result-slot::before{
+      content:"";
+      position:absolute;
+      left:12px;
+      top:50%;
+      transform:translateY(-50%);
+      width:24px;
+      height:24px;
+      border-radius:50%;
+      background:linear-gradient(180deg, #ffe7f0, #ffb9cc);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.65);
+    }
+
+    .result-slot .num{
+      position:absolute;
+      left:12px;
+      top:50%;
+      transform:translateY(-50%);
+      width:24px;
+      text-align:center;
+      font-size:11px;
+      font-weight:900;
+      color:#7a4b5f;
+      z-index:1;
+    }
+
+    .result-slot .label{
+      font-size:15px;
+      font-weight:900;
+      color:#5b3746;
+      line-height:1.35;
+      word-break:break-word;
+    }
+
+    .result-slot .meta{
+      margin-top:4px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.45;
+    }
+
+    .result-slot.empty .label{
+      color:#b48fa0;
+    }
+
+    .result-slot.filled{
+      border-color:rgba(255,122,167,.28);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(255,183,207,.22), transparent 36%),
+        linear-gradient(180deg, #fff9fc, #fff1f7);
+    }
+
+    @keyframes boardPop{
+      0%{transform:scale(.92); opacity:.35}
+      55%{transform:scale(1.04); opacity:1}
+      100%{transform:scale(1); opacity:1}
+    }
+
+    .result-slot.new-fill{
+      animation:boardPop .55s ease;
+      box-shadow:
+        0 0 0 2px rgba(255,153,187,.18),
+        0 10px 28px rgba(255,122,167,.14);
+    }
+
+    .content-area{
+      min-width:0;
+    }
+
+    .event-panel{
+      padding:14px;
+      overflow:hidden;
+    }
+
+    .event-stage{
+      position:relative;
+      padding:18px 14px 24px;
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.72), transparent 48%),
+        radial-gradient(circle at 50% 100%, rgba(255,183,207,.1), transparent 48%),
+        linear-gradient(180deg, #fff8fb 0%, #fff1f7 58%, #ffeaf2 100%);
+      min-height:650px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .event-stage::before{
+      content:"";
+      position:absolute;
+      left:-24px;
+      bottom:-30px;
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.48), transparent 70%);
+    }
+
+    .event-stage::after{
+      content:"";
+      position:absolute;
+      right:-24px;
+      top:-30px;
+      width:130px;
+      height:130px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(199,181,255,.22), transparent 70%);
+    }
+
+    .event-wrap{
+      width:min(100%, 640px);
+      position:relative;
+      z-index:1;
+    }
+
+    .event-header{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:14px;
+      gap:12px;
+      flex-direction:column;
+    }
+
+    .event-logo{
+      position:relative;
+      width:118px;
+      height:118px;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 35% 32%, rgba(255,255,255,.52), transparent 16%),
+        linear-gradient(145deg, #fffefc, #ffe2ec 35%, #fff8fb 68%, #ffd4e3 100%);
+      box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,.55),
+        0 14px 24px rgba(170,102,132,.15);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px;
+      overflow:hidden;
+    }
+
+    .event-logo::before,
+    .event-logo::after{
+      content:"";
+      position:absolute;
+      top:-24px;
+      width:30px;
+      height:52px;
+      border-radius:999px 999px 18px 18px;
+      background:linear-gradient(180deg, #fffafc, #ffd8e4 64%, #ffc0d5 100%);
+      border:1px solid rgba(145,84,107,.08);
+      z-index:-1;
+    }
+
+    .event-logo::before{
+      left:18px;
+      transform:rotate(-10deg);
+    }
+
+    .event-logo::after{
+      right:18px;
+      transform:rotate(10deg);
+    }
+
+    .event-logo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:50%;
+      display:block;
+    }
+
+    .event-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:10px 18px;
+      border-radius:999px;
+      border:1px solid rgba(145,84,107,.08);
+      background:linear-gradient(180deg, #fffdf0, #fff4c7);
+      color:#8b5f3d;
+      font-weight:900;
+      font-size:16px;
+      letter-spacing:-.02em;
+      text-align:center;
+      box-shadow:0 8px 14px rgba(170,102,132,.08);
+    }
+
+    .picker-shell{
+      position:relative;
+      border-radius:40px;
+      padding:26px 20px 22px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.22), transparent 40%),
+        linear-gradient(145deg, #ffe5ee, #ffd1e1 30%, #fff3f8 50%, #ffd0df 72%, #ffe2ec 100%);
+      box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,.55),
+        inset 0 0 0 12px rgba(255,243,248,.88),
+        var(--shadow-strong);
+    }
+
+    .picker-shell::before,
+    .picker-shell::after{
+      content:"";
+      position:absolute;
+      top:-38px;
+      width:64px;
+      height:118px;
+      border-radius:999px 999px 24px 24px;
+      background:linear-gradient(180deg, #fffafc, #ffd9e6 62%, #ffbfd4 100%);
+      border:1px solid rgba(145,84,107,.08);
+      box-shadow:0 8px 18px rgba(170,102,132,.1);
+      z-index:0;
+    }
+
+    .picker-shell::before{
+      left:64px;
+      transform:rotate(-8deg);
+    }
+
+    .picker-shell::after{
+      right:64px;
+      transform:rotate(8deg);
+    }
+
+    .picker-glass{
+      position:relative;
+      border-radius:28px;
+      padding:20px 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,248,252,.92)),
+        linear-gradient(180deg, #fffbfd 0%, #fff2f8 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.75),
+        inset 0 8px 20px rgba(255,255,255,.24),
+        inset 0 -12px 24px rgba(255,183,207,.12);
+      z-index:1;
+    }
+
+    .picker-window{
+      position:relative;
+      width:min(100%, var(--slot-width));
+      height:calc(var(--row-height) * 3);
+      margin:0 auto;
+      overflow:hidden;
+      border-radius:24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,248,252,.96)),
+        linear-gradient(180deg, #fffdfd 0%, #fff3f8 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.7),
+        inset 0 18px 30px rgba(255,255,255,.16),
+        inset 0 -18px 30px rgba(255,183,207,.08);
+    }
+
+    .picker-window::before,
+    .picker-window::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      height:calc(var(--row-height) * 0.95);
+      z-index:3;
+      pointer-events:none;
+    }
+
+    .picker-window::before{
+      top:0;
+      background:linear-gradient(180deg, rgba(255,241,247,.96), rgba(255,241,247,.05));
+    }
+
+    .picker-window::after{
+      bottom:0;
+      background:linear-gradient(180deg, rgba(255,241,247,0), rgba(255,241,247,.96));
+    }
+
+    .picker-track{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      will-change:transform;
+      transform:translateY(0);
+      z-index:1;
+    }
+
+    .picker-row{
+      height:var(--row-height);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 14px;
+    }
+
+    .picker-token{
+      width:100%;
+      height:66px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#5c3850;
+      font-weight:900;
+      font-size:28px;
+      letter-spacing:-.03em;
+      border:1px solid rgba(145,84,107,.08);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.55),
+        0 4px 10px rgba(170,102,132,.08);
+      user-select:none;
+      padding:0 18px;
+    }
+
+    .picker-token.pink{ background:linear-gradient(180deg, #ffe7f0, #ffcade 74%); }
+    .picker-token.mint{ background:linear-gradient(180deg, #ecfff8, #cbf2e5 74%); }
+    .picker-token.lav{ background:linear-gradient(180deg, #f1ecff, #ddd0ff 74%); }
+
+    .picker-author{
+      width:100%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      text-align:center;
+    }
+
+    .picker-center-frame{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:calc(100% - 14px);
+      height:var(--frame-height);
+      transform:translate(-50%, -50%);
+      border-radius:22px;
+      z-index:4;
+      pointer-events:none;
+      box-shadow:
+        0 0 0 2px rgba(255,255,255,.98),
+        0 0 0 8px rgba(255,153,187,.14),
+        0 10px 24px rgba(170,102,132,.12),
+        0 0 24px rgba(255,173,201,.22);
+      background:linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,.08));
+    }
+
+    .picker-center-frame::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:22px;
+      border:2px solid rgba(255,143,176,.62);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+    }
+
+    .picker-center-line{
+      position:absolute;
+      left:50%;
+      top:10px;
+      bottom:10px;
+      width:4px;
+      transform:translateX(-50%);
+      border-radius:999px;
+      background:linear-gradient(180deg, #fffefb, #ffc7db 52%, #fffefb);
+      box-shadow:0 0 12px rgba(255,184,207,.45);
+      opacity:.95;
+    }
+
+    .picker-center-frame.glow{
+      box-shadow:
+        0 0 0 2px rgba(255,255,255,.98),
+        0 0 0 8px rgba(255,143,176,.16),
+        0 10px 24px rgba(170,102,132,.12),
+        0 0 40px rgba(255,173,201,.44);
+    }
+
+    .live-box{
+      width:min(100%, 620px);
+      margin:16px auto 0;
+      border:1px solid rgba(145,84,107,.08);
+      border-radius:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,247,251,.96));
+      padding:16px 14px;
+      text-align:center;
+      box-shadow:0 12px 26px rgba(170,102,132,.08);
+      z-index:1;
+    }
+
+    .box-title{
+      margin:0 0 10px;
+      font-size:17px;
+      font-weight:900;
+      color:#6b4455;
+    }
+
+    .live-name{
+      font-size:34px;
+      font-weight:900;
+      line-height:1.1;
+      color:#6f4255;
+      text-shadow:0 1px 0 rgba(255,255,255,.8);
+      min-height:44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      word-break:break-word;
+    }
+
+    .live-sub{
+      margin-top:8px;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.6;
+      min-height:24px;
+    }
+
+    .section{
+      margin-top:12px;
+      padding:16px;
+    }
+
+    .section h2{
+      margin:0 0 10px;
+      font-size:19px;
+      color:#6b4455;
+    }
+
+    textarea{
+      width:100%;
+      min-height:220px;
+      border:1px solid rgba(145,84,107,.1);
+      border-radius:18px;
+      padding:14px;
+      resize:vertical;
+      background:#fffafd;
+      color:var(--text);
+      font-size:13px;
+      line-height:1.65;
+      outline:none;
+      box-shadow:inset 0 4px 10px rgba(170,102,132,.04);
+    }
+
+    .status{
+      margin-top:10px;
+      font-size:12px;
+      color:#9e6e83;
+      line-height:1.55;
+      white-space:pre-line;
+    }
+
+    .ticket-summary{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .ticket-item{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(145,84,107,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,245,249,.92));
+    }
+
+    .ticket-rank{
+      width:34px;
+      height:34px;
+      flex:0 0 34px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      font-size:13px;
+      font-weight:900;
+      color:#6e4356;
+      background:linear-gradient(180deg, #fff0f6, #ffd2df);
+      box-shadow:inset 0 1px 2px rgba(255,255,255,.75);
+    }
+
+    .ticket-text{
+      min-width:0;
+      flex:1;
+    }
+
+    .ticket-title{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.45;
+      margin-bottom:4px;
+      word-break:break-word;
+      color:#5b3746;
+    }
+
+    .ticket-meta{
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.6;
+      word-break:break-word;
+    }
+
+    .bottom-bar{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:60;
+      padding:12px 12px calc(12px + env(safe-area-inset-bottom));
+      background:
+        linear-gradient(180deg, rgba(255,245,249,.45), rgba(255,245,249,.92) 24%, rgba(255,245,249,.98) 100%);
+      backdrop-filter:blur(10px);
+      border-top:1px solid rgba(145,84,107,.08);
+      box-shadow:0 -8px 24px rgba(170,102,132,.08);
+    }
+
+    .bottom-inner{
+      width:min(980px, calc(100% - 4px));
+      margin:0 auto;
+      display:grid;
+      gap:10px;
+    }
+
+    .count-row,
+    .action-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .count-btn,.action-btn{
+      appearance:none;
+      border:1px solid rgba(145,84,107,.1);
+      background:linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,245,249,.94));
+      color:var(--text);
+      border-radius:16px;
+      padding:14px 12px;
+      font-weight:800;
+      font-size:14px;
+      cursor:pointer;
+      transition:.2s ease;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.85);
+    }
+
+    .count-btn.active{
+      border-color:rgba(255,122,167,.42);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,173,201,.18), transparent 56%),
+        linear-gradient(180deg, #fff8fb, #ffeef5);
+      color:#6f4255;
+    }
+
+    .count-btn .big{
+      display:block;
+      font-size:18px;
+      margin-bottom:0;
+      font-weight:900;
+    }
+
+    .action-btn.primary{
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,195,213,.26), transparent 55%),
+        linear-gradient(180deg, #ffd8e6, #ffc1d7 55%, #ffadca 100%);
+      border-color:rgba(255,153,187,.34);
+      color:#714557;
+    }
+
+    .action-btn.secondary{
+      background:linear-gradient(180deg, #e7ddff, #d5c5ff);
+      color:#614f8a;
+    }
+
+    .action-btn.ghost{
+      background:linear-gradient(180deg, #fffafc, #fff0f6);
+    }
+
+    .action-btn:disabled,
+    .count-btn:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+
+    .popup{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:100;
+      background:rgba(109,73,90,.24);
+      backdrop-filter:blur(8px);
+    }
+
+    .popup.show{display:flex}
+
+    @keyframes popupBounce{
+      0%{transform:translateY(18px) scale(.94); opacity:0}
+      55%{transform:translateY(-4px) scale(1.02); opacity:1}
+      100%{transform:translateY(0) scale(1); opacity:1}
+    }
+
+    .popup-card{
+      width:min(100%, 620px);
+      border-radius:28px;
+      border:1px solid rgba(145,84,107,.1);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,219,231,.4), transparent 40%),
+        linear-gradient(180deg, #fffbfd 0%, #fff3f8 100%);
+      box-shadow:0 20px 60px rgba(170,102,132,.18);
+      padding:20px 18px 18px;
+      position:relative;
+      animation:popupBounce .45s ease;
+      overflow:hidden;
+    }
+
+    .popup-card::before,
+    .popup-card::after{
+      content:"";
+      position:absolute;
+      top:-22px;
+      width:34px;
+      height:56px;
+      border-radius:999px 999px 18px 18px;
+      background:linear-gradient(180deg, #fffafc, #ffd6e3 68%, #ffc2d6 100%);
+      border:1px solid rgba(145,84,107,.08);
+    }
+
+    .popup-card::before{
+      left:32px;
+      transform:rotate(-10deg);
+    }
+
+    .popup-card::after{
+      right:32px;
+      transform:rotate(10deg);
+    }
+
+    .popup-title{
+      margin:0 0 8px;
+      text-align:center;
+      font-size:24px;
+      font-weight:900;
+      color:#6f4255;
+    }
+
+    .popup-sub{
+      text-align:center;
+      color:#9b6d82;
+      font-size:14px;
+      line-height:1.7;
+      margin-bottom:14px;
+    }
+
+    .gift-card-box{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .gift-card-image{
+      width:min(100%, 260px);
+      display:block;
+      border-radius:20px;
+      box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,.55),
+        0 12px 28px rgba(170,102,132,.12);
+    }
+
+    .winner-message{
+      text-align:center;
+      font-size:22px;
+      font-weight:900;
+      color:#6f4255;
+      line-height:1.45;
+      margin-bottom:14px;
+      word-break:keep-all;
+    }
+
+    .popup-list{
+      display:grid;
+      gap:10px;
+      margin-bottom:16px;
+      max-height:360px;
+      overflow:auto;
+    }
+
+    .popup-item{
+      border:1px solid rgba(145,84,107,.08);
+      border-radius:16px;
+      padding:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,244,249,.92));
+    }
+
+    .popup-item strong{
+      display:block;
+      font-size:15px;
+      line-height:1.45;
+      margin-bottom:4px;
+      word-break:break-word;
+      color:#5b3746;
+    }
+
+    .popup-item span{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.6;
+      word-break:break-word;
+    }
+
+    .popup-close{
+      width:100%;
+      border:0;
+      border-radius:16px;
+      padding:14px 12px;
+      font-size:14px;
+      font-weight:900;
+      cursor:pointer;
+      color:#6f4255;
+      background:linear-gradient(180deg, #ffe7f0, #ffc8d8);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+    }
+
+    @media (max-width: 1024px){
+      .main-layout{
+        grid-template-columns:1fr;
+      }
+
+      .board-panel{
+        position:relative;
+        top:auto;
+      }
+
+      .result-board{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px){
+      :root{
+        --slot-width:min(100%, 360px);
+        --row-height:72px;
+        --frame-height:88px;
+        --bottom-bar-h:158px;
+      }
+
+      .title{
+        font-size:22px;
+      }
+
+      .rabbit-header{
+        padding:22px 18px 16px;
+      }
+
+      .rabbit-header::before,
+      .rabbit-header::after{
+        width:42px;
+        height:76px;
+        top:-32px;
+      }
+
+      .event-stage{
+        min-height:540px;
+        padding-top:16px;
+      }
+
+      .event-logo{
+        width:92px;
+        height:92px;
+      }
+
+      .picker-shell::before,
+      .picker-shell::after{
+        width:48px;
+        height:92px;
+        top:-28px;
+      }
+
+      .picker-token{
+        height:56px;
+        font-size:22px;
+      }
+
+      .live-name{
+        font-size:26px;
+        min-height:34px;
+      }
+
+      .count-btn .big{
+        font-size:16px;
+      }
+
+      .winner-message{
+        font-size:18px;
+      }
+
+      .result-board{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z2MJ6TXZHK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Z2MJ6TXZHK');
+  </script>
+
+</head>
+<body>
+  <div class="app" id="appRoot">
+    <div class="topbar">
+      <div class="rabbit-header">
+        <div class="header-badge">NAVER KINGSHOT USER COMMUNITY EVENT</div>
+        <h1 class="title">네이버 킹샷 유저커뮤니티 이벤트</h1>
+      </div>
+    </div>
+
+    <div class="main-layout">
+      <aside class="panel board-panel">
+        <div class="board-head">
+          <h2 class="board-title">선정 인원</h2>
+        </div>
+        <div class="result-board" id="resultBoard"></div>
+      </aside>
+
+      <div class="content-area">
+        <div class="panel event-panel main-stage">
+          <div class="event-stage">
+            <div class="event-wrap">
+              <div class="event-header">
+                <div class="event-logo">
+                  <img src="/img/cute-event-character.png" alt="이벤트 캐릭터" onerror="this.style.display='none'">
+                </div>
+                <div class="event-badge" id="eventBadge">5명 선정</div>
+              </div>
+
+              <div class="picker-shell">
+                <div class="picker-glass">
+                  <div class="picker-window" id="pickerWindow">
+                    <div class="picker-track" id="pickerTrack"></div>
+                    <div class="picker-center-frame" id="pickerFrame">
+                      <div class="picker-center-line"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="live-box">
+              <h3 class="box-title">현재 추첨 대상</h3>
+              <div class="live-name" id="liveName">대기 중</div>
+              <div class="live-sub" id="liveSub"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel section">
+          <h2>작성자별 참여 현황</h2>
+          <div class="ticket-summary" id="ticketSummary"></div>
+        </div>
+
+        <div class="panel section">
+          <h2>오늘하루 게시판 참여자 불러오기</h2>
+          <textarea id="rawInput" placeholder="여기에 오늘하루 게시판 데이터를 붙여넣어"></textarea>
+          <div class="status" id="statusText"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="bottom-inner">
+      <div class="count-row">
+        <button class="count-btn active" id="count5Btn" type="button">
+          <span class="big">5명 선정</span>
+        </button>
+        <button class="count-btn" id="count10Btn" type="button">
+          <span class="big">10명 선정</span>
+        </button>
+      </div>
+
+      <div class="action-row">
+        <button class="action-btn primary" id="parseBtn" type="button">데이터 분석</button>
+        <button class="action-btn secondary" id="spinBtn" type="button" disabled>추첨 시작</button>
+      </div>
+
+      <div class="action-row">
+        <button class="action-btn ghost" id="autoBtn" type="button" disabled>자동 추첨</button>
+        <button class="action-btn ghost" id="resetBtn" type="button">초기화</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup" id="popup">
+    <div class="popup-card">
+      <h2 class="popup-title" id="popupTitle">추첨 결과 안내</h2>
+
+      <div class="gift-card-box">
+        <img
+          class="gift-card-image"
+          src="/img/naver-gift.png"
+          alt="네이버상품권 1만원"
+          onerror="this.style.display='none'"
+        />
+      </div>
+
+      <div class="winner-message" id="winnerMessage">선정되신 것을 축하드립니다.</div>
+
+      <div class="popup-sub" id="popupSub">네이버상품권 1만원</div>
+
+      <div class="popup-list" id="popupList"></div>
+
+      <button class="popup-close" id="popupClose" type="button">확인</button>
+    </div>
+  </div>
+
+  <script>
+    const EXCLUDED_AUTHORS = new Set(['Ten']);
+
+    const state = {
+      extraMode: '5',
+      posts: [],
+      authorEntries: [],
+      results: [],
+      spinning: false,
+      currentTrackItems: [],
+      currentRenderedItems: [],
+      currentOffset: 0,
+      popupLocked: false,
+      lastAddedAuthor: ''
+    };
+
+    const els = {
+      appRoot: document.getElementById('appRoot'),
+      count5Btn: document.getElementById('count5Btn'),
+      count10Btn: document.getElementById('count10Btn'),
+      parseBtn: document.getElementById('parseBtn'),
+      spinBtn: document.getElementById('spinBtn'),
+      autoBtn: document.getElementById('autoBtn'),
+      resetBtn: document.getElementById('resetBtn'),
+      rawInput: document.getElementById('rawInput'),
+      statusText: document.getElementById('statusText'),
+      pickerWindow: document.getElementById('pickerWindow'),
+      pickerTrack: document.getElementById('pickerTrack'),
+      pickerFrame: document.getElementById('pickerFrame'),
+      liveName: document.getElementById('liveName'),
+      liveSub: document.getElementById('liveSub'),
+      ticketSummary: document.getElementById('ticketSummary'),
+      popup: document.getElementById('popup'),
+      popupTitle: document.getElementById('popupTitle'),
+      popupSub: document.getElementById('popupSub'),
+      popupList: document.getElementById('popupList'),
+      popupClose: document.getElementById('popupClose'),
+      winnerMessage: document.getElementById('winnerMessage'),
+      eventBadge: document.getElementById('eventBadge'),
+      resultBoard: document.getElementById('resultBoard')
+    };
+
+    function escapeHtml(str){
+      return String(str ?? '')
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#39;");
+    }
+
+    function sleep(ms){
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function formatNo(no){
+      return String(no).padStart(2, '0');
+    }
+
+    function cleanTitle(raw){
+      return String(raw || '').replace(/댓글수\[\d+\]/g, '').trim();
+    }
+
+    function easeOutCubic(t){
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function getRowHeight(){
+      const v = getComputedStyle(document.documentElement).getPropertyValue('--row-height').trim();
+      return parseFloat(v) || 88;
+    }
+
+    function getCenterIndexForWindow(){
+      return 1;
+    }
+
+    function triggerEarthquake(){
+      const app = els.appRoot;
+      if(!app) return;
+
+      app.classList.remove('earthquake');
+      void app.offsetWidth;
+      app.classList.add('earthquake');
+
+      setTimeout(() => {
+        app.classList.remove('earthquake');
+      }, 420);
+    }
+
+    function parsePosts(raw){
+      const normalized = String(raw || '').replace(/\r/g, '');
+      const blocks = normalized.split(/\n\s*\n+/).map(v => v.trim()).filter(Boolean);
+      const posts = [];
+
+      for(const block of blocks){
+        const lines = block.split('\n').map(v => v.trim()).filter(Boolean);
+        if(lines.length < 4) continue;
+
+        const idLine = lines[0];
+        const titleLine = lines[1];
+        const authorLine = lines[2];
+        const metaLine = lines[3];
+
+        const idMatch = idLine.match(/^(\d+)$/);
+        const commentMatch = titleLine.match(/댓글수\[(\d+)\]/);
+        const metaMatch = metaLine.match(/^(\d{4}\.\d{2}\.\d{2}\.)\s+(\d+)\s+(\d+)$/);
+
+        if(!idMatch || !commentMatch || !metaMatch) continue;
+
+        posts.push({
+          id: Number(idMatch[1]),
+          title: cleanTitle(titleLine),
+          author: authorLine,
+          date: metaMatch[1],
+          views: Number(metaMatch[2]),
+          likes: Number(metaMatch[3]),
+          comments: Number(commentMatch[1])
+        });
+      }
+
+      return posts;
+    }
+
+    function assignFixedNumbers(posts){
+      return posts.map((post, idx) => ({
+        ...post,
+        fixedNo: idx + 1
+      }));
+    }
+
+    function buildAuthorEntries(posts){
+      const authorMap = new Map();
+
+      for(const post of posts){
+        if(EXCLUDED_AUTHORS.has(post.author)) continue;
+
+        if(!authorMap.has(post.author)){
+          authorMap.set(post.author, {
+            author: post.author,
+            entryCount: 0,
+            representative: post,
+            posts: []
+          });
+        }
+
+        const entry = authorMap.get(post.author);
+        entry.entryCount += 1;
+        entry.posts.push(post);
+      }
+
+      return [...authorMap.values()].sort((a, b) => {
+        if(b.entryCount !== a.entryCount) return b.entryCount - a.entryCount;
+        return a.author.localeCompare(b.author, 'ko');
+      });
+    }
+
+    function getCurrentSelectedAuthors(){
+      return new Set(state.results.map(v => v.author));
+    }
+
+    function buildAvailableEntries(){
+      const selectedAuthors = getCurrentSelectedAuthors();
+      const entries = [];
+
+      for(const entry of state.authorEntries){
+        if(selectedAuthors.has(entry.author)) continue;
+
+        for(let i = 0; i < entry.entryCount; i++){
+          entries.push({
+            author: entry.author,
+            representative: entry.representative,
+            entryNo: i + 1,
+            totalEntries: entry.entryCount
+          });
+        }
+      }
+
+      return entries;
+    }
+
+    function getRemainingAuthorEntries(){
+      const selectedAuthors = getCurrentSelectedAuthors();
+      return state.authorEntries.filter(entry => !selectedAuthors.has(entry.author));
+    }
+
+    function getCountTarget(){
+      return state.extraMode === '5' ? 5 : 10;
+    }
+
+    function getTokenType(idx){
+      const types = ['pink', 'mint', 'lav'];
+      return types[idx % types.length];
+    }
+
+    function buildTrackItems(sourceEntries){
+      if(!sourceEntries.length){
+        return [{
+          author: '',
+          label: '대기 중',
+          representative: null,
+          entryNo: 0,
+          totalEntries: 0,
+          type: 'mint'
+        }];
+      }
+
+      return sourceEntries.map((entry, idx) => ({
+        ...entry,
+        label: entry.author,
+        type: getTokenType(idx)
+      }));
+    }
+
+    function renderTrack(items){
+      state.currentTrackItems = items;
+
+      const repeated = [];
+      const repeatCount = items.length === 1 ? 7 : 18;
+
+      for(let r = 0; r < repeatCount; r++){
+        for(let i = 0; i < items.length; i++){
+          repeated.push({
+            ...items[i],
+            renderKey: `${r}-${i}`
+          });
+        }
+      }
+
+      state.currentRenderedItems = repeated;
+
+      els.pickerTrack.innerHTML = repeated.map((item, renderIndex) => `
+        <div class="picker-row" data-render-index="${renderIndex}" data-author="${escapeHtml(item.author)}">
+          <div class="picker-token ${item.type}">
+            <span class="picker-author">${escapeHtml(item.label)}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setTrackOffset(offset){
+      state.currentOffset = offset;
+      els.pickerTrack.style.transform = `translateY(${offset}px)`;
+    }
+
+    function getTrackCenterOffsetForAbsoluteIndex(index){
+      const rowH = getRowHeight();
+      const centerIndex = getCenterIndexForWindow();
+      return -((index - centerIndex) * rowH);
+    }
+
+    function renderTrackPreview(){
+      const entries = buildAvailableEntries();
+      renderTrack(buildTrackItems(entries));
+      setTrackOffset(0);
+    }
+
+    function renderEntrySummary(){
+      const entries = getRemainingAuthorEntries();
+
+      if(!state.authorEntries.length){
+        els.ticketSummary.innerHTML = `
+          <div class="ticket-item">
+            <div class="ticket-rank">-</div>
+            <div class="ticket-text">
+              <div class="ticket-title">표시할 참여자가 없어</div>
+              <div class="ticket-meta"></div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      if(!entries.length){
+        els.ticketSummary.innerHTML = `
+          <div class="ticket-item">
+            <div class="ticket-rank">-</div>
+            <div class="ticket-text">
+              <div class="ticket-title">남은 선정 대상이 없어</div>
+              <div class="ticket-meta"></div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      els.ticketSummary.innerHTML = entries.map((entry, idx) => `
+        <div class="ticket-item">
+          <div class="ticket-rank">${idx + 1}</div>
+          <div class="ticket-text">
+            <div class="ticket-title">${escapeHtml(entry.author)} 참여 ${entry.entryCount}회</div>
+            <div class="ticket-meta">게시글 ${entry.entryCount}개 작성</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderResultBoard(){
+      const target = getCountTarget();
+      const cards = [];
+
+      for(let i = 0; i < target; i++){
+        const result = state.results[i];
+        const isNew = result && state.lastAddedAuthor && result.author === state.lastAddedAuthor && i === state.results.length - 1;
+
+        if(result){
+          cards.push(`
+            <div class="result-slot filled ${isNew ? 'new-fill' : ''}">
+              <div class="num">${formatNo(i + 1)}</div>
+              <div class="label">${escapeHtml(result.author)}</div>
+              <div class="meta">네이버상품권 1만원 | 참여 ${result.totalEntries}회</div>
+            </div>
+          `);
+        } else {
+          cards.push(`
+            <div class="result-slot empty">
+              <div class="num">${formatNo(i + 1)}</div>
+              <div class="label">대기 중</div>
+              <div class="meta"></div>
+            </div>
+          `);
+        }
+      }
+
+      els.resultBoard.innerHTML = cards.join('');
+    }
+
+    function updateButtons(){
+      const hasPosts = state.posts.length > 0;
+      const targetCount = getCountTarget();
+      const currentPool = buildAvailableEntries();
+      const remainingAuthors = getRemainingAuthorEntries().length;
+      const canSpin = hasPosts && !state.spinning && state.results.length < targetCount && currentPool.length > 0 && remainingAuthors > 0;
+
+      els.spinBtn.disabled = !canSpin;
+      els.autoBtn.disabled = !canSpin;
+    }
+
+    function updateEventBadge(){
+      const target = getCountTarget();
+      const remain = Math.max(0, target - state.results.length);
+      els.eventBadge.textContent = `${target}명 선정 | 남은 인원 ${remain}명`;
+    }
+
+    function setLiveEntry(entry, prefix = ''){
+      if(!entry){
+        els.liveName.textContent = '대기 중';
+        els.liveSub.textContent = '';
+        return;
+      }
+
+      els.liveName.textContent = prefix ? `${prefix} ${entry.author}` : entry.author;
+      els.liveSub.textContent = `참여 ${entry.totalEntries}회`;
+    }
+
+    function closePopup(force = false){
+      if(state.popupLocked && !force) return;
+      els.popup.classList.remove('show');
+    }
+
+    async function showWinnerPopup(entry, autoClose = true){
+      els.popupTitle.textContent = `${state.results.length}번째 선정 결과`;
+      els.winnerMessage.textContent = `${entry.author}님 선정되신 것을 축하드립니다.`;
+      els.popupSub.textContent = `네이버상품권 1만원`;
+
+      els.popupList.innerHTML = `
+        <div class="popup-item">
+          <strong>${escapeHtml(entry.author)}님 네이버상품권 1만원 선정</strong>
+          <span>참여 ${entry.totalEntries}회</span>
+        </div>
+      `;
+
+      els.popup.classList.add('show');
+
+      if(!autoClose) return;
+
+      state.popupLocked = true;
+      await sleep(1500);
+      state.popupLocked = false;
+      closePopup(true);
+      await sleep(180);
+    }
+
+    function showFinalPopup(){
+      els.popupTitle.textContent = `최종 선정 인원 ${state.results.length}명`;
+      els.winnerMessage.textContent = `최종 선정되신 모든 분들 축하드립니다.`;
+      els.popupSub.textContent = `네이버상품권 1만원`;
+
+      els.popupList.innerHTML = state.results.map((entry, idx) => `
+        <div class="popup-item">
+          <strong>${formatNo(idx + 1)}. ${escapeHtml(entry.author)}님</strong>
+          <span>네이버상품권 1만원 선정 | 참여 ${entry.totalEntries}회</span>
+        </div>
+      `).join('');
+
+      els.popup.classList.add('show');
+    }
+
+    async function animateTrack(fromOffset, toOffset, duration, easingFn){
+      return new Promise(resolve => {
+        const startTs = performance.now();
+
+        function frame(now){
+          const elapsed = now - startTs;
+          const t = Math.min(1, elapsed / duration);
+          const eased = easingFn(t);
+          const current = fromOffset + (toOffset - fromOffset) * eased;
+          setTrackOffset(current);
+
+          if(t < 1){
+            requestAnimationFrame(frame);
+          } else {
+            resolve();
+          }
+        }
+
+        requestAnimationFrame(frame);
+      });
+    }
+
+    function getCenteredRenderedItem(){
+      const rows = els.pickerTrack.querySelectorAll('.picker-row');
+      if(!rows.length) return null;
+
+      const frameRect = els.pickerFrame.getBoundingClientRect();
+      const frameCenterY = frameRect.top + (frameRect.height / 2);
+
+      let closestRow = null;
+      let closestDistance = Infinity;
+
+      rows.forEach(row => {
+        const rect = row.getBoundingClientRect();
+        const rowCenterY = rect.top + (rect.height / 2);
+        const distance = Math.abs(rowCenterY - frameCenterY);
+
+        if(distance < closestDistance){
+          closestDistance = distance;
+          closestRow = row;
+        }
+      });
+
+      if(!closestRow) return null;
+
+      const renderIndex = Number(closestRow.dataset.renderIndex);
+      if(Number.isNaN(renderIndex)) return null;
+
+      return state.currentRenderedItems[renderIndex] || null;
+    }
+
+    async function animatePickerAndGetWinner(){
+      const items = state.currentTrackItems;
+      const total = items.length;
+
+      if(!total){
+        return null;
+      }
+
+      if(total === 1){
+        const centerAbsoluteIndex = 1;
+        const centerOffset = getTrackCenterOffsetForAbsoluteIndex(centerAbsoluteIndex);
+        setTrackOffset(centerOffset);
+
+        const winnerEntry = items[0] || null;
+        if(winnerEntry) setLiveEntry(winnerEntry, '선정');
+        return winnerEntry;
+      }
+
+      const rowH = getRowHeight();
+      const start = 0;
+      const baseLoops = 10 + Math.floor(Math.random() * 3);
+      const winnerIndex = Math.floor(Math.random() * total);
+
+      const absoluteIndexForWinner = baseLoops * total + winnerIndex + getCenterIndexForWindow();
+      const finalTarget = getTrackCenterOffsetForAbsoluteIndex(absoluteIndexForWinner);
+      const overshoot = rowH * (0.22 + Math.random() * 0.12);
+
+      const phase1 = finalTarget - overshoot;
+      const phase2 = finalTarget + (overshoot * 0.35);
+
+      els.pickerFrame.classList.add('glow');
+
+      await animateTrack(start, phase1, 3900, easeOutCubic);
+      await animateTrack(phase1, phase2, 240, easeOutCubic);
+      await animateTrack(phase2, finalTarget, 180, easeOutCubic);
+
+      els.pickerFrame.classList.remove('glow');
+
+      const snappedFinalTarget = Math.round(finalTarget / rowH) * rowH;
+      setTrackOffset(snappedFinalTarget);
+
+      await sleep(30);
+
+      const centeredItem = getCenteredRenderedItem();
+      const winnerEntry = centeredItem || items[winnerIndex] || null;
+
+      if(winnerEntry){
+        setLiveEntry(winnerEntry, '선정');
+      }
+
+      return winnerEntry;
+    }
+
+    function analyzeData(){
+      const parsed = parsePosts(els.rawInput.value);
+      const posts = assignFixedNumbers(parsed);
+
+      state.posts = posts;
+      state.authorEntries = buildAuthorEntries(posts);
+      state.results = [];
+      state.spinning = false;
+      state.currentOffset = 0;
+      state.popupLocked = false;
+      state.lastAddedAuthor = '';
+
+      if(!posts.length){
+        els.statusText.textContent = '';
+        renderTrack(buildTrackItems([]));
+        renderEntrySummary();
+        renderResultBoard();
+        setLiveEntry(null);
+        updateEventBadge();
+        updateButtons();
+        return;
+      }
+
+      renderTrackPreview();
+      renderEntrySummary();
+      renderResultBoard();
+      setLiveEntry(null);
+
+      els.statusText.textContent = '';
+
+      updateEventBadge();
+      updateButtons();
+    }
+
+    async function pickOneRound(){
+      const pool = buildAvailableEntries();
+      const targetCount = getCountTarget();
+
+      if(!pool.length) return;
+      if(state.results.length >= targetCount) return;
+
+      state.spinning = true;
+      updateButtons();
+
+      renderTrack(buildTrackItems(pool));
+      setTrackOffset(0);
+
+      const winnerEntry = await animatePickerAndGetWinner();
+
+      if(!winnerEntry){
+        state.spinning = false;
+        updateButtons();
+        return;
+      }
+
+      const finalWinner = {
+        author: winnerEntry.author,
+        totalEntries: winnerEntry.totalEntries
+      };
+
+      if(!state.results.some(v => v.author === finalWinner.author)){
+        state.results.push(finalWinner);
+        state.lastAddedAuthor = finalWinner.author;
+        renderResultBoard();
+        triggerEarthquake();
+      }
+
+      renderEntrySummary();
+      updateEventBadge();
+      await showWinnerPopup(finalWinner, true);
+
+      state.currentOffset = 0;
+      renderTrackPreview();
+
+      els.statusText.textContent = '';
+
+      state.spinning = false;
+      updateButtons();
+
+      if(state.results.length >= targetCount || getRemainingAuthorEntries().length === 0){
+        state.lastAddedAuthor = '';
+        renderResultBoard();
+        showFinalPopup();
+      }
+    }
+
+    async function spinMain(){
+      if(state.spinning) return;
+      if(!state.posts.length) return;
+
+      closePopup(true);
+      await pickOneRound();
+    }
+
+    async function autoRun(){
+      if(state.spinning || !state.posts.length) return;
+
+      closePopup(true);
+
+      while(!state.spinning && state.results.length < getCountTarget() && getRemainingAuthorEntries().length > 0){
+        await pickOneRound();
+
+        if(state.results.length < getCountTarget()){
+          closePopup(true);
+          await sleep(420);
+        }
+      }
+    }
+
+    function resetAll(){
+      state.posts = [];
+      state.authorEntries = [];
+      state.results = [];
+      state.spinning = false;
+      state.currentTrackItems = [];
+      state.currentRenderedItems = [];
+      state.currentOffset = 0;
+      state.popupLocked = false;
+      state.lastAddedAuthor = '';
+
+      els.rawInput.value = '';
+      els.statusText.textContent = '';
+      closePopup(true);
+
+      renderTrack(buildTrackItems([]));
+      renderEntrySummary();
+      renderResultBoard();
+      setLiveEntry(null);
+      updateEventBadge();
+      updateButtons();
+    }
+
+    function setExtraMode(value){
+      state.extraMode = value;
+      els.count5Btn.classList.toggle('active', value === '5');
+      els.count10Btn.classList.toggle('active', value === '10');
+
+      state.results = [];
+      state.currentOffset = 0;
+      state.lastAddedAuthor = '';
+      closePopup(true);
+
+      renderTrackPreview();
+      renderEntrySummary();
+      renderResultBoard();
+      setLiveEntry(null);
+      updateEventBadge();
+      updateButtons();
+    }
+
+    els.count5Btn.addEventListener('click', () => setExtraMode('5'));
+    els.count10Btn.addEventListener('click', () => setExtraMode('10'));
+    els.parseBtn.addEventListener('click', analyzeData);
+    els.spinBtn.addEventListener('click', spinMain);
+    els.autoBtn.addEventListener('click', autoRun);
+    els.resetBtn.addEventListener('click', resetAll);
+    els.popupClose.addEventListener('click', () => closePopup());
+    els.popup.addEventListener('click', (e) => {
+      if(e.target === els.popup) closePopup();
+    });
+
+    renderTrack(buildTrackItems([]));
+    renderEntrySummary();
+    renderResultBoard();
+    setLiveEntry(null);
+    updateEventBadge();
+    updateButtons();
+  </script>
+</body>
+</html>
