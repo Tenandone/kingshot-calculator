@@ -1,0 +1,1168 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>킹샷 낚시 이벤트 공략 가이드 | 랭킹 진입 팁과 보물 단계 운영 | 킹샷데이터코리아</title>
+  <meta name="description" content="킹샷 낚시 이벤트 기본 구조, 장비 업그레이드, 보물 단계 점수 운영, 조수 나팔 활용, 다시하기 팁, 랭킹 진입 전략과 보상 스킨 도감을 한 번에 정리한 가이드입니다." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/ko/guides/fishing-event-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/fishing-event-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/fishing-event-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/fishing-event-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/fishing-event-guide.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guide/fishing-event-guide.webp" />
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="킹샷 낚시 이벤트 공략 가이드" />
+  <meta property="og:description" content="낚시 이벤트 기본 정보부터 랭킹 진입 전략, 보물 단계 점수 운영, 다시하기 팁, 보상 스킨 도감까지 정리한 실전 가이드." />
+  <meta property="og:url" content="https://kingshotdata.kr/ko/guides/fishing-event-guide.html" />
+  <meta property="og:site_name" content="킹샷데이터코리아" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guide/fishing-event-guide.webp" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="킹샷 낚시 이벤트 공략 가이드" />
+  <meta name="twitter:description" content="조수 나팔, 보물 단계, 랭킹 운영, 다시하기 팁, 보상 스킨 도감까지 한 번에 보는 낚시 이벤트 공략." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guide/fishing-event-guide.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#111827;
+      --danger:#dc2626;
+      --warn:#b45309;
+      --warn-bg:rgba(245,158,11,.08);
+      --warn-border:rgba(245,158,11,.35);
+      --soft-bg:#f8fbff;
+      --soft-border:#dbeafe;
+      --ok-bg:#f0fdf4;
+      --ok-border:#bbf7d0;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:18px;
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.68 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    body.modal-open{
+      overflow:hidden;
+    }
+
+    img{max-width:100%}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:8px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:20px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-visual{
+      width:160px;
+      height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:16px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      overflow:hidden;
+    }
+
+    .hero-visual img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:32px;
+      line-height:1.14;
+      letter-spacing:-.02em;
+    }
+
+    .hero-lead{
+      margin:0 0 10px;
+      font-size:19px;
+      font-weight:900;
+      color:var(--accent);
+      line-height:1.45;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .hero-cta{
+      margin-top:14px;
+      padding:16px;
+      border:1px solid var(--soft-border);
+      border-radius:16px;
+      background:var(--soft-bg);
+    }
+
+    .hero-cta p{
+      margin:0 0 10px;
+      color:var(--text);
+      font-weight:800;
+    }
+
+    .hero-proof{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:12px;
+    }
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.45}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.25;
+      letter-spacing:-.01em;
+    }
+
+    section h3{
+      margin:18px 0 8px;
+      font-size:18px;
+      line-height:1.35;
+    }
+
+    section p{margin:8px 0}
+
+    .note,
+    .ok-note{
+      display:flex;
+      gap:10px;
+      padding:13px 14px;
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+
+    .note{
+      border:1px solid var(--warn-border);
+      background:var(--warn-bg);
+    }
+
+    .ok-note{
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+    }
+
+    .note strong,
+    .ok-note strong{
+      font-weight:900;
+    }
+
+    .note .note-ico{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      margin-top:2px;
+      color:var(--warn);
+    }
+
+    .panel{
+      border:1px solid var(--soft-border);
+      background:var(--soft-bg);
+      border-radius:14px;
+      padding:14px 16px;
+      margin:10px 0 14px;
+    }
+
+    .mini-grid,
+    .stat-grid,
+    .check-grid,
+    .reward-grid,
+    .encyclopedia-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .stat-grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .reward-grid{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+
+    .encyclopedia-grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .mini-card,
+    .stat-card,
+    .check-card,
+    .reward-card,
+    .encyclopedia-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+    }
+
+    .stat-card .label{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:6px;
+    }
+
+    .stat-card strong{
+      display:block;
+      font-size:24px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+
+    .stat-card em{
+      display:block;
+      margin-top:6px;
+      font-style:normal;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .mini-card h3,
+    .check-card h3,
+    .reward-card h3,
+    .encyclopedia-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+
+    .mini-card p,
+    .check-card p,
+    .reward-card p,
+    .encyclopedia-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .keyword{
+      color:var(--danger);
+      font-weight:900;
+    }
+
+    .guide-list{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .guide-list li{margin:6px 0}
+
+    .table-wrap{
+      overflow:auto;
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:640px;
+    }
+
+    th,td{
+      padding:12px;
+      border-bottom:1px solid var(--border);
+      text-align:center;
+      vertical-align:middle;
+      white-space:nowrap;
+    }
+
+    th{
+      background:#f8fafc;
+      font-size:14px;
+      font-weight:900;
+    }
+
+    td{
+      font-size:14px;
+    }
+
+    tbody tr:last-child td{border-bottom:none}
+
+    .links{
+      background:var(--soft-bg);
+      padding:16px;
+      border-radius:14px;
+      margin-top:14px;
+      border:1px solid var(--soft-border);
+    }
+
+    .links h3{
+      color:var(--text);
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .links a{font-weight:900}
+
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:#fff;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      cursor:pointer;
+      font-weight:900;
+      text-decoration:none !important;
+      line-height:1;
+      user-select:none;
+      background:#fff;
+      color:var(--text);
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    .reward-thumb,
+    .encyclopedia-thumb{
+      width:100%;
+      aspect-ratio:1/1;
+      border:1px dashed #cbd5e1;
+      border-radius:14px;
+      background:#f8fafc;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      margin-bottom:12px;
+    }
+
+    .reward-thumb img,
+    .encyclopedia-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+    }
+
+    .zoomable{
+      cursor:zoom-in;
+    }
+
+    .image-modal{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      background:rgba(15,23,42,.82);
+      backdrop-filter:blur(4px);
+    }
+
+    .image-modal.is-open{
+      display:flex;
+    }
+
+    .image-modal-dialog{
+      position:relative;
+      width:min(96vw,1200px);
+      max-height:92vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .image-modal-img{
+      display:block;
+      max-width:100%;
+      max-height:92vh;
+      width:auto;
+      height:auto;
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 18px 40px rgba(0,0,0,.35);
+    }
+
+    .image-modal-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      width:44px;
+      height:44px;
+      border:none;
+      border-radius:999px;
+      background:rgba(17,24,39,.82);
+      color:#fff;
+      font-size:24px;
+      line-height:1;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .image-modal-close:hover{
+      background:rgba(17,24,39,.96);
+    }
+
+    .image-modal-caption{
+      position:absolute;
+      left:16px;
+      bottom:16px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(17,24,39,.78);
+      color:#fff;
+      font-size:13px;
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+
+      .hero{grid-template-columns:1fr}
+      .hero-visual{width:120px;height:120px}
+      h1{font-size:28px}
+      .hero-lead{font-size:17px}
+      .mini-grid,
+      .check-grid,
+      .stat-grid,
+      .reward-grid,
+      .encyclopedia-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:25px}
+      section{padding:15px}
+      .image-modal{
+        padding:12px;
+      }
+      .image-modal-close{
+        top:8px;
+        right:8px;
+      }
+      .image-modal-caption{
+        left:10px;
+        right:10px;
+        bottom:10px;
+        border-radius:12px;
+        text-align:center;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"홈","item":"https://kingshotdata.kr/ko/"},
+          {"@type":"ListItem","position":2,"name":"가이드","item":"https://kingshotdata.kr/ko/guides/"},
+          {"@type":"ListItem","position":3,"name":"낚시 이벤트 가이드","item":"https://kingshotdata.kr/ko/guides/fishing-event-guide.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"킹샷 낚시 이벤트 공략 가이드",
+        "description":"낚시 이벤트 구조, 조수 나팔 활용, 장비 업그레이드, 보물 단계 점수 운영, 다시하기 팁, 보상 스킨 도감을 정리한 가이드입니다.",
+        "mainEntityOfPage":"https://kingshotdata.kr/ko/guides/fishing-event-guide.html",
+        "inLanguage":"ko",
+        "author":{
+          "@type":"Organization",
+          "name":"킹샷데이터코리아"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"킹샷데이터코리아",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+          }
+        },
+        "image":"https://kingshotdata.kr/img/guide/fishing-event-guide.webp"
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/ko/" aria-label="킹샷데이터코리아 홈">
+          <img src="/img/kingshotdata-logo.png" alt="킹샷데이터코리아" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>킹샷데이터코리아</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/fishing-event-guide.html">EN</a>
+        <a href="/ko/guides/fishing-event-guide.html" aria-current="page">KO</a>
+        <a href="/ja/guides/fishing-event-guide.html">JA</a>
+        <a href="/zh-tw/guides/fishing-event-guide.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">결론</a>
+      <a href="#basic">기본 정보</a>
+      <a href="#strategy">핵심 전략</a>
+      <a href="#control">컨트롤</a>
+      <a href="#reward-skins">보상 스킨</a>
+      <a href="#encyclopedia">도감</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/ko/">홈</a> <span class="muted">›</span>
+        <a href="/ko/guides/">가이드</a> <span class="muted">›</span>
+        <span>낚시 이벤트 가이드</span>
+      </div>
+
+      <div class="hero">
+        <div class="hero-visual">
+          <img src="/img/guide/fishing-event-guide.webp" alt="킹샷 낚시 이벤트 가이드" loading="eager" fetchpriority="high" width="160" height="160">
+        </div>
+
+        <div>
+          <h1>킹샷 낚시 이벤트 공략 가이드</h1>
+          <p class="hero-lead">랭킹 진입의 핵심은 조수 나팔 활용, 보물 단계 점수 운영, 그리고 올라오는 구간의 컨트롤 완성도다.</p>
+          <p class="sub">
+            기본 정보부터 장비 업그레이드 순서, 보물 단계 목표 점수, 다시하기 팁, 보상 스킨, 낚시 도감까지 한 번에 정리했다.
+          </p>
+
+          <div class="hero-cta" aria-label="핵심 요약">
+            <p>빠르게 보면 이 정도만 기억하면 된다.</p>
+            <div class="hero-proof" aria-label="quick summary">
+              <span class="badge">장비 최고 레벨 10</span>
+              <span class="badge">보물 단계는 최고 레벨 시작</span>
+              <span class="badge">조수 나팔 활용이 핵심</span>
+              <span class="badge">도감 이미지 확대 가능</span>
+            </div>
+
+            <div class="jump" aria-label="Quick jump links">
+              <a class="btn btn-primary" href="#strategy">랭킹 전략 보기</a>
+              <a class="btn" href="#reward-skins">보상 스킨 보기</a>
+              <a class="btn" href="#encyclopedia">낚시 도감 보기</a>
+            </div>
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">결론</a><span class="dotsep">•</span>
+            <a href="#basic">기본 정보</a><span class="dotsep">•</span>
+            <a href="#strategy">핵심 전략</a><span class="dotsep">•</span>
+            <a href="#control">컨트롤</a><span class="dotsep">•</span>
+            <a href="#reward-skins">보상 스킨</a><span class="dotsep">•</span>
+            <a href="#encyclopedia">도감</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <span class="anchor"></span>
+        <h2>결론</h2>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <span class="label">핵심 아이템</span>
+            <strong>조수 나팔</strong>
+            <em>랭킹 점수 차이의 핵심</em>
+          </div>
+          <div class="stat-card">
+            <span class="label">핵심 구간</span>
+            <strong>보물 단계</strong>
+            <em>업그레이드와 고득점의 중심</em>
+          </div>
+          <div class="stat-card">
+            <span class="label">목표 운영</span>
+            <strong>1,200점+</strong>
+            <em>보물 단계 최소 권장 기준</em>
+          </div>
+        </div>
+
+        <div class="note" role="note" aria-label="Important note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>중요:</strong> 낚시 이벤트는 단순히 많이 플레이하는 것보다
+            <span class="keyword">보물 단계에서 장비 업그레이드를 빠르게 끝내고 점수 효율을 올리는 것</span>이 더 중요하다.
+          </div>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="point note">
+          <div>
+            <strong>포인트:</strong> 초반에는 장비 업그레이드에 집중하고, 업그레이드 완료 후에는 일반 단계에서 효율 좋은 대상만 골라 점수를 끌어올리는 방식이 안정적이다.
+          </div>
+        </div>
+      </section>
+
+      <section id="basic">
+        <span class="anchor"></span>
+        <h2>이벤트 기본 정보</h2>
+
+        <div class="check-grid">
+          <div class="check-card">
+            <h3>이벤트 구성</h3>
+            <p>총 5개 페이지로 구성된다. 낚시 선수권 대회, 낚시 클럽, 낚시 마스터 랭킹, 낚시 전문가 세트, 도감.</p>
+          </div>
+          <div class="check-card">
+            <h3>핵심 플레이</h3>
+            <p>실제 낚시는 낚시 선수권 대회 페이지에서 진행된다.</p>
+          </div>
+          <div class="check-card">
+            <h3>장비 최고 레벨</h3>
+            <p>낚싯줄, 낚싯바늘, 낚시추의 최고 레벨은 각각 10이다.</p>
+          </div>
+          <div class="check-card">
+            <h3>스테이지 구분</h3>
+            <p>일반 단계와 보물 단계로 나뉘며, 보물 단계가 핵심 점수 구간이다.</p>
+          </div>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="Treasure stage note">
+          <div>
+            <strong>보물 단계:</strong> 바다 보물 지도 아이템으로 입장하는 특별 스테이지다. 시작부터 장비가 최고 레벨로 설정되므로 고득점과 빠른 업그레이드 운영에 매우 유리하다.
+          </div>
+        </div>
+      </section>
+
+      <section id="strategy">
+        <span class="anchor"></span>
+        <h2>랭킹 진입 핵심 전략</h2>
+
+        <div class="note" role="note" aria-label="Ranking note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>핵심:</strong> 랭킹을 노린다면 조수 나팔을 언제 어떤 어종에 쓰는지가 가장 중요하다.
+          </div>
+        </div>
+
+        <h3>초반 플레이 - 장비 업그레이드 단계</h3>
+        <ul class="guide-list">
+          <li>릴, 심해 센서, 조명등 등 버프를 모두 활성화한 상태에서 시작한다.</li>
+          <li>5성, 4성 물고기는 모두 챙기고, 나머지는 3성 위주로 최대한 많이 낚는다.</li>
+          <li>한 판 기준으로 1,150점에서 1,200점 사이를 목표로 포인트를 모은다.</li>
+          <li>포인트는 낚싯줄 업그레이드를 우선으로 사용한다.</li>
+          <li>낚싯줄 레벨이 오른 뒤 현재 시즌의 5성 어종에 조수 나팔을 활용하는 흐름을 3~4회 반복해 기본 장비 업그레이드를 완료한다.</li>
+        </ul>
+
+        <div class="panel">
+          <p><strong>숙련자 기준 팁</strong></p>
+          <p>게임에 익숙해지고 물고기 구분이 가능해지면 조명등 하나만 사용하는 방식도 충분히 효율적이다.</p>
+          <p>재화를 아끼는 쪽으로 운영하려면 릴과 심해 센서는 꼭 고정으로 쓸 필요는 없다.</p>
+        </div>
+
+        <h3>본격적인 플레이 - 장비 업그레이드 완료 후</h3>
+        <ul class="guide-list">
+          <li>보물 단계에서 장비 업그레이드를 모두 끝냈다면 이후에는 일반 단계 점수 운영으로 넘어간다.</li>
+          <li>올라오는 구간에서 성게, 홍합, 가재 같은 20점짜리 대상은 중간중간 챙겨주는 편이 효율적이다.</li>
+          <li>부러진 검, 배의 키 같은 1성 도구는 한 번 낚은 뒤로는 무조건 피하는 것이 좋다.</li>
+        </ul>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>구간</th>
+                <th>운영 목표</th>
+                <th>핵심 포인트</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>초반</td>
+                <td>장비 업그레이드</td>
+                <td>5성, 4성, 3성 위주 점수 확보</td>
+              </tr>
+              <tr>
+                <td>중반</td>
+                <td>낚싯줄 우선 강화</td>
+                <td>조수 나팔 활용 반복</td>
+              </tr>
+              <tr>
+                <td>후반</td>
+                <td>랭킹 점수 극대화</td>
+                <td>일반 단계 효율 사냥과 회피</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="control">
+        <span class="anchor"></span>
+        <h2>컨트롤 및 상세 공략</h2>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>550m 하강 운영</h3>
+            <p>우측 상단의 일시정지와 나가기를 반복하면서 보호막 소모를 2개 이하로 줄이는 연습이 중요하다.</p>
+          </div>
+          <div class="mini-card">
+            <h3>낚시 쿠폰</h3>
+            <p>쿠폰을 얻었다면 바로 사용하는 것이 좋다. 점수를 1.5배로 올려주기 때문에 체감 차이가 크다.</p>
+          </div>
+        </div>
+
+        <h3>물고기 등급 구별법</h3>
+        <ul class="guide-list">
+          <li>5성 물고기: 휘황찬란한 금색 아우라</li>
+          <li>4성 물고기: 은색 또는 은은한 파란빛 계열 아우라</li>
+          <li>3성 물고기: 연한 동색 또는 갈색 계열 아우라</li>
+        </ul>
+
+        <h3>필수 회피 및 조작 팁</h3>
+        <ul class="guide-list">
+          <li>내려갈 때보다 올라올 때의 컨트롤이 훨씬 더 중요하다.</li>
+          <li>작은 물고기들은 벽에 부딪히면 크게 느려지므로 벽에 너무 붙지 않는 편이 좋다.</li>
+          <li>피라냐는 내려갈 때는 피하고, 올라올 때는 일부러 물려 40점을 챙기는 운영도 가능하다.</li>
+          <li>물고기 꼬리 쪽은 낚이지 않고 보호막만 깎일 수 있으므로 주의해야 한다.</li>
+          <li>단순히 벽에 붙어 다니는 것보다 섬세하게 피하는 감각을 익히는 쪽이 점수에 더 큰 도움이 된다.</li>
+        </ul>
+
+        <div class="ok-note" role="note" aria-label="Treasure score note">
+          <div>
+            <strong>보물 단계 목표 점수:</strong> 조수 나팔, 릴, 심해 센서, 조명등을 모두 사용한다면 최소 1,200점 이상을 목표로 잡는 것이 좋다. 풀버프 상태에서 5성 2마리, 4성 1~2마리, 나머지를 3성으로 채우면 1,800점에서 1,900점도 노려볼 수 있다.
+          </div>
+        </div>
+      </section>
+
+      <section id="qa">
+        <span class="anchor"></span>
+        <h2>Q&amp;A - 실수로 다시하기, 괜찮을까</h2>
+
+        <div class="panel">
+          <p><strong>Q.</strong> 실수로 너무 많이 부딪혀서 끝까지 못 내려갔는데 다시하기를 눌러도 괜찮을까요?</p>
+          <p><strong>A.</strong> 괜찮다. 오히려 점수 관리 측면에서는 다시 시작하는 것이 더 좋은 경우도 많다.</p>
+        </div>
+
+        <p>다시 시작하기를 눌러도 이전에 나왔던 고득점 물고기와 보물상자는 같은 위치에 다시 등장한다. 따라서 하강 구간에서 실수가 컸다면 망설이지 말고 다시하기를 눌러 완성도 높은 시도를 노리는 편이 좋다.</p>
+
+        <div class="note" role="note" aria-label="Mermaid note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>예외:</strong> 인어는 다시 시작할 때마다 위치나 등장 여부가 랜덤으로 바뀐다. 원하는 대상이 나오지 않았을 때 다시 시작으로 인어를 노려볼 수도 있지만, 실제로는 인어가 안 뜨거나 다른 대상이 나올 확률이 더 높아 스트레스를 받을 수 있다.
+          </div>
+        </div>
+      </section>
+
+      <section id="reward-skins">
+        <span class="anchor"></span>
+        <h2>보상 스킨</h2>
+
+        <div class="reward-grid">
+          <div class="reward-card">
+            <div class="reward-thumb">
+              <img src="/img/guide/도시스킨2.png" alt="킹샷 낚시 이벤트 도시스킨">
+            </div>
+            <h3>도시스킨</h3>
+          </div>
+
+          <div class="reward-card">
+            <div class="reward-thumb">
+              <img src="/img/guide/프레임2.png" alt="킹샷 낚시 이벤트 프레임">
+            </div>
+            <h3>프레임</h3>
+          </div>
+
+          <div class="reward-card">
+            <div class="reward-thumb">
+              <img src="/img/guide/행군스킨2.png" alt="킹샷 낚시 이벤트 행군 스킨">
+            </div>
+            <h3>행군 스킨</h3>
+          </div>
+
+          <div class="reward-card">
+            <div class="reward-thumb">
+              <img src="/img/guide/명패2.png" alt="킹샷 낚시 이벤트 명패">
+            </div>
+            <h3>명패</h3>
+          </div>
+        </div>
+      </section>
+
+      <section id="encyclopedia">
+        <span class="anchor"></span>
+        <h2>낚시 도감</h2>
+
+        <div class="encyclopedia-grid">
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/봄.png" alt="킹샷 낚시 도감 봄" data-zoom-src="/img/guide/봄.png" data-zoom-title="봄">
+            </div>
+            <h3>봄</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/여름.png" alt="킹샷 낚시 도감 여름" data-zoom-src="/img/guide/여름.png" data-zoom-title="여름">
+            </div>
+            <h3>여름</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/가을.png" alt="킹샷 낚시 도감 가을" data-zoom-src="/img/guide/가을.png" data-zoom-title="가을">
+            </div>
+            <h3>가을</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/겨울.png" alt="킹샷 낚시 도감 겨울" data-zoom-src="/img/guide/겨울.png" data-zoom-title="겨울">
+            </div>
+            <h3>겨울</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/명패.png" alt="킹샷 낚시 도감 명패" data-zoom-src="/img/guide/명패.png" data-zoom-title="명패">
+            </div>
+            <h3>명패</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/프레임.png" alt="킹샷 낚시 도감 프레임" data-zoom-src="/img/guide/프레임.png" data-zoom-title="프레임">
+            </div>
+            <h3>프레임</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/행군스킨.png" alt="킹샷 낚시 도감 행군 스킨" data-zoom-src="/img/guide/행군스킨.png" data-zoom-title="행군 스킨">
+            </div>
+            <h3>행군 스킨</h3>
+          </div>
+        </div>
+      </section>
+
+      <section id="links">
+        <span class="anchor"></span>
+        <h2>관련 링크</h2>
+
+        <div class="links">
+          <h3>최신 기프트코드</h3>
+          <a href="/ko/guides/kingshot-giftcode.html">킹샷 최신 기프트코드 보기</a>
+        </div>
+
+        <div class="links">
+          <h3>킹샷 충전 가이드</h3>
+          <a href="/ko/guides/topup-guide.html">킹샷 충전 가이드 보기</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="image-modal" id="imageModal" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-label="이미지 확대 보기">
+      <button type="button" class="image-modal-close" id="imageModalClose" aria-label="닫기">×</button>
+      <img class="image-modal-img" id="imageModalImg" src="" alt="">
+      <div class="image-modal-caption" id="imageModalCaption"></div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if (mqMobile && mqMobile.addEventListener) {
+        mqMobile.addEventListener('change', setStickyTop);
+      } else if (mqMobile && mqMobile.addListener) {
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+
+      var modal = document.getElementById('imageModal');
+      var modalImg = document.getElementById('imageModalImg');
+      var modalCaption = document.getElementById('imageModalCaption');
+      var modalClose = document.getElementById('imageModalClose');
+      var zoomables = document.querySelectorAll('.zoomable');
+      var lastFocused = null;
+
+      function openModal(src, alt, title){
+        if (!src) return;
+        lastFocused = document.activeElement;
+        modalImg.src = src;
+        modalImg.alt = alt || title || '확대 이미지';
+        modalCaption.textContent = title || alt || '';
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        modalClose.focus();
+      }
+
+      function closeModal(){
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        modalImg.src = '';
+        modalImg.alt = '';
+        modalCaption.textContent = '';
+        document.body.classList.remove('modal-open');
+        if (lastFocused) lastFocused.focus();
+      }
+
+      zoomables.forEach(function(img){
+        img.addEventListener('click', function(){
+          openModal(
+            img.getAttribute('data-zoom-src') || img.getAttribute('src'),
+            img.getAttribute('alt'),
+            img.getAttribute('data-zoom-title')
+          );
+        });
+
+        img.addEventListener('keydown', function(e){
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModal(
+              img.getAttribute('data-zoom-src') || img.getAttribute('src'),
+              img.getAttribute('alt'),
+              img.getAttribute('data-zoom-title')
+            );
+          }
+        });
+
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('role', 'button');
+        img.setAttribute('aria-label', (img.getAttribute('data-zoom-title') || img.getAttribute('alt') || '이미지') + ' 확대 보기');
+      });
+
+      modalClose.addEventListener('click', closeModal);
+
+      modal.addEventListener('click', function(e){
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+          closeModal();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

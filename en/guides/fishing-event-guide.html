@@ -1,0 +1,1168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kingshot Fishing Event Guide | Ranking Tips and Treasure Stage Strategy | KingshotData</title>
+  <meta name="description" content="A complete Kingshot fishing event guide covering the event structure, gear upgrades, treasure stage scoring, Tide Horn usage, restart tips, ranking strategy, and reward skin collection." />
+
+  <link rel="canonical" href="https://kingshotdata.kr/en/guides/fishing-event-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/fishing-event-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/fishing-event-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/fishing-event-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/fishing-event-guide.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guide/fishing-event-guide.webp" />
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kingshot Fishing Event Guide" />
+  <meta property="og:description" content="A practical guide covering fishing event basics, ranking strategy, treasure stage scoring, restart tips, and reward skins." />
+  <meta property="og:url" content="https://kingshotdata.kr/en/guides/fishing-event-guide.html" />
+  <meta property="og:site_name" content="KingshotData" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guide/fishing-event-guide.webp" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kingshot Fishing Event Guide" />
+  <meta name="twitter:description" content="Everything you need for the fishing event, including Tide Horn usage, treasure stage scoring, ranking tips, and reward skins." />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guide/fishing-event-guide.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#111827;
+      --danger:#dc2626;
+      --warn:#b45309;
+      --warn-bg:rgba(245,158,11,.08);
+      --warn-border:rgba(245,158,11,.35);
+      --soft-bg:#f8fbff;
+      --soft-border:#dbeafe;
+      --ok-bg:#f0fdf4;
+      --ok-border:#bbf7d0;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:18px;
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.68 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans","Arial",sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    body.modal-open{
+      overflow:hidden;
+    }
+
+    img{max-width:100%}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:8px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:20px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-visual{
+      width:160px;
+      height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:16px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      overflow:hidden;
+    }
+
+    .hero-visual img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:32px;
+      line-height:1.14;
+      letter-spacing:-.02em;
+    }
+
+    .hero-lead{
+      margin:0 0 10px;
+      font-size:19px;
+      font-weight:900;
+      color:var(--accent);
+      line-height:1.45;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .hero-cta{
+      margin-top:14px;
+      padding:16px;
+      border:1px solid var(--soft-border);
+      border-radius:16px;
+      background:var(--soft-bg);
+    }
+
+    .hero-cta p{
+      margin:0 0 10px;
+      color:var(--text);
+      font-weight:800;
+    }
+
+    .hero-proof{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:12px;
+    }
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.45}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.25;
+      letter-spacing:-.01em;
+    }
+
+    section h3{
+      margin:18px 0 8px;
+      font-size:18px;
+      line-height:1.35;
+    }
+
+    section p{margin:8px 0}
+
+    .note,
+    .ok-note{
+      display:flex;
+      gap:10px;
+      padding:13px 14px;
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+
+    .note{
+      border:1px solid var(--warn-border);
+      background:var(--warn-bg);
+    }
+
+    .ok-note{
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+    }
+
+    .note strong,
+    .ok-note strong{
+      font-weight:900;
+    }
+
+    .note .note-ico{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      margin-top:2px;
+      color:var(--warn);
+    }
+
+    .panel{
+      border:1px solid var(--soft-border);
+      background:var(--soft-bg);
+      border-radius:14px;
+      padding:14px 16px;
+      margin:10px 0 14px;
+    }
+
+    .mini-grid,
+    .stat-grid,
+    .check-grid,
+    .reward-grid,
+    .encyclopedia-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .stat-grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .reward-grid{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+
+    .encyclopedia-grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .mini-card,
+    .stat-card,
+    .check-card,
+    .reward-card,
+    .encyclopedia-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+    }
+
+    .stat-card .label{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:6px;
+    }
+
+    .stat-card strong{
+      display:block;
+      font-size:24px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+
+    .stat-card em{
+      display:block;
+      margin-top:6px;
+      font-style:normal;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .mini-card h3,
+    .check-card h3,
+    .reward-card h3,
+    .encyclopedia-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+
+    .mini-card p,
+    .check-card p,
+    .reward-card p,
+    .encyclopedia-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .keyword{
+      color:var(--danger);
+      font-weight:900;
+    }
+
+    .guide-list{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .guide-list li{margin:6px 0}
+
+    .table-wrap{
+      overflow:auto;
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:640px;
+    }
+
+    th,td{
+      padding:12px;
+      border-bottom:1px solid var(--border);
+      text-align:center;
+      vertical-align:middle;
+      white-space:nowrap;
+    }
+
+    th{
+      background:#f8fafc;
+      font-size:14px;
+      font-weight:900;
+    }
+
+    td{
+      font-size:14px;
+    }
+
+    tbody tr:last-child td{border-bottom:none}
+
+    .links{
+      background:var(--soft-bg);
+      padding:16px;
+      border-radius:14px;
+      margin-top:14px;
+      border:1px solid var(--soft-border);
+    }
+
+    .links h3{
+      color:var(--text);
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .links a{font-weight:900}
+
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:#fff;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      cursor:pointer;
+      font-weight:900;
+      text-decoration:none !important;
+      line-height:1;
+      user-select:none;
+      background:#fff;
+      color:var(--text);
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    .reward-thumb,
+    .encyclopedia-thumb{
+      width:100%;
+      aspect-ratio:1/1;
+      border:1px dashed #cbd5e1;
+      border-radius:14px;
+      background:#f8fafc;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      margin-bottom:12px;
+    }
+
+    .reward-thumb img,
+    .encyclopedia-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+    }
+
+    .zoomable{
+      cursor:zoom-in;
+    }
+
+    .image-modal{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      background:rgba(15,23,42,.82);
+      backdrop-filter:blur(4px);
+    }
+
+    .image-modal.is-open{
+      display:flex;
+    }
+
+    .image-modal-dialog{
+      position:relative;
+      width:min(96vw,1200px);
+      max-height:92vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .image-modal-img{
+      display:block;
+      max-width:100%;
+      max-height:92vh;
+      width:auto;
+      height:auto;
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 18px 40px rgba(0,0,0,.35);
+    }
+
+    .image-modal-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      width:44px;
+      height:44px;
+      border:none;
+      border-radius:999px;
+      background:rgba(17,24,39,.82);
+      color:#fff;
+      font-size:24px;
+      line-height:1;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .image-modal-close:hover{
+      background:rgba(17,24,39,.96);
+    }
+
+    .image-modal-caption{
+      position:absolute;
+      left:16px;
+      bottom:16px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(17,24,39,.78);
+      color:#fff;
+      font-size:13px;
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+
+      .hero{grid-template-columns:1fr}
+      .hero-visual{width:120px;height:120px}
+      h1{font-size:28px}
+      .hero-lead{font-size:17px}
+      .mini-grid,
+      .check-grid,
+      .stat-grid,
+      .reward-grid,
+      .encyclopedia-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:25px}
+      section{padding:15px}
+      .image-modal{
+        padding:12px;
+      }
+      .image-modal-close{
+        top:8px;
+        right:8px;
+      }
+      .image-modal-caption{
+        left:10px;
+        right:10px;
+        bottom:10px;
+        border-radius:12px;
+        text-align:center;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://kingshotdata.kr/en/"},
+          {"@type":"ListItem","position":2,"name":"Guides","item":"https://kingshotdata.kr/en/guides/"},
+          {"@type":"ListItem","position":3,"name":"Fishing Event Guide","item":"https://kingshotdata.kr/en/guides/fishing-event-guide.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"Kingshot Fishing Event Guide",
+        "description":"A complete guide to the fishing event structure, Tide Horn usage, gear upgrades, treasure stage scoring, restart tips, and reward skin collection.",
+        "mainEntityOfPage":"https://kingshotdata.kr/en/guides/fishing-event-guide.html",
+        "inLanguage":"en",
+        "author":{
+          "@type":"Organization",
+          "name":"KingshotData"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"KingshotData",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+          }
+        },
+        "image":"https://kingshotdata.kr/img/guide/fishing-event-guide.webp"
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/en/" aria-label="KingshotData Home">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>KingshotData</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/fishing-event-guide.html" aria-current="page">EN</a>
+        <a href="/ko/guides/fishing-event-guide.html">KO</a>
+        <a href="/ja/guides/fishing-event-guide.html">JA</a>
+        <a href="/zh-tw/guides/fishing-event-guide.html">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">Summary</a>
+      <a href="#basic">Basics</a>
+      <a href="#strategy">Strategy</a>
+      <a href="#control">Controls</a>
+      <a href="#reward-skins">Reward Skins</a>
+      <a href="#encyclopedia">Collection</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/en/">Home</a> <span class="muted">›</span>
+        <a href="/en/guides/">Guides</a> <span class="muted">›</span>
+        <span>Fishing Event Guide</span>
+      </div>
+
+      <div class="hero">
+        <div class="hero-visual">
+          <img src="/img/guide/fishing-event-guide.webp" alt="Kingshot Fishing Event Guide" loading="eager" fetchpriority="high" width="160" height="160">
+        </div>
+
+        <div>
+          <h1>Kingshot Fishing Event Guide</h1>
+          <p class="hero-lead">The keys to ranking are smart Tide Horn usage, efficient treasure stage scoring, and precise control during the return climb.</p>
+          <p class="sub">
+            This guide covers the basics, gear upgrade order, treasure stage score goals, restart tips, reward skins, and the fishing collection in one place.
+          </p>
+
+          <div class="hero-cta" aria-label="Key summary">
+            <p>These are the main points to remember.</p>
+            <div class="hero-proof" aria-label="quick summary">
+              <span class="badge">Max gear level is 10</span>
+              <span class="badge">Treasure stages start at max gear</span>
+              <span class="badge">Tide Horn timing matters most</span>
+              <span class="badge">Collection images can be zoomed</span>
+            </div>
+
+            <div class="jump" aria-label="Quick jump links">
+              <a class="btn btn-primary" href="#strategy">View Strategy</a>
+              <a class="btn" href="#reward-skins">View Reward Skins</a>
+              <a class="btn" href="#encyclopedia">View Collection</a>
+            </div>
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">Summary</a><span class="dotsep">•</span>
+            <a href="#basic">Basics</a><span class="dotsep">•</span>
+            <a href="#strategy">Strategy</a><span class="dotsep">•</span>
+            <a href="#control">Controls</a><span class="dotsep">•</span>
+            <a href="#reward-skins">Reward Skins</a><span class="dotsep">•</span>
+            <a href="#encyclopedia">Collection</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <span class="anchor"></span>
+        <h2>Summary</h2>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <span class="label">Core Item</span>
+            <strong>Tide Horn</strong>
+            <em>The biggest factor in ranking gains</em>
+          </div>
+          <div class="stat-card">
+            <span class="label">Core Stage</span>
+            <strong>Treasure Stage</strong>
+            <em>The center of upgrades and high scores</em>
+          </div>
+          <div class="stat-card">
+            <span class="label">Target Score</span>
+            <strong>1,200+</strong>
+            <em>Recommended minimum for treasure stages</em>
+          </div>
+        </div>
+
+        <div class="note" role="note" aria-label="Important note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Important:</strong> this event is not just about playing more runs.
+            <span class="keyword">The real goal is to finish your gear upgrades quickly in treasure stages and improve your score efficiency.</span>
+          </div>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="point note">
+          <div>
+            <strong>Main idea:</strong> focus on gear upgrades first, then move back to normal stages and target only the most efficient catches to raise your total score more consistently.
+          </div>
+        </div>
+      </section>
+
+      <section id="basic">
+        <span class="anchor"></span>
+        <h2>Event Basics</h2>
+
+        <div class="check-grid">
+          <div class="check-card">
+            <h3>Event Structure</h3>
+            <p>The event has 5 pages: Fishing Championship, Fishing Club, Fishing Master Ranking, Fishing Expert Set, and Collection.</p>
+          </div>
+          <div class="check-card">
+            <h3>Main Gameplay</h3>
+            <p>The actual fishing gameplay takes place on the Fishing Championship page.</p>
+          </div>
+          <div class="check-card">
+            <h3>Maximum Gear Level</h3>
+            <p>Fishing Line, Hook, and Sinker all have a max level of 10.</p>
+          </div>
+          <div class="check-card">
+            <h3>Stage Types</h3>
+            <p>The event is split into Normal Stages and Treasure Stages, with Treasure Stages being the main source of high scores.</p>
+          </div>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="Treasure stage note">
+          <div>
+            <strong>Treasure Stage:</strong> this is a special stage entered with the Sea Treasure Map item. You begin with max-level gear, which makes it the best place for fast upgrades and high-score runs.
+          </div>
+        </div>
+      </section>
+
+      <section id="strategy">
+        <span class="anchor"></span>
+        <h2>Core Ranking Strategy</h2>
+
+        <div class="note" role="note" aria-label="Ranking note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Key Point:</strong> if you want to rank, the single most important thing is when and on which fish you use the Tide Horn.
+          </div>
+        </div>
+
+        <h3>Early Phase - Gear Upgrade Stage</h3>
+        <ul class="guide-list">
+          <li>Start with all buffs active, including Reel, Deep Sea Sensor, and Lamp.</li>
+          <li>Catch every 5-star and 4-star fish you can, then fill the rest with as many 3-star fish as possible.</li>
+          <li>Aim for around 1,150 to 1,200 points per run.</li>
+          <li>Use your points to upgrade the Fishing Line first.</li>
+          <li>Once your Fishing Line level rises, repeat the flow of using Tide Horn on the current season’s 5-star fish about 3 to 4 times until your basic gear upgrades are done.</li>
+        </ul>
+
+        <div class="panel">
+          <p><strong>Tip for experienced players</strong></p>
+          <p>Once you get used to identifying fish, using only the Lamp can still be very efficient.</p>
+          <p>If you want to save resources, you do not need to use the Reel and Deep Sea Sensor on every run.</p>
+        </div>
+
+        <h3>Main Scoring Phase - After Gear Upgrades</h3>
+        <ul class="guide-list">
+          <li>After finishing your upgrades in Treasure Stages, shift your focus to score management in Normal Stages.</li>
+          <li>On the way back up, targets like sea urchins, mussels, and crayfish are worth grabbing for their 20-point value.</li>
+          <li>Once you have caught 1-star items like the Broken Sword or Ship Rudder, it is best to avoid them afterward.</li>
+        </ul>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Phase</th>
+                <th>Goal</th>
+                <th>Main Focus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Early</td>
+                <td>Upgrade gear</td>
+                <td>Score steadily with 5-star, 4-star, and 3-star catches</td>
+              </tr>
+              <tr>
+                <td>Mid</td>
+                <td>Prioritize Fishing Line</td>
+                <td>Repeat Tide Horn usage efficiently</td>
+              </tr>
+              <tr>
+                <td>Late</td>
+                <td>Maximize ranking score</td>
+                <td>Efficient catches and precise avoidance in normal stages</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="control">
+        <span class="anchor"></span>
+        <h2>Controls and Detailed Tips</h2>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>550m Descent Control</h3>
+            <p>Use the pause and exit buttons at the top right to practice minimizing shield loss to 2 or less during the descent.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Fishing Coupon</h3>
+            <p>If you get a Fishing Coupon, use it right away. The 1.5x score boost makes a huge difference.</p>
+          </div>
+        </div>
+
+        <h3>How to Identify Fish Rarity</h3>
+        <ul class="guide-list">
+          <li>5-star fish: brilliant golden aura</li>
+          <li>4-star fish: silver or soft blue aura</li>
+          <li>3-star fish: light bronze or brown aura</li>
+        </ul>
+
+        <h3>Must-Know Avoidance and Control Tips</h3>
+        <ul class="guide-list">
+          <li>The climb back up is much more important than the descent.</li>
+          <li>Small fish slow down heavily when they hit walls, so do not stay glued to the wall.</li>
+          <li>Piranhas should be avoided on the way down, but on the way up you can sometimes let them bite you on purpose for 40 points.</li>
+          <li>The tail end of a fish may not count as a catch and can only drain your shield, so be careful.</li>
+          <li>Do not rely only on wall-hugging. Learning precise movement and clean avoidance is what really improves your score.</li>
+        </ul>
+
+        <div class="ok-note" role="note" aria-label="Treasure score note">
+          <div>
+            <strong>Treasure Stage Score Goal:</strong> if you use Tide Horn, Reel, Deep Sea Sensor, and Lamp together, you should aim for at least 1,200 points. With full buffs, 2 five-star fish, 1 to 2 four-star fish, and the rest filled with 3-star catches, scores around 1,800 to 1,900 are possible.
+          </div>
+        </div>
+      </section>
+
+      <section id="qa">
+        <span class="anchor"></span>
+        <h2>Q&amp;A - Is Restarting Fine After a Mistake?</h2>
+
+        <div class="panel">
+          <p><strong>Q.</strong> If I collide too much and fail to reach the bottom, is it okay to press restart?</p>
+          <p><strong>A.</strong> Yes. In many cases, restarting is actually the better option for score management.</p>
+        </div>
+
+        <p>When you restart, the high-value fish and treasure chests that appeared before will show up again in the same positions. If your descent goes badly, do not hesitate to restart and aim for a cleaner run.</p>
+
+        <div class="note" role="note" aria-label="Mermaid note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>Exception:</strong> the Mermaid changes position and may or may not appear after each restart. You can try to reroll for it, but in practice it is more common for it not to appear or for something else to show up instead.
+          </div>
+        </div>
+      </section>
+
+      <section id="reward-skins">
+        <span class="anchor"></span>
+        <h2>Reward Skins</h2>
+
+        <div class="reward-grid">
+          <div class="reward-card">
+            <div class="reward-thumb">
+              <img src="/img/guide/도시스킨2.png" alt="Kingshot Fishing Event City Skin">
+            </div>
+            <h3>City Skin</h3>
+          </div>
+
+          <div class="reward-card">
+            <div class="reward-thumb">
+              <img src="/img/guide/프레임2.png" alt="Kingshot Fishing Event Frame">
+            </div>
+            <h3>Frame</h3>
+          </div>
+
+          <div class="reward-card">
+            <div class="reward-thumb">
+              <img src="/img/guide/행군스킨2.png" alt="Kingshot Fishing Event March Skin">
+            </div>
+            <h3>March Skin</h3>
+          </div>
+
+          <div class="reward-card">
+            <div class="reward-thumb">
+              <img src="/img/guide/명패2.png" alt="Kingshot Fishing Event Nameplate">
+            </div>
+            <h3>Nameplate</h3>
+          </div>
+        </div>
+      </section>
+
+      <section id="encyclopedia">
+        <span class="anchor"></span>
+        <h2>Fishing Collection</h2>
+
+        <div class="encyclopedia-grid">
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/봄.png" alt="Kingshot Fishing Collection Spring" data-zoom-src="/img/guide/봄.png" data-zoom-title="Spring">
+            </div>
+            <h3>Spring</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/여름.png" alt="Kingshot Fishing Collection Summer" data-zoom-src="/img/guide/여름.png" data-zoom-title="Summer">
+            </div>
+            <h3>Summer</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/가을.png" alt="Kingshot Fishing Collection Autumn" data-zoom-src="/img/guide/가을.png" data-zoom-title="Autumn">
+            </div>
+            <h3>Autumn</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/겨울.png" alt="Kingshot Fishing Collection Winter" data-zoom-src="/img/guide/겨울.png" data-zoom-title="Winter">
+            </div>
+            <h3>Winter</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/명패.png" alt="Kingshot Fishing Collection Nameplate" data-zoom-src="/img/guide/명패.png" data-zoom-title="Nameplate">
+            </div>
+            <h3>Nameplate</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/프레임.png" alt="Kingshot Fishing Collection Frame" data-zoom-src="/img/guide/프레임.png" data-zoom-title="Frame">
+            </div>
+            <h3>Frame</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/행군스킨.png" alt="Kingshot Fishing Collection March Skin" data-zoom-src="/img/guide/행군스킨.png" data-zoom-title="March Skin">
+            </div>
+            <h3>March Skin</h3>
+          </div>
+        </div>
+      </section>
+
+      <section id="links">
+        <span class="anchor"></span>
+        <h2>Related Links</h2>
+
+        <div class="links">
+          <h3>Latest Gift Codes</h3>
+          <a href="/en/guides/kingshot-giftcode.html">View the latest Kingshot gift codes</a>
+        </div>
+
+        <div class="links">
+          <h3>Kingshot Top-Up Guide</h3>
+          <a href="/en/guides/topup-guide.html">View the Kingshot top-up guide</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="image-modal" id="imageModal" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-label="Image zoom view">
+      <button type="button" class="image-modal-close" id="imageModalClose" aria-label="Close">×</button>
+      <img class="image-modal-img" id="imageModalImg" src="" alt="">
+      <div class="image-modal-caption" id="imageModalCaption"></div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if (mqMobile && mqMobile.addEventListener) {
+        mqMobile.addEventListener('change', setStickyTop);
+      } else if (mqMobile && mqMobile.addListener) {
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+
+      var modal = document.getElementById('imageModal');
+      var modalImg = document.getElementById('imageModalImg');
+      var modalCaption = document.getElementById('imageModalCaption');
+      var modalClose = document.getElementById('imageModalClose');
+      var zoomables = document.querySelectorAll('.zoomable');
+      var lastFocused = null;
+
+      function openModal(src, alt, title){
+        if (!src) return;
+        lastFocused = document.activeElement;
+        modalImg.src = src;
+        modalImg.alt = alt || title || 'Zoomed image';
+        modalCaption.textContent = title || alt || '';
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        modalClose.focus();
+      }
+
+      function closeModal(){
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        modalImg.src = '';
+        modalImg.alt = '';
+        modalCaption.textContent = '';
+        document.body.classList.remove('modal-open');
+        if (lastFocused) lastFocused.focus();
+      }
+
+      zoomables.forEach(function(img){
+        img.addEventListener('click', function(){
+          openModal(
+            img.getAttribute('data-zoom-src') || img.getAttribute('src'),
+            img.getAttribute('alt'),
+            img.getAttribute('data-zoom-title')
+          );
+        });
+
+        img.addEventListener('keydown', function(e){
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModal(
+              img.getAttribute('data-zoom-src') || img.getAttribute('src'),
+              img.getAttribute('alt'),
+              img.getAttribute('data-zoom-title')
+            );
+          }
+        });
+
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('role', 'button');
+        img.setAttribute('aria-label', (img.getAttribute('data-zoom-title') || img.getAttribute('alt') || 'Image') + ' zoom view');
+      });
+
+      modalClose.addEventListener('click', closeModal);
+
+      modal.addEventListener('click', function(e){
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+          closeModal();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

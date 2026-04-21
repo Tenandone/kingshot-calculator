@@ -1,0 +1,1168 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KingShot 釣魚活動攻略指南 | 衝榜技巧與寶藏關卡運營 | KingshotData</title>
+  <meta name="description" content="整理 KingShot 釣魚活動的基本結構、裝備升級、寶藏關卡分數運營、潮汐號角使用、重新開始技巧、衝榜策略與獎勵外觀圖鑑的完整指南。" />
+
+  <link rel="canonical" href="https://kingshotdata.kr/zh-tw/guides/fishing-event-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/guides/fishing-event-guide.html" />
+  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/guides/fishing-event-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/guides/fishing-event-guide.html" />
+  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/guides/fishing-event-guide.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
+  <link rel="preload" as="image" href="/img/guide/fishing-event-guide.webp" />
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="KingShot 釣魚活動攻略指南" />
+  <meta property="og:description" content="從活動基本資訊到衝榜策略、寶藏關卡分數運營、重新開始技巧與獎勵外觀圖鑑，一次整理完成的實戰指南。" />
+  <meta property="og:url" content="https://kingshotdata.kr/zh-tw/guides/fishing-event-guide.html" />
+  <meta property="og:site_name" content="KingshotData" />
+  <meta property="og:image" content="https://kingshotdata.kr/img/guide/fishing-event-guide.webp" />
+  <meta property="og:locale" content="zh_TW" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="KingShot 釣魚活動攻略指南" />
+  <meta name="twitter:description" content="潮汐號角、寶藏關卡、衝榜運營、重新開始技巧與獎勵外觀圖鑑，一次看懂釣魚活動攻略。" />
+  <meta name="twitter:image" content="https://kingshotdata.kr/img/guide/fishing-event-guide.webp" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#2563eb;
+      --accent:#111827;
+      --danger:#dc2626;
+      --warn:#b45309;
+      --warn-bg:rgba(245,158,11,.08);
+      --warn-border:rgba(245,158,11,.35);
+      --soft-bg:#f8fbff;
+      --soft-border:#dbeafe;
+      --ok-bg:#f0fdf4;
+      --ok-border:#bbf7d0;
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:18px;
+      --header-h:0px;
+      --tabs-h:0px;
+      --sticky-top:0px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.68 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","Microsoft JhengHei","PingFang TC",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    body.modal-open{
+      overflow:hidden;
+    }
+
+    img{max-width:100%}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 16px 64px}
+
+    header.top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+
+    .brand a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.1px;
+    }
+
+    .brand img{
+      display:block;
+      width:28px;
+      height:28px;
+      border-radius:8px;
+    }
+
+    nav.lang{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    nav.lang a{
+      color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      text-decoration:none;
+    }
+
+    nav.lang a[aria-current="page"]{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    nav.section-tabs{
+      display:none;
+      gap:8px;
+      padding:8px 0;
+      margin:0;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+
+    nav.section-tabs a{
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+    }
+
+    nav.section-tabs a:hover{color:var(--text)}
+
+    .crumbs{
+      margin:14px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .crumbs a{color:var(--muted)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:18px;
+      padding:20px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-visual{
+      width:160px;
+      height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:16px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      overflow:hidden;
+    }
+
+    .hero-visual img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:32px;
+      line-height:1.14;
+      letter-spacing:-.02em;
+    }
+
+    .hero-lead{
+      margin:0 0 10px;
+      font-size:19px;
+      font-weight:900;
+      color:var(--accent);
+      line-height:1.45;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .hero-cta{
+      margin-top:14px;
+      padding:16px;
+      border:1px solid var(--soft-border);
+      border-radius:16px;
+      background:var(--soft-bg);
+    }
+
+    .hero-cta p{
+      margin:0 0 10px;
+      color:var(--text);
+      font-weight:800;
+    }
+
+    .hero-proof{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:12px;
+    }
+
+    .jump{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .jump a{color:var(--muted)}
+    .jump a:hover{color:var(--text)}
+    .dotsep{opacity:.45}
+
+    section{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    section h2{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.25;
+      letter-spacing:-.01em;
+    }
+
+    section h3{
+      margin:18px 0 8px;
+      font-size:18px;
+      line-height:1.35;
+    }
+
+    section p{margin:8px 0}
+
+    .note,
+    .ok-note{
+      display:flex;
+      gap:10px;
+      padding:13px 14px;
+      border-radius:14px;
+      margin:10px 0 14px;
+    }
+
+    .note{
+      border:1px solid var(--warn-border);
+      background:var(--warn-bg);
+    }
+
+    .ok-note{
+      border:1px solid var(--ok-border);
+      background:var(--ok-bg);
+    }
+
+    .note strong,
+    .ok-note strong{
+      font-weight:900;
+    }
+
+    .note .note-ico{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      margin-top:2px;
+      color:var(--warn);
+    }
+
+    .panel{
+      border:1px solid var(--soft-border);
+      background:var(--soft-bg);
+      border-radius:14px;
+      padding:14px 16px;
+      margin:10px 0 14px;
+    }
+
+    .mini-grid,
+    .stat-grid,
+    .check-grid,
+    .reward-grid,
+    .encyclopedia-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .stat-grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .reward-grid{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+
+    .encyclopedia-grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .mini-card,
+    .stat-card,
+    .check-card,
+    .reward-card,
+    .encyclopedia-card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+    }
+
+    .stat-card .label{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:6px;
+    }
+
+    .stat-card strong{
+      display:block;
+      font-size:24px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+
+    .stat-card em{
+      display:block;
+      margin-top:6px;
+      font-style:normal;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .mini-card h3,
+    .check-card h3,
+    .reward-card h3,
+    .encyclopedia-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+
+    .mini-card p,
+    .check-card p,
+    .reward-card p,
+    .encyclopedia-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .keyword{
+      color:var(--danger);
+      font-weight:900;
+    }
+
+    .guide-list{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .guide-list li{margin:6px 0}
+
+    .table-wrap{
+      overflow:auto;
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:640px;
+    }
+
+    th,td{
+      padding:12px;
+      border-bottom:1px solid var(--border);
+      text-align:center;
+      vertical-align:middle;
+      white-space:nowrap;
+    }
+
+    th{
+      background:#f8fafc;
+      font-size:14px;
+      font-weight:900;
+    }
+
+    td{
+      font-size:14px;
+    }
+
+    tbody tr:last-child td{border-bottom:none}
+
+    .links{
+      background:var(--soft-bg);
+      padding:16px;
+      border-radius:14px;
+      margin-top:14px;
+      border:1px solid var(--soft-border);
+    }
+
+    .links h3{
+      color:var(--text);
+      margin:0 0 8px;
+      font-size:18px;
+    }
+
+    .links a{font-weight:900}
+
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:#fff;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      cursor:pointer;
+      font-weight:900;
+      text-decoration:none !important;
+      line-height:1;
+      user-select:none;
+      background:#fff;
+      color:var(--text);
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      border-color:#d1d5db;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .anchor{
+      display:block;
+      height:0;
+      scroll-margin-top:calc(var(--sticky-top) + 12px);
+    }
+
+    .reward-thumb,
+    .encyclopedia-thumb{
+      width:100%;
+      aspect-ratio:1/1;
+      border:1px dashed #cbd5e1;
+      border-radius:14px;
+      background:#f8fafc;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      margin-bottom:12px;
+    }
+
+    .reward-thumb img,
+    .encyclopedia-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+    }
+
+    .zoomable{
+      cursor:zoom-in;
+    }
+
+    .image-modal{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      background:rgba(15,23,42,.82);
+      backdrop-filter:blur(4px);
+    }
+
+    .image-modal.is-open{
+      display:flex;
+    }
+
+    .image-modal-dialog{
+      position:relative;
+      width:min(96vw,1200px);
+      max-height:92vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .image-modal-img{
+      display:block;
+      max-width:100%;
+      max-height:92vh;
+      width:auto;
+      height:auto;
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 18px 40px rgba(0,0,0,.35);
+    }
+
+    .image-modal-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      width:44px;
+      height:44px;
+      border:none;
+      border-radius:999px;
+      background:rgba(17,24,39,.82);
+      color:#fff;
+      font-size:24px;
+      line-height:1;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .image-modal-close:hover{
+      background:rgba(17,24,39,.96);
+    }
+
+    .image-modal-caption{
+      position:absolute;
+      left:16px;
+      bottom:16px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(17,24,39,.78);
+      color:#fff;
+      font-size:13px;
+    }
+
+    @media (max-width:900px){
+      header.top{
+        position:sticky;
+        top:0;
+        z-index:40;
+      }
+
+      nav.section-tabs{
+        display:flex;
+        position:sticky;
+        top:var(--header-h);
+        z-index:35;
+      }
+
+      .hero{grid-template-columns:1fr}
+      .hero-visual{width:120px;height:120px}
+      h1{font-size:28px}
+      .hero-lead{font-size:17px}
+      .mini-grid,
+      .check-grid,
+      .stat-grid,
+      .reward-grid,
+      .encyclopedia-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:600px){
+      body{font-size:15px}
+      .wrap{padding:14px 12px 56px}
+      h1{font-size:25px}
+      section{padding:15px}
+      .image-modal{
+        padding:12px;
+      }
+      .image-modal-close{
+        top:8px;
+        right:8px;
+      }
+      .image-modal-caption{
+        left:10px;
+        right:10px;
+        bottom:10px;
+        border-radius:12px;
+        text-align:center;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"首頁","item":"https://kingshotdata.kr/zh-tw/"},
+          {"@type":"ListItem","position":2,"name":"指南","item":"https://kingshotdata.kr/zh-tw/guides/"},
+          {"@type":"ListItem","position":3,"name":"釣魚活動攻略指南","item":"https://kingshotdata.kr/zh-tw/guides/fishing-event-guide.html"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"KingShot 釣魚活動攻略指南",
+        "description":"整理釣魚活動結構、潮汐號角使用、裝備升級、寶藏關卡分數運營、重新開始技巧與獎勵外觀圖鑑的完整指南。",
+        "mainEntityOfPage":"https://kingshotdata.kr/zh-tw/guides/fishing-event-guide.html",
+        "inLanguage":"zh-Hant",
+        "author":{
+          "@type":"Organization",
+          "name":"KingshotData"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"KingshotData",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://kingshotdata.kr/img/kingshotdata-logo.png"
+          }
+        },
+        "image":"https://kingshotdata.kr/img/guide/fishing-event-guide.webp"
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMGDGSEWW6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-info" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
+      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <a href="/zh-tw/" aria-label="KingshotData 首頁">
+          <img src="/img/kingshotdata-logo.png" alt="KingshotData" loading="eager" fetchpriority="high" width="28" height="28" />
+          <span>KingshotData</span>
+        </a>
+      </div>
+
+      <nav class="lang" aria-label="Language">
+        <a href="/en/guides/fishing-event-guide.html">EN</a>
+        <a href="/ko/guides/fishing-event-guide.html">KO</a>
+        <a href="/ja/guides/fishing-event-guide.html">JA</a>
+        <a href="/zh-tw/guides/fishing-event-guide.html" aria-current="page">ZH-TW</a>
+      </nav>
+    </header>
+
+    <nav class="section-tabs" aria-label="Section navigation">
+      <a href="#overview">結論</a>
+      <a href="#basic">基本資訊</a>
+      <a href="#strategy">核心策略</a>
+      <a href="#control">操作技巧</a>
+      <a href="#reward-skins">獎勵外觀</a>
+      <a href="#encyclopedia">圖鑑</a>
+    </nav>
+
+    <main id="main">
+      <div class="crumbs">
+        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
+        <a href="/zh-tw/guides/">指南</a> <span class="muted">›</span>
+        <span>釣魚活動攻略指南</span>
+      </div>
+
+      <div class="hero">
+        <div class="hero-visual">
+          <img src="/img/guide/fishing-event-guide.webp" alt="KingShot 釣魚活動攻略指南" loading="eager" fetchpriority="high" width="160" height="160">
+        </div>
+
+        <div>
+          <h1>KingShot 釣魚活動攻略指南</h1>
+          <p class="hero-lead">想衝進排行榜，關鍵就在潮汐號角的使用時機、寶藏關卡的分數運營，以及上浮階段的操作穩定度。</p>
+          <p class="sub">
+            從基本資訊、裝備升級順序、寶藏關卡目標分數、重新開始技巧，到獎勵外觀與釣魚圖鑑，這裡一次整理完成。
+          </p>
+
+          <div class="hero-cta" aria-label="重點摘要">
+            <p>先記住這幾點就夠了。</p>
+            <div class="hero-proof" aria-label="quick summary">
+              <span class="badge">裝備最高等級 10</span>
+              <span class="badge">寶藏關卡開局即滿級</span>
+              <span class="badge">潮汐號角運用最關鍵</span>
+              <span class="badge">圖鑑圖片可放大查看</span>
+            </div>
+
+            <div class="jump" aria-label="Quick jump links">
+              <a class="btn btn-primary" href="#strategy">查看核心策略</a>
+              <a class="btn" href="#reward-skins">查看獎勵外觀</a>
+              <a class="btn" href="#encyclopedia">查看釣魚圖鑑</a>
+            </div>
+          </div>
+
+          <div class="jump" aria-label="Quick jump links">
+            <a href="#overview">結論</a><span class="dotsep">•</span>
+            <a href="#basic">基本資訊</a><span class="dotsep">•</span>
+            <a href="#strategy">核心策略</a><span class="dotsep">•</span>
+            <a href="#control">操作技巧</a><span class="dotsep">•</span>
+            <a href="#reward-skins">獎勵外觀</a><span class="dotsep">•</span>
+            <a href="#encyclopedia">圖鑑</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="overview">
+        <span class="anchor"></span>
+        <h2>結論</h2>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <span class="label">核心道具</span>
+            <strong>潮汐號角</strong>
+            <em>拉開排行榜差距的重點</em>
+          </div>
+          <div class="stat-card">
+            <span class="label">核心關卡</span>
+            <strong>寶藏關卡</strong>
+            <em>升級與高分的中心</em>
+          </div>
+          <div class="stat-card">
+            <span class="label">目標分數</span>
+            <strong>1,200分+</strong>
+            <em>寶藏關卡最低建議標準</em>
+          </div>
+        </div>
+
+        <div class="note" role="note" aria-label="Important note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>重點：</strong>釣魚活動不是單純打更多場次，而是
+            <span class="keyword">在寶藏關卡中快速完成裝備升級，並把分數效率拉高</span>。
+          </div>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="point note">
+          <div>
+            <strong>核心思路：</strong>前期先專心升裝，升裝完成後再回到一般關卡，挑高效率目標去拉高總分，這樣最穩定。
+          </div>
+        </div>
+      </section>
+
+      <section id="basic">
+        <span class="anchor"></span>
+        <h2>活動基本資訊</h2>
+
+        <div class="check-grid">
+          <div class="check-card">
+            <h3>活動構成</h3>
+            <p>活動共分為 5 個頁面。分別是釣魚錦標賽、釣魚俱樂部、釣魚大師排行榜、釣魚專家套組，以及圖鑑。</p>
+          </div>
+          <div class="check-card">
+            <h3>核心玩法</h3>
+            <p>實際釣魚操作是在釣魚錦標賽頁面中進行。</p>
+          </div>
+          <div class="check-card">
+            <h3>裝備最高等級</h3>
+            <p>釣線、魚鉤、鉛墜的最高等級皆為 10。</p>
+          </div>
+          <div class="check-card">
+            <h3>關卡區分</h3>
+            <p>活動分為一般關卡與寶藏關卡，其中寶藏關卡是高分的主要來源。</p>
+          </div>
+        </div>
+
+        <div class="ok-note" role="note" aria-label="Treasure stage note">
+          <div>
+            <strong>寶藏關卡：</strong>透過海上寶藏地圖道具進入的特殊關卡。開場就會直接套用滿級裝備，因此在衝高分與快速升級方面非常有利。
+          </div>
+        </div>
+      </section>
+
+      <section id="strategy">
+        <span class="anchor"></span>
+        <h2>衝榜核心策略</h2>
+
+        <div class="note" role="note" aria-label="Ranking note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>關鍵：</strong>想衝進排行榜，最重要的就是潮汐號角要在什麼時候、對哪一種魚使用。
+          </div>
+        </div>
+
+        <h3>前期玩法 - 裝備升級階段</h3>
+        <ul class="guide-list">
+          <li>先把捲線器、深海感測器、照明燈等增益全部開啟後再開始。</li>
+          <li>5星、4星魚盡量全抓，其餘則以 3 星魚為主，能抓多少抓多少。</li>
+          <li>每一局以 1,150 分到 1,200 分為目標去累積點數。</li>
+          <li>點數優先投入釣線升級。</li>
+          <li>釣線等級提升後，再把潮汐號角用在當前賽季的 5 星魚上，重複 3 到 4 輪，把基本裝備升級完成。</li>
+        </ul>
+
+        <div class="panel">
+          <p><strong>熟練後的小技巧</strong></p>
+          <p>當你已經能分辨魚種時，其實只開照明燈也能有不錯效率。</p>
+          <p>想省資源的話，捲線器與深海感測器不一定每次都要固定開。</p>
+        </div>
+
+        <h3>正式刷分 - 裝備升級完成後</h3>
+        <ul class="guide-list">
+          <li>在寶藏關卡把裝備升滿後，後續就可以回到一般關卡做分數運營。</li>
+          <li>上浮過程中，像海膽、淡菜、龍蝦這類 20 分目標可以順手補抓，效率不錯。</li>
+          <li>像斷劍、船舵這類 1 星道具，抓過一次之後就建議直接避開。</li>
+        </ul>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>階段</th>
+                <th>運營目標</th>
+                <th>核心重點</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>前期</td>
+                <td>升級裝備</td>
+                <td>以 5 星、4 星、3 星魚為主穩定拿分</td>
+              </tr>
+              <tr>
+                <td>中期</td>
+                <td>優先強化釣線</td>
+                <td>反覆運用潮汐號角</td>
+              </tr>
+              <tr>
+                <td>後期</td>
+                <td>極限衝榜</td>
+                <td>一般關卡高效率抓取與精準迴避</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="control">
+        <span class="anchor"></span>
+        <h2>操作與細節技巧</h2>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>550m 下潛操作</h3>
+            <p>透過右上角的暫停與退出反覆操作，把護盾消耗壓到 2 個以下，這是高分基礎。</p>
+          </div>
+          <div class="mini-card">
+            <h3>釣魚優惠券</h3>
+            <p>拿到優惠券後建議直接使用，因為能把分數直接提高到 1.5 倍，差距非常明顯。</p>
+          </div>
+        </div>
+
+        <h3>魚類星級判斷方式</h3>
+        <ul class="guide-list">
+          <li>5星魚：華麗的金色光暈</li>
+          <li>4星魚：銀色或淡藍色光暈</li>
+          <li>3星魚：淡銅色或棕色系光暈</li>
+        </ul>
+
+        <h3>必學迴避與操作技巧</h3>
+        <ul class="guide-list">
+          <li>比起下潛階段，上浮階段的操作其實更重要。</li>
+          <li>小型魚撞牆後會大幅減速，所以不要一直貼牆走。</li>
+          <li>食人魚在下潛時建議避開，上浮時則可以視情況故意被咬來拿 40 分。</li>
+          <li>魚尾部位可能不會被釣上來，只會消耗護盾，要特別注意。</li>
+          <li>不要只會沿牆移動，學會細膩走位與閃避，才是拉開分數的關鍵。</li>
+        </ul>
+
+        <div class="ok-note" role="note" aria-label="Treasure score note">
+          <div>
+            <strong>寶藏關卡目標分數：</strong>若潮汐號角、捲線器、深海感測器、照明燈全部開滿，最低建議目標是 1,200 分以上。若是滿增益狀態下抓到 2 隻 5 星、1 到 2 隻 4 星，其餘用 3 星填滿，則有機會達到 1,800 到 1,900 分。
+          </div>
+        </div>
+      </section>
+
+      <section id="qa">
+        <span class="anchor"></span>
+        <h2>Q&amp;A - 失誤後重新開始可以嗎</h2>
+
+        <div class="panel">
+          <p><strong>Q.</strong> 如果途中撞太多次，導致沒辦法順利下潛到底，這時候按重新開始可以嗎？</p>
+          <p><strong>A.</strong> 可以，而且從分數角度來看，很多時候重新開始反而更划算。</p>
+        </div>
+
+        <p>按下重新開始之後，之前出現過的高分魚與寶箱，依然會在相同位置重新出現。所以如果下潛階段失誤太大，不用猶豫，直接重開去追求更完整的一次操作會更好。</p>
+
+        <div class="note" role="note" aria-label="Mermaid note">
+          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+          <div>
+            <strong>例外：</strong>人魚在每次重新開始後，位置與是否出現都會隨機變動。雖然可以利用這點去賭人魚刷新，但實際上更常遇到的是人魚不出現，或跑出其他目標。
+          </div>
+        </div>
+      </section>
+
+      <section id="reward-skins">
+        <span class="anchor"></span>
+        <h2>獎勵外觀</h2>
+
+        <div class="reward-grid">
+          <div class="reward-card">
+            <div class="reward-thumb">
+              <img src="/img/guide/도시스킨2.png" alt="KingShot 釣魚活動 城市外觀">
+            </div>
+            <h3>城市外觀</h3>
+          </div>
+
+          <div class="reward-card">
+            <div class="reward-thumb">
+              <img src="/img/guide/프레임2.png" alt="KingShot 釣魚活動 頭像框">
+            </div>
+            <h3>頭像框</h3>
+          </div>
+
+          <div class="reward-card">
+            <div class="reward-thumb">
+              <img src="/img/guide/행군스킨2.png" alt="KingShot 釣魚活動 行軍外觀">
+            </div>
+            <h3>行軍外觀</h3>
+          </div>
+
+          <div class="reward-card">
+            <div class="reward-thumb">
+              <img src="/img/guide/명패2.png" alt="KingShot 釣魚活動 名牌">
+            </div>
+            <h3>名牌</h3>
+          </div>
+        </div>
+      </section>
+
+      <section id="encyclopedia">
+        <span class="anchor"></span>
+        <h2>釣魚圖鑑</h2>
+
+        <div class="encyclopedia-grid">
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/봄.png" alt="KingShot 釣魚圖鑑 春季" data-zoom-src="/img/guide/봄.png" data-zoom-title="春季">
+            </div>
+            <h3>春季</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/여름.png" alt="KingShot 釣魚圖鑑 夏季" data-zoom-src="/img/guide/여름.png" data-zoom-title="夏季">
+            </div>
+            <h3>夏季</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/가을.png" alt="KingShot 釣魚圖鑑 秋季" data-zoom-src="/img/guide/가을.png" data-zoom-title="秋季">
+            </div>
+            <h3>秋季</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/겨울.png" alt="KingShot 釣魚圖鑑 冬季" data-zoom-src="/img/guide/겨울.png" data-zoom-title="冬季">
+            </div>
+            <h3>冬季</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/명패.png" alt="KingShot 釣魚圖鑑 名牌" data-zoom-src="/img/guide/명패.png" data-zoom-title="名牌">
+            </div>
+            <h3>名牌</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/프레임.png" alt="KingShot 釣魚圖鑑 頭像框" data-zoom-src="/img/guide/프레임.png" data-zoom-title="頭像框">
+            </div>
+            <h3>頭像框</h3>
+          </div>
+
+          <div class="encyclopedia-card">
+            <div class="encyclopedia-thumb">
+              <img class="zoomable" src="/img/guide/행군스킨.png" alt="KingShot 釣魚圖鑑 行軍外觀" data-zoom-src="/img/guide/행군스킨.png" data-zoom-title="行軍外觀">
+            </div>
+            <h3>行軍外觀</h3>
+          </div>
+        </div>
+      </section>
+
+      <section id="links">
+        <span class="anchor"></span>
+        <h2>相關連結</h2>
+
+        <div class="links">
+          <h3>最新禮包碼</h3>
+          <a href="/zh-tw/guides/kingshot-giftcode.html">查看 KingShot 最新禮包碼</a>
+        </div>
+
+        <div class="links">
+          <h3>KingShot 儲值指南</h3>
+          <a href="/zh-tw/guides/topup-guide.html">查看 KingShot 儲值指南</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="image-modal" id="imageModal" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-label="圖片放大檢視">
+      <button type="button" class="image-modal-close" id="imageModalClose" aria-label="關閉">×</button>
+      <img class="image-modal-img" id="imageModalImg" src="" alt="">
+      <div class="image-modal-caption" id="imageModalCaption"></div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      var mqMobile = window.matchMedia('(max-width: 900px)');
+
+      function setStickyTop(){
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        var isMobile = mqMobile.matches;
+
+        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
+        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
+
+        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
+        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
+        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
+      }
+
+      setStickyTop();
+      requestAnimationFrame(setStickyTop);
+      setTimeout(setStickyTop, 60);
+
+      if (mqMobile && mqMobile.addEventListener) {
+        mqMobile.addEventListener('change', setStickyTop);
+      } else if (mqMobile && mqMobile.addListener) {
+        mqMobile.addListener(setStickyTop);
+      }
+
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function(){ setStickyTop(); });
+        var header = document.querySelector('header.top');
+        var tabs = document.querySelector('nav.section-tabs');
+        if (header) ro.observe(header);
+        if (tabs) ro.observe(tabs);
+      }
+
+      window.addEventListener('load', setStickyTop);
+      window.addEventListener('resize', setStickyTop);
+
+      var modal = document.getElementById('imageModal');
+      var modalImg = document.getElementById('imageModalImg');
+      var modalCaption = document.getElementById('imageModalCaption');
+      var modalClose = document.getElementById('imageModalClose');
+      var zoomables = document.querySelectorAll('.zoomable');
+      var lastFocused = null;
+
+      function openModal(src, alt, title){
+        if (!src) return;
+        lastFocused = document.activeElement;
+        modalImg.src = src;
+        modalImg.alt = alt || title || '放大圖片';
+        modalCaption.textContent = title || alt || '';
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        modalClose.focus();
+      }
+
+      function closeModal(){
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        modalImg.src = '';
+        modalImg.alt = '';
+        modalCaption.textContent = '';
+        document.body.classList.remove('modal-open');
+        if (lastFocused) lastFocused.focus();
+      }
+
+      zoomables.forEach(function(img){
+        img.addEventListener('click', function(){
+          openModal(
+            img.getAttribute('data-zoom-src') || img.getAttribute('src'),
+            img.getAttribute('alt'),
+            img.getAttribute('data-zoom-title')
+          );
+        });
+
+        img.addEventListener('keydown', function(e){
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModal(
+              img.getAttribute('data-zoom-src') || img.getAttribute('src'),
+              img.getAttribute('alt'),
+              img.getAttribute('data-zoom-title')
+            );
+          }
+        });
+
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('role', 'button');
+        img.setAttribute('aria-label', (img.getAttribute('data-zoom-title') || img.getAttribute('alt') || '圖片') + ' 放大檢視');
+      });
+
+      modalClose.addEventListener('click', closeModal);
+
+      modal.addEventListener('click', function(e){
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+          closeModal();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
