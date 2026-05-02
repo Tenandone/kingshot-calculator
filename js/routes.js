@@ -269,6 +269,17 @@
       return slug;
     }
 
+    function normalizeMasterSlug(slug){
+      slug = String(slug || '').trim();
+      if (!slug) return slug;
+
+      slug = slug.replace(/\.html$/i, '');
+      slug = slug.toLowerCase();
+
+      if (slug === 'roman' || slug === 'pan' || slug === 'valora') return slug;
+      return '';
+    }
+
     function getPetFileCandidates(lang, slug) {
       var cands = [
         '/' + lang + '/pet/' + slug + '.html',
@@ -291,6 +302,14 @@
       }
 
       return cands;
+    }
+
+    function getMasterFileCandidates(lang, slug) {
+      return [
+        '/' + lang + '/masters/' + slug + '/index.html',
+        '/' + lang + '/masters/' + slug + '/',
+        '/' + lang + '/masters/' + slug + '.html'
+      ];
     }
 
     var __htmlCache = new Map();
@@ -515,6 +534,7 @@
             { href:'/buildings',  img:'/img/home/saulchar.png',   t:'home.card.buildings.title',   d:'home.card.buildings.desc' },
             { href:'/heroes',     img:'/img/home/helgachar.png',  t:'home.card.heroes.title',      d:'home.card.heroes.desc' },
             { href:'/pet',        img:'/img/home/pet.png',        t:'nav.pet',                     d:'home.card.pet.desc' },
+            { href:'/masters',    img:'/img/masters/valora.webp', t:'home.card.masters.title',     d:'home.card.masters.desc' },
             { href:'/database',   img:'/img/home/database.png',   t:'home.card.database.title',    d:'home.card.database.desc' },
             { href:'/guides',     img:'/img/home/guides.png',     t:'home.card.guides.title',      d:'home.card.guides.desc' },
             { href:'/calculator', img:'/img/home/calculator.png', t:'home.card.calculators.title', d:'home.card.calculators.desc' },
@@ -841,6 +861,101 @@
               '<div class="placeholder">' +
                 '<h2>Not Found</h2>' +
                 '<p class="muted">Missing: ' + cands.map(function(x){ return x; }).join(' , ') + '</p>' +
+              '</div>';
+            return;
+          }
+
+          el.innerHTML = htmlBodyOnly(html);
+          try { apply(el); } catch(e){}
+          window.scrollTo({ top: 0 });
+          focusMain(el);
+        }
+      },
+
+      '/masters': {
+        title: 'Masters - KingshotData.kr',
+        render: async function (el, __forcedLang) {
+          var lang = normLangCode(__forcedLang) || getCurrentLang();
+          var cands = [
+            '/' + lang + '/masters/index.html',
+            '/' + lang + '/masters/'
+          ];
+
+          if (lang === 'zh-tw') {
+            cands.push('/zh-TW/masters/index.html');
+          }
+
+          if (window.KD_ROUTE_MOUNT_LOCALIZED_HTML && typeof window.KD_ROUTE_MOUNT_LOCALIZED_HTML === 'function') {
+            return window.KD_ROUTE_MOUNT_LOCALIZED_HTML(el, {
+              routeType: 'masters',
+              lang: lang,
+              candidates: cands,
+              pageURL: '/' + lang + '/masters/',
+              assetKey: 'masters-index-' + lang,
+              titleFallback: 'Masters - KingshotData.kr',
+              afterMount: function (mountRoot) {
+                focusMain(mountRoot);
+              }
+            });
+          }
+
+          var token = newRenderToken();
+          el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+
+          var html = await loadHTMLCached(cands);
+          if (isStale(token)) return;
+
+          if (!html) {
+            el.innerHTML =
+              '<div class="placeholder">' +
+                '<h2>Not Found</h2>' +
+                '<p class="muted">Missing: ' + cands.join(' , ') + '</p>' +
+              '</div>';
+            return;
+          }
+
+          el.innerHTML = htmlBodyOnly(html);
+          try { apply(el); } catch(e){}
+          window.scrollTo({ top: 0 });
+          focusMain(el);
+        }
+      },
+
+      '/master-static': {
+        title: 'Master - KingshotData.kr',
+        render: async function (el, rest, __forcedLang) {
+          var slug = normalizeMasterSlug(safeSeg((rest || '').split('/').filter(Boolean)[0] || ''));
+          if (!slug) { goto('/masters'); return; }
+
+          var lang = normLangCode(__forcedLang) || getCurrentLang();
+          var cands = getMasterFileCandidates(lang, slug);
+
+          if (window.KD_ROUTE_MOUNT_LOCALIZED_HTML && typeof window.KD_ROUTE_MOUNT_LOCALIZED_HTML === 'function') {
+            return window.KD_ROUTE_MOUNT_LOCALIZED_HTML(el, {
+              routeType: 'masters',
+              lang: lang,
+              slug: slug,
+              candidates: cands,
+              pageURL: '/' + lang + '/masters/' + slug + '/',
+              assetKey: 'masters-' + lang + '-' + slug,
+              titleFallback: 'Master - KingshotData.kr',
+              afterMount: function (mountRoot) {
+                focusMain(mountRoot);
+              }
+            });
+          }
+
+          var token = newRenderToken();
+          el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+
+          var html = await loadHTMLCached(cands);
+          if (isStale(token)) return;
+
+          if (!html) {
+            el.innerHTML =
+              '<div class="placeholder">' +
+                '<h2>Not Found</h2>' +
+                '<p class="muted">Missing: ' + cands.join(' , ') + '</p>' +
               '</div>';
             return;
           }
@@ -1235,6 +1350,7 @@
       '/':           { js: [], html: ['/tools/home-waracademy-banner.html', 'tools/home-waracademy-banner.html'] },
       '/heroes':     { js: ['/js/pages/heroes.js'], html: ['pages/heroes.html','/pages/heroes.html'] },
       '/pet':        { js: ['/js/pages/pet.js'], html: ['/en/pet/index.html', '/ko/pet/index.html', '/ja/pet/index.html', '/zh-tw/pet/index.html'] },
+      '/masters':    { js: [], html: ['/en/masters/index.html', '/ko/masters/index.html', '/ja/masters/index.html', '/zh-tw/masters/index.html'] },
       '/database':   { js: ['/js/pages/database.js'], html: ['pages/database.html','/pages/database.html'] },
       '/guides':     { js: ['/js/pages/guides.js'], css: ['/css/guides.css'], html: ['pages/guides.html','/pages/guides.html'] },
       '/waracademy': { js: ['/js/pages/waracademy.js'], css: ['/css/waracademy.css'], html: ['pages/waracademy.html','/pages/waracademy.html'] }
@@ -1253,7 +1369,7 @@
     }
 
     document.addEventListener('mouseover', function (e) {
-      var a = e.target.closest && e.target.closest('a.card--category, a[href="/"], a[href="/buildings"], a[href="/heroes"], a[href="/pet"], a[href="/database"], a[href="/guides"], a[href="/waracademy"], a[href="/war-academy"], a[href="/home"]');
+      var a = e.target.closest && e.target.closest('a.card--category, a[href="/"], a[href="/buildings"], a[href="/heroes"], a[href="/pet"], a[href="/masters"], a[href="/database"], a[href="/guides"], a[href="/waracademy"], a[href="/war-academy"], a[href="/home"]');
       if (!a) return;
       prefetchFor(a.href);
     });

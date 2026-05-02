@@ -333,6 +333,14 @@
     );
   }
 
+  function isMastersDetailPath(pathname) {
+    var p = String(pathname || '');
+    return (
+      /^\/masters\/[^\/?#]+(?:\.html)?$/i.test(p) ||
+      /^\/(ko|en|ja|zh-tw|zh-TW)\/masters\/[^\/?#]+(?:\.html)?$/i.test(p)
+    );
+  }
+
   function renderPetDetail(el, slug, lang, token) {
     var safeSlug = stripHtmlExt(String(slug || '').replace(/^\/+|\/+$/g, ''));
     var langFolder = normalizeLangFolder(lang || getCurrentContentLang());
@@ -395,6 +403,9 @@
               }
               if (sec === 'pet') {
                 return window.navigate(getPetHrefByLang(targetSlug));
+              }
+              if (sec === 'masters') {
+                return window.navigate('/masters/' + targetSlug);
               }
             }
           } catch (_) {}
@@ -849,6 +860,11 @@
         return u;
       }
 
+      if (segs[1] === 'masters' && segs[2]) {
+        u.pathname = '/' + segs[0] + '/masters/' + segs.slice(2).join('/').replace(/\.html$/i, '');
+        return u;
+      }
+
       if (segs[1] === 'database' && segs[2]) {
         u.pathname = '/db/' + segs.slice(2).join('/').replace(/\.html$/i, '');
         return u;
@@ -875,6 +891,11 @@
 
     if (segs[0] === 'pet' && segs[1]) {
       u.pathname = '/' + normalizeLangFolder(getCurrentContentLang()) + '/pet/' + segs.slice(1).join('/').replace(/\.html$/i, '');
+      return u;
+    }
+
+    if (segs[0] === 'masters' && segs[1]) {
+      u.pathname = '/masters/' + segs.slice(1).join('/').replace(/\.html$/i, '');
       return u;
     }
 
@@ -1108,6 +1129,39 @@
         });
       }
 
+      if (pathNorm === '/masters') {
+        removeCSS('calc-css');
+        if (routes && routes['/masters'] && typeof routes['/masters'].render === 'function') {
+          return Promise.resolve(routes['/masters'].render(el));
+        }
+      }
+
+      if (segs.length === 2 && (segs[0] === 'ko' || segs[0] === 'en' || segs[0] === 'ja' || segs[0] === 'zh-tw' || segs[0] === 'zh-TW') && segs[1] === 'masters') {
+        removeCSS('calc-css');
+        var mastersListLang = normalizeLangFolder(segs[0]);
+        if (routes && routes['/masters'] && typeof routes['/masters'].render === 'function') {
+          return Promise.resolve(routes['/masters'].render(el, mastersListLang));
+        }
+      }
+
+      if (isMastersDetailPath(pathNorm)) {
+        removeCSS('calc-css');
+
+        var masterLang = normalizeLangFolder(getCurrentContentLang());
+        var masterSlug = '';
+
+        if (segs.length >= 3 && (segs[0] === 'ko' || segs[0] === 'en' || segs[0] === 'ja' || segs[0] === 'zh-tw' || segs[0] === 'zh-TW') && segs[1] === 'masters') {
+          masterLang = normalizeLangFolder(segs[0]);
+          masterSlug = stripHtmlExt(segs.slice(2).join('/'));
+        } else if (segs.length >= 2 && segs[0] === 'masters') {
+          masterSlug = stripHtmlExt(segs.slice(1).join('/'));
+        }
+
+        if (routes && routes['/master-static'] && typeof routes['/master-static'].render === 'function') {
+          return Promise.resolve(routes['/master-static'].render(el, masterSlug, masterLang));
+        }
+      }
+
       if (pathNorm.indexOf('/db/') === 0 && segs.length >= 2) {
         removeCSS('calc-css');
         return Promise.resolve(renderDbDetail(el, stripHtmlExt(segs[1]), segs.length >= 3 ? segs.slice(2).join('/') : ''));
@@ -1202,6 +1256,7 @@
 
     var href = a.getAttribute('href');
     if (!href) return;
+    if (a.__kdMountedLinkBound) return;
 
     if (
       /^\/guides\/(?!$)(?!index(?:\.html)?$)[^\/?#]+(?:\.html)?(?:[?#].*)?$/i.test(href) ||
@@ -1312,8 +1367,10 @@
       var m3 = p.match(/^\/db\/[^\/?#]+(\/.*)?$/i);
       var m4 = p.match(/^\/pet\/[^\/?#]+(\.html)?$/i);
       var m5 = p.match(/^\/(en|ko|ja|zh-tw|zh-TW)\/pet\/[^\/?#]+(\.html)?$/i);
+      var m6 = p.match(/^\/masters(\/[^\/?#]+)?(\.html)?$/i);
+      var m7 = p.match(/^\/(en|ko|ja|zh-tw|zh-TW)\/masters(\/[^\/?#]+)?(\.html)?$/i);
 
-      if (m1 || m2 || m3 || m4 || m5) {
+      if (m1 || m2 || m3 || m4 || m5 || m6 || m7) {
         dispatch();
       }
     } catch (_e) {}
