@@ -103,6 +103,7 @@
 
   /* ========= Plan ========= */
   const PLAN = [
+    { type:'gen', value:'7',  label:'Gen7', limit:3 },
     { type:'gen', value:'6',  label:'Gen6', limit:3 },
     { type:'gen', value:'5',  label:'Gen5', limit:3 },
     { type:'gen', value:'4',  label:'Gen4', limit:3 },
