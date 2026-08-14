@@ -672,6 +672,17 @@
               <a class="btn" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow">교환</a>
             </div>
           </article>
+          <article class="card" data-static-preview="true">
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <div class="code">Kingshot888</div>
+              <span class="badge active">사용 가능</span>
+            </div>
+            <div class="until">상시 코드</div>
+            <div class="actions">
+              <button class="btn" type="button" onclick="navigator.clipboard && navigator.clipboard.writeText('Kingshot888')">복사</button>
+              <a class="btn" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow">교환</a>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -816,6 +827,16 @@
             <article class="card">
               <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
                 <div class="code">VIP777</div>
+                <span class="badge active">사용 가능</span>
+              </div>
+              <div class="until">상시 코드</div>
+              <div class="actions">
+                <a class="btn" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow">교환</a>
+              </div>
+            </article>
+            <article class="card">
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                <div class="code">Kingshot888</div>
                 <span class="badge active">사용 가능</span>
               </div>
               <div class="until">상시 코드</div>
@@ -1196,7 +1217,12 @@
               return ap - bp;
             });
 
-          renderCodes(active);
+          const permanentActive = [
+            { code:"VIP777", until:"permanent" },
+            { code:"Kingshot888", until:"permanent" }
+          ];
+
+          renderCodes(permanentActive.concat(active));
         } catch (e) {
           console.error(e);
           renderArchive();
@@ -1205,6 +1231,8 @@
           if (grid) {
             grid.innerHTML = "";
             grid.appendChild(makeCodeCard({ code:"VIP777", until:"상시" }, LANG_DATA.ko));
+
+            grid.appendChild(makeCodeCard({ code:"Kingshot888", until:"상시" }, LANG_DATA.ko));
           }
         }
       }

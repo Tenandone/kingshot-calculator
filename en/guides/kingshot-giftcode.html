@@ -379,6 +379,17 @@
               <a class="btn" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow">Redeem</a>
             </div>
           </article>
+          <article class="card" data-static-preview="true">
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <div class="code">Kingshot888</div>
+              <span class="badge active">Active</span>
+            </div>
+            <div class="until">Permanent Code</div>
+            <div class="actions">
+              <button class="btn" type="button" onclick="navigator.clipboard && navigator.clipboard.writeText('Kingshot888')">Copy</button>
+              <a class="btn" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow">Redeem</a>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -523,6 +534,16 @@
             <article class="card">
               <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
                 <div class="code">VIP777</div>
+                <span class="badge active">Active</span>
+              </div>
+              <div class="until">Permanent Code</div>
+              <div class="actions">
+                <a class="btn" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow">Redeem</a>
+              </div>
+            </article>
+            <article class="card">
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                <div class="code">Kingshot888</div>
                 <span class="badge active">Active</span>
               </div>
               <div class="until">Permanent Code</div>
@@ -893,7 +914,12 @@
               return ap - bp;
             });
 
-          renderCodes(active);
+          const permanentActive = [
+            { code:"VIP777", until:"permanent" },
+            { code:"Kingshot888", until:"permanent" }
+          ];
+
+          renderCodes(permanentActive.concat(active));
         } catch (e) {
           console.error(e);
           renderArchive();
@@ -902,6 +928,8 @@
           if (grid) {
             grid.innerHTML = "";
             grid.appendChild(makeCodeCard({ code:"VIP777", until:"Permanent" }, LANG_DATA.en));
+
+            grid.appendChild(makeCodeCard({ code:"Kingshot888", until:"Permanent" }, LANG_DATA.en));
           }
         }
       }
