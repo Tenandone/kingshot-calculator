@@ -534,11 +534,11 @@
           if (isStale(token)) return;
 
           var cards = [
-            { href:'/buildings',  img:'/img/home/saulchar.png',   t:'home.card.buildings.title',   d:'home.card.buildings.desc' },
-            { href:'/heroes',     img:'/img/home/helgachar.png',  t:'home.card.heroes.title',      d:'home.card.heroes.desc' },
-            { href:'/pet',        img:'/img/home/pet.png',        t:'nav.pet',                     d:'home.card.pet.desc' },
-            { href:'/masters',    img:'/img/masters/valora.webp', t:'home.card.masters.title',     d:'home.card.masters.desc' },
-            { href:'/database',   img:'/img/home/database.png',   t:'home.card.database.title',    d:'home.card.database.desc' }
+            { href:'/buildings',  img:'/img/home/saulchar-card.webp',  t:'home.card.buildings.title',   d:'home.card.buildings.desc' },
+            { href:'/heroes',     img:'/img/home/helgachar-card.webp', t:'home.card.heroes.title',      d:'home.card.heroes.desc' },
+            { href:'/pet',        img:'/img/home/pet-card.webp',       t:'nav.pet',                     d:'home.card.pet.desc' },
+            { href:'/masters',    img:'/img/masters/valora-card.webp', t:'home.card.masters.title', d:'home.card.masters.desc' },
+            { href:'/database',   img:'/img/home/database-card.webp',  t:'home.card.database.title',    d:'home.card.database.desc' }
           ];
 
           var quickLinks = [
@@ -1555,6 +1555,38 @@
           el.innerHTML = html ? htmlBodyOnly(html)
             : '<div class="placeholder"><h2 data-i18n="about.title">소개</h2><p class="muted" data-i18n="about.missing">about.html을 찾을 수 없습니다.</p></div>';
           setTitle('title.about', '소개 - KingshotData.kr');
+          apply(el);
+          window.scrollTo({ top: 0 });
+          focusMain(el);
+        }
+      },
+
+      '/contact': {
+        title: '문의 - KingshotData.kr',
+        render: async function (el) {
+          var token = newRenderToken();
+          el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+          var html = await loadHTMLCached(['pages/contact.html','/pages/contact.html']);
+          if (isStale(token)) return;
+          el.innerHTML = html ? htmlBodyOnly(html)
+            : '<div class="placeholder"><h2 data-i18n="contact.h1">문의</h2></div>';
+          setTitle('contact.title', '문의 - KingshotData.kr');
+          apply(el);
+          window.scrollTo({ top: 0 });
+          focusMain(el);
+        }
+      },
+
+      '/terms': {
+        title: '이용약관 - KingshotData.kr',
+        render: async function (el) {
+          var token = newRenderToken();
+          el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+          var html = await loadHTMLCached(['pages/terms.html','/pages/terms.html']);
+          if (isStale(token)) return;
+          el.innerHTML = html ? htmlBodyOnly(html)
+            : '<div class="placeholder"><h2 data-i18n="terms.h1">이용약관</h2></div>';
+          setTitle('terms.title', '이용약관 - KingshotData.kr');
           apply(el);
           window.scrollTo({ top: 0 });
           focusMain(el);

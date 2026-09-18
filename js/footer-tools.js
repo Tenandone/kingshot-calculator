@@ -341,7 +341,7 @@
     lootbar.className = 'footer-image-banner';
     lootbar.innerHTML =
       '<a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">' +
-        '<img src="/img/lootbar.png" alt="Top-up Guide Banner" loading="lazy">' +
+        '<img src="/img/lootbar.webp" alt="Top-up Guide Banner" loading="lazy" decoding="async" width="816" height="75">' +
       '</a>';
 
     container.appendChild(couponWrap);

@@ -5,6 +5,7 @@
   var MOUNT_ID = 'naverCafeBannerMount';
   var SRC = '/tools/naver-banner.html';
   var bannerReqId = 0;
+  var observer = null;
 
   async function loadNaverCafeBanner(){
     var mount = document.getElementById(MOUNT_ID);
@@ -19,7 +20,8 @@
     }
 
     try{
-      var res = await fetch(SRC + '?v=' + Date.now(), { cache: 'no-store' });
+      var src = window.v ? window.v(SRC) : SRC;
+      var res = await fetch(src, { cache: 'default' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
 
       var html = await res.text();
@@ -38,11 +40,37 @@
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadNaverCafeBanner);
-  } else {
-    loadNaverCafeBanner();
+  function scheduleNaverCafeBanner(){
+    var mount = document.getElementById(MOUNT_ID);
+    if (!mount) return;
+    if (mount.dataset.naverBannerLoaded === '1') return;
+
+    if (!('IntersectionObserver' in window)) {
+      mount.dataset.naverBannerLoaded = '1';
+      loadNaverCafeBanner();
+      return;
+    }
+
+    if (observer) observer.disconnect();
+    observer = new IntersectionObserver(function(entries){
+      if (!entries.some(function(entry){ return entry.isIntersecting; })) return;
+      observer.disconnect();
+      observer = null;
+      mount.dataset.naverBannerLoaded = '1';
+      loadNaverCafeBanner();
+    }, { rootMargin: '160px 0px' });
+    observer.observe(mount);
   }
 
-  document.addEventListener('i18n:changed', loadNaverCafeBanner);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scheduleNaverCafeBanner);
+  } else {
+    scheduleNaverCafeBanner();
+  }
+
+  document.addEventListener('i18n:changed', function(){
+    var mount = document.getElementById(MOUNT_ID);
+    if (mount && mount.dataset.naverBannerLoaded === '1') loadNaverCafeBanner();
+    else scheduleNaverCafeBanner();
+  });
 })();

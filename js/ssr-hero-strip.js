@@ -5,6 +5,7 @@
   var MOUNT_ID = 'ssrHeroStripMount';
   var HEROES_JSON = '/data/heroes.json';
   var reqId = 0;
+  var observer = null;
 
   function getMount() {
     return document.getElementById(MOUNT_ID);
@@ -90,7 +91,7 @@
 
             return ''
               + '<a class="' + cls + '" href="' + escapeHtml(href) + '" aria-label="' + escapeHtml(name) + '">'
-              +   '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(name) + '" loading="lazy" decoding="async">'
+              +   '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(name) + '" loading="lazy" decoding="async" width="40" height="40">'
               + '</a>';
           }).join('')
       + '</section>';
@@ -103,7 +104,8 @@
     var currentReqId = ++reqId;
 
     try {
-      var res = await fetch(HEROES_JSON + '?v=' + Date.now(), { cache: 'no-store' });
+      var src = window.v ? window.v(HEROES_JSON) : HEROES_JSON;
+      var res = await fetch(src, { cache: 'default' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
 
       var data = await res.json();
@@ -130,11 +132,37 @@
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadSSRHeroStrip);
-  } else {
-    loadSSRHeroStrip();
+  function scheduleSSRHeroStrip() {
+    var mount = getMount();
+    if (!mount) return;
+    if (mount.dataset.heroStripLoaded === '1') return;
+
+    if (!('IntersectionObserver' in window)) {
+      mount.dataset.heroStripLoaded = '1';
+      loadSSRHeroStrip();
+      return;
+    }
+
+    if (observer) observer.disconnect();
+    observer = new IntersectionObserver(function (entries) {
+      if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
+      observer.disconnect();
+      observer = null;
+      mount.dataset.heroStripLoaded = '1';
+      loadSSRHeroStrip();
+    }, { rootMargin: '160px 0px' });
+    observer.observe(mount);
   }
 
-  document.addEventListener('i18n:changed', loadSSRHeroStrip);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scheduleSSRHeroStrip);
+  } else {
+    scheduleSSRHeroStrip();
+  }
+
+  document.addEventListener('i18n:changed', function () {
+    var mount = getMount();
+    if (mount && mount.dataset.heroStripLoaded === '1') loadSSRHeroStrip();
+    else scheduleSSRHeroStrip();
+  });
 })();

@@ -47,7 +47,9 @@ const COPY = {
     '/calc-pet': ['킹샷 펫 계산기', '펫 성장과 강화에 필요한 재료를 계산하세요.', '펫 계산기'],
     '/waracademy': ['킹샷 전쟁아카데미 연구', '11티어 전쟁아카데미 연구 조건, 비용과 전투 보너스를 확인하세요.', '전쟁아카데미 연구'],
     '/about': ['킹샷데이터코리아 소개', '킹샷데이터코리아의 운영 목적, 데이터 출처와 팬사이트 정책을 안내합니다.', '킹샷데이터코리아 소개'],
-    '/privacy': ['개인정보처리방침', '킹샷데이터코리아의 개인정보 및 데이터 이용 안내입니다.', '개인정보처리방침']
+    '/privacy': ['개인정보처리방침', '킹샷데이터코리아의 개인정보 및 데이터 이용 안내입니다.', '개인정보처리방침'],
+    '/contact': ['문의', '킹샷데이터코리아의 데이터, 번역, 기능 및 사이트 운영 문의 방법을 안내합니다.', '문의'],
+    '/terms': ['이용약관', '킹샷데이터코리아의 서비스 목적, 정보 이용, 게임 자산과 외부 링크 정책을 안내합니다.', '이용약관']
   },
   en: {
     '/': ['Kingshot Data: Heroes, Calculators, Guides & Gift Codes', 'Explore Kingshot heroes, masters, buildings, calculators, gift codes, upgrade data, and practical guides in one place.', 'Kingshot Data and Strategy Guides'],
@@ -63,7 +65,9 @@ const COPY = {
     '/calc-pet': ['Kingshot Pet Calculator', 'Calculate materials required for pet growth and upgrades.', 'Pet Calculator'],
     '/waracademy': ['Kingshot War Academy Research', 'Review T11 War Academy research requirements, costs, and combat bonuses.', 'War Academy Research'],
     '/about': ['About KingshotData', 'Learn about KingshotData, its data sources, and the unofficial fan-site policy.', 'About KingshotData'],
-    '/privacy': ['Privacy Policy', 'Privacy and data-use information for KingshotData.', 'Privacy Policy']
+    '/privacy': ['Privacy Policy', 'Privacy and data-use information for KingshotData.', 'Privacy Policy'],
+    '/contact': ['Contact KingshotData', 'Contact KingshotData about data corrections, translations, site features, copyright, or privacy.', 'Contact'],
+    '/terms': ['Terms of Use', 'Read the KingshotData terms covering information accuracy, acceptable use, game assets, and external links.', 'Terms of Use']
   },
   ja: {
     '/': ['Kingshot データ | 英雄・建物・計算機・攻略', 'Kingshotの英雄、マスター、建物、ペット、計算機、ギフトコード、イベント攻略を一か所で確認できます。', 'Kingshot データと攻略'],
@@ -79,7 +83,9 @@ const COPY = {
     '/calc-pet': ['Kingshot ペット計算機', 'ペットの成長と強化に必要な素材を計算できます。', 'ペット計算機'],
     '/waracademy': ['Kingshot 戦争学院研究', 'T11研究の条件、コスト、戦闘ボーナスを確認できます。', '戦争学院研究'],
     '/about': ['KingshotDataについて', 'KingshotDataの目的、情報源、非公式ファンサイト方針を案内します。', 'KingshotDataについて'],
-    '/privacy': ['プライバシーポリシー', 'KingshotDataのプライバシーとデータ利用方針です。', 'プライバシーポリシー']
+    '/privacy': ['プライバシーポリシー', 'KingshotDataのプライバシーとデータ利用方針です。', 'プライバシーポリシー'],
+    '/contact': ['お問い合わせ', 'データ、翻訳、機能、著作権、プライバシーに関するKingshotDataへのお問い合わせ方法です。', 'お問い合わせ'],
+    '/terms': ['利用規約', '情報の正確性、サイト利用、ゲーム素材、外部リンクに関するKingshotDataの利用規約です。', '利用規約']
   },
   'zh-TW': {
     '/': ['Kingshot 資料 | 英雄、建築、計算器與攻略', '一次查看 Kingshot 英雄、大師、建築、寵物、計算器、禮包碼與活動攻略。', 'Kingshot 資料與攻略'],
@@ -95,7 +101,9 @@ const COPY = {
     '/calc-pet': ['Kingshot 寵物計算器', '計算寵物成長與升級所需材料。', '寵物計算器'],
     '/waracademy': ['Kingshot 戰爭學院研究', '查看 T11 研究條件、成本與戰鬥加成。', '戰爭學院研究'],
     '/about': ['關於 KingshotData', '介紹 KingshotData 的目標、資料來源與非官方粉絲網站政策。', '關於 KingshotData'],
-    '/privacy': ['隱私權政策', 'KingshotData 的隱私與資料使用說明。', '隱私權政策']
+    '/privacy': ['隱私權政策', 'KingshotData 的隱私與資料使用說明。', '隱私權政策'],
+    '/contact': ['聯絡 KingshotData', '聯絡 KingshotData 回報資料、翻譯、功能、著作權或隱私問題。', '聯絡我們'],
+    '/terms': ['使用條款', '查看 KingshotData 關於資訊準確性、網站使用、遊戲素材與外部連結的條款。', '使用條款']
   }
 };
 
@@ -158,9 +166,10 @@ function eventCopy(dictionary, slug) {
   return dictionary && dictionary.records && dictionary.records[slug] ? dictionary.records[slug] : {};
 }
 
-function genericPage(routePath, lang, dictionary, heroes, events, eventDictionary) {
+function genericPage(routePath, lang, dictionary, heroes, events, eventDictionary, commonDictionary) {
   const entry = COPY[lang.code][routePath] || COPY.en[routePath];
   const [title, description, heading] = entry;
+  const common = key => commonDictionary && commonDictionary[key] ? commonDictionary[key] : '';
   let body = '<p>' + escapeHtml(description) + '</p>';
   if (routePath === '/') {
     const dataLabel = lang.code === 'ko' ? '주요 데이터' : lang.code === 'ja' ? '主要データ' : lang.code === 'zh-TW' ? '主要資料' : 'Key Data';
@@ -183,6 +192,64 @@ function genericPage(routePath, lang, dictionary, heroes, events, eventDictionar
       return '<li><a href="' + absoluteUrl('/events/' + encodeURIComponent(event.slug), lang) + '">' + escapeHtml(copy.title || event.slug) + '</a> - ' + escapeHtml(copy.summary || '') + '</li>';
     }).join('');
     body += '</ul>';
+  } else if (routePath === '/about') {
+    body = ['about.intro.p1', 'about.intro.p2', 'about.intro.p3', 'about.intro.p4']
+      .map(key => common(key)).filter(Boolean).map(value => '<p>' + escapeHtml(value) + '</p>').join('');
+    body += '<h2>' + escapeHtml(common('about.section.provide')) + '</h2><ul>';
+    body += ['about.provide.li1', 'about.provide.li2', 'about.provide.li3']
+      .map(key => common(key)).filter(Boolean).map(value => '<li>' + escapeHtml(value) + '</li>').join('');
+    body += '</ul><h2>' + escapeHtml(common('about.section.copyright')) + '</h2>';
+    body += '<p>' + escapeHtml(common('about.copyright.p1')) + '</p><p>' + escapeHtml(common('about.copyright.p2')) + '</p>';
+    body += '<h2>' + escapeHtml(common('about.section.contact')) + '</h2><p><a href="mailto:nomadten@nomadeten.com">nomadten@nomadeten.com</a></p>';
+  } else if (routePath === '/privacy') {
+    body = '<p>' + escapeHtml(common('privacy.s0.p1')) + '</p>';
+    for (const key of ['s1', 's2', 's4', 's5', 's51', 's8', 's10']) {
+      const titleValue = common('privacy.' + key + '.title');
+      const textValue = common('privacy.' + key + '.p1') || common('privacy.' + key + '.note');
+      if (titleValue) body += '<h2>' + escapeHtml(titleValue) + '</h2>';
+      if (textValue) body += '<p>' + escapeHtml(textValue) + '</p>';
+    }
+  } else if (routePath === '/contact') {
+    body = '<p>' + escapeHtml(commonDictionary['contact.intro']) + '</p>';
+    body += '<h2>' + escapeHtml(commonDictionary['contact.emailTitle']) + '</h2>';
+    body += '<p><a href="mailto:nomadten@nomadeten.com">nomadten@nomadeten.com</a></p>';
+    body += '<p>' + escapeHtml(commonDictionary['contact.emailNote']) + '</p>';
+    body += '<h2>' + escapeHtml(commonDictionary['contact.scopeTitle']) + '</h2><ul>';
+    body += ['contact.scopeData', 'contact.scopeTranslation', 'contact.scopeTechnical', 'contact.scopeRights']
+      .map(key => '<li>' + escapeHtml(commonDictionary[key]) + '</li>').join('');
+    body += '</ul><h2>' + escapeHtml(commonDictionary['contact.noticeTitle']) + '</h2>';
+    body += '<p>' + escapeHtml(commonDictionary['contact.notice']) + '</p>';
+  } else if (routePath === '/terms') {
+    body = '<p>' + escapeHtml(commonDictionary['terms.updated']) + '</p>';
+    for (const key of ['purpose', 'accuracy', 'rights', 'use', 'links']) {
+      body += '<h2>' + escapeHtml(commonDictionary['terms.' + key + 'Title']) + '</h2>';
+      body += '<p>' + escapeHtml(commonDictionary['terms.' + key]) + '</p>';
+    }
+    body += '<h2>' + escapeHtml(commonDictionary['terms.contactTitle']) + '</h2>';
+    body += '<p><a href="mailto:nomadten@nomadeten.com">nomadten@nomadeten.com</a></p>';
+  } else if (routePath === '/calculator' || routePath.startsWith('/calc-')) {
+    const supplement = {
+      ko: ['계산 결과는 선택한 시작 단계와 목표 단계 사이에 필요한 재료와 시간을 빠르게 비교하기 위한 참고값입니다.', '게임 업데이트나 적용 중인 버프에 따라 실제 값이 달라질 수 있으므로 최종 진행 전 게임 화면의 요구량도 확인하세요.', '각 계산기는 브라우저에서 직접 작동하며 입력한 값은 계산 목적으로만 사용됩니다.'],
+      en: ['Results help compare the materials and time required between the selected starting and target levels.', 'Game updates and active buffs may change actual requirements, so confirm the final values in the current game client.', 'Calculations run directly in your browser and entered values are used only for the calculation.'],
+      ja: ['選択した開始段階から目標段階までに必要な素材と時間を比較するための参考値を表示します。', 'ゲームの更新や適用中のバフにより実際の必要量が変わる場合があるため、実行前にゲーム画面でも確認してください。', '計算はブラウザ内で行われ、入力値は計算のためだけに使用されます。'],
+      'zh-TW': ['計算結果可用來比較所選起始階段至目標階段所需的材料與時間。', '遊戲更新或目前套用的增益可能使實際需求不同，進行升級前請再確認遊戲畫面。', '計算會直接在瀏覽器中執行，輸入內容僅用於本次計算。']
+    }[lang.code];
+    body += supplement.map(value => '<p>' + escapeHtml(value) + '</p>').join('');
+    const relatedLabel = lang.code === 'ko' ? '관련 계산기' : lang.code === 'ja' ? '関連計算機' : lang.code === 'zh-TW' ? '相關計算器' : 'Related calculators';
+    body += '<h2>' + escapeHtml(relatedLabel) + '</h2><ul>';
+    body += ['/calc-building', '/calc-gear', '/calc-charm', '/calc-training', '/calc-pet']
+      .filter(pathValue => pathValue !== routePath)
+      .map(pathValue => '<li><a href="' + absoluteUrl(pathValue, lang) + '">' + escapeHtml((COPY[lang.code][pathValue] || COPY.en[pathValue])[2]) + '</a></li>').join('');
+    body += '</ul>';
+  } else if (routePath === '/waracademy') {
+    const supplement = {
+      ko: ['전쟁아카데미 연구는 11티어 병력 성장에 필요한 선행 조건, 자원과 전투 보너스를 확인하기 위한 데이터입니다.', '병종별 연구 순서와 순금 관련 연구를 함께 비교하면 장기 성장 계획을 세우는 데 도움이 됩니다.', '표의 값은 게임 업데이트에 따라 달라질 수 있으므로 마지막 검증 정보와 실제 게임 화면을 함께 확인하세요.'],
+      en: ['War Academy research data helps review prerequisites, resources, and combat bonuses for Tier 11 troop progression.', 'Comparing each unit branch with Advanced Truegold research can support a longer-term upgrade plan.', 'Values may change with game updates, so check the verification information and the current game client.'],
+      ja: ['戦争学院研究データでは、T11兵士育成の前提条件、資源、戦闘ボーナスを確認できます。', '兵種別の研究順序と上級トゥルーゴールド研究を比較すると、長期的な育成計画に役立ちます。', '数値はゲーム更新で変わる場合があるため、検証情報と現在のゲーム画面も確認してください。'],
+      'zh-TW': ['戰爭學院研究資料可用來確認 T11 部隊成長所需的前置條件、資源與戰鬥加成。', '比較各兵種研究順序與進階真金研究，有助於規劃長期升級路線。', '數值可能隨遊戲更新而變動，請一併確認驗證資訊與目前遊戲畫面。']
+    }[lang.code];
+    body += supplement.map(value => '<p>' + escapeHtml(value) + '</p>').join('');
+    body += '<p><a href="' + absoluteUrl('/research/advanced-truegold', lang) + '">' + escapeHtml((COPY[lang.code]['/research'] || COPY.en['/research'])[2]) + '</a></p>';
   }
   return {
     title: routePath === '/' ? title : title + ' | ' + TITLE_SITE_NAME[lang.code],
@@ -526,6 +593,9 @@ function main() {
   const itemDictionaries = new Map(
     LANGS.map(lang => [lang.code, readJson(path.join(ROOT, 'i18n', lang.folder === 'zh-tw' ? 'zh-TW' : lang.folder, 'items.json'))])
   );
+  const commonDictionaries = new Map(
+    LANGS.map(lang => [lang.code, readJson(path.join(ROOT, 'i18n', lang.folder === 'zh-tw' ? 'zh-TW' : lang.folder, 'common.json'))])
+  );
 
   cleanPreviousOutputs();
   const generated = [];
@@ -546,7 +616,7 @@ function main() {
       ? heroPage(hero, route.lang, heroDictionaries.get(route.lang.code), heroes)
       : event
         ? eventPage(event, route.lang, eventDictionaries.get(route.lang.code), heroDictionaries.get(route.lang.code), heroes, events)
-        : genericPage(route.routePath, route.lang, heroDictionaries.get(route.lang.code), heroes, events, eventDictionaries.get(route.lang.code));
+        : genericPage(route.routePath, route.lang, heroDictionaries.get(route.lang.code), heroes, events, eventDictionaries.get(route.lang.code), commonDictionaries.get(route.lang.code));
     let html = replaceHead(template, route, page);
     html = replaceContent(html, route, page);
     fs.mkdirSync(path.dirname(route.file), { recursive: true });

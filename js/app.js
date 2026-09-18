@@ -24,19 +24,29 @@
 
   var CALC_CSS_HREF = '/css/calculator.css';
 
+  function finishInitialHydration() {
+    document.documentElement.classList.remove('kd-hydrating');
+    if (window.__KD_HYDRATION_TIMER__) {
+      clearTimeout(window.__KD_HYDRATION_TIMER__);
+      window.__KD_HYDRATION_TIMER__ = null;
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
-    ensureCSS('calculator-css', CALC_CSS_HREF)
-      .then(function(){ return ensureI18N(); })
-      .then(function(){
-        var canon = canonicalize(location.href);
-        return selectAndBuildRoutesFor(canon.pathname);
-      })
-      .then(function(builtRoutes){
+    var canon = canonicalize(location.href);
+    Promise.all([
+      ensureI18N(),
+      selectAndBuildRoutesFor(canon.pathname)
+    ])
+      .then(function(results){
+        var builtRoutes = results[1];
         startRouter(builtRoutes || {});
         return dispatch();
       })
+      .then(finishInitialHydration)
       .catch(function(err){
         console.error('[app bootstrap] failed:', err);
+        finishInitialHydration();
       });
   });
 
@@ -143,7 +153,7 @@
     return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
   function iconImg(alt, src) {
-    return '<img src="' + v(src) + '" alt="' + escapeAttr(alt) + '" class="cat-icon__img" loading="lazy" decoding="async">';
+    return '<img src="' + v(src) + '" alt="' + escapeAttr(alt) + '" class="cat-icon__img" loading="lazy" decoding="async" width="256" height="256">';
   }
 
   function getCurrentContentLang() {

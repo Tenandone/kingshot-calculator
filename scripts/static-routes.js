@@ -26,7 +26,9 @@ const GENERIC_ROUTES = [
   '/calc-pet',
   '/waracademy',
   '/about',
-  '/privacy'
+  '/privacy',
+  '/contact',
+  '/terms'
 ];
 
 function readJson(file) {
