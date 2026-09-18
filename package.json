@@ -12,6 +12,7 @@
     "coupons:update": "node scripts/coupons/update-coupons.js --write",
     "coupons:check": "node scripts/coupons/update-coupons.js",
     "coupons:test": "node scripts/coupons/test-coupons.js",
+    "audit:seo": "node scripts/audit-static-seo.js",
     "bump": "node bump-version.js",
     "deploy": "npm run bump && npm run build && gh-pages -d dist"
   },

@@ -1,0 +1,86 @@
+{
+  "title": "킹샷 이벤트 데이터",
+  "intro": "반복되는 킹샷 이벤트의 해금 조건, 진행 기간, 주기와 관련 시스템을 교차검증한 데이터입니다.",
+  "labels": {
+    "quickFacts": "핵심 정보",
+    "type": "이벤트 유형",
+    "duration": "진행 기간",
+    "recurrence": "반복 주기",
+    "unlock": "해금 조건",
+    "lastVerified": "마지막 검증",
+    "verification": "데이터 검증",
+    "relatedEvents": "관련 이벤트",
+    "relatedHeroes": "관련 영웅",
+    "relatedGuides": "관련 가이드",
+    "details": "이벤트 핵심 설명",
+    "days": "일",
+    "hours": "시간",
+    "crossVerified": "독립된 공개 출처를 교차검증함"
+  },
+  "types": {
+    "competitive": "성장 경쟁",
+    "cross-kingdom": "왕국 간 경쟁",
+    "alliance": "연맹 경쟁",
+    "escort": "수송대 호송 및 약탈",
+    "exchange": "아이템 교환",
+    "hero-growth": "영웅 획득 및 성장"
+  },
+  "recurrence": {
+    "biweekly": "왕국 초기 2주 주기",
+    "monthly": "약 1개월 주기",
+    "four-weeks": "4주 주기",
+    "regular-major-event": "주요 성장 이벤트와 함께 반복"
+  },
+  "unlock": {
+    "early-kingdom": "왕국 초기 세대",
+    "after-first-kvk": "첫 왕국의 힘 종료 후",
+    "kingdom-progression": "왕국 성장 단계에 따라 해금",
+    "eligible-kingdoms": "참가 조건을 충족한 왕국과 연맹",
+    "after-third-hall-of-governors": "세 번째 최강영주 이후",
+    "generation-based": "세대에 따라 등장 영웅 변경"
+  },
+  "records": {
+    "hall-of-governors": {
+      "title": "최강영주",
+      "summary": "최강영주는 왕국 초기에 도시 성장, 영웅 육성, 병력 훈련 등 일자별 과제로 점수를 경쟁하는 이벤트입니다.",
+      "answerTitle": "최강영주는 언제 열리나요?",
+      "answer": "왕국 초기 세대에서 약 2주 주기로 진행되며, 왕국 성장에 따라 시즌 영웅과 점수 과제가 달라집니다."
+    },
+    "strongest-governor": {
+      "title": "지고의 영주",
+      "summary": "지고의 영주는 초기 최강영주를 대체하는 7일 경쟁 이벤트로, 여러 성장 항목을 일자별로 나누어 순위를 계산합니다.",
+      "answerTitle": "지고의 영주는 언제 해금되나요?",
+      "answer": "왕국이 첫 왕국의 힘 이벤트를 마친 뒤 해금되며, 이후 일반적으로 월간 주기로 반복됩니다."
+    },
+    "kingdom-of-power": {
+      "title": "왕국의 힘",
+      "summary": "왕국의 힘(KvK)은 준비 단계의 성장 점수와 전투 단계의 왕국 간 전투 결과를 함께 겨루는 핵심 이벤트입니다.",
+      "answerTitle": "왕국의 힘은 얼마나 자주 열리나요?",
+      "answer": "주요 이벤트 사이클은 약 4주마다 반복되며, 실제 참가는 왕국 성장도와 매칭 결과에 따라 결정됩니다."
+    },
+    "alliance-brawl": {
+      "title": "연맹 결투",
+      "summary": "연맹 결투는 서로 다른 왕국의 두 연맹이 일자별 과제를 수행해 점수를 겨루는 6.5일 경쟁 이벤트입니다.",
+      "answerTitle": "연맹 결투는 며칠 동안 진행되나요?",
+      "answer": "일반 5일과 연장된 마지막 단계를 합쳐 총 6.5일 동안 진행됩니다."
+    },
+    "merchant-empire": {
+      "title": "상단 제국",
+      "summary": "상단 제국은 수송대를 호송하거나 다른 수송대를 약탈하고 등급에 따른 보상을 얻는 7일 이벤트입니다.",
+      "answerTitle": "상단 제국과 연맹 결투는 어떤 관계인가요?",
+      "answer": "두 이벤트는 함께 진행되는 경우가 많으며, 수송대 활동이 연맹 결투 점수 과제에 포함될 수 있습니다."
+    },
+    "champagne-fair": {
+      "title": "샴페인 축제",
+      "summary": "샴페인 축제는 남는 영웅 조각과 스킬북 등 교환 가능한 재료를 바우처로 바꾸고 성장 아이템을 구매하는 교환 이벤트입니다.",
+      "answerTitle": "샴페인 축제는 언제 처음 열리나요?",
+      "answer": "세 번째 최강영주 이후 처음 등장하며, 교환 품목은 왕국 성장 단계에 따라 달라질 수 있습니다."
+    },
+    "hero-roulette": {
+      "title": "영웅 룰렛",
+      "summary": "영웅 룰렛은 보석이나 행운 칩을 사용해 현재 왕국 세대의 신화 영웅 조각을 얻는 반복형 영웅 획득 이벤트입니다.",
+      "answerTitle": "영웅 룰렛에는 어떤 영웅이 나오나요?",
+      "answer": "등장하는 신화 영웅은 왕국의 영웅 세대에 따라 바뀌며 주요 성장 이벤트와 함께 진행됩니다."
+    }
+  }
+}

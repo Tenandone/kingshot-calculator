@@ -102,3 +102,27 @@ Conflicted codes are not promoted to the public active list unless an official s
 
 - Kingshot Mastery gift codes: `expired` (https://kingshotmastery.com/gift-codes)
 - Kingshot.net gift codes: `active` (https://v2.kingshot.net/gift-codes)
+
+<!-- BEGIN VERIFIED DATA CONFLICTS -->
+# Non-coupon Data Conflicts
+
+These entries are intentionally withheld from structured public data until the conflicting detail is resolved.
+
+## Kingdom of Power phase count
+
+- Kingshot Database describes preparation, battle, field triage, and recovery as four phases.
+- Kingshot Wiki introduces three phases but also discusses field triage separately.
+- Resolution: the public event record describes preparation and battle without storing a fixed phase count.
+
+## Champagne Fair duration and recurrence
+
+- Kingshot Wiki supplies a two-day monthly schedule.
+- The second checked source confirms the exchange system and unlock timing, but not those schedule fields.
+- Resolution: duration and recurrence are omitted from the public event record.
+
+## Hero Roulette duration
+
+- Sources agree on the recurring gem/Lucky Chip mechanic and generation-based featured hero.
+- Exact duration wording is not consistent enough for a numeric field.
+- Resolution: duration is omitted from the public event record.
+<!-- END VERIFIED DATA CONFLICTS -->

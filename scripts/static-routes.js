@@ -15,6 +15,7 @@ const LANGS = [
 const GENERIC_ROUTES = [
   '/',
   '/heroes',
+  '/events',
   '/calculator',
   '/calc-building',
   '/calc-gear',
@@ -34,11 +35,21 @@ function readHeroes() {
   return readJson(path.join(ROOT, 'data', 'heroes.json'));
 }
 
+function readEvents() {
+  const data = readJson(path.join(ROOT, 'data', 'events.json'));
+  return Array.isArray(data.events)
+    ? data.events.map(event => ({ ...event, verifiedAt: event.verifiedAt || data.verifiedAt }))
+    : [];
+}
+
 function getRoutePaths() {
   return GENERIC_ROUTES.concat(
     readHeroes()
       .filter(hero => hero && hero.slug)
-      .map(hero => '/hero/' + encodeURIComponent(hero.slug))
+      .map(hero => '/hero/' + encodeURIComponent(hero.slug)),
+    readEvents()
+      .filter(event => event && event.slug)
+      .map(event => '/events/' + encodeURIComponent(event.slug))
   );
 }
 
@@ -81,6 +92,7 @@ module.exports = {
   GENERIC_ROUTES,
   readJson,
   readHeroes,
+  readEvents,
   getRoutePaths,
   localizedPath,
   outputFile,

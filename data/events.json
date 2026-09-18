@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-09-18",
+  "events": [
+    {
+      "slug": "hall-of-governors",
+      "type": "competitive",
+      "recurrence": "biweekly",
+      "unlock": "early-kingdom",
+      "relatedHeroes": ["amadeus", "hilde"],
+      "relatedEvents": ["strongest-governor", "hero-roulette"],
+      "relatedGuides": ["hallofgovernors"],
+      "sourceType": "cross-verified",
+      "confidence": 90,
+      "sources": [
+        { "name": "Kingshot Database", "url": "https://kingshotdata.com/events/hall-of-governors/", "checkedAt": "2026-09-18" },
+        { "name": "Kingshot Wiki", "url": "https://kingshotwiki.com/events/hall-of-governors/", "checkedAt": "2026-09-18" }
+      ]
+    },
+    {
+      "slug": "strongest-governor",
+      "type": "competitive",
+      "durationDays": 7,
+      "recurrence": "monthly",
+      "unlock": "after-first-kvk",
+      "replaces": "hall-of-governors",
+      "relatedEvents": ["hall-of-governors", "alliance-brawl", "hero-roulette"],
+      "sourceType": "cross-verified",
+      "confidence": 90,
+      "sources": [
+        { "name": "Kingshot Database", "url": "https://kingshotdata.com/events/strongest-governor-event/", "checkedAt": "2026-09-18" },
+        { "name": "Kingshot Wiki", "url": "https://kingshotwiki.com/events/strongest-governor/", "checkedAt": "2026-09-18" }
+      ]
+    },
+    {
+      "slug": "kingdom-of-power",
+      "type": "cross-kingdom",
+      "recurrence": "four-weeks",
+      "unlock": "kingdom-progression",
+      "relatedEvents": ["alliance-brawl", "merchant-empire", "hero-roulette"],
+      "relatedGuides": ["kingdom-of-power-prep"],
+      "sourceType": "cross-verified",
+      "confidence": 90,
+      "sources": [
+        { "name": "Kingshot Database", "url": "https://kingshotdata.com/events/kingdom-of-power-kvk-event/", "checkedAt": "2026-09-18" },
+        { "name": "Kingshot Wiki", "url": "https://kingshotwiki.com/events/kingdom-of-power/", "checkedAt": "2026-09-18" },
+        { "name": "Kingshot Lab", "url": "https://kshot-lab.com/guides/event-cycle-guide", "checkedAt": "2026-09-18" }
+      ]
+    },
+    {
+      "slug": "alliance-brawl",
+      "type": "alliance",
+      "durationDays": 6.5,
+      "recurrence": "monthly",
+      "unlock": "eligible-kingdoms",
+      "relatedEvents": ["kingdom-of-power", "merchant-empire", "strongest-governor"],
+      "sourceType": "cross-verified",
+      "confidence": 90,
+      "sources": [
+        { "name": "Kingshot Database", "url": "https://kingshotdata.com/events/alliance-brawl-event/", "checkedAt": "2026-09-18" },
+        { "name": "Kingshot Wiki", "url": "https://kingshotwiki.com/events/alliance-brawl/", "checkedAt": "2026-09-18" }
+      ]
+    },
+    {
+      "slug": "merchant-empire",
+      "type": "escort",
+      "durationDays": 7,
+      "recurrence": "monthly",
+      "unlock": "kingdom-progression",
+      "relatedEvents": ["kingdom-of-power", "alliance-brawl"],
+      "sourceType": "cross-verified",
+      "confidence": 90,
+      "sources": [
+        { "name": "Kingshot Database", "url": "https://kingshotdata.com/events/merchant-empire-event/", "checkedAt": "2026-09-18" },
+        { "name": "Kingshot Wiki", "url": "https://kingshotwiki.com/events/merchant-empire-event/", "checkedAt": "2026-09-18" }
+      ]
+    },
+    {
+      "slug": "champagne-fair",
+      "type": "exchange",
+      "unlock": "after-third-hall-of-governors",
+      "relatedEvents": ["hall-of-governors"],
+      "sourceType": "cross-verified",
+      "confidence": 90,
+      "sources": [
+        { "name": "Kingshot Database", "url": "https://kingshotdata.com/events/champagne-fair/", "checkedAt": "2026-09-18" },
+        { "name": "Kingshot Wiki", "url": "https://kingshotwiki.com/events/champagne-fair/", "checkedAt": "2026-09-18" }
+      ]
+    },
+    {
+      "slug": "hero-roulette",
+      "type": "hero-growth",
+      "recurrence": "regular-major-event",
+      "unlock": "generation-based",
+      "relatedEvents": ["hall-of-governors", "strongest-governor", "kingdom-of-power"],
+      "sourceType": "cross-verified",
+      "confidence": 90,
+      "sources": [
+        { "name": "Kingshot Database", "url": "https://kingshotdata.com/events/hero-roulette/", "checkedAt": "2026-09-18" },
+        { "name": "Kingshot Wiki", "url": "https://kingshotwiki.com/events/roulette-hero/", "checkedAt": "2026-09-18" }
+      ]
+    }
+  ]
+}

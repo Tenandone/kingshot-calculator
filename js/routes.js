@@ -581,7 +581,7 @@
                 { href:'/guides/kingshot-f2p-guide', t:'home.hub.beginnerGuide' },
                 { href:'/guides/kingshot-bearhunt', t:'home.hub.bearGuide' },
                 { href:'/guides/transfer', t:'home.hub.transferGuide' },
-                { href:'/guides/hallofgovernors', t:'home.hub.eventGuide' }
+                { href:'/events', t:'home.hub.eventGuide' }
               ]
             }
           ];
@@ -1144,6 +1144,36 @@
         }
       },
 
+      '/events': {
+        title: 'Kingshot Events - KingshotData.kr',
+        render: async function (el, rest) {
+          var token = newRenderToken();
+          var slug = decodeURIComponent((rest || '').split('/').filter(Boolean)[0] || '');
+          el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+
+          var html = await loadHTMLCached(['pages/events.html', '/pages/events.html']);
+          if (isStale(token)) return;
+          if (!html) {
+            el.innerHTML = '<div class="error">Unable to load events page.</div>';
+            return;
+          }
+          el.innerHTML = htmlBodyOnly(html);
+
+          try {
+            await _loadScriptOnce(window.v ? window.v('/js/pages/events.js') : '/js/pages/events.js');
+          } catch (error) {
+            console.error(error);
+            el.insertAdjacentHTML('beforeend', '<div class="error">Unable to load events script.</div>');
+            return;
+          }
+          if (isStale(token)) return;
+          if (typeof window.initEvents === 'function') await window.initEvents(slug);
+          apply(el);
+          window.scrollTo({ top: 0 });
+          focusMain(el);
+        }
+      },
+
       '/heroes': {
         title: '영웅 - KingshotData.kr',
         render: async function (el) {
@@ -1483,6 +1513,7 @@
     var PREFETCH_MAP = {
       '/':           { js: [], html: ['/tools/home-waracademy-banner.html', 'tools/home-waracademy-banner.html'] },
       '/heroes':     { js: ['/js/pages/heroes.js'], html: ['pages/heroes.html','/pages/heroes.html'] },
+      '/events':     { js: ['/js/pages/events.js'], html: ['pages/events.html','/pages/events.html'] },
       '/pet':        { js: ['/js/pages/pet.js'], html: ['/en/pet/index.html', '/ko/pet/index.html', '/ja/pet/index.html', '/zh-tw/pet/index.html'] },
       '/masters':    { js: [], html: ['/en/masters/index.html', '/ko/masters/index.html', '/ja/masters/index.html', '/zh-tw/masters/index.html'] },
       '/database':   { js: ['/js/pages/database.js'], html: ['pages/database.html','/pages/database.html'] },
@@ -1503,7 +1534,7 @@
     }
 
     document.addEventListener('mouseover', function (e) {
-      var a = e.target.closest && e.target.closest('a.card--category, a[href="/"], a[href="/buildings"], a[href="/heroes"], a[href="/pet"], a[href="/masters"], a[href="/database"], a[href="/guides"], a[href="/waracademy"], a[href="/war-academy"], a[href="/home"]');
+      var a = e.target.closest && e.target.closest('a.card--category, a[href="/"], a[href="/buildings"], a[href="/heroes"], a[href="/events"], a[href="/pet"], a[href="/masters"], a[href="/database"], a[href="/guides"], a[href="/waracademy"], a[href="/war-academy"], a[href="/home"]');
       if (!a) return;
       prefetchFor(a.href);
     });

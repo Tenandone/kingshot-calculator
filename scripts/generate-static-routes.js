@@ -8,6 +8,7 @@ const {
   LANGS,
   readJson,
   readHeroes,
+  readEvents,
   absoluteUrl,
   getStaticRoutes
 } = require('./static-routes');
@@ -33,6 +34,7 @@ const COPY = {
   ko: {
     '/': ['킹샷데이터코리아 | 쿠폰, 계산기, 영웅·건물 공략', '킹샷 영웅, 거장, 건물, 펫 데이터와 성장 계산기, 기프트코드, 이벤트 공략을 한곳에서 확인하세요.', '킹샷 공략과 성장 데이터'],
     '/heroes': ['킹샷 영웅 정보', '세대와 병종별 킹샷 영웅, 스킬, 획득처 정보를 확인하세요.', '킹샷 영웅'],
+    '/events': ['킹샷 이벤트 데이터', '킹샷 주요 이벤트의 진행 기간, 반복 주기, 해금 조건과 관련 콘텐츠를 교차검증된 데이터로 확인하세요.', '킹샷 이벤트 데이터'],
     '/calculator': ['킹샷 계산기', '건물, 병력, 펫, 영주 장비와 보석에 필요한 성장 재료를 계산하세요.', '킹샷 계산기'],
     '/calc-building': ['킹샷 건물 계산기', '건물 업그레이드에 필요한 자원과 시간을 계산하세요.', '건물 계산기'],
     '/calc-gear': ['킹샷 영주 장비 계산기', '영주 장비 강화에 필요한 재료를 계산하세요.', '영주 장비 계산기'],
@@ -46,6 +48,7 @@ const COPY = {
   en: {
     '/': ['Kingshot Data: Heroes, Calculators, Guides & Gift Codes', 'Explore Kingshot heroes, masters, buildings, calculators, gift codes, upgrade data, and practical guides in one place.', 'Kingshot Data and Strategy Guides'],
     '/heroes': ['Kingshot Heroes', 'Browse Kingshot heroes by generation, unit type, skills, and acquisition source.', 'Kingshot Heroes'],
+    '/events': ['Kingshot Events', 'Browse cross-verified Kingshot event duration, recurrence, unlock conditions, and related game systems.', 'Kingshot Events'],
     '/calculator': ['Kingshot Calculators', 'Calculate building, troop, pet, Governor Gear, and charm upgrade requirements.', 'Kingshot Calculators'],
     '/calc-building': ['Kingshot Building Calculator', 'Calculate resources and time required for building upgrades.', 'Building Calculator'],
     '/calc-gear': ['Kingshot Governor Gear Calculator', 'Calculate materials required to upgrade Governor Gear.', 'Governor Gear Calculator'],
@@ -59,6 +62,7 @@ const COPY = {
   ja: {
     '/': ['Kingshot データ | 英雄・建物・計算機・攻略', 'Kingshotの英雄、マスター、建物、ペット、計算機、ギフトコード、イベント攻略を一か所で確認できます。', 'Kingshot データと攻略'],
     '/heroes': ['Kingshot 英雄情報', '世代と兵種別の英雄、スキル、入手方法を確認できます。', 'Kingshot 英雄'],
+    '/events': ['Kingshot イベント情報', 'Kingshot主要イベントの期間、周期、解放条件、関連コンテンツを確認できます。', 'Kingshot イベント情報'],
     '/calculator': ['Kingshot 計算機', '建物、兵士、ペット、領主装備、宝石の必要素材を計算できます。', 'Kingshot 計算機'],
     '/calc-building': ['Kingshot 建物計算機', '建物強化に必要な資源と時間を計算できます。', '建物計算機'],
     '/calc-gear': ['Kingshot 領主装備計算機', '領主装備の強化に必要な素材を計算できます。', '領主装備計算機'],
@@ -72,6 +76,7 @@ const COPY = {
   'zh-TW': {
     '/': ['Kingshot 資料 | 英雄、建築、計算器與攻略', '一次查看 Kingshot 英雄、大師、建築、寵物、計算器、禮包碼與活動攻略。', 'Kingshot 資料與攻略'],
     '/heroes': ['Kingshot 英雄資料', '依世代與兵種查看英雄、技能與取得方式。', 'Kingshot 英雄'],
+    '/events': ['Kingshot 活動資料', '查看經交叉驗證的 Kingshot 活動期間、週期、解鎖條件與相關系統。', 'Kingshot 活動資料'],
     '/calculator': ['Kingshot 計算器', '計算建築、部隊、寵物、領主裝備與寶石所需材料。', 'Kingshot 計算器'],
     '/calc-building': ['Kingshot 建築計算器', '計算建築升級所需的資源與時間。', '建築計算器'],
     '/calc-gear': ['Kingshot 領主裝備計算器', '計算領主裝備升級所需材料。', '領主裝備計算器'],
@@ -129,7 +134,11 @@ function breadcrumbJson(routePath, lang, title) {
   return { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items };
 }
 
-function genericPage(routePath, lang, dictionary, heroes) {
+function eventCopy(dictionary, slug) {
+  return dictionary && dictionary.records && dictionary.records[slug] ? dictionary.records[slug] : {};
+}
+
+function genericPage(routePath, lang, dictionary, heroes, events, eventDictionary) {
   const entry = COPY[lang.code][routePath] || COPY.en[routePath];
   const [title, description, heading] = entry;
   let body = '<p>' + escapeHtml(description) + '</p>';
@@ -140,6 +149,13 @@ function genericPage(routePath, lang, dictionary, heroes) {
       return '<li><a href="' + absoluteUrl('/hero/' + encodeURIComponent(hero.slug), lang) + '">' + escapeHtml(name) + '</a></li>';
     }).join('');
     body += '</ul>';
+  } else if (routePath === '/events') {
+    body = '<p>' + escapeHtml(eventDictionary.intro || description) + '</p><h2>' + escapeHtml(eventDictionary.title || heading) + '</h2><ul>';
+    body += events.map(event => {
+      const copy = eventCopy(eventDictionary, event.slug);
+      return '<li><a href="' + absoluteUrl('/events/' + encodeURIComponent(event.slug), lang) + '">' + escapeHtml(copy.title || event.slug) + '</a> - ' + escapeHtml(copy.summary || '') + '</li>';
+    }).join('');
+    body += '</ul>';
   }
   return {
     title: routePath === '/' ? title : title + ' | ' + TITLE_SITE_NAME[lang.code],
@@ -148,6 +164,74 @@ function genericPage(routePath, lang, dictionary, heroes) {
     image: '/img/kingshotdata-og-v5.png',
     type: 'website',
     body
+  };
+}
+
+function eventPage(event, lang, eventDictionary, heroDictionary, heroes, events) {
+  const copy = eventCopy(eventDictionary, event.slug);
+  const labels = eventDictionary.labels || {};
+  const name = copy.title || event.slug;
+  const summary = copy.summary || '';
+  const type = (eventDictionary.types || {})[event.type] || event.type;
+  const recurrence = (eventDictionary.recurrence || {})[event.recurrence] || '';
+  const unlock = (eventDictionary.unlock || {})[event.unlock] || '';
+  const duration = event.durationDays
+    ? event.durationDays + ' ' + (labels.days || 'days')
+    : event.durationHours
+      ? event.durationHours + ' ' + (labels.hours || 'hours')
+      : '';
+  const facts = [
+    [labels.type || 'Event type', type],
+    [labels.duration || 'Duration', duration],
+    [labels.recurrence || 'Recurrence', recurrence],
+    [labels.unlock || 'Unlock', unlock],
+    [labels.lastVerified || 'Last verified', event.verifiedAt || '2026-09-18']
+  ].filter(row => row[1]);
+  const eventBySlug = new Map(events.map(item => [item.slug, item]));
+  const heroBySlug = new Map(heroes.map(item => [item.slug, item]));
+  const relatedEvents = (event.relatedEvents || []).map(slug => {
+    const related = eventBySlug.get(slug);
+    const title = eventCopy(eventDictionary, slug).title || slug;
+    return related ? '<a href="' + absoluteUrl('/events/' + encodeURIComponent(slug), lang) + '">' + escapeHtml(title) + '</a>' : '';
+  }).filter(Boolean);
+  const relatedHeroes = (event.relatedHeroes || []).map(slug => {
+    const hero = heroBySlug.get(slug);
+    if (!hero) return '';
+    const title = translated(hero.title, heroDictionary, hero.name || slug);
+    return '<a href="' + absoluteUrl('/hero/' + encodeURIComponent(slug), lang) + '">' + escapeHtml(title) + '</a>';
+  }).filter(Boolean);
+  const guidePrefix = '/' + lang.folder + '/guides/';
+  const relatedGuides = (event.relatedGuides || []).map(slug => '<a href="' + guidePrefix + encodeURIComponent(slug) + '.html">' + escapeHtml(name) + '</a>');
+
+  let body = '<p>' + escapeHtml(summary) + '</p>';
+  body += '<h2>' + escapeHtml(labels.quickFacts || 'Quick Facts') + '</h2><dl>';
+  body += facts.map(row => '<dt>' + escapeHtml(row[0]) + '</dt><dd>' + escapeHtml(String(row[1])) + '</dd>').join('');
+  body += '</dl>';
+  if (copy.answerTitle && copy.answer) body += '<h2>' + escapeHtml(copy.answerTitle) + '</h2><p>' + escapeHtml(copy.answer) + '</p>';
+  if (relatedEvents.length) body += '<h2>' + escapeHtml(labels.relatedEvents || 'Related events') + '</h2><p>' + relatedEvents.join(' · ') + '</p>';
+  if (relatedHeroes.length) body += '<h2>' + escapeHtml(labels.relatedHeroes || 'Related heroes') + '</h2><p>' + relatedHeroes.join(' · ') + '</p>';
+  if (relatedGuides.length) body += '<h2>' + escapeHtml(labels.relatedGuides || 'Related guides') + '</h2><p>' + relatedGuides.join(' · ') + '</p>';
+  body += '<h2>' + escapeHtml(labels.verification || 'Data verification') + '</h2>';
+  body += '<p>' + escapeHtml(labels.crossVerified || 'Cross-verified') + ' · ' + escapeHtml(event.verifiedAt || '2026-09-18') + '</p><ul>';
+  body += (event.sources || []).map(source => '<li><a href="' + escapeHtml(source.url) + '" rel="nofollow noopener">' + escapeHtml(source.name) + '</a></li>').join('');
+  body += '</ul>';
+
+  return {
+    title: name + ' | ' + TITLE_SITE_NAME[lang.code],
+    description: truncate(summary, 155),
+    heading: name,
+    image: '/img/kingshotdata-og-v5.png',
+    type: 'article',
+    body,
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name,
+      description: summary,
+      url: absoluteUrl('/events/' + encodeURIComponent(event.slug), lang),
+      dateModified: event.verifiedAt || '2026-09-18',
+      isPartOf: { '@type': 'WebSite', name: 'KingshotData', url: ORIGIN + '/' }
+    }
   };
 }
 
@@ -233,7 +317,8 @@ function replaceHead(html, route, page) {
   if (page.type === 'article') {
     html = html.replace(/\s*<meta property="og:image:(?:width|height)"[^>]*>/gi, '');
   }
-  html = html.replace('</head>', '  <style>.ssg-initial-content{max-width:860px;margin:0 auto;text-align:center}.ssg-initial-content img{display:block;max-width:100%;height:auto;margin:16px auto}.ssg-initial-content dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px 16px;max-width:520px;margin:20px auto;text-align:left}.ssg-initial-content dt{font-weight:800}.ssg-initial-content dd{margin:0}.ssg-initial-content ul{max-width:720px;margin:12px auto 24px;text-align:left}.ssg-initial-content nav{text-align:left;font-size:13px}</style>\n  <script id="ssg-breadcrumb-schema" type="application/ld+json">' + escapeJson(breadcrumbJson(route.routePath, route.lang, page.heading)) + '</script>\n</head>');
+  const pageSchema = page.schema ? '\n  <script id="ssg-page-schema" type="application/ld+json">' + escapeJson(page.schema) + '</script>' : '';
+  html = html.replace('</head>', '  <style>.ssg-initial-content{max-width:860px;margin:0 auto;text-align:center}.ssg-initial-content img{display:block;max-width:100%;height:auto;margin:16px auto}.ssg-initial-content dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px 16px;max-width:520px;margin:20px auto;text-align:left}.ssg-initial-content dt{font-weight:800}.ssg-initial-content dd{margin:0}.ssg-initial-content ul{max-width:720px;margin:12px auto 24px;text-align:left}.ssg-initial-content nav{text-align:left;font-size:13px}</style>\n  <script id="ssg-breadcrumb-schema" type="application/ld+json">' + escapeJson(breadcrumbJson(route.routePath, route.lang, page.heading)) + '</script>' + pageSchema + '\n</head>');
   return html;
 }
 
@@ -267,19 +352,28 @@ function main() {
   if (!fs.existsSync(TEMPLATE_FILE)) throw new Error('Missing SPA template: ' + TEMPLATE_FILE);
   const template = fs.readFileSync(TEMPLATE_FILE, 'utf8');
   const heroes = readHeroes();
+  const events = readEvents();
   const heroBySlug = new Map(heroes.map(hero => [String(hero.slug), hero]));
-  const dictionaries = new Map(
+  const heroDictionaries = new Map(
     LANGS.map(lang => [lang.code, readJson(path.join(ROOT, 'i18n', lang.folder === 'zh-tw' ? 'zh-TW' : lang.folder, 'heroes.json'))])
   );
+  const eventDictionaries = new Map(
+    LANGS.map(lang => [lang.code, readJson(path.join(ROOT, 'i18n', lang.folder === 'zh-tw' ? 'zh-TW' : lang.folder, 'events.json'))])
+  );
+  const eventBySlug = new Map(events.map(event => [String(event.slug), event]));
 
   cleanPreviousOutputs();
   const generated = [];
   for (const route of getStaticRoutes()) {
     const heroMatch = route.routePath.match(/^\/hero\/([^/]+)$/);
     const hero = heroMatch ? heroBySlug.get(decodeURIComponent(heroMatch[1])) : null;
+    const eventMatch = route.routePath.match(/^\/events\/([^/]+)$/);
+    const event = eventMatch ? eventBySlug.get(decodeURIComponent(eventMatch[1])) : null;
     const page = hero
-      ? heroPage(hero, route.lang, dictionaries.get(route.lang.code), heroes)
-      : genericPage(route.routePath, route.lang, dictionaries.get(route.lang.code), heroes);
+      ? heroPage(hero, route.lang, heroDictionaries.get(route.lang.code), heroes)
+      : event
+        ? eventPage(event, route.lang, eventDictionaries.get(route.lang.code), heroDictionaries.get(route.lang.code), heroes, events)
+        : genericPage(route.routePath, route.lang, heroDictionaries.get(route.lang.code), heroes, events, eventDictionaries.get(route.lang.code));
     let html = replaceHead(template, route, page);
     html = replaceContent(html, route, page);
     fs.mkdirSync(path.dirname(route.file), { recursive: true });

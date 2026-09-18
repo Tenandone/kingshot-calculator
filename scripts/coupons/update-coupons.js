@@ -8,6 +8,8 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const COUPONS_FILE = path.join(ROOT, 'data', 'coupons.json');
 const CANDIDATES_FILE = path.join(ROOT, 'data', 'coupon-candidates.json');
 const CONFLICT_FILE = path.join(ROOT, 'DATA_CONFLICT_REPORT.md');
+const MANUAL_CONFLICTS_START = '<!-- BEGIN VERIFIED DATA CONFLICTS -->';
+const MANUAL_CONFLICTS_END = '<!-- END VERIFIED DATA CONFLICTS -->';
 const writeMode = process.argv.includes('--write');
 
 const sources = [
@@ -26,7 +28,13 @@ function stable(value) {
   return JSON.stringify(value, null, 2) + '\n';
 }
 
-function reportConflicts(conflicts) {
+function preservedManualConflicts(existing) {
+  const pattern = new RegExp(MANUAL_CONFLICTS_START + '[\\s\\S]*?' + MANUAL_CONFLICTS_END);
+  const match = String(existing || '').match(pattern);
+  return match ? match[0] : '';
+}
+
+function reportConflicts(conflicts, existing) {
   const lines = [
     '# Coupon Data Conflict Report',
     '',
@@ -45,6 +53,8 @@ function reportConflicts(conflicts) {
       lines.push('');
     }
   }
+  const manual = preservedManualConflicts(existing);
+  if (manual) lines.push('', manual);
   return lines.join('\n').trimEnd() + '\n';
 }
 
@@ -138,7 +148,8 @@ async function main() {
 
   fs.writeFileSync(COUPONS_FILE, stable(nextData), 'utf8');
   fs.writeFileSync(CANDIDATES_FILE, stable(nextCandidates), 'utf8');
-  fs.writeFileSync(CONFLICT_FILE, reportConflicts(merged.conflicts), 'utf8');
+  const existingConflictReport = fs.existsSync(CONFLICT_FILE) ? fs.readFileSync(CONFLICT_FILE, 'utf8') : '';
+  fs.writeFileSync(CONFLICT_FILE, reportConflicts(merged.conflicts, existingConflictReport), 'utf8');
 }
 
 main().catch(error => {
