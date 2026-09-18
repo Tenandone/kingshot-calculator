@@ -139,8 +139,11 @@
   function isActiveCoupon(c, nowMs) {
     if (!c || !c.code) return false;
 
+    var status = String(c.status || '').trim().toLowerCase();
+    if (status === 'candidate' || status === 'rejected' || status === 'expired') return false;
+
     var expMs = parseExpiryMs(c);
-    if (expMs == null) return false;
+    if (expMs == null) return status === 'active' || status === 'expiring';
     if (expMs !== Infinity && nowMs >= expMs) return false;
 
     var startMs = parseStartMs(c);
@@ -151,6 +154,8 @@
 
   function isExpiredCoupon(c, nowMs) {
     if (!c || !c.code) return false;
+
+    if (String(c.status || '').trim().toLowerCase() === 'expired') return true;
 
     var expMs = parseExpiryMs(c);
     if (expMs == null || expMs === Infinity) return false;

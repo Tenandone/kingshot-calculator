@@ -5,12 +5,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>May 2026 Gift Codes and Redeem Codes - Kingshot</title>
+  <title>Latest Kingshot Gift Codes and Redeem Codes</title>
   <meta name="description" content="Find active and expired Kingshot gift codes for iOS and Android, plus the official redeem page, code entry guide, and useful Kingshot guides." />
   <meta name="keywords" content="Kingshot gift code, Kingshot redeem code, Kingshot coupon, Kingshot latest code, Kingshot code redeem, Kingshot guide, Kingshot tips" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
 
-  <meta property="og:title" content="May 2026 Gift Codes and Redeem Codes - Kingshot" />
+  <meta property="og:title" content="Latest Kingshot Gift Codes and Redeem Codes" />
   <meta property="og:description" content="Find active and expired Kingshot gift codes for iOS and Android, plus the official redeem page, code entry guide, and useful Kingshot guides." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://kingshotdata.kr/en/guides/kingshot-giftcode.html" />
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="en_US" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="May 2026 Gift Codes and Redeem Codes - Kingshot" />
+  <meta name="twitter:title" content="Latest Kingshot Gift Codes and Redeem Codes" />
   <meta name="twitter:description" content="Find active and expired Kingshot gift codes for iOS and Android, plus the official redeem page, code entry guide, and useful Kingshot guides." />
   <meta name="twitter:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
 
@@ -261,7 +261,7 @@
   {
     "@context":"https://schema.org",
     "@type":"Article",
-    "headline":"May 2026 Gift Codes and Redeem Codes - Kingshot",
+    "headline":"Latest Kingshot Gift Codes and Redeem Codes",
     "description":"Find active and expired Kingshot gift codes for iOS and Android, plus the official redeem page, code entry guide, and useful Kingshot guides.",
     "inLanguage":"en",
     "mainEntityOfPage":"https://kingshotdata.kr/en/guides/kingshot-giftcode.html",
@@ -334,7 +334,7 @@
 
       <div class="hero" id="overview">
         <div>
-          <h1 id="h1">May 2026 Gift Codes and Redeem Codes - Kingshot</h1>
+          <h1 id="h1">Latest Kingshot Gift Codes and Redeem Codes</h1>
           <p class="sub" id="lead">Find active and expired Kingshot gift codes for iOS and Android, plus the official redeem page, code entry guide, and useful Kingshot guides.</p>
 
           <div class="jump" aria-label="Quick jump links">
@@ -366,7 +366,8 @@
       </section>
 
       <section id="current-codes" aria-live="polite" aria-busy="true">
-        <h2 id="current-title">Active Kingshot Gift Codes for May 2026</h2>
+        <h2 id="current-title">Currently Active Kingshot Gift Codes</h2>
+        <p id="coupon-last-checked" class="note-txt" hidden></p>
         <div id="couponGrid" class="grid">
           <article class="card" data-static-preview="true">
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
@@ -560,13 +561,13 @@
   <script>
     const LANG_DATA = {
       en: {
-        metaTitle: "May 2026 Gift Codes and Redeem Codes - Kingshot",
+        metaTitle: "Latest Kingshot Gift Codes and Redeem Codes",
         metaDesc: "Find active and expired Kingshot gift codes for iOS and Android, plus the official redeem page, code entry guide, and useful Kingshot guides.",
-        ogTitle: "May 2026 Gift Codes and Redeem Codes - Kingshot",
+        ogTitle: "Latest Kingshot Gift Codes and Redeem Codes",
         ogDesc: "Find active and expired Kingshot gift codes for iOS and Android, plus the official redeem page, code entry guide, and useful Kingshot guides.",
-        twTitle: "May 2026 Gift Codes and Redeem Codes - Kingshot",
+        twTitle: "Latest Kingshot Gift Codes and Redeem Codes",
         twDesc: "Find active and expired Kingshot gift codes for iOS and Android, plus the official redeem page, code entry guide, and useful Kingshot guides.",
-        h1: "May 2026 Gift Codes and Redeem Codes - Kingshot",
+        h1: "Latest Kingshot Gift Codes and Redeem Codes",
         lead: "Find active and expired Kingshot gift codes for iOS and Android, plus the official redeem page, code entry guide, and useful Kingshot guides.",
         countdownKicker: "LIVE COUPON TIMER",
         countdownTitle: "Kingshot Coupon Countdown",
@@ -578,7 +579,7 @@
         heroTitle: "Official Kingshot Redeem Page",
         heroDesc: "Go straight to the official redeem page and enter your Kingshot gift code.",
         ctaText: "Open Redeem Page",
-        currentTitle: "Active Kingshot Gift Codes for May 2026",
+        currentTitle: "Currently Active Kingshot Gift Codes",
         howTitle: "How to Redeem Kingshot Gift Codes",
         how1: "Open <strong>Profile → Settings → Redeem Code</strong> in the game, or go directly to the official redeem page.",
         how2: "Enter the Kingshot code exactly as shown.",
@@ -670,9 +671,11 @@
     }
 
     function isActive(c, nowMs){
+      const status = safeText(c.status).toLowerCase();
+      if (status === "candidate" || status === "rejected" || status === "expired") return false;
       if (isPerpetual(c)) return true;
       const exp = parseExpiryMs(c);
-      if (exp == null) return false;
+      if (exp == null) return status === "active" || status === "expiring";
       if (nowMs >= exp) return false;
       const st = safeText(c.startAt);
       if (st) {
@@ -745,16 +748,24 @@
       const exp = parseExpiryMs(c);
       const reward = safeText(c.reward);
       const perpetual = isPerpetual(c);
+      const nowMs = Date.now();
+      const discoveredMs = Date.parse(safeText(c.discoveredAt));
+      const isNew = Number.isFinite(discoveredMs) && nowMs >= discoveredMs && nowMs - discoveredMs <= 72 * 60 * 60 * 1000;
+      const ui = STATUS_TEXT[currentLanguage] || STATUS_TEXT.en;
+      const expiring = safeText(c.status).toLowerCase() === "expiring";
+      const verifiedCount = Number(c.verifiedSourceCount || 0);
 
       const card = document.createElement("article");
       card.className = "card";
       card.innerHTML = `
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <div class="code">${escapeHTML(c.code || "")}</div>
-          <span class="badge active">${escapeHTML(t.activeBadge)}</span>
+          <span class="badge active">${escapeHTML(expiring ? ui.expiring : t.activeBadge)}</span>
+          ${isNew ? `<span class="badge active">${escapeHTML(ui.new)}</span>` : ""}
         </div>
         <div class="until">${perpetual ? escapeHTML(t.perpetual) : `${escapeHTML(t.until)}: ${exp ? new Date(exp).toISOString().replace("T"," ").slice(0,16) + " UTC" : "—"}`}</div>
         ${reward ? `<div class="until">${escapeHTML(reward)}</div>` : ""}
+        ${verifiedCount ? `<div class="until">${escapeHTML(ui.verified)}: ${verifiedCount}</div>` : ""}
         <div class="actions">
           <button class="btn" type="button">${escapeHTML(t.copy)}</button>
           <a class="btn" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener nofollow">${escapeHTML(t.redeem)}</a>
@@ -789,12 +800,31 @@
       });
     }
 
+    const STATUS_TEXT = {
+      ko: { new:"신규", expiring:"곧 만료", verified:"검증 출처", lastChecked:"마지막 확인" },
+      en: { new:"NEW", expiring:"EXPIRING SOON", verified:"Verified sources", lastChecked:"Last checked" },
+      ja: { new:"新着", expiring:"まもなく終了", verified:"確認元", lastChecked:"最終確認" },
+      "zh-TW": { new:"最新", expiring:"即將到期", verified:"驗證來源", lastChecked:"最後確認" }
+    };
+    let currentLanguage = "en";
+    let couponLastCheckedAt = "";
+
+    function renderLastChecked(){
+      const el = document.getElementById("coupon-last-checked");
+      const checkedMs = Date.parse(couponLastCheckedAt);
+      if (!el || !Number.isFinite(checkedMs)) return;
+      const ui = STATUS_TEXT[currentLanguage] || STATUS_TEXT.en;
+      el.textContent = ui.lastChecked + ": " + new Intl.DateTimeFormat(currentLanguage, { dateStyle:"medium", timeStyle:"short", timeZone:"UTC" }).format(new Date(checkedMs)) + " UTC";
+      el.hidden = false;
+    }
+
     async function loadCoupons(){
       const url = "/data/coupons.json?v=" + Date.now();
       const res = await fetch(url, { cache:"no-store" });
       if (!res.ok) throw new Error("HTTP " + res.status);
 
       const data = await res.json();
+      couponLastCheckedAt = safeText(data?.lastCheckedAt);
       const arr = Array.isArray(data?.coupons) ? data.coupons : (Array.isArray(data) ? data : []);
 
       return arr.map(x => ({
@@ -803,11 +833,15 @@
         expiresAt: x.expiresAt,
         firstSeenAt: x.firstSeenAt,
         startAt: x.startAt,
-        reward: x.reward
+        reward: x.reward,
+        status: x.status,
+        discoveredAt: x.discoveredAt,
+        verifiedSourceCount: x.verifiedSourceCount
       })).filter(x => x.code);
     }
 
     function applyLanguage(lang){
+      currentLanguage = lang;
       const t = LANG_DATA[lang] || LANG_DATA.en;
       document.documentElement.setAttribute("lang", "en");
 
@@ -903,6 +937,7 @@
           renderArchive();
 
           const all = await loadCoupons();
+          renderLastChecked();
           const nowMs = Date.now();
 
           const active = all
@@ -914,12 +949,7 @@
               return ap - bp;
             });
 
-          const permanentActive = [
-            { code:"VIP777", until:"permanent" },
-            { code:"Kingshot888", until:"permanent" }
-          ];
-
-          renderCodes(permanentActive.concat(active));
+          renderCodes(active);
         } catch (e) {
           console.error(e);
           renderArchive();

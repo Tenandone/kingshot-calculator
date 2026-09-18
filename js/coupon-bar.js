@@ -79,6 +79,7 @@
 
       var until = safeStr(c && c.until).trim();
       if (until){
+        if (/^(permanent|perpetual|unlimited|ongoing|indefinite|상시|무기한)$/i.test(until)) return Infinity;
         var p = until.split('-');
         if (p.length === 3){
           var y = p[0];
@@ -93,8 +94,11 @@
     }
 
     function isActive(c, nowMs){
+      var status = safeStr(c && c.status).trim().toLowerCase();
+      if (status === 'candidate' || status === 'rejected' || status === 'expired') return false;
       var exp = parseExpiryMs(c);
-      if (exp == null || nowMs >= exp) return false;
+      if (exp == null) return status === 'active' || status === 'expiring';
+      if (exp !== Infinity && nowMs >= exp) return false;
 
       var st = safeStr(c && c.startAt).trim();
       if (st){
@@ -137,7 +141,7 @@
       var min = null;
       for (var i = 0; i < active.length; i++){
         var ms = parseExpiryMs(active[i]);
-        if (ms == null) continue;
+        if (ms == null || ms === Infinity) continue;
         if (min == null || ms < min) min = ms;
       }
       return min;

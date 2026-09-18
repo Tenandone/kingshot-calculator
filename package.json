@@ -9,6 +9,9 @@
     "prebuild": "npm run sitemap",
     "build": "vite build",
     "sitemap": "npm run generate:routes && node scripts/generate-sitemap.js",
+    "coupons:update": "node scripts/coupons/update-coupons.js --write",
+    "coupons:check": "node scripts/coupons/update-coupons.js",
+    "coupons:test": "node scripts/coupons/test-coupons.js",
     "bump": "node bump-version.js",
     "deploy": "npm run bump && npm run build && gh-pages -d dist"
   },

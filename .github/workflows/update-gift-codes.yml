@@ -1,0 +1,56 @@
+name: Update Kingshot gift codes
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-kingshot-gift-codes
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Collect and verify gift codes
+        run: npm run coupons:update
+
+      - name: Test coupon automation
+        run: npm run coupons:test
+
+      - name: Build site
+        run: npm run build
+
+      - name: Commit meaningful coupon changes
+        shell: bash
+        run: |
+          git add data/coupons.json data/coupon-candidates.json DATA_CONFLICT_REPORT.md
+          if git diff --cached --quiet; then
+            echo "No coupon data changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: update Kingshot gift codes"
+          git pull --rebase origin main
+          git push origin HEAD:main
