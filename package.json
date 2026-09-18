@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "sitemap": "node scripts/generate-sitemap.js",
     "bump": "node bump-version.js",
     "deploy": "npm run bump && npm run build && gh-pages -d dist"
   },

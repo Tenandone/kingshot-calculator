@@ -698,6 +698,13 @@
           })(internals[ii]);
         }
       });
+    }).then(function(result){
+      try {
+        if (window.KD_SEO_SYNC && typeof window.KD_SEO_SYNC === 'function') {
+          window.KD_SEO_SYNC();
+        }
+      } catch (_seoError) {}
+      return result;
     });
   }
 
@@ -1233,6 +1240,13 @@
           try { applyCalcI18NIfAvailable(document.getElementById('content') || document.body); } catch (_e4) {}
         });
       });
+    }).then(function(result){
+      try {
+        if (window.KD_SEO_SYNC && typeof window.KD_SEO_SYNC === 'function') {
+          window.KD_SEO_SYNC();
+        }
+      } catch (_seoError) {}
+      return result;
     });
   }
 

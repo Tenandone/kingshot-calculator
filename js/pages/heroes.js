@@ -102,14 +102,7 @@
   };
 
   /* ========= Plan ========= */
-  const PLAN = [
-    { type:'gen', value:'7',  label:'Gen7', limit:3 },
-    { type:'gen', value:'6',  label:'Gen6', limit:3 },
-    { type:'gen', value:'5',  label:'Gen5', limit:3 },
-    { type:'gen', value:'4',  label:'Gen4', limit:3 },
-    { type:'gen', value:'3',  label:'Gen3', limit:3 },
-    { type:'gen', value:'2',  label:'Gen2', limit:3 },
-    { type:'gen', value:'1',  label:'Gen1', limit:4 },
+  const RARITY_PLAN = [
     { type:'rar', value:'SR', label:'SR'    },
     { type:'rar', value:'R',  label:'R'     },
   ];
@@ -290,8 +283,12 @@
     ROOT.innerHTML = '';
     const used = new Set();
     let rendered = 0;
+    const plan = [
+      ...collectGenerations(heroes).map(g => ({ type:'gen', value:g, label:`Gen${g}` })),
+      ...RARITY_PLAN
+    ];
 
-    for (const p of PLAN){
+    for (const p of plan){
       const bucket = heroes
         .filter(h => {
           const key = h.slug || h.name || h.nameEn || '';

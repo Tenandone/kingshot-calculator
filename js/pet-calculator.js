@@ -301,7 +301,7 @@
   }
 
   function getPetDetailHref(petId) {
-    if (!petId || petId === 'unknown') return '#';
+    if (!petId) return '#';
     return '/' + getCurrentLangFolder() + '/pet/' + petId;
   }
 

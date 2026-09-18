@@ -535,20 +535,96 @@
             { href:'/heroes',     img:'/img/home/helgachar.png',  t:'home.card.heroes.title',      d:'home.card.heroes.desc' },
             { href:'/pet',        img:'/img/home/pet.png',        t:'nav.pet',                     d:'home.card.pet.desc' },
             { href:'/masters',    img:'/img/masters/valora.webp', t:'home.card.masters.title',     d:'home.card.masters.desc' },
-            { href:'/database',   img:'/img/home/database.png',   t:'home.card.database.title',    d:'home.card.database.desc' },
-            { href:'/guides',     img:'/img/home/guides.png',     t:'home.card.guides.title',      d:'home.card.guides.desc' },
-            { href:'/calculator', img:'/img/home/calculator.png', t:'home.card.calculators.title', d:'home.card.calculators.desc' },
-            { href:'/about',      img:'/img/home/about.png',      t:'nav.about',                   d:'home.card.about.desc' }
+            { href:'/database',   img:'/img/home/database.png',   t:'home.card.database.title',    d:'home.card.database.desc' }
           ];
+
+          var quickLinks = [
+            { href:'/guides/kingshot-giftcode', t:'home.hub.giftCodes', d:'home.hub.giftCodesDesc' },
+            { href:'/calc-building',             t:'home.hub.buildingCalc', d:'home.hub.buildingCalcDesc' },
+            { href:'/heroes',                   t:'home.hub.heroData', d:'home.hub.heroDataDesc' },
+            { href:'/guides/kingshot-bearhunt', t:'home.hub.bearGuide', d:'home.hub.bearGuideDesc' }
+          ];
+
+          var hubGroups = [
+            {
+              key: 'calculators',
+              title: 'home.hub.calculatorsTitle',
+              desc: 'home.hub.calculatorsDesc',
+              links: [
+                { href:'/calc-building', t:'home.hub.buildingCalc' },
+                { href:'/calc-gear', t:'home.hub.governorGearCalc' },
+                { href:'/calc-charm', t:'home.hub.governorCharmCalc' },
+                { href:'/calc-training', t:'home.hub.troopCalc' },
+                { href:'/calc-pet', t:'home.hub.petCalc' }
+              ]
+            },
+            {
+              key: 'tools',
+              title: 'home.hub.toolsTitle',
+              desc: 'home.hub.toolsDesc',
+              links: [
+                { href:'/guides/kingshot-giftcode', t:'home.hub.giftCodes' },
+                { href:'/guides/coupon-countdown', t:'home.hub.couponCountdown' },
+                { href:'/guides/server-timeline', t:'home.hub.serverTimeline' },
+                { href:'/waracademy', t:'home.hub.warAcademy' },
+                { href:'/guides/ssr-hero-vs', t:'home.hub.heroCompare' }
+              ]
+            },
+            {
+              key: 'guides',
+              title: 'home.hub.guidesTitle',
+              desc: 'home.hub.guidesDesc',
+              links: [
+                { href:'/guides/kingshot-f2p-guide', t:'home.hub.beginnerGuide' },
+                { href:'/guides/kingshot-bearhunt', t:'home.hub.bearGuide' },
+                { href:'/guides/transfer', t:'home.hub.transferGuide' },
+                { href:'/guides/hallofgovernors', t:'home.hub.eventGuide' }
+              ]
+            }
+          ];
+
+          function renderCompactLink(link) {
+            return '<a class="home-hub-link" data-search-item href="' + link.href + '">' +
+              '<span data-i18n="' + link.t + '">' + t(link.t) + '</span>' +
+              '<span class="home-hub-link__arrow" aria-hidden="true">›</span>' +
+            '</a>';
+          }
 
           el.innerHTML =
             '<div class="home-container">' +
-              '<section class="home-categories">' +
-                '<h2 class="section-title" data-i18n="home.categoriesTitle">' + t('home.categoriesTitle','카테고리') + '</h2>' +
+              '<section class="home-hub-intro" aria-labelledby="home-hub-title">' +
+                '<p class="home-hub-eyebrow" data-i18n="home.hub.eyebrow">' + t('home.hub.eyebrow','Kingshot data hub') + '</p>' +
+                '<h1 id="home-hub-title" data-i18n="home.hub.title">' + t('home.hub.title','Kingshot guides and data') + '</h1>' +
+                '<p class="home-hub-intro__copy" data-i18n="home.hub.intro">' + t('home.hub.intro','Find Kingshot data, calculators, tools, and guides.') + '</p>' +
+                '<div class="home-search" role="search">' +
+                  '<label class="visually-hidden-seo" for="home-search-input" data-i18n="home.hub.searchLabel">' + t('home.hub.searchLabel','Search site content') + '</label>' +
+                  '<input id="home-search-input" type="search" autocomplete="off" inputmode="search" ' +
+                    'placeholder="' + t('home.hub.searchPlaceholder','Search heroes, buildings, calculators, guides') + '" ' +
+                    'data-i18n-attr="placeholder:home.hub.searchPlaceholder" />' +
+                  '<p class="home-search__hint" data-i18n="home.hub.searchHint">' + t('home.hub.searchHint','Type to filter the content below instantly.') + '</p>' +
+                  '<p id="home-search-empty" class="home-search__empty" hidden data-i18n="home.hub.noResults">' + t('home.hub.noResults','No matching content found.') + '</p>' +
+                '</div>' +
+              '</section>' +
+              '<section class="home-hub-section home-hub-section--quick" data-search-section>' +
+                '<h2 data-i18n="home.hub.quickTitle">' + t('home.hub.quickTitle','Quick access') + '</h2>' +
+                '<div class="home-quick-grid">' +
+                  quickLinks.map(function(link){
+                    return '<a class="home-quick-link" data-search-item href="' + link.href + '">' +
+                      '<strong data-i18n="' + link.t + '">' + t(link.t) + '</strong>' +
+                      '<span data-i18n="' + link.d + '">' + t(link.d) + '</span>' +
+                    '</a>';
+                  }).join('') +
+                '</div>' +
+              '</section>' +
+              '<section class="home-categories home-hub-section" data-search-section>' +
+                '<div class="home-hub-section__head">' +
+                  '<h2 data-i18n="home.hub.databaseTitle">' + t('home.hub.databaseTitle','Database') + '</h2>' +
+                  '<p data-i18n="home.hub.databaseDesc">' + t('home.hub.databaseDesc','Browse Kingshot data.') + '</p>' +
+                '</div>' +
                 '<div class="grid category-grid">' +
                   cards.map(function(c){
                     return '' +
-                    '<a class="card card--category" href="' + c.href + '">' +
+                    '<a class="card card--category" data-search-item href="' + c.href + '">' +
                       '<div class="card__media" aria-hidden="true">' +
                         (iconImg ? iconImg(t(c.t), c.img) : '') +
                       '</div>' +
@@ -561,7 +637,50 @@
                 '</div>' +
                 '<div id="home-waracademy-banner-mount" hidden></div>' +
               '</section>' +
+              hubGroups.map(function(group){
+                return '<section class="home-hub-section" data-search-section data-hub-group="' + group.key + '">' +
+                  '<div class="home-hub-section__head">' +
+                    '<h2 data-i18n="' + group.title + '">' + t(group.title) + '</h2>' +
+                    '<p data-i18n="' + group.desc + '">' + t(group.desc) + '</p>' +
+                  '</div>' +
+                  '<div class="home-hub-link-grid">' + group.links.map(renderCompactLink).join('') + '</div>' +
+                '</section>';
+              }).join('') +
             '</div>';
+
+          var searchInput = el.querySelector('#home-search-input');
+          var searchEmpty = el.querySelector('#home-search-empty');
+
+          function applyHomeSearch() {
+            if (!searchInput) return;
+            var query = String(searchInput.value || '').trim().toLocaleLowerCase();
+            var visibleCount = 0;
+            var items = el.querySelectorAll('[data-search-item]');
+
+            Array.prototype.forEach.call(items, function(item){
+              var hit = !query || String(item.textContent || '').toLocaleLowerCase().indexOf(query) !== -1;
+              item.hidden = !hit;
+              if (hit) visibleCount += 1;
+            });
+
+            Array.prototype.forEach.call(el.querySelectorAll('[data-search-section]'), function(section){
+              var hasVisible = section.querySelector('[data-search-item]:not([hidden])');
+              section.hidden = !!query && !hasVisible;
+            });
+
+            if (searchEmpty) searchEmpty.hidden = !query || visibleCount > 0;
+          }
+
+          if (searchInput) {
+            try { searchInput.value = new URLSearchParams(location.search).get('q') || ''; } catch (_) {}
+            searchInput.addEventListener('input', applyHomeSearch);
+            searchInput.addEventListener('keydown', function(e){
+              if (e.key !== 'Enter') return;
+              var first = el.querySelector('[data-search-item]:not([hidden])');
+              if (first) first.click();
+            });
+            applyHomeSearch();
+          }
 
           if (isStale(token)) return;
 
@@ -1028,6 +1147,12 @@
           var token = newRenderToken();
           el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
 
+          try {
+            if (window.I18N && window.I18N.loadNamespace) {
+              await window.I18N.loadNamespace('heroes');
+            }
+          } catch (e) {}
+
           var html = await loadHTMLCached(['pages/heroes.html','/pages/heroes.html','heroes.html','/heroes.html']);
           if (isStale(token)) return;
 
@@ -1059,7 +1184,7 @@
             return;
           }
           if (typeof window.initHeroes === 'function') {
-            try { window.initHeroes(); } catch (e2) { console.error(e2); }
+            try { await window.initHeroes(); } catch (e2) { console.error(e2); }
           } else {
             el.insertAdjacentHTML('beforeend','<div class="error" data-i18n="heroes.noInit">initHeroes()가 없습니다.</div>');
           }
@@ -1076,10 +1201,16 @@
         render: async function (el, rest) {
           var token = newRenderToken();
           var slug = decodeURIComponent((rest || '').split('/').filter(Boolean)[0] || '');
+
+          try {
+            if (window.I18N && window.I18N.loadNamespace) {
+              await window.I18N.loadNamespace('heroes');
+            }
+          } catch (e) {}
+
           el.innerHTML =
             '<section class="container">' +
-              '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">' +
-                '<h1 class="page-title" id="hero-title" data-i18n="heroes.detail.title">^_^</h1>' +
+              '<div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;">' +
                 '<a class="btn btn-icon" href="/heroes" data-smart-back="/heroes" aria-label="Back" title="Back">←</a>' +
               '</div>' +
               '<div id="hero-root" class="hero-detail"></div>' +

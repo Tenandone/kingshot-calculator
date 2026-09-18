@@ -58,7 +58,7 @@
     header.innerHTML = [
       '<div class="mh-wrap">',
         '<a class="mh-brand" href="/', qstr, '#/" aria-label="KingshotData Home">',
-          '<img class="mh-logo" src="/img/logo-kingshotdata.png" alt="KingshotData" decoding="async" />',
+          '<img class="mh-logo" src="/img/kingshotdata-logo-112.png" alt="KingshotData" decoding="async" />',
         '</a>',
         '<nav class="mh-nav" aria-label="Mini navigation">',
           '<a href="/', qstr, '#/buildings">건물</a>',
