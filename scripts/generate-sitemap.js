@@ -2,15 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-
-const ROOT = path.resolve(__dirname, '..');
-const ORIGIN = 'https://kingshotdata.kr';
-const LANGS = [
-  { folder: 'ko', code: 'ko' },
-  { folder: 'en', code: 'en' },
-  { folder: 'ja', code: 'ja' },
-  { folder: 'zh-tw', code: 'zh-TW' }
-];
+const { ROOT, ORIGIN, LANGS, getStaticRoutes } = require('./static-routes');
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, ''));
@@ -51,6 +43,7 @@ function normalizeUrl(value) {
 }
 
 function languageFromUrl(value) {
+  if (explicitLanguages.has(value)) return explicitLanguages.get(value);
   const url = new URL(value);
   const queryLang = url.searchParams.get('lang');
   if (queryLang) return queryLang.toLowerCase() === 'zh-tw' ? 'zh-TW' : queryLang.toLowerCase();
@@ -65,6 +58,7 @@ function logicalKey(value) {
   if (queryLang) url.searchParams.delete('lang');
   url.pathname = url.pathname.replace(/^\/(ko|en|ja|zh-tw)(?=\/|$)/, '');
   if (!url.pathname) url.pathname = '/';
+  if (url.pathname.length > 1) url.pathname = url.pathname.replace(/\/+$/, '');
   const search = url.searchParams.toString();
   return url.pathname + (search ? '?' + search : '');
 }
@@ -79,6 +73,12 @@ function escapeXml(value) {
 }
 
 const urls = new Set();
+const explicitLanguages = new Map();
+
+for (const route of getStaticRoutes()) {
+  urls.add(route.url);
+  explicitLanguages.set(route.url, route.lang.code);
+}
 
 for (const lang of LANGS) {
   const directory = path.join(ROOT, lang.folder);
@@ -87,32 +87,6 @@ for (const lang of LANGS) {
     if (/<title[^>]*>\s*Redirecting/i.test(html)) continue;
     const canonical = normalizeUrl(getCanonical(html));
     if (canonical && languageFromUrl(canonical) && !canonical.includes('/tw/')) urls.add(canonical);
-  }
-}
-
-const spaPaths = [
-  '/',
-  '/heroes',
-  '/database',
-  '/calculator',
-  '/calc-building',
-  '/calc-gear',
-  '/calc-charm',
-  '/calc-training',
-  '/calc-pet',
-  '/waracademy',
-  '/about',
-  '/privacy'
-];
-
-const heroes = readJson(path.join(ROOT, 'data', 'heroes.json'));
-for (const hero of heroes) {
-  if (hero && hero.slug) spaPaths.push('/hero/' + encodeURIComponent(hero.slug));
-}
-
-for (const lang of LANGS) {
-  for (const pathname of spaPaths) {
-    urls.add(ORIGIN + pathname + '?lang=' + encodeURIComponent(lang.code));
   }
 }
 

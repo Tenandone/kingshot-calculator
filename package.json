@@ -5,8 +5,10 @@
   "main": "bump-version.js",
   "scripts": {
     "dev": "vite dev",
+    "generate:routes": "node scripts/generate-static-routes.js",
+    "prebuild": "npm run sitemap",
     "build": "vite build",
-    "sitemap": "node scripts/generate-sitemap.js",
+    "sitemap": "npm run generate:routes && node scripts/generate-sitemap.js",
     "bump": "node bump-version.js",
     "deploy": "npm run bump && npm run build && gh-pages -d dist"
   },

@@ -744,7 +744,7 @@
       var saved   = (function(){ try { return localStorage.getItem('lang'); } catch(_){ return null; } })();
       var urlLang = new URLSearchParams(location.search).get('lang');
       var fallback= (navigator.language || 'en');
-      var lang    = normalizeLanguage(pathLang || urlLang || saved || fallback);
+      var lang    = normalizeLanguage(pathLang || window.__STATIC_LANG || urlLang || saved || fallback);
 
       if (window.I18N.current === lang && typeof window.I18N.t === 'function') return Promise.resolve();
 
@@ -840,6 +840,28 @@
     var p = pathname.replace(/\/index\.html$/i, '');
     if (p.length > 1 && p.lastIndexOf('/') === p.length - 1) p = p.slice(0, -1);
     return p || '/';
+  }
+
+  function isStaticSpaRoute(pathname) {
+    return pathname === '/' ||
+      /^\/(?:heroes|calculator|calc-building|calc-gear|calc-charm|calc-training|calc-pet|waracademy|about|privacy)(?:\/|$)/i.test(pathname) ||
+      /^\/hero\/[^/?#]+\/?$/i.test(pathname);
+  }
+
+  function localizeStaticSpaUrl(url) {
+    var u = new URL(url, location.origin);
+    var p = normalize(u.pathname);
+    var prefixed = p.match(/^\/(ko|en|ja|zh-tw)(\/.*|$)/i);
+    var routePath = prefixed ? (prefixed[2] || '/') : p;
+    if (!isStaticSpaRoute(routePath)) return u;
+    var lang = prefixed
+      ? normalizeLanguage(prefixed[1])
+      : normalizeLanguage((window.I18N && window.I18N.current) || window.__STATIC_LANG || 'ko');
+    var folder = normalizeLangFolder(lang);
+    u.pathname = (lang === 'ko' ? '' : '/' + folder) + routePath + '/';
+    if (routePath === '/') u.pathname = lang === 'ko' ? '/' : '/' + folder + '/';
+    u.searchParams.delete('lang');
+    return u;
   }
 
   function canonicalize(input) {
@@ -1062,7 +1084,7 @@
     return ensureI18N().then(function(){
       if (myVer !== navVer) return;
 
-      canon = canonicalize(location.href);
+      canon = localizeStaticSpaUrl(canonicalize(location.href));
       var wantUrl = canon.pathname + canon.search + canon.hash;
       var haveUrl = location.pathname + location.search + location.hash;
       if (wantUrl !== haveUrl) {
@@ -1177,11 +1199,16 @@
       removeBuildingScopedStyleIfAny();
       removePetScopedStyleIfAny();
 
-      var key  = '/' + (segs[0] || '');
-      if (key === '//') key = '/';
-      if (pathNorm === '/') key = '/';
+      var routeSegs = segs;
+      if (segs.length && (segs[0] === 'ko' || segs[0] === 'en' || segs[0] === 'ja' || segs[0] === 'zh-tw' || segs[0] === 'zh-TW')) {
+        routeSegs = segs.slice(1);
+      }
 
-      var rest = '/' + segs.slice(1).join('/');
+      var key  = '/' + (routeSegs[0] || '');
+      if (key === '//') key = '/';
+      if (pathNorm === '/' || routeSegs.length === 0) key = '/';
+
+      var rest = '/' + routeSegs.slice(1).join('/');
       var route = getRoute(key);
 
       var isCalcRoute = (key === '/calculator') || (key.indexOf('/calc-') === 0);
@@ -1252,7 +1279,7 @@
 
   window.navigate = function (to, opts) {
     opts = opts || {};
-    var u = canonicalize(to);
+    var u = localizeStaticSpaUrl(canonicalize(to));
     var url = u.pathname + u.search + u.hash;
     if (opts.replace) history.replaceState(null, '', url);
     else history.pushState(null, '', url);

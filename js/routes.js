@@ -102,6 +102,9 @@
 
     function goto(path, replaceMode) {
       var url = String(path || '/');
+      if (window.navigate && typeof window.navigate === 'function') {
+        return window.navigate(url, { replace: !!replaceMode });
+      }
       if (replaceMode) {
         history.replaceState(null, '', url);
       } else {
