@@ -4,7 +4,7 @@
 <head>
   <meta name="google-adsense-account" content="ca-pub-9189957764761115">
   <meta charset="utf-8" />
-  <script>window.__V="2026091809";window.__STATIC_LANG="ko";window.__STATIC_ROUTE="/events/"</script>
+  <script>window.__V="2026091810";window.__STATIC_LANG="ko";window.__STATIC_ROUTE="/events/"</script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>킹샷 이벤트 데이터 | 킹샷데이터코리아</title>
   <base href="/" />
@@ -268,6 +268,9 @@
         en: {
           buildings: ['Kingshot Buildings', 'Building levels, requirements, upgrade costs, and related calculators for Kingshot.'],
           heroes: ['Kingshot Heroes', 'Browse Kingshot heroes by generation, unit type, skills, and acquisition source.'],
+          events: ['Kingshot Events', 'Browse verified Kingshot event duration, recurrence, unlock conditions, and related systems.'],
+          research: ['Kingshot Research Data', 'Browse verified Academy and Advanced War Academy research names, branches, and maximum levels.'],
+          items: ['Kingshot Items Database', 'Browse verified uses and acquisition routes for key Kingshot resources and materials.'],
           pet: ['Kingshot Pets', 'Compare Kingshot pet skills, upgrade levels, and required materials.'],
           masters: ['Kingshot Masters', 'Explore Kingshot masters, relationship levels, skills, talents, and rewards.'],
           database: ['Kingshot Database', 'Reference tables for hero shards, Governor Gear, charms, forging, and upgrade materials.'],
@@ -280,6 +283,9 @@
         ko: {
           buildings: ['킹샷 건물 데이터', '킹샷 건물 레벨, 요구 조건, 업그레이드 비용과 관련 계산기를 확인하세요.'],
           heroes: ['킹샷 영웅 정보', '세대와 병종별 킹샷 영웅, 스킬, 획득처 정보를 확인하세요.'],
+          events: ['킹샷 이벤트 데이터', '검증된 킹샷 이벤트의 기간, 주기, 해금 조건과 관련 시스템을 확인하세요.'],
+          research: ['킹샷 연구 데이터', '아카데미와 고급 전쟁아카데미의 연구 이름, 분류와 최대 레벨을 확인하세요.'],
+          items: ['킹샷 아이템 데이터베이스', '주요 자원과 성장 재료의 검증된 용도와 획득 경로를 확인하세요.'],
           pet: ['킹샷 펫 데이터', '킹샷 펫 스킬, 성장 단계와 필요한 강화 재료를 비교하세요.'],
           masters: ['킹샷 거장 정보', '킹샷 거장의 관계 레벨, 스킬, 특성과 보상 정보를 확인하세요.'],
           database: ['킹샷 데이터베이스', '영웅 조각, 영주 장비, 보석, 제련과 성장 재료 표를 확인하세요.'],
@@ -292,6 +298,9 @@
         ja: {
           buildings: ['Kingshot 建物データ', '建物レベル、条件、強化コスト、関連計算機を確認できます。'],
           heroes: ['Kingshot 英雄情報', '世代と兵種別の英雄、スキル、入手方法を確認できます。'],
+          events: ['Kingshot イベント情報', '検証済みのイベント期間、周期、解放条件、関連システムを確認できます。'],
+          research: ['Kingshot 研究データ', '学院と上級戦争学院の研究名、分類、最大レベルを確認できます。'],
+          items: ['Kingshot アイテムデータベース', '主要な資源と育成素材の用途、入手方法を確認できます。'],
           pet: ['Kingshot ペットデータ', 'ペットスキル、成長段階、必要素材を比較できます。'],
           masters: ['Kingshot マスター情報', '関係レベル、スキル、才能、報酬情報を確認できます。'],
           database: ['Kingshot データベース', '英雄の欠片、領主装備、宝石、鍛造、育成素材の表を確認できます。'],
@@ -304,6 +313,9 @@
         'zh-TW': {
           buildings: ['Kingshot 建築資料', '查看建築等級、條件、升級成本與相關計算器。'],
           heroes: ['Kingshot 英雄資料', '依世代與兵種查看英雄、技能與取得方式。'],
+          events: ['Kingshot 活動資料', '查看經驗證的活動期間、週期、解鎖條件與相關系統。'],
+          research: ['Kingshot 研究資料', '查看學院與進階戰爭學院的研究名稱、分類及最高等級。'],
+          items: ['Kingshot 道具資料庫', '查看主要資源與成長材料的用途及取得方式。'],
           pet: ['Kingshot 寵物資料', '比較寵物技能、成長階段與所需材料。'],
           masters: ['Kingshot 大師資料', '查看關係等級、技能、天賦與獎勵資訊。'],
           database: ['Kingshot 資料庫', '查看英雄碎片、領主裝備、寶石、鍛造與成長材料表。'],
@@ -370,7 +382,7 @@
           return ORIGIN + '/' + langPath + '/masters/' + masterDetail[1].replace(/\.html$/i, '') + '/';
         }
 
-        if (/^\/(heroes|calculator|calc-building|calc-gear|calc-charm|calc-training|calc-pet|waracademy|about|privacy)(?:\/|$)/i.test(p) || /^\/hero\/[^/?#]+$/i.test(p)) {
+        if (/^\/(heroes|events|research|items|calculator|calc-building|calc-gear|calc-charm|calc-training|calc-pet|waracademy|about|privacy)(?:\/|$)/i.test(p) || /^\/hero\/[^/?#]+$/i.test(p)) {
           return ORIGIN + (langCode === 'ko' ? '' : '/' + langPath) + p + '/';
         }
 
@@ -1034,7 +1046,7 @@
       <article class="ssg-initial-content" data-static-seo="true">
         <nav aria-label="Breadcrumb"><a href="https://kingshotdata.kr/">KingshotData</a></nav>
         <h1>킹샷 이벤트 데이터</h1>
-        <p>반복되는 킹샷 이벤트의 해금 조건, 진행 기간, 주기와 관련 시스템을 교차검증한 데이터입니다.</p><h2>킹샷 이벤트 데이터</h2><ul><li><a href="https://kingshotdata.kr/events/hall-of-governors/">최강영주</a> - 최강영주는 왕국 초기에 도시 성장, 영웅 육성, 병력 훈련 등 일자별 과제로 점수를 경쟁하는 이벤트입니다.</li><li><a href="https://kingshotdata.kr/events/strongest-governor/">지고의 영주</a> - 지고의 영주는 초기 최강영주를 대체하는 7일 경쟁 이벤트로, 여러 성장 항목을 일자별로 나누어 순위를 계산합니다.</li><li><a href="https://kingshotdata.kr/events/kingdom-of-power/">왕국의 힘</a> - 왕국의 힘(KvK)은 준비 단계의 성장 점수와 전투 단계의 왕국 간 전투 결과를 함께 겨루는 핵심 이벤트입니다.</li><li><a href="https://kingshotdata.kr/events/alliance-brawl/">연맹 결투</a> - 연맹 결투는 서로 다른 왕국의 두 연맹이 일자별 과제를 수행해 점수를 겨루는 6.5일 경쟁 이벤트입니다.</li><li><a href="https://kingshotdata.kr/events/merchant-empire/">상단 제국</a> - 상단 제국은 수송대를 호송하거나 다른 수송대를 약탈하고 등급에 따른 보상을 얻는 7일 이벤트입니다.</li><li><a href="https://kingshotdata.kr/events/champagne-fair/">샴페인 축제</a> - 샴페인 축제는 남는 영웅 조각과 스킬북 등 교환 가능한 재료를 바우처로 바꾸고 성장 아이템을 구매하는 교환 이벤트입니다.</li><li><a href="https://kingshotdata.kr/events/hero-roulette/">영웅 룰렛</a> - 영웅 룰렛은 보석이나 행운 칩을 사용해 현재 왕국 세대의 신화 영웅 조각을 얻는 반복형 영웅 획득 이벤트입니다.</li></ul>
+        <p>반복되는 킹샷 이벤트의 해금 조건, 진행 기간, 주기와 관련 시스템을 교차검증한 데이터입니다.</p><h2>킹샷 이벤트 데이터</h2><ul><li><a href="https://kingshotdata.kr/events/hall-of-governors/">최강영주</a> - 최강영주는 왕국 초기에 도시 성장, 영웅 육성, 병력 훈련 등 일자별 과제로 점수를 경쟁하는 이벤트입니다.</li><li><a href="https://kingshotdata.kr/events/strongest-governor/">지고의 영주</a> - 지고의 영주는 초기 최강영주를 대체하는 7일 경쟁 이벤트로, 여러 성장 항목을 일자별로 나누어 순위를 계산합니다.</li><li><a href="https://kingshotdata.kr/events/kingdom-of-power/">왕국의 힘</a> - 왕국의 힘(KvK)은 준비 단계의 성장 점수와 전투 단계의 왕국 간 전투 결과를 함께 겨루는 핵심 이벤트입니다.</li><li><a href="https://kingshotdata.kr/events/alliance-brawl/">연맹 결투</a> - 연맹 결투는 서로 다른 왕국의 두 연맹이 일자별 과제를 수행해 점수를 겨루는 6.5일 경쟁 이벤트입니다.</li><li><a href="https://kingshotdata.kr/events/merchant-empire/">상단 제국</a> - 상단 제국은 수송대를 호송하거나 다른 수송대를 약탈하고 등급에 따른 보상을 얻는 7일 이벤트입니다.</li><li><a href="https://kingshotdata.kr/events/champagne-fair/">샴페인 축제</a> - 샴페인 축제는 남는 영웅 조각과 스킬북 등 교환 가능한 재료를 바우처로 바꾸고 성장 아이템을 구매하는 교환 이벤트입니다.</li><li><a href="https://kingshotdata.kr/events/hero-roulette/">영웅 룰렛</a> - 영웅 룰렛은 보석이나 행운 칩을 사용해 현재 왕국 세대의 신화 영웅 조각을 얻는 반복형 영웅 획득 이벤트입니다.</li><li><a href="https://kingshotdata.kr/events/viking-vengeance/">바이킹의 복수</a> - 바이킹의 복수는 20개 공격 웨이브로 연맹원 도시와 연맹 본부를 방어하는 연맹 협동 이벤트입니다.</li><li><a href="https://kingshotdata.kr/events/mystic-trial/">신비의 시련</a> - 신비의 시련은 순환 구역, 최초 클리어 보상, 주간 소탕 보상과 시련 수정 상점을 제공하는 상시 PvE 콘텐츠입니다.</li><li><a href="https://kingshotdata.kr/events/hall-of-heroes/">영웅의 전당</a> - 영웅의 전당은 3일 동안 열리는 주간 상점 이벤트로, 용맹의 증표를 왕국 세대에 맞는 신화 영웅 조각으로 교환합니다.</li><li><a href="https://kingshotdata.kr/events/champions-way/">챔피언의 길</a> - 챔피언의 길은 4세대부터 사막의 시련을 대체하며 야수 사냥과 정예 반군 처치로 단계 보상을 얻는 3일 영웅 성장 이벤트입니다.</li></ul>
       </article>
     </div>
 

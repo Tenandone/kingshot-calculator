@@ -125,4 +125,15 @@ These entries are intentionally withheld from structured public data until the c
 - Sources agree on the recurring gem/Lucky Chip mechanic and generation-based featured hero.
 - Exact duration wording is not consistent enough for a numeric field.
 - Resolution: duration is omitted from the public event record.
+
+## Advanced War Academy: Truegold Provisions III maximum level
+
+- GameDataBook lists a maximum level of 99.
+- Kingshot Optimizer and Kingshot.net independently list a maximum level of 100.
+- Resolution: the public research index uses 100 because two independent sources agree. The disagreement remains documented here.
+
+## Academy and Advanced War Academy aggregate costs
+
+- The checked research catalogs agree on record identity and maximum levels, but several aggregate resource, time, and power totals do not match.
+- Resolution: `data/research.json` publishes only the cross-verified research identity, branch/category, and maximum level. Cost, time, power, prerequisite, and per-level effect values are withheld.
 <!-- END VERIFIED DATA CONFLICTS -->

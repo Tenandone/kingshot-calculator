@@ -62,6 +62,26 @@ function localAsset(rawUrl) {
   return localFileForUrl(url.href);
 }
 
+function localHtmlTarget(rawUrl) {
+  if (!rawUrl || rawUrl.includes('${') || /^(?:data:|blob:|javascript:|mailto:|tel:|#)/i.test(rawUrl)) return null;
+  const url = new URL(rawUrl, ORIGIN);
+  if (url.origin !== ORIGIN) return null;
+  const pathname = decodeURIComponent(url.pathname);
+  const clean = pathname.replace(/^\/+|\/+$/g, '');
+  if (!clean) return path.join(ROOT, 'index.html');
+  if (path.extname(clean)) return path.join(ROOT, clean);
+
+  const candidates = [
+    path.join(ROOT, clean, 'index.html'),
+    path.join(ROOT, clean + '.html'),
+  ];
+  if (!/^(?:ko|en|ja|zh-tw)(?:\/|$)/i.test(clean)) {
+    candidates.push(path.join(ROOT, 'ko', clean, 'index.html'));
+    candidates.push(path.join(ROOT, 'ko', clean + '.html'));
+  }
+  return candidates.find(candidate => fs.existsSync(candidate)) || candidates[0];
+}
+
 function listSitemapUrls() {
   const sitemap = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
   return [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => decode(match[1]));
@@ -98,7 +118,11 @@ function audit() {
     else if (canonical !== expectedCanonical) errors.push(url + ': canonical mismatch (' + canonical + ')');
     if (h1Count !== 1) errors.push(url + ': expected one H1, found ' + h1Count);
     if (!ogTitle || !ogDescription || !ogImage) errors.push(url + ': incomplete Open Graph metadata');
-    if (alternates.length < 4) warnings.push(url + ': fewer than four hreflang alternates');
+    for (const alternate of alternates) {
+      const href = attr(alternate, 'href');
+      const target = localAsset(href);
+      if (target && !fs.existsSync(target)) warnings.push(url + ': unresolved hreflang ' + href);
+    }
     if (rawText.length < 120) warnings.push(url + ': thin raw HTML (' + rawText.length + ' characters)');
 
     if (title) {
@@ -125,7 +149,7 @@ function audit() {
     }
     for (const match of html.matchAll(/<a\b[^>]*>/gi)) {
       const href = attr(match[0], 'href');
-      const target = localAsset(href);
+      const target = localHtmlTarget(href);
       if (target && !fs.existsSync(target)) warnings.push('unresolved internal route ' + href);
     }
   }

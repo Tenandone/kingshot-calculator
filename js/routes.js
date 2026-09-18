@@ -570,6 +570,8 @@
                 { href:'/guides/coupon-countdown', t:'home.hub.couponCountdown' },
                 { href:'/guides/server-timeline', t:'home.hub.serverTimeline' },
                 { href:'/waracademy', t:'home.hub.warAcademy' },
+                { href:'/research', t:'home.hub.researchData' },
+                { href:'/items', t:'home.hub.itemsDatabase' },
                 { href:'/guides/ssr-hero-vs', t:'home.hub.heroCompare' }
               ]
             },
@@ -1174,6 +1176,66 @@
         }
       },
 
+      '/research': {
+        title: 'Kingshot Research Data - KingshotData.kr',
+        render: async function (el, rest) {
+          var token = newRenderToken();
+          var slug = decodeURIComponent((rest || '').split('/').filter(Boolean)[0] || '');
+          el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+
+          var html = await loadHTMLCached(['pages/research.html', '/pages/research.html']);
+          if (isStale(token)) return;
+          if (!html) {
+            el.innerHTML = '<div class="error">Unable to load research page.</div>';
+            return;
+          }
+          el.innerHTML = htmlBodyOnly(html);
+
+          try {
+            await _loadScriptOnce(window.v ? window.v('/js/pages/research.js') : '/js/pages/research.js');
+          } catch (error) {
+            console.error(error);
+            el.insertAdjacentHTML('beforeend', '<div class="error">Unable to load research script.</div>');
+            return;
+          }
+          if (isStale(token)) return;
+          if (typeof window.initResearch === 'function') await window.initResearch(slug);
+          apply(el);
+          window.scrollTo({ top: 0 });
+          focusMain(el);
+        }
+      },
+
+      '/items': {
+        title: 'Kingshot Items Database - KingshotData.kr',
+        render: async function (el, rest) {
+          var token = newRenderToken();
+          var slug = decodeURIComponent((rest || '').split('/').filter(Boolean)[0] || '');
+          el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
+
+          var html = await loadHTMLCached(['pages/items.html', '/pages/items.html']);
+          if (isStale(token)) return;
+          if (!html) {
+            el.innerHTML = '<div class="error">Unable to load items page.</div>';
+            return;
+          }
+          el.innerHTML = htmlBodyOnly(html);
+
+          try {
+            await _loadScriptOnce(window.v ? window.v('/js/pages/items.js') : '/js/pages/items.js');
+          } catch (error) {
+            console.error(error);
+            el.insertAdjacentHTML('beforeend', '<div class="error">Unable to load items script.</div>');
+            return;
+          }
+          if (isStale(token)) return;
+          if (typeof window.initItems === 'function') await window.initItems(slug);
+          apply(el);
+          window.scrollTo({ top: 0 });
+          focusMain(el);
+        }
+      },
+
       '/heroes': {
         title: '영웅 - KingshotData.kr',
         render: async function (el) {
@@ -1514,6 +1576,8 @@
       '/':           { js: [], html: ['/tools/home-waracademy-banner.html', 'tools/home-waracademy-banner.html'] },
       '/heroes':     { js: ['/js/pages/heroes.js'], html: ['pages/heroes.html','/pages/heroes.html'] },
       '/events':     { js: ['/js/pages/events.js'], html: ['pages/events.html','/pages/events.html'] },
+      '/research':   { js: ['/js/pages/research.js'], html: ['pages/research.html','/pages/research.html'] },
+      '/items':      { js: ['/js/pages/items.js'], html: ['pages/items.html','/pages/items.html'] },
       '/pet':        { js: ['/js/pages/pet.js'], html: ['/en/pet/index.html', '/ko/pet/index.html', '/ja/pet/index.html', '/zh-tw/pet/index.html'] },
       '/masters':    { js: [], html: ['/en/masters/index.html', '/ko/masters/index.html', '/ja/masters/index.html', '/zh-tw/masters/index.html'] },
       '/database':   { js: ['/js/pages/database.js'], html: ['pages/database.html','/pages/database.html'] },
@@ -1534,7 +1598,7 @@
     }
 
     document.addEventListener('mouseover', function (e) {
-      var a = e.target.closest && e.target.closest('a.card--category, a[href="/"], a[href="/buildings"], a[href="/heroes"], a[href="/events"], a[href="/pet"], a[href="/masters"], a[href="/database"], a[href="/guides"], a[href="/waracademy"], a[href="/war-academy"], a[href="/home"]');
+      var a = e.target.closest && e.target.closest('a.card--category, a[href="/"], a[href="/buildings"], a[href="/heroes"], a[href^="/research"], a[href^="/items"], a[href="/events"], a[href="/pet"], a[href="/masters"], a[href="/database"], a[href="/guides"], a[href="/waracademy"], a[href="/war-academy"], a[href="/home"]');
       if (!a) return;
       prefetchFor(a.href);
     });

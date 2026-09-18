@@ -4,7 +4,7 @@
 <head>
   <meta name="google-adsense-account" content="ca-pub-9189957764761115">
   <meta charset="utf-8" />
-  <script>window.__V="2026091809";window.__STATIC_LANG="en";window.__STATIC_ROUTE="/en/calculator/"</script>
+  <script>window.__V="2026091810";window.__STATIC_LANG="en";window.__STATIC_ROUTE="/en/calculator/"</script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kingshot Calculators | KingshotData</title>
   <base href="/" />
@@ -268,6 +268,9 @@
         en: {
           buildings: ['Kingshot Buildings', 'Building levels, requirements, upgrade costs, and related calculators for Kingshot.'],
           heroes: ['Kingshot Heroes', 'Browse Kingshot heroes by generation, unit type, skills, and acquisition source.'],
+          events: ['Kingshot Events', 'Browse verified Kingshot event duration, recurrence, unlock conditions, and related systems.'],
+          research: ['Kingshot Research Data', 'Browse verified Academy and Advanced War Academy research names, branches, and maximum levels.'],
+          items: ['Kingshot Items Database', 'Browse verified uses and acquisition routes for key Kingshot resources and materials.'],
           pet: ['Kingshot Pets', 'Compare Kingshot pet skills, upgrade levels, and required materials.'],
           masters: ['Kingshot Masters', 'Explore Kingshot masters, relationship levels, skills, talents, and rewards.'],
           database: ['Kingshot Database', 'Reference tables for hero shards, Governor Gear, charms, forging, and upgrade materials.'],
@@ -280,6 +283,9 @@
         ko: {
           buildings: ['킹샷 건물 데이터', '킹샷 건물 레벨, 요구 조건, 업그레이드 비용과 관련 계산기를 확인하세요.'],
           heroes: ['킹샷 영웅 정보', '세대와 병종별 킹샷 영웅, 스킬, 획득처 정보를 확인하세요.'],
+          events: ['킹샷 이벤트 데이터', '검증된 킹샷 이벤트의 기간, 주기, 해금 조건과 관련 시스템을 확인하세요.'],
+          research: ['킹샷 연구 데이터', '아카데미와 고급 전쟁아카데미의 연구 이름, 분류와 최대 레벨을 확인하세요.'],
+          items: ['킹샷 아이템 데이터베이스', '주요 자원과 성장 재료의 검증된 용도와 획득 경로를 확인하세요.'],
           pet: ['킹샷 펫 데이터', '킹샷 펫 스킬, 성장 단계와 필요한 강화 재료를 비교하세요.'],
           masters: ['킹샷 거장 정보', '킹샷 거장의 관계 레벨, 스킬, 특성과 보상 정보를 확인하세요.'],
           database: ['킹샷 데이터베이스', '영웅 조각, 영주 장비, 보석, 제련과 성장 재료 표를 확인하세요.'],
@@ -292,6 +298,9 @@
         ja: {
           buildings: ['Kingshot 建物データ', '建物レベル、条件、強化コスト、関連計算機を確認できます。'],
           heroes: ['Kingshot 英雄情報', '世代と兵種別の英雄、スキル、入手方法を確認できます。'],
+          events: ['Kingshot イベント情報', '検証済みのイベント期間、周期、解放条件、関連システムを確認できます。'],
+          research: ['Kingshot 研究データ', '学院と上級戦争学院の研究名、分類、最大レベルを確認できます。'],
+          items: ['Kingshot アイテムデータベース', '主要な資源と育成素材の用途、入手方法を確認できます。'],
           pet: ['Kingshot ペットデータ', 'ペットスキル、成長段階、必要素材を比較できます。'],
           masters: ['Kingshot マスター情報', '関係レベル、スキル、才能、報酬情報を確認できます。'],
           database: ['Kingshot データベース', '英雄の欠片、領主装備、宝石、鍛造、育成素材の表を確認できます。'],
@@ -304,6 +313,9 @@
         'zh-TW': {
           buildings: ['Kingshot 建築資料', '查看建築等級、條件、升級成本與相關計算器。'],
           heroes: ['Kingshot 英雄資料', '依世代與兵種查看英雄、技能與取得方式。'],
+          events: ['Kingshot 活動資料', '查看經驗證的活動期間、週期、解鎖條件與相關系統。'],
+          research: ['Kingshot 研究資料', '查看學院與進階戰爭學院的研究名稱、分類及最高等級。'],
+          items: ['Kingshot 道具資料庫', '查看主要資源與成長材料的用途及取得方式。'],
           pet: ['Kingshot 寵物資料', '比較寵物技能、成長階段與所需材料。'],
           masters: ['Kingshot 大師資料', '查看關係等級、技能、天賦與獎勵資訊。'],
           database: ['Kingshot 資料庫', '查看英雄碎片、領主裝備、寶石、鍛造與成長材料表。'],
@@ -370,7 +382,7 @@
           return ORIGIN + '/' + langPath + '/masters/' + masterDetail[1].replace(/\.html$/i, '') + '/';
         }
 
-        if (/^\/(heroes|calculator|calc-building|calc-gear|calc-charm|calc-training|calc-pet|waracademy|about|privacy)(?:\/|$)/i.test(p) || /^\/hero\/[^/?#]+$/i.test(p)) {
+        if (/^\/(heroes|events|research|items|calculator|calc-building|calc-gear|calc-charm|calc-training|calc-pet|waracademy|about|privacy)(?:\/|$)/i.test(p) || /^\/hero\/[^/?#]+$/i.test(p)) {
           return ORIGIN + (langCode === 'ko' ? '' : '/' + langPath) + p + '/';
         }
 

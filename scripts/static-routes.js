@@ -16,6 +16,8 @@ const GENERIC_ROUTES = [
   '/',
   '/heroes',
   '/events',
+  '/research',
+  '/items',
   '/calculator',
   '/calc-building',
   '/calc-gear',
@@ -42,14 +44,29 @@ function readEvents() {
     : [];
 }
 
+function readResearch() {
+  return readJson(path.join(ROOT, 'data', 'research.json'));
+}
+
+function readItems() {
+  const data = readJson(path.join(ROOT, 'data', 'items.json'));
+  return Array.isArray(data.items)
+    ? data.items.map(item => ({ ...item, verifiedAt: item.verifiedAt || data.verifiedAt }))
+    : [];
+}
+
 function getRoutePaths() {
   return GENERIC_ROUTES.concat(
+    ['/research/academy', '/research/advanced-truegold'],
     readHeroes()
       .filter(hero => hero && hero.slug)
       .map(hero => '/hero/' + encodeURIComponent(hero.slug)),
     readEvents()
       .filter(event => event && event.slug)
-      .map(event => '/events/' + encodeURIComponent(event.slug))
+      .map(event => '/events/' + encodeURIComponent(event.slug)),
+    readItems()
+      .filter(item => item && item.slug)
+      .map(item => '/items/' + encodeURIComponent(item.slug))
   );
 }
 
@@ -93,6 +110,8 @@ module.exports = {
   readJson,
   readHeroes,
   readEvents,
+  readResearch,
+  readItems,
   getRoutePaths,
   localizedPath,
   outputFile,

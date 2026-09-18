@@ -844,7 +844,7 @@
 
   function isStaticSpaRoute(pathname) {
     return pathname === '/' ||
-      /^\/(?:heroes|events|calculator|calc-building|calc-gear|calc-charm|calc-training|calc-pet|waracademy|about|privacy)(?:\/|$)/i.test(pathname) ||
+      /^\/(?:heroes|events|research|items|calculator|calc-building|calc-gear|calc-charm|calc-training|calc-pet|waracademy|about|privacy)(?:\/|$)/i.test(pathname) ||
       /^\/hero\/[^/?#]+\/?$/i.test(pathname);
   }
 

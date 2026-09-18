@@ -9,6 +9,8 @@ const {
   readJson,
   readHeroes,
   readEvents,
+  readResearch,
+  readItems,
   absoluteUrl,
   getStaticRoutes
 } = require('./static-routes');
@@ -35,6 +37,8 @@ const COPY = {
     '/': ['킹샷데이터코리아 | 쿠폰, 계산기, 영웅·건물 공략', '킹샷 영웅, 거장, 건물, 펫 데이터와 성장 계산기, 기프트코드, 이벤트 공략을 한곳에서 확인하세요.', '킹샷 공략과 성장 데이터'],
     '/heroes': ['킹샷 영웅 정보', '세대와 병종별 킹샷 영웅, 스킬, 획득처 정보를 확인하세요.', '킹샷 영웅'],
     '/events': ['킹샷 이벤트 데이터', '킹샷 주요 이벤트의 진행 기간, 반복 주기, 해금 조건과 관련 콘텐츠를 교차검증된 데이터로 확인하세요.', '킹샷 이벤트 데이터'],
+    '/research': ['킹샷 연구 데이터', '아카데미와 고급 전쟁아카데미의 연구 이름, 분류, 최대 레벨을 교차 검증한 목록입니다.', '킹샷 연구 데이터'],
+    '/items': ['킹샷 아이템 데이터베이스', '순금, 영웅 조각, 장비 재료와 왕국 이전권 등 주요 아이템의 용도와 획득 경로를 확인하세요.', '킹샷 아이템 데이터베이스'],
     '/calculator': ['킹샷 계산기', '건물, 병력, 펫, 영주 장비와 보석에 필요한 성장 재료를 계산하세요.', '킹샷 계산기'],
     '/calc-building': ['킹샷 건물 계산기', '건물 업그레이드에 필요한 자원과 시간을 계산하세요.', '건물 계산기'],
     '/calc-gear': ['킹샷 영주 장비 계산기', '영주 장비 강화에 필요한 재료를 계산하세요.', '영주 장비 계산기'],
@@ -49,6 +53,8 @@ const COPY = {
     '/': ['Kingshot Data: Heroes, Calculators, Guides & Gift Codes', 'Explore Kingshot heroes, masters, buildings, calculators, gift codes, upgrade data, and practical guides in one place.', 'Kingshot Data and Strategy Guides'],
     '/heroes': ['Kingshot Heroes', 'Browse Kingshot heroes by generation, unit type, skills, and acquisition source.', 'Kingshot Heroes'],
     '/events': ['Kingshot Events', 'Browse cross-verified Kingshot event duration, recurrence, unlock conditions, and related game systems.', 'Kingshot Events'],
+    '/research': ['Kingshot Research Data', 'Browse cross-verified Academy and Advanced War Academy research names, branches, and maximum levels.', 'Kingshot Research Data'],
+    '/items': ['Kingshot Items Database', 'Browse verified uses and acquisition routes for key Kingshot resources, hero materials, gear materials, and transfer items.', 'Kingshot Items Database'],
     '/calculator': ['Kingshot Calculators', 'Calculate building, troop, pet, Governor Gear, and charm upgrade requirements.', 'Kingshot Calculators'],
     '/calc-building': ['Kingshot Building Calculator', 'Calculate resources and time required for building upgrades.', 'Building Calculator'],
     '/calc-gear': ['Kingshot Governor Gear Calculator', 'Calculate materials required to upgrade Governor Gear.', 'Governor Gear Calculator'],
@@ -63,6 +69,8 @@ const COPY = {
     '/': ['Kingshot データ | 英雄・建物・計算機・攻略', 'Kingshotの英雄、マスター、建物、ペット、計算機、ギフトコード、イベント攻略を一か所で確認できます。', 'Kingshot データと攻略'],
     '/heroes': ['Kingshot 英雄情報', '世代と兵種別の英雄、スキル、入手方法を確認できます。', 'Kingshot 英雄'],
     '/events': ['Kingshot イベント情報', 'Kingshot主要イベントの期間、周期、解放条件、関連コンテンツを確認できます。', 'Kingshot イベント情報'],
+    '/research': ['Kingshot 研究データ', '学院と上級戦争学院の研究名、分類、最大レベルを照合した一覧です。', 'Kingshot 研究データ'],
+    '/items': ['Kingshot アイテムデータベース', '主要な資源、英雄素材、装備素材、王国移転アイテムの用途と入手方法を確認できます。', 'Kingshot アイテムデータベース'],
     '/calculator': ['Kingshot 計算機', '建物、兵士、ペット、領主装備、宝石の必要素材を計算できます。', 'Kingshot 計算機'],
     '/calc-building': ['Kingshot 建物計算機', '建物強化に必要な資源と時間を計算できます。', '建物計算機'],
     '/calc-gear': ['Kingshot 領主装備計算機', '領主装備の強化に必要な素材を計算できます。', '領主装備計算機'],
@@ -77,6 +85,8 @@ const COPY = {
     '/': ['Kingshot 資料 | 英雄、建築、計算器與攻略', '一次查看 Kingshot 英雄、大師、建築、寵物、計算器、禮包碼與活動攻略。', 'Kingshot 資料與攻略'],
     '/heroes': ['Kingshot 英雄資料', '依世代與兵種查看英雄、技能與取得方式。', 'Kingshot 英雄'],
     '/events': ['Kingshot 活動資料', '查看經交叉驗證的 Kingshot 活動期間、週期、解鎖條件與相關系統。', 'Kingshot 活動資料'],
+    '/research': ['Kingshot 研究資料', '查看經交叉驗證的學院與進階戰爭學院研究名稱、分類及最高等級。', 'Kingshot 研究資料'],
+    '/items': ['Kingshot 道具資料庫', '查看主要資源、英雄材料、裝備材料與王國轉移道具的用途及取得方式。', 'Kingshot 道具資料庫'],
     '/calculator': ['Kingshot 計算器', '計算建築、部隊、寵物、領主裝備與寶石所需材料。', 'Kingshot 計算器'],
     '/calc-building': ['Kingshot 建築計算器', '計算建築升級所需的資源與時間。', '建築計算器'],
     '/calc-gear': ['Kingshot 領主裝備計算器', '計算領主裝備升級所需材料。', '領主裝備計算器'],
@@ -121,12 +131,22 @@ function breadcrumbJson(routePath, lang, title) {
   const homeName = SITE_NAME[lang.code];
   const sectionName = routePath.startsWith('/hero/')
     ? (COPY[lang.code]['/heroes'] || COPY.en['/heroes'])[2]
+    : routePath.startsWith('/research/')
+      ? (COPY[lang.code]['/research'] || COPY.en['/research'])[2]
+    : routePath.startsWith('/items/')
+      ? (COPY[lang.code]['/items'] || COPY.en['/items'])[2]
     : title;
   const items = [
     { '@type': 'ListItem', position: 1, name: homeName, item: absoluteUrl('/', lang) }
   ];
   if (routePath.startsWith('/hero/')) {
     items.push({ '@type': 'ListItem', position: 2, name: sectionName, item: absoluteUrl('/heroes', lang) });
+    items.push({ '@type': 'ListItem', position: 3, name: title, item: absoluteUrl(routePath, lang) });
+  } else if (routePath.startsWith('/research/')) {
+    items.push({ '@type': 'ListItem', position: 2, name: sectionName, item: absoluteUrl('/research', lang) });
+    items.push({ '@type': 'ListItem', position: 3, name: title, item: absoluteUrl(routePath, lang) });
+  } else if (routePath.startsWith('/items/')) {
+    items.push({ '@type': 'ListItem', position: 2, name: sectionName, item: absoluteUrl('/items', lang) });
     items.push({ '@type': 'ListItem', position: 3, name: title, item: absoluteUrl(routePath, lang) });
   } else if (routePath !== '/') {
     items.push({ '@type': 'ListItem', position: 2, name: title, item: absoluteUrl(routePath, lang) });
@@ -142,7 +162,14 @@ function genericPage(routePath, lang, dictionary, heroes, events, eventDictionar
   const entry = COPY[lang.code][routePath] || COPY.en[routePath];
   const [title, description, heading] = entry;
   let body = '<p>' + escapeHtml(description) + '</p>';
-  if (routePath === '/heroes') {
+  if (routePath === '/') {
+    const dataLabel = lang.code === 'ko' ? '주요 데이터' : lang.code === 'ja' ? '主要データ' : lang.code === 'zh-TW' ? '主要資料' : 'Key Data';
+    body += '<h2>' + escapeHtml(dataLabel) + '</h2><ul>';
+    body += '<li><a href="' + absoluteUrl('/heroes', lang) + '">' + escapeHtml((COPY[lang.code]['/heroes'] || COPY.en['/heroes'])[2]) + '</a></li>';
+    body += '<li><a href="' + absoluteUrl('/events', lang) + '">' + escapeHtml((COPY[lang.code]['/events'] || COPY.en['/events'])[2]) + '</a></li>';
+    body += '<li><a href="' + absoluteUrl('/research', lang) + '">' + escapeHtml((COPY[lang.code]['/research'] || COPY.en['/research'])[2]) + '</a></li>';
+    body += '<li><a href="' + absoluteUrl('/items', lang) + '">' + escapeHtml((COPY[lang.code]['/items'] || COPY.en['/items'])[2]) + '</a></li></ul>';
+  } else if (routePath === '/heroes') {
     body += '<h2>' + escapeHtml(lang.code === 'ko' ? '영웅 목록' : lang.code === 'ja' ? '英雄一覧' : lang.code === 'zh-TW' ? '英雄列表' : 'Hero List') + '</h2><ul>';
     body += heroes.map(hero => {
       const name = translated(hero.title, dictionary, hero.name || hero.slug);
@@ -230,6 +257,135 @@ function eventPage(event, lang, eventDictionary, heroDictionary, heroes, events)
       description: summary,
       url: absoluteUrl('/events/' + encodeURIComponent(event.slug), lang),
       dateModified: event.verifiedAt || '2026-09-18',
+      isPartOf: { '@type': 'WebSite', name: 'KingshotData', url: ORIGIN + '/' }
+    }
+  };
+}
+
+function researchPage(routePath, lang, research, dictionary) {
+  const isIndex = routePath === '/research';
+  const isAcademy = routePath === '/research/academy';
+  const records = isAcademy ? research.academy : research.advancedWarAcademy;
+  const heading = isIndex ? dictionary.title : (isAcademy ? dictionary.academyTitle : dictionary.advancedTitle);
+  const summary = isIndex ? dictionary.intro : (isAcademy ? dictionary.academySummary : dictionary.advancedSummary);
+  const sourceKeys = isAcademy
+    ? ['gameDataBook', 'optimizerAcademy']
+    : ['gameDataBook', 'optimizerAdvanced', 'kingshotNetAdvanced'];
+  const sourceNames = {
+    gameDataBook: 'GameDataBook',
+    optimizerAcademy: 'Kingshot Optimizer',
+    optimizerAdvanced: 'Kingshot Optimizer',
+    kingshotNetAdvanced: 'Kingshot.net'
+  };
+  let body = '<p>' + escapeHtml(summary) + '</p>';
+
+  if (isIndex) {
+    body += '<h2>' + escapeHtml(dictionary.academyTitle) + '</h2><p>' + escapeHtml(dictionary.academySummary) + '</p>';
+    body += '<p><a href="' + absoluteUrl('/research/academy', lang) + '">' + escapeHtml(dictionary.academyTitle) + '</a></p>';
+    body += '<h2>' + escapeHtml(dictionary.advancedTitle) + '</h2><p>' + escapeHtml(dictionary.advancedSummary) + '</p>';
+    body += '<p><a href="' + absoluteUrl('/research/advanced-truegold', lang) + '">' + escapeHtml(dictionary.advancedTitle) + '</a></p>';
+  } else {
+    const categoryText = isAcademy
+      ? [dictionary.growth, dictionary.economy, dictionary.battle].join(' / ')
+      : dictionary.advanced;
+    body += '<h2>' + escapeHtml(dictionary.quickFacts) + '</h2><dl>';
+    body += '<dt>' + escapeHtml(dictionary.recordCount) + '</dt><dd>' + records.length + '</dd>';
+    body += '<dt>' + escapeHtml(dictionary.categories) + '</dt><dd>' + escapeHtml(categoryText) + '</dd>';
+    body += '<dt>' + escapeHtml(dictionary.verifiedFields) + '</dt><dd>' + escapeHtml(dictionary.verifiedFieldsValue) + '</dd>';
+    body += '<dt>' + escapeHtml(dictionary.lastVerified) + '</dt><dd>' + escapeHtml(research.verifiedAt) + '</dd></dl>';
+    body += '<h2>' + escapeHtml(heading) + '</h2><ul>' + records.map(record => {
+      const category = isAcademy ? (dictionary[record.category] || record.category) + ' · ' : '';
+      return '<li><strong>' + escapeHtml(record.name) + '</strong> - ' + escapeHtml(category + dictionary.maxLevel + ' ' + record.maxLevel) + '</li>';
+    }).join('') + '</ul>';
+    body += '<h2>' + escapeHtml(dictionary.related) + '</h2><p><a href="' + absoluteUrl('/waracademy', lang) + '">' + escapeHtml(dictionary.warAcademy) + '</a></p>';
+  }
+
+  body += '<h2>' + escapeHtml(dictionary.verification) + '</h2><p>' + escapeHtml(dictionary.verificationText) + '</p>';
+  if (!isIndex) {
+    body += '<ul>' + sourceKeys.map(key => '<li><a href="' + escapeHtml(research.sources[key]) + '" rel="nofollow noopener">' + escapeHtml(sourceNames[key]) + '</a></li>').join('') + '</ul>';
+  }
+
+  const description = truncate(summary, 155);
+  return {
+    title: heading + ' | ' + TITLE_SITE_NAME[lang.code],
+    description,
+    heading,
+    image: '/img/kingshotdata-og-v5.png',
+    type: isIndex ? 'website' : 'article',
+    body,
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': isIndex ? 'CollectionPage' : 'WebPage',
+      name: heading,
+      description,
+      url: absoluteUrl(routePath, lang),
+      dateModified: research.verifiedAt,
+      numberOfItems: isIndex ? 2 : records.length,
+      isPartOf: { '@type': 'WebSite', name: 'KingshotData', url: ORIGIN + '/' }
+    }
+  };
+}
+
+function itemPage(routePath, item, lang, items, dictionary, eventDictionary) {
+  const labels = dictionary.labels || {};
+  if (!item) {
+    const intro = dictionary.intro || '';
+    const body = '<p>' + escapeHtml(intro) + '</p><h2>' + escapeHtml(dictionary.title) + '</h2><ul>' + items.map(entry => {
+      const copy = dictionary.records[entry.slug] || {};
+      return '<li><a href="' + absoluteUrl('/items/' + encodeURIComponent(entry.slug), lang) + '">' + escapeHtml(copy.title || entry.slug) + '</a> - ' + escapeHtml(copy.summary || '') + '</li>';
+    }).join('') + '</ul>';
+    return {
+      title: dictionary.title + ' | ' + TITLE_SITE_NAME[lang.code],
+      description: truncate(intro, 155),
+      heading: dictionary.title,
+      image: '/img/kingshotdata-og-v5.png',
+      type: 'website',
+      body,
+      schema: {
+        '@context': 'https://schema.org', '@type': 'CollectionPage', name: dictionary.title,
+        description: intro, url: absoluteUrl('/items', lang), dateModified: item ? item.verifiedAt : '2026-09-18',
+        numberOfItems: items.length, isPartOf: { '@type': 'WebSite', name: 'KingshotData', url: ORIGIN + '/' }
+      }
+    };
+  }
+
+  const copy = dictionary.records[item.slug] || {};
+  const category = (dictionary.categories || {})[item.category] || item.category;
+  const related = [];
+  for (const slug of item.relatedEvents || []) {
+    related.push('<a href="' + absoluteUrl('/events/' + encodeURIComponent(slug), lang) + '">' + escapeHtml(eventCopy(eventDictionary, slug).title || slug) + '</a>');
+  }
+  for (const slug of item.relatedResearch || []) {
+    related.push('<a href="' + absoluteUrl('/research/' + encodeURIComponent(slug), lang) + '">' + escapeHtml(slug.replace(/-/g, ' ')) + '</a>');
+  }
+  for (const slug of item.relatedGuides || []) {
+    related.push('<a href="/' + lang.folder + '/guides/' + encodeURIComponent(slug) + '.html">' + escapeHtml(slug.replace(/-/g, ' ')) + '</a>');
+  }
+  if ((item.relatedBuildings || []).includes('war-academy')) {
+    related.push('<a href="' + absoluteUrl('/waracademy', lang) + '">War Academy</a>');
+  }
+  if ((item.relatedPages || []).includes('heroes')) {
+    related.push('<a href="' + absoluteUrl('/heroes', lang) + '">Heroes</a>');
+  }
+
+  let body = '<p>' + escapeHtml(copy.summary || '') + '</p><h2>' + escapeHtml(labels.quickFacts || 'Quick Facts') + '</h2><dl>';
+  body += '<dt>' + escapeHtml(labels.category || 'Category') + '</dt><dd>' + escapeHtml(category) + '</dd>';
+  body += '<dt>' + escapeHtml(labels.purpose || 'Purpose') + '</dt><dd>' + escapeHtml(copy.purpose || '') + '</dd>';
+  body += '<dt>' + escapeHtml(labels.acquisition || 'Acquisition') + '</dt><dd>' + escapeHtml(copy.acquisition || '') + '</dd>';
+  body += '<dt>' + escapeHtml(labels.lastVerified || 'Last verified') + '</dt><dd>' + escapeHtml(item.verifiedAt) + '</dd></dl>';
+  if (related.length) body += '<h2>' + escapeHtml(labels.related || 'Related data') + '</h2><p>' + related.join(' · ') + '</p>';
+  body += '<h2>' + escapeHtml(labels.sources || 'Sources') + '</h2><ul>' + (item.sources || []).map(source => '<li><a href="' + escapeHtml(source.url) + '" rel="nofollow noopener">' + escapeHtml(source.name) + '</a></li>').join('') + '</ul>';
+
+  return {
+    title: (copy.title || item.slug) + ' | ' + TITLE_SITE_NAME[lang.code],
+    description: truncate(copy.summary, 155),
+    heading: copy.title || item.slug,
+    image: '/img/kingshotdata-og-v5.png',
+    type: 'article',
+    body,
+    schema: {
+      '@context': 'https://schema.org', '@type': 'WebPage', name: copy.title || item.slug,
+      description: copy.summary || '', url: absoluteUrl(routePath, lang), dateModified: item.verifiedAt,
       isPartOf: { '@type': 'WebSite', name: 'KingshotData', url: ORIGIN + '/' }
     }
   };
@@ -353,6 +509,8 @@ function main() {
   const template = fs.readFileSync(TEMPLATE_FILE, 'utf8');
   const heroes = readHeroes();
   const events = readEvents();
+  const research = readResearch();
+  const items = readItems();
   const heroBySlug = new Map(heroes.map(hero => [String(hero.slug), hero]));
   const heroDictionaries = new Map(
     LANGS.map(lang => [lang.code, readJson(path.join(ROOT, 'i18n', lang.folder === 'zh-tw' ? 'zh-TW' : lang.folder, 'heroes.json'))])
@@ -360,7 +518,14 @@ function main() {
   const eventDictionaries = new Map(
     LANGS.map(lang => [lang.code, readJson(path.join(ROOT, 'i18n', lang.folder === 'zh-tw' ? 'zh-TW' : lang.folder, 'events.json'))])
   );
+  const researchDictionaries = new Map(
+    LANGS.map(lang => [lang.code, readJson(path.join(ROOT, 'i18n', lang.folder === 'zh-tw' ? 'zh-TW' : lang.folder, 'research.json'))])
+  );
   const eventBySlug = new Map(events.map(event => [String(event.slug), event]));
+  const itemBySlug = new Map(items.map(item => [String(item.slug), item]));
+  const itemDictionaries = new Map(
+    LANGS.map(lang => [lang.code, readJson(path.join(ROOT, 'i18n', lang.folder === 'zh-tw' ? 'zh-TW' : lang.folder, 'items.json'))])
+  );
 
   cleanPreviousOutputs();
   const generated = [];
@@ -369,7 +534,15 @@ function main() {
     const hero = heroMatch ? heroBySlug.get(decodeURIComponent(heroMatch[1])) : null;
     const eventMatch = route.routePath.match(/^\/events\/([^/]+)$/);
     const event = eventMatch ? eventBySlug.get(decodeURIComponent(eventMatch[1])) : null;
-    const page = hero
+    const itemMatch = route.routePath.match(/^\/items\/([^/]+)$/);
+    const item = itemMatch ? itemBySlug.get(decodeURIComponent(itemMatch[1])) : null;
+    const isResearch = route.routePath === '/research' || route.routePath.startsWith('/research/');
+    const isItems = route.routePath === '/items' || route.routePath.startsWith('/items/');
+    const page = isItems
+      ? itemPage(route.routePath, item, route.lang, items, itemDictionaries.get(route.lang.code), eventDictionaries.get(route.lang.code))
+      : isResearch
+      ? researchPage(route.routePath, route.lang, research, researchDictionaries.get(route.lang.code))
+      : hero
       ? heroPage(hero, route.lang, heroDictionaries.get(route.lang.code), heroes)
       : event
         ? eventPage(event, route.lang, eventDictionaries.get(route.lang.code), heroDictionaries.get(route.lang.code), heroes, events)

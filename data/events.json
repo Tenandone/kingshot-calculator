@@ -99,6 +99,62 @@
         { "name": "Kingshot Database", "url": "https://kingshotdata.com/events/hero-roulette/", "checkedAt": "2026-09-18" },
         { "name": "Kingshot Wiki", "url": "https://kingshotwiki.com/events/roulette-hero/", "checkedAt": "2026-09-18" }
       ]
+    },
+    {
+      "slug": "viking-vengeance",
+      "type": "alliance-pve",
+      "unlock": "alliance-participation",
+      "relatedEvents": ["alliance-brawl"],
+      "relatedGuides": ["viking"],
+      "sourceType": "cross-verified",
+      "confidence": 90,
+      "sources": [
+        { "name": "Kingshot Wiki", "url": "https://www.kingshot.wiki/events/viking-vengeance", "checkedAt": "2026-09-18" },
+        { "name": "KingShot Data Toolkit", "url": "https://ks-toolkit.com/data/events/vikings-vengeance/", "checkedAt": "2026-09-18" }
+      ]
+    },
+    {
+      "slug": "mystic-trial",
+      "type": "permanent-pve",
+      "recurrence": "weekly-rotation",
+      "unlock": "town-center-19-week-four",
+      "relatedEvents": [],
+      "sourceType": "official-and-cross-verified",
+      "confidence": 95,
+      "sources": [
+        { "name": "Century Games Support", "url": "https://centurygames.helpshift.com/hc/en/140-kingshot/section/1554-mystic-trial/", "checkedAt": "2026-09-18" },
+        { "name": "Kingshot Database", "url": "https://kingshotdata.com/events/mystic-trial/", "checkedAt": "2026-09-18" }
+      ]
+    },
+    {
+      "slug": "hall-of-heroes",
+      "type": "hero-exchange",
+      "durationDays": 3,
+      "recurrence": "weekly",
+      "unlock": "generation-based",
+      "relatedHeroes": ["saul", "jabel", "marlin", "eric", "hilde", "margot", "ava"],
+      "relatedEvents": ["hero-roulette", "champions-way"],
+      "sourceType": "cross-verified",
+      "confidence": 90,
+      "sources": [
+        { "name": "Kingshot Database", "url": "https://kingshotdata.com/events/hall-of-heroes/", "checkedAt": "2026-09-18" },
+        { "name": "Kingshot Wiki", "url": "https://hunteronewiki.github.io/events/hall-of-heroes/", "checkedAt": "2026-09-18" }
+      ]
+    },
+    {
+      "slug": "champions-way",
+      "type": "hero-growth",
+      "durationDays": 3,
+      "recurrence": "biweekly",
+      "unlock": "generation-four",
+      "relatedHeroes": ["hilde"],
+      "relatedEvents": ["hall-of-heroes", "hero-roulette"],
+      "sourceType": "cross-verified",
+      "confidence": 90,
+      "sources": [
+        { "name": "Kingshot Database", "url": "https://kingshotdata.com/events/champions-way-event/", "checkedAt": "2026-09-18" },
+        { "name": "Kingshot Wiki", "url": "https://www.kingshot.wiki/events", "checkedAt": "2026-09-18" }
+      ]
     }
   ]
 }

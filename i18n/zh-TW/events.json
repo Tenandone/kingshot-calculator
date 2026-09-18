@@ -4,9 +4,9 @@
   "labels": {
     "quickFacts": "重點資料", "type": "活動類型", "duration": "持續時間", "recurrence": "活動週期", "unlock": "解鎖條件", "lastVerified": "最後驗證", "verification": "資料驗證", "relatedEvents": "相關活動", "relatedHeroes": "相關英雄", "relatedGuides": "相關攻略", "details": "活動重點", "days": "天", "hours": "小時", "crossVerified": "已由獨立公開來源交叉驗證"
   },
-  "types": { "competitive": "成長競賽", "cross-kingdom": "跨王國競賽", "alliance": "聯盟競賽", "escort": "商隊護送與掠奪", "exchange": "道具兌換", "hero-growth": "英雄取得與培養" },
-  "recurrence": { "biweekly": "王國初期每兩週一次", "monthly": "約每月一次", "four-weeks": "四週週期", "regular-major-event": "配合主要成長活動定期出現" },
-  "unlock": { "early-kingdom": "王國初期世代", "after-first-kvk": "首次王國之力結束後", "kingdom-progression": "依王國進度解鎖", "eligible-kingdoms": "符合資格的王國與聯盟", "after-third-hall-of-governors": "第三次最強領主後", "generation-based": "登場英雄隨世代變更" },
+  "types": { "competitive": "成長競賽", "cross-kingdom": "跨王國競賽", "alliance": "聯盟競賽", "escort": "商隊護送與掠奪", "exchange": "道具兌換", "hero-growth": "英雄取得與培養", "alliance-pve": "聯盟合作防守", "permanent-pve": "常駐輪替PvE", "hero-exchange": "英雄碎片兌換" },
+  "recurrence": { "biweekly": "王國初期每兩週一次", "monthly": "約每月一次", "four-weeks": "四週週期", "regular-major-event": "配合主要成長活動定期出現", "weekly-rotation": "每週輪替", "weekly": "每週" },
+  "unlock": { "early-kingdom": "王國初期世代", "after-first-kvk": "首次王國之力結束後", "kingdom-progression": "依王國進度解鎖", "eligible-kingdoms": "符合資格的王國與聯盟", "after-third-hall-of-governors": "第三次最強領主後", "generation-based": "登場英雄隨世代變更", "alliance-participation": "參與聯盟後可使用", "town-center-19-week-four": "市政廳19級與伺服器第4週", "generation-four": "第4世代起取代沙漠試煉" },
   "records": {
     "hall-of-governors": { "title": "最強領主", "summary": "最強領主是王國初期透過城市發展、英雄培養與部隊訓練等每日任務競逐積分的活動。", "answerTitle": "最強領主何時舉行？", "answer": "王國初期約每兩週舉行一次，賽季英雄與積分任務會隨王國進度改變。" },
     "strongest-governor": { "title": "至高領主", "summary": "至高領主是接替初期最強領主的七日競賽，依每日不同的成長項目計算排名。", "answerTitle": "至高領主何時解鎖？", "answer": "王國完成首次王國之力後解鎖，之後通常約每月舉行一次。" },
@@ -14,6 +14,10 @@
     "alliance-brawl": { "title": "聯盟對決", "summary": "聯盟對決是來自不同王國的兩個聯盟以每日任務競逐積分的6.5天活動。", "answerTitle": "聯盟對決持續多久？", "answer": "包含五個一般日與延長的最終階段，共持續6.5天。" },
     "merchant-empire": { "title": "商業帝國", "summary": "商業帝國是護送己方商隊、掠奪其他商隊並依稀有度取得獎勵的七日活動。", "answerTitle": "商業帝國與聯盟對決有何關係？", "answer": "兩者經常同時舉行，商隊行動也可能計入聯盟對決積分。" },
     "champagne-fair": { "title": "香檳市集", "summary": "香檳市集可將多餘的英雄碎片、技能書等合資格材料兌換成票券，再購買實用的成長道具。", "answerTitle": "香檳市集何時首次出現？", "answer": "第三次最強領主結束後首次出現，兌換內容可能隨王國進度調整。" },
-    "hero-roulette": { "title": "英雄轉盤", "summary": "英雄轉盤使用寶石或幸運籌碼抽取當前王國世代對應的神話英雄碎片。", "answerTitle": "英雄轉盤會出現哪位英雄？", "answer": "登場的神話英雄會隨王國英雄世代變更，並配合主要成長活動開放。" }
+    "hero-roulette": { "title": "英雄轉盤", "summary": "英雄轉盤使用寶石或幸運籌碼抽取當前王國世代對應的神話英雄碎片。", "answerTitle": "英雄轉盤會出現哪位英雄？", "answer": "登場的神話英雄會隨王國英雄世代變更，並配合主要成長活動開放。" },
+    "viking-vengeance": { "title": "維京復仇", "summary": "維京復仇是由20波攻擊組成的聯盟合作防守活動，目標是守住成員城市與聯盟總部。", "answerTitle": "維京復仇如何進行？", "answer": "聯盟成員要防守20波攻擊。第10與20波攻擊聯盟總部，部分波次只會攻擊在線成員。" },
+    "mystic-trial": { "title": "神秘試煉", "summary": "神秘試煉是具有輪替區域、首次通關獎勵、每週掃蕩獎勵與試煉水晶商店的常駐PvE玩法。", "answerTitle": "神秘試煉何時解鎖？", "answer": "官方客服說明此功能於伺服器第4週星期一開放，並需要市政廳19級與指揮中心1級。" },
+    "hall-of-heroes": { "title": "英雄殿堂", "summary": "英雄殿堂是為期3天的每週商店活動，可用勇氣徽記兌換符合王國世代的神話英雄碎片。", "answerTitle": "英雄殿堂有什麼用途？", "answer": "玩家可持續以勇氣徽記取得神話英雄碎片，可選英雄會隨王國進度變化。" },
+    "champions-way": { "title": "冠軍之路", "summary": "冠軍之路自第4世代起取代沙漠試煉，透過狩獵野獸與擊敗精英叛軍取得里程碑獎勵，活動為期3天。", "answerTitle": "冠軍之路何時出現？", "answer": "第4世代起作為沙漠試煉的後繼活動出現，通常以兩週為週期回歸。" }
   }
 }

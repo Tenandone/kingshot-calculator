@@ -4,9 +4,9 @@
   "labels": {
     "quickFacts": "基本情報", "type": "イベント種別", "duration": "開催期間", "recurrence": "開催周期", "unlock": "解放条件", "lastVerified": "最終確認", "verification": "データ検証", "relatedEvents": "関連イベント", "relatedHeroes": "関連英雄", "relatedGuides": "関連ガイド", "details": "イベント概要", "days": "日", "hours": "時間", "crossVerified": "独立した公開情報源で照合済み"
   },
-  "types": { "competitive": "育成競争", "cross-kingdom": "王国間競争", "alliance": "同盟競争", "escort": "キャラバン護衛・襲撃", "exchange": "アイテム交換", "hero-growth": "英雄獲得・育成" },
-  "recurrence": { "biweekly": "王国初期は2週間周期", "monthly": "約1か月周期", "four-weeks": "4週間周期", "regular-major-event": "主要育成イベントと共に定期開催" },
-  "unlock": { "early-kingdom": "王国初期世代", "after-first-kvk": "初回の王国の力終了後", "kingdom-progression": "王国の進行に応じて解放", "eligible-kingdoms": "参加条件を満たす王国と同盟", "after-third-hall-of-governors": "3回目の最強領主後", "generation-based": "世代により対象英雄が変化" },
+  "types": { "competitive": "育成競争", "cross-kingdom": "王国間競争", "alliance": "同盟競争", "escort": "キャラバン護衛・襲撃", "exchange": "アイテム交換", "hero-growth": "英雄獲得・育成", "alliance-pve": "同盟協力防衛", "permanent-pve": "常設ローテーションPvE", "hero-exchange": "英雄の欠片交換" },
+  "recurrence": { "biweekly": "王国初期は2週間周期", "monthly": "約1か月周期", "four-weeks": "4週間周期", "regular-major-event": "主要育成イベントと共に定期開催", "weekly-rotation": "週間ローテーション", "weekly": "毎週" },
+  "unlock": { "early-kingdom": "王国初期世代", "after-first-kvk": "初回の王国の力終了後", "kingdom-progression": "王国の進行に応じて解放", "eligible-kingdoms": "参加条件を満たす王国と同盟", "after-third-hall-of-governors": "3回目の最強領主後", "generation-based": "世代により対象英雄が変化", "alliance-participation": "同盟参加後に利用可能", "town-center-19-week-four": "タウンセンター19とサーバー第4週", "generation-four": "第4世代から砂漠の試練に代わって登場" },
   "records": {
     "hall-of-governors": { "title": "最強領主", "summary": "最強領主は王国初期に都市育成、英雄強化、兵士訓練などの日別課題で得点を競うイベントです。", "answerTitle": "最強領主はいつ開催されますか？", "answer": "王国初期の世代では約2週間周期で開催され、王国の進行に応じて対象英雄と得点課題が変化します。" },
     "strongest-governor": { "title": "至高の領主", "summary": "至高の領主は初期の最強領主に代わる7日間の競争イベントで、複数の育成項目を日別に競います。", "answerTitle": "至高の領主はいつ解放されますか？", "answer": "初回の王国の力終了後に解放され、その後は通常約1か月周期で開催されます。" },
@@ -14,6 +14,10 @@
     "alliance-brawl": { "title": "同盟決闘", "summary": "同盟決闘は異なる王国の2同盟が日別課題で得点を競う6.5日間のイベントです。", "answerTitle": "同盟決闘は何日間ですか？", "answer": "通常の5日間と延長された最終段階を合わせて6.5日間です。" },
     "merchant-empire": { "title": "商業帝国", "summary": "商業帝国はキャラバンの護衛や襲撃を行い、希少度に応じた報酬を得る7日間のイベントです。", "answerTitle": "商業帝国と同盟決闘の関係は？", "answer": "同時開催されることが多く、キャラバン行動が同盟決闘の得点対象になる場合があります。" },
     "champagne-fair": { "title": "シャンパンフェア", "summary": "シャンパンフェアは余った英雄の欠片やスキルブックなどを引換券に変え、育成アイテムと交換するイベントです。", "answerTitle": "シャンパンフェアはいつ初登場しますか？", "answer": "3回目の最強領主後に初登場し、交換内容は王国の進行により変化する場合があります。" },
-    "hero-roulette": { "title": "英雄ルーレット", "summary": "英雄ルーレットはジェムやラッキーチップを使い、現在の王国世代に対応する神話英雄の欠片を獲得するイベントです。", "answerTitle": "英雄ルーレットの対象英雄は？", "answer": "対象の神話英雄は王国の英雄世代によって変わり、主要な育成イベントと共に開催されます。" }
+    "hero-roulette": { "title": "英雄ルーレット", "summary": "英雄ルーレットはジェムやラッキーチップを使い、現在の王国世代に対応する神話英雄の欠片を獲得するイベントです。", "answerTitle": "英雄ルーレットの対象英雄は？", "answer": "対象の神話英雄は王国の英雄世代によって変わり、主要な育成イベントと共に開催されます。" },
+    "viking-vengeance": { "title": "ヴァイキングの復讐", "summary": "ヴァイキングの復讐は20回の襲撃から同盟員の都市と同盟本部を守る協力防衛イベントです。", "answerTitle": "ヴァイキングの復讐の進め方は？", "answer": "同盟員は20ウェーブを防衛します。第10・20ウェーブは同盟本部を、一部のウェーブはオンライン中の同盟員を攻撃します。" },
+    "mystic-trial": { "title": "神秘の試練", "summary": "神秘の試練はローテーションする区域、初回クリア報酬、週間レイド報酬、試練クリスタル商店を備えた常設PvEです。", "answerTitle": "神秘の試練はいつ解放されますか？", "answer": "公式サポートによるとサーバー第4週の月曜日に解放され、タウンセンター19と司令センター1が必要です。" },
+    "hall-of-heroes": { "title": "英雄の殿堂", "summary": "英雄の殿堂は3日間開催される週間商店イベントで、勇気の証を王国世代に応じた神話英雄の欠片と交換します。", "answerTitle": "英雄の殿堂は何に使いますか？", "answer": "勇気の証から神話英雄の欠片を継続的に入手でき、対象英雄は王国の進行に合わせて変化します。" },
+    "champions-way": { "title": "チャンピオンの道", "summary": "チャンピオンの道は第4世代から砂漠の試練に代わり、野獣狩りと精鋭反乱軍の討伐で報酬を得る3日間の英雄育成イベントです。", "answerTitle": "チャンピオンの道はいつ登場しますか？", "answer": "第4世代から砂漠の試練の後継として登場し、通常は2週間周期で開催されます。" }
   }
 }
