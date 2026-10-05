@@ -1380,3 +1380,7 @@ main#main #pet-page .card-name{
     font-size:36px;
   }
 }
+
+/* Standalone pages bring their policy footer when mounted in the SPA.
+   The SPA already has its own site-wide footer. */
+#content .kd-policy-footer { display: none; }
