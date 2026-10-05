@@ -37,8 +37,10 @@ for(const p of require('./public-index-policy.json').paths){
  const category=/\/masters?\//.test(p)?'Masters':/\/pet\//.test(p)?'Pets':/\/buildings\//.test(p)?'Buildings':'Other data';
  all.filter(n=>n.tagName==='td').forEach((n,i)=>{const v=text(n);if(/\d/.test(v))add(category,file,'table-cell['+i+']',v);});
 }
+const primary=read('data/primary-verified-fields.json');
+for(const proof of primary){const row=rows.find(r=>r.file===proof.file&&r.field===proof.field);if(!row)throw Error('Evidence field missing: '+proof.field);if(JSON.stringify(row.value)!==JSON.stringify(proof.value))throw Error('Evidence value changed: '+proof.field);Object.assign(row,proof);}
 const summary={};for(const r of rows){const g=summary[r.category]||(summary[r.category]={});g[r.status]=(g[r.status]||0)+1;}
 const out=process.env.KS_AUDIT_OUTPUT||path.join(ROOT,'.audit/final-gate');fs.mkdirSync(out,{recursive:true});fs.writeFileSync(path.join(out,'data-fields.json'),JSON.stringify({checkedAt:new Date().toISOString(),scope:'Numeric JSON leaves, localized hero skill fields and Korean static data table cells. Missing nonnumeric unlock/prerequisite content and image-only data remain editorial review gaps; this ledger does not imply exhaustive game verification.',summary,rows},null,2));
 fs.writeFileSync(path.join(ROOT,'data/verified-fields.json'),JSON.stringify(rows.filter(r=>r.status==='VERIFIED'||r.status==='PARTIALLY VERIFIED'),null,2)+'\n');
-fs.writeFileSync(path.join(ROOT,'data/verification-summary.json'),JSON.stringify({reviewedAt:'2026-10-06',status:'PARTIAL',summary,sources,notes:'No category is completely verified. 10 displayed stats, 18 Korean skill fields and 4 localized forgehammer summaries verified; other fields must not be treated as confirmed.'},null,2)+'\n');
+fs.writeFileSync(path.join(ROOT,'data/verification-summary.json'),JSON.stringify({reviewedAt:'2026-10-06',status:'PARTIAL',summary,sources,notes:'Primary evidence covers governor gear material costs, charm costs and cumulative attributes, Town Center level 2–30 resources and base time, and five representative pet rarity cost tables. Other fields, including late building costs and hero gear enhancement XP, remain unverified; this is not a full category verification.'},null,2)+'\n');
 console.log(JSON.stringify({fields:rows.length,summary},null,2));

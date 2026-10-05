@@ -176,14 +176,14 @@
 
     var labelMap = [
       ['label-building', 'calc.form.building.label',  '건물 선택'],
-      ['label-start',    'calc.form.startLevel',      '시작 레벨'],
-      ['label-target',   'calc.form.targetLevel',     '목표 레벨'],
-      ['label-speed',    'calc.form.speedBonus',      '건설 속도(%)'],
-      ['label-saul',     'calc.form.saulBonus',       '살로 할인(%)'],
-      ['label-wolf',     'calc.form.wolfBonus',       '늑대 버프(%)'],
-      ['label-position', 'calc.form.positionBonus',   '직책/타이틀(%)'],
-      ['label-double',   'calc.form.doubleTime',      '이중법령(시간 20% 감소)'],
-      ['label-include',  'calc.form.includePrereq',   '선행 건물 포함']
+      ['label-start',    'calc.form.startLevel.label',      '시작 레벨'],
+      ['label-target',   'calc.form.targetLevel.label',     '목표 레벨'],
+      ['label-speed',    'calc.form.speedBonus.label',      '건설 속도(%)'],
+      ['label-saul',     'calc.form.saulBonus.label',       '살로 할인(%)'],
+      ['label-wolf',     'calc.form.wolfBonus.label',       '늑대 버프(%)'],
+      ['label-position', 'calc.form.positionBonus.label',   '직책/타이틀(%)'],
+      ['label-double',   'calc.form.doubleTime.label',      '이중법령(시간 20% 감소)'],
+      ['label-include',  'calc.form.includePrereq.label',   '선행 건물 포함']
     ];
 
     for (var i = 0; i < labelMap.length; i++) {

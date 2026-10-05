@@ -45,7 +45,7 @@
       i18nLoadError: 'hero-gear-calculator.json 불러오기 실패. 기본 언어로 표시합니다.'
     },
     resources: {
-      enhancementPart100: '강화 부품 100점',
+      enhancementPart100: '강화 경험치 (XP)',
       mithril: '미스릴',
       forgehammer: '제작망치',
       legendGear: '레전드 장비'
@@ -889,6 +889,9 @@
   }
 
   function rerender(root, data) {
+    window.KD_CALCULATOR_RESULT = null;
+    var inventory = document.getElementById('calc-inventory');
+    if (inventory) inventory.innerHTML = '';
     if(!state.ready){showEmpty(root,getMessage('messages.loadError'));return;}
     var form = readForm(root);
     var error = validateForm(form);
@@ -900,7 +903,32 @@
 
     var result = calculateByTab(form, data);
     renderResult(root, form, result);
+    var meta = buildResourceMeta();
+    window.dispatchEvent(new CustomEvent('kd:calculated', {detail: {
+      kind: 'hero-gear',
+      selection: form,
+      resources: getResultKeyOrderByTab(form.tab).map(function (key) {
+        return {key: key, label: meta[key].label, required: result.total[key]};
+      })
+    }}));
   }
+
+  // Persist the active mode and slots as well as the two level selectors.
+  window.KD_HERO_GEAR_STATE = {
+    capture: function () { return state.root && state.root.isConnected ? readForm(state.root) : null; },
+    restore: function (saved) {
+      var root = state.root;
+      if (!state.ready || !root || !root.isConnected || !saved || !TAB_ORDER.includes(saved.tab) || !Array.isArray(saved.selectedIds)) return false;
+      root.querySelectorAll('.hg-top-tab').forEach(function (el) { el.classList.toggle('is-active', el.dataset.tab === saved.tab); });
+      updateStageSelectsByTab(root);
+      root.querySelectorAll('.hg-slot-card').forEach(function (el) { el.classList.toggle('is-active', saved.selectedIds.includes(el.dataset.slotId)); });
+      var range = getStageRangeByTab(saved.tab);
+      root.querySelector('[data-hg-start-stage]').value = normalizeStage(saved.startStage, range.min, range.max);
+      root.querySelector('[data-hg-target-stage]').value = normalizeStage(saved.targetStage, range.min, range.max);
+      rerender(root, state.data);
+      return true;
+    }
+  };
 
   function updateStageSelectsByTab(root) {
     var tab = getActiveTab(root);

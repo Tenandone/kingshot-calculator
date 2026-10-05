@@ -20,6 +20,7 @@ function fileFor(url) {
 }
 const exists = u => fs.existsSync(fileFor(u)) && fs.statSync(fileFor(u)).isFile();
 const aliases = {};
+const editorial=require('./editorial-context').copy;
 // Windows is case-insensitive; GitHub Pages URLs are not.
 const exactPaths = new Map(walk(ROOT).map(file => {
   const urlPath = '/' + path.relative(ROOT,file).replace(/\\/g,'/').replace(/index\.html$/, '');
@@ -37,7 +38,7 @@ for(const lang of LANGS) {
   const navigation=paths.map((p,i)=>`<li><a href="${p}">${sections[i]}</a></li>`).join('');
   const items=links.map(name=>{const h=read(path.join(ROOT,lang.folder,'database',name));const title=(h.match(/<title[^>]*>([\s\S]*?)<\/title>/i)||[])[1]||name;return `<li><a href="${canonical}${name}">${title}</a></li>`;}).join('\n');
   const metadata=`<meta property="og:title" content="${labels[0]}"><meta property="og:description" content="${labels[1]}"><meta property="og:url" content="${ORIGIN+canonical}"><meta property="og:type" content="website"><meta property="og:image" content="${ORIGIN}/img/kingshotdata-og-v5.png"><script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@type':'CollectionPage',name:labels[0],url:ORIGIN+canonical})}</script>`;
-  write(fileFor(canonical),`<!doctype html><html lang="${lang.htmlLang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${labels[0]} | KingshotData ${lang.code}</title><meta name="description" content="${labels[1]}"><link rel="canonical" href="${ORIGIN+canonical}">${metadata}<link rel="stylesheet" href="/css/common.css"></head><body><main style="max-width:860px;margin:auto;padding:24px"><h1>${labels[0]}</h1><p>${labels[1]}</p><nav aria-label="Data"><ul>${navigation}</ul></nav><h2>${labels[0]}</h2><ul>${items}</ul></main></body></html>`);
+  write(fileFor(canonical),`<!doctype html><html lang="${lang.htmlLang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${labels[0]} | KingshotData ${lang.code}</title><meta name="description" content="${labels[1]}"><link rel="canonical" href="${ORIGIN+canonical}">${metadata}<link rel="stylesheet" href="/css/common.css"></head><body><main style="max-width:860px;margin:auto;padding:24px"><h1>${labels[0]}</h1><p>${labels[1]}</p><nav aria-label="Data"><ul>${navigation}</ul></nav><h2>${labels[0]}</h2><ul>${items}</ul><h2>${editorial[lang.folder].title}</h2><p>${editorial[lang.folder].database}</p></main></body></html>`);
 }
 for(const folder of folders) {
   for(const section of ['pet','buildings','guides','database']) {

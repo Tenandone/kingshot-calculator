@@ -39,13 +39,13 @@
   <title data-i18n="calc.meta.title">Kingshot 건물 계산기</title>
 
   <link rel="preconnect" href="https://www.googletagmanager.com">
-  
-  
+
+
 <script src="/js/canonical-links.js?v=2026100603" defer></script>
 <script defer src="/js/image-system.js?v=2026100606"></script>
 <script defer src="/js/hub.js?v=2026100608"></script>
 <script defer src="/js/hub-metrics.js?v=2026100608"></script>
-<script defer src="/js/my-progress.js?v=2026100608"></script>
+<script defer src="/js/my-progress.js?v=2026100614"></script>
 <link rel="stylesheet" href="/css/my-progress.css?v=2026100608">
 <script defer src="/js/privacy-controls.js?v=2026100608"></script>
 
@@ -108,7 +108,7 @@
         </div>
 
         <div class="form-group">
-          <label id="label-start" for="startLevel" data-i18n="calc.form.startLevel">시작 레벨</label>
+          <label id="label-start" for="startLevel" data-i18n="calc.form.startLevel.label">시작 레벨</label>
           <input type="number" id="startLevel" name="startLevel" min="1" max="80" value="1"
                  inputmode="numeric" autocomplete="off"
                  placeholder="현재 레벨"
@@ -116,7 +116,7 @@
         </div>
 
         <div class="form-group">
-          <label id="label-target" for="targetLevel" data-i18n="calc.form.targetLevel">목표 레벨</label>
+          <label id="label-target" for="targetLevel" data-i18n="calc.form.targetLevel.label">목표 레벨</label>
           <input type="number" id="targetLevel" name="targetLevel" min="1" max="80" value="1"
                  inputmode="numeric" autocomplete="off"
                  placeholder="목표 레벨"
@@ -124,7 +124,7 @@
         </div>
 
         <div class="form-group">
-          <label id="label-speed" for="speedBonus" data-i18n="calc.form.speedBonus">건설 속도 보너스 (%)</label>
+          <label id="label-speed" for="speedBonus" data-i18n="calc.form.speedBonus.label">건설 속도 보너스 (%)</label>
           <input type="number" id="speedBonus" name="speedBonus" min="0" max="1000" value="0"
                  inputmode="numeric" autocomplete="off"
                  placeholder="0"
@@ -132,7 +132,7 @@
         </div>
 
         <div class="form-group">
-          <label id="label-saul" for="saulBonus" data-i18n="calc.form.saulBonus">살로 할인 (%)</label>
+          <label id="label-saul" for="saulBonus" data-i18n="calc.form.saulBonus.label">살로 할인 (%)</label>
           <input type="number" id="saulBonus" name="saulBonus" min="0" max="100" value="0"
                  inputmode="numeric" autocomplete="off"
                  placeholder="0"
@@ -140,7 +140,7 @@
         </div>
 
         <div class="form-group">
-          <label id="label-wolf" for="wolfBonus" data-i18n="calc.form.wolfBonus">늑대 보너스 (%)</label>
+          <label id="label-wolf" for="wolfBonus" data-i18n="calc.form.wolfBonus.label">늑대 보너스 (%)</label>
           <input type="number" id="wolfBonus" name="wolfBonus" min="0" max="100" value="0"
                  inputmode="numeric" autocomplete="off"
                  placeholder="0"
@@ -148,7 +148,7 @@
         </div>
 
         <div class="form-group">
-          <label id="label-position" for="positionBonus" data-i18n="calc.form.positionBonus">직책/타이틀 보너스 (%)</label>
+          <label id="label-position" for="positionBonus" data-i18n="calc.form.positionBonus.label">직책/타이틀 보너스 (%)</label>
           <input type="number" id="positionBonus" name="positionBonus" min="0" max="100" value="0"
                  inputmode="numeric" autocomplete="off"
                  placeholder="0"
@@ -157,7 +157,7 @@
 
         <div class="form-check">
           <input type="checkbox" id="doubleTime" name="doubleTime" aria-describedby="doubleTimeHelp">
-          <label id="label-double" for="doubleTime" data-i18n="calc.form.doubleTime">이중법령(시간 20% 감소)</label>
+          <label id="label-double" for="doubleTime" data-i18n="calc.form.doubleTime.label">이중법령(시간 20% 감소)</label>
           <p id="doubleTimeHelp" class="visually-hidden" data-i18n="calc.form.doubleTime.help">
             건설 법령 활성화 시 기본 건설 시간에서 20% 감소가 적용됩니다.
           </p>
@@ -165,7 +165,7 @@
 
         <div class="form-check">
           <input type="checkbox" id="includePrereq" name="includePrereq" aria-controls="prereq-details">
-          <label id="label-include" for="includePrereq" data-i18n="calc.form.includePrereq">선행 건물 포함</label>
+          <label id="label-include" for="includePrereq" data-i18n="calc.form.includePrereq.label">선행 건물 포함</label>
         </div>
 
         <details id="prereq-details" class="collapsible" hidden>
