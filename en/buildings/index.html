@@ -139,6 +139,10 @@
   </script>
 <script src="/js/canonical-links.js?v=2026100603" defer></script>
 <script defer src="/js/image-system.js?v=2026100606"></script>
+<script defer src="/js/hub.js?v=2026100608"></script>
+<script defer src="/js/hub-metrics.js?v=2026100608"></script>
+<script defer src="/js/my-progress.js?v=2026100608"></script>
+<link rel="stylesheet" href="/css/my-progress.css?v=2026100608">
 </head>
 
 <body class="theme-default">
@@ -153,23 +157,24 @@
     </section>
 
     <div id="buildings-grid" class="grid">
-      <div class="card"><a href="/en/buildings/town-center.html"><div class="imgbox"><img src="/img/buildings/towncenter-kingshot.webp" alt="Town Center"></div><div class="card-name">Town Center</div></a></div>
-      <div class="card"><a href="/en/buildings/academy.html"><div class="imgbox"><img src="/img/buildings/academy-kingshot.webp" alt="Academy"></div><div class="card-name">Academy</div></a></div>
-      <div class="card"><a href="/en/buildings/embassy.html"><div class="imgbox"><img src="/img/buildings/embassy-kingshot.webp" alt="Embassy"></div><div class="card-name">Embassy</div></a></div>
-      <div class="card"><a href="/en/buildings/barracks.html"><div class="imgbox"><img src="/img/buildings/barracks-kingshot.webp" alt="Barracks"></div><div class="card-name">Barracks</div></a></div>
-      <div class="card"><a href="/en/buildings/range.html"><div class="imgbox"><img src="/img/buildings/range-kingshot.webp" alt="Range"></div><div class="card-name">Range</div></a></div>
-      <div class="card"><a href="/en/buildings/stable.html"><div class="imgbox"><img src="/img/buildings/stable-kingshot.webp" alt="Stable"></div><div class="card-name">Stable</div></a></div>
-      <div class="card"><a href="/en/buildings/commandcenter.html"><div class="imgbox"><img src="/img/buildings/command-center-kingshot.webp" alt="Command Center"></div><div class="card-name">Command Center</div></a></div>
-      <div class="card"><a href="/en/buildings/storehouse.html"><div class="imgbox"><img src="/img/buildings/storehouse-kingshot.webp" alt="Storehouse"></div><div class="card-name">Storehouse</div></a></div>
-      <div class="card"><a href="/en/buildings/kitchen.html"><div class="imgbox"><img src="/img/buildings/kitchen-kingshot.webp" alt="Kitchen"></div><div class="card-name">Kitchen</div></a></div>
-      <div class="card"><a href="/en/buildings/infirmary.html"><div class="imgbox"><img src="/img/buildings/infirmary-kingshot.webp" alt="Infirmary"></div><div class="card-name">Infirmary</div></a></div>
-      <div class="card"><a href="/en/buildings/guard-station.html"><div class="imgbox"><img src="/img/buildings/guard-station-kingshot.webp" alt="Guard Station"></div><div class="card-name">Guard Station</div></a></div>
-      <div class="card"><a href="/en/buildings/truegold-crucible.html"><div class="imgbox"><img src="/img/buildings/truegold-crucible-kingshot.webp" alt="Truegold Crucible"></div><div class="card-name">Truegold Crucible</div></a></div>
-      <div class="card"><a href="/en/buildings/war-academy.html"><div class="imgbox"><img src="/img/buildings/war-academy.webp" alt="War Academy"></div><div class="card-name">War Academy</div></a></div>
+      <div class="card"><a href="/en/buildings/town-center.html"><div class="imgbox"><img src="/img/buildings/towncenter-kingshot.webp" alt="Town Center" width="269" height="300" decoding="async"></div><div class="card-name">Town Center</div></a></div>
+      <div class="card"><a href="/en/buildings/academy.html"><div class="imgbox"><img src="/img/buildings/academy-kingshot.webp" alt="Academy" width="477" height="523" decoding="async"></div><div class="card-name">Academy</div></a></div>
+      <div class="card"><a href="/en/buildings/embassy.html"><div class="imgbox"><img src="/img/buildings/embassy-kingshot.webp" alt="Embassy" width="515" height="484" decoding="async"></div><div class="card-name">Embassy</div></a></div>
+      <div class="card"><a href="/en/buildings/barracks.html"><div class="imgbox"><img src="/img/buildings/barracks-kingshot.webp" alt="Barracks" width="261" height="300" decoding="async" loading="lazy"></div><div class="card-name">Barracks</div></a></div>
+      <div class="card"><a href="/en/buildings/range.html"><div class="imgbox"><img src="/img/buildings/range-kingshot.webp" alt="Range" width="505" height="494" decoding="async" loading="lazy"></div><div class="card-name">Range</div></a></div>
+      <div class="card"><a href="/en/buildings/stable.html"><div class="imgbox"><img src="/img/buildings/stable-kingshot.webp" alt="Stable" width="520" height="480" decoding="async" loading="lazy"></div><div class="card-name">Stable</div></a></div>
+      <div class="card"><a href="/en/buildings/commandcenter.html"><div class="imgbox"><img src="/img/buildings/command-center-kingshot.webp" alt="Command Center" width="506" height="493" decoding="async" loading="lazy"></div><div class="card-name">Command Center</div></a></div>
+      <div class="card"><a href="/en/buildings/storehouse.html"><div class="imgbox"><img src="/img/buildings/storehouse-kingshot.webp" alt="Storehouse" width="525" height="476" decoding="async" loading="lazy"></div><div class="card-name">Storehouse</div></a></div>
+      <div class="card"><a href="/en/buildings/kitchen.html"><div class="imgbox"><img src="/img/buildings/kitchen-kingshot.webp" alt="Kitchen" width="398" height="391" decoding="async" loading="lazy"></div><div class="card-name">Kitchen</div></a></div>
+      <div class="card"><a href="/en/buildings/infirmary.html"><div class="imgbox"><img src="/img/buildings/infirmary-kingshot.webp" alt="Infirmary" width="432" height="476" decoding="async" loading="lazy"></div><div class="card-name">Infirmary</div></a></div>
+      <div class="card"><a href="/en/buildings/guard-station.html"><div class="imgbox"><img src="/img/buildings/guard-station-kingshot.webp" alt="Guard Station" width="300" height="250" decoding="async" loading="lazy"></div><div class="card-name">Guard Station</div></a></div>
+      <div class="card"><a href="/en/buildings/truegold-crucible.html"><div class="imgbox"><img src="/img/buildings/truegold-crucible-kingshot.webp" alt="Truegold Crucible" width="294" height="300" decoding="async" loading="lazy"></div><div class="card-name">Truegold Crucible</div></a></div>
+      <div class="card"><a href="/en/buildings/war-academy.html"><div class="imgbox"><img src="/img/buildings/war-academy.webp" alt="War Academy" width="562" height="592" decoding="async" loading="lazy"></div><div class="card-name">War Academy</div></a></div>
     </div>
 
     <div id="building-root"></div>
-  </main><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/en/about/">About</a><a href="/en/privacy/">Privacy</a><a href="/en/terms/">Terms</a><a href="/en/contact/">Contact</a></nav><p>An unofficial fan site operated independently of the game developer and publisher. Game assets and trademarks belong to their respective owners.</p></footer><!-- shared-policy-footer:end -->
+  </main>
+<!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/en/about/">About</a><a href="/en/privacy/">Privacy</a><a href="/en/terms/">Terms</a><a href="/en/contact/">Contact</a></nav><p>An unofficial fan site operated independently of the game developer and publisher. Game assets and trademarks belong to their respective owners.</p></footer><!-- shared-policy-footer:end -->
 <!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>Related data and tools</h2><ul><li><a href="/en/calc-building/">Building Calculator</a></li><li><a href="/en/guides/kingshot-f2p-guide.html">Kingshot Beginner Guide · F2P / Low-Spender Growth Guide</a></li></ul></section><!-- kd-related:end -->
 </body>
 </html>

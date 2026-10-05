@@ -139,6 +139,10 @@
 
 <script src="/js/canonical-links.js?v=2026100603" defer></script>
 <script defer src="/js/image-system.js?v=2026100606"></script>
+<script defer src="/js/hub.js?v=2026100608"></script>
+<script defer src="/js/hub-metrics.js?v=2026100608"></script>
+<script defer src="/js/my-progress.js?v=2026100608"></script>
+<link rel="stylesheet" href="/css/my-progress.css?v=2026100608">
 </head>
 
 <body class="theme-default">
@@ -153,23 +157,24 @@
     </section>
 
     <div id="buildings-grid" class="grid">
-      <div class="card"><a href="/ja/buildings/town-center.html"><div class="imgbox"><img src="/img/buildings/towncenter-kingshot.webp" alt="都市センター"></div><div class="card-name">都市センター</div></a></div>
-      <div class="card"><a href="/ja/buildings/academy.html"><div class="imgbox"><img src="/img/buildings/academy-kingshot.webp" alt="アカデミー"></div><div class="card-name">アカデミー</div></a></div>
-      <div class="card"><a href="/ja/buildings/embassy.html"><div class="imgbox"><img src="/img/buildings/embassy-kingshot.webp" alt="大使館"></div><div class="card-name">大使館</div></a></div>
-      <div class="card"><a href="/ja/buildings/barracks.html"><div class="imgbox"><img src="/img/buildings/barracks-kingshot.webp" alt="兵舎"></div><div class="card-name">兵舎</div></a></div>
-      <div class="card"><a href="/ja/buildings/range.html"><div class="imgbox"><img src="/img/buildings/range-kingshot.webp" alt="射撃場"></div><div class="card-name">射撃場</div></a></div>
-      <div class="card"><a href="/ja/buildings/stable.html"><div class="imgbox"><img src="/img/buildings/stable-kingshot.webp" alt="厩舎"></div><div class="card-name">厩舎</div></a></div>
-      <div class="card"><a href="/ja/buildings/commandcenter.html"><div class="imgbox"><img src="/img/buildings/command-center-kingshot.webp" alt="指揮部"></div><div class="card-name">指揮部</div></a></div>
-      <div class="card"><a href="/ja/buildings/storehouse.html"><div class="imgbox"><img src="/img/buildings/storehouse-kingshot.webp" alt="倉庫"></div><div class="card-name">倉庫</div></a></div>
-      <div class="card"><a href="/ja/buildings/kitchen.html"><div class="imgbox"><img src="/img/buildings/kitchen-kingshot.webp" alt="キッチン"></div><div class="card-name">キッチン</div></a></div>
-      <div class="card"><a href="/ja/buildings/infirmary.html"><div class="imgbox"><img src="/img/buildings/infirmary-kingshot.webp" alt="野戦病院"></div><div class="card-name">野戦病院</div></a></div>
-      <div class="card"><a href="/ja/buildings/guard-station.html"><div class="imgbox"><img src="/img/buildings/guard-station-kingshot.webp" alt="衛兵所"></div><div class="card-name">衛兵所</div></a></div>
-      <div class="card"><a href="/ja/buildings/truegold-crucible.html"><div class="imgbox"><img src="/img/buildings/truegold-crucible-kingshot.webp" alt="純金精錬炉"></div><div class="card-name">純金精錬炉</div></a></div>
-      <div class="card"><a href="/ja/buildings/war-academy.html"><div class="imgbox"><img src="/img/buildings/war-academy.webp" alt="戦争アカデミー"></div><div class="card-name">戦争アカデミー</div></a></div>
+      <div class="card"><a href="/ja/buildings/town-center.html"><div class="imgbox"><img src="/img/buildings/towncenter-kingshot.webp" alt="都市センター" width="269" height="300" decoding="async"></div><div class="card-name">都市センター</div></a></div>
+      <div class="card"><a href="/ja/buildings/academy.html"><div class="imgbox"><img src="/img/buildings/academy-kingshot.webp" alt="アカデミー" width="477" height="523" decoding="async"></div><div class="card-name">アカデミー</div></a></div>
+      <div class="card"><a href="/ja/buildings/embassy.html"><div class="imgbox"><img src="/img/buildings/embassy-kingshot.webp" alt="大使館" width="515" height="484" decoding="async"></div><div class="card-name">大使館</div></a></div>
+      <div class="card"><a href="/ja/buildings/barracks.html"><div class="imgbox"><img src="/img/buildings/barracks-kingshot.webp" alt="兵舎" width="261" height="300" decoding="async" loading="lazy"></div><div class="card-name">兵舎</div></a></div>
+      <div class="card"><a href="/ja/buildings/range.html"><div class="imgbox"><img src="/img/buildings/range-kingshot.webp" alt="射撃場" width="505" height="494" decoding="async" loading="lazy"></div><div class="card-name">射撃場</div></a></div>
+      <div class="card"><a href="/ja/buildings/stable.html"><div class="imgbox"><img src="/img/buildings/stable-kingshot.webp" alt="厩舎" width="520" height="480" decoding="async" loading="lazy"></div><div class="card-name">厩舎</div></a></div>
+      <div class="card"><a href="/ja/buildings/commandcenter.html"><div class="imgbox"><img src="/img/buildings/command-center-kingshot.webp" alt="指揮部" width="506" height="493" decoding="async" loading="lazy"></div><div class="card-name">指揮部</div></a></div>
+      <div class="card"><a href="/ja/buildings/storehouse.html"><div class="imgbox"><img src="/img/buildings/storehouse-kingshot.webp" alt="倉庫" width="525" height="476" decoding="async" loading="lazy"></div><div class="card-name">倉庫</div></a></div>
+      <div class="card"><a href="/ja/buildings/kitchen.html"><div class="imgbox"><img src="/img/buildings/kitchen-kingshot.webp" alt="キッチン" width="398" height="391" decoding="async" loading="lazy"></div><div class="card-name">キッチン</div></a></div>
+      <div class="card"><a href="/ja/buildings/infirmary.html"><div class="imgbox"><img src="/img/buildings/infirmary-kingshot.webp" alt="野戦病院" width="432" height="476" decoding="async" loading="lazy"></div><div class="card-name">野戦病院</div></a></div>
+      <div class="card"><a href="/ja/buildings/guard-station.html"><div class="imgbox"><img src="/img/buildings/guard-station-kingshot.webp" alt="衛兵所" width="300" height="250" decoding="async" loading="lazy"></div><div class="card-name">衛兵所</div></a></div>
+      <div class="card"><a href="/ja/buildings/truegold-crucible.html"><div class="imgbox"><img src="/img/buildings/truegold-crucible-kingshot.webp" alt="純金精錬炉" width="294" height="300" decoding="async" loading="lazy"></div><div class="card-name">純金精錬炉</div></a></div>
+      <div class="card"><a href="/ja/buildings/war-academy.html"><div class="imgbox"><img src="/img/buildings/war-academy.webp" alt="戦争アカデミー" width="562" height="592" decoding="async" loading="lazy"></div><div class="card-name">戦争アカデミー</div></a></div>
     </div>
 
     <div id="building-root"></div>
-  </main><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/ja/about/">サイト紹介</a><a href="/ja/privacy/">プライバシー</a><a href="/ja/terms/">利用規約</a><a href="/ja/contact/">お問い合わせ</a></nav><p>開発元・パブリッシャーから独立した非公式ファンサイトです。ゲーム素材と商標の権利は各権利者に帰属します。</p></footer><!-- shared-policy-footer:end -->
+  </main>
+<!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/ja/about/">サイト紹介</a><a href="/ja/privacy/">プライバシー</a><a href="/ja/terms/">利用規約</a><a href="/ja/contact/">お問い合わせ</a></nav><p>開発元・パブリッシャーから独立した非公式ファンサイトです。ゲーム素材と商標の権利は各権利者に帰属します。</p></footer><!-- shared-policy-footer:end -->
 <!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>関連データと計算ツール</h2><ul><li><a href="/ja/calc-building/">建物計算機</a></li><li><a href="/ja/guides/kingshot-f2p-guide.html">キングショット 初心者ガイド｜無課金・微課金向け成長攻略</a></li></ul></section><!-- kd-related:end -->
 </body>
 </html>

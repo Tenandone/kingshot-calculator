@@ -139,6 +139,10 @@
 
 <script src="/js/canonical-links.js?v=2026100603" defer></script>
 <script defer src="/js/image-system.js?v=2026100606"></script>
+<script defer src="/js/hub.js?v=2026100608"></script>
+<script defer src="/js/hub-metrics.js?v=2026100608"></script>
+<script defer src="/js/my-progress.js?v=2026100608"></script>
+<link rel="stylesheet" href="/css/my-progress.css?v=2026100608">
 </head>
 
 <body class="theme-default">
@@ -153,23 +157,24 @@
     </section>
 
     <div id="buildings-grid" class="grid">
-      <div class="card"><a href="/ko/buildings/town-center.html"><div class="imgbox"><img src="/img/buildings/towncenter-kingshot.webp" alt="도시센터"></div><div class="card-name">도시센터</div></a></div>
-      <div class="card"><a href="/ko/buildings/academy.html"><div class="imgbox"><img src="/img/buildings/academy-kingshot.webp" alt="아카데미"></div><div class="card-name">아카데미</div></a></div>
-      <div class="card"><a href="/ko/buildings/embassy.html"><div class="imgbox"><img src="/img/buildings/embassy-kingshot.webp" alt="대사관"></div><div class="card-name">대사관</div></a></div>
-      <div class="card"><a href="/ko/buildings/barracks.html"><div class="imgbox"><img src="/img/buildings/barracks-kingshot.webp" alt="보병대"></div><div class="card-name">보병대</div></a></div>
-      <div class="card"><a href="/ko/buildings/range.html"><div class="imgbox"><img src="/img/buildings/range-kingshot.webp" alt="궁병대"></div><div class="card-name">궁병대</div></a></div>
-      <div class="card"><a href="/ko/buildings/stable.html"><div class="imgbox"><img src="/img/buildings/stable-kingshot.webp" alt="기병대"></div><div class="card-name">기병대</div></a></div>
-      <div class="card"><a href="/ko/buildings/commandcenter.html"><div class="imgbox"><img src="/img/buildings/command-center-kingshot.webp" alt="지휘부"></div><div class="card-name">지휘부</div></a></div>
-      <div class="card"><a href="/ko/buildings/storehouse.html"><div class="imgbox"><img src="/img/buildings/storehouse-kingshot.webp" alt="창고"></div><div class="card-name">창고</div></a></div>
-      <div class="card"><a href="/ko/buildings/kitchen.html"><div class="imgbox"><img src="/img/buildings/kitchen-kingshot.webp" alt="주방"></div><div class="card-name">주방</div></a></div>
-      <div class="card"><a href="/ko/buildings/infirmary.html"><div class="imgbox"><img src="/img/buildings/infirmary-kingshot.webp" alt="야전병원"></div><div class="card-name">야전병원</div></a></div>
-      <div class="card"><a href="/ko/buildings/guard-station.html"><div class="imgbox"><img src="/img/buildings/guard-station-kingshot.webp" alt="방위소"></div><div class="card-name">방위소</div></a></div>
-      <div class="card"><a href="/ko/buildings/truegold-crucible.html"><div class="imgbox"><img src="/img/buildings/truegold-crucible-kingshot.webp" alt="황금용광로"></div><div class="card-name">황금용광로</div></a></div>
-      <div class="card"><a href="/ko/buildings/war-academy.html"><div class="imgbox"><img src="/img/buildings/war-academy.webp" alt="전쟁 아카데미"></div><div class="card-name">전쟁 아카데미</div></a></div>
+      <div class="card"><a href="/ko/buildings/town-center.html"><div class="imgbox"><img src="/img/buildings/towncenter-kingshot.webp" alt="도시센터" width="269" height="300" decoding="async"></div><div class="card-name">도시센터</div></a></div>
+      <div class="card"><a href="/ko/buildings/academy.html"><div class="imgbox"><img src="/img/buildings/academy-kingshot.webp" alt="아카데미" width="477" height="523" decoding="async"></div><div class="card-name">아카데미</div></a></div>
+      <div class="card"><a href="/ko/buildings/embassy.html"><div class="imgbox"><img src="/img/buildings/embassy-kingshot.webp" alt="대사관" width="515" height="484" decoding="async"></div><div class="card-name">대사관</div></a></div>
+      <div class="card"><a href="/ko/buildings/barracks.html"><div class="imgbox"><img src="/img/buildings/barracks-kingshot.webp" alt="보병대" width="261" height="300" decoding="async" loading="lazy"></div><div class="card-name">보병대</div></a></div>
+      <div class="card"><a href="/ko/buildings/range.html"><div class="imgbox"><img src="/img/buildings/range-kingshot.webp" alt="궁병대" width="505" height="494" decoding="async" loading="lazy"></div><div class="card-name">궁병대</div></a></div>
+      <div class="card"><a href="/ko/buildings/stable.html"><div class="imgbox"><img src="/img/buildings/stable-kingshot.webp" alt="기병대" width="520" height="480" decoding="async" loading="lazy"></div><div class="card-name">기병대</div></a></div>
+      <div class="card"><a href="/ko/buildings/commandcenter.html"><div class="imgbox"><img src="/img/buildings/command-center-kingshot.webp" alt="지휘부" width="506" height="493" decoding="async" loading="lazy"></div><div class="card-name">지휘부</div></a></div>
+      <div class="card"><a href="/ko/buildings/storehouse.html"><div class="imgbox"><img src="/img/buildings/storehouse-kingshot.webp" alt="창고" width="525" height="476" decoding="async" loading="lazy"></div><div class="card-name">창고</div></a></div>
+      <div class="card"><a href="/ko/buildings/kitchen.html"><div class="imgbox"><img src="/img/buildings/kitchen-kingshot.webp" alt="주방" width="398" height="391" decoding="async" loading="lazy"></div><div class="card-name">주방</div></a></div>
+      <div class="card"><a href="/ko/buildings/infirmary.html"><div class="imgbox"><img src="/img/buildings/infirmary-kingshot.webp" alt="야전병원" width="432" height="476" decoding="async" loading="lazy"></div><div class="card-name">야전병원</div></a></div>
+      <div class="card"><a href="/ko/buildings/guard-station.html"><div class="imgbox"><img src="/img/buildings/guard-station-kingshot.webp" alt="방위소" width="300" height="250" decoding="async" loading="lazy"></div><div class="card-name">방위소</div></a></div>
+      <div class="card"><a href="/ko/buildings/truegold-crucible.html"><div class="imgbox"><img src="/img/buildings/truegold-crucible-kingshot.webp" alt="황금용광로" width="294" height="300" decoding="async" loading="lazy"></div><div class="card-name">황금용광로</div></a></div>
+      <div class="card"><a href="/ko/buildings/war-academy.html"><div class="imgbox"><img src="/img/buildings/war-academy.webp" alt="전쟁 아카데미" width="562" height="592" decoding="async" loading="lazy"></div><div class="card-name">전쟁 아카데미</div></a></div>
     </div>
 
     <div id="building-root"></div>
-  </main><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav><p>게임 개발사 및 퍼블리셔와 독립적으로 운영하는 비공식 팬사이트입니다. 게임 이미지와 상표의 권리는 해당 권리자에게 있습니다.</p></footer><!-- shared-policy-footer:end -->
+  </main>
+<!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav><p>게임 개발사 및 퍼블리셔와 독립적으로 운영하는 비공식 팬사이트입니다. 게임 이미지와 상표의 권리는 해당 권리자에게 있습니다.</p></footer><!-- shared-policy-footer:end -->
 <!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>관련 데이터와 계산 도구</h2><ul><li><a href="/calc-building/">건물 계산기</a></li><li><a href="/ko/guides/kingshot-f2p-guide.html">킹샷 초보 공략 · 무과금/소과금 성장 가이드</a></li></ul></section><!-- kd-related:end -->
 </body>
 </html>

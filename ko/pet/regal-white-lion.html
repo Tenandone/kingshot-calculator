@@ -529,6 +529,10 @@
   </script>
 <script src="/js/canonical-links.js?v=2026100603" defer></script>
 <script defer src="/js/image-system.js?v=2026100606"></script>
+<script defer src="/js/hub.js?v=2026100608"></script>
+<script defer src="/js/hub-metrics.js?v=2026100608"></script>
+<script defer src="/js/my-progress.js?v=2026100608"></script>
+<link rel="stylesheet" href="/css/my-progress.css?v=2026100608">
 </head>
 <body class="theme-default">
   <div class="pet-page">
@@ -536,7 +540,7 @@
       <header class="top">
         <div class="brand">
           <a href="/ko/" aria-label="킹샷데이터코리아 홈">
-            <img src="/img/kingshotdata-logo.png" alt="킹샷데이터코리아" loading="eager" fetchpriority="high" width="28" height="28" />
+            <img src="/img/kingshotdata-logo.png" alt="킹샷데이터코리아" loading="eager" fetchpriority="high" width="28" height="28" decoding="async">
             <span>킹샷데이터코리아</span>
           </a>
         </div>
@@ -565,7 +569,7 @@
         </div>
 
         <div class="hero">
-          <img src="/img/pet/regal-white-lion.webp" alt="킹샷 자이언트 백사자 펫 이미지" loading="eager" fetchpriority="high" width="180" height="180" />
+          <img src="/img/pet/regal-white-lion.webp" alt="킹샷 자이언트 백사자 펫 이미지" loading="eager" fetchpriority="high" width="180" height="180" decoding="async">
           <div>
             <h1>자이언트 백사자</h1>
             <p class="sub">
@@ -621,7 +625,7 @@
           <h2>스킬 효과</h2>
 
           <div class="skill-panel">
-            <img class="skill-icon" src="/img/pet/regal-white-lionskill.webp" alt="자이언트 백사자 스킬 아이콘" loading="lazy" width="88" height="88" />
+            <img class="skill-icon" src="/img/pet/regal-white-lionskill.webp" alt="자이언트 백사자 스킬 아이콘" loading="lazy" width="88" height="88" decoding="async">
 
             <p class="skill-desc">
               강인한 영역의 기세로 아군을 보호하며,
@@ -650,7 +654,7 @@
           <div class="materials-grid">
             <div class="material-card">
               <div class="material-head">
-                <img src="/img/pet/food.png" alt="" aria-hidden="true" width="20" height="20" />
+                <img src="/img/pet/food.png" alt="" aria-hidden="true" width="20" height="20" decoding="async" loading="lazy">
                 <span>펫 먹이</span>
               </div>
               <div class="material-total">762,250</div>
@@ -658,7 +662,7 @@
 
             <div class="material-card">
               <div class="material-head">
-                <img src="/img/pet/manual.png" alt="" aria-hidden="true" width="20" height="20" />
+                <img src="/img/pet/manual.png" alt="" aria-hidden="true" width="20" height="20" decoding="async" loading="lazy">
                 <span>육성 수첩</span>
               </div>
               <div class="material-total">2,990</div>
@@ -666,7 +670,7 @@
 
             <div class="material-card">
               <div class="material-head">
-                <img src="/img/pet/potion.png" alt="" aria-hidden="true" width="20" height="20" />
+                <img src="/img/pet/potion.png" alt="" aria-hidden="true" width="20" height="20" decoding="async" loading="lazy">
                 <span>영양제</span>
               </div>
               <div class="material-total">450</div>
@@ -674,7 +678,7 @@
 
             <div class="material-card">
               <div class="material-head">
-                <img src="/img/pet/medal.png" alt="" aria-hidden="true" width="20" height="20" />
+                <img src="/img/pet/medal.png" alt="" aria-hidden="true" width="20" height="20" decoding="async" loading="lazy">
                 <span>승급 메달</span>
               </div>
               <div class="material-total">310</div>
@@ -798,7 +802,8 @@
         init();
       }
     })();
-  </script><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav><p>게임 개발사 및 퍼블리셔와 독립적으로 운영하는 비공식 팬사이트입니다. 게임 이미지와 상표의 권리는 해당 권리자에게 있습니다.</p></footer><!-- shared-policy-footer:end -->
+  </script>
+<!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav><p>게임 개발사 및 퍼블리셔와 독립적으로 운영하는 비공식 팬사이트입니다. 게임 이미지와 상표의 권리는 해당 권리자에게 있습니다.</p></footer><!-- shared-policy-footer:end -->
 <!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>관련 데이터와 계산 도구</h2><ul><li><a href="/ko/pet/">킹샷 펫</a></li><li><a href="/calc-pet/">펫 계산기</a></li><li><a href="/ko/guides/kingshot-f2p-guide.html">킹샷 초보 공략 · 무과금/소과금 성장 가이드</a></li></ul></section><!-- kd-related:end -->
 </body>
 </html>

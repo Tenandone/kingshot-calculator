@@ -359,6 +359,10 @@
   </style>
 <script src="/js/canonical-links.js?v=2026100603" defer></script>
 <script defer src="/js/image-system.js?v=2026100606"></script>
+<script defer src="/js/hub.js?v=2026100608"></script>
+<script defer src="/js/hub-metrics.js?v=2026100608"></script>
+<script defer src="/js/my-progress.js?v=2026100608"></script>
+<link rel="stylesheet" href="/css/my-progress.css?v=2026100608">
 </head>
 <body>
   <div class="wrap">
@@ -370,7 +374,7 @@
               <div class="title-spacer"></div>
 
               <div class="title-main">
-                <img src="../img/kingdom/kingdom.webp" alt="최강왕국 로고" />
+                <img src="../img/kingdom/kingdom.webp" alt="최강왕국 로고" width="300" height="252" decoding="async">
                 <span>최강왕국 준비단계 권장 표</span>
               </div>
             </div>
@@ -380,7 +384,7 @@
         <tr>
           <th class="side-head">
             <div class="cell-item">
-              <img src="../img/kingdom/kingshotdata-logo.png" alt="Ten 로고" />
+              <img src="../img/kingdom/kingshotdata-logo.png" alt="Ten 로고" width="512" height="512" decoding="async">
               <span class="sr-only">Ten 로고</span>
             </div>
           </th>
@@ -395,23 +399,23 @@
         <tr>
           <th class="side-head no-bottom">
             <div class="cell-item">
-              <img src="../img/kingdom/build.webp" alt="건설" />
+              <img src="../img/kingdom/build.webp" alt="건설" width="300" height="276" decoding="async">
               <span>건설</span>
             </div>
           </th>
           <td class="cell-gray">
             <div class="cell-item multi">
               <div class="icon-row">
-                <img src="../img/kingdom/truegold.webp" alt="순금" />
-                <img src="../img/kingdom/tempered.webp" alt="담금질" />
-                <img src="../img/kingdom/buildspeed.webp" alt="건설가속" />
+                <img src="../img/kingdom/truegold.webp" alt="순금" width="256" height="267" decoding="async" loading="lazy">
+                <img src="../img/kingdom/tempered.webp" alt="담금질" width="300" height="300" decoding="async" loading="lazy">
+                <img src="../img/kingdom/buildspeed.webp" alt="건설가속" width="153" height="151" decoding="async" loading="lazy">
               </div>
               <span class="sr-only">1일차 건설 재료: 순금, 담금질, 건설가속</span>
             </div>
           </td>
           <td class="cell-gray">
             <div class="cell-item soft-icon">
-              <img src="../img/kingdom/build.webp" alt="건설" />
+              <img src="../img/kingdom/build.webp" alt="건설" width="300" height="276" decoding="async" loading="lazy">
               <span class="sr-only">2일차 건설</span>
             </div>
           </td>
@@ -419,13 +423,13 @@
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">4일차 건설 없음</span></div></td>
           <td class="cell-gray">
             <div class="cell-item soft-icon">
-              <img src="../img/kingdom/build.webp" alt="건설" />
+              <img src="../img/kingdom/build.webp" alt="건설" width="300" height="276" decoding="async" loading="lazy">
               <span class="sr-only">5일차 건설</span>
             </div>
           </td>
           <td class="castle-cell" rowspan="11">
             <div class="castle-wrap">
-              <img src="../img/kingdom/cattle.webp" alt="6일차 캐슬전" />
+              <img src="../img/kingdom/cattle.webp" alt="6일차 캐슬전" width="195" height="161" decoding="async" loading="lazy">
               <span class="sr-only">6일차 캐슬전</span>
             </div>
           </td>
@@ -434,21 +438,21 @@
         <tr>
           <th class="side-head no-bottom">
             <div class="cell-item">
-              <img src="../img/kingdom/tech.webp" alt="연구" />
+              <img src="../img/kingdom/tech.webp" alt="연구" width="300" height="224" decoding="async" loading="lazy">
               <span>연구</span>
             </div>
           </th>
           <td class="cell-gray">
             <div class="cell-item soft-icon">
-              <img src="../img/kingdom/tech.webp" alt="연구" />
+              <img src="../img/kingdom/tech.webp" alt="연구" width="300" height="224" decoding="async" loading="lazy">
               <span class="sr-only">1일차 연구</span>
             </div>
           </td>
           <td class="cell-gray">
             <div class="cell-item multi">
               <div class="icon-row">
-                <img src="../img/kingdom/dust.webp" alt="연구재료" />
-                <img src="../img/kingdom/techspeed.webp" alt="연구가속" />
+                <img src="../img/kingdom/dust.webp" alt="연구재료" width="249" height="245" decoding="async" loading="lazy">
+                <img src="../img/kingdom/techspeed.webp" alt="연구가속" width="159" height="156" decoding="async" loading="lazy">
               </div>
               <span class="sr-only">2일차 연구 재료: 연구재료, 연구가속</span>
             </div>
@@ -457,7 +461,7 @@
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">4일차 연구 없음</span></div></td>
           <td class="cell-gray">
             <div class="cell-item soft-icon">
-              <img src="../img/kingdom/tech.webp" alt="연구" />
+              <img src="../img/kingdom/tech.webp" alt="연구" width="300" height="224" decoding="async" loading="lazy">
               <span class="sr-only">5일차 연구</span>
             </div>
           </td>
@@ -466,32 +470,32 @@
         <tr>
           <th class="side-head no-bottom">
             <div class="cell-item">
-              <img src="../img/kingdom/train.webp" alt="훈련" />
+              <img src="../img/kingdom/train.webp" alt="훈련" width="300" height="272" decoding="async" loading="lazy">
               <span>훈련</span>
             </div>
           </th>
           <td class="cell-gray">
             <div class="cell-item soft-icon">
-              <img src="../img/kingdom/train.webp" alt="훈련" />
+              <img src="../img/kingdom/train.webp" alt="훈련" width="300" height="272" decoding="async" loading="lazy">
               <span class="sr-only">1일차 훈련</span>
             </div>
           </td>
           <td class="cell-gray">
             <div class="cell-item soft-icon">
-              <img src="../img/kingdom/train.webp" alt="훈련" />
+              <img src="../img/kingdom/train.webp" alt="훈련" width="300" height="272" decoding="async" loading="lazy">
               <span class="sr-only">2일차 훈련</span>
             </div>
           </td>
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">3일차 훈련 없음</span></div></td>
           <td class="cell-gray">
             <div class="cell-item">
-              <img src="../img/kingdom/trainspeed.webp" alt="훈련가속" />
+              <img src="../img/kingdom/trainspeed.webp" alt="훈련가속" width="154" height="150" decoding="async" loading="lazy">
               <span class="sr-only">4일차 훈련 재료: 훈련가속</span>
             </div>
           </td>
           <td class="cell-gray">
             <div class="cell-item soft-icon">
-              <img src="../img/kingdom/train.webp" alt="훈련" />
+              <img src="../img/kingdom/train.webp" alt="훈련" width="300" height="272" decoding="async" loading="lazy">
               <span class="sr-only">5일차 훈련</span>
             </div>
           </td>
@@ -500,13 +504,13 @@
         <tr>
           <th class="side-head">
             <div class="cell-item">
-              <img src="../img/kingdom/roulette.webp" alt="룰렛" />
+              <img src="../img/kingdom/roulette.webp" alt="룰렛" width="300" height="241" decoding="async" loading="lazy">
               <span>룰렛</span>
             </div>
           </th>
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">1일차 룰렛 없음</span></div></td>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/roulette.webp" alt="룰렛" /><span class="sr-only">2일차 룰렛</span></div></td>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/roulette.webp" alt="룰렛" /><span class="sr-only">3일차 룰렛</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/roulette.webp" alt="룰렛" width="300" height="241" decoding="async" loading="lazy"><span class="sr-only">2일차 룰렛</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/roulette.webp" alt="룰렛" width="300" height="241" decoding="async" loading="lazy"><span class="sr-only">3일차 룰렛</span></div></td>
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">4일차 룰렛 없음</span></div></td>
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">5일차 룰렛 없음</span></div></td>
         </tr>
@@ -514,13 +518,13 @@
         <tr>
           <th class="side-head">
             <div class="cell-item">
-              <img src="../img/kingdom/shard.webp" alt="영웅조각소모" />
+              <img src="../img/kingdom/shard.webp" alt="영웅조각소모" width="300" height="264" decoding="async" loading="lazy">
               <span>영웅조각소모</span>
             </div>
           </th>
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">1일차 영웅조각소모 없음</span></div></td>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/shard.webp" alt="영웅조각소모" /><span class="sr-only">2일차 영웅조각소모</span></div></td>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/shard.webp" alt="영웅조각소모" /><span class="sr-only">3일차 영웅조각소모</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/shard.webp" alt="영웅조각소모" width="300" height="264" decoding="async" loading="lazy"><span class="sr-only">2일차 영웅조각소모</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/shard.webp" alt="영웅조각소모" width="300" height="264" decoding="async" loading="lazy"><span class="sr-only">3일차 영웅조각소모</span></div></td>
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">4일차 영웅조각소모 없음</span></div></td>
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">5일차 영웅조각소모 없음</span></div></td>
         </tr>
@@ -528,7 +532,7 @@
         <tr>
           <th class="side-head no-bottom">
             <div class="cell-item">
-              <img src="../img/kingdom/steel.webp" alt="영웅장비강화" />
+              <img src="../img/kingdom/steel.webp" alt="영웅장비강화" width="300" height="238" decoding="async" loading="lazy">
               <span>영웅장비강화</span>
             </div>
           </th>
@@ -540,9 +544,9 @@
           <td class="cell-gray">
             <div class="cell-item multi">
               <div class="icon-row">
-                <img src="../img/kingdom/forgehammer.webp" alt="망치" />
-                <img src="../img/kingdom/mithri.webp" alt="미스릴" />
-                <img src="../img/kingdom/widget.webp" alt="전용무기" />
+                <img src="../img/kingdom/forgehammer.webp" alt="망치" width="300" height="280" decoding="async" loading="lazy">
+                <img src="../img/kingdom/mithri.webp" alt="미스릴" width="300" height="289" decoding="async" loading="lazy">
+                <img src="../img/kingdom/widget.webp" alt="전용무기" width="300" height="296" decoding="async" loading="lazy">
               </div>
               <span class="sr-only">4일차 영웅장비강화 재료: 망치, 미스릴, 전용무기</span>
             </div>
@@ -550,9 +554,9 @@
           <td class="cell-gray">
             <div class="cell-item multi">
               <div class="icon-row">
-                <img src="../img/kingdom/forgehammer.webp" alt="망치" />
-                <img src="../img/kingdom/mithri.webp" alt="미스릴" />
-                <img src="../img/kingdom/widget.webp" alt="전용무기" />
+                <img src="../img/kingdom/forgehammer.webp" alt="망치" width="300" height="280" decoding="async" loading="lazy">
+                <img src="../img/kingdom/mithri.webp" alt="미스릴" width="300" height="289" decoding="async" loading="lazy">
+                <img src="../img/kingdom/widget.webp" alt="전용무기" width="300" height="296" decoding="async" loading="lazy">
               </div>
               <span class="sr-only">5일차 영웅장비강화 재료: 망치, 미스릴, 전용무기</span>
             </div>
@@ -562,21 +566,21 @@
         <tr>
           <th class="side-head no-bottom">
             <div class="cell-item">
-              <img src="../img/kingdom/take.webp" alt="채집" />
+              <img src="../img/kingdom/take.webp" alt="채집" width="223" height="233" decoding="async" loading="lazy">
               <span>채집</span>
             </div>
           </th>
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">1일차 채집 없음</span></div></td>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/take.webp" alt="채집" /><span class="sr-only">2일차 채집</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/take.webp" alt="채집" width="223" height="233" decoding="async" loading="lazy"><span class="sr-only">2일차 채집</span></div></td>
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">3일차 채집 없음</span></div></td>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/take.webp" alt="채집" /><span class="sr-only">4일차 채집</span></div></td>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/take.webp" alt="채집" /><span class="sr-only">5일차 채집</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/take.webp" alt="채집" width="223" height="233" decoding="async" loading="lazy"><span class="sr-only">4일차 채집</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/take.webp" alt="채집" width="223" height="233" decoding="async" loading="lazy"><span class="sr-only">5일차 채집</span></div></td>
         </tr>
 
         <tr>
           <th class="side-head">
             <div class="cell-item">
-              <img src="../img/kingdom/pet.webp" alt="펫강화" />
+              <img src="../img/kingdom/pet.webp" alt="펫강화" width="170" height="176" decoding="async" loading="lazy">
               <span>펫강화</span>
             </div>
           </th>
@@ -585,12 +589,12 @@
           <td class="cell-gray">
             <div class="cell-item multi pet-grid">
               <div class="icon-row">
-                <img src="../img/kingdom/pet1.webp" alt="펫 재료 1" />
-                <img src="../img/kingdom/pet2.webp" alt="펫 재료 2" />
+                <img src="../img/kingdom/pet1.webp" alt="펫 재료 1" width="236" height="240" decoding="async" loading="lazy">
+                <img src="../img/kingdom/pet2.webp" alt="펫 재료 2" width="246" height="244" decoding="async" loading="lazy">
               </div>
               <div class="icon-row">
-                <img src="../img/kingdom/pet3.webp" alt="펫 재료 3" />
-                <img src="../img/kingdom/pet4.webp" alt="펫 재료 4" />
+                <img src="../img/kingdom/pet3.webp" alt="펫 재료 3" width="244" height="246" decoding="async" loading="lazy">
+                <img src="../img/kingdom/pet4.webp" alt="펫 재료 4" width="258" height="247" decoding="async" loading="lazy">
               </div>
               <span class="sr-only">3일차 펫강화 재료: 펫 재료 1, 펫 재료 2, 펫 재료 3, 펫 재료 4</span>
             </div>
@@ -599,12 +603,12 @@
           <td class="cell-gray">
             <div class="cell-item multi pet-grid">
               <div class="icon-row">
-                <img src="../img/kingdom/pet1.webp" alt="펫 재료 1" />
-                <img src="../img/kingdom/pet2.webp" alt="펫 재료 2" />
+                <img src="../img/kingdom/pet1.webp" alt="펫 재료 1" width="236" height="240" decoding="async" loading="lazy">
+                <img src="../img/kingdom/pet2.webp" alt="펫 재료 2" width="246" height="244" decoding="async" loading="lazy">
               </div>
               <div class="icon-row">
-                <img src="../img/kingdom/pet3.webp" alt="펫 재료 3" />
-                <img src="../img/kingdom/pet4.webp" alt="펫 재료 4" />
+                <img src="../img/kingdom/pet3.webp" alt="펫 재료 3" width="244" height="246" decoding="async" loading="lazy">
+                <img src="../img/kingdom/pet4.webp" alt="펫 재료 4" width="258" height="247" decoding="async" loading="lazy">
               </div>
               <span class="sr-only">5일차 펫강화 재료: 펫 재료 1, 펫 재료 2, 펫 재료 3, 펫 재료 4</span>
             </div>
@@ -614,7 +618,7 @@
         <tr>
           <th class="side-head">
             <div class="cell-item">
-              <img src="../img/kingdom/gear.webp" alt="영주장비" />
+              <img src="../img/kingdom/gear.webp" alt="영주장비" width="219" height="214" decoding="async" loading="lazy">
               <span>영주장비</span>
             </div>
           </th>
@@ -625,9 +629,9 @@
           <td class="cell-gray">
             <div class="cell-item multi">
               <div class="icon-row">
-                <img src="../img/kingdom/vision.webp" alt="설계도" />
-                <img src="../img/kingdom/threads.webp" alt="실" />
-                <img src="../img/kingdom/satin.webp" alt="비단" />
+                <img src="../img/kingdom/vision.webp" alt="설계도" width="292" height="300" decoding="async" loading="lazy">
+                <img src="../img/kingdom/threads.webp" alt="실" width="300" height="292" decoding="async" loading="lazy">
+                <img src="../img/kingdom/satin.webp" alt="비단" width="300" height="296" decoding="async" loading="lazy">
               </div>
               <span class="sr-only">5일차 영주장비 재료: 설계도, 실, 비단</span>
             </div>
@@ -637,15 +641,15 @@
         <tr>
           <th class="side-head no-bottom">
             <div class="cell-item">
-              <img src="../img/kingdom/charm.webp" alt="영주보석" />
+              <img src="../img/kingdom/charm.webp" alt="영주보석" width="300" height="282" decoding="async" loading="lazy">
               <span>영주보석</span>
             </div>
           </th>
           <td class="cell-gray">
             <div class="cell-item multi">
               <div class="icon-row">
-                <img src="../img/kingdom/charmdesign.webp" alt="보석 설계도" />
-                <img src="../img/kingdom/charmguide.webp" alt="보석 가이드" />
+                <img src="../img/kingdom/charmdesign.webp" alt="보석 설계도" width="300" height="286" decoding="async" loading="lazy">
+                <img src="../img/kingdom/charmguide.webp" alt="보석 가이드" width="300" height="290" decoding="async" loading="lazy">
               </div>
               <span class="sr-only">1일차 영주보석 재료: 보석 설계도, 보석 가이드</span>
             </div>
@@ -654,8 +658,8 @@
           <td class="cell-gray">
             <div class="cell-item multi">
               <div class="icon-row">
-                <img src="../img/kingdom/charmdesign.webp" alt="보석 설계도" />
-                <img src="../img/kingdom/charmguide.webp" alt="보석 가이드" />
+                <img src="../img/kingdom/charmdesign.webp" alt="보석 설계도" width="300" height="286" decoding="async" loading="lazy">
+                <img src="../img/kingdom/charmguide.webp" alt="보석 가이드" width="300" height="290" decoding="async" loading="lazy">
               </div>
               <span class="sr-only">3일차 영주보석 재료: 보석 설계도, 보석 가이드</span>
             </div>
@@ -663,8 +667,8 @@
           <td class="cell-gray">
             <div class="cell-item multi">
               <div class="icon-row">
-                <img src="../img/kingdom/charmdesign.webp" alt="보석 설계도" />
-                <img src="../img/kingdom/charmguide.webp" alt="보석 가이드" />
+                <img src="../img/kingdom/charmdesign.webp" alt="보석 설계도" width="300" height="286" decoding="async" loading="lazy">
+                <img src="../img/kingdom/charmguide.webp" alt="보석 가이드" width="300" height="290" decoding="async" loading="lazy">
               </div>
               <span class="sr-only">4일차 영주보석 재료: 보석 설계도, 보석 가이드</span>
             </div>
@@ -675,30 +679,30 @@
         <tr>
           <th class="side-head">
             <div class="cell-item">
-              <img src="../img/kingdom/intel.webp" alt="정보이벤트" />
+              <img src="../img/kingdom/intel.webp" alt="정보이벤트" width="183" height="187" decoding="async" loading="lazy">
               <span>정보이벤트</span>
             </div>
           </th>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/intel.webp" alt="정보이벤트" /><span class="sr-only">1일차 정보이벤트</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/intel.webp" alt="정보이벤트" width="183" height="187" decoding="async" loading="lazy"><span class="sr-only">1일차 정보이벤트</span></div></td>
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">2일차 정보이벤트 없음</span></div></td>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/intel.webp" alt="정보이벤트" /><span class="sr-only">3일차 정보이벤트</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/intel.webp" alt="정보이벤트" width="183" height="187" decoding="async" loading="lazy"><span class="sr-only">3일차 정보이벤트</span></div></td>
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">4일차 정보이벤트 없음</span></div></td>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/intel.webp" alt="정보이벤트" /><span class="sr-only">5일차 정보이벤트</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/intel.webp" alt="정보이벤트" width="183" height="187" decoding="async" loading="lazy"><span class="sr-only">5일차 정보이벤트</span></div></td>
         </tr>
 
         <tr>
           <th class="side-head">
             <div class="cell-item">
-              <img src="../img/kingdom/king.webp" alt="국왕버프" />
+              <img src="../img/kingdom/king.webp" alt="국왕버프" width="186" height="200" decoding="async" loading="lazy">
               <span>국왕버프</span>
             </div>
           </th>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/kingbuild.webp" alt="건설" /><span class="sr-only">1일차 국왕버프 건설</span></div></td>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/kingtech.webp" alt="연구" /><span class="sr-only">2일차 국왕버프 연구</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/kingbuild.webp" alt="건설" width="256" height="229" decoding="async" loading="lazy"><span class="sr-only">1일차 국왕버프 건설</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/kingtech.webp" alt="연구" width="233" height="238" decoding="async" loading="lazy"><span class="sr-only">2일차 국왕버프 연구</span></div></td>
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">3일차 국왕버프 없음</span></div></td>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/kingtrain.webp" alt="훈련" /><span class="sr-only">4일차 국왕버프 훈련</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/kingtrain.webp" alt="훈련" width="248" height="237" decoding="async" loading="lazy"><span class="sr-only">4일차 국왕버프 훈련</span></div></td>
           <td class="cell-gray"><div class="cell-item"><span class="sr-only">5일차 국왕버프 없음</span></div></td>
-          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/kingbuff.webp" alt="치료" /><span class="sr-only">6일차 국왕버프 치료</span></div></td>
+          <td class="cell-gray"><div class="cell-item"><img src="../img/kingdom/kingbuff.webp" alt="치료" width="226" height="231" decoding="async" loading="lazy"><span class="sr-only">6일차 국왕버프 치료</span></div></td>
         </tr>
       </table>
     </div>

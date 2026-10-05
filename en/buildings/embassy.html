@@ -502,6 +502,10 @@
   <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
 <script src="/js/canonical-links.js?v=2026100603" defer></script>
 <script defer src="/js/image-system.js?v=2026100606"></script>
+<script defer src="/js/hub.js?v=2026100608"></script>
+<script defer src="/js/hub-metrics.js?v=2026100608"></script>
+<script defer src="/js/my-progress.js?v=2026100608"></script>
+<link rel="stylesheet" href="/css/my-progress.css?v=2026100608">
 </head>
 
 <body>
@@ -525,7 +529,7 @@
     <header class="top">
       <div class="brand">
         <a href="/en/" aria-label="Kingshot Data Home">
-          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" decoding="async">
           <span>Kingshot Data</span>
         </a>
       </div>
@@ -553,7 +557,7 @@
       </div>
 
       <div class="hero">
-        <img src="/img/buildings/embassy.webp" alt="Embassy (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" />
+        <img src="/img/buildings/embassy.webp" alt="Embassy (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" decoding="async">
         <div>
           <h1>Embassy</h1>
           <p class="sub">
@@ -701,10 +705,10 @@
                   <th class="num" title="Ally Assists">Assists</th>
                   <th class="num" title="Ally Help Time (seconds)">Help (s)</th>
                   <th class="num" title="Reinforce Capacity">Reinf Cap</th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="13" height="13">Wood</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="13" height="13">Bread</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="13" height="13">Stone</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="13" height="13">Iron</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="13" height="13" decoding="async">Wood</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="13" height="13" decoding="async" loading="lazy">Bread</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="13" height="13" decoding="async" loading="lazy">Stone</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="13" height="13" decoding="async" loading="lazy">Iron</span></th>
                 </tr>
               </thead>
               <tbody>
@@ -769,12 +773,12 @@
                 <tr>
                   <th class="center">Level</th>
                   <th class="req-h">Requirements</th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/truegold.webp" alt="" aria-hidden="true" width="13" height="13">Truegold</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/tempered-truegold.webp" alt="" aria-hidden="true" width="13" height="13">Tempered</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="13" height="13">Wood</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="13" height="13">Bread</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="13" height="13">Stone</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="13" height="13">Iron</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/truegold.webp" alt="" aria-hidden="true" width="13" height="13" decoding="async" loading="lazy">Truegold</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/tempered-truegold.webp" alt="" aria-hidden="true" width="13" height="13" decoding="async" loading="lazy">Tempered</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="13" height="13" decoding="async" loading="lazy">Wood</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="13" height="13" decoding="async" loading="lazy">Bread</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="13" height="13" decoding="async" loading="lazy">Stone</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="13" height="13" decoding="async" loading="lazy">Iron</span></th>
                   <th>Upgrade Time</th>
                   <th class="num" title="Ally Assists">Assists</th>
                   <th class="num" title="Ally Help Time (seconds)">Help (s)</th>
@@ -1226,7 +1230,8 @@
         init();
       }
     })();
-  </script><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/en/about/">About</a><a href="/en/privacy/">Privacy</a><a href="/en/terms/">Terms</a><a href="/en/contact/">Contact</a></nav><p>An unofficial fan site operated independently of the game developer and publisher. Game assets and trademarks belong to their respective owners.</p></footer><!-- shared-policy-footer:end -->
+  </script>
+<!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/en/about/">About</a><a href="/en/privacy/">Privacy</a><a href="/en/terms/">Terms</a><a href="/en/contact/">Contact</a></nav><p>An unofficial fan site operated independently of the game developer and publisher. Game assets and trademarks belong to their respective owners.</p></footer><!-- shared-policy-footer:end -->
 <!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>Related data and tools</h2><ul><li><a href="/en/buildings/">Kingshot Buildings</a></li><li><a href="/en/calc-building/">Building Calculator</a></li><li><a href="/en/guides/kingshot-f2p-guide.html">Kingshot Beginner Guide · F2P / Low-Spender Growth Guide</a></li></ul></section><!-- kd-related:end -->
 </body>
 </html>

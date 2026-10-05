@@ -139,6 +139,10 @@
 
 <script src="/js/canonical-links.js?v=2026100603" defer></script>
 <script defer src="/js/image-system.js?v=2026100606"></script>
+<script defer src="/js/hub.js?v=2026100608"></script>
+<script defer src="/js/hub-metrics.js?v=2026100608"></script>
+<script defer src="/js/my-progress.js?v=2026100608"></script>
+<link rel="stylesheet" href="/css/my-progress.css?v=2026100608">
 </head>
 
 <body class="theme-default">
@@ -153,23 +157,24 @@
     </section>
 
     <div id="buildings-grid" class="grid">
-      <div class="card"><a href="/zh-tw/buildings/town-center.html"><div class="imgbox"><img src="/img/buildings/towncenter-kingshot.webp" alt="市政廳"></div><div class="card-name">市政廳</div></a></div>
-      <div class="card"><a href="/zh-tw/buildings/academy.html"><div class="imgbox"><img src="/img/buildings/academy-kingshot.webp" alt="學院"></div><div class="card-name">學院</div></a></div>
-      <div class="card"><a href="/zh-tw/buildings/embassy.html"><div class="imgbox"><img src="/img/buildings/embassy-kingshot.webp" alt="大使館"></div><div class="card-name">大使館</div></a></div>
-      <div class="card"><a href="/zh-tw/buildings/barracks.html"><div class="imgbox"><img src="/img/buildings/barracks-kingshot.webp" alt="步兵營"></div><div class="card-name">步兵營</div></a></div>
-      <div class="card"><a href="/zh-tw/buildings/range.html"><div class="imgbox"><img src="/img/buildings/range-kingshot.webp" alt="射擊場"></div><div class="card-name">射擊場</div></a></div>
-      <div class="card"><a href="/zh-tw/buildings/stable.html"><div class="imgbox"><img src="/img/buildings/stable-kingshot.webp" alt="馬廄"></div><div class="card-name">馬廄</div></a></div>
-      <div class="card"><a href="/zh-tw/buildings/commandcenter.html"><div class="imgbox"><img src="/img/buildings/command-center-kingshot.webp" alt="指揮部"></div><div class="card-name">指揮部</div></a></div>
-      <div class="card"><a href="/zh-tw/buildings/storehouse.html"><div class="imgbox"><img src="/img/buildings/storehouse-kingshot.webp" alt="倉庫"></div><div class="card-name">倉庫</div></a></div>
-      <div class="card"><a href="/zh-tw/buildings/kitchen.html"><div class="imgbox"><img src="/img/buildings/kitchen-kingshot.webp" alt="廚房"></div><div class="card-name">廚房</div></a></div>
-      <div class="card"><a href="/zh-tw/buildings/infirmary.html"><div class="imgbox"><img src="/img/buildings/infirmary-kingshot.webp" alt="野戰醫院"></div><div class="card-name">野戰醫院</div></a></div>
-      <div class="card"><a href="/zh-tw/buildings/guard-station.html"><div class="imgbox"><img src="/img/buildings/guard-station-kingshot.webp" alt="衛兵所"></div><div class="card-name">衛兵所</div></a></div>
-      <div class="card"><a href="/zh-tw/buildings/truegold-crucible.html"><div class="imgbox"><img src="/img/buildings/truegold-crucible-kingshot.webp" alt="純金熔爐"></div><div class="card-name">純金熔爐</div></a></div>
-      <div class="card"><a href="/zh-tw/buildings/war-academy.html"><div class="imgbox"><img src="/img/buildings/war-academy.webp" alt="戰爭學院"></div><div class="card-name">戰爭學院</div></a></div>
+      <div class="card"><a href="/zh-tw/buildings/town-center.html"><div class="imgbox"><img src="/img/buildings/towncenter-kingshot.webp" alt="市政廳" width="269" height="300" decoding="async"></div><div class="card-name">市政廳</div></a></div>
+      <div class="card"><a href="/zh-tw/buildings/academy.html"><div class="imgbox"><img src="/img/buildings/academy-kingshot.webp" alt="學院" width="477" height="523" decoding="async"></div><div class="card-name">學院</div></a></div>
+      <div class="card"><a href="/zh-tw/buildings/embassy.html"><div class="imgbox"><img src="/img/buildings/embassy-kingshot.webp" alt="大使館" width="515" height="484" decoding="async"></div><div class="card-name">大使館</div></a></div>
+      <div class="card"><a href="/zh-tw/buildings/barracks.html"><div class="imgbox"><img src="/img/buildings/barracks-kingshot.webp" alt="步兵營" width="261" height="300" decoding="async" loading="lazy"></div><div class="card-name">步兵營</div></a></div>
+      <div class="card"><a href="/zh-tw/buildings/range.html"><div class="imgbox"><img src="/img/buildings/range-kingshot.webp" alt="射擊場" width="505" height="494" decoding="async" loading="lazy"></div><div class="card-name">射擊場</div></a></div>
+      <div class="card"><a href="/zh-tw/buildings/stable.html"><div class="imgbox"><img src="/img/buildings/stable-kingshot.webp" alt="馬廄" width="520" height="480" decoding="async" loading="lazy"></div><div class="card-name">馬廄</div></a></div>
+      <div class="card"><a href="/zh-tw/buildings/commandcenter.html"><div class="imgbox"><img src="/img/buildings/command-center-kingshot.webp" alt="指揮部" width="506" height="493" decoding="async" loading="lazy"></div><div class="card-name">指揮部</div></a></div>
+      <div class="card"><a href="/zh-tw/buildings/storehouse.html"><div class="imgbox"><img src="/img/buildings/storehouse-kingshot.webp" alt="倉庫" width="525" height="476" decoding="async" loading="lazy"></div><div class="card-name">倉庫</div></a></div>
+      <div class="card"><a href="/zh-tw/buildings/kitchen.html"><div class="imgbox"><img src="/img/buildings/kitchen-kingshot.webp" alt="廚房" width="398" height="391" decoding="async" loading="lazy"></div><div class="card-name">廚房</div></a></div>
+      <div class="card"><a href="/zh-tw/buildings/infirmary.html"><div class="imgbox"><img src="/img/buildings/infirmary-kingshot.webp" alt="野戰醫院" width="432" height="476" decoding="async" loading="lazy"></div><div class="card-name">野戰醫院</div></a></div>
+      <div class="card"><a href="/zh-tw/buildings/guard-station.html"><div class="imgbox"><img src="/img/buildings/guard-station-kingshot.webp" alt="衛兵所" width="300" height="250" decoding="async" loading="lazy"></div><div class="card-name">衛兵所</div></a></div>
+      <div class="card"><a href="/zh-tw/buildings/truegold-crucible.html"><div class="imgbox"><img src="/img/buildings/truegold-crucible-kingshot.webp" alt="純金熔爐" width="294" height="300" decoding="async" loading="lazy"></div><div class="card-name">純金熔爐</div></a></div>
+      <div class="card"><a href="/zh-tw/buildings/war-academy.html"><div class="imgbox"><img src="/img/buildings/war-academy.webp" alt="戰爭學院" width="562" height="592" decoding="async" loading="lazy"></div><div class="card-name">戰爭學院</div></a></div>
     </div>
 
     <div id="building-root"></div>
-  </main><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/zh-tw/about/">關於</a><a href="/zh-tw/privacy/">隱私權</a><a href="/zh-tw/terms/">使用條款</a><a href="/zh-tw/contact/">聯絡</a></nav><p>本網站為獨立於遊戲開發商與發行商的非官方粉絲網站。遊戲素材與商標屬於各權利人。</p></footer><!-- shared-policy-footer:end -->
+  </main>
+<!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/zh-tw/about/">關於</a><a href="/zh-tw/privacy/">隱私權</a><a href="/zh-tw/terms/">使用條款</a><a href="/zh-tw/contact/">聯絡</a></nav><p>本網站為獨立於遊戲開發商與發行商的非官方粉絲網站。遊戲素材與商標屬於各權利人。</p></footer><!-- shared-policy-footer:end -->
 <!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>相關資料與計算工具</h2><ul><li><a href="/zh-tw/calc-building/">建築計算器</a></li><li><a href="/zh-tw/guides/kingshot-f2p-guide.html">Kingshot 新手攻略 · 無課金／小課成長指南</a></li></ul></section><!-- kd-related:end -->
 </body>
 </html>

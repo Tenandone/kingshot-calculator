@@ -513,6 +513,10 @@
   <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
 <script src="/js/canonical-links.js?v=2026100603" defer></script>
 <script defer src="/js/image-system.js?v=2026100606"></script>
+<script defer src="/js/hub.js?v=2026100608"></script>
+<script defer src="/js/hub-metrics.js?v=2026100608"></script>
+<script defer src="/js/my-progress.js?v=2026100608"></script>
+<link rel="stylesheet" href="/css/my-progress.css?v=2026100608">
 </head>
 
 <body>
@@ -536,7 +540,7 @@
     <header class="top">
       <div class="brand">
         <a href="/zh-tw/" aria-label="Kingshot Data Home">
-          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" />
+          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" decoding="async">
           <span>Kingshot Data</span>
         </a>
       </div>
@@ -565,7 +569,7 @@
       </div>
 
       <div class="hero">
-        <img src="/img/buildings/town-center.webp" alt="城鎮中心 (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" />
+        <img src="/img/buildings/town-center.webp" alt="城鎮中心 (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" decoding="async">
         <div>
           <h1>城鎮中心</h1>
           <p class="sub">
@@ -698,10 +702,10 @@
                 <tr>
                   <th class="center">等級</th>
                   <th class="req-h">需求</th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="14" height="14">木材</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="14" height="14">麵包</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="14" height="14">石材</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="14" height="14">鐵</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async">木材</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">麵包</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">石材</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">鐵</span></th>
                   <th><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-time"></use></svg>時間</span></th>
                   <th class="num"><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-power"></use></svg>戰力</span></th>
                   <th class="center">英雄上限</th>
@@ -766,12 +770,12 @@
                 <tr>
                   <th class="center">段位</th>
                   <th class="req-h">需求</th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/truegold.webp" alt="" aria-hidden="true" width="14" height="14">Truegold</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/tempered-truegold.webp" alt="" aria-hidden="true" width="14" height="14">淬火 Truegold</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="14" height="14">木材</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="14" height="14">麵包</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="14" height="14">石材</span></th>
-                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="14" height="14">鐵</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/truegold.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">Truegold</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/tempered-truegold.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">淬火 Truegold</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">木材</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">麵包</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">石材</span></th>
+                  <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">鐵</span></th>
                   <th><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-time"></use></svg>時間</span></th>
                   <th class="num"><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-power"></use></svg>戰力</span></th>
                 </tr>
@@ -1237,7 +1241,8 @@
         init();
       }
     })();
-  </script><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/zh-tw/about/">關於</a><a href="/zh-tw/privacy/">隱私權</a><a href="/zh-tw/terms/">使用條款</a><a href="/zh-tw/contact/">聯絡</a></nav><p>本網站為獨立於遊戲開發商與發行商的非官方粉絲網站。遊戲素材與商標屬於各權利人。</p></footer><!-- shared-policy-footer:end -->
+  </script>
+<!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/zh-tw/about/">關於</a><a href="/zh-tw/privacy/">隱私權</a><a href="/zh-tw/terms/">使用條款</a><a href="/zh-tw/contact/">聯絡</a></nav><p>本網站為獨立於遊戲開發商與發行商的非官方粉絲網站。遊戲素材與商標屬於各權利人。</p></footer><!-- shared-policy-footer:end -->
 <!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>相關資料與計算工具</h2><ul><li><a href="/zh-tw/buildings/">Kingshot 建築</a></li><li><a href="/zh-tw/calc-building/">建築計算器</a></li><li><a href="/zh-tw/guides/kingshot-f2p-guide.html">Kingshot 新手攻略 · 無課金／小課成長指南</a></li></ul></section><!-- kd-related:end -->
 </body>
 </html>

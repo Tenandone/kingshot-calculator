@@ -145,6 +145,10 @@
   </script>
 <script src="/js/canonical-links.js?v=2026100603" defer></script>
 <script defer src="/js/image-system.js?v=2026100606"></script>
+<script defer src="/js/hub.js?v=2026100608"></script>
+<script defer src="/js/hub-metrics.js?v=2026100608"></script>
+<script defer src="/js/my-progress.js?v=2026100608"></script>
+<link rel="stylesheet" href="/css/my-progress.css?v=2026100608">
 </head>
 
 <body class="theme-default">
@@ -158,22 +162,23 @@
     </section>
 
     <div id="pet-grid" class="grid">
-      <div class="card"><a href="/ja/pet/graywolf.html"><div class="imgbox"><img src="/img/pet/graywolf.webp" alt="グレイウルフ"></div><div class="card-name">グレイウルフ</div></a></div>
-      <div class="card"><a href="/ja/pet/lynx.html"><div class="imgbox"><img src="/img/pet/lynx.webp" alt="オオヤマネコ"></div><div class="card-name">オオヤマネコ</div></a></div>
-      <div class="card"><a href="/ja/pet/bison.html"><div class="imgbox"><img src="/img/pet/bison.webp" alt="オックス"></div><div class="card-name">オックス</div></a></div>
-      <div class="card"><a href="/ja/pet/cheetah.html"><div class="imgbox"><img src="/img/pet/cheetah.webp" alt="チーター"></div><div class="card-name">チーター</div></a></div>
-      <div class="card"><a href="/ja/pet/moose.html"><div class="imgbox"><img src="/img/pet/moose.webp" alt="ヘラジカ"></div><div class="card-name">ヘラジカ</div></a></div>
-      <div class="card"><a href="/ja/pet/lion.html"><div class="imgbox"><img src="/img/pet/lion.webp" alt="ライオン"></div><div class="card-name">ライオン</div></a></div>
-      <div class="card"><a href="/ja/pet/grizzly-bear.html"><div class="imgbox"><img src="/img/pet/grizzly-bear.webp" alt="グリズリー"></div><div class="card-name">グリズリー</div></a></div>
-      <div class="card"><a href="/ja/pet/giant-rhino.html"><div class="imgbox"><img src="/img/pet/giant-rhino.webp" alt="巨大戦犀"></div><div class="card-name">巨大戦犀</div></a></div>
-      <div class="card"><a href="/ja/pet/mighty-bison.html"><div class="imgbox"><img src="/img/pet/mighty-bison.webp" alt="巨大蛮牛"></div><div class="card-name">巨大蛮牛</div></a></div>
-      <div class="card"><a href="/ja/pet/great-moose.html"><div class="imgbox"><img src="/img/pet/great-moose.webp" alt="巨大ヘラジカ"></div><div class="card-name">巨大ヘラジカ</div></a></div>
-      <div class="card"><a href="/ja/pet/alpha-black-panther.html"><div class="imgbox"><img src="/img/pet/alpha-black-panther.webp" alt="巨大黒豹"></div><div class="card-name">巨大黒豹</div></a></div>
-      <div class="card"><a href="/ja/pet/regal-white-lion.html"><div class="imgbox"><img src="/img/pet/regal-white-lion.webp" alt="巨大白獅子"></div><div class="card-name">巨大白獅子</div></a></div>
-      <div class="card"><a href="/ja/pet/ironclad-war-elephant.html"><div class="imgbox"><img src="/img/pet/ironclad-war-elephant.webp" alt="巨大戦象"></div><div class="card-name">巨大戦象</div></a></div>
-      <div class="card"><a href="/ja/pet/unknown.html"><div class="imgbox"><img src="/img/pet/unknown.webp" alt="アイアンクラッド・ウォーベア"></div><div class="card-name">アイアンクラッド・ウォーベア</div></a></div>
+      <div class="card"><a href="/ja/pet/graywolf.html"><div class="imgbox"><img src="/img/pet/graywolf.webp" alt="グレイウルフ" width="291" height="300" decoding="async"></div><div class="card-name">グレイウルフ</div></a></div>
+      <div class="card"><a href="/ja/pet/lynx.html"><div class="imgbox"><img src="/img/pet/lynx.webp" alt="オオヤマネコ" width="300" height="292" decoding="async"></div><div class="card-name">オオヤマネコ</div></a></div>
+      <div class="card"><a href="/ja/pet/bison.html"><div class="imgbox"><img src="/img/pet/bison.webp" alt="オックス" width="297" height="300" decoding="async"></div><div class="card-name">オックス</div></a></div>
+      <div class="card"><a href="/ja/pet/cheetah.html"><div class="imgbox"><img src="/img/pet/cheetah.webp" alt="チーター" width="274" height="300" decoding="async" loading="lazy"></div><div class="card-name">チーター</div></a></div>
+      <div class="card"><a href="/ja/pet/moose.html"><div class="imgbox"><img src="/img/pet/moose.webp" alt="ヘラジカ" width="506" height="493" decoding="async" loading="lazy"></div><div class="card-name">ヘラジカ</div></a></div>
+      <div class="card"><a href="/ja/pet/lion.html"><div class="imgbox"><img src="/img/pet/lion.webp" alt="ライオン" width="293" height="300" decoding="async" loading="lazy"></div><div class="card-name">ライオン</div></a></div>
+      <div class="card"><a href="/ja/pet/grizzly-bear.html"><div class="imgbox"><img src="/img/pet/grizzly-bear.webp" alt="グリズリー" width="600" height="556" decoding="async" loading="lazy"></div><div class="card-name">グリズリー</div></a></div>
+      <div class="card"><a href="/ja/pet/giant-rhino.html"><div class="imgbox"><img src="/img/pet/giant-rhino.webp" alt="巨大戦犀" width="294" height="300" decoding="async" loading="lazy"></div><div class="card-name">巨大戦犀</div></a></div>
+      <div class="card"><a href="/ja/pet/mighty-bison.html"><div class="imgbox"><img src="/img/pet/mighty-bison.webp" alt="巨大蛮牛" width="600" height="578" decoding="async" loading="lazy"></div><div class="card-name">巨大蛮牛</div></a></div>
+      <div class="card"><a href="/ja/pet/great-moose.html"><div class="imgbox"><img src="/img/pet/great-moose.webp" alt="巨大ヘラジカ" width="300" height="294" decoding="async" loading="lazy"></div><div class="card-name">巨大ヘラジカ</div></a></div>
+      <div class="card"><a href="/ja/pet/alpha-black-panther.html"><div class="imgbox"><img src="/img/pet/alpha-black-panther.webp" alt="巨大黒豹" width="292" height="300" decoding="async" loading="lazy"></div><div class="card-name">巨大黒豹</div></a></div>
+      <div class="card"><a href="/ja/pet/regal-white-lion.html"><div class="imgbox"><img src="/img/pet/regal-white-lion.webp" alt="巨大白獅子" width="300" height="290" decoding="async" loading="lazy"></div><div class="card-name">巨大白獅子</div></a></div>
+      <div class="card"><a href="/ja/pet/ironclad-war-elephant.html"><div class="imgbox"><img src="/img/pet/ironclad-war-elephant.webp" alt="巨大戦象" width="600" height="578" decoding="async" loading="lazy"></div><div class="card-name">巨大戦象</div></a></div>
+      <div class="card"><a href="/ja/pet/unknown.html"><div class="imgbox"><img src="/img/pet/unknown.webp" alt="アイアンクラッド・ウォーベア" width="169" height="176" decoding="async" loading="lazy"></div><div class="card-name">アイアンクラッド・ウォーベア</div></a></div>
     </div>
-  </main><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/ja/about/">サイト紹介</a><a href="/ja/privacy/">プライバシー</a><a href="/ja/terms/">利用規約</a><a href="/ja/contact/">お問い合わせ</a></nav><p>開発元・パブリッシャーから独立した非公式ファンサイトです。ゲーム素材と商標の権利は各権利者に帰属します。</p></footer><!-- shared-policy-footer:end -->
+  </main>
+<!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/ja/about/">サイト紹介</a><a href="/ja/privacy/">プライバシー</a><a href="/ja/terms/">利用規約</a><a href="/ja/contact/">お問い合わせ</a></nav><p>開発元・パブリッシャーから独立した非公式ファンサイトです。ゲーム素材と商標の権利は各権利者に帰属します。</p></footer><!-- shared-policy-footer:end -->
 <!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>関連データと計算ツール</h2><ul><li><a href="/ja/calc-pet/">ペット計算機</a></li><li><a href="/ja/guides/kingshot-f2p-guide.html">キングショット 初心者ガイド｜無課金・微課金向け成長攻略</a></li></ul></section><!-- kd-related:end -->
 </body>
 </html>
