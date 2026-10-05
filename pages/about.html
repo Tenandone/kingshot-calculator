@@ -24,6 +24,7 @@
     gtag('js', new Date());
     gtag('config', 'G-TMGDGSEWW6', { send_page_view: true });
   </script>
+<script src="/js/canonical-links.js?v=2026100601" defer></script>
 </head>
 
 <body>
@@ -44,9 +45,6 @@
       <p data-i18n="about.intro.p1"></p>
       <p data-i18n="about.intro.p2"></p>
       <p data-i18n="about.intro.p3"></p>
-      <p data-i18n="about.intro.p4"></p>
-      <p data-i18n="about.intro.p5"></p>
-      <p data-i18n="about.intro.p6"></p>
     </section>
 
     <!-- 광고/실험 -->
@@ -55,10 +53,6 @@
 
       <p data-i18n="about.ads.p1"></p>
       <p data-i18n="about.ads.p2"></p>
-      <p data-i18n="about.ads.p3"></p>
-      <p data-i18n="about.ads.p4"></p>
-      <p data-i18n="about.ads.p5"></p>
-      <p data-i18n="about.ads.p6"></p>
     </section>
 
     <!-- 제공 -->
@@ -129,7 +123,7 @@
           var val = I18N.t(key, null);
 
           if (val === null || val === undefined || val === key) {
-            el.textContent = showMissingKey ? key : '';
+            if (el.textContent === key) el.textContent = '';
             continue;
           }
 
@@ -151,7 +145,7 @@
           if (typeof I18N.applyTo === 'function') I18N.applyTo(document);
         } catch (e) {}
 
-        renderAll(true);
+        renderAll(false);
       }
 
       window.addEventListener('load', boot);

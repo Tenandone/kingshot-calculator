@@ -13,6 +13,7 @@
   window.__KSD_CONSENT_INIT__ = true;
 
   const KEY = 'KSD_CONSENT_V1';
+  const AD_SERVING_ENABLED = false; // Enable only after page eligibility and CMP review.
   const defaultConsent = { necessary: true, analytics: false, ads: false };
 
   // ---------- Debug ----------
@@ -45,6 +46,8 @@
   }
 
   function loadAdSense() {
+    // Publisher verification is retained in HTML. Enable serving only after page/CMP review.
+    if (!AD_SERVING_ENABLED) return;
     if (window.__adsenseLoaded) return; window.__adsenseLoaded = true;
     const s = document.createElement('script');
     s.async = true;

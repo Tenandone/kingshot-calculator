@@ -1,0 +1,56 @@
+Production source: Tenandone/kingshot-calculator, GitHub Pages main:/, kingshotdata.kr.
+Baseline: 96ed426. The worktree was clean before this change.
+
+Changes
+- Correct canonical links in published HTML and links subsequently rendered by the SPA.
+- Restore 73 known broken URLs with exact-target, zero-second meta-refresh redirects.
+  64 were .html pages linked as trailing-slash slugs; 9 were old SPA/locale routes.
+  GitHub Pages cannot provide custom HTTP 301 rules. These are explicit static redirects,
+  not new content pages; they are excluded from the sitemap and contain no ads.
+- Restore the existing database menu as a real index of the five published articles in
+  each of four languages. Preserve all 521 original sitemap URLs; total is now 525.
+- Remove seven obsolete About bindings absent from the translation dictionaries.
+  Missing DOM translations preserve readable fallback text instead of displaying keys.
+  Calculator accessible labels also preserve the displayed button text.
+- Add Google advertising-cookie, personalized-ad choices, third-party choices and actual
+  browser-storage disclosures in KO/EN/JA/ZH-TW, with working external policy links.
+  Build the full static privacy body from the same template and dictionary as the SPA.
+- Generate a common policy footer on standalone localized content pages.
+- Keep initial server-provided content visible while the SPA loads.
+- Disable ad-serving scripts pending individual-page and CMP review; retain publisher
+  ownership metadata and ads.txt. No slots or ads were added.
+- Add a strict parse5 crawl of canonical pages, linked pages, redirects and local assets.
+  It does not silently treat /slug/ as /slug.html, unlike the previous SEO helper.
+
+Local validation
+525 sitemap URLs, 627 page requests, 549 distinct internal links, 283 assets.
+0 sitemap errors, 0 broken internal links, 0 broken assets, 0 static raw translation keys.
+SEO audit: 0 errors / 0 warnings. Coupon automation tests: passed. Vite build: passed.
+GitHub Pages publishes repository source, not Vite dist (which is not a complete Pages export).
+Browser: four hydrated About locales have no raw keys; mobile home search, detail ->
+About -> Privacy -> Contact flow works. Calculator TC1->TC2 still displays 180 bread / 6 sec;
+the result link resolves to the real building page. Checked console errors/warnings: none.
+This does not prove every dynamic state or game number correct.
+
+Content grouping of original 521 URLs
+Home 4; policies 16; buildings 56; calculators 24; database 20; events 48;
+guides 85; heroes 152; items 24; masters 16; pet 60; research 12; waracademy 4.
+
+CONTENT_REQUIRED
+Existing guides contain substantive explanations; tools provide calculations and instructions.
+Some event/item/research pages primarily summarize external sources or list data.
+Do not invent gameplay experience, research priorities, rewards or numerical recommendations.
+For alliance-brawl, truegold and the academy research examples, an editor should supply
+verified practical examples, limitations and original interpretation, with a review date.
+No mass articles or unverifiable game content were added. No existing canonical was noindexed.
+
+Remaining account/editorial verification
+- Actual AdSense rejection message and publisher ownership/site-review status.
+- Originality and permissions for game images/text; a fan-site notice is not a license.
+- Account-level CMP and ad eligibility before re-enabling ads.
+- Search Console rendering and real Googlebot access; a spoofed UA is not that evidence.
+These remain explicit readiness limitations. A clean technical crawl is not an approval guarantee.
+
+References
+https://developers.google.com/search/docs/crawling-indexing/301-redirects
+https://support.google.com/adsense/answer/1348695?hl=ko

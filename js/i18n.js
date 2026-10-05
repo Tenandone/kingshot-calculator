@@ -216,7 +216,8 @@
 
     root.querySelectorAll('[data-i18n]').forEach(function (el) {
       var key = el.getAttribute('data-i18n');
-      var val = t(key, el.textContent || key);
+      var fallback = el.textContent === key ? '' : el.textContent;
+      var val = t(key, fallback);
       if (val !== undefined) el.textContent = val;
     });
 
@@ -230,19 +231,19 @@
         var key  = (parts[1] || '').trim();
         if (!attr || !key) return;
 
-        var val = t(key, el.getAttribute(attr) || key);
+        var val = t(key, el.getAttribute(attr) === key ? '' : (el.getAttribute(attr) || ''));
         if (val !== undefined) el.setAttribute(attr, val);
       });
     });
 
     root.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
       var key = el.getAttribute('data-i18n-placeholder');
-      el.setAttribute('placeholder', t(key, el.getAttribute('placeholder') || key));
+      el.setAttribute('placeholder', t(key, el.getAttribute('placeholder') || ''));
     });
 
     root.querySelectorAll('[data-i18n-aria-label]').forEach(function (el) {
       var key = el.getAttribute('data-i18n-aria-label');
-      el.setAttribute('aria-label', t(key, el.getAttribute('aria-label') || key));
+      el.setAttribute('aria-label', t(key, el.getAttribute('aria-label') === key ? el.textContent : (el.getAttribute('aria-label') || el.textContent)));
     });
   }
 

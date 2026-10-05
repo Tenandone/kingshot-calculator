@@ -8,13 +8,14 @@
     "generate:routes": "node scripts/generate-static-routes.js",
     "prebuild": "npm run sitemap",
     "build": "vite build",
-    "sitemap": "npm run generate:routes && node scripts/generate-sitemap.js",
+    "sitemap": "npm run generate:routes && node scripts/prepare-publishing.js && node scripts/generate-sitemap.js",
     "coupons:update": "node scripts/coupons/update-coupons.js --write",
     "coupons:check": "node scripts/coupons/update-coupons.js",
     "coupons:test": "node scripts/coupons/test-coupons.js",
     "audit:seo": "node scripts/audit-static-seo.js",
     "bump": "node bump-version.js",
-    "deploy": "npm run bump && npm run build && gh-pages -d dist"
+    "deploy": "npm run bump && npm run build && gh-pages -d dist",
+    "audit:publishing": "node scripts/audit-publishing.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
   "homepage": "https://tenandone.github.io/kingshot-calculator/",
   "devDependencies": {
     "gh-pages": "^6.3.0",
+    "parse5": "^8.0.1",
     "vite": "^7.3.1"
   }
 }

@@ -202,13 +202,11 @@ function genericPage(routePath, lang, dictionary, heroes, events, eventDictionar
     body += '<p>' + escapeHtml(common('about.copyright.p1')) + '</p><p>' + escapeHtml(common('about.copyright.p2')) + '</p>';
     body += '<h2>' + escapeHtml(common('about.section.contact')) + '</h2><p><a href="mailto:nomadten@nomadeten.com">nomadten@nomadeten.com</a></p>';
   } else if (routePath === '/privacy') {
-    body = '<p>' + escapeHtml(common('privacy.s0.p1')) + '</p>';
-    for (const key of ['s1', 's2', 's4', 's5', 's51', 's8', 's10']) {
-      const titleValue = common('privacy.' + key + '.title');
-      const textValue = common('privacy.' + key + '.p1') || common('privacy.' + key + '.note');
-      if (titleValue) body += '<h2>' + escapeHtml(titleValue) + '</h2>';
-      if (textValue) body += '<p>' + escapeHtml(textValue) + '</p>';
-    }
+    const policy = fs.readFileSync(path.join(ROOT, 'pages/privacy.html'), 'utf8');
+    body = policy.match(/<section class="container" id="top">([\s\S]*?)<\/section>/)[1]
+      .replace(/<h1\b[\s\S]*?<\/h1>/, '')
+      .replace(/<(\w+)([^>]*data-i18n="([^"]+)"[^>]*)>[\s\S]*?<\/\1>/g,
+        (_all, tag, attrs, key) => '<' + tag + attrs + '>' + escapeHtml(common(key)) + '</' + tag + '>');
   } else if (routePath === '/contact') {
     body = '<p>' + escapeHtml(commonDictionary['contact.intro']) + '</p>';
     body += '<h2>' + escapeHtml(commonDictionary['contact.emailTitle']) + '</h2>';
