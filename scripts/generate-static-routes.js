@@ -112,6 +112,8 @@ COPY.en['/calc-hero-gear']=['KingShot Hero Gear Calculator','Calculate the upgra
 COPY.ko['/calc-hero-gear']=['킹샷 영웅 장비 계산기','영웅 장비 강화·단련·마스터리 구간별 필요 재료를 계산하세요.','영웅 장비 계산기'];
 COPY.ja['/calc-hero-gear']=['Kingshot 英雄装備計算機','英雄装備の強化・鍛錬・マスタリーに必要な素材を計算します。','英雄装備計算機'];
 COPY['zh-TW']['/calc-hero-gear']=['Kingshot 英雄裝備計算器','計算英雄裝備強化、淬鍊與精通所需材料。','英雄裝備計算器'];
+// Availability is visible before entering paused calculators (SEO and home catalog).
+for(const [lang,message] of Object.entries({ko:'핵심 수치 검증 중으로 계산과 새 결과 저장을 일시 중단했습니다. 기존 저장 기록은 확인할 수 있습니다.',en:'Calculation and new result saving are paused for core data verification. Existing saved snapshots remain available.',ja:'主要データの検証中のため、計算と新しい結果の保存を停止しています。保存済みの記録は確認できます。','zh-TW':'核心資料驗證中，暫停計算及儲存新結果。仍可查看既有儲存紀錄。'}))for(const route of ['/calc-building','/calc-hero-gear','/calc-training'])COPY[lang][route][1]=message;
 function escapeHtml(value) {
   return String(value == null ? '' : value)
     .replace(/&/g, '&amp;')
