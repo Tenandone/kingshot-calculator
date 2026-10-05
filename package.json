@@ -14,7 +14,7 @@
     "coupons:test": "node scripts/coupons/test-coupons.js",
     "audit:seo": "node scripts/audit-static-seo.js",
     "bump": "node bump-version.js",
-    "deploy": "npm run bump && npm run build && gh-pages -d dist",
+    "deploy": "node -e \"console.error('Publish reviewed commits to main; GitHub Pages serves the repository root, not dist.');process.exit(1)\"",
     "audit:publishing": "node scripts/audit-publishing.js"
   },
   "repository": {
@@ -29,7 +29,6 @@
   },
   "homepage": "https://tenandone.github.io/kingshot-calculator/",
   "devDependencies": {
-    "gh-pages": "^6.3.0",
     "parse5": "^8.0.1",
     "vite": "^7.3.1"
   }

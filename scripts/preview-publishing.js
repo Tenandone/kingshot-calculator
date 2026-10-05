@@ -13,4 +13,4 @@ http.createServer((req,res)=>{
  if(!fs.existsSync(file)&&!u.pathname.endsWith('/')&&!path.extname(file)&&fs.existsSync(file+'.html'))file+='.html';
  if(!fs.existsSync(file)||!fs.statSync(file).isFile()){res.writeHead(404,{'Content-Type':'text/html'});return res.end('<h1>404</h1>');}
  res.writeHead(200,{'Content-Type':types[path.extname(file)]||'application/octet-stream','Cache-Control':'no-store'});fs.createReadStream(file).pipe(res);
-}).listen(4173,'127.0.0.1',()=>console.log('Static preview http://127.0.0.1:4173'));
+}).listen(Number(process.env.PORT||4173),'127.0.0.1',()=>console.log('Static preview ready')); 

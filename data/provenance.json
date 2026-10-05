@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-06",
+  "policy": "Source review dates are not game-version verification dates. Numeric data remains unchanged unless individually checked.",
+  "datasets": [
+    {
+      "file": "data/heroes.json",
+      "reference": "https://kingshotwiki.com/ko/heroes/",
+      "status": "partial",
+      "scope": "Category roster reviewed; individual skills/stats not reverified."
+    },
+    {
+      "file": "data/buildings.json",
+      "reference": "https://kingshotwiki.com/ko/buildings/",
+      "status": "partial",
+      "scope": "Category structure reviewed; upgrade rows not reverified."
+    },
+    {
+      "file": "data/research.json",
+      "reference": "https://kingshotwiki.com/ko/research/",
+      "status": "partial",
+      "scope": "Existing names/max-level verification scope retained. Missing resource/time rows are not synthesized."
+    },
+    {
+      "file": "data/hero-gear-data.json",
+      "reference": "https://kingshotwiki.com/ko/hero-gears/영웅장비/",
+      "status": "partial",
+      "scope": "System reference reviewed; upgrade numeric rows not independently reverified."
+    },
+    {
+      "file": "data/pet-upgrade.json",
+      "reference": "https://kingshotwiki.com/ko/pets/",
+      "status": "partial",
+      "scope": "Existing data retained; individual upgrade costs not independently reverified."
+    }
+  ]
+}

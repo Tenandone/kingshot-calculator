@@ -9,6 +9,16 @@ const original=process.env.KS_ORIGINAL_SITEMAP;
 const maps=[fs.readFileSync(path.join(ROOT,'sitemap.xml'),'utf8')];if(original)maps.push(fs.readFileSync(original,'utf8'));
 const urls=[...new Set(maps.flatMap(s=>[...s.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1])))];
 const queue=[...urls,...baseline.map(r=>r.Url)], seen=new Set(),rows=[], links=new Map(),assets=new Map(),errors=[];
+const dirEntries=new Map();
+function exactCase(file) {
+ let dir=ROOT;
+ for(const part of path.relative(ROOT,file).split(path.sep)) {
+  if(!dirEntries.has(dir))dirEntries.set(dir,fs.existsSync(dir)&&fs.statSync(dir).isDirectory()?fs.readdirSync(dir):[]);
+  if(!dirEntries.get(dir).includes(part))return false;
+  dir=path.join(dir,part);
+ }
+ return true;
+}
 function targetFile(u) {
  const pathname=decodeURIComponent(new URL(u,ORIGIN).pathname);
  let file=path.resolve(ROOT,'.'+pathname);
@@ -18,7 +28,7 @@ function targetFile(u) {
  return file;
 }
 async function get(url,body=true) {
- if(!live){const f=targetFile(url);return fs.existsSync(f)&&fs.statSync(f).isFile()?{status:200,text:body?fs.readFileSync(f,'utf8'):'',url}:{status:404,text:'',url};}
+ if(!live){const f=targetFile(url);return fs.existsSync(f)&&fs.statSync(f).isFile()&&exactCase(f)?{status:200,text:body?fs.readFileSync(f,'utf8'):'',url}:{status:404,text:'',url};}
  try{const r=await fetch(url,{signal:AbortSignal.timeout(20000)});return {status:r.status,text:body?await r.text():'',url:r.url};}catch(e){return {status:0,text:e.message,url};}
 }
 function tree(html){const nodes=[];function visit(n){nodes.push(n);(n.childNodes||[]).forEach(visit);}visit(parse(html));return nodes;}
