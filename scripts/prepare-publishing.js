@@ -103,6 +103,7 @@ write(path.join(ROOT,'js/canonical-links.js'),runtime);
 for(const file of walk(ROOT)) {
  let html=read(file); if(html.includes(MARKER)) continue;
  const relative=path.relative(ROOT,file).replace(/\\/g,'/');
+ if(!html.includes('/js/image-system.js')&&!/<title[^>]*>\s*Redirecting/i.test(html))html=html.replace(/<\/head>/i,'<script defer src="/js/image-system.js?v=2026100606"></script>\n</head>');
  html=html.replace(/Kingshot gift codes, Kingshot coupon codes, Kingshot top up, Kingshot redeem guide, Kingshot codes, Kingshot coupon, KingshotData/g, 'Kingshot data, heroes, buildings, pets, calculators, guides, gift codes, KingshotData');
  html=html.replace(/footer-tools\.js\?v=[^"'\s<>]+/g, 'footer-tools.js?v=2026100602');
  html=html.replace(/canonical-links\.js\?v=[^"'\s<>]+/g, 'canonical-links.js?v=2026100603');

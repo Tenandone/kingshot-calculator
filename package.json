@@ -8,7 +8,7 @@
     "generate:routes": "node scripts/generate-static-routes.js",
     "prebuild": "npm run sitemap",
     "build": "vite build",
-    "sitemap": "node scripts/apply-lootbar-state.js --restore && npm run generate:routes && node scripts/prepare-publishing.js && node scripts/apply-lootbar-state.js && node scripts/generate-sitemap.js && node scripts/generate-catalog.js",
+    "sitemap": "node scripts/apply-lootbar-state.js --restore && npm run generate:routes && node scripts/prepare-publishing.js && node scripts/apply-lootbar-state.js && node scripts/generate-sitemap.js && node scripts/generate-catalog.js && node scripts/generate-image-manifest.js",
     "coupons:update": "node scripts/coupons/update-coupons.js --write",
     "coupons:check": "node scripts/coupons/update-coupons.js",
     "coupons:test": "node scripts/coupons/test-coupons.js",
@@ -29,6 +29,7 @@
   },
   "homepage": "https://tenandone.github.io/kingshot-calculator/",
   "devDependencies": {
+    "image-size": "^2.0.4",
     "parse5": "^8.0.1",
     "vite": "^7.3.1"
   }

@@ -1,0 +1,7 @@
+(function(){
+ 'use strict';if(window.__kdImages)return;window.__kdImages=true;
+ let manifest={};
+ function patch(root){const images=root.matches?.('img')?[root]:Array.from(root.querySelectorAll?.('img')||[]);for(const img of images){let key;try{key=new URL(img.getAttribute('src'),location.href).pathname;}catch(_){continue;}const meta=manifest[key];if(meta&&(!img.hasAttribute('width')||!img.hasAttribute('height'))){const w=Number(img.getAttribute('width')),h=Number(img.getAttribute('height'));img.setAttribute('width',w|| (h?Math.round(h*meta.width/meta.height):meta.width));img.setAttribute('height',h|| (w?Math.round(w*meta.height/meta.width):meta.height));img.dataset.kdIntrinsic='';}if(!img.hasAttribute('decoding'))img.decoding='async';if(!img.hasAttribute('loading')&&img.getBoundingClientRect().top>innerHeight)img.loading='lazy';}}
+ function start(){const style=document.createElement('style');style.textContent=':where(img[data-kd-intrinsic]){max-width:100%;height:auto}';document.head.appendChild(style);fetch('/data/image-manifest.json?v=2026100606').then(r=>r.ok?r.json():{}).then(data=>{manifest=data;patch(document);new MutationObserver(rs=>rs.forEach(r=>r.addedNodes.forEach(n=>{if(n.nodeType===1)patch(n);}))).observe(document.body,{childList:true,subtree:true});}).catch(()=>{});}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();

@@ -11,7 +11,7 @@
  function search(entries,q){const terms=normalize(q).split(' ').filter(Boolean);if(!terms.length)return [];return entries.map(e=>{const title=normalize(e.title+' '+(e.aliases||[]).join(' '));const body=normalize(title+' '+e.description+' '+e.category);return {e,score:terms.every(t=>body.includes(t))?terms.reduce((n,t)=>n+(title.startsWith(t)?8:title.includes(t)?4:1),0):0};}).filter(r=>r.score).sort((a,b)=>b.score-a.score||a.e.title.localeCompare(b.e.title)).map(r=>r.e);}
  function lang(){const p=location.pathname.match(/^\/(en|ja|zh-tw)\//i);return p?p[1].toLowerCase():'ko';}
  const promises={};
- function catalog(l){return promises[l]||(promises[l]=fetch('/data/catalog/'+l+'.json?v=2026100604').then(r=>{if(!r.ok)throw Error('Search index unavailable');return r.json();}).catch(e=>{delete promises[l];throw e;}));}
+ function catalog(l){return promises[l]||(promises[l]=fetch('/data/catalog/'+l+'.json?v=2026100606').then(r=>{if(!r.ok)throw Error('Search index unavailable');return r.json();}).catch(e=>{delete promises[l];throw e;}));}
  function card(e,labels){return '<a class="hub-card" href="'+esc(e.url)+'">'+(e.image?'<img src="'+esc(e.image)+'" alt="" width="64" height="64" loading="lazy" decoding="async">':'<span class="hub-mark" aria-hidden="true">↗</span>')+'<span><small>'+esc(labels.categories[e.category])+'</small><strong>'+esc(e.title)+'</strong><span>'+esc(e.description)+'</span></span></a>';}
  async function render(container){const l=lang(),c=COPY[l],prefix=l==='ko'?'':'/'+l;const entries=await catalog(l);if(!container.isConnected)return;
  const tools=entries.filter(e=>e.category==='tools'&&/\/calc-/.test(e.url));const groups=['heroes','buildings','research','gear','pets','masters','items','events'];
