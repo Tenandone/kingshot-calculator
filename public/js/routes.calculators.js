@@ -263,10 +263,10 @@
     el.__calcRenderToken = token;
     function isAlive() {
       if (el.__calcRenderToken !== token) return false;
-      var path = location.pathname || '';
+      var path = (location.pathname || '').replace(/^\/(?:ko|en|ja|zh-tw)(?=\/)/i, '');
       for (var i=0;i<validPaths.length;i++){
         var p = validPaths[i];
-        if (path.indexOf(p) === 0) return true;
+        if (path === p || path === p + '/') return true;
       }
       return false;
     }
