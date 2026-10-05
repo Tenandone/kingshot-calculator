@@ -477,14 +477,14 @@ function heroPage(hero, lang, dictionary, heroes) {
   }
 
   const related = heroes
-    .filter(item => item.slug !== hero.slug && item.generation === hero.generation)
+    .filter(item => hero.generation != null && item.slug !== hero.slug && item.generation === hero.generation)
     .map(item => translated(item.title, dictionary, item.name || item.slug));
   const generationLabel = lang.code === 'ko' ? '세대' : lang.code === 'ja' ? '世代' : lang.code === 'zh-TW' ? '世代' : 'Generation';
   const sourceLabel = lang.code === 'ko' ? '획득처' : lang.code === 'ja' ? '入手方法' : lang.code === 'zh-TW' ? '取得方式' : 'Acquisition';
   const skillsLabel = lang.code === 'ko' ? '주요 스킬' : lang.code === 'ja' ? '主要スキル' : lang.code === 'zh-TW' ? '主要技能' : 'Key Skills';
   const relatedLabel = lang.code === 'ko' ? '같은 세대 영웅' : lang.code === 'ja' ? '同世代の英雄' : lang.code === 'zh-TW' ? '同世代英雄' : 'Heroes from the same generation';
-  const description = truncate([summary, generationLabel + ' ' + hero.generation, unit, sources.join(', ')].filter(Boolean).join(' · '), 155);
-  const detailItems = [generationLabel + ' ' + hero.generation, unit].filter(Boolean);
+  const description = truncate([summary, (hero.generation == null ? '' : generationLabel + ' ' + hero.generation), unit, sources.join(', ')].filter(Boolean).join(' · '), 155);
+  const detailItems = [(hero.generation == null ? '' : generationLabel + ' ' + hero.generation), unit].filter(Boolean);
 
   let body = '';
   if (hero.image) body += '<img src="' + escapeHtml(hero.image) + '" alt="' + escapeHtml(name) + '" width="220" height="220" loading="eager">';

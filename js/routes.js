@@ -533,6 +533,8 @@
 
           if (isStale(token)) return;
 
+          if (window.KD_HUB) { await window.KD_HUB.render(el); focusMain(el); return; }
+
           var cards = [
             { href:'/buildings',  img:'/img/home/saulchar-card.webp',  t:'home.card.buildings.title',   d:'home.card.buildings.desc' },
             { href:'/heroes',     img:'/img/home/helgachar-card.webp', t:'home.card.heroes.title',      d:'home.card.heroes.desc' },
