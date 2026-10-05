@@ -71,6 +71,7 @@
     lang: 'ko',
     messages: DEFAULT_I18N,
     data: DEFAULT_DATA,
+    ready: false,
     root: null
   };
 
@@ -888,6 +889,7 @@
   }
 
   function rerender(root, data) {
+    if(!state.ready){showEmpty(root,getMessage('messages.loadError'));return;}
     var form = readForm(root);
     var error = validateForm(form);
 
@@ -1045,12 +1047,12 @@
     injectStyles();
     hidePageHeaderNav();
 
-    Promise.all([
-      loadI18n(opts),
-      loadCalculatorData(opts).catch(function () {
-        return DEFAULT_DATA;
-      })
-    ]).then(function (results) {
+    state.ready=false;
+    return Promise.all([loadI18n(opts),loadCalculatorData(opts)]).then(function (results) {
+      if(!root.isConnected)return;
+      var tables=results[1]&&results[1].heroGear&&results[1].heroGear.upgradeTables;
+      if(!tables||!Array.isArray(tables.enhancement)||!tables.enhancement.length||!Array.isArray(tables.mastery)||!tables.mastery.length)throw new Error('Hero gear data unavailable');
+      state.ready=true;
       state.messages = results[0] || DEFAULT_I18N;
       state.data = results[1] || DEFAULT_DATA;
 
@@ -1059,12 +1061,15 @@
       mountCalculator(root);
       rerender(root, state.data);
     }).catch(function () {
+      if(!root.isConnected)return;
+      state.ready=false;
       state.messages = DEFAULT_I18N;
       state.data = DEFAULT_DATA;
       updatePageMeta();
       updateBreadcrumbs();
       mountCalculator(root);
       showEmpty(root, getMessage('messages.loadError'));
+      root.querySelectorAll('input,select,button').forEach(function(el){el.disabled=true;});
     });
   }
 

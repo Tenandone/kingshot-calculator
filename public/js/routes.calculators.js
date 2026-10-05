@@ -733,7 +733,7 @@ routes['/calc-hero-gear']={title:'KingShot Hero Gear Calculator',render:async fu
  await loadScriptCandidates(['/js/hero-gear-calculator.js'],loadScriptOnce);
  if(!guard.isAlive())return;
  if(typeof window.initHeroGearCalculator!=='function')throw new Error('Hero gear calculator unavailable');
- window.initHeroGearCalculator({root:'#hero-gear-calculator-root',lang:(window.KD_HUB?window.KD_HUB.lang():'ko')==='zh-tw'?'zh-TW':(window.KD_HUB?window.KD_HUB.lang():'ko')});
+ await window.initHeroGearCalculator({root:'#hero-gear-calculator-root',lang:(window.KD_HUB?window.KD_HUB.lang():'ko')==='zh-tw'?'zh-TW':(window.KD_HUB?window.KD_HUB.lang():'ko')});
 }};
 return routes;
 };
