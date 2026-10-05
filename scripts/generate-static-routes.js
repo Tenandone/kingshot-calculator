@@ -55,9 +55,9 @@ const COPY = {
   en: {
     '/': ['Kingshot Data: Heroes, Calculators, Guides & Gift Codes', 'Explore Kingshot heroes, masters, buildings, calculators, gift codes, upgrade data, and practical guides in one place.', 'Kingshot Data and Strategy Guides'],
     '/heroes': ['Kingshot Heroes', 'Browse Kingshot heroes by generation, unit type, skills, and acquisition source.', 'Kingshot Heroes'],
-    '/events': ['Kingshot Events', 'Browse cross-verified Kingshot event duration, recurrence, unlock conditions, and related game systems.', 'Kingshot Events'],
-    '/research': ['Kingshot Research Data', 'Browse cross-verified Academy and Advanced War Academy research names, branches, and maximum levels.', 'Kingshot Research Data'],
-    '/items': ['Kingshot Items Database', 'Browse verified uses and acquisition routes for key Kingshot resources, hero materials, gear materials, and transfer items.', 'Kingshot Items Database'],
+    '/events': ['Kingshot Events', 'Browse reference Kingshot event duration, recurrence, unlock conditions, and related game systems.', 'Kingshot Events'],
+    '/research': ['Kingshot Research Data', 'Browse reference Academy and Advanced War Academy research names, branches, and maximum levels.', 'Kingshot Research Data'],
+    '/items': ['Kingshot Items Database', 'Browse uses and acquisition routes for key Kingshot resources, hero materials, gear materials, and transfer items.', 'Kingshot Items Database'],
     '/calculator': ['Kingshot Calculators', 'Calculate building, troop, pet, Governor Gear, and charm upgrade requirements.', 'Kingshot Calculators'],
     '/calc-building': ['Kingshot Building Calculator', 'Calculate resources and time required for building upgrades.', 'Building Calculator'],
     '/calc-gear': ['Kingshot Governor Gear Calculator', 'Calculate materials required to upgrade Governor Gear.', 'Governor Gear Calculator'],

@@ -76,6 +76,8 @@ const urls = new Set();
 const explicitLanguages = new Map();
 
 for (const route of getStaticRoutes()) {
+  const html = fs.readFileSync(route.file, "utf8");
+  if (!require("./public-index-policy.json").paths.includes(new URL(route.url).pathname) || /name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) continue;
   urls.add(route.url);
   explicitLanguages.set(route.url, route.lang.code);
 }
@@ -86,7 +88,7 @@ for (const lang of LANGS) {
     const html = fs.readFileSync(file, 'utf8');
     if (/<title[^>]*>\s*Redirecting/i.test(html) || /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) continue;
     const canonical = normalizeUrl(getCanonical(html));
-    if (canonical && languageFromUrl(canonical) && !canonical.includes('/tw/')) urls.add(canonical);
+    if (canonical && require("./public-index-policy.json").paths.includes(new URL(canonical).pathname) && languageFromUrl(canonical) && !canonical.includes('/tw/')) urls.add(canonical);
   }
 }
 

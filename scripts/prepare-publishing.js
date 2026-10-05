@@ -146,7 +146,7 @@ for(const [old,target] of Object.entries(aliases)) {
  }
  if(fs.existsSync(dest)&&!read(dest).includes(MARKER))continue;
  // GitHub Pages has no configurable HTTP redirects. Zero-second refresh is its static fallback.
- write(dest,`<!doctype html>\n${MARKER}\n<html><head><meta charset="utf-8"><title>Redirecting to KingshotData</title><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="${ORIGIN+target}"><meta http-equiv="refresh" content="0;url=${esc(target)}"></head><body><p>This page has moved.</p><a href="${esc(target)}">Continue to the requested KingshotData page</a></body></html>\n`);
+ write(dest,`<!doctype html>\n${MARKER}\n<html><head><meta charset="utf-8"><title>Redirecting to KingshotData</title><meta name="robots" content="noindex,follow"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="${ORIGIN+target}"><meta http-equiv="refresh" content="0;url=${esc(target)}"></head><body><p>This page has moved.</p><a href="${esc(target)}">Continue to the requested KingshotData page</a></body></html>\n`);
 }
 write(path.join(ROOT,'scripts/legacy-redirects.json'),JSON.stringify(aliases,null,2)+'\n');
 console.log('Prepared canonical links, shared policy footer and '+Object.keys(aliases).length+' legacy aliases. Ad serving stays disabled pending page review.');

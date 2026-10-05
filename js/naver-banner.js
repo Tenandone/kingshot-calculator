@@ -33,7 +33,7 @@
         return;
       }
 
-      mount.innerHTML = html;
+      mount.innerHTML = html.replace(/<head\b[^>]*>[\s\S]*?<\/head>/gi, '');
     }catch(_e){
       if (reqId !== bannerReqId) return;
       mount.innerHTML = '';

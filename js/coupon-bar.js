@@ -29,7 +29,10 @@
     if (!mount) return;
 
     try{
-      mount.innerHTML = await fetchText(SRC);
+      // Source fragments carry their own noindex policy. Never mount document SEO metadata.
+      var fragment = await fetchText(SRC);
+      fragment = fragment.replace(/<head\b[^>]*>[\s\S]*?<\/head>/gi, '');
+      mount.innerHTML = fragment;
 
       var root = mount.querySelector('[data-kd-couponbar="1"]') || mount.querySelector('.kd-couponbar');
       if (!root) {
