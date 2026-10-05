@@ -1325,6 +1325,7 @@ const totalRowValues = {
   design: totalDesign
 };
 
+window.dispatchEvent(new CustomEvent('kd:calculated',{detail:{kind:'charm',start:fromIdx,target:toIdx,resources:[{key:'manual',label:getResourceLabel('manual'),required:totalManual},{key:'design',label:getResourceLabel('design'),required:totalDesign}]}}));
 renderDesktopRow(tb, T('calcCharm.table.total', '합계'), totalMetricDefs, totalRowValues, true);
 renderMobileRow(mobileDetailWrap, T('calcCharm.table.total', '합계'), totalMetricDefs, totalRowValues, true);
 

@@ -475,6 +475,7 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
     var totalSec = days * 86400;
     var n = t1 > 0 ? Math.floor(totalSec / t1) : 0;
     var tN = t1 * n;
+    window.dispatchEvent(new CustomEvent('kd:calculated',{detail:{kind:'training',resources:[],timeSec:tN,troops:n}}));
 
     var icons = getMetricIcons();
 

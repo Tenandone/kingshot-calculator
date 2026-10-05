@@ -20,6 +20,7 @@ const GENERIC_ROUTES = [
   '/items',
   '/calculator',
   '/calc-building',
+  '/calc-hero-gear',
   '/calc-gear',
   '/calc-charm',
   '/calc-training',

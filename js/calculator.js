@@ -1358,7 +1358,7 @@
       const ul = document.getElementById('prereq-list');
 
       if (start > 0 && to > 0 && to > start) {
-        renderPrereqBox(dataKey, start, to);
+      renderPrereqBox(dataKey, start, to);
       } else if (ul) {
         ul.innerHTML = '';
       }
@@ -1480,6 +1480,7 @@
         preRaw
       );
 
+        window.dispatchEvent(new CustomEvent('kd:calculated',{detail:{kind:'building',entity:dataKey,start:start,target:to,timeSec:totalsAfterSaul.timeSec,resources:['bread','wood','stone','iron','truegold','tempered_truegold'].map(key=>({key:key,label:t('calc.table.col.'+key,key),required:Number(totalsAfterSaul[key]||0)}))}}));
       renderPrereqBox(dataKey, start, to);
     });
 

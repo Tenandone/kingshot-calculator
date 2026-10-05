@@ -709,6 +709,7 @@
         }
       });
     }).then(function(result){
+      window.dispatchEvent(new CustomEvent('kd:page-ready'));
       try {
         if (window.KD_SEO_SYNC && typeof window.KD_SEO_SYNC === 'function') {
           window.KD_SEO_SYNC();
@@ -854,7 +855,7 @@
 
   function isStaticSpaRoute(pathname) {
     return pathname === '/' ||
-      /^\/(?:heroes|events|research|items|calculator|calc-building|calc-gear|calc-charm|calc-training|calc-pet|waracademy|about|privacy)(?:\/|$)/i.test(pathname) ||
+      /^\/(?:heroes|events|research|items|calculator|calc-building|calc-hero-gear|calc-gear|calc-charm|calc-training|calc-pet|waracademy|about|privacy)(?:\/|$)/i.test(pathname) ||
       /^\/hero\/[^/?#]+\/?$/i.test(pathname);
   }
 
@@ -1017,7 +1018,7 @@
 
   var proxyRoutes = (function(){
     var map = {};
-    var keys = ['/calculator','/calc-building','/calc-gear','/calc-charm','/calc-training','/calc-pet'];
+    var keys = ['/calculator','/calc-building','/calc-hero-gear','/calc-gear','/calc-charm','/calc-training','/calc-pet'];
 
     function makeProxyRoute(key) {
       return {

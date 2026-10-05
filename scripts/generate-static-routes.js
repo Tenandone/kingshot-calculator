@@ -39,6 +39,7 @@ const COPY = {
     '/events': ['킹샷 이벤트 데이터', '킹샷 주요 이벤트의 진행 기간, 반복 주기, 해금 조건과 관련 콘텐츠를 교차검증된 데이터로 확인하세요.', '킹샷 이벤트 데이터'],
     '/research': ['킹샷 연구 데이터', '아카데미와 고급 전쟁아카데미의 연구 이름, 분류, 최대 레벨을 교차 검증한 목록입니다.', '킹샷 연구 데이터'],
     '/items': ['킹샷 아이템 데이터베이스', '순금, 영웅 조각, 장비 재료와 왕국 이전권 등 주요 아이템의 용도와 획득 경로를 확인하세요.', '킹샷 아이템 데이터베이스'],
+    '/calc-hero-gear': ['KingShot Hero Gear Calculator', 'Calculate the upgrade materials for your selected hero equipment.', 'Hero Gear Calculator'],
     '/calculator': ['킹샷 계산기', '건물, 병력, 펫, 영주 장비와 보석에 필요한 성장 재료를 계산하세요.', '킹샷 계산기'],
     '/calc-building': ['킹샷 건물 계산기', '건물 업그레이드에 필요한 자원과 시간을 계산하세요.', '건물 계산기'],
     '/calc-gear': ['킹샷 영주 장비 계산기', '영주 장비 강화에 필요한 재료를 계산하세요.', '영주 장비 계산기'],
@@ -107,6 +108,10 @@ const COPY = {
   }
 };
 
+COPY.en['/calc-hero-gear']=['KingShot Hero Gear Calculator','Calculate the upgrade materials for your selected hero equipment.','Hero Gear Calculator'];
+COPY.ko['/calc-hero-gear']=['킹샷 영웅 장비 계산기','영웅 장비 강화·단련·마스터리 구간별 필요 재료를 계산하세요.','영웅 장비 계산기'];
+COPY.ja['/calc-hero-gear']=['Kingshot 英雄装備計算機','英雄装備の強化・鍛錬・マスタリーに必要な素材を計算します。','英雄装備計算機'];
+COPY['zh-TW']['/calc-hero-gear']=['Kingshot 英雄裝備計算器','計算英雄裝備強化、淬鍊與精通所需材料。','英雄裝備計算器'];
 function escapeHtml(value) {
   return String(value == null ? '' : value)
     .replace(/&/g, '&amp;')

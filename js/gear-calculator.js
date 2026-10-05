@@ -1436,6 +1436,7 @@
       ]));
 
       updateCompactKPI(total);
+      window.dispatchEvent(new CustomEvent('kd:calculated',{detail:{kind:'gear',start:Number(fromSel.value),target:Number(toSel.value),resources:['satin','thread','sketch'].map(key=>({key:key,label:getResourceLabel(key),required:total[key]}))}}));
 
       detailWrap.style.display = '';
       mobileDetailWrap.style.display = '';

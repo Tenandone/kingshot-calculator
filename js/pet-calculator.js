@@ -553,6 +553,7 @@
     }
 
     const totals = calcTotals(rows, fromIdx, toIdx);
+    window.dispatchEvent(new CustomEvent('kd:calculated',{detail:{kind:'pet',start:fromIdx,target:toIdx,resources:Object.keys(totals).map(key=>({key:key,label:getResourceLabel(key),required:totals[key]}))}}));
 
     S_els('pc-need-food').textContent = fmt(totals.food);
     S_els('pc-need-notebook').textContent = fmt(totals.notebook);
