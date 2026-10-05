@@ -28,12 +28,16 @@ const exactPaths = new Map(walk(ROOT).map(file => {
 const folders=['ko','en','ja','zh-tw'];
 // The database menu already has these five published articles. Restore its hub.
 for(const lang of LANGS) {
-  const links=fs.readdirSync(path.join(ROOT,lang.folder,'database')).filter(x=>x.endsWith('.html'));
+  const links=fs.readdirSync(path.join(ROOT,lang.folder,'database')).filter(x=>x.endsWith('.html')&&x!=='index.html');
   const labels={ko:['성장 데이터','영주 장비·보석과 영웅 성장 재료를 확인할 수 있습니다. 필요한 항목을 선택해 단계별 자료를 확인하세요.'],en:['Growth data','Choose a resource or equipment system to review its published upgrade data.'],ja:['成長データ','装備や成長素材を選び、公開されている段階別データを確認できます。'],'zh-TW':['成長資料','選擇裝備或成長材料，查看已公開的各階段資料。']}[lang.code];
   const canonical=`/${lang.folder}/database/`;
+  const prefix=lang.folder==='ko'?'':'/'+lang.folder;
+  const sections={ko:['영웅','건물','연구','전쟁아카데미','펫','거장','아이템','계산기'],en:['Heroes','Buildings','Research','War Academy','Pets','Masters','Items','Calculators'],ja:['英雄','建物','研究','戦争学院','ペット','巨匠','アイテム','計算機'],'zh-TW':['英雄','建築','研究','戰爭學院','寵物','巨匠','道具','計算器']}[lang.code];
+  const paths=[prefix+'/heroes/','/'+lang.folder+'/buildings/',prefix+'/research/',prefix+'/waracademy/','/'+lang.folder+'/pet/','/'+lang.folder+'/masters/',prefix+'/items/',prefix+'/calculator/'];
+  const navigation=paths.map((p,i)=>`<li><a href="${p}">${sections[i]}</a></li>`).join('');
   const items=links.map(name=>{const h=read(path.join(ROOT,lang.folder,'database',name));const title=(h.match(/<title[^>]*>([\s\S]*?)<\/title>/i)||[])[1]||name;return `<li><a href="${canonical}${name}">${title}</a></li>`;}).join('\n');
   const metadata=`<meta property="og:title" content="${labels[0]}"><meta property="og:description" content="${labels[1]}"><meta property="og:url" content="${ORIGIN+canonical}"><meta property="og:type" content="website"><meta property="og:image" content="${ORIGIN}/img/kingshotdata-og-v5.png"><script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@type':'CollectionPage',name:labels[0],url:ORIGIN+canonical})}</script>`;
-  write(fileFor(canonical),`<!doctype html><html lang="${lang.htmlLang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${labels[0]} | KingshotData ${lang.code}</title><meta name="description" content="${labels[1]}"><link rel="canonical" href="${ORIGIN+canonical}">${metadata}<link rel="stylesheet" href="/css/common.css"></head><body><main style="max-width:860px;margin:auto;padding:24px"><h1>${labels[0]}</h1><p>${labels[1]}</p><ul>${items}</ul></main></body></html>`);
+  write(fileFor(canonical),`<!doctype html><html lang="${lang.htmlLang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${labels[0]} | KingshotData ${lang.code}</title><meta name="description" content="${labels[1]}"><link rel="canonical" href="${ORIGIN+canonical}">${metadata}<link rel="stylesheet" href="/css/common.css"></head><body><main style="max-width:860px;margin:auto;padding:24px"><h1>${labels[0]}</h1><p>${labels[1]}</p><nav aria-label="Data"><ul>${navigation}</ul></nav><h2>${labels[0]}</h2><ul>${items}</ul></main></body></html>`);
 }
 for(const folder of folders) {
   for(const section of ['pet','buildings','guides','database']) {

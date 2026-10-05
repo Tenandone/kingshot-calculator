@@ -44,7 +44,7 @@ const COPY = {
     '/calc-building': ['킹샷 건물 계산기', '건물 업그레이드에 필요한 자원과 시간을 계산하세요.', '건물 계산기'],
     '/calc-gear': ['킹샷 영주 장비 계산기', '영주 장비 강화에 필요한 재료를 계산하세요.', '영주 장비 계산기'],
     '/calc-charm': ['킹샷 영주 보석 계산기', '영주 보석 강화에 필요한 재료를 계산하세요.', '영주 보석 계산기'],
-    '/calc-training': ['킹샷 병력 훈련 계산기', '병력 훈련과 승급에 필요한 자원과 시간을 계산하세요.', '병력 훈련 계산기'],
+    '/calc-training': ['킹샷 병력 훈련 계산기', '가속 시간으로 가능한 병력 수와 훈련·승급 점수를 계산하세요.', '병력 훈련 계산기'],
     '/calc-pet': ['킹샷 펫 계산기', '펫 성장과 강화에 필요한 재료를 계산하세요.', '펫 계산기'],
     '/waracademy': ['킹샷 전쟁아카데미 연구', '11티어 전쟁아카데미 연구 조건, 비용과 전투 보너스를 확인하세요.', '전쟁아카데미 연구'],
     '/about': ['킹샷데이터코리아 소개', '킹샷데이터코리아의 운영 목적, 데이터 출처와 팬사이트 정책을 안내합니다.', '킹샷데이터코리아 소개'],
@@ -62,7 +62,7 @@ const COPY = {
     '/calc-building': ['Kingshot Building Calculator', 'Calculate resources and time required for building upgrades.', 'Building Calculator'],
     '/calc-gear': ['Kingshot Governor Gear Calculator', 'Calculate materials required to upgrade Governor Gear.', 'Governor Gear Calculator'],
     '/calc-charm': ['Kingshot Governor Charm Calculator', 'Calculate materials required to upgrade Governor Charms.', 'Governor Charm Calculator'],
-    '/calc-training': ['Kingshot Troop Training Calculator', 'Calculate resources and time for troop training and promotion.', 'Troop Training Calculator'],
+    '/calc-training': ['Kingshot Troop Training Calculator', 'Calculate troop counts and event points from training or promotion time.', 'Troop Training Calculator'],
     '/calc-pet': ['Kingshot Pet Calculator', 'Calculate materials required for pet growth and upgrades.', 'Pet Calculator'],
     '/waracademy': ['Kingshot War Academy Research', 'Review T11 War Academy research requirements, costs, and combat bonuses.', 'War Academy Research'],
     '/about': ['About KingshotData', 'Learn about KingshotData, its data sources, and the unofficial fan-site policy.', 'About KingshotData'],
@@ -80,7 +80,7 @@ const COPY = {
     '/calc-building': ['Kingshot 建物計算機', '建物強化に必要な資源と時間を計算できます。', '建物計算機'],
     '/calc-gear': ['Kingshot 領主装備計算機', '領主装備の強化に必要な素材を計算できます。', '領主装備計算機'],
     '/calc-charm': ['Kingshot 領主宝石計算機', '領主宝石の強化に必要な素材を計算できます。', '領主宝石計算機'],
-    '/calc-training': ['Kingshot 兵士訓練計算機', '兵士の訓練と昇格に必要な資源と時間を計算できます。', '兵士訓練計算機'],
+    '/calc-training': ['Kingshot 兵士訓練計算機', '訓練・昇格の時間から兵士数とイベントポイントを計算できます。', '兵士訓練計算機'],
     '/calc-pet': ['Kingshot ペット計算機', 'ペットの成長と強化に必要な素材を計算できます。', 'ペット計算機'],
     '/waracademy': ['Kingshot 戦争学院研究', 'T11研究の条件、コスト、戦闘ボーナスを確認できます。', '戦争学院研究'],
     '/about': ['KingshotDataについて', 'KingshotDataの目的、情報源、非公式ファンサイト方針を案内します。', 'KingshotDataについて'],
@@ -98,7 +98,7 @@ const COPY = {
     '/calc-building': ['Kingshot 建築計算器', '計算建築升級所需的資源與時間。', '建築計算器'],
     '/calc-gear': ['Kingshot 領主裝備計算器', '計算領主裝備升級所需材料。', '領主裝備計算器'],
     '/calc-charm': ['Kingshot 領主寶石計算器', '計算領主寶石升級所需材料。', '領主寶石計算器'],
-    '/calc-training': ['Kingshot 部隊訓練計算器', '計算部隊訓練與晉升所需的資源與時間。', '部隊訓練計算器'],
+    '/calc-training': ['Kingshot 部隊訓練計算器', '依訓練或晉升時間計算兵力與活動分數。', '部隊訓練計算器'],
     '/calc-pet': ['Kingshot 寵物計算器', '計算寵物成長與升級所需材料。', '寵物計算器'],
     '/waracademy': ['Kingshot 戰爭學院研究', '查看 T11 研究條件、成本與戰鬥加成。', '戰爭學院研究'],
     '/about': ['關於 KingshotData', '介紹 KingshotData 的目標、資料來源與非官方粉絲網站政策。', '關於 KingshotData'],
@@ -240,7 +240,7 @@ function genericPage(routePath, lang, dictionary, heroes, events, eventDictionar
     body += supplement.map(value => '<p>' + escapeHtml(value) + '</p>').join('');
     const relatedLabel = lang.code === 'ko' ? '관련 계산기' : lang.code === 'ja' ? '関連計算機' : lang.code === 'zh-TW' ? '相關計算器' : 'Related calculators';
     body += '<h2>' + escapeHtml(relatedLabel) + '</h2><ul>';
-    body += ['/calc-building', '/calc-gear', '/calc-charm', '/calc-training', '/calc-pet']
+    body += ['/calc-building', '/calc-gear', '/calc-charm', '/calc-training', '/calc-pet', '/calc-hero-gear']
       .filter(pathValue => pathValue !== routePath)
       .map(pathValue => '<li><a href="' + absoluteUrl(pathValue, lang) + '">' + escapeHtml((COPY[lang.code][pathValue] || COPY.en[pathValue])[2]) + '</a></li>').join('');
     body += '</ul>';
@@ -483,7 +483,7 @@ function heroPage(hero, lang, dictionary, heroes) {
 
   const related = heroes
     .filter(item => hero.generation != null && item.slug !== hero.slug && item.generation === hero.generation)
-    .map(item => translated(item.title, dictionary, item.name || item.slug));
+    .map(item => '<a href="' + absoluteUrl('/hero/'+item.slug,lang) + '">' + escapeHtml(translated(item.title,dictionary,item.name||item.slug)) + '</a>');
   const generationLabel = lang.code === 'ko' ? '세대' : lang.code === 'ja' ? '世代' : lang.code === 'zh-TW' ? '世代' : 'Generation';
   const sourceLabel = lang.code === 'ko' ? '획득처' : lang.code === 'ja' ? '入手方法' : lang.code === 'zh-TW' ? '取得方式' : 'Acquisition';
   const skillsLabel = lang.code === 'ko' ? '주요 스킬' : lang.code === 'ja' ? '主要スキル' : lang.code === 'zh-TW' ? '主要技能' : 'Key Skills';
@@ -495,13 +495,14 @@ function heroPage(hero, lang, dictionary, heroes) {
   if (hero.image) body += '<img src="' + escapeHtml(hero.image) + '" alt="' + escapeHtml(name) + '" width="220" height="220" loading="eager">';
   if (subtitle) body += '<p class="ssg-subtitle">' + escapeHtml(subtitle) + '</p>';
   body += '<p>' + escapeHtml(summary) + '</p>';
-  body += '<dl><dt>' + escapeHtml(generationLabel) + '</dt><dd>' + escapeHtml(String(hero.generation || '')) + '</dd>';
+  body += '<dl>';
+  if(hero.generation!=null)body += '<dt>'+escapeHtml(generationLabel)+'</dt><dd>'+escapeHtml(String(hero.generation))+'</dd>';
   if (unit) body += '<dt>' + escapeHtml(lang.code === 'ko' ? '병종' : lang.code === 'ja' ? '兵種' : lang.code === 'zh-TW' ? '兵種' : 'Unit Type') + '</dt><dd>' + escapeHtml(unit) + '</dd>';
   body += '</dl>';
   if (sources.length) body += '<h2>' + escapeHtml(sourceLabel) + '</h2><ul>' + sources.map(value => '<li>' + escapeHtml(value) + '</li>').join('') + '</ul>';
   if (stats.length) body += '<h2>' + escapeHtml(lang.code === 'ko' ? '주요 능력치' : lang.code === 'ja' ? '主要能力値' : lang.code === 'zh-TW' ? '主要屬性' : 'Key Stats') + '</h2><ul>' + stats.map(value => '<li>' + escapeHtml(value) + '</li>').join('') + '</ul>';
   if (skills.length) body += '<h2>' + escapeHtml(skillsLabel) + '</h2><ul>' + skills.map(value => '<li>' + escapeHtml(value) + '</li>').join('') + '</ul>';
-  if (related.length) body += '<h2>' + escapeHtml(relatedLabel) + '</h2><p>' + related.map(escapeHtml).join(' · ') + '</p>';
+  if (related.length) body += '<h2>' + escapeHtml(relatedLabel) + '</h2><p>' + related.join(' · ') + '</p>';
 
   return {
     title: name + ' | ' + TITLE_SITE_NAME[lang.code],
