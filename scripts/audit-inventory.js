@@ -7,13 +7,15 @@ const attr=(n,k)=>(n.attrs||[]).find(a=>a.name===k)?.value||'';
 function nodes(n){return [n,...(n.childNodes||[]).flatMap(nodes)];}
 function text(n){if(['script','style','nav','footer','header'].includes(n.tagName))return '';return n.nodeName==='#text'?n.value:(n.childNodes||[]).map(text).join(' ');}
 function category(u){const p=new URL(u).pathname.replace(/^\/(ko|en|ja|zh-tw)(?=\/)/i,'');if(p==='/')return 'Home';if(/giftcode|coupon/.test(p))return 'Gift Codes';if(/calc/.test(p))return 'Calculators';if(/\/guides(?:\/|$)/.test(p))return 'Guides';if(/gear|charm/.test(p))return 'Gear';if(/\/database(?:\/|$)/.test(p))return 'Database';for(const [re,name] of [[/hero/,'Heroes'],[/building/,'Buildings'],[/research|waracademy/,'Research'],[/pet/,'Pets'],[/master/,'Masters'],[/alliance/,'Alliance'],[/events?/,'Events'],[/items?/,'Items'],[/database/,'Database'],[/guides?/,'Guides']])if(re.test(p))return name;return 'Other';}
-function localFile(u){let p=path.join(ROOT,new URL(u).pathname);if(fs.existsSync(p)&&fs.statSync(p).isDirectory())p=path.join(p,'index.html');if(!fs.existsSync(p)&&fs.existsSync(p+'.html'))p+='.html';return p;}
+function localFile(u){let p=path.join(ROOT,decodeURIComponent(new URL(u).pathname));if(fs.existsSync(p)&&fs.statSync(p).isDirectory())p=path.join(p,'index.html');if(!fs.existsSync(p)&&fs.existsSync(p+'.html'))p+='.html';return p;}
 async function get(u){if(!live){const p=localFile(u);return {status:fs.existsSync(p)?200:404,html:fs.existsSync(p)?fs.readFileSync(p,'utf8'):''};}try{let r=await fetch(u,{signal:AbortSignal.timeout(20000)});if(r.status>=500)r=await fetch(u,{signal:AbortSignal.timeout(20000)});return {status:r.status,html:await r.text()};}catch(e){return {status:0,html:'',error:e.message};}}
 (async()=>{
  fs.mkdirSync(out,{recursive:true});
  const xml=live?(await get(ORIGIN+'/sitemap.xml')).html:fs.readFileSync(path.join(ROOT,'sitemap.xml'),'utf8');
  const sitemap=new Set([...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]));
  const queue=[...sitemap];for(const lang of ['ko','en','ja','zh-tw'])for(const slug of ['topup-guide','topup-promotion'])queue.push(`${ORIGIN}/${lang}/guides/${slug}.html`);
+ function publicHtml(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){if(e.name.startsWith('.')||e.name.startsWith('_')||['node_modules','dist','scripts','reports'].includes(e.name))continue;const f=path.join(dir,e.name);if(e.isDirectory())publicHtml(f);else if(e.name.endsWith('.html'))queue.push(ORIGIN+'/'+path.relative(ROOT,f).replace(/\\/g,'/').replace(/index\.html$/,''));}}
+ publicHtml(ROOT);
  const seen=new Set(),rows=[];
  while(queue.length){const batch=[];while(queue.length&&batch.length<5){const u=queue.shift();if(seen.has(u))continue;seen.add(u);batch.push(u);}
  await Promise.all(batch.map(async url=>{const r=await get(url);const all=nodes(parse(r.html));const main=all.find(n=>n.tagName==='main')||all.find(n=>n.tagName==='body')||all[0];const content=text(main).replace(/\s+/g,' ').trim();const links=[];

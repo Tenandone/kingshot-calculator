@@ -107,8 +107,13 @@ write(path.join(ROOT,'js/canonical-links.js'),runtime);
 for(const file of walk(ROOT)) {
  let html=read(file); if(html.includes(MARKER)) continue;
  const relative=path.relative(ROOT,file).replace(/\\/g,'/');
+ if(/^(pages|templates)\//.test(relative)&&/<head\b/i.test(html)){html=html.replace(/<meta\s+name=["']robots["'][^>]*>/gi,'');html=html.replace(/<\/head>/i,'<meta name="robots" content="noindex,follow">\n</head>');}
+
+ html=html.replace(/<script\b[^>]*src=["'][^"']*(?:googletagmanager\.com\/gtag|\/js\/consent\.js)[^"']*["'][^>]*>[\s\S]*?<\/script>/gi,'');
+ html=html.replace(/<script\b(?![^>]*src=)[^>]*>[\s\S]*?<\/script>/gi,tag=>/gtag\(['"]config['"],\s*['"]G-TMGDGSEWW6/.test(tag)?'':tag);
+
  if(!/<title[^>]*>\s*Redirecting/i.test(html)){
-  for(const name of ['hub','hub-metrics','my-progress'])if(!html.includes('/js/'+name+'.js'))html=html.replace(/<\/head>/i,'<script defer src="/js/'+name+'.js?v=2026100608"></script>\n</head>');
+  for(const name of ['hub','hub-metrics','my-progress','privacy-controls'])if(!html.includes('/js/'+name+'.js'))html=html.replace(/<\/head>/i,'<script defer src="/js/'+name+'.js?v=2026100608"></script>\n</head>');
   if(!html.includes('/css/my-progress.css'))html=html.replace(/<\/head>/i,'<link rel="stylesheet" href="/css/my-progress.css?v=2026100608">\n</head>');
  }
  if(!html.includes('/js/image-system.js')&&!/<title[^>]*>\s*Redirecting/i.test(html))html=html.replace(/<\/head>/i,'<script defer src="/js/image-system.js?v=2026100606"></script>\n</head>');

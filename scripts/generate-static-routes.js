@@ -516,6 +516,7 @@ function heroPage(hero, lang, dictionary, heroes) {
 }
 
 function replaceHead(html, route, page) {
+  html=html.replace(/<meta\s+name="robots"[^>]*>/i,'<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">');
   const canonical = route.url;
   const alternates = routeAlternates(route.routePath);
   const xDefault = alternates.find(item => item.lang.code === 'en').href;
