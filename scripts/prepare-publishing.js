@@ -93,6 +93,9 @@ write(path.join(ROOT,'js/canonical-links.js'),runtime);
 for(const file of walk(ROOT)) {
  let html=read(file); if(html.includes(MARKER)) continue;
  const relative=path.relative(ROOT,file).replace(/\\/g,'/');
+ html=html.replace(/Kingshot gift codes, Kingshot coupon codes, Kingshot top up, Kingshot redeem guide, Kingshot codes, Kingshot coupon, KingshotData/g, 'Kingshot data, heroes, buildings, pets, calculators, guides, gift codes, KingshotData');
+ html=html.replace(/footer-tools\.js\?v=[^"'\s<>]+/g, 'footer-tools.js?v=2026100602');
+ if ((html.includes('footer-tools.js') || ['tools/coupon-countdown.html','pages/tools/landing.html'].includes(relative)) && !html.includes('/js/site-features.js')) html=html.replace(/<head\b[^>]*>/i, tag => tag+'\n<script src="/js/site-features.js?v=2026100601"></script>');
  const base=ORIGIN+'/'+relative.replace(/index\.html$/,'');
  // Work with HTML attributes (including literal markup in templates), not router identifiers.
  if(!relative.startsWith('templates/'))html=html.replace(/\bhref=(['"])([^'"]+)\1/g,(all,q,href)=>'href='+q+resolve(href,base)+q);

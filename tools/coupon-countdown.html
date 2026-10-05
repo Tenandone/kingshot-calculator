@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
+<script src="/js/site-features.js?v=2026100601"></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="color-scheme" content="dark" />
@@ -630,43 +631,9 @@
     <img class="mascot" src="/img/kingshotdata-logo.png" alt="Loading" />
   </div>
 
-  <div class="stickyBar">
-    <div class="sponsorPill" aria-label="Sponsor">
-      <span class="sponsorText" id="sTopText">킹샷 충전 20% 할인</span>
-      <a class="btnSave" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener">
-        <span class="zap">⚡</span>
-        <span id="sSaveNow">지금 할인받기</span>
-      </a>
-    </div>
-  </div>
+  <!-- lootbar-disabled:a1a80eb523832c85e5e849b9 -->
 
-  <div class="popback" id="popBack" aria-hidden="true">
-    <div class="pop" role="dialog" aria-modal="true" aria-label="Discount">
-      <button class="popClose" id="popClose" aria-label="Close">✕</button>
-
-      <div class="popCorner c1"><img src="/img/lootbar/1.webp" alt="" loading="lazy" decoding="async"></div>
-      <div class="popCorner c2"><img src="/img/lootbar/2.webp" alt="" loading="lazy" decoding="async"></div>
-      <div class="popCorner c3"><img src="/img/lootbar/3.webp" alt="" loading="lazy" decoding="async"></div>
-      <div class="popCorner c4"><img src="/img/lootbar/4.webp" alt="" loading="lazy" decoding="async"></div>
-
-      <div class="popCenter">
-        <div class="popBig" id="pBig">20% OFF</div>
-        <div class="popSub" id="pSub">첫 주문 할인</div>
-        <div class="popHint" id="pHint">힌트: 검색창에 <b>#s4qU</b> 를 입력하면 추가 보상이 있어요.</div>
-
-        <div class="popFine" id="pFine">
-          할인 충전 링크 접속 · 쿠폰 코드 입력 · 링크 즐겨찾기<br>
-          매달 1일 추첨 · 매달 15일 추가 쿠폰
-        </div>
-        <div class="popFineMini" id="pFineMini">이벤트 조건 충족 시</div>
-
-        <div class="popBtns">
-          <button class="popYes" id="popYes" type="button">예, 받을래요!</button>
-          <button class="popNo" id="popNo" type="button">할인 거절</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- lootbar-disabled:c8f1a9752c4a88fac33c77ac -->
 
   <div class="wrap">
     <div class="title">
@@ -684,13 +651,7 @@
       </div>
       <div class="metaLine" id="aLine"><span id="aLineK">만료 시각:</span> <b id="aWhen">—</b> <span class="soft" id="aTz">(GMT+9)</span></div>
 
-      <div class="midBanner">
-        <div class="promoSlimWrap">
-          <a class="promoSlimLink" href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener">
-            <img class="promoSlimImg" src="/img/lootbar.png" alt="킹샷 할인 충전 배너" loading="eager" decoding="async" />
-          </a>
-        </div>
-      </div>
+      <!-- lootbar-disabled:a14969f7738f1e0f5792309f -->
     </section>
 
     <section class="region">
@@ -722,25 +683,16 @@
       <div class="controls">
         <button class="btnSmall" id="btnShare" type="button">공유</button>
         <a class="btnSmall" id="btnRedeem" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener">교환하러가기</a>
-        <a class="btnSmall cta" id="btnGuide" href="/ko/guides/topup-guide.html" target="_blank" rel="noopener">할인 충전 가이드</a>
+        <!-- lootbar-disabled:94a995dc8646fbe5fc0ad751 -->
       </div>
 
-      <div class="iframeSection">
-        <div class="iframeCard">
-          <iframe
-            src="https://lootbar.gg/embed.html?game=king-shot-top-up&theme=dark&aff_short=ten"
-            title="Kingshot LootBar Top-up"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-          ></iframe>
-        </div>
-      </div>
+      <!-- lootbar-disabled:8bdfceb7a178751bf17fa9f2 -->
 
       <div class="footerLinks" aria-label="Footer links">
         <a href="/" data-link id="lnkHome">홈</a>
         <a href="/ko/guides/" data-link id="lnkGuides">가이드</a>
         <a href="/calculator" data-link id="lnkCalc">계산기</a>
-        <button class="footerAdBtn" id="footerAdBtn" type="button">광고보기</button>
+        <!-- lootbar-disabled:ea630464d50b19b32fcaeb76 -->
       </div>
     </section>
   </div>
@@ -1289,13 +1241,13 @@
     const popNo = document.getElementById("popNo");
 
     function openPopup(){
-      if(!popBack) return;
+      if(!window.KINGSHOT_FEATURES?.LOOTBAR_ENABLED || !popBack) return;
       popBack.style.display = "flex";
       popBack.setAttribute("aria-hidden","false");
       try{ document.body.style.overflow = "hidden"; }catch(_){}
     }
     function closePopup(){
-      if(!popBack) return;
+      if(!window.KINGSHOT_FEATURES?.LOOTBAR_ENABLED || !popBack) return;
       popBack.style.display = "none";
       popBack.setAttribute("aria-hidden","true");
       try{ document.body.style.overflow = ""; }catch(_){}

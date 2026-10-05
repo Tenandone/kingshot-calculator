@@ -1,0 +1,28 @@
+LootBar deactivation — 2026-10-06
+
+Single configuration: js/site-features.js, LOOTBAR_ENABLED: false.
+After changing the flag, run npm run sitemap and publish the repository root.
+GitHub Pages serves main:/ (not Vite dist).
+
+A: Four localized topup-promotion.html pages: noindex service-unavailable notices.
+B: Four localized topup-guide.html pages and pages/guides/topup-guide.html: same treatment.
+C: General guides, guide listings, coupon countdown, sample tool landing: promotional fragments suppressed; game information and gift-code tools retained.
+Shared footer: promotional DOM is created only when the feature flag is explicitly true.
+Coupon countdown: no promotional popup, sponsor banner, top-up guide CTA or iframe in served HTML.
+Homepage/About retain the existing unofficial data, calculator and guide positioning.
+Generic SEO keyword text changed from top-up to data/heroes/buildings/pets/calculators/guides.
+
+Original fragments and full promotional pages are preserved in _lootbar/source.json.
+The underscore directory is excluded by GitHub Pages/Jekyll; no .nojekyll is used.
+Do not replace the preserved source with publicly rendered templates or CSS-hidden promotions.
+The publishing pipeline restores archived fragments before regeneration, then applies the current feature state.
+To reactivate: change the single flag to true, run npm run sitemap, verify the restored service and deploy.
+Reactivation and disable round-trip tested: 525 URLs restored, then identical disabled output returned.
+
+Validation:
+node scripts/audit-lootbar.js: 699 HTML files checked, 9 nonempty noindex notices, 0 issues.
+node scripts/audit-publishing.js: 517 sitemap URLs, 619 page URLs, 541 internal links, 262 assets, 0 errors.
+npm run audit:seo: 0 errors, 0 warnings.
+npm run coupons:test: passed.
+Browser: home/header/footer, coupon countdown, building calculator (TC1 to TC2 = 180 bread/6 seconds), mobile drawer and pet navigation.
+Production deployment and live verification are reported separately; local pass is not a claim of production completion.

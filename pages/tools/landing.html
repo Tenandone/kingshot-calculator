@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
+<script src="/js/site-features.js?v=2026100601"></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="color-scheme" content="dark" />
@@ -467,10 +468,7 @@
         </div>
 
         <!-- 레퍼럴 CTA (링크만 너꺼로 바꿔) -->
-        <button class="cta" id="topupBtn" type="button">
-          <span>Top-up Discount</span>
-          <span class="arrow">➜</span>
-        </button>
+        <!-- lootbar-disabled:3c89140ce026057417046619 -->
       </div>
     </div>
 
@@ -494,16 +492,7 @@
 
         <div class="heroRight">
           <!-- 얇은 배너 슬롯(원하면 adsense/affiliate로 교체) -->
-          <div class="adSlot">
-            <div class="txt">
-              <b>SAFE & CHEAP KINGSHOT TOP UP</b>
-              <small>Affiliate banner slot (optional)</small>
-            </div>
-            <a id="bannerLink" href="#" target="_blank" rel="noopener">
-              <span class="dot" aria-hidden="true"></span>
-              <span>Save Now</span>
-            </a>
-          </div>
+          <!-- lootbar-disabled:96989984a8dd0d4f934a1b69 -->
 
           <div class="adSlot" style="min-height:86px">
             <div class="txt">
@@ -599,7 +588,7 @@
           </div>
 
           <div class="btnRow" style="margin-top:12px">
-            <button class="btn primary" id="bottomTopup" type="button">Top-up (Affiliate)</button>
+            <!-- lootbar-disabled:60421b22e39805472bc144a1 -->
             <button class="btn" id="moreTools" type="button">Open Tools</button>
           </div>
         </div>
@@ -672,9 +661,9 @@
       const releaseTextEl=$("releaseText");
 
       // links/buttons
-      $("topupBtn").addEventListener("click", ()=>open(AFFILIATE_URL));
-      $("bottomTopup").addEventListener("click", ()=>open(AFFILIATE_URL));
-      $("bannerLink").href = AFFILIATE_URL;
+      $("topupBtn")?.addEventListener("click", ()=>open(AFFILIATE_URL));
+      $("bottomTopup")?.addEventListener("click", ()=>open(AFFILIATE_URL));
+      if ($("bannerLink")) $("bannerLink").href = AFFILIATE_URL;
       $("communityLink").href = COMMUNITY_URL;
 
       $("moreTools").addEventListener("click", ()=>open(TOOLS_URL));

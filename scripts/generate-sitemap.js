@@ -84,7 +84,7 @@ for (const lang of LANGS) {
   const directory = path.join(ROOT, lang.folder);
   for (const file of walkHtml(directory)) {
     const html = fs.readFileSync(file, 'utf8');
-    if (/<title[^>]*>\s*Redirecting/i.test(html)) continue;
+    if (/<title[^>]*>\s*Redirecting/i.test(html) || /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) continue;
     const canonical = normalizeUrl(getCanonical(html));
     if (canonical && languageFromUrl(canonical) && !canonical.includes('/tw/')) urls.add(canonical);
   }

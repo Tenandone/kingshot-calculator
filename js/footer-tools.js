@@ -337,16 +337,17 @@
         '<strong>' + escapeHtml(getCommunityLabel(lang)) + '</strong>' +
       '</a>';
 
-    var lootbar = document.createElement('div');
-    lootbar.className = 'footer-image-banner';
-    lootbar.innerHTML =
-      '<a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">' +
-        '<img src="/img/lootbar.webp" alt="Top-up Guide Banner" loading="lazy" decoding="async" width="816" height="75">' +
-      '</a>';
-
     container.appendChild(couponWrap);
     container.appendChild(ctas);
-    container.appendChild(lootbar);
+    if (window.KINGSHOT_FEATURES && window.KINGSHOT_FEATURES.LOOTBAR_ENABLED === true) {
+      var lootbar = document.createElement('div');
+      lootbar.className = 'footer-image-banner';
+      lootbar.innerHTML =
+        '<a href="https://lootbar.gg/shop/ten/top-up/kingshot" target="_blank" rel="noopener noreferrer">' +
+          '<img src="/img/lootbar.webp" alt="Top-up Guide Banner" loading="lazy" decoding="async" width="816" height="75">' +
+        '</a>';
+      container.appendChild(lootbar);
+    }
   }
 
   async function renderFooterToolsAll(opts) {
