@@ -603,6 +603,8 @@
     var b = document.getElementById(id);
     if (!b || !data || !data.requirements) return;
 
+    b.textContent = window.KD_PROOF?.message() || 'Verified data unavailable.';
+    return; // Keep the source data, but do not publish unverified aggregate requirements.
     var r = data.requirements;
     var bo = data.bonuses || {};
 
@@ -700,6 +702,8 @@
 
     d.innerHTML = headHtml;
 
+    window.KD_PROOF?.block(d);
+    return; // Costs, prerequisites and totals remain unavailable pending primary evidence.
     if (!(research.levels && research.levels.length)) return;
 
     var sumBread = 0, sumWood = 0, sumStone = 0, sumIron = 0, sumGold = 0, sumDust = 0, sumSecs = 0;

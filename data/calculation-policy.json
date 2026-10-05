@@ -1,0 +1,67 @@
+{
+  "reviewed_at": "2026-10-06",
+  "gate": "VERIFIED or UNVERIFIED + BLOCKED",
+  "tracing": [
+    {
+      "calculator": "Building",
+      "input": "building, start/target, prerequisites, bonuses",
+      "source": "data/buildings-calc.json",
+      "transformation": "level-range accumulation, prerequisite expansion, resource/time bonuses",
+      "output": "BLOCKED before transformation; no result event; no new goal",
+      "reason": "Incomplete prerequisites, discounts, timing and TG/War Academy scope. Whole calculator conservatively paused."
+    },
+    {
+      "calculator": "Governor Gear",
+      "input": "equipment slots, current/target stage",
+      "source": "data/governor-gear.json",
+      "transformation": "sum stages (current,target], multiply selected slots; deficit=max(0,ceil(required-owned))",
+      "output": "VERIFIED materials only; score excluded and shown as dash",
+      "proof": "All material fields, including zero, must match dated field-specific source evidence; supplied slot-specific tables checked too."
+    },
+    {
+      "calculator": "Governor Charm",
+      "input": "three troop charm counts and current/target stage",
+      "source": "data/governor-charm.json",
+      "transformation": "sum stage materials × count; target cumulative attribute × each troop count",
+      "output": "VERIFIED materials and attributes; shortage from owned input",
+      "proof": "Every manual/blueprint/attr value checked against dated primary evidence."
+    },
+    {
+      "calculator": "Hero Gear",
+      "input": "normal/temper/mastery, slots, current/target",
+      "source": "data/hero-gear-data.json",
+      "transformation": "range totals × selected slots (not executed)",
+      "output": "BLOCKED XP/mithril/forgehammers/gear results; new goal disabled",
+      "reason": "Complete table evidence unavailable. Historical goals remain explicitly labeled snapshots."
+    },
+    {
+      "calculator": "Pet",
+      "input": "species, current/target including breakthrough",
+      "source": "data/pet-upgrade.json",
+      "transformation": "sum selected range material rows; deficit vs owned",
+      "output": "VERIFIED representative species only: graywolf, lynx, cheetah, lion, giant-rhino",
+      "proof": "Exact material values required; all other species mappings blocked."
+    },
+    {
+      "calculator": "Training",
+      "input": "training/promotion, tier, speed, owned days",
+      "source": "data/ks_training_promotion_per_troop.json",
+      "transformation": "base seconds/(1+speed/100), days×86400, floor(time budget/per-unit time), points×count (not executed)",
+      "output": "BLOCKED time/count/power/score results; no defaults substituted"
+    },
+    {
+      "calculator": "War Academy research totals",
+      "input": "troop branch, research selection",
+      "source": "data/waracademy-{infantry,cavalry,archer}.json",
+      "transformation": "row cost/time totals (not executed)",
+      "output": "BLOCKED costs, requirements and aggregate bonuses; research titles/descriptions/navigation retained"
+    },
+    {
+      "calculator": "Hero numeric comparisons",
+      "input": "none in the six calculators",
+      "source": "data/heroes.json",
+      "transformation": "No hero stats consumed by these calculators; heroes renderer uses generation for browsing groups, not result calculation",
+      "output": "Reference details retain explicit partial/unverified notices; not promoted wholesale to VERIFIED"
+    }
+  ]
+}

@@ -253,7 +253,7 @@
       s += +c.satin || 0;
       t += +c.thread || 0;
       sk += +c.sketch || 0;
-      sc += +c.score || 0;
+      // Unverified score is deliberately excluded from calculations.
     }
 
     return { satin: s, thread: t, sketch: sk, score: sc, invalid: false };
@@ -1152,7 +1152,7 @@
       return h('div', { class: 'gear-kpi' }, [
         thumb,
         h('div', { class: 'gc-kpi-text' }, [
-          h('div', { class: 'num', id: numId, text: '0' }),
+          h('div', { class: 'num', id: numId, text: resourceKey === 'score' ? '—' : '0' }),
           h('div', { class: 'gc-kpi-label', id: labId, text: getResourceLabel(resourceKey) })
         ])
       ]);
@@ -1276,7 +1276,7 @@
       if (sat) sat.textContent = '0';
       if (thr) thr.textContent = '0';
       if (sk) sk.textContent = '0';
-      if (sc) sc.textContent = '0';
+      if (sc) sc.textContent = '—';
       if (tbody) tbody.innerHTML = '';
 
       mobileDetailWrap.innerHTML = '';
@@ -1290,10 +1290,12 @@
       document.getElementById('gc-thr').textContent = fmtCompact(total.thread);
       document.getElementById('gc-sat').textContent = fmtCompact(total.satin);
       document.getElementById('gc-sk').textContent = fmtCompact(total.sketch);
-      document.getElementById('gc-score').textContent = fmtCompact(total.score);
+      document.getElementById('gc-score').textContent = '—';
     }
 
     function runAuto() {
+      if (!window.KD_PROOF?.steps('gear', gear) || Object.values(stepsMap || {}).some(steps=>!window.KD_PROOF.steps('gear',{steps}))) { resetOutputs(); window.KD_PROOF?.block(root); return; }
+      window.KD_PROOF.clear(root);
       const checked = getCheckedInputs().map((i) => i.value);
       const fromIdx = parseInt(fromSel.value, 10);
       const toIdx = parseInt(toSel.value, 10);
@@ -1325,7 +1327,7 @@
           h('td', { text: fmt(r.satin) }),
           h('td', { text: fmt(r.thread) }),
           h('td', { text: fmt(r.sketch) }),
-          h('td', { text: fmt(r.score) })
+          h('td', { text: '—' })
         ]));
 
         mobileDetailWrap.appendChild(h('div', { class: 'gc-mobile-row' }, [
@@ -1373,7 +1375,7 @@
                 ]),
                 h('div', { class: 'gc-mobile-metric-label', text: getResourceLabel('score') })
               ]),
-              h('div', { class: 'gc-mobile-metric-num', text: fmt(r.score) })
+              h('div', { class: 'gc-mobile-metric-num', text: '—' })
             ])
           ])
         ]));
@@ -1385,7 +1387,7 @@
         h('td', { text: fmt(total.satin) }),
         h('td', { text: fmt(total.thread) }),
         h('td', { text: fmt(total.sketch) }),
-        h('td', { text: fmt(total.score) })
+        h('td', { text: '—' })
       ]));
 
       mobileDetailWrap.appendChild(h('div', { class: 'gc-mobile-row gc-mobile-total' }, [
@@ -1430,7 +1432,7 @@
               ]),
               h('div', { class: 'gc-mobile-metric-label', text: getResourceLabel('score') })
             ]),
-            h('div', { class: 'gc-mobile-metric-num', text: fmt(total.score) })
+            h('div', { class: 'gc-mobile-metric-num', text: '—' })
           ])
         ])
       ]));
@@ -1481,7 +1483,7 @@
         getResourceLabel('thread') + ': ' + fmt(STATE.last.total.thread) + '\n' +
         getResourceLabel('satin') + ': ' + fmt(STATE.last.total.satin) + '\n' +
         getResourceLabel('sketch') + ': ' + fmt(STATE.last.total.sketch) + '\n' +
-        getResourceLabel('score') + ': ' + fmt(STATE.last.total.score);
+        getResourceLabel('score') + ': ' + 'UNVERIFIED';
 
       try {
         await navigator.clipboard.writeText(text);
@@ -1688,7 +1690,7 @@
       document.getElementById('gc-sat').textContent = '0';
       document.getElementById('gc-thr').textContent = '0';
       document.getElementById('gc-sk').textContent = '0';
-      document.getElementById('gc-score').textContent = '0';
+      document.getElementById('gc-score').textContent = '—';
       detailWrap.style.display = 'none';
       mobileDetailWrap.style.display = 'none';
       copyBtn.disabled = true;

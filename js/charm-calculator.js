@@ -1255,6 +1255,8 @@
     }
 
     function doCalc() {
+      if (!window.KD_PROOF?.steps('charm', charm)) { resetOutputs(); window.KD_PROOF?.block(root); return; }
+      window.KD_PROOF.clear(root);
       clampInputs();
 
       const fromIdx = parseInt(fromSel.value, 10);

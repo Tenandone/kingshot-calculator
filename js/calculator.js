@@ -1397,6 +1397,11 @@
     });
 
     if (calcBtn) bindOnce(calcBtn, 'click', function () {
+      const blockedResult = document.getElementById('result');
+      if (blockedResult) { blockedResult.replaceChildren(); if (window.KD_PROOF) window.KD_PROOF.block(blockedResult); else blockedResult.textContent = 'Verified data unavailable.'; }
+      window.KD_CALCULATOR_RESULT = null;
+      return; // Prerequisites, discounts and all supported growth ranges are not fully verified.
+
       const uiKey = normalizeUiKey(buildingEl.value);
 
       const start = clampLv(startEl.value);

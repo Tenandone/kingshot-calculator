@@ -552,6 +552,13 @@
       return;
     }
 
+    const proofHost = document.getElementById('content') || document.querySelector('main');
+    if (!window.KD_PROOF?.pet(STATE.data, STATE.els.petSel.value, rows, fromIdx, toIdx)) {
+      resetOutputs();
+      ['pc-need-food','pc-need-notebook','pc-need-supplement','pc-need-medal'].forEach(id=>{const e=S_els(id);if(e)e.textContent='—';});
+      window.KD_PROOF?.block(proofHost); return;
+    }
+    window.KD_PROOF.clear(proofHost);
     const totals = calcTotals(rows, fromIdx, toIdx);
     window.dispatchEvent(new CustomEvent('kd:calculated',{detail:{kind:'pet',start:fromIdx,target:toIdx,resources:Object.keys(totals).map(key=>({key:key,label:getResourceLabel(key),required:totals[key]}))}}));
 

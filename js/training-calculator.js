@@ -430,6 +430,12 @@ window.initTrainingCalculator = function initTrainingCalculator(opts) {
   function calc() {
     if (!DATA || !modeSel || !toSel) return;
 
+    setWarn(window.KD_PROOF?.message() || 'Verified data unavailable.');
+    setResultVisible(false);
+    renderResultCards([]);
+    window.KD_CALCULATOR_RESULT = null;
+    return;
+
     ensureEnhancementLayout();
 
     var mode = modeSel.value;

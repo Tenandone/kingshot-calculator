@@ -901,6 +901,11 @@
       return;
     }
 
+    // All three cost tables remain unverified. Never execute a normal calculation.
+    showEmpty(root, window.KD_PROOF?.message() || 'Verified data unavailable.');
+    window.KD_PROOF?.block(root);
+    return;
+
     var result = calculateByTab(form, data);
     renderResult(root, form, result);
     var meta = buildResourceMeta();
