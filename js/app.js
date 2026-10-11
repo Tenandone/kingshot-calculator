@@ -874,11 +874,26 @@
     return u;
   }
 
+
+  // UI7 owns only existing catalog routes. Other locales and page families retain their lifecycle.
+  var UI7_CATALOG_ROUTES = {"/ko/pet/graywolf":{"locale":"ko","canonical":"/ko/pet/graywolf.html"},"/ko/pet/lynx":{"locale":"ko","canonical":"/ko/pet/lynx.html"},"/ko/pet/bison":{"locale":"ko","canonical":"/ko/pet/bison.html"},"/ko/pet/cheetah":{"locale":"ko","canonical":"/ko/pet/cheetah.html"},"/ko/pet/moose":{"locale":"ko","canonical":"/ko/pet/moose.html"},"/ko/pet/lion":{"locale":"ko","canonical":"/ko/pet/lion.html"},"/ko/pet/grizzly-bear":{"locale":"ko","canonical":"/ko/pet/grizzly-bear.html"},"/ko/pet/giant-rhino":{"locale":"ko","canonical":"/ko/pet/giant-rhino.html"},"/ko/pet/mighty-bison":{"locale":"ko","canonical":"/ko/pet/mighty-bison.html"},"/ko/pet/great-moose":{"locale":"ko","canonical":"/ko/pet/great-moose.html"},"/ko/pet/alpha-black-panther":{"locale":"ko","canonical":"/ko/pet/alpha-black-panther.html"},"/ko/pet/regal-white-lion":{"locale":"ko","canonical":"/ko/pet/regal-white-lion.html"},"/ko/pet/ironclad-war-elephant":{"locale":"ko","canonical":"/ko/pet/ironclad-war-elephant.html"},"/ko/pet/unknown":{"locale":"ko","canonical":"/ko/pet/unknown.html"},"/ko/database/governor-gear":{"locale":"ko","canonical":"/ko/database/governor-gear.html"},"/ko/database/governor-charm":{"locale":"ko","canonical":"/ko/database/governor-charm.html"},"/ko/database/mastery-forging":{"locale":"ko","canonical":"/ko/database/mastery-forging.html"},"/ko/database/widgets":{"locale":"ko","canonical":"/ko/database/widgets.html"},"/ko/database/hero-shards":{"locale":"ko","canonical":"/ko/database/hero-shards.html"},"/items/truegold":{"locale":"ko","canonical":"/items/truegold/"},"/items/truegold-dust":{"locale":"ko","canonical":"/items/truegold-dust/"},"/items/mythic-general-hero-shard":{"locale":"ko","canonical":"/items/mythic-general-hero-shard/"},"/items/forgehammers":{"locale":"ko","canonical":"/items/forgehammers/"},"/items/transfer-passes":{"locale":"ko","canonical":"/items/transfer-passes/"},"/ko/database":{"locale":"ko","canonical":"/ko/database/"},"/ko/pet":{"locale":"ko","canonical":"/ko/pet/"},"/items":{"locale":"ko","canonical":"/items/"},"/en/pet/graywolf":{"locale":"en","canonical":"/en/pet/graywolf.html"},"/en/pet/lynx":{"locale":"en","canonical":"/en/pet/lynx.html"},"/en/pet/bison":{"locale":"en","canonical":"/en/pet/bison.html"},"/en/pet/cheetah":{"locale":"en","canonical":"/en/pet/cheetah.html"},"/en/pet/moose":{"locale":"en","canonical":"/en/pet/moose.html"},"/en/pet/lion":{"locale":"en","canonical":"/en/pet/lion.html"},"/en/pet/grizzly-bear":{"locale":"en","canonical":"/en/pet/grizzly-bear.html"},"/en/pet/giant-rhino":{"locale":"en","canonical":"/en/pet/giant-rhino.html"},"/en/pet/mighty-bison":{"locale":"en","canonical":"/en/pet/mighty-bison.html"},"/en/pet/great-moose":{"locale":"en","canonical":"/en/pet/great-moose.html"},"/en/pet/alpha-black-panther":{"locale":"en","canonical":"/en/pet/alpha-black-panther.html"},"/en/pet/regal-white-lion":{"locale":"en","canonical":"/en/pet/regal-white-lion.html"},"/en/pet/ironclad-war-elephant":{"locale":"en","canonical":"/en/pet/ironclad-war-elephant.html"},"/en/pet/unknown":{"locale":"en","canonical":"/en/pet/unknown.html"},"/en/database/governor-gear":{"locale":"en","canonical":"/en/database/governor-gear.html"},"/en/database/governor-charm":{"locale":"en","canonical":"/en/database/governor-charm.html"},"/en/database/mastery-forging":{"locale":"en","canonical":"/en/database/mastery-forging.html"},"/en/database/widgets":{"locale":"en","canonical":"/en/database/widgets.html"},"/en/database/hero-shards":{"locale":"en","canonical":"/en/database/hero-shards.html"},"/en/items/truegold":{"locale":"en","canonical":"/en/items/truegold/"},"/en/items/truegold-dust":{"locale":"en","canonical":"/en/items/truegold-dust/"},"/en/items/mythic-general-hero-shard":{"locale":"en","canonical":"/en/items/mythic-general-hero-shard/"},"/en/items/forgehammers":{"locale":"en","canonical":"/en/items/forgehammers/"},"/en/items/transfer-passes":{"locale":"en","canonical":"/en/items/transfer-passes/"},"/en/database":{"locale":"en","canonical":"/en/database/"},"/en/pet":{"locale":"en","canonical":"/en/pet/"},"/en/items":{"locale":"en","canonical":"/en/items/"},"/ja/pet/graywolf":{"locale":"ja","canonical":"/ja/pet/graywolf.html"},"/ja/pet/lynx":{"locale":"ja","canonical":"/ja/pet/lynx.html"},"/ja/pet/bison":{"locale":"ja","canonical":"/ja/pet/bison.html"},"/ja/pet/cheetah":{"locale":"ja","canonical":"/ja/pet/cheetah.html"},"/ja/pet/moose":{"locale":"ja","canonical":"/ja/pet/moose.html"},"/ja/pet/lion":{"locale":"ja","canonical":"/ja/pet/lion.html"},"/ja/pet/grizzly-bear":{"locale":"ja","canonical":"/ja/pet/grizzly-bear.html"},"/ja/pet/giant-rhino":{"locale":"ja","canonical":"/ja/pet/giant-rhino.html"},"/ja/pet/mighty-bison":{"locale":"ja","canonical":"/ja/pet/mighty-bison.html"},"/ja/pet/great-moose":{"locale":"ja","canonical":"/ja/pet/great-moose.html"},"/ja/pet/alpha-black-panther":{"locale":"ja","canonical":"/ja/pet/alpha-black-panther.html"},"/ja/pet/regal-white-lion":{"locale":"ja","canonical":"/ja/pet/regal-white-lion.html"},"/ja/pet/ironclad-war-elephant":{"locale":"ja","canonical":"/ja/pet/ironclad-war-elephant.html"},"/ja/pet/unknown":{"locale":"ja","canonical":"/ja/pet/unknown.html"},"/ja/database/governor-gear":{"locale":"ja","canonical":"/ja/database/governor-gear.html"},"/ja/database/governor-charm":{"locale":"ja","canonical":"/ja/database/governor-charm.html"},"/ja/database/mastery-forging":{"locale":"ja","canonical":"/ja/database/mastery-forging.html"},"/ja/database/widgets":{"locale":"ja","canonical":"/ja/database/widgets.html"},"/ja/database/hero-shards":{"locale":"ja","canonical":"/ja/database/hero-shards.html"},"/ja/items/truegold":{"locale":"ja","canonical":"/ja/items/truegold/"},"/ja/items/truegold-dust":{"locale":"ja","canonical":"/ja/items/truegold-dust/"},"/ja/items/mythic-general-hero-shard":{"locale":"ja","canonical":"/ja/items/mythic-general-hero-shard/"},"/ja/items/forgehammers":{"locale":"ja","canonical":"/ja/items/forgehammers/"},"/ja/items/transfer-passes":{"locale":"ja","canonical":"/ja/items/transfer-passes/"},"/ja/database":{"locale":"ja","canonical":"/ja/database/"},"/ja/pet":{"locale":"ja","canonical":"/ja/pet/"},"/ja/items":{"locale":"ja","canonical":"/ja/items/"}};
+  function ui7CatalogInfo(pathname) {
+    var key=String(pathname).replace(/\/index\.html$/i,'').replace(/\.html$/i,'').replace(/\/$/,'');
+    if(UI7_CATALOG_ROUTES[key])return UI7_CATALOG_ROUTES[key];
+    var lang=normalizeLangFolder(getCurrentContentLang());
+    if(!/^(ko|en|ja)$/.test(lang))return null;
+    if(/^\/(?:db|database)\//.test(key))return UI7_CATALOG_ROUTES['/'+lang+'/database/'+key.replace(/^\/(?:db|database)\//,'')]||null;
+    if(key==='/pet'||key==='/database')return UI7_CATALOG_ROUTES['/'+lang+key]||null;
+    return null;
+  }
+
   function canonicalize(input) {
     var u = new URL(typeof input === 'string' ? input : String(input), location.origin);
     var p = u.pathname.replace(/\/index\.html$/i, '');
     if (p.length > 1 && p.lastIndexOf('/') === p.length - 1) p = p.slice(0, -1);
 
+    var catalogRoute=ui7CatalogInfo(p);
+    if(catalogRoute){u.pathname=catalogRoute.canonical;return u;}
     if (p === '/home') p = '/';
 
     if (p.indexOf('/calc-') === 0 || p === '/calculator') {
@@ -1127,6 +1142,15 @@
       var segs = pathNorm.split('/').filter(Boolean);
       var el = document.getElementById('content') || document.body;
 
+      var catalogInfo=ui7CatalogInfo(pathNorm);
+      if(catalogInfo){
+        removeCSS('calc-css');removeBuildingScopedStyleIfAny();removePetScopedStyleIfAny();
+        el.innerHTML='<div id="kcat-root"></div>';var catalogHost=el.firstElementChild,catalogPath=location.pathname;
+        return ensureCSS('catalog-ui7-css','/css/equipment-pets-items.css').then(function(){return window.KD_CATALOG_VIEW?null:loadScriptOnce('/js/ui/equipment-pets-items-view.js');}).then(function(){return window.KD_CATALOG_UI?null:loadScriptOnce('/js/ui/equipment-pets-items-client.js');}).then(function(){
+          if(myVer===navVer&&catalogHost.isConnected&&catalogPath===location.pathname)return window.KD_CATALOG_UI.mount(catalogHost,catalogInfo.locale);
+        }).then(function(){if(myVer!==navVer)return;setActiveByPath(pathNorm);if(nav&&toggle){nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');}window.scrollTo({top:0});});
+      }
+      document.body.classList.remove('kcat-shell');
       if (pathNorm.indexOf('/buildings/') === 0 && segs.length >= 2) {
         removeCSS('calc-css');
         var slug1 = stripHtmlExt(segs.slice(1).join('/'));
@@ -1305,6 +1329,7 @@
         }
       } catch (_seoError) {}
       try { if (window.KD_GROWTH_PLANNER) window.KD_GROWTH_PLANNER.syncSeo(); } catch (_plannerSeoError) {}
+      try { if (window.KD_CATALOG_UI && window.KD_CATALOG_UI.syncSeo) window.KD_CATALOG_UI.syncSeo(); } catch (_catalogSeoError) {}
       return result;
     });
   }

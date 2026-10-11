@@ -404,9 +404,12 @@
 <script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/runtime.js?v=ks-ui5-20261011a" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
+<link rel="stylesheet" href="/css/equipment-pets-items.css?v=ks-ui7-20261012">
+<script defer src="/js/ui/equipment-pets-items-view.js?v=ks-ui7-20261012"></script>
+<script defer src="/js/ui/equipment-pets-items-client.js?v=ks-ui7-20261012"></script>
 </head>
 
-<body>
+<body class="kcat-shell">
   <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
     <symbol id="ico-info" viewBox="0 0 24 24">
       <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
@@ -440,6 +443,7 @@
     </nav>
 
     <main id="main">
+<div id="kcat-root"><article class="kcat-page kcat-detail" data-kcat-model="ks-catalog-ui7-857680239c25d1f0" data-kcat-locale="ja" data-kcat-type="database" data-kcat-slug="widgets"><nav class="kcat-nav" aria-label="分類"><a href="/ja/database/" aria-current="page">装備・育成素材</a><a href="/ja/pet/">ペット</a><a href="/ja/items/">アイテム</a></nav><p class="kcat-back"><a href="/ja/database/">← 装備・育成素材</a></p><div class="kcat-content">
       <div class="crumbs">
         <a href="/ja/">ホーム</a> <span class="muted">›</span>
         <a href="/ja/database/">データベース</a> <span class="muted">›</span>
@@ -454,7 +458,7 @@
             英雄専用武器パーツは、KingshotでSSR英雄の専用武器を解放・強化する時に使う重要な素材です。
             長く使う英雄を先に決めて、その英雄の10強化を事前に目標設定しておくことが大切です。
           </p>
-          <p class="muted" style="margin-top:10px">
+          <p class="muted">
             このページでは、英雄専用武器とは何か、どこで入手できるのか、強化段階ごとの必要数、
             そしてフルパッケージ基準までまとめて確認できます。
           </p>
@@ -469,8 +473,8 @@
         </div>
       </div>
 
-      <section id="overview">
-        <h2>英雄専用武器とは？</h2>
+      <nav class="kcat-toc" aria-label="ページ内リンク"><a href="#kcat-section-1">英雄専用武器とは？</a><a href="#kcat-section-2">英雄専用武器パーツの入手先</a><a href="#kcat-section-3">強化段階ごとの必要数</a><a href="#kcat-section-4">フルパッケージ基準</a><a href="#kcat-section-5">関連ページ</a></nav><section id="overview">
+        <h2 id="kcat-section-1">英雄専用武器とは？</h2>
 
         <div class="note" role="note" aria-label="Note">
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
@@ -499,8 +503,8 @@
       </section>
 
       <section id="sources">
-        <h2>英雄専用武器パーツの入手先</h2>
-        <p class="muted" style="margin-top:-2px">サーバー進行度とイベント状況によって入手先が変わる場合があります。</p>
+        <h2 id="kcat-section-2">英雄専用武器パーツの入手先</h2>
+        <p class="muted">サーバー進行度とイベント状況によって入手先が変わる場合があります。</p>
 
         <div class="sources-grid">
           <article class="source-card">
@@ -532,16 +536,16 @@
 
       <section id="upgrade">
         <span id="requirements" class="anchor"></span>
-        <h2>強化段階ごとの必要数</h2>
-        <p class="muted" style="margin-top:-2px">専用武器1〜10段階に必要な英雄専用武器パーツ数</p>
+        <h2 id="kcat-section-3">強化段階ごとの必要数</h2>
+        <p class="muted">専用武器1〜10段階に必要な英雄専用武器パーツ数</p>
 
         <div class="cards" id="widget-cards" aria-label="英雄専用武器パーツ必要数カード"></div>
 
         <div class="table-wrap data-table" aria-label="専用武器強化段階ごとの英雄専用武器パーツ必要数表">
-          <table id="widget-table">
+          <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="表を左右にスクロールして全列を確認できます。"><table id="widget-table">
             <colgroup>
-              <col style="width:50%">
-              <col style="width:50%">
+              <col>
+              <col>
             </colgroup>
             <thead>
               <tr>
@@ -555,21 +559,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td class="num">5</td></tr>
-              <tr><td>2</td><td class="num">10</td></tr>
-              <tr><td>3</td><td class="num">15</td></tr>
-              <tr><td>4</td><td class="num">20</td></tr>
-              <tr><td>5</td><td class="num">25</td></tr>
-              <tr><td>6</td><td class="num">30</td></tr>
-              <tr><td>7</td><td class="num">35</td></tr>
-              <tr><td>8</td><td class="num">40</td></tr>
-              <tr><td>9</td><td class="num">45</td></tr>
-              <tr><td>10</td><td class="num">50</td></tr>
+              <tr><td data-kcat-number="true">1</td><td class="num" data-kcat-number="true">5</td></tr>
+              <tr><td data-kcat-number="true">2</td><td class="num" data-kcat-number="true">10</td></tr>
+              <tr><td data-kcat-number="true">3</td><td class="num" data-kcat-number="true">15</td></tr>
+              <tr><td data-kcat-number="true">4</td><td class="num" data-kcat-number="true">20</td></tr>
+              <tr><td data-kcat-number="true">5</td><td class="num" data-kcat-number="true">25</td></tr>
+              <tr><td data-kcat-number="true">6</td><td class="num" data-kcat-number="true">30</td></tr>
+              <tr><td data-kcat-number="true">7</td><td class="num" data-kcat-number="true">35</td></tr>
+              <tr><td data-kcat-number="true">8</td><td class="num" data-kcat-number="true">40</td></tr>
+              <tr><td data-kcat-number="true">9</td><td class="num" data-kcat-number="true">45</td></tr>
+              <tr><td data-kcat-number="true">10</td><td class="num" data-kcat-number="true">50</td></tr>
             </tbody>
             <tfoot>
-              <tr><td>合計</td><td class="num">275</td></tr>
+              <tr><td>合計</td><td class="num" data-kcat-number="true">275</td></tr>
             </tfoot>
-          </table>
+          </table></div>
         </div>
 
         <div class="note" role="note" aria-label="Total note">
@@ -582,8 +586,8 @@
       </section>
 
       <section id="packages">
-        <h2>フルパッケージ基準</h2>
-        <p class="muted" style="margin-top:-2px">ショップ専用武器パック構成例（共通ドル表記）</p>
+        <h2 id="kcat-section-4">フルパッケージ基準</h2>
+        <p class="muted">ショップ専用武器パック構成例（共通ドル表記）</p>
 
         <div class="packages-grid">
           <article class="package-card">
@@ -633,14 +637,15 @@
       </section>
 
       <section id="related">
-        <h2>関連ページ</h2>
+        <h2 id="kcat-section-5">関連ページ</h2>
         <div class="related">
           <a class="pill" href="/ja/database/">データベースメイン</a>
           <a class="pill" href="/ja/heroes/">英雄一覧</a>
           <a class="pill" href="/ja/guides/">ガイド</a>
         </div>
       </section>
-    </main>
+    <section class="kcat-related-tools"><h2>関連情報</h2><a class="pill" href="/ja/calc-hero-gear/">関連計算ツール</a></section></div></article></div>
+</main>
   </div>
 
   <script>

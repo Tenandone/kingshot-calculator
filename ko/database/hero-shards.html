@@ -473,9 +473,12 @@
 <script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/runtime.js?v=ks-ui5-20261011a" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
+<link rel="stylesheet" href="/css/equipment-pets-items.css?v=ks-ui7-20261012">
+<script defer src="/js/ui/equipment-pets-items-view.js?v=ks-ui7-20261012"></script>
+<script defer src="/js/ui/equipment-pets-items-client.js?v=ks-ui7-20261012"></script>
 </head>
 
-<body>
+<body class="kcat-shell">
   <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
     <symbol id="ico-info" viewBox="0 0 24 24">
       <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
@@ -508,6 +511,7 @@
     </nav>
 
     <main id="main">
+<div id="kcat-root"><article class="kcat-page kcat-detail" data-kcat-model="ks-catalog-ui7-857680239c25d1f0" data-kcat-locale="ko" data-kcat-type="database" data-kcat-slug="hero-shards"><nav class="kcat-nav" aria-label="분류"><a href="/ko/database/" aria-current="page">장비·성장 재료</a><a href="/ko/pet/">펫</a><a href="/items/">아이템</a></nav><p class="kcat-back"><a href="/ko/database/">← 장비·성장 재료</a></p><div class="kcat-content">
       <div class="crumbs">
         <a href="/ko/">홈</a> <span class="muted">›</span>
         <a href="/ko/database/">데이터베이스</a> <span class="muted">›</span>
@@ -522,7 +526,7 @@
             영웅 성급조각은 영웅의 성급을 올리는 데 사용됩니다.
             성급 상승 시 신규 스킬 해금 및 강화, 전투력 증가, 영웅 스토리 해금이 이루어집니다.
           </p>
-          <p class="muted" style="margin-top:10px">
+          <p class="muted">
             이 페이지에서는 영웅 성급조각 종류, 영웅 등급, 예외 영웅, 획득처와 단계별 필요 수량을 확인할 수 있습니다.
           </p>
 
@@ -535,8 +539,8 @@
         </div>
       </div>
 
-      <section id="overview">
-        <h2>개요</h2>
+      <nav class="kcat-toc" aria-label="바로 보기"><a href="#kcat-section-1">개요</a><a href="#kcat-section-2">필요 수량</a><a href="#kcat-section-3">조각 종류</a><a href="#kcat-section-4">관련 페이지</a></nav><section id="overview">
+        <h2 id="kcat-section-1">개요</h2>
 
         <div class="note" role="note" aria-label="Note">
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
@@ -572,8 +576,8 @@
       </section>
 
       <section id="requirements">
-        <h2>필요 수량</h2>
-        <p class="muted" style="margin-top:-2px">성급과 단계별 영웅 성급조각 필요 수량</p>
+        <h2 id="kcat-section-2">필요 수량</h2>
+        <p class="muted">성급과 단계별 영웅 성급조각 필요 수량</p>
 
         <div class="star-banner">
           <img src="/img/star/6.webp" alt="5성 최대" width="92" height="92" decoding="async">
@@ -586,16 +590,16 @@
         <div class="cards" id="hero-shard-cards" aria-label="영웅 성급조각 필요 수량 카드"></div>
 
         <div class="table-wrap data-table" aria-label="영웅 성급조각 필요 수량 표">
-          <table id="hero-shard-table">
+          <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="표를 좌우로 이동할 수 있습니다."><table id="hero-shard-table">
             <colgroup>
-              <col style="width:18%">
-              <col style="width:11%">
-              <col style="width:11%">
-              <col style="width:11%">
-              <col style="width:11%">
-              <col style="width:11%">
-              <col style="width:11%">
-              <col style="width:16%">
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
             </colgroup>
             <thead>
               <tr>
@@ -612,63 +616,63 @@
             <tbody>
               <tr>
                 <td class="star-name">1성</td>
-                <td class="center"><span class="tier-chip">1</span></td>
-                <td class="center"><span class="tier-chip">1</span></td>
-                <td class="center"><span class="tier-chip">2</span></td>
-                <td class="center"><span class="tier-chip">2</span></td>
-                <td class="center"><span class="tier-chip">2</span></td>
-                <td class="center"><span class="tier-chip">2</span></td>
-                <td class="num total-strong">10</td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">1</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">1</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">2</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">2</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">2</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">2</span></td>
+                <td class="num total-strong" data-kcat-number="true">10</td>
               </tr>
               <tr>
                 <td class="star-name">2성</td>
-                <td class="center"><span class="tier-chip">5</span></td>
-                <td class="center"><span class="tier-chip">5</span></td>
-                <td class="center"><span class="tier-chip">5</span></td>
-                <td class="center"><span class="tier-chip">5</span></td>
-                <td class="center"><span class="tier-chip">5</span></td>
-                <td class="center"><span class="tier-chip">15</span></td>
-                <td class="num total-strong">40</td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">5</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">5</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">5</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">5</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">5</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">15</span></td>
+                <td class="num total-strong" data-kcat-number="true">40</td>
               </tr>
               <tr>
                 <td class="star-name">3성</td>
-                <td class="center"><span class="tier-chip">15</span></td>
-                <td class="center"><span class="tier-chip">15</span></td>
-                <td class="center"><span class="tier-chip">15</span></td>
-                <td class="center"><span class="tier-chip">15</span></td>
-                <td class="center"><span class="tier-chip">15</span></td>
-                <td class="center"><span class="tier-chip">40</span></td>
-                <td class="num total-strong">115</td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">15</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">15</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">15</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">15</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">15</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">40</span></td>
+                <td class="num total-strong" data-kcat-number="true">115</td>
               </tr>
               <tr>
                 <td class="star-name">4성</td>
-                <td class="center"><span class="tier-chip">40</span></td>
-                <td class="center"><span class="tier-chip">40</span></td>
-                <td class="center"><span class="tier-chip">40</span></td>
-                <td class="center"><span class="tier-chip">40</span></td>
-                <td class="center"><span class="tier-chip">40</span></td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="num total-strong">300</td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">40</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">40</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">40</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">40</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">40</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="num total-strong" data-kcat-number="true">300</td>
               </tr>
               <tr>
                 <td class="star-name">5성</td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="num total-strong">600</td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="num total-strong" data-kcat-number="true">600</td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
                 <td>총합</td>
                 <td colspan="6">최대 성급 업그레이드 총수</td>
-                <td class="num">1,065</td>
+                <td class="num" data-kcat-number="true">1,065</td>
               </tr>
             </tfoot>
-          </table>
+          </table></div>
         </div>
 
         <div class="note" role="note" aria-label="Total note">
@@ -681,8 +685,8 @@
       </section>
 
       <section id="types">
-        <h2>조각 종류</h2>
-        <p class="muted" style="margin-top:-2px">공용 조각과 영웅 전용 조각은 사용 방식이 다릅니다.</p>
+        <h2 id="kcat-section-3">조각 종류</h2>
+        <p class="muted">공용 조각과 영웅 전용 조각은 사용 방식이 다릅니다.</p>
 
         <div class="types-grid">
           <article class="type-card">
@@ -720,14 +724,15 @@
       </section>
 
       <section id="related">
-        <h2>관련 페이지</h2>
+        <h2 id="kcat-section-4">관련 페이지</h2>
         <div class="related">
           <a class="pill" href="/ko/database/">데이터베이스 메인</a>
           <a class="pill" href="/ko/heroes/">영웅 목록</a>
           <a class="pill" href="/ko/database/widgets.html">전용무기 부속품</a>
         </div>
       </section>
-    </main>
+    </div></article></div>
+</main>
   </div>
 
   <script>

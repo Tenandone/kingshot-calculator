@@ -9,7 +9,8 @@
     const current=Object.create(null),entities=new Set((model.entities||[]).map(e=>e.id));
     for(const [id,key] of Object.entries(input.current||{}))if(entities.has(id)&&typeof key==='string')current[id]=key;
     const targets=(Array.isArray(input.targets)?input.targets:[]).filter(t=>t&&typeof t.entityId==='string'&&typeof t.levelKey==='string').map(t=>({entityId:t.entityId,levelKey:t.levelKey}));
-    return{schemaVersion:1,modelVersion:model.version||model.id,name:String(input.name||'').slice(0,100),current,targets};
+    const history=(Array.isArray(input.history)?input.history:[]).filter(h=>h&&entities.has(h.entityId)&&typeof h.levelKey==='string'&&typeof h.completedAt==='string'&&/^\d{4}-\d{2}-\d{2}T/.test(h.completedAt)&&Number.isFinite(Date.parse(h.completedAt))).map(h=>({entityId:h.entityId,levelKey:h.levelKey,completedAt:h.completedAt}));
+    return{schemaVersion:1,modelVersion:model.version||model.id,name:String(input.name||'').slice(0,100),current,targets,history};
   }
   function makeIndex(model){
     const entities=new Map(),issues=[];

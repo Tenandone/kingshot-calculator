@@ -626,9 +626,12 @@
 <script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/runtime.js?v=ks-ui5-20261011a" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
+<link rel="stylesheet" href="/css/equipment-pets-items.css?v=ks-ui7-20261012">
+<script defer src="/js/ui/equipment-pets-items-view.js?v=ks-ui7-20261012"></script>
+<script defer src="/js/ui/equipment-pets-items-client.js?v=ks-ui7-20261012"></script>
 </head>
 
-<body>
+<body class="kcat-shell">
   <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
     <symbol id="ico-info" viewBox="0 0 24 24">
       <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
@@ -662,7 +665,8 @@
       <a href="#related">관련</a>
     </nav>
 
-    <main id="main"><aside data-verification-note style="max-width:1100px;margin:16px auto;padding:14px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;color:#334155"><strong>데이터 검증 상태: 일부 확인</strong><p style="margin:6px 0 0">이 페이지의 수치·효과·획득 조건은 전체 검증이 완료되지 않았습니다. 별도로 확인 표시가 없는 값은 검증되지 않은 참고값입니다. 미검증 핵심 데이터를 사용하는 계산은 차단됩니다. 자료를 참고할 때는 현재 게임 화면을 확인하세요.</p></aside>
+    <main id="main">
+<div id="kcat-root"><article class="kcat-page kcat-detail" data-kcat-model="ks-catalog-ui7-857680239c25d1f0" data-kcat-locale="ko" data-kcat-type="database" data-kcat-slug="mastery-forging"><nav class="kcat-nav" aria-label="분류"><a href="/ko/database/" aria-current="page">장비·성장 재료</a><a href="/ko/pet/">펫</a><a href="/items/">아이템</a></nav><p class="kcat-back"><a href="/ko/database/">← 장비·성장 재료</a></p><div class="kcat-content">
       <div class="crumbs">
         <a href="/ko/">홈</a> <span class="muted">›</span>
         <a href="/ko/database/">데이터베이스</a> <span class="muted">›</span>
@@ -689,8 +693,8 @@
         </div>
       </div>
 
-      <section id="overview">
-        <h2>영웅 장비 강화란?</h2>
+      <nav class="kcat-toc" aria-label="바로 보기"><a href="#kcat-section-1">영웅 장비 강화란?</a><a href="#kcat-section-2">레전드 장비 업그레이드 소모표</a><a href="#kcat-section-3">레전드 장비 1 ~ 10</a><a href="#kcat-section-4">레전드 장비 11 ~ 20</a><a href="#kcat-section-5">강화 경험치 기준</a><a href="#kcat-section-6">필요 경험치</a><a href="#kcat-section-7">구간별 필요 재료</a><a href="#kcat-section-8">+20 구간</a><a href="#kcat-section-9">+40 구간</a><a href="#kcat-section-10">+60 구간</a><a href="#kcat-section-11">+80 구간</a><a href="#kcat-section-12">+100 구간</a><a href="#kcat-section-13">관련 페이지</a></nav><section id="overview">
+        <h2 id="kcat-section-1">영웅 장비 강화란?</h2>
 
         <div class="note" role="note" aria-label="Note">
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
@@ -730,13 +734,13 @@
       </section>
 
       <section id="legend-cost">
-        <h2>레전드 장비 업그레이드 소모표</h2>        
+        <h2 id="kcat-section-2">레전드 장비 업그레이드 소모표</h2>
 
         <div class="legend-grid">
           <article class="legend-card">
-            <h3>레전드 장비 1 ~ 10</h3>
+            <h3 id="kcat-section-3">레전드 장비 1 ~ 10</h3>
             <div class="table-wrap" aria-label="레전드 장비 1부터 10 표">
-              <table class="legend-table">
+              <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="표를 좌우로 이동할 수 있습니다."><table class="legend-table">
                 <thead>
                   <tr>
                     <th>레벨</th>
@@ -744,25 +748,25 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>Level 1</td><td class="num">10</td></tr>
-                  <tr><td>Level 2</td><td class="num">20</td></tr>
-                  <tr><td>Level 3</td><td class="num">30</td></tr>
-                  <tr><td>Level 4</td><td class="num">40</td></tr>
-                  <tr><td>Level 5</td><td class="num">50</td></tr>
-                  <tr><td>Level 6</td><td class="num">60</td></tr>
-                  <tr><td>Level 7</td><td class="num">70</td></tr>
-                  <tr><td>Level 8</td><td class="num">80</td></tr>
-                  <tr><td>Level 9</td><td class="num">90</td></tr>
-                  <tr><td>Level 10</td><td class="num">100</td></tr>
+                  <tr><td>Level 1</td><td class="num" data-kcat-number="true">10</td></tr>
+                  <tr><td>Level 2</td><td class="num" data-kcat-number="true">20</td></tr>
+                  <tr><td>Level 3</td><td class="num" data-kcat-number="true">30</td></tr>
+                  <tr><td>Level 4</td><td class="num" data-kcat-number="true">40</td></tr>
+                  <tr><td>Level 5</td><td class="num" data-kcat-number="true">50</td></tr>
+                  <tr><td>Level 6</td><td class="num" data-kcat-number="true">60</td></tr>
+                  <tr><td>Level 7</td><td class="num" data-kcat-number="true">70</td></tr>
+                  <tr><td>Level 8</td><td class="num" data-kcat-number="true">80</td></tr>
+                  <tr><td>Level 9</td><td class="num" data-kcat-number="true">90</td></tr>
+                  <tr><td>Level 10</td><td class="num" data-kcat-number="true">100</td></tr>
                 </tbody>
-              </table>
+              </table></div>
             </div>
           </article>
 
           <article class="legend-card">
-            <h3>레전드 장비 11 ~ 20</h3>
+            <h3 id="kcat-section-4">레전드 장비 11 ~ 20</h3>
             <div class="table-wrap" aria-label="레전드 장비 11부터 20 표">
-              <table class="legend-table">
+              <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="표를 좌우로 이동할 수 있습니다."><table class="legend-table">
                 <thead>
                   <tr>
                     <th>레벨</th>
@@ -770,18 +774,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>Level 11</td><td class="num">110</td></tr>
-                  <tr><td>Level 12</td><td class="num">120</td></tr>
-                  <tr><td>Level 13</td><td class="num">130</td></tr>
-                  <tr><td>Level 14</td><td class="num">140</td></tr>
-                  <tr><td>Level 15</td><td class="num">150</td></tr>
-                  <tr><td>Level 16</td><td class="num">160</td></tr>
-                  <tr><td>Level 17</td><td class="num">170</td></tr>
-                  <tr><td>Level 18</td><td class="num">180</td></tr>
-                  <tr><td>Level 19</td><td class="num">190</td></tr>
-                  <tr><td>Level 20</td><td class="num">200</td></tr>
+                  <tr><td>Level 11</td><td class="num" data-kcat-number="true">110</td></tr>
+                  <tr><td>Level 12</td><td class="num" data-kcat-number="true">120</td></tr>
+                  <tr><td>Level 13</td><td class="num" data-kcat-number="true">130</td></tr>
+                  <tr><td>Level 14</td><td class="num" data-kcat-number="true">140</td></tr>
+                  <tr><td>Level 15</td><td class="num" data-kcat-number="true">150</td></tr>
+                  <tr><td>Level 16</td><td class="num" data-kcat-number="true">160</td></tr>
+                  <tr><td>Level 17</td><td class="num" data-kcat-number="true">170</td></tr>
+                  <tr><td>Level 18</td><td class="num" data-kcat-number="true">180</td></tr>
+                  <tr><td>Level 19</td><td class="num" data-kcat-number="true">190</td></tr>
+                  <tr><td>Level 20</td><td class="num" data-kcat-number="true">200</td></tr>
                 </tbody>
-              </table>
+              </table></div>
             </div>
           </article>
         </div>
@@ -797,13 +801,13 @@
       </section>
 
       <section id="gear-xp">
-        <h2>강화 경험치 기준</h2>
-        <p class="muted" style="margin-top:-2px">장비 등급과 강화부품 기준 경험치</p>
+        <h2 id="kcat-section-5">강화 경험치 기준</h2>
+        <p class="muted">장비 등급과 강화부품 기준 경험치</p>
 
         <div class="cards" id="xp-cards" aria-label="강화 경험치 카드"></div>
 
         <div class="table-wrap data-table" aria-label="강화 경험치 기준 표">
-          <table id="xp-table" class="xp-table">
+          <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="표를 좌우로 이동할 수 있습니다."><table id="xp-table" class="xp-table">
             <thead>
               <tr>
                 <th>구분</th>
@@ -811,23 +815,23 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>일반</td><td class="num">10</td></tr>
-              <tr><td>고급</td><td class="num">30</td></tr>
-              <tr><td>레어</td><td class="num">60</td></tr>
-              <tr><td>에픽</td><td class="num">150</td></tr>
-              <tr><td>경험치 강화부품 10점</td><td class="num">10</td></tr>
-              <tr><td>경험치 강화부품 100점</td><td class="num">100</td></tr>
+              <tr><td>일반</td><td class="num" data-kcat-number="true">10</td></tr>
+              <tr><td>고급</td><td class="num" data-kcat-number="true">30</td></tr>
+              <tr><td>레어</td><td class="num" data-kcat-number="true">60</td></tr>
+              <tr><td>에픽</td><td class="num" data-kcat-number="true">150</td></tr>
+              <tr><td>경험치 강화부품 10점</td><td class="num" data-kcat-number="true">10</td></tr>
+              <tr><td>경험치 강화부품 100점</td><td class="num" data-kcat-number="true">100</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
       </section>
 
       <section id="required-xp">
-        <h2>필요 경험치</h2>
-        <p class="muted" style="margin-top:-2px">시작 레벨 기준 필요 경험치와 경험치 강화부품 100점 환산 개수</p>
+        <h2 id="kcat-section-6">필요 경험치</h2>
+        <p class="muted">시작 레벨 기준 필요 경험치와 경험치 강화부품 100점 환산 개수</p>
 
         <div class="table-wrap" aria-label="필요 경험치 표">
-          <table class="required-table">
+          <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="표를 좌우로 이동할 수 있습니다."><table class="required-table">
             <thead>
               <tr>
                 <th class="num">시작 레벨</th>
@@ -836,27 +840,27 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td class="num">0</td><td class="num">73,330</td><td class="num">734개</td></tr>
-              <tr><td class="num">10</td><td class="num">73,005</td><td class="num">731개</td></tr>
-              <tr><td class="num">20</td><td class="num">72,180</td><td class="num">722개</td></tr>
-              <tr><td class="num">30</td><td class="num">70,850</td><td class="num">709개</td></tr>
-              <tr><td class="num">40</td><td class="num">68,690</td><td class="num">687개</td></tr>
-              <tr><td class="num">50</td><td class="num">64,890</td><td class="num">649개</td></tr>
-              <tr><td class="num">55</td><td class="num">62,240</td><td class="num">623개</td></tr>
-              <tr><td class="num">60</td><td class="num">59,080</td><td class="num">591개</td></tr>
-              <tr><td class="num">65</td><td class="num">55,230</td><td class="num">553개</td></tr>
-              <tr><td class="num">70</td><td class="num">50,620</td><td class="num">507개</td></tr>
-              <tr><td class="num">75</td><td class="num">45,070</td><td class="num">451개</td></tr>
-              <tr><td class="num">80</td><td class="num">38,510</td><td class="num">386개</td></tr>
-              <tr><td class="num">85</td><td class="num">30,760</td><td class="num">308개</td></tr>
-              <tr><td class="num">90</td><td class="num">21,750</td><td class="num">218개</td></tr>
-              <tr><td class="num">95</td><td class="num">11,500</td><td class="num">115개</td></tr>
-              <tr><td class="num">96</td><td class="num">9,300</td><td class="num">93개</td></tr>
-              <tr><td class="num">97</td><td class="num">7,050</td><td class="num">71개</td></tr>
-              <tr><td class="num">98</td><td class="num">4,970</td><td class="num">50개</td></tr>
-              <tr><td class="num">99</td><td class="num">2,400</td><td class="num">24개</td></tr>
+              <tr><td class="num" data-kcat-number="true">0</td><td class="num" data-kcat-number="true">73,330</td><td class="num">734개</td></tr>
+              <tr><td class="num" data-kcat-number="true">10</td><td class="num" data-kcat-number="true">73,005</td><td class="num">731개</td></tr>
+              <tr><td class="num" data-kcat-number="true">20</td><td class="num" data-kcat-number="true">72,180</td><td class="num">722개</td></tr>
+              <tr><td class="num" data-kcat-number="true">30</td><td class="num" data-kcat-number="true">70,850</td><td class="num">709개</td></tr>
+              <tr><td class="num" data-kcat-number="true">40</td><td class="num" data-kcat-number="true">68,690</td><td class="num">687개</td></tr>
+              <tr><td class="num" data-kcat-number="true">50</td><td class="num" data-kcat-number="true">64,890</td><td class="num">649개</td></tr>
+              <tr><td class="num" data-kcat-number="true">55</td><td class="num" data-kcat-number="true">62,240</td><td class="num">623개</td></tr>
+              <tr><td class="num" data-kcat-number="true">60</td><td class="num" data-kcat-number="true">59,080</td><td class="num">591개</td></tr>
+              <tr><td class="num" data-kcat-number="true">65</td><td class="num" data-kcat-number="true">55,230</td><td class="num">553개</td></tr>
+              <tr><td class="num" data-kcat-number="true">70</td><td class="num" data-kcat-number="true">50,620</td><td class="num">507개</td></tr>
+              <tr><td class="num" data-kcat-number="true">75</td><td class="num" data-kcat-number="true">45,070</td><td class="num">451개</td></tr>
+              <tr><td class="num" data-kcat-number="true">80</td><td class="num" data-kcat-number="true">38,510</td><td class="num">386개</td></tr>
+              <tr><td class="num" data-kcat-number="true">85</td><td class="num" data-kcat-number="true">30,760</td><td class="num">308개</td></tr>
+              <tr><td class="num" data-kcat-number="true">90</td><td class="num" data-kcat-number="true">21,750</td><td class="num">218개</td></tr>
+              <tr><td class="num" data-kcat-number="true">95</td><td class="num" data-kcat-number="true">11,500</td><td class="num">115개</td></tr>
+              <tr><td class="num" data-kcat-number="true">96</td><td class="num" data-kcat-number="true">9,300</td><td class="num">93개</td></tr>
+              <tr><td class="num" data-kcat-number="true">97</td><td class="num" data-kcat-number="true">7,050</td><td class="num">71개</td></tr>
+              <tr><td class="num" data-kcat-number="true">98</td><td class="num" data-kcat-number="true">4,970</td><td class="num">50개</td></tr>
+              <tr><td class="num" data-kcat-number="true">99</td><td class="num" data-kcat-number="true">2,400</td><td class="num">24개</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <div class="note" role="note" aria-label="Required xp note">
@@ -869,13 +873,13 @@
       </section>
 
       <section id="unlock-cost">
-        <h2>구간별 필요 재료</h2>        
+        <h2 id="kcat-section-7">구간별 필요 재료</h2>
 
         <div class="grid-2">
           <div>
-            <h3>+20 구간</h3>
+            <h3 id="kcat-section-8">+20 구간</h3>
             <div class="table-wrap" aria-label="+20 구간 표">
-              <table class="cost-table">
+              <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="표를 좌우로 이동할 수 있습니다."><table class="cost-table">
                 <thead>
                   <tr>
                     <th>구간</th>
@@ -884,16 +888,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>1 ~ 20</td><td class="num">10</td><td class="num">52,650</td></tr>
+                  <tr><td>1 ~ 20</td><td class="num" data-kcat-number="true">10</td><td class="num" data-kcat-number="true">52,650</td></tr>
                 </tbody>
-              </table>
+              </table></div>
             </div>
           </div>
 
           <div>
-            <h3>+40 구간</h3>
+            <h3 id="kcat-section-9">+40 구간</h3>
             <div class="table-wrap" aria-label="+40 구간 표">
-              <table class="cost-table">
+              <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="표를 좌우로 이동할 수 있습니다."><table class="cost-table">
                 <thead>
                   <tr>
                     <th>구간</th>
@@ -902,16 +906,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>21 ~ 40</td><td class="num">20</td><td class="num">75,050</td></tr>
+                  <tr><td>21 ~ 40</td><td class="num" data-kcat-number="true">20</td><td class="num" data-kcat-number="true">75,050</td></tr>
                 </tbody>
-              </table>
+              </table></div>
             </div>
           </div>
 
           <div>
-            <h3>+60 구간</h3>
+            <h3 id="kcat-section-10">+60 구간</h3>
             <div class="table-wrap" aria-label="+60 구간 표">
-              <table class="cost-table">
+              <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="표를 좌우로 이동할 수 있습니다."><table class="cost-table">
                 <thead>
                   <tr>
                     <th>구간</th>
@@ -920,16 +924,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>41 ~ 60</td><td class="num">30</td><td class="num">93,100</td></tr>
+                  <tr><td>41 ~ 60</td><td class="num" data-kcat-number="true">30</td><td class="num" data-kcat-number="true">93,100</td></tr>
                 </tbody>
-              </table>
+              </table></div>
             </div>
           </div>
 
           <div>
-            <h3>+80 구간</h3>
+            <h3 id="kcat-section-11">+80 구간</h3>
             <div class="table-wrap" aria-label="+80 구간 표">
-              <table class="cost-table">
+              <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="표를 좌우로 이동할 수 있습니다."><table class="cost-table">
                 <thead>
                   <tr>
                     <th>구간</th>
@@ -938,16 +942,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>61 ~ 80</td><td class="num">40</td><td class="num">121,600</td></tr>
+                  <tr><td>61 ~ 80</td><td class="num" data-kcat-number="true">40</td><td class="num" data-kcat-number="true">121,600</td></tr>
                 </tbody>
-              </table>
+              </table></div>
             </div>
           </div>
 
-          <div style="grid-column:1 / -1">
-            <h3>+100 구간</h3>
+          <div>
+            <h3 id="kcat-section-12">+100 구간</h3>
             <div class="table-wrap" aria-label="+100 구간 표">
-              <table class="cost-table">
+              <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="표를 좌우로 이동할 수 있습니다."><table class="cost-table">
                 <thead>
                   <tr>
                     <th>구간</th>
@@ -956,9 +960,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>81 ~ 100</td><td class="num">50</td><td class="num">159,600</td></tr>
+                  <tr><td>81 ~ 100</td><td class="num" data-kcat-number="true">50</td><td class="num" data-kcat-number="true">159,600</td></tr>
                 </tbody>
-              </table>
+              </table></div>
             </div>
           </div>
         </div>
@@ -974,14 +978,15 @@
       </section>
 
       <section id="related">
-        <h2>관련 페이지</h2>
+        <h2 id="kcat-section-13">관련 페이지</h2>
         <div class="related">
           <a class="pill" href="/ko/database/">데이터베이스 메인</a>
           <a class="pill" href="/ko/heroes/">영웅 목록</a>
           <a class="pill" href="/ko/guides/">가이드</a>
         </div>
       </section>
-    </main>
+    <section class="kcat-related-tools"><h2>관련 자료</h2><a class="pill" href="/calc-hero-gear/">관련 계산기</a><a class="pill" href="/pages/database/hero-gear-enhancement-chart/" data-router-ignore="true">영웅 장비 강화 경험치 표</a></section></div></article></div>
+</main>
   </div>
 
   <script>

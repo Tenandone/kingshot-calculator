@@ -400,9 +400,12 @@
 <script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/runtime.js?v=ks-ui5-20261011a" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
+<link rel="stylesheet" href="/css/equipment-pets-items.css?v=ks-ui7-20261012">
+<script defer src="/js/ui/equipment-pets-items-view.js?v=ks-ui7-20261012"></script>
+<script defer src="/js/ui/equipment-pets-items-client.js?v=ks-ui7-20261012"></script>
 </head>
 
-<body>
+<body class="kcat-shell">
   <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
     <symbol id="ico-info" viewBox="0 0 24 24">
       <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
@@ -436,6 +439,7 @@
     </nav>
 
     <main id="main">
+<div id="kcat-root"><article class="kcat-page kcat-detail" data-kcat-model="ks-catalog-ui7-857680239c25d1f0" data-kcat-locale="en" data-kcat-type="database" data-kcat-slug="widgets"><nav class="kcat-nav" aria-label="Category"><a href="/en/database/" aria-current="page">Equipment & growth</a><a href="/en/pet/">Pets</a><a href="/en/items/">Items</a></nav><p class="kcat-back"><a href="/en/database/">← Equipment & growth</a></p><div class="kcat-content">
       <div class="crumbs">
         <a href="/en/">Home</a> <span class="muted">›</span>
         <a href="/en/database/">Database</a> <span class="muted">›</span>
@@ -450,7 +454,7 @@
             Widgets are parts needed to unlock and upgrade Hero Exclusive Gear in Kingshot.
             If you plan to use a Mythic Hero for a long time, it is better to decide early and invest toward a level 10 Exclusive Gear.
           </p>
-          <p class="muted" style="margin-top:10px">
+          <p class="muted">
             This page explains what Widgets are, where to get them, how many you need for each upgrade level,
             and how Full Package pricing is commonly understood in USD.
           </p>
@@ -465,8 +469,8 @@
         </div>
       </div>
 
-      <section id="overview">
-        <h2>What are Widgets?</h2>
+      <nav class="kcat-toc" aria-label="On this page"><a href="#kcat-section-1">What are Widgets?</a><a href="#kcat-section-2">Sources</a><a href="#kcat-section-3">Requirements</a><a href="#kcat-section-4">Full Package</a><a href="#kcat-section-5">Related Pages</a></nav><section id="overview">
+        <h2 id="kcat-section-1">What are Widgets?</h2>
 
         <div class="note" role="note" aria-label="Note">
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
@@ -492,8 +496,8 @@
       </section>
 
       <section id="sources">
-        <h2>Sources</h2>
-        <p class="muted" style="margin-top:-2px">Availability may vary depending on server progress and event rotation.</p>
+        <h2 id="kcat-section-2">Sources</h2>
+        <p class="muted">Availability may vary depending on server progress and event rotation.</p>
 
         <div class="sources-grid">
           <article class="source-card">
@@ -525,16 +529,16 @@
 
       <section id="upgrade">
         <span id="requirements" class="anchor"></span>
-        <h2>Requirements</h2>
-        <p class="muted" style="margin-top:-2px">Widget requirements for Hero Exclusive Gears</p>
+        <h2 id="kcat-section-3">Requirements</h2>
+        <p class="muted">Widget requirements for Hero Exclusive Gears</p>
 
         <div class="cards" id="widget-cards" aria-label="Widget requirement cards"></div>
 
         <div class="table-wrap data-table" aria-label="Widget requirements for Hero Exclusive Gears table">
-          <table id="widget-table">
+          <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="Scroll horizontally to see every column."><table id="widget-table">
             <colgroup>
-              <col style="width:50%">
-              <col style="width:50%">
+              <col>
+              <col>
             </colgroup>
             <thead>
               <tr>
@@ -548,21 +552,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td class="num">5</td></tr>
-              <tr><td>2</td><td class="num">10</td></tr>
-              <tr><td>3</td><td class="num">15</td></tr>
-              <tr><td>4</td><td class="num">20</td></tr>
-              <tr><td>5</td><td class="num">25</td></tr>
-              <tr><td>6</td><td class="num">30</td></tr>
-              <tr><td>7</td><td class="num">35</td></tr>
-              <tr><td>8</td><td class="num">40</td></tr>
-              <tr><td>9</td><td class="num">45</td></tr>
-              <tr><td>10</td><td class="num">50</td></tr>
+              <tr><td data-kcat-number="true">1</td><td class="num" data-kcat-number="true">5</td></tr>
+              <tr><td data-kcat-number="true">2</td><td class="num" data-kcat-number="true">10</td></tr>
+              <tr><td data-kcat-number="true">3</td><td class="num" data-kcat-number="true">15</td></tr>
+              <tr><td data-kcat-number="true">4</td><td class="num" data-kcat-number="true">20</td></tr>
+              <tr><td data-kcat-number="true">5</td><td class="num" data-kcat-number="true">25</td></tr>
+              <tr><td data-kcat-number="true">6</td><td class="num" data-kcat-number="true">30</td></tr>
+              <tr><td data-kcat-number="true">7</td><td class="num" data-kcat-number="true">35</td></tr>
+              <tr><td data-kcat-number="true">8</td><td class="num" data-kcat-number="true">40</td></tr>
+              <tr><td data-kcat-number="true">9</td><td class="num" data-kcat-number="true">45</td></tr>
+              <tr><td data-kcat-number="true">10</td><td class="num" data-kcat-number="true">50</td></tr>
             </tbody>
             <tfoot>
-              <tr><td>Total</td><td class="num">275</td></tr>
+              <tr><td>Total</td><td class="num" data-kcat-number="true">275</td></tr>
             </tfoot>
-          </table>
+          </table></div>
         </div>
 
         <div class="note" role="note" aria-label="Total note">
@@ -575,8 +579,8 @@
       </section>
 
       <section id="packages">
-        <h2>Full Package</h2>
-        <p class="muted" style="margin-top:-2px">Example Exclusive Gear pack pricing in USD</p>
+        <h2 id="kcat-section-4">Full Package</h2>
+        <p class="muted">Example Exclusive Gear pack pricing in USD</p>
 
         <div class="packages-grid">
           <article class="package-card">
@@ -625,14 +629,15 @@
       </section>
 
       <section id="related">
-        <h2>Related Pages</h2>
+        <h2 id="kcat-section-5">Related Pages</h2>
         <div class="related">
           <a class="pill" href="/en/database/">Database Main</a>
           <a class="pill" href="/en/heroes/">Hero List</a>
           <a class="pill" href="/en/guides/">Guides</a>
         </div>
       </section>
-    </main>
+    <section class="kcat-related-tools"><h2>Related pages</h2><a class="pill" href="/en/calc-hero-gear/">Related calculator</a></section></div></article></div>
+</main>
   </div>
 
   <script>

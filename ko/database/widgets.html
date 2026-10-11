@@ -404,9 +404,12 @@
 <script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/runtime.js?v=ks-ui5-20261011a" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
+<link rel="stylesheet" href="/css/equipment-pets-items.css?v=ks-ui7-20261012">
+<script defer src="/js/ui/equipment-pets-items-view.js?v=ks-ui7-20261012"></script>
+<script defer src="/js/ui/equipment-pets-items-client.js?v=ks-ui7-20261012"></script>
 </head>
 
-<body>
+<body class="kcat-shell">
   <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
     <symbol id="ico-info" viewBox="0 0 24 24">
       <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
@@ -440,6 +443,7 @@
     </nav>
 
     <main id="main">
+<div id="kcat-root"><article class="kcat-page kcat-detail" data-kcat-model="ks-catalog-ui7-857680239c25d1f0" data-kcat-locale="ko" data-kcat-type="database" data-kcat-slug="widgets"><nav class="kcat-nav" aria-label="분류"><a href="/ko/database/" aria-current="page">장비·성장 재료</a><a href="/ko/pet/">펫</a><a href="/items/">아이템</a></nav><p class="kcat-back"><a href="/ko/database/">← 장비·성장 재료</a></p><div class="kcat-content">
       <div class="crumbs">
         <a href="/ko/">홈</a> <span class="muted">›</span>
         <a href="/ko/database/">데이터베이스</a> <span class="muted">›</span>
@@ -454,7 +458,7 @@
             영웅 전용무기 부속품은 Kingshot에서 SSR 영웅 전용무기를 개방하고 강화할 때 사용하는 핵심 재료입니다.
             오래 사용할 영웅을 먼저 정하고, 해당 영웅의 10강 목표를 미리 잡아두는 것이 중요합니다.
           </p>
-          <p class="muted" style="margin-top:10px">
+          <p class="muted">
             이 페이지에서는 영웅 전용무기가 무엇인지, 어디서 얻는지, 강화 단계별 필요 개수,
             그리고 풀패키지 기준까지 한 번에 정리합니다.
           </p>
@@ -469,8 +473,8 @@
         </div>
       </div>
 
-      <section id="overview">
-        <h2>영웅 전용무기란?</h2>
+      <nav class="kcat-toc" aria-label="바로 보기"><a href="#kcat-section-1">영웅 전용무기란?</a><a href="#kcat-section-2">영웅 전용무기 부속품 획득처</a><a href="#kcat-section-3">강화 단계별 필요 개수</a><a href="#kcat-section-4">풀패키지 기준</a><a href="#kcat-section-5">관련 페이지</a></nav><section id="overview">
+        <h2 id="kcat-section-1">영웅 전용무기란?</h2>
 
         <div class="note" role="note" aria-label="Note">
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
@@ -499,8 +503,8 @@
       </section>
 
       <section id="sources">
-        <h2>영웅 전용무기 부속품 획득처</h2>
-        <p class="muted" style="margin-top:-2px">서버 진행도와 이벤트 상황에 따라 수급처가 달라질 수 있습니다.</p>
+        <h2 id="kcat-section-2">영웅 전용무기 부속품 획득처</h2>
+        <p class="muted">서버 진행도와 이벤트 상황에 따라 수급처가 달라질 수 있습니다.</p>
 
         <div class="sources-grid">
           <article class="source-card">
@@ -532,16 +536,16 @@
 
       <section id="upgrade">
         <span id="requirements" class="anchor"></span>
-        <h2>강화 단계별 필요 개수</h2>
-        <p class="muted" style="margin-top:-2px">전용무기 1~10단계에 필요한 영웅 전용무기 부속품 개수</p>
+        <h2 id="kcat-section-3">강화 단계별 필요 개수</h2>
+        <p class="muted">전용무기 1~10단계에 필요한 영웅 전용무기 부속품 개수</p>
 
         <div class="cards" id="widget-cards" aria-label="영웅 전용무기 부속품 필요 개수 카드"></div>
 
         <div class="table-wrap data-table" aria-label="전용무기 강화 단계별 영웅 전용무기 부속품 필요 개수 표">
-          <table id="widget-table">
+          <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="표를 좌우로 이동할 수 있습니다."><table id="widget-table">
             <colgroup>
-              <col style="width:50%">
-              <col style="width:50%">
+              <col>
+              <col>
             </colgroup>
             <thead>
               <tr>
@@ -555,21 +559,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td class="num">5</td></tr>
-              <tr><td>2</td><td class="num">10</td></tr>
-              <tr><td>3</td><td class="num">15</td></tr>
-              <tr><td>4</td><td class="num">20</td></tr>
-              <tr><td>5</td><td class="num">25</td></tr>
-              <tr><td>6</td><td class="num">30</td></tr>
-              <tr><td>7</td><td class="num">35</td></tr>
-              <tr><td>8</td><td class="num">40</td></tr>
-              <tr><td>9</td><td class="num">45</td></tr>
-              <tr><td>10</td><td class="num">50</td></tr>
+              <tr><td data-kcat-number="true">1</td><td class="num" data-kcat-number="true">5</td></tr>
+              <tr><td data-kcat-number="true">2</td><td class="num" data-kcat-number="true">10</td></tr>
+              <tr><td data-kcat-number="true">3</td><td class="num" data-kcat-number="true">15</td></tr>
+              <tr><td data-kcat-number="true">4</td><td class="num" data-kcat-number="true">20</td></tr>
+              <tr><td data-kcat-number="true">5</td><td class="num" data-kcat-number="true">25</td></tr>
+              <tr><td data-kcat-number="true">6</td><td class="num" data-kcat-number="true">30</td></tr>
+              <tr><td data-kcat-number="true">7</td><td class="num" data-kcat-number="true">35</td></tr>
+              <tr><td data-kcat-number="true">8</td><td class="num" data-kcat-number="true">40</td></tr>
+              <tr><td data-kcat-number="true">9</td><td class="num" data-kcat-number="true">45</td></tr>
+              <tr><td data-kcat-number="true">10</td><td class="num" data-kcat-number="true">50</td></tr>
             </tbody>
             <tfoot>
-              <tr><td>합계</td><td class="num">275</td></tr>
+              <tr><td>합계</td><td class="num" data-kcat-number="true">275</td></tr>
             </tfoot>
-          </table>
+          </table></div>
         </div>
 
         <div class="note" role="note" aria-label="Total note">
@@ -582,8 +586,8 @@
       </section>
 
       <section id="packages">
-        <h2>풀패키지 기준</h2>
-        <p class="muted" style="margin-top:-2px">상점 전용무기 패키지 구성 예시 (공통 달러 표기)</p>
+        <h2 id="kcat-section-4">풀패키지 기준</h2>
+        <p class="muted">상점 전용무기 패키지 구성 예시 (공통 달러 표기)</p>
 
         <div class="packages-grid">
           <article class="package-card">
@@ -633,14 +637,15 @@
       </section>
 
       <section id="related">
-        <h2>관련 페이지</h2>
+        <h2 id="kcat-section-5">관련 페이지</h2>
         <div class="related">
           <a class="pill" href="/ko/database/">데이터베이스 메인</a>
           <a class="pill" href="/ko/heroes/">영웅 목록</a>
           <a class="pill" href="/ko/guides/">가이드</a>
         </div>
       </section>
-    </main>
+    <section class="kcat-related-tools"><h2>관련 자료</h2><a class="pill" href="/calc-hero-gear/">관련 계산기</a></section></div></article></div>
+</main>
   </div>
 
   <script>

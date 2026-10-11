@@ -414,9 +414,12 @@
 <script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/runtime.js?v=ks-ui5-20261011a" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
+<link rel="stylesheet" href="/css/equipment-pets-items.css?v=ks-ui7-20261012">
+<script defer src="/js/ui/equipment-pets-items-view.js?v=ks-ui7-20261012"></script>
+<script defer src="/js/ui/equipment-pets-items-client.js?v=ks-ui7-20261012"></script>
 </head>
 
-<body>
+<body class="kcat-shell">
   <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
     <symbol id="ico-info" viewBox="0 0 24 24">
       <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
@@ -448,7 +451,8 @@
       <a href="#related">関連ページ</a>
     </nav>
 
-    <main id="main"><aside data-verification-note style="max-width:1100px;margin:16px auto;padding:14px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;color:#334155"><strong>データ検証：一部確認済み</strong><p style="margin:6px 0 0">このページの数値・効果・解放条件は全件検証されていません。確認済みと明記していない値は未検証の参考値です。未検証の主要データを使う計算は停止しています。参考資料は現在のゲーム画面で確認してください。</p><p>2026-10-06確認：領主装備58段階の素材費用と宝石Lv.1–22の素材・累計属性を公式Wiki表と照合しました。装備評点とイベントポイントは対象外です。 </p></aside>
+    <main id="main">
+<div id="kcat-root"><article class="kcat-page kcat-detail" data-kcat-model="ks-catalog-ui7-857680239c25d1f0" data-kcat-locale="ja" data-kcat-type="database" data-kcat-slug="governor-charm"><nav class="kcat-nav" aria-label="分類"><a href="/ja/database/" aria-current="page">装備・育成素材</a><a href="/ja/pet/">ペット</a><a href="/ja/items/">アイテム</a></nav><p class="kcat-back"><a href="/ja/database/">← 装備・育成素材</a></p><div class="kcat-content">
       <div class="crumbs">
         <a href="/ja/">ホーム</a> <span class="muted">›</span>
         <a href="/ja/database/">データベース</a> <span class="muted">›</span>
@@ -456,14 +460,14 @@
       </div>
 
       <div class="hero">
-        <img src="/img/database/Governor Charm/governor-charms.webp" alt="領主宝石" loading="eager" fetchpriority="high" width="160" height="160" decoding="async">
+        <img src="/img/database/Governor%20Charm/governor-charms.webp" alt="領主宝石" loading="eager" fetchpriority="high" width="160" height="160" decoding="async">
         <div>
           <h1>領主宝石データベース</h1>
           <p class="sub">
             領主宝石は Kingshot で領主装備をさらに強化する特別な成長システムです。
             都市センター25レベルで解放され、全体戦闘力に大きな上昇効果をもたらします。
           </p>
-          <p class="muted" style="margin-top:10px">
+          <p class="muted">
             このページでは、解放条件、強化素材、レベル1から22までの全必要数値、
             ステータス上昇量、累計ステータス、戦闘力情報をまとめて確認できます。
           </p>
@@ -477,8 +481,8 @@
         </div>
       </div>
 
-      <section id="overview">
-        <h2>概要</h2>
+      <nav class="kcat-toc" aria-label="ページ内リンク"><a href="#kcat-section-1">概要</a><a href="#kcat-section-2">条件</a><a href="#kcat-section-3">領主宝石 必要数表</a><a href="#kcat-section-4">関連ページ</a><a href="#kcat-section-5">関連データと計算ツール</a></nav><section id="overview">
+        <h2 id="kcat-section-1">概要</h2>
 
         <div class="note" role="note" aria-label="Note">
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
@@ -500,7 +504,7 @@
       </section>
 
       <section id="requirements">
-        <h2>条件</h2>
+        <h2 id="kcat-section-2">条件</h2>
         <div class="facts">
           <article class="fact">
             <strong>解放条件</strong>
@@ -519,20 +523,20 @@
 
       <section id="table-section">
         <span id="requirements-table" class="anchor"></span>
-        <h2>領主宝石 必要数表</h2>
-        <p class="muted" style="margin-top:-2px">全レベルの素材消費量、ステータス上昇量、累計ステータス、戦闘力情報</p>
+        <h2 id="kcat-section-3">領主宝石 必要数表</h2>
+        <p class="muted">全レベルの素材消費量、ステータス上昇量、累計ステータス、戦闘力情報</p>
 
         <div class="cards" id="governor-charm-cards" aria-label="領主宝石 必要数カード"></div>
 
         <div class="table-wrap data-table" aria-label="領主宝石 必要数表">
-          <table id="governor-charm-table">
+          <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="表を左右にスクロールして全列を確認できます。"><table id="governor-charm-table">
             <colgroup>
-              <col style="width:16%">
-              <col style="width:17%">
-              <col style="width:17%">
-              <col style="width:16%">
-              <col style="width:16%">
-              <col style="width:18%">
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
             </colgroup>
             <thead>
               <tr>
@@ -557,187 +561,187 @@
             <tbody>
               <tr>
                 <td class="level">レベル 1</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">5</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">5</span></td>
-                <td class="num">+9.00%</td>
-                <td class="num">+9.00%</td>
-                <td class="num">+205,700</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">5</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">5</span></td>
+                <td class="num" data-kcat-number="true">+9.00%</td>
+                <td class="num" data-kcat-number="true">+9.00%</td>
+                <td class="num" data-kcat-number="true">+205,700</td>
               </tr>
               <tr>
                 <td class="level">レベル 2</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">40</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">15</span></td>
-                <td class="num">+3.00%</td>
-                <td class="num">+12.00%</td>
-                <td class="num">+82,300</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">40</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">15</span></td>
+                <td class="num" data-kcat-number="true">+3.00%</td>
+                <td class="num" data-kcat-number="true">+12.00%</td>
+                <td class="num" data-kcat-number="true">+82,300</td>
               </tr>
               <tr>
                 <td class="level">レベル 3</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">60</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">40</span></td>
-                <td class="num">+4.00%</td>
-                <td class="num">+16.00%</td>
-                <td class="num">+82,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">60</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">40</span></td>
+                <td class="num" data-kcat-number="true">+4.00%</td>
+                <td class="num" data-kcat-number="true">+16.00%</td>
+                <td class="num" data-kcat-number="true">+82,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 4</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">80</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">100</span></td>
-                <td class="num">+3.00%</td>
-                <td class="num">+19.00%</td>
-                <td class="num">+82,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">80</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">100</span></td>
+                <td class="num" data-kcat-number="true">+3.00%</td>
+                <td class="num" data-kcat-number="true">+19.00%</td>
+                <td class="num" data-kcat-number="true">+82,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 5</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">100</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">200</span></td>
-                <td class="num">+6.00%</td>
-                <td class="num">+25.00%</td>
-                <td class="num">+124,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">100</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">200</span></td>
+                <td class="num" data-kcat-number="true">+6.00%</td>
+                <td class="num" data-kcat-number="true">+25.00%</td>
+                <td class="num" data-kcat-number="true">+124,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 6</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">120</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">300</span></td>
-                <td class="num">+5.00%</td>
-                <td class="num">+30.00%</td>
-                <td class="num">+124,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">120</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">300</span></td>
+                <td class="num" data-kcat-number="true">+5.00%</td>
+                <td class="num" data-kcat-number="true">+30.00%</td>
+                <td class="num" data-kcat-number="true">+124,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 7</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">140</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">400</span></td>
-                <td class="num">+5.00%</td>
-                <td class="num">+35.00%</td>
-                <td class="num">+124,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">140</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">400</span></td>
+                <td class="num" data-kcat-number="true">+5.00%</td>
+                <td class="num" data-kcat-number="true">+35.00%</td>
+                <td class="num" data-kcat-number="true">+124,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 8</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">200</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">400</span></td>
-                <td class="num">+5.00%</td>
-                <td class="num">+40.00%</td>
-                <td class="num">+124,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">200</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">400</span></td>
+                <td class="num" data-kcat-number="true">+5.00%</td>
+                <td class="num" data-kcat-number="true">+40.00%</td>
+                <td class="num" data-kcat-number="true">+124,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 9</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">300</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">400</span></td>
-                <td class="num">+5.00%</td>
-                <td class="num">+45.00%</td>
-                <td class="num">+124,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">300</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">400</span></td>
+                <td class="num" data-kcat-number="true">+5.00%</td>
+                <td class="num" data-kcat-number="true">+45.00%</td>
+                <td class="num" data-kcat-number="true">+124,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 10</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">420</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">420</span></td>
-                <td class="num">+5.00%</td>
-                <td class="num">+50.00%</td>
-                <td class="num">+124,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">420</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">420</span></td>
+                <td class="num" data-kcat-number="true">+5.00%</td>
+                <td class="num" data-kcat-number="true">+50.00%</td>
+                <td class="num" data-kcat-number="true">+124,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 11</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">560</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">420</span></td>
-                <td class="num">+5.00%</td>
-                <td class="num">+55.00%</td>
-                <td class="num">+124,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">560</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">420</span></td>
+                <td class="num" data-kcat-number="true">+5.00%</td>
+                <td class="num" data-kcat-number="true">+55.00%</td>
+                <td class="num" data-kcat-number="true">+124,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 12</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">580</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">600</span></td>
-                <td class="num">+4.00%</td>
-                <td class="num">+59.00%</td>
-                <td class="num">+96,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">580</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">600</span></td>
+                <td class="num" data-kcat-number="true">+4.00%</td>
+                <td class="num" data-kcat-number="true">+59.00%</td>
+                <td class="num" data-kcat-number="true">+96,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 13</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">610</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">780</span></td>
-                <td class="num">+4.00%</td>
-                <td class="num">+63.00%</td>
-                <td class="num">+96,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">610</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">780</span></td>
+                <td class="num" data-kcat-number="true">+4.00%</td>
+                <td class="num" data-kcat-number="true">+63.00%</td>
+                <td class="num" data-kcat-number="true">+96,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 14</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">645</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">960</span></td>
-                <td class="num">+4.00%</td>
-                <td class="num">+67.00%</td>
-                <td class="num">+96,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">645</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">960</span></td>
+                <td class="num" data-kcat-number="true">+4.00%</td>
+                <td class="num" data-kcat-number="true">+67.00%</td>
+                <td class="num" data-kcat-number="true">+96,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 15</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">685</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,140</span></td>
-                <td class="num">+4.00%</td>
-                <td class="num">+71.00%</td>
-                <td class="num">+96,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">685</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,140</span></td>
+                <td class="num" data-kcat-number="true">+4.00%</td>
+                <td class="num" data-kcat-number="true">+71.00%</td>
+                <td class="num" data-kcat-number="true">+96,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 16</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">730</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,320</span></td>
-                <td class="num">+4.00%</td>
-                <td class="num">+75.00%</td>
-                <td class="num">+96,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">730</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,320</span></td>
+                <td class="num" data-kcat-number="true">+4.00%</td>
+                <td class="num" data-kcat-number="true">+75.00%</td>
+                <td class="num" data-kcat-number="true">+96,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 17</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">780</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,500</span></td>
-                <td class="num">+4.00%</td>
-                <td class="num">+79.00%</td>
-                <td class="num">+96,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">780</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,500</span></td>
+                <td class="num" data-kcat-number="true">+4.00%</td>
+                <td class="num" data-kcat-number="true">+79.00%</td>
+                <td class="num" data-kcat-number="true">+96,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 18</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">835</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,680</span></td>
-                <td class="num">+4.00%</td>
-                <td class="num">+83.00%</td>
-                <td class="num">+96,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">835</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,680</span></td>
+                <td class="num" data-kcat-number="true">+4.00%</td>
+                <td class="num" data-kcat-number="true">+83.00%</td>
+                <td class="num" data-kcat-number="true">+96,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 19</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">895</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,860</span></td>
-                <td class="num">+4.00%</td>
-                <td class="num">+87.00%</td>
-                <td class="num">+96,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">895</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,860</span></td>
+                <td class="num" data-kcat-number="true">+4.00%</td>
+                <td class="num" data-kcat-number="true">+87.00%</td>
+                <td class="num" data-kcat-number="true">+96,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 20</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">960</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">2,040</span></td>
-                <td class="num">+4.00%</td>
-                <td class="num">+91.00%</td>
-                <td class="num">+96,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">960</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">2,040</span></td>
+                <td class="num" data-kcat-number="true">+4.00%</td>
+                <td class="num" data-kcat-number="true">+91.00%</td>
+                <td class="num" data-kcat-number="true">+96,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 21</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,030</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">2,220</span></td>
-                <td class="num">+4.00%</td>
-                <td class="num">+95.00%</td>
-                <td class="num">+96,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,030</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">2,220</span></td>
+                <td class="num" data-kcat-number="true">+4.00%</td>
+                <td class="num" data-kcat-number="true">+95.00%</td>
+                <td class="num" data-kcat-number="true">+96,000</td>
               </tr>
               <tr>
                 <td class="level">レベル 22</td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,105</span></td>
-                <td class="num"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">2,400</span></td>
-                <td class="num">+4.00%</td>
-                <td class="num">+99.00%</td>
-                <td class="num">+96,000</td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-guide.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">1,105</span></td>
+                <td class="num" data-kcat-number="true"><span class="cell-item"><img class="cell-ico" src="/img/database/charm-design.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">2,400</span></td>
+                <td class="num" data-kcat-number="true">+4.00%</td>
+                <td class="num" data-kcat-number="true">+99.00%</td>
+                <td class="num" data-kcat-number="true">+96,000</td>
               </tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
       </section>
 
       <section id="related">
-        <h2>関連ページ</h2>
+        <h2 id="kcat-section-4">関連ページ</h2>
         <div class="related">
           <a class="pill" href="/ja/database/">データベースメイン</a>
           <a class="pill" href="/ja/database/governor-gear.html">領主装備</a>
@@ -752,7 +756,8 @@
 
 
 
-<!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>関連データと計算ツール</h2><ul><li><a href="/ja/calc-charm/">領主宝石計算機</a></li><li><a href="/ja/guides/kingshot-f2p-guide.html">キングショット 初心者ガイド｜無課金・微課金向け成長攻略</a></li></ul></section><!-- kd-related:end -->
+<!-- kd-related:start --><section data-kd-related=""><h2 id="kcat-section-5">関連データと計算ツール</h2><ul><li><a href="/ja/calc-charm/">領主宝石計算機</a></li><li><a href="/ja/guides/kingshot-f2p-guide.html">キングショット 初心者ガイド｜無課金・微課金向け成長攻略</a></li></ul></section><!-- kd-related:end -->
+</div></article></div>
 </main>
   </div>
 

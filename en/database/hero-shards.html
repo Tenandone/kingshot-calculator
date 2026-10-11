@@ -473,9 +473,12 @@
 <script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/runtime.js?v=ks-ui5-20261011a" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
+<link rel="stylesheet" href="/css/equipment-pets-items.css?v=ks-ui7-20261012">
+<script defer src="/js/ui/equipment-pets-items-view.js?v=ks-ui7-20261012"></script>
+<script defer src="/js/ui/equipment-pets-items-client.js?v=ks-ui7-20261012"></script>
 </head>
 
-<body>
+<body class="kcat-shell">
   <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
     <symbol id="ico-info" viewBox="0 0 24 24">
       <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
@@ -508,6 +511,7 @@
     </nav>
 
     <main id="main">
+<div id="kcat-root"><article class="kcat-page kcat-detail" data-kcat-model="ks-catalog-ui7-857680239c25d1f0" data-kcat-locale="en" data-kcat-type="database" data-kcat-slug="hero-shards"><nav class="kcat-nav" aria-label="Category"><a href="/en/database/" aria-current="page">Equipment & growth</a><a href="/en/pet/">Pets</a><a href="/en/items/">Items</a></nav><p class="kcat-back"><a href="/en/database/">← Equipment & growth</a></p><div class="kcat-content">
       <div class="crumbs">
         <a href="/en/">Home</a> <span class="muted">›</span>
         <a href="/en/database/">Database</a> <span class="muted">›</span>
@@ -522,7 +526,7 @@
             Hero Shards are used to increase a hero’s star level in Kingshot.
             Star upgrades unlock new skills, improve existing skills, increase power, and unlock the hero story.
           </p>
-          <p class="muted" style="margin-top:10px">
+          <p class="muted">
             This page covers hero shard types, hero rarity, exception heroes, sources, and total shard requirements.
           </p>
 
@@ -535,8 +539,8 @@
         </div>
       </div>
 
-      <section id="overview">
-        <h2>Overview</h2>
+      <nav class="kcat-toc" aria-label="On this page"><a href="#kcat-section-1">Overview</a><a href="#kcat-section-2">Requirements</a><a href="#kcat-section-3">Types</a><a href="#kcat-section-4">Related Pages</a></nav><section id="overview">
+        <h2 id="kcat-section-1">Overview</h2>
 
         <div class="note" role="note" aria-label="Note">
           <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
@@ -573,8 +577,8 @@
       </section>
 
       <section id="requirements">
-        <h2>Requirements</h2>
-        <p class="muted" style="margin-top:-2px">Complete shard requirements by star level and tier</p>
+        <h2 id="kcat-section-2">Requirements</h2>
+        <p class="muted">Complete shard requirements by star level and tier</p>
 
         <div class="star-banner">
           <img src="/img/star/6.webp" alt="Full 5 Star" width="92" height="92" decoding="async">
@@ -587,16 +591,16 @@
         <div class="cards" id="hero-shard-cards" aria-label="Hero shard requirement cards"></div>
 
         <div class="table-wrap data-table" aria-label="Hero Shard Requirements table">
-          <table id="hero-shard-table">
+          <div class="kcat-table-scroll" role="region" tabindex="0" aria-label="Scroll horizontally to see every column."><table id="hero-shard-table">
             <colgroup>
-              <col style="width:18%">
-              <col style="width:11%">
-              <col style="width:11%">
-              <col style="width:11%">
-              <col style="width:11%">
-              <col style="width:11%">
-              <col style="width:11%">
-              <col style="width:16%">
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
             </colgroup>
             <thead>
               <tr>
@@ -613,63 +617,63 @@
             <tbody>
               <tr>
                 <td class="star-name">1 Star</td>
-                <td class="center"><span class="tier-chip">1</span></td>
-                <td class="center"><span class="tier-chip">1</span></td>
-                <td class="center"><span class="tier-chip">2</span></td>
-                <td class="center"><span class="tier-chip">2</span></td>
-                <td class="center"><span class="tier-chip">2</span></td>
-                <td class="center"><span class="tier-chip">2</span></td>
-                <td class="num total-strong">10</td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">1</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">1</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">2</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">2</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">2</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">2</span></td>
+                <td class="num total-strong" data-kcat-number="true">10</td>
               </tr>
               <tr>
                 <td class="star-name">2 Star</td>
-                <td class="center"><span class="tier-chip">5</span></td>
-                <td class="center"><span class="tier-chip">5</span></td>
-                <td class="center"><span class="tier-chip">5</span></td>
-                <td class="center"><span class="tier-chip">5</span></td>
-                <td class="center"><span class="tier-chip">5</span></td>
-                <td class="center"><span class="tier-chip">15</span></td>
-                <td class="num total-strong">40</td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">5</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">5</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">5</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">5</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">5</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">15</span></td>
+                <td class="num total-strong" data-kcat-number="true">40</td>
               </tr>
               <tr>
                 <td class="star-name">3 Star</td>
-                <td class="center"><span class="tier-chip">15</span></td>
-                <td class="center"><span class="tier-chip">15</span></td>
-                <td class="center"><span class="tier-chip">15</span></td>
-                <td class="center"><span class="tier-chip">15</span></td>
-                <td class="center"><span class="tier-chip">15</span></td>
-                <td class="center"><span class="tier-chip">40</span></td>
-                <td class="num total-strong">115</td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">15</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">15</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">15</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">15</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">15</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">40</span></td>
+                <td class="num total-strong" data-kcat-number="true">115</td>
               </tr>
               <tr>
                 <td class="star-name">4 Star</td>
-                <td class="center"><span class="tier-chip">40</span></td>
-                <td class="center"><span class="tier-chip">40</span></td>
-                <td class="center"><span class="tier-chip">40</span></td>
-                <td class="center"><span class="tier-chip">40</span></td>
-                <td class="center"><span class="tier-chip">40</span></td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="num total-strong">300</td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">40</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">40</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">40</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">40</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">40</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="num total-strong" data-kcat-number="true">300</td>
               </tr>
               <tr>
                 <td class="star-name">5 Star</td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="center"><span class="tier-chip">100</span></td>
-                <td class="num total-strong">600</td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="center" data-kcat-number="true"><span class="tier-chip">100</span></td>
+                <td class="num total-strong" data-kcat-number="true">600</td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
                 <td>Total</td>
                 <td colspan="6">Max star upgrade total</td>
-                <td class="num">1,065</td>
+                <td class="num" data-kcat-number="true">1,065</td>
               </tr>
             </tfoot>
-          </table>
+          </table></div>
         </div>
 
         <div class="note" role="note" aria-label="Total note">
@@ -683,8 +687,8 @@
       </section>
 
       <section id="types">
-        <h2>Types</h2>
-        <p class="muted" style="margin-top:-2px">General shards and hero-specific shards are used differently.</p>
+        <h2 id="kcat-section-3">Types</h2>
+        <p class="muted">General shards and hero-specific shards are used differently.</p>
 
         <div class="types-grid">
           <article class="type-card">
@@ -722,14 +726,15 @@
       </section>
 
       <section id="related">
-        <h2>Related Pages</h2>
+        <h2 id="kcat-section-4">Related Pages</h2>
         <div class="related">
           <a class="pill" href="/en/database/">Database Main</a>
           <a class="pill" href="/en/heroes/">Hero List</a>
           <a class="pill" href="/en/database/widgets.html">Widgets</a>
         </div>
       </section>
-    </main>
+    </div></article></div>
+</main>
   </div>
 
   <script>
