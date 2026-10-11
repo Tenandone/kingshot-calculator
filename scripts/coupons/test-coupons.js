@@ -3,6 +3,7 @@
 const assert = require('assert');
 const { mergeCouponData, normalizeCode } = require('./lib');
 const { parseOfficialExpiry } = require('./sources/official-centurygames');
+const { unexpectedCouponPaths } = require('./check-working-tree');
 
 const NOW = '2026-09-18T00:00:00.000Z';
 const source = (id, status, official = false, code = 'TESTCODE') => ({
@@ -57,4 +58,9 @@ function result(observations, published = [], candidates = []) {
 assert.equal(normalizeCode(' Kingshot888 '), 'KINGSHOT888');
 assert.equal(parseOfficialExpiry('14 Sept 2025, 23:59 UTC+0', '2025-09-11'), '2025-09-14T23:59:59.000Z');
 assert.equal(parseOfficialExpiry('Jan 11, 23:59 UTC+0', '2026-01-09'), '2026-01-11T23:59:59.000Z');
+assert.deepEqual(unexpectedCouponPaths(''), []);
+assert.deepEqual(unexpectedCouponPaths(' M data/coupons.json\0M  data/coupon-candidates.json\0?? DATA_CONFLICT_REPORT.md\0'), []);
+assert.deepEqual(unexpectedCouponPaths(' M data/coupons.json\0 M index.html\0?? generated-extra.json\0'), ['index.html', 'generated-extra.json']);
+assert.deepEqual(unexpectedCouponPaths('R  data/coupons.json\0data/other.json\0'), ['data/other.json']);
+assert.deepEqual(unexpectedCouponPaths('?? data/coupons.json.backup\0?? unrelated name\nwith newline\0'), ['data/coupons.json.backup', 'unrelated name\nwith newline']);
 console.log('Coupon automation tests passed.');

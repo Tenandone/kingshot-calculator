@@ -38,8 +38,8 @@ jobs:
       - name: Test coupon automation
         run: npm run coupons:test
 
-      - name: Build site
-        run: npm run build
+      - name: Verify coupon-only working tree
+        run: node scripts/coupons/check-working-tree.js
 
       - name: Commit meaningful coupon changes
         shell: bash
