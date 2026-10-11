@@ -1,6 +1,4 @@
-<!doctype html>
-<html lang="ko">
-<head>
+<!doctype html><html lang="ko"><head>
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://kingshotdata.kr/ko/buildings/war-academy.html">
 <script src="/js/calculation-provenance.js?v=2026100621"></script>
@@ -20,440 +18,7 @@
   <link rel="preload" as="image" href="/img/buildings/war-academy.webp" />
   <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
 
-  <style>
-    :root{
-      --bg:#ffffff;
-      --panel:#ffffff;
-      --border:#e5e7eb;
-      --text:#111827;
-      --muted:#6b7280;
-      --brand:#2563eb;
-
-      --radius:16px;
-      --shadow:0 10px 24px rgba(0,0,0,.06);
-
-      --header-h: 0px;
-      --tabs-h: 0px;
-      --sticky-top: 0px;
-
-      --cell-ico: 14px;
-      --th-ico: 14px;
-      --tbl-font: 13px;
-      --tbl-pad-y: 9px;
-      --tbl-pad-x: 10px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR","Noto Sans",Arial;
-      color:var(--text);
-      background:var(--bg);
-    }
-    a{color:var(--brand); text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
-
-    header.top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:10px 0 12px;
-      border-bottom:1px solid var(--border);
-      background:var(--bg);
-    }
-    .brand a{
-      display:flex; align-items:center; gap:10px;
-      color:var(--text);
-      text-decoration:none;
-      font-weight:900;
-      letter-spacing:.1px;
-    }
-    .brand img{display:block; width:28px; height:28px; border-radius:8px}
-
-    nav.lang{
-      display:flex; gap:8px; flex-wrap:wrap;
-      color:var(--muted); font-size:13px;
-    }
-    nav.lang a{
-      color:var(--muted);
-      padding:8px 10px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      background:#fff;
-      text-decoration:none;
-    }
-    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
-
-    nav.section-tabs{
-      display:none;
-      gap:8px;
-      padding:6px 0;
-      margin:0;
-      overflow:auto;
-      -webkit-overflow-scrolling:touch;
-      background:var(--bg);
-      border-bottom:1px solid var(--border);
-    }
-    nav.section-tabs a{
-      display:inline-flex;
-      align-items:center;
-      white-space:nowrap;
-      padding:8px 10px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      background:#fff;
-      color:var(--muted);
-      font-size:13px;
-      text-decoration:none;
-    }
-    nav.section-tabs a:hover{color:var(--text)}
-
-    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
-    .crumbs a{color:var(--muted)}
-
-    .hero{
-      display:grid; grid-template-columns: 160px 1fr; gap:18px;
-      padding:18px;
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-    .hero img{
-      width:160px; height:160px; object-fit:contain;
-      border-radius:14px;
-      background:#f8fafc;
-      border:1px solid var(--border);
-      padding:10px;
-    }
-    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
-    .sub{margin:0; color:var(--muted)}
-    .muted{color:var(--muted)}
-    .quote{
-      margin:10px 0 0;
-      padding:10px 12px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fbfdff;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .jump{
-      margin-top:10px;
-      display:flex; gap:10px; flex-wrap:wrap;
-      font-size:13px; color:var(--muted);
-    }
-    .jump a{color:var(--muted)}
-    .jump a:hover{color:var(--text)}
-    .dotsep{opacity:.5}
-
-    section{
-      margin-top:22px;
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:18px;
-    }
-    section h2{margin:0 0 10px; font-size:20px}
-    section p{margin:8px 0}
-
-    .note{
-      display:flex;
-      gap:10px;
-      padding:12px 14px;
-      border:1px solid rgba(245,158,11,.35);
-      background:rgba(245,158,11,.08);
-      border-radius:14px;
-      margin:10px 0 14px;
-    }
-    .note strong{font-weight:900}
-    .note .note-ico{
-      width:18px; height:18px; flex:0 0 18px;
-      margin-top:2px;
-      color:#b45309;
-    }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-      margin-top:10px;
-    }
-    .box{
-      border:1px solid var(--border);
-      border-radius:16px;
-      background:#fff;
-      padding:12px;
-    }
-    .box h3{margin:0 0 6px; font-size:15px}
-    ul.clean{margin:0; padding-left:18px}
-    ul.clean li{margin:6px 0}
-
-    .img-wide{
-      margin:10px 0 14px;
-      border:1px solid var(--border);
-      border-radius:16px;
-      overflow:hidden;
-      background:#fff;
-    }
-    .img-wide img{display:block; width:100%; height:auto}
-
-    .img-grid{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:12px;
-      margin-top:10px;
-    }
-    figure.pic{
-      margin:0;
-      border:1px solid var(--border);
-      border-radius:16px;
-      overflow:hidden;
-      background:#fff;
-    }
-    figure.pic img{display:block; width:100%; height:auto}
-    figure.pic figcaption{
-      padding:10px 12px;
-      border-top:1px solid var(--border);
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .table-wrap{
-      border:1px solid var(--border);
-      border-radius:14px;
-      overflow-x:auto;
-      -webkit-overflow-scrolling:touch;
-      background:#fff;
-    }
-    table{
-      width:100%;
-      border-collapse:separate;
-      border-spacing:0;
-      background:#fff;
-    }
-    thead th{
-      position:sticky;
-      top:var(--sticky-top);
-      background:#f8fafc;
-      text-align:left;
-      padding:var(--tbl-pad-y) var(--tbl-pad-x);
-      border-bottom:1px solid var(--border);
-      font-size:calc(var(--tbl-font) - 1px);
-      white-space:nowrap;
-      z-index:3;
-    }
-    tbody td{
-      padding:var(--tbl-pad-y) var(--tbl-pad-x);
-      border-bottom:1px solid var(--border);
-      vertical-align:top;
-      font-size:var(--tbl-font);
-      white-space:nowrap;
-    }
-    tbody tr:nth-child(even) td{background:#fcfcfd}
-    tbody tr:hover td{background:#f3f6ff}
-    tbody tr:last-child td{border-bottom:0}
-
-    .center{text-align:center}
-    .num{text-align:right; font-variant-numeric: tabular-nums}
-    .req{white-space:normal; overflow-wrap:anywhere; word-break:keep-all}
-    .req-h{white-space:normal}
-
-    .th-flex{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-    }
-    .th-ico{
-      width:var(--th-ico);
-      height:var(--th-ico);
-      object-fit:contain;
-      display:inline-block;
-      vertical-align:middle;
-    }
-    .cell-num{
-      display:inline-flex;
-      align-items:center;
-      justify-content:flex-end;
-      gap:6px;
-      white-space:nowrap;
-    }
-    .td-ico{
-      width:var(--cell-ico);
-      height:var(--cell-ico);
-      object-fit:contain;
-      display:inline-block;
-      vertical-align:middle;
-      opacity:.95;
-    }
-
-    table.sticky-firstcol th:first-child,
-    table.sticky-firstcol td:first-child{
-      position: sticky;
-      left: 0;
-      background:inherit;
-      z-index:2;
-    }
-    table.sticky-firstcol thead th:first-child{
-      z-index:4;
-      background:#f8fafc;
-    }
-
-    .cards{display:none}
-    .cards .card{
-      border:1px solid var(--border);
-      border-radius:16px;
-      background:#fff;
-      box-shadow:0 6px 16px rgba(0,0,0,.04);
-      padding:12px 12px;
-    }
-    .card-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:8px;
-    }
-    .card-title{
-      font-size:15px;
-      font-weight:900;
-      line-height:1.2;
-      margin:0;
-    }
-    .card-meta{
-      text-align:right;
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.25;
-      white-space:nowrap;
-    }
-    .card-req{
-      margin:8px 0 10px;
-      color:var(--text);
-      font-size:13px;
-      white-space:normal;
-    }
-    .res-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:8px;
-      margin-top:10px;
-    }
-    .res-item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:10px 10px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fff;
-      font-size:13px;
-    }
-    .res-left{display:flex; align-items:center; gap:8px; min-width:0}
-    .icoimg{
-      width:18px; height:18px; flex:0 0 18px;
-      object-fit:contain;
-      display:block;
-    }
-    .res-label{
-      color:var(--muted);
-      font-size:12px;
-      white-space:nowrap;
-    }
-    .res-val{
-      font-weight:900;
-      font-variant-numeric: tabular-nums;
-      white-space:nowrap;
-    }
-    .card-foot{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:10px;
-      color:var(--muted);
-      font-size:12px;
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:6px 10px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      background:#fff;
-      white-space:nowrap;
-    }
-    .badge svg{width:16px;height:16px;opacity:.85}
-
-    .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
-    .pill{
-      display:inline-flex; align-items:center;
-      padding:7px 10px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      background:#fff;
-      font-size:13px;
-      color:var(--text);
-      text-decoration:none;
-    }
-    .pill:hover{border-color:#c7d2fe}
-
-    .anchor{
-      display:block;
-      height:0;
-      scroll-margin-top: calc(var(--sticky-top) + 12px);
-    }
-
-    @media (min-width: 901px){
-      :root{
-        --tbl-font: 12px;
-        --tbl-pad-y: 7px;
-        --tbl-pad-x: 8px;
-        --cell-ico: 13px;
-        --th-ico: 13px;
-      }
-      table{table-layout:fixed}
-      .table-wrap{overflow-x:clip}
-      @supports not (overflow: clip){ .table-wrap{overflow-x:hidden} }
-      td.req, th.req-h{white-space:normal}
-    }
-
-    @media (max-width: 900px){
-      header.top{
-        position: sticky;
-        top: 0;
-        z-index: 40;
-      }
-      nav.section-tabs{
-        display:flex;
-        position: sticky;
-        top: var(--header-h);
-        z-index: 35;
-      }
-      .hero{grid-template-columns:1fr}
-      .hero img{width:120px;height:120px}
-
-      .grid-2{grid-template-columns:1fr}
-      .img-grid{grid-template-columns:1fr}
-
-      .enhanced .data-table{display:none}
-      .enhanced .cards{display:grid; gap:12px}
-    }
-
-    @media (max-width: 600px){
-      body{font-size:15px}
-      .wrap{padding:14px 12px 56px}
-      h1{font-size:24px}
-      section{padding:14px}
-      .res-grid{grid-template-columns: 1fr}
-    }
-  </style>
+  
 
   <script type="application/ld+json">
   {
@@ -489,545 +54,113 @@
 <script defer src="/js/my-progress.js?v=2026100621"></script>
 <link rel="stylesheet" href="/css/my-progress.css?v=2026100621">
 <script defer src="/js/privacy-controls.js?v=2026100621"></script>
-<script defer src="/js/data-verification.js?v=2026100621"></script>
-<link rel="stylesheet" href="/css/ui-common.css?v=ks-ui1-85ec3439fd000513">
-<link rel="stylesheet" href="/css/ui-building.css?v=ks-ui1-85ec3439fd000513">
-<link rel="stylesheet" href="/css/ui-collections.css?v=ks-ui1-85ec3439fd000513">
-<script defer src="/js/ui/building-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
-<script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
-<script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
-<script defer src="/js/ui/runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
-</head>
+<script defer src="/js/data-verification.js?v=ks-ui3-numeric-f58d3832d761edab"></script>
 
-<body>
-  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
-    <symbol id="ico-info" viewBox="0 0 24 24">
-      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
-      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="ico-time" viewBox="0 0 24 24">
-      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
-      <path d="M12 6v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
-  </svg>
 
-  <div class="wrap">
-    <header class="top">
-      <div class="brand">
-        <a href="/ko/" aria-label="Kingshot Data 홈">
-          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" decoding="async">
-          <span>Kingshot Data</span>
-        </a>
-      </div>
-      <nav class="lang" aria-label="Language">
-        <a href="/en/buildings/war-academy.html">EN</a>
-        <a href="/ko/buildings/war-academy.html" aria-current="page">KO</a>
-        <a href="/ja/buildings/war-academy.html">JA</a>
-        <a href="/zh-tw/buildings/war-academy.html">ZH-TW</a>
-      </nav>
-    </header>
 
-    <nav class="section-tabs" aria-label="섹션 이동">
-      <a href="#overview">개요</a>
-      <a href="#exchange">교환</a>
-      <a href="#pictures">이미지</a>
-      <a href="#requirements">요구사항</a>
-      <a href="#research-tree">연구트리</a>
-      <a href="#related">관련</a>
-    </nav>
-
-    <main id="main"><aside data-verification-note style="max-width:1100px;margin:16px auto;padding:14px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;color:#334155"><strong>데이터 검증 상태: 일부 확인</strong><p style="margin:6px 0 0">이 페이지의 수치·효과·획득 조건은 전체 검증이 완료되지 않았습니다. 별도로 확인 표시가 없는 값은 검증되지 않은 참고값입니다. 미검증 핵심 데이터를 사용하는 계산은 차단됩니다. 자료를 참고할 때는 현재 게임 화면을 확인하세요.</p><p>확인 범위(2026-10-06): 일반 건물 8종의 Lv.1–30 자원 표와 도시센터 Lv.2–30 기본 시간을 대조했습니다. 원문이 비어 있는 비용, 아카데미 Lv.12 나무의 원문 단위 오기, 선행 조건, TG 단계·전쟁아카데미 비용은 확인이 남아 있습니다. </p></aside>
-      <div class="crumbs">
-        <a href="/ko/">홈</a> <span class="muted">›</span>
-        <a href="/ko/buildings/">건물</a> <span class="muted">›</span>
-        <span>전쟁 아카데미</span>
-      </div>
-
-      <div class="hero">
-        <img src="/img/buildings/war-academy.webp" alt="전쟁 아카데미 (킹샷)" loading="eager" fetchpriority="high" width="160" height="160" decoding="async">
-        <div>
-          <h1>전쟁 아카데미</h1>
-          <p class="sub">이름 그대로, 도시의 다양한 기능을 강화하고 발전시키기 위한 새로운 기술을 연구하는 곳입니다. 기술의 종류는 총 세 가지 입니다: 보병, 기병, 궁병 이 아카데미에서는 전투에 집중적인 연구를 진행할 수 있으며, 연구를 통해 T11 병사를 잠금 해제할 수 있습니다. 각 연구에는 순금 가루가 필요하며, 패키지 구매 외에 다음과 같은 교환으로 획득할 수 있습니다. - 5,000 금화 = 순금 가루 1개 (하루 최대 20회) - 10 순금 = 13 순금 가루 (하루 최대 200회)</p>
-          <div class="quote">
-            전쟁 아카데미는 순금 가루를 전장에 적용해 병사 전투력을 강화하는 연구를 진행합니다.
-          </div>
-
-          <div class="jump" aria-label="빠른 이동">
-            <a href="#overview">개요</a><span class="dotsep">•</span>
-            <a href="#exchange">교환</a><span class="dotsep">•</span>
-            <a href="#pictures">이미지</a><span class="dotsep">•</span>
-            <a href="#requirements">요구사항</a><span class="dotsep">•</span>
-            <a href="#research-tree">연구트리</a><span class="dotsep">•</span>
-            <a href="#related">관련</a>
-          </div>
-        </div>
-      </div>
-
-      <section id="overview">
+<script defer src="/js/ui/building-client.js?v=ks-ui3-numeric-f58d3832d761edab" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/runtime.js?v=ks-ui3-numeric-f58d3832d761edab" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<link rel="stylesheet" href="/css/ui-common.css?v=ks-ui3-numeric-f58d3832d761edab"><link rel="stylesheet" href="/css/ui-building.css?v=ks-ui3-numeric-f58d3832d761edab"><link rel="stylesheet" href="/css/ui-building-table.css?v=ks-ui3-numeric-f58d3832d761edab"></head><body class="kd-ui-shell kd-building-table-shell"><div class="wrap"><header class="top kd-standalone-header"><a class="kd-standalone-brand" href="/"><img src="/img/kingshotdata-logo-56.webp" width="32" height="32" alt="">Kingshot Data</a><nav class="kd-standalone-links"><a href="/ko/buildings/">건물</a><a href="/calculator/">계산기</a><a href="/#hub-search">검색</a></nav><nav class="kd-standalone-langs" aria-label="Language"><a href="/ko/buildings/war-academy.html" lang="ko" aria-current="page">KO</a><a href="/en/buildings/war-academy.html" lang="en">EN</a><a href="/ja/buildings/war-academy.html" lang="ja">JA</a><a href="/zh-tw/buildings/war-academy.html" lang="zh-TW">TW</a></nav></header><main id="main"><article id="kd-building" class="kd-ui kd-building kd-building-table-page" data-building-id="ks:building:war-academy" data-locale="ko" data-version="ks-ui3-numeric-f58d3832d761edab" data-model-url="/data/ui/buildings/war-academy.json"><div class="kd-building-heading"><img class="kd-building-image" src="/img/buildings/war-academy.webp" alt="전쟁 아카데미" width="104" height="104"><div class="kd-building-heading-copy"><a class="kd-building-back" href="/ko/buildings/">← 건물</a><h1>전쟁 아카데미</h1><p class="kd-building-intro">이름 그대로, 도시의 다양한 기능을 강화하고 발전시키기 위한 새로운 기술을 연구하는 곳입니다. 기술의 종류는 총 세 가지 입니다: 보병, 기병, 궁병 이 아카데미에서는 전투에 집중적인 연구를 진행할 수 있으며, 연구를 통해 T11 병사를 잠금 해제할 수 있습니다.</p><details class="kd-building-description"><summary>설명 더 보기</summary><p>이름 그대로, 도시의 다양한 기능을 강화하고 발전시키기 위한 새로운 기술을 연구하는 곳입니다. 기술의 종류는 총 세 가지 입니다: 보병, 기병, 궁병 이 아카데미에서는 전투에 집중적인 연구를 진행할 수 있으며, 연구를 통해 T11 병사를 잠금 해제할 수 있습니다. 각 연구에는 순금 가루가 필요하며, 패키지 구매 외에 다음과 같은 교환으로 획득할 수 있습니다. - 5,000 금화 = 순금 가루 1개 (하루 최대 20회) - 10 순금 = 13 순금 가루 (하루 최대 200회)</p></details></div></div><nav class="kd-building-toc"><a href="#truegold" data-kd-anchor="truegold">TG 단계</a><a href="#effects" data-kd-anchor="effects">효과·추가 정보</a><a href="#related" data-kd-anchor="related">관련 건물</a></nav><div class="kd-building-content"><span id="upgrade" class="kd-building-anchor"></span><span id="requirements" class="kd-building-anchor"></span><section id="truegold" class="kd-building-section"><div class="kd-building-table-toolbar"><div class="kd-building-table-title"><h2>TG 단계</h2><span>40 단계</span></div></div><p class="kd-building-scroll-hint">좌우로 밀어 자원·시간·조건을 비교하세요.</p><div class="kd-building-table-region" tabindex="0" role="region" aria-label="TG 단계"><table class="kd-building-table kd-building-base-table" data-stage="tg"><thead><tr><th scope="col">레벨</th><th scope="col" class="kd-num"><img src="/img/bread.webp" alt="" width="18" height="18">빵</th><th scope="col" class="kd-num"><img src="/img/wood.webp" alt="" width="18" height="18">나무</th><th scope="col" class="kd-num"><img src="/img/stone.webp" alt="" width="18" height="18">석재</th><th scope="col" class="kd-num"><img src="/img/iron.webp" alt="" width="18" height="18">철광</th><th scope="col" class="kd-num"><img src="/img/truegold.webp" alt="" width="18" height="18">순금</th><th scope="col" class="kd-num"><img src="/img/tempered-truegold.webp" alt="" width="18" height="18">담금질 순금</th><th scope="col" class="kd-num">기본 건설 시간</th><th scope="col" class="kd-num">전투력</th><th scope="col" class="kd-num">전투력 증가</th><th scope="col">선행 조건</th></tr></thead><tbody><tr data-row-key="tg:1:0" id="row-tg-1-0"><th scope="row">TG1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num " data-field="truegold" data-status="held" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="2" data-display-value="2" data-unit="second">2초</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="217260" data-display-value="217260" data-unit="power">217,260</td><td class="kd-num " data-field="powerIncrease" data-status="missing" data-value="null" data-display-value="null" data-unit="power">–</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:1:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A1%3A0#row-tg-1-0">도시 센터 TG 1</a></td></tr><tr data-row-key="tg:1:1" id="row-tg-1-1"><th scope="row">TG1-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1800000" data-unit="resource_unit">1.8M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="71" data-display-value="71" data-unit="resource_unit">71</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="155520" data-display-value="155520" data-unit="second">1일 19시간 12분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="224148" data-display-value="224148" data-unit="power">224,148</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:2:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A2%3A0#row-tg-2-0">도시 센터 TG 2</a></td></tr><tr data-row-key="tg:1:2" id="row-tg-1-2"><th scope="row">TG1-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1800000" data-unit="resource_unit">1.8M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="71" data-display-value="71" data-unit="resource_unit">71</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="155520" data-display-value="155520" data-unit="second">1일 19시간 12분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="231036" data-display-value="231036" data-unit="power">231,036</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:2:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A2%3A0#row-tg-2-0">도시 센터 TG 2</a></td></tr><tr data-row-key="tg:1:3" id="row-tg-1-3"><th scope="row">TG1-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1800000" data-unit="resource_unit">1.8M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="71" data-display-value="71" data-unit="resource_unit">71</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="155520" data-display-value="155520" data-unit="second">1일 19시간 12분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="237924" data-display-value="237924" data-unit="power">237,924</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:2:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A2%3A0#row-tg-2-0">도시 센터 TG 2</a></td></tr><tr data-row-key="tg:1:4" id="row-tg-1-4"><th scope="row">TG1-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1800000" data-unit="resource_unit">1.8M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="71" data-display-value="71" data-unit="resource_unit">71</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="155520" data-display-value="155520" data-unit="second">1일 19시간 12분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="244812" data-display-value="244812" data-unit="power">244,812</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:2:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A2%3A0#row-tg-2-0">도시 센터 TG 2</a></td></tr><tr data-row-key="tg:2:0" id="row-tg-2-0"><th scope="row">TG2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1800000" data-unit="resource_unit">1.8M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="71" data-display-value="71" data-unit="resource_unit">71</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="155520" data-display-value="155520" data-unit="second">1일 19시간 12분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="251700" data-display-value="251700" data-unit="power">251,700</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:2:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A2%3A0#row-tg-2-0">도시 센터 TG 2</a></td></tr><tr data-row-key="tg:2:1" id="row-tg-2-1"><th scope="row">TG2-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7900000" data-unit="resource_unit">7.9M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1900000" data-unit="resource_unit">1.9M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="107" data-display-value="107" data-unit="resource_unit">107</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="190080" data-display-value="190080" data-unit="second">2일 4시간 48분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="258588" data-display-value="258588" data-unit="power">258,588</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:3:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A3%3A0#row-tg-3-0">도시 센터 TG 3</a></td></tr><tr data-row-key="tg:2:2" id="row-tg-2-2"><th scope="row">TG2-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7900000" data-unit="resource_unit">7.9M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1900000" data-unit="resource_unit">1.9M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="107" data-display-value="107" data-unit="resource_unit">107</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="190080" data-display-value="190080" data-unit="second">2일 4시간 48분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="265476" data-display-value="265476" data-unit="power">265,476</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:3:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A3%3A0#row-tg-3-0">도시 센터 TG 3</a></td></tr><tr data-row-key="tg:2:3" id="row-tg-2-3"><th scope="row">TG2-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7900000" data-unit="resource_unit">7.9M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1900000" data-unit="resource_unit">1.9M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="107" data-display-value="107" data-unit="resource_unit">107</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="190080" data-display-value="190080" data-unit="second">2일 4시간 48분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="272364" data-display-value="272364" data-unit="power">272,364</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:3:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A3%3A0#row-tg-3-0">도시 센터 TG 3</a></td></tr><tr data-row-key="tg:2:4" id="row-tg-2-4"><th scope="row">TG2-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7900000" data-unit="resource_unit">7.9M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1900000" data-unit="resource_unit">1.9M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="107" data-display-value="107" data-unit="resource_unit">107</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="190080" data-display-value="190080" data-unit="second">2일 4시간 48분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="279252" data-display-value="279252" data-unit="power">279,252</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:3:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A3%3A0#row-tg-3-0">도시 센터 TG 3</a></td></tr><tr data-row-key="tg:3:0" id="row-tg-3-0"><th scope="row">TG3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7900000" data-unit="resource_unit">7.9M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1900000" data-unit="resource_unit">1.9M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="107" data-display-value="107" data-unit="resource_unit">107</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="190080" data-display-value="190080" data-unit="second">2일 4시간 48분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="286140" data-display-value="286140" data-unit="power">286,140</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:3:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A3%3A0#row-tg-3-0">도시 센터 TG 3</a></td></tr><tr data-row-key="tg:3:1" id="row-tg-3-1"><th scope="row">TG3-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2000000" data-unit="resource_unit">2M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="207360" data-display-value="207360" data-unit="second">2일 9시간 36분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="293724" data-display-value="293724" data-unit="power">293,724</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:4:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A4%3A0#row-tg-4-0">도시 센터 TG 4</a></td></tr><tr data-row-key="tg:3:2" id="row-tg-3-2"><th scope="row">TG3-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2000000" data-unit="resource_unit">2M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="207360" data-display-value="207360" data-unit="second">2일 9시간 36분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="301308" data-display-value="301308" data-unit="power">301,308</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:4:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A4%3A0#row-tg-4-0">도시 센터 TG 4</a></td></tr><tr data-row-key="tg:3:3" id="row-tg-3-3"><th scope="row">TG3-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2000000" data-unit="resource_unit">2M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="207360" data-display-value="207360" data-unit="second">2일 9시간 36분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="308892" data-display-value="308892" data-unit="power">308,892</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:4:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A4%3A0#row-tg-4-0">도시 센터 TG 4</a></td></tr><tr data-row-key="tg:3:4" id="row-tg-3-4"><th scope="row">TG3-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2000000" data-unit="resource_unit">2M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="207360" data-display-value="207360" data-unit="second">2일 9시간 36분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="316476" data-display-value="316476" data-unit="power">316,476</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:4:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A4%3A0#row-tg-4-0">도시 센터 TG 4</a></td></tr><tr data-row-key="tg:4:0" id="row-tg-4-0"><th scope="row">TG4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2000000" data-unit="resource_unit">2M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="207360" data-display-value="207360" data-unit="second">2일 9시간 36분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="324060" data-display-value="324060" data-unit="power">324,060</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:4:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A4%3A0#row-tg-4-0">도시 센터 TG 4</a></td></tr><tr data-row-key="tg:4:1" id="row-tg-4-1"><th scope="row">TG4-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2100000" data-unit="resource_unit">2.1M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="150" data-display-value="150" data-unit="resource_unit">150</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="241920" data-display-value="241920" data-unit="second">2일 19시간 12분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="331644" data-display-value="331644" data-unit="power">331,644</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:5:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A5%3A0#row-tg-5-0">도시 센터 TG 5</a></td></tr><tr data-row-key="tg:4:2" id="row-tg-4-2"><th scope="row">TG4-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2100000" data-unit="resource_unit">2.1M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="150" data-display-value="150" data-unit="resource_unit">150</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="241920" data-display-value="241920" data-unit="second">2일 19시간 12분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="339228" data-display-value="339228" data-unit="power">339,228</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:5:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A5%3A0#row-tg-5-0">도시 센터 TG 5</a></td></tr><tr data-row-key="tg:4:3" id="row-tg-4-3"><th scope="row">TG4-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2100000" data-unit="resource_unit">2.1M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="150" data-display-value="150" data-unit="resource_unit">150</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="241920" data-display-value="241920" data-unit="second">2일 19시간 12분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="346812" data-display-value="346812" data-unit="power">346,812</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:5:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A5%3A0#row-tg-5-0">도시 센터 TG 5</a></td></tr><tr data-row-key="tg:4:4" id="row-tg-4-4"><th scope="row">TG4-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2100000" data-unit="resource_unit">2.1M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="150" data-display-value="150" data-unit="resource_unit">150</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="241920" data-display-value="241920" data-unit="second">2일 19시간 12분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="354396" data-display-value="354396" data-unit="power">354,396</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:5:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A5%3A0#row-tg-5-0">도시 센터 TG 5</a></td></tr><tr data-row-key="tg:5:0" id="row-tg-5-0"><th scope="row">TG5</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2100000" data-unit="resource_unit">2.1M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="150" data-display-value="150" data-unit="resource_unit">150</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="241920" data-display-value="241920" data-unit="second">2일 19시간 12분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="361980" data-display-value="361980" data-unit="power">361,980</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:5:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A5%3A0#row-tg-5-0">도시 센터 TG 5</a></td></tr><tr data-row-key="tg:5:1" id="row-tg-5-1"><th scope="row">TG5-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="9600000" data-unit="resource_unit">9.6M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2400000" data-unit="resource_unit">2.4M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="90" data-display-value="90" data-unit="resource_unit">90</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="4" data-display-value="4" data-unit="resource_unit">4</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="259200" data-display-value="259200" data-unit="second">3일</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="370092" data-display-value="370092" data-unit="power">370,092</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:6:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A6%3A0#row-tg-6-0">도시 센터 TG 6</a></td></tr><tr data-row-key="tg:5:2" id="row-tg-5-2"><th scope="row">TG5-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="9600000" data-unit="resource_unit">9.6M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2400000" data-unit="resource_unit">2.4M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="90" data-display-value="90" data-unit="resource_unit">90</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="4" data-display-value="4" data-unit="resource_unit">4</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="259200" data-display-value="259200" data-unit="second">3일</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="378204" data-display-value="378204" data-unit="power">378,204</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:6:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A6%3A0#row-tg-6-0">도시 센터 TG 6</a></td></tr><tr data-row-key="tg:5:3" id="row-tg-5-3"><th scope="row">TG5-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="9600000" data-unit="resource_unit">9.6M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2400000" data-unit="resource_unit">2.4M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="90" data-display-value="90" data-unit="resource_unit">90</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="4" data-display-value="4" data-unit="resource_unit">4</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="259200" data-display-value="259200" data-unit="second">3일</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="386316" data-display-value="386316" data-unit="power">386,316</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:6:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A6%3A0#row-tg-6-0">도시 센터 TG 6</a></td></tr><tr data-row-key="tg:5:4" id="row-tg-5-4"><th scope="row">TG5-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="9600000" data-unit="resource_unit">9.6M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2400000" data-unit="resource_unit">2.4M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="90" data-display-value="90" data-unit="resource_unit">90</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="4" data-display-value="4" data-unit="resource_unit">4</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="259200" data-display-value="259200" data-unit="second">3일</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="394428" data-display-value="394428" data-unit="power">394,428</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:6:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A6%3A0#row-tg-6-0">도시 센터 TG 6</a></td></tr><tr data-row-key="tg:6:0" id="row-tg-6-0"><th scope="row">TG6</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="9600000" data-unit="resource_unit">9.6M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2400000" data-unit="resource_unit">2.4M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="45" data-display-value="45" data-unit="resource_unit">45</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="9" data-display-value="9" data-unit="resource_unit">9</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="259200" data-display-value="259200" data-unit="second">3일</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="402540" data-display-value="402540" data-unit="power">402,540</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:6:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A6%3A0#row-tg-6-0">도시 센터 TG 6</a></td></tr><tr data-row-key="tg:6:1" id="row-tg-6-1"><th scope="row">TG6-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="10000000" data-unit="resource_unit">10M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2700000" data-unit="resource_unit">2.7M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="6" data-display-value="6" data-unit="resource_unit">6</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="311040" data-display-value="311040" data-unit="second">3일 14시간 24분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="410652" data-display-value="410652" data-unit="power">410,652</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:7:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A7%3A0#row-tg-7-0">도시 센터 TG 7</a></td></tr><tr data-row-key="tg:6:2" id="row-tg-6-2"><th scope="row">TG6-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="10000000" data-unit="resource_unit">10M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2700000" data-unit="resource_unit">2.7M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="6" data-display-value="6" data-unit="resource_unit">6</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="311040" data-display-value="311040" data-unit="second">3일 14시간 24분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="418764" data-display-value="418764" data-unit="power">418,764</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:7:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A7%3A0#row-tg-7-0">도시 센터 TG 7</a></td></tr><tr data-row-key="tg:6:3" id="row-tg-6-3"><th scope="row">TG6-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="10000000" data-unit="resource_unit">10M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2700000" data-unit="resource_unit">2.7M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="6" data-display-value="6" data-unit="resource_unit">6</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="311040" data-display-value="311040" data-unit="second">3일 14시간 24분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="426876" data-display-value="426876" data-unit="power">426,876</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:7:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A7%3A0#row-tg-7-0">도시 센터 TG 7</a></td></tr><tr data-row-key="tg:6:4" id="row-tg-6-4"><th scope="row">TG6-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="10000000" data-unit="resource_unit">10M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2700000" data-unit="resource_unit">2.7M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="6" data-display-value="6" data-unit="resource_unit">6</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="311040" data-display-value="311040" data-unit="second">3일 14시간 24분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="434988" data-display-value="434988" data-unit="power">434,988</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:7:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A7%3A0#row-tg-7-0">도시 센터 TG 7</a></td></tr><tr data-row-key="tg:7:0" id="row-tg-7-0"><th scope="row">TG7</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="10000000" data-unit="resource_unit">10M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2700000" data-unit="resource_unit">2.7M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="54" data-display-value="54" data-unit="resource_unit">54</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="13" data-display-value="13" data-unit="resource_unit">13</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="311040" data-display-value="311040" data-unit="second">3일 14시간 24분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="443100" data-display-value="443100" data-unit="power">443,100</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:7:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A7%3A0#row-tg-7-0">도시 센터 TG 7</a></td></tr><tr data-row-key="tg:7:1" id="row-tg-7-1"><th scope="row">TG7-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="13000000" data-unit="resource_unit">13M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3300000" data-unit="resource_unit">3.3M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="9" data-display-value="9" data-unit="resource_unit">9</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="345600" data-display-value="345600" data-unit="second">4일</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="451212" data-display-value="451212" data-unit="power">451,212</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:8:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A8%3A0#row-tg-8-0">도시 센터 TG 8</a></td></tr><tr data-row-key="tg:7:2" id="row-tg-7-2"><th scope="row">TG7-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="13000000" data-unit="resource_unit">13M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3300000" data-unit="resource_unit">3.3M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="9" data-display-value="9" data-unit="resource_unit">9</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="345600" data-display-value="345600" data-unit="second">4일</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="459324" data-display-value="459324" data-unit="power">459,324</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:8:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A8%3A0#row-tg-8-0">도시 센터 TG 8</a></td></tr><tr data-row-key="tg:7:3" id="row-tg-7-3"><th scope="row">TG7-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="13000000" data-unit="resource_unit">13M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3300000" data-unit="resource_unit">3.3M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="9" data-display-value="9" data-unit="resource_unit">9</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="345600" data-display-value="345600" data-unit="second">4일</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="467436" data-display-value="467436" data-unit="power">467,436</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:8:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A8%3A0#row-tg-8-0">도시 센터 TG 8</a></td></tr><tr data-row-key="tg:7:4" id="row-tg-7-4"><th scope="row">TG7-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="13000000" data-unit="resource_unit">13M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3300000" data-unit="resource_unit">3.3M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="9" data-display-value="9" data-unit="resource_unit">9</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="345600" data-display-value="345600" data-unit="second">4일</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="475548" data-display-value="475548" data-unit="power">475,548</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:8:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A8%3A0#row-tg-8-0">도시 센터 TG 8</a></td></tr><tr data-row-key="tg:8:0" id="row-tg-8-0"><th scope="row">TG8</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="13000000" data-unit="resource_unit">13M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3300000" data-unit="resource_unit">3.3M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="9" data-display-value="9" data-unit="resource_unit">9</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="345600" data-display-value="345600" data-unit="second">4일</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="483660" data-display-value="483660" data-unit="power">483,660</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:8:0" href="/ko/buildings/town-center.html?stage=tg&level=tg%3A8%3A0#row-tg-8-0">도시 센터 TG 8</a></td></tr><tr data-row-key="tg:8:1" id="row-tg-8-1"><th scope="row">TG8-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="14000000" data-unit="resource_unit">14M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3600000" data-unit="resource_unit">3.6M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="13" data-display-value="13" data-unit="resource_unit">13</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="224640" data-display-value="224640" data-unit="second">2일 14시간 24분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="492348" data-display-value="492348" data-unit="power">492,348</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8688" data-display-value="8688" data-unit="power">8,688</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:9:0" href="/ko/buildings/town-center.html">도시 센터 TG 9</a></td></tr><tr data-row-key="tg:8:2" id="row-tg-8-2"><th scope="row">TG8-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="14000000" data-unit="resource_unit">14M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3600000" data-unit="resource_unit">3.6M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="13" data-display-value="13" data-unit="resource_unit">13</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="224640" data-display-value="224640" data-unit="second">2일 14시간 24분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="501036" data-display-value="501036" data-unit="power">501,036</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8688" data-display-value="8688" data-unit="power">8,688</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:9:0" href="/ko/buildings/town-center.html">도시 센터 TG 9</a></td></tr><tr data-row-key="tg:8:3" id="row-tg-8-3"><th scope="row">TG8-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="14000000" data-unit="resource_unit">14M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3600000" data-unit="resource_unit">3.6M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="13" data-display-value="13" data-unit="resource_unit">13</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="224640" data-display-value="224640" data-unit="second">2일 14시간 24분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="509724" data-display-value="509724" data-unit="power">509,724</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8688" data-display-value="8688" data-unit="power">8,688</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:9:0" href="/ko/buildings/town-center.html">도시 센터 TG 9</a></td></tr><tr data-row-key="tg:8:4" id="row-tg-8-4"><th scope="row">TG8-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="14000000" data-unit="resource_unit">14M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3600000" data-unit="resource_unit">3.6M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="13" data-display-value="13" data-unit="resource_unit">13</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="224640" data-display-value="224640" data-unit="second">2일 14시간 24분</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="518412" data-display-value="518412" data-unit="power">518,412</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8688" data-display-value="8688" data-unit="power">8,688</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:9:0" href="/ko/buildings/town-center.html">도시 센터 TG 9</a></td></tr></tbody></table></div><p class="kd-building-reference-note">–는 확인 가능한 값이 없는 항목입니다. 게임의 버프와 진행 조건에 따라 실제 시간이 달라집니다.</p></section><span id="ico-info" class="kd-building-anchor"></span><span id="ico-time" class="kd-building-anchor"></span><span id="wa-cards" class="kd-building-anchor"></span><span id="overview-anchor" class="kd-building-anchor"></span><section id="effects" class="kd-building-section"><h2>효과·추가 정보</h2><details class="kd-building-description"><summary>설명 더 보기</summary><p>아래에 표시된 건설 시간은 기본 시간입니다. 왕국 버프, 연구 기술, 살로의 스킬 등 건설 시간 감소 효과는 포함되어 있지 않습니다. 따라서 실제 건설 시간은 대부분 아래 표에 표시된 시간보다 더 짧습니다.</p></details><span id="overview" class="kd-building-anchor"></span><section id="legacy-war-academy-overview" class="kd-building-supplement-section">
         <h2>개요</h2>
         <p>
           전쟁 아카데미 연구에는 새로운 재료인 <strong>순금 가루(Truegold Dust)</strong>가 필요하며,
           기본 자원(빵/나무/석재/철)도 함께 소모됩니다.
         </p>
 
-        <div class="note" role="note" aria-label="안내">
-          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+        <div role="note" aria-label="안내" class="kd-building-supplement-note">
+          
           <div>
             <strong>안내:</strong>
             영웅/연구/버프 등에 따라 실제 소모량은 달라질 수 있습니다. 여기 표는 기본(원본) 수치 기준입니다.
           </div>
         </div>
       </section>
-
-      <section id="exchange">
+<span id="exchange" class="kd-building-anchor"></span><section id="legacy-war-academy-exchange" class="kd-building-supplement-section">
         <h2>순금 가루 교환</h2>
-        <p class="muted" style="margin-top:-2px">
+        <p>
           순금 가루는 패키지 구매로 얻을 수도 있고, 전쟁 아카데미 내부에서 골드/순금을 교환해 획득할 수도 있습니다.
         </p>
 
-        <div class="img-wide" aria-label="순금 가루 교환 화면">
+        <div aria-label="순금 가루 교환 화면">
           <img src="/img/buildings/war-academy1.webp" alt="전쟁 아카데미: 순금 가루 교환 UI" loading="lazy" decoding="async" width="465" height="316">
         </div>
 
-        <div class="grid-2">
-          <div class="box">
+        <div>
+          <div>
             <h3>골드 교환</h3>
-            <ul class="clean">
+            <ul>
               <li><strong>골드 5,000</strong> → <strong>순금 가루 1</strong></li>
               <li>하루 최대 <strong>20회</strong> 교환</li>
             </ul>
           </div>
-          <div class="box">
+          <div>
             <h3>순금 교환</h3>
-            <ul class="clean">
+            <ul>
               <li><strong>순금 10</strong> → <strong>순금 가루 13</strong></li>
               <li>하루 최대 <strong>200회</strong> 교환 (하루 최대 <strong>2,600</strong> 가루 획득 가능)</li>
             </ul>
           </div>
         </div>
       </section>
-
-      <section id="pictures">
+<span id="pictures" class="kd-building-anchor"></span><section id="legacy-war-academy-pictures" class="kd-building-supplement-section">
         <h2>이미지</h2>
-        <p class="muted" style="margin-top:-2px">
+        <p>
           연구 트리 및 주요 화면 예시입니다.
         </p>
 
-        <div class="img-grid" aria-label="전쟁 아카데미 이미지">
-          <figure class="pic">
+        <div aria-label="전쟁 아카데미 이미지">
+          <figure>
             <img src="/img/buildings/war-academy2.webp" alt="전쟁 아카데미 연구 트리 (1)" loading="lazy" decoding="async" width="768" height="1279">
             <figcaption>연구 트리 (1)</figcaption>
           </figure>
-          <figure class="pic">
+          <figure>
             <img src="/img/buildings/war-academy3.webp" alt="전쟁 아카데미 연구 트리 (2)" loading="lazy" decoding="async" width="768" height="1279">
             <figcaption>연구 트리 (2)</figcaption>
           </figure>
-          <figure class="pic">
+          <figure>
             <img src="/img/buildings/war-academy4.webp" alt="전쟁 아카데미 연구 트리 (3)" loading="lazy" decoding="async" width="768" height="1275">
             <figcaption>연구 트리 (3)</figcaption>
           </figure>
-          <figure class="pic">
+          <figure>
             <img src="/img/buildings/war-academy5.webp" alt="전쟁 아카데미 연구 트리 (4)" loading="lazy" decoding="async" width="768" height="1275">
             <figcaption>연구 트리 (4)</figcaption>
           </figure>
         </div>
       </section>
-
-      <section id="req">
-        <span id="requirements" class="anchor"></span>
-        <h2>요구사항</h2>
-        <p class="muted" style="margin-top:-2px">
+<section class="kd-building-supplement-section"><h2>건물 효과·참고값 · 순금 단계</h2><div class="kd-building-supplement-table-region" role="region" tabindex="0" aria-label="건물 효과·참고값 · 순금 단계"><span id="wa-table" class="kd-building-anchor"></span><table id="legacy-war-academy-wa-table" class="kd-building-supplement-table"><thead><tr><th scope="col" class="kd-building-supplement-level">레벨</th><th scope="col">연구 속도</th></tr></thead><tbody><tr><th scope="row" class="kd-building-supplement-level">TG 1</th><td class="kd-num">0.50%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 1-1</th><td class="kd-num">0.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 1-2</th><td class="kd-num">0.70%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 1-3</th><td class="kd-num">0.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 1-4</th><td class="kd-num">0.90%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 2</th><td class="kd-num">1.00%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 2-1</th><td class="kd-num">1.10%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 2-2</th><td class="kd-num">1.20%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 2-3</th><td class="kd-num">1.30%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 2-4</th><td class="kd-num">1.40%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 3</th><td class="kd-num">1.50%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 3-1</th><td class="kd-num">1.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 3-2</th><td class="kd-num">1.70%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 3-3</th><td class="kd-num">1.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 3-4</th><td class="kd-num">1.90%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 4</th><td class="kd-num">2.00%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 4-1</th><td class="kd-num">2.10%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 4-2</th><td class="kd-num">2.20%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 4-3</th><td class="kd-num">2.30%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 4-4</th><td class="kd-num">2.40%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 5</th><td class="kd-num">2.50%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 5-1</th><td class="kd-num">2.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 5-2</th><td class="kd-num">2.70%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 5-3</th><td class="kd-num">2.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 5-4</th><td class="kd-num">2.90%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 6</th><td class="kd-num">3.00%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 6-1</th><td class="kd-num">3.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 6-2</th><td class="kd-num">4.20%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 6-3</th><td class="kd-num">4.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 6-4</th><td class="kd-num">5.40%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 7</th><td class="kd-num">6.00%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 7-1</th><td class="kd-num">6.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 7-2</th><td class="kd-num">7.20%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 7-3</th><td class="kd-num">7.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 7-4</th><td class="kd-num">8.40%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 8</th><td class="kd-num">9.00%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 8-1</th><td class="kd-num">9.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 8-2</th><td class="kd-num">10.20%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 8-3</th><td class="kd-num">10.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 8-4</th><td class="kd-num">11.40%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9</th><td class="kd-num">12.00%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9-1</th><td class="kd-num">12.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9-2</th><td class="kd-num">13.20%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9-3</th><td class="kd-num">13.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9-4</th><td class="kd-num">14.40%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 10</th><td class="kd-num">15.00%</td></tr></tbody></table></div></section>
+<section class="kd-building-supplement-section"><h2>기존 건물 정보 · 순금 단계</h2><div class="kd-building-supplement-table-region" role="region" tabindex="0" aria-label="기존 건물 정보 · 순금 단계"><table id="legacy-war-academy-wa-table-remaining" class="kd-building-supplement-table"><thead><tr><th scope="col" class="kd-building-supplement-level">레벨</th><th scope="col">필요 건물</th><th scope="col">빵</th><th scope="col">나무</th><th scope="col">석재</th><th scope="col">철</th><th scope="col">순금</th><th scope="col">담금질 순금</th><th scope="col">시간</th><th scope="col">전투력</th><th scope="col">연구 속도</th></tr></thead><tbody><tr><th scope="row" class="kd-building-supplement-level">TG 9</th><td class="kd-num"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 9</a></td><td class="kd-num">72M</td><td class="kd-num">72M</td><td class="kd-num">14M</td><td class="kd-num">3.6M</td><td class="kd-num">63</td><td class="kd-num">27</td><td class="kd-num">2d 14h 24m</td><td class="kd-num">527,100</td><td class="kd-num">12.00%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9-1</th><td class="kd-num"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 10</a></td><td class="kd-num">84M</td><td class="kd-num">84M</td><td class="kd-num">16M</td><td class="kd-num">7.2M</td><td class="kd-num">157</td><td class="kd-num">31</td><td class="kd-num">4d</td><td class="kd-num">535,788</td><td class="kd-num">12.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9-2</th><td class="kd-num"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 10</a></td><td class="kd-num">84M</td><td class="kd-num">84M</td><td class="kd-num">16M</td><td class="kd-num">7.2M</td><td class="kd-num">157</td><td class="kd-num">31</td><td class="kd-num">4d</td><td class="kd-num">544,476</td><td class="kd-num">13.20%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9-3</th><td class="kd-num"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 10</a></td><td class="kd-num">84M</td><td class="kd-num">84M</td><td class="kd-num">16M</td><td class="kd-num">7.2M</td><td class="kd-num">157</td><td class="kd-num">31</td><td class="kd-num">4d</td><td class="kd-num">553,164</td><td class="kd-num">13.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9-4</th><td class="kd-num"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 10</a></td><td class="kd-num">84M</td><td class="kd-num">84M</td><td class="kd-num">16M</td><td class="kd-num">7.2M</td><td class="kd-num">157</td><td class="kd-num">31</td><td class="kd-num">4d</td><td class="kd-num">561,852</td><td class="kd-num">14.40%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 10</th><td class="kd-num"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 10</a></td><td class="kd-num">84M</td><td class="kd-num">84M</td><td class="kd-num">16M</td><td class="kd-num">7.2M</td><td class="kd-num">78</td><td class="kd-num">63</td><td class="kd-num">4d</td><td class="kd-num">570,540</td><td class="kd-num">15.00%</td></tr></tbody></table></div></section>
+<span id="req" class="kd-building-anchor"></span><section id="legacy-war-academy-req" class="kd-building-supplement-section">
+        
+        
+        <p>
           전쟁 아카데미는 순금(TG) 구간 건물입니다. 아래 표는 게임 내 TG 진행 기준으로 정리했습니다.
         </p>
 
-        <div class="table-wrap data-table" aria-label="전쟁 아카데미 요구사항 표">
-          <table id="wa-table" class="sticky-firstcol">
-            <colgroup>
-              <col style="width:9%">
-              <col style="width:16%">
-              <col style="width:9%">
-              <col style="width:9%">
-              <col style="width:9%">
-              <col style="width:9%">
-              <col style="width:8%">
-              <col style="width:10%">
-              <col style="width:12%">
-              <col style="width:10%">
-              <col style="width:9%">
-            </colgroup>
-            <thead>
-              <tr>
-                <th class="center">레벨</th>
-                <th class="req-h">필요 건물</th>
-                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">빵</span></th>
-                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">나무</span></th>
-                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">석재</span></th>
-                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">철</span></th>
-                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/truegold.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">순금</span></th>
-                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/tempered-truegold.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">담금질 순금</span></th>
-                <th><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-time"></use></svg>시간</span></th>
-                <th class="num">전투력</th>
-                <th class="num">연구 속도</th>
-              </tr>
-            </thead>
+        
 
-            <tbody>
-              <tr><td class="center">TG 1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 1</a></td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td>2s</td><td class="num">217,260</td><td class="num">0.50%</td></tr>
-
-              <tr><td class="center">TG 1-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 2</a></td><td class="num">36M</td><td class="num">36M</td><td class="num">7.2M</td><td class="num">1.8M</td><td class="num">71</td><td class="num">–</td><td>1d 19h 12m</td><td class="num">224,148</td><td class="num">0.60%</td></tr>
-              <tr><td class="center">TG 1-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 2</a></td><td class="num">36M</td><td class="num">36M</td><td class="num">7.2M</td><td class="num">1.8M</td><td class="num">71</td><td class="num">–</td><td>1d 19h 12m</td><td class="num">231,036</td><td class="num">0.70%</td></tr>
-              <tr><td class="center">TG 1-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 2</a></td><td class="num">36M</td><td class="num">36M</td><td class="num">7.2M</td><td class="num">1.8M</td><td class="num">71</td><td class="num">–</td><td>1d 19h 12m</td><td class="num">237,924</td><td class="num">0.80%</td></tr>
-              <tr><td class="center">TG 1-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 2</a></td><td class="num">36M</td><td class="num">36M</td><td class="num">7.2M</td><td class="num">1.8M</td><td class="num">71</td><td class="num">–</td><td>1d 19h 12m</td><td class="num">244,812</td><td class="num">0.90%</td></tr>
-              <tr><td class="center">TG 2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 2</a></td><td class="num">36M</td><td class="num">36M</td><td class="num">7.2M</td><td class="num">1.8M</td><td class="num">71</td><td class="num">–</td><td>1d 19h 12m</td><td class="num">251,700</td><td class="num">1.00%</td></tr>
-
-              <tr><td class="center">TG 2-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 3</a></td><td class="num">39M</td><td class="num">39M</td><td class="num">7.9M</td><td class="num">1.9M</td><td class="num">107</td><td class="num">–</td><td>2d 4h 48m</td><td class="num">258,588</td><td class="num">1.10%</td></tr>
-              <tr><td class="center">TG 2-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 3</a></td><td class="num">39M</td><td class="num">39M</td><td class="num">7.9M</td><td class="num">1.9M</td><td class="num">107</td><td class="num">–</td><td>2d 4h 48m</td><td class="num">265,476</td><td class="num">1.20%</td></tr>
-              <tr><td class="center">TG 2-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 3</a></td><td class="num">39M</td><td class="num">39M</td><td class="num">7.9M</td><td class="num">1.9M</td><td class="num">107</td><td class="num">–</td><td>2d 4h 48m</td><td class="num">272,364</td><td class="num">1.30%</td></tr>
-              <tr><td class="center">TG 2-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 3</a></td><td class="num">39M</td><td class="num">39M</td><td class="num">7.9M</td><td class="num">1.9M</td><td class="num">107</td><td class="num">–</td><td>2d 4h 48m</td><td class="num">279,252</td><td class="num">1.40%</td></tr>
-              <tr><td class="center">TG 3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 3</a></td><td class="num">39M</td><td class="num">39M</td><td class="num">7.9M</td><td class="num">1.9M</td><td class="num">107</td><td class="num">–</td><td>2d 4h 48m</td><td class="num">286,140</td><td class="num">1.50%</td></tr>
-
-              <tr><td class="center">TG 3-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 4</a></td><td class="num">41M</td><td class="num">41M</td><td class="num">8.2M</td><td class="num">2M</td><td class="num">126</td><td class="num">–</td><td>2d 9h 36m</td><td class="num">293,724</td><td class="num">1.60%</td></tr>
-              <tr><td class="center">TG 3-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 4</a></td><td class="num">41M</td><td class="num">41M</td><td class="num">8.2M</td><td class="num">2M</td><td class="num">126</td><td class="num">–</td><td>2d 9h 36m</td><td class="num">301,308</td><td class="num">1.70%</td></tr>
-              <tr><td class="center">TG 3-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 4</a></td><td class="num">41M</td><td class="num">41M</td><td class="num">8.2M</td><td class="num">2M</td><td class="num">126</td><td class="num">–</td><td>2d 9h 36m</td><td class="num">308,892</td><td class="num">1.80%</td></tr>
-              <tr><td class="center">TG 3-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 4</a></td><td class="num">41M</td><td class="num">41M</td><td class="num">8.2M</td><td class="num">2M</td><td class="num">126</td><td class="num">–</td><td>2d 9h 36m</td><td class="num">316,476</td><td class="num">1.90%</td></tr>
-              <tr><td class="center">TG 4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 4</a></td><td class="num">41M</td><td class="num">41M</td><td class="num">8.2M</td><td class="num">2M</td><td class="num">126</td><td class="num">–</td><td>2d 9h 36m</td><td class="num">324,060</td><td class="num">2.00%</td></tr>
-
-              <tr><td class="center">TG 4-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 5</a></td><td class="num">42M</td><td class="num">42M</td><td class="num">8.2M</td><td class="num">2.1M</td><td class="num">150</td><td class="num">–</td><td>2d 19h 12m</td><td class="num">331,644</td><td class="num">2.10%</td></tr>
-              <tr><td class="center">TG 4-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 5</a></td><td class="num">42M</td><td class="num">42M</td><td class="num">8.2M</td><td class="num">2.1M</td><td class="num">150</td><td class="num">–</td><td>2d 19h 12m</td><td class="num">339,228</td><td class="num">2.20%</td></tr>
-              <tr><td class="center">TG 4-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 5</a></td><td class="num">42M</td><td class="num">42M</td><td class="num">8.2M</td><td class="num">2.1M</td><td class="num">150</td><td class="num">–</td><td>2d 19h 12m</td><td class="num">346,812</td><td class="num">2.30%</td></tr>
-              <tr><td class="center">TG 4-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 5</a></td><td class="num">42M</td><td class="num">42M</td><td class="num">8.2M</td><td class="num">2.1M</td><td class="num">150</td><td class="num">–</td><td>2d 19h 12m</td><td class="num">354,396</td><td class="num">2.40%</td></tr>
-              <tr><td class="center">TG 5</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 5</a></td><td class="num">42M</td><td class="num">42M</td><td class="num">8.2M</td><td class="num">2.1M</td><td class="num">150</td><td class="num">–</td><td>2d 19h 12m</td><td class="num">361,980</td><td class="num">2.50%</td></tr>
-
-              <tr><td class="center">TG 5-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 6</a></td><td class="num">48M</td><td class="num">48M</td><td class="num">9.6M</td><td class="num">2.4M</td><td class="num">90</td><td class="num">4</td><td>3d</td><td class="num">370,092</td><td class="num">2.60%</td></tr>
-              <tr><td class="center">TG 5-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 6</a></td><td class="num">48M</td><td class="num">48M</td><td class="num">9.6M</td><td class="num">2.4M</td><td class="num">90</td><td class="num">4</td><td>3d</td><td class="num">378,204</td><td class="num">2.70%</td></tr>
-              <tr><td class="center">TG 5-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 6</a></td><td class="num">48M</td><td class="num">48M</td><td class="num">9.6M</td><td class="num">2.4M</td><td class="num">90</td><td class="num">4</td><td>3d</td><td class="num">386,316</td><td class="num">2.80%</td></tr>
-              <tr><td class="center">TG 5-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 6</a></td><td class="num">48M</td><td class="num">48M</td><td class="num">9.6M</td><td class="num">2.4M</td><td class="num">90</td><td class="num">4</td><td>3d</td><td class="num">394,428</td><td class="num">2.90%</td></tr>
-              <tr><td class="center">TG 6</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 6</a></td><td class="num">48M</td><td class="num">48M</td><td class="num">9.6M</td><td class="num">2.4M</td><td class="num">45</td><td class="num">9</td><td>3d</td><td class="num">402,540</td><td class="num">3.00%</td></tr>
-
-              <tr><td class="center">TG 6-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 7</a></td><td class="num">54M</td><td class="num">54M</td><td class="num">10M</td><td class="num">2.7M</td><td class="num">108</td><td class="num">6</td><td>3d 14h 24m</td><td class="num">410,652</td><td class="num">3.60%</td></tr>
-              <tr><td class="center">TG 6-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 7</a></td><td class="num">54M</td><td class="num">54M</td><td class="num">10M</td><td class="num">2.7M</td><td class="num">108</td><td class="num">6</td><td>3d 14h 24m</td><td class="num">418,764</td><td class="num">4.20%</td></tr>
-              <tr><td class="center">TG 6-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 7</a></td><td class="num">54M</td><td class="num">54M</td><td class="num">10M</td><td class="num">2.7M</td><td class="num">108</td><td class="num">6</td><td>3d 14h 24m</td><td class="num">426,876</td><td class="num">4.80%</td></tr>
-              <tr><td class="center">TG 6-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 7</a></td><td class="num">54M</td><td class="num">54M</td><td class="num">10M</td><td class="num">2.7M</td><td class="num">108</td><td class="num">6</td><td>3d 14h 24m</td><td class="num">434,988</td><td class="num">5.40%</td></tr>
-              <tr><td class="center">TG 7</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 7</a></td><td class="num">54M</td><td class="num">54M</td><td class="num">10M</td><td class="num">2.7M</td><td class="num">54</td><td class="num">13</td><td>3d 14h 24m</td><td class="num">443,100</td><td class="num">6.00%</td></tr>
-
-              <tr><td class="center">TG 7-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 8</a></td><td class="num">66M</td><td class="num">66M</td><td class="num">13M</td><td class="num">3.3M</td><td class="num">108</td><td class="num">9</td><td>4d</td><td class="num">451,212</td><td class="num">6.60%</td></tr>
-              <tr><td class="center">TG 7-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 8</a></td><td class="num">66M</td><td class="num">66M</td><td class="num">13M</td><td class="num">3.3M</td><td class="num">108</td><td class="num">9</td><td>4d</td><td class="num">459,324</td><td class="num">7.20%</td></tr>
-              <tr><td class="center">TG 7-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 8</a></td><td class="num">66M</td><td class="num">66M</td><td class="num">13M</td><td class="num">3.3M</td><td class="num">108</td><td class="num">9</td><td>4d</td><td class="num">467,436</td><td class="num">7.80%</td></tr>
-              <tr><td class="center">TG 7-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 8</a></td><td class="num">66M</td><td class="num">66M</td><td class="num">13M</td><td class="num">3.3M</td><td class="num">108</td><td class="num">9</td><td>4d</td><td class="num">475,548</td><td class="num">8.40%</td></tr>
-              <tr><td class="center">TG 8</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 8</a></td><td class="num">66M</td><td class="num">66M</td><td class="num">13M</td><td class="num">3.3M</td><td class="num">54</td><td class="num">18</td><td>4d</td><td class="num">483,660</td><td class="num">9.00%</td></tr>
-
-              <tr><td class="center">TG 8-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 9</a></td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td class="num">126</td><td class="num">13</td><td>2d 14h 24m</td><td class="num">492,348</td><td class="num">9.60%</td></tr>
-              <tr><td class="center">TG 8-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 9</a></td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td class="num">126</td><td class="num">13</td><td>2d 14h 24m</td><td class="num">501,036</td><td class="num">10.20%</td></tr>
-              <tr><td class="center">TG 8-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 9</a></td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td class="num">126</td><td class="num">13</td><td>2d 14h 24m</td><td class="num">509,724</td><td class="num">10.80%</td></tr>
-              <tr><td class="center">TG 8-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 9</a></td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td class="num">126</td><td class="num">13</td><td>2d 14h 24m</td><td class="num">518,412</td><td class="num">11.40%</td></tr>
-              <tr><td class="center">TG 9</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 9</a></td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td class="num">63</td><td class="num">27</td><td>2d 14h 24m</td><td class="num">527,100</td><td class="num">12.00%</td></tr>
-
-              <tr><td class="center">TG 9-1</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 10</a></td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">7.2M</td><td class="num">157</td><td class="num">31</td><td>4d</td><td class="num">535,788</td><td class="num">12.60%</td></tr>
-              <tr><td class="center">TG 9-2</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 10</a></td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">7.2M</td><td class="num">157</td><td class="num">31</td><td>4d</td><td class="num">544,476</td><td class="num">13.20%</td></tr>
-              <tr><td class="center">TG 9-3</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 10</a></td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">7.2M</td><td class="num">157</td><td class="num">31</td><td>4d</td><td class="num">553,164</td><td class="num">13.80%</td></tr>
-              <tr><td class="center">TG 9-4</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 10</a></td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">7.2M</td><td class="num">157</td><td class="num">31</td><td>4d</td><td class="num">561,852</td><td class="num">14.40%</td></tr>
-              <tr><td class="center">TG 10</td><td class="req"><a href="/ko/buildings/town-center.html#truegold">도시센터 TG 10</a></td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">7.2M</td><td class="num">78</td><td class="num">63</td><td>4d</td><td class="num">570,540</td><td class="num">15.00%</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="cards" id="wa-cards" aria-label="전쟁 아카데미 요구사항 (모바일 카드)"></div>
+        
       </section>
-
-      <section id="research-tree">
+<span id="research-tree" class="kd-building-anchor"></span><section id="legacy-war-academy-research-tree" class="kd-building-supplement-section">
   <h2>전쟁 아카데미 연구트리</h2>
-  <p class="muted" style="margin-top:-2px">
+  <p>
     전쟁 아카데미 해금 이후 진행할 수 있는 순금 병종 연구와 세부 연구 비용표를 한눈에 확인하세요.
   </p>
   <p>
     순금보병, 순금궁병, 순금기병 연구 정보를 한 페이지에서 편하게 확인할 수 있습니다.
   </p>
 
-  <div class="related">
-    <a class="pill" href="/waracademy">전쟁 아카데미 연구트리 바로가기</a>
+  <div>
+    <a href="/waracademy">전쟁 아카데미 연구트리 바로가기</a>
   </div>
 </section>
-
-      <section id="related">
+<section id="legacy-war-academy-related" class="kd-building-supplement-section">
         <h2>관련 건물</h2>
-        <div class="related">
-          <a class="pill" href="/ko/buildings/town-center.html">도시센터</a>
-          <a class="pill" href="/ko/buildings/academy.html">아카데미</a>
-          <a class="pill" href="/ko/buildings/truegold-crucible.html">순금용광로</a>
+        <div>
+          <a href="/ko/buildings/town-center.html">도시센터</a>
+          <a href="/ko/buildings/academy.html">아카데미</a>
+          <a href="/ko/buildings/truegold-crucible.html">순금용광로</a>
         </div>
       </section>
-
-
-
-
-
-
-
-
-<!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>관련 데이터와 계산 도구</h2><p>개별 건물 페이지에서는 선행 건물, 자원과 기본 시간을 확인합니다. 도시센터 목표를 세웠다면 요구되는 대사관과 병영 레벨도 함께 살펴보세요. 여러 단계를 올릴 때는 건물 계산기에서 현재 레벨을 입력해 완료한 단계의 비용을 제외할 수 있습니다. 표의 기본 시간과 계정 보너스를 적용한 시간은 구분해서 비교하세요.</p><ul><li><a href="/ko/buildings/">킹샷 건물</a></li><li><a href="/calc-building/">건물 계산기</a></li><li><a href="/ko/guides/kingshot-f2p-guide.html">킹샷 초보 공략 · 무과금/소과금 성장 가이드</a></li></ul></section><!-- kd-related:end -->
-</main>
-  </div>
-
-  <script>
-    (function(){
-      document.documentElement.classList.add('js');
-
-      var mqMobile = window.matchMedia('(max-width: 900px)');
-
-      function setStickyTop(){
-        var header = document.querySelector('header.top');
-        var tabs = document.querySelector('nav.section-tabs');
-        var isMobile = mqMobile.matches;
-
-        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
-        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
-
-        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
-        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
-        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
-      }
-
-      function isDash(v){
-        if(!v) return true;
-        var t = String(v).trim();
-        return t === '–' || t === '-' || t === '';
-      }
-
-      function parseCompact(s){
-        var t = String(s || '').trim();
-        if(isDash(t)) return null;
-
-        t = t.replace(/,/g,'').toUpperCase();
-
-        var m = t.match(/^(\d+(?:\.\d+)?)([KMB])$/);
-        if(m){
-          var n = Number(m[1]);
-          var suf = m[2];
-          if(!Number.isFinite(n)) return null;
-          if(suf === 'K') return Math.round(n * 1e3);
-          if(suf === 'M') return Math.round(n * 1e6);
-          if(suf === 'B') return Math.round(n * 1e9);
-        }
-
-        var n2 = Number(t);
-        return Number.isFinite(n2) ? n2 : null;
-      }
-
-      function fmtKMB(n){
-        if(n === null) return '–';
-        if(n < 1000) return String(n);
-
-        var v, suf;
-        if(n >= 1e9){ v = n / 1e9; suf = 'B'; }
-        else if(n >= 1e6){ v = n / 1e6; suf = 'M'; }
-        else { v = n / 1e3; suf = 'k'; }
-
-        var out;
-        if(v >= 100 || Number.isInteger(v)) out = v.toFixed(0);
-        else out = (Math.round(v * 10) / 10).toFixed(1).replace(/\.0$/,'');
-
-        return out + suf;
-      }
-
-      function formatResourceCells(tableId, colIdxs){
-        var table = document.getElementById(tableId);
-        if(!table) return;
-
-        var rows = table.querySelectorAll('tbody tr');
-        rows.forEach(function(tr){
-          var tds = tr.querySelectorAll('td');
-          colIdxs.forEach(function(idx){
-            var td = tds[idx];
-            if(!td) return;
-
-            var raw = td.textContent.trim();
-            if(isDash(raw)) return;
-
-            td.dataset.raw = raw;
-
-            var n = parseCompact(raw);
-            if(n === null) return;
-
-            td.textContent = fmtKMB(n);
-          });
-        });
-      }
-
-      var ICON = {
-        bread: '/img/bread.webp',
-        wood: '/img/wood.webp',
-        stone: '/img/stone.webp',
-        iron: '/img/iron.webp',
-        truegold: '/img/truegold.webp',
-        tempered: '/img/tempered-truegold.webp'
-      };
-
-      function imgIcon(src){
-        return '<img class="icoimg" src="'+src+'" alt="" aria-hidden="true" width="18" height="18" loading="lazy" decoding="async">';
-      }
-
-      function makeResItem(src, label, value, rawTitle){
-        var titleAttr = rawTitle ? (' title="원본: '+ rawTitle.replace(/"/g,'&quot;') +'"') : '';
-        return (
-          '<div class="res-item"' + titleAttr + '>' +
-            '<div class="res-left">' +
-              imgIcon(src) +
-              '<div class="res-label">'+ label +'</div>' +
-            '</div>' +
-            '<div class="res-val">'+ value +'</div>' +
-          '</div>'
-        );
-      }
-
-      function svgUse(id){
-        return '<svg aria-hidden="true" viewBox="0 0 24 24"><use href="#'+id+'"></use></svg>';
-      }
-
-      function buildCardsFromWarAcademyTable(){
-        var table = document.getElementById('wa-table');
-        var target = document.getElementById('wa-cards');
-        if(!table || !target) return 0;
-
-        var rows = table.querySelectorAll('tbody tr');
-        if(!rows || !rows.length) return 0;
-
-        var html = '';
-        var count = 0;
-
-        rows.forEach(function(tr){
-          var td = tr.querySelectorAll('td');
-          if(!td || td.length < 11) return;
-
-          var lvl = td[0].textContent.trim();
-          var reqHTML = td[1].innerHTML.trim();
-
-          var bread = td[2].textContent.trim();
-          var wood  = td[3].textContent.trim();
-          var stone = td[4].textContent.trim();
-          var iron  = td[5].textContent.trim();
-          var tg    = td[6].textContent.trim();
-          var temp  = td[7].textContent.trim();
-          var time  = td[8].textContent.trim();
-          var power = td[9].textContent.trim();
-          var rs    = td[10].textContent.trim();
-
-          var breadRaw = td[2].dataset.raw || '';
-          var woodRaw  = td[3].dataset.raw || '';
-          var stoneRaw = td[4].dataset.raw || '';
-          var ironRaw  = td[5].dataset.raw || '';
-          var tgRaw    = td[6].dataset.raw || '';
-          var tempRaw  = td[7].dataset.raw || '';
-
-          var res = '';
-          if(!isDash(bread)) res += makeResItem(ICON.bread,'빵', bread, breadRaw);
-          if(!isDash(wood))  res += makeResItem(ICON.wood,'나무', wood, woodRaw);
-          if(!isDash(stone)) res += makeResItem(ICON.stone,'석재', stone, stoneRaw);
-          if(!isDash(iron))  res += makeResItem(ICON.iron,'철', iron, ironRaw);
-          if(!isDash(tg))    res += makeResItem(ICON.truegold,'순금', tg, tgRaw);
-          if(!isDash(temp))  res += makeResItem(ICON.tempered,'담금질 순금', temp, tempRaw);
-
-          var foot = '';
-          if(!isDash(time))  foot += '<span class="badge">'+ svgUse('ico-time') + '<span>시간: '+ time +'</span></span>';
-          if(!isDash(power)) foot += '<span class="badge"><span>전투력: '+ power +'</span></span>';
-          if(!isDash(rs))    foot += '<span class="badge"><span>연구: '+ rs +'</span></span>';
-
-          html += (
-            '<article class="card">' +
-              '<div class="card-head">' +
-                '<h3 class="card-title">' + lvl + '</h3>' +
-                '<div class="card-meta">' + (isDash(time) ? '' : ('시간<br><strong>'+ time +'</strong>')) + '</div>' +
-              '</div>' +
-              '<div class="card-req"><strong>필요:</strong> ' + reqHTML + '</div>' +
-              (res ? ('<div class="res-grid" aria-label="자원">'+ res +'</div>') : '') +
-              (foot ? ('<div class="card-foot">'+ foot +'</div>') : '') +
-            '</article>'
-          );
-
-          count++;
-        });
-
-        target.innerHTML = html;
-        return count;
-      }
-
-      function decorateTableNumbers(tableId, map){
-        var table = document.getElementById(tableId);
-        if(!table) return;
-
-        var rows = table.querySelectorAll('tbody tr');
-        rows.forEach(function(tr){
-          var tds = tr.querySelectorAll('td');
-          if(!tds || !tds.length) return;
-
-          Object.keys(map).forEach(function(key){
-            var idx = parseInt(key, 10);
-            var iconSrc = map[key];
-            var td = tds[idx];
-            if(!td) return;
-
-            var display = td.textContent.trim();
-            if(isDash(display)) return;
-
-            var raw = td.dataset.raw ? td.dataset.raw.trim() : '';
-            var title = raw ? (' title="원본: ' + raw.replace(/"/g,'&quot;') + '"') : '';
-
-            td.innerHTML =
-              '<span class="cell-num"' + title + '>' +
-                '<img class="td-ico" src="'+ iconSrc +'" alt="" aria-hidden="true" width="14" height="14" loading="lazy" decoding="async">' +
-                '<span>'+ display +'</span>' +
-              '</span>';
-          });
-        });
-      }
-
-      function initStickyObservers(){
-        setStickyTop();
-        requestAnimationFrame(setStickyTop);
-        setTimeout(setStickyTop, 60);
-
-        if(mqMobile && mqMobile.addEventListener){
-          mqMobile.addEventListener('change', setStickyTop);
-        }else if(mqMobile && mqMobile.addListener){
-          mqMobile.addListener(setStickyTop);
-        }
-
-        if(window.ResizeObserver){
-          var ro = new ResizeObserver(function(){ setStickyTop(); });
-          var header = document.querySelector('header.top');
-          var tabs = document.querySelector('nav.section-tabs');
-          if(header) ro.observe(header);
-          if(tabs) ro.observe(tabs);
-        }
-
-        window.addEventListener('load', setStickyTop);
-        window.addEventListener('resize', setStickyTop);
-      }
-
-      function init(){
-        initStickyObservers();
-        formatResourceCells('wa-table', [2,3,4,5,6,7]);
-
-        var c = buildCardsFromWarAcademyTable();
-        if(c > 0) document.documentElement.classList.add('enhanced');
-
-        decorateTableNumbers('wa-table', {
-          2: ICON.bread,
-          3: ICON.wood,
-          4: ICON.stone,
-          5: ICON.iron,
-          6: ICON.truegold,
-          7: ICON.tempered
-        });
-      }
-
-      if(document.readyState === 'loading'){
-        document.addEventListener('DOMContentLoaded', init);
-      }else{
-        init();
-      }
-    })();
-  </script><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav><p>게임 개발사 및 퍼블리셔와 독립적으로 운영하는 비공식 팬사이트입니다. 게임 이미지와 상표의 권리는 해당 권리자에게 있습니다.</p></footer><!-- shared-policy-footer:end -->
-<script defer src="/js/integration-presentation.ks-integration-adb72e714503e84f.js" data-kd-presentation="v1" data-kd-model="/data/integration/display-model.ks-integration-adb72e714503e84f.json" data-kd-release="ks-integration-adb72e714503e84f"></script>
-</body>
-</html>
+<section class="kd-building-supplement-section"><h2>관련 데이터와 계산 도구</h2><p>개별 건물 페이지에서는 선행 건물, 자원과 기본 시간을 확인합니다. 도시센터 목표를 세웠다면 요구되는 대사관과 병영 레벨도 함께 살펴보세요. 여러 단계를 올릴 때는 건물 계산기에서 현재 레벨을 입력해 완료한 단계의 비용을 제외할 수 있습니다. 표의 기본 시간과 계정 보너스를 적용한 시간은 구분해서 비교하세요.</p><ul><li><a href="/ko/buildings/">킹샷 건물</a></li><li><a href="/calc-building/">건물 계산기</a></li><li><a href="/ko/guides/kingshot-f2p-guide.html">킹샷 초보 공략 · 무과금/소과금 성장 가이드</a></li></ul></section></section><section id="related" class="kd-building-section"><h2>관련 건물</h2><div class="kd-building-related"><a href="/ko/buildings/town-center.html">도시 센터</a><a href="/ko/buildings/">전체 건물 →</a></div></section></div></article></main></div><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav><p>게임 개발사 및 퍼블리셔와 독립적으로 운영하는 비공식 팬사이트입니다. 게임 이미지와 상표의 권리는 해당 권리자에게 있습니다.</p></footer><!-- shared-policy-footer:end --><script defer src="/js/integration-presentation.ks-integration-adb72e714503e84f.js" data-kd-presentation="v1" data-kd-model="/data/integration/display-model.ks-integration-adb72e714503e84f.json" data-kd-release="ks-integration-adb72e714503e84f"></script></body></html>

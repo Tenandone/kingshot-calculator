@@ -1,6 +1,4 @@
-<!doctype html>
-<html lang="ko">
-<head>
+<!doctype html><html lang="ko"><head>
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://kingshotdata.kr/ko/buildings/truegold-crucible.html">
 <script src="/js/calculation-provenance.js?v=2026100621"></script>
@@ -22,163 +20,7 @@
   <link rel="preload" as="image" href="/img/buildings/truegold-crucible.webp" />
   <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
 
-  <style>
-    :root{
-      --bg:#ffffff;
-      --panel:#ffffff;
-      --border:#e5e7eb;
-      --text:#111827;
-      --muted:#6b7280;
-      --brand:#2563eb;
-
-      --radius:16px;
-      --shadow:0 10px 24px rgba(0,0,0,.06);
-
-      --header-h:0px;
-      --tabs-h:0px;
-      --sticky-top:0px;
-
-      --tbl-font:13px;
-      --tbl-pad-y:9px;
-      --tbl-pad-x:10px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",Arial;
-      color:var(--text);
-      background:var(--bg);
-    }
-    a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    .wrap{max-width:1100px;margin:0 auto;padding:18px 16px 64px}
-
-    header.top{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:10px 0 12px;border-bottom:1px solid var(--border);background:var(--bg);
-    }
-    .brand a{
-      display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;
-      font-weight:900;letter-spacing:.1px;
-    }
-    .brand img{display:block;width:28px;height:28px;border-radius:8px}
-
-    nav.lang{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:13px}
-    nav.lang a{
-      color:var(--muted);padding:8px 10px;border:1px solid var(--border);
-      border-radius:999px;background:#fff;text-decoration:none;
-    }
-    nav.lang a[aria-current="page"]{color:var(--text);font-weight:800}
-
-    nav.section-tabs{
-      display:none;gap:8px;padding:6px 0;margin:0;overflow:auto;
-      -webkit-overflow-scrolling:touch;background:var(--bg);border-bottom:1px solid var(--border);
-    }
-    nav.section-tabs a{
-      display:inline-flex;align-items:center;white-space:nowrap;
-      padding:8px 10px;border:1px solid var(--border);border-radius:999px;background:#fff;
-      color:var(--muted);font-size:13px;text-decoration:none;
-    }
-    nav.section-tabs a:hover{color:var(--text)}
-
-    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
-    .crumbs a{color:var(--muted)}
-
-    .hero{
-      display:grid;grid-template-columns:160px 1fr;gap:18px;
-      padding:18px;background:var(--panel);border:1px solid var(--border);
-      border-radius:var(--radius);box-shadow:var(--shadow);
-    }
-    .hero img{
-      width:160px;height:160px;object-fit:contain;border-radius:14px;
-      background:#f8fafc;border:1px solid var(--border);padding:10px;
-    }
-    h1{margin:0 0 6px;font-size:28px;line-height:1.15}
-    .sub{margin:0;color:var(--muted)}
-    .muted{color:var(--muted)}
-    .jump{
-      margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;
-      font-size:13px;color:var(--muted);
-    }
-    .jump a{color:var(--muted)}
-    .jump a:hover{color:var(--text)}
-    .dotsep{opacity:.5}
-
-    section{
-      margin-top:22px;background:var(--panel);border:1px solid var(--border);
-      border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;
-    }
-    section h2{margin:0 0 10px;font-size:20px}
-    section p{margin:8px 0}
-
-    .note{
-      display:flex;gap:10px;padding:12px 14px;border:1px solid rgba(245,158,11,.35);
-      background:rgba(245,158,11,.08);border-radius:14px;margin:10px 0 14px;
-    }
-    .note strong{font-weight:900}
-    .note .note-ico{width:18px;height:18px;flex:0 0 18px;margin-top:2px;color:#b45309}
-
-    .table-wrap{
-      border:1px solid var(--border);border-radius:14px;overflow-x:auto;
-      -webkit-overflow-scrolling:touch;background:#fff;
-    }
-    table{width:100%;border-collapse:separate;border-spacing:0;background:#fff}
-    thead th{
-      position:sticky;top:var(--sticky-top);background:#f8fafc;text-align:left;
-      padding:var(--tbl-pad-y) var(--tbl-pad-x);border-bottom:1px solid var(--border);
-      font-size:calc(var(--tbl-font) - 1px);white-space:nowrap;z-index:3;
-    }
-    tbody td{
-      padding:var(--tbl-pad-y) var(--tbl-pad-x);border-bottom:1px solid var(--border);
-      vertical-align:top;font-size:var(--tbl-font);white-space:nowrap;
-    }
-    tbody tr:nth-child(even) td{background:#fcfcfd}
-    tbody tr:hover td{background:#f3f6ff}
-    tbody tr:last-child td{border-bottom:0}
-
-    .num{text-align:right;font-variant-numeric:tabular-nums}
-
-    ul.clean{margin:0;padding-left:18px}
-    ul.clean li{margin:6px 0}
-
-    .cards{display:none}
-    .cards .card{
-      border:1px solid var(--border);border-radius:16px;background:#fff;
-      box-shadow:0 6px 16px rgba(0,0,0,.04);padding:12px 12px;
-    }
-    .card-head{
-      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;
-    }
-    .card-title{font-size:15px;font-weight:900;line-height:1.2;margin:0}
-    .card-meta{text-align:right;color:var(--muted);font-size:12px;line-height:1.25;white-space:nowrap}
-    .card-body{margin:8px 0 0;color:var(--text);font-size:13px;white-space:normal}
-
-    @media (min-width:901px){
-      :root{--tbl-font:12px;--tbl-pad-y:7px;--tbl-pad-x:8px}
-      table{table-layout:fixed}
-      .table-wrap{overflow-x:clip}
-      @supports not (overflow:clip){.table-wrap{overflow-x:hidden}}
-    }
-
-    @media (max-width:900px){
-      header.top{position:sticky;top:0;z-index:40}
-      nav.section-tabs{display:flex;position:sticky;top:var(--header-h);z-index:35}
-      .hero{grid-template-columns:1fr}
-      .hero img{width:120px;height:120px}
-      .enhanced .data-table{display:none}
-      .enhanced .cards{display:grid;gap:12px}
-    }
-
-    @media (max-width:600px){
-      body{font-size:15px}
-      .wrap{padding:14px 12px 56px}
-      h1{font-size:24px}
-      section{padding:14px}
-    }
-  </style>
+  
   <!-- GA4 -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
 
@@ -197,255 +39,91 @@
 <script defer src="/js/my-progress.js?v=2026100621"></script>
 <link rel="stylesheet" href="/css/my-progress.css?v=2026100621">
 <script defer src="/js/privacy-controls.js?v=2026100621"></script>
-<script defer src="/js/data-verification.js?v=2026100621"></script>
-<link rel="stylesheet" href="/css/ui-common.css?v=ks-ui1-85ec3439fd000513">
-<link rel="stylesheet" href="/css/ui-building.css?v=ks-ui1-85ec3439fd000513">
-<link rel="stylesheet" href="/css/ui-collections.css?v=ks-ui1-85ec3439fd000513">
-<script defer src="/js/ui/building-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
-<script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
-<script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
-<script defer src="/js/ui/runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
-</head>
+<script defer src="/js/data-verification.js?v=ks-ui3-numeric-f58d3832d761edab"></script>
 
-<body>
-  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
-    <symbol id="ico-info" viewBox="0 0 24 24">
-      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
-      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-    </symbol>
-  </svg>
 
-  <div class="wrap">
-    <header class="top">
-      <div class="brand">
-        <a href="/ko/" aria-label="Kingshot Data Home">
-          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" decoding="async">
-          <span>Kingshot Data</span>
-        </a>
-      </div>
-      <nav class="lang" aria-label="Language">
-        <a href="/en/buildings/truegold-crucible.html">EN</a>
-        <a href="/ko/buildings/truegold-crucible.html" aria-current="page">KO</a>
-        <a href="/ja/buildings/truegold-crucible.html">JA</a>
-        <a href="/zh-tw/buildings/truegold-crucible.html">ZH-TW</a>
-      </nav>
-    </header>
 
-    <nav class="section-tabs" aria-label="Section navigation">
-      <a href="#overview">개요</a>
-      <a href="#chances">확률</a>
-      <a href="#limits">제한·비용</a>
-      <a href="#other">기타</a>
-    </nav>
-
-    <main id="main"><aside data-verification-note style="max-width:1100px;margin:16px auto;padding:14px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;color:#334155"><strong>데이터 검증 상태: 일부 확인</strong><p style="margin:6px 0 0">이 페이지의 수치·효과·획득 조건은 전체 검증이 완료되지 않았습니다. 별도로 확인 표시가 없는 값은 검증되지 않은 참고값입니다. 미검증 핵심 데이터를 사용하는 계산은 차단됩니다. 자료를 참고할 때는 현재 게임 화면을 확인하세요.</p><p>확인 범위(2026-10-06): 일반 건물 8종의 Lv.1–30 자원 표와 도시센터 Lv.2–30 기본 시간을 대조했습니다. 원문이 비어 있는 비용, 아카데미 Lv.12 나무의 원문 단위 오기, 선행 조건, TG 단계·전쟁아카데미 비용은 확인이 남아 있습니다. </p></aside>
-      <div class="crumbs">
-        <a href="/ko/">홈</a> <span class="muted">›</span>
-        <a href="/ko/buildings/">건물</a> <span class="muted">›</span>
-        <span>황금용광로</span>
-      </div>
-
-      <div class="hero">
-        <img src="/img/buildings/truegold-crucible.webp" alt="황금용광로 (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" decoding="async">
-        <div>
-          <h1>순금 용광로</h1>
-          <p class="sub">순금 용광로에서는 매일 자원을 사용해 순금과 교환할 수 있습니다. 왕국에 해금된 TG 레벨에 따라 하루 5~8회까지 교환이 가능합니다. - TG 5: 5회 교환 해금 - 전쟁 아카데미: 6회 교환 해금 - TG 8: 7회 교환 해금 - TG 10: 8회 교환 해금 교환 비용 - 1회차: 식량 5,000 / 목재 5,000 / 석재 5,000 / 철 5,000 - 2회차: 식량 10,000 / 목재 10,000 / 석재 10,000 / 철 10,000 - 3회차: 식량 20,000 / 목재 20,000 / 석재 20,000 / 철 20,000 - 4회차: 식량 30,000 / 목재 30,000 / 석재 30,000 / 철 30,000 - 5회차: 식량 40,000 / 목재 40,000 / 석재 40,000 / 철 40,000 - 6~8회차: 식량 50,000 / 목재 50,000 / 석재 50,000 / 철 50,000 각 교환에서는 순금 1~5개를 획득할 수 있으며, 획득 확률은 다음과 같습니다. - 1개: 40% - 2개: 30% - 3개: 15% - 4개: 10% - 5개: 5%</p>
-
-          <div class="jump" aria-label="Quick jump links">
-            <a href="#overview">개요</a><span class="dotsep">•</span>
-            <a href="#chances">정련 확률</a><span class="dotsep">•</span>
-            <a href="#limits">제한·비용</a><span class="dotsep">•</span>
-            <a href="#other">기타</a>
-          </div>
-        </div>
-      </div>
-
-      <section id="overview">
+<script defer src="/js/ui/building-client.js?v=ks-ui3-numeric-f58d3832d761edab" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/runtime.js?v=ks-ui3-numeric-f58d3832d761edab" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<link rel="stylesheet" href="/css/ui-common.css?v=ks-ui3-numeric-f58d3832d761edab"><link rel="stylesheet" href="/css/ui-building.css?v=ks-ui3-numeric-f58d3832d761edab"><link rel="stylesheet" href="/css/ui-building-table.css?v=ks-ui3-numeric-f58d3832d761edab"></head><body class="kd-ui-shell kd-building-table-shell"><div class="wrap"><header class="top kd-standalone-header"><a class="kd-standalone-brand" href="/"><img src="/img/kingshotdata-logo-56.webp" width="32" height="32" alt="">Kingshot Data</a><nav class="kd-standalone-links"><a href="/ko/buildings/">건물</a><a href="/calculator/">계산기</a><a href="/#hub-search">검색</a></nav><nav class="kd-standalone-langs" aria-label="Language"><a href="/ko/buildings/truegold-crucible.html" lang="ko" aria-current="page">KO</a><a href="/en/buildings/truegold-crucible.html" lang="en">EN</a><a href="/ja/buildings/truegold-crucible.html" lang="ja">JA</a><a href="/zh-tw/buildings/truegold-crucible.html" lang="zh-TW">TW</a></nav></header><main id="main"><article id="kd-building" class="kd-ui kd-building kd-building-table-page" data-building-id="ks:building:truegold-crucible" data-locale="ko" data-version="ks-ui3-numeric-f58d3832d761edab" data-model-url="/data/ui/buildings/truegold-crucible.json"><div class="kd-building-heading"><img class="kd-building-image" src="/img/buildings/truegold-crucible.webp" alt="순금 용광로" width="104" height="104"><div class="kd-building-heading-copy"><a class="kd-building-back" href="/ko/buildings/">← 건물</a><h1>순금 용광로</h1><p class="kd-building-intro">순금 용광로에서는 매일 자원을 사용해 순금과 교환할 수 있습니다. 왕국에 해금된 TG 레벨에 따라 하루 5~8회까지 교환이 가능합니다.</p><details class="kd-building-description"><summary>설명 더 보기</summary><p>순금 용광로에서는 매일 자원을 사용해 순금과 교환할 수 있습니다. 왕국에 해금된 TG 레벨에 따라 하루 5~8회까지 교환이 가능합니다. - TG 5: 5회 교환 해금 - 전쟁 아카데미: 6회 교환 해금 - TG 8: 7회 교환 해금 - TG 10: 8회 교환 해금 교환 비용 - 1회차: 식량 5,000 / 목재 5,000 / 석재 5,000 / 철 5,000 - 2회차: 식량 10,000 / 목재 10,000 / 석재 10,000 / 철 10,000 - 3회차: 식량 20,000 / 목재 20,000 / 석재 20,000 / 철 20,000 - 4회차: 식량 30,000 / 목재 30,000 / 석재 30,000 / 철 30,000 - 5회차: 식량 40,000 / 목재 40,000 / 석재 40,000 / 철 40,000 - 6~8회차: 식량 50,000 / 목재 50,000 / 석재 50,000 / 철 50,000 각 교환에서는 순금 1~5개를 획득할 수 있으며, 획득 확률은 다음과 같습니다. - 1개: 40% - 2개: 30% - 3개: 15% - 4개: 10% - 5개: 5%</p></details></div></div><nav class="kd-building-toc"><a href="#effects" data-kd-anchor="effects">효과·추가 정보</a><a href="#related" data-kd-anchor="related">관련 건물</a></nav><div class="kd-building-content"><p class="kd-empty">현재 제공되는 업그레이드 표가 없습니다.</p><span id="ico-info" class="kd-building-anchor"></span><span id="chance-cards" class="kd-building-anchor"></span><span id="cost-cards" class="kd-building-anchor"></span><span id="upgrade" class="kd-building-anchor"></span><span id="overview-anchor" class="kd-building-anchor"></span><section id="effects" class="kd-building-section"><h2>효과·추가 정보</h2><span id="overview" class="kd-building-anchor"></span><section id="legacy-truegold-crucible-overview" class="kd-building-supplement-section">
         <h2>개요</h2>
         <p>
           이 건물은 일반 자원(<strong>빵, 나무, 석재, 철</strong> — 4종을 동시에) 을
           <strong>순금(Truegold)</strong>으로 바꾸는 <strong>정련(Refinement)</strong> 기능을 제공합니다.
         </p>
 
-        <div class="note" role="note" aria-label="Note">
-          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
+        <div role="note" aria-label="Note" class="kd-building-supplement-note">
+          
           <div>
             <strong>참고:</strong>
             해금 시점/일일 정련 횟수는 서버 진행도 및 업데이트에 따라 달라질 수 있습니다.
           </div>
         </div>
       </section>
-
-      <section id="chances">
+<span id="chances" class="kd-building-anchor"></span><section id="legacy-truegold-crucible-chances" class="kd-building-supplement-section">
         <h2>순금 정련 확률</h2>
-        <p class="muted" style="margin-top:-2px">정련 1회마다 아래 확률로 랜덤 순금을 획득합니다.</p>
+        <p>정련 1회마다 아래 확률로 랜덤 순금을 획득합니다.</p>
 
-        <div class="table-wrap data-table" aria-label="Refinement chances table">
-          <table id="chance-table">
-            <colgroup><col style="width:60%"><col style="width:40%"></colgroup>
+        <div aria-label="Refinement chances table">
+          <div class="kd-building-supplement-table-region" role="region" tabindex="0" aria-label="순금 정련 확률"><span id="chance-table" class="kd-building-anchor"></span><table id="legacy-truegold-crucible-chance-table" class="kd-building-supplement-table">
+            
             <thead>
-              <tr><th>결과</th><th class="num">확률</th></tr>
+              <tr><th class="kd-building-supplement-level">결과</th><th class="kd-building-supplement-cell">확률</th></tr>
             </thead>
             <tbody>
-              <tr><td>순금 1</td><td class="num">40%</td></tr>
-              <tr><td>순금 2</td><td class="num">30%</td></tr>
-              <tr><td>순금 3</td><td class="num">15%</td></tr>
-              <tr><td>순금 4</td><td class="num">10%</td></tr>
-              <tr><td>순금 5</td><td class="num">5%</td></tr>
+              <tr><td class="kd-building-supplement-level">순금 1</td><td class="kd-building-supplement-cell">40%</td></tr>
+              <tr><td class="kd-building-supplement-level">순금 2</td><td class="kd-building-supplement-cell">30%</td></tr>
+              <tr><td class="kd-building-supplement-level">순금 3</td><td class="kd-building-supplement-cell">15%</td></tr>
+              <tr><td class="kd-building-supplement-level">순금 4</td><td class="kd-building-supplement-cell">10%</td></tr>
+              <tr><td class="kd-building-supplement-level">순금 5</td><td class="kd-building-supplement-cell">5%</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
-        <div class="cards" id="chance-cards" aria-label="Refinement chances cards"></div>
+        
 
-        <p class="muted" style="margin-top:10px">
+        <p>
           평균적으로 순금정련소에서 하루 약 <strong>10.5 순금</strong>을 획득한다고 볼 수 있습니다.
         </p>
       </section>
-
-      <section id="limits">
+<span id="limits" class="kd-building-anchor"></span><section id="legacy-truegold-crucible-limits" class="kd-building-supplement-section">
         <h2>정련 제한·비용</h2>
         <p>
           순금 초반(순금 5 구간)에는 하루 <strong>5회</strong> 정련이 가능합니다.
           왕국 나이가 더 늘어나면 일일 정련 횟수가 증가합니다.
         </p>
-        <p class="muted">정련은 회차가 늘수록 비용이 증가합니다(각 회차마다 빵/나무/석재/철 동일):</p>
+        <p>정련은 회차가 늘수록 비용이 증가합니다(각 회차마다 빵/나무/석재/철 동일):</p>
 
-        <div class="table-wrap data-table" aria-label="Refinement costs table">
-          <table id="cost-table">
-            <colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+        <div aria-label="Refinement costs table">
+          <div class="kd-building-supplement-table-region" role="region" tabindex="0" aria-label="정련 제한·비용"><span id="cost-table" class="kd-building-anchor"></span><table id="legacy-truegold-crucible-cost-table" class="kd-building-supplement-table">
+            
             <thead>
-              <tr><th>정련</th><th>비용 (빵 / 나무 / 석재 / 철)</th></tr>
+              <tr><th class="kd-building-supplement-level">정련</th><th class="kd-building-supplement-cell">비용 (빵 / 나무 / 석재 / 철)</th></tr>
             </thead>
             <tbody>
-              <tr><td><strong>1회</strong></td><td>각 5,000</td></tr>
-              <tr><td><strong>2회</strong></td><td>각 10,000</td></tr>
-              <tr><td><strong>3회</strong></td><td>각 20,000</td></tr>
-              <tr><td><strong>4회</strong></td><td>각 30,000</td></tr>
-              <tr><td><strong>5회</strong></td><td>각 40,000</td></tr>
+              <tr><td class="kd-building-supplement-level"><strong>1회</strong></td><td class="kd-building-supplement-cell">각 5,000</td></tr>
+              <tr><td class="kd-building-supplement-level"><strong>2회</strong></td><td class="kd-building-supplement-cell">각 10,000</td></tr>
+              <tr><td class="kd-building-supplement-level"><strong>3회</strong></td><td class="kd-building-supplement-cell">각 20,000</td></tr>
+              <tr><td class="kd-building-supplement-level"><strong>4회</strong></td><td class="kd-building-supplement-cell">각 30,000</td></tr>
+              <tr><td class="kd-building-supplement-level"><strong>5회</strong></td><td class="kd-building-supplement-cell">각 40,000</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
-        <div class="cards" id="cost-cards" aria-label="Refinement costs cards"></div>
+        
 
-        <p class="muted" style="margin-top:10px">
+        <p>
           5회 정련 총비용: 각 자원 <strong>105,000</strong>.
         </p>
       </section>
-
-      <section id="other">
+<span id="other" class="kd-building-anchor"></span><section id="legacy-truegold-crucible-other" class="kd-building-supplement-section">
         <h2>기타 정보</h2>
-        <ul class="clean">
+        <ul>
           <li>순금정련소는 <strong>무료 건설</strong>입니다(자원 소모 없음).</li>
           <li>왕국이 <strong>순금 5</strong>에 도달하면 <strong>즉시 건설</strong>할 수 있습니다.</li>
           <li><strong>레벨 업그레이드가 없는</strong> 고정형 건물입니다.</li>
         </ul>
       </section>
-
-
-
-
-
-
-
-
-<!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>관련 데이터와 계산 도구</h2><p>개별 건물 페이지에서는 선행 건물, 자원과 기본 시간을 확인합니다. 도시센터 목표를 세웠다면 요구되는 대사관과 병영 레벨도 함께 살펴보세요. 여러 단계를 올릴 때는 건물 계산기에서 현재 레벨을 입력해 완료한 단계의 비용을 제외할 수 있습니다. 표의 기본 시간과 계정 보너스를 적용한 시간은 구분해서 비교하세요.</p><ul><li><a href="/ko/buildings/">킹샷 건물</a></li><li><a href="/calc-building/">건물 계산기</a></li><li><a href="/ko/guides/kingshot-f2p-guide.html">킹샷 초보 공략 · 무과금/소과금 성장 가이드</a></li></ul></section><!-- kd-related:end -->
-</main>
-  </div>
-
-  <script>
-    (function(){
-      var mqMobile = window.matchMedia('(max-width: 900px)');
-
-      function setStickyTop(){
-        var header = document.querySelector('header.top');
-        var tabs = document.querySelector('nav.section-tabs');
-        var isMobile = mqMobile.matches;
-
-        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
-        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
-
-        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
-        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
-        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
-      }
-
-      function buildSimpleCards(tableId, targetId, mode){
-        var table = document.getElementById(tableId);
-        var target = document.getElementById(targetId);
-        if(!table || !target) return 0;
-
-        var rows = table.querySelectorAll('tbody tr');
-        if(!rows || !rows.length) return 0;
-
-        var html = '';
-        var count = 0;
-
-        rows.forEach(function(tr){
-          var tds = tr.querySelectorAll('td');
-          if(!tds || tds.length < 2) return;
-
-          var left = tds[0].textContent.trim();
-          var right = tds[1].textContent.trim();
-
-          if(mode === 'chance'){
-            html += (
-              '<article class="card">' +
-                '<div class="card-head">' +
-                  '<h3 class="card-title">'+ left +'</h3>' +
-                  '<div class="card-meta"><strong>'+ right +'</strong></div>' +
-                '</div>' +
-              '</article>'
-            );
-          }else{
-            html += (
-              '<article class="card">' +
-                '<div class="card-head">' +
-                  '<h3 class="card-title">'+ left +'</h3>' +
-                '</div>' +
-                '<div class="card-body"><strong>비용:</strong> '+ right +'</div>' +
-              '</article>'
-            );
-          }
-
-          count++;
-        });
-
-        target.innerHTML = html;
-        return count;
-      }
-
-      function init(){
-        setStickyTop();
-        requestAnimationFrame(setStickyTop);
-        setTimeout(setStickyTop, 60);
-
-        if(window.ResizeObserver){
-          var ro = new ResizeObserver(function(){ setStickyTop(); });
-          var header = document.querySelector('header.top');
-          var tabs = document.querySelector('nav.section-tabs');
-          if(header) ro.observe(header);
-          if(tabs) ro.observe(tabs);
-        }
-        window.addEventListener('resize', setStickyTop);
-
-        var c1 = buildSimpleCards('chance-table', 'chance-cards', 'chance');
-        var c2 = buildSimpleCards('cost-table', 'cost-cards', 'cost');
-
-        if((c1 + c2) > 0){
-          document.documentElement.classList.add('enhanced');
-        }
-      }
-
-      if(document.readyState === 'loading'){
-        document.addEventListener('DOMContentLoaded', init);
-      }else{
-        init();
-      }
-    })();
-  </script><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav><p>게임 개발사 및 퍼블리셔와 독립적으로 운영하는 비공식 팬사이트입니다. 게임 이미지와 상표의 권리는 해당 권리자에게 있습니다.</p></footer><!-- shared-policy-footer:end -->
-<script defer src="/js/integration-presentation.ks-integration-adb72e714503e84f.js" data-kd-presentation="v1" data-kd-model="/data/integration/display-model.ks-integration-adb72e714503e84f.json" data-kd-release="ks-integration-adb72e714503e84f"></script>
-</body>
-</html>
+<section class="kd-building-supplement-section"><h2>관련 데이터와 계산 도구</h2><p>개별 건물 페이지에서는 선행 건물, 자원과 기본 시간을 확인합니다. 도시센터 목표를 세웠다면 요구되는 대사관과 병영 레벨도 함께 살펴보세요. 여러 단계를 올릴 때는 건물 계산기에서 현재 레벨을 입력해 완료한 단계의 비용을 제외할 수 있습니다. 표의 기본 시간과 계정 보너스를 적용한 시간은 구분해서 비교하세요.</p><ul><li><a href="/ko/buildings/">킹샷 건물</a></li><li><a href="/calc-building/">건물 계산기</a></li><li><a href="/ko/guides/kingshot-f2p-guide.html">킹샷 초보 공략 · 무과금/소과금 성장 가이드</a></li></ul></section></section><section id="related" class="kd-building-section"><h2>관련 건물</h2><div class="kd-building-related"><a href="/ko/buildings/">전체 건물 →</a></div></section></div></article></main></div><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav><p>게임 개발사 및 퍼블리셔와 독립적으로 운영하는 비공식 팬사이트입니다. 게임 이미지와 상표의 권리는 해당 권리자에게 있습니다.</p></footer><!-- shared-policy-footer:end --><script defer src="/js/integration-presentation.ks-integration-adb72e714503e84f.js" data-kd-presentation="v1" data-kd-model="/data/integration/display-model.ks-integration-adb72e714503e84f.json" data-kd-release="ks-integration-adb72e714503e84f"></script></body></html>

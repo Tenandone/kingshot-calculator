@@ -1,140 +1,38 @@
-<!doctype html>
-<html lang="ko">
-<head>
+<!doctype html><html lang="ko"><head>
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://kingshotdata.kr/ko/buildings/">
+
 <script src="/js/calculation-provenance.js?v=2026100621"></script>
 <script src="/js/calculation-proof.js?v=2026100621"></script>
 <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  
 
-  <title>킹샷 건물 가이드 – 전체 목록, 해금 조건 & 업그레이드 요구사항</title>
-  <meta name="description" content="킹샷 건물 전체 목록과 해금 정보, 업그레이드 요구사항을 한 번에 확인하세요. 도시센터, 아카데미, 대사관, 보병대, 궁병대, 기병대, 지휘부, 창고, 주방, 야전병원, 방위소, 황금용광로, 전쟁 아카데미를 포함합니다." />
+  <!-- SEO -->
+  
+  
+  
+  
+  
+  <meta name="theme-color" content="#ffffff" />
 
-  <link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/buildings/" />
-  <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/buildings/" />
-  <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings/" />
-  <link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/buildings/" />
-  <link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/buildings/" />
+  <!-- Performance -->
+  <link rel="preload" as="image" href="/img/buildings/embassy.webp" />
+  <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
 
-  <meta property="og:title" content="킹샷 건물 가이드 – 전체 건물 목록" />
-  <meta property="og:description" content="킹샷 건물 전체 목록과 해금 정보, 업그레이드 요구사항을 확인하세요." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://kingshotdata.kr/ko/buildings/" />
-  <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
+  
 
-  <!-- ✅ 사이트 공통 CSS -->
-  <link rel="stylesheet" href="/css/common.css?v=202509131858">
-  <link rel="stylesheet" href="/css/category.css?v=202509131858">
-  <link rel="stylesheet" href="/css/database.css?v=202509131858">
-  <link rel="stylesheet" href="/css/mobile-patch.css?v=202509131858">
-  <link rel="stylesheet" href="/css/footer-tools.css?v=202509131858">
-  <link rel="stylesheet" href="/css/header.css?v=202509131858">
-  <link rel="stylesheet" href="/css/sponsor.css?v=202509131858">
-
-  <style>
-    /* ===== page scope ===== */
-    #buildings-page{max-width:1100px;margin:0 auto;padding:28px 16px}
-    #buildings-page h1{margin:0 0 10px;font-size:28px;letter-spacing:-.02em}
-    #buildings-page .sub{margin:0 0 18px;color:#6b7280}
-
-    /* ✅ PC 4열 / 모바일 2열 */
-    #buildings-page .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}
-    @media (max-width:980px){ #buildings-page .grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
-    @media (max-width:520px){
-      #buildings-page{padding:18px 12px}
-      #buildings-page h1{font-size:22px}
-      #buildings-page .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-    }
-
-    #buildings-page .card{
-      border:1px solid rgba(0,0,0,.08);
-      border-radius:16px;
-      background:#fff;
-      overflow:hidden;
-      transition:transform .12s ease,box-shadow .12s ease;
-      height:100%;
-    }
-    #buildings-page .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
-    #buildings-page .card a{display:flex;flex-direction:column;height:100%;color:inherit;text-decoration:none}
-
-    /* ✅ 이미지 크롭 제거 */
-    #buildings-page .imgbox{
-      background:#f2f4f7;
-      display:flex;align-items:center;justify-content:center;
-      padding:10px;
-      aspect-ratio:16/10;
-    }
-    #buildings-page img{
-      width:100%;height:100%;
-      object-fit:contain;
-      display:block;
-      max-width:100%;max-height:100%;
-    }
-    @media (max-width:520px){ #buildings-page .imgbox{padding:8px;aspect-ratio:1/1} }
-
-    /* ✅ 건물이름 가운데 정렬 */
-    #buildings-page .card-name{
-      padding:12px 12px 14px;
-      font-weight:800;
-      font-size:15px;
-      line-height:1.2;
-      min-height:40px;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-    }
-    @media (max-width:520px){
-      #buildings-page .card-name{
-        font-size:14px;
-        min-height:36px;
-        padding:10px 10px 12px;
-      }
-    }
-
-    /* ✅ SEO용: 화면엔 안 보이지만 접근성 방식으로 남김 */
-    .visually-hidden{
-      position:absolute !important;
-      width:1px;height:1px;
-      padding:0;margin:-1px;
-      overflow:hidden;
-      clip:rect(0,0,0,0);
-      white-space:nowrap;border:0;
-    }
-
-    #building-root{margin-top:26px}
-  </style>
-
-  <!-- ✅ JSON-LD: ItemList (SEO 구조화 데이터) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Kingshot Buildings List (KO)",
-    "itemListElement": [
-      {"@type":"ListItem","position":1,"name":"도시센터","url":"https://kingshotdata.kr/ko/buildings/town-center.html"},
-      {"@type":"ListItem","position":2,"name":"아카데미","url":"https://kingshotdata.kr/ko/buildings/academy.html"},
-      {"@type":"ListItem","position":3,"name":"대사관","url":"https://kingshotdata.kr/ko/buildings/embassy.html"},
-      {"@type":"ListItem","position":4,"name":"보병대","url":"https://kingshotdata.kr/ko/buildings/barracks.html"},
-      {"@type":"ListItem","position":5,"name":"궁병대","url":"https://kingshotdata.kr/ko/buildings/range.html"},
-      {"@type":"ListItem","position":6,"name":"기병대","url":"https://kingshotdata.kr/ko/buildings/stable.html"},
-      {"@type":"ListItem","position":7,"name":"지휘부","url":"https://kingshotdata.kr/ko/buildings/commandcenter.html"},
-      {"@type":"ListItem","position":8,"name":"창고","url":"https://kingshotdata.kr/ko/buildings/storehouse.html"},
-      {"@type":"ListItem","position":9,"name":"주방","url":"https://kingshotdata.kr/ko/buildings/kitchen.html"},
-      {"@type":"ListItem","position":10,"name":"야전병원","url":"https://kingshotdata.kr/ko/buildings/infirmary.html"},
-      {"@type":"ListItem","position":11,"name":"방위소","url":"https://kingshotdata.kr/ko/buildings/guard-station.html"},
-      {"@type":"ListItem","position":12,"name":"황금용광로","url":"https://kingshotdata.kr/ko/buildings/truegold-crucible.html"},
-      {"@type":"ListItem","position":13,"name":"전쟁 아카데미","url":"https://kingshotdata.kr/ko/buildings/war-academy.html"}
-    ]
-  }
-  </script>
+  
   <!-- GA4 -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
 
 
 
+  
+  
+  
+  
+  
 <script src="/js/canonical-links.js?v=2026100621" defer></script>
 <script defer src="/js/image-system.js?v=2026100621"></script>
 <script defer src="/js/hub.js?v=2026100621"></script>
@@ -142,54 +40,12 @@
 <script defer src="/js/my-progress.js?v=2026100621"></script>
 <link rel="stylesheet" href="/css/my-progress.css?v=2026100621">
 <script defer src="/js/privacy-controls.js?v=2026100621"></script>
-<script defer src="/js/data-verification.js?v=2026100621"></script>
-<link rel="stylesheet" href="/css/ui-common.css?v=ks-ui1-85ec3439fd000513">
-<link rel="stylesheet" href="/css/ui-building.css?v=ks-ui1-85ec3439fd000513">
-<link rel="stylesheet" href="/css/ui-collections.css?v=ks-ui1-85ec3439fd000513">
-<script defer src="/js/ui/building-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
-<script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
-<script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
-<script defer src="/js/ui/runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
-</head>
-
-<body class="theme-default">
-  <main id="buildings-page"><aside data-verification-note style="max-width:1100px;margin:16px auto;padding:14px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;color:#334155"><strong>데이터 검증 상태: 일부 확인</strong><p style="margin:6px 0 0">이 페이지의 수치·효과·획득 조건은 전체 검증이 완료되지 않았습니다. 별도로 확인 표시가 없는 값은 검증되지 않은 참고값입니다. 미검증 핵심 데이터를 사용하는 계산은 차단됩니다. 자료를 참고할 때는 현재 게임 화면을 확인하세요.</p><p>확인 범위(2026-10-06): 일반 건물 8종의 Lv.1–30 자원 표와 도시센터 Lv.2–30 기본 시간을 대조했습니다. 원문이 비어 있는 비용, 아카데미 Lv.12 나무의 원문 단위 오기, 선행 조건, TG 단계·전쟁아카데미 비용은 확인이 남아 있습니다. </p></aside>
-    <h1>킹샷 건물</h1>
-    <p class="sub">전체 건물 목록을 확인하고, 각 페이지에서 해금 정보와 업그레이드 요구사항을 확인하세요.</p>
-
-    <!-- ✅ SEO 본문(유저 눈엔 안 보임) -->
-    <section class="visually-hidden" aria-hidden="false">
-      <h2>전체 건물 목록</h2>
-      <p>이 페이지는 킹샷 건물 전체 목록을 제공합니다. 도시센터, 아카데미, 대사관, 보병대, 궁병대, 기병대, 지휘부, 창고, 주방, 야전병원, 방위소, 황금용광로, 전쟁 아카데미를 포함합니다.</p>
-    </section>
-
-    <div id="buildings-grid" class="grid">
-      <div class="card"><a href="/ko/buildings/town-center.html"><div class="imgbox"><img src="/img/buildings/towncenter-kingshot.webp" alt="도시센터" width="269" height="300" decoding="async"></div><div class="card-name">도시센터</div></a></div>
-      <div class="card"><a href="/ko/buildings/academy.html"><div class="imgbox"><img src="/img/buildings/academy-kingshot.webp" alt="아카데미" width="477" height="523" decoding="async"></div><div class="card-name">아카데미</div></a></div>
-      <div class="card"><a href="/ko/buildings/embassy.html"><div class="imgbox"><img src="/img/buildings/embassy-kingshot.webp" alt="대사관" width="515" height="484" decoding="async"></div><div class="card-name">대사관</div></a></div>
-      <div class="card"><a href="/ko/buildings/barracks.html"><div class="imgbox"><img src="/img/buildings/barracks-kingshot.webp" alt="보병대" width="261" height="300" decoding="async" loading="lazy"></div><div class="card-name">보병대</div></a></div>
-      <div class="card"><a href="/ko/buildings/range.html"><div class="imgbox"><img src="/img/buildings/range-kingshot.webp" alt="궁병대" width="505" height="494" decoding="async" loading="lazy"></div><div class="card-name">궁병대</div></a></div>
-      <div class="card"><a href="/ko/buildings/stable.html"><div class="imgbox"><img src="/img/buildings/stable-kingshot.webp" alt="기병대" width="520" height="480" decoding="async" loading="lazy"></div><div class="card-name">기병대</div></a></div>
-      <div class="card"><a href="/ko/buildings/commandcenter.html"><div class="imgbox"><img src="/img/buildings/command-center-kingshot.webp" alt="지휘부" width="506" height="493" decoding="async" loading="lazy"></div><div class="card-name">지휘부</div></a></div>
-      <div class="card"><a href="/ko/buildings/storehouse.html"><div class="imgbox"><img src="/img/buildings/storehouse-kingshot.webp" alt="창고" width="525" height="476" decoding="async" loading="lazy"></div><div class="card-name">창고</div></a></div>
-      <div class="card"><a href="/ko/buildings/kitchen.html"><div class="imgbox"><img src="/img/buildings/kitchen-kingshot.webp" alt="주방" width="398" height="391" decoding="async" loading="lazy"></div><div class="card-name">주방</div></a></div>
-      <div class="card"><a href="/ko/buildings/infirmary.html"><div class="imgbox"><img src="/img/buildings/infirmary-kingshot.webp" alt="야전병원" width="432" height="476" decoding="async" loading="lazy"></div><div class="card-name">야전병원</div></a></div>
-      <div class="card"><a href="/ko/buildings/guard-station.html"><div class="imgbox"><img src="/img/buildings/guard-station-kingshot.webp" alt="방위소" width="300" height="250" decoding="async" loading="lazy"></div><div class="card-name">방위소</div></a></div>
-      <div class="card"><a href="/ko/buildings/truegold-crucible.html"><div class="imgbox"><img src="/img/buildings/truegold-crucible-kingshot.webp" alt="황금용광로" width="294" height="300" decoding="async" loading="lazy"></div><div class="card-name">황금용광로</div></a></div>
-      <div class="card"><a href="/ko/buildings/war-academy.html"><div class="imgbox"><img src="/img/buildings/war-academy.webp" alt="전쟁 아카데미" width="562" height="592" decoding="async" loading="lazy"></div><div class="card-name">전쟁 아카데미</div></a></div>
-    </div>
-
-    <div id="building-root"></div>
-  <!-- editorial-hub:start --><section><h2>이 자료 활용하기</h2><p>개별 건물 페이지에서는 선행 건물, 자원과 기본 시간을 확인합니다. 도시센터 목표를 세웠다면 요구되는 대사관과 병영 레벨도 함께 살펴보세요. 여러 단계를 올릴 때는 건물 계산기에서 현재 레벨을 입력해 완료한 단계의 비용을 제외할 수 있습니다. 표의 기본 시간과 계정 보너스를 적용한 시간은 구분해서 비교하세요.</p><p><a href="/calc-building/">계산기로 목표 구간 비교</a></p></section><!-- editorial-hub:end -->
+<script defer src="/js/data-verification.js?v=ks-ui3-numeric-f58d3832d761edab"></script>
 
 
 
-
-
-
-
-<!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>관련 데이터와 계산 도구</h2><ul><li><a href="/calc-building/">건물 계산기</a></li><li><a href="/ko/guides/kingshot-f2p-guide.html">킹샷 초보 공략 · 무과금/소과금 성장 가이드</a></li></ul></section><!-- kd-related:end -->
-</main><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav><p>게임 개발사 및 퍼블리셔와 독립적으로 운영하는 비공식 팬사이트입니다. 게임 이미지와 상표의 권리는 해당 권리자에게 있습니다.</p></footer><!-- shared-policy-footer:end -->
-<script defer src="/js/integration-presentation.ks-integration-adb72e714503e84f.js" data-kd-presentation="v1" data-kd-model="/data/integration/display-model.ks-integration-adb72e714503e84f.json" data-kd-release="ks-integration-adb72e714503e84f"></script>
-</body>
-</html>
+<script defer src="/js/ui/building-client.js?v=ks-ui3-numeric-f58d3832d761edab" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/runtime.js?v=ks-ui3-numeric-f58d3832d761edab" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<link rel="stylesheet" href="/css/ui-common.css?v=ks-ui3-numeric-f58d3832d761edab"><link rel="stylesheet" href="/css/ui-building.css?v=ks-ui3-numeric-f58d3832d761edab"><link rel="stylesheet" href="/css/ui-building-table.css?v=ks-ui3-numeric-f58d3832d761edab"><link rel="canonical" href="https://kingshotdata.kr/ko/buildings/"><title>킹샷 건물 가이드 – 전체 목록, 해금 조건 & 업그레이드 요구사항</title><meta name="description" content="킹샷 건물 전체 목록과 해금 정보, 업그레이드 요구사항을 한 번에 확인하세요. 도시센터, 아카데미, 대사관, 보병대, 궁병대, 기병대, 지휘부, 창고, 주방, 야전병원, 방위소, 황금용광로, 전쟁 아카데미를 포함합니다." /><link rel="alternate" hreflang="x-default" href="https://kingshotdata.kr/en/buildings/" /><link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/buildings/" /><link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings/" /><link rel="alternate" hreflang="ja" href="https://kingshotdata.kr/ja/buildings/" /><link rel="alternate" hreflang="zh-TW" href="https://kingshotdata.kr/zh-tw/buildings/" /><meta property="og:title" content="킹샷 건물 가이드 – 전체 건물 목록" /><meta property="og:description" content="킹샷 건물 전체 목록과 해금 정보, 업그레이드 요구사항을 확인하세요." /><meta property="og:type" content="website" /><meta property="og:url" content="https://kingshotdata.kr/ko/buildings/" /><meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" /></head><body class="kd-ui-shell kd-building-table-shell"><div class="wrap"><header class="top kd-standalone-header"><a class="kd-standalone-brand" href="/"><img src="/img/kingshotdata-logo-56.webp" width="32" height="32" alt="">Kingshot Data</a><nav class="kd-standalone-links"><a href="/ko/buildings/">건물</a><a href="/calculator/">계산기</a><a href="/#hub-search">검색</a></nav><nav class="kd-standalone-langs" aria-label="Language"><a href="/ko/buildings/" lang="ko" aria-current="page">KO</a><a href="/en/buildings/" lang="en">EN</a><a href="/ja/buildings/" lang="ja">JA</a><a href="/zh-tw/buildings/" lang="zh-TW">TW</a></nav></header><main id="main"><article id="kd-buildings-index" class="kd-ui" data-version="ks-ui3-numeric-f58d3832d761edab" data-locale="ko"><h1>건물</h1><p>건물별 자원·시간·선행 조건을 비교하고 다음 업그레이드를 찾아보세요.</p><div class="kd-index-controls"><label class="kd-building-sr" for="kd-building-search">건물 이름·별칭 검색</label><input type="search" id="kd-building-search" placeholder="건물 이름·별칭 검색"><select id="kd-building-filter" aria-label="건물"><option value="all">전체 건물</option><option value="tables">레벨 자료 있음</option><option value="info">소개 자료</option></select><output id="kd-building-count">30 개</output></div><div class="kd-building-directory"><a href="/ko/buildings/master-academy.html" data-building-entry data-search="거장 아카데미 master-academy 거장 아카데미 マスター学院" data-kind="info"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>거장 아카데미</strong><span>소개 자료</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/arena.html" data-building-entry data-search="경기장 arena 경기장 arena 競技場" data-kind="info"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>경기장</strong><span>소개 자료</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/range.html" data-building-entry data-search="궁병대 range 궁병대 range 弓兵営舎" data-kind="tables"><img src="/img/buildings/range.webp" alt="" width="56" height="56"><div><strong>궁병대</strong><span>74 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/stable.html" data-building-entry data-search="기병대 stable 기병대 stable 騎兵営舎" data-kind="tables"><img src="/img/buildings/stable.webp" alt="" width="56" height="56"><div><strong>기병대</strong><span>74 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/embassy.html" data-building-entry data-search="대사관 embassy 대사관 embassy 大使館" data-kind="tables"><img src="/img/buildings/embassy.webp" alt="" width="56" height="56"><div><strong>대사관</strong><span>74 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/town-center.html" data-building-entry data-search="도시 센터 town-center 도시 센터 town center 役場" data-kind="tables"><img src="/img/buildings/town-center.webp" alt="" width="56" height="56"><div><strong>도시 센터</strong><span>74 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/house-1.html" data-building-entry data-search="민가 house-1 민가 house 1 民家1" data-kind="tables"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>민가</strong><span>10 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/suggestion-box.html" data-building-entry data-search="민원 편지함 suggestion-box 민원 편지함 suggestion box 投書箱" data-kind="info"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>민원 편지함</strong><span>소개 자료</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/mill.html" data-building-entry data-search="방앗간 mill 방앗간 mill 製粉所" data-kind="tables"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>방앗간</strong><span>30 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/defense-tower.html" data-building-entry data-search="방어탑 defense-tower 방어탑 defense tower 防衛塔" data-kind="tables"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>방어탑</strong><span>30 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/guard-station.html" data-building-entry data-search="방위소 guard-station 방위소 guard station 防衛局" data-kind="tables"><img src="/img/buildings/guard-station.webp" alt="" width="56" height="56"><div><strong>방위소</strong><span>10 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/sawmill.html" data-building-entry data-search="벌목장 sawmill 벌목장 sawmill 伐採場" data-kind="tables"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>벌목장</strong><span>30 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/barracks.html" data-building-entry data-search="보병대 barracks 보병대 barracks 歩兵営舎" data-kind="tables"><img src="/img/buildings/barracks.webp" alt="" width="56" height="56"><div><strong>보병대</strong><span>74 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/court-of-justice.html" data-building-entry data-search="사법재판소 court-of-justice 사법재판소 court of justice 司法所" data-kind="info"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>사법재판소</strong><span>소개 자료</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/quarry.html" data-building-entry data-search="석재 공장 quarry 석재 공장 quarry 石材工場" data-kind="tables"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>석재 공장</strong><span>30 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/barricade-1.html" data-building-entry data-search="성벽 1 barricade-1 성벽 1 barricade 1 城壁1" data-kind="info"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>성벽 1</strong><span>소개 자료</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/conquerors-camp.html" data-building-entry data-search="소대 영지 토벌 conquerors-camp 소대 영지 토벌 conquerors' camp 討伐小隊キャンプ" data-kind="info"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>소대 영지 토벌</strong><span>소개 자료</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/truegold-crucible.html" data-building-entry data-search="순금 용광로 truegold-crucible 순금 용광로 truegold crucible 黄金溶炉" data-kind="info"><img src="/img/buildings/truegold-crucible.webp" alt="" width="56" height="56"><div><strong>순금 용광로</strong><span>소개 자료</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/academy.html" data-building-entry data-search="아카데미 academy 아카데미 academy 学院" data-kind="tables"><img src="/img/buildings/academy.webp" alt="" width="56" height="56"><div><strong>아카데미</strong><span>30 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/infirmary.html" data-building-entry data-search="야전 병원 infirmary 야전 병원 infirmary 野戦病院" data-kind="tables"><img src="/img/buildings/infirmary.webp" alt="" width="56" height="56"><div><strong>야전 병원</strong><span>74 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/hero-hall.html" data-building-entry data-search="영웅의 홀 hero-hall 영웅의 홀 hero hall 英雄ロビー" data-kind="info"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>영웅의 홀</strong><span>소개 자료</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/clinic.html" data-building-entry data-search="의무실 clinic 의무실 clinic 医務室" data-kind="tables"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>의무실</strong><span>10 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/monument.html" data-building-entry data-search="이정표 monument 이정표 monument マイルストーン" data-kind="info"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>이정표</strong><span>소개 자료</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/watchtower-localized.html" data-building-entry data-search="전망대 watchtower-localized 전망대 ハヤブサの塔" data-kind="info"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>전망대</strong><span>소개 자료</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/war-academy.html" data-building-entry data-search="전쟁 아카데미 war-academy 전쟁 아카데미 war academy 戦争学院" data-kind="tables"><img src="/img/buildings/war-academy.webp" alt="" width="56" height="56"><div><strong>전쟁 아카데미</strong><span>40 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/iron-mine.html" data-building-entry data-search="제철 공장 iron-mine 제철 공장 iron mine 鉄鉱工場" data-kind="tables"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>제철 공장</strong><span>30 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/kitchen.html" data-building-entry data-search="주방 kitchen 주방 kitchen 厨房" data-kind="tables"><img src="/img/buildings/kitchen.webp" alt="" width="56" height="56"><div><strong>주방</strong><span>10 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/commandcenter.html" data-building-entry data-search="지휘부 commandcenter 지휘부 command center 指揮所" data-kind="tables"><img src="/img/buildings/commandcenter.webp" alt="" width="56" height="56"><div><strong>지휘부</strong><span>74 단계</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/enlistment-office.html" data-building-entry data-search="징병소 enlistment-office 징병소 enlistment office 募兵所" data-kind="info"><span class="kd-directory-noimage" aria-hidden="true"></span><div><strong>징병소</strong><span>소개 자료</span></div><span aria-hidden="true">→</span></a><a href="/ko/buildings/storehouse.html" data-building-entry data-search="창고 storehouse 창고 storehouse 倉庫" data-kind="tables"><img src="/img/buildings/storehouse.webp" alt="" width="56" height="56"><div><strong>창고</strong><span>30 단계</span></div><span aria-hidden="true">→</span></a></div></article></main></div><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav><p>게임 개발사 및 퍼블리셔와 독립적으로 운영하는 비공식 팬사이트입니다. 게임 이미지와 상표의 권리는 해당 권리자에게 있습니다.</p></footer><!-- shared-policy-footer:end --><script defer src="/js/integration-presentation.ks-integration-adb72e714503e84f.js" data-kd-presentation="v1" data-kd-model="/data/integration/display-model.ks-integration-adb72e714503e84f.json" data-kd-release="ks-integration-adb72e714503e84f"></script></body></html>

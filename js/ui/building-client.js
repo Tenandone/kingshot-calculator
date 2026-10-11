@@ -1,61 +1,22 @@
-(function (window) {
-  'use strict';
-  if (window.KD_UI_BUILDING) return;
-  var states = new WeakMap();
-  function levelFrom(value) { var n = Number(value); return Number.isInteger(n) && n >= 1 && n <= 30 ? n : 1; }
-  function enhance(root, locale) {
-    var article = root && root.id === 'kd-building' ? root : root && root.querySelector('#kd-building');
-    if (!article || (locale && article.dataset.locale !== locale)) return;
-    if (states.has(article)) { states.get(article).restore(false); return; }
-    var select = article.querySelector('#kd-building-level'), range = article.querySelector('#kd-building-level-range');
-    if (!select || !range) return;
-    var current = null;
-    function update(level) {
-      level = levelFrom(level);
-      if (current === level) return;
-      current = level; select.value = String(level); range.value = String(level);
-      var row = article.querySelector('[data-kd-level="' + level + '"]');
-      article.querySelectorAll('[data-kd-level]').forEach(function (item) {
-        if (item === row) item.setAttribute('data-selected', 'true'); else item.removeAttribute('data-selected');
-      });
-      article.querySelector('#kd-building-current-level').textContent = 'Lv. ' + level;
-      [['requirement', 'requirement'], ['time', 'constructionTime'], ['power', 'power'], ['wood', 'wood'], ['bread', 'bread'], ['stone', 'stone'], ['iron', 'iron']].forEach(function (pair) {
-        var cell = row && row.querySelector('[data-kd-field="' + pair[1] + '"]'), output = article.querySelector('#kd-building-current-' + pair[0]);
-        if (output) output.textContent = cell ? cell.textContent.trim() : '–';
-      });
-    }
-    function restore(scroll) {
-      var url = new URL(window.location.href); update(url.searchParams.get('level'));
-      var anchor = url.hash.indexOf('#/') === 0 ? url.searchParams.get('section') : url.hash.slice(1);
-      if (scroll !== false && anchor && ['requirements', 'truegold', 'overview', 'truegold-timeline', 'related', 'upgrade', 'overview-anchor'].indexOf(anchor) >= 0) {
-        var target = article.querySelector('#' + anchor);
-        if (target) target.scrollIntoView({ block: 'start' });
-      }
-    }
-    function choose(value, push) {
-      var level = levelFrom(value), url = new URL(window.location.href);
-      url.searchParams.set('level', String(level));
-      var state = Object.assign({}, window.history.state || {}, { kdBuilding: { locale: article.dataset.locale, level: level } });
-      window.history[push ? 'pushState' : 'replaceState'](state, '', url.pathname + url.search + url.hash); update(level);
-    }
-    select.addEventListener('change', function () { choose(select.value, true); });
-    range.addEventListener('input', function () { choose(range.value, false); });
-    article.addEventListener('click', function (event) {
-      var link = event.target.closest && event.target.closest('a[data-kd-anchor]');
-      if (!link || !article.contains(link) || event.button > 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      var id = link.dataset.kdAnchor, target = article.querySelector('#' + id);
-      if (!target) return;
-      event.preventDefault(); event.stopPropagation();
-      var url = new URL(window.location.href);
-      if (url.hash.indexOf('#/') === 0) url.searchParams.set('section', id); else url.hash = id;
-      window.history.replaceState(window.history.state, '', url.pathname + url.search + url.hash);
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    var state = { restore: restore };
-    states.set(article, state);
-    window.addEventListener('popstate', function () { if (article.isConnected) restore(); });
-    window.addEventListener('hashchange', function () { if (article.isConnected) restore(); });
-    restore();
-  }
-  window.KD_UI_BUILDING = { enhance: enhance };
+(function(win){'use strict';if(win.KD_UI_BUILDING?.ui3)return;
+ const states=new WeakMap(),indexes=new WeakMap();
+ const words={ko:{missing:'자료 부족',error:'구간을 확인할 수 없습니다. 현재·목표 레벨을 확인하세요.',bread:'빵',wood:'나무',stone:'석재',iron:'철광',truegold:'순금',tempered_truegold:'담금질 순금',timeSeconds:'기본 건설 시간',d:'일',h:'시간',m:'분',s:'초'},en:{missing:'Unavailable',error:'Cannot compare this range. Check the current and target levels.',bread:'Bread',wood:'Wood',stone:'Stone',iron:'Iron',truegold:'Truegold',tempered_truegold:'Tempered Truegold',timeSeconds:'Base build time',d:'d',h:'h',m:'m',s:'s'},ja:{missing:'データなし',error:'この区間を比較できません。現在・目標レベルを確認してください。',bread:'パン',wood:'木材',stone:'石材',iron:'鉄鉱',truegold:'純金',tempered_truegold:'精製純金',timeSeconds:'基本建設時間',d:'日',h:'時間',m:'分',s:'秒'}};
+ function duration(n,t){if(n==null)return t.missing;let a=[];for(const[s,k]of[[86400,'d'],[3600,'h'],[60,'m'],[1,'s']]){const q=Math.floor(n/s);n%=s;if(q)a.push(q+t[k]);}return a.join(' ')||'0'+t.s;}
+ function saveURL(changes,push){const u=new URL(location.href);for(const[k,v]of Object.entries(changes)){if(v==null)u.searchParams.delete(k);else u.searchParams.set(k,v);}history[push?'pushState':'replaceState'](history.state,'',u.pathname+u.search+u.hash);}
+ function enhanceIndex(root){const index=root.querySelector('#kd-buildings-index');if(!index||indexes.has(index))return;const search=index.querySelector('#kd-building-search'),filter=index.querySelector('#kd-building-filter'),entries=[...index.querySelectorAll('[data-building-entry]')],count=index.querySelector('#kd-building-count');
+  function update(){const q=search.value.trim().toLowerCase();let n=0;for(const e of entries){e.hidden=!(e.dataset.search.includes(q)&&(filter.value==='all'||e.dataset.kind===filter.value));if(!e.hidden)n++;}count.textContent=String(n);}
+  function restore(){const u=new URL(location.href);search.value=u.searchParams.get('q')||'';filter.value=u.searchParams.get('kind')||'all';update();}
+  search.addEventListener('input',()=>{saveURL({q:search.value||null},false);update();});filter.addEventListener('change',()=>{saveURL({kind:filter.value},true);update();});win.addEventListener('popstate',()=>{if(index.isConnected)restore();});restore();indexes.set(index,true);
+ }
+ function enhance(root,locale){enhanceIndex(root);const article=root.id==='kd-building'?root:root.querySelector('#kd-building');if(!article||!article.classList.contains('kd-building-table-page')||(locale&&article.dataset.locale!==locale))return;if(states.has(article)){states.get(article).restore(false);return;}
+  const select=article.querySelector('#kd-building-level'),rows=[...article.querySelectorAll('[data-row-key]')],current=article.querySelector('[data-range-current]'),target=article.querySelector('[data-range-target]'),output=article.querySelector('[data-range-result]'),t=words[article.dataset.locale]||words.ko;let chosen=null,modelPromise=null;
+  function languageState(){const u=new URL(location.href);document.querySelectorAll('.kd-standalone-langs a:not([lang="zh-TW"])').forEach(a=>{const next=new URL(a.href,location.href);for(const key of ['level','stage','from','to']){if(u.searchParams.has(key))next.searchParams.set(key,u.searchParams.get(key));else next.searchParams.delete(key);}a.href=next.pathname+next.search;});}
+  function update(value,stage='normal'){languageState();const options=select?[...select.options].map(o=>o.value):[];const valid=options.includes(String(value))?String(value):options[0];if(select)select.value=valid;chosen=stage==='tg'?String(value):valid;for(const row of rows){const key=stage==='tg'?chosen:'normal:'+valid;if(row.dataset.rowKey===key)row.setAttribute('data-selected','true');else row.removeAttribute('data-selected');}}
+  function restore(scroll=true){const u=new URL(location.href),stage=u.searchParams.get('stage')||'normal';update(u.searchParams.get('level'),stage);if(current&&u.searchParams.has('from'))current.value=u.searchParams.get('from');if(target&&u.searchParams.has('to'))target.value=u.searchParams.get('to');const anchor=u.hash.startsWith('#/')?u.searchParams.get('section'):u.hash.slice(1);if(scroll&&anchor){const el=article.querySelector('#'+CSS.escape(anchor));if(el)el.scrollIntoView({block:'start'});}}
+  if(select)select.addEventListener('change',()=>{saveURL({level:select.value,stage:null},true);update(select.value);});article.querySelector('#kd-building-jump')?.addEventListener('click',()=>{const row=rows.find(r=>r.dataset.rowKey==='normal:'+select.value);row?.setAttribute('tabindex','-1');row?.focus({preventScroll:true});row?.scrollIntoView({block:'start',inline:'nearest',behavior:win.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});});
+  article.addEventListener('click',e=>{const a=e.target.closest('a[data-kd-anchor]');if(!a||e.button>0||e.ctrlKey||e.metaKey||e.shiftKey)return;const el=article.querySelector('#'+CSS.escape(a.dataset.kdAnchor));if(!el)return;e.preventDefault();e.stopPropagation();const u=new URL(location.href);if(u.hash.startsWith('#/'))u.searchParams.set('section',a.dataset.kdAnchor);else u.hash=a.dataset.kdAnchor;history.replaceState(history.state,'',u.pathname+u.search+u.hash);el.scrollIntoView({block:'start',behavior:'smooth'});});
+  async function compare(){if(!current||!target)return;saveURL({from:current.value,to:target.value},false);output.textContent='…';try{if(!modelPromise)modelPromise=fetch(article.dataset.modelUrl,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('MODEL_HTTP_'+r.status);return r.json();});const model=await modelPromise;if(model.version!==article.dataset.version||model.id!==article.dataset.buildingId)throw Error('MODEL_VERSION_MISMATCH');const {summarizeRange}=await import('/js/ui/building-range.mjs');const normal=model.levels.filter(r=>r.stage==='normal');const keys=model.displayFields.normal.filter(k=>!['timeSeconds','power','powerIncrease'].includes(k));const result=summarizeRange({rows:model.levels,currentLevel:Number(current.value),targetLevel:Number(target.value),resourceKeys:keys.length?keys:['wood'],stage:'normal',bounds:{minLevel:Math.min(...normal.map(r=>r.level))-1,maxLevel:Math.max(...normal.map(r=>r.level))}});const list=document.createElement('dl');list.className='kd-range-totals';for(const[k,v]of Object.entries({...Object.fromEntries(Object.entries(result.resources).filter(([k])=>keys.includes(k))),timeSeconds:result.timeSeconds})){const box=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=t[k];dd.textContent=v.displayedValueTotal==null?t.missing:(v.approximate?'≈ ':'')+(k==='timeSeconds'?duration(v.displayedValueTotal,t):v.displayedValueTotal.toLocaleString('en-US'));dd.dataset.totalField=k;dd.dataset.totalValue=String(v.displayedValueTotal);box.append(dt,dd);list.append(box);}output.replaceChildren(list);output.dataset.actualGameCalculationAllowed='false';output.dataset.status=result.displayStatus;}catch(e){output.textContent=t.error;output.dataset.status='blocked';}}
+  [current,target].forEach(el=>el?.addEventListener('change',()=>{saveURL({from:current.value,to:target.value},false);languageState();output.replaceChildren();}));article.querySelector('[data-range-submit]')?.addEventListener('click',compare);const state={restore};states.set(article,state);win.addEventListener('popstate',()=>{if(article.isConnected)restore();});win.addEventListener('hashchange',()=>{if(article.isConnected)restore();});restore();
+ }
+ win.KD_UI_BUILDING={enhance,ui3:true};
 })(window);

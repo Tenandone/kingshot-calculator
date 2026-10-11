@@ -1,11 +1,11 @@
 (function(win){'use strict';
   const doc=win.document,script=doc.currentScript,version=script?.dataset.kdUiVersion;
-  if(win.KD_UI?.version===version)return;
-  win.KD_UI={version,status:'loading',errors:[]};
+  if(win.KD_UI?.ui3)return;
+  win.KD_UI={version,ui3:true,status:'loading',errors:[]};
   let scheduled=false,running=false,rerun=false;
   const labels={ko:['건물','영웅','연구','계산기','소개'],en:['Buildings','Heroes','Research','Calculators','About'],ja:['建物','英雄','研究','計算機','サイト紹介']};
   function locale(){const m=location.pathname.match(/^\/(ko|en|ja|zh-tw)(?:\/|$)/);return m?m[1]:((doc.documentElement.lang||'ko').startsWith('zh')?'zh-tw':doc.documentElement.lang||'ko');}
-  function scope(){const p=location.hash.startsWith('#/')?location.hash.slice(1):location.pathname;return /(?:buildings\/embassy(?:\.html)?|(?:^|\/)heroes\/?$|hero\/jabel|research(?:\/(?:academy|advanced-truegold))?\/?$|(?:^|\/)about(?:\.html)?\/?$)/.test(p);}
+  function scope(){const p=location.hash.startsWith('#/')?location.hash.slice(1):location.pathname;return /(?:buildings?(?:\/[^?#]*)?|(?:^|\/)heroes\/?$|hero\/jabel|research(?:\/(?:academy|advanced-truegold))?\/?$|(?:^|\/)about(?:\.html)?\/?$)/.test(p);}
   function subnav(lang){
     const host=doc.querySelector('#content')||doc.querySelector('main');if(!host||host.querySelector(':scope > .kd-subnav'))return;
     const prefix=lang==='ko'?'':'/'+lang,words=labels[lang]||labels.ko;
@@ -16,7 +16,7 @@
   async function run(){
     scheduled=false;if(running){rerun=true;return;}running=true;
     try{
-      const lang=locale(),enabled=lang!=='zh-tw'&&scope();doc.body.classList.toggle('kd-ui-shell',enabled);
+      const lang=locale(),enabled=lang!=='zh-tw'&&scope();doc.body.classList.toggle('kd-ui-shell',enabled);doc.body.classList.toggle('kd-building-table-shell',enabled&&!!doc.querySelector('#kd-building.kd-building-table-page,#kd-buildings-index'));
       (doc.querySelector('#content')||doc.querySelector('main'))?.classList.toggle('kd-ui',enabled);
       win.KD_UI_SOURCES?.apply(doc);
       if(enabled){
