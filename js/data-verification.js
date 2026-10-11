@@ -13,6 +13,7 @@
   'zh-tw':{gear:'2026-10-06核對：領主裝備58階段材料需求，以及寶石1–22級材料與累計屬性已與官方Wiki表核對。裝備評分和活動分數不在本次驗證範圍。',building:'2026-10-06核對：8種一般建築Lv.1–30資源表與市政廳Lv.2–30基本時間。原文空白費用、學院Lv.12木材單位誤植、前置條件、TG階段及戰爭學院費用仍待確認。',pet:'2026-10-06核對：以灰狼、猞猁、獵豹、獅子、巨型犀牛核對5種稀有度的飼料與突破材料表。其他寵物是否適用同表、技能及解鎖時點仍需另外確認。'}
  };
  function html(pathname){
+  if(/^\/(?:(?:ko|en|ja)\/)?research(?:\/(?:academy|advanced-truegold))?\/?$/.test(pathname))return ''; // Detailed provenance stays in About and the private source ledger.
   if(/^\/(?:(?:ko|en|ja)\/)?(?:heroes|hero\/[^/]+)\/?$/.test(pathname))return ''; // Hero policy lives in existing About; calculator gates are unchanged.
   if(!/^\/zh-tw(?:\/|$)/i.test(pathname)&&/^\/(?:ko\/|en\/|ja\/)?buildings?(?:\/|$)/.test(pathname))return '';
   const p=pathname.replace(/^\/(en|ko|ja|zh-tw)(?=\/)/,'');

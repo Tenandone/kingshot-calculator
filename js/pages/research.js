@@ -133,3 +133,11 @@
     }
   };
 })();
+
+/* UI5 display adapter. The original renderer above remains the Traditional Chinese fallback. */
+(function(win){'use strict';
+  const oldInit=win.initResearch,doc=win.document;
+  function locale(){const raw=String(win.I18N?.current||doc.documentElement.lang||'ko').toLowerCase();return raw.startsWith('zh')?'zh-tw':raw.startsWith('en')?'en':raw.startsWith('ja')?'ja':'ko';}
+  async function load(){if(win.KD_UI_RESEARCH)return;if(!win.__KD_RESEARCH_LOADER__)win.__KD_RESEARCH_LOADER__=(async()=>{if(!doc.querySelector('link[href^="/css/research-ui.css"]')){const l=doc.createElement('link');l.rel='stylesheet';l.href='/css/research-ui.css?v=ks-ui5-20261011a';doc.head.append(l);}for(const [name,key]of[['research-view','KD_RESEARCH_VIEW'],['research-client','KD_UI_RESEARCH']]){if(win[key])continue;await new Promise((resolve,reject)=>{const s=doc.createElement('script');s.src='/js/ui/'+name+'.js?v=ks-ui5-20261011a';s.onload=resolve;s.onerror=reject;doc.head.append(s);});}})().catch(e=>{win.__KD_RESEARCH_LOADER__=null;throw e;});await win.__KD_RESEARCH_LOADER__;}
+  win.initResearch=async function(slug){const l=locale();if(l==='zh-tw'){doc.body.classList.remove('kr-shell');return oldInit(slug);}await load();return win.KD_UI_RESEARCH.mount(doc.getElementById('research-root'),l,slug);};
+})(window);

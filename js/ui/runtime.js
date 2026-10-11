@@ -2,7 +2,8 @@
   const doc=win.document,script=doc.currentScript,version=script?.dataset.kdUiVersion;
   if(win.KD_UI?.ui3)return;
   win.KD_UI={version,ui3:true,status:'loading',errors:[]};
-  let scheduled=false,running=false,rerun=false,heroLoading;
+  let scheduled=false,running=false,rerun=false,heroLoading,researchLoading;
+  async function loadResearch(){if(win.KD_UI_RESEARCH)return;if(!researchLoading)researchLoading=(async()=>{if(!doc.querySelector('link[href^="/css/research-ui.css"]')){const link=doc.createElement('link');link.rel='stylesheet';link.href='/css/research-ui.css?v=ks-ui5-20261011a';doc.head.append(link);}for(const [name,global] of [['research-view','KD_RESEARCH_VIEW'],['research-client','KD_UI_RESEARCH']]){if(win[global])continue;await new Promise((resolve,reject)=>{const s=doc.createElement('script');s.src='/js/ui/'+name+'.js?v=ks-ui5-20261011a';s.onload=resolve;s.onerror=reject;doc.head.append(s);});}})().catch(e=>{researchLoading=null;throw e;});await researchLoading;}
   async function loadHeroes(){if(win.KD_UI_HEROES)return;if(!heroLoading)heroLoading=(async()=>{if(!doc.querySelector('link[href^="/css/ui-heroes.css"]')){const link=doc.createElement("link");link.rel="stylesheet";link.href="/css/ui-heroes.css?v=ks-tg-heroes-20261011a";doc.head.append(link);}for(const [name,global] of [["hero-view","KD_HERO_VIEW"],["hero-client","KD_UI_HEROES"]]){if(win[global])continue;await new Promise((resolve,reject)=>{const s=doc.createElement("script");s.src="/js/ui/"+name+".js?v=ks-tg-heroes-20261011a";s.onload=resolve;s.onerror=reject;doc.head.append(s);});}})().catch(e=>{heroLoading=null;throw e;});await heroLoading;}
   const labels={ko:['건물','영웅','연구','계산기','소개'],en:['Buildings','Heroes','Research','Calculators','About'],ja:['建物','英雄','研究','計算機','サイト紹介']};
   function locale(){const m=location.pathname.match(/^\/(ko|en|ja|zh-tw)(?:\/|$)/);return m?m[1]:((doc.documentElement.lang||'ko').startsWith('zh')?'zh-tw':doc.documentElement.lang||'ko');}
@@ -17,14 +18,17 @@
   async function run(){
     scheduled=false;if(running){rerun=true;return;}running=true;
     try{
-      const lang=locale(),isHero=/^\/(?:(?:ko|en|ja)\/)?(?:heroes|hero\/[^/]+)\/?$/.test(location.pathname),enabled=lang!=='zh-tw'&&scope();doc.body.classList.toggle("kh-shell",enabled&&isHero);doc.body.classList.toggle('kd-ui-shell',enabled);doc.body.classList.toggle('kd-building-table-shell',enabled&&!!doc.querySelector('#kd-building.kd-building-table-page,#kd-buildings-index'));
+      const routeAtStart=location.pathname+location.hash,localeAtStart=locale(),hostAtStart=doc.querySelector('#content')||doc.querySelector('main');
+      const stale=()=>{const changed=routeAtStart!==location.pathname+location.hash||localeAtStart!==locale()||hostAtStart!==(doc.querySelector('#content')||doc.querySelector('main'));if(changed)rerun=true;return changed;};
+      const lang=locale(),isHero=/^\/(?:(?:ko|en|ja)\/)?(?:heroes|hero\/[^/]+)\/?$/.test(location.pathname),isResearch=/^\/(?:(?:ko|en|ja)\/)?research(?:\/(?:academy|advanced-truegold))?\/?$/.test(location.pathname),enabled=lang!=='zh-tw'&&scope();doc.body.classList.toggle("kh-shell",enabled&&isHero);doc.body.classList.toggle('kr-shell',enabled&&isResearch);doc.body.classList.toggle('kd-ui-shell',enabled);doc.body.classList.toggle('kd-building-table-shell',enabled&&!!doc.querySelector('#kd-building.kd-building-table-page,#kd-buildings-index'));
       (doc.querySelector('#content')||doc.querySelector('main'))?.classList.toggle('kd-ui',enabled);
       win.KD_UI_SOURCES?.apply(doc);
       if(enabled){
         win.KD_UI_BUILDING?.enhance(doc,lang);
         const buildingNotice=doc.querySelector('[data-verification-note]'),buildingState=doc.querySelector('#kd-building #requirements .kd-building-state');
         if(buildingNotice&&buildingState&&buildingNotice.previousElementSibling!==buildingState)buildingState.after(buildingNotice);
-        if(isHero){await loadHeroes();await win.KD_UI_HEROES.enhance(doc,lang);}else if(/\/research\/(?:academy|advanced-truegold)/.test(location.pathname))await win.KD_UI_COLLECTIONS?.enhance(doc,lang);
+        if(isHero){await loadHeroes();if(stale())return;await win.KD_UI_HEROES.enhance(doc,lang);}else if(isResearch){await loadResearch();if(stale())return;await win.KD_UI_RESEARCH.enhance(doc,lang);}
+        if(stale())return;
         if(!isHero)subnav(lang);
       }
       win.KD_UI_SOURCES?.apply(doc);win.KD_UI.status='ready';
