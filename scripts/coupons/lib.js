@@ -139,11 +139,15 @@ function buildRecord(previous, observations, decision, checkedAt) {
   else delete record.until;
   if (decision.conflict) record.notes = 'Source status conflict; not published as active.';
   else if (record.notes === 'Source status conflict; not published as active.') delete record.notes;
+  delete record.reviewRequired;
+  delete record.reviewReason;
+  delete record.currentVerifiedSourceCount;
   return record;
 }
 
 function mergeCouponData(existingCoupons, existingCandidates, observations, checkedAt) {
   const nowMs = Date.parse(checkedAt);
+  const previouslyPublished = new Map((existingCoupons || []).map(record => [normalizeCode(record.code), record]));
   const published = new Map((existingCoupons || []).map(record => {
     const migrated = migrateManualRecord(record, nowMs);
     return [migrated.normalizedCode, migrated];
@@ -160,6 +164,28 @@ function mergeCouponData(existingCoupons, existingCandidates, observations, chec
       manual.lastCheckedAt = checkedAt;
       manual.officialVerified = manual.officialVerified || decision.officialVerified;
       manual.verifiedSourceCount = Math.max(manual.verifiedSourceCount || 0, decision.verifiedSourceCount);
+      continue;
+    }
+
+    // One missing corroborating source is not evidence that an existing code expired.
+    // Keep its earlier verification distinct from this run's insufficient evidence.
+    const previousPublished = previouslyPublished.get(key);
+    const priorExpiry = previousPublished && parseTime(previousPublished.expiresAt || previousPublished.until);
+    const observedExpiry = parseTime(decision.expiresAt);
+    if (previousPublished && ACTIVE_STATUSES.has(previousPublished.status) && decision.status === 'candidate' &&
+        !decision.conflict && grouped.every(item => ACTIVE_STATUSES.has(item.status)) &&
+        new Set(grouped.map(item => item.sourceId)).size === 1 &&
+        priorExpiry !== null && priorExpiry > nowMs && observedExpiry !== null && observedExpiry > nowMs) {
+      published.set(key, {
+        ...previousPublished,
+        sources: mergeSourceHistory(previousPublished.sources, grouped, checkedAt),
+        lastSeenAt: checkedAt,
+        lastCheckedAt: checkedAt,
+        reviewRequired: true,
+        reviewReason: 'current_active_source_count_below_threshold',
+        currentVerifiedSourceCount: decision.verifiedSourceCount
+      });
+      candidates.delete(key);
       continue;
     }
 

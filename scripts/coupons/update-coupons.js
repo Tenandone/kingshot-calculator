@@ -75,6 +75,9 @@ function semanticRecord(record) {
     verifiedSourceCount: Number(record.verifiedSourceCount || 0),
     confidence: Number(record.confidence || 0),
     manualOverride: Boolean(record.manualOverride),
+    reviewRequired: Boolean(record.reviewRequired),
+    reviewReason: record.reviewReason || null,
+    currentVerifiedSourceCount: record.currentVerifiedSourceCount == null ? null : Number(record.currentVerifiedSourceCount),
     sources: (record.sources || []).map(source => ({ id: source.id, observedStatus: source.observedStatus || null, observedExpiresAt: source.observedExpiresAt || null })).sort((a, b) => a.id.localeCompare(b.id))
   });
 }
