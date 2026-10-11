@@ -853,7 +853,7 @@
   }
 
   function isStaticSpaRoute(pathname) {
-    return pathname === '/' ||
+    return pathname === '/' || pathname === '/growth-planner' ||
       /^\/(?:heroes|events|research|items|calculator|calc-building|calc-hero-gear|calc-gear|calc-charm|calc-training|calc-pet|waracademy|about|privacy)(?:\/|$)/i.test(pathname) ||
       /^\/hero\/[^/?#]+\/?$/i.test(pathname);
   }
@@ -1049,6 +1049,24 @@
   })();
 
   function getRoute(key) {
+    if (key === '/growth-planner') return {
+      title: 'Growth planner | KingshotData',
+      render: function(el) {
+        var pathname = location.pathname;
+        var locale = (/^\/(en|ja)\//.exec(pathname) || [])[1] || 'ko';
+        el.innerHTML = '<div id="planner-root" aria-live="polite"></div>';
+        var host = el.firstElementChild;
+        return ensureCSS('growth-planner-css', '/css/growth-planner.css').then(function(){
+          return window.KD_PLANNER_CORE ? null : loadScriptOnce('/js/ui/planner-core.js');
+        }).then(function(){
+          return window.KD_PLANNER_VIEW ? null : loadScriptOnce('/js/ui/planner-view.js');
+        }).then(function(){
+          return window.KD_GROWTH_PLANNER ? null : loadScriptOnce('/js/ui/planner-client.js');
+        }).then(function(){
+          if (host.isConnected && pathname === location.pathname) return window.KD_GROWTH_PLANNER.mount(host, locale);
+        });
+      }
+    };
     if (routes && routes[key]) return routes[key];
     if (proxyRoutes && proxyRoutes[key]) return proxyRoutes[key];
     if (routes && routes['/']) return routes['/'];
@@ -1286,6 +1304,7 @@
           window.KD_SEO_SYNC();
         }
       } catch (_seoError) {}
+      try { if (window.KD_GROWTH_PLANNER) window.KD_GROWTH_PLANNER.syncSeo(); } catch (_plannerSeoError) {}
       return result;
     });
   }
