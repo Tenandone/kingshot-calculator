@@ -8,7 +8,7 @@
 <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>방위소 업그레이드 비용 (Lv 1–10) | 킹샷</title>
-  <meta name="description" content="킹샷 방위소(Guard Station) 업그레이드 요구사항과 비용 (레벨 1–10). 도시센터 요구 레벨, 업그레이드 시간, 자원, 방위소 방어력, 전투력과 방위소 수리/복구 방법 포함." />
+  <meta name="description" content="도시의 안전을 지킬 수 있으며, 방위소를 업그레이드하면 방위도를 높일 수 있습니다." />
 
   <!-- SEO -->
   <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings/guard-station.html" />
@@ -400,7 +400,7 @@
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="방위소 업그레이드 비용 (Lv 1–10) | 킹샷" />
-  <meta property="og:description" content="킹샷 방위소(Guard Station) 업그레이드 요구사항과 비용 (레벨 1–10). 도시센터 요구 레벨, 업그레이드 시간, 자원, 방위소 방어력, 전투력과 방위소 수리/복구 방법 포함." />
+  <meta property="og:description" content="도시의 안전을 지킬 수 있으며, 방위소를 업그레이드하면 방위도를 높일 수 있습니다." />
   <meta property="og:url" content="https://kingshotdata.kr/ko/buildings/guard-station.html" />
   <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
 <script src="/js/canonical-links.js?v=2026100621" defer></script>
@@ -411,6 +411,13 @@
 <link rel="stylesheet" href="/css/my-progress.css?v=2026100621">
 <script defer src="/js/privacy-controls.js?v=2026100621"></script>
 <script defer src="/js/data-verification.js?v=2026100621"></script>
+<link rel="stylesheet" href="/css/ui-common.css?v=ks-ui1-85ec3439fd000513">
+<link rel="stylesheet" href="/css/ui-building.css?v=ks-ui1-85ec3439fd000513">
+<link rel="stylesheet" href="/css/ui-collections.css?v=ks-ui1-85ec3439fd000513">
+<script defer src="/js/ui/building-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
+<script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
+<script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
+<script defer src="/js/ui/runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 </head>
 
 <body>
@@ -449,7 +456,7 @@
       <a href="#restore">수리/복구</a>
     </nav>
 
-    <main id="main"><aside data-verification-note style="max-width:1100px;margin:16px auto;padding:14px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;color:#334155"><strong>데이터 검증 상태: 일부 확인</strong><p style="margin:6px 0 0">이 페이지의 수치·효과·획득 조건은 전체 검증이 완료되지 않았습니다. 별도로 확인 표시가 없는 값은 검증되지 않은 참고값입니다. 미검증 핵심 데이터를 사용하는 계산은 차단됩니다. 자료를 참고할 때는 현재 게임 화면을 확인하세요.</p><p>확인 범위(2026-10-06): 일반 건물 8종의 Lv.1–30 자원 표와 도시센터 Lv.2–30 기본 시간을 대조했습니다. 원문이 비어 있는 비용, 아카데미 Lv.12 나무의 원문 단위 오기, 선행 조건, TG 단계·전쟁아카데미 비용은 확인이 남아 있습니다. <a href="https://kingshotwiki.com/buildings/town-center/">Kingshot Official Wiki</a></p></aside>
+    <main id="main"><aside data-verification-note style="max-width:1100px;margin:16px auto;padding:14px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;color:#334155"><strong>데이터 검증 상태: 일부 확인</strong><p style="margin:6px 0 0">이 페이지의 수치·효과·획득 조건은 전체 검증이 완료되지 않았습니다. 별도로 확인 표시가 없는 값은 검증되지 않은 참고값입니다. 미검증 핵심 데이터를 사용하는 계산은 차단됩니다. 자료를 참고할 때는 현재 게임 화면을 확인하세요.</p><p>확인 범위(2026-10-06): 일반 건물 8종의 Lv.1–30 자원 표와 도시센터 Lv.2–30 기본 시간을 대조했습니다. 원문이 비어 있는 비용, 아카데미 Lv.12 나무의 원문 단위 오기, 선행 조건, TG 단계·전쟁아카데미 비용은 확인이 남아 있습니다. </p></aside>
       <div class="crumbs">
         <a href="/ko/">홈</a> <span class="muted">›</span>
         <a href="/ko/buildings/">건물</a> <span class="muted">›</span>
@@ -460,10 +467,7 @@
         <img src="/img/buildings/guard-station.webp" alt="방위소 (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" decoding="async">
         <div>
           <h1>방위소</h1>
-          <p class="sub">
-            방위소는 도시를 방어하는 핵심 건물입니다. 방어에 실패해 도시가 불타면 방위소 체력이 지속적으로 감소하며,
-            <strong>체력이 0이 되면 도시가 랜덤 위치로 텔레포트</strong>됩니다.
-          </p>
+          <p class="sub">도시의 안전을 지킬 수 있으며, 방위소를 업그레이드하면 방위도를 높일 수 있습니다.</p>
           <div class="quote">도시를 보호합니다. 방위소를 업그레이드하면 내구성이 강화됩니다.</div>
 
           <div class="jump" aria-label="빠른 이동">
@@ -753,5 +757,6 @@
       }
     })();
   </script><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav><p>게임 개발사 및 퍼블리셔와 독립적으로 운영하는 비공식 팬사이트입니다. 게임 이미지와 상표의 권리는 해당 권리자에게 있습니다.</p></footer><!-- shared-policy-footer:end -->
+<script defer src="/js/integration-presentation.ks-integration-adb72e714503e84f.js" data-kd-presentation="v1" data-kd-model="/data/integration/display-model.ks-integration-adb72e714503e84f.json" data-kd-release="ks-integration-adb72e714503e84f"></script>
 </body>
 </html>

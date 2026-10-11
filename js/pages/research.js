@@ -88,15 +88,19 @@
     function draw() {
       var query = String(input.value || '').trim().toLowerCase();
       var filtered = records.filter(function (record) {
-        return (!isAcademy || activeCategory === 'all' || record.category === activeCategory) && (!query || record.name.toLowerCase().indexOf(query) !== -1);
+        return (!isAcademy || activeCategory === 'all' || record.category === activeCategory) && (!query || (window.KD_PRESENTATION && typeof window.KD_PRESENTATION.researchMatches === 'function' ? window.KD_PRESENTATION.researchMatches(record, branch, query) : record.name.toLowerCase().indexOf(query) !== -1));
       });
       list.innerHTML = filtered.map(function (record) {
         var category = isAcademy ? (copy[record.category] || record.category) : copy.advanced;
-        return '<li class="research-record"><strong>' + esc(record.name) + '</strong><span>' + esc(category) + ' · ' + esc(copy.maxLevel) + ' ' + esc(record.maxLevel) + '</span></li>';
+        return '<li class="research-record"><strong>' + esc(window.KD_PRESENTATION && typeof window.KD_PRESENTATION.researchTitle === 'function' ? window.KD_PRESENTATION.researchTitle(record, branch) : record.name) + '</strong><span>' + esc(category) + ' · ' + esc(copy.maxLevel) + ' ' + esc(record.maxLevel) + '</span></li>';
       }).join('');
       empty.hidden = filtered.length !== 0;
     }
     input.addEventListener('input', draw);
+    // Re-evaluate the unchanged query after the pinned display model arrives.
+    window.addEventListener('kd:presentation-ready', function () {
+      if (root.isConnected && root.querySelector('#research-list') === list) draw();
+    }, { once: true });
     root.querySelectorAll('.research-filter').forEach(function (button) {
       button.addEventListener('click', function () {
         activeCategory = button.getAttribute('data-category') || 'all';

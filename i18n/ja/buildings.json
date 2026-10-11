@@ -6,7 +6,6 @@
   "buildings.notFound.desc": "要求された建物が見つかりませんでした。",
   "buildings.unlocks": "解放",
   "buildings.kitchenSchedule": "厨房スケジュール",
-
   "buildings.col.gold": "トゥルーゴールド",
   "buildings.col.bread": "パン",
   "buildings.col.wood": "木材",
@@ -34,11 +33,9 @@
   "buildings.col.amount": "獲得トゥルーゴールド量",
   "buildings.col.chance": "確率",
   "buildings.col.refineCount": "精錬回数",
-
-  "buildings.card.towncenter.title": "タウンセンター",
+  "buildings.card.towncenter.title": "役場",
   "buildings.card.towncenter.subtitle": "Lv.1–30 + TG1–TG5",
-  "buildings.card.towncenter.desc": "タウンセンターはKingshotにおける全ての建物のアップグレードの中心となる重要な施設です。レベルが上がるごとに他の建物の最大レベル制限が解除され、様々な機能が解放されます。また、英雄装備、領主装備、領主宝石、TGレベルの解放にも連動します。",
-
+  "buildings.card.towncenter.desc": "これは都市の本部であり、最初に解放される施設です。この施設のレベルによって、他の施設をアップグレードできる最大レベルや、新しい施設が解放されるタイミングが決まります。アップグレードすることで、都市の攻撃力と防御力が上昇し、襲撃時の反乱軍に対するブースト効果も得られます。 解放要素: 役場 のレベルアップに伴い、以下の機能や施設が解放されます。 役場 レベル 2: 製粉所 役場 レベル 3: 石材工場 役場 レベル 4: 民家3, 医務室, 鎮圧小隊キャンプ, 英雄ロビー 役場 レベル 5: 民家4, 鉄鉱工場 役場 レベル 6: 民家5, ハヤブサの塔, 同盟, 司法所 役場 レベル 7: 民家6, 歩兵営舎, 防衛局 役場 レベル 8: 大使館 競技場, マイルストーン, 弓兵営舎, 野戦病院 役場 レベル 9: 倉庫, 学院, 騎兵営舎 役場 レベル 10: 民家7, 民家8, 指揮所 役場 レベル 11: 募兵所 役場 レベル 13: 訓練キャンプ 役場 レベル 15: 英雄装備 役場 レベル 20: マスター鍛造 役場 レベル 22: 領主装備 役場 レベル 25: 領主チャーム 役場 レベル 30: 黄金レベル リスト作成：Daryl",
   "buildings.towncenter.unlock.lv2": "Lv.2: 製粉所",
   "buildings.towncenter.unlock.lv3": "Lv.3: 採石場",
   "buildings.towncenter.unlock.lv4": "Lv.4: 民家×3、医務室、小隊遠征、英雄の館",
@@ -55,54 +52,42 @@
   "buildings.towncenter.unlock.lv22": "Lv.22: 領主装備",
   "buildings.towncenter.unlock.lv25": "Lv.25: 領主宝石",
   "buildings.towncenter.unlock.lv30": "Lv.30: TGレベル解放",
-
   "buildings.card.embassy.title": "大使館",
-  "buildings.card.embassy.desc": "大使館はKingshotにおいて重要な軍事施設であり、タウンセンターLv.9以上にアップグレードするために必須です。レベルが上がるにつれて、同盟支援回数、支援時間短縮、兵力支援量が向上します。",
-
+  "buildings.card.embassy.desc": "同盟建物のひとつであり、同盟メンバーから送られてくる援軍を駐留させるための施設です。また、建設、技術研究、負傷兵の治療を行う際、同盟メンバーから受けられる支援（ヘルプ）の回数や効果にも影響を与えます。 通常、この建物は役場を次のレベルへアップグレードするための前提条件となります。 大使館をアップグレードすると、受け入れ可能な援軍の最大容量が増加するだけでなく、メンバーから受けられるヘルプの回数が増え、さらに自身の総力も上昇します。",
   "buildings.col.reqtc": "必要条件",
   "buildings.col.supportcount": "支援回数",
   "buildings.col.supporttime": "支援時間",
   "buildings.col.troopsupport": "兵力支援",
-
-  "buildings.card.academy.title": "アカデミー",
+  "buildings.card.academy.title": "学院",
   "buildings.card.academy.subtitle": "発展 / 経済 / 戦闘研究",
-  "buildings.card.academy.desc": "アカデミーはタウンセンターレベル9で解放されます。発展・経済・戦闘研究によって都市全体の効率が向上します。",
+  "buildings.card.academy.desc": "ここは、都市のさまざまな要素を強化・発展させるための新たな技術を研究する場所です。 学院には、「発展」「経済」「戦闘」の3つのタブがあります。",
   "buildings.academy.unlock.dev": "発展",
   "buildings.academy.unlock.econ": "経済",
   "buildings.academy.unlock.combat": "戦闘",
-
-  "buildings.card.command.title": "司令部",
-  "buildings.card.command.desc": "司令部は集結と出征を統括する中核施設です。レベルを上げると、集結収容人数と出征兵力が増加し、大規模な作戦をより効率的に遂行できます。",
-
+  "buildings.card.command.title": "指揮所",
+  "buildings.card.command.desc": "同盟建物のひとつであり、この建物をアップグレードすると、自分が発動した集結に参加できる最大兵数が増加し、さらに自身の部隊に編成できる兵数上限もアップします。また、自身の総力も上昇します。 なお、科学研究の「戦闘」タブにある「編成拡大」の技術を研究することでも、部隊の兵数上限を増やすことができます。",
   "buildings.command.note.reqtown10": "司令部の主要機能は、タウンセンターLv.10以上で解放されます。",
   "buildings.command.note.levelup": "司令部を強化すると、集結収容人数と出征兵力が増加します。",
-
   "buildings.col.reqbuilding": "必要建物",
   "buildings.col.truegold": "トゥルーゴールド",
   "buildings.col.buildtime": "建設時間",
   "buildings.col.rallycapacity": "集結収容人数",
   "buildings.col.marchtroops": "出征兵力",
-
   "buildings.card.infirmary.title": "野戦病院",
   "buildings.card.infirmary.subtitle": "Lv.1–55",
-  "buildings.card.infirmary.desc": "負傷兵を治療できる建物です。",
-
+  "buildings.card.infirmary.desc": "ここは、負傷した兵士たちを治療する施設です。この建物をアップグレードすると、野戦病院の収容容量が増加し、さらに自身の総力も上昇します。 もし野戦病院が満杯（上限）になると、それ以上戦闘で負傷した兵士たちは治療を受けられず、死亡してしまうため注意してください。 なお、治療速度は英雄「あまね」のスキルによって上昇させることができます。 学院の「発展」タブにある技術「病室増設」を研究することでも、野戦病院の収容容量を増やすことが可能です。また、同じく「発展」タブにある「医療改善」を研究すると、治療時間が短縮されます。",
   "buildings.card.truegold-crucible.title": "真金精錬所",
   "buildings.card.truegold-crucible.subtitle": "真金交換",
   "buildings.card.truegoldCrucible.desc": "真金精錬所は王国がTG Lv.5に到達すると解放される特殊な建物で、パン・木材・石材・鉄を消費して少量の真金を精錬します。",
-
   "buildings.truegoldCrucible.unlock.tg5": "王国がTG Lv.5に到達すると即時解放",
   "buildings.truegoldCrucible.unlock.noCost": "建設資源不要",
   "buildings.truegoldCrucible.unlock.noLevel": "アップグレードレベルなし",
   "buildings.truegoldCrucible.unlock.dailyOutput": "1日平均約10.5の真金を獲得（期待値）",
-
   "buildings.col.truegoldAmount": "獲得真金量",
   "buildings.col.probability": "確率",
-
   "buildings.card.guard-station.title": "防衛所",
   "buildings.card.guard-station.subtitle": "Lv.1–10",
-  "buildings.card.guardStation.desc": "防衛所はTC Lv.7で解放される防御施設で、敵の攻撃から都市を守ります。敗北すると都市が炎上し、防衛所の耐久力が減少します。耐久力が0になると、都市はランダムな場所に強制移転されます。",
-
+  "buildings.card.guardStation.desc": "都市の安全を守るための重要な防衛施設です。防壁をアップグレードすることで、防衛の耐久度（都市防衛力）を高めることができます。 都市が敵から攻撃された際、ここに配置されている英雄3人のスキルや装備の効果が発動します。防衛の要となるため、登録する英雄には所持している中で最も強力な3人を選出して配置しましょう。",
   "buildings.guardStation.unlock.example": "活用例",
   "buildings.guardStation.unlock.swordWar": "聖剣争奪戦: 防衛所のレベルが低いと戦場付近から強制的に退却させられる",
   "buildings.guardStation.unlock.viking": "バイキング復讐戦: 耐久力が低いとバイキングの攻撃に弱い",
@@ -110,44 +95,30 @@
   "buildings.guardStation.unlock.recover": "防衛所回復",
   "buildings.guardStation.unlock.recoverManual": "30分ごとに手動で回復可能（ダイヤで即時回復は不可）",
   "buildings.guardStation.unlock.repairSteps": "修復手順: 防衛所に入る → 都市防御をクリック → 防衛所修復を押す → 30分ごとに繰り返す",
-  "buildings.guardStation.unlock.tip": "ヒント: 攻撃中にオンラインならダイヤで火災を消火でき、防衛所の追加損傷や強制テレポートを防げる"
-,
-
+  "buildings.guardStation.unlock.tip": "ヒント: 攻撃中にオンラインならダイヤで火災を消火でき、防衛所の追加損傷や強制テレポートを防げる",
   "buildings.card.kitchen.title": "厨房",
-"buildings.card.kitchen.subtitle": "Lv.1–10",
-"buildings.card.kitchen.desc": "厨房は生存者が食事を準備する建物です。パンを基盤とした3種類の食事（おがくずパン、チーズピザ、豪華な饗宴）を提供し、高級な食事ほど満腹感を多く与えます。満腹感が高いほど病気や死亡の確率が低下するため、可能であれば豪華な饗宴を維持することを推奨します。",
-
-"buildings.col.requirement": "必要条件",
-"buildings.col.unlockItem": "解除アイテム",
-
-"buildings.col.buildingEffectMax": "建物効果",
-"buildings.kitchen.unlock.prepare": "準備",
-"buildings.kitchen.unlock.serve": "配膳",
-"buildings.kitchen.unlock.eat": "食事"
-,
-
-  
+  "buildings.card.kitchen.subtitle": "Lv.1–10",
+  "buildings.card.kitchen.desc": "ゲーム開始後、2番目に解放される施設です。その名の通り、住民たちが食事を行う場所として機能します。 食堂は、稼働を維持するために農場から一定量の食糧を消費します。ゲーム序盤は食糧不足に陥りやすいため、農場が最大効率で食糧を生産できているか常に確認しておきましょう。 本施設は、住民の健康度や幸福度（機嫌）を高く保つための非常に重要な要素です。適切な食糧が供給されていないと、住民の機嫌が損なわれるだけでなく、病気が発生する原因にもなります。「施設レベルや民家のレベルを十分に上げているのに住民が病気になる」という場合は、食糧の「品質」が不足している可能性が高いです。 住民に提供する食糧の品質（メニュー）を改善することで、これらの問題を解決できます。 食堂をタップしたあと、生産の右に表示される小さな黄色のメニューボタンから食事の内容を変更できます。",
+  "buildings.col.requirement": "必要条件",
+  "buildings.col.unlockItem": "解除アイテム",
+  "buildings.col.buildingEffectMax": "建物効果",
+  "buildings.kitchen.unlock.prepare": "準備",
+  "buildings.kitchen.unlock.serve": "配膳",
+  "buildings.kitchen.unlock.eat": "食事",
   "buildings.card.storehouse.title": "倉庫",
   "buildings.card.storehouse.subtitle": "Lv.1–30",
-  "buildings.card.storehouse.desc": "資源の略奪から「非保護資源」を守る重要な貯蔵建物。",
-
+  "buildings.card.storehouse.desc": "ここは、あなたの資源を安全に保管する倉庫です。ここに保管された資源は、他の領主から都市が攻撃されても略奪されることはありません。上限を超えて溢れた資源は、攻撃を受けた際に略奪の対象となり、奪われてしまいます。 また、倉庫からは時間経過（タイマーカウント）によって、ギフトとして加速アイテムを回収することができます。 この建物をアップグレードすると、略奪から保護できる資源の容量が増加するだけでなく、自身の総力も上昇します。",
   "buildings.storehouse.unlock.tc9": "TC Lv.9で解放",
   "buildings.storehouse.unlock.protected": "保護資源: 製粉所・伐採場・採石場・製鉄所の生産/オフライン報酬 → 略奪不可",
   "buildings.storehouse.unlock.unprotected": "非保護資源: 採集・略奪・バックパック入手 → 倉庫容量を超えると略奪される",
   "buildings.storehouse.unlock.capacity": "レベルアップで資源の「保護容量」が増加",
-
-  "buildings.col.storeProtected": "資源保護容量"
-
-,
-
-    "buildings.card.barracks.title": "兵営",
+  "buildings.col.storeProtected": "資源保護容量",
+  "buildings.card.barracks.title": "歩兵営舎",
   "buildings.card.barracks.subtitle": "Lv.1–30 + TG1–5",
-  "buildings.card.barracks.desc": "歩兵ユニットを訓練するための主要な建物です。都市センターレベル7で解放され、レベルを上げるとより強力な歩兵ユニットが解放され、訓練速度と収容数も増加します。",
-
+  "buildings.card.barracks.desc": "歩兵の訓練およびアップグレード（昇格）を行う施設です。役場レベル7に達すると解放されます。 歩兵営舎は役場のレベルに応じて段階的に強化でき、通常、役場を次のレベルへ進めるための必要条件の1つとなります。施設をアップグレードするごとに、一度に訓練できる兵士の数（訓練容量）が増加し、訓練時間が短縮されるほか、自身の総力も上昇します。 また、特定のレベルに達することで、より高ランクの兵士（Tier）が解放されます。T5兵士（豪胆）を解放すると、それまでに訓練した低ランクの兵士を、現在訓練可能な最高ランクへと昇格させることができるようになります。 学院の「発展」タブにある技術「兵舎増設」を研究することでも、一度に訓練できる兵士の数をさらに増やすことができます。また、同じく「発展」タブにある「訓練機材」を研究すると、部隊の訓練に必要な時間が短縮されます。",
   "buildings.col.trainCapacity": "訓練収容数",
   "buildings.col.trainSpeed": "訓練速度",
   "buildings.col.unlocks": "解放",
-
   "buildings.barracks.unlock.lv1": "レベル1: 新兵歩兵 (騎兵へのダメージ +10%)",
   "buildings.barracks.unlock.lv4": "レベル4: 訓練兵歩兵",
   "buildings.barracks.unlock.lv7": "レベル7: 熟練歩兵",
@@ -158,85 +129,64 @@
   "buildings.barracks.unlock.lv22": "レベル22: 精鋭歩兵",
   "buildings.barracks.unlock.lv26": "レベル26: 崇高な歩兵",
   "buildings.barracks.unlock.lv30": "レベル30: 究極の歩兵",
-
-  "buildings.card.stable.title": "騎兵隊",
-"buildings.card.stable.subtitle": "Lv.1–30 + TG1–5",
-"buildings.card.stable.desc": "騎兵ユニットを訓練する軍事施設です。アップグレードによって上位の騎兵ユニットが解放されます。",
-
-"buildings.stable.unlock.lv1": "レベル1: 見習い騎兵",
-"buildings.stable.unlock.lv4": "レベル4: 熟練騎兵",
-"buildings.stable.unlock.lv7": "レベル7: ベテラン騎兵",
-"buildings.stable.unlock.lv11": "レベル11: 百戦錬磨の騎兵",
-"buildings.stable.unlock.lv13": "レベル13: 不屈の騎兵",
-"buildings.stable.unlock.lv16": "レベル16: 勇敢な騎兵",
-"buildings.stable.unlock.lv19": "レベル19: 恐れを知らぬ騎兵",
-"buildings.stable.unlock.lv22": "レベル22: 精鋭騎兵",
-"buildings.stable.unlock.lv26": "レベル26: 栄光の騎兵",
-"buildings.stable.unlock.lv30": "レベル30: エース騎兵",
-
-"buildings.stable.unlock.tg": "TG1~TG5: トゥルーゴールド騎兵解放",
-
-  "buildings.card.range.title": "射手兵舎",
-"buildings.card.range.subtitle": "Lv.1–30 + TG1–5",
-"buildings.card.range.desc": "射手兵舎は弓兵を訓練する建物で、都市センターLv.8から建設可能です。アップグレードすると、より強力な弓兵を訓練でき、訓練速度と収容人数も増加します。",
-
-"buildings.range.unlock.lv1": "レベル1: 見習い弓兵",
-"buildings.range.unlock.lv4": "レベル4: 熟練弓兵",
-"buildings.range.unlock.lv7": "レベル7: ベテラン弓兵",
-"buildings.range.unlock.lv11": "レベル11: 歴戦の弓兵",
-"buildings.range.unlock.lv13": "レベル13: 剛毅な弓兵",
-"buildings.range.unlock.lv16": "レベル16: 勇敢な弓兵",
-"buildings.range.unlock.lv19": "レベル19: 恐れ知らずの弓兵",
-"buildings.range.unlock.lv22": "レベル22: エリート弓兵",
-"buildings.range.unlock.lv26": "レベル26: 栄光の弓兵",
-"buildings.range.unlock.lv30": "レベル30: エース弓兵",
-
-"buildings.card.war-academy.title": "戦争アカデミー",
-"buildings.card.war-academy.subtitle": "TG1–TG5",
-"buildings.card.war-academy.desc": "戦争アカデミーは戦場での真金の粉の応用を研究し、兵士の戦闘力を高めます。",
-
-"buildings.detail.war-academy.desc": "戦争アカデミーは、キングショットの王国開始から約220日後に解放される研究施設です。建設すると、各兵種の研究ツリーを完了することでT11部隊（真金歩兵、騎兵、弓兵）を解放できます。また、部隊配置数、集結規模、全兵士のステータスを強化する強力なアップグレードも提供します。\n\n研究を始めるには、新素材「真金の粉」（アカデミー解放と同時に利用可能）に加えて、パン、木材、石材、鉄などの通常資源が必要です。真金の粉はパック購入や、戦争アカデミー内で真金やゴールドを交換することで入手できます。\n\n交換ルール:\n- ゴールド: 5,000ゴールド → 真金の粉1個（1日最大20回）\n- 真金: 真金10個 → 真金の粉13個（1日最大200回、最大2,600真金の粉/日）",
-
-"buildings.war-academy.unlock.lv1": "王国年齢約220日で解放",
-"buildings.war-academy.unlock.lv5": "T11部隊解放: 真金歩兵、騎兵、弓兵",
-"buildings.war-academy.unlock.tg": "研究により部隊配置、集結規模、兵士ステータスを強化",
-
-"buildings.towncenter.table.tc.title": "TC 1–30（基本資源）",
+  "buildings.card.stable.title": "騎兵営舎",
+  "buildings.card.stable.subtitle": "Lv.1–30 + TG1–5",
+  "buildings.card.stable.desc": "騎兵の訓練およびアップグレード（昇格）を行う施設です。役場レベル9に達すると解放されます。 騎兵営舎は役場のレベルに応じて段階的に強化でき、通常、役場を次のレベルへ進めるための必須要件の1つとなります。施設をアップグレードするごとに、一度に訓練できる兵士の数（訓練容量）が増加し、訓練時間が短縮されるほか、自身の総力も上昇します。 また、特定のレベルに達することで、より高ランクの兵士（Tier）が解放されます。T5兵士（豪胆）を解放すると、それまでに訓練した低ランクの兵士を、現在訓練可能な最高ランクへと昇格させることができるようになります。 学院の「発展」タブにある技術「兵舎増設」を研究することでも、一度に訓練できる兵士の数をさらに増やすことができます。また、同じく「発展」タブにある「訓練機材」を研究すると、部隊の訓練に必要な時間が短縮されます。",
+  "buildings.stable.unlock.lv1": "レベル1: 見習い騎兵",
+  "buildings.stable.unlock.lv4": "レベル4: 熟練騎兵",
+  "buildings.stable.unlock.lv7": "レベル7: ベテラン騎兵",
+  "buildings.stable.unlock.lv11": "レベル11: 百戦錬磨の騎兵",
+  "buildings.stable.unlock.lv13": "レベル13: 不屈の騎兵",
+  "buildings.stable.unlock.lv16": "レベル16: 勇敢な騎兵",
+  "buildings.stable.unlock.lv19": "レベル19: 恐れを知らぬ騎兵",
+  "buildings.stable.unlock.lv22": "レベル22: 精鋭騎兵",
+  "buildings.stable.unlock.lv26": "レベル26: 栄光の騎兵",
+  "buildings.stable.unlock.lv30": "レベル30: エース騎兵",
+  "buildings.stable.unlock.tg": "TG1~TG5: トゥルーゴールド騎兵解放",
+  "buildings.card.range.title": "弓兵営舎",
+  "buildings.card.range.subtitle": "Lv.1–30 + TG1–5",
+  "buildings.card.range.desc": "弓兵の訓練およびアップグレード（昇格）を行う施設です。役場レベル8に達すると解放されます。 弓兵営舎は役場のレベルに応じて段階的に強化でき、通常、役場を次のレベルへ進めるための必須要件の1つとなります。施設をアップグレードするごとに、一度に訓練できる兵士の数（訓練容量）が増加し、訓練時間が短縮されるほか、自身の総力も上昇します。 また、特定のレベルに達することで、より高ランクの兵士（Tier）が解放されます。T5兵士（豪胆）を解放すると、それまでに訓練した低ランクの兵士を、現在訓練可能な最高ランクへと昇格させることができるようになります。 学院の「発展」タブにある技術「兵舎増設」を研究することでも、一度に訓練できる兵士の数をさらに増やすことができます。また、同じく「発展」タブにある「訓練機材」を研究すると、部隊の訓練に必要な時間が短縮されます。",
+  "buildings.range.unlock.lv1": "レベル1: 見習い弓兵",
+  "buildings.range.unlock.lv4": "レベル4: 熟練弓兵",
+  "buildings.range.unlock.lv7": "レベル7: ベテラン弓兵",
+  "buildings.range.unlock.lv11": "レベル11: 歴戦の弓兵",
+  "buildings.range.unlock.lv13": "レベル13: 剛毅な弓兵",
+  "buildings.range.unlock.lv16": "レベル16: 勇敢な弓兵",
+  "buildings.range.unlock.lv19": "レベル19: 恐れ知らずの弓兵",
+  "buildings.range.unlock.lv22": "レベル22: エリート弓兵",
+  "buildings.range.unlock.lv26": "レベル26: 栄光の弓兵",
+  "buildings.range.unlock.lv30": "レベル30: エース弓兵",
+  "buildings.card.war-academy.title": "戦争学院",
+  "buildings.card.war-academy.subtitle": "TG1–TG5",
+  "buildings.card.war-academy.desc": "その名の通り、都市のさまざまな要素を強化・活性化させるための、新たな技術を研究する施設です。 技術のタイプは、弓兵・歩兵・騎兵の3つの系統に分かれています。 ここでは非常に高度な技術研究を行うことができ、最終的には最高峰の「T11部隊」を解放することが可能です。 各研究には特殊アイテム「黄金微粒子」が必要となります。黄金微粒子はパックの購入、または交換にて以下のレートで獲得できます。 ■ 黄金微粒子の交換レート ・5,000ゴールド ＝ 1 黄金微粒子（週に最大20回まで） ・5 黄金 ＝ 13 黄金微粒子（週に最大20回まで／50%OFF） ・10 黄金 ＝ 13 黄金微粒子（制限なし）",
+  "buildings.detail.war-academy.desc": "戦争アカデミーは、キングショットの王国開始から約220日後に解放される研究施設です。建設すると、各兵種の研究ツリーを完了することでT11部隊（真金歩兵、騎兵、弓兵）を解放できます。また、部隊配置数、集結規模、全兵士のステータスを強化する強力なアップグレードも提供します。\n\n研究を始めるには、新素材「真金の粉」（アカデミー解放と同時に利用可能）に加えて、パン、木材、石材、鉄などの通常資源が必要です。真金の粉はパック購入や、戦争アカデミー内で真金やゴールドを交換することで入手できます。\n\n交換ルール:\n- ゴールド: 5,000ゴールド → 真金の粉1個（1日最大20回）\n- 真金: 真金10個 → 真金の粉13個（1日最大200回、最大2,600真金の粉/日）",
+  "buildings.war-academy.unlock.lv1": "王国年齢約220日で解放",
+  "buildings.war-academy.unlock.lv5": "T11部隊解放: 真金歩兵、騎兵、弓兵",
+  "buildings.war-academy.unlock.tg": "研究により部隊配置、集結規模、兵士ステータスを強化",
+  "buildings.towncenter.table.tc.title": "TC 1–30（基本資源）",
   "buildings.towncenter.table.tg.title": "TG 1–5（真金を含む）",
   "buildings.towncenter.table.tg_adv.title": "TG 5+（精錬真金を含む）",
-
   "buildings.embassy.table.tc.title": "Lv. 1–30（基本資源）",
   "buildings.embassy.table.tg.title": "TG 1–5（トゥルーゴールド含む）",
   "buildings.embassy.table.tg_adv.title": "TG 5+（精錬トゥルーゴールド含む）",
-
   "buildings.command.table.tc.title": "Lv. 1～30（基本資源）",
-"buildings.command.table.tg.title": "TG 1～5（順金を含む）",
-"buildings.command.table.tg_adv.title": "TG 5+（精錬順金を含む）",
-
-"buildings.col.traincapacity": "訓練収容数",
+  "buildings.command.table.tg.title": "TG 1～5（順金を含む）",
+  "buildings.command.table.tg_adv.title": "TG 5+（精錬順金を含む）",
+  "buildings.col.traincapacity": "訓練収容数",
   "buildings.col.trainspeed": "訓練速度",
-
   "buildings.unlock.tier_troops": "T{tier}兵士",
   "buildings.unlock.truegold_train": "純金兵士Lv.{level}訓練",
-
   "buildings.barracks.table.tc.title": "Lv. 1–30 (Base Resources)",
-"buildings.barracks.table.tg.title": "TG 1–5 (Includes Truegold)",
-"buildings.barracks.table.tg_adv.title": "TG 5+ (Includes Tempered Truegold)",
-
-
-"buildings.stable.table.tc.title": "Lv. 1–30（基本資源）",
+  "buildings.barracks.table.tg.title": "TG 1–5 (Includes Truegold)",
+  "buildings.barracks.table.tg_adv.title": "TG 5+ (Includes Tempered Truegold)",
+  "buildings.stable.table.tc.title": "Lv. 1–30（基本資源）",
   "buildings.stable.table.tg.title": "TG 1–5（真金を含む）",
   "buildings.stable.table.tg_adv.title": "TG 5+（精錬真金を含む）",
-
-"buildings.range.table.tc.title": "Lv. 1–30（基本資源）",
-"buildings.range.table.tg.title": "TG 1–5（トゥルーゴールド含む）",
-"buildings.range.table.tg_adv.title": "TG 5+（精錬トゥルーゴールド含む）",
-
-"buildings.infirmary.table.tc.title": "Lv. 1–30（基本資源）",
-    "buildings.infirmary.table.tg.title": "TG 1–5（順金を含む）",
-    "buildings.infirmary.table.tg_adv.title": "TG 5+（精錬順金を含む）",
-
-
+  "buildings.range.table.tc.title": "Lv. 1–30（基本資源）",
+  "buildings.range.table.tg.title": "TG 1–5（トゥルーゴールド含む）",
+  "buildings.range.table.tg_adv.title": "TG 5+（精錬トゥルーゴールド含む）",
+  "buildings.infirmary.table.tc.title": "Lv. 1–30（基本資源）",
+  "buildings.infirmary.table.tg.title": "TG 1–5（順金を含む）",
+  "buildings.infirmary.table.tg_adv.title": "TG 5+（精錬順金を含む）",
   "buildings.col.tempered_truegold": "精錬真金"
-
 }

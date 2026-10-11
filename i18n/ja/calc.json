@@ -1,6 +1,8 @@
 {
   "calc": {
-    "meta": { "title": "建物計算機 | KingshotData" },
+    "meta": {
+      "title": "建物計算機 | KingshotData"
+    },
     "title": "建物計算機",
     "desc": "アップグレードに必要な資源と所要時間を確認できます。",
     "howto": {
@@ -31,25 +33,43 @@
       "building": {
         "label": "建物選択",
         "option": {
-          "towncenter": "都市センター",
+          "towncenter": "役場",
           "embassy": "大使館",
-          "command": "司令部",
-          "barracks": "歩兵隊",
-          "stable": "騎兵隊",
-          "range": "弓兵隊",
-          "academy": "アカデミー",
+          "command": "指揮所",
+          "barracks": "歩兵営舎",
+          "stable": "騎兵営舎",
+          "range": "弓兵営舎",
+          "academy": "学院",
           "infirmary": "野戦病院",
-          "war-academy": "戦争アカデミー"
+          "war-academy": "戦争学院"
         }
       },
-      "startLevel": { "label": "現在レベル", "placeholder": "現在レベルを入力" },
-      "targetLevel": { "label": "目標レベル", "placeholder": "目標レベルを入力" },
-      "speedBonus": { "label": "建設速度ボーナス (%)" },
-      "saulBonus": { "label": "サウルスキルボーナス (%) — 建設コスト適用" },
-      "wolfBonus": { "label": "オオカミスキルボーナス (%)" },
-      "positionBonus": { "label": "国王／官職ボーナス (%)" },
-      "doubleTime": { "label": "建設法令適用（時間20%減少）" },
-      "includePrereq": { "label": "先行建物を含む" },
+      "startLevel": {
+        "label": "現在レベル",
+        "placeholder": "現在レベルを入力"
+      },
+      "targetLevel": {
+        "label": "目標レベル",
+        "placeholder": "目標レベルを入力"
+      },
+      "speedBonus": {
+        "label": "建設速度ボーナス (%)"
+      },
+      "saulBonus": {
+        "label": "サウルスキルボーナス (%) — 建設コスト適用"
+      },
+      "wolfBonus": {
+        "label": "オオカミスキルボーナス (%)"
+      },
+      "positionBonus": {
+        "label": "国王／官職ボーナス (%)"
+      },
+      "doubleTime": {
+        "label": "建設法令適用（時間20%減少）"
+      },
+      "includePrereq": {
+        "label": "先行建物を含む"
+      },
       "actions": {
         "calculate": "アップグレード計算",
         "clear": "アップグレード初期化"
@@ -118,23 +138,31 @@
       "load": "データの読み込みに失敗しました"
     }
   },
-
-  
-
-  
   "calcHub": {
-  "meta": {
-    "title": "キングショット計算機 | KingshotData",
-    "description": "キングショット建築計算機、領主装備計算機、領主宝石計算機、兵士訓練計算機、ペット計算機をまとめて確認できます。"
-  },
-  "title": "キングショット計算機",
-  "cards": {
-    "building": { "title": "キングショット建物計算機" },
-"gear": { "title": "キングショット装備計算機" },
-"charm": { "title": "キングショットチャーム計算機" },
-"training": { "title": "キングショット兵士訓練計算機" },
-"pet": { "title": "キングショットペット計算機" },
-"heroGear": { "title": "キングショットヒーロー装備計算機" }
+    "meta": {
+      "title": "キングショット計算機 | KingshotData",
+      "description": "キングショット建築計算機、領主装備計算機、領主宝石計算機、兵士訓練計算機、ペット計算機をまとめて確認できます。"
+    },
+    "title": "キングショット計算機",
+    "cards": {
+      "building": {
+        "title": "キングショット建物計算機"
+      },
+      "gear": {
+        "title": "キングショット装備計算機"
+      },
+      "charm": {
+        "title": "キングショットチャーム計算機"
+      },
+      "training": {
+        "title": "キングショット兵士訓練計算機"
+      },
+      "pet": {
+        "title": "キングショットペット計算機"
+      },
+      "heroGear": {
+        "title": "キングショットヒーロー装備計算機"
+      }
+    }
   }
-}
 }
