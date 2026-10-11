@@ -126,14 +126,19 @@
     });
     return {locale:locale, bound:changed, detailId:detail && detail.bindingId};
   }
+  function needsModel(doc,loc) {
+    var current=routePath(loc.hash && loc.hash.indexOf('#/')===0?loc.hash.slice(1):loc.pathname);
+    if (['/','/ko','/en','/ja'].indexOf(current)===-1) return true;
+    return !!doc.querySelector('[data-kd-entity-id][data-kd-field],#buildings-grid a.card,.heroes-grid a.card,a.item-card,#research-list .research-record strong,.ssg-initial-content li > strong');
+  }
   function boot(win) {
     var doc=win.document, script=doc.currentScript;
     if (!script || !script.dataset.kdModel) return;
-    var url=script.dataset.kdModel, expected=script.dataset.kdRelease, timer=null, data=null;
+    var url=script.dataset.kdModel, expected=script.dataset.kdRelease, timer=null, data=null, started=false;
     function currentLocale(){var declared=win.I18N&&(typeof win.I18N.getLang==='function'?win.I18N.getLang():(win.I18N.current||win.I18N.lang))||doc.documentElement.lang;return localeOf(win.location.pathname,declared);}
     function run() {
       timer=null;
-      if (!data) return;
+      if (!data) {if (!started && needsModel(doc,win.location)) load();return;}
       var declared = win.I18N && (typeof win.I18N.getLang === 'function' ? win.I18N.getLang() : (win.I18N.current || win.I18N.lang)) || doc.documentElement.lang;
       var state=apply(doc,data,win.location,declared);
       win.KD_PRESENTATION.lastState=state;
@@ -143,18 +148,22 @@
       researchTitle:function(record,branch){return data?researchTitle(data,currentLocale(),record,branch):record.name;},
       researchMatches:function(record,branch,query){return researchMatches(data||{models:{}},currentLocale(),record,branch,query);}
     };
+    function load(){
+    if(started)return;started=true;win.KD_PRESENTATION.status='loading';
     win.fetch(url,{credentials:'same-origin'}).then(function(r){if(!r.ok)throw new Error('Display model HTTP '+r.status);return r.json();}).then(function(value){
       if(value.releaseId!==expected)throw new Error('Display model release mismatch');
       data=value;win.KD_PRESENTATION.status='ready';win.KD_PRESENTATION.data=value;
       schedule();
-      // Text/child changes cover the existing asynchronous SPA mounts. Attribute changes are excluded.
-      var observer=new win.MutationObserver(schedule);
-      observer.observe(doc.body,{childList:true,subtree:true,characterData:true});
       win.dispatchEvent(new win.CustomEvent('kd:presentation-ready',{detail:{releaseId:expected}}));
     }).catch(function(e){win.KD_PRESENTATION.status='error';win.KD_PRESENTATION.error=e.message;});
+    }
+    // Watch SPA mounts before loading so a deferred home can activate the existing display layer.
+    var observer=new win.MutationObserver(schedule);
+    observer.observe(doc.body,{childList:true,subtree:true,characterData:true});
+    if(needsModel(doc,win.location))load();else win.KD_PRESENTATION.status='deferred';
     ['i18n:ready','i18n:changed'].forEach(function(name){doc.addEventListener(name,schedule);});
     ['kd:page-ready','popstate','hashchange'].forEach(function(name){win.addEventListener(name,schedule);});
     doc.addEventListener('DOMContentLoaded',schedule);
   }
-  return {routePath:routePath,localeOf:localeOf,routeModel:routeModel,researchModel:researchModel,researchTitle:researchTitle,researchMatches:researchMatches,titleWithContext:titleWithContext,apply:apply,boot:boot};
+  return {routePath:routePath,localeOf:localeOf,routeModel:routeModel,researchModel:researchModel,researchTitle:researchTitle,researchMatches:researchMatches,titleWithContext:titleWithContext,apply:apply,needsModel:needsModel,boot:boot};
 });
