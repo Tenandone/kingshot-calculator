@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const ROOT = path.resolve(__dirname, '..');
-const VERSION = 'ks-ui13-20261012';
+const VERSION = 'ks-ui14-20261012';
 const START = '<!-- ks-ui13-design:start -->';
 const END = '<!-- ks-ui13-design:end -->';
 const ASSETS = Object.freeze([
@@ -62,8 +62,14 @@ function classification(relative, html) {
 function injectDesign(html, relative) {
   const selection = classification(relative, html);
   const clean = stripDesignBlock(html);
+  const block = headBlock(html.includes('\r\n') ? '\r\n' : '\n');
+  let replaced = false;
   const after = selection.kind === 'excluded' ? clean
-    : clean.replace(/<\/head\s*>/i, close => headBlock(html.includes('\r\n') ? '\r\n' : '\n') + close);
+    : html.includes(START)
+      ? html.replace(/<!-- ks-ui13-design:start -->[\s\S]*?<!-- ks-ui13-design:end -->/g, () => {
+        if (replaced) return ''; replaced = true; return block;
+      })
+      : html.replace(/<\/head\s*>/i, close => block + close);
   if (stripDesignBlock(after) !== clean) throw new Error('Unexpected HTML mutation outside the design marker: ' + relative);
   return {html:after, ...selection};
 }

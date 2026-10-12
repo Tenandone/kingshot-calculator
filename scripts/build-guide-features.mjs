@@ -42,6 +42,16 @@ function transform(source,slug){
     replace(/^\s*initStickyObservers\(\);\r?\n/gm,'','remove standalone sticky initializer');
     replace(/if\(document\.readyState === 'loading'\)\{\s*document\.addEventListener\('DOMContentLoaded', init\);\s*\}\s*else\{\s*init\(\);\s*\}/,'init();','mount after reader inserts the guide DOM');
   }else if(slug==='kingshot-giftcode'){
+    // UI14 coupon intro copy stays aligned with the static first paragraph.
+    // Only these reviewed display strings differ from the immutable baseline.
+    const couponIntroCopies = [
+      ["lead: \"iOS 및 Android용 활성 및 만료된 킹샷:Kingshot 기프트코드 목록 및 킹샷공략 입니다.\"", "lead: \"현재 사용 가능한 킹샷 기프트코드와 공식 교환 페이지를 확인하세요. iOS·Android 입력 방법, 코드가 적용되지 않을 때의 확인 사항, 만료 코드 기록을 함께 제공합니다.\""],
+      ["lead: \"iOS・Android向けの有効コードと期限切れコードをまとめたキングショット:Kingshotギフトコード一覧と攻略ページです。\"", "lead: \"使用できるキングショットのギフトコードと公式交換ページを確認できます。iOS・Androidでの入力方法、コードが使えないときの確認事項、期限切れコードの記録も掲載しています。\""],
+      ["lead: \"Find active and expired Kingshot gift codes for iOS and Android, plus the official redeem page, code entry guide, and useful Kingshot guides.\"", "lead: \"Find active Kingshot gift codes and the official redeem page. Check how to redeem on iOS and Android, troubleshoot codes that do not work, and view the expired-code archive.\""],
+    ];
+    for (const [oldCopy,newCopy] of couponIntroCopies) {
+      if (code.includes(oldCopy)) replace(oldCopy,newCopy,'UI14 coupon intro copy');
+    }
     cut('function setFaqJsonLd(t){','function safeText(s){','head JSON-LD remains owned by the original HTML and reader');
     replace(/^\s*setFaqJsonLd\(t\);\r?\n/gm,'','do not regenerate head JSON-LD');
     replace(/^\s*document\.documentElement\.setAttribute\("lang", (?:lang|"en"|"zh-Hant")\);\r?\n/gm,'','reader owns document language');

@@ -66,7 +66,7 @@ body.ks-design :is(.empty,.empty-state,.hub-empty){color:var(--ks-muted);backgro
  body.ks-design .site-header .brand.brand-pro .brand-sub{font-size:8px!important}
  body.ks-design :is(.brand-sub,.ks-brand-sub){font-size:8px;letter-spacing:.08em}
  body.ks-design :is(#primaryNav,#ks-navigation-links){display:none!important}
- body.ks-design :is(#menuToggle,.ks-nav-toggle){display:flex!important;align-items:center;justify-content:center;grid-row:1;grid-column:3;margin:0;font-size:14px;padding:8px}
+ body.ks-design :is(#menuToggle,.ks-nav-toggle){display:flex!important;align-items:center;justify-content:center;grid-row:1;grid-column:3;margin:0;font-size:14px;padding:8px;white-space:nowrap}
  body.ks-design .nav-right{display:flex;grid-column:2;min-width:0}
  body.ks-design .ks-nav-languages{grid-column:2}
  body.ks-design .ks-nav-languages a{min-width:27px;padding:4px;font-size:11px}
@@ -78,6 +78,7 @@ body.ks-design :is(.empty,.empty-state,.hub-empty){color:var(--ks-muted);backgro
 }
 @media(max-width:430px){
  body.ks-design :is(.container.nav-bar,.ks-nav-bar){padding-inline:12px;column-gap:5px}
+ body.ks-design .ks-nav-toggle{padding-inline:6px}
  body.ks-design .ks-nav-languages{gap:0}
  body.ks-design .ks-nav-languages a{font-size:10px;min-width:24px}
  body.ks-design .ks-nav-brand .ks-brand-sub{display:none}

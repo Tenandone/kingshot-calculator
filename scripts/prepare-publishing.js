@@ -160,3 +160,7 @@ console.log('Prepared canonical links, shared policy footer and '+Object.keys(al
 // ks-ui13-design-hook:start
 require('./apply-design-system').applyDesignSystem({root:ROOT});
 // ks-ui13-design-hook:end
+
+// ks-ui14-seo-hook:start
+require('./apply-seo-editorial').applySeoEditorial({root:ROOT});
+// ks-ui14-seo-hook:end

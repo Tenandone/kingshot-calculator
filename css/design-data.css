@@ -532,3 +532,22 @@ body.ks-design .kp-page .kp-history summary{min-height:44px;align-content:center
   body.ks-design .kp-page .kp-step-costs>div{gap:8px}
   body.ks-design .kp-page .kp-requirements{border-left:0;border-top:1px solid var(--dd-line);padding:10px 0 0}
 }
+
+/* UI14: the shared header is taller than the original fixed 80-100px offsets.
+   Use its already-measured height so anchor headings stay below the sticky chrome. */
+body.ks-design #kd-building.kd-building-table-page :is(section.kd-building-section,[data-kd-level],[data-row-key]),
+body.ks-design .kh-detail :is(h2[id],.kh-section),
+body.ks-design .kh-list .kh-comparison,
+body.ks-design .kr-page .kr-detail,
+body.ks-design .kcat-page [id],
+body.ks-design .kp-page :is(.kp-section,.kp-output){
+  scroll-margin-top:calc(var(--ks-site-nav-height,var(--ks-header,112px)) + 16px);
+}
+@media(min-width:761px){
+  body.ks-design .kr-page .kr-catalog{top:calc(var(--ks-site-nav-height,var(--ks-header,112px)) + 16px)}
+  body.ks-design .kr-page .kr-catalog-scroll{max-height:max(180px,min(660px,calc(100dvh - var(--ks-site-nav-height,var(--ks-header,112px)) - 90px)))}
+}
+@media(max-width:760px){
+  /* The planner adds a 46px sticky jump bar beneath the shared site header. */
+  body.ks-design .kp-page :is(.kp-section,.kp-output){scroll-margin-top:calc(var(--ks-site-nav-height,var(--ks-header,72px)) + 68px)}
+}

@@ -6,6 +6,8 @@ body.ks-design .kd-home-v3 .hub-hero h1{font-size:clamp(30px,3.3vw,44px);font-we
 body.ks-design .kd-home-v3 .hub-intro{max-width:none;font-size:16px;line-height:1.6;color:var(--ks-muted);margin:0 0 24px}
 body.ks-design .kd-home-v3 .hub-search{max-width:850px;margin:0}
 body.ks-design .kd-home-v3 .hub-search-field{display:flex;gap:0;border:1px solid var(--ks-teal);border-radius:6px;box-shadow:0 3px 0 rgba(36,93,88,.07);background:var(--ks-paper);overflow:hidden}
+/* The rounded field clips child outlines; keep keyboard focus visible outside it. */
+body.ks-design .kd-home-v3 .hub-search-field:focus-within{outline:2px solid var(--ks-teal);outline-offset:3px}
 body.ks-design .kd-home-v3 #hub-search{height:58px;min-width:0;padding:0 18px;border:0;border-radius:0;background:transparent;font-size:17px;color:var(--ks-ink);box-shadow:none}
 body.ks-design .kd-home-v3 .hub-search-submit{min-width:82px;padding:0 22px;margin:6px;border:0;border-radius:3px;background:var(--ks-teal);color:white;font-weight:700;font-size:15px;min-height:46px}
 body.ks-design .kd-home-v3 #hub-search-status{font-size:13px;color:var(--ks-muted);margin-top:8px}
@@ -40,7 +42,7 @@ body.ks-design .kd-home-v3 .hub-card h3{font-size:16px}
 body.ks-design .kd-home-v3 .hub-card p{font-size:14px;color:var(--ks-muted)}
 body.ks-design .kd-home-v3 .hub-search-result{border:0!important;border-bottom:1px solid var(--ks-line)!important;border-radius:0!important;background:var(--ks-paper)!important;padding:14px!important;min-height:80px;color:var(--ks-ink)}
 body.ks-design .kd-home-v3 .hub-result-description{font-size:14px!important;line-height:1.6!important;color:var(--ks-muted)}
-body.ks-design .kd-home-v3 .hub-search-filters button{min-height:40px;border:1px solid var(--ks-line);background:var(--ks-paper);color:var(--ks-ink);border-radius:4px}
+body.ks-design .kd-home-v3 .hub-search-filters button{min-height:44px;border:1px solid var(--ks-line);background:var(--ks-paper);color:var(--ks-ink);border-radius:4px}
 body.ks-design .kd-home-v3 .hub-search-filters button[aria-pressed=true]{color:white;background:var(--ks-teal);border-color:var(--ks-teal)}
 body.ks-design .kd-couponbar{max-width:var(--ks-width);padding:0 28px;margin:14px auto 0!important;justify-content:flex-start}
 body.ks-design .kd-couponbar__a{width:100%}
@@ -67,7 +69,7 @@ body.ks-design .kd-couponbar [data-kd="vNext"]{color:var(--ks-bronze)!important;
  body.ks-design .kd-home-v3 .hub-hero h1{font-size:32px;margin-bottom:8px}
  body.ks-design .kd-home-v3 .hub-intro{font-size:14px;margin-bottom:18px}
  body.ks-design .kd-home-v3 #hub-search{font-size:16px;padding-inline:12px;height:54px}
- body.ks-design .kd-home-v3 .hub-search-submit{min-width:60px;padding:0 12px;min-height:42px}
+ body.ks-design .kd-home-v3 .hub-search-submit{min-width:60px;padding:0 12px;min-height:44px}
  body.ks-design .kd-home-v3 .hub-primary{grid-template-columns:1fr 1fr;margin-bottom:20px}
  body.ks-design .kd-home-v3 .hub-primary a{min-height:108px;gap:7px;padding:18px 14px!important}
  body.ks-design .kd-home-v3 .hub-primary a:nth-child(2){border-right:0!important}
