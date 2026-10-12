@@ -1344,7 +1344,7 @@ function guideFeature8(document, window, fetch, ResizeObserver, setTimeout, clea
         twTitle: "Kingshot 最新禮包碼與兌換碼",
         twDesc: "整理 iOS 與 Android 可用與已過期的 Kingshot 禮包碼與兌換碼，同時提供攻略資訊與官方輸入入口。",
         h1: "Kingshot 最新禮包碼與兌換碼",
-        lead: "整理 iOS 與 Android 可用與已過期的 Kingshot 禮包碼與兌換碼，同時提供攻略資訊與官方輸入入口。",
+        lead: "查看目前可用的 Kingshot 禮包碼與官方兌換頁面，了解 iOS、Android 的輸入方式、無法兌換時的檢查項目，以及過期碼記錄。",
         countdownKicker: "LIVE COUPON TIMER",
         countdownTitle: "Kingshot 禮包碼倒數頁",
         countdownDesc: "可立即查看目前可用的 Kingshot 禮包碼與剩餘時間。",

@@ -1,18 +1,16 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
+<!doctype html><html lang="zh-TW"><head>
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://kingshotdata.kr/zh-tw/buildings/truegold-crucible.html">
 <!-- kd-ui12-navigation:start -->
 <link rel="stylesheet" href="/css/site-navigation.css?v=ks-ui12-20261012-h1">
-<script defer src="/js/navigation.js?v=ks-ui12-20261012-h1"></script>
+<script defer src="/js/navigation.js?v=ks-ui16-tw-20261012"></script>
 <!-- kd-ui12-navigation:end -->
 <script src="/js/calculation-provenance.js?v=2026100621"></script>
 <script src="/js/calculation-proof.js?v=2026100621"></script>
 <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>順金熔爐（精煉機率・成本・次數） | Kingshot</title>
-  <meta name="description" content="Kingshot 順金熔爐指南：解鎖時機、精煉機率、每日限制、精煉成本。將麵包/木材/石材/鐵礦轉換為順金。" />
+  <title>真金熔爐 | Kingshot</title>
+<meta name="description" content="Kingshot 真金熔爐指南：解鎖時機、精煉機率、每日次數限制與費用。可將麵包、木材、石材與鐵礦精煉成真金。" />
 
   <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings/truegold-crucible.html" />
   <link rel="alternate" hreflang="ko" href="https://kingshotdata.kr/ko/buildings/truegold-crucible.html" />
@@ -24,141 +22,38 @@
   <link rel="preload" as="image" href="/img/buildings/truegold-crucible.webp" />
   <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
 
-  <style>
-    :root{
-      --bg:#ffffff;--panel:#ffffff;--border:#e5e7eb;--text:#111827;--muted:#6b7280;--brand:#2563eb;
-      --radius:16px;--shadow:0 10px 24px rgba(0,0,0,.06);
-      --header-h:0px;--tabs-h:0px;--sticky-top:0px;
-      --tbl-font:13px;--tbl-pad-y:9px;--tbl-pad-x:10px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC",Arial;color:var(--text);background:var(--bg)}
-    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
-    .wrap{max-width:1100px;margin:0 auto;padding:18px 16px 64px}
 
-    header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0 12px;border-bottom:1px solid var(--border);background:var(--bg)}
-    .brand a{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:900;letter-spacing:.1px}
-    .brand img{display:block;width:28px;height:28px;border-radius:8px}
-    nav.lang{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:13px}
-    nav.lang a{color:var(--muted);padding:8px 10px;border:1px solid var(--border);border-radius:999px;background:#fff;text-decoration:none}
-    nav.lang a[aria-current="page"]{color:var(--text);font-weight:800}
-
-    nav.section-tabs{display:none;gap:8px;padding:6px 0;margin:0;overflow:auto;-webkit-overflow-scrolling:touch;background:var(--bg);border-bottom:1px solid var(--border)}
-    nav.section-tabs a{display:inline-flex;align-items:center;white-space:nowrap;padding:8px 10px;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--muted);font-size:13px;text-decoration:none}
-    nav.section-tabs a:hover{color:var(--text)}
-
-    .crumbs{margin:14px 0;color:var(--muted);font-size:13px}
-    .crumbs a{color:var(--muted)}
-
-    .hero{display:grid;grid-template-columns:160px 1fr;gap:18px;padding:18px;background:var(--panel);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
-    .hero img{width:160px;height:160px;object-fit:contain;border-radius:14px;background:#f8fafc;border:1px solid var(--border);padding:10px}
-    h1{margin:0 0 6px;font-size:28px;line-height:1.15}
-    .sub{margin:0;color:var(--muted)}
-    .muted{color:var(--muted)}
-    .jump{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
-    .jump a{color:var(--muted)} .jump a:hover{color:var(--text)} .dotsep{opacity:.5}
-
-    section{margin-top:22px;background:var(--panel);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:18px}
-    section h2{margin:0 0 10px;font-size:20px}
-    section p{margin:8px 0}
-
-    .note{display:flex;gap:10px;padding:12px 14px;border:1px solid rgba(245,158,11,.35);background:rgba(245,158,11,.08);border-radius:14px;margin:10px 0 14px}
-    .note strong{font-weight:900}
-    .note .note-ico{width:18px;height:18px;flex:0 0 18px;margin-top:2px;color:#b45309}
-
-    .table-wrap{border:1px solid var(--border);border-radius:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff}
-    table{width:100%;border-collapse:separate;border-spacing:0;background:#fff}
-    thead th{position:sticky;top:var(--sticky-top);background:#f8fafc;text-align:left;padding:var(--tbl-pad-y) var(--tbl-pad-x);border-bottom:1px solid var(--border);font-size:calc(var(--tbl-font) - 1px);white-space:nowrap;z-index:3}
-    tbody td{padding:var(--tbl-pad-y) var(--tbl-pad-x);border-bottom:1px solid var(--border);vertical-align:top;font-size:var(--tbl-font);white-space:nowrap}
-    tbody tr:nth-child(even) td{background:#fcfcfd}
-    tbody tr:hover td{background:#f3f6ff}
-    tbody tr:last-child td{border-bottom:0}
-
-    .num{text-align:right;font-variant-numeric:tabular-nums}
-    ul.clean{margin:0;padding-left:18px}
-    ul.clean li{margin:6px 0}
-
-    .cards{display:none}
-    .cards .card{border:1px solid var(--border);border-radius:16px;background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.04);padding:12px 12px}
-    .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
-    .card-title{font-size:15px;font-weight:900;line-height:1.2;margin:0}
-    .card-meta{text-align:right;color:var(--muted);font-size:12px;line-height:1.25;white-space:nowrap}
-    .card-body{margin:8px 0 0;color:var(--text);font-size:13px;white-space:normal}
-
-    @media (min-width:901px){
-      :root{--tbl-font:12px;--tbl-pad-y:7px;--tbl-pad-x:8px}
-      table{table-layout:fixed}
-      .table-wrap{overflow-x:clip}
-      @supports not (overflow:clip){.table-wrap{overflow-x:hidden}}
-    }
-    @media (max-width:900px){
-      header.top{position:sticky;top:0;z-index:40}
-      nav.section-tabs{display:flex;position:sticky;top:var(--header-h);z-index:35}
-      .hero{grid-template-columns:1fr}
-      .hero img{width:120px;height:120px}
-      .enhanced .data-table{display:none}
-      .enhanced .cards{display:grid;gap:12px}
-    }
-    @media (max-width:600px){
-      body{font-size:15px}
-      .wrap{padding:14px 12px 56px}
-      h1{font-size:24px}
-      section{padding:14px}
-    }
-  </style>
   <!-- GA4 -->
 
 
 
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="順金熔爐（精煉機率・成本・次數） | Kingshot" />
-  <meta property="og:description" content="Kingshot 順金熔爐指南：解鎖時機、精煉機率、每日限制、精煉成本。將麵包/木材/石材/鐵礦轉換為順金。" />
+  <meta property="og:title" content="真金熔爐 | Kingshot" />
+  <meta property="og:description" content="Kingshot 真金熔爐指南：解鎖時機、精煉機率、每日次數限制與費用。可將麵包、木材、石材與鐵礦精煉成真金。" />
   <meta property="og:url" content="https://kingshotdata.kr/zh-tw/buildings/truegold-crucible.html" />
   <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": "https://kingshotdata.kr/zh-tw/buildings/truegold-crucible.html",
-        "url": "https://kingshotdata.kr/zh-tw/buildings/truegold-crucible.html",
-        "name": "順金熔爐（精煉機率・成本・次數） | Kingshot",
-        "description": "Kingshot 順金熔爐指南：解鎖時機、精煉機率、每日限制、精煉成本。將麵包/木材/石材/鐵礦轉換為順金。",
-        "inLanguage": "zh-Hant"
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "KingshotData.kr",
-            "item": "https://kingshotdata.kr/zh-tw/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "順金熔爐（精煉機率・成本・次數） | Kingshot",
-            "item": "https://kingshotdata.kr/zh-tw/buildings/truegold-crucible.html"
-          }
-        ]
-      }
-    ]
-  }
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://kingshotdata.kr/zh-tw/buildings/truegold-crucible.html","url":"https://kingshotdata.kr/zh-tw/buildings/truegold-crucible.html","name":"真金熔爐","description":"Kingshot 真金熔爐指南：解鎖時機、精煉機率、每日次數限制與費用。可將麵包、木材、石材與鐵礦精煉成真金。","inLanguage":"zh-TW"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"KingshotData.kr","item":"https://kingshotdata.kr/zh-tw/"},{"@type":"ListItem","position":2,"name":"真金熔爐","item":"https://kingshotdata.kr/zh-tw/buildings/truegold-crucible.html"}]}]}</script>
 <script src="/js/canonical-links.js?v=2026100621" defer></script>
 <script defer src="/js/image-system.js?v=2026100621"></script>
-<script defer src="/js/hub.js?v=ks-ui12-20261012"></script>
+<script defer src="/js/hub.js?v=ks-ui16-tw-20261012"></script>
 <script defer src="/js/hub-metrics.js?v=ks-ui9-20261012"></script>
 <script defer src="/js/my-progress.js?v=ks-ui9-20261012"></script>
 <link rel="stylesheet" href="/css/my-progress.css?v=2026100621">
 <script defer src="/js/privacy-controls.js?v=ks-ui12-20261012"></script>
-<script defer src="/js/data-verification.js?v=2026100621"></script>
+<script defer src="/js/data-verification.js?v=ks-ui16-tw-20261012"></script>
 
-<script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
+
+
+<script defer src="/js/ui/building-client.js?v=ks-ui16-tw-20261012" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/collections-client.js?v=ks-ui16-tw-20261012" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/sources-runtime.js?v=ks-ui16-tw-20261012" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/runtime.js?v=ks-ui16-tw-20261012" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<link rel="stylesheet" href="/css/ui-common.css?v=ks-ui3-numeric-f58d3832d761edab"><link rel="stylesheet" href="/css/ui-building.css?v=ks-ui3-numeric-f58d3832d761edab"><link rel="stylesheet" href="/css/ui-building-table.css?v=ks-ui3-numeric-f58d3832d761edab"><!-- kd-related-navigation:start -->
+<link rel="stylesheet" href="/css/related-navigation.css?v=ks-ui8-20261012">
+<script defer src="/js/ui/related-navigation-view.js?v=ks-ui16-tw-20261012"></script>
+<script defer src="/js/ui/related-navigation-client.js?v=ks-ui16-tw-20261012"></script>
+<!-- kd-related-navigation:end -->
 <!-- ks-ui14-seo:start -->
 <script defer src="/js/seo-editorial.js?v=ks-ui14-20261012"></script>
 <!-- ks-ui14-seo:end --><!-- ks-ui13-design:start -->
@@ -168,249 +63,73 @@
 <link rel="stylesheet" href="/css/design-data.css?v=ks-ui14-20261012">
 <script defer src="/js/design-system.js?v=ks-ui14-20261012"></script>
 <script defer src="/js/design-guides.js?v=ks-ui14-20261012"></script>
-<!-- ks-ui13-design:end --></head>
+<!-- ks-ui13-design:end --><link rel="stylesheet" href="/css/ui16-sync.css?v=ks-ui16-tw-20261012">
+</head><body class="kd-ui-shell kd-building-table-shell"><div class="wrap"><header class="top kd-standalone-header"><a class="kd-standalone-brand" href="/ja"><img src="/img/kingshotdata-logo-56.webp" width="32" height="32" alt="">Kingshot Data</a><nav class="kd-standalone-links"><a href="/zh-tw/buildings/">建築</a><a href="/zh-tw/calculator/">計算器</a><a href="/zh-tw/#hub-search">搜尋</a></nav><nav class="kd-standalone-langs" aria-label="Language"><a href="/ko/buildings/truegold-crucible.html" lang="ko">KO</a><a href="/en/buildings/truegold-crucible.html" lang="en">EN</a><a href="/ja/buildings/truegold-crucible.html" lang="ja">JA</a><a href="/zh-tw/buildings/truegold-crucible.html" lang="zh-TW" aria-current="page">TW</a></nav></header><main id="main"><article id="kd-building" class="kd-ui kd-building kd-building-table-page" data-building-id="ks:building:truegold-crucible" data-locale="zh-tw" data-version="ks-ui3-numeric-f58d3832d761edab" data-model-url="/data/ui/buildings/truegold-crucible.json"><div class="kd-building-heading"><img class="kd-building-image" src="/img/buildings/truegold-crucible.webp" alt="真金熔爐" width="104" height="104"><div class="kd-building-heading-copy"><a class="kd-building-back" href="/zh-tw/buildings/">← 建築</a><h1>真金熔爐</h1><p class="kd-building-intro">達到 5 時解鎖的特殊建築，許多伺服器會在王國年齡約 150 天前後開放（依伺服器而異）。</p><details class="kd-building-description"><summary>閱讀說明</summary><p>真金熔爐是王國達到真金（TG）Lv.5 後解鎖的特殊建築，許多伺服器會在王國年齡約 150 天前後開放（依伺服器而異）。</p></details></div></div><nav class="kd-building-toc"><a href="#effects" data-kd-anchor="effects">效果與補充資料</a><a href="#related" data-kd-anchor="related">相關建築</a></nav><div class="kd-building-content"><p class="kd-empty">目前尚無升級表。</p><span id="ico-info" class="kd-building-anchor"></span><span id="chance-cards" class="kd-building-anchor"></span><span id="cost-cards" class="kd-building-anchor"></span><span id="upgrade" class="kd-building-anchor"></span><span id="overview-anchor" class="kd-building-anchor"></span><section id="effects" class="kd-building-section"><h2>效果與補充資料</h2><span id="overview" class="kd-building-anchor"></span><section id="legacy-truegold-crucible-overview" class="kd-building-supplement-section">
+        <h2>概要</h2>
+        <p>此建築可將一般資源（<strong>麵包、木材、石材、鐵礦</strong>— 同時消耗 4 種）<strong>真金（Truegold）</strong>轉換為<strong>精錬（Refinement）</strong>。</p>
 
-<body>
-  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
-    <symbol id="ico-info" viewBox="0 0 24 24">
-      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
-      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-    </symbol>
-  </svg>
+        <div role="note" aria-label="Note" class="kd-building-supplement-note">
 
-  <div class="wrap">
-    <header class="top">
-      <div class="brand">
-        <a href="/zh-tw/" aria-label="Kingshot Data Home">
-          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" decoding="async">
-          <span>Kingshot Data</span>
-        </a>
-      </div>
-      <nav class="lang" aria-label="Language">
-        <a href="/en/buildings/truegold-crucible.html">EN</a>
-        <a href="/ko/buildings/truegold-crucible.html">KO</a>
-        <a href="/ja/buildings/truegold-crucible.html">JA</a>
-        <a href="/zh-tw/buildings/truegold-crucible.html" aria-current="page">ZH-TW</a>
-      </nav>
-    </header>
-
-    <nav class="section-tabs" aria-label="Section navigation">
-      <a href="#overview">概覽</a>
-      <a href="#chances">機率</a>
-      <a href="#limits">限制・成本</a>
-      <a href="#other">其他</a>
-    </nav>
-
-    <main id="main"><aside data-verification-note style="max-width:1100px;margin:16px auto;padding:14px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;color:#334155"><strong>資料驗證：部分完成</strong><p style="margin:6px 0 0">本頁數值、效果及解鎖條件尚未全部驗證。未明確標示已確認的數值均為未驗證參考資料。使用未驗證核心資料的計算已停用。參考資料請核對目前遊戲畫面。</p><p>2026-10-06核對：8種一般建築Lv.1–30資源表與市政廳Lv.2–30基本時間。原文空白費用、學院Lv.12木材單位誤植、前置條件、TG階段及戰爭學院費用仍待確認。 </p></aside>
-      <div class="crumbs">
-        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
-        <a href="/zh-tw/buildings/">建築</a> <span class="muted">›</span>
-        <span>順金熔爐</span>
-      </div>
-
-      <div class="hero">
-        <img src="/img/buildings/truegold-crucible.webp" alt="順金熔爐 (Kingshot)" loading="eager" fetchpriority="high" width="160" height="160" decoding="async">
-        <div>
-          <h1>順金熔爐</h1>
-          <p class="sub">
-            順金熔爐是在王國達到 <strong>順金（TG）Lv.5</strong> 時解鎖的特殊建築。
-            多數伺服器通常在王國年齡約 <strong>150 天前後</strong> 出現（依伺服器而異）。
-          </p>
-
-          <div class="jump" aria-label="Quick jump links">
-            <a href="#overview">概覽</a><span class="dotsep">•</span>
-            <a href="#chances">精煉機率</a><span class="dotsep">•</span>
-            <a href="#limits">限制・成本</a><span class="dotsep">•</span>
-            <a href="#other">其他</a>
-          </div>
-        </div>
-      </div>
-
-      <section id="overview">
-        <h2>概覽</h2>
-        <p>
-          此建築可透過 <strong>精煉（Refinement）</strong>，將一般資源（<strong>麵包、木材、石材、鐵礦</strong> — 4 種同時）
-          轉換成少量的 <strong>順金（Truegold）</strong>。
-        </p>
-
-        <div class="note" role="note" aria-label="Note">
-          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
           <div>
-            <strong>注意:</strong>
-            解鎖時間與每日精煉次數可能因伺服器進度與更新而有所不同。
-          </div>
+            <strong>注:</strong>解鎖時機與 1 天的精煉次數可能隨伺服器進度或更新改變。</div>
         </div>
       </section>
+<span id="chances" class="kd-building-anchor"></span><section id="legacy-truegold-crucible-chances" class="kd-building-supplement-section">
+        <h2>真金精錬機率</h2>
+        <p>每精煉 1 次，依以下機率隨機獲得真金。</p>
 
-      <section id="chances">
-        <h2>順金精煉機率</h2>
-        <p class="muted" style="margin-top:-2px">每次精煉會依下列機率隨機獲得 Truegold。</p>
+        <div aria-label="Refinement chances table">
+          <div class="kd-building-supplement-table-region" role="region" tabindex="0" aria-label="真金精錬機率"><span id="chance-table" class="kd-building-anchor"></span><table id="legacy-truegold-crucible-chance-table" class="kd-building-supplement-table">
 
-        <div class="table-wrap data-table" aria-label="Refinement chances table">
-          <table id="chance-table">
-            <colgroup><col style="width:60%"><col style="width:40%"></colgroup>
             <thead>
-              <tr><th>結果</th><th class="num">機率</th></tr>
+              <tr><th class="kd-building-supplement-level">結果</th><th class="kd-building-supplement-cell">機率</th></tr>
             </thead>
             <tbody>
-              <tr><td>Truegold 1</td><td class="num">40%</td></tr>
-              <tr><td>Truegold 2</td><td class="num">30%</td></tr>
-              <tr><td>Truegold 3</td><td class="num">15%</td></tr>
-              <tr><td>Truegold 4</td><td class="num">10%</td></tr>
-              <tr><td>Truegold 5</td><td class="num">5%</td></tr>
+              <tr><td class="kd-building-supplement-level">Truegold 1</td><td class="kd-building-supplement-cell">40%</td></tr>
+              <tr><td class="kd-building-supplement-level">Truegold 2</td><td class="kd-building-supplement-cell">30%</td></tr>
+              <tr><td class="kd-building-supplement-level">Truegold 3</td><td class="kd-building-supplement-cell">15%</td></tr>
+              <tr><td class="kd-building-supplement-level">Truegold 4</td><td class="kd-building-supplement-cell">10%</td></tr>
+              <tr><td class="kd-building-supplement-level">Truegold 5</td><td class="kd-building-supplement-cell">5%</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
-        <div class="cards" id="chance-cards" aria-label="Refinement chances cards"></div>
 
-        <p class="muted" style="margin-top:10px">
-          平均而言，你每天大約可從順金熔爐獲得 <strong>10.5 Truegold</strong>。
-        </p>
+
+        <p>平均而言，真金熔爐 1 天約可取得<strong>10.5 Truegold</strong>，僅供參考。</p>
       </section>
+<span id="limits" class="kd-building-anchor"></span><section id="legacy-truegold-crucible-limits" class="kd-building-supplement-section">
+        <h2>精煉次數與費用</h2>
+        <p>真金初期（TG Lv.5 時期），1 天可進行<strong>5回</strong>精煉。隨王國年齡增加，1 天的精煉次數也會增加。</p>
+        <p>精煉次數越多，費用越高（每次的麵包、木材、石材與鐵礦數量相同）：</p>
 
-      <section id="limits">
-        <h2>精煉限制・成本</h2>
-        <p>
-          在順金初期（TG Lv.5 時期）每天可精煉 <strong>5 次</strong>。
-          隨王國年齡增加，每日精煉次數也會提高。
-        </p>
-        <p class="muted">每次精煉的成本會逐次增加（每次麵包/木材/石材/鐵礦相同數量）:</p>
+        <div aria-label="Refinement costs table">
+          <div class="kd-building-supplement-table-region" role="region" tabindex="0" aria-label="精煉次數與費用"><span id="cost-table" class="kd-building-anchor"></span><table id="legacy-truegold-crucible-cost-table" class="kd-building-supplement-table">
 
-        <div class="table-wrap data-table" aria-label="Refinement costs table">
-          <table id="cost-table">
-            <colgroup><col style="width:30%"><col style="width:70%"></colgroup>
             <thead>
-              <tr><th>精煉</th><th>成本（麵包 / 木材 / 石材 / 鐵礦）</th></tr>
+              <tr><th class="kd-building-supplement-level">精錬</th><th class="kd-building-supplement-cell">費用（麵包 / 木材 / 石材 / 鐵礦）</th></tr>
             </thead>
             <tbody>
-              <tr><td><strong>第 1 次</strong></td><td>各 5,000</td></tr>
-              <tr><td><strong>第 2 次</strong></td><td>各 10,000</td></tr>
-              <tr><td><strong>第 3 次</strong></td><td>各 20,000</td></tr>
-              <tr><td><strong>第 4 次</strong></td><td>各 30,000</td></tr>
-              <tr><td><strong>第 5 次</strong></td><td>各 40,000</td></tr>
+              <tr><td class="kd-building-supplement-level"><strong>1回目</strong></td><td class="kd-building-supplement-cell">各 5,000</td></tr>
+              <tr><td class="kd-building-supplement-level"><strong>2回目</strong></td><td class="kd-building-supplement-cell">各 10,000</td></tr>
+              <tr><td class="kd-building-supplement-level"><strong>3回目</strong></td><td class="kd-building-supplement-cell">各 20,000</td></tr>
+              <tr><td class="kd-building-supplement-level"><strong>4回目</strong></td><td class="kd-building-supplement-cell">各 30,000</td></tr>
+              <tr><td class="kd-building-supplement-level"><strong>5回目</strong></td><td class="kd-building-supplement-cell">各 40,000</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
-        <div class="cards" id="cost-cards" aria-label="Refinement costs cards"></div>
 
-        <p class="muted" style="margin-top:10px">
-          5 次精煉總成本：每種資源各 <strong>105,000</strong>。
+
+        <p>精煉 5 次的總費用：每種資源<strong>105,000</strong>。
         </p>
       </section>
-
-      <section id="other">
-        <h2>其他資訊</h2>
-        <ul class="clean">
-          <li>順金熔爐 <strong>免費建造</strong>（不需任何資源）。</li>
-          <li>王國達到 <strong>TG Lv.5</strong> 後可 <strong>立即建造</strong>。</li>
-          <li>此建築 <strong>沒有等級升級</strong>。</li>
+<span id="other" class="kd-building-anchor"></span><section id="legacy-truegold-crucible-other" class="kd-building-supplement-section">
+        <h2>其他情報</h2>
+        <ul>
+          <li>真金熔爐<strong>建設無料</strong>（不需資源）。</li>
+          <li>王國達到<strong>TG Lv.5</strong>後即可<strong>即時建設</strong>。</li>
+          <li><strong>沒有等級提升</strong>（固定機能建築）。</li>
         </ul>
       </section>
-
-
-
-
-
-
-
-
-<!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>相關資料與計算工具</h2><p>各建築頁列出前置建築、資源與基本時間。規劃市政廳目標時，也要查看大使館與兵營條件。在建築計算器輸入目前等級，可以排除已完成的升級。基本時間與套用帳號加成後的時間應分開比較。</p><ul><li><a href="/zh-tw/buildings/">Kingshot 建築</a></li><li><a href="/zh-tw/calc-building/">建築計算器</a></li><li><a href="/zh-tw/guides/kingshot-f2p-guide.html">Kingshot 新手攻略 · 無課金／小課成長指南</a></li></ul></section><!-- kd-related:end -->
-</main>
-  </div>
-
-  <script>
-    (function(){
-      var mqMobile = window.matchMedia('(max-width: 900px)');
-
-      function setStickyTop(){
-        var header = document.querySelector('header.top');
-        var tabs = document.querySelector('nav.section-tabs');
-        var isMobile = mqMobile.matches;
-
-        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
-        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
-
-        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
-        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
-        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
-      }
-
-      function buildSimpleCards(tableId, targetId, mode){
-        var table = document.getElementById(tableId);
-        var target = document.getElementById(targetId);
-        if(!table || !target) return 0;
-
-        var rows = table.querySelectorAll('tbody tr');
-        if(!rows || !rows.length) return 0;
-
-        var html = '';
-        var count = 0;
-
-        rows.forEach(function(tr){
-          var tds = tr.querySelectorAll('td');
-          if(!tds || tds.length < 2) return;
-
-          var left = tds[0].textContent.trim();
-          var right = tds[1].textContent.trim();
-
-          if(mode === 'chance'){
-            html += (
-              '<article class="card">' +
-                '<div class="card-head">' +
-                  '<h3 class="card-title">'+ left +'</h3>' +
-                  '<div class="card-meta"><strong>'+ right +'</strong></div>' +
-                '</div>' +
-              '</article>'
-            );
-          }else{
-            html += (
-              '<article class="card">' +
-                '<div class="card-head">' +
-                  '<h3 class="card-title">'+ left +'</h3>' +
-                '</div>' +
-                '<div class="card-body"><strong>成本:</strong> '+ right +'</div>' +
-              '</article>'
-            );
-          }
-
-          count++;
-        });
-
-        target.innerHTML = html;
-        return count;
-      }
-
-      function init(){
-        setStickyTop();
-        requestAnimationFrame(setStickyTop);
-        setTimeout(setStickyTop, 60);
-
-        if(window.ResizeObserver){
-          var ro = new ResizeObserver(function(){ setStickyTop(); });
-          var header = document.querySelector('header.top');
-          var tabs = document.querySelector('nav.section-tabs');
-          if(header) ro.observe(header);
-          if(tabs) ro.observe(tabs);
-        }
-        window.addEventListener('resize', setStickyTop);
-
-        var c1 = buildSimpleCards('chance-table', 'chance-cards', 'chance');
-        var c2 = buildSimpleCards('cost-table', 'cost-cards', 'cost');
-
-        if((c1 + c2) > 0){
-          document.documentElement.classList.add('enhanced');
-        }
-      }
-
-      if(document.readyState === 'loading'){
-        document.addEventListener('DOMContentLoaded', init);
-      }else{
-        init();
-      }
-    })();
-  </script><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/zh-tw/about/">關於</a><a href="/zh-tw/privacy/">隱私權</a><a href="/zh-tw/terms/">使用條款</a><a href="/zh-tw/contact/">聯絡</a></nav><p>本網站為獨立於遊戲開發商與發行商的非官方粉絲網站。遊戲素材與商標屬於各權利人。</p></footer><!-- shared-policy-footer:end -->
-</body>
-</html>
+<section class="kd-building-supplement-section"><h2>相關資料與計算工具</h2><p>各建築頁面可查看前置建築、資源與基礎時間，也請確認城市中心目標所需的大使館和兵營。在計算器輸入目前等級，即可排除已完成階段。比較時請區分基礎時間與帳號加成後的時間。</p><ul><li><a href="/zh-tw/buildings/">Kingshot 建築</a></li><li><a href="/zh-tw/calc-building/">建築計算器</a></li><li><a href="/zh-tw/guides/kingshot-f2p-guide.html">Kingshot 新手攻略｜無課與小額付費成長指南</a></li></ul></section></section><section id="related" class="kd-building-section"><h2>相關建築</h2><div class="kd-building-related"><a href="/zh-tw/buildings/">全部建築 →</a></div></section></div></article></main></div><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/zh-tw/about/">網站介紹</a><a href="/zh-tw/privacy/">隱私權</a><a href="/zh-tw/terms/">使用條款</a><a href="/zh-tw/contact/">聯絡我們</a></nav><p>本網站為獨立於開發商與發行商的非官方粉絲網站。遊戲素材與商標權利歸各權利人所有。</p></footer><!-- shared-policy-footer:end --><script defer src="/js/integration-presentation.ks-integration-adb72e714503e84f.js?v=ks-ui9-20261012" data-kd-presentation="v1" data-kd-model="/data/integration/display-model.ks-integration-adb72e714503e84f.json" data-kd-release="ks-integration-adb72e714503e84f"></script></body></html>

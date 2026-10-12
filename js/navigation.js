@@ -2,7 +2,7 @@
 (function (win, doc) {
   'use strict';
   if (win.KD_NAV) return;
-  win.__NAV_VER = 'ks-ui12-20261012';
+  win.__NAV_VER = 'ks-ui16-tw-20261012';
   const NS = '__ksNavigation', KEY = 'KSD_NAVIGATION_V1:', claims = new WeakSet();
   const push = history.pushState.bind(history), replace = history.replaceState.bind(history);
   const id = () => Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
@@ -64,7 +64,7 @@
     if (!saved || saved.url !== path()) return;
     pending = saved;
     awaitingPage=typeof win.navigate==='function';
-    awaitingUI=!!win.KD_UI && /^\/(?:(?:ko|en|ja)\/)?(?:heroes|hero\/[^/]+|research(?:\/[^/]+)?|growth-planner)\/?$/.test(location.pathname);
+    awaitingUI=!!win.KD_UI && /^\/(?:(?:ko|en|ja|zh-tw)\/)?(?:heroes|hero\/[^/]+|research(?:\/[^/]+)?|growth-planner)\/?$/.test(location.pathname);
     observer = new MutationObserver(ready);
     const main = doc.getElementById('content') || doc.querySelector('main');
     if (main) observer.observe(main, {childList:true, subtree:true});
@@ -91,17 +91,18 @@
   function destinations(l) {
     const p = l === 'ko' ? '' : '/' + l;
     return [p+'/#hub-search', '/'+l+'/buildings/', p+'/heroes/',p+'/research/', '/'+l+'/database/', '/'+l+'/pet/',
-      l === 'zh-tw' ? p+'/calculator/' : p+'/growth-planner/', p+'/calculator/', '/'+l+'/guides/', '/'+l+'/guides/kingshot-giftcode.html'];
+      p+'/growth-planner/', p+'/calculator/', '/'+l+'/guides/', '/'+l+'/guides/kingshot-giftcode.html'];
   }
   function linkLocale(a,l) {
     if(a.hasAttribute('hreflang') || a.closest('.ks-nav-languages'))return;
     const u = new URL(a.href, location.href);
     if (u.origin !== location.origin && u.origin !== 'https://kingshotdata.kr') return;
-    if (/kingshot-giftcode(?:\.html)?\/?$/.test(u.pathname)) {
+    if (/^\/(?:(?:ko|en|ja|zh-tw)\/)?$/.test(u.pathname) && u.hash==='#hub-search') u.pathname=l==='ko'?'/':'/'+l+'/';
+    else if (/kingshot-giftcode(?:\.html)?\/?$/.test(u.pathname)) {
       u.pathname = '/'+l+'/guides/kingshot-giftcode.html';
       a.removeAttribute('data-korean-only');
     } else if (/^\/(?:(?:ko|en|ja|zh-tw)\/)?(?:guides|buildings|database|pet)\/?$/.test(u.pathname)) u.pathname = '/'+l+'/'+u.pathname.split('/').filter(Boolean).at(-1)+'/';
-    else if (/^\/(?:(?:ko|en|ja|zh-tw)\/)?(?:heroes|research|items|events|calculator|growth-planner)\/?$/.test(u.pathname)) u.pathname = (l==='ko'?'':'/'+l)+'/'+u.pathname.split('/').filter(Boolean).at(-1)+'/';
+    else if (/^\/(?:(?:ko|en|ja|zh-tw)\/)?(?:heroes|research|items|events|calculator|growth-planner|about|contact|privacy|terms)\/?$/.test(u.pathname)) u.pathname = (l==='ko'?'':'/'+l)+'/'+u.pathname.split('/').filter(Boolean).at(-1)+'/';
     else return;
     if(a.getAttribute('href')!==u.pathname+u.search+u.hash)a.setAttribute('href', u.pathname+u.search+u.hash);
     const span = a.querySelector('span');
@@ -142,7 +143,7 @@
           shared.querySelector('.ks-nav-brand').href=l==='ko'?'/':'/'+l+'/';
           shared.querySelector('button').textContent=words[10];
           const links=shared.querySelector('#ks-navigation-links'); links.replaceChildren();
-          targets.forEach((href,i)=>{if(l==='zh-tw'&&i===6)return;const a=doc.createElement('a');a.href=href;a.textContent=words[i];if(currentCategory(location.pathname)===i)a.setAttribute('aria-current','page');links.append(a);});
+          targets.forEach((href,i)=>{if(i===6)return;const a=doc.createElement('a');a.href=href;a.textContent=words[i];if(currentCategory(location.pathname)===i)a.setAttribute('aria-current','page');links.append(a);});
           const languages=shared.querySelector('.ks-nav-languages');languages.replaceChildren();
           for(const alt of doc.querySelectorAll('head link[rel="alternate"][hreflang]:not([hreflang="x-default"])')){
             const lang=alt.hreflang.toLowerCase(),a=doc.createElement('a'),u=new URL(alt.href);a.href=u.pathname+u.search;a.textContent=lang==='zh-tw'?'繁中':lang.toUpperCase();a.hreflang=alt.hreflang;a.dataset.routerIgnore='true';if(lang===l)a.setAttribute('aria-current','page');languages.append(a);
@@ -151,12 +152,14 @@
         doc.documentElement.style.setProperty('--ks-site-nav-height',shared.offsetHeight+'px');
       }
       doc.body.classList.toggle('ks-shared-navigation',!!shared);
+      doc.querySelectorAll('footer a[href]').forEach(a=>linkLocale(a,l));
+      const brandHome=original?.querySelector('a.brand, a[aria-label="KingshotData Home"]');if(brandHome)brandHome.setAttribute('href',l==='ko'?'/':'/'+l+'/');
       const menu=original?.querySelector('#primaryNav');
       if(menu) {
         for(const host of [menu,doc.querySelector('#mobileDrawer .nav-list')].filter(Boolean)){
           if(host.dataset.ksMenuLocale!==l){
             host.dataset.ksMenuLocale=l;host.replaceChildren();
-            targets.forEach((href,i)=>{if(l==='zh-tw'&&i===6)return;const a=doc.createElement('a');a.href=href;a.textContent=words[i];a.dataset.link='';host.append(a);});
+            targets.forEach((href,i)=>{if(i===6)return;const a=doc.createElement('a');a.href=href;a.textContent=words[i];a.dataset.link='';host.append(a);});
           }
           host.querySelectorAll('a').forEach(a=>{const p=new URL(a.href).pathname; if(currentCategory(p)===currentCategory(location.pathname))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
         }

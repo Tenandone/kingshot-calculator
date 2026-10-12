@@ -1,13 +1,13 @@
 /* Independent progressive schedule UI. Never writes game data or legacy storage. */
 (() => {'use strict';
  const root=document.querySelector('[data-schedule-planner]');if(!root)return;
- const locale=document.documentElement.lang,w=window.KSScheduleCopy?.[locale],engine=window.KS_SCHEDULE_ENGINE;
+ const rawLocale=document.documentElement.lang,locale=/^zh(?:-|$)/i.test(rawLocale)?'zh-tw':rawLocale,w=window.KSScheduleCopy?.[locale],engine=window.KS_SCHEDULE_ENGINE;
  const form=document.getElementById('schedule-form'),kingdom=document.getElementById('schedule-kingdom'),date=document.getElementById('schedule-date'),status=document.getElementById('schedule-status'),results=document.getElementById('schedule-results'),mode=document.getElementById('schedule-mode');
  if(!w||!engine)return;
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const dateFmt=new Intl.DateTimeFormat({ko:'ko-KR',en:'en-GB',ja:'ja-JP'}[locale],{year:'numeric',month:'short',day:'numeric',timeZone:'UTC'});
+ const dateFmt=new Intl.DateTimeFormat({ko:'ko-KR',en:'en-GB',ja:'ja-JP','zh-tw':'zh-TW'}[locale],{year:'numeric',month:'short',day:'numeric',timeZone:'UTC'});
  const phaseName=id=>({'idle':w.waiting,'preparation':w.preparation,'battle':w.battle,'matchmaking':w.matchmaking,'pre-transfer':w.preTransfer,'invitational':w.invitational,'open-transfer':w.openTransfer}[id]||w.unavailable);
- const targetCopy={ko:{'next-preparation-start':'준비 시작까지','preparation-end':'준비 종료까지','battle-end':'전투 종료까지'},en:{'next-preparation-start':'Until preparation starts','preparation-end':'Until preparation ends','battle-end':'Until battle ends'},ja:{'next-preparation-start':'準備開始まで','preparation-end':'準備終了まで','battle-end':'戦闘終了まで'}}[locale];
+ const targetCopy={ko:{'next-preparation-start':'준비 시작까지','preparation-end':'준비 종료까지','battle-end':'전투 종료까지'},en:{'next-preparation-start':'Until preparation starts','preparation-end':'Until preparation ends','battle-end':'Until battle ends'},ja:{'next-preparation-start':'準備開始まで','preparation-end':'準備終了まで','battle-end':'戦闘終了まで'},'zh-tw':{'next-preparation-start':'距離準備開始','preparation-end':'距離準備結束','battle-end':'距離戰鬥結束'}}[locale];
  let rules=null,applied={kingdom:null,date:''},valid=true;
  function time(value,withTime=true){if(!value)return '';const d=new Date(value);if(!Number.isFinite(d.valueOf()))return '';return '<time datetime="'+esc(d.toISOString())+'">'+esc(dateFmt.format(d))+(withTime?' · '+esc(d.toISOString().slice(11,d.getUTCSeconds()?19:16)):'')+'</time>';}
  function remaining(value){if(!value)return '—';return value.days+w.days+' '+value.hours+w.hours+' '+value.minutes+w.minutes;}

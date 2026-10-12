@@ -11,6 +11,35 @@
 // - 기존 기능(정렬/배지/유닛아이콘/compact 그리드) 유지
 (function(){
   'use strict';
+  // TW uses the current display model also when entered from the shared SPA shell.
+  async function mountTwHeroDisplay() {
+    if (!/^\/zh-tw\/(?:heroes|hero\/[^/]+)\/?$/.test(location.pathname)) return false;
+    const pathname = location.pathname;
+    if (!window.KD_TW_HERO_ENTRY) {
+      window.KD_TW_HERO_ENTRY = (async function () {
+        if (!document.querySelector('link[href^="/css/ui-heroes.css"]')) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = '/css/ui-heroes.css?v=ks-ui16-tw-20261012';
+          document.head.appendChild(link);
+        }
+        for (const [name, globalName] of [['hero-view', 'KD_HERO_VIEW'], ['hero-client', 'KD_UI_HEROES']]) {
+          if (window[globalName]) continue;
+          await new Promise(function (resolve, reject) {
+            const script = document.createElement('script');
+            script.src = '/js/ui/' + name + '.js?v=ks-ui16-tw-20261012';
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+          });
+        }
+      })().catch(function (error) { window.KD_TW_HERO_ENTRY = null; throw error; });
+    }
+    await window.KD_TW_HERO_ENTRY;
+    if (location.pathname === pathname) await window.KD_UI_HEROES.enhance(document, 'zh-tw');
+    return true;
+  }
+
 
   /* ========= i18n helpers ========= */
   const hasI18N = () => (window.I18N && typeof window.I18N.t === 'function');
@@ -71,6 +100,7 @@
 
   /* ========= Entry ========= */
   window.initHeroes = async function initHeroes(){
+    if (await mountTwHeroDisplay()) return;
     const ROOT = document.getElementById('heroes-root');
     if (!ROOT) return;
 

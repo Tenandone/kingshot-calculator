@@ -48,6 +48,7 @@ function transform(source,slug){
       ["lead: \"iOS 및 Android용 활성 및 만료된 킹샷:Kingshot 기프트코드 목록 및 킹샷공략 입니다.\"", "lead: \"현재 사용 가능한 킹샷 기프트코드와 공식 교환 페이지를 확인하세요. iOS·Android 입력 방법, 코드가 적용되지 않을 때의 확인 사항, 만료 코드 기록을 함께 제공합니다.\""],
       ["lead: \"iOS・Android向けの有効コードと期限切れコードをまとめたキングショット:Kingshotギフトコード一覧と攻略ページです。\"", "lead: \"使用できるキングショットのギフトコードと公式交換ページを確認できます。iOS・Androidでの入力方法、コードが使えないときの確認事項、期限切れコードの記録も掲載しています。\""],
       ["lead: \"Find active and expired Kingshot gift codes for iOS and Android, plus the official redeem page, code entry guide, and useful Kingshot guides.\"", "lead: \"Find active Kingshot gift codes and the official redeem page. Check how to redeem on iOS and Android, troubleshoot codes that do not work, and view the expired-code archive.\""],
+      ["lead: \"整理 iOS 與 Android 可用與已過期的 Kingshot 禮包碼與兌換碼，同時提供攻略資訊與官方輸入入口。\"","lead: \"查看目前可用的 Kingshot 禮包碼與官方兌換頁面，了解 iOS、Android 的輸入方式、無法兌換時的檢查項目，以及過期碼記錄。\""],
     ];
     for (const [oldCopy,newCopy] of couponIntroCopies) {
       if (code.includes(oldCopy)) replace(oldCopy,newCopy,'UI14 coupon intro copy');

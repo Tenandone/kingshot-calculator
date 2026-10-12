@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   if (window.KD_GUIDE_READER) return;
-  const VERSION='ks-ui12', STORE='KSD_GUIDE_READER_V1';
+  const VERSION='ks-ui16-tw-20261012', STORE='KSD_GUIDE_READER_V1';
   const pathPattern=/^\/(ko|en|ja|zh-tw)\/guides(?:\/([^/?#]+))?\/?$/i;
   const copy={
     ko:['가이드','가이드 검색','전체','목록','목차','관련 가이드','가이드를 선택하세요','검색 결과가 없습니다.','불러오는 중…','목록으로','초보자','성장','전투','이벤트','보상','시스템'],

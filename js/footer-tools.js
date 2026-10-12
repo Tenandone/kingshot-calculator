@@ -153,6 +153,8 @@
 
   function getGiftLabel(lang) {
     if (lang === 'ko') return '기프트코드';
+    if (lang === 'ja') return 'ギフトコード';
+    if (/^zh/i.test(lang)) return '禮包碼';
     return 'Gift Code';
   }
 

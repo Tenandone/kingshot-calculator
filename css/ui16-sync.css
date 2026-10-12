@@ -1,0 +1,35 @@
+/* Shared visual layer; category-specific content remains intact. */
+body.ks-design .kd-home-v3 .hub-primary{grid-template-columns:repeat(3,minmax(0,1fr))}
+body.ks-design .kd-home-v3 .hub-primary>a{border-top:3px solid #a76d31!important;background:linear-gradient(135deg,#fffdf8,#f5f0e6)!important}
+body.ks-design .kd-home-v3 .hub-primary>a[data-home-primary="heroes"]{border-top-color:#7550a0!important;background:linear-gradient(135deg,#fff,#f4effa)!important}
+body.ks-design .kd-home-v3 .hub-primary>a[data-home-primary="research"]{border-top-color:#2f8174!important;background:linear-gradient(135deg,#fff,#edf7f3)!important}
+body.ks-design .kd-home-v3 .hub-category-links a{border-radius:6px;border-color:#dbd6ca;background:#fffefb}
+body.ks-design .kd-home-v3 .hub-search-field:focus-within{outline:2px solid #906324;outline-offset:3px}
+#couponBarMount{width:min(100% - 32px,1200px);margin:12px auto 8px}
+.kd-gift-summary{border-block:1px solid #ded4bd;padding:10px 14px;background:#fcf6e8;color:#3f3323;border-radius:6px;font-size:14px;line-height:1.5}
+.kd-gift-summary__heading{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.kd-gift-summary__heading strong{font-size:16px}
+.kd-gift-summary__heading a{margin-inline-start:auto;color:#68421b;font-weight:650;text-decoration:underline;text-underline-offset:3px;min-height:32px;display:inline-flex;align-items:center}
+.kd-gift-count{font-variant-numeric:tabular-nums;color:#315b39;font-weight:700}
+.kd-gift-checked{margin:2px 0;color:#675a46;font-size:12px}
+.kd-gift-summary details{margin-top:4px}
+.kd-gift-summary summary{cursor:pointer;width:fit-content;min-height:30px;align-content:center;font-weight:600}
+.kd-gift-codes{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0}
+.kd-gift-codes>div{display:flex;gap:8px;align-items:center;background:#fffdf8;border:1px solid #ded4bd;padding:4px 4px 4px 10px;border-radius:5px}
+.kd-gift-codes code{font-size:14px;user-select:all;overflow-wrap:anywhere}
+.kd-gift-codes button{border:1px solid #cec3ab;border-radius:4px;background:#fff;min-height:40px;padding:4px 12px;cursor:pointer;color:#47371f;font-weight:600}
+html[lang^="zh"]{font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
+@media(max-width:600px){
+ body.ks-design .kd-home-v3 .hub-primary{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ body.ks-design .kd-home-v3 .hub-primary>a{padding:12px 9px!important;min-width:0;min-height:108px}
+ body.ks-design .kd-home-v3 .hub-primary>a strong{font-size:15px}
+ body.ks-design .kd-home-v3 .hub-primary>a span{font-size:12px}
+ body.ks-design .kd-home-v3 .hub-primary>a i{display:none}
+ #couponBarMount{width:calc(100% - 24px);margin:8px auto}
+ .kd-gift-summary{padding:8px 10px}
+ .kd-gift-summary__heading{gap:5px 10px}
+ .kd-gift-summary__heading a{font-size:13px}
+ .kd-gift-summary summary{min-height:40px}
+}
+
+@media(max-width:600px){body.ks-design .kd-home-v3 .hub-primary>a:nth-child(-n+2){border-bottom:0!important}body.ks-design .kd-home-v3 .hub-primary>a:nth-child(2){border-right:1px solid var(--ks-line)!important}}

@@ -1,18 +1,16 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
+<!doctype html><html lang="zh-TW"><head>
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://kingshotdata.kr/zh-tw/buildings/war-academy.html">
 <!-- kd-ui12-navigation:start -->
 <link rel="stylesheet" href="/css/site-navigation.css?v=ks-ui12-20261012-h1">
-<script defer src="/js/navigation.js?v=ks-ui12-20261012-h1"></script>
+<script defer src="/js/navigation.js?v=ks-ui16-tw-20261012"></script>
 <!-- kd-ui12-navigation:end -->
 <script src="/js/calculation-provenance.js?v=2026100621"></script>
 <script src="/js/calculation-proof.js?v=2026100621"></script>
 <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>戰爭學院 升級成本與Truegold階段（TG 1–10） | Kingshot</title>
-  <meta name="description" content="Kingshot 戰爭學院（War Academy）升級需求與成本（TG 1–10，含子階段）。包含Truegold Dust兌換、資源、Truegold、淬鍊Truegold、升級時間、戰力與研究速度。" />
+  <title>戰爭學院強化費用與真金階段（TG 1–10）| Kingshot</title>
+  <meta name="description" content="研究新技術，以強化並活化城市各項能力的設施。技術分為弓兵、步兵與騎兵 3 個系統，可進行高階研究，最終解鎖「T11 部隊」。研究需要特殊道具「真金粉末」，可購買禮包或按以下比例兌換。■ 真金粉末兌換：5,000 金幣 = 1 真金粉末（每週最多 20 次）；5 真金 = 13 真金粉末（每週最多 20 次／50% OFF）；10 真金 = 13 真金粉末（不限次數）。" />
 
   <!-- SEO -->
   <link rel="alternate" hreflang="en" href="https://kingshotdata.kr/en/buildings/war-academy.html" />
@@ -26,478 +24,39 @@
   <link rel="preload" as="image" href="/img/buildings/war-academy.webp" />
   <link rel="preload" as="image" href="/img/kingshotdata-logo.png" />
 
-  <style>
-    :root{
-      --bg:#ffffff;
-      --panel:#ffffff;
-      --border:#e5e7eb;
-      --text:#111827;
-      --muted:#6b7280;
-      --brand:#2563eb;
 
-      --radius:16px;
-      --shadow:0 10px 24px rgba(0,0,0,.06);
 
-      --header-h: 0px;
-      --tabs-h: 0px;
-      --sticky-top: 0px;
-
-      --cell-ico: 14px;
-      --th-ico: 14px;
-      --tbl-font: 13px;
-      --tbl-pad-y: 9px;
-      --tbl-pad-x: 10px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","Noto Sans",Arial;
-      color:var(--text);
-      background:var(--bg);
-    }
-    a{color:var(--brand); text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    .wrap{max-width:1240px; margin:0 auto; padding:18px 16px 64px}
-
-    header.top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:10px 0 12px;
-      border-bottom:1px solid var(--border);
-      background:var(--bg);
-    }
-    .brand a{
-      display:flex; align-items:center; gap:10px;
-      color:var(--text);
-      text-decoration:none;
-      font-weight:900;
-      letter-spacing:.1px;
-    }
-    .brand img{display:block; width:28px; height:28px; border-radius:8px}
-
-    nav.lang{
-      display:flex; gap:8px; flex-wrap:wrap;
-      color:var(--muted); font-size:13px;
-    }
-    nav.lang a{
-      color:var(--muted);
-      padding:8px 10px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      background:#fff;
-      text-decoration:none;
-    }
-    nav.lang a[aria-current="page"]{color:var(--text); font-weight:800}
-
-    nav.section-tabs{
-      display:none;
-      gap:8px;
-      padding:6px 0;
-      margin:0;
-      overflow:auto;
-      -webkit-overflow-scrolling:touch;
-      background:var(--bg);
-      border-bottom:1px solid var(--border);
-    }
-    nav.section-tabs a{
-      display:inline-flex;
-      align-items:center;
-      white-space:nowrap;
-      padding:8px 10px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      background:#fff;
-      color:var(--muted);
-      font-size:13px;
-      text-decoration:none;
-    }
-    nav.section-tabs a:hover{color:var(--text)}
-
-    .crumbs{margin:14px 0; color:var(--muted); font-size:13px}
-    .crumbs a{color:var(--muted)}
-
-    .hero{
-      display:grid; grid-template-columns: 160px 1fr; gap:18px;
-      padding:18px;
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-    .hero img{
-      width:160px; height:160px; object-fit:contain;
-      border-radius:14px;
-      background:#f8fafc;
-      border:1px solid var(--border);
-      padding:10px;
-    }
-    h1{margin:0 0 6px; font-size:28px; line-height:1.15}
-    .sub{margin:0; color:var(--muted)}
-    .muted{color:var(--muted)}
-    .quote{
-      margin:10px 0 0;
-      padding:10px 12px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fbfdff;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .jump{
-      margin-top:10px;
-      display:flex; gap:10px; flex-wrap:wrap;
-      font-size:13px; color:var(--muted);
-    }
-    .jump a{color:var(--muted)}
-    .jump a:hover{color:var(--text)}
-    .dotsep{opacity:.5}
-
-    section{
-      margin-top:22px;
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:18px;
-    }
-    section h2{margin:0 0 10px; font-size:20px}
-    section p{margin:8px 0}
-
-    .note{
-      display:flex;
-      gap:10px;
-      padding:12px 14px;
-      border:1px solid rgba(245,158,11,.35);
-      background:rgba(245,158,11,.08);
-      border-radius:14px;
-      margin:10px 0 14px;
-    }
-    .note strong{font-weight:900}
-    .note .note-ico{
-      width:18px; height:18px; flex:0 0 18px;
-      margin-top:2px;
-      color:#b45309;
-    }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-      margin-top:10px;
-    }
-    .box{
-      border:1px solid var(--border);
-      border-radius:16px;
-      background:#fff;
-      padding:12px;
-    }
-    .box h3{margin:0 0 6px; font-size:15px}
-    ul.clean{margin:0; padding-left:18px}
-    ul.clean li{margin:6px 0}
-
-    .img-wide{
-      margin:10px 0 14px;
-      border:1px solid var(--border);
-      border-radius:16px;
-      overflow:hidden;
-      background:#fff;
-    }
-    .img-wide img{display:block; width:100%; height:auto}
-
-    .img-grid{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:12px;
-      margin-top:10px;
-    }
-    figure.pic{
-      margin:0;
-      border:1px solid var(--border);
-      border-radius:16px;
-      overflow:hidden;
-      background:#fff;
-    }
-    figure.pic img{display:block; width:100%; height:auto}
-    figure.pic figcaption{
-      padding:10px 12px;
-      border-top:1px solid var(--border);
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .table-wrap{
-      border:1px solid var(--border);
-      border-radius:14px;
-      overflow-x:auto;
-      -webkit-overflow-scrolling:touch;
-      background:#fff;
-    }
-    table{
-      width:100%;
-      border-collapse:separate;
-      border-spacing:0;
-      background:#fff;
-    }
-    thead th{
-      position:sticky;
-      top:var(--sticky-top);
-      background:#f8fafc;
-      text-align:left;
-      padding:var(--tbl-pad-y) var(--tbl-pad-x);
-      border-bottom:1px solid var(--border);
-      font-size:calc(var(--tbl-font) - 1px);
-      white-space:nowrap;
-      z-index:3;
-    }
-    tbody td{
-      padding:var(--tbl-pad-y) var(--tbl-pad-x);
-      border-bottom:1px solid var(--border);
-      vertical-align:top;
-      font-size:var(--tbl-font);
-      white-space:nowrap;
-    }
-    tbody tr:nth-child(even) td{background:#fcfcfd}
-    tbody tr:hover td{background:#f3f6ff}
-    tbody tr:last-child td{border-bottom:0}
-
-    .center{text-align:center}
-    .num{text-align:right; font-variant-numeric: tabular-nums}
-    .req{white-space:normal; overflow-wrap:anywhere; word-break:keep-all}
-    .req-h{white-space:normal}
-
-    .th-flex{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-    }
-    .th-ico{
-      width:var(--th-ico);
-      height:var(--th-ico);
-      object-fit:contain;
-      display:inline-block;
-      vertical-align:middle;
-    }
-    .cell-num{
-      display:inline-flex;
-      align-items:center;
-      justify-content:flex-end;
-      gap:6px;
-      white-space:nowrap;
-    }
-    .td-ico{
-      width:var(--cell-ico);
-      height:var(--cell-ico);
-      object-fit:contain;
-      display:inline-block;
-      vertical-align:middle;
-      opacity:.95;
-    }
-
-    table.sticky-firstcol th:first-child,
-    table.sticky-firstcol td:first-child{
-      position: sticky;
-      left: 0;
-      background:inherit;
-      z-index:2;
-    }
-    table.sticky-firstcol thead th:first-child{
-      z-index:4;
-      background:#f8fafc;
-    }
-
-    .cards{display:none}
-    .cards .card{
-      border:1px solid var(--border);
-      border-radius:16px;
-      background:#fff;
-      box-shadow:0 6px 16px rgba(0,0,0,.04);
-      padding:12px 12px;
-    }
-    .card-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:8px;
-    }
-    .card-title{
-      font-size:15px;
-      font-weight:900;
-      line-height:1.2;
-      margin:0;
-    }
-    .card-meta{
-      text-align:right;
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.25;
-      white-space:nowrap;
-    }
-    .card-req{
-      margin:8px 0 10px;
-      color:var(--text);
-      font-size:13px;
-      white-space:normal;
-    }
-    .res-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:8px;
-      margin-top:10px;
-    }
-    .res-item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:10px 10px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fff;
-      font-size:13px;
-    }
-    .res-left{display:flex; align-items:center; gap:8px; min-width:0}
-    .icoimg{
-      width:18px; height:18px; flex:0 0 18px;
-      object-fit:contain;
-      display:block;
-    }
-    .res-label{
-      color:var(--muted);
-      font-size:12px;
-      white-space:nowrap;
-    }
-    .res-val{
-      font-weight:900;
-      font-variant-numeric: tabular-nums;
-      white-space:nowrap;
-    }
-    .card-foot{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:10px;
-      color:var(--muted);
-      font-size:12px;
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:6px 10px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      background:#fff;
-      white-space:nowrap;
-    }
-    .badge svg{width:16px;height:16px;opacity:.85}
-
-    .related{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
-    .pill{
-      display:inline-flex; align-items:center;
-      padding:7px 10px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      background:#fff;
-      font-size:13px;
-      color:var(--text);
-      text-decoration:none;
-    }
-    .pill:hover{border-color:#c7d2fe}
-
-    .anchor{
-      display:block;
-      height:0;
-      scroll-margin-top: calc(var(--sticky-top) + 12px);
-    }
-
-    @media (min-width: 901px){
-      :root{
-        --tbl-font: 12px;
-        --tbl-pad-y: 7px;
-        --tbl-pad-x: 8px;
-        --cell-ico: 13px;
-        --th-ico: 13px;
-      }
-      table{table-layout:fixed}
-      .table-wrap{overflow-x:clip}
-      @supports not (overflow: clip){ .table-wrap{overflow-x:hidden} }
-      td.req, th.req-h{white-space:normal}
-    }
-
-    @media (max-width: 900px){
-      header.top{
-        position: sticky;
-        top: 0;
-        z-index: 40;
-      }
-      nav.section-tabs{
-        display:flex;
-        position: sticky;
-        top: var(--header-h);
-        z-index: 35;
-      }
-      .hero{grid-template-columns:1fr}
-      .hero img{width:120px;height:120px}
-
-      .grid-2{grid-template-columns:1fr}
-      .img-grid{grid-template-columns:1fr}
-
-      .enhanced .data-table{display:none}
-      .enhanced .cards{display:grid; gap:12px}
-    }
-
-    @media (max-width: 600px){
-      body{font-size:15px}
-      .wrap{padding:14px 12px 56px}
-      h1{font-size:24px}
-      section{padding:14px}
-      .res-grid{grid-template-columns: 1fr}
-    }
-  </style>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebPage",
-    "name":"戰爭學院 (Kingshot)",
-    "inLanguage":"zh-TW",
-    "description":"Kingshot 戰爭學院（War Academy）升級需求與成本（TG 1–10，含子階段）。包含Truegold Dust兌換、資源、Truegold、淬鍊Truegold、升級時間、戰力與研究速度。",
-    "breadcrumb":{
-      "@type":"BreadcrumbList",
-      "itemListElement":[
-        {"@type":"ListItem","position":1,"name":"首頁","item":"https://kingshotdata.kr/zh-tw/"},
-        {"@type":"ListItem","position":2,"name":"建築","item":"https://kingshotdata.kr/zh-tw/buildings/"},
-        {"@type":"ListItem","position":3,"name":"戰爭學院","item":"https://kingshotdata.kr/zh-tw/buildings/war-academy.html"}
-      ]
-    }
-  }
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"戰爭學院 (Kingshot)","inLanguage":"zh-TW","description":"Kingshot 戰爭學院強化條件與費用（TG 1–10，含細分階段），包含真金粉末兌換、資源、真金、淬鍊真金、所需時間、戰力與研究速度。","breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首頁","item":"https://kingshotdata.kr/zh-tw/"},{"@type":"ListItem","position":2,"name":"建築","item":"https://kingshotdata.kr/zh-tw/buildings/"},{"@type":"ListItem","position":3,"name":"戰爭學院","item":"https://kingshotdata.kr/zh-tw/buildings/war-academy.html"}]}}</script>
   <!-- GA4 -->
 
 
 
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="戰爭學院 升級成本與Truegold階段（TG 1–10） | Kingshot" />
-  <meta property="og:description" content="Kingshot 戰爭學院（War Academy）升級需求與成本（TG 1–10，含子階段）。包含Truegold Dust兌換、資源、Truegold、淬鍊Truegold、升級時間、戰力與研究速度。" />
+  <meta property="og:title" content="戰爭學院強化費用與真金階段（TG 1–10）| Kingshot" />
+  <meta property="og:description" content="研究新技術，以強化並活化城市各項能力的設施。技術分為弓兵、步兵與騎兵 3 個系統，可進行高階研究，最終解鎖「T11 部隊」。研究需要特殊道具「真金粉末」，可購買禮包或按以下比例兌換。■ 真金粉末兌換：5,000 金幣 = 1 真金粉末（每週最多 20 次）；5 真金 = 13 真金粉末（每週最多 20 次／50% OFF）；10 真金 = 13 真金粉末（不限次數）。" />
   <meta property="og:url" content="https://kingshotdata.kr/zh-tw/buildings/war-academy.html" />
   <meta property="og:image" content="https://kingshotdata.kr/img/kingshotdata-og-v5.png" />
 <script src="/js/canonical-links.js?v=2026100621" defer></script>
 <script defer src="/js/image-system.js?v=2026100621"></script>
-<script defer src="/js/hub.js?v=ks-ui12-20261012"></script>
+<script defer src="/js/hub.js?v=ks-ui16-tw-20261012"></script>
 <script defer src="/js/hub-metrics.js?v=ks-ui9-20261012"></script>
 <script defer src="/js/my-progress.js?v=ks-ui9-20261012"></script>
 <link rel="stylesheet" href="/css/my-progress.css?v=2026100621">
 <script defer src="/js/privacy-controls.js?v=ks-ui12-20261012"></script>
-<script defer src="/js/data-verification.js?v=2026100621"></script>
+<script defer src="/js/data-verification.js?v=ks-ui16-tw-20261012"></script>
 
-<script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
+
+
+<script defer src="/js/ui/building-client.js?v=ks-ui16-tw-20261012" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/collections-client.js?v=ks-ui16-tw-20261012" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/sources-runtime.js?v=ks-ui16-tw-20261012" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<script defer src="/js/ui/runtime.js?v=ks-ui16-tw-20261012" data-kd-ui-version="ks-ui3-numeric-f58d3832d761edab"></script>
+<link rel="stylesheet" href="/css/ui-common.css?v=ks-ui3-numeric-f58d3832d761edab"><link rel="stylesheet" href="/css/ui-building.css?v=ks-ui3-numeric-f58d3832d761edab"><link rel="stylesheet" href="/css/ui-building-table.css?v=ks-ui3-numeric-f58d3832d761edab"><!-- kd-related-navigation:start -->
+<link rel="stylesheet" href="/css/related-navigation.css?v=ks-ui8-20261012">
+<script defer src="/js/ui/related-navigation-view.js?v=ks-ui16-tw-20261012"></script>
+<script defer src="/js/ui/related-navigation-client.js?v=ks-ui16-tw-20261012"></script>
+<!-- kd-related-navigation:end -->
 <!-- ks-ui14-seo:start -->
 <script defer src="/js/seo-editorial.js?v=ks-ui14-20261012"></script>
 <!-- ks-ui14-seo:end --><!-- ks-ui13-design:start -->
@@ -507,543 +66,91 @@
 <link rel="stylesheet" href="/css/design-data.css?v=ks-ui14-20261012">
 <script defer src="/js/design-system.js?v=ks-ui14-20261012"></script>
 <script defer src="/js/design-guides.js?v=ks-ui14-20261012"></script>
-<!-- ks-ui13-design:end --></head>
+<!-- ks-ui13-design:end --><link rel="stylesheet" href="/css/ui16-sync.css?v=ks-ui16-tw-20261012">
+</head><body class="kd-ui-shell kd-building-table-shell"><div class="wrap"><header class="top kd-standalone-header"><a class="kd-standalone-brand" href="/ja"><img src="/img/kingshotdata-logo-56.webp" width="32" height="32" alt="">Kingshot Data</a><nav class="kd-standalone-links"><a href="/zh-tw/buildings/">建築</a><a href="/zh-tw/calculator/">計算器</a><a href="/zh-tw/#hub-search">搜尋</a></nav><nav class="kd-standalone-langs" aria-label="Language"><a href="/ko/buildings/war-academy.html" lang="ko">KO</a><a href="/en/buildings/war-academy.html" lang="en">EN</a><a href="/ja/buildings/war-academy.html" lang="ja">JA</a><a href="/zh-tw/buildings/war-academy.html" lang="zh-TW" aria-current="page">TW</a></nav></header><main id="main"><article id="kd-building" class="kd-ui kd-building kd-building-table-page" data-building-id="ks:building:war-academy" data-locale="zh-tw" data-version="ks-tg-recovery-62ceaba3420bf57f" data-model-url="/data/ui/buildings/war-academy.json"><div class="kd-building-heading"><img class="kd-building-image" src="/img/buildings/war-academy.webp" alt="戰爭學院" width="104" height="104"><div class="kd-building-heading-copy"><a class="kd-building-back" href="/zh-tw/buildings/">← 建築</a><h1>戰爭學院</h1><p class="kd-building-intro">研究新技術，以強化並活化城市各項能力的設施。技術分為弓兵、步兵與騎兵 3 個系統。</p><details class="kd-building-description"><summary>閱讀說明</summary><p>研究新技術，以強化並活化城市各項能力的設施。技術分為弓兵、步兵與騎兵 3 個系統，可進行高階研究，最終解鎖「T11 部隊」。研究需要特殊道具「真金粉末」，可購買禮包或按以下比例兌換。■ 真金粉末兌換：5,000 金幣 = 1 真金粉末（每週最多 20 次）；5 真金 = 13 真金粉末（每週最多 20 次／50% OFF）；10 真金 = 13 真金粉末（不限次數）。</p></details></div></div><nav class="kd-building-toc"><a href="#truegold" data-kd-anchor="truegold">TG階段</a><a href="#effects" data-kd-anchor="effects">效果與補充資料</a><a href="#related" data-kd-anchor="related">相關建築</a></nav><div class="kd-building-content"><span id="upgrade" class="kd-building-anchor"></span><span id="requirements" class="kd-building-anchor"></span><span id="legacy-war-academy-wa-table-remaining" class="kd-building-anchor"></span><section id="truegold" class="kd-building-section"><div class="kd-building-table-toolbar"><div class="kd-building-table-title"><h2>TG階段</h2><span>46 階段</span></div></div><p class="kd-building-scroll-hint">左右捲動即可比較資源、時間與條件。</p><div class="kd-building-table-region" tabindex="0" role="region" aria-label="TG階段"><table class="kd-building-table kd-building-base-table" data-stage="tg"><thead><tr><th scope="col">等級</th><th scope="col" class="kd-num"><img src="/img/bread.webp" alt="" width="18" height="18">麵包</th><th scope="col" class="kd-num"><img src="/img/wood.webp" alt="" width="18" height="18">木材</th><th scope="col" class="kd-num"><img src="/img/stone.webp" alt="" width="18" height="18">石材</th><th scope="col" class="kd-num"><img src="/img/iron.webp" alt="" width="18" height="18">鐵礦</th><th scope="col" class="kd-num"><img src="/img/truegold.webp" alt="" width="18" height="18">真金</th><th scope="col" class="kd-num"><img src="/img/tempered-truegold.webp" alt="" width="18" height="18">精煉真金</th><th scope="col" class="kd-num">基礎建造時間</th><th scope="col" class="kd-num">戰力</th><th scope="col" class="kd-num">戰力増加</th><th scope="col">前置條件</th></tr></thead><tbody><tr data-row-key="tg:1:0" id="row-tg-1-0"><th scope="row">TG1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num " data-field="truegold" data-status="held" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="2" data-display-value="2" data-unit="second">2秒</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="217260" data-display-value="217260" data-unit="power">217,260</td><td class="kd-num " data-field="powerIncrease" data-status="missing" data-value="null" data-display-value="null" data-unit="power">–</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:1:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A1%3A0#row-tg-1-0">城市中心 TG 1</a></td></tr><tr data-row-key="tg:1:1" id="row-tg-1-1"><th scope="row">TG1-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1800000" data-unit="resource_unit">1.8M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="71" data-display-value="71" data-unit="resource_unit">71</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="155520" data-display-value="155520" data-unit="second">1天 19小時 12分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="224148" data-display-value="224148" data-unit="power">224,148</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:2:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A2%3A0#row-tg-2-0">城市中心 TG 2</a></td></tr><tr data-row-key="tg:1:2" id="row-tg-1-2"><th scope="row">TG1-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1800000" data-unit="resource_unit">1.8M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="71" data-display-value="71" data-unit="resource_unit">71</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="155520" data-display-value="155520" data-unit="second">1天 19小時 12分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="231036" data-display-value="231036" data-unit="power">231,036</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:2:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A2%3A0#row-tg-2-0">城市中心 TG 2</a></td></tr><tr data-row-key="tg:1:3" id="row-tg-1-3"><th scope="row">TG1-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1800000" data-unit="resource_unit">1.8M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="71" data-display-value="71" data-unit="resource_unit">71</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="155520" data-display-value="155520" data-unit="second">1天 19小時 12分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="237924" data-display-value="237924" data-unit="power">237,924</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:2:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A2%3A0#row-tg-2-0">城市中心 TG 2</a></td></tr><tr data-row-key="tg:1:4" id="row-tg-1-4"><th scope="row">TG1-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1800000" data-unit="resource_unit">1.8M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="71" data-display-value="71" data-unit="resource_unit">71</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="155520" data-display-value="155520" data-unit="second">1天 19小時 12分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="244812" data-display-value="244812" data-unit="power">244,812</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:2:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A2%3A0#row-tg-2-0">城市中心 TG 2</a></td></tr><tr data-row-key="tg:2:0" id="row-tg-2-0"><th scope="row">TG2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="36000000" data-unit="resource_unit">36M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1800000" data-unit="resource_unit">1.8M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="71" data-display-value="71" data-unit="resource_unit">71</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="155520" data-display-value="155520" data-unit="second">1天 19小時 12分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="251700" data-display-value="251700" data-unit="power">251,700</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:2:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A2%3A0#row-tg-2-0">城市中心 TG 2</a></td></tr><tr data-row-key="tg:2:1" id="row-tg-2-1"><th scope="row">TG2-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7900000" data-unit="resource_unit">7.9M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1900000" data-unit="resource_unit">1.9M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="107" data-display-value="107" data-unit="resource_unit">107</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="190080" data-display-value="190080" data-unit="second">2天 4小時 48分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="258588" data-display-value="258588" data-unit="power">258,588</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:3:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A3%3A0#row-tg-3-0">城市中心 TG 3</a></td></tr><tr data-row-key="tg:2:2" id="row-tg-2-2"><th scope="row">TG2-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7900000" data-unit="resource_unit">7.9M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1900000" data-unit="resource_unit">1.9M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="107" data-display-value="107" data-unit="resource_unit">107</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="190080" data-display-value="190080" data-unit="second">2天 4小時 48分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="265476" data-display-value="265476" data-unit="power">265,476</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:3:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A3%3A0#row-tg-3-0">城市中心 TG 3</a></td></tr><tr data-row-key="tg:2:3" id="row-tg-2-3"><th scope="row">TG2-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7900000" data-unit="resource_unit">7.9M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1900000" data-unit="resource_unit">1.9M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="107" data-display-value="107" data-unit="resource_unit">107</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="190080" data-display-value="190080" data-unit="second">2天 4小時 48分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="272364" data-display-value="272364" data-unit="power">272,364</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:3:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A3%3A0#row-tg-3-0">城市中心 TG 3</a></td></tr><tr data-row-key="tg:2:4" id="row-tg-2-4"><th scope="row">TG2-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7900000" data-unit="resource_unit">7.9M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1900000" data-unit="resource_unit">1.9M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="107" data-display-value="107" data-unit="resource_unit">107</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="190080" data-display-value="190080" data-unit="second">2天 4小時 48分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="279252" data-display-value="279252" data-unit="power">279,252</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:3:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A3%3A0#row-tg-3-0">城市中心 TG 3</a></td></tr><tr data-row-key="tg:3:0" id="row-tg-3-0"><th scope="row">TG3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="39000000" data-unit="resource_unit">39M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="7900000" data-unit="resource_unit">7.9M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="1900000" data-unit="resource_unit">1.9M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="107" data-display-value="107" data-unit="resource_unit">107</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="190080" data-display-value="190080" data-unit="second">2天 4小時 48分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="286140" data-display-value="286140" data-unit="power">286,140</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="6888" data-display-value="6888" data-unit="power">6,888</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:3:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A3%3A0#row-tg-3-0">城市中心 TG 3</a></td></tr><tr data-row-key="tg:3:1" id="row-tg-3-1"><th scope="row">TG3-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2000000" data-unit="resource_unit">2M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="207360" data-display-value="207360" data-unit="second">2天 9小時 36分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="293724" data-display-value="293724" data-unit="power">293,724</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:4:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A4%3A0#row-tg-4-0">城市中心 TG 4</a></td></tr><tr data-row-key="tg:3:2" id="row-tg-3-2"><th scope="row">TG3-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2000000" data-unit="resource_unit">2M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="207360" data-display-value="207360" data-unit="second">2天 9小時 36分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="301308" data-display-value="301308" data-unit="power">301,308</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:4:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A4%3A0#row-tg-4-0">城市中心 TG 4</a></td></tr><tr data-row-key="tg:3:3" id="row-tg-3-3"><th scope="row">TG3-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2000000" data-unit="resource_unit">2M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="207360" data-display-value="207360" data-unit="second">2天 9小時 36分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="308892" data-display-value="308892" data-unit="power">308,892</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:4:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A4%3A0#row-tg-4-0">城市中心 TG 4</a></td></tr><tr data-row-key="tg:3:4" id="row-tg-3-4"><th scope="row">TG3-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2000000" data-unit="resource_unit">2M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="207360" data-display-value="207360" data-unit="second">2天 9小時 36分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="316476" data-display-value="316476" data-unit="power">316,476</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:4:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A4%3A0#row-tg-4-0">城市中心 TG 4</a></td></tr><tr data-row-key="tg:4:0" id="row-tg-4-0"><th scope="row">TG4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="41000000" data-unit="resource_unit">41M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2000000" data-unit="resource_unit">2M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="207360" data-display-value="207360" data-unit="second">2天 9小時 36分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="324060" data-display-value="324060" data-unit="power">324,060</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:4:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A4%3A0#row-tg-4-0">城市中心 TG 4</a></td></tr><tr data-row-key="tg:4:1" id="row-tg-4-1"><th scope="row">TG4-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2100000" data-unit="resource_unit">2.1M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="150" data-display-value="150" data-unit="resource_unit">150</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="241920" data-display-value="241920" data-unit="second">2天 19小時 12分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="331644" data-display-value="331644" data-unit="power">331,644</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:5:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A5%3A0#row-tg-5-0">城市中心 TG 5</a></td></tr><tr data-row-key="tg:4:2" id="row-tg-4-2"><th scope="row">TG4-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2100000" data-unit="resource_unit">2.1M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="150" data-display-value="150" data-unit="resource_unit">150</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="241920" data-display-value="241920" data-unit="second">2天 19小時 12分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="339228" data-display-value="339228" data-unit="power">339,228</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:5:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A5%3A0#row-tg-5-0">城市中心 TG 5</a></td></tr><tr data-row-key="tg:4:3" id="row-tg-4-3"><th scope="row">TG4-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2100000" data-unit="resource_unit">2.1M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="150" data-display-value="150" data-unit="resource_unit">150</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="241920" data-display-value="241920" data-unit="second">2天 19小時 12分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="346812" data-display-value="346812" data-unit="power">346,812</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:5:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A5%3A0#row-tg-5-0">城市中心 TG 5</a></td></tr><tr data-row-key="tg:4:4" id="row-tg-4-4"><th scope="row">TG4-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2100000" data-unit="resource_unit">2.1M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="150" data-display-value="150" data-unit="resource_unit">150</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="241920" data-display-value="241920" data-unit="second">2天 19小時 12分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="354396" data-display-value="354396" data-unit="power">354,396</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:5:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A5%3A0#row-tg-5-0">城市中心 TG 5</a></td></tr><tr data-row-key="tg:5:0" id="row-tg-5-0"><th scope="row">TG5</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="42000000" data-unit="resource_unit">42M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="8200000" data-unit="resource_unit">8.2M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2100000" data-unit="resource_unit">2.1M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="150" data-display-value="150" data-unit="resource_unit">150</td><td class="kd-num " data-field="tempered_truegold" data-status="missing" data-value="null" data-display-value="null" data-unit="resource_unit">–</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="241920" data-display-value="241920" data-unit="second">2天 19小時 12分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="361980" data-display-value="361980" data-unit="power">361,980</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="7584" data-display-value="7584" data-unit="power">7,584</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:5:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A5%3A0#row-tg-5-0">城市中心 TG 5</a></td></tr><tr data-row-key="tg:5:1" id="row-tg-5-1"><th scope="row">TG5-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="9600000" data-unit="resource_unit">9.6M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2400000" data-unit="resource_unit">2.4M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="90" data-display-value="90" data-unit="resource_unit">90</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="4" data-display-value="4" data-unit="resource_unit">4</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="259200" data-display-value="259200" data-unit="second">3天</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="370092" data-display-value="370092" data-unit="power">370,092</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:6:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A6%3A0#row-tg-6-0">城市中心 TG 6</a></td></tr><tr data-row-key="tg:5:2" id="row-tg-5-2"><th scope="row">TG5-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="9600000" data-unit="resource_unit">9.6M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2400000" data-unit="resource_unit">2.4M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="90" data-display-value="90" data-unit="resource_unit">90</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="4" data-display-value="4" data-unit="resource_unit">4</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="259200" data-display-value="259200" data-unit="second">3天</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="378204" data-display-value="378204" data-unit="power">378,204</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:6:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A6%3A0#row-tg-6-0">城市中心 TG 6</a></td></tr><tr data-row-key="tg:5:3" id="row-tg-5-3"><th scope="row">TG5-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="9600000" data-unit="resource_unit">9.6M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2400000" data-unit="resource_unit">2.4M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="90" data-display-value="90" data-unit="resource_unit">90</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="4" data-display-value="4" data-unit="resource_unit">4</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="259200" data-display-value="259200" data-unit="second">3天</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="386316" data-display-value="386316" data-unit="power">386,316</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:6:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A6%3A0#row-tg-6-0">城市中心 TG 6</a></td></tr><tr data-row-key="tg:5:4" id="row-tg-5-4"><th scope="row">TG5-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="9600000" data-unit="resource_unit">9.6M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2400000" data-unit="resource_unit">2.4M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="90" data-display-value="90" data-unit="resource_unit">90</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="4" data-display-value="4" data-unit="resource_unit">4</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="259200" data-display-value="259200" data-unit="second">3天</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="394428" data-display-value="394428" data-unit="power">394,428</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:6:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A6%3A0#row-tg-6-0">城市中心 TG 6</a></td></tr><tr data-row-key="tg:6:0" id="row-tg-6-0"><th scope="row">TG6</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="48000000" data-unit="resource_unit">48M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="9600000" data-unit="resource_unit">9.6M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2400000" data-unit="resource_unit">2.4M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="45" data-display-value="45" data-unit="resource_unit">45</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="9" data-display-value="9" data-unit="resource_unit">9</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="259200" data-display-value="259200" data-unit="second">3天</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="402540" data-display-value="402540" data-unit="power">402,540</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:6:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A6%3A0#row-tg-6-0">城市中心 TG 6</a></td></tr><tr data-row-key="tg:6:1" id="row-tg-6-1"><th scope="row">TG6-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="10000000" data-unit="resource_unit">10M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2700000" data-unit="resource_unit">2.7M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="6" data-display-value="6" data-unit="resource_unit">6</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="311040" data-display-value="311040" data-unit="second">3天 14小時 24分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="410652" data-display-value="410652" data-unit="power">410,652</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:7:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A7%3A0#row-tg-7-0">城市中心 TG 7</a></td></tr><tr data-row-key="tg:6:2" id="row-tg-6-2"><th scope="row">TG6-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="10000000" data-unit="resource_unit">10M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2700000" data-unit="resource_unit">2.7M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="6" data-display-value="6" data-unit="resource_unit">6</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="311040" data-display-value="311040" data-unit="second">3天 14小時 24分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="418764" data-display-value="418764" data-unit="power">418,764</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:7:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A7%3A0#row-tg-7-0">城市中心 TG 7</a></td></tr><tr data-row-key="tg:6:3" id="row-tg-6-3"><th scope="row">TG6-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="10000000" data-unit="resource_unit">10M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2700000" data-unit="resource_unit">2.7M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="6" data-display-value="6" data-unit="resource_unit">6</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="311040" data-display-value="311040" data-unit="second">3天 14小時 24分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="426876" data-display-value="426876" data-unit="power">426,876</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:7:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A7%3A0#row-tg-7-0">城市中心 TG 7</a></td></tr><tr data-row-key="tg:6:4" id="row-tg-6-4"><th scope="row">TG6-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="10000000" data-unit="resource_unit">10M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2700000" data-unit="resource_unit">2.7M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="6" data-display-value="6" data-unit="resource_unit">6</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="311040" data-display-value="311040" data-unit="second">3天 14小時 24分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="434988" data-display-value="434988" data-unit="power">434,988</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:7:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A7%3A0#row-tg-7-0">城市中心 TG 7</a></td></tr><tr data-row-key="tg:7:0" id="row-tg-7-0"><th scope="row">TG7</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="54000000" data-unit="resource_unit">54M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="10000000" data-unit="resource_unit">10M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="2700000" data-unit="resource_unit">2.7M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="54" data-display-value="54" data-unit="resource_unit">54</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="13" data-display-value="13" data-unit="resource_unit">13</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="311040" data-display-value="311040" data-unit="second">3天 14小時 24分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="443100" data-display-value="443100" data-unit="power">443,100</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:7:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A7%3A0#row-tg-7-0">城市中心 TG 7</a></td></tr><tr data-row-key="tg:7:1" id="row-tg-7-1"><th scope="row">TG7-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="13000000" data-unit="resource_unit">13M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3300000" data-unit="resource_unit">3.3M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="9" data-display-value="9" data-unit="resource_unit">9</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="345600" data-display-value="345600" data-unit="second">4天</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="451212" data-display-value="451212" data-unit="power">451,212</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:8:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A8%3A0#row-tg-8-0">城市中心 TG 8</a></td></tr><tr data-row-key="tg:7:2" id="row-tg-7-2"><th scope="row">TG7-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="13000000" data-unit="resource_unit">13M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3300000" data-unit="resource_unit">3.3M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="9" data-display-value="9" data-unit="resource_unit">9</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="345600" data-display-value="345600" data-unit="second">4天</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="459324" data-display-value="459324" data-unit="power">459,324</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:8:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A8%3A0#row-tg-8-0">城市中心 TG 8</a></td></tr><tr data-row-key="tg:7:3" id="row-tg-7-3"><th scope="row">TG7-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="13000000" data-unit="resource_unit">13M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3300000" data-unit="resource_unit">3.3M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="9" data-display-value="9" data-unit="resource_unit">9</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="345600" data-display-value="345600" data-unit="second">4天</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="467436" data-display-value="467436" data-unit="power">467,436</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:8:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A8%3A0#row-tg-8-0">城市中心 TG 8</a></td></tr><tr data-row-key="tg:7:4" id="row-tg-7-4"><th scope="row">TG7-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="13000000" data-unit="resource_unit">13M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3300000" data-unit="resource_unit">3.3M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="9" data-display-value="9" data-unit="resource_unit">9</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="345600" data-display-value="345600" data-unit="second">4天</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="475548" data-display-value="475548" data-unit="power">475,548</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:8:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A8%3A0#row-tg-8-0">城市中心 TG 8</a></td></tr><tr data-row-key="tg:8:0" id="row-tg-8-0"><th scope="row">TG8</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="66000000" data-unit="resource_unit">66M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="13000000" data-unit="resource_unit">13M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3300000" data-unit="resource_unit">3.3M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="108" data-display-value="108" data-unit="resource_unit">108</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="9" data-display-value="9" data-unit="resource_unit">9</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="345600" data-display-value="345600" data-unit="second">4天</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="483660" data-display-value="483660" data-unit="power">483,660</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8112" data-display-value="8112" data-unit="power">8,112</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:8:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A8%3A0#row-tg-8-0">城市中心 TG 8</a></td></tr><tr data-row-key="tg:8:1" id="row-tg-8-1"><th scope="row">TG8-1</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="14000000" data-unit="resource_unit">14M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3600000" data-unit="resource_unit">3.6M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="13" data-display-value="13" data-unit="resource_unit">13</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="224640" data-display-value="224640" data-unit="second">2天 14小時 24分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="492348" data-display-value="492348" data-unit="power">492,348</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8688" data-display-value="8688" data-unit="power">8,688</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:9:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A9%3A0#row-tg-9-0">城市中心 TG 9</a></td></tr><tr data-row-key="tg:8:2" id="row-tg-8-2"><th scope="row">TG8-2</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="14000000" data-unit="resource_unit">14M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3600000" data-unit="resource_unit">3.6M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="13" data-display-value="13" data-unit="resource_unit">13</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="224640" data-display-value="224640" data-unit="second">2天 14小時 24分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="501036" data-display-value="501036" data-unit="power">501,036</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8688" data-display-value="8688" data-unit="power">8,688</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:9:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A9%3A0#row-tg-9-0">城市中心 TG 9</a></td></tr><tr data-row-key="tg:8:3" id="row-tg-8-3"><th scope="row">TG8-3</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="14000000" data-unit="resource_unit">14M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3600000" data-unit="resource_unit">3.6M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="13" data-display-value="13" data-unit="resource_unit">13</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="224640" data-display-value="224640" data-unit="second">2天 14小時 24分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="509724" data-display-value="509724" data-unit="power">509,724</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8688" data-display-value="8688" data-unit="power">8,688</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:9:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A9%3A0#row-tg-9-0">城市中心 TG 9</a></td></tr><tr data-row-key="tg:8:4" id="row-tg-8-4"><th scope="row">TG8-4</th><td class="kd-num " data-field="bread" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="wood" data-status="held" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="stone" data-status="held" data-value="null" data-display-value="14000000" data-unit="resource_unit">14M</td><td class="kd-num " data-field="iron" data-status="held" data-value="null" data-display-value="3600000" data-unit="resource_unit">3.6M</td><td class="kd-num " data-field="truegold" data-status="verified_source_parse" data-value="126" data-display-value="126" data-unit="resource_unit">126</td><td class="kd-num " data-field="tempered_truegold" data-status="verified_source_parse" data-value="13" data-display-value="13" data-unit="resource_unit">13</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="verified_source_parse" data-value="224640" data-display-value="224640" data-unit="second">2天 14小時 24分</td><td class="kd-num " data-field="power" data-status="verified_source_parse" data-value="518412" data-display-value="518412" data-unit="power">518,412</td><td class="kd-num " data-field="powerIncrease" data-status="derived_verified" data-value="8688" data-display-value="8688" data-unit="power">8,688</td><td data-field="prerequisites" class="kd-building-prerequisites"><a data-prereq-building-id="ks:building:town-center" data-prereq-key="tg:9:0" href="/zh-tw/buildings/town-center.html?stage=tg&amp;level=tg%3A9%3A0#row-tg-9-0">城市中心 TG 9</a></td></tr><tr data-row-key="tg:9:0" id="row-tg-9-0"><th scope="row">TG 9</th><td class="kd-num " data-field="bread" data-status="restored_legacy_display" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="wood" data-status="restored_legacy_display" data-value="null" data-display-value="72000000" data-unit="resource_unit">72M</td><td class="kd-num " data-field="stone" data-status="restored_legacy_display" data-value="null" data-display-value="14000000" data-unit="resource_unit">14M</td><td class="kd-num " data-field="iron" data-status="restored_legacy_display" data-value="null" data-display-value="3600000" data-unit="resource_unit">3.6M</td><td class="kd-num " data-field="truegold" data-status="restored_legacy_display" data-value="63" data-display-value="63" data-unit="resource_unit">63</td><td class="kd-num " data-field="tempered_truegold" data-status="restored_legacy_display" data-value="27" data-display-value="27" data-unit="resource_unit">27</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="restored_legacy_display" data-value="224640" data-display-value="224640" data-unit="second">2天 14小時 24分</td><td class="kd-num " data-field="power" data-status="restored_legacy_display" data-value="527100" data-display-value="527100" data-unit="power">527,100</td><td class="kd-num " data-field="powerIncrease" data-status="missing" data-value="null" data-display-value="null" data-unit="">–</td><td data-field="prerequisites" class="kd-building-prerequisites"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 9</a></td></tr><tr data-row-key="tg:9:1" id="row-tg-9-1"><th scope="row">TG 9-1</th><td class="kd-num " data-field="bread" data-status="restored_legacy_display" data-value="null" data-display-value="84000000" data-unit="resource_unit">84M</td><td class="kd-num " data-field="wood" data-status="restored_legacy_display" data-value="null" data-display-value="84000000" data-unit="resource_unit">84M</td><td class="kd-num " data-field="stone" data-status="restored_legacy_display" data-value="null" data-display-value="16000000" data-unit="resource_unit">16M</td><td class="kd-num " data-field="iron" data-status="restored_legacy_display" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="truegold" data-status="restored_legacy_display" data-value="157" data-display-value="157" data-unit="resource_unit">157</td><td class="kd-num " data-field="tempered_truegold" data-status="restored_legacy_display" data-value="31" data-display-value="31" data-unit="resource_unit">31</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="restored_legacy_display" data-value="345600" data-display-value="345600" data-unit="second">4天</td><td class="kd-num " data-field="power" data-status="restored_legacy_display" data-value="535788" data-display-value="535788" data-unit="power">535,788</td><td class="kd-num " data-field="powerIncrease" data-status="missing" data-value="null" data-display-value="null" data-unit="">–</td><td data-field="prerequisites" class="kd-building-prerequisites"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td></tr><tr data-row-key="tg:9:2" id="row-tg-9-2"><th scope="row">TG 9-2</th><td class="kd-num " data-field="bread" data-status="restored_legacy_display" data-value="null" data-display-value="84000000" data-unit="resource_unit">84M</td><td class="kd-num " data-field="wood" data-status="restored_legacy_display" data-value="null" data-display-value="84000000" data-unit="resource_unit">84M</td><td class="kd-num " data-field="stone" data-status="restored_legacy_display" data-value="null" data-display-value="16000000" data-unit="resource_unit">16M</td><td class="kd-num " data-field="iron" data-status="restored_legacy_display" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="truegold" data-status="restored_legacy_display" data-value="157" data-display-value="157" data-unit="resource_unit">157</td><td class="kd-num " data-field="tempered_truegold" data-status="restored_legacy_display" data-value="31" data-display-value="31" data-unit="resource_unit">31</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="restored_legacy_display" data-value="345600" data-display-value="345600" data-unit="second">4天</td><td class="kd-num " data-field="power" data-status="restored_legacy_display" data-value="544476" data-display-value="544476" data-unit="power">544,476</td><td class="kd-num " data-field="powerIncrease" data-status="missing" data-value="null" data-display-value="null" data-unit="">–</td><td data-field="prerequisites" class="kd-building-prerequisites"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td></tr><tr data-row-key="tg:9:3" id="row-tg-9-3"><th scope="row">TG 9-3</th><td class="kd-num " data-field="bread" data-status="restored_legacy_display" data-value="null" data-display-value="84000000" data-unit="resource_unit">84M</td><td class="kd-num " data-field="wood" data-status="restored_legacy_display" data-value="null" data-display-value="84000000" data-unit="resource_unit">84M</td><td class="kd-num " data-field="stone" data-status="restored_legacy_display" data-value="null" data-display-value="16000000" data-unit="resource_unit">16M</td><td class="kd-num " data-field="iron" data-status="restored_legacy_display" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="truegold" data-status="restored_legacy_display" data-value="157" data-display-value="157" data-unit="resource_unit">157</td><td class="kd-num " data-field="tempered_truegold" data-status="restored_legacy_display" data-value="31" data-display-value="31" data-unit="resource_unit">31</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="restored_legacy_display" data-value="345600" data-display-value="345600" data-unit="second">4天</td><td class="kd-num " data-field="power" data-status="restored_legacy_display" data-value="553164" data-display-value="553164" data-unit="power">553,164</td><td class="kd-num " data-field="powerIncrease" data-status="missing" data-value="null" data-display-value="null" data-unit="">–</td><td data-field="prerequisites" class="kd-building-prerequisites"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td></tr><tr data-row-key="tg:9:4" id="row-tg-9-4"><th scope="row">TG 9-4</th><td class="kd-num " data-field="bread" data-status="restored_legacy_display" data-value="null" data-display-value="84000000" data-unit="resource_unit">84M</td><td class="kd-num " data-field="wood" data-status="restored_legacy_display" data-value="null" data-display-value="84000000" data-unit="resource_unit">84M</td><td class="kd-num " data-field="stone" data-status="restored_legacy_display" data-value="null" data-display-value="16000000" data-unit="resource_unit">16M</td><td class="kd-num " data-field="iron" data-status="restored_legacy_display" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="truegold" data-status="restored_legacy_display" data-value="157" data-display-value="157" data-unit="resource_unit">157</td><td class="kd-num " data-field="tempered_truegold" data-status="restored_legacy_display" data-value="31" data-display-value="31" data-unit="resource_unit">31</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="restored_legacy_display" data-value="345600" data-display-value="345600" data-unit="second">4天</td><td class="kd-num " data-field="power" data-status="restored_legacy_display" data-value="561852" data-display-value="561852" data-unit="power">561,852</td><td class="kd-num " data-field="powerIncrease" data-status="missing" data-value="null" data-display-value="null" data-unit="">–</td><td data-field="prerequisites" class="kd-building-prerequisites"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td></tr><tr data-row-key="tg:10:0" id="row-tg-10-0"><th scope="row">TG 10</th><td class="kd-num " data-field="bread" data-status="restored_legacy_display" data-value="null" data-display-value="84000000" data-unit="resource_unit">84M</td><td class="kd-num " data-field="wood" data-status="restored_legacy_display" data-value="null" data-display-value="84000000" data-unit="resource_unit">84M</td><td class="kd-num " data-field="stone" data-status="restored_legacy_display" data-value="null" data-display-value="16000000" data-unit="resource_unit">16M</td><td class="kd-num " data-field="iron" data-status="restored_legacy_display" data-value="null" data-display-value="7200000" data-unit="resource_unit">7.2M</td><td class="kd-num " data-field="truegold" data-status="restored_legacy_display" data-value="78" data-display-value="78" data-unit="resource_unit">78</td><td class="kd-num " data-field="tempered_truegold" data-status="restored_legacy_display" data-value="63" data-display-value="63" data-unit="resource_unit">63</td><td class="kd-num kd-building-time" data-field="timeSeconds" data-status="restored_legacy_display" data-value="345600" data-display-value="345600" data-unit="second">4天</td><td class="kd-num " data-field="power" data-status="restored_legacy_display" data-value="570540" data-display-value="570540" data-unit="power">570,540</td><td class="kd-num " data-field="powerIncrease" data-status="missing" data-value="null" data-display-value="null" data-unit="">–</td><td data-field="prerequisites" class="kd-building-prerequisites"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td></tr></tbody></table></div><p class="kd-building-reference-note">– 表示尚無可確認的數值。實際時間會隨增益與進度條件改變。</p></section><span id="ico-info" class="kd-building-anchor"></span><span id="ico-time" class="kd-building-anchor"></span><span id="wa-cards" class="kd-building-anchor"></span><span id="overview-anchor" class="kd-building-anchor"></span><section id="effects" class="kd-building-section"><h2>效果與補充資料</h2><details class="kd-building-description"><summary>閱讀說明</summary><p>下列建造時間為基礎時間，未計入王國增益、科技研究、索爾技能等縮時效果。因此，多數玩家的實際建造時間會比這裡列出的時間短。</p></details><span id="overview" class="kd-building-anchor"></span><section id="legacy-war-academy-overview" class="kd-building-supplement-section">
+        <h2>概要</h2>
+        <p>戰爭學院研究需要新材料<strong>真金粉末（Truegold Dust）</strong>，同時也會消耗一般資源（麵包／木材／石材／鐵礦）。</p>
 
-<body>
-  <!-- Inline SVG for NOTE / Time -->
-  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden">
-    <symbol id="ico-info" viewBox="0 0 24 24">
-      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
-      <path d="M12 10v7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-      <path d="M12 7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="ico-time" viewBox="0 0 24 24">
-      <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2z" fill="currentColor"/>
-      <path d="M12 6v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
-  </svg>
+        <div role="note" aria-label="注意事項" class="kd-building-supplement-note">
 
-  <div class="wrap">
-    <header class="top">
-      <div class="brand">
-        <a href="/zh-tw/" aria-label="Kingshot Data 首頁">
-          <img src="/img/kingshotdata-logo.png" alt="Kingshot Data" loading="eager" fetchpriority="high" width="28" height="28" decoding="async">
-          <span>Kingshot Data</span>
-        </a>
-      </div>
-      <nav class="lang" aria-label="Language">
-        <a href="/en/buildings/war-academy.html">EN</a>
-        <a href="/ko/buildings/war-academy.html">KO</a>
-        <a href="/ja/buildings/war-academy.html">JA</a>
-        <a href="/zh-tw/buildings/war-academy.html" aria-current="page">ZH-TW</a>
-      </nav>
-    </header>
-
-    <nav class="section-tabs" aria-label="區塊導覽">
-      <a href="#overview">概覽</a>
-      <a href="#exchange">兌換</a>
-      <a href="#pictures">圖片</a>
-      <a href="#requirements">需求</a>
-      <a href="#related">相關</a>
-    </nav>
-
-    <main id="main"><aside data-verification-note style="max-width:1100px;margin:16px auto;padding:14px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;color:#334155"><strong>資料驗證：部分完成</strong><p style="margin:6px 0 0">本頁數值、效果及解鎖條件尚未全部驗證。未明確標示已確認的數值均為未驗證參考資料。使用未驗證核心資料的計算已停用。參考資料請核對目前遊戲畫面。</p><p>2026-10-06核對：8種一般建築Lv.1–30資源表與市政廳Lv.2–30基本時間。原文空白費用、學院Lv.12木材單位誤植、前置條件、TG階段及戰爭學院費用仍待確認。 </p></aside>
-      <div class="crumbs">
-        <a href="/zh-tw/">首頁</a> <span class="muted">›</span>
-        <a href="/zh-tw/buildings/">建築</a> <span class="muted">›</span>
-        <span>戰爭學院</span>
-      </div>
-
-      <div class="hero">
-        <img src="/img/buildings/war-academy.webp" alt="戰爭學院（Kingshot）" loading="eager" fetchpriority="high" width="160" height="160" decoding="async">
-        <div>
-          <h1>戰爭學院</h1>
-          <p class="sub">
-            戰爭學院通常在王國約 <strong>220 天</strong> 左右解鎖。
-            建成後可解鎖 <strong>T11 部隊</strong>，並提供大幅提升的小隊規模、集結容量與部隊屬性等強力強化。
-          </p>
-          <div class="quote">
-            戰爭學院研究 Truegold Dust 在戰場上的運用，以提升士兵戰力。
-          </div>
-
-          <div class="jump" aria-label="快速跳轉">
-            <a href="#overview">概覽</a><span class="dotsep">•</span>
-            <a href="#exchange">兌換</a><span class="dotsep">•</span>
-            <a href="#pictures">圖片</a><span class="dotsep">•</span>
-            <a href="#requirements">需求</a><span class="dotsep">•</span>
-            <a href="#related">相關</a>
-          </div>
-        </div>
-      </div>
-
-      <section id="overview">
-        <h2>概覽</h2>
-        <p>
-          在戰爭學院進行研究需要新材料 <strong>Truegold Dust</strong>，
-          同時也會消耗一般資源（糧食／木材／石材／鐵）。
-        </p>
-
-        <div class="note" role="note" aria-label="Note">
-          <svg class="note-ico" aria-hidden="true"><use href="#ico-info"></use></svg>
           <div>
-            <strong>提示:</strong>
-            實際消耗可能受英雄、研究與增益影響而變動；此處為基礎/原始數值。
-          </div>
+            <strong>注意事項:</strong>實際消耗會隨英雄、研究與增益改變。這裡刊登基礎數值。</div>
         </div>
       </section>
+<span id="exchange" class="kd-building-anchor"></span><section id="legacy-war-academy-exchange" class="kd-building-supplement-section">
+        <h2>真金粉末兌換</h2>
+        <p>除了購買禮包，也能在戰爭學院以金幣或真金兌換真金粉末。</p>
 
-      <section id="exchange">
-        <h2>Truegold Dust 兌換</h2>
-        <p class="muted" style="margin-top:-2px">
-          Truegold Dust 可透過購買禮包取得，也可在戰爭學院內用金幣/Truegold 兌換。
-        </p>
-
-        <div class="img-wide" aria-label="Truegold Dust 兌換畫面">
-          <img src="/img/buildings/war-academy1.webp" alt="戰爭學院：Truegold Dust 兌換介面" loading="lazy" decoding="async" width="465" height="316">
+        <div aria-label="真金粉末兌換畫面">
+          <img src="/img/buildings/war-academy1.webp" alt="戰爭學院：真金粉末兌換介面" loading="lazy" decoding="async" width="465" height="316">
         </div>
 
-        <div class="grid-2">
-          <div class="box">
-            <h3>金幣兌換</h3>
-            <ul class="clean">
-              <li><strong>5,000 金幣</strong> → <strong>1 Truegold Dust</strong></li>
-              <li>每日最多 <strong>20 次</strong></li>
+        <div>
+          <div>
+            <h3>金幣交換</h3>
+            <ul>
+              <li><strong>金幣 5,000</strong> → <strong>粉末 1</strong></li>
+              <li>1天最大 <strong>20回</strong> 交換</li>
             </ul>
           </div>
-          <div class="box">
-            <h3>Truegold 兌換</h3>
-            <ul class="clean">
-              <li><strong>10 Truegold</strong> → <strong>13 Truegold Dust</strong></li>
-              <li>每日最多 <strong>200 次</strong>（最高 <strong>2,600</strong> Dust/日）</li>
+          <div>
+            <h3>真金兌換</h3>
+            <ul>
+              <li><strong>真金 10</strong> → <strong>粉末 13</strong></li>
+              <li>1天最大 <strong>200回</strong> 交換（最大 <strong>2,600</strong> 粉末／天）</li>
             </ul>
           </div>
         </div>
       </section>
+<span id="pictures" class="kd-building-anchor"></span><section id="legacy-war-academy-pictures" class="kd-building-supplement-section">
+        <h2>画像</h2>
+        <p>研究樹與主要畫面範例。</p>
 
-      <section id="pictures">
-        <h2>圖片</h2>
-        <p class="muted" style="margin-top:-2px">
-          研究樹與關鍵畫面示意。
-        </p>
-
-        <div class="img-grid" aria-label="戰爭學院圖片">
-          <figure class="pic">
-            <img src="/img/buildings/war-academy2.webp" alt="戰爭學院研究樹 (1)" loading="lazy" decoding="async" width="768" height="1279">
+        <div aria-label="戰爭學院画像">
+          <figure>
+            <img src="/img/buildings/war-academy2.webp" alt="戰爭學院 研究樹 (1)" loading="lazy" decoding="async" width="768" height="1279">
             <figcaption>研究樹 (1)</figcaption>
           </figure>
-          <figure class="pic">
-            <img src="/img/buildings/war-academy3.webp" alt="戰爭學院研究樹 (2)" loading="lazy" decoding="async" width="768" height="1279">
+          <figure>
+            <img src="/img/buildings/war-academy3.webp" alt="戰爭學院 研究樹 (2)" loading="lazy" decoding="async" width="768" height="1279">
             <figcaption>研究樹 (2)</figcaption>
           </figure>
-          <figure class="pic">
-            <img src="/img/buildings/war-academy4.webp" alt="戰爭學院研究樹 (3)" loading="lazy" decoding="async" width="768" height="1275">
+          <figure>
+            <img src="/img/buildings/war-academy4.webp" alt="戰爭學院 研究樹 (3)" loading="lazy" decoding="async" width="768" height="1275">
             <figcaption>研究樹 (3)</figcaption>
           </figure>
-          <figure class="pic">
-            <img src="/img/buildings/war-academy5.webp" alt="戰爭學院研究樹 (4)" loading="lazy" decoding="async" width="768" height="1275">
+          <figure>
+            <img src="/img/buildings/war-academy5.webp" alt="戰爭學院 研究樹 (4)" loading="lazy" decoding="async" width="768" height="1275">
             <figcaption>研究樹 (4)</figcaption>
           </figure>
         </div>
       </section>
+<section class="kd-building-supplement-section"><h2>建築效果與參考值 · 真金階段</h2><div class="kd-building-supplement-table-region" role="region" tabindex="0" aria-label="建築效果與參考值 · 真金階段"><span id="wa-table" class="kd-building-anchor"></span><table id="legacy-war-academy-wa-table" class="kd-building-supplement-table"><thead><tr><th scope="col" class="kd-building-supplement-level">等級</th><th scope="col">研究速度</th></tr></thead><tbody><tr><th scope="row" class="kd-building-supplement-level">TG 1</th><td class="kd-num">0.50%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 1-1</th><td class="kd-num">0.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 1-2</th><td class="kd-num">0.70%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 1-3</th><td class="kd-num">0.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 1-4</th><td class="kd-num">0.90%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 2</th><td class="kd-num">1.00%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 2-1</th><td class="kd-num">1.10%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 2-2</th><td class="kd-num">1.20%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 2-3</th><td class="kd-num">1.30%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 2-4</th><td class="kd-num">1.40%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 3</th><td class="kd-num">1.50%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 3-1</th><td class="kd-num">1.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 3-2</th><td class="kd-num">1.70%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 3-3</th><td class="kd-num">1.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 3-4</th><td class="kd-num">1.90%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 4</th><td class="kd-num">2.00%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 4-1</th><td class="kd-num">2.10%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 4-2</th><td class="kd-num">2.20%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 4-3</th><td class="kd-num">2.30%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 4-4</th><td class="kd-num">2.40%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 5</th><td class="kd-num">2.50%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 5-1</th><td class="kd-num">2.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 5-2</th><td class="kd-num">2.70%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 5-3</th><td class="kd-num">2.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 5-4</th><td class="kd-num">2.90%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 6</th><td class="kd-num">3.00%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 6-1</th><td class="kd-num">3.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 6-2</th><td class="kd-num">4.20%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 6-3</th><td class="kd-num">4.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 6-4</th><td class="kd-num">5.40%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 7</th><td class="kd-num">6.00%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 7-1</th><td class="kd-num">6.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 7-2</th><td class="kd-num">7.20%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 7-3</th><td class="kd-num">7.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 7-4</th><td class="kd-num">8.40%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 8</th><td class="kd-num">9.00%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 8-1</th><td class="kd-num">9.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 8-2</th><td class="kd-num">10.20%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 8-3</th><td class="kd-num">10.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 8-4</th><td class="kd-num">11.40%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9</th><td class="kd-num">12.00%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9-1</th><td class="kd-num">12.60%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9-2</th><td class="kd-num">13.20%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9-3</th><td class="kd-num">13.80%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 9-4</th><td class="kd-num">14.40%</td></tr><tr><th scope="row" class="kd-building-supplement-level">TG 10</th><td class="kd-num">15.00%</td></tr></tbody></table></div></section>
 
-      <section id="req">
-        <span id="requirements" class="anchor"></span>
-        <h2>需求</h2>
-        <p class="muted" style="margin-top:-2px">
-          戰爭學院為 Truegold 階段建築，以下依照遊戲內 TG 進度整理。
-        </p>
+<span id="req" class="kd-building-anchor"></span><section id="legacy-war-academy-req" class="kd-building-supplement-section">
 
-        <div class="table-wrap data-table" aria-label="戰爭學院需求表">
-          <table id="wa-table" class="sticky-firstcol">
-            <colgroup>
-              <col style="width:9%">
-              <col style="width:16%">
-              <col style="width:9%">
-              <col style="width:9%">
-              <col style="width:9%">
-              <col style="width:9%">
-              <col style="width:8%">
-              <col style="width:10%">
-              <col style="width:12%">
-              <col style="width:10%">
-              <col style="width:9%">
-            </colgroup>
-            <thead>
-              <tr>
-                <th class="center">等級</th>
-                <th class="req-h">需求建築</th>
 
-                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/bread.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">糧食</span></th>
-                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/wood.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">木材</span></th>
-                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/stone.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">石材</span></th>
-                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/iron.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">鐵</span></th>
+        <p>戰爭學院屬於真金 TG 階段建築，下表依遊戲中的 TG 進度整理。</p>
 
-                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/truegold.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">Truegold</span></th>
-                <th class="num"><span class="th-flex"><img class="th-ico" src="/img/tempered-truegold.webp" alt="" aria-hidden="true" width="14" height="14" decoding="async" loading="lazy">淬鍊</span></th>
 
-                <th><span class="th-flex"><svg aria-hidden="true" width="16" height="16"><use href="#ico-time"></use></svg>時間</span></th>
-                <th class="num">戰力</th>
-                <th class="num">研究速度</th>
-              </tr>
-            </thead>
 
-            <tbody>
-              <!-- Data same as EN base (language only) -->
-              <tr><td class="center">TG 1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 1</a></td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td>2s</td><td class="num">217,260</td><td class="num">0.50%</td></tr>
 
-              <tr><td class="center">TG 1-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 2</a></td><td class="num">36M</td><td class="num">36M</td><td class="num">7.2M</td><td class="num">1.8M</td><td class="num">71</td><td class="num">–</td><td>1d 19h 12m</td><td class="num">224,148</td><td class="num">0.60%</td></tr>
-              <tr><td class="center">TG 1-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 2</a></td><td class="num">36M</td><td class="num">36M</td><td class="num">7.2M</td><td class="num">1.8M</td><td class="num">71</td><td class="num">–</td><td>1d 19h 12m</td><td class="num">231,036</td><td class="num">0.70%</td></tr>
-              <tr><td class="center">TG 1-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 2</a></td><td class="num">36M</td><td class="num">36M</td><td class="num">7.2M</td><td class="num">1.8M</td><td class="num">71</td><td class="num">–</td><td>1d 19h 12m</td><td class="num">237,924</td><td class="num">0.80%</td></tr>
-              <tr><td class="center">TG 1-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 2</a></td><td class="num">36M</td><td class="num">36M</td><td class="num">7.2M</td><td class="num">1.8M</td><td class="num">71</td><td class="num">–</td><td>1d 19h 12m</td><td class="num">244,812</td><td class="num">0.90%</td></tr>
-              <tr><td class="center">TG 2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 2</a></td><td class="num">36M</td><td class="num">36M</td><td class="num">7.2M</td><td class="num">1.8M</td><td class="num">71</td><td class="num">–</td><td>1d 19h 12m</td><td class="num">251,700</td><td class="num">1.00%</td></tr>
-
-              <tr><td class="center">TG 2-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 3</a></td><td class="num">39M</td><td class="num">39M</td><td class="num">7.9M</td><td class="num">1.9M</td><td class="num">107</td><td class="num">–</td><td>2d 4h 48m</td><td class="num">258,588</td><td class="num">1.10%</td></tr>
-              <tr><td class="center">TG 2-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 3</a></td><td class="num">39M</td><td class="num">39M</td><td class="num">7.9M</td><td class="num">1.9M</td><td class="num">107</td><td class="num">–</td><td>2d 4h 48m</td><td class="num">265,476</td><td class="num">1.20%</td></tr>
-              <tr><td class="center">TG 2-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 3</a></td><td class="num">39M</td><td class="num">39M</td><td class="num">7.9M</td><td class="num">1.9M</td><td class="num">107</td><td class="num">–</td><td>2d 4h 48m</td><td class="num">272,364</td><td class="num">1.30%</td></tr>
-              <tr><td class="center">TG 2-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 3</a></td><td class="num">39M</td><td class="num">39M</td><td class="num">7.9M</td><td class="num">1.9M</td><td class="num">107</td><td class="num">–</td><td>2d 4h 48m</td><td class="num">279,252</td><td class="num">1.40%</td></tr>
-              <tr><td class="center">TG 3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 3</a></td><td class="num">39M</td><td class="num">39M</td><td class="num">7.9M</td><td class="num">1.9M</td><td class="num">107</td><td class="num">–</td><td>2d 4h 48m</td><td class="num">286,140</td><td class="num">1.50%</td></tr>
-
-              <tr><td class="center">TG 3-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 4</a></td><td class="num">41M</td><td class="num">41M</td><td class="num">8.2M</td><td class="num">2M</td><td class="num">126</td><td class="num">–</td><td>2d 9h 36m</td><td class="num">293,724</td><td class="num">1.60%</td></tr>
-              <tr><td class="center">TG 3-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 4</a></td><td class="num">41M</td><td class="num">41M</td><td class="num">8.2M</td><td class="num">2M</td><td class="num">126</td><td class="num">–</td><td>2d 9h 36m</td><td class="num">301,308</td><td class="num">1.70%</td></tr>
-              <tr><td class="center">TG 3-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 4</a></td><td class="num">41M</td><td class="num">41M</td><td class="num">8.2M</td><td class="num">2M</td><td class="num">126</td><td class="num">–</td><td>2d 9h 36m</td><td class="num">308,892</td><td class="num">1.80%</td></tr>
-              <tr><td class="center">TG 3-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 4</a></td><td class="num">41M</td><td class="num">41M</td><td class="num">8.2M</td><td class="num">2M</td><td class="num">126</td><td class="num">–</td><td>2d 9h 36m</td><td class="num">316,476</td><td class="num">1.90%</td></tr>
-              <tr><td class="center">TG 4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 4</a></td><td class="num">41M</td><td class="num">41M</td><td class="num">8.2M</td><td class="num">2M</td><td class="num">126</td><td class="num">–</td><td>2d 9h 36m</td><td class="num">324,060</td><td class="num">2.00%</td></tr>
-
-              <tr><td class="center">TG 4-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 5</a></td><td class="num">42M</td><td class="num">42M</td><td class="num">8.2M</td><td class="num">2.1M</td><td class="num">150</td><td class="num">–</td><td>2d 19h 12m</td><td class="num">331,644</td><td class="num">2.10%</td></tr>
-              <tr><td class="center">TG 4-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 5</a></td><td class="num">42M</td><td class="num">42M</td><td class="num">8.2M</td><td class="num">2.1M</td><td class="num">150</td><td class="num">–</td><td>2d 19h 12m</td><td class="num">339,228</td><td class="num">2.20%</td></tr>
-              <tr><td class="center">TG 4-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 5</a></td><td class="num">42M</td><td class="num">42M</td><td class="num">8.2M</td><td class="num">2.1M</td><td class="num">150</td><td class="num">–</td><td>2d 19h 12m</td><td class="num">346,812</td><td class="num">2.30%</td></tr>
-              <tr><td class="center">TG 4-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 5</a></td><td class="num">42M</td><td class="num">42M</td><td class="num">8.2M</td><td class="num">2.1M</td><td class="num">150</td><td class="num">–</td><td>2d 19h 12m</td><td class="num">354,396</td><td class="num">2.40%</td></tr>
-              <tr><td class="center">TG 5</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 5</a></td><td class="num">42M</td><td class="num">42M</td><td class="num">8.2M</td><td class="num">2.1M</td><td class="num">150</td><td class="num">–</td><td>2d 19h 12m</td><td class="num">361,980</td><td class="num">2.50%</td></tr>
-
-              <tr><td class="center">TG 5-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 6</a></td><td class="num">48M</td><td class="num">48M</td><td class="num">9.6M</td><td class="num">2.4M</td><td class="num">90</td><td class="num">4</td><td>3d</td><td class="num">370,092</td><td class="num">2.60%</td></tr>
-              <tr><td class="center">TG 5-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 6</a></td><td class="num">48M</td><td class="num">48M</td><td class="num">9.6M</td><td class="num">2.4M</td><td class="num">90</td><td class="num">4</td><td>3d</td><td class="num">378,204</td><td class="num">2.70%</td></tr>
-              <tr><td class="center">TG 5-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 6</a></td><td class="num">48M</td><td class="num">48M</td><td class="num">9.6M</td><td class="num">2.4M</td><td class="num">90</td><td class="num">4</td><td>3d</td><td class="num">386,316</td><td class="num">2.80%</td></tr>
-              <tr><td class="center">TG 5-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 6</a></td><td class="num">48M</td><td class="num">48M</td><td class="num">9.6M</td><td class="num">2.4M</td><td class="num">90</td><td class="num">4</td><td>3d</td><td class="num">394,428</td><td class="num">2.90%</td></tr>
-              <tr><td class="center">TG 6</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 6</a></td><td class="num">48M</td><td class="num">48M</td><td class="num">9.6M</td><td class="num">2.4M</td><td class="num">45</td><td class="num">9</td><td>3d</td><td class="num">402,540</td><td class="num">3.00%</td></tr>
-
-              <tr><td class="center">TG 6-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 7</a></td><td class="num">54M</td><td class="num">54M</td><td class="num">10M</td><td class="num">2.7M</td><td class="num">108</td><td class="num">6</td><td>3d 14h 24m</td><td class="num">410,652</td><td class="num">3.60%</td></tr>
-              <tr><td class="center">TG 6-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 7</a></td><td class="num">54M</td><td class="num">54M</td><td class="num">10M</td><td class="num">2.7M</td><td class="num">108</td><td class="num">6</td><td>3d 14h 24m</td><td class="num">418,764</td><td class="num">4.20%</td></tr>
-              <tr><td class="center">TG 6-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 7</a></td><td class="num">54M</td><td class="num">54M</td><td class="num">10M</td><td class="num">2.7M</td><td class="num">108</td><td class="num">6</td><td>3d 14h 24m</td><td class="num">426,876</td><td class="num">4.80%</td></tr>
-              <tr><td class="center">TG 6-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 7</a></td><td class="num">54M</td><td class="num">54M</td><td class="num">10M</td><td class="num">2.7M</td><td class="num">108</td><td class="num">6</td><td>3d 14h 24m</td><td class="num">434,988</td><td class="num">5.40%</td></tr>
-              <tr><td class="center">TG 7</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 7</a></td><td class="num">54M</td><td class="num">54M</td><td class="num">10M</td><td class="num">2.7M</td><td class="num">54</td><td class="num">13</td><td>3d 14h 24m</td><td class="num">443,100</td><td class="num">6.00%</td></tr>
-
-              <tr><td class="center">TG 7-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 8</a></td><td class="num">66M</td><td class="num">66M</td><td class="num">13M</td><td class="num">3.3M</td><td class="num">108</td><td class="num">9</td><td>4d</td><td class="num">451,212</td><td class="num">6.60%</td></tr>
-              <tr><td class="center">TG 7-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 8</a></td><td class="num">66M</td><td class="num">66M</td><td class="num">13M</td><td class="num">3.3M</td><td class="num">108</td><td class="num">9</td><td>4d</td><td class="num">459,324</td><td class="num">7.20%</td></tr>
-              <tr><td class="center">TG 7-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 8</a></td><td class="num">66M</td><td class="num">66M</td><td class="num">13M</td><td class="num">3.3M</td><td class="num">108</td><td class="num">9</td><td>4d</td><td class="num">467,436</td><td class="num">7.80%</td></tr>
-              <tr><td class="center">TG 7-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 8</a></td><td class="num">66M</td><td class="num">66M</td><td class="num">13M</td><td class="num">3.3M</td><td class="num">108</td><td class="num">9</td><td>4d</td><td class="num">475,548</td><td class="num">8.40%</td></tr>
-              <tr><td class="center">TG 8</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 8</a></td><td class="num">66M</td><td class="num">66M</td><td class="num">13M</td><td class="num">3.3M</td><td class="num">54</td><td class="num">18</td><td>4d</td><td class="num">483,660</td><td class="num">9.00%</td></tr>
-
-              <tr><td class="center">TG 8-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 9</a></td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td class="num">126</td><td class="num">13</td><td>2d 14h 24m</td><td class="num">492,348</td><td class="num">9.60%</td></tr>
-              <tr><td class="center">TG 8-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 9</a></td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td class="num">126</td><td class="num">13</td><td>2d 14h 24m</td><td class="num">501,036</td><td class="num">10.20%</td></tr>
-              <tr><td class="center">TG 8-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 9</a></td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td class="num">126</td><td class="num">13</td><td>2d 14h 24m</td><td class="num">509,724</td><td class="num">10.80%</td></tr>
-              <tr><td class="center">TG 8-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 9</a></td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td class="num">126</td><td class="num">13</td><td>2d 14h 24m</td><td class="num">518,412</td><td class="num">11.40%</td></tr>
-              <tr><td class="center">TG 9</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 9</a></td><td class="num">72M</td><td class="num">72M</td><td class="num">14M</td><td class="num">3.6M</td><td class="num">63</td><td class="num">27</td><td>2d 14h 24m</td><td class="num">527,100</td><td class="num">12.00%</td></tr>
-
-              <tr><td class="center">TG 9-1</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">7.2M</td><td class="num">157</td><td class="num">31</td><td>4d</td><td class="num">535,788</td><td class="num">12.60%</td></tr>
-              <tr><td class="center">TG 9-2</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">7.2M</td><td class="num">157</td><td class="num">31</td><td>4d</td><td class="num">544,476</td><td class="num">13.20%</td></tr>
-              <tr><td class="center">TG 9-3</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">7.2M</td><td class="num">157</td><td class="num">31</td><td>4d</td><td class="num">553,164</td><td class="num">13.80%</td></tr>
-              <tr><td class="center">TG 9-4</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">7.2M</td><td class="num">157</td><td class="num">31</td><td>4d</td><td class="num">561,852</td><td class="num">14.40%</td></tr>
-              <tr><td class="center">TG 10</td><td class="req"><a href="/zh-tw/buildings/town-center.html#truegold">城市中心 TG 10</a></td><td class="num">84M</td><td class="num">84M</td><td class="num">16M</td><td class="num">7.2M</td><td class="num">78</td><td class="num">63</td><td>4d</td><td class="num">570,540</td><td class="num">15.00%</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="cards" id="wa-cards" aria-label="戰爭學院需求（手機卡片）"></div>
       </section>
-
-      <section id="waracademy-link">
+<span id="waracademy-link" class="kd-building-anchor"></span><section id="legacy-war-academy-waracademy-link" class="kd-building-supplement-section">
         <h2>戰爭學院研究樹</h2>
-        <p class="muted" style="margin-top:-2px">
-          戰爭學院解鎖後可進行的真金兵種研究與詳細研究成本，都可以在同一頁面一目了然查看。
-        </p>
-        <p>
-          你可以在一個頁面中集中查看真金步兵、真金弓兵、真金騎兵的研究資訊。
-        </p>
+        <p>查看解鎖戰爭學院後可進行的真金兵種研究與詳細研究費用。</p>
+        <p>在 1 個頁面查看真金步兵、真金弓兵與真金騎兵的研究資料。</p>
 
-        <div class="related">
-          <a class="pill" href="/waracademy">查看戰爭學院研究樹</a>
+        <div>
+          <a href="/waracademy">查看戰爭學院研究樹</a>
         </div>
       </section>
-
-      <section id="related">
+<section id="legacy-war-academy-related" class="kd-building-supplement-section">
         <h2>相關</h2>
-        <div class="related">
-          <a class="pill" href="/zh-tw/buildings/town-center.html">城市中心</a>
-          <a class="pill" href="/zh-tw/buildings/academy.html">學院</a>
-          <a class="pill" href="/zh-tw/buildings/truegold-crucible.html">真金熔爐</a>
+        <div>
+          <a href="/zh-tw/buildings/town-center.html">城市中心</a>
+          <a href="/zh-tw/buildings/academy.html">學院</a>
+          <a href="/zh-tw/buildings/truegold-crucible.html">真金溶鉱炉</a>
         </div>
       </section>
-
-
-
-
-
-
-
-
-<!-- kd-related:start --><section data-kd-related style="max-width:1100px;margin:28px auto;padding:18px;border-top:1px solid #cbd5e1"><h2>相關資料與計算工具</h2><p>各建築頁列出前置建築、資源與基本時間。規劃市政廳目標時，也要查看大使館與兵營條件。在建築計算器輸入目前等級，可以排除已完成的升級。基本時間與套用帳號加成後的時間應分開比較。</p><ul><li><a href="/zh-tw/buildings/">Kingshot 建築</a></li><li><a href="/zh-tw/calc-building/">建築計算器</a></li><li><a href="/zh-tw/guides/kingshot-f2p-guide.html">Kingshot 新手攻略 · 無課金／小課成長指南</a></li></ul></section><!-- kd-related:end -->
-</main>
-  </div>
-
-  <script>
-    (function(){
-      document.documentElement.classList.add('js');
-
-      var mqMobile = window.matchMedia('(max-width: 900px)');
-
-      function setStickyTop(){
-        var header = document.querySelector('header.top');
-        var tabs = document.querySelector('nav.section-tabs');
-        var isMobile = mqMobile.matches;
-
-        var hh = (isMobile && header) ? header.getBoundingClientRect().height : 0;
-        var th = (isMobile && tabs) ? tabs.getBoundingClientRect().height : 0;
-
-        document.documentElement.style.setProperty('--header-h', Math.round(hh) + 'px');
-        document.documentElement.style.setProperty('--tabs-h', Math.round(th) + 'px');
-        document.documentElement.style.setProperty('--sticky-top', Math.round(hh + th) + 'px');
-      }
-
-      function isDash(v){
-        if(!v) return true;
-        var t = String(v).trim();
-        return t === '–' || t === '-' || t === '';
-      }
-
-      function parseCompact(s){
-        var t = String(s || '').trim();
-        if(isDash(t)) return null;
-
-        t = t.replace(/,/g,'').toUpperCase();
-
-        var m = t.match(/^(\d+(?:\.\d+)?)([KMB])$/);
-        if(m){
-          var n = Number(m[1]);
-          var suf = m[2];
-          if(!Number.isFinite(n)) return null;
-          if(suf === 'K') return Math.round(n * 1e3);
-          if(suf === 'M') return Math.round(n * 1e6);
-          if(suf === 'B') return Math.round(n * 1e9);
-        }
-
-        var n2 = Number(t);
-        return Number.isFinite(n2) ? n2 : null;
-      }
-
-      function fmtKMB(n){
-        if(n === null) return '–';
-        if(n < 1000) return String(n);
-
-        var v, suf;
-        if(n >= 1e9){ v = n / 1e9; suf = 'B'; }
-        else if(n >= 1e6){ v = n / 1e6; suf = 'M'; }
-        else { v = n / 1e3; suf = 'k'; }
-
-        var out;
-        if(v >= 100 || Number.isInteger(v)) out = v.toFixed(0);
-        else out = (Math.round(v * 10) / 10).toFixed(1).replace(/\.0$/,'');
-
-        return out + suf;
-      }
-
-      function formatResourceCells(tableId, colIdxs){
-        var table = document.getElementById(tableId);
-        if(!table) return;
-
-        var rows = table.querySelectorAll('tbody tr');
-        rows.forEach(function(tr){
-          var tds = tr.querySelectorAll('td');
-          colIdxs.forEach(function(idx){
-            var td = tds[idx];
-            if(!td) return;
-
-            var raw = td.textContent.trim();
-            if(isDash(raw)) return;
-
-            td.dataset.raw = raw;
-
-            var n = parseCompact(raw);
-            if(n === null) return;
-
-            td.textContent = fmtKMB(n);
-          });
-        });
-      }
-
-      var ICON = {
-        bread: '/img/bread.webp',
-        wood: '/img/wood.webp',
-        stone: '/img/stone.webp',
-        iron: '/img/iron.webp',
-        truegold: '/img/truegold.webp',
-        tempered: '/img/tempered-truegold.webp'
-      };
-
-      function imgIcon(src){
-        return '<img class="icoimg" src="'+src+'" alt="" aria-hidden="true" width="18" height="18" loading="lazy" decoding="async">';
-      }
-
-      function makeResItem(src, label, value, rawTitle){
-        var titleAttr = rawTitle ? (' title="原值: '+ rawTitle.replace(/"/g,'&quot;') +'"') : '';
-        return (
-          '<div class="res-item"' + titleAttr + '>' +
-            '<div class="res-left">' +
-              imgIcon(src) +
-              '<div class="res-label">'+ label +'</div>' +
-            '</div>' +
-            '<div class="res-val">'+ value +'</div>' +
-          '</div>'
-        );
-      }
-
-      function svgUse(id){
-        return '<svg aria-hidden="true" viewBox="0 0 24 24"><use href="#'+id+'"></use></svg>';
-      }
-
-      function buildCardsFromWarAcademyTable(){
-        var table = document.getElementById('wa-table');
-        var target = document.getElementById('wa-cards');
-        if(!table || !target) return 0;
-
-        var rows = table.querySelectorAll('tbody tr');
-        if(!rows || !rows.length) return 0;
-
-        var html = '';
-        var count = 0;
-
-        rows.forEach(function(tr){
-          var td = tr.querySelectorAll('td');
-          if(!td || td.length < 11) return;
-
-          var lvl = td[0].textContent.trim();
-          var reqHTML = td[1].innerHTML.trim();
-
-          var bread = td[2].textContent.trim();
-          var wood  = td[3].textContent.trim();
-          var stone = td[4].textContent.trim();
-          var iron  = td[5].textContent.trim();
-          var tg    = td[6].textContent.trim();
-          var temp  = td[7].textContent.trim();
-          var time  = td[8].textContent.trim();
-          var power = td[9].textContent.trim();
-          var rs    = td[10].textContent.trim();
-
-          var breadRaw = td[2].dataset.raw || '';
-          var woodRaw  = td[3].dataset.raw || '';
-          var stoneRaw = td[4].dataset.raw || '';
-          var ironRaw  = td[5].dataset.raw || '';
-          var tgRaw    = td[6].dataset.raw || '';
-          var tempRaw  = td[7].dataset.raw || '';
-
-          var res = '';
-          if(!isDash(bread)) res += makeResItem(ICON.bread,'糧食', bread, breadRaw);
-          if(!isDash(wood))  res += makeResItem(ICON.wood,'木材', wood, woodRaw);
-          if(!isDash(stone)) res += makeResItem(ICON.stone,'石材', stone, stoneRaw);
-          if(!isDash(iron))  res += makeResItem(ICON.iron,'鐵', iron, ironRaw);
-          if(!isDash(tg))    res += makeResItem(ICON.truegold,'真金', tg, tgRaw);
-          if(!isDash(temp))  res += makeResItem(ICON.tempered,'淬鍊真金', temp, tempRaw);
-
-          var foot = '';
-          if(!isDash(time))  foot += '<span class="badge">'+ svgUse('ico-time') + '<span>時間: '+ time +'</span></span>';
-          if(!isDash(power)) foot += '<span class="badge"><span>戰力: '+ power +'</span></span>';
-          if(!isDash(rs))    foot += '<span class="badge"><span>研究: '+ rs +'</span></span>';
-
-          html += (
-            '<article class="card">' +
-              '<div class="card-head">' +
-                '<h3 class="card-title">' + lvl + '</h3>' +
-                '<div class="card-meta">' + (isDash(time) ? '' : ('時間<br><strong>'+ time +'</strong>')) + '</div>' +
-              '</div>' +
-              '<div class="card-req"><strong>需求:</strong> ' + reqHTML + '</div>' +
-              (res ? ('<div class="res-grid" aria-label="資源">'+ res +'</div>') : '') +
-              (foot ? ('<div class="card-foot">'+ foot +'</div>') : '') +
-            '</article>'
-          );
-
-          count++;
-        });
-
-        target.innerHTML = html;
-        return count;
-      }
-
-      function decorateTableNumbers(tableId, map){
-        var table = document.getElementById(tableId);
-        if(!table) return;
-
-        var rows = table.querySelectorAll('tbody tr');
-        rows.forEach(function(tr){
-          var tds = tr.querySelectorAll('td');
-          if(!tds || !tds.length) return;
-
-          Object.keys(map).forEach(function(key){
-            var idx = parseInt(key, 10);
-            var iconSrc = map[key];
-            var td = tds[idx];
-            if(!td) return;
-
-            var display = td.textContent.trim();
-            if(isDash(display)) return;
-
-            var raw = td.dataset.raw ? td.dataset.raw.trim() : '';
-            var title = raw ? (' title="原值: ' + raw.replace(/"/g,'&quot;') + '"') : '';
-
-            td.innerHTML =
-              '<span class="cell-num"' + title + '>' +
-                '<img class="td-ico" src="'+ iconSrc +'" alt="" aria-hidden="true" width="14" height="14" loading="lazy" decoding="async">' +
-                '<span>'+ display +'</span>' +
-              '</span>';
-          });
-        });
-      }
-
-      function initStickyObservers(){
-        setStickyTop();
-        requestAnimationFrame(setStickyTop);
-        setTimeout(setStickyTop, 60);
-
-        if(mqMobile && mqMobile.addEventListener){
-          mqMobile.addEventListener('change', setStickyTop);
-        }else if(mqMobile && mqMobile.addListener){
-          mqMobile.addListener(setStickyTop);
-        }
-
-        if(window.ResizeObserver){
-          var ro = new ResizeObserver(function(){ setStickyTop(); });
-          var header = document.querySelector('header.top');
-          var tabs = document.querySelector('nav.section-tabs');
-          if(header) ro.observe(header);
-          if(tabs) ro.observe(tabs);
-        }
-
-        window.addEventListener('load', setStickyTop);
-        window.addEventListener('resize', setStickyTop);
-      }
-
-      function init(){
-        initStickyObservers();
-
-        formatResourceCells('wa-table', [2,3,4,5,6,7]);
-
-        var c = buildCardsFromWarAcademyTable();
-        if(c > 0) document.documentElement.classList.add('enhanced');
-
-        decorateTableNumbers('wa-table', {
-          2: ICON.bread,
-          3: ICON.wood,
-          4: ICON.stone,
-          5: ICON.iron,
-          6: ICON.truegold,
-          7: ICON.tempered
-        });
-      }
-
-      if(document.readyState === 'loading'){
-        document.addEventListener('DOMContentLoaded', init);
-      }else{
-        init();
-      }
-    })();
-  </script><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/zh-tw/about/">關於</a><a href="/zh-tw/privacy/">隱私權</a><a href="/zh-tw/terms/">使用條款</a><a href="/zh-tw/contact/">聯絡</a></nav><p>本網站為獨立於遊戲開發商與發行商的非官方粉絲網站。遊戲素材與商標屬於各權利人。</p></footer><!-- shared-policy-footer:end -->
-</body>
-</html>
+<section class="kd-building-supplement-section"><h2>相關資料與計算工具</h2><p>各建築頁面可查看前置建築、資源與基礎時間，也請確認城市中心目標所需的大使館和兵營。在計算器輸入目前等級，即可排除已完成階段。比較時請區分基礎時間與帳號加成後的時間。</p><ul><li><a href="/zh-tw/buildings/">Kingshot 建築</a></li><li><a href="/zh-tw/calc-building/">建築計算器</a></li><li><a href="/zh-tw/guides/kingshot-f2p-guide.html">Kingshot 新手攻略｜無課與小額付費成長指南</a></li></ul></section></section><section id="related" class="kd-building-section"><h2>相關建築</h2><div class="kd-building-related"><a href="/zh-tw/buildings/town-center.html">城市中心</a><a href="/zh-tw/buildings/">全部建築 →</a></div></section></div></article></main></div><!-- shared-policy-footer:start --><footer class="kd-policy-footer" style="max-width:1100px;margin:32px auto 80px;padding:20px 16px;border-top:1px solid #94a3b8;font:14px/1.7 system-ui"><nav aria-label="Site information" style="display:flex;flex-wrap:wrap;gap:16px"><a href="/zh-tw/about/">網站介紹</a><a href="/zh-tw/privacy/">隱私權</a><a href="/zh-tw/terms/">使用條款</a><a href="/zh-tw/contact/">聯絡我們</a></nav><p>本網站為獨立於開發商與發行商的非官方粉絲網站。遊戲素材與商標權利歸各權利人所有。</p></footer><!-- shared-policy-footer:end --><script defer src="/js/integration-presentation.ks-integration-adb72e714503e84f.js?v=ks-ui9-20261012" data-kd-presentation="v1" data-kd-model="/data/integration/display-model.ks-integration-adb72e714503e84f.json" data-kd-release="ks-integration-adb72e714503e84f"></script></body></html>

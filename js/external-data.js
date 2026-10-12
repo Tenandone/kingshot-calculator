@@ -12,5 +12,5 @@
  }
  window.addEventListener('hashchange',reveal);if(location.hash)reveal();
  // Equivalent translated documents retain the reader's filter and exact row.
- document.addEventListener('click',e=>{const a=e.target.closest?.('.ks-nav-languages a[hreflang]');if(!a)return;const u=new URL(a.href,location.href);if(!/^\/(ko|en|ja)\/(alliance\/tech|events\/calendar|masters)(\/|$)/.test(u.pathname))return;a.href=u.pathname+location.search+location.hash;},true);
+ document.addEventListener('click',e=>{const a=e.target.closest?.('.ks-nav-languages a[hreflang]');if(!a)return;const u=new URL(a.href,location.href);if(!/^\/(ko|en|ja|zh-tw)\/(alliance\/tech|events\/calendar|masters)(\/|$)/.test(u.pathname))return;a.href=u.pathname+location.search+location.hash;},true);
 })();

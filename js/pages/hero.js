@@ -5,6 +5,35 @@
 // - ensureHeroesI18N: 현재 lang 유지
 (function () {
   'use strict';
+  // TW uses the current display model also when entered from the shared SPA shell.
+  async function mountTwHeroDisplay() {
+    if (!/^\/zh-tw\/(?:heroes|hero\/[^/]+)\/?$/.test(location.pathname)) return false;
+    const pathname = location.pathname;
+    if (!window.KD_TW_HERO_ENTRY) {
+      window.KD_TW_HERO_ENTRY = (async function () {
+        if (!document.querySelector('link[href^="/css/ui-heroes.css"]')) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = '/css/ui-heroes.css?v=ks-ui16-tw-20261012';
+          document.head.appendChild(link);
+        }
+        for (const [name, globalName] of [['hero-view', 'KD_HERO_VIEW'], ['hero-client', 'KD_UI_HEROES']]) {
+          if (window[globalName]) continue;
+          await new Promise(function (resolve, reject) {
+            const script = document.createElement('script');
+            script.src = '/js/ui/' + name + '.js?v=ks-ui16-tw-20261012';
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+          });
+        }
+      })().catch(function (error) { window.KD_TW_HERO_ENTRY = null; throw error; });
+    }
+    await window.KD_TW_HERO_ENTRY;
+    if (location.pathname === pathname) await window.KD_UI_HEROES.enhance(document, 'zh-tw');
+    return true;
+  }
+
 
   const esc = (s) => String(s ?? '')
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
@@ -203,6 +232,8 @@
 
   // ===== 엔트리 =====
   globalThis.initHero = async function (slug) {
+    if (/^\/zh-tw\/hero\//.test(location.pathname)) { CURRENT_HERO = null; CURRENT_SLUG = ''; window.__HERO_BOOTED__ = true; }
+    if (await mountTwHeroDisplay()) return;
     // 중복 실행 방지 (히스토리 라우터 + 폴백 가드)
     window.__HERO_BOOTED__ = true;
 

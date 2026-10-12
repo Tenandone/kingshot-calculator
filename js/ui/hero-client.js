@@ -1,7 +1,7 @@
 (function(win){'use strict';if(win.KD_UI_HEROES)return;
 const doc=win.document,V=win.KD_HERO_VIEW,cache=new Map(),mounted=new WeakMap();
-const supported=l=>['ko','en','ja'].includes(l);
-const current=()=>{const m=location.pathname.match(/^\/(?:(ko|en|ja)\/)?(heroes|hero\/([^/]+))\/?$/);return m?{locale:m[1]||'ko',slug:m[3]||null}:null;};
+const supported=l=>['ko','en','ja','zh-tw'].includes(l);
+const current=()=>{const m=location.pathname.match(/^\/(?:(ko|en|ja|zh-tw)\/)?(heroes|hero\/([^/]+))\/?$/);return m?{locale:m[1]||'ko',slug:m[3]||null}:null;};
 const get=url=>{if(!cache.has(url))cache.set(url,fetch(url).then(r=>{if(!r.ok)throw Error('Hero display data: '+r.status);return r.json();}).catch(e=>{cache.delete(url);throw e;}));return cache.get(url);};
 function state(l,onlyUrl){let saved={};if(!onlyUrl)try{saved=JSON.parse(sessionStorage.getItem('KSD_UI_COLLECTIONS_V1:'+location.pathname+':'+l))||{};}catch{}const u=new URL(location.href),s={...V.defaults,...saved};if(u.searchParams.has('kdu'))for(const k of ['q','unit','gen','rarity','sort'])s[k]=u.searchParams.get('kdu_'+k)||V.defaults[k];s.q=String(s.q||'').slice(0,200);s.compare=(u.searchParams.get('kdu_compare')||'').split(',').filter(x=>/^[a-z0-9-]+$/.test(x)).slice(0,3);return s;}
 function save(s,l,push){try{sessionStorage.setItem('KSD_UI_COLLECTIONS_V1:'+location.pathname+':'+l,JSON.stringify(s));}catch{}const u=new URL(location.href);u.searchParams.set('kdu','1');for(const k of ['q','unit','gen','rarity','sort']){if(s[k]!==V.defaults[k])u.searchParams.set('kdu_'+k,s[k]);else u.searchParams.delete('kdu_'+k);}if(s.compare.length)u.searchParams.set('kdu_compare',s.compare.join(','));else u.searchParams.delete('kdu_compare');const next=u.pathname+u.search+u.hash;if(next!==location.pathname+location.search+location.hash)history[push?'pushState':'replaceState'](history.state,'',next);}
