@@ -1,0 +1,95 @@
+/* Home: a search-led index, with the same editorial shell as the reader. */
+body.ks-design.kd-home-view #content{padding:0 28px!important;max-width:var(--ks-width)!important;margin:0 auto!important;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+body.ks-design .professional-hub.kd-home-v3{max-width:none;padding:0 0 32px;display:grid;grid-template-columns:1fr 1fr;column-gap:36px;row-gap:0;background:none;color:var(--ks-ink)}
+body.ks-design .kd-home-v3 .hub-hero{grid-column:1/-1;display:block;padding:34px 0 30px!important;margin:0;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;text-align:left}
+body.ks-design .kd-home-v3 .hub-hero h1{font-size:clamp(30px,3.3vw,44px);font-weight:800;letter-spacing:-.055em;line-height:1.2;margin:0 0 10px;color:var(--ks-ink)}
+body.ks-design .kd-home-v3 .hub-intro{max-width:none;font-size:16px;line-height:1.6;color:var(--ks-muted);margin:0 0 24px}
+body.ks-design .kd-home-v3 .hub-search{max-width:850px;margin:0}
+body.ks-design .kd-home-v3 .hub-search-field{display:flex;gap:0;border:1px solid var(--ks-teal);border-radius:6px;box-shadow:0 3px 0 rgba(36,93,88,.07);background:var(--ks-paper);overflow:hidden}
+body.ks-design .kd-home-v3 #hub-search{height:58px;min-width:0;padding:0 18px;border:0;border-radius:0;background:transparent;font-size:17px;color:var(--ks-ink);box-shadow:none}
+body.ks-design .kd-home-v3 .hub-search-submit{min-width:82px;padding:0 22px;margin:6px;border:0;border-radius:3px;background:var(--ks-teal);color:white;font-weight:700;font-size:15px;min-height:46px}
+body.ks-design .kd-home-v3 #hub-search-status{font-size:13px;color:var(--ks-muted);margin-top:8px}
+body.ks-design .kd-home-v3 .hub-primary{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:0 0 26px;border-top:2px solid var(--ks-ink);border-bottom:1px solid var(--ks-line);background:var(--ks-paper)}
+body.ks-design .kd-home-v3 .hub-primary a{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:126px;padding:22px 24px!important;gap:9px;background:none!important;border:0!important;border-right:1px solid var(--ks-line)!important;border-radius:0!important;box-shadow:none!important;transform:none!important;text-decoration:none;color:var(--ks-ink)}
+body.ks-design .kd-home-v3 .hub-primary a:last-child{border-right:0!important}
+body.ks-design .kd-home-v3 .hub-primary a:hover{background:#eef2ec!important}
+body.ks-design .kd-home-v3 .hub-primary strong{font-size:23px;line-height:1.25;letter-spacing:-.035em}
+body.ks-design .kd-home-v3 .hub-primary span{font-size:14px;color:var(--ks-muted);line-height:1.5;padding-right:18px}
+body.ks-design .kd-home-v3 .hub-primary i{position:absolute;right:20px;top:22px;font-size:18px;font-style:normal;color:var(--ks-teal)}
+body.ks-design .kd-home-v3 .hub-section{padding:20px 0;margin:0;border:0;border-bottom:1px solid var(--ks-line);background:none;box-shadow:none;border-radius:0}
+body.ks-design .kd-home-v3 .hub-section :is(h2,.hub-section-title h2){font-size:18px;margin:0 0 14px;font-weight:750;letter-spacing:-.025em}
+body.ks-design .kd-home-v3 .hub-more-data{grid-column:1/-1;display:flex;align-items:center;gap:28px;padding:0 0 22px}
+body.ks-design .kd-home-v3 .hub-more-data h2{margin:0;white-space:nowrap;font-size:14px;color:var(--ks-muted)}
+body.ks-design .kd-home-v3 .hub-category-links{display:flex;flex-wrap:wrap;gap:6px 24px}
+body.ks-design .kd-home-v3 .hub-category-links a{background:none;border:0;border-radius:0;box-shadow:none;padding:7px 0;min-height:38px;color:var(--ks-ink);font-size:15px;font-weight:650}
+body.ks-design .kd-home-v3 .hub-home-tools{grid-column:1;grid-row:4}
+body.ks-design .kd-home-v3 .hub-help{grid-column:2;grid-row:4}
+body.ks-design .kd-home-v3 .hub-tool-links{gap:4px 20px;display:flex;flex-wrap:wrap}
+body.ks-design .kd-home-v3 .hub-tool-links a{border:0;padding:6px 0;background:none;color:var(--ks-teal);font-size:14px;min-height:36px}
+body.ks-design .kd-home-v3 .hub-utility-nav{display:flex;gap:26px;margin:0 0 14px}
+body.ks-design .kd-home-v3 .hub-utility-nav a{padding:0;min-height:32px;border:0;background:none;color:var(--ks-ink);font-size:18px;font-weight:750}
+body.ks-design .kd-home-v3 .hub-disclosure{border:0;border-radius:0;box-shadow:none;background:transparent;padding:0;margin:12px 0;color:var(--ks-ink)}
+body.ks-design .kd-home-v3 .hub-disclosure summary{min-height:44px;padding:10px 0;font-size:14px;color:var(--ks-muted)}
+body.ks-design .kd-home-v3 .hub-progress-disclosure{grid-column:1/-1;padding:8px 0;margin:0;border-bottom:1px solid var(--ks-line)}
+body.ks-design .kd-home-v3 .hub-progress-disclosure summary{display:flex;gap:16px;align-items:center;color:var(--ks-ink)}
+body.ks-design .kd-home-v3 .hub-progress-disclosure summary strong{font-size:17px}
+body.ks-design .kd-home-v3 .hub-progress-disclosure summary span{color:var(--ks-muted);font-size:13px}
+body.ks-design .kd-home-v3 .hub-updates{grid-column:1/-1;margin:0;padding:8px 0;border-bottom:1px solid var(--ks-line)}
+body.ks-design .kd-home-v3 .hub-card{border:0;border-top:1px solid var(--ks-line);background:none;box-shadow:none;border-radius:0;padding:14px 0}
+body.ks-design .kd-home-v3 .hub-card h3{font-size:16px}
+body.ks-design .kd-home-v3 .hub-card p{font-size:14px;color:var(--ks-muted)}
+body.ks-design .kd-home-v3 .hub-search-result{border:0!important;border-bottom:1px solid var(--ks-line)!important;border-radius:0!important;background:var(--ks-paper)!important;padding:14px!important;min-height:80px;color:var(--ks-ink)}
+body.ks-design .kd-home-v3 .hub-result-description{font-size:14px!important;line-height:1.6!important;color:var(--ks-muted)}
+body.ks-design .kd-home-v3 .hub-search-filters button{min-height:40px;border:1px solid var(--ks-line);background:var(--ks-paper);color:var(--ks-ink);border-radius:4px}
+body.ks-design .kd-home-v3 .hub-search-filters button[aria-pressed=true]{color:white;background:var(--ks-teal);border-color:var(--ks-teal)}
+body.ks-design .kd-couponbar{max-width:var(--ks-width);padding:0 28px;margin:14px auto 0!important;justify-content:flex-start}
+body.ks-design .kd-couponbar__a{width:100%}
+body.ks-design .kd-couponbar__panel{min-height:42px!important;border:0!important;border-bottom:1px solid var(--ks-line)!important;border-radius:0!important;background:none!important;box-shadow:none!important;padding:0 0 10px!important;transform:none!important;gap:12px}
+body.ks-design .kd-couponbar__panel::before{display:none}
+body.ks-design .kd-couponbar__left{padding:0;gap:8px;flex:none}
+body.ks-design .kd-couponbar__dot{width:6px;height:6px;background:var(--ks-teal);box-shadow:none}
+body.ks-design .kd-couponbar__title{font-size:13px;font-weight:650;color:var(--ks-ink)}
+body.ks-design .kd-couponbar__grid{display:flex!important;gap:22px;flex:1;justify-content:flex-end}
+body.ks-design .kd-couponbar__chip{border:0;background:none;box-shadow:none;min-width:0;min-height:24px;padding:0;gap:8px}
+body.ks-design .kd-couponbar__label{font-size:11px!important;font-weight:500;color:var(--ks-muted)}
+body.ks-design .kd-couponbar__val{font-size:13px!important;font-weight:650;color:var(--ks-ink)!important;text-shadow:none!important}
+body.ks-design .kd-couponbar [data-kd="vNext"]{color:var(--ks-bronze)!important;text-shadow:none!important}
+@media(max-width:900px){
+ body.ks-design .kd-home-v3 .hub-primary strong{font-size:20px}
+ body.ks-design .kd-home-v3 .hub-primary a{padding:20px 16px!important}
+ body.ks-design .kd-home-v3 .hub-primary i{right:12px;top:14px}
+ body.ks-design .kd-home-v3 .hub-primary span{font-size:13px;padding:0}
+}
+@media(max-width:600px){
+ body.ks-design.kd-home-view #content{padding-inline:16px!important}
+ body.ks-design .professional-hub.kd-home-v3{display:block;padding-bottom:24px}
+ body.ks-design .kd-home-v3 .hub-hero{padding:24px 0 22px!important}
+ body.ks-design .kd-home-v3 .hub-hero h1{font-size:32px;margin-bottom:8px}
+ body.ks-design .kd-home-v3 .hub-intro{font-size:14px;margin-bottom:18px}
+ body.ks-design .kd-home-v3 #hub-search{font-size:16px;padding-inline:12px;height:54px}
+ body.ks-design .kd-home-v3 .hub-search-submit{min-width:60px;padding:0 12px;min-height:42px}
+ body.ks-design .kd-home-v3 .hub-primary{grid-template-columns:1fr 1fr;margin-bottom:20px}
+ body.ks-design .kd-home-v3 .hub-primary a{min-height:108px;gap:7px;padding:18px 14px!important}
+ body.ks-design .kd-home-v3 .hub-primary a:nth-child(2){border-right:0!important}
+ body.ks-design .kd-home-v3 .hub-primary a:nth-child(-n+2){border-bottom:1px solid var(--ks-line)!important}
+ body.ks-design .kd-home-v3 .hub-primary strong{font-size:20px}
+ body.ks-design .kd-home-v3 .hub-primary span{font-size:13px;max-width:125px}
+ body.ks-design .kd-home-v3 .hub-primary i{font-size:15px;top:10px;right:10px}
+ body.ks-design .kd-home-v3 .hub-more-data{display:block;padding:0 0 16px}
+ body.ks-design .kd-home-v3 .hub-more-data h2{font-size:13px;margin-bottom:6px}
+ body.ks-design .kd-home-v3 .hub-category-links{gap:2px 22px}
+ body.ks-design .kd-home-v3 .hub-category-links a{min-height:44px;font-size:14px}
+ body.ks-design .kd-home-v3 .hub-section{padding-block:18px}
+ body.ks-design .kd-home-v3 .hub-section.hub-more-data{padding:0 0 12px}
+ body.ks-design .kd-home-v3 .hub-section.hub-more-data h2{font-size:13px;margin:0 0 4px}
+ body.ks-design .kd-home-v3 .hub-tool-links a{min-height:44px}
+ body.ks-design .kd-home-v3 .hub-progress-disclosure summary{display:block}
+ body.ks-design .kd-home-v3 .hub-progress-disclosure summary span{display:block;margin-top:3px}
+ body.ks-design .kd-couponbar{padding:0 16px;margin-top:10px!important}
+ body.ks-design .kd-couponbar__title{font-size:12px!important}
+ body.ks-design .kd-couponbar__grid{gap:12px!important}
+ body.ks-design .kd-couponbar__chip[data-kd-chip=coupons]{display:flex!important}
+ body.ks-design .kd-couponbar__chip[data-kd-chip=now]{display:none!important}
+ body.ks-design .kd-couponbar__chip[data-kd-chip=next]{padding:0!important;height:auto!important;min-height:24px!important;gap:4px!important}
+ body.ks-design .kd-couponbar__chip[data-kd-chip=coupons] .kd-couponbar__label{display:none}
+}

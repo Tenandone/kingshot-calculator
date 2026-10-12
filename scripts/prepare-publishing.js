@@ -156,3 +156,7 @@ for(const [old,target] of Object.entries(aliases)) {
 }
 write(path.join(ROOT,'scripts/legacy-redirects.json'),JSON.stringify(aliases,null,2)+'\n');
 console.log('Prepared canonical links, shared policy footer and '+Object.keys(aliases).length+' legacy aliases. Ad serving stays disabled pending page review.');
+
+// ks-ui13-design-hook:start
+require('./apply-design-system').applyDesignSystem({root:ROOT});
+// ks-ui13-design-hook:end

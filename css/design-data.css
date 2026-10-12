@@ -1,0 +1,534 @@
+/* UI13 data surfaces. Presentation only; opt-in is owned by design-system.js.
+   Existing data attributes, tables, controls and their event contracts stay intact. */
+body.ks-design :where(#kd-building.kd-building-table-page,.kh-detail,.kh-list,.kr-page,.kp-page,.kcat-page,#calc-ui,#calc-hub,#training-calc,.hero-gear-page,.hg-calc,.calc-workbench,.kd-personal,#pet-page){
+  --dd-ink:var(--ks-ink,#182c39);
+  --dd-muted:var(--ks-muted,#66727a);
+  --dd-paper:var(--ks-paper,#fffefb);
+  --dd-soft:var(--ks-bg,#f6f5f0);
+  --dd-line:var(--ks-line,#dcded6);
+  --dd-accent:var(--ks-teal,#245d58);
+  --dd-bronze:var(--ks-bronze,#94743f);
+  --dd-selected:#e7efea;
+  --kd-ink:var(--dd-ink);--kd-muted:var(--dd-muted);--kd-line:var(--dd-line);--kd-accent:var(--dd-accent);
+  --kh-ink:var(--dd-ink);--kh-muted:var(--dd-muted);--kh-line:var(--dd-line);--kh-blue:var(--dd-accent);
+  --kr-ink:var(--dd-ink);--kr-muted:var(--dd-muted);--kr-line:var(--dd-line);--kr-accent:var(--dd-accent);
+  --kp-ink:var(--dd-ink);--kp-muted:var(--dd-muted);--kp-line:var(--dd-line);--kp-accent:var(--dd-accent);--kp-bg:var(--dd-soft);
+  min-width:0;color:var(--dd-ink);font-family:var(--ks-font,inherit);line-height:1.6;
+}
+
+/* Rollout: the existing roster and comparison share the detail palette.
+   Checkbox dimensions and the three-hero selection contract are unchanged. */
+body.ks-design .kh-list{color:var(--dd-ink);font-family:var(--ks-font,inherit)}
+body.ks-design .kh-list .kh-list-head{margin-bottom:22px}
+body.ks-design .kh-list .kh-list-head h1{font-size:32px;line-height:1.3;font-weight:780;color:var(--dd-ink)}
+body.ks-design .kh-list .kh-list-head :is(p,span){color:var(--dd-muted)}
+body.ks-design .kh-list .kh-filters{gap:14px;padding:18px 0;border-color:var(--dd-line)}
+body.ks-design .kh-list .kh-filters :is(button,select,input){min-height:44px;border-color:var(--dd-line);background:var(--dd-paper);color:var(--dd-ink);border-radius:5px;font-size:14px}
+body.ks-design .kh-list .kh-filters label{font-size:12px;color:var(--dd-muted)}
+body.ks-design .kh-list .kh-results{color:var(--dd-muted);font-size:13px;padding-block:15px 8px}
+body.ks-design .kh-list .kh-roster{gap:0 28px}
+body.ks-design .kh-list .kh-card{padding:18px 0;border-color:var(--dd-line)}
+body.ks-design .kh-list .kh-card h2{color:var(--dd-ink);font-size:19px;line-height:1.4}
+body.ks-design .kh-list .kh-card img{border-radius:5px;background:#efeee5;object-fit:contain}
+body.ks-design .kh-list .kh-badges{color:var(--dd-muted);line-height:1.5}
+body.ks-design .kh-list .kh-compare-pick{min-height:44px;padding-top:4px;font-size:13px;color:var(--dd-muted)}
+body.ks-design .kh-list .kh-compare-pick input{accent-color:var(--dd-accent)}
+body.ks-design .kh-list .kh-selection:not(:empty){background:var(--dd-selected);border-color:var(--dd-accent);padding:12px 14px}
+body.ks-design .kh-list .kh-selection :is(a,span){color:var(--dd-accent)}
+body.ks-design .kh-list .kh-comparison{border-color:var(--dd-accent);padding-top:20px}
+body.ks-design .kh-list .kh-comparison-head{flex-wrap:wrap}
+body.ks-design .kh-list .kh-comparison-head h2{font-size:21px;color:var(--dd-ink)}
+body.ks-design .kh-list .kh-comparison-head button{min-height:44px;background:var(--dd-paper);border-color:var(--dd-line);font-size:13px;color:var(--dd-accent)}
+body.ks-design .kh-list .kh-scroll{min-width:0;max-width:100%;overflow:auto;overscroll-behavior-x:contain;scrollbar-width:thin;border-top:1px solid var(--dd-line)}
+body.ks-design .kh-list .kh-compare-table{min-width:540px;font-size:13px}
+body.ks-design .kh-list .kh-table :is(th,td){padding:12px 14px;background:var(--dd-paper);border-color:var(--dd-line);font-variant-numeric:tabular-nums}
+body.ks-design .kh-list .kh-table thead th{background:#edf0e9;color:#4b5d5d;font-size:12px}
+body.ks-design .kh-list .kh-table tbody tr:nth-child(even)>*{background:#fafaf5}
+body.ks-design .kh-list .kh-table tbody th:first-child{background:#f1f2eb}
+body.ks-design .kh-list .kh-compare-table thead th button{width:44px;min-height:44px;margin-left:8px;color:var(--dd-muted);border-radius:4px}
+body.ks-design .kh-list :is(a,button,input,select):focus-visible{outline:2px solid var(--dd-accent);outline-offset:3px}
+
+/* Equipment, pet and item pages already share one renderer and table scroller.
+   Keep rarity treatments, identity images, data-kcat-number and mobile behavior. */
+body.ks-design.kcat-shell :is(main,#content,#pet-page,.wrap){max-width:1360px!important}
+body.ks-design.kcat-shell :is(main.container,.wrap){padding-inline:0!important}
+body.ks-design .kcat-page{--kcat-line:var(--dd-line);--kcat-muted:var(--dd-muted);--kcat-accent:var(--dd-accent);max-width:1360px;padding:26px 32px 48px;font-family:var(--ks-font,inherit);color:var(--dd-ink)}
+body.ks-design .kcat-page h1{font-size:32px;line-height:1.25;font-weight:780;color:var(--dd-ink)}
+body.ks-design .kcat-page :is(h2,h3){color:var(--dd-ink);letter-spacing:-.02em}
+body.ks-design .kcat-page .kcat-nav{gap:24px;padding:0;margin-bottom:22px;scrollbar-width:thin}
+body.ks-design .kcat-page .kcat-nav a{display:flex;align-items:center;min-height:46px;padding:10px 0;border-bottom:2px solid transparent;border-radius:0;background:transparent;font-size:14px;color:var(--dd-muted)}
+body.ks-design .kcat-page .kcat-nav a[aria-current]{border-color:var(--dd-accent);background:transparent;color:var(--dd-accent)}
+body.ks-design .kcat-page .kcat-tools{padding:16px 0;border-width:1px 0;border-radius:0;box-shadow:none;background:transparent;gap:14px}
+body.ks-design .kcat-page .kcat-tools :is(button,select,input){min-height:44px;min-width:0;border-radius:5px;border-color:var(--dd-line);background:var(--dd-paper);color:var(--dd-ink)}
+body.ks-design .kcat-page .kcat-tools .kcat-search{min-width:0}
+body.ks-design .kcat-page .kcat-grid{gap:0 28px}
+body.ks-design .kcat-page .kcat-card{padding:20px 0;border:0;border-top:1px solid var(--dd-line);border-radius:0;background:transparent;gap:16px;color:var(--dd-ink)!important}
+body.ks-design .kcat-page .kcat-card:hover{border-color:#9aafa1;background:#eeefe7}
+body.ks-design .kcat-page .kcat-card>img{width:82px;height:88px;flex-basis:82px;object-fit:contain}
+body.ks-design .kcat-page .kcat-card h2{font-size:19px;line-height:1.4}
+body.ks-design .kcat-page .kcat-card p{font-size:13px;line-height:1.7}
+body.ks-design .kcat-page .kcat-open{font-size:13px;color:var(--dd-accent);margin-top:9px}
+body.ks-design .kcat-page .kcat-toc{gap:22px;padding:0;scrollbar-width:thin}
+body.ks-design .kcat-page .kcat-toc a{display:flex;align-items:center;min-height:44px;padding:10px 0;border-radius:0;background:transparent;font-size:13px;color:var(--dd-accent)}
+body.ks-design .kcat-page .kcat-content .hero{gap:22px}
+body.ks-design .kcat-page .kcat-content .hero .sub{color:var(--dd-muted);font-size:14px}
+body.ks-design .kcat-page .kcat-content :is(.panel,.skill-panel){border:0;border-radius:0;box-shadow:none;padding:14px 0;background:transparent}
+body.ks-design .kcat-page .kcat-content :is(.stat-card,.material-card){border:0;border-top:1px solid var(--dd-line);border-radius:0;background:transparent;padding:12px 0}
+body.ks-design .kcat-page .kcat-content :is(.overview-grid,.materials-grid,.facts){gap:0 24px}
+body.ks-design .kcat-page .kcat-content :is(.stat-value,.material-total){font-size:21px;font-variant-numeric:tabular-nums;color:var(--dd-ink)}
+body.ks-design .kcat-page .kcat-content :is(.source-card,.type-card,.rarity-card){border-color:var(--dd-line);border-radius:5px;background:var(--dd-paper);box-shadow:none}
+body.ks-design .kcat-page .kcat-content .note{background:#eef1e9;border-left-color:#a3b8a9;color:var(--dd-ink);line-height:1.7}
+body.ks-design .kcat-page .kcat-content .accent{color:var(--dd-accent)}
+body.ks-design .kcat-page .kcat-content .cta-box{border-width:1px 0;border-radius:0;background:transparent;padding:15px 0}
+body.ks-design .kcat-page .kcat-content :is(.btn,.pill){min-height:44px;align-items:center;border-radius:5px;border-color:var(--dd-line);background:var(--dd-paper);color:var(--dd-accent);font-size:13px}
+body.ks-design .kcat-page .kcat-content details{border-width:1px 0 0;border-radius:0;background:transparent;padding:8px 0}
+body.ks-design .kcat-page .kcat-content summary{min-height:44px;align-content:center}
+body.ks-design .kcat-page .kcat-content dt{background:#edf0e9;color:var(--dd-muted)}
+body.ks-design .kcat-page .kcat-content dd{background:var(--dd-paper)}
+body.ks-design .kcat-page .kcat-table-scroll{border:0;border-top:2px solid var(--dd-accent);border-bottom:1px solid var(--dd-line);border-radius:0;background:var(--dd-paper);scrollbar-width:thin;scrollbar-color:#afbab1 var(--dd-soft)}
+/* The existing catalog table reset is !important; only its palette/spacing changes. */
+body.ks-design .kcat-page .kcat-content table{color:var(--dd-ink)!important;background:var(--dd-paper)!important;font-variant-numeric:tabular-nums}
+body.ks-design .kcat-page .kcat-content :is(th,td){padding:12px!important;border-bottom-color:var(--dd-line)!important;font-size:13px}
+body.ks-design .kcat-page .kcat-content th{background:#edf0e9!important;color:#4b5d5d!important;font-size:12px}
+body.ks-design .kcat-page .kcat-content td:first-child{background:#f1f2eb!important}
+body.ks-design .kcat-page .kcat-content th:first-child{background:#e8ece3!important}
+body.ks-design .kcat-page .kcat-empty{background:var(--dd-soft);border:1px dashed var(--dd-line);color:var(--dd-muted)}
+body.ks-design .kcat-page :is(a,button,input,select,summary,[tabindex="0"]):focus-visible{outline:2px solid var(--dd-accent);outline-offset:3px}
+/* Pet documents retain older ID-scoped image/title rules. Keep roster identity compact. */
+body.ks-design #pet-page .kcat-page h1{font-size:32px;line-height:1.25}
+body.ks-design #pet-page .kcat-card{display:flex;flex-direction:row;align-items:flex-start;gap:16px}
+body.ks-design #pet-page .kcat-card>img{width:82px;min-width:82px;max-width:82px;height:88px;max-height:88px;flex:0 0 82px;object-fit:contain;aspect-ratio:auto}
+body.ks-design #pet-page .kcat-card>div{min-width:0;flex:1}
+
+/* Calculators: restyle the existing form/result containers, never their visibility.
+   Disabled buttons, blocked messages and native mobile result cards keep ownership. */
+body.ks-design :is(#calc-ui,#training-calc,.hero-gear-page,.hg-calc){
+  --bg:var(--ks-bg);--panel:var(--ks-paper);--text:var(--ks-ink);--muted:var(--ks-muted);
+  --border:var(--ks-line);--primary:var(--ks-teal);--primary-hover:#194d48;
+  font-family:var(--ks-font,inherit);color:var(--ks-ink);background:transparent;min-width:0;
+}
+body.ks-design #calc-ui{max-width:1360px;padding:24px 20px 40px}
+body.ks-design #content:has(:is(#calc-ui,#calc-hub,#training-calc,.hero-gear-page)){max-width:1360px;min-width:0;border:0;border-radius:0;box-shadow:none;background:transparent;padding:0 32px}
+body.ks-design #calc-ui .calc-card{border:0;border-top:1px solid var(--ks-line);border-radius:0;box-shadow:none;background:transparent;padding:20px 0;margin:0 0 16px}
+body.ks-design #calc-ui .calc-card:first-child{border-top:0}
+body.ks-design #calc-ui :is(.calc-title,h2){color:var(--ks-ink);font-size:24px;line-height:1.35}
+body.ks-design #calc-ui .calc-desc{color:var(--ks-muted);line-height:1.75;font-size:14px}
+body.ks-design #calc-ui form.calc-form{background:transparent;box-shadow:none;border-radius:0;padding:16px 0;gap:14px}
+body.ks-design :is(#calc-ui,#training-calc,.hg-calc) :is(select,input[type=number],input[type=text]){min-height:44px;max-width:100%;box-sizing:border-box;border-radius:5px;border-color:var(--ks-line);background:var(--ks-paper);color:var(--ks-ink);font-size:14px}
+body.ks-design :where(#calc-ui,#training-calc,.hg-calc) button{min-height:44px;border-radius:5px;font-family:inherit}
+body.ks-design :where(#calc-ui,#training-calc,.hg-calc) :is(button,input,select,a,summary):focus-visible{outline:2px solid var(--ks-teal);outline-offset:3px;box-shadow:none}
+body.ks-design #calc-ui :is(#result,#prereq-box){background:var(--ks-paper);color:var(--ks-ink);box-shadow:none;border-radius:0;border-top:2px solid var(--ks-line);font-variant-numeric:tabular-nums}
+body.ks-design #calc-ui #result{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+body.ks-design #calc-ui thead th,body.ks-design #training-calc thead th{background:#edf0e9;color:#4b5d5d}
+body.ks-design #calc-ui :is(th,td),body.ks-design #training-calc :is(th,td){border-color:var(--ks-line);padding:10px 12px;font-variant-numeric:tabular-nums}
+body.ks-design #calc-ui tbody tr:nth-child(even) td{background:#fafaf5}
+body.ks-design #training-calc{max-width:1360px;margin:20px auto;padding:0 20px 40px}
+body.ks-design #training-calc .card{border:0;border-top:1px solid var(--ks-line);border-radius:0;box-shadow:none;background:transparent;padding:20px 0}
+body.ks-design #training-calc #calcBtn{background:var(--ks-teal);color:var(--ks-paper)}
+body.ks-design #training-calc #result{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+body.ks-design .hero-gear-page .wrap{max-width:1360px;padding:24px 20px 40px}
+body.ks-design .hero-gear-page .panel{border:0;border-radius:0;box-shadow:none;background:transparent;padding:0}
+body.ks-design .hg-calc :is(.hg-page-title,.hg-detail-title){color:var(--ks-ink)}
+body.ks-design .hg-calc :is(.hg-page-desc,.hg-resource-name){color:var(--ks-muted)}
+body.ks-design .hg-calc :is(.hg-result,.hg-resource-item,.hg-detail-card){border-color:var(--ks-line);border-radius:5px;box-shadow:none;background:var(--ks-paper)}
+body.ks-design .hg-calc :is(.hg-resource-value,.hg-detail-cell-value,.hg-detail-card-item-value){color:var(--ks-ink);font-variant-numeric:tabular-nums}
+body.ks-design .hg-calc .hg-detail-table-wrap{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;border-color:var(--ks-line);border-radius:0;scrollbar-width:thin}
+body.ks-design .hg-calc .hg-detail-table th{background:#edf0e9;color:#4b5d5d}
+body.ks-design .hg-calc .hg-field select{border-color:var(--ks-line);border-radius:5px;background:var(--ks-paper);color:var(--ks-ink)}
+body.ks-design #pet-calc :is(.pc-card,.pc-resource-card),body.ks-design #charm-calc .cc-kpi{border-color:var(--ks-line);border-radius:5px;box-shadow:none;background:var(--ks-paper)}
+body.ks-design #pet-calc .pc-pet-btn{border-radius:5px}
+body.ks-design #pet-calc .pc-pet-btn.is-active{border-color:var(--ks-teal);background:#e7efea;box-shadow:inset 0 0 0 1px var(--ks-teal)}
+body.ks-design :is(#pet-calc,#gear-calc,#charm-calc) :is(.pc-detail,.cc-details,.gear-details){max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;border-color:var(--ks-line);border-radius:0}
+body.ks-design #charm-calc .cc-btn-primary{background:var(--ks-teal);color:var(--ks-paper)}
+body.ks-design :where(#calc-ui,#training-calc,.hg-calc) button:disabled{opacity:.6;cursor:not-allowed}
+body.ks-design [data-calculation-blocked]{border-left:3px solid var(--ks-bronze);padding:12px 14px;background:#f6f0e3;color:#755825;font-size:14px;line-height:1.7}
+
+/* Calculator directory and existing browser-local progress tools. */
+body.ks-design #calc-hub{max-width:1360px;padding:24px 20px 40px}
+body.ks-design #calc-hub .hub-card{border:0;border-radius:0;background:transparent;box-shadow:none;padding:0}
+body.ks-design #calc-hub .hub-title{text-align:left;font-size:30px;color:var(--ks-ink);margin-bottom:22px}
+body.ks-design #calc-hub .hub-link{border-color:var(--ks-line);border-radius:5px;background:var(--ks-paper);box-shadow:none}
+body.ks-design #calc-hub .hub-link:hover{transform:none;border-color:#9aafa1;box-shadow:none}
+body.ks-design #calc-hub .hub-thumb{background:#efeee5;border-color:var(--ks-line)}
+body.ks-design #calc-hub .hub-card-title{color:var(--ks-ink);font-size:16px;line-height:1.45}
+body.ks-design .calc-workbench{max-width:1360px;padding:20px 0;border:0;border-top:1px solid var(--ks-line);border-radius:0;background:transparent;color:var(--ks-ink)}
+body.ks-design .calc-workbench .inventory-item{border-color:var(--ks-line);border-radius:5px;background:var(--ks-paper);padding:14px}
+body.ks-design .calc-workbench :is(input,.calc-related a){min-height:44px;border-color:var(--ks-line);border-radius:5px;background:var(--ks-paper);color:var(--ks-ink)}
+body.ks-design .calc-workbench input[aria-invalid=true]{border-color:#b93737}
+body.ks-design .kd-personal.kd-page-actions{border-width:1px 0;border-color:var(--ks-line);border-radius:0;background:transparent;box-shadow:none;color:var(--ks-ink)}
+body.ks-design .kd-personal button{border-color:var(--ks-line);border-radius:5px;background:var(--ks-paper);color:var(--ks-teal)}
+body.ks-design .kd-personal button[aria-pressed=true]{background:#e7efea;border-color:#aabfb0}
+body.ks-design .kd-personal .kd-goal{border-color:var(--ks-line);border-radius:5px;box-shadow:none;background:var(--ks-paper)}
+body.ks-design .kd-personal :is(progress,.calc-workbench progress){accent-color:var(--ks-teal)}
+/* Preserved legacy pet and research collections receive the same neutral surface. */
+body.ks-design #pet-page:not(:has(.kcat-page)) .card{border-color:var(--ks-line);border-radius:5px;box-shadow:none;background:var(--ks-paper)}
+body.ks-design #pet-page:not(:has(.kcat-page)) .card:hover{transform:none;box-shadow:none;border-color:#9aafa1}
+body.ks-design #pet-page:not(:has(.kcat-page)) .card-name{color:var(--ks-ink);font-size:18px}
+body.ks-design .kd-research :is(.research-record,.kd-research-detail){border-color:var(--ks-line);border-radius:5px;box-shadow:none;background:var(--ks-paper);color:var(--ks-ink)}
+body.ks-design .kd-research .research-record.kd-selected{border-color:var(--ks-teal);box-shadow:inset 3px 0 var(--ks-teal)}
+body.ks-design .kd-research .research-filter[aria-pressed=true]{background:var(--ks-teal);color:var(--ks-paper)}
+body.ks-design #kd-buildings-index{--kd-ink:var(--ks-ink);--kd-muted:var(--ks-muted);--kd-line:var(--ks-line);--kd-accent:var(--ks-teal)}
+body.ks-design #kd-buildings-index h1{color:var(--ks-ink);font-size:32px}
+body.ks-design #kd-buildings-index .kd-index-controls{gap:14px;margin:18px 0}
+body.ks-design #kd-buildings-index .kd-index-controls :is(input,select,button){min-height:44px;border-radius:5px;border-color:var(--ks-line);background:var(--ks-paper);color:var(--ks-ink)}
+body.ks-design #kd-buildings-index [data-building-entry]{border-color:var(--ks-line);color:var(--ks-ink);padding:18px 0}
+body.ks-design #kd-buildings-index [data-building-entry] strong{font-size:16px;line-height:1.45}
+body.ks-design #kd-buildings-index [data-building-entry] span{color:var(--ks-muted);font-size:12px}
+
+@media(max-width:760px){
+  body.ks-design .kh-list .kh-list-head h1{font-size:28px}
+  body.ks-design .kh-list .kh-filters{gap:10px;padding-block:15px}
+  body.ks-design .kh-list .kh-filters :is(button,select,input){font-size:13px;padding-inline:9px}
+  body.ks-design .kh-list .kh-roster{gap:0 18px}
+  body.ks-design .kh-list .kh-card{padding-block:16px}
+  body.ks-design .kh-list .kh-card h2{font-size:17px}
+  body.ks-design .kh-list .kh-table :is(th,td){padding:11px 10px}
+  body.ks-design .kh-list .kh-compare-table thead th button{margin-left:2px}
+  body.ks-design .kcat-page{padding:18px 16px 36px;font-size:14px}
+  body.ks-design .kcat-page h1{font-size:28px}
+  body.ks-design .kcat-page .kcat-nav{gap:21px;margin-bottom:18px}
+  body.ks-design .kcat-page .kcat-nav a{font-size:13px}
+  body.ks-design .kcat-page .kcat-tools{flex-wrap:wrap;gap:10px}
+  body.ks-design .kcat-page .kcat-tools .kcat-search{flex-basis:100%}
+  body.ks-design .kcat-page .kcat-tools label{min-width:0;flex:1}
+  body.ks-design .kcat-page .kcat-tools :is(input,select){width:100%;font-size:13px}
+  body.ks-design .kcat-page .kcat-grid{gap:0 18px}
+  body.ks-design .kcat-page .kcat-card{padding-block:17px;gap:14px}
+  body.ks-design .kcat-page .kcat-card>img{width:74px;height:82px;flex-basis:74px}
+  body.ks-design .kcat-page .kcat-card h2{font-size:18px}
+  body.ks-design #pet-page .kcat-page h1{font-size:28px}
+  body.ks-design #pet-page .kcat-card{gap:14px}
+  body.ks-design #pet-page .kcat-card>img{width:74px;min-width:74px;max-width:74px;height:82px;max-height:82px;flex-basis:74px}
+  body.ks-design .kcat-page .kcat-content .hero{gap:15px}
+  body.ks-design .kcat-page .kcat-content :is(.overview-grid,.materials-grid,.facts){gap:0 18px}
+  body.ks-design .kcat-page .kcat-content :is(.stat-value,.material-total){font-size:18px}
+  body.ks-design .kcat-page .kcat-content :is(th,td){padding:11px 10px!important;font-size:13px}
+  body.ks-design .kcat-page .kcat-content th{font-size:12px}
+  body.ks-design :is(#calc-ui,#calc-hub){padding:18px 0 30px}
+  body.ks-design #content:has(:is(#calc-ui,#calc-hub,#training-calc,.hero-gear-page)){padding-inline:16px}
+  body.ks-design #training-calc{padding:0 0 30px}
+  body.ks-design .hero-gear-page .wrap{padding:18px 0 30px}
+  body.ks-design #calc-ui :is(.calc-title,h2){font-size:22px}
+  body.ks-design #calc-hub .hub-title{font-size:27px}
+  body.ks-design #calc-hub .hub-card-title{font-size:14px}
+  body.ks-design .calc-workbench .inventory-grid{gap:10px}
+  body.ks-design #kd-buildings-index h1{font-size:28px}
+}
+/* Legacy page styles lock these widths with !important. Keep one outer gutter. */
+body.ks-design.kd-building-table-shell > .wrap > #main,
+body.ks-design.kd-building-table-shell > main.container{
+  max-width:1360px!important;padding:26px 32px 48px!important;
+}
+body.ks-design.kh-shell #main{max-width:1360px;padding-top:18px!important}
+body.ks-design.kh-shell #content.panel{max-width:1360px;padding:0 32px 48px}
+body.ks-design.kr-shell #content,
+body.ks-design.kp-shell main.container,
+body.ks-design.kp-shell #content{max-width:1360px!important}
+/* Static research retains .panel without .kd-ui. Flatten that old outer box too;
+   .kr-page alone owns the responsive content gutter. */
+body.ks-design.kr-shell #main.container,
+body.ks-design.kr-shell #content.panel{
+  width:100%;max-width:1360px!important;min-width:0;margin-inline:auto!important;padding:0!important;
+  border:0;border-radius:0;box-shadow:none;background:transparent;
+}
+body.ks-design :is(.kr-page,.kp-page){max-width:none;padding:26px 32px 48px}
+/* :where prevents the building ID from raising every generic control's priority
+   above the research/planner primary-action styles. */
+body.ks-design :where(#kd-building.kd-building-table-page,.kh-detail,.kr-page,.kp-page) :is(button,input,select){
+  min-height:44px;border-color:var(--dd-line);border-radius:5px;background:var(--dd-paper);
+  box-shadow:none;font-size:14px;
+}
+body.ks-design :where(#kd-building.kd-building-table-page,.kh-detail,.kr-page,.kp-page) :is(a,button,input,select,summary,[tabindex="0"]):focus-visible{
+  outline:2px solid var(--dd-accent);outline-offset:3px;
+}
+body.ks-design :where(#kd-building.kd-building-table-page,.kh-detail,.kr-page,.kp-page) a{color:var(--dd-accent);text-underline-offset:4px}
+body.ks-design :where(#kd-building.kd-building-table-page,.kh-detail,.kr-page,.kp-page) :is(h1,h2,h3,h4){color:var(--dd-ink);letter-spacing:-.025em}
+body.ks-design :where(#kd-building.kd-building-table-page,.kh-detail,.kr-page,.kp-page) :is(table,dd,output){font-variant-numeric:tabular-nums lining-nums}
+/* Suppress only duplicate cross-category navigation when the global menu exists.
+   Building/hero TOCs, research branches and related-resource links stay visible. */
+body.ks-design:has(> .site-header,> [data-ks-site-nav]) :is(.kd-subnav,.kh-subnav){display:none}
+
+/* Buildings: a compact identity, one full-width data sheet, then range tools. */
+body.ks-design #kd-building.kd-building-table-page .kd-building-heading{gap:22px;margin-bottom:18px;align-items:center}
+body.ks-design #kd-building.kd-building-table-page .kd-building-image{width:108px;height:108px;flex-basis:108px;object-fit:contain}
+body.ks-design #kd-building.kd-building-table-page h1{font-size:34px;line-height:1.18;font-weight:780;margin:5px 0 8px}
+body.ks-design #kd-building.kd-building-table-page .kd-building-back{color:var(--dd-muted);font-size:13px}
+body.ks-design #kd-building.kd-building-table-page .kd-building-intro{color:var(--dd-muted);font-size:15px;line-height:1.6;max-width:80ch}
+body.ks-design #kd-building.kd-building-table-page .kd-building-description{font-size:13px;margin-top:3px}
+body.ks-design #kd-building.kd-building-table-page .kd-building-description summary{padding:7px 0;min-height:36px}
+body.ks-design #kd-building.kd-building-table-page .kd-building-toc{gap:26px;margin-bottom:24px;border-color:var(--dd-line)}
+body.ks-design #kd-building.kd-building-table-page .kd-building-toc a{display:flex;align-items:center;min-height:46px;padding:11px 0;font-size:14px;color:var(--dd-muted)}
+body.ks-design #kd-building.kd-building-table-page .kd-building-toc a:first-of-type{border-color:var(--dd-accent);color:var(--dd-accent)}
+body.ks-design #kd-building.kd-building-table-page section.kd-building-section{margin-bottom:36px;scroll-margin-top:100px}
+body.ks-design #kd-building.kd-building-table-page .kd-building-table-toolbar{gap:12px;margin-bottom:12px;flex-wrap:wrap}
+body.ks-design #kd-building.kd-building-table-page .kd-building-table-title{gap:12px;flex-wrap:wrap}
+body.ks-design #kd-building.kd-building-table-page .kd-building-table-title h2{font-size:21px;font-weight:750}
+body.ks-design #kd-building.kd-building-table-page .kd-building-table-title>span{font-size:12px;color:var(--dd-muted)}
+body.ks-design #kd-building.kd-building-table-page .kd-building-row-finder{gap:8px;font-size:13px}
+body.ks-design #kd-building.kd-building-table-page .kd-building-row-finder label{color:var(--dd-muted)}
+body.ks-design #kd-building.kd-building-table-page .kd-building-row-finder :is(button,select){min-height:44px;font-size:13px;padding:9px 12px}
+body.ks-design #kd-building.kd-building-table-page .kd-building-row-finder button{background:var(--dd-accent);border-color:var(--dd-accent);color:var(--dd-paper)}
+body.ks-design #kd-building.kd-building-table-page .kd-building-row-finder button:hover{background:#194d48}
+body.ks-design #kd-building.kd-building-table-page .kd-building-table-region{
+  min-width:0;max-width:100%;overflow:auto;overscroll-behavior-x:contain;
+  border:0;border-top:2px solid var(--dd-accent);border-bottom:1px solid var(--dd-line);
+  border-radius:0;background:var(--dd-paper);scrollbar-width:thin;scrollbar-color:#afbab1 var(--dd-soft);
+}
+body.ks-design #kd-building.kd-building-table-page .kd-building-table{font-size:13px;background:var(--dd-paper)}
+body.ks-design #kd-building.kd-building-table-page :is(th,td){padding:12px 13px;border-bottom-color:var(--dd-line);background:var(--dd-paper);line-height:1.45}
+body.ks-design #kd-building.kd-building-table-page thead th{background:#edf0e9;color:#4b5d5d;font-size:12px;font-weight:700}
+body.ks-design #kd-building.kd-building-table-page thead th img{width:18px;height:18px;vertical-align:-4px;margin-right:5px}
+body.ks-design #kd-building.kd-building-table-page .kd-num{text-align:right}
+body.ks-design #kd-building.kd-building-table-page tbody th{min-width:68px;background:#f1f2eb;color:var(--dd-ink);box-shadow:1px 0 0 var(--dd-line);font-size:12px}
+body.ks-design #kd-building.kd-building-table-page thead th:first-child{min-width:68px;background:#e8ece3;z-index:3}
+body.ks-design #kd-building.kd-building-table-page tbody tr:nth-child(even)>td{background:#fafaf5}
+body.ks-design #kd-building.kd-building-table-page tbody tr>td.kd-building-time{background:#f0f3ed;border-inline:1px solid #dfe5db;color:var(--dd-accent);font-weight:650}
+body.ks-design #kd-building.kd-building-table-page tbody tr:hover>td{background:#f0f3eb}
+/* Override the original selected-row !important so the existing state remains visible. */
+body.ks-design #kd-building.kd-building-table-page [data-selected=true]>*{background:var(--dd-selected)!important;border-bottom-color:#b9cdc2}
+body.ks-design #kd-building.kd-building-table-page [data-selected=true]>th{color:var(--dd-accent);box-shadow:inset 3px 0 var(--dd-accent),1px 0 #b9cdc2}
+body.ks-design #kd-building.kd-building-table-page .kd-building-prerequisites{font-size:12px;line-height:1.65;min-width:170px}
+body.ks-design #kd-building.kd-building-table-page .kd-building-prerequisites a{text-decoration:underline;text-decoration-color:#a5bbb0}
+body.ks-design #kd-building.kd-building-table-page .kd-building-scroll-hint{font-size:12px;color:var(--dd-muted);margin-bottom:9px}
+body.ks-design #kd-building.kd-building-table-page .kd-range{padding-block:5px;border-color:var(--dd-line)}
+body.ks-design #kd-building.kd-building-table-page .kd-range summary{font-size:18px;min-height:48px}
+body.ks-design #kd-building.kd-building-table-page .kd-range-controls{gap:14px;margin-block:16px}
+body.ks-design #kd-building.kd-building-table-page .kd-range-controls label{font-size:13px;color:var(--dd-muted)}
+body.ks-design #kd-building.kd-building-table-page .kd-range-totals{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0 22px}
+body.ks-design #kd-building.kd-building-table-page .kd-range-totals>div{padding:12px 0;border-color:var(--dd-line)}
+body.ks-design #kd-building.kd-building-table-page .kd-range-totals dt{color:var(--dd-muted);font-size:12px}
+body.ks-design #kd-building.kd-building-table-page .kd-range-totals dd{font-size:21px;text-align:right;margin:6px 0;color:var(--dd-ink)}
+body.ks-design #kd-building.kd-building-table-page .kd-building-related{gap:10px 22px}
+body.ks-design #kd-building.kd-building-table-page .kd-building-related a{border:0;border-bottom:1px solid var(--dd-line);border-radius:0;padding:10px 0;min-height:44px;font-size:14px}
+
+/* Hero detail: portrait identity and parallel combat columns, not card stacks. */
+body.ks-design .kh-detail .kh-subnav{border-color:var(--dd-line);margin-bottom:24px;gap:26px;padding:0;font-size:13px}
+body.ks-design .kh-detail .kh-subnav a{display:flex;align-items:center;min-height:44px;color:var(--dd-muted)}
+body.ks-design .kh-detail .kh-subnav [aria-current]{color:var(--dd-accent)}
+body.ks-design .kh-detail .kh-hero-head{gap:24px;padding-bottom:22px}
+body.ks-design .kh-detail .kh-portrait{width:120px;height:120px;object-fit:contain;border-radius:6px;background:#efeee5}
+body.ks-design .kh-detail .kh-hero-head h1{font-size:34px;font-weight:780;margin:5px 0 9px}
+body.ks-design .kh-detail .kh-back{color:var(--dd-muted);font-size:13px}
+body.ks-design .kh-detail .kh-badges{color:var(--dd-muted);font-size:13px;gap:6px 12px}
+body.ks-design .kh-detail .kh-badges>span+span{border-color:var(--dd-line);padding-left:12px}
+body.ks-design .kh-detail .kh-rarity[data-rarity=SSR]{color:#805e27}
+body.ks-design .kh-detail .kh-toc{gap:26px;padding:0;border-top:0;border-color:var(--dd-line);font-size:14px}
+body.ks-design .kh-detail .kh-toc a{display:flex;align-items:center;min-height:46px;padding:11px 0}
+body.ks-design .kh-detail .kh-condition{font-size:12px;color:var(--dd-muted);line-height:1.6;margin:12px 0 22px!important}
+body.ks-design .kh-detail .kh-combat-grid{gap:36px}
+body.ks-design .kh-detail :is(.kh-mode h2,.kh-section>h2){font-size:21px;font-weight:750;border-bottom:2px solid var(--dd-accent);padding-bottom:12px}
+body.ks-design .kh-detail .kh-stats{margin:8px 0 12px;font-size:14px}
+body.ks-design .kh-detail .kh-stats>div{padding:9px 0;border-color:var(--dd-line)}
+body.ks-design .kh-detail .kh-stats dt{color:var(--dd-muted)}
+body.ks-design .kh-detail .kh-stats dd{font-size:16px;color:var(--dd-ink);font-weight:700}
+body.ks-design .kh-detail .kh-skill{padding:20px 0;gap:15px;border-color:var(--dd-line)}
+body.ks-design .kh-detail .kh-skill h3{font-size:17px;line-height:1.45;margin-bottom:8px}
+body.ks-design .kh-detail .kh-skill p{font-size:14px;line-height:1.85;color:var(--dd-ink)}
+body.ks-design .kh-detail .kh-skill-icon{border-radius:5px}
+body.ks-design .kh-detail .kh-series{background:#f0f2eb;border-left:2px solid #a3b8a9;padding:9px 12px;margin-top:10px}
+body.ks-design .kh-detail .kh-series>span{color:var(--dd-muted);font-size:11px}
+body.ks-design .kh-detail .kh-series p{font-size:13px;line-height:1.7}
+body.ks-design .kh-detail .kh-section{margin-top:36px}
+body.ks-design .kh-detail .kh-scroll{min-width:0;overflow:auto;scrollbar-width:thin;scrollbar-color:#afbab1 var(--dd-soft);border-top:1px solid var(--dd-line)}
+body.ks-design .kh-detail .kh-table :is(th,td){padding:12px 14px;border-color:var(--dd-line);background:var(--dd-paper)}
+body.ks-design .kh-detail .kh-table thead th{background:#edf0e9;color:#4b5d5d;font-size:12px}
+body.ks-design .kh-detail .kh-table tbody tr:nth-child(even)>*{background:#fafaf5}
+body.ks-design .kh-detail .kh-table tbody th:first-child{background:#f1f2eb}
+body.ks-design .kh-detail .kh-story{padding:14px 0;border-color:var(--dd-line)}
+body.ks-design .kh-detail .kh-story summary{min-height:44px;padding-block:9px}
+body.ks-design .kh-detail :is(.kh-related,.kh-resource-links){gap:10px 24px}
+body.ks-design .kh-detail :is(.kh-related,.kh-resource-links) a{min-height:44px;display:inline-flex;align-items:center}
+
+/* Research: quiet persistent catalog, strong selected entry and a readable sheet. */
+body.ks-design .kr-page .kr-head h1{font-size:32px;font-weight:780;line-height:1.25}
+body.ks-design .kr-page .kr-head p{font-size:14px;line-height:1.6}
+body.ks-design .kr-page .kr-branches{gap:24px;padding:0;margin:20px 0;border-color:var(--dd-line);flex-wrap:nowrap;overflow:auto;scrollbar-width:thin;max-width:100%}
+body.ks-design .kr-page .kr-branches a{display:flex;align-items:center;gap:5px;flex:none;min-height:46px;border-radius:0;padding:10px 0;background:transparent;color:var(--dd-muted);border-bottom:2px solid transparent;white-space:nowrap}
+body.ks-design .kr-page .kr-branches a[aria-current=page]{background:transparent;color:var(--dd-accent);border-color:var(--dd-accent)}
+body.ks-design .kr-page .kr-filters{gap:12px;margin-bottom:22px}
+body.ks-design .kr-page :is(.kr-filters,.kr-level-tools,.kr-range-controls) label{font-size:12px;color:var(--dd-muted);gap:6px}
+body.ks-design .kr-page .kr-workspace{grid-template-columns:272px minmax(0,1fr);gap:32px}
+body.ks-design .kr-page .kr-catalog{background:transparent;border:0;border-top:2px solid var(--dd-line);border-radius:0;top:90px}
+body.ks-design .kr-page .kr-catalog-label{padding:13px 10px;border-color:var(--dd-line)}
+body.ks-design .kr-page .kr-catalog-label h2{font-size:14px;letter-spacing:0}
+body.ks-design .kr-page .kr-catalog-scroll{scrollbar-width:thin;scrollbar-color:#afbab1 var(--dd-soft)}
+body.ks-design .kr-page .kr-catalog-table th{background:var(--dd-soft);padding:9px 10px;font-size:11px}
+body.ks-design .kr-page .kr-catalog-table td{border-color:var(--dd-line)}
+body.ks-design .kr-page .kr-catalog-table button{font-size:13px;min-height:58px;background:transparent;border:0;border-radius:0;padding:10px;line-height:1.45}
+body.ks-design .kr-page .kr-catalog-table small{font-size:11px;margin-top:4px}
+body.ks-design .kr-page .kr-catalog-table .kr-selected{background:var(--dd-selected)}
+body.ks-design .kr-page .kr-catalog-table .kr-selected button{color:var(--dd-accent);box-shadow:inset 3px 0 var(--dd-accent)}
+body.ks-design .kr-page .kr-record-head{gap:16px;margin:0 0 13px}
+body.ks-design .kr-page .kr-record-head img{width:68px;height:68px}
+body.ks-design .kr-page .kr-record-head h2{font-size:26px;line-height:1.3;font-weight:750}
+body.ks-design .kr-page .kr-description{font-size:14px;line-height:1.75;color:var(--dd-muted);margin-bottom:15px}
+body.ks-design .kr-page .kr-level-tools{padding-top:2px;gap:10px;flex-wrap:wrap}
+body.ks-design .kr-page .kr-level-tools button{min-height:44px;background:var(--dd-accent);border-color:var(--dd-accent);color:var(--dd-paper);font-size:13px}
+body.ks-design .kr-page .kr-scroll{border:0;border-top:2px solid var(--dd-accent);border-bottom:1px solid var(--dd-line);border-radius:0;background:var(--dd-paper);scrollbar-width:thin;scrollbar-color:#afbab1 var(--dd-soft)}
+body.ks-design .kr-page .kr-level-table{font-size:13px}
+body.ks-design .kr-page .kr-level-table :is(th,td){padding:12px 13px;border-color:var(--dd-line);background:var(--dd-paper)}
+body.ks-design .kr-page .kr-level-table thead th{background:#edf0e9;color:#4b5d5d;font-size:12px}
+body.ks-design .kr-page .kr-level-table tbody tr:nth-child(even)>td{background:#fafaf5}
+body.ks-design .kr-page .kr-level-table tr>*:first-child{background:#f1f2eb;min-width:54px;color:var(--dd-ink)}
+body.ks-design .kr-page .kr-level-table thead tr>*:first-child{background:#e8ece3}
+/* Existing research selection uses !important; maintain that state in the new palette. */
+body.ks-design .kr-page .kr-level-table .kr-highlight>*{background:var(--dd-selected)!important}
+body.ks-design .kr-page .kr-level-table .kr-highlight>th{box-shadow:inset 3px 0 var(--dd-accent);color:var(--dd-accent)}
+body.ks-design .kr-page .kr-range{margin-top:24px;padding-top:20px}
+body.ks-design .kr-page .kr-totals{gap:0 22px;border:0;border-radius:0;background:transparent;overflow:visible}
+body.ks-design .kr-page .kr-totals>div{background:transparent;border-top:1px solid var(--dd-line);padding:12px 0;min-width:0}
+body.ks-design .kr-page .kr-totals dt{font-size:12px}
+body.ks-design .kr-page .kr-totals dd{font-size:18px;font-weight:700;margin-top:6px}
+body.ks-design .kr-page .kr-empty{background:var(--dd-soft);border-radius:0;border-left:2px solid var(--dd-line)}
+body.ks-design .kr-page .kr-related{gap:8px 24px}
+body.ks-design .kr-page .kr-related a{display:flex;align-items:center;min-height:44px;font-size:14px}
+
+/* Planner: stable input rail and cost ledger with clear actions and honest statuses. */
+body.ks-design .kp-page .kp-head{gap:24px;margin-bottom:22px}
+body.ks-design .kp-page .kp-head h1{font-size:32px;font-weight:780;line-height:1.25;margin-bottom:9px}
+body.ks-design .kp-page .kp-head p{font-size:14px;line-height:1.6;max-width:72ch}
+body.ks-design .kp-page .kp-head .kp-eyebrow{font-size:11px;color:var(--dd-bronze);letter-spacing:.11em}
+body.ks-design .kp-page .kp-head nav{font-size:13px;gap:8px 18px}
+body.ks-design .kp-page .kp-head nav a{display:flex;align-items:center;min-height:44px}
+body.ks-design .kp-page .kp-jump{gap:24px;border-bottom:1px solid var(--dd-line);margin-bottom:0;padding:0;background:var(--dd-soft)}
+body.ks-design .kp-page .kp-jump button{padding:11px 0;min-height:46px;border:0;border-radius:0;background:transparent;font-size:14px;font-weight:700;color:var(--dd-accent)}
+body.ks-design .kp-page .kp-storage{border-top:0;padding:10px 0;border-bottom-color:var(--dd-line)}
+body.ks-design .kp-page .kp-storage>summary{font-size:13px;min-height:44px;align-content:center;color:var(--dd-accent)}
+body.ks-design .kp-page .kp-saved{padding:8px 0;gap:14px}
+body.ks-design .kp-page .kp-save-actions button{min-height:44px;font-size:13px}
+body.ks-design .kp-page .kp-save-actions button:first-child{background:var(--dd-accent);color:var(--dd-paper);border-color:var(--dd-accent)}
+body.ks-design .kp-page .kp-workspace{grid-template-columns:350px minmax(0,1fr);gap:40px}
+body.ks-design .kp-page .kp-section{padding:18px 0;margin-bottom:20px;border-top:2px solid var(--dd-line)}
+body.ks-design .kp-page h2{font-size:19px;gap:9px}
+body.ks-design .kp-page h2>span{width:25px;height:25px;background:var(--dd-selected);color:var(--dd-accent);border-radius:4px;font-size:12px}
+body.ks-design .kp-page :is(.kp-help,.kp-empty){font-size:12px;line-height:1.7}
+body.ks-design .kp-page label{font-size:13px;font-weight:600;gap:6px}
+body.ks-design .kp-page .kp-picker-level>button{background:var(--dd-accent);color:var(--dd-paper);border-color:var(--dd-accent);font-size:13px;padding-inline:13px}
+body.ks-design .kp-page :is(.kp-current-list,.kp-goals) li{border-color:var(--dd-line);padding-block:12px;gap:8px}
+body.ks-design .kp-page .kp-goal-actions{gap:5px}
+/* Old icon button dimensions are !important. Increase only these real controls. */
+body.ks-design .kp-page .kp-icon-button{width:44px;min-width:44px;min-height:44px!important;padding:6px!important;font-size:17px!important;margin:0}
+body.ks-design .kp-page .kp-goal-actions .kp-icon-button{width:44px;min-width:44px}
+body.ks-design .kp-page .kp-add-state>summary{font-size:13px;min-height:44px;align-content:center}
+body.ks-design .kp-page .kp-output{padding-top:18px;border-top:2px solid var(--dd-accent)}
+body.ks-design .kp-page .kp-badge{border-radius:3px;padding:5px 8px;font-size:11px!important;font-weight:650;white-space:normal;text-align:center}
+body.ks-design .kp-page .kp-badge-exact{background:#e8f1e9;border-color:#bfd3c5;color:var(--dd-accent)!important}
+body.ks-design .kp-page :is(.kp-badge-partial,.kp-badge-blocked,.kp-badge-invalid){background:#f6f0e1;border-color:#dfcfa8;color:#755825!important}
+body.ks-design .kp-page .kp-notice{background:#f6f0e3;border-color:var(--dd-bronze);padding:13px 15px;margin:18px 0}
+body.ks-design .kp-page .kp-notice p{line-height:1.65}
+body.ks-design .kp-page .kp-notice button{min-height:44px;font-size:12px;border-color:#dccdab;background:var(--dd-paper)}
+body.ks-design .kp-page .kp-plan-empty{background:var(--dd-soft);border:1px dashed #b6c4ba;border-radius:0;padding:30px 18px;line-height:1.7}
+body.ks-design .kp-page .kp-totals{margin-block:22px 28px}
+body.ks-design .kp-page .kp-totals>dl{gap:0 22px;border:0;border-radius:0;background:transparent;overflow:visible}
+body.ks-design .kp-page .kp-totals>dl>div{background:transparent;padding:12px 0;border-top:1px solid var(--dd-line)}
+body.ks-design .kp-page .kp-totals dt{font-size:12px;line-height:1.5}
+body.ks-design .kp-page .kp-totals dd{font-size:22px;line-height:1.4;margin:6px 0 3px;font-weight:750}
+body.ks-design .kp-page .kp-totals small{font-size:11px;line-height:1.5;color:var(--dd-muted)}
+body.ks-design .kp-page .kp-step{padding:16px 0;border-color:var(--dd-line)}
+body.ks-design .kp-page .kp-step-index{width:26px;height:26px;background:var(--dd-selected);color:var(--dd-accent);border-radius:4px}
+body.ks-design .kp-page .kp-step h4{font-size:15px;font-weight:700;line-height:1.55}
+body.ks-design .kp-page .kp-step h4 b{font-size:13px;font-weight:650;margin-left:5px}
+body.ks-design .kp-page .kp-step-head p{font-size:12px;margin-top:4px}
+body.ks-design .kp-page .kp-step-head>button{font-size:12px;min-height:44px;border-color:var(--dd-line);padding:8px 10px}
+body.ks-design .kp-page .kp-step-head>button:not(:disabled){color:var(--dd-accent);border-color:#aabfb0;background:#edf3ec;font-weight:650}
+body.ks-design .kp-page button:disabled{background:#efefe9;color:#788179;border-color:#dce0d6}
+body.ks-design .kp-page .kp-step-details>summary{min-height:44px;align-items:center;font-size:12px;padding:8px 0}
+body.ks-design .kp-page .kp-step-data{gap:22px;margin-top:8px}
+body.ks-design .kp-page .kp-step-costs{gap:7px 20px}
+body.ks-design .kp-page .kp-step-costs>div{font-size:12px;line-height:1.65;gap:10px}
+body.ks-design .kp-page .kp-step-costs dd{font-weight:600}
+body.ks-design .kp-page .kp-requirements{font-size:12px;line-height:1.75;border-color:var(--dd-line)}
+body.ks-design .kp-page .kp-requirements :is(strong,p){font-size:12px}
+body.ks-design .kp-page .kp-history summary{min-height:44px;align-content:center}
+
+@media(min-width:761px) and (max-width:1100px){
+  body.ks-design .kr-page .kr-workspace{grid-template-columns:235px minmax(0,1fr);gap:24px}
+  body.ks-design .kp-page .kp-workspace{grid-template-columns:310px minmax(0,1fr);gap:26px}
+  body.ks-design .kp-page .kp-totals>dl{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.ks-design .kp-page .kp-step-data{grid-template-columns:1fr;gap:10px}
+}
+@media(max-width:760px){
+  body.ks-design.kd-building-table-shell > .wrap > #main,
+  body.ks-design.kd-building-table-shell > main.container{padding:18px 16px 36px!important}
+  body.ks-design.kh-shell #content.panel{padding:0 16px 36px}
+  body.ks-design :is(.kr-page,.kp-page){padding:18px 16px 36px}
+  body.ks-design #kd-building.kd-building-table-page .kd-building-heading{gap:14px;align-items:flex-start;margin-bottom:15px}
+  body.ks-design #kd-building.kd-building-table-page .kd-building-image{width:76px;height:82px;flex-basis:76px;margin-top:3px}
+  body.ks-design #kd-building.kd-building-table-page h1{font-size:28px;margin:3px 0 7px}
+  body.ks-design #kd-building.kd-building-table-page .kd-building-intro{font-size:13px;line-height:1.65}
+  body.ks-design #kd-building.kd-building-table-page .kd-building-description{font-size:12px}
+  body.ks-design #kd-building.kd-building-table-page .kd-building-toc{gap:22px;margin-bottom:20px}
+  body.ks-design #kd-building.kd-building-table-page .kd-building-toc a{font-size:13px;min-height:44px}
+  body.ks-design #kd-building.kd-building-table-page .kd-building-table-toolbar{display:block}
+  body.ks-design #kd-building.kd-building-table-page .kd-building-table-title h2{font-size:19px}
+  body.ks-design #kd-building.kd-building-table-page .kd-building-row-finder{margin-top:12px;gap:7px}
+  body.ks-design #kd-building.kd-building-table-page .kd-building-row-finder :is(select,button){font-size:12px;padding-inline:10px}
+  body.ks-design #kd-building.kd-building-table-page .kd-building-row-finder label{font-size:12px}
+  body.ks-design #kd-building.kd-building-table-page :is(th,td){padding:12px 10px}
+  body.ks-design #kd-building.kd-building-table-page .kd-range-totals{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px}
+  body.ks-design #kd-building.kd-building-table-page .kd-range-totals dd{font-size:18px}
+  body.ks-design #kd-building.kd-building-table-page .kd-range-controls{gap:10px}
+  body.ks-design #kd-building.kd-building-table-page .kd-range-controls label{font-size:12px}
+  body.ks-design .kh-detail .kh-subnav{gap:22px;margin-bottom:18px;font-size:12px}
+  body.ks-design .kh-detail .kh-hero-head{gap:17px;padding-bottom:18px}
+  body.ks-design .kh-detail .kh-portrait{width:90px;height:90px}
+  body.ks-design .kh-detail .kh-hero-head h1{font-size:28px}
+  body.ks-design .kh-detail .kh-badges{font-size:12px;gap:5px 9px}
+  body.ks-design .kh-detail .kh-badges>span+span{padding-left:9px}
+  body.ks-design .kh-detail .kh-toc{gap:22px;font-size:13px}
+  body.ks-design .kh-detail .kh-condition{font-size:12px;margin-bottom:18px!important}
+  body.ks-design .kh-detail .kh-combat-grid{grid-template-columns:1fr;gap:26px}
+  body.ks-design .kh-detail :is(.kh-mode h2,.kh-section>h2){font-size:20px}
+  body.ks-design .kh-detail .kh-skill{grid-template-columns:42px minmax(0,1fr);gap:12px;padding:18px 0}
+  body.ks-design .kh-detail .kh-skill:not(:has(>img)){grid-template-columns:1fr}
+  body.ks-design .kh-detail .kh-skill-icon{width:42px;height:42px}
+  body.ks-design .kh-detail .kh-skill h3{font-size:16px}
+  body.ks-design .kh-detail .kh-skill p{font-size:14px;line-height:1.8}
+  body.ks-design .kh-detail .kh-series p{font-size:13px}
+  body.ks-design .kh-detail .kh-section{margin-top:28px}
+  body.ks-design .kh-detail .kh-table :is(th,td){padding:11px 12px}
+  body.ks-design .kr-page .kr-head h1,body.ks-design .kp-page .kp-head h1{font-size:28px}
+  body.ks-design .kr-page .kr-branches{gap:21px;margin:15px 0 18px}
+  body.ks-design .kr-page .kr-branches a{font-size:13px;min-height:44px}
+  body.ks-design .kr-page .kr-filters{gap:10px;margin-bottom:20px}
+  body.ks-design .kr-page .kr-filters :is(button,select,input){min-height:44px;font-size:13px;padding:9px 10px}
+  body.ks-design .kr-page .kr-workspace{display:flex;gap:28px}
+  body.ks-design .kr-page .kr-catalog{position:static}
+  body.ks-design .kr-page .kr-record-head{gap:12px}
+  body.ks-design .kr-page .kr-record-head img{width:58px;height:58px}
+  body.ks-design .kr-page .kr-record-head h2{font-size:23px}
+  body.ks-design .kr-page .kr-description{font-size:13px;line-height:1.75}
+  body.ks-design .kr-page .kr-level-table :is(th,td){padding:11px 10px}
+  body.ks-design .kr-page .kr-level-table{font-size:13px}
+  body.ks-design .kr-page .kr-totals{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px}
+  body.ks-design .kr-page .kr-totals dd{font-size:17px}
+  body.ks-design .kp-page .kp-head{margin-bottom:16px}
+  body.ks-design .kp-page .kp-head p{font-size:13px}
+  body.ks-design .kp-page .kp-head nav{gap:6px 16px;margin-top:8px;font-size:12px}
+  body.ks-design .kp-page .kp-jump{top:var(--ks-site-nav-height,60px);gap:8px;flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:thin}
+  body.ks-design .kp-page .kp-jump button{font-size:12px;padding:10px 2px;flex:1 0 auto;min-height:46px;white-space:nowrap}
+  body.ks-design .kp-page .kp-saved{gap:10px}
+  body.ks-design .kp-page .kp-save-actions{gap:8px}
+  body.ks-design .kp-page .kp-save-actions button{font-size:12px;padding-inline:8px}
+  body.ks-design .kp-page .kp-workspace{display:block}
+  body.ks-design .kp-page .kp-section{padding:16px 0;margin-bottom:14px}
+  body.ks-design .kp-page .kp-output{margin-top:22px;padding-top:18px}
+  body.ks-design .kp-page h2{font-size:18px}
+  body.ks-design .kp-page .kp-current-list label{grid-template-columns:minmax(0,1fr) minmax(100px,42%);gap:10px;font-size:13px}
+  body.ks-design .kp-page .kp-goals li{align-items:flex-end}
+  body.ks-design .kp-page .kp-goals label{flex:1 1 145px;min-width:0;font-size:13px}
+  body.ks-design .kp-page .kp-goals select{font-size:13px}
+  body.ks-design .kp-page .kp-goal-actions{flex-shrink:0;gap:4px}
+  body.ks-design .kp-page .kp-totals>dl{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px}
+  body.ks-design .kp-page .kp-totals dd{font-size:20px}
+  body.ks-design .kp-page .kp-step-data{grid-template-columns:1fr;gap:12px}
+  body.ks-design .kp-page .kp-step-head{gap:8px;flex-wrap:wrap}
+  body.ks-design .kp-page .kp-step-head>div{min-width:130px}
+  body.ks-design .kp-page .kp-step-head>button{max-width:100px;font-size:11px;padding-inline:8px}
+  body.ks-design .kp-page .kp-step h4{font-size:14px}
+  body.ks-design .kp-page .kp-step-details>summary{gap:8px;flex-wrap:wrap;font-size:12px}
+  body.ks-design .kp-page .kp-step-details>summary span{font-size:12px;overflow-wrap:anywhere;max-width:100%}
+  body.ks-design .kp-page .kp-step-costs{gap:7px 18px}
+  body.ks-design .kp-page .kp-step-costs>div{gap:8px}
+  body.ks-design .kp-page .kp-requirements{border-left:0;border-top:1px solid var(--dd-line);padding:10px 0 0}
+}
