@@ -1351,9 +1351,29 @@
   }
 
   var navigationIntent = 0;
+  // These static data documents own their full tables; the legacy fragment router
+  // has no matching renderer. Preserve the locale, query and anchor in one visit.
+  function externalDataDocument(to) {
+    try {
+      var u = new URL(to, location.href);
+      if (u.origin !== location.origin && u.origin !== 'https://kingshotdata.kr') return null;
+      var m = u.pathname.match(/^\/(?:(ko|en|ja)\/)?(alliance\/tech|events\/calendar|masters(?:\/(?:pan|roman|valora|cassia|guinevere|wilson|isnor|aena))?)\/?$/);
+      if (!m) return null;
+      var l = m[1] || (window.KD_NAV && window.KD_NAV.locale()) || 'ko';
+      if (!/^(ko|en|ja)$/.test(l)) return null;
+      return '/' + l + '/' + m[2] + '/' + u.search + u.hash;
+    } catch (_) { return null; }
+  }
   window.navigate = function (to, opts) {
     var intent = ++navigationIntent;
     opts = opts || {};
+    var documentPath = externalDataDocument(to);
+    if (documentPath) {
+      if (window.KD_NAV) window.KD_NAV.capture();
+      if (opts.replace) window.location.replace(documentPath);
+      else window.location.assign(documentPath);
+      return Promise.resolve();
+    }
     var u = localizeStaticSpaUrl(canonicalize(to));
     var url = u.pathname + u.search + u.hash;
     if (window.KD_NAV) window.KD_NAV.capture();
@@ -1373,6 +1393,13 @@
 
     var href = a.getAttribute('href');
     if (!href) return;
+    var documentPath = externalDataDocument(href);
+    if (documentPath && !a.hasAttribute('download')) {
+      e.preventDefault(); e.stopImmediatePropagation(); a.removeAttribute('target');
+      if (window.KD_NAV) window.KD_NAV.capture();
+      window.location.assign(documentPath);
+      return;
+    }
     // Enter the canonical guide reader in this tab, including list/search links.
     // Once inside, guide-reader owns content/history; the global SPA never remounts it.
     try {

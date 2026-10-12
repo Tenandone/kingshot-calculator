@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 1,
+  "release": "ks-ui15-schedules-20261012",
+  "locales": [
+    "ko",
+    "en",
+    "ja"
+  ],
+  "sources": [
+    {
+      "id": "wiki-kvk-en",
+      "url": "https://kingshotwiki.com/events/kingdom-of-power/",
+      "observedAt": "2026-10-11T05:19:11.315Z",
+      "sha256": "f1c9968495316706ae605e6e4e53187d06f0f92f7bfebf764c8de9e7d512db2e",
+      "authority": "project-approved-wiki"
+    },
+    {
+      "id": "wiki-transfer-en",
+      "url": "https://kingshotwiki.com/events/kingdom-transfer-event/",
+      "observedAt": "2026-10-11T05:19:14.097Z",
+      "sha256": "ecd3c0621fc17e7aa3bc1016af20ebce0c9a15eee243313cae85a33323d0518c",
+      "authority": "project-approved-wiki"
+    },
+    {
+      "id": "wiki-kvk-ja",
+      "url": "https://kingshotwiki.com/ja/events/kingdom-of-power-ja/",
+      "observedAt": "2026-10-11T05:19:08.416Z",
+      "sha256": "eb94ba23ca61e70003767104c692136eb76518502a76575ffc1d6d8ccd869c2b",
+      "authority": "project-approved-wiki"
+    },
+    {
+      "id": "wiki-transfer-ja",
+      "url": "https://kingshotwiki.com/ja/events/kingdom-transfer-event-ja/",
+      "observedAt": "2026-10-11T05:19:06.774Z",
+      "sha256": "81616eba3a14b5d86ee06cc4d5b1caba4b94938cf8d9c2a3b21beb9ce0a7b7a0",
+      "authority": "project-approved-wiki"
+    },
+    {
+      "id": "wiki-kvk-ko",
+      "url": "https://kingshotwiki.com/ko/events/kingdom-of-power-ko/",
+      "observedAt": "2026-10-11T05:19:08.839Z",
+      "sha256": "dd331553ab7d707d54727648af09b4f32967375ae3006931a761975a08bfeef8",
+      "authority": "project-approved-wiki"
+    },
+    {
+      "id": "wiki-transfer-ko",
+      "url": "https://kingshotwiki.com/ko/events/kingdom-transfer-event-ko/",
+      "observedAt": "2026-10-11T05:19:07.071Z",
+      "sha256": "43c67007c0034d48662968db6f9cbf3eb0f691eb50b2569e95448f7788e5f218",
+      "authority": "project-approved-wiki"
+    },
+    {
+      "id": "net-transfer",
+      "url": "https://kingshot.net/transfer-history",
+      "observedAt": "2026-10-12T05:44:21.219Z",
+      "sha256": "2d0fe37a22939dd482b706d183d656301e20bf78d11b9bf77a606b6929268cf5",
+      "authority": "community-fan-site"
+    },
+    {
+      "id": "net-calendar-browser",
+      "url": "https://kingshot.net/calendar",
+      "observedAt": "2026-10-12T05:52:56.900Z",
+      "sha256": "16440633d4988e6ee40641d6adb0d473a345860151b1d096d2ccd078b477785b",
+      "authority": "community-fan-site"
+    }
+  ],
+  "events": [
+    {
+      "id": "ks:event:kingdom-of-power",
+      "names": {
+        "en": "Kingdom of Power",
+        "ja": "最強王国",
+        "ko": "최강 왕국"
+      },
+      "next": {
+        "status": "community-cycle-reference",
+        "startDate": "2026-11-01",
+        "endDateInclusive": "2026-11-07",
+        "startAtUtc": null,
+        "endAtUtc": null,
+        "timezone": "UTC",
+        "kingdomGroups": [],
+        "countdownAllowed": false,
+        "displayMode": "conditional-cycle-dates",
+        "sourceIds": [
+          "net-calendar-browser"
+        ],
+        "evidence": [
+          "kvkBrowserCycle"
+        ],
+        "officialAnnouncementObserved": false,
+        "scopeStatus": "user-selected-cycle-not-kingdom-confirmation",
+        "sourceObservedAt": "2026-10-12T05:52:56.900Z",
+        "reviewBy": "2026-10-19T05:52:56.900Z",
+        "hideOnOrAfterDate": "2026-11-01",
+        "scope": {
+          "currentWeek": 1,
+          "currentDay": "Monday",
+          "referenceDay": "2026-10-12",
+          "kingdomEligibilityUnknown": true,
+          "serverOffsetPossible": true
+        },
+        "stages": [
+          {
+            "id": "matchmaking",
+            "startDate": "2026-11-01",
+            "endDateInclusive": "2026-11-01"
+          },
+          {
+            "id": "preparation",
+            "startDate": "2026-11-02",
+            "endDateInclusive": "2026-11-06"
+          },
+          {
+            "id": "castle-battle",
+            "startDate": "2026-11-07",
+            "endDateInclusive": "2026-11-07"
+          }
+        ],
+        "reviewPolicy": "Reference cycle only, not an announced event. Hide on review expiry or the reference first date; never extend."
+      },
+      "phases": [
+        {
+          "id": "matchmaking",
+          "durationDays": 2,
+          "evidence": [
+            "kvkMatchmaking"
+          ],
+          "status": "source-observed"
+        },
+        {
+          "id": "preparation",
+          "sourceHeadingDays": 5,
+          "exactDurationHours": null,
+          "startWeekday": "Monday",
+          "endWeekday": "Saturday",
+          "endUtcTime": "10:00",
+          "evidence": [
+            "kvkPreparation",
+            "kvkPreparationSpill"
+          ],
+          "status": "boundary-needs-context",
+          "noteCode": "heading-five-days-text-includes-saturday"
+        },
+        {
+          "id": "battle",
+          "weekday": "Saturday",
+          "startUtcTime": "10:00",
+          "endUtcTime": "22:00",
+          "evidence": [
+            "kvkBattle",
+            "kvkBattleUtc"
+          ],
+          "status": "cross-checked-relative-rule"
+        },
+        {
+          "id": "castle-battle",
+          "weekday": "Saturday",
+          "startUtcTime": "12:00",
+          "latestEndUtcTime": "17:00",
+          "evidence": [
+            "kvkCastleUtc"
+          ],
+          "status": "source-observed"
+        },
+        {
+          "id": "field-triage",
+          "startWeekday": "Saturday",
+          "startUtcTime": "22:00",
+          "durationHours": 50,
+          "evidence": [
+            "kvkTriageDuration",
+            "kvkTriageStart"
+          ],
+          "status": "source-observed"
+        }
+      ]
+    },
+    {
+      "id": "ks:event:kingdom-transfer-event",
+      "names": {
+        "en": "Kingdom Transfer Event",
+        "ja": "王国移民",
+        "ko": "왕국 이민 이벤트"
+      },
+      "next": {
+        "status": "community-provisional",
+        "startDate": "2026-11-08",
+        "endDateInclusive": "2026-11-14",
+        "startAtUtc": null,
+        "endAtUtc": null,
+        "timezone": null,
+        "kingdomGroups": [
+          {
+            "group": 1,
+            "kingdomFrom": 1,
+            "kingdomTo": 417,
+            "evidence": "transferGroup1"
+          },
+          {
+            "group": 2,
+            "kingdomFrom": 418,
+            "kingdomTo": 587,
+            "evidence": "transferGroup2"
+          },
+          {
+            "group": 3,
+            "kingdomFrom": 588,
+            "kingdomTo": 927,
+            "evidence": "transferGroup3"
+          },
+          {
+            "group": 4,
+            "kingdomFrom": 928,
+            "kingdomTo": 1331,
+            "evidence": "transferGroup4"
+          },
+          {
+            "group": 5,
+            "kingdomFrom": 1332,
+            "kingdomTo": 1502,
+            "evidence": "transferGroup5"
+          },
+          {
+            "group": 6,
+            "kingdomFrom": 1503,
+            "kingdomTo": 1689,
+            "evidence": "transferGroup6"
+          },
+          {
+            "group": 7,
+            "kingdomFrom": 1690,
+            "kingdomTo": 1935,
+            "evidence": "transferGroup7"
+          },
+          {
+            "group": 8,
+            "kingdomFrom": 1936,
+            "kingdomTo": 2050,
+            "evidence": "transferGroup8"
+          },
+          {
+            "group": 9,
+            "kingdomFrom": 2051,
+            "kingdomTo": 2105,
+            "evidence": "transferGroup9"
+          },
+          {
+            "group": 10,
+            "kingdomFrom": 2106,
+            "kingdomTo": 2234,
+            "evidence": "transferGroup10"
+          }
+        ],
+        "countdownAllowed": false,
+        "displayMode": "reference-date-range",
+        "sourceIds": [
+          "net-transfer",
+          "net-nexus972"
+        ],
+        "evidence": [
+          "transferStart",
+          "transferEnd",
+          "transferProvisional"
+        ],
+        "officialAnnouncementObserved": false,
+        "scopeStatus": "provisional-groups-not-eligibility-guarantee",
+        "sourceObservedAt": "2026-10-12T05:44:21.219Z",
+        "reviewBy": "2026-10-19T05:44:21.219Z",
+        "hideOnOrAfterDate": "2026-11-08",
+        "reviewPolicy": "Seven-day review TTL is an internal editorial limit, not a game schedule fact. Hide when stale or start-date reached; never roll forward automatically."
+      },
+      "phases": [
+        {
+          "id": "pre-transfer",
+          "weekdays": [
+            "Sunday",
+            "Monday",
+            "Tuesday"
+          ],
+          "durationDays": 3,
+          "timezone": null,
+          "evidence": [
+            "transferWeekdays"
+          ],
+          "status": "source-observed"
+        },
+        {
+          "id": "invitational",
+          "weekdays": [
+            "Wednesday",
+            "Thursday"
+          ],
+          "durationDays": 2,
+          "timezone": null,
+          "evidence": [
+            "transferInvitational"
+          ],
+          "status": "source-observed"
+        },
+        {
+          "id": "open-transfer",
+          "weekdays": [
+            "Friday",
+            "Saturday"
+          ],
+          "durationDays": 2,
+          "timezone": null,
+          "evidence": [
+            "transferOpen"
+          ],
+          "status": "source-observed"
+        }
+      ]
+    }
+  ],
+  "policy": {
+    "referenceDatesAreNotConfirmed": true,
+    "automaticRecurrenceProjection": false,
+    "countdownAllowed": false,
+    "afterReviewDeadline": "hide-reference-dates",
+    "sourceUpdates": "review-required-before-publication"
+  }
+}

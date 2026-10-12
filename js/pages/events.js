@@ -112,6 +112,7 @@
         if (!event) throw new Error('Event not found: ' + cleanSlug);
         renderDetail(root, event, data, dictionary, heroDictionary, lang);
       }
+      if(lang.code!=='zh-TW'&&!root.querySelector('[data-external-discovery]')) {var p=document.createElement('p');p.className='event-related';p.dataset.externalDiscovery='';var a=document.createElement('a');a.href='/'+lang.folder+'/events/calendar/';a.dataset.routerIgnore='true';a.textContent=({ko:'이벤트 일정 · KvK · 이민',en:'Event calendar · KvK · Transfer',ja:'イベント日程・KvK・移民'})[lang.code];p.append(a);root.prepend(p);}
     } catch (error) {
       console.error('[events]', error);
       root.innerHTML = '<div class="error">Unable to load event data.</div>';

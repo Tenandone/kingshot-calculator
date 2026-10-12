@@ -114,7 +114,7 @@
     if (/\/calc/.test(p)) return 7;
     if (/\/building/.test(p)) return 1;
     if (/\/hero/.test(p)) return 2;
-    if (/\/research/.test(p)) return 3;
+    if (/\/research|\/alliance\/tech/.test(p)) return 3;
     if (/\/pet/.test(p)) return 5;
     if (/\/(?:database|items)/.test(p)) return 4;
     return 0;
