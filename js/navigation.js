@@ -150,6 +150,7 @@
         }
         doc.documentElement.style.setProperty('--ks-site-nav-height',shared.offsetHeight+'px');
       }
+      doc.body.classList.toggle('ks-shared-navigation',!!shared);
       const menu=original?.querySelector('#primaryNav');
       if(menu) {
         for(const host of [menu,doc.querySelector('#mobileDrawer .nav-list')].filter(Boolean)){

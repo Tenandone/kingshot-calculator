@@ -28,7 +28,7 @@ const exactPaths = new Map(walk(ROOT).map(file => {
 }));
 const folders=['ko','en','ja','zh-tw'];
 // UI12: keep the four real database locale URLs and shared navigation on regeneration.
-const UI12_NAV_HEAD='<!-- kd-ui12-navigation:start -->\n<link rel="stylesheet" href="/css/site-navigation.css?v=ks-ui12-20261012">\n<script defer src="/js/navigation.js?v=ks-ui12-20261012"></script>\n<!-- kd-ui12-navigation:end -->\n';
+const UI12_NAV_HEAD='<!-- kd-ui12-navigation:start -->\n<link rel="stylesheet" href="/css/site-navigation.css?v=ks-ui12-20261012-h1">\n<script defer src="/js/navigation.js?v=ks-ui12-20261012-h1"></script>\n<!-- kd-ui12-navigation:end -->\n';
 const DATABASE_ALTERNATES='<!-- kd-ui12-database-alternates:start -->\n'+LANGS.map(lang=>`<link rel="alternate" hreflang="${lang.code}" href="${ORIGIN}/${lang.folder}/database/">`).join('\n')+'\n<!-- kd-ui12-database-alternates:end -->\n';
 // The database menu already has these five published articles. Restore its hub.
 for(const lang of LANGS) {

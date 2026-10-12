@@ -1,5 +1,8 @@
 /* Shared chrome for standalone documents; existing app shell keeps its lifecycle. */
 :root{--ks-site-nav-height:0px}
+/* Keep original document chrome as a no-JS fallback, but show only the shared site header. */
+body.ks-shared-navigation > .wrap > header.top:not(.site-header),
+body.ks-shared-navigation > .pet-page > .wrap > header.top:not(.site-header){display:none!important}
 .site-header #primaryNav{gap:2px;flex-wrap:wrap}.site-header #primaryNav a{padding-inline:7px;font-size:14px}
 .ks-site-nav{position:relative;z-index:50;background:#fff;color:#142a43;border-bottom:1px solid #d8e0e9;font:14px/1.45 system-ui,sans-serif}
 .ks-nav-bar{max-width:1440px;margin:auto;padding:10px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
