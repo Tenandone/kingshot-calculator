@@ -21,6 +21,38 @@ function readInline(file){
   const m=scripts[0];
   return {html,code:m[2],line:html.slice(0,m.index).split('\n').length};
 }
+// Omit only unavailable TG9/TG10 images; preserve all TG labels and data.
+function omitMissingTgIcons(code){
+  const pairs=[
+  [
+    "tgLevel: (n) => `/img/icons/truegold_level_${n}.webp`,",
+    "tgLevel: (n) => n >= 1 && n <= 8 ? `/img/icons/truegold_level_${n}.webp` : null,",
+    1
+  ],
+  [
+    "<img src=\"${src}\" alt=\"${label}\"\n               onerror=\"this.style.display='none'; this.parentNode.querySelector('.tg-fallback').style.display='inline-flex';\">\n          <span class=\"tg-fallback\">${label}</span>",
+    "${src ? `<img src=\"${src}\" alt=\"${label}\"\n               onerror=\"this.style.display='none'; this.parentNode.querySelector('.tg-fallback').style.display='inline-flex';\">` : ''}\n          <span class=\"tg-fallback\"${src ? '' : ' style=\"display:inline-flex\"'}>${label}</span>",
+    1
+  ],
+  [
+    "<img src=\"${ICONS.tgLevel(tg)}\" alt=\"TG${tg}\" onerror=\"this.style.display='none'\">",
+    "${ICONS.tgLevel(tg) ? `<img src=\"${ICONS.tgLevel(tg)}\" alt=\"TG${tg}\" onerror=\"this.style.display='none'\">` : ''}",
+    2
+  ],
+  [
+    "tgIcon.src = ICONS.tgLevel(tg);",
+    "const tgSrc = ICONS.tgLevel(tg);\n      if (tgSrc) {\n        tgIcon.src = tgSrc;\n        tgIcon.hidden = false;\n        tgIcon.style.removeProperty('display');\n      } else {\n        tgIcon.removeAttribute('src');\n        tgIcon.hidden = true;\n      }",
+    1
+  ]
+];
+  for(const [before,after,expected] of pairs){
+    const count=code.split(before).length-1;
+    if(count!==expected)throw new Error("Missing TG image transform boundary: "+count+" !== "+expected);
+    code=code.split(before).join(after);
+  }
+  return code;
+}
+
 function transform(source,slug){
   let code=source;const edits=[];
   function cut(a,b,why){const start=code.indexOf(a),end=code.indexOf(b,start+a.length);if(start<0||end<0)throw new Error(`${slug}: missing boundary ${a} -> ${b}`);const removed=code.slice(start,end);edits.push({why,removedSha256:hash(removed),removedChars:removed.length,startAnchor:a,endAnchor:b});code=code.slice(0,start)+code.slice(end);}
@@ -84,6 +116,11 @@ function transform(source,slug){
   };
   const [from,to]=ranges[slug],start=source.indexOf(from),end=source.indexOf(to,start+from.length),protectedCode=source.slice(start,end);
   if(start<0||end<0||!code.includes(protectedCode))throw new Error(`${slug}: protected data/formula/feature body changed`);
+  // Original data/formula protection above remains checked before presentation-only omission.
+  if(slug==='truegold'){
+    const original=code;code=omitMissingTgIcons(code);
+    edits.push({why:'omit missing TG9/TG10 images without changing labels/data',beforeSha256:hash(original),afterSha256:hash(code)});
+  }
   return {code,edits,protectedCodeSha256:hash(protectedCode),protectedCodeChars:protectedCode.length};
 }
 

@@ -65,6 +65,15 @@ aliases['/home']='/';
 const baseline=JSON.parse(read(path.join(ROOT,'scripts/broken-links-baseline.json')).replace(/^\uFEFF/,''));
 const legacyPaths=new Set(baseline.map(r=>new URL(r.Url).pathname.replace(/\/$/,'')));
 ['/home','/buildings/towncenter','/guides/coupon-countdown','/guides/kingshot-f2p-route-g4'].forEach(p=>legacyPaths.add(p));
+// Previously published TW hreflang pointed to these nonexistent KO prefixes.
+// Keep the normal Korean /items/ documents and preserve old discovered links.
+for (const slug of ['pet-food','pet-notebook','pet-promotion-medal','pet-supplement']) {
+ const old='/ko/items/'+slug;
+ aliases[old]='/items/'+slug+'/';
+ legacyPaths.add(old);
+}
+aliases['/ko/heroes']='/heroes/';
+legacyPaths.add('/ko/heroes');
 function resolve(href,base) {
   try {
     const u=new URL(href,base);
@@ -124,6 +133,7 @@ for(const file of walk(ROOT)) {
  if(!html.includes('/js/image-system.js')&&!/<title[^>]*>\s*Redirecting/i.test(html))html=html.replace(/<\/head>/i,'<script defer src="/js/image-system.js?v=2026100606"></script>\n</head>');
  html=html.replace(/Kingshot gift codes, Kingshot coupon codes, Kingshot top up, Kingshot redeem guide, Kingshot codes, Kingshot coupon, KingshotData/g, 'Kingshot data, heroes, buildings, pets, calculators, guides, gift codes, KingshotData');
  html=html.replace(/footer-tools\.js\?v=[^"'\s<>]+/g, 'footer-tools.js?v=2026100602');
+ html=html.replace(/guide-features\.js\?v=[^"'\s<>]+/g, 'guide-features.js?v=ks-url-access-20261012');
  html=html.replace(/canonical-links\.js\?v=[^"'\s<>]+/g, 'canonical-links.js?v=2026100603');
  if ((html.includes('footer-tools.js') || ['tools/coupon-countdown.html','pages/tools/landing.html'].includes(relative)) && !html.includes('/js/site-features.js')) html=html.replace(/<head\b[^>]*>/i, tag => tag+'\n<script src="/js/site-features.js?v=2026100601"></script>');
  const base=ORIGIN+'/'+relative.replace(/index\.html$/,'');
@@ -166,4 +176,8 @@ require('./apply-seo-editorial').applySeoEditorial({root:ROOT});
 // ks-ui14-seo-hook:end
 
 // Keep directly requested home documents aligned with the browser renderer.
-require('./apply-editorial-home').applyEditorialHome({root:ROOT}).catch(error=>{console.error(error);process.exitCode=1;});
+require('./apply-editorial-home').applyEditorialHome({root:ROOT}).then(async()=>{
+ // Static discovery and anchors must also work before JavaScript executes.
+ require('child_process').execFileSync(process.execPath,[path.join(__dirname,'sync-static-guides.js')],{stdio:'inherit'});
+ await require('./normalize-static-anchors.cjs').normalizeStaticAnchors({root:ROOT,apply:true});
+}).catch(error=>{console.error(error);process.exitCode=1;});

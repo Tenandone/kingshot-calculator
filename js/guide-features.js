@@ -3701,7 +3701,7 @@ function guideFeature13(document, window, fetch, ResizeObserver, setTimeout, cle
 
   (function(){
     const ICONS = {
-      tgLevel: (n) => `/img/icons/truegold_level_${n}.webp`,
+      tgLevel: (n) => n >= 1 && n <= 8 ? `/img/icons/truegold_level_${n}.webp` : null,
       truegold: '/img/icons/truegold-kingshot.webp',
       tempered: '/img/icons/Ttruegold-kingshot.webp'
     };
@@ -3819,9 +3819,9 @@ function guideFeature13(document, window, fetch, ResizeObserver, setTimeout, cle
       const src = ICONS.tgLevel(tg);
       return `
         <div class="tghead">
-          <img src="${src}" alt="${label}"
-               onerror="this.style.display='none'; this.parentNode.querySelector('.tg-fallback').style.display='inline-flex';">
-          <span class="tg-fallback">${label}</span>
+          ${src ? `<img src="${src}" alt="${label}"
+               onerror="this.style.display='none'; this.parentNode.querySelector('.tg-fallback').style.display='inline-flex';">` : ''}
+          <span class="tg-fallback"${src ? '' : ' style="display:inline-flex"'}>${label}</span>
         </div>
       `;
     }
@@ -3906,7 +3906,7 @@ function guideFeature13(document, window, fetch, ResizeObserver, setTimeout, cle
             <div class="tg-stage">
               <div class="tg-stage-top">
                 <div class="tg-stage-badge">
-                  <img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">
+                  ${ICONS.tgLevel(tg) ? `<img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">` : ''}
                   <span>TG${tg}</span>
                 </div>
               </div>
@@ -3986,7 +3986,7 @@ function guideFeature13(document, window, fetch, ResizeObserver, setTimeout, cle
         const tg = i + 1;
         return `
           <div class="tick">
-            <img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">
+            ${ICONS.tgLevel(tg) ? `<img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">` : ''}
             <span>${tg}</span>
           </div>
         `;
@@ -4016,7 +4016,15 @@ function guideFeature13(document, window, fetch, ResizeObserver, setTimeout, cle
       const curP = totals[idx].tempered;
       const hideTemper = (tg <= 5) || !totals[idx].hasTempered;
 
-      tgIcon.src = ICONS.tgLevel(tg);
+      const tgSrc = ICONS.tgLevel(tg);
+      if (tgSrc) {
+        tgIcon.src = tgSrc;
+        tgIcon.hidden = false;
+        tgIcon.style.removeProperty('display');
+      } else {
+        tgIcon.removeAttribute('src');
+        tgIcon.hidden = true;
+      }
       tgIcon.alt = `TG${tg}`;
       tgLabel.textContent = `TG${tg} 총 소모량`;
 
@@ -4046,7 +4054,7 @@ function guideFeature14(document, window, fetch, ResizeObserver, setTimeout, cle
 
   (function(){
     const ICONS = {
-      tgLevel: (n) => `/img/icons/truegold_level_${n}.webp`,
+      tgLevel: (n) => n >= 1 && n <= 8 ? `/img/icons/truegold_level_${n}.webp` : null,
       truegold: '/img/icons/truegold-kingshot.webp',
       tempered: '/img/icons/Ttruegold-kingshot.webp'
     };
@@ -4164,9 +4172,9 @@ function guideFeature14(document, window, fetch, ResizeObserver, setTimeout, cle
       const src = ICONS.tgLevel(tg);
       return `
         <div class="tghead">
-          <img src="${src}" alt="${label}"
-               onerror="this.style.display='none'; this.parentNode.querySelector('.tg-fallback').style.display='inline-flex';">
-          <span class="tg-fallback">${label}</span>
+          ${src ? `<img src="${src}" alt="${label}"
+               onerror="this.style.display='none'; this.parentNode.querySelector('.tg-fallback').style.display='inline-flex';">` : ''}
+          <span class="tg-fallback"${src ? '' : ' style="display:inline-flex"'}>${label}</span>
         </div>
       `;
     }
@@ -4251,7 +4259,7 @@ function guideFeature14(document, window, fetch, ResizeObserver, setTimeout, cle
             <div class="tg-stage">
               <div class="tg-stage-top">
                 <div class="tg-stage-badge">
-                  <img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">
+                  ${ICONS.tgLevel(tg) ? `<img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">` : ''}
                   <span>TG${tg}</span>
                 </div>
               </div>
@@ -4331,7 +4339,7 @@ function guideFeature14(document, window, fetch, ResizeObserver, setTimeout, cle
         const tg = i + 1;
         return `
           <div class="tick">
-            <img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">
+            ${ICONS.tgLevel(tg) ? `<img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">` : ''}
             <span>${tg}</span>
           </div>
         `;
@@ -4361,7 +4369,15 @@ function guideFeature14(document, window, fetch, ResizeObserver, setTimeout, cle
       const curP = totals[idx].tempered;
       const hideTemper = (tg <= 5) || !totals[idx].hasTempered;
 
-      tgIcon.src = ICONS.tgLevel(tg);
+      const tgSrc = ICONS.tgLevel(tg);
+      if (tgSrc) {
+        tgIcon.src = tgSrc;
+        tgIcon.hidden = false;
+        tgIcon.style.removeProperty('display');
+      } else {
+        tgIcon.removeAttribute('src');
+        tgIcon.hidden = true;
+      }
       tgIcon.alt = `TG${tg}`;
       tgLabel.textContent = `TG${tg} Total Cost`;
 
@@ -4391,7 +4407,7 @@ function guideFeature15(document, window, fetch, ResizeObserver, setTimeout, cle
 
   (function(){
     const ICONS = {
-      tgLevel: (n) => `/img/icons/truegold_level_${n}.webp`,
+      tgLevel: (n) => n >= 1 && n <= 8 ? `/img/icons/truegold_level_${n}.webp` : null,
       truegold: '/img/icons/truegold-kingshot.webp',
       tempered: '/img/icons/Ttruegold-kingshot.webp'
     };
@@ -4509,9 +4525,9 @@ function guideFeature15(document, window, fetch, ResizeObserver, setTimeout, cle
       const src = ICONS.tgLevel(tg);
       return `
         <div class="tghead">
-          <img src="${src}" alt="${label}"
-               onerror="this.style.display='none'; this.parentNode.querySelector('.tg-fallback').style.display='inline-flex';">
-          <span class="tg-fallback">${label}</span>
+          ${src ? `<img src="${src}" alt="${label}"
+               onerror="this.style.display='none'; this.parentNode.querySelector('.tg-fallback').style.display='inline-flex';">` : ''}
+          <span class="tg-fallback"${src ? '' : ' style="display:inline-flex"'}>${label}</span>
         </div>
       `;
     }
@@ -4596,7 +4612,7 @@ function guideFeature15(document, window, fetch, ResizeObserver, setTimeout, cle
             <div class="tg-stage">
               <div class="tg-stage-top">
                 <div class="tg-stage-badge">
-                  <img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">
+                  ${ICONS.tgLevel(tg) ? `<img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">` : ''}
                   <span>TG${tg}</span>
                 </div>
               </div>
@@ -4676,7 +4692,7 @@ function guideFeature15(document, window, fetch, ResizeObserver, setTimeout, cle
         const tg = i + 1;
         return `
           <div class="tick">
-            <img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">
+            ${ICONS.tgLevel(tg) ? `<img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">` : ''}
             <span>${tg}</span>
           </div>
         `;
@@ -4706,7 +4722,15 @@ function guideFeature15(document, window, fetch, ResizeObserver, setTimeout, cle
       const curP = totals[idx].tempered;
       const hideTemper = (tg <= 5) || !totals[idx].hasTempered;
 
-      tgIcon.src = ICONS.tgLevel(tg);
+      const tgSrc = ICONS.tgLevel(tg);
+      if (tgSrc) {
+        tgIcon.src = tgSrc;
+        tgIcon.hidden = false;
+        tgIcon.style.removeProperty('display');
+      } else {
+        tgIcon.removeAttribute('src');
+        tgIcon.hidden = true;
+      }
       tgIcon.alt = `TG${tg}`;
       tgLabel.textContent = `TG${tg} 合計コスト`;
 
@@ -4736,7 +4760,7 @@ function guideFeature16(document, window, fetch, ResizeObserver, setTimeout, cle
 
   (function(){
     const ICONS = {
-      tgLevel: (n) => `/img/icons/truegold_level_${n}.webp`,
+      tgLevel: (n) => n >= 1 && n <= 8 ? `/img/icons/truegold_level_${n}.webp` : null,
       truegold: '/img/icons/truegold-kingshot.webp',
       tempered: '/img/icons/Ttruegold-kingshot.webp'
     };
@@ -4854,9 +4878,9 @@ function guideFeature16(document, window, fetch, ResizeObserver, setTimeout, cle
       const src = ICONS.tgLevel(tg);
       return `
         <div class="tghead">
-          <img src="${src}" alt="${label}"
-               onerror="this.style.display='none'; this.parentNode.querySelector('.tg-fallback').style.display='inline-flex';">
-          <span class="tg-fallback">${label}</span>
+          ${src ? `<img src="${src}" alt="${label}"
+               onerror="this.style.display='none'; this.parentNode.querySelector('.tg-fallback').style.display='inline-flex';">` : ''}
+          <span class="tg-fallback"${src ? '' : ' style="display:inline-flex"'}>${label}</span>
         </div>
       `;
     }
@@ -4941,7 +4965,7 @@ function guideFeature16(document, window, fetch, ResizeObserver, setTimeout, cle
             <div class="tg-stage">
               <div class="tg-stage-top">
                 <div class="tg-stage-badge">
-                  <img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">
+                  ${ICONS.tgLevel(tg) ? `<img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">` : ''}
                   <span>TG${tg}</span>
                 </div>
               </div>
@@ -5021,7 +5045,7 @@ function guideFeature16(document, window, fetch, ResizeObserver, setTimeout, cle
         const tg = i + 1;
         return `
           <div class="tick">
-            <img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">
+            ${ICONS.tgLevel(tg) ? `<img src="${ICONS.tgLevel(tg)}" alt="TG${tg}" onerror="this.style.display='none'">` : ''}
             <span>${tg}</span>
           </div>
         `;
@@ -5051,7 +5075,15 @@ function guideFeature16(document, window, fetch, ResizeObserver, setTimeout, cle
       const curP = totals[idx].tempered;
       const hideTemper = (tg <= 5) || !totals[idx].hasTempered;
 
-      tgIcon.src = ICONS.tgLevel(tg);
+      const tgSrc = ICONS.tgLevel(tg);
+      if (tgSrc) {
+        tgIcon.src = tgSrc;
+        tgIcon.hidden = false;
+        tgIcon.style.removeProperty('display');
+      } else {
+        tgIcon.removeAttribute('src');
+        tgIcon.hidden = true;
+      }
       tgIcon.alt = `TG${tg}`;
       tgLabel.textContent = `TG${tg} 總消耗量`;
 
