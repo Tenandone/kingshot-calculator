@@ -517,6 +517,19 @@ function heroPage(hero, lang, dictionary, heroes) {
   };
 }
 
+// UI12: localize only the shared header/drawer gift-code destination.
+// Editorial guide links and Korean-only external community links stay intact.
+function localizeCouponMenu(html, folder) {
+  return html.replace(/<(header|aside)\b([^>]*)>[\s\S]*?<\/\1>/gi, (block, tag, attrs) => {
+    if (!/\bclass\s*=\s*["'][^"']*\bsite-header\b/i.test(attrs) && !/\bid\s*=\s*["']mobileDrawer["']/i.test(attrs)) return block;
+    return block.replace(/<a\b[^>]*>/gi, anchor => {
+      if (!/\bhref\s*=\s*["']\/(?:ko|en|ja|zh-tw)\/guides\/kingshot-giftcode\.html(?:[?#][^"']*)?["']/i.test(anchor)) return anchor;
+      return anchor.replace(/(\bhref\s*=\s*["'])\/(?:ko|en|ja|zh-tw)\/guides\/kingshot-giftcode\.html/i, '$1/' + folder + '/guides/kingshot-giftcode.html')
+        .replace(/\s+data-korean-only(?:\s*=\s*(?:["'][^"']*["']|[^\s>]+))?/gi, '');
+    });
+  });
+}
+
 function replaceHead(html, route, page) {
   html=html.replace(/<meta\s+name="robots"[^>]*>/i,'<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">');
   const canonical = route.url;
@@ -530,6 +543,7 @@ function replaceHead(html, route, page) {
 
   html = html.replace('<!doctype html>', '<!doctype html>\n' + GENERATED_MARKER);
   html = html.replace(/<html\s+lang="[^"]+">/i, '<html lang="' + route.lang.htmlLang + '">');
+  html = localizeCouponMenu(html, route.lang.folder);
   html = html.replace(/<script>window\.__V="([^"]+)"<\/script>/, '<script>window.__V="$1";window.__STATIC_LANG=' + escapeJson(route.lang.code) + ';window.__STATIC_ROUTE=' + escapeJson(route.pathname) + '</script>');
   html = html.replace(/<title>[\s\S]*?<\/title>/i, '<title>' + escapeHtml(page.title) + '</title>');
   html = html.replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/>/i, '<meta name="description" content="' + escapeHtml(page.description) + '" />');

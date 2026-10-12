@@ -77,3 +77,12 @@ body.ks-guide-active > .wrap,body.ks-guide-active > .container{max-width:none;pa
 
 #ks-guide-reader .ks-guide-table{max-width:100%;min-width:0;overflow-x:auto;overscroll-behavior-x:contain}
 #ks-guide-reader main h1:focus{outline:none}
+/* Shared site chrome owns brand/language; the local toolbar only controls reading. */
+#ks-guide-reader.ks-guide-shared-nav .ks-guide-toolbar{top:var(--ks-site-nav-height,64px);min-height:48px;padding:6px 0;flex-wrap:nowrap}
+#ks-guide-reader.ks-guide-shared-nav #ks-guide-sidebar,#ks-guide-reader.ks-guide-shared-nav #ks-guide-toc{top:calc(var(--ks-site-nav-height,64px) + 70px);max-height:calc(100vh - var(--ks-site-nav-height,64px) - 90px)}
+#ks-guide-reader.ks-guide-shared-nav main :is(h1,h2,h3,section,[id]){scroll-margin-top:calc(var(--ks-site-nav-height,64px) + 68px)}
+@media(max-width:800px){
+ #ks-guide-reader.ks-guide-shared-nav .ks-guide-list-link{display:block;margin-right:auto}
+ #ks-guide-reader.ks-guide-shared-nav #ks-guide-sidebar{top:0;max-height:none}
+ #ks-guide-reader.ks-guide-shared-nav.ks-toc-open #ks-guide-toc{top:calc(var(--ks-site-nav-height,64px) + 56px);max-height:60vh}
+}

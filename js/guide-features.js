@@ -490,54 +490,9 @@ function guideFeature5(document, window, fetch, ResizeObserver, setTimeout, clea
       return String(s ?? "").trim();
     }
 
-    function parseExpiryMs(c){
-      const iso = safeText(c.expiresAt);
-      if (iso) {
-        const t = Date.parse(iso);
-        if (Number.isFinite(t)) return t;
-      }
-
-      const until = safeText(c.until);
-      if (until && /^\d{4}-\d{2}-\d{2}$/.test(until)) {
-        const t = Date.parse(until + "T00:00:00Z");
-        if (Number.isFinite(t)) return t;
-      }
-
-      return null;
-    }
-
-    function isPerpetual(c){
-      const until = safeText(c.until).toLowerCase();
-      const exp = safeText(c.expiresAt).toLowerCase();
-      return (
-        until === "permanent" ||
-        until === "perpetual" ||
-        until === "unlimited" ||
-        until === "ongoing" ||
-        until === "indefinite" ||
-        until === "상시" ||
-        until === "무기한" ||
-        exp === "permanent" ||
-        exp === "perpetual"
-      );
-    }
-
-    function isActive(c, nowMs){
-      const status = safeText(c.status).toLowerCase();
-      if (status === "candidate" || status === "rejected" || status === "expired") return false;
-      if (isPerpetual(c)) return true;
-
-      const exp = parseExpiryMs(c);
-      if (exp == null) return status === "active" || status === "expiring";
-      if (nowMs >= exp) return false;
-
-      const st = safeText(c.startAt);
-      if (st) {
-        const stMs = Date.parse(st);
-        if (Number.isFinite(stMs) && nowMs < stMs) return false;
-      }
-      return true;
-    }
+    function parseExpiryMs(c){ return window.KD_COUPON_STATE.expiry(c).ms; }
+    function isPerpetual(c){ return window.KD_COUPON_STATE.expiry(c).kind === "permanent"; }
+    function isActive(c, nowMs){ return window.KD_COUPON_STATE.isActive(c, nowMs); }
 
     function escapeHTML(s){
       return String(s)
@@ -739,7 +694,7 @@ function guideFeature5(document, window, fetch, ResizeObserver, setTimeout, clea
       document.getElementById("faq-a4").textContent = t.faqA4;
     }
 
-    (function(){
+    return (function(){
       async function init(){
         try{
           applyLanguage("ko");
@@ -750,13 +705,8 @@ function guideFeature5(document, window, fetch, ResizeObserver, setTimeout, clea
           const nowMs = Date.now();
 
           const active = all
-            .filter(c => safeText(c.code).toLowerCase() !== "jackkaoandks")
             .filter(c => isActive(c, nowMs))
-            .sort((a, b) => {
-              const ap = isPerpetual(a) ? Number.MAX_SAFE_INTEGER : (parseExpiryMs(a) || 0);
-              const bp = isPerpetual(b) ? Number.MAX_SAFE_INTEGER : (parseExpiryMs(b) || 0);
-              return ap - bp;
-            });
+            .sort(window.KD_COUPON_STATE.sortActive);
 
           renderCodes(active);
         } catch (e) {
@@ -766,17 +716,13 @@ function guideFeature5(document, window, fetch, ResizeObserver, setTimeout, clea
 
           const grid = document.getElementById("couponGrid");
           if (grid) {
-            grid.innerHTML = "";
-            grid.appendChild(makeCodeCard({ code:"VIP777", until:"상시" }, LANG_DATA.ko));
-
-            grid.appendChild(makeCodeCard({ code:"Kingshot888", until:"상시" }, LANG_DATA.ko));
+            grid.textContent = ({ko:"쿠폰을 불러오지 못했습니다. 잠시 후 새로고침해 주세요.",en:"Could not load codes. Please refresh shortly.",ja:"コードを読み込めませんでした。しばらくして再読み込みしてください。","zh-TW":"無法載入優惠碼，請稍後重新整理。"})[currentLanguage] || "Could not load codes.";
           }
         }
       }
-
-      init();
+      return init();
     })();
-  
+
 }
 
 function guideFeature6(document, window, fetch, ResizeObserver, setTimeout, clearTimeout, setInterval, clearInterval, requestAnimationFrame, cancelAnimationFrame, navigator) {
@@ -849,48 +795,9 @@ function guideFeature6(document, window, fetch, ResizeObserver, setTimeout, clea
       return String(s ?? "").trim();
     }
 
-    function parseExpiryMs(c){
-      const iso = safeText(c.expiresAt);
-      if (iso) {
-        const t = Date.parse(iso);
-        if (Number.isFinite(t)) return t;
-      }
-      const until = safeText(c.until);
-      if (until && /^\d{4}-\d{2}-\d{2}$/.test(until)) {
-        const t = Date.parse(until + "T00:00:00Z");
-        if (Number.isFinite(t)) return t;
-      }
-      return null;
-    }
-
-    function isPerpetual(c){
-      const until = safeText(c.until).toLowerCase();
-      const exp = safeText(c.expiresAt).toLowerCase();
-      return (
-        until === "permanent" ||
-        until === "perpetual" ||
-        until === "unlimited" ||
-        until === "ongoing" ||
-        until === "indefinite" ||
-        exp === "permanent" ||
-        exp === "perpetual"
-      );
-    }
-
-    function isActive(c, nowMs){
-      const status = safeText(c.status).toLowerCase();
-      if (status === "candidate" || status === "rejected" || status === "expired") return false;
-      if (isPerpetual(c)) return true;
-      const exp = parseExpiryMs(c);
-      if (exp == null) return status === "active" || status === "expiring";
-      if (nowMs >= exp) return false;
-      const st = safeText(c.startAt);
-      if (st) {
-        const stMs = Date.parse(st);
-        if (Number.isFinite(stMs) && nowMs < stMs) return false;
-      }
-      return true;
-    }
+    function parseExpiryMs(c){ return window.KD_COUPON_STATE.expiry(c).ms; }
+    function isPerpetual(c){ return window.KD_COUPON_STATE.expiry(c).kind === "permanent"; }
+    function isActive(c, nowMs){ return window.KD_COUPON_STATE.isActive(c, nowMs); }
 
     function escapeHTML(s){
       return String(s)
@@ -1090,7 +997,7 @@ function guideFeature6(document, window, fetch, ResizeObserver, setTimeout, clea
       document.getElementById("faq-a4").textContent = t.faqA4;
     }
 
-    (function(){
+    return (function(){
       async function init(){
         try{
           applyLanguage("en");
@@ -1101,13 +1008,8 @@ function guideFeature6(document, window, fetch, ResizeObserver, setTimeout, clea
           const nowMs = Date.now();
 
           const active = all
-            .filter(c => safeText(c.code).toLowerCase() !== "jackkaoandks")
             .filter(c => isActive(c, nowMs))
-            .sort((a, b) => {
-              const ap = isPerpetual(a) ? Number.MAX_SAFE_INTEGER : (parseExpiryMs(a) || 0);
-              const bp = isPerpetual(b) ? Number.MAX_SAFE_INTEGER : (parseExpiryMs(b) || 0);
-              return ap - bp;
-            });
+            .sort(window.KD_COUPON_STATE.sortActive);
 
           renderCodes(active);
         } catch (e) {
@@ -1117,17 +1019,13 @@ function guideFeature6(document, window, fetch, ResizeObserver, setTimeout, clea
 
           const grid = document.getElementById("couponGrid");
           if (grid) {
-            grid.innerHTML = "";
-            grid.appendChild(makeCodeCard({ code:"VIP777", until:"Permanent" }, LANG_DATA.en));
-
-            grid.appendChild(makeCodeCard({ code:"Kingshot888", until:"Permanent" }, LANG_DATA.en));
+            grid.textContent = ({ko:"쿠폰을 불러오지 못했습니다. 잠시 후 새로고침해 주세요.",en:"Could not load codes. Please refresh shortly.",ja:"コードを読み込めませんでした。しばらくして再読み込みしてください。","zh-TW":"無法載入優惠碼，請稍後重新整理。"})[currentLanguage] || "Could not load codes.";
           }
         }
       }
-
-      init();
+      return init();
     })();
-  
+
 }
 
 function guideFeature7(document, window, fetch, ResizeObserver, setTimeout, clearTimeout, setInterval, clearInterval, requestAnimationFrame, cancelAnimationFrame, navigator) {
@@ -1200,54 +1098,9 @@ function guideFeature7(document, window, fetch, ResizeObserver, setTimeout, clea
       return String(s ?? "").trim();
     }
 
-    function parseExpiryMs(c){
-      const iso = safeText(c.expiresAt);
-      if (iso) {
-        const t = Date.parse(iso);
-        if (Number.isFinite(t)) return t;
-      }
-
-      const until = safeText(c.until);
-      if (until && /^\d{4}-\d{2}-\d{2}$/.test(until)) {
-        const t = Date.parse(until + "T00:00:00Z");
-        if (Number.isFinite(t)) return t;
-      }
-
-      return null;
-    }
-
-    function isPerpetual(c){
-      const until = safeText(c.until).toLowerCase();
-      const exp = safeText(c.expiresAt).toLowerCase();
-      return (
-        until === "permanent" ||
-        until === "perpetual" ||
-        until === "unlimited" ||
-        until === "ongoing" ||
-        until === "indefinite" ||
-        until === "常設" ||
-        until === "無期限" ||
-        exp === "permanent" ||
-        exp === "perpetual"
-      );
-    }
-
-    function isActive(c, nowMs){
-      const status = safeText(c.status).toLowerCase();
-      if (status === "candidate" || status === "rejected" || status === "expired") return false;
-      if (isPerpetual(c)) return true;
-
-      const exp = parseExpiryMs(c);
-      if (exp == null) return status === "active" || status === "expiring";
-      if (nowMs >= exp) return false;
-
-      const st = safeText(c.startAt);
-      if (st) {
-        const stMs = Date.parse(st);
-        if (Number.isFinite(stMs) && nowMs < stMs) return false;
-      }
-      return true;
-    }
+    function parseExpiryMs(c){ return window.KD_COUPON_STATE.expiry(c).ms; }
+    function isPerpetual(c){ return window.KD_COUPON_STATE.expiry(c).kind === "permanent"; }
+    function isActive(c, nowMs){ return window.KD_COUPON_STATE.isActive(c, nowMs); }
 
     function escapeHTML(s){
       return String(s)
@@ -1449,7 +1302,7 @@ function guideFeature7(document, window, fetch, ResizeObserver, setTimeout, clea
       document.getElementById("faq-a4").textContent = t.faqA4;
     }
 
-    (function(){
+    return (function(){
       async function init(){
         try{
           applyLanguage("ja");
@@ -1460,13 +1313,8 @@ function guideFeature7(document, window, fetch, ResizeObserver, setTimeout, clea
           const nowMs = Date.now();
 
           const active = all
-            .filter(c => safeText(c.code).toLowerCase() !== "jackkaoandks")
             .filter(c => isActive(c, nowMs))
-            .sort((a, b) => {
-              const ap = isPerpetual(a) ? Number.MAX_SAFE_INTEGER : (parseExpiryMs(a) || 0);
-              const bp = isPerpetual(b) ? Number.MAX_SAFE_INTEGER : (parseExpiryMs(b) || 0);
-              return ap - bp;
-            });
+            .sort(window.KD_COUPON_STATE.sortActive);
 
           renderCodes(active);
         } catch (e) {
@@ -1476,17 +1324,13 @@ function guideFeature7(document, window, fetch, ResizeObserver, setTimeout, clea
 
           const grid = document.getElementById("couponGrid");
           if (grid) {
-            grid.innerHTML = "";
-            grid.appendChild(makeCodeCard({ code:"VIP777", until:"常設" }, LANG_DATA.ja));
-
-            grid.appendChild(makeCodeCard({ code:"Kingshot888", until:"常設" }, LANG_DATA.ja));
+            grid.textContent = ({ko:"쿠폰을 불러오지 못했습니다. 잠시 후 새로고침해 주세요.",en:"Could not load codes. Please refresh shortly.",ja:"コードを読み込めませんでした。しばらくして再読み込みしてください。","zh-TW":"無法載入優惠碼，請稍後重新整理。"})[currentLanguage] || "Could not load codes.";
           }
         }
       }
-
-      init();
+      return init();
     })();
-  
+
 }
 
 function guideFeature8(document, window, fetch, ResizeObserver, setTimeout, clearTimeout, setInterval, clearInterval, requestAnimationFrame, cancelAnimationFrame, navigator) {
@@ -1559,51 +1403,9 @@ function guideFeature8(document, window, fetch, ResizeObserver, setTimeout, clea
       return String(s ?? "").trim();
     }
 
-    function parseExpiryMs(c){
-      const iso = safeText(c.expiresAt);
-      if (iso) {
-        const t = Date.parse(iso);
-        if (Number.isFinite(t)) return t;
-      }
-      const until = safeText(c.until);
-      if (until && /^\d{4}-\d{2}-\d{2}$/.test(until)) {
-        const t = Date.parse(until + "T00:00:00Z");
-        if (Number.isFinite(t)) return t;
-      }
-      return null;
-    }
-
-    function isPerpetual(c){
-      const until = safeText(c.until).toLowerCase();
-      const exp = safeText(c.expiresAt).toLowerCase();
-      return (
-        until === "permanent" ||
-        until === "perpetual" ||
-        until === "unlimited" ||
-        until === "ongoing" ||
-        until === "indefinite" ||
-        until === "常駐" ||
-        until === "常駐序號" ||
-        until === "永久" ||
-        exp === "permanent" ||
-        exp === "perpetual"
-      );
-    }
-
-    function isActive(c, nowMs){
-      const status = safeText(c.status).toLowerCase();
-      if (status === "candidate" || status === "rejected" || status === "expired") return false;
-      if (isPerpetual(c)) return true;
-      const exp = parseExpiryMs(c);
-      if (exp == null) return status === "active" || status === "expiring";
-      if (nowMs >= exp) return false;
-      const st = safeText(c.startAt);
-      if (st) {
-        const stMs = Date.parse(st);
-        if (Number.isFinite(stMs) && nowMs < stMs) return false;
-      }
-      return true;
-    }
+    function parseExpiryMs(c){ return window.KD_COUPON_STATE.expiry(c).ms; }
+    function isPerpetual(c){ return window.KD_COUPON_STATE.expiry(c).kind === "permanent"; }
+    function isActive(c, nowMs){ return window.KD_COUPON_STATE.isActive(c, nowMs); }
 
     function escapeHTML(s){
       return String(s)
@@ -1804,7 +1606,7 @@ function guideFeature8(document, window, fetch, ResizeObserver, setTimeout, clea
       document.getElementById("faq-a4").textContent = t.faqA4;
     }
 
-    (function(){
+    return (function(){
       async function init(){
         try{
           applyLanguage("zh-tw");
@@ -1815,13 +1617,8 @@ function guideFeature8(document, window, fetch, ResizeObserver, setTimeout, clea
           const nowMs = Date.now();
 
           const active = all
-            .filter(c => safeText(c.code).toLowerCase() !== "jackkaoandks")
             .filter(c => isActive(c, nowMs))
-            .sort((a, b) => {
-              const ap = isPerpetual(a) ? Number.MAX_SAFE_INTEGER : (parseExpiryMs(a) || 0);
-              const bp = isPerpetual(b) ? Number.MAX_SAFE_INTEGER : (parseExpiryMs(b) || 0);
-              return ap - bp;
-            });
+            .sort(window.KD_COUPON_STATE.sortActive);
 
           renderCodes(active);
         } catch (e) {
@@ -1831,17 +1628,13 @@ function guideFeature8(document, window, fetch, ResizeObserver, setTimeout, clea
 
           const grid = document.getElementById("couponGrid");
           if (grid) {
-            grid.innerHTML = "";
-            grid.appendChild(makeCodeCard({ code:"VIP777", until:"常駐序號" }, LANG_DATA["zh-tw"]));
-
-            grid.appendChild(makeCodeCard({ code:"Kingshot888", until:"常駐序號" }, LANG_DATA["zh-tw"]));
+            grid.textContent = ({ko:"쿠폰을 불러오지 못했습니다. 잠시 후 새로고침해 주세요.",en:"Could not load codes. Please refresh shortly.",ja:"コードを読み込めませんでした。しばらくして再読み込みしてください。","zh-TW":"無法載入優惠碼，請稍後重新整理。"})[currentLanguage] || "Could not load codes.";
           }
         }
       }
-
-      init();
+      return init();
     })();
-  
+
 }
 
 function guideFeature9(document, window, fetch, ResizeObserver, setTimeout, clearTimeout, setInterval, clearInterval, requestAnimationFrame, cancelAnimationFrame, navigator) {
@@ -5322,9 +5115,10 @@ function guideFeature16(document, window, fetch, ResizeObserver, setTimeout, cle
      if(typeof ctx.cleanup==='function')ctx.cleanup();
    }
    try{
-     fn(doc,win,ctx.fetch||bind('fetch'),ctx.ResizeObserver||win.ResizeObserver,bind('setTimeout'),bind('clearTimeout'),bind('setInterval'),bind('clearInterval'),bind('requestAnimationFrame'),bind('cancelAnimationFrame'),ctx.navigator||win.navigator);
+     const ready=fn(doc,win,ctx.fetch||bind('fetch'),ctx.ResizeObserver||win.ResizeObserver,bind('setTimeout'),bind('clearTimeout'),bind('setInterval'),bind('clearInterval'),bind('requestAnimationFrame'),bind('cancelAnimationFrame'),ctx.navigator||win.navigator);
+     cleanup.ready=Promise.resolve(ready);
    }catch(error){cleanup();throw error;}
    return cleanup;
  }
- global.KD_GUIDE_FEATURES=Object.freeze({version:'ks-ui11-guide-features-v1',baseCommit:"0de7c3697ae1ef4370e2bc0ffdcb53fa761aeb36",mount,supports:(slug,lang)=>Boolean(registry[String(slug)+'|'+normalizeLang(lang)])});
+ global.KD_GUIDE_FEATURES=Object.freeze({version:'ks-ui12-guide-features-v1',baseCommit:"0de7c3697ae1ef4370e2bc0ffdcb53fa761aeb36",mount,supports:(slug,lang)=>Boolean(registry[String(slug)+'|'+normalizeLang(lang)])});
 })(window);

@@ -20,7 +20,7 @@
   const inflight = window.__KD_INFLIGHT  || (window.__KD_INFLIGHT  = new Map());
 
   // ✅ 버전 파라미터 우선순위: __ASSET_VER > __V > 'now'
-  const ASSET_VER = window.__ASSET_VER || window.__V || 'now';
+  const ASSET_VER = window.__NAV_VER || window.__ASSET_VER || window.__V || 'now';
 
   // ---- helpers ----
   function canonical(url) {
@@ -87,6 +87,9 @@
   window.ensureScript = window.ensureScript || function ensureScript(src, opt) {
     opt = opt || {};
     const absKey = canonical(src);
+    const existingScript = Array.from(document.scripts).find(s => s.src && canonical(s.src) === absKey);
+    if(existingScript?.__ksLoadPromise)return existingScript.__ksLoadPromise;
+    if (document.readyState !== 'loading' && existingScript) return Promise.resolve();
     const selEnsured = 'script[data-ensured="' + escAttr(absKey) + '"]';
     if (seenJS.has(absKey) || document.querySelector(selEnsured)) return Promise.resolve();
 
@@ -112,11 +115,13 @@
 
       s.setAttribute('data-ensured', absKey);
       s.onload  = function(){ seenJS.add(absKey); res(); };
-      s.onerror = function(){ rej(new Error('Script load failed: ' + src)); };
+      s.onerror = function(){ s.remove(); rej(new Error('Script load failed: ' + src)); };
       document.head.appendChild(s);
     }).finally(function(){ inflight.delete(inflightKey); });
 
     inflight.set(inflightKey, p);
+    const loadingNode=Array.from(document.scripts).find(s=>s.src&&canonical(s.src)===absKey);
+    if(loadingNode)loadingNode.__ksLoadPromise=p;
     return p;
   };
 })();

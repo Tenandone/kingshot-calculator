@@ -96,125 +96,22 @@
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4c-4.97 0-9 3.13-9 7 0 2.19 1.29 4.15 3.31 5.44l-.73 3.45c-.09.43.38.77.77.57l4.02-2.18c.53.07 1.07.11 1.63.11 4.97 0 9-3.13 9-7s-4.03-7-9-7z"/></svg>';
   }
 
-  function parseExpiryMs(c) {
-    if (!c) return null;
-
-    var expiresAt = String(c.expiresAt || '').trim();
-    if (expiresAt) {
-      if (isForever(expiresAt)) return Infinity;
-      var ts = Date.parse(expiresAt);
-      if (Number.isFinite(ts)) return ts;
-    }
-
-    var until = String(c.until || '').trim();
-    if (until) {
-      if (isForever(until)) return Infinity;
-
-      var p = until.split('-');
-      if (p.length === 3) {
-        var y = p[0];
-        var m = String(p[1]).padStart(2, '0');
-        var d = String(p[2]).padStart(2, '0');
-        var ts2 = Date.parse(y + '-' + m + '-' + d + 'T00:00:00Z');
-        if (Number.isFinite(ts2)) return ts2;
-      }
-
-      var ts3 = Date.parse(until);
-      if (Number.isFinite(ts3)) return ts3;
-    }
-
-    return null;
-  }
-
-  function parseStartMs(c) {
-    if (!c) return null;
-
-    var startAt = String(c.startAt || '').trim();
-    if (!startAt) return null;
-
-    var ts = Date.parse(startAt);
-    return Number.isFinite(ts) ? ts : null;
-  }
-
-  function isActiveCoupon(c, nowMs) {
-    if (!c || !c.code) return false;
-
-    var status = String(c.status || '').trim().toLowerCase();
-    if (status === 'candidate' || status === 'rejected' || status === 'expired') return false;
-
-    var expMs = parseExpiryMs(c);
-    if (expMs == null) return status === 'active' || status === 'expiring';
-    if (expMs !== Infinity && nowMs >= expMs) return false;
-
-    var startMs = parseStartMs(c);
-    if (startMs != null && nowMs < startMs) return false;
-
-    return true;
-  }
-
-  function isExpiredCoupon(c, nowMs) {
-    if (!c || !c.code) return false;
-
-    if (String(c.status || '').trim().toLowerCase() === 'expired') return true;
-
-    var expMs = parseExpiryMs(c);
-    if (expMs == null || expMs === Infinity) return false;
-
-    return nowMs >= expMs;
-  }
+  function parseExpiryMs(c) { return window.KD_COUPON_STATE.expiry(c).ms; }
+  function isActiveCoupon(c, nowMs) { return window.KD_COUPON_STATE.isActive(c, nowMs); }
+  function isExpiredCoupon(c, nowMs) { return window.KD_COUPON_STATE.isExpired(c, nowMs); }
 
   function getStatusIcon(c, nowMs) {
     return isActiveCoupon(c, nowMs) ? '🟢' : '⚫';
   }
 
-  function isPermanentCoupon(c) {
-    if (!c) return false;
-    if (c.until != null && isForever(c.until)) return true;
-    if (c.expiresAt != null && isForever(c.expiresAt)) return true;
-    return false;
-  }
-
   function getCouponDisplayDate(c) {
-    if (!c) return '';
-
-    if (isPermanentCoupon(c)) return '♾️';
-
-    if (c.until != null && String(c.until).trim()) {
-      return fmtDate(c.until);
-    }
-
-    if (c.expiresAt != null && String(c.expiresAt).trim()) {
-      try {
-        var lang = getLangSafe();
-        var d = new Date(String(c.expiresAt).trim());
-        if (!isNaN(d)) {
-          return new Intl.DateTimeFormat(lang, {
-            year: 'numeric',
-            month: 'short',
-            day: '2-digit',
-            timeZone: 'UTC'
-          }).format(d);
-        }
-      } catch (_e) {}
-      return String(c.expiresAt).trim();
-    }
-
-    return '';
+    var end = window.KD_COUPON_STATE.expiry(c);
+    if (end.kind === 'permanent') return '♾️';
+    if (end.ms == null) return '';
+    try { return new Intl.DateTimeFormat(getLangSafe(), {year:'numeric',month:'short',day:'2-digit',timeZone:'UTC'}).format(new Date(end.ms)); }
+    catch (_) { return ''; }
   }
-
-  function sortActiveCoupons(a, b) {
-    var aMs = parseExpiryMs(a);
-    var bMs = parseExpiryMs(b);
-
-    if (aMs === Infinity && bMs === Infinity) return 0;
-    if (aMs === Infinity) return 1;
-    if (bMs === Infinity) return -1;
-    if (aMs == null && bMs == null) return 0;
-    if (aMs == null) return 1;
-    if (bMs == null) return -1;
-
-    return aMs - bMs;
-  }
+  function sortActiveCoupons(a, b) { return window.KD_COUPON_STATE.sortActive(a, b); }
 
   function sortExpiredCoupons(a, b) {
     var aMs = parseExpiryMs(a);
@@ -269,10 +166,10 @@
   }
 
   function getGiftGuideHref(lang) {
-    if (lang === 'ko') return '/ko/guides/kingshot-giftcode';
-    if (lang === 'ja') return '/ja/guides/kingshot-giftcode';
-    if (lang === 'zh-TW') return '/zh-tw/guides/kingshot-giftcode';
-    return '/en/guides/kingshot-giftcode';
+    if (lang === 'ko') return '/ko/guides/kingshot-giftcode.html';
+    if (lang === 'ja') return '/ja/guides/kingshot-giftcode.html';
+    if (lang === 'zh-TW') return '/zh-tw/guides/kingshot-giftcode.html';
+    return '/en/guides/kingshot-giftcode.html';
   }
 
   function getCommunityHref(lang) {
@@ -328,7 +225,7 @@
     var ctas = document.createElement('div');
     ctas.className = 'footer-ctas';
     ctas.innerHTML =
-      '<a class="footer-cta footer-cta-gift" href="' + getGiftGuideHref(lang) + '" target="_blank" rel="noopener">' +
+      '<a class="footer-cta footer-cta-gift" href="' + getGiftGuideHref(lang) + '">' +
         iconGift() +
         '<strong>' + escapeHtml(getGiftLabel(lang)) + '</strong>' +
       '</a>' +

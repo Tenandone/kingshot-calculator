@@ -55,6 +55,8 @@
     var tickTimer = null;
     var targetNextMs = null;
     var cachedCount = 0;
+    var cachedCoupons = [];
+    var nextChangeMs = null;
     var destroyed = false;
 
     var TXT = {
@@ -73,44 +75,8 @@
       return v == null ? '' : String(v);
     }
 
-    function parseExpiryMs(c){
-      var iso = safeStr(c && c.expiresAt).trim();
-      if (iso){
-        var ts = Date.parse(iso);
-        if (Number.isFinite(ts)) return ts;
-      }
-
-      var until = safeStr(c && c.until).trim();
-      if (until){
-        if (/^(permanent|perpetual|unlimited|ongoing|indefinite|상시|무기한)$/i.test(until)) return Infinity;
-        var p = until.split('-');
-        if (p.length === 3){
-          var y = p[0];
-          var m = String(p[1]).padStart(2, '0');
-          var d = String(p[2]).padStart(2, '0');
-          var ts2 = Date.parse(y + '-' + m + '-' + d + 'T00:00:00Z');
-          if (Number.isFinite(ts2)) return ts2;
-        }
-      }
-
-      return null;
-    }
-
-    function isActive(c, nowMs){
-      var status = safeStr(c && c.status).trim().toLowerCase();
-      if (status === 'candidate' || status === 'rejected' || status === 'expired') return false;
-      var exp = parseExpiryMs(c);
-      if (exp == null) return status === 'active' || status === 'expiring';
-      if (exp !== Infinity && nowMs >= exp) return false;
-
-      var st = safeStr(c && c.startAt).trim();
-      if (st){
-        var stMs = Date.parse(st);
-        if (Number.isFinite(stMs) && nowMs < stMs) return false;
-      }
-
-      return true;
-    }
+    function parseExpiryMs(c){ return window.KD_COUPON_STATE.expiry(c).ms; }
+    function isActive(c, nowMs){ return window.KD_COUPON_STATE.isActive(c, nowMs); }
 
     function fmt2(n){
       return String(n).padStart(2, '0');
@@ -189,6 +155,7 @@
       if (destroyed) return;
 
       var now = new Date();
+      if (nextChangeMs != null && now.getTime() >= nextChangeMs) compute(now.getTime());
 
       if (els.vNow) {
         els.vNow.textContent = clockNow(now);
@@ -204,6 +171,14 @@
       }
     }
 
+    function compute(nowMs){
+      var active = cachedCoupons.filter(function(c){ return isActive(c, nowMs); });
+      cachedCount = active.length;
+      renderCount();
+      targetNextMs = computeNextExpiry(active);
+      nextChangeMs = window.KD_COUPON_STATE.nextChange(cachedCoupons, nowMs);
+    }
+
     async function refresh(){
       if (destroyed) return;
 
@@ -214,14 +189,8 @@
         var list = await loadCoupons();
         if (destroyed) return;
 
-        var nowMs = Date.now();
-        var active = list.filter(function(c){
-          return c && c.code && isActive(c, nowMs);
-        });
-
-        cachedCount = active.length;
-        renderCount();
-        targetNextMs = computeNextExpiry(active);
+        cachedCoupons = list;
+        compute(Date.now());
 
         root.hidden = false;
 

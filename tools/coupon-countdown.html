@@ -3,6 +3,11 @@
 <head>
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="https://kingshotdata.kr/tools/coupon-countdown.html">
+<!-- kd-ui12-navigation:start -->
+<link rel="stylesheet" href="/css/site-navigation.css?v=ks-ui12-20261012">
+<script src="/js/coupon-state.js?v=ks-ui12-20261012"></script>
+<script defer src="/js/navigation.js?v=ks-ui12-20261012"></script>
+<!-- kd-ui12-navigation:end -->
 <script src="/js/calculation-provenance.js?v=2026100621"></script>
 <script src="/js/calculation-proof.js?v=2026100621"></script>
 <script src="/js/site-features.js?v=2026100621"></script>
@@ -624,18 +629,18 @@
   </style>
 <script src="/js/canonical-links.js?v=2026100621" defer></script>
 <script defer src="/js/image-system.js?v=2026100621"></script>
-<script defer src="/js/hub.js?v=ks-ui9-20261012"></script>
+<script defer src="/js/hub.js?v=ks-ui12-20261012"></script>
 <script defer src="/js/hub-metrics.js?v=ks-ui9-20261012"></script>
 <script defer src="/js/my-progress.js?v=ks-ui9-20261012"></script>
 <link rel="stylesheet" href="/css/my-progress.css?v=2026100621">
-<script defer src="/js/privacy-controls.js?v=ks-ui9-20261012"></script>
+<script defer src="/js/privacy-controls.js?v=ks-ui12-20261012"></script>
 <link rel="stylesheet" href="/css/ui-common.css?v=ks-ui1-85ec3439fd000513">
 <link rel="stylesheet" href="/css/ui-building.css?v=ks-ui1-85ec3439fd000513">
 <link rel="stylesheet" href="/css/ui-collections.css?v=ks-ui1-85ec3439fd000513">
 <script defer src="/js/ui/building-client.js?v=ks-tg-heroes-20261011a" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/collections-client.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 <script defer src="/js/ui/sources-runtime.js?v=ks-ui1-85ec3439fd000513" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
-<script defer src="/js/ui/runtime.js?v=ks-ui5-20261011a" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
+<script defer src="/js/ui/runtime.js?v=ks-ui12-20261012" data-kd-ui-version="ks-ui1-85ec3439fd000513"></script>
 </head>
 
 <body>
@@ -718,7 +723,6 @@
     const REF_URL = "https://lootbar.gg/shop/ten/top-up/kingshot";
     const REDEEM_URL = "https://ks-giftcode.centurygame.com/";
     const DATA_URL = "/data/coupons.json";
-    const MAX_SHOW = 6;
     const TICK_MS = 1000;
 
     const GUIDE_LINKS = {
@@ -734,6 +738,9 @@
         saveNow: "Save Now",
         h1: "Kingshot Coupon Countdown",
         h2Active: "Active codes + next expiry countdown",
+        h2Unknown: "Active codes · expiry time unavailable",
+        expiryUnknown: "Expiry time unavailable",
+        permanent: "Permanent",
         h2None: "No active codes — time since last code:",
         expiry: "Expiry Date & Time:",
         since: "Since:",
@@ -765,6 +772,9 @@
         saveNow: "지금 할인받기",
         h1: "킹샷 쿠폰 카운트다운",
         h2Active: "활성 쿠폰 + 다음 만료 카운트다운",
+        h2Unknown: "활성 쿠폰 · 만료 시각 미공개",
+        expiryUnknown: "만료 시각 미공개",
+        permanent: "상시",
         h2None: "활성 쿠폰 없음 · 마지막 쿠폰 이후:",
         expiry: "만료 시각:",
         since: "기준 시각:",
@@ -796,6 +806,9 @@
         saveNow: "今すぐ保存",
         h1: "Kingshot クーポン カウントダウン",
         h2Active: "有効コード + 次の期限カウントダウン",
+        h2Unknown: "有効コード · 有効期限未公開",
+        expiryUnknown: "有効期限未公開",
+        permanent: "無期限",
         h2None: "有効コードなし · 最後のコードから:",
         expiry: "期限:",
         since: "基準:",
@@ -827,6 +840,9 @@
         saveNow: "立即省錢",
         h1: "Kingshot 優惠碼倒數",
         h2Active: "可用代碼 + 下次到期倒數",
+        h2Unknown: "可用代碼 · 到期時間未公布",
+        expiryUnknown: "到期時間未公布",
+        permanent: "永久",
         h2None: "目前無可用代碼 · 距離上次代碼:",
         expiry: "到期時間:",
         since: "基準時間:",
@@ -998,25 +1014,7 @@
 
     function safeStr(v){ return (v==null?"":String(v)); }
 
-    function parseExpiryMs(c){
-      const iso = safeStr(c.expiresAt).trim();
-      if(iso){
-        const t = Date.parse(iso);
-        if(Number.isFinite(t)) return t;
-      }
-      const until = safeStr(c.until).trim();
-      if(until){
-        const parts = until.split("-");
-        if(parts.length===3){
-          const y=parts[0];
-          const m=String(parts[1]).padStart(2,"0");
-          const d=String(parts[2]).padStart(2,"0");
-          const t = Date.parse(`${y}-${m}-${d}T00:00:00Z`);
-          if(Number.isFinite(t)) return t;
-        }
-      }
-      return null;
-    }
+    function parseExpiryMs(c){ return window.KD_COUPON_STATE.expiry(c).ms; }
 
     function parseSeenMs(c){
       const seen = safeStr(c.firstSeenAt).trim();
@@ -1027,17 +1025,7 @@
       return parseExpiryMs(c);
     }
 
-    function isActive(c, nowMs){
-      const exp = parseExpiryMs(c);
-      if(exp == null) return false;
-      if(nowMs >= exp) return false;
-      const st = safeStr(c.startAt).trim();
-      if(st){
-        const stMs = Date.parse(st);
-        if(Number.isFinite(stMs) && nowMs < stMs) return false;
-      }
-      return true;
-    }
+    function isActive(c, nowMs){ return window.KD_COUPON_STATE.isActive(c, nowMs); }
 
     function partsFromMs(ms){
       let sec = Math.max(0, Math.floor(ms/1000));
@@ -1105,13 +1093,13 @@
         return;
       }
 
-      active.slice(0, MAX_SHOW).forEach(c=>{
-        const exp = parseExpiryMs(c);
-        const diff = exp ? (exp - nowMs) : 0;
-
+      active.forEach(c=>{
+        const end = window.KD_COUPON_STATE.expiry(c);
+        const exp = end.ms;
+        const diff = exp == null ? null : exp - nowMs;
         let tag = "ACTIVE";
-        if(diff <= 0) tag = "EXPIRED";
-        else if(diff <= 2*86400*1000) tag = "ENDING SOON";
+        if(diff != null && diff <= 2*86400*1000) tag = "ENDING SOON";
+        const expiryText = end.kind === 'permanent' ? T.permanent : exp == null ? T.expiryUnknown : 'UTC: ' + new Date(exp).toISOString().replace("T"," ").slice(0,16);
 
         const reward = safeStr(c.reward).trim();
 
@@ -1122,7 +1110,7 @@
             <div class="codeTxt">${escapeHTML(c.code || "")}</div>
             <div class="codeMeta">
               <span class="pill">${escapeHTML(tag)}</span>
-              <span class="pill">UTC: ${exp ? new Date(exp).toISOString().replace("T"," ").slice(0,16) : "—"}</span>
+              <span class="pill">${escapeHTML(expiryText)}</span>
               ${reward ? `<span class="pill">${escapeHTML(reward)}</span>` : ``}
             </div>
           </div>
@@ -1149,7 +1137,8 @@
         expiresAt: x.expiresAt,
         firstSeenAt: x.firstSeenAt,
         startAt: x.startAt,
-        reward: x.reward
+        reward: x.reward,
+        status: x.status
       })).filter(x=>x.code);
     }
 
@@ -1158,11 +1147,13 @@
     let targetMs = null;
     let sinceMs = null;
     let tickTimer = null;
+    let nextChangeMs = null;
 
     function compute(){
       const nowMs = Date.now();
       active = all.filter(c => c.code && isActive(c, nowMs));
-      active.sort((a,b)=> (parseExpiryMs(a)||0) - (parseExpiryMs(b)||0));
+      active.sort(window.KD_COUPON_STATE.sortActive);
+      nextChangeMs = window.KD_COUPON_STATE.nextChange(all, nowMs);
 
       if (dom.aTz) dom.aTz.textContent = REG.asia.tzNote;
       if (dom.eTz) dom.eTz.textContent = REG.europe.tzNote;
@@ -1170,21 +1161,22 @@
 
       if(active.length > 0){
         setLineLabels('expiry');
-        targetMs = parseExpiryMs(active[0]);
+        targetMs = window.KD_COUPON_STATE.nextExpiry(active, nowMs);
         sinceMs = null;
 
-        if (dom.h2) dom.h2.textContent = T.h2Active;
+        if (dom.h2) dom.h2.textContent = targetMs == null ? T.h2Unknown : T.h2Active;
         if (dom.codesTitle) dom.codesTitle.textContent = `${T.codesActive} (${active.length})`;
 
-        if (dom.aWhen) dom.aWhen.textContent = formatLine(targetMs, REG.asia.tz);
-        if (dom.eWhen) dom.eWhen.textContent = formatLine(targetMs, REG.europe.tz);
-        if (dom.uWhen) dom.uWhen.textContent = formatLine(targetMs, REG.us.tz);
+        if (dom.aWhen) dom.aWhen.textContent = targetMs == null ? T.expiryUnknown : formatLine(targetMs, REG.asia.tz);
+        if (dom.eWhen) dom.eWhen.textContent = targetMs == null ? T.expiryUnknown : formatLine(targetMs, REG.europe.tz);
+        if (dom.uWhen) dom.uWhen.textContent = targetMs == null ? T.expiryUnknown : formatLine(targetMs, REG.us.tz);
       } else {
         targetMs = null;
         let last = null, lastCode = null;
         for(const c of all){
+          if(!window.KD_COUPON_STATE.isExpired(c, nowMs)) continue;
           const s = parseSeenMs(c);
-          if(s == null) continue;
+          if(s == null || s > nowMs) continue;
           if(last == null || s > last){ last = s; lastCode = c.code || null; }
         }
         sinceMs = last;
@@ -1210,12 +1202,15 @@
 
     function tick(){
       const nowMs = Date.now();
+      if(nextChangeMs != null && nowMs >= nextChangeMs) compute();
       if(targetMs){
         setTimer(partsFromMs(targetMs - nowMs));
         return;
       }
       if(sinceMs){
         setTimer(partsFromMs(nowMs - sinceMs));
+      } else {
+        setTimer({days:"—", hours:"—", mins:"—", sec:"—"});
       }
     }
 

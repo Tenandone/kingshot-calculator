@@ -31,7 +31,7 @@
         if(stale())return;
         if(!isHero)subnav(lang);
       }
-      win.KD_UI_SOURCES?.apply(doc);win.KD_UI.status='ready';
+      win.KD_UI_SOURCES?.apply(doc);win.KD_UI.status='ready';win.dispatchEvent(new CustomEvent('kd:ui-ready',{detail:{path:location.pathname}}));
     }catch(e){win.KD_UI.status='error';win.KD_UI.errors.push(e.message);console.error('[ui-integration]',e);}
     finally{running=false;if(rerun){rerun=false;schedule();}}
   }

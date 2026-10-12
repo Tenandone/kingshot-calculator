@@ -183,6 +183,7 @@
     scopeRoot.__kd_anchor_fix__ = true;
 
     scopeRoot.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
       var t = e.target;
       if (!t || !t.closest) return;
 
@@ -444,13 +445,14 @@
   // -------------------------------------------------------
   // execute scripts in original document order
   // -------------------------------------------------------
-  async function executeScripts(doc, root) {
+  async function executeScripts(doc, root, stale) {
     var execHost = getExecHost(root);
 
     try {
       var scripts = Array.prototype.slice.call(doc.querySelectorAll('script')) || [];
 
       for (var k = 0; k < scripts.length; k++) {
+        if (stale && stale()) return;
         var sc = scripts[k];
         var src = sc.getAttribute && sc.getAttribute('src');
         var typeAttr = (sc.getAttribute && sc.getAttribute('type')) ? sc.getAttribute('type') : '';
@@ -473,9 +475,8 @@
 
           try {
             await ensureScript(src, { type: isModule ? 'module' : undefined });
+            LOADED_SCRIPT_ABS.add(abs);
           } catch (_) {}
-
-          LOADED_SCRIPT_ABS.add(abs);
           continue;
         }
 
@@ -511,6 +512,9 @@
   // -------------------------------------------------------
   async function mount(root, html, options) {
     options = options || {};
+    var mountPath=location.pathname+location.search, mountEpoch=window.__KD_ROUTE_EPOCH||0;
+    function stale(){return !root.isConnected || mountPath!==location.pathname+location.search || mountEpoch!==(window.__KD_ROUTE_EPOCH||0) || (typeof options.isStale==='function'&&options.isStale());}
+    if(stale())return {cancelled:true};
 
     var preferWrap = options.preferWrap !== false;
     var scopeSelector = options.scopeSelector || '#content';
@@ -530,6 +534,7 @@
       root.innerHTML = htmlBodyOnly(html);
 
       try { await ensureCSS(ensureCommonCSS); } catch (_) {}
+      if(stale())return {cancelled:true};
       ensureAnchorFix(root);
       forceMobileCardsIfEmpty(root, options);
       runKnownPageInit(root, options);
@@ -555,6 +560,17 @@
       } else if (options.pageURL) {
         try { setCanonical(new URL(options.pageURL, location.href).href); } catch (_) {}
       }
+      var alternates = doc.querySelectorAll('link[rel="alternate"][hreflang]');
+      if (alternates.length) {
+        document.querySelectorAll('head link[rel="alternate"][hreflang]').forEach(function(n){n.remove();});
+        alternates.forEach(function(n){document.head.appendChild(n.cloneNode(true));});
+      }
+      if (doc.documentElement.lang) document.documentElement.lang = doc.documentElement.lang;
+      doc.querySelectorAll('meta[property^="og:"],meta[name^="twitter:"]').forEach(function(n){
+        var attr=n.hasAttribute('property')?'property':'name', value=n.getAttribute(attr);
+        var current=document.head.querySelector('meta['+attr+'="'+value+'"]');
+        if(current)current.setAttribute('content',n.content);else document.head.appendChild(n.cloneNode(true));
+      });
     } catch (_) {}
 
     // 2) external CSS
@@ -564,10 +580,12 @@
         var href = links[i].getAttribute('href');
         if (!href) continue;
         try { await ensureCSS(href); } catch (_) {}
+        if(stale())return {cancelled:true};
       }
     } catch (_) {}
 
     // 3) inline style scoped
+    if(stale())return {cancelled:true};
     try {
       var styles = doc.head ? doc.head.querySelectorAll('style') : [];
       var combined = '';
@@ -616,9 +634,11 @@
 
     // 5) common css last
     try { await ensureCSS(ensureCommonCSS); } catch (_) {}
+    if(stale())return {cancelled:true};
 
     // 6) execute scripts
-    await executeScripts(doc, root);
+    await executeScripts(doc, root, stale);
+    if(stale())return {cancelled:true};
 
     // 7) post script fallback
     forceMobileCardsIfEmpty(root, options);

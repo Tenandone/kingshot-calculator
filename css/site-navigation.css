@@ -1,0 +1,15 @@
+/* Shared chrome for standalone documents; existing app shell keeps its lifecycle. */
+:root{--ks-site-nav-height:0px}
+.site-header #primaryNav{gap:2px;flex-wrap:wrap}.site-header #primaryNav a{padding-inline:7px;font-size:14px}
+.ks-site-nav{position:relative;z-index:50;background:#fff;color:#142a43;border-bottom:1px solid #d8e0e9;font:14px/1.45 system-ui,sans-serif}
+.ks-nav-bar{max-width:1440px;margin:auto;padding:10px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.ks-site-nav a{color:#183d65;text-decoration:none;border-radius:5px;padding:6px 8px;display:inline-block}
+.ks-site-nav a:hover,.ks-site-nav a:focus-visible{background:#edf4fc;text-decoration:underline}
+.ks-site-nav a[aria-current=page]{background:#e6f0fc;color:#123c72;font-weight:700}
+.ks-site-nav .ks-nav-brand{font-weight:800;font-size:17px;white-space:nowrap}
+#ks-navigation-links{display:flex;flex-wrap:wrap;gap:1px;flex:1}
+.ks-nav-languages{display:flex;gap:1px}
+.ks-nav-toggle{display:none;border:1px solid #91a8bf;border-radius:6px;color:#173c64;background:#fff;padding:8px 12px;font:inherit}
+.ks-site-nav :focus-visible{outline:2px solid #246fba;outline-offset:2px}
+@media(max-width:900px){.ks-nav-bar{gap:8px}.ks-nav-toggle{display:block;margin-left:auto}#ks-navigation-links{display:none;flex-basis:100%;order:4;grid-template-columns:repeat(3,minmax(0,1fr));padding-top:8px;border-top:1px solid #d8e0e9}.ks-site-nav.is-open #ks-navigation-links{display:grid}.ks-nav-languages{font-size:12px}.ks-nav-languages a{padding:5px}.ks-site-nav .ks-nav-brand{font-size:15px}}
+@media(max-width:390px){.ks-nav-bar{padding:9px 10px;gap:4px}.ks-nav-toggle{padding:6px 8px}.ks-nav-languages{gap:0}#ks-navigation-links{grid-template-columns:repeat(2,minmax(0,1fr))}}

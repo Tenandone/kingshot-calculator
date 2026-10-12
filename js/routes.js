@@ -10,8 +10,9 @@
   'use strict';
 
   var __renderToken = 0;
-  function newRenderToken() { return ++__renderToken; }
-  function isStale(token)   { return token !== __renderToken; }
+  var __renderPath = '', __renderEpoch = 0;
+  function newRenderToken() { __renderPath=location.pathname+location.search;__renderEpoch=window.__KD_ROUTE_EPOCH||0;return ++__renderToken; }
+  function isStale(token)   { return token !== __renderToken || __renderPath!==location.pathname+location.search || __renderEpoch!==(window.__KD_ROUTE_EPOCH||0); }
 
   try { history.scrollRestoration = 'manual'; } catch (e) {}
 
@@ -365,6 +366,7 @@
       el.__bldListBound = true;
 
       el.addEventListener('click', function(e){
+        if (e.defaultPrevented || e.button || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
         var a = e.target.closest && e.target.closest('a[href]');
         if (!a) return;
 
@@ -384,7 +386,7 @@
           var m = u.pathname.match(/^\/(en|ko|ja|tw|zh-tw|zh-TW)\/buildings\/([^\/]+)\.html$/);
           if (m){
             e.preventDefault();
-            return goto('/buildings/' + normalizeBuildingSlug(m[2]));
+            return goto('/' + m[1].toLowerCase().replace(/^tw$/, 'zh-tw') + '/buildings/' + normalizeBuildingSlug(m[2]) + '.html' + u.search + u.hash);
           }
         }catch(_){}
       }, true);
@@ -395,6 +397,7 @@
       el.__petListBound = true;
 
       el.addEventListener('click', function(e){
+        if (e.defaultPrevented || e.button || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
         var a = e.target.closest && e.target.closest('a[href]');
         if (!a) return;
 
@@ -750,6 +753,7 @@
           var token = newRenderToken();
 
           try { if (window.I18N && window.I18N.loadNamespace) { await window.I18N.loadNamespace('buildings'); } } catch(e) {}
+          if (isStale(token)) return;
 
           var lang = getCurrentLang();
           el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
@@ -890,6 +894,7 @@
           var token = newRenderToken();
 
           try { if (window.I18N && window.I18N.loadNamespace) { await window.I18N.loadNamespace('pet'); } } catch(e) {}
+          if (isStale(token)) return;
 
           var lang = getCurrentLang();
           el.innerHTML = '<div class="loading" data-i18n="common.loading">Loading…</div>';
@@ -968,6 +973,7 @@
           if (window.KD_ROUTE_MOUNT_LOCALIZED_HTML && typeof window.KD_ROUTE_MOUNT_LOCALIZED_HTML === 'function') {
             return window.KD_ROUTE_MOUNT_LOCALIZED_HTML(el, {
               token: token,
+              isStale: function(){return isStale(token);},
               routeType: 'pet',
               lang: lang,
               slug: slug,
