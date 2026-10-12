@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {checkScheduleRules} from './check-schedule-rules.mjs';
 const here=path.dirname(fileURLToPath(import.meta.url)),site=path.resolve(here,'../..');
 const hash=value=>crypto.createHash('sha256').update(value).digest('hex');
 const allowedHosts=new Set(['kingshot.net','kingshotwiki.com','kingshot.wiki','kingshotdata.com']);
@@ -49,7 +50,12 @@ export async function checkSources({registry,output,fetchImpl=fetch}){
    if(response.status===429){rateLimited=true;throw Error('HTTP 429; remaining requests stopped');}
    if(response.status!==200)throw Error('HTTP '+response.status+'; no redirect/retry attempted');
    if(!/text\/html|application\/xhtml/i.test(response.headers.get('content-type')||''))throw Error('Unexpected content type');
-   const html=await bodyLimited(response);const record=compareSource(source,html);results.push(record);
+   const html=await bodyLimited(response);const record=compareSource(source,html);
+   if(source.ruleCheck){
+    try{record.ruleCheck=await checkScheduleRules({html,config:source.ruleCheck,fetchImpl,bodyLimited});if(record.ruleCheck.status!=='unchanged')record.status='review-required';}
+    catch(error){if(error.rateLimited)rateLimited=true;record.status='review-required';record.ruleCheck={status:'extraction-unconfirmed',error:String(error.message),publicationAllowed:false,thirdPartyCodeExecuted:false,thirdPartyCodeStored:false};}
+   }
+   results.push(record);
    // Keep public workflow artifacts factual: hashes and extracted schedule fields,
    // not third-party page code, prose or image payloads.
   }catch(error){results.push({id:source.id,url:source.url,status:'access-unconfirmed',error:String(error.message),publicationAllowed:false});}

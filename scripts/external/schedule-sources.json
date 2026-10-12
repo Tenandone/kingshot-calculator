@@ -23,7 +23,19 @@
       "projection": "visible-text",
       "expectedProjectionSha256": "4b41351430db51aefce27c0c466360abce98088f9f3bad2354534d3744c013df",
       "renderedReviewRequired": true,
-      "reviewPolicy": "Changes require review; never write schedules or publish automatically."
+      "reviewPolicy": "Changes require review; never write schedules or publish automatically.",
+      "ruleCheck": {
+        "kind": "calendar",
+        "importModule": "677114",
+        "subtractModule": "935169",
+        "maxScripts": 3,
+        "reviewedScripts": [
+          "/_next/static/chunks/dfba1f0d43928a2f.js",
+          "/_next/static/chunks/701d8c513fb2427b.js",
+          "/_next/static/chunks/0b16aa5c96ec8b4c.js"
+        ],
+        "expectedProjectionSha256": "9decb0c585335d187f8395b68906aff9ba957388afc5317e50131e69a654ccd1"
+      }
     },
     {
       "id": "wiki-kvk-en",
@@ -46,6 +58,39 @@
       "expectedProjectionSha256": "62b43104da42d891a8fc5b2a406971381933dfb42dea561b17bc0ca32e16e4c7",
       "renderedReviewRequired": false,
       "reviewPolicy": "Changes require review; never write schedules or publish automatically."
+    },
+    {
+      "id": "net-home",
+      "url": "https://kingshot.net/",
+      "reviewedAt": "2026-10-12T05:43:41.031Z",
+      "authority": "community-fan-site",
+      "expectedBodySha256": "82a3b91c77c973f82383d9c44d1dc8d85ed33f254ba9277a47ed5a7b6fb6ebd3",
+      "projection": "visible-text",
+      "expectedProjectionSha256": "5f2246a88204666fc37bdc9796234036af26983e9d79f8adc24304292d8624e6",
+      "renderedReviewRequired": true,
+      "reviewPolicy": "Detect changes only; no automatic data approval, schedule updates, or publication.",
+      "ruleCheck": {
+        "kind": "timers",
+        "importModule": "935169",
+        "maxScripts": 3,
+        "reviewedScripts": [
+          "/_next/static/chunks/2591ddf194a5db7d.js",
+          "/_next/static/chunks/492a0da95c538485.js",
+          "/_next/static/chunks/0230265263d2d752.js"
+        ],
+        "expectedProjectionSha256": "a829b3d863bd08eedb84d932c577a9225dfdbca11f7ebdc7ea192f10c84bbfaa"
+      }
+    },
+    {
+      "id": "net-timeline",
+      "url": "https://kingshot.net/kingdom-timeline",
+      "reviewedAt": "2026-10-12T06:19:23.846Z",
+      "authority": "community-fan-site",
+      "expectedBodySha256": "d78e9886db0c555fe1f0612c7404e65829435204605eab9c1a373fa1cf08ec0a",
+      "projection": "visible-text",
+      "expectedProjectionSha256": "9900823532bebd52c1e284befcf5dde7e770ea91055449697eed916232534119",
+      "renderedReviewRequired": true,
+      "reviewPolicy": "Detect changes only; no automatic data approval, schedule updates, or publication."
     }
   ]
 }

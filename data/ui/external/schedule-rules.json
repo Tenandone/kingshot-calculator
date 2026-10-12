@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "release": "ks-ui16-schedule-rules-20261012",
+  "assurance": "community-prediction",
+  "timezone": "UTC",
+  "phaseIntervals": "half-open",
+  "observedAt": "2026-10-12T06:19:08.387Z",
+  "sources": [
+    {
+      "id": "net-header-timer",
+      "url": "https://kingshot.net/_next/static/chunks/2591ddf194a5db7d.js",
+      "sha256": "e5901596ec1e8232a77c0a7d1dd330f2c13edc2fa8d1d52100e218be0cf6a57d",
+      "observedAt": "2026-10-12T06:19:08.387Z",
+      "module": 935169
+    },
+    {
+      "id": "net-transfer-data",
+      "url": "https://kingshot.net/_next/static/chunks/0230265263d2d752.js",
+      "sha256": "f399db9a2114ab3044beee145425e22f52cc16ea24add42390497339fea446f1",
+      "observedAt": "2026-10-12T06:19:56.590Z",
+      "module": 465893
+    },
+    {
+      "id": "net-calendar-cycle",
+      "url": "https://kingshot.net/_next/static/chunks/0b16aa5c96ec8b4c.js",
+      "sha256": "81c925ded6a4fb1c79739b3e24f838db125c99c683534ee03bc5038a52833f63",
+      "observedAt": "2026-10-12T06:19:33.999Z",
+      "module": 37077
+    }
+  ],
+  "kvk": {
+    "anchor": "2026-01-26T00:00:00Z",
+    "periodDays": 28,
+    "baseEventNumber": 10,
+    "matchingLeadDays": 2,
+    "preparationHours": 130,
+    "battleHours": 12,
+    "meaning": "The header timer counts to preparation start; matchmaking is a separate reference stage 2 days earlier.",
+    "kingdomChangesDates": false,
+    "matchingReference": {
+      "sourceId": "net-calendar-cycle",
+      "path": "weeks[2].events[5]",
+      "start": "Saturday",
+      "end": "Sunday",
+      "classification": "community-calendar-reference"
+    }
+  },
+  "transfer": {
+    "phases": [
+      {
+        "id": "pre-transfer",
+        "durationDays": 3
+      },
+      {
+        "id": "invitational",
+        "durationDays": 2
+      },
+      {
+        "id": "open-transfer",
+        "durationDays": 2
+      }
+    ],
+    "fallbackDays": 56,
+    "fallbackMaxOccurrences": 1,
+    "windows": [
+      {
+        "id": "transfer-2025-09-14",
+        "startAt": "2025-09-14T00:00:00Z",
+        "endAt": "2025-09-21T00:00:00.000Z",
+        "status": "community-provisional",
+        "groups": [],
+        "groupObservedAt": null,
+        "groupSource": null,
+        "sourceEndAt": "2025-09-20T23:59:59Z",
+        "endNormalization": "inclusive-second-to-exclusive"
+      },
+      {
+        "id": "transfer-2025-11-09",
+        "startAt": "2025-11-09T00:00:00Z",
+        "endAt": "2025-11-16T00:00:00.000Z",
+        "status": "community-provisional",
+        "groups": [],
+        "groupObservedAt": null,
+        "groupSource": null,
+        "sourceEndAt": "2025-11-15T23:59:59Z",
+        "endNormalization": "inclusive-second-to-exclusive"
+      },
+      {
+        "id": "transfer-2026-01-04",
+        "startAt": "2026-01-04T00:00:00Z",
+        "endAt": "2026-01-11T00:00:00.000Z",
+        "status": "community-provisional",
+        "groups": [],
+        "groupObservedAt": null,
+        "groupSource": null,
+        "sourceEndAt": "2026-01-10T23:59:59Z",
+        "endNormalization": "inclusive-second-to-exclusive"
+      },
+      {
+        "id": "transfer-2026-03-01",
+        "startAt": "2026-03-01T00:00:00Z",
+        "endAt": "2026-03-08T00:00:00.000Z",
+        "status": "community-provisional",
+        "groups": [],
+        "groupObservedAt": null,
+        "groupSource": null,
+        "sourceEndAt": "2026-03-07T23:59:59Z",
+        "endNormalization": "inclusive-second-to-exclusive"
+      },
+      {
+        "id": "transfer-2026-04-12",
+        "startAt": "2026-04-12T00:00:00Z",
+        "endAt": "2026-04-19T00:00:00.000Z",
+        "status": "community-provisional",
+        "groups": [],
+        "groupObservedAt": null,
+        "groupSource": null,
+        "sourceEndAt": "2026-04-18T23:59:59Z",
+        "endNormalization": "inclusive-second-to-exclusive"
+      },
+      {
+        "id": "transfer-2026-06-07",
+        "startAt": "2026-06-07T00:00:00Z",
+        "endAt": "2026-06-14T00:00:00.000Z",
+        "status": "community-provisional",
+        "groups": [],
+        "groupObservedAt": null,
+        "groupSource": null,
+        "sourceEndAt": "2026-06-13T23:59:59Z",
+        "endNormalization": "inclusive-second-to-exclusive"
+      },
+      {
+        "id": "transfer-2026-07-19",
+        "startAt": "2026-07-19T00:00:00Z",
+        "endAt": "2026-07-26T00:00:00.000Z",
+        "status": "community-provisional",
+        "groups": [],
+        "groupObservedAt": null,
+        "groupSource": null,
+        "sourceEndAt": "2026-07-25T23:59:59Z",
+        "endNormalization": "inclusive-second-to-exclusive"
+      },
+      {
+        "id": "transfer-2026-09-13",
+        "startAt": "2026-09-13T00:00:00Z",
+        "endAt": "2026-09-20T00:00:00.000Z",
+        "status": "community-provisional",
+        "groups": [],
+        "groupObservedAt": null,
+        "groupSource": null,
+        "sourceEndAt": "2026-09-19T23:59:59Z",
+        "endNormalization": "inclusive-second-to-exclusive"
+      },
+      {
+        "id": "transfer-2026-11-08",
+        "startAt": "2026-11-08T00:00:00Z",
+        "endAt": "2026-11-15T00:00:00.000Z",
+        "status": "community-provisional",
+        "groups": [
+          {
+            "id": 1,
+            "from": 1,
+            "to": 417
+          },
+          {
+            "id": 2,
+            "from": 418,
+            "to": 587
+          },
+          {
+            "id": 3,
+            "from": 588,
+            "to": 927
+          },
+          {
+            "id": 4,
+            "from": 928,
+            "to": 1331
+          },
+          {
+            "id": 5,
+            "from": 1332,
+            "to": 1502
+          },
+          {
+            "id": 6,
+            "from": 1503,
+            "to": 1689
+          },
+          {
+            "id": 7,
+            "from": 1690,
+            "to": 1935
+          },
+          {
+            "id": 8,
+            "from": 1936,
+            "to": 2050
+          },
+          {
+            "id": 9,
+            "from": 2051,
+            "to": 2105
+          },
+          {
+            "id": 10,
+            "from": 2106,
+            "to": 2234
+          }
+        ],
+        "groupObservedAt": "2026-10-12T06:19:56.590Z",
+        "groupSource": "net-transfer-data",
+        "sourceEndAt": "2026-11-14T23:59:59Z",
+        "endNormalization": "inclusive-second-to-exclusive"
+      }
+    ],
+    "kingdomChangesDates": false,
+    "groupPolicy": "Only the listed window group snapshot; never inherited by an estimated fallback."
+  },
+  "limitations": [
+    "Date predictions and UTC assignment describe community site logic, not an official announcement.",
+    "The 28-day model does not know kingdom eligibility, generation or synchronization.",
+    "After the one documented 56-day transfer fallback, no further transfer window is invented.",
+    "Kingdom group lookup is not transfer eligibility or a guaranteed invitation.",
+    "Clock inputs are device/simulation time; no server clock or private API is consulted."
+  ]
+}
