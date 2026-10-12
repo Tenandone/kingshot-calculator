@@ -1,0 +1,79 @@
+/* All overrides are scoped to the progressive guide reader. */
+html body.ks-guide-active{overflow-anchor:none;margin:0;background:#f6f8fb;color:#172334;font:16px/1.75 system-ui,-apple-system,'Noto Sans KR','Noto Sans JP',sans-serif;--sticky-top:64px;--header-h:64px;--tabs-h:0px}
+body.ks-guide-active > .wrap,body.ks-guide-active > .container{max-width:none;padding:0;margin:0}
+#ks-guide-reader{max-width:1560px;margin:0 auto;padding:0 24px 40px}
+#ks-guide-reader *{box-sizing:border-box}
+#ks-guide-reader .ks-guide-toolbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:14px;min-height:64px;padding:10px 0;background:#f6f8fb;border:0;border-bottom:1px solid #dbe3ed;box-shadow:none;max-width:none;flex-wrap:nowrap}
+#ks-guide-reader .ks-guide-toolbar a{color:#203b59;text-decoration:none;font-size:14px;font-weight:600}
+#ks-guide-reader .ks-guide-brand{font-size:18px;margin-right:12px;white-space:nowrap}
+#ks-guide-reader .ks-guide-toolbar nav{display:flex;gap:4px;margin-left:auto;white-space:nowrap}
+#ks-guide-reader .ks-guide-toolbar nav a{padding:5px 7px;border-radius:5px}
+#ks-guide-reader [aria-current=page]{background:#e3eefc;color:#11539b!important;font-weight:700}
+#ks-guide-reader .ks-guide-toolbar button{border:1px solid #bdcadb;border-radius:6px;background:white;color:#203b59;padding:8px 12px;min-height:40px;font:inherit;font-size:14px;cursor:pointer}
+#ks-guide-reader .ks-guide-toolbar [data-guide-toggle]{display:none}
+#ks-guide-reader .ks-guide-layout{display:grid;grid-template-columns:230px minmax(0,1fr) 175px;gap:26px;align-items:start;padding-top:22px}
+#ks-guide-sidebar,#ks-guide-toc{position:sticky;top:86px;min-width:0;max-height:calc(100vh - 105px)}
+#ks-guide-reader #ks-guide-sidebar h2,#ks-guide-reader #ks-guide-toc h2{margin:0 0 12px;font:700 16px/1.5 system-ui;color:#1e3a59}
+#ks-guide-sidebar input,#ks-guide-sidebar select{width:100%;min-height:42px;background:#fff;border:1px solid #b4c1d2;border-radius:6px;padding:8px 10px;margin:0 0 9px;font:inherit;font-size:14px;color:#172334}
+#ks-guide-sidebar small{display:block;color:#55657b;font-size:12px;margin-bottom:8px}
+#ks-guide-sidebar .ks-guide-list{max-height:calc(100vh - 260px);overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+#ks-guide-sidebar .ks-guide-list a,#ks-guide-toc a{display:block;color:#334b68;text-decoration:none;padding:8px 10px;border-radius:5px;font-size:14px;line-height:1.5;margin:2px 0}
+#ks-guide-sidebar a:hover,#ks-guide-toc a:hover{background:#e9eff7}
+#ks-guide-toc{overflow:auto}
+#ks-guide-reader #ks-guide-content{min-width:0;overflow-wrap:anywhere}
+#ks-guide-reader main{max-width:none;width:100%;padding:0;margin:0;min-width:0}
+#ks-guide-reader main .wrap,#ks-guide-reader main .container{max-width:none;padding:0;margin:0}
+#ks-guide-reader main p,#ks-guide-reader main ul,#ks-guide-reader main ol{max-width:48em;font-size:16px;line-height:1.8}
+#ks-guide-reader main h1{font-size:clamp(24px,2.5vw,34px);line-height:1.35;letter-spacing:-.02em;margin:8px 0 12px;color:#152b45}
+#ks-guide-reader main h2{font-size:23px;line-height:1.4;color:#183e6a}
+#ks-guide-reader main .hero{border:0;box-shadow:none;background:transparent;padding:0 0 22px;margin:0 0 24px;border-radius:0;gap:18px}
+#ks-guide-reader main .hero img{max-width:120px;max-height:120px;object-fit:contain}
+#ks-guide-reader main .card{box-shadow:none;transform:none;background:transparent;border:0;border-radius:0;padding:0;margin:26px 0;overflow:visible}
+#ks-guide-reader main .card .card{margin:12px 0}
+#ks-guide-reader main .muted,#ks-guide-reader main .sub{color:#536479}
+#ks-guide-reader main .toc,#ks-guide-reader main [aria-label="Table of contents"],#ks-guide-reader main [aria-label="본문 목차"],#ks-guide-reader main [aria-label="Quick jump links"]{display:none}
+#ks-guide-reader main table{font-size:14px;max-width:100%}
+#ks-guide-reader main .table-wrap,#ks-guide-reader main .compare-table-wrap{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+#ks-guide-reader main :is(h1,h2,h3,section,[id]){scroll-margin-top:86px}
+#ks-guide-reader .ks-guide-status:empty{display:none}
+#ks-guide-reader .ks-guide-status{position:fixed;bottom:12px;right:15px;background:#172e48;color:#fff;padding:8px 16px;border-radius:6px;z-index:110}
+#ks-guide-reader .ks-guide-overview-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}
+#ks-guide-reader .ks-guide-overview-links a{padding:16px 0;border-bottom:1px solid #d6e0eb;text-decoration:none;color:#234866}
+#ks-guide-reader .ks-guide-overview-links span{display:block;font-size:14px;line-height:1.6;color:#536479;margin-top:6px}
+#ks-guide-reader.ks-guide-index .ks-guide-layout{grid-template-columns:230px minmax(0,1fr)}
+#ks-guide-reader.ks-guide-index #ks-guide-toc{display:none}
+#ks-guide-reader.ks-guide-index [data-guide-toc-toggle]{display:none}
+@media(min-width:1250px){#ks-guide-reader [data-guide-toc-toggle]{display:none}}
+@media(max-width:1249px) and (min-width:801px){#ks-guide-reader .ks-guide-layout{grid-template-columns:210px minmax(0,1fr);gap:24px}#ks-guide-reader #ks-guide-toc{display:none}#ks-guide-reader.ks-toc-open #ks-guide-toc{display:block;position:fixed;top:70px;right:20px;width:270px;padding:20px;background:white;border:1px solid #b4c1d2;box-shadow:0 8px 24px #152b4530;z-index:120}}
+@media(max-width:800px){
+ #ks-guide-reader{padding:0 14px 32px}
+ #ks-guide-reader .ks-guide-toolbar{min-height:60px;gap:6px;padding:8px 0;flex-wrap:wrap}
+ #ks-guide-reader .ks-guide-brand{font-size:15px;margin-right:auto}
+ #ks-guide-reader .ks-guide-toolbar nav{margin-left:0;gap:0}
+ #ks-guide-reader .ks-guide-toolbar nav a{font-size:12px;padding:5px}
+ #ks-guide-reader .ks-guide-list-link{display:none}
+ #ks-guide-reader .ks-guide-toolbar button{font-size:13px;min-height:36px;padding:5px 9px}
+ #ks-guide-reader .ks-guide-toolbar [data-guide-toggle]{display:block}
+ #ks-guide-reader .ks-guide-layout,#ks-guide-reader.ks-guide-index .ks-guide-layout{display:block;padding-top:18px}
+ #ks-guide-reader #ks-guide-sidebar{display:none;position:relative;top:0;max-height:none;margin-bottom:20px}
+ #ks-guide-reader.ks-list-open #ks-guide-sidebar,#ks-guide-reader.ks-guide-index #ks-guide-sidebar{display:block}
+ #ks-guide-reader.ks-list-open #ks-guide-content{display:none}
+ #ks-guide-reader.ks-guide-index #ks-guide-content{display:none}
+ #ks-guide-reader #ks-guide-sidebar .ks-guide-list{max-height:none;overflow:visible}
+ #ks-guide-reader #ks-guide-sidebar .ks-guide-list a{padding:13px 4px;border-bottom:1px solid #d6e0eb}
+ #ks-guide-reader #ks-guide-toc{display:none}
+ #ks-guide-reader.ks-toc-open #ks-guide-toc{display:block;position:fixed;z-index:120;top:98px;left:14px;right:14px;max-height:65vh;background:white;border:1px solid #b4c1d2;box-shadow:0 8px 24px #152b4530;padding:16px}
+ #ks-guide-reader main p,#ks-guide-reader main ul,#ks-guide-reader main ol{font-size:15px;line-height:1.75}
+ #ks-guide-reader main h1{font-size:25px;line-height:1.4}
+ #ks-guide-reader main h2{font-size:21px}
+ #ks-guide-reader main .hero{display:block;margin-bottom:18px;padding-bottom:12px}
+ #ks-guide-reader main .hero>img{float:right;width:64px;height:64px;margin:0 0 10px 12px}
+ #ks-guide-reader main .hero:after{content:'';display:block;clear:both}
+ #ks-guide-reader main .hero-side{margin-top:12px}
+ #ks-guide-reader main .card{margin:24px 0}
+ #ks-guide-reader main :is(h1,h2,h3,section,[id]){scroll-margin-top:108px}
+ #ks-guide-reader .ks-guide-overview-links{display:block}
+}
+
+#ks-guide-reader .ks-guide-table{max-width:100%;min-width:0;overflow-x:auto;overscroll-behavior-x:contain}
+#ks-guide-reader main h1:focus{outline:none}

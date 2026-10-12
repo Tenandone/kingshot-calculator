@@ -1356,6 +1356,21 @@
 
     var href = a.getAttribute('href');
     if (!href) return;
+    // Enter the canonical guide reader in this tab, including list/search links.
+    // Once inside, guide-reader owns content/history; the global SPA never remounts it.
+    try {
+      var readerUrl = new URL(href, location.href);
+      var readerMatch = readerUrl.pathname.match(/^\/(?:(ko|en|ja|zh-tw)\/)?guides(?:\/([^/?#]+))?\/?$/i);
+      if (readerMatch && (readerUrl.origin === location.origin || readerUrl.origin === 'https://kingshotdata.kr')) {
+        var readerLang = (readerMatch[1] || getGuideHrefByLang('x').split('/')[1]).toLowerCase();
+        if (a.closest && a.closest('.g-block[data-slug]')) readerLang = getGuideHrefByLang('x').split('/')[1];
+        var readerSlug = (readerMatch[2] || '').replace(/\.html$/i, '');
+        var readerPath = '/' + readerLang + '/guides/' + (readerSlug && readerSlug !== 'index' ? readerSlug + '.html' : '');
+        e.preventDefault(); e.stopImmediatePropagation(); a.removeAttribute('target');
+        window.location.assign(readerPath + readerUrl.search + readerUrl.hash);
+        return;
+      }
+    } catch (_readerError) {}
     if (a.__kdMountedLinkBound) return;
 
     if (
