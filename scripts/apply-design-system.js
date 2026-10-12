@@ -6,7 +6,8 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const ROOT = path.resolve(__dirname, '..');
-const VERSION = 'ks-ui17-20261012';
+const VERSION = 'ks-brand-20261012';
+const HUB_VERSION = 'ks-ui17-20261012';
 const START = '<!-- ks-ui13-design:start -->';
 const END = '<!-- ks-ui13-design:end -->';
 const ASSETS = Object.freeze([
@@ -17,8 +18,13 @@ const ASSETS = Object.freeze([
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 
 function headBlock(newline = '\n') {
-  return [START, '<link rel="icon" type="image/webp" sizes="56x56" href="/img/kingshotdata-logo-56.webp">',
-    '<link rel="apple-touch-icon" href="/img/kingshotdata-logo.png">', ...ASSETS.map(file => file.endsWith('.css')
+  return [START,
+    `<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="/favicon.ico?v=${VERSION}">`,
+    `<link rel="icon" type="image/png" sizes="16x16" href="/img/brand/favicon-16.png?v=${VERSION}">`,
+    `<link rel="icon" type="image/png" sizes="32x32" href="/img/brand/favicon-32.png?v=${VERSION}">`,
+    `<link rel="icon" type="image/png" sizes="48x48" href="/img/brand/favicon-48.png?v=${VERSION}">`,
+    `<link rel="apple-touch-icon" sizes="180x180" href="/img/brand/apple-touch-icon.png?v=${VERSION}">`,
+    `<link rel="manifest" href="/site.webmanifest?v=${VERSION}">`, ...ASSETS.map(file => file.endsWith('.css')
     ? `<link rel="stylesheet" href="/${file}?v=${VERSION}">`
     : `<script defer src="/${file}?v=${VERSION}"></script>`), END].join(newline);
 }
@@ -66,7 +72,7 @@ function classification(relative, html) {
 
 function injectDesign(html, relative) {
   const selection = classification(relative, html);
-  const normalizeCache=value=>value.replace(/\/js\/hub\.js\?v=[^"'\s<>]+/g, '/js/hub.js?v='+VERSION);
+  const normalizeCache=value=>value.replace(/\/js\/hub\.js\?v=[^"'\s<>]+/g, '/js/hub.js?v='+HUB_VERSION);
   const clean = normalizeCache(stripDesignBlock(html));
   const block = headBlock(html.includes('\r\n') ? '\r\n' : '\n');
   const after = selection.kind === 'excluded' ? clean

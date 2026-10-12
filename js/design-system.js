@@ -1,31 +1,46 @@
 /* Presentation only. Existing router, analytics, storage and page scripts retain ownership. */
 (() => {
   'use strict';
-  const logo = '/img/kingshotdata-logo-112.png';
+  const logo = '/img/brand/bear-symbol-112.png';
+  const logo2x = '/img/brand/bear-symbol-224.png';
+  const wordmark = '/img/brand/wordmark-ink.svg';
   function frameLogo(brand) {
     const img = brand.querySelector('.brand-logo,.ks-brand-logo');
     if (!img) return;
     if (img.getAttribute('src') !== logo) img.setAttribute('src', logo);
+    if (img.getAttribute('srcset') !== `${logo} 1x, ${logo2x} 2x`) img.setAttribute('srcset', `${logo} 1x, ${logo2x} 2x`);
+    img.alt = ''; img.width = 44; img.height = 44;
     // Preserve the actual brand anchor and every navigation event attached to it.
-    // The silhouette is CSS on a separate element, not a crop of the bear art.
+    // The character supplies its own silhouette; the wrapper has no background.
     if (!img.parentElement.classList.contains('ks-brand-mark')) {
       const mark = document.createElement('span');
       mark.className = 'ks-brand-mark'; mark.setAttribute('aria-hidden', 'true');
       img.before(mark); mark.append(img);
     }
+    const text = brand.querySelector('.brand-text,.ks-brand-text');
+    if (text && !text.querySelector('.ks-brand-wordmark')) {
+      const picture = document.createElement('picture');
+      picture.className = 'ks-brand-lettering';
+      const compact = document.createElement('source');
+      compact.media = '(max-width: 360px)'; compact.srcset = '/img/brand/wordmark-compact-ink.svg';
+      const lettering = document.createElement('img');
+      lettering.className = 'ks-brand-wordmark'; lettering.src = wordmark;
+      lettering.alt = ''; lettering.width = 360; lettering.height = 48;
+      lettering.setAttribute('aria-hidden', 'true');
+      picture.append(compact, lettering); text.prepend(picture);
+    }
+    brand.classList.add('ks-brand-ready');
+    brand.setAttribute('aria-label', 'KingshotData Home');
   }
   function apply() {
     document.body.classList.add('ks-design');
-    const subtitle = document.querySelector('.site-header .brand-sub');
-    if(subtitle && subtitle.textContent !== 'Database & Strategy') subtitle.textContent = 'Database & Strategy';
     const brand = document.querySelector('.ks-nav-brand');
     if (brand && !brand.querySelector('.ks-brand-logo')) {
       const img = document.createElement('img');
-      img.className = 'ks-brand-logo'; img.src = logo; img.alt = ''; img.width = 36; img.height = 36;
+      img.className = 'ks-brand-logo'; img.src = logo; img.alt = ''; img.width = 44; img.height = 44;
       const text = document.createElement('span'); text.className = 'ks-brand-text';
       const title = document.createElement('span'); title.className = 'ks-brand-title'; title.textContent = 'Kingshot Data';
-      const sub = document.createElement('span'); sub.className = 'ks-brand-sub'; sub.textContent = 'Database & Strategy';
-      text.append(title, sub); brand.replaceChildren(img, text);
+      text.append(title); brand.replaceChildren(img, text);
     }
     document.querySelectorAll('.site-header .brand.brand-pro,.ks-site-nav .ks-nav-brand').forEach(frameLogo);
     // Keep the existing controls and their listeners while normalizing visual order.
