@@ -164,3 +164,6 @@ require('./apply-design-system').applyDesignSystem({root:ROOT});
 // ks-ui14-seo-hook:start
 require('./apply-seo-editorial').applySeoEditorial({root:ROOT});
 // ks-ui14-seo-hook:end
+
+// Keep directly requested home documents aligned with the browser renderer.
+require('./apply-editorial-home').applyEditorialHome({root:ROOT}).catch(error=>{console.error(error);process.exitCode=1;});

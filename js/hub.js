@@ -132,7 +132,9 @@
   try{const [entries,updates]=await Promise.all([catalog(l),fetch('/data/site-updates.json?v=2026100608').then(r=>r.ok?r.json():[]).catch(()=>[])]);
    if(!container.isConnected||ticket!==renderTicket||pathname!==location.pathname)return;
    const previous=container.querySelector('#hub-search'),draft=previous?.value||'',focused=!!previous&&document.activeElement===previous,caret=focused?[previous.selectionStart,previous.selectionEnd]:null,keepDraft=!!draft&&!new URLSearchParams(location.search).has('q');
-   container.innerHTML=homeMarkup(entries,l,updates);const searchUI=bindUnifiedSearch(container,entries,l),input=container.querySelector('#hub-search');
+   const originalHome=homeMarkup(entries,l,updates);
+   container.innerHTML=root.KD_EDITORIAL?root.KD_EDITORIAL.markup(l,originalHome):originalHome;const searchUI=bindUnifiedSearch(container,entries,l),input=container.querySelector('#hub-search');
+   if(root.KD_EDITORIAL)root.KD_EDITORIAL.bind(container,l);
    if(keepDraft){input.value=draft.slice(0,200);searchUI.update(true);}if(focused){input.focus({preventScroll:true});if(keepDraft&&caret?.every(Number.isInteger)){try{input.setSelectionRange(Math.min(caret[0],input.value.length),Math.min(caret[1],input.value.length));}catch{}}}
    root.dispatchEvent(new CustomEvent('kd:page-ready'));return container;
   }catch(error){if(!container.isConnected||ticket!==renderTicket||pathname!==location.pathname)return;const c=SEARCH_COPY[l];if(!container.querySelector('.hub-hero')){const p=l==='ko'?'':'/'+l;container.innerHTML=homeMarkup([{category:'buildings',url:'/'+l+'/buildings/'},{category:'heroes',url:p+'/heroes/'},{category:'research',url:p+'/research/'}],l,[]);}let note=container.querySelector('[data-search-error]');if(!note){note=document.createElement('p');note.dataset.searchError='';note.setAttribute('role','alert');container.querySelector('.hub-hero').append(note);}note.innerHTML=esc(c.unavailable)+' <button type="button">'+esc(c.retry)+'</button>';note.querySelector('button').addEventListener('click',()=>{note.remove();render(container);},{once:true});}
