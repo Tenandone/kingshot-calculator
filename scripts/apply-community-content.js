@@ -3,6 +3,7 @@
 const fs = require('fs'), path = require('path'), {parse} = require('parse5');
 const ROOT = path.resolve(__dirname, '..');
 const locales = ['ko', 'en', 'ja', 'zh-tw'];
+const CONTENT_VERSION = 'ks-community-20261012';
 const esc = s => String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const read = p => fs.readFileSync(path.join(ROOT,p),'utf8');
 const write = (p,s) => {fs.mkdirSync(path.dirname(path.join(ROOT,p)),{recursive:true}); if(!fs.existsSync(path.join(ROOT,p)) || read(p)!==s) fs.writeFileSync(path.join(ROOT,p),s);};
@@ -89,6 +90,20 @@ function applyCommunityContent() {
   }
   append(p,u,l,n=>u.id==='E07'?n.tagName==='section'&&attr(n,'aria-label')==='Truegold Chart':n.tagName==='main');
  }
+ // The i18n loader uses force-cache. A release must invalidate old dictionaries
+ // even when a returning visitor enters About through another SPA route.
+ function refreshCache(dir) {
+  for(const entry of fs.readdirSync(path.join(ROOT,dir),{withFileTypes:true})) {
+   if(entry.name.startsWith('.')||['node_modules','dist'].includes(entry.name))continue;
+   const relative=path.posix.join(dir,entry.name);
+   if(entry.isDirectory()){refreshCache(relative);continue;}
+   if(!entry.name.endsWith('.html'))continue;
+   const html=read(relative),updated=html.replace(/window\.__V="[^"]+"/g,`window.__V="${CONTENT_VERSION}"`)
+    .replace(/(\/js\/ui\/equipment-pets-items-view\.js\?v=)[^"'\s<>]+/g,`$1${CONTENT_VERSION}`);
+   if(updated!==html)write(relative,updated);
+  }
+ }
+ refreshCache('');
  console.log('Applied community prose to 36 existing and 8 new localized pages.');
 }
 if(require.main===module)applyCommunityContent();
