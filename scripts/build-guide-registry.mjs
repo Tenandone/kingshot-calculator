@@ -6,6 +6,8 @@ import { createHash } from 'node:crypto';
 // Reviewed guide topics. A new slug must be classified deliberately; content is
 // read from its existing localized page/catalog, never translated or generated.
 const topics = {
+  'equipment-investment': 'growth',
+  'alliance-mobilization': 'events',
   'Tri-Alliance-Clash': 'battle',
   'fishing-event-guide': 'events',
   hallofgovernors: 'events',

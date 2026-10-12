@@ -202,6 +202,7 @@ function genericPage(routePath, lang, dictionary, heroes, events, eventDictionar
   } else if (routePath === '/about') {
     body = ['about.intro.p1', 'about.intro.p2', 'about.intro.p3', 'about.intro.p4']
       .map(key => common(key)).filter(Boolean).map(value => '<p>' + escapeHtml(value) + '</p>').join('');
+    if (common('about.community.source')) body += '<p class="muted community-source">' + escapeHtml(common('about.community.source')) + '</p>';
     body += '<h2>' + escapeHtml(common('about.section.provide')) + '</h2><ul>';
     body += ['about.provide.li1', 'about.provide.li2', 'about.provide.li3']
       .map(key => common(key)).filter(Boolean).map(value => '<li>' + escapeHtml(value) + '</li>').join('');
@@ -307,6 +308,7 @@ function eventPage(event, lang, eventDictionary, heroDictionary, heroes, events)
   body += facts.map(row => '<dt>' + escapeHtml(row[0]) + '</dt><dd>' + escapeHtml(String(row[1])) + '</dd>').join('');
   body += '</dl>';
   if (copy.answerTitle && copy.answer) body += '<h2>' + escapeHtml(copy.answerTitle) + '</h2><p>' + escapeHtml(copy.answer) + '</p>';
+  body += copy.strategyHtml || '';
   if (relatedEvents.length) body += '<h2>' + escapeHtml(labels.relatedEvents || 'Related events') + '</h2><p>' + relatedEvents.join(' · ') + '</p>';
   if (relatedHeroes.length) body += '<h2>' + escapeHtml(labels.relatedHeroes || 'Related heroes') + '</h2><p>' + relatedHeroes.join(' · ') + '</p>';
   if (relatedGuides.length) body += '<h2>' + escapeHtml(labels.relatedGuides || 'Related guides') + '</h2><p>' + relatedGuides.join(' · ') + '</p>';

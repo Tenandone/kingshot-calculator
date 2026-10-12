@@ -4,6 +4,7 @@
   if (window.KD_DESIGN_GUIDES) return;
   // Existing classifications from data/ui/guides.json (ks-guides-4b091fca22f7aca6).
   const categories = Object.freeze({
+    'equipment-investment':'growth', 'alliance-mobilization':'events',
     'fishing-event-guide':'events', hallofgovernors:'events', 'kingdom-of-power-prep':'events',
     'kingshot-bear-reward':'rewards', 'kingshot-bearhunt':'battle', 'kingshot-easter-event-spending-guide':'events',
     'kingshot-f2p-guide':'beginner', 'kingshot-giftcode':'rewards', 'kingshot-ruins-tip':'events',
