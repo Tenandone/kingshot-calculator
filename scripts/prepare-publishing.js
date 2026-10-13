@@ -178,6 +178,7 @@ require('./apply-seo-editorial').applySeoEditorial({root:ROOT});
 // Keep directly requested home documents aligned with the browser renderer.
 require('./apply-editorial-home').applyEditorialHome({root:ROOT}).then(async()=>{
  require('./apply-community-content').applyCommunityContent();
+ await require('./apply-operator-profile').applyOperatorProfile({root:ROOT});
  // Static discovery and anchors must also work before JavaScript executes.
  require('child_process').execFileSync(process.execPath,[path.join(__dirname,'sync-static-guides.js')],{stdio:'inherit'});
  await require('./normalize-static-anchors.cjs').normalizeStaticAnchors({root:ROOT,apply:true});

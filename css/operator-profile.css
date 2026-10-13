@@ -1,0 +1,14 @@
+/* A quiet signature, using the site's typography and palette. */
+.ten-signature{color:var(--ks-ink,#182c39);font-family:inherit;font-size:14px;line-height:1.65;text-align:start;margin:2rem 0 1rem;padding:0;max-width:48rem;clear:both}
+.ten-signature .ten-signature-identity{display:flex;align-items:baseline;flex-wrap:wrap;gap:.25rem .65rem;margin:0;font-size:inherit;line-height:inherit}
+.ten-signature-identity strong{font-size:15px;letter-spacing:.06em;font-weight:750}
+.ten-signature-identity span,.ten-signature-personal{color:var(--ks-muted,#52656a);font-size:13px}
+.ten-signature .ten-signature-bio{margin:.25rem 0 0;font-size:inherit;line-height:inherit}
+.ten-signature-social{display:flex;align-items:center;flex-wrap:wrap;gap:0 .6rem}
+.ten-signature a.ten-signature-link{display:inline-flex;align-items:center;gap:.35em;min-height:44px;padding:.25rem 0;color:var(--ks-teal,#245d58);font:inherit;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere;box-sizing:border-box}
+.ten-signature a.ten-signature-link:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:2px}
+.ten-signature--compact{margin:1.5rem 0 .5rem}
+.ten-signature--link{font-size:13px;margin:.35rem 0;max-width:none;text-align:inherit}
+.ten-signature--link .ten-signature-link{justify-content:center}
+.ten-signature[hidden]{display:none!important}
+@media(max-width:600px){.ten-signature{font-size:13px;margin-top:1.5rem}.ten-signature--link{margin-top:.35rem}}

@@ -1,9 +1,10 @@
 (function(root){
  'use strict';
- if(root.KD_METRICS?.version==='ks-ui10-20261012')return;
+ if(root.KD_METRICS?.version==='ks-ten-profile-20261013')return;
  const categories=['all','buildings','heroes','research','gear','pets','items','tools','guides','events','other'],types=['home','building','hero','research','gear','pet','item','planner','other'],locales=['ko','en','ja','zh-tw'];
  const aliases={search:'search_execute',favorite:'favorite_add',goal_save:'calculator_goal_save'};
- const events=['page_view','search_execute','search_no_results','search_result_click','detail_view','planner_enter','planner_goal_add','planner_save','favorite_add','language_change','navigation_click','calculator_complete','calculator_goal_save'];
+ const operatorAnalytics=root.KD_OPERATOR_PROFILE_CONFIG?.analytics||{},operatorEvent=operatorAnalytics.eventName,operatorPlacements=operatorAnalytics.placements||{};
+ const events=['page_view','search_execute','search_no_results','search_result_click','detail_view','planner_enter','planner_goal_add','planner_save','favorite_add','language_change','navigation_click','calculator_complete','calculator_goal_save',...(typeof operatorEvent==='string'&&operatorEvent?[operatorEvent]:[])];
  const choose=(x,list,fallback)=>list.includes(x)?x:fallback;
  const bucket=n=>!Number.isFinite(n)||n<0?'unknown':n===0?'0':n===1?'1':n<=5?'2-5':n<=20?'6-20':'21+';
  function language(){return choose((root.location.pathname.match(/^\/(ko|en|ja|zh-tw)(?:\/|$)/i)?.[1]||'ko').toLowerCase(),locales,'ko');}
@@ -11,6 +12,7 @@
  function clean(name,params={}){
   name=aliases[name]||name;if(!events.includes(name))return null;
   const p={language:language(),page_type:pageType()};
+  if(name===operatorEvent){const placement=choose(params.placement,Object.keys(operatorPlacements),'');if(!placement)return null;p.placement=placement;p.page_type=operatorPlacements[placement];}
   if(['search_execute','search_no_results','search_result_click','favorite_add'].includes(name))p.category=choose(params.category,categories,'other');
   if(['search_execute','search_no_results'].includes(name)){p.result_bucket=params.result_count===undefined?choose(params.result_bucket,['0','1','2-5','6-20','21+'],'unknown'):bucket(params.result_count);p.trigger=choose(params.trigger,['typing','submit','filter'],'typing');}
   if(name==='search_result_click')p.position_bucket=params.position===undefined?choose(params.position_bucket,['0','1','2-5','6-20','21+'],'unknown'):bucket(params.position);
@@ -22,7 +24,7 @@
   return{name,params:p};
  }
  function emit(name,params){try{const event=clean(name,params);if(!event||!root.KD_PRIVACY?.canRecord())return false;const sent=root.KD_PRIVACY.send(event.name,event.params);if(sent&&event.name==='search_execute'&&event.params.result_bucket==='0'){const empty=clean('search_no_results',params);root.KD_PRIVACY.send(empty.name,empty.params);}return sent;}catch(_){return false;}}
- root.KD_METRICS={emit,clean,pageType,bucket,version:'ks-ui10-20261012',eventNames:events.slice()};
+ root.KD_METRICS={emit,clean,pageType,bucket,version:'ks-ten-profile-20261013',eventNames:events.slice()};
  let lastPage='',lastDetail='',scheduled=false,consentReady=!!root.KD_PRIVACY?.canSend();
  function matchesRoute(node,type){
   const d=node.dataset||{},path=root.location.pathname.replace(/\/index\.html$/,'/'),slug=path.split('/').filter(Boolean).at(-1)?.replace(/\.html$/,'');
