@@ -7,6 +7,7 @@ const crypto = require('crypto');
 const { parse } = require('parse5');
 const { LOOTBAR_ENABLED } = require('../js/site-features');
 const ROOT = path.resolve(__dirname, '..');
+require('./regeneration-safety').assertRegenerationWorkspace(ROOT);
 const archiveFile = path.join(ROOT, '_lootbar', 'source.json');
 const archive = fs.existsSync(archiveFile) ? JSON.parse(fs.readFileSync(archiveFile, 'utf8')) : {};
 const marker = /<!-- lootbar-disabled:([a-f0-9]+) -->/g;

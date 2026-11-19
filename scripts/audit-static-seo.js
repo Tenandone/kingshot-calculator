@@ -3,7 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..');
+// A caller may audit an isolated build artifact without rewriting or serving it.
+const ROOT = path.resolve(process.env.KD_SEO_AUDIT_ROOT || path.join(__dirname, '..'));
 const ORIGIN = 'https://kingshotdata.kr';
 
 function decode(value) {

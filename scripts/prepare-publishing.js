@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { ROOT, ORIGIN, LANGS } = require('./static-routes');
+require('./regeneration-safety').assertRegenerationWorkspace(ROOT);
 const MARKER = '<!-- Kingshot legacy redirect: generated -->';
 const read = f => fs.readFileSync(f, 'utf8');
 const write = (f,s) => { fs.mkdirSync(path.dirname(f), {recursive:true}); fs.writeFileSync(f,s); };
@@ -179,7 +180,7 @@ require('./apply-seo-editorial').applySeoEditorial({root:ROOT});
 require('./apply-editorial-home').applyEditorialHome({root:ROOT}).then(async()=>{
  require('./apply-community-content').applyCommunityContent();
  await require('./apply-operator-profile').applyOperatorProfile({root:ROOT});
- // Static discovery and anchors must also work before JavaScript executes.
- require('child_process').execFileSync(process.execPath,[path.join(__dirname,'sync-static-guides.js')],{stdio:'inherit'});
+ // Sync guide discovery in the sitemap pipeline after disabled promotions are
+ // removed; restored, inactive top-up cards must not enter the guide registry.
  await require('./normalize-static-anchors.cjs').normalizeStaticAnchors({root:ROOT,apply:true});
 }).catch(error=>{console.error(error);process.exitCode=1;});

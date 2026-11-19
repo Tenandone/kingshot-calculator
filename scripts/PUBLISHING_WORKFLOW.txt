@@ -1,0 +1,78 @@
+Static publishing workflow — BUFFHUB preservation change, 2026-11-19
+
+Authority and deployment
+GitHub Pages publishes main:/, including the existing reviewed HTML and assets.
+The legacy Vite bundle in dist is not the production artifact for this site.
+No command added here commits, pushes, deploys or promotes regenerated output.
+The operating campaign scope approved on 2026-11-19 is all 81 detailed guides.
+The contractual 44-page settlement scope is tracked separately. Campaign display
+is controlled manually by enabled and the exact 81-path allowlist; there is no
+date-based automatic campaign shutdown. Approved main:/ publication remains a
+separate release action after the preservation and campaign checks pass.
+
+Default feature build
+npm run build verifies the published baseline, checks for new SEO findings,
+and copies the current static source into a fresh .audit/static-build/site-* folder.
+It does not rewrite HTML, game data, metadata, sitemap or existing images.
+The output path and SHA-256 copy manifest are recorded in .audit/static-build/latest.json.
+A file edited during copying causes the build to fail; retry after editing stops.
+
+Preservation checks
+scripts/published-baseline.json protects 644 exact sitemap URLs and 2,000 existing
+static files, including all 830 existing HTML files. Text comparisons normalize
+CRLF/LF only; canonical, hreflang, metadata, scripts, markup and article text
+inside HTML must otherwise remain identical. It also checks each URL still has
+a local file and the index policy still includes every published URL.
+The new BUFFHUB feature is integrated through shared JavaScript, so no HTML
+exception or broad normalization is necessary.
+Do not regenerate this baseline during ordinary builds to make a failure disappear.
+Future approved editorial/content maintenance must review and update its expected
+values explicitly, separately from a campaign configuration change.
+
+Known SEO findings
+The existing 644-URL source has 95 findings classified as errors by audit-static-seo:
+67 building pages lack complete Open Graph metadata; 28 duplicate-title groups
+occur across language versions. It also has 71 missing-JSON-LD warnings.
+These are recorded in published-seo-baseline.json and remain visible.
+npm run audit:seo still reports them and fails. npm run check:seo reports whether
+any new findings have appeared; passing that check does not mean all old findings
+were fixed. Hiding these pages from the sitemap is not an acceptable SEO fix.
+
+Cause of the previous 644 -> 521 sitemap loss
+public-index-policy.json listed only 521 paths, while the deployed source already
+had 644. apply-index-policy added noindex to the missing 123 routes; generate-sitemap
+then omitted them. Search catalogs also lost records as a downstream effect.
+All 123 previously published paths have now been restored to the policy.
+No new page is auto-indexed by this reconciliation.
+The generator also missed five Korean root routes outside its generic route list:
+/growth-planner/ and the four /items/pet-* pages. It now inspects every reviewed
+policy path and verifies the actual file, canonical and index eligibility before
+including it. Missing or newly noindexed reviewed pages stop regeneration.
+
+Why the 790 generated files differed
+The old prebuild reran a general SPA shell generator plus editorial, alias,
+related-content, image and indexing passes directly over the published root.
+This replaced existing manually improved rendered HTML and copied stale policy
+into both the sitemap and search data.
+The complete classified inventory is retained locally at:
+.audit/buffhub-implementation/generated-change-classification.json
+61 changes are demonstrably technical/equivalent, 323 are outside-scope changes
+to existing indexing/SEO/discoverability/content, and 406 require individual
+editorial review. None of the old generated output is automatically promoted.
+
+Explicit legacy regeneration review
+npm run regenerate:review copies current source and generators into a fresh
+.audit/regeneration-review/review-* workspace, runs the old pipeline there and
+compares it to the preservation baseline. npm run generate:routes runs only the
+route generator in that same isolated workflow.
+The original source remains untouched. An integrity mismatch returns a nonzero
+exit status and a detailed report; that is a review result, not a release build.
+The dangerous root-level generator entry points reject execution without the
+isolated workspace sentinel. This prevents accidental reuse of the old mutation
+workflow. No review command automatically copies its output back into the site.
+
+Verification
+npm run test:integrity exercises real canonical/hreflang/noindex/title/body/data
+mutations, missing and duplicate sitemap entries, missing pages, stale policy,
+line endings and direct execution of the five protected generator entry points.
+All fixtures are under .audit/integrity-tests. User data is not deleted.

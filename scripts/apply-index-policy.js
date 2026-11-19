@@ -1,6 +1,7 @@
 'use strict';
 const fs = require('fs'), path = require('path');
 const { ROOT, ORIGIN } = require('./static-routes');
+require('./regeneration-safety').assertRegenerationWorkspace(ROOT);
 const policy = require('./public-index-policy.json');
 const allowed = new Set(policy.paths);
 const rows = [];

@@ -14,6 +14,7 @@ const {
   absoluteUrl,
   getStaticRoutes
 } = require('./static-routes');
+require('./regeneration-safety').assertRegenerationWorkspace(ROOT);
 
 const TEMPLATE_FILE = path.join(ROOT, 'templates', 'spa-shell.html');
 const MANIFEST_FILE = path.join(ROOT, 'scripts', 'generated-static-routes.json');
@@ -549,7 +550,7 @@ function replaceHead(html, route, page) {
   html = html.replace(/<script>window\.__V="([^"]+)"<\/script>/, '<script>window.__V="$1";window.__STATIC_LANG=' + escapeJson(route.lang.code) + ';window.__STATIC_ROUTE=' + escapeJson(route.pathname) + '</script>');
   html = html.replace(/<title>[\s\S]*?<\/title>/i, '<title>' + escapeHtml(page.title) + '</title>');
   html = html.replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/>/i, '<meta name="description" content="' + escapeHtml(page.description) + '" />');
-  html = html.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/>/i, '<link rel="canonical" href="' + canonical + '" />');
+  html = html.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i, '<link rel="canonical" href="' + canonical + '" />');
   html = html.replace(/(?:\s*<link\s+rel="alternate"\s+hreflang="[^"]+"\s+href="[^"]*"\s*\/>){5}/i, '\n' + alternateHtml);
   html = html.replace(/<meta\s+property="og:title"\s+content="[^"]*">/i, '<meta property="og:title" content="' + escapeHtml(page.title) + '">');
   html = html.replace(/<meta\s+property="og:description"\s+content="[^"]*">/i, '<meta property="og:description" content="' + escapeHtml(page.description) + '">');

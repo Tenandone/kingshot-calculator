@@ -1,0 +1,88 @@
+BUFFHUB 중앙 광고 시스템 운영 준비 — 2026-11-19
+
+승인된 운영 정책 — 2026-11-19
+81개 상세 가이드 전체의 광고 노출이 승인되었다. approvedPaths는 해당 81개 경로만 포함한다.
+계약상 44개 페이지는 별도 정산 범위이며, 승인된 81개 가이드의 운영 노출 범위와 구분한다.
+enabled=true로 운영하며 중지할 때만 enabled=false로 변경한다. 날짜에 따른 자동 시작·종료는 사용하지 않는다.
+허용목록 밖의 페이지에는 광고가 표시되지 않는다.
+
+중앙 설정
+- enabled: 전체 캠페인 스위치. false이면 이미지·광고 CSS도 요청하지 않는다.
+- 날짜 조건은 없다. 캠페인 종료는 운영자가 enabled=false로 수동 중지한다.
+- approvedPaths: canonical과 일치하는 정확한 경로만 허용. 와일드카드/접두사/쿼리/해시 불가.
+- creatives: ko / en / ja / zh-tw 소재·문구·URL·소재 ID.
+  TW 페이지 경로는 /zh-tw/, BUFFHUB 도착 경로는 /zh-Hant/이다.
+  링크는 HTTPS buffhub.com의 검증된 KINGSHOT 경로와 단일 aff_short=kingshot만 허용한다.
+- placements: guide_after_intro 기본. content_after_intro / content_end도 지원한다.
+- pathOverrides: 승인 경로별 placement와 안정적인 selector를 명시할 수 있다.
+  selector는 main 안에서 유일하고 숨겨지지 않은 요소를 가리켜야 한다.
+  calculator_result는 추측하지 않으며 승인된 페이지별 결과 selector가 반드시 필요하다.
+- events: sponsor_impression / sponsor_click.
+- viewability: 기본 50% 이상 1초 연속 표시. 창 숨김·화면 이탈·동의 철회 시 대기 중 측정 취소.
+
+구현 구조
+기존 모든 사이트맵 페이지의 hub.js가 sponsors.js를 한 번 로드한다.
+기존 HTML 830개는 변경하지 않는다. 가이드 reader는 준비된 광고를 본문과 같은 렌더링 시점에 붙인다.
+초기 준비 대기는 최대 500ms이며 광고 오류가 기존 정적 콘텐츠나 reader를 막지 않는다.
+81개 상세 가이드(한국어21, 나머지언어각20)에 Introduction 하단 기본 지점이 확인됐다.
+소개 hero가 없는 커뮤니티 가이드는 첫 소개 문단 뒤를 사용한다.
+앵커·canonical·설정이 유효하지 않으면 광고를 표시하지 않는다.
+기타 콘텐츠는 승인 경로와 실제 앵커 검사를 통과해야 하며 전체 사이트 자동 노출은 없다.
+
+반응형·이미지
+원본 PNG 4개는 외부 원본 폴더에 그대로 보존한다.
+WebP는 728x90과 1456x180을 각각 생성하며 최대 표시 크기는728x90이다.
+srcset을 사용하고 잘라내지 않는다. 모바일에서는16px HTML 안내/행동 문구로 작은 이미지 글자를 보완한다.
+이미지 영역의 비율을 미리 확보하고, 고정 크기 광고 이미지 때문에 reader의 스크롤 복귀를 기다리지 않는다.
+이미지·CSS 실패 시 광고만 제거하고 본문과 계산기는 유지한다.
+이미지 생성: node scripts/optimize-buffhub-images.cjs --source-dir <원본폴더>
+검증: node scripts/test-buffhub-images.cjs
+매칭·원본/출력 해시: img/sponsors/buffhub/manifest.json
+
+개인정보·계측
+privacy-controls.js는 수정하지 않았다. 기존 동의·운영 호스트·전송 게이트를 그대로 사용한다.
+동의 전/거절/철회/localhost에서는 실제 분석 요청을 보내지 않는다.
+동의 거절은 정상 광고 링크 이동을 차단하지 않는다.
+page_path에는 승인된 현재 정적 경로만 담는다. 검색어·쿼리·해시·원본URL·사용자 입력은 전송하지 않는다.
+event dimensions: campaign_id, creative_id, placement_id, page_path, language, page_type.
+노출은 같은 페이지 방문에서 한 번만 측정하고, 클릭은 실제 유효한 기본/가운데 버튼 클릭을 측정한다.
+GA4 맞춤 정의/보고서 구성은 관리자 작업이며 이 로컬 구현에서는 변경하지 않았다.
+구매·수수료 귀속은 구현/검증 범위에 포함되지 않는다. 광고주 또는 관리자 통계로 별도 확인한다.
+
+로컬 검증
+npm test
+npm run check:buffhub
+npm run check:integrity
+npm run check:seo
+npm run build
+기존 audit:seo는 현재 발행 페이지에 있던95오류·71경고를 계속 보고한다.
+check:seo는 새 오류·경고가 없는지 비교한다. 기존 문제를 숨기기 위해 사이트맵을 축소하지 않는다.
+기본 build는 원본을 쓰지 않고 .audit/static-build/site-*에 검증 사본을 만든다.
+GitHub Pages의 실제 소스는 여전히 main:/이며 dist가 아니다.
+전체 재생성은 npm run regenerate:review로 격리해서 검토한다.
+자세한 빌드 기준은 scripts/PUBLISHING_WORKFLOW.txt를 참조한다.
+
+브라우저 테스트
+npm run preview:buffhub -- --image-delay=800
+이 서버는127.0.0.1:4174에만 바인딩하고 JSON 응답만 메모리에서 테스트용으로 바꾼다.
+실제 buffhub.json은 변경하지 않는다. 운영 승인과 별개로 테스트 응답에서는 equipment-investment를 허용목록 밖 경로 검증용으로 제외한다.
+화면의 Local BUFFHUB QA 도구에서 active/disabled/invalid 상태를 바꿀 수 있다.
+실제 기본 설정 확인: npm run preview:static
+검사 완료 후 서버는 Ctrl+C로 종료한다. 로컬 미리보기는 배포 명령이 아니다.
+
+운영 반영 순서
+1. 승인된 81개 상세 가이드와 정확한 허용목록이 일치하는지 확인한다. 계약 44개 정산 목록은 별도로 관리한다.
+2. check:buffhub로 실제 파일/canonical/앵커/이미지를 검사하고 날짜 조건이 없는 수동 운영 설정을 검증한다.
+3. 회귀·SEO 무결성·정적 빌드 검증을 통과한 소스만 승인된 GitHub Pages main:/ 절차로 반영한다.
+4. 실제 설정에서 노출/클릭 및 GA4 보고서 연결을 확인한다. 구매·수수료 귀속은 광고주/관리자 통계로 별도 검증한다.
+5. 중지 시 enabled=false로 설정한다. 활성 페이지는60초마다 설정을 갱신하며 변경된 비활성 설정을 받으면 표시·측정을 중단한다.
+   HTML의 기존 script URL을 보존했으므로 기존 방문자의 스크립트 캐시 전환을 확인해야 한다.
+
+성능 검사 한계
+320/375/430/1440px 이미지 지연 로딩 전후에 배너 높이와 다음 콘텐츠 위치가 동일했다.
+전체 페이지의 CLS는 기존 guide reader 초기 전환 영향을 포함한다. 광고 없는 EN1440px도약0.68이 관찰됐다.
+광고 추가 후 전체 사이트 CWV가 개선됐거나 모든 환경에서CLS0이라고 주장하지 않는다.
+느린 설정/CSS응답으로500ms 준비 한도를 넘을 때의 늦은 삽입도 별도 운영 성능 점검 대상이다.
+
+검증·이미지·미리보기 스크립트는 커밋·Push·운영 배포·운영 DB 변경·deploy.ps1 실행을 자동 수행하지 않는다.
+승인된 운영 배포는 검증을 마친 뒤 별도 GitHub Pages main:/ 절차로 진행한다.

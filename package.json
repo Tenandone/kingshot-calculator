@@ -5,17 +5,27 @@
   "main": "bump-version.js",
   "scripts": {
     "dev": "vite dev",
-    "generate:routes": "node scripts/generate-static-routes.js",
-    "prebuild": "npm run sitemap",
-    "build": "vite build",
-    "sitemap": "node scripts/apply-lootbar-state.js --restore && npm run generate:routes && node scripts/generate-calculation-proof.js && node scripts/prepare-publishing.js && node scripts/apply-lootbar-state.js && node scripts/apply-index-policy.js && node scripts/generate-sitemap.js && node scripts/generate-catalog.js && node scripts/generate-image-manifest.js && node scripts/generate-context.js && node scripts/apply-verification-notices.js",
+    "generate:routes": "node scripts/review-legacy-generation.js --routes-only",
+    "prebuild": "npm run check:buffhub && npm run check:integrity && npm run check:seo",
+    "build": "node scripts/build-preserved-site.js",
+    "sitemap": "node scripts/check-published-integrity.js",
     "coupons:update": "node scripts/coupons/update-coupons.js --write",
     "coupons:check": "node scripts/coupons/update-coupons.js",
     "coupons:test": "node scripts/coupons/test-coupons.js",
     "audit:seo": "node scripts/audit-static-seo.js",
     "bump": "node bump-version.js",
     "deploy": "node -e \"console.error('Publish reviewed commits to main; GitHub Pages serves the repository root, not dist.');process.exit(1)\"",
-    "audit:publishing": "node scripts/audit-publishing.js"
+    "audit:publishing": "node scripts/audit-publishing.js",
+    "regenerate:review": "node scripts/review-legacy-generation.js",
+    "check:integrity": "node scripts/check-published-integrity.js",
+    "check:seo": "node scripts/check-seo-regressions.js",
+    "test:integrity": "node scripts/test-published-integrity.js",
+    "check:buffhub": "node scripts/check-buffhub-config.cjs",
+    "test:buffhub": "node scripts/test-sponsor-config.cjs && node scripts/test-sponsors-runtime.cjs && node scripts/test-buffhub-images.cjs && node scripts/test-buffhub-metrics-prep.js",
+    "preview:buffhub": "node scripts/preview-buffhub.cjs --test-campaign",
+    "preview:static": "node scripts/preview-publishing.js",
+    "test": "node scripts/test-local.cjs",
+    "check:syntax": "node --check js/sponsors.js && node --check js/hub.js && node --check js/hub-metrics.js && node --check js/guide-reader.js"
   },
   "repository": {
     "type": "git",
@@ -30,7 +40,9 @@
   "homepage": "https://tenandone.github.io/kingshot-calculator/",
   "devDependencies": {
     "image-size": "^2.0.4",
+    "linkedom": "0.18.15",
     "parse5": "^8.0.1",
-    "vite": "^7.3.1"
+    "sharp": "0.35.5",
+    "vite": "7.3.7"
   }
 }

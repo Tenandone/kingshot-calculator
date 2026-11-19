@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { ROOT, ORIGIN, LANGS, getStaticRoutes } = require('./static-routes');
+require('./regeneration-safety').assertRegenerationWorkspace(ROOT);
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, ''));
@@ -90,6 +91,24 @@ for (const lang of LANGS) {
     const canonical = normalizeUrl(getCanonical(html));
     if (canonical && require("./public-index-policy.json").paths.includes(new URL(canonical).pathname) && languageFromUrl(canonical) && !canonical.includes('/tw/')) urls.add(canonical);
   }
+}
+
+// Korean published routes also exist at the root (growth-planner and pet items).
+// They are not all in getStaticRoutes(), so locale-directory discovery alone
+// silently loses valid pages even after the index allowlist is reconciled.
+for (const pathname of require('./public-index-policy.json').paths) {
+  const relative = pathname.replace(/^\//, '');
+  const file = path.join(ROOT, relative, pathname.endsWith('/') ? 'index.html' : '');
+  if (!fs.existsSync(file) || !fs.statSync(file).isFile()) throw new Error('Reviewed sitemap path has no HTML: ' + pathname);
+  const html = fs.readFileSync(file, 'utf8');
+  const canonical = normalizeUrl(getCanonical(html));
+  if (canonical !== ORIGIN + pathname) throw new Error('Reviewed sitemap canonical differs: ' + pathname);
+  if (/<meta\b[^>]*http-equiv=["']refresh["']/i.test(html) || /name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) {
+    throw new Error('Reviewed sitemap page became a redirect or noindex: ' + pathname);
+  }
+  const segment = pathname.split('/').filter(Boolean)[0];
+  explicitLanguages.set(canonical, segment === 'zh-tw' ? 'zh-TW' : ['en', 'ja'].includes(segment) ? segment : 'ko');
+  urls.add(canonical);
 }
 
 const groups = new Map();

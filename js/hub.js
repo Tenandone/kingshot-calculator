@@ -147,3 +147,19 @@
  }
  const api={render,search,rankResults,catalog,lang,COPY,esc,card,homeMarkup,heroCount};if(typeof module==='object'&&module.exports)module.exports={search,legacySearch,rankResults,normalize,compact,safeURL,bindUnifiedSearch,homeMarkup,heroCount,blockedTool,homeCard,syncHomeClass,searchSnippet,mergeResearchCatalog};else root.KD_HUB=api;
 })(typeof window!=='undefined'?window:this);
+
+// Independent first-party sponsor bootstrap. Existing HTML and hub behavior stay intact.
+// Campaign eligibility is decided only by the exact-path allowlist in buffhub.json.
+(function (root) {
+ 'use strict';
+ if (!root || !root.document?.head || root.KD_SPONSORS || root.__kdSponsorLoading) return;
+ root.__kdSponsorLoading = true;
+ let finish;
+ root.__kdSponsorReady = new Promise(resolve => { finish = resolve; });
+ const script = root.document.createElement('script');
+ script.src = '/js/sponsors.js?v=buffhub-20261119-v2';
+ script.async = true;
+ script.onload = () => { Promise.resolve(root.KD_SPONSORS?.ready).then(() => finish(true), () => finish(false)); };
+ script.onerror = () => { root.__kdSponsorLoading = false; finish(false); };
+ root.document.head.appendChild(script);
+})(typeof window === 'undefined' ? null : window);
